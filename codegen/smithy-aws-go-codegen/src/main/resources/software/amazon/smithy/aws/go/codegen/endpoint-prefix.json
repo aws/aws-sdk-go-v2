@@ -27,6 +27,7 @@
   "Auto Scaling": "autoscaling",
   "Auto Scaling Plans": "autoscaling-plans",
   "Backup": "backup",
+  "Backup Gateway": "backup-gateway",
   "Batch": "batch",
   "Braket": "braket",
   "Budgets": "budgets",
@@ -144,6 +145,7 @@
   "IoTSecureTunneling": "api.tunneling.iot",
   "IoTSiteWise": "iotsitewise",
   "IoTThingsGraph": "iotthingsgraph",
+  "IoTTwinMaker": "iottwinmaker",
   "IotDeviceAdvisor": "api.iotdeviceadvisor",
   "Ivs": "ivs",
   "KMS": "kms",
@@ -293,5 +295,6 @@
   "WorkMail": "workmail",
   "WorkMailMessageFlow": "workmailmessageflow",
   "WorkSpaces": "workspaces",
+  "WorkSpaces Web": "workspaces-web",
   "XRay": "xray"
 }

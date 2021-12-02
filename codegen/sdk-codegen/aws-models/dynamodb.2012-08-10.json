@@ -1822,6 +1822,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Replica-specific global secondary index settings.</p>"
                     }
+                },
+                "TableClassOverride": {
+                    "target": "com.amazonaws.dynamodb#TableClass",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Replica-specific table class. If not specified, uses the source table's\n            table class.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1921,6 +1927,12 @@
                     "target": "com.amazonaws.dynamodb#TagList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of key-value pairs to label the table. For more information, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html\">Tagging\n                for DynamoDB</a>.</p>"
+                    }
+                },
+                "TableClass": {
+                    "target": "com.amazonaws.dynamodb#TableClass",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The table class of the new table. Valid values are <code>STANDARD</code> and\n                <code>STANDARD_INFREQUENT_ACCESS</code>.</p>"
                     }
                 }
             },
@@ -6288,6 +6300,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The time at which the replica was first detected as inaccessible. To determine cause\n            of inaccessibility check the <code>ReplicaStatus</code> property.</p>"
                     }
+                },
+                "ReplicaTableClassSummary": {
+                    "target": "com.amazonaws.dynamodb#TableClassSummary"
                 }
             },
             "traits": {
@@ -6572,6 +6587,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Replica global secondary index settings for the global table.</p>"
                     }
+                },
+                "ReplicaTableClassSummary": {
+                    "target": "com.amazonaws.dynamodb#TableClassSummary"
                 }
             },
             "traits": {
@@ -6610,6 +6628,12 @@
                     "target": "com.amazonaws.dynamodb#ReplicaGlobalSecondaryIndexSettingsUpdateList",
                     "traits": {
                         "smithy.api#documentation": "<p>Represents the settings of a global secondary index for a global table that will be\n            modified.</p>"
+                    }
+                },
+                "ReplicaTableClass": {
+                    "target": "com.amazonaws.dynamodb#TableClass",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Replica-specific table class. If not specified, uses the source table's\n            table class.</p>"
                     }
                 }
             },
@@ -7725,6 +7749,41 @@
                 "smithy.api#documentation": "<p>Represents the auto scaling configuration for a global table.</p>"
             }
         },
+        "com.amazonaws.dynamodb#TableClass": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "STANDARD",
+                        "name": "STANDARD"
+                    },
+                    {
+                        "value": "STANDARD_INFREQUENT_ACCESS",
+                        "name": "STANDARD_INFREQUENT_ACCESS"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.dynamodb#TableClassSummary": {
+            "type": "structure",
+            "members": {
+                "TableClass": {
+                    "target": "com.amazonaws.dynamodb#TableClass",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The table class of the specified table. Valid values are <code>STANDARD</code> and\n                <code>STANDARD_INFREQUENT_ACCESS</code>.</p>"
+                    }
+                },
+                "LastUpdateDateTime": {
+                    "target": "com.amazonaws.dynamodb#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time at which the table class was last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details of the table class.</p>"
+            }
+        },
         "com.amazonaws.dynamodb#TableCreationDateTime": {
             "type": "timestamp"
         },
@@ -7855,6 +7914,12 @@
                     "target": "com.amazonaws.dynamodb#ArchivalSummary",
                     "traits": {
                         "smithy.api#documentation": "<p>Contains information about the table archive.</p>"
+                    }
+                },
+                "TableClassSummary": {
+                    "target": "com.amazonaws.dynamodb#TableClassSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains details of the table class.</p>"
                     }
                 }
             },
@@ -8986,6 +9051,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Replica-specific global secondary index settings.</p>"
                     }
+                },
+                "TableClassOverride": {
+                    "target": "com.amazonaws.dynamodb#TableClass",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Replica-specific table class. If not specified, uses the source table's\n            table class.</p>"
+                    }
                 }
             },
             "traits": {
@@ -9074,6 +9145,12 @@
                     "target": "com.amazonaws.dynamodb#ReplicationGroupUpdateList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of replica update actions (create, delete, or update) for the table.</p>\n        <note>\n            <p>This property only applies to <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html\">Version\n                    2019.11.21</a> of global tables.</p>\n        </note>"
+                    }
+                },
+                "TableClass": {
+                    "target": "com.amazonaws.dynamodb#TableClass",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The table class of the table to be updated. Valid values are <code>STANDARD</code> and\n                <code>STANDARD_INFREQUENT_ACCESS</code>.</p>"
                     }
                 }
             },

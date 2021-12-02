@@ -192,6 +192,75 @@
                 }
             }
         },
+        "com.amazonaws.lexmodelsv2#AssociatedTranscript": {
+            "type": "structure",
+            "members": {
+                "transcript": {
+                    "target": "com.amazonaws.lexmodelsv2#Transcript",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content of the transcript that meets the search filter criteria.\n         For the JSON format of the transcript, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/designing-output-format.html\">Output transcript\n            format</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The object containing information that associates the recommended\n         intent/slot type with a conversation.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AssociatedTranscriptFilter": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.lexmodelsv2#AssociatedTranscriptFilterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the field to use for filtering. The allowed names are\n         IntentId and SlotTypeId.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "values": {
+                    "target": "com.amazonaws.lexmodelsv2#FilterValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The values to use to filter the transcript.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Filters to search for the associated transcript.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AssociatedTranscriptFilterName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "IntentId",
+                        "name": "IntentId"
+                    },
+                    {
+                        "value": "SlotTypeId",
+                        "name": "SlotTypeId"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AssociatedTranscriptFilters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#AssociatedTranscriptFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AssociatedTranscriptList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#AssociatedTranscript"
+            }
+        },
         "com.amazonaws.lexmodelsv2#AttachmentTitle": {
             "type": "string",
             "traits": {
@@ -785,6 +854,10 @@
                     {
                         "value": "Importing",
                         "name": "Importing"
+                    },
+                    {
+                        "value": "Processing",
+                        "name": "Processing"
                     }
                 ]
             }
@@ -837,6 +910,127 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.lexmodelsv2#BotLocaleSummary"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#BotRecommendationResultStatistics": {
+            "type": "structure",
+            "members": {
+                "intents": {
+                    "target": "com.amazonaws.lexmodelsv2#IntentStatistics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Statistical information about about the intents associated with the\n         bot recommendation results.</p>"
+                    }
+                },
+                "slotTypes": {
+                    "target": "com.amazonaws.lexmodelsv2#SlotTypeStatistics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Statistical information about the slot types associated with the bot\n         recommendation results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A statistical summary of the bot recommendation results.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#BotRecommendationResults": {
+            "type": "structure",
+            "members": {
+                "botLocaleExportUrl": {
+                    "target": "com.amazonaws.lexmodelsv2#PresignedS3Url",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The presigned URL link of the recommended bot definition.</p>"
+                    }
+                },
+                "associatedTranscriptsUrl": {
+                    "target": "com.amazonaws.lexmodelsv2#PresignedS3Url",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The presigned url link of the associated transcript.</p>"
+                    }
+                },
+                "statistics": {
+                    "target": "com.amazonaws.lexmodelsv2#BotRecommendationResultStatistics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The statistical summary of the bot recommendation results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The object representing the URL of the bot definition, the URL of\n         the associated transcript and a statistical summary of the bot\n         recommendation results.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#BotRecommendationStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Processing",
+                        "name": "Processing"
+                    },
+                    {
+                        "value": "Deleting",
+                        "name": "Deleting"
+                    },
+                    {
+                        "value": "Deleted",
+                        "name": "Deleted"
+                    },
+                    {
+                        "value": "Downloading",
+                        "name": "Downloading"
+                    },
+                    {
+                        "value": "Updating",
+                        "name": "Updating"
+                    },
+                    {
+                        "value": "Available",
+                        "name": "Available"
+                    },
+                    {
+                        "value": "Failed",
+                        "name": "Failed"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lexmodelsv2#BotRecommendationSummary": {
+            "type": "structure",
+            "members": {
+                "botRecommendationStatus": {
+                    "target": "com.amazonaws.lexmodelsv2#BotRecommendationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the bot recommendation.</p>\n         <p>If the status is Failed, then the reasons for the failure are listed\n         in the failureReasons field. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "botRecommendationId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot recommendation to be\n         updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "creationDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp of the date and time that the bot recommendation was\n         created.</p>"
+                    }
+                },
+                "lastUpdatedDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp of the date and time that the bot recommendation was\n         last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of the bot recommendation.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#BotRecommendationSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#BotRecommendationSummary"
             }
         },
         "com.amazonaws.lexmodelsv2#BotSortAttribute": {
@@ -1545,6 +1739,12 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Configures conversation logging that saves audio, text, and metadata\n         for the conversations with your users.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#Count": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {}
             }
         },
         "com.amazonaws.lexmodelsv2#CreateBot": {
@@ -3068,6 +3268,28 @@
                 "smithy.api#documentation": "<p>By default, data stored by Amazon Lex is encrypted. The\n            <code>DataPrivacy</code> structure provides settings that determine\n         how Amazon Lex handles special cases of securing the data for your bot.\n      </p>"
             }
         },
+        "com.amazonaws.lexmodelsv2#DateRangeFilter": {
+            "type": "structure",
+            "members": {
+                "startDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp indicating the start date for the date range\n         filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "endDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp indicating the end date for the date range\n         filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The object used for specifying the data range that the customer\n         wants Amazon Lex to read through in the input transcripts.</p>"
+            }
+        },
         "com.amazonaws.lexmodelsv2#DeleteBot": {
             "type": "operation",
             "input": {
@@ -4539,6 +4761,145 @@
                 }
             }
         },
+        "com.amazonaws.lexmodelsv2#DescribeBotRecommendation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#DescribeBotRecommendationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#DescribeBotRecommendationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Provides metadata information about a bot recommendation. This\n         information will enable you to get a description on the request inputs,\n         to download associated transcripts after processing is complete, and to\n         download intents and slot-types generated by the bot\n         recommendation.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/botrecommendations/{botRecommendationId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DescribeBotRecommendationRequest": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot associated with the bot\n         recommendation.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#DraftBotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the bot associated with the bot\n         recommendation.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the language and locale of the bot recommendation\n         to describe. The string must match one of the supported locales. For\n         more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "botRecommendationId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the bot recommendation to describe.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DescribeBotRecommendationResponse": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the bot associated with the bot\n         recommendation.</p>"
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#DraftBotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the bot associated with the bot\n         recommendation.</p>"
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the language and locale of the bot recommendation\n         to describe.</p>"
+                    }
+                },
+                "botRecommendationStatus": {
+                    "target": "com.amazonaws.lexmodelsv2#BotRecommendationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the bot recommendation. If the status is Failed, then\n         the reasons for the failure are listed in the failureReasons field.\n      </p>"
+                    }
+                },
+                "botRecommendationId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the bot recommendation being described.</p>"
+                    }
+                },
+                "failureReasons": {
+                    "target": "com.amazonaws.lexmodelsv2#FailureReasons",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If botRecommendationStatus is Failed, Amazon Lex explains why.</p>"
+                    }
+                },
+                "creationDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the bot recommendation was created.</p>"
+                    }
+                },
+                "lastUpdatedDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the bot recommendation was last\n         updated.</p>"
+                    }
+                },
+                "transcriptSourceSetting": {
+                    "target": "com.amazonaws.lexmodelsv2#TranscriptSourceSetting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The object representing the Amazon S3 bucket containing the transcript,\n         as well as the associated metadata.</p>"
+                    }
+                },
+                "encryptionSetting": {
+                    "target": "com.amazonaws.lexmodelsv2#EncryptionSetting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The object representing the passwords that were used to encrypt the\n         data related to the bot recommendation results, as well as the KMS key\n         ARN used to encrypt the associated metadata.</p>"
+                    }
+                },
+                "botRecommendationResults": {
+                    "target": "com.amazonaws.lexmodelsv2#BotRecommendationResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The object representing the URL of the bot definition, the URL of\n         the associated transcript and a statistical summary of the bot\n         recommendation results.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.lexmodelsv2#DescribeBotRequest": {
             "type": "structure",
             "members": {
@@ -5652,6 +6013,32 @@
                 ]
             }
         },
+        "com.amazonaws.lexmodelsv2#EncryptionSetting": {
+            "type": "structure",
+            "members": {
+                "kmsKeyArn": {
+                    "target": "com.amazonaws.lexmodelsv2#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The KMS key ARN used to encrypt the metadata associated with the bot\n         recommendation.</p>"
+                    }
+                },
+                "botLocaleExportPassword": {
+                    "target": "com.amazonaws.lexmodelsv2#FilePassword",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The password used to encrypt the recommended bot recommendation\n         file.</p>"
+                    }
+                },
+                "associatedTranscriptsPassword": {
+                    "target": "com.amazonaws.lexmodelsv2#FilePassword",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The password used to encrypt the associated transcript file.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The object representing the passwords that were used to encrypt the\n         data related to the bot recommendation, as well as the KMS key ARN used\n         to encrypt the associated metadata.</p>"
+            }
+        },
         "com.amazonaws.lexmodelsv2#ExceptionMessage": {
             "type": "string"
         },
@@ -5855,6 +6242,16 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.lexmodelsv2#FailureReason"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#FilePassword": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.lexmodelsv2#FilterValue": {
@@ -6487,6 +6884,20 @@
                 "smithy.api#documentation": "<p>Specifies attributes for sorting a list of intents.</p>"
             }
         },
+        "com.amazonaws.lexmodelsv2#IntentStatistics": {
+            "type": "structure",
+            "members": {
+                "discoveredIntentCount": {
+                    "target": "com.amazonaws.lexmodelsv2#Count",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of recommended intents associated with the bot\n         recommendation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The object that contains the statistical summary of recommended\n         intents associated with the bot recommendation.</p>"
+            }
+        },
         "com.amazonaws.lexmodelsv2#IntentSummary": {
             "type": "structure",
             "members": {
@@ -6736,6 +7147,9 @@
                     "target": "com.amazonaws.lexmodelsv2#DescribeBotLocale"
                 },
                 {
+                    "target": "com.amazonaws.lexmodelsv2#DescribeBotRecommendation"
+                },
+                {
                     "target": "com.amazonaws.lexmodelsv2#DescribeBotVersion"
                 },
                 {
@@ -6766,6 +7180,9 @@
                     "target": "com.amazonaws.lexmodelsv2#ListBotLocales"
                 },
                 {
+                    "target": "com.amazonaws.lexmodelsv2#ListBotRecommendations"
+                },
+                {
                     "target": "com.amazonaws.lexmodelsv2#ListBots"
                 },
                 {
@@ -6787,6 +7204,9 @@
                     "target": "com.amazonaws.lexmodelsv2#ListIntents"
                 },
                 {
+                    "target": "com.amazonaws.lexmodelsv2#ListRecommendedIntents"
+                },
+                {
                     "target": "com.amazonaws.lexmodelsv2#ListSlots"
                 },
                 {
@@ -6794,6 +7214,12 @@
                 },
                 {
                     "target": "com.amazonaws.lexmodelsv2#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#SearchAssociatedTranscripts"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#StartBotRecommendation"
                 },
                 {
                     "target": "com.amazonaws.lexmodelsv2#StartImport"
@@ -6814,6 +7240,9 @@
                     "target": "com.amazonaws.lexmodelsv2#UpdateBotLocale"
                 },
                 {
+                    "target": "com.amazonaws.lexmodelsv2#UpdateBotRecommendation"
+                },
+                {
                     "target": "com.amazonaws.lexmodelsv2#UpdateExport"
                 },
                 {
@@ -6829,6 +7258,20 @@
                     "target": "com.amazonaws.lexmodelsv2#UpdateSlotType"
                 }
             ]
+        },
+        "com.amazonaws.lexmodelsv2#LexTranscriptFilter": {
+            "type": "structure",
+            "members": {
+                "dateRangeFilter": {
+                    "target": "com.amazonaws.lexmodelsv2#DateRangeFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The object that contains a date range filter that will be applied to\n         the transcript. Specify this object if you want Amazon Lex to only read the\n         files that are within the date range.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The object that contains transcript filter details that are\n         associated with a bot recommendation.</p>"
+            }
         },
         "com.amazonaws.lexmodelsv2#ListAggregatedUtterances": {
             "type": "operation",
@@ -7184,6 +7627,118 @@
                     "target": "com.amazonaws.lexmodelsv2#BotLocaleSummaryList",
                     "traits": {
                         "smithy.api#documentation": "<p>Summary information for the locales that meet the filter criteria\n         specified in the request. The length of the list is specified in the\n            <code>maxResults</code> parameter of the request. If there are more\n         locales available, the <code>nextToken</code> field contains a token to\n         get the next page of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ListBotRecommendations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#ListBotRecommendationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#ListBotRecommendationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get a list of bot recommendations that meet the specified\n         criteria.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/botrecommendations",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ListBotRecommendationsRequest": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot that contains the bot\n         recommendation list.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#DraftBotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the bot that contains the bot recommendation\n         list.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the language and locale of the bot recommendation\n         list.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.lexmodelsv2#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of bot recommendations to return in each page of\n         results. If there are fewer results than the max page size, only the\n         actual number of results are returned.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.lexmodelsv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response from the ListBotRecommendation operation contains\n         more results than specified in the maxResults parameter, a token is\n         returned in the response. Use that token in the nextToken parameter to\n         return the next page of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ListBotRecommendationsResponse": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot that contains the bot\n         recommendation list.</p>"
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#DraftBotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the bot that contains the bot recommendation\n         list.</p>"
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the language and locale of the bot recommendation\n         list.</p>"
+                    }
+                },
+                "botRecommendationSummaries": {
+                    "target": "com.amazonaws.lexmodelsv2#BotRecommendationSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Summary information for the bot recommendations that meet the filter\n         specified in this request. The length of the list is specified in the\n         maxResults parameter of the request. If there are more bot\n         recommendations available, the nextToken field contains a token to get\n         the next page of results.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.lexmodelsv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that indicates whether there are more results to return in a\n         response to the ListBotRecommendations operation. If the nextToken\n         field is present, you send the contents as the nextToken parameter of a\n         ListBotRecommendations operation request to get the next page of\n         results. </p>"
                     }
                 }
             }
@@ -7870,6 +8425,135 @@
                 }
             }
         },
+        "com.amazonaws.lexmodelsv2#ListRecommendedIntents": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#ListRecommendedIntentsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#ListRecommendedIntentsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets a list of recommended intents provided by the bot\n         recommendation that you can use in your bot.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/botrecommendations/{botRecommendationId}/intents",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ListRecommendedIntentsRequest": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot associated with the recommended\n         intents.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#DraftBotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the bot that contains the recommended intents.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the language and locale of the recommended\n         intents.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "botRecommendationId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the bot recommendation that contains the\n         recommended intents.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.lexmodelsv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response from the ListRecommendedIntents operation contains\n         more results than specified in the maxResults parameter, a token is\n         returned in the response. Use that token in the nextToken parameter to\n         return the next page of results.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.lexmodelsv2#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of bot recommendations to return in each page of\n         results. If there are fewer results than the max page size, only the\n         actual number of results are returned.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ListRecommendedIntentsResponse": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot associated with the recommended\n         intent.</p>"
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#DraftBotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the bot that contains the intent.</p>"
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the language and locale of the intents to list.\n         The string must match one of the supported locales. For more\n         information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>"
+                    }
+                },
+                "botRecommendationId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the bot recommendation that contains the\n         recommended intent.</p>"
+                    }
+                },
+                "summaryList": {
+                    "target": "com.amazonaws.lexmodelsv2#RecommendedIntentSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Summary information for the intents that meet the filter criteria\n         specified in the request. The length of the list is specified in the\n         maxResults parameter of the request. If there are more intents\n         available, the nextToken field contains a token to get the next page of\n         results.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.lexmodelsv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that indicates whether there are more results to return in a\n         response to the ListRecommendedIntents operation. If the nextToken\n         field is present, you send the contents as the nextToken parameter of a\n         ListRecommendedIntents operation request to get the next page of\n         results.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.lexmodelsv2#ListSlotTypes": {
             "type": "operation",
             "input": {
@@ -8223,6 +8907,10 @@
                     {
                         "value": "FailOnConflict",
                         "name": "FailOnConflict"
+                    },
+                    {
+                        "value": "Append",
+                        "name": "Append"
                     }
                 ]
             }
@@ -8334,6 +9022,16 @@
                 "smithy.api#pattern": "^([0-9a-zA-Z][_-]?)+$"
             }
         },
+        "com.amazonaws.lexmodelsv2#NextIndex": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 10000000
+                }
+            }
+        },
         "com.amazonaws.lexmodelsv2#NextToken": {
             "type": "string"
         },
@@ -8375,6 +9073,27 @@
                         "name": "DefaultObfuscation"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ObjectPrefix": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                },
+                "smithy.api#pattern": "^[\\/]?+[a-zA-Z0-9!_.*'()-]+(\\/[a-zA-Z0-9!_.*'()-]+)*$"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ObjectPrefixes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#ObjectPrefix"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#Operation": {
@@ -8432,6 +9151,20 @@
                     "min": 0,
                     "max": 10
                 }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#PathFormat": {
+            "type": "structure",
+            "members": {
+                "objectPrefixes": {
+                    "target": "com.amazonaws.lexmodelsv2#ObjectPrefixes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of Amazon S3 prefixes that points to sub-folders in the Amazon S3\n         bucket. Specify this list if you only want Lex to read the files under\n         this set of sub-folders.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The object that contains a path format that will be applied when\n         Amazon Lex reads the transcript file in the bucket you provide. Specify this\n         object if you only want Lex to read a subset of files in your Amazon S3\n         bucket.</p>"
             }
         },
         "com.amazonaws.lexmodelsv2#PlainTextMessage": {
@@ -8598,6 +9331,38 @@
                 }
             }
         },
+        "com.amazonaws.lexmodelsv2#RecommendedIntentSummary": {
+            "type": "structure",
+            "members": {
+                "intentId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of a recommended intent associated with the\n         bot recommendation.</p>"
+                    }
+                },
+                "intentName": {
+                    "target": "com.amazonaws.lexmodelsv2#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a recommended intent associated with the bot\n         recommendation.</p>"
+                    }
+                },
+                "sampleUtterancesCount": {
+                    "target": "com.amazonaws.lexmodelsv2#SampleUtterancesCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The count of sample utterances of a recommended intent that is\n         associated with a bot recommendation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains a summary of a recommended intent.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#RecommendedIntentSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#RecommendedIntentSummary"
+            }
+        },
         "com.amazonaws.lexmodelsv2#RegexPattern": {
             "type": "string",
             "traits": {
@@ -8730,6 +9495,56 @@
                 "smithy.api#documentation": "<p>Specifies an Amazon S3 bucket for logging audio conversations</p>"
             }
         },
+        "com.amazonaws.lexmodelsv2#S3BucketName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 63
+                },
+                "smithy.api#pattern": "^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#S3BucketTranscriptSource": {
+            "type": "structure",
+            "members": {
+                "s3BucketName": {
+                    "target": "com.amazonaws.lexmodelsv2#S3BucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the bucket containing the transcript and the associated\n         metadata.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "pathFormat": {
+                    "target": "com.amazonaws.lexmodelsv2#PathFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The object that contains a path format that will be applied when\n         Amazon Lex reads the transcript file in the bucket you provide. Specify this\n         object if you only want Lex to read a subset of files in your Amazon S3\n         bucket.</p>"
+                    }
+                },
+                "transcriptFormat": {
+                    "target": "com.amazonaws.lexmodelsv2#TranscriptFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format of the transcript content. Currently, Genie only supports\n         the Amazon Lex transcript format.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "transcriptFilter": {
+                    "target": "com.amazonaws.lexmodelsv2#TranscriptFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The object that contains the filter which will be applied when Amazon Lex\n         reads through the Amazon S3 bucket. Specify this object if you want Amazon Lex to\n         read only a subset of the Amazon S3 bucket based on the filter you\n         provide.</p>"
+                    }
+                },
+                "kmsKeyArn": {
+                    "target": "com.amazonaws.lexmodelsv2#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the KMS key that customer use to encrypt their Amazon S3\n         bucket. Only use this field if your bucket is encrypted using a\n         customer managed KMS key.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The object representing the Amazon S3 bucket containing the transcript,\n         as well as the associated metadata.</p>"
+            }
+        },
         "com.amazonaws.lexmodelsv2#SSMLMessage": {
             "type": "structure",
             "members": {
@@ -8769,6 +9584,12 @@
                 "smithy.api#documentation": "<p>A sample utterance that invokes an intent or respond to a slot\n         elicitation prompt.</p>"
             }
         },
+        "com.amazonaws.lexmodelsv2#SampleUtterancesCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
         "com.amazonaws.lexmodelsv2#SampleUtterancesList": {
             "type": "list",
             "member": {
@@ -8788,6 +9609,164 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Defines one of the values for a slot type.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#SearchAssociatedTranscripts": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#SearchAssociatedTranscriptsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#SearchAssociatedTranscriptsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Search for associated transcripts that meet the specified\n         criteria.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/botrecommendations/{botRecommendationId}/associatedtranscripts",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#SearchAssociatedTranscriptsRequest": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot associated with the transcripts\n         that you are searching.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#BotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the bot containing the transcripts that you are\n         searching.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the language and locale of the transcripts to\n         search. The string must match one of the supported locales. For more\n         information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>\n         </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "botRecommendationId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot recommendation associated with the\n         transcripts to search.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "searchOrder": {
+                    "target": "com.amazonaws.lexmodelsv2#SearchOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How SearchResults are ordered. Valid values are Ascending or\n         Descending. The default is Descending.</p>"
+                    }
+                },
+                "filters": {
+                    "target": "com.amazonaws.lexmodelsv2#AssociatedTranscriptFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of filter objects.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.lexmodelsv2#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of bot recommendations to return in each page of\n         results. If there are fewer results than the max page size, only the\n         actual number of results are returned.</p>"
+                    }
+                },
+                "nextIndex": {
+                    "target": "com.amazonaws.lexmodelsv2#NextIndex",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response from the SearchAssociatedTranscriptsRequest\n         operation contains more results than specified in the maxResults\n         parameter, an index is returned in the response. Use that index in the\n         nextIndex parameter to return the next page of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#SearchAssociatedTranscriptsResponse": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot associated with the transcripts\n         that you are searching.</p>"
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#BotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the bot containing the transcripts that you are\n         searching.</p>"
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the language and locale of the transcripts to\n         search. The string must match one of the supported locales. For more\n         information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>\n         </p>"
+                    }
+                },
+                "botRecommendationId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The unique identifier of the bot recommendation associated with the\n         transcripts to search.</p>"
+                    }
+                },
+                "nextIndex": {
+                    "target": "com.amazonaws.lexmodelsv2#NextIndex",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A index that indicates whether there are more results to return in a\n         response to the SearchAssociatedTranscripts operation. If the nextIndex\n         field is present, you send the contents as the nextIndex parameter of a\n         SearchAssociatedTranscriptsRequest operation to get the next page of\n         results.</p>"
+                    }
+                },
+                "associatedTranscripts": {
+                    "target": "com.amazonaws.lexmodelsv2#AssociatedTranscriptList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The object that contains the associated transcript that meet the\n         criteria you specified.</p>"
+                    }
+                },
+                "totalResults": {
+                    "target": "com.amazonaws.lexmodelsv2#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of transcripts returned by the search.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#SearchOrder": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Ascending",
+                        "name": "Ascending"
+                    },
+                    {
+                        "value": "Descending",
+                        "name": "Descending"
+                    }
+                ]
             }
         },
         "com.amazonaws.lexmodelsv2#SentimentAnalysisSettings": {
@@ -9212,6 +10191,20 @@
                 "smithy.api#documentation": "<p>Specifies attributes for sorting a list of slot types.</p>"
             }
         },
+        "com.amazonaws.lexmodelsv2#SlotTypeStatistics": {
+            "type": "structure",
+            "members": {
+                "discoveredSlotTypeCount": {
+                    "target": "com.amazonaws.lexmodelsv2#Count",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of recommended slot types associated with the bot\n         recommendation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The object that contains the statistical summary of the recommended\n         slot type associated with the bot recommendation.</p>"
+            }
+        },
         "com.amazonaws.lexmodelsv2#SlotTypeSummary": {
             "type": "structure",
             "members": {
@@ -9388,6 +10381,141 @@
                         "name": "Descending"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.lexmodelsv2#StartBotRecommendation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#StartBotRecommendationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#StartBotRecommendationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#PreconditionFailedException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Use this to provide your transcript data, and to start the bot\n         recommendation process.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/botrecommendations",
+                    "code": 202
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#StartBotRecommendationRequest": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot containing the bot\n         recommendation.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#DraftBotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the bot containing the bot recommendation.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the language and locale of the bot recommendation\n         to start. The string must match one of the supported locales. For more\n         information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>\n         </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "transcriptSourceSetting": {
+                    "target": "com.amazonaws.lexmodelsv2#TranscriptSourceSetting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The object representing the Amazon S3 bucket containing the transcript,\n         as well as the associated metadata.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "encryptionSetting": {
+                    "target": "com.amazonaws.lexmodelsv2#EncryptionSetting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The object representing the passwords that will be used to encrypt\n         the data related to the bot recommendation results, as well as the KMS\n         key ARN used to encrypt the associated metadata.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#StartBotRecommendationResponse": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot containing the bot\n         recommendation.</p>"
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#DraftBotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the bot containing the bot recommendation.</p>"
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the language and locale of the bot recommendation\n         to start. The string must match one of the supported locales. For more\n         information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>\n         </p>"
+                    }
+                },
+                "botRecommendationStatus": {
+                    "target": "com.amazonaws.lexmodelsv2#BotRecommendationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the bot recommendation.</p>\n         <p>If the status is Failed, then the reasons for the failure are listed\n         in the failureReasons field. </p>"
+                    }
+                },
+                "botRecommendationId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the bot recommendation that you have\n         created.</p>"
+                    }
+                },
+                "creationDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp of the date and time that the bot recommendation was\n         created.</p>"
+                    }
+                },
+                "transcriptSourceSetting": {
+                    "target": "com.amazonaws.lexmodelsv2#TranscriptSourceSetting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The object representing the Amazon S3 bucket containing the transcript,\n         as well as the associated metadata.</p>"
+                    }
+                },
+                "encryptionSetting": {
+                    "target": "com.amazonaws.lexmodelsv2#EncryptionSetting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The object representing the passwords that were used to encrypt the\n         data related to the bot recommendation results, as well as the KMS key\n         ARN used to encrypt the associated metadata.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#StartImport": {
@@ -9758,6 +10886,55 @@
         },
         "com.amazonaws.lexmodelsv2#Timestamp": {
             "type": "timestamp"
+        },
+        "com.amazonaws.lexmodelsv2#Transcript": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 6000000
+                },
+                "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#TranscriptFilter": {
+            "type": "structure",
+            "members": {
+                "lexTranscriptFilter": {
+                    "target": "com.amazonaws.lexmodelsv2#LexTranscriptFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The object representing the filter that Amazon Lex will use to select the\n         appropriate transcript when the transcript format is the Amazon Lex\n         format.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The object representing the filter that Amazon Lex will use to select the\n         appropriate transcript.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#TranscriptFormat": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Lex",
+                        "name": "Lex"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lexmodelsv2#TranscriptSourceSetting": {
+            "type": "structure",
+            "members": {
+                "s3BucketTranscriptSource": {
+                    "target": "com.amazonaws.lexmodelsv2#S3BucketTranscriptSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the setting of the Amazon S3 bucket where the transcript is\n         stored.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Indicates the setting of the location where the transcript is\n         stored.</p>"
+            }
         },
         "com.amazonaws.lexmodelsv2#UntagResource": {
             "type": "operation",
@@ -10164,6 +11341,149 @@
                     "target": "com.amazonaws.lexmodelsv2#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>A timestamp of the date and time that the locale was last\n         updated.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#UpdateBotRecommendation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#UpdateBotRecommendationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#UpdateBotRecommendationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#PreconditionFailedException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an existing bot recommendation request.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/botrecommendations/{botRecommendationId}",
+                    "code": 202
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#UpdateBotRecommendationRequest": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot containing the bot recommendation\n         to be updated.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#DraftBotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the bot containing the bot recommendation to be\n         updated.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the language and locale of the bot recommendation\n         to update. The string must match one of the supported locales. For more\n         information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>\n         </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "botRecommendationId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot recommendation to be\n         updated.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "encryptionSetting": {
+                    "target": "com.amazonaws.lexmodelsv2#EncryptionSetting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The object representing the passwords that will be used to encrypt\n         the data related to the bot recommendation results, as well as the KMS\n         key ARN used to encrypt the associated metadata.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#UpdateBotRecommendationResponse": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot containing the bot recommendation\n         that has been updated.</p>"
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#DraftBotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the bot containing the bot recommendation that has\n         been updated.</p>"
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the language and locale of the bot recommendation\n         to update. The string must match one of the supported locales. For more\n         information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>\n         </p>"
+                    }
+                },
+                "botRecommendationStatus": {
+                    "target": "com.amazonaws.lexmodelsv2#BotRecommendationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the bot recommendation.</p>\n         <p>If the status is Failed, then the reasons for the failure are listed\n         in the failureReasons field. </p>"
+                    }
+                },
+                "botRecommendationId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot recommendation to be\n         updated.</p>"
+                    }
+                },
+                "creationDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp of the date and time that the bot recommendation was\n         created.</p>"
+                    }
+                },
+                "lastUpdatedDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp of the date and time that the bot recommendation was\n         last updated.</p>"
+                    }
+                },
+                "transcriptSourceSetting": {
+                    "target": "com.amazonaws.lexmodelsv2#TranscriptSourceSetting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The object representing the Amazon S3 bucket containing the transcript,\n         as well as the associated metadata.</p>"
+                    }
+                },
+                "encryptionSetting": {
+                    "target": "com.amazonaws.lexmodelsv2#EncryptionSetting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The object representing the passwords that were used to encrypt the\n         data related to the bot recommendation results, as well as the KMS key\n         ARN used to encrypt the associated metadata.</p>"
                     }
                 }
             }

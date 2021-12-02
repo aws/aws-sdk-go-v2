@@ -34,7 +34,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Runs one or more SQL statements, which can be data manipulation language (DML) or data definition\n      language (DDL). \n      Depending on the authorization\n      method, use one of the following combinations of request parameters: </p>\n         <ul>\n            <li>\n               <p>Secrets Manager - specify the Amazon Resource Name (ARN) of the secret, the database name, and the \n        cluster identifier that matches the cluster in the secret. </p>\n            </li>\n            <li>\n               <p>Temporary credentials - specify the cluster identifier, the database name, and the\n          database user name. Permission to call the <code>redshift:GetClusterCredentials</code>\n          operation is required to use this method. </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Runs one or more SQL statements, which can be data manipulation language (DML) or data definition\n      language (DDL). \n      Depending on the authorization\n      method, use one of the following combinations of request parameters: </p>\n         <ul>\n            <li>\n               <p>Secrets Manager - when connecting to a cluster, specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret.\nWhen connecting to a serverless endpoint, specify the Amazon Resource Name (ARN) of the secret and the database name. </p>\n            </li>\n            <li>\n               <p>Temporary credentials - when connecting to a cluster, specify the cluster identifier, the database name, and the database user name. \nAlso, permission to call the <code>redshift:GetClusterCredentials</code> operation is required.\nWhen connecting to a serverless endpoint, specify the database name. </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.redshiftdata#BatchExecuteStatementException": {
@@ -73,8 +73,7 @@
                 "ClusterIdentifier": {
                     "target": "com.amazonaws.redshiftdata#Location",
                     "traits": {
-                        "smithy.api#documentation": "<p>The cluster identifier. This parameter is required when authenticating using either Secrets Manager or temporary credentials. </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The cluster identifier. This parameter is required when connecting to a cluster and authenticating using either Secrets Manager or temporary credentials. </p>"
                     }
                 },
                 "SecretArn": {
@@ -86,7 +85,7 @@
                 "DbUser": {
                     "target": "com.amazonaws.redshiftdata#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The database user name. This parameter is required when authenticating using temporary credentials. </p>"
+                        "smithy.api#documentation": "<p>The database user name. This parameter is required when connecting to a cluster and authenticating using temporary credentials. </p>"
                     }
                 },
                 "Database": {
@@ -128,7 +127,7 @@
                 "ClusterIdentifier": {
                     "target": "com.amazonaws.redshiftdata#Location",
                     "traits": {
-                        "smithy.api#documentation": "<p>The cluster identifier. </p>"
+                        "smithy.api#documentation": "<p>The cluster identifier. This parameter is not returned when connecting to a serverless endpoint. </p>"
                     }
                 },
                 "DbUser": {
@@ -181,6 +180,9 @@
                 "target": "com.amazonaws.redshiftdata#CancelStatementResponse"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.redshiftdata#DatabaseConnectionException"
+                },
                 {
                     "target": "com.amazonaws.redshiftdata#InternalServerException"
                 },
@@ -316,6 +318,22 @@
                 "target": "com.amazonaws.redshiftdata#ColumnMetadata"
             }
         },
+        "com.amazonaws.redshiftdata#DatabaseConnectionException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.redshiftdata#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Connection to a database failed.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
         "com.amazonaws.redshiftdata#DatabaseList": {
             "type": "list",
             "member": {
@@ -431,7 +449,7 @@
                 "HasResultSet": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that indicates whether the statement has a result set. The result set can be empty. </p>"
+                        "smithy.api#documentation": "<p>A value that indicates whether the statement has a result set. The result set can be empty. The value is true for an empty result set.\n      The value is true if any substatement returns a result set.</p>"
                     }
                 },
                 "QueryString": {
@@ -482,6 +500,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.redshiftdata#DatabaseConnectionException"
+                },
+                {
                     "target": "com.amazonaws.redshiftdata#InternalServerException"
                 },
                 {
@@ -489,7 +510,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the detailed information about a table from metadata in the cluster. The\n      information includes its columns. \n      A token is returned to page through the column list.\n      Depending on the authorization method, use one of the\n      following combinations of request parameters: </p>\n         <ul>\n            <li>\n               <p>Secrets Manager - specify the Amazon Resource Name (ARN) of the secret, the database name, and the \n         cluster identifier that matches the cluster in the secret. </p>\n            </li>\n            <li>\n               <p>Temporary credentials - specify the cluster identifier, the database name, and the database\n          user name. Permission to call the <code>redshift:GetClusterCredentials</code> operation is\n          required to use this method. </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Describes the detailed information about a table from metadata in the cluster. The\n      information includes its columns. \n      A token is returned to page through the column list.\n      Depending on the authorization method, use one of the\n      following combinations of request parameters: </p>\n         <ul>\n            <li>\n               <p>Secrets Manager - when connecting to a cluster, specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret.\nWhen connecting to a serverless endpoint, specify the Amazon Resource Name (ARN) of the secret and the database name. </p>\n            </li>\n            <li>\n               <p>Temporary credentials - when connecting to a cluster, specify the cluster identifier, the database name, and the database user name. \nAlso, permission to call the <code>redshift:GetClusterCredentials</code> operation is required.\nWhen connecting to a serverless endpoint, specify the database name. </p>\n            </li>\n         </ul>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -505,8 +526,7 @@
                 "ClusterIdentifier": {
                     "target": "com.amazonaws.redshiftdata#Location",
                     "traits": {
-                        "smithy.api#documentation": "<p>The cluster identifier. This parameter is required when authenticating using either Secrets Manager or temporary credentials. </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The cluster identifier. This parameter is required when connecting to a cluster and authenticating using either Secrets Manager or temporary credentials. </p>"
                     }
                 },
                 "SecretArn": {
@@ -518,7 +538,7 @@
                 "DbUser": {
                     "target": "com.amazonaws.redshiftdata#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The database user name. This parameter is required when authenticating using temporary credentials. </p>"
+                        "smithy.api#documentation": "<p>The database user name. This parameter is required when connecting to a cluster and authenticating using temporary credentials. </p>"
                     }
                 },
                 "Database": {
@@ -603,7 +623,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Runs an SQL statement, which can be data manipulation language (DML) or data definition\n      language (DDL). This statement must be a single SQL statement. \n      Depending on the authorization\n      method, use one of the following combinations of request parameters: </p>\n         <ul>\n            <li>\n               <p>Secrets Manager - specify the Amazon Resource Name (ARN) of the secret, the database name, and the \n         cluster identifier that matches the cluster in the secret. </p>\n            </li>\n            <li>\n               <p>Temporary credentials - specify the cluster identifier, the database name, and the\n          database user name. Permission to call the <code>redshift:GetClusterCredentials</code>\n          operation is required to use this method. </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Runs an SQL statement, which can be data manipulation language (DML) or data definition\n      language (DDL). This statement must be a single SQL statement. \n      Depending on the authorization\n      method, use one of the following combinations of request parameters: </p>\n         <ul>\n            <li>\n               <p>Secrets Manager - when connecting to a cluster, specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret.\nWhen connecting to a serverless endpoint, specify the Amazon Resource Name (ARN) of the secret and the database name. </p>\n            </li>\n            <li>\n               <p>Temporary credentials - when connecting to a cluster, specify the cluster identifier, the database name, and the database user name. \nAlso, permission to call the <code>redshift:GetClusterCredentials</code> operation is required.\nWhen connecting to a serverless endpoint, specify the database name. </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.redshiftdata#ExecuteStatementException": {
@@ -643,8 +663,7 @@
                 "ClusterIdentifier": {
                     "target": "com.amazonaws.redshiftdata#Location",
                     "traits": {
-                        "smithy.api#documentation": "<p>The cluster identifier. This parameter is required when authenticating using either Secrets Manager or temporary credentials. </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The cluster identifier. This parameter is required when connecting to a cluster and authenticating using either Secrets Manager or temporary credentials. </p>"
                     }
                 },
                 "SecretArn": {
@@ -656,7 +675,7 @@
                 "DbUser": {
                     "target": "com.amazonaws.redshiftdata#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The database user name. This parameter is required when authenticating using temporary credentials. </p>"
+                        "smithy.api#documentation": "<p>The database user name. This parameter is required when connecting to a cluster and authenticating using temporary credentials. </p>"
                     }
                 },
                 "Database": {
@@ -704,7 +723,7 @@
                 "ClusterIdentifier": {
                     "target": "com.amazonaws.redshiftdata#Location",
                     "traits": {
-                        "smithy.api#documentation": "<p>The cluster identifier. </p>"
+                        "smithy.api#documentation": "<p>The cluster identifier. This parameter is not returned when connecting to a serverless endpoint. </p>"
                     }
                 },
                 "DbUser": {
@@ -884,6 +903,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.redshiftdata#DatabaseConnectionException"
+                },
+                {
                     "target": "com.amazonaws.redshiftdata#InternalServerException"
                 },
                 {
@@ -891,7 +913,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List the databases in a cluster. \n      A token is returned to page through the database list.\n      Depending on the authorization method, use one of the\n      following combinations of request parameters: </p>\n         <ul>\n            <li>\n               <p>Secrets Manager - specify the Amazon Resource Name (ARN) of the secret, the database name, and the \n         cluster identifier that matches the cluster in the secret. </p>\n            </li>\n            <li>\n               <p>Temporary credentials - specify the cluster identifier, the database name, and the\n          database user name. Permission to call the <code>redshift:GetClusterCredentials</code>\n          operation is required to use this method. </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>List the databases in a cluster. \n      A token is returned to page through the database list.\n      Depending on the authorization method, use one of the\n      following combinations of request parameters: </p>\n         <ul>\n            <li>\n               <p>Secrets Manager - when connecting to a cluster, specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret.\nWhen connecting to a serverless endpoint, specify the Amazon Resource Name (ARN) of the secret and the database name. </p>\n            </li>\n            <li>\n               <p>Temporary credentials - when connecting to a cluster, specify the cluster identifier, the database name, and the database user name. \nAlso, permission to call the <code>redshift:GetClusterCredentials</code> operation is required.\nWhen connecting to a serverless endpoint, specify the database name. </p>\n            </li>\n         </ul>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -907,8 +929,7 @@
                 "ClusterIdentifier": {
                     "target": "com.amazonaws.redshiftdata#Location",
                     "traits": {
-                        "smithy.api#documentation": "<p>The cluster identifier. This parameter is required when authenticating using either Secrets Manager or temporary credentials. </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The cluster identifier. This parameter is required when connecting to a cluster and authenticating using either Secrets Manager or temporary credentials. </p>"
                     }
                 },
                 "Database": {
@@ -927,7 +948,7 @@
                 "DbUser": {
                     "target": "com.amazonaws.redshiftdata#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The database user name. This parameter is required when authenticating using temporary credentials. </p>"
+                        "smithy.api#documentation": "<p>The database user name. This parameter is required when connecting to a cluster and authenticating using temporary credentials. </p>"
                     }
                 },
                 "NextToken": {
@@ -971,6 +992,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.redshiftdata#DatabaseConnectionException"
+                },
+                {
                     "target": "com.amazonaws.redshiftdata#InternalServerException"
                 },
                 {
@@ -978,7 +1002,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the schemas in a database. \n      A token is returned to page through the schema list. \n      Depending on the authorization method, use one of the\n      following combinations of request parameters: </p>\n         <ul>\n            <li>\n               <p>Secrets Manager - specify the Amazon Resource Name (ARN) of the secret, the database name, and the \n         cluster identifier that matches the cluster in the secret. </p>\n            </li>\n            <li>\n               <p>Temporary credentials - specify the cluster identifier, the database name, and the\n          database user name. Permission to call the <code>redshift:GetClusterCredentials</code>\n          operation is required to use this method. </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Lists the schemas in a database. \n      A token is returned to page through the schema list. \n      Depending on the authorization method, use one of the\n      following combinations of request parameters: </p>\n         <ul>\n            <li>\n               <p>Secrets Manager - when connecting to a cluster, specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret.\nWhen connecting to a serverless endpoint, specify the Amazon Resource Name (ARN) of the secret and the database name. </p>\n            </li>\n            <li>\n               <p>Temporary credentials - when connecting to a cluster, specify the cluster identifier, the database name, and the database user name. \nAlso, permission to call the <code>redshift:GetClusterCredentials</code> operation is required.\nWhen connecting to a serverless endpoint, specify the database name. </p>\n            </li>\n         </ul>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -994,8 +1018,7 @@
                 "ClusterIdentifier": {
                     "target": "com.amazonaws.redshiftdata#Location",
                     "traits": {
-                        "smithy.api#documentation": "<p>The cluster identifier. This parameter is required when authenticating using either Secrets Manager or temporary credentials. </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The cluster identifier. This parameter is required when connecting to a cluster and authenticating using either Secrets Manager or temporary credentials. </p>"
                     }
                 },
                 "SecretArn": {
@@ -1007,7 +1030,7 @@
                 "DbUser": {
                     "target": "com.amazonaws.redshiftdata#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The database user name. This parameter is required when authenticating using temporary credentials. </p>"
+                        "smithy.api#documentation": "<p>The database user name. This parameter is required when connecting to a cluster and authenticating using temporary credentials. </p>"
                     }
                 },
                 "Database": {
@@ -1159,6 +1182,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.redshiftdata#DatabaseConnectionException"
+                },
+                {
                     "target": "com.amazonaws.redshiftdata#InternalServerException"
                 },
                 {
@@ -1166,7 +1192,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List the tables in a database. If neither <code>SchemaPattern</code> nor <code>TablePattern</code> are specified, then \n       all tables in the database are returned.\n      A token is returned to page through the table list. \n      Depending on the authorization method, use one of the\n      following combinations of request parameters: </p>\n         <ul>\n            <li>\n               <p>Secrets Manager - specify the Amazon Resource Name (ARN) of the secret, the database name, and the \n         cluster identifier that matches the cluster in the secret. </p>\n            </li>\n            <li>\n               <p>Temporary credentials - specify the cluster identifier, the database name, and the\n          database user name. Permission to call the <code>redshift:GetClusterCredentials</code>\n          operation is required to use this method. </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>List the tables in a database. If neither <code>SchemaPattern</code> nor <code>TablePattern</code> are specified, then \n       all tables in the database are returned.\n      A token is returned to page through the table list. \n      Depending on the authorization method, use one of the\n      following combinations of request parameters: </p>\n         <ul>\n            <li>\n               <p>Secrets Manager - when connecting to a cluster, specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret.\nWhen connecting to a serverless endpoint, specify the Amazon Resource Name (ARN) of the secret and the database name. </p>\n            </li>\n            <li>\n               <p>Temporary credentials - when connecting to a cluster, specify the cluster identifier, the database name, and the database user name. \nAlso, permission to call the <code>redshift:GetClusterCredentials</code> operation is required.\nWhen connecting to a serverless endpoint, specify the database name. </p>\n            </li>\n         </ul>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -1182,8 +1208,7 @@
                 "ClusterIdentifier": {
                     "target": "com.amazonaws.redshiftdata#Location",
                     "traits": {
-                        "smithy.api#documentation": "<p>The cluster identifier. This parameter is required when authenticating using either Secrets Manager or temporary credentials. </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The cluster identifier. This parameter is required when connecting to a cluster and authenticating using either Secrets Manager or temporary credentials. </p>"
                     }
                 },
                 "SecretArn": {
@@ -1195,7 +1220,7 @@
                 "DbUser": {
                     "target": "com.amazonaws.redshiftdata#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The database user name. This parameter is required when authenticating using temporary credentials. </p>"
+                        "smithy.api#documentation": "<p>The database user name. This parameter is required when connecting to a cluster and authenticating using temporary credentials. </p>"
                     }
                 },
                 "Database": {
@@ -1653,7 +1678,7 @@
                 "HasResultSet": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that indicates whether the statement has a result set. The result set can be empty.</p>"
+                        "smithy.api#documentation": "<p>A value that indicates whether the statement has a result set. The result set can be empty. The value is true for an empty result set.</p>"
                     }
                 }
             },

@@ -31,8 +31,29 @@
     "shapes": {
         "com.amazonaws.kendra#AWSKendraFrontendService": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "kendra",
+                    "arnNamespace": "kendra",
+                    "cloudFormationName": "Kendra",
+                    "cloudTrailEventSource": "kendra.amazonaws.com",
+                    "endpointPrefix": "kendra"
+                },
+                "aws.auth#sigv4": {
+                    "name": "kendra"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<p>Amazon Kendra is a service for indexing large document sets.</p>",
+                "smithy.api#title": "AWSKendraFrontendService"
+            },
             "version": "2019-02-03",
             "operations": [
+                {
+                    "target": "com.amazonaws.kendra#AssociateEntitiesToExperience"
+                },
+                {
+                    "target": "com.amazonaws.kendra#AssociatePersonasToEntities"
+                },
                 {
                     "target": "com.amazonaws.kendra#BatchDeleteDocument"
                 },
@@ -49,6 +70,9 @@
                     "target": "com.amazonaws.kendra#CreateDataSource"
                 },
                 {
+                    "target": "com.amazonaws.kendra#CreateExperience"
+                },
+                {
                     "target": "com.amazonaws.kendra#CreateFaq"
                 },
                 {
@@ -62,6 +86,9 @@
                 },
                 {
                     "target": "com.amazonaws.kendra#DeleteDataSource"
+                },
+                {
+                    "target": "com.amazonaws.kendra#DeleteExperience"
                 },
                 {
                     "target": "com.amazonaws.kendra#DeleteFaq"
@@ -82,6 +109,9 @@
                     "target": "com.amazonaws.kendra#DescribeDataSource"
                 },
                 {
+                    "target": "com.amazonaws.kendra#DescribeExperience"
+                },
+                {
                     "target": "com.amazonaws.kendra#DescribeFaq"
                 },
                 {
@@ -100,13 +130,31 @@
                     "target": "com.amazonaws.kendra#DescribeThesaurus"
                 },
                 {
+                    "target": "com.amazonaws.kendra#DisassociateEntitiesFromExperience"
+                },
+                {
+                    "target": "com.amazonaws.kendra#DisassociatePersonasFromEntities"
+                },
+                {
                     "target": "com.amazonaws.kendra#GetQuerySuggestions"
+                },
+                {
+                    "target": "com.amazonaws.kendra#GetSnapshots"
                 },
                 {
                     "target": "com.amazonaws.kendra#ListDataSources"
                 },
                 {
                     "target": "com.amazonaws.kendra#ListDataSourceSyncJobs"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ListEntityPersonas"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ListExperienceEntities"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ListExperiences"
                 },
                 {
                     "target": "com.amazonaws.kendra#ListFaqs"
@@ -151,6 +199,9 @@
                     "target": "com.amazonaws.kendra#UpdateDataSource"
                 },
                 {
+                    "target": "com.amazonaws.kendra#UpdateExperience"
+                },
+                {
                     "target": "com.amazonaws.kendra#UpdateIndex"
                 },
                 {
@@ -162,22 +213,7 @@
                 {
                     "target": "com.amazonaws.kendra#UpdateThesaurus"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "kendra",
-                    "arnNamespace": "kendra",
-                    "cloudFormationName": "Kendra",
-                    "cloudTrailEventSource": "kendra.amazonaws.com",
-                    "endpointPrefix": "kendra"
-                },
-                "aws.auth#sigv4": {
-                    "name": "kendra"
-                },
-                "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>Amazon Kendra is a service for indexing large document sets.</p>",
-                "smithy.api#title": "AWSKendraFrontendService"
-            }
+            ]
         },
         "com.amazonaws.kendra#AccessControlListConfiguration": {
             "type": "structure",
@@ -290,6 +326,168 @@
                 }
             }
         },
+        "com.amazonaws.kendra#AssociateEntitiesToExperience": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kendra#AssociateEntitiesToExperienceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kendra#AssociateEntitiesToExperienceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kendra#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ResourceAlreadyExistException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Grants users or groups in your Amazon Web Services SSO identity source access \n            to your Amazon Kendra experience. You can create an Amazon Kendra experience such as a \n            search application. For more information on creating a search application \n            experience, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html\">Building \n                a search experience with no code</a>.</p>"
+            }
+        },
+        "com.amazonaws.kendra#AssociateEntitiesToExperienceFailedEntityList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendra#FailedEntity"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.kendra#AssociateEntitiesToExperienceRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.kendra#ExperienceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of your Amazon Kendra experience.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IndexId": {
+                    "target": "com.amazonaws.kendra#IndexId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the index for your Amazon Kendra experience.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EntityList": {
+                    "target": "com.amazonaws.kendra#AssociateEntityList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lists users or groups in your Amazon Web Services SSO identity source.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kendra#AssociateEntitiesToExperienceResponse": {
+            "type": "structure",
+            "members": {
+                "FailedEntityList": {
+                    "target": "com.amazonaws.kendra#AssociateEntitiesToExperienceFailedEntityList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lists the users or groups in your Amazon Web Services SSO identity source that \n            failed to properly configure with your Amazon Kendra experience.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kendra#AssociateEntityList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendra#EntityConfiguration"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.kendra#AssociatePersonasToEntities": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kendra#AssociatePersonasToEntitiesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kendra#AssociatePersonasToEntitiesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kendra#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ResourceAlreadyExistException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the specific permissions of users or groups in your Amazon Web Services SSO\n            identity source with access to your Amazon Kendra experience. You can create an Amazon Kendra \n            experience such as a search application. For more information on creating a \n            search application experience, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html\">Building \n                a search experience with no code</a>.</p>"
+            }
+        },
+        "com.amazonaws.kendra#AssociatePersonasToEntitiesRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.kendra#ExperienceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of your Amazon Kendra experience.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IndexId": {
+                    "target": "com.amazonaws.kendra#IndexId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the index for your Amazon Kendra experience.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Personas": {
+                    "target": "com.amazonaws.kendra#EntityPersonaConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The personas that define the specific permissions of users or groups in \n            your Amazon Web Services SSO identity source. The available personas or access \n            roles are <code>Owner</code> and <code>Viewer</code>. For more information \n            on these personas, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html#access-search-experience\">Providing \n                access to your search page</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kendra#AssociatePersonasToEntitiesResponse": {
+            "type": "structure",
+            "members": {
+                "FailedEntityList": {
+                    "target": "com.amazonaws.kendra#FailedEntityList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lists the users or groups in your Amazon Web Services SSO identity source that \n            failed to properly configure with your Amazon Kendra experience.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.kendra#AttributeFilter": {
             "type": "structure",
             "members": {
@@ -355,7 +553,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides filtering the query results based on document\n         attributes.</p>\n         <p>When you use the <code>AndAllFilters</code> or\n            <code>OrAllFilters</code>, filters you can use 2 layers under the\n         first attribute filter. For example, you can use:</p>\n         <p>\n            <code><AndAllFilters></code>\n         </p>\n         <ol>\n            <li>\n               <p>\n                  <code> <OrAllFilters></code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code> <EqualTo></code>\n               </p>\n            </li>\n         </ol>\n         <p>If you use more than 2 layers, you receive a\n            <code>ValidationException</code> exception with the message\n            \"<code>AttributeFilter</code> cannot have a depth of more \n         than 2.\"</p>\n         <p>If you use more than 10 attribute filters in a given list for \n         <code>AndAllFilters</code> or <code>OrAllFilters</code>, you receive \n         a <code>ValidationException</code> with the message \n         \"<code>AttributeFilter</code> cannot have a length of more than 10\".</p>"
+                "smithy.api#documentation": "<p>Provides filtering the query results based on document\n         attributes.</p>\n         <p>When you use the <code>AndAllFilters</code> or\n            <code>OrAllFilters</code>, filters you can use 2 layers under the\n         first attribute filter. For example, you can use:</p>\n         <p>\n            <code><AndAllFilters></code>\n         </p>\n         <ol>\n            <li>\n               <p>\n                  <code> <OrAllFilters></code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code> <EqualsTo></code>\n               </p>\n            </li>\n         </ol>\n         <p>If you use more than 2 layers, you receive a\n            <code>ValidationException</code> exception with the message\n            \"<code>AttributeFilter</code> cannot have a depth of more \n         than 2.\"</p>\n         <p>If you use more than 10 attribute filters in a given list for \n         <code>AndAllFilters</code> or <code>OrAllFilters</code>, you receive \n         a <code>ValidationException</code> with the message \n         \"<code>AttributeFilter</code> cannot have a length of more than 10\".</p>"
             }
         },
         "com.amazonaws.kendra#AttributeFilterList": {
@@ -398,7 +596,7 @@
                 "Credentials": {
                     "target": "com.amazonaws.kendra#SecretArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>Your secret ARN, which you can create in <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html\">AWS Secrets Manager</a>\n         </p>\n        <p>You use a secret if basic authentication credentials are required to connect \n            to a website. The secret stores your credentials of user name and password.</p>",
+                        "smithy.api#documentation": "<p>Your secret ARN, which you can create in <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html\">Secrets Manager</a>\n         </p>\n        <p>You use a secret if basic authentication credentials are required to connect \n            to a website. The secret stores your credentials of user name and password.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -673,6 +871,12 @@
                         "smithy.api#documentation": "<p>One or more documents to add to the index.</p>\n         <p>Documents can include custom attributes. For example, \n      'DataSourceId' and 'DataSourceSyncJobId' are custom \n      attributes that provide information on the synchronization \n      of documents running on a data source. Note, \n      'DataSourceSyncJobId' could be an optional custom attribute \n      as Amazon Kendra will use the ID of a running sync job.</p>\n         <p>Documents have the following file size limits.</p>\n         <ul>\n            <li>\n               <p>5 MB total size for inline documents</p>\n            </li>\n            <li>\n               <p>50 MB total size for files from an S3 bucket</p>\n            </li>\n            <li>\n               <p>5 MB extracted text for any file</p>\n            </li>\n         </ul>\n         <p>For more information about file size and transaction per second\n      quotas, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/quotas.html\">Quotas</a>.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "CustomDocumentEnrichmentConfiguration": {
+                    "target": "com.amazonaws.kendra#CustomDocumentEnrichmentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration information for altering your document metadata and content during \n            the document ingestion process when you use the <code>BatchPutDocument</code> \n            operation.</p>\n        <p>For more information on how to create, modify and delete document metadata, \n            or make other content alterations when you ingest documents into Amazon Kendra, see \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html\">Customizing \n                document metadata during the ingestion process</a>.</p>"
+                    }
                 }
             }
         },
@@ -795,7 +999,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Clears existing query suggestions from an index.</p>\n        <p>This deletes existing suggestions only, not the queries \n            in the query log. After you clear suggestions, Amazon Kendra learns \n            new suggestions based on new queries added to the query log \n            from the time you cleared suggestions. If you do not see any \n            new suggestions, then please allow Amazon Kendra to collect \n            enough queries to learn new suggestions.</p>"
+                "smithy.api#documentation": "<p>Clears existing query suggestions from an index.</p>\n        <p>This deletes existing suggestions only, not the queries \n            in the query log. After you clear suggestions, Amazon Kendra learns \n            new suggestions based on new queries added to the query log \n            from the time you cleared suggestions. If you do not see any \n            new suggestions, then please allow Amazon Kendra to collect \n            enough queries to learn new suggestions.</p>\n        <p>\n            <code>ClearQuerySuggestions</code> is currently not supported in the \n            Amazon Web Services GovCloud (US-West) region.</p>"
             }
         },
         "com.amazonaws.kendra#ClearQuerySuggestionsRequest": {
@@ -896,6 +1100,57 @@
                     "max": 100
                 },
                 "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9_]*$"
+            }
+        },
+        "com.amazonaws.kendra#ConditionOperator": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "GreaterThan",
+                        "name": "GreaterThan"
+                    },
+                    {
+                        "value": "GreaterThanOrEquals",
+                        "name": "GreaterThanOrEquals"
+                    },
+                    {
+                        "value": "LessThan",
+                        "name": "LessThan"
+                    },
+                    {
+                        "value": "LessThanOrEquals",
+                        "name": "LessThanOrEquals"
+                    },
+                    {
+                        "value": "Equals",
+                        "name": "Equals"
+                    },
+                    {
+                        "value": "NotEquals",
+                        "name": "NotEquals"
+                    },
+                    {
+                        "value": "Contains",
+                        "name": "Contains"
+                    },
+                    {
+                        "value": "NotContains",
+                        "name": "NotContains"
+                    },
+                    {
+                        "value": "Exists",
+                        "name": "Exists"
+                    },
+                    {
+                        "value": "NotExists",
+                        "name": "NotExists"
+                    },
+                    {
+                        "value": "BeginsWith",
+                        "name": "BeginsWith"
+                    }
+                ]
             }
         },
         "com.amazonaws.kendra#ConflictException": {
@@ -1128,7 +1383,7 @@
                 "SecretArn": {
                     "target": "com.amazonaws.kendra#SecretArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an Secrets Managersecret\n            that contains the key/value pairs required to connect to your\n            Confluence server. The secret must contain a JSON structure with the\n            following keys:</p>\n        <ul>\n            <li>\n                <p>username - The user name or email address of a user with\n                    administrative privileges for the Confluence server.</p>\n            </li>\n            <li>\n                <p>password - The password associated with the user logging\n                    in to the Confluence server.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an Secrets Manager secret\n            that contains the key/value pairs required to connect to your\n            Confluence server. The secret must contain a JSON structure with the\n            following keys:</p>\n        <ul>\n            <li>\n                <p>username - The user name or email address of a user with\n                    administrative privileges for the Confluence server.</p>\n            </li>\n            <li>\n                <p>password - The password associated with the user logging\n                    in to the Confluence server.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1471,6 +1726,32 @@
                 "smithy.api#documentation": "<p>Provides the information necessary to connect to a\n            database.</p>"
             }
         },
+        "com.amazonaws.kendra#ContentSourceConfiguration": {
+            "type": "structure",
+            "members": {
+                "DataSourceIds": {
+                    "target": "com.amazonaws.kendra#DataSourceIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the data sources you want to use for your Amazon Kendra experience.</p>"
+                    }
+                },
+                "FaqIds": {
+                    "target": "com.amazonaws.kendra#FaqIdsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the FAQs that you want to use for your Amazon Kendra experience.</p>"
+                    }
+                },
+                "DirectPutContent": {
+                    "target": "com.amazonaws.kendra#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <code>TRUE</code> to use documents you indexed directly using the\n                <code>BatchPutDocument</code> operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration information for your content sources, such as data sources, \n            FAQs, and content indexed directly via <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_BatchPutDocument.html\">BatchPutDocument</a>.</p>"
+            }
+        },
         "com.amazonaws.kendra#ContentType": {
             "type": "string",
             "traits": {
@@ -1543,7 +1824,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a data source that you want to use with an Amazon Kendra index. </p>\n         <p>You specify a name, data source connector type and description for\n      your data source. You also specify configuration information for the \n      data source connector.</p>\n         <p>\n            <code>CreateDataSource</code> is a synchronous operation. The\n      operation returns 200 if the data source was successfully created.\n      Otherwise, an exception is raised.</p>"
+                "smithy.api#documentation": "<p>Creates a data source that you want to use with an Amazon Kendra index. </p>\n         <p>You specify a name, data source connector type and description for\n      your data source. You also specify configuration information for the \n      data source connector.</p>\n         <p>\n            <code>CreateDataSource</code> is a synchronous operation. The\n      operation returns 200 if the data source was successfully created.\n      Otherwise, an exception is raised.</p>\n         <p>Amazon S3 and <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/data-source-custom.html\">custom</a> data sources are \n      the only supported data sources in the Amazon Web Services GovCloud (US-West) region.</p>"
             }
         },
         "com.amazonaws.kendra#CreateDataSourceRequest": {
@@ -1612,6 +1893,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The code for a language. This allows you to support a language for all \n            documents when creating the data source. English is supported \n            by default. For more information on supported languages, including their codes, \n            see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html\">Adding \n                documents in languages other than English</a>.</p>"
                     }
+                },
+                "CustomDocumentEnrichmentConfiguration": {
+                    "target": "com.amazonaws.kendra#CustomDocumentEnrichmentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration information for altering document metadata and content during the\n            document ingestion process when you create a data source.</p>\n        <p>For more information on how to create, modify and delete document metadata, or make\n            other content alterations when you ingest documents into Amazon Kendra, see \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html\">Customizing \n                document metadata during the ingestion process</a>.</p>"
+                    }
                 }
             }
         },
@@ -1622,6 +1909,97 @@
                     "target": "com.amazonaws.kendra#DataSourceId",
                     "traits": {
                         "smithy.api#documentation": "<p>A unique identifier for the data source.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kendra#CreateExperience": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kendra#CreateExperienceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kendra#CreateExperienceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kendra#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an Amazon Kendra experience such as a search application. For more information \n            on creating a search application experience, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html\">Building a \n                search experience with no code</a>.</p>"
+            }
+        },
+        "com.amazonaws.kendra#CreateExperienceRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.kendra#ExperienceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name for your Amazon Kendra experience.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IndexId": {
+                    "target": "com.amazonaws.kendra#IndexId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the index for your Amazon Kendra experience.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.kendra#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a role with permission to access <code>Query</code>\n            operations, <code>QuerySuggestions</code> operations, <code>SubmitFeedback</code>\n            operations, and Amazon Web Services SSO that stores your user and group information. \n            For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html\">IAM roles for Amazon Kendra</a>.</p>"
+                    }
+                },
+                "Configuration": {
+                    "target": "com.amazonaws.kendra#ExperienceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides the configuration information for your Amazon Kendra experience. This includes\n            <code>ContentSourceConfiguration</code>, which specifies the data source IDs \n            and/or FAQ IDs, and <code>UserIdentityConfiguration</code>, which specifies the \n            user or group information to grant access to your Amazon Kendra experience.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.kendra#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description for your Amazon Kendra experience.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.kendra#ClientTokenName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that you provide to identify the request to create your Amazon Kendra experience.\n            Multiple calls to the <code>CreateExperience</code> operation with the same client \n            token creates only one Amazon Kendra experience.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kendra#CreateExperienceResponse": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.kendra#ExperienceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for your created Amazon Kendra experience.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1835,7 +2213,7 @@
                 "UserGroupResolutionConfiguration": {
                     "target": "com.amazonaws.kendra#UserGroupResolutionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enables fetching access levels of groups and users from an AWS Single Sign-On \n         identity source. To configure this, see \n         <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_UserGroupResolutionConfiguration.html\">UserGroupResolutionConfiguration</a>.</p>"
+                        "smithy.api#documentation": "<p>Enables fetching access levels of groups and users from an Amazon Web Services Single Sign On \n         identity source. To configure this, see \n         <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_UserGroupResolutionConfiguration.html\">UserGroupResolutionConfiguration</a>.</p>"
                     }
                 }
             }
@@ -1883,7 +2261,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a block list to exlcude certain queries from suggestions.</p>\n        <p>Any query that contains words or phrases specified in the block \n            list is blocked or filtered out from being shown as a suggestion.</p>\n        <p>You need to provide the file location of your block list text file \n            in your S3 bucket. In your text file, enter each block word or phrase \n            on a separate line.</p>\n        <p>For information on the current quota limits for block lists, see \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/quotas.html\">Quotas \n                for Amazon Kendra</a>.</p>"
+                "smithy.api#documentation": "<p>Creates a block list to exlcude certain queries from suggestions.</p>\n        <p>Any query that contains words or phrases specified in the block \n            list is blocked or filtered out from being shown as a suggestion.</p>\n        <p>You need to provide the file location of your block list text file \n            in your S3 bucket. In your text file, enter each block word or phrase \n            on a separate line.</p>\n        <p>For information on the current quota limits for block lists, see \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/quotas.html\">Quotas \n                for Amazon Kendra</a>.</p>\n        <p>\n            <code>CreateQuerySuggestionsBlockList</code> is currently not supported in the \n            Amazon Web Services GovCloud (US-West) region.</p>"
             }
         },
         "com.amazonaws.kendra#CreateQuerySuggestionsBlockListRequest": {
@@ -2010,7 +2388,7 @@
                 "RoleArn": {
                     "target": "com.amazonaws.kendra#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>An AWS Identity and Access Management (IAM) role that gives Amazon Kendra permissions \n         to access thesaurus file specified in <code>SourceS3Path</code>.\n      </p>",
+                        "smithy.api#documentation": "<p>An IAM role that gives Amazon Kendra permissions \n         to access thesaurus file specified in <code>SourceS3Path</code>.\n      </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2045,6 +2423,38 @@
                         "smithy.api#documentation": "<p>The unique identifier of the thesaurus. \n      </p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.kendra#CustomDocumentEnrichmentConfiguration": {
+            "type": "structure",
+            "members": {
+                "InlineConfigurations": {
+                    "target": "com.amazonaws.kendra#InlineCustomDocumentEnrichmentConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration information to alter document attributes or metadata fields and \n            content when ingesting documents into Amazon Kendra.</p>"
+                    }
+                },
+                "PreExtractionHookConfiguration": {
+                    "target": "com.amazonaws.kendra#HookConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration information for invoking a Lambda function in Lambda \n            on the original or raw documents before extracting their metadata and text. You can \n            use a Lambda function to apply advanced logic for creating, modifying, or deleting\n            document metadata and content. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html#advanced-data-manipulation\">Advanced \n                data manipulation</a>.</p>"
+                    }
+                },
+                "PostExtractionHookConfiguration": {
+                    "target": "com.amazonaws.kendra#HookConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration information for invoking a Lambda function in Lambda \n            on the structured documents with their metadata and text extracted. You can use a \n            Lambda function to apply advanced logic for creating, modifying, or deleting document\n            metadata and content. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html#advanced-data-manipulation\">Advanced \n                data manipulation</a>.</p>"
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.kendra#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a role with permission to run \n            <code>PreExtractionHookConfiguration</code> and \n            <code>PostExtractionHookConfiguration</code> for altering document metadata \n            and content during the document ingestion process. For more information, \n            see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html\">IAM roles for\n                Amazon Kendra</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides the configuration information for altering document metadata and content\n            during the document ingestion process.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html\">Customizing document metadata\n                during the ingestion process</a>.</p>"
             }
         },
         "com.amazonaws.kendra#DataSourceConfiguration": {
@@ -2109,7 +2519,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configuration information for a Amazon Kendra data source.</p>"
+                "smithy.api#documentation": "<p>Configuration information for an Amazon Kendra data source.</p>"
             }
         },
         "com.amazonaws.kendra#DataSourceDateFieldFormat": {
@@ -2174,6 +2584,18 @@
                     "max": 100
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
+            }
+        },
+        "com.amazonaws.kendra#DataSourceIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendra#DataSourceId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
             }
         },
         "com.amazonaws.kendra#DataSourceInclusionsExclusionsStrings": {
@@ -2713,6 +3135,61 @@
                 }
             }
         },
+        "com.amazonaws.kendra#DeleteExperience": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kendra#DeleteExperienceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kendra#DeleteExperienceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kendra#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes your Amazon Kendra experience such as a search application. For more information on\n            creating a search application experience, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html\">Building a search\n                experience with no code</a>.</p>"
+            }
+        },
+        "com.amazonaws.kendra#DeleteExperienceRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.kendra#ExperienceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of your Amazon Kendra experience you want to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IndexId": {
+                    "target": "com.amazonaws.kendra#IndexId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the index for your Amazon Kendra experience you want to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kendra#DeleteExperienceResponse": {
+            "type": "structure",
+            "members": {}
+        },
         "com.amazonaws.kendra#DeleteFaq": {
             "type": "operation",
             "input": {
@@ -2828,7 +3305,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a group so that all users and sub groups that belong to the group can \n            no longer access documents only available to that group.</p>\n        <p>For example, after deleting the group \"Summer Interns\", all interns who \n            belonged to that group no longer see intern-only documents in their search \n            results.</p>\n        <p>If you want to delete or replace users or sub groups of a group, you need to \n            use the <code>PutPrincipalMapping</code> operation. For example, if a user in \n            the group \"Engineering\" leaves the engineering team and another user takes \n            their place, you provide an updated list of users or sub groups that belong \n            to the \"Engineering\" group when calling <code>PutPrincipalMapping</code>. You \n            can update your internal list of users or sub groups and input this list \n            when calling <code>PutPrincipalMapping</code>.</p>"
+                "smithy.api#documentation": "<p>Deletes a group so that all users and sub groups that belong to the group can \n            no longer access documents only available to that group.</p>\n        <p>For example, after deleting the group \"Summer Interns\", all interns who \n            belonged to that group no longer see intern-only documents in their search \n            results.</p>\n        <p>If you want to delete or replace users or sub groups of a group, you need to \n            use the <code>PutPrincipalMapping</code> operation. For example, if a user in \n            the group \"Engineering\" leaves the engineering team and another user takes \n            their place, you provide an updated list of users or sub groups that belong \n            to the \"Engineering\" group when calling <code>PutPrincipalMapping</code>. You \n            can update your internal list of users or sub groups and input this list \n            when calling <code>PutPrincipalMapping</code>.</p>\n        <p>\n            <code>DeletePrincipalMapping</code> is currently not supported in the \n            Amazon Web Services GovCloud (US-West) region.</p>"
             }
         },
         "com.amazonaws.kendra#DeletePrincipalMappingRequest": {
@@ -2888,7 +3365,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a block list used for query suggestions for an index.</p>\n        <p>A deleted block list might not take effect right away. Amazon Kendra \n            needs to refresh the entire suggestions list to add back the \n            queries that were previously blocked.</p>"
+                "smithy.api#documentation": "<p>Deletes a block list used for query suggestions for an index.</p>\n        <p>A deleted block list might not take effect right away. Amazon Kendra \n            needs to refresh the entire suggestions list to add back the \n            queries that were previously blocked.</p>\n        <p>\n            <code>DeleteQuerySuggestionsBlockList</code> is currently not supported in the \n            Amazon Web Services GovCloud (US-West) region.</p>"
             }
         },
         "com.amazonaws.kendra#DeleteQuerySuggestionsBlockListRequest": {
@@ -3085,6 +3562,131 @@
                     "target": "com.amazonaws.kendra#LanguageCode",
                     "traits": {
                         "smithy.api#documentation": "<p>The code for a language. This shows a supported language for all \n            documents in the data source. English is supported by \n            default. For more information on supported languages, including their codes, \n            see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html\">Adding \n                documents in languages other than English</a>.</p>"
+                    }
+                },
+                "CustomDocumentEnrichmentConfiguration": {
+                    "target": "com.amazonaws.kendra#CustomDocumentEnrichmentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration information for altering document metadata and content during the\n            document ingestion process when you describe a data source.</p>\n        <p>For more information on how to create, modify and delete document metadata, or make\n            other content alterations when you ingest documents into Amazon Kendra, see \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html\">Customizing \n                document metadata during the ingestion process</a>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kendra#DescribeExperience": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kendra#DescribeExperienceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kendra#DescribeExperienceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kendra#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets information about your Amazon Kendra experience such as a search application. \n            For more information on creating a search application experience, \n            see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html\">Building \n                a search experience with no code</a>.</p>"
+            }
+        },
+        "com.amazonaws.kendra#DescribeExperienceRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.kendra#ExperienceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of your Amazon Kendra experience you want to get information on.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IndexId": {
+                    "target": "com.amazonaws.kendra#IndexId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the index for your Amazon Kendra experience you want to get \n            information on.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kendra#DescribeExperienceResponse": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.kendra#ExperienceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows the identifier of your Amazon Kendra experience.</p>"
+                    }
+                },
+                "IndexId": {
+                    "target": "com.amazonaws.kendra#IndexId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows the identifier of the index for your Amazon Kendra experience.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.kendra#ExperienceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows the name of your Amazon Kendra experience.</p>"
+                    }
+                },
+                "Endpoints": {
+                    "target": "com.amazonaws.kendra#ExperienceEndpoints",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows the endpoint URLs for your Amazon Kendra experiences. The URLs are unique and fully\n            hosted by Amazon Web Services.</p>"
+                    }
+                },
+                "Configuration": {
+                    "target": "com.amazonaws.kendra#ExperienceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows the configuration information for your Amazon Kendra experience. This includes\n                <code>ContentSourceConfiguration</code>, which specifies the data source IDs \n            and/or FAQ IDs, and <code>UserIdentityConfiguration</code>, which specifies the \n            user or group information to grant access to your Amazon Kendra experience.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.kendra#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows the date-time your Amazon Kendra experience was created.</p>"
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.kendra#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows the date-time your Amazon Kendra experience was last updated.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.kendra#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows the description for your Amazon Kendra experience.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.kendra#ExperienceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current processing status of your Amazon Kendra experience. When the status \n            is <code>ACTIVE</code>, your Amazon Kendra experience is ready to use. When the \n            status is <code>FAILED</code>, the <code>ErrorMessage</code> field contains \n            the reason that this failed.</p>"
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.kendra#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows the Amazon Resource Name (ARN) of a role with permission to access \n            <code>Query</code> operations, <code>QuerySuggestions</code> operations, \n            <code>SubmitFeedback</code> operations, and Amazon Web Services SSO that stores \n            your user and group information.</p>"
+                    }
+                },
+                "ErrorMessage": {
+                    "target": "com.amazonaws.kendra#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason your Amazon Kendra experience could not properly process.</p>"
                     }
                 }
             }
@@ -3348,7 +3950,7 @@
                 "UserGroupResolutionConfiguration": {
                     "target": "com.amazonaws.kendra#UserGroupResolutionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Shows whether you have enabled the configuration for fetching access \n         levels of groups and users from an AWS Single Sign-On identity source.</p>"
+                        "smithy.api#documentation": "<p>Shows whether you have enabled the configuration for fetching access \n         levels of groups and users from an Amazon Web Services Single Sign On identity source.</p>"
                     }
                 }
             }
@@ -3379,7 +3981,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the processing of <code>PUT</code> and <code>DELETE</code> actions \n            for mapping users to their groups. This includes information on the status of \n            actions currently processing or yet to be processed, when actions were last updated, \n            when actions were received by Amazon Kendra, the latest action that should process \n            and apply after other actions, and useful error messages if an action could \n            not be processed.</p>"
+                "smithy.api#documentation": "<p>Describes the processing of <code>PUT</code> and <code>DELETE</code> actions \n            for mapping users to their groups. This includes information on the status of \n            actions currently processing or yet to be processed, when actions were last updated, \n            when actions were received by Amazon Kendra, the latest action that should process \n            and apply after other actions, and useful error messages if an action could \n            not be processed.</p>\n        <p>\n            <code>DescribePrincipalMapping</code> is currently not supported in the \n            Amazon Web Services GovCloud (US-West) region.</p>"
             }
         },
         "com.amazonaws.kendra#DescribePrincipalMappingRequest": {
@@ -3462,7 +4064,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes a block list used for query suggestions for an index.</p>\n        <p>This is used to check the current settings that are applied to a \n            block list.</p>"
+                "smithy.api#documentation": "<p>Describes a block list used for query suggestions for an index.</p>\n        <p>This is used to check the current settings that are applied to a \n            block list.</p>\n        <p>\n            <code>DescribeQuerySuggestionsBlockList</code> is currently not supported in the \n            Amazon Web Services GovCloud (US-West) region.</p>"
             }
         },
         "com.amazonaws.kendra#DescribeQuerySuggestionsBlockListRequest": {
@@ -3587,7 +4189,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the settings of query suggestions for an index.</p>\n        <p>This is used to check the current settings applied \n            to query suggestions.</p>"
+                "smithy.api#documentation": "<p>Describes the settings of query suggestions for an index.</p>\n        <p>This is used to check the current settings applied \n            to query suggestions.</p>\n        <p>\n            <code>DescribeQuerySuggestionsConfig</code> is currently not supported in the \n            Amazon Web Services GovCloud (US-West) region.</p>"
             }
         },
         "com.amazonaws.kendra#DescribeQuerySuggestionsConfigRequest": {
@@ -3763,7 +4365,7 @@
                 "RoleArn": {
                     "target": "com.amazonaws.kendra#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>An AWS Identity and Access Management (IAM) role that gives Amazon Kendra permissions \n         to access thesaurus file specified in <code>SourceS3Path</code>.\n      </p>"
+                        "smithy.api#documentation": "<p>An IAM role that gives Amazon Kendra permissions \n         to access thesaurus file specified in <code>SourceS3Path</code>.\n      </p>"
                     }
                 },
                 "SourceS3Path": {
@@ -3797,6 +4399,150 @@
                     "max": 1000
                 },
                 "smithy.api#pattern": "^\\P{C}*$"
+            }
+        },
+        "com.amazonaws.kendra#DisassociateEntitiesFromExperience": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kendra#DisassociateEntitiesFromExperienceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kendra#DisassociateEntitiesFromExperienceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kendra#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Prevents users or groups in your Amazon Web Services SSO identity source\n            from accessing your Amazon Kendra experience. You can create an Amazon Kendra experience \n            such as a search application. For more information on creating a search \n            application experience, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html\">Building \n                a search experience with no code</a>.</p>"
+            }
+        },
+        "com.amazonaws.kendra#DisassociateEntitiesFromExperienceRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.kendra#ExperienceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of your Amazon Kendra experience.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IndexId": {
+                    "target": "com.amazonaws.kendra#IndexId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the index for your Amazon Kendra experience.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EntityList": {
+                    "target": "com.amazonaws.kendra#DisassociateEntityList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lists users or groups in your Amazon Web Services SSO identity source.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kendra#DisassociateEntitiesFromExperienceResponse": {
+            "type": "structure",
+            "members": {
+                "FailedEntityList": {
+                    "target": "com.amazonaws.kendra#FailedEntityList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lists the users or groups in your Amazon Web Services SSO identity source that \n            failed to properly remove access to your Amazon Kendra experience.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kendra#DisassociateEntityList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendra#EntityConfiguration"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 40
+                }
+            }
+        },
+        "com.amazonaws.kendra#DisassociatePersonasFromEntities": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kendra#DisassociatePersonasFromEntitiesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kendra#DisassociatePersonasFromEntitiesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kendra#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes the specific permissions of users or groups in your Amazon Web Services SSO \n            identity source with access to your Amazon Kendra experience. You can create an Amazon Kendra \n            experience such as a search application. For more information on creating a \n            search application experience, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html\">Building a \n                search experience with no code</a>.</p>"
+            }
+        },
+        "com.amazonaws.kendra#DisassociatePersonasFromEntitiesRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.kendra#ExperienceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of your Amazon Kendra experience.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IndexId": {
+                    "target": "com.amazonaws.kendra#IndexId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the index for your Amazon Kendra experience.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EntityIds": {
+                    "target": "com.amazonaws.kendra#EntityIdsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifiers of users or groups in your Amazon Web Services SSO identity \n            source. For example, user IDs could be user emails.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kendra#DisassociatePersonasFromEntitiesResponse": {
+            "type": "structure",
+            "members": {
+                "FailedEntityList": {
+                    "target": "com.amazonaws.kendra#FailedEntityList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lists the users or groups in your Amazon Web Services SSO identity source that \n            failed to properly remove access to your Amazon Kendra experience.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.kendra#Document": {
@@ -3875,6 +4621,34 @@
                 "smithy.api#documentation": "<p>A custom attribute value assigned to a document. </p>"
             }
         },
+        "com.amazonaws.kendra#DocumentAttributeCondition": {
+            "type": "structure",
+            "members": {
+                "ConditionDocumentAttributeKey": {
+                    "target": "com.amazonaws.kendra#DocumentAttributeKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the document attribute used for the condition.</p>\n        <p>For example, 'Source_URI' could be an identifier for the attribute or metadata \n            field that contains source URIs associated with the documents.</p>\n        <p>Amazon Kendra currently does not support <code>_document_body</code> as an attribute \n            key used for the condition.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Operator": {
+                    "target": "com.amazonaws.kendra#ConditionOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The condition operator.</p>\n        <p>For example, you can use 'Contains' to partially match a string.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ConditionOnValue": {
+                    "target": "com.amazonaws.kendra#DocumentAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value used by the operator.</p>\n        <p>For example, you can specify the value 'financial' for strings in the 'Source_URI'\n            field that partially match or contain this value.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The condition used for the target document attribute or metadata field when \n            ingesting documents into Amazon Kendra. You use this with <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_DocumentAttributeTarget.html\">DocumentAttributeTarget \n                to apply the condition</a>.</p>\n        <p>For example, you can create the 'Department' target field and have it prefill \n            department names associated with the documents based on information in the \n            'Source_URI' field. Set the condition that if the 'Source_URI' field contains \n            'financial' in its URI value, then prefill the target field 'Department' with \n            the target value 'Finance' for the document.</p>\n        <p>Amazon Kendra cannot create a target field if it has not already been created as an \n            index field. After you create your index field, you can create a document metadata \n            field using <code>DocumentAttributeTarget</code>. Amazon Kendra then will map your newly \n            created metadata field to your index field.</p>"
+            }
+        },
         "com.amazonaws.kendra#DocumentAttributeKey": {
             "type": "string",
             "traits": {
@@ -3916,6 +4690,32 @@
                     "min": 1,
                     "max": 2048
                 }
+            }
+        },
+        "com.amazonaws.kendra#DocumentAttributeTarget": {
+            "type": "structure",
+            "members": {
+                "TargetDocumentAttributeKey": {
+                    "target": "com.amazonaws.kendra#DocumentAttributeKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the target document attribute or metadata field.</p>\n        <p>For example, 'Department' could be an identifier for the target attribute or \n            metadata field that includes the department names associated with the documents.</p>"
+                    }
+                },
+                "TargetDocumentAttributeValueDeletion": {
+                    "target": "com.amazonaws.kendra#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <code>TRUE</code> to delete the existing target value for your specified target \n            attribute key. You cannot create a target value and set this to <code>TRUE</code>. \n            To create a target value (<code>TargetDocumentAttributeValue</code>), set this to \n            <code>FALSE</code>.</p>"
+                    }
+                },
+                "TargetDocumentAttributeValue": {
+                    "target": "com.amazonaws.kendra#DocumentAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target value you want to create for the target attribute.</p>\n        <p>For example, 'Finance' could be the target value for the target attribute key\n            'Department'.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The target document attribute or metadata field you want to alter when ingesting\n            documents into Amazon Kendra.</p>\n        <p>For example, you can delete customer identification numbers associated with the\n            documents, stored in the document metadata field called 'Customer_ID'. You set the\n            target key as 'Customer_ID' and the deletion flag to <code>TRUE</code>. This\n            removes all customer ID values in the field 'Customer_ID'. This would scrub \n            personally identifiable information from each document's metadata.</p>\n        <p>Amazon Kendra cannot create a target field if it has not already been created as an \n            index field. After you create your index field, you can create a document metadata \n            field using <code>DocumentAttributeTarget</code>. Amazon Kendra then will map your newly \n            created metadata field to your index field.</p>\n        <p>You can also use this with <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_DocumentAttributeCondition.html\">DocumentAttributeCondition</a>.</p>"
             }
         },
         "com.amazonaws.kendra#DocumentAttributeValue": {
@@ -4220,6 +5020,158 @@
                 "smithy.api#pattern": "^[0-9]+[s]$"
             }
         },
+        "com.amazonaws.kendra#Endpoint": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^\\P{C}*$"
+            }
+        },
+        "com.amazonaws.kendra#EndpointType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "HOME",
+                        "name": "HOME"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.kendra#EntityConfiguration": {
+            "type": "structure",
+            "members": {
+                "EntityId": {
+                    "target": "com.amazonaws.kendra#EntityId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of a user or group in your Amazon Web Services SSO identity \n            source. For example, a user ID could be an email.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EntityType": {
+                    "target": "com.amazonaws.kendra#EntityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether you are configuring a <code>User</code> or a\n            <code>Group</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides the configuration information of users or groups in \n            your Amazon Web Services SSO identity source to grant access your Amazon Kendra \n            experience.</p>"
+            }
+        },
+        "com.amazonaws.kendra#EntityDisplayData": {
+            "type": "structure",
+            "members": {
+                "UserName": {
+                    "target": "com.amazonaws.kendra#NameType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the user.</p>"
+                    }
+                },
+                "GroupName": {
+                    "target": "com.amazonaws.kendra#NameType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the group.</p>"
+                    }
+                },
+                "IdentifiedUserName": {
+                    "target": "com.amazonaws.kendra#NameType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user name of the user.</p>"
+                    }
+                },
+                "FirstName": {
+                    "target": "com.amazonaws.kendra#NameType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The first name of the user.</p>"
+                    }
+                },
+                "LastName": {
+                    "target": "com.amazonaws.kendra#NameType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last name of the user.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the user entity.</p>"
+            }
+        },
+        "com.amazonaws.kendra#EntityId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 47
+                },
+                "smithy.api#pattern": "^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$"
+            }
+        },
+        "com.amazonaws.kendra#EntityIdsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendra#EntityId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 25
+                }
+            }
+        },
+        "com.amazonaws.kendra#EntityPersonaConfiguration": {
+            "type": "structure",
+            "members": {
+                "EntityId": {
+                    "target": "com.amazonaws.kendra#EntityId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of a user or group in your Amazon Web Services SSO identity \n            source. For example, a user ID could be an email.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Persona": {
+                    "target": "com.amazonaws.kendra#Persona",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The persona that defines the specific permissions of the user or group \n            in your Amazon Web Services SSO identity source. The available personas or \n            access roles are <code>Owner</code> and <code>Viewer</code>. For more \n            information on these personas, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html#access-search-experience\">Providing \n                access to your search page</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides the configuration information of users or groups in your \n            Amazon Web Services SSO identity source for access to your Amazon Kendra experience. \n            Specific permissions are defined for each user or group once they are \n            granted access to your Amazon Kendra experience.</p>"
+            }
+        },
+        "com.amazonaws.kendra#EntityPersonaConfigurationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendra#EntityPersonaConfiguration"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 25
+                }
+            }
+        },
+        "com.amazonaws.kendra#EntityType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "USER",
+                        "name": "USER"
+                    },
+                    {
+                        "value": "GROUP",
+                        "name": "GROUP"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.kendra#ErrorCode": {
             "type": "string",
             "traits": {
@@ -4281,6 +5233,177 @@
                 }
             }
         },
+        "com.amazonaws.kendra#ExperienceConfiguration": {
+            "type": "structure",
+            "members": {
+                "ContentSourceConfiguration": {
+                    "target": "com.amazonaws.kendra#ContentSourceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifiers of your data sources and FAQs. Or, you can specify \n            that you want to use documents indexed via the <code>BatchPutDocument</code> \n            operation. This is the content you want to use for your Amazon Kendra experience.</p>"
+                    }
+                },
+                "UserIdentityConfiguration": {
+                    "target": "com.amazonaws.kendra#UserIdentityConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services SSO field name that contains the identifiers of your users, \n            such as their emails.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the configuration information for your Amazon Kendra experience. This includes \n            the data source IDs and/or FAQ IDs, and user or group information to grant access \n            to your Amazon Kendra experience.</p>"
+            }
+        },
+        "com.amazonaws.kendra#ExperienceEndpoint": {
+            "type": "structure",
+            "members": {
+                "EndpointType": {
+                    "target": "com.amazonaws.kendra#EndpointType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of endpoint for your Amazon Kendra experience. The type currently available \n            is <code>HOME</code>, which is a unique and fully hosted URL to the home page \n            of your Amazon Kendra experience.</p>"
+                    }
+                },
+                "Endpoint": {
+                    "target": "com.amazonaws.kendra#Endpoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The endpoint of your Amazon Kendra experience.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides the configuration information of the endpoint for your Amazon Kendra\n            experience.</p>"
+            }
+        },
+        "com.amazonaws.kendra#ExperienceEndpoints": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendra#ExperienceEndpoint"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
+                }
+            }
+        },
+        "com.amazonaws.kendra#ExperienceEntitiesSummary": {
+            "type": "structure",
+            "members": {
+                "EntityId": {
+                    "target": "com.amazonaws.kendra#EntityId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of a user or group in your Amazon Web Services SSO identity source. \n            For example, a user ID could be an email.</p>"
+                    }
+                },
+                "EntityType": {
+                    "target": "com.amazonaws.kendra#EntityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows the type as <code>User</code> or <code>Group</code>.</p>"
+                    }
+                },
+                "DisplayData": {
+                    "target": "com.amazonaws.kendra#EntityDisplayData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the user entity.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information for users or groups in your Amazon Web Services SSO identity\n            source with granted access to your Amazon Kendra experience. You can create an Amazon Kendra \n            experience such as a search application. For more information on creating a \n            search application experience, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html\">Building \n                a search experience with no code</a>.</p>"
+            }
+        },
+        "com.amazonaws.kendra#ExperienceEntitiesSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendra#ExperienceEntitiesSummary"
+            }
+        },
+        "com.amazonaws.kendra#ExperienceId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 36
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
+            }
+        },
+        "com.amazonaws.kendra#ExperienceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
+            }
+        },
+        "com.amazonaws.kendra#ExperienceStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CREATING",
+                        "name": "CREATING"
+                    },
+                    {
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
+                    },
+                    {
+                        "value": "DELETING",
+                        "name": "DELETING"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.kendra#ExperiencesSummary": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.kendra#ExperienceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of your Amazon Kendra experience.</p>"
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.kendra#ExperienceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of your Amazon Kendra experience.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.kendra#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date-time your Amazon Kendra experience was created.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.kendra#ExperienceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The processing status of your Amazon Kendra experience.</p>"
+                    }
+                },
+                "Endpoints": {
+                    "target": "com.amazonaws.kendra#ExperienceEndpoints",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The endpoint URLs for your Amazon Kendra experiences. The URLs are unique \n            and fully hosted by Amazon Web Services.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information for your Amazon Kendra experience. You can create an Amazon Kendra \n            experience such as a search application. For more information on creating \n            a search application experience, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html\">Building \n                a search experience with no code</a>.</p>"
+            }
+        },
+        "com.amazonaws.kendra#ExperiencesSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendra#ExperiencesSummary"
+            }
+        },
         "com.amazonaws.kendra#Facet": {
             "type": "structure",
             "members": {
@@ -4333,6 +5456,38 @@
                 "target": "com.amazonaws.kendra#FacetResult"
             }
         },
+        "com.amazonaws.kendra#FailedEntity": {
+            "type": "structure",
+            "members": {
+                "EntityId": {
+                    "target": "com.amazonaws.kendra#EntityId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the user or group in your Amazon Web Services SSO identity \n            source. For example, a user ID could be an email.</p>"
+                    }
+                },
+                "ErrorMessage": {
+                    "target": "com.amazonaws.kendra#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason the user or group in your Amazon Web Services SSO identity source \n            failed to properly configure with your Amazon Kendra experience.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information on the users or groups in your Amazon Web Services SSO identity \n            source that failed to properly configure with your Amazon Kendra experience.</p>"
+            }
+        },
+        "com.amazonaws.kendra#FailedEntityList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendra#FailedEntity"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 25
+                }
+            }
+        },
         "com.amazonaws.kendra#FailureReason": {
             "type": "string",
             "traits": {
@@ -4370,6 +5525,18 @@
                     "max": 100
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
+            }
+        },
+        "com.amazonaws.kendra#FaqIdsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendra#FaqId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
             }
         },
         "com.amazonaws.kendra#FaqName": {
@@ -4522,7 +5689,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Fetches the queries that are suggested to your users.</p>"
+                "smithy.api#documentation": "<p>Fetches the queries that are suggested to your users.</p>\n        <p>\n            <code>GetQuerySuggestions</code> is currently not supported in the \n            Amazon Web Services GovCloud (US-West) region.</p>"
             }
         },
         "com.amazonaws.kendra#GetQuerySuggestionsRequest": {
@@ -4563,6 +5730,99 @@
                     "target": "com.amazonaws.kendra#SuggestionList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of query suggestions for an index.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kendra#GetSnapshots": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kendra#GetSnapshotsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kendra#GetSnapshotsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kendra#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves search metrics data. The data provides a snapshot of how\n            your users interact with your search application and how effective\n            the application is.</p>"
+            }
+        },
+        "com.amazonaws.kendra#GetSnapshotsRequest": {
+            "type": "structure",
+            "members": {
+                "IndexId": {
+                    "target": "com.amazonaws.kendra#IndexId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the index to get search metrics data.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Interval": {
+                    "target": "com.amazonaws.kendra#Interval",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time interval or time window to get search metrics data. \n            The time interval uses the time zone of your index. \n            You can view data in the following time windows:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>THIS_WEEK</code>: The current week, starting on \n                    the Sunday and ending on the day before the current date.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ONE_WEEK_AGO</code>: The previous week, starting on \n                    the Sunday and ending on the following Saturday.</p>\n            </li>\n            <li>\n                <p>\n                  <code>TWO_WEEKS_AGO</code>: The week before the previous week, \n                    starting on the Sunday and ending on the following Saturday.</p>\n            </li>\n            <li>\n                <p>\n                  <code>THIS_MONTH</code>: The current month, starting on the \n                    first day of the month and ending on the day before the current date.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ONE_MONTH_AGO</code>: The previous month, starting on the \n                    first day of the month and ending on the last day of the month.</p>\n            </li>\n            <li>\n                <p>\n                  <code>TWO_MONTHS_AGO</code>: The month before the previous month, \n                    starting on the first day of the month and ending on last day of the month.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MetricType": {
+                    "target": "com.amazonaws.kendra#MetricType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metric you want to retrieve. You\n            can specify only one metric per call.</p>\n        <p>For more information about the metrics you can view, see \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/search-analytics.html\">Gaining \n                insights with search analytics</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.kendra#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the previous response was incomplete (because there\n            is more data to retrieve), Amazon Kendra returns a pagination token in \n            the response. You can use this pagination token to\n            retrieve the next set of search metrics data.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.kendra#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of returned data for the metric.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kendra#GetSnapshotsResponse": {
+            "type": "structure",
+            "members": {
+                "SnapShotTimeFilter": {
+                    "target": "com.amazonaws.kendra#TimeRange",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date-time for the beginning and end of the time window \n            for the search metrics data.</p>"
+                    }
+                },
+                "SnapshotsDataHeader": {
+                    "target": "com.amazonaws.kendra#SnapshotsDataHeaderFields",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The column headers for the search metrics data.</p>"
+                    }
+                },
+                "SnapshotsData": {
+                    "target": "com.amazonaws.kendra#SnapshotsDataRecords",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The search metrics data. The data returned depends on the \n            metric type you requested.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.kendra#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response is truncated, Amazon Kendra returns this\n            token, which you can use in a later request to retrieve the \n            next set of search metrics data.</p>"
                     }
                 }
             }
@@ -4829,6 +6089,34 @@
                 ]
             }
         },
+        "com.amazonaws.kendra#HookConfiguration": {
+            "type": "structure",
+            "members": {
+                "InvocationCondition": {
+                    "target": "com.amazonaws.kendra#DocumentAttributeCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The condition used for when a Lambda function should be invoked.</p>\n        <p>For example, you can specify a condition that if there are empty date-time\n            values, then Amazon Kendra should invoke a function that inserts the current date-time.</p>"
+                    }
+                },
+                "LambdaArn": {
+                    "target": "com.amazonaws.kendra#LambdaArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a role with permission to run a Lambda function\n            during ingestion. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html\">IAM roles for Amazon Kendra</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "S3Bucket": {
+                    "target": "com.amazonaws.kendra#S3BucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Stores the original, raw documents or the structured, parsed\n            documents before and after altering them. For more information, \n            see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html#cde-data-contracts-lambda\">Data \n                contracts for Lambda functions</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides the configuration information for invoking a Lambda function in \n            Lambda to alter document metadata and content when ingesting \n            documents into Amazon Kendra. You can configure your Lambda function using \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_PreExtractionHookConfiguration.html\">PreExtractionHookConfiguration</a> \n            if you want to apply advanced alterations on the original or raw documents. \n            If you want to apply advanced alterations on the Amazon Kendra structured documents, \n            you must configure your Lambda function using <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_PostExtractionHookConfiguration.html\">PostExtractionHookConfiguration</a>. \n            You can only invoke one Lambda function. However, this function can invoke other \n            functions it requires.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html\">Customizing document metadata\n                during the ingestion process</a>.</p>"
+            }
+        },
         "com.amazonaws.kendra#Host": {
             "type": "string",
             "traits": {
@@ -4837,6 +6125,16 @@
                     "max": 253
                 },
                 "smithy.api#pattern": "^([^\\s]*)$"
+            }
+        },
+        "com.amazonaws.kendra#IdentityAttributeName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
             }
         },
         "com.amazonaws.kendra#Importance": {
@@ -5024,6 +6322,44 @@
                 }
             }
         },
+        "com.amazonaws.kendra#InlineCustomDocumentEnrichmentConfiguration": {
+            "type": "structure",
+            "members": {
+                "Condition": {
+                    "target": "com.amazonaws.kendra#DocumentAttributeCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration of the condition used for the target document attribute or metadata\n            field when ingesting documents into Amazon Kendra.</p>"
+                    }
+                },
+                "Target": {
+                    "target": "com.amazonaws.kendra#DocumentAttributeTarget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration of the target document attribute or metadata field when ingesting\n            documents into Amazon Kendra. You can also include a value.</p>"
+                    }
+                },
+                "DocumentContentDeletion": {
+                    "target": "com.amazonaws.kendra#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <code>TRUE</code> to delete content if the condition used for the target \n            attribute is met.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides the configuration information for applying basic logic to alter document\n            metadata and content when ingesting documents into Amazon Kendra. To apply advanced \n            logic, to go beyond what you can do with basic logic, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_HookConfiguration.html\">HookConfiguration</a>.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html\">Customizing document metadata\n                during the ingestion process</a>.</p>"
+            }
+        },
+        "com.amazonaws.kendra#InlineCustomDocumentEnrichmentConfigurationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendra#InlineCustomDocumentEnrichmentConfiguration"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.kendra#Integer": {
             "type": "integer",
             "traits": {
@@ -5041,6 +6377,50 @@
                 "smithy.api#documentation": "<p></p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.kendra#Interval": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "THIS_MONTH",
+                        "name": "THIS_MONTH"
+                    },
+                    {
+                        "value": "THIS_WEEK",
+                        "name": "THIS_WEEK"
+                    },
+                    {
+                        "value": "ONE_WEEK_AGO",
+                        "name": "ONE_WEEK_AGO"
+                    },
+                    {
+                        "value": "TWO_WEEKS_AGO",
+                        "name": "TWO_WEEKS_AGO"
+                    },
+                    {
+                        "value": "ONE_MONTH_AGO",
+                        "name": "ONE_MONTH_AGO"
+                    },
+                    {
+                        "value": "TWO_MONTHS_AGO",
+                        "name": "TWO_MONTHS_AGO"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.kendra#InvalidRequestException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.kendra#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input to the request is not valid.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
             }
         },
         "com.amazonaws.kendra#Issuer": {
@@ -5149,6 +6529,16 @@
                     "max": 2048
                 },
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.kendra#LambdaArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^/arn:aws[a-zA-Z-]*:lambda:[a-z]+-[a-z]+-[0-9]:[0-9]{12}:function:[a-zA-Z0-9-_]+(\\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?(:[a-zA-Z0-9-_]+)?/$"
             }
         },
         "com.amazonaws.kendra#LanguageCode": {
@@ -5334,6 +6724,238 @@
                 }
             }
         },
+        "com.amazonaws.kendra#ListEntityPersonas": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kendra#ListEntityPersonasRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kendra#ListEntityPersonasResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kendra#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists specific permissions of users and groups with access to your \n            Amazon Kendra experience.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.kendra#ListEntityPersonasRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.kendra#ExperienceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of your Amazon Kendra experience.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IndexId": {
+                    "target": "com.amazonaws.kendra#IndexId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the index for your Amazon Kendra experience.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.kendra#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the previous response was incomplete (because there is more data to retrieve),\n            Amazon Kendra returns a pagination token in the response. You can use this pagination \n            token to retrieve the next set of users or groups.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.kendra#MaxResultsIntegerForListEntityPersonasRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of returned users or groups.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kendra#ListEntityPersonasResponse": {
+            "type": "structure",
+            "members": {
+                "SummaryItems": {
+                    "target": "com.amazonaws.kendra#PersonasSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of summary information for one or more users or groups.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.kendra#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response is truncated, Amazon Kendra returns this token, which you can use in \n            a later request to retrieve the next set of users or groups.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kendra#ListExperienceEntities": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kendra#ListExperienceEntitiesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kendra#ListExperienceEntitiesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kendra#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists users or groups in your Amazon Web Services SSO identity source that are \n            granted access to your Amazon Kendra experience. You can create an Amazon Kendra experience \n            such as a search application. For more information on creating a search \n            application experience, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html\">Building \n                a search experience with no code</a>.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken"
+                }
+            }
+        },
+        "com.amazonaws.kendra#ListExperienceEntitiesRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.kendra#ExperienceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of your Amazon Kendra experience.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IndexId": {
+                    "target": "com.amazonaws.kendra#IndexId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the index for your Amazon Kendra experience.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.kendra#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the previous response was incomplete (because there is more data to retrieve),\n            Amazon Kendra returns a pagination token in the response. You can use this pagination \n            token to retrieve the next set of users or groups.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kendra#ListExperienceEntitiesResponse": {
+            "type": "structure",
+            "members": {
+                "SummaryItems": {
+                    "target": "com.amazonaws.kendra#ExperienceEntitiesSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of summary information for one or more users or groups.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.kendra#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response is truncated, Amazon Kendra returns this token, which you can use in \n            a later request to retrieve the next set of users or groups.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kendra#ListExperiences": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kendra#ListExperiencesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kendra#ListExperiencesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kendra#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists one or more Amazon Kendra experiences. You can create an Amazon Kendra experience such \n            as a search application. For more information on creating a search application \n            experience, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html\">Building a \n                search experience with no code</a>.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.kendra#ListExperiencesRequest": {
+            "type": "structure",
+            "members": {
+                "IndexId": {
+                    "target": "com.amazonaws.kendra#IndexId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the index for your Amazon Kendra experience.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.kendra#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the previous response was incomplete (because there is more data\n            to retrieve), Amazon Kendra returns a pagination token in the response. You can use this\n            pagination token to retrieve the next set of Amazon Kendra experiences.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.kendra#MaxResultsIntegerForListExperiencesRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of returned Amazon Kendra experiences.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kendra#ListExperiencesResponse": {
+            "type": "structure",
+            "members": {
+                "SummaryItems": {
+                    "target": "com.amazonaws.kendra#ExperiencesSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of summary information for one or more Amazon Kendra experiences.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.kendra#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response is truncated, Amazon Kendra returns this token, which you can use \n            in a later request to retrieve the next set of Amazon Kendra experiences.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.kendra#ListFaqs": {
             "type": "operation",
             "input": {
@@ -5433,7 +7055,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides a list of groups that are mapped to users before a \n            given ordering or timestamp identifier.</p>"
+                "smithy.api#documentation": "<p>Provides a list of groups that are mapped to users before a \n            given ordering or timestamp identifier.</p>\n        <p>\n            <code>ListGroupsOlderThanOrderingId</code> is currently not supported in the \n            Amazon Web Services GovCloud (US-West) region.</p>"
             }
         },
         "com.amazonaws.kendra#ListGroupsOlderThanOrderingIdRequest": {
@@ -5587,7 +7209,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the block lists used for query suggestions for an index.</p>\n        <p>For information on the current quota limits for block lists, see \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/quotas.html\">Quotas \n                for Amazon Kendra</a>.</p>"
+                "smithy.api#documentation": "<p>Lists the block lists used for query suggestions for an index.</p>\n        <p>For information on the current quota limits for block lists, see \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/quotas.html\">Quotas \n                for Amazon Kendra</a>.</p>\n        <p>\n            <code>ListQuerySuggestionsBlockLists</code> is currently not supported in the \n            Amazon Web Services GovCloud (US-West) region.</p>"
             }
         },
         "com.amazonaws.kendra#ListQuerySuggestionsBlockListsRequest": {
@@ -5799,6 +7421,26 @@
                 }
             }
         },
+        "com.amazonaws.kendra#MaxResultsIntegerForListEntityPersonasRequest": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.kendra#MaxResultsIntegerForListExperiencesRequest": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.kendra#MaxResultsIntegerForListFaqsRequest": {
             "type": "integer",
             "traits": {
@@ -5919,6 +7561,37 @@
                 }
             }
         },
+        "com.amazonaws.kendra#MetricType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "QUERIES_BY_COUNT",
+                        "name": "QUERIES_BY_COUNT"
+                    },
+                    {
+                        "value": "QUERIES_BY_ZERO_CLICK_RATE",
+                        "name": "QUERIES_BY_ZERO_CLICK_RATE"
+                    },
+                    {
+                        "value": "QUERIES_BY_ZERO_RESULT_RATE",
+                        "name": "QUERIES_BY_ZERO_RESULT_RATE"
+                    },
+                    {
+                        "value": "DOCS_BY_CLICK_COUNT",
+                        "name": "DOCS_BY_CLICK_COUNT"
+                    },
+                    {
+                        "value": "AGG_QUERY_DOC_METRICS",
+                        "name": "AGG_QUERY_DOC_METRICS"
+                    },
+                    {
+                        "value": "TREND_QUERY_DOC_METRICS",
+                        "name": "TREND_QUERY_DOC_METRICS"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.kendra#MetricValue": {
             "type": "string",
             "traits": {
@@ -5968,6 +7641,17 @@
                         "name": "LEARN_ONLY"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.kendra#NameType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[\\S\\s]*$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.kendra#NextToken": {
@@ -6105,6 +7789,59 @@
                 "smithy.api#pattern": "^d-[0-9a-fA-F]{10}$"
             }
         },
+        "com.amazonaws.kendra#Persona": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "OWNER",
+                        "name": "OWNER"
+                    },
+                    {
+                        "value": "VIEWER",
+                        "name": "VIEWER"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.kendra#PersonasSummary": {
+            "type": "structure",
+            "members": {
+                "EntityId": {
+                    "target": "com.amazonaws.kendra#EntityId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of a user or group in your Amazon Web Services SSO identity source. \n            For example, a user ID could be an email.</p>"
+                    }
+                },
+                "Persona": {
+                    "target": "com.amazonaws.kendra#Persona",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The persona that defines the specific permissions of the user or group in \n            your Amazon Web Services SSO identity source. The available personas or access \n            roles are <code>Owner</code> and <code>Viewer</code>. For more information on \n            these personas, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html#access-search-experience\">Providing \n                access to your search page</a>.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.kendra#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date-time the summary information was created.</p>"
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.kendra#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date-time the summary information was last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information for users or groups in your Amazon Web Services SSO identity \n            source. This applies to users and groups with specific permissions that define \n            their level of access to your Amazon Kendra experience. You can create an Amazon Kendra experience \n            such as a search application. For more information on creating a search application \n            experience, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html\">Building a \n                search experience with no code</a>.</p>"
+            }
+        },
+        "com.amazonaws.kendra#PersonasSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendra#PersonasSummary"
+            }
+        },
         "com.amazonaws.kendra#Port": {
             "type": "integer",
             "traits": {
@@ -6238,7 +7975,7 @@
                 "Credentials": {
                     "target": "com.amazonaws.kendra#SecretArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>Your secret ARN, which you can create in <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html\">AWS Secrets Manager</a>\n         </p>\n        <p>The credentials are optional. You use a secret if web proxy credentials \n            are required to connect to a website host. Amazon Kendra currently support basic \n            authentication to connect to a web proxy server. The secret stores your \n            credentials.</p>"
+                        "smithy.api#documentation": "<p>Your secret ARN, which you can create in <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html\">Secrets Manager</a>\n         </p>\n        <p>The credentials are optional. You use a secret if web proxy credentials \n            are required to connect to a website host. Amazon Kendra currently support basic \n            authentication to connect to a web proxy server. The secret stores your \n            credentials.</p>"
                     }
                 }
             },
@@ -6275,7 +8012,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Maps users to their groups so that you only need to provide \n            the user ID when you issue the query.</p>\n        <p>You can also map sub groups to groups. \n            For example, the group \"Company Intellectual Property Teams\" includes \n            sub groups \"Research\" and \"Engineering\". These sub groups include their\n            own list of users or people who work in these teams. Only users who work \n            in research and engineering, and therefore belong in the intellectual \n            property group, can see top-secret company documents in their search \n            results.</p>\n        <p>You map users to their groups when you want to filter search results \n            for different users based on their group’s access to documents. For more \n            information on filtering search results for different users, see \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/user-context-filter.html\">Filtering \n                on user context</a>.</p>\n        <p>If more than five <code>PUT</code> actions for a group are currently \n            processing, a validation exception is thrown.</p>"
+                "smithy.api#documentation": "<p>Maps users to their groups so that you only need to provide \n            the user ID when you issue the query.</p>\n        <p>You can also map sub groups to groups. \n            For example, the group \"Company Intellectual Property Teams\" includes \n            sub groups \"Research\" and \"Engineering\". These sub groups include their\n            own list of users or people who work in these teams. Only users who work \n            in research and engineering, and therefore belong in the intellectual \n            property group, can see top-secret company documents in their search \n            results.</p>\n        <p>You map users to their groups when you want to filter search results \n            for different users based on their group’s access to documents. For more \n            information on filtering search results for different users, see \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/user-context-filter.html\">Filtering \n                on user context</a>.</p>\n        <p>If more than five <code>PUT</code> actions for a group are currently \n            processing, a validation exception is thrown.</p>\n        <p>\n            <code>PutPrincipalMapping</code> is currently not supported in the \n            Amazon Web Services GovCloud (US-West) region.</p>"
             }
         },
         "com.amazonaws.kendra#PutPrincipalMappingRequest": {
@@ -6888,7 +8625,7 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
+                    "min": 0,
                     "max": 1284
                 },
                 "smithy.api#pattern": "^arn:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[^/].{0,1023}$"
@@ -7510,7 +9247,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides the configuration information of the seed or starting point URLs to crawl.</p>\n        <p>\n            <i>When selecting websites to index, you must adhere to \n            the <a href=\"https://aws.amazon.com/aup/\">Amazon Acceptable Use Policy</a> \n            and all other Amazon terms. Remember that you must only use the Amazon Kendra web \n            crawler to index your own webpages, or webpages that you have authorization \n            to index.</i>\n         </p>"
+                "smithy.api#documentation": "<p>Provides the configuration information of the seed or starting point URLs to crawl.</p>\n        <p>\n            <i>When selecting websites to index, you must adhere to \n            the <a href=\"https://aws.amazon.com/aup/\">Amazon Acceptable Use Policy</a> \n            and all other Amazon terms. Remember that you must only use Amazon Kendra Web \n            Crawler to index your own webpages, or webpages that you have authorization \n            to index.</i>\n         </p>"
             }
         },
         "com.amazonaws.kendra#SeedUrlList": {
@@ -7608,7 +9345,7 @@
                 "AuthenticationType": {
                     "target": "com.amazonaws.kendra#ServiceNowAuthenticationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Determines the type of authentication used to connect to the\n            ServiceNow instance. If you choose <code>HTTP_BASIC</code>, Amazon Kendra is\n            authenticated using the user name and password provided in the AWS\n            Secrets Manager secret in the <code>SecretArn</code> field. When you\n            choose <code>OAUTH2</code>, Amazon Kendra is authenticated using the OAuth\n            token and secret provided in the Secrets Manager secret, and the\n            user name and password are used to determine which information Amazon Kendra\n            has access to.</p>\n        <p>When you use <code>OAUTH2</code> authentication, you must generate\n            a token and a client secret using the ServiceNow console. For more\n            information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/data-source-servicenow.html\">Using a\n                ServiceNow data source</a>.</p>"
+                        "smithy.api#documentation": "<p>Determines the type of authentication used to connect to the\n            ServiceNow instance. If you choose <code>HTTP_BASIC</code>, Amazon Kendra is\n            authenticated using the user name and password provided in the \n            Secrets Manager secret in the <code>SecretArn</code> field. When you\n            choose <code>OAUTH2</code>, Amazon Kendra is authenticated using the OAuth\n            token and secret provided in the Secrets Manager secret, and the\n            user name and password are used to determine which information Amazon Kendra\n            has access to.</p>\n        <p>When you use <code>OAUTH2</code> authentication, you must generate\n            a token and a client secret using the ServiceNow console. For more\n            information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/data-source-servicenow.html\">Using a\n                ServiceNow data source</a>.</p>"
                     }
                 }
             },
@@ -7765,7 +9502,7 @@
                 "SecretArn": {
                     "target": "com.amazonaws.kendra#SecretArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of credentials stored in \n            Secrets Manager. The credentials should be a user/password pair. \n            If you use SharePoint Server, you also need to provide the sever \n            domain name as part of the credentials. For\n            more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html\">Using a\n                Microsoft SharePoint Data Source</a>. For more information\n            about Secrets Manager, see <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html\"> What Is \n                Secrets Manager</a> in the <i>Secrets Manager\n                </i> user guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of credentials stored in \n            Secrets Manager. The credentials should be a user/password pair. \n            If you use SharePoint Server, you also need to provide the sever \n            domain name as part of the credentials. For\n            more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html\">Using a\n                Microsoft SharePoint Data Source</a>. For more information\n            about Secrets Manager see <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html\"> What Is \n                Secrets Manager</a> in the <i>Secrets Manager\n                </i> user guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7885,7 +9622,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides the configuration information of the sitemap URLs to crawl.</p>\n        <p>\n            <i>When selecting websites to index, you must adhere to \n            the <a href=\"https://aws.amazon.com/aup/\">Amazon Acceptable Use Policy</a> \n            and all other Amazon terms. Remember that you must only use the Amazon Kendra web \n            crawler to index your own webpages, or webpages that you have authorization \n            to index.</i>\n         </p>"
+                "smithy.api#documentation": "<p>Provides the configuration information of the sitemap URLs to crawl.</p>\n        <p>\n            <i>When selecting websites to index, you must adhere to \n            the <a href=\"https://aws.amazon.com/aup/\">Amazon Acceptable Use Policy</a> \n            and all other Amazon terms. Remember that you must only use Amazon Kendra Web \n            Crawler to index your own webpages, or webpages that you have authorization \n            to index.</i>\n         </p>"
             }
         },
         "com.amazonaws.kendra#SiteMapsList": {
@@ -7898,6 +9635,24 @@
                     "min": 0,
                     "max": 3
                 }
+            }
+        },
+        "com.amazonaws.kendra#SnapshotsDataHeaderFields": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendra#String"
+            }
+        },
+        "com.amazonaws.kendra#SnapshotsDataRecord": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendra#String"
+            }
+        },
+        "com.amazonaws.kendra#SnapshotsDataRecords": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendra#SnapshotsDataRecord"
             }
         },
         "com.amazonaws.kendra#SortOrder": {
@@ -8137,7 +9892,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Enables you to provide feedback to Amazon Kendra to improve the\n            performance of your index. </p>"
+                "smithy.api#documentation": "<p>Enables you to provide feedback to Amazon Kendra to improve the\n            performance of your index.</p>\n        <p>\n            <code>SubmitFeedback</code> is currently not supported in the \n            Amazon Web Services GovCloud (US-West) region.</p>"
             }
         },
         "com.amazonaws.kendra#SubmitFeedbackRequest": {
@@ -8712,7 +10467,10 @@
                     }
                 },
                 "Configuration": {
-                    "target": "com.amazonaws.kendra#DataSourceConfiguration"
+                    "target": "com.amazonaws.kendra#DataSourceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration information for an Amazon Kendra data source.</p>"
+                    }
                 },
                 "Description": {
                     "target": "com.amazonaws.kendra#Description",
@@ -8736,6 +10494,84 @@
                     "target": "com.amazonaws.kendra#LanguageCode",
                     "traits": {
                         "smithy.api#documentation": "<p>The code for a language. This allows you to support a language for all \n            documents when updating the data source. English is supported \n            by default. For more information on supported languages, including their codes, \n            see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html\">Adding \n                documents in languages other than English</a>.</p>"
+                    }
+                },
+                "CustomDocumentEnrichmentConfiguration": {
+                    "target": "com.amazonaws.kendra#CustomDocumentEnrichmentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration information for altering document metadata and content during the\n            document ingestion process when you update a data source.</p>\n        <p>For more information on how to create, modify and delete document metadata, or make\n            other content alterations when you ingest documents into Amazon Kendra, see \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html\">Customizing \n                document metadata during the ingestion process</a>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kendra#UpdateExperience": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kendra#UpdateExperienceRequest"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kendra#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates your Amazon Kendra experience such as a search application. For more information on\n            creating a search application experience, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html\">Building a \n                search experience with no code</a>.</p>"
+            }
+        },
+        "com.amazonaws.kendra#UpdateExperienceRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.kendra#ExperienceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of your Amazon Kendra experience you want to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.kendra#ExperienceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of your Amazon Kendra experience you want to update.</p>"
+                    }
+                },
+                "IndexId": {
+                    "target": "com.amazonaws.kendra#IndexId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the index for your Amazon Kendra experience you want to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.kendra#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a role with permission to access <code>Query</code>\n            operations, <code>QuerySuggestions</code> operations, <code>SubmitFeedback</code>\n            operations, and Amazon Web Services SSO that stores your user and group information. \n            For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html\">IAM roles for Amazon Kendra</a>.</p>"
+                    }
+                },
+                "Configuration": {
+                    "target": "com.amazonaws.kendra#ExperienceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides the user configuration information. This includes the Amazon Web Services SSO\n            field name that contains the identifiers of your users, such as their emails.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.kendra#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of your Amazon Kendra experience you want to update.</p>"
                     }
                 }
             }
@@ -8827,7 +10663,7 @@
                 "UserGroupResolutionConfiguration": {
                     "target": "com.amazonaws.kendra#UserGroupResolutionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enables fetching access levels of groups and users from an AWS Single Sign-On \n         identity source. To configure this, see \n         <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_UserGroupResolutionConfiguration.html\">UserGroupResolutionConfiguration</a>.</p>"
+                        "smithy.api#documentation": "<p>Enables fetching access levels of groups and users from an Amazon Web Services Single Sign On \n         identity source. To configure this, see \n         <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_UserGroupResolutionConfiguration.html\">UserGroupResolutionConfiguration</a>.</p>"
                     }
                 }
             }
@@ -8858,7 +10694,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a block list used for query suggestions for an index.</p>\n        <p>Updates to a block list might not take effect right away. Amazon Kendra \n            needs to refresh the entire suggestions list to apply any updates to the \n            block list. Other changes not related to the block list apply immediately.</p>\n        <p>If a block list is updating, then you need to wait for the first update to \n            finish before submitting another update.</p>\n        <p>Amazon Kendra supports partial updates, so you only need to provide the fields \n            you want to update.</p>"
+                "smithy.api#documentation": "<p>Updates a block list used for query suggestions for an index.</p>\n        <p>Updates to a block list might not take effect right away. Amazon Kendra \n            needs to refresh the entire suggestions list to apply any updates to the \n            block list. Other changes not related to the block list apply immediately.</p>\n        <p>If a block list is updating, then you need to wait for the first update to \n            finish before submitting another update.</p>\n        <p>Amazon Kendra supports partial updates, so you only need to provide the fields \n            you want to update.</p>\n        <p>\n            <code>UpdateQuerySuggestionsBlockList</code> is currently not supported in the \n            Amazon Web Services GovCloud (US-West) region.</p>"
             }
         },
         "com.amazonaws.kendra#UpdateQuerySuggestionsBlockListRequest": {
@@ -8930,7 +10766,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the settings of query suggestions for an index.</p>\n        <p>Amazon Kendra supports partial updates, so you only need to provide \n            the fields you want to update.</p>\n        <p>If an update is currently processing (i.e. 'happening'), you \n            need to wait for the update to finish before making another update.</p>\n        <p>Updates to query suggestions settings might not take effect right away. \n            The time for your updated settings to take effect depends on the updates \n            made and the number of search queries in your index.</p>\n        <p>You can still enable/disable query suggestions at any time.</p>"
+                "smithy.api#documentation": "<p>Updates the settings of query suggestions for an index.</p>\n        <p>Amazon Kendra supports partial updates, so you only need to provide \n            the fields you want to update.</p>\n        <p>If an update is currently processing (i.e. 'happening'), you \n            need to wait for the update to finish before making another update.</p>\n        <p>Updates to query suggestions settings might not take effect right away. \n            The time for your updated settings to take effect depends on the updates \n            made and the number of search queries in your index.</p>\n        <p>You can still enable/disable query suggestions at any time.</p>\n        <p>\n            <code>UpdateQuerySuggestionsConfig</code> is currently not supported in the \n            Amazon Web Services GovCloud (US-West) region.</p>"
             }
         },
         "com.amazonaws.kendra#UpdateQuerySuggestionsConfigRequest": {
@@ -9071,7 +10907,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides the configuration information of the URLs to crawl.</p>\n        <p>You can only crawl websites that use the secure communication protocol, \n            Hypertext Transfer Protocol Secure (HTTPS). If you receive an error when \n            crawling a website, it could be that the website is blocked from crawling.</p>\n        <p>\n            <i>When selecting websites to index, you must adhere to \n            the <a href=\"https://aws.amazon.com/aup/\">Amazon Acceptable Use Policy</a> \n            and all other Amazon terms. Remember that you must only use the Amazon Kendra web \n            crawler to index your own webpages, or webpages that you have authorization to \n            index.</i>\n         </p>"
+                "smithy.api#documentation": "<p>Provides the configuration information of the URLs to crawl.</p>\n        <p>You can only crawl websites that use the secure communication protocol, \n            Hypertext Transfer Protocol Secure (HTTPS). If you receive an error when \n            crawling a website, it could be that the website is blocked from crawling.</p>\n        <p>\n            <i>When selecting websites to index, you must adhere to \n            the <a href=\"https://aws.amazon.com/aup/\">Amazon Acceptable Use Policy</a> \n            and all other Amazon terms. Remember that you must only use Amazon Kendra Web  \n            Crawler to index your own webpages, or webpages that you have authorization to \n            index.</i>\n         </p>"
             }
         },
         "com.amazonaws.kendra#UserAccount": {
@@ -9137,13 +10973,13 @@
                 "UserGroupResolutionMode": {
                     "target": "com.amazonaws.kendra#UserGroupResolutionMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identity store provider (mode) you want to use to fetch access levels of groups and\n         users. AWS Single Sign-On is currently the only available mode. Your users and groups\n         must\n         exist in an AWS SSO identity source in order to use this mode.</p>",
+                        "smithy.api#documentation": "<p>The identity store provider (mode) you want to use to fetch access levels of groups and\n         users. Amazon Web Services Single Sign On is currently the only available mode. Your users and groups\n         must\n         exist in an Amazon Web Services SSO identity source in order to use this mode.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides the configuration information to fetch access levels \n         of groups and users from an AWS Single Sign-On identity \n         source. This is useful for setting up user context filtering, where \n         Amazon Kendra filters search results for different users based on their \n         group's access to documents. You can also map your users to their \n         groups for user context filtering using the \n         <a href=\"https://docs.aws.amazon.com/latest/dg/API_PutPrincipalMapping.html\">PutPrincipalMapping \n            operation</a>.</p>\n         <p>To set up an AWS SSO identity source in the console to use with \n         Amazon Kendra, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/getting-started-aws-sso.html\">Getting started \n            with an AWS SSO identity source</a>. You must also grant the required \n            permissions to use AWS SSO with Amazon Kendra. For more information, see \n         <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html#iam-roles-aws-sso\">IAM roles for \n            AWS Single Sign-On</a>.</p>"
+                "smithy.api#documentation": "<p>Provides the configuration information to fetch access levels \n         of groups and users from an Amazon Web Services Single Sign On identity \n         source. This is useful for setting up user context filtering, where \n         Amazon Kendra filters search results for different users based on their \n         group's access to documents. You can also map your users to their \n         groups for user context filtering using the \n         <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_PutPrincipalMapping.html\">PutPrincipalMapping \n            operation</a>.</p>\n         <p>To set up an Amazon Web Services SSO identity source in the console to use with \n         Amazon Kendra, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/getting-started-aws-sso.html\">Getting started \n            with an Amazon Web Services SSO identity source</a>. You must also grant the required \n         permissions to use Amazon Web Services SSO with Amazon Kendra. For more information, see \n         <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html#iam-roles-aws-sso\">IAM roles for \n            Amazon Web Services SSO</a>.</p>"
             }
         },
         "com.amazonaws.kendra#UserGroupResolutionMode": {
@@ -9169,6 +11005,20 @@
                     "max": 1024
                 },
                 "smithy.api#pattern": "^\\P{C}*$"
+            }
+        },
+        "com.amazonaws.kendra#UserIdentityConfiguration": {
+            "type": "structure",
+            "members": {
+                "IdentityAttributeName": {
+                    "target": "com.amazonaws.kendra#IdentityAttributeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services SSO field name that contains the identifiers of your users, \n            such as their emails. This is used for <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/user-context-filter.html\">user context filtering</a> \n            and for granting access to your Amazon Kendra experience. You must set up Amazon Web Services SSO \n            with Amazon Kendra. You must include your users and groups in your Access Control List when \n            you ingest documents into your index. For more information, see \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/getting-started-aws-sso.html\">Getting \n                started with an Amazon Web Services SSO identity source</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration information for the identifiers of your users.</p>"
             }
         },
         "com.amazonaws.kendra#UserNameAttributeField": {
@@ -9270,7 +11120,7 @@
                 "Urls": {
                     "target": "com.amazonaws.kendra#Urls",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the seed or starting point URLs of the \n            websites or the sitemap URLs of the websites you want to crawl.</p>\n        <p>You can include website subdomains. You can list up to 100 seed \n            URLs and up to three sitemap URLs.</p>\n        <p>You can only crawl websites that use the secure communication protocol, \n            Hypertext Transfer Protocol Secure (HTTPS). If you receive an error when \n            crawling a website, it could be that the website is blocked from crawling.</p>\n        <p>\n            <i>When selecting websites to index, you must adhere to \n            the <a href=\"https://aws.amazon.com/aup/\">Amazon Acceptable Use Policy</a> \n            and all other Amazon terms. Remember that you must only use the Amazon Kendra \n            web crawler to index your own webpages, or webpages that you have \n            authorization to index.</i>\n         </p>",
+                        "smithy.api#documentation": "<p>Specifies the seed or starting point URLs of the \n            websites or the sitemap URLs of the websites you want to crawl.</p>\n        <p>You can include website subdomains. You can list up to 100 seed \n            URLs and up to three sitemap URLs.</p>\n        <p>You can only crawl websites that use the secure communication protocol, \n            Hypertext Transfer Protocol Secure (HTTPS). If you receive an error when \n            crawling a website, it could be that the website is blocked from crawling.</p>\n        <p>\n            <i>When selecting websites to index, you must adhere to \n            the <a href=\"https://aws.amazon.com/aup/\">Amazon Acceptable Use Policy</a> \n            and all other Amazon terms. Remember that you must only use Amazon Kendra \n            Web Crawler to index your own webpages, or webpages that you have \n            authorization to index.</i>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -9313,18 +11163,18 @@
                 "ProxyConfiguration": {
                     "target": "com.amazonaws.kendra#ProxyConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides configuration information required to connect to your internal \n            websites via a web proxy.</p>\n        <p>You must provide the website host name and port number. For example, the \n            host name of https://a.example.com/page1.html is \"a.example.com\" and the \n            port is 443, the standard port for HTTPS.</p>\n        <p>Web proxy credentials are optional and you can use them to connect to a \n            web proxy server that requires basic authentication. To store web proxy \n            credentials, you use a secret in <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html\">AWS Secrets Manager</a>.</p>"
+                        "smithy.api#documentation": "<p>Provides configuration information required to connect to your internal \n            websites via a web proxy.</p>\n        <p>You must provide the website host name and port number. For example, the \n            host name of https://a.example.com/page1.html is \"a.example.com\" and the \n            port is 443, the standard port for HTTPS.</p>\n        <p>Web proxy credentials are optional and you can use them to connect to a \n            web proxy server that requires basic authentication. To store web proxy \n            credentials, you use a secret in <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html\">Secrets Manager</a>.</p>"
                     }
                 },
                 "AuthenticationConfiguration": {
                     "target": "com.amazonaws.kendra#AuthenticationConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides configuration information required to connect to websites using \n            authentication.</p>\n        <p>You can connect to websites using basic authentication of user name and password.</p>\n        <p>You must provide the website host name and port number. For example, the host name \n            of https://a.example.com/page1.html is \"a.example.com\" and the port is 443, the \n            standard port for HTTPS. You use a secret in <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html\">AWS Secrets Manager</a> to store \n            your authentication credentials.</p>"
+                        "smithy.api#documentation": "<p>Provides configuration information required to connect to websites using \n            authentication.</p>\n        <p>You can connect to websites using basic authentication of user name and password.</p>\n        <p>You must provide the website host name and port number. For example, the host name \n            of https://a.example.com/page1.html is \"a.example.com\" and the port is 443, the \n            standard port for HTTPS. You use a secret in <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html\">Secrets Manager</a> to store \n            your authentication credentials.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides the configuration information required for Amazon Kendra \n            web crawler.</p>"
+                "smithy.api#documentation": "<p>Provides the configuration information required for Amazon Kendra \n            Web Crawler.</p>"
             }
         },
         "com.amazonaws.kendra#WebCrawlerMode": {
@@ -9352,7 +11202,7 @@
                 "OrganizationId": {
                     "target": "com.amazonaws.kendra#OrganizationId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the directory corresponding to your \n            Amazon WorkDocs site repository.</p>\n        <p>You can find the organization ID in the \n            <a href=\"https://console.aws.amazon.com/directoryservicev2/\">AWS Directory Service</a> by going to \n            <b>Active Directory</b>, then \n            <b>Directories</b>. Your Amazon WorkDocs site directory has an \n            ID, which is the organization ID. You can also set up a new Amazon WorkDocs \n            directory in the AWS Directory Service console and enable a Amazon WorkDocs site \n            for the directory in the Amazon WorkDocs console.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the directory corresponding to your \n            Amazon WorkDocs site repository.</p>\n        <p>You can find the organization ID in the \n            <a href=\"https://console.aws.amazon.com/directoryservicev2/\">Directory Service</a> by going to \n            <b>Active Directory</b>, then \n            <b>Directories</b>. Your Amazon WorkDocs site directory has an \n            ID, which is the organization ID. You can also set up a new Amazon WorkDocs \n            directory in the Directory Service console and enable a Amazon WorkDocs site \n            for the directory in the Amazon WorkDocs console.</p>",
                         "smithy.api#required": {}
                     }
                 },

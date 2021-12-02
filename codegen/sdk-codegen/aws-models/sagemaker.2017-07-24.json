@@ -285,6 +285,70 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#AdditionalInferenceSpecificationDefinition": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.sagemaker#EntityName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique name to identify the additional inference specification. The name must \n           be unique within the list of your additional inference specifications for a \n           particular model package.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.sagemaker#EntityDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the additional Inference specification</p>"
+                    }
+                },
+                "Containers": {
+                    "target": "com.amazonaws.sagemaker#ModelPackageContainerDefinitionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon ECR registry path of the Docker image that contains the inference code.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SupportedTransformInstanceTypes": {
+                    "target": "com.amazonaws.sagemaker#TransformInstanceTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the instance types on which a transformation job can be run \n           or on which an endpoint can be deployed.</p>"
+                    }
+                },
+                "SupportedRealtimeInferenceInstanceTypes": {
+                    "target": "com.amazonaws.sagemaker#RealtimeInferenceInstanceTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the instance types that are used to generate inferences in real-time.</p>"
+                    }
+                },
+                "SupportedContentTypes": {
+                    "target": "com.amazonaws.sagemaker#ContentTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The supported MIME types for the input data.</p>"
+                    }
+                },
+                "SupportedResponseMIMETypes": {
+                    "target": "com.amazonaws.sagemaker#ResponseMIMETypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The supported MIME types for the output data.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure of additional Inference Specification. Additional Inference Specification \n            specifies details about inference jobs that can be run with models based on\n            this model package</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#AdditionalInferenceSpecifications": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#AdditionalInferenceSpecificationDefinition"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 15
+                }
+            }
+        },
         "com.amazonaws.sagemaker#AgentVersion": {
             "type": "structure",
             "members": {
@@ -2575,6 +2639,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The bias report for a model</p>"
                     }
+                },
+                "PreTrainingReport": {
+                    "target": "com.amazonaws.sagemaker#MetricsSource"
+                },
+                "PostTrainingReport": {
+                    "target": "com.amazonaws.sagemaker#MetricsSource"
                 }
             },
             "traits": {
@@ -2979,6 +3049,28 @@
                 "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"
             }
         },
+        "com.amazonaws.sagemaker#CategoricalParameter": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.sagemaker#String64",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Name of the environment variable.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.sagemaker#CategoricalParameterRangeValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of values you can pass.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Environment parameters you want to benchmark your load test against.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#CategoricalParameterRange": {
             "type": "structure",
             "members": {
@@ -3016,6 +3108,18 @@
                 "smithy.api#documentation": "<p>Defines the possible values for a categorical hyperparameter.</p>"
             }
         },
+        "com.amazonaws.sagemaker#CategoricalParameterRangeValues": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#String128"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 3
+                }
+            }
+        },
         "com.amazonaws.sagemaker#CategoricalParameterRanges": {
             "type": "list",
             "member": {
@@ -3025,6 +3129,18 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 20
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#CategoricalParameters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#CategoricalParameter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
                 }
             }
         },
@@ -3196,6 +3312,62 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.sagemaker#Cidr"
+            }
+        },
+        "com.amazonaws.sagemaker#ClarifyCheckStepMetadata": {
+            "type": "structure",
+            "members": {
+                "CheckType": {
+                    "target": "com.amazonaws.sagemaker#String256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the Clarify Check step</p>"
+                    }
+                },
+                "BaselineUsedForDriftCheckConstraints": {
+                    "target": "com.amazonaws.sagemaker#String1024",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 URI of baseline constraints file to be used for the drift check.</p>"
+                    }
+                },
+                "CalculatedBaselineConstraints": {
+                    "target": "com.amazonaws.sagemaker#String1024",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 URI of the newly calculated baseline constraints file.</p>"
+                    }
+                },
+                "ModelPackageGroupName": {
+                    "target": "com.amazonaws.sagemaker#String256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The model package group name.</p>"
+                    }
+                },
+                "ViolationReport": {
+                    "target": "com.amazonaws.sagemaker#String1024",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 URI of the violation report if violations are detected.</p>"
+                    }
+                },
+                "CheckJobArn": {
+                    "target": "com.amazonaws.sagemaker#String256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the check processing job that was run by this step's execution.</p>"
+                    }
+                },
+                "SkipCheck": {
+                    "target": "com.amazonaws.sagemaker#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This flag indicates if the drift check against the previous baseline will be skipped or not. \n         If it is set to <code>False</code>, the previous baseline of the configured check type must be available.</p>"
+                    }
+                },
+                "RegisterNewBaseline": {
+                    "target": "com.amazonaws.sagemaker#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This flag indicates if a newly calculated baseline can be accessed through step properties \n         <code>BaselineUsedForDriftCheckConstraints</code> and <code>BaselineUsedForDriftCheckStatistics</code>. \n         If it is set to <code>False</code>, the previous baseline of the configured check type must also be available. \n         These can be accessed through the <code>BaselineUsedForDriftCheckConstraints</code> property. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The container for the metadata for the ClarifyCheck step. For more information, \n         see the topic on <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/build-and-manage-steps.html#step-type-clarify-check\">ClarifyCheck step</a> in the <i>Amazon SageMaker Developer Guide</i>.\n      </p>"
             }
         },
         "com.amazonaws.sagemaker#ClientId": {
@@ -3761,6 +3933,12 @@
                     "target": "com.amazonaws.sagemaker#VersionedArnOrName",
                     "traits": {
                         "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the model package to use to create the\n            model.</p>"
+                    }
+                },
+                "InferenceSpecificationName": {
+                    "target": "com.amazonaws.sagemaker#InferenceSpecificationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The inference specification name in the model package version.</p>"
                     }
                 },
                 "MultiModelConfig": {
@@ -4589,11 +4767,16 @@
                         "smithy.api#required": {}
                     }
                 },
+                "ModelPackageVersionArn": {
+                    "target": "com.amazonaws.sagemaker#ModelPackageArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a versioned model package. Provide either a \n    <code>ModelPackageVersionArn</code> or an <code>InputConfig</code> object in the \n    request syntax. The presence of both objects in the <code>CreateCompilationJob</code> \n    request will return an exception.</p>"
+                    }
+                },
                 "InputConfig": {
                     "target": "com.amazonaws.sagemaker#InputConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides information about the location of input model artifacts, the name and shape\n            of the expected data inputs, and the framework in which the model was trained.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Provides information about the location of input model artifacts, the name and shape\n            of the expected data inputs, and the framework in which the model was trained.</p>"
                     }
                 },
                 "OutputConfig": {
@@ -5677,6 +5860,89 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#CreateInferenceRecommendationsJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#CreateInferenceRecommendationsJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#CreateInferenceRecommendationsJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceInUse"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceLimitExceeded"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts a recommendation job. You can create either an instance \n          recommendation or load test job.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#CreateInferenceRecommendationsJobRequest": {
+            "type": "structure",
+            "members": {
+                "JobName": {
+                    "target": "com.amazonaws.sagemaker#RecommendationJobName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name for the recommendation job. The name must be unique within \n           the Amazon Web Services Region and within your Amazon Web Services account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "JobType": {
+                    "target": "com.amazonaws.sagemaker#RecommendationJobType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the type of recommendation job. Specify <code>Default</code> to initiate an instance \n           recommendation and <code>Advanced</code> to initiate a load test. If left unspecified, \n           Amazon SageMaker Inference Recommender will run an instance recommendation (<code>DEFAULT</code>) job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.sagemaker#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that enables Amazon SageMaker \n    to perform tasks on your behalf.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InputConfig": {
+                    "target": "com.amazonaws.sagemaker#RecommendationJobInputConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides information about the versioned model package Amazon Resource Name (ARN), \n    the traffic pattern, and endpoint configurations.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "JobDescription": {
+                    "target": "com.amazonaws.sagemaker#RecommendationJobDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Description of the recommendation job.</p>"
+                    }
+                },
+                "StoppingConditions": {
+                    "target": "com.amazonaws.sagemaker#RecommendationJobStoppingConditions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A set of conditions for stopping a recommendation job.  If any of \n          the conditions are met, the job is automatically stopped.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.sagemaker#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata that you apply to Amazon Web Services resources to help you \n           categorize and organize them. Each tag consists of a key and a value, both of \n           which you define. For more information, see \n           <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services Resources</a> \n           in the Amazon Web Services General Reference.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#CreateInferenceRecommendationsJobResponse": {
+            "type": "structure",
+            "members": {
+                "JobArn": {
+                    "target": "com.amazonaws.sagemaker#RecommendationJobArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the recommendation job.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.sagemaker#CreateLabelingJob": {
             "type": "operation",
             "input": {
@@ -6210,6 +6476,36 @@
                     "target": "com.amazonaws.sagemaker#CustomerMetadataMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The metadata properties associated with the model package versions.</p>"
+                    }
+                },
+                "DriftCheckBaselines": {
+                    "target": "com.amazonaws.sagemaker#DriftCheckBaselines",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the drift check baselines that can be used when the model monitor is set using the model package.\n         For more information, see the topic on <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines-quality-clarify-baseline-lifecycle.html#pipelines-quality-clarify-baseline-drift-detection\">Drift Detection against Previous Baselines in SageMaker Pipelines</a> in the <i>Amazon SageMaker Developer Guide</i>.\n      </p>"
+                    }
+                },
+                "Domain": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The machine learning domain of your model package and its components. Common \n    machine learning domains include computer vision and natural language processing.</p>"
+                    }
+                },
+                "Task": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The machine learning task your model package accomplishes. Common machine \n    learning tasks include object detection and image classification.</p>"
+                    }
+                },
+                "SamplePayloadUrl": {
+                    "target": "com.amazonaws.sagemaker#S3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Simple Storage Service (Amazon S3) path where the sample payload are stored. This path must point \n    to a single gzip compressed tar archive (.tar.gz suffix).</p>"
+                    }
+                },
+                "AdditionalInferenceSpecifications": {
+                    "target": "com.amazonaws.sagemaker#AdditionalInferenceSpecifications",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of additional Inference Specification objects. Each additional \n    Inference Specification specifies artifacts based on this model package that can \n    be used on inference endpoints. Generally used with SageMaker Neo to store the \n    compiled artifacts. </p>"
                     }
                 }
             }
@@ -9531,7 +9827,7 @@
             "type": "structure",
             "members": {
                 "ActionName": {
-                    "target": "com.amazonaws.sagemaker#ExperimentEntityName",
+                    "target": "com.amazonaws.sagemaker#ExperimentEntityNameOrArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the action.</p>"
                     }
@@ -9592,6 +9888,12 @@
                 },
                 "MetadataProperties": {
                     "target": "com.amazonaws.sagemaker#MetadataProperties"
+                },
+                "LineageGroupArn": {
+                    "target": "com.amazonaws.sagemaker#LineageGroupArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the lineage group.</p>"
+                    }
                 }
             }
         },
@@ -9914,7 +10216,7 @@
             "type": "structure",
             "members": {
                 "ArtifactName": {
-                    "target": "com.amazonaws.sagemaker#ExperimentEntityName",
+                    "target": "com.amazonaws.sagemaker#ExperimentEntityNameOrArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the artifact.</p>"
                     }
@@ -9963,6 +10265,12 @@
                 },
                 "MetadataProperties": {
                     "target": "com.amazonaws.sagemaker#MetadataProperties"
+                },
+                "LineageGroupArn": {
+                    "target": "com.amazonaws.sagemaker#LineageGroupArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the lineage group.</p>"
+                    }
                 }
             }
         },
@@ -10276,6 +10584,12 @@
                         "smithy.api#documentation": "<p>The inference image to use when compiling a model. \n            Specify an image only if the target device is a cloud instance.</p>"
                     }
                 },
+                "ModelPackageVersionArn": {
+                    "target": "com.amazonaws.sagemaker#ModelPackageArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the versioned model package that was \n    provided to SageMaker Neo when you initiated a compilation job.</p>"
+                    }
+                },
                 "CreationTime": {
                     "target": "com.amazonaws.sagemaker#CreationTime",
                     "traits": {
@@ -10360,7 +10674,7 @@
             "type": "structure",
             "members": {
                 "ContextName": {
-                    "target": "com.amazonaws.sagemaker#ExperimentEntityName",
+                    "target": "com.amazonaws.sagemaker#ExperimentEntityNameOrArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the context to describe.</p>",
                         "smithy.api#required": {}
@@ -10424,6 +10738,12 @@
                 },
                 "LastModifiedBy": {
                     "target": "com.amazonaws.sagemaker#UserContext"
+                },
+                "LineageGroupArn": {
+                    "target": "com.amazonaws.sagemaker#LineageGroupArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the lineage group.</p>"
+                    }
                 }
             }
         },
@@ -12107,6 +12427,126 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#DescribeInferenceRecommendationsJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#DescribeInferenceRecommendationsJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#DescribeInferenceRecommendationsJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Provides the results of the Inference Recommender job. \n          One or more recommendation jobs are returned.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#DescribeInferenceRecommendationsJobRequest": {
+            "type": "structure",
+            "members": {
+                "JobName": {
+                    "target": "com.amazonaws.sagemaker#RecommendationJobName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the job. The name must be unique within an \n           Amazon Web Services Region in the Amazon Web Services account.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#DescribeInferenceRecommendationsJobResponse": {
+            "type": "structure",
+            "members": {
+                "JobName": {
+                    "target": "com.amazonaws.sagemaker#RecommendationJobName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the job. The name must be unique within an \n           Amazon Web Services Region in the Amazon Web Services account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "JobDescription": {
+                    "target": "com.amazonaws.sagemaker#RecommendationJobDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The job description that you provided when you initiated the job.</p>"
+                    }
+                },
+                "JobType": {
+                    "target": "com.amazonaws.sagemaker#RecommendationJobType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The job type that you provided when you initiated the job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "JobArn": {
+                    "target": "com.amazonaws.sagemaker#RecommendationJobArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.sagemaker#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services \n           Identity and Access Management (IAM) role you provided when you initiated the job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.sagemaker#RecommendationJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.sagemaker#CreationTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp that shows when the job was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CompletionTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp that shows when the job completed.</p>"
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.sagemaker#LastModifiedTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp that shows when the job was last modified.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FailureReason": {
+                    "target": "com.amazonaws.sagemaker#FailureReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the job fails, provides information why the job failed.</p>"
+                    }
+                },
+                "InputConfig": {
+                    "target": "com.amazonaws.sagemaker#RecommendationJobInputConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns information about the versioned model package Amazon Resource Name (ARN), \n    the traffic pattern, and endpoint configurations you provided when you initiated the job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StoppingConditions": {
+                    "target": "com.amazonaws.sagemaker#RecommendationJobStoppingConditions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The stopping conditions that you provided when you initiated the job.</p>"
+                    }
+                },
+                "InferenceRecommendations": {
+                    "target": "com.amazonaws.sagemaker#InferenceRecommendations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommendations made by Inference Recommender.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.sagemaker#DescribeLabelingJob": {
             "type": "operation",
             "input": {
@@ -12257,6 +12697,82 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The location of the output produced by the labeling job.</p>"
                     }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#DescribeLineageGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#DescribeLineageGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#DescribeLineageGroupResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Provides a list of properties for the requested lineage group. \n         For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/xaccount-lineage-tracking.html\">\n            Cross-Account Lineage Tracking </a> in the <i>Amazon SageMaker Developer Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#DescribeLineageGroupRequest": {
+            "type": "structure",
+            "members": {
+                "LineageGroupName": {
+                    "target": "com.amazonaws.sagemaker#ExperimentEntityName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the lineage group.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#DescribeLineageGroupResponse": {
+            "type": "structure",
+            "members": {
+                "LineageGroupName": {
+                    "target": "com.amazonaws.sagemaker#ExperimentEntityName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the lineage group.</p>"
+                    }
+                },
+                "LineageGroupArn": {
+                    "target": "com.amazonaws.sagemaker#LineageGroupArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the lineage group.</p>"
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.sagemaker#ExperimentEntityName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the lineage group.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.sagemaker#ExperimentDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the lineage group.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The creation time of lineage group.</p>"
+                    }
+                },
+                "CreatedBy": {
+                    "target": "com.amazonaws.sagemaker#UserContext"
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last modified time of the lineage group.</p>"
+                    }
+                },
+                "LastModifiedBy": {
+                    "target": "com.amazonaws.sagemaker#UserContext"
                 }
             }
         },
@@ -12763,6 +13279,36 @@
                     "target": "com.amazonaws.sagemaker#CustomerMetadataMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The metadata properties associated with the model package versions.</p>"
+                    }
+                },
+                "DriftCheckBaselines": {
+                    "target": "com.amazonaws.sagemaker#DriftCheckBaselines",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the drift check baselines that can be used when the model monitor is set using the model package. \n         For more information, see the topic on <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines-quality-clarify-baseline-lifecycle.html#pipelines-quality-clarify-baseline-drift-detection\">Drift Detection against Previous Baselines in SageMaker Pipelines</a> in the <i>Amazon SageMaker Developer Guide</i>.\n      </p>"
+                    }
+                },
+                "Domain": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The machine learning domain of the model package you specified. Common machine \n    learning domains include computer vision and natural language processing.</p>"
+                    }
+                },
+                "Task": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The machine learning task you specified that your model package accomplishes. \n     Common machine learning tasks include object detection and image classification.</p>"
+                    }
+                },
+                "SamplePayloadUrl": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Simple Storage Service (Amazon S3) path where the sample payload are stored. This path points to a single \n    gzip compressed tar archive (.tar.gz suffix).</p>"
+                    }
+                },
+                "AdditionalInferenceSpecifications": {
+                    "target": "com.amazonaws.sagemaker#AdditionalInferenceSpecifications",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of additional Inference Specification objects. Each additional \n    Inference Specification specifies artifacts based on this model package that can \n    be used on inference endpoints. Generally used with SageMaker Neo to store the compiled artifacts.</p>"
                     }
                 }
             }
@@ -14469,7 +15015,7 @@
             "type": "structure",
             "members": {
                 "TrialComponentName": {
-                    "target": "com.amazonaws.sagemaker#ExperimentEntityName",
+                    "target": "com.amazonaws.sagemaker#ExperimentEntityNameOrArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the trial component to describe.</p>",
                         "smithy.api#required": {}
@@ -14571,6 +15117,12 @@
                     "target": "com.amazonaws.sagemaker#TrialComponentMetricSummaries",
                     "traits": {
                         "smithy.api#documentation": "<p>The metrics for the component.</p>"
+                    }
+                },
+                "LineageGroupArn": {
+                    "target": "com.amazonaws.sagemaker#LineageGroupArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the lineage group.</p>"
                     }
                 }
             }
@@ -15163,6 +15715,25 @@
                 ]
             }
         },
+        "com.amazonaws.sagemaker#Direction": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Both",
+                        "name": "BOTH"
+                    },
+                    {
+                        "value": "Ascendants",
+                        "name": "ASCENDANTS"
+                    },
+                    {
+                        "value": "Descendants",
+                        "name": "DESCENDANTS"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.sagemaker#DirectoryPath": {
             "type": "string",
             "traits": {
@@ -15440,6 +16011,129 @@
             "type": "double",
             "traits": {
                 "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.sagemaker#DriftCheckBaselines": {
+            "type": "structure",
+            "members": {
+                "Bias": {
+                    "target": "com.amazonaws.sagemaker#DriftCheckBias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the drift check bias baselines that can be used when the model monitor is set using the model \n         package. </p>"
+                    }
+                },
+                "Explainability": {
+                    "target": "com.amazonaws.sagemaker#DriftCheckExplainability",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the drift check explainability baselines that can be used when the model monitor is set using \n         the model package. </p>"
+                    }
+                },
+                "ModelQuality": {
+                    "target": "com.amazonaws.sagemaker#DriftCheckModelQuality",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the drift check model quality baselines that can be used when the model monitor is set using \n         the model package.</p>"
+                    }
+                },
+                "ModelDataQuality": {
+                    "target": "com.amazonaws.sagemaker#DriftCheckModelDataQuality",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the drift check model data quality baselines that can be used when the model monitor is set \n         using the model package.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the drift check baselines that can be used when the model monitor is set using the model \n         package. </p>"
+            }
+        },
+        "com.amazonaws.sagemaker#DriftCheckBias": {
+            "type": "structure",
+            "members": {
+                "ConfigFile": {
+                    "target": "com.amazonaws.sagemaker#FileSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The bias config file for a model.</p>"
+                    }
+                },
+                "PreTrainingConstraints": {
+                    "target": "com.amazonaws.sagemaker#MetricsSource"
+                },
+                "PostTrainingConstraints": {
+                    "target": "com.amazonaws.sagemaker#MetricsSource"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the drift check bias baselines that can be used when the model monitor is set using the \n         model package.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#DriftCheckExplainability": {
+            "type": "structure",
+            "members": {
+                "Constraints": {
+                    "target": "com.amazonaws.sagemaker#MetricsSource"
+                },
+                "ConfigFile": {
+                    "target": "com.amazonaws.sagemaker#FileSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The explainability config file for the model.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the drift check explainability baselines that can be used when the model monitor is set \n         using the model package. </p>"
+            }
+        },
+        "com.amazonaws.sagemaker#DriftCheckModelDataQuality": {
+            "type": "structure",
+            "members": {
+                "Statistics": {
+                    "target": "com.amazonaws.sagemaker#MetricsSource"
+                },
+                "Constraints": {
+                    "target": "com.amazonaws.sagemaker#MetricsSource"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the drift check data quality baselines that can be used when the model monitor is set using \n         the model package. </p>"
+            }
+        },
+        "com.amazonaws.sagemaker#DriftCheckModelQuality": {
+            "type": "structure",
+            "members": {
+                "Statistics": {
+                    "target": "com.amazonaws.sagemaker#MetricsSource"
+                },
+                "Constraints": {
+                    "target": "com.amazonaws.sagemaker#MetricsSource"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the drift check model quality baselines that can be used when the model monitor is set using \n         the model package. </p>"
+            }
+        },
+        "com.amazonaws.sagemaker#Edge": {
+            "type": "structure",
+            "members": {
+                "SourceArn": {
+                    "target": "com.amazonaws.sagemaker#AssociationEntityArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the source lineage entity of the directed edge.</p>"
+                    }
+                },
+                "DestinationArn": {
+                    "target": "com.amazonaws.sagemaker#AssociationEntityArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the destination lineage entity of the directed edge.</p>"
+                    }
+                },
+                "AssociationType": {
+                    "target": "com.amazonaws.sagemaker#AssociationEdgeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the Association(Edge) between the source and destination. For example <code>ContributedTo</code>, \n         <code>Produced</code>, or <code>DerivedFrom</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A directed edge connecting two lineage entities.</p>"
             }
         },
         "com.amazonaws.sagemaker#EdgeModel": {
@@ -15783,6 +16477,12 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9\\ \\_\\.]+$"
             }
         },
+        "com.amazonaws.sagemaker#Edges": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#Edge"
+            }
+        },
         "com.amazonaws.sagemaker#EfsUid": {
             "type": "string",
             "traits": {
@@ -16059,6 +16759,45 @@
                 "smithy.api#documentation": "<p>Input object for the endpoint</p>"
             }
         },
+        "com.amazonaws.sagemaker#EndpointInputConfiguration": {
+            "type": "structure",
+            "members": {
+                "InstanceType": {
+                    "target": "com.amazonaws.sagemaker#ProductionVariantInstanceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The instance types to use for the load test.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InferenceSpecificationName": {
+                    "target": "com.amazonaws.sagemaker#InferenceSpecificationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The inference specification name in the model package version.</p>"
+                    }
+                },
+                "EnvironmentParameterRanges": {
+                    "target": "com.amazonaws.sagemaker#EnvironmentParameterRanges",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The parameter you want to benchmark against.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The endpoint configuration for the load test.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#EndpointInputConfigurations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#EndpointInputConfiguration"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.sagemaker#EndpointName": {
             "type": "string",
             "traits": {
@@ -16077,6 +16816,42 @@
                     "max": 63
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9-]+$"
+            }
+        },
+        "com.amazonaws.sagemaker#EndpointOutputConfiguration": {
+            "type": "structure",
+            "members": {
+                "EndpointName": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the endpoint made during a recommendation job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "VariantName": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the production variant (deployed model) made during a recommendation job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstanceType": {
+                    "target": "com.amazonaws.sagemaker#ProductionVariantInstanceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The instance type recommended by Amazon SageMaker Inference Recommender.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InitialInstanceCount": {
+                    "target": "com.amazonaws.sagemaker#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of instances recommended to launch initially.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The endpoint configuration made by Inference Recommender during a recommendation job.</p>"
             }
         },
         "com.amazonaws.sagemaker#EndpointSortKey": {
@@ -16228,6 +17003,61 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 16
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#EnvironmentParameter": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The environment key suggested by the Amazon SageMaker Inference Recommender.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ValueType": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value type suggested by the Amazon SageMaker Inference Recommender.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value suggested by the Amazon SageMaker Inference Recommender.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of environment parameters suggested by the Amazon SageMaker Inference Recommender.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#EnvironmentParameterRanges": {
+            "type": "structure",
+            "members": {
+                "CategoricalParameterRanges": {
+                    "target": "com.amazonaws.sagemaker#CategoricalParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specified a list of parameters for each category.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the range of environment parameters</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#EnvironmentParameters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#EnvironmentParameter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
                 }
             }
         },
@@ -16402,6 +17232,16 @@
                     "max": 120
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,119}$"
+            }
+        },
+        "com.amazonaws.sagemaker#ExperimentEntityNameOrArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:(experiment|experiment-trial|experiment-trial-component|artifact|action|context)\\/)?([a-zA-Z0-9](-*[a-zA-Z0-9]){0,119})$"
             }
         },
         "com.amazonaws.sagemaker#ExperimentSource": {
@@ -16816,6 +17656,33 @@
                         "name": "STRING"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.sagemaker#FileSource": {
+            "type": "structure",
+            "members": {
+                "ContentType": {
+                    "target": "com.amazonaws.sagemaker#ContentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of content stored in the file source.</p>"
+                    }
+                },
+                "ContentDigest": {
+                    "target": "com.amazonaws.sagemaker#ContentDigest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The digest of the file source.</p>"
+                    }
+                },
+                "S3Uri": {
+                    "target": "com.amazonaws.sagemaker#S3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 URI for the file source.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details regarding the file source.</p>"
             }
         },
         "com.amazonaws.sagemaker#FileSystemAccessMode": {
@@ -17360,6 +18227,52 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#GetLineageGroupPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#GetLineageGroupPolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#GetLineageGroupPolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>The resource policy for the lineage group.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#GetLineageGroupPolicyRequest": {
+            "type": "structure",
+            "members": {
+                "LineageGroupName": {
+                    "target": "com.amazonaws.sagemaker#LineageGroupNameOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the lineage group.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#GetLineageGroupPolicyResponse": {
+            "type": "structure",
+            "members": {
+                "LineageGroupArn": {
+                    "target": "com.amazonaws.sagemaker#LineageGroupArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the lineage group.</p>"
+                    }
+                },
+                "ResourcePolicy": {
+                    "target": "com.amazonaws.sagemaker#ResourcePolicyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource policy that gives access to the lineage group in another account.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.sagemaker#GetModelPackageGroupPolicy": {
             "type": "operation",
             "input": {
@@ -17711,14 +18624,14 @@
                 "TaskTimeLimitInSeconds": {
                     "target": "com.amazonaws.sagemaker#TaskTimeLimitInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of time that a worker has to complete a task. </p>\n        <p>If you create a custom labeling job, the maximum value for this parameter is 8 hours\n            (28,800 seconds).</p>\n        <p>If you create a labeling job using a <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-task-types.html\">built-in task type</a> the maximum\n            for this parameter depends on the task type you use:</p>\n        <ul>\n            <li>\n                <p>For <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-label-images.html\">image</a> and \n                    <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-label-text.html\">text</a> labeling jobs,\n                    the maximum is 8 hours (28,800 seconds).</p>\n            </li>\n            <li>\n                <p>For <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-point-cloud.html\">3D point cloud</a> and <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-video.html\">video frame</a> labeling jobs, the maximum is 30 days (2952,000 seconds) for non-AL mode. For most users, the maximum is also 30 days. If you want to change these limits,\n                    contact Amazon Web Services Support.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The amount of time that a worker has to complete a task. </p>\n        <p>If you create a custom labeling job, the maximum value for this parameter is 8 hours\n            (28,800 seconds).</p>\n        <p>If you create a labeling job using a <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-task-types.html\">built-in task type</a> the maximum\n            for this parameter depends on the task type you use:</p>\n        <ul>\n            <li>\n                <p>For <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-label-images.html\">image</a> and \n                    <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-label-text.html\">text</a> labeling jobs,\n                    the maximum is 8 hours (28,800 seconds).</p>\n            </li>\n            <li>\n                <p>For <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-point-cloud.html\">3D point cloud</a> and <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-video.html\">video frame</a> labeling jobs, the maximum is 30 days (2952,000 seconds) for non-AL mode. For most users, the maximum is also 30 days.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "TaskAvailabilityLifetimeInSeconds": {
                     "target": "com.amazonaws.sagemaker#TaskAvailabilityLifetimeInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The length of time that a task remains available for labeling by human workers. The\n            default and maximum values for this parameter depend on the type of workforce you\n            use.</p>\n        <ul>\n            <li>\n                <p>If you choose the Amazon Mechanical Turk workforce, the maximum is 12 hours (43,200 seconds).\n                    The default is 6 hours (21,600 seconds).</p>\n            </li>\n            <li>\n                <p>If you choose a private or vendor workforce, the default value is 30 days (2592,000 seconds) for non-AL mode. For most users, the maximum is also 30 days. If you want to\n                    change this limit, contact Amazon Web Services Support.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The length of time that a task remains available for labeling by human workers. The\n            default and maximum values for this parameter depend on the type of workforce you\n            use.</p>\n        <ul>\n            <li>\n                <p>If you choose the Amazon Mechanical Turk workforce, the maximum is 12 hours (43,200 seconds).\n                    The default is 6 hours (21,600 seconds).</p>\n            </li>\n            <li>\n                <p>If you choose a private or vendor workforce, the default value is 30 days (2592,000 seconds) for non-AL mode. For most users, the maximum is also 30 days.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "MaxConcurrentTaskCount": {
@@ -18929,6 +19842,129 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#InferenceRecommendation": {
+            "type": "structure",
+            "members": {
+                "Metrics": {
+                    "target": "com.amazonaws.sagemaker#RecommendationMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metrics used to decide what recommendation to make.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EndpointConfiguration": {
+                    "target": "com.amazonaws.sagemaker#EndpointOutputConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the endpoint configuration parameters.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ModelConfiguration": {
+                    "target": "com.amazonaws.sagemaker#ModelConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the model configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of recommendations made by Amazon SageMaker Inference Recommender.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#InferenceRecommendations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#InferenceRecommendation"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#InferenceRecommendationsJob": {
+            "type": "structure",
+            "members": {
+                "JobName": {
+                    "target": "com.amazonaws.sagemaker#RecommendationJobName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "JobDescription": {
+                    "target": "com.amazonaws.sagemaker#RecommendationJobDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The job description.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "JobType": {
+                    "target": "com.amazonaws.sagemaker#RecommendationJobType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommendation job type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "JobArn": {
+                    "target": "com.amazonaws.sagemaker#RecommendationJobArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the recommendation job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.sagemaker#RecommendationJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.sagemaker#CreationTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp that shows when the job was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CompletionTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp that shows when the job completed.</p>"
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.sagemaker#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that enables Amazon SageMaker \n    to perform tasks on your behalf.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.sagemaker#LastModifiedTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp that shows when the job was last modified.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FailureReason": {
+                    "target": "com.amazonaws.sagemaker#FailureReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the job fails, provides information why the job failed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains a list of recommendation jobs.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#InferenceRecommendationsJobs": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#InferenceRecommendationsJob"
+            }
+        },
         "com.amazonaws.sagemaker#InferenceSpecification": {
             "type": "structure",
             "members": {
@@ -18968,6 +20004,25 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Defines how to perform inference generation after a training job is run.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#InferenceSpecificationName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 63
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"
+            }
+        },
+        "com.amazonaws.sagemaker#InitialNumberOfUsers": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1
+                }
             }
         },
         "com.amazonaws.sagemaker#InitialTaskCount": {
@@ -19399,6 +20454,15 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:rolealias/?[a-zA-Z_0-9+=,.@\\-_/]+$"
+            }
+        },
+        "com.amazonaws.sagemaker#JobDurationInSeconds": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1
+                }
             }
         },
         "com.amazonaws.sagemaker#JobReferenceCode": {
@@ -20130,6 +21194,93 @@
                     "min": 0,
                     "max": 30
                 }
+            }
+        },
+        "com.amazonaws.sagemaker#LineageGroupArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:lineage-group/"
+            }
+        },
+        "com.amazonaws.sagemaker#LineageGroupNameOrArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:lineage-group\\/)?([a-zA-Z0-9](-*[a-zA-Z0-9]){0,119})$"
+            }
+        },
+        "com.amazonaws.sagemaker#LineageGroupSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#LineageGroupSummary"
+            }
+        },
+        "com.amazonaws.sagemaker#LineageGroupSummary": {
+            "type": "structure",
+            "members": {
+                "LineageGroupArn": {
+                    "target": "com.amazonaws.sagemaker#LineageGroupArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the lineage group resource.</p>"
+                    }
+                },
+                "LineageGroupName": {
+                    "target": "com.amazonaws.sagemaker#ExperimentEntityName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the lineage group.</p>"
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.sagemaker#ExperimentEntityName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the lineage group summary.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The creation time of the lineage group summary.</p>"
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last modified time of the lineage group summary.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Lists a summary of the properties of a lineage group. A lineage group provides a group of shareable lineage entity \n         resources.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#LineageType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "TrialComponent",
+                        "name": "TRIAL_COMPONENT"
+                    },
+                    {
+                        "value": "Artifact",
+                        "name": "ARTIFACT"
+                    },
+                    {
+                        "value": "Context",
+                        "name": "CONTEXT"
+                    },
+                    {
+                        "value": "Action",
+                        "name": "ACTION"
+                    }
+                ]
             }
         },
         "com.amazonaws.sagemaker#ListActions": {
@@ -22412,6 +23563,125 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#ListInferenceRecommendationsJobs": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#ListInferenceRecommendationsJobsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#ListInferenceRecommendationsJobsResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Lists recommendation jobs that satisfy various filters.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ListInferenceRecommendationsJobsRequest": {
+            "type": "structure",
+            "members": {
+                "CreationTimeAfter": {
+                    "target": "com.amazonaws.sagemaker#CreationTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter that returns only jobs created after the specified time (timestamp).</p>"
+                    }
+                },
+                "CreationTimeBefore": {
+                    "target": "com.amazonaws.sagemaker#CreationTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter that returns only jobs created before the specified time (timestamp).</p>"
+                    }
+                },
+                "LastModifiedTimeAfter": {
+                    "target": "com.amazonaws.sagemaker#LastModifiedTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter that returns only jobs that were last modified after the specified time (timestamp).</p>"
+                    }
+                },
+                "LastModifiedTimeBefore": {
+                    "target": "com.amazonaws.sagemaker#LastModifiedTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter that returns only jobs that were last modified before the specified time (timestamp).</p>"
+                    }
+                },
+                "NameContains": {
+                    "target": "com.amazonaws.sagemaker#NameContains",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string in the job name. This filter returns only recommendations whose name contains the specified string.</p>"
+                    }
+                },
+                "StatusEquals": {
+                    "target": "com.amazonaws.sagemaker#RecommendationJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter that retrieves only inference recommendations jobs with a specific status.</p>"
+                    }
+                },
+                "SortBy": {
+                    "target": "com.amazonaws.sagemaker#ListInferenceRecommendationsJobsSortBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameter by which to sort the results.</p>"
+                    }
+                },
+                "SortOrder": {
+                    "target": "com.amazonaws.sagemaker#SortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sort order for the results.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sagemaker#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response to a previous <code>ListInferenceRecommendationsJobsRequest</code> request \n         was truncated, the response includes a <code>NextToken</code>. To retrieve the next set \n         of recommendations, use the token in the next request.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.sagemaker#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of recommendations to return in the response.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ListInferenceRecommendationsJobsResponse": {
+            "type": "structure",
+            "members": {
+                "InferenceRecommendationsJobs": {
+                    "target": "com.amazonaws.sagemaker#InferenceRecommendationsJobs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommendations created from the Amazon SageMaker Inference Recommender job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sagemaker#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token for getting the next set of recommendations, if there are any.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ListInferenceRecommendationsJobsSortBy": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Name",
+                        "name": "NAME"
+                    },
+                    {
+                        "value": "CreationTime",
+                        "name": "CREATION_TIME"
+                    },
+                    {
+                        "value": "Status",
+                        "name": "STATUS"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.sagemaker#ListLabelingJobs": {
             "type": "operation",
             "input": {
@@ -22622,6 +23892,81 @@
                 "target": "com.amazonaws.sagemaker#StringParameterValue"
             }
         },
+        "com.amazonaws.sagemaker#ListLineageGroups": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#ListLineageGroupsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#ListLineageGroupsResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of lineage groups shared with your Amazon Web Services account. \n         For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/xaccount-lineage-tracking.html\">\n            Cross-Account Lineage Tracking </a> in the <i>Amazon SageMaker Developer Guide</i>.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ListLineageGroupsRequest": {
+            "type": "structure",
+            "members": {
+                "CreatedAfter": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp to filter against lineage groups created after a certain point in time.</p>"
+                    }
+                },
+                "CreatedBefore": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp to filter against lineage groups created before a certain point in time.</p>"
+                    }
+                },
+                "SortBy": {
+                    "target": "com.amazonaws.sagemaker#SortLineageGroupsBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameter by which to sort the results. The default is\n         <code>CreationTime</code>.</p>"
+                    }
+                },
+                "SortOrder": {
+                    "target": "com.amazonaws.sagemaker#SortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sort order for the results. The default is <code>Ascending</code>.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sagemaker#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response is truncated, SageMaker returns this token. To retrieve the next set of\n         algorithms, use it in the subsequent request.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.sagemaker#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of endpoints to return in the response. This value defaults to\n         10.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ListLineageGroupsResponse": {
+            "type": "structure",
+            "members": {
+                "LineageGroupSummaries": {
+                    "target": "com.amazonaws.sagemaker#LineageGroupSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of lineage groups and their properties.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sagemaker#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response is truncated, SageMaker returns this token. To retrieve the next set of\n         algorithms, use it in the subsequent request.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.sagemaker#ListMaxResults": {
             "type": "integer",
             "traits": {
@@ -22802,6 +24147,64 @@
                     "target": "com.amazonaws.sagemaker#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of jobs,\n         use it in the subsequent request.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ListModelMetadata": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#ListModelMetadataRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#ListModelMetadataResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the domain, framework, task, and model name of standard \n          machine learning models found in common model zoos.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ListModelMetadataRequest": {
+            "type": "structure",
+            "members": {
+                "SearchExpression": {
+                    "target": "com.amazonaws.sagemaker#ModelMetadataSearchExpression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more filters that searches for the specified resource or resources \n          in a search. All resource objects that satisfy the expression's condition are \n          included in the search results. Specify the  Framework, FrameworkVersion, Domain \n          or Task to filter supported. Filter names and values are case-sensitive.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sagemaker#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response to a previous <code>ListModelMetadataResponse</code> request was truncated, \n           the response includes a NextToken. To retrieve the next set of model metadata, \n           use the token in the next request.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.sagemaker#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of models to return in the response.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ListModelMetadataResponse": {
+            "type": "structure",
+            "members": {
+                "ModelMetadataSummaries": {
+                    "target": "com.amazonaws.sagemaker#ModelMetadataSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that holds model metadata.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sagemaker#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token for getting the next set of recommendations, if there are any.</p>"
                     }
                 }
             }
@@ -25114,9 +26517,27 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#MaxNumberOfTests": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
         "com.amazonaws.sagemaker#MaxNumberOfTrainingJobs": {
             "type": "integer",
             "traits": {
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#MaxParallelOfTests": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1
                 }
@@ -25601,6 +27022,26 @@
                 "smithy.api#documentation": "<p>Configures the timeout and maximum number of retries for processing a transform job\n            invocation.</p>"
             }
         },
+        "com.amazonaws.sagemaker#ModelConfiguration": {
+            "type": "structure",
+            "members": {
+                "InferenceSpecificationName": {
+                    "target": "com.amazonaws.sagemaker#InferenceSpecificationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The inference specification name in the model package version.</p>"
+                    }
+                },
+                "EnvironmentParameters": {
+                    "target": "com.amazonaws.sagemaker#EnvironmentParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the environment parameters that includes key, value types, and values.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the model configuration. Includes the specification name and environment parameters.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#ModelDataQuality": {
             "type": "structure",
             "members": {
@@ -25726,6 +27167,173 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Inputs for the model explainability job.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#ModelInput": {
+            "type": "structure",
+            "members": {
+                "DataInputConfig": {
+                    "target": "com.amazonaws.sagemaker#DataInputConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The input configuration object for the model.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input object for the model.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#ModelLatencyThreshold": {
+            "type": "structure",
+            "members": {
+                "Percentile": {
+                    "target": "com.amazonaws.sagemaker#String64",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The model latency percentile threshold.</p>"
+                    }
+                },
+                "ValueInMilliseconds": {
+                    "target": "com.amazonaws.sagemaker#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The model latency percentile value in milliseconds.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The model latency threshold.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#ModelLatencyThresholds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#ModelLatencyThreshold"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ModelMetadataFilter": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.sagemaker#ModelMetadataFilterType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the of the model to filter by.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.sagemaker#String256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value to filter the model metadata.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Part of the search expression. You can specify the name and value \n          (domain, task, framework, framework version, task, and model).</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#ModelMetadataFilterType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Domain",
+                        "name": "DOMAIN"
+                    },
+                    {
+                        "value": "Framework",
+                        "name": "FRAMEWORK"
+                    },
+                    {
+                        "value": "Task",
+                        "name": "TASK"
+                    },
+                    {
+                        "value": "FrameworkVersion",
+                        "name": "FRAMEWORKVERSION"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.sagemaker#ModelMetadataFilters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#ModelMetadataFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ModelMetadataSearchExpression": {
+            "type": "structure",
+            "members": {
+                "Filters": {
+                    "target": "com.amazonaws.sagemaker#ModelMetadataFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of filter objects.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>One or more filters that searches for the specified resource or resources in \n          a search. All resource objects that satisfy the expression's condition are \n          included in the search results</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#ModelMetadataSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#ModelMetadataSummary"
+            }
+        },
+        "com.amazonaws.sagemaker#ModelMetadataSummary": {
+            "type": "structure",
+            "members": {
+                "Domain": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The machine learning domain of the model.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Framework": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The machine learning framework of the model.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Task": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The machine learning task of the model.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Model": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the model.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FrameworkVersion": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The framework version of the model.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of the model metadata.</p>"
             }
         },
         "com.amazonaws.sagemaker#ModelMetrics": {
@@ -25876,6 +27484,30 @@
                         "smithy.api#documentation": "<p>A description provided when the model approval is set.</p>"
                     }
                 },
+                "Domain": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The machine learning domain of your model package and its components. Common \n           machine learning domains include computer vision and natural language processing.</p>"
+                    }
+                },
+                "Task": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The machine learning task your model package accomplishes. Common machine \n     learning tasks include object detection and image classification.</p>"
+                    }
+                },
+                "SamplePayloadUrl": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Simple Storage Service path where the sample payload are stored. This path must point to \n           a single gzip compressed tar archive (.tar.gz suffix).</p>"
+                    }
+                },
+                "AdditionalInferenceSpecifications": {
+                    "target": "com.amazonaws.sagemaker#AdditionalInferenceSpecifications",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of additional Inference Specification objects.</p>"
+                    }
+                },
                 "Tags": {
                     "target": "com.amazonaws.sagemaker#TagList",
                     "traits": {
@@ -25886,6 +27518,12 @@
                     "target": "com.amazonaws.sagemaker#CustomerMetadataMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The metadata properties for the model package. </p>"
+                    }
+                },
+                "DriftCheckBaselines": {
+                    "target": "com.amazonaws.sagemaker#DriftCheckBaselines",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the drift check baselines that can be used when the model monitor is set using the model package.</p>"
                     }
                 }
             },
@@ -25953,6 +27591,30 @@
                     "target": "com.amazonaws.sagemaker#EnvironmentMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The environment variables to set in the Docker container. Each key and value in the\n            <code>Environment</code> string to string map can have length of up to 1024. We\n            support up to 16 entries in the map.</p>"
+                    }
+                },
+                "ModelInput": {
+                    "target": "com.amazonaws.sagemaker#ModelInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure with Model Input details.</p>"
+                    }
+                },
+                "Framework": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The machine learning framework of the model package container image.</p>"
+                    }
+                },
+                "FrameworkVersion": {
+                    "target": "com.amazonaws.sagemaker#FrameworkVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The framework version of the Model Package Container Image.</p>"
+                    }
+                },
+                "NearestModelName": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a pre-trained machine learning benchmarked by \n           Amazon SageMaker Inference Recommender model that matches your model. \n           You can find a list of benchmarked models by calling <code>ListModelMetadata</code>.</p>"
                     }
                 }
             },
@@ -28746,6 +30408,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The endpoint variant status which describes the current deployment stage status or operational status.</p>"
                     }
+                },
+                "CurrentServerlessConfig": {
+                    "target": "com.amazonaws.sagemaker#ProductionVariantServerlessConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The serverless configuration for the endpoint.</p>\n         <note>\n            <p>Serverless Inference is in preview release for Amazon SageMaker and is subject to change. We do not recommend using this feature in production environments.</p>\n         </note>"
+                    }
+                },
+                "DesiredServerlessConfig": {
+                    "target": "com.amazonaws.sagemaker#ProductionVariantServerlessConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The serverless configuration requested for this deployment, as specified in the endpoint configuration for the endpoint.</p>\n         <note>\n            <p>Serverless Inference is in preview release for Amazon SageMaker and is subject to change. We do not recommend using this feature in production environments.</p>\n         </note>"
+                    }
                 }
             },
             "traits": {
@@ -28756,6 +30430,43 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.sagemaker#PendingProductionVariantSummary"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#Phase": {
+            "type": "structure",
+            "members": {
+                "InitialNumberOfUsers": {
+                    "target": "com.amazonaws.sagemaker#InitialNumberOfUsers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies how many concurrent users to start with.</p>"
+                    }
+                },
+                "SpawnRate": {
+                    "target": "com.amazonaws.sagemaker#SpawnRate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specified how many new users to spawn in a minute.</p>"
+                    }
+                },
+                "DurationInSeconds": {
+                    "target": "com.amazonaws.sagemaker#TrafficDurationInSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies how long traffic phase should be.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the traffic pattern.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#Phases": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#Phase"
             },
             "traits": {
                 "smithy.api#length": {
@@ -29122,6 +30833,18 @@
                     "target": "com.amazonaws.sagemaker#LambdaStepMetadata",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Lambda function that was run by this step execution and a list of\n        output parameters.</p>"
+                    }
+                },
+                "QualityCheck": {
+                    "target": "com.amazonaws.sagemaker#QualityCheckStepMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configurations and outcomes of the check step execution. This includes: </p>\n         <ul>\n            <li>\n               <p>The type of the check conducted,</p>\n            </li>\n            <li>\n               <p>The Amazon S3 URIs of baseline constraints and statistics files to be used for the drift check.</p>\n            </li>\n            <li>\n               <p>The Amazon S3 URIs of newly calculated baseline constraints and statistics.</p>\n            </li>\n            <li>\n               <p>The model package group name provided.</p>\n            </li>\n            <li>\n               <p>The Amazon S3 URI of the violation report if violations detected.</p>\n            </li>\n            <li>\n               <p>The Amazon Resource Name (ARN) of check processing job initiated by the step execution.</p>\n            </li>\n            <li>\n               <p>The boolean flags indicating if the drift check is skipped.</p>\n            </li>\n            <li>\n               <p>If step property <code>BaselineUsedForDriftCheck</code> is set the same as \n            <code>CalculatedBaseline</code>.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "ClarifyCheck": {
+                    "target": "com.amazonaws.sagemaker#ClarifyCheckStepMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Container for the metadata for a Clarify check step. The configurations \n         and outcomes of the check step execution. This includes: </p>\n         <ul>\n            <li>\n               <p>The type of the check conducted,</p>\n            </li>\n            <li>\n               <p>The Amazon S3 URIs of baseline constraints and statistics files to be used for the drift check.</p>\n            </li>\n            <li>\n               <p>The Amazon S3 URIs of newly calculated baseline constraints and statistics.</p>\n            </li>\n            <li>\n               <p>The model package group name provided.</p>\n            </li>\n            <li>\n               <p>The Amazon S3 URI of the violation report if violations detected.</p>\n            </li>\n            <li>\n               <p>The Amazon Resource Name (ARN) of check processing job initiated by the step execution.</p>\n            </li>\n            <li>\n               <p>The boolean flags indicating if the drift check is skipped.</p>\n            </li>\n            <li>\n               <p>If step property <code>BaselineUsedForDriftCheck</code> is set the same as \n               <code>CalculatedBaseline</code>.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -30229,15 +31952,13 @@
                 "InitialInstanceCount": {
                     "target": "com.amazonaws.sagemaker#InitialTaskCount",
                     "traits": {
-                        "smithy.api#documentation": "<p>Number of instances to launch initially.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Number of instances to launch initially.</p>"
                     }
                 },
                 "InstanceType": {
                     "target": "com.amazonaws.sagemaker#ProductionVariantInstanceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ML compute instance type.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The ML compute instance type.</p>"
                     }
                 },
                 "InitialVariantWeight": {
@@ -30256,6 +31977,12 @@
                     "target": "com.amazonaws.sagemaker#ProductionVariantCoreDumpConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies configuration for a core dump from the model container when the process\n            crashes.</p>"
+                    }
+                },
+                "ServerlessConfig": {
+                    "target": "com.amazonaws.sagemaker#ProductionVariantServerlessConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The serverless configuration for an endpoint. Specifies a serverless endpoint configuration instead of an instance-based endpoint configuration.</p>\n         <note>\n            <p>Serverless Inference is in preview release for Amazon SageMaker and is subject to change. We do not recommend using this feature in production environments.</p>\n         </note>"
                     }
                 }
             },
@@ -30598,6 +32325,28 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#ProductionVariantServerlessConfig": {
+            "type": "structure",
+            "members": {
+                "MemorySizeInMB": {
+                    "target": "com.amazonaws.sagemaker#ServerlessMemorySizeInMB",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The memory size of your serverless endpoint. Valid values are in 1 GB increments: 1024 MB, 2048 MB, 3072 MB, 4096 MB, 5120 MB, or 6144 MB.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxConcurrency": {
+                    "target": "com.amazonaws.sagemaker#ServerlessMaxConcurrency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of concurrent invocations your serverless endpoint can process.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<important>\n            <p>Serverless Inference is in preview release for Amazon SageMaker and is subject to change. We do not recommend using this feature in production environments.</p>\n         </important>\n         <p>Specifies the serverless configuration for an endpoint variant.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#ProductionVariantStatus": {
             "type": "structure",
             "members": {
@@ -30681,6 +32430,18 @@
                     "target": "com.amazonaws.sagemaker#ProductionVariantStatusList",
                     "traits": {
                         "smithy.api#documentation": "<p>The endpoint variant status which describes the current deployment stage status or operational status.</p>"
+                    }
+                },
+                "CurrentServerlessConfig": {
+                    "target": "com.amazonaws.sagemaker#ProductionVariantServerlessConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The serverless configuration for the endpoint.</p>\n         <note>\n            <p>Serverless Inference is in preview release for Amazon SageMaker and is subject to change. We do not recommend using this feature in production environments.</p>\n         </note>"
+                    }
+                },
+                "DesiredServerlessConfig": {
+                    "target": "com.amazonaws.sagemaker#ProductionVariantServerlessConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The serverless configuration requested for the endpoint update.</p>\n         <note>\n            <p>Serverless Inference is in preview release for Amazon SageMaker and is subject to change. We do not recommend using this feature in production environments.</p>\n         </note>"
                     }
                 }
             },
@@ -31295,6 +33056,286 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#QualityCheckStepMetadata": {
+            "type": "structure",
+            "members": {
+                "CheckType": {
+                    "target": "com.amazonaws.sagemaker#String256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the Quality check step.</p>"
+                    }
+                },
+                "BaselineUsedForDriftCheckStatistics": {
+                    "target": "com.amazonaws.sagemaker#String1024",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 URI of the baseline statistics file used for the drift check.</p>"
+                    }
+                },
+                "BaselineUsedForDriftCheckConstraints": {
+                    "target": "com.amazonaws.sagemaker#String1024",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 URI of the baseline constraints file used for the drift check.</p>"
+                    }
+                },
+                "CalculatedBaselineStatistics": {
+                    "target": "com.amazonaws.sagemaker#String1024",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 URI of the newly calculated baseline statistics file.</p>"
+                    }
+                },
+                "CalculatedBaselineConstraints": {
+                    "target": "com.amazonaws.sagemaker#String1024",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 URI of the newly calculated baseline constraints file.</p>"
+                    }
+                },
+                "ModelPackageGroupName": {
+                    "target": "com.amazonaws.sagemaker#String256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The model package group name.</p>"
+                    }
+                },
+                "ViolationReport": {
+                    "target": "com.amazonaws.sagemaker#String1024",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 URI of violation report if violations are detected.</p>"
+                    }
+                },
+                "CheckJobArn": {
+                    "target": "com.amazonaws.sagemaker#String256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Quality check processing job that was run by this step execution.</p>"
+                    }
+                },
+                "SkipCheck": {
+                    "target": "com.amazonaws.sagemaker#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This flag indicates if the drift check against the previous baseline will be skipped or not. \n         If it is set to <code>False</code>, the previous baseline of the configured check type must be available.</p>"
+                    }
+                },
+                "RegisterNewBaseline": {
+                    "target": "com.amazonaws.sagemaker#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This flag indicates if a newly calculated baseline can be accessed through step properties \n         <code>BaselineUsedForDriftCheckConstraints</code> and <code>BaselineUsedForDriftCheckStatistics</code>. \n         If it is set to <code>False</code>, the previous baseline of the configured check type must also be available. \n         These can be accessed through the <code>BaselineUsedForDriftCheckConstraints</code> and <code>\n            BaselineUsedForDriftCheckStatistics</code> properties. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Container for the metadata for a Quality check step. For more information, see \n         the topic on <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/build-and-manage-steps.html#step-type-quality-check\">QualityCheck step</a> in the <i>Amazon SageMaker Developer Guide</i>.\n      </p>"
+            }
+        },
+        "com.amazonaws.sagemaker#QueryFilters": {
+            "type": "structure",
+            "members": {
+                "Types": {
+                    "target": "com.amazonaws.sagemaker#QueryTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter the lineage entities connected to the <code>StartArn</code> by type. For example: <code>DataSet</code>, \n         <code>Model</code>, <code>Endpoint</code>, or <code>ModelDeployment</code>.</p>"
+                    }
+                },
+                "LineageTypes": {
+                    "target": "com.amazonaws.sagemaker#QueryLineageTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter the lineage entities connected to the <code>StartArn</code>(s) by the type of the lineage entity.</p>"
+                    }
+                },
+                "CreatedBefore": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter the lineage entities connected to the <code>StartArn</code>(s) by created date.</p>"
+                    }
+                },
+                "CreatedAfter": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter the lineage entities connected to the <code>StartArn</code>(s) after the create date.</p>"
+                    }
+                },
+                "ModifiedBefore": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter the lineage entities connected to the <code>StartArn</code>(s) before the last modified date.</p>"
+                    }
+                },
+                "ModifiedAfter": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter the lineage entities connected to the <code>StartArn</code>(s) after the last modified date.</p>"
+                    }
+                },
+                "Properties": {
+                    "target": "com.amazonaws.sagemaker#QueryProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter the lineage entities connected to the <code>StartArn</code>(s) by a set if property key value pairs. \n         If multiple pairs are provided, an entity will be included in the results if it matches any of the provided pairs.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A set of filters to narrow the set of lineage entities connected to the <code>StartArn</code>(s) returned by the \n      <code>QueryLineage</code> API action.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#QueryLineage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#QueryLineageRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#QueryLineageResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Use this action to inspect your lineage and discover relationships between entities. \n         For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/querying-lineage-entities.html\">\n            Querying Lineage Entities</a> in the <i>Amazon SageMaker Developer Guide</i>.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#QueryLineageMaxDepth": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#QueryLineageMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#QueryLineageRequest": {
+            "type": "structure",
+            "members": {
+                "StartArns": {
+                    "target": "com.amazonaws.sagemaker#QueryLineageStartArns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of resource Amazon Resource Name (ARN) that represent the starting point for your lineage query.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Direction": {
+                    "target": "com.amazonaws.sagemaker#Direction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Associations between lineage entities are directed.  This parameter determines the direction from the \n         StartArn(s) the query will look.</p>"
+                    }
+                },
+                "IncludeEdges": {
+                    "target": "com.amazonaws.sagemaker#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Setting this value to <code>True</code> will retrieve not only the entities of interest but also the \n         <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/lineage-tracking-entities.html\">Associations</a> and \n         lineage entities on the path. Set to <code>False</code> to only return lineage entities that match your query.</p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.sagemaker#QueryFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A set of filtering parameters that allow you to specify which entities should be returned.</p>\n         <ul>\n            <li>\n               <p>Properties - Key-value pairs to match on the lineage entities' properties.</p>\n            </li>\n            <li>\n               <p>LineageTypes - A set of lineage entity types to match on. For example: <code>TrialComponent</code>, \n            <code>Artifact</code>, or <code>Context</code>.</p>\n            </li>\n            <li>\n               <p>CreatedBefore - Filter entities created before this date.</p>\n            </li>\n            <li>\n               <p>ModifiedBefore - Filter entities modified before this date.</p>\n            </li>\n            <li>\n               <p>ModifiedAfter - Filter entities modified after this date.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "MaxDepth": {
+                    "target": "com.amazonaws.sagemaker#QueryLineageMaxDepth",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum depth in lineage relationships from the <code>StartArns</code> that will be traversed. Depth is a measure of the number \n         of <code>Associations</code> from the <code>StartArn</code> entity to the matched results.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.sagemaker#QueryLineageMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Limits the number of vertices in the results. Use the <code>NextToken</code> in a response to to retrieve the next page of results.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sagemaker#String8192",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Limits the number of vertices in the request. Use the <code>NextToken</code> in a response to to retrieve the next page of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#QueryLineageResponse": {
+            "type": "structure",
+            "members": {
+                "Vertices": {
+                    "target": "com.amazonaws.sagemaker#Vertices",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of vertices connected to the start entity(ies) in the lineage graph.</p>"
+                    }
+                },
+                "Edges": {
+                    "target": "com.amazonaws.sagemaker#Edges",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of edges that connect vertices in the response.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sagemaker#String8192",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Limits the number of vertices in the response. Use the <code>NextToken</code> in a response to to retrieve the next page of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#QueryLineageStartArns": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#AssociationEntityArn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#QueryLineageTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#LineageType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 4
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#QueryProperties": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.sagemaker#String256"
+            },
+            "value": {
+                "target": "com.amazonaws.sagemaker#String256"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#QueryTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#String40"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 5
+                }
+            }
+        },
         "com.amazonaws.sagemaker#RSessionAppSettings": {
             "type": "structure",
             "members": {},
@@ -31404,6 +33445,196 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.sagemaker#ProductionVariantInstanceType"
+            }
+        },
+        "com.amazonaws.sagemaker#RecommendationJobArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:inference-recommendations-job/"
+            }
+        },
+        "com.amazonaws.sagemaker#RecommendationJobDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#RecommendationJobInputConfig": {
+            "type": "structure",
+            "members": {
+                "ModelPackageVersionArn": {
+                    "target": "com.amazonaws.sagemaker#ModelPackageArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a versioned model package.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "JobDurationInSeconds": {
+                    "target": "com.amazonaws.sagemaker#JobDurationInSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the maximum duration of the job, in seconds.></p>"
+                    }
+                },
+                "TrafficPattern": {
+                    "target": "com.amazonaws.sagemaker#TrafficPattern",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the traffic pattern of the job.</p>"
+                    }
+                },
+                "ResourceLimit": {
+                    "target": "com.amazonaws.sagemaker#RecommendationJobResourceLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the resource limit of the job.</p>"
+                    }
+                },
+                "EndpointConfigurations": {
+                    "target": "com.amazonaws.sagemaker#EndpointInputConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the endpoint configuration to use for a job.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input configuration of the recommendation job.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#RecommendationJobName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}$"
+            }
+        },
+        "com.amazonaws.sagemaker#RecommendationJobResourceLimit": {
+            "type": "structure",
+            "members": {
+                "MaxNumberOfTests": {
+                    "target": "com.amazonaws.sagemaker#MaxNumberOfTests",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the maximum number of load tests.</p>"
+                    }
+                },
+                "MaxParallelOfTests": {
+                    "target": "com.amazonaws.sagemaker#MaxParallelOfTests",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the maximum number of parallel load tests.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the maximum number of jobs that can run in parallel \n    and the maximum number of jobs that can run.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#RecommendationJobStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PENDING",
+                        "name": "PENDING"
+                    },
+                    {
+                        "value": "IN_PROGRESS",
+                        "name": "IN_PROGRESS"
+                    },
+                    {
+                        "value": "COMPLETED",
+                        "name": "COMPLETED"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    },
+                    {
+                        "value": "STOPPING",
+                        "name": "STOPPING"
+                    },
+                    {
+                        "value": "STOPPED",
+                        "name": "STOPPED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.sagemaker#RecommendationJobStoppingConditions": {
+            "type": "structure",
+            "members": {
+                "MaxInvocations": {
+                    "target": "com.amazonaws.sagemaker#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of requests per minute expected for the endpoint.</p>"
+                    }
+                },
+                "ModelLatencyThresholds": {
+                    "target": "com.amazonaws.sagemaker#ModelLatencyThresholds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The interval of time taken by a model to respond as viewed from SageMaker. \n          The interval includes the local communication time taken to send the request \n          and to fetch the response from the container of a model and the time taken to \n          complete the inference in the container.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies conditions for stopping a job. When a job reaches a \n           stopping condition limit, SageMaker ends the job.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#RecommendationJobType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Default",
+                        "name": "DEFAULT"
+                    },
+                    {
+                        "value": "Advanced",
+                        "name": "ADVANCED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.sagemaker#RecommendationMetrics": {
+            "type": "structure",
+            "members": {
+                "CostPerHour": {
+                    "target": "com.amazonaws.sagemaker#Float",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the cost per hour for the instance. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CostPerInference": {
+                    "target": "com.amazonaws.sagemaker#Float",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the cost per inference for the instance .</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxInvocations": {
+                    "target": "com.amazonaws.sagemaker#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expected maximum number of requests per minute for the instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ModelLatency": {
+                    "target": "com.amazonaws.sagemaker#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expected model latency at maximum invocation per minute for the instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The metrics of recommendations.</p>"
             }
         },
         "com.amazonaws.sagemaker#RecordWrapper": {
@@ -31905,6 +34136,16 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.sagemaker#ResourcePolicyString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 20480
+                },
+                "smithy.api#pattern": "(?:[ \\r\\n\\t].*)*$"
+            }
+        },
         "com.amazonaws.sagemaker#ResourcePropertyName": {
             "type": "string",
             "traits": {
@@ -32399,6 +34640,9 @@
                     "target": "com.amazonaws.sagemaker#CreateImageVersion"
                 },
                 {
+                    "target": "com.amazonaws.sagemaker#CreateInferenceRecommendationsJob"
+                },
+                {
                     "target": "com.amazonaws.sagemaker#CreateLabelingJob"
                 },
                 {
@@ -32654,7 +34898,13 @@
                     "target": "com.amazonaws.sagemaker#DescribeImageVersion"
                 },
                 {
+                    "target": "com.amazonaws.sagemaker#DescribeInferenceRecommendationsJob"
+                },
+                {
                     "target": "com.amazonaws.sagemaker#DescribeLabelingJob"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#DescribeLineageGroup"
                 },
                 {
                     "target": "com.amazonaws.sagemaker#DescribeModel"
@@ -32736,6 +34986,9 @@
                 },
                 {
                     "target": "com.amazonaws.sagemaker#GetDeviceFleetReport"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#GetLineageGroupPolicy"
                 },
                 {
                     "target": "com.amazonaws.sagemaker#GetModelPackageGroupPolicy"
@@ -32822,16 +35075,25 @@
                     "target": "com.amazonaws.sagemaker#ListImageVersions"
                 },
                 {
+                    "target": "com.amazonaws.sagemaker#ListInferenceRecommendationsJobs"
+                },
+                {
                     "target": "com.amazonaws.sagemaker#ListLabelingJobs"
                 },
                 {
                     "target": "com.amazonaws.sagemaker#ListLabelingJobsForWorkteam"
                 },
                 {
+                    "target": "com.amazonaws.sagemaker#ListLineageGroups"
+                },
+                {
                     "target": "com.amazonaws.sagemaker#ListModelBiasJobDefinitions"
                 },
                 {
                     "target": "com.amazonaws.sagemaker#ListModelExplainabilityJobDefinitions"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#ListModelMetadata"
                 },
                 {
                     "target": "com.amazonaws.sagemaker#ListModelPackageGroups"
@@ -32912,6 +35174,9 @@
                     "target": "com.amazonaws.sagemaker#PutModelPackageGroupPolicy"
                 },
                 {
+                    "target": "com.amazonaws.sagemaker#QueryLineage"
+                },
+                {
                     "target": "com.amazonaws.sagemaker#RegisterDevices"
                 },
                 {
@@ -32949,6 +35214,9 @@
                 },
                 {
                     "target": "com.amazonaws.sagemaker#StopHyperParameterTuningJob"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#StopInferenceRecommendationsJob"
                 },
                 {
                     "target": "com.amazonaws.sagemaker#StopLabelingJob"
@@ -33576,6 +35844,26 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#ServerlessMaxConcurrency": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ServerlessMemorySizeInMB": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1024,
+                    "max": 6144
+                }
+            }
+        },
         "com.amazonaws.sagemaker#ServiceCatalogEntityId": {
             "type": "string",
             "traits": {
@@ -33828,6 +36116,21 @@
                 ]
             }
         },
+        "com.amazonaws.sagemaker#SortLineageGroupsBy": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Name",
+                        "name": "NAME"
+                    },
+                    {
+                        "value": "CreationTime",
+                        "name": "CREATION_TIME"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.sagemaker#SortOrder": {
             "type": "string",
             "traits": {
@@ -33983,6 +36286,15 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.sagemaker#SpawnRate": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 0
+                }
             }
         },
         "com.amazonaws.sagemaker#SplitType": {
@@ -34282,6 +36594,32 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#StopInferenceRecommendationsJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#StopInferenceRecommendationsJobRequest"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Stops an Inference Recommender job.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#StopInferenceRecommendationsJobRequest": {
+            "type": "structure",
+            "members": {
+                "JobName": {
+                    "target": "com.amazonaws.sagemaker#RecommendationJobName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the job you want to stop.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.sagemaker#StopLabelingJob": {
             "type": "operation",
             "input": {
@@ -34513,6 +36851,15 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#String128": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 128
+                }
+            }
+        },
         "com.amazonaws.sagemaker#String200": {
             "type": "string",
             "traits": {
@@ -34541,12 +36888,30 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#String40": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 40
+                }
+            }
+        },
         "com.amazonaws.sagemaker#String64": {
             "type": "string",
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
                     "max": 64
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#String8192": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 8192
                 }
             }
         },
@@ -35246,6 +37611,35 @@
         "com.amazonaws.sagemaker#Timestamp": {
             "type": "timestamp"
         },
+        "com.amazonaws.sagemaker#TrafficDurationInSeconds": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#TrafficPattern": {
+            "type": "structure",
+            "members": {
+                "TrafficType": {
+                    "target": "com.amazonaws.sagemaker#TrafficType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the traffic patterns.</p>"
+                    }
+                },
+                "Phases": {
+                    "target": "com.amazonaws.sagemaker#Phases",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the phases traffic specification.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the traffic pattern of the load test.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#TrafficRoutingConfig": {
             "type": "structure",
             "members": {
@@ -35295,6 +37689,17 @@
                     {
                         "value": "LINEAR",
                         "name": "LINEAR"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.sagemaker#TrafficType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PHASES",
+                        "name": "PHASES"
                     }
                 ]
             }
@@ -36852,6 +39257,12 @@
                         "smithy.api#documentation": "<p>Details of the source of the component.</p>"
                     }
                 },
+                "LineageGroupArn": {
+                    "target": "com.amazonaws.sagemaker#LineageGroupArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the lineage group resource.</p>"
+                    }
+                },
                 "Tags": {
                     "target": "com.amazonaws.sagemaker#TagList",
                     "traits": {
@@ -38172,6 +40583,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The metadata properties associated with the model package versions to remove.</p>"
                     }
+                },
+                "AdditionalInferenceSpecificationsToAdd": {
+                    "target": "com.amazonaws.sagemaker#AdditionalInferenceSpecifications",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of additional Inference Specification objects to be added to the \n    existing array additional Inference Specification. Total number of additional \n    Inference Specifications can not exceed 15. Each additional Inference Specification \n    specifies artifacts based on this model package that can be used on inference endpoints. \n    Generally used with SageMaker Neo to store the compiled artifacts.</p>"
+                    }
                 }
             }
         },
@@ -38962,7 +41379,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about the user who created or modified an experiment, trial, trial\n      component, or project.</p>"
+                "smithy.api#documentation": "<p>Information about the user who created or modified an experiment, trial, trial\n      component, lineage group, or project.</p>"
             }
         },
         "com.amazonaws.sagemaker#UserProfileArn": {
@@ -39244,6 +41661,38 @@
                     "max": 176
                 },
                 "smithy.api#pattern": "^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:[a-z\\-]*\\/)?([a-zA-Z0-9]([a-zA-Z0-9-]){0,62})(?<!-)(\\/[0-9]{1,5})?$"
+            }
+        },
+        "com.amazonaws.sagemaker#Vertex": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.sagemaker#AssociationEntityArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the lineage entity resource.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.sagemaker#String40",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the lineage entity resource. For example: <code>DataSet</code>, <code>Model</code>, <code>Endpoint</code>, \n         etc...</p>"
+                    }
+                },
+                "LineageType": {
+                    "target": "com.amazonaws.sagemaker#LineageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of resource of the lineage entity.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A lineage entity connected to the starting entity(ies).</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#Vertices": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#Vertex"
             }
         },
         "com.amazonaws.sagemaker#VolumeSizeInGB": {

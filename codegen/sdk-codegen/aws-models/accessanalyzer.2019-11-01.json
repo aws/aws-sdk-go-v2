@@ -3,6 +3,27 @@
     "shapes": {
         "com.amazonaws.accessanalyzer#AccessAnalyzer": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "AccessAnalyzer",
+                    "arnNamespace": "access-analyzer",
+                    "cloudFormationName": "AccessAnalyzer",
+                    "cloudTrailEventSource": "access-analyzer.amazonaws.com",
+                    "endpointPrefix": "access-analyzer"
+                },
+                "aws.auth#sigv4": {
+                    "name": "access-analyzer"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#cors": {},
+                "smithy.api#documentation": "<p>Identity and Access Management Access Analyzer helps identify potential resource-access risks by enabling you to\n         identify any policies that grant access to an external principal. It does this by using\n         logic-based reasoning to analyze resource-based policies in your Amazon Web Services environment. An\n         external principal can be another Amazon Web Services account, a root user, an IAM user or role, a\n         federated user, an Amazon Web Services service, or an anonymous user. You can also use IAM Access Analyzer to\n         preview and validate public and cross-account access to your resources before deploying\n         permissions changes. This guide describes the Identity and Access Management Access Analyzer operations that you can\n         call programmatically. For general information about IAM Access Analyzer, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/what-is-access-analyzer.html\">Identity and Access Management Access Analyzer</a> in the <b>IAM User Guide</b>.</p>\n         <p>To start using IAM Access Analyzer, you first need to create an analyzer.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                },
+                "smithy.api#title": "Access Analyzer"
+            },
             "version": "2019-11-01",
             "operations": [
                 {
@@ -67,28 +88,7 @@
                 {
                     "target": "com.amazonaws.accessanalyzer#Analyzer"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "AccessAnalyzer",
-                    "arnNamespace": "access-analyzer",
-                    "cloudFormationName": "AccessAnalyzer",
-                    "cloudTrailEventSource": "access-analyzer.amazonaws.com",
-                    "endpointPrefix": "access-analyzer"
-                },
-                "aws.auth#sigv4": {
-                    "name": "access-analyzer"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#cors": {},
-                "smithy.api#documentation": "<p>Identity and Access Management Access Analyzer helps identify potential resource-access risks by enabling you to\n         identify any policies that grant access to an external principal. It does this by using\n         logic-based reasoning to analyze resource-based policies in your Amazon Web Services environment. An\n         external principal can be another Amazon Web Services account, a root user, an IAM user or role, a\n         federated user, an Amazon Web Services service, or an anonymous user. You can also use IAM Access Analyzer to\n         preview and validate public and cross-account access to your resources before deploying\n         permissions changes. This guide describes the Identity and Access Management Access Analyzer operations that you can\n         call programmatically. For general information about IAM Access Analyzer, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/what-is-access-analyzer.html\">Identity and Access Management Access Analyzer</a> in the <b>IAM User Guide</b>.</p>\n         <p>To start using IAM Access Analyzer, you first need to create an analyzer.</p>",
-                "smithy.api#paginated": {
-                    "inputToken": "nextToken",
-                    "outputToken": "nextToken",
-                    "pageSize": "maxResults"
-                },
-                "smithy.api#title": "Access Analyzer"
-            }
+            ]
         },
         "com.amazonaws.accessanalyzer#AccessDeniedException": {
             "type": "structure",
@@ -3863,7 +3863,7 @@
                 "kmsKeyId": {
                     "target": "com.amazonaws.accessanalyzer#SecretsManagerSecretKmsId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The proposed ARN, key ID, or alias of the KMS customer master key (CMK).</p>"
+                        "smithy.api#documentation": "<p>The proposed ARN, key ID, or alias of the KMS key.</p>"
                     }
                 },
                 "secretPolicy": {
@@ -3874,7 +3874,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration for a Secrets Manager secret. For more information, see <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_CreateSecret.html\">CreateSecret</a>.</p>\n         <p>You can propose a configuration for a new secret or an existing secret that you own by\n         specifying the secret policy and optional KMS encryption key. If the configuration is for\n         an existing secret and you do not specify the secret policy, the access preview uses the\n         existing policy for the secret. If the access preview is for a new resource and you do not\n         specify the policy, the access preview assumes a secret without a policy. To propose\n         deletion of an existing policy, you can specify an empty string. If the proposed\n         configuration is for a new secret and you do not specify the KMS key ID, the access\n         preview uses the default CMK of the Amazon Web Services account. If you specify an empty string for the\n         KMS key ID, the access preview uses the default CMK of the Amazon Web Services account. For more\n         information about secret policy limits, see <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_limits.html\">Quotas for\n            Secrets Manager.</a>.</p>"
+                "smithy.api#documentation": "<p>The configuration for a Secrets Manager secret. For more information, see <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_CreateSecret.html\">CreateSecret</a>.</p>\n         <p>You can propose a configuration for a new secret or an existing secret that you own by\n         specifying the secret policy and optional KMS encryption key. If the configuration is for\n         an existing secret and you do not specify the secret policy, the access preview uses the\n         existing policy for the secret. If the access preview is for a new resource and you do not\n         specify the policy, the access preview assumes a secret without a policy. To propose\n         deletion of an existing policy, you can specify an empty string. If the proposed\n         configuration is for a new secret and you do not specify the KMS key ID, the access\n         preview uses the Amazon Web Services managed key <code>aws/secretsmanager</code>. If you specify an empty\n         string for the KMS key ID, the access preview uses the Amazon Web Services managed key of the Amazon Web Services\n         account. For more information about secret policy limits, see <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_limits.html\">Quotas for\n            Secrets Manager.</a>.</p>"
             }
         },
         "com.amazonaws.accessanalyzer#SecretsManagerSecretKmsId": {
@@ -4691,7 +4691,36 @@
                         "smithy.api#documentation": "<p>The type of policy to validate. Identity policies grant permissions to IAM principals.\n         Identity policies include managed and inline policies for IAM roles, users, and groups.\n         They also include service-control policies (SCPs) that are attached to an Amazon Web Services\n         organization, organizational unit (OU), or an account.</p>\n         <p>Resource policies grant permissions on Amazon Web Services resources. Resource policies include trust\n         policies for IAM roles and bucket policies for Amazon S3 buckets. You can provide a generic\n         input such as identity policy or resource policy or a specific input such as managed policy\n         or Amazon S3 bucket policy. </p>",
                         "smithy.api#required": {}
                     }
+                },
+                "validatePolicyResourceType": {
+                    "target": "com.amazonaws.accessanalyzer#ValidatePolicyResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of resource to attach to your resource policy. Specify a value for the policy\n         validation resource type only if the policy type is <code>RESOURCE_POLICY</code>. For\n         example, to validate a resource policy to attach to an Amazon S3 bucket, you can choose\n            <code>AWS::S3::Bucket</code> for the policy validation resource type.</p>\n         <p>For resource types not supported as valid values, IAM Access Analyzer runs policy checks that\n         apply to all resource policies. For example, to validate a resource policy to attach to a\n         KMS key, do not specify a value for the policy validation resource type and IAM Access Analyzer\n         will run policy checks that apply to all resource policies.</p>"
+                    }
                 }
+            }
+        },
+        "com.amazonaws.accessanalyzer#ValidatePolicyResourceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "AWS::S3::Bucket",
+                        "name": "S3_BUCKET"
+                    },
+                    {
+                        "value": "AWS::S3::AccessPoint",
+                        "name": "S3_ACCESS_POINT"
+                    },
+                    {
+                        "value": "AWS::S3::MultiRegionAccessPoint",
+                        "name": "S3_MULTI_REGION_ACCESS_POINT"
+                    },
+                    {
+                        "value": "AWS::S3ObjectLambda::AccessPoint",
+                        "name": "S3_OBJECT_LAMBDA_ACCESS_POINT"
+                    }
+                ]
             }
         },
         "com.amazonaws.accessanalyzer#ValidatePolicyResponse": {
