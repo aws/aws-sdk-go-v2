@@ -4,6 +4,7 @@ package lakeformation
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
@@ -40,8 +41,8 @@ type SearchDatabasesByLFTagsInput struct {
 
 	// The identifier for the Data Catalog. By default, the account ID. The Data
 	// Catalog is the persistent metadata store. It contains database definitions,
-	// table definitions, and other control information to manage your AWS Lake
-	// Formation environment.
+	// table definitions, and other control information to manage your Lake Formation
+	// environment.
 	CatalogId *string
 
 	// The maximum number of results to return.
@@ -55,7 +56,7 @@ type SearchDatabasesByLFTagsInput struct {
 
 type SearchDatabasesByLFTagsOutput struct {
 
-	// A list of databases that meet the tag conditions.
+	// A list of databases that meet the LF-tag conditions.
 	DatabaseList []types.TaggedDatabase
 
 	// A continuation token, present if the current list segment is not the last.
@@ -68,11 +69,11 @@ type SearchDatabasesByLFTagsOutput struct {
 }
 
 func (c *Client) addOperationSearchDatabasesByLFTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSearchDatabasesByLFTags{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchDatabasesByLFTags{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSearchDatabasesByLFTags{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchDatabasesByLFTags{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -128,6 +129,94 @@ func (c *Client) addOperationSearchDatabasesByLFTagsMiddlewares(stack *middlewar
 		return err
 	}
 	return nil
+}
+
+// SearchDatabasesByLFTagsAPIClient is a client that implements the
+// SearchDatabasesByLFTags operation.
+type SearchDatabasesByLFTagsAPIClient interface {
+	SearchDatabasesByLFTags(context.Context, *SearchDatabasesByLFTagsInput, ...func(*Options)) (*SearchDatabasesByLFTagsOutput, error)
+}
+
+var _ SearchDatabasesByLFTagsAPIClient = (*Client)(nil)
+
+// SearchDatabasesByLFTagsPaginatorOptions is the paginator options for
+// SearchDatabasesByLFTags
+type SearchDatabasesByLFTagsPaginatorOptions struct {
+	// The maximum number of results to return.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// SearchDatabasesByLFTagsPaginator is a paginator for SearchDatabasesByLFTags
+type SearchDatabasesByLFTagsPaginator struct {
+	options   SearchDatabasesByLFTagsPaginatorOptions
+	client    SearchDatabasesByLFTagsAPIClient
+	params    *SearchDatabasesByLFTagsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewSearchDatabasesByLFTagsPaginator returns a new
+// SearchDatabasesByLFTagsPaginator
+func NewSearchDatabasesByLFTagsPaginator(client SearchDatabasesByLFTagsAPIClient, params *SearchDatabasesByLFTagsInput, optFns ...func(*SearchDatabasesByLFTagsPaginatorOptions)) *SearchDatabasesByLFTagsPaginator {
+	if params == nil {
+		params = &SearchDatabasesByLFTagsInput{}
+	}
+
+	options := SearchDatabasesByLFTagsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &SearchDatabasesByLFTagsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *SearchDatabasesByLFTagsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next SearchDatabasesByLFTags page.
+func (p *SearchDatabasesByLFTagsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*SearchDatabasesByLFTagsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.SearchDatabasesByLFTags(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opSearchDatabasesByLFTags(region string) *awsmiddleware.RegisterServiceMetadata {

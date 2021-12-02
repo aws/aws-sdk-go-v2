@@ -4565,6 +4565,15 @@ func awsRestjson1_deserializeDocumentOutpost(v **types.Outpost, value interface{
 				sv.SiteId = ptr.String(jtv)
 			}
 
+		case "SupportedHardwareType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SupportedHardwareType to be of type string, got %T instead", value)
+				}
+				sv.SupportedHardwareType = types.SupportedHardwareType(jtv)
+			}
+
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err

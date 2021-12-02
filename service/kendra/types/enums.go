@@ -19,6 +19,42 @@ func (AdditionalResultAttributeValueType) Values() []AdditionalResultAttributeVa
 	}
 }
 
+type ConditionOperator string
+
+// Enum values for ConditionOperator
+const (
+	ConditionOperatorGreaterThan         ConditionOperator = "GreaterThan"
+	ConditionOperatorGreaterThanOrEquals ConditionOperator = "GreaterThanOrEquals"
+	ConditionOperatorLessThan            ConditionOperator = "LessThan"
+	ConditionOperatorLessThanOrEquals    ConditionOperator = "LessThanOrEquals"
+	ConditionOperatorEquals              ConditionOperator = "Equals"
+	ConditionOperatorNotEquals           ConditionOperator = "NotEquals"
+	ConditionOperatorContains            ConditionOperator = "Contains"
+	ConditionOperatorNotContains         ConditionOperator = "NotContains"
+	ConditionOperatorExists              ConditionOperator = "Exists"
+	ConditionOperatorNotExists           ConditionOperator = "NotExists"
+	ConditionOperatorBeginsWith          ConditionOperator = "BeginsWith"
+)
+
+// Values returns all known values for ConditionOperator. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConditionOperator) Values() []ConditionOperator {
+	return []ConditionOperator{
+		"GreaterThan",
+		"GreaterThanOrEquals",
+		"LessThan",
+		"LessThanOrEquals",
+		"Equals",
+		"NotEquals",
+		"Contains",
+		"NotContains",
+		"Exists",
+		"NotExists",
+		"BeginsWith",
+	}
+}
+
 type ConfluenceAttachmentFieldName string
 
 // Enum values for ConfluenceAttachmentFieldName
@@ -348,6 +384,40 @@ func (DocumentStatus) Values() []DocumentStatus {
 	}
 }
 
+type EndpointType string
+
+// Enum values for EndpointType
+const (
+	EndpointTypeHome EndpointType = "HOME"
+)
+
+// Values returns all known values for EndpointType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (EndpointType) Values() []EndpointType {
+	return []EndpointType{
+		"HOME",
+	}
+}
+
+type EntityType string
+
+// Enum values for EntityType
+const (
+	EntityTypeUser  EntityType = "USER"
+	EntityTypeGroup EntityType = "GROUP"
+)
+
+// Values returns all known values for EntityType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (EntityType) Values() []EntityType {
+	return []EntityType{
+		"USER",
+		"GROUP",
+	}
+}
+
 type ErrorCode string
 
 // Enum values for ErrorCode
@@ -363,6 +433,28 @@ func (ErrorCode) Values() []ErrorCode {
 	return []ErrorCode{
 		"InternalError",
 		"InvalidRequest",
+	}
+}
+
+type ExperienceStatus string
+
+// Enum values for ExperienceStatus
+const (
+	ExperienceStatusCreating ExperienceStatus = "CREATING"
+	ExperienceStatusActive   ExperienceStatus = "ACTIVE"
+	ExperienceStatusDeleting ExperienceStatus = "DELETING"
+	ExperienceStatusFailed   ExperienceStatus = "FAILED"
+)
+
+// Values returns all known values for ExperienceStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ExperienceStatus) Values() []ExperienceStatus {
+	return []ExperienceStatus{
+		"CREATING",
+		"ACTIVE",
+		"DELETING",
+		"FAILED",
 	}
 }
 
@@ -472,6 +564,32 @@ func (IndexStatus) Values() []IndexStatus {
 	}
 }
 
+type Interval string
+
+// Enum values for Interval
+const (
+	IntervalThisMonth    Interval = "THIS_MONTH"
+	IntervalThisWeek     Interval = "THIS_WEEK"
+	IntervalOneWeekAgo   Interval = "ONE_WEEK_AGO"
+	IntervalTwoWeeksAgo  Interval = "TWO_WEEKS_AGO"
+	IntervalOneMonthAgo  Interval = "ONE_MONTH_AGO"
+	IntervalTwoMonthsAgo Interval = "TWO_MONTHS_AGO"
+)
+
+// Values returns all known values for Interval. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Interval) Values() []Interval {
+	return []Interval{
+		"THIS_MONTH",
+		"THIS_WEEK",
+		"ONE_WEEK_AGO",
+		"TWO_WEEKS_AGO",
+		"ONE_MONTH_AGO",
+		"TWO_MONTHS_AGO",
+	}
+}
+
 type KeyLocation string
 
 // Enum values for KeyLocation
@@ -487,6 +605,32 @@ func (KeyLocation) Values() []KeyLocation {
 	return []KeyLocation{
 		"URL",
 		"SECRET_MANAGER",
+	}
+}
+
+type MetricType string
+
+// Enum values for MetricType
+const (
+	MetricTypeQueriesByCount          MetricType = "QUERIES_BY_COUNT"
+	MetricTypeQueriesByZeroClickRate  MetricType = "QUERIES_BY_ZERO_CLICK_RATE"
+	MetricTypeQueriesByZeroResultRate MetricType = "QUERIES_BY_ZERO_RESULT_RATE"
+	MetricTypeDocsByClickCount        MetricType = "DOCS_BY_CLICK_COUNT"
+	MetricTypeAggQueryDocMetrics      MetricType = "AGG_QUERY_DOC_METRICS"
+	MetricTypeTrendQueryDocMetrics    MetricType = "TREND_QUERY_DOC_METRICS"
+)
+
+// Values returns all known values for MetricType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (MetricType) Values() []MetricType {
+	return []MetricType{
+		"QUERIES_BY_COUNT",
+		"QUERIES_BY_ZERO_CLICK_RATE",
+		"QUERIES_BY_ZERO_RESULT_RATE",
+		"DOCS_BY_CLICK_COUNT",
+		"AGG_QUERY_DOC_METRICS",
+		"TREND_QUERY_DOC_METRICS",
 	}
 }
 
@@ -523,6 +667,24 @@ func (Order) Values() []Order {
 	return []Order{
 		"ASCENDING",
 		"DESCENDING",
+	}
+}
+
+type Persona string
+
+// Enum values for Persona
+const (
+	PersonaOwner  Persona = "OWNER"
+	PersonaViewer Persona = "VIEWER"
+)
+
+// Values returns all known values for Persona. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Persona) Values() []Persona {
+	return []Persona{
+		"OWNER",
+		"VIEWER",
 	}
 }
 

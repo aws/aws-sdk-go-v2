@@ -14,10 +14,10 @@ import (
 
 // Retrieves OwnershipControls for an Amazon S3 bucket. To use this operation, you
 // must have the s3:GetBucketOwnershipControls permission. For more information
-// about Amazon S3 permissions, see Specifying Permissions in a Policy
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html).
+// about Amazon S3 permissions, see Specifying permissions in a policy
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html).
 // For information about Amazon S3 Object Ownership, see Using Object Ownership
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/about-object-ownership.html).
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html).
 // The following operations are related to GetBucketOwnershipControls:
 //
 // *
@@ -55,8 +55,8 @@ type GetBucketOwnershipControlsInput struct {
 
 type GetBucketOwnershipControlsOutput struct {
 
-	// The OwnershipControls (BucketOwnerPreferred or ObjectWriter) currently in effect
-	// for this Amazon S3 bucket.
+	// The OwnershipControls (BucketOwnerEnforced, BucketOwnerPreferred, or
+	// ObjectWriter) currently in effect for this Amazon S3 bucket.
 	OwnershipControls *types.OwnershipControls
 
 	// Metadata pertaining to the operation's result.

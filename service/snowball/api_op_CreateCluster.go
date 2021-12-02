@@ -47,7 +47,7 @@ type CreateClusterInput struct {
 	JobType types.JobType
 
 	// The resources associated with the cluster job. These resources include Amazon S3
-	// buckets and optional AWS Lambda functions written in the Python language.
+	// buckets and optional Lambda functions written in the Python language.
 	//
 	// This member is required.
 	Resources *types.JobResource
@@ -55,7 +55,7 @@ type CreateClusterInput struct {
 	// The RoleARN that you want to associate with this cluster. RoleArn values are
 	// created by using the CreateRole
 	// (https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html) API
-	// action in AWS Identity and Access Management (IAM).
+	// action in Identity and Access Management (IAM).
 	//
 	// This member is required.
 	RoleARN *string
@@ -97,9 +97,9 @@ type CreateClusterInput struct {
 	// This member is required.
 	ShippingOption types.ShippingOption
 
-	// The type of AWS Snow Family device to use for this cluster. For cluster jobs,
-	// AWS Snow Family currently supports only the EDGE device type. For more
-	// information, see
+	// The type of Snow Family Devices to use for this cluster. For cluster jobs,
+	// Amazon Web Services Snow Family currently supports only the EDGE device type.
+	// For more information, see
 	// "https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html"
 	// (Snow Family Devices and Capacity) in the Snowcone User Guide or
 	// "https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html"
@@ -119,7 +119,7 @@ type CreateClusterInput struct {
 	// The KmsKeyARN value that you want to associate with this cluster. KmsKeyARN
 	// values are created by using the CreateKey
 	// (https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html) API
-	// action in AWS Key Management Service (AWS KMS).
+	// action in Key Management Service (KMS).
 	KmsKeyARN *string
 
 	// The Amazon Simple Notification Service (Amazon SNS) notification settings for
@@ -127,8 +127,8 @@ type CreateClusterInput struct {
 	Notification *types.Notification
 
 	// Specifies the service or services on the Snow Family device that your
-	// transferred data will be exported from or imported into. AWS Snow Family
-	// supports Amazon S3 and NFS (Network File System).
+	// transferred data will be exported from or imported into. Amazon Web Services
+	// Snow Family device clusters support Amazon S3 and NFS (Network File System).
 	OnDeviceServiceConfiguration *types.OnDeviceServiceConfiguration
 
 	// Allows you to securely operate and manage Snow devices in a cluster remotely
@@ -137,7 +137,7 @@ type CreateClusterInput struct {
 	// location. Otherwise, you need to use the Snowball Client to manage the device.
 	RemoteManagement types.RemoteManagement
 
-	// The tax documents required in your AWS Region.
+	// The tax documents required in your Amazon Web Services Region.
 	TaxDocuments *types.TaxDocuments
 
 	noSmithyDocumentSerde

@@ -39,8 +39,16 @@ type UpdateDataSourceInput struct {
 	// This member is required.
 	IndexId *string
 
-	// Configuration information for a Amazon Kendra data source.
+	// Configuration information for an Amazon Kendra data source.
 	Configuration *types.DataSourceConfiguration
+
+	// Configuration information for altering document metadata and content during the
+	// document ingestion process when you update a data source. For more information
+	// on how to create, modify and delete document metadata, or make other content
+	// alterations when you ingest documents into Amazon Kendra, see Customizing
+	// document metadata during the ingestion process
+	// (https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html).
+	CustomDocumentEnrichmentConfiguration *types.CustomDocumentEnrichmentConfiguration
 
 	// The new description for the data source.
 	Description *string

@@ -15,10 +15,12 @@ import (
 // Returns the number of open proactive insights, open reactive insights, and the
 // Mean Time to Recover (MTTR) for all closed insights in resource collections in
 // your account. You specify the type of Amazon Web Services resources collection.
-// The one type of Amazon Web Services resource collection supported is Amazon Web
-// Services CloudFormation stacks. DevOps Guru can be configured to analyze only
-// the Amazon Web Services resources that are defined in the stacks. You can
-// specify up to 500 Amazon Web Services CloudFormation stacks.
+// The two types of Amazon Web Services resource collections supported are Amazon
+// Web Services CloudFormation stacks and Amazon Web Services resources that
+// contain the same Amazon Web Services tag. DevOps Guru can be configured to
+// analyze the Amazon Web Services resources that are defined in the stacks or that
+// are tagged using the same tag key. You can specify up to 500 Amazon Web Services
+// CloudFormation stacks.
 func (c *Client) DescribeResourceCollectionHealth(ctx context.Context, params *DescribeResourceCollectionHealthInput, optFns ...func(*Options)) (*DescribeResourceCollectionHealthOutput, error) {
 	if params == nil {
 		params = &DescribeResourceCollectionHealthInput{}
@@ -37,11 +39,12 @@ func (c *Client) DescribeResourceCollectionHealth(ctx context.Context, params *D
 type DescribeResourceCollectionHealthInput struct {
 
 	// An Amazon Web Services resource collection type. This type specifies how
-	// analyzed Amazon Web Services resources are defined. The one type of Amazon Web
-	// Services resource collection supported is Amazon Web Services CloudFormation
-	// stacks. DevOps Guru can be configured to analyze only the Amazon Web Services
-	// resources that are defined in the stacks. You can specify up to 500 Amazon Web
-	// Services CloudFormation stacks.
+	// analyzed Amazon Web Services resources are defined. The two types of Amazon Web
+	// Services resource collections supported are Amazon Web Services CloudFormation
+	// stacks and Amazon Web Services resources that contain the same Amazon Web
+	// Services tag. DevOps Guru can be configured to analyze the Amazon Web Services
+	// resources that are defined in the stacks or that are tagged using the same tag
+	// key. You can specify up to 500 Amazon Web Services CloudFormation stacks.
 	//
 	// This member is required.
 	ResourceCollectionType types.ResourceCollectionType
@@ -57,8 +60,6 @@ type DescribeResourceCollectionHealthOutput struct {
 
 	// The returned CloudFormationHealthOverview object that contains an
 	// InsightHealthOverview object with the requested system health information.
-	//
-	// This member is required.
 	CloudFormation []types.CloudFormationHealth
 
 	// The pagination token to use to retrieve the next page of results for this
@@ -68,6 +69,35 @@ type DescribeResourceCollectionHealthOutput struct {
 	// An array of ServiceHealth objects that describes the health of the Amazon Web
 	// Services services associated with the resources in the collection.
 	Service []types.ServiceHealth
+
+	// The Amazon Web Services tags that are used by resources in the resource
+	// collection. Tags help you identify and organize your Amazon Web Services
+	// resources. Many Amazon Web Services services support tagging, so you can assign
+	// the same tag to resources from different services to indicate that the resources
+	// are related. For example, you can assign the same tag to an Amazon DynamoDB
+	// table resource that you assign to an Lambda function. For more information about
+	// using tags, see the Tagging best practices
+	// (https://d1.awsstatic.com/whitepapers/aws-tagging-best-practices.pdf)
+	// whitepaper. Each Amazon Web Services tag has two parts.
+	//
+	// * A tag key (for
+	// example, CostCenter, Environment, Project, or Secret). Tag keys are
+	// case-sensitive.
+	//
+	// * An optional field known as a tag value (for example,
+	// 111122223333, Production, or a team name). Omitting the tag value is the same as
+	// using an empty string. Like tag keys, tag values are case-sensitive.
+	//
+	// Together
+	// these are known as key-value pairs. The string used for a key in a tag that you
+	// use to define your resource coverage must begin with the prefix Devops-guru-.
+	// The tag key might be Devops-guru-deployment-application or
+	// Devops-guru-rds-application. While keys are case-sensitive, the case of key
+	// characters don't matter to DevOps Guru. For example, DevOps Guru works with a
+	// key named devops-guru-rds and a key named DevOps-Guru-RDS. Possible key/value
+	// pairs in your application might be Devops-Guru-production-application/RDS or
+	// Devops-Guru-production-application/containers.
+	Tags []types.TagHealth
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

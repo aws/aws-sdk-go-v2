@@ -2203,7 +2203,11 @@ type LoggingEnabled struct {
 	// This member is required.
 	TargetPrefix *string
 
-	// Container for granting information.
+	// Container for granting information. Buckets that use the bucket owner enforced
+	// setting for Object Ownership don't support target grants. For more information,
+	// see Permissions for server access log delivery
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/enable-server-access-logging.html#grant-log-delivery-permissions-general)
+	// in the Amazon S3 User Guide.
 	TargetGrants []TargetGrant
 
 	noSmithyDocumentSerde
@@ -2378,12 +2382,12 @@ type NoncurrentVersionExpiration struct {
 }
 
 // Container for the transition rule that describes when noncurrent objects
-// transition to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, or
-// DEEP_ARCHIVE storage class. If your bucket is versioning-enabled (or versioning
-// is suspended), you can set this action to request that Amazon S3 transition
-// noncurrent object versions to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING,
-// GLACIER, or DEEP_ARCHIVE storage class at a specific period in the object's
-// lifetime.
+// transition to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER_IR,
+// GLACIER, or DEEP_ARCHIVE storage class. If your bucket is versioning-enabled (or
+// versioning is suspended), you can set this action to request that Amazon S3
+// transition noncurrent object versions to the STANDARD_IA, ONEZONE_IA,
+// INTELLIGENT_TIERING, GLACIER_IR, GLACIER, or DEEP_ARCHIVE storage class at a
+// specific period in the object's lifetime.
 type NoncurrentVersionTransition struct {
 
 	// Specifies how many noncurrent versions Amazon S3 will retain. If there are this
@@ -2633,6 +2637,12 @@ type OwnershipControlsRule struct {
 	// bucket owner if the objects are uploaded with the bucket-owner-full-control
 	// canned ACL. ObjectWriter - The uploading account will own the object if the
 	// object is uploaded with the bucket-owner-full-control canned ACL.
+	// BucketOwnerEnforced - Access control lists (ACLs) are disabled and no longer
+	// affect permissions. The bucket owner automatically owns and has full control
+	// over every object in the bucket. The bucket only accepts PUT requests that don't
+	// specify an ACL or bucket owner full control ACLs, such as the
+	// bucket-owner-full-control canned ACL or an equivalent form of this ACL expressed
+	// in the XML format.
 	//
 	// This member is required.
 	ObjectOwnership ObjectOwnership
@@ -3474,7 +3484,11 @@ type Tagging struct {
 	noSmithyDocumentSerde
 }
 
-// Container for granting information.
+// Container for granting information. Buckets that use the bucket owner enforced
+// setting for Object Ownership don't support target grants. For more information,
+// see Permissions server access log delivery
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/enable-server-access-logging.html#grant-log-delivery-permissions-general)
+// in the Amazon S3 User Guide.
 type TargetGrant struct {
 
 	// Container for the person being granted permissions.

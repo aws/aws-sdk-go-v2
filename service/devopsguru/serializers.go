@@ -1970,10 +1970,28 @@ func awsRestjson1_serializeDocumentCostEstimationResourceCollectionFilter(v *typ
 		}
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsRestjson1_serializeDocumentTagCostEstimationResourceCollectionFilters(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
 func awsRestjson1_serializeDocumentCostEstimationStackNames(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCostEstimationTagValues(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
@@ -2246,6 +2264,13 @@ func awsRestjson1_serializeDocumentResourceCollection(v *types.ResourceCollectio
 		}
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsRestjson1_serializeDocumentTagCollections(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -2395,6 +2420,81 @@ func awsRestjson1_serializeDocumentStartTimeRange(v *types.StartTimeRange, value
 	return nil
 }
 
+func awsRestjson1_serializeDocumentTagCollection(v *types.TagCollection, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AppBoundaryKey != nil {
+		ok := object.Key("AppBoundaryKey")
+		ok.String(*v.AppBoundaryKey)
+	}
+
+	if v.TagValues != nil {
+		ok := object.Key("TagValues")
+		if err := awsRestjson1_serializeDocumentTagValues(v.TagValues, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTagCollections(v []types.TagCollection, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentTagCollection(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTagCostEstimationResourceCollectionFilter(v *types.TagCostEstimationResourceCollectionFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AppBoundaryKey != nil {
+		ok := object.Key("AppBoundaryKey")
+		ok.String(*v.AppBoundaryKey)
+	}
+
+	if v.TagValues != nil {
+		ok := object.Key("TagValues")
+		if err := awsRestjson1_serializeDocumentCostEstimationTagValues(v.TagValues, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTagCostEstimationResourceCollectionFilters(v []types.TagCostEstimationResourceCollectionFilter, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentTagCostEstimationResourceCollectionFilter(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTagValues(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentUpdateCloudFormationCollectionFilter(v *types.UpdateCloudFormationCollectionFilter, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2420,6 +2520,13 @@ func awsRestjson1_serializeDocumentUpdateResourceCollectionFilter(v *types.Updat
 		}
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsRestjson1_serializeDocumentUpdateTagCollectionFilters(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -2438,6 +2545,49 @@ func awsRestjson1_serializeDocumentUpdateServiceIntegrationConfig(v *types.Updat
 }
 
 func awsRestjson1_serializeDocumentUpdateStackNames(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentUpdateTagCollectionFilter(v *types.UpdateTagCollectionFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AppBoundaryKey != nil {
+		ok := object.Key("AppBoundaryKey")
+		ok.String(*v.AppBoundaryKey)
+	}
+
+	if v.TagValues != nil {
+		ok := object.Key("TagValues")
+		if err := awsRestjson1_serializeDocumentUpdateTagValues(v.TagValues, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentUpdateTagCollectionFilters(v []types.UpdateTagCollectionFilter, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentUpdateTagCollectionFilter(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentUpdateTagValues(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 

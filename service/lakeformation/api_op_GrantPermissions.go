@@ -32,11 +32,11 @@ func (c *Client) GrantPermissions(ctx context.Context, params *GrantPermissionsI
 
 type GrantPermissionsInput struct {
 
-	// The permissions granted to the principal on the resource. AWS Lake Formation
-	// defines privileges to grant and revoke access to metadata in the Data Catalog
-	// and data organized in underlying data storage such as Amazon S3. AWS Lake
-	// Formation requires that each principal be authorized to perform a specific task
-	// on AWS Lake Formation resources.
+	// The permissions granted to the principal on the resource. Lake Formation defines
+	// privileges to grant and revoke access to metadata in the Data Catalog and data
+	// organized in underlying data storage such as Amazon S3. Lake Formation requires
+	// that each principal be authorized to perform a specific task on Lake Formation
+	// resources.
 	//
 	// This member is required.
 	Permissions []types.Permission
@@ -50,16 +50,16 @@ type GrantPermissionsInput struct {
 	// This member is required.
 	Principal *types.DataLakePrincipal
 
-	// The resource to which permissions are to be granted. Resources in AWS Lake
-	// Formation are the Data Catalog, databases, and tables.
+	// The resource to which permissions are to be granted. Resources in Lake Formation
+	// are the Data Catalog, databases, and tables.
 	//
 	// This member is required.
 	Resource *types.Resource
 
 	// The identifier for the Data Catalog. By default, the account ID. The Data
 	// Catalog is the persistent metadata store. It contains database definitions,
-	// table definitions, and other control information to manage your AWS Lake
-	// Formation environment.
+	// table definitions, and other control information to manage your Lake Formation
+	// environment.
 	CatalogId *string
 
 	// Indicates a list of the granted permissions that the principal may pass to other
@@ -78,11 +78,11 @@ type GrantPermissionsOutput struct {
 }
 
 func (c *Client) addOperationGrantPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGrantPermissions{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGrantPermissions{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGrantPermissions{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGrantPermissions{}, middleware.After)
 	if err != nil {
 		return err
 	}

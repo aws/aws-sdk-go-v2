@@ -49,6 +49,9 @@ type UpdateTableInput struct {
 	// the archived version.
 	SkipArchive *bool
 
+	// The transaction ID at which to update the table contents.
+	TransactionId *string
+
 	noSmithyDocumentSerde
 }
 

@@ -16,23 +16,27 @@ import (
 // Amazon Web Services Region (cross-Region copy) or within the same Amazon Web
 // Services Region (in-Region copy). You can have up to five backup copy requests
 // in progress to a single destination Region per account. You can use cross-Region
-// backup copies for cross-region disaster recovery. You periodically take backups
-// and copy them to another Region so that in the event of a disaster in the
-// primary Region, you can restore from backup and recover availability quickly in
-// the other Region. You can make cross-Region copies only within your Amazon Web
-// Services partition. You can also use backup copies to clone your file data set
-// to another Region or within the same Region. You can use the SourceRegion
-// parameter to specify the Amazon Web Services Region from which the backup will
-// be copied. For example, if you make the call from the us-west-1 Region and want
-// to copy a backup from the us-east-2 Region, you specify us-east-2 in the
-// SourceRegion parameter to make a cross-Region copy. If you don't specify a
-// Region, the backup copy is created in the same Region where the request is sent
-// from (in-Region copy). For more information on creating backup copies, see
-// Copying backups
+// backup copies for cross-Region disaster recovery. You can periodically take
+// backups and copy them to another Region so that in the event of a disaster in
+// the primary Region, you can restore from backup and recover availability quickly
+// in the other Region. You can make cross-Region copies only within your Amazon
+// Web Services partition. A partition is a grouping of Regions. Amazon Web
+// Services currently has three partitions: aws (Standard Regions), aws-cn (China
+// Regions), and aws-us-gov (Amazon Web Services GovCloud [US] Regions). You can
+// also use backup copies to clone your file dataset to another Region or within
+// the same Region. You can use the SourceRegion parameter to specify the Amazon
+// Web Services Region from which the backup will be copied. For example, if you
+// make the call from the us-west-1 Region and want to copy a backup from the
+// us-east-2 Region, you specify us-east-2 in the SourceRegion parameter to make a
+// cross-Region copy. If you don't specify a Region, the backup copy is created in
+// the same Region where the request is sent from (in-Region copy). For more
+// information about creating backup copies, see  Copying backups
 // (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/using-backups.html#copy-backups)
-// in the Amazon FSx for Windows User Guide and Copying backups
+// in the Amazon FSx for Windows User Guide, Copying backups
 // (https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-backups-fsx.html#copy-backups)
-// in the Amazon FSx for Lustre User Guide.
+// in the Amazon FSx for Lustre User Guide, and Copying backups
+// (https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/using-backups.html#copy-backups)
+// in the Amazon FSx for OpenZFS User Guide.
 func (c *Client) CopyBackup(ctx context.Context, params *CopyBackupInput, optFns ...func(*Options)) (*CopyBackupOutput, error) {
 	if params == nil {
 		params = &CopyBackupInput{}
@@ -50,8 +54,7 @@ func (c *Client) CopyBackup(ctx context.Context, params *CopyBackupInput, optFns
 
 type CopyBackupInput struct {
 
-	// The ID of the source backup. Specifies the ID of the backup that is being
-	// copied.
+	// The ID of the source backup. Specifies the ID of the backup that's being copied.
 	//
 	// This member is required.
 	SourceBackupId *string
@@ -61,7 +64,7 @@ type CopyBackupInput struct {
 	// the Command Line Interface (CLI) or an Amazon Web Services SDK.
 	ClientRequestToken *string
 
-	// A boolean flag indicating whether tags from the source backup should be copied
+	// A Boolean flag indicating whether tags from the source backup should be copied
 	// to the backup copy. This value defaults to false. If you set CopyTags to true
 	// and the source backup has existing tags, you can use the Tags parameter to
 	// create new tags, provided that the sum of the source backup tags and the new
@@ -72,19 +75,19 @@ type CopyBackupInput struct {
 
 	// The ID of the Key Management Service (KMS) key used to encrypt the file system's
 	// data for Amazon FSx for Windows File Server file systems, Amazon FSx for NetApp
-	// ONTAP file systems, and Amazon FSx for Lustre PERSISTENT_1 file systems at rest.
-	// If not specified, the Amazon FSx managed key is used. The Amazon FSx for Lustre
-	// SCRATCH_1 and SCRATCH_2 file systems are always encrypted at rest using Amazon
-	// FSx managed keys. For more information, see Encrypt
-	// (https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html) in the
-	// Key Management Service API Reference.
+	// ONTAP file systems, and Amazon FSx for Lustre PERSISTENT_1 and PERSISTENT_2 file
+	// systems at rest. If this ID isn't specified, the key managed by Amazon FSx is
+	// used. The Amazon FSx for Lustre SCRATCH_1 and SCRATCH_2 file systems are always
+	// encrypted at rest using Amazon FSx-managed keys. For more information, see
+	// Encrypt (https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html)
+	// in the Key Management Service API Reference.
 	KmsKeyId *string
 
 	// The source Amazon Web Services Region of the backup. Specifies the Amazon Web
 	// Services Region from which the backup is being copied. The source and
 	// destination Regions must be in the same Amazon Web Services partition. If you
-	// don't specify a Region, it defaults to the Region where the request is sent from
-	// (in-Region copy).
+	// don't specify a Region, SourceRegion defaults to the Region where the request is
+	// sent from (in-Region copy).
 	SourceRegion *string
 
 	// A list of Tag values, with a maximum of 50 elements.
@@ -95,8 +98,9 @@ type CopyBackupInput struct {
 
 type CopyBackupOutput struct {
 
-	// A backup of an Amazon FSx for Windows File Server or Amazon FSx for Lustre file
-	// system, or of an Amazon FSx for NetApp ONTAP volume.
+	// A backup of an Amazon FSx for Windows File Server, Amazon FSx for Lustre file
+	// system, Amazon FSx for NetApp ONTAP volume, or Amazon FSx for OpenZFS file
+	// system.
 	Backup *types.Backup
 
 	// Metadata pertaining to the operation's result.

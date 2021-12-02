@@ -24,15 +24,22 @@ import (
 // can continue to use that approach. For more information, see Access Control List
 // (ACL) Overview
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html) in the
-// Amazon S3 User Guide. Access Permissions You can set access permissions using
-// one of the following methods:
+// Amazon S3 User Guide. If your bucket uses the bucket owner enforced setting for
+// S3 Object Ownership, ACLs are disabled and no longer affect permissions. You
+// must use policies to grant access to your bucket and the objects in it. Requests
+// to set ACLs or update ACLs fail and return the AccessControlListNotSupported
+// error code. Requests to read ACLs are still supported. For more information, see
+// Controlling object ownership
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html)
+// in the Amazon S3 User Guide. Access Permissions You can set access permissions
+// using one of the following methods:
 //
-// * Specify a canned ACL with the x-amz-acl request
-// header. Amazon S3 supports a set of predefined ACLs, known as canned ACLs. Each
-// canned ACL has a predefined set of grantees and permissions. Specify the canned
-// ACL name as the value of x-amz-acl. If you use this header, you cannot use other
-// access control-specific headers in your request. For more information, see
-// Canned ACL
+// * Specify a canned ACL with the x-amz-acl
+// request header. Amazon S3 supports a set of predefined ACLs, known as canned
+// ACLs. Each canned ACL has a predefined set of grantees and permissions. Specify
+// the canned ACL name as the value of x-amz-acl. If you use this header, you
+// cannot use other access control-specific headers in your request. For more
+// information, see Canned ACL
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL).
 //
 // *

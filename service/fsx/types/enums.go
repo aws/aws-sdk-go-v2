@@ -32,6 +32,9 @@ const (
 	AdministrativeActionTypeStorageOptimization           AdministrativeActionType = "STORAGE_OPTIMIZATION"
 	AdministrativeActionTypeFileSystemAliasAssociation    AdministrativeActionType = "FILE_SYSTEM_ALIAS_ASSOCIATION"
 	AdministrativeActionTypeFileSystemAliasDisassociation AdministrativeActionType = "FILE_SYSTEM_ALIAS_DISASSOCIATION"
+	AdministrativeActionTypeVolumeUpdate                  AdministrativeActionType = "VOLUME_UPDATE"
+	AdministrativeActionTypeSnapshotUpdate                AdministrativeActionType = "SNAPSHOT_UPDATE"
+	AdministrativeActionTypeReleaseNfsV3Locks             AdministrativeActionType = "RELEASE_NFS_V3_LOCKS"
 )
 
 // Values returns all known values for AdministrativeActionType. Note that this can
@@ -43,6 +46,9 @@ func (AdministrativeActionType) Values() []AdministrativeActionType {
 		"STORAGE_OPTIMIZATION",
 		"FILE_SYSTEM_ALIAS_ASSOCIATION",
 		"FILE_SYSTEM_ALIAS_DISASSOCIATION",
+		"VOLUME_UPDATE",
+		"SNAPSHOT_UPDATE",
+		"RELEASE_NFS_V3_LOCKS",
 	}
 }
 
@@ -74,9 +80,10 @@ type AutoImportPolicyType string
 
 // Enum values for AutoImportPolicyType
 const (
-	AutoImportPolicyTypeNone       AutoImportPolicyType = "NONE"
-	AutoImportPolicyTypeNew        AutoImportPolicyType = "NEW"
-	AutoImportPolicyTypeNewChanged AutoImportPolicyType = "NEW_CHANGED"
+	AutoImportPolicyTypeNone              AutoImportPolicyType = "NONE"
+	AutoImportPolicyTypeNew               AutoImportPolicyType = "NEW"
+	AutoImportPolicyTypeNewChanged        AutoImportPolicyType = "NEW_CHANGED"
+	AutoImportPolicyTypeNewChangedDeleted AutoImportPolicyType = "NEW_CHANGED_DELETED"
 )
 
 // Values returns all known values for AutoImportPolicyType. Note that this can be
@@ -87,6 +94,7 @@ func (AutoImportPolicyType) Values() []AutoImportPolicyType {
 		"NONE",
 		"NEW",
 		"NEW_CHANGED",
+		"NEW_CHANGED_DELETED",
 	}
 }
 
@@ -165,6 +173,7 @@ const (
 	DataRepositoryLifecycleMisconfigured DataRepositoryLifecycle = "MISCONFIGURED"
 	DataRepositoryLifecycleUpdating      DataRepositoryLifecycle = "UPDATING"
 	DataRepositoryLifecycleDeleting      DataRepositoryLifecycle = "DELETING"
+	DataRepositoryLifecycleFailed        DataRepositoryLifecycle = "FAILED"
 )
 
 // Values returns all known values for DataRepositoryLifecycle. Note that this can
@@ -177,6 +186,7 @@ func (DataRepositoryLifecycle) Values() []DataRepositoryLifecycle {
 		"MISCONFIGURED",
 		"UPDATING",
 		"DELETING",
+		"FAILED",
 	}
 }
 
@@ -184,8 +194,9 @@ type DataRepositoryTaskFilterName string
 
 // Enum values for DataRepositoryTaskFilterName
 const (
-	DataRepositoryTaskFilterNameFileSystemId  DataRepositoryTaskFilterName = "file-system-id"
-	DataRepositoryTaskFilterNameTaskLifecycle DataRepositoryTaskFilterName = "task-lifecycle"
+	DataRepositoryTaskFilterNameFileSystemId          DataRepositoryTaskFilterName = "file-system-id"
+	DataRepositoryTaskFilterNameTaskLifecycle         DataRepositoryTaskFilterName = "task-lifecycle"
+	DataRepositoryTaskFilterNameDataRepoAssociationId DataRepositoryTaskFilterName = "data-repository-association-id"
 )
 
 // Values returns all known values for DataRepositoryTaskFilterName. Note that this
@@ -195,6 +206,7 @@ func (DataRepositoryTaskFilterName) Values() []DataRepositoryTaskFilterName {
 	return []DataRepositoryTaskFilterName{
 		"file-system-id",
 		"task-lifecycle",
+		"data-repository-association-id",
 	}
 }
 
@@ -229,6 +241,7 @@ type DataRepositoryTaskType string
 // Enum values for DataRepositoryTaskType
 const (
 	DataRepositoryTaskTypeExport DataRepositoryTaskType = "EXPORT_TO_REPOSITORY"
+	DataRepositoryTaskTypeImport DataRepositoryTaskType = "IMPORT_METADATA_FROM_REPOSITORY"
 )
 
 // Values returns all known values for DataRepositoryTaskType. Note that this can
@@ -237,6 +250,23 @@ const (
 func (DataRepositoryTaskType) Values() []DataRepositoryTaskType {
 	return []DataRepositoryTaskType{
 		"EXPORT_TO_REPOSITORY",
+		"IMPORT_METADATA_FROM_REPOSITORY",
+	}
+}
+
+type DeleteOpenZFSVolumeOption string
+
+// Enum values for DeleteOpenZFSVolumeOption
+const (
+	DeleteOpenZFSVolumeOptionDeleteChildVolumesAndSnapshots DeleteOpenZFSVolumeOption = "DELETE_CHILD_VOLUMES_AND_SNAPSHOTS"
+)
+
+// Values returns all known values for DeleteOpenZFSVolumeOption. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DeleteOpenZFSVolumeOption) Values() []DeleteOpenZFSVolumeOption {
+	return []DeleteOpenZFSVolumeOption{
+		"DELETE_CHILD_VOLUMES_AND_SNAPSHOTS",
 	}
 }
 
@@ -273,6 +303,26 @@ func (DriveCacheType) Values() []DriveCacheType {
 	return []DriveCacheType{
 		"NONE",
 		"READ",
+	}
+}
+
+type EventType string
+
+// Enum values for EventType
+const (
+	EventTypeNew     EventType = "NEW"
+	EventTypeChanged EventType = "CHANGED"
+	EventTypeDeleted EventType = "DELETED"
+)
+
+// Values returns all known values for EventType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (EventType) Values() []EventType {
+	return []EventType{
+		"NEW",
+		"CHANGED",
+		"DELETED",
 	}
 }
 
@@ -328,6 +378,7 @@ const (
 	FileSystemTypeWindows FileSystemType = "WINDOWS"
 	FileSystemTypeLustre  FileSystemType = "LUSTRE"
 	FileSystemTypeOntap   FileSystemType = "ONTAP"
+	FileSystemTypeOpenzfs FileSystemType = "OPENZFS"
 )
 
 // Values returns all known values for FileSystemType. Note that this can be
@@ -338,6 +389,7 @@ func (FileSystemType) Values() []FileSystemType {
 		"WINDOWS",
 		"LUSTRE",
 		"ONTAP",
+		"OPENZFS",
 	}
 }
 
@@ -345,10 +397,11 @@ type FilterName string
 
 // Enum values for FilterName
 const (
-	FilterNameFileSystemId   FilterName = "file-system-id"
-	FilterNameBackupType     FilterName = "backup-type"
-	FilterNameFileSystemType FilterName = "file-system-type"
-	FilterNameVolumeId       FilterName = "volume-id"
+	FilterNameFileSystemId       FilterName = "file-system-id"
+	FilterNameBackupType         FilterName = "backup-type"
+	FilterNameFileSystemType     FilterName = "file-system-type"
+	FilterNameVolumeId           FilterName = "volume-id"
+	FilterNameDataRepositoryType FilterName = "data-repository-type"
 )
 
 // Values returns all known values for FilterName. Note that this can be expanded
@@ -360,6 +413,7 @@ func (FilterName) Values() []FilterName {
 		"backup-type",
 		"file-system-type",
 		"volume-id",
+		"data-repository-type",
 	}
 }
 
@@ -383,6 +437,28 @@ func (FlexCacheEndpointType) Values() []FlexCacheEndpointType {
 	}
 }
 
+type LustreAccessAuditLogLevel string
+
+// Enum values for LustreAccessAuditLogLevel
+const (
+	LustreAccessAuditLogLevelDisabled  LustreAccessAuditLogLevel = "DISABLED"
+	LustreAccessAuditLogLevelWarnOnly  LustreAccessAuditLogLevel = "WARN_ONLY"
+	LustreAccessAuditLogLevelErrorOnly LustreAccessAuditLogLevel = "ERROR_ONLY"
+	LustreAccessAuditLogLevelWarnError LustreAccessAuditLogLevel = "WARN_ERROR"
+)
+
+// Values returns all known values for LustreAccessAuditLogLevel. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LustreAccessAuditLogLevel) Values() []LustreAccessAuditLogLevel {
+	return []LustreAccessAuditLogLevel{
+		"DISABLED",
+		"WARN_ONLY",
+		"ERROR_ONLY",
+		"WARN_ERROR",
+	}
+}
+
 type LustreDeploymentType string
 
 // Enum values for LustreDeploymentType
@@ -390,6 +466,7 @@ const (
 	LustreDeploymentTypeScratch1    LustreDeploymentType = "SCRATCH_1"
 	LustreDeploymentTypeScratch2    LustreDeploymentType = "SCRATCH_2"
 	LustreDeploymentTypePersistent1 LustreDeploymentType = "PERSISTENT_1"
+	LustreDeploymentTypePersistent2 LustreDeploymentType = "PERSISTENT_2"
 )
 
 // Values returns all known values for LustreDeploymentType. Note that this can be
@@ -400,6 +477,7 @@ func (LustreDeploymentType) Values() []LustreDeploymentType {
 		"SCRATCH_1",
 		"SCRATCH_2",
 		"PERSISTENT_1",
+		"PERSISTENT_2",
 	}
 }
 
@@ -436,6 +514,76 @@ func (OntapVolumeType) Values() []OntapVolumeType {
 		"RW",
 		"DP",
 		"LS",
+	}
+}
+
+type OpenZFSCopyStrategy string
+
+// Enum values for OpenZFSCopyStrategy
+const (
+	OpenZFSCopyStrategyClone    OpenZFSCopyStrategy = "CLONE"
+	OpenZFSCopyStrategyFullCopy OpenZFSCopyStrategy = "FULL_COPY"
+)
+
+// Values returns all known values for OpenZFSCopyStrategy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OpenZFSCopyStrategy) Values() []OpenZFSCopyStrategy {
+	return []OpenZFSCopyStrategy{
+		"CLONE",
+		"FULL_COPY",
+	}
+}
+
+type OpenZFSDataCompressionType string
+
+// Enum values for OpenZFSDataCompressionType
+const (
+	OpenZFSDataCompressionTypeNone OpenZFSDataCompressionType = "NONE"
+	OpenZFSDataCompressionTypeZstd OpenZFSDataCompressionType = "ZSTD"
+)
+
+// Values returns all known values for OpenZFSDataCompressionType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OpenZFSDataCompressionType) Values() []OpenZFSDataCompressionType {
+	return []OpenZFSDataCompressionType{
+		"NONE",
+		"ZSTD",
+	}
+}
+
+type OpenZFSDeploymentType string
+
+// Enum values for OpenZFSDeploymentType
+const (
+	OpenZFSDeploymentTypeSingleAz1 OpenZFSDeploymentType = "SINGLE_AZ_1"
+)
+
+// Values returns all known values for OpenZFSDeploymentType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OpenZFSDeploymentType) Values() []OpenZFSDeploymentType {
+	return []OpenZFSDeploymentType{
+		"SINGLE_AZ_1",
+	}
+}
+
+type OpenZFSQuotaType string
+
+// Enum values for OpenZFSQuotaType
+const (
+	OpenZFSQuotaTypeUser  OpenZFSQuotaType = "USER"
+	OpenZFSQuotaTypeGroup OpenZFSQuotaType = "GROUP"
+)
+
+// Values returns all known values for OpenZFSQuotaType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OpenZFSQuotaType) Values() []OpenZFSQuotaType {
+	return []OpenZFSQuotaType{
+		"USER",
+		"GROUP",
 	}
 }
 
@@ -489,6 +637,24 @@ func (ResourceType) Values() []ResourceType {
 	}
 }
 
+type RestoreOpenZFSVolumeOption string
+
+// Enum values for RestoreOpenZFSVolumeOption
+const (
+	RestoreOpenZFSVolumeOptionDeleteIntermediateSnapshots RestoreOpenZFSVolumeOption = "DELETE_INTERMEDIATE_SNAPSHOTS"
+	RestoreOpenZFSVolumeOptionDeleteClonedVolumes         RestoreOpenZFSVolumeOption = "DELETE_CLONED_VOLUMES"
+)
+
+// Values returns all known values for RestoreOpenZFSVolumeOption. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RestoreOpenZFSVolumeOption) Values() []RestoreOpenZFSVolumeOption {
+	return []RestoreOpenZFSVolumeOption{
+		"DELETE_INTERMEDIATE_SNAPSHOTS",
+		"DELETE_CLONED_VOLUMES",
+	}
+}
+
 type SecurityStyle string
 
 // Enum values for SecurityStyle
@@ -538,6 +704,46 @@ func (ServiceLimit) Values() []ServiceLimit {
 		"STORAGE_VIRTUAL_MACHINES_PER_FILE_SYSTEM",
 		"VOLUMES_PER_FILE_SYSTEM",
 		"TOTAL_SSD_IOPS",
+	}
+}
+
+type SnapshotFilterName string
+
+// Enum values for SnapshotFilterName
+const (
+	SnapshotFilterNameFileSystemId SnapshotFilterName = "file-system-id"
+	SnapshotFilterNameVolumeId     SnapshotFilterName = "volume-id"
+)
+
+// Values returns all known values for SnapshotFilterName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SnapshotFilterName) Values() []SnapshotFilterName {
+	return []SnapshotFilterName{
+		"file-system-id",
+		"volume-id",
+	}
+}
+
+type SnapshotLifecycle string
+
+// Enum values for SnapshotLifecycle
+const (
+	SnapshotLifecyclePending   SnapshotLifecycle = "PENDING"
+	SnapshotLifecycleCreating  SnapshotLifecycle = "CREATING"
+	SnapshotLifecycleDeleting  SnapshotLifecycle = "DELETING"
+	SnapshotLifecycleAvailable SnapshotLifecycle = "AVAILABLE"
+)
+
+// Values returns all known values for SnapshotLifecycle. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SnapshotLifecycle) Values() []SnapshotLifecycle {
+	return []SnapshotLifecycle{
+		"PENDING",
+		"CREATING",
+		"DELETING",
+		"AVAILABLE",
 	}
 }
 
@@ -720,6 +926,7 @@ const (
 	VolumeLifecycleFailed        VolumeLifecycle = "FAILED"
 	VolumeLifecycleMisconfigured VolumeLifecycle = "MISCONFIGURED"
 	VolumeLifecyclePending       VolumeLifecycle = "PENDING"
+	VolumeLifecycleAvailable     VolumeLifecycle = "AVAILABLE"
 )
 
 // Values returns all known values for VolumeLifecycle. Note that this can be
@@ -733,6 +940,7 @@ func (VolumeLifecycle) Values() []VolumeLifecycle {
 		"FAILED",
 		"MISCONFIGURED",
 		"PENDING",
+		"AVAILABLE",
 	}
 }
 
@@ -740,7 +948,8 @@ type VolumeType string
 
 // Enum values for VolumeType
 const (
-	VolumeTypeOntap VolumeType = "ONTAP"
+	VolumeTypeOntap   VolumeType = "ONTAP"
+	VolumeTypeOpenzfs VolumeType = "OPENZFS"
 )
 
 // Values returns all known values for VolumeType. Note that this can be expanded
@@ -749,6 +958,7 @@ const (
 func (VolumeType) Values() []VolumeType {
 	return []VolumeType{
 		"ONTAP",
+		"OPENZFS",
 	}
 }
 

@@ -48,6 +48,9 @@ type CreateOutpostInput struct {
 	// The description of the Outpost.
 	Description *string
 
+	// The type of hardware for this Outpost.
+	SupportedHardwareType types.SupportedHardwareType
+
 	// The tags to apply to the Outpost.
 	Tags map[string]string
 

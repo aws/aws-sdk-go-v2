@@ -14,6 +14,8 @@ import (
 
 // Describes a block list used for query suggestions for an index. This is used to
 // check the current settings that are applied to a block list.
+// DescribeQuerySuggestionsBlockList is currently not supported in the Amazon Web
+// Services GovCloud (US-West) region.
 func (c *Client) DescribeQuerySuggestionsBlockList(ctx context.Context, params *DescribeQuerySuggestionsBlockListInput, optFns ...func(*Options)) (*DescribeQuerySuggestionsBlockListOutput, error) {
 	if params == nil {
 		params = &DescribeQuerySuggestionsBlockListInput{}

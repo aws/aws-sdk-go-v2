@@ -74,7 +74,8 @@ type DescribeStatementOutput struct {
 	Error *string
 
 	// A value that indicates whether the statement has a result set. The result set
-	// can be empty.
+	// can be empty. The value is true for an empty result set. The value is true if
+	// any substatement returns a result set.
 	HasResultSet *bool
 
 	// The parameters for the SQL statement.

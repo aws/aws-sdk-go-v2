@@ -49,8 +49,8 @@ type RevokePermissionsInput struct {
 
 	// The identifier for the Data Catalog. By default, the account ID. The Data
 	// Catalog is the persistent metadata store. It contains database definitions,
-	// table definitions, and other control information to manage your AWS Lake
-	// Formation environment.
+	// table definitions, and other control information to manage your Lake Formation
+	// environment.
 	CatalogId *string
 
 	// Indicates a list of permissions for which to revoke the grant option allowing
@@ -68,11 +68,11 @@ type RevokePermissionsOutput struct {
 }
 
 func (c *Client) addOperationRevokePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRevokePermissions{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpRevokePermissions{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRevokePermissions{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRevokePermissions{}, middleware.After)
 	if err != nil {
 		return err
 	}

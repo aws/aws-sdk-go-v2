@@ -47,6 +47,9 @@ type CreateTableInput struct {
 	// A list of partition indexes, PartitionIndex structures, to create in the table.
 	PartitionIndexes []types.PartitionIndex
 
+	// The ID of the transaction.
+	TransactionId *string
+
 	noSmithyDocumentSerde
 }
 

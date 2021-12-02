@@ -20,11 +20,11 @@ import (
 // limit the number of descriptions in a response. If more file system descriptions
 // remain, Amazon FSx returns a NextToken value in the response. In this case, send
 // a later request with the NextToken request parameter set to the value of
-// NextToken from the last response. This action is used in an iterative process to
-// retrieve a list of your file system descriptions. DescribeFileSystems is called
-// first without a NextTokenvalue. Then the action continues to be called with the
-// NextToken parameter set to the value of the last NextToken value until a
-// response has no NextToken. When using this action, keep the following in
+// NextToken from the last response. This operation is used in an iterative process
+// to retrieve a list of your file system descriptions. DescribeFileSystems is
+// called first without a NextTokenvalue. Then the operation continues to be called
+// with the NextToken parameter set to the value of the last NextToken value until
+// a response has no NextToken. When using this operation, keep the following in
 // mind:
 //
 // * The implementation might return fewer than MaxResults file system
@@ -62,7 +62,7 @@ type DescribeFileSystemsInput struct {
 	MaxResults *int32
 
 	// Opaque pagination token returned from a previous DescribeFileSystems operation
-	// (String). If a token present, the action continues the list from where the
+	// (String). If a token present, the operation continues the list from where the
 	// returning call left off.
 	NextToken *string
 

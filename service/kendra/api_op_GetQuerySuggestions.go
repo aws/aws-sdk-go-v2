@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Fetches the queries that are suggested to your users.
+// Fetches the queries that are suggested to your users. GetQuerySuggestions is
+// currently not supported in the Amazon Web Services GovCloud (US-West) region.
 func (c *Client) GetQuerySuggestions(ctx context.Context, params *GetQuerySuggestionsInput, optFns ...func(*Options)) (*GetQuerySuggestionsOutput, error) {
 	if params == nil {
 		params = &GetQuerySuggestionsInput{}

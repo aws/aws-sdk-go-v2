@@ -12,22 +12,23 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a backup of an existing Amazon FSx for Windows File Server or Amazon FSx
-// for Lustre file system, or of an Amazon FSx for NetApp ONTAP volume. Creating
-// regular backups is a best practice, enabling you to restore a file system or
-// volume from a backup if an issue arises with the original file system or volume.
-// For Amazon FSx for Lustre file systems, you can create a backup only for file
-// systems with the following configuration:
+// Creates a backup of an existing Amazon FSx for Windows File Server file system,
+// Amazon FSx for Lustre file system, Amazon FSx for NetApp ONTAP volume, or Amazon
+// FSx for OpenZFS file system. We recommend creating regular backups so that you
+// can restore a file system or volume from a backup if an issue arises with the
+// original file system or volume. For Amazon FSx for Lustre file systems, you can
+// create a backup only for file systems that have the following configuration:
 //
-// * a Persistent deployment type
+// *
+// A Persistent deployment type
 //
-// * is
-// not linked to a data repository.
+// * Are not linked to a data repository
 //
-// For more information about backups, see the
-// following:
+// For more
+// information about backups, see the following:
 //
-// * For Amazon FSx for Lustre, see Working with FSx for Lustre backups
+// * For Amazon FSx for Lustre, see
+// Working with FSx for Lustre backups
 // (https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-backups-fsx.html).
 //
 // *
@@ -38,10 +39,14 @@ import (
 // Amazon FSx for NetApp ONTAP, see Working with FSx for NetApp ONTAP backups
 // (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/using-backups.html).
 //
+// * For
+// Amazon FSx for OpenZFS, see Working with FSx for OpenZFS backups
+// (https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/using-backups.html).
+//
 // If a
-// backup with the specified client request token exists, and the parameters match,
-// this operation returns the description of the existing backup. If a backup
-// specified client request token exists, and the parameters don't match, this
+// backup with the specified client request token exists and the parameters match,
+// this operation returns the description of the existing backup. If a backup with
+// the specified client request token exists and the parameters don't match, this
 // operation returns IncompatibleParameterError. If a backup with the specified
 // client request token doesn't exist, CreateBackup does the following:
 //
@@ -58,8 +63,9 @@ import (
 // request token and the initial call created a backup, the operation returns a
 // successful result because all the parameters are the same. The CreateBackup
 // operation returns while the backup's lifecycle state is still CREATING. You can
-// check the backup creation status by calling the DescribeBackups operation, which
-// returns the backup state along with other information.
+// check the backup creation status by calling the DescribeBackups
+// (https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeBackups.html)
+// operation, which returns the backup state along with other information.
 func (c *Client) CreateBackup(ctx context.Context, params *CreateBackupInput, optFns ...func(*Options)) (*CreateBackupOutput, error) {
 	if params == nil {
 		params = &CreateBackupInput{}
@@ -89,11 +95,11 @@ type CreateBackupInput struct {
 	// (Optional) The tags to apply to the backup at backup creation. The key value of
 	// the Name tag appears in the console as the backup name. If you have set
 	// CopyTagsToBackups to true, and you specify one or more tags using the
-	// CreateBackup action, no existing file system tags are copied from the file
+	// CreateBackup operation, no existing file system tags are copied from the file
 	// system to the backup.
 	Tags []types.Tag
 
-	// The ID of he FSx for NetApp ONTAP volume to back up.
+	// (Optional) The ID of the FSx for ONTAP volume to back up.
 	VolumeId *string
 
 	noSmithyDocumentSerde

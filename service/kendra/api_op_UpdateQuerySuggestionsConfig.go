@@ -18,6 +18,8 @@ import (
 // settings might not take effect right away. The time for your updated settings to
 // take effect depends on the updates made and the number of search queries in your
 // index. You can still enable/disable query suggestions at any time.
+// UpdateQuerySuggestionsConfig is currently not supported in the Amazon Web
+// Services GovCloud (US-West) region.
 func (c *Client) UpdateQuerySuggestionsConfig(ctx context.Context, params *UpdateQuerySuggestionsConfigInput, optFns ...func(*Options)) (*UpdateQuerySuggestionsConfigOutput, error) {
 	if params == nil {
 		params = &UpdateQuerySuggestionsConfigInput{}

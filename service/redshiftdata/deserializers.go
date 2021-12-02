@@ -236,6 +236,9 @@ func awsAwsjson11_deserializeOpErrorCancelStatement(response *smithyhttp.Respons
 	}
 
 	switch {
+	case strings.EqualFold("DatabaseConnectionException", errorCode):
+		return awsAwsjson11_deserializeErrorDatabaseConnectionException(response, errorBody)
+
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalServerException(response, errorBody)
 
@@ -470,6 +473,9 @@ func awsAwsjson11_deserializeOpErrorDescribeTable(response *smithyhttp.Response,
 	}
 
 	switch {
+	case strings.EqualFold("DatabaseConnectionException", errorCode):
+		return awsAwsjson11_deserializeErrorDatabaseConnectionException(response, errorBody)
+
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalServerException(response, errorBody)
 
@@ -818,6 +824,9 @@ func awsAwsjson11_deserializeOpErrorListDatabases(response *smithyhttp.Response,
 	}
 
 	switch {
+	case strings.EqualFold("DatabaseConnectionException", errorCode):
+		return awsAwsjson11_deserializeErrorDatabaseConnectionException(response, errorBody)
+
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalServerException(response, errorBody)
 
@@ -932,6 +941,9 @@ func awsAwsjson11_deserializeOpErrorListSchemas(response *smithyhttp.Response, m
 	}
 
 	switch {
+	case strings.EqualFold("DatabaseConnectionException", errorCode):
+		return awsAwsjson11_deserializeErrorDatabaseConnectionException(response, errorBody)
+
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalServerException(response, errorBody)
 
@@ -1160,6 +1172,9 @@ func awsAwsjson11_deserializeOpErrorListTables(response *smithyhttp.Response, me
 	}
 
 	switch {
+	case strings.EqualFold("DatabaseConnectionException", errorCode):
+		return awsAwsjson11_deserializeErrorDatabaseConnectionException(response, errorBody)
+
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalServerException(response, errorBody)
 
@@ -1231,6 +1246,41 @@ func awsAwsjson11_deserializeErrorBatchExecuteStatementException(response *smith
 
 	output := &types.BatchExecuteStatementException{}
 	err := awsAwsjson11_deserializeDocumentBatchExecuteStatementException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
+func awsAwsjson11_deserializeErrorDatabaseConnectionException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.DatabaseConnectionException{}
+	err := awsAwsjson11_deserializeDocumentDatabaseConnectionException(&output, shape)
 
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -1704,6 +1754,46 @@ func awsAwsjson11_deserializeDocumentColumnMetadataList(v *[]types.ColumnMetadat
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentDatabaseConnectionException(v **types.DatabaseConnectionException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DatabaseConnectionException
+	if *v == nil {
+		sv = &types.DatabaseConnectionException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

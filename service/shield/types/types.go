@@ -7,6 +7,31 @@ import (
 	"time"
 )
 
+// The automatic application layer DDoS mitigation settings for a Protection. This
+// configuration determines whether Shield Advanced automatically manages rules in
+// the web ACL in order to respond to application layer events that Shield Advanced
+// determines to be DDoS attacks.
+type ApplicationLayerAutomaticResponseConfiguration struct {
+
+	// Specifies the action setting that Shield Advanced should use in the WAF rules
+	// that it creates on behalf of the protected resource in response to DDoS attacks.
+	// You specify this as part of the configuration for the automatic application
+	// layer DDoS mitigation feature, when you enable or update automatic mitigation.
+	// Shield Advanced creates the WAF rules in a Shield Advanced-managed rule group,
+	// inside the web ACL that you have associated with the resource.
+	//
+	// This member is required.
+	Action *ResponseAction
+
+	// Indicates whether automatic application layer DDoS mitigation is enabled for the
+	// protection.
+	//
+	// This member is required.
+	Status ApplicationLayerAutomaticResponseStatus
+
+	noSmithyDocumentSerde
+}
+
 // The details of a DDoS attack.
 type AttackDetail struct {
 
@@ -17,16 +42,14 @@ type AttackDetail struct {
 	AttackId *string
 
 	// The array of objects that provide details of the Shield event. For
-	// infrastructure layer events (L3 and L4 events) after January 25, 2021, you can
-	// view metrics for top contributors in Amazon CloudWatch metrics. For more
-	// information, see Shield metrics and alarms
+	// infrastructure layer events (L3 and L4 events), you can view metrics for top
+	// contributors in Amazon CloudWatch metrics. For more information, see Shield
+	// metrics and alarms
 	// (https://docs.aws.amazon.com/waf/latest/developerguide/monitoring-cloudwatch.html#set-ddos-alarms)
 	// in the WAF Developer Guide.
 	AttackProperties []AttackProperty
 
-	// The time the attack ended, in Unix time in seconds. For more information see
-	// timestamp
-	// (http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types).
+	// The time the attack ended, in Unix time in seconds.
 	EndTime *time.Time
 
 	// List of mitigation actions taken for the attack.
@@ -35,9 +58,7 @@ type AttackDetail struct {
 	// The ARN (Amazon Resource Name) of the resource that was attacked.
 	ResourceArn *string
 
-	// The time the attack started, in Unix time in seconds. For more information see
-	// timestamp
-	// (http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types).
+	// The time the attack started, in Unix time in seconds.
 	StartTime *time.Time
 
 	// If applicable, additional detail about the resource being attacked, for example,
@@ -52,9 +73,8 @@ type AttackProperty struct {
 
 	// The type of Shield event that was observed. NETWORK indicates layer 3 and layer
 	// 4 events and APPLICATION indicates layer 7 events. For infrastructure layer
-	// events (L3 and L4 events) after January 25, 2021, you can view metrics for top
-	// contributors in Amazon CloudWatch metrics. For more information, see Shield
-	// metrics and alarms
+	// events (L3 and L4 events), you can view metrics for top contributors in Amazon
+	// CloudWatch metrics. For more information, see Shield metrics and alarms
 	// (https://docs.aws.amazon.com/waf/latest/developerguide/monitoring-cloudwatch.html#set-ddos-alarms)
 	// in the WAF Developer Guide.
 	AttackLayer AttackLayer
@@ -64,7 +84,9 @@ type AttackProperty struct {
 	// for WordPress reflective pingback events.
 	AttackPropertyIdentifier AttackPropertyIdentifier
 
-	// Contributor objects for the top five contributors to a Shield event.
+	// Contributor objects for the top five contributors to a Shield event. A
+	// contributor is a source of traffic that Shield Advanced identifies as
+	// responsible for some or all of an event.
 	TopContributors []Contributor
 
 	// The total contributions made to this Shield event by all contributors.
@@ -103,17 +125,13 @@ type AttackSummary struct {
 	// The list of attacks for a specified time period.
 	AttackVectors []AttackVectorDescription
 
-	// The end time of the attack, in Unix time in seconds. For more information see
-	// timestamp
-	// (http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types).
+	// The end time of the attack, in Unix time in seconds.
 	EndTime *time.Time
 
 	// The ARN (Amazon Resource Name) of the resource that was attacked.
 	ResourceArn *string
 
-	// The start time of the attack, in Unix time in seconds. For more information see
-	// timestamp
-	// (http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types).
+	// The start time of the attack, in Unix time in seconds.
 	StartTime *time.Time
 
 	noSmithyDocumentSerde
@@ -203,18 +221,33 @@ type AttackVolumeStatistics struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies that Shield Advanced should configure its WAF rules with the WAF Block
+// action. This is only used in the context of the ResponseAction setting. JSON
+// specification: "Block": {}
+type BlockAction struct {
+	noSmithyDocumentSerde
+}
+
 // A contributor to the attack and their contribution.
 type Contributor struct {
 
-	// The name of the contributor. This is dependent on the AttackPropertyIdentifier.
-	// For example, if the AttackPropertyIdentifier is SOURCE_COUNTRY, the Name could
-	// be United States.
+	// The name of the contributor. The type of name that you'll find here depends on
+	// the AttackPropertyIdentifier setting in the AttackProperty where this
+	// contributor is defined. For example, if the AttackPropertyIdentifier is
+	// SOURCE_COUNTRY, the Name could be United States.
 	Name *string
 
 	// The contribution of this contributor expressed in Protection units. For example
 	// 10,000.
 	Value int64
 
+	noSmithyDocumentSerde
+}
+
+// Specifies that Shield Advanced should configure its WAF rules with the WAF Count
+// action. This is only used in the context of the ResponseAction setting. JSON
+// specification: "Count": {}
+type CountAction struct {
 	noSmithyDocumentSerde
 }
 
@@ -260,6 +293,12 @@ type Mitigation struct {
 
 // An object that represents a resource that is under DDoS protection.
 type Protection struct {
+
+	// The automatic application layer DDoS mitigation settings for the protection.
+	// This configuration determines whether Shield Advanced automatically manages
+	// rules in the web ACL in order to respond to application layer events that Shield
+	// Advanced determines to be DDoS attacks.
+	ApplicationLayerAutomaticResponseConfiguration *ApplicationLayerAutomaticResponseConfiguration
 
 	// The unique identifier (ID) for the Route 53 health check that's associated with
 	// the protection.
@@ -390,6 +429,25 @@ type ProtectionLimits struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies the action setting that Shield Advanced should use in the WAF rules
+// that it creates on behalf of the protected resource in response to DDoS attacks.
+// You specify this as part of the configuration for the automatic application
+// layer DDoS mitigation feature, when you enable or update automatic mitigation.
+// Shield Advanced creates the WAF rules in a Shield Advanced-managed rule group,
+// inside the web ACL that you have associated with the resource.
+type ResponseAction struct {
+
+	// Specifies that Shield Advanced should configure its WAF rules with the WAF Block
+	// action. You must specify exactly one action, either Block or Count.
+	Block *BlockAction
+
+	// Specifies that Shield Advanced should configure its WAF rules with the WAF Count
+	// action. You must specify exactly one action, either Block or Count.
+	Count *CountAction
+
+	noSmithyDocumentSerde
+}
+
 // The attack information for the specified SubResource.
 type SubResourceSummary struct {
 
@@ -437,9 +495,7 @@ type Subscription struct {
 	// initiate proactive customer support.
 	ProactiveEngagementStatus ProactiveEngagementStatus
 
-	// The start time of the subscription, in Unix time in seconds. For more
-	// information see timestamp
-	// (http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types).
+	// The start time of the subscription, in Unix time in seconds.
 	StartTime *time.Time
 
 	// The ARN (Amazon Resource Name) of the subscription.
@@ -530,12 +586,10 @@ type Tag struct {
 // The time range.
 type TimeRange struct {
 
-	// The start time, in Unix time in seconds. For more information see timestamp
-	// (http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types).
+	// The start time, in Unix time in seconds.
 	FromInclusive *time.Time
 
-	// The end time, in Unix time in seconds. For more information see timestamp
-	// (http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types).
+	// The end time, in Unix time in seconds.
 	ToExclusive *time.Time
 
 	noSmithyDocumentSerde

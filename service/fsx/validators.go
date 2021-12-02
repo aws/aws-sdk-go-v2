@@ -90,6 +90,26 @@ func (m *validateOpCreateBackup) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateDataRepositoryAssociation struct {
+}
+
+func (*validateOpCreateDataRepositoryAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateDataRepositoryAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateDataRepositoryAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateDataRepositoryAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateDataRepositoryTask struct {
 }
 
@@ -145,6 +165,26 @@ func (m *validateOpCreateFileSystem) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateFileSystemInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateSnapshot struct {
+}
+
+func (*validateOpCreateSnapshot) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateSnapshot) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateSnapshotInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateSnapshotInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -230,6 +270,26 @@ func (m *validateOpDeleteBackup) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteDataRepositoryAssociation struct {
+}
+
+func (*validateOpDeleteDataRepositoryAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteDataRepositoryAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteDataRepositoryAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteDataRepositoryAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteFileSystem struct {
 }
 
@@ -245,6 +305,26 @@ func (m *validateOpDeleteFileSystem) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteFileSystemInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteSnapshot struct {
+}
+
+func (*validateOpDeleteSnapshot) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteSnapshot) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteSnapshotInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteSnapshotInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -350,6 +430,46 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpReleaseFileSystemNfsV3Locks struct {
+}
+
+func (*validateOpReleaseFileSystemNfsV3Locks) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpReleaseFileSystemNfsV3Locks) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ReleaseFileSystemNfsV3LocksInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpReleaseFileSystemNfsV3LocksInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpRestoreVolumeFromSnapshot struct {
+}
+
+func (*validateOpRestoreVolumeFromSnapshot) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRestoreVolumeFromSnapshot) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RestoreVolumeFromSnapshotInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRestoreVolumeFromSnapshotInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -390,6 +510,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateDataRepositoryAssociation struct {
+}
+
+func (*validateOpUpdateDataRepositoryAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateDataRepositoryAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateDataRepositoryAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateDataRepositoryAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateFileSystem struct {
 }
 
@@ -405,6 +545,26 @@ func (m *validateOpUpdateFileSystem) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateFileSystemInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateSnapshot struct {
+}
+
+func (*validateOpUpdateSnapshot) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateSnapshot) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateSnapshotInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateSnapshotInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -466,6 +626,10 @@ func addOpCreateBackupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateBackup{}, middleware.After)
 }
 
+func addOpCreateDataRepositoryAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateDataRepositoryAssociation{}, middleware.After)
+}
+
 func addOpCreateDataRepositoryTaskValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDataRepositoryTask{}, middleware.After)
 }
@@ -476,6 +640,10 @@ func addOpCreateFileSystemFromBackupValidationMiddleware(stack *middleware.Stack
 
 func addOpCreateFileSystemValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateFileSystem{}, middleware.After)
+}
+
+func addOpCreateSnapshotValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateSnapshot{}, middleware.After)
 }
 
 func addOpCreateStorageVirtualMachineValidationMiddleware(stack *middleware.Stack) error {
@@ -494,8 +662,16 @@ func addOpDeleteBackupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteBackup{}, middleware.After)
 }
 
+func addOpDeleteDataRepositoryAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteDataRepositoryAssociation{}, middleware.After)
+}
+
 func addOpDeleteFileSystemValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteFileSystem{}, middleware.After)
+}
+
+func addOpDeleteSnapshotValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteSnapshot{}, middleware.After)
 }
 
 func addOpDeleteStorageVirtualMachineValidationMiddleware(stack *middleware.Stack) error {
@@ -518,6 +694,14 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
+func addOpReleaseFileSystemNfsV3LocksValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpReleaseFileSystemNfsV3Locks{}, middleware.After)
+}
+
+func addOpRestoreVolumeFromSnapshotValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRestoreVolumeFromSnapshot{}, middleware.After)
+}
+
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
 }
@@ -526,8 +710,16 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
 }
 
+func addOpUpdateDataRepositoryAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateDataRepositoryAssociation{}, middleware.After)
+}
+
 func addOpUpdateFileSystemValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateFileSystem{}, middleware.After)
+}
+
+func addOpUpdateSnapshotValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateSnapshot{}, middleware.After)
 }
 
 func addOpUpdateStorageVirtualMachineValidationMiddleware(stack *middleware.Stack) error {
@@ -553,6 +745,23 @@ func validateCompletionReport(v *types.CompletionReport) error {
 	}
 }
 
+func validateCreateFileSystemLustreConfiguration(v *types.CreateFileSystemLustreConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateFileSystemLustreConfiguration"}
+	if v.LogConfiguration != nil {
+		if err := validateLustreLogCreateConfiguration(v.LogConfiguration); err != nil {
+			invalidParams.AddNested("LogConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCreateFileSystemOntapConfiguration(v *types.CreateFileSystemOntapConfiguration) error {
 	if v == nil {
 		return nil
@@ -563,6 +772,29 @@ func validateCreateFileSystemOntapConfiguration(v *types.CreateFileSystemOntapCo
 	}
 	if v.ThroughputCapacity == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ThroughputCapacity"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCreateFileSystemOpenZFSConfiguration(v *types.CreateFileSystemOpenZFSConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateFileSystemOpenZFSConfiguration"}
+	if len(v.DeploymentType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DeploymentType"))
+	}
+	if v.ThroughputCapacity == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ThroughputCapacity"))
+	}
+	if v.RootVolumeConfiguration != nil {
+		if err := validateOpenZFSCreateRootVolumeConfiguration(v.RootVolumeConfiguration); err != nil {
+			invalidParams.AddNested("RootVolumeConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -620,6 +852,54 @@ func validateCreateOntapVolumeConfiguration(v *types.CreateOntapVolumeConfigurat
 	}
 }
 
+func validateCreateOpenZFSOriginSnapshotConfiguration(v *types.CreateOpenZFSOriginSnapshotConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateOpenZFSOriginSnapshotConfiguration"}
+	if v.SnapshotARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SnapshotARN"))
+	}
+	if len(v.CopyStrategy) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("CopyStrategy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCreateOpenZFSVolumeConfiguration(v *types.CreateOpenZFSVolumeConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateOpenZFSVolumeConfiguration"}
+	if v.ParentVolumeId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ParentVolumeId"))
+	}
+	if v.OriginSnapshot != nil {
+		if err := validateCreateOpenZFSOriginSnapshotConfiguration(v.OriginSnapshot); err != nil {
+			invalidParams.AddNested("OriginSnapshot", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.NfsExports != nil {
+		if err := validateOpenZFSNfsExports(v.NfsExports); err != nil {
+			invalidParams.AddNested("NfsExports", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.UserAndGroupQuotas != nil {
+		if err := validateOpenZFSUserAndGroupQuotas(v.UserAndGroupQuotas); err != nil {
+			invalidParams.AddNested("UserAndGroupQuotas", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCreateSvmActiveDirectoryConfiguration(v *types.CreateSvmActiveDirectoryConfiguration) error {
 	if v == nil {
 		return nil
@@ -645,6 +925,23 @@ func validateDeleteFileSystemLustreConfiguration(v *types.DeleteFileSystemLustre
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteFileSystemLustreConfiguration"}
+	if v.FinalBackupTags != nil {
+		if err := validateTags(v.FinalBackupTags); err != nil {
+			invalidParams.AddNested("FinalBackupTags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDeleteFileSystemOpenZFSConfiguration(v *types.DeleteFileSystemOpenZFSConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteFileSystemOpenZFSConfiguration"}
 	if v.FinalBackupTags != nil {
 		if err := validateTags(v.FinalBackupTags); err != nil {
 			invalidParams.AddNested("FinalBackupTags", err.(smithy.InvalidParamsError))
@@ -683,6 +980,152 @@ func validateDeleteVolumeOntapConfiguration(v *types.DeleteVolumeOntapConfigurat
 		if err := validateTags(v.FinalBackupTags); err != nil {
 			invalidParams.AddNested("FinalBackupTags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLustreLogCreateConfiguration(v *types.LustreLogCreateConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LustreLogCreateConfiguration"}
+	if len(v.Level) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Level"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpenZFSClientConfiguration(v *types.OpenZFSClientConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OpenZFSClientConfiguration"}
+	if v.Clients == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Clients"))
+	}
+	if v.Options == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Options"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpenZFSClientConfigurations(v []types.OpenZFSClientConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OpenZFSClientConfigurations"}
+	for i := range v {
+		if err := validateOpenZFSClientConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpenZFSCreateRootVolumeConfiguration(v *types.OpenZFSCreateRootVolumeConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OpenZFSCreateRootVolumeConfiguration"}
+	if v.NfsExports != nil {
+		if err := validateOpenZFSNfsExports(v.NfsExports); err != nil {
+			invalidParams.AddNested("NfsExports", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.UserAndGroupQuotas != nil {
+		if err := validateOpenZFSUserAndGroupQuotas(v.UserAndGroupQuotas); err != nil {
+			invalidParams.AddNested("UserAndGroupQuotas", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpenZFSNfsExport(v *types.OpenZFSNfsExport) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OpenZFSNfsExport"}
+	if v.ClientConfigurations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientConfigurations"))
+	} else if v.ClientConfigurations != nil {
+		if err := validateOpenZFSClientConfigurations(v.ClientConfigurations); err != nil {
+			invalidParams.AddNested("ClientConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpenZFSNfsExports(v []types.OpenZFSNfsExport) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OpenZFSNfsExports"}
+	for i := range v {
+		if err := validateOpenZFSNfsExport(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpenZFSUserAndGroupQuotas(v []types.OpenZFSUserOrGroupQuota) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OpenZFSUserAndGroupQuotas"}
+	for i := range v {
+		if err := validateOpenZFSUserOrGroupQuota(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpenZFSUserOrGroupQuota(v *types.OpenZFSUserOrGroupQuota) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OpenZFSUserOrGroupQuota"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.StorageCapacityQuotaGiB == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StorageCapacityQuotaGiB"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -750,6 +1193,23 @@ func validateTags(v []types.Tag) error {
 	}
 }
 
+func validateUpdateFileSystemLustreConfiguration(v *types.UpdateFileSystemLustreConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateFileSystemLustreConfiguration"}
+	if v.LogConfiguration != nil {
+		if err := validateLustreLogCreateConfiguration(v.LogConfiguration); err != nil {
+			invalidParams.AddNested("LogConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateUpdateFileSystemWindowsConfiguration(v *types.UpdateFileSystemWindowsConfiguration) error {
 	if v == nil {
 		return nil
@@ -758,6 +1218,28 @@ func validateUpdateFileSystemWindowsConfiguration(v *types.UpdateFileSystemWindo
 	if v.AuditLogConfiguration != nil {
 		if err := validateWindowsAuditLogCreateConfiguration(v.AuditLogConfiguration); err != nil {
 			invalidParams.AddNested("AuditLogConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateOpenZFSVolumeConfiguration(v *types.UpdateOpenZFSVolumeConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateOpenZFSVolumeConfiguration"}
+	if v.NfsExports != nil {
+		if err := validateOpenZFSNfsExports(v.NfsExports); err != nil {
+			invalidParams.AddNested("NfsExports", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.UserAndGroupQuotas != nil {
+		if err := validateOpenZFSUserAndGroupQuotas(v.UserAndGroupQuotas); err != nil {
+			invalidParams.AddNested("UserAndGroupQuotas", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -855,6 +1337,32 @@ func validateOpCreateBackupInput(v *CreateBackupInput) error {
 	}
 }
 
+func validateOpCreateDataRepositoryAssociationInput(v *CreateDataRepositoryAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateDataRepositoryAssociationInput"}
+	if v.FileSystemId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileSystemId"))
+	}
+	if v.FileSystemPath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileSystemPath"))
+	}
+	if v.DataRepositoryPath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataRepositoryPath"))
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateDataRepositoryTaskInput(v *CreateDataRepositoryTaskInput) error {
 	if v == nil {
 		return nil
@@ -906,6 +1414,16 @@ func validateOpCreateFileSystemFromBackupInput(v *CreateFileSystemFromBackupInpu
 			invalidParams.AddNested("WindowsConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.LustreConfiguration != nil {
+		if err := validateCreateFileSystemLustreConfiguration(v.LustreConfiguration); err != nil {
+			invalidParams.AddNested("LustreConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OpenZFSConfiguration != nil {
+		if err := validateCreateFileSystemOpenZFSConfiguration(v.OpenZFSConfiguration); err != nil {
+			invalidParams.AddNested("OpenZFSConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -937,9 +1455,42 @@ func validateOpCreateFileSystemInput(v *CreateFileSystemInput) error {
 			invalidParams.AddNested("WindowsConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.LustreConfiguration != nil {
+		if err := validateCreateFileSystemLustreConfiguration(v.LustreConfiguration); err != nil {
+			invalidParams.AddNested("LustreConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.OntapConfiguration != nil {
 		if err := validateCreateFileSystemOntapConfiguration(v.OntapConfiguration); err != nil {
 			invalidParams.AddNested("OntapConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OpenZFSConfiguration != nil {
+		if err := validateCreateFileSystemOpenZFSConfiguration(v.OpenZFSConfiguration); err != nil {
+			invalidParams.AddNested("OpenZFSConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateSnapshotInput(v *CreateSnapshotInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateSnapshotInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.VolumeId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VolumeId"))
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1026,6 +1577,11 @@ func validateOpCreateVolumeInput(v *CreateVolumeInput) error {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.OpenZFSConfiguration != nil {
+		if err := validateCreateOpenZFSVolumeConfiguration(v.OpenZFSConfiguration); err != nil {
+			invalidParams.AddNested("OpenZFSConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1040,6 +1596,24 @@ func validateOpDeleteBackupInput(v *DeleteBackupInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteBackupInput"}
 	if v.BackupId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BackupId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteDataRepositoryAssociationInput(v *DeleteDataRepositoryAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteDataRepositoryAssociationInput"}
+	if v.AssociationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssociationId"))
+	}
+	if v.DeleteDataInFileSystem == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeleteDataInFileSystem"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1065,6 +1639,26 @@ func validateOpDeleteFileSystemInput(v *DeleteFileSystemInput) error {
 		if err := validateDeleteFileSystemLustreConfiguration(v.LustreConfiguration); err != nil {
 			invalidParams.AddNested("LustreConfiguration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.OpenZFSConfiguration != nil {
+		if err := validateDeleteFileSystemOpenZFSConfiguration(v.OpenZFSConfiguration); err != nil {
+			invalidParams.AddNested("OpenZFSConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteSnapshotInput(v *DeleteSnapshotInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteSnapshotInput"}
+	if v.SnapshotId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SnapshotId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1156,6 +1750,39 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	}
 }
 
+func validateOpReleaseFileSystemNfsV3LocksInput(v *ReleaseFileSystemNfsV3LocksInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ReleaseFileSystemNfsV3LocksInput"}
+	if v.FileSystemId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileSystemId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRestoreVolumeFromSnapshotInput(v *RestoreVolumeFromSnapshotInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RestoreVolumeFromSnapshotInput"}
+	if v.VolumeId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VolumeId"))
+	}
+	if v.SnapshotId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SnapshotId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpTagResourceInput(v *TagResourceInput) error {
 	if v == nil {
 		return nil
@@ -1196,6 +1823,21 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 }
 
+func validateOpUpdateDataRepositoryAssociationInput(v *UpdateDataRepositoryAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateDataRepositoryAssociationInput"}
+	if v.AssociationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssociationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateFileSystemInput(v *UpdateFileSystemInput) error {
 	if v == nil {
 		return nil
@@ -1208,6 +1850,29 @@ func validateOpUpdateFileSystemInput(v *UpdateFileSystemInput) error {
 		if err := validateUpdateFileSystemWindowsConfiguration(v.WindowsConfiguration); err != nil {
 			invalidParams.AddNested("WindowsConfiguration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.LustreConfiguration != nil {
+		if err := validateUpdateFileSystemLustreConfiguration(v.LustreConfiguration); err != nil {
+			invalidParams.AddNested("LustreConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateSnapshotInput(v *UpdateSnapshotInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateSnapshotInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.SnapshotId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SnapshotId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1238,6 +1903,11 @@ func validateOpUpdateVolumeInput(v *UpdateVolumeInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateVolumeInput"}
 	if v.VolumeId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VolumeId"))
+	}
+	if v.OpenZFSConfiguration != nil {
+		if err := validateUpdateOpenZFSVolumeConfiguration(v.OpenZFSConfiguration); err != nil {
+			invalidParams.AddNested("OpenZFSConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

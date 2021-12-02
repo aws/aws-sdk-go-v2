@@ -60,12 +60,25 @@ import (
 // For more information, see Access Control List (ACL) Overview
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html) and Managing
 // ACLs Using the REST API
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-using-rest-api.html).
-// Storage Class Options By default, Amazon S3 uses the STANDARD Storage Class to
-// store newly created objects. The STANDARD storage class provides high durability
-// and high availability. Depending on performance needs, you can specify a
-// different Storage Class. Amazon S3 on Outposts only uses the OUTPOSTS Storage
-// Class. For more information, see Storage Classes
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-using-rest-api.html). If
+// the bucket that you're uploading objects to uses the bucket owner enforced
+// setting for S3 Object Ownership, ACLs are disabled and no longer affect
+// permissions. Buckets that use this setting only accept PUT requests that don't
+// specify an ACL or PUT requests that specify bucket owner full control ACLs, such
+// as the bucket-owner-full-control canned ACL or an equivalent form of this ACL
+// expressed in the XML format. PUT requests that contain other ACLs (for example,
+// custom grants to certain Amazon Web Services accounts) fail and return a 400
+// error with the error code AccessControlListNotSupported. For more information,
+// see  Controlling ownership of objects and disabling ACLs
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html)
+// in the Amazon S3 User Guide. If your bucket uses the bucket owner enforced
+// setting for Object Ownership, all objects written to the bucket by any account
+// will be owned by the bucket owner. Storage Class Options By default, Amazon S3
+// uses the STANDARD Storage Class to store newly created objects. The STANDARD
+// storage class provides high durability and high availability. Depending on
+// performance needs, you can specify a different Storage Class. Amazon S3 on
+// Outposts only uses the OUTPOSTS Storage Class. For more information, see Storage
+// Classes
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html) in
 // the Amazon S3 User Guide. Versioning If you enable versioning for a bucket,
 // Amazon S3 automatically generates a unique version ID for the object being

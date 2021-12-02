@@ -53,7 +53,7 @@ type DescribeRouterConfigurationOutput struct {
 	// The ID assigned to the virtual interface.
 	VirtualInterfaceId *string
 
-	// The name of the virtual interface assigned by the customer network.
+	// Provides the details about a virtual interface's router.
 	VirtualInterfaceName *string
 
 	// Metadata pertaining to the operation's result.

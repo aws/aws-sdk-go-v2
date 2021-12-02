@@ -15,14 +15,17 @@ import (
 // list. Depending on the authorization method, use one of the following
 // combinations of request parameters:
 //
-// * Secrets Manager - specify the Amazon
-// Resource Name (ARN) of the secret, the database name, and the cluster identifier
-// that matches the cluster in the secret.
+// * Secrets Manager - when connecting to a
+// cluster, specify the Amazon Resource Name (ARN) of the secret, the database
+// name, and the cluster identifier that matches the cluster in the secret. When
+// connecting to a serverless endpoint, specify the Amazon Resource Name (ARN) of
+// the secret and the database name.
 //
-// * Temporary credentials - specify the
-// cluster identifier, the database name, and the database user name. Permission to
-// call the redshift:GetClusterCredentials operation is required to use this
-// method.
+// * Temporary credentials - when connecting to
+// a cluster, specify the cluster identifier, the database name, and the database
+// user name. Also, permission to call the redshift:GetClusterCredentials operation
+// is required. When connecting to a serverless endpoint, specify the database
+// name.
 func (c *Client) ListSchemas(ctx context.Context, params *ListSchemasInput, optFns ...func(*Options)) (*ListSchemasOutput, error) {
 	if params == nil {
 		params = &ListSchemasInput{}
@@ -40,12 +43,6 @@ func (c *Client) ListSchemas(ctx context.Context, params *ListSchemasInput, optF
 
 type ListSchemasInput struct {
 
-	// The cluster identifier. This parameter is required when authenticating using
-	// either Secrets Manager or temporary credentials.
-	//
-	// This member is required.
-	ClusterIdentifier *string
-
 	// The name of the database that contains the schemas to list. If ConnectedDatabase
 	// is not specified, this is also the database to connect to with your
 	// authentication credentials.
@@ -53,12 +50,16 @@ type ListSchemasInput struct {
 	// This member is required.
 	Database *string
 
+	// The cluster identifier. This parameter is required when connecting to a cluster
+	// and authenticating using either Secrets Manager or temporary credentials.
+	ClusterIdentifier *string
+
 	// A database name. The connected database is specified when you connect with your
 	// authentication credentials.
 	ConnectedDatabase *string
 
-	// The database user name. This parameter is required when authenticating using
-	// temporary credentials.
+	// The database user name. This parameter is required when connecting to a cluster
+	// and authenticating using temporary credentials.
 	DbUser *string
 
 	// The maximum number of schemas to return in the response. If more schemas exist

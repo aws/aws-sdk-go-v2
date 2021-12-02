@@ -15,11 +15,13 @@ import (
 // resource can be an Amazon CloudFront distribution, Elastic Load Balancing load
 // balancer, Global Accelerator accelerator, Elastic IP Address, or an Amazon Route
 // 53 hosted zone. You can add protection to only a single resource with each
-// CreateProtection request. If you want to add protection to multiple resources at
-// once, use the WAF console (https://console.aws.amazon.com/waf/). For more
-// information see Getting Started with Shield Advanced
+// CreateProtection request. You can add protection to multiple resources at once
+// through the Shield Advanced console at
+// https://console.aws.amazon.com/wafv2/shieldv2#/
+// (https://console.aws.amazon.com/wafv2/shieldv2#/). For more information see
+// Getting Started with Shield Advanced
 // (https://docs.aws.amazon.com/waf/latest/developerguide/getting-started-ddos.html)
-// and Add Shield Advanced Protection to more Amazon Web Services Resources
+// and Adding Shield Advanced protection to Amazon Web Services resources
 // (https://docs.aws.amazon.com/waf/latest/developerguide/configure-new-protection.html).
 func (c *Client) CreateProtection(ctx context.Context, params *CreateProtectionInput, optFns ...func(*Options)) (*CreateProtectionOutput, error) {
 	if params == nil {

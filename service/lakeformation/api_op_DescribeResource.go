@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the current data access role for the given resource registered in AWS
-// Lake Formation.
+// Retrieves the current data access role for the given resource registered in Lake
+// Formation.
 func (c *Client) DescribeResource(ctx context.Context, params *DescribeResourceInput, optFns ...func(*Options)) (*DescribeResourceOutput, error) {
 	if params == nil {
 		params = &DescribeResourceInput{}
@@ -40,7 +40,7 @@ type DescribeResourceInput struct {
 
 type DescribeResourceOutput struct {
 
-	// A structure containing information about an AWS Lake Formation resource.
+	// A structure containing information about an Lake Formation resource.
 	ResourceInfo *types.ResourceInfo
 
 	// Metadata pertaining to the operation's result.
@@ -50,11 +50,11 @@ type DescribeResourceOutput struct {
 }
 
 func (c *Client) addOperationDescribeResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeResource{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeResource{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeResource{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeResource{}, middleware.After)
 	if err != nil {
 		return err
 	}

@@ -11,7 +11,7 @@ import (
 )
 
 // Updates the data access role used for vending access to the given (registered)
-// resource in AWS Lake Formation.
+// resource in Lake Formation.
 func (c *Client) UpdateResource(ctx context.Context, params *UpdateResourceInput, optFns ...func(*Options)) (*UpdateResourceOutput, error) {
 	if params == nil {
 		params = &UpdateResourceInput{}
@@ -34,7 +34,7 @@ type UpdateResourceInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// The new role to use for the given resource registered in AWS Lake Formation.
+	// The new role to use for the given resource registered in Lake Formation.
 	//
 	// This member is required.
 	RoleArn *string
@@ -50,11 +50,11 @@ type UpdateResourceOutput struct {
 }
 
 func (c *Client) addOperationUpdateResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateResource{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateResource{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateResource{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateResource{}, middleware.After)
 	if err != nil {
 		return err
 	}

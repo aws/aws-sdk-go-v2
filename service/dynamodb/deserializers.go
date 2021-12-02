@@ -12243,6 +12243,11 @@ func awsAwsjson10_deserializeDocumentReplicaDescription(v **types.ReplicaDescrip
 				sv.ReplicaStatusPercentProgress = ptr.String(jtv)
 			}
 
+		case "ReplicaTableClassSummary":
+			if err := awsAwsjson10_deserializeDocumentTableClassSummary(&sv.ReplicaTableClassSummary, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -12735,6 +12740,11 @@ func awsAwsjson10_deserializeDocumentReplicaSettingsDescription(v **types.Replic
 					return fmt.Errorf("expected ReplicaStatus to be of type string, got %T instead", value)
 				}
 				sv.ReplicaStatus = types.ReplicaStatus(jtv)
+			}
+
+		case "ReplicaTableClassSummary":
+			if err := awsAwsjson10_deserializeDocumentTableClassSummary(&sv.ReplicaTableClassSummary, value); err != nil {
+				return err
 			}
 
 		default:
@@ -13437,6 +13447,62 @@ func awsAwsjson10_deserializeDocumentTableAutoScalingDescription(v **types.Table
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentTableClassSummary(v **types.TableClassSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TableClassSummary
+	if *v == nil {
+		sv = &types.TableClassSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "LastUpdateDateTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastUpdateDateTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Date to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "TableClass":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TableClass to be of type string, got %T instead", value)
+				}
+				sv.TableClass = types.TableClass(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentTableDescription(v **types.TableDescription, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13577,6 +13643,11 @@ func awsAwsjson10_deserializeDocumentTableDescription(v **types.TableDescription
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.TableArn = ptr.String(jtv)
+			}
+
+		case "TableClassSummary":
+			if err := awsAwsjson10_deserializeDocumentTableClassSummary(&sv.TableClassSummary, value); err != nil {
+				return err
 			}
 
 		case "TableId":

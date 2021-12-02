@@ -97,7 +97,7 @@ type ActivateGatewayInput struct {
 	// A value that defines the type of gateway to activate. The type specified is
 	// critical to all later functions of the gateway and cannot be changed after
 	// activation. The default value is CACHED. Valid Values: STORED | CACHED | VTL |
-	// FILE_S3 | FILE_FSX_SMB|
+	// VTL_SNOW | FILE_S3 | FILE_FSX_SMB
 	GatewayType *string
 
 	// The value that indicates the type of medium changer to use for tape gateway.

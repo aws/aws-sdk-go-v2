@@ -15,14 +15,17 @@ import (
 // database list. Depending on the authorization method, use one of the following
 // combinations of request parameters:
 //
-// * Secrets Manager - specify the Amazon
-// Resource Name (ARN) of the secret, the database name, and the cluster identifier
-// that matches the cluster in the secret.
+// * Secrets Manager - when connecting to a
+// cluster, specify the Amazon Resource Name (ARN) of the secret, the database
+// name, and the cluster identifier that matches the cluster in the secret. When
+// connecting to a serverless endpoint, specify the Amazon Resource Name (ARN) of
+// the secret and the database name.
 //
-// * Temporary credentials - specify the
-// cluster identifier, the database name, and the database user name. Permission to
-// call the redshift:GetClusterCredentials operation is required to use this
-// method.
+// * Temporary credentials - when connecting to
+// a cluster, specify the cluster identifier, the database name, and the database
+// user name. Also, permission to call the redshift:GetClusterCredentials operation
+// is required. When connecting to a serverless endpoint, specify the database
+// name.
 func (c *Client) ListDatabases(ctx context.Context, params *ListDatabasesInput, optFns ...func(*Options)) (*ListDatabasesOutput, error) {
 	if params == nil {
 		params = &ListDatabasesInput{}
@@ -40,20 +43,18 @@ func (c *Client) ListDatabases(ctx context.Context, params *ListDatabasesInput, 
 
 type ListDatabasesInput struct {
 
-	// The cluster identifier. This parameter is required when authenticating using
-	// either Secrets Manager or temporary credentials.
-	//
-	// This member is required.
-	ClusterIdentifier *string
-
 	// The name of the database. This parameter is required when authenticating using
 	// either Secrets Manager or temporary credentials.
 	//
 	// This member is required.
 	Database *string
 
-	// The database user name. This parameter is required when authenticating using
-	// temporary credentials.
+	// The cluster identifier. This parameter is required when connecting to a cluster
+	// and authenticating using either Secrets Manager or temporary credentials.
+	ClusterIdentifier *string
+
+	// The database user name. This parameter is required when connecting to a cluster
+	// and authenticating using temporary credentials.
 	DbUser *string
 
 	// The maximum number of databases to return in the response. If more databases

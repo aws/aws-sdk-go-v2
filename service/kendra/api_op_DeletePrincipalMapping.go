@@ -20,6 +20,8 @@ import (
 // updated list of users or sub groups that belong to the "Engineering" group when
 // calling PutPrincipalMapping. You can update your internal list of users or sub
 // groups and input this list when calling PutPrincipalMapping.
+// DeletePrincipalMapping is currently not supported in the Amazon Web Services
+// GovCloud (US-West) region.
 func (c *Client) DeletePrincipalMapping(ctx context.Context, params *DeletePrincipalMappingInput, optFns ...func(*Options)) (*DeletePrincipalMappingOutput, error) {
 	if params == nil {
 		params = &DeletePrincipalMappingInput{}

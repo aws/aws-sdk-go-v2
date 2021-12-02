@@ -66,6 +66,54 @@ type AcceleratorTotalMemoryMiBRequest struct {
 	noSmithyDocumentSerde
 }
 
+// Describes a finding for a Network Access Scope.
+type AccessScopeAnalysisFinding struct {
+
+	// The finding components.
+	FindingComponents []PathComponent
+
+	// The ID of the finding.
+	FindingId *string
+
+	// The ID of the Network Access Scope analysis.
+	NetworkInsightsAccessScopeAnalysisId *string
+
+	// The ID of the Network Access Scope.
+	NetworkInsightsAccessScopeId *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes a path.
+type AccessScopePath struct {
+
+	// The destination.
+	Destination *PathStatement
+
+	// The source.
+	Source *PathStatement
+
+	// The through resources.
+	ThroughResources []ThroughResourcesStatement
+
+	noSmithyDocumentSerde
+}
+
+// Describes a path.
+type AccessScopePathRequest struct {
+
+	// The destination.
+	Destination *PathStatementRequest
+
+	// The source.
+	Source *PathStatementRequest
+
+	// The through resources.
+	ThroughResources []ThroughResourcesStatementRequest
+
+	noSmithyDocumentSerde
+}
+
 // Describes an account attribute.
 type AccountAttribute struct {
 
@@ -103,6 +151,19 @@ type ActiveInstance struct {
 
 	// The ID of the Spot Instance request.
 	SpotInstanceRequestId *string
+
+	noSmithyDocumentSerde
+}
+
+// Add an operating Region to an IPAM. Operating Regions are Amazon Web Services
+// Regions where the IPAM is allowed to manage IP address CIDRs. IPAM only
+// discovers and monitors resources in the Amazon Web Services Regions you select
+// as operating Regions. For more information about operating Regions, see Create
+// an IPAM in the Amazon VPC IPAM User Guide.
+type AddIpamOperatingRegion struct {
+
+	// The name of the operating Region.
+	RegionName *string
 
 	noSmithyDocumentSerde
 }
@@ -247,6 +308,9 @@ type AnalysisComponent struct {
 
 	// The ID of the component.
 	Id *string
+
+	// The name of the analysis component.
+	Name *string
 
 	noSmithyDocumentSerde
 }
@@ -6295,6 +6359,426 @@ type InternetGatewayAttachment struct {
 	noSmithyDocumentSerde
 }
 
+// IPAM is a VPC feature that you can use to automate your IP address management
+// workflows including assigning, tracking, troubleshooting, and auditing IP
+// addresses across Amazon Web Services Regions and accounts throughout your Amazon
+// Web Services Organization. For more information, see What is IPAM? in the Amazon
+// VPC IPAM User Guide.
+type Ipam struct {
+
+	// The description for the IPAM.
+	Description *string
+
+	// The ARN of the IPAM.
+	IpamArn *string
+
+	// The ID of the IPAM.
+	IpamId *string
+
+	// The Amazon Web Services Region of the IPAM.
+	IpamRegion *string
+
+	// The operating Regions for an IPAM. Operating Regions are Amazon Web Services
+	// Regions where the IPAM is allowed to manage IP address CIDRs. IPAM only
+	// discovers and monitors resources in the Amazon Web Services Regions you select
+	// as operating Regions. For more information about operating Regions, see Create
+	// an IPAM in the Amazon VPC IPAM User Guide.
+	OperatingRegions []IpamOperatingRegion
+
+	// The Amazon Web Services account ID of the owner of the IPAM.
+	OwnerId *string
+
+	// The ID of the IPAM's default private scope.
+	PrivateDefaultScopeId *string
+
+	// The ID of the IPAM's default public scope.
+	PublicDefaultScopeId *string
+
+	// The number of scopes in the IPAM. The scope quota is 5. For more information on
+	// quotas, see Quotas in IPAM in the Amazon VPC IPAM User Guide.
+	ScopeCount *int32
+
+	// The state of the IPAM.
+	State IpamState
+
+	// The key/value combination of a tag assigned to the resource. Use the tag key in
+	// the filter name and the tag value as the filter value. For example, to find all
+	// resources that have a tag with the key Owner and the value TeamA, specify
+	// tag:Owner for the filter name and TeamA for the filter value.
+	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
+// The historical record of a CIDR within an IPAM scope. For more information, see
+// View the history of IP addresses in the Amazon VPC IPAM User Guide.
+type IpamAddressHistoryRecord struct {
+
+	// The CIDR of the resource.
+	ResourceCidr *string
+
+	// The compliance status of a resource. For more information on compliance
+	// statuses, see Monitor CIDR usage by resource in the Amazon VPC IPAM User Guide.
+	ResourceComplianceStatus IpamComplianceStatus
+
+	// The ID of the resource.
+	ResourceId *string
+
+	// The name of the resource.
+	ResourceName *string
+
+	// The overlap status of an IPAM resource. The overlap status tells you if the CIDR
+	// for a resource overlaps with another CIDR in the scope. For more information on
+	// overlap statuses, see Monitor CIDR usage by resource in the Amazon VPC IPAM User
+	// Guide.
+	ResourceOverlapStatus IpamOverlapStatus
+
+	// The ID of the resource owner.
+	ResourceOwnerId *string
+
+	// The Amazon Web Services Region of the resource.
+	ResourceRegion *string
+
+	// The type of the resource.
+	ResourceType IpamAddressHistoryResourceType
+
+	// Sampled end time of the resource-to-CIDR association within the IPAM scope.
+	// Changes are picked up in periodic snapshots, so the end time may have occurred
+	// before this specific time.
+	SampledEndTime *time.Time
+
+	// Sampled start time of the resource-to-CIDR association within the IPAM scope.
+	// Changes are picked up in periodic snapshots, so the start time may have occurred
+	// before this specific time.
+	SampledStartTime *time.Time
+
+	// The VPC ID of the resource.
+	VpcId *string
+
+	noSmithyDocumentSerde
+}
+
+// A signed document that proves that you are authorized to bring the specified IP
+// address range to Amazon using BYOIP.
+type IpamCidrAuthorizationContext struct {
+
+	// The plain-text authorization message for the prefix and account.
+	Message *string
+
+	// The signed authorization message for the prefix and account.
+	Signature *string
+
+	noSmithyDocumentSerde
+}
+
+// The operating Regions for an IPAM. Operating Regions are Amazon Web Services
+// Regions where the IPAM is allowed to manage IP address CIDRs. IPAM only
+// discovers and monitors resources in the Amazon Web Services Regions you select
+// as operating Regions. For more information about operating Regions, see Create
+// an IPAM in the Amazon VPC IPAM User Guide.
+type IpamOperatingRegion struct {
+
+	// The name of the operating Region.
+	RegionName *string
+
+	noSmithyDocumentSerde
+}
+
+// In IPAM, a pool is a collection of contiguous IP addresses CIDRs. Pools enable
+// you to organize your IP addresses according to your routing and security needs.
+// For example, if you have separate routing and security needs for development and
+// production applications, you can create a pool for each.
+type IpamPool struct {
+
+	// The address family of the pool.
+	AddressFamily AddressFamily
+
+	// The default netmask length for allocations added to this pool. If, for example,
+	// the CIDR assigned to this pool is 10.0.0.0/8 and you enter 16 here, new
+	// allocations will default to 10.0.0.0/16.
+	AllocationDefaultNetmaskLength *int32
+
+	// The maximum netmask length possible for CIDR allocations in this IPAM pool to be
+	// compliant. The maximum netmask length must be greater than the minimum netmask
+	// length. Possible netmask lengths for IPv4 addresses are 0 - 32. Possible netmask
+	// lengths for IPv6 addresses are 0 - 128.
+	AllocationMaxNetmaskLength *int32
+
+	// The minimum netmask length required for CIDR allocations in this IPAM pool to be
+	// compliant. The minimum netmask length must be less than the maximum netmask
+	// length. Possible netmask lengths for IPv4 addresses are 0 - 32. Possible netmask
+	// lengths for IPv6 addresses are 0 - 128.
+	AllocationMinNetmaskLength *int32
+
+	// Tags that are required for resources that use CIDRs from this IPAM pool.
+	// Resources that do not have these tags will not be allowed to allocate space from
+	// the pool. If the resources have their tags changed after they have allocated
+	// space or if the allocation tagging requirements are changed on the pool, the
+	// resource may be marked as noncompliant.
+	AllocationResourceTags []IpamResourceTag
+
+	// If selected, IPAM will continuously look for resources within the CIDR range of
+	// this pool and automatically import them as allocations into your IPAM. The CIDRs
+	// that will be allocated for these resources must not already be allocated to
+	// other resources in order for the import to succeed. IPAM will import a CIDR
+	// regardless of its compliance with the pool's allocation rules, so a resource
+	// might be imported and subsequently marked as noncompliant. If IPAM discovers
+	// multiple CIDRs that overlap, IPAM will import the largest CIDR only. If IPAM
+	// discovers multiple CIDRs with matching CIDRs, IPAM will randomly import one of
+	// them only. A locale must be set on the pool for this feature to work.
+	AutoImport *bool
+
+	// Limits which service in Amazon Web Services that the pool can be used in. "ec2",
+	// for example, allows users to use space for Elastic IP addresses and VPCs.
+	AwsService IpamPoolAwsService
+
+	// The description of the IPAM pool.
+	Description *string
+
+	// The ARN of the IPAM.
+	IpamArn *string
+
+	// The ARN of the IPAM pool.
+	IpamPoolArn *string
+
+	// The ID of the IPAM pool.
+	IpamPoolId *string
+
+	// The Amazon Web Services Region of the IPAM pool.
+	IpamRegion *string
+
+	// The ARN of the scope of the IPAM pool.
+	IpamScopeArn *string
+
+	// In IPAM, a scope is the highest-level container within IPAM. An IPAM contains
+	// two default scopes. Each scope represents the IP space for a single network. The
+	// private scope is intended for all private IP address space. The public scope is
+	// intended for all public IP address space. Scopes enable you to reuse IP
+	// addresses across multiple unconnected networks without causing IP address
+	// overlap or conflict.
+	IpamScopeType IpamScopeType
+
+	// The locale of the IPAM pool. In IPAM, the locale is the Amazon Web Services
+	// Region where you want to make an IPAM pool available for allocations. Only
+	// resources in the same Region as the locale of the pool can get IP address
+	// allocations from the pool. You can only allocate a CIDR for a VPC, for example,
+	// from an IPAM pool that shares a locale with the VPC’s Region. Note that once you
+	// choose a Locale for a pool, you cannot modify it. If you choose an Amazon Web
+	// Services Region for locale that has not been configured as an operating Region
+	// for the IPAM, you'll get an error.
+	Locale *string
+
+	// The Amazon Web Services account ID of the owner of the IPAM pool.
+	OwnerId *string
+
+	// The depth of pools in your IPAM pool. The pool depth quota is 10. For more
+	// information, see Quotas in IPAM in the Amazon VPC IPAM User Guide.
+	PoolDepth *int32
+
+	// Determines if a pool is publicly advertisable. This option is not available for
+	// pools with AddressFamily set to ipv4.
+	PubliclyAdvertisable *bool
+
+	// The ID of the source IPAM pool. You can use this option to create an IPAM pool
+	// within an existing source pool.
+	SourceIpamPoolId *string
+
+	// The state of the IPAM pool.
+	State IpamPoolState
+
+	// A message related to the failed creation of an IPAM pool.
+	StateMessage *string
+
+	// The key/value combination of a tag assigned to the resource. Use the tag key in
+	// the filter name and the tag value as the filter value. For example, to find all
+	// resources that have a tag with the key Owner and the value TeamA, specify
+	// tag:Owner for the filter name and TeamA for the filter value.
+	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
+// In IPAM, an allocation is a CIDR assignment from an IPAM pool to another
+// resource or IPAM pool.
+type IpamPoolAllocation struct {
+
+	// The CIDR for the allocation. A CIDR is a representation of an IP address and its
+	// associated network mask (or netmask) and refers to a range of IP addresses. An
+	// IPv4 CIDR example is 10.24.34.0/23. An IPv6 CIDR example is 2001:DB8::/32.
+	Cidr *string
+
+	// A description of the pool allocation.
+	Description *string
+
+	// The ID of an allocation.
+	IpamPoolAllocationId *string
+
+	// The ID of the resource.
+	ResourceId *string
+
+	// The owner of the resource.
+	ResourceOwner *string
+
+	// The Amazon Web Services Region of the resource.
+	ResourceRegion *string
+
+	// The type of the resource.
+	ResourceType IpamPoolAllocationResourceType
+
+	noSmithyDocumentSerde
+}
+
+// A CIDR provisioned to an IPAM pool.
+type IpamPoolCidr struct {
+
+	// The CIDR provisioned to the IPAM pool. A CIDR is a representation of an IP
+	// address and its associated network mask (or netmask) and refers to a range of IP
+	// addresses. An IPv4 CIDR example is 10.24.34.0/23. An IPv6 CIDR example is
+	// 2001:DB8::/32.
+	Cidr *string
+
+	// Details related to why an IPAM pool CIDR failed to be provisioned.
+	FailureReason *IpamPoolCidrFailureReason
+
+	// The state of the CIDR.
+	State IpamPoolCidrState
+
+	noSmithyDocumentSerde
+}
+
+// Details related to why an IPAM pool CIDR failed to be provisioned.
+type IpamPoolCidrFailureReason struct {
+
+	// An error code related to why an IPAM pool CIDR failed to be provisioned.
+	Code IpamPoolCidrFailureCode
+
+	// A message related to why an IPAM pool CIDR failed to be provisioned.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// The CIDR for an IPAM resource.
+type IpamResourceCidr struct {
+
+	// The compliance status of the IPAM resource. For more information on compliance
+	// statuses, see Monitor CIDR usage by resource in the Amazon VPC IPAM User Guide.
+	ComplianceStatus IpamComplianceStatus
+
+	// The IP address space in the IPAM pool that is allocated to this resource. To
+	// convert the decimal to a percentage, multiply the decimal by 100.
+	IpUsage *float64
+
+	// The IPAM ID for an IPAM resource.
+	IpamId *string
+
+	// The pool ID for an IPAM resource.
+	IpamPoolId *string
+
+	// The scope ID for an IPAM resource.
+	IpamScopeId *string
+
+	// The management state of the resource. For more information about management
+	// states, see Monitor CIDR usage by resource in the Amazon VPC IPAM User Guide.
+	ManagementState IpamManagementState
+
+	// The overlap status of an IPAM resource. The overlap status tells you if the CIDR
+	// for a resource overlaps with another CIDR in the scope. For more information on
+	// overlap statuses, see Monitor CIDR usage by resource in the Amazon VPC IPAM User
+	// Guide.
+	OverlapStatus IpamOverlapStatus
+
+	// The CIDR for an IPAM resource.
+	ResourceCidr *string
+
+	// The ID of an IPAM resource.
+	ResourceId *string
+
+	// The name of an IPAM resource.
+	ResourceName *string
+
+	// The Amazon Web Services account number of the owner of an IPAM resource.
+	ResourceOwnerId *string
+
+	// The Amazon Web Services Region for an IPAM resource.
+	ResourceRegion *string
+
+	// The tags for an IPAM resource.
+	ResourceTags []IpamResourceTag
+
+	// The type of IPAM resource.
+	ResourceType IpamResourceType
+
+	// The ID of a VPC.
+	VpcId *string
+
+	noSmithyDocumentSerde
+}
+
+// The key/value combination of a tag assigned to the resource. Use the tag key in
+// the filter name and the tag value as the filter value. For example, to find all
+// resources that have a tag with the key Owner and the value TeamA, specify
+// tag:Owner for the filter name and TeamA for the filter value.
+type IpamResourceTag struct {
+
+	// The key of a tag assigned to the resource. Use this filter to find all resources
+	// assigned a tag with a specific key, regardless of the tag value.
+	Key *string
+
+	// The value of the tag.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// In IPAM, a scope is the highest-level container within IPAM. An IPAM contains
+// two default scopes. Each scope represents the IP space for a single network. The
+// private scope is intended for all private IP address space. The public scope is
+// intended for all public IP address space. Scopes enable you to reuse IP
+// addresses across multiple unconnected networks without causing IP address
+// overlap or conflict. For more information, see How IPAM works in the Amazon VPC
+// IPAM User Guide
+type IpamScope struct {
+
+	// The description of the scope.
+	Description *string
+
+	// The ARN of the IPAM.
+	IpamArn *string
+
+	// The Amazon Web Services Region of the IPAM scope.
+	IpamRegion *string
+
+	// The ARN of the scope.
+	IpamScopeArn *string
+
+	// The ID of the scope.
+	IpamScopeId *string
+
+	// The type of the scope.
+	IpamScopeType IpamScopeType
+
+	// Defines if the scope is the default scope or not.
+	IsDefault *bool
+
+	// The Amazon Web Services account ID of the owner of the scope.
+	OwnerId *string
+
+	// The number of pools in the scope.
+	PoolCount *int32
+
+	// The state of the IPAM scope.
+	State IpamScopeState
+
+	// The key/value combination of a tag assigned to the resource. Use the tag key in
+	// the filter name and the tag value as the filter value. For example, to find all
+	// resources that have a tag with the key Owner and the value TeamA, specify
+	// tag:Owner for the filter name and TeamA for the filter value.
+	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
 // Describes a set of permissions for a security group rule.
 type IpPermission struct {
 
@@ -8318,6 +8802,81 @@ type NetworkInfo struct {
 	noSmithyDocumentSerde
 }
 
+// Describes a Network Access Scope.
+type NetworkInsightsAccessScope struct {
+
+	// The creation date.
+	CreatedDate *time.Time
+
+	// The Amazon Resource Name (ARN) of the Network Access Scope.
+	NetworkInsightsAccessScopeArn *string
+
+	// The ID of the Network Access Scope.
+	NetworkInsightsAccessScopeId *string
+
+	// The tags.
+	Tags []Tag
+
+	// The last updated date.
+	UpdatedDate *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Describes a Network Access Scope analysis.
+type NetworkInsightsAccessScopeAnalysis struct {
+
+	// The number of network interfaces analyzed.
+	AnalyzedEniCount *int32
+
+	// The analysis end date.
+	EndDate *time.Time
+
+	// Indicates whether there are findings.
+	FindingsFound FindingsFound
+
+	// The Amazon Resource Name (ARN) of the Network Access Scope analysis.
+	NetworkInsightsAccessScopeAnalysisArn *string
+
+	// The ID of the Network Access Scope analysis.
+	NetworkInsightsAccessScopeAnalysisId *string
+
+	// The ID of the Network Access Scope.
+	NetworkInsightsAccessScopeId *string
+
+	// The analysis start date.
+	StartDate *time.Time
+
+	// The status.
+	Status AnalysisStatus
+
+	// The status message.
+	StatusMessage *string
+
+	// The tags.
+	Tags []Tag
+
+	// The warning message.
+	WarningMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the Network Access Scope content.
+type NetworkInsightsAccessScopeContent struct {
+
+	// The paths to exclude.
+	ExcludePaths []AccessScopePath
+
+	// The paths to match.
+	MatchPaths []AccessScopePath
+
+	// The ID of the Network Access Scope.
+	NetworkInsightsAccessScopeId *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes a network insights analysis.
 type NetworkInsightsAnalysis struct {
 
@@ -8362,6 +8921,9 @@ type NetworkInsightsAnalysis struct {
 
 	// The tags.
 	Tags []Tag
+
+	// The warning message.
+	WarningMessage *string
 
 	noSmithyDocumentSerde
 }
@@ -8742,11 +9304,68 @@ type OnDemandOptionsRequest struct {
 	noSmithyDocumentSerde
 }
 
+// Describes a packet header statement.
+type PacketHeaderStatement struct {
+
+	// The destination addresses.
+	DestinationAddresses []string
+
+	// The destination ports.
+	DestinationPorts []string
+
+	// The destination prefix lists.
+	DestinationPrefixLists []string
+
+	// The protocols.
+	Protocols []Protocol
+
+	// The source addresses.
+	SourceAddresses []string
+
+	// The source ports.
+	SourcePorts []string
+
+	// The source prefix lists.
+	SourcePrefixLists []string
+
+	noSmithyDocumentSerde
+}
+
+// Describes a packet header statement.
+type PacketHeaderStatementRequest struct {
+
+	// The destination addresses.
+	DestinationAddresses []string
+
+	// The destination ports.
+	DestinationPorts []string
+
+	// The destination prefix lists.
+	DestinationPrefixLists []string
+
+	// The protocols.
+	Protocols []Protocol
+
+	// The source addresses.
+	SourceAddresses []string
+
+	// The source ports.
+	SourcePorts []string
+
+	// The source prefix lists.
+	SourcePrefixLists []string
+
+	noSmithyDocumentSerde
+}
+
 // Describes a path component.
 type PathComponent struct {
 
 	// The network ACL rule.
 	AclRule *AnalysisAclRule
+
+	// The resource to which the path component is attached.
+	AttachedTo *AnalysisComponent
 
 	// The component.
 	Component *AnalysisComponent
@@ -8777,6 +9396,30 @@ type PathComponent struct {
 
 	// The component VPC.
 	Vpc *AnalysisComponent
+
+	noSmithyDocumentSerde
+}
+
+// Describes a path statement.
+type PathStatement struct {
+
+	// The packet header statement.
+	PacketHeaderStatement *PacketHeaderStatement
+
+	// The resource statement.
+	ResourceStatement *ResourceStatement
+
+	noSmithyDocumentSerde
+}
+
+// Describes a path statement.
+type PathStatementRequest struct {
+
+	// The packet header statement.
+	PacketHeaderStatement *PacketHeaderStatementRequest
+
+	// The resource statement.
+	ResourceStatement *ResourceStatementRequest
 
 	noSmithyDocumentSerde
 }
@@ -9559,6 +10202,19 @@ type RegisterInstanceTagAttributeRequest struct {
 	noSmithyDocumentSerde
 }
 
+// Remove an operating Region from an IPAM. Operating Regions are Amazon Web
+// Services Regions where the IPAM is allowed to manage IP address CIDRs. IPAM only
+// discovers and monitors resources in the Amazon Web Services Regions you select
+// as operating Regions. For more information about operating Regions, see Create
+// an IPAM in the Amazon VPC IPAM User Guide
+type RemoveIpamOperatingRegion struct {
+
+	// The name of the operating Region you want to remove.
+	RegionName *string
+
+	noSmithyDocumentSerde
+}
+
 // An entry for a prefix list.
 type RemovePrefixListEntry struct {
 
@@ -9613,6 +10269,19 @@ type ReplaceRootVolumeTask struct {
 	// * failed-detached - the replacement task has failed and the instance
 	// has no root volume attached.
 	TaskState ReplaceRootVolumeTaskState
+
+	noSmithyDocumentSerde
+}
+
+// A tag on an IPAM resource.
+type RequestIpamResourceTag struct {
+
+	// The key of a tag assigned to the resource. Use this filter to find all resources
+	// assigned a tag with a specific key, regardless of the tag value.
+	Key *string
+
+	// The value for the tag.
+	Value *string
 
 	noSmithyDocumentSerde
 }
@@ -10197,6 +10866,30 @@ type ReservedInstancesOffering struct {
 
 	// The usage price of the Reserved Instance, per hour.
 	UsagePrice *float32
+
+	noSmithyDocumentSerde
+}
+
+// Describes a resource statement.
+type ResourceStatement struct {
+
+	// The resource types.
+	ResourceTypes []string
+
+	// The resources.
+	Resources []string
+
+	noSmithyDocumentSerde
+}
+
+// Describes a resource statement.
+type ResourceStatementRequest struct {
+
+	// The resource types.
+	ResourceTypes []string
+
+	// The resources.
+	Resources []string
 
 	noSmithyDocumentSerde
 }
@@ -12390,6 +13083,11 @@ type Subnet struct {
 	// subnet should return synthetic IPv6 addresses for IPv4-only destinations.
 	EnableDns64 *bool
 
+	// Indicates the device position for local network interfaces in this subnet. For
+	// example, 1 indicates local network interfaces in this subnet are the secondary
+	// network interface (eth1).
+	EnableLniAtDeviceIndex *int32
+
 	// Information about the IPv6 CIDR blocks associated with the subnet.
 	Ipv6CidrBlockAssociationSet []SubnetIpv6CidrBlockAssociation
 
@@ -12735,6 +13433,24 @@ type TerminateConnectionStatus struct {
 
 	// The state of the client connection.
 	PreviousStatus *ClientVpnConnectionStatus
+
+	noSmithyDocumentSerde
+}
+
+// Describes a through resource statement.
+type ThroughResourcesStatement struct {
+
+	// The resource statement.
+	ResourceStatement *ResourceStatement
+
+	noSmithyDocumentSerde
+}
+
+// Describes a through resource statement.
+type ThroughResourcesStatementRequest struct {
+
+	// The resource statement.
+	ResourceStatement *ResourceStatementRequest
 
 	noSmithyDocumentSerde
 }

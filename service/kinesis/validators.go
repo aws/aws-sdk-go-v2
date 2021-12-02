@@ -490,6 +490,26 @@ func (m *validateOpUpdateShardCount) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateStreamMode struct {
+}
+
+func (*validateOpUpdateStreamMode) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateStreamMode) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateStreamModeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateStreamModeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpAddTagsToStreamValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAddTagsToStream{}, middleware.After)
 }
@@ -586,6 +606,10 @@ func addOpUpdateShardCountValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateShardCount{}, middleware.After)
 }
 
+func addOpUpdateStreamModeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateStreamMode{}, middleware.After)
+}
+
 func validatePutRecordsRequestEntry(v *types.PutRecordsRequestEntry) error {
 	if v == nil {
 		return nil
@@ -651,6 +675,21 @@ func validateStartingPosition(v *types.StartingPosition) error {
 	}
 }
 
+func validateStreamModeDetails(v *types.StreamModeDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StreamModeDetails"}
+	if len(v.StreamMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("StreamMode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAddTagsToStreamInput(v *AddTagsToStreamInput) error {
 	if v == nil {
 		return nil
@@ -677,8 +716,10 @@ func validateOpCreateStreamInput(v *CreateStreamInput) error {
 	if v.StreamName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StreamName"))
 	}
-	if v.ShardCount == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ShardCount"))
+	if v.StreamModeDetails != nil {
+		if err := validateStreamModeDetails(v.StreamModeDetails); err != nil {
+			invalidParams.AddNested("StreamModeDetails", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1088,6 +1129,28 @@ func validateOpUpdateShardCountInput(v *UpdateShardCountInput) error {
 	}
 	if len(v.ScalingType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ScalingType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateStreamModeInput(v *UpdateStreamModeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateStreamModeInput"}
+	if v.StreamARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StreamARN"))
+	}
+	if v.StreamModeDetails == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StreamModeDetails"))
+	} else if v.StreamModeDetails != nil {
+		if err := validateStreamModeDetails(v.StreamModeDetails); err != nil {
+			invalidParams.AddNested("StreamModeDetails", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -98,10 +98,10 @@ type PutRecordsInput struct {
 // PutRecords results.
 type PutRecordsOutput struct {
 
-	// An array of successfully and unsuccessfully processed record results, correlated
-	// with the request by natural ordering. A record that is successfully added to a
-	// stream includes SequenceNumber and ShardId in the result. A record that fails to
-	// be added to a stream includes ErrorCode and ErrorMessage in the result.
+	// An array of successfully and unsuccessfully processed record results. A record
+	// that is successfully added to a stream includes SequenceNumber and ShardId in
+	// the result. A record that fails to be added to a stream includes ErrorCode and
+	// ErrorMessage in the result.
 	//
 	// This member is required.
 	Records []types.PutRecordsResultEntry
@@ -112,7 +112,7 @@ type PutRecordsOutput struct {
 	// * NONE: Do not encrypt the records.
 	//
 	// * KMS: Use server-side
-	// encryption on the records using a customer-managed AWS KMS key.
+	// encryption on the records using a customer-managed Amazon Web Services KMS key.
 	EncryptionType types.EncryptionType
 
 	// The number of unsuccessfully processed records in a PutRecords request.

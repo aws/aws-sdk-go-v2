@@ -62,6 +62,9 @@ type DescribeTrialComponentOutput struct {
 	// When the component was last modified.
 	LastModifiedTime *time.Time
 
+	// The Amazon Resource Name (ARN) of the lineage group.
+	LineageGroupArn *string
+
 	// Metadata properties of the tracking entity, trial, or trial component.
 	MetadataProperties *types.MetadataProperties
 

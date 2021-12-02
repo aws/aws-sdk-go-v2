@@ -115,6 +115,10 @@ type UpdateTableInput struct {
 	// stream.
 	StreamSpecification *types.StreamSpecification
 
+	// The table class of the table to be updated. Valid values are STANDARD and
+	// STANDARD_INFREQUENT_ACCESS.
+	TableClass types.TableClass
+
 	noSmithyDocumentSerde
 }
 

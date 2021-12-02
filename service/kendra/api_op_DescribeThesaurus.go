@@ -67,8 +67,8 @@ type DescribeThesaurusOutput struct {
 	// The thesaurus name.
 	Name *string
 
-	// An AWS Identity and Access Management (IAM) role that gives Amazon Kendra
-	// permissions to access thesaurus file specified in SourceS3Path.
+	// An IAM role that gives Amazon Kendra permissions to access thesaurus file
+	// specified in SourceS3Path.
 	RoleArn *string
 
 	// Information required to find a specific file in an Amazon S3 bucket.

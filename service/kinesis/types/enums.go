@@ -136,6 +136,24 @@ func (ShardIteratorType) Values() []ShardIteratorType {
 	}
 }
 
+type StreamMode string
+
+// Enum values for StreamMode
+const (
+	StreamModeProvisioned StreamMode = "PROVISIONED"
+	StreamModeOnDemand    StreamMode = "ON_DEMAND"
+)
+
+// Values returns all known values for StreamMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (StreamMode) Values() []StreamMode {
+	return []StreamMode{
+		"PROVISIONED",
+		"ON_DEMAND",
+	}
+}
+
 type StreamStatus string
 
 // Enum values for StreamStatus

@@ -32,8 +32,8 @@ type GetDataLakeSettingsInput struct {
 
 	// The identifier for the Data Catalog. By default, the account ID. The Data
 	// Catalog is the persistent metadata store. It contains database definitions,
-	// table definitions, and other control information to manage your AWS Lake
-	// Formation environment.
+	// table definitions, and other control information to manage your Lake Formation
+	// environment.
 	CatalogId *string
 
 	noSmithyDocumentSerde
@@ -41,8 +41,8 @@ type GetDataLakeSettingsInput struct {
 
 type GetDataLakeSettingsOutput struct {
 
-	// A structure representing a list of AWS Lake Formation principals designated as
-	// data lake administrators.
+	// A structure representing a list of Lake Formation principals designated as data
+	// lake administrators.
 	DataLakeSettings *types.DataLakeSettings
 
 	// Metadata pertaining to the operation's result.
@@ -52,11 +52,11 @@ type GetDataLakeSettingsOutput struct {
 }
 
 func (c *Client) addOperationGetDataLakeSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDataLakeSettings{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDataLakeSettings{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetDataLakeSettings{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDataLakeSettings{}, middleware.After)
 	if err != nil {
 		return err
 	}

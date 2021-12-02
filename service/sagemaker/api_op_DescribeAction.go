@@ -50,7 +50,7 @@ type DescribeActionOutput struct {
 	ActionType *string
 
 	// Information about the user who created or modified an experiment, trial, trial
-	// component, or project.
+	// component, lineage group, or project.
 	CreatedBy *types.UserContext
 
 	// When the action was created.
@@ -60,11 +60,14 @@ type DescribeActionOutput struct {
 	Description *string
 
 	// Information about the user who created or modified an experiment, trial, trial
-	// component, or project.
+	// component, lineage group, or project.
 	LastModifiedBy *types.UserContext
 
 	// When the action was last modified.
 	LastModifiedTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the lineage group.
+	LineageGroupArn *string
 
 	// Metadata properties of the tracking entity, trial, or trial component.
 	MetadataProperties *types.MetadataProperties

@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a tag with the specified name and values.
+// Creates an LF-tag with the specified name and values.
 func (c *Client) CreateLFTag(ctx context.Context, params *CreateLFTagInput, optFns ...func(*Options)) (*CreateLFTagOutput, error) {
 	if params == nil {
 		params = &CreateLFTagInput{}
@@ -28,7 +28,7 @@ func (c *Client) CreateLFTag(ctx context.Context, params *CreateLFTagInput, optF
 
 type CreateLFTagInput struct {
 
-	// The key-name for the tag.
+	// The key-name for the LF-tag.
 	//
 	// This member is required.
 	TagKey *string
@@ -40,8 +40,8 @@ type CreateLFTagInput struct {
 
 	// The identifier for the Data Catalog. By default, the account ID. The Data
 	// Catalog is the persistent metadata store. It contains database definitions,
-	// table definitions, and other control information to manage your AWS Lake
-	// Formation environment.
+	// table definitions, and other control information to manage your Lake Formation
+	// environment.
 	CatalogId *string
 
 	noSmithyDocumentSerde
@@ -55,11 +55,11 @@ type CreateLFTagOutput struct {
 }
 
 func (c *Client) addOperationCreateLFTagMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateLFTag{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateLFTag{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateLFTag{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateLFTag{}, middleware.After)
 	if err != nil {
 		return err
 	}

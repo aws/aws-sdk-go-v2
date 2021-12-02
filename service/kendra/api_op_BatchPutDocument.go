@@ -63,6 +63,14 @@ type BatchPutDocumentInput struct {
 	// This member is required.
 	IndexId *string
 
+	// Configuration information for altering your document metadata and content during
+	// the document ingestion process when you use the BatchPutDocument operation. For
+	// more information on how to create, modify and delete document metadata, or make
+	// other content alterations when you ingest documents into Amazon Kendra, see
+	// Customizing document metadata during the ingestion process
+	// (https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html).
+	CustomDocumentEnrichmentConfiguration *types.CustomDocumentEnrichmentConfiguration
+
 	// The Amazon Resource Name (ARN) of a role that is allowed to run the
 	// BatchPutDocument operation. For more information, see IAM Roles for Amazon
 	// Kendra (https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html).

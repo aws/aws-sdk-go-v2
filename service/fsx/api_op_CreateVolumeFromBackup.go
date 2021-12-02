@@ -31,7 +31,7 @@ func (c *Client) CreateVolumeFromBackup(ctx context.Context, params *CreateVolum
 
 type CreateVolumeFromBackupInput struct {
 
-	// The ID of the source backup. Specifies the backup you are copying.
+	// The ID of the source backup. Specifies the backup that you are copying.
 	//
 	// This member is required.
 	BackupId *string

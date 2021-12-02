@@ -6,6 +6,7 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -19,29 +20,30 @@ import (
 // second. Each shard can support writes up to 1,000 records per second, up to a
 // maximum data write total of 1 MiB per second. If the amount of data input
 // increases or decreases, you can add or remove shards. The stream name identifies
-// the stream. The name is scoped to the AWS account used by the application. It is
-// also scoped by AWS Region. That is, two streams in two different accounts can
-// have the same name, and two streams in the same account, but in two different
-// Regions, can have the same name. CreateStream is an asynchronous operation. Upon
-// receiving a CreateStream request, Kinesis Data Streams immediately returns and
-// sets the stream status to CREATING. After the stream is created, Kinesis Data
-// Streams sets the stream status to ACTIVE. You should perform read and write
-// operations only on an ACTIVE stream. You receive a LimitExceededException when
-// making a CreateStream request when you try to do one of the following:
+// the stream. The name is scoped to the Amazon Web Services account used by the
+// application. It is also scoped by Amazon Web Services Region. That is, two
+// streams in two different accounts can have the same name, and two streams in the
+// same account, but in two different Regions, can have the same name. CreateStream
+// is an asynchronous operation. Upon receiving a CreateStream request, Kinesis
+// Data Streams immediately returns and sets the stream status to CREATING. After
+// the stream is created, Kinesis Data Streams sets the stream status to ACTIVE.
+// You should perform read and write operations only on an ACTIVE stream. You
+// receive a LimitExceededException when making a CreateStream request when you try
+// to do one of the following:
 //
-// * Have
-// more than five streams in the CREATING state at any point in time.
+// * Have more than five streams in the CREATING state
+// at any point in time.
 //
-// * Create
-// more shards than are authorized for your account.
+// * Create more shards than are authorized for your
+// account.
 //
-// For the default shard limit
-// for an AWS account, see Amazon Kinesis Data Streams Limits
+// For the default shard limit for an Amazon Web Services account, see
+// Amazon Kinesis Data Streams Limits
 // (https://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html)
 // in the Amazon Kinesis Data Streams Developer Guide. To increase this limit,
-// contact AWS Support
+// contact Amazon Web Services Support
 // (https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html). You can
-// use DescribeStream to check the stream status, which is returned in
+// use DescribeStreamSummary to check the stream status, which is returned in
 // StreamStatus. CreateStream has a limit of five transactions per second per
 // account.
 func (c *Client) CreateStream(ctx context.Context, params *CreateStreamInput, optFns ...func(*Options)) (*CreateStreamOutput, error) {
@@ -62,21 +64,25 @@ func (c *Client) CreateStream(ctx context.Context, params *CreateStreamInput, op
 // Represents the input for CreateStream.
 type CreateStreamInput struct {
 
-	// The number of shards that the stream will use. The throughput of the stream is a
-	// function of the number of shards; more shards are required for greater
-	// provisioned throughput.
-	//
-	// This member is required.
-	ShardCount *int32
-
-	// A name to identify the stream. The stream name is scoped to the AWS account used
-	// by the application that creates the stream. It is also scoped by AWS Region.
-	// That is, two streams in two different AWS accounts can have the same name. Two
-	// streams in the same AWS account but in two different Regions can also have the
-	// same name.
+	// A name to identify the stream. The stream name is scoped to the Amazon Web
+	// Services account used by the application that creates the stream. It is also
+	// scoped by Amazon Web Services Region. That is, two streams in two different
+	// Amazon Web Services accounts can have the same name. Two streams in the same
+	// Amazon Web Services account but in two different Regions can also have the same
+	// name.
 	//
 	// This member is required.
 	StreamName *string
+
+	// The number of shards that the stream will use. The throughput of the stream is a
+	// function of the number of shards; more shards are required for greater
+	// provisioned throughput.
+	ShardCount *int32
+
+	// Indicates the capacity mode of the data stream. Currently, in Kinesis Data
+	// Streams, you can choose between an on-demand capacity mode and a provisioned
+	// capacity mode for your data streams.
+	StreamModeDetails *types.StreamModeDetails
 
 	noSmithyDocumentSerde
 }

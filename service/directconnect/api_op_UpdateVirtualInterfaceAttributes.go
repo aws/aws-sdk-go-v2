@@ -41,9 +41,15 @@ type UpdateVirtualInterfaceAttributesInput struct {
 	// This member is required.
 	VirtualInterfaceId *string
 
+	// Indicates whether to enable or disable SiteLink.
+	EnableSiteLink *bool
+
 	// The maximum transmission unit (MTU), in bytes. The supported values are 1500 and
 	// 9001. The default value is 1500.
 	Mtu *int32
+
+	// The name of the virtual private interface.
+	VirtualInterfaceName *string
 
 	noSmithyDocumentSerde
 }
@@ -109,6 +115,9 @@ type UpdateVirtualInterfaceAttributesOutput struct {
 	// The routes to be advertised to the Amazon Web Services network in this Region.
 	// Applies to public virtual interfaces.
 	RouteFilterPrefixes []types.RouteFilterPrefix
+
+	// Indicates whether SiteLink is enabled.
+	SiteLinkEnabled *bool
 
 	// The tags associated with the virtual interface.
 	Tags []types.Tag

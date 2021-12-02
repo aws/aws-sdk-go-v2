@@ -5490,6 +5490,11 @@ func awsAwsjson11_deserializeDocumentOnDeviceServiceConfiguration(v **types.OnDe
 				return err
 			}
 
+		case "TGWOnDeviceService":
+			if err := awsAwsjson11_deserializeDocumentTGWOnDeviceServiceConfiguration(&sv.TGWOnDeviceService, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -5866,6 +5871,59 @@ func awsAwsjson11_deserializeDocumentTaxDocuments(v **types.TaxDocuments, value 
 		case "IND":
 			if err := awsAwsjson11_deserializeDocumentINDTaxDocuments(&sv.IND, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentTGWOnDeviceServiceConfiguration(v **types.TGWOnDeviceServiceConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TGWOnDeviceServiceConfiguration
+	if *v == nil {
+		sv = &types.TGWOnDeviceServiceConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "StorageLimit":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected StorageLimit to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.StorageLimit = int32(i64)
+			}
+
+		case "StorageUnit":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StorageUnit to be of type string, got %T instead", value)
+				}
+				sv.StorageUnit = types.StorageUnit(jtv)
 			}
 
 		default:
@@ -6413,6 +6471,15 @@ func awsAwsjson11_deserializeOpDocumentDescribeReturnShippingLabelOutput(v **Des
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "ReturnShippingLabelURI":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ReturnShippingLabelURI = ptr.String(jtv)
 			}
 
 		case "Status":

@@ -66,7 +66,7 @@ type UpdateFleetMetricInput struct {
 
 	// Used to support unit transformation such as milliseconds to seconds. The unit
 	// must be supported by CW metric
-	// (https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html).
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html).
 	Unit types.FleetMetricUnit
 
 	noSmithyDocumentSerde

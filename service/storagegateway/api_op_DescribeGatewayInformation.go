@@ -90,8 +90,13 @@ type DescribeGatewayInformationOutput struct {
 	// The type of the gateway.
 	GatewayType *string
 
-	// The type of hypervisor environment used by the host.
+	// The type of hardware or software platform on which the gateway is running.
 	HostEnvironment types.HostEnvironment
+
+	// A unique identifier for the specific instance of the host platform running the
+	// gateway. This value is only available for certain host environments, and its
+	// format depends on the host environment type.
+	HostEnvironmentId *string
 
 	// The date on which the last software update was applied to the gateway. If the
 	// gateway has never been updated, this field does not return a value in the

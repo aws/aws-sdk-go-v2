@@ -33,8 +33,8 @@ import (
 //
 // * WeeklyMaintenanceStartTime
 //
-// For Amazon
-// FSx for Lustre file systems, you can update the following properties:
+// For FSx for
+// Lustre file systems, you can update the following properties:
 //
 // *
 // AutoImportPolicy
@@ -51,8 +51,8 @@ import (
 // *
 // WeeklyMaintenanceStartTime
 //
-// For Amazon FSx for NetApp ONTAP file systems, you
-// can update the following properties:
+// For FSx for ONTAP file systems, you can update the
+// following properties:
 //
 // * AutomaticBackupRetentionDays
 //
@@ -60,6 +60,26 @@ import (
 // DailyAutomaticBackupStartTime
 //
 // * FsxAdminPassword
+//
+// *
+// WeeklyMaintenanceStartTime
+//
+// For the Amazon FSx for OpenZFS file systems, you can
+// update the following properties:
+//
+// * AutomaticBackupRetentionDays
+//
+// *
+// CopyTagsToBackups
+//
+// * CopyTagsToVolumes
+//
+// * DailyAutomaticBackupStartTime
+//
+// *
+// DiskIopsConfiguration
+//
+// * ThroughputCapacity
 //
 // * WeeklyMaintenanceStartTime
 func (c *Client) UpdateFileSystem(ctx context.Context, params *UpdateFileSystemInput, optFns ...func(*Options)) (*UpdateFileSystemOutput, error) {
@@ -80,7 +100,7 @@ func (c *Client) UpdateFileSystem(ctx context.Context, params *UpdateFileSystemI
 // The request object for the UpdateFileSystem operation.
 type UpdateFileSystemInput struct {
 
-	// Identifies the file system that you are updating.
+	// The ID of the file system that you are updating.
 	//
 	// This member is required.
 	FileSystemId *string
@@ -97,35 +117,44 @@ type UpdateFileSystemInput struct {
 	// The configuration updates for an Amazon FSx for NetApp ONTAP file system.
 	OntapConfiguration *types.UpdateFileSystemOntapConfiguration
 
+	// The configuration updates for an Amazon FSx for OpenZFS file system.
+	OpenZFSConfiguration *types.UpdateFileSystemOpenZFSConfiguration
+
 	// Use this parameter to increase the storage capacity of an Amazon FSx for Windows
 	// File Server or Amazon FSx for Lustre file system. Specifies the storage capacity
-	// target value, GiB, to increase the storage capacity for the file system that
-	// you're updating. You cannot make a storage capacity increase request if there is
+	// target value, in GiB, to increase the storage capacity for the file system that
+	// you're updating. You can't make a storage capacity increase request if there is
 	// an existing storage capacity increase request in progress. For Windows file
-	// systems, the storage capacity target value must be at least 10 percent (%)
-	// greater than the current storage capacity value. In order to increase storage
-	// capacity, the file system must have at least 16 MB/s of throughput capacity. For
-	// Lustre file systems, the storage capacity target value can be the following:
-	//
-	// *
-	// For SCRATCH_2 and PERSISTENT_1 SSD deployment types, valid values are in
-	// multiples of 2400 GiB. The value must be greater than the current storage
-	// capacity.
-	//
-	// * For PERSISTENT HDD file systems, valid values are multiples of 6000
-	// GiB for 12 MB/s/TiB file systems and multiples of 1800 GiB for 40 MB/s/TiB file
-	// systems. The values must be greater than the current storage capacity.
+	// systems, the storage capacity target value must be at least 10 percent greater
+	// than the current storage capacity value. To increase storage capacity, the file
+	// system must have at least 16 MBps of throughput capacity. For Lustre file
+	// systems, the storage capacity target value can be the following:
 	//
 	// * For
-	// SCRATCH_1 file systems, you cannot increase the storage capacity.
+	// SCRATCH_2 and PERSISTENT_1 SSD deployment types, valid values are in multiples
+	// of 2400 GiB. The value must be greater than the current storage capacity.
 	//
-	// For more
-	// information, see Managing storage capacity
+	// * For
+	// PERSISTENT HDD file systems, valid values are multiples of 6000 GiB for 12-MBps
+	// throughput per TiB file systems and multiples of 1800 GiB for 40-MBps throughput
+	// per TiB file systems. The values must be greater than the current storage
+	// capacity.
+	//
+	// * For SCRATCH_1 file systems, you can't increase the storage
+	// capacity.
+	//
+	// For OpenZFS file systems, the input/output operations per second
+	// (IOPS) automatically scale with increases to the storage capacity if IOPS is
+	// configured for automatic scaling. If the storage capacity increase would result
+	// in less than 3 IOPS per GiB of storage, this operation returns an error. For
+	// more information, see Managing storage capacity
 	// (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html)
-	// in the Amazon FSx for Windows File Server User Guide and Managing storage and
+	// in the Amazon FSx for Windows File Server User Guide, Managing storage and
 	// throughput capacity
 	// (https://docs.aws.amazon.com/fsx/latest/LustreGuide/managing-storage-capacity.html)
-	// in the Amazon FSx for Lustre User Guide.
+	// in the Amazon FSx for Lustre User Guide, and Managing storage capacity
+	// (https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/managing-storage-capacity.html)
+	// in the Amazon FSx for OpenZFS User Guide.
 	StorageCapacity *int32
 
 	// The configuration updates for an Amazon FSx for Windows File Server file system.

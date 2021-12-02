@@ -257,6 +257,9 @@ type Outpost struct {
 	// The ID of the site.
 	SiteId *string
 
+	// The hardware type.
+	SupportedHardwareType SupportedHardwareType
+
 	// The Outpost tags.
 	Tags map[string]string
 

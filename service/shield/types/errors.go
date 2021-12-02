@@ -95,7 +95,8 @@ func (e *InvalidOperationException) ErrorCode() string             { return "Inv
 func (e *InvalidOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Exception that indicates that the NextToken specified in the request is invalid.
-// Submit the request using the NextToken value that was returned in the response.
+// Submit the request using the NextToken value that was returned in the prior
+// response.
 type InvalidPaginationTokenException struct {
 	Message *string
 

@@ -12,15 +12,16 @@ import (
 )
 
 // Creates a job to import or export data between Amazon S3 and your on-premises
-// data center. Your AWS account must have the right trust policies and permissions
-// in place to create a job for a Snow device. If you're creating a job for a node
-// in a cluster, you only need to provide the clusterId value; the other job
-// attributes are inherited from the cluster. Only the Snowball; Edge device type
-// is supported when ordering clustered jobs. The device capacity is optional.
-// Availability of device types differ by AWS Region. For more information about
-// Region availability, see AWS Regional Services
+// data center. Your Amazon Web Services account must have the right trust policies
+// and permissions in place to create a job for a Snow device. If you're creating a
+// job for a node in a cluster, you only need to provide the clusterId value; the
+// other job attributes are inherited from the cluster. Only the Snowball; Edge
+// device type is supported when ordering clustered jobs. The device capacity is
+// optional. Availability of device types differ by Amazon Web Services Region. For
+// more information about Region availability, see Amazon Web Services Regional
+// Services
 // (https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/?p=ngi&loc=4).
-// AWS Snow Family device types and their capacities.
+// Snow Family Devices and their capacities.
 //
 // * Snow Family device type:
 // SNC1_SSD
@@ -72,15 +73,15 @@ import (
 //
 // * Description: Original
 // Snowball device This device is only available in the Ningxia, Beijing, and
-// Singapore AWS Regions.
+// Singapore Amazon Web Services Region
 //
 // * Device type: STANDARD
 //
-// * Capacity: T80
+// * Capacity:
+// T80
 //
-// * Description:
-// Original Snowball device This device is only available in the Ningxia, Beijing,
-// and Singapore AWS Regions.
+// * Description: Original Snowball device This device is only available in
+// the Ningxia, Beijing, and Singapore Amazon Web Services Region.
 func (c *Client) CreateJob(ctx context.Context, params *CreateJobInput, optFns ...func(*Options)) (*CreateJobOutput, error) {
 	if params == nil {
 		params = &CreateJobInput{}
@@ -110,8 +111,7 @@ type CreateJobInput struct {
 	// Photos 2016-08-11.
 	Description *string
 
-	// Defines the device configuration for an AWS Snowcone job. For more information,
-	// see
+	// Defines the device configuration for an Snowcone job. For more information, see
 	// "https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html"
 	// (Snow Family Devices and Capacity) in the Snowcone User Guide or
 	// "https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html"
@@ -127,7 +127,7 @@ type CreateJobInput struct {
 
 	// The KmsKeyARN that you want to associate with this job. KmsKeyARNs are created
 	// using the CreateKey
-	// (https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html) AWS Key
+	// (https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html) Key
 	// Management Service (KMS) API action.
 	KmsKeyARN *string
 
@@ -139,8 +139,9 @@ type CreateJobInput struct {
 	Notification *types.Notification
 
 	// Specifies the service or services on the Snow Family device that your
-	// transferred data will be exported from or imported into. AWS Snow Family
-	// supports Amazon S3 and NFS (Network File System).
+	// transferred data will be exported from or imported into. Amazon Web Services
+	// Snow Family supports Amazon S3 and NFS (Network File System) and the Amazon Web
+	// Services Storage Gateway service Tape Gateway type.
 	OnDeviceServiceConfiguration *types.OnDeviceServiceConfiguration
 
 	// Allows you to securely operate and manage Snowcone devices remotely from outside
@@ -160,7 +161,7 @@ type CreateJobInput struct {
 
 	// The RoleARN that you want to associate with this job. RoleArns are created using
 	// the CreateRole
-	// (https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html) AWS
+	// (https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html)
 	// Identity and Access Management (IAM) API action.
 	RoleARN *string
 
@@ -193,10 +194,11 @@ type CreateJobInput struct {
 	// (Snow Family Devices and Capacity) in the Snowcone User Guide.
 	SnowballCapacityPreference types.SnowballCapacity
 
-	// The type of AWS Snow Family device to use for this job. For cluster jobs, AWS
-	// Snow Family currently supports only the EDGE device type. The type of AWS Snow
-	// device to use for this job. Currently, the only supported device type for
-	// cluster jobs is EDGE. For more information, see Snowball Edge Device Options
+	// The type of Snow Family Devices to use for this job. For cluster jobs, Amazon
+	// Web Services Snow Family currently supports only the EDGE device type. The type
+	// of Amazon Web Services Snow device to use for this job. Currently, the only
+	// supported device type for cluster jobs is EDGE. For more information, see
+	// Snowball Edge Device Options
 	// (https://docs.aws.amazon.com/snowball/latest/developer-guide/device-differences.html)
 	// in the Snowball Edge Developer Guide. For more information, see
 	// "https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html"
@@ -205,7 +207,7 @@ type CreateJobInput struct {
 	// (Snow Family Devices and Capacity) in the Snowcone User Guide.
 	SnowballType types.SnowballType
 
-	// The tax documents required in your AWS Region.
+	// The tax documents required in your Amazon Web Services Region.
 	TaxDocuments *types.TaxDocuments
 
 	noSmithyDocumentSerde

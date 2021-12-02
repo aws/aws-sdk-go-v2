@@ -129,6 +129,27 @@ func (e *BadRequest) ErrorMessage() string {
 func (e *BadRequest) ErrorCode() string             { return "BadRequest" }
 func (e *BadRequest) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// No data repository associations were found based upon the supplied parameters.
+type DataRepositoryAssociationNotFound struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *DataRepositoryAssociationNotFound) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *DataRepositoryAssociationNotFound) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *DataRepositoryAssociationNotFound) ErrorCode() string {
+	return "DataRepositoryAssociationNotFound"
+}
+func (e *DataRepositoryAssociationNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The data repository task could not be canceled because the task has already
 // ended.
 type DataRepositoryTaskEnded struct {
@@ -269,7 +290,26 @@ func (e *InternalServerError) ErrorMessage() string {
 func (e *InternalServerError) ErrorCode() string             { return "InternalServerError" }
 func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The Key Management Service (KMS) key of the destination backup is invalid.
+// You have filtered the response to a data repository type that is not supported.
+type InvalidDataRepositoryType struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidDataRepositoryType) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidDataRepositoryType) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidDataRepositoryType) ErrorCode() string             { return "InvalidDataRepositoryType" }
+func (e *InvalidDataRepositoryType) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The Key Management Service (KMS) key of the destination backup is not valid.
 type InvalidDestinationKmsKey struct {
 	Message *string
 
@@ -371,8 +411,8 @@ func (e *InvalidPerUnitStorageThroughput) ErrorCode() string {
 }
 func (e *InvalidPerUnitStorageThroughput) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The Region provided for Source Region is invalid or is in a different Amazon Web
-// Services partition.
+// The Region provided for SourceRegion is not valid or is in a different Amazon
+// Web Services partition.
 type InvalidRegion struct {
 	Message *string
 
@@ -391,7 +431,7 @@ func (e *InvalidRegion) ErrorMessage() string {
 func (e *InvalidRegion) ErrorCode() string             { return "InvalidRegion" }
 func (e *InvalidRegion) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The Key Management Service (KMS) key of the source backup is invalid.
+// The Key Management Service (KMS) key of the source backup is not valid.
 type InvalidSourceKmsKey struct {
 	Message *string
 
@@ -534,8 +574,27 @@ func (e *ServiceLimitExceeded) ErrorMessage() string {
 func (e *ServiceLimitExceeded) ErrorCode() string             { return "ServiceLimitExceeded" }
 func (e *ServiceLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request was rejected because the lifecycle status of the source backup is
-// not AVAILABLE.
+// No Amazon FSx snapshots were found based on the supplied parameters.
+type SnapshotNotFound struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *SnapshotNotFound) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *SnapshotNotFound) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *SnapshotNotFound) ErrorCode() string             { return "SnapshotNotFound" }
+func (e *SnapshotNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The request was rejected because the lifecycle status of the source backup isn't
+// AVAILABLE.
 type SourceBackupUnavailable struct {
 	Message *string
 

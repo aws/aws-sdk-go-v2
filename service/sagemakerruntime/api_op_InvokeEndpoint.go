@@ -17,8 +17,9 @@ import (
 // Amazon SageMaker strips all POST headers except those supported by the API.
 // Amazon SageMaker might add additional headers. You should not rely on the
 // behavior of headers outside those enumerated in the request syntax. Calls to
-// InvokeEndpoint are authenticated by using AWS Signature Version 4. For
-// information, see Authenticating Requests (AWS Signature Version 4)
+// InvokeEndpoint are authenticated by using Amazon Web Services Signature Version
+// 4. For information, see Authenticating Requests (Amazon Web Services Signature
+// Version 4)
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html)
 // in the Amazon S3 API Reference. A customer's model containers must respond to
 // requests within 60 seconds. The model itself can have a maximum processing time
@@ -78,7 +79,8 @@ type InvokeEndpointInput struct {
 	// this value in the response, an empty value is returned. For example, if a custom
 	// attribute represents the trace ID, your model can prepend the custom attribute
 	// with Trace ID: in your post-processing function. This feature is currently
-	// supported in the AWS SDKs but not in the Amazon SageMaker Python SDK.
+	// supported in the Amazon Web Services SDKs but not in the Amazon SageMaker Python
+	// SDK.
 	CustomAttributes *string
 
 	// If you provide a value, it is added to the captured data when you enable data
@@ -130,8 +132,8 @@ type InvokeEndpointOutput struct {
 	// response. If your code does not set this value in the response, an empty value
 	// is returned. For example, if a custom attribute represents the trace ID, your
 	// model can prepend the custom attribute with Trace ID: in your post-processing
-	// function. This feature is currently supported in the AWS SDKs but not in the
-	// Amazon SageMaker Python SDK.
+	// function. This feature is currently supported in the Amazon Web Services SDKs
+	// but not in the Amazon SageMaker Python SDK.
 	CustomAttributes *string
 
 	// Identifies the production variant that was invoked.

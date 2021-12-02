@@ -11,13 +11,7 @@ import (
 )
 
 // Removes the Shield Response Team's (SRT) access to your Amazon Web Services
-// account. To make a DisassociateDRTRole request, you must be subscribed to the
-// Business Support plan (https://aws.amazon.com/premiumsupport/business-support/)
-// or the Enterprise Support plan
-// (https://aws.amazon.com/premiumsupport/enterprise-support/). However, if you are
-// not subscribed to one of these support plans, but had been previously and had
-// granted the SRT access to your account, you can submit a DisassociateDRTRole
-// request to remove this access.
+// account.
 func (c *Client) DisassociateDRTRole(ctx context.Context, params *DisassociateDRTRoleInput, optFns ...func(*Options)) (*DisassociateDRTRoleOutput, error) {
 	if params == nil {
 		params = &DisassociateDRTRoleInput{}

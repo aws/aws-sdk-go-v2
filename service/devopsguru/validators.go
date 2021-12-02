@@ -466,6 +466,23 @@ func addOpUpdateServiceIntegrationValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpUpdateServiceIntegration{}, middleware.After)
 }
 
+func validateCostEstimationResourceCollectionFilter(v *types.CostEstimationResourceCollectionFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CostEstimationResourceCollectionFilter"}
+	if v.Tags != nil {
+		if err := validateTagCostEstimationResourceCollectionFilters(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateEventTimeRange(v *types.EventTimeRange) error {
 	if v == nil {
 		return nil
@@ -492,6 +509,11 @@ func validateListEventsFilters(v *types.ListEventsFilters) error {
 	if v.EventTimeRange != nil {
 		if err := validateEventTimeRange(v.EventTimeRange); err != nil {
 			invalidParams.AddNested("EventTimeRange", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ResourceCollection != nil {
+		if err := validateResourceCollection(v.ResourceCollection); err != nil {
+			invalidParams.AddNested("ResourceCollection", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -586,6 +608,179 @@ func validateNotificationChannelConfig(v *types.NotificationChannelConfig) error
 	invalidParams := smithy.InvalidParamsError{Context: "NotificationChannelConfig"}
 	if v.Sns == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Sns"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateResourceCollection(v *types.ResourceCollection) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResourceCollection"}
+	if v.Tags != nil {
+		if err := validateTagCollections(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSearchInsightsFilters(v *types.SearchInsightsFilters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchInsightsFilters"}
+	if v.ResourceCollection != nil {
+		if err := validateResourceCollection(v.ResourceCollection); err != nil {
+			invalidParams.AddNested("ResourceCollection", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSearchOrganizationInsightsFilters(v *types.SearchOrganizationInsightsFilters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchOrganizationInsightsFilters"}
+	if v.ResourceCollection != nil {
+		if err := validateResourceCollection(v.ResourceCollection); err != nil {
+			invalidParams.AddNested("ResourceCollection", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTagCollection(v *types.TagCollection) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TagCollection"}
+	if v.AppBoundaryKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppBoundaryKey"))
+	}
+	if v.TagValues == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagValues"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTagCollections(v []types.TagCollection) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TagCollections"}
+	for i := range v {
+		if err := validateTagCollection(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTagCostEstimationResourceCollectionFilter(v *types.TagCostEstimationResourceCollectionFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TagCostEstimationResourceCollectionFilter"}
+	if v.AppBoundaryKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppBoundaryKey"))
+	}
+	if v.TagValues == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagValues"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTagCostEstimationResourceCollectionFilters(v []types.TagCostEstimationResourceCollectionFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TagCostEstimationResourceCollectionFilters"}
+	for i := range v {
+		if err := validateTagCostEstimationResourceCollectionFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateResourceCollectionFilter(v *types.UpdateResourceCollectionFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateResourceCollectionFilter"}
+	if v.Tags != nil {
+		if err := validateUpdateTagCollectionFilters(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateTagCollectionFilter(v *types.UpdateTagCollectionFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateTagCollectionFilter"}
+	if v.AppBoundaryKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppBoundaryKey"))
+	}
+	if v.TagValues == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagValues"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateTagCollectionFilters(v []types.UpdateTagCollectionFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateTagCollectionFilters"}
+	for i := range v {
+		if err := validateUpdateTagCollectionFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -828,6 +1023,11 @@ func validateOpSearchInsightsInput(v *SearchInsightsInput) error {
 	if v.StartTimeRange == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StartTimeRange"))
 	}
+	if v.Filters != nil {
+		if err := validateSearchInsightsFilters(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
@@ -849,6 +1049,11 @@ func validateOpSearchOrganizationInsightsInput(v *SearchOrganizationInsightsInpu
 	if v.StartTimeRange == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StartTimeRange"))
 	}
+	if v.Filters != nil {
+		if err := validateSearchOrganizationInsightsFilters(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
@@ -866,6 +1071,10 @@ func validateOpStartCostEstimationInput(v *StartCostEstimationInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "StartCostEstimationInput"}
 	if v.ResourceCollection == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceCollection"))
+	} else if v.ResourceCollection != nil {
+		if err := validateCostEstimationResourceCollectionFilter(v.ResourceCollection); err != nil {
+			invalidParams.AddNested("ResourceCollection", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -884,6 +1093,10 @@ func validateOpUpdateResourceCollectionInput(v *UpdateResourceCollectionInput) e
 	}
 	if v.ResourceCollection == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceCollection"))
+	} else if v.ResourceCollection != nil {
+		if err := validateUpdateResourceCollectionFilter(v.ResourceCollection); err != nil {
+			invalidParams.AddNested("ResourceCollection", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

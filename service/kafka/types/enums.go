@@ -68,6 +68,24 @@ func (ClusterState) Values() []ClusterState {
 	}
 }
 
+type ClusterType string
+
+// Enum values for ClusterType
+const (
+	ClusterTypeProvisioned ClusterType = "PROVISIONED"
+	ClusterTypeServerless  ClusterType = "SERVERLESS"
+)
+
+// Values returns all known values for ClusterType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ClusterType) Values() []ClusterType {
+	return []ClusterType{
+		"PROVISIONED",
+		"SERVERLESS",
+	}
+}
+
 type ConfigurationState string
 
 // Enum values for ConfigurationState

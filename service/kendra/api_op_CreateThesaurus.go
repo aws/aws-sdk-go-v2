@@ -41,8 +41,8 @@ type CreateThesaurusInput struct {
 	// This member is required.
 	Name *string
 
-	// An AWS Identity and Access Management (IAM) role that gives Amazon Kendra
-	// permissions to access thesaurus file specified in SourceS3Path.
+	// An IAM role that gives Amazon Kendra permissions to access thesaurus file
+	// specified in SourceS3Path.
 	//
 	// This member is required.
 	RoleArn *string

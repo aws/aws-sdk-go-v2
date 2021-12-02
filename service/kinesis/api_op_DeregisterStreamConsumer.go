@@ -46,7 +46,8 @@ type DeregisterStreamConsumerInput struct {
 	ConsumerName *string
 
 	// The ARN of the Kinesis data stream that the consumer is registered with. For
-	// more information, see Amazon Resource Names (ARNs) and AWS Service Namespaces
+	// more information, see Amazon Resource Names (ARNs) and Amazon Web Services
+	// Service Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kinesis-streams).
 	StreamARN *string
 

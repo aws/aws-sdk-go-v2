@@ -60,13 +60,6 @@ type CreateCompilationJobInput struct {
 	// This member is required.
 	CompilationJobName *string
 
-	// Provides information about the location of input model artifacts, the name and
-	// shape of the expected data inputs, and the framework in which the model was
-	// trained.
-	//
-	// This member is required.
-	InputConfig *types.InputConfig
-
 	// Provides information about the output location for the compiled model and the
 	// target device the model runs on.
 	//
@@ -101,6 +94,17 @@ type CreateCompilationJobInput struct {
 	//
 	// This member is required.
 	StoppingCondition *types.StoppingCondition
+
+	// Provides information about the location of input model artifacts, the name and
+	// shape of the expected data inputs, and the framework in which the model was
+	// trained.
+	InputConfig *types.InputConfig
+
+	// The Amazon Resource Name (ARN) of a versioned model package. Provide either a
+	// ModelPackageVersionArn or an InputConfig object in the request syntax. The
+	// presence of both objects in the CreateCompilationJob request will return an
+	// exception.
+	ModelPackageVersionArn *string
 
 	// An array of key-value pairs. You can use tags to categorize your Amazon Web
 	// Services resources in different ways, for example, by purpose, owner, or

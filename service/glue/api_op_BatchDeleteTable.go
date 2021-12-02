@@ -50,6 +50,9 @@ type BatchDeleteTableInput struct {
 	// Amazon Web Services account ID is used by default.
 	CatalogId *string
 
+	// The transaction ID at which to delete the table contents.
+	TransactionId *string
+
 	noSmithyDocumentSerde
 }
 

@@ -10,12 +10,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified tag key name. If the attribute key does not exist or the
-// tag does not exist, then the operation will not do anything. If the attribute
-// key exists, then the operation checks if any resources are tagged with this
-// attribute key, if yes, the API throws a 400 Exception with the message "Delete
-// not allowed" as the tag key is still attached with resources. You can consider
-// untagging resources with this tag key.
+// Deletes the specified LF-tag key name. If the attribute key does not exist or
+// the LF-tag does not exist, then the operation will not do anything. If the
+// attribute key exists, then the operation checks if any resources are tagged with
+// this attribute key, if yes, the API throws a 400 Exception with the message
+// "Delete not allowed" as the LF-tag key is still attached with resources. You can
+// consider untagging resources with this LF-tag key.
 func (c *Client) DeleteLFTag(ctx context.Context, params *DeleteLFTagInput, optFns ...func(*Options)) (*DeleteLFTagOutput, error) {
 	if params == nil {
 		params = &DeleteLFTagInput{}
@@ -33,15 +33,15 @@ func (c *Client) DeleteLFTag(ctx context.Context, params *DeleteLFTagInput, optF
 
 type DeleteLFTagInput struct {
 
-	// The key-name for the tag to delete.
+	// The key-name for the LF-tag to delete.
 	//
 	// This member is required.
 	TagKey *string
 
 	// The identifier for the Data Catalog. By default, the account ID. The Data
 	// Catalog is the persistent metadata store. It contains database definitions,
-	// table definitions, and other control information to manage your AWS Lake
-	// Formation environment.
+	// table definitions, and other control information to manage your Lake Formation
+	// environment.
 	CatalogId *string
 
 	noSmithyDocumentSerde
@@ -55,11 +55,11 @@ type DeleteLFTagOutput struct {
 }
 
 func (c *Client) addOperationDeleteLFTagMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteLFTag{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteLFTag{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteLFTag{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteLFTag{}, middleware.After)
 	if err != nil {
 		return err
 	}

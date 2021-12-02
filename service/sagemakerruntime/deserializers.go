@@ -99,11 +99,17 @@ func awsRestjson1_deserializeOpErrorInvokeEndpoint(response *smithyhttp.Response
 	}
 
 	switch {
+	case strings.EqualFold("InternalDependencyException", errorCode):
+		return awsRestjson1_deserializeErrorInternalDependencyException(response, errorBody)
+
 	case strings.EqualFold("InternalFailure", errorCode):
 		return awsRestjson1_deserializeErrorInternalFailure(response, errorBody)
 
 	case strings.EqualFold("ModelError", errorCode):
 		return awsRestjson1_deserializeErrorModelError(response, errorBody)
+
+	case strings.EqualFold("ModelNotReadyException", errorCode):
+		return awsRestjson1_deserializeErrorModelNotReadyException(response, errorBody)
 
 	case strings.EqualFold("ServiceUnavailable", errorCode):
 		return awsRestjson1_deserializeErrorServiceUnavailable(response, errorBody)
@@ -332,6 +338,42 @@ func awsRestjson1_deserializeOpDocumentInvokeEndpointAsyncOutput(v **InvokeEndpo
 	return nil
 }
 
+func awsRestjson1_deserializeErrorInternalDependencyException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.InternalDependencyException{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	err := awsRestjson1_deserializeDocumentInternalDependencyException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+
+	return output
+}
+
 func awsRestjson1_deserializeErrorInternalFailure(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.InternalFailure{}
 	var buff [1024]byte
@@ -388,6 +430,42 @@ func awsRestjson1_deserializeErrorModelError(response *smithyhttp.Response, erro
 	}
 
 	err := awsRestjson1_deserializeDocumentModelError(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+
+	return output
+}
+
+func awsRestjson1_deserializeErrorModelNotReadyException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.ModelNotReadyException{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	err := awsRestjson1_deserializeDocumentModelNotReadyException(&output, shape)
 
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -474,6 +552,46 @@ func awsRestjson1_deserializeErrorValidationError(response *smithyhttp.Response,
 	errorBody.Seek(0, io.SeekStart)
 
 	return output
+}
+
+func awsRestjson1_deserializeDocumentInternalDependencyException(v **types.InternalDependencyException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InternalDependencyException
+	if *v == nil {
+		sv = &types.InternalDependencyException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Message to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
 }
 
 func awsRestjson1_deserializeDocumentInternalFailure(v **types.InternalFailure, value interface{}) error {
@@ -576,6 +694,46 @@ func awsRestjson1_deserializeDocumentModelError(v **types.ModelError, value inte
 					return err
 				}
 				sv.OriginalStatusCode = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentModelNotReadyException(v **types.ModelNotReadyException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ModelNotReadyException
+	if *v == nil {
+		sv = &types.ModelNotReadyException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Message to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:

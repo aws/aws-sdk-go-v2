@@ -9,6 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"time"
 )
 
 // Retrieves the Table definition in a Data Catalog for a specified table.
@@ -44,6 +45,14 @@ type GetTableInput struct {
 	// The ID of the Data Catalog where the table resides. If none is provided, the
 	// Amazon Web Services account ID is used by default.
 	CatalogId *string
+
+	// The time as of when to read the table contents. If not set, the most recent
+	// transaction commit time will be used. Cannot be specified along with
+	// TransactionId.
+	QueryAsOfTime *time.Time
+
+	// The transaction ID at which to read the table contents.
+	TransactionId *string
 
 	noSmithyDocumentSerde
 }

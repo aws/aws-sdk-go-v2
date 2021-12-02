@@ -34,6 +34,14 @@ type UpdateModelPackageInput struct {
 	// This member is required.
 	ModelPackageArn *string
 
+	// An array of additional Inference Specification objects to be added to the
+	// existing array additional Inference Specification. Total number of additional
+	// Inference Specifications can not exceed 15. Each additional Inference
+	// Specification specifies artifacts based on this model package that can be used
+	// on inference endpoints. Generally used with SageMaker Neo to store the compiled
+	// artifacts.
+	AdditionalInferenceSpecificationsToAdd []types.AdditionalInferenceSpecificationDefinition
+
 	// A description for the approval status of the model.
 	ApprovalDescription *string
 

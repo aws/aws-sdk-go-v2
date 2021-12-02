@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an Amazon FSx for NetApp ONTAP volume's configuration.
+// Updates the configuration of an Amazon FSx for NetApp ONTAP or Amazon FSx for
+// OpenZFS volume.
 func (c *Client) UpdateVolume(ctx context.Context, params *UpdateVolumeInput, optFns ...func(*Options)) (*UpdateVolumeOutput, error) {
 	if params == nil {
 		params = &UpdateVolumeInput{}
@@ -30,7 +31,8 @@ func (c *Client) UpdateVolume(ctx context.Context, params *UpdateVolumeInput, op
 
 type UpdateVolumeInput struct {
 
-	// Specifies the volume that you want to update, formatted fsvol-0123456789abcdef0.
+	// The ID of the volume that you want to update, in the format
+	// fsvol-0123456789abcdef0.
 	//
 	// This member is required.
 	VolumeId *string
@@ -40,16 +42,24 @@ type UpdateVolumeInput struct {
 	// the Command Line Interface (CLI) or an Amazon Web Services SDK.
 	ClientRequestToken *string
 
-	// The ONTAP configuration of the volume you are updating.
+	// The name of the OpenZFS volume. OpenZFS root volumes are automatically named
+	// FSX. Child volume names must be unique among their parent volume's children. The
+	// name of the volume is part of the mount string for the OpenZFS volume.
+	Name *string
+
+	// The configuration of the ONTAP volume that you are updating.
 	OntapConfiguration *types.UpdateOntapVolumeConfiguration
+
+	// The configuration of the OpenZFS volume that you are updating.
+	OpenZFSConfiguration *types.UpdateOpenZFSVolumeConfiguration
 
 	noSmithyDocumentSerde
 }
 
 type UpdateVolumeOutput struct {
 
-	// Returned after a successful UpdateVolume API operation, describing the volume
-	// just updated.
+	// A description of the volume just updated. Returned after a successful
+	// UpdateVolume API operation.
 	Volume *types.Volume
 
 	// Metadata pertaining to the operation's result.

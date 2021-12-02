@@ -88,6 +88,26 @@ func (FieldNameString) Values() []FieldNameString {
 	}
 }
 
+type OptimizerType string
+
+// Enum values for OptimizerType
+const (
+	OptimizerTypeCompaction        OptimizerType = "COMPACTION"
+	OptimizerTypeGarbageCollection OptimizerType = "GARBAGE_COLLECTION"
+	OptimizerTypeGeneric           OptimizerType = "ALL"
+)
+
+// Values returns all known values for OptimizerType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OptimizerType) Values() []OptimizerType {
+	return []OptimizerType{
+		"COMPACTION",
+		"GARBAGE_COLLECTION",
+		"ALL",
+	}
+}
+
 type Permission string
 
 // Enum values for Permission
@@ -132,6 +152,30 @@ func (Permission) Values() []Permission {
 	}
 }
 
+type QueryStateString string
+
+// Enum values for QueryStateString
+const (
+	QueryStateStringPending            QueryStateString = "PENDING"
+	QueryStateStringWorkunitsAvailable QueryStateString = "WORKUNITS_AVAILABLE"
+	QueryStateStringError              QueryStateString = "ERROR"
+	QueryStateStringFinished           QueryStateString = "FINISHED"
+	QueryStateStringExpired            QueryStateString = "EXPIRED"
+)
+
+// Values returns all known values for QueryStateString. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (QueryStateString) Values() []QueryStateString {
+	return []QueryStateString{
+		"PENDING",
+		"WORKUNITS_AVAILABLE",
+		"ERROR",
+		"FINISHED",
+		"EXPIRED",
+	}
+}
+
 type ResourceShareType string
 
 // Enum values for ResourceShareType
@@ -165,5 +209,69 @@ func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"DATABASE",
 		"TABLE",
+	}
+}
+
+type TransactionStatus string
+
+// Enum values for TransactionStatus
+const (
+	TransactionStatusActive           TransactionStatus = "ACTIVE"
+	TransactionStatusCommitted        TransactionStatus = "COMMITTED"
+	TransactionStatusAborted          TransactionStatus = "ABORTED"
+	TransactionStatusCommitInProgress TransactionStatus = "COMMIT_IN_PROGRESS"
+)
+
+// Values returns all known values for TransactionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TransactionStatus) Values() []TransactionStatus {
+	return []TransactionStatus{
+		"ACTIVE",
+		"COMMITTED",
+		"ABORTED",
+		"COMMIT_IN_PROGRESS",
+	}
+}
+
+type TransactionStatusFilter string
+
+// Enum values for TransactionStatusFilter
+const (
+	TransactionStatusFilterAll       TransactionStatusFilter = "ALL"
+	TransactionStatusFilterCompleted TransactionStatusFilter = "COMPLETED"
+	TransactionStatusFilterActive    TransactionStatusFilter = "ACTIVE"
+	TransactionStatusFilterCommitted TransactionStatusFilter = "COMMITTED"
+	TransactionStatusFilterAborted   TransactionStatusFilter = "ABORTED"
+)
+
+// Values returns all known values for TransactionStatusFilter. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TransactionStatusFilter) Values() []TransactionStatusFilter {
+	return []TransactionStatusFilter{
+		"ALL",
+		"COMPLETED",
+		"ACTIVE",
+		"COMMITTED",
+		"ABORTED",
+	}
+}
+
+type TransactionType string
+
+// Enum values for TransactionType
+const (
+	TransactionTypeReadAndWrite TransactionType = "READ_AND_WRITE"
+	TransactionTypeReadOnly     TransactionType = "READ_ONLY"
+)
+
+// Values returns all known values for TransactionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TransactionType) Values() []TransactionType {
+	return []TransactionType{
+		"READ_AND_WRITE",
+		"READ_ONLY",
 	}
 }

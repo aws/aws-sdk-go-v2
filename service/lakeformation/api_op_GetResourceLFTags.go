@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the tags applied to a resource.
+// Returns the LF-tags applied to a resource.
 func (c *Client) GetResourceLFTags(ctx context.Context, params *GetResourceLFTagsInput, optFns ...func(*Options)) (*GetResourceLFTagsOutput, error) {
 	if params == nil {
 		params = &GetResourceLFTagsInput{}
@@ -29,18 +29,18 @@ func (c *Client) GetResourceLFTags(ctx context.Context, params *GetResourceLFTag
 
 type GetResourceLFTagsInput struct {
 
-	// The resource for which you want to return tags.
+	// The database, table, or column resource for which you want to return LF-tags.
 	//
 	// This member is required.
 	Resource *types.Resource
 
 	// The identifier for the Data Catalog. By default, the account ID. The Data
 	// Catalog is the persistent metadata store. It contains database definitions,
-	// table definitions, and other control information to manage your AWS Lake
-	// Formation environment.
+	// table definitions, and other control information to manage your Lake Formation
+	// environment.
 	CatalogId *string
 
-	// Indicates whether to show the assigned tags.
+	// Indicates whether to show the assigned LF-tags.
 	ShowAssignedLFTags *bool
 
 	noSmithyDocumentSerde
@@ -48,13 +48,13 @@ type GetResourceLFTagsInput struct {
 
 type GetResourceLFTagsOutput struct {
 
-	// A list of tags applied to a database resource.
+	// A list of LF-tags applied to a database resource.
 	LFTagOnDatabase []types.LFTagPair
 
-	// A list of tags applied to a column resource.
+	// A list of LF-tags applied to a column resource.
 	LFTagsOnColumns []types.ColumnLFTag
 
-	// A list of tags applied to a table resource.
+	// A list of LF-tags applied to a table resource.
 	LFTagsOnTable []types.LFTagPair
 
 	// Metadata pertaining to the operation's result.
@@ -64,11 +64,11 @@ type GetResourceLFTagsOutput struct {
 }
 
 func (c *Client) addOperationGetResourceLFTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetResourceLFTags{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetResourceLFTags{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetResourceLFTags{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetResourceLFTags{}, middleware.After)
 	if err != nil {
 		return err
 	}

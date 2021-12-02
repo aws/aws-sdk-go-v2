@@ -70,6 +70,26 @@ func (m *validateOpCreateCluster) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateClusterV2 struct {
+}
+
+func (*validateOpCreateClusterV2) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateClusterV2) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateClusterV2Input)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateClusterV2Input(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateConfiguration struct {
 }
 
@@ -165,6 +185,26 @@ func (m *validateOpDescribeClusterOperation) HandleInitialize(ctx context.Contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeClusterOperationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeClusterV2 struct {
+}
+
+func (*validateOpDescribeClusterV2) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeClusterV2) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeClusterV2Input)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeClusterV2Input(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -582,6 +622,10 @@ func addOpCreateClusterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateCluster{}, middleware.After)
 }
 
+func addOpCreateClusterV2ValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateClusterV2{}, middleware.After)
+}
+
 func addOpCreateConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateConfiguration{}, middleware.After)
 }
@@ -600,6 +644,10 @@ func addOpDescribeClusterValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDescribeClusterOperationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeClusterOperation{}, middleware.After)
+}
+
+func addOpDescribeClusterV2ValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeClusterV2{}, middleware.After)
 }
 
 func addOpDescribeConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -689,6 +737,23 @@ func validate__listOfBrokerEBSVolumeInfo(v []types.BrokerEBSVolumeInfo) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListOfBrokerEBSVolumeInfo"}
 	for i := range v {
 		if err := validateBrokerEBSVolumeInfo(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validate__listOfVpcConfig(v []types.VpcConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfVpcConfig"}
+	for i := range v {
+		if err := validateVpcConfig(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -914,11 +979,87 @@ func validatePrometheusInfo(v *types.PrometheusInfo) error {
 	}
 }
 
+func validateProvisionedRequest(v *types.ProvisionedRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProvisionedRequest"}
+	if v.BrokerNodeGroupInfo == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BrokerNodeGroupInfo"))
+	} else if v.BrokerNodeGroupInfo != nil {
+		if err := validateBrokerNodeGroupInfo(v.BrokerNodeGroupInfo); err != nil {
+			invalidParams.AddNested("BrokerNodeGroupInfo", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ConfigurationInfo != nil {
+		if err := validateConfigurationInfo(v.ConfigurationInfo); err != nil {
+			invalidParams.AddNested("ConfigurationInfo", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EncryptionInfo != nil {
+		if err := validateEncryptionInfo(v.EncryptionInfo); err != nil {
+			invalidParams.AddNested("EncryptionInfo", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OpenMonitoring != nil {
+		if err := validateOpenMonitoringInfo(v.OpenMonitoring); err != nil {
+			invalidParams.AddNested("OpenMonitoring", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.KafkaVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KafkaVersion"))
+	}
+	if v.LoggingInfo != nil {
+		if err := validateLoggingInfo(v.LoggingInfo); err != nil {
+			invalidParams.AddNested("LoggingInfo", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateS3(v *types.S3) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "S3"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateServerlessRequest(v *types.ServerlessRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ServerlessRequest"}
+	if v.VpcConfigs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcConfigs"))
+	} else if v.VpcConfigs != nil {
+		if err := validate__listOfVpcConfig(v.VpcConfigs); err != nil {
+			invalidParams.AddNested("VpcConfigs", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVpcConfig(v *types.VpcConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VpcConfig"}
+	if v.SubnetIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1007,6 +1148,31 @@ func validateOpCreateClusterInput(v *CreateClusterInput) error {
 	}
 }
 
+func validateOpCreateClusterV2Input(v *CreateClusterV2Input) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateClusterV2Input"}
+	if v.ClusterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
+	if v.Provisioned != nil {
+		if err := validateProvisionedRequest(v.Provisioned); err != nil {
+			invalidParams.AddNested("Provisioned", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Serverless != nil {
+		if err := validateServerlessRequest(v.Serverless); err != nil {
+			invalidParams.AddNested("Serverless", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateConfigurationInput(v *CreateConfigurationInput) error {
 	if v == nil {
 		return nil
@@ -1077,6 +1243,21 @@ func validateOpDescribeClusterOperationInput(v *DescribeClusterOperationInput) e
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeClusterOperationInput"}
 	if v.ClusterOperationArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterOperationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeClusterV2Input(v *DescribeClusterV2Input) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeClusterV2Input"}
+	if v.ClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

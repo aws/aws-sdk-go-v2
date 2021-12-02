@@ -14,6 +14,8 @@ import (
 
 // Describes the settings of query suggestions for an index. This is used to check
 // the current settings applied to query suggestions.
+// DescribeQuerySuggestionsConfig is currently not supported in the Amazon Web
+// Services GovCloud (US-West) region.
 func (c *Client) DescribeQuerySuggestionsConfig(ctx context.Context, params *DescribeQuerySuggestionsConfigInput, optFns ...func(*Options)) (*DescribeQuerySuggestionsConfigOutput, error) {
 	if params == nil {
 		params = &DescribeQuerySuggestionsConfigInput{}

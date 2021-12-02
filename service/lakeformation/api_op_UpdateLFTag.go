@@ -10,12 +10,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the list of possible values for the specified tag key. If the tag does
-// not exist, the operation throws an EntityNotFoundException. The values in the
-// delete key values will be deleted from list of possible values. If any value in
-// the delete key values is attached to a resource, then API errors out with a 400
-// Exception - "Update not allowed". Untag the attribute before deleting the tag
-// key's value.
+// Updates the list of possible values for the specified LF-tag key. If the LF-tag
+// does not exist, the operation throws an EntityNotFoundException. The values in
+// the delete key values will be deleted from list of possible values. If any value
+// in the delete key values is attached to a resource, then API errors out with a
+// 400 Exception - "Update not allowed". Untag the attribute before deleting the
+// LF-tag key's value.
 func (c *Client) UpdateLFTag(ctx context.Context, params *UpdateLFTagInput, optFns ...func(*Options)) (*UpdateLFTagOutput, error) {
 	if params == nil {
 		params = &UpdateLFTagInput{}
@@ -33,21 +33,21 @@ func (c *Client) UpdateLFTag(ctx context.Context, params *UpdateLFTagInput, optF
 
 type UpdateLFTagInput struct {
 
-	// The key-name for the tag for which to add or delete values.
+	// The key-name for the LF-tag for which to add or delete values.
 	//
 	// This member is required.
 	TagKey *string
 
 	// The identifier for the Data Catalog. By default, the account ID. The Data
 	// Catalog is the persistent metadata store. It contains database definitions,
-	// table definitions, and other control information to manage your AWS Lake
-	// Formation environment.
+	// table definitions, and other control information to manage your Lake Formation
+	// environment.
 	CatalogId *string
 
-	// A list of tag values to add from the tag.
+	// A list of LF-tag values to add from the LF-tag.
 	TagValuesToAdd []string
 
-	// A list of tag values to delete from the tag.
+	// A list of LF-tag values to delete from the LF-tag.
 	TagValuesToDelete []string
 
 	noSmithyDocumentSerde
@@ -61,11 +61,11 @@ type UpdateLFTagOutput struct {
 }
 
 func (c *Client) addOperationUpdateLFTagMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateLFTag{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateLFTag{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateLFTag{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateLFTag{}, middleware.After)
 	if err != nil {
 		return err
 	}

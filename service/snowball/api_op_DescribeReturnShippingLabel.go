@@ -13,7 +13,7 @@ import (
 )
 
 // Information on the shipping label of a Snow device that is being returned to
-// AWS.
+// Amazon Web Services.
 func (c *Client) DescribeReturnShippingLabel(ctx context.Context, params *DescribeReturnShippingLabelInput, optFns ...func(*Options)) (*DescribeReturnShippingLabelOutput, error) {
 	if params == nil {
 		params = &DescribeReturnShippingLabelInput{}
@@ -45,8 +45,11 @@ type DescribeReturnShippingLabelOutput struct {
 	// The expiration date of the current return shipping label.
 	ExpirationDate *time.Time
 
+	// The pre-signed Amazon S3 URI used to download the return shipping label.
+	ReturnShippingLabelURI *string
+
 	// The status information of the task on a Snow device that is being returned to
-	// AWS.
+	// Amazon Web Services.
 	Status types.ShippingLabelStatus
 
 	// Metadata pertaining to the operation's result.

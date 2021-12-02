@@ -64,6 +64,25 @@ func (e *InternalServerException) ErrorMessage() string {
 func (e *InternalServerException) ErrorCode() string             { return "InternalServerException" }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
+// The input to the request is not valid.
+type InvalidRequestException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidRequestException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidRequestException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
+func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 //
 type ResourceAlreadyExistException struct {
 	Message *string

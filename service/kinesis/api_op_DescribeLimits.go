@@ -34,6 +34,16 @@ type DescribeLimitsInput struct {
 
 type DescribeLimitsOutput struct {
 
+	// Indicates the number of data streams with the on-demand capacity mode.
+	//
+	// This member is required.
+	OnDemandStreamCount *int32
+
+	// The maximum number of data streams with the on-demand capacity mode.
+	//
+	// This member is required.
+	OnDemandStreamCountLimit *int32
+
 	// The number of open shards.
 	//
 	// This member is required.
