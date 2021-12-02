@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 env:
-  EACHMODULE_CONCURRENCY: 4
+  EACHMODULE_CONCURRENCY: 2
 
 jobs:
   unix-tests:
