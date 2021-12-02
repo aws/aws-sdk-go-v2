@@ -108,6 +108,9 @@ func (c *Client) addOperationListTrackerConsumersMiddlewares(stack *middleware.S
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addEndpointPrefix_opListTrackerConsumersMiddleware(stack); err != nil {
+		return err
+	}
 	if err = addOpListTrackerConsumersValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -124,6 +127,33 @@ func (c *Client) addOperationListTrackerConsumersMiddlewares(stack *middleware.S
 		return err
 	}
 	return nil
+}
+
+type endpointPrefix_opListTrackerConsumersMiddleware struct {
+}
+
+func (*endpointPrefix_opListTrackerConsumersMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListTrackerConsumersMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleSerialize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "tracking." + req.URL.Host
+
+	return next.HandleSerialize(ctx, in)
+}
+func addEndpointPrefix_opListTrackerConsumersMiddleware(stack *middleware.Stack) error {
+	return stack.Serialize.Insert(&endpointPrefix_opListTrackerConsumersMiddleware{}, `OperationSerializer`, middleware.After)
 }
 
 // ListTrackerConsumersAPIClient is a client that implements the

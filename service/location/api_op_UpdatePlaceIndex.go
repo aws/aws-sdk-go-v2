@@ -4,6 +4,7 @@ package location
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
@@ -123,6 +124,9 @@ func (c *Client) addOperationUpdatePlaceIndexMiddlewares(stack *middleware.Stack
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addEndpointPrefix_opUpdatePlaceIndexMiddleware(stack); err != nil {
+		return err
+	}
 	if err = addOpUpdatePlaceIndexValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -139,6 +143,33 @@ func (c *Client) addOperationUpdatePlaceIndexMiddlewares(stack *middleware.Stack
 		return err
 	}
 	return nil
+}
+
+type endpointPrefix_opUpdatePlaceIndexMiddleware struct {
+}
+
+func (*endpointPrefix_opUpdatePlaceIndexMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opUpdatePlaceIndexMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleSerialize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "places." + req.URL.Host
+
+	return next.HandleSerialize(ctx, in)
+}
+func addEndpointPrefix_opUpdatePlaceIndexMiddleware(stack *middleware.Stack) error {
+	return stack.Serialize.Insert(&endpointPrefix_opUpdatePlaceIndexMiddleware{}, `OperationSerializer`, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opUpdatePlaceIndex(region string) *awsmiddleware.RegisterServiceMetadata {

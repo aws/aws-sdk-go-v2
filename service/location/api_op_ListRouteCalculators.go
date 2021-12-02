@@ -103,6 +103,9 @@ func (c *Client) addOperationListRouteCalculatorsMiddlewares(stack *middleware.S
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addEndpointPrefix_opListRouteCalculatorsMiddleware(stack); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRouteCalculators(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -116,6 +119,33 @@ func (c *Client) addOperationListRouteCalculatorsMiddlewares(stack *middleware.S
 		return err
 	}
 	return nil
+}
+
+type endpointPrefix_opListRouteCalculatorsMiddleware struct {
+}
+
+func (*endpointPrefix_opListRouteCalculatorsMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListRouteCalculatorsMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleSerialize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "routes." + req.URL.Host
+
+	return next.HandleSerialize(ctx, in)
+}
+func addEndpointPrefix_opListRouteCalculatorsMiddleware(stack *middleware.Stack) error {
+	return stack.Serialize.Insert(&endpointPrefix_opListRouteCalculatorsMiddleware{}, `OperationSerializer`, middleware.After)
 }
 
 // ListRouteCalculatorsAPIClient is a client that implements the

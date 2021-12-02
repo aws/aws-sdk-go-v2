@@ -4,6 +4,7 @@ package location
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
@@ -103,6 +104,9 @@ func (c *Client) addOperationBatchDeleteDevicePositionHistoryMiddlewares(stack *
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addEndpointPrefix_opBatchDeleteDevicePositionHistoryMiddleware(stack); err != nil {
+		return err
+	}
 	if err = addOpBatchDeleteDevicePositionHistoryValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -119,6 +123,33 @@ func (c *Client) addOperationBatchDeleteDevicePositionHistoryMiddlewares(stack *
 		return err
 	}
 	return nil
+}
+
+type endpointPrefix_opBatchDeleteDevicePositionHistoryMiddleware struct {
+}
+
+func (*endpointPrefix_opBatchDeleteDevicePositionHistoryMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opBatchDeleteDevicePositionHistoryMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleSerialize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "tracking." + req.URL.Host
+
+	return next.HandleSerialize(ctx, in)
+}
+func addEndpointPrefix_opBatchDeleteDevicePositionHistoryMiddleware(stack *middleware.Stack) error {
+	return stack.Serialize.Insert(&endpointPrefix_opBatchDeleteDevicePositionHistoryMiddleware{}, `OperationSerializer`, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opBatchDeleteDevicePositionHistory(region string) *awsmiddleware.RegisterServiceMetadata {

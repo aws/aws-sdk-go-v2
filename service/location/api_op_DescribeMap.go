@@ -4,7 +4,9 @@ package location
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -118,7 +120,13 @@ func (c *Client) addOperationDescribeMapMiddlewares(stack *middleware.Stack, opt
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
+	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+		return err
+	}
 	if err = addRetryMiddlewares(stack, options); err != nil {
+		return err
+	}
+	if err = addHTTPSignerV4Middleware(stack, options); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
@@ -134,6 +142,9 @@ func (c *Client) addOperationDescribeMapMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addEndpointPrefix_opDescribeMapMiddleware(stack); err != nil {
 		return err
 	}
 	if err = addOpDescribeMapValidationMiddleware(stack); err != nil {
@@ -154,10 +165,38 @@ func (c *Client) addOperationDescribeMapMiddlewares(stack *middleware.Stack, opt
 	return nil
 }
 
+type endpointPrefix_opDescribeMapMiddleware struct {
+}
+
+func (*endpointPrefix_opDescribeMapMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opDescribeMapMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleSerialize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "maps." + req.URL.Host
+
+	return next.HandleSerialize(ctx, in)
+}
+func addEndpointPrefix_opDescribeMapMiddleware(stack *middleware.Stack) error {
+	return stack.Serialize.Insert(&endpointPrefix_opDescribeMapMiddleware{}, `OperationSerializer`, middleware.After)
+}
+
 func newServiceMetadataMiddleware_opDescribeMap(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
+		SigningName:   "geo",
 		OperationName: "DescribeMap",
 	}
 }

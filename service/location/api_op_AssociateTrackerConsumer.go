@@ -4,6 +4,7 @@ package location
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
@@ -103,6 +104,9 @@ func (c *Client) addOperationAssociateTrackerConsumerMiddlewares(stack *middlewa
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addEndpointPrefix_opAssociateTrackerConsumerMiddleware(stack); err != nil {
+		return err
+	}
 	if err = addOpAssociateTrackerConsumerValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -119,6 +123,33 @@ func (c *Client) addOperationAssociateTrackerConsumerMiddlewares(stack *middlewa
 		return err
 	}
 	return nil
+}
+
+type endpointPrefix_opAssociateTrackerConsumerMiddleware struct {
+}
+
+func (*endpointPrefix_opAssociateTrackerConsumerMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opAssociateTrackerConsumerMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleSerialize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "tracking." + req.URL.Host
+
+	return next.HandleSerialize(ctx, in)
+}
+func addEndpointPrefix_opAssociateTrackerConsumerMiddleware(stack *middleware.Stack) error {
+	return stack.Serialize.Insert(&endpointPrefix_opAssociateTrackerConsumerMiddleware{}, `OperationSerializer`, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opAssociateTrackerConsumer(region string) *awsmiddleware.RegisterServiceMetadata {
