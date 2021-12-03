@@ -3,20 +3,8 @@
     "type": "feature",
     "description": "API client updated",
     "modules": [
-        "service/accessanalyzer",
-        "service/amp",
-        "service/appmesh",
-        "service/braket",
-        "service/codeguruprofiler",
-        "service/evidently",
-        "service/grafana",
-        "service/location",
         "service/networkmanager",
-        "service/nimble",
-        "service/proton",
         "service/ram",
-        "service/rekognition",
-        "service/snowdevicemanagement",
-        "service/wisdom"
+        "service/rekognition"
     ]
 }

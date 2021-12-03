@@ -4,6 +4,7 @@ package location
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
@@ -132,6 +133,9 @@ func (c *Client) addOperationGetMapGlyphsMiddlewares(stack *middleware.Stack, op
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addEndpointPrefix_opGetMapGlyphsMiddleware(stack); err != nil {
+		return err
+	}
 	if err = addOpGetMapGlyphsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -148,6 +152,33 @@ func (c *Client) addOperationGetMapGlyphsMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	return nil
+}
+
+type endpointPrefix_opGetMapGlyphsMiddleware struct {
+}
+
+func (*endpointPrefix_opGetMapGlyphsMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opGetMapGlyphsMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleSerialize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "maps." + req.URL.Host
+
+	return next.HandleSerialize(ctx, in)
+}
+func addEndpointPrefix_opGetMapGlyphsMiddleware(stack *middleware.Stack) error {
+	return stack.Serialize.Insert(&endpointPrefix_opGetMapGlyphsMiddleware{}, `OperationSerializer`, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opGetMapGlyphs(region string) *awsmiddleware.RegisterServiceMetadata {

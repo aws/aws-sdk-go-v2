@@ -4,6 +4,7 @@ package snowdevicemanagement
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/snowdevicemanagement/types"
@@ -111,6 +112,9 @@ func (c *Client) addOperationCreateTaskMiddlewares(stack *middleware.Stack, opti
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addIdempotencyToken_opCreateTaskMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateTaskValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -127,6 +131,39 @@ func (c *Client) addOperationCreateTaskMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	return nil
+}
+
+type idempotencyToken_initializeOpCreateTask struct {
+	tokenProvider IdempotencyTokenProvider
+}
+
+func (*idempotencyToken_initializeOpCreateTask) ID() string {
+	return "OperationIdempotencyTokenAutoFill"
+}
+
+func (m *idempotencyToken_initializeOpCreateTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.tokenProvider == nil {
+		return next.HandleInitialize(ctx, in)
+	}
+
+	input, ok := in.Parameters.(*CreateTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *CreateTaskInput ")
+	}
+
+	if input.ClientToken == nil {
+		t, err := m.tokenProvider.GetIdempotencyToken()
+		if err != nil {
+			return out, metadata, err
+		}
+		input.ClientToken = &t
+	}
+	return next.HandleInitialize(ctx, in)
+}
+func addIdempotencyToken_opCreateTaskMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateTask{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opCreateTask(region string) *awsmiddleware.RegisterServiceMetadata {

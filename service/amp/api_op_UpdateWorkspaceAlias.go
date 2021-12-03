@@ -4,6 +4,7 @@ package amp
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
@@ -96,6 +97,9 @@ func (c *Client) addOperationUpdateWorkspaceAliasMiddlewares(stack *middleware.S
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addIdempotencyToken_opUpdateWorkspaceAliasMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateWorkspaceAliasValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -112,6 +116,39 @@ func (c *Client) addOperationUpdateWorkspaceAliasMiddlewares(stack *middleware.S
 		return err
 	}
 	return nil
+}
+
+type idempotencyToken_initializeOpUpdateWorkspaceAlias struct {
+	tokenProvider IdempotencyTokenProvider
+}
+
+func (*idempotencyToken_initializeOpUpdateWorkspaceAlias) ID() string {
+	return "OperationIdempotencyTokenAutoFill"
+}
+
+func (m *idempotencyToken_initializeOpUpdateWorkspaceAlias) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.tokenProvider == nil {
+		return next.HandleInitialize(ctx, in)
+	}
+
+	input, ok := in.Parameters.(*UpdateWorkspaceAliasInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *UpdateWorkspaceAliasInput ")
+	}
+
+	if input.ClientToken == nil {
+		t, err := m.tokenProvider.GetIdempotencyToken()
+		if err != nil {
+			return out, metadata, err
+		}
+		input.ClientToken = &t
+	}
+	return next.HandleInitialize(ctx, in)
+}
+func addIdempotencyToken_opUpdateWorkspaceAliasMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateWorkspaceAlias{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opUpdateWorkspaceAlias(region string) *awsmiddleware.RegisterServiceMetadata {
