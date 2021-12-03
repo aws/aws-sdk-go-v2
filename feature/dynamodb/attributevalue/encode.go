@@ -212,6 +212,13 @@ func MarshalList(in interface{}) ([]types.AttributeValue, error) {
 // EncoderOptions is a collection of options shared between marshaling
 // and unmarshaling
 type EncoderOptions struct {
+	// States that the encoding/json struct tags should be supported.
+	// if a `dynamodbav` struct tag is also provided the encoding/json
+	// tag will be ignored.
+	//
+	// Enabled by default.
+	SupportJSONTags bool
+
 	// Support other custom struct tag keys, such as `yaml`, `json`, or `toml`.
 	// Note that values provided with a custom TagKey must also be supported
 	// by the (un)marshalers in this package.
@@ -241,7 +248,8 @@ type Encoder struct {
 // the `opts` functional options to override the default configuration.
 func NewEncoder(optFns ...func(*EncoderOptions)) *Encoder {
 	options := EncoderOptions{
-		NullEmptySets: true,
+		NullEmptySets:   true,
+		SupportJSONTags: true,
 	}
 	for _, fn := range optFns {
 		fn(&options)

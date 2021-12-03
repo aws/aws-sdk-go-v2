@@ -34,6 +34,13 @@ func buildField(pIdx []int, i int, sf reflect.StructField, fieldTag tag) field {
 }
 
 type structFieldOptions struct {
+	// States that the encoding/json struct tags should be supported.
+	// if a `dynamodbav` struct tag is also provided the encoding/json
+	// tag will be ignored.
+	//
+	// Enabled by default.
+	SupportJSONTags bool
+
 	// Support other custom struct tag keys, such as `yaml`, `json`, or `toml`.
 	// Note that values provided with a custom TagKey must also be supported
 	// by the (un)marshalers in this package.
@@ -107,6 +114,8 @@ func enumFields(t reflect.Type, opts structFieldOptions) []field {
 				// Because MarshalOptions.TagKey must be explicitly set.
 				if opts.TagKey != "" && fieldTag == (tag{}) {
 					fieldTag.parseStructTag(opts.TagKey, sf.Tag)
+				} else if opts.SupportJSONTags && fieldTag == (tag{}) {
+					fieldTag.parseStructTag("json", sf.Tag)
 				}
 
 				if fieldTag.Ignore {

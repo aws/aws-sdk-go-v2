@@ -114,6 +114,13 @@ func UnmarshalListOfMaps(l []map[string]types.AttributeValue, out interface{}) e
 // DecoderOptions is a collection of options to configure how the decoder
 // unmarshalls the value.
 type DecoderOptions struct {
+	// States that the encoding/json struct tags should be supported.
+	// if a `dynamodbav` struct tag is also provided the encoding/json
+	// tag will be ignored.
+	//
+	// Enabled by default.
+	SupportJSONTags bool
+
 	// Support other custom struct tag keys, such as `yaml`, `json`, or `toml`.
 	// Note that values provided with a custom TagKey must also be supported
 	// by the (un)marshalers in this package.
@@ -136,7 +143,10 @@ type Decoder struct {
 // NewDecoder creates a new Decoder with default configuration. Use
 // the `opts` functional options to override the default configuration.
 func NewDecoder(optFns ...func(*DecoderOptions)) *Decoder {
-	var options DecoderOptions
+	var options = DecoderOptions{
+		SupportJSONTags: true,
+	}
+
 	for _, fn := range optFns {
 		fn(&options)
 	}
