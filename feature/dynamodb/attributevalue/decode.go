@@ -519,7 +519,8 @@ func (d *Decoder) decodeMap(avMap map[string]types.AttributeValue, v reflect.Val
 		}
 	} else if v.Kind() == reflect.Struct {
 		fields := unionStructFields(v.Type(), structFieldOptions{
-			TagKey: d.options.TagKey,
+			TagKey:          d.options.TagKey,
+			SupportJSONTags: true,
 		})
 		for k, av := range avMap {
 			if f, ok := fields.FieldByName(k); ok {
