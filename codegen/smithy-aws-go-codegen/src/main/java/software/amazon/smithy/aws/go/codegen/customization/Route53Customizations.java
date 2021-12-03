@@ -14,6 +14,7 @@ import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.MiddlewareRegistrar;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
 import software.amazon.smithy.model.Model;
+import software.amazon.smithy.model.knowledge.TopDownIndex;
 import software.amazon.smithy.model.shapes.MemberShape;
 import software.amazon.smithy.model.shapes.OperationShape;
 import software.amazon.smithy.model.shapes.ServiceShape;
@@ -97,8 +98,7 @@ public class Route53Customizations implements GoIntegration {
 
         writer.openBlock("func sanitizeHostedZoneIDInput(input interface{}) error {", "}", () -> {
             writer.openBlock("switch i:= input.(type) {", "}", () -> {
-                service.getAllOperations().forEach((operationId)-> {
-                    OperationShape operation = model.expectShape(operationId, OperationShape.class);
+                TopDownIndex.of(model).getContainedOperations(service).forEach((operation)-> {
                     StructureShape input = model.expectShape(operation.getInput().get(), StructureShape.class);
                     List<MemberShape> hostedZoneIDMembers = input.getAllMembers().values().stream()
                             .filter(m -> m.getTarget().getName(service).equalsIgnoreCase("ResourceId")

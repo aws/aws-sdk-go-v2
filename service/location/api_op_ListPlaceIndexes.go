@@ -103,6 +103,9 @@ func (c *Client) addOperationListPlaceIndexesMiddlewares(stack *middleware.Stack
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addEndpointPrefix_opListPlaceIndexesMiddleware(stack); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPlaceIndexes(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -116,6 +119,33 @@ func (c *Client) addOperationListPlaceIndexesMiddlewares(stack *middleware.Stack
 		return err
 	}
 	return nil
+}
+
+type endpointPrefix_opListPlaceIndexesMiddleware struct {
+}
+
+func (*endpointPrefix_opListPlaceIndexesMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListPlaceIndexesMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleSerialize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "places." + req.URL.Host
+
+	return next.HandleSerialize(ctx, in)
+}
+func addEndpointPrefix_opListPlaceIndexesMiddleware(stack *middleware.Stack) error {
+	return stack.Serialize.Insert(&endpointPrefix_opListPlaceIndexesMiddleware{}, `OperationSerializer`, middleware.After)
 }
 
 // ListPlaceIndexesAPIClient is a client that implements the ListPlaceIndexes

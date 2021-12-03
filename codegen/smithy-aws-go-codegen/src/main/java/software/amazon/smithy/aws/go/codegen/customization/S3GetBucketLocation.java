@@ -17,6 +17,7 @@ import software.amazon.smithy.go.codegen.integration.ProtocolGenerator;
 import software.amazon.smithy.go.codegen.integration.ProtocolUtils;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
 import software.amazon.smithy.model.Model;
+import software.amazon.smithy.model.knowledge.TopDownIndex;
 import software.amazon.smithy.model.shapes.OperationShape;
 import software.amazon.smithy.model.shapes.ServiceShape;
 import software.amazon.smithy.model.shapes.Shape;
@@ -85,12 +86,11 @@ public class S3GetBucketLocation implements GoIntegration {
             return;
         }
 
-        for (ShapeId operationId : service.getAllOperations()) {
-            if (!(operationId.getName(service).equals(getBucketLocationOpID))) {
+        for (OperationShape operation : TopDownIndex.of(model).getContainedOperations(service)) {
+            if (!(operation.getId().getName(service).equals(getBucketLocationOpID))) {
                 continue;
             }
 
-            OperationShape operation = model.expectShape(operationId, OperationShape.class);
             goDelegator.useShapeWriter(operation, writer -> {
                 writeCustomDeserializer(writer, model, symbolProvider, service, operation);
                 writeDeserializerSwapFunction(writer, service, operation);

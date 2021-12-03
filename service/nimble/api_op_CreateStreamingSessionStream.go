@@ -4,6 +4,7 @@ package nimble
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/nimble/types"
@@ -110,6 +111,9 @@ func (c *Client) addOperationCreateStreamingSessionStreamMiddlewares(stack *midd
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addIdempotencyToken_opCreateStreamingSessionStreamMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateStreamingSessionStreamValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -126,6 +130,39 @@ func (c *Client) addOperationCreateStreamingSessionStreamMiddlewares(stack *midd
 		return err
 	}
 	return nil
+}
+
+type idempotencyToken_initializeOpCreateStreamingSessionStream struct {
+	tokenProvider IdempotencyTokenProvider
+}
+
+func (*idempotencyToken_initializeOpCreateStreamingSessionStream) ID() string {
+	return "OperationIdempotencyTokenAutoFill"
+}
+
+func (m *idempotencyToken_initializeOpCreateStreamingSessionStream) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.tokenProvider == nil {
+		return next.HandleInitialize(ctx, in)
+	}
+
+	input, ok := in.Parameters.(*CreateStreamingSessionStreamInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *CreateStreamingSessionStreamInput ")
+	}
+
+	if input.ClientToken == nil {
+		t, err := m.tokenProvider.GetIdempotencyToken()
+		if err != nil {
+			return out, metadata, err
+		}
+		input.ClientToken = &t
+	}
+	return next.HandleInitialize(ctx, in)
+}
+func addIdempotencyToken_opCreateStreamingSessionStreamMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateStreamingSessionStream{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opCreateStreamingSessionStream(region string) *awsmiddleware.RegisterServiceMetadata {

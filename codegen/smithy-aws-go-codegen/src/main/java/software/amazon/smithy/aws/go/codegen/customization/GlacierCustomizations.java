@@ -13,6 +13,7 @@ import software.amazon.smithy.go.codegen.integration.MiddlewareRegistrar;
 import software.amazon.smithy.go.codegen.integration.ProtocolUtils;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
 import software.amazon.smithy.model.Model;
+import software.amazon.smithy.model.knowledge.TopDownIndex;
 import software.amazon.smithy.model.shapes.MemberShape;
 import software.amazon.smithy.model.shapes.OperationShape;
 import software.amazon.smithy.model.shapes.ServiceShape;
@@ -87,13 +88,12 @@ public class GlacierCustomizations implements GoIntegration {
         writer.writeDocs("setDefaultAccountID sets the AccountID to the given value if the current value is nil");
         writer.openBlock("func setDefaultAccountID(input interface{}, accountID string) interface{} {", "}", () -> {
             writer.openBlock("switch i := input.(type) {", "}", () -> {
-                for (ShapeId operationId : service.getAllOperations()) {
-                    OperationShape operation = model.expectShape(operationId, OperationShape.class);
+                for (OperationShape operation : TopDownIndex.of(model).getContainedOperations(service)) {
                     StructureShape input = ProtocolUtils.expectInput(model, operation);
 
                     List<MemberShape> accountId = input.getAllMembers().values().stream()
                             .filter(m -> m.getMemberName().toLowerCase().equals("accountid"))
-                            .collect(Collectors.toList());
+                            .toList();
 
                     if (accountId.isEmpty()) {
                         continue;

@@ -4,6 +4,7 @@ package appmesh
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/appmesh/types"
@@ -146,6 +147,9 @@ func (c *Client) addOperationCreateVirtualNodeMiddlewares(stack *middleware.Stac
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addIdempotencyToken_opCreateVirtualNodeMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateVirtualNodeValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -162,6 +166,39 @@ func (c *Client) addOperationCreateVirtualNodeMiddlewares(stack *middleware.Stac
 		return err
 	}
 	return nil
+}
+
+type idempotencyToken_initializeOpCreateVirtualNode struct {
+	tokenProvider IdempotencyTokenProvider
+}
+
+func (*idempotencyToken_initializeOpCreateVirtualNode) ID() string {
+	return "OperationIdempotencyTokenAutoFill"
+}
+
+func (m *idempotencyToken_initializeOpCreateVirtualNode) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.tokenProvider == nil {
+		return next.HandleInitialize(ctx, in)
+	}
+
+	input, ok := in.Parameters.(*CreateVirtualNodeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *CreateVirtualNodeInput ")
+	}
+
+	if input.ClientToken == nil {
+		t, err := m.tokenProvider.GetIdempotencyToken()
+		if err != nil {
+			return out, metadata, err
+		}
+		input.ClientToken = &t
+	}
+	return next.HandleInitialize(ctx, in)
+}
+func addIdempotencyToken_opCreateVirtualNodeMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateVirtualNode{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opCreateVirtualNode(region string) *awsmiddleware.RegisterServiceMetadata {

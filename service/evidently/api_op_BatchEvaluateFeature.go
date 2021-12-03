@@ -4,6 +4,7 @@ package evidently
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/evidently/types"
@@ -115,6 +116,9 @@ func (c *Client) addOperationBatchEvaluateFeatureMiddlewares(stack *middleware.S
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addEndpointPrefix_opBatchEvaluateFeatureMiddleware(stack); err != nil {
+		return err
+	}
 	if err = addOpBatchEvaluateFeatureValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -131,6 +135,33 @@ func (c *Client) addOperationBatchEvaluateFeatureMiddlewares(stack *middleware.S
 		return err
 	}
 	return nil
+}
+
+type endpointPrefix_opBatchEvaluateFeatureMiddleware struct {
+}
+
+func (*endpointPrefix_opBatchEvaluateFeatureMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opBatchEvaluateFeatureMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleSerialize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "dataplane." + req.URL.Host
+
+	return next.HandleSerialize(ctx, in)
+}
+func addEndpointPrefix_opBatchEvaluateFeatureMiddleware(stack *middleware.Stack) error {
+	return stack.Serialize.Insert(&endpointPrefix_opBatchEvaluateFeatureMiddleware{}, `OperationSerializer`, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opBatchEvaluateFeature(region string) *awsmiddleware.RegisterServiceMetadata {

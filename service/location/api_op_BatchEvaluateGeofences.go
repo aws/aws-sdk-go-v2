@@ -4,7 +4,9 @@ package location
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -92,7 +94,13 @@ func (c *Client) addOperationBatchEvaluateGeofencesMiddlewares(stack *middleware
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
+	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+		return err
+	}
 	if err = addRetryMiddlewares(stack, options); err != nil {
+		return err
+	}
+	if err = addHTTPSignerV4Middleware(stack, options); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
@@ -108,6 +116,9 @@ func (c *Client) addOperationBatchEvaluateGeofencesMiddlewares(stack *middleware
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addEndpointPrefix_opBatchEvaluateGeofencesMiddleware(stack); err != nil {
 		return err
 	}
 	if err = addOpBatchEvaluateGeofencesValidationMiddleware(stack); err != nil {
@@ -128,10 +139,38 @@ func (c *Client) addOperationBatchEvaluateGeofencesMiddlewares(stack *middleware
 	return nil
 }
 
+type endpointPrefix_opBatchEvaluateGeofencesMiddleware struct {
+}
+
+func (*endpointPrefix_opBatchEvaluateGeofencesMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opBatchEvaluateGeofencesMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleSerialize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "geofencing." + req.URL.Host
+
+	return next.HandleSerialize(ctx, in)
+}
+func addEndpointPrefix_opBatchEvaluateGeofencesMiddleware(stack *middleware.Stack) error {
+	return stack.Serialize.Insert(&endpointPrefix_opBatchEvaluateGeofencesMiddleware{}, `OperationSerializer`, middleware.After)
+}
+
 func newServiceMetadataMiddleware_opBatchEvaluateGeofences(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
+		SigningName:   "geo",
 		OperationName: "BatchEvaluateGeofences",
 	}
 }

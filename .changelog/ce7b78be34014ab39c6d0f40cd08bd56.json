@@ -1,0 +1,8 @@
+{
+    "id": "ce7b78be-3401-4ab3-9c6d-0f40cd08bd56",
+    "type": "bugfix",
+    "description": "Fixed an issue that caused some operations to not be signed using sigv4, resulting in authentication failures.",
+    "modules": [
+        "service/location"
+    ]
+}

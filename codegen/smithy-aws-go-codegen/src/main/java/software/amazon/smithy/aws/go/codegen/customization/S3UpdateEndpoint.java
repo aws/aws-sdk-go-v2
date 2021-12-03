@@ -36,6 +36,7 @@ import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.MiddlewareRegistrar;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
 import software.amazon.smithy.model.Model;
+import software.amazon.smithy.model.knowledge.TopDownIndex;
 import software.amazon.smithy.model.shapes.MemberShape;
 import software.amazon.smithy.model.shapes.OperationShape;
 import software.amazon.smithy.model.shapes.ServiceShape;
@@ -126,9 +127,7 @@ public class S3UpdateEndpoint implements GoIntegration {
     @Override
     public void processFinalizedModel(GoSettings settings, Model model) {
         ServiceShape service = settings.getService(model);
-        for (ShapeId operationId : service.getAllOperations()) {
-            final OperationShape operation = model.expectShape(operationId, OperationShape.class);
-
+        for (final OperationShape operation : TopDownIndex.of(model).getContainedOperations(service)) {
             // Create a symbol provider because one is not available in this call.
             SymbolProvider symbolProvider = GoCodegenPlugin.createSymbolProvider(model, settings);
             String helperFuncName = addMiddlewareFuncName(
@@ -275,8 +274,7 @@ public class S3UpdateEndpoint implements GoIntegration {
                 GoDelegator goDelegator
         ) {
 
-            for (ShapeId operationID : service.getAllOperations()) {
-                OperationShape operation = model.expectShape(operationID, OperationShape.class);
+            for (OperationShape operation : TopDownIndex.of(model).getContainedOperations(service)) {
                 goDelegator.useShapeWriter(operation, writer -> {
                     // generate get bucket member helper function
                     writeGetBucketMemberHelper(writer, model, symbolProvider, operation);
@@ -452,8 +450,7 @@ public class S3UpdateEndpoint implements GoIntegration {
                 SymbolProvider symbolProvider,
                 GoDelegator goDelegator
         ) {
-            for (ShapeId operationID : service.getAllOperations()) {
-                OperationShape operation = model.expectShape(operationID, OperationShape.class);
+            for (OperationShape operation : TopDownIndex.of(model).getContainedOperations(service)) {
                 goDelegator.useShapeWriter(operation, writer -> {
                     // get input shape from operation
                     StructureShape input = model.expectShape(operation.getInput().get(), StructureShape.class);

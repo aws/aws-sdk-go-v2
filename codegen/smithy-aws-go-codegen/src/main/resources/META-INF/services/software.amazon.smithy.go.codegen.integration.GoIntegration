@@ -14,6 +14,7 @@ software.amazon.smithy.aws.go.codegen.AWSResponseErrorWrapper
 software.amazon.smithy.aws.go.codegen.FilterShapes
 software.amazon.smithy.aws.go.codegen.customization.ShapeBackwardsCompatabilityTransforms
 software.amazon.smithy.aws.go.codegen.customization.BackfillBoxTrait
+software.amazon.smithy.aws.go.codegen.customization.LocationModelFixes
 software.amazon.smithy.aws.go.codegen.customization.DynamoDBValidateResponseChecksum
 software.amazon.smithy.aws.go.codegen.customization.S3UpdateEndpoint
 software.amazon.smithy.aws.go.codegen.customization.APIGatewayAcceptHeader
