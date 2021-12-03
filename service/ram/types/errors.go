@@ -7,8 +7,9 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// A client token input parameter was reused with an operation, but at least one of
-// the other input parameters is different from the previous call to the operation.
+// The client token input parameter was matched one used with a previous call to
+// the operation, but at least one of the other input parameters is different from
+// the previous call.
 type IdempotentParameterMismatchException struct {
 	Message *string
 
@@ -31,7 +32,7 @@ func (e *IdempotentParameterMismatchException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// A client token is not valid.
+// The client token is not valid.
 type InvalidClientTokenException struct {
 	Message *string
 
@@ -206,7 +207,7 @@ func (e *OperationNotPermittedException) ErrorMessage() string {
 func (e *OperationNotPermittedException) ErrorCode() string             { return "OperationNotPermittedException" }
 func (e *OperationNotPermittedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An Amazon Resource Name (ARN) was not found.
+// The specified Amazon Resource Name (ARN) was not found.
 type ResourceArnNotFoundException struct {
 	Message *string
 
@@ -225,7 +226,7 @@ func (e *ResourceArnNotFoundException) ErrorMessage() string {
 func (e *ResourceArnNotFoundException) ErrorCode() string             { return "ResourceArnNotFoundException" }
 func (e *ResourceArnNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The invitation was already accepted.
+// The specified invitation was already accepted.
 type ResourceShareInvitationAlreadyAcceptedException struct {
 	Message *string
 
@@ -248,7 +249,7 @@ func (e *ResourceShareInvitationAlreadyAcceptedException) ErrorFault() smithy.Er
 	return smithy.FaultClient
 }
 
-// The invitation was already rejected.
+// The specified invitation was already rejected.
 type ResourceShareInvitationAlreadyRejectedException struct {
 	Message *string
 
@@ -271,7 +272,7 @@ func (e *ResourceShareInvitationAlreadyRejectedException) ErrorFault() smithy.Er
 	return smithy.FaultClient
 }
 
-// The Amazon Resource Name (ARN) for an invitation was not found.
+// The specified Amazon Resource Name (ARN) for an invitation was not found.
 type ResourceShareInvitationArnNotFoundException struct {
 	Message *string
 
@@ -294,7 +295,7 @@ func (e *ResourceShareInvitationArnNotFoundException) ErrorFault() smithy.ErrorF
 	return smithy.FaultClient
 }
 
-// The invitation is expired.
+// The specified invitation is expired.
 type ResourceShareInvitationExpiredException struct {
 	Message *string
 
@@ -317,7 +318,7 @@ func (e *ResourceShareInvitationExpiredException) ErrorFault() smithy.ErrorFault
 	return smithy.FaultClient
 }
 
-// The requested resource share exceeds the limit for your account.
+// This request would exceed the limit for resource shares for your account.
 type ResourceShareLimitExceededException struct {
 	Message *string
 
@@ -378,7 +379,7 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 func (e *ServiceUnavailableException) ErrorCode() string             { return "ServiceUnavailableException" }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The requested tags exceed the limit for your account.
+// This request would exceed the limit for tags for your account.
 type TagLimitExceededException struct {
 	Message *string
 
@@ -397,7 +398,7 @@ func (e *TagLimitExceededException) ErrorMessage() string {
 func (e *TagLimitExceededException) ErrorCode() string             { return "TagLimitExceededException" }
 func (e *TagLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified tag is a reserved word and cannot be used.
+// The specified tag key is a reserved word and can't be used.
 type TagPolicyViolationException struct {
 	Message *string
 
@@ -415,6 +416,26 @@ func (e *TagPolicyViolationException) ErrorMessage() string {
 }
 func (e *TagPolicyViolationException) ErrorCode() string             { return "TagPolicyViolationException" }
 func (e *TagPolicyViolationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// You exceeded the rate at which you are allowed to perform this operation. Please
+// try again later.
+type ThrottlingException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ThrottlingException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ThrottlingException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
+func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A specified resource was not found.
 type UnknownResourceException struct {

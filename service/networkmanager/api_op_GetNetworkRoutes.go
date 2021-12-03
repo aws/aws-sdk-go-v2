@@ -71,6 +71,9 @@ type GetNetworkRoutesInput struct {
 
 type GetNetworkRoutesOutput struct {
 
+	// Describes a core network segment edge.
+	CoreNetworkSegmentEdge *types.CoreNetworkSegmentEdgeIdentifier
+
 	// The network routes.
 	NetworkRoutes []types.NetworkRoute
 

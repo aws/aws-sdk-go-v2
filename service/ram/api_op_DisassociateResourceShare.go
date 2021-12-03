@@ -30,19 +30,56 @@ func (c *Client) DisassociateResourceShare(ctx context.Context, params *Disassoc
 
 type DisassociateResourceShareInput struct {
 
-	// The Amazon Resource Name (ARN) of the resource share.
+	// Specifies Amazon Resoure Name (ARN)
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
+	// the resource share that you want to remove resources from.
 	//
 	// This member is required.
 	ResourceShareArn *string
 
-	// A unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
+	// Specifies a unique, case-sensitive identifier that you provide to ensure the
+	// idempotency of the request. This lets you safely retry the request without
+	// accidentally performing the same operation a second time. Passing the same value
+	// to a later call to an operation requires that you also pass the same value for
+	// all other parameters. We recommend that you use a UUID type of value.
+	// (https://wikipedia.org/wiki/Universally_unique_identifier). If you don't provide
+	// this value, then Amazon Web Services generates a random one for you.
 	ClientToken *string
 
-	// The principals.
+	// Specifies a list of one or more principals that no longer are to have access to
+	// the resources in this resource share. You can include the following values:
+	//
+	// *
+	// An Amazon Web Services account ID, for example: 123456789012
+	//
+	// * An Amazon
+	// Resoure Name (ARN)
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
+	// an organization in Organizations, for example:
+	// organizations::123456789012:organization/o-exampleorgid
+	//
+	// * An ARN of an
+	// organizational unit (OU) in Organizations, for example:
+	// organizations::123456789012:ou/o-exampleorgid/ou-examplerootid-exampleouid123
+	//
+	// *
+	// An ARN of an IAM role, for example: iam::123456789012:role/rolename
+	//
+	// * An ARN of
+	// an IAM user, for example: iam::123456789012user/username
+	//
+	// Not all resource types
+	// can be shared with IAM roles and users. For more information, see Sharing with
+	// IAM roles and users
+	// (https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types)
+	// in the Resource Access Manager User Guide.
 	Principals []string
 
-	// The Amazon Resource Names (ARNs) of the resources.
+	// Specifies a list of Amazon Resource Names (ARNs)
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) for
+	// one or more resources that you want to remove from the resource share. After the
+	// operation runs, these resources are no longer shared with principals outside of
+	// the Amazon Web Services account that created the resources.
 	ResourceArns []string
 
 	noSmithyDocumentSerde
@@ -50,11 +87,14 @@ type DisassociateResourceShareInput struct {
 
 type DisassociateResourceShareOutput struct {
 
-	// A unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
+	// The idempotency identifier associated with this request. If you want to repeat
+	// the same operation in an idempotent manner then you must include this value in
+	// the clientToken request parameter of that later call. All other parameters must
+	// also have the same values that you used in the first call.
 	ClientToken *string
 
-	// Information about the associations.
+	// An array of objects that contain information about the updated associations for
+	// this resource share.
 	ResourceShareAssociations []types.ResourceShareAssociation
 
 	// Metadata pertaining to the operation's result.

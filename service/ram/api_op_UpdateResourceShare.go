@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the specified resource share that you own.
+// Modifies some of the properties of the specified resource share.
 func (c *Client) UpdateResourceShare(ctx context.Context, params *UpdateResourceShareInput, optFns ...func(*Options)) (*UpdateResourceShareOutput, error) {
 	if params == nil {
 		params = &UpdateResourceShareInput{}
@@ -29,20 +29,27 @@ func (c *Client) UpdateResourceShare(ctx context.Context, params *UpdateResource
 
 type UpdateResourceShareInput struct {
 
-	// The Amazon Resource Name (ARN) of the resource share.
+	// Specifies the Amazon Resoure Name (ARN)
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
+	// the resource share that you want to modify.
 	//
 	// This member is required.
 	ResourceShareArn *string
 
-	// Indicates whether principals outside your organization in Organizations can be
+	// Specifies whether principals outside your organization in Organizations can be
 	// associated with a resource share.
 	AllowExternalPrincipals *bool
 
-	// A unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
+	// Specifies a unique, case-sensitive identifier that you provide to ensure the
+	// idempotency of the request. This lets you safely retry the request without
+	// accidentally performing the same operation a second time. Passing the same value
+	// to a later call to an operation requires that you also pass the same value for
+	// all other parameters. We recommend that you use a UUID type of value.
+	// (https://wikipedia.org/wiki/Universally_unique_identifier). If you don't provide
+	// this value, then Amazon Web Services generates a random one for you.
 	ClientToken *string
 
-	// The name of the resource share.
+	// If specified, the new name that you want to attach to the resource share.
 	Name *string
 
 	noSmithyDocumentSerde
@@ -50,8 +57,10 @@ type UpdateResourceShareInput struct {
 
 type UpdateResourceShareOutput struct {
 
-	// A unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
+	// The idempotency identifier associated with this request. If you want to repeat
+	// the same operation in an idempotent manner then you must include this value in
+	// the clientToken request parameter of that later call. All other parameters must
+	// also have the same values that you used in the first call.
 	ClientToken *string
 
 	// Information about the resource share.

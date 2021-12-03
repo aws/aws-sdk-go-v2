@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a resource share. You must provide a list of the Amazon Resource Names
-// (ARNs) for the resources you want to share. You must also specify who you want
-// to share the resources with, and the permissions that you grant them. Sharing a
+// Creates a resource share. You can provide a list of the Amazon Resource Names
+// (ARNs)
+// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) for
+// the resources that you want to share, a list of principals you want to share the
+// resources with, and the permissions to grant those principals. Sharing a
 // resource makes it available for use by principals outside of the Amazon Web
 // Services account that created the resource. Sharing doesn't change any
 // permissions or quotas that apply to the resource in the account that created it.
@@ -34,52 +36,69 @@ func (c *Client) CreateResourceShare(ctx context.Context, params *CreateResource
 
 type CreateResourceShareInput struct {
 
-	// The name of the resource share.
+	// Specifies the name of the resource share.
 	//
 	// This member is required.
 	Name *string
 
-	// Indicates whether principals outside your organization in Organizations can be
-	// associated with a resource share.
+	// Specifies whether principals outside your organization in Organizations can be
+	// associated with a resource share. A value of true lets you share with individual
+	// Amazon Web Services accounts that are not in your organization. A value of false
+	// only has meaning if your account is a member of an Amazon Web Services
+	// Organization. The default value is true.
 	AllowExternalPrincipals *bool
 
-	// A unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
+	// Specifies a unique, case-sensitive identifier that you provide to ensure the
+	// idempotency of the request. This lets you safely retry the request without
+	// accidentally performing the same operation a second time. Passing the same value
+	// to a later call to an operation requires that you also pass the same value for
+	// all other parameters. We recommend that you use a UUID type of value.
+	// (https://wikipedia.org/wiki/Universally_unique_identifier). If you don't provide
+	// this value, then Amazon Web Services generates a random one for you.
 	ClientToken *string
 
-	// The Amazon Resource Names (ARNs) of the permissions to associate with the
-	// resource share. If you do not specify an ARN for the permission, RAM
-	// automatically attaches the default version of the permission for each resource
-	// type. Only one permission can be associated with each resource type in a
-	// resource share.
+	// Specifies the Amazon Resource Names (ARNs)
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
+	// the RAM permission to associate with the resource share. If you do not specify
+	// an ARN for the permission, RAM automatically attaches the default version of the
+	// permission for each resource type. You can associate only one permission with
+	// each resource type included in the resource share.
 	PermissionArns []string
 
-	// The principals to associate with the resource share. The possible values are:
+	// Specifies a list of one or more principals to associate with the resource share.
+	// You can include the following values:
+	//
+	// * An Amazon Web Services account ID, for
+	// example: 123456789012
+	//
+	// * An Amazon Resoure Name (ARN)
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
+	// an organization in Organizations, for example:
+	// organizations::123456789012:organization/o-exampleorgid
+	//
+	// * An ARN of an
+	// organizational unit (OU) in Organizations, for example:
+	// organizations::123456789012:ou/o-exampleorgid/ou-examplerootid-exampleouid123
 	//
 	// *
-	// An Amazon Web Services account ID
+	// An ARN of an IAM role, for example: iam::123456789012:role/rolename
 	//
-	// * An Amazon Resource Name (ARN) of an
-	// organization in Organizations
+	// * An ARN of
+	// an IAM user, for example: iam::123456789012user/username
 	//
-	// * An ARN of an organizational unit (OU) in
-	// Organizations
-	//
-	// * An ARN of an IAM role
-	//
-	// * An ARN of an IAM user
-	//
-	// Not all
-	// resource types can be shared with IAM roles and IAM users. For more information,
-	// see Sharing with IAM roles and IAM users
+	// Not all resource types
+	// can be shared with IAM roles and users. For more information, see Sharing with
+	// IAM roles and users
 	// (https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types)
 	// in the Resource Access Manager User Guide.
 	Principals []string
 
-	// The ARNs of the resources to associate with the resource share.
+	// Specifies a list of one or more ARNs of the resources to associate with the
+	// resource share.
 	ResourceArns []string
 
-	// One or more tags.
+	// Specifies one or more tags to attach to the resource share itself. It doesn't
+	// attach the tags to the resources associated with the resource share.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -87,11 +106,13 @@ type CreateResourceShareInput struct {
 
 type CreateResourceShareOutput struct {
 
-	// A unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
+	// The idempotency identifier associated with this request. If you want to repeat
+	// the same operation in an idempotent manner then you must include this value in
+	// the clientToken request parameter of that later call. All other parameters must
+	// also have the same values that you used in the first call.
 	ClientToken *string
 
-	// Information about the resource share.
+	// An object with information about the new resource share.
 	ResourceShare *types.ResourceShare
 
 	// Metadata pertaining to the operation's result.

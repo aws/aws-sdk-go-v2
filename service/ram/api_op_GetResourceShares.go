@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the resource shares that you own or the resource shares that are shared
-// with you.
+// Retrieves details about the resource shares that you own or that are shared with
+// you.
 func (c *Client) GetResourceShares(ctx context.Context, params *GetResourceSharesInput, optFns ...func(*Options)) (*GetResourceSharesOutput, error) {
 	if params == nil {
 		params = &GetResourceSharesInput{}
@@ -31,32 +31,54 @@ func (c *Client) GetResourceShares(ctx context.Context, params *GetResourceShare
 
 type GetResourceSharesInput struct {
 
-	// The type of owner.
+	// Specifies that you want to retrieve details of only those resource shares that
+	// match the following:
+	//
+	// * SELF – resources that you are sharing
+	//
+	// * OTHER-ACCOUNTS
+	// – resources that other accounts share with you
 	//
 	// This member is required.
 	ResourceOwner types.ResourceOwner
 
-	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
+	// Specifies the total number of results that you want included on each page of the
+	// response. If you do not include this parameter, it defaults to a value that is
+	// specific to the operation. If additional items exist beyond the number you
+	// specify, the NextToken response element is returned with a value (not null).
+	// Include the specified value as the NextToken request parameter in the next call
+	// to the operation to get the next part of the results. Note that the service
+	// might return fewer results than the maximum even when there are more results
+	// available. You should check NextToken after every operation to ensure that you
+	// receive all of the results.
 	MaxResults *int32
 
-	// The name of the resource share.
+	// Specifies the name of an individual resource share that you want to retrieve
+	// details about.
 	Name *string
 
-	// The token for the next page of results.
+	// Specifies that you want to receive the next page of results. Valid only if you
+	// received a NextToken response in the previous request. If you did, it indicates
+	// that more output is available. Set this parameter to the value provided by the
+	// previous call's NextToken response to request the next page of results.
 	NextToken *string
 
-	// The Amazon Resource Name (ARN) of the RAM permission that is associated with the
-	// resource share.
+	// Specifies that you want to retrieve details of only those resource shares that
+	// use the RAM permission with this Amazon Resoure Name (ARN)
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	PermissionArn *string
 
-	// The Amazon Resource Names (ARNs) of the resource shares.
+	// Specifies the Amazon Resource Names (ARNs)
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
+	// individual resource shares that you want information about.
 	ResourceShareArns []string
 
-	// The status of the resource share.
+	// Specifies that you want to retrieve details of only those resource shares that
+	// have this status.
 	ResourceShareStatus types.ResourceShareStatus
 
-	// One or more tag filters.
+	// Specifies that you want to retrieve details of only those resource shares that
+	// match the specified tag keys and values.
 	TagFilters []types.TagFilter
 
 	noSmithyDocumentSerde
@@ -64,11 +86,14 @@ type GetResourceSharesInput struct {
 
 type GetResourceSharesOutput struct {
 
-	// The token to use to retrieve the next page of results. This value is null when
-	// there are no more results to return.
+	// If present, this value indicates that more output is available than is included
+	// in the current response. Use this value in the NextToken request parameter in a
+	// subsequent call to the operation to get the next part of the output. You should
+	// repeat this until the NextToken response element comes back as null. This
+	// indicates that this is the last page of results.
 	NextToken *string
 
-	// Information about the resource shares.
+	// An array of objects that contain the information about the resource shares.
 	ResourceShares []types.ResourceShare
 
 	// Metadata pertaining to the operation's result.
@@ -150,8 +175,15 @@ var _ GetResourceSharesAPIClient = (*Client)(nil)
 
 // GetResourceSharesPaginatorOptions is the paginator options for GetResourceShares
 type GetResourceSharesPaginatorOptions struct {
-	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
+	// Specifies the total number of results that you want included on each page of the
+	// response. If you do not include this parameter, it defaults to a value that is
+	// specific to the operation. If additional items exist beyond the number you
+	// specify, the NextToken response element is returned with a value (not null).
+	// Include the specified value as the NextToken request parameter in the next call
+	// to the operation to get the next part of the results. Note that the service
+	// might return fewer results than the maximum even when there are more results
+	// available. You should check NextToken after every operation to ensure that you
+	// receive all of the results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

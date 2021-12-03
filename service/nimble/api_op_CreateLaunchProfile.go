@@ -4,7 +4,6 @@ package nimble
 
 import (
 	"context"
-	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/nimble/types"
@@ -136,9 +135,6 @@ func (c *Client) addOperationCreateLaunchProfileMiddlewares(stack *middleware.St
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addIdempotencyToken_opCreateLaunchProfileMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCreateLaunchProfileValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -155,39 +151,6 @@ func (c *Client) addOperationCreateLaunchProfileMiddlewares(stack *middleware.St
 		return err
 	}
 	return nil
-}
-
-type idempotencyToken_initializeOpCreateLaunchProfile struct {
-	tokenProvider IdempotencyTokenProvider
-}
-
-func (*idempotencyToken_initializeOpCreateLaunchProfile) ID() string {
-	return "OperationIdempotencyTokenAutoFill"
-}
-
-func (m *idempotencyToken_initializeOpCreateLaunchProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	if m.tokenProvider == nil {
-		return next.HandleInitialize(ctx, in)
-	}
-
-	input, ok := in.Parameters.(*CreateLaunchProfileInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("expected middleware input to be of type *CreateLaunchProfileInput ")
-	}
-
-	if input.ClientToken == nil {
-		t, err := m.tokenProvider.GetIdempotencyToken()
-		if err != nil {
-			return out, metadata, err
-		}
-		input.ClientToken = &t
-	}
-	return next.HandleInitialize(ctx, in)
-}
-func addIdempotencyToken_opCreateLaunchProfileMiddleware(stack *middleware.Stack, cfg Options) error {
-	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateLaunchProfile{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opCreateLaunchProfile(region string) *awsmiddleware.RegisterServiceMetadata {

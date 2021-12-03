@@ -4,7 +4,6 @@ package wisdom
 
 import (
 	"context"
-	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/wisdom/types"
@@ -112,9 +111,6 @@ func (c *Client) addOperationCreateAssistantMiddlewares(stack *middleware.Stack,
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addIdempotencyToken_opCreateAssistantMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCreateAssistantValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -131,39 +127,6 @@ func (c *Client) addOperationCreateAssistantMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	return nil
-}
-
-type idempotencyToken_initializeOpCreateAssistant struct {
-	tokenProvider IdempotencyTokenProvider
-}
-
-func (*idempotencyToken_initializeOpCreateAssistant) ID() string {
-	return "OperationIdempotencyTokenAutoFill"
-}
-
-func (m *idempotencyToken_initializeOpCreateAssistant) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	if m.tokenProvider == nil {
-		return next.HandleInitialize(ctx, in)
-	}
-
-	input, ok := in.Parameters.(*CreateAssistantInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("expected middleware input to be of type *CreateAssistantInput ")
-	}
-
-	if input.ClientToken == nil {
-		t, err := m.tokenProvider.GetIdempotencyToken()
-		if err != nil {
-			return out, metadata, err
-		}
-		input.ClientToken = &t
-	}
-	return next.HandleInitialize(ctx, in)
-}
-func addIdempotencyToken_opCreateAssistantMiddleware(stack *middleware.Stack, cfg Options) error {
-	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateAssistant{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opCreateAssistant(region string) *awsmiddleware.RegisterServiceMetadata {

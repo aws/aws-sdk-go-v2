@@ -4,7 +4,6 @@ package location
 
 import (
 	"context"
-	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
@@ -121,9 +120,6 @@ func (c *Client) addOperationUpdateMapMiddlewares(stack *middleware.Stack, optio
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addEndpointPrefix_opUpdateMapMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addOpUpdateMapValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -140,33 +136,6 @@ func (c *Client) addOperationUpdateMapMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	return nil
-}
-
-type endpointPrefix_opUpdateMapMiddleware struct {
-}
-
-func (*endpointPrefix_opUpdateMapMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opUpdateMapMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleSerialize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "maps." + req.URL.Host
-
-	return next.HandleSerialize(ctx, in)
-}
-func addEndpointPrefix_opUpdateMapMiddleware(stack *middleware.Stack) error {
-	return stack.Serialize.Insert(&endpointPrefix_opUpdateMapMiddleware{}, `OperationSerializer`, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opUpdateMap(region string) *awsmiddleware.RegisterServiceMetadata {

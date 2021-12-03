@@ -252,8 +252,10 @@ type KnownGenderType string
 
 // Enum values for KnownGenderType
 const (
-	KnownGenderTypeMale   KnownGenderType = "Male"
-	KnownGenderTypeFemale KnownGenderType = "Female"
+	KnownGenderTypeMale      KnownGenderType = "Male"
+	KnownGenderTypeFemale    KnownGenderType = "Female"
+	KnownGenderTypeNonbinary KnownGenderType = "Nonbinary"
+	KnownGenderTypeUnlisted  KnownGenderType = "Unlisted"
 )
 
 // Values returns all known values for KnownGenderType. Note that this can be
@@ -263,6 +265,8 @@ func (KnownGenderType) Values() []KnownGenderType {
 	return []KnownGenderType{
 		"Male",
 		"Female",
+		"Nonbinary",
+		"Unlisted",
 	}
 }
 

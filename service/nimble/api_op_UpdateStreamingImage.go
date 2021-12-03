@@ -4,7 +4,6 @@ package nimble
 
 import (
 	"context"
-	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/nimble/types"
@@ -112,9 +111,6 @@ func (c *Client) addOperationUpdateStreamingImageMiddlewares(stack *middleware.S
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addIdempotencyToken_opUpdateStreamingImageMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = addOpUpdateStreamingImageValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -131,39 +127,6 @@ func (c *Client) addOperationUpdateStreamingImageMiddlewares(stack *middleware.S
 		return err
 	}
 	return nil
-}
-
-type idempotencyToken_initializeOpUpdateStreamingImage struct {
-	tokenProvider IdempotencyTokenProvider
-}
-
-func (*idempotencyToken_initializeOpUpdateStreamingImage) ID() string {
-	return "OperationIdempotencyTokenAutoFill"
-}
-
-func (m *idempotencyToken_initializeOpUpdateStreamingImage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	if m.tokenProvider == nil {
-		return next.HandleInitialize(ctx, in)
-	}
-
-	input, ok := in.Parameters.(*UpdateStreamingImageInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("expected middleware input to be of type *UpdateStreamingImageInput ")
-	}
-
-	if input.ClientToken == nil {
-		t, err := m.tokenProvider.GetIdempotencyToken()
-		if err != nil {
-			return out, metadata, err
-		}
-		input.ClientToken = &t
-	}
-	return next.HandleInitialize(ctx, in)
-}
-func addIdempotencyToken_opUpdateStreamingImageMiddleware(stack *middleware.Stack, cfg Options) error {
-	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateStreamingImage{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opUpdateStreamingImage(region string) *awsmiddleware.RegisterServiceMetadata {

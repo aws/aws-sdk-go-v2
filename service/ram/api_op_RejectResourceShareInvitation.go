@@ -30,13 +30,20 @@ func (c *Client) RejectResourceShareInvitation(ctx context.Context, params *Reje
 
 type RejectResourceShareInvitationInput struct {
 
-	// The Amazon Resource Name (ARN) of the invitation.
+	// Specifies the Amazon Resoure Name (ARN)
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
+	// the invitation that you want to reject.
 	//
 	// This member is required.
 	ResourceShareInvitationArn *string
 
-	// A unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
+	// Specifies a unique, case-sensitive identifier that you provide to ensure the
+	// idempotency of the request. This lets you safely retry the request without
+	// accidentally performing the same operation a second time. Passing the same value
+	// to a later call to an operation requires that you also pass the same value for
+	// all other parameters. We recommend that you use a UUID type of value.
+	// (https://wikipedia.org/wiki/Universally_unique_identifier). If you don't provide
+	// this value, then Amazon Web Services generates a random one for you.
 	ClientToken *string
 
 	noSmithyDocumentSerde
@@ -44,11 +51,13 @@ type RejectResourceShareInvitationInput struct {
 
 type RejectResourceShareInvitationOutput struct {
 
-	// A unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
+	// The idempotency identifier associated with this request. If you want to repeat
+	// the same operation in an idempotent manner then you must include this value in
+	// the clientToken request parameter of that later call. All other parameters must
+	// also have the same values that you used in the first call.
 	ClientToken *string
 
-	// Information about the invitation.
+	// An object that contains the details about the rejected invitation.
 	ResourceShareInvitation *types.ResourceShareInvitation
 
 	// Metadata pertaining to the operation's result.

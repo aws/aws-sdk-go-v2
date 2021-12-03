@@ -43,6 +43,9 @@ type GetNetworkResourcesInput struct {
 	// The Amazon Web Services Region.
 	AwsRegion *string
 
+	// The ID of a core network.
+	CoreNetworkId *string
+
 	// The maximum number of results to return.
 	MaxResults *int32
 

@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds the specified tags to the specified resource share that you own.
+// Adds the specified tag keys and values to the specified resource share. The tags
+// are attached only to the resource share, not to the resources that are in the
+// resource share.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -29,12 +31,16 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the resource share.
+	// Specifies the Amazon Resoure Name (ARN)
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
+	// the resource share that you want to add tags to.
 	//
 	// This member is required.
 	ResourceShareArn *string
 
-	// One or more tags.
+	// A list of one or more tag key and value pairs. The tag key must be present and
+	// not be an empty string. The tag value must be present but can be an empty
+	// string.
 	//
 	// This member is required.
 	Tags []types.Tag

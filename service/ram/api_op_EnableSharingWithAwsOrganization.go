@@ -10,8 +10,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Enables resource sharing within your organization in Organizations. The caller
-// must be the master account for the organization.
+// Enables resource sharing within your organization in Organizations. Calling this
+// operation enables RAM to retrieve information about the organization and its
+// structure. This lets you share resources with all of the accounts in an
+// organization by specifying the organization's ID, or all of the accounts in an
+// organizational unit (OU) by specifying the OU's ID. Until you enable sharing
+// within the organization, you can specify only individual Amazon Web Services
+// accounts, or for supported resource types, IAM users and roles. You must call
+// this operation from an IAM user or role in the organization's management
+// account.
 func (c *Client) EnableSharingWithAwsOrganization(ctx context.Context, params *EnableSharingWithAwsOrganizationInput, optFns ...func(*Options)) (*EnableSharingWithAwsOrganizationOutput, error) {
 	if params == nil {
 		params = &EnableSharingWithAwsOrganizationInput{}
@@ -33,7 +40,8 @@ type EnableSharingWithAwsOrganizationInput struct {
 
 type EnableSharingWithAwsOrganizationOutput struct {
 
-	// Indicates whether the request succeeded.
+	// A return value of true indicates that the request succeeded. A value of false
+	// indicates that the request failed.
 	ReturnValue *bool
 
 	// Metadata pertaining to the operation's result.

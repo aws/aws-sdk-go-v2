@@ -140,7 +140,8 @@ type Celebrity struct {
 	// A unique identifier for the celebrity.
 	Id *string
 
-	// The known gender identity for the celebrity that matches the provided ID.
+	// The known gender identity for the celebrity that matches the provided ID. The
+	// known gender identity can be Male, Female, Nonbinary, or Unlisted.
 	KnownGender *KnownGender
 
 	// The confidence, in percentage, that Amazon Rekognition has that the recognized
@@ -920,7 +921,8 @@ type KinesisVideoStream struct {
 	noSmithyDocumentSerde
 }
 
-// The known gender identity for the celebrity that matches the provided ID.
+// The known gender identity for the celebrity that matches the provided ID. The
+// known gender identity can be Male, Female, Nonbinary, or Unlisted.
 type KnownGender struct {
 
 	// A string value of the KnownGender info about the Celebrity.

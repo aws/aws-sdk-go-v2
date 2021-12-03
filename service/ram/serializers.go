@@ -1157,6 +1157,11 @@ func awsRestjson1_serializeOpDocumentListPendingInvitationResourcesInput(v *List
 		ok.String(*v.NextToken)
 	}
 
+	if len(v.ResourceRegionScope) > 0 {
+		ok := object.Key("resourceRegionScope")
+		ok.String(string(v.ResourceRegionScope))
+	}
+
 	if v.ResourceShareInvitationArn != nil {
 		ok := object.Key("resourceShareInvitationArn")
 		ok.String(*v.ResourceShareInvitationArn)
@@ -1432,6 +1437,11 @@ func awsRestjson1_serializeOpDocumentListResourcesInput(v *ListResourcesInput, v
 		ok.String(string(v.ResourceOwner))
 	}
 
+	if len(v.ResourceRegionScope) > 0 {
+		ok := object.Key("resourceRegionScope")
+		ok.String(string(v.ResourceRegionScope))
+	}
+
 	if v.ResourceShareArns != nil {
 		ok := object.Key("resourceShareArns")
 		if err := awsRestjson1_serializeDocumentResourceShareArnList(v.ResourceShareArns, ok); err != nil {
@@ -1593,6 +1603,11 @@ func awsRestjson1_serializeOpDocumentListResourceTypesInput(v *ListResourceTypes
 	if v.NextToken != nil {
 		ok := object.Key("nextToken")
 		ok.String(*v.NextToken)
+	}
+
+	if len(v.ResourceRegionScope) > 0 {
+		ok := object.Key("resourceRegionScope")
+		ok.String(string(v.ResourceRegionScope))
 	}
 
 	return nil

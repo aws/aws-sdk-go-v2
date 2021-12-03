@@ -2,6 +2,128 @@
 
 package types
 
+type AttachmentState string
+
+// Enum values for AttachmentState
+const (
+	AttachmentStateRejected                    AttachmentState = "REJECTED"
+	AttachmentStatePendingAttachmentAcceptance AttachmentState = "PENDING_ATTACHMENT_ACCEPTANCE"
+	AttachmentStateCreating                    AttachmentState = "CREATING"
+	AttachmentStateFailed                      AttachmentState = "FAILED"
+	AttachmentStateAvailable                   AttachmentState = "AVAILABLE"
+	AttachmentStateUpdating                    AttachmentState = "UPDATING"
+	AttachmentStatePendingNetworkUpdate        AttachmentState = "PENDING_NETWORK_UPDATE"
+	AttachmentStatePendingTagAcceptance        AttachmentState = "PENDING_TAG_ACCEPTANCE"
+	AttachmentStateDeleting                    AttachmentState = "DELETING"
+)
+
+// Values returns all known values for AttachmentState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AttachmentState) Values() []AttachmentState {
+	return []AttachmentState{
+		"REJECTED",
+		"PENDING_ATTACHMENT_ACCEPTANCE",
+		"CREATING",
+		"FAILED",
+		"AVAILABLE",
+		"UPDATING",
+		"PENDING_NETWORK_UPDATE",
+		"PENDING_TAG_ACCEPTANCE",
+		"DELETING",
+	}
+}
+
+type AttachmentType string
+
+// Enum values for AttachmentType
+const (
+	AttachmentTypeConnect       AttachmentType = "CONNECT"
+	AttachmentTypeSiteToSiteVpn AttachmentType = "SITE_TO_SITE_VPN"
+	AttachmentTypeVpc           AttachmentType = "VPC"
+)
+
+// Values returns all known values for AttachmentType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AttachmentType) Values() []AttachmentType {
+	return []AttachmentType{
+		"CONNECT",
+		"SITE_TO_SITE_VPN",
+		"VPC",
+	}
+}
+
+type ChangeAction string
+
+// Enum values for ChangeAction
+const (
+	ChangeActionAdd    ChangeAction = "ADD"
+	ChangeActionModify ChangeAction = "MODIFY"
+	ChangeActionRemove ChangeAction = "REMOVE"
+)
+
+// Values returns all known values for ChangeAction. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ChangeAction) Values() []ChangeAction {
+	return []ChangeAction{
+		"ADD",
+		"MODIFY",
+		"REMOVE",
+	}
+}
+
+type ChangeSetState string
+
+// Enum values for ChangeSetState
+const (
+	ChangeSetStatePendingGeneration  ChangeSetState = "PENDING_GENERATION"
+	ChangeSetStateFailedGeneration   ChangeSetState = "FAILED_GENERATION"
+	ChangeSetStateReadyToExecute     ChangeSetState = "READY_TO_EXECUTE"
+	ChangeSetStateExecuting          ChangeSetState = "EXECUTING"
+	ChangeSetStateExecutionSucceeded ChangeSetState = "EXECUTION_SUCCEEDED"
+	ChangeSetStateOutOfDate          ChangeSetState = "OUT_OF_DATE"
+)
+
+// Values returns all known values for ChangeSetState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ChangeSetState) Values() []ChangeSetState {
+	return []ChangeSetState{
+		"PENDING_GENERATION",
+		"FAILED_GENERATION",
+		"READY_TO_EXECUTE",
+		"EXECUTING",
+		"EXECUTION_SUCCEEDED",
+		"OUT_OF_DATE",
+	}
+}
+
+type ChangeType string
+
+// Enum values for ChangeType
+const (
+	ChangeTypeCoreNetworkSegment         ChangeType = "CORE_NETWORK_SEGMENT"
+	ChangeTypeCoreNetworkEdge            ChangeType = "CORE_NETWORK_EDGE"
+	ChangeTypeAttachmentMapping          ChangeType = "ATTACHMENT_MAPPING"
+	ChangeTypeAttachmentRoutePropagation ChangeType = "ATTACHMENT_ROUTE_PROPAGATION"
+	ChangeTypeAttachmentRouteStatic      ChangeType = "ATTACHMENT_ROUTE_STATIC"
+)
+
+// Values returns all known values for ChangeType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ChangeType) Values() []ChangeType {
+	return []ChangeType{
+		"CORE_NETWORK_SEGMENT",
+		"CORE_NETWORK_EDGE",
+		"ATTACHMENT_MAPPING",
+		"ATTACHMENT_ROUTE_PROPAGATION",
+		"ATTACHMENT_ROUTE_STATIC",
+	}
+}
+
 type ConnectionState string
 
 // Enum values for ConnectionState
@@ -57,6 +179,90 @@ func (ConnectionType) Values() []ConnectionType {
 	return []ConnectionType{
 		"BGP",
 		"IPSEC",
+	}
+}
+
+type ConnectPeerAssociationState string
+
+// Enum values for ConnectPeerAssociationState
+const (
+	ConnectPeerAssociationStatePending   ConnectPeerAssociationState = "PENDING"
+	ConnectPeerAssociationStateAvailable ConnectPeerAssociationState = "AVAILABLE"
+	ConnectPeerAssociationStateDeleting  ConnectPeerAssociationState = "DELETING"
+	ConnectPeerAssociationStateDeleted   ConnectPeerAssociationState = "DELETED"
+)
+
+// Values returns all known values for ConnectPeerAssociationState. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectPeerAssociationState) Values() []ConnectPeerAssociationState {
+	return []ConnectPeerAssociationState{
+		"PENDING",
+		"AVAILABLE",
+		"DELETING",
+		"DELETED",
+	}
+}
+
+type ConnectPeerState string
+
+// Enum values for ConnectPeerState
+const (
+	ConnectPeerStateCreating  ConnectPeerState = "CREATING"
+	ConnectPeerStateFailed    ConnectPeerState = "FAILED"
+	ConnectPeerStateAvailable ConnectPeerState = "AVAILABLE"
+	ConnectPeerStateDeleting  ConnectPeerState = "DELETING"
+)
+
+// Values returns all known values for ConnectPeerState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectPeerState) Values() []ConnectPeerState {
+	return []ConnectPeerState{
+		"CREATING",
+		"FAILED",
+		"AVAILABLE",
+		"DELETING",
+	}
+}
+
+type CoreNetworkPolicyAlias string
+
+// Enum values for CoreNetworkPolicyAlias
+const (
+	CoreNetworkPolicyAliasLive   CoreNetworkPolicyAlias = "LIVE"
+	CoreNetworkPolicyAliasLatest CoreNetworkPolicyAlias = "LATEST"
+)
+
+// Values returns all known values for CoreNetworkPolicyAlias. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CoreNetworkPolicyAlias) Values() []CoreNetworkPolicyAlias {
+	return []CoreNetworkPolicyAlias{
+		"LIVE",
+		"LATEST",
+	}
+}
+
+type CoreNetworkState string
+
+// Enum values for CoreNetworkState
+const (
+	CoreNetworkStateCreating  CoreNetworkState = "CREATING"
+	CoreNetworkStateUpdating  CoreNetworkState = "UPDATING"
+	CoreNetworkStateAvailable CoreNetworkState = "AVAILABLE"
+	CoreNetworkStateDeleting  CoreNetworkState = "DELETING"
+)
+
+// Values returns all known values for CoreNetworkState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CoreNetworkState) Values() []CoreNetworkState {
+	return []CoreNetworkState{
+		"CREATING",
+		"UPDATING",
+		"AVAILABLE",
+		"DELETING",
 	}
 }
 
@@ -270,6 +476,7 @@ type RouteTableType string
 // Enum values for RouteTableType
 const (
 	RouteTableTypeTransitGatewayRouteTable RouteTableType = "TRANSIT_GATEWAY_ROUTE_TABLE"
+	RouteTableTypeCoreNetworkSegment       RouteTableType = "CORE_NETWORK_SEGMENT"
 )
 
 // Values returns all known values for RouteTableType. Note that this can be
@@ -278,6 +485,7 @@ const (
 func (RouteTableType) Values() []RouteTableType {
 	return []RouteTableType{
 		"TRANSIT_GATEWAY_ROUTE_TABLE",
+		"CORE_NETWORK_SEGMENT",
 	}
 }
 
@@ -366,6 +574,22 @@ func (TransitGatewayRegistrationState) Values() []TransitGatewayRegistrationStat
 		"DELETING",
 		"DELETED",
 		"FAILED",
+	}
+}
+
+type TunnelProtocol string
+
+// Enum values for TunnelProtocol
+const (
+	TunnelProtocolGre TunnelProtocol = "GRE"
+)
+
+// Values returns all known values for TunnelProtocol. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TunnelProtocol) Values() []TunnelProtocol {
+	return []TunnelProtocol{
+		"GRE",
 	}
 }
 

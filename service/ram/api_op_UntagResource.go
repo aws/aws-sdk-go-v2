@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes the specified tags from the specified resource share that you own.
+// Removes the specified tag key and value pairs from the specified resource share.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}
@@ -28,12 +28,15 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the resource share.
+	// Specifies the Amazon Resoure Name (ARN)
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
+	// the resource share that you want to remove tags from. The tags are removed from
+	// the resource share, not the resources in the resource share.
 	//
 	// This member is required.
 	ResourceShareArn *string
 
-	// The tag keys of the tags to remove.
+	// Specifies a list of one or more tag keys that you want to remove.
 	//
 	// This member is required.
 	TagKeys []string

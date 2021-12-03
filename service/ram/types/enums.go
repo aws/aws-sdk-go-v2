@@ -20,6 +20,44 @@ func (ResourceOwner) Values() []ResourceOwner {
 	}
 }
 
+type ResourceRegionScope string
+
+// Enum values for ResourceRegionScope
+const (
+	ResourceRegionScopeRegional ResourceRegionScope = "REGIONAL"
+	ResourceRegionScopeGlobal   ResourceRegionScope = "GLOBAL"
+)
+
+// Values returns all known values for ResourceRegionScope. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceRegionScope) Values() []ResourceRegionScope {
+	return []ResourceRegionScope{
+		"REGIONAL",
+		"GLOBAL",
+	}
+}
+
+type ResourceRegionScopeFilter string
+
+// Enum values for ResourceRegionScopeFilter
+const (
+	ResourceRegionScopeFilterAll      ResourceRegionScopeFilter = "ALL"
+	ResourceRegionScopeFilterRegional ResourceRegionScopeFilter = "REGIONAL"
+	ResourceRegionScopeFilterGlobal   ResourceRegionScopeFilter = "GLOBAL"
+)
+
+// Values returns all known values for ResourceRegionScopeFilter. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceRegionScopeFilter) Values() []ResourceRegionScopeFilter {
+	return []ResourceRegionScopeFilter{
+		"ALL",
+		"REGIONAL",
+		"GLOBAL",
+	}
+}
+
 type ResourceShareAssociationStatus string
 
 // Enum values for ResourceShareAssociationStatus

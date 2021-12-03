@@ -10,7 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disassociates an RAM permission from a resource share.
+// Disassociates an RAM permission from a resource share. Permission changes take
+// effect immediately. You can remove a RAM permission from a resource share only
+// if there are currently no resources of the relevant resource type currently
+// attached to the resource share.
 func (c *Client) DisassociateResourceSharePermission(ctx context.Context, params *DisassociateResourceSharePermissionInput, optFns ...func(*Options)) (*DisassociateResourceSharePermissionOutput, error) {
 	if params == nil {
 		params = &DisassociateResourceSharePermissionInput{}
@@ -28,19 +31,28 @@ func (c *Client) DisassociateResourceSharePermission(ctx context.Context, params
 
 type DisassociateResourceSharePermissionInput struct {
 
-	// The Amazon Resource Name (ARN) of the permission to disassociate from the
-	// resource share.
+	// The Amazon Resoure Name (ARN)
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
+	// the permission to disassociate from the resource share. Changes to permissions
+	// take effect immediately.
 	//
 	// This member is required.
 	PermissionArn *string
 
-	// The Amazon Resource Name (ARN) of the resource share.
+	// The Amazon Resoure Name (ARN)
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
+	// the resource share from which you want to disassociate a permission.
 	//
 	// This member is required.
 	ResourceShareArn *string
 
-	// A unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
+	// Specifies a unique, case-sensitive identifier that you provide to ensure the
+	// idempotency of the request. This lets you safely retry the request without
+	// accidentally performing the same operation a second time. Passing the same value
+	// to a later call to an operation requires that you also pass the same value for
+	// all other parameters. We recommend that you use a UUID type of value.
+	// (https://wikipedia.org/wiki/Universally_unique_identifier). If you don't provide
+	// this value, then Amazon Web Services generates a random one for you.
 	ClientToken *string
 
 	noSmithyDocumentSerde
@@ -48,11 +60,14 @@ type DisassociateResourceSharePermissionInput struct {
 
 type DisassociateResourceSharePermissionOutput struct {
 
-	// A unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
+	// The idempotency identifier associated with this request. If you want to repeat
+	// the same operation in an idempotent manner then you must include this value in
+	// the clientToken request parameter of that later call. All other parameters must
+	// also have the same values that you used in the first call.
 	ClientToken *string
 
-	// Indicates whether the request succeeded.
+	// A return value of true indicates that the request succeeded. A value of false
+	// indicates that the request failed.
 	ReturnValue *bool
 
 	// Metadata pertaining to the operation's result.

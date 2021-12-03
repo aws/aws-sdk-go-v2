@@ -4,7 +4,6 @@ package nimble
 
 import (
 	"context"
-	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/nimble/types"
@@ -107,9 +106,6 @@ func (c *Client) addOperationStartStreamingSessionMiddlewares(stack *middleware.
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addIdempotencyToken_opStartStreamingSessionMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = addOpStartStreamingSessionValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -126,39 +122,6 @@ func (c *Client) addOperationStartStreamingSessionMiddlewares(stack *middleware.
 		return err
 	}
 	return nil
-}
-
-type idempotencyToken_initializeOpStartStreamingSession struct {
-	tokenProvider IdempotencyTokenProvider
-}
-
-func (*idempotencyToken_initializeOpStartStreamingSession) ID() string {
-	return "OperationIdempotencyTokenAutoFill"
-}
-
-func (m *idempotencyToken_initializeOpStartStreamingSession) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	if m.tokenProvider == nil {
-		return next.HandleInitialize(ctx, in)
-	}
-
-	input, ok := in.Parameters.(*StartStreamingSessionInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("expected middleware input to be of type *StartStreamingSessionInput ")
-	}
-
-	if input.ClientToken == nil {
-		t, err := m.tokenProvider.GetIdempotencyToken()
-		if err != nil {
-			return out, metadata, err
-		}
-		input.ClientToken = &t
-	}
-	return next.HandleInitialize(ctx, in)
-}
-func addIdempotencyToken_opStartStreamingSessionMiddleware(stack *middleware.Stack, cfg Options) error {
-	return stack.Initialize.Add(&idempotencyToken_initializeOpStartStreamingSession{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opStartStreamingSession(region string) *awsmiddleware.RegisterServiceMetadata {

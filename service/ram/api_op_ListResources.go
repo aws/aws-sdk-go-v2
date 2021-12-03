@@ -31,38 +31,66 @@ func (c *Client) ListResources(ctx context.Context, params *ListResourcesInput, 
 
 type ListResourcesInput struct {
 
-	// The type of owner.
+	// Specifies that you want to list only the resource shares that match the
+	// following:
+	//
+	// * SELF – resources that you are sharing
+	//
+	// * OTHER-ACCOUNTS –
+	// resources that other accounts share with you
 	//
 	// This member is required.
 	ResourceOwner types.ResourceOwner
 
-	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
+	// Specifies the total number of results that you want included on each page of the
+	// response. If you do not include this parameter, it defaults to a value that is
+	// specific to the operation. If additional items exist beyond the number you
+	// specify, the NextToken response element is returned with a value (not null).
+	// Include the specified value as the NextToken request parameter in the next call
+	// to the operation to get the next part of the results. Note that the service
+	// might return fewer results than the maximum even when there are more results
+	// available. You should check NextToken after every operation to ensure that you
+	// receive all of the results.
 	MaxResults *int32
 
-	// The token for the next page of results.
+	// Specifies that you want to receive the next page of results. Valid only if you
+	// received a NextToken response in the previous request. If you did, it indicates
+	// that more output is available. Set this parameter to the value provided by the
+	// previous call's NextToken response to request the next page of results.
 	NextToken *string
 
-	// The principal.
+	// Specifies that you want to list only the resource shares that are associated
+	// with the specified principal.
 	Principal *string
 
-	// The Amazon Resource Names (ARNs) of the resources.
+	// Specifies that you want to list only the resource shares that include resources
+	// with the specified Amazon Resource Names (ARNs)
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	ResourceArns []string
 
-	// The Amazon Resource Names (ARN) of the resource shares.
+	// Specifies that you want the results to include only resources that have the
+	// specified scope.
+	//
+	// * ALL – the results include both global and regional resources
+	// or resource types.
+	//
+	// * GLOBAL – the results include only global resources or
+	// resource types.
+	//
+	// * REGIONAL – the results include only regional resources or
+	// resource types.
+	//
+	// The default value is ALL.
+	ResourceRegionScope types.ResourceRegionScopeFilter
+
+	// Specifies that you want to list only resources in the resource shares identified
+	// by the specified Amazon Resource Names (ARNs)
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	ResourceShareArns []string
 
-	// The resource type. Valid values: acm-pca:CertificateAuthority | appmesh:Mesh |
-	// codebuild:Project | codebuild:ReportGroup | ec2:CapacityReservation |
-	// ec2:DedicatedHost | ec2:LocalGatewayRouteTable | ec2:PrefixList | ec2:Subnet |
-	// ec2:TrafficMirrorTarget | ec2:TransitGateway | imagebuilder:Component |
-	// imagebuilder:Image | imagebuilder:ImageRecipe | imagebuilder:ContainerRecipe |
-	// glue:Catalog | glue:Database | glue:Table | license-manager:LicenseConfiguration
-	// I network-firewall:FirewallPolicy | network-firewall:StatefulRuleGroup |
-	// network-firewall:StatelessRuleGroup | outposts:Outpost | resource-groups:Group |
-	// rds:Cluster | route53resolver:FirewallRuleGroup
-	// |route53resolver:ResolverQueryLogConfig | route53resolver:ResolverRule |
-	// s3-outposts:Outpost | ssm-contacts:Contact | ssm-incidents:ResponsePlan
+	// Specifies that you want to list only the resource shares that include resources
+	// of the specified resource type. For valid values, query the ListResourceTypes
+	// operation.
 	ResourceType *string
 
 	noSmithyDocumentSerde
@@ -70,11 +98,14 @@ type ListResourcesInput struct {
 
 type ListResourcesOutput struct {
 
-	// The token to use to retrieve the next page of results. This value is null when
-	// there are no more results to return.
+	// If present, this value indicates that more output is available than is included
+	// in the current response. Use this value in the NextToken request parameter in a
+	// subsequent call to the operation to get the next part of the output. You should
+	// repeat this until the NextToken response element comes back as null. This
+	// indicates that this is the last page of results.
 	NextToken *string
 
-	// Information about the resources.
+	// An array of objects that contain information about the resources.
 	Resources []types.Resource
 
 	// Metadata pertaining to the operation's result.
@@ -155,8 +186,15 @@ var _ ListResourcesAPIClient = (*Client)(nil)
 
 // ListResourcesPaginatorOptions is the paginator options for ListResources
 type ListResourcesPaginatorOptions struct {
-	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
+	// Specifies the total number of results that you want included on each page of the
+	// response. If you do not include this parameter, it defaults to a value that is
+	// specific to the operation. If additional items exist beyond the number you
+	// specify, the NextToken response element is returned with a value (not null).
+	// Include the specified value as the NextToken request parameter in the next call
+	// to the operation to get the next part of the results. Note that the service
+	// might return fewer results than the maximum even when there are more results
+	// available. You should check NextToken after every operation to ensure that you
+	// receive all of the results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

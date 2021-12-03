@@ -9,6 +9,46 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpAcceptAttachment struct {
+}
+
+func (*validateOpAcceptAttachment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAcceptAttachment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AcceptAttachmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAcceptAttachmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpAssociateConnectPeer struct {
+}
+
+func (*validateOpAssociateConnectPeer) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateConnectPeer) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateConnectPeerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateConnectPeerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAssociateCustomerGateway struct {
 }
 
@@ -69,6 +109,26 @@ func (m *validateOpAssociateTransitGatewayConnectPeer) HandleInitialize(ctx cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateConnectAttachment struct {
+}
+
+func (*validateOpCreateConnectAttachment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateConnectAttachment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateConnectAttachmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateConnectAttachmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateConnection struct {
 }
 
@@ -84,6 +144,46 @@ func (m *validateOpCreateConnection) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateConnectionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateConnectPeer struct {
+}
+
+func (*validateOpCreateConnectPeer) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateConnectPeer) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateConnectPeerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateConnectPeerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateCoreNetwork struct {
+}
+
+func (*validateOpCreateCoreNetwork) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateCoreNetwork) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateCoreNetworkInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateCoreNetworkInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -149,6 +249,66 @@ func (m *validateOpCreateSite) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateSiteToSiteVpnAttachment struct {
+}
+
+func (*validateOpCreateSiteToSiteVpnAttachment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateSiteToSiteVpnAttachment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateSiteToSiteVpnAttachmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateSiteToSiteVpnAttachmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateVpcAttachment struct {
+}
+
+func (*validateOpCreateVpcAttachment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateVpcAttachment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateVpcAttachmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateVpcAttachmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteAttachment struct {
+}
+
+func (*validateOpDeleteAttachment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAttachment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAttachmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAttachmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteConnection struct {
 }
 
@@ -164,6 +324,66 @@ func (m *validateOpDeleteConnection) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteConnectionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteConnectPeer struct {
+}
+
+func (*validateOpDeleteConnectPeer) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteConnectPeer) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteConnectPeerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteConnectPeerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteCoreNetwork struct {
+}
+
+func (*validateOpDeleteCoreNetwork) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteCoreNetwork) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteCoreNetworkInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteCoreNetworkInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteCoreNetworkPolicyVersion struct {
+}
+
+func (*validateOpDeleteCoreNetworkPolicyVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteCoreNetworkPolicyVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteCoreNetworkPolicyVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteCoreNetworkPolicyVersionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -229,6 +449,26 @@ func (m *validateOpDeleteLink) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteResourcePolicy struct {
+}
+
+func (*validateOpDeleteResourcePolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteResourcePolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteResourcePolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteResourcePolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteSite struct {
 }
 
@@ -264,6 +504,26 @@ func (m *validateOpDeregisterTransitGateway) HandleInitialize(ctx context.Contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeregisterTransitGatewayInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDisassociateConnectPeer struct {
+}
+
+func (*validateOpDisassociateConnectPeer) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateConnectPeer) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateConnectPeerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateConnectPeerInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -329,6 +589,46 @@ func (m *validateOpDisassociateTransitGatewayConnectPeer) HandleInitialize(ctx c
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpExecuteCoreNetworkChangeSet struct {
+}
+
+func (*validateOpExecuteCoreNetworkChangeSet) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpExecuteCoreNetworkChangeSet) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ExecuteCoreNetworkChangeSetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpExecuteCoreNetworkChangeSetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetConnectAttachment struct {
+}
+
+func (*validateOpGetConnectAttachment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetConnectAttachment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetConnectAttachmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetConnectAttachmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetConnections struct {
 }
 
@@ -344,6 +644,106 @@ func (m *validateOpGetConnections) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetConnectionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetConnectPeerAssociations struct {
+}
+
+func (*validateOpGetConnectPeerAssociations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetConnectPeerAssociations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetConnectPeerAssociationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetConnectPeerAssociationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetConnectPeer struct {
+}
+
+func (*validateOpGetConnectPeer) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetConnectPeer) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetConnectPeerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetConnectPeerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetCoreNetworkChangeSet struct {
+}
+
+func (*validateOpGetCoreNetworkChangeSet) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCoreNetworkChangeSet) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCoreNetworkChangeSetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCoreNetworkChangeSetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetCoreNetwork struct {
+}
+
+func (*validateOpGetCoreNetwork) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCoreNetwork) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCoreNetworkInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCoreNetworkInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetCoreNetworkPolicy struct {
+}
+
+func (*validateOpGetCoreNetworkPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCoreNetworkPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCoreNetworkPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCoreNetworkPolicyInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -529,6 +929,26 @@ func (m *validateOpGetNetworkTelemetry) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetResourcePolicy struct {
+}
+
+func (*validateOpGetResourcePolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetResourcePolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetResourcePolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetResourcePolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetRouteAnalysis struct {
 }
 
@@ -564,6 +984,26 @@ func (m *validateOpGetSites) HandleInitialize(ctx context.Context, in middleware
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetSitesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetSiteToSiteVpnAttachment struct {
+}
+
+func (*validateOpGetSiteToSiteVpnAttachment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetSiteToSiteVpnAttachment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetSiteToSiteVpnAttachmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetSiteToSiteVpnAttachmentInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -609,6 +1049,46 @@ func (m *validateOpGetTransitGatewayRegistrations) HandleInitialize(ctx context.
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetVpcAttachment struct {
+}
+
+func (*validateOpGetVpcAttachment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetVpcAttachment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetVpcAttachmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetVpcAttachmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListCoreNetworkPolicyVersions struct {
+}
+
+func (*validateOpListCoreNetworkPolicyVersions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCoreNetworkPolicyVersions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListCoreNetworkPolicyVersionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListCoreNetworkPolicyVersionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -629,6 +1109,46 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutCoreNetworkPolicy struct {
+}
+
+func (*validateOpPutCoreNetworkPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutCoreNetworkPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutCoreNetworkPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutCoreNetworkPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutResourcePolicy struct {
+}
+
+func (*validateOpPutResourcePolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutResourcePolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutResourcePolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutResourcePolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpRegisterTransitGateway struct {
 }
 
@@ -644,6 +1164,46 @@ func (m *validateOpRegisterTransitGateway) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpRegisterTransitGatewayInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpRejectAttachment struct {
+}
+
+func (*validateOpRejectAttachment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRejectAttachment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RejectAttachmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRejectAttachmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpRestoreCoreNetworkPolicyVersion struct {
+}
+
+func (*validateOpRestoreCoreNetworkPolicyVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRestoreCoreNetworkPolicyVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RestoreCoreNetworkPolicyVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRestoreCoreNetworkPolicyVersionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -724,6 +1284,26 @@ func (m *validateOpUpdateConnection) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateConnectionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateCoreNetwork struct {
+}
+
+func (*validateOpUpdateCoreNetwork) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateCoreNetwork) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateCoreNetworkInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateCoreNetworkInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -829,6 +1409,34 @@ func (m *validateOpUpdateSite) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateVpcAttachment struct {
+}
+
+func (*validateOpUpdateVpcAttachment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateVpcAttachment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateVpcAttachmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateVpcAttachmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+func addOpAcceptAttachmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAcceptAttachment{}, middleware.After)
+}
+
+func addOpAssociateConnectPeerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateConnectPeer{}, middleware.After)
+}
+
 func addOpAssociateCustomerGatewayValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateCustomerGateway{}, middleware.After)
 }
@@ -841,8 +1449,20 @@ func addOpAssociateTransitGatewayConnectPeerValidationMiddleware(stack *middlewa
 	return stack.Initialize.Add(&validateOpAssociateTransitGatewayConnectPeer{}, middleware.After)
 }
 
+func addOpCreateConnectAttachmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateConnectAttachment{}, middleware.After)
+}
+
 func addOpCreateConnectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateConnection{}, middleware.After)
+}
+
+func addOpCreateConnectPeerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateConnectPeer{}, middleware.After)
+}
+
+func addOpCreateCoreNetworkValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateCoreNetwork{}, middleware.After)
 }
 
 func addOpCreateDeviceValidationMiddleware(stack *middleware.Stack) error {
@@ -857,8 +1477,32 @@ func addOpCreateSiteValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateSite{}, middleware.After)
 }
 
+func addOpCreateSiteToSiteVpnAttachmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateSiteToSiteVpnAttachment{}, middleware.After)
+}
+
+func addOpCreateVpcAttachmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateVpcAttachment{}, middleware.After)
+}
+
+func addOpDeleteAttachmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAttachment{}, middleware.After)
+}
+
 func addOpDeleteConnectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteConnection{}, middleware.After)
+}
+
+func addOpDeleteConnectPeerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteConnectPeer{}, middleware.After)
+}
+
+func addOpDeleteCoreNetworkValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteCoreNetwork{}, middleware.After)
+}
+
+func addOpDeleteCoreNetworkPolicyVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteCoreNetworkPolicyVersion{}, middleware.After)
 }
 
 func addOpDeleteDeviceValidationMiddleware(stack *middleware.Stack) error {
@@ -873,12 +1517,20 @@ func addOpDeleteLinkValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteLink{}, middleware.After)
 }
 
+func addOpDeleteResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteResourcePolicy{}, middleware.After)
+}
+
 func addOpDeleteSiteValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteSite{}, middleware.After)
 }
 
 func addOpDeregisterTransitGatewayValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeregisterTransitGateway{}, middleware.After)
+}
+
+func addOpDisassociateConnectPeerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateConnectPeer{}, middleware.After)
 }
 
 func addOpDisassociateCustomerGatewayValidationMiddleware(stack *middleware.Stack) error {
@@ -893,8 +1545,36 @@ func addOpDisassociateTransitGatewayConnectPeerValidationMiddleware(stack *middl
 	return stack.Initialize.Add(&validateOpDisassociateTransitGatewayConnectPeer{}, middleware.After)
 }
 
+func addOpExecuteCoreNetworkChangeSetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpExecuteCoreNetworkChangeSet{}, middleware.After)
+}
+
+func addOpGetConnectAttachmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetConnectAttachment{}, middleware.After)
+}
+
 func addOpGetConnectionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetConnections{}, middleware.After)
+}
+
+func addOpGetConnectPeerAssociationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetConnectPeerAssociations{}, middleware.After)
+}
+
+func addOpGetConnectPeerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetConnectPeer{}, middleware.After)
+}
+
+func addOpGetCoreNetworkChangeSetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCoreNetworkChangeSet{}, middleware.After)
+}
+
+func addOpGetCoreNetworkValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCoreNetwork{}, middleware.After)
+}
+
+func addOpGetCoreNetworkPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCoreNetworkPolicy{}, middleware.After)
 }
 
 func addOpGetCustomerGatewayAssociationsValidationMiddleware(stack *middleware.Stack) error {
@@ -933,12 +1613,20 @@ func addOpGetNetworkTelemetryValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpGetNetworkTelemetry{}, middleware.After)
 }
 
+func addOpGetResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetResourcePolicy{}, middleware.After)
+}
+
 func addOpGetRouteAnalysisValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetRouteAnalysis{}, middleware.After)
 }
 
 func addOpGetSitesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetSites{}, middleware.After)
+}
+
+func addOpGetSiteToSiteVpnAttachmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetSiteToSiteVpnAttachment{}, middleware.After)
 }
 
 func addOpGetTransitGatewayConnectPeerAssociationsValidationMiddleware(stack *middleware.Stack) error {
@@ -949,12 +1637,36 @@ func addOpGetTransitGatewayRegistrationsValidationMiddleware(stack *middleware.S
 	return stack.Initialize.Add(&validateOpGetTransitGatewayRegistrations{}, middleware.After)
 }
 
+func addOpGetVpcAttachmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetVpcAttachment{}, middleware.After)
+}
+
+func addOpListCoreNetworkPolicyVersionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCoreNetworkPolicyVersions{}, middleware.After)
+}
+
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
+func addOpPutCoreNetworkPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutCoreNetworkPolicy{}, middleware.After)
+}
+
+func addOpPutResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutResourcePolicy{}, middleware.After)
+}
+
 func addOpRegisterTransitGatewayValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRegisterTransitGateway{}, middleware.After)
+}
+
+func addOpRejectAttachmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRejectAttachment{}, middleware.After)
+}
+
+func addOpRestoreCoreNetworkPolicyVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRestoreCoreNetworkPolicyVersion{}, middleware.After)
 }
 
 func addOpStartRouteAnalysisValidationMiddleware(stack *middleware.Stack) error {
@@ -971,6 +1683,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateConnectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateConnection{}, middleware.After)
+}
+
+func addOpUpdateCoreNetworkValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateCoreNetwork{}, middleware.After)
 }
 
 func addOpUpdateDeviceValidationMiddleware(stack *middleware.Stack) error {
@@ -991,6 +1707,46 @@ func addOpUpdateNetworkResourceMetadataValidationMiddleware(stack *middleware.St
 
 func addOpUpdateSiteValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateSite{}, middleware.After)
+}
+
+func addOpUpdateVpcAttachmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateVpcAttachment{}, middleware.After)
+}
+
+func validateOpAcceptAttachmentInput(v *AcceptAttachmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AcceptAttachmentInput"}
+	if v.AttachmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttachmentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAssociateConnectPeerInput(v *AssociateConnectPeerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateConnectPeerInput"}
+	if v.GlobalNetworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GlobalNetworkId"))
+	}
+	if v.ConnectPeerId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectPeerId"))
+	}
+	if v.DeviceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeviceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateOpAssociateCustomerGatewayInput(v *AssociateCustomerGatewayInput) error {
@@ -1056,6 +1812,30 @@ func validateOpAssociateTransitGatewayConnectPeerInput(v *AssociateTransitGatewa
 	}
 }
 
+func validateOpCreateConnectAttachmentInput(v *CreateConnectAttachmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateConnectAttachmentInput"}
+	if v.CoreNetworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CoreNetworkId"))
+	}
+	if v.EdgeLocation == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EdgeLocation"))
+	}
+	if v.TransportAttachmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TransportAttachmentId"))
+	}
+	if v.Options == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Options"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateConnectionInput(v *CreateConnectionInput) error {
 	if v == nil {
 		return nil
@@ -1069,6 +1849,42 @@ func validateOpCreateConnectionInput(v *CreateConnectionInput) error {
 	}
 	if v.ConnectedDeviceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConnectedDeviceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateConnectPeerInput(v *CreateConnectPeerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateConnectPeerInput"}
+	if v.ConnectAttachmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectAttachmentId"))
+	}
+	if v.PeerAddress == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PeerAddress"))
+	}
+	if v.InsideCidrBlocks == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InsideCidrBlocks"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateCoreNetworkInput(v *CreateCoreNetworkInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateCoreNetworkInput"}
+	if v.GlobalNetworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GlobalNetworkId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1128,6 +1944,60 @@ func validateOpCreateSiteInput(v *CreateSiteInput) error {
 	}
 }
 
+func validateOpCreateSiteToSiteVpnAttachmentInput(v *CreateSiteToSiteVpnAttachmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateSiteToSiteVpnAttachmentInput"}
+	if v.CoreNetworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CoreNetworkId"))
+	}
+	if v.VpnConnectionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpnConnectionArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateVpcAttachmentInput(v *CreateVpcAttachmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateVpcAttachmentInput"}
+	if v.CoreNetworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CoreNetworkId"))
+	}
+	if v.VpcArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcArn"))
+	}
+	if v.SubnetArns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubnetArns"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteAttachmentInput(v *DeleteAttachmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAttachmentInput"}
+	if v.AttachmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttachmentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteConnectionInput(v *DeleteConnectionInput) error {
 	if v == nil {
 		return nil
@@ -1138,6 +2008,54 @@ func validateOpDeleteConnectionInput(v *DeleteConnectionInput) error {
 	}
 	if v.ConnectionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConnectionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteConnectPeerInput(v *DeleteConnectPeerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteConnectPeerInput"}
+	if v.ConnectPeerId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectPeerId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteCoreNetworkInput(v *DeleteCoreNetworkInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteCoreNetworkInput"}
+	if v.CoreNetworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CoreNetworkId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteCoreNetworkPolicyVersionInput(v *DeleteCoreNetworkPolicyVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteCoreNetworkPolicyVersionInput"}
+	if v.CoreNetworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CoreNetworkId"))
+	}
+	if v.PolicyVersionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyVersionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1197,6 +2115,21 @@ func validateOpDeleteLinkInput(v *DeleteLinkInput) error {
 	}
 }
 
+func validateOpDeleteResourcePolicyInput(v *DeleteResourcePolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteResourcePolicyInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteSiteInput(v *DeleteSiteInput) error {
 	if v == nil {
 		return nil
@@ -1225,6 +2158,24 @@ func validateOpDeregisterTransitGatewayInput(v *DeregisterTransitGatewayInput) e
 	}
 	if v.TransitGatewayArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TransitGatewayArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDisassociateConnectPeerInput(v *DisassociateConnectPeerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateConnectPeerInput"}
+	if v.GlobalNetworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GlobalNetworkId"))
+	}
+	if v.ConnectPeerId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectPeerId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1290,6 +2241,39 @@ func validateOpDisassociateTransitGatewayConnectPeerInput(v *DisassociateTransit
 	}
 }
 
+func validateOpExecuteCoreNetworkChangeSetInput(v *ExecuteCoreNetworkChangeSetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExecuteCoreNetworkChangeSetInput"}
+	if v.CoreNetworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CoreNetworkId"))
+	}
+	if v.PolicyVersionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyVersionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetConnectAttachmentInput(v *GetConnectAttachmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetConnectAttachmentInput"}
+	if v.AttachmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttachmentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetConnectionsInput(v *GetConnectionsInput) error {
 	if v == nil {
 		return nil
@@ -1297,6 +2281,84 @@ func validateOpGetConnectionsInput(v *GetConnectionsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetConnectionsInput"}
 	if v.GlobalNetworkId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GlobalNetworkId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetConnectPeerAssociationsInput(v *GetConnectPeerAssociationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetConnectPeerAssociationsInput"}
+	if v.GlobalNetworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GlobalNetworkId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetConnectPeerInput(v *GetConnectPeerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetConnectPeerInput"}
+	if v.ConnectPeerId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectPeerId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetCoreNetworkChangeSetInput(v *GetCoreNetworkChangeSetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCoreNetworkChangeSetInput"}
+	if v.CoreNetworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CoreNetworkId"))
+	}
+	if v.PolicyVersionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyVersionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetCoreNetworkInput(v *GetCoreNetworkInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCoreNetworkInput"}
+	if v.CoreNetworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CoreNetworkId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetCoreNetworkPolicyInput(v *GetCoreNetworkPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCoreNetworkPolicyInput"}
+	if v.CoreNetworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CoreNetworkId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1443,6 +2505,21 @@ func validateOpGetNetworkTelemetryInput(v *GetNetworkTelemetryInput) error {
 	}
 }
 
+func validateOpGetResourcePolicyInput(v *GetResourcePolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetResourcePolicyInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetRouteAnalysisInput(v *GetRouteAnalysisInput) error {
 	if v == nil {
 		return nil
@@ -1468,6 +2545,21 @@ func validateOpGetSitesInput(v *GetSitesInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetSitesInput"}
 	if v.GlobalNetworkId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GlobalNetworkId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetSiteToSiteVpnAttachmentInput(v *GetSiteToSiteVpnAttachmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetSiteToSiteVpnAttachmentInput"}
+	if v.AttachmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttachmentId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1506,11 +2598,77 @@ func validateOpGetTransitGatewayRegistrationsInput(v *GetTransitGatewayRegistrat
 	}
 }
 
+func validateOpGetVpcAttachmentInput(v *GetVpcAttachmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetVpcAttachmentInput"}
+	if v.AttachmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttachmentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListCoreNetworkPolicyVersionsInput(v *ListCoreNetworkPolicyVersionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCoreNetworkPolicyVersionsInput"}
+	if v.CoreNetworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CoreNetworkId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutCoreNetworkPolicyInput(v *PutCoreNetworkPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutCoreNetworkPolicyInput"}
+	if v.CoreNetworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CoreNetworkId"))
+	}
+	if v.PolicyDocument == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyDocument"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutResourcePolicyInput(v *PutResourcePolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutResourcePolicyInput"}
+	if v.PolicyDocument == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyDocument"))
+	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
@@ -1531,6 +2689,39 @@ func validateOpRegisterTransitGatewayInput(v *RegisterTransitGatewayInput) error
 	}
 	if v.TransitGatewayArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TransitGatewayArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRejectAttachmentInput(v *RejectAttachmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RejectAttachmentInput"}
+	if v.AttachmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttachmentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRestoreCoreNetworkPolicyVersionInput(v *RestoreCoreNetworkPolicyVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RestoreCoreNetworkPolicyVersionInput"}
+	if v.CoreNetworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CoreNetworkId"))
+	}
+	if v.PolicyVersionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyVersionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1606,6 +2797,21 @@ func validateOpUpdateConnectionInput(v *UpdateConnectionInput) error {
 	}
 	if v.ConnectionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConnectionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateCoreNetworkInput(v *UpdateCoreNetworkInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateCoreNetworkInput"}
+	if v.CoreNetworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CoreNetworkId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1696,6 +2902,21 @@ func validateOpUpdateSiteInput(v *UpdateSiteInput) error {
 	}
 	if v.SiteId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SiteId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateVpcAttachmentInput(v *UpdateVpcAttachmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateVpcAttachmentInput"}
+	if v.AttachmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttachmentId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
