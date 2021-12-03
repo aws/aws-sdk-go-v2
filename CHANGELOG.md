@@ -1,3 +1,40 @@
+# Release (2021-12-03)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/accessanalyzer`: [v1.10.1](service/accessanalyzer/CHANGELOG.md#v1101-2021-12-03)
+  * **Bug Fix**: Fixed an issue that prevent auto-filling of an API's idempotency parameters when not explictly provided by the caller.
+* `github.com/aws/aws-sdk-go-v2/service/amp`: [v1.9.3](service/amp/CHANGELOG.md#v193-2021-12-03)
+  * **Bug Fix**: Fixed an issue that prevent auto-filling of an API's idempotency parameters when not explictly provided by the caller.
+* `github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder`: [v1.0.0](service/amplifyuibuilder/CHANGELOG.md#v100-2021-12-03)
+  * **Release**: New AWS service client module
+* `github.com/aws/aws-sdk-go-v2/service/appmesh`: [v1.8.3](service/appmesh/CHANGELOG.md#v183-2021-12-03)
+  * **Bug Fix**: Fixed an issue that prevent auto-filling of an API's idempotency parameters when not explictly provided by the caller.
+* `github.com/aws/aws-sdk-go-v2/service/braket`: [v1.10.2](service/braket/CHANGELOG.md#v1102-2021-12-03)
+  * **Bug Fix**: Fixed an issue that prevent auto-filling of an API's idempotency parameters when not explictly provided by the caller.
+* `github.com/aws/aws-sdk-go-v2/service/codeguruprofiler`: [v1.7.3](service/codeguruprofiler/CHANGELOG.md#v173-2021-12-03)
+  * **Bug Fix**: Fixed an issue that prevent auto-filling of an API's idempotency parameters when not explictly provided by the caller.
+* `github.com/aws/aws-sdk-go-v2/service/evidently`: [v1.1.1](service/evidently/CHANGELOG.md#v111-2021-12-03)
+  * **Bug Fix**: Fixed a bug that prevented the resolution of the correct endpoint for some API operations.
+* `github.com/aws/aws-sdk-go-v2/service/grafana`: [v1.2.3](service/grafana/CHANGELOG.md#v123-2021-12-03)
+  * **Bug Fix**: Fixed an issue that prevent auto-filling of an API's idempotency parameters when not explictly provided by the caller.
+* `github.com/aws/aws-sdk-go-v2/service/location`: [v1.9.2](service/location/CHANGELOG.md#v192-2021-12-03)
+  * **Bug Fix**: Fixed a bug that prevented the resolution of the correct endpoint for some API operations.
+  * **Bug Fix**: Fixed an issue that caused some operations to not be signed using sigv4, resulting in authentication failures.
+* `github.com/aws/aws-sdk-go-v2/service/networkmanager`: [v1.7.0](service/networkmanager/CHANGELOG.md#v170-2021-12-03)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/nimble`: [v1.7.3](service/nimble/CHANGELOG.md#v173-2021-12-03)
+  * **Bug Fix**: Fixed an issue that prevent auto-filling of an API's idempotency parameters when not explictly provided by the caller.
+* `github.com/aws/aws-sdk-go-v2/service/proton`: [v1.7.2](service/proton/CHANGELOG.md#v172-2021-12-03)
+  * **Bug Fix**: Fixed an issue that prevent auto-filling of an API's idempotency parameters when not explictly provided by the caller.
+* `github.com/aws/aws-sdk-go-v2/service/ram`: [v1.10.0](service/ram/CHANGELOG.md#v1100-2021-12-03)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/rekognition`: [v1.12.0](service/rekognition/CHANGELOG.md#v1120-2021-12-03)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/snowdevicemanagement`: [v1.3.3](service/snowdevicemanagement/CHANGELOG.md#v133-2021-12-03)
+  * **Bug Fix**: Fixed an issue that prevent auto-filling of an API's idempotency parameters when not explictly provided by the caller.
+* `github.com/aws/aws-sdk-go-v2/service/wisdom`: [v1.2.3](service/wisdom/CHANGELOG.md#v123-2021-12-03)
+  * **Bug Fix**: Fixed an issue that prevent auto-filling of an API's idempotency parameters when not explictly provided by the caller.
+
 # Release (2021-12-02)
 
 ## General Highlights

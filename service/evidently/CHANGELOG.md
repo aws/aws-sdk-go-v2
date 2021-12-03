@@ -1,3 +1,7 @@
+# v1.1.1 (2021-12-03)
+
+* **Bug Fix**: Fixed a bug that prevented the resolution of the correct endpoint for some API operations.
+
 # v1.1.0 (2021-12-02)
 
 * **Feature**: API client updated

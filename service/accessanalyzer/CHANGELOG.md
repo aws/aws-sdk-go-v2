@@ -1,3 +1,7 @@
+# v1.10.1 (2021-12-03)
+
+* **Bug Fix**: Fixed an issue that prevent auto-filling of an API's idempotency parameters when not explictly provided by the caller.
+
 # v1.10.0 (2021-12-02)
 
 * **Feature**: API client updated

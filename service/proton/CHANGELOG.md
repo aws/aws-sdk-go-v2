@@ -1,3 +1,7 @@
+# v1.7.2 (2021-12-03)
+
+* **Bug Fix**: Fixed an issue that prevent auto-filling of an API's idempotency parameters when not explictly provided by the caller.
+
 # v1.7.1 (2021-12-02)
 
 * **Bug Fix**: Fixes a bug that prevented aws.EndpointResolverWithOptions from being used by the service client. ([#1514](https://github.com/aws/aws-sdk-go-v2/pull/1514))
