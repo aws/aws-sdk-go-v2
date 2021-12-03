@@ -8,6 +8,7 @@
   "Amp": "aps",
   "Amplify": "amplify",
   "AmplifyBackend": "amplifybackend",
+  "AmplifyUIBuilder": "amplifyuibuilder",
   "ApiGatewayManagementApi": "execute-api",
   "ApiGatewayV2": "apigateway",
   "App Mesh": "appmesh",

@@ -1,0 +1,2408 @@
+{
+    "smithy": "1.0",
+    "shapes": {
+        "com.amazonaws.amplifyuibuilder#AmplifyUIBuilder": {
+            "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "AmplifyUIBuilder",
+                    "arnNamespace": "amplifyuibuilder",
+                    "cloudFormationName": "AmplifyUIBuilder",
+                    "cloudTrailEventSource": "amplifyuibuilder.amazonaws.com",
+                    "endpointPrefix": "amplifyuibuilder"
+                },
+                "aws.auth#sigv4": {
+                    "name": "amplifyuibuilder"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#cors": {},
+                "smithy.api#documentation": "<p>The Amplify UI Builder API provides a programmatic interface for creating and configuring\n      user interface (UI) component libraries and themes for use in your Amplify applications. You\n      can then connect these UI components to an application's backend Amazon Web Services\n      resources.</p>\n         <p>You can also use the Amplify Studio visual designer to create UI components and model data\n      for an app. For more information, see <a href=\"https://docs.amplify.aws/console/adminui/intro\">Introduction</a> in the\n        <i>Amplify Docs</i>.</p>\n         <p>The Amplify Framework is a comprehensive set of SDKs, libraries, tools, and documentation\n      for client app development. For more information, see the <a href=\"https://docs.amplify.aws/\">Amplify Framework</a>. For more information about\n      deploying an Amplify application to Amazon Web Services, see the <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/welcome.html\">Amplify Console User Guide</a>.</p>",
+                "smithy.api#title": "AWS Amplify UI Builder"
+            },
+            "version": "2021-08-11",
+            "operations": [
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#ExchangeCodeForToken"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#RefreshToken"
+                }
+            ],
+            "resources": [
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#ComponentResource"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#ThemeResource"
+                }
+            ]
+        },
+        "com.amazonaws.amplifyuibuilder#Component": {
+            "type": "structure",
+            "members": {
+                "appId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the Amplify app associated with the component.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "environmentName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment that is a part of the Amplify app.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sourceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the component in its original source system, such as Figma.</p>"
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.amplifyuibuilder#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the component.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.amplifyuibuilder#ComponentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the component.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "componentType": {
+                    "target": "com.amazonaws.amplifyuibuilder#ComponentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the component. This can be an Amplify custom UI component or another custom\n      component.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "properties": {
+                    "target": "com.amazonaws.amplifyuibuilder#ComponentProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the component's properties.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "children": {
+                    "target": "com.amazonaws.amplifyuibuilder#ComponentChildList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the component's <code>ComponentChild</code> instances.</p>"
+                    }
+                },
+                "variants": {
+                    "target": "com.amazonaws.amplifyuibuilder#ComponentVariants",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the component's variants. A variant is a unique style configuration of a\n      main component.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "overrides": {
+                    "target": "com.amazonaws.amplifyuibuilder#ComponentOverrides",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the component's properties that can be overriden in a customized instance of the\n      component.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "bindingProperties": {
+                    "target": "com.amazonaws.amplifyuibuilder#ComponentBindingProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The information to connect a component's properties to data at runtime.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "collectionProperties": {
+                    "target": "com.amazonaws.amplifyuibuilder#ComponentCollectionProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data binding configuration for the component's properties. Use this for a collection component.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "read",
+                        "smithy.api#documentation": "<p>The time that the component was created.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "modifiedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "read",
+                        "smithy.api#documentation": "<p>The time that the component was modified.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.amplifyuibuilder#Tags",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "create-and-read",
+                        "smithy.api#documentation": "<p>One or more key-value pairs to use when tagging the component.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the configuration settings for a user interface (UI) element for an Amplify app. A\n      component is configured as a primary, stand-alone UI element. Use <code>ComponentChild</code>\n      to configure an instance of a <code>Component</code>. A <code>ComponentChild</code> instance\n      inherits the configuration of the main <code>Component</code>.</p>",
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.amplifyuibuilder#ComponentResource"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ComponentBindingProperties": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "com.amazonaws.amplifyuibuilder#ComponentBindingPropertiesValue"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ComponentBindingPropertiesValue": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The property type.</p>"
+                    }
+                },
+                "bindingProperties": {
+                    "target": "com.amazonaws.amplifyuibuilder#ComponentBindingPropertiesValueProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the properties to customize with data at runtime.</p>"
+                    }
+                },
+                "defaultValue": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default value of the property.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the data binding configuration for a component at runtime. You can use\n        <code>ComponentBindingPropertiesValue</code> to add exposed properties to a component to\n      allow different values to be entered when a component is reused in different places in an\n      app.</p>"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ComponentBindingPropertiesValueProperties": {
+            "type": "structure",
+            "members": {
+                "model": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An Amplify DataStore model.</p>"
+                    }
+                },
+                "field": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The field to bind the data to.</p>"
+                    }
+                },
+                "predicates": {
+                    "target": "com.amazonaws.amplifyuibuilder#PredicateList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of predicates for binding a component's properties to data.</p>"
+                    }
+                },
+                "userAttribute": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An authenticated user attribute.</p>"
+                    }
+                },
+                "bucket": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An Amazon S3 bucket.</p>"
+                    }
+                },
+                "key": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The storage key for an Amazon S3 bucket.</p>"
+                    }
+                },
+                "defaultValue": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default value to assign to the property.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the data binding configuration for a specific property using data stored in\n        Amazon Web Services. For Amazon Web Services connected properties, you can bind a property to\n      data stored in an Amazon S3 bucket, an Amplify DataStore model or an\n      authenticated user attribute.</p>"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ComponentChild": {
+            "type": "structure",
+            "members": {
+                "componentType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the child component. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the child component.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "properties": {
+                    "target": "com.amazonaws.amplifyuibuilder#ComponentProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the properties of the child component.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "children": {
+                    "target": "com.amazonaws.amplifyuibuilder#ComponentChildList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of <code>ComponentChild</code> instances for this component.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A nested UI configuration within a parent <code>Component</code>.</p>"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ComponentChildList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.amplifyuibuilder#ComponentChild"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ComponentCollectionProperties": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "com.amazonaws.amplifyuibuilder#ComponentDataConfiguration"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ComponentConditionProperty": {
+            "type": "structure",
+            "members": {
+                "property": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the conditional property.</p>"
+                    }
+                },
+                "field": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a field. Specify this when the property is a data model.</p>"
+                    }
+                },
+                "operator": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operator to use to perform the evaluation, such as <code>eq</code> to represent\n      equals.</p>"
+                    }
+                },
+                "operand": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the property to evaluate.</p>"
+                    }
+                },
+                "then": {
+                    "target": "com.amazonaws.amplifyuibuilder#ComponentProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value to assign to the property if the condition is met.</p>"
+                    }
+                },
+                "else": {
+                    "target": "com.amazonaws.amplifyuibuilder#ComponentProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value to assign to the property if the condition is not met.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a conditional expression to set a component property. Use\n        <code>ComponentConditionProperty</code> to set a property to different values conditionally,\n      based on the value of another property.</p>"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ComponentDataConfiguration": {
+            "type": "structure",
+            "members": {
+                "model": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the data model to use to bind data to a component.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sort": {
+                    "target": "com.amazonaws.amplifyuibuilder#SortPropertyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes how to sort the component's properties.</p>"
+                    }
+                },
+                "predicate": {
+                    "target": "com.amazonaws.amplifyuibuilder#Predicate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the conditional logic to use when binding data to a component. Use this\n      property to retrieve only a subset of the data in a collection.</p>"
+                    }
+                },
+                "identifiers": {
+                    "target": "com.amazonaws.amplifyuibuilder#IdentifierList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of IDs to use to bind data to a component. Use this property to bind specifically\n      chosen data, rather than data retrieved from a query.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the configuration for binding a component's properties to data.</p>"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ComponentList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.amplifyuibuilder#Component"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ComponentName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ComponentOverrides": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "com.amazonaws.amplifyuibuilder#ComponentOverridesValue"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ComponentOverridesValue": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "smithy.api#String"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ComponentProperties": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "com.amazonaws.amplifyuibuilder#ComponentProperty"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ComponentProperty": {
+            "type": "structure",
+            "members": {
+                "value": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value to assign to the component property.</p>"
+                    }
+                },
+                "bindingProperties": {
+                    "target": "com.amazonaws.amplifyuibuilder#ComponentPropertyBindingProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The information to bind the component property to data at runtime.</p>"
+                    }
+                },
+                "collectionBindingProperties": {
+                    "target": "com.amazonaws.amplifyuibuilder#ComponentPropertyBindingProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The information to bind the component property to data at runtime. Use this for collection components.</p>"
+                    }
+                },
+                "defaultValue": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default value to assign to the component property.</p>"
+                    }
+                },
+                "model": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data model to use to assign a value to the component property.</p>"
+                    }
+                },
+                "bindings": {
+                    "target": "com.amazonaws.amplifyuibuilder#FormBindings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The information to bind the component property to form data.</p>"
+                    }
+                },
+                "event": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An event that occurs in your app. Use this for workflow data binding.</p>"
+                    }
+                },
+                "userAttribute": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An authenticated user attribute to use to assign a value to the component property.</p>"
+                    }
+                },
+                "concat": {
+                    "target": "com.amazonaws.amplifyuibuilder#ComponentPropertyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of component properties to concatenate to create the value to assign to this component property.</p>"
+                    }
+                },
+                "condition": {
+                    "target": "com.amazonaws.amplifyuibuilder#ComponentConditionProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The conditional expression to use to assign a value to the component property..</p>"
+                    }
+                },
+                "configured": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the user configured the property in Amplify Studio after importing it.</p>"
+                    }
+                },
+                "type": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The component type.</p>"
+                    }
+                },
+                "importedValue": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default value assigned to property when the component is imported into an app.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the configuration for all of a component's properties. Use\n        <code>ComponentProperty</code> to specify the values to render or bind by\n      default.</p>"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ComponentPropertyBindingProperties": {
+            "type": "structure",
+            "members": {
+                "property": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The component property to bind to the data field.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "field": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data field to bind the property to.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Associates a component property to a binding property. This enables exposed properties on\n      the top level component to propagate data to the component's property values.</p>"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ComponentPropertyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.amplifyuibuilder#ComponentProperty"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ComponentResource": {
+            "type": "resource",
+            "identifiers": {
+                "id": {
+                    "target": "com.amazonaws.amplifyuibuilder#Uuid"
+                },
+                "appId": {
+                    "target": "smithy.api#String"
+                },
+                "environmentName": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.amplifyuibuilder#CreateComponent"
+            },
+            "read": {
+                "target": "com.amazonaws.amplifyuibuilder#GetComponent"
+            },
+            "update": {
+                "target": "com.amazonaws.amplifyuibuilder#UpdateComponent"
+            },
+            "delete": {
+                "target": "com.amazonaws.amplifyuibuilder#DeleteComponent"
+            },
+            "list": {
+                "target": "com.amazonaws.amplifyuibuilder#ListComponents"
+            },
+            "collectionOperations": [
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#ExportComponents"
+                }
+            ],
+            "traits": {
+                "aws.api#arn": {
+                    "template": "app/{appId}/environment/{environmentName}/components/{id}",
+                    "absolute": false,
+                    "noAccount": false,
+                    "noRegion": false
+                },
+                "aws.cloudformation#cfnResource": {
+                    "additionalSchemas": [
+                        "com.amazonaws.amplifyuibuilder#Component"
+                    ],
+                    "name": "Component"
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ComponentSummary": {
+            "type": "structure",
+            "members": {
+                "appId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the Amplify app associated with the component.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "environmentName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment that is a part of the Amplify app.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.amplifyuibuilder#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the component.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.amplifyuibuilder#ComponentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the component.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "componentType": {
+                    "target": "com.amazonaws.amplifyuibuilder#ComponentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The component type.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains a summary of a component. This is a read-only data type that is returned by\n        <code>ListComponents</code>.</p>"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ComponentSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.amplifyuibuilder#ComponentSummary"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ComponentType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ComponentVariant": {
+            "type": "structure",
+            "members": {
+                "variantValues": {
+                    "target": "com.amazonaws.amplifyuibuilder#ComponentVariantValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The combination of variants that comprise this variant.</p>"
+                    }
+                },
+                "overrides": {
+                    "target": "com.amazonaws.amplifyuibuilder#ComponentOverrides",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The properties of the component variant that can be overriden when customizing an instance\n      of the component.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the style configuration of a unique variation of a main component.</p>"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ComponentVariantValues": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "smithy.api#String"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ComponentVariants": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.amplifyuibuilder#ComponentVariant"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#CreateComponent": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifyuibuilder#CreateComponentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amplifyuibuilder#CreateComponentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#ResourceConflictException"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#ServiceQuotaExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new component for an Amplify app.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/app/{appId}/environment/{environmentName}/components",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#CreateComponentData": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.amplifyuibuilder#ComponentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the component</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sourceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the component in its original source system, such as Figma.</p>"
+                    }
+                },
+                "componentType": {
+                    "target": "com.amazonaws.amplifyuibuilder#ComponentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The component type. This can be an Amplify custom UI component or another custom\n      component.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "properties": {
+                    "target": "com.amazonaws.amplifyuibuilder#ComponentProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the component's properties.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "children": {
+                    "target": "com.amazonaws.amplifyuibuilder#ComponentChildList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of child components that are instances of the main component.</p>"
+                    }
+                },
+                "variants": {
+                    "target": "com.amazonaws.amplifyuibuilder#ComponentVariants",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the unique variants of this component.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "overrides": {
+                    "target": "com.amazonaws.amplifyuibuilder#ComponentOverrides",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the component properties that can be overriden to customize an instance of the\n      component.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "bindingProperties": {
+                    "target": "com.amazonaws.amplifyuibuilder#ComponentBindingProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data binding information for the component's properties.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "collectionProperties": {
+                    "target": "com.amazonaws.amplifyuibuilder#ComponentCollectionProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data binding configuration for customizing a component's properties. Use this for a collection component.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.amplifyuibuilder#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more key-value pairs to use when tagging the component data.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents all of the information that is required to create a component.</p>"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#CreateComponentRequest": {
+            "type": "structure",
+            "members": {
+                "appId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the Amplify app to associate with the component.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "environmentName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment that is a part of the Amplify app.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The unique client token.</p>",
+                        "smithy.api#httpQuery": "clientToken",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "componentToCreate": {
+                    "target": "com.amazonaws.amplifyuibuilder#CreateComponentData",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>Represents the configuration of the component to create.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#CreateComponentResponse": {
+            "type": "structure",
+            "members": {
+                "entity": {
+                    "target": "com.amazonaws.amplifyuibuilder#Component",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the configuration of the new component.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#CreateTheme": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifyuibuilder#CreateThemeRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amplifyuibuilder#CreateThemeResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#ResourceConflictException"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#ServiceQuotaExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a theme to apply to the components in an Amplify app.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/app/{appId}/environment/{environmentName}/themes",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#CreateThemeData": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.amplifyuibuilder#ThemeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the theme.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "values": {
+                    "target": "com.amazonaws.amplifyuibuilder#ThemeValuesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of key-value pairs that deﬁnes the properties of the theme.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "overrides": {
+                    "target": "com.amazonaws.amplifyuibuilder#ThemeValuesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the properties that can be overriden to customize an instance of the\n      theme.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.amplifyuibuilder#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more key-value pairs to use when tagging the theme data.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents all of the information that is required to create a theme.</p>"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#CreateThemeRequest": {
+            "type": "structure",
+            "members": {
+                "appId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the Amplify app associated with the theme.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "environmentName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment that is a part of the Amplify app.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The unique client token.</p>",
+                        "smithy.api#httpQuery": "clientToken",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "themeToCreate": {
+                    "target": "com.amazonaws.amplifyuibuilder#CreateThemeData",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>Represents the configuration of the theme to create.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#CreateThemeResponse": {
+            "type": "structure",
+            "members": {
+                "entity": {
+                    "target": "com.amazonaws.amplifyuibuilder#Theme",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the configuration of the new theme.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#DeleteComponent": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifyuibuilder#DeleteComponentRequest"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a component from an Amplify app.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/app/{appId}/environment/{environmentName}/components/{id}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#DeleteComponentRequest": {
+            "type": "structure",
+            "members": {
+                "appId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the Amplify app associated with the component to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "environmentName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment that is a part of the Amplify app.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.amplifyuibuilder#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the component to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#DeleteTheme": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifyuibuilder#DeleteThemeRequest"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a theme from an Amplify app.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/app/{appId}/environment/{environmentName}/themes/{id}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#DeleteThemeRequest": {
+            "type": "structure",
+            "members": {
+                "appId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the Amplify app associated with the theme to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "environmentName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment that is a part of the Amplify app.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.amplifyuibuilder#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the theme to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ExchangeCodeForToken": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifyuibuilder#ExchangeCodeForTokenRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amplifyuibuilder#ExchangeCodeForTokenResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#InvalidParameterException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Exchanges an access code for a token.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/tokens/{provider}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ExchangeCodeForTokenRequest": {
+            "type": "structure",
+            "members": {
+                "provider": {
+                    "target": "com.amazonaws.amplifyuibuilder#TokenProviders",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The third-party provider for the token. The only valid value is <code>figma</code>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "request": {
+                    "target": "com.amazonaws.amplifyuibuilder#ExchangeCodeForTokenRequestBody",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the configuration of the request.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ExchangeCodeForTokenRequestBody": {
+            "type": "structure",
+            "members": {
+                "code": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The access code to send in the request.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#sensitive": {}
+                    }
+                },
+                "redirectUri": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location of the application that will receive the access code.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the configuration of a request to exchange an access code for a token.</p>"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ExchangeCodeForTokenResponse": {
+            "type": "structure",
+            "members": {
+                "accessToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The access token.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#sensitive": {}
+                    }
+                },
+                "expiresIn": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the new access token expires.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "refreshToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use to refresh a previously issued access token that might have\n      expired.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#sensitive": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ExportComponents": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifyuibuilder#ExportComponentsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amplifyuibuilder#ExportComponentsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#InvalidParameterException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Exports component configurations to code that is ready to integrate into an Amplify\n      app.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/export/app/{appId}/environment/{environmentName}/components",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ExportComponentsRequest": {
+            "type": "structure",
+            "members": {
+                "appId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the Amplify app to export components to.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "environmentName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment that is a part of the Amplify app.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ExportComponentsResponse": {
+            "type": "structure",
+            "members": {
+                "entities": {
+                    "target": "com.amazonaws.amplifyuibuilder#ComponentList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the configuration of the exported components.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ExportThemes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifyuibuilder#ExportThemesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amplifyuibuilder#ExportThemesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#InvalidParameterException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Exports theme configurations to code that is ready to integrate into an Amplify\n      app.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/export/app/{appId}/environment/{environmentName}/themes",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ExportThemesRequest": {
+            "type": "structure",
+            "members": {
+                "appId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the Amplify app to export the themes to.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "environmentName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment that is part of the Amplify app.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ExportThemesResponse": {
+            "type": "structure",
+            "members": {
+                "entities": {
+                    "target": "com.amazonaws.amplifyuibuilder#ThemeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the configuration of the exported themes.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#FormBindingElement": {
+            "type": "structure",
+            "members": {
+                "element": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the component to retrieve a value from.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "property": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The property to retrieve a value from.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes how to bind a component property to form data.</p>"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#FormBindings": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "com.amazonaws.amplifyuibuilder#FormBindingElement"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#GetComponent": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifyuibuilder#GetComponentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amplifyuibuilder#GetComponentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns an existing component for an Amplify app.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/app/{appId}/environment/{environmentName}/components/{id}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#GetComponentRequest": {
+            "type": "structure",
+            "members": {
+                "appId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the Amplify app.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "environmentName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment that is part of the Amplify app.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.amplifyuibuilder#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the component.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#GetComponentResponse": {
+            "type": "structure",
+            "members": {
+                "component": {
+                    "target": "com.amazonaws.amplifyuibuilder#Component",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>Represents the configuration settings for the component.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#GetTheme": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifyuibuilder#GetThemeRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amplifyuibuilder#GetThemeResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns an existing theme for an Amplify app.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/app/{appId}/environment/{environmentName}/themes/{id}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#GetThemeRequest": {
+            "type": "structure",
+            "members": {
+                "appId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the Amplify app.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "environmentName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment that is part of the Amplify app.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.amplifyuibuilder#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID for the theme.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#GetThemeResponse": {
+            "type": "structure",
+            "members": {
+                "theme": {
+                    "target": "com.amazonaws.amplifyuibuilder#Theme",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>Represents the configuration settings for the theme.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#IdentifierList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An internal error has occurred. Please retry your request.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#InvalidParameterException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An invalid or out-of-range value was supplied for the input parameter.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ListComponents": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifyuibuilder#ListComponentsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amplifyuibuilder#ListComponentsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#InvalidParameterException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a list of components for a specified Amplify app and backend environment.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/app/{appId}/environment/{environmentName}/components",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "entities",
+                    "pageSize": "maxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ListComponentsLimit": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ListComponentsRequest": {
+            "type": "structure",
+            "members": {
+                "appId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID for the Amplify app.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "environmentName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment that is a part of the Amplify app.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to request the next page of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.amplifyuibuilder#ListComponentsLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of components to retrieve.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ListComponentsResponse": {
+            "type": "structure",
+            "members": {
+                "entities": {
+                    "target": "com.amazonaws.amplifyuibuilder#ComponentSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of components for the Amplify app.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token that's included if more results are available.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ListThemes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifyuibuilder#ListThemesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amplifyuibuilder#ListThemesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#InvalidParameterException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a list of themes for a specified Amplify app and backend environment.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/app/{appId}/environment/{environmentName}/themes",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "entities",
+                    "pageSize": "maxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ListThemesLimit": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ListThemesRequest": {
+            "type": "structure",
+            "members": {
+                "appId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID for the Amplify app.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "environmentName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment that is a part of the Amplify app.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to request the next page of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.amplifyuibuilder#ListThemesLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of theme results to return in the response.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ListThemesResponse": {
+            "type": "structure",
+            "members": {
+                "entities": {
+                    "target": "com.amazonaws.amplifyuibuilder#ThemeSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of themes for the Amplify app.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token that's returned if more results are available.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#Predicate": {
+            "type": "structure",
+            "members": {
+                "or": {
+                    "target": "com.amazonaws.amplifyuibuilder#PredicateList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of predicates to combine logically.</p>"
+                    }
+                },
+                "and": {
+                    "target": "com.amazonaws.amplifyuibuilder#PredicateList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of predicates to combine logically.</p>"
+                    }
+                },
+                "field": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The field to query.</p>"
+                    }
+                },
+                "operator": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operator to use to perform the evaluation.</p>"
+                    }
+                },
+                "operand": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value to use when performing the evaluation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Stores information for generating Amplify DataStore queries. Use a <code>Predicate</code>\n      to retrieve a subset of the data in a collection.</p>"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#PredicateList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.amplifyuibuilder#Predicate"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#RefreshToken": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifyuibuilder#RefreshTokenRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amplifyuibuilder#RefreshTokenResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#InvalidParameterException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Refreshes a previously issued access token that might have expired.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/tokens/{provider}/refresh",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#RefreshTokenRequest": {
+            "type": "structure",
+            "members": {
+                "provider": {
+                    "target": "com.amazonaws.amplifyuibuilder#TokenProviders",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The third-party provider for the token. The only valid value is <code>figma</code>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "refreshTokenBody": {
+                    "target": "com.amazonaws.amplifyuibuilder#RefreshTokenRequestBody",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the refresh token request.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#RefreshTokenRequestBody": {
+            "type": "structure",
+            "members": {
+                "token": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use to refresh a previously issued access token that might have\n      expired.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#sensitive": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a refresh token.</p>"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#RefreshTokenResponse": {
+            "type": "structure",
+            "members": {
+                "accessToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The access token.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#sensitive": {}
+                    }
+                },
+                "expiresIn": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the new access token expires.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ResourceConflictException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The resource specified in the request conflicts with an existing resource.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The requested resource does not exist, or access was denied.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You exceeded your service quota. Service quotas, also referred to as limits, are the\n      maximum number of service resources or operations for your Amazon Web Services account. </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#SortDirection": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ASC"
+                    },
+                    {
+                        "value": "DESC"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#SortProperty": {
+            "type": "structure",
+            "members": {
+                "field": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The field to perform the sort on.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "direction": {
+                    "target": "com.amazonaws.amplifyuibuilder#SortDirection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The direction of the sort, either ascending or descending.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes how to sort the data that you bind to a component.</p>"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#SortPropertyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.amplifyuibuilder#SortProperty"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^(?!aws:)[a-zA-Z+-=._:/]+$"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#Tags": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.amplifyuibuilder#TagKey"
+            },
+            "value": {
+                "target": "com.amazonaws.amplifyuibuilder#TagValue"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#Theme": {
+            "type": "structure",
+            "members": {
+                "appId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID for the Amplify app associated with the theme.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "environmentName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment that is a part of the Amplify app.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.amplifyuibuilder#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID for the theme.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.amplifyuibuilder#ThemeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the theme.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "read",
+                        "smithy.api#documentation": "<p>The time that the theme was created.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "modifiedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "read",
+                        "smithy.api#documentation": "<p>The time that the theme was modified.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "values": {
+                    "target": "com.amazonaws.amplifyuibuilder#ThemeValuesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of key-value pairs that defines the properties of the theme.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "overrides": {
+                    "target": "com.amazonaws.amplifyuibuilder#ThemeValuesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the properties that can be overriden to customize a theme.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.amplifyuibuilder#Tags",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "create-and-read",
+                        "smithy.api#documentation": "<p>One or more key-value pairs to use when tagging the theme.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A theme is a collection of style settings that apply globally to the components associated\n      with an Amplify application.</p>",
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.amplifyuibuilder#ThemeResource"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ThemeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.amplifyuibuilder#Theme"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ThemeName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ThemeResource": {
+            "type": "resource",
+            "identifiers": {
+                "id": {
+                    "target": "com.amazonaws.amplifyuibuilder#Uuid"
+                },
+                "appId": {
+                    "target": "smithy.api#String"
+                },
+                "environmentName": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.amplifyuibuilder#CreateTheme"
+            },
+            "read": {
+                "target": "com.amazonaws.amplifyuibuilder#GetTheme"
+            },
+            "update": {
+                "target": "com.amazonaws.amplifyuibuilder#UpdateTheme"
+            },
+            "delete": {
+                "target": "com.amazonaws.amplifyuibuilder#DeleteTheme"
+            },
+            "list": {
+                "target": "com.amazonaws.amplifyuibuilder#ListThemes"
+            },
+            "collectionOperations": [
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#ExportThemes"
+                }
+            ],
+            "traits": {
+                "aws.api#arn": {
+                    "template": "app/{appId}/environment/{environmentName}/themes/{id}",
+                    "absolute": false,
+                    "noAccount": false,
+                    "noRegion": false
+                },
+                "aws.cloudformation#cfnResource": {
+                    "additionalSchemas": [
+                        "com.amazonaws.amplifyuibuilder#Theme"
+                    ],
+                    "name": "Theme"
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ThemeSummary": {
+            "type": "structure",
+            "members": {
+                "appId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID for the app associated with the theme summary.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "environmentName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment that is part of the Amplify app.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.amplifyuibuilder#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the theme.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.amplifyuibuilder#ThemeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the theme.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the basic information about a theme.</p>"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ThemeSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.amplifyuibuilder#ThemeSummary"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ThemeValue": {
+            "type": "structure",
+            "members": {
+                "value": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of a theme property.</p>"
+                    }
+                },
+                "children": {
+                    "target": "com.amazonaws.amplifyuibuilder#ThemeValuesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of key-value pairs that define the theme's properties.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the configuration of a theme's properties.</p>"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ThemeValues": {
+            "type": "structure",
+            "members": {
+                "key": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the property.</p>"
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.amplifyuibuilder#ThemeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the property.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A key-value pair that defines a property of a theme.</p>"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ThemeValuesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.amplifyuibuilder#ThemeValues"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#TokenProviders": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "figma",
+                        "name": "FIGMA",
+                        "documentation": "The figma token provider."
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#UpdateComponent": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifyuibuilder#UpdateComponentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amplifyuibuilder#UpdateComponentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#ResourceConflictException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an existing component.</p>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/app/{appId}/environment/{environmentName}/components/{id}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#UpdateComponentData": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.amplifyuibuilder#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the component to update.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.amplifyuibuilder#ComponentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the component to update.</p>"
+                    }
+                },
+                "sourceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the component in its original source system, such as Figma.</p>"
+                    }
+                },
+                "componentType": {
+                    "target": "com.amazonaws.amplifyuibuilder#ComponentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the component. This can be an Amplify custom UI component or another custom\n      component.</p>"
+                    }
+                },
+                "properties": {
+                    "target": "com.amazonaws.amplifyuibuilder#ComponentProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the component's properties.</p>"
+                    }
+                },
+                "children": {
+                    "target": "com.amazonaws.amplifyuibuilder#ComponentChildList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The components that are instances of the main component.</p>"
+                    }
+                },
+                "variants": {
+                    "target": "com.amazonaws.amplifyuibuilder#ComponentVariants",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the unique variants of the main component being updated.</p>"
+                    }
+                },
+                "overrides": {
+                    "target": "com.amazonaws.amplifyuibuilder#ComponentOverrides",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the properties that can be overriden to customize the component.</p>"
+                    }
+                },
+                "bindingProperties": {
+                    "target": "com.amazonaws.amplifyuibuilder#ComponentBindingProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data binding information for the component's properties.</p>"
+                    }
+                },
+                "collectionProperties": {
+                    "target": "com.amazonaws.amplifyuibuilder#ComponentCollectionProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for binding a component's properties to a data model. Use this for a collection component.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Updates and saves all of the information about a component, based on component ID.</p>"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#UpdateComponentRequest": {
+            "type": "structure",
+            "members": {
+                "appId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID for the Amplify app.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "environmentName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment that is part of the Amplify app.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.amplifyuibuilder#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID for the component.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The unique client token.</p>",
+                        "smithy.api#httpQuery": "clientToken",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "updatedComponent": {
+                    "target": "com.amazonaws.amplifyuibuilder#UpdateComponentData",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The configuration of the updated component.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#UpdateComponentResponse": {
+            "type": "structure",
+            "members": {
+                "entity": {
+                    "target": "com.amazonaws.amplifyuibuilder#Component",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the configuration of the updated component.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#UpdateTheme": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifyuibuilder#UpdateThemeRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amplifyuibuilder#UpdateThemeResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#ResourceConflictException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an existing theme.</p>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/app/{appId}/environment/{environmentName}/themes/{id}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#UpdateThemeData": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.amplifyuibuilder#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the theme to update.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.amplifyuibuilder#ThemeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the theme to update.</p>"
+                    }
+                },
+                "values": {
+                    "target": "com.amazonaws.amplifyuibuilder#ThemeValuesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of key-value pairs that define the theme's properties.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "overrides": {
+                    "target": "com.amazonaws.amplifyuibuilder#ThemeValuesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the properties that can be overriden to customize the theme.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Saves the data binding information for a theme.</p>"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#UpdateThemeRequest": {
+            "type": "structure",
+            "members": {
+                "appId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID for the Amplify app.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "environmentName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment that is part of the Amplify app.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.amplifyuibuilder#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID for the theme.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The unique client token.</p>",
+                        "smithy.api#httpQuery": "clientToken",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "updatedTheme": {
+                    "target": "com.amazonaws.amplifyuibuilder#UpdateThemeData",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The configuration of the updated theme.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#UpdateThemeResponse": {
+            "type": "structure",
+            "members": {
+                "entity": {
+                    "target": "com.amazonaws.amplifyuibuilder#Theme",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the configuration of the updated theme.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#Uuid": {
+            "type": "string"
+        }
+    }
+}
