@@ -41,7 +41,7 @@ public class AwsClientUserAgent implements GoIntegration {
             GoDelegator goDelegator
     ) {
         ServiceTrait serviceTrait = settings.getService(model).expectTrait(ServiceTrait.class);
-        String servceId = serviceTrait.getSdkId().replace("-", "").replace(" ", "").toLowerCase();
+        String serviceId = serviceTrait.getSdkId().replace("-", "").replace(" ", "").toLowerCase();
 
         goDelegator.useShapeWriter(settings.getService(model), writer -> {
             writer.openBlock("func $L(stack $P) error {", "}", MIDDLEWARE_RESOLVER, SymbolUtils.createPointableSymbolBuilder("Stack",
@@ -51,7 +51,7 @@ public class AwsClientUserAgent implements GoIntegration {
                                 .build(),
                         SymbolUtils.createValueSymbolBuilder("APIMetadata",
                                 AwsGoDependency.AWS_MIDDLEWARE).build(),
-                        servceId,
+                        serviceId,
                         SymbolUtils.createValueSymbolBuilder("goModuleVersion").build());
             });
             writer.write("");
