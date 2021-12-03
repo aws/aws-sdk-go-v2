@@ -10,7 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified resource share.
+// Deletes the specified resource share. This doesn't delete any of the resources
+// that were associated with the resource share; it only stops the sharing of those
+// resources outside of the Amazon Web Services account that created them.
 func (c *Client) DeleteResourceShare(ctx context.Context, params *DeleteResourceShareInput, optFns ...func(*Options)) (*DeleteResourceShareOutput, error) {
 	if params == nil {
 		params = &DeleteResourceShareInput{}
@@ -28,13 +30,20 @@ func (c *Client) DeleteResourceShare(ctx context.Context, params *DeleteResource
 
 type DeleteResourceShareInput struct {
 
-	// The Amazon Resource Name (ARN) of the resource share.
+	// Specifies the Amazon Resoure Name (ARN)
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
+	// the resource share to delete.
 	//
 	// This member is required.
 	ResourceShareArn *string
 
-	// A unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
+	// Specifies a unique, case-sensitive identifier that you provide to ensure the
+	// idempotency of the request. This lets you safely retry the request without
+	// accidentally performing the same operation a second time. Passing the same value
+	// to a later call to an operation requires that you also pass the same value for
+	// all other parameters. We recommend that you use a UUID type of value.
+	// (https://wikipedia.org/wiki/Universally_unique_identifier). If you don't provide
+	// this value, then Amazon Web Services generates a random one for you.
 	ClientToken *string
 
 	noSmithyDocumentSerde
@@ -42,11 +51,14 @@ type DeleteResourceShareInput struct {
 
 type DeleteResourceShareOutput struct {
 
-	// A unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
+	// The idempotency identifier associated with this request. If you want to repeat
+	// the same operation in an idempotent manner then you must include this value in
+	// the clientToken request parameter of that later call. All other parameters must
+	// also have the same values that you used in the first call.
 	ClientToken *string
 
-	// Indicates whether the request succeeded.
+	// A return value of true indicates that the request succeeded. A value of false
+	// indicates that the request failed.
 	ReturnValue *bool
 
 	// Metadata pertaining to the operation's result.

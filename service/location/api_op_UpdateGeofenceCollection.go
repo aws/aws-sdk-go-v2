@@ -4,7 +4,6 @@ package location
 
 import (
 	"context"
-	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
@@ -132,9 +131,6 @@ func (c *Client) addOperationUpdateGeofenceCollectionMiddlewares(stack *middlewa
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addEndpointPrefix_opUpdateGeofenceCollectionMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addOpUpdateGeofenceCollectionValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -151,33 +147,6 @@ func (c *Client) addOperationUpdateGeofenceCollectionMiddlewares(stack *middlewa
 		return err
 	}
 	return nil
-}
-
-type endpointPrefix_opUpdateGeofenceCollectionMiddleware struct {
-}
-
-func (*endpointPrefix_opUpdateGeofenceCollectionMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opUpdateGeofenceCollectionMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleSerialize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "geofencing." + req.URL.Host
-
-	return next.HandleSerialize(ctx, in)
-}
-func addEndpointPrefix_opUpdateGeofenceCollectionMiddleware(stack *middleware.Stack) error {
-	return stack.Serialize.Insert(&endpointPrefix_opUpdateGeofenceCollectionMiddleware{}, `OperationSerializer`, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opUpdateGeofenceCollection(region string) *awsmiddleware.RegisterServiceMetadata {

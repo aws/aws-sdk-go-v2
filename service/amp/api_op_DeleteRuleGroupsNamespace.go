@@ -4,7 +4,6 @@ package amp
 
 import (
 	"context"
-	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
@@ -99,9 +98,6 @@ func (c *Client) addOperationDeleteRuleGroupsNamespaceMiddlewares(stack *middlew
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addIdempotencyToken_opDeleteRuleGroupsNamespaceMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteRuleGroupsNamespaceValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -118,39 +114,6 @@ func (c *Client) addOperationDeleteRuleGroupsNamespaceMiddlewares(stack *middlew
 		return err
 	}
 	return nil
-}
-
-type idempotencyToken_initializeOpDeleteRuleGroupsNamespace struct {
-	tokenProvider IdempotencyTokenProvider
-}
-
-func (*idempotencyToken_initializeOpDeleteRuleGroupsNamespace) ID() string {
-	return "OperationIdempotencyTokenAutoFill"
-}
-
-func (m *idempotencyToken_initializeOpDeleteRuleGroupsNamespace) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	if m.tokenProvider == nil {
-		return next.HandleInitialize(ctx, in)
-	}
-
-	input, ok := in.Parameters.(*DeleteRuleGroupsNamespaceInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("expected middleware input to be of type *DeleteRuleGroupsNamespaceInput ")
-	}
-
-	if input.ClientToken == nil {
-		t, err := m.tokenProvider.GetIdempotencyToken()
-		if err != nil {
-			return out, metadata, err
-		}
-		input.ClientToken = &t
-	}
-	return next.HandleInitialize(ctx, in)
-}
-func addIdempotencyToken_opDeleteRuleGroupsNamespaceMiddleware(stack *middleware.Stack, cfg Options) error {
-	return stack.Initialize.Add(&idempotencyToken_initializeOpDeleteRuleGroupsNamespace{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opDeleteRuleGroupsNamespace(region string) *awsmiddleware.RegisterServiceMetadata {

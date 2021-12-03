@@ -10,15 +10,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Resource shares that were created by attaching a policy to a resource are
-// visible only to the resource share owner, and the resource share cannot be
-// modified in RAM. Use this API action to promote the resource share. When you
-// promote the resource share, it becomes:
-//
-// * Visible to all principals that it is
-// shared with.
-//
-// * Modifiable in RAM.
+// When you attach a resource-based permission policy to a resource, it
+// automatically creates a resource share. However, resource shares created this
+// way are visible only to the resource share owner, and the resource share can't
+// be modified in RAM. You can use this operation to promote the resource share to
+// a full RAM resource share. When you promote a resource share, you can then
+// manage the resource share in RAM and it becomes visible to all of the principals
+// you shared it with.
 func (c *Client) PromoteResourceShareCreatedFromPolicy(ctx context.Context, params *PromoteResourceShareCreatedFromPolicyInput, optFns ...func(*Options)) (*PromoteResourceShareCreatedFromPolicyOutput, error) {
 	if params == nil {
 		params = &PromoteResourceShareCreatedFromPolicyInput{}
@@ -36,7 +34,9 @@ func (c *Client) PromoteResourceShareCreatedFromPolicy(ctx context.Context, para
 
 type PromoteResourceShareCreatedFromPolicyInput struct {
 
-	// The Amazon Resource Name (ARN) of the resource share to promote.
+	// Specifies the Amazon Resoure Name (ARN)
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
+	// the resource share to promote.
 	//
 	// This member is required.
 	ResourceShareArn *string
@@ -46,7 +46,8 @@ type PromoteResourceShareCreatedFromPolicyInput struct {
 
 type PromoteResourceShareCreatedFromPolicyOutput struct {
 
-	// Indicates whether the request succeeded.
+	// A return value of true indicates that the request succeeded. A value of false
+	// indicates that the request failed.
 	ReturnValue *bool
 
 	// Metadata pertaining to the operation's result.

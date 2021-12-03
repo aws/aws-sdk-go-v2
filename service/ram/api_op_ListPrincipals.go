@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the principals that you have shared resources with or that have shared
+// Lists the principals that you are sharing resources with or that are sharing
 // resources with you.
 func (c *Client) ListPrincipals(ctx context.Context, params *ListPrincipalsInput, optFns ...func(*Options)) (*ListPrincipalsOutput, error) {
 	if params == nil {
@@ -31,38 +31,75 @@ func (c *Client) ListPrincipals(ctx context.Context, params *ListPrincipalsInput
 
 type ListPrincipalsInput struct {
 
-	// The type of owner.
+	// Specifies that you want to list information for only resource shares that match
+	// the following:
+	//
+	// * SELF – resources that you are sharing
+	//
+	// * OTHER-ACCOUNTS –
+	// resources that other accounts share with you
 	//
 	// This member is required.
 	ResourceOwner types.ResourceOwner
 
-	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
+	// Specifies the total number of results that you want included on each page of the
+	// response. If you do not include this parameter, it defaults to a value that is
+	// specific to the operation. If additional items exist beyond the number you
+	// specify, the NextToken response element is returned with a value (not null).
+	// Include the specified value as the NextToken request parameter in the next call
+	// to the operation to get the next part of the results. Note that the service
+	// might return fewer results than the maximum even when there are more results
+	// available. You should check NextToken after every operation to ensure that you
+	// receive all of the results.
 	MaxResults *int32
 
-	// The token for the next page of results.
+	// Specifies that you want to receive the next page of results. Valid only if you
+	// received a NextToken response in the previous request. If you did, it indicates
+	// that more output is available. Set this parameter to the value provided by the
+	// previous call's NextToken response to request the next page of results.
 	NextToken *string
 
-	// The principals.
+	// Specifies that you want to list information for only the listed principals. You
+	// can include the following values:
+	//
+	// * An Amazon Web Services account ID, for
+	// example: 123456789012
+	//
+	// * An Amazon Resoure Name (ARN)
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
+	// an organization in Organizations, for example:
+	// organizations::123456789012:organization/o-exampleorgid
+	//
+	// * An ARN of an
+	// organizational unit (OU) in Organizations, for example:
+	// organizations::123456789012:ou/o-exampleorgid/ou-examplerootid-exampleouid123
+	//
+	// *
+	// An ARN of an IAM role, for example: iam::123456789012:role/rolename
+	//
+	// * An ARN of
+	// an IAM user, for example: iam::123456789012user/username
+	//
+	// Not all resource types
+	// can be shared with IAM roles and users. For more information, see Sharing with
+	// IAM roles and users
+	// (https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types)
+	// in the Resource Access Manager User Guide.
 	Principals []string
 
-	// The Amazon Resource Name (ARN) of the resource.
+	// Specifies that you want to list principal information for the resource share
+	// with the specified Amazon Resoure Name (ARN)
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	ResourceArn *string
 
-	// The Amazon Resource Names (ARN) of the resource shares.
+	// Specifies that you want to list information for only principals associated with
+	// the resource shares specified by a list the Amazon Resource Names (ARNs)
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	ResourceShareArns []string
 
-	// The resource type. Valid values: acm-pca:CertificateAuthority | appmesh:Mesh |
-	// codebuild:Project | codebuild:ReportGroup | ec2:CapacityReservation |
-	// ec2:DedicatedHost | ec2:LocalGatewayRouteTable | ec2:PrefixList | ec2:Subnet |
-	// ec2:TrafficMirrorTarget | ec2:TransitGateway | imagebuilder:Component |
-	// imagebuilder:Image | imagebuilder:ImageRecipe | imagebuilder:ContainerRecipe |
-	// glue:Catalog | glue:Database | glue:Table | license-manager:LicenseConfiguration
-	// I network-firewall:FirewallPolicy | network-firewall:StatefulRuleGroup |
-	// network-firewall:StatelessRuleGroup | outposts:Outpost | resource-groups:Group |
-	// rds:Cluster | route53resolver:FirewallRuleGroup
-	// |route53resolver:ResolverQueryLogConfig | route53resolver:ResolverRule |
-	// s3-outposts:Outpost | ssm-contacts:Contact | ssm-incidents:ResponsePlan
+	// Specifies that you want to list information for only principals associated with
+	// resource shares that include the specified resource type. For a list of valid
+	// values, query the ListResourceTypes operation.
 	ResourceType *string
 
 	noSmithyDocumentSerde
@@ -70,11 +107,14 @@ type ListPrincipalsInput struct {
 
 type ListPrincipalsOutput struct {
 
-	// The token to use to retrieve the next page of results. This value is null when
-	// there are no more results to return.
+	// If present, this value indicates that more output is available than is included
+	// in the current response. Use this value in the NextToken request parameter in a
+	// subsequent call to the operation to get the next part of the output. You should
+	// repeat this until the NextToken response element comes back as null. This
+	// indicates that this is the last page of results.
 	NextToken *string
 
-	// The principals.
+	// An array of objects that contain the details about the principals.
 	Principals []types.Principal
 
 	// Metadata pertaining to the operation's result.
@@ -156,8 +196,15 @@ var _ ListPrincipalsAPIClient = (*Client)(nil)
 
 // ListPrincipalsPaginatorOptions is the paginator options for ListPrincipals
 type ListPrincipalsPaginatorOptions struct {
-	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
+	// Specifies the total number of results that you want included on each page of the
+	// response. If you do not include this parameter, it defaults to a value that is
+	// specific to the operation. If additional items exist beyond the number you
+	// specify, the NextToken response element is returned with a value (not null).
+	// Include the specified value as the NextToken request parameter in the next call
+	// to the operation to get the next part of the results. Note that the service
+	// might return fewer results than the maximum even when there are more results
+	// available. You should check NextToken after every operation to ensure that you
+	// receive all of the results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

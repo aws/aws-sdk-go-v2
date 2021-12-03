@@ -129,9 +129,6 @@ func (c *Client) addOperationGetDevicePositionHistoryMiddlewares(stack *middlewa
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addEndpointPrefix_opGetDevicePositionHistoryMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addOpGetDevicePositionHistoryValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -148,33 +145,6 @@ func (c *Client) addOperationGetDevicePositionHistoryMiddlewares(stack *middlewa
 		return err
 	}
 	return nil
-}
-
-type endpointPrefix_opGetDevicePositionHistoryMiddleware struct {
-}
-
-func (*endpointPrefix_opGetDevicePositionHistoryMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opGetDevicePositionHistoryMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleSerialize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "tracking." + req.URL.Host
-
-	return next.HandleSerialize(ctx, in)
-}
-func addEndpointPrefix_opGetDevicePositionHistoryMiddleware(stack *middleware.Stack) error {
-	return stack.Serialize.Insert(&endpointPrefix_opGetDevicePositionHistoryMiddleware{}, `OperationSerializer`, middleware.After)
 }
 
 // GetDevicePositionHistoryAPIClient is a client that implements the

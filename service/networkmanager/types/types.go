@@ -7,6 +7,54 @@ import (
 	"time"
 )
 
+// Describes a core network attachment.
+type Attachment struct {
+
+	// The ID of the attachment.
+	AttachmentId *string
+
+	// The policy rule number associated with the attachment.
+	AttachmentPolicyRuleNumber *int32
+
+	// The type of attachment.
+	AttachmentType AttachmentType
+
+	// The ARN of a core network.
+	CoreNetworkArn *string
+
+	// A core network ID.
+	CoreNetworkId *string
+
+	// The timestamp when the attachment was created.
+	CreatedAt *time.Time
+
+	// The Region where the edge is located.
+	EdgeLocation *string
+
+	// The ID of the attachment account owner.
+	OwnerAccountId *string
+
+	// The attachment to move from one segment to another.
+	ProposedSegmentChange *ProposedSegmentChange
+
+	// The attachment resource ARN.
+	ResourceArn *string
+
+	// The name of the segment attachment.
+	SegmentName *string
+
+	// The state of the attachment.
+	State AttachmentState
+
+	// The tags associated with the attachment.
+	Tags []Tag
+
+	// The timestamp when the attachment was last updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Specifies a location in Amazon Web Services.
 type AWSLocation struct {
 
@@ -28,6 +76,39 @@ type Bandwidth struct {
 
 	// Upload speed in Mbps.
 	UploadSpeed *int32
+
+	noSmithyDocumentSerde
+}
+
+// Describes the BGP options.
+type BgpOptions struct {
+
+	// The Peer ASN of the BGP.
+	PeerAsn *int64
+
+	noSmithyDocumentSerde
+}
+
+// Describes a core network Connect attachment.
+type ConnectAttachment struct {
+
+	// The attachment details.
+	Attachment *Attachment
+
+	// Options for connecting an attachment.
+	Options *ConnectAttachmentOptions
+
+	// The ID of the transport attachment.
+	TransportAttachmentId *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes a core network Connect attachment options.
+type ConnectAttachmentOptions struct {
+
+	// The protocol used for the attachment connection.
+	Protocol TunnelProtocol
 
 	noSmithyDocumentSerde
 }
@@ -82,6 +163,354 @@ type ConnectionHealth struct {
 
 	// The connection type.
 	Type ConnectionType
+
+	noSmithyDocumentSerde
+}
+
+// Describes a core network Connect peer.
+type ConnectPeer struct {
+
+	// The configuration of the Connect peer.
+	Configuration *ConnectPeerConfiguration
+
+	// The ID of the attachment to connect.
+	ConnectAttachmentId *string
+
+	// The ID of the Connect peer.
+	ConnectPeerId *string
+
+	// The ID of a core network.
+	CoreNetworkId *string
+
+	// The timestamp when the Connect peer was created.
+	CreatedAt *time.Time
+
+	// The Connect peer Regions where edges are located.
+	EdgeLocation *string
+
+	// The state of the Connect peer.
+	State ConnectPeerState
+
+	// The tags associated with the Connect peer.
+	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
+// Describes a core network Connect peer association.
+type ConnectPeerAssociation struct {
+
+	// The ID of the Connect peer.
+	ConnectPeerId *string
+
+	// The ID of the device to connect to.
+	DeviceId *string
+
+	// The ID of the global network.
+	GlobalNetworkId *string
+
+	// The ID of the link.
+	LinkId *string
+
+	// The state of the Connect peer association.
+	State ConnectPeerAssociationState
+
+	noSmithyDocumentSerde
+}
+
+// Describes a core network BGP configuration.
+type ConnectPeerBgpConfiguration struct {
+
+	// The address of a core network.
+	CoreNetworkAddress *string
+
+	// The ASN of the Coret Network.
+	CoreNetworkAsn *int64
+
+	// The address of a core network Connect peer.
+	PeerAddress *string
+
+	// The ASN of the Connect peer.
+	PeerAsn *int64
+
+	noSmithyDocumentSerde
+}
+
+// Describes a core network Connect peer configuration.
+type ConnectPeerConfiguration struct {
+
+	// The Connect peer BGP configurations.
+	BgpConfigurations []ConnectPeerBgpConfiguration
+
+	// The IP address of a core network.
+	CoreNetworkAddress *string
+
+	// The inside IP addresses used for a Connect peer configuration.
+	InsideCidrBlocks []string
+
+	// The IP address of the Connect peer.
+	PeerAddress *string
+
+	// The protocol used for a Connect peer configuration.
+	Protocol TunnelProtocol
+
+	noSmithyDocumentSerde
+}
+
+// Summary description of a Connect peer.
+type ConnectPeerSummary struct {
+
+	// The ID of a Connect peer attachment.
+	ConnectAttachmentId *string
+
+	// The ID of a Connect peer.
+	ConnectPeerId *string
+
+	// The state of a Connect peer.
+	ConnectPeerState ConnectPeerState
+
+	// The ID of a core network.
+	CoreNetworkId *string
+
+	// The timestamp when a Connect peer was created.
+	CreatedAt *time.Time
+
+	// The Region where the edge is located.
+	EdgeLocation *string
+
+	// The tags associated with a Connect peer summary.
+	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
+// Describes a core network.
+type CoreNetwork struct {
+
+	// The ARN of a core network.
+	CoreNetworkArn *string
+
+	// The ID of a core network.
+	CoreNetworkId *string
+
+	// The timestamp when a core network was created.
+	CreatedAt *time.Time
+
+	// The description of a core network.
+	Description *string
+
+	// The edges within a core network.
+	Edges []CoreNetworkEdge
+
+	// The ID of the global network that your core network is a part of.
+	GlobalNetworkId *string
+
+	// The segments within a core network.
+	Segments []CoreNetworkSegment
+
+	// The current state of a core network.
+	State CoreNetworkState
+
+	// The tags associated with a core network.
+	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
+// Details describing a core network change.
+type CoreNetworkChange struct {
+
+	// The action to take for a core network.
+	Action ChangeAction
+
+	// The resource identifier.
+	Identifier *string
+
+	// The new value for a core network
+	NewValues *CoreNetworkChangeValues
+
+	// The previous values for a core network.
+	PreviousValues *CoreNetworkChangeValues
+
+	// The type of change.
+	Type ChangeType
+
+	noSmithyDocumentSerde
+}
+
+// Describes a core network change.
+type CoreNetworkChangeValues struct {
+
+	// The ASN of a core network.
+	Asn *int64
+
+	// The IP addresses used for a core network.
+	Cidr *string
+
+	// The ID of the destination.
+	DestinationIdentifier *string
+
+	// The Regions where edges are located in a core network.
+	EdgeLocations []string
+
+	// The inside IP addresses used for core network change values.
+	InsideCidrBlocks []string
+
+	// The names of the segments in a core network.
+	SegmentName *string
+
+	// The shared segments for a core network change value.
+	SharedSegments []string
+
+	noSmithyDocumentSerde
+}
+
+// Describes a core network edge.
+type CoreNetworkEdge struct {
+
+	// The ASN of a core network edge.
+	Asn *int64
+
+	// The Region where a core network edge is located.
+	EdgeLocation *string
+
+	// The inside IP addresses used for core network edges.
+	InsideCidrBlocks []string
+
+	noSmithyDocumentSerde
+}
+
+// Describes a core network policy. You can have only one LIVE Core Policy.
+type CoreNetworkPolicy struct {
+
+	// Whether a core network policy is the current LIVE policy or the most recently
+	// submitted policy.
+	Alias CoreNetworkPolicyAlias
+
+	// The state of a core network policy.
+	ChangeSetState ChangeSetState
+
+	// The ID of a core network.
+	CoreNetworkId *string
+
+	// The timestamp when a core network policy was created.
+	CreatedAt *time.Time
+
+	// The description of a core network policy.
+	Description *string
+
+	// Describes a core network policy.
+	//
+	// This value conforms to the media type: application/json
+	PolicyDocument *string
+
+	// Describes any errors in a core network policy.
+	PolicyErrors []CoreNetworkPolicyError
+
+	// The ID of the policy version.
+	PolicyVersionId *int32
+
+	noSmithyDocumentSerde
+}
+
+// Provides details about an error in a core network policy.
+type CoreNetworkPolicyError struct {
+
+	// The error code associated with a core network policy error.
+	//
+	// This member is required.
+	ErrorCode *string
+
+	// The message associated with a core network policy error code.
+	//
+	// This member is required.
+	Message *string
+
+	// The JSON path where the error was discovered in the policy document.
+	Path *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes a core network policy version.
+type CoreNetworkPolicyVersion struct {
+
+	// Whether a core network policy is the current policy or the most recently
+	// submitted policy.
+	Alias CoreNetworkPolicyAlias
+
+	// The status of the policy version change set.
+	ChangeSetState ChangeSetState
+
+	// The ID of a core network.
+	CoreNetworkId *string
+
+	// The timestamp when a core network policy version was created.
+	CreatedAt *time.Time
+
+	// The description of a core network policy version.
+	Description *string
+
+	// The ID of the policy version.
+	PolicyVersionId *int32
+
+	noSmithyDocumentSerde
+}
+
+// Describes a core network segment, which are dedicated routes. Only attachments
+// within this segment can communicate with each other.
+type CoreNetworkSegment struct {
+
+	// The Regions where the edges are located.
+	EdgeLocations []string
+
+	// The name of a core network segment.
+	Name *string
+
+	// The shared segments of a core network.
+	SharedSegments []string
+
+	noSmithyDocumentSerde
+}
+
+// Returns details about a core network edge.
+type CoreNetworkSegmentEdgeIdentifier struct {
+
+	// The ID of a core network.
+	CoreNetworkId *string
+
+	// The Region where the segment edge is located.
+	EdgeLocation *string
+
+	// The name of the segment edge.
+	SegmentName *string
+
+	noSmithyDocumentSerde
+}
+
+// Returns summary information about a core network.
+type CoreNetworkSummary struct {
+
+	// a core network ARN.
+	CoreNetworkArn *string
+
+	// The ID of a core network.
+	CoreNetworkId *string
+
+	// The description of a core network.
+	Description *string
+
+	// The global network ID.
+	GlobalNetworkId *string
+
+	// The ID of the account owner.
+	OwnerAccountId *string
+
+	// The state of a core network.
+	State CoreNetworkState
+
+	// The key-value tags associated with a core network summary.
+	Tags []Tag
 
 	noSmithyDocumentSerde
 }
@@ -155,7 +584,9 @@ type Device struct {
 	noSmithyDocumentSerde
 }
 
-// Describes a global network.
+// Describes a global network. This is a single private network acting as a
+// high-level container for your network objects, including an Amazon Web
+// Services-manged Core Network.
 type GlobalNetwork struct {
 
 	// The date and time that the global network was created.
@@ -259,6 +690,9 @@ type NetworkResource struct {
 
 	// The Amazon Web Services Region.
 	AwsRegion *string
+
+	// a core network ID.
+	CoreNetworkId *string
 
 	// Information about the resource, in JSON format. Network Manager gets this
 	// information by describing the resource using its Describe API call.
@@ -384,11 +818,20 @@ type NetworkRoute struct {
 // Describes the destination of a network route.
 type NetworkRouteDestination struct {
 
+	// The ID of a core network attachment.
+	CoreNetworkAttachmentId *string
+
+	// The edge location for the network destination.
+	EdgeLocation *string
+
 	// The ID of the resource.
 	ResourceId *string
 
 	// The resource type.
 	ResourceType *string
+
+	// The name of the segment.
+	SegmentName *string
 
 	// The ID of the transit gateway attachment.
 	TransitGatewayAttachmentId *string
@@ -407,6 +850,9 @@ type NetworkTelemetry struct {
 
 	// The Amazon Web Services Region.
 	AwsRegion *string
+
+	// The ID of a core network.
+	CoreNetworkId *string
 
 	// The connection health.
 	Health *ConnectionHealth
@@ -437,6 +883,22 @@ type PathComponent struct {
 
 	// The sequence number in the path. The destination is 0.
 	Sequence *int32
+
+	noSmithyDocumentSerde
+}
+
+// Describes a proposed segment change. In some cases, the segment change must
+// first be evaluated and accepted.
+type ProposedSegmentChange struct {
+
+	// The rule number in the policy document that applies to this change.
+	AttachmentPolicyRuleNumber *int32
+
+	// The name of the segment to change.
+	SegmentName *string
+
+	// The key-value tags that changed for the segment.
+	Tags []Tag
 
 	noSmithyDocumentSerde
 }
@@ -582,6 +1044,9 @@ type RouteAnalysisPath struct {
 // Describes a route table.
 type RouteTableIdentifier struct {
 
+	// The segment edge in a core network.
+	CoreNetworkSegmentEdge *CoreNetworkSegmentEdgeIdentifier
+
 	// The ARN of the transit gateway route table.
 	TransitGatewayRouteTableArn *string
 
@@ -614,6 +1079,18 @@ type Site struct {
 
 	// The tags for the site.
 	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
+// Creates a site-to-site VPN attachment.
+type SiteToSiteVpnAttachment struct {
+
+	// Provides details about a site-to-site VPN attachment.
+	Attachment *Attachment
+
+	// The ARN of the site-to-site VPN attachment.
+	VpnConnectionArn *string
 
 	noSmithyDocumentSerde
 }
@@ -690,6 +1167,30 @@ type ValidationExceptionField struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes a VPC attachment.
+type VpcAttachment struct {
+
+	// Provides details about the VPC attachment.
+	Attachment *Attachment
+
+	// Provides details about the VPC attachment.
+	Options *VpcOptions
+
+	// The subnet ARNs.
+	SubnetArns []string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the VPC options.
+type VpcOptions struct {
+
+	// Indicates whether IPv6 is supported.
+	Ipv6Support bool
 
 	noSmithyDocumentSerde
 }

@@ -28,7 +28,7 @@ import (
 // a PNG or JPEG file. In response, the operation returns an array of face matches
 // ordered by similarity score in descending order. For each face match, the
 // response provides a bounding box of the face, facial landmarks, pose details
-// (pitch, role, and yaw), quality (brightness and sharpness), and confidence value
+// (pitch, roll, and yaw), quality (brightness and sharpness), and confidence value
 // (indicating the level of confidence that the bounding box contains a face). The
 // response also provides a similarity score, which indicates how closely the faces
 // match. By default, only faces with a similarity score of greater than or equal

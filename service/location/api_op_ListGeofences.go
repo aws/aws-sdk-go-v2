@@ -104,9 +104,6 @@ func (c *Client) addOperationListGeofencesMiddlewares(stack *middleware.Stack, o
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addEndpointPrefix_opListGeofencesMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addOpListGeofencesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -123,33 +120,6 @@ func (c *Client) addOperationListGeofencesMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	return nil
-}
-
-type endpointPrefix_opListGeofencesMiddleware struct {
-}
-
-func (*endpointPrefix_opListGeofencesMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListGeofencesMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleSerialize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "geofencing." + req.URL.Host
-
-	return next.HandleSerialize(ctx, in)
-}
-func addEndpointPrefix_opListGeofencesMiddleware(stack *middleware.Stack) error {
-	return stack.Serialize.Insert(&endpointPrefix_opListGeofencesMiddleware{}, `OperationSerializer`, middleware.After)
 }
 
 // ListGeofencesAPIClient is a client that implements the ListGeofences operation.

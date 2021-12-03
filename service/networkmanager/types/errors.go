@@ -49,6 +49,27 @@ func (e *ConflictException) ErrorMessage() string {
 func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// Describes a core network policy exception.
+type CoreNetworkPolicyException struct {
+	Message *string
+
+	Errors []CoreNetworkPolicyError
+
+	noSmithyDocumentSerde
+}
+
+func (e *CoreNetworkPolicyException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *CoreNetworkPolicyException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *CoreNetworkPolicyException) ErrorCode() string             { return "CoreNetworkPolicyException" }
+func (e *CoreNetworkPolicyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The request has failed due to an internal error.
 type InternalServerException struct {
 	Message *string

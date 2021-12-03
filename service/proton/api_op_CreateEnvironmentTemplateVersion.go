@@ -4,7 +4,6 @@ package proton
 
 import (
 	"context"
-	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
@@ -120,9 +119,6 @@ func (c *Client) addOperationCreateEnvironmentTemplateVersionMiddlewares(stack *
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addIdempotencyToken_opCreateEnvironmentTemplateVersionMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCreateEnvironmentTemplateVersionValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -139,39 +135,6 @@ func (c *Client) addOperationCreateEnvironmentTemplateVersionMiddlewares(stack *
 		return err
 	}
 	return nil
-}
-
-type idempotencyToken_initializeOpCreateEnvironmentTemplateVersion struct {
-	tokenProvider IdempotencyTokenProvider
-}
-
-func (*idempotencyToken_initializeOpCreateEnvironmentTemplateVersion) ID() string {
-	return "OperationIdempotencyTokenAutoFill"
-}
-
-func (m *idempotencyToken_initializeOpCreateEnvironmentTemplateVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	if m.tokenProvider == nil {
-		return next.HandleInitialize(ctx, in)
-	}
-
-	input, ok := in.Parameters.(*CreateEnvironmentTemplateVersionInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("expected middleware input to be of type *CreateEnvironmentTemplateVersionInput ")
-	}
-
-	if input.ClientToken == nil {
-		t, err := m.tokenProvider.GetIdempotencyToken()
-		if err != nil {
-			return out, metadata, err
-		}
-		input.ClientToken = &t
-	}
-	return next.HandleInitialize(ctx, in)
-}
-func addIdempotencyToken_opCreateEnvironmentTemplateVersionMiddleware(stack *middleware.Stack, cfg Options) error {
-	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateEnvironmentTemplateVersion{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opCreateEnvironmentTemplateVersion(region string) *awsmiddleware.RegisterServiceMetadata {

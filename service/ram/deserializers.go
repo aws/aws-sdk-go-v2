@@ -327,6 +327,9 @@ func awsRestjson1_deserializeOpErrorAssociateResourceShare(response *smithyhttp.
 	case strings.EqualFold("ServiceUnavailableException", errorCode):
 		return awsRestjson1_deserializeErrorServiceUnavailableException(response, errorBody)
 
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
 	case strings.EqualFold("UnknownResourceException", errorCode):
 		return awsRestjson1_deserializeErrorUnknownResourceException(response, errorBody)
 
@@ -4789,6 +4792,42 @@ func awsRestjson1_deserializeErrorTagPolicyViolationException(response *smithyht
 	return output
 }
 
+func awsRestjson1_deserializeErrorThrottlingException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.ThrottlingException{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	err := awsRestjson1_deserializeDocumentThrottlingException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+
+	return output
+}
+
 func awsRestjson1_deserializeErrorUnknownResourceException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.UnknownResourceException{}
 	var buff [1024]byte
@@ -5455,6 +5494,15 @@ func awsRestjson1_deserializeDocumentResource(v **types.Resource, value interfac
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.ResourceGroupArn = ptr.String(jtv)
+			}
+
+		case "resourceRegionScope":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceRegionScope to be of type string, got %T instead", value)
+				}
+				sv.ResourceRegionScope = types.ResourceRegionScope(jtv)
 			}
 
 		case "resourceShareArn":
@@ -6598,6 +6646,15 @@ func awsRestjson1_deserializeDocumentServiceNameAndResourceType(v **types.Servic
 
 	for key, value := range shape {
 		switch key {
+		case "resourceRegionScope":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceRegionScope to be of type string, got %T instead", value)
+				}
+				sv.ResourceRegionScope = types.ResourceRegionScope(jtv)
+			}
+
 		case "resourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6838,6 +6895,46 @@ func awsRestjson1_deserializeDocumentTagPolicyViolationException(v **types.TagPo
 	var sv *types.TagPolicyViolationException
 	if *v == nil {
 		sv = &types.TagPolicyViolationException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ThrottlingException
+	if *v == nil {
+		sv = &types.ThrottlingException{}
 	} else {
 		sv = *v
 	}

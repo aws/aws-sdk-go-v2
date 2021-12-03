@@ -103,9 +103,6 @@ func (c *Client) addOperationListMapsMiddlewares(stack *middleware.Stack, option
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addEndpointPrefix_opListMapsMiddleware(stack); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListMaps(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -119,33 +116,6 @@ func (c *Client) addOperationListMapsMiddlewares(stack *middleware.Stack, option
 		return err
 	}
 	return nil
-}
-
-type endpointPrefix_opListMapsMiddleware struct {
-}
-
-func (*endpointPrefix_opListMapsMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListMapsMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleSerialize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "maps." + req.URL.Host
-
-	return next.HandleSerialize(ctx, in)
-}
-func addEndpointPrefix_opListMapsMiddleware(stack *middleware.Stack) error {
-	return stack.Serialize.Insert(&endpointPrefix_opListMapsMiddleware{}, `OperationSerializer`, middleware.After)
 }
 
 // ListMapsAPIClient is a client that implements the ListMaps operation.
