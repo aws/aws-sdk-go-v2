@@ -101,6 +101,11 @@ func (p *CredentialsCache) singleRetrieve(ctx context.Context) (interface{}, err
 		return *creds, nil
 	}
 
+	return p.Renew(ctx)
+}
+
+// Renew will fetch a new credential from provider and cache it
+func (p *CredentialsCache) Renew(ctx context.Context) (interface{}, error) {
 	creds, err := p.provider.Retrieve(ctx)
 	if err == nil {
 		if creds.CanExpire {
