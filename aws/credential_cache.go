@@ -101,7 +101,7 @@ func (p *CredentialsCache) singleRetrieve(ctx context.Context) (interface{}, err
 		return *creds, nil
 	}
 
-	return p.Renew(ctx)
+	return p.renew(ctx)
 }
 
 // Renew will fetch a new credential from provider and cache it
@@ -109,6 +109,7 @@ func (p *CredentialsCache) Renew(ctx context.Context) (interface{}, error) {
 	resCh := p.sf.DoChan("renew", func() (interface{}, error) {
 		return p.renew(&suppressedContext{ctx})
 	})
+	
 	select {
 	case res := <-resCh:
 		return res.Val.(Credentials), res.Err
