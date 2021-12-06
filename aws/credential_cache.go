@@ -106,6 +106,14 @@ func (p *CredentialsCache) singleRetrieve(ctx context.Context) (interface{}, err
 
 // Renew will fetch a new credential from provider and cache it
 func (p *CredentialsCache) Renew(ctx context.Context) (interface{}, error) {
+	creds, err, _ := p.sf.Do("renew", func() (interface{}, error) {
+		return p.renew(ctx)
+	})
+
+	return creds, err
+}
+
+func (p *CredentialsCache) renew(ctx context.Context) (interface{}, error) {
 	creds, err := p.provider.Retrieve(ctx)
 	if err == nil {
 		if creds.CanExpire {
