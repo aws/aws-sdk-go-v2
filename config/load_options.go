@@ -383,7 +383,7 @@ func (o LoadOptions) getCredentialsCacheOptions(ctx context.Context) (func(*aws.
 // aws.CredentialsCache will be configured with, if the CredentialsCache is used
 // by the configuration loader.
 //
-// If multiple WithProcessCredentialOptions calls are made, the last call
+// If multiple WithCredentialsCacheOptions calls are made, the last call
 // overrides the previous call values.
 func WithCredentialsCacheOptions(v func(*aws.CredentialsCacheOptions)) LoadOptionsFunc {
 	return func(o *LoadOptions) error {
