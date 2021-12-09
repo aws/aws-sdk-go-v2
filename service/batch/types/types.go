@@ -269,7 +269,7 @@ type ComputeResource struct {
 	// modifies this value between the minimum and maximum values, based on job queue
 	// demand. This parameter isn't applicable to jobs that are running on Fargate
 	// resources, and shouldn't be specified.
-	DesiredvCpus int32
+	DesiredvCpus *int32
 
 	// Provides information used to select Amazon Machine Images (AMIs) for EC2
 	// instances in the compute environment. If Ec2Configuration isn't specified, the
@@ -337,7 +337,7 @@ type ComputeResource struct {
 	// The minimum number of Amazon EC2 vCPUs that an environment should maintain (even
 	// if the compute environment is DISABLED). This parameter isn't applicable to jobs
 	// that are running on Fargate resources, and shouldn't be specified.
-	MinvCpus int32
+	MinvCpus *int32
 
 	// The Amazon EC2 placement group to associate with your compute resources. If you
 	// intend to submit multi-node parallel jobs to your compute environment, you
