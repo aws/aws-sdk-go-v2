@@ -616,7 +616,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>From a data producer account, authorizes the sharing of a datashare with one or more\n            consumer accounts. To authorize a datashare for a data consumer, the producer account\n            must have the correct access privileges.</p>"
+                "smithy.api#documentation": "<p>From a data producer account, authorizes the sharing of a datashare with one or more\n            consumer accounts or managing entities. To authorize a datashare for a data consumer, the producer account\n            must have the correct access privileges.</p>"
             }
         },
         "com.amazonaws.redshift#AuthorizeDataShareMessage": {
@@ -632,7 +632,7 @@
                 "ConsumerIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the data consumer that is authorized to access the datashare. This identifier is an Amazon Web Services account ID.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the data consumer that is authorized to access the datashare. This identifier is an Amazon Web Services account ID or a keyword, such as ADX.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3717,6 +3717,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A value that specifies when the datashare has an association between a producer and data consumers.</p>"
                     }
+                },
+                "ManagedBy": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of a datashare to show its managing entity.</p>"
+                    }
                 }
             }
         },
@@ -3920,7 +3926,7 @@
                 "ConsumerIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the data consumer that is to have authorization removed from the datashare. \n            This identifier is an Amazon Web Services account ID.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the data consumer that is to have authorization removed from the datashare. \n            This identifier is an Amazon Web Services account ID or a keyword, such as ADX.</p>",
                         "smithy.api#required": {}
                     }
                 }

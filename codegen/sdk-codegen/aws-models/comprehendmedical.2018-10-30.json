@@ -44,13 +44,13 @@
                 "Score": {
                     "target": "com.amazonaws.comprehendmedical#Float",
                     "traits": {
-                        "smithy.api#documentation": "<p> The level of confidence that Amazon Comprehend Medical has that the segment of text is correctly recognized\n      as an attribute. </p>"
+                        "smithy.api#documentation": "<p> The level of confidence that Comprehend Medical; has that the segment of text is correctly recognized\n      as an attribute. </p>"
                     }
                 },
                 "RelationshipScore": {
                     "target": "com.amazonaws.comprehendmedical#Float",
                     "traits": {
-                        "smithy.api#documentation": "<p> The level of confidence that Amazon Comprehend Medical has that this attribute is correctly related to this\n      entity. </p>"
+                        "smithy.api#documentation": "<p> The level of confidence that Comprehend Medical; has that this attribute is correctly related to this\n      entity. </p>"
                     }
                 },
                 "RelationshipType": {
@@ -136,6 +136,20 @@
                     "min": 1,
                     "max": 20000
                 }
+            }
+        },
+        "com.amazonaws.comprehendmedical#Characters": {
+            "type": "structure",
+            "members": {
+                "OriginalTextCharacters": {
+                    "target": "com.amazonaws.comprehendmedical#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The number of characters present in the input text document as processed by Comprehend Medical.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      The number of characters in the input text to be analyzed. \n    </p>"
             }
         },
         "com.amazonaws.comprehendmedical#ClientRequestTokenString": {
@@ -246,7 +260,7 @@
                 "DataAccessRoleArn": {
                     "target": "com.amazonaws.comprehendmedical#IamRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that gives Amazon Comprehend Medical read access to your input data.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that gives Comprehend Medical; read access to your input data.</p>"
                     }
                 },
                 "ManifestFilePath": {
@@ -280,6 +294,21 @@
         },
         "com.amazonaws.comprehendmedical#ComprehendMedical_20181030": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "ComprehendMedical",
+                    "arnNamespace": "comprehendmedical",
+                    "cloudFormationName": "ComprehendMedical",
+                    "cloudTrailEventSource": "comprehendmedical.amazonaws.com",
+                    "endpointPrefix": "comprehendmedical"
+                },
+                "aws.auth#sigv4": {
+                    "name": "comprehendmedical"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<p> Comprehend Medical; extracts structured information from unstructured clinical text. Use these actions\n      to gain insight in your documents. </p>",
+                "smithy.api#title": "AWS Comprehend Medical"
+            },
             "version": "2018-10-30",
             "operations": [
                 {
@@ -293,6 +322,9 @@
                 },
                 {
                     "target": "com.amazonaws.comprehendmedical#DescribeRxNormInferenceJob"
+                },
+                {
+                    "target": "com.amazonaws.comprehendmedical#DescribeSNOMEDCTInferenceJob"
                 },
                 {
                     "target": "com.amazonaws.comprehendmedical#DetectEntities"
@@ -310,6 +342,9 @@
                     "target": "com.amazonaws.comprehendmedical#InferRxNorm"
                 },
                 {
+                    "target": "com.amazonaws.comprehendmedical#InferSNOMEDCT"
+                },
+                {
                     "target": "com.amazonaws.comprehendmedical#ListEntitiesDetectionV2Jobs"
                 },
                 {
@@ -320,6 +355,9 @@
                 },
                 {
                     "target": "com.amazonaws.comprehendmedical#ListRxNormInferenceJobs"
+                },
+                {
+                    "target": "com.amazonaws.comprehendmedical#ListSNOMEDCTInferenceJobs"
                 },
                 {
                     "target": "com.amazonaws.comprehendmedical#StartEntitiesDetectionV2Job"
@@ -334,6 +372,9 @@
                     "target": "com.amazonaws.comprehendmedical#StartRxNormInferenceJob"
                 },
                 {
+                    "target": "com.amazonaws.comprehendmedical#StartSNOMEDCTInferenceJob"
+                },
+                {
                     "target": "com.amazonaws.comprehendmedical#StopEntitiesDetectionV2Job"
                 },
                 {
@@ -344,23 +385,11 @@
                 },
                 {
                     "target": "com.amazonaws.comprehendmedical#StopRxNormInferenceJob"
+                },
+                {
+                    "target": "com.amazonaws.comprehendmedical#StopSNOMEDCTInferenceJob"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "ComprehendMedical",
-                    "arnNamespace": "comprehendmedical",
-                    "cloudFormationName": "ComprehendMedical",
-                    "cloudTrailEventSource": "comprehendmedical.amazonaws.com",
-                    "endpointPrefix": "comprehendmedical"
-                },
-                "aws.auth#sigv4": {
-                    "name": "comprehendmedical"
-                },
-                "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p> Amazon Comprehend Medical extracts structured information from unstructured clinical text. Use these actions\n      to gain insight in your documents. </p>",
-                "smithy.api#title": "AWS Comprehend Medical"
-            }
+            ]
         },
         "com.amazonaws.comprehendmedical#DescribeEntitiesDetectionV2Job": {
             "type": "operation",
@@ -394,7 +423,7 @@
                 "JobId": {
                     "target": "com.amazonaws.comprehendmedical#JobId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier that Amazon Comprehend Medical generated for the job. The\n        <code>StartEntitiesDetectionV2Job</code> operation returns this identifier in its\n      response.</p>",
+                        "smithy.api#documentation": "<p>The identifier that Comprehend Medical; generated for the job. The\n        <code>StartEntitiesDetectionV2Job</code> operation returns this identifier in its\n      response.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -492,7 +521,7 @@
                 "JobId": {
                     "target": "com.amazonaws.comprehendmedical#JobId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier that Amazon Comprehend Medical generated for the job. The <code>StartPHIDetectionJob</code>\n      operation returns this identifier in its response.</p>",
+                        "smithy.api#documentation": "<p>The identifier that Comprehend Medical; generated for the job. The <code>StartPHIDetectionJob</code>\n      operation returns this identifier in its response.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -558,6 +587,52 @@
                 }
             }
         },
+        "com.amazonaws.comprehendmedical#DescribeSNOMEDCTInferenceJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.comprehendmedical#DescribeSNOMEDCTInferenceJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.comprehendmedical#DescribeSNOMEDCTInferenceJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.comprehendmedical#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.comprehendmedical#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.comprehendmedical#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.comprehendmedical#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n      Gets the properties associated with an InferSNOMEDCT job. Use this operation to get the status of an inference job.\n    </p>"
+            }
+        },
+        "com.amazonaws.comprehendmedical#DescribeSNOMEDCTInferenceJobRequest": {
+            "type": "structure",
+            "members": {
+                "JobId": {
+                    "target": "com.amazonaws.comprehendmedical#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The identifier that Amazon Comprehend Medical generated for the job. The StartSNOMEDCTInferenceJob operation returns this identifier in its response.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.comprehendmedical#DescribeSNOMEDCTInferenceJobResponse": {
+            "type": "structure",
+            "members": {
+                "ComprehendMedicalAsyncJobProperties": {
+                    "target": "com.amazonaws.comprehendmedical#ComprehendMedicalAsyncJobProperties"
+                }
+            }
+        },
         "com.amazonaws.comprehendmedical#DetectEntities": {
             "type": "operation",
             "input": {
@@ -611,7 +686,7 @@
                 "Entities": {
                     "target": "com.amazonaws.comprehendmedical#EntityList",
                     "traits": {
-                        "smithy.api#documentation": "<p> The collection of medical entities extracted from the input text and their associated\n      information. For each entity, the response provides the entity text, the entity category,\n      where the entity text begins and ends, and the level of confidence that Amazon Comprehend Medical has in the\n      detection and analysis. Attributes and traits of the entity are also returned.</p>",
+                        "smithy.api#documentation": "<p> The collection of medical entities extracted from the input text and their associated\n      information. For each entity, the response provides the entity text, the entity category,\n      where the entity text begins and ends, and the level of confidence that Comprehend Medical; has in the\n      detection and analysis. Attributes and traits of the entity are also returned.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -761,7 +836,7 @@
                 "Entities": {
                     "target": "com.amazonaws.comprehendmedical#EntityList",
                     "traits": {
-                        "smithy.api#documentation": "<p> The collection of PHI entities extracted from the input text and their associated\n      information. For each entity, the response provides the entity text, the entity category,\n      where the entity text begins and ends, and the level of confidence that Amazon Comprehend Medical has in its\n      detection. </p>",
+                        "smithy.api#documentation": "<p> The collection of PHI entities extracted from the input text and their associated\n      information. For each entity, the response provides the entity text, the entity category,\n      where the entity text begins and ends, and the level of confidence that Comprehend Medical; has in its\n      detection. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -804,7 +879,7 @@
                 "Score": {
                     "target": "com.amazonaws.comprehendmedical#Float",
                     "traits": {
-                        "smithy.api#documentation": "<p>The level of confidence that Amazon Comprehend Medical has in the accuracy of the detection.</p>"
+                        "smithy.api#documentation": "<p>The level of confidence that Comprehend Medical; has in the accuracy of the detection.</p>"
                     }
                 },
                 "Text": {
@@ -855,6 +930,10 @@
                     {
                         "value": "NAME",
                         "name": "NAME"
+                    },
+                    {
+                        "value": "DX_NAME",
+                        "name": "DX_NAME"
                     },
                     {
                         "value": "DOSAGE",
@@ -909,6 +988,10 @@
                         "name": "TEST_UNITS"
                     },
                     {
+                        "value": "TEST_UNIT",
+                        "name": "TEST_UNIT"
+                    },
+                    {
                         "value": "PROCEDURE_NAME",
                         "name": "PROCEDURE_NAME"
                     },
@@ -929,12 +1012,20 @@
                         "name": "CONTACT_POINT"
                     },
                     {
+                        "value": "PHONE_OR_FAX",
+                        "name": "PHONE_OR_FAX"
+                    },
+                    {
                         "value": "EMAIL",
                         "name": "EMAIL"
                     },
                     {
                         "value": "IDENTIFIER",
                         "name": "IDENTIFIER"
+                    },
+                    {
+                        "value": "ID",
+                        "name": "ID"
                     },
                     {
                         "value": "URL",
@@ -1296,7 +1387,7 @@
                 "Score": {
                     "target": "com.amazonaws.comprehendmedical#Float",
                     "traits": {
-                        "smithy.api#documentation": "<p>The level of confidence that Amazon Comprehend Medical has that the segment of text is correctly recognized\n      as a trait.</p>"
+                        "smithy.api#documentation": "<p>The level of confidence that Comprehend Medical; has that the segment of text is correctly recognized\n      as a trait.</p>"
                     }
                 }
             },
@@ -1340,7 +1431,7 @@
                     "min": 20,
                     "max": 2048
                 },
-                "smithy.api#pattern": "arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+"
+                "smithy.api#pattern": "^arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+$"
             }
         },
         "com.amazonaws.comprehendmedical#InferICD10CM": {
@@ -1475,6 +1566,86 @@
                     "target": "com.amazonaws.comprehendmedical#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The version of the model used to analyze the documents, in the format\n        <i>n</i>.<i>n</i>.<i>n</i> You can use this\n      information to track the model used for a particular batch of documents.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.comprehendmedical#InferSNOMEDCT": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.comprehendmedical#InferSNOMEDCTRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.comprehendmedical#InferSNOMEDCTResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.comprehendmedical#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.comprehendmedical#InvalidEncodingException"
+                },
+                {
+                    "target": "com.amazonaws.comprehendmedical#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.comprehendmedical#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.comprehendmedical#TextSizeLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.comprehendmedical#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n      InferSNOMEDCT detects possible medical concepts as entities and links them to codes from the Systematized Nomenclature of Medicine, Clinical Terms (SNOMED-CT) ontology</p>"
+            }
+        },
+        "com.amazonaws.comprehendmedical#InferSNOMEDCTRequest": {
+            "type": "structure",
+            "members": {
+                "Text": {
+                    "target": "com.amazonaws.comprehendmedical#OntologyLinkingBoundedLengthString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The input text to be analyzed using InferSNOMEDCT. The text should be a string with 1 to 10000 characters. \n    </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.comprehendmedical#InferSNOMEDCTResponse": {
+            "type": "structure",
+            "members": {
+                "Entities": {
+                    "target": "com.amazonaws.comprehendmedical#SNOMEDCTEntityList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The collection of medical concept entities extracted from the input text and their associated information. For each entity, the response provides the entity text, the entity category, where the entity text begins and ends, and the level of confidence that Comprehend Medical has in the detection and analysis. Attributes and traits of the entity are also returned. \n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PaginationToken": {
+                    "target": "com.amazonaws.comprehendmedical#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      If the result of the request is truncated, the pagination token can be used to fetch the next page of entities.\n    </p>"
+                    }
+                },
+                "ModelVersion": {
+                    "target": "com.amazonaws.comprehendmedical#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The version of the model used to analyze the documents, in the format n.n.n You can use this information to track the model used for a particular batch of documents.\n    </p>"
+                    }
+                },
+                "SNOMEDCTDetails": {
+                    "target": "com.amazonaws.comprehendmedical#SNOMEDCTDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The details of the SNOMED-CT revision, including the edition, language, and version date. \n    </p>"
+                    }
+                },
+                "Characters": {
+                    "target": "com.amazonaws.comprehendmedical#Characters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The number of characters in the input request documentation. \n    </p>"
                     }
                 }
             }
@@ -1885,6 +2056,69 @@
                 }
             }
         },
+        "com.amazonaws.comprehendmedical#ListSNOMEDCTInferenceJobs": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.comprehendmedical#ListSNOMEDCTInferenceJobsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.comprehendmedical#ListSNOMEDCTInferenceJobsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.comprehendmedical#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.comprehendmedical#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.comprehendmedical#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.comprehendmedical#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n      Gets a list of InferSNOMEDCT jobs a user has submitted.\n    </p>"
+            }
+        },
+        "com.amazonaws.comprehendmedical#ListSNOMEDCTInferenceJobsRequest": {
+            "type": "structure",
+            "members": {
+                "Filter": {
+                    "target": "com.amazonaws.comprehendmedical#ComprehendMedicalAsyncJobFilter"
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.comprehendmedical#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Identifies the next page of InferSNOMEDCT results to return.\n    </p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.comprehendmedical#MaxResultsInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The maximum number of results to return in each page. The default is 100.\n    </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.comprehendmedical#ListSNOMEDCTInferenceJobsResponse": {
+            "type": "structure",
+            "members": {
+                "ComprehendMedicalAsyncJobPropertiesList": {
+                    "target": "com.amazonaws.comprehendmedical#ComprehendMedicalAsyncJobPropertiesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      A list containing the properties of each job that is returned.\n    </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.comprehendmedical#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Identifies the next page of results to return.\n    </p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.comprehendmedical#ManifestFilePath": {
             "type": "string",
             "traits": {
@@ -1929,7 +2163,7 @@
                 "S3Key": {
                     "target": "com.amazonaws.comprehendmedical#S3Key",
                     "traits": {
-                        "smithy.api#documentation": "<p>The path to the output data files in the S3 bucket. Amazon Comprehend Medical creates an output directory\n      using the job ID so that the output from one job does not overwrite the output of\n      another.</p>"
+                        "smithy.api#documentation": "<p>The path to the output data files in the S3 bucket. Comprehend Medical; creates an output directory\n      using the job ID so that the output from one job does not overwrite the output of\n      another.</p>"
                     }
                 }
             },
@@ -2004,6 +2238,10 @@
                     {
                         "value": "TEST_UNITS",
                         "name": "TEST_UNITS"
+                    },
+                    {
+                        "value": "TEST_UNIT",
+                        "name": "TEST_UNIT"
                     },
                     {
                         "value": "DIRECTION",
@@ -2315,6 +2553,371 @@
                 "smithy.api#pattern": ".*"
             }
         },
+        "com.amazonaws.comprehendmedical#SNOMEDCTAttribute": {
+            "type": "structure",
+            "members": {
+                "Category": {
+                    "target": "com.amazonaws.comprehendmedical#SNOMEDCTEntityCategory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The category of the detected attribute. Possible categories include MEDICAL_CONDITION, ANATOMY, and TEST_TREATMENT_PROCEDURE.\n    </p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.comprehendmedical#SNOMEDCTAttributeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The type of attribute. Possible types include DX_NAME, ACUITY, DIRECTION, SYSTEM_ORGAN_SITE,TEST_NAME, TEST_VALUE, TEST_UNIT, PROCEDURE_NAME, and TREATMENT_NAME.\n    </p>"
+                    }
+                },
+                "Score": {
+                    "target": "com.amazonaws.comprehendmedical#Float",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The level of confidence that Comprehend Medical has that the segment of text is correctly recognized as an attribute.\n    </p>"
+                    }
+                },
+                "RelationshipScore": {
+                    "target": "com.amazonaws.comprehendmedical#Float",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The level of confidence that Comprehend Medical has that this attribute is correctly related to this entity.\n    </p>"
+                    }
+                },
+                "RelationshipType": {
+                    "target": "com.amazonaws.comprehendmedical#SNOMEDCTRelationshipType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The type of relationship that exists between the entity and the related attribute. \n    </p>"
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.comprehendmedical#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The numeric identifier for this attribute. This is a monotonically increasing id unique within this response rather than a global unique identifier.\n    </p>"
+                    }
+                },
+                "BeginOffset": {
+                    "target": "com.amazonaws.comprehendmedical#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The 0-based character offset in the input text that shows where the attribute begins. The offset returns the UTF-8 code point in the string.\n    </p>"
+                    }
+                },
+                "EndOffset": {
+                    "target": "com.amazonaws.comprehendmedical#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The 0-based character offset in the input text that shows where the attribute ends. The offset returns the UTF-8 code point in the string.\n    </p>"
+                    }
+                },
+                "Text": {
+                    "target": "com.amazonaws.comprehendmedical#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The segment of input text extracted as this attribute.\n    </p>"
+                    }
+                },
+                "Traits": {
+                    "target": "com.amazonaws.comprehendmedical#SNOMEDCTTraitList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Contextual information for an attribute. Examples include signs, symptoms, diagnosis, and negation.\n    </p>"
+                    }
+                },
+                "SNOMEDCTConcepts": {
+                    "target": "com.amazonaws.comprehendmedical#SNOMEDCTConceptList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The SNOMED-CT concepts specific to an attribute, along with a score indicating the likelihood of the match.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      The extracted attributes that relate to an entity. An extracted segment of the text that is an attribute of an entity, or otherwise related to an entity, such as the dosage of a medication taken.\n    </p>"
+            }
+        },
+        "com.amazonaws.comprehendmedical#SNOMEDCTAttributeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.comprehendmedical#SNOMEDCTAttribute"
+            }
+        },
+        "com.amazonaws.comprehendmedical#SNOMEDCTAttributeType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ACUITY",
+                        "name": "ACUITY"
+                    },
+                    {
+                        "value": "QUALITY",
+                        "name": "QUALITY"
+                    },
+                    {
+                        "value": "DIRECTION",
+                        "name": "DIRECTION"
+                    },
+                    {
+                        "value": "SYSTEM_ORGAN_SITE",
+                        "name": "SYSTEM_ORGAN_SITE"
+                    },
+                    {
+                        "value": "TEST_VALUE",
+                        "name": "TEST_VALUE"
+                    },
+                    {
+                        "value": "TEST_UNIT",
+                        "name": "TEST_UNIT"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.comprehendmedical#SNOMEDCTConcept": {
+            "type": "structure",
+            "members": {
+                "Description": {
+                    "target": "com.amazonaws.comprehendmedical#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The description of the SNOMED-CT concept. \n    </p>"
+                    }
+                },
+                "Code": {
+                    "target": "com.amazonaws.comprehendmedical#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The numeric ID for the SNOMED-CT concept.\n    </p>"
+                    }
+                },
+                "Score": {
+                    "target": "com.amazonaws.comprehendmedical#Float",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The level of confidence Comprehend Medical has that the entity should be linked to the identified SNOMED-CT concept.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      The SNOMED-CT concepts that the entity could refer to, along with a score indicating the likelihood of the match.\n    </p>"
+            }
+        },
+        "com.amazonaws.comprehendmedical#SNOMEDCTConceptList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.comprehendmedical#SNOMEDCTConcept"
+            }
+        },
+        "com.amazonaws.comprehendmedical#SNOMEDCTDetails": {
+            "type": "structure",
+            "members": {
+                "Edition": {
+                    "target": "com.amazonaws.comprehendmedical#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The edition of SNOMED-CT used. The edition used for the InferSNOMEDCT editions is the US edition. \n    </p>"
+                    }
+                },
+                "Language": {
+                    "target": "com.amazonaws.comprehendmedical#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The language used in the SNOMED-CT ontology. All Amazon Comprehend Medical operations are US English (en).\n    </p>"
+                    }
+                },
+                "VersionDate": {
+                    "target": "com.amazonaws.comprehendmedical#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The version date of the SNOMED-CT ontology used. \n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      The information about the revision of the SNOMED-CT ontology in the response. Specifically, the details include the SNOMED-CT edition, language, and version date. \n    </p>"
+            }
+        },
+        "com.amazonaws.comprehendmedical#SNOMEDCTEntity": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.comprehendmedical#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The numeric identifier for the entity. This is a monotonically increasing id unique within this response rather than a global unique identifier.\n    </p>"
+                    }
+                },
+                "Text": {
+                    "target": "com.amazonaws.comprehendmedical#OntologyLinkingBoundedLengthString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The segment of input text extracted as this entity.\n    </p>"
+                    }
+                },
+                "Category": {
+                    "target": "com.amazonaws.comprehendmedical#SNOMEDCTEntityCategory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The category of the detected entity. Possible categories are MEDICAL_CONDITION, ANATOMY, or TEST_TREATMENT_PROCEDURE. \n    </p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.comprehendmedical#SNOMEDCTEntityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Describes the specific type of entity with category of entities. Possible types include DX_NAME, ACUITY, DIRECTION, SYSTEM_ORGAN_SITE, TEST_NAME, TEST_VALUE, TEST_UNIT, PROCEDURE_NAME, or TREATMENT_NAME. \n    </p>"
+                    }
+                },
+                "Score": {
+                    "target": "com.amazonaws.comprehendmedical#Float",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The level of confidence that Comprehend Medical has in the accuracy of the detected entity.\n    </p>"
+                    }
+                },
+                "BeginOffset": {
+                    "target": "com.amazonaws.comprehendmedical#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The 0-based character offset in the input text that shows where the entity begins. The offset returns the UTF-8 code point in the string.\n    </p>"
+                    }
+                },
+                "EndOffset": {
+                    "target": "com.amazonaws.comprehendmedical#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The 0-based character offset in the input text that shows where the entity ends. The offset returns the UTF-8 code point in the string.\n    </p>"
+                    }
+                },
+                "Attributes": {
+                    "target": "com.amazonaws.comprehendmedical#SNOMEDCTAttributeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      An extracted segment of the text that is an attribute of an entity, or otherwise related to an entity, such as the dosage of a medication taken.\n    </p>"
+                    }
+                },
+                "Traits": {
+                    "target": "com.amazonaws.comprehendmedical#SNOMEDCTTraitList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Contextual information for the entity.\n    </p>"
+                    }
+                },
+                "SNOMEDCTConcepts": {
+                    "target": "com.amazonaws.comprehendmedical#SNOMEDCTConceptList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The SNOMED concepts that the entity could refer to, along with a score indicating the likelihood of the match.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      The collection of medical entities extracted from the input text and their associated information. For each entity, the response provides the entity text, the entity category, where the entity text begins and ends, and the level of confidence that Comprehend Medical has in the detection and analysis. Attributes and traits of the entity are also returned. \n    </p>"
+            }
+        },
+        "com.amazonaws.comprehendmedical#SNOMEDCTEntityCategory": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "MEDICAL_CONDITION",
+                        "name": "MEDICAL_CONDITION"
+                    },
+                    {
+                        "value": "ANATOMY",
+                        "name": "ANATOMY"
+                    },
+                    {
+                        "value": "TEST_TREATMENT_PROCEDURE",
+                        "name": "TEST_TREATMENT_PROCEDURE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.comprehendmedical#SNOMEDCTEntityList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.comprehendmedical#SNOMEDCTEntity"
+            }
+        },
+        "com.amazonaws.comprehendmedical#SNOMEDCTEntityType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "DX_NAME",
+                        "name": "DX_NAME"
+                    },
+                    {
+                        "value": "TEST_NAME",
+                        "name": "TEST_NAME"
+                    },
+                    {
+                        "value": "PROCEDURE_NAME",
+                        "name": "PROCEDURE_NAME"
+                    },
+                    {
+                        "value": "TREATMENT_NAME",
+                        "name": "TREATMENT_NAME"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.comprehendmedical#SNOMEDCTRelationshipType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ACUITY",
+                        "name": "ACUITY"
+                    },
+                    {
+                        "value": "QUALITY",
+                        "name": "QUALITY"
+                    },
+                    {
+                        "value": "TEST_VALUE",
+                        "name": "TEST_VALUE"
+                    },
+                    {
+                        "value": "TEST_UNITS",
+                        "name": "TEST_UNITS"
+                    },
+                    {
+                        "value": "DIRECTION",
+                        "name": "DIRECTION"
+                    },
+                    {
+                        "value": "SYSTEM_ORGAN_SITE",
+                        "name": "SYSTEM_ORGAN_SITE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.comprehendmedical#SNOMEDCTTrait": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.comprehendmedical#SNOMEDCTTraitName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The name or contextual description of a detected trait.\n    </p>"
+                    }
+                },
+                "Score": {
+                    "target": "com.amazonaws.comprehendmedical#Float",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The level of confidence that Comprehend Medical has in the accuracy of a detected trait.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      Contextual information for an entity.\n    </p>"
+            }
+        },
+        "com.amazonaws.comprehendmedical#SNOMEDCTTraitList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.comprehendmedical#SNOMEDCTTrait"
+            }
+        },
+        "com.amazonaws.comprehendmedical#SNOMEDCTTraitName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "NEGATION",
+                        "name": "NEGATION"
+                    },
+                    {
+                        "value": "DIAGNOSIS",
+                        "name": "DIAGNOSIS"
+                    },
+                    {
+                        "value": "SIGN",
+                        "name": "SIGN"
+                    },
+                    {
+                        "value": "SYMPTOM",
+                        "name": "SYMPTOM"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.comprehendmedical#ServiceUnavailableException": {
             "type": "structure",
             "members": {
@@ -2323,7 +2926,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The Amazon Comprehend Medical service is temporarily unavailable. Please wait and then retry your request.\n    </p>",
+                "smithy.api#documentation": "<p> The Comprehend Medical; service is temporarily unavailable. Please wait and then retry your request.\n    </p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 503
             }
@@ -2360,21 +2963,21 @@
                 "InputDataConfig": {
                     "target": "com.amazonaws.comprehendmedical#InputDataConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the format and location of the input data for the job.</p>",
+                        "smithy.api#documentation": "<p>The input configuration that specifies the format and location of the input data for the job.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "OutputDataConfig": {
                     "target": "com.amazonaws.comprehendmedical#OutputDataConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies where to send the output files.</p>",
+                        "smithy.api#documentation": "<p>The output configuration that specifies where to send the output files.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "DataAccessRoleArn": {
                     "target": "com.amazonaws.comprehendmedical#IamRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that\n      grants Amazon Comprehend Medical read access to your input data. For more information, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions-med.html#auth-role-permissions-med\"> Role-Based Permissions Required for Asynchronous Operations</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that\n      grants Comprehend Medical; read access to your input data. For more information, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions-med.html#auth-role-permissions-med\"> Role-Based Permissions Required for Asynchronous Operations</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2387,7 +2990,7 @@
                 "ClientRequestToken": {
                     "target": "com.amazonaws.comprehendmedical#ClientRequestTokenString",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier for the request. If you don't set the client request token, Amazon Comprehend Medical\n      generates one.</p>",
+                        "smithy.api#documentation": "<p>A unique identifier for the request. If you don't set the client request token, Comprehend Medical;\n      generates one for you.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -2400,7 +3003,7 @@
                 "LanguageCode": {
                     "target": "com.amazonaws.comprehendmedical#LanguageCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language of the input documents. All documents must be in the same language.</p>",
+                        "smithy.api#documentation": "<p>The language of the input documents. All documents must be in the same language. Comprehend Medical; processes files in US English (en).</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2463,7 +3066,7 @@
                 "DataAccessRoleArn": {
                     "target": "com.amazonaws.comprehendmedical#IamRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that\n      grants Amazon Comprehend Medical read access to your input data. For more information, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions-med.html#auth-role-permissions-med\"> Role-Based Permissions Required for Asynchronous Operations</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that\n      grants Comprehend Medical; read access to your input data. For more information, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions-med.html#auth-role-permissions-med\"> Role-Based Permissions Required for Asynchronous Operations</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2476,7 +3079,7 @@
                 "ClientRequestToken": {
                     "target": "com.amazonaws.comprehendmedical#ClientRequestTokenString",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier for the request. If you don't set the client request token, Amazon Comprehend Medical\n      generates one.</p>",
+                        "smithy.api#documentation": "<p>A unique identifier for the request. If you don't set the client request token, Comprehend Medical;\n      generates one.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -2552,7 +3155,7 @@
                 "DataAccessRoleArn": {
                     "target": "com.amazonaws.comprehendmedical#IamRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that\n      grants Amazon Comprehend Medical read access to your input data. For more information, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions-med.html#auth-role-permissions-med\"> Role-Based Permissions Required for Asynchronous Operations</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that\n      grants Comprehend Medical; read access to your input data. For more information, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions-med.html#auth-role-permissions-med\"> Role-Based Permissions Required for Asynchronous Operations</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2565,7 +3168,7 @@
                 "ClientRequestToken": {
                     "target": "com.amazonaws.comprehendmedical#ClientRequestTokenString",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier for the request. If you don't set the client request token, Amazon Comprehend Medical\n      generates one.</p>",
+                        "smithy.api#documentation": "<p>A unique identifier for the request. If you don't set the client request token, Comprehend Medical;\n      generates one.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -2641,7 +3244,7 @@
                 "DataAccessRoleArn": {
                     "target": "com.amazonaws.comprehendmedical#IamRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that\n      grants Amazon Comprehend Medical read access to your input data. For more information, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions-med.html#auth-role-permissions-med\"> Role-Based Permissions Required for Asynchronous Operations</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that\n      grants Comprehend Medical; read access to your input data. For more information, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions-med.html#auth-role-permissions-med\"> Role-Based Permissions Required for Asynchronous Operations</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2654,7 +3257,7 @@
                 "ClientRequestToken": {
                     "target": "com.amazonaws.comprehendmedical#ClientRequestTokenString",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier for the request. If you don't set the client request token, Amazon Comprehend Medical\n      generates one.</p>",
+                        "smithy.api#documentation": "<p>A unique identifier for the request. If you don't set the client request token, Comprehend Medical;\n      generates one.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -2680,6 +3283,93 @@
                     "target": "com.amazonaws.comprehendmedical#JobId",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the job.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.comprehendmedical#StartSNOMEDCTInferenceJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.comprehendmedical#StartSNOMEDCTInferenceJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.comprehendmedical#StartSNOMEDCTInferenceJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.comprehendmedical#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.comprehendmedical#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.comprehendmedical#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.comprehendmedical#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n      Starts an asynchronous job to detect medical concepts and link them to the SNOMED-CT ontology. Use the DescribeSNOMEDCTInferenceJob operation to track the status of a job.\n    </p>"
+            }
+        },
+        "com.amazonaws.comprehendmedical#StartSNOMEDCTInferenceJobRequest": {
+            "type": "structure",
+            "members": {
+                "InputDataConfig": {
+                    "target": "com.amazonaws.comprehendmedical#InputDataConfig",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "OutputDataConfig": {
+                    "target": "com.amazonaws.comprehendmedical#OutputDataConfig",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "DataAccessRoleArn": {
+                    "target": "com.amazonaws.comprehendmedical#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend Medical read access to your input data. \n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "JobName": {
+                    "target": "com.amazonaws.comprehendmedical#JobName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The user generated name the asynchronous InferSNOMEDCT job.\n    </p>"
+                    }
+                },
+                "ClientRequestToken": {
+                    "target": "com.amazonaws.comprehendmedical#ClientRequestTokenString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      A unique identifier for the request. If you don't set the client request token, Amazon Comprehend Medical generates one.\n    </p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "KMSKey": {
+                    "target": "com.amazonaws.comprehendmedical#KMSKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      An AWS Key Management Service key used to encrypt your output files. If you do not specify a key, the files are written in plain text.\n    </p>"
+                    }
+                },
+                "LanguageCode": {
+                    "target": "com.amazonaws.comprehendmedical#LanguageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The language of the input documents. All documents must be in the same language.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.comprehendmedical#StartSNOMEDCTInferenceJobResponse": {
+            "type": "structure",
+            "members": {
+                "JobId": {
+                    "target": "com.amazonaws.comprehendmedical#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The identifier generated for the job. To get the status of a job, use this identifier with the StartSNOMEDCTInferenceJob operation.\n    </p>"
                     }
                 }
             }
@@ -2868,6 +3558,55 @@
                 }
             }
         },
+        "com.amazonaws.comprehendmedical#StopSNOMEDCTInferenceJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.comprehendmedical#StopSNOMEDCTInferenceJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.comprehendmedical#StopSNOMEDCTInferenceJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.comprehendmedical#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.comprehendmedical#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.comprehendmedical#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.comprehendmedical#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n      Stops an InferSNOMEDCT inference job in progress.\n    </p>"
+            }
+        },
+        "com.amazonaws.comprehendmedical#StopSNOMEDCTInferenceJobRequest": {
+            "type": "structure",
+            "members": {
+                "JobId": {
+                    "target": "com.amazonaws.comprehendmedical#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The job id of the asynchronous InferSNOMEDCT job to be stopped.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.comprehendmedical#StopSNOMEDCTInferenceJobResponse": {
+            "type": "structure",
+            "members": {
+                "JobId": {
+                    "target": "com.amazonaws.comprehendmedical#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The identifier generated for the job. To get the status of job, use this identifier with the DescribeSNOMEDCTInferenceJob operation.\n    </p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.comprehendmedical#String": {
             "type": "string",
             "traits": {
@@ -2917,7 +3656,7 @@
                 "Score": {
                     "target": "com.amazonaws.comprehendmedical#Float",
                     "traits": {
-                        "smithy.api#documentation": "<p> The level of confidence that Amazon Comprehend Medical has in the accuracy of this trait.</p>"
+                        "smithy.api#documentation": "<p> The level of confidence that Comprehend Medical; has in the accuracy of this trait.</p>"
                     }
                 }
             },
@@ -2937,7 +3676,7 @@
                 "Type": {
                     "target": "com.amazonaws.comprehendmedical#EntityType",
                     "traits": {
-                        "smithy.api#documentation": "<p> The type of the attribute, could be one of the following values: \"MEDICATION\",\n      \"MEDICAL_CONDITION\", \"ANATOMY\", \"TEST_AND_TREATMENT_PROCEDURE\" or\n      \"PROTECTED_HEALTH_INFORMATION\". </p>"
+                        "smithy.api#documentation": "<p> The type of the unmapped attribute, could be one of the following values: \"MEDICATION\",\n      \"MEDICAL_CONDITION\", \"ANATOMY\", \"TEST_AND_TREATMENT_PROCEDURE\" or\n      \"PROTECTED_HEALTH_INFORMATION\". </p>"
                     }
                 },
                 "Attribute": {
@@ -2948,7 +3687,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> An attribute that we extracted, but were unable to relate to an entity. </p>"
+                "smithy.api#documentation": "<p> An attribute that was extracted, but Comprehend Medical; was unable to relate to an entity. </p>"
             }
         },
         "com.amazonaws.comprehendmedical#UnmappedAttributeList": {

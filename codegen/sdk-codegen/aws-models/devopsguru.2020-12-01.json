@@ -1439,6 +1439,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The pagination token to use to retrieve \n   the next page of results for this operation. If there are no more pages, this value is null.</p>"
                     }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.devopsguru#TagHealths",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags help you identify and organize your Amazon Web Services resources. Many Amazon Web Services services support\n   \t\ttagging, so you can assign the same tag to resources from different services to indicate\n   \t\tthat the resources are related. For example, you can assign the same tag to an Amazon DynamoDB\n   \t\ttable resource that you assign to an Lambda function. For more information about\n   \t\tusing tags, see the <a href=\"https://d1.awsstatic.com/whitepapers/aws-tagging-best-practices.pdf\">Tagging\n   \t\t\tbest practices</a> whitepaper. </p>\n   \t     <p>Each Amazon Web Services tag has two parts. </p>\n   \t     <ul>\n            <li>\n   \t\t\t         <p>A tag <i>key</i> (for example, <code>CostCenter</code>,\n   \t\t\t\t<code>Environment</code>, <code>Project</code>, or <code>Secret</code>). Tag\n   \t\t\t\t<i>keys</i> are case-sensitive.</p>\n   \t\t       </li>\n            <li>\n   \t\t\t         <p>An optional field known as a tag <i>value</i> (for example,\n   \t\t\t\t<code>111122223333</code>, <code>Production</code>, or a team\n   \t\t\t\tname). Omitting the tag <i>value</i> is the same as using an empty\n   \t\t\t\tstring. Like tag <i>keys</i>, tag <i>values</i> are\n   \t\t\t\tcase-sensitive.</p>\n   \t\t       </li>\n         </ul>\n   \t     <p>Together these are known as <i>key</i>-<i>value</i> pairs.</p>\n   \t     <important>\n\t\t          <p>The string used for a <i>key</i> in a tag that you use to define your resource coverage must begin with the\n\t\t\tprefix <code>Devops-guru-</code>. The tag <i>key</i> might be\n\t\t\t<code>Devops-guru-deployment-application</code> or\n\t\t\t<code>Devops-guru-rds-application</code>. While <i>keys</i> are case-sensitive, the\n\t\t\tcase of <i>key</i> characters don't matter to DevOps Guru. For example, DevOps Guru works with a\n\t\t\t<i>key</i> named <code>devops-guru-rds</code> and a <i>key</i> named\n\t\t\t<code>DevOps-Guru-RDS</code>. Possible <i>key</i>/<i>value</i> pairs in your\n\t\t\tapplication might be <code>Devops-Guru-production-application/RDS</code> or\n\t\t\t<code>Devops-Guru-production-application/containers</code>.</p>\n\t        </important>"
+                    }
                 }
             }
         },
@@ -3070,6 +3076,10 @@
                     {
                         "value": "AWS_ACCOUNT",
                         "name": "AWS_ACCOUNT"
+                    },
+                    {
+                        "value": "AWS_TAGS",
+                        "name": "AWS_TAGS"
                     }
                 ]
             }
