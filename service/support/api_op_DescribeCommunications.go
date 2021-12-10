@@ -21,13 +21,14 @@ import (
 // number of cases that you want to display on each page, and use nextToken to
 // specify the resumption of pagination.
 //
-// * You must have a Business or Enterprise
-// Support plan to use the AWS Support API.
+// * You must have a Business, Enterprise
+// On-Ramp, or Enterprise Support plan to use the Amazon Web Services Support
+// API.
 //
-// * If you call the AWS Support API from
-// an account that does not have a Business or Enterprise Support plan, the
+// * If you call the Amazon Web Services Support API from an account that
+// does not have a Business, Enterprise On-Ramp, or Enterprise Support plan, the
 // SubscriptionRequiredException error message appears. For information about
-// changing your support plan, see AWS Support
+// changing your support plan, see Amazon Web Services Support
 // (http://aws.amazon.com/premiumsupport/).
 func (c *Client) DescribeCommunications(ctx context.Context, params *DescribeCommunicationsInput, optFns ...func(*Options)) (*DescribeCommunicationsOutput, error) {
 	if params == nil {

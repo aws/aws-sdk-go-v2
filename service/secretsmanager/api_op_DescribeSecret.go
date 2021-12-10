@@ -12,26 +12,8 @@ import (
 	"time"
 )
 
-// Retrieves the details of a secret. It does not include the encrypted fields.
-// Secrets Manager only returns fields populated with a value in the response.
-// Minimum permissions To run this command, you must have the following
-// permissions:
-//
-// * secretsmanager:DescribeSecret
-//
-// Related operations
-//
-// * To create a
-// secret, use CreateSecret.
-//
-// * To modify a secret, use UpdateSecret.
-//
-// * To
-// retrieve the encrypted secret information in a version of the secret, use
-// GetSecretValue.
-//
-// * To list all of the secrets in the Amazon Web Services
-// account, use ListSecrets.
+// Retrieves the details of a secret. It does not include the encrypted secret
+// value. Secrets Manager only returns fields that have a value in the response.
 func (c *Client) DescribeSecret(ctx context.Context, params *DescribeSecretInput, optFns ...func(*Options)) (*DescribeSecretOutput, error) {
 	if params == nil {
 		params = &DescribeSecretInput{}
@@ -49,9 +31,8 @@ func (c *Client) DescribeSecret(ctx context.Context, params *DescribeSecretInput
 
 type DescribeSecretInput struct {
 
-	// The identifier of the secret whose details you want to retrieve. You can specify
-	// either the Amazon Resource Name (ARN) or the friendly name of the secret. For an
-	// ARN, we recommend that you specify a complete ARN rather than a partial ARN.
+	// The ARN or name of the secret. For an ARN, we recommend that you specify a
+	// complete ARN rather than a partial ARN.
 	//
 	// This member is required.
 	SecretId *string
@@ -64,74 +45,98 @@ type DescribeSecretOutput struct {
 	// The ARN of the secret.
 	ARN *string
 
-	// The date you created the secret.
+	// The date the secret was created.
 	CreatedDate *time.Time
 
-	// This value exists if the secret is scheduled for deletion. Some time after the
-	// specified date and time, Secrets Manager deletes the secret and all of its
-	// versions. If a secret is scheduled for deletion, then its details, including the
-	// encrypted secret information, is not accessible. To cancel a scheduled deletion
-	// and restore access, use RestoreSecret.
+	// The date the secret is scheduled for deletion. If it is not scheduled for
+	// deletion, this field is omitted. When you delete a secret, Secrets Manager
+	// requires a recovery window of at least 7 days before deleting the secret. Some
+	// time after the deleted date, Secrets Manager deletes the secret, including all
+	// of its versions. If a secret is scheduled for deletion, then its details,
+	// including the encrypted secret value, is not accessible. To cancel a scheduled
+	// deletion and restore access to the secret, use RestoreSecret.
 	DeletedDate *time.Time
 
-	// The user-provided description of the secret.
+	// The description of the secret.
 	Description *string
 
-	// The ARN or alias of the Amazon Web Services KMS customer master key (CMK) that's
-	// used to encrypt the SecretString or SecretBinary fields in each version of the
-	// secret. If you don't provide a key, then Secrets Manager defaults to encrypting
-	// the secret fields with the default Amazon Web Services KMS CMK (the one named
-	// awssecretsmanager) for this account.
+	// The ARN of the KMS key that Secrets Manager uses to encrypt the secret value. If
+	// the secret is encrypted with the Amazon Web Services managed key
+	// aws/secretsmanager, this field is omitted.
 	KmsKeyId *string
 
-	// The last date that this secret was accessed. This value is truncated to midnight
-	// of the date and therefore shows only the date, not the time.
+	// The last date that the secret value was retrieved. This value does not include
+	// the time. This field is omitted if the secret has never been retrieved.
 	LastAccessedDate *time.Time
 
 	// The last date and time that this secret was modified in any way.
 	LastChangedDate *time.Time
 
-	// The last date and time that the rotation process for this secret was invoked.
-	// The most recent date and time that the Secrets Manager rotation process
-	// successfully completed. If the secret doesn't rotate, Secrets Manager returns a
-	// null value.
+	// The last date and time that Secrets Manager rotated the secret. If the secret
+	// isn't configured for rotation, Secrets Manager returns null.
 	LastRotatedDate *time.Time
 
-	// The user-provided friendly name of the secret.
+	// The name of the secret.
 	Name *string
 
-	// Returns the name of the service that created this secret.
+	// The name of the service that created this secret.
 	OwningService *string
 
-	// Specifies the primary region for secret replication.
+	// The Region the secret is in. If a secret is replicated to other Regions, the
+	// replicas are listed in ReplicationStatus.
 	PrimaryRegion *string
 
-	// Describes a list of replication status objects as InProgress, Failed or InSync.P
+	// A list of the replicas of this secret and their status:
+	//
+	// * Failed, which
+	// indicates that the replica was not created.
+	//
+	// * InProgress, which indicates that
+	// Secrets Manager is in the process of creating the replica.
+	//
+	// * InSync, which
+	// indicates that the replica was created.
 	ReplicationStatus []types.ReplicationStatusType
 
-	// Specifies whether automatic rotation is enabled for this secret. To enable
-	// rotation, use RotateSecret with AutomaticallyRotateAfterDays set to a value
-	// greater than 0. To disable rotation, use CancelRotateSecret.
+	// Specifies whether automatic rotation is turned on for this secret. To turn on
+	// rotation, use RotateSecret. To turn off rotation, use CancelRotateSecret.
 	RotationEnabled bool
 
-	// The ARN of a Lambda function that's invoked by Secrets Manager to rotate the
-	// secret either automatically per the schedule or manually by a call to
-	// RotateSecret.
+	// The ARN of the Lambda function that Secrets Manager invokes to rotate the
+	// secret.
 	RotationLambdaARN *string
 
-	// A structure with the rotation configuration for this secret. This field is only
-	// populated if rotation is configured.
+	// The rotation schedule and Lambda function for this secret. If the secret
+	// previously had rotation turned on, but it is now turned off, this field shows
+	// the previous rotation schedule and rotation function. If the secret never had
+	// rotation turned on, this field is omitted.
 	RotationRules *types.RotationRulesType
 
-	// The list of user-defined tags that are associated with the secret. To add tags
-	// to a secret, use TagResource. To remove tags, use UntagResource.
+	// The list of tags attached to the secret. To add tags to a secret, use
+	// TagResource. To remove tags, use UntagResource.
 	Tags []types.Tag
 
-	// A list of all of the currently assigned VersionStage staging labels and the
-	// VersionId that each is attached to. Staging labels are used to keep track of the
-	// different versions during the rotation process. A version that does not have any
-	// staging labels attached is considered deprecated and subject to deletion. Such
-	// versions are not included in this list.
+	// A list of the versions of the secret that have staging labels attached. Versions
+	// that don't have staging labels are considered deprecated and Secrets Manager can
+	// delete them. Secrets Manager uses staging labels to indicate the status of a
+	// secret version during rotation. The three staging labels for rotation are:
+	//
+	// *
+	// AWSCURRENT, which indicates the current version of the secret.
+	//
+	// * AWSPENDING,
+	// which indicates the version of the secret that contains new secret information
+	// that will become the next current version when rotation finishes. During
+	// rotation, Secrets Manager creates an AWSPENDING version ID before creating the
+	// new secret version. To check if a secret version exists, call GetSecretValue.
+	//
+	// *
+	// AWSPREVIOUS, which indicates the previous current version of the secret. You can
+	// use this as the last known good version.
+	//
+	// For more information about rotation
+	// and staging labels, see How rotation works
+	// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotate-secrets_how.html).
 	VersionIdsToStages map[string][]string
 
 	// Metadata pertaining to the operation's result.

@@ -10,19 +10,20 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds additional customer communication to an AWS Support case. Use the caseId
-// parameter to identify the case to which to add communication. You can list a set
-// of email addresses to copy on the communication by using the ccEmailAddresses
-// parameter. The communicationBody value contains the text of the
+// Adds additional customer communication to an Amazon Web Services Support case.
+// Use the caseId parameter to identify the case to which to add communication. You
+// can list a set of email addresses to copy on the communication by using the
+// ccEmailAddresses parameter. The communicationBody value contains the text of the
 // communication.
 //
-// * You must have a Business or Enterprise Support plan to use the
-// AWS Support API.
+// * You must have a Business, Enterprise On-Ramp, or Enterprise
+// Support plan to use the Amazon Web Services Support API.
 //
-// * If you call the AWS Support API from an account that does
-// not have a Business or Enterprise Support plan, the
+// * If you call the
+// Amazon Web Services Support API from an account that does not have a Business,
+// Enterprise On-Ramp, or Enterprise Support plan, the
 // SubscriptionRequiredException error message appears. For information about
-// changing your support plan, see AWS Support
+// changing your support plan, see Amazon Web Services Support
 // (http://aws.amazon.com/premiumsupport/).
 func (c *Client) AddCommunicationToCase(ctx context.Context, params *AddCommunicationToCaseInput, optFns ...func(*Options)) (*AddCommunicationToCaseOutput, error) {
 	if params == nil {

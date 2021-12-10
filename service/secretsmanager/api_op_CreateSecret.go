@@ -12,83 +12,27 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new secret. A secret in Secrets Manager consists of both the protected
-// secret data and the important information needed to manage the secret. Secrets
-// Manager stores the encrypted secret data in one of a collection of "versions"
-// associated with the secret. Each version contains a copy of the encrypted secret
-// data. Each version is associated with one or more "staging labels" that identify
-// where the version is in the rotation cycle. The SecretVersionsToStages field of
-// the secret contains the mapping of staging labels to the active versions of the
-// secret. Versions without a staging label are considered deprecated and not
-// included in the list. You provide the secret data to be encrypted by putting
-// text in either the SecretString parameter or binary data in the SecretBinary
-// parameter, but not both. If you include SecretString or SecretBinary then
-// Secrets Manager also creates an initial secret version and automatically
-// attaches the staging label AWSCURRENT to the new version.
-//
-// * If you call an
-// operation to encrypt or decrypt the SecretString or SecretBinary for a secret in
-// the same account as the calling user and that secret doesn't specify a Amazon
-// Web Services KMS encryption key, Secrets Manager uses the account's default
-// Amazon Web Services managed customer master key (CMK) with the alias
-// aws/secretsmanager. If this key doesn't already exist in your account then
-// Secrets Manager creates it for you automatically. All users and roles in the
-// same Amazon Web Services account automatically have access to use the default
-// CMK. Note that if an Secrets Manager API call results in Amazon Web Services
-// creating the account's Amazon Web Services-managed CMK, it can result in a
-// one-time significant delay in returning the result.
-//
-// * If the secret resides in
-// a different Amazon Web Services account from the credentials calling an API that
-// requires encryption or decryption of the secret value then you must create and
-// use a custom Amazon Web Services KMS CMK because you can't access the default
-// CMK for the account using credentials from a different Amazon Web Services
-// account. Store the ARN of the CMK in the secret when you create the secret or
-// when you update it by including it in the KMSKeyId. If you call an API that must
-// encrypt or decrypt SecretString or SecretBinary using credentials from a
-// different account then the Amazon Web Services KMS key policy must grant
-// cross-account access to that other account's user or role for both the
-// kms:GenerateDataKey and kms:Decrypt operations.
-//
-// Minimum permissions To run this
-// command, you must have the following permissions:
-//
-// *
-// secretsmanager:CreateSecret
-//
-// * kms:GenerateDataKey - needed only if you use a
-// customer-managed Amazon Web Services KMS key to encrypt the secret. You do not
-// need this permission to use the account default Amazon Web Services managed CMK
-// for Secrets Manager.
-//
-// * kms:Decrypt - needed only if you use a customer-managed
-// Amazon Web Services KMS key to encrypt the secret. You do not need this
-// permission to use the account default Amazon Web Services managed CMK for
-// Secrets Manager.
-//
-// * secretsmanager:TagResource - needed only if you include the
-// Tags parameter.
-//
-// Related operations
-//
-// * To delete a secret, use DeleteSecret.
-//
-// *
-// To modify an existing secret, use UpdateSecret.
-//
-// * To create a new version of a
-// secret, use PutSecretValue.
-//
-// * To retrieve the encrypted secure string and
-// secure binary values, use GetSecretValue.
-//
-// * To retrieve all other details for a
-// secret, use DescribeSecret. This does not include the encrypted secure string
-// and secure binary values.
-//
-// * To retrieve the list of secret versions associated
-// with the current secret, use DescribeSecret and examine the
-// SecretVersionsToStages response value.
+// Creates a new secret. A secret is a set of credentials, such as a user name and
+// password, that you store in an encrypted form in Secrets Manager. The secret
+// also includes the connection information to access a database or other service,
+// which Secrets Manager doesn't encrypt. A secret in Secrets Manager consists of
+// both the protected secret data and the important information needed to manage
+// the secret. For information about creating a secret in the console, see Create a
+// secret
+// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/manage_create-basic-secret.html).
+// To create a secret, you can provide the secret value to be encrypted in either
+// the SecretString parameter or the SecretBinary parameter, but not both. If you
+// include SecretString or SecretBinary then Secrets Manager creates an initial
+// secret version and automatically attaches the staging label AWSCURRENT to it. If
+// you don't specify an KMS encryption key, Secrets Manager uses the Amazon Web
+// Services managed key aws/secretsmanager. If this key doesn't already exist in
+// your account, then Secrets Manager creates it for you automatically. All users
+// and roles in the Amazon Web Services account automatically have access to use
+// aws/secretsmanager. Creating aws/secretsmanager can result in a one-time
+// significant delay in returning the result. If the secret is in a different
+// Amazon Web Services account from the credentials calling the API, then you can't
+// use aws/secretsmanager to encrypt the secret, and you must create and use a
+// customer managed KMS key.
 func (c *Client) CreateSecret(ctx context.Context, params *CreateSecretInput, optFns ...func(*Options)) (*CreateSecretOutput, error) {
 	if params == nil {
 		params = &CreateSecretInput{}
@@ -106,25 +50,23 @@ func (c *Client) CreateSecret(ctx context.Context, params *CreateSecretInput, op
 
 type CreateSecretInput struct {
 
-	// Specifies the friendly name of the new secret. The secret name must be ASCII
-	// letters, digits, or the following characters : /_+=.@- Do not end your secret
-	// name with a hyphen followed by six characters. If you do so, you risk confusion
-	// and unexpected results when searching for a secret by partial ARN. Secrets
-	// Manager automatically adds a hyphen and six random characters at the end of the
-	// ARN.
+	// The name of the new secret. The secret name can contain ASCII letters, numbers,
+	// and the following characters: /_+=.@- Do not end your secret name with a hyphen
+	// followed by six characters. If you do so, you risk confusion and unexpected
+	// results when searching for a secret by partial ARN. Secrets Manager
+	// automatically adds a hyphen and six random characters after the secret name at
+	// the end of the ARN.
 	//
 	// This member is required.
 	Name *string
 
-	// (Optional) Add a list of regions to replicate secrets. Secrets Manager
-	// replicates the KMSKeyID objects to the list of regions specified in the
-	// parameter.
+	// A list of Regions and KMS keys to replicate secrets.
 	AddReplicaRegions []types.ReplicaRegionType
 
-	// (Optional) If you include SecretString or SecretBinary, then an initial version
-	// is created as part of the secret, and this parameter specifies a unique
+	// If you include SecretString or SecretBinary, then Secrets Manager creates an
+	// initial version for the secret, and this parameter specifies the unique
 	// identifier for the new version. If you use the Amazon Web Services CLI or one of
-	// the Amazon Web Services SDK to call this operation, then you can leave this
+	// the Amazon Web Services SDKs to call this operation, then you can leave this
 	// parameter empty. The CLI or SDK generates a random UUID for you and includes it
 	// as the value for this parameter in the request. If you don't use the SDK and
 	// instead generate a raw HTTP request to the Secrets Manager service endpoint,
@@ -152,98 +94,80 @@ type CreateSecretInput struct {
 	// This value becomes the VersionId of the new version.
 	ClientRequestToken *string
 
-	// (Optional) Specifies a user-provided description of the secret.
+	// The description of the secret.
 	Description *string
 
-	// (Optional) If set, the replication overwrites a secret with the same name in the
-	// destination region.
+	// Specifies whether to overwrite a secret with the same name in the destination
+	// Region.
 	ForceOverwriteReplicaSecret bool
 
-	// (Optional) Specifies the ARN, Key ID, or alias of the Amazon Web Services KMS
-	// customer master key (CMK) to be used to encrypt the SecretString or SecretBinary
-	// values in the versions stored in this secret. You can specify any of the
-	// supported ways to identify a Amazon Web Services KMS key ID. If you need to
-	// reference a CMK in a different account, you can use only the key ARN or the
-	// alias ARN. If you don't specify this value, then Secrets Manager defaults to
-	// using the Amazon Web Services account's default CMK (the one named
-	// aws/secretsmanager). If a Amazon Web Services KMS CMK with that name doesn't yet
-	// exist, then Secrets Manager creates it for you automatically the first time it
-	// needs to encrypt a version's SecretString or SecretBinary fields. You can use
-	// the account default CMK to encrypt and decrypt only if you call this operation
-	// using credentials from the same account that owns the secret. If the secret
-	// resides in a different account, then you must create a custom CMK and specify
-	// the ARN in this field.
+	// The ARN, key ID, or alias of the KMS key that Secrets Manager uses to encrypt
+	// the secret value in the secret. To use a KMS key in a different account, use the
+	// key ARN or the alias ARN. If you don't specify this value, then Secrets Manager
+	// uses the key aws/secretsmanager. If that key doesn't yet exist, then Secrets
+	// Manager creates it for you automatically the first time it encrypts the secret
+	// value. If the secret is in a different Amazon Web Services account from the
+	// credentials calling the API, then you can't use aws/secretsmanager to encrypt
+	// the secret, and you must create and use a customer managed KMS key.
 	KmsKeyId *string
 
-	// (Optional) Specifies binary data that you want to encrypt and store in the new
-	// version of the secret. To use this parameter in the command-line tools, we
-	// recommend that you store your binary data in a file and then use the appropriate
-	// technique for your tool to pass the contents of the file as a parameter. Either
-	// SecretString or SecretBinary must have a value, but not both. They cannot both
-	// be empty. This parameter is not available using the Secrets Manager console. It
-	// can be accessed only by using the Amazon Web Services CLI or one of the Amazon
-	// Web Services SDKs.
+	// The binary data to encrypt and store in the new version of the secret. We
+	// recommend that you store your binary data in a file and then pass the contents
+	// of the file as a parameter. Either SecretString or SecretBinary must have a
+	// value, but not both. This parameter is not available in the Secrets Manager
+	// console.
 	SecretBinary []byte
 
-	// (Optional) Specifies text data that you want to encrypt and store in this new
-	// version of the secret. Either SecretString or SecretBinary must have a value,
-	// but not both. They cannot both be empty. If you create a secret by using the
-	// Secrets Manager console then Secrets Manager puts the protected secret text in
-	// only the SecretString parameter. The Secrets Manager console stores the
-	// information as a JSON structure of key/value pairs that the Lambda rotation
-	// function knows how to parse. For storing multiple values, we recommend that you
-	// use a JSON text string argument and specify key/value pairs. For more
-	// information, see Specifying parameter values for the Amazon Web Services CLI
-	// (https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters.html) in
-	// the Amazon Web Services CLI User Guide.
+	// The text data to encrypt and store in this new version of the secret. We
+	// recommend you use a JSON structure of key/value pairs for your secret value.
+	// Either SecretString or SecretBinary must have a value, but not both. If you
+	// create a secret by using the Secrets Manager console then Secrets Manager puts
+	// the protected secret text in only the SecretString parameter. The Secrets
+	// Manager console stores the information as a JSON structure of key/value pairs
+	// that a Lambda rotation function can parse.
 	SecretString *string
 
-	// (Optional) Specifies a list of user-defined tags that are attached to the
-	// secret. Each tag is a "Key" and "Value" pair of strings. This operation only
-	// appends tags to the existing list of tags. To remove tags, you must use
-	// UntagResource.
-	//
-	// * Secrets Manager tag key names are case sensitive. A tag with
-	// the key "ABC" is a different tag from one with key "abc".
-	//
-	// * If you check tags
-	// in IAM policy Condition elements as part of your security strategy, then adding
-	// or removing a tag can change permissions. If the successful completion of this
-	// operation would result in you losing your permissions for this secret, then this
-	// operation is blocked and returns an Access Denied error.
-	//
-	// This parameter
-	// requires a JSON text string argument. For information on how to format a JSON
-	// parameter for the various command line tool environments, see Using JSON for
-	// Parameters
-	// (https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json)
-	// in the CLI User Guide. For example:
+	// A list of tags to attach to the secret. Each tag is a key and value pair of
+	// strings in a JSON text string, for example:
 	// [{"Key":"CostCenter","Value":"12345"},{"Key":"environment","Value":"production"}]
+	// Secrets Manager tag key names are case sensitive. A tag with the key "ABC" is a
+	// different tag from one with key "abc". If you check tags in permissions policies
+	// as part of your security strategy, then adding or removing a tag can change
+	// permissions. If the completion of this operation would result in you losing your
+	// permissions for this secret, then Secrets Manager blocks the operation and
+	// returns an Access Denied error. For more information, see Control access to
+	// secrets using tags
+	// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access_examples.html#tag-secrets-abac)
+	// and Limit access to identities with tags that match secrets' tags
+	// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access_examples.html#auth-and-access_tags2).
+	// For information about how to format a JSON parameter for the various command
+	// line tool environments, see Using JSON for Parameters
+	// (https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json).
 	// If your command-line tool or SDK requires quotation marks around the parameter,
 	// you should use single quotes to avoid confusion with the double quotes required
-	// in the JSON text. The following basic restrictions apply to tags:
+	// in the JSON text. The following restrictions apply to tags:
 	//
-	// * Maximum
-	// number of tags per secret—50
+	// * Maximum number of
+	// tags per secret: 50
 	//
-	// * Maximum key length—127 Unicode characters in
-	// UTF-8
+	// * Maximum key length: 127 Unicode characters in UTF-8
 	//
-	// * Maximum value length—255 Unicode characters in UTF-8
+	// *
+	// Maximum value length: 255 Unicode characters in UTF-8
 	//
-	// * Tag keys and
-	// values are case sensitive.
+	// * Tag keys and values are
+	// case sensitive.
 	//
-	// * Do not use the aws: prefix in your tag names or
-	// values because Amazon Web Services reserves it for Amazon Web Services use. You
-	// can't edit or delete tag names or values with this prefix. Tags with this prefix
-	// do not count against your tags per secret limit.
+	// * Do not use the aws: prefix in your tag names or values
+	// because Amazon Web Services reserves it for Amazon Web Services use. You can't
+	// edit or delete tag names or values with this prefix. Tags with this prefix do
+	// not count against your tags per secret limit.
 	//
-	// * If you use your tagging
-	// schema across multiple services and resources, remember other services might
-	// have restrictions on allowed characters. Generally allowed characters: letters,
-	// spaces, and numbers representable in UTF-8, plus the following special
-	// characters: + - = . _ : / @.
+	// * If you use your tagging schema
+	// across multiple services and resources, other services might have restrictions
+	// on allowed characters. Generally allowed characters: letters, spaces, and
+	// numbers representable in UTF-8, plus the following special characters: + - = . _
+	// : / @.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -251,23 +175,28 @@ type CreateSecretInput struct {
 
 type CreateSecretOutput struct {
 
-	// The Amazon Resource Name (ARN) of the secret that you just created. Secrets
-	// Manager automatically adds several random characters to the name at the end of
-	// the ARN when you initially create a secret. This affects only the ARN and not
-	// the actual friendly name. This ensures that if you create a new secret with the
-	// same name as an old secret that you previously deleted, then users with access
-	// to the old secret don't automatically get access to the new secret because the
-	// ARNs are different.
+	// The ARN of the new secret. The ARN includes the name of the secret followed by
+	// six random characters. This ensures that if you create a new secret with the
+	// same name as a deleted secret, then users with access to the old secret don't
+	// get access to the new secret because the ARNs are different.
 	ARN *string
 
-	// The friendly name of the secret that you just created.
+	// The name of the new secret.
 	Name *string
 
-	// Describes a list of replication status objects as InProgress, Failed or InSync.
+	// A list of the replicas of this secret and their status:
+	//
+	// * Failed, which
+	// indicates that the replica was not created.
+	//
+	// * InProgress, which indicates that
+	// Secrets Manager is in the process of creating the replica.
+	//
+	// * InSync, which
+	// indicates that the replica was created.
 	ReplicationStatus []types.ReplicationStatusType
 
-	// The unique identifier associated with the version of the secret you just
-	// created.
+	// The unique identifier associated with the version of the new secret.
 	VersionId *string
 
 	// Metadata pertaining to the operation's result.

@@ -31,7 +31,7 @@ func (c *Client) CreateSavingsPlan(ctx context.Context, params *CreateSavingsPla
 type CreateSavingsPlanInput struct {
 
 	// The hourly commitment, in USD. This is a value between 0.001 and 1 million. You
-	// cannot specify more than three digits after the decimal point.
+	// cannot specify more than five digits after the decimal point.
 	//
 	// This member is required.
 	Commitment *string

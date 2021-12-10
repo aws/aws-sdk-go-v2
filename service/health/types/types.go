@@ -547,7 +547,7 @@ type OrganizationEventDetailsErrorItem struct {
 	//
 	// * Your Amazon Web Services account doesn't include
 	// the Amazon Web Services Support plan required to use the Health API. You must
-	// have either a Business or Enterprise Support plan.
+	// have either a Business, Enterprise On-Ramp, or Enterprise Support plan.
 	ErrorMessage *string
 
 	// The name of the error.

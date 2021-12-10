@@ -42,10 +42,16 @@ type UpdateUsagePlanInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents a usage plan than can specify who can assess associated API stages
-// with specified request limits and quotas. In a usage plan, you associate an API
-// by specifying the API's Id and a stage name of the specified API. You add plan
-// customers by adding API keys to the plan. Create and Use Usage Plans
+// Represents a usage plan used to specify who can assess associated API stages.
+// Optionally, target request rate and quota limits can be set. In some cases
+// clients can exceed the targets that you set. Don’t rely on usage plans to
+// control costs. Consider using AWS Budgets
+// (https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html)
+// to monitor costs and AWS WAF
+// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html) to
+// manage API requests. In a usage plan, you associate an API by specifying the
+// API's Id and a stage name of the specified API. You add plan customers by adding
+// API keys to the plan. Create and Use Usage Plans
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html)
 type UpdateUsagePlanOutput struct {
 
@@ -65,13 +71,14 @@ type UpdateUsagePlanOutput struct {
 	// product on AWS Marketplace.
 	ProductCode *string
 
-	// The maximum number of permitted requests per a given unit time interval.
+	// The target maximum number of permitted requests per a given unit time interval.
 	Quota *types.QuotaSettings
 
 	// The collection of tags. Each tag element is associated with a given resource.
 	Tags map[string]string
 
-	// The request throttle limits of a usage plan.
+	// Map containing method level throttling information for API stage in a usage
+	// plan.
 	Throttle *types.ThrottleSettings
 
 	// Metadata pertaining to the operation's result.

@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Allows application import from AWS Migration Hub.
+// Allows application import from Migration Hub.
 func (c *Client) ImportAppCatalog(ctx context.Context, params *ImportAppCatalogInput, optFns ...func(*Options)) (*ImportAppCatalogOutput, error) {
 	if params == nil {
 		params = &ImportAppCatalogInput{}
@@ -29,10 +29,10 @@ func (c *Client) ImportAppCatalog(ctx context.Context, params *ImportAppCatalogI
 type ImportAppCatalogInput struct {
 
 	// The name of the service role. If you omit this parameter, we create a
-	// service-linked role for AWS Migration Hub in your account. Otherwise, the role
-	// that you provide must have the policy and trust policy
+	// service-linked role for Migration Hub in your account. Otherwise, the role that
+	// you provide must have the policy and trust policy
 	// (https://docs.aws.amazon.com/migrationhub/latest/ug/new-customer-setup.html#sms-managed)
-	// described in the AWS Migration Hub User Guide.
+	// described in the Migration Hub User Guide.
 	RoleName *string
 
 	noSmithyDocumentSerde

@@ -10,8 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes the secret from replication and promotes the secret to a regional secret
-// in the replica Region.
+// Removes the link between the replica secret and the primary secret and promotes
+// the replica to a primary secret in the replica Region. You must call this
+// operation from the Region in which you want to promote the replica to a primary
+// secret.
 func (c *Client) StopReplicationToReplica(ctx context.Context, params *StopReplicationToReplicaInput, optFns ...func(*Options)) (*StopReplicationToReplicaOutput, error) {
 	if params == nil {
 		params = &StopReplicationToReplicaInput{}
@@ -29,7 +31,7 @@ func (c *Client) StopReplicationToReplica(ctx context.Context, params *StopRepli
 
 type StopReplicationToReplicaInput struct {
 
-	// Response to StopReplicationToReplica of a secret, based on the SecretId.
+	// The ARN of the primary secret.
 	//
 	// This member is required.
 	SecretId *string
@@ -39,7 +41,8 @@ type StopReplicationToReplicaInput struct {
 
 type StopReplicationToReplicaOutput struct {
 
-	// Response StopReplicationToReplica of a secret, based on the ARN,.
+	// The ARN of the promoted secret. The ARN is the same as the original primary
+	// secret except the Region is changed.
 	ARN *string
 
 	// Metadata pertaining to the operation's result.

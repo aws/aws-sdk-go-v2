@@ -12,61 +12,29 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Configures and starts the asynchronous process of rotating this secret. If you
-// include the configuration parameters, the operation sets those values for the
-// secret and then immediately starts a rotation. If you do not include the
+// Configures and starts the asynchronous process of rotating the secret. If you
+// include the configuration parameters, the operation sets the values for the
+// secret and then immediately starts a rotation. If you don't include the
 // configuration parameters, the operation starts a rotation with the values
-// already stored in the secret. After the rotation completes, the protected
-// service and its clients all use the new version of the secret. This required
-// configuration information includes the ARN of an Amazon Web Services Lambda
-// function and optionally, the time between scheduled rotations. The Lambda
-// rotation function creates a new version of the secret and creates or updates the
-// credentials on the protected service to match. After testing the new
-// credentials, the function marks the new secret with the staging label AWSCURRENT
-// so that your clients all immediately begin to use the new version. For more
-// information about rotating secrets and how to configure a Lambda function to
-// rotate the secrets for your protected service, see Rotating Secrets in Amazon
-// Web Services Secrets Manager
-// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets.html)
-// in the Amazon Web Services Secrets Manager User Guide. Secrets Manager schedules
-// the next rotation when the previous one completes. Secrets Manager schedules the
-// date by adding the rotation interval (number of days) to the actual date of the
-// last rotation. The service chooses the hour within that 24-hour date window
-// randomly. The minute is also chosen somewhat randomly, but weighted towards the
-// top of the hour and influenced by a variety of factors that help distribute
-// load. The rotation function must end with the versions of the secret in one of
-// two states:
-//
-// * The AWSPENDING and AWSCURRENT staging labels are attached to the
-// same version of the secret, or
-//
-// * The AWSPENDING staging label is not attached
-// to any version of the secret.
-//
-// If the AWSPENDING staging label is present but
-// not attached to the same version as AWSCURRENT then any later invocation of
-// RotateSecret assumes that a previous rotation request is still in progress and
-// returns an error. Minimum permissions To run this command, you must have the
-// following permissions:
-//
-// * secretsmanager:RotateSecret
-//
-// * lambda:InvokeFunction
-// (on the function specified in the secret's metadata)
-//
-// Related operations
-//
-// * To
-// list the secrets in your account, use ListSecrets.
-//
-// * To get the details for a
-// version of a secret, use DescribeSecret.
-//
-// * To create a new version of a secret,
-// use CreateSecret.
-//
-// * To attach staging labels to or remove staging labels from a
-// version of a secret, use UpdateSecretVersionStage.
+// already stored in the secret. For more information about rotation, see Rotate
+// secrets
+// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets.html).
+// To configure rotation, you include the ARN of an Amazon Web Services Lambda
+// function and the schedule for the rotation. The Lambda rotation function creates
+// a new version of the secret and creates or updates the credentials on the
+// database or service to match. After testing the new credentials, the function
+// marks the new secret version with the staging label AWSCURRENT. Then anyone who
+// retrieves the secret gets the new version. For more information, see How
+// rotation works
+// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotate-secrets_how.html).
+// When rotation is successful, the AWSPENDING staging label might be attached to
+// the same version as the AWSCURRENT version, or it might not be attached to any
+// version. If the AWSPENDING staging label is present but not attached to the same
+// version as AWSCURRENT, then any later invocation of RotateSecret assumes that a
+// previous rotation request is still in progress and returns an error. To run this
+// command, you must have secretsmanager:RotateSecret permissions and
+// lambda:InvokeFunction permissions on the function specified in the secret's
+// metadata.
 func (c *Client) RotateSecret(ctx context.Context, params *RotateSecretInput, optFns ...func(*Options)) (*RotateSecretOutput, error) {
 	if params == nil {
 		params = &RotateSecretInput{}
@@ -84,31 +52,29 @@ func (c *Client) RotateSecret(ctx context.Context, params *RotateSecretInput, op
 
 type RotateSecretInput struct {
 
-	// Specifies the secret that you want to rotate. You can specify either the Amazon
-	// Resource Name (ARN) or the friendly name of the secret. For an ARN, we recommend
-	// that you specify a complete ARN rather than a partial ARN.
+	// The ARN or name of the secret to rotate. For an ARN, we recommend that you
+	// specify a complete ARN rather than a partial ARN.
 	//
 	// This member is required.
 	SecretId *string
 
-	// (Optional) Specifies a unique identifier for the new version of the secret that
-	// helps ensure idempotency. If you use the Amazon Web Services CLI or one of the
-	// Amazon Web Services SDK to call this operation, then you can leave this
-	// parameter empty. The CLI or SDK generates a random UUID for you and includes
-	// that in the request for this parameter. If you don't use the SDK and instead
-	// generate a raw HTTP request to the Secrets Manager service endpoint, then you
-	// must generate a ClientRequestToken yourself for new versions and include that
-	// value in the request. You only need to specify your own value if you implement
-	// your own retry logic and want to ensure that a given secret is not created
-	// twice. We recommend that you generate a UUID-type
-	// (https://wikipedia.org/wiki/Universally_unique_identifier) value to ensure
-	// uniqueness within the specified secret. Secrets Manager uses this value to
-	// prevent the accidental creation of duplicate versions if there are failures and
-	// retries during the function's processing. This value becomes the VersionId of
-	// the new version.
+	// A unique identifier for the new version of the secret that helps ensure
+	// idempotency. Secrets Manager uses this value to prevent the accidental creation
+	// of duplicate versions if there are failures and retries during rotation. This
+	// value becomes the VersionId of the new version. If you use the Amazon Web
+	// Services CLI or one of the Amazon Web Services SDK to call this operation, then
+	// you can leave this parameter empty. The CLI or SDK generates a random UUID for
+	// you and includes that in the request for this parameter. If you don't use the
+	// SDK and instead generate a raw HTTP request to the Secrets Manager service
+	// endpoint, then you must generate a ClientRequestToken yourself for new versions
+	// and include that value in the request. You only need to specify this value if
+	// you implement your own retry logic and you want to ensure that Secrets Manager
+	// doesn't attempt to create a secret version twice. We recommend that you generate
+	// a UUID-type (https://wikipedia.org/wiki/Universally_unique_identifier) value to
+	// ensure uniqueness within the specified secret.
 	ClientRequestToken *string
 
-	// (Optional) Specifies the ARN of the Lambda function that can rotate the secret.
+	// The ARN of the Lambda rotation function that can rotate the secret.
 	RotationLambdaARN *string
 
 	// A structure that defines the rotation configuration for this secret.
@@ -122,11 +88,10 @@ type RotateSecretOutput struct {
 	// The ARN of the secret.
 	ARN *string
 
-	// The friendly name of the secret.
+	// The name of the secret.
 	Name *string
 
-	// The ID of the new version of the secret created by the rotation started by this
-	// request.
+	// The ID of the new version of the secret.
 	VersionId *string
 
 	// Metadata pertaining to the operation's result.

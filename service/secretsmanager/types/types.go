@@ -8,26 +8,45 @@ import (
 )
 
 // Allows you to add filters when you use the search function in Secrets Manager.
+// For more information, see Find secrets in Secrets Manager
+// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/manage_search-secret.html).
 type Filter struct {
 
-	// Filters your list of secrets by a specific key.
+	// The following are keys you can use:
+	//
+	// * description: Prefix match, not
+	// case-sensitive.
+	//
+	// * name: Prefix match, case-sensitive.
+	//
+	// * tag-key: Prefix match,
+	// case-sensitive.
+	//
+	// * tag-value: Prefix match, case-sensitive.
+	//
+	// * primary-region:
+	// Prefix match, case-sensitive.
+	//
+	// * all: Breaks the filter value string into words
+	// and then searches all attributes for matches. Not case-sensitive.
 	Key FilterNameStringType
 
-	// Filters your list of secrets by a specific value. You can prefix your search
-	// value with an exclamation mark (!) in order to perform negation filters.
+	// The keyword to filter for. You can prefix your search value with an exclamation
+	// mark (!) in order to perform negation filters.
 	Values []string
 
 	noSmithyDocumentSerde
 }
 
-// (Optional) Custom type consisting of a Region (required) and the KmsKeyId which
-// can be an ARN, Key ID, or Alias.
+// A custom type that specifies a Region and the KmsKeyId for a replica secret.
 type ReplicaRegionType struct {
 
-	// Can be an ARN, Key ID, or Alias.
+	// The ARN, key ID, or alias of the KMS key to encrypt the secret. If you don't
+	// include this field, Secrets Manager uses aws/secretsmanager.
 	KmsKeyId *string
 
-	// Describes a single instance of Region objects.
+	// A Region code. For a list of Region codes, see Name and code of Regions
+	// (https://docs.aws.amazon.com/general/latest/gr/rande.html#regional-endpoints).
 	Region *string
 
 	noSmithyDocumentSerde
@@ -75,10 +94,7 @@ type RotationRulesType struct {
 // GetSecretValue operation.
 type SecretListEntry struct {
 
-	// The Amazon Resource Name (ARN) of the secret. For more information about ARNs in
-	// Secrets Manager, see Policy Resources
-	// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#iam-resources)
-	// in the Amazon Web Services Secrets Manager User Guide.
+	// The Amazon Resource Name (ARN) of the secret.
 	ARN *string
 
 	// The date and time when a secret was created.
@@ -93,11 +109,9 @@ type SecretListEntry struct {
 	// The user-provided description of the secret.
 	Description *string
 
-	// The ARN or alias of the Amazon Web Services KMS customer master key (CMK) used
-	// to encrypt the SecretString and SecretBinary fields in each version of the
-	// secret. If you don't provide a key, then Secrets Manager defaults to encrypting
-	// the secret fields with the default KMS CMK, the key named awssecretsmanager, for
-	// this account.
+	// The ARN of the KMS key that Secrets Manager uses to encrypt the secret value. If
+	// the secret is encrypted with the Amazon Web Services managed key
+	// aws/secretsmanager, this field is omitted.
 	KmsKeyId *string
 
 	// The last date that this secret was accessed. This value is truncated to midnight

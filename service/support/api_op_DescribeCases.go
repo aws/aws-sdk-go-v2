@@ -29,13 +29,14 @@ import (
 // for 12 months after creation. If a case was created more than 12 months ago, a
 // request might return an error.
 //
-// * You must have a Business or Enterprise Support
-// plan to use the AWS Support API.
+// * You must have a Business, Enterprise On-Ramp,
+// or Enterprise Support plan to use the Amazon Web Services Support API.
 //
-// * If you call the AWS Support API from an
-// account that does not have a Business or Enterprise Support plan, the
+// * If you
+// call the Amazon Web Services Support API from an account that does not have a
+// Business, Enterprise On-Ramp, or Enterprise Support plan, the
 // SubscriptionRequiredException error message appears. For information about
-// changing your support plan, see AWS Support
+// changing your support plan, see Amazon Web Services Support
 // (http://aws.amazon.com/premiumsupport/).
 func (c *Client) DescribeCases(ctx context.Context, params *DescribeCasesInput, optFns ...func(*Options)) (*DescribeCasesOutput, error) {
 	if params == nil {
@@ -66,7 +67,8 @@ type DescribeCasesInput struct {
 	// of cases is 100.
 	CaseIdList []string
 
-	// The ID displayed for a case in the AWS Support Center user interface.
+	// The ID displayed for a case in the Amazon Web Services Support Center user
+	// interface.
 	DisplayId *string
 
 	// Specifies whether to include communications in the DescribeCases response. By
@@ -77,9 +79,10 @@ type DescribeCasesInput struct {
 	// response. By default, resolved cases aren't included.
 	IncludeResolvedCases bool
 
-	// The ISO 639-1 code for the language in which AWS provides support. AWS Support
-	// currently supports English ("en") and Japanese ("ja"). Language parameters must
-	// be passed explicitly for operations that take them.
+	// The ISO 639-1 code for the language in which Amazon Web Services provides
+	// support. Amazon Web Services Support currently supports English ("en") and
+	// Japanese ("ja"). Language parameters must be passed explicitly for operations
+	// that take them.
 	Language *string
 
 	// The maximum number of results to return before paginating.

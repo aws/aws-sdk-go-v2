@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the results of the AWS Trusted Advisor check that has the specified
-// check ID. You can get the check IDs by calling the DescribeTrustedAdvisorChecks
+// Returns the results of the Trusted Advisor check that has the specified check
+// ID. You can get the check IDs by calling the DescribeTrustedAdvisorChecks
 // operation. The response contains a TrustedAdvisorCheckResult object, which
 // contains these three objects:
 //
@@ -35,13 +35,15 @@ import (
 // * checkId - The unique identifier for
 // the check.
 //
-// * You must have a Business or Enterprise Support plan to use the AWS
-// Support API.
+// * You must have a Business, Enterprise On-Ramp, or Enterprise
+// Support plan to use the Amazon Web Services Support API.
 //
-// * If you call the AWS Support API from an account that does not
-// have a Business or Enterprise Support plan, the SubscriptionRequiredException
-// error message appears. For information about changing your support plan, see AWS
-// Support (http://aws.amazon.com/premiumsupport/).
+// * If you call the
+// Amazon Web Services Support API from an account that does not have a Business,
+// Enterprise On-Ramp, or Enterprise Support plan, the
+// SubscriptionRequiredException error message appears. For information about
+// changing your support plan, see Amazon Web Services Support
+// (http://aws.amazon.com/premiumsupport/).
 func (c *Client) DescribeTrustedAdvisorCheckResult(ctx context.Context, params *DescribeTrustedAdvisorCheckResultInput, optFns ...func(*Options)) (*DescribeTrustedAdvisorCheckResultOutput, error) {
 	if params == nil {
 		params = &DescribeTrustedAdvisorCheckResultInput{}
@@ -65,9 +67,10 @@ type DescribeTrustedAdvisorCheckResultInput struct {
 	// This member is required.
 	CheckId *string
 
-	// The ISO 639-1 code for the language in which AWS provides support. AWS Support
-	// currently supports English ("en") and Japanese ("ja"). Language parameters must
-	// be passed explicitly for operations that take them.
+	// The ISO 639-1 code for the language in which Amazon Web Services provides
+	// support. Amazon Web Services Support currently supports English ("en") and
+	// Japanese ("ja"). Language parameters must be passed explicitly for operations
+	// that take them.
 	Language *string
 
 	noSmithyDocumentSerde

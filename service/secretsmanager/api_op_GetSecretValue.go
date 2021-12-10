@@ -12,24 +12,13 @@ import (
 )
 
 // Retrieves the contents of the encrypted fields SecretString or SecretBinary from
-// the specified version of a secret, whichever contains content. Minimum
-// permissions To run this command, you must have the following permissions:
-//
-// *
-// secretsmanager:GetSecretValue
-//
-// * kms:Decrypt - required only if you use a
-// customer-managed Amazon Web Services KMS key to encrypt the secret. You do not
-// need this permission to use the account's default Amazon Web Services managed
-// CMK for Secrets Manager.
-//
-// Related operations
-//
-// * To create a new version of the
-// secret with different encrypted information, use PutSecretValue.
-//
-// * To retrieve
-// the non-encrypted details for the secret, use DescribeSecret.
+// the specified version of a secret, whichever contains content. For information
+// about retrieving the secret value in the console, see Retrieve secrets
+// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieving-secrets.html).
+// To run this command, you must have secretsmanager:GetSecretValue permissions. If
+// the secret is encrypted using a customer-managed key instead of the Amazon Web
+// Services managed key aws/secretsmanager, then you also need kms:Decrypt
+// permissions for that key.
 func (c *Client) GetSecretValue(ctx context.Context, params *GetSecretValueInput, optFns ...func(*Options)) (*GetSecretValueOutput, error) {
 	if params == nil {
 		params = &GetSecretValueInput{}
@@ -47,29 +36,25 @@ func (c *Client) GetSecretValue(ctx context.Context, params *GetSecretValueInput
 
 type GetSecretValueInput struct {
 
-	// Specifies the secret containing the version that you want to retrieve. You can
-	// specify either the Amazon Resource Name (ARN) or the friendly name of the
-	// secret. For an ARN, we recommend that you specify a complete ARN rather than a
-	// partial ARN.
+	// The ARN or name of the secret to retrieve. For an ARN, we recommend that you
+	// specify a complete ARN rather than a partial ARN.
 	//
 	// This member is required.
 	SecretId *string
 
-	// Specifies the unique identifier of the version of the secret that you want to
-	// retrieve. If you specify both this parameter and VersionStage, the two
-	// parameters must refer to the same secret version. If you don't specify either a
-	// VersionStage or VersionId then the default is to perform the operation on the
-	// version with the VersionStage value of AWSCURRENT. This value is typically a
+	// The unique identifier of the version of the secret to retrieve. If you include
+	// both this parameter and VersionStage, the two parameters must refer to the same
+	// secret version. If you don't specify either a VersionStage or VersionId, then
+	// Secrets Manager returns the AWSCURRENT version. This value is typically a
 	// UUID-type (https://wikipedia.org/wiki/Universally_unique_identifier) value with
 	// 32 hexadecimal digits.
 	VersionId *string
 
-	// Specifies the secret version that you want to retrieve by the staging label
-	// attached to the version. Staging labels are used to keep track of different
-	// versions during the rotation process. If you specify both this parameter and
-	// VersionId, the two parameters must refer to the same secret version . If you
-	// don't specify either a VersionStage or VersionId, then the default is to perform
-	// the operation on the version with the VersionStage value of AWSCURRENT.
+	// The staging label of the version of the secret to retrieve. Secrets Manager uses
+	// staging labels to keep track of different versions during the rotation process.
+	// If you include both this parameter and VersionId, the two parameters must refer
+	// to the same secret version. If you don't specify either a VersionStage or
+	// VersionId, Secrets Manager returns the AWSCURRENT version.
 	VersionStage *string
 
 	noSmithyDocumentSerde
@@ -80,31 +65,26 @@ type GetSecretValueOutput struct {
 	// The ARN of the secret.
 	ARN *string
 
-	// The date and time that this version of the secret was created.
+	// The date and time that this version of the secret was created. If you don't
+	// specify which version in VersionId or VersionStage, then Secrets Manager uses
+	// the AWSCURRENT version.
 	CreatedDate *time.Time
 
 	// The friendly name of the secret.
 	Name *string
 
-	// The decrypted part of the protected secret information that was originally
-	// provided as binary data in the form of a byte array. The response parameter
-	// represents the binary data as a base64-encoded
-	// (https://tools.ietf.org/html/rfc4648#section-4) string. This parameter is not
-	// used if the secret is created by the Secrets Manager console. If you store
-	// custom information in this field of the secret, then you must code your Lambda
-	// rotation function to parse and interpret whatever you store in the SecretString
-	// or SecretBinary fields.
+	// The decrypted secret value, if the secret value was originally provided as
+	// binary data in the form of a byte array. The response parameter represents the
+	// binary data as a base64-encoded (https://tools.ietf.org/html/rfc4648#section-4)
+	// string. If the secret was created by using the Secrets Manager console, or if
+	// the secret value was originally provided as a string, then this field is
+	// omitted. The secret value appears in SecretString instead.
 	SecretBinary []byte
 
-	// The decrypted part of the protected secret information that was originally
-	// provided as a string. If you create this secret by using the Secrets Manager
-	// console then only the SecretString parameter contains data. Secrets Manager
-	// stores the information as a JSON structure of key/value pairs that the Lambda
-	// rotation function knows how to parse. If you store custom information in the
-	// secret by using the CreateSecret, UpdateSecret, or PutSecretValue API operations
-	// instead of the Secrets Manager console, or by using the Other secret type in the
-	// console, then you must code your Lambda rotation function to parse and interpret
-	// those values.
+	// The decrypted secret value, if the secret value was originally provided as a
+	// string or through the Secrets Manager console. If this secret was created by
+	// using the console, then Secrets Manager stores the information as a JSON
+	// structure of key/value pairs.
 	SecretString *string
 
 	// The unique identifier of this version of the secret.

@@ -1322,7 +1322,7 @@ type PatchOperation struct {
 // Quotas configured for a usage plan.
 type QuotaSettings struct {
 
-	// The maximum number of requests that can be made in a given time period.
+	// The target maximum number of requests that can be made in a given time period.
 	Limit int32
 
 	// The day that a time period starts. For example, with a time period of WEEK, an
@@ -1651,12 +1651,11 @@ type StageKey struct {
 // The API request rate limits.
 type ThrottleSettings struct {
 
-	// The API request burst limit, the maximum rate limit over a time ranging from one
-	// to a few seconds, depending upon whether the underlying token bucket is at its
-	// full capacity.
+	// The API target request burst rate limit. This allows more requests through for a
+	// period of time than the target rate limit.
 	BurstLimit int32
 
-	// The API request steady-state rate limit.
+	// The API target request rate limit.
 	RateLimit float64
 
 	noSmithyDocumentSerde
@@ -1677,10 +1676,16 @@ type TlsConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Represents a usage plan than can specify who can assess associated API stages
-// with specified request limits and quotas. In a usage plan, you associate an API
-// by specifying the API's Id and a stage name of the specified API. You add plan
-// customers by adding API keys to the plan. Create and Use Usage Plans
+// Represents a usage plan used to specify who can assess associated API stages.
+// Optionally, target request rate and quota limits can be set. In some cases
+// clients can exceed the targets that you set. Don’t rely on usage plans to
+// control costs. Consider using AWS Budgets
+// (https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html)
+// to monitor costs and AWS WAF
+// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html) to
+// manage API requests. In a usage plan, you associate an API by specifying the
+// API's Id and a stage name of the specified API. You add plan customers by adding
+// API keys to the plan. Create and Use Usage Plans
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html)
 type UsagePlan struct {
 
@@ -1700,13 +1705,14 @@ type UsagePlan struct {
 	// product on AWS Marketplace.
 	ProductCode *string
 
-	// The maximum number of permitted requests per a given unit time interval.
+	// The target maximum number of permitted requests per a given unit time interval.
 	Quota *QuotaSettings
 
 	// The collection of tags. Each tag element is associated with a given resource.
 	Tags map[string]string
 
-	// The request throttle limits of a usage plan.
+	// Map containing method level throttling information for API stage in a usage
+	// plan.
 	Throttle *ThrottleSettings
 
 	noSmithyDocumentSerde

@@ -10,45 +10,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disables automatic scheduled rotation and cancels the rotation of a secret if
-// currently in progress. To re-enable scheduled rotation, call RotateSecret with
-// AutomaticallyRotateAfterDays set to a value greater than 0. This immediately
-// rotates your secret and then enables the automatic schedule. If you cancel a
-// rotation while in progress, it can leave the VersionStage labels in an
+// Turns off automatic rotation, and if a rotation is currently in progress,
+// cancels the rotation. To turn on automatic rotation again, call RotateSecret. If
+// you cancel a rotation in progress, it can leave the VersionStage labels in an
 // unexpected state. Depending on the step of the rotation in progress, you might
 // need to remove the staging label AWSPENDING from the partially created version,
-// specified by the VersionId response value. You should also evaluate the
-// partially rotated new version to see if it should be deleted, which you can do
-// by removing all staging labels from the new version VersionStage field. To
-// successfully start a rotation, the staging label AWSPENDING must be in one of
-// the following states:
-//
-// * Not attached to any version at all
-//
-// * Attached to the
-// same version as the staging label AWSCURRENT
-//
-// If the staging label AWSPENDING
-// attached to a different version than the version with AWSCURRENT then the
-// attempt to rotate fails. Minimum permissions To run this command, you must have
-// the following permissions:
-//
-// * secretsmanager:CancelRotateSecret
-//
-// Related
-// operations
-//
-// * To configure rotation for a secret or to manually trigger a
-// rotation, use RotateSecret.
-//
-// * To get the rotation configuration details for a
-// secret, use DescribeSecret.
-//
-// * To list all of the currently available secrets,
-// use ListSecrets.
-//
-// * To list all of the versions currently associated with a
-// secret, use ListSecretVersionIds.
+// specified by the VersionId response value. We recommend you also evaluate the
+// partially rotated new version to see if it should be deleted. You can delete a
+// version by removing all staging labels from it.
 func (c *Client) CancelRotateSecret(ctx context.Context, params *CancelRotateSecretInput, optFns ...func(*Options)) (*CancelRotateSecretOutput, error) {
 	if params == nil {
 		params = &CancelRotateSecretInput{}
@@ -66,9 +35,8 @@ func (c *Client) CancelRotateSecret(ctx context.Context, params *CancelRotateSec
 
 type CancelRotateSecretInput struct {
 
-	// Specifies the secret to cancel a rotation request. You can specify either the
-	// Amazon Resource Name (ARN) or the friendly name of the secret. For an ARN, we
-	// recommend that you specify a complete ARN rather than a partial ARN.
+	// The ARN or name of the secret. For an ARN, we recommend that you specify a
+	// complete ARN rather than a partial ARN.
 	//
 	// This member is required.
 	SecretId *string
@@ -78,17 +46,17 @@ type CancelRotateSecretInput struct {
 
 type CancelRotateSecretOutput struct {
 
-	// The ARN of the secret for which rotation was canceled.
+	// The ARN of the secret.
 	ARN *string
 
-	// The friendly name of the secret for which rotation was canceled.
+	// The name of the secret.
 	Name *string
 
 	// The unique identifier of the version of the secret created during the rotation.
 	// This version might not be complete, and should be evaluated for possible
-	// deletion. At the very least, you should remove the VersionStage value AWSPENDING
-	// to enable this version to be deleted. Failing to clean up a cancelled rotation
-	// can block you from successfully starting future rotations.
+	// deletion. We recommend that you remove the VersionStage value AWSPENDING from
+	// this version so that Secrets Manager can delete it. Failing to clean up a
+	// cancelled rotation can block you from starting future rotations.
 	VersionId *string
 
 	// Metadata pertaining to the operation's result.

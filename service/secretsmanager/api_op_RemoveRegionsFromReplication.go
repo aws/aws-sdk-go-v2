@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Remove regions from replication.
+// For a secret that is replicated to other Regions, deletes the secret replicas
+// from the Regions you specify.
 func (c *Client) RemoveRegionsFromReplication(ctx context.Context, params *RemoveRegionsFromReplicationInput, optFns ...func(*Options)) (*RemoveRegionsFromReplicationOutput, error) {
 	if params == nil {
 		params = &RemoveRegionsFromReplicationInput{}
@@ -29,12 +30,12 @@ func (c *Client) RemoveRegionsFromReplication(ctx context.Context, params *Remov
 
 type RemoveRegionsFromReplicationInput struct {
 
-	// Remove replication from specific Regions.
+	// The Regions of the replicas to remove.
 	//
 	// This member is required.
 	RemoveReplicaRegions []string
 
-	// Remove a secret by SecretId from replica Regions.
+	// The ARN or name of the secret.
 	//
 	// This member is required.
 	SecretId *string
@@ -44,11 +45,10 @@ type RemoveRegionsFromReplicationInput struct {
 
 type RemoveRegionsFromReplicationOutput struct {
 
-	// The secret ARN removed from replication regions.
+	// The ARN of the primary secret.
 	ARN *string
 
-	// Describes the remaining replication status after you remove regions from the
-	// replication list.
+	// The status of replicas for this secret after you remove Regions.
 	ReplicationStatus []types.ReplicationStatusType
 
 	// Metadata pertaining to the operation's result.

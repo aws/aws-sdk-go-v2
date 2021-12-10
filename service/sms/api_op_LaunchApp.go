@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Launches the specified application as a stack in AWS CloudFormation.
+// Launches the specified application as a stack in CloudFormation.
 func (c *Client) LaunchApp(ctx context.Context, params *LaunchAppInput, optFns ...func(*Options)) (*LaunchAppOutput, error) {
 	if params == nil {
 		params = &LaunchAppInput{}

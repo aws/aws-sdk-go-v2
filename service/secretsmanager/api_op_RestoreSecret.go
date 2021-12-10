@@ -11,16 +11,7 @@ import (
 )
 
 // Cancels the scheduled deletion of a secret by removing the DeletedDate time
-// stamp. This makes the secret accessible to query once again. Minimum permissions
-// To run this command, you must have the following permissions:
-//
-// *
-// secretsmanager:RestoreSecret
-//
-// Related operations
-//
-// * To delete a secret, use
-// DeleteSecret.
+// stamp. You can access a secret again after it has been restored.
 func (c *Client) RestoreSecret(ctx context.Context, params *RestoreSecretInput, optFns ...func(*Options)) (*RestoreSecretOutput, error) {
 	if params == nil {
 		params = &RestoreSecretInput{}
@@ -38,10 +29,8 @@ func (c *Client) RestoreSecret(ctx context.Context, params *RestoreSecretInput, 
 
 type RestoreSecretInput struct {
 
-	// Specifies the secret that you want to restore from a previously scheduled
-	// deletion. You can specify either the Amazon Resource Name (ARN) or the friendly
-	// name of the secret. For an ARN, we recommend that you specify a complete ARN
-	// rather than a partial ARN.
+	// The ARN or name of the secret to restore. For an ARN, we recommend that you
+	// specify a complete ARN rather than a partial ARN.
 	//
 	// This member is required.
 	SecretId *string
@@ -54,7 +43,7 @@ type RestoreSecretOutput struct {
 	// The ARN of the secret that was restored.
 	ARN *string
 
-	// The friendly name of the secret that was restored.
+	// The name of the secret that was restored.
 	Name *string
 
 	// Metadata pertaining to the operation's result.
