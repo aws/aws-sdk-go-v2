@@ -59,7 +59,12 @@ type DescribeAutoPredictorOutput struct {
 	// complete.
 	EstimatedTimeRemainingInMinutes *int64
 
+	// Provides the status and ARN of the Predictor Explainability.
 	ExplainabilityInfo *types.ExplainabilityInfo
+
+	// An array of dimension (field) names that specify the attributes used to group
+	// your time series.
+	ForecastDimensions []string
 
 	// The frequency of predictions in a forecast. Valid intervals are Y (Year), M
 	// (Month), W (Week), D (Day), H (Hour), 30min (30 minutes), 15min (15 minutes),

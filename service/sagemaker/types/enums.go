@@ -3851,6 +3851,7 @@ const (
 	TargetDeviceQcs605        TargetDevice = "qcs605"
 	TargetDeviceQcs603        TargetDevice = "qcs603"
 	TargetDeviceSitaraAm57x   TargetDevice = "sitara_am57x"
+	TargetDeviceAmbaCv2       TargetDevice = "amba_cv2"
 	TargetDeviceAmbaCv22      TargetDevice = "amba_cv22"
 	TargetDeviceAmbaCv25      TargetDevice = "amba_cv25"
 	TargetDeviceX86Win32      TargetDevice = "x86_win32"
@@ -3889,6 +3890,7 @@ func (TargetDevice) Values() []TargetDevice {
 		"qcs605",
 		"qcs603",
 		"sitara_am57x",
+		"amba_cv2",
 		"amba_cv22",
 		"amba_cv25",
 		"x86_win32",

@@ -12,8 +12,7 @@ import (
 	"time"
 )
 
-// This API is in preview release for Amazon Connect and subject to change. Before
-// calling this API, use CreateDomain
+// Before calling this API, use CreateDomain
 // (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_CreateDomain.html)
 // or UpdateDomain
 // (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UpdateDomain.html)

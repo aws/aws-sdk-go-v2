@@ -40,12 +40,12 @@ type UpdateApiCacheInput struct {
 	// This member is required.
 	ApiCachingBehavior types.ApiCachingBehavior
 
-	// The GraphQL API Id.
+	// The GraphQL API ID.
 	//
 	// This member is required.
 	ApiId *string
 
-	// TTL in seconds for cache entries. Valid values are between 1 and 3600 seconds.
+	// TTL in seconds for cache entries. Valid values are 1–3,600 seconds.
 	//
 	// This member is required.
 	Ttl int64

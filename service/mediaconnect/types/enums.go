@@ -228,6 +228,7 @@ const (
 	ProtocolSt2110Jpegxs Protocol = "st2110-jpegxs"
 	ProtocolCdi          Protocol = "cdi"
 	ProtocolSrtListener  Protocol = "srt-listener"
+	ProtocolFujitsuQos   Protocol = "fujitsu-qos"
 )
 
 // Values returns all known values for Protocol. Note that this can be expanded in
@@ -243,6 +244,7 @@ func (Protocol) Values() []Protocol {
 		"st2110-jpegxs",
 		"cdi",
 		"srt-listener",
+		"fujitsu-qos",
 	}
 }
 

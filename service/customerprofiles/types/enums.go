@@ -447,6 +447,7 @@ const (
 	StandardIdentifierSecondary  StandardIdentifier = "SECONDARY"
 	StandardIdentifierLookupOnly StandardIdentifier = "LOOKUP_ONLY"
 	StandardIdentifierNewOnly    StandardIdentifier = "NEW_ONLY"
+	StandardIdentifierOrder      StandardIdentifier = "ORDER"
 )
 
 // Values returns all known values for StandardIdentifier. Note that this can be
@@ -461,6 +462,7 @@ func (StandardIdentifier) Values() []StandardIdentifier {
 		"SECONDARY",
 		"LOOKUP_ONLY",
 		"NEW_ONLY",
+		"ORDER",
 	}
 }
 

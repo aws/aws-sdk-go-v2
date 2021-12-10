@@ -37,7 +37,6 @@ type GetEulaInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type GetEulaOutput struct {
 
 	// The EULA.

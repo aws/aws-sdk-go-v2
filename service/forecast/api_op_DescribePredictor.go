@@ -13,8 +13,7 @@ import (
 )
 
 // This operation is only valid for legacy predictors created with CreatePredictor.
-// If you are not using a legacy predictor, use DescribeAutoPredictor. To upgrade a
-// legacy predictor to AutoPredictor, see Upgrading to AutoPredictor. Describes a
+// If you are not using a legacy predictor, use DescribeAutoPredictor. Describes a
 // predictor created using the CreatePredictor operation. In addition to listing
 // the properties provided in the CreatePredictor request, this operation lists the
 // following properties:

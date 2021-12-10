@@ -31,11 +31,6 @@ func (c *Client) UpdateDataset(ctx context.Context, params *UpdateDatasetInput, 
 // The request for an UpdateDataset operation
 type UpdateDatasetInput struct {
 
-	// The unique resource identifier for a Dataset.
-	//
-	// This member is required.
-	Alias *string
-
 	// The unique identifier for the Dataset to update.
 	//
 	// This member is required.
@@ -56,6 +51,9 @@ type UpdateDatasetInput struct {
 	//
 	// This member is required.
 	Kind types.DatasetKind
+
+	// The unique resource identifier for a Dataset.
+	Alias *string
 
 	// A token used to ensure idempotency.
 	ClientToken *string

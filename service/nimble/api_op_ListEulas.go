@@ -39,7 +39,6 @@ type ListEulasInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type ListEulasOutput struct {
 
 	// A collection of EULA resources.

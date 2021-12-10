@@ -2022,6 +2022,11 @@ func awsAwsjson11_serializeDocumentProtocolDetails(v *types.ProtocolDetails, val
 		ok.String(*v.PassiveIp)
 	}
 
+	if len(v.TlsSessionResumptionMode) > 0 {
+		ok := object.Key("TlsSessionResumptionMode")
+		ok.String(string(v.TlsSessionResumptionMode))
+	}
+
 	return nil
 }
 
@@ -2357,6 +2362,13 @@ func awsAwsjson11_serializeOpDocumentCreateServerInput(v *CreateServerInput, val
 	if v.LoggingRole != nil {
 		ok := object.Key("LoggingRole")
 		ok.String(*v.LoggingRole)
+	}
+
+	if v.ProtocolDetails != nil {
+		ok := object.Key("ProtocolDetails")
+		if err := awsAwsjson11_serializeDocumentProtocolDetails(v.ProtocolDetails, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Protocols != nil {

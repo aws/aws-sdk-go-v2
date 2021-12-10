@@ -70,6 +70,9 @@ type DescribeSlotTypeOutput struct {
 	// The description specified for the slot type.
 	Description *string
 
+	// Provides information about the external source of the slot type's definition.
+	ExternalSourceSetting *types.ExternalSourceSetting
+
 	// A timestamp of the date and time that the slot type was last updated.
 	LastUpdatedDateTime *time.Time
 

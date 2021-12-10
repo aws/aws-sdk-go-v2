@@ -101,6 +101,9 @@ type UpdateBotLocaleOutput struct {
 	// utterance.
 	NluIntentConfidenceThreshold *float64
 
+	// Recommended actions to take to resolve an error in the failureReasons field.
+	RecommendedActions []string
+
 	// The updated Amazon Polly voice to use for voice interaction with the user.
 	VoiceSettings *types.VoiceSettings
 

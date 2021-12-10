@@ -359,6 +359,24 @@ func (StandardsStatus) Values() []StandardsStatus {
 	}
 }
 
+type StatusReasonCode string
+
+// Enum values for StatusReasonCode
+const (
+	StatusReasonCodeNoAvailableConfigurationRecorder StatusReasonCode = "NO_AVAILABLE_CONFIGURATION_RECORDER"
+	StatusReasonCodeInternalError                    StatusReasonCode = "INTERNAL_ERROR"
+)
+
+// Values returns all known values for StatusReasonCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (StatusReasonCode) Values() []StatusReasonCode {
+	return []StatusReasonCode{
+		"NO_AVAILABLE_CONFIGURATION_RECORDER",
+		"INTERNAL_ERROR",
+	}
+}
+
 type StringFilterComparison string
 
 // Enum values for StringFilterComparison

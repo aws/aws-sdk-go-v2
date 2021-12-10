@@ -42,7 +42,6 @@ type GetStudioInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type GetStudioOutput struct {
 
 	// Information about a studio.

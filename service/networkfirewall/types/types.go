@@ -237,6 +237,22 @@ type FirewallPolicy struct {
 	StatelessFragmentDefaultActions []string
 
 	// The default actions to take on a packet that doesn't match any stateful rules.
+	// The stateful default action is optional, and is only valid when using the strict
+	// rule order. Valid values of the stateful default action:
+	//
+	// * aws:drop_strict
+	//
+	// *
+	// aws:drop_established
+	//
+	// * aws:alert_strict
+	//
+	// * aws:alert_established
+	//
+	// For more
+	// information, see Strict evaluation order
+	// (https://docs.aws.amazon.com/network-firewall/latest/developerguide/suricata-strict-rule-evaluation-order.html)
+	// in the AWS Network Firewall Developer Guide.
 	StatefulDefaultActions []string
 
 	// Additional options governing how Network Firewall handles stateful rules. The
@@ -812,16 +828,16 @@ type RulesSourceList struct {
 	// This member is required.
 	TargetTypes []TargetType
 
-	// The domains that you want to inspect for in your traffic flows. To provide
-	// multiple domains, separate them with commas. Valid domain specifications are the
-	// following:
+	// The domains that you want to inspect for in your traffic flows. Valid domain
+	// specifications are the following:
 	//
-	// * Explicit names. For example, abc.example.com matches only the
-	// domain abc.example.com.
+	// * Explicit names. For example,
+	// abc.example.com matches only the domain abc.example.com.
 	//
-	// * Names that use a domain wildcard, which you indicate
-	// with an initial '.'. For example,.example.com matches example.com and matches
-	// all subdomains of example.com, such as abc.example.com and www.example.com.
+	// * Names that use a
+	// domain wildcard, which you indicate with an initial '.'. For
+	// example,.example.com matches example.com and matches all subdomains of
+	// example.com, such as abc.example.com and www.example.com.
 	//
 	// This member is required.
 	Targets []string
@@ -846,13 +862,12 @@ type RuleVariables struct {
 // firewall policy.
 type StatefulEngineOptions struct {
 
-	// Indicates how to manage the order of stateful rule evaluation for the policy. By
-	// default, Network Firewall leaves the rule evaluation order up to the Suricata
-	// rule processing engine. If you set this to STRICT_ORDER, your rules are
-	// evaluated in the exact order that you provide them in the policy. With strict
-	// ordering, the rule groups are evaluated by order of priority, starting from the
-	// lowest number, and the rules in each rule group are processed in the order that
-	// they're defined.
+	// Indicates how to manage the order of stateful rule evaluation for the policy.
+	// DEFAULT_ACTION_ORDER is the default behavior. Stateful rules are provided to the
+	// rule engine as Suricata compatible strings, and Suricata evaluates them based on
+	// certain settings. For more information, see Evaluation order for stateful rules
+	// (https://docs.aws.amazon.com/network-firewall/latest/developerguide/suricata-rule-evaluation-order.html)
+	// in the AWS Network Firewall Developer Guide.
 	RuleOrder RuleOrder
 
 	noSmithyDocumentSerde
@@ -900,6 +915,17 @@ type StatefulRule struct {
 	noSmithyDocumentSerde
 }
 
+// The setting that allows the policy owner to change the behavior of the rule
+// group within a policy.
+type StatefulRuleGroupOverride struct {
+
+	// The action that changes the rule group from DROP to ALERT. This only applies to
+	// managed rule groups.
+	Action OverrideAction
+
+	noSmithyDocumentSerde
+}
+
 // Identifier for a single stateful rule group, used in a firewall policy to refer
 // to a rule group.
 type StatefulRuleGroupReference struct {
@@ -908,6 +934,10 @@ type StatefulRuleGroupReference struct {
 	//
 	// This member is required.
 	ResourceArn *string
+
+	// The action that allows the policy owner to override the behavior of the rule
+	// group within a policy.
+	Override *StatefulRuleGroupOverride
 
 	// An integer setting that indicates the order in which to run the stateful rule
 	// groups in a single FirewallPolicy. This setting only applies to firewall
@@ -927,10 +957,12 @@ type StatefulRuleGroupReference struct {
 // can only use these for stateful rule groups.
 type StatefulRuleOptions struct {
 
-	// Indicates how to manage the order of the rule evaluation for the rule group. By
-	// default, Network Firewall leaves the rule evaluation order up to the Suricata
-	// rule processing engine. If you set this to STRICT_ORDER, your rules are
-	// evaluated in the exact order that they're listed in your Suricata rules string.
+	// Indicates how to manage the order of the rule evaluation for the rule group.
+	// DEFAULT_ACTION_ORDER is the default behavior. Stateful rules are provided to the
+	// rule engine as Suricata compatible strings, and Suricata evaluates them based on
+	// certain settings. For more information, see Evaluation order for stateful rules
+	// (https://docs.aws.amazon.com/network-firewall/latest/developerguide/suricata-rule-evaluation-order.html)
+	// in the AWS Network Firewall Developer Guide.
 	RuleOrder RuleOrder
 
 	noSmithyDocumentSerde

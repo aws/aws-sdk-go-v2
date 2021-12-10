@@ -30,6 +30,7 @@ type CountryCode string
 
 // Enum values for CountryCode
 const (
+	CountryCodeAc CountryCode = "AC"
 	CountryCodeAd CountryCode = "AD"
 	CountryCodeAe CountryCode = "AE"
 	CountryCodeAf CountryCode = "AF"
@@ -45,6 +46,7 @@ const (
 	CountryCodeAt CountryCode = "AT"
 	CountryCodeAu CountryCode = "AU"
 	CountryCodeAw CountryCode = "AW"
+	CountryCodeAx CountryCode = "AX"
 	CountryCodeAz CountryCode = "AZ"
 	CountryCodeBa CountryCode = "BA"
 	CountryCodeBb CountryCode = "BB"
@@ -59,9 +61,11 @@ const (
 	CountryCodeBm CountryCode = "BM"
 	CountryCodeBn CountryCode = "BN"
 	CountryCodeBo CountryCode = "BO"
+	CountryCodeBq CountryCode = "BQ"
 	CountryCodeBr CountryCode = "BR"
 	CountryCodeBs CountryCode = "BS"
 	CountryCodeBt CountryCode = "BT"
+	CountryCodeBv CountryCode = "BV"
 	CountryCodeBw CountryCode = "BW"
 	CountryCodeBy CountryCode = "BY"
 	CountryCodeBz CountryCode = "BZ"
@@ -80,6 +84,7 @@ const (
 	CountryCodeCr CountryCode = "CR"
 	CountryCodeCu CountryCode = "CU"
 	CountryCodeCv CountryCode = "CV"
+	CountryCodeCw CountryCode = "CW"
 	CountryCodeCx CountryCode = "CX"
 	CountryCodeCy CountryCode = "CY"
 	CountryCodeCz CountryCode = "CZ"
@@ -92,6 +97,7 @@ const (
 	CountryCodeEc CountryCode = "EC"
 	CountryCodeEe CountryCode = "EE"
 	CountryCodeEg CountryCode = "EG"
+	CountryCodeEh CountryCode = "EH"
 	CountryCodeEr CountryCode = "ER"
 	CountryCodeEs CountryCode = "ES"
 	CountryCodeEt CountryCode = "ET"
@@ -105,18 +111,23 @@ const (
 	CountryCodeGb CountryCode = "GB"
 	CountryCodeGd CountryCode = "GD"
 	CountryCodeGe CountryCode = "GE"
+	CountryCodeGf CountryCode = "GF"
+	CountryCodeGg CountryCode = "GG"
 	CountryCodeGh CountryCode = "GH"
 	CountryCodeGi CountryCode = "GI"
 	CountryCodeGl CountryCode = "GL"
 	CountryCodeGm CountryCode = "GM"
 	CountryCodeGn CountryCode = "GN"
+	CountryCodeGp CountryCode = "GP"
 	CountryCodeGq CountryCode = "GQ"
 	CountryCodeGr CountryCode = "GR"
+	CountryCodeGs CountryCode = "GS"
 	CountryCodeGt CountryCode = "GT"
 	CountryCodeGu CountryCode = "GU"
 	CountryCodeGw CountryCode = "GW"
 	CountryCodeGy CountryCode = "GY"
 	CountryCodeHk CountryCode = "HK"
+	CountryCodeHm CountryCode = "HM"
 	CountryCodeHn CountryCode = "HN"
 	CountryCodeHr CountryCode = "HR"
 	CountryCodeHt CountryCode = "HT"
@@ -126,10 +137,12 @@ const (
 	CountryCodeIl CountryCode = "IL"
 	CountryCodeIm CountryCode = "IM"
 	CountryCodeIn CountryCode = "IN"
+	CountryCodeIo CountryCode = "IO"
 	CountryCodeIq CountryCode = "IQ"
 	CountryCodeIr CountryCode = "IR"
 	CountryCodeIs CountryCode = "IS"
 	CountryCodeIt CountryCode = "IT"
+	CountryCodeJe CountryCode = "JE"
 	CountryCodeJm CountryCode = "JM"
 	CountryCodeJo CountryCode = "JO"
 	CountryCodeJp CountryCode = "JP"
@@ -168,6 +181,7 @@ const (
 	CountryCodeMn CountryCode = "MN"
 	CountryCodeMo CountryCode = "MO"
 	CountryCodeMp CountryCode = "MP"
+	CountryCodeMq CountryCode = "MQ"
 	CountryCodeMr CountryCode = "MR"
 	CountryCodeMs CountryCode = "MS"
 	CountryCodeMt CountryCode = "MT"
@@ -180,6 +194,7 @@ const (
 	CountryCodeNa CountryCode = "NA"
 	CountryCodeNc CountryCode = "NC"
 	CountryCodeNe CountryCode = "NE"
+	CountryCodeNf CountryCode = "NF"
 	CountryCodeNg CountryCode = "NG"
 	CountryCodeNi CountryCode = "NI"
 	CountryCodeNl CountryCode = "NL"
@@ -199,10 +214,12 @@ const (
 	CountryCodePm CountryCode = "PM"
 	CountryCodePn CountryCode = "PN"
 	CountryCodePr CountryCode = "PR"
+	CountryCodePs CountryCode = "PS"
 	CountryCodePt CountryCode = "PT"
 	CountryCodePw CountryCode = "PW"
 	CountryCodePy CountryCode = "PY"
 	CountryCodeQa CountryCode = "QA"
+	CountryCodeRe CountryCode = "RE"
 	CountryCodeRo CountryCode = "RO"
 	CountryCodeRs CountryCode = "RS"
 	CountryCodeRu CountryCode = "RU"
@@ -215,18 +232,22 @@ const (
 	CountryCodeSg CountryCode = "SG"
 	CountryCodeSh CountryCode = "SH"
 	CountryCodeSi CountryCode = "SI"
+	CountryCodeSj CountryCode = "SJ"
 	CountryCodeSk CountryCode = "SK"
 	CountryCodeSl CountryCode = "SL"
 	CountryCodeSm CountryCode = "SM"
 	CountryCodeSn CountryCode = "SN"
 	CountryCodeSo CountryCode = "SO"
 	CountryCodeSr CountryCode = "SR"
+	CountryCodeSs CountryCode = "SS"
 	CountryCodeSt CountryCode = "ST"
 	CountryCodeSv CountryCode = "SV"
+	CountryCodeSx CountryCode = "SX"
 	CountryCodeSy CountryCode = "SY"
 	CountryCodeSz CountryCode = "SZ"
 	CountryCodeTc CountryCode = "TC"
 	CountryCodeTd CountryCode = "TD"
+	CountryCodeTf CountryCode = "TF"
 	CountryCodeTg CountryCode = "TG"
 	CountryCodeTh CountryCode = "TH"
 	CountryCodeTj CountryCode = "TJ"
@@ -235,6 +256,7 @@ const (
 	CountryCodeTm CountryCode = "TM"
 	CountryCodeTn CountryCode = "TN"
 	CountryCodeTo CountryCode = "TO"
+	CountryCodeTp CountryCode = "TP"
 	CountryCodeTr CountryCode = "TR"
 	CountryCodeTt CountryCode = "TT"
 	CountryCodeTv CountryCode = "TV"
@@ -266,6 +288,7 @@ const (
 // this slice is not guaranteed to be stable across updates.
 func (CountryCode) Values() []CountryCode {
 	return []CountryCode{
+		"AC",
 		"AD",
 		"AE",
 		"AF",
@@ -281,6 +304,7 @@ func (CountryCode) Values() []CountryCode {
 		"AT",
 		"AU",
 		"AW",
+		"AX",
 		"AZ",
 		"BA",
 		"BB",
@@ -295,9 +319,11 @@ func (CountryCode) Values() []CountryCode {
 		"BM",
 		"BN",
 		"BO",
+		"BQ",
 		"BR",
 		"BS",
 		"BT",
+		"BV",
 		"BW",
 		"BY",
 		"BZ",
@@ -316,6 +342,7 @@ func (CountryCode) Values() []CountryCode {
 		"CR",
 		"CU",
 		"CV",
+		"CW",
 		"CX",
 		"CY",
 		"CZ",
@@ -328,6 +355,7 @@ func (CountryCode) Values() []CountryCode {
 		"EC",
 		"EE",
 		"EG",
+		"EH",
 		"ER",
 		"ES",
 		"ET",
@@ -341,18 +369,23 @@ func (CountryCode) Values() []CountryCode {
 		"GB",
 		"GD",
 		"GE",
+		"GF",
+		"GG",
 		"GH",
 		"GI",
 		"GL",
 		"GM",
 		"GN",
+		"GP",
 		"GQ",
 		"GR",
+		"GS",
 		"GT",
 		"GU",
 		"GW",
 		"GY",
 		"HK",
+		"HM",
 		"HN",
 		"HR",
 		"HT",
@@ -362,10 +395,12 @@ func (CountryCode) Values() []CountryCode {
 		"IL",
 		"IM",
 		"IN",
+		"IO",
 		"IQ",
 		"IR",
 		"IS",
 		"IT",
+		"JE",
 		"JM",
 		"JO",
 		"JP",
@@ -404,6 +439,7 @@ func (CountryCode) Values() []CountryCode {
 		"MN",
 		"MO",
 		"MP",
+		"MQ",
 		"MR",
 		"MS",
 		"MT",
@@ -416,6 +452,7 @@ func (CountryCode) Values() []CountryCode {
 		"NA",
 		"NC",
 		"NE",
+		"NF",
 		"NG",
 		"NI",
 		"NL",
@@ -435,10 +472,12 @@ func (CountryCode) Values() []CountryCode {
 		"PM",
 		"PN",
 		"PR",
+		"PS",
 		"PT",
 		"PW",
 		"PY",
 		"QA",
+		"RE",
 		"RO",
 		"RS",
 		"RU",
@@ -451,18 +490,22 @@ func (CountryCode) Values() []CountryCode {
 		"SG",
 		"SH",
 		"SI",
+		"SJ",
 		"SK",
 		"SL",
 		"SM",
 		"SN",
 		"SO",
 		"SR",
+		"SS",
 		"ST",
 		"SV",
+		"SX",
 		"SY",
 		"SZ",
 		"TC",
 		"TD",
+		"TF",
 		"TG",
 		"TH",
 		"TJ",
@@ -471,6 +514,7 @@ func (CountryCode) Values() []CountryCode {
 		"TM",
 		"TN",
 		"TO",
+		"TP",
 		"TR",
 		"TT",
 		"TV",
@@ -561,6 +605,7 @@ const (
 	ExtraParamNameVatNumber                     ExtraParamName = "VAT_NUMBER"
 	ExtraParamNameUkContactType                 ExtraParamName = "UK_CONTACT_TYPE"
 	ExtraParamNameUkCompanyNumber               ExtraParamName = "UK_COMPANY_NUMBER"
+	ExtraParamNameEuCountryOfCitizenship        ExtraParamName = "EU_COUNTRY_OF_CITIZENSHIP"
 )
 
 // Values returns all known values for ExtraParamName. Note that this can be
@@ -597,6 +642,25 @@ func (ExtraParamName) Values() []ExtraParamName {
 		"VAT_NUMBER",
 		"UK_CONTACT_TYPE",
 		"UK_COMPANY_NUMBER",
+		"EU_COUNTRY_OF_CITIZENSHIP",
+	}
+}
+
+type ListDomainsAttributeName string
+
+// Enum values for ListDomainsAttributeName
+const (
+	ListDomainsAttributeNameDomainName ListDomainsAttributeName = "DomainName"
+	ListDomainsAttributeNameExpiry     ListDomainsAttributeName = "Expiry"
+)
+
+// Values returns all known values for ListDomainsAttributeName. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ListDomainsAttributeName) Values() []ListDomainsAttributeName {
+	return []ListDomainsAttributeName{
+		"DomainName",
+		"Expiry",
 	}
 }
 
@@ -674,6 +738,26 @@ func (OperationType) Values() []OperationType {
 	}
 }
 
+type Operator string
+
+// Enum values for Operator
+const (
+	OperatorLe         Operator = "LE"
+	OperatorGe         Operator = "GE"
+	OperatorBeginsWith Operator = "BEGINS_WITH"
+)
+
+// Values returns all known values for Operator. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Operator) Values() []Operator {
+	return []Operator{
+		"LE",
+		"GE",
+		"BEGINS_WITH",
+	}
+}
+
 type ReachabilityStatus string
 
 // Enum values for ReachabilityStatus
@@ -691,6 +775,24 @@ func (ReachabilityStatus) Values() []ReachabilityStatus {
 		"PENDING",
 		"DONE",
 		"EXPIRED",
+	}
+}
+
+type SortOrder string
+
+// Enum values for SortOrder
+const (
+	SortOrderAsc  SortOrder = "ASC"
+	SortOrderDesc SortOrder = "DESC"
+)
+
+// Values returns all known values for SortOrder. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (SortOrder) Values() []SortOrder {
+	return []SortOrder{
+		"ASC",
+		"DESC",
 	}
 }
 

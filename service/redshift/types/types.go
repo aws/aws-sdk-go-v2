@@ -629,6 +629,9 @@ type DataShare struct {
 	// and data consumers.
 	DataShareAssociations []DataShareAssociation
 
+	// The identifier of a datashare to show its managing entity.
+	ManagedBy *string
+
 	// The Amazon Resource Name (ARN) of the producer.
 	ProducerArn *string
 

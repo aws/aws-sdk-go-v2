@@ -49,13 +49,15 @@ type CreateDatasetInput struct {
 	ProjectName *string
 
 	// ClientToken is an idempotency token that ensures a call to CreateDataset
-	// completes only once. You choose the value to pass. For example, An issue, such
-	// as an network outage, might prevent you from getting a response from
-	// CreateDataset. In this case, safely retry your call to CreateDataset by using
-	// the same ClientToken parameter value. An error occurs if the other input
-	// parameters are not the same as in the first request. Using a different value for
-	// ClientToken is considered a new call to CreateDataset. An idempotency token is
-	// active for 8 hours.
+	// completes only once. You choose the value to pass. For example, An issue might
+	// prevent you from getting a response from CreateDataset. In this case, safely
+	// retry your call to CreateDataset by using the same ClientToken parameter value.
+	// If you don't supply a value for ClientToken, the AWS SDK you are using inserts a
+	// value for you. This prevents retries after a network error from making multiple
+	// dataset creation requests. You'll need to provide your own value for other use
+	// cases. An error occurs if the other input parameters are not the same as in the
+	// first request. Using a different value for ClientToken is considered a new call
+	// to CreateDataset. An idempotency token is active for 8 hours.
 	ClientToken *string
 
 	// The location of the manifest file that Amazon Lookout for Vision uses to create

@@ -649,7 +649,7 @@ func (e *InvalidVPCId) ErrorCode() string             { return "InvalidVPCId" }
 func (e *InvalidVPCId) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You've already created a key-signing key (KSK) with this name or with the same
-// customer managed customer master key (CMK) ARN.
+// customer managed key ARN.
 type KeySigningKeyAlreadyExists struct {
 	Message *string
 

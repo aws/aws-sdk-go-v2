@@ -3233,6 +3233,118 @@ func awsRestjson1_serializeOpDocumentSearchPlaceIndexForPositionInput(v *SearchP
 	return nil
 }
 
+type awsRestjson1_serializeOpSearchPlaceIndexForSuggestions struct {
+}
+
+func (*awsRestjson1_serializeOpSearchPlaceIndexForSuggestions) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpSearchPlaceIndexForSuggestions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*SearchPlaceIndexForSuggestionsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/places/v0/indexes/{IndexName}/search/suggestions")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsSearchPlaceIndexForSuggestionsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentSearchPlaceIndexForSuggestionsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsSearchPlaceIndexForSuggestionsInput(v *SearchPlaceIndexForSuggestionsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.IndexName == nil || len(*v.IndexName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member IndexName must not be empty")}
+	}
+	if v.IndexName != nil {
+		if err := encoder.SetURI("IndexName").String(*v.IndexName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentSearchPlaceIndexForSuggestionsInput(v *SearchPlaceIndexForSuggestionsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BiasPosition != nil {
+		ok := object.Key("BiasPosition")
+		if err := awsRestjson1_serializeDocumentPosition(v.BiasPosition, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FilterBBox != nil {
+		ok := object.Key("FilterBBox")
+		if err := awsRestjson1_serializeDocumentBoundingBox(v.FilterBBox, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FilterCountries != nil {
+		ok := object.Key("FilterCountries")
+		if err := awsRestjson1_serializeDocumentCountryCodeList(v.FilterCountries, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Language != nil {
+		ok := object.Key("Language")
+		ok.String(*v.Language)
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.Text != nil {
+		ok := object.Key("Text")
+		ok.String(*v.Text)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpSearchPlaceIndexForText struct {
 }
 
@@ -4086,6 +4198,13 @@ func awsRestjson1_serializeDocumentDevicePositionUpdate(v *types.DevicePositionU
 	object := value.Object()
 	defer object.Close()
 
+	if v.Accuracy != nil {
+		ok := object.Key("Accuracy")
+		if err := awsRestjson1_serializeDocumentPositionalAccuracy(v.Accuracy, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DeviceId != nil {
 		ok := object.Key("DeviceId")
 		ok.String(*v.DeviceId)
@@ -4094,6 +4213,13 @@ func awsRestjson1_serializeDocumentDevicePositionUpdate(v *types.DevicePositionU
 	if v.Position != nil {
 		ok := object.Key("Position")
 		if err := awsRestjson1_serializeDocumentPosition(v.Position, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PositionProperties != nil {
+		ok := object.Key("PositionProperties")
+		if err := awsRestjson1_serializeDocumentPropertyMap(v.PositionProperties, ok); err != nil {
 			return err
 		}
 	}
@@ -4208,6 +4334,42 @@ func awsRestjson1_serializeDocumentPosition(v []float64, value smithyjson.Value)
 			av.Double(v[i])
 
 		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPositionalAccuracy(v *types.PositionalAccuracy, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Horizontal != nil {
+		ok := object.Key("Horizontal")
+		switch {
+		case math.IsNaN(*v.Horizontal):
+			ok.String("NaN")
+
+		case math.IsInf(*v.Horizontal, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.Horizontal, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.Horizontal)
+
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPropertyMap(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
 	}
 	return nil
 }

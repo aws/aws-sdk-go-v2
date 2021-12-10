@@ -72,7 +72,7 @@ type JournalKinesisStreamDescription struct {
 // creation request.
 type JournalS3ExportDescription struct {
 
-	// The exclusive end date and time for the range of journal contents that are
+	// The exclusive end date and time for the range of journal contents that was
 	// specified in the original export request.
 	//
 	// This member is required.
@@ -90,7 +90,7 @@ type JournalS3ExportDescription struct {
 	// This member is required.
 	ExportId *string
 
-	// The inclusive start date and time for the range of journal contents that are
+	// The inclusive start date and time for the range of journal contents that was
 	// specified in the original export request.
 	//
 	// This member is required.
@@ -108,8 +108,8 @@ type JournalS3ExportDescription struct {
 	// Simple Storage Service (Amazon S3) bucket.
 	//
 	// * (Optional) Use your customer
-	// master key (CMK) in Key Management Service (KMS) for server-side encryption of
-	// your exported data.
+	// managed key in Key Management Service (KMS) for server-side encryption of your
+	// exported data.
 	//
 	// This member is required.
 	RoleArn *string
@@ -124,6 +124,9 @@ type JournalS3ExportDescription struct {
 	//
 	// This member is required.
 	Status ExportStatus
+
+	// The output format of the exported journal data.
+	OutputFormat OutputFormat
 
 	noSmithyDocumentSerde
 }
@@ -228,10 +231,10 @@ type S3EncryptionConfiguration struct {
 	// This member is required.
 	ObjectEncryptionType S3ObjectEncryptionType
 
-	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) in Key
-	// Management Service (KMS). Amazon S3 does not support asymmetric CMKs. You must
-	// provide a KmsKeyArn if you specify SSE_KMS as the ObjectEncryptionType.
-	// KmsKeyArn is not required if you specify SSE_S3 as the ObjectEncryptionType.
+	// The Amazon Resource Name (ARN) of a symmetric key in Key Management Service
+	// (KMS). Amazon S3 does not support asymmetric KMS keys. You must provide a
+	// KmsKeyArn if you specify SSE_KMS as the ObjectEncryptionType. KmsKeyArn is not
+	// required if you specify SSE_S3 as the ObjectEncryptionType.
 	KmsKeyArn *string
 
 	noSmithyDocumentSerde

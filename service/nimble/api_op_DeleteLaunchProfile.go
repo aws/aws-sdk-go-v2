@@ -48,7 +48,6 @@ type DeleteLaunchProfileInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type DeleteLaunchProfileOutput struct {
 
 	// The launch profile.

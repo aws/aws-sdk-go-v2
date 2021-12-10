@@ -857,6 +857,19 @@ func awsRestjson1_deserializeOpDocumentGetChangesetOutput(v **GetChangesetOutput
 
 	for key, value := range shape {
 		switch key {
+		case "activeFromTimestamp":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TimestampEpoch to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ActiveFromTimestamp = i64
+			}
+
 		case "activeUntilTimestamp":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3040,6 +3053,19 @@ func awsRestjson1_deserializeDocumentChangesetSummary(v **types.ChangesetSummary
 
 	for key, value := range shape {
 		switch key {
+		case "activeFromTimestamp":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TimestampEpoch to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ActiveFromTimestamp = i64
+			}
+
 		case "activeUntilTimestamp":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3623,6 +3649,20 @@ func awsRestjson1_deserializeDocumentDataViewDestinationTypeParams(v **types.Dat
 				sv.DestinationType = ptr.String(jtv)
 			}
 
+		case "s3DestinationExportFileFormat":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExportFileFormat to be of type string, got %T instead", value)
+				}
+				sv.S3DestinationExportFileFormat = types.ExportFileFormat(jtv)
+			}
+
+		case "s3DestinationExportFileFormatOptions":
+			if err := awsRestjson1_deserializeDocumentS3DestinationFormatOptions(&sv.S3DestinationExportFileFormatOptions, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -4039,6 +4079,42 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentS3DestinationFormatOptions(v *map[string]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]string
+	if *v == nil {
+		mv = map[string]string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected StringMapValue to be of type string, got %T instead", value)
+			}
+			parsedVal = jtv
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
 	return nil
 }
 

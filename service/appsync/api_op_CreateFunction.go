@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a Function object. A function is a reusable entity. Multiple functions
-// can be used to compose the resolver logic.
+// Creates a Function object. A function is a reusable entity. You can use multiple
+// functions to compose the resolver logic.
 func (c *Client) CreateFunction(ctx context.Context, params *CreateFunctionInput, optFns ...func(*Options)) (*CreateFunctionOutput, error) {
 	if params == nil {
 		params = &CreateFunctionInput{}
@@ -40,7 +40,7 @@ type CreateFunctionInput struct {
 	// This member is required.
 	DataSourceName *string
 
-	// The version of the request mapping template. Currently the supported value is
+	// The version of the request mapping template. Currently, the supported value is
 	// 2018-05-29.
 	//
 	// This member is required.
@@ -61,9 +61,8 @@ type CreateFunctionInput struct {
 	// The Function response mapping template.
 	ResponseMappingTemplate *string
 
-	// Describes a Sync configuration for a resolver. Contains information on which
-	// Conflict Detection as well as Resolution strategy should be performed when the
-	// resolver is invoked.
+	// Describes a Sync configuration for a resolver. Specifies which Conflict
+	// Detection strategy and Resolution strategy to use when the resolver is invoked.
 	SyncConfig *types.SyncConfig
 
 	noSmithyDocumentSerde

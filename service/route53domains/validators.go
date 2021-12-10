@@ -90,6 +90,26 @@ func (m *validateOpCheckDomainTransferability) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteDomain struct {
+}
+
+func (*validateOpDeleteDomain) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteDomain) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteDomainInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteDomainInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteTagsForDomain struct {
 }
 
@@ -245,6 +265,26 @@ func (m *validateOpGetOperationDetail) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetOperationDetailInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListDomains struct {
+}
+
+func (*validateOpListDomains) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListDomains) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListDomainsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListDomainsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -486,6 +526,10 @@ func addOpCheckDomainTransferabilityValidationMiddleware(stack *middleware.Stack
 	return stack.Initialize.Add(&validateOpCheckDomainTransferability{}, middleware.After)
 }
 
+func addOpDeleteDomainValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteDomain{}, middleware.After)
+}
+
 func addOpDeleteTagsForDomainValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteTagsForDomain{}, middleware.After)
 }
@@ -516,6 +560,10 @@ func addOpGetDomainSuggestionsValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpGetOperationDetailValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetOperationDetail{}, middleware.After)
+}
+
+func addOpListDomainsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListDomains{}, middleware.After)
 }
 
 func addOpListTagsForDomainValidationMiddleware(stack *middleware.Stack) error {
@@ -614,6 +662,44 @@ func validateExtraParamList(v []types.ExtraParam) error {
 	}
 }
 
+func validateFilterCondition(v *types.FilterCondition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FilterCondition"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Operator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Operator"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFilterConditions(v []types.FilterCondition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FilterConditions"}
+	for i := range v {
+		if err := validateFilterCondition(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateNameserver(v *types.Nameserver) error {
 	if v == nil {
 		return nil
@@ -638,6 +724,24 @@ func validateNameserverList(v []types.Nameserver) error {
 		if err := validateNameserver(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSortCondition(v *types.SortCondition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SortCondition"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.SortOrder) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SortOrder"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -699,6 +803,21 @@ func validateOpCheckDomainTransferabilityInput(v *CheckDomainTransferabilityInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CheckDomainTransferabilityInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteDomainInput(v *DeleteDomainInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteDomainInput"}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}
@@ -827,6 +946,28 @@ func validateOpGetOperationDetailInput(v *GetOperationDetailInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetOperationDetailInput"}
 	if v.OperationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OperationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListDomainsInput(v *ListDomainsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListDomainsInput"}
+	if v.FilterConditions != nil {
+		if err := validateFilterConditions(v.FilterConditions); err != nil {
+			invalidParams.AddNested("FilterConditions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SortCondition != nil {
+		if err := validateSortCondition(v.SortCondition); err != nil {
+			invalidParams.AddNested("SortCondition", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

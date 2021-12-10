@@ -575,8 +575,20 @@ type AwsApiGatewayV2StageDetails struct {
 	noSmithyDocumentSerde
 }
 
+// An Availability Zone for the automatic scaling group.
+type AwsAutoScalingAutoScalingGroupAvailabilityZonesListDetails struct {
+
+	// The name of the Availability Zone.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // Provides details about an auto scaling group.
 type AwsAutoScalingAutoScalingGroupDetails struct {
+
+	// The list of Availability Zones for the automatic scaling group.
+	AvailabilityZones []AwsAutoScalingAutoScalingGroupAvailabilityZonesListDetails
 
 	// Indicates when the auto scaling group was created. Uses the date-time format
 	// specified in RFC 3339 section 5.6, Internet Date/Time Format
@@ -596,6 +608,95 @@ type AwsAutoScalingAutoScalingGroupDetails struct {
 
 	// The list of load balancers associated with the group.
 	LoadBalancerNames []string
+
+	// The mixed instances policy for the automatic scaling group.
+	MixedInstancesPolicy *AwsAutoScalingAutoScalingGroupMixedInstancesPolicyDetails
+
+	noSmithyDocumentSerde
+}
+
+// The mixed instances policy for the automatic scaling group.
+type AwsAutoScalingAutoScalingGroupMixedInstancesPolicyDetails struct {
+
+	// The instances distribution. The instances distribution specifies the
+	// distribution of On-Demand Instances and Spot Instances, the maximum price to pay
+	// for Spot Instances, and how the Auto Scaling group allocates instance types to
+	// fulfill On-Demand and Spot capacity.
+	InstancesDistribution *AwsAutoScalingAutoScalingGroupMixedInstancesPolicyInstancesDistributionDetails
+
+	// The launch template to use and the instance types (overrides) to use to
+	// provision EC2 instances to fulfill On-Demand and Spot capacities.
+	LaunchTemplate *AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateDetails
+
+	noSmithyDocumentSerde
+}
+
+// Information about the instances distribution.
+type AwsAutoScalingAutoScalingGroupMixedInstancesPolicyInstancesDistributionDetails struct {
+
+	// How to allocate instance types to fulfill On-Demand capacity.
+	OnDemandAllocationStrategy *string
+
+	// The minimum amount of the Auto Scaling group's capacity that must be fulfilled
+	// by On-Demand Instances.
+	OnDemandBaseCapacity int32
+
+	// The percentage of On-Demand Instances and Spot Instances for additional capacity
+	// beyond OnDemandBaseCapacity.
+	OnDemandPercentageAboveBaseCapacity int32
+
+	// How to allocate instances across Spot Instance pools.
+	SpotAllocationStrategy *string
+
+	// The number of Spot Instance pools across which to allocate your Spot Instances.
+	SpotInstancePools int32
+
+	// The maximum price per unit hour that you are willing to pay for a Spot Instance.
+	SpotMaxPrice *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes a launch template and overrides for a mixed instances policy.
+type AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateDetails struct {
+
+	// The launch template to use.
+	LaunchTemplateSpecification *AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateLaunchTemplateSpecification
+
+	// Property values to use to override the values in the launch template.
+	Overrides []AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateOverridesListDetails
+
+	noSmithyDocumentSerde
+}
+
+// Details about the launch template to use.
+type AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateLaunchTemplateSpecification struct {
+
+	// The identifier of the launch template. You must specify either LaunchTemplateId
+	// or LaunchTemplateName.
+	LaunchTemplateId *string
+
+	// The name of the launch template. You must specify either LaunchTemplateId or
+	// LaunchTemplateName.
+	LaunchTemplateName *string
+
+	// Identifies the version of the launch template. You can specify a version
+	// identifier, or use the values $Latest or $Default.
+	Version *string
+
+	noSmithyDocumentSerde
+}
+
+// Property values to use to override the values in the launch template.
+type AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateOverridesListDetails struct {
+
+	// The instance type. For example, m3.xlarge.
+	InstanceType *string
+
+	// The number of capacity units provided by the specified instance type in terms of
+	// virtual CPUs, memory, storage, throughput, or other relative performance
+	// characteristic.
+	WeightedCapacity *string
 
 	noSmithyDocumentSerde
 }
@@ -715,6 +816,9 @@ type AwsAutoScalingLaunchConfigurationDetails struct {
 	// The name of the launch configuration.
 	LaunchConfigurationName *string
 
+	// The metadata options for the instances.
+	MetadataOptions *AwsAutoScalingLaunchConfigurationMetadataOptions
+
 	// The tenancy of the instance. An instance with dedicated tenancy runs on
 	// isolated, single-tenant hardware and can only be launched into a VPC.
 	PlacementTenancy *string
@@ -742,6 +846,24 @@ type AwsAutoScalingLaunchConfigurationInstanceMonitoringDetails struct {
 	// If set to true, then instances in the group launch with detailed monitoring. If
 	// set to false, then instances in the group launch with basic monitoring.
 	Enabled bool
+
+	noSmithyDocumentSerde
+}
+
+// The metadata options for the instances.
+type AwsAutoScalingLaunchConfigurationMetadataOptions struct {
+
+	// Enables or disables the HTTP metadata endpoint on your instances. By default,
+	// the metadata endpoint is enabled.
+	HttpEndpoint *string
+
+	// The HTTP PUT response hop limit for instance metadata requests. The larger the
+	// number, the further instance metadata requests can travel.
+	HttpPutResponseHopLimit int32
+
+	// Indicates whether token usage is required or optional for metadata requests. By
+	// default, token usage is optional.
+	HttpTokens *string
 
 	noSmithyDocumentSerde
 }
@@ -5011,6 +5133,107 @@ type AwsLambdaLayerVersionDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Details about an Network Firewall firewall.
+type AwsNetworkFirewallFirewallDetails struct {
+
+	// Whether the firewall is protected from deletion. If set to true, then the
+	// firewall cannot be deleted.
+	DeleteProtection bool
+
+	// A description of the firewall.
+	Description *string
+
+	// The ARN of the firewall.
+	FirewallArn *string
+
+	// The identifier of the firewall.
+	FirewallId *string
+
+	// A descriptive name of the firewall.
+	FirewallName *string
+
+	// The ARN of the firewall policy.
+	FirewallPolicyArn *string
+
+	// Whether the firewall is protected from a change to the firewall policy. If set
+	// to true, you cannot associate a different policy with the firewall.
+	FirewallPolicyChangeProtection bool
+
+	// Whether the firewall is protected from a change to the subnet associations. If
+	// set to true, you cannot map different subnets to the firewall.
+	SubnetChangeProtection bool
+
+	// The public subnets that Network Firewall uses for the firewall. Each subnet must
+	// belong to a different Availability Zone.
+	SubnetMappings []AwsNetworkFirewallFirewallSubnetMappingsDetails
+
+	// The identifier of the VPC where the firewall is used.
+	VpcId *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about a firewall policy. A firewall policy defines the behavior of a
+// network firewall.
+type AwsNetworkFirewallFirewallPolicyDetails struct {
+
+	// A description of the firewall policy.
+	Description *string
+
+	// The firewall policy configuration.
+	FirewallPolicy *FirewallPolicyDetails
+
+	// The ARN of the firewall policy.
+	FirewallPolicyArn *string
+
+	// The identifier of the firewall policy.
+	FirewallPolicyId *string
+
+	// The name of the firewall policy.
+	FirewallPolicyName *string
+
+	noSmithyDocumentSerde
+}
+
+// A public subnet that Network Firewall uses for the firewall.
+type AwsNetworkFirewallFirewallSubnetMappingsDetails struct {
+
+	// The identifier of the subnet
+	SubnetId *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about an Network Firewall rule group. Rule groups are used to inspect
+// and control network traffic. Stateless rule groups apply to individual packets.
+// Stateful rule groups apply to packets in the context of their traffic flow. Rule
+// groups are referenced in firewall policies.
+type AwsNetworkFirewallRuleGroupDetails struct {
+
+	// The maximum number of operating resources that this rule group can use.
+	Capacity int32
+
+	// A description of the rule group.
+	Description *string
+
+	// Details about the rule group.
+	RuleGroup *RuleGroupDetails
+
+	// The ARN of the rule group.
+	RuleGroupArn *string
+
+	// The identifier of the rule group.
+	RuleGroupId *string
+
+	// The descriptive name of the rule group.
+	RuleGroupName *string
+
+	// The type of rule group. A rule group can be stateful or stateless.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
 // Details about the configuration of an OpenSearch cluster.
 type AwsOpenSearchServiceDomainClusterConfigDetails struct {
 
@@ -6713,6 +6936,20 @@ type AwsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the versioning state of an S3 bucket.
+type AwsS3BucketBucketVersioningConfiguration struct {
+
+	// Specifies whether MFA delete is currently enabled in the S3 bucket versioning
+	// configuration. If the S3 bucket was never configured with MFA delete, then this
+	// attribute is not included.
+	IsMfaDeleteEnabled bool
+
+	// The versioning status of the S3 bucket.
+	Status *string
+
+	noSmithyDocumentSerde
+}
+
 // The details of an Amazon S3 bucket.
 type AwsS3BucketDetails struct {
 
@@ -6727,6 +6964,9 @@ type AwsS3BucketDetails struct {
 
 	// The notification configuration for the S3 bucket.
 	BucketNotificationConfiguration *AwsS3BucketNotificationConfiguration
+
+	// The versioning state of an S3 bucket.
+	BucketVersioningConfiguration *AwsS3BucketBucketVersioningConfiguration
 
 	// The website configuration parameters for the S3 bucket.
 	BucketWebsiteConfiguration *AwsS3BucketWebsiteConfiguration
@@ -7566,21 +7806,41 @@ type AwsSecurityFindingFilters struct {
 	// Security Hub also resets the workflow status from NOTIFIED or RESOLVED to NEW in
 	// the following cases:
 	//
-	// * The record state changes from ARCHIVED to ACTIVE.
+	// * RecordState changes from ARCHIVED to ACTIVE.
 	//
-	// * The
-	// compliance status changes from PASSED to either WARNING, FAILED, or
+	// *
+	// Compliance.Status changes from PASSED to either WARNING, FAILED, or
 	// NOT_AVAILABLE.
 	//
 	// * NOTIFIED - Indicates that the resource owner has been notified
 	// about the security issue. Used when the initial reviewer is not the resource
-	// owner, and needs intervention from the resource owner.
+	// owner, and needs intervention from the resource owner. If one of the following
+	// occurs, the workflow status is changed automatically from NOTIFIED to NEW:
 	//
-	// * SUPPRESSED - The
-	// finding will not be reviewed again and will not be acted upon.
+	// *
+	// RecordState changes from ARCHIVED to ACTIVE.
 	//
-	// * RESOLVED - The
-	// finding was reviewed and remediated and is now considered resolved.
+	// * Compliance.Status changes from
+	// PASSED to FAILED, WARNING, or NOT_AVAILABLE.
+	//
+	// * SUPPRESSED - Indicates that you
+	// reviewed the finding and do not believe that any action is needed. The workflow
+	// status of a SUPPRESSED finding does not change if RecordState changes from
+	// ARCHIVED to ACTIVE.
+	//
+	// * RESOLVED - The finding was reviewed and remediated and is
+	// now considered resolved. The finding remains RESOLVED unless one of the
+	// following occurs:
+	//
+	// * RecordState changes from ARCHIVED to ACTIVE.
+	//
+	// *
+	// Compliance.Status changes from PASSED to FAILED, WARNING, or NOT_AVAILABLE.
+	//
+	// In
+	// those cases, the workflow status is automatically reset to NEW. For findings
+	// from controls, if Compliance.Status is PASSED, then Security Hub automatically
+	// sets the workflow status to RESOLVED.
 	WorkflowStatus []StringFilter
 
 	noSmithyDocumentSerde
@@ -8261,6 +8521,67 @@ type FindingProviderSeverity struct {
 
 	// The finding provider's original value for the severity.
 	Original *string
+
+	noSmithyDocumentSerde
+}
+
+// Defines the behavior of the firewall.
+type FirewallPolicyDetails struct {
+
+	// The stateful rule groups that are used in the firewall policy.
+	StatefulRuleGroupReferences []FirewallPolicyStatefulRuleGroupReferencesDetails
+
+	// The custom action definitions that are available to use in the firewall policy's
+	// StatelessDefaultActions setting.
+	StatelessCustomActions []FirewallPolicyStatelessCustomActionsDetails
+
+	// The actions to take on a packet if it doesn't match any of the stateless rules
+	// in the policy. You must specify a standard action (aws:pass, aws:drop,
+	// aws:forward_to_sfe), and can optionally include a custom action from
+	// StatelessCustomActions.
+	StatelessDefaultActions []string
+
+	// The actions to take on a fragmented UDP packet if it doesn't match any of the
+	// stateless rules in the policy. You must specify a standard action (aws:pass,
+	// aws:drop, aws:forward_to_sfe), and can optionally include a custom action from
+	// StatelessCustomActions.
+	StatelessFragmentDefaultActions []string
+
+	// The stateless rule groups that are used in the firewall policy.
+	StatelessRuleGroupReferences []FirewallPolicyStatelessRuleGroupReferencesDetails
+
+	noSmithyDocumentSerde
+}
+
+// A stateful rule group that is used by the firewall policy.
+type FirewallPolicyStatefulRuleGroupReferencesDetails struct {
+
+	// The ARN of the stateful rule group.
+	ResourceArn *string
+
+	noSmithyDocumentSerde
+}
+
+// A custom action that can be used for stateless packet handling.
+type FirewallPolicyStatelessCustomActionsDetails struct {
+
+	// The definition of the custom action.
+	ActionDefinition *StatelessCustomActionDefinition
+
+	// The name of the custom action.
+	ActionName *string
+
+	noSmithyDocumentSerde
+}
+
+// A stateless rule group that is used by the firewall policy.
+type FirewallPolicyStatelessRuleGroupReferencesDetails struct {
+
+	// The order in which to run the stateless rule group.
+	Priority int32
+
+	// The ARN of the stateless rule group.
+	ResourceArn *string
 
 	noSmithyDocumentSerde
 }
@@ -9221,6 +9542,15 @@ type ResourceDetails struct {
 	// Details for a Lambda layer version.
 	AwsLambdaLayerVersion *AwsLambdaLayerVersionDetails
 
+	// Details about an Network Firewall firewall.
+	AwsNetworkFirewallFirewall *AwsNetworkFirewallFirewallDetails
+
+	// Details about an Network Firewall firewall policy.
+	AwsNetworkFirewallFirewallPolicy *AwsNetworkFirewallFirewallPolicyDetails
+
+	// Details about an Network Firewall rule group.
+	AwsNetworkFirewallRuleGroup *AwsNetworkFirewallRuleGroupDetails
+
 	// Details about an Amazon OpenSearch Service domain.
 	AwsOpenSearchServiceDomain *AwsOpenSearchServiceDomainDetails
 
@@ -9303,6 +9633,284 @@ type Result struct {
 
 	// The reason that the account was not processed.
 	ProcessingResult *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about the rule group.
+type RuleGroupDetails struct {
+
+	// Additional settings to use in the specified rules.
+	RuleVariables *RuleGroupVariables
+
+	// The rules and actions for the rule group. For stateful rule groups, can contain
+	// RulesString, RulesSourceList, or StatefulRules. For stateless rule groups,
+	// contains StatelessRulesAndCustomActions.
+	RulesSource *RuleGroupSource
+
+	noSmithyDocumentSerde
+}
+
+// The rules and actions for the rule group.
+type RuleGroupSource struct {
+
+	// Stateful inspection criteria for a domain list rule group. A domain list rule
+	// group determines access by specific protocols to specific domains.
+	RulesSourceList *RuleGroupSourceListDetails
+
+	// Stateful inspection criteria, provided in Suricata compatible intrusion
+	// prevention system (IPS) rules.
+	RulesString *string
+
+	// Suricata rule specifications.
+	StatefulRules []RuleGroupSourceStatefulRulesDetails
+
+	// The stateless rules and custom actions used by a stateless rule group.
+	StatelessRulesAndCustomActions *RuleGroupSourceStatelessRulesAndCustomActionsDetails
+
+	noSmithyDocumentSerde
+}
+
+// A custom action definition. A custom action is an optional, non-standard action
+// to use for stateless packet handling.
+type RuleGroupSourceCustomActionsDetails struct {
+
+	// The definition of a custom action.
+	ActionDefinition *StatelessCustomActionDefinition
+
+	// A descriptive name of the custom action.
+	ActionName *string
+
+	noSmithyDocumentSerde
+}
+
+// Stateful inspection criteria for a domain list rule group.
+type RuleGroupSourceListDetails struct {
+
+	// Indicates whether to allow or deny access to the domains listed in Targets.
+	GeneratedRulesType *string
+
+	// The protocols that you want to inspect. Specify LS_SNI for HTTPS. Specify
+	// HTTP_HOST for HTTP. You can specify either or both.
+	TargetTypes []string
+
+	// The domains that you want to inspect for in your traffic flows. You can provide
+	// full domain names, or use the '.' prefix as a wildcard. For example,
+	// .example.com matches all domains that end with example.com.
+	Targets []string
+
+	noSmithyDocumentSerde
+}
+
+// A Suricata rule specification.
+type RuleGroupSourceStatefulRulesDetails struct {
+
+	// Defines what Network Firewall should do with the packets in a traffic flow when
+	// the flow matches the stateful rule criteria.
+	Action *string
+
+	// The stateful inspection criteria for the rule.
+	Header *RuleGroupSourceStatefulRulesHeaderDetails
+
+	// Additional options for the rule.
+	RuleOptions []RuleGroupSourceStatefulRulesOptionsDetails
+
+	noSmithyDocumentSerde
+}
+
+// The inspection criteria for a stateful rule.
+type RuleGroupSourceStatefulRulesHeaderDetails struct {
+
+	// The destination IP address or address range to inspect for, in CIDR notation. To
+	// match with any address, specify ANY.
+	Destination *string
+
+	// The destination port to inspect for. You can specify an individual port, such as
+	// 1994. You also can specify a port range, such as 1990:1994. To match with any
+	// port, specify ANY.
+	DestinationPort *string
+
+	// The direction of traffic flow to inspect. If set to ANY, the inspection matches
+	// bidirectional traffic, both from the source to the destination and from the
+	// destination to the source. If set to FORWARD, the inspection only matches
+	// traffic going from the source to the destination.
+	Direction *string
+
+	// The protocol to inspect for. To inspector for all protocols, use IP.
+	Protocol *string
+
+	// The source IP address or address range to inspect for, in CIDR notation. To
+	// match with any address, specify ANY.
+	Source *string
+
+	// The source port to inspect for. You can specify an individual port, such as
+	// 1994. You also can specify a port range, such as 1990:1994. To match with any
+	// port, specify ANY.
+	SourcePort *string
+
+	noSmithyDocumentSerde
+}
+
+// A rule option for a stateful rule.
+type RuleGroupSourceStatefulRulesOptionsDetails struct {
+
+	// A keyword to look for.
+	Keyword *string
+
+	// A list of settings.
+	Settings []string
+
+	noSmithyDocumentSerde
+}
+
+// The definition of the stateless rule.
+type RuleGroupSourceStatelessRuleDefinition struct {
+
+	// The actions to take on a packet that matches one of the stateless rule
+	// definition's match attributes. You must specify a standard action (aws:pass,
+	// aws:drop, or aws:forward_to_sfe). You can then add custom actions.
+	Actions []string
+
+	// The criteria for Network Firewall to use to inspect an individual packet in a
+	// stateless rule inspection.
+	MatchAttributes *RuleGroupSourceStatelessRuleMatchAttributes
+
+	noSmithyDocumentSerde
+}
+
+// Criteria for the stateless rule.
+type RuleGroupSourceStatelessRuleMatchAttributes struct {
+
+	// A list of port ranges to specify the destination ports to inspect for.
+	DestinationPorts []RuleGroupSourceStatelessRuleMatchAttributesDestinationPorts
+
+	// The destination IP addresses and address ranges to inspect for, in CIDR
+	// notation.
+	Destinations []RuleGroupSourceStatelessRuleMatchAttributesDestinations
+
+	// The protocols to inspect for.
+	Protocols []int32
+
+	// A list of port ranges to specify the source ports to inspect for.
+	SourcePorts []RuleGroupSourceStatelessRuleMatchAttributesSourcePorts
+
+	// The source IP addresses and address ranges to inspect for, in CIDR notation.
+	Sources []RuleGroupSourceStatelessRuleMatchAttributesSources
+
+	// The TCP flags and masks to inspect for.
+	TcpFlags []RuleGroupSourceStatelessRuleMatchAttributesTcpFlags
+
+	noSmithyDocumentSerde
+}
+
+// A port range to specify the destination ports to inspect for.
+type RuleGroupSourceStatelessRuleMatchAttributesDestinationPorts struct {
+
+	// The starting port value for the port range.
+	FromPort int32
+
+	// The ending port value for the port range.
+	ToPort int32
+
+	noSmithyDocumentSerde
+}
+
+// A destination IP address or range.
+type RuleGroupSourceStatelessRuleMatchAttributesDestinations struct {
+
+	// An IP address or a block of IP addresses.
+	AddressDefinition *string
+
+	noSmithyDocumentSerde
+}
+
+// A port range to specify the source ports to inspect for.
+type RuleGroupSourceStatelessRuleMatchAttributesSourcePorts struct {
+
+	// The starting port value for the port range.
+	FromPort int32
+
+	// The ending port value for the port range.
+	ToPort int32
+
+	noSmithyDocumentSerde
+}
+
+// A source IP addresses and address range to inspect for.
+type RuleGroupSourceStatelessRuleMatchAttributesSources struct {
+
+	// An IP address or a block of IP addresses.
+	AddressDefinition *string
+
+	noSmithyDocumentSerde
+}
+
+// A set of TCP flags and masks to inspect for.
+type RuleGroupSourceStatelessRuleMatchAttributesTcpFlags struct {
+
+	// Defines the flags from the Masks setting that must be set in order for the
+	// packet to match. Flags that are listed must be set. Flags that are not listed
+	// must not be set.
+	Flags []string
+
+	// The set of flags to consider in the inspection. If not specified, then all flags
+	// are inspected.
+	Masks []string
+
+	noSmithyDocumentSerde
+}
+
+// Stateless rules and custom actions for a stateless rule group.
+type RuleGroupSourceStatelessRulesAndCustomActionsDetails struct {
+
+	// Custom actions for the rule group.
+	CustomActions []RuleGroupSourceCustomActionsDetails
+
+	// Stateless rules for the rule group.
+	StatelessRules []RuleGroupSourceStatelessRulesDetails
+
+	noSmithyDocumentSerde
+}
+
+// A stateless rule in the rule group.
+type RuleGroupSourceStatelessRulesDetails struct {
+
+	// Indicates the order in which to run this rule relative to all of the rules in
+	// the stateless rule group.
+	Priority int32
+
+	// Provides the definition of the stateless rule.
+	RuleDefinition *RuleGroupSourceStatelessRuleDefinition
+
+	noSmithyDocumentSerde
+}
+
+// Additional settings to use in the specified rules.
+type RuleGroupVariables struct {
+
+	// A list of IP addresses and address ranges, in CIDR notation.
+	IpSets *RuleGroupVariablesIpSetsDetails
+
+	// A list of port ranges.
+	PortSets *RuleGroupVariablesPortSetsDetails
+
+	noSmithyDocumentSerde
+}
+
+// A list of IP addresses and address ranges, in CIDR notation.
+type RuleGroupVariablesIpSetsDetails struct {
+
+	// The list of IP addresses and ranges.
+	Definition []string
+
+	noSmithyDocumentSerde
+}
+
+// A list of port ranges.
+type RuleGroupVariablesPortSetsDetails struct {
+
+	// The list of port ranges.
+	Definition []string
 
 	noSmithyDocumentSerde
 }
@@ -9556,6 +10164,18 @@ type StandardsControl struct {
 	noSmithyDocumentSerde
 }
 
+// The reason for the current status of a standard subscription.
+type StandardsStatusReason struct {
+
+	// The reason code that represents the reason for the current status of a standard
+	// subscription.
+	//
+	// This member is required.
+	StatusReasonCode StatusReasonCode
+
+	noSmithyDocumentSerde
+}
+
 // A resource that represents your subscription to a supported standard.
 type StandardsSubscription struct {
 
@@ -9593,6 +10213,9 @@ type StandardsSubscription struct {
 	// This member is required.
 	StandardsSubscriptionArn *string
 
+	// The reason for the current status.
+	StandardsStatusReason *StandardsStatusReason
+
 	noSmithyDocumentSerde
 }
 
@@ -9607,6 +10230,34 @@ type StandardsSubscriptionRequest struct {
 
 	// A key-value pair of input for the standard.
 	StandardsInput map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// The definition of a custom action that can be used for stateless packet
+// handling.
+type StatelessCustomActionDefinition struct {
+
+	// Information about metrics to publish to CloudWatch.
+	PublishMetricAction *StatelessCustomPublishMetricAction
+
+	noSmithyDocumentSerde
+}
+
+// Information about metrics to publish to CloudWatch.
+type StatelessCustomPublishMetricAction struct {
+
+	// Defines CloudWatch dimension values to publish.
+	Dimensions []StatelessCustomPublishMetricActionDimension
+
+	noSmithyDocumentSerde
+}
+
+// Defines a CloudWatch dimension value to publish.
+type StatelessCustomPublishMetricActionDimension struct {
+
+	// The value to use for the custom metric dimension.
+	Value *string
 
 	noSmithyDocumentSerde
 }

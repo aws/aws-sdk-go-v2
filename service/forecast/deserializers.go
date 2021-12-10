@@ -10190,6 +10190,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeAutoPredictorOutput(v **DescribeA
 				return err
 			}
 
+		case "ForecastDimensions":
+			if err := awsAwsjson11_deserializeDocumentForecastDimensions(&sv.ForecastDimensions, value); err != nil {
+				return err
+			}
+
 		case "ForecastFrequency":
 			if value != nil {
 				jtv, ok := value.(string)

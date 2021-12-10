@@ -231,10 +231,10 @@ type DescribedServer struct {
 	// provide a Directory ID using the IdentityProviderDetails parameter. Use the
 	// API_GATEWAY value to integrate with an identity provider of your choosing. The
 	// API_GATEWAY setting requires you to provide an API Gateway endpoint URL to call
-	// for authentication using the IdentityProviderDetails parameter. Use the LAMBDA
-	// value to directly use a Lambda function as your identity provider. If you choose
-	// this value, you must specify the ARN for the lambda function in the Function
-	// parameter for the IdentityProviderDetails data type.
+	// for authentication using the IdentityProviderDetails parameter. Use the
+	// AWS_LAMBDA value to directly use a Lambda function as your identity provider. If
+	// you choose this value, you must specify the ARN for the lambda function in the
+	// Function parameter for the IdentityProviderDetails data type.
 	IdentityProviderType IdentityProviderType
 
 	// Specifies the Amazon Resource Name (ARN) of the Amazon Web Services Identity and
@@ -551,7 +551,7 @@ type HomeDirectoryMapEntry struct {
 // method of authentication.
 type IdentityProviderDetails struct {
 
-	// The identifier of the Amazon Web ServicesDirectory Service directory that you
+	// The identifier of the Amazon Web Services Directory Service directory that you
 	// want to stop sharing.
 	DirectoryId *string
 
@@ -666,10 +666,10 @@ type ListedServer struct {
 	// provide a Directory ID using the IdentityProviderDetails parameter. Use the
 	// API_GATEWAY value to integrate with an identity provider of your choosing. The
 	// API_GATEWAY setting requires you to provide an API Gateway endpoint URL to call
-	// for authentication using the IdentityProviderDetails parameter. Use the LAMBDA
-	// value to directly use a Lambda function as your identity provider. If you choose
-	// this value, you must specify the ARN for the lambda function in the Function
-	// parameter for the IdentityProviderDetails data type.
+	// for authentication using the IdentityProviderDetails parameter. Use the
+	// AWS_LAMBDA value to directly use a Lambda function as your identity provider. If
+	// you choose this value, you must specify the ARN for the lambda function in the
+	// Function parameter for the IdentityProviderDetails data type.
 	IdentityProviderType IdentityProviderType
 
 	// Specifies the Amazon Resource Name (ARN) of the Amazon Web Services Identity and
@@ -796,8 +796,7 @@ type PosixProfile struct {
 	noSmithyDocumentSerde
 }
 
-// The protocol settings that are configured for your server. This type is only
-// valid in the UpdateServer API.
+// The protocol settings that are configured for your server.
 type ProtocolDetails struct {
 
 	// Indicates passive mode, for FTP and FTPS protocols. Enter a single dotted-quad
@@ -810,6 +809,33 @@ type ProtocolDetails struct {
 	// behind a firewall or NAT with Amazon Web Services Transfer Family
 	// (http://aws.amazon.com/blogs/storage/configuring-your-ftps-server-behind-a-firewall-or-nat-with-aws-transfer-family/).
 	PassiveIp *string
+
+	// A property used with Transfer servers that use the FTPS protocol. TLS Session
+	// Resumption provides a mechanism to resume or share a negotiated secret key
+	// between the control and data connection for an FTPS session.
+	// TlsSessionResumptionMode determines whether or not the server resumes recent,
+	// negotiated sessions through a unique session ID. This property is available
+	// during CreateServer and UpdateServer calls. If a TlsSessionResumptionMode value
+	// is not specified during CreateServer, it is set to ENFORCED by default.
+	//
+	// *
+	// DISABLED: the server does not process TLS session resumption client requests and
+	// creates a new TLS session for each request.
+	//
+	// * ENABLED: the server processes and
+	// accepts clients that are performing TLS session resumption. The server doesn't
+	// reject client data connections that do not perform the TLS session resumption
+	// client processing.
+	//
+	// * ENFORCED: the server processes and accepts clients that
+	// are performing TLS session resumption. The server rejects client data
+	// connections that do not perform the TLS session resumption client processing.
+	// Before you set the value to ENFORCED, test your clients. Not all FTPS clients
+	// perform TLS session resumption. So, if you choose to enforce TLS session
+	// resumption, you prevent any connections from FTPS clients that don't perform the
+	// protocol negotiation. To determine whether or not you can use the ENFORCED
+	// value, you need to test your clients.
+	TlsSessionResumptionMode TlsSessionResumptionMode
 
 	noSmithyDocumentSerde
 }

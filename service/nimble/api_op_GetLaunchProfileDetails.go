@@ -46,7 +46,6 @@ type GetLaunchProfileDetailsInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type GetLaunchProfileDetailsOutput struct {
 
 	// The launch profile.

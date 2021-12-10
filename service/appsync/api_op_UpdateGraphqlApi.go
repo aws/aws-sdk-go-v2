@@ -45,7 +45,7 @@ type UpdateGraphqlApiInput struct {
 	// The new authentication type for the GraphqlApi object.
 	AuthenticationType types.AuthenticationType
 
-	// Configuration for Amazon Web Services Lambda function authorization.
+	// Configuration for Lambda function authorization.
 	LambdaAuthorizerConfig *types.LambdaAuthorizerConfig
 
 	// The Amazon CloudWatch Logs configuration for the GraphqlApi object.
@@ -54,10 +54,10 @@ type UpdateGraphqlApiInput struct {
 	// The OpenID Connect configuration for the GraphqlApi object.
 	OpenIDConnectConfig *types.OpenIDConnectConfig
 
-	// The new Amazon Cognito user pool configuration for the GraphqlApi object.
+	// The new Amazon Cognito user pool configuration for the ~GraphqlApi object.
 	UserPoolConfig *types.UserPoolConfig
 
-	// A flag indicating whether to enable X-Ray tracing for the GraphqlApi.
+	// A flag indicating whether to use X-Ray tracing for the GraphqlApi.
 	XrayEnabled bool
 
 	noSmithyDocumentSerde

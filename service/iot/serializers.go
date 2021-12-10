@@ -1309,6 +1309,11 @@ func awsRestjson1_serializeOpDocumentCreateAuthorizerInput(v *CreateAuthorizerIn
 		ok.String(*v.AuthorizerFunctionArn)
 	}
 
+	if v.EnableCachingForHttp != nil {
+		ok := object.Key("enableCachingForHttp")
+		ok.Boolean(*v.EnableCachingForHttp)
+	}
+
 	if v.SigningDisabled != nil {
 		ok := object.Key("signingDisabled")
 		ok.Boolean(*v.SigningDisabled)
@@ -15126,6 +15131,11 @@ func awsRestjson1_serializeOpDocumentUpdateAuthorizerInput(v *UpdateAuthorizerIn
 	if v.AuthorizerFunctionArn != nil {
 		ok := object.Key("authorizerFunctionArn")
 		ok.String(*v.AuthorizerFunctionArn)
+	}
+
+	if v.EnableCachingForHttp != nil {
+		ok := object.Key("enableCachingForHttp")
+		ok.Boolean(*v.EnableCachingForHttp)
 	}
 
 	if len(v.Status) > 0 {

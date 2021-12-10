@@ -53,12 +53,13 @@ type UpdateResolverInput struct {
 	// The resolver type.
 	//
 	// * UNIT: A UNIT resolver type. A UNIT resolver is the default
-	// resolver type. A UNIT resolver enables you to execute a GraphQL query against a
+	// resolver type. You can use a UNIT resolver to run a GraphQL query against a
 	// single data source.
 	//
-	// * PIPELINE: A PIPELINE resolver type. A PIPELINE resolver
-	// enables you to execute a series of Function in a serial manner. You can use a
-	// pipeline resolver to execute a GraphQL query against multiple data sources.
+	// * PIPELINE: A PIPELINE resolver type. You can use a
+	// PIPELINE resolver to invoke a series of Function objects in a serial manner. You
+	// can use a pipeline resolver to run a GraphQL query against multiple data
+	// sources.
 	Kind types.ResolverKind
 
 	// The PipelineConfig.
@@ -67,14 +68,14 @@ type UpdateResolverInput struct {
 	// The new request mapping template. A resolver uses a request mapping template to
 	// convert a GraphQL expression into a format that a data source can understand.
 	// Mapping templates are written in Apache Velocity Template Language (VTL). VTL
-	// request mapping templates are optional when using a Lambda data source. For all
+	// request mapping templates are optional when using an Lambda data source. For all
 	// other data sources, VTL request and response mapping templates are required.
 	RequestMappingTemplate *string
 
 	// The new response mapping template.
 	ResponseMappingTemplate *string
 
-	// The SyncConfig for a resolver attached to a versioned datasource.
+	// The SyncConfig for a resolver attached to a versioned data source.
 	SyncConfig *types.SyncConfig
 
 	noSmithyDocumentSerde

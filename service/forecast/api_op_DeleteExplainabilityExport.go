@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an Explainability export job.
+// Deletes an Explainability export.
 func (c *Client) DeleteExplainabilityExport(ctx context.Context, params *DeleteExplainabilityExportInput, optFns ...func(*Options)) (*DeleteExplainabilityExportOutput, error) {
 	if params == nil {
 		params = &DeleteExplainabilityExportInput{}

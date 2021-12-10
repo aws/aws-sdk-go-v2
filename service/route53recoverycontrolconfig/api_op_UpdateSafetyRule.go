@@ -11,10 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Update a safety rule (an assertion rule or gating rule) for the routing controls
-// in a control panel. You can only update the name and the waiting period for a
-// safety rule. To make other updates, delete the safety rule and create a new
-// safety rule.
+// Update a safety rule (an assertion rule or gating rule). You can only update the
+// name and the waiting period for a safety rule. To make other updates, delete the
+// safety rule and create a new one.
 func (c *Client) UpdateSafetyRule(ctx context.Context, params *UpdateSafetyRuleInput, optFns ...func(*Options)) (*UpdateSafetyRuleOutput, error) {
 	if params == nil {
 		params = &UpdateSafetyRuleInput{}
@@ -30,15 +29,14 @@ func (c *Client) UpdateSafetyRule(ctx context.Context, params *UpdateSafetyRuleI
 	return out, nil
 }
 
+// A rule that you add to Application Recovery Controller to ensure that recovery
+// actions don't accidentally impair your application's availability.
 type UpdateSafetyRuleInput struct {
 
-	// An update to an assertion rule. You can update the name or the evaluation period
-	// (wait period). If you don't specify one of the items to update, the item is
-	// unchanged.
+	// The assertion rule to update.
 	AssertionRuleUpdate *types.AssertionRuleUpdate
 
-	// Update to a gating rule. You can update the name or the evaluation period (wait
-	// period). If you don't specify one of the items to update, the item is unchanged.
+	// The gating rule to update.
 	GatingRuleUpdate *types.GatingRuleUpdate
 
 	noSmithyDocumentSerde
@@ -46,15 +44,10 @@ type UpdateSafetyRuleInput struct {
 
 type UpdateSafetyRuleOutput struct {
 
-	// An assertion rule enforces that, when a routing control state is changed, the
-	// criteria set by the rule configuration is met. Otherwise, the change to the
-	// routing control is not accepted.
+	// The assertion rule updated.
 	AssertionRule *types.AssertionRule
 
-	// A gating rule verifies that a set of gating controls evaluates as true, based on
-	// a rule configuration that you specify. If the gating rule evaluates to true,
-	// Amazon Route 53 Application Recovery Controller allows a set of routing control
-	// state changes to run and complete against the set of target controls.
+	// The gating rule updated.
 	GatingRule *types.GatingRule
 
 	// Metadata pertaining to the operation's result.

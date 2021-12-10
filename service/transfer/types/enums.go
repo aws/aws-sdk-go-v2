@@ -200,6 +200,26 @@ func (State) Values() []State {
 	}
 }
 
+type TlsSessionResumptionMode string
+
+// Enum values for TlsSessionResumptionMode
+const (
+	TlsSessionResumptionModeDisabled TlsSessionResumptionMode = "DISABLED"
+	TlsSessionResumptionModeEnabled  TlsSessionResumptionMode = "ENABLED"
+	TlsSessionResumptionModeEnforced TlsSessionResumptionMode = "ENFORCED"
+)
+
+// Values returns all known values for TlsSessionResumptionMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TlsSessionResumptionMode) Values() []TlsSessionResumptionMode {
+	return []TlsSessionResumptionMode{
+		"DISABLED",
+		"ENABLED",
+		"ENFORCED",
+	}
+}
+
 type WorkflowStepType string
 
 // Enum values for WorkflowStepType

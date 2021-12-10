@@ -43,7 +43,6 @@ func (c *Client) CreateStudio(ctx context.Context, params *CreateStudioInput, op
 	return out, nil
 }
 
-//
 type CreateStudioInput struct {
 
 	// The IAM role that Studio Admins will assume when logging in to the Nimble Studio
@@ -84,7 +83,6 @@ type CreateStudioInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type CreateStudioOutput struct {
 
 	// Information about a studio.

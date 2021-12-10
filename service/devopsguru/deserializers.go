@@ -1616,6 +1616,11 @@ func awsRestjson1_deserializeOpDocumentDescribeOrganizationResourceCollectionHea
 				return err
 			}
 
+		case "Tags":
+			if err := awsRestjson1_deserializeDocumentTagHealths(&sv.Tags, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 

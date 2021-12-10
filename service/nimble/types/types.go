@@ -158,7 +158,7 @@ type LaunchProfile struct {
 }
 
 // A Launch Profile Initialization contains information required for a workstation
-// or server to connect to a launch profile This includes scripts, endpoints,
+// or server to connect to a launch profile. This includes scripts, endpoints,
 // security groups, subnets, and other configuration.
 type LaunchProfileInitialization struct {
 
@@ -193,7 +193,8 @@ type LaunchProfileInitialization struct {
 	noSmithyDocumentSerde
 }
 
-//
+// The Launch Profile Initialization Active Directory contains information required
+// for the launch profile to connect to the Active Directory.
 type LaunchProfileInitializationActiveDirectory struct {
 
 	// A collection of custom attributes for an Active Directory computer.
@@ -221,7 +222,8 @@ type LaunchProfileInitializationActiveDirectory struct {
 	noSmithyDocumentSerde
 }
 
-//
+// The Launch Profile Initialization Script is used when start streaming session
+// runs.
 type LaunchProfileInitializationScript struct {
 
 	// The initialization script.
@@ -236,7 +238,26 @@ type LaunchProfileInitializationScript struct {
 	noSmithyDocumentSerde
 }
 
+// Launch profile membership enables your studio admins to delegate launch profile
+// access to other studio users in the Nimble Studio portal without needing to
+// write or maintain complex IAM policies. A launch profile member is a user
+// association from your studio identity source who is granted permissions to a
+// launch profile. A launch profile member (type USER) provides the following
+// permissions to that launch profile:
 //
+// * GetLaunchProfile
+//
+// *
+// GetLaunchProfileInitialization
+//
+// * GetLaunchProfileMembers
+//
+// *
+// GetLaunchProfileMember
+//
+// * CreateStreamingSession
+//
+// * GetLaunchProfileDetails
 type LaunchProfileMembership struct {
 
 	// The ID of the identity store.
@@ -265,7 +286,7 @@ type LicenseServiceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-//
+// A new member that is added to a launch profile.
 type NewLaunchProfileMember struct {
 
 	// The persona.
@@ -281,7 +302,7 @@ type NewLaunchProfileMember struct {
 	noSmithyDocumentSerde
 }
 
-//
+// A new studio user's membership.
 type NewStudioMember struct {
 
 	// The persona.
@@ -371,6 +392,9 @@ type StreamConfiguration struct {
 	// the session will automatically be stopped by AWS (instead of terminated).
 	MaxStoppedSessionLengthInMinutes int32
 
+	// (Optional) The upload storage for a streaming session.
+	SessionStorage *StreamConfigurationSessionStorage
+
 	noSmithyDocumentSerde
 }
 
@@ -401,11 +425,36 @@ type StreamConfigurationCreate struct {
 	// the maximum length of time is 30 days.
 	MaxSessionLengthInMinutes int32
 
-	// The length of time, in minutes, that a streaming session can be active before it
-	// is stopped or terminated. After this point, Nimble Studio automatically
-	// terminates or stops the session. The default length of time is 690 minutes, and
-	// the maximum length of time is 30 days.
+	// Integer that determines if you can start and stop your sessions and how long a
+	// session can stay in the STOPPED state. The default value is 0. The maximum value
+	// is 5760. If the value is missing or set to 0, your sessions can’t be stopped. If
+	// you then call StopStreamingSession, the session fails. If the time that a
+	// session stays in the READY state exceeds the maxSessionLengthInMinutes value,
+	// the session will automatically be terminated by AWS (instead of stopped). If the
+	// value is set to a positive number, the session can be stopped. You can call
+	// StopStreamingSession to stop sessions in the READY state. If the time that a
+	// session stays in the READY state exceeds the maxSessionLengthInMinutes value,
+	// the session will automatically be stopped by AWS (instead of terminated).
 	MaxStoppedSessionLengthInMinutes int32
+
+	// (Optional) The upload storage for a streaming workstation that is created using
+	// this launch profile.
+	SessionStorage *StreamConfigurationSessionStorage
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for a streaming session’s upload storage.
+type StreamConfigurationSessionStorage struct {
+
+	// Allows artists to upload files to their workstations. The only valid option is
+	// UPLOAD.
+	//
+	// This member is required.
+	Mode []StreamingSessionStorageMode
+
+	// The configuration for the upload storage root of the streaming session.
+	Root *StreamingSessionStorageRoot
 
 	noSmithyDocumentSerde
 }
@@ -544,6 +593,21 @@ type StreamingSession struct {
 
 	// The user ID of the user that most recently updated the resource.
 	UpdatedBy *string
+
+	noSmithyDocumentSerde
+}
+
+// The upload storage root location (folder) on streaming workstations where files
+// are uploaded.
+type StreamingSessionStorageRoot struct {
+
+	// The folder path in Linux workstations where files are uploaded. The default path
+	// is $HOME/Downloads.
+	Linux *string
+
+	// The folder path in Windows workstations where files are uploaded. The default
+	// path is %HOMEPATH%\Downloads.
+	Windows *string
 
 	noSmithyDocumentSerde
 }
@@ -762,7 +826,7 @@ type StudioComponentInitializationScript struct {
 	noSmithyDocumentSerde
 }
 
-//
+// The studio component's summary.
 type StudioComponentSummary struct {
 
 	// The Unix epoch timestamp in seconds for when the resource was created.

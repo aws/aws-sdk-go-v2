@@ -37,11 +37,11 @@ type ListApiKeysInput struct {
 	// This member is required.
 	ApiId *string
 
-	// The maximum number of results you want the request to return.
+	// The maximum number of results that you want the request to return.
 	MaxResults int32
 
 	// An identifier that was returned from the previous call to this operation, which
-	// can be used to return the next set of items in the list.
+	// you can use to return the next set of items in the list.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -52,8 +52,8 @@ type ListApiKeysOutput struct {
 	// The ApiKey objects.
 	ApiKeys []types.ApiKey
 
-	// An identifier to be passed in the next request to this operation to return the
-	// next set of items in the list.
+	// An identifier to pass in the next request to this operation to return the next
+	// set of items in the list.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

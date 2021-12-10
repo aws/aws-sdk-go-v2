@@ -29,7 +29,6 @@ func (c *Client) CreateStreamingSession(ctx context.Context, params *CreateStrea
 	return out, nil
 }
 
-//
 type CreateStreamingSessionInput struct {
 
 	// The studio ID.
@@ -61,7 +60,6 @@ type CreateStreamingSessionInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type CreateStreamingSessionOutput struct {
 
 	// The session.

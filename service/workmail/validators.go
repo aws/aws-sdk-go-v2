@@ -230,6 +230,26 @@ func (m *validateOpDeleteAlias) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteEmailMonitoringConfiguration struct {
+}
+
+func (*validateOpDeleteEmailMonitoringConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteEmailMonitoringConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteEmailMonitoringConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteEmailMonitoringConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteGroup struct {
 }
 
@@ -425,6 +445,26 @@ func (m *validateOpDeregisterMailDomain) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeregisterMailDomainInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeEmailMonitoringConfiguration struct {
+}
+
+func (*validateOpDescribeEmailMonitoringConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeEmailMonitoringConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeEmailMonitoringConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeEmailMonitoringConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -990,6 +1030,26 @@ func (m *validateOpPutAccessControlRule) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutEmailMonitoringConfiguration struct {
+}
+
+func (*validateOpPutEmailMonitoringConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutEmailMonitoringConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutEmailMonitoringConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutEmailMonitoringConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutInboundDmarcSettings struct {
 }
 
@@ -1334,6 +1394,10 @@ func addOpDeleteAliasValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAlias{}, middleware.After)
 }
 
+func addOpDeleteEmailMonitoringConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteEmailMonitoringConfiguration{}, middleware.After)
+}
+
 func addOpDeleteGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteGroup{}, middleware.After)
 }
@@ -1372,6 +1436,10 @@ func addOpDeregisterFromWorkMailValidationMiddleware(stack *middleware.Stack) er
 
 func addOpDeregisterMailDomainValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeregisterMailDomain{}, middleware.After)
+}
+
+func addOpDescribeEmailMonitoringConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeEmailMonitoringConfiguration{}, middleware.After)
 }
 
 func addOpDescribeGroupValidationMiddleware(stack *middleware.Stack) error {
@@ -1484,6 +1552,10 @@ func addOpListUsersValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpPutAccessControlRuleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutAccessControlRule{}, middleware.After)
+}
+
+func addOpPutEmailMonitoringConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutEmailMonitoringConfiguration{}, middleware.After)
 }
 
 func addOpPutInboundDmarcSettingsValidationMiddleware(stack *middleware.Stack) error {
@@ -1838,6 +1910,21 @@ func validateOpDeleteAliasInput(v *DeleteAliasInput) error {
 	}
 }
 
+func validateOpDeleteEmailMonitoringConfigurationInput(v *DeleteEmailMonitoringConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteEmailMonitoringConfigurationInput"}
+	if v.OrganizationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteGroupInput(v *DeleteGroupInput) error {
 	if v == nil {
 		return nil
@@ -2013,6 +2100,21 @@ func validateOpDeregisterMailDomainInput(v *DeregisterMailDomainInput) error {
 	}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeEmailMonitoringConfigurationInput(v *DescribeEmailMonitoringConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeEmailMonitoringConfigurationInput"}
+	if v.OrganizationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2499,6 +2601,27 @@ func validateOpPutAccessControlRuleInput(v *PutAccessControlRuleInput) error {
 	}
 	if v.OrganizationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutEmailMonitoringConfigurationInput(v *PutEmailMonitoringConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutEmailMonitoringConfigurationInput"}
+	if v.OrganizationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.LogGroupArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LogGroupArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

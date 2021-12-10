@@ -47,7 +47,6 @@ type GetStudioComponentInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type GetStudioComponentOutput struct {
 
 	// Information about the studio component.

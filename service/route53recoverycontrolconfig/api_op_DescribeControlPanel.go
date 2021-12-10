@@ -35,8 +35,7 @@ func (c *Client) DescribeControlPanel(ctx context.Context, params *DescribeContr
 
 type DescribeControlPanelInput struct {
 
-	// The Amazon Resource Name (ARN) of the control panel that you're getting details
-	// for.
+	// The Amazon Resource Name (ARN) of the control panel.
 	//
 	// This member is required.
 	ControlPanelArn *string

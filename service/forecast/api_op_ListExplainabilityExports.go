@@ -42,7 +42,7 @@ type ListExplainabilityExportsInput struct {
 	// apply. Valid values are IS and IS_NOT.
 	//
 	// * Key - The name of the parameter to
-	// filter on. Valid values are PredictorArn and Status.
+	// filter on. Valid values are ResourceArn and Status.
 	//
 	// * Value - The value to
 	// match.

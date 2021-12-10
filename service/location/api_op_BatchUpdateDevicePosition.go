@@ -22,7 +22,14 @@ import (
 // seconds, only one update per 30 seconds is stored for each unique device ID.
 // When PositionFiltering is set to DistanceBased filtering, location data is
 // stored and evaluated against linked geofence collections only if the device has
-// moved more than 30 m (98.4 ft).
+// moved more than 30 m (98.4 ft). When PositionFiltering is set to AccuracyBased
+// filtering, location data is stored and evaluated against linked geofence
+// collections only if the device has moved more than the measured accuracy. For
+// example, if two consecutive updates from a device have a horizontal accuracy of
+// 5 m and 10 m, the second update is neither stored or evaluated if the device has
+// moved less than 15 m. If PositionFiltering is set to AccuracyBased filtering,
+// Amazon Location uses the default value { "Horizontal": 0} when accuracy is not
+// provided on a DevicePositionUpdate.
 func (c *Client) BatchUpdateDevicePosition(ctx context.Context, params *BatchUpdateDevicePositionInput, optFns ...func(*Options)) (*BatchUpdateDevicePositionOutput, error) {
 	if params == nil {
 		params = &BatchUpdateDevicePositionInput{}

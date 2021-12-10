@@ -21,6 +21,7 @@
         "api_op_DescribeLoggingConfiguration.go",
         "api_op_DescribeResourcePolicy.go",
         "api_op_DescribeRuleGroup.go",
+        "api_op_DescribeRuleGroupMetadata.go",
         "api_op_DisassociateSubnets.go",
         "api_op_ListFirewallPolicies.go",
         "api_op_ListFirewalls.go",

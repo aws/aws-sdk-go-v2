@@ -42,7 +42,6 @@ type GetStudioMemberInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type GetStudioMemberOutput struct {
 
 	// The member.

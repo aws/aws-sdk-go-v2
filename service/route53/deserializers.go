@@ -9555,6 +9555,9 @@ func awsRestxml_deserializeOpErrorUpdateHostedZoneComment(response *smithyhttp.R
 	case strings.EqualFold("NoSuchHostedZone", errorCode):
 		return awsRestxml_deserializeErrorNoSuchHostedZone(response, errorBody)
 
+	case strings.EqualFold("PriorRequestNotComplete", errorCode):
+		return awsRestxml_deserializeErrorPriorRequestNotComplete(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,

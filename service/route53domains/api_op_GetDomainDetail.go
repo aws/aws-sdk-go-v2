@@ -13,8 +13,8 @@ import (
 )
 
 // This operation returns detailed information about a specified domain that is
-// associated with the current AWS account. Contact information for the domain is
-// also returned as part of the output.
+// associated with the current Amazon Web Services account. Contact information for
+// the domain is also returned as part of the output.
 func (c *Client) GetDomainDetail(ctx context.Context, params *GetDomainDetailInput, optFns ...func(*Options)) (*GetDomainDetailOutput, error) {
 	if params == nil {
 		params = &GetDomainDetailInput{}
@@ -91,7 +91,7 @@ type GetDomainDetailOutput struct {
 	// The date and time is in Unix time format and Coordinated Universal time (UTC).
 	CreationDate *time.Time
 
-	// Reserved for future use.
+	// Deprecated.
 	DnsSec *string
 
 	// The date when the registration for the domain is set to expire. The date and

@@ -44,10 +44,9 @@ type DescribeExplainabilityOutput struct {
 	// When the Explainability resource was created.
 	CreationTime *time.Time
 
-	// The source of your training data, an AWS Identity and Access Management (IAM)
-	// role that allows Amazon Forecast to access the data and, optionally, an AWS Key
-	// Management Service (KMS) key. This object is submitted in the
-	// CreateDatasetImportJob request.
+	// The source of your data, an AWS Identity and Access Management (IAM) role that
+	// allows Amazon Forecast to access the data and, optionally, an AWS Key Management
+	// Service (KMS) key.
 	DataSource *types.DataSource
 
 	// Whether the visualization was enabled for the Explainability resource.
@@ -95,8 +94,7 @@ type DescribeExplainabilityOutput struct {
 	// Explainability resource.
 	ResourceArn *string
 
-	// Defines the fields of a dataset. You specify this object in the CreateDataset
-	// request.
+	// Defines the fields of a dataset.
 	Schema *types.Schema
 
 	// If TimePointGranularity is set to SPECIFIC, the first time point in the

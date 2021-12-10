@@ -1195,6 +1195,13 @@ func awsRestjson1_serializeOpDocumentCreateSlotTypeInput(v *CreateSlotTypeInput,
 		ok.String(*v.Description)
 	}
 
+	if v.ExternalSourceSetting != nil {
+		ok := object.Key("externalSourceSetting")
+		if err := awsRestjson1_serializeDocumentExternalSourceSetting(v.ExternalSourceSetting, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ParentSlotTypeSignature != nil {
 		ok := object.Key("parentSlotTypeSignature")
 		ok.String(*v.ParentSlotTypeSignature)
@@ -5959,6 +5966,13 @@ func awsRestjson1_serializeOpDocumentUpdateSlotTypeInput(v *UpdateSlotTypeInput,
 		ok.String(*v.Description)
 	}
 
+	if v.ExternalSourceSetting != nil {
+		ok := object.Key("externalSourceSetting")
+		if err := awsRestjson1_serializeDocumentExternalSourceSetting(v.ExternalSourceSetting, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ParentSlotTypeSignature != nil {
 		ok := object.Key("parentSlotTypeSignature")
 		ok.String(*v.ParentSlotTypeSignature)
@@ -6724,6 +6738,20 @@ func awsRestjson1_serializeDocumentExportSortBy(v *types.ExportSortBy, value smi
 	return nil
 }
 
+func awsRestjson1_serializeDocumentExternalSourceSetting(v *types.ExternalSourceSetting, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.GrammarSlotTypeSetting != nil {
+		ok := object.Key("grammarSlotTypeSetting")
+		if err := awsRestjson1_serializeDocumentGrammarSlotTypeSetting(v.GrammarSlotTypeSetting, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentFilterValues(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -6835,6 +6863,42 @@ func awsRestjson1_serializeDocumentFulfillmentUpdatesSpecification(v *types.Fulf
 		if err := awsRestjson1_serializeDocumentFulfillmentUpdateResponseSpecification(v.UpdateResponse, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGrammarSlotTypeSetting(v *types.GrammarSlotTypeSetting, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Source != nil {
+		ok := object.Key("source")
+		if err := awsRestjson1_serializeDocumentGrammarSlotTypeSource(v.Source, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGrammarSlotTypeSource(v *types.GrammarSlotTypeSource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.KmsKeyArn != nil {
+		ok := object.Key("kmsKeyArn")
+		ok.String(*v.KmsKeyArn)
+	}
+
+	if v.S3BucketName != nil {
+		ok := object.Key("s3BucketName")
+		ok.String(*v.S3BucketName)
+	}
+
+	if v.S3ObjectKey != nil {
+		ok := object.Key("s3ObjectKey")
+		ok.String(*v.S3ObjectKey)
 	}
 
 	return nil

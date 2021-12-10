@@ -28,7 +28,6 @@ func (c *Client) AcceptEulas(ctx context.Context, params *AcceptEulasInput, optF
 	return out, nil
 }
 
-//
 type AcceptEulasInput struct {
 
 	// A collection of EULA IDs.
@@ -47,7 +46,6 @@ type AcceptEulasInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type AcceptEulasOutput struct {
 
 	// A collection of EULA acceptances.

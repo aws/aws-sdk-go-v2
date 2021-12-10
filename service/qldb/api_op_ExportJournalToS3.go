@@ -13,10 +13,16 @@ import (
 )
 
 // Exports journal contents within a date and time range from a ledger into a
-// specified Amazon Simple Storage Service (Amazon S3) bucket. The data is written
-// as files in Amazon Ion format. If the ledger with the given Name doesn't exist,
-// then throws ResourceNotFoundException. If the ledger with the given Name is in
-// CREATING status, then throws ResourcePreconditionNotMetException. You can
+// specified Amazon Simple Storage Service (Amazon S3) bucket. A journal export job
+// can write the data objects in either the text or binary representation of Amazon
+// Ion format, or in JSON Lines text format. In JSON Lines format, each journal
+// block in the exported data object is a valid JSON object that is delimited by a
+// newline. You can use this format to easily integrate JSON exports with analytics
+// tools such as Glue and Amazon Athena because these services can parse
+// newline-delimited JSON automatically. For more information about the format, see
+// JSON Lines (https://jsonlines.org/). If the ledger with the given Name doesn't
+// exist, then throws ResourceNotFoundException. If the ledger with the given Name
+// is in CREATING status, then throws ResourcePreconditionNotMetException. You can
 // initiate up to two concurrent journal export requests for each ledger. Beyond
 // this limit, journal export requests throw LimitExceededException.
 func (c *Client) ExportJournalToS3(ctx context.Context, params *ExportJournalToS3Input, optFns ...func(*Options)) (*ExportJournalToS3Output, error) {
@@ -66,8 +72,12 @@ type ExportJournalToS3Input struct {
 	// Simple Storage Service (Amazon S3) bucket.
 	//
 	// * (Optional) Use your customer
-	// master key (CMK) in Key Management Service (KMS) for server-side encryption of
-	// your exported data.
+	// managed key in Key Management Service (KMS) for server-side encryption of your
+	// exported data.
+	//
+	// To pass a role to QLDB when requesting a journal export, you
+	// must have permissions to perform the iam:PassRole action on the IAM role
+	// resource. This is required for all journal export requests.
 	//
 	// This member is required.
 	RoleArn *string
@@ -77,6 +87,10 @@ type ExportJournalToS3Input struct {
 	//
 	// This member is required.
 	S3ExportConfiguration *types.S3ExportConfiguration
+
+	// The output format of your exported journal data. If this parameter is not
+	// specified, the exported data defaults to ION_TEXT format.
+	OutputFormat types.OutputFormat
 
 	noSmithyDocumentSerde
 }

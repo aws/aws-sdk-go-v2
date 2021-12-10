@@ -31,8 +31,7 @@ func (c *Client) ListSafetyRules(ctx context.Context, params *ListSafetyRulesInp
 
 type ListSafetyRulesInput struct {
 
-	// The Amazon Resource Name (ARN) of the control panel that you're getting details
-	// for.
+	// The Amazon Resource Name (ARN) of the control panel.
 	//
 	// This member is required.
 	ControlPanelArn *string

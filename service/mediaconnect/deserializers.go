@@ -7814,6 +7814,28 @@ func awsRestjson1_deserializeDocumentSource(v **types.Source, value interface{})
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "senderControlPort":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SenderControlPort = int32(i64)
+			}
+
+		case "senderIpAddress":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.SenderIpAddress = ptr.String(jtv)
+			}
+
 		case "sourceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8030,6 +8052,28 @@ func awsRestjson1_deserializeDocumentTransport(v **types.Transport, value interf
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.RemoteId = ptr.String(jtv)
+			}
+
+		case "senderControlPort":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SenderControlPort = int32(i64)
+			}
+
+		case "senderIpAddress":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.SenderIpAddress = ptr.String(jtv)
 			}
 
 		case "smoothingLatency":

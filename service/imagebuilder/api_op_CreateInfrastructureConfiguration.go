@@ -73,7 +73,11 @@ type CreateInfrastructureConfigurationInput struct {
 	// Amazon EC2 AMI.
 	SecurityGroupIds []string
 
-	// The SNS topic on which to send image build events.
+	// The Amazon Resource Name (ARN) for the SNS topic to which we send image build
+	// event notifications. EC2 Image Builder is unable to send notifications to SNS
+	// topics that are encrypted using keys from other accounts. The key that is used
+	// to encrypt the SNS topic must reside in the account that the Image Builder
+	// service runs under.
 	SnsTopicArn *string
 
 	// The subnet ID in which to place the instance used to customize your Amazon EC2

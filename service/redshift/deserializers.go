@@ -23453,6 +23453,19 @@ func awsAwsquery_deserializeDocumentDataShare(v **types.DataShare, decoder smith
 				return err
 			}
 
+		case strings.EqualFold("ManagedBy", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ManagedBy = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("ProducerArn", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -37558,6 +37571,19 @@ func awsAwsquery_deserializeOpDocumentAssociateDataShareConsumerOutput(v **Assoc
 				return err
 			}
 
+		case strings.EqualFold("ManagedBy", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ManagedBy = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("ProducerArn", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -37682,6 +37708,19 @@ func awsAwsquery_deserializeOpDocumentAuthorizeDataShareOutput(v **AuthorizeData
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentDataShareAssociationList(&sv.DataShareAssociations, nodeDecoder); err != nil {
 				return err
+			}
+
+		case strings.EqualFold("ManagedBy", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ManagedBy = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("ProducerArn", t.Name.Local):
@@ -39341,6 +39380,19 @@ func awsAwsquery_deserializeOpDocumentDeauthorizeDataShareOutput(v **Deauthorize
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentDataShareAssociationList(&sv.DataShareAssociations, nodeDecoder); err != nil {
 				return err
+			}
+
+		case strings.EqualFold("ManagedBy", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ManagedBy = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("ProducerArn", t.Name.Local):
@@ -42200,6 +42252,19 @@ func awsAwsquery_deserializeOpDocumentDisassociateDataShareConsumerOutput(v **Di
 				return err
 			}
 
+		case strings.EqualFold("ManagedBy", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ManagedBy = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("ProducerArn", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -43813,6 +43878,19 @@ func awsAwsquery_deserializeOpDocumentRejectDataShareOutput(v **RejectDataShareO
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentDataShareAssociationList(&sv.DataShareAssociations, nodeDecoder); err != nil {
 				return err
+			}
+
+		case strings.EqualFold("ManagedBy", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ManagedBy = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("ProducerArn", t.Name.Local):

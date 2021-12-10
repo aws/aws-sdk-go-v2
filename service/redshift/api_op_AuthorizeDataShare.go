@@ -12,8 +12,8 @@ import (
 )
 
 // From a data producer account, authorizes the sharing of a datashare with one or
-// more consumer accounts. To authorize a datashare for a data consumer, the
-// producer account must have the correct access privileges.
+// more consumer accounts or managing entities. To authorize a datashare for a data
+// consumer, the producer account must have the correct access privileges.
 func (c *Client) AuthorizeDataShare(ctx context.Context, params *AuthorizeDataShareInput, optFns ...func(*Options)) (*AuthorizeDataShareOutput, error) {
 	if params == nil {
 		params = &AuthorizeDataShareInput{}
@@ -32,7 +32,7 @@ func (c *Client) AuthorizeDataShare(ctx context.Context, params *AuthorizeDataSh
 type AuthorizeDataShareInput struct {
 
 	// The identifier of the data consumer that is authorized to access the datashare.
-	// This identifier is an Amazon Web Services account ID.
+	// This identifier is an Amazon Web Services account ID or a keyword, such as ADX.
 	//
 	// This member is required.
 	ConsumerIdentifier *string
@@ -61,6 +61,9 @@ type AuthorizeDataShareOutput struct {
 	// A value that specifies when the datashare has an association between a producer
 	// and data consumers.
 	DataShareAssociations []types.DataShareAssociation
+
+	// The identifier of a datashare to show its managing entity.
+	ManagedBy *string
 
 	// The Amazon Resource Name (ARN) of the producer.
 	ProducerArn *string

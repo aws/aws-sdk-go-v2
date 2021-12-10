@@ -55,7 +55,6 @@ type GetStreamingSessionStreamInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type GetStreamingSessionStreamOutput struct {
 
 	// The stream.

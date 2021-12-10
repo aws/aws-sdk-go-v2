@@ -28,7 +28,7 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
-	// The GraphqlApi ARN.
+	// The GraphqlApi Amazon Resource Name (ARN).
 	//
 	// This member is required.
 	ResourceArn *string

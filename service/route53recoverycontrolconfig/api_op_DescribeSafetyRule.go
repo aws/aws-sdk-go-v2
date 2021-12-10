@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the safety rules (that is, the assertion rules and gating rules) for
-// the routing controls in a control panel.
+// Returns information about a safety rule.
 func (c *Client) DescribeSafetyRule(ctx context.Context, params *DescribeSafetyRuleInput, optFns ...func(*Options)) (*DescribeSafetyRuleOutput, error) {
 	if params == nil {
 		params = &DescribeSafetyRuleInput{}
@@ -30,7 +29,7 @@ func (c *Client) DescribeSafetyRule(ctx context.Context, params *DescribeSafetyR
 
 type DescribeSafetyRuleInput struct {
 
-	// The request body that you include when you update a safety rule.
+	// The ARN of the safety rule.
 	//
 	// This member is required.
 	SafetyRuleArn *string
@@ -40,15 +39,10 @@ type DescribeSafetyRuleInput struct {
 
 type DescribeSafetyRuleOutput struct {
 
-	// An assertion rule enforces that, when a routing control state is changed, the
-	// criteria set by the rule configuration is met. Otherwise, the change to the
-	// routing control is not accepted.
+	// The assertion rule in the response.
 	AssertionRule *types.AssertionRule
 
-	// A gating rule verifies that a set of gating controls evaluates as true, based on
-	// a rule configuration that you specify. If the gating rule evaluates to true,
-	// Amazon Route 53 Application Recovery Controller allows a set of routing control
-	// state changes to run and complete against the set of target controls.
+	// The gating rule in the response.
 	GatingRule *types.GatingRule
 
 	// Metadata pertaining to the operation's result.

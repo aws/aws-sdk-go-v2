@@ -29,8 +29,7 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 type UntagResourceInput struct {
 
 	// The Amazon Resource Name (ARN) that identifies the resource for which to list
-	// the tags. Currently, the supported resources are Forecast dataset groups,
-	// datasets, dataset import jobs, predictors, forecasts, and forecast exports.
+	// the tags.
 	//
 	// This member is required.
 	ResourceArn *string

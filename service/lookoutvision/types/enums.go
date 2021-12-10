@@ -60,6 +60,28 @@ func (ModelHostingStatus) Values() []ModelHostingStatus {
 	}
 }
 
+type ModelPackagingJobStatus string
+
+// Enum values for ModelPackagingJobStatus
+const (
+	ModelPackagingJobStatusCreated   ModelPackagingJobStatus = "CREATED"
+	ModelPackagingJobStatusRunning   ModelPackagingJobStatus = "RUNNING"
+	ModelPackagingJobStatusSucceeded ModelPackagingJobStatus = "SUCCEEDED"
+	ModelPackagingJobStatusFailed    ModelPackagingJobStatus = "FAILED"
+)
+
+// Values returns all known values for ModelPackagingJobStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ModelPackagingJobStatus) Values() []ModelPackagingJobStatus {
+	return []ModelPackagingJobStatus{
+		"CREATED",
+		"RUNNING",
+		"SUCCEEDED",
+		"FAILED",
+	}
+}
+
 type ModelStatus string
 
 // Enum values for ModelStatus
@@ -96,10 +118,11 @@ type ResourceType string
 
 // Enum values for ResourceType
 const (
-	ResourceTypeProject ResourceType = "PROJECT"
-	ResourceTypeDataset ResourceType = "DATASET"
-	ResourceTypeModel   ResourceType = "MODEL"
-	ResourceTypeTrial   ResourceType = "TRIAL"
+	ResourceTypeProject         ResourceType = "PROJECT"
+	ResourceTypeDataset         ResourceType = "DATASET"
+	ResourceTypeModel           ResourceType = "MODEL"
+	ResourceTypeTrial           ResourceType = "TRIAL"
+	ResourceTypeModelPackageJob ResourceType = "MODEL_PACKAGE_JOB"
 )
 
 // Values returns all known values for ResourceType. Note that this can be expanded
@@ -111,5 +134,72 @@ func (ResourceType) Values() []ResourceType {
 		"DATASET",
 		"MODEL",
 		"TRIAL",
+		"MODEL_PACKAGE_JOB",
+	}
+}
+
+type TargetDevice string
+
+// Enum values for TargetDevice
+const (
+	TargetDeviceJetsonXavier TargetDevice = "jetson_xavier"
+)
+
+// Values returns all known values for TargetDevice. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (TargetDevice) Values() []TargetDevice {
+	return []TargetDevice{
+		"jetson_xavier",
+	}
+}
+
+type TargetPlatformAccelerator string
+
+// Enum values for TargetPlatformAccelerator
+const (
+	TargetPlatformAcceleratorNvidia TargetPlatformAccelerator = "NVIDIA"
+)
+
+// Values returns all known values for TargetPlatformAccelerator. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TargetPlatformAccelerator) Values() []TargetPlatformAccelerator {
+	return []TargetPlatformAccelerator{
+		"NVIDIA",
+	}
+}
+
+type TargetPlatformArch string
+
+// Enum values for TargetPlatformArch
+const (
+	TargetPlatformArchArm64 TargetPlatformArch = "ARM64"
+	TargetPlatformArchX8664 TargetPlatformArch = "X86_64"
+)
+
+// Values returns all known values for TargetPlatformArch. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TargetPlatformArch) Values() []TargetPlatformArch {
+	return []TargetPlatformArch{
+		"ARM64",
+		"X86_64",
+	}
+}
+
+type TargetPlatformOs string
+
+// Enum values for TargetPlatformOs
+const (
+	TargetPlatformOsLinux TargetPlatformOs = "LINUX"
+)
+
+// Values returns all known values for TargetPlatformOs. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TargetPlatformOs) Values() []TargetPlatformOs {
+	return []TargetPlatformOs{
+		"LINUX",
 	}
 }

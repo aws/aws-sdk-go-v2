@@ -30,8 +30,7 @@ func (c *Client) ListAssociatedRoute53HealthChecks(ctx context.Context, params *
 
 type ListAssociatedRoute53HealthChecksInput struct {
 
-	// The Amazon Resource Name (ARN) of the routing control that you're getting
-	// details for.
+	// The Amazon Resource Name (ARN) of the routing control.
 	//
 	// This member is required.
 	RoutingControlArn *string
@@ -50,7 +49,7 @@ type ListAssociatedRoute53HealthChecksOutput struct {
 	// Identifiers for the health checks.
 	HealthCheckIds []string
 
-	// The token that identifies which batch of results you want to see.
+	// Next token for listing health checks.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

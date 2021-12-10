@@ -54,7 +54,7 @@ type CreateFlowInput struct {
 	// The settings for the source of the flow.
 	Source *types.SetSourceRequest
 
-	// The settings for source failover
+	// The settings for source failover.
 	SourceFailoverConfig *types.FailoverConfig
 
 	Sources []types.SetSourceRequest

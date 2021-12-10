@@ -29,6 +29,7 @@ type EntitySubType string
 // Enum values for EntitySubType
 const (
 	EntitySubTypeName                 EntitySubType = "NAME"
+	EntitySubTypeDxName               EntitySubType = "DX_NAME"
 	EntitySubTypeDosage               EntitySubType = "DOSAGE"
 	EntitySubTypeRouteOrMode          EntitySubType = "ROUTE_OR_MODE"
 	EntitySubTypeForm                 EntitySubType = "FORM"
@@ -42,13 +43,16 @@ const (
 	EntitySubTypeTestName             EntitySubType = "TEST_NAME"
 	EntitySubTypeTestValue            EntitySubType = "TEST_VALUE"
 	EntitySubTypeTestUnits            EntitySubType = "TEST_UNITS"
+	EntitySubTypeTestUnit             EntitySubType = "TEST_UNIT"
 	EntitySubTypeProcedureName        EntitySubType = "PROCEDURE_NAME"
 	EntitySubTypeTreatmentName        EntitySubType = "TREATMENT_NAME"
 	EntitySubTypeDate                 EntitySubType = "DATE"
 	EntitySubTypeAge                  EntitySubType = "AGE"
 	EntitySubTypeContactPoint         EntitySubType = "CONTACT_POINT"
+	EntitySubTypePhoneOrFax           EntitySubType = "PHONE_OR_FAX"
 	EntitySubTypeEmail                EntitySubType = "EMAIL"
 	EntitySubTypeIdentifier           EntitySubType = "IDENTIFIER"
+	EntitySubTypeId                   EntitySubType = "ID"
 	EntitySubTypeUrl                  EntitySubType = "URL"
 	EntitySubTypeAddress              EntitySubType = "ADDRESS"
 	EntitySubTypeProfession           EntitySubType = "PROFESSION"
@@ -70,6 +74,7 @@ const (
 func (EntitySubType) Values() []EntitySubType {
 	return []EntitySubType{
 		"NAME",
+		"DX_NAME",
 		"DOSAGE",
 		"ROUTE_OR_MODE",
 		"FORM",
@@ -83,13 +88,16 @@ func (EntitySubType) Values() []EntitySubType {
 		"TEST_NAME",
 		"TEST_VALUE",
 		"TEST_UNITS",
+		"TEST_UNIT",
 		"PROCEDURE_NAME",
 		"TREATMENT_NAME",
 		"DATE",
 		"AGE",
 		"CONTACT_POINT",
+		"PHONE_OR_FAX",
 		"EMAIL",
 		"IDENTIFIER",
+		"ID",
 		"URL",
 		"ADDRESS",
 		"PROFESSION",
@@ -298,6 +306,7 @@ const (
 	RelationshipTypeAcuity          RelationshipType = "ACUITY"
 	RelationshipTypeTestValue       RelationshipType = "TEST_VALUE"
 	RelationshipTypeTestUnits       RelationshipType = "TEST_UNITS"
+	RelationshipTypeTestUnit        RelationshipType = "TEST_UNIT"
 	RelationshipTypeDirection       RelationshipType = "DIRECTION"
 	RelationshipTypeSystemOrganSite RelationshipType = "SYSTEM_ORGAN_SITE"
 )
@@ -323,6 +332,7 @@ func (RelationshipType) Values() []RelationshipType {
 		"ACUITY",
 		"TEST_VALUE",
 		"TEST_UNITS",
+		"TEST_UNIT",
 		"DIRECTION",
 		"SYSTEM_ORGAN_SITE",
 	}
@@ -403,5 +413,121 @@ const (
 func (RxNormTraitName) Values() []RxNormTraitName {
 	return []RxNormTraitName{
 		"NEGATION",
+	}
+}
+
+type SNOMEDCTAttributeType string
+
+// Enum values for SNOMEDCTAttributeType
+const (
+	SNOMEDCTAttributeTypeAcuity          SNOMEDCTAttributeType = "ACUITY"
+	SNOMEDCTAttributeTypeQuality         SNOMEDCTAttributeType = "QUALITY"
+	SNOMEDCTAttributeTypeDirection       SNOMEDCTAttributeType = "DIRECTION"
+	SNOMEDCTAttributeTypeSystemOrganSite SNOMEDCTAttributeType = "SYSTEM_ORGAN_SITE"
+	SNOMEDCTAttributeTypeTestValue       SNOMEDCTAttributeType = "TEST_VALUE"
+	SNOMEDCTAttributeTypeTestUnit        SNOMEDCTAttributeType = "TEST_UNIT"
+)
+
+// Values returns all known values for SNOMEDCTAttributeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SNOMEDCTAttributeType) Values() []SNOMEDCTAttributeType {
+	return []SNOMEDCTAttributeType{
+		"ACUITY",
+		"QUALITY",
+		"DIRECTION",
+		"SYSTEM_ORGAN_SITE",
+		"TEST_VALUE",
+		"TEST_UNIT",
+	}
+}
+
+type SNOMEDCTEntityCategory string
+
+// Enum values for SNOMEDCTEntityCategory
+const (
+	SNOMEDCTEntityCategoryMedicalCondition       SNOMEDCTEntityCategory = "MEDICAL_CONDITION"
+	SNOMEDCTEntityCategoryAnatomy                SNOMEDCTEntityCategory = "ANATOMY"
+	SNOMEDCTEntityCategoryTestTreatmentProcedure SNOMEDCTEntityCategory = "TEST_TREATMENT_PROCEDURE"
+)
+
+// Values returns all known values for SNOMEDCTEntityCategory. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SNOMEDCTEntityCategory) Values() []SNOMEDCTEntityCategory {
+	return []SNOMEDCTEntityCategory{
+		"MEDICAL_CONDITION",
+		"ANATOMY",
+		"TEST_TREATMENT_PROCEDURE",
+	}
+}
+
+type SNOMEDCTEntityType string
+
+// Enum values for SNOMEDCTEntityType
+const (
+	SNOMEDCTEntityTypeDxName        SNOMEDCTEntityType = "DX_NAME"
+	SNOMEDCTEntityTypeTestName      SNOMEDCTEntityType = "TEST_NAME"
+	SNOMEDCTEntityTypeProcedureName SNOMEDCTEntityType = "PROCEDURE_NAME"
+	SNOMEDCTEntityTypeTreatmentName SNOMEDCTEntityType = "TREATMENT_NAME"
+)
+
+// Values returns all known values for SNOMEDCTEntityType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SNOMEDCTEntityType) Values() []SNOMEDCTEntityType {
+	return []SNOMEDCTEntityType{
+		"DX_NAME",
+		"TEST_NAME",
+		"PROCEDURE_NAME",
+		"TREATMENT_NAME",
+	}
+}
+
+type SNOMEDCTRelationshipType string
+
+// Enum values for SNOMEDCTRelationshipType
+const (
+	SNOMEDCTRelationshipTypeAcuity          SNOMEDCTRelationshipType = "ACUITY"
+	SNOMEDCTRelationshipTypeQuality         SNOMEDCTRelationshipType = "QUALITY"
+	SNOMEDCTRelationshipTypeTestValue       SNOMEDCTRelationshipType = "TEST_VALUE"
+	SNOMEDCTRelationshipTypeTestUnits       SNOMEDCTRelationshipType = "TEST_UNITS"
+	SNOMEDCTRelationshipTypeDirection       SNOMEDCTRelationshipType = "DIRECTION"
+	SNOMEDCTRelationshipTypeSystemOrganSite SNOMEDCTRelationshipType = "SYSTEM_ORGAN_SITE"
+)
+
+// Values returns all known values for SNOMEDCTRelationshipType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SNOMEDCTRelationshipType) Values() []SNOMEDCTRelationshipType {
+	return []SNOMEDCTRelationshipType{
+		"ACUITY",
+		"QUALITY",
+		"TEST_VALUE",
+		"TEST_UNITS",
+		"DIRECTION",
+		"SYSTEM_ORGAN_SITE",
+	}
+}
+
+type SNOMEDCTTraitName string
+
+// Enum values for SNOMEDCTTraitName
+const (
+	SNOMEDCTTraitNameNegation  SNOMEDCTTraitName = "NEGATION"
+	SNOMEDCTTraitNameDiagnosis SNOMEDCTTraitName = "DIAGNOSIS"
+	SNOMEDCTTraitNameSign      SNOMEDCTTraitName = "SIGN"
+	SNOMEDCTTraitNameSymptom   SNOMEDCTTraitName = "SYMPTOM"
+)
+
+// Values returns all known values for SNOMEDCTTraitName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SNOMEDCTTraitName) Values() []SNOMEDCTTraitName {
+	return []SNOMEDCTTraitName{
+		"NEGATION",
+		"DIAGNOSIS",
+		"SIGN",
+		"SYMPTOM",
 	}
 }

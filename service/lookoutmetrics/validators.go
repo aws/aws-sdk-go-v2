@@ -290,6 +290,26 @@ func (m *validateOpGetSampleData) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListAnomalyGroupRelatedMetrics struct {
+}
+
+func (*validateOpListAnomalyGroupRelatedMetrics) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAnomalyGroupRelatedMetrics) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAnomalyGroupRelatedMetricsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAnomalyGroupRelatedMetricsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListAnomalyGroupSummaries struct {
 }
 
@@ -504,6 +524,10 @@ func addOpGetFeedbackValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetSampleDataValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetSampleData{}, middleware.After)
+}
+
+func addOpListAnomalyGroupRelatedMetricsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAnomalyGroupRelatedMetrics{}, middleware.After)
 }
 
 func addOpListAnomalyGroupSummariesValidationMiddleware(stack *middleware.Stack) error {
@@ -1106,6 +1130,24 @@ func validateOpGetSampleDataInput(v *GetSampleDataInput) error {
 		if err := validateSampleDataS3SourceConfig(v.S3SourceConfig); err != nil {
 			invalidParams.AddNested("S3SourceConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAnomalyGroupRelatedMetricsInput(v *ListAnomalyGroupRelatedMetricsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAnomalyGroupRelatedMetricsInput"}
+	if v.AnomalyDetectorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AnomalyDetectorArn"))
+	}
+	if v.AnomalyGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AnomalyGroupId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -36,7 +36,7 @@ func (c *Client) DescribeCluster(ctx context.Context, params *DescribeClusterInp
 
 type DescribeClusterInput struct {
 
-	// The Amazon Resource Name (ARN) of the cluster that you're getting details for.
+	// The Amazon Resource Name (ARN) of the cluster.
 	//
 	// This member is required.
 	ClusterArn *string

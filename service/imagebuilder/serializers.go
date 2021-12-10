@@ -2033,6 +2033,111 @@ func awsRestjson1_serializeOpDocumentImportComponentInput(v *ImportComponentInpu
 	return nil
 }
 
+type awsRestjson1_serializeOpImportVmImage struct {
+}
+
+func (*awsRestjson1_serializeOpImportVmImage) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpImportVmImage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ImportVmImageInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/ImportVmImage")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentImportVmImageInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsImportVmImageInput(v *ImportVmImageInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentImportVmImageInput(v *ImportVmImageInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.OsVersion != nil {
+		ok := object.Key("osVersion")
+		ok.String(*v.OsVersion)
+	}
+
+	if len(v.Platform) > 0 {
+		ok := object.Key("platform")
+		ok.String(string(v.Platform))
+	}
+
+	if v.SemanticVersion != nil {
+		ok := object.Key("semanticVersion")
+		ok.String(*v.SemanticVersion)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VmImportTaskId != nil {
+		ok := object.Key("vmImportTaskId")
+		ok.String(*v.VmImportTaskId)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpListComponentBuildVersions struct {
 }
 
@@ -4080,6 +4185,13 @@ func awsRestjson1_serializeDocumentDistribution(v *types.Distribution, value smi
 		ok.String(*v.Region)
 	}
 
+	if v.S3ExportConfiguration != nil {
+		ok := object.Key("s3ExportConfiguration")
+		if err := awsRestjson1_serializeDocumentS3ExportConfiguration(v.S3ExportConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -4428,6 +4540,33 @@ func awsRestjson1_serializeDocumentResourceTagMap(v map[string]string, value smi
 		om := object.Key(key)
 		om.String(v[key])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentS3ExportConfiguration(v *types.S3ExportConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.DiskImageFormat) > 0 {
+		ok := object.Key("diskImageFormat")
+		ok.String(string(v.DiskImageFormat))
+	}
+
+	if v.RoleName != nil {
+		ok := object.Key("roleName")
+		ok.String(*v.RoleName)
+	}
+
+	if v.S3Bucket != nil {
+		ok := object.Key("s3Bucket")
+		ok.String(*v.S3Bucket)
+	}
+
+	if v.S3Prefix != nil {
+		ok := object.Key("s3Prefix")
+		ok.String(*v.S3Prefix)
+	}
+
 	return nil
 }
 

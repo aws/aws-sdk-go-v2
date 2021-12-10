@@ -48,7 +48,6 @@ type GetStreamingSessionInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type GetStreamingSessionOutput struct {
 
 	// The session.

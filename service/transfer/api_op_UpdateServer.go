@@ -116,7 +116,9 @@ type UpdateServerInput struct {
 	// The protocol settings that are configured for your server. Use the PassiveIp
 	// parameter to indicate passive mode (for FTP and FTPS protocols). Enter a single
 	// dotted-quad IPv4 address, such as the external IP address of a firewall, router,
-	// or load balancer.
+	// or load balancer. Use the TlsSessionResumptionMode parameter to determine
+	// whether or not your Transfer server resumes recent, negotiated sessions through
+	// a unique session ID.
 	ProtocolDetails *types.ProtocolDetails
 
 	// Specifies the file transfer protocol or protocols over which your file transfer
