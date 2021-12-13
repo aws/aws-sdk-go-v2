@@ -171,12 +171,13 @@ func NewGetUsagePlansPaginator(client GetUsagePlansAPIClient, params *GetUsagePl
 		client:    client,
 		params:    params,
 		firstPage: true,
+		nextToken: params.Position,
 	}
 }
 
 // HasMorePages returns a boolean indicating whether more pages are available
 func (p *GetUsagePlansPaginator) HasMorePages() bool {
-	return p.firstPage || p.nextToken != nil
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
 }
 
 // NextPage retrieves the next GetUsagePlans page.
@@ -203,7 +204,10 @@ func (p *GetUsagePlansPaginator) NextPage(ctx context.Context, optFns ...func(*O
 	prevToken := p.nextToken
 	p.nextToken = result.Position
 
-	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
 		p.nextToken = nil
 	}
 

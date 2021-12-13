@@ -260,12 +260,13 @@ func NewListClosedWorkflowExecutionsPaginator(client ListClosedWorkflowExecution
 		client:    client,
 		params:    params,
 		firstPage: true,
+		nextToken: params.NextPageToken,
 	}
 }
 
 // HasMorePages returns a boolean indicating whether more pages are available
 func (p *ListClosedWorkflowExecutionsPaginator) HasMorePages() bool {
-	return p.firstPage || p.nextToken != nil
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
 }
 
 // NextPage retrieves the next ListClosedWorkflowExecutions page.
@@ -288,7 +289,10 @@ func (p *ListClosedWorkflowExecutionsPaginator) NextPage(ctx context.Context, op
 	prevToken := p.nextToken
 	p.nextToken = result.NextPageToken
 
-	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
 		p.nextToken = nil
 	}
 

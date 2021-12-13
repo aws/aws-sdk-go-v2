@@ -168,12 +168,13 @@ func NewListPoliciesPaginator(client ListPoliciesAPIClient, params *ListPolicies
 		client:    client,
 		params:    params,
 		firstPage: true,
+		nextToken: params.Marker,
 	}
 }
 
 // HasMorePages returns a boolean indicating whether more pages are available
 func (p *ListPoliciesPaginator) HasMorePages() bool {
-	return p.firstPage || p.nextToken != nil
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
 }
 
 // NextPage retrieves the next ListPolicies page.
@@ -200,7 +201,10 @@ func (p *ListPoliciesPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	prevToken := p.nextToken
 	p.nextToken = result.NextMarker
 
-	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
 		p.nextToken = nil
 	}
 
