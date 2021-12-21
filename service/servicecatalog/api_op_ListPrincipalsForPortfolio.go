@@ -182,12 +182,13 @@ func NewListPrincipalsForPortfolioPaginator(client ListPrincipalsForPortfolioAPI
 		client:    client,
 		params:    params,
 		firstPage: true,
+		nextToken: params.PageToken,
 	}
 }
 
 // HasMorePages returns a boolean indicating whether more pages are available
 func (p *ListPrincipalsForPortfolioPaginator) HasMorePages() bool {
-	return p.firstPage || p.nextToken != nil
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
 }
 
 // NextPage retrieves the next ListPrincipalsForPortfolio page.
@@ -210,7 +211,10 @@ func (p *ListPrincipalsForPortfolioPaginator) NextPage(ctx context.Context, optF
 	prevToken := p.nextToken
 	p.nextToken = result.NextPageToken
 
-	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
 		p.nextToken = nil
 	}
 

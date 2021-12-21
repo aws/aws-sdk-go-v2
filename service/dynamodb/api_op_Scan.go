@@ -486,6 +486,7 @@ func NewScanPaginator(client ScanAPIClient, params *ScanInput, optFns ...func(*S
 		client:    client,
 		params:    params,
 		firstPage: true,
+		nextToken: params.ExclusiveStartKey,
 	}
 }
 

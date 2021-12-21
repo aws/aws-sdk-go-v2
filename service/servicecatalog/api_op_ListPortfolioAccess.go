@@ -186,12 +186,13 @@ func NewListPortfolioAccessPaginator(client ListPortfolioAccessAPIClient, params
 		client:    client,
 		params:    params,
 		firstPage: true,
+		nextToken: params.PageToken,
 	}
 }
 
 // HasMorePages returns a boolean indicating whether more pages are available
 func (p *ListPortfolioAccessPaginator) HasMorePages() bool {
-	return p.firstPage || p.nextToken != nil
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
 }
 
 // NextPage retrieves the next ListPortfolioAccess page.
@@ -214,7 +215,10 @@ func (p *ListPortfolioAccessPaginator) NextPage(ctx context.Context, optFns ...f
 	prevToken := p.nextToken
 	p.nextToken = result.NextPageToken
 
-	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
 		p.nextToken = nil
 	}
 

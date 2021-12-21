@@ -230,12 +230,13 @@ func NewListGrantsPaginator(client ListGrantsAPIClient, params *ListGrantsInput,
 		client:    client,
 		params:    params,
 		firstPage: true,
+		nextToken: params.Marker,
 	}
 }
 
 // HasMorePages returns a boolean indicating whether more pages are available
 func (p *ListGrantsPaginator) HasMorePages() bool {
-	return p.firstPage || p.nextToken != nil
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
 }
 
 // NextPage retrieves the next ListGrants page.
@@ -262,7 +263,10 @@ func (p *ListGrantsPaginator) NextPage(ctx context.Context, optFns ...func(*Opti
 	prevToken := p.nextToken
 	p.nextToken = result.NextMarker
 
-	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
 		p.nextToken = nil
 	}
 
