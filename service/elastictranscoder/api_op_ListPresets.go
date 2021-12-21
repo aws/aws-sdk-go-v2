@@ -161,12 +161,13 @@ func NewListPresetsPaginator(client ListPresetsAPIClient, params *ListPresetsInp
 		client:    client,
 		params:    params,
 		firstPage: true,
+		nextToken: params.PageToken,
 	}
 }
 
 // HasMorePages returns a boolean indicating whether more pages are available
 func (p *ListPresetsPaginator) HasMorePages() bool {
-	return p.firstPage || p.nextToken != nil
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
 }
 
 // NextPage retrieves the next ListPresets page.
@@ -187,7 +188,10 @@ func (p *ListPresetsPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 	prevToken := p.nextToken
 	p.nextToken = result.NextPageToken
 
-	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
 		p.nextToken = nil
 	}
 

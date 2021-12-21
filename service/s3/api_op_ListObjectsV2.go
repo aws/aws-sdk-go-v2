@@ -329,12 +329,13 @@ func NewListObjectsV2Paginator(client ListObjectsV2APIClient, params *ListObject
 		client:    client,
 		params:    params,
 		firstPage: true,
+		nextToken: params.ContinuationToken,
 	}
 }
 
 // HasMorePages returns a boolean indicating whether more pages are available
 func (p *ListObjectsV2Paginator) HasMorePages() bool {
-	return p.firstPage || p.nextToken != nil
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
 }
 
 // NextPage retrieves the next ListObjectsV2 page.
@@ -360,7 +361,10 @@ func (p *ListObjectsV2Paginator) NextPage(ctx context.Context, optFns ...func(*O
 		p.nextToken = result.NextContinuationToken
 	}
 
-	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
 		p.nextToken = nil
 	}
 

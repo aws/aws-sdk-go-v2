@@ -176,12 +176,13 @@ func NewGetModelsPaginator(client GetModelsAPIClient, params *GetModelsInput, op
 		client:    client,
 		params:    params,
 		firstPage: true,
+		nextToken: params.Position,
 	}
 }
 
 // HasMorePages returns a boolean indicating whether more pages are available
 func (p *GetModelsPaginator) HasMorePages() bool {
-	return p.firstPage || p.nextToken != nil
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
 }
 
 // NextPage retrieves the next GetModels page.
@@ -208,7 +209,10 @@ func (p *GetModelsPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 	prevToken := p.nextToken
 	p.nextToken = result.Position
 
-	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
 		p.nextToken = nil
 	}
 

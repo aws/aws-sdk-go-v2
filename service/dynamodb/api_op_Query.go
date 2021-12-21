@@ -563,6 +563,7 @@ func NewQueryPaginator(client QueryAPIClient, params *QueryInput, optFns ...func
 		client:    client,
 		params:    params,
 		firstPage: true,
+		nextToken: params.ExclusiveStartKey,
 	}
 }
 

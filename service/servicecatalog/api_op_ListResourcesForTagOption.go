@@ -179,12 +179,13 @@ func NewListResourcesForTagOptionPaginator(client ListResourcesForTagOptionAPICl
 		client:    client,
 		params:    params,
 		firstPage: true,
+		nextToken: params.PageToken,
 	}
 }
 
 // HasMorePages returns a boolean indicating whether more pages are available
 func (p *ListResourcesForTagOptionPaginator) HasMorePages() bool {
-	return p.firstPage || p.nextToken != nil
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
 }
 
 // NextPage retrieves the next ListResourcesForTagOption page.
@@ -207,7 +208,10 @@ func (p *ListResourcesForTagOptionPaginator) NextPage(ctx context.Context, optFn
 	prevToken := p.nextToken
 	p.nextToken = result.PageToken
 
-	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
 		p.nextToken = nil
 	}
 
