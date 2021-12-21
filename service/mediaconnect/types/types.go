@@ -66,7 +66,8 @@ type AddOutputRequest struct {
 	// will use the default setting (static-key).
 	Encryption *Encryption
 
-	// The maximum latency in milliseconds for Zixi-based streams.
+	// The maximum latency in milliseconds. This parameter applies only to RIST-based,
+	// Zixi-based, and Fujitsu-based streams.
 	MaxLatency int32
 
 	// The media streams that are associated with the output, and the parameters for
@@ -88,6 +89,10 @@ type AddOutputRequest struct {
 
 	// The remote ID for the Zixi-pull output stream.
 	RemoteId *string
+
+	// The port that the flow uses to send outbound requests to initiate connection
+	// with the sender.
+	SenderControlPort int32
 
 	// The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.
 	SmoothingLatency int32
@@ -289,7 +294,7 @@ type Entitlement struct {
 	noSmithyDocumentSerde
 }
 
-// The settings for source failover
+// The settings for source failover.
 type FailoverConfig struct {
 
 	// The type of failover you choose for this flow. MERGE combines the source streams
@@ -360,7 +365,7 @@ type Flow struct {
 	// stream with a source, you can also associate it with outputs on the flow.
 	MediaStreams []MediaStream
 
-	// The settings for source failover
+	// The settings for source failover.
 	SourceFailoverConfig *FailoverConfig
 
 	Sources []Source
@@ -990,8 +995,8 @@ type SetSourceRequest struct {
 	// The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.
 	MaxBitrate int32
 
-	// The maximum latency in milliseconds. This parameter applies only to RIST-based
-	// and Zixi-based streams.
+	// The maximum latency in milliseconds. This parameter applies only to RIST-based,
+	// Zixi-based, and Fujitsu-based streams.
 	MaxLatency int32
 
 	// The size of the buffer (in milliseconds) to use to sync incoming source data.
@@ -1013,6 +1018,14 @@ type SetSourceRequest struct {
 
 	// The protocol that is used by the source.
 	Protocol Protocol
+
+	// The port that the flow uses to send outbound requests to initiate connection
+	// with the sender.
+	SenderControlPort int32
+
+	// The IP address that the flow communicates with to initiate connection with the
+	// sender.
+	SenderIpAddress *string
 
 	// The stream ID that you want to use for this transport. This parameter applies
 	// only to Zixi-based streams.
@@ -1067,6 +1080,14 @@ type Source struct {
 	// those associations.
 	MediaStreamSourceConfigurations []MediaStreamSourceConfiguration
 
+	// The port that the flow uses to send outbound requests to initiate connection
+	// with the sender.
+	SenderControlPort int32
+
+	// The IP address that the flow communicates with to initiate connection with the
+	// sender.
+	SenderIpAddress *string
+
 	// Attributes related to the transport stream that are used in the source.
 	Transport *Transport
 
@@ -1107,8 +1128,8 @@ type Transport struct {
 	// The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.
 	MaxBitrate int32
 
-	// The maximum latency in milliseconds. This parameter applies only to RIST-based
-	// and Zixi-based streams.
+	// The maximum latency in milliseconds. This parameter applies only to RIST-based,
+	// Zixi-based, and Fujitsu-based streams.
 	MaxLatency int32
 
 	// The size of the buffer (in milliseconds) to use to sync incoming source data.
@@ -1123,6 +1144,14 @@ type Transport struct {
 
 	// The remote ID for the Zixi-pull stream.
 	RemoteId *string
+
+	// The port that the flow uses to send outbound requests to initiate connection
+	// with the sender.
+	SenderControlPort int32
+
+	// The IP address that the flow communicates with to initiate connection with the
+	// sender.
+	SenderIpAddress *string
 
 	// The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.
 	SmoothingLatency int32
@@ -1183,7 +1212,7 @@ type UpdateEncryption struct {
 	noSmithyDocumentSerde
 }
 
-// The settings for source failover
+// The settings for source failover.
 type UpdateFailoverConfig struct {
 
 	// The type of failover you choose for this flow. MERGE combines the source streams
@@ -1206,7 +1235,7 @@ type UpdateFailoverConfig struct {
 // The settings for a VPC Source.
 type VpcInterface struct {
 
-	// Immutable and has to be a unique against other VpcInterfaces in this Flow
+	// Immutable and has to be a unique against other VpcInterfaces in this Flow.
 	//
 	// This member is required.
 	Name *string

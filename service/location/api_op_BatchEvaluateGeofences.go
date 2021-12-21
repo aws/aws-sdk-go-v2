@@ -26,7 +26,9 @@ import (
 //
 // The last
 // geofence that a device was observed within is tracked for 30 days after the most
-// recent device position update.
+// recent device position update. Geofence evaluation uses the given device
+// position. It does not account for the optional Accuracy of a
+// DevicePositionUpdate.
 func (c *Client) BatchEvaluateGeofences(ctx context.Context, params *BatchEvaluateGeofencesInput, optFns ...func(*Options)) (*BatchEvaluateGeofencesOutput, error) {
 	if params == nil {
 		params = &BatchEvaluateGeofencesInput{}

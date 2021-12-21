@@ -2196,6 +2196,16 @@ func awsRestjson1_serializeOpDocumentUpdateFlowOutputInput(v *UpdateFlowOutputIn
 		ok.String(*v.RemoteId)
 	}
 
+	if v.SenderControlPort != 0 {
+		ok := object.Key("senderControlPort")
+		ok.Integer(v.SenderControlPort)
+	}
+
+	if v.SenderIpAddress != nil {
+		ok := object.Key("senderIpAddress")
+		ok.String(*v.SenderIpAddress)
+	}
+
 	if v.SmoothingLatency != 0 {
 		ok := object.Key("smoothingLatency")
 		ok.Integer(v.SmoothingLatency)
@@ -2350,6 +2360,16 @@ func awsRestjson1_serializeOpDocumentUpdateFlowSourceInput(v *UpdateFlowSourceIn
 	if len(v.Protocol) > 0 {
 		ok := object.Key("protocol")
 		ok.String(string(v.Protocol))
+	}
+
+	if v.SenderControlPort != 0 {
+		ok := object.Key("senderControlPort")
+		ok.Integer(v.SenderControlPort)
+	}
+
+	if v.SenderIpAddress != nil {
+		ok := object.Key("senderIpAddress")
+		ok.String(*v.SenderIpAddress)
 	}
 
 	if v.StreamId != nil {
@@ -2616,6 +2636,11 @@ func awsRestjson1_serializeDocumentAddOutputRequest(v *types.AddOutputRequest, v
 	if v.RemoteId != nil {
 		ok := object.Key("remoteId")
 		ok.String(*v.RemoteId)
+	}
+
+	if v.SenderControlPort != 0 {
+		ok := object.Key("senderControlPort")
+		ok.Integer(v.SenderControlPort)
 	}
 
 	if v.SmoothingLatency != 0 {
@@ -3022,6 +3047,16 @@ func awsRestjson1_serializeDocumentSetSourceRequest(v *types.SetSourceRequest, v
 	if len(v.Protocol) > 0 {
 		ok := object.Key("protocol")
 		ok.String(string(v.Protocol))
+	}
+
+	if v.SenderControlPort != 0 {
+		ok := object.Key("senderControlPort")
+		ok.Integer(v.SenderControlPort)
+	}
+
+	if v.SenderIpAddress != nil {
+		ok := object.Key("senderIpAddress")
+		ok.String(*v.SenderIpAddress)
 	}
 
 	if v.StreamId != nil {

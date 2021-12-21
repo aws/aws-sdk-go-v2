@@ -4588,9 +4588,41 @@ func awsRestjson1_serializeDocumentAwsApiGatewayV2StageDetails(v *types.AwsApiGa
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAwsAutoScalingAutoScalingGroupAvailabilityZonesList(v []types.AwsAutoScalingAutoScalingGroupAvailabilityZonesListDetails, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAwsAutoScalingAutoScalingGroupAvailabilityZonesListDetails(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsAutoScalingAutoScalingGroupAvailabilityZonesListDetails(v *types.AwsAutoScalingAutoScalingGroupAvailabilityZonesListDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Value != nil {
+		ok := object.Key("Value")
+		ok.String(*v.Value)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAwsAutoScalingAutoScalingGroupDetails(v *types.AwsAutoScalingAutoScalingGroupDetails, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AvailabilityZones != nil {
+		ok := object.Key("AvailabilityZones")
+		if err := awsRestjson1_serializeDocumentAwsAutoScalingAutoScalingGroupAvailabilityZonesList(v.AvailabilityZones, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.CreatedTime != nil {
 		ok := object.Key("CreatedTime")
@@ -4617,6 +4649,144 @@ func awsRestjson1_serializeDocumentAwsAutoScalingAutoScalingGroupDetails(v *type
 		if err := awsRestjson1_serializeDocumentStringList(v.LoadBalancerNames, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.MixedInstancesPolicy != nil {
+		ok := object.Key("MixedInstancesPolicy")
+		if err := awsRestjson1_serializeDocumentAwsAutoScalingAutoScalingGroupMixedInstancesPolicyDetails(v.MixedInstancesPolicy, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsAutoScalingAutoScalingGroupMixedInstancesPolicyDetails(v *types.AwsAutoScalingAutoScalingGroupMixedInstancesPolicyDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.InstancesDistribution != nil {
+		ok := object.Key("InstancesDistribution")
+		if err := awsRestjson1_serializeDocumentAwsAutoScalingAutoScalingGroupMixedInstancesPolicyInstancesDistributionDetails(v.InstancesDistribution, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LaunchTemplate != nil {
+		ok := object.Key("LaunchTemplate")
+		if err := awsRestjson1_serializeDocumentAwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateDetails(v.LaunchTemplate, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsAutoScalingAutoScalingGroupMixedInstancesPolicyInstancesDistributionDetails(v *types.AwsAutoScalingAutoScalingGroupMixedInstancesPolicyInstancesDistributionDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.OnDemandAllocationStrategy != nil {
+		ok := object.Key("OnDemandAllocationStrategy")
+		ok.String(*v.OnDemandAllocationStrategy)
+	}
+
+	if v.OnDemandBaseCapacity != 0 {
+		ok := object.Key("OnDemandBaseCapacity")
+		ok.Integer(v.OnDemandBaseCapacity)
+	}
+
+	if v.OnDemandPercentageAboveBaseCapacity != 0 {
+		ok := object.Key("OnDemandPercentageAboveBaseCapacity")
+		ok.Integer(v.OnDemandPercentageAboveBaseCapacity)
+	}
+
+	if v.SpotAllocationStrategy != nil {
+		ok := object.Key("SpotAllocationStrategy")
+		ok.String(*v.SpotAllocationStrategy)
+	}
+
+	if v.SpotInstancePools != 0 {
+		ok := object.Key("SpotInstancePools")
+		ok.Integer(v.SpotInstancePools)
+	}
+
+	if v.SpotMaxPrice != nil {
+		ok := object.Key("SpotMaxPrice")
+		ok.String(*v.SpotMaxPrice)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateDetails(v *types.AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LaunchTemplateSpecification != nil {
+		ok := object.Key("LaunchTemplateSpecification")
+		if err := awsRestjson1_serializeDocumentAwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateLaunchTemplateSpecification(v.LaunchTemplateSpecification, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Overrides != nil {
+		ok := object.Key("Overrides")
+		if err := awsRestjson1_serializeDocumentAwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateOverridesList(v.Overrides, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateLaunchTemplateSpecification(v *types.AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateLaunchTemplateSpecification, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LaunchTemplateId != nil {
+		ok := object.Key("LaunchTemplateId")
+		ok.String(*v.LaunchTemplateId)
+	}
+
+	if v.LaunchTemplateName != nil {
+		ok := object.Key("LaunchTemplateName")
+		ok.String(*v.LaunchTemplateName)
+	}
+
+	if v.Version != nil {
+		ok := object.Key("Version")
+		ok.String(*v.Version)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateOverridesList(v []types.AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateOverridesListDetails, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateOverridesListDetails(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateOverridesListDetails(v *types.AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateOverridesListDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.InstanceType != nil {
+		ok := object.Key("InstanceType")
+		ok.String(*v.InstanceType)
+	}
+
+	if v.WeightedCapacity != nil {
+		ok := object.Key("WeightedCapacity")
+		ok.String(*v.WeightedCapacity)
 	}
 
 	return nil
@@ -4776,6 +4946,13 @@ func awsRestjson1_serializeDocumentAwsAutoScalingLaunchConfigurationDetails(v *t
 		ok.String(*v.LaunchConfigurationName)
 	}
 
+	if v.MetadataOptions != nil {
+		ok := object.Key("MetadataOptions")
+		if err := awsRestjson1_serializeDocumentAwsAutoScalingLaunchConfigurationMetadataOptions(v.MetadataOptions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.PlacementTenancy != nil {
 		ok := object.Key("PlacementTenancy")
 		ok.String(*v.PlacementTenancy)
@@ -4813,6 +4990,28 @@ func awsRestjson1_serializeDocumentAwsAutoScalingLaunchConfigurationInstanceMoni
 	if v.Enabled {
 		ok := object.Key("Enabled")
 		ok.Boolean(v.Enabled)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsAutoScalingLaunchConfigurationMetadataOptions(v *types.AwsAutoScalingLaunchConfigurationMetadataOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.HttpEndpoint != nil {
+		ok := object.Key("HttpEndpoint")
+		ok.String(*v.HttpEndpoint)
+	}
+
+	if v.HttpPutResponseHopLimit != 0 {
+		ok := object.Key("HttpPutResponseHopLimit")
+		ok.Integer(v.HttpPutResponseHopLimit)
+	}
+
+	if v.HttpTokens != nil {
+		ok := object.Key("HttpTokens")
+		ok.String(*v.HttpTokens)
 	}
 
 	return nil
@@ -11772,6 +11971,168 @@ func awsRestjson1_serializeDocumentAwsLambdaLayerVersionDetails(v *types.AwsLamb
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAwsNetworkFirewallFirewallDetails(v *types.AwsNetworkFirewallFirewallDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DeleteProtection {
+		ok := object.Key("DeleteProtection")
+		ok.Boolean(v.DeleteProtection)
+	}
+
+	if v.Description != nil {
+		ok := object.Key("Description")
+		ok.String(*v.Description)
+	}
+
+	if v.FirewallArn != nil {
+		ok := object.Key("FirewallArn")
+		ok.String(*v.FirewallArn)
+	}
+
+	if v.FirewallId != nil {
+		ok := object.Key("FirewallId")
+		ok.String(*v.FirewallId)
+	}
+
+	if v.FirewallName != nil {
+		ok := object.Key("FirewallName")
+		ok.String(*v.FirewallName)
+	}
+
+	if v.FirewallPolicyArn != nil {
+		ok := object.Key("FirewallPolicyArn")
+		ok.String(*v.FirewallPolicyArn)
+	}
+
+	if v.FirewallPolicyChangeProtection {
+		ok := object.Key("FirewallPolicyChangeProtection")
+		ok.Boolean(v.FirewallPolicyChangeProtection)
+	}
+
+	if v.SubnetChangeProtection {
+		ok := object.Key("SubnetChangeProtection")
+		ok.Boolean(v.SubnetChangeProtection)
+	}
+
+	if v.SubnetMappings != nil {
+		ok := object.Key("SubnetMappings")
+		if err := awsRestjson1_serializeDocumentAwsNetworkFirewallFirewallSubnetMappingsList(v.SubnetMappings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VpcId != nil {
+		ok := object.Key("VpcId")
+		ok.String(*v.VpcId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsNetworkFirewallFirewallPolicyDetails(v *types.AwsNetworkFirewallFirewallPolicyDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Description != nil {
+		ok := object.Key("Description")
+		ok.String(*v.Description)
+	}
+
+	if v.FirewallPolicy != nil {
+		ok := object.Key("FirewallPolicy")
+		if err := awsRestjson1_serializeDocumentFirewallPolicyDetails(v.FirewallPolicy, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FirewallPolicyArn != nil {
+		ok := object.Key("FirewallPolicyArn")
+		ok.String(*v.FirewallPolicyArn)
+	}
+
+	if v.FirewallPolicyId != nil {
+		ok := object.Key("FirewallPolicyId")
+		ok.String(*v.FirewallPolicyId)
+	}
+
+	if v.FirewallPolicyName != nil {
+		ok := object.Key("FirewallPolicyName")
+		ok.String(*v.FirewallPolicyName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsNetworkFirewallFirewallSubnetMappingsDetails(v *types.AwsNetworkFirewallFirewallSubnetMappingsDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SubnetId != nil {
+		ok := object.Key("SubnetId")
+		ok.String(*v.SubnetId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsNetworkFirewallFirewallSubnetMappingsList(v []types.AwsNetworkFirewallFirewallSubnetMappingsDetails, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAwsNetworkFirewallFirewallSubnetMappingsDetails(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsNetworkFirewallRuleGroupDetails(v *types.AwsNetworkFirewallRuleGroupDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Capacity != 0 {
+		ok := object.Key("Capacity")
+		ok.Integer(v.Capacity)
+	}
+
+	if v.Description != nil {
+		ok := object.Key("Description")
+		ok.String(*v.Description)
+	}
+
+	if v.RuleGroup != nil {
+		ok := object.Key("RuleGroup")
+		if err := awsRestjson1_serializeDocumentRuleGroupDetails(v.RuleGroup, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RuleGroupArn != nil {
+		ok := object.Key("RuleGroupArn")
+		ok.String(*v.RuleGroupArn)
+	}
+
+	if v.RuleGroupId != nil {
+		ok := object.Key("RuleGroupId")
+		ok.String(*v.RuleGroupId)
+	}
+
+	if v.RuleGroupName != nil {
+		ok := object.Key("RuleGroupName")
+		ok.String(*v.RuleGroupName)
+	}
+
+	if v.Type != nil {
+		ok := object.Key("Type")
+		ok.String(*v.Type)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAwsOpenSearchServiceDomainClusterConfigDetails(v *types.AwsOpenSearchServiceDomainClusterConfigDetails, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -14509,6 +14870,23 @@ func awsRestjson1_serializeDocumentAwsS3BucketBucketLifecycleConfigurationRulesT
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAwsS3BucketBucketVersioningConfiguration(v *types.AwsS3BucketBucketVersioningConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IsMfaDeleteEnabled {
+		ok := object.Key("IsMfaDeleteEnabled")
+		ok.Boolean(v.IsMfaDeleteEnabled)
+	}
+
+	if v.Status != nil {
+		ok := object.Key("Status")
+		ok.String(*v.Status)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAwsS3BucketDetails(v *types.AwsS3BucketDetails, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -14535,6 +14913,13 @@ func awsRestjson1_serializeDocumentAwsS3BucketDetails(v *types.AwsS3BucketDetail
 	if v.BucketNotificationConfiguration != nil {
 		ok := object.Key("BucketNotificationConfiguration")
 		if err := awsRestjson1_serializeDocumentAwsS3BucketNotificationConfiguration(v.BucketNotificationConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.BucketVersioningConfiguration != nil {
+		ok := object.Key("BucketVersioningConfiguration")
+		if err := awsRestjson1_serializeDocumentAwsS3BucketBucketVersioningConfiguration(v.BucketVersioningConfiguration, ok); err != nil {
 			return err
 		}
 	}
@@ -16927,6 +17312,135 @@ func awsRestjson1_serializeDocumentFindingProviderSeverity(v *types.FindingProvi
 	return nil
 }
 
+func awsRestjson1_serializeDocumentFirewallPolicyDetails(v *types.FirewallPolicyDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.StatefulRuleGroupReferences != nil {
+		ok := object.Key("StatefulRuleGroupReferences")
+		if err := awsRestjson1_serializeDocumentFirewallPolicyStatefulRuleGroupReferencesList(v.StatefulRuleGroupReferences, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.StatelessCustomActions != nil {
+		ok := object.Key("StatelessCustomActions")
+		if err := awsRestjson1_serializeDocumentFirewallPolicyStatelessCustomActionsList(v.StatelessCustomActions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.StatelessDefaultActions != nil {
+		ok := object.Key("StatelessDefaultActions")
+		if err := awsRestjson1_serializeDocumentNonEmptyStringList(v.StatelessDefaultActions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.StatelessFragmentDefaultActions != nil {
+		ok := object.Key("StatelessFragmentDefaultActions")
+		if err := awsRestjson1_serializeDocumentNonEmptyStringList(v.StatelessFragmentDefaultActions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.StatelessRuleGroupReferences != nil {
+		ok := object.Key("StatelessRuleGroupReferences")
+		if err := awsRestjson1_serializeDocumentFirewallPolicyStatelessRuleGroupReferencesList(v.StatelessRuleGroupReferences, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFirewallPolicyStatefulRuleGroupReferencesDetails(v *types.FirewallPolicyStatefulRuleGroupReferencesDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ResourceArn != nil {
+		ok := object.Key("ResourceArn")
+		ok.String(*v.ResourceArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFirewallPolicyStatefulRuleGroupReferencesList(v []types.FirewallPolicyStatefulRuleGroupReferencesDetails, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentFirewallPolicyStatefulRuleGroupReferencesDetails(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFirewallPolicyStatelessCustomActionsDetails(v *types.FirewallPolicyStatelessCustomActionsDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ActionDefinition != nil {
+		ok := object.Key("ActionDefinition")
+		if err := awsRestjson1_serializeDocumentStatelessCustomActionDefinition(v.ActionDefinition, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ActionName != nil {
+		ok := object.Key("ActionName")
+		ok.String(*v.ActionName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFirewallPolicyStatelessCustomActionsList(v []types.FirewallPolicyStatelessCustomActionsDetails, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentFirewallPolicyStatelessCustomActionsDetails(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFirewallPolicyStatelessRuleGroupReferencesDetails(v *types.FirewallPolicyStatelessRuleGroupReferencesDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Priority != 0 {
+		ok := object.Key("Priority")
+		ok.Integer(v.Priority)
+	}
+
+	if v.ResourceArn != nil {
+		ok := object.Key("ResourceArn")
+		ok.String(*v.ResourceArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFirewallPolicyStatelessRuleGroupReferencesList(v []types.FirewallPolicyStatelessRuleGroupReferencesDetails, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentFirewallPolicyStatelessRuleGroupReferencesDetails(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentGeoLocation(v *types.GeoLocation, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -18283,6 +18797,27 @@ func awsRestjson1_serializeDocumentResourceDetails(v *types.ResourceDetails, val
 		}
 	}
 
+	if v.AwsNetworkFirewallFirewall != nil {
+		ok := object.Key("AwsNetworkFirewallFirewall")
+		if err := awsRestjson1_serializeDocumentAwsNetworkFirewallFirewallDetails(v.AwsNetworkFirewallFirewall, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AwsNetworkFirewallFirewallPolicy != nil {
+		ok := object.Key("AwsNetworkFirewallFirewallPolicy")
+		if err := awsRestjson1_serializeDocumentAwsNetworkFirewallFirewallPolicyDetails(v.AwsNetworkFirewallFirewallPolicy, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AwsNetworkFirewallRuleGroup != nil {
+		ok := object.Key("AwsNetworkFirewallRuleGroup")
+		if err := awsRestjson1_serializeDocumentAwsNetworkFirewallRuleGroupDetails(v.AwsNetworkFirewallRuleGroup, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.AwsOpenSearchServiceDomain != nil {
 		ok := object.Key("AwsOpenSearchServiceDomain")
 		if err := awsRestjson1_serializeDocumentAwsOpenSearchServiceDomainDetails(v.AwsOpenSearchServiceDomain, ok); err != nil {
@@ -18436,6 +18971,564 @@ func awsRestjson1_serializeDocumentResourceList(v []types.Resource, value smithy
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRuleGroupDetails(v *types.RuleGroupDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RulesSource != nil {
+		ok := object.Key("RulesSource")
+		if err := awsRestjson1_serializeDocumentRuleGroupSource(v.RulesSource, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RuleVariables != nil {
+		ok := object.Key("RuleVariables")
+		if err := awsRestjson1_serializeDocumentRuleGroupVariables(v.RuleVariables, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRuleGroupSource(v *types.RuleGroupSource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RulesSourceList != nil {
+		ok := object.Key("RulesSourceList")
+		if err := awsRestjson1_serializeDocumentRuleGroupSourceListDetails(v.RulesSourceList, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RulesString != nil {
+		ok := object.Key("RulesString")
+		ok.String(*v.RulesString)
+	}
+
+	if v.StatefulRules != nil {
+		ok := object.Key("StatefulRules")
+		if err := awsRestjson1_serializeDocumentRuleGroupSourceStatefulRulesList(v.StatefulRules, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.StatelessRulesAndCustomActions != nil {
+		ok := object.Key("StatelessRulesAndCustomActions")
+		if err := awsRestjson1_serializeDocumentRuleGroupSourceStatelessRulesAndCustomActionsDetails(v.StatelessRulesAndCustomActions, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRuleGroupSourceCustomActionsDetails(v *types.RuleGroupSourceCustomActionsDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ActionDefinition != nil {
+		ok := object.Key("ActionDefinition")
+		if err := awsRestjson1_serializeDocumentStatelessCustomActionDefinition(v.ActionDefinition, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ActionName != nil {
+		ok := object.Key("ActionName")
+		ok.String(*v.ActionName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRuleGroupSourceCustomActionsList(v []types.RuleGroupSourceCustomActionsDetails, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentRuleGroupSourceCustomActionsDetails(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRuleGroupSourceListDetails(v *types.RuleGroupSourceListDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.GeneratedRulesType != nil {
+		ok := object.Key("GeneratedRulesType")
+		ok.String(*v.GeneratedRulesType)
+	}
+
+	if v.Targets != nil {
+		ok := object.Key("Targets")
+		if err := awsRestjson1_serializeDocumentNonEmptyStringList(v.Targets, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TargetTypes != nil {
+		ok := object.Key("TargetTypes")
+		if err := awsRestjson1_serializeDocumentNonEmptyStringList(v.TargetTypes, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRuleGroupSourceStatefulRulesDetails(v *types.RuleGroupSourceStatefulRulesDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Action != nil {
+		ok := object.Key("Action")
+		ok.String(*v.Action)
+	}
+
+	if v.Header != nil {
+		ok := object.Key("Header")
+		if err := awsRestjson1_serializeDocumentRuleGroupSourceStatefulRulesHeaderDetails(v.Header, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RuleOptions != nil {
+		ok := object.Key("RuleOptions")
+		if err := awsRestjson1_serializeDocumentRuleGroupSourceStatefulRulesOptionsList(v.RuleOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRuleGroupSourceStatefulRulesHeaderDetails(v *types.RuleGroupSourceStatefulRulesHeaderDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Destination != nil {
+		ok := object.Key("Destination")
+		ok.String(*v.Destination)
+	}
+
+	if v.DestinationPort != nil {
+		ok := object.Key("DestinationPort")
+		ok.String(*v.DestinationPort)
+	}
+
+	if v.Direction != nil {
+		ok := object.Key("Direction")
+		ok.String(*v.Direction)
+	}
+
+	if v.Protocol != nil {
+		ok := object.Key("Protocol")
+		ok.String(*v.Protocol)
+	}
+
+	if v.Source != nil {
+		ok := object.Key("Source")
+		ok.String(*v.Source)
+	}
+
+	if v.SourcePort != nil {
+		ok := object.Key("SourcePort")
+		ok.String(*v.SourcePort)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRuleGroupSourceStatefulRulesList(v []types.RuleGroupSourceStatefulRulesDetails, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentRuleGroupSourceStatefulRulesDetails(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRuleGroupSourceStatefulRulesOptionsDetails(v *types.RuleGroupSourceStatefulRulesOptionsDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Keyword != nil {
+		ok := object.Key("Keyword")
+		ok.String(*v.Keyword)
+	}
+
+	if v.Settings != nil {
+		ok := object.Key("Settings")
+		if err := awsRestjson1_serializeDocumentRuleGroupSourceStatefulRulesRuleOptionsSettingsList(v.Settings, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRuleGroupSourceStatefulRulesOptionsList(v []types.RuleGroupSourceStatefulRulesOptionsDetails, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentRuleGroupSourceStatefulRulesOptionsDetails(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRuleGroupSourceStatefulRulesRuleOptionsSettingsList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRuleGroupSourceStatelessRuleDefinition(v *types.RuleGroupSourceStatelessRuleDefinition, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Actions != nil {
+		ok := object.Key("Actions")
+		if err := awsRestjson1_serializeDocumentNonEmptyStringList(v.Actions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MatchAttributes != nil {
+		ok := object.Key("MatchAttributes")
+		if err := awsRestjson1_serializeDocumentRuleGroupSourceStatelessRuleMatchAttributes(v.MatchAttributes, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRuleGroupSourceStatelessRuleMatchAttributes(v *types.RuleGroupSourceStatelessRuleMatchAttributes, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DestinationPorts != nil {
+		ok := object.Key("DestinationPorts")
+		if err := awsRestjson1_serializeDocumentRuleGroupSourceStatelessRuleMatchAttributesDestinationPortsList(v.DestinationPorts, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Destinations != nil {
+		ok := object.Key("Destinations")
+		if err := awsRestjson1_serializeDocumentRuleGroupSourceStatelessRuleMatchAttributesDestinationsList(v.Destinations, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Protocols != nil {
+		ok := object.Key("Protocols")
+		if err := awsRestjson1_serializeDocumentRuleGroupSourceStatelessRuleMatchAttributesProtocolsList(v.Protocols, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SourcePorts != nil {
+		ok := object.Key("SourcePorts")
+		if err := awsRestjson1_serializeDocumentRuleGroupSourceStatelessRuleMatchAttributesSourcePortsList(v.SourcePorts, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Sources != nil {
+		ok := object.Key("Sources")
+		if err := awsRestjson1_serializeDocumentRuleGroupSourceStatelessRuleMatchAttributesSourcesList(v.Sources, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TcpFlags != nil {
+		ok := object.Key("TcpFlags")
+		if err := awsRestjson1_serializeDocumentRuleGroupSourceStatelessRuleMatchAttributesTcpFlagsList(v.TcpFlags, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRuleGroupSourceStatelessRuleMatchAttributesDestinationPorts(v *types.RuleGroupSourceStatelessRuleMatchAttributesDestinationPorts, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FromPort != 0 {
+		ok := object.Key("FromPort")
+		ok.Integer(v.FromPort)
+	}
+
+	if v.ToPort != 0 {
+		ok := object.Key("ToPort")
+		ok.Integer(v.ToPort)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRuleGroupSourceStatelessRuleMatchAttributesDestinationPortsList(v []types.RuleGroupSourceStatelessRuleMatchAttributesDestinationPorts, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentRuleGroupSourceStatelessRuleMatchAttributesDestinationPorts(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRuleGroupSourceStatelessRuleMatchAttributesDestinations(v *types.RuleGroupSourceStatelessRuleMatchAttributesDestinations, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AddressDefinition != nil {
+		ok := object.Key("AddressDefinition")
+		ok.String(*v.AddressDefinition)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRuleGroupSourceStatelessRuleMatchAttributesDestinationsList(v []types.RuleGroupSourceStatelessRuleMatchAttributesDestinations, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentRuleGroupSourceStatelessRuleMatchAttributesDestinations(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRuleGroupSourceStatelessRuleMatchAttributesProtocolsList(v []int32, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.Integer(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRuleGroupSourceStatelessRuleMatchAttributesSourcePorts(v *types.RuleGroupSourceStatelessRuleMatchAttributesSourcePorts, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FromPort != 0 {
+		ok := object.Key("FromPort")
+		ok.Integer(v.FromPort)
+	}
+
+	if v.ToPort != 0 {
+		ok := object.Key("ToPort")
+		ok.Integer(v.ToPort)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRuleGroupSourceStatelessRuleMatchAttributesSourcePortsList(v []types.RuleGroupSourceStatelessRuleMatchAttributesSourcePorts, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentRuleGroupSourceStatelessRuleMatchAttributesSourcePorts(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRuleGroupSourceStatelessRuleMatchAttributesSources(v *types.RuleGroupSourceStatelessRuleMatchAttributesSources, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AddressDefinition != nil {
+		ok := object.Key("AddressDefinition")
+		ok.String(*v.AddressDefinition)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRuleGroupSourceStatelessRuleMatchAttributesSourcesList(v []types.RuleGroupSourceStatelessRuleMatchAttributesSources, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentRuleGroupSourceStatelessRuleMatchAttributesSources(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRuleGroupSourceStatelessRuleMatchAttributesTcpFlags(v *types.RuleGroupSourceStatelessRuleMatchAttributesTcpFlags, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Flags != nil {
+		ok := object.Key("Flags")
+		if err := awsRestjson1_serializeDocumentNonEmptyStringList(v.Flags, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Masks != nil {
+		ok := object.Key("Masks")
+		if err := awsRestjson1_serializeDocumentNonEmptyStringList(v.Masks, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRuleGroupSourceStatelessRuleMatchAttributesTcpFlagsList(v []types.RuleGroupSourceStatelessRuleMatchAttributesTcpFlags, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentRuleGroupSourceStatelessRuleMatchAttributesTcpFlags(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRuleGroupSourceStatelessRulesAndCustomActionsDetails(v *types.RuleGroupSourceStatelessRulesAndCustomActionsDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CustomActions != nil {
+		ok := object.Key("CustomActions")
+		if err := awsRestjson1_serializeDocumentRuleGroupSourceCustomActionsList(v.CustomActions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.StatelessRules != nil {
+		ok := object.Key("StatelessRules")
+		if err := awsRestjson1_serializeDocumentRuleGroupSourceStatelessRulesList(v.StatelessRules, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRuleGroupSourceStatelessRulesDetails(v *types.RuleGroupSourceStatelessRulesDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Priority != 0 {
+		ok := object.Key("Priority")
+		ok.Integer(v.Priority)
+	}
+
+	if v.RuleDefinition != nil {
+		ok := object.Key("RuleDefinition")
+		if err := awsRestjson1_serializeDocumentRuleGroupSourceStatelessRuleDefinition(v.RuleDefinition, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRuleGroupSourceStatelessRulesList(v []types.RuleGroupSourceStatelessRulesDetails, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentRuleGroupSourceStatelessRulesDetails(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRuleGroupVariables(v *types.RuleGroupVariables, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IpSets != nil {
+		ok := object.Key("IpSets")
+		if err := awsRestjson1_serializeDocumentRuleGroupVariablesIpSetsDetails(v.IpSets, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PortSets != nil {
+		ok := object.Key("PortSets")
+		if err := awsRestjson1_serializeDocumentRuleGroupVariablesPortSetsDetails(v.PortSets, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRuleGroupVariablesIpSetsDetails(v *types.RuleGroupVariablesIpSetsDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Definition != nil {
+		ok := object.Key("Definition")
+		if err := awsRestjson1_serializeDocumentNonEmptyStringList(v.Definition, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRuleGroupVariablesPortSetsDetails(v *types.RuleGroupVariablesPortSetsDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Definition != nil {
+		ok := object.Key("Definition")
+		if err := awsRestjson1_serializeDocumentNonEmptyStringList(v.Definition, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -18732,6 +19825,59 @@ func awsRestjson1_serializeDocumentStandardsSubscriptionRequests(v []types.Stand
 	for i := range v {
 		av := array.Value()
 		if err := awsRestjson1_serializeDocumentStandardsSubscriptionRequest(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentStatelessCustomActionDefinition(v *types.StatelessCustomActionDefinition, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PublishMetricAction != nil {
+		ok := object.Key("PublishMetricAction")
+		if err := awsRestjson1_serializeDocumentStatelessCustomPublishMetricAction(v.PublishMetricAction, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentStatelessCustomPublishMetricAction(v *types.StatelessCustomPublishMetricAction, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Dimensions != nil {
+		ok := object.Key("Dimensions")
+		if err := awsRestjson1_serializeDocumentStatelessCustomPublishMetricActionDimensionsList(v.Dimensions, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentStatelessCustomPublishMetricActionDimension(v *types.StatelessCustomPublishMetricActionDimension, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Value != nil {
+		ok := object.Key("Value")
+		ok.String(*v.Value)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentStatelessCustomPublishMetricActionDimensionsList(v []types.StatelessCustomPublishMetricActionDimension, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentStatelessCustomPublishMetricActionDimension(&v[i], av); err != nil {
 			return err
 		}
 	}

@@ -1180,27 +1180,6 @@ func validateProcessorList(v []types.Processor) error {
 	}
 }
 
-func validatePushNotificationConfiguration(v *types.PushNotificationConfiguration) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "PushNotificationConfiguration"}
-	if v.Title == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Title"))
-	}
-	if v.Body == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Body"))
-	}
-	if len(v.Type) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Type"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validatePushNotificationPreferences(v *types.PushNotificationPreferences) error {
 	if v == nil {
 		return nil
@@ -2021,11 +2000,6 @@ func validateOpSendChannelMessageInput(v *SendChannelMessageInput) error {
 	}
 	if v.ChimeBearer == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ChimeBearer"))
-	}
-	if v.PushNotification != nil {
-		if err := validatePushNotificationConfiguration(v.PushNotification); err != nil {
-			invalidParams.AddNested("PushNotification", err.(smithy.InvalidParamsError))
-		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

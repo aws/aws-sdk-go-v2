@@ -32,13 +32,6 @@ func (c *Client) CreateTracker(ctx context.Context, params *CreateTrackerInput, 
 
 type CreateTrackerInput struct {
 
-	// Specifies the pricing plan for the tracker resource. For additional details and
-	// restrictions on each pricing plan option, see Amazon Location Service pricing
-	// (https://aws.amazon.com/location/pricing/).
-	//
-	// This member is required.
-	PricingPlan types.PricingPlan
-
 	// The name for the tracker resource. Requirements:
 	//
 	// * Contain only alphanumeric
@@ -76,9 +69,24 @@ type CreateTrackerInput struct {
 	// positions to paginate through. Distance-based filtering can also reduce the
 	// effects of GPS noise when displaying device trajectories on a map.
 	//
+	// *
+	// AccuracyBased - If the device has moved less than the measured accuracy,
+	// location updates are ignored. For example, if two consecutive updates from a
+	// device have a horizontal accuracy of 5 m and 10 m, the second update is ignored
+	// if the device has moved less than 15 m. Ignored location updates are neither
+	// evaluated against linked geofence collections, nor stored. This can reduce the
+	// effects of GPS noise when displaying device trajectories on a map, and can help
+	// control your costs by reducing the number of geofence evaluations.
+	//
 	// This field
 	// is optional. If not specified, the default value is TimeBased.
 	PositionFiltering types.PositionFiltering
+
+	// Optionally specifies the pricing plan for the tracker resource. Defaults to
+	// RequestBasedUsage. For additional details and restrictions on each pricing plan
+	// option, see Amazon Location Service pricing
+	// (https://aws.amazon.com/location/pricing/).
+	PricingPlan types.PricingPlan
 
 	// Specifies the data provider for the tracker resource.
 	//

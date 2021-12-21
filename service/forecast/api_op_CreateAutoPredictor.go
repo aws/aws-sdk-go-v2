@@ -72,6 +72,7 @@ type CreateAutoPredictorInput struct {
 	// specify this optional object in the CreateDataset and CreatePredictor requests.
 	EncryptionConfig *types.EncryptionConfig
 
+	// Create an Explainability resource for the predictor.
 	ExplainPredictor *bool
 
 	// An array of dimension (field) names that specify how to group the generated

@@ -40,7 +40,8 @@ type CreateAppInput struct {
 	// The name of the new application.
 	Name *string
 
-	// The name of the service role in the customer's account to be used by AWS SMS.
+	// The name of the service role in the customer's account to be used by Server
+	// Migration Service.
 	RoleName *string
 
 	// The server groups to include in the application.

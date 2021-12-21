@@ -14,9 +14,11 @@ import (
 // privacy protection is enabled, contact information such as email address is
 // replaced either with contact information for Amazon Registrar (for .com, .net,
 // and .org domains) or with contact information for our registrar associate,
-// Gandi. This operation affects only the contact information for the specified
-// contact type (registrant, administrator, or tech). If the request succeeds,
-// Amazon Route 53 returns an operation ID that you can use with GetOperationDetail
+// Gandi. You must specify the same privacy setting for the administrative,
+// registrant, and technical contacts. This operation affects only the contact
+// information for the specified contact type (administrative, registrant, or
+// technical). If the request succeeds, Amazon Route 53 returns an operation ID
+// that you can use with GetOperationDetail
 // (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html)
 // to track the progress and completion of the action. If the request doesn't
 // complete successfully, the domain registrant will be notified by email. By
@@ -56,7 +58,9 @@ type UpdateDomainContactPrivacyInput struct {
 	// specify true, WHOIS ("who is") queries return contact information either for
 	// Amazon Registrar (for .com, .net, and .org domains) or for our registrar
 	// associate, Gandi (for all other TLDs). If you specify false, WHOIS queries
-	// return the information that you entered for the admin contact.
+	// return the information that you entered for the admin contact. You must specify
+	// the same privacy setting for the administrative, registrant, and technical
+	// contacts.
 	AdminPrivacy *bool
 
 	// Whether you want to conceal contact information from WHOIS queries. If you
@@ -64,14 +68,17 @@ type UpdateDomainContactPrivacyInput struct {
 	// Amazon Registrar (for .com, .net, and .org domains) or for our registrar
 	// associate, Gandi (for all other TLDs). If you specify false, WHOIS queries
 	// return the information that you entered for the registrant contact (domain
-	// owner).
+	// owner). You must specify the same privacy setting for the administrative,
+	// registrant, and technical contacts.
 	RegistrantPrivacy *bool
 
 	// Whether you want to conceal contact information from WHOIS queries. If you
 	// specify true, WHOIS ("who is") queries return contact information either for
 	// Amazon Registrar (for .com, .net, and .org domains) or for our registrar
 	// associate, Gandi (for all other TLDs). If you specify false, WHOIS queries
-	// return the information that you entered for the technical contact.
+	// return the information that you entered for the technical contact. You must
+	// specify the same privacy setting for the administrative, registrant, and
+	// technical contacts.
 	TechPrivacy *bool
 
 	noSmithyDocumentSerde

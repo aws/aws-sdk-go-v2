@@ -415,15 +415,20 @@ type ListIntegrationItem struct {
 	// This member is required.
 	LastUpdatedAt *time.Time
 
-	// The name of the profile object type.
-	//
-	// This member is required.
-	ObjectTypeName *string
-
 	// The URI of the S3 bucket or any other type of data source.
 	//
 	// This member is required.
 	Uri *string
+
+	// The name of the profile object type.
+	ObjectTypeName *string
+
+	// A map in which each key is an event type from an external application such as
+	// Segment or Shopify, and each value is an ObjectTypeName (template) used to
+	// ingest the event. It supports the following event types: SegmentIdentify,
+	// ShopifyCreateCustomers, ShopifyUpdateCustomers, ShopifyCreateDraftOrders,
+	// ShopifyUpdateDraftOrders, ShopifyCreateOrders, and ShopifyUpdatedOrders.
+	ObjectTypeNames map[string]string
 
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
@@ -558,12 +563,13 @@ type MatchItem struct {
 
 // The filter applied to ListProfileObjects response to include profile objects
 // with the specified index values. This filter is only supported for
-// ObjectTypeName _asset and _case.
+// ObjectTypeName _asset, _case and _order.
 type ObjectFilter struct {
 
 	// A searchable identifier of a standard profile object. The predefined keys you
 	// can use to search for _asset include: _assetId, _assetName, _serialNumber. The
-	// predefined keys you can use to search for _case include: _caseId.
+	// predefined keys you can use to search for _case include: _caseId. The predefined
+	// keys you can use to search for _order include: _orderId.
 	//
 	// This member is required.
 	KeyName *string
@@ -602,14 +608,15 @@ type ObjectTypeKey struct {
 	FieldNames []string
 
 	// The types of keys that a ProfileObject can have. Each ProfileObject can have
-	// only 1 UNIQUE key but multiple PROFILE keys. PROFILE, ASSET or CASE means that
-	// this key can be used to tie an object to a PROFILE, ASSET or CASE respectively.
-	// UNIQUE means that it can be used to uniquely identify an object. If a key a is
-	// marked as SECONDARY, it will be used to search for profiles after all other
-	// PROFILE keys have been searched. A LOOKUP_ONLY key is only used to match a
-	// profile but is not persisted to be used for searching of the profile. A NEW_ONLY
-	// key is only used if the profile does not already exist before the object is
-	// ingested, otherwise it is only used for matching objects to profiles.
+	// only 1 UNIQUE key but multiple PROFILE keys. PROFILE, ASSET, CASE, or ORDER
+	// means that this key can be used to tie an object to a PROFILE, ASSET, CASE, or
+	// ORDER respectively. UNIQUE means that it can be used to uniquely identify an
+	// object. If a key a is marked as SECONDARY, it will be used to search for
+	// profiles after all other PROFILE keys have been searched. A LOOKUP_ONLY key is
+	// only used to match a profile but is not persisted to be used for searching of
+	// the profile. A NEW_ONLY key is only used if the profile does not already exist
+	// before the object is ingested, otherwise it is only used for matching objects to
+	// profiles.
 	StandardIdentifiers []StandardIdentifier
 
 	noSmithyDocumentSerde

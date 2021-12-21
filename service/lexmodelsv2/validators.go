@@ -2221,6 +2221,23 @@ func validateExportSortBy(v *types.ExportSortBy) error {
 	}
 }
 
+func validateExternalSourceSetting(v *types.ExternalSourceSetting) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExternalSourceSetting"}
+	if v.GrammarSlotTypeSetting != nil {
+		if err := validateGrammarSlotTypeSetting(v.GrammarSlotTypeSetting); err != nil {
+			invalidParams.AddNested("GrammarSlotTypeSetting", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateFulfillmentCodeHookSettings(v *types.FulfillmentCodeHookSettings) error {
 	if v == nil {
 		return nil
@@ -2304,6 +2321,41 @@ func validateFulfillmentUpdatesSpecification(v *types.FulfillmentUpdatesSpecific
 		if err := validateFulfillmentUpdateResponseSpecification(v.UpdateResponse); err != nil {
 			invalidParams.AddNested("UpdateResponse", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGrammarSlotTypeSetting(v *types.GrammarSlotTypeSetting) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GrammarSlotTypeSetting"}
+	if v.Source != nil {
+		if err := validateGrammarSlotTypeSource(v.Source); err != nil {
+			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGrammarSlotTypeSource(v *types.GrammarSlotTypeSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GrammarSlotTypeSource"}
+	if v.S3BucketName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3BucketName"))
+	}
+	if v.S3ObjectKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3ObjectKey"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3771,9 +3823,7 @@ func validateOpCreateSlotTypeInput(v *CreateSlotTypeInput) error {
 			invalidParams.AddNested("SlotTypeValues", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.ValueSelectionSetting == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ValueSelectionSetting"))
-	} else if v.ValueSelectionSetting != nil {
+	if v.ValueSelectionSetting != nil {
 		if err := validateSlotValueSelectionSetting(v.ValueSelectionSetting); err != nil {
 			invalidParams.AddNested("ValueSelectionSetting", err.(smithy.InvalidParamsError))
 		}
@@ -3786,6 +3836,11 @@ func validateOpCreateSlotTypeInput(v *CreateSlotTypeInput) error {
 	}
 	if v.LocaleId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LocaleId"))
+	}
+	if v.ExternalSourceSetting != nil {
+		if err := validateExternalSourceSetting(v.ExternalSourceSetting); err != nil {
+			invalidParams.AddNested("ExternalSourceSetting", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5004,9 +5059,7 @@ func validateOpUpdateSlotTypeInput(v *UpdateSlotTypeInput) error {
 			invalidParams.AddNested("SlotTypeValues", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.ValueSelectionSetting == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ValueSelectionSetting"))
-	} else if v.ValueSelectionSetting != nil {
+	if v.ValueSelectionSetting != nil {
 		if err := validateSlotValueSelectionSetting(v.ValueSelectionSetting); err != nil {
 			invalidParams.AddNested("ValueSelectionSetting", err.(smithy.InvalidParamsError))
 		}
@@ -5019,6 +5072,11 @@ func validateOpUpdateSlotTypeInput(v *UpdateSlotTypeInput) error {
 	}
 	if v.LocaleId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LocaleId"))
+	}
+	if v.ExternalSourceSetting != nil {
+		if err := validateExternalSourceSetting(v.ExternalSourceSetting); err != nil {
+			invalidParams.AddNested("ExternalSourceSetting", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

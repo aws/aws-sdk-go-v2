@@ -1573,6 +1573,11 @@ type AutoMLChannel struct {
 	// You can use Gzip or None. The default value is None.
 	CompressionType CompressionType
 
+	// The content type of the data from the input source. You can use
+	// text/csv;header=present or x-application/vnd.amazon+parquet. The default value
+	// is text/csv;header=present.
+	ContentType *string
+
 	noSmithyDocumentSerde
 }
 
@@ -9086,6 +9091,7 @@ type PipelineExecution struct {
 
 // An execution of a step in a pipeline.
 type PipelineExecutionStep struct {
+	AttemptCount int32
 
 	// If this pipeline execution step was cached, details on the cache hit.
 	CacheHitResult *CacheHitResult

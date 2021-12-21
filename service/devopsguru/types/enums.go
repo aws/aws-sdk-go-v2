@@ -329,6 +329,7 @@ const (
 	OrganizationResourceCollectionTypeAwsCloudFormation OrganizationResourceCollectionType = "AWS_CLOUD_FORMATION"
 	OrganizationResourceCollectionTypeAwsService        OrganizationResourceCollectionType = "AWS_SERVICE"
 	OrganizationResourceCollectionTypeAwsAccount        OrganizationResourceCollectionType = "AWS_ACCOUNT"
+	OrganizationResourceCollectionTypeAwsTags           OrganizationResourceCollectionType = "AWS_TAGS"
 )
 
 // Values returns all known values for OrganizationResourceCollectionType. Note
@@ -340,6 +341,7 @@ func (OrganizationResourceCollectionType) Values() []OrganizationResourceCollect
 		"AWS_CLOUD_FORMATION",
 		"AWS_SERVICE",
 		"AWS_ACCOUNT",
+		"AWS_TAGS",
 	}
 }
 

@@ -785,6 +785,61 @@ func (m *awsAwsjson10_serializeOpDescribeRuleGroup) HandleSerialize(ctx context.
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpDescribeRuleGroupMetadata struct {
+}
+
+func (*awsAwsjson10_serializeOpDescribeRuleGroupMetadata) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpDescribeRuleGroupMetadata) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeRuleGroupMetadataInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("NetworkFirewall_20201112.DescribeRuleGroupMetadata")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentDescribeRuleGroupMetadataInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpDisassociateSubnets struct {
 }
 
@@ -2274,9 +2329,28 @@ func awsAwsjson10_serializeDocumentStatefulRule(v *types.StatefulRule, value smi
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentStatefulRuleGroupOverride(v *types.StatefulRuleGroupOverride, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Action) > 0 {
+		ok := object.Key("Action")
+		ok.String(string(v.Action))
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentStatefulRuleGroupReference(v *types.StatefulRuleGroupReference, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Override != nil {
+		ok := object.Key("Override")
+		if err := awsAwsjson10_serializeDocumentStatefulRuleGroupOverride(v.Override, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.Priority != 0 {
 		ok := object.Key("Priority")
@@ -2908,6 +2982,28 @@ func awsAwsjson10_serializeOpDocumentDescribeRuleGroupInput(v *DescribeRuleGroup
 	return nil
 }
 
+func awsAwsjson10_serializeOpDocumentDescribeRuleGroupMetadataInput(v *DescribeRuleGroupMetadataInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RuleGroupArn != nil {
+		ok := object.Key("RuleGroupArn")
+		ok.String(*v.RuleGroupArn)
+	}
+
+	if v.RuleGroupName != nil {
+		ok := object.Key("RuleGroupName")
+		ok.String(*v.RuleGroupName)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeOpDocumentDisassociateSubnetsInput(v *DisassociateSubnetsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2990,6 +3086,11 @@ func awsAwsjson10_serializeOpDocumentListRuleGroupsInput(v *ListRuleGroupsInput,
 	if v.NextToken != nil {
 		ok := object.Key("NextToken")
 		ok.String(*v.NextToken)
+	}
+
+	if len(v.Scope) > 0 {
+		ok := object.Key("Scope")
+		ok.String(string(v.Scope))
 	}
 
 	return nil

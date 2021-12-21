@@ -7,6 +7,7 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/location/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -65,8 +66,14 @@ type GetDevicePositionOutput struct {
 	// This member is required.
 	SampleTime *time.Time
 
+	// The accuracy of the device position.
+	Accuracy *types.PositionalAccuracy
+
 	// The device whose position you retrieved.
 	DeviceId *string
+
+	// The properties associated with the position.
+	PositionProperties map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

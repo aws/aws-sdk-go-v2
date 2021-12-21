@@ -100,6 +100,9 @@ type DescribeBotLocaleOutput struct {
 	// utterance.
 	NluIntentConfidenceThreshold *float64
 
+	// Recommended actions to take to resolve an error in the failureReasons field.
+	RecommendedActions []string
+
 	// The number of slot types defined for the locale.
 	SlotTypesCount *int32
 

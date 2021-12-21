@@ -29,7 +29,6 @@ func (c *Client) UpdateStudio(ctx context.Context, params *UpdateStudioInput, op
 	return out, nil
 }
 
-//
 type UpdateStudioInput struct {
 
 	// The studio ID.
@@ -56,7 +55,6 @@ type UpdateStudioInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type UpdateStudioOutput struct {
 
 	// Information about a studio.

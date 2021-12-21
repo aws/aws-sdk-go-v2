@@ -13,15 +13,19 @@ import (
 )
 
 // Creates a safety rule in a control panel. Safety rules let you add safeguards
-// around enabling and disabling routing controls, to help prevent unexpected
-// outcomes. There are two types of safety rules: assertion rules and gating rules.
-// Assertion rule: An assertion rule enforces that, when a routing control state is
-// changed, the criteria set by the rule configuration is met. Otherwise, the
-// change to the routing control is not accepted. Gating rule: A gating rule
-// verifies that a set of gating controls evaluates as true, based on a rule
-// configuration that you specify. If the gating rule evaluates to true, Amazon
-// Route 53 Application Recovery Controller allows a set of routing control state
-// changes to run and complete against the set of target controls.
+// around changing routing control states, and for enabling and disabling routing
+// controls, to help prevent unexpected outcomes. There are two types of safety
+// rules: assertion rules and gating rules. Assertion rule: An assertion rule
+// enforces that, when you change a routing control state, that a certain criteria
+// is met. For example, the criteria might be that at least one routing control
+// state is On after the transation so that traffic continues to flow to at least
+// one cell for the application. This ensures that you avoid a fail-open scenario.
+// Gating rule: A gating rule lets you configure a gating routing control as an
+// overall "on/off" switch for a group of routing controls. Or, you can configure
+// more complex gating scenarios, for example by configuring multiple gating
+// routing controls. For more information, see Safety rules
+// (https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.safety-rules.html)
+// in the Amazon Route 53 Application Recovery Controller Developer Guide.
 func (c *Client) CreateSafetyRule(ctx context.Context, params *CreateSafetyRuleInput, optFns ...func(*Options)) (*CreateSafetyRuleOutput, error) {
 	if params == nil {
 		params = &CreateSafetyRuleInput{}
@@ -40,29 +44,28 @@ func (c *Client) CreateSafetyRule(ctx context.Context, params *CreateSafetyRuleI
 // The request body that you include when you create a safety rule.
 type CreateSafetyRuleInput struct {
 
-	// A new assertion rule for a control panel.
+	// The assertion rule requested.
 	AssertionRule *types.NewAssertionRule
 
-	// Unique client idempotency token.
+	// A unique, case-sensitive string of up to 64 ASCII characters. To make an
+	// idempotent API request with an action, specify a client token in the request.
 	ClientToken *string
 
-	// A new gating rule for a control panel.
+	// The gating rule requested.
 	GatingRule *types.NewGatingRule
+
+	// The tags associated with the safety rule.
+	Tags map[string]string
 
 	noSmithyDocumentSerde
 }
 
 type CreateSafetyRuleOutput struct {
 
-	// An assertion rule enforces that, when a routing control state is changed, the
-	// criteria set by the rule configuration is met. Otherwise, the change to the
-	// routing control is not accepted.
+	// The assertion rule created.
 	AssertionRule *types.AssertionRule
 
-	// A gating rule verifies that a set of gating controls evaluates as true, based on
-	// a rule configuration that you specify. If the gating rule evaluates to true,
-	// Amazon Route 53 Application Recovery Controller allows a set of routing control
-	// state changes to run and complete against the set of target controls.
+	// The gating rule created.
 	GatingRule *types.GatingRule
 
 	// Metadata pertaining to the operation's result.

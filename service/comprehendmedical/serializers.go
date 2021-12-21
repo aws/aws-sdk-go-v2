@@ -236,6 +236,61 @@ func (m *awsAwsjson11_serializeOpDescribeRxNormInferenceJob) HandleSerialize(ctx
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpDescribeSNOMEDCTInferenceJob struct {
+}
+
+func (*awsAwsjson11_serializeOpDescribeSNOMEDCTInferenceJob) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDescribeSNOMEDCTInferenceJob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeSNOMEDCTInferenceJobInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("ComprehendMedical_20181030.DescribeSNOMEDCTInferenceJob")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDescribeSNOMEDCTInferenceJobInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpDetectEntities struct {
 }
 
@@ -511,6 +566,61 @@ func (m *awsAwsjson11_serializeOpInferRxNorm) HandleSerialize(ctx context.Contex
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpInferSNOMEDCT struct {
+}
+
+func (*awsAwsjson11_serializeOpInferSNOMEDCT) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpInferSNOMEDCT) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*InferSNOMEDCTInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("ComprehendMedical_20181030.InferSNOMEDCT")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentInferSNOMEDCTInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpListEntitiesDetectionV2Jobs struct {
 }
 
@@ -716,6 +826,61 @@ func (m *awsAwsjson11_serializeOpListRxNormInferenceJobs) HandleSerialize(ctx co
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentListRxNormInferenceJobsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpListSNOMEDCTInferenceJobs struct {
+}
+
+func (*awsAwsjson11_serializeOpListSNOMEDCTInferenceJobs) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpListSNOMEDCTInferenceJobs) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListSNOMEDCTInferenceJobsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("ComprehendMedical_20181030.ListSNOMEDCTInferenceJobs")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentListSNOMEDCTInferenceJobsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -951,6 +1116,61 @@ func (m *awsAwsjson11_serializeOpStartRxNormInferenceJob) HandleSerialize(ctx co
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpStartSNOMEDCTInferenceJob struct {
+}
+
+func (*awsAwsjson11_serializeOpStartSNOMEDCTInferenceJob) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpStartSNOMEDCTInferenceJob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StartSNOMEDCTInferenceJobInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("ComprehendMedical_20181030.StartSNOMEDCTInferenceJob")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentStartSNOMEDCTInferenceJobInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpStopEntitiesDetectionV2Job struct {
 }
 
@@ -1170,6 +1390,61 @@ func (m *awsAwsjson11_serializeOpStopRxNormInferenceJob) HandleSerialize(ctx con
 
 	return next.HandleSerialize(ctx, in)
 }
+
+type awsAwsjson11_serializeOpStopSNOMEDCTInferenceJob struct {
+}
+
+func (*awsAwsjson11_serializeOpStopSNOMEDCTInferenceJob) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpStopSNOMEDCTInferenceJob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StopSNOMEDCTInferenceJobInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("ComprehendMedical_20181030.StopSNOMEDCTInferenceJob")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentStopSNOMEDCTInferenceJobInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
 func awsAwsjson11_serializeDocumentComprehendMedicalAsyncJobFilter(v *types.ComprehendMedicalAsyncJobFilter, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1279,6 +1554,18 @@ func awsAwsjson11_serializeOpDocumentDescribeRxNormInferenceJobInput(v *Describe
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentDescribeSNOMEDCTInferenceJobInput(v *DescribeSNOMEDCTInferenceJobInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.JobId != nil {
+		ok := object.Key("JobId")
+		ok.String(*v.JobId)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentDetectEntitiesInput(v *DetectEntitiesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1328,6 +1615,18 @@ func awsAwsjson11_serializeOpDocumentInferICD10CMInput(v *InferICD10CMInput, val
 }
 
 func awsAwsjson11_serializeOpDocumentInferRxNormInput(v *InferRxNormInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Text != nil {
+		ok := object.Key("Text")
+		ok.String(*v.Text)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentInferSNOMEDCTInput(v *InferSNOMEDCTInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1412,6 +1711,30 @@ func awsAwsjson11_serializeOpDocumentListPHIDetectionJobsInput(v *ListPHIDetecti
 }
 
 func awsAwsjson11_serializeOpDocumentListRxNormInferenceJobsInput(v *ListRxNormInferenceJobsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Filter != nil {
+		ok := object.Key("Filter")
+		if err := awsAwsjson11_serializeDocumentComprehendMedicalAsyncJobFilter(v.Filter, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentListSNOMEDCTInferenceJobsInput(v *ListSNOMEDCTInferenceJobsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1619,6 +1942,52 @@ func awsAwsjson11_serializeOpDocumentStartRxNormInferenceJobInput(v *StartRxNorm
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentStartSNOMEDCTInferenceJobInput(v *StartSNOMEDCTInferenceJobInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientRequestToken != nil {
+		ok := object.Key("ClientRequestToken")
+		ok.String(*v.ClientRequestToken)
+	}
+
+	if v.DataAccessRoleArn != nil {
+		ok := object.Key("DataAccessRoleArn")
+		ok.String(*v.DataAccessRoleArn)
+	}
+
+	if v.InputDataConfig != nil {
+		ok := object.Key("InputDataConfig")
+		if err := awsAwsjson11_serializeDocumentInputDataConfig(v.InputDataConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.JobName != nil {
+		ok := object.Key("JobName")
+		ok.String(*v.JobName)
+	}
+
+	if v.KMSKey != nil {
+		ok := object.Key("KMSKey")
+		ok.String(*v.KMSKey)
+	}
+
+	if len(v.LanguageCode) > 0 {
+		ok := object.Key("LanguageCode")
+		ok.String(string(v.LanguageCode))
+	}
+
+	if v.OutputDataConfig != nil {
+		ok := object.Key("OutputDataConfig")
+		if err := awsAwsjson11_serializeDocumentOutputDataConfig(v.OutputDataConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentStopEntitiesDetectionV2JobInput(v *StopEntitiesDetectionV2JobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1656,6 +2025,18 @@ func awsAwsjson11_serializeOpDocumentStopPHIDetectionJobInput(v *StopPHIDetectio
 }
 
 func awsAwsjson11_serializeOpDocumentStopRxNormInferenceJobInput(v *StopRxNormInferenceJobInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.JobId != nil {
+		ok := object.Key("JobId")
+		ok.String(*v.JobId)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentStopSNOMEDCTInferenceJobInput(v *StopSNOMEDCTInferenceJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

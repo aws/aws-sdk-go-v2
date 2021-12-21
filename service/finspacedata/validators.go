@@ -348,14 +348,8 @@ func validateOpCreateDatasetInput(v *CreateDatasetInput) error {
 	if len(v.Kind) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Kind"))
 	}
-	if v.DatasetDescription == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DatasetDescription"))
-	}
 	if v.PermissionGroupParams == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PermissionGroupParams"))
-	}
-	if v.Alias == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Alias"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -534,9 +528,6 @@ func validateOpUpdateDatasetInput(v *UpdateDatasetInput) error {
 	}
 	if len(v.Kind) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Kind"))
-	}
-	if v.Alias == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Alias"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

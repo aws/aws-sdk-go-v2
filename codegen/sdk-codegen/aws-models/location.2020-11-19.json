@@ -328,8 +328,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#auth": [],
-                "smithy.api#documentation": "<p>Evaluates device positions against the geofence geometries from a given geofence\n            collection.</p>\n        <p>This operation always returns an empty response because geofences are asynchronously\n            evaluated. The evaluation determines if the device has entered or exited a geofenced\n            area, and then publishes one of the following events to Amazon EventBridge:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>ENTER</code> if Amazon Location determines that the tracked device has entered\n                    a geofenced area.</p>\n            </li>\n            <li>\n                <p>\n                  <code>EXIT</code> if Amazon Location determines that the tracked device has exited a\n                    geofenced area.</p>\n            </li>\n         </ul>\n        <note>\n            <p>The last geofence that a device was observed within is tracked for 30 days after\n                the most recent device position update.</p>\n        </note>",
+                "smithy.api#documentation": "<p>Evaluates device positions against the geofence geometries from a given geofence\n            collection.</p>\n        <p>This operation always returns an empty response because geofences are asynchronously\n            evaluated. The evaluation determines if the device has entered or exited a geofenced\n            area, and then publishes one of the following events to Amazon EventBridge:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>ENTER</code> if Amazon Location determines that the tracked device has entered\n                    a geofenced area.</p>\n            </li>\n            <li>\n                <p>\n                  <code>EXIT</code> if Amazon Location determines that the tracked device has exited a\n                    geofenced area.</p>\n            </li>\n         </ul>\n        <note>\n            <p>The last geofence that a device was observed within is tracked for 30 days after\n                the most recent device position update.</p>\n        </note>\n        <note>\n            <p>Geofence evaluation uses the given device position. It does not account for the \n                optional <code>Accuracy</code> of a <code>DevicePositionUpdate</code>.</p>\n        </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "geofencing."
                 },
@@ -771,7 +770,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Uploads position update data for one or more devices to a tracker resource. Amazon Location\n           uses the data when it reports the last known device position and position history. Amazon Location retains location data for 30 \n           days.</p>\n         <note>\n           <p>Position updates are handled based on the <code>PositionFiltering</code> property of the tracker. \n               When <code>PositionFiltering</code> is set to <code>TimeBased</code>, updates are evaluated against linked geofence collections, \n               and location data is stored at a maximum of one position per 30 second interval. If your update frequency is more often than \n               every 30 seconds, only one update per 30 seconds is stored for each unique device ID.\n               When <code>PositionFiltering</code> is set to <code>DistanceBased</code> filtering, location data is stored and evaluated against linked geofence \n               collections only if the device has moved more than 30 m (98.4 ft).</p>\n         </note>",
+                "smithy.api#documentation": "<p>Uploads position update data for one or more devices to a tracker resource. Amazon Location\n           uses the data when it reports the last known device position and position history. Amazon Location retains location data for 30 \n           days.</p>\n         <note>\n           <p>Position updates are handled based on the <code>PositionFiltering</code> property of the tracker. \n               When <code>PositionFiltering</code> is set to <code>TimeBased</code>, updates are evaluated against linked geofence collections, \n               and location data is stored at a maximum of one position per 30 second interval. If your update frequency is more often than \n               every 30 seconds, only one update per 30 seconds is stored for each unique device ID.</p>\n            <p>When <code>PositionFiltering</code> is set to <code>DistanceBased</code> filtering, location data is stored and evaluated against linked geofence \n                collections only if the device has moved more than 30 m (98.4 ft).</p>\n            <p>When <code>PositionFiltering</code> is set to <code>AccuracyBased</code> filtering,\n                location data is stored and evaluated against linked geofence collections only if the\n                device has moved more than the measured accuracy. For example, if two consecutive\n                updates from a device have a horizontal accuracy of 5 m and 10 m, the second update\n                is neither stored or evaluated if the device has moved less than 15 m. If\n                <code>PositionFiltering</code> is set to <code>AccuracyBased</code> filtering, Amazon Location\n                uses the default value <code>{ \"Horizontal\": 0}</code> when accuracy is not provided on\n                a <code>DevicePositionUpdate</code>.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "tracking."
                 },
@@ -1194,8 +1193,7 @@
                 "PricingPlan": {
                     "target": "com.amazonaws.location#PricingPlan",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the pricing plan for the geofence collection.</p>\n        <p>For additional details and restrictions on each pricing plan option, see the <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing\n            page</a>.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Optionally specifies the pricing plan for the geofence collection. Defaults to\n            <code>RequestBasedUsage</code>.</p>\n        <p>For additional details and restrictions on each pricing plan option, see the <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing\n            page</a>.</p>"
                     }
                 },
                 "PricingPlanDataSource": {
@@ -1308,8 +1306,7 @@
                 "PricingPlan": {
                     "target": "com.amazonaws.location#PricingPlan",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the pricing plan for your map resource.</p>\n        <p>For additional details and restrictions on each pricing plan option, see <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing</a>.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Optionally specifies the pricing plan for the map resource. Defaults to\n            <code>RequestBasedUsage</code>.</p>\n        <p>For additional details and restrictions on each pricing plan option, see <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing</a>.</p>"
                     }
                 },
                 "Description": {
@@ -1378,7 +1375,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a place index resource in your AWS account. Use a place index resource to\n            geocode addresses and other text queries by using the <code>SearchPlaceIndexForText</code> operation,\n            and reverse geocode coordinates by using the <code>SearchPlaceIndexForPosition</code> operation.</p>",
+                "smithy.api#documentation": "<p>Creates a place index resource in your AWS account. Use a place index resource to\n            geocode addresses and other text queries by using the <code>SearchPlaceIndexForText</code> operation,\n            and reverse geocode coordinates by using the <code>SearchPlaceIndexForPosition</code> operation, and\n            enable autosuggestions by using the <code>SearchPlaceIndexForSuggestions</code> operation.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "places."
                 },
@@ -1410,8 +1407,7 @@
                 "PricingPlan": {
                     "target": "com.amazonaws.location#PricingPlan",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the pricing plan for your place index resource.</p>\n         <p>For additional details and restrictions on each pricing plan option, see <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing</a>.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Optionally specifies the pricing plan for the place index resource. Defaults to\n         <code>RequestBasedUsage</code>.</p>\n         <p>For additional details and restrictions on each pricing plan option, see <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing</a>.</p>"
                     }
                 },
                 "Description": {
@@ -1518,8 +1514,7 @@
                 "PricingPlan": {
                     "target": "com.amazonaws.location#PricingPlan",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the pricing plan for your route calculator resource.</p>\n        <p>For additional details and restrictions on each pricing plan option, see <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing</a>.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Optionally specifies the pricing plan for the route calculator resource. Defaults to\n            <code>RequestBasedUsage</code>.</p>\n        <p>For additional details and restrictions on each pricing plan option, see <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing</a>.</p>"
                     }
                 },
                 "Description": {
@@ -1613,8 +1608,7 @@
                 "PricingPlan": {
                     "target": "com.amazonaws.location#PricingPlan",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the pricing plan for the tracker resource.</p>\n         <p>For additional details and restrictions on each pricing plan option, see <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing</a>.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Optionally specifies the pricing plan for the tracker resource. Defaults to\n            <code>RequestBasedUsage</code>.</p>\n         <p>For additional details and restrictions on each pricing plan option, see <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing</a>.</p>"
                     }
                 },
                 "KmsKeyId": {
@@ -1644,7 +1638,7 @@
                 "PositionFiltering": {
                     "target": "com.amazonaws.location#PositionFiltering",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the position filtering for the tracker resource.</p>\n        <p>Valid values:</p>\n        <ul>\n            <li>\n                <p>\n                    <code>TimeBased</code> - Location updates are evaluated against linked geofence collections, \n                    but not every location update is stored. If your update frequency is more often than 30 seconds, \n                    only one update per 30 seconds is stored for each unique device ID.\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>DistanceBased</code> - If the device has moved less than 30 m (98.4 ft), location updates are \n                    ignored. Location updates within this area are neither evaluated against linked geofence collections, nor stored.\n                    This helps control costs by reducing the number of geofence evaluations and historical device positions to paginate through.\n                    Distance-based filtering can also reduce the effects of GPS noise when displaying device trajectories on a map.\n                </p>\n            </li>\n         </ul>\n        <p>This field is optional. If not specified, the default value is <code>TimeBased</code>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the position filtering for the tracker resource.</p>\n        <p>Valid values:</p>\n        <ul>\n            <li>\n                <p>\n                    <code>TimeBased</code> - Location updates are evaluated against linked geofence collections, \n                    but not every location update is stored. If your update frequency is more often than 30 seconds, \n                    only one update per 30 seconds is stored for each unique device ID.\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>DistanceBased</code> - If the device has moved less than 30 m (98.4 ft), location updates are \n                    ignored. Location updates within this area are neither evaluated against linked geofence collections, nor stored.\n                    This helps control costs by reducing the number of geofence evaluations and historical device positions to paginate through.\n                    Distance-based filtering can also reduce the effects of GPS noise when displaying device trajectories on a map.\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>AccuracyBased</code> - If the device has moved less than the measured accuracy,\n                    location updates are ignored. For example, if two consecutive updates from a device\n                    have a horizontal accuracy of 5 m and 10 m, the second update is ignored if the device\n                    has moved less than 15 m. Ignored location updates are neither evaluated against\n                    linked geofence collections, nor stored. This can reduce the effects of GPS noise\n                    when displaying device trajectories on a map, and can help control your costs by reducing the\n                    number of geofence evaluations.\n                </p>\n            </li>\n         </ul>\n        <p>This field is optional. If not specified, the default value is <code>TimeBased</code>.</p>"
                     }
                 }
             }
@@ -1990,7 +1984,6 @@
                 }
             ],
             "traits": {
-                "smithy.api#auth": [],
                 "smithy.api#documentation": "<p>Retrieves the geofence collection details.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "geofencing."
@@ -2107,7 +2100,6 @@
                 }
             ],
             "traits": {
-                "smithy.api#auth": [],
                 "smithy.api#documentation": "<p>Retrieves the map resource details.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "maps."
@@ -2226,7 +2218,6 @@
                 }
             ],
             "traits": {
-                "smithy.api#auth": [],
                 "smithy.api#documentation": "<p>Retrieves the place index resource details.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "places."
@@ -2345,7 +2336,6 @@
                 }
             ],
             "traits": {
-                "smithy.api#auth": [],
                 "smithy.api#documentation": "<p>Retrieves the route calculator resource details.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "routes."
@@ -2457,7 +2447,6 @@
                 }
             ],
             "traits": {
-                "smithy.api#auth": [],
                 "smithy.api#documentation": "<p>Retrieves the tracker resource details.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "tracking."
@@ -2589,6 +2578,18 @@
                         "smithy.api#documentation": "<p>The last known device position.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "Accuracy": {
+                    "target": "com.amazonaws.location#PositionalAccuracy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The accuracy of the device position.</p>"
+                    }
+                },
+                "PositionProperties": {
+                    "target": "com.amazonaws.location#PropertyMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The properties associated with the position.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2623,6 +2624,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The latest device position defined in <a href=\"https://earth-info.nga.mil/GandG/wgs84/index.html\">WGS 84</a> format:\n                <code>[X or longitude, Y or latitude]</code>.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "Accuracy": {
+                    "target": "com.amazonaws.location#PositionalAccuracy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The accuracy of the device position.</p>"
+                    }
+                },
+                "PositionProperties": {
+                    "target": "com.amazonaws.location#PropertyMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Associates one of more properties with the position update. A property is a key-value\n            pair stored with the position update and added to any geofence event the update may\n            trigger.</p>\n        <p>Format: <code>\"key\" : \"value\"</code>\n         </p>"
                     }
                 }
             },
@@ -2999,6 +3012,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The last known device position.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "Accuracy": {
+                    "target": "com.amazonaws.location#PositionalAccuracy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The accuracy of the device position.</p>"
+                    }
+                },
+                "PositionProperties": {
+                    "target": "com.amazonaws.location#PropertyMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The properties associated with the position.</p>"
                     }
                 }
             }
@@ -3734,6 +3759,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The last known device position. Empty if no positions currently stored.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "Accuracy": {
+                    "target": "com.amazonaws.location#PositionalAccuracy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The accuracy of the device position.</p>"
+                    }
+                },
+                "PositionProperties": {
+                    "target": "com.amazonaws.location#PropertyMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The properties associated with the position.</p>"
                     }
                 }
             },
@@ -4938,6 +4975,9 @@
                     "target": "com.amazonaws.location#SearchPlaceIndexForPosition"
                 },
                 {
+                    "target": "com.amazonaws.location#SearchPlaceIndexForSuggestions"
+                },
+                {
                     "target": "com.amazonaws.location#SearchPlaceIndexForText"
                 }
             ],
@@ -4995,6 +5035,25 @@
                 ]
             }
         },
+        "com.amazonaws.location#PositionalAccuracy": {
+            "type": "structure",
+            "members": {
+                "Horizontal": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Estimated maximum distance, in meters, between the measured position and the true\n            position of a device, along the Earth's surface.</p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 10000
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the level of certainty of the position.</p>"
+            }
+        },
         "com.amazonaws.location#PricingPlan": {
             "type": "string",
             "traits": {
@@ -5012,6 +5071,34 @@
                         "documentation": "This pricing plan must be picked for mobile asset management use cases"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.location#PropertyMap": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String",
+                "traits": {
+                    "smithy.api#length": {
+                        "min": 1,
+                        "max": 20
+                    }
+                }
+            },
+            "value": {
+                "target": "smithy.api#String",
+                "traits": {
+                    "smithy.api#length": {
+                        "min": 1,
+                        "max": 40
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 3
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.location#PutGeofence": {
@@ -5212,6 +5299,27 @@
                 "target": "com.amazonaws.location#SearchForPositionResult"
             }
         },
+        "com.amazonaws.location#SearchForSuggestionsResult": {
+            "type": "structure",
+            "members": {
+                "Text": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text of the place suggestion, typically formatted as an address string.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains a place suggestion resulting from a place suggestion query that is run on a place index resource.</p>"
+            }
+        },
+        "com.amazonaws.location#SearchForSuggestionsResultList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.location#SearchForSuggestionsResult"
+            }
+        },
         "com.amazonaws.location#SearchForTextResult": {
             "type": "structure",
             "members": {
@@ -5375,6 +5483,175 @@
                 "smithy.api#documentation": "<p>A summary of the request sent by using <code>SearchPlaceIndexForPosition</code>.</p>"
             }
         },
+        "com.amazonaws.location#SearchPlaceIndexForSuggestions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.location#SearchPlaceIndexForSuggestionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.location#SearchPlaceIndexForSuggestionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.location#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.location#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.location#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.location#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.location#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Generates suggestions for addresses and points of interest based on partial or\n         misspelled free-form text. This operation is also known as autocomplete, autosuggest,\n         or fuzzy matching.</p>\n         <p>Optional parameters let you narrow your search results by bounding box or\n         country, or bias your search toward a specific position on the globe.</p>\n         <note>\n            <p>You can search for suggested place names near a specified position by using <code>BiasPosition</code>, or\n            filter results within a bounding box by using <code>FilterBBox</code>. These parameters are mutually exclusive; \n            using both <code>BiasPosition</code> and <code>FilterBBox</code> in the same command returns an error.</p>\n         </note>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "places."
+                },
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/places/v0/indexes/{IndexName}/search/suggestions",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.location#SearchPlaceIndexForSuggestionsRequest": {
+            "type": "structure",
+            "members": {
+                "IndexName": {
+                    "target": "com.amazonaws.location#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the place index resource you want to use for the search.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Text": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The free-form partial text to use to generate place suggestions. For example,\n         <code>eiffel tow</code>.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 200
+                        },
+                        "smithy.api#required": {},
+                        "smithy.api#sensitive": {}
+                    }
+                },
+                "BiasPosition": {
+                    "target": "com.amazonaws.location#Position",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional parameter that indicates a preference for place suggestions that are closer to a specified position.</p>\n         <p>\n         If provided, this parameter must contain a pair of numbers. The first number represents the X coordinate, or longitude; \n           the second number represents the Y coordinate, or latitude.</p>\n         <p>For example, <code>[-123.1174, 49.2847]</code> represents the position with\n            longitude <code>-123.1174</code> and\n            latitude <code>49.2847</code>.</p>\n         <note>\n            <p>\n               <code>BiasPosition</code> and <code>FilterBBox</code> are mutually exclusive. Specifying both options results in an error.\n         </p>\n         </note>"
+                    }
+                },
+                "FilterBBox": {
+                    "target": "com.amazonaws.location#BoundingBox",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional parameter that limits the search results by returning only suggestions within a specified bounding box.</p>\n         <p>\n         If provided, this parameter must contain a total of four consecutive numbers in two pairs.\n         The first pair of numbers represents the X and Y coordinates (longitude and latitude, respectively)\n         of the southwest corner of the bounding box; the second pair of numbers represents the X and Y coordinates (longitude and latitude, respectively)\n         of the northeast corner of the bounding box.</p>\n         <p>For example, <code>[-12.7935, -37.4835, -12.0684, -36.9542]</code> represents\n         a bounding box where the southwest corner has longitude <code>-12.7935</code> and latitude <code>-37.4835</code>, \n         and the northeast corner has longitude <code>-12.0684</code> and latitude <code>-36.9542</code>.</p>\n         <note>\n            <p>\n               <code>FilterBBox</code> and <code>BiasPosition</code> are mutually exclusive. Specifying both options results in an error.\n         </p>\n         </note>"
+                    }
+                },
+                "FilterCountries": {
+                    "target": "com.amazonaws.location#CountryCodeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional parameter that limits the search results by returning only suggestions within the provided list of countries.</p>\n         <ul>\n            <li>\n               <p>Use the <a href=\"https://www.iso.org/iso-3166-country-codes.html\">ISO 3166</a> 3-digit\n            country code. For example, Australia uses three upper-case characters:\n            <code>AUS</code>.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional parameter. The maximum number of results returned per request. </p>\n         <p>The default: <code>5</code>\n         </p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 15
+                        }
+                    }
+                },
+                "Language": {
+                    "target": "com.amazonaws.location#LanguageTag",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The preferred language used to return results. The value must be a valid <a href=\"https://tools.ietf.org/search/bcp47\">BCP 47</a> language tag, for example,\n         <code>en</code> for English.</p> \n         <p>This setting affects the languages used in the results. It does not change which \n         results are returned. If the language is not specified, or not supported for a \n         particular result, the partner automatically chooses a language for the result.</p>\n         <p>Used only when the partner selected is Here.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.location#SearchPlaceIndexForSuggestionsResponse": {
+            "type": "structure",
+            "members": {
+                "Summary": {
+                    "target": "com.amazonaws.location#SearchPlaceIndexForSuggestionsSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains a summary of the request. Echoes the input values for <code>BiasPosition</code>,\n         <code>FilterBBox</code>, <code>FilterCountries</code>, <code>Language</code>, <code>MaxResults</code>,\n         and <code>Text</code>. Also includes the <code>DataSource</code> of the place index.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Results": {
+                    "target": "com.amazonaws.location#SearchForSuggestionsResultList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of place suggestions that best match the search text.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.location#SearchPlaceIndexForSuggestionsSummary": {
+            "type": "structure",
+            "members": {
+                "Text": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The free-form partial text input specified in the request.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#sensitive": {}
+                    }
+                },
+                "BiasPosition": {
+                    "target": "com.amazonaws.location#Position",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the coordinates for the optional bias position specified in the request.</p>\n         <p>This parameter contains a pair of numbers. The first number represents the X \n         coordinate, or longitude; the second number represents the Y coordinate, or latitude.</p>\n         <p>For example, <code>[-123.1174, 49.2847]</code> represents the position with\n         longitude <code>-123.1174</code> and latitude <code>49.2847</code>.</p>"
+                    }
+                },
+                "FilterBBox": {
+                    "target": "com.amazonaws.location#BoundingBox",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the coordinates for the optional bounding box specified in the request.</p>"
+                    }
+                },
+                "FilterCountries": {
+                    "target": "com.amazonaws.location#CountryCodeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the optional country filter specified in the request.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the optional result count limit specified in the request.</p>"
+                    }
+                },
+                "DataSource": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The geospatial data provider attached to the place index resource specified in the request.\n         Values can be one of the following:</p>\n         <ul>\n            <li>\n               <p>Esri</p>\n            </li>\n            <li>\n               <p>Here</p>\n            </li>\n         </ul>\n         <p>For more information about data providers, see <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html\">Amazon Location Service data providers</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Language": {
+                    "target": "com.amazonaws.location#LanguageTag",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The preferred language used to return results. Matches the language in the request. \n         The value is a valid <a href=\"https://tools.ietf.org/search/bcp47\">BCP 47</a> language tag, for example,\n         <code>en</code> for English.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of the request sent by using <code>SearchPlaceIndexForSuggestions</code>.</p>"
+            }
+        },
         "com.amazonaws.location#SearchPlaceIndexForText": {
             "type": "operation",
             "input": {
@@ -5501,7 +5778,7 @@
                 "BiasPosition": {
                     "target": "com.amazonaws.location#Position",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains the coordinates for the optional bias position specified in the request.</p>"
+                        "smithy.api#documentation": "<p>Contains the coordinates for the optional bias position specified in the request.</p>\n         <p>This parameter contains a pair of numbers. The first number represents the X \n         coordinate, or longitude; the second number represents the Y coordinate, or latitude.</p>\n         <p>For example, <code>[-123.1174, 49.2847]</code> represents the position with\n         longitude <code>-123.1174</code> and latitude <code>49.2847</code>.</p>"
                     }
                 },
                 "FilterBBox": {
@@ -6427,7 +6704,7 @@
                 "PositionFiltering": {
                     "target": "com.amazonaws.location#PositionFiltering",
                     "traits": {
-                        "smithy.api#documentation": "<p>Updates the position filtering for the tracker resource.</p>\n        <p>Valid values:</p>\n        <ul>\n            <li>\n                <p>\n                    <code>TimeBased</code> - Location updates are evaluated against linked geofence collections, \n                    but not every location update is stored. If your update frequency is more often than 30 seconds, \n                    only one update per 30 seconds is stored for each unique device ID.\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>DistanceBased</code> - If the device has moved less than 30 m (98.4 ft), location updates are \n                    ignored. Location updates within this distance are neither evaluated against linked geofence collections, nor stored. \n                    This helps control costs by reducing the number of geofence evaluations and device positions to retrieve. \n                    Distance-based filtering can also reduce the jitter effect when displaying device trajectory on a map.\n                </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Updates the position filtering for the tracker resource.</p>\n        <p>Valid values:</p>\n        <ul>\n            <li>\n                <p>\n                    <code>TimeBased</code> - Location updates are evaluated against linked geofence collections, \n                    but not every location update is stored. If your update frequency is more often than 30 seconds, \n                    only one update per 30 seconds is stored for each unique device ID.\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>DistanceBased</code> - If the device has moved less than 30 m (98.4 ft), location updates are \n                    ignored. Location updates within this distance are neither evaluated against linked geofence collections, nor stored.\n                    This helps control costs by reducing the number of geofence evaluations and historical device positions to paginate through.\n                    Distance-based filtering can also reduce the effects of GPS noise when displaying device trajectories on a map.\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>AccuracyBased</code> - If the device has moved less than the measured accuracy,\n                    location updates are ignored. For example, if two consecutive updates from a device\n                    have a horizontal accuracy of 5 m and 10 m, the second update is ignored if the device\n                    has moved less than 15 m. Ignored location updates are neither evaluated against\n                    linked geofence collections, nor stored. This helps educe the effects of GPS noise \n                    when displaying device trajectories on a map, and can help control costs by reducing the\n                    number of geofence evaluations.\n                </p>\n            </li>\n         </ul>"
                     }
                 }
             }

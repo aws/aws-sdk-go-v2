@@ -6273,6 +6273,15 @@ func awsAwsjson11_deserializeDocumentProtocolDetails(v **types.ProtocolDetails, 
 				sv.PassiveIp = ptr.String(jtv)
 			}
 
+		case "TlsSessionResumptionMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TlsSessionResumptionMode to be of type string, got %T instead", value)
+				}
+				sv.TlsSessionResumptionMode = types.TlsSessionResumptionMode(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

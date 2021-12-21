@@ -51,7 +51,6 @@ type DeleteStreamingSessionInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type DeleteStreamingSessionOutput struct {
 
 	// The session.

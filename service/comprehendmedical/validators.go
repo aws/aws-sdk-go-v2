@@ -90,6 +90,26 @@ func (m *validateOpDescribeRxNormInferenceJob) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeSNOMEDCTInferenceJob struct {
+}
+
+func (*validateOpDescribeSNOMEDCTInferenceJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeSNOMEDCTInferenceJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeSNOMEDCTInferenceJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeSNOMEDCTInferenceJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDetectEntities struct {
 }
 
@@ -190,6 +210,26 @@ func (m *validateOpInferRxNorm) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpInferSNOMEDCT struct {
+}
+
+func (*validateOpInferSNOMEDCT) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpInferSNOMEDCT) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*InferSNOMEDCTInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpInferSNOMEDCTInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartEntitiesDetectionV2Job struct {
 }
 
@@ -265,6 +305,26 @@ func (m *validateOpStartRxNormInferenceJob) HandleInitialize(ctx context.Context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStartRxNormInferenceJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartSNOMEDCTInferenceJob struct {
+}
+
+func (*validateOpStartSNOMEDCTInferenceJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartSNOMEDCTInferenceJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartSNOMEDCTInferenceJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartSNOMEDCTInferenceJobInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -350,6 +410,26 @@ func (m *validateOpStopRxNormInferenceJob) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStopSNOMEDCTInferenceJob struct {
+}
+
+func (*validateOpStopSNOMEDCTInferenceJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopSNOMEDCTInferenceJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopSNOMEDCTInferenceJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopSNOMEDCTInferenceJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpDescribeEntitiesDetectionV2JobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeEntitiesDetectionV2Job{}, middleware.After)
 }
@@ -364,6 +444,10 @@ func addOpDescribePHIDetectionJobValidationMiddleware(stack *middleware.Stack) e
 
 func addOpDescribeRxNormInferenceJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeRxNormInferenceJob{}, middleware.After)
+}
+
+func addOpDescribeSNOMEDCTInferenceJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeSNOMEDCTInferenceJob{}, middleware.After)
 }
 
 func addOpDetectEntitiesValidationMiddleware(stack *middleware.Stack) error {
@@ -386,6 +470,10 @@ func addOpInferRxNormValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpInferRxNorm{}, middleware.After)
 }
 
+func addOpInferSNOMEDCTValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpInferSNOMEDCT{}, middleware.After)
+}
+
 func addOpStartEntitiesDetectionV2JobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartEntitiesDetectionV2Job{}, middleware.After)
 }
@@ -402,6 +490,10 @@ func addOpStartRxNormInferenceJobValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpStartRxNormInferenceJob{}, middleware.After)
 }
 
+func addOpStartSNOMEDCTInferenceJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartSNOMEDCTInferenceJob{}, middleware.After)
+}
+
 func addOpStopEntitiesDetectionV2JobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStopEntitiesDetectionV2Job{}, middleware.After)
 }
@@ -416,6 +508,10 @@ func addOpStopPHIDetectionJobValidationMiddleware(stack *middleware.Stack) error
 
 func addOpStopRxNormInferenceJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStopRxNormInferenceJob{}, middleware.After)
+}
+
+func addOpStopSNOMEDCTInferenceJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopSNOMEDCTInferenceJob{}, middleware.After)
 }
 
 func validateInputDataConfig(v *types.InputDataConfig) error {
@@ -508,6 +604,21 @@ func validateOpDescribeRxNormInferenceJobInput(v *DescribeRxNormInferenceJobInpu
 	}
 }
 
+func validateOpDescribeSNOMEDCTInferenceJobInput(v *DescribeSNOMEDCTInferenceJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeSNOMEDCTInferenceJobInput"}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDetectEntitiesInput(v *DetectEntitiesInput) error {
 	if v == nil {
 		return nil
@@ -573,6 +684,21 @@ func validateOpInferRxNormInput(v *InferRxNormInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "InferRxNormInput"}
+	if v.Text == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Text"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpInferSNOMEDCTInput(v *InferSNOMEDCTInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InferSNOMEDCTInput"}
 	if v.Text == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Text"))
 	}
@@ -711,6 +837,38 @@ func validateOpStartRxNormInferenceJobInput(v *StartRxNormInferenceJobInput) err
 	}
 }
 
+func validateOpStartSNOMEDCTInferenceJobInput(v *StartSNOMEDCTInferenceJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartSNOMEDCTInferenceJobInput"}
+	if v.InputDataConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputDataConfig"))
+	} else if v.InputDataConfig != nil {
+		if err := validateInputDataConfig(v.InputDataConfig); err != nil {
+			invalidParams.AddNested("InputDataConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OutputDataConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputDataConfig"))
+	} else if v.OutputDataConfig != nil {
+		if err := validateOutputDataConfig(v.OutputDataConfig); err != nil {
+			invalidParams.AddNested("OutputDataConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DataAccessRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataAccessRoleArn"))
+	}
+	if len(v.LanguageCode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("LanguageCode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStopEntitiesDetectionV2JobInput(v *StopEntitiesDetectionV2JobInput) error {
 	if v == nil {
 		return nil
@@ -761,6 +919,21 @@ func validateOpStopRxNormInferenceJobInput(v *StopRxNormInferenceJobInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StopRxNormInferenceJobInput"}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopSNOMEDCTInferenceJobInput(v *StopSNOMEDCTInferenceJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopSNOMEDCTInferenceJobInput"}
 	if v.JobId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
 	}

@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the connectors registered with the AWS SMS.
+// Describes the connectors registered with the Server Migration Service.
 func (c *Client) GetConnectors(ctx context.Context, params *GetConnectorsInput, optFns ...func(*Options)) (*GetConnectorsOutput, error) {
 	if params == nil {
 		params = &GetConnectorsInput{}

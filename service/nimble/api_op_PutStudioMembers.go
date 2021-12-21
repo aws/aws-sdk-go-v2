@@ -28,7 +28,6 @@ func (c *Client) PutStudioMembers(ctx context.Context, params *PutStudioMembersI
 	return out, nil
 }
 
-//
 type PutStudioMembersInput struct {
 
 	// The ID of the identity store.
@@ -54,7 +53,6 @@ type PutStudioMembersInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type PutStudioMembersOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

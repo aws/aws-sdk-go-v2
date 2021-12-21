@@ -318,6 +318,68 @@
                 "smithy.api#documentation": "<p>CreateLocationEfs</p>"
             }
         },
+        "com.amazonaws.datasync#CreateLocationFsxLustre": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datasync#CreateLocationFsxLustreRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.datasync#CreateLocationFsxLustreResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datasync#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.datasync#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an endpoint for an Amazon FSx for Lustre file system.</p>"
+            }
+        },
+        "com.amazonaws.datasync#CreateLocationFsxLustreRequest": {
+            "type": "structure",
+            "members": {
+                "FsxFilesystemArn": {
+                    "target": "com.amazonaws.datasync#FsxFilesystemArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the FSx for Lustre file system.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SecurityGroupArns": {
+                    "target": "com.amazonaws.datasync#Ec2SecurityGroupArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the security groups that are used to configure the FSx for Lustre file system.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Subdirectory": {
+                    "target": "com.amazonaws.datasync#FsxLustreSubdirectory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A subdirectory in the location's path. This subdirectory in the FSx for Lustre file system is used to read data from the FSx for Lustre source location or write data to the FSx for Lustre  destination.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.datasync#InputTagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key-value pair that represents a tag that you want to add to the resource. The value can be an empty string. This value helps you manage, filter, and search for your resources. We recommend that you create a name tag for your location.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.datasync#CreateLocationFsxLustreResponse": {
+            "type": "structure",
+            "members": {
+                "LocationArn": {
+                    "target": "com.amazonaws.datasync#LocationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the FSx for Lustre file system location that's\n      created. </p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.datasync#CreateLocationFsxWindows": {
             "type": "operation",
             "input": {
@@ -344,7 +406,7 @@
                 "Subdirectory": {
                     "target": "com.amazonaws.datasync#FsxWindowsSubdirectory",
                     "traits": {
-                        "smithy.api#documentation": "<p>A subdirectory in the location’s path. This subdirectory in the Amazon FSx for Windows\n      File Server file system is used to read data from the Amazon FSx for Windows File Server\n      source location or write data to the FSx for Windows File Server destination.</p>"
+                        "smithy.api#documentation": "<p>A subdirectory in the location's path. This subdirectory in the Amazon FSx for Windows\n      File Server file system is used to read data from the Amazon FSx for Windows File Server\n      source location or write data to the FSx for Windows File Server destination.</p>"
                     }
                 },
                 "FsxFilesystemArn": {
@@ -357,7 +419,7 @@
                 "SecurityGroupArns": {
                     "target": "com.amazonaws.datasync#Ec2SecurityGroupArnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the security groups that are to use to configure the\n      FSx for Windows File Server file system.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the security groups that are used to configure the\n      FSx for Windows File Server file system.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1227,6 +1289,67 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>DescribeLocationEfsResponse</p>"
+            }
+        },
+        "com.amazonaws.datasync#DescribeLocationFsxLustre": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datasync#DescribeLocationFsxLustreRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.datasync#DescribeLocationFsxLustreResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datasync#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.datasync#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns metadata, such as the path information about an Amazon FSx for Lustre\n      location.</p>"
+            }
+        },
+        "com.amazonaws.datasync#DescribeLocationFsxLustreRequest": {
+            "type": "structure",
+            "members": {
+                "LocationArn": {
+                    "target": "com.amazonaws.datasync#LocationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the FSx for Lustre location to describe. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.datasync#DescribeLocationFsxLustreResponse": {
+            "type": "structure",
+            "members": {
+                "LocationArn": {
+                    "target": "com.amazonaws.datasync#LocationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the FSx for Lustre location that was described.</p>"
+                    }
+                },
+                "LocationUri": {
+                    "target": "com.amazonaws.datasync#LocationUri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URI of the FSx for Lustre location that was described.</p>"
+                    }
+                },
+                "SecurityGroupArns": {
+                    "target": "com.amazonaws.datasync#Ec2SecurityGroupArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the security groups that are configured for the FSx for Lustre file system.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.datasync#Time",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the FSx for Lustre location was created.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.datasync#DescribeLocationFsxWindows": {
@@ -2199,6 +2322,9 @@
                     "target": "com.amazonaws.datasync#CreateLocationEfs"
                 },
                 {
+                    "target": "com.amazonaws.datasync#CreateLocationFsxLustre"
+                },
+                {
                     "target": "com.amazonaws.datasync#CreateLocationFsxWindows"
                 },
                 {
@@ -2233,6 +2359,9 @@
                 },
                 {
                     "target": "com.amazonaws.datasync#DescribeLocationEfs"
+                },
+                {
+                    "target": "com.amazonaws.datasync#DescribeLocationFsxLustre"
                 },
                 {
                     "target": "com.amazonaws.datasync#DescribeLocationFsxWindows"
@@ -2313,6 +2442,16 @@
                     "max": 128
                 },
                 "smithy.api#pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):fsx:[a-z\\-0-9]*:[0-9]{12}:file-system/fs-.*$"
+            }
+        },
+        "com.amazonaws.datasync#FsxLustreSubdirectory": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 4096
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\$\\p{Zs}]+$"
             }
         },
         "com.amazonaws.datasync#FsxWindowsSubdirectory": {
@@ -3024,7 +3163,7 @@
                 "LocationUri": {
                     "target": "com.amazonaws.datasync#LocationUri",
                     "traits": {
-                        "smithy.api#documentation": "<p>Represents a list of URLs of a location. <code>LocationUri</code> returns an array that\n      contains a list of locations when the <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_ListLocations.html\">ListLocations</a> operation is\n      called.</p>\n         <p>Format: <code>TYPE://GLOBAL_ID/SUBDIR</code>.</p>\n         <p>TYPE designates the type of location. Valid values: NFS | EFS | S3.</p>\n         <p>GLOBAL_ID is the globally unique identifier of the resource that backs the location. An\n      example for EFS is <code>us-east-2.fs-abcd1234</code>. An example for Amazon S3 is the bucket\n      name, such as <code>myBucket</code>. An example for NFS is a valid IPv4 address or a host name\n      compliant with Domain Name Service (DNS).</p>\n         <p>SUBDIR is a valid file system path, delimited by forward slashes as is the *nix\n      convention. For NFS and Amazon EFS, it's the export path to mount the location. For\n      Amazon S3, it's the prefix path that you mount to and treat as the root of the\n      location.</p>\n         <p></p>"
+                        "smithy.api#documentation": "<p>Represents a list of URIs of a location. <code>LocationUri</code> returns an array that\n      contains a list of locations when the <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_ListLocations.html\">ListLocations</a> operation is\n      called.</p>\n         <p>Format: <code>TYPE://GLOBAL_ID/SUBDIR</code>.</p>\n         <p>TYPE designates the type of location. Valid values: NFS | EFS | S3.</p>\n         <p>GLOBAL_ID is the globally unique identifier of the resource that backs the location. An\n      example for EFS is <code>us-east-2.fs-abcd1234</code>. An example for Amazon S3 is the bucket\n      name, such as <code>myBucket</code>. An example for NFS is a valid IPv4 address or a host name\n      compliant with Domain Name Service (DNS).</p>\n         <p>SUBDIR is a valid file system path, delimited by forward slashes as is the *nix\n      convention. For NFS and Amazon EFS, it's the export path to mount the location. For\n      Amazon S3, it's the prefix path that you mount to and treat as the root of the\n      location.</p>\n         <p></p>"
                     }
                 }
             },
@@ -3039,7 +3178,7 @@
                     "min": 0,
                     "max": 4356
                 },
-                "smithy.api#pattern": "^(efs|nfs|s3|smb|fsxw)://[a-zA-Z0-9.\\-]+$"
+                "smithy.api#pattern": "^(efs|nfs|s3|smb|fsxw|fsxl)://[a-zA-Z0-9.\\-]+$"
             }
         },
         "com.amazonaws.datasync#LogGroupArn": {

@@ -30,15 +30,17 @@ import (
 // queries return contact information either for Amazon Registrar (for .com, .net,
 // and .org domains) or for our registrar associate, Gandi (for all other TLDs). If
 // you don't enable privacy protection, WHOIS queries return the information that
-// you entered for the registrant, admin, and tech contacts.
+// you entered for the administrative, registrant, and technical contacts. You must
+// specify the same privacy setting for the administrative, registrant, and
+// technical contacts.
 //
-// * If registration is
-// successful, returns an operation ID that you can use to track the progress and
-// completion of the action. If the request is not completed successfully, the
-// domain registrant is notified by email.
+// * If registration is successful, returns an operation ID
+// that you can use to track the progress and completion of the action. If the
+// request is not completed successfully, the domain registrant is notified by
+// email.
 //
-// * Charges your AWS account an amount
-// based on the top-level domain. For more information, see Amazon Route 53 Pricing
+// * Charges your Amazon Web Services account an amount based on the
+// top-level domain. For more information, see Amazon Route 53 Pricing
 // (http://aws.amazon.com/route53/pricing/).
 func (c *Client) RegisterDomain(ctx context.Context, params *RegisterDomainInput, optFns ...func(*Options)) (*RegisterDomainOutput, error) {
 	if params == nil {
@@ -130,7 +132,9 @@ type RegisterDomainInput struct {
 	// specify true, WHOIS ("who is") queries return contact information either for
 	// Amazon Registrar (for .com, .net, and .org domains) or for our registrar
 	// associate, Gandi (for all other TLDs). If you specify false, WHOIS queries
-	// return the information that you entered for the admin contact. Default: true
+	// return the information that you entered for the admin contact. You must specify
+	// the same privacy setting for the administrative, registrant, and technical
+	// contacts. Default: true
 	PrivacyProtectAdminContact *bool
 
 	// Whether you want to conceal contact information from WHOIS queries. If you
@@ -138,14 +142,17 @@ type RegisterDomainInput struct {
 	// Amazon Registrar (for .com, .net, and .org domains) or for our registrar
 	// associate, Gandi (for all other TLDs). If you specify false, WHOIS queries
 	// return the information that you entered for the registrant contact (the domain
-	// owner). Default: true
+	// owner). You must specify the same privacy setting for the administrative,
+	// registrant, and technical contacts. Default: true
 	PrivacyProtectRegistrantContact *bool
 
 	// Whether you want to conceal contact information from WHOIS queries. If you
 	// specify true, WHOIS ("who is") queries return contact information either for
 	// Amazon Registrar (for .com, .net, and .org domains) or for our registrar
 	// associate, Gandi (for all other TLDs). If you specify false, WHOIS queries
-	// return the information that you entered for the technical contact. Default: true
+	// return the information that you entered for the technical contact. You must
+	// specify the same privacy setting for the administrative, registrant, and
+	// technical contacts. Default: true
 	PrivacyProtectTechContact *bool
 
 	noSmithyDocumentSerde

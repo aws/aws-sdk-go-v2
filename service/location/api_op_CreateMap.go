@@ -51,15 +51,14 @@ type CreateMapInput struct {
 	// This member is required.
 	MapName *string
 
-	// Specifies the pricing plan for your map resource. For additional details and
-	// restrictions on each pricing plan option, see Amazon Location Service pricing
-	// (https://aws.amazon.com/location/pricing/).
-	//
-	// This member is required.
-	PricingPlan types.PricingPlan
-
 	// An optional description for the map resource.
 	Description *string
+
+	// Optionally specifies the pricing plan for the map resource. Defaults to
+	// RequestBasedUsage. For additional details and restrictions on each pricing plan
+	// option, see Amazon Location Service pricing
+	// (https://aws.amazon.com/location/pricing/).
+	PricingPlan types.PricingPlan
 
 	// Applies one or more tags to the map resource. A tag is a key-value pair helps
 	// manage, identify, search, and filter your resources by labelling them. Format:

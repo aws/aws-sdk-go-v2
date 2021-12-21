@@ -15,7 +15,7 @@ import (
 
 // Returns information about all of the operations that return an operation ID and
 // that have ever been performed on domains that were registered by the current
-// account.
+// account. This command runs only in the us-east-1 Region.
 func (c *Client) ListOperations(ctx context.Context, params *ListOperationsInput, optFns ...func(*Options)) (*ListOperationsOutput, error) {
 	if params == nil {
 		params = &ListOperationsInput{}

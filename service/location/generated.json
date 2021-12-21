@@ -49,6 +49,7 @@
         "api_op_ListTrackers.go",
         "api_op_PutGeofence.go",
         "api_op_SearchPlaceIndexForPosition.go",
+        "api_op_SearchPlaceIndexForSuggestions.go",
         "api_op_SearchPlaceIndexForText.go",
         "api_op_TagResource.go",
         "api_op_UntagResource.go",

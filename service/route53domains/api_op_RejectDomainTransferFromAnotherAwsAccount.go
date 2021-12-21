@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Rejects the transfer of a domain from another AWS account to the current AWS
-// account. You initiate a transfer between AWS accounts using
-// TransferDomainToAnotherAwsAccount
+// Rejects the transfer of a domain from another Amazon Web Services account to the
+// current Amazon Web Services account. You initiate a transfer betweenAmazon Web
+// Services accounts using TransferDomainToAnotherAwsAccount
 // (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html).
 // Use either ListOperations
 // (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ListOperations.html)
@@ -41,8 +41,8 @@ func (c *Client) RejectDomainTransferFromAnotherAwsAccount(ctx context.Context, 
 // element.
 type RejectDomainTransferFromAnotherAwsAccountInput struct {
 
-	// The name of the domain that was specified when another AWS account submitted a
-	// TransferDomainToAnotherAwsAccount
+	// The name of the domain that was specified when another Amazon Web Services
+	// account submitted a TransferDomainToAnotherAwsAccount
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html)
 	// request.
 	//

@@ -170,6 +170,26 @@ func (m *validateOpDescribeModel) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeModelPackagingJob struct {
+}
+
+func (*validateOpDescribeModelPackagingJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeModelPackagingJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeModelPackagingJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeModelPackagingJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeProject struct {
 }
 
@@ -230,6 +250,26 @@ func (m *validateOpListDatasetEntries) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListModelPackagingJobs struct {
+}
+
+func (*validateOpListModelPackagingJobs) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListModelPackagingJobs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListModelPackagingJobsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListModelPackagingJobsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListModels struct {
 }
 
@@ -285,6 +325,26 @@ func (m *validateOpStartModel) HandleInitialize(ctx context.Context, in middlewa
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStartModelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartModelPackagingJob struct {
+}
+
+func (*validateOpStartModelPackagingJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartModelPackagingJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartModelPackagingJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartModelPackagingJobInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -402,6 +462,10 @@ func addOpDescribeModelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeModel{}, middleware.After)
 }
 
+func addOpDescribeModelPackagingJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeModelPackagingJob{}, middleware.After)
+}
+
 func addOpDescribeProjectValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeProject{}, middleware.After)
 }
@@ -414,6 +478,10 @@ func addOpListDatasetEntriesValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpListDatasetEntries{}, middleware.After)
 }
 
+func addOpListModelPackagingJobsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListModelPackagingJobs{}, middleware.After)
+}
+
 func addOpListModelsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListModels{}, middleware.After)
 }
@@ -424,6 +492,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 
 func addOpStartModelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartModel{}, middleware.After)
+}
+
+func addOpStartModelPackagingJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartModelPackagingJob{}, middleware.After)
 }
 
 func addOpStopModelValidationMiddleware(stack *middleware.Stack) error {
@@ -476,6 +548,41 @@ func validateDatasetSource(v *types.DatasetSource) error {
 	}
 }
 
+func validateGreengrassConfiguration(v *types.GreengrassConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GreengrassConfiguration"}
+	if v.CompilerOptions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CompilerOptions"))
+	}
+	if v.TargetPlatform != nil {
+		if err := validateTargetPlatform(v.TargetPlatform); err != nil {
+			invalidParams.AddNested("TargetPlatform", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.S3OutputLocation == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3OutputLocation"))
+	} else if v.S3OutputLocation != nil {
+		if err := validateS3Location(v.S3OutputLocation); err != nil {
+			invalidParams.AddNested("S3OutputLocation", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ComponentName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ComponentName"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateInputS3Object(v *types.InputS3Object) error {
 	if v == nil {
 		return nil
@@ -486,6 +593,25 @@ func validateInputS3Object(v *types.InputS3Object) error {
 	}
 	if v.Key == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateModelPackagingConfiguration(v *types.ModelPackagingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModelPackagingConfiguration"}
+	if v.Greengrass == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Greengrass"))
+	} else if v.Greengrass != nil {
+		if err := validateGreengrassConfiguration(v.Greengrass); err != nil {
+			invalidParams.AddNested("Greengrass", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -555,6 +681,27 @@ func validateTagList(v []types.Tag) error {
 		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTargetPlatform(v *types.TargetPlatform) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TargetPlatform"}
+	if len(v.Os) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Os"))
+	}
+	if len(v.Arch) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Arch"))
+	}
+	if len(v.Accelerator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Accelerator"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -715,6 +862,24 @@ func validateOpDescribeModelInput(v *DescribeModelInput) error {
 	}
 }
 
+func validateOpDescribeModelPackagingJobInput(v *DescribeModelPackagingJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeModelPackagingJobInput"}
+	if v.ProjectName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectName"))
+	}
+	if v.JobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeProjectInput(v *DescribeProjectInput) error {
 	if v == nil {
 		return nil
@@ -772,6 +937,21 @@ func validateOpListDatasetEntriesInput(v *ListDatasetEntriesInput) error {
 	}
 }
 
+func validateOpListModelPackagingJobsInput(v *ListModelPackagingJobsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListModelPackagingJobsInput"}
+	if v.ProjectName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListModelsInput(v *ListModelsInput) error {
 	if v == nil {
 		return nil
@@ -815,6 +995,31 @@ func validateOpStartModelInput(v *StartModelInput) error {
 	}
 	if v.MinInferenceUnits == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MinInferenceUnits"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartModelPackagingJobInput(v *StartModelPackagingJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartModelPackagingJobInput"}
+	if v.ProjectName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectName"))
+	}
+	if v.ModelVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelVersion"))
+	}
+	if v.Configuration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Configuration"))
+	} else if v.Configuration != nil {
+		if err := validateModelPackagingConfiguration(v.Configuration); err != nil {
+			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

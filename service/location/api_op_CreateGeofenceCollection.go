@@ -45,13 +45,6 @@ type CreateGeofenceCollectionInput struct {
 	// This member is required.
 	CollectionName *string
 
-	// Specifies the pricing plan for the geofence collection. For additional details
-	// and restrictions on each pricing plan option, see the Amazon Location Service
-	// pricing page (https://aws.amazon.com/location/pricing/).
-	//
-	// This member is required.
-	PricingPlan types.PricingPlan
-
 	// An optional description for the geofence collection.
 	Description *string
 
@@ -59,6 +52,12 @@ type CreateGeofenceCollectionInput struct {
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html). Enter
 	// a key ID, key ARN, alias name, or alias ARN.
 	KmsKeyId *string
+
+	// Optionally specifies the pricing plan for the geofence collection. Defaults to
+	// RequestBasedUsage. For additional details and restrictions on each pricing plan
+	// option, see the Amazon Location Service pricing page
+	// (https://aws.amazon.com/location/pricing/).
+	PricingPlan types.PricingPlan
 
 	// Specifies the data provider for the geofence collection.
 	//

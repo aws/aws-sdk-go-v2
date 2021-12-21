@@ -28,7 +28,7 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// The GraphqlApi ARN.
+	// The GraphqlApi Amazon Resource Name (ARN).
 	//
 	// This member is required.
 	ResourceArn *string

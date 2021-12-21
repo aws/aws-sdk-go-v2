@@ -52,7 +52,7 @@
                     "min": 1,
                     "max": 10
                 },
-                "smithy.api#pattern": "(normal|anomaly)"
+                "smithy.api#pattern": "^(normal|anomaly)$"
             }
         },
         "com.amazonaws.lookoutvision#Boolean": {
@@ -66,6 +66,52 @@
                     "max": 64
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9-]+$"
+            }
+        },
+        "com.amazonaws.lookoutvision#CompilerOptions": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 1024
+                },
+                "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.lookoutvision#ComponentDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-_. ()':,;?]+$"
+            }
+        },
+        "com.amazonaws.lookoutvision#ComponentName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-_.]+$"
+            }
+        },
+        "com.amazonaws.lookoutvision#ComponentVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^([0-9]{1,6})\\.([0-9]{1,6})\\.([0-9]{1,6})$"
+            }
+        },
+        "com.amazonaws.lookoutvision#ComponentVersionArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:[^:]*:greengrass:[^:]*:aws:components:[^:]+$"
             }
         },
         "com.amazonaws.lookoutvision#ConflictException": {
@@ -175,7 +221,7 @@
                 "ClientToken": {
                     "target": "com.amazonaws.lookoutvision#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>ClientToken is an idempotency token that ensures a call to <code>CreateDataset</code>\n      completes only once.  You choose the value to pass. For example, An issue, \n      such as an network outage, might prevent you from getting a response from <code>CreateDataset</code>.\n      In this case, safely retry your call\n       to <code>CreateDataset</code> by using the same <code>ClientToken</code> parameter value. An error occurs\n       if the other input parameters are not the same as in the first request. Using a different  \n       value for <code>ClientToken</code> is considered a new call to <code>CreateDataset</code>. An idempotency\n       token is active for 8 hours.\n    </p>",
+                        "smithy.api#documentation": "<p>ClientToken is an idempotency token that ensures a call to <code>CreateDataset</code>\n      completes only once.  You choose the value to pass. For example, An issue might prevent you\n      from getting a response from <code>CreateDataset</code>.\n      In this case, safely retry your call\n       to <code>CreateDataset</code> by using the same <code>ClientToken</code> parameter value.</p>\n         <p>If you don't supply a value for <code>ClientToken</code>, the AWS SDK you are using inserts a value for you. \n         This prevents retries after a network error from making multiple dataset creation requests. You'll need to\n         provide your own value for other use cases. </p>\n         <p>An error occurs if the other input parameters are not the same as in the first request. Using a different  \n       value for <code>ClientToken</code> is considered a new call to <code>CreateDataset</code>. An idempotency\n       token is active for 8 hours.\n    </p>",
                         "smithy.api#httpHeader": "X-Amzn-Client-Token",
                         "smithy.api#idempotencyToken": {}
                     }
@@ -253,7 +299,7 @@
                 "ClientToken": {
                     "target": "com.amazonaws.lookoutvision#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>ClientToken is an idempotency token that ensures a call to <code>CreateModel</code>\n      completes only once.  You choose the value to pass. For example, An issue, \n      such as an network outage, might prevent you from getting a response from <code>CreateModel</code>.\n      In this case, safely retry your call\n       to <code>CreateModel</code> by using the same <code>ClientToken</code> parameter value. An error occurs\n       if the other input parameters are not the same as in the first request. Using a different  \n       value for <code>ClientToken</code> is considered a new call to <code>CreateModel</code>. An idempotency\n       token is active for 8 hours.</p>",
+                        "smithy.api#documentation": "<p>ClientToken is an idempotency token that ensures a call to <code>CreateModel</code>\n      completes only once.  You choose the value to pass. For example, An issue\n      might prevent you from getting a response from <code>CreateModel</code>.\n      In this case, safely retry your call\n       to <code>CreateModel</code> by using the same <code>ClientToken</code> parameter value. </p>\n         <p>If you don't supply a value for <code>ClientToken</code>, the AWS SDK you are using inserts a value for you. \n            This prevents retries after a network error from starting multiple training jobs. You'll need to\n            provide your own value for other use cases. </p>  \n        <p>An error occurs if the other input parameters are not the same as in the first request. Using a different  \n       value for <code>ClientToken</code> is considered a new call to <code>CreateModel</code>. An idempotency\n       token is active for 8 hours.</p>",
                         "smithy.api#httpHeader": "X-Amzn-Client-Token",
                         "smithy.api#idempotencyToken": {}
                     }
@@ -268,7 +314,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.lookoutvision#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for your AWS Key Management Service (AWS KMS) customer master key (CMK).\n         The key is used to encrypt training and test images copied into the service for model training. Your \n         source images are unaffected.\n         If this parameter is not specified, the copied images are encrypted by a key that AWS owns and manages.</p>"
+                        "smithy.api#documentation": "<p>The identifier for your AWS KMS key.\n         The key is used to encrypt training and test images copied into the service for model training. Your \n         source images are unaffected.\n         If this parameter is not specified, the copied images are encrypted by a key that AWS owns and manages.</p>"
                     }
                 },
                 "Tags": {
@@ -343,7 +389,7 @@
                 "ClientToken": {
                     "target": "com.amazonaws.lookoutvision#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>ClientToken is an idempotency token that ensures a call to <code>CreateProject</code>\n      completes only once.  You choose the value to pass. For example, An issue, \n      such as an network outage, might prevent you from getting a response from <code>CreateProject</code>.\n      In this case, safely retry your call\n       to <code>CreateProject</code> by using the same <code>ClientToken</code> parameter value. An error occurs\n       if the other input parameters are not the same as in the first request. Using a different  \n       value for <code>ClientToken</code> is considered a new call to <code>CreateProject</code>. An idempotency\n       token is active for 8 hours.</p>",
+                        "smithy.api#documentation": "<p>ClientToken is an idempotency token that ensures a call to <code>CreateProject</code>\n      completes only once.  You choose the value to pass. For example, An issue might prevent you from \n      getting a response from <code>CreateProject</code>.\n      In this case, safely retry your call\n       to <code>CreateProject</code> by using the same <code>ClientToken</code> parameter value. </p>\n         <p>If you don't supply a value for <code>ClientToken</code>, the AWS SDK you are using inserts a value for you. \n          This prevents retries after a network error from making multiple project creation requests. You'll need to\n           provide your own value for other use cases. </p>      \n         <p>An error occurs\n       if the other input parameters are not the same as in the first request. Using a different  \n       value for <code>ClientToken</code> is considered a new call to <code>CreateProject</code>. An idempotency\n       token is active for 8 hours.</p>",
                         "smithy.api#httpHeader": "X-Amzn-Client-Token",
                         "smithy.api#idempotencyToken": {}
                     }
@@ -412,7 +458,7 @@
                 "ImageStats": {
                     "target": "com.amazonaws.lookoutvision#DatasetImageStats",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>Statistics about the images in a dataset.</p>"
                     }
                 }
             },
@@ -511,7 +557,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Sumary information for an Amazon Lookout for Vision dataset.</p>"
+                "smithy.api#documentation": "<p>Summary information for an Amazon Lookout for Vision dataset. For more information,\n      see <a>DescribeDataset</a> and <a>ProjectDescription</a>.</p>"
             }
         },
         "com.amazonaws.lookoutvision#DatasetMetadataList": {
@@ -591,7 +637,7 @@
                     "min": 1,
                     "max": 10
                 },
-                "smithy.api#pattern": "train|test"
+                "smithy.api#pattern": "^train|test$"
             }
         },
         "com.amazonaws.lookoutvision#DateTime": {
@@ -656,7 +702,7 @@
                 "ClientToken": {
                     "target": "com.amazonaws.lookoutvision#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>ClientToken is an idempotency token that ensures a call to <code>DeleteDataset</code>\n      completes only once.  You choose the value to pass. For example, An issue, \n      such as an network outage, might prevent you from getting a response from <code>DeleteDataset</code>.\n      In this case, safely retry your call\n       to <code>DeleteDataset</code> by using the same <code>ClientToken</code> parameter value. An error occurs\n       if the other input parameters are not the same as in the first request. Using a different  \n       value for <code>ClientToken</code> is considered a new call to <code>DeleteDataset</code>. An idempotency\n       token is active for 8 hours.</p>",
+                        "smithy.api#documentation": "<p>ClientToken is an idempotency token that ensures a call to <code>DeleteDataset</code>\n      completes only once.  You choose the value to pass. For example, An issue might prevent you from getting a response from <code>DeleteDataset</code>.\n      In this case, safely retry your call\n       to <code>DeleteDataset</code> by using the same <code>ClientToken</code> parameter value. </p>\n         <p>If you don't supply a value for <code>ClientToken</code>, the AWS SDK you are using inserts a value for you. \n                 This prevents retries after a network error from making multiple deletetion requests. You'll need to\n                 provide your own value for other use cases. </p>       \n         <p>An error occurs if the other input parameters are not the same as in the first request. Using a different  \n       value for <code>ClientToken</code> is considered a new call to <code>DeleteDataset</code>. An idempotency\n       token is active for 8 hours.</p>",
                         "smithy.api#httpHeader": "X-Amzn-Client-Token",
                         "smithy.api#idempotencyToken": {}
                     }
@@ -696,7 +742,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an Amazon Lookout for Vision model. You can't delete a running model. To stop a running model,\n      use the <a>StopModel</a> operation.</p>\n         <p>It might take a few seconds to delete a model. To determine if a model has been deleted, call\n         <a>ListProjects</a> and check if the version of the model (<code>ModelVersion</code>) is in the\n         <code>Models</code> array. </p>\n         <p>This operation requires permissions to perform the\n         <code>lookoutvision:DeleteModel</code> operation.</p>",
+                "smithy.api#documentation": "<p>Deletes an Amazon Lookout for Vision model. You can't delete a running model. To stop a running model,\n      use the <a>StopModel</a> operation.</p>\n         <p>It might take a few seconds to delete a model. To determine if a model has been deleted, call\n         <a>ListModels</a> and check if the version of the model (<code>ModelVersion</code>) is in the\n         <code>Models</code> array. </p>\n         <p></p>\n         <p>This operation requires permissions to perform the\n         <code>lookoutvision:DeleteModel</code> operation.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/2020-11-20/projects/{ProjectName}/models/{ModelVersion}",
@@ -716,7 +762,7 @@
                     }
                 },
                 "ModelVersion": {
-                    "target": "com.amazonaws.lookoutvision#ModelVersion",
+                    "target": "com.amazonaws.lookoutvision#ModelVersionNoLatest",
                     "traits": {
                         "smithy.api#documentation": "<p>The version of the model that you want to delete.</p>",
                         "smithy.api#httpLabel": {},
@@ -726,7 +772,7 @@
                 "ClientToken": {
                     "target": "com.amazonaws.lookoutvision#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>ClientToken is an idempotency token that ensures a call to <code>DeleteModel</code>\n      completes only once.  You choose the value to pass. For example, An issue, \n      such as an network outage, might prevent you from getting a response from <code>DeleteModel</code>.\n      In this case, safely retry your call\n       to <code>DeleteModel</code> by using the same <code>ClientToken</code> parameter value. An error occurs\n       if the other input parameters are not the same as in the first request. Using a different  \n       value for <code>ClientToken</code> is considered a new call to <code>DeleteModel</code>. An idempotency\n       token is active for 8 hours.</p>",
+                        "smithy.api#documentation": "<p>ClientToken is an idempotency token that ensures a call to <code>DeleteModel</code>\n      completes only once.  You choose the value to pass. For example, an issue might prevent\n      you from getting a response from <code>DeleteModel</code>.\n      In this case, safely retry your call\n       to <code>DeleteModel</code> by using the same <code>ClientToken</code> parameter value.</p>\n         <p>If you don't supply a value for ClientToken, the AWS SDK you are using inserts a value for you. \n         This prevents retries after a network error from making multiple model deletion requests. You'll need to\n         provide your own value for other use cases. </p>\n    \n         <p>An error occurs if the other input parameters are not the same as in the first request. Using a different  \n       value for <code>ClientToken</code> is considered a new call to <code>DeleteModel</code>. An idempotency\n       token is active for 8 hours.</p>",
                         "smithy.api#httpHeader": "X-Amzn-Client-Token",
                         "smithy.api#idempotencyToken": {}
                     }
@@ -795,7 +841,7 @@
                 "ClientToken": {
                     "target": "com.amazonaws.lookoutvision#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>ClientToken is an idempotency token that ensures a call to <code>DeleteProject</code>\n         completes only once.  You choose the value to pass. For example, An issue, \n         such as an network outage, might prevent you from getting a response from <code>DeleteProject</code>.\n         In this case, safely retry your call\n         to <code>DeleteProject</code> by using the same <code>ClientToken</code> parameter value. An error occurs\n         if the other input parameters are not the same as in the first request. Using a different  \n         value for <code>ClientToken</code> is considered a new call to <code>DeleteProject</code>. An idempotency\n         token is active for 8 hours.</p>",
+                        "smithy.api#documentation": "<p>ClientToken is an idempotency token that ensures a call to <code>DeleteProject</code>\n         completes only once.  You choose the value to pass. For example, An issue\n         might prevent you from getting a response from <code>DeleteProject</code>.\n         In this case, safely retry your call\n         to <code>DeleteProject</code> by using the same <code>ClientToken</code> parameter value. </p>\n         <p>If you don't supply a value for <code>ClientToken</code>, the AWS SDK you are using inserts a value for you. \n         This prevents retries after a network error from making multiple project deletion requests. You'll need to\n         provide your own value for other use cases. </p>\n         <p>An error occurs if the other input parameters are not the same as in the first request. Using a different  \n         value for <code>ClientToken</code> is considered a new call to <code>DeleteProject</code>. An idempotency\n         token is active for 8 hours.</p>",
                         "smithy.api#httpHeader": "X-Amzn-Client-Token",
                         "smithy.api#idempotencyToken": {}
                     }
@@ -916,6 +962,72 @@
                     "method": "GET",
                     "uri": "/2020-11-20/projects/{ProjectName}/models/{ModelVersion}",
                     "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#DescribeModelPackagingJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutvision#DescribeModelPackagingJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutvision#DescribeModelPackagingJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutvision#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an Amazon Lookout for Vision model packaging job.\n</p>\n         <p>This operation requires permissions to perform the\n         <code>lookoutvision:DescribeModelPackagingJob</code> operation.</p>\n      \n         <p>For more information, see \n         <i>Using your Amazon Lookout for Vision model on an edge device</i> in the  Amazon Lookout for Vision Developer Guide. </p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2020-11-20/projects/{ProjectName}/modelpackagingjobs/{JobName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#DescribeModelPackagingJobRequest": {
+            "type": "structure",
+            "members": {
+                "ProjectName": {
+                    "target": "com.amazonaws.lookoutvision#ProjectName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the project that contains the model packaging job that you want to describe. \n</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "JobName": {
+                    "target": "com.amazonaws.lookoutvision#ModelPackagingJobName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The job name for the model packaging job. \n\n</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#DescribeModelPackagingJobResponse": {
+            "type": "structure",
+            "members": {
+                "ModelPackagingDescription": {
+                    "target": "com.amazonaws.lookoutvision#ModelPackagingDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the model packaging job.\n</p>"
+                    }
                 }
             }
         },
@@ -1132,6 +1244,91 @@
                 "smithy.api#box": {}
             }
         },
+        "com.amazonaws.lookoutvision#GreengrassConfiguration": {
+            "type": "structure",
+            "members": {
+                "CompilerOptions": {
+                    "target": "com.amazonaws.lookoutvision#CompilerOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional compiler options for the Greengrass component. Currently, \n   only NVIDIA Graphics Processing Units (GPU) are supported.</p> \n   \n   \n         <p>For more information, see \n      <i>Compiler options</i> in the  Amazon Lookout for Vision Developer Guide. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TargetDevice": {
+                    "target": "com.amazonaws.lookoutvision#TargetDevice",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target device for the model. Currently the only supported value is <code>jetson_xavier</code>.\n      If you specify <code>TargetDevice</code>, you can't specify\n      <code>TargetPlatform</code>.\n\n</p>"
+                    }
+                },
+                "TargetPlatform": {
+                    "target": "com.amazonaws.lookoutvision#TargetPlatform",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target platform for the model. If you specify <code>TargetPlatform</code>, you can't specify\n         <code>TargetDevice</code>.\n      </p>"
+                    }
+                },
+                "S3OutputLocation": {
+                    "target": "com.amazonaws.lookoutvision#S3Location",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         An S3 location in which Lookout for Vision stores the component artifacts. \n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ComponentName": {
+                    "target": "com.amazonaws.lookoutvision#ComponentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   A name for the AWS IoT Greengrass component. \n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ComponentVersion": {
+                    "target": "com.amazonaws.lookoutvision#ComponentVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Version for the AWS IoT Greengrass component. If you don't provide a\n      value, a default value of <code>\n               <i>Model Version</i>.0.0</code> is used.\n</p>"
+                    }
+                },
+                "ComponentDescription": {
+                    "target": "com.amazonaws.lookoutvision#ComponentDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   A description for the AWS IoT Greengrass component.\n</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.lookoutvision#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   A set of tags (key-value pairs) that you want to attach to the AWS IoT Greengrass component.\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration information for the AWS IoT Greengrass component created in a model packaging job. \n   For more information, see <a>StartModelPackagingJob</a>.\n</p>\n         <note>\n            <p>You can't specify a component with the same <code>ComponentName</code> and <code>Componentversion</code> as\n      an existing component with the same component name and component version.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.lookoutvision#GreengrassOutputDetails": {
+            "type": "structure",
+            "members": {
+                "ComponentVersionArn": {
+                    "target": "com.amazonaws.lookoutvision#ComponentVersionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe Amazon Resource Name (ARN) of the component.\n</p>"
+                    }
+                },
+                "ComponentName": {
+                    "target": "com.amazonaws.lookoutvision#ComponentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name of the component.\n</p>"
+                    }
+                },
+                "ComponentVersion": {
+                    "target": "com.amazonaws.lookoutvision#ComponentVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe version of the component.\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the AWS IoT Greengrass component created by a model packaging job.\n\n</p>"
+            }
+        },
         "com.amazonaws.lookoutvision#ImageSource": {
             "type": "structure",
             "members": {
@@ -1149,7 +1346,7 @@
         "com.amazonaws.lookoutvision#ImageSourceType": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "direct"
+                "smithy.api#pattern": "^direct$"
             }
         },
         "com.amazonaws.lookoutvision#InferenceUnits": {
@@ -1363,6 +1560,89 @@
                 }
             }
         },
+        "com.amazonaws.lookoutvision#ListModelPackagingJobs": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutvision#ListModelPackagingJobsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutvision#ListModelPackagingJobsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutvision#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\nLists the model packaging jobs created for an Amazon Lookout for Vision project.\n</p>\n         <p>This operation requires permissions to perform the\n    <code>lookoutvision:ListModelPackagingJobs</code> operation.\n</p>\n   \n         <p>For more information, see \n      <i>Using your Amazon Lookout for Vision model on an edge device</i> in the  Amazon Lookout for Vision Developer Guide. </p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2020-11-20/projects/{ProjectName}/modelpackagingjobs",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#ListModelPackagingJobsRequest": {
+            "type": "structure",
+            "members": {
+                "ProjectName": {
+                    "target": "com.amazonaws.lookoutvision#ProjectName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name of the project for which you want to list the model packaging jobs.\n</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.lookoutvision#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the previous response was incomplete (because there is more\n      results to retrieve), Amazon Lookout for Vision returns a pagination token in the response. You can use this pagination \n      token to retrieve the next set of results. </p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.lookoutvision#PageSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per paginated call. The largest value you can specify is 100. \n      If you specify a value greater than 100, a ValidationException\n      error occurs. The default value is 100. </p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#ListModelPackagingJobsResponse": {
+            "type": "structure",
+            "members": {
+                "ModelPackagingJobs": {
+                    "target": "com.amazonaws.lookoutvision#ModelPackagingJobsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nA list of the model packaging jobs created for the specified Amazon Lookout for Vision project.\n</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.lookoutvision#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the previous response was incomplete (because there is more\n   results to retrieve), Amazon Lookout for Vision returns a pagination token in the response. You can use this pagination \n   token to retrieve the next set of results.\n</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.lookoutvision#ListModels": {
             "type": "operation",
             "input": {
@@ -1392,7 +1672,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the versions of a model in an Amazon Lookout for Vision project.</p>\n         <p>This operation requires permissions to perform the\n         <code>lookoutvision:ListModels</code> operation.</p>",
+                "smithy.api#documentation": "<p>Lists the versions of a model in an Amazon Lookout for Vision project.</p>\n         <p>The <code>ListModels</code> operation is eventually consistent.  \n         Recent calls to <code>CreateModel</code> might\n         take a while to appear in the response from <code>ListProjects</code>.</p>\n         <p>This operation requires permissions to perform the\n         <code>lookoutvision:ListModels</code> operation.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2020-11-20/projects/{ProjectName}/models",
@@ -1478,7 +1758,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the Amazon Lookout for Vision projects in your AWS account.</p>\n         <p>This operation requires permissions to perform the\n         <code>lookoutvision:ListProjects</code> operation.</p>",
+                "smithy.api#documentation": "<p>Lists the Amazon Lookout for Vision projects in your AWS account.</p>\n         <p>The <code>ListProjects</code> operation is eventually consistent.  \n         Recent calls to <code>CreateProject</code> and <code>DeleteProject</code> might\n         take a while to appear in the response from <code>ListProjects</code>.</p>\n         <p>This operation requires permissions to perform the\n         <code>lookoutvision:ListProjects</code> operation.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2020-11-20/projects",
@@ -1590,6 +1870,21 @@
         },
         "com.amazonaws.lookoutvision#LookoutVisionService": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "LookoutVision",
+                    "arnNamespace": "lookoutvision",
+                    "cloudFormationName": "LookoutVision",
+                    "cloudTrailEventSource": "lookoutvision.amazonaws.com",
+                    "endpointPrefix": "lookoutvision"
+                },
+                "aws.auth#sigv4": {
+                    "name": "lookoutvision"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>This is the Amazon Lookout for Vision API Reference. It provides descriptions of actions, \n      data types, common parameters, and common errors.</p>\n         <p>Amazon Lookout for Vision enables you to find visual defects in industrial products,\n         accurately and at scale. It uses computer vision to identify missing components in an industrial product,\n         damage to vehicles or structures, irregularities in production lines, and even minuscule defects in\n         silicon wafers — or any other physical item where quality is important such as a missing capacitor\n         on printed circuit boards.</p>",
+                "smithy.api#title": "Amazon Lookout for Vision"
+            },
             "version": "2020-11-20",
             "operations": [
                 {
@@ -1617,6 +1912,9 @@
                     "target": "com.amazonaws.lookoutvision#DescribeModel"
                 },
                 {
+                    "target": "com.amazonaws.lookoutvision#DescribeModelPackagingJob"
+                },
+                {
                     "target": "com.amazonaws.lookoutvision#DescribeProject"
                 },
                 {
@@ -1624,6 +1922,9 @@
                 },
                 {
                     "target": "com.amazonaws.lookoutvision#ListDatasetEntries"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ListModelPackagingJobs"
                 },
                 {
                     "target": "com.amazonaws.lookoutvision#ListModels"
@@ -1638,6 +1939,9 @@
                     "target": "com.amazonaws.lookoutvision#StartModel"
                 },
                 {
+                    "target": "com.amazonaws.lookoutvision#StartModelPackagingJob"
+                },
+                {
                     "target": "com.amazonaws.lookoutvision#StopModel"
                 },
                 {
@@ -1649,22 +1953,7 @@
                 {
                     "target": "com.amazonaws.lookoutvision#UpdateDatasetEntries"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "LookoutVision",
-                    "arnNamespace": "lookoutvision",
-                    "cloudFormationName": "LookoutVision",
-                    "cloudTrailEventSource": "lookoutvision.amazonaws.com",
-                    "endpointPrefix": "lookoutvision"
-                },
-                "aws.auth#sigv4": {
-                    "name": "lookoutvision"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>This is the Amazon Lookout for Vision API Reference. It provides descriptions of actions, \n      data types, common parameters, and common errors.</p>\n         <p>Amazon Lookout for Vision enables you to find visual defects in industrial products,\n         accurately and at scale. It uses computer vision to identify missing components in an industrial product,\n         damage to vehicles or structures, irregularities in production lines, and even minuscule defects in\n         silicon wafers — or any other physical item where quality is important such as a missing capacitor\n         on printed circuit boards.</p>",
-                "smithy.api#title": "Amazon Lookout for Vision"
-            }
+            ]
         },
         "com.amazonaws.lookoutvision#ModelArn": {
             "type": "string"
@@ -1756,7 +2045,7 @@
                     "min": 1,
                     "max": 500
                 },
-                "smithy.api#pattern": "[0-9A-Za-z\\.\\-_]*"
+                "smithy.api#pattern": "^[0-9A-Za-z\\.\\-_]*$"
             }
         },
         "com.amazonaws.lookoutvision#ModelHostingStatus": {
@@ -1842,6 +2131,233 @@
                 "target": "com.amazonaws.lookoutvision#ModelMetadata"
             }
         },
+        "com.amazonaws.lookoutvision#ModelPackagingConfiguration": {
+            "type": "structure",
+            "members": {
+                "Greengrass": {
+                    "target": "com.amazonaws.lookoutvision#GreengrassConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nConfiguration information for the AWS IoT Greengrass component in a model packaging job.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\nConfiguration information for a Amazon Lookout for Vision model packaging job. For more information,\nsee <a>StartModelPackagingJob</a>.\n</p>"
+            }
+        },
+        "com.amazonaws.lookoutvision#ModelPackagingDescription": {
+            "type": "structure",
+            "members": {
+                "JobName": {
+                    "target": "com.amazonaws.lookoutvision#ModelPackagingJobName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name of the model packaging job.\n</p>"
+                    }
+                },
+                "ProjectName": {
+                    "target": "com.amazonaws.lookoutvision#ProjectName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the project that's associated with a model that's in the model package.\n\n</p>"
+                    }
+                },
+                "ModelVersion": {
+                    "target": "com.amazonaws.lookoutvision#ModelVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the model used in the model packaging job.\n\n</p>"
+                    }
+                },
+                "ModelPackagingConfiguration": {
+                    "target": "com.amazonaws.lookoutvision#ModelPackagingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe configuration information used in the model packaging job.\n</p>"
+                    }
+                },
+                "ModelPackagingJobDescription": {
+                    "target": "com.amazonaws.lookoutvision#ModelPackagingJobDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description for the model packaging job.\n\n</p>"
+                    }
+                },
+                "ModelPackagingMethod": {
+                    "target": "com.amazonaws.lookoutvision#ModelPackagingMethod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS service used to package the job. Currently Lookout for Vision can package\njobs with AWS IoT Greengrass.\n</p>"
+                    }
+                },
+                "ModelPackagingOutputDetails": {
+                    "target": "com.amazonaws.lookoutvision#ModelPackagingOutputDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the output of the model packaging job. For more information,\n   see <a>DescribeModelPackagingJob</a>.\n</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.lookoutvision#ModelPackagingJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe status of the model packaging job.\n</p>"
+                    }
+                },
+                "StatusMessage": {
+                    "target": "com.amazonaws.lookoutvision#ModelPackagingStatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe status message for the model packaging job.\n</p>"
+                    }
+                },
+                "CreationTimestamp": {
+                    "target": "com.amazonaws.lookoutvision#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The Unix timestamp for the time and date that the model packaging job was created.\n</p>"
+                    }
+                },
+                "LastUpdatedTimestamp": {
+                    "target": "com.amazonaws.lookoutvision#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The Unix timestamp for the time and date that the model packaging job was last updated.\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\nInformation about a model packaging job. For more information, see \n<a>DescribeModelPackagingJob</a>.\n</p>"
+            }
+        },
+        "com.amazonaws.lookoutvision#ModelPackagingJobDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-_. ()':,;?]+$"
+            }
+        },
+        "com.amazonaws.lookoutvision#ModelPackagingJobMetadata": {
+            "type": "structure",
+            "members": {
+                "JobName": {
+                    "target": "com.amazonaws.lookoutvision#ModelPackagingJobName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name of the model packaging job.\n</p>"
+                    }
+                },
+                "ProjectName": {
+                    "target": "com.amazonaws.lookoutvision#ProjectName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe project that contains the model that is in the model package.\n</p>"
+                    }
+                },
+                "ModelVersion": {
+                    "target": "com.amazonaws.lookoutvision#ModelVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe version of the model that is in the model package.\n</p>"
+                    }
+                },
+                "ModelPackagingJobDescription": {
+                    "target": "com.amazonaws.lookoutvision#ModelPackagingJobDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe description for the model packaging job.\n</p>"
+                    }
+                },
+                "ModelPackagingMethod": {
+                    "target": "com.amazonaws.lookoutvision#ModelPackagingMethod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe AWS service used to package the job. Currently Lookout for Vision can package\n      jobs with AWS IoT Greengrass.\n</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.lookoutvision#ModelPackagingJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the model packaging job.\n</p>"
+                    }
+                },
+                "StatusMessage": {
+                    "target": "com.amazonaws.lookoutvision#ModelPackagingStatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status message for the model packaging job.\n</p>"
+                    }
+                },
+                "CreationTimestamp": {
+                    "target": "com.amazonaws.lookoutvision#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp for the time and date that the model packaging job was created.</p>"
+                    }
+                },
+                "LastUpdatedTimestamp": {
+                    "target": "com.amazonaws.lookoutvision#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp for the time and date that the model packaging job was last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n   Metadata for a model packaging job. For more information, see <a>ListModelPackagingJobs</a>.\n</p>"
+            }
+        },
+        "com.amazonaws.lookoutvision#ModelPackagingJobName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-]+$"
+            }
+        },
+        "com.amazonaws.lookoutvision#ModelPackagingJobStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CREATED",
+                        "name": "CREATED"
+                    },
+                    {
+                        "value": "RUNNING",
+                        "name": "RUNNING"
+                    },
+                    {
+                        "value": "SUCCEEDED",
+                        "name": "SUCCEEDED"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lookoutvision#ModelPackagingJobsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lookoutvision#ModelPackagingJobMetadata"
+            }
+        },
+        "com.amazonaws.lookoutvision#ModelPackagingMethod": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9]+$"
+            }
+        },
+        "com.amazonaws.lookoutvision#ModelPackagingOutputDetails": {
+            "type": "structure",
+            "members": {
+                "Greengrass": {
+                    "target": "com.amazonaws.lookoutvision#GreengrassOutputDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nInformation about the AWS IoT Greengrass component in a model packaging job.\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\nInformation about the output from a model packaging job.\n</p>"
+            }
+        },
+        "com.amazonaws.lookoutvision#ModelPackagingStatusMessage": {
+            "type": "string"
+        },
         "com.amazonaws.lookoutvision#ModelPerformance": {
             "type": "structure",
             "members": {
@@ -1921,7 +2437,17 @@
                     "min": 1,
                     "max": 10
                 },
-                "smithy.api#pattern": "([1-9][0-9]*|latest)"
+                "smithy.api#pattern": "^([1-9][0-9]*|latest)$"
+            }
+        },
+        "com.amazonaws.lookoutvision#ModelVersionNoLatest": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                },
+                "smithy.api#pattern": "^([1-9][0-9]*)$"
             }
         },
         "com.amazonaws.lookoutvision#OutputConfig": {
@@ -2055,7 +2581,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9][a-zA-Z0-9_\\-]*"
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-]*$"
             }
         },
         "com.amazonaws.lookoutvision#QueryString": {
@@ -2065,7 +2591,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": ".*\\S.*"
+                "smithy.api#pattern": "\\S"
             }
         },
         "com.amazonaws.lookoutvision#ResourceNotFoundException": {
@@ -2117,6 +2643,10 @@
                     {
                         "value": "TRIAL",
                         "name": "TRIAL"
+                    },
+                    {
+                        "value": "MODEL_PACKAGE_JOB",
+                        "name": "MODEL_PACKAGE_JOB"
                     }
                 ]
             }
@@ -2131,7 +2661,7 @@
                     "min": 3,
                     "max": 63
                 },
-                "smithy.api#pattern": "[0-9A-Za-z\\.\\-_]*"
+                "smithy.api#pattern": "^[0-9A-Za-z\\.\\-_]*$"
             }
         },
         "com.amazonaws.lookoutvision#S3KeyPrefix": {
@@ -2150,19 +2680,19 @@
                 "Bucket": {
                     "target": "com.amazonaws.lookoutvision#S3BucketName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The S3 bucket that contains the training output.</p>",
+                        "smithy.api#documentation": "<p>The S3 bucket that contains the training or model packaging job output. If you are training a model,\n         the bucket must in your AWS account. If you use an S3 bucket for a model packaging job,\n      the S3 bucket must be in the same AWS Region and AWS account in which you use AWS IoT Greengrass.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Prefix": {
                     "target": "com.amazonaws.lookoutvision#S3KeyPrefix",
                     "traits": {
-                        "smithy.api#documentation": "<p>The path of the folder, within the S3 bucket, that contains the training output.</p>"
+                        "smithy.api#documentation": "<p>The path of the folder, within the S3 bucket, that contains the output.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about the location training output.</p>"
+                "smithy.api#documentation": "<p>Information about the location of training output or the output of a model packaging job.</p>"
             }
         },
         "com.amazonaws.lookoutvision#S3ObjectKey": {
@@ -2267,6 +2797,104 @@
                 }
             }
         },
+        "com.amazonaws.lookoutvision#StartModelPackagingJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutvision#StartModelPackagingJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutvision#StartModelPackagingJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutvision#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts an Amazon Lookout for Vision model packaging job. A model packaging job creates an AWS IoT Greengrass component for\n   a Lookout for Vision model. You can use the component to deploy your model to an edge device managed by Greengrass.\n</p>\n   \n         <p>Use the <a>DescribeModelPackagingJob</a> API to determine the current status of the job.\n     \n  The model packaging job is complete if the value of <code>Status</code> is <code>SUCCEEDED</code>.</p>\n         <p>To deploy the component\n      to the target device, use the component name and component version\n      with the AWS IoT Greengrass <a href=\"https://docs.aws.amazon.com/greengrass/v2/APIReference/API_CreateDeployment.html\">CreateDeployment</a> API.</p>\n\n         <p>This operation requires the following permissions:</p> \n         <ul>\n            <li>\n               <p>\n                  <code>lookoutvision:StartModelPackagingJobs</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>s3:PutObject</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>s3:GetBucketLocation</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>greengrass:CreateComponentVersion</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>greengrass:DescribeComponent</code>\n               </p>\n            </li>\n            <li>\n               <p>(Optional) <code>greengrass:TagResource</code>. Only required if you want to tag the component.</p>\n            </li>\n         </ul>\n   \n   \n         <p>For more information, see \n      <i>Using your Amazon Lookout for Vision model on an edge device</i> in the  Amazon Lookout for Vision Developer Guide. </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2020-11-20/projects/{ProjectName}/modelpackagingjobs",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#StartModelPackagingJobRequest": {
+            "type": "structure",
+            "members": {
+                "ProjectName": {
+                    "target": "com.amazonaws.lookoutvision#ProjectName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name of the project which contains the version of the model that you want to package.\n</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ModelVersion": {
+                    "target": "com.amazonaws.lookoutvision#ModelVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe version of the model within the project that you want to package.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "JobName": {
+                    "target": "com.amazonaws.lookoutvision#ModelPackagingJobName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name for the model packaging job. If you don't supply a value, the service creates\n   a job name for you.\n</p>"
+                    }
+                },
+                "Configuration": {
+                    "target": "com.amazonaws.lookoutvision#ModelPackagingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for the model packaging job.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.lookoutvision#ModelPackagingJobDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description for the model packaging job.\n</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.lookoutvision#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ClientToken is an idempotency token that ensures a call to <code>StartModelPackagingJob</code>\n      completes only once.  You choose the value to pass. For example, An issue might prevent you\n      from getting a response from <code>StartModelPackagingJob</code>.\n      In this case, safely retry your call\n      to <code>StartModelPackagingJob</code> by using the same <code>ClientToken</code> parameter value.</p>\n         <p>If you don't supply a value for <code>ClientToken</code>, the AWS SDK you are using inserts a value for you. \n      This prevents retries after a network error from making multiple dataset creation requests. You'll need to\n      provide your own value for other use cases. </p>\n         <p>An error occurs if the other input parameters are not the same as in the first request. Using a different  \n      value for <code>ClientToken</code> is considered a new call to <code>StartModelPackagingJob</code>. An idempotency\n      token is active for 8 hours.\n   </p>",
+                        "smithy.api#httpHeader": "X-Amzn-Client-Token",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#StartModelPackagingJobResponse": {
+            "type": "structure",
+            "members": {
+                "JobName": {
+                    "target": "com.amazonaws.lookoutvision#ModelPackagingJobName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The job name for the model packaging job. If you don't supply a job name in the <code>JobName</code> input parameter,\n   the service creates a job name for you.\n\n</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.lookoutvision#StartModelRequest": {
             "type": "structure",
             "members": {
@@ -2289,14 +2917,14 @@
                 "MinInferenceUnits": {
                     "target": "com.amazonaws.lookoutvision#InferenceUnits",
                     "traits": {
-                        "smithy.api#documentation": "<p>The minimum number of inference units to use. A single\n         inference unit represents 1 hour of processing and can support up to 5 Transaction Pers Second (TPS).\n         Use a higher number to increase the TPS throughput of your model. You are charged for the number\n         of inference units that you use.\n      </p>",
+                        "smithy.api#documentation": "<p>The minimum number of inference units to use. A single\n         inference unit represents 1 hour of processing. \n         Use a higher number to increase the TPS throughput of your model. You are charged for the number\n         of inference units that you use.\n      </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ClientToken": {
                     "target": "com.amazonaws.lookoutvision#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>ClientToken is an idempotency token that ensures a call to <code>StartModel</code>\n         completes only once.  You choose the value to pass. For example, An issue, \n         such as an network outage, might prevent you from getting a response from <code>StartModel</code>.\n         In this case, safely retry your call\n         to <code>StartModel</code> by using the same <code>ClientToken</code> parameter value. An error occurs\n         if the other input parameters are not the same as in the first request. Using a different  \n         value for <code>ClientToken</code> is considered a new call to <code>StartModel</code>. An idempotency\n         token is active for 8 hours.\n      </p>",
+                        "smithy.api#documentation": "<p>ClientToken is an idempotency token that ensures a call to <code>StartModel</code>\n         completes only once.  You choose the value to pass. For example, An issue might prevent \n         you from getting a response from <code>StartModel</code>.\n         In this case, safely retry your call\n         to <code>StartModel</code> by using the same <code>ClientToken</code> parameter value. </p>\n         <p>If you don't supply a value for <code>ClientToken</code>, the AWS SDK you are using inserts a value for you. \n         This prevents retries after a network error from making multiple start requests. You'll need to\n         provide your own value for other use cases. </p>\n         \n         <p>An error occurs if the other input parameters are not the same as in the first request. Using a different  \n         value for <code>ClientToken</code> is considered a new call to <code>StartModel</code>. An idempotency\n         token is active for 8 hours.\n      </p>",
                         "smithy.api#httpHeader": "X-Amzn-Client-Token",
                         "smithy.api#idempotencyToken": {}
                     }
@@ -2373,7 +3001,7 @@
                 "ClientToken": {
                     "target": "com.amazonaws.lookoutvision#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>ClientToken is an idempotency token that ensures a call to <code>StopModel</code>\n         completes only once.  You choose the value to pass. For example, An issue, \n         such as an network outage, might prevent you from getting a response from <code>StopModel</code>.\n         In this case, safely retry your call\n         to <code>StopModel</code> by using the same <code>ClientToken</code> parameter value. An error occurs\n         if the other input parameters are not the same as in the first request. Using a different  \n         value for <code>ClientToken</code> is considered a new call to <code>StopModel</code>. An idempotency\n         token is active for 8 hours.\n         \n        \n      </p>",
+                        "smithy.api#documentation": "<p>ClientToken is an idempotency token that ensures a call to <code>StopModel</code>\n         completes only once.  You choose the value to pass. For example, An issue \n         might prevent you from getting a response from <code>StopModel</code>.\n         In this case, safely retry your call\n         to <code>StopModel</code> by using the same <code>ClientToken</code> parameter value.</p>\n         <p>If you don't supply a value for <code>ClientToken</code>, the AWS SDK you are using inserts a value for you. \n         This prevents retries after a network error from making multiple stop requests. You'll need to\n         provide your own value for other use cases. </p>\n         <p>An error occurs if the other input parameters are not the same as in the first request. Using a different  \n         value for <code>ClientToken</code> is considered a new call to <code>StopModel</code>. An idempotency\n         token is active for 8 hours.\n         \n        \n      </p>",
                         "smithy.api#httpHeader": "X-Amzn-Client-Token",
                         "smithy.api#idempotencyToken": {}
                     }
@@ -2537,6 +3165,83 @@
                 "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
             }
         },
+        "com.amazonaws.lookoutvision#TargetDevice": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "jetson_xavier",
+                        "name": "JETSON_XAVIER"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lookoutvision#TargetPlatform": {
+            "type": "structure",
+            "members": {
+                "Os": {
+                    "target": "com.amazonaws.lookoutvision#TargetPlatformOs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target operating system for the model. Linux is the only operating system\n         that is currently supported.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Arch": {
+                    "target": "com.amazonaws.lookoutvision#TargetPlatformArch",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target architecture for the model. The currently supported architectures are\n         X86_64 (64-bit version of the x86 instruction set) and ARM_64 (ARMv8 64-bit CPU).\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Accelerator": {
+                    "target": "com.amazonaws.lookoutvision#TargetPlatformAccelerator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target accelerator for the model. NVIDIA (Nvidia graphics processing unit) \n         is the only accelerator that is currently supported. You must also specify the <code>gpu-code</code>, <code>trt-ver</code>,\n         and <code>cuda-ver</code> compiler options.\n         \n      </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The platform on which a model runs on an AWS IoT Greengrass core device.</p>"
+            }
+        },
+        "com.amazonaws.lookoutvision#TargetPlatformAccelerator": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "NVIDIA",
+                        "name": "NVIDIA"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lookoutvision#TargetPlatformArch": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ARM64",
+                        "name": "ARM64"
+                    },
+                    {
+                        "value": "X86_64",
+                        "name": "X86_64"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lookoutvision#TargetPlatformOs": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "LINUX",
+                        "name": "LINUX"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.lookoutvision#ThrottlingException": {
             "type": "structure",
             "members": {
@@ -2663,7 +3368,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds one or more JSON Line entries to a dataset. A JSON Line includes information about an image\n         used for training or testing an Amazon Lookout for Vision model. The following is an example JSON Line.</p>\n \n        \n         <p>Updating a dataset might take a while to complete. To check the current status, call <a>DescribeDataset</a> and\n         check the <code>Status</code> field in the response.</p>\n         <p>This operation requires permissions to perform the\n         <code>lookoutvision:UpdateDatasetEntries</code> operation.</p>",
+                "smithy.api#documentation": "<p>Adds or updates one or more JSON Line entries in a dataset. A JSON Line includes information about an image\n         used for training or testing an Amazon Lookout for Vision model.</p>\n         <p>To update an existing JSON Line, use the <code>source-ref</code> field to identify the JSON Line. The JSON line\n         that you supply replaces the existing JSON line. Any existing annotations that are not in the new JSON line are removed from the dataset.\n      </p>\n      \n      \n         <p>For more information, see \n         <i>Defining JSON lines for anomaly classification</i> in the  Amazon Lookout for Vision Developer Guide. </p>\n      \n         <note>\n            <p>The images you reference in the <code>source-ref</code> field of a JSON line, must be \n      in the same S3 bucket as the existing images in the dataset. </p>\n         </note>\n        \n         <p>Updating a dataset might take a while to complete. To check the current status, call <a>DescribeDataset</a> and\n         check the <code>Status</code> field in the response.</p>\n         <p>This operation requires permissions to perform the\n         <code>lookoutvision:UpdateDatasetEntries</code> operation.</p>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/2020-11-20/projects/{ProjectName}/datasets/{DatasetType}/entries",
@@ -2700,7 +3405,7 @@
                 "ClientToken": {
                     "target": "com.amazonaws.lookoutvision#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>ClientToken is an idempotency token that ensures a call to <code>UpdateDatasetEntries</code>\n         completes only once.  You choose the value to pass. For example, An issue, \n         such as an network outage, might prevent you from getting a response from <code>UpdateDatasetEntries</code>.\n         In this case, safely retry your call\n         to <code>UpdateDatasetEntries</code> by using the same <code>ClientToken</code> parameter value. An error occurs\n         if the other input parameters are not the same as in the first request. Using a different  \n         value for <code>ClientToken</code> is considered a new call to <code>UpdateDatasetEntries</code>. An idempotency\n         token is active for 8 hours.\n      </p>",
+                        "smithy.api#documentation": "<p>ClientToken is an idempotency token that ensures a call to <code>UpdateDatasetEntries</code>\n         completes only once.  You choose the value to pass. For example, An issue \n         might prevent you from getting a response from <code>UpdateDatasetEntries</code>.\n         In this case, safely retry your call\n         to <code>UpdateDatasetEntries</code> by using the same <code>ClientToken</code> parameter value.</p>\n         <p>If you don't supply a value for <code>ClientToken</code>, the AWS SDK you are using inserts a value for you. \n         This prevents retries after a network error from making multiple updates with the same dataset entries. You'll need to\n         provide your own value for other use cases. </p>\n         <p>An error occurs\n         if the other input parameters are not the same as in the first request. Using a different  \n         value for <code>ClientToken</code> is considered a new call to <code>UpdateDatasetEntries</code>. An idempotency\n         token is active for 8 hours.\n      </p>",
                         "smithy.api#httpHeader": "X-Amzn-Client-Token",
                         "smithy.api#idempotencyToken": {}
                     }

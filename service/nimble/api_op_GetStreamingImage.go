@@ -47,7 +47,6 @@ type GetStreamingImageInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type GetStreamingImageOutput struct {
 
 	// The streaming image.

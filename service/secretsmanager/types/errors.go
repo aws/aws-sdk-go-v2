@@ -28,10 +28,9 @@ func (e *DecryptionFailure) ErrorCode() string             { return "DecryptionF
 func (e *DecryptionFailure) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Secrets Manager can't encrypt the protected secret text using the provided KMS
-// key. Check that the customer master key (CMK) is available, enabled, and not in
-// an invalid state. For more information, see How Key State Affects Use of a
-// Customer Master Key
-// (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html).
+// key. Check that the KMS key is available, enabled, and not in an invalid state.
+// For more information, see Key state: Effect on your KMS key
+// (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html).
 type EncryptionFailure struct {
 	Message *string
 
@@ -69,7 +68,7 @@ func (e *InternalServiceError) ErrorMessage() string {
 func (e *InternalServiceError) ErrorCode() string             { return "InternalServiceError" }
 func (e *InternalServiceError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// You provided an invalid NextToken value.
+// The NextToken value is invalid.
 type InvalidNextTokenException struct {
 	Message *string
 
@@ -88,7 +87,7 @@ func (e *InvalidNextTokenException) ErrorMessage() string {
 func (e *InvalidNextTokenException) ErrorCode() string             { return "InvalidNextTokenException" }
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You provided an invalid value for a parameter.
+// The parameter name is invalid value.
 type InvalidParameterException struct {
 	Message *string
 
@@ -107,15 +106,14 @@ func (e *InvalidParameterException) ErrorMessage() string {
 func (e *InvalidParameterException) ErrorCode() string             { return "InvalidParameterException" }
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You provided a parameter value that is not valid for the current state of the
-// resource. Possible causes:
+// A parameter value is not valid for the current state of the resource. Possible
+// causes:
 //
-// * You tried to perform the operation on a secret
-// that's currently marked deleted.
+// * The secret is scheduled for deletion.
 //
-// * You tried to enable rotation on a secret
-// that doesn't already have a Lambda function ARN configured and you didn't
-// include such an ARN as a parameter in this call.
+// * You tried to enable rotation
+// on a secret that doesn't already have a Lambda function ARN configured and you
+// didn't include such an ARN as a parameter in this call.
 type InvalidRequestException struct {
 	Message *string
 
@@ -134,8 +132,7 @@ func (e *InvalidRequestException) ErrorMessage() string {
 func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request failed because it would exceed one of the Secrets Manager internal
-// limits.
+// The request failed because it would exceed one of the Secrets Manager quotas.
 type LimitExceededException struct {
 	Message *string
 
@@ -154,7 +151,7 @@ func (e *LimitExceededException) ErrorMessage() string {
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You provided a resource-based policy with syntax errors.
+// The resource policy has syntax errors.
 type MalformedPolicyDocumentException struct {
 	Message *string
 
@@ -194,7 +191,7 @@ func (e *PreconditionNotMetException) ErrorMessage() string {
 func (e *PreconditionNotMetException) ErrorCode() string             { return "PreconditionNotMetException" }
 func (e *PreconditionNotMetException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The BlockPublicPolicy parameter is set to true and the resource policy did not
+// The BlockPublicPolicy parameter is set to true, and the resource policy did not
 // prevent broad access to the secret.
 type PublicPolicyException struct {
 	Message *string
@@ -233,7 +230,7 @@ func (e *ResourceExistsException) ErrorMessage() string {
 func (e *ResourceExistsException) ErrorCode() string             { return "ResourceExistsException" }
 func (e *ResourceExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// We can't find the resource that you asked for.
+// Secrets Manager can't find the resource that you asked for.
 type ResourceNotFoundException struct {
 	Message *string
 

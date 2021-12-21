@@ -7,7 +7,7 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// You do not have access to perform this operation on this resource.
+// You don't have access to perform this operation on this resource.
 type AccessDeniedException struct {
 	Message *string
 
@@ -207,7 +207,7 @@ func (e *NotFoundException) ErrorMessage() string {
 func (e *NotFoundException) ErrorCode() string             { return "NotFoundException" }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You are not authorized to perform this operation.
+// You aren't authorized to perform this operation.
 type UnauthorizedException struct {
 	Message *string
 

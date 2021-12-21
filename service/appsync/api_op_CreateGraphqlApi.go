@@ -29,8 +29,8 @@ func (c *Client) CreateGraphqlApi(ctx context.Context, params *CreateGraphqlApiI
 
 type CreateGraphqlApiInput struct {
 
-	// The authentication type: API key, Identity and Access Management, OIDC, Amazon
-	// Cognito user pools, or Amazon Web Services Lambda.
+	// The authentication type: API key, Identity and Access Management (IAM), OpenID
+	// Connect (OIDC), Amazon Cognito user pools, or Lambda.
 	//
 	// This member is required.
 	AuthenticationType types.AuthenticationType
@@ -43,13 +43,13 @@ type CreateGraphqlApiInput struct {
 	// A list of additional authentication providers for the GraphqlApi API.
 	AdditionalAuthenticationProviders []types.AdditionalAuthenticationProvider
 
-	// Configuration for Amazon Web Services Lambda function authorization.
+	// Configuration for Lambda function authorization.
 	LambdaAuthorizerConfig *types.LambdaAuthorizerConfig
 
 	// The Amazon CloudWatch Logs configuration.
 	LogConfig *types.LogConfig
 
-	// The OpenID Connect configuration.
+	// The OIDC configuration.
 	OpenIDConnectConfig *types.OpenIDConnectConfig
 
 	// A TagMap object.
@@ -58,7 +58,7 @@ type CreateGraphqlApiInput struct {
 	// The Amazon Cognito user pool configuration.
 	UserPoolConfig *types.UserPoolConfig
 
-	// A flag indicating whether to enable X-Ray tracing for the GraphqlApi.
+	// A flag indicating whether to use X-Ray tracing for the GraphqlApi.
 	XrayEnabled bool
 
 	noSmithyDocumentSerde

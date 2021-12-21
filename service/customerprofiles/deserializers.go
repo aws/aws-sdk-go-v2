@@ -2472,6 +2472,11 @@ func awsRestjson1_deserializeOpDocumentGetIntegrationOutput(v **GetIntegrationOu
 				sv.ObjectTypeName = ptr.String(jtv)
 			}
 
+		case "ObjectTypeNames":
+			if err := awsRestjson1_deserializeDocumentObjectTypeNames(&sv.ObjectTypeNames, value); err != nil {
+				return err
+			}
+
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
@@ -4851,6 +4856,11 @@ func awsRestjson1_deserializeOpDocumentPutIntegrationOutput(v **PutIntegrationOu
 					return fmt.Errorf("expected typeName to be of type string, got %T instead", value)
 				}
 				sv.ObjectTypeName = ptr.String(jtv)
+			}
+
+		case "ObjectTypeNames":
+			if err := awsRestjson1_deserializeDocumentObjectTypeNames(&sv.ObjectTypeNames, value); err != nil {
+				return err
 			}
 
 		case "Tags":
@@ -7383,6 +7393,11 @@ func awsRestjson1_deserializeDocumentListIntegrationItem(v **types.ListIntegrati
 				sv.ObjectTypeName = ptr.String(jtv)
 			}
 
+		case "ObjectTypeNames":
+			if err := awsRestjson1_deserializeDocumentObjectTypeNames(&sv.ObjectTypeNames, value); err != nil {
+				return err
+			}
+
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
@@ -7974,6 +7989,42 @@ func awsRestjson1_deserializeDocumentObjectTypeKeyList(v *[]types.ObjectTypeKey,
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentObjectTypeNames(v *map[string]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]string
+	if *v == nil {
+		mv = map[string]string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected typeName to be of type string, got %T instead", value)
+			}
+			parsedVal = jtv
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
 	return nil
 }
 

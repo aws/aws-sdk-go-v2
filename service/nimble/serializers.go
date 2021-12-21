@@ -4074,9 +4074,37 @@ func awsRestjson1_serializeDocumentStreamConfigurationCreate(v *types.StreamConf
 		ok.Integer(v.MaxStoppedSessionLengthInMinutes)
 	}
 
+	if v.SessionStorage != nil {
+		ok := object.Key("sessionStorage")
+		if err := awsRestjson1_serializeDocumentStreamConfigurationSessionStorage(v.SessionStorage, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.StreamingImageIds != nil {
 		ok := object.Key("streamingImageIds")
 		if err := awsRestjson1_serializeDocumentStreamingImageIdList(v.StreamingImageIds, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentStreamConfigurationSessionStorage(v *types.StreamConfigurationSessionStorage, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Mode != nil {
+		ok := object.Key("mode")
+		if err := awsRestjson1_serializeDocumentStreamingSessionStorageModeList(v.Mode, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Root != nil {
+		ok := object.Key("root")
+		if err := awsRestjson1_serializeDocumentStreamingSessionStorageRoot(v.Root, ok); err != nil {
 			return err
 		}
 	}
@@ -4103,6 +4131,34 @@ func awsRestjson1_serializeDocumentStreamingInstanceTypeList(v []types.Streaming
 		av := array.Value()
 		av.String(string(v[i]))
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentStreamingSessionStorageModeList(v []types.StreamingSessionStorageMode, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentStreamingSessionStorageRoot(v *types.StreamingSessionStorageRoot, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Linux != nil {
+		ok := object.Key("linux")
+		ok.String(*v.Linux)
+	}
+
+	if v.Windows != nil {
+		ok := object.Key("windows")
+		ok.String(*v.Windows)
+	}
+
 	return nil
 }
 

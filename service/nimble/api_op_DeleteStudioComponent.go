@@ -48,7 +48,6 @@ type DeleteStudioComponentInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type DeleteStudioComponentOutput struct {
 
 	// Information about the studio component.

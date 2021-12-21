@@ -10,12 +10,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Cancels the transfer of a domain from the current AWS account to another AWS
-// account. You initiate a transfer between AWS accounts using
-// TransferDomainToAnotherAwsAccount
+// Cancels the transfer of a domain from the current Amazon Web Services account to
+// another Amazon Web Services account. You initiate a transfer betweenAmazon Web
+// Services accounts using TransferDomainToAnotherAwsAccount
 // (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html).
-// You must cancel the transfer before the other AWS account accepts the transfer
-// using AcceptDomainTransferFromAnotherAwsAccount
+// You must cancel the transfer before the other Amazon Web Services account
+// accepts the transfer using AcceptDomainTransferFromAnotherAwsAccount
 // (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_AcceptDomainTransferFromAnotherAwsAccount.html).
 // Use either ListOperations
 // (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ListOperations.html)
@@ -44,8 +44,8 @@ func (c *Client) CancelDomainTransferToAnotherAwsAccount(ctx context.Context, pa
 // element.
 type CancelDomainTransferToAnotherAwsAccountInput struct {
 
-	// The name of the domain for which you want to cancel the transfer to another AWS
-	// account.
+	// The name of the domain for which you want to cancel the transfer to another
+	// Amazon Web Services account.
 	//
 	// This member is required.
 	DomainName *string

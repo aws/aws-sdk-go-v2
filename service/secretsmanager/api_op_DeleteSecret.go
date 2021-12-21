@@ -11,41 +11,22 @@ import (
 	"time"
 )
 
-// Deletes an entire secret and all of the versions. You can optionally include a
-// recovery window during which you can restore the secret. If you don't specify a
-// recovery window value, the operation defaults to 30 days. Secrets Manager
-// attaches a DeletionDate stamp to the secret that specifies the end of the
-// recovery window. At the end of the recovery window, Secrets Manager deletes the
-// secret permanently. At any time before recovery window ends, you can use
-// RestoreSecret to remove the DeletionDate and cancel the deletion of the secret.
-// You cannot access the encrypted secret information in any secret scheduled for
-// deletion. If you need to access that information, you must cancel the deletion
-// with RestoreSecret and then retrieve the information.
-//
-// * There is no explicit
-// operation to delete a version of a secret. Instead, remove all staging labels
-// from the VersionStage field of a version. That marks the version as deprecated
-// and allows Secrets Manager to delete it as needed. Versions without any staging
-// labels do not show up in ListSecretVersionIds unless you specify
-// IncludeDeprecated.
-//
-// * The permanent secret deletion at the end of the waiting
-// period is performed as a background task with low priority. There is no
-// guarantee of a specific time after the recovery window for the actual delete
-// operation to occur.
-//
-// Minimum permissions To run this command, you must have the
-// following permissions:
-//
-// * secretsmanager:DeleteSecret
-//
-// Related operations
-//
-// * To
-// create a secret, use CreateSecret.
-//
-// * To cancel deletion of a version of a
-// secret before the recovery window has expired, use RestoreSecret.
+// Deletes a secret and all of its versions. You can specify a recovery window
+// during which you can restore the secret. The minimum recovery window is 7 days.
+// The default recovery window is 30 days. Secrets Manager attaches a DeletionDate
+// stamp to the secret that specifies the end of the recovery window. At the end of
+// the recovery window, Secrets Manager deletes the secret permanently. For
+// information about deleting a secret in the console, see
+// https://docs.aws.amazon.com/secretsmanager/latest/userguide/manage_delete-secret.html
+// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/manage_delete-secret.html).
+// Secrets Manager performs the permanent secret deletion at the end of the waiting
+// period as a background task with low priority. There is no guarantee of a
+// specific time after the recovery window for the permanent delete to occur. At
+// any time before recovery window ends, you can use RestoreSecret to remove the
+// DeletionDate and cancel the deletion of the secret. In a secret scheduled for
+// deletion, you cannot access the encrypted secret value. To access that
+// information, first cancel the deletion with RestoreSecret and then retrieve the
+// information.
 func (c *Client) DeleteSecret(ctx context.Context, params *DeleteSecretInput, optFns ...func(*Options)) (*DeleteSecretOutput, error) {
 	if params == nil {
 		params = &DeleteSecretInput{}
@@ -63,32 +44,30 @@ func (c *Client) DeleteSecret(ctx context.Context, params *DeleteSecretInput, op
 
 type DeleteSecretInput struct {
 
-	// Specifies the secret to delete. You can specify either the Amazon Resource Name
-	// (ARN) or the friendly name of the secret. For an ARN, we recommend that you
+	// The ARN or name of the secret to delete. For an ARN, we recommend that you
 	// specify a complete ARN rather than a partial ARN.
 	//
 	// This member is required.
 	SecretId *string
 
-	// (Optional) Specifies that the secret is to be deleted without any recovery
-	// window. You can't use both this parameter and the RecoveryWindowInDays parameter
-	// in the same API call. An asynchronous background process performs the actual
-	// deletion, so there can be a short delay before the operation completes. If you
-	// write code to delete and then immediately recreate a secret with the same name,
-	// ensure that your code includes appropriate back off and retry logic. Use this
-	// parameter with caution. This parameter causes the operation to skip the normal
-	// waiting period before the permanent deletion that Amazon Web Services would
-	// normally impose with the RecoveryWindowInDays parameter. If you delete a secret
-	// with the ForceDeleteWithouRecovery parameter, then you have no opportunity to
-	// recover the secret. You lose the secret permanently. If you use this parameter
-	// and include a previously deleted or nonexistent secret, the operation does not
-	// return the error ResourceNotFoundException in order to correctly handle retries.
+	// Specifies whether to delete the secret without any recovery window. You can't
+	// use both this parameter and RecoveryWindowInDays in the same call. If you don't
+	// use either, then Secrets Manager defaults to a 30 day recovery window. Secrets
+	// Manager performs the actual deletion with an asynchronous background process, so
+	// there might be a short delay before the secret is permanently deleted. If you
+	// delete a secret and then immediately create a secret with the same name, use
+	// appropriate back off and retry logic. Use this parameter with caution. This
+	// parameter causes the operation to skip the normal recovery window before the
+	// permanent deletion that Secrets Manager would normally impose with the
+	// RecoveryWindowInDays parameter. If you delete a secret with the
+	// ForceDeleteWithouRecovery parameter, then you have no opportunity to recover the
+	// secret. You lose the secret permanently.
 	ForceDeleteWithoutRecovery bool
 
-	// (Optional) Specifies the number of days that Secrets Manager waits before
-	// Secrets Manager can delete the secret. You can't use both this parameter and the
-	// ForceDeleteWithoutRecovery parameter in the same API call. This value can range
-	// from 7 to 30 days with a default value of 30.
+	// The number of days from 7 to 30 that Secrets Manager waits before permanently
+	// deleting the secret. You can't use both this parameter and
+	// ForceDeleteWithoutRecovery in the same call. If you don't use either, then
+	// Secrets Manager defaults to a 30 day recovery window.
 	RecoveryWindowInDays int64
 
 	noSmithyDocumentSerde
@@ -96,15 +75,15 @@ type DeleteSecretInput struct {
 
 type DeleteSecretOutput struct {
 
-	// The ARN of the secret that is now scheduled for deletion.
+	// The ARN of the secret.
 	ARN *string
 
-	// The date and time after which this secret can be deleted by Secrets Manager and
-	// can no longer be restored. This value is the date and time of the delete request
-	// plus the number of days specified in RecoveryWindowInDays.
+	// The date and time after which this secret Secrets Manager can permanently delete
+	// this secret, and it can no longer be restored. This value is the date and time
+	// of the delete request plus the number of days in RecoveryWindowInDays.
 	DeletionDate *time.Time
 
-	// The friendly name of the secret currently scheduled for deletion.
+	// The name of the secret.
 	Name *string
 
 	// Metadata pertaining to the operation's result.

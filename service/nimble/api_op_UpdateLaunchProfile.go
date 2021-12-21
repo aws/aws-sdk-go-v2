@@ -28,7 +28,6 @@ func (c *Client) UpdateLaunchProfile(ctx context.Context, params *UpdateLaunchPr
 	return out, nil
 }
 
-//
 type UpdateLaunchProfileInput struct {
 
 	// The Launch Profile ID.
@@ -66,7 +65,6 @@ type UpdateLaunchProfileInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type UpdateLaunchProfileOutput struct {
 
 	// The launch profile.

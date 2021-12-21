@@ -28,7 +28,7 @@ type AdditionalDataset struct {
 	Name *string
 
 	// Weather Index To enable the Weather Index, do not specify a value for
-	// Configuration. Holidays To enable Holidays, specify a country with one of the
+	// Configuration. Holidays To enable Holidays, set CountryCode to one of the
 	// following two-letter country codes:
 	//
 	// * "AL" - ALBANIA
@@ -432,14 +432,13 @@ type DatasetSummary struct {
 	noSmithyDocumentSerde
 }
 
-// The source of your training data, an AWS Identity and Access Management (IAM)
-// role that allows Amazon Forecast to access the data and, optionally, an AWS Key
-// Management Service (KMS) key. This object is submitted in the
-// CreateDatasetImportJob request.
+// The source of your data, an AWS Identity and Access Management (IAM) role that
+// allows Amazon Forecast to access the data and, optionally, an AWS Key Management
+// Service (KMS) key.
 type DataSource struct {
 
-	// The path to the training data stored in an Amazon Simple Storage Service (Amazon
-	// S3) bucket along with the credentials to access the data.
+	// The path to the data stored in an Amazon Simple Storage Service (Amazon S3)
+	// bucket along with the credentials to access the data.
 	//
 	// This member is required.
 	S3Config *S3Config
@@ -611,9 +610,23 @@ type ExplainabilityExportSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Provides information about the Explainability resource.
 type ExplainabilityInfo struct {
+
+	// The Amazon Resource Name (ARN) of the Explainability.
 	ExplainabilityArn *string
 
+	// The status of the Explainability. States include:
+	//
+	// * ACTIVE
+	//
+	// * CREATE_PENDING,
+	// CREATE_IN_PROGRESS, CREATE_FAILED
+	//
+	// * CREATE_STOPPING, CREATE_STOPPED
+	//
+	// *
+	// DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED
 	Status *string
 
 	noSmithyDocumentSerde
@@ -678,20 +691,22 @@ type ExplainabilitySummary struct {
 	noSmithyDocumentSerde
 }
 
-// Provides featurization (transformation) information for a dataset field. This
-// object is part of the FeaturizationConfig object. For example: {
+// This object belongs to the CreatePredictor operation. If you created your
+// predictor with CreateAutoPredictor, see AttributeConfig. Provides featurization
+// (transformation) information for a dataset field. This object is part of the
+// FeaturizationConfig object. For example: {
+//     "AttributeName": "demand",
 //
-// "AttributeName": "demand",
 //
-//     FeaturizationPipeline [ {
+// FeaturizationPipeline [ {
+//
+//     "FeaturizationMethodName": "filling",
 //
 //
-// "FeaturizationMethodName": "filling",
+// "FeaturizationMethodParameters": {"aggregation": "avg", "backfill": "nan"}
 //
-//     "FeaturizationMethodParameters":
-// {"aggregation": "avg", "backfill": "nan"}
 //
-//     } ]
+// } ]
 //
 //     }
 type Featurization struct {
@@ -712,17 +727,18 @@ type Featurization struct {
 	noSmithyDocumentSerde
 }
 
-// In a CreatePredictor operation, the specified algorithm trains a model using the
-// specified dataset group. You can optionally tell the operation to modify data
-// fields prior to training a model. These modifications are referred to as
-// featurization. You define featurization using the FeaturizationConfig object.
-// You specify an array of transformations, one for each field that you want to
-// featurize. You then include the FeaturizationConfig object in your
-// CreatePredictor request. Amazon Forecast applies the featurization to the
-// TARGET_TIME_SERIES and RELATED_TIME_SERIES datasets before model training. You
-// can create multiple featurization configurations. For example, you might call
-// the CreatePredictor operation twice by specifying different featurization
-// configurations.
+// This object belongs to the CreatePredictor operation. If you created your
+// predictor with CreateAutoPredictor, see AttributeConfig. In a CreatePredictor
+// operation, the specified algorithm trains a model using the specified dataset
+// group. You can optionally tell the operation to modify data fields prior to
+// training a model. These modifications are referred to as featurization. You
+// define featurization using the FeaturizationConfig object. You specify an array
+// of transformations, one for each field that you want to featurize. You then
+// include the FeaturizationConfig object in your CreatePredictor request. Amazon
+// Forecast applies the featurization to the TARGET_TIME_SERIES and
+// RELATED_TIME_SERIES datasets before model training. You can create multiple
+// featurization configurations. For example, you might call the CreatePredictor
+// operation twice by specifying different featurization configurations.
 type FeaturizationConfig struct {
 
 	// The frequency of predictions in a forecast. Valid intervals are Y (Year), M
@@ -897,6 +913,8 @@ type ForecastExportJobSummary struct {
 // operation. To get the complete set of properties, call the DescribeForecast
 // operation, and provide the ForecastArn that is listed in the summary.
 type ForecastSummary struct {
+
+	// Whether the Forecast was created from an AutoPredictor.
 	CreatedUsingAutoPredictor *bool
 
 	// When the forecast creation task was created.
@@ -972,8 +990,10 @@ type HyperParameterTuningJobConfig struct {
 	noSmithyDocumentSerde
 }
 
-// The data used to train a predictor. The data includes a dataset group and any
-// supplementary features. You specify this object in the CreatePredictor request.
+// This object belongs to the CreatePredictor operation. If you created your
+// predictor with CreateAutoPredictor, see DataConfig. The data used to train a
+// predictor. The data includes a dataset group and any supplementary features. You
+// specify this object in the CreatePredictor request.
 type InputDataConfig struct {
 
 	// The Amazon Resource Name (ARN) of the dataset group.
@@ -1257,8 +1277,7 @@ type S3Config struct {
 	noSmithyDocumentSerde
 }
 
-// Defines the fields of a dataset. You specify this object in the CreateDataset
-// request.
+// Defines the fields of a dataset.
 type Schema struct {
 
 	// An array of attributes specifying the name and type of each field in a dataset.
@@ -1332,7 +1351,9 @@ type Statistics struct {
 	noSmithyDocumentSerde
 }
 
-// Describes a supplementary feature of a dataset group. This object is part of the
+// This object belongs to the CreatePredictor operation. If you created your
+// predictor with CreateAutoPredictor, see AdditionalDataset. Describes a
+// supplementary feature of a dataset group. This object is part of the
 // InputDataConfig object. Forecast supports the Weather Index and Holidays
 // built-in featurizations. Weather Index The Amazon Forecast Weather Index is a
 // built-in featurization that incorporates historical and projected weather

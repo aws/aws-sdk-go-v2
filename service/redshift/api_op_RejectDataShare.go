@@ -53,6 +53,9 @@ type RejectDataShareOutput struct {
 	// and data consumers.
 	DataShareAssociations []types.DataShareAssociation
 
+	// The identifier of a datashare to show its managing entity.
+	ManagedBy *string
+
 	// The Amazon Resource Name (ARN) of the producer.
 	ProducerArn *string
 

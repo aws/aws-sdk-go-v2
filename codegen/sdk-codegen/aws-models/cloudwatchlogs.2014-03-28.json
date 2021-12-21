@@ -1799,6 +1799,12 @@
                 "target": "com.amazonaws.cloudwatchlogs#FilteredLogEvent"
             }
         },
+        "com.amazonaws.cloudwatchlogs#ForceUpdate": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
         "com.amazonaws.cloudwatchlogs#GetLogEvents": {
             "type": "operation",
             "input": {
@@ -2890,6 +2896,12 @@
                         "smithy.api#documentation": "<p>An IAM policy document that authorizes cross-account users to deliver their log events\n      to the associated destination. This can be up to 5120 bytes.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "forceUpdate": {
+                    "target": "com.amazonaws.cloudwatchlogs#ForceUpdate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify true if you are updating an existing destination policy to grant permission to\n    an organization ID instead of granting permission to individual AWS accounts. Before\n    you update a destination policy this way, you must first update the subscription\n    filters in the accounts that send logs to this destination. If you do not, the subscription\n    filters might stop working. By specifying <code>true</code>\n      for <code>forceUpdate</code>, you are affirming that you have already updated the subscription \n      filters.\n    For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Cross-Account-Log_Subscription-Update.html\">\n      Updating an existing cross-account subscription</a>\n         </p>\n         <p>If you omit this parameter, the default of <code>false</code> is used.</p>"
+                    }
                 }
             }
         },
@@ -3083,6 +3095,9 @@
                     "target": "com.amazonaws.cloudwatchlogs#InvalidParameterException"
                 },
                 {
+                    "target": "com.amazonaws.cloudwatchlogs#LimitExceededException"
+                },
+                {
                     "target": "com.amazonaws.cloudwatchlogs#ResourceNotFoundException"
                 },
                 {
@@ -3170,7 +3185,7 @@
                 "policyDocument": {
                     "target": "com.amazonaws.cloudwatchlogs#PolicyDocument",
                     "traits": {
-                        "smithy.api#documentation": "<p>Details of the new policy, including the identity of the principal that is enabled to put logs to this account. This is formatted as a JSON string.\n    This parameter is required.</p>\n         <p>The following example creates a resource policy enabling the Route 53 service to put\n      DNS query logs in to the specified log group. Replace <code>\"logArn\"</code> with the ARN of \n      your CloudWatch Logs resource, such as a log group or log stream.</p>\n         <p>CloudWatch Logs also supports <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourcearn\">aws:SourceArn</a>\n      and <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourceaccount\">aws:SourceAccount</a>\ncondition context keys.</p>\n         <p>In the example resource policy, you would replace the value of <code>SourceArn</code> with the resource making the\n      call from Route 53 to CloudWatch Logs and replace the value of <code>SourceAccount</code> with \n      the Amazon Web Services account ID making that call.</p>\n         <p></p>\n         <p>\n            <code>{\n    \"Version\": \"2012-10-17\",\n    \"Statement\": [\n        {\n           \"Sid\": \"Route53LogsToCloudWatchLogs\",\n           \"Effect\": \"Allow\",\n           \"Principal\": {\n               \"Service\": [\n                   \"route53.amazonaws.com\"\n                ]\n            },\n           \"Action\": \"logs:PutLogEvents\",\n           \"Resource\": \"logArn\",\n           \"Condition\": {\n               \"ArnLike\": {\n                   \"aws:SourceArn\": \"myRoute53ResourceArn\"\n                },\n               \"StringEquals\": {\n                   \"aws:SourceAccount\": \"myAwsAccountId\"\n               }\n            }\n        }\n      ]\n}</code>\n \n         </p>"
+                        "smithy.api#documentation": "<p>Details of the new policy, including the identity of the principal that is enabled to put logs to this account. This is formatted as a JSON string.\n    This parameter is required.</p>\n         <p>The following example creates a resource policy enabling the Route 53 service to put\n      DNS query logs in to the specified log group. Replace <code>\"logArn\"</code> with the ARN of \n      your CloudWatch Logs resource, such as a log group or log stream.</p>\n         <p>CloudWatch Logs also supports <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourcearn\">aws:SourceArn</a>\n      and <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourceaccount\">aws:SourceAccount</a>\ncondition context keys.</p>\n         <p>In the example resource policy, you would replace the value of <code>SourceArn</code> with the resource making the\n      call from Route 53 to CloudWatch Logs and replace the value of <code>SourceAccount</code> with \n      the Amazon Web Services account ID making that call.</p>\n         <p></p>\n         <p>\n            <code>{\n    \"Version\": \"2012-10-17\",\n    \"Statement\": [\n        {\n           \"Sid\": \"Route53LogsToCloudWatchLogs\",\n           \"Effect\": \"Allow\",\n           \"Principal\": {\n               \"Service\": [\n                   \"route53.amazonaws.com\"\n                ]\n            },\n           \"Action\": \"logs:PutLogEvents\",\n           \"Resource\": \"logArn\",\n           \"Condition\": {\n               \"ArnLike\": {\n                   \"aws:SourceArn\": \"myRoute53ResourceArn\"\n                },\n               \"StringEquals\": {\n                   \"aws:SourceAccount\": \"myAwsAccountId\"\n               }\n            }\n        }\n      ]\n}</code>\n \n         </p>"
                     }
                 }
             }

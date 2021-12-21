@@ -14264,6 +14264,11 @@ func awsAwsjson11_serializeDocumentAutoMLChannel(v *types.AutoMLChannel, value s
 		ok.String(string(v.CompressionType))
 	}
 
+	if v.ContentType != nil {
+		ok := object.Key("ContentType")
+		ok.String(*v.ContentType)
+	}
+
 	if v.DataSource != nil {
 		ok := object.Key("DataSource")
 		if err := awsAwsjson11_serializeDocumentAutoMLDataSource(v.DataSource, ok); err != nil {

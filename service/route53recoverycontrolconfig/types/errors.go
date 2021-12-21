@@ -7,8 +7,7 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// 403 response - AccessDeniedException. You do not have sufficient access to
-// perform this action.
+// 403 response - You do not have sufficient access to perform this action.
 type AccessDeniedException struct {
 	Message *string
 
@@ -27,7 +26,7 @@ func (e *AccessDeniedException) ErrorMessage() string {
 func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// 409 response - ConflictException.
+// 409 response - ConflictException. You might be using a predefined variable.
 type ConflictException struct {
 	Message *string
 
@@ -65,7 +64,8 @@ func (e *InternalServerException) ErrorMessage() string {
 func (e *InternalServerException) ErrorCode() string             { return "InternalServerException" }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// 404 response - The query string contains a syntax error or resource not found.
+// 404 response - MalformedQueryString. The query string contains a syntax error or
+// resource not found..
 type ResourceNotFoundException struct {
 	Message *string
 
@@ -84,7 +84,8 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// 402 response
+// 402 response - You attempted to create more resources than the service allows
+// based on service quotas.
 type ServiceQuotaExceededException struct {
 	Message *string
 
@@ -103,7 +104,7 @@ func (e *ServiceQuotaExceededException) ErrorMessage() string {
 func (e *ServiceQuotaExceededException) ErrorCode() string             { return "ServiceQuotaExceededException" }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// 429 response - ThrottlingException.
+// 429 response - LimitExceededException or TooManyRequestsException.
 type ThrottlingException struct {
 	Message *string
 
@@ -123,8 +124,8 @@ func (e *ThrottlingException) ErrorCode() string             { return "Throttlin
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // 400 response - Multiple causes. For example, you might have a malformed query
-// string and input parameter might be out of range, or you used parameters
-// together incorrectly.
+// string and input parameter might be out of range, or you might have used
+// parameters together incorrectly.
 type ValidationException struct {
 	Message *string
 

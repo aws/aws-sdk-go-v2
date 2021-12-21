@@ -10,34 +10,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Attaches the contents of the specified resource-based permission policy to a
-// secret. A resource-based policy is optional. Alternatively, you can use IAM
-// identity-based policies that specify the secret's Amazon Resource Name (ARN) in
-// the policy statement's Resources element. You can also use a combination of both
-// identity-based and resource-based policies. The affected users and roles receive
-// the permissions that are permitted by all of the relevant policies. For more
-// information, see Using Resource-Based Policies for Amazon Web Services Secrets
-// Manager
-// (http://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access_resource-based-policies.html).
-// For the complete description of the Amazon Web Services policy syntax and
-// grammar, see IAM JSON Policy Reference
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html) in
-// the IAM User Guide. Minimum permissions To run this command, you must have the
-// following permissions:
-//
-// * secretsmanager:PutResourcePolicy
-//
-// Related
-// operations
-//
-// * To retrieve the resource policy attached to a secret, use
-// GetResourcePolicy.
-//
-// * To delete the resource-based policy attached to a secret,
-// use DeleteResourcePolicy.
-//
-// * To list all of the currently available secrets, use
-// ListSecrets.
+// Attaches a resource-based permission policy to a secret. A resource-based policy
+// is optional. For more information, see Authentication and access control for
+// Secrets Manager
+// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html)
+// For information about attaching a policy in the console, see Attach a
+// permissions policy to a secret
+// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access_resource-based-policies.html).
 func (c *Client) PutResourcePolicy(ctx context.Context, params *PutResourcePolicyInput, optFns ...func(*Options)) (*PutResourcePolicyOutput, error) {
 	if params == nil {
 		params = &PutResourcePolicyInput{}
@@ -55,26 +34,22 @@ func (c *Client) PutResourcePolicy(ctx context.Context, params *PutResourcePolic
 
 type PutResourcePolicyInput struct {
 
-	// A JSON-formatted string constructed according to the grammar and syntax for an
-	// Amazon Web Services resource-based policy. The policy in the string identifies
-	// who can access or manage this secret and its versions. For information on how to
-	// format a JSON parameter for the various command line tool environments, see
-	// Using JSON for Parameters
-	// (http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json)
-	// in the CLI User Guide.
+	// A JSON-formatted string for an Amazon Web Services resource-based policy. For
+	// example policies, see Permissions policy examples
+	// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access_examples.html).
 	//
 	// This member is required.
 	ResourcePolicy *string
 
-	// Specifies the secret that you want to attach the resource-based policy. You can
-	// specify either the ARN or the friendly name of the secret. For an ARN, we
-	// recommend that you specify a complete ARN rather than a partial ARN.
+	// The ARN or name of the secret to attach the resource-based policy. For an ARN,
+	// we recommend that you specify a complete ARN rather than a partial ARN.
 	//
 	// This member is required.
 	SecretId *string
 
-	// (Optional) If you set the parameter, BlockPublicPolicy to true, then you block
-	// resource-based policies that allow broad access to the secret.
+	// Specifies whether to block resource-based policies that allow broad access to
+	// the secret. By default, Secrets Manager blocks policies that allow broad access,
+	// for example those that use a wildcard for the principal.
 	BlockPublicPolicy bool
 
 	noSmithyDocumentSerde
@@ -82,10 +57,10 @@ type PutResourcePolicyInput struct {
 
 type PutResourcePolicyOutput struct {
 
-	// The ARN of the secret retrieved by the resource-based policy.
+	// The ARN of the secret.
 	ARN *string
 
-	// The friendly name of the secret retrieved by the resource-based policy.
+	// The name of the secret.
 	Name *string
 
 	// Metadata pertaining to the operation's result.

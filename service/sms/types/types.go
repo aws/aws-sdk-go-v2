@@ -52,7 +52,8 @@ type AppSummary struct {
 	// A message related to the replication status of the application.
 	ReplicationStatusMessage *string
 
-	// The name of the service role in the customer's account used by AWS SMS.
+	// The name of the service role in the customer's account used by Server Migration
+	// Service.
 	RoleName *string
 
 	// Status of the application.
@@ -211,7 +212,7 @@ type ReplicationJob struct {
 	// Information about the replication runs.
 	ReplicationRunList []ReplicationRun
 
-	// The name of the IAM role to be used by AWS SMS.
+	// The name of the IAM role to be used by Server Migration Service.
 	RoleName *string
 
 	// Indicates whether to run the replication job one time.
@@ -414,7 +415,7 @@ type ServerLaunchConfiguration struct {
 	// The instance type to use when launching the server.
 	InstanceType *string
 
-	// The logical ID of the server in the AWS CloudFormation template.
+	// The logical ID of the server in the CloudFormation template.
 	LogicalId *string
 
 	// The ID of the security group that applies to the launched server.
@@ -540,7 +541,7 @@ type SSMOutput struct {
 // Contains validation parameters.
 type SSMValidationParameters struct {
 
-	// The command to run the validation script
+	// The command to run the validation script.
 	Command *string
 
 	// The timeout interval, in seconds.

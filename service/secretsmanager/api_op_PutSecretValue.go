@@ -11,84 +11,26 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Stores a new encrypted secret value in the specified secret. To do this, the
-// operation creates a new version and attaches it to the secret. The version can
-// contain a new SecretString value or a new SecretBinary value. You can also
-// specify the staging labels that are initially attached to the new version. We
-// recommend you avoid calling PutSecretValue at a sustained rate of more than once
-// every 10 minutes. When you update the secret value, Secrets Manager creates a
-// new version of the secret. Secrets Manager removes outdated versions when there
-// are more than 100, but it does not remove versions created less than 24 hours
-// ago. If you call PutSecretValue more than once every 10 minutes, you create more
-// versions than Secrets Manager removes, and you will reach the quota for secret
-// versions.
-//
-// * If this operation creates the first version for the secret then
-// Secrets Manager automatically attaches the staging label AWSCURRENT to the new
-// version.
-//
-// * If you do not specify a value for VersionStages then Secrets Manager
-// automatically moves the staging label AWSCURRENT to this new version.
-//
-// * If this
-// operation moves the staging label AWSCURRENT from another version to this
-// version, then Secrets Manager also automatically moves the staging label
-// AWSPREVIOUS to the version that AWSCURRENT was removed from.
-//
-// * This operation
-// is idempotent. If a version with a VersionId with the same value as the
-// ClientRequestToken parameter already exists and you specify the same secret
-// data, the operation succeeds but does nothing. However, if the secret data is
-// different, then the operation fails because you cannot modify an existing
-// version; you can only create new ones.
-//
-// * If you call an operation to encrypt or
-// decrypt the SecretString or SecretBinary for a secret in the same account as the
-// calling user and that secret doesn't specify a Amazon Web Services KMS
-// encryption key, Secrets Manager uses the account's default Amazon Web Services
-// managed customer master key (CMK) with the alias aws/secretsmanager. If this key
-// doesn't already exist in your account then Secrets Manager creates it for you
-// automatically. All users and roles in the same Amazon Web Services account
-// automatically have access to use the default CMK. Note that if an Secrets
-// Manager API call results in Amazon Web Services creating the account's Amazon
-// Web Services-managed CMK, it can result in a one-time significant delay in
-// returning the result.
-//
-// * If the secret resides in a different Amazon Web
-// Services account from the credentials calling an API that requires encryption or
-// decryption of the secret value then you must create and use a custom Amazon Web
-// Services KMS CMK because you can't access the default CMK for the account using
-// credentials from a different Amazon Web Services account. Store the ARN of the
-// CMK in the secret when you create the secret or when you update it by including
-// it in the KMSKeyId. If you call an API that must encrypt or decrypt SecretString
-// or SecretBinary using credentials from a different account then the Amazon Web
-// Services KMS key policy must grant cross-account access to that other account's
-// user or role for both the kms:GenerateDataKey and kms:Decrypt
-// operations.
-//
-// Minimum permissions To run this command, you must have the
-// following permissions:
-//
-// * secretsmanager:PutSecretValue
-//
-// * kms:GenerateDataKey -
-// needed only if you use a customer-managed Amazon Web Services KMS key to encrypt
-// the secret. You do not need this permission to use the account's default Amazon
-// Web Services managed CMK for Secrets Manager.
-//
-// Related operations
-//
-// * To retrieve
-// the encrypted value you store in the version of a secret, use GetSecretValue.
-//
-// *
-// To create a secret, use CreateSecret.
-//
-// * To get the details for a secret, use
-// DescribeSecret.
-//
-// * To list the versions attached to a secret, use
-// ListSecretVersionIds.
+// Creates a new version with a new encrypted secret value and attaches it to the
+// secret. The version can contain a new SecretString value or a new SecretBinary
+// value. We recommend you avoid calling PutSecretValue at a sustained rate of more
+// than once every 10 minutes. When you update the secret value, Secrets Manager
+// creates a new version of the secret. Secrets Manager removes outdated versions
+// when there are more than 100, but it does not remove versions created less than
+// 24 hours ago. If you call PutSecretValue more than once every 10 minutes, you
+// create more versions than Secrets Manager removes, and you will reach the quota
+// for secret versions. You can specify the staging labels to attach to the new
+// version in VersionStages. If you don't include VersionStages, then Secrets
+// Manager automatically moves the staging label AWSCURRENT to this version. If
+// this operation creates the first version for the secret, then Secrets Manager
+// automatically attaches the staging label AWSCURRENT to it . If this operation
+// moves the staging label AWSCURRENT from another version to this version, then
+// Secrets Manager also automatically moves the staging label AWSPREVIOUS to the
+// version that AWSCURRENT was removed from. This operation is idempotent. If a
+// version with a VersionId with the same value as the ClientRequestToken parameter
+// already exists, and you specify the same secret data, the operation succeeds but
+// does nothing. However, if the secret data is different, then the operation fails
+// because you can't modify an existing version; you can only create new ones.
 func (c *Client) PutSecretValue(ctx context.Context, params *PutSecretValueInput, optFns ...func(*Options)) (*PutSecretValueOutput, error) {
 	if params == nil {
 		params = &PutSecretValueInput{}
@@ -106,24 +48,22 @@ func (c *Client) PutSecretValue(ctx context.Context, params *PutSecretValueInput
 
 type PutSecretValueInput struct {
 
-	// Specifies the secret to which you want to add a new version. You can specify
-	// either the Amazon Resource Name (ARN) or the friendly name of the secret. The
-	// secret must already exist. For an ARN, we recommend that you specify a complete
-	// ARN rather than a partial ARN.
+	// The ARN or name of the secret to add a new version to. For an ARN, we recommend
+	// that you specify a complete ARN rather than a partial ARN. If the secret doesn't
+	// already exist, use CreateSecret instead.
 	//
 	// This member is required.
 	SecretId *string
 
-	// (Optional) Specifies a unique identifier for the new version of the secret. If
-	// you use the Amazon Web Services CLI or one of the Amazon Web Services SDK to
-	// call this operation, then you can leave this parameter empty. The CLI or SDK
-	// generates a random UUID for you and includes that in the request. If you don't
-	// use the SDK and instead generate a raw HTTP request to the Secrets Manager
-	// service endpoint, then you must generate a ClientRequestToken yourself for new
-	// versions and include that value in the request. This value helps ensure
+	// A unique identifier for the new version of the secret. If you use the Amazon Web
+	// Services CLI or one of the Amazon Web Services SDKs to call this operation, then
+	// you can leave this parameter empty because they generate a random UUID for you.
+	// If you don't use the SDK and instead generate a raw HTTP request to the Secrets
+	// Manager service endpoint, then you must generate a ClientRequestToken yourself
+	// for new versions and include that value in the request. This value helps ensure
 	// idempotency. Secrets Manager uses this value to prevent the accidental creation
 	// of duplicate versions if there are failures and retries during the Lambda
-	// rotation function's processing. We recommend that you generate a UUID-type
+	// rotation function processing. We recommend that you generate a UUID-type
 	// (https://wikipedia.org/wiki/Universally_unique_identifier) value to ensure
 	// uniqueness within the specified secret.
 	//
@@ -133,47 +73,38 @@ type PutSecretValueInput struct {
 	//
 	// * If a version with this value already exists and that version's
 	// SecretString or SecretBinary values are the same as those in the request then
-	// the request is ignored (the operation is idempotent).
+	// the request is ignored. The operation is idempotent.
 	//
 	// * If a version with this
 	// value already exists and the version of the SecretString and SecretBinary values
-	// are different from those in the request then the request fails because you
-	// cannot modify an existing secret version. You can only create new versions to
-	// store new secret values.
+	// are different from those in the request, then the request fails because you
+	// can't modify a secret version. You can only create new versions to store new
+	// secret values.
 	//
 	// This value becomes the VersionId of the new version.
 	ClientRequestToken *string
 
-	// (Optional) Specifies binary data that you want to encrypt and store in the new
-	// version of the secret. To use this parameter in the command-line tools, we
-	// recommend that you store your binary data in a file and then use the appropriate
-	// technique for your tool to pass the contents of the file as a parameter. Either
-	// SecretBinary or SecretString must have a value, but not both. They cannot both
-	// be empty. This parameter is not accessible if the secret using the Secrets
-	// Manager console.
+	// The binary data to encrypt and store in the new version of the secret. To use
+	// this parameter in the command-line tools, we recommend that you store your
+	// binary data in a file and then pass the contents of the file as a parameter. You
+	// must include SecretBinary or SecretString, but not both. You can't access this
+	// value from the Secrets Manager console.
 	SecretBinary []byte
 
-	// (Optional) Specifies text data that you want to encrypt and store in this new
-	// version of the secret. Either SecretString or SecretBinary must have a value,
-	// but not both. They cannot both be empty. If you create this secret by using the
-	// Secrets Manager console then Secrets Manager puts the protected secret text in
-	// only the SecretString parameter. The Secrets Manager console stores the
-	// information as a JSON structure of key/value pairs that the default Lambda
-	// rotation function knows how to parse. For storing multiple values, we recommend
-	// that you use a JSON text string argument and specify key/value pairs. For more
-	// information, see Specifying parameter values for the Amazon Web Services CLI
-	// (https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters.html) in
-	// the Amazon Web Services CLI User Guide.
+	// The text to encrypt and store in the new version of the secret. You must include
+	// SecretBinary or SecretString, but not both. We recommend you create the secret
+	// string as JSON key/value pairs, as shown in the example.
 	SecretString *string
 
-	// (Optional) Specifies a list of staging labels that are attached to this version
-	// of the secret. These staging labels are used to track the versions through the
-	// rotation process by the Lambda rotation function. A staging label must be unique
-	// to a single version of the secret. If you specify a staging label that's already
-	// associated with a different version of the same secret then that staging label
-	// is automatically removed from the other version and attached to this version. If
-	// you do not specify a value for VersionStages then Secrets Manager automatically
-	// moves the staging label AWSCURRENT to this new version.
+	// A list of staging labels to attach to this version of the secret. Secrets
+	// Manager uses staging labels to track versions of a secret through the rotation
+	// process. If you specify a staging label that's already associated with a
+	// different version of the same secret, then Secrets Manager removes the label
+	// from the other version and attaches it to this version. If you specify
+	// AWSCURRENT, and it is already attached to another version, then Secrets Manager
+	// also moves the staging label AWSPREVIOUS to the version that AWSCURRENT was
+	// removed from. If you don't include VersionStages, then Secrets Manager
+	// automatically moves the staging label AWSCURRENT to this version.
 	VersionStages []string
 
 	noSmithyDocumentSerde
@@ -181,19 +112,18 @@ type PutSecretValueInput struct {
 
 type PutSecretValueOutput struct {
 
-	// The Amazon Resource Name (ARN) for the secret for which you just created a
-	// version.
+	// The ARN of the secret.
 	ARN *string
 
-	// The friendly name of the secret for which you just created or updated a version.
+	// The name of the secret.
 	Name *string
 
-	// The unique identifier of the version of the secret you just created or updated.
+	// The unique identifier of the version of the secret.
 	VersionId *string
 
 	// The list of staging labels that are currently attached to this version of the
-	// secret. Staging labels are used to track a version as it progresses through the
-	// secret rotation process.
+	// secret. Secrets Manager uses staging labels to track a version as it progresses
+	// through the secret rotation process.
 	VersionStages []string
 
 	// Metadata pertaining to the operation's result.

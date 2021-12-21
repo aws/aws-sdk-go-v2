@@ -28,7 +28,6 @@ func (c *Client) PutLaunchProfileMembers(ctx context.Context, params *PutLaunchP
 	return out, nil
 }
 
-//
 type PutLaunchProfileMembersInput struct {
 
 	// The ID of the identity store.

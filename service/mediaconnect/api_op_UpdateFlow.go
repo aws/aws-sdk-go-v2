@@ -35,7 +35,7 @@ type UpdateFlowInput struct {
 	// This member is required.
 	FlowArn *string
 
-	// The settings for source failover
+	// The settings for source failover.
 	SourceFailoverConfig *types.UpdateFailoverConfig
 
 	noSmithyDocumentSerde

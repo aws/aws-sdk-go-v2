@@ -58,8 +58,8 @@ type UpdateFlowSourceInput struct {
 	// The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.
 	MaxBitrate int32
 
-	// The maximum latency in milliseconds. This parameter applies only to RIST-based
-	// and Zixi-based streams.
+	// The maximum latency in milliseconds. This parameter applies only to RIST-based,
+	// Zixi-based, and Fujitsu-based streams.
 	MaxLatency int32
 
 	// The size of the buffer (in milliseconds) to use to sync incoming source data.
@@ -78,6 +78,14 @@ type UpdateFlowSourceInput struct {
 
 	// The protocol that is used by the source.
 	Protocol types.Protocol
+
+	// The port that the flow uses to send outbound requests to initiate connection
+	// with the sender.
+	SenderControlPort int32
+
+	// The IP address that the flow communicates with to initiate connection with the
+	// sender.
+	SenderIpAddress *string
 
 	// The stream ID that you want to use for this transport. This parameter applies
 	// only to Zixi-based streams.

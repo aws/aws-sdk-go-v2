@@ -31,6 +31,21 @@
     "shapes": {
         "com.amazonaws.savingsplans#AWSSavingsPlan": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "savingsplans",
+                    "arnNamespace": "savingsplans",
+                    "cloudFormationName": "Savingsplans",
+                    "cloudTrailEventSource": "savingsplans.amazonaws.com",
+                    "endpointPrefix": "savingsplans"
+                },
+                "aws.auth#sigv4": {
+                    "name": "savingsplans"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>Savings Plans are a pricing model that offer significant savings on AWS usage (for\n        example, on Amazon EC2 instances). You commit to a consistent amount of usage, in USD\n        per hour, for a term of 1 or 3 years, and receive a lower price for that usage. For\n        more information, see the <a href=\"https://docs.aws.amazon.com/savingsplans/latest/userguide/\">AWS Savings Plans User Guide</a>.</p>",
+                "smithy.api#title": "AWS Savings Plans"
+            },
             "version": "2019-06-28",
             "operations": [
                 {
@@ -60,22 +75,7 @@
                 {
                     "target": "com.amazonaws.savingsplans#UntagResource"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "savingsplans",
-                    "arnNamespace": "savingsplans",
-                    "cloudFormationName": "Savingsplans",
-                    "cloudTrailEventSource": "savingsplans.amazonaws.com",
-                    "endpointPrefix": "savingsplans"
-                },
-                "aws.auth#sigv4": {
-                    "name": "savingsplans"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Savings Plans are a pricing model that offer significant savings on AWS usage (for\n        example, on Amazon EC2 instances). You commit to a consistent amount of usage, in USD\n        per hour, for a term of 1 or 3 years, and receive a lower price for that usage. For\n        more information, see the <a href=\"https://docs.aws.amazon.com/savingsplans/latest/userguide/\">AWS Savings Plans User Guide</a>.</p>",
-                "smithy.api#title": "AWS Savings Plans"
-            }
+            ]
         },
         "com.amazonaws.savingsplans#Amount": {
             "type": "string"
@@ -127,7 +127,7 @@
                 "commitment": {
                     "target": "com.amazonaws.savingsplans#Amount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The hourly commitment, in USD. This is a value between 0.001 and 1 million. You cannot specify more\n        than three digits after the decimal point.</p>",
+                        "smithy.api#documentation": "<p>The hourly commitment, in USD. This is a value between 0.001 and 1 million. You cannot specify more\n        than five digits after the decimal point.</p>",
                         "smithy.api#required": {}
                     }
                 },

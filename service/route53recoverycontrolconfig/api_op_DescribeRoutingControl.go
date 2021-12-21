@@ -39,8 +39,7 @@ func (c *Client) DescribeRoutingControl(ctx context.Context, params *DescribeRou
 
 type DescribeRoutingControlInput struct {
 
-	// The Amazon Resource Name (ARN) of the routing control that you're getting
-	// details for.
+	// The Amazon Resource Name (ARN) of the routing control.
 	//
 	// This member is required.
 	RoutingControlArn *string

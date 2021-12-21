@@ -170,6 +170,24 @@ func (JsonFileCompression) Values() []JsonFileCompression {
 	}
 }
 
+type RelationshipType string
+
+// Enum values for RelationshipType
+const (
+	RelationshipTypeCauseOfInputAnomalyGroup  RelationshipType = "CAUSE_OF_INPUT_ANOMALY_GROUP"
+	RelationshipTypeEffectOfInputAnomalyGroup RelationshipType = "EFFECT_OF_INPUT_ANOMALY_GROUP"
+)
+
+// Values returns all known values for RelationshipType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RelationshipType) Values() []RelationshipType {
+	return []RelationshipType{
+		"CAUSE_OF_INPUT_ANOMALY_GROUP",
+		"EFFECT_OF_INPUT_ANOMALY_GROUP",
+	}
+}
+
 type ValidationExceptionReason string
 
 // Enum values for ValidationExceptionReason

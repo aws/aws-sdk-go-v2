@@ -10,11 +10,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Accepts the transfer of a domain from another AWS account to the current AWS
-// account. You initiate a transfer between AWS accounts using
-// TransferDomainToAnotherAwsAccount
+// Accepts the transfer of a domain from another Amazon Web Services account to the
+// currentAmazon Web Services account. You initiate a transfer between Amazon Web
+// Services accounts using TransferDomainToAnotherAwsAccount
 // (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html).
-// Use either ListOperations
+// If you use the CLI command at accept-domain-transfer-from-another-aws-account
+// (https://docs.aws.amazon.com/cli/latest/reference/route53domains/accept-domain-transfer-from-another-aws-account.html),
+// use JSON format as input instead of text because otherwise CLI will throw an
+// error from domain transfer input that includes single quotes. Use either
+// ListOperations
 // (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ListOperations.html)
 // or GetOperationDetail
 // (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html)
@@ -41,8 +45,8 @@ func (c *Client) AcceptDomainTransferFromAnotherAwsAccount(ctx context.Context, 
 // elements.
 type AcceptDomainTransferFromAnotherAwsAccountInput struct {
 
-	// The name of the domain that was specified when another AWS account submitted a
-	// TransferDomainToAnotherAwsAccount
+	// The name of the domain that was specified when another Amazon Web Services
+	// account submitted a TransferDomainToAnotherAwsAccount
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html)
 	// request.
 	//

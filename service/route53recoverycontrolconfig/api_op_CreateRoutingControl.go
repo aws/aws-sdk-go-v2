@@ -45,7 +45,8 @@ type CreateRoutingControlInput struct {
 	// This member is required.
 	RoutingControlName *string
 
-	// Unique client idempotency token.
+	// A unique, case-sensitive string of up to 64 ASCII characters. To make an
+	// idempotent API request with an action, specify a client token in the request.
 	ClientToken *string
 
 	// The Amazon Resource Name (ARN) of the control panel that includes the routing

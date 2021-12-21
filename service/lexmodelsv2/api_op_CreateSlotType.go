@@ -56,6 +56,23 @@ type CreateSlotTypeInput struct {
 	// This member is required.
 	SlotTypeName *string
 
+	// A description of the slot type. Use the description to help identify the slot
+	// type in lists.
+	Description *string
+
+	// Sets the type of external information used to create the slot type.
+	ExternalSourceSetting *types.ExternalSourceSetting
+
+	// The built-in slot type used as a parent of this slot type. When you define a
+	// parent slot type, the new slot type has the configuration of the parent slot
+	// type. Only AMAZON.AlphaNumeric is supported.
+	ParentSlotTypeSignature *string
+
+	// A list of SlotTypeValue objects that defines the values that the slot type can
+	// take. Each value can have a list of synonyms, additional values that help train
+	// the machine learning model about the values that it resolves for a slot.
+	SlotTypeValues []types.SlotTypeValue
+
 	// Determines the strategy that Amazon Lex uses to select a value from the list of
 	// possible values. The field can be set to one of the following values:
 	//
@@ -69,23 +86,7 @@ type CreateSlotTypeInput struct {
 	//
 	// If you don't specify the valueSelectionSetting
 	// parameter, the default is OriginalValue.
-	//
-	// This member is required.
 	ValueSelectionSetting *types.SlotValueSelectionSetting
-
-	// A description of the slot type. Use the description to help identify the slot
-	// type in lists.
-	Description *string
-
-	// The built-in slot type used as a parent of this slot type. When you define a
-	// parent slot type, the new slot type has the configuration of the parent slot
-	// type. Only AMAZON.AlphaNumeric is supported.
-	ParentSlotTypeSignature *string
-
-	// A list of SlotTypeValue objects that defines the values that the slot type can
-	// take. Each value can have a list of synonyms, additional values that help train
-	// the machine learning model about the values that it resolves for a slot.
-	SlotTypeValues []types.SlotTypeValue
 
 	noSmithyDocumentSerde
 }
@@ -103,6 +104,9 @@ type CreateSlotTypeOutput struct {
 
 	// The description specified for the slot type.
 	Description *string
+
+	// The type of external information used to create the slot type.
+	ExternalSourceSetting *types.ExternalSourceSetting
 
 	// The specified language and local specified for the slot type.
 	LocaleId *string

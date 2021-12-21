@@ -12,11 +12,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of predictors created using the CreatePredictor operation. For
-// each predictor, this operation returns a summary of its properties, including
-// its Amazon Resource Name (ARN). You can retrieve the complete set of properties
-// by using the ARN with the DescribePredictor operation. You can filter the list
-// using an array of Filter objects.
+// Returns a list of predictors created using the CreateAutoPredictor or
+// CreatePredictor operations. For each predictor, this operation returns a summary
+// of its properties, including its Amazon Resource Name (ARN). You can retrieve
+// the complete set of properties by using the ARN with the DescribeAutoPredictor
+// and DescribePredictor operations. You can filter the list using an array of
+// Filter objects.
 func (c *Client) ListPredictors(ctx context.Context, params *ListPredictorsInput, optFns ...func(*Options)) (*ListPredictorsOutput, error) {
 	if params == nil {
 		params = &ListPredictorsInput{}

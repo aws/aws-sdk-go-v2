@@ -82,6 +82,7 @@ const (
 	CloudWatchRegionApSouth1     CloudWatchRegion = "ap-south-1"
 	CloudWatchRegionApSoutheast1 CloudWatchRegion = "ap-southeast-1"
 	CloudWatchRegionApSoutheast2 CloudWatchRegion = "ap-southeast-2"
+	CloudWatchRegionApSoutheast3 CloudWatchRegion = "ap-southeast-3"
 	CloudWatchRegionApNortheast1 CloudWatchRegion = "ap-northeast-1"
 	CloudWatchRegionApNortheast2 CloudWatchRegion = "ap-northeast-2"
 	CloudWatchRegionApNortheast3 CloudWatchRegion = "ap-northeast-3"
@@ -94,6 +95,7 @@ const (
 	CloudWatchRegionUsGovWest1   CloudWatchRegion = "us-gov-west-1"
 	CloudWatchRegionUsGovEast1   CloudWatchRegion = "us-gov-east-1"
 	CloudWatchRegionUsIsoEast1   CloudWatchRegion = "us-iso-east-1"
+	CloudWatchRegionUsIsoWest1   CloudWatchRegion = "us-iso-west-1"
 	CloudWatchRegionUsIsobEast1  CloudWatchRegion = "us-isob-east-1"
 )
 
@@ -116,6 +118,7 @@ func (CloudWatchRegion) Values() []CloudWatchRegion {
 		"ap-south-1",
 		"ap-southeast-1",
 		"ap-southeast-2",
+		"ap-southeast-3",
 		"ap-northeast-1",
 		"ap-northeast-2",
 		"ap-northeast-3",
@@ -128,6 +131,7 @@ func (CloudWatchRegion) Values() []CloudWatchRegion {
 		"us-gov-west-1",
 		"us-gov-east-1",
 		"us-iso-east-1",
+		"us-iso-west-1",
 		"us-isob-east-1",
 	}
 }
@@ -307,6 +311,7 @@ const (
 	ResourceRecordSetRegionEuCentral1   ResourceRecordSetRegion = "eu-central-1"
 	ResourceRecordSetRegionApSoutheast1 ResourceRecordSetRegion = "ap-southeast-1"
 	ResourceRecordSetRegionApSoutheast2 ResourceRecordSetRegion = "ap-southeast-2"
+	ResourceRecordSetRegionApSoutheast3 ResourceRecordSetRegion = "ap-southeast-3"
 	ResourceRecordSetRegionApNortheast1 ResourceRecordSetRegion = "ap-northeast-1"
 	ResourceRecordSetRegionApNortheast2 ResourceRecordSetRegion = "ap-northeast-2"
 	ResourceRecordSetRegionApNortheast3 ResourceRecordSetRegion = "ap-northeast-3"
@@ -337,6 +342,7 @@ func (ResourceRecordSetRegion) Values() []ResourceRecordSetRegion {
 		"eu-central-1",
 		"ap-southeast-1",
 		"ap-southeast-2",
+		"ap-southeast-3",
 		"ap-northeast-1",
 		"ap-northeast-2",
 		"ap-northeast-3",
@@ -468,9 +474,11 @@ const (
 	VPCRegionUsGovWest1   VPCRegion = "us-gov-west-1"
 	VPCRegionUsGovEast1   VPCRegion = "us-gov-east-1"
 	VPCRegionUsIsoEast1   VPCRegion = "us-iso-east-1"
+	VPCRegionUsIsoWest1   VPCRegion = "us-iso-west-1"
 	VPCRegionUsIsobEast1  VPCRegion = "us-isob-east-1"
 	VPCRegionApSoutheast1 VPCRegion = "ap-southeast-1"
 	VPCRegionApSoutheast2 VPCRegion = "ap-southeast-2"
+	VPCRegionApSoutheast3 VPCRegion = "ap-southeast-3"
 	VPCRegionApSouth1     VPCRegion = "ap-south-1"
 	VPCRegionApNortheast1 VPCRegion = "ap-northeast-1"
 	VPCRegionApNortheast2 VPCRegion = "ap-northeast-2"
@@ -501,9 +509,11 @@ func (VPCRegion) Values() []VPCRegion {
 		"us-gov-west-1",
 		"us-gov-east-1",
 		"us-iso-east-1",
+		"us-iso-west-1",
 		"us-isob-east-1",
 		"ap-southeast-1",
 		"ap-southeast-2",
+		"ap-southeast-3",
 		"ap-south-1",
 		"ap-northeast-1",
 		"ap-northeast-2",

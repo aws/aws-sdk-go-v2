@@ -25,6 +25,11 @@ import (
 // Forecast Export Job
 //
 // * Predictor Backtest Export Job
+//
+// * Explainability Job
+//
+// *
+// Explainability Export Job
 func (c *Client) StopResource(ctx context.Context, params *StopResourceInput, optFns ...func(*Options)) (*StopResourceOutput, error) {
 	if params == nil {
 		params = &StopResourceInput{}
@@ -44,7 +49,8 @@ type StopResourceInput struct {
 
 	// The Amazon Resource Name (ARN) that identifies the resource to stop. The
 	// supported ARNs are DatasetImportJobArn, PredictorArn,
-	// PredictorBacktestExportJobArn, ForecastArn, and ForecastExportJobArn.
+	// PredictorBacktestExportJobArn, ForecastArn, ForecastExportJobArn,
+	// ExplainabilityArn, and ExplainabilityExportArn.
 	//
 	// This member is required.
 	ResourceArn *string

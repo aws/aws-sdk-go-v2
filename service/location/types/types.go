@@ -332,8 +332,14 @@ type DevicePosition struct {
 	// This member is required.
 	SampleTime *time.Time
 
+	// The accuracy of the device position.
+	Accuracy *PositionalAccuracy
+
 	// The device whose position you retrieved.
 	DeviceId *string
+
+	// The properties associated with the position.
+	PositionProperties map[string]string
 
 	noSmithyDocumentSerde
 }
@@ -359,6 +365,14 @@ type DevicePositionUpdate struct {
 	//
 	// This member is required.
 	SampleTime *time.Time
+
+	// The accuracy of the device position.
+	Accuracy *PositionalAccuracy
+
+	// Associates one of more properties with the position update. A property is a
+	// key-value pair stored with the position update and added to any geofence event
+	// the update may trigger. Format: "key" : "value"
+	PositionProperties map[string]string
 
 	noSmithyDocumentSerde
 }
@@ -484,6 +498,12 @@ type ListDevicePositionsResponseEntry struct {
 	//
 	// This member is required.
 	SampleTime *time.Time
+
+	// The accuracy of the device position.
+	Accuracy *PositionalAccuracy
+
+	// The properties associated with the position.
+	PositionProperties map[string]string
 
 	noSmithyDocumentSerde
 }
@@ -891,6 +911,18 @@ type PlaceGeometry struct {
 	noSmithyDocumentSerde
 }
 
+// Defines the level of certainty of the position.
+type PositionalAccuracy struct {
+
+	// Estimated maximum distance, in meters, between the measured position and the
+	// true position of a device, along the Earth's surface.
+	//
+	// This member is required.
+	Horizontal *float64
+
+	noSmithyDocumentSerde
+}
+
 // Contains a search result from a position search query that is run on a place
 // index resource.
 type SearchForPositionResult struct {
@@ -906,6 +938,18 @@ type SearchForPositionResult struct {
 	//
 	// This member is required.
 	Place *Place
+
+	noSmithyDocumentSerde
+}
+
+// Contains a place suggestion resulting from a place suggestion query that is run
+// on a place index resource.
+type SearchForSuggestionsResult struct {
+
+	// The text of the place suggestion, typically formatted as an address string.
+	//
+	// This member is required.
+	Text *string
 
 	noSmithyDocumentSerde
 }
@@ -968,6 +1012,52 @@ type SearchPlaceIndexForPositionSummary struct {
 	noSmithyDocumentSerde
 }
 
+// A summary of the request sent by using SearchPlaceIndexForSuggestions.
+type SearchPlaceIndexForSuggestionsSummary struct {
+
+	// The geospatial data provider attached to the place index resource specified in
+	// the request. Values can be one of the following:
+	//
+	// * Esri
+	//
+	// * Here
+	//
+	// For more
+	// information about data providers, see Amazon Location Service data providers
+	// (https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html).
+	//
+	// This member is required.
+	DataSource *string
+
+	// The free-form partial text input specified in the request.
+	//
+	// This member is required.
+	Text *string
+
+	// Contains the coordinates for the optional bias position specified in the
+	// request. This parameter contains a pair of numbers. The first number represents
+	// the X coordinate, or longitude; the second number represents the Y coordinate,
+	// or latitude. For example, [-123.1174, 49.2847] represents the position with
+	// longitude -123.1174 and latitude 49.2847.
+	BiasPosition []float64
+
+	// Contains the coordinates for the optional bounding box specified in the request.
+	FilterBBox []float64
+
+	// Contains the optional country filter specified in the request.
+	FilterCountries []string
+
+	// The preferred language used to return results. Matches the language in the
+	// request. The value is a valid BCP 47 (https://tools.ietf.org/search/bcp47)
+	// language tag, for example, en for English.
+	Language *string
+
+	// Contains the optional result count limit specified in the request.
+	MaxResults *int32
+
+	noSmithyDocumentSerde
+}
+
 // A summary of the request sent by using SearchPlaceIndexForText.
 type SearchPlaceIndexForTextSummary struct {
 
@@ -991,7 +1081,10 @@ type SearchPlaceIndexForTextSummary struct {
 	Text *string
 
 	// Contains the coordinates for the optional bias position specified in the
-	// request.
+	// request. This parameter contains a pair of numbers. The first number represents
+	// the X coordinate, or longitude; the second number represents the Y coordinate,
+	// or latitude. For example, [-123.1174, 49.2847] represents the position with
+	// longitude -123.1174 and latitude 49.2847.
 	BiasPosition []float64
 
 	// Contains the coordinates for the optional bounding box specified in the request.

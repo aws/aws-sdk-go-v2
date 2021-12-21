@@ -48,7 +48,6 @@ type DeleteStreamingImageInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type DeleteStreamingImageOutput struct {
 
 	// The streaming image.

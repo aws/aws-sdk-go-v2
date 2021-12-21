@@ -3073,8 +3073,7 @@
                 "valueSelectionSetting": {
                     "target": "com.amazonaws.lexmodelsv2#SlotValueSelectionSetting",
                     "traits": {
-                        "smithy.api#documentation": "<p>Determines the strategy that Amazon Lex uses to select a value from the\n         list of possible values. The field can be set to one of the following\n         values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>OriginalValue</code> - Returns the value entered by the\n               user, if the user value is similar to the slot value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TopResolution</code> - If there is a resolution list for\n               the slot, return the first value in the resolution list. If there\n               is no resolution list, return null.</p>\n            </li>\n         </ul>\n         <p>If you don't specify the <code>valueSelectionSetting</code>\n         parameter, the default is <code>OriginalValue</code>.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Determines the strategy that Amazon Lex uses to select a value from the\n         list of possible values. The field can be set to one of the following\n         values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>OriginalValue</code> - Returns the value entered by the\n               user, if the user value is similar to the slot value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TopResolution</code> - If there is a resolution list for\n               the slot, return the first value in the resolution list. If there\n               is no resolution list, return null.</p>\n            </li>\n         </ul>\n         <p>If you don't specify the <code>valueSelectionSetting</code>\n         parameter, the default is <code>OriginalValue</code>.</p>"
                     }
                 },
                 "parentSlotTypeSignature": {
@@ -3105,6 +3104,12 @@
                         "smithy.api#documentation": "<p>The identifier of the language and locale that the slot type will be\n         used in. The string must match one of the supported locales. All of the\n         bots, intents, and slots used by the slot type must have the same\n         locale. For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "externalSourceSetting": {
+                    "target": "com.amazonaws.lexmodelsv2#ExternalSourceSetting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets the type of external information used to create the slot\n         type.</p>"
                     }
                 }
             }
@@ -3170,6 +3175,12 @@
                     "target": "com.amazonaws.lexmodelsv2#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>A timestamp of the date and time that the slot type was\n         created.</p>"
+                    }
+                },
+                "externalSourceSetting": {
+                    "target": "com.amazonaws.lexmodelsv2#ExternalSourceSetting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of external information used to create the slot\n         type.</p>"
                     }
                 }
             }
@@ -4758,6 +4769,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>History of changes, such as when a locale is used in an alias, that\n         have taken place for the locale.</p>"
                     }
+                },
+                "recommendedActions": {
+                    "target": "com.amazonaws.lexmodelsv2#RecommendedActions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Recommended actions to take to resolve an error in the\n            <code>failureReasons</code> field.</p>"
+                    }
                 }
             }
         },
@@ -5961,6 +5978,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A timestamp of the date and time that the slot type was last\n         updated.</p>"
                     }
+                },
+                "externalSourceSetting": {
+                    "target": "com.amazonaws.lexmodelsv2#ExternalSourceSetting"
                 }
             }
         },
@@ -6235,6 +6255,20 @@
                 "target": "com.amazonaws.lexmodelsv2#ExportSummary"
             }
         },
+        "com.amazonaws.lexmodelsv2#ExternalSourceSetting": {
+            "type": "structure",
+            "members": {
+                "grammarSlotTypeSetting": {
+                    "target": "com.amazonaws.lexmodelsv2#GrammarSlotTypeSetting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings required for a slot type based on a grammar that you\n         provide.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information about the external source of the slot type's\n         definition.</p>"
+            }
+        },
         "com.amazonaws.lexmodelsv2#FailureReason": {
             "type": "string"
         },
@@ -6420,6 +6454,48 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Provides information for updating the user on the progress of\n         fulfilling an intent.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#GrammarSlotTypeSetting": {
+            "type": "structure",
+            "members": {
+                "source": {
+                    "target": "com.amazonaws.lexmodelsv2#GrammarSlotTypeSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source of the grammar used to create the slot type.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Settings requried for a slot type based on a grammar that you\n         provide.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#GrammarSlotTypeSource": {
+            "type": "structure",
+            "members": {
+                "s3BucketName": {
+                    "target": "com.amazonaws.lexmodelsv2#S3BucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the S3 bucket that contains the grammar source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "s3ObjectKey": {
+                    "target": "com.amazonaws.lexmodelsv2#S3ObjectPath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path to the grammar in the S3 bucket.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "kmsKeyArn": {
+                    "target": "com.amazonaws.lexmodelsv2#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon KMS key required to decrypt the contents of the grammar,\n         if any.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the Amazon S3 bucket name and location for the grammar\n         that is the source for the slot type.</p>"
             }
         },
         "com.amazonaws.lexmodelsv2#HitCount": {
@@ -9331,6 +9407,15 @@
                 }
             }
         },
+        "com.amazonaws.lexmodelsv2#RecommendedAction": {
+            "type": "string"
+        },
+        "com.amazonaws.lexmodelsv2#RecommendedActions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#RecommendedAction"
+            }
+        },
         "com.amazonaws.lexmodelsv2#RecommendedIntentSummary": {
             "type": "structure",
             "members": {
@@ -9543,6 +9628,16 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The object representing the Amazon S3 bucket containing the transcript,\n         as well as the associated metadata.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#S3ObjectPath": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[\\.\\-\\!\\*\\_\\'\\(\\)a-zA-Z0-9][\\.\\-\\!\\*\\_\\'\\(\\)\\/a-zA-Z0-9]*$"
             }
         },
         "com.amazonaws.lexmodelsv2#SSMLMessage": {
@@ -10084,6 +10179,25 @@
                 "target": "com.amazonaws.lexmodelsv2#SlotSummary"
             }
         },
+        "com.amazonaws.lexmodelsv2#SlotTypeCategory": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Custom",
+                        "name": "Custom"
+                    },
+                    {
+                        "value": "Extended",
+                        "name": "Extended"
+                    },
+                    {
+                        "value": "ExternalGrammar",
+                        "name": "ExternalGrammar"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.lexmodelsv2#SlotTypeFilter": {
             "type": "structure",
             "members": {
@@ -10120,6 +10234,10 @@
                     {
                         "value": "SlotTypeName",
                         "name": "SlotTypeName"
+                    },
+                    {
+                        "value": "ExternalSourceType",
+                        "name": "ExternalSourceType"
                     }
                 ]
             }
@@ -10236,6 +10354,12 @@
                     "target": "com.amazonaws.lexmodelsv2#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>A timestamp of the date and time that the slot type was last\n         updated.</p>"
+                    }
+                },
+                "slotTypeCategory": {
+                    "target": "com.amazonaws.lexmodelsv2#SlotTypeCategory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the type of the slot type.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Custom</code> - A slot type that you created using\n               custom values. For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/custom-slot-types.html\">Creating custom slot\n               types</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Extended</code> - A slot type created by extending the\n               AMAZON.AlphaNumeric built-in slot type. For more information, see\n                  <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/built-in-slot-alphanumerice.html\">AMAZON.AlphaNumeric</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ExternalGrammar</code> - A slot type using a custom\n               GRXML grammar to define values. For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/building-grxml.html\">Using a custom grammar slot type</a>.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -11342,6 +11466,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A timestamp of the date and time that the locale was last\n         updated.</p>"
                     }
+                },
+                "recommendedActions": {
+                    "target": "com.amazonaws.lexmodelsv2#RecommendedActions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Recommended actions to take to resolve an error in the\n            <code>failureReasons</code> field.</p>"
+                    }
                 }
             }
         },
@@ -12306,8 +12436,7 @@
                 "valueSelectionSetting": {
                     "target": "com.amazonaws.lexmodelsv2#SlotValueSelectionSetting",
                     "traits": {
-                        "smithy.api#documentation": "<p>The strategy that Amazon Lex should use when deciding on a value from the\n         list of slot type values.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The strategy that Amazon Lex should use when deciding on a value from the\n         list of slot type values.</p>"
                     }
                 },
                 "parentSlotTypeSignature": {
@@ -12339,6 +12468,9 @@
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
+                },
+                "externalSourceSetting": {
+                    "target": "com.amazonaws.lexmodelsv2#ExternalSourceSetting"
                 }
             }
         },
@@ -12410,6 +12542,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A timestamp of the date and time that the slot type was last\n         updated.</p>"
                     }
+                },
+                "externalSourceSetting": {
+                    "target": "com.amazonaws.lexmodelsv2#ExternalSourceSetting"
                 }
             }
         },
@@ -12484,7 +12619,7 @@
                 "engine": {
                     "target": "com.amazonaws.lexmodelsv2#VoiceEngine",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the type of Amazon Polly\n         voice that Amazon Lex should use for voice interaction with the user. \n      For more information, see <a href=\"https://docs.aws.amazon.com/polly/latest/dg/voicelist.html\">Voices in Amazon Polly</a>.</p>"
+                        "smithy.api#documentation": "<p>Indicates the type of Amazon Polly voice that Amazon Lex should use for voice interaction with the user. For more\n         information, see the <a href=\"https://docs.aws.amazon.com/polly/latest/dg/API_SynthesizeSpeech.html#polly-SynthesizeSpeech-request-Engine\">\n               <code>engine</code> parameter of the\n               <code>SynthesizeSpeech</code> operation</a> in the\n               <i>Amazon Polly developer guide</i>.</p>\n         <p>If you do not specify a value, the default is\n         <code>standard</code>.</p>"
                     }
                 }
             },

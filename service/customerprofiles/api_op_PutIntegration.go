@@ -37,14 +37,19 @@ type PutIntegrationInput struct {
 	// This member is required.
 	DomainName *string
 
-	// The name of the profile object type.
-	//
-	// This member is required.
-	ObjectTypeName *string
-
 	// The configuration that controls how Customer Profiles retrieves data from the
 	// source.
 	FlowDefinition *types.FlowDefinition
+
+	// The name of the profile object type.
+	ObjectTypeName *string
+
+	// A map in which each key is an event type from an external application such as
+	// Segment or Shopify, and each value is an ObjectTypeName (template) used to
+	// ingest the event. It supports the following event types: SegmentIdentify,
+	// ShopifyCreateCustomers, ShopifyUpdateCustomers, ShopifyCreateDraftOrders,
+	// ShopifyUpdateDraftOrders, ShopifyCreateOrders, and ShopifyUpdatedOrders.
+	ObjectTypeNames map[string]string
 
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
@@ -72,15 +77,20 @@ type PutIntegrationOutput struct {
 	// This member is required.
 	LastUpdatedAt *time.Time
 
-	// The name of the profile object type.
-	//
-	// This member is required.
-	ObjectTypeName *string
-
 	// The URI of the S3 bucket or any other type of data source.
 	//
 	// This member is required.
 	Uri *string
+
+	// The name of the profile object type.
+	ObjectTypeName *string
+
+	// A map in which each key is an event type from an external application such as
+	// Segment or Shopify, and each value is an ObjectTypeName (template) used to
+	// ingest the event. It supports the following event types: SegmentIdentify,
+	// ShopifyCreateCustomers, ShopifyUpdateCustomers, ShopifyCreateDraftOrders,
+	// ShopifyUpdateDraftOrders, ShopifyCreateOrders, and ShopifyUpdatedOrders.
+	ObjectTypeNames map[string]string
 
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string

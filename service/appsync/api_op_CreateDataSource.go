@@ -59,7 +59,7 @@ type CreateDataSourceInput struct {
 	// HTTP endpoint settings.
 	HttpConfig *types.HttpDataSourceConfig
 
-	// Amazon Web Services Lambda settings.
+	// Lambda settings.
 	LambdaConfig *types.LambdaDataSourceConfig
 
 	// Amazon OpenSearch Service settings.
@@ -68,8 +68,9 @@ type CreateDataSourceInput struct {
 	// Relational database settings.
 	RelationalDatabaseConfig *types.RelationalDatabaseDataSourceConfig
 
-	// The Identity and Access Management service role ARN for the data source. The
-	// system assumes this role when accessing the data source.
+	// The Identity and Access Management (IAM) service role Amazon Resource Name (ARN)
+	// for the data source. The system assumes this role when accessing the data
+	// source.
 	ServiceRoleArn *string
 
 	noSmithyDocumentSerde

@@ -13,8 +13,8 @@ import (
 )
 
 // Creates a replication job. The replication job schedules periodic replication
-// runs to replicate your server to AWS. Each replication run creates an Amazon
-// Machine Image (AMI).
+// runs to replicate your server to Amazon Web Services. Each replication run
+// creates an Amazon Machine Image (AMI).
 func (c *Client) CreateReplicationJob(ctx context.Context, params *CreateReplicationJobInput, optFns ...func(*Options)) (*CreateReplicationJobOutput, error) {
 	if params == nil {
 		params = &CreateReplicationJobInput{}
@@ -75,7 +75,7 @@ type CreateReplicationJobInput struct {
 	// the maximum number is reached and a new AMI is created.
 	NumberOfRecentAmisToKeep *int32
 
-	// The name of the IAM role to be used by the AWS SMS.
+	// The name of the IAM role to be used by the Server Migration Service.
 	RoleName *string
 
 	// Indicates whether to run the replication job one time.

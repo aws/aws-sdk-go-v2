@@ -43,7 +43,6 @@ type DeleteStudioInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type DeleteStudioOutput struct {
 
 	// Information about a studio.

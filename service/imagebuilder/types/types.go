@@ -479,6 +479,10 @@ type Distribution struct {
 	// Region.
 	LicenseConfigurationArns []string
 
+	// Configure export settings to deliver disk images created from your image build,
+	// using a file format that is compatible with your VMs in that Region.
+	S3ExportConfiguration *S3ExportConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -605,6 +609,19 @@ type Image struct {
 	// * Build version ARNs have all four nodes, and point to a
 	// specific build for a specific version of an object.
 	Arn *string
+
+	// Indicates the type of build that created this image. The build can be initiated
+	// in the following ways:
+	//
+	// * USER_INITIATED – A manual pipeline build request.
+	//
+	// *
+	// SCHEDULED – A pipeline build initiated by a cron expression in the Image Builder
+	// pipeline, or from EventBridge.
+	//
+	// * IMPORT – A VM import created the image to use
+	// as the base image for the recipe.
+	BuildType BuildType
 
 	// The recipe that is used to create an Image Builder container image.
 	ContainerRecipe *ContainerRecipe
@@ -846,6 +863,19 @@ type ImageSummary struct {
 	// The Amazon Resource Name (ARN) of the image.
 	Arn *string
 
+	// Indicates the type of build that created this image. The build can be initiated
+	// in the following ways:
+	//
+	// * USER_INITIATED – A manual pipeline build request.
+	//
+	// *
+	// SCHEDULED – A pipeline build initiated by a cron expression in the Image Builder
+	// pipeline, or from EventBridge.
+	//
+	// * IMPORT – A VM import created the image to use
+	// as the base image for the recipe.
+	BuildType BuildType
+
 	// The date on which this image was created.
 	DateCreated *string
 
@@ -880,10 +910,13 @@ type ImageSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Image tests configuration.
+// Configure image tests for your pipeline build. Tests run after building the
+// image, to verify that the AMI or container image is valid before distributing
+// it.
 type ImageTestsConfiguration struct {
 
-	// Defines if tests should be executed when building this image.
+	// Determines if tests should run after building the image. Image Builder defaults
+	// to enable tests to run following the image build, before image distribution.
 	ImageTestsEnabled *bool
 
 	// The maximum time in minutes that tests are permitted to run.
@@ -909,6 +942,19 @@ type ImageVersion struct {
 	// * Build version ARNs have all
 	// four nodes, and point to a specific build for a specific version of an object.
 	Arn *string
+
+	// Indicates the type of build that created this image. The build can be initiated
+	// in the following ways:
+	//
+	// * USER_INITIATED – A manual pipeline build request.
+	//
+	// *
+	// SCHEDULED – A pipeline build initiated by a cron expression in the Image Builder
+	// pipeline, or from EventBridge.
+	//
+	// * IMPORT – A VM import created the image to use
+	// as the base image for the recipe.
+	BuildType BuildType
 
 	// The date on which this specific version of the Image Builder image was created.
 	DateCreated *string
@@ -986,7 +1032,11 @@ type InfrastructureConfiguration struct {
 	// The security group IDs of the infrastructure configuration.
 	SecurityGroupIds []string
 
-	// The SNS topic Amazon Resource Name (ARN) of the infrastructure configuration.
+	// The Amazon Resource Name (ARN) for the SNS topic to which we send image build
+	// event notifications. EC2 Image Builder is unable to send notifications to SNS
+	// topics that are encrypted using keys from other accounts. The key that is used
+	// to encrypt the SNS topic must reside in the account that the Image Builder
+	// service runs under.
 	SnsTopicArn *string
 
 	// The subnet ID of the infrastructure configuration.
@@ -1171,13 +1221,50 @@ type OutputResources struct {
 	noSmithyDocumentSerde
 }
 
+// Properties that configure export from your build instance to a compatible file
+// format for your VM.
+type S3ExportConfiguration struct {
+
+	// Export the updated image to one of the following supported disk image
+	// formats:
+	//
+	// * Virtual Hard Disk (VHD) – Compatible with Citrix Xen and Microsoft
+	// Hyper-V virtualization products.
+	//
+	// * Stream-optimized ESX Virtual Machine Disk
+	// (VMDK) – Compatible with VMware ESX and VMware vSphere versions 4, 5, and 6.
+	//
+	// *
+	// Raw – Raw format.
+	//
+	// This member is required.
+	DiskImageFormat DiskImageFormat
+
+	// The name of the role that grants VM Import/Export permission to export images to
+	// your S3 bucket.
+	//
+	// This member is required.
+	RoleName *string
+
+	// The S3 bucket in which to store the output disk images for your VM.
+	//
+	// This member is required.
+	S3Bucket *string
+
+	// The Amazon S3 path for the bucket where the output disk images for your VM are
+	// stored.
+	S3Prefix *string
+
+	noSmithyDocumentSerde
+}
+
 // Amazon S3 logging configuration.
 type S3Logs struct {
 
-	// The Amazon S3 bucket in which to store the logs.
+	// The S3 bucket in which to store the logs.
 	S3BucketName *string
 
-	// The Amazon S3 path in which to store the logs.
+	// The Amazon S3 path to the bucket where the logs are stored.
 	S3KeyPrefix *string
 
 	noSmithyDocumentSerde

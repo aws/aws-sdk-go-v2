@@ -2168,6 +2168,44 @@
         "com.amazonaws.lookoutmetrics#Integer": {
             "type": "integer"
         },
+        "com.amazonaws.lookoutmetrics#InterMetricImpactDetails": {
+            "type": "structure",
+            "members": {
+                "MetricName": {
+                    "target": "com.amazonaws.lookoutmetrics#MetricName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the measure.</p>"
+                    }
+                },
+                "AnomalyGroupId": {
+                    "target": "com.amazonaws.lookoutmetrics#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the anomaly group.</p>"
+                    }
+                },
+                "RelationshipType": {
+                    "target": "com.amazonaws.lookoutmetrics#RelationshipType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether a measure is a potential cause of the anomaly group\n            (<code>CAUSE_OF_INPUT_ANOMALY_GROUP</code>), or whether the measure is impacted by the\n            anomaly group (<code>EFFECT_OF_INPUT_ANOMALY_GROUP</code>).</p>"
+                    }
+                },
+                "ContributionPercentage": {
+                    "target": "com.amazonaws.lookoutmetrics#MetricChangePercentage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For potential causes (<code>CAUSE_OF_INPUT_ANOMALY_GROUP</code>), the percentage\n            contribution the measure has in causing the anomalies.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Aggregated details about the measures contributing to the anomaly group, and the measures\n            potentially impacted by the anomaly group.</p>\n        <p></p>"
+            }
+        },
+        "com.amazonaws.lookoutmetrics#InterMetricImpactList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lookoutmetrics#InterMetricImpactDetails"
+            }
+        },
         "com.amazonaws.lookoutmetrics#InternalServerException": {
             "type": "structure",
             "members": {
@@ -2427,6 +2465,100 @@
                     "target": "com.amazonaws.lookoutmetrics#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>If the response is truncated, the service returns this token. To retrieve the next set of results, use the\n      token in the next request.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutmetrics#ListAnomalyGroupRelatedMetrics": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutmetrics#ListAnomalyGroupRelatedMetricsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutmetrics#ListAnomalyGroupRelatedMetricsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutmetrics#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutmetrics#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutmetrics#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutmetrics#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutmetrics#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of measures that are potential causes or effects of an\n            anomaly group.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ListAnomalyGroupRelatedMetrics",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.lookoutmetrics#ListAnomalyGroupRelatedMetricsRequest": {
+            "type": "structure",
+            "members": {
+                "AnomalyDetectorArn": {
+                    "target": "com.amazonaws.lookoutmetrics#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the anomaly detector.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AnomalyGroupId": {
+                    "target": "com.amazonaws.lookoutmetrics#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the anomaly group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RelationshipTypeFilter": {
+                    "target": "com.amazonaws.lookoutmetrics#RelationshipType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter for potential causes (<code>CAUSE_OF_INPUT_ANOMALY_GROUP</code>) or\n            downstream effects (<code>EFFECT_OF_INPUT_ANOMALY_GROUP</code>) of the anomaly group.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.lookoutmetrics#MaxResults",
+                    "traits": {
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>The maximum number of results to return.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.lookoutmetrics#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify the pagination token that's returned by a previous request to retrieve the next\n            page of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutmetrics#ListAnomalyGroupRelatedMetricsResponse": {
+            "type": "structure",
+            "members": {
+                "InterMetricImpactList": {
+                    "target": "com.amazonaws.lookoutmetrics#InterMetricImpactList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Aggregated details about the measures contributing to the anomaly group, and the measures\n            potentially impacted by the anomaly group.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.lookoutmetrics#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token that's included if more results are available.</p>"
                     }
                 }
             }
@@ -2774,6 +2906,21 @@
         },
         "com.amazonaws.lookoutmetrics#LookoutMetrics": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "LookoutMetrics",
+                    "arnNamespace": "lookoutmetrics",
+                    "cloudFormationName": "LookoutMetrics",
+                    "cloudTrailEventSource": "lookoutmetrics.amazonaws.com",
+                    "endpointPrefix": "lookoutmetrics"
+                },
+                "aws.auth#sigv4": {
+                    "name": "lookoutmetrics"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>This is the <i>Amazon Lookout for Metrics API Reference</i>. For an introduction to the service\n      with tutorials for getting started, visit <a href=\"https://docs.aws.amazon.com/lookoutmetrics/latest/dev\">Amazon\n        Lookout for Metrics Developer Guide</a>.</p>",
+                "smithy.api#title": "Amazon Lookout for Metrics"
+            },
             "version": "2017-07-25",
             "operations": [
                 {
@@ -2825,6 +2972,9 @@
                     "target": "com.amazonaws.lookoutmetrics#ListAnomalyDetectors"
                 },
                 {
+                    "target": "com.amazonaws.lookoutmetrics#ListAnomalyGroupRelatedMetrics"
+                },
+                {
                     "target": "com.amazonaws.lookoutmetrics#ListAnomalyGroupSummaries"
                 },
                 {
@@ -2851,22 +3001,7 @@
                 {
                     "target": "com.amazonaws.lookoutmetrics#UpdateMetricSet"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "LookoutMetrics",
-                    "arnNamespace": "lookoutmetrics",
-                    "cloudFormationName": "LookoutMetrics",
-                    "cloudTrailEventSource": "lookoutmetrics.amazonaws.com",
-                    "endpointPrefix": "lookoutmetrics"
-                },
-                "aws.auth#sigv4": {
-                    "name": "lookoutmetrics"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>This is the <i>Amazon Lookout for Metrics API Reference</i>. For an introduction to the service\n      with tutorials for getting started, visit <a href=\"https://docs.aws.amazon.com/lookoutmetrics/latest/dev\">Amazon\n        Lookout for Metrics Developer Guide</a>.</p>",
-                "smithy.api#title": "Amazon Lookout for Metrics"
-            }
+            ]
         },
         "com.amazonaws.lookoutmetrics#MaxResults": {
             "type": "integer",
@@ -2906,6 +3041,16 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A calculation made by contrasting a measure and a dimension from your source data.</p>"
+            }
+        },
+        "com.amazonaws.lookoutmetrics#MetricChangePercentage": {
+            "type": "double",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 0.0,
+                    "max": 100.0
+                }
             }
         },
         "com.amazonaws.lookoutmetrics#MetricLevelImpact": {
@@ -3361,6 +3506,21 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Provides information about the Amazon Redshift database configuration.</p>"
+            }
+        },
+        "com.amazonaws.lookoutmetrics#RelationshipType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CAUSE_OF_INPUT_ANOMALY_GROUP",
+                        "name": "CAUSE_OF_INPUT_ANOMALY_GROUP"
+                    },
+                    {
+                        "value": "EFFECT_OF_INPUT_ANOMALY_GROUP",
+                        "name": "EFFECT_OF_INPUT_ANOMALY_GROUP"
+                    }
+                ]
             }
         },
         "com.amazonaws.lookoutmetrics#ResourceId": {

@@ -28,7 +28,6 @@ func (c *Client) CreateStreamingImage(ctx context.Context, params *CreateStreami
 	return out, nil
 }
 
-//
 type CreateStreamingImageInput struct {
 
 	// The ID of an EC2 machine image with which to create this streaming image.
@@ -61,7 +60,6 @@ type CreateStreamingImageInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type CreateStreamingImageOutput struct {
 
 	// The streaming image.

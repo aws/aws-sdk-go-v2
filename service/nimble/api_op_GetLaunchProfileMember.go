@@ -47,7 +47,6 @@ type GetLaunchProfileMemberInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type GetLaunchProfileMemberOutput struct {
 
 	// The member.

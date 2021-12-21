@@ -16,8 +16,7 @@ import (
 // which you can run API calls to update or get the state of one or more routing
 // controls. Each cluster has a name, status, Amazon Resource Name (ARN), and an
 // array of the five cluster endpoints (one for each supported Amazon Web Services
-// Region) that you can use with API calls to the Amazon Route 53 Application
-// Recovery Controller cluster data plane.
+// Region) that you can use with API calls to the cluster data plane.
 func (c *Client) CreateCluster(ctx context.Context, params *CreateClusterInput, optFns ...func(*Options)) (*CreateClusterOutput, error) {
 	if params == nil {
 		params = &CreateClusterInput{}
@@ -41,8 +40,12 @@ type CreateClusterInput struct {
 	// This member is required.
 	ClusterName *string
 
-	// Unique client idempotency token.
+	// A unique, case-sensitive string of up to 64 ASCII characters. To make an
+	// idempotent API request with an action, specify a client token in the request.
 	ClientToken *string
+
+	// The tags associated with the cluster.
+	Tags map[string]string
 
 	noSmithyDocumentSerde
 }

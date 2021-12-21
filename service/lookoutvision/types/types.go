@@ -17,7 +17,7 @@ type DatasetDescription struct {
 	// dataset project. The value test represents a test dataset.
 	DatasetType *string
 
-	//
+	// Statistics about the images in a dataset.
 	ImageStats *DatasetImageStats
 
 	// The Unix timestamp for the date and time that the dataset was last updated.
@@ -63,7 +63,8 @@ type DatasetImageStats struct {
 	noSmithyDocumentSerde
 }
 
-// Sumary information for an Amazon Lookout for Vision dataset.
+// Summary information for an Amazon Lookout for Vision dataset. For more
+// information, see DescribeDataset and ProjectDescription.
 type DatasetMetadata struct {
 
 	// The Unix timestamp for the date and time that the dataset was created.
@@ -104,6 +105,67 @@ type DetectAnomalyResult struct {
 	// The source of the image that was analyzed. direct means that the images was
 	// supplied from the local computer. No other values are supported.
 	Source *ImageSource
+
+	noSmithyDocumentSerde
+}
+
+// Configuration information for the AWS IoT Greengrass component created in a
+// model packaging job. For more information, see StartModelPackagingJob. You can't
+// specify a component with the same ComponentName and Componentversion as an
+// existing component with the same component name and component version.
+type GreengrassConfiguration struct {
+
+	// Additional compiler options for the Greengrass component. Currently, only NVIDIA
+	// Graphics Processing Units (GPU) are supported. For more information, see
+	// Compiler options in the Amazon Lookout for Vision Developer Guide.
+	//
+	// This member is required.
+	CompilerOptions *string
+
+	// A name for the AWS IoT Greengrass component.
+	//
+	// This member is required.
+	ComponentName *string
+
+	// An S3 location in which Lookout for Vision stores the component artifacts.
+	//
+	// This member is required.
+	S3OutputLocation *S3Location
+
+	// A description for the AWS IoT Greengrass component.
+	ComponentDescription *string
+
+	// A Version for the AWS IoT Greengrass component. If you don't provide a value, a
+	// default value of  Model Version.0.0 is used.
+	ComponentVersion *string
+
+	// A set of tags (key-value pairs) that you want to attach to the AWS IoT
+	// Greengrass component.
+	Tags []Tag
+
+	// The target device for the model. Currently the only supported value is
+	// jetson_xavier. If you specify TargetDevice, you can't specify TargetPlatform.
+	TargetDevice TargetDevice
+
+	// The target platform for the model. If you specify TargetPlatform, you can't
+	// specify TargetDevice.
+	TargetPlatform *TargetPlatform
+
+	noSmithyDocumentSerde
+}
+
+// Information about the AWS IoT Greengrass component created by a model packaging
+// job.
+type GreengrassOutputDetails struct {
+
+	// The name of the component.
+	ComponentName *string
+
+	// The version of the component.
+	ComponentVersion *string
+
+	// The Amazon Resource Name (ARN) of the component.
+	ComponentVersionArn *string
 
 	noSmithyDocumentSerde
 }
@@ -208,6 +270,110 @@ type ModelMetadata struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration information for a Amazon Lookout for Vision model packaging job.
+// For more information, see StartModelPackagingJob.
+type ModelPackagingConfiguration struct {
+
+	// Configuration information for the AWS IoT Greengrass component in a model
+	// packaging job.
+	//
+	// This member is required.
+	Greengrass *GreengrassConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Information about a model packaging job. For more information, see
+// DescribeModelPackagingJob.
+type ModelPackagingDescription struct {
+
+	// The Unix timestamp for the time and date that the model packaging job was
+	// created.
+	CreationTimestamp *time.Time
+
+	// The name of the model packaging job.
+	JobName *string
+
+	// The Unix timestamp for the time and date that the model packaging job was last
+	// updated.
+	LastUpdatedTimestamp *time.Time
+
+	// The configuration information used in the model packaging job.
+	ModelPackagingConfiguration *ModelPackagingConfiguration
+
+	// The description for the model packaging job.
+	ModelPackagingJobDescription *string
+
+	// The AWS service used to package the job. Currently Lookout for Vision can
+	// package jobs with AWS IoT Greengrass.
+	ModelPackagingMethod *string
+
+	// Information about the output of the model packaging job. For more information,
+	// see DescribeModelPackagingJob.
+	ModelPackagingOutputDetails *ModelPackagingOutputDetails
+
+	// The version of the model used in the model packaging job.
+	ModelVersion *string
+
+	// The name of the project that's associated with a model that's in the model
+	// package.
+	ProjectName *string
+
+	// The status of the model packaging job.
+	Status ModelPackagingJobStatus
+
+	// The status message for the model packaging job.
+	StatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// Metadata for a model packaging job. For more information, see
+// ListModelPackagingJobs.
+type ModelPackagingJobMetadata struct {
+
+	// The Unix timestamp for the time and date that the model packaging job was
+	// created.
+	CreationTimestamp *time.Time
+
+	// The name of the model packaging job.
+	JobName *string
+
+	// The Unix timestamp for the time and date that the model packaging job was last
+	// updated.
+	LastUpdatedTimestamp *time.Time
+
+	// The description for the model packaging job.
+	ModelPackagingJobDescription *string
+
+	// The AWS service used to package the job. Currently Lookout for Vision can
+	// package jobs with AWS IoT Greengrass.
+	ModelPackagingMethod *string
+
+	// The version of the model that is in the model package.
+	ModelVersion *string
+
+	// The project that contains the model that is in the model package.
+	ProjectName *string
+
+	// The status of the model packaging job.
+	Status ModelPackagingJobStatus
+
+	// The status message for the model packaging job.
+	StatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the output from a model packaging job.
+type ModelPackagingOutputDetails struct {
+
+	// Information about the AWS IoT Greengrass component in a model packaging job.
+	Greengrass *GreengrassOutputDetails
+
+	noSmithyDocumentSerde
+}
+
 // Information about the evaluation performance of a trained model.
 type ModelPerformance struct {
 
@@ -284,15 +450,19 @@ type ProjectMetadata struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the location training output.
+// Information about the location of training output or the output of a model
+// packaging job.
 type S3Location struct {
 
-	// The S3 bucket that contains the training output.
+	// The S3 bucket that contains the training or model packaging job output. If you
+	// are training a model, the bucket must in your AWS account. If you use an S3
+	// bucket for a model packaging job, the S3 bucket must be in the same AWS Region
+	// and AWS account in which you use AWS IoT Greengrass.
 	//
 	// This member is required.
 	Bucket *string
 
-	// The path of the folder, within the S3 bucket, that contains the training output.
+	// The path of the folder, within the S3 bucket, that contains the output.
 	Prefix *string
 
 	noSmithyDocumentSerde
@@ -311,6 +481,32 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// The platform on which a model runs on an AWS IoT Greengrass core device.
+type TargetPlatform struct {
+
+	// The target accelerator for the model. NVIDIA (Nvidia graphics processing unit)
+	// is the only accelerator that is currently supported. You must also specify the
+	// gpu-code, trt-ver, and cuda-ver compiler options.
+	//
+	// This member is required.
+	Accelerator TargetPlatformAccelerator
+
+	// The target architecture for the model. The currently supported architectures are
+	// X86_64 (64-bit version of the x86 instruction set) and ARM_64 (ARMv8 64-bit
+	// CPU).
+	//
+	// This member is required.
+	Arch TargetPlatformArch
+
+	// The target operating system for the model. Linux is the only operating system
+	// that is currently supported.
+	//
+	// This member is required.
+	Os TargetPlatformOs
 
 	noSmithyDocumentSerde
 }

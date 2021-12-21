@@ -16,7 +16,8 @@ import (
 // Creates a place index resource in your AWS account. Use a place index resource
 // to geocode addresses and other text queries by using the SearchPlaceIndexForText
 // operation, and reverse geocode coordinates by using the
-// SearchPlaceIndexForPosition operation.
+// SearchPlaceIndexForPosition operation, and enable autosuggestions by using the
+// SearchPlaceIndexForSuggestions operation.
 func (c *Client) CreatePlaceIndex(ctx context.Context, params *CreatePlaceIndexInput, optFns ...func(*Options)) (*CreatePlaceIndexOutput, error) {
 	if params == nil {
 		params = &CreatePlaceIndexInput{}
@@ -77,18 +78,17 @@ type CreatePlaceIndexInput struct {
 	// This member is required.
 	IndexName *string
 
-	// Specifies the pricing plan for your place index resource. For additional details
-	// and restrictions on each pricing plan option, see Amazon Location Service
-	// pricing (https://aws.amazon.com/location/pricing/).
-	//
-	// This member is required.
-	PricingPlan types.PricingPlan
-
 	// Specifies the data storage option requesting Places.
 	DataSourceConfiguration *types.DataSourceConfiguration
 
 	// The optional description for the place index resource.
 	Description *string
+
+	// Optionally specifies the pricing plan for the place index resource. Defaults to
+	// RequestBasedUsage. For additional details and restrictions on each pricing plan
+	// option, see Amazon Location Service pricing
+	// (https://aws.amazon.com/location/pricing/).
+	PricingPlan types.PricingPlan
 
 	// Applies one or more tags to the place index resource. A tag is a key-value pair
 	// that helps you manage, identify, search, and filter your resources. Format:

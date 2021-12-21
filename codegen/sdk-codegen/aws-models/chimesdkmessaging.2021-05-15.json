@@ -874,6 +874,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The message metadata.</p>"
                     }
+                },
+                "PushNotification": {
+                    "target": "com.amazonaws.chimesdkmessaging#PushNotificationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The push notification configuration of the message.</p>"
+                    }
+                },
+                "MessageAttributes": {
+                    "target": "com.amazonaws.chimesdkmessaging#MessageAttributeMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attributes for the message, used for message filtering along with a <code>FilterRule</code> defined in the <code>PushNotificationPreferences</code>. </p>"
+                    }
                 }
             },
             "traits": {
@@ -1197,6 +1209,21 @@
         },
         "com.amazonaws.chimesdkmessaging#ChimeMessagingService": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Chime SDK Messaging",
+                    "arnNamespace": "chime",
+                    "cloudFormationName": "ChimeSDKMessaging",
+                    "cloudTrailEventSource": "chimesdkmessaging.amazonaws.com",
+                    "endpointPrefix": "messaging-chime"
+                },
+                "aws.auth#sigv4": {
+                    "name": "chime"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>The Amazon Chime SDK Messaging APIs in this section allow software developers to send\n         and receive messages in custom messaging applications. These APIs depend on the frameworks\n         provided by the Amazon Chime SDK Identity APIs. For more information about the messaging\n         APIs, see <a href=\"https://docs.aws.amazon.com/chime/latest/APIReference/API_Operations_Amazon_Chime_SDK_Messaging\">Amazon Chime SDK messaging</a>\n         </p>",
+                "smithy.api#title": "Amazon Chime SDK Messaging"
+            },
             "version": "2021-05-15",
             "operations": [
                 {
@@ -1334,22 +1361,7 @@
                 {
                     "target": "com.amazonaws.chimesdkmessaging#UpdateChannelReadMarker"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Chime SDK Messaging",
-                    "arnNamespace": "chime",
-                    "cloudFormationName": "ChimeSDKMessaging",
-                    "cloudTrailEventSource": "chimesdkmessaging.amazonaws.com",
-                    "endpointPrefix": "messaging-chime"
-                },
-                "aws.auth#sigv4": {
-                    "name": "chime"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>The Amazon Chime SDK Messaging APIs in this section allow software developers to send\n         and receive messages in custom messaging applications. These APIs depend on the frameworks\n         provided by the Amazon Chime SDK Identity APIs. For more information about the messaging\n         APIs, see <a href=\"https://docs.aws.amazon.com/chime/latest/APIReference/API_Operations_Amazon_Chime_SDK_Messaging\">Amazon Chime SDK messaging</a>\n         </p>",
-                "smithy.api#title": "Amazon Chime SDK Messaging"
-            }
+            ]
         },
         "com.amazonaws.chimesdkmessaging#ClientRequestToken": {
             "type": "string",
@@ -3617,7 +3629,7 @@
                 "Type": {
                     "target": "com.amazonaws.chimesdkmessaging#ChannelMembershipType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The membership type of a user, <code>DEFAULT</code> or <code>HIDDEN</code>. Default\n         members are always returned as part of <code>ListChannelMemberships</code>. Hidden members\n         are only returned if the type filter in <code>ListChannelMemberships</code> equals\n            <code>HIDDEN</code>. Otherwise hidden members are not returned.</p>",
+                        "smithy.api#documentation": "<p>The membership type of a user, <code>DEFAULT</code> or <code>HIDDEN</code>. Default\n         members are returned as part of <code>ListChannelMemberships</code> if no type is specified. Hidden members\n         are only returned if the type filter in <code>ListChannelMemberships</code> equals\n            <code>HIDDEN</code>.</p>",
                         "smithy.api#httpQuery": "type"
                     }
                 },
@@ -4475,22 +4487,19 @@
                 "Title": {
                     "target": "com.amazonaws.chimesdkmessaging#PushNotificationTitle",
                     "traits": {
-                        "smithy.api#documentation": "<p>The title of the push notification.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The title of the push notification.</p>"
                     }
                 },
                 "Body": {
                     "target": "com.amazonaws.chimesdkmessaging#PushNotificationBody",
                     "traits": {
-                        "smithy.api#documentation": "<p>The body of the push notification.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The body of the push notification.</p>"
                     }
                 },
                 "Type": {
                     "target": "com.amazonaws.chimesdkmessaging#PushNotificationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enum value that indicates the type of the push notification for a message.\n         <code>DEFAULT</code>: Normal mobile push notification.\n         <code>VOIP</code>: VOIP mobile push notification.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Enum value that indicates the type of the push notification for a message.\n         <code>DEFAULT</code>: Normal mobile push notification.\n         <code>VOIP</code>: VOIP mobile push notification.</p>"
                     }
                 }
             },

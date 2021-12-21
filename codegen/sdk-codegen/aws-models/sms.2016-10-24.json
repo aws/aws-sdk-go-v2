@@ -31,6 +31,24 @@
     "shapes": {
         "com.amazonaws.sms#AWSServerMigrationService_V2016_10_24": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "SMS",
+                    "arnNamespace": "sms",
+                    "cloudFormationName": "SMS",
+                    "cloudTrailEventSource": "sms.amazonaws.com",
+                    "endpointPrefix": "sms"
+                },
+                "aws.auth#sigv4": {
+                    "name": "sms"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<important>\n            <p>\n               <b>Product update</b>\n            </p>\n            <p>As of March 31, 2022, Amazon Web Services will discontinue Server Migration Service (Amazon Web Services SMS).\n         Going forward, we recommend <a href=\"http://aws.amazon.com/application-migration-service\">Amazon Web Services Application Migration Service</a> (Amazon Web Services MGN) as the primary migration\n         service for lift-and-shift migrations.</p>\n            <p>You can initiate new migration jobs in Server Migration Service until January 1, 2022.\n         Complete these active migration projects by March 31, 2022. For more information, see\n            <a href=\"http://aws.amazon.com/application-migration-service/when-to-choose-aws-mgn/\">When\n            to Choose AWS Application Migration Service</a>.</p>\n         </important>\n            \n        <p>Server Migration Service (Server Migration Service) makes it easier and faster for you to migrate your\n            on-premises workloads to Amazon Web Services. To learn more about Server Migration Service, see the following \n            resources:</p>\n        <ul>\n            <li>\n                <p>\n                  <a href=\"http://aws.amazon.com/server-migration-service/\">Server Migration Service\n                    product page</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/server-migration-service/latest/userguide/\">Server Migration Service User Guide</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#title": "AWS Server Migration Service",
+                "smithy.api#xmlNamespace": {
+                    "uri": "http://ec2.amazon.com/servermigration/2016-10-24/"
+                }
+            },
             "version": "2016-10-24",
             "operations": [
                 {
@@ -138,25 +156,7 @@
                 {
                     "target": "com.amazonaws.sms#UpdateReplicationJob"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "SMS",
-                    "arnNamespace": "sms",
-                    "cloudFormationName": "SMS",
-                    "cloudTrailEventSource": "sms.amazonaws.com",
-                    "endpointPrefix": "sms"
-                },
-                "aws.auth#sigv4": {
-                    "name": "sms"
-                },
-                "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<fullname>AWS Server Migration Service</fullname>\n        <p>AWS Server Migration Service (AWS SMS) makes it easier and faster for you to migrate your\n            on-premises workloads to AWS. To learn more about AWS SMS, see the following \n            resources:</p>\n        <ul>\n            <li>\n                <p>\n                  <a href=\"http://aws.amazon.com/server-migration-service/\">AWS Server Migration Service\n                    product page</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/server-migration-service/latest/userguide/\">AWS Server Migration Service User Guide</a>\n               </p>\n            </li>\n         </ul>",
-                "smithy.api#title": "AWS Server Migration Service",
-                "smithy.api#xmlNamespace": {
-                    "uri": "http://ec2.amazon.com/servermigration/2016-10-24/"
-                }
-            }
+            ]
         },
         "com.amazonaws.sms#AmiId": {
             "type": "string"
@@ -492,7 +492,7 @@
                 "roleName": {
                     "target": "com.amazonaws.sms#RoleName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the service role in the customer's account used by AWS SMS.</p>"
+                        "smithy.api#documentation": "<p>The name of the service role in the customer's account used by Server Migration Service.</p>"
                     }
                 },
                 "totalServerGroups": {
@@ -789,7 +789,7 @@
                 "roleName": {
                     "target": "com.amazonaws.sms#RoleName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the service role in the customer's account to be used by AWS SMS.</p>"
+                        "smithy.api#documentation": "<p>The name of the service role in the customer's account to be used by Server Migration Service.</p>"
                     }
                 },
                 "clientToken": {
@@ -873,7 +873,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a replication job. The replication job schedules periodic replication runs\n            to replicate your server to AWS. Each replication run creates an Amazon Machine Image\n            (AMI).</p>"
+                "smithy.api#documentation": "<p>Creates a replication job. The replication job schedules periodic replication runs\n            to replicate your server to Amazon Web Services. Each replication run creates an Amazon Machine Image\n            (AMI).</p>"
             }
         },
         "com.amazonaws.sms#CreateReplicationJobRequest": {
@@ -914,7 +914,7 @@
                 "roleName": {
                     "target": "com.amazonaws.sms#RoleName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the IAM role to be used by the AWS SMS.</p>"
+                        "smithy.api#documentation": "<p>The name of the IAM role to be used by the Server Migration Service.</p>"
                     }
                 },
                 "description": {
@@ -980,7 +980,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified application. Optionally deletes the launched stack associated with\n            the application and all AWS SMS replication jobs for servers in the application.</p>"
+                "smithy.api#documentation": "<p>Deletes the specified application. Optionally deletes the launched stack associated with\n            the application and all Server Migration Service replication jobs for servers in the application.</p>"
             }
         },
         "com.amazonaws.sms#DeleteAppLaunchConfiguration": {
@@ -1169,7 +1169,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified replication job.</p>\n        <p>After you delete a replication job, there are no further replication runs. AWS\n            deletes the contents of the Amazon S3 bucket used to store AWS SMS artifacts. The AMIs created\n            by the replication runs are not deleted.</p>"
+                "smithy.api#documentation": "<p>Deletes the specified replication job.</p>\n        <p>After you delete a replication job, there are no further replication runs. Amazon Web Services\n            deletes the contents of the Amazon S3 bucket used to store Server Migration Service artifacts. The AMIs created\n            by the replication runs are not deleted.</p>"
             }
         },
         "com.amazonaws.sms#DeleteReplicationJobRequest": {
@@ -1248,7 +1248,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disassociates the specified connector from AWS SMS.</p>\n        <p>After you disassociate a connector, it is no longer available to support\n            replication jobs.</p>"
+                "smithy.api#documentation": "<p>Disassociates the specified connector from Server Migration Service.</p>\n        <p>After you disassociate a connector, it is no longer available to support\n            replication jobs.</p>"
             }
         },
         "com.amazonaws.sms#DisassociateConnectorRequest": {
@@ -1275,6 +1275,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "DryRunOperationException",
+                    "httpResponseCode": 412
+                },
                 "smithy.api#documentation": "<p>The user has the required permissions, so the request would have succeeded, \n            but a dry run was performed.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 412
@@ -1402,7 +1406,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Generates an AWS CloudFormation template based on the current launch configuration and writes it to\n            an Amazon S3 object in the customer’s Amazon S3 bucket.</p>"
+                "smithy.api#documentation": "<p>Generates an CloudFormation template based on the current launch configuration and writes it to\n            an Amazon S3 object in the customer’s Amazon S3 bucket.</p>"
             }
         },
         "com.amazonaws.sms#GenerateTemplateRequest": {
@@ -1411,13 +1415,13 @@
                 "appId": {
                     "target": "com.amazonaws.sms#AppId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the application associated with the AWS CloudFormation template.</p>"
+                        "smithy.api#documentation": "<p>The ID of the application associated with the CloudFormation template.</p>"
                     }
                 },
                 "templateFormat": {
                     "target": "com.amazonaws.sms#OutputFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>The format for generating the AWS CloudFormation template.</p>"
+                        "smithy.api#documentation": "<p>The format for generating the CloudFormation template.</p>"
                     }
                 }
             }
@@ -1514,7 +1518,7 @@
                 "roleName": {
                     "target": "com.amazonaws.sms#RoleName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the service role in the customer's account that AWS CloudFormation uses to launch the\n            application.</p>"
+                        "smithy.api#documentation": "<p>The name of the service role in the customer's account that CloudFormation uses to launch the\n            application.</p>"
                     }
                 },
                 "autoLaunch": {
@@ -1740,7 +1744,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the connectors registered with the AWS SMS.</p>",
+                "smithy.api#documentation": "<p>Describes the connectors registered with the Server Migration Service.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -2038,7 +2042,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Allows application import from AWS Migration Hub.</p>"
+                "smithy.api#documentation": "<p>Allows application import from Migration Hub.</p>"
             }
         },
         "com.amazonaws.sms#ImportAppCatalogRequest": {
@@ -2047,7 +2051,7 @@
                 "roleName": {
                     "target": "com.amazonaws.sms#RoleName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the service role. If you omit this parameter, we create a service-linked role\n            for AWS Migration Hub in your account. Otherwise, the role that you provide must have the <a href=\"https://docs.aws.amazon.com/migrationhub/latest/ug/new-customer-setup.html#sms-managed\">policy\n            and trust policy</a> described in the <i>AWS Migration Hub User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The name of the service role. If you omit this parameter, we create a service-linked role\n            for Migration Hub in your account. Otherwise, the role that you provide must have the <a href=\"https://docs.aws.amazon.com/migrationhub/latest/ug/new-customer-setup.html#sms-managed\">policy\n                and trust policy</a> described in the <i>Migration Hub User Guide</i>.</p>"
                     }
                 }
             }
@@ -2099,7 +2103,7 @@
         "com.amazonaws.sms#InstanceId": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^i-(\\w{8}|\\w{17})$)|(^mi-\\w{17}$)"
+                "smithy.api#pattern": "^(^i-(\\w{8}|\\w{17})$)|(^mi-\\w{17}$)$"
             }
         },
         "com.amazonaws.sms#InstanceType": {
@@ -2113,6 +2117,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InternalError",
+                    "httpResponseCode": 500
+                },
                 "smithy.api#documentation": "<p>An internal error occurred.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
@@ -2126,6 +2134,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidParameter",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>A specified parameter is not valid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -2163,7 +2175,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Launches the specified application as a stack in AWS CloudFormation.</p>"
+                "smithy.api#documentation": "<p>Launches the specified application as a stack in CloudFormation.</p>"
             }
         },
         "com.amazonaws.sms#LaunchAppRequest": {
@@ -2317,6 +2329,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "MissingRequiredParameter",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>A required parameter is missing.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -2333,6 +2349,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "NoConnectorsAvailable",
+                    "httpResponseCode": 430
+                },
                 "smithy.api#documentation": "<p>There are no connectors available.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 430
@@ -2400,7 +2420,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides information to AWS SMS about whether application validation is successful.</p>"
+                "smithy.api#documentation": "<p>Provides information to Server Migration Service about whether application validation is successful.</p>"
             }
         },
         "com.amazonaws.sms#NotifyAppValidationOutputRequest": {
@@ -2439,6 +2459,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "OperationNotPermitted",
+                    "httpResponseCode": 403
+                },
                 "smithy.api#documentation": "<p>This operation is not allowed.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
@@ -2500,7 +2524,7 @@
                 "roleName": {
                     "target": "com.amazonaws.sms#RoleName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of service role in the customer's account that AWS CloudFormation uses to launch the\n            application.</p>"
+                        "smithy.api#documentation": "<p>The name of service role in the customer's account that CloudFormation uses to launch the\n            application.</p>"
                     }
                 },
                 "autoLaunch": {
@@ -2688,7 +2712,7 @@
                 "roleName": {
                     "target": "com.amazonaws.sms#RoleName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the IAM role to be used by AWS SMS.</p>"
+                        "smithy.api#documentation": "<p>The name of the IAM role to be used by Server Migration Service.</p>"
                     }
                 },
                 "latestAmiId": {
@@ -2752,6 +2776,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ReplicationJobAlreadyExists",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The specified replication job already exists.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -2777,6 +2805,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ReplicationJobNotFound",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>The specified replication job does not exist.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -2915,6 +2947,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ReplicationRunLimitExceeded",
+                    "httpResponseCode": 429
+                },
                 "smithy.api#documentation": "<p>You have exceeded the number of on-demand replication runs you can request in a\n            24-hour period.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429
@@ -3090,7 +3126,7 @@
                 "command": {
                     "target": "com.amazonaws.sms#Command",
                     "traits": {
-                        "smithy.api#documentation": "<p>The command to run the validation script</p>"
+                        "smithy.api#documentation": "<p>The command to run the validation script.</p>"
                     }
                 },
                 "executionTimeoutSeconds": {
@@ -3174,6 +3210,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ServerCannotBeReplicated",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The specified server cannot be replicated.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -3343,7 +3383,7 @@
                 "logicalId": {
                     "target": "com.amazonaws.sms#LogicalId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The logical ID of the server in the AWS CloudFormation template.</p>"
+                        "smithy.api#documentation": "<p>The logical ID of the server in the CloudFormation template.</p>"
                     }
                 },
                 "vpc": {
@@ -3829,6 +3869,10 @@
             "type": "structure",
             "members": {},
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "TemporarilyUnavailable",
+                    "httpResponseCode": 503
+                },
                 "smithy.api#documentation": "<p>The service is temporarily unavailable.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 503
@@ -3901,6 +3945,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "UnauthorizedOperation",
+                    "httpResponseCode": 403
+                },
                 "smithy.api#documentation": "<p>You lack permissions needed to perform this operation. Check your IAM policies,\n            and ensure that you are using the correct access keys.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
@@ -3959,7 +4007,7 @@
                 "roleName": {
                     "target": "com.amazonaws.sms#RoleName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the service role in the customer's account used by AWS SMS.</p>"
+                        "smithy.api#documentation": "<p>The name of the service role in the customer's account used by Server Migration Service.</p>"
                     }
                 },
                 "serverGroups": {
@@ -4068,7 +4116,7 @@
                 "roleName": {
                     "target": "com.amazonaws.sms#RoleName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the IAM role to be used by AWS SMS.</p>"
+                        "smithy.api#documentation": "<p>The name of the IAM role to be used by Server Migration Service.</p>"
                     }
                 },
                 "description": {

@@ -28,7 +28,6 @@ func (c *Client) UpdateLaunchProfileMember(ctx context.Context, params *UpdateLa
 	return out, nil
 }
 
-//
 type UpdateLaunchProfileMemberInput struct {
 
 	// The Launch Profile ID.

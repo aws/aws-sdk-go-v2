@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an API key. The key can be updated while it is not deleted.
+// Updates an API key. You can update the key as long as it's not deleted.
 func (c *Client) UpdateApiKey(ctx context.Context, params *UpdateApiKeyInput, optFns ...func(*Options)) (*UpdateApiKeyOutput, error) {
 	if params == nil {
 		params = &UpdateApiKeyInput{}
@@ -42,7 +42,7 @@ type UpdateApiKeyInput struct {
 	// A description of the purpose of the API key.
 	Description *string
 
-	// The time from update time after which the API key expires. The date is
+	// From the update time, the time after which the API key expires. The date is
 	// represented as seconds since the epoch. For more information, see .
 	Expires int64
 

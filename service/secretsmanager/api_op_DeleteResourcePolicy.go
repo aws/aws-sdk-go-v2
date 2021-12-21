@@ -10,22 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the resource-based permission policy attached to the secret. Minimum
-// permissions To run this command, you must have the following permissions:
-//
-// *
-// secretsmanager:DeleteResourcePolicy
-//
-// Related operations
-//
-// * To attach a resource
+// Deletes the resource-based permission policy attached to the secret. To attach a
 // policy to a secret, use PutResourcePolicy.
-//
-// * To retrieve the current
-// resource-based policy attached to a secret, use GetResourcePolicy.
-//
-// * To list
-// all of the currently available secrets, use ListSecrets.
 func (c *Client) DeleteResourcePolicy(ctx context.Context, params *DeleteResourcePolicyInput, optFns ...func(*Options)) (*DeleteResourcePolicyOutput, error) {
 	if params == nil {
 		params = &DeleteResourcePolicyInput{}
@@ -43,10 +29,9 @@ func (c *Client) DeleteResourcePolicy(ctx context.Context, params *DeleteResourc
 
 type DeleteResourcePolicyInput struct {
 
-	// Specifies the secret that you want to delete the attached resource-based policy
-	// for. You can specify either the Amazon Resource Name (ARN) or the friendly name
-	// of the secret. For an ARN, we recommend that you specify a complete ARN rather
-	// than a partial ARN.
+	// The ARN or name of the secret to delete the attached resource-based policy for.
+	// For an ARN, we recommend that you specify a complete ARN rather than a partial
+	// ARN.
 	//
 	// This member is required.
 	SecretId *string
@@ -59,7 +44,7 @@ type DeleteResourcePolicyOutput struct {
 	// The ARN of the secret that the resource-based policy was deleted for.
 	ARN *string
 
-	// The friendly name of the secret that the resource-based policy was deleted for.
+	// The name of the secret that the resource-based policy was deleted for.
 	Name *string
 
 	// Metadata pertaining to the operation's result.

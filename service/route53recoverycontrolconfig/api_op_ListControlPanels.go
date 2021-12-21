@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns an array of control panels for a cluster.
+// Returns an array of control panels in an account or in a cluster.
 func (c *Client) ListControlPanels(ctx context.Context, params *ListControlPanelsInput, optFns ...func(*Options)) (*ListControlPanelsOutput, error) {
 	if params == nil {
 		params = &ListControlPanelsInput{}
