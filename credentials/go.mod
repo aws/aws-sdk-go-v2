@@ -5,8 +5,8 @@ go 1.15
 require (
 	github.com/aws/aws-sdk-go-v2 v1.11.2
 	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.8.2
-	github.com/aws/aws-sdk-go-v2/service/sso v1.6.2
-	github.com/aws/aws-sdk-go-v2/service/sts v1.11.1
+	github.com/aws/aws-sdk-go-v2/service/sso v1.7.0
+	github.com/aws/aws-sdk-go-v2/service/sts v1.12.0
 	github.com/aws/smithy-go v1.9.0
 	github.com/google/go-cmp v0.5.6
 )
