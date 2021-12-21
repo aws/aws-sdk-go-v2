@@ -1,7 +1,7 @@
 {
     "id": "f9ed95d2-adec-4a42-a82e-373aa72efd98",
     "type": "feature",
-    "description": "Updated to service endpoints",
+    "description": "Updated to latest service endpoints",
     "modules": [
         "service/accessanalyzer",
         "service/acm",
