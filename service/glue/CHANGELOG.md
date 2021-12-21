@@ -1,3 +1,7 @@
+# v1.17.0 (2021-12-21)
+
+* **Feature**: API Paginators now support specifying the initial starting token, and support stopping on empty string tokens.
+
 # v1.16.0 (2021-12-02)
 
 * **Feature**: API client updated

@@ -1,3 +1,7 @@
+# v1.13.0 (2021-12-21)
+
+* **Feature**: Updated to latest service endpoints
+
 # v1.12.0 (2021-12-02)
 
 * **Feature**: API client updated
