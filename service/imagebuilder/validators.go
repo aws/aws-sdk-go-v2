@@ -550,6 +550,26 @@ func (m *validateOpImportComponent) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpImportVmImage struct {
+}
+
+func (*validateOpImportVmImage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpImportVmImage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ImportVmImageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpImportVmImageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListComponentBuildVersions struct {
 }
 
@@ -958,6 +978,10 @@ func addOpImportComponentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpImportComponent{}, middleware.After)
 }
 
+func addOpImportVmImageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpImportVmImage{}, middleware.After)
+}
+
 func addOpListComponentBuildVersionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListComponentBuildVersions{}, middleware.After)
 }
@@ -1127,6 +1151,11 @@ func validateDistribution(v *types.Distribution) error {
 			invalidParams.AddNested("LaunchTemplateConfigurations", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.S3ExportConfiguration != nil {
+		if err := validateS3ExportConfiguration(v.S3ExportConfiguration); err != nil {
+			invalidParams.AddNested("S3ExportConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1175,6 +1204,27 @@ func validateLaunchTemplateConfigurationList(v []types.LaunchTemplateConfigurati
 		if err := validateLaunchTemplateConfiguration(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3ExportConfiguration(v *types.S3ExportConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3ExportConfiguration"}
+	if v.RoleName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleName"))
+	}
+	if len(v.DiskImageFormat) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DiskImageFormat"))
+	}
+	if v.S3Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Bucket"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1689,6 +1739,33 @@ func validateOpImportComponentInput(v *ImportComponentInput) error {
 	}
 	if len(v.Platform) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Platform"))
+	}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpImportVmImageInput(v *ImportVmImageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ImportVmImageInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.SemanticVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SemanticVersion"))
+	}
+	if len(v.Platform) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Platform"))
+	}
+	if v.VmImportTaskId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VmImportTaskId"))
 	}
 	if v.ClientToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))

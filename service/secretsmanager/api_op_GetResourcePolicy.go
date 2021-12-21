@@ -11,24 +11,9 @@ import (
 )
 
 // Retrieves the JSON text of the resource-based policy document attached to the
-// specified secret. The JSON request string input and response output displays
-// formatted code with white space and line breaks for better readability. Submit
-// your input as a single line JSON string. Minimum permissions To run this
-// command, you must have the following permissions:
-//
-// *
-// secretsmanager:GetResourcePolicy
-//
-// Related operations
-//
-// * To attach a resource
-// policy to a secret, use PutResourcePolicy.
-//
-// * To delete the resource-based
-// policy attached to a secret, use DeleteResourcePolicy.
-//
-// * To list all of the
-// currently available secrets, use ListSecrets.
+// secret. For more information about permissions policies attached to a secret,
+// see Permissions policies attached to a secret
+// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access_resource-policies.html).
 func (c *Client) GetResourcePolicy(ctx context.Context, params *GetResourcePolicyInput, optFns ...func(*Options)) (*GetResourcePolicyOutput, error) {
 	if params == nil {
 		params = &GetResourcePolicyInput{}
@@ -46,10 +31,9 @@ func (c *Client) GetResourcePolicy(ctx context.Context, params *GetResourcePolic
 
 type GetResourcePolicyInput struct {
 
-	// Specifies the secret that you want to retrieve the attached resource-based
-	// policy for. You can specify either the Amazon Resource Name (ARN) or the
-	// friendly name of the secret. For an ARN, we recommend that you specify a
-	// complete ARN rather than a partial ARN.
+	// The ARN or name of the secret to retrieve the attached resource-based policy
+	// for. For an ARN, we recommend that you specify a complete ARN rather than a
+	// partial ARN.
 	//
 	// This member is required.
 	SecretId *string
@@ -62,18 +46,13 @@ type GetResourcePolicyOutput struct {
 	// The ARN of the secret that the resource-based policy was retrieved for.
 	ARN *string
 
-	// The friendly name of the secret that the resource-based policy was retrieved
-	// for.
+	// The name of the secret that the resource-based policy was retrieved for.
 	Name *string
 
-	// A JSON-formatted string that describes the permissions that are associated with
-	// the attached secret. These permissions are combined with any permissions that
-	// are associated with the user or role that attempts to access this secret. The
-	// combined permissions specify who can access the secret and what actions they can
-	// perform. For more information, see Authentication and Access Control for Amazon
-	// Web Services Secrets Manager
-	// (http://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html)
-	// in the Amazon Web Services Secrets Manager User Guide.
+	// A JSON-formatted string that contains the permissions policy attached to the
+	// secret. For more information about permissions policies, see Authentication and
+	// access control for Secrets Manager
+	// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 	ResourcePolicy *string
 
 	// Metadata pertaining to the operation's result.

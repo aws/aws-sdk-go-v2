@@ -31,16 +31,6 @@ func (c *Client) CreateDataset(ctx context.Context, params *CreateDatasetInput, 
 // The request for a CreateDataset operation
 type CreateDatasetInput struct {
 
-	// The unique resource identifier for a Dataset.
-	//
-	// This member is required.
-	Alias *string
-
-	// Description of a Dataset.
-	//
-	// This member is required.
-	DatasetDescription *string
-
 	// Display title for a FinSpace Dataset.
 	//
 	// This member is required.
@@ -62,8 +52,14 @@ type CreateDatasetInput struct {
 	// This member is required.
 	PermissionGroupParams *types.PermissionGroupParams
 
+	// The unique resource identifier for a Dataset.
+	Alias *string
+
 	// A token used to ensure idempotency.
 	ClientToken *string
+
+	// Description of a Dataset.
+	DatasetDescription *string
 
 	// Contact information for a Dataset owner.
 	OwnerInfo *types.DatasetOwnerInfo

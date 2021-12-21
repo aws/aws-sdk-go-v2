@@ -750,6 +750,26 @@ func (m *validateOpSearchPlaceIndexForPosition) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSearchPlaceIndexForSuggestions struct {
+}
+
+func (*validateOpSearchPlaceIndexForSuggestions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSearchPlaceIndexForSuggestions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SearchPlaceIndexForSuggestionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSearchPlaceIndexForSuggestionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpSearchPlaceIndexForText struct {
 }
 
@@ -1058,6 +1078,10 @@ func addOpSearchPlaceIndexForPositionValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpSearchPlaceIndexForPosition{}, middleware.After)
 }
 
+func addOpSearchPlaceIndexForSuggestionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSearchPlaceIndexForSuggestions{}, middleware.After)
+}
+
 func addOpSearchPlaceIndexForTextValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSearchPlaceIndexForText{}, middleware.After)
 }
@@ -1139,6 +1163,11 @@ func validateDevicePositionUpdate(v *types.DevicePositionUpdate) error {
 	if v.Position == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Position"))
 	}
+	if v.Accuracy != nil {
+		if err := validatePositionalAccuracy(v.Accuracy); err != nil {
+			invalidParams.AddNested("Accuracy", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1170,6 +1199,21 @@ func validateMapConfiguration(v *types.MapConfiguration) error {
 	invalidParams := smithy.InvalidParamsError{Context: "MapConfiguration"}
 	if v.Style == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Style"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePositionalAccuracy(v *types.PositionalAccuracy) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PositionalAccuracy"}
+	if v.Horizontal == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Horizontal"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1345,9 +1389,6 @@ func validateOpCreateGeofenceCollectionInput(v *CreateGeofenceCollectionInput) e
 	if v.CollectionName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CollectionName"))
 	}
-	if len(v.PricingPlan) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("PricingPlan"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1370,9 +1411,6 @@ func validateOpCreateMapInput(v *CreateMapInput) error {
 			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
 		}
 	}
-	if len(v.PricingPlan) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("PricingPlan"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1390,9 +1428,6 @@ func validateOpCreatePlaceIndexInput(v *CreatePlaceIndexInput) error {
 	}
 	if v.DataSource == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DataSource"))
-	}
-	if len(v.PricingPlan) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("PricingPlan"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1412,9 +1447,6 @@ func validateOpCreateRouteCalculatorInput(v *CreateRouteCalculatorInput) error {
 	if v.DataSource == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DataSource"))
 	}
-	if len(v.PricingPlan) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("PricingPlan"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1429,9 +1461,6 @@ func validateOpCreateTrackerInput(v *CreateTrackerInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CreateTrackerInput"}
 	if v.TrackerName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TrackerName"))
-	}
-	if len(v.PricingPlan) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("PricingPlan"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1831,6 +1860,24 @@ func validateOpSearchPlaceIndexForPositionInput(v *SearchPlaceIndexForPositionIn
 	}
 	if v.Position == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Position"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSearchPlaceIndexForSuggestionsInput(v *SearchPlaceIndexForSuggestionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchPlaceIndexForSuggestionsInput"}
+	if v.IndexName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexName"))
+	}
+	if v.Text == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Text"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

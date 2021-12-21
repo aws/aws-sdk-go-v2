@@ -40,7 +40,7 @@ type CreateLocationFsxWindowsInput struct {
 	// This member is required.
 	Password *string
 
-	// The Amazon Resource Names (ARNs) of the security groups that are to use to
+	// The Amazon Resource Names (ARNs) of the security groups that are used to
 	// configure the FSx for Windows File Server file system.
 	//
 	// This member is required.
@@ -56,7 +56,7 @@ type CreateLocationFsxWindowsInput struct {
 	// The name of the Windows domain that the FSx for Windows File Server belongs to.
 	Domain *string
 
-	// A subdirectory in the location’s path. This subdirectory in the Amazon FSx for
+	// A subdirectory in the location's path. This subdirectory in the Amazon FSx for
 	// Windows File Server file system is used to read data from the Amazon FSx for
 	// Windows File Server source location or write data to the FSx for Windows File
 	// Server destination.

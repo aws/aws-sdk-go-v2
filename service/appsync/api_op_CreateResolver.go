@@ -12,7 +12,7 @@ import (
 )
 
 // Creates a Resolver object. A resolver converts incoming requests into a format
-// that a data source can understand and converts the data source's responses into
+// that a data source can understand, and converts the data source's responses into
 // GraphQL.
 func (c *Client) CreateResolver(ctx context.Context, params *CreateResolverInput, optFns ...func(*Options)) (*CreateResolverOutput, error) {
 	if params == nil {
@@ -55,29 +55,30 @@ type CreateResolverInput struct {
 	// The resolver type.
 	//
 	// * UNIT: A UNIT resolver type. A UNIT resolver is the default
-	// resolver type. A UNIT resolver enables you to execute a GraphQL query against a
+	// resolver type. You can use a UNIT resolver to run a GraphQL query against a
 	// single data source.
 	//
-	// * PIPELINE: A PIPELINE resolver type. A PIPELINE resolver
-	// enables you to execute a series of Function in a serial manner. You can use a
-	// pipeline resolver to execute a GraphQL query against multiple data sources.
+	// * PIPELINE: A PIPELINE resolver type. You can use a
+	// PIPELINE resolver to invoke a series of Function objects in a serial manner. You
+	// can use a pipeline resolver to run a GraphQL query against multiple data
+	// sources.
 	Kind types.ResolverKind
 
 	// The PipelineConfig.
 	PipelineConfig *types.PipelineConfig
 
-	// The mapping template to be used for requests. A resolver uses a request mapping
+	// The mapping template to use for requests. A resolver uses a request mapping
 	// template to convert a GraphQL expression into a format that a data source can
 	// understand. Mapping templates are written in Apache Velocity Template Language
-	// (VTL). VTL request mapping templates are optional when using a Lambda data
+	// (VTL). VTL request mapping templates are optional when using an Lambda data
 	// source. For all other data sources, VTL request and response mapping templates
 	// are required.
 	RequestMappingTemplate *string
 
-	// The mapping template to be used for responses from the data source.
+	// The mapping template to use for responses from the data source.
 	ResponseMappingTemplate *string
 
-	// The SyncConfig for a resolver attached to a versioned datasource.
+	// The SyncConfig for a resolver attached to a versioned data source.
 	SyncConfig *types.SyncConfig
 
 	noSmithyDocumentSerde

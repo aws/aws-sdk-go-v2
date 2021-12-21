@@ -28,7 +28,6 @@ func (c *Client) CreateLaunchProfile(ctx context.Context, params *CreateLaunchPr
 	return out, nil
 }
 
-//
 type CreateLaunchProfileInput struct {
 
 	// Specifies the IDs of the EC2 subnets where streaming sessions will be accessible
@@ -79,7 +78,6 @@ type CreateLaunchProfileInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type CreateLaunchProfileOutput struct {
 
 	// The launch profile.

@@ -13,7 +13,7 @@ import (
 )
 
 // This operation returns all the domain names registered with Amazon Route 53 for
-// the current AWS account.
+// the current Amazon Web Services account if no filtering conditions are used.
 func (c *Client) ListDomains(ctx context.Context, params *ListDomainsInput, optFns ...func(*Options)) (*ListDomainsOutput, error) {
 	if params == nil {
 		params = &ListDomainsInput{}
@@ -32,16 +32,26 @@ func (c *Client) ListDomains(ctx context.Context, params *ListDomainsInput, optF
 // The ListDomains request includes the following elements.
 type ListDomainsInput struct {
 
+	// A complex type that contains information about the filters applied during the
+	// ListDomains request. The filter conditions can include domain name and domain
+	// expiration.
+	FilterConditions []types.FilterCondition
+
 	// For an initial request for a list of domains, omit this element. If the number
-	// of domains that are associated with the current AWS account is greater than the
-	// value that you specified for MaxItems, you can use Marker to return additional
-	// domains. Get the value of NextPageMarker from the previous response, and submit
-	// another request that includes the value of NextPageMarker in the Marker element.
-	// Constraints: The marker must match the value specified in the previous request.
+	// of domains that are associated with the current Amazon Web Services account is
+	// greater than the value that you specified for MaxItems, you can use Marker to
+	// return additional domains. Get the value of NextPageMarker from the previous
+	// response, and submit another request that includes the value of NextPageMarker
+	// in the Marker element. Constraints: The marker must match the value specified in
+	// the previous request.
 	Marker *string
 
 	// Number of domains to be returned. Default: 20
 	MaxItems *int32
+
+	// A complex type that contains information about the requested ordering of domains
+	// in the returned list.
+	SortCondition *types.SortCondition
 
 	noSmithyDocumentSerde
 }
@@ -49,7 +59,7 @@ type ListDomainsInput struct {
 // The ListDomains response includes the following elements.
 type ListDomainsOutput struct {
 
-	// A summary of domains.
+	// A list of domains.
 	//
 	// This member is required.
 	Domains []types.DomainSummary
@@ -107,6 +117,9 @@ func (c *Client) addOperationListDomainsMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addOpListDomainsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDomains(options.Region), middleware.Before); err != nil {

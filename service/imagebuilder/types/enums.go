@@ -2,6 +2,26 @@
 
 package types
 
+type BuildType string
+
+// Enum values for BuildType
+const (
+	BuildTypeUserInitiated BuildType = "USER_INITIATED"
+	BuildTypeScheduled     BuildType = "SCHEDULED"
+	BuildTypeImport        BuildType = "IMPORT"
+)
+
+// Values returns all known values for BuildType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (BuildType) Values() []BuildType {
+	return []BuildType{
+		"USER_INITIATED",
+		"SCHEDULED",
+		"IMPORT",
+	}
+}
+
 type ComponentFormat string
 
 // Enum values for ComponentFormat
@@ -81,6 +101,26 @@ const (
 func (ContainerType) Values() []ContainerType {
 	return []ContainerType{
 		"DOCKER",
+	}
+}
+
+type DiskImageFormat string
+
+// Enum values for DiskImageFormat
+const (
+	DiskImageFormatVmdk DiskImageFormat = "VMDK"
+	DiskImageFormatRaw  DiskImageFormat = "RAW"
+	DiskImageFormatVhd  DiskImageFormat = "VHD"
+)
+
+// Values returns all known values for DiskImageFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DiskImageFormat) Values() []DiskImageFormat {
+	return []DiskImageFormat{
+		"VMDK",
+		"RAW",
+		"VHD",
 	}
 }
 

@@ -550,12 +550,12 @@ type DNSSECStatus struct {
 	// zone. NOT_SIGNING DNSSEC signing is not enabled for the hosted zone. DELETING
 	// DNSSEC signing is in the process of being removed for the hosted zone.
 	// ACTION_NEEDED There is a problem with signing in the hosted zone that requires
-	// you to take action to resolve. For example, the customer managed customer master
-	// key (CMK) might have been deleted, or the permissions for the customer managed
-	// CMK might have been changed. INTERNAL_FAILURE There was an error during a
-	// request. Before you can continue to work with DNSSEC signing, including with
-	// key-signing keys (KSKs), you must correct the problem by enabling or disabling
-	// DNSSEC signing for the hosted zone.
+	// you to take action to resolve. For example, the customer managed key might have
+	// been deleted, or the permissions for the customer managed key might have been
+	// changed. INTERNAL_FAILURE There was an error during a request. Before you can
+	// continue to work with DNSSEC signing, including with key-signing keys (KSKs),
+	// you must correct the problem by enabling or disabling DNSSEC signing for the
+	// hosted zone.
 	ServeSignature *string
 
 	// The status message provided for the following DNSSEC signing status:
@@ -1157,10 +1157,10 @@ type KeySigningKey struct {
 	// (https://tools.ietf.org/rfc/rfc4034.txt).
 	KeyTag int32
 
-	// The Amazon resource name (ARN) used to identify the customer managed customer
-	// master key (CMK) in Key Management Service (KMS). The KmsArn must be unique for
-	// each key-signing key (KSK) in a single hosted zone. You must configure the CMK
-	// as follows: Status Enabled Key spec ECC_NIST_P256 Key usage Sign and verify Key
+	// The Amazon resource name (ARN) used to identify the customer managed key in Key
+	// Management Service (KMS). The KmsArn must be unique for each key-signing key
+	// (KSK) in a single hosted zone. You must configure the customer managed key as
+	// follows: Status Enabled Key spec ECC_NIST_P256 Key usage Sign and verify Key
 	// policy The key policy must give permission for the following actions:
 	//
 	// *
@@ -1177,7 +1177,7 @@ type KeySigningKey struct {
 	// "Service": "dnssec-route53.amazonaws.com"
 	//
 	// For more information about working
-	// with the customer managed CMK in KMS, see Key Management Service concepts
+	// with the customer managed key in KMS, see Key Management Service concepts
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html).
 	KmsArn *string
 
@@ -1207,12 +1207,12 @@ type KeySigningKey struct {
 	// have one of the following values: ACTIVE The KSK is being used for signing.
 	// INACTIVE The KSK is not being used for signing. DELETING The KSK is in the
 	// process of being deleted. ACTION_NEEDED There is a problem with the KSK that
-	// requires you to take action to resolve. For example, the customer managed
-	// customer master key (CMK) might have been deleted, or the permissions for the
-	// customer managed CMK might have been changed. INTERNAL_FAILURE There was an
-	// error during a request. Before you can continue to work with DNSSEC signing,
-	// including actions that involve this KSK, you must correct the problem. For
-	// example, you may need to activate or deactivate the KSK.
+	// requires you to take action to resolve. For example, the customer managed key
+	// might have been deleted, or the permissions for the customer managed key might
+	// have been changed. INTERNAL_FAILURE There was an error during a request. Before
+	// you can continue to work with DNSSEC signing, including actions that involve
+	// this KSK, you must correct the problem. For example, you may need to activate or
+	// deactivate the KSK.
 	Status *string
 
 	// The status message provided for the following key-signing key (KSK) statuses:
@@ -1947,7 +1947,10 @@ type TrafficPolicySummary struct {
 }
 
 // (Private hosted zones only) A complex type that contains information about an
-// Amazon VPC.
+// Amazon VPC. If you associate a private hosted zone with an Amazon VPC when you
+// make a CreateHostedZone
+// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateHostedZone.html)
+// request, the following parameters are also required.
 type VPC struct {
 
 	// (Private hosted zones only) The ID of an Amazon VPC.

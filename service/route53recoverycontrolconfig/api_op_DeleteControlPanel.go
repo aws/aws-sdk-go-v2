@@ -28,7 +28,7 @@ func (c *Client) DeleteControlPanel(ctx context.Context, params *DeleteControlPa
 
 type DeleteControlPanelInput struct {
 
-	// The Amazon Resource Name (ARN) of the control panel that you're deleting.
+	// The Amazon Resource Name (ARN) of the control panel.
 	//
 	// This member is required.
 	ControlPanelArn *string

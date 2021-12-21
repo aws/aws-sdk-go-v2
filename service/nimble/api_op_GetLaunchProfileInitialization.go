@@ -57,7 +57,6 @@ type GetLaunchProfileInitializationInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type GetLaunchProfileInitializationOutput struct {
 
 	// The launch profile initialization.

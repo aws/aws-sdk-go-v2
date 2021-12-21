@@ -44,7 +44,6 @@ type ListEulaAcceptancesInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type ListEulaAcceptancesOutput struct {
 
 	// A collection of EULA acceptances.

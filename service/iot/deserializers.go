@@ -39590,6 +39590,15 @@ func awsRestjson1_deserializeDocumentAuthorizerDescription(v **types.AuthorizerD
 				}
 			}
 
+		case "enableCachingForHttp":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected EnableCachingForHttp to be of type *bool, got %T instead", value)
+				}
+				sv.EnableCachingForHttp = ptr.Bool(jtv)
+			}
+
 		case "lastModifiedDate":
 			if value != nil {
 				switch jtv := value.(type) {

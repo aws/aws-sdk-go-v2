@@ -9472,8 +9472,54 @@ func awsRestjson1_deserializeDocumentStreamConfiguration(v **types.StreamConfigu
 				sv.MaxStoppedSessionLengthInMinutes = int32(i64)
 			}
 
+		case "sessionStorage":
+			if err := awsRestjson1_deserializeDocumentStreamConfigurationSessionStorage(&sv.SessionStorage, value); err != nil {
+				return err
+			}
+
 		case "streamingImageIds":
 			if err := awsRestjson1_deserializeDocumentStreamingImageIdList(&sv.StreamingImageIds, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentStreamConfigurationSessionStorage(v **types.StreamConfigurationSessionStorage, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.StreamConfigurationSessionStorage
+	if *v == nil {
+		sv = &types.StreamConfigurationSessionStorage{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "mode":
+			if err := awsRestjson1_deserializeDocumentStreamingSessionStorageModeList(&sv.Mode, value); err != nil {
+				return err
+			}
+
+		case "root":
+			if err := awsRestjson1_deserializeDocumentStreamingSessionStorageRoot(&sv.Root, value); err != nil {
 				return err
 			}
 
@@ -10039,6 +10085,91 @@ func awsRestjson1_deserializeDocumentStreamingSessionList(v *[]types.StreamingSe
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentStreamingSessionStorageModeList(v *[]types.StreamingSessionStorageMode, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.StreamingSessionStorageMode
+	if *v == nil {
+		cv = []types.StreamingSessionStorageMode{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.StreamingSessionStorageMode
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected StreamingSessionStorageMode to be of type string, got %T instead", value)
+			}
+			col = types.StreamingSessionStorageMode(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentStreamingSessionStorageRoot(v **types.StreamingSessionStorageRoot, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.StreamingSessionStorageRoot
+	if *v == nil {
+		sv = &types.StreamingSessionStorageRoot{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "linux":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StreamingSessionStorageRootPathLinux to be of type string, got %T instead", value)
+				}
+				sv.Linux = ptr.String(jtv)
+			}
+
+		case "windows":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StreamingSessionStorageRootPathWindows to be of type string, got %T instead", value)
+				}
+				sv.Windows = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

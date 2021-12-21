@@ -1054,6 +1054,46 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.workmail#DeleteEmailMonitoringConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workmail#DeleteEmailMonitoringConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workmail#DeleteEmailMonitoringConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workmail#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#OrganizationNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#OrganizationStateException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the email monitoring configuration for a specified organization.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.workmail#DeleteEmailMonitoringConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "OrganizationId": {
+                    "target": "com.amazonaws.workmail#OrganizationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the organization from which the email monitoring configuration is deleted.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workmail#DeleteEmailMonitoringConfigurationResponse": {
+            "type": "structure",
+            "members": {}
+        },
         "com.amazonaws.workmail#DeleteGroup": {
             "type": "operation",
             "input": {
@@ -1603,6 +1643,62 @@
         "com.amazonaws.workmail#DeregisterMailDomainResponse": {
             "type": "structure",
             "members": {}
+        },
+        "com.amazonaws.workmail#DescribeEmailMonitoringConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workmail#DescribeEmailMonitoringConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workmail#DescribeEmailMonitoringConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workmail#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#OrganizationNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#OrganizationStateException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the current email monitoring configuration for a specified organization.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.workmail#DescribeEmailMonitoringConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "OrganizationId": {
+                    "target": "com.amazonaws.workmail#OrganizationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the organization for which the email monitoring configuration is described.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workmail#DescribeEmailMonitoringConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "RoleArn": {
+                    "target": "com.amazonaws.workmail#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM Role associated with the email monitoring configuration.</p>"
+                    }
+                },
+                "LogGroupArn": {
+                    "target": "com.amazonaws.workmail#LogGroupArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the CloudWatch Log group associated with the email monitoring configuration.</p>"
+                    }
+                }
+            }
         },
         "com.amazonaws.workmail#DescribeGroup": {
             "type": "operation",
@@ -4269,6 +4365,16 @@
                 }
             }
         },
+        "com.amazonaws.workmail#LogGroupArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 47,
+                    "max": 562
+                },
+                "smithy.api#pattern": "^arn:aws:logs:[a-z\\-0-9]*:[0-9]{12}:log-group:([\\.\\-_/#A-Za-z0-9]+):\\*$"
+            }
+        },
         "com.amazonaws.workmail#MailDomainInUseException": {
             "type": "structure",
             "members": {
@@ -5059,6 +5165,63 @@
             }
         },
         "com.amazonaws.workmail#PutAccessControlRuleResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.workmail#PutEmailMonitoringConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workmail#PutEmailMonitoringConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workmail#PutEmailMonitoringConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workmail#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#OrganizationNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#OrganizationStateException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates or updates the email monitoring configuration for a specified organization.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.workmail#PutEmailMonitoringConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "OrganizationId": {
+                    "target": "com.amazonaws.workmail#OrganizationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the organization for which the email monitoring configuration is set.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.workmail#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM Role associated with the email monitoring configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LogGroupArn": {
+                    "target": "com.amazonaws.workmail#LogGroupArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the CloudWatch Log group associated with the email monitoring configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workmail#PutEmailMonitoringConfigurationResponse": {
             "type": "structure",
             "members": {}
         },
@@ -6515,6 +6678,21 @@
         },
         "com.amazonaws.workmail#WorkMailService": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "WorkMail",
+                    "arnNamespace": "workmail",
+                    "cloudFormationName": "WorkMail",
+                    "cloudTrailEventSource": "workmail.amazonaws.com",
+                    "endpointPrefix": "workmail"
+                },
+                "aws.auth#sigv4": {
+                    "name": "workmail"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<p>Amazon WorkMail is a secure, managed business email and calendaring service with support for\n         existing desktop and mobile email clients. You can access your email, contacts, and\n         calendars using Microsoft Outlook, your browser, or other native iOS and Android email\n         applications. You can integrate WorkMail with your existing corporate directory and control\n         both the keys that encrypt your data and the location in which your data is\n         stored.</p>\n         <p>The WorkMail API is designed for the following scenarios:</p>\n         <ul>\n            <li>\n               <p>Listing and describing organizations</p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>Managing users</p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>Managing groups</p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>Managing resources</p>\n            </li>\n         </ul>\n         <p>All WorkMail API operations are Amazon-authenticated and certificate-signed. They not\n         only require the use of the AWS SDK, but also allow for the exclusive use of AWS Identity and Access Management\n         users and roles to help facilitate access, trust, and permission policies. By creating a\n         role and allowing an IAM user to access the WorkMail site, the IAM user gains full\n         administrative visibility into the entire WorkMail organization (or as set in the IAM\n         policy). This includes, but is not limited to, the ability to create, update, and delete\n         users, groups, and resources. This allows developers to perform the scenarios listed above,\n         as well as give users the ability to grant access on a selective basis using the IAM\n         model.</p>",
+                "smithy.api#title": "Amazon WorkMail"
+            },
             "version": "2017-10-01",
             "operations": [
                 {
@@ -6551,6 +6729,9 @@
                     "target": "com.amazonaws.workmail#DeleteAlias"
                 },
                 {
+                    "target": "com.amazonaws.workmail#DeleteEmailMonitoringConfiguration"
+                },
+                {
                     "target": "com.amazonaws.workmail#DeleteGroup"
                 },
                 {
@@ -6579,6 +6760,9 @@
                 },
                 {
                     "target": "com.amazonaws.workmail#DeregisterMailDomain"
+                },
+                {
+                    "target": "com.amazonaws.workmail#DescribeEmailMonitoringConfiguration"
                 },
                 {
                     "target": "com.amazonaws.workmail#DescribeGroup"
@@ -6668,6 +6852,9 @@
                     "target": "com.amazonaws.workmail#PutAccessControlRule"
                 },
                 {
+                    "target": "com.amazonaws.workmail#PutEmailMonitoringConfiguration"
+                },
+                {
                     "target": "com.amazonaws.workmail#PutInboundDmarcSettings"
                 },
                 {
@@ -6712,22 +6899,7 @@
                 {
                     "target": "com.amazonaws.workmail#UpdateResource"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "WorkMail",
-                    "arnNamespace": "workmail",
-                    "cloudFormationName": "WorkMail",
-                    "cloudTrailEventSource": "workmail.amazonaws.com",
-                    "endpointPrefix": "workmail"
-                },
-                "aws.auth#sigv4": {
-                    "name": "workmail"
-                },
-                "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>Amazon WorkMail is a secure, managed business email and calendaring service with support for\n         existing desktop and mobile email clients. You can access your email, contacts, and\n         calendars using Microsoft Outlook, your browser, or other native iOS and Android email\n         applications. You can integrate WorkMail with your existing corporate directory and control\n         both the keys that encrypt your data and the location in which your data is\n         stored.</p>\n         <p>The WorkMail API is designed for the following scenarios:</p>\n         <ul>\n            <li>\n               <p>Listing and describing organizations</p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>Managing users</p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>Managing groups</p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>Managing resources</p>\n            </li>\n         </ul>\n         <p>All WorkMail API operations are Amazon-authenticated and certificate-signed. They not\n         only require the use of the AWS SDK, but also allow for the exclusive use of AWS Identity and Access Management\n         users and roles to help facilitate access, trust, and permission policies. By creating a\n         role and allowing an IAM user to access the WorkMail site, the IAM user gains full\n         administrative visibility into the entire WorkMail organization (or as set in the IAM\n         policy). This includes, but is not limited to, the ability to create, update, and delete\n         users, groups, and resources. This allows developers to perform the scenarios listed above,\n         as well as give users the ability to grant access on a selective basis using the IAM\n         model.</p>",
-                "smithy.api#title": "Amazon WorkMail"
-            }
+            ]
         }
     }
 }

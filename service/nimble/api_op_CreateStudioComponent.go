@@ -28,7 +28,6 @@ func (c *Client) CreateStudioComponent(ctx context.Context, params *CreateStudio
 	return out, nil
 }
 
-//
 type CreateStudioComponentInput struct {
 
 	// The name for the studio component.
@@ -76,7 +75,6 @@ type CreateStudioComponentInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type CreateStudioComponentOutput struct {
 
 	// Information about the studio component.

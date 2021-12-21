@@ -39,11 +39,11 @@ type ListTypesInput struct {
 	// This member is required.
 	Format types.TypeDefinitionFormat
 
-	// The maximum number of results you want the request to return.
+	// The maximum number of results that you want the request to return.
 	MaxResults int32
 
 	// An identifier that was returned from the previous call to this operation, which
-	// can be used to return the next set of items in the list.
+	// you can use to return the next set of items in the list.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -51,8 +51,8 @@ type ListTypesInput struct {
 
 type ListTypesOutput struct {
 
-	// An identifier to be passed in the next request to this operation to return the
-	// next set of items in the list.
+	// An identifier to pass in the next request to this operation to return the next
+	// set of items in the list.
 	NextToken *string
 
 	// The Type objects.

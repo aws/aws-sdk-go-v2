@@ -284,8 +284,15 @@ type ChannelMessageCallback struct {
 	// The message content.
 	Content *string
 
+	// The attributes for the message, used for message filtering along with a
+	// FilterRule defined in the PushNotificationPreferences.
+	MessageAttributes map[string]MessageAttributeValue
+
 	// The message metadata.
 	Metadata *string
+
+	// The push notification configuration of the message.
+	PushNotification *PushNotificationConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -499,19 +506,13 @@ type ProcessorConfiguration struct {
 type PushNotificationConfiguration struct {
 
 	// The body of the push notification.
-	//
-	// This member is required.
 	Body *string
 
 	// The title of the push notification.
-	//
-	// This member is required.
 	Title *string
 
 	// Enum value that indicates the type of the push notification for a message.
 	// DEFAULT: Normal mobile push notification. VOIP: VOIP mobile push notification.
-	//
-	// This member is required.
 	Type PushNotificationType
 
 	noSmithyDocumentSerde

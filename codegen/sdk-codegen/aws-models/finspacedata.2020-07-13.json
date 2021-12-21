@@ -250,6 +250,12 @@
                         "smithy.api#documentation": "<p>Time until which the Changeset is active. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
                     }
                 },
+                "activeFromTimestamp": {
+                    "target": "com.amazonaws.finspacedata#TimestampEpoch",
+                    "traits": {
+                        "smithy.api#box": {}
+                    }
+                },
                 "updatesChangesetId": {
                     "target": "com.amazonaws.finspacedata#ChangesetId",
                     "traits": {
@@ -696,8 +702,7 @@
                 "datasetDescription": {
                     "target": "com.amazonaws.finspacedata#DatasetDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>Description of a Dataset.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Description of a Dataset.</p>"
                     }
                 },
                 "ownerInfo": {
@@ -716,8 +721,7 @@
                 "alias": {
                     "target": "com.amazonaws.finspacedata#AliasString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique resource identifier for a Dataset.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The unique resource identifier for a Dataset.</p>"
                     }
                 },
                 "schemaDefinition": {
@@ -792,6 +796,12 @@
                         "smithy.api#documentation": "<p>Destination type for a Dataview.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>GLUE_TABLE</code> - Glue table destination type.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
+                },
+                "s3DestinationExportFileFormat": {
+                    "target": "com.amazonaws.finspacedata#ExportFileFormat"
+                },
+                "s3DestinationExportFileFormatOptions": {
+                    "target": "com.amazonaws.finspacedata#S3DestinationFormatOptions"
                 }
             },
             "traits": {
@@ -1038,7 +1048,7 @@
                 "smithy.api#documentation": "Description of a dataset",
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 256
+                    "max": 1000
                 },
                 "smithy.api#pattern": "^[\\s\\S]*\\S[\\s\\S]*$"
             }
@@ -1281,6 +1291,22 @@
         "com.amazonaws.finspacedata#ErrorMessage2": {
             "type": "string"
         },
+        "com.amazonaws.finspacedata#ExportFileFormat": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Data View Export File Format",
+                "smithy.api#enum": [
+                    {
+                        "value": "PARQUET",
+                        "name": "PARQUET"
+                    },
+                    {
+                        "value": "DELIMITED_TEXT",
+                        "name": "DELIMITED_TEXT"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.finspacedata#FormatParams": {
             "type": "map",
             "key": {
@@ -1416,6 +1442,12 @@
                     "traits": {
                         "smithy.api#box": {},
                         "smithy.api#documentation": "<p>Time until which the Changeset is active. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
+                    }
+                },
+                "activeFromTimestamp": {
+                    "target": "com.amazonaws.finspacedata#TimestampEpoch",
+                    "traits": {
+                        "smithy.api#box": {}
                     }
                 },
                 "updatesChangesetId": {
@@ -2272,6 +2304,15 @@
                 }
             }
         },
+        "com.amazonaws.finspacedata#S3DestinationFormatOptions": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.finspacedata#StringMapKey"
+            },
+            "value": {
+                "target": "com.amazonaws.finspacedata#StringMapValue"
+            }
+        },
         "com.amazonaws.finspacedata#SchemaDefinition": {
             "type": "structure",
             "members": {
@@ -2582,8 +2623,7 @@
                 "alias": {
                     "target": "com.amazonaws.finspacedata#AliasString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique resource identifier for a Dataset.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The unique resource identifier for a Dataset.</p>"
                     }
                 },
                 "schemaDefinition": {

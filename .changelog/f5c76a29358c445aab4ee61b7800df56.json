@@ -1,0 +1,13 @@
+{
+    "id": "f5c76a29-358c-445a-ab4e-e61b7800df56",
+    "type": "documentation",
+    "description": "API client updated",
+    "modules": [
+        "service/apigateway",
+        "service/health",
+        "service/savingsplans",
+        "service/secretsmanager",
+        "service/sms",
+        "service/support"
+    ]
+}

@@ -120,7 +120,7 @@ type LocationListEntry struct {
 	// prefix path that you want to mount and use as the root of the location.
 	LocationArn *string
 
-	// Represents a list of URLs of a location. LocationUri returns an array that
+	// Represents a list of URIs of a location. LocationUri returns an array that
 	// contains a list of locations when the ListLocations
 	// (https://docs.aws.amazon.com/datasync/latest/userguide/API_ListLocations.html)
 	// operation is called. Format: TYPE://GLOBAL_ID/SUBDIR. TYPE designates the type

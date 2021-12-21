@@ -10,7 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//
+// Modifies the flag, ChangeProtection, which indicates whether it is possible to
+// change the firewall. If the flag is set to TRUE, the firewall is protected from
+// changes. This setting helps protect against accidentally changing a firewall
+// that's in use.
 func (c *Client) UpdateFirewallPolicyChangeProtection(ctx context.Context, params *UpdateFirewallPolicyChangeProtectionInput, optFns ...func(*Options)) (*UpdateFirewallPolicyChangeProtectionOutput, error) {
 	if params == nil {
 		params = &UpdateFirewallPolicyChangeProtectionInput{}

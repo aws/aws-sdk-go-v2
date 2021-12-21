@@ -82,6 +82,26 @@ func (LedgerState) Values() []LedgerState {
 	}
 }
 
+type OutputFormat string
+
+// Enum values for OutputFormat
+const (
+	OutputFormatIonBinary OutputFormat = "ION_BINARY"
+	OutputFormatIonText   OutputFormat = "ION_TEXT"
+	OutputFormatJson      OutputFormat = "JSON"
+)
+
+// Values returns all known values for OutputFormat. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (OutputFormat) Values() []OutputFormat {
+	return []OutputFormat{
+		"ION_BINARY",
+		"ION_TEXT",
+		"JSON",
+	}
+}
+
 type PermissionsMode string
 
 // Enum values for PermissionsMode

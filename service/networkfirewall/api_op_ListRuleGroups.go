@@ -45,6 +45,11 @@ type ListRuleGroupsInput struct {
 	// request in your next request.
 	NextToken *string
 
+	// The scope of the request. The default setting of ACCOUNT or a setting of NULL
+	// returns all of the rule groups in your account. A setting of MANAGED returns all
+	// available managed rule groups.
+	Scope types.ResourceManagedStatus
+
 	noSmithyDocumentSerde
 }
 

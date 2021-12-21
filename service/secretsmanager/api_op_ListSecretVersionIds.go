@@ -12,23 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all of the versions attached to the specified secret. The output does not
-// include the SecretString or SecretBinary fields. By default, the list includes
-// only versions that have at least one staging label in VersionStage attached.
-// Always check the NextToken response parameter when calling any of the List*
-// operations. These operations can occasionally return an empty or shorter than
-// expected list of results even when there more results become available. When
-// this happens, the NextToken response parameter contains a value to pass to the
-// next call to the same API to request the next part of the list. Minimum
-// permissions To run this command, you must have the following permissions:
-//
-// *
-// secretsmanager:ListSecretVersionIds
-//
-// Related operations
-//
-// * To list the secrets
-// in an account, use ListSecrets.
+// Lists the versions for a secret. To list the secrets in the account, use
+// ListSecrets. To get the secret value from SecretString or SecretBinary, call
+// GetSecretValue. Minimum permissions To run this command, you must have
+// secretsmanager:ListSecretVersionIds permissions.
 func (c *Client) ListSecretVersionIds(ctx context.Context, params *ListSecretVersionIdsInput, optFns ...func(*Options)) (*ListSecretVersionIdsOutput, error) {
 	if params == nil {
 		params = &ListSecretVersionIdsInput{}
@@ -46,34 +33,25 @@ func (c *Client) ListSecretVersionIds(ctx context.Context, params *ListSecretVer
 
 type ListSecretVersionIdsInput struct {
 
-	// The identifier for the secret containing the versions you want to list. You can
-	// specify either the Amazon Resource Name (ARN) or the friendly name of the
-	// secret. For an ARN, we recommend that you specify a complete ARN rather than a
-	// partial ARN.
+	// The ARN or name of the secret whose versions you want to list. For an ARN, we
+	// recommend that you specify a complete ARN rather than a partial ARN.
 	//
 	// This member is required.
 	SecretId *string
 
-	// (Optional) Specifies that you want the results to include versions that do not
-	// have any staging labels attached to them. Such versions are considered
-	// deprecated and are subject to deletion by Secrets Manager as needed.
+	// Specifies whether to include versions of secrets that don't have any staging
+	// labels attached to them. Versions without staging labels are considered
+	// deprecated and are subject to deletion by Secrets Manager.
 	IncludeDeprecated bool
 
-	// (Optional) Limits the number of results you want to include in the response. If
-	// you don't include this parameter, it defaults to a value that's specific to the
-	// operation. If additional items exist beyond the maximum you specify, the
-	// NextToken response element is present and has a value (isn't null). Include that
-	// value as the NextToken request parameter in the next call to the operation to
-	// get the next part of the results. Note that Secrets Manager might return fewer
-	// results than the maximum even when there are more results available. You should
-	// check NextToken after every operation to ensure that you receive all of the
-	// results.
+	// The number of results to include in the response. If there are more results
+	// available, in the response, Secrets Manager includes NextToken. To get the next
+	// results, call ListSecretVersionIds again with the value from NextToken.
 	MaxResults int32
 
-	// (Optional) Use this parameter in a request if you receive a NextToken response
-	// in a previous request indicating there's more output available. In a subsequent
-	// call, set it to the value of the previous call NextToken response to indicate
-	// where the output should continue from.
+	// A token that indicates where the output should continue from, if a previous call
+	// did not show all results. To get the next results, call ListSecretVersionIds
+	// again with this value.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -81,27 +59,19 @@ type ListSecretVersionIdsInput struct {
 
 type ListSecretVersionIdsOutput struct {
 
-	// The Amazon Resource Name (ARN) for the secret. Secrets Manager automatically
-	// adds several random characters to the name at the end of the ARN when you
-	// initially create a secret. This affects only the ARN and not the actual friendly
-	// name. This ensures that if you create a new secret with the same name as an old
-	// secret that you previously deleted, then users with access to the old secret
-	// don't automatically get access to the new secret because the ARNs are different.
+	// The ARN of the secret.
 	ARN *string
 
-	// The friendly name of the secret.
+	// The name of the secret.
 	Name *string
 
-	// If present in the response, this value indicates that there's more output
-	// available than included in the current response. This can occur even when the
-	// response includes no values at all, such as when you ask for a filtered view of
-	// a very long list. Use this value in the NextToken request parameter in a
-	// subsequent call to the operation to continue processing and get the next part of
-	// the output. You should repeat this until the NextToken response element comes
-	// back empty (as null).
+	// Secrets Manager includes this value if there's more output available than what
+	// is included in the current response. This can occur even when the response
+	// includes no values at all, such as when you ask for a filtered view of a long
+	// list. To get the next results, call ListSecretVersionIds again with this value.
 	NextToken *string
 
-	// The list of the currently available versions of the specified secret.
+	// A list of the versions of the secret.
 	Versions []types.SecretVersionsListEntry
 
 	// Metadata pertaining to the operation's result.
@@ -184,15 +154,9 @@ var _ ListSecretVersionIdsAPIClient = (*Client)(nil)
 // ListSecretVersionIdsPaginatorOptions is the paginator options for
 // ListSecretVersionIds
 type ListSecretVersionIdsPaginatorOptions struct {
-	// (Optional) Limits the number of results you want to include in the response. If
-	// you don't include this parameter, it defaults to a value that's specific to the
-	// operation. If additional items exist beyond the maximum you specify, the
-	// NextToken response element is present and has a value (isn't null). Include that
-	// value as the NextToken request parameter in the next call to the operation to
-	// get the next part of the results. Note that Secrets Manager might return fewer
-	// results than the maximum even when there are more results available. You should
-	// check NextToken after every operation to ensure that you receive all of the
-	// results.
+	// The number of results to include in the response. If there are more results
+	// available, in the response, Secrets Manager includes NextToken. To get the next
+	// results, call ListSecretVersionIds again with the value from NextToken.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

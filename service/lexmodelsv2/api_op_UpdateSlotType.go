@@ -58,14 +58,11 @@ type UpdateSlotTypeInput struct {
 	// This member is required.
 	SlotTypeName *string
 
-	// The strategy that Amazon Lex should use when deciding on a value from the list
-	// of slot type values.
-	//
-	// This member is required.
-	ValueSelectionSetting *types.SlotValueSelectionSetting
-
 	// The new description of the slot type.
 	Description *string
+
+	// Provides information about the external source of the slot type's definition.
+	ExternalSourceSetting *types.ExternalSourceSetting
 
 	// The new built-in slot type that should be used as the parent of this slot type.
 	ParentSlotTypeSignature *string
@@ -73,6 +70,10 @@ type UpdateSlotTypeInput struct {
 	// A new list of values and their optional synonyms that define the values that the
 	// slot type can take.
 	SlotTypeValues []types.SlotTypeValue
+
+	// The strategy that Amazon Lex should use when deciding on a value from the list
+	// of slot type values.
+	ValueSelectionSetting *types.SlotValueSelectionSetting
 
 	noSmithyDocumentSerde
 }
@@ -90,6 +91,9 @@ type UpdateSlotTypeOutput struct {
 
 	// The updated description of the slot type.
 	Description *string
+
+	// Provides information about the external source of the slot type's definition.
+	ExternalSourceSetting *types.ExternalSourceSetting
 
 	// A timestamp of the date and time that the slot type was last updated.
 	LastUpdatedDateTime *time.Time

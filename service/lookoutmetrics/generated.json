@@ -23,6 +23,7 @@
         "api_op_GetSampleData.go",
         "api_op_ListAlerts.go",
         "api_op_ListAnomalyDetectors.go",
+        "api_op_ListAnomalyGroupRelatedMetrics.go",
         "api_op_ListAnomalyGroupSummaries.go",
         "api_op_ListAnomalyGroupTimeSeries.go",
         "api_op_ListMetricSets.go",

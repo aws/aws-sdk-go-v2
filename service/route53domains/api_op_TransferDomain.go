@@ -24,7 +24,8 @@ import (
 // in the Amazon Route 53 Developer Guide.
 //
 // * For information about how to transfer
-// a domain from one AWS account to another, see TransferDomainToAnotherAwsAccount
+// a domain from one Amazon Web Services account to another, see
+// TransferDomainToAnotherAwsAccount
 // (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html).
 //
 // *
@@ -126,7 +127,9 @@ type TransferDomainInput struct {
 	// specify true, WHOIS ("who is") queries return contact information either for
 	// Amazon Registrar (for .com, .net, and .org domains) or for our registrar
 	// associate, Gandi (for all other TLDs). If you specify false, WHOIS queries
-	// return the information that you entered for the admin contact. Default: true
+	// return the information that you entered for the admin contact. You must specify
+	// the same privacy setting for the administrative, registrant, and technical
+	// contacts. Default: true
 	PrivacyProtectAdminContact *bool
 
 	// Whether you want to conceal contact information from WHOIS queries. If you
@@ -134,14 +137,17 @@ type TransferDomainInput struct {
 	// Amazon Registrar (for .com, .net, and .org domains) or for our registrar
 	// associate, Gandi (for all other TLDs). If you specify false, WHOIS queries
 	// return the information that you entered for the registrant contact (domain
-	// owner). Default: true
+	// owner). You must specify the same privacy setting for the administrative,
+	// registrant, and technical contacts. Default: true
 	PrivacyProtectRegistrantContact *bool
 
 	// Whether you want to conceal contact information from WHOIS queries. If you
 	// specify true, WHOIS ("who is") queries return contact information either for
 	// Amazon Registrar (for .com, .net, and .org domains) or for our registrar
 	// associate, Gandi (for all other TLDs). If you specify false, WHOIS queries
-	// return the information that you entered for the technical contact. Default: true
+	// return the information that you entered for the technical contact. You must
+	// specify the same privacy setting for the administrative, registrant, and
+	// technical contacts. Default: true
 	PrivacyProtectTechContact *bool
 
 	noSmithyDocumentSerde

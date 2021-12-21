@@ -50,7 +50,6 @@ type StartStudioSSOConfigurationRepairInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type StartStudioSSOConfigurationRepairOutput struct {
 
 	// Information about a studio.

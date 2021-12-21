@@ -109,8 +109,10 @@ type CreateHostedZoneInput struct {
 
 	// (Private hosted zones only) A complex type that contains information about the
 	// Amazon VPC that you're associating with this hosted zone. You can specify only
-	// one Amazon VPC when you create a private hosted zone. To associate additional
-	// Amazon VPCs with the hosted zone, use AssociateVPCWithHostedZone
+	// one Amazon VPC when you create a private hosted zone. If you are associating a
+	// VPC with a hosted zone with this request, the paramaters VPCId and VPCRegion are
+	// also required. To associate additional Amazon VPCs with the hosted zone, use
+	// AssociateVPCWithHostedZone
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_AssociateVPCWithHostedZone.html)
 	// after you create a hosted zone.
 	VPC *types.VPC

@@ -29281,6 +29281,15 @@ func awsAwsjson11_deserializeDocumentAutoMLChannel(v **types.AutoMLChannel, valu
 				sv.CompressionType = types.CompressionType(jtv)
 			}
 
+		case "ContentType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ContentType to be of type string, got %T instead", value)
+				}
+				sv.ContentType = ptr.String(jtv)
+			}
+
 		case "DataSource":
 			if err := awsAwsjson11_deserializeDocumentAutoMLDataSource(&sv.DataSource, value); err != nil {
 				return err
@@ -47865,6 +47874,19 @@ func awsAwsjson11_deserializeDocumentPipelineExecutionStep(v **types.PipelineExe
 
 	for key, value := range shape {
 		switch key {
+		case "AttemptCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected IntegerValue to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AttemptCount = int32(i64)
+			}
+
 		case "CacheHitResult":
 			if err := awsAwsjson11_deserializeDocumentCacheHitResult(&sv.CacheHitResult, value); err != nil {
 				return err

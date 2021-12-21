@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API is in preview release for Amazon Connect and subject to change. Runs an
-// AWS Lambda job that does the following:
+// Runs an AWS Lambda job that does the following:
 //
 // * All the profileKeys in the
 // ProfileToBeMerged will be moved to the main profile.

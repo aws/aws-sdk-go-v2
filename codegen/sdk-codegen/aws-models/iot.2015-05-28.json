@@ -2827,6 +2827,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether IoT validates the token signature in an authorization request.</p>"
                     }
+                },
+                "enableCachingForHttp": {
+                    "target": "com.amazonaws.iot#EnableCachingForHttp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When <code>true</code>, the result from the authorizer’s Lambda function is\n\t  cached for the time specified in <code>refreshAfterInSeconds</code>. The cached\n\t  result is used while the device reuses the same HTTP connection.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2839,7 +2845,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 2048
-                }
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.iot#AuthorizerName": {
@@ -4222,15 +4229,18 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 65536
-                }
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.iot#CertificateSigningRequest": {
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 1
-                }
+                    "min": 1,
+                    "max": 4096
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.iot#CertificateStateException": {
@@ -4968,6 +4978,12 @@
                     "target": "com.amazonaws.iot#BooleanKey",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether IoT validates the token signature in an authorization request.</p>"
+                    }
+                },
+                "enableCachingForHttp": {
+                    "target": "com.amazonaws.iot#EnableCachingForHttp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When <code>true</code>, the result from the authorizer’s Lambda function is\n\t  cached for clients that use persistent HTTP connections. The results are cached for the time\n\t  specified by the Lambda function in <code>refreshAfterInSeconds</code>. This value\n     does not affect authorization of clients that use MQTT connections.</p>\n         <p>The default value is <code>false</code>.</p>"
                     }
                 }
             }
@@ -13077,7 +13093,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 253
-                }
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.iot#DomainType": {
@@ -13326,6 +13343,12 @@
         "com.amazonaws.iot#ElasticsearchType": {
             "type": "string"
         },
+        "com.amazonaws.iot#EnableCachingForHttp": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
         "com.amazonaws.iot#EnableIoTLoggingParams": {
             "type": "structure",
             "members": {
@@ -13407,7 +13430,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 128
-                }
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.iot#Environment": {
@@ -15327,7 +15351,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 8192
-                }
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.iot#HttpHeaderValue": {
@@ -15336,7 +15361,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 8192
-                }
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.iot#HttpHeaders": {
@@ -15354,7 +15380,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 4096
-                }
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.iot#HttpUrlDestinationConfiguration": {
@@ -16466,7 +16493,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 5120
-                }
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.iot#KinesisAction": {
@@ -21638,7 +21666,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 128
-                }
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.iot#MessageFormat": {
@@ -21996,7 +22025,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 65535
-                }
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.iot#MqttContext": {
@@ -22040,7 +22070,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 65535
-                }
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.iot#NamedShadowIndexingMode": {
@@ -22512,7 +22543,14 @@
             }
         },
         "com.amazonaws.iot#Parameter": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
+            }
         },
         "com.amazonaws.iot#ParameterKey": {
             "type": "string",
@@ -22654,7 +22692,14 @@
             "type": "string"
         },
         "com.amazonaws.iot#PolicyDocument": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 404600
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
+            }
         },
         "com.amazonaws.iot#PolicyDocuments": {
             "type": "list",
@@ -24051,7 +24096,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 2048
-                }
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.iot#ResourceAlreadyExistsException": {
@@ -24844,7 +24890,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 253
-                }
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.iot#ServiceName": {
@@ -26391,7 +26438,14 @@
             "type": "string"
         },
         "com.amazonaws.iot#TemplateBody": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10240
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
+            }
         },
         "com.amazonaws.iot#TemplateDescription": {
             "type": "string",
@@ -27368,7 +27422,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 6144
-                }
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.iot#TokenKeyName": {
@@ -28171,6 +28226,12 @@
                     "target": "com.amazonaws.iot#AuthorizerStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>The status of the update authorizer request.</p>"
+                    }
+                },
+                "enableCachingForHttp": {
+                    "target": "com.amazonaws.iot#EnableCachingForHttp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When <code>true</code>, the result from the authorizer’s Lambda function is\n\t  cached for the time specified in <code>refreshAfterInSeconds</code>. The cached\n\t  result is used while the device reuses the same HTTP connection.</p>"
                     }
                 }
             }
@@ -30047,7 +30108,14 @@
             }
         },
         "com.amazonaws.iot#Value": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 4096
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
+            }
         },
         "com.amazonaws.iot#Variance": {
             "type": "double"

@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a unique key that you can distribute to clients who are executing your
-// API.
+// Creates a unique key that you can distribute to clients who invoke your API.
 func (c *Client) CreateApiKey(ctx context.Context, params *CreateApiKeyInput, optFns ...func(*Options)) (*CreateApiKeyOutput, error) {
 	if params == nil {
 		params = &CreateApiKeyInput{}
@@ -38,7 +37,7 @@ type CreateApiKeyInput struct {
 	// A description of the purpose of the API key.
 	Description *string
 
-	// The time from creation time after which the API key expires. The date is
+	// From the creation time, the time after which the API key expires. The date is
 	// represented as seconds since the epoch, rounded down to the nearest hour. The
 	// default value for this parameter is 7 days from creation time. For more
 	// information, see .

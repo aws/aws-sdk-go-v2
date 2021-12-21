@@ -50,7 +50,6 @@ type ListStreamingSessionsInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type ListStreamingSessionsOutput struct {
 
 	// The token for the next set of results, or null if there are no more results.

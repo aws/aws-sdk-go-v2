@@ -34,6 +34,24 @@
         },
         "com.amazonaws.route53#AWSDnsV20130401": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Route 53",
+                    "arnNamespace": "route53",
+                    "cloudFormationName": "Route53",
+                    "cloudTrailEventSource": "route53.amazonaws.com",
+                    "endpointPrefix": "route53"
+                },
+                "aws.auth#sigv4": {
+                    "name": "route53"
+                },
+                "aws.protocols#restXml": {},
+                "smithy.api#documentation": "<p>Amazon Route 53 is a highly available and scalable Domain Name System (DNS) web service.</p>",
+                "smithy.api#title": "Amazon Route 53",
+                "smithy.api#xmlNamespace": {
+                    "uri": "https://route53.amazonaws.com/doc/2013-04-01/"
+                }
+            },
             "version": "2013-04-01",
             "operations": [
                 {
@@ -228,25 +246,7 @@
                 {
                     "target": "com.amazonaws.route53#UpdateTrafficPolicyInstance"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Route 53",
-                    "arnNamespace": "route53",
-                    "cloudFormationName": "Route53",
-                    "cloudTrailEventSource": "route53.amazonaws.com",
-                    "endpointPrefix": "route53"
-                },
-                "aws.auth#sigv4": {
-                    "name": "route53"
-                },
-                "aws.protocols#restXml": {},
-                "smithy.api#documentation": "<p>Amazon Route 53 is a highly available and scalable Domain Name System (DNS) web service.</p>",
-                "smithy.api#title": "Amazon Route 53",
-                "smithy.api#xmlNamespace": {
-                    "uri": "https://route53.amazonaws.com/doc/2013-04-01/"
-                }
-            }
+            ]
         },
         "com.amazonaws.route53#AccountLimit": {
             "type": "structure",
@@ -942,6 +942,10 @@
                         "name": "ap_southeast_2"
                     },
                     {
+                        "value": "ap-southeast-3",
+                        "name": "ap_southeast_3"
+                    },
+                    {
                         "value": "ap-northeast-1",
                         "name": "ap_northeast_1"
                     },
@@ -988,6 +992,10 @@
                     {
                         "value": "us-iso-east-1",
                         "name": "us_iso_east_1"
+                    },
+                    {
+                        "value": "us-iso-west-1",
+                        "name": "us_iso_west_1"
                     },
                     {
                         "value": "us-isob-east-1",
@@ -1199,7 +1207,7 @@
                 "VPC": {
                     "target": "com.amazonaws.route53#VPC",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Private hosted zones only) A complex type that contains information about the Amazon VPC that you're associating with this hosted zone.</p>\n\t\t       <p>You can specify only one Amazon VPC when you create a private hosted zone. To associate additional Amazon VPCs with the hosted zone, \n\t\t\tuse <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_AssociateVPCWithHostedZone.html\">AssociateVPCWithHostedZone</a>\n\t\t\tafter you create a hosted zone.</p>"
+                        "smithy.api#documentation": "<p>(Private hosted zones only) A complex type that contains information about the Amazon VPC that you're associating with this hosted zone.</p>\n\t\t       <p>You can specify only one Amazon VPC when you create a private hosted zone. If you are associating a VPC with a hosted zone with this request,\n\t\t\tthe paramaters \n\t\t\t<code>VPCId</code> and <code>VPCRegion</code> are also required.</p>\n\t\t       <p>To associate additional Amazon VPCs with the hosted zone, \n\t\t\tuse <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_AssociateVPCWithHostedZone.html\">AssociateVPCWithHostedZone</a>\n\t\t\tafter you create a hosted zone.</p>"
                     }
                 },
                 "CallerReference": {
@@ -1338,7 +1346,7 @@
                 "KeyManagementServiceArn": {
                     "target": "com.amazonaws.route53#SigningKeyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon resource name (ARN) for a customer managed customer master key (CMK) in Key Management Service (KMS).\n\t\t\tThe <code>KeyManagementServiceArn</code> must be unique for each key-signing key (KSK) in a single hosted zone. \n\t\t\tTo see an example of <code>KeyManagementServiceArn</code> that grants the correct permissions for DNSSEC, \n\t\t\tscroll down to <b>Example</b>. </p>\n\t\t       <p>You must configure the customer managed CMK as follows:</p>\n\t\t       <dl>\n            <dt>Status</dt>\n            <dd>\n               <p>Enabled</p>\n            </dd>\n            <dt>Key spec</dt>\n            <dd>\n               <p>ECC_NIST_P256</p>\n            </dd>\n            <dt>Key usage</dt>\n            <dd>\n               <p>Sign and verify</p>\n            </dd>\n            <dt>Key policy</dt>\n            <dd>\n               <p>The key policy must give permission for the following actions:</p>\n\t\t\t\t\t          <ul>\n                  <li>\n                     <p>DescribeKey</p>\n                  </li>\n                  <li>\n                     <p>GetPublicKey</p>\n                  </li>\n                  <li>\n                     <p>Sign</p>\n                  </li>\n               </ul>\n\t\t\t\t\t          <p>The key policy must also include the Amazon Route 53 service in the principal for your account. \n\t\t\t\t\t\tSpecify the following:</p>\n\t\t\t\t\t          <ul>\n                  <li>\n                     <p>\n                        <code>\"Service\": \"dnssec-route53.amazonaws.com\"</code>\n                     </p>\n                  </li>\n               </ul>\n\t\t\t\t        </dd>\n         </dl>\n\t\t       <p>For more information about working with a customer managed CMK in KMS, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html\">Key Management Service concepts</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon resource name (ARN) for a customer managed key in Key Management Service (KMS).\n\t\t\tThe <code>KeyManagementServiceArn</code> must be unique for each key-signing key (KSK) in a single hosted zone. \n\t\t\tTo see an example of <code>KeyManagementServiceArn</code> that grants the correct permissions for DNSSEC, \n\t\t\tscroll down to <b>Example</b>. </p>\n\t\t       <p>You must configure the customer managed customer managed key as follows:</p>\n\t\t       <dl>\n            <dt>Status</dt>\n            <dd>\n               <p>Enabled</p>\n            </dd>\n            <dt>Key spec</dt>\n            <dd>\n               <p>ECC_NIST_P256</p>\n            </dd>\n            <dt>Key usage</dt>\n            <dd>\n               <p>Sign and verify</p>\n            </dd>\n            <dt>Key policy</dt>\n            <dd>\n               <p>The key policy must give permission for the following actions:</p>\n\t\t\t\t\t          <ul>\n                  <li>\n                     <p>DescribeKey</p>\n                  </li>\n                  <li>\n                     <p>GetPublicKey</p>\n                  </li>\n                  <li>\n                     <p>Sign</p>\n                  </li>\n               </ul>\n\t\t\t\t\t          <p>The key policy must also include the Amazon Route 53 service in the principal for your account. \n\t\t\t\t\t\tSpecify the following:</p>\n\t\t\t\t\t          <ul>\n                  <li>\n                     <p>\n                        <code>\"Service\": \"dnssec-route53.amazonaws.com\"</code>\n                     </p>\n                  </li>\n               </ul>\n\t\t\t\t        </dd>\n         </dl>\n\t\t       <p>For more information about working with a customer managed key in KMS, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html\">Key Management Service concepts</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1916,7 +1924,7 @@
                 "ServeSignature": {
                     "target": "com.amazonaws.route53#ServeSignature",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string that represents the current hosted zone signing status.</p>\n\t\t       <p>Status can have one of the following values:</p>\n\t\t       <dl>\n            <dt>SIGNING</dt>\n            <dd>\n               <p>DNSSEC signing is enabled for the hosted zone.</p>\n            </dd>\n            <dt>NOT_SIGNING</dt>\n            <dd>\n               <p>DNSSEC signing is not enabled for the hosted zone.</p>\n            </dd>\n            <dt>DELETING</dt>\n            <dd>\n               <p>DNSSEC signing is in the process of being removed for the hosted zone.</p>\n            </dd>\n            <dt>ACTION_NEEDED</dt>\n            <dd>\n               <p>There is a problem with signing in the hosted zone that requires you to take action to resolve.\n\t\t\t\t\tFor example, the customer managed customer master key (CMK) might have been deleted, or the\n\t\t\t\t\tpermissions for the customer managed CMK might have been changed.</p>\n            </dd>\n            <dt>INTERNAL_FAILURE</dt>\n            <dd>\n               <p>There was an error during a request. Before you can continue to work with DNSSEC\n\t\t\t\t\tsigning, including with key-signing keys (KSKs), you must correct the problem by enabling or \n\t\t\t\t\tdisabling DNSSEC signing for the hosted zone.</p>\n            </dd>\n         </dl>"
+                        "smithy.api#documentation": "<p>A string that represents the current hosted zone signing status.</p>\n\t\t       <p>Status can have one of the following values:</p>\n\t\t       <dl>\n            <dt>SIGNING</dt>\n            <dd>\n               <p>DNSSEC signing is enabled for the hosted zone.</p>\n            </dd>\n            <dt>NOT_SIGNING</dt>\n            <dd>\n               <p>DNSSEC signing is not enabled for the hosted zone.</p>\n            </dd>\n            <dt>DELETING</dt>\n            <dd>\n               <p>DNSSEC signing is in the process of being removed for the hosted zone.</p>\n            </dd>\n            <dt>ACTION_NEEDED</dt>\n            <dd>\n               <p>There is a problem with signing in the hosted zone that requires you to take action to resolve.\n\t\t\t\t\tFor example, the customer managed key might have been deleted, or the\n\t\t\t\t\tpermissions for the customer managed key might have been changed.</p>\n            </dd>\n            <dt>INTERNAL_FAILURE</dt>\n            <dd>\n               <p>There was an error during a request. Before you can continue to work with DNSSEC\n\t\t\t\t\tsigning, including with key-signing keys (KSKs), you must correct the problem by enabling or \n\t\t\t\t\tdisabling DNSSEC signing for the hosted zone.</p>\n            </dd>\n         </dl>"
                     }
                 },
                 "StatusMessage": {
@@ -2272,7 +2280,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a key-signing key (KSK). Before you can delete a KSK, you must deactivate it. The KSK must be\n\t\tdeactivated before you can delete it regardless of whether the hosted zone is enabled for DNSSEC signing.</p>",
+                "smithy.api#documentation": "<p>Deletes a key-signing key (KSK). Before you can delete a KSK, you must deactivate it. The KSK must be\n\t\tdeactivated before you can delete it regardless of whether the hosted zone is enabled for DNSSEC signing.</p>\n\t\t       <p>You can use <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_DeactivateKeySigningKey.html\">DeactivateKeySigningKey</a> \n\t\t\tto deactivate the key before you delete it.</p>\n\t\t       <p>Use <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetDNSSEC.html\">GetDNSSEC</a> to verify that the KSK is in an <code>INACTIVE</code>\n\t\t\tstatus.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/2013-04-01/keysigningkey/{HostedZoneId}/{Name}",
@@ -4973,7 +4981,7 @@
                 "KmsArn": {
                     "target": "com.amazonaws.route53#SigningKeyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon resource name (ARN) used to identify the customer managed customer master key (CMK) in Key Management Service (KMS).\n\t\t\tThe <code>KmsArn</code> must be unique for each key-signing key (KSK) in a single hosted zone.</p>\n\t\t       <p>You must configure the CMK as follows:</p>\n\t\t       <dl>\n            <dt>Status</dt>\n            <dd>\n               <p>Enabled</p>\n            </dd>\n            <dt>Key spec</dt>\n            <dd>\n               <p>ECC_NIST_P256</p>\n            </dd>\n            <dt>Key usage</dt>\n            <dd>\n               <p>Sign and verify</p>\n            </dd>\n            <dt>Key policy</dt>\n            <dd>\n               <p>The key policy must give permission for the following actions:</p>\n\t\t\t\t           <ul>\n                  <li>\n                     <p>DescribeKey</p>\n                  </li>\n                  <li>\n                     <p>GetPublicKey</p>\n                  </li>\n                  <li>\n                     <p>Sign</p>\n                  </li>\n               </ul>\n\t\t\t\t\t          <p>The key policy must also include the Amazon Route 53 service in the principal for your account. \n\t\t\t\t\t\tSpecify the following:</p>\n\t\t\t\t\t          <ul>\n                  <li>\n                     <p>\n                        <code>\"Service\": \"dnssec-route53.amazonaws.com\"</code>\n                     </p>\n                  </li>\n               </ul>\n\t\t\t\t        </dd>\n         </dl>\n\t\t       <p>For more information about working with the customer managed CMK in KMS, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html\">Key Management Service concepts</a>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon resource name (ARN) used to identify the customer managed key in Key Management Service (KMS).\n\t\t\tThe <code>KmsArn</code> must be unique for each key-signing key (KSK) in a single hosted zone.</p>\n\t\t       <p>You must configure the customer managed key as follows:</p>\n\t\t       <dl>\n            <dt>Status</dt>\n            <dd>\n               <p>Enabled</p>\n            </dd>\n            <dt>Key spec</dt>\n            <dd>\n               <p>ECC_NIST_P256</p>\n            </dd>\n            <dt>Key usage</dt>\n            <dd>\n               <p>Sign and verify</p>\n            </dd>\n            <dt>Key policy</dt>\n            <dd>\n               <p>The key policy must give permission for the following actions:</p>\n\t\t\t\t           <ul>\n                  <li>\n                     <p>DescribeKey</p>\n                  </li>\n                  <li>\n                     <p>GetPublicKey</p>\n                  </li>\n                  <li>\n                     <p>Sign</p>\n                  </li>\n               </ul>\n\t\t\t\t\t          <p>The key policy must also include the Amazon Route 53 service in the principal for your account. \n\t\t\t\t\t\tSpecify the following:</p>\n\t\t\t\t\t          <ul>\n                  <li>\n                     <p>\n                        <code>\"Service\": \"dnssec-route53.amazonaws.com\"</code>\n                     </p>\n                  </li>\n               </ul>\n\t\t\t\t        </dd>\n         </dl>\n\t\t       <p>For more information about working with the customer managed key in KMS, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html\">Key Management Service concepts</a>.</p>"
                     }
                 },
                 "Flag": {
@@ -5039,7 +5047,7 @@
                 "Status": {
                     "target": "com.amazonaws.route53#SigningKeyStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string that represents the current key-signing key (KSK) status.</p>\n\t\t       <p>Status can have one of the following values:</p>\n\t\t       <dl>\n            <dt>ACTIVE</dt>\n            <dd>\n               <p>The KSK is being used for signing.</p>\n            </dd>\n            <dt>INACTIVE</dt>\n            <dd>\n               <p>The KSK is not being used for signing.</p>\n            </dd>\n            <dt>DELETING</dt>\n            <dd>\n               <p>The KSK is in the process of being deleted.</p>\n            </dd>\n            <dt>ACTION_NEEDED</dt>\n            <dd>\n               <p>There is a problem with the KSK that requires you to take action to resolve.\n\t\t\t\tFor example, the customer managed customer master key (CMK) might have been deleted, or the\n\t\t\t\tpermissions for the customer managed CMK might have been changed.</p>\n            </dd>\n            <dt>INTERNAL_FAILURE</dt>\n            <dd>\n               <p>There was an error during a request. Before you can continue to work with DNSSEC\n\t\t\t\t\tsigning, including actions that involve this KSK, you must correct the problem. For example,\n\t\t\t\t\tyou may need to activate or deactivate the KSK.</p>\n            </dd>\n         </dl>"
+                        "smithy.api#documentation": "<p>A string that represents the current key-signing key (KSK) status.</p>\n\t\t       <p>Status can have one of the following values:</p>\n\t\t       <dl>\n            <dt>ACTIVE</dt>\n            <dd>\n               <p>The KSK is being used for signing.</p>\n            </dd>\n            <dt>INACTIVE</dt>\n            <dd>\n               <p>The KSK is not being used for signing.</p>\n            </dd>\n            <dt>DELETING</dt>\n            <dd>\n               <p>The KSK is in the process of being deleted.</p>\n            </dd>\n            <dt>ACTION_NEEDED</dt>\n            <dd>\n               <p>There is a problem with the KSK that requires you to take action to resolve.\n\t\t\t\t\tFor example, the customer managed key might have been deleted, or the\n\t\t\t\t\tpermissions for the customer managed key might have been changed.</p>\n            </dd>\n            <dt>INTERNAL_FAILURE</dt>\n            <dd>\n               <p>There was an error during a request. Before you can continue to work with DNSSEC\n\t\t\t\t\tsigning, including actions that involve this KSK, you must correct the problem. For example,\n\t\t\t\t\tyou may need to activate or deactivate the KSK.</p>\n            </dd>\n         </dl>"
                     }
                 },
                 "StatusMessage": {
@@ -5073,7 +5081,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>You've already created a key-signing key (KSK) with this name or with the same customer managed customer master key (CMK) ARN.</p>",
+                "smithy.api#documentation": "<p>You've already created a key-signing key (KSK) with this name or with the same customer managed key ARN.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
             }
@@ -7391,6 +7399,10 @@
                         "name": "ap_southeast_2"
                     },
                     {
+                        "value": "ap-southeast-3",
+                        "name": "ap_southeast_3"
+                    },
+                    {
                         "value": "ap-northeast-1",
                         "name": "ap_northeast_1"
                     },
@@ -8503,7 +8515,7 @@
                 "InsufficientDataHealthStatus": {
                     "target": "com.amazonaws.route53#InsufficientDataHealthStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>When CloudWatch has insufficient data about the metric to determine the alarm state, the status that you want Amazon Route 53 to assign \n\t\t\tto the health check:</p>\n\t\t       <ul>\n            <li>\n               <p>\n                  <code>Healthy</code>: Route 53 considers the health check to be healthy.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Unhealthy</code>: Route 53 considers the health check to be unhealthy.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LastKnownStatus</code>: Route 53 uses the status of the health check from the last time CloudWatch had sufficient data \n\t\t\t\tto determine the alarm state. For new health checks that have no last known status, the default status for the health check is healthy.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>When CloudWatch has insufficient data about the metric to determine the alarm state, the status that you want Amazon Route 53 to assign \n\t\t\tto the health check:</p>\n\t\t       <ul>\n            <li>\n               <p>\n                  <code>Healthy</code>: Route 53 considers the health check to be healthy.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Unhealthy</code>: Route 53 considers the health check to be unhealthy.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LastKnownStatus</code>: By default, Route 53 uses the status of the health check from the last time CloudWatch had sufficient data \n\t\t\t\tto determine the alarm state. For new health checks that have no last known status, the status for the health check is healthy.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ResetElements": {
@@ -8546,6 +8558,9 @@
                 },
                 {
                     "target": "com.amazonaws.route53#NoSuchHostedZone"
+                },
+                {
+                    "target": "com.amazonaws.route53#PriorRequestNotComplete"
                 }
             ],
             "traits": {
@@ -8776,7 +8791,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>(Private hosted zones only) A complex type that contains information about an Amazon VPC.</p>"
+                "smithy.api#documentation": "<p>(Private hosted zones only) A complex type that contains information about an Amazon VPC.</p>\n\t\t       <p>If you associate a private hosted zone with an Amazon VPC when you make a <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateHostedZone.html\">CreateHostedZone</a> request, the following parameters are also\n\t\t\trequired.</p>"
             }
         },
         "com.amazonaws.route53#VPCAssociationAuthorizationNotFound": {
@@ -8878,6 +8893,10 @@
                         "name": "us_iso_east_1"
                     },
                     {
+                        "value": "us-iso-west-1",
+                        "name": "us_iso_west_1"
+                    },
+                    {
                         "value": "us-isob-east-1",
                         "name": "us_isob_east_1"
                     },
@@ -8888,6 +8907,10 @@
                     {
                         "value": "ap-southeast-2",
                         "name": "ap_southeast_2"
+                    },
+                    {
+                        "value": "ap-southeast-3",
+                        "name": "ap_southeast_3"
                     },
                     {
                         "value": "ap-south-1",

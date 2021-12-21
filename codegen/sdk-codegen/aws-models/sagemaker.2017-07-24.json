@@ -1899,6 +1899,12 @@
                         "smithy.api#documentation": "<p>The name of the target variable in supervised learning, usually represented by\n         'y'.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "ContentType": {
+                    "target": "com.amazonaws.sagemaker#ContentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content type of the data from the input source. You can use\n            <code>text/csv;header=present</code> or <code>x-application/vnd.amazon+parquet</code>.\n         The default value is <code>text/csv;header=present</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7982,7 +7988,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 30
+                    "max": 200
                 }
             }
         },
@@ -20430,6 +20436,9 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#IntegerValue": {
+            "type": "integer"
+        },
         "com.amazonaws.sagemaker#InvocationsMaxRetries": {
             "type": "integer",
             "traits": {
@@ -30749,6 +30758,9 @@
                         "smithy.api#documentation": "<p>If this pipeline execution step was cached, details on the cache hit.</p>"
                     }
                 },
+                "AttemptCount": {
+                    "target": "com.amazonaws.sagemaker#IntegerValue"
+                },
                 "FailureReason": {
                     "target": "com.amazonaws.sagemaker#FailureReason",
                     "traits": {
@@ -37310,6 +37322,10 @@
                     {
                         "value": "sitara_am57x",
                         "name": "SITARA_AM57X"
+                    },
+                    {
+                        "value": "amba_cv2",
+                        "name": "AMBA_CV2"
                     },
                     {
                         "value": "amba_cv22",

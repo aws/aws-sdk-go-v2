@@ -1604,9 +1604,6 @@ func validateOpPutIntegrationInput(v *PutIntegrationInput) error {
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}
-	if v.ObjectTypeName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ObjectTypeName"))
-	}
 	if v.FlowDefinition != nil {
 		if err := validateFlowDefinition(v.FlowDefinition); err != nil {
 			invalidParams.AddNested("FlowDefinition", err.(smithy.InvalidParamsError))

@@ -505,6 +505,11 @@ func awsRestjson1_serializeOpDocumentExportJournalToS3Input(v *ExportJournalToS3
 		ok.Double(smithytime.FormatEpochSeconds(*v.InclusiveStartTime))
 	}
 
+	if len(v.OutputFormat) > 0 {
+		ok := object.Key("OutputFormat")
+		ok.String(string(v.OutputFormat))
+	}
+
 	if v.RoleArn != nil {
 		ok := object.Key("RoleArn")
 		ok.String(*v.RoleArn)

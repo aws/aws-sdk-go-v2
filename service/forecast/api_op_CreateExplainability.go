@@ -54,7 +54,7 @@ import (
 // “SPECIFIC”.
 //
 // CreateExplainability with a Forecast ARN You can specify a maximum
-// of 50 time series and 1500 time points. The following parameters are required
+// of 50 time series and 500 time points. The following parameters are required
 // when providing a Predictor ARN:
 //
 // * ExplainabilityName - A unique name for the
@@ -119,25 +119,25 @@ type CreateExplainabilityInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// The source of your training data, an AWS Identity and Access Management (IAM)
-	// role that allows Amazon Forecast to access the data and, optionally, an AWS Key
-	// Management Service (KMS) key. This object is submitted in the
-	// CreateDatasetImportJob request.
+	// The source of your data, an AWS Identity and Access Management (IAM) role that
+	// allows Amazon Forecast to access the data and, optionally, an AWS Key Management
+	// Service (KMS) key.
 	DataSource *types.DataSource
 
 	// Create an Expainability visualization that is viewable within the AWS console.
 	EnableVisualization *bool
 
 	// If TimePointGranularity is set to SPECIFIC, define the last time point for the
-	// Explainability.
+	// Explainability. Use the following timestamp format: yyyy-MM-ddTHH:mm:ss
+	// (example: 2015-01-01T20:00:00)
 	EndDateTime *string
 
-	// Defines the fields of a dataset. You specify this object in the CreateDataset
-	// request.
+	// Defines the fields of a dataset.
 	Schema *types.Schema
 
 	// If TimePointGranularity is set to SPECIFIC, define the first point for the
-	// Explainability.
+	// Explainability. Use the following timestamp format: yyyy-MM-ddTHH:mm:ss
+	// (example: 2015-01-01T20:00:00)
 	StartDateTime *string
 
 	// Optional metadata to help you categorize and organize your resources. Each tag

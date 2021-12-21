@@ -33,8 +33,7 @@ func (c *Client) ListRoutingControls(ctx context.Context, params *ListRoutingCon
 
 type ListRoutingControlsInput struct {
 
-	// The Amazon Resource Name (ARN) of the control panel that you're getting routing
-	// control details for.
+	// The Amazon Resource Name (ARN) of the control panel.
 	//
 	// This member is required.
 	ControlPanelArn *string

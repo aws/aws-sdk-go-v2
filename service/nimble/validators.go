@@ -1174,6 +1174,26 @@ func validateStreamConfigurationCreate(v *types.StreamConfigurationCreate) error
 	if v.StreamingImageIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StreamingImageIds"))
 	}
+	if v.SessionStorage != nil {
+		if err := validateStreamConfigurationSessionStorage(v.SessionStorage); err != nil {
+			invalidParams.AddNested("SessionStorage", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStreamConfigurationSessionStorage(v *types.StreamConfigurationSessionStorage) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StreamConfigurationSessionStorage"}
+	if v.Mode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Mode"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

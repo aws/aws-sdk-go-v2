@@ -45,32 +45,33 @@ type AttachmentDetails struct {
 // a call to DescribeServices.
 //
 // * displayId - The identifier for the case on pages
-// in the AWS Support Center.
+// in the Amazon Web Services Support Center.
 //
-// * language - The ISO 639-1 code for the language in
-// which AWS provides support. AWS Support currently supports English ("en") and
-// Japanese ("ja"). Language parameters must be passed explicitly for operations
-// that take them.
+// * language - The ISO 639-1 code for
+// the language in which Amazon Web Services provides support. Amazon Web Services
+// Support currently supports English ("en") and Japanese ("ja"). Language
+// parameters must be passed explicitly for operations that take them.
 //
-// * nextToken - A resumption point for pagination.
+// * nextToken
+// - A resumption point for pagination.
+//
+// * recentCommunications - One or more
+// Communication objects. Fields of these objects are attachments, body, caseId,
+// submittedBy, and timeCreated.
+//
+// * serviceCode - The identifier for the Amazon Web
+// Services service that corresponds to the service code defined in the call to
+// DescribeServices.
+//
+// * severityCode - The severity code assigned to the case.
+// Contains one of the values returned by the call to DescribeSeverityLevels. The
+// possible values are: low, normal, high, urgent, and critical.
+//
+// * status - The
+// status of the case in the Amazon Web Services Support Center. Valid values:
 //
 // *
-// recentCommunications - One or more Communication objects. Fields of these
-// objects are attachments, body, caseId, submittedBy, and timeCreated.
-//
-// *
-// serviceCode - The identifier for the AWS service that corresponds to the service
-// code defined in the call to DescribeServices.
-//
-// * severityCode - The severity
-// code assigned to the case. Contains one of the values returned by the call to
-// DescribeSeverityLevels. The possible values are: low, normal, high, urgent, and
-// critical.
-//
-// * status - The status of the case in the AWS Support Center. Valid
-// values:
-//
-// * opened
+// opened
 //
 // * pending-customer-action
 //
@@ -78,18 +79,18 @@ type AttachmentDetails struct {
 //
 // * resolved
 //
-// *
-// unassigned
+// * unassigned
 //
-// * work-in-progress
+// *
+// work-in-progress
 //
 // * subject - The subject line of the case.
 //
-// *
-// submittedBy - The email address of the account that submitted the case.
+// * submittedBy - The
+// email address of the account that submitted the case.
 //
-// *
-// timeCreated - The time the case was created, in ISO-8601 format.
+// * timeCreated - The time
+// the case was created, in ISO-8601 format.
 type CaseDetails struct {
 
 	// The support case ID requested or returned in the call. The case ID is an
@@ -103,22 +104,23 @@ type CaseDetails struct {
 	// The email addresses that receive copies of communication about the case.
 	CcEmailAddresses []string
 
-	// The ID displayed for the case in the AWS Support Center. This is a numeric
-	// string.
+	// The ID displayed for the case in the Amazon Web Services Support Center. This is
+	// a numeric string.
 	DisplayId *string
 
-	// The ISO 639-1 code for the language in which AWS provides support. AWS Support
-	// currently supports English ("en") and Japanese ("ja"). Language parameters must
-	// be passed explicitly for operations that take them.
+	// The ISO 639-1 code for the language in which Amazon Web Services provides
+	// support. Amazon Web Services Support currently supports English ("en") and
+	// Japanese ("ja"). Language parameters must be passed explicitly for operations
+	// that take them.
 	Language *string
 
-	// The five most recent communications between you and AWS Support Center,
-	// including the IDs of any attachments to the communications. Also includes a
-	// nextToken that you can use to retrieve earlier communications.
+	// The five most recent communications between you and Amazon Web Services Support
+	// Center, including the IDs of any attachments to the communications. Also
+	// includes a nextToken that you can use to retrieve earlier communications.
 	RecentCommunications *RecentCaseCommunications
 
-	// The code for the AWS service. You can get a list of codes and the corresponding
-	// service names by calling DescribeServices.
+	// The code for the Amazon Web Services service. You can get a list of codes and
+	// the corresponding service names by calling DescribeServices.
 	ServiceCode *string
 
 	// The code for the severity level returned by the call to DescribeSeverityLevels.
@@ -140,21 +142,21 @@ type CaseDetails struct {
 	// * work-in-progress
 	Status *string
 
-	// The subject line for the case in the AWS Support Center.
+	// The subject line for the case in the Amazon Web Services Support Center.
 	Subject *string
 
 	// The email address of the account that submitted the case.
 	SubmittedBy *string
 
-	// The time that the case was created in the AWS Support Center.
+	// The time that the case was created in the Amazon Web Services Support Center.
 	TimeCreated *string
 
 	noSmithyDocumentSerde
 }
 
 // A JSON-formatted name/value pair that represents the category name and category
-// code of the problem, selected from the DescribeServices response for each AWS
-// service.
+// code of the problem, selected from the DescribeServices response for each Amazon
+// Web Services service.
 type Category struct {
 
 	// The category code for the support case.
@@ -174,7 +176,8 @@ type Communication struct {
 	// Information about the attachments to the case communication.
 	AttachmentSet []AttachmentDetails
 
-	// The text of the communication between the customer and AWS Support.
+	// The text of the communication between the customer and Amazon Web Services
+	// Support.
 	Body *string
 
 	// The support case ID requested or returned in the call. The case ID is an
@@ -184,8 +187,8 @@ type Communication struct {
 
 	// The identity of the account that submitted, or responded to, the support case.
 	// Customer entries include the role or IAM user as well as the email address. For
-	// example, "AdminRole (Role) . Entries from the AWS Support team display "Amazon
-	// Web Services," and don't show an email address.
+	// example, "AdminRole (Role) . Entries from the Amazon Web Services Support team
+	// display "Amazon Web Services," and don't show an email address.
 	SubmittedBy *string
 
 	// The time the communication was created.
@@ -206,20 +209,21 @@ type RecentCaseCommunications struct {
 	noSmithyDocumentSerde
 }
 
-// Information about an AWS service returned by the DescribeServices operation.
+// Information about an Amazon Web Services service returned by the
+// DescribeServices operation.
 type Service struct {
 
 	// A list of categories that describe the type of support issue a case describes.
 	// Categories consist of a category name and a category code. Category names and
-	// codes are passed to AWS Support when you call CreateCase.
+	// codes are passed to Amazon Web Services Support when you call CreateCase.
 	Categories []Category
 
-	// The code for an AWS service returned by the DescribeServices response. The name
-	// element contains the corresponding friendly name.
+	// The code for an Amazon Web Services service returned by the DescribeServices
+	// response. The name element contains the corresponding friendly name.
 	Code *string
 
-	// The friendly name for an AWS service. The code element contains the
-	// corresponding code.
+	// The friendly name for an Amazon Web Services service. The code element contains
+	// the corresponding code.
 	Name *string
 
 	noSmithyDocumentSerde
@@ -229,7 +233,7 @@ type Service struct {
 // available values depend on the support plan for the account. For more
 // information, see Choosing a severity
 // (https://docs.aws.amazon.com/awssupport/latest/user/case-management.html#choosing-severity)
-// in the AWS Support User Guide.
+// in the Amazon Web Services Support User Guide.
 type SeverityLevel struct {
 
 	// The code for case severity level. Valid values: low | normal | high | urgent |
@@ -237,27 +241,27 @@ type SeverityLevel struct {
 	Code *string
 
 	// The name of the severity level that corresponds to the severity level code. The
-	// values returned by the API are different from the values that appear in the AWS
-	// Support Center. For example, the API uses the code low, but the name appears as
-	// General guidance in Support Center. The following are the API code names and how
-	// they appear in the console:
+	// values returned by the API are different from the values that appear in the
+	// Amazon Web Services Support Center. For example, the API uses the code low, but
+	// the name appears as General guidance in Support Center. The following are the
+	// API code names and how they appear in the console:
 	//
 	// * low - General guidance
 	//
-	// * normal - System
-	// impaired
+	// *
+	// normal - System impaired
 	//
 	// * high - Production system impaired
 	//
-	// * urgent - Production system
-	// down
+	// * urgent -
+	// Production system down
 	//
 	// * critical - Business-critical system down
 	//
-	// For more information, see
-	// Choosing a severity
+	// For more
+	// information, see Choosing a severity
 	// (https://docs.aws.amazon.com/awssupport/latest/user/case-management.html#choosing-severity)
-	// in the AWS Support User Guide.
+	// in the Amazon Web Services Support User Guide.
 	Name *string
 
 	noSmithyDocumentSerde
@@ -367,8 +371,8 @@ type TrustedAdvisorCheckResult struct {
 	// This member is required.
 	FlaggedResources []TrustedAdvisorResourceDetail
 
-	// Details about AWS resources that were analyzed in a call to Trusted Advisor
-	// DescribeTrustedAdvisorCheckSummaries.
+	// Details about Amazon Web Services resources that were analyzed in a call to
+	// Trusted Advisor DescribeTrustedAdvisorCheckSummaries.
 	//
 	// This member is required.
 	ResourcesSummary *TrustedAdvisorResourcesSummary
@@ -402,8 +406,8 @@ type TrustedAdvisorCheckSummary struct {
 	// This member is required.
 	CheckId *string
 
-	// Details about AWS resources that were analyzed in a call to Trusted Advisor
-	// DescribeTrustedAdvisorCheckSummaries.
+	// Details about Amazon Web Services resources that were analyzed in a call to
+	// Trusted Advisor DescribeTrustedAdvisorCheckSummaries.
 	//
 	// This member is required.
 	ResourcesSummary *TrustedAdvisorResourcesSummary
@@ -466,39 +470,40 @@ type TrustedAdvisorResourceDetail struct {
 	// This member is required.
 	Status *string
 
-	// Specifies whether the AWS resource was ignored by Trusted Advisor because it was
-	// marked as suppressed by the user.
+	// Specifies whether the Amazon Web Services resource was ignored by Trusted
+	// Advisor because it was marked as suppressed by the user.
 	IsSuppressed bool
 
-	// The AWS Region in which the identified resource is located.
+	// The Amazon Web Services Region in which the identified resource is located.
 	Region *string
 
 	noSmithyDocumentSerde
 }
 
-// Details about AWS resources that were analyzed in a call to Trusted Advisor
-// DescribeTrustedAdvisorCheckSummaries.
+// Details about Amazon Web Services resources that were analyzed in a call to
+// Trusted Advisor DescribeTrustedAdvisorCheckSummaries.
 type TrustedAdvisorResourcesSummary struct {
 
-	// The number of AWS resources that were flagged (listed) by the Trusted Advisor
-	// check.
+	// The number of Amazon Web Services resources that were flagged (listed) by the
+	// Trusted Advisor check.
 	//
 	// This member is required.
 	ResourcesFlagged int64
 
-	// The number of AWS resources ignored by Trusted Advisor because information was
-	// unavailable.
+	// The number of Amazon Web Services resources ignored by Trusted Advisor because
+	// information was unavailable.
 	//
 	// This member is required.
 	ResourcesIgnored int64
 
-	// The number of AWS resources that were analyzed by the Trusted Advisor check.
+	// The number of Amazon Web Services resources that were analyzed by the Trusted
+	// Advisor check.
 	//
 	// This member is required.
 	ResourcesProcessed int64
 
-	// The number of AWS resources ignored by Trusted Advisor because they were marked
-	// as suppressed by the user.
+	// The number of Amazon Web Services resources ignored by Trusted Advisor because
+	// they were marked as suppressed by the user.
 	//
 	// This member is required.
 	ResourcesSuppressed int64

@@ -34,7 +34,7 @@ type CreateOutpostInput struct {
 	// This member is required.
 	Name *string
 
-	// The ID of the site.
+	// The ID or the Amazon Resource Name (ARN) of the site.
 	//
 	// This member is required.
 	SiteId *string

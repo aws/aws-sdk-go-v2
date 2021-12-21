@@ -118,6 +118,22 @@ func (LogType) Values() []LogType {
 	}
 }
 
+type OverrideAction string
+
+// Enum values for OverrideAction
+const (
+	OverrideActionDropToAlert OverrideAction = "DROP_TO_ALERT"
+)
+
+// Values returns all known values for OverrideAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OverrideAction) Values() []OverrideAction {
+	return []OverrideAction{
+		"DROP_TO_ALERT",
+	}
+}
+
 type PerObjectSyncStatus string
 
 // Enum values for PerObjectSyncStatus
@@ -133,6 +149,24 @@ func (PerObjectSyncStatus) Values() []PerObjectSyncStatus {
 	return []PerObjectSyncStatus{
 		"PENDING",
 		"IN_SYNC",
+	}
+}
+
+type ResourceManagedStatus string
+
+// Enum values for ResourceManagedStatus
+const (
+	ResourceManagedStatusManaged ResourceManagedStatus = "MANAGED"
+	ResourceManagedStatusAccount ResourceManagedStatus = "ACCOUNT"
+)
+
+// Values returns all known values for ResourceManagedStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceManagedStatus) Values() []ResourceManagedStatus {
+	return []ResourceManagedStatus{
+		"MANAGED",
+		"ACCOUNT",
 	}
 }
 

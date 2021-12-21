@@ -40,7 +40,6 @@ type ListTagsForResourceInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type ListTagsForResourceOutput struct {
 
 	// A collection of labels, in the form of key:value pairs, that apply to this

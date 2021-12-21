@@ -28,7 +28,6 @@ func (c *Client) UpdateStudioComponent(ctx context.Context, params *UpdateStudio
 	return out, nil
 }
 
-//
 type UpdateStudioComponentInput struct {
 
 	// The studio component ID.
@@ -73,7 +72,6 @@ type UpdateStudioComponentInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type UpdateStudioComponentOutput struct {
 
 	// Information about the studio component.

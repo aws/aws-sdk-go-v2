@@ -26,6 +26,7 @@
         "api_op_ListTagsForResource.go",
         "api_op_TagResource.go",
         "api_op_UntagResource.go",
+        "api_op_UpdateOutpost.go",
         "api_op_UpdateSite.go",
         "api_op_UpdateSiteAddress.go",
         "api_op_UpdateSiteRackPhysicalProperties.go",

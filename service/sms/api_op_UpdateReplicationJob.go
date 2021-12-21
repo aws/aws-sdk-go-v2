@@ -72,7 +72,7 @@ type UpdateReplicationJobInput struct {
 	// the maximum number is reached and a new AMI is created.
 	NumberOfRecentAmisToKeep *int32
 
-	// The name of the IAM role to be used by AWS SMS.
+	// The name of the IAM role to be used by Server Migration Service.
 	RoleName *string
 
 	noSmithyDocumentSerde

@@ -28,7 +28,7 @@ func (c *Client) DeleteSafetyRule(ctx context.Context, params *DeleteSafetyRuleI
 
 type DeleteSafetyRuleInput struct {
 
-	// The request body that you include when you update a safety rule.
+	// The ARN of the safety rule.
 	//
 	// This member is required.
 	SafetyRuleArn *string

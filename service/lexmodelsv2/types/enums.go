@@ -690,11 +690,32 @@ func (SlotSortAttribute) Values() []SlotSortAttribute {
 	}
 }
 
+type SlotTypeCategory string
+
+// Enum values for SlotTypeCategory
+const (
+	SlotTypeCategoryCustom          SlotTypeCategory = "Custom"
+	SlotTypeCategoryExtended        SlotTypeCategory = "Extended"
+	SlotTypeCategoryExternalGrammar SlotTypeCategory = "ExternalGrammar"
+)
+
+// Values returns all known values for SlotTypeCategory. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SlotTypeCategory) Values() []SlotTypeCategory {
+	return []SlotTypeCategory{
+		"Custom",
+		"Extended",
+		"ExternalGrammar",
+	}
+}
+
 type SlotTypeFilterName string
 
 // Enum values for SlotTypeFilterName
 const (
-	SlotTypeFilterNameSlotTypeName SlotTypeFilterName = "SlotTypeName"
+	SlotTypeFilterNameSlotTypeName       SlotTypeFilterName = "SlotTypeName"
+	SlotTypeFilterNameExternalSourceType SlotTypeFilterName = "ExternalSourceType"
 )
 
 // Values returns all known values for SlotTypeFilterName. Note that this can be
@@ -703,6 +724,7 @@ const (
 func (SlotTypeFilterName) Values() []SlotTypeFilterName {
 	return []SlotTypeFilterName{
 		"SlotTypeName",
+		"ExternalSourceType",
 	}
 }
 

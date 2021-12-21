@@ -181,6 +181,7 @@ const (
 	StreamingImageStatusCodeStreamingImageDeleted          StreamingImageStatusCode = "STREAMING_IMAGE_DELETED"
 	StreamingImageStatusCodeStreamingImageUpdateInProgress StreamingImageStatusCode = "STREAMING_IMAGE_UPDATE_IN_PROGRESS"
 	StreamingImageStatusCodeInternalError                  StreamingImageStatusCode = "INTERNAL_ERROR"
+	StreamingImageStatusCodeAccessDenied                   StreamingImageStatusCode = "ACCESS_DENIED"
 )
 
 // Values returns all known values for StreamingImageStatusCode. Note that this can
@@ -194,6 +195,7 @@ func (StreamingImageStatusCode) Values() []StreamingImageStatusCode {
 		"STREAMING_IMAGE_DELETED",
 		"STREAMING_IMAGE_UPDATE_IN_PROGRESS",
 		"INTERNAL_ERROR",
+		"ACCESS_DENIED",
 	}
 }
 
@@ -300,6 +302,22 @@ func (StreamingSessionStatusCode) Values() []StreamingSessionStatusCode {
 		"STREAMING_SESSION_STARTED",
 		"STREAMING_SESSION_STOP_IN_PROGRESS",
 		"STREAMING_SESSION_START_IN_PROGRESS",
+	}
+}
+
+type StreamingSessionStorageMode string
+
+// Enum values for StreamingSessionStorageMode
+const (
+	StreamingSessionStorageModeUpload StreamingSessionStorageMode = "UPLOAD"
+)
+
+// Values returns all known values for StreamingSessionStorageMode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StreamingSessionStorageMode) Values() []StreamingSessionStorageMode {
+	return []StreamingSessionStorageMode{
+		"UPLOAD",
 	}
 }
 

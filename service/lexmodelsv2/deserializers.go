@@ -2489,6 +2489,11 @@ func awsRestjson1_deserializeOpDocumentCreateSlotTypeOutput(v **CreateSlotTypeOu
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "externalSourceSetting":
+			if err := awsRestjson1_deserializeDocumentExternalSourceSetting(&sv.ExternalSourceSetting, value); err != nil {
+				return err
+			}
+
 		case "localeId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5348,6 +5353,11 @@ func awsRestjson1_deserializeOpDocumentDescribeBotLocaleOutput(v **DescribeBotLo
 				}
 			}
 
+		case "recommendedActions":
+			if err := awsRestjson1_deserializeDocumentRecommendedActions(&sv.RecommendedActions, value); err != nil {
+				return err
+			}
+
 		case "slotTypesCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7265,6 +7275,11 @@ func awsRestjson1_deserializeOpDocumentDescribeSlotTypeOutput(v **DescribeSlotTy
 					return fmt.Errorf("expected Description to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
+			}
+
+		case "externalSourceSetting":
+			if err := awsRestjson1_deserializeDocumentExternalSourceSetting(&sv.ExternalSourceSetting, value); err != nil {
+				return err
 			}
 
 		case "lastUpdatedDateTime":
@@ -11757,6 +11772,11 @@ func awsRestjson1_deserializeOpDocumentUpdateBotLocaleOutput(v **UpdateBotLocale
 				}
 			}
 
+		case "recommendedActions":
+			if err := awsRestjson1_deserializeDocumentRecommendedActions(&sv.RecommendedActions, value); err != nil {
+				return err
+			}
+
 		case "voiceSettings":
 			if err := awsRestjson1_deserializeDocumentVoiceSettings(&sv.VoiceSettings, value); err != nil {
 				return err
@@ -13176,6 +13196,11 @@ func awsRestjson1_deserializeOpDocumentUpdateSlotTypeOutput(v **UpdateSlotTypeOu
 					return fmt.Errorf("expected Description to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
+			}
+
+		case "externalSourceSetting":
+			if err := awsRestjson1_deserializeDocumentExternalSourceSetting(&sv.ExternalSourceSetting, value); err != nil {
+				return err
 			}
 
 		case "lastUpdatedDateTime":
@@ -16037,6 +16062,42 @@ func awsRestjson1_deserializeDocumentExportSummaryList(v *[]types.ExportSummary,
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentExternalSourceSetting(v **types.ExternalSourceSetting, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ExternalSourceSetting
+	if *v == nil {
+		sv = &types.ExternalSourceSetting{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "grammarSlotTypeSetting":
+			if err := awsRestjson1_deserializeDocumentGrammarSlotTypeSetting(&sv.GrammarSlotTypeSetting, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentFailureReasons(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -16291,6 +16352,100 @@ func awsRestjson1_deserializeDocumentFulfillmentUpdatesSpecification(v **types.F
 		case "updateResponse":
 			if err := awsRestjson1_deserializeDocumentFulfillmentUpdateResponseSpecification(&sv.UpdateResponse, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGrammarSlotTypeSetting(v **types.GrammarSlotTypeSetting, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GrammarSlotTypeSetting
+	if *v == nil {
+		sv = &types.GrammarSlotTypeSetting{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "source":
+			if err := awsRestjson1_deserializeDocumentGrammarSlotTypeSource(&sv.Source, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGrammarSlotTypeSource(v **types.GrammarSlotTypeSource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GrammarSlotTypeSource
+	if *v == nil {
+		sv = &types.GrammarSlotTypeSource{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "kmsKeyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KmsKeyArn to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyArn = ptr.String(jtv)
+			}
+
+		case "s3BucketName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3BucketName to be of type string, got %T instead", value)
+				}
+				sv.S3BucketName = ptr.String(jtv)
+			}
+
+		case "s3ObjectKey":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3ObjectPath to be of type string, got %T instead", value)
+				}
+				sv.S3ObjectKey = ptr.String(jtv)
 			}
 
 		default:
@@ -17667,6 +17822,42 @@ func awsRestjson1_deserializeDocumentPromptSpecification(v **types.PromptSpecifi
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentRecommendedActions(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected RecommendedAction to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentRecommendedIntentSummary(v **types.RecommendedIntentSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -18647,6 +18838,15 @@ func awsRestjson1_deserializeDocumentSlotTypeSummary(v **types.SlotTypeSummary, 
 					return fmt.Errorf("expected SlotTypeSignature to be of type string, got %T instead", value)
 				}
 				sv.ParentSlotTypeSignature = ptr.String(jtv)
+			}
+
+		case "slotTypeCategory":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SlotTypeCategory to be of type string, got %T instead", value)
+				}
+				sv.SlotTypeCategory = types.SlotTypeCategory(jtv)
 			}
 
 		case "slotTypeId":

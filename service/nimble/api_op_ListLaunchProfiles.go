@@ -50,7 +50,6 @@ type ListLaunchProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type ListLaunchProfilesOutput struct {
 
 	// A collection of launch profiles.

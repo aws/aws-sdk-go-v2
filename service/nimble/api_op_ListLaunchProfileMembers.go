@@ -49,7 +49,6 @@ type ListLaunchProfileMembersInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type ListLaunchProfileMembersOutput struct {
 
 	// A list of members.

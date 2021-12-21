@@ -37,7 +37,6 @@ type ListStudiosInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type ListStudiosOutput struct {
 
 	// A collection of studios.

@@ -50,9 +50,18 @@ type UpdateTrackerInput struct {
 	// * DistanceBased - If the device has moved less than 30 m (98.4 ft),
 	// location updates are ignored. Location updates within this distance are neither
 	// evaluated against linked geofence collections, nor stored. This helps control
-	// costs by reducing the number of geofence evaluations and device positions to
-	// retrieve. Distance-based filtering can also reduce the jitter effect when
-	// displaying device trajectory on a map.
+	// costs by reducing the number of geofence evaluations and historical device
+	// positions to paginate through. Distance-based filtering can also reduce the
+	// effects of GPS noise when displaying device trajectories on a map.
+	//
+	// *
+	// AccuracyBased - If the device has moved less than the measured accuracy,
+	// location updates are ignored. For example, if two consecutive updates from a
+	// device have a horizontal accuracy of 5 m and 10 m, the second update is ignored
+	// if the device has moved less than 15 m. Ignored location updates are neither
+	// evaluated against linked geofence collections, nor stored. This helps educe the
+	// effects of GPS noise when displaying device trajectories on a map, and can help
+	// control costs by reducing the number of geofence evaluations.
 	PositionFiltering types.PositionFiltering
 
 	// Updates the pricing plan for the tracker resource. For more information about

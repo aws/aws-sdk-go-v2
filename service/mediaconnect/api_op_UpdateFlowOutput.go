@@ -56,7 +56,8 @@ type UpdateFlowOutputInput struct {
 	// will use the default setting (static-key).
 	Encryption *types.UpdateEncryption
 
-	// The maximum latency in milliseconds for Zixi-based streams.
+	// The maximum latency in milliseconds. This parameter applies only to RIST-based,
+	// Zixi-based, and Fujitsu-based streams.
 	MaxLatency int32
 
 	// The media streams that are associated with the output, and the parameters for
@@ -78,6 +79,14 @@ type UpdateFlowOutputInput struct {
 
 	// The remote ID for the Zixi-pull stream.
 	RemoteId *string
+
+	// The port that the flow uses to send outbound requests to initiate connection
+	// with the sender.
+	SenderControlPort int32
+
+	// The IP address that the flow communicates with to initiate connection with the
+	// sender.
+	SenderIpAddress *string
 
 	// The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.
 	SmoothingLatency int32

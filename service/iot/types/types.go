@@ -583,6 +583,11 @@ type AuthorizerDescription struct {
 	// The UNIX timestamp of when the authorizer was created.
 	CreationDate *time.Time
 
+	// When true, the result from the authorizer’s Lambda function is cached for the
+	// time specified in refreshAfterInSeconds. The cached result is used while the
+	// device reuses the same HTTP connection.
+	EnableCachingForHttp *bool
+
 	// The UNIX timestamp of when the authorizer was last updated.
 	LastModifiedDate *time.Time
 

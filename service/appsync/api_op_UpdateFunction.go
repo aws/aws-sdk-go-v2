@@ -44,7 +44,7 @@ type UpdateFunctionInput struct {
 	// This member is required.
 	FunctionId *string
 
-	// The version of the request mapping template. Currently the supported value is
+	// The version of the request mapping template. Currently, the supported value is
 	// 2018-05-29.
 	//
 	// This member is required.
@@ -65,9 +65,8 @@ type UpdateFunctionInput struct {
 	// The Function request mapping template.
 	ResponseMappingTemplate *string
 
-	// Describes a Sync configuration for a resolver. Contains information on which
-	// Conflict Detection as well as Resolution strategy should be performed when the
-	// resolver is invoked.
+	// Describes a Sync configuration for a resolver. Specifies which Conflict
+	// Detection strategy and Resolution strategy to use when the resolver is invoked.
 	SyncConfig *types.SyncConfig
 
 	noSmithyDocumentSerde

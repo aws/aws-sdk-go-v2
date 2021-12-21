@@ -54,7 +54,10 @@ type StreamJournalToKinesisInput struct {
 	LedgerName *string
 
 	// The Amazon Resource Name (ARN) of the IAM role that grants QLDB permissions for
-	// a journal stream to write data records to a Kinesis Data Streams resource.
+	// a journal stream to write data records to a Kinesis Data Streams resource. To
+	// pass a role to QLDB when requesting a journal stream, you must have permissions
+	// to perform the iam:PassRole action on the IAM role resource. This is required
+	// for all journal stream requests.
 	//
 	// This member is required.
 	RoleArn *string

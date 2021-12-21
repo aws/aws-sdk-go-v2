@@ -10,14 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Generates a random password of the specified complexity. This operation is
-// intended for use in the Lambda rotation function. Per best practice, we
-// recommend that you specify the maximum length and include every character type
-// that the system you are generating a password for can support. Minimum
-// permissions To run this command, you must have the following permissions:
-//
-// *
-// secretsmanager:GetRandomPassword
+// Generates a random password. We recommend that you specify the maximum length
+// and include every character type that the system you are generating a password
+// for can support.
 func (c *Client) GetRandomPassword(ctx context.Context, params *GetRandomPasswordInput, optFns ...func(*Options)) (*GetRandomPasswordOutput, error) {
 	if params == nil {
 		params = &GetRandomPasswordInput{}
@@ -35,44 +30,37 @@ func (c *Client) GetRandomPassword(ctx context.Context, params *GetRandomPasswor
 
 type GetRandomPasswordInput struct {
 
-	// A string that includes characters that should not be included in the generated
-	// password. The default is that all characters from the included sets can be used.
+	// A string of the characters that you don't want in the password.
 	ExcludeCharacters *string
 
-	// Specifies that the generated password should not include lowercase letters. The
-	// default if you do not include this switch parameter is that lowercase letters
-	// can be included.
+	// Specifies whether to exclude lowercase letters from the password. If you don't
+	// include this switch, the password can contain lowercase letters.
 	ExcludeLowercase bool
 
-	// Specifies that the generated password should not include digits. The default if
-	// you do not include this switch parameter is that digits can be included.
+	// Specifies whether to exclude numbers from the password. If you don't include
+	// this switch, the password can contain numbers.
 	ExcludeNumbers bool
 
-	// Specifies that the generated password should not include punctuation characters.
-	// The default if you do not include this switch parameter is that punctuation
-	// characters can be included. The following are the punctuation characters that
-	// can be included in the generated password if you don't explicitly exclude them
-	// with ExcludeCharacters or ExcludePunctuation: ! " # $ % & ' ( ) * + , - . / : ;
-	// < = > ? @ [ \ ] ^ _ ` { | } ~
+	// Specifies whether to exclude the following punctuation characters from the
+	// password: ! " # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~. If
+	// you don't include this switch, the password can contain punctuation.
 	ExcludePunctuation bool
 
-	// Specifies that the generated password should not include uppercase letters. The
-	// default if you do not include this switch parameter is that uppercase letters
-	// can be included.
+	// Specifies whether to exclude uppercase letters from the password. If you don't
+	// include this switch, the password can contain uppercase letters.
 	ExcludeUppercase bool
 
-	// Specifies that the generated password can include the space character. The
-	// default if you do not include this switch parameter is that the space character
-	// is not included.
+	// Specifies whether to include the space character. If you include this switch,
+	// the password can contain space characters.
 	IncludeSpace bool
 
-	// The desired length of the generated password. The default value if you do not
-	// include this parameter is 32 characters.
+	// The length of the password. If you don't include this parameter, the default
+	// length is 32 characters.
 	PasswordLength int64
 
-	// A boolean value that specifies whether the generated password must include at
-	// least one of every allowed character type. The default value is True and the
-	// operation requires at least one of every character type.
+	// Specifies whether to include at least one upper and lowercase letter, one
+	// number, and one punctuation. If you don't include this switch, the password
+	// contains at least one of every character type.
 	RequireEachIncludedType bool
 
 	noSmithyDocumentSerde
@@ -80,7 +68,7 @@ type GetRandomPasswordInput struct {
 
 type GetRandomPasswordOutput struct {
 
-	// A string with the generated password.
+	// A string with the password.
 	RandomPassword *string
 
 	// Metadata pertaining to the operation's result.

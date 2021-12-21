@@ -18,13 +18,14 @@ import (
 // objects that are returned by the DescribeCommunications operation.
 //
 // * You must
-// have a Business or Enterprise Support plan to use the AWS Support API.
+// have a Business, Enterprise On-Ramp, or Enterprise Support plan to use the
+// Amazon Web Services Support API.
 //
-// * If you
-// call the AWS Support API from an account that does not have a Business or
+// * If you call the Amazon Web Services Support
+// API from an account that does not have a Business, Enterprise On-Ramp, or
 // Enterprise Support plan, the SubscriptionRequiredException error message
-// appears. For information about changing your support plan, see AWS Support
-// (http://aws.amazon.com/premiumsupport/).
+// appears. For information about changing your support plan, see Amazon Web
+// Services Support (http://aws.amazon.com/premiumsupport/).
 func (c *Client) DescribeAttachment(ctx context.Context, params *DescribeAttachmentInput, optFns ...func(*Options)) (*DescribeAttachmentOutput, error) {
 	if params == nil {
 		params = &DescribeAttachmentInput{}

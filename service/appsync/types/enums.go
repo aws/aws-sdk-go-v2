@@ -88,6 +88,26 @@ func (ApiCachingBehavior) Values() []ApiCachingBehavior {
 	}
 }
 
+type AssociationStatus string
+
+// Enum values for AssociationStatus
+const (
+	AssociationStatusProcessing AssociationStatus = "PROCESSING"
+	AssociationStatusFailed     AssociationStatus = "FAILED"
+	AssociationStatusSuccess    AssociationStatus = "SUCCESS"
+)
+
+// Values returns all known values for AssociationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AssociationStatus) Values() []AssociationStatus {
+	return []AssociationStatus{
+		"PROCESSING",
+		"FAILED",
+		"SUCCESS",
+	}
+}
+
 type AuthenticationType string
 
 // Enum values for AuthenticationType

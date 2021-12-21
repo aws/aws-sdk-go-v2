@@ -36,8 +36,8 @@ type PutAppLaunchConfigurationInput struct {
 	// replication is complete.
 	AutoLaunch *bool
 
-	// The name of service role in the customer's account that AWS CloudFormation uses
-	// to launch the application.
+	// The name of service role in the customer's account that CloudFormation uses to
+	// launch the application.
 	RoleName *string
 
 	// Information about the launch configurations for server groups in the

@@ -16,7 +16,7 @@ import (
 // controls that can be changed together in a single transaction. You can use a
 // control panel to centrally view the operational status of applications across
 // your organization, and trigger multi-app failovers in a single transaction, for
-// example, to fail over an Availability Zone or AWS Region.
+// example, to fail over an Availability Zone or Amazon Web Services Region.
 func (c *Client) CreateControlPanel(ctx context.Context, params *CreateControlPanelInput, optFns ...func(*Options)) (*CreateControlPanelOutput, error) {
 	if params == nil {
 		params = &CreateControlPanelInput{}
@@ -45,8 +45,12 @@ type CreateControlPanelInput struct {
 	// This member is required.
 	ControlPanelName *string
 
-	// Unique client idempotency token.
+	// A unique, case-sensitive string of up to 64 ASCII characters. To make an
+	// idempotent API request with an action, specify a client token in the request.
 	ClientToken *string
+
+	// The tags associated with the control panel.
+	Tags map[string]string
 
 	noSmithyDocumentSerde
 }

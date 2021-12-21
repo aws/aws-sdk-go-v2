@@ -76,15 +76,14 @@ type CreateRouteCalculatorInput struct {
 	// This member is required.
 	DataSource *string
 
-	// Specifies the pricing plan for your route calculator resource. For additional
-	// details and restrictions on each pricing plan option, see Amazon Location
-	// Service pricing (https://aws.amazon.com/location/pricing/).
-	//
-	// This member is required.
-	PricingPlan types.PricingPlan
-
 	// The optional description for the route calculator resource.
 	Description *string
+
+	// Optionally specifies the pricing plan for the route calculator resource.
+	// Defaults to RequestBasedUsage. For additional details and restrictions on each
+	// pricing plan option, see Amazon Location Service pricing
+	// (https://aws.amazon.com/location/pricing/).
+	PricingPlan types.PricingPlan
 
 	// Applies one or more tags to the route calculator resource. A tag is a key-value
 	// pair helps manage, identify, search, and filter your resources by labelling

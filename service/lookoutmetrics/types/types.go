@@ -359,6 +359,28 @@ type FileFormatDescriptor struct {
 	noSmithyDocumentSerde
 }
 
+// Aggregated details about the measures contributing to the anomaly group, and the
+// measures potentially impacted by the anomaly group.
+type InterMetricImpactDetails struct {
+
+	// The ID of the anomaly group.
+	AnomalyGroupId *string
+
+	// For potential causes (CAUSE_OF_INPUT_ANOMALY_GROUP), the percentage contribution
+	// the measure has in causing the anomalies.
+	ContributionPercentage *float64
+
+	// The name of the measure.
+	MetricName *string
+
+	// Whether a measure is a potential cause of the anomaly group
+	// (CAUSE_OF_INPUT_ANOMALY_GROUP), or whether the measure is impacted by the
+	// anomaly group (EFFECT_OF_INPUT_ANOMALY_GROUP).
+	RelationshipType RelationshipType
+
+	noSmithyDocumentSerde
+}
+
 // Aggregated statistics about a measure affected by an anomaly.
 type ItemizedMetricStats struct {
 

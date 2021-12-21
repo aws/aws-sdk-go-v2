@@ -52,22 +52,24 @@ type CreateModelInput struct {
 	ProjectName *string
 
 	// ClientToken is an idempotency token that ensures a call to CreateModel completes
-	// only once. You choose the value to pass. For example, An issue, such as an
-	// network outage, might prevent you from getting a response from CreateModel. In
-	// this case, safely retry your call to CreateModel by using the same ClientToken
-	// parameter value. An error occurs if the other input parameters are not the same
-	// as in the first request. Using a different value for ClientToken is considered a
-	// new call to CreateModel. An idempotency token is active for 8 hours.
+	// only once. You choose the value to pass. For example, An issue might prevent you
+	// from getting a response from CreateModel. In this case, safely retry your call
+	// to CreateModel by using the same ClientToken parameter value. If you don't
+	// supply a value for ClientToken, the AWS SDK you are using inserts a value for
+	// you. This prevents retries after a network error from starting multiple training
+	// jobs. You'll need to provide your own value for other use cases. An error occurs
+	// if the other input parameters are not the same as in the first request. Using a
+	// different value for ClientToken is considered a new call to CreateModel. An
+	// idempotency token is active for 8 hours.
 	ClientToken *string
 
 	// A description for the version of the model.
 	Description *string
 
-	// The identifier for your AWS Key Management Service (AWS KMS) customer master key
-	// (CMK). The key is used to encrypt training and test images copied into the
-	// service for model training. Your source images are unaffected. If this parameter
-	// is not specified, the copied images are encrypted by a key that AWS owns and
-	// manages.
+	// The identifier for your AWS KMS key. The key is used to encrypt training and
+	// test images copied into the service for model training. Your source images are
+	// unaffected. If this parameter is not specified, the copied images are encrypted
+	// by a key that AWS owns and manages.
 	KmsKeyId *string
 
 	// A set of tags (key-value pairs) that you want to attach to the model.

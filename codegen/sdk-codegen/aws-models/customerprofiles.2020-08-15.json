@@ -1320,7 +1320,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configuration information about the S3 bucket where Identity Resolution Jobs writes result files. </p>\n         <note>\n            <p>You need to give Customer Profiles service principal write permission to your S3 bucket.\n            Otherwise, you'll get an exception in the API response. For an example policy, see\n               <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/cross-service-confused-deputy-prevention.html#customer-profiles-cross-service\">Amazon Connect Customer Profiles cross-service confused deputy prevention</a>.\n         </p>\n         </note>"
+                "smithy.api#documentation": "<p>Configuration information about the S3 bucket where Identity Resolution Jobs writes result files. </p>\n         <note>\n            <p>You need to give Customer Profiles service principal write permission to your S3 bucket.\n            Otherwise, you'll get an exception in the API response. For an example policy, see\n               <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/cross-service-confused-deputy-prevention.html#customer-profiles-cross-service\">Amazon Connect Customer Profiles cross-service confused deputy prevention</a>. </p>\n         </note>"
             }
         },
         "com.amazonaws.customerprofiles#ExportingLocation": {
@@ -2001,8 +2001,7 @@
                 "ObjectTypeName": {
                     "target": "com.amazonaws.customerprofiles#typeName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the profile object type.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The name of the profile object type.</p>"
                     }
                 },
                 "CreatedAt": {
@@ -2023,6 +2022,12 @@
                     "target": "com.amazonaws.customerprofiles#TagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                },
+                "ObjectTypeNames": {
+                    "target": "com.amazonaws.customerprofiles#ObjectTypeNames",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map in which each key is an event type from an external application such as Segment or Shopify, and each value is an <code>ObjectTypeName</code> (template) used to ingest the event.\nIt supports the following event types: <code>SegmentIdentify</code>, <code>ShopifyCreateCustomers</code>, <code>ShopifyUpdateCustomers</code>, <code>ShopifyCreateDraftOrders</code>, \n<code>ShopifyUpdateDraftOrders</code>, <code>ShopifyCreateOrders</code>, and <code>ShopifyUpdatedOrders</code>.</p>"
                     }
                 }
             }
@@ -2053,7 +2058,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and subject to change.</p>\n         <p>Before calling this API, use <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_CreateDomain.html\">CreateDomain</a> or\n            <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UpdateDomain.html\">UpdateDomain</a> to\n         enable identity resolution: set <code>Matching</code> to true.</p>\n         <p>GetMatches returns potentially matching profiles, based on the results of the latest run\n         of a machine learning process. </p>\n         <important>\n            <p>The process of matching duplicate profiles. If <code>Matching</code> = <code>true</code>, Amazon Connect Customer Profiles starts a weekly\nbatch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every \nSaturday at 12AM UTC to detect duplicate profiles in your domains. </p>\n            <p>After the Identity Resolution Job completes, use the \n<a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html\">GetMatches</a>\nAPI to return and review the results. Or, if you have configured <code>ExportingConfig</code> in the <code>MatchingRequest</code>, you can download the results from\nS3.</p>\n         </important>\n\n         <p>Amazon Connect uses the following profile attributes to identify matches:</p>\n         <ul>\n            <li>\n               <p>PhoneNumber</p>\n            </li>\n            <li>\n               <p>HomePhoneNumber</p>\n            </li>\n            <li>\n               <p>BusinessPhoneNumber</p>\n            </li>\n            <li>\n               <p>MobilePhoneNumber</p>\n            </li>\n            <li>\n               <p>EmailAddress</p>\n            </li>\n            <li>\n               <p>PersonalEmailAddress</p>\n            </li>\n            <li>\n               <p>BusinessEmailAddress</p>\n            </li>\n            <li>\n               <p>FullName</p>\n            </li>\n            <li>\n               <p>BusinessName</p>\n            </li>\n         </ul>\n         <p>For example, two or more profiles—with spelling mistakes such as <b>John Doe</b> and <b>Jhn Doe</b>, or different casing\n         email addresses such as <b>JOHN_DOE@ANYCOMPANY.COM</b> and\n            <b>johndoe@anycompany.com</b>, or different phone number\n         formats such as <b>555-010-0000</b> and <b>+1-555-010-0000</b>—can be detected as belonging to the same customer <b>John Doe</b> and merged into a unified profile.</p>",
+                "smithy.api#documentation": "<p>Before calling this API, use <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_CreateDomain.html\">CreateDomain</a> or\n            <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UpdateDomain.html\">UpdateDomain</a> to\n         enable identity resolution: set <code>Matching</code> to true.</p>\n         <p>GetMatches returns potentially matching profiles, based on the results of the latest run\n         of a machine learning process. </p>\n         <important>\n            <p>The process of matching duplicate profiles. If <code>Matching</code> = <code>true</code>, Amazon Connect Customer Profiles starts a weekly\nbatch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every \nSaturday at 12AM UTC to detect duplicate profiles in your domains. </p>\n            <p>After the Identity Resolution Job completes, use the \n<a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html\">GetMatches</a>\nAPI to return and review the results. Or, if you have configured <code>ExportingConfig</code> in the <code>MatchingRequest</code>, you can download the results from\nS3.</p>\n         </important>\n\n         <p>Amazon Connect uses the following profile attributes to identify matches:</p>\n         <ul>\n            <li>\n               <p>PhoneNumber</p>\n            </li>\n            <li>\n               <p>HomePhoneNumber</p>\n            </li>\n            <li>\n               <p>BusinessPhoneNumber</p>\n            </li>\n            <li>\n               <p>MobilePhoneNumber</p>\n            </li>\n            <li>\n               <p>EmailAddress</p>\n            </li>\n            <li>\n               <p>PersonalEmailAddress</p>\n            </li>\n            <li>\n               <p>BusinessEmailAddress</p>\n            </li>\n            <li>\n               <p>FullName</p>\n            </li>\n            <li>\n               <p>BusinessName</p>\n            </li>\n         </ul>\n         <p>For example, two or more profiles—with spelling mistakes such as <b>John Doe</b> and <b>Jhn Doe</b>, or different casing\n         email addresses such as <b>JOHN_DOE@ANYCOMPANY.COM</b> and\n            <b>johndoe@anycompany.com</b>, or different phone number\n         formats such as <b>555-010-0000</b> and <b>+1-555-010-0000</b>—can be detected as belonging to the same customer <b>John Doe</b> and merged into a unified profile.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/domains/{DomainName}/matches",
@@ -2867,8 +2872,7 @@
                 "ObjectTypeName": {
                     "target": "com.amazonaws.customerprofiles#typeName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the profile object type.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The name of the profile object type.</p>"
                     }
                 },
                 "CreatedAt": {
@@ -2889,6 +2893,12 @@
                     "target": "com.amazonaws.customerprofiles#TagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                },
+                "ObjectTypeNames": {
+                    "target": "com.amazonaws.customerprofiles#ObjectTypeNames",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map in which each key is an event type from an external application such as Segment or Shopify, and each value is an <code>ObjectTypeName</code> (template) used to ingest the event.\nIt supports the following event types: <code>SegmentIdentify</code>, <code>ShopifyCreateCustomers</code>, <code>ShopifyUpdateCustomers</code>, <code>ShopifyCreateDraftOrders</code>, \n<code>ShopifyUpdateDraftOrders</code>, <code>ShopifyCreateOrders</code>, and <code>ShopifyUpdatedOrders</code>.</p>"
                     }
                 }
             },
@@ -3290,7 +3300,7 @@
                 "ObjectFilter": {
                     "target": "com.amazonaws.customerprofiles#ObjectFilter",
                     "traits": {
-                        "smithy.api#documentation": "<p>Applies a filter to the response to include profile objects with the specified index\n         values. This filter is only supported for ObjectTypeName _asset and _case.</p>"
+                        "smithy.api#documentation": "<p>Applies a filter to the response to include profile objects with the specified index\n         values. This filter is only supported for ObjectTypeName _asset, _case and _order.</p>"
                     }
                 }
             }
@@ -3594,7 +3604,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and subject to change.</p>\n         <p>Runs an AWS Lambda job that does the following:</p>\n         <ol>\n            <li>\n               <p>All the profileKeys in the <code>ProfileToBeMerged</code> will be moved to the\n               main profile.</p>\n            </li>\n            <li>\n               <p>All the objects in the <code>ProfileToBeMerged</code> will be moved to the main\n               profile.</p>\n            </li>\n            <li>\n               <p>All the <code>ProfileToBeMerged</code> will be deleted at the end.</p>\n            </li>\n            <li>\n               <p>All the profileKeys in the <code>ProfileIdsToBeMerged</code> will be moved to the\n               main profile.</p>\n            </li>\n            <li>\n               <p>Standard fields are merged as follows:</p>\n               <ol>\n                  <li>\n                     <p>Fields are always \"union\"-ed if there are no conflicts in standard fields or\n                     attributeKeys.</p>\n                  </li>\n                  <li>\n                     <p>When there are conflicting fields:</p>\n\n                     <ol>\n                        <li>\n                           <p>If no <code>SourceProfileIds</code> entry is specified, the main\n                           Profile value is always taken. </p>\n                        </li>\n                        <li>\n                           <p>If a <code>SourceProfileIds</code> entry is specified, the specified\n                           profileId is always taken, even if it is a NULL value.</p>\n                        </li>\n                     </ol>\n                  </li>\n               </ol>\n            </li>\n         </ol>\n         <p>You can use MergeProfiles together with <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html\">GetMatches</a>, which\n         returns potentially matching profiles, or use it with the results of another matching\n         system. After profiles have been merged, they cannot be separated (unmerged).</p>",
+                "smithy.api#documentation": "<p>Runs an AWS Lambda job that does the following:</p>\n         <ol>\n            <li>\n               <p>All the profileKeys in the <code>ProfileToBeMerged</code> will be moved to the\n               main profile.</p>\n            </li>\n            <li>\n               <p>All the objects in the <code>ProfileToBeMerged</code> will be moved to the main\n               profile.</p>\n            </li>\n            <li>\n               <p>All the <code>ProfileToBeMerged</code> will be deleted at the end.</p>\n            </li>\n            <li>\n               <p>All the profileKeys in the <code>ProfileIdsToBeMerged</code> will be moved to the\n               main profile.</p>\n            </li>\n            <li>\n               <p>Standard fields are merged as follows:</p>\n               <ol>\n                  <li>\n                     <p>Fields are always \"union\"-ed if there are no conflicts in standard fields or\n                     attributeKeys.</p>\n                  </li>\n                  <li>\n                     <p>When there are conflicting fields:</p>\n\n                     <ol>\n                        <li>\n                           <p>If no <code>SourceProfileIds</code> entry is specified, the main\n                           Profile value is always taken. </p>\n                        </li>\n                        <li>\n                           <p>If a <code>SourceProfileIds</code> entry is specified, the specified\n                           profileId is always taken, even if it is a NULL value.</p>\n                        </li>\n                     </ol>\n                  </li>\n               </ol>\n            </li>\n         </ol>\n         <p>You can use MergeProfiles together with <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html\">GetMatches</a>, which\n         returns potentially matching profiles, or use it with the results of another matching\n         system. After profiles have been merged, they cannot be separated (unmerged).</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/domains/{DomainName}/profiles/objects/merge",
@@ -3662,7 +3672,7 @@
                 "KeyName": {
                     "target": "com.amazonaws.customerprofiles#name",
                     "traits": {
-                        "smithy.api#documentation": "<p>A searchable identifier of a standard profile object. The predefined keys you can use to\n         search for _asset include: _assetId, _assetName, _serialNumber. The predefined keys you can\n         use to search for _case include: _caseId.</p>",
+                        "smithy.api#documentation": "<p>A searchable identifier of a standard profile object. The predefined keys you can use to\n         search for _asset include: _assetId, _assetName, _serialNumber. The predefined keys you can\n         use to search for _case include: _caseId. The predefined keys you can use to search for\n         _order include: _orderId.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3675,7 +3685,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The filter applied to ListProfileObjects response to include profile objects with the\n         specified index values. This filter is only supported for ObjectTypeName _asset and\n         _case.</p>"
+                "smithy.api#documentation": "<p>The filter applied to ListProfileObjects response to include profile objects with the\n         specified index values. This filter is only supported for ObjectTypeName _asset, _case and\n         _order.</p>"
             }
         },
         "com.amazonaws.customerprofiles#ObjectTypeField": {
@@ -3710,7 +3720,7 @@
                 "StandardIdentifiers": {
                     "target": "com.amazonaws.customerprofiles#StandardIdentifierList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The types of keys that a ProfileObject can have. Each ProfileObject can have only 1\n         UNIQUE key but multiple PROFILE keys. PROFILE, ASSET or CASE means that this key can be\n         used to tie an object to a PROFILE, ASSET or CASE respectively. UNIQUE means that it can be\n         used to uniquely identify an object. If a key a is marked as SECONDARY, it will be used to\n         search for profiles after all other PROFILE keys have been searched. A LOOKUP_ONLY key is\n         only used to match a profile but is not persisted to be used for searching of the profile.\n         A NEW_ONLY key is only used if the profile does not already exist before the object is\n         ingested, otherwise it is only used for matching objects to profiles.</p>"
+                        "smithy.api#documentation": "<p>The types of keys that a ProfileObject can have. Each ProfileObject can have only 1\n         UNIQUE key but multiple PROFILE keys. PROFILE, ASSET, CASE, or ORDER  means that this key can be\n         used to tie an object to a PROFILE, ASSET, CASE, or ORDER respectively. UNIQUE means that it can be\n         used to uniquely identify an object. If a key a is marked as SECONDARY, it will be used to\n         search for profiles after all other PROFILE keys have been searched. A LOOKUP_ONLY key is\n         only used to match a profile but is not persisted to be used for searching of the profile.\n         A NEW_ONLY key is only used if the profile does not already exist before the object is\n         ingested, otherwise it is only used for matching objects to profiles.</p>"
                     }
                 },
                 "FieldNames": {
@@ -3728,6 +3738,15 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.customerprofiles#ObjectTypeKey"
+            }
+        },
+        "com.amazonaws.customerprofiles#ObjectTypeNames": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.customerprofiles#string1To255"
+            },
+            "value": {
+                "target": "com.amazonaws.customerprofiles#typeName"
             }
         },
         "com.amazonaws.customerprofiles#OperatorPropertiesKeys": {
@@ -4058,8 +4077,7 @@
                 "ObjectTypeName": {
                     "target": "com.amazonaws.customerprofiles#typeName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the profile object type.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The name of the profile object type.</p>"
                     }
                 },
                 "Tags": {
@@ -4072,6 +4090,12 @@
                     "target": "com.amazonaws.customerprofiles#FlowDefinition",
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration that controls how Customer Profiles retrieves data from the\n         source.</p>"
+                    }
+                },
+                "ObjectTypeNames": {
+                    "target": "com.amazonaws.customerprofiles#ObjectTypeNames",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map in which each key is an event type from an external application such as Segment or Shopify, and each value is an <code>ObjectTypeName</code> (template) used to ingest the event.\nIt supports the following event types: <code>SegmentIdentify</code>, <code>ShopifyCreateCustomers</code>, <code>ShopifyUpdateCustomers</code>, <code>ShopifyCreateDraftOrders</code>, \n<code>ShopifyUpdateDraftOrders</code>, <code>ShopifyCreateOrders</code>, and <code>ShopifyUpdatedOrders</code>.</p>"
                     }
                 }
             }
@@ -4096,8 +4120,7 @@
                 "ObjectTypeName": {
                     "target": "com.amazonaws.customerprofiles#typeName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the profile object type.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The name of the profile object type.</p>"
                     }
                 },
                 "CreatedAt": {
@@ -4118,6 +4141,12 @@
                     "target": "com.amazonaws.customerprofiles#TagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                },
+                "ObjectTypeNames": {
+                    "target": "com.amazonaws.customerprofiles#ObjectTypeNames",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map in which each key is an event type from an external application such as Segment or Shopify, and each value is an <code>ObjectTypeName</code> (template) used to ingest the event.\nIt supports the following event types: <code>SegmentIdentify</code>, <code>ShopifyCreateCustomers</code>, <code>ShopifyUpdateCustomers</code>, <code>ShopifyCreateDraftOrders</code>, \n<code>ShopifyUpdateDraftOrders</code>, <code>ShopifyCreateOrders</code>, and <code>ShopifyUpdatedOrders</code>.</p>"
                     }
                 }
             }
@@ -4281,7 +4310,7 @@
                 "SourceLastUpdatedTimestampFormat": {
                     "target": "com.amazonaws.customerprofiles#string1To255",
                     "traits": {
-                        "smithy.api#documentation": "<p>The format of your <code>sourceLastUpdatedTimestamp</code> that was previously set up.\n         </p>"
+                        "smithy.api#documentation": "<p>The format of your <code>sourceLastUpdatedTimestamp</code> that was previously set up.\n      </p>"
                     }
                 },
                 "Fields": {
@@ -4796,7 +4825,7 @@
                 "KeyName": {
                     "target": "com.amazonaws.customerprofiles#name",
                     "traits": {
-                        "smithy.api#documentation": "<p>A searchable identifier of a customer profile. The predefined keys you can use to search include: _account, _profileId,\n         _fullName, _phone, _email, _ctrContactId, _marketoLeadId, _salesforceAccountId,\n         _salesforceContactId, _zendeskUserId, _zendeskExternalId, _serviceNowSystemId.</p>",
+                        "smithy.api#documentation": "<p>A searchable identifier of a customer profile. The predefined keys you can use\n         to search include: _account, _profileId, _assetId, _caseId, _orderId, _fullName, _phone,\n         _email, _ctrContactId, _marketoLeadId, _salesforceAccountId, _salesforceContactId,\n         _salesforceAssetId, _zendeskUserId, _zendeskExternalId, _zendeskTicketId,\n         _serviceNowSystemId, _serviceNowIncidentId, _segmentUserId, _shopifyCustomerId,\n         _shopifyOrderId.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5068,6 +5097,10 @@
                     {
                         "value": "NEW_ONLY",
                         "name": "NEW_ONLY"
+                    },
+                    {
+                        "value": "ORDER",
+                        "name": "ORDER"
                     }
                 ]
             }

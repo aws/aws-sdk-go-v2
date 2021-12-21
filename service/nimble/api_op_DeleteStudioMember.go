@@ -47,7 +47,6 @@ type DeleteStudioMemberInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type DeleteStudioMemberOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

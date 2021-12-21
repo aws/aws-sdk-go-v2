@@ -3652,6 +3652,15 @@ func awsRestjson1_deserializeDocumentJournalS3ExportDescription(v **types.Journa
 				sv.LedgerName = ptr.String(jtv)
 			}
 
+		case "OutputFormat":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OutputFormat to be of type string, got %T instead", value)
+				}
+				sv.OutputFormat = types.OutputFormat(jtv)
+			}
+
 		case "RoleArn":
 			if value != nil {
 				jtv, ok := value.(string)

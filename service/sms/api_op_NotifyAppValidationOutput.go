@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides information to AWS SMS about whether application validation is
-// successful.
+// Provides information to Server Migration Service about whether application
+// validation is successful.
 func (c *Client) NotifyAppValidationOutput(ctx context.Context, params *NotifyAppValidationOutputInput, optFns ...func(*Options)) (*NotifyAppValidationOutputOutput, error) {
 	if params == nil {
 		params = &NotifyAppValidationOutputInput{}

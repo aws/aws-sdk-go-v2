@@ -35,7 +35,7 @@ func (c *Client) UpdateSiteRackPhysicalProperties(ctx context.Context, params *U
 
 type UpdateSiteRackPhysicalPropertiesInput struct {
 
-	// The ID of the site.
+	// The ID or the Amazon Resource Name (ARN) of the site.
 	//
 	// This member is required.
 	SiteId *string

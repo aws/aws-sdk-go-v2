@@ -3450,6 +3450,13 @@ func awsRestjson1_serializeDocumentChannelMessageCallback(v *types.ChannelMessag
 		ok.String(*v.Content)
 	}
 
+	if v.MessageAttributes != nil {
+		ok := object.Key("MessageAttributes")
+		if err := awsRestjson1_serializeDocumentMessageAttributeMap(v.MessageAttributes, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.MessageId != nil {
 		ok := object.Key("MessageId")
 		ok.String(*v.MessageId)
@@ -3458,6 +3465,13 @@ func awsRestjson1_serializeDocumentChannelMessageCallback(v *types.ChannelMessag
 	if v.Metadata != nil {
 		ok := object.Key("Metadata")
 		ok.String(*v.Metadata)
+	}
+
+	if v.PushNotification != nil {
+		ok := object.Key("PushNotification")
+		if err := awsRestjson1_serializeDocumentPushNotificationConfiguration(v.PushNotification, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

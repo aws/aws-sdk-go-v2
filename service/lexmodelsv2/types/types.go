@@ -887,6 +887,15 @@ type ExportSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Provides information about the external source of the slot type's definition.
+type ExternalSourceSetting struct {
+
+	// Settings required for a slot type based on a grammar that you provide.
+	GrammarSlotTypeSetting *GrammarSlotTypeSetting
+
+	noSmithyDocumentSerde
+}
+
 // Determines if a Lambda function should be invoked for a specific intent.
 type FulfillmentCodeHookSettings struct {
 
@@ -978,6 +987,35 @@ type FulfillmentUpdatesSpecification struct {
 	// Provides configuration information for messages sent periodically to the user
 	// while the fulfillment Lambda function is running.
 	UpdateResponse *FulfillmentUpdateResponseSpecification
+
+	noSmithyDocumentSerde
+}
+
+// Settings requried for a slot type based on a grammar that you provide.
+type GrammarSlotTypeSetting struct {
+
+	// The source of the grammar used to create the slot type.
+	Source *GrammarSlotTypeSource
+
+	noSmithyDocumentSerde
+}
+
+// Describes the Amazon S3 bucket name and location for the grammar that is the
+// source for the slot type.
+type GrammarSlotTypeSource struct {
+
+	// The name of the S3 bucket that contains the grammar source.
+	//
+	// This member is required.
+	S3BucketName *string
+
+	// The path to the grammar in the S3 bucket.
+	//
+	// This member is required.
+	S3ObjectKey *string
+
+	// The Amazon KMS key required to decrypt the contents of the grammar, if any.
+	KmsKeyArn *string
 
 	noSmithyDocumentSerde
 }
@@ -1787,6 +1825,23 @@ type SlotTypeSummary struct {
 	// slot type.
 	ParentSlotTypeSignature *string
 
+	// Indicates the type of the slot type.
+	//
+	// * Custom - A slot type that you created
+	// using custom values. For more information, see Creating custom slot types
+	// (https://docs.aws.amazon.com/lexv2/latest/dg/custom-slot-types.html).
+	//
+	// *
+	// Extended - A slot type created by extending the AMAZON.AlphaNumeric built-in
+	// slot type. For more information, see AMAZON.AlphaNumeric
+	// (https://docs.aws.amazon.com/lexv2/latest/dg/built-in-slot-alphanumerice.html).
+	//
+	// *
+	// ExternalGrammar - A slot type using a custom GRXML grammar to define values. For
+	// more information, see Using a custom grammar slot type
+	// (https://docs.aws.amazon.com/lexv2/latest/dg/building-grxml.html).
+	SlotTypeCategory SlotTypeCategory
+
 	// The unique identifier assigned to the slot type.
 	SlotTypeId *string
 
@@ -2002,8 +2057,11 @@ type VoiceSettings struct {
 	VoiceId *string
 
 	// Indicates the type of Amazon Polly voice that Amazon Lex should use for voice
-	// interaction with the user. For more information, see Voices in Amazon Polly
-	// (https://docs.aws.amazon.com/polly/latest/dg/voicelist.html).
+	// interaction with the user. For more information, see the engine parameter of the
+	// SynthesizeSpeech operation
+	// (https://docs.aws.amazon.com/polly/latest/dg/API_SynthesizeSpeech.html#polly-SynthesizeSpeech-request-Engine)
+	// in the Amazon Polly developer guide. If you do not specify a value, the default
+	// is standard.
 	Engine VoiceEngine
 
 	noSmithyDocumentSerde

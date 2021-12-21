@@ -1192,6 +1192,18 @@ func awsRestjson1_serializeDocumentDataViewDestinationTypeParams(v *types.DataVi
 		ok.String(*v.DestinationType)
 	}
 
+	if len(v.S3DestinationExportFileFormat) > 0 {
+		ok := object.Key("s3DestinationExportFileFormat")
+		ok.String(string(v.S3DestinationExportFileFormat))
+	}
+
+	if v.S3DestinationExportFileFormatOptions != nil {
+		ok := object.Key("s3DestinationExportFileFormatOptions")
+		if err := awsRestjson1_serializeDocumentS3DestinationFormatOptions(v.S3DestinationExportFileFormatOptions, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -1257,6 +1269,17 @@ func awsRestjson1_serializeDocumentResourcePermissionsList(v []types.ResourcePer
 		if err := awsRestjson1_serializeDocumentResourcePermission(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentS3DestinationFormatOptions(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
 	}
 	return nil
 }

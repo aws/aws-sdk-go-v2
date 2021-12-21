@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpAssociateApi struct {
+}
+
+func (*validateOpAssociateApi) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateApi) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateApiInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateApiInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateApiCache struct {
 }
 
@@ -65,6 +85,26 @@ func (m *validateOpCreateDataSource) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateDataSourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateDomainName struct {
+}
+
+func (*validateOpCreateDomainName) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateDomainName) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateDomainNameInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateDomainNameInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -210,6 +250,26 @@ func (m *validateOpDeleteDataSource) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteDomainName struct {
+}
+
+func (*validateOpDeleteDomainName) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteDomainName) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteDomainNameInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteDomainNameInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteFunction struct {
 }
 
@@ -290,6 +350,26 @@ func (m *validateOpDeleteType) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisassociateApi struct {
+}
+
+func (*validateOpDisassociateApi) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateApi) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateApiInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateApiInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpFlushApiCache struct {
 }
 
@@ -305,6 +385,26 @@ func (m *validateOpFlushApiCache) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpFlushApiCacheInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetApiAssociation struct {
+}
+
+func (*validateOpGetApiAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetApiAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetApiAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetApiAssociationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -345,6 +445,26 @@ func (m *validateOpGetDataSource) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetDataSourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetDomainName struct {
+}
+
+func (*validateOpGetDomainName) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDomainName) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDomainNameInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDomainNameInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -730,6 +850,26 @@ func (m *validateOpUpdateDataSource) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateDomainName struct {
+}
+
+func (*validateOpUpdateDomainName) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateDomainName) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateDomainNameInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateDomainNameInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateFunction struct {
 }
 
@@ -810,6 +950,10 @@ func (m *validateOpUpdateType) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpAssociateApiValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateApi{}, middleware.After)
+}
+
 func addOpCreateApiCacheValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateApiCache{}, middleware.After)
 }
@@ -820,6 +964,10 @@ func addOpCreateApiKeyValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCreateDataSourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDataSource{}, middleware.After)
+}
+
+func addOpCreateDomainNameValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateDomainName{}, middleware.After)
 }
 
 func addOpCreateFunctionValidationMiddleware(stack *middleware.Stack) error {
@@ -850,6 +998,10 @@ func addOpDeleteDataSourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDataSource{}, middleware.After)
 }
 
+func addOpDeleteDomainNameValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteDomainName{}, middleware.After)
+}
+
 func addOpDeleteFunctionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteFunction{}, middleware.After)
 }
@@ -866,8 +1018,16 @@ func addOpDeleteTypeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteType{}, middleware.After)
 }
 
+func addOpDisassociateApiValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateApi{}, middleware.After)
+}
+
 func addOpFlushApiCacheValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpFlushApiCache{}, middleware.After)
+}
+
+func addOpGetApiAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetApiAssociation{}, middleware.After)
 }
 
 func addOpGetApiCacheValidationMiddleware(stack *middleware.Stack) error {
@@ -876,6 +1036,10 @@ func addOpGetApiCacheValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetDataSourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDataSource{}, middleware.After)
+}
+
+func addOpGetDomainNameValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDomainName{}, middleware.After)
 }
 
 func addOpGetFunctionValidationMiddleware(stack *middleware.Stack) error {
@@ -952,6 +1116,10 @@ func addOpUpdateApiKeyValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateDataSourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateDataSource{}, middleware.After)
+}
+
+func addOpUpdateDomainNameValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateDomainName{}, middleware.After)
 }
 
 func addOpUpdateFunctionValidationMiddleware(stack *middleware.Stack) error {
@@ -1202,6 +1370,24 @@ func validateUserPoolConfig(v *types.UserPoolConfig) error {
 	}
 }
 
+func validateOpAssociateApiInput(v *AssociateApiInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateApiInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.ApiId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateApiCacheInput(v *CreateApiCacheInput) error {
 	if v == nil {
 		return nil
@@ -1276,6 +1462,24 @@ func validateOpCreateDataSourceInput(v *CreateDataSourceInput) error {
 		if err := validateHttpDataSourceConfig(v.HttpConfig); err != nil {
 			invalidParams.AddNested("HttpConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateDomainNameInput(v *CreateDomainNameInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateDomainNameInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.CertificateArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CertificateArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1444,6 +1648,21 @@ func validateOpDeleteDataSourceInput(v *DeleteDataSourceInput) error {
 	}
 }
 
+func validateOpDeleteDomainNameInput(v *DeleteDomainNameInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteDomainNameInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteFunctionInput(v *DeleteFunctionInput) error {
 	if v == nil {
 		return nil
@@ -1516,6 +1735,21 @@ func validateOpDeleteTypeInput(v *DeleteTypeInput) error {
 	}
 }
 
+func validateOpDisassociateApiInput(v *DisassociateApiInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateApiInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpFlushApiCacheInput(v *FlushApiCacheInput) error {
 	if v == nil {
 		return nil
@@ -1523,6 +1757,21 @@ func validateOpFlushApiCacheInput(v *FlushApiCacheInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "FlushApiCacheInput"}
 	if v.ApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetApiAssociationInput(v *GetApiAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetApiAssociationInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1556,6 +1805,21 @@ func validateOpGetDataSourceInput(v *GetDataSourceInput) error {
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetDomainNameInput(v *GetDomainNameInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDomainNameInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1917,6 +2181,21 @@ func validateOpUpdateDataSourceInput(v *UpdateDataSourceInput) error {
 		if err := validateHttpDataSourceConfig(v.HttpConfig); err != nil {
 			invalidParams.AddNested("HttpConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateDomainNameInput(v *UpdateDomainNameInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateDomainNameInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

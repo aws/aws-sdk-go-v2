@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Converts an existing secret to a multi-Region secret and begins replication the
-// secret to a list of new regions.
+// Replicates the secret to a new Regions. See Multi-Region secrets
+// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/create-manage-multi-region-secrets.html).
 func (c *Client) ReplicateSecretToRegions(ctx context.Context, params *ReplicateSecretToRegionsInput, optFns ...func(*Options)) (*ReplicateSecretToRegionsOutput, error) {
 	if params == nil {
 		params = &ReplicateSecretToRegionsInput{}
@@ -30,18 +30,18 @@ func (c *Client) ReplicateSecretToRegions(ctx context.Context, params *Replicate
 
 type ReplicateSecretToRegionsInput struct {
 
-	// Add Regions to replicate the secret.
+	// A list of Regions in which to replicate the secret.
 	//
 	// This member is required.
 	AddReplicaRegions []types.ReplicaRegionType
 
-	// Use the Secret Id to replicate a secret to regions.
+	// The ARN or name of the secret to replicate.
 	//
 	// This member is required.
 	SecretId *string
 
-	// (Optional) If set, Secrets Manager replication overwrites a secret with the same
-	// name in the destination region.
+	// Specifies whether to overwrite a secret with the same name in the destination
+	// Region.
 	ForceOverwriteReplicaSecret bool
 
 	noSmithyDocumentSerde
@@ -49,12 +49,10 @@ type ReplicateSecretToRegionsInput struct {
 
 type ReplicateSecretToRegionsOutput struct {
 
-	// Replicate a secret based on the ReplicaRegionType> consisting of a
-	// Region(required) and a KMSKeyId (optional) which can be the ARN, KeyID, or
-	// Alias.
+	// The ARN of the primary secret.
 	ARN *string
 
-	// Describes the secret replication status as PENDING, SUCCESS or FAIL.
+	// The status of replication.
 	ReplicationStatus []types.ReplicationStatusType
 
 	// Metadata pertaining to the operation's result.

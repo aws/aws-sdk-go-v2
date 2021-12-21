@@ -34,12 +34,12 @@ type ListResolversByFunctionInput struct {
 	// This member is required.
 	ApiId *string
 
-	// The Function ID.
+	// The function ID.
 	//
 	// This member is required.
 	FunctionId *string
 
-	// The maximum number of results you want the request to return.
+	// The maximum number of results that you want the request to return.
 	MaxResults int32
 
 	// An identifier that was returned from the previous call to this operation, which
@@ -51,7 +51,7 @@ type ListResolversByFunctionInput struct {
 
 type ListResolversByFunctionOutput struct {
 
-	// An identifier that can be used to return the next set of items in the list.
+	// An identifier that you can use to return the next set of items in the list.
 	NextToken *string
 
 	// The list of resolvers.

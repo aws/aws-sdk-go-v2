@@ -2093,6 +2093,13 @@ func awsRestjson1_serializeOpDocumentPutIntegrationInput(v *PutIntegrationInput,
 		ok.String(*v.ObjectTypeName)
 	}
 
+	if v.ObjectTypeNames != nil {
+		ok := object.Key("ObjectTypeNames")
+		if err := awsRestjson1_serializeDocumentObjectTypeNames(v.ObjectTypeNames, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
@@ -3426,6 +3433,17 @@ func awsRestjson1_serializeDocumentObjectTypeKeyList(v []types.ObjectTypeKey, va
 		if err := awsRestjson1_serializeDocumentObjectTypeKey(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentObjectTypeNames(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
 	}
 	return nil
 }

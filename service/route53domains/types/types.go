@@ -59,8 +59,8 @@ type ContactDetail struct {
 	// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html)
 	// in the Amazon Route 53 Developer Guide
 	//
-	// * For .es domains, if you specify
-	// PERSON, you must specify INDIVIDUAL for the value of ES_LEGAL_FORM.
+	// * For .es domains, the value of
+	// ContactType must be PERSON for all three contacts.
 	ContactType ContactType
 
 	// Code for the country of the contact's address.
@@ -96,6 +96,30 @@ type ContactDetail struct {
 
 	// The zip or postal code of the contact's address.
 	ZipCode *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the domain price associated with a TLD.
+type DomainPrice struct {
+
+	// The price for changing domain ownership.
+	ChangeOwnershipPrice *PriceWithCurrency
+
+	// The name of the TLD for which the prices apply.
+	Name *string
+
+	// The price for domain registration with Route 53.
+	RegistrationPrice *PriceWithCurrency
+
+	// The price for renewing domain registration with Route 53.
+	RenewalPrice *PriceWithCurrency
+
+	// The price for restoring the domain with Route 53.
+	RestorationPrice *PriceWithCurrency
+
+	// The price for transferring the domain registration to Route 53.
+	TransferPrice *PriceWithCurrency
 
 	noSmithyDocumentSerde
 }
@@ -297,73 +321,107 @@ type ExtraParam struct {
 	//
 	// .es
 	//
-	// * ES_IDENTIFICATION Specify the applicable value:
+	// * ES_IDENTIFICATION The value of ES_IDENTIFICATION depends on the
+	// following values:
 	//
-	// * For contacts
-	// inside Spain: Enter your passport ID.
+	// * The value of ES_LEGAL_FORM
 	//
-	// * For contacts outside of Spain: Enter
-	// the VAT identification number for the company. For .es domains, the value of
-	// ContactType must be PERSON.
+	// * The value of
+	// ES_IDENTIFICATION_TYPE
 	//
-	// * ES_IDENTIFICATION_TYPE Valid values include the
+	// If ES_LEGAL_FORM is any value other than INDIVIDUAL:
+	//
+	// *
+	// Specify 1 letter + 8 numbers (CIF [Certificado de Identificación Fiscal])
+	//
+	// *
+	// Example: B12345678
+	//
+	// If ES_LEGAL_FORM is INDIVIDUAL, the value that you specify
+	// for ES_IDENTIFICATION depends on the value of ES_IDENTIFICATION_TYPE:
+	//
+	// * If
+	// ES_IDENTIFICATION_TYPE is DNI_AND_NIF (for Spanish contacts):
+	//
+	// * Specify 8
+	// numbers + 1 letter (DNI [Documento Nacional de Identidad], NIF [Número de
+	// Identificación Fiscal])
+	//
+	// * Example: 12345678M
+	//
+	// * If ES_IDENTIFICATION_TYPE is
+	// NIE (for foreigners with legal residence):
+	//
+	// * Specify 1 letter + 7 numbers + 1
+	// letter ( NIE [Número de Identidad de Extranjero])
+	//
+	// * Example: Y1234567X
+	//
+	// * If
+	// ES_IDENTIFICATION_TYPE is OTHER (for contacts outside of Spain):
+	//
+	// * Specify a
+	// passport number, drivers license number, or national identity card number
+	//
+	// *
+	// ES_IDENTIFICATION_TYPE Valid values include the following:
+	//
+	// * DNI_AND_NIF (For
+	// Spanish contacts)
+	//
+	// * NIE (For foreigners with legal residence)
+	//
+	// * OTHER (For
+	// contacts outside of Spain)
+	//
+	// * ES_LEGAL_FORM Valid values include the
 	// following:
-	//
-	// * DNI_AND_NIF (For Spanish contacts)
-	//
-	// * NIE (For foreigners with
-	// legal residence)
-	//
-	// * OTHER (For contacts outside of Spain)
-	//
-	// * ES_LEGAL_FORM Valid
-	// values include the following:
 	//
 	// * ASSOCIATION
 	//
 	// * CENTRAL_GOVERNMENT_BODY
 	//
-	// *
-	// CIVIL_SOCIETY
+	// * CIVIL_SOCIETY
 	//
-	// * COMMUNITY_OF_OWNERS
+	// *
+	// COMMUNITY_OF_OWNERS
 	//
 	// * COMMUNITY_PROPERTY
 	//
 	// * CONSULATE
 	//
-	// *
-	// COOPERATIVE
-	//
-	// * DESIGNATION_OF_ORIGIN_SUPERVISORY_COUNCIL
+	// * COOPERATIVE
 	//
 	// *
-	// ECONOMIC_INTEREST_GROUP
+	// DESIGNATION_OF_ORIGIN_SUPERVISORY_COUNCIL
 	//
-	// * EMBASSY
+	// * ECONOMIC_INTEREST_GROUP
+	//
+	// *
+	// EMBASSY
 	//
 	// * ENTITY_MANAGING_NATURAL_AREAS
 	//
-	// *
-	// FARM_PARTNERSHIP
+	// * FARM_PARTNERSHIP
 	//
 	// * FOUNDATION
 	//
-	// * GENERAL_AND_LIMITED_PARTNERSHIP
-	//
 	// *
-	// GENERAL_PARTNERSHIP
+	// GENERAL_AND_LIMITED_PARTNERSHIP
+	//
+	// * GENERAL_PARTNERSHIP
 	//
 	// * INDIVIDUAL
 	//
-	// * LIMITED_COMPANY
+	// *
+	// LIMITED_COMPANY
 	//
 	// * LOCAL_AUTHORITY
 	//
-	// *
-	// LOCAL_PUBLIC_ENTITY
+	// * LOCAL_PUBLIC_ENTITY
 	//
-	// * MUTUAL_INSURANCE_COMPANY
+	// *
+	// MUTUAL_INSURANCE_COMPANY
 	//
 	// * NATIONAL_PUBLIC_ENTITY
 	//
@@ -407,38 +465,42 @@ type ExtraParam struct {
 	//
 	// * WORKER_OWNED_LIMITED_COMPANY
 	//
-	// .fi
+	// .eu
 	//
 	// *
-	// BIRTH_DATE_IN_YYYY_MM_DD
+	// EU_COUNTRY_OF_CITIZENSHIP
 	//
-	// * FI_BUSINESS_NUMBER
+	// .fi
+	//
+	// * BIRTH_DATE_IN_YYYY_MM_DD
+	//
+	// *
+	// FI_BUSINESS_NUMBER
 	//
 	// * FI_ID_NUMBER
 	//
-	// * FI_NATIONALITY
-	// Valid values include the following:
+	// * FI_NATIONALITY Valid values include the
+	// following:
 	//
 	// * FINNISH
 	//
 	// * NOT_FINNISH
 	//
-	// *
-	// FI_ORGANIZATION_TYPE Valid values include the following:
+	// * FI_ORGANIZATION_TYPE Valid values
+	// include the following:
 	//
 	// * COMPANY
 	//
-	// *
-	// CORPORATION
+	// * CORPORATION
 	//
 	// * GOVERNMENT
 	//
 	// * INSTITUTION
 	//
-	// * POLITICAL_PARTY
-	//
 	// *
-	// PUBLIC_COMMUNITY
+	// POLITICAL_PARTY
+	//
+	// * PUBLIC_COMMUNITY
 	//
 	// * TOWNSHIP
 	//
@@ -446,16 +508,16 @@ type ExtraParam struct {
 	//
 	// * BIRTH_CITY
 	//
-	// * BIRTH_COUNTRY
-	//
 	// *
-	// BIRTH_DATE_IN_YYYY_MM_DD
+	// BIRTH_COUNTRY
 	//
-	// * BIRTH_DEPARTMENT: Specify the INSEE code that
-	// corresponds with the department where the contact was born. If the contact was
-	// born somewhere other than France or its overseas departments, specify 99. For
-	// more information, including a list of departments and the corresponding INSEE
-	// numbers, see the Wikipedia entry Departments of France
+	// * BIRTH_DATE_IN_YYYY_MM_DD
+	//
+	// * BIRTH_DEPARTMENT: Specify the INSEE
+	// code that corresponds with the department where the contact was born. If the
+	// contact was born somewhere other than France or its overseas departments,
+	// specify 99. For more information, including a list of departments and the
+	// corresponding INSEE numbers, see the Wikipedia entry Departments of France
 	// (https://en.wikipedia.org/wiki/Departments_of_France).
 	//
 	// * BRAND_NUMBER
@@ -563,6 +625,36 @@ type ExtraParam struct {
 	noSmithyDocumentSerde
 }
 
+// Information for the filtering of a list of domains returned by ListDomains
+// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains__ListDomains.html).
+type FilterCondition struct {
+
+	// Name of the field which should be used for filtering the list of domains.
+	//
+	// This member is required.
+	Name ListDomainsAttributeName
+
+	// The operator values for filtering domain names. The values can be:
+	//
+	// * LE: Less
+	// than, or equal to
+	//
+	// * GE: Greater than, or equal to
+	//
+	// * BEGINS_WITH: Begins with
+	//
+	// This member is required.
+	Operator Operator
+
+	// An array of strings presenting values to compare. Only 1 item in the list is
+	// currently supported.
+	//
+	// This member is required.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
 // Nameserver includes the following elements.
 type Nameserver struct {
 
@@ -604,6 +696,44 @@ type OperationSummary struct {
 	//
 	// This member is required.
 	Type OperationType
+
+	noSmithyDocumentSerde
+}
+
+// Currency-specific price information.
+type PriceWithCurrency struct {
+
+	// The currency specifier.
+	//
+	// This member is required.
+	Currency *string
+
+	// The price of a domain, in a specific currency.
+	//
+	// This member is required.
+	Price float64
+
+	noSmithyDocumentSerde
+}
+
+// Information for sorting a list of domains.
+type SortCondition struct {
+
+	// Field to be used for sorting the list of domains. It can be either the name or
+	// the expiration for a domain. Note that if filterCondition is used in the same
+	// ListDomains
+	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains__ListDomains.html)
+	// call, the field used for sorting has to be the same as the field used for
+	// filtering.
+	//
+	// This member is required.
+	Name ListDomainsAttributeName
+
+	// The sort order for a list of domains. Either ascending (ASC) or descending
+	// (DES).
+	//
+	// This member is required.
+	SortOrder SortOrder
 
 	noSmithyDocumentSerde
 }

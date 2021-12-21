@@ -3144,6 +3144,11 @@ func awsAwsjson11_serializeOpDocumentPutDestinationPolicyInput(v *PutDestination
 		ok.String(*v.DestinationName)
 	}
 
+	if v.ForceUpdate != nil {
+		ok := object.Key("forceUpdate")
+		ok.Boolean(*v.ForceUpdate)
+	}
+
 	return nil
 }
 
