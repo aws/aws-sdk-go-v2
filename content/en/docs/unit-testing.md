@@ -140,7 +140,7 @@ func CountObjects(ctx context.Context, pager ListObjectsV2Pager) (count int, err
 		if err != nil {
 			return count, err
 		}
-		count += len(output.Contents)
+		count += int(output.KeyCount)
 	}
 	return count, nil
 }
@@ -195,7 +195,7 @@ func TestCountObjects(t *testing.T) {
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
-	if expect, actual := int64(30), objects; expect != actual {
+	if expect, actual := 30, objects; expect != actual {
 		t.Errorf("expect %v, got %v", expect, actual)
 	}
 }
