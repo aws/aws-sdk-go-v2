@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disassociate a list of client devices from a core device. After you disassociate
-// a client device from a core device, the client device won't be able to use cloud
-// discovery to retrieve the core device's connectivity information and
-// certificates.
+// Disassociates a list of client devices from a core device. After you
+// disassociate a client device from a core device, the client device won't be able
+// to use cloud discovery to retrieve the core device's connectivity information
+// and certificates.
 func (c *Client) BatchDisassociateClientDeviceFromCoreDevice(ctx context.Context, params *BatchDisassociateClientDeviceFromCoreDeviceInput, optFns ...func(*Options)) (*BatchDisassociateClientDeviceFromCoreDeviceOutput, error) {
 	if params == nil {
 		params = &BatchDisassociateClientDeviceFromCoreDeviceInput{}
@@ -45,8 +45,8 @@ type BatchDisassociateClientDeviceFromCoreDeviceInput struct {
 
 type BatchDisassociateClientDeviceFromCoreDeviceOutput struct {
 
-	// The list of errors (if any) for the entries in the request. Each error entry
-	// contains the name of the IoT thing that failed to disassociate.
+	// The list of any errors for the entries in the request. Each error entry contains
+	// the name of the IoT thing that failed to disassociate.
 	ErrorEntries []types.DisassociateClientDeviceFromCoreDeviceErrorEntry
 
 	// Metadata pertaining to the operation's result.

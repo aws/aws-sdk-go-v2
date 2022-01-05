@@ -394,6 +394,26 @@ func (e *OperationTimeoutException) ErrorMessage() string {
 func (e *OperationTimeoutException) ErrorCode() string             { return "OperationTimeoutException" }
 func (e *OperationTimeoutException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+type PermissionTypeMismatchException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *PermissionTypeMismatchException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *PermissionTypeMismatchException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *PermissionTypeMismatchException) ErrorCode() string {
+	return "PermissionTypeMismatchException"
+}
+func (e *PermissionTypeMismatchException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // A resource was not ready for a transaction.
 type ResourceNotReadyException struct {
 	Message *string

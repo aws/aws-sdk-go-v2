@@ -1217,6 +1217,26 @@ func (ResourceType) Values() []ResourceType {
 	}
 }
 
+type RetryableFailureType string
+
+// Enum values for RetryableFailureType
+const (
+	RetryableFailureTypeFailed   RetryableFailureType = "FAILED"
+	RetryableFailureTypeTimedOut RetryableFailureType = "TIMED_OUT"
+	RetryableFailureTypeAll      RetryableFailureType = "ALL"
+)
+
+// Values returns all known values for RetryableFailureType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RetryableFailureType) Values() []RetryableFailureType {
+	return []RetryableFailureType{
+		"FAILED",
+		"TIMED_OUT",
+		"ALL",
+	}
+}
+
 type ServerCertificateStatus string
 
 // Enum values for ServerCertificateStatus

@@ -6,6 +6,7 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -33,8 +34,15 @@ type UpdatePipelineInput struct {
 	// This member is required.
 	PipelineName *string
 
+	// If specified, it applies to all executions of this pipeline by default.
+	ParallelismConfiguration *types.ParallelismConfiguration
+
 	// The JSON pipeline definition.
 	PipelineDefinition *string
+
+	// The location of the pipeline definition stored in Amazon S3. If specified,
+	// SageMaker will retrieve the pipeline definition from this location.
+	PipelineDefinitionS3Location *types.PipelineDefinitionS3Location
 
 	// The description of the pipeline.
 	PipelineDescription *string

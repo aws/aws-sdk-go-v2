@@ -4062,6 +4062,14 @@ const (
 	TrainingInstanceTypeMlC5n4xlarge   TrainingInstanceType = "ml.c5n.4xlarge"
 	TrainingInstanceTypeMlC5n9xlarge   TrainingInstanceType = "ml.c5n.9xlarge"
 	TrainingInstanceTypeMlC5n18xlarge  TrainingInstanceType = "ml.c5n.18xlarge"
+	TrainingInstanceTypeMlG5Xlarge     TrainingInstanceType = "ml.g5.xlarge"
+	TrainingInstanceTypeMlG52xlarge    TrainingInstanceType = "ml.g5.2xlarge"
+	TrainingInstanceTypeMlG54xlarge    TrainingInstanceType = "ml.g5.4xlarge"
+	TrainingInstanceTypeMlG58xlarge    TrainingInstanceType = "ml.g5.8xlarge"
+	TrainingInstanceTypeMlG516xlarge   TrainingInstanceType = "ml.g5.16xlarge"
+	TrainingInstanceTypeMlG512xlarge   TrainingInstanceType = "ml.g5.12xlarge"
+	TrainingInstanceTypeMlG524xlarge   TrainingInstanceType = "ml.g5.24xlarge"
+	TrainingInstanceTypeMlG548xlarge   TrainingInstanceType = "ml.g5.48xlarge"
 )
 
 // Values returns all known values for TrainingInstanceType. Note that this can be
@@ -4108,6 +4116,14 @@ func (TrainingInstanceType) Values() []TrainingInstanceType {
 		"ml.c5n.4xlarge",
 		"ml.c5n.9xlarge",
 		"ml.c5n.18xlarge",
+		"ml.g5.xlarge",
+		"ml.g5.2xlarge",
+		"ml.g5.4xlarge",
+		"ml.g5.8xlarge",
+		"ml.g5.16xlarge",
+		"ml.g5.12xlarge",
+		"ml.g5.24xlarge",
+		"ml.g5.48xlarge",
 	}
 }
 

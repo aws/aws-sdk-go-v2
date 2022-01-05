@@ -35285,6 +35285,73 @@ func awsAwsjson11_deserializeDocumentEdges(v *[]types.Edge, value interface{}) e
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentEMRStepMetadata(v **types.EMRStepMetadata, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EMRStepMetadata
+	if *v == nil {
+		sv = &types.EMRStepMetadata{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ClusterId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String256 to be of type string, got %T instead", value)
+				}
+				sv.ClusterId = ptr.String(jtv)
+			}
+
+		case "LogFilePath":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String1024 to be of type string, got %T instead", value)
+				}
+				sv.LogFilePath = ptr.String(jtv)
+			}
+
+		case "StepId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String256 to be of type string, got %T instead", value)
+				}
+				sv.StepId = ptr.String(jtv)
+			}
+
+		case "StepName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String256 to be of type string, got %T instead", value)
+				}
+				sv.StepName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentEndpoint(v **types.Endpoint, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -46828,6 +46895,50 @@ func awsAwsjson11_deserializeDocumentOutputParameterList(v *[]types.OutputParame
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentParallelismConfiguration(v **types.ParallelismConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ParallelismConfiguration
+	if *v == nil {
+		sv = &types.ParallelismConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "MaxParallelExecutionSteps":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MaxParallelExecutionSteps to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxParallelExecutionSteps = int32(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentParameter(v **types.Parameter, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -47647,6 +47758,11 @@ func awsAwsjson11_deserializeDocumentPipeline(v **types.Pipeline, value interfac
 				}
 			}
 
+		case "ParallelismConfiguration":
+			if err := awsAwsjson11_deserializeDocumentParallelismConfiguration(&sv.ParallelismConfiguration, value); err != nil {
+				return err
+			}
+
 		case "PipelineArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -47786,6 +47902,11 @@ func awsAwsjson11_deserializeDocumentPipelineExecution(v **types.PipelineExecuti
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "ParallelismConfiguration":
+			if err := awsAwsjson11_deserializeDocumentParallelismConfiguration(&sv.ParallelismConfiguration, value); err != nil {
+				return err
 			}
 
 		case "PipelineArn":
@@ -47938,6 +48059,24 @@ func awsAwsjson11_deserializeDocumentPipelineExecutionStep(v **types.PipelineExe
 				}
 			}
 
+		case "StepDescription":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StepDescription to be of type string, got %T instead", value)
+				}
+				sv.StepDescription = ptr.String(jtv)
+			}
+
+		case "StepDisplayName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StepDisplayName to be of type string, got %T instead", value)
+				}
+				sv.StepDisplayName = ptr.String(jtv)
+			}
+
 		case "StepName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -48033,6 +48172,11 @@ func awsAwsjson11_deserializeDocumentPipelineExecutionStepMetadata(v **types.Pip
 
 		case "Condition":
 			if err := awsAwsjson11_deserializeDocumentConditionStepMetadata(&sv.Condition, value); err != nil {
+				return err
+			}
+
+		case "EMR":
+			if err := awsAwsjson11_deserializeDocumentEMRStepMetadata(&sv.EMR, value); err != nil {
 				return err
 			}
 
@@ -65069,6 +65213,11 @@ func awsAwsjson11_deserializeOpDocumentDescribePipelineExecutionOutput(v **Descr
 				}
 			}
 
+		case "ParallelismConfiguration":
+			if err := awsAwsjson11_deserializeDocumentParallelismConfiguration(&sv.ParallelismConfiguration, value); err != nil {
+				return err
+			}
+
 		case "PipelineArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -65206,6 +65355,11 @@ func awsAwsjson11_deserializeOpDocumentDescribePipelineOutput(v **DescribePipeli
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "ParallelismConfiguration":
+			if err := awsAwsjson11_deserializeDocumentParallelismConfiguration(&sv.ParallelismConfiguration, value); err != nil {
+				return err
 			}
 
 		case "PipelineArn":

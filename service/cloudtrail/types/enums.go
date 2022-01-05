@@ -18,6 +18,26 @@ func (EventCategory) Values() []EventCategory {
 	}
 }
 
+type EventDataStoreStatus string
+
+// Enum values for EventDataStoreStatus
+const (
+	EventDataStoreStatusCreated         EventDataStoreStatus = "CREATED"
+	EventDataStoreStatusEnabled         EventDataStoreStatus = "ENABLED"
+	EventDataStoreStatusPendingDeletion EventDataStoreStatus = "PENDING_DELETION"
+)
+
+// Values returns all known values for EventDataStoreStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EventDataStoreStatus) Values() []EventDataStoreStatus {
+	return []EventDataStoreStatus{
+		"CREATED",
+		"ENABLED",
+		"PENDING_DELETION",
+	}
+}
+
 type InsightType string
 
 // Enum values for InsightType
@@ -63,6 +83,30 @@ func (LookupAttributeKey) Values() []LookupAttributeKey {
 		"ResourceName",
 		"EventSource",
 		"AccessKeyId",
+	}
+}
+
+type QueryStatus string
+
+// Enum values for QueryStatus
+const (
+	QueryStatusQueued    QueryStatus = "QUEUED"
+	QueryStatusRunning   QueryStatus = "RUNNING"
+	QueryStatusFinished  QueryStatus = "FINISHED"
+	QueryStatusFailed    QueryStatus = "FAILED"
+	QueryStatusCancelled QueryStatus = "CANCELLED"
+)
+
+// Values returns all known values for QueryStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (QueryStatus) Values() []QueryStatus {
+	return []QueryStatus{
+		"QUEUED",
+		"RUNNING",
+		"FINISHED",
+		"FAILED",
+		"CANCELLED",
 	}
 }
 

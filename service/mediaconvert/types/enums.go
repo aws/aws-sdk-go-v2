@@ -6365,6 +6365,27 @@ func (NoiseFilterPostTemporalSharpening) Values() []NoiseFilterPostTemporalSharp
 	}
 }
 
+type NoiseFilterPostTemporalSharpeningStrength string
+
+// Enum values for NoiseFilterPostTemporalSharpeningStrength
+const (
+	NoiseFilterPostTemporalSharpeningStrengthLow    NoiseFilterPostTemporalSharpeningStrength = "LOW"
+	NoiseFilterPostTemporalSharpeningStrengthMedium NoiseFilterPostTemporalSharpeningStrength = "MEDIUM"
+	NoiseFilterPostTemporalSharpeningStrengthHigh   NoiseFilterPostTemporalSharpeningStrength = "HIGH"
+)
+
+// Values returns all known values for NoiseFilterPostTemporalSharpeningStrength.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (NoiseFilterPostTemporalSharpeningStrength) Values() []NoiseFilterPostTemporalSharpeningStrength {
+	return []NoiseFilterPostTemporalSharpeningStrength{
+		"LOW",
+		"MEDIUM",
+		"HIGH",
+	}
+}
+
 type NoiseReducerFilter string
 
 // Enum values for NoiseReducerFilter

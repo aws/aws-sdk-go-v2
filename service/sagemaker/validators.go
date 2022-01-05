@@ -7882,6 +7882,18 @@ func validateOutputParameterList(v []types.OutputParameter) error {
 	}
 }
 
+func validateParallelismConfiguration(v *types.ParallelismConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ParallelismConfiguration"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateParameter(v *types.Parameter) error {
 	if v == nil {
 		return nil
@@ -7963,6 +7975,24 @@ func validateParameterRanges(v *types.ParameterRanges) error {
 		if err := validateCategoricalParameterRanges(v.CategoricalParameterRanges); err != nil {
 			invalidParams.AddNested("CategoricalParameterRanges", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePipelineDefinitionS3Location(v *types.PipelineDefinitionS3Location) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PipelineDefinitionS3Location"}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
+	if v.ObjectKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ObjectKey"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -10373,8 +10403,10 @@ func validateOpCreatePipelineInput(v *CreatePipelineInput) error {
 	if v.PipelineName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PipelineName"))
 	}
-	if v.PipelineDefinition == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PipelineDefinition"))
+	if v.PipelineDefinitionS3Location != nil {
+		if err := validatePipelineDefinitionS3Location(v.PipelineDefinitionS3Location); err != nil {
+			invalidParams.AddNested("PipelineDefinitionS3Location", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.ClientRequestToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
@@ -10385,6 +10417,11 @@ func validateOpCreatePipelineInput(v *CreatePipelineInput) error {
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ParallelismConfiguration != nil {
+		if err := validateParallelismConfiguration(v.ParallelismConfiguration); err != nil {
+			invalidParams.AddNested("ParallelismConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -12486,6 +12523,11 @@ func validateOpRetryPipelineExecutionInput(v *RetryPipelineExecutionInput) error
 	if v.ClientRequestToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
 	}
+	if v.ParallelismConfiguration != nil {
+		if err := validateParallelismConfiguration(v.ParallelismConfiguration); err != nil {
+			invalidParams.AddNested("ParallelismConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -12593,6 +12635,11 @@ func validateOpStartPipelineExecutionInput(v *StartPipelineExecutionInput) error
 	}
 	if v.ClientRequestToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
+	}
+	if v.ParallelismConfiguration != nil {
+		if err := validateParallelismConfiguration(v.ParallelismConfiguration); err != nil {
+			invalidParams.AddNested("ParallelismConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -13093,6 +13140,11 @@ func validateOpUpdatePipelineExecutionInput(v *UpdatePipelineExecutionInput) err
 	if v.PipelineExecutionArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PipelineExecutionArn"))
 	}
+	if v.ParallelismConfiguration != nil {
+		if err := validateParallelismConfiguration(v.ParallelismConfiguration); err != nil {
+			invalidParams.AddNested("ParallelismConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -13107,6 +13159,16 @@ func validateOpUpdatePipelineInput(v *UpdatePipelineInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdatePipelineInput"}
 	if v.PipelineName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PipelineName"))
+	}
+	if v.PipelineDefinitionS3Location != nil {
+		if err := validatePipelineDefinitionS3Location(v.PipelineDefinitionS3Location); err != nil {
+			invalidParams.AddNested("PipelineDefinitionS3Location", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ParallelismConfiguration != nil {
+		if err := validateParallelismConfiguration(v.ParallelismConfiguration); err != nil {
+			invalidParams.AddNested("ParallelismConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

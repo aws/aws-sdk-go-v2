@@ -10779,6 +10779,15 @@ func awsAwsjson11_deserializeDocumentFace(v **types.Face, value interface{}) err
 				sv.ImageId = ptr.String(jtv)
 			}
 
+		case "IndexFacesModelVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IndexFacesModelVersion to be of type string, got %T instead", value)
+				}
+				sv.IndexFacesModelVersion = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

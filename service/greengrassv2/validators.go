@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpAssociateServiceRoleToAccount struct {
+}
+
+func (*validateOpAssociateServiceRoleToAccount) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateServiceRoleToAccount) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateServiceRoleToAccountInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateServiceRoleToAccountInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchAssociateClientDeviceWithCoreDevice struct {
 }
 
@@ -205,6 +225,26 @@ func (m *validateOpGetComponentVersionArtifact) HandleInitialize(ctx context.Con
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetComponentVersionArtifactInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetConnectivityInfo struct {
+}
+
+func (*validateOpGetConnectivityInfo) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetConnectivityInfo) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetConnectivityInfoInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetConnectivityInfoInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -410,6 +450,30 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateConnectivityInfo struct {
+}
+
+func (*validateOpUpdateConnectivityInfo) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateConnectivityInfo) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateConnectivityInfoInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateConnectivityInfoInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+func addOpAssociateServiceRoleToAccountValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateServiceRoleToAccount{}, middleware.After)
+}
+
 func addOpBatchAssociateClientDeviceWithCoreDeviceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchAssociateClientDeviceWithCoreDevice{}, middleware.After)
 }
@@ -450,6 +514,10 @@ func addOpGetComponentVersionArtifactValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpGetComponentVersionArtifact{}, middleware.After)
 }
 
+func addOpGetConnectivityInfoValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetConnectivityInfo{}, middleware.After)
+}
+
 func addOpGetCoreDeviceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetCoreDevice{}, middleware.After)
 }
@@ -488,6 +556,10 @@ func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func addOpUpdateConnectivityInfoValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateConnectivityInfo{}, middleware.After)
 }
 
 func validateAssociateClientDeviceWithCoreDeviceEntry(v *types.AssociateClientDeviceWithCoreDeviceEntry) error {
@@ -845,6 +917,21 @@ func validateLambdaVolumeMount(v *types.LambdaVolumeMount) error {
 	}
 }
 
+func validateOpAssociateServiceRoleToAccountInput(v *AssociateServiceRoleToAccountInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateServiceRoleToAccountInput"}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpBatchAssociateClientDeviceWithCoreDeviceInput(v *BatchAssociateClientDeviceWithCoreDeviceInput) error {
 	if v == nil {
 		return nil
@@ -1015,6 +1102,21 @@ func validateOpGetComponentVersionArtifactInput(v *GetComponentVersionArtifactIn
 	}
 }
 
+func validateOpGetConnectivityInfoInput(v *GetConnectivityInfoInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetConnectivityInfoInput"}
+	if v.ThingName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ThingName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetCoreDeviceInput(v *GetCoreDeviceInput) error {
 	if v == nil {
 		return nil
@@ -1166,6 +1268,24 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateConnectivityInfoInput(v *UpdateConnectivityInfoInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateConnectivityInfoInput"}
+	if v.ThingName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ThingName"))
+	}
+	if v.ConnectivityInfo == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectivityInfo"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

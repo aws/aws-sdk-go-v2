@@ -85,7 +85,7 @@ type DescribeDomainOutput struct {
 	// The ID of the Amazon Elastic File System (EFS) managed by this Domain.
 	HomeEfsFileSystemId *string
 
-	// This member is deprecated and replaced with KmsKeyId.
+	// Use KmsKeyId.
 	//
 	// Deprecated: This property is deprecated, use KmsKeyId instead.
 	HomeEfsFileSystemKmsKeyId *string

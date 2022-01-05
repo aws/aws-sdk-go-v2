@@ -7,19 +7,37 @@ import (
 	"time"
 )
 
-// An AWS account that is the administrator account of or a member of a behavior
-// graph.
+// An Amazon Web Services account that is the administrator account of or a member
+// of a behavior graph.
 type Account struct {
 
-	// The account identifier of the AWS account.
+	// The account identifier of the Amazon Web Services account.
 	//
 	// This member is required.
 	AccountId *string
 
-	// The AWS account root user email address for the AWS account.
+	// The Amazon Web Services account root user email address for the Amazon Web
+	// Services account.
 	//
 	// This member is required.
 	EmailAddress *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the Detective administrator account for an organization.
+type Administrator struct {
+
+	// The Amazon Web Services account identifier of the Detective administrator
+	// account for the organization.
+	AccountId *string
+
+	// The date and time when the Detective administrator account was enabled. The
+	// value is an ISO8601 formatted string. For example, 2021-08-18T16:35:56.284Z.
+	DelegationTime *time.Time
+
+	// The ARN of the organization behavior graph.
+	GraphArn *string
 
 	noSmithyDocumentSerde
 }
@@ -30,21 +48,21 @@ type Graph struct {
 	// The ARN of the behavior graph.
 	Arn *string
 
-	// The date and time that the behavior graph was created. The value is in
-	// milliseconds since the epoch.
+	// The date and time that the behavior graph was created. The value is an ISO8601
+	// formatted string. For example, 2021-08-18T16:35:56.284Z.
 	CreatedTime *time.Time
 
 	noSmithyDocumentSerde
 }
 
-// Details about a member account that was invited to contribute to a behavior
-// graph.
+// Details about a member account in a behavior graph.
 type MemberDetail struct {
 
-	// The AWS account identifier for the member account.
+	// The Amazon Web Services account identifier for the member account.
 	AccountId *string
 
-	// The AWS account identifier of the administrator account for the behavior graph.
+	// The Amazon Web Services account identifier of the administrator account for the
+	// behavior graph.
 	AdministratorId *string
 
 	// For member accounts with a status of ACCEPTED_BUT_DISABLED, the reason that the
@@ -60,17 +78,24 @@ type MemberDetail struct {
 	// GuardDuty.
 	DisabledReason MemberDisabledReason
 
-	// The AWS account root user email address for the member account.
+	// The Amazon Web Services account root user email address for the member account.
 	EmailAddress *string
 
-	// The ARN of the behavior graph that the member account was invited to.
+	// The ARN of the behavior graph.
 	GraphArn *string
 
-	// The date and time that Detective sent the invitation to the member account. The
-	// value is in milliseconds since the epoch.
+	// The type of behavior graph membership. For an organization account in the
+	// organization behavior graph, the type is ORGANIZATION. For an account that was
+	// invited to a behavior graph, the type is INVITATION.
+	InvitationType InvitationType
+
+	// For invited accounts, the date and time that Detective sent the invitation to
+	// the account. The value is an ISO8601 formatted string. For example,
+	// 2021-08-18T16:35:56.284Z.
 	InvitedTime *time.Time
 
-	// The AWS account identifier of the administrator account for the behavior graph.
+	// The Amazon Web Services account identifier of the administrator account for the
+	// behavior graph.
 	//
 	// Deprecated: This property is deprecated. Use AdministratorId instead.
 	MasterId *string
@@ -86,7 +111,8 @@ type MemberDetail struct {
 	// Deprecated: This property is deprecated. Use VolumeUsageInBytes instead.
 	PercentOfGraphUtilization *float64
 
-	// The date and time when the graph utilization percentage was last updated.
+	// The date and time when the graph utilization percentage was last updated. The
+	// value is an ISO8601 formatted string. For example, 2021-08-18T16:35:56.284Z.
 	//
 	// Deprecated: This property is deprecated. Use VolumeUsageUpdatedTime instead.
 	PercentOfGraphUtilizationUpdatedTime *time.Time
@@ -94,40 +120,49 @@ type MemberDetail struct {
 	// The current membership status of the member account. The status can have one of
 	// the following values:
 	//
-	// * INVITED - Indicates that the member was sent an
-	// invitation but has not yet responded.
+	// * INVITED - For invited accounts only. Indicates that the
+	// member was sent an invitation but has not yet responded.
 	//
-	// * VERIFICATION_IN_PROGRESS - Indicates
-	// that Detective is verifying that the account identifier and email address
-	// provided for the member account match. If they do match, then Detective sends
-	// the invitation. If the email address and account identifier don't match, then
-	// the member cannot be added to the behavior graph.
+	// *
+	// VERIFICATION_IN_PROGRESS - For invited accounts only, indicates that Detective
+	// is verifying that the account identifier and email address provided for the
+	// member account match. If they do match, then Detective sends the invitation. If
+	// the email address and account identifier don't match, then the member cannot be
+	// added to the behavior graph. For organization accounts in the organization
+	// behavior graph, indicates that Detective is verifying that the account belongs
+	// to the organization.
 	//
-	// * VERIFICATION_FAILED -
+	// * VERIFICATION_FAILED - For invited accounts only.
 	// Indicates that the account and email address provided for the member account do
 	// not match, and Detective did not send an invitation to the account.
 	//
 	// * ENABLED -
-	// Indicates that the member account accepted the invitation to contribute to the
-	// behavior graph.
+	// Indicates that the member account currently contributes data to the behavior
+	// graph. For invited accounts, the member account accepted the invitation. For
+	// organization accounts in the organization behavior graph, the Detective
+	// administrator account enabled the organization account as a member account.
 	//
-	// * ACCEPTED_BUT_DISABLED - Indicates that the member account
-	// accepted the invitation but is prevented from contributing data to the behavior
-	// graph. DisabledReason provides the reason why the member account is not
-	// enabled.
+	// *
+	// ACCEPTED_BUT_DISABLED - The account accepted the invitation, or was enabled by
+	// the Detective administrator account, but is prevented from contributing data to
+	// the behavior graph. DisabledReason provides the reason why the member account is
+	// not enabled.
 	//
-	// Member accounts that declined an invitation or that were removed from
-	// the behavior graph are not included.
+	// Invited accounts that declined an invitation or that were removed
+	// from the behavior graph are not included. In the organization behavior graph,
+	// organization accounts that the Detective administrator account did not enable
+	// are not included.
 	Status MemberStatus
 
-	// The date and time that the member account was last updated. The value is in
-	// milliseconds since the epoch.
+	// The date and time that the member account was last updated. The value is an
+	// ISO8601 formatted string. For example, 2021-08-18T16:35:56.284Z.
 	UpdatedTime *time.Time
 
 	// The data volume in bytes per day for the member account.
 	VolumeUsageInBytes *int64
 
-	// The data and time when the member account data volume was last updated.
+	// The data and time when the member account data volume was last updated. The
+	// value is an ISO8601 formatted string. For example, 2021-08-18T16:35:56.284Z.
 	VolumeUsageUpdatedTime *time.Time
 
 	noSmithyDocumentSerde
@@ -137,7 +172,8 @@ type MemberDetail struct {
 // not be processed.
 type UnprocessedAccount struct {
 
-	// The AWS account identifier of the member account that was not processed.
+	// The Amazon Web Services account identifier of the member account that was not
+	// processed.
 	AccountId *string
 
 	// The reason that the member account request could not be processed.

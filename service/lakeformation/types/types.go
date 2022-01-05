@@ -40,6 +40,17 @@ type AllRowsWildcard struct {
 	noSmithyDocumentSerde
 }
 
+// A structure used to include auditing information on the privileged API.
+type AuditContext struct {
+
+	// The filter engine can populate the 'AdditionalAuditContext' information with the
+	// request ID for you to track. This information will be displayed in CloudTrail
+	// log in your account.
+	AdditionalAuditContext *string
+
+	noSmithyDocumentSerde
+}
+
 // A list of failures when performing a batch grant or batch revoke operation.
 type BatchPermissionsFailureEntry struct {
 
@@ -144,7 +155,8 @@ type DataCellsFilter struct {
 	// A list of column names.
 	ColumnNames []string
 
-	// A wildcard with exclusions.
+	// A wildcard with exclusions. You must specify either a ColumnNames list or the
+	// ColumnWildCard.
 	ColumnWildcard *ColumnWildcard
 
 	// A PartiQL predicate.
@@ -171,8 +183,7 @@ type DataCellsFilterResource struct {
 	noSmithyDocumentSerde
 }
 
-// The AWS Lake Formation principal. Supported principals are IAM users or IAM
-// roles.
+// The Lake Formation principal. Supported principals are IAM users or IAM roles.
 type DataLakePrincipal struct {
 
 	// An identifier for the Lake Formation principal.
@@ -185,6 +196,23 @@ type DataLakePrincipal struct {
 // lake administrators and lists of principal permission entries for default create
 // database and default create table permissions.
 type DataLakeSettings struct {
+
+	// Whether to allow Amazon EMR clusters to access data managed by Lake Formation.
+	// If true, you allow Amazon EMR clusters to access data in Amazon S3 locations
+	// that are registered with Lake Formation. If false or null, no Amazon EMR
+	// clusters will be able to access data in Amazon S3 locations that are registered
+	// with Lake Formation. For more information, see (Optional) Allow Data Filtering
+	// on Amazon EMR
+	// (https://docs-aws.amazon.com/lake-formation/latest/dg/getting-started-setup.html#emr-switch).
+	AllowExternalDataFiltering *bool
+
+	// Lake Formation relies on a privileged process secured by Amazon EMR or the third
+	// party integrator to tag the user's role while assuming it. Lake Formation will
+	// publish the acceptable key-value pair, for example key =
+	// "LakeFormationTrustedCaller" and value = "TRUE" and the third party integrator
+	// must properly tag the temporary security credentials that will be used to call
+	// Lake Formation's administrative APIs.
+	AuthorizedSessionTagValueList []string
 
 	// Specifies whether access control on newly created database is managed by Lake
 	// Formation permissions or exclusively by IAM permissions. You can override this
@@ -214,6 +242,10 @@ type DataLakeSettings struct {
 	// A list of Lake Formation principals. Supported principals are IAM users or IAM
 	// roles.
 	DataLakeAdmins []DataLakePrincipal
+
+	// A list of the account IDs of Amazon Web Services accounts with Amazon EMR
+	// clusters that are to perform data filtering.>
+	ExternalDataFilteringAllowList []DataLakePrincipal
 
 	// A list of the resource-owning account IDs that the caller's account can use to
 	// share their user access details (user ARNs). The user ARNs can be logged in the
@@ -420,6 +452,17 @@ type PartitionObjects struct {
 
 	// A list of partition values.
 	PartitionValues []string
+
+	noSmithyDocumentSerde
+}
+
+// Contains a list of values defining partitions.
+type PartitionValueList struct {
+
+	// The list of partition values.
+	//
+	// This member is required.
+	Values []string
 
 	noSmithyDocumentSerde
 }

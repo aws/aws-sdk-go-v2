@@ -1790,6 +1790,66 @@ func (m *validateOpGetTrigger) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetUnfilteredPartitionMetadata struct {
+}
+
+func (*validateOpGetUnfilteredPartitionMetadata) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetUnfilteredPartitionMetadata) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetUnfilteredPartitionMetadataInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetUnfilteredPartitionMetadataInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetUnfilteredPartitionsMetadata struct {
+}
+
+func (*validateOpGetUnfilteredPartitionsMetadata) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetUnfilteredPartitionsMetadata) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetUnfilteredPartitionsMetadataInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetUnfilteredPartitionsMetadataInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetUnfilteredTableMetadata struct {
+}
+
+func (*validateOpGetUnfilteredTableMetadata) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetUnfilteredTableMetadata) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetUnfilteredTableMetadataInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetUnfilteredTableMetadataInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetUserDefinedFunction struct {
 }
 
@@ -3144,6 +3204,18 @@ func addOpGetTagsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetTriggerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetTrigger{}, middleware.After)
+}
+
+func addOpGetUnfilteredPartitionMetadataValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetUnfilteredPartitionMetadata{}, middleware.After)
+}
+
+func addOpGetUnfilteredPartitionsMetadataValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetUnfilteredPartitionsMetadata{}, middleware.After)
+}
+
+func addOpGetUnfilteredTableMetadataValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetUnfilteredTableMetadata{}, middleware.After)
 }
 
 func addOpGetUserDefinedFunctionValidationMiddleware(stack *middleware.Stack) error {
@@ -6075,6 +6147,86 @@ func validateOpGetTriggerInput(v *GetTriggerInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetTriggerInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetUnfilteredPartitionMetadataInput(v *GetUnfilteredPartitionMetadataInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetUnfilteredPartitionMetadataInput"}
+	if v.CatalogId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CatalogId"))
+	}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.TableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
+	if v.PartitionValues == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PartitionValues"))
+	}
+	if v.SupportedPermissionTypes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SupportedPermissionTypes"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetUnfilteredPartitionsMetadataInput(v *GetUnfilteredPartitionsMetadataInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetUnfilteredPartitionsMetadataInput"}
+	if v.CatalogId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CatalogId"))
+	}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.TableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
+	if v.SupportedPermissionTypes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SupportedPermissionTypes"))
+	}
+	if v.Segment != nil {
+		if err := validateSegment(v.Segment); err != nil {
+			invalidParams.AddNested("Segment", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetUnfilteredTableMetadataInput(v *GetUnfilteredTableMetadataInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetUnfilteredTableMetadataInput"}
+	if v.CatalogId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CatalogId"))
+	}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.SupportedPermissionTypes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SupportedPermissionTypes"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

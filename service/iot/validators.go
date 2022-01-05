@@ -5223,6 +5223,25 @@ func validateIotSiteWiseAction(v *types.IotSiteWiseAction) error {
 	}
 }
 
+func validateJobExecutionsRetryConfig(v *types.JobExecutionsRetryConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "JobExecutionsRetryConfig"}
+	if v.CriteriaList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CriteriaList"))
+	} else if v.CriteriaList != nil {
+		if err := validateRetryCriteriaList(v.CriteriaList); err != nil {
+			invalidParams.AddNested("CriteriaList", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateJobExecutionsRolloutConfig(v *types.JobExecutionsRolloutConfig) error {
 	if v == nil {
 		return nil
@@ -5549,6 +5568,41 @@ func validateRepublishAction(v *types.RepublishAction) error {
 	}
 	if v.Topic == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Topic"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRetryCriteria(v *types.RetryCriteria) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RetryCriteria"}
+	if len(v.FailureType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("FailureType"))
+	}
+	if v.NumberOfRetries == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NumberOfRetries"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRetryCriteriaList(v []types.RetryCriteria) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RetryCriteriaList"}
+	for i := range v {
+		if err := validateRetryCriteria(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6389,6 +6443,11 @@ func validateOpCreateJobInput(v *CreateJobInput) error {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.JobExecutionsRetryConfig != nil {
+		if err := validateJobExecutionsRetryConfig(v.JobExecutionsRetryConfig); err != nil {
+			invalidParams.AddNested("JobExecutionsRetryConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -6420,6 +6479,11 @@ func validateOpCreateJobTemplateInput(v *CreateJobTemplateInput) error {
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.JobExecutionsRetryConfig != nil {
+		if err := validateJobExecutionsRetryConfig(v.JobExecutionsRetryConfig); err != nil {
+			invalidParams.AddNested("JobExecutionsRetryConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -8970,6 +9034,11 @@ func validateOpUpdateJobInput(v *UpdateJobInput) error {
 	if v.AbortConfig != nil {
 		if err := validateAbortConfig(v.AbortConfig); err != nil {
 			invalidParams.AddNested("AbortConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.JobExecutionsRetryConfig != nil {
+		if err := validateJobExecutionsRetryConfig(v.JobExecutionsRetryConfig); err != nil {
+			invalidParams.AddNested("JobExecutionsRetryConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

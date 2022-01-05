@@ -11779,6 +11779,9 @@ type ServiceConfiguration struct {
 	// The Amazon Resource Names (ARNs) of the Network Load Balancers for the service.
 	NetworkLoadBalancerArns []string
 
+	// The payer responsibility.
+	PayerResponsibility PayerResponsibility
+
 	// The private DNS name for the service.
 	PrivateDnsName *string
 
@@ -11822,6 +11825,9 @@ type ServiceDetail struct {
 
 	// The Amazon Web Services account ID of the service owner.
 	Owner *string
+
+	// The payer responsibility.
+	PayerResponsibility PayerResponsibility
 
 	// The private DNS name for the service.
 	PrivateDnsName *string

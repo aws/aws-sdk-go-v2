@@ -3380,6 +3380,25 @@ type EdgePresetDeploymentOutput struct {
 	noSmithyDocumentSerde
 }
 
+// The configurations and outcomes of an Amazon EMR step execution.
+type EMRStepMetadata struct {
+
+	// The identifier of the EMR cluster.
+	ClusterId *string
+
+	// The path to the log file where the cluster step's failure root cause is
+	// recorded.
+	LogFilePath *string
+
+	// The identifier of the EMR cluster step.
+	StepId *string
+
+	// The name of the EMR cluster step.
+	StepName *string
+
+	noSmithyDocumentSerde
+}
+
 // A hosted endpoint for real-time inference.
 type Endpoint struct {
 
@@ -6365,9 +6384,13 @@ type InputConfig struct {
 	// This member is required.
 	S3Uri *string
 
-	// Specifies the framework version to use. This API field is only supported for
-	// PyTorch framework versions 1.4, 1.5, and 1.6 for cloud instance target devices:
-	// ml_c4, ml_c5, ml_m4, ml_m5, ml_p2, ml_p3, and ml_g4dn.
+	// Specifies the framework version to use. This API field is only supported for the
+	// PyTorch and TensorFlow frameworks. For information about framework versions
+	// supported for cloud targets and edge devices, see Cloud Supported Instance Types
+	// and Frameworks
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/neo-supported-cloud.html) and
+	// Edge Supported Frameworks
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/neo-supported-devices-edge-frameworks.html).
 	FrameworkVersion *string
 
 	noSmithyDocumentSerde
@@ -8824,6 +8847,19 @@ type OutputParameter struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration that controls the parallelism of the pipeline. By default, the
+// parallelism configuration specified applies to all executions of the pipeline
+// unless overridden.
+type ParallelismConfiguration struct {
+
+	// The max number of steps that can be executed in parallel.
+	//
+	// This member is required.
+	MaxParallelExecutionSteps int32
+
+	noSmithyDocumentSerde
+}
+
 // Assigns a value to a named Pipeline parameter.
 type Parameter struct {
 
@@ -9021,6 +9057,9 @@ type Pipeline struct {
 	// The time when the pipeline was last run.
 	LastRunTime *time.Time
 
+	// The parallelism configuration applied to the pipeline.
+	ParallelismConfiguration *ParallelismConfiguration
+
 	// The Amazon Resource Name (ARN) of the pipeline.
 	PipelineArn *string
 
@@ -9045,6 +9084,26 @@ type Pipeline struct {
 	noSmithyDocumentSerde
 }
 
+// The location of the pipeline definition stored in Amazon S3.
+type PipelineDefinitionS3Location struct {
+
+	// Name of the S3 bucket.
+	//
+	// This member is required.
+	Bucket *string
+
+	// The object key (or key name) uniquely identifies the object in an S3 bucket.
+	//
+	// This member is required.
+	ObjectKey *string
+
+	// Version Id of the pipeline definition file. If not specified, Amazon SageMaker
+	// will retrieve the latest version.
+	VersionId *string
+
+	noSmithyDocumentSerde
+}
+
 // An execution of a pipeline.
 type PipelineExecution struct {
 
@@ -9064,6 +9123,9 @@ type PipelineExecution struct {
 
 	// The time that the pipeline execution was last modified.
 	LastModifiedTime *time.Time
+
+	// The parallelism configuration applied to the pipeline execution.
+	ParallelismConfiguration *ParallelismConfiguration
 
 	// The Amazon Resource Name (ARN) of the pipeline that was executed.
 	PipelineArn *string
@@ -9091,6 +9153,10 @@ type PipelineExecution struct {
 
 // An execution of a step in a pipeline.
 type PipelineExecutionStep struct {
+
+	// The current attempt of the execution step. For more information, see Retry
+	// Policy for Amazon SageMaker Pipelines steps
+	// (https://docs.aws.amazon.com/https:/docs.aws.amazon.com/sagemaker/latest/dg/pipelines-retry-policy.html).
 	AttemptCount int32
 
 	// If this pipeline execution step was cached, details on the cache hit.
@@ -9108,6 +9174,12 @@ type PipelineExecutionStep struct {
 
 	// The time that the step started executing.
 	StartTime *time.Time
+
+	// The description of the step.
+	StepDescription *string
+
+	// The display name of the step.
+	StepDisplayName *string
 
 	// The name of the step that is executed.
 	StepName *string
@@ -9154,6 +9226,9 @@ type PipelineExecutionStepMetadata struct {
 
 	// The outcome of the condition evaluation that was run by this step execution.
 	Condition *ConditionStepMetadata
+
+	// The configurations and outcomes of an EMR step execution.
+	EMR *EMRStepMetadata
 
 	// The Amazon Resource Name (ARN) of the Lambda function that was run by this step
 	// execution and a list of output parameters.

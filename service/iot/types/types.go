@@ -1844,6 +1844,9 @@ type Job struct {
 	// An ARN identifying the job with format "arn:aws:iot:region:account:job/jobId".
 	JobArn *string
 
+	// The configuration for the criteria to retry the job.
+	JobExecutionsRetryConfig *JobExecutionsRetryConfig
+
 	// Allows you to create a staged rollout of a job.
 	JobExecutionsRolloutConfig *JobExecutionsRolloutConfig
 
@@ -1945,6 +1948,19 @@ type JobExecution struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration that determines how many retries are allowed for each failure
+// type for a job.
+type JobExecutionsRetryConfig struct {
+
+	// The list of criteria that determines how many retries are allowed for each
+	// failure type for a job.
+	//
+	// This member is required.
+	CriteriaList []RetryCriteria
+
+	noSmithyDocumentSerde
+}
+
 // Allows you to create a staged rollout of a job.
 type JobExecutionsRolloutConfig struct {
 
@@ -1981,6 +1997,10 @@ type JobExecutionSummary struct {
 
 	// The time, in seconds since the epoch, when the job execution was queued.
 	QueuedAt *time.Time
+
+	// The number that indicates how many retry attempts have been completed for this
+	// job on this device.
+	RetryAttempt *int32
 
 	// The time, in seconds since the epoch, when the job execution started.
 	StartedAt *time.Time
@@ -2840,6 +2860,23 @@ type ResourceIdentifier struct {
 
 	// The ARN of the role alias that has overly permissive actions.
 	RoleAliasArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The criteria that determines how many retries are allowed for each failure type
+// for a job.
+type RetryCriteria struct {
+
+	// The type of job execution failures that can initiate a job retry.
+	//
+	// This member is required.
+	FailureType RetryableFailureType
+
+	// The number of retries allowed for a failure type for the job.
+	//
+	// This member is required.
+	NumberOfRetries *int32
 
 	noSmithyDocumentSerde
 }

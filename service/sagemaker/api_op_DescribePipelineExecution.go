@@ -57,6 +57,9 @@ type DescribePipelineExecutionOutput struct {
 	// The time when the pipeline execution was modified last.
 	LastModifiedTime *time.Time
 
+	// The parallelism configuration applied to the pipeline.
+	ParallelismConfiguration *types.ParallelismConfiguration
+
 	// The Amazon Resource Name (ARN) of the pipeline.
 	PipelineArn *string
 
