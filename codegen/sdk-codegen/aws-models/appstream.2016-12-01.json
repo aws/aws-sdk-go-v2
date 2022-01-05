@@ -186,6 +186,21 @@
                 "target": "com.amazonaws.appstream#AppBlock"
             }
         },
+        "com.amazonaws.appstream#AppVisibility": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ALL",
+                        "name": "ALL"
+                    },
+                    {
+                        "value": "ASSOCIATED",
+                        "name": "ASSOCIATED"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.appstream#Application": {
             "type": "structure",
             "members": {
@@ -477,6 +492,62 @@
                     }
                 }
             }
+        },
+        "com.amazonaws.appstream#AssociateApplicationToEntitlement": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appstream#AssociateApplicationToEntitlementRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appstream#AssociateApplicationToEntitlementResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appstream#EntitlementNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#OperationNotPermittedException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Associates an application to entitle.</p>"
+            }
+        },
+        "com.amazonaws.appstream#AssociateApplicationToEntitlementRequest": {
+            "type": "structure",
+            "members": {
+                "StackName": {
+                    "target": "com.amazonaws.appstream#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the stack.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EntitlementName": {
+                    "target": "com.amazonaws.appstream#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the entitlement.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ApplicationIdentifier": {
+                    "target": "com.amazonaws.appstream#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the application.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appstream#AssociateApplicationToEntitlementResult": {
+            "type": "structure",
+            "members": {}
         },
         "com.amazonaws.appstream#AssociateFleet": {
             "type": "operation",
@@ -1060,6 +1131,82 @@
                     "target": "com.amazonaws.appstream#DirectoryConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the directory configuration.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appstream#CreateEntitlement": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appstream#CreateEntitlementRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appstream#CreateEntitlementResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appstream#EntitlementAlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#OperationNotPermittedException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new entitlement. Entitlements control access to specific applications within\n            a stack, based on user attributes. Entitlements apply to SAML 2.0 federated user\n            identities. Amazon AppStream 2.0 user pool and streaming URL users are entitled to all\n            applications in a stack. Entitlements don't apply to the desktop stream view\n            application, or to applications managed by a dynamic app provider using the Dynamic\n            Application Framework.</p>"
+            }
+        },
+        "com.amazonaws.appstream#CreateEntitlementRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.appstream#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the entitlement.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StackName": {
+                    "target": "com.amazonaws.appstream#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the stack with which the entitlement is associated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.appstream#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the entitlement.</p>"
+                    }
+                },
+                "AppVisibility": {
+                    "target": "com.amazonaws.appstream#AppVisibility",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether all or selected apps are entitled.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Attributes": {
+                    "target": "com.amazonaws.appstream#EntitlementAttributeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attributes of the entitlement.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appstream#CreateEntitlementResult": {
+            "type": "structure",
+            "members": {
+                "Entitlement": {
+                    "target": "com.amazonaws.appstream#Entitlement",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The entitlement.</p>"
                     }
                 }
             }
@@ -1975,6 +2122,55 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.appstream#DeleteEntitlement": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appstream#DeleteEntitlementRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appstream#DeleteEntitlementResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appstream#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#EntitlementNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#OperationNotPermittedException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the specified entitlement.</p>"
+            }
+        },
+        "com.amazonaws.appstream#DeleteEntitlementRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.appstream#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the entitlement.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StackName": {
+                    "target": "com.amazonaws.appstream#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the stack with which the entitlement is associated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appstream#DeleteEntitlementResult": {
+            "type": "structure",
+            "members": {}
+        },
         "com.amazonaws.appstream#DeleteFleet": {
             "type": "operation",
             "input": {
@@ -2163,6 +2359,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.appstream#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#OperationNotPermittedException"
                 },
                 {
                     "target": "com.amazonaws.appstream#ResourceInUseException"
@@ -2498,6 +2697,76 @@
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appstream#DescribeEntitlements": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appstream#DescribeEntitlementsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appstream#DescribeEntitlementsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appstream#EntitlementNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#OperationNotPermittedException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a list that describes one of more entitlements.</p>"
+            }
+        },
+        "com.amazonaws.appstream#DescribeEntitlementsRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.appstream#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the entitlement.</p>"
+                    }
+                },
+                "StackName": {
+                    "target": "com.amazonaws.appstream#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the stack with which the entitlement is associated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.appstream#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token used to retrieve the next page of results for this operation.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.appstream#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum size of each page of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appstream#DescribeEntitlementsResult": {
+            "type": "structure",
+            "members": {
+                "Entitlements": {
+                    "target": "com.amazonaws.appstream#EntitlementList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The entitlements.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.appstream#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token used to retrieve the next page of results for this\n            operation.</p>"
                     }
                 }
             }
@@ -3305,6 +3574,59 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.appstream#DisassociateApplicationFromEntitlement": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appstream#DisassociateApplicationFromEntitlementRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appstream#DisassociateApplicationFromEntitlementResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appstream#EntitlementNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#OperationNotPermittedException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the specified application from the specified entitlement.</p>"
+            }
+        },
+        "com.amazonaws.appstream#DisassociateApplicationFromEntitlementRequest": {
+            "type": "structure",
+            "members": {
+                "StackName": {
+                    "target": "com.amazonaws.appstream#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the stack with which the entitlement is associated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EntitlementName": {
+                    "target": "com.amazonaws.appstream#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the entitlement.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ApplicationIdentifier": {
+                    "target": "com.amazonaws.appstream#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the application to remove from the entitlement.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appstream#DisassociateApplicationFromEntitlementResult": {
+            "type": "structure",
+            "members": {}
+        },
         "com.amazonaws.appstream#DisassociateFleet": {
             "type": "operation",
             "input": {
@@ -3470,6 +3792,146 @@
         "com.amazonaws.appstream#EnableUserResult": {
             "type": "structure",
             "members": {}
+        },
+        "com.amazonaws.appstream#EntitledApplication": {
+            "type": "structure",
+            "members": {
+                "ApplicationIdentifier": {
+                    "target": "com.amazonaws.appstream#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the application.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The application associated to an entitlement. Access is controlled based on user attributes.</p>"
+            }
+        },
+        "com.amazonaws.appstream#EntitledApplicationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.appstream#EntitledApplication"
+            }
+        },
+        "com.amazonaws.appstream#Entitlement": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.appstream#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the entitlement.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StackName": {
+                    "target": "com.amazonaws.appstream#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the stack with which the entitlement is associated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.appstream#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the entitlement.</p>"
+                    }
+                },
+                "AppVisibility": {
+                    "target": "com.amazonaws.appstream#AppVisibility",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether all or selected apps are entitled.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Attributes": {
+                    "target": "com.amazonaws.appstream#EntitlementAttributeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attributes of the entitlement.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedTime": {
+                    "target": "com.amazonaws.appstream#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the entitlement was created.</p>"
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.appstream#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the entitlement was last modified.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies an entitlement. Entitlements control access to specific applications within\n            a stack, based on user attributes. Entitlements apply to SAML 2.0 federated user\n            identities. Amazon AppStream 2.0 user pool and streaming URL users are entitled to all\n            applications in a stack. Entitlements don't apply to the desktop stream view\n            application, or to applications managed by a dynamic app provider using the Dynamic\n            Application Framework.</p>"
+            }
+        },
+        "com.amazonaws.appstream#EntitlementAlreadyExistsException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.appstream#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The entitlement already exists.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.appstream#EntitlementAttribute": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.appstream#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A supported AWS IAM SAML <code>PrincipalTag</code> attribute that is matched to the\n            associated value when a user identity federates into an Amazon AppStream 2.0 SAML\n            application.</p>\n        <p>The following are valid values:</p>\n        <ul>\n            <li>\n               <p>roles</p>\n            </li>\n            <li>\n               <p>department </p>\n            </li>\n            <li>\n               <p>organization </p>\n            </li>\n            <li>\n               <p>groups </p>\n            </li>\n            <li>\n               <p>title </p>\n            </li>\n            <li>\n               <p>costCenter </p>\n            </li>\n            <li>\n               <p>userType</p>\n            </li>\n         </ul>\n        <p> </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.appstream#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that is matched to a supported SAML attribute name when a user identity\n            federates into an Amazon AppStream 2.0 SAML application. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An attribute associated with an entitlement. Application entitlements work by matching\n            a supported SAML 2.0 attribute name to a value when a user identity federates to an\n            Amazon AppStream 2.0 SAML application.</p>"
+            }
+        },
+        "com.amazonaws.appstream#EntitlementAttributeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.appstream#EntitlementAttribute"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.appstream#EntitlementList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.appstream#Entitlement"
+            }
+        },
+        "com.amazonaws.appstream#EntitlementNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.appstream#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The entitlement can't be found.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
         },
         "com.amazonaws.appstream#ErrorMessage": {
             "type": "string",
@@ -4514,6 +4976,77 @@
                 }
             }
         },
+        "com.amazonaws.appstream#ListEntitledApplications": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appstream#ListEntitledApplicationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appstream#ListEntitledApplicationsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appstream#EntitlementNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#OperationNotPermittedException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a list of entitled applications.</p>"
+            }
+        },
+        "com.amazonaws.appstream#ListEntitledApplicationsRequest": {
+            "type": "structure",
+            "members": {
+                "StackName": {
+                    "target": "com.amazonaws.appstream#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the stack with which the entitlement is associated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EntitlementName": {
+                    "target": "com.amazonaws.appstream#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the entitlement.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.appstream#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token used to retrieve the next page of results for this operation.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.appstream#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum size of each page of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appstream#ListEntitledApplicationsResult": {
+            "type": "structure",
+            "members": {
+                "EntitledApplications": {
+                    "target": "com.amazonaws.appstream#EntitledApplicationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The entitled applications.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.appstream#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token used to retrieve the next page of results for this operation.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.appstream#ListTagsForResource": {
             "type": "operation",
             "input": {
@@ -4686,6 +5219,9 @@
                     "target": "com.amazonaws.appstream#AssociateApplicationFleet"
                 },
                 {
+                    "target": "com.amazonaws.appstream#AssociateApplicationToEntitlement"
+                },
+                {
                     "target": "com.amazonaws.appstream#AssociateFleet"
                 },
                 {
@@ -4705,6 +5241,9 @@
                 },
                 {
                     "target": "com.amazonaws.appstream#CreateDirectoryConfig"
+                },
+                {
+                    "target": "com.amazonaws.appstream#CreateEntitlement"
                 },
                 {
                     "target": "com.amazonaws.appstream#CreateFleet"
@@ -4740,6 +5279,9 @@
                     "target": "com.amazonaws.appstream#DeleteDirectoryConfig"
                 },
                 {
+                    "target": "com.amazonaws.appstream#DeleteEntitlement"
+                },
+                {
                     "target": "com.amazonaws.appstream#DeleteFleet"
                 },
                 {
@@ -4771,6 +5313,9 @@
                 },
                 {
                     "target": "com.amazonaws.appstream#DescribeDirectoryConfigs"
+                },
+                {
+                    "target": "com.amazonaws.appstream#DescribeEntitlements"
                 },
                 {
                     "target": "com.amazonaws.appstream#DescribeFleets"
@@ -4806,6 +5351,9 @@
                     "target": "com.amazonaws.appstream#DisassociateApplicationFleet"
                 },
                 {
+                    "target": "com.amazonaws.appstream#DisassociateApplicationFromEntitlement"
+                },
+                {
                     "target": "com.amazonaws.appstream#DisassociateFleet"
                 },
                 {
@@ -4819,6 +5367,9 @@
                 },
                 {
                     "target": "com.amazonaws.appstream#ListAssociatedStacks"
+                },
+                {
+                    "target": "com.amazonaws.appstream#ListEntitledApplications"
                 },
                 {
                     "target": "com.amazonaws.appstream#ListTagsForResource"
@@ -4846,6 +5397,9 @@
                 },
                 {
                     "target": "com.amazonaws.appstream#UpdateDirectoryConfig"
+                },
+                {
+                    "target": "com.amazonaws.appstream#UpdateEntitlement"
                 },
                 {
                     "target": "com.amazonaws.appstream#UpdateFleet"
@@ -6065,6 +6619,80 @@
                     "target": "com.amazonaws.appstream#DirectoryConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the Directory Config object.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appstream#UpdateEntitlement": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appstream#UpdateEntitlementRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appstream#UpdateEntitlementResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appstream#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#EntitlementNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#OperationNotPermittedException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the specified entitlement.</p>"
+            }
+        },
+        "com.amazonaws.appstream#UpdateEntitlementRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.appstream#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the entitlement.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StackName": {
+                    "target": "com.amazonaws.appstream#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the stack with which the entitlement is associated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.appstream#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the entitlement.</p>"
+                    }
+                },
+                "AppVisibility": {
+                    "target": "com.amazonaws.appstream#AppVisibility",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether all or only selected apps are entitled.</p>"
+                    }
+                },
+                "Attributes": {
+                    "target": "com.amazonaws.appstream#EntitlementAttributeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attributes of the entitlement.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appstream#UpdateEntitlementResult": {
+            "type": "structure",
+            "members": {
+                "Entitlement": {
+                    "target": "com.amazonaws.appstream#Entitlement",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The entitlement.</p>"
                     }
                 }
             }
