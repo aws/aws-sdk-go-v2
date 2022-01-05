@@ -289,6 +289,29 @@ type ComponentVersionListItem struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about an endpoint and port where client devices can connect
+// to an MQTT broker on a Greengrass core device.
+type ConnectivityInfo struct {
+
+	// The IP address or DNS address where client devices can connect to an MQTT broker
+	// on the Greengrass core device.
+	HostAddress *string
+
+	// An ID for the connectivity information.
+	Id *string
+
+	// Additional metadata to provide to client devices that connect to this core
+	// device.
+	Metadata *string
+
+	// The port where the MQTT broker operates on the core device. This port is
+	// typically 8883, which is the default port for the MQTT broker component that
+	// runs on core devices.
+	PortNumber int32
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about a Greengrass core device, which is an IoT thing that
 // runs the IoT Greengrass Core software.
 type CoreDevice struct {

@@ -101,8 +101,9 @@ type SearchFacesByImageOutput struct {
 	// match.
 	FaceMatches []types.FaceMatch
 
-	// Version number of the face detection model associated with the input collection
-	// (CollectionId).
+	// Latest face model being used with the collection. For more information, see
+	// Model versioning
+	// (https://docs.aws.amazon.com/rekognition/latest/dg/face-detection-model.html).
 	FaceModelVersion *string
 
 	// The bounding box around the face in the input image that Amazon Rekognition used

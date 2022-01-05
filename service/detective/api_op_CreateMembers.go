@@ -11,23 +11,30 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sends a request to invite the specified AWS accounts to be member accounts in
-// the behavior graph. This operation can only be called by the administrator
-// account for a behavior graph. CreateMembers verifies the accounts and then
-// invites the verified accounts. The administrator can optionally specify to not
-// send invitation emails to the member accounts. This would be used when the
-// administrator manages their member accounts centrally. The request provides the
-// behavior graph ARN and the list of accounts to invite. The response separates
-// the requested accounts into two lists:
+// CreateMembers is used to send invitations to accounts. For the organization
+// behavior graph, the Detective administrator account uses CreateMembers to enable
+// organization accounts as member accounts. For invited accounts, CreateMembers
+// sends a request to invite the specified Amazon Web Services accounts to be
+// member accounts in the behavior graph. This operation can only be called by the
+// administrator account for a behavior graph. CreateMembers verifies the accounts
+// and then invites the verified accounts. The administrator can optionally specify
+// to not send invitation emails to the member accounts. This would be used when
+// the administrator manages their member accounts centrally. For organization
+// accounts in the organization behavior graph, CreateMembers attempts to enable
+// the accounts. The organization accounts do not receive invitations. The request
+// provides the behavior graph ARN and the list of accounts to invite or to enable.
+// The response separates the requested accounts into two lists:
 //
-// * The accounts that CreateMembers was
-// able to start the verification for. This list includes member accounts that are
-// being verified, that have passed verification and are to be invited, and that
-// have failed verification.
+// * The accounts
+// that CreateMembers was able to process. For invited accounts, includes member
+// accounts that are being verified, that have passed verification and are to be
+// invited, and that have failed verification. For organization accounts in the
+// organization behavior graph, includes accounts that can be enabled and that
+// cannot be enabled.
 //
-// * The accounts that CreateMembers was unable to
-// process. This list includes accounts that were already invited to be member
-// accounts in the behavior graph.
+// * The accounts that CreateMembers was unable to process.
+// This list includes accounts that were already invited to be member accounts in
+// the behavior graph.
 func (c *Client) CreateMembers(ctx context.Context, params *CreateMembersInput, optFns ...func(*Options)) (*CreateMembersOutput, error) {
 	if params == nil {
 		params = &CreateMembersInput{}
@@ -45,23 +52,24 @@ func (c *Client) CreateMembers(ctx context.Context, params *CreateMembersInput, 
 
 type CreateMembersInput struct {
 
-	// The list of AWS accounts to invite to become member accounts in the behavior
-	// graph. You can invite up to 50 accounts at a time. For each invited account, the
-	// account list contains the account identifier and the AWS account root user email
-	// address.
+	// The list of Amazon Web Services accounts to invite or to enable. You can invite
+	// or enable up to 50 accounts at a time. For each invited account, the account
+	// list contains the account identifier and the Amazon Web Services account root
+	// user email address. For organization accounts in the organization behavior
+	// graph, the email address is not required.
 	//
 	// This member is required.
 	Accounts []types.Account
 
-	// The ARN of the behavior graph to invite the member accounts to contribute their
-	// data to.
+	// The ARN of the behavior graph.
 	//
 	// This member is required.
 	GraphArn *string
 
-	// if set to true, then the member accounts do not receive email notifications. By
-	// default, this is set to false, and the member accounts receive email
-	// notifications.
+	// if set to true, then the invited accounts do not receive email notifications. By
+	// default, this is set to false, and the invited accounts receive email
+	// notifications. Organization accounts in the organization behavior graph do not
+	// receive email notifications.
 	DisableEmailNotification bool
 
 	// Customized message text to include in the invitation email message to the
@@ -73,15 +81,16 @@ type CreateMembersInput struct {
 
 type CreateMembersOutput struct {
 
-	// The set of member account invitation requests that Detective was able to
-	// process. This includes accounts that are being verified, that failed
-	// verification, and that passed verification and are being sent an invitation.
+	// The set of member account invitation or enablement requests that Detective was
+	// able to process. This includes accounts that are being verified, that failed
+	// verification, and that passed verification and are being sent an invitation or
+	// are being enabled.
 	Members []types.MemberDetail
 
-	// The list of accounts for which Detective was unable to process the invitation
-	// request. For each account, the list provides the reason why the request could
-	// not be processed. The list includes accounts that are already member accounts in
-	// the behavior graph.
+	// The list of accounts for which Detective was unable to process the invitation or
+	// enablement request. For each account, the list provides the reason why the
+	// request could not be processed. The list includes accounts that are already
+	// member accounts in the behavior graph.
 	UnprocessedAccounts []types.UnprocessedAccount
 
 	// Metadata pertaining to the operation's result.

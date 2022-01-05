@@ -45,8 +45,8 @@ type ModifyCustomDBEngineVersionInput struct {
 	Engine *string
 
 	// The custom engine version (CEV) that you want to modify. This option is required
-	// for RDS Custom, but optional for Amazon RDS. The combination of Engine and
-	// EngineVersion is unique per customer per Amazon Web Services Region.
+	// for RDS Custom for Oracle, but optional for Amazon RDS. The combination of
+	// Engine and EngineVersion is unique per customer per Amazon Web Services Region.
 	//
 	// This member is required.
 	EngineVersion *string

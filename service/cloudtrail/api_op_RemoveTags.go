@@ -37,6 +37,8 @@ type RemoveTagsInput struct {
 	ResourceId *string
 
 	// Specifies a list of tags to be removed.
+	//
+	// This member is required.
 	TagsList []types.Tag
 
 	noSmithyDocumentSerde

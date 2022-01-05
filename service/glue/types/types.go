@@ -43,6 +43,12 @@ type Action struct {
 	noSmithyDocumentSerde
 }
 
+type AuditContext struct {
+	AdditionalAuditContext *string
+
+	noSmithyDocumentSerde
+}
+
 // A list of errors that can occur when registering partition indexes for an
 // existing table. These errors give the details about why an index registration
 // failed and provide a limited number of partitions in the response, so that you
@@ -333,6 +339,11 @@ type CatalogTarget struct {
 	// This member is required.
 	Tables []string
 
+	// The name of the connection for an Amazon S3-backed Data Catalog table to be a
+	// target of the crawl when using a Catalog connection type paired with a NETWORK
+	// Connection type.
+	ConnectionName *string
+
 	noSmithyDocumentSerde
 }
 
@@ -477,6 +488,14 @@ type ColumnImportance struct {
 
 	// The column importance score for the column, as a decimal.
 	Importance *float64
+
+	noSmithyDocumentSerde
+}
+
+type ColumnRowFilter struct {
+	ColumnName *string
+
+	RowFilterExpression *string
 
 	noSmithyDocumentSerde
 }
@@ -897,6 +916,8 @@ type Crawler struct {
 	// A description of the crawler.
 	Description *string
 
+	LakeFormationConfiguration *LakeFormationConfiguration
+
 	// The status of the last crawl, and potentially error information if an error
 	// occurred.
 	LastCrawl *LastCrawlInfo
@@ -984,6 +1005,9 @@ type CrawlerTargets struct {
 
 	// Specifies Glue Data Catalog targets.
 	CatalogTargets []CatalogTarget
+
+	// Specifies Delta data store targets.
+	DeltaTargets []DeltaTarget
 
 	// Specifies Amazon DynamoDB targets.
 	DynamoDBTargets []DynamoDBTarget
@@ -1293,6 +1317,21 @@ type DecimalNumber struct {
 	//
 	// This member is required.
 	UnscaledValue []byte
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a Delta data store to crawl one or more Delta tables.
+type DeltaTarget struct {
+
+	// The name of the connection to use to connect to the Delta table target.
+	ConnectionName *string
+
+	// A list of the Amazon S3 paths to the Delta tables.
+	DeltaTables []string
+
+	// Specifies whether to write the manifest files to the Delta table path.
+	WriteManifest *bool
 
 	noSmithyDocumentSerde
 }
@@ -2330,6 +2369,14 @@ type LabelingSetGenerationTaskRunProperties struct {
 	noSmithyDocumentSerde
 }
 
+type LakeFormationConfiguration struct {
+	AccountId *string
+
+	UseLakeFormationCredentials *bool
+
+	noSmithyDocumentSerde
+}
+
 // When there are multiple versions of a blueprint and the latest version has some
 // errors, this attribute indicates the last successful blueprint definition that
 // is available with the service.
@@ -3291,6 +3338,7 @@ type StartingEventBatchCondition struct {
 
 // Describes the physical storage of table data.
 type StorageDescriptor struct {
+	AdditionalLocations []string
 
 	// A list of reducer grouping columns, clustering columns, and bucketing columns in
 	// the table.
@@ -3812,6 +3860,17 @@ type TriggerUpdate struct {
 	// For example, to run something every day at 12:15 UTC, you would specify: cron(15
 	// 12 * * ? *).
 	Schedule *string
+
+	noSmithyDocumentSerde
+}
+
+type UnfilteredPartition struct {
+	AuthorizedColumns []string
+
+	IsRegisteredWithLakeFormation bool
+
+	// Represents a slice of table data.
+	Partition *Partition
 
 	noSmithyDocumentSerde
 }

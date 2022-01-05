@@ -254,6 +254,24 @@ func (FargateProfileStatus) Values() []FargateProfileStatus {
 	}
 }
 
+type IpFamily string
+
+// Enum values for IpFamily
+const (
+	IpFamilyIpv4 IpFamily = "ipv4"
+	IpFamilyIpv6 IpFamily = "ipv6"
+)
+
+// Values returns all known values for IpFamily. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (IpFamily) Values() []IpFamily {
+	return []IpFamily{
+		"ipv4",
+		"ipv6",
+	}
+}
+
 type LogType string
 
 // Enum values for LogType

@@ -64,6 +64,24 @@ func (ApplicationAttribute) Values() []ApplicationAttribute {
 	}
 }
 
+type AppVisibility string
+
+// Enum values for AppVisibility
+const (
+	AppVisibilityAll        AppVisibility = "ALL"
+	AppVisibilityAssociated AppVisibility = "ASSOCIATED"
+)
+
+// Values returns all known values for AppVisibility. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AppVisibility) Values() []AppVisibility {
+	return []AppVisibility{
+		"ALL",
+		"ASSOCIATED",
+	}
+}
+
 type AuthenticationType string
 
 // Enum values for AuthenticationType

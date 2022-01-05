@@ -19,7 +19,7 @@ type Attachment struct {
 	Id *string
 
 	// The status of the attachment. Valid values are PRECREATED, CREATED, ATTACHING,
-	// ATTACHED, DETACHING, DETACHED, and DELETED.
+	// ATTACHED, DETACHING, DETACHED, DELETED, and FAILED.
 	Status *string
 
 	// The type of the attachment, such as ElasticNetworkInterface.
@@ -88,13 +88,13 @@ type AutoScalingGroupProvider struct {
 
 	// The managed termination protection setting to use for the Auto Scaling group
 	// capacity provider. This determines whether the Auto Scaling group has managed
-	// termination protection. When using managed termination protection, managed
-	// scaling must also be used otherwise managed termination protection doesn't work.
-	// When managed termination protection is enabled, Amazon ECS prevents the Amazon
-	// EC2 instances in an Auto Scaling group that contain tasks from being terminated
-	// during a scale-in action. The Auto Scaling group and each instance in the Auto
-	// Scaling group must have instance protection from scale-in actions enabled as
-	// well. For more information, see Instance Protection
+	// termination protection. The default is disabled. When using managed termination
+	// protection, managed scaling must also be used otherwise managed termination
+	// protection doesn't work. When managed termination protection is enabled, Amazon
+	// ECS prevents the Amazon EC2 instances in an Auto Scaling group that contain
+	// tasks from being terminated during a scale-in action. The Auto Scaling group and
+	// each instance in the Auto Scaling group must have instance protection from
+	// scale-in actions enabled as well. For more information, see Instance Protection
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection)
 	// in the Auto Scaling User Guide. When managed termination protection is disabled,
 	// your Amazon EC2 instances aren't protected from termination when the Auto

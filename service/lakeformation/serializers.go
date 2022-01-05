@@ -1594,6 +1594,201 @@ func awsRestjson1_serializeOpDocumentGetTableObjectsInput(v *GetTableObjectsInpu
 	return nil
 }
 
+type awsRestjson1_serializeOpGetTemporaryGluePartitionCredentials struct {
+}
+
+func (*awsRestjson1_serializeOpGetTemporaryGluePartitionCredentials) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetTemporaryGluePartitionCredentials) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetTemporaryGluePartitionCredentialsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/GetTemporaryGluePartitionCredentials")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentGetTemporaryGluePartitionCredentialsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetTemporaryGluePartitionCredentialsInput(v *GetTemporaryGluePartitionCredentialsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentGetTemporaryGluePartitionCredentialsInput(v *GetTemporaryGluePartitionCredentialsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AuditContext != nil {
+		ok := object.Key("AuditContext")
+		if err := awsRestjson1_serializeDocumentAuditContext(v.AuditContext, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DurationSeconds != nil {
+		ok := object.Key("DurationSeconds")
+		ok.Integer(*v.DurationSeconds)
+	}
+
+	if v.Partition != nil {
+		ok := object.Key("Partition")
+		if err := awsRestjson1_serializeDocumentPartitionValueList(v.Partition, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Permissions != nil {
+		ok := object.Key("Permissions")
+		if err := awsRestjson1_serializeDocumentPermissionList(v.Permissions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SupportedPermissionTypes != nil {
+		ok := object.Key("SupportedPermissionTypes")
+		if err := awsRestjson1_serializeDocumentPermissionTypeList(v.SupportedPermissionTypes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TableArn != nil {
+		ok := object.Key("TableArn")
+		ok.String(*v.TableArn)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpGetTemporaryGlueTableCredentials struct {
+}
+
+func (*awsRestjson1_serializeOpGetTemporaryGlueTableCredentials) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetTemporaryGlueTableCredentials) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetTemporaryGlueTableCredentialsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/GetTemporaryGlueTableCredentials")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentGetTemporaryGlueTableCredentialsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetTemporaryGlueTableCredentialsInput(v *GetTemporaryGlueTableCredentialsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentGetTemporaryGlueTableCredentialsInput(v *GetTemporaryGlueTableCredentialsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AuditContext != nil {
+		ok := object.Key("AuditContext")
+		if err := awsRestjson1_serializeDocumentAuditContext(v.AuditContext, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DurationSeconds != nil {
+		ok := object.Key("DurationSeconds")
+		ok.Integer(*v.DurationSeconds)
+	}
+
+	if v.Permissions != nil {
+		ok := object.Key("Permissions")
+		if err := awsRestjson1_serializeDocumentPermissionList(v.Permissions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SupportedPermissionTypes != nil {
+		ok := object.Key("SupportedPermissionTypes")
+		if err := awsRestjson1_serializeDocumentPermissionTypeList(v.SupportedPermissionTypes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TableArn != nil {
+		ok := object.Key("TableArn")
+		ok.String(*v.TableArn)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpGetWorkUnitResults struct {
 }
 
@@ -3382,6 +3577,29 @@ func awsRestjson1_serializeDocumentAllRowsWildcard(v *types.AllRowsWildcard, val
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAuditContext(v *types.AuditContext, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AdditionalAuditContext != nil {
+		ok := object.Key("AdditionalAuditContext")
+		ok.String(*v.AdditionalAuditContext)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAuthorizedSessionTagValueList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentBatchPermissionsRequestEntry(v *types.BatchPermissionsRequestEntry, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3588,6 +3806,18 @@ func awsRestjson1_serializeDocumentDataLakeSettings(v *types.DataLakeSettings, v
 	object := value.Object()
 	defer object.Close()
 
+	if v.AllowExternalDataFiltering != nil {
+		ok := object.Key("AllowExternalDataFiltering")
+		ok.Boolean(*v.AllowExternalDataFiltering)
+	}
+
+	if v.AuthorizedSessionTagValueList != nil {
+		ok := object.Key("AuthorizedSessionTagValueList")
+		if err := awsRestjson1_serializeDocumentAuthorizedSessionTagValueList(v.AuthorizedSessionTagValueList, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.CreateDatabaseDefaultPermissions != nil {
 		ok := object.Key("CreateDatabaseDefaultPermissions")
 		if err := awsRestjson1_serializeDocumentPrincipalPermissionsList(v.CreateDatabaseDefaultPermissions, ok); err != nil {
@@ -3605,6 +3835,13 @@ func awsRestjson1_serializeDocumentDataLakeSettings(v *types.DataLakeSettings, v
 	if v.DataLakeAdmins != nil {
 		ok := object.Key("DataLakeAdmins")
 		if err := awsRestjson1_serializeDocumentDataLakePrincipalList(v.DataLakeAdmins, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ExternalDataFilteringAllowList != nil {
+		ok := object.Key("ExternalDataFilteringAllowList")
+		if err := awsRestjson1_serializeDocumentDataLakePrincipalList(v.ExternalDataFilteringAllowList, ok); err != nil {
 			return err
 		}
 	}
@@ -3814,6 +4051,20 @@ func awsRestjson1_serializeDocumentLFTagsList(v []types.LFTagPair, value smithyj
 	return nil
 }
 
+func awsRestjson1_serializeDocumentPartitionValueList(v *types.PartitionValueList, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Values != nil {
+		ok := object.Key("Values")
+		if err := awsRestjson1_serializeDocumentValueStringList(v.Values, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentPartitionValuesList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -3826,6 +4077,17 @@ func awsRestjson1_serializeDocumentPartitionValuesList(v []string, value smithyj
 }
 
 func awsRestjson1_serializeDocumentPermissionList(v []types.Permission, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPermissionTypeList(v []types.PermissionType, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
@@ -4119,6 +4381,17 @@ func awsRestjson1_serializeDocumentTagValueList(v []string, value smithyjson.Val
 }
 
 func awsRestjson1_serializeDocumentTrustedResourceOwners(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentValueStringList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 

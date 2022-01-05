@@ -18530,6 +18530,18 @@ func awsAwsjson11_serializeDocumentOutputParameterList(v []types.OutputParameter
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentParallelismConfiguration(v *types.ParallelismConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	{
+		ok := object.Key("MaxParallelExecutionSteps")
+		ok.Integer(v.MaxParallelExecutionSteps)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentParameter(v *types.Parameter, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -18684,6 +18696,28 @@ func awsAwsjson11_serializeDocumentPhases(v []types.Phase, value smithyjson.Valu
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPipelineDefinitionS3Location(v *types.PipelineDefinitionS3Location, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Bucket != nil {
+		ok := object.Key("Bucket")
+		ok.String(*v.Bucket)
+	}
+
+	if v.ObjectKey != nil {
+		ok := object.Key("ObjectKey")
+		ok.String(*v.ObjectKey)
+	}
+
+	if v.VersionId != nil {
+		ok := object.Key("VersionId")
+		ok.String(*v.VersionId)
+	}
+
 	return nil
 }
 
@@ -22462,9 +22496,23 @@ func awsAwsjson11_serializeOpDocumentCreatePipelineInput(v *CreatePipelineInput,
 		ok.String(*v.ClientRequestToken)
 	}
 
+	if v.ParallelismConfiguration != nil {
+		ok := object.Key("ParallelismConfiguration")
+		if err := awsAwsjson11_serializeDocumentParallelismConfiguration(v.ParallelismConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.PipelineDefinition != nil {
 		ok := object.Key("PipelineDefinition")
 		ok.String(*v.PipelineDefinition)
+	}
+
+	if v.PipelineDefinitionS3Location != nil {
+		ok := object.Key("PipelineDefinitionS3Location")
+		if err := awsAwsjson11_serializeDocumentPipelineDefinitionS3Location(v.PipelineDefinitionS3Location, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.PipelineDescription != nil {
@@ -27161,6 +27209,13 @@ func awsAwsjson11_serializeOpDocumentRetryPipelineExecutionInput(v *RetryPipelin
 		ok.String(*v.ClientRequestToken)
 	}
 
+	if v.ParallelismConfiguration != nil {
+		ok := object.Key("ParallelismConfiguration")
+		if err := awsAwsjson11_serializeDocumentParallelismConfiguration(v.ParallelismConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.PipelineExecutionArn != nil {
 		ok := object.Key("PipelineExecutionArn")
 		ok.String(*v.PipelineExecutionArn)
@@ -27285,6 +27340,13 @@ func awsAwsjson11_serializeOpDocumentStartPipelineExecutionInput(v *StartPipelin
 	if v.ClientRequestToken != nil {
 		ok := object.Key("ClientRequestToken")
 		ok.String(*v.ClientRequestToken)
+	}
+
+	if v.ParallelismConfiguration != nil {
+		ok := object.Key("ParallelismConfiguration")
+		if err := awsAwsjson11_serializeDocumentParallelismConfiguration(v.ParallelismConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.PipelineExecutionDescription != nil {
@@ -27960,6 +28022,13 @@ func awsAwsjson11_serializeOpDocumentUpdatePipelineExecutionInput(v *UpdatePipel
 	object := value.Object()
 	defer object.Close()
 
+	if v.ParallelismConfiguration != nil {
+		ok := object.Key("ParallelismConfiguration")
+		if err := awsAwsjson11_serializeDocumentParallelismConfiguration(v.ParallelismConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.PipelineExecutionArn != nil {
 		ok := object.Key("PipelineExecutionArn")
 		ok.String(*v.PipelineExecutionArn)
@@ -27982,9 +28051,23 @@ func awsAwsjson11_serializeOpDocumentUpdatePipelineInput(v *UpdatePipelineInput,
 	object := value.Object()
 	defer object.Close()
 
+	if v.ParallelismConfiguration != nil {
+		ok := object.Key("ParallelismConfiguration")
+		if err := awsAwsjson11_serializeDocumentParallelismConfiguration(v.ParallelismConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.PipelineDefinition != nil {
 		ok := object.Key("PipelineDefinition")
 		ok.String(*v.PipelineDefinition)
+	}
+
+	if v.PipelineDefinitionS3Location != nil {
+		ok := object.Key("PipelineDefinitionS3Location")
+		if err := awsAwsjson11_serializeDocumentPipelineDefinitionS3Location(v.PipelineDefinitionS3Location, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.PipelineDescription != nil {

@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a dataset.
+// Creates a dataset. This operation doesn't support datasets that include uploaded
+// files as a source.
 func (c *Client) CreateDataSet(ctx context.Context, params *CreateDataSetInput, optFns ...func(*Options)) (*CreateDataSetOutput, error) {
 	if params == nil {
 		params = &CreateDataSetInput{}

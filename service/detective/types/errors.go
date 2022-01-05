@@ -68,7 +68,7 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 //
 // * The
 // request would cause the number of member accounts in the behavior graph to
-// exceed the maximum allowed. A behavior graph cannot have more than 1000 member
+// exceed the maximum allowed. A behavior graph cannot have more than 1200 member
 // accounts.
 //
 // * The request would cause the data rate for the behavior graph to
@@ -94,6 +94,26 @@ func (e *ServiceQuotaExceededException) ErrorMessage() string {
 }
 func (e *ServiceQuotaExceededException) ErrorCode() string             { return "ServiceQuotaExceededException" }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The request cannot be completed because too many other requests are occurring at
+// the same time.
+type TooManyRequestsException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *TooManyRequestsException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *TooManyRequestsException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *TooManyRequestsException) ErrorCode() string             { return "TooManyRequestsException" }
+func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request parameters are invalid.
 type ValidationException struct {

@@ -127,6 +127,160 @@ func (e *ConflictException) ErrorMessage() string {
 func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// An event data store with that name already exists.
+type EventDataStoreAlreadyExistsException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *EventDataStoreAlreadyExistsException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *EventDataStoreAlreadyExistsException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *EventDataStoreAlreadyExistsException) ErrorCode() string {
+	return "EventDataStoreAlreadyExistsException"
+}
+func (e *EventDataStoreAlreadyExistsException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// The specified event data store ARN is not valid or does not map to an event data
+// store in your account.
+type EventDataStoreARNInvalidException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *EventDataStoreARNInvalidException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *EventDataStoreARNInvalidException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *EventDataStoreARNInvalidException) ErrorCode() string {
+	return "EventDataStoreARNInvalidException"
+}
+func (e *EventDataStoreARNInvalidException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// Your account has used the maximum number of event data stores.
+type EventDataStoreMaxLimitExceededException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *EventDataStoreMaxLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *EventDataStoreMaxLimitExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *EventDataStoreMaxLimitExceededException) ErrorCode() string {
+	return "EventDataStoreMaxLimitExceededException"
+}
+func (e *EventDataStoreMaxLimitExceededException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// The specified event data store was not found.
+type EventDataStoreNotFoundException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *EventDataStoreNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *EventDataStoreNotFoundException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *EventDataStoreNotFoundException) ErrorCode() string {
+	return "EventDataStoreNotFoundException"
+}
+func (e *EventDataStoreNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The event data store cannot be deleted because termination protection is enabled
+// for it.
+type EventDataStoreTerminationProtectedException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *EventDataStoreTerminationProtectedException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *EventDataStoreTerminationProtectedException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *EventDataStoreTerminationProtectedException) ErrorCode() string {
+	return "EventDataStoreTerminationProtectedException"
+}
+func (e *EventDataStoreTerminationProtectedException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// The event data store against which you ran your query is inactive.
+type InactiveEventDataStoreException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InactiveEventDataStoreException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InactiveEventDataStoreException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InactiveEventDataStoreException) ErrorCode() string {
+	return "InactiveEventDataStoreException"
+}
+func (e *InactiveEventDataStoreException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The specified query cannot be canceled because it is in the FINISHED, FAILED, or
+// CANCELLED state.
+type InactiveQueryException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InactiveQueryException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InactiveQueryException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InactiveQueryException) ErrorCode() string             { return "InactiveQueryException" }
+func (e *InactiveQueryException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // If you run GetInsightSelectors on a trail that does not have Insights events
 // enabled, the operation throws the exception InsightNotEnabledException.
 type InsightNotEnabledException struct {
@@ -292,6 +446,28 @@ func (e *InvalidCloudWatchLogsRoleArnException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
+// A date range for the query was specified that is not valid. For more information
+// about writing a query, see Create or edit a query
+// (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-create-edit-query.html)
+// in the CloudTrail User Guide.
+type InvalidDateRangeException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidDateRangeException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidDateRangeException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidDateRangeException) ErrorCode() string             { return "InvalidDateRangeException" }
+func (e *InvalidDateRangeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // Occurs if an event category that is not valid is specified as a value of
 // EventCategory.
 type InvalidEventCategoryException struct {
@@ -311,6 +487,29 @@ func (e *InvalidEventCategoryException) ErrorMessage() string {
 }
 func (e *InvalidEventCategoryException) ErrorCode() string             { return "InvalidEventCategoryException" }
 func (e *InvalidEventCategoryException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The event data store is not in a status that supports the operation.
+type InvalidEventDataStoreStatusException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidEventDataStoreStatusException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidEventDataStoreStatusException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidEventDataStoreStatusException) ErrorCode() string {
+	return "InvalidEventDataStoreStatusException"
+}
+func (e *InvalidEventDataStoreStatusException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
 
 // This exception is thrown when the PutEventSelectors operation is called with a
 // number of event selectors, advanced event selectors, or data resources that is
@@ -500,6 +699,67 @@ func (e *InvalidParameterCombinationException) ErrorCode() string {
 func (e *InvalidParameterCombinationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+
+// The request includes a parameter that is not valid.
+type InvalidParameterException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidParameterException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidParameterException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidParameterException) ErrorCode() string             { return "InvalidParameterException" }
+func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The query that was submitted has validation errors, or uses incorrect syntax or
+// unsupported keywords. For more information about writing a query, see Create or
+// edit a query
+// (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-create-edit-query.html)
+// in the CloudTrail User Guide.
+type InvalidQueryStatementException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidQueryStatementException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidQueryStatementException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidQueryStatementException) ErrorCode() string             { return "InvalidQueryStatementException" }
+func (e *InvalidQueryStatementException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The query status is not valid for the operation.
+type InvalidQueryStatusException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidQueryStatusException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidQueryStatusException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidQueryStatusException) ErrorCode() string             { return "InvalidQueryStatusException" }
+func (e *InvalidQueryStatusException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This exception is thrown when the provided S3 bucket name is not valid.
 type InvalidS3BucketNameException struct {
@@ -712,6 +972,26 @@ func (e *KmsKeyNotFoundException) ErrorMessage() string {
 func (e *KmsKeyNotFoundException) ErrorCode() string             { return "KmsKeyNotFoundException" }
 func (e *KmsKeyNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// You are already running the maximum number of concurrent queries. Wait a minute
+// for some queries to finish, and then run the query again.
+type MaxConcurrentQueriesException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *MaxConcurrentQueriesException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *MaxConcurrentQueriesException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *MaxConcurrentQueriesException) ErrorCode() string             { return "MaxConcurrentQueriesException" }
+func (e *MaxConcurrentQueriesException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // This exception is thrown when the maximum number of trails is reached.
 type MaximumNumberOfTrailsExceededException struct {
 	Message *string
@@ -828,6 +1108,25 @@ func (e *OrganizationsNotInUseException) ErrorMessage() string {
 }
 func (e *OrganizationsNotInUseException) ErrorCode() string             { return "OrganizationsNotInUseException" }
 func (e *OrganizationsNotInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The query ID does not exist or does not map to a query.
+type QueryIdNotFoundException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *QueryIdNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *QueryIdNotFoundException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *QueryIdNotFoundException) ErrorCode() string             { return "QueryIdNotFoundException" }
+func (e *QueryIdNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This exception is thrown when the specified resource is not found.
 type ResourceNotFoundException struct {

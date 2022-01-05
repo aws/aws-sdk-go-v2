@@ -1903,7 +1903,7 @@
                 "ContentType": {
                     "target": "com.amazonaws.sagemaker#ContentType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The content type of the data from the input source. You can use\n            <code>text/csv;header=present</code> or <code>x-application/vnd.amazon+parquet</code>.\n         The default value is <code>text/csv;header=present</code>.</p>"
+                        "smithy.api#documentation": "<p>The content type of the data from the input source. You can use\n         <code>text/csv;header=present</code> or <code>x-application/vnd.amazon+parquet</code>.\n         The default value is <code>text/csv;header=present</code>.</p>"
                     }
                 }
             },
@@ -2728,6 +2728,16 @@
                     "max": 1024
                 },
                 "smithy.api#pattern": "^[^ ~^:?*\\[]+$"
+            }
+        },
+        "com.amazonaws.sagemaker#BucketName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 63
+                },
+                "smithy.api#pattern": "^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$"
             }
         },
         "com.amazonaws.sagemaker#CacheHitResult": {
@@ -5131,7 +5141,7 @@
                         "smithy.api#deprecated": {
                             "message": "This property is deprecated, use KmsKeyId instead."
                         },
-                        "smithy.api#documentation": "<p>This member is deprecated and replaced with <code>KmsKeyId</code>.</p>"
+                        "smithy.api#documentation": "<p>Use <code>KmsKeyId</code>.</p>"
                     }
                 },
                 "KmsKeyId": {
@@ -6900,8 +6910,13 @@
                 "PipelineDefinition": {
                     "target": "com.amazonaws.sagemaker#PipelineDefinition",
                     "traits": {
-                        "smithy.api#documentation": "<p>The JSON pipeline definition of the pipeline.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The JSON pipeline definition of the pipeline.</p>"
+                    }
+                },
+                "PipelineDefinitionS3Location": {
+                    "target": "com.amazonaws.sagemaker#PipelineDefinitionS3Location",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location of the pipeline definition stored in Amazon S3. If specified, \n            SageMaker will retrieve the pipeline definition from this location.</p>"
                     }
                 },
                 "PipelineDescription": {
@@ -6929,6 +6944,12 @@
                     "target": "com.amazonaws.sagemaker#TagList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of tags to apply to the created pipeline.</p>"
+                    }
+                },
+                "ParallelismConfiguration": {
+                    "target": "com.amazonaws.sagemaker#ParallelismConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the configuration that controls the parallelism of the pipeline. \n            If specified, it applies to all runs of this pipeline by default.</p>"
                     }
                 }
             }
@@ -11169,7 +11190,7 @@
                         "smithy.api#deprecated": {
                             "message": "This property is deprecated, use KmsKeyId instead."
                         },
-                        "smithy.api#documentation": "<p>This member is deprecated and replaced with <code>KmsKeyId</code>.</p>"
+                        "smithy.api#documentation": "<p>Use <code>KmsKeyId</code>.</p>"
                     }
                 },
                 "SubnetIds": {
@@ -13969,6 +13990,12 @@
                 },
                 "LastModifiedBy": {
                     "target": "com.amazonaws.sagemaker#UserContext"
+                },
+                "ParallelismConfiguration": {
+                    "target": "com.amazonaws.sagemaker#ParallelismConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parallelism configuration applied to the pipeline.</p>"
+                    }
                 }
             }
         },
@@ -14052,6 +14079,12 @@
                 },
                 "LastModifiedBy": {
                     "target": "com.amazonaws.sagemaker#UserContext"
+                },
+                "ParallelismConfiguration": {
+                    "target": "com.amazonaws.sagemaker#ParallelismConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lists the parallelism configuration applied to the pipeline.</p>"
+                    }
                 }
             }
         },
@@ -16114,6 +16147,38 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Represents the drift check model quality baselines that can be used when the model monitor is set using \n         the model package. </p>"
+            }
+        },
+        "com.amazonaws.sagemaker#EMRStepMetadata": {
+            "type": "structure",
+            "members": {
+                "ClusterId": {
+                    "target": "com.amazonaws.sagemaker#String256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the EMR cluster.</p>"
+                    }
+                },
+                "StepId": {
+                    "target": "com.amazonaws.sagemaker#String256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the EMR cluster step.</p>"
+                    }
+                },
+                "StepName": {
+                    "target": "com.amazonaws.sagemaker#String256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the EMR cluster step.</p>"
+                    }
+                },
+                "LogFilePath": {
+                    "target": "com.amazonaws.sagemaker#String1024",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path to the log file where the cluster step's failure root cause \n            is recorded.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configurations and outcomes of an Amazon EMR step execution.</p>"
             }
         },
         "com.amazonaws.sagemaker#Edge": {
@@ -20067,7 +20132,7 @@
                 "FrameworkVersion": {
                     "target": "com.amazonaws.sagemaker#FrameworkVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the framework version to use.</p>\n        <p>This API field is only supported for PyTorch framework versions <code>1.4</code>, \n            <code>1.5</code>, and <code>1.6</code> for \n            cloud instance target devices: <code>ml_c4</code>, <code>ml_c5</code>, <code>ml_m4</code>, \n            <code>ml_m5</code>, <code>ml_p2</code>, <code>ml_p3</code>, and <code>ml_g4dn</code>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the framework version to use. This API field is only supported for the PyTorch and TensorFlow frameworks.</p>\n        <p>For information about framework versions supported for cloud targets and edge devices, see \n            <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/neo-supported-cloud.html\">Cloud Supported Instance Types and Frameworks</a> and \n            <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/neo-supported-devices-edge-frameworks.html\">Edge Supported Frameworks</a>.</p>"
                     }
                 }
             },
@@ -20655,6 +20720,16 @@
                     "min": 1,
                     "max": 1
                 }
+            }
+        },
+        "com.amazonaws.sagemaker#Key": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^.+$"
             }
         },
         "com.amazonaws.sagemaker#KmsKeyId": {
@@ -26543,6 +26618,14 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#MaxParallelExecutionSteps": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
         "com.amazonaws.sagemaker#MaxParallelOfTests": {
             "type": "integer",
             "traits": {
@@ -30130,13 +30213,28 @@
                 "smithy.api#pattern": ".*"
             }
         },
+        "com.amazonaws.sagemaker#ParallelismConfiguration": {
+            "type": "structure",
+            "members": {
+                "MaxParallelExecutionSteps": {
+                    "target": "com.amazonaws.sagemaker#MaxParallelExecutionSteps",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The max number of steps that can be executed in parallel. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration that controls the parallelism of the pipeline. \n            By default, the parallelism configuration specified applies to all \n            executions of the pipeline unless overridden.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#Parameter": {
             "type": "structure",
             "members": {
                 "Name": {
                     "target": "com.amazonaws.sagemaker#PipelineParameterName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the parameter to assign a value to. This parameter name must match a named parameter in the pipeline definition.</p>",
+                        "smithy.api#documentation": "<p>The name of the parameter to assign a value to. This \n         parameter name must match a named parameter in the \n         pipeline definition.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -30546,6 +30644,12 @@
                 "LastModifiedBy": {
                     "target": "com.amazonaws.sagemaker#UserContext"
                 },
+                "ParallelismConfiguration": {
+                    "target": "com.amazonaws.sagemaker#ParallelismConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parallelism configuration applied to the pipeline.</p>"
+                    }
+                },
                 "Tags": {
                     "target": "com.amazonaws.sagemaker#TagList",
                     "traits": {
@@ -30575,6 +30679,34 @@
                     "max": 1048576
                 },
                 "smithy.api#pattern": "(?:[ \\r\\n\\t].*)*$"
+            }
+        },
+        "com.amazonaws.sagemaker#PipelineDefinitionS3Location": {
+            "type": "structure",
+            "members": {
+                "Bucket": {
+                    "target": "com.amazonaws.sagemaker#BucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the S3 bucket.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ObjectKey": {
+                    "target": "com.amazonaws.sagemaker#Key",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The object key (or key name) uniquely identifies the \n            object in an S3 bucket. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "VersionId": {
+                    "target": "com.amazonaws.sagemaker#VersionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Version Id of the pipeline definition file. If not specified, Amazon SageMaker \n            will retrieve the latest version.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The location of the pipeline definition stored in Amazon S3.</p>"
             }
         },
         "com.amazonaws.sagemaker#PipelineDescription": {
@@ -30646,6 +30778,12 @@
                 },
                 "LastModifiedBy": {
                     "target": "com.amazonaws.sagemaker#UserContext"
+                },
+                "ParallelismConfiguration": {
+                    "target": "com.amazonaws.sagemaker#ParallelismConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parallelism configuration applied to the pipeline execution.</p>"
+                    }
                 },
                 "PipelineParameters": {
                     "target": "com.amazonaws.sagemaker#ParameterList",
@@ -30734,6 +30872,18 @@
                         "smithy.api#documentation": "<p>The name of the step that is executed.</p>"
                     }
                 },
+                "StepDisplayName": {
+                    "target": "com.amazonaws.sagemaker#StepDisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the step.</p>"
+                    }
+                },
+                "StepDescription": {
+                    "target": "com.amazonaws.sagemaker#StepDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the step.</p>"
+                    }
+                },
                 "StartTime": {
                     "target": "com.amazonaws.sagemaker#Timestamp",
                     "traits": {
@@ -30759,7 +30909,10 @@
                     }
                 },
                 "AttemptCount": {
-                    "target": "com.amazonaws.sagemaker#IntegerValue"
+                    "target": "com.amazonaws.sagemaker#IntegerValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current attempt of the execution step. For more information, see <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/sagemaker/latest/dg/pipelines-retry-policy.html\">Retry Policy for Amazon SageMaker Pipelines steps</a>.</p>"
+                    }
                 },
                 "FailureReason": {
                     "target": "com.amazonaws.sagemaker#FailureReason",
@@ -30857,6 +31010,12 @@
                     "target": "com.amazonaws.sagemaker#ClarifyCheckStepMetadata",
                     "traits": {
                         "smithy.api#documentation": "<p>Container for the metadata for a Clarify check step. The configurations \n         and outcomes of the check step execution. This includes: </p>\n         <ul>\n            <li>\n               <p>The type of the check conducted,</p>\n            </li>\n            <li>\n               <p>The Amazon S3 URIs of baseline constraints and statistics files to be used for the drift check.</p>\n            </li>\n            <li>\n               <p>The Amazon S3 URIs of newly calculated baseline constraints and statistics.</p>\n            </li>\n            <li>\n               <p>The model package group name provided.</p>\n            </li>\n            <li>\n               <p>The Amazon S3 URI of the violation report if violations detected.</p>\n            </li>\n            <li>\n               <p>The Amazon Resource Name (ARN) of check processing job initiated by the step execution.</p>\n            </li>\n            <li>\n               <p>The boolean flags indicating if the drift check is skipped.</p>\n            </li>\n            <li>\n               <p>If step property <code>BaselineUsedForDriftCheck</code> is set the same as \n               <code>CalculatedBaseline</code>.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "EMR": {
+                    "target": "com.amazonaws.sagemaker#EMRStepMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configurations and outcomes of an EMR step execution.</p>"
                     }
                 }
             },
@@ -34336,6 +34495,12 @@
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#required": {}
                     }
+                },
+                "ParallelismConfiguration": {
+                    "target": "com.amazonaws.sagemaker#ParallelismConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This configuration, if specified, overrides the parallelism configuration \n            of the parent pipeline.</p>"
+                    }
                 }
             }
         },
@@ -36439,6 +36604,12 @@
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#required": {}
                     }
+                },
+                "ParallelismConfiguration": {
+                    "target": "com.amazonaws.sagemaker#ParallelismConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This configuration, if specified, overrides the parallelism configuration \n            of the parent pipeline for this specific run.</p>"
+                    }
                 }
             }
         },
@@ -36466,7 +36637,17 @@
         "com.amazonaws.sagemaker#StatusMessage": {
             "type": "string"
         },
-        "com.amazonaws.sagemaker#StepName": {
+        "com.amazonaws.sagemaker#StepDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 3072
+                },
+                "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.sagemaker#StepDisplayName": {
             "type": "string",
             "traits": {
                 "smithy.api#length": {
@@ -36474,6 +36655,16 @@
                     "max": 256
                 },
                 "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.sagemaker#StepName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9\\-_]*$"
             }
         },
         "com.amazonaws.sagemaker#StepStatus": {
@@ -36719,7 +36910,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Stops a pipeline execution.</p>\n\n         <p>\n            <b>Callback Step</b>\n         </p>\n         <p>A pipeline execution won't stop while a callback step is running.\n        When you call <code>StopPipelineExecution</code>\n        on a pipeline execution with a running callback step, SageMaker Pipelines sends an\n        additional Amazon SQS message to the specified SQS queue. The body of the SQS message\n        contains a \"Status\" field which is set to \"Stopping\".</p>\n         <p>You should add logic to your Amazon SQS message consumer to take any needed action (for\n        example, resource cleanup) upon receipt of the message followed by a call to\n        <code>SendPipelineExecutionStepSuccess</code> or\n        <code>SendPipelineExecutionStepFailure</code>.</p>\n         <p>Only when SageMaker Pipelines receives one of these calls will it stop the pipeline execution.</p>\n\n         <p>\n            <b>Lambda Step</b>\n         </p>\n         <p>A pipeline execution can't be stopped while a lambda step is running because the Lambda\n        function invoked by the lambda step can't be stopped. If you attempt to stop the execution\n        while the Lambda function is running, the pipeline waits for the Lambda function to finish\n        or until the timeout is hit, whichever occurs first, and then stops. If the Lambda function\n        finishes, the pipeline execution status is <code>Stopped</code>. If the timeout is hit\n        the pipeline execution status is <code>Failed</code>.</p>"
+                "smithy.api#documentation": "<p>Stops a pipeline execution.</p>\n\n         <p>\n            <b>Callback Step</b>\n         </p>\n         <p>A pipeline execution won't stop while a callback step is running.\n        When you call <code>StopPipelineExecution</code>\n        on a pipeline execution with a running callback step, Amazon SageMaker Pipelines sends an\n        additional Amazon SQS message to the specified SQS queue. The body of the SQS message\n        contains a \"Status\" field which is set to \"Stopping\".</p>\n         <p>You should add logic to your Amazon SQS message consumer to take any needed action (for\n        example, resource cleanup) upon receipt of the message followed by a call to\n        <code>SendPipelineExecutionStepSuccess</code> or\n        <code>SendPipelineExecutionStepFailure</code>.</p>\n         <p>Only when Amazon SageMaker Pipelines receives one of these calls will it stop the pipeline execution.</p>\n\n         <p>\n            <b>Lambda Step</b>\n         </p>\n         <p>A pipeline execution can't be stopped while a lambda step is running because the Lambda\n        function invoked by the lambda step can't be stopped. If you attempt to stop the execution\n        while the Lambda function is running, the pipeline waits for the Lambda function to finish\n        or until the timeout is hit, whichever occurs first, and then stops. If the Lambda function\n        finishes, the pipeline execution status is <code>Stopped</code>. If the timeout is hit\n        the pipeline execution status is <code>Failed</code>.</p>"
             }
         },
         "com.amazonaws.sagemaker#StopPipelineExecutionRequest": {
@@ -36816,7 +37007,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Stops a transform job.</p>\n        <p>When Amazon SageMaker receives a <code>StopTransformJob</code> request, the status of the job\n            changes to <code>Stopping</code>. After Amazon SageMaker\n            stops\n            the job, the status is set to <code>Stopped</code>. When you stop a transform job before\n            it is completed, Amazon SageMaker doesn't store the job's output in Amazon S3.</p>"
+                "smithy.api#documentation": "<p>Stops a batch transform job.</p>\n        <p>When Amazon SageMaker receives a <code>StopTransformJob</code> request, the status of the job\n            changes to <code>Stopping</code>. After Amazon SageMaker\n            stops\n            the job, the status is set to <code>Stopped</code>. When you stop a batch transform job before\n            it is completed, Amazon SageMaker doesn't store the job's output in Amazon S3.</p>"
             }
         },
         "com.amazonaws.sagemaker#StopTransformJobRequest": {
@@ -36825,7 +37016,7 @@
                 "TransformJobName": {
                     "target": "com.amazonaws.sagemaker#TransformJobName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the transform job to stop.</p>",
+                        "smithy.api#documentation": "<p>The name of the batch transform job to stop.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -37942,6 +38133,38 @@
                     {
                         "value": "ml.c5n.18xlarge",
                         "name": "ML_C5N_18XLARGE"
+                    },
+                    {
+                        "value": "ml.g5.xlarge",
+                        "name": "ML_G5_XLARGE"
+                    },
+                    {
+                        "value": "ml.g5.2xlarge",
+                        "name": "ML_G5_2XLARGE"
+                    },
+                    {
+                        "value": "ml.g5.4xlarge",
+                        "name": "ML_G5_4XLARGE"
+                    },
+                    {
+                        "value": "ml.g5.8xlarge",
+                        "name": "ML_G5_8XLARGE"
+                    },
+                    {
+                        "value": "ml.g5.16xlarge",
+                        "name": "ML_G5_16XLARGE"
+                    },
+                    {
+                        "value": "ml.g5.12xlarge",
+                        "name": "ML_G5_12XLARGE"
+                    },
+                    {
+                        "value": "ml.g5.24xlarge",
+                        "name": "ML_G5_24XLARGE"
+                    },
+                    {
+                        "value": "ml.g5.48xlarge",
+                        "name": "ML_G5_48XLARGE"
                     }
                 ]
             }
@@ -40876,6 +41099,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The display name of the pipeline execution.</p>"
                     }
+                },
+                "ParallelismConfiguration": {
+                    "target": "com.amazonaws.sagemaker#ParallelismConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This configuration, if specified, overrides the parallelism configuration \n            of the parent pipeline for this specific run.</p>"
+                    }
                 }
             }
         },
@@ -40912,6 +41141,12 @@
                         "smithy.api#documentation": "<p>The JSON pipeline definition.</p>"
                     }
                 },
+                "PipelineDefinitionS3Location": {
+                    "target": "com.amazonaws.sagemaker#PipelineDefinitionS3Location",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location of the pipeline definition stored in Amazon S3. If specified, \n            SageMaker will retrieve the pipeline definition from this location.</p>"
+                    }
+                },
                 "PipelineDescription": {
                     "target": "com.amazonaws.sagemaker#PipelineDescription",
                     "traits": {
@@ -40922,6 +41157,12 @@
                     "target": "com.amazonaws.sagemaker#RoleArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that the pipeline uses to execute.</p>"
+                    }
+                },
+                "ParallelismConfiguration": {
+                    "target": "com.amazonaws.sagemaker#ParallelismConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If specified, it applies to all executions of this pipeline by default.</p>"
                     }
                 }
             }
@@ -41667,6 +41908,16 @@
                 "smithy.api#range": {
                     "min": 0
                 }
+            }
+        },
+        "com.amazonaws.sagemaker#VersionId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^.+$"
             }
         },
         "com.amazonaws.sagemaker#VersionedArnOrName": {

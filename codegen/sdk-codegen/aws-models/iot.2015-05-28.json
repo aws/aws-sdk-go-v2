@@ -5817,7 +5817,7 @@
                 "abortConfig": {
                     "target": "com.amazonaws.iot#AbortConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Allows you to create criteria to abort a job.</p>"
+                        "smithy.api#documentation": "<p>Allows you to create the criteria to abort a job.</p>"
                     }
                 },
                 "timeoutConfig": {
@@ -5842,6 +5842,12 @@
                     "target": "com.amazonaws.iot#JobTemplateArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the job template used to create the job.</p>"
+                    }
+                },
+                "jobExecutionsRetryConfig": {
+                    "target": "com.amazonaws.iot#JobExecutionsRetryConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows you to create the criteria to retry a job.</p>"
                     }
                 },
                 "documentParameters": {
@@ -5964,6 +5970,12 @@
                     "target": "com.amazonaws.iot#TagList",
                     "traits": {
                         "smithy.api#documentation": "<p>Metadata that can be used to manage the job template.</p>"
+                    }
+                },
+                "jobExecutionsRetryConfig": {
+                    "target": "com.amazonaws.iot#JobExecutionsRetryConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows you to create the criteria to retry a job.</p>"
                     }
                 }
             }
@@ -11146,6 +11158,12 @@
                 },
                 "timeoutConfig": {
                     "target": "com.amazonaws.iot#TimeoutConfig"
+                },
+                "jobExecutionsRetryConfig": {
+                    "target": "com.amazonaws.iot#JobExecutionsRetryConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration that determines how many retries are allowed for each failure type\n            for a job.</p>"
+                    }
                 }
             }
         },
@@ -15882,6 +15900,12 @@
                         "smithy.api#documentation": "<p>The ARN of the job template used to create the job.</p>"
                     }
                 },
+                "jobExecutionsRetryConfig": {
+                    "target": "com.amazonaws.iot#JobExecutionsRetryConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for the criteria to retry the job.</p>"
+                    }
+                },
                 "documentParameters": {
                     "target": "com.amazonaws.iot#ParameterMap",
                     "traits": {
@@ -16106,6 +16130,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A string (consisting of the digits \"0\" through \"9\") which identifies this particular job execution on\n            this particular device. It can be used later in commands which return or update job execution\n            information.</p>"
                     }
+                },
+                "retryAttempt": {
+                    "target": "com.amazonaws.iot#RetryAttempt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number that indicates how many retry attempts have been completed for this \n        job on this device.</p>"
+                    }
                 }
             },
             "traits": {
@@ -16162,6 +16192,21 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.iot#JobExecutionSummaryForThing"
+            }
+        },
+        "com.amazonaws.iot#JobExecutionsRetryConfig": {
+            "type": "structure",
+            "members": {
+                "criteriaList": {
+                    "target": "com.amazonaws.iot#RetryCriteriaList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of criteria that determines how many retries are allowed for each failure\n            type for a job.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration that determines how many retries are allowed for each failure \n            type for a job.</p>"
             }
         },
         "com.amazonaws.iot#JobExecutionsRolloutConfig": {
@@ -18434,6 +18479,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The token to retrieve the next set of results.</p>",
                         "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "jobId": {
+                    "target": "com.amazonaws.iot#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier you assigned to this job when it was created.</p>",
+                        "smithy.api#httpQuery": "jobId"
                     }
                 }
             }
@@ -22174,6 +22226,16 @@
                 "target": "com.amazonaws.iot#Number"
             }
         },
+        "com.amazonaws.iot#NumberOfRetries": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.iot#NumberOfThings": {
             "type": "integer",
             "traits": {
@@ -24274,6 +24336,65 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.iot#Resource"
+            }
+        },
+        "com.amazonaws.iot#RetryAttempt": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.iot#RetryCriteria": {
+            "type": "structure",
+            "members": {
+                "failureType": {
+                    "target": "com.amazonaws.iot#RetryableFailureType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of job execution failures that can initiate a job retry.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "numberOfRetries": {
+                    "target": "com.amazonaws.iot#NumberOfRetries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of retries allowed for a failure type for the job.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The criteria that determines how many retries are allowed for each failure\n            type for a job.</p>"
+            }
+        },
+        "com.amazonaws.iot#RetryCriteriaList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iot#RetryCriteria"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
+                }
+            }
+        },
+        "com.amazonaws.iot#RetryableFailureType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    },
+                    {
+                        "value": "TIMED_OUT",
+                        "name": "TIMED_OUT"
+                    },
+                    {
+                        "value": "ALL",
+                        "name": "ALL"
+                    }
+                ]
             }
         },
         "com.amazonaws.iot#RoleAlias": {
@@ -29141,6 +29262,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p>\n        <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that \n            contain the value in the following format.</p>\n        <p>\n            <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>\n         </p>\n        <note>\n            <p>The <code>namespaceId</code> feature is in public preview.</p>\n         </note>",
                         "smithy.api#httpQuery": "namespaceId"
+                    }
+                },
+                "jobExecutionsRetryConfig": {
+                    "target": "com.amazonaws.iot#JobExecutionsRetryConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows you to create the criteria to retry a job.</p>"
                     }
                 }
             }

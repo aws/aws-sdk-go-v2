@@ -43,7 +43,7 @@ type CreateJobInput struct {
 	// This member is required.
 	Targets []string
 
-	// Allows you to create criteria to abort a job.
+	// Allows you to create the criteria to abort a job.
 	AbortConfig *types.AbortConfig
 
 	// A short text description of the job.
@@ -63,6 +63,9 @@ type CreateJobInput struct {
 	// where bucket is your bucket name and key is the object in the bucket to which
 	// you are linking.
 	DocumentSource *string
+
+	// Allows you to create the criteria to retry a job.
+	JobExecutionsRetryConfig *types.JobExecutionsRetryConfig
 
 	// Allows you to create a staged rollout of the job.
 	JobExecutionsRolloutConfig *types.JobExecutionsRolloutConfig

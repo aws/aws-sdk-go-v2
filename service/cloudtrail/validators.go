@@ -30,6 +30,46 @@ func (m *validateOpAddTags) HandleInitialize(ctx context.Context, in middleware.
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCancelQuery struct {
+}
+
+func (*validateOpCancelQuery) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCancelQuery) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CancelQueryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCancelQueryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateEventDataStore struct {
+}
+
+func (*validateOpCreateEventDataStore) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateEventDataStore) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateEventDataStoreInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateEventDataStoreInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateTrail struct {
 }
 
@@ -50,6 +90,26 @@ func (m *validateOpCreateTrail) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteEventDataStore struct {
+}
+
+func (*validateOpDeleteEventDataStore) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteEventDataStore) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteEventDataStoreInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteEventDataStoreInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteTrail struct {
 }
 
@@ -65,6 +125,46 @@ func (m *validateOpDeleteTrail) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteTrailInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeQuery struct {
+}
+
+func (*validateOpDescribeQuery) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeQuery) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeQueryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeQueryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetEventDataStore struct {
+}
+
+func (*validateOpGetEventDataStore) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetEventDataStore) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetEventDataStoreInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetEventDataStoreInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -110,6 +210,26 @@ func (m *validateOpGetInsightSelectors) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetQueryResults struct {
+}
+
+func (*validateOpGetQueryResults) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetQueryResults) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetQueryResultsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetQueryResultsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetTrail struct {
 }
 
@@ -145,6 +265,26 @@ func (m *validateOpGetTrailStatus) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetTrailStatusInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListQueries struct {
+}
+
+func (*validateOpListQueries) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListQueries) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListQueriesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListQueriesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -250,6 +390,26 @@ func (m *validateOpRemoveTags) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRestoreEventDataStore struct {
+}
+
+func (*validateOpRestoreEventDataStore) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRestoreEventDataStore) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RestoreEventDataStoreInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRestoreEventDataStoreInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartLogging struct {
 }
 
@@ -270,6 +430,26 @@ func (m *validateOpStartLogging) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartQuery struct {
+}
+
+func (*validateOpStartQuery) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartQuery) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartQueryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartQueryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStopLogging struct {
 }
 
@@ -285,6 +465,26 @@ func (m *validateOpStopLogging) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStopLoggingInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateEventDataStore struct {
+}
+
+func (*validateOpUpdateEventDataStore) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateEventDataStore) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateEventDataStoreInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateEventDataStoreInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -314,12 +514,32 @@ func addOpAddTagsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAddTags{}, middleware.After)
 }
 
+func addOpCancelQueryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCancelQuery{}, middleware.After)
+}
+
+func addOpCreateEventDataStoreValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateEventDataStore{}, middleware.After)
+}
+
 func addOpCreateTrailValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateTrail{}, middleware.After)
 }
 
+func addOpDeleteEventDataStoreValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteEventDataStore{}, middleware.After)
+}
+
 func addOpDeleteTrailValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteTrail{}, middleware.After)
+}
+
+func addOpDescribeQueryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeQuery{}, middleware.After)
+}
+
+func addOpGetEventDataStoreValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetEventDataStore{}, middleware.After)
 }
 
 func addOpGetEventSelectorsValidationMiddleware(stack *middleware.Stack) error {
@@ -330,12 +550,20 @@ func addOpGetInsightSelectorsValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpGetInsightSelectors{}, middleware.After)
 }
 
+func addOpGetQueryResultsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetQueryResults{}, middleware.After)
+}
+
 func addOpGetTrailValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetTrail{}, middleware.After)
 }
 
 func addOpGetTrailStatusValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetTrailStatus{}, middleware.After)
+}
+
+func addOpListQueriesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListQueries{}, middleware.After)
 }
 
 func addOpListTagsValidationMiddleware(stack *middleware.Stack) error {
@@ -358,12 +586,24 @@ func addOpRemoveTagsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRemoveTags{}, middleware.After)
 }
 
+func addOpRestoreEventDataStoreValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRestoreEventDataStore{}, middleware.After)
+}
+
 func addOpStartLoggingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartLogging{}, middleware.After)
 }
 
+func addOpStartQueryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartQuery{}, middleware.After)
+}
+
 func addOpStopLoggingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStopLogging{}, middleware.After)
+}
+
+func addOpUpdateEventDataStoreValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateEventDataStore{}, middleware.After)
 }
 
 func addOpUpdateTrailValidationMiddleware(stack *middleware.Stack) error {
@@ -513,6 +753,51 @@ func validateOpAddTagsInput(v *AddTagsInput) error {
 	if v.ResourceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
 	}
+	if v.TagsList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagsList"))
+	} else if v.TagsList != nil {
+		if err := validateTagsList(v.TagsList); err != nil {
+			invalidParams.AddNested("TagsList", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCancelQueryInput(v *CancelQueryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CancelQueryInput"}
+	if v.EventDataStore == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventDataStore"))
+	}
+	if v.QueryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateEventDataStoreInput(v *CreateEventDataStoreInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateEventDataStoreInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.AdvancedEventSelectors != nil {
+		if err := validateAdvancedEventSelectors(v.AdvancedEventSelectors); err != nil {
+			invalidParams.AddNested("AdvancedEventSelectors", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.TagsList != nil {
 		if err := validateTagsList(v.TagsList); err != nil {
 			invalidParams.AddNested("TagsList", err.(smithy.InvalidParamsError))
@@ -548,6 +833,21 @@ func validateOpCreateTrailInput(v *CreateTrailInput) error {
 	}
 }
 
+func validateOpDeleteEventDataStoreInput(v *DeleteEventDataStoreInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteEventDataStoreInput"}
+	if v.EventDataStore == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventDataStore"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteTrailInput(v *DeleteTrailInput) error {
 	if v == nil {
 		return nil
@@ -555,6 +855,39 @@ func validateOpDeleteTrailInput(v *DeleteTrailInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteTrailInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeQueryInput(v *DescribeQueryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeQueryInput"}
+	if v.EventDataStore == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventDataStore"))
+	}
+	if v.QueryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetEventDataStoreInput(v *GetEventDataStoreInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetEventDataStoreInput"}
+	if v.EventDataStore == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventDataStore"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -593,6 +926,24 @@ func validateOpGetInsightSelectorsInput(v *GetInsightSelectorsInput) error {
 	}
 }
 
+func validateOpGetQueryResultsInput(v *GetQueryResultsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetQueryResultsInput"}
+	if v.EventDataStore == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventDataStore"))
+	}
+	if v.QueryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetTrailInput(v *GetTrailInput) error {
 	if v == nil {
 		return nil
@@ -615,6 +966,21 @@ func validateOpGetTrailStatusInput(v *GetTrailStatusInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetTrailStatusInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListQueriesInput(v *ListQueriesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListQueriesInput"}
+	if v.EventDataStore == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventDataStore"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -701,10 +1067,27 @@ func validateOpRemoveTagsInput(v *RemoveTagsInput) error {
 	if v.ResourceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
 	}
-	if v.TagsList != nil {
+	if v.TagsList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagsList"))
+	} else if v.TagsList != nil {
 		if err := validateTagsList(v.TagsList); err != nil {
 			invalidParams.AddNested("TagsList", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRestoreEventDataStoreInput(v *RestoreEventDataStoreInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RestoreEventDataStoreInput"}
+	if v.EventDataStore == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventDataStore"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -728,6 +1111,21 @@ func validateOpStartLoggingInput(v *StartLoggingInput) error {
 	}
 }
 
+func validateOpStartQueryInput(v *StartQueryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartQueryInput"}
+	if v.QueryStatement == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryStatement"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStopLoggingInput(v *StopLoggingInput) error {
 	if v == nil {
 		return nil
@@ -735,6 +1133,26 @@ func validateOpStopLoggingInput(v *StopLoggingInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "StopLoggingInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateEventDataStoreInput(v *UpdateEventDataStoreInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateEventDataStoreInput"}
+	if v.EventDataStore == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventDataStore"))
+	}
+	if v.AdvancedEventSelectors != nil {
+		if err := validateAdvancedEventSelectors(v.AdvancedEventSelectors); err != nil {
+			invalidParams.AddNested("AdvancedEventSelectors", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

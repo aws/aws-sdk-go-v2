@@ -70,7 +70,7 @@ func (c *Client) UpdateContainerInstancesState(ctx context.Context, params *Upda
 
 type UpdateContainerInstancesStateInput struct {
 
-	// A list of container instance IDs or full ARN entries.
+	// A list of up to 10 container instance IDs or full ARN entries.
 	//
 	// This member is required.
 	ContainerInstances []string

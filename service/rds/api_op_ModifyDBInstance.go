@@ -65,7 +65,7 @@ type ModifyDBInstanceInput struct {
 	// an outage and are applied on the next call to RebootDBInstance, or the next
 	// failure reboot. Review the table of parameters in Modifying a DB Instance
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.DBInstance.Modifying.html)
-	// in the Amazon RDS User Guide. to see the impact of enabling or disabling
+	// in the Amazon RDS User Guide to see the impact of enabling or disabling
 	// ApplyImmediately for each modified parameter and to determine when the changes
 	// are applied.
 	ApplyImmediately bool
@@ -112,13 +112,13 @@ type ModifyDBInstanceInput struct {
 	//
 	// * It must be a value from 0 to 35. It can't be set to 0 if
 	// the DB instance is a source to read replicas. It can't be set to 0 or 35 for an
-	// RDS Custom DB instance.
+	// RDS Custom for Oracle DB instance.
 	//
-	// * It can be specified for a MySQL read replica only if
-	// the source is running MySQL 5.6 or later.
+	// * It can be specified for a MySQL read
+	// replica only if the source is running MySQL 5.6 or later.
 	//
-	// * It can be specified for a
-	// PostgreSQL read replica only if the source is running PostgreSQL 9.3.5.
+	// * It can be specified
+	// for a PostgreSQL read replica only if the source is running PostgreSQL 9.3.5.
 	BackupRetentionPeriod *int32
 
 	// Specifies the certificate to associate with the DB instance. This setting
@@ -169,7 +169,7 @@ type ModifyDBInstanceInput struct {
 	// in the Amazon RDS User Guide. If you modify the DB instance class, an outage
 	// occurs during the change. The change is applied during the next maintenance
 	// window, unless ApplyImmediately is enabled for this request. This setting
-	// doesn't apply to RDS Custom. Default: Uses existing setting
+	// doesn't apply to RDS Custom for Oracle. Default: Uses existing setting
 	DBInstanceClass *string
 
 	// The name of the DB parameter group to apply to the DB instance. Changing this
@@ -276,8 +276,8 @@ type ModifyDBInstanceInput struct {
 	// that DB parameter group family. If you specify only a major version, Amazon RDS
 	// will update the DB instance to the default minor version if the current minor
 	// version is lower. For information about valid engine versions, see
-	// CreateDBInstance, or call DescribeDBEngineVersions. In RDS Custom, this
-	// parameter is supported for read replicas only if they are in the
+	// CreateDBInstance, or call DescribeDBEngineVersions. In RDS Custom for Oracle,
+	// this parameter is supported for read replicas only if they are in the
 	// PATCH_DB_FAILURE lifecycle.
 	EngineVersion *string
 
@@ -460,7 +460,7 @@ type ModifyDBInstanceInput struct {
 	// The DB instance must be part of a public subnet and PubliclyAccessible must be
 	// enabled for it to be publicly accessible. Changes to the PubliclyAccessible
 	// parameter are applied immediately regardless of the value of the
-	// ApplyImmediately parameter. This setting doesn't apply to RDS Custom.
+	// ApplyImmediately parameter.
 	PubliclyAccessible *bool
 
 	// A value that sets the open mode of a replica database to either mounted or

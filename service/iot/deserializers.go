@@ -13824,6 +13824,11 @@ func awsRestjson1_deserializeOpDocumentDescribeJobTemplateOutput(v **DescribeJob
 				sv.DocumentSource = ptr.String(jtv)
 			}
 
+		case "jobExecutionsRetryConfig":
+			if err := awsRestjson1_deserializeDocumentJobExecutionsRetryConfig(&sv.JobExecutionsRetryConfig, value); err != nil {
+				return err
+			}
+
 		case "jobExecutionsRolloutConfig":
 			if err := awsRestjson1_deserializeDocumentJobExecutionsRolloutConfig(&sv.JobExecutionsRolloutConfig, value); err != nil {
 				return err
@@ -44756,6 +44761,11 @@ func awsRestjson1_deserializeDocumentJob(v **types.Job, value interface{}) error
 				sv.JobArn = ptr.String(jtv)
 			}
 
+		case "jobExecutionsRetryConfig":
+			if err := awsRestjson1_deserializeDocumentJobExecutionsRetryConfig(&sv.JobExecutionsRetryConfig, value); err != nil {
+				return err
+			}
+
 		case "jobExecutionsRolloutConfig":
 			if err := awsRestjson1_deserializeDocumentJobExecutionsRolloutConfig(&sv.JobExecutionsRolloutConfig, value); err != nil {
 				return err
@@ -45019,6 +45029,42 @@ func awsRestjson1_deserializeDocumentJobExecution(v **types.JobExecution, value 
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentJobExecutionsRetryConfig(v **types.JobExecutionsRetryConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.JobExecutionsRetryConfig
+	if *v == nil {
+		sv = &types.JobExecutionsRetryConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "criteriaList":
+			if err := awsRestjson1_deserializeDocumentRetryCriteriaList(&sv.CriteriaList, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentJobExecutionsRolloutConfig(v **types.JobExecutionsRolloutConfig, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -45169,6 +45215,19 @@ func awsRestjson1_deserializeDocumentJobExecutionSummary(v **types.JobExecutionS
 					return fmt.Errorf("expected DateType to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "retryAttempt":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected RetryAttempt to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.RetryAttempt = ptr.Int32(int32(i64))
 			}
 
 		case "startedAt":
@@ -49516,6 +49575,93 @@ func awsRestjson1_deserializeDocumentResources(v *[]string, value interface{}) e
 			}
 			col = jtv
 		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRetryCriteria(v **types.RetryCriteria, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RetryCriteria
+	if *v == nil {
+		sv = &types.RetryCriteria{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "failureType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RetryableFailureType to be of type string, got %T instead", value)
+				}
+				sv.FailureType = types.RetryableFailureType(jtv)
+			}
+
+		case "numberOfRetries":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected NumberOfRetries to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.NumberOfRetries = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRetryCriteriaList(v *[]types.RetryCriteria, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RetryCriteria
+	if *v == nil {
+		cv = []types.RetryCriteria{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RetryCriteria
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentRetryCriteria(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}

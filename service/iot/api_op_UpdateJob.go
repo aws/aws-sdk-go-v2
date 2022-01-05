@@ -43,6 +43,9 @@ type UpdateJobInput struct {
 	// A short text description of the job.
 	Description *string
 
+	// Allows you to create the criteria to retry a job.
+	JobExecutionsRetryConfig *types.JobExecutionsRetryConfig
+
 	// Allows you to create a staged rollout of the job.
 	JobExecutionsRolloutConfig *types.JobExecutionsRolloutConfig
 

@@ -2929,6 +2929,11 @@ func awsRestjson1_serializeDocumentKubernetesNetworkConfigRequest(v *types.Kuber
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.IpFamily) > 0 {
+		ok := object.Key("ipFamily")
+		ok.String(string(v.IpFamily))
+	}
+
 	if v.ServiceIpv4Cidr != nil {
 		ok := object.Key("serviceIpv4Cidr")
 		ok.String(*v.ServiceIpv4Cidr)

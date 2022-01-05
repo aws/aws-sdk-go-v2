@@ -7643,6 +7643,15 @@ func awsRestjson1_deserializeDocumentKubernetesNetworkConfigResponse(v **types.K
 
 	for key, value := range shape {
 		switch key {
+		case "ipFamily":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IpFamily to be of type string, got %T instead", value)
+				}
+				sv.IpFamily = types.IpFamily(jtv)
+			}
+
 		case "serviceIpv4Cidr":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7650,6 +7659,15 @@ func awsRestjson1_deserializeDocumentKubernetesNetworkConfigResponse(v **types.K
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.ServiceIpv4Cidr = ptr.String(jtv)
+			}
+
+		case "serviceIpv6Cidr":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ServiceIpv6Cidr = ptr.String(jtv)
 			}
 
 		default:

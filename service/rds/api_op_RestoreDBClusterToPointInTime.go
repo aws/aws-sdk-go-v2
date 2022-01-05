@@ -273,9 +273,8 @@ type RestoreDBClusterToPointInTimeInput struct {
 	ScalingConfiguration *types.ScalingConfiguration
 
 	// Specifies the storage type to be associated with the each DB instance in the
-	// Multi-AZ DB cluster. Valid values: standard | gp2 | io1 If you specify io1, also
-	// include a value for the Iops parameter. Default: io1 if the Iops parameter is
-	// specified, otherwise gp2 Valid for: Multi-AZ DB clusters only
+	// Multi-AZ DB cluster. Valid values: io1 When specified, a value for the Iops
+	// parameter is required. Default: io1 Valid for: Multi-AZ DB clusters only
 	StorageType *string
 
 	// A list of tags. For more information, see Tagging Amazon RDS Resources

@@ -7,6 +7,7 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,6 +40,10 @@ type RetryPipelineExecutionInput struct {
 	//
 	// This member is required.
 	PipelineExecutionArn *string
+
+	// This configuration, if specified, overrides the parallelism configuration of the
+	// parent pipeline.
+	ParallelismConfiguration *types.ParallelismConfiguration
 
 	noSmithyDocumentSerde
 }

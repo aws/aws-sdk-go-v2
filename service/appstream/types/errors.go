@@ -28,6 +28,46 @@ func (e *ConcurrentModificationException) ErrorCode() string {
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The entitlement already exists.
+type EntitlementAlreadyExistsException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *EntitlementAlreadyExistsException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *EntitlementAlreadyExistsException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *EntitlementAlreadyExistsException) ErrorCode() string {
+	return "EntitlementAlreadyExistsException"
+}
+func (e *EntitlementAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The entitlement can't be found.
+type EntitlementNotFoundException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *EntitlementNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *EntitlementNotFoundException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *EntitlementNotFoundException) ErrorCode() string             { return "EntitlementNotFoundException" }
+func (e *EntitlementNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The image can't be updated because it's not compatible for updates.
 type IncompatibleImageException struct {
 	Message *string

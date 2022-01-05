@@ -370,6 +370,46 @@ func (m *validateOpGetTableObjects) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetTemporaryGluePartitionCredentials struct {
+}
+
+func (*validateOpGetTemporaryGluePartitionCredentials) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetTemporaryGluePartitionCredentials) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetTemporaryGluePartitionCredentialsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetTemporaryGluePartitionCredentialsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetTemporaryGlueTableCredentials struct {
+}
+
+func (*validateOpGetTemporaryGlueTableCredentials) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetTemporaryGlueTableCredentials) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetTemporaryGlueTableCredentialsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetTemporaryGlueTableCredentialsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetWorkUnitResults struct {
 }
 
@@ -782,6 +822,14 @@ func addOpGetTableObjectsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetTableObjects{}, middleware.After)
 }
 
+func addOpGetTemporaryGluePartitionCredentialsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetTemporaryGluePartitionCredentials{}, middleware.After)
+}
+
+func addOpGetTemporaryGlueTableCredentialsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetTemporaryGlueTableCredentials{}, middleware.After)
+}
+
 func addOpGetWorkUnitResultsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetWorkUnitResults{}, middleware.After)
 }
@@ -1076,6 +1124,21 @@ func validateLFTagsList(v []types.LFTagPair) error {
 		if err := validateLFTagPair(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePartitionValueList(v *types.PartitionValueList) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PartitionValueList"}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1553,6 +1616,49 @@ func validateOpGetTableObjectsInput(v *GetTableObjectsInput) error {
 	}
 	if v.TableName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetTemporaryGluePartitionCredentialsInput(v *GetTemporaryGluePartitionCredentialsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetTemporaryGluePartitionCredentialsInput"}
+	if v.TableArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableArn"))
+	}
+	if v.Partition == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Partition"))
+	} else if v.Partition != nil {
+		if err := validatePartitionValueList(v.Partition); err != nil {
+			invalidParams.AddNested("Partition", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SupportedPermissionTypes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SupportedPermissionTypes"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetTemporaryGlueTableCredentialsInput(v *GetTemporaryGlueTableCredentialsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetTemporaryGlueTableCredentialsInput"}
+	if v.TableArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableArn"))
+	}
+	if v.SupportedPermissionTypes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SupportedPermissionTypes"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -36,11 +36,6 @@ type CreatePipelineInput struct {
 	// This member is required.
 	ClientRequestToken *string
 
-	// The JSON pipeline definition of the pipeline.
-	//
-	// This member is required.
-	PipelineDefinition *string
-
 	// The name of the pipeline.
 	//
 	// This member is required.
@@ -51,6 +46,17 @@ type CreatePipelineInput struct {
 	//
 	// This member is required.
 	RoleArn *string
+
+	// This is the configuration that controls the parallelism of the pipeline. If
+	// specified, it applies to all runs of this pipeline by default.
+	ParallelismConfiguration *types.ParallelismConfiguration
+
+	// The JSON pipeline definition of the pipeline.
+	PipelineDefinition *string
+
+	// The location of the pipeline definition stored in Amazon S3. If specified,
+	// SageMaker will retrieve the pipeline definition from this location.
+	PipelineDefinitionS3Location *types.PipelineDefinitionS3Location
 
 	// A description of the pipeline.
 	PipelineDescription *string

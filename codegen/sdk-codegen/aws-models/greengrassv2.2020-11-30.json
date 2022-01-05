@@ -110,6 +110,56 @@
                 }
             }
         },
+        "com.amazonaws.greengrassv2#AssociateServiceRoleToAccount": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.greengrassv2#AssociateServiceRoleToAccountRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.greengrassv2#AssociateServiceRoleToAccountResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.greengrassv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.greengrassv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Associates a Greengrass service role with IoT Greengrass for your Amazon Web Services account in this Amazon Web Services Region. IoT Greengrass\n      uses this role to verify the identity of client devices and manage core device connectivity\n      information. The role must include the <a href=\"https://console.aws.amazon.com/iam/home#/policies/arn:awsiam::aws:policy/service-role/AWSGreengrassResourceAccessRolePolicy\">AWSGreengrassResourceAccessRolePolicy</a> managed policy or a custom policy that\n      defines equivalent permissions for the IoT Greengrass features that you use. For more information, see\n        <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-service-role.html\">Greengrass service role</a> in the <i>IoT Greengrass Version 2 Developer Guide</i>.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/greengrass/servicerole",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.greengrassv2#AssociateServiceRoleToAccountRequest": {
+            "type": "structure",
+            "members": {
+                "roleArn": {
+                    "target": "com.amazonaws.greengrassv2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the service role to associate with IoT Greengrass for your\n      Amazon Web Services account in this Amazon Web Services Region.</p>",
+                        "smithy.api#jsonName": "RoleArn",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.greengrassv2#AssociateServiceRoleToAccountResponse": {
+            "type": "structure",
+            "members": {
+                "associatedAt": {
+                    "target": "com.amazonaws.greengrassv2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the service role was associated with IoT Greengrass for your Amazon Web Services account in this\n      Amazon Web Services Region.</p>",
+                        "smithy.api#jsonName": "AssociatedAt"
+                    }
+                }
+            }
+        },
         "com.amazonaws.greengrassv2#AssociatedClientDevice": {
             "type": "structure",
             "members": {
@@ -168,7 +218,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Associate a list of client devices with a core device. Use this API operation to specify\n      which client devices can discover a core device through cloud discovery. With cloud discovery,\n      client devices connect to IoT Greengrass to retrieve associated core devices' connectivity information\n      and certificates. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-cloud-discovery.html\">Configure cloud\n        discovery</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p>\n    \n         <note>\n            <p>Client devices are local IoT devices that connect to and communicate with an IoT Greengrass core\n        device over MQTT. You can connect client devices to a core device to sync MQTT messages and\n        data to Amazon Web Services IoT Core and interact with client devices in Greengrass components. For more information,\n        see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/interact-with-local-iot-devices.html\">Interact with\n          local IoT devices</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Associates a list of client devices with a core device. Use this API operation to specify\n      which client devices can discover a core device through cloud discovery. With cloud discovery,\n      client devices connect to IoT Greengrass to retrieve associated core devices' connectivity information\n      and certificates. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-cloud-discovery.html\">Configure cloud\n        discovery</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p>\n    \n         <note>\n            <p>Client devices are local IoT devices that connect to and communicate with an IoT Greengrass core\n        device over MQTT. You can connect client devices to a core device to sync MQTT messages and\n        data to Amazon Web Services IoT Core and interact with client devices in Greengrass components. For more information,\n        see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/interact-with-local-iot-devices.html\">Interact with\n          local IoT devices</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/greengrass/v2/coreDevices/{coreDeviceThingName}/associateClientDevices",
@@ -232,7 +282,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disassociate a list of client devices from a core device. After you disassociate a client\n      device from a core device, the client device won't be able to use cloud discovery to retrieve\n      the core device's connectivity information and certificates.</p>",
+                "smithy.api#documentation": "<p>Disassociates a list of client devices from a core device. After you disassociate a client\n      device from a core device, the client device won't be able to use cloud discovery to retrieve\n      the core device's connectivity information and certificates.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/greengrass/v2/coreDevices/{coreDeviceThingName}/disassociateClientDevices",
@@ -265,7 +315,7 @@
                 "errorEntries": {
                     "target": "com.amazonaws.greengrassv2#DisassociateClientDeviceFromCoreDeviceErrorList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of errors (if any) for the entries in the request. Each error entry contains the\n      name of the IoT thing that failed to disassociate.</p>"
+                        "smithy.api#documentation": "<p>The list of any errors for the entries in the request. Each error entry contains the name\n      of the IoT thing that failed to disassociate.</p>"
                     }
                 }
             }
@@ -803,6 +853,42 @@
                 "smithy.api#httpError": 409
             }
         },
+        "com.amazonaws.greengrassv2#ConnectivityInfo": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.greengrassv2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An ID for the connectivity information.</p>",
+                        "smithy.api#jsonName": "Id"
+                    }
+                },
+                "hostAddress": {
+                    "target": "com.amazonaws.greengrassv2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address or DNS address where client devices can connect to an MQTT broker on the\n      Greengrass core device.</p>",
+                        "smithy.api#jsonName": "HostAddress"
+                    }
+                },
+                "portNumber": {
+                    "target": "com.amazonaws.greengrassv2#PortNumberInt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port where the MQTT broker operates on the core device. This port is typically 8883,\n      which is the default port for the MQTT broker component that runs on core devices.</p>",
+                        "smithy.api#jsonName": "PortNumber"
+                    }
+                },
+                "metadata": {
+                    "target": "com.amazonaws.greengrassv2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional metadata to provide to client devices that connect to this core device.</p>",
+                        "smithy.api#jsonName": "Metadata"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about an endpoint and port where client devices can connect to an\n      MQTT broker on a Greengrass core device.</p>"
+            }
+        },
         "com.amazonaws.greengrassv2#CoreDevice": {
             "type": "structure",
             "members": {
@@ -815,7 +901,7 @@
                 "status": {
                     "target": "com.amazonaws.greengrassv2#CoreDeviceStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the core device. Core devices can have the following statuses:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>HEALTHY</code> – The IoT Greengrass Core software and all components run on the core device without issue.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UNHEALTHY</code> – The IoT Greengrass Core software or a component is in a failed state\n          on the core device.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The status of the core device. Core devices can have the following\n      statuses:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>HEALTHY</code> – The IoT Greengrass Core software and all components run on the core device without issue.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UNHEALTHY</code> – The IoT Greengrass Core software or a component is in a failed state\n          on the core device.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "lastStatusUpdateTimestamp": {
@@ -1603,6 +1689,44 @@
                 }
             }
         },
+        "com.amazonaws.greengrassv2#DisassociateServiceRoleFromAccount": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.greengrassv2#DisassociateServiceRoleFromAccountRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.greengrassv2#DisassociateServiceRoleFromAccountResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.greengrassv2#InternalServerException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Disassociates the Greengrass service role from IoT Greengrass for your Amazon Web Services account in this Amazon Web Services Region.\n      Without a service role, IoT Greengrass can't verify the identity of client devices or manage core device\n      connectivity information. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-service-role.html\">Greengrass service role</a> in\n      the <i>IoT Greengrass Version 2 Developer Guide</i>.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/greengrass/servicerole",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.greengrassv2#DisassociateServiceRoleFromAccountRequest": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.greengrassv2#DisassociateServiceRoleFromAccountResponse": {
+            "type": "structure",
+            "members": {
+                "disassociatedAt": {
+                    "target": "com.amazonaws.greengrassv2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the service role was disassociated from IoT Greengrass for your Amazon Web Services account in this\n      Amazon Web Services Region.</p>",
+                        "smithy.api#jsonName": "DisassociatedAt"
+                    }
+                }
+            }
+        },
         "com.amazonaws.greengrassv2#EffectiveDeployment": {
             "type": "structure",
             "members": {
@@ -1882,6 +2006,63 @@
                 }
             }
         },
+        "com.amazonaws.greengrassv2#GetConnectivityInfo": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.greengrassv2#GetConnectivityInfoRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.greengrassv2#GetConnectivityInfoResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.greengrassv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.greengrassv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves connectivity information for a Greengrass core device.</p>\n         <p>Connectivity information includes endpoints and ports where client devices\n      can connect to an MQTT broker on the core device. When a client device\n      calls the <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-discover-api.html\">Greengrass discovery API</a>,\n      IoT Greengrass returns connectivity information for all of the core devices where the client device can\n      connect. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/connect-client-devices.html\">Connect client devices to\n        core devices</a> in the <i>IoT Greengrass Version 2 Developer Guide</i>.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/greengrass/things/{thingName}/connectivityInfo",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.greengrassv2#GetConnectivityInfoRequest": {
+            "type": "structure",
+            "members": {
+                "thingName": {
+                    "target": "com.amazonaws.greengrassv2#CoreDeviceThingName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the core device. This is also the name of the IoT thing.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.greengrassv2#GetConnectivityInfoResponse": {
+            "type": "structure",
+            "members": {
+                "connectivityInfo": {
+                    "target": "com.amazonaws.greengrassv2#connectivityInfoList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connectivity information for the core device.</p>",
+                        "smithy.api#jsonName": "ConnectivityInfo"
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.greengrassv2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message about the connectivity information request.</p>",
+                        "smithy.api#jsonName": "Message"
+                    }
+                }
+            }
+        },
         "com.amazonaws.greengrassv2#GetCoreDevice": {
             "type": "operation",
             "input": {
@@ -2106,6 +2287,51 @@
                 }
             }
         },
+        "com.amazonaws.greengrassv2#GetServiceRoleForAccount": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.greengrassv2#GetServiceRoleForAccountRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.greengrassv2#GetServiceRoleForAccountResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.greengrassv2#InternalServerException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the service role associated with IoT Greengrass for your Amazon Web Services account in this Amazon Web Services Region.\n      IoT Greengrass uses this role to verify the identity of client devices and manage core device\n      connectivity information. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-service-role.html\">Greengrass service role</a> in\n      the <i>IoT Greengrass Version 2 Developer Guide</i>.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/greengrass/servicerole",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.greengrassv2#GetServiceRoleForAccountRequest": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.greengrassv2#GetServiceRoleForAccountResponse": {
+            "type": "structure",
+            "members": {
+                "associatedAt": {
+                    "target": "com.amazonaws.greengrassv2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the service role was associated with IoT Greengrass for your Amazon Web Services account in this\n      Amazon Web Services Region.</p>",
+                        "smithy.api#jsonName": "AssociatedAt"
+                    }
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.greengrassv2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the service role that is associated with IoT Greengrass for your Amazon Web Services account in this\n      Amazon Web Services Region.</p>",
+                        "smithy.api#jsonName": "RoleArn"
+                    }
+                }
+            }
+        },
         "com.amazonaws.greengrassv2#GreengrassV2": {
             "type": "service",
             "traits": {
@@ -2125,6 +2351,9 @@
             },
             "version": "2020-11-30",
             "operations": [
+                {
+                    "target": "com.amazonaws.greengrassv2#AssociateServiceRoleToAccount"
+                },
                 {
                     "target": "com.amazonaws.greengrassv2#BatchAssociateClientDeviceWithCoreDevice"
                 },
@@ -2150,16 +2379,25 @@
                     "target": "com.amazonaws.greengrassv2#DescribeComponent"
                 },
                 {
+                    "target": "com.amazonaws.greengrassv2#DisassociateServiceRoleFromAccount"
+                },
+                {
                     "target": "com.amazonaws.greengrassv2#GetComponent"
                 },
                 {
                     "target": "com.amazonaws.greengrassv2#GetComponentVersionArtifact"
                 },
                 {
+                    "target": "com.amazonaws.greengrassv2#GetConnectivityInfo"
+                },
+                {
                     "target": "com.amazonaws.greengrassv2#GetCoreDevice"
                 },
                 {
                     "target": "com.amazonaws.greengrassv2#GetDeployment"
+                },
+                {
+                    "target": "com.amazonaws.greengrassv2#GetServiceRoleForAccount"
                 },
                 {
                     "target": "com.amazonaws.greengrassv2#ListClientDevicesAssociatedWithCoreDevice"
@@ -2193,6 +2431,9 @@
                 },
                 {
                     "target": "com.amazonaws.greengrassv2#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.greengrassv2#UpdateConnectivityInfo"
                 }
             ]
         },
@@ -3624,6 +3865,15 @@
                 "target": "com.amazonaws.greengrassv2#NonEmptyString"
             }
         },
+        "com.amazonaws.greengrassv2#PortNumberInt": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 65535
+                }
+            }
+        },
         "com.amazonaws.greengrassv2#PublisherString": {
             "type": "string"
         },
@@ -4080,6 +4330,72 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.greengrassv2#UpdateConnectivityInfo": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.greengrassv2#UpdateConnectivityInfoRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.greengrassv2#UpdateConnectivityInfoResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.greengrassv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.greengrassv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates connectivity information for a Greengrass core device.</p>\n         <p>Connectivity information includes endpoints and ports where client devices\n      can connect to an MQTT broker on the core device. When a client device\n      calls the <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-discover-api.html\">Greengrass discovery API</a>,\n      IoT Greengrass returns connectivity information for all of the core devices where the client device can\n      connect. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/connect-client-devices.html\">Connect client devices to\n        core devices</a> in the <i>IoT Greengrass Version 2 Developer Guide</i>.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/greengrass/things/{thingName}/connectivityInfo",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.greengrassv2#UpdateConnectivityInfoRequest": {
+            "type": "structure",
+            "members": {
+                "thingName": {
+                    "target": "com.amazonaws.greengrassv2#CoreDeviceThingName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the core device. This is also the name of the IoT thing.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#jsonName": "ThingName",
+                        "smithy.api#required": {}
+                    }
+                },
+                "connectivityInfo": {
+                    "target": "com.amazonaws.greengrassv2#connectivityInfoList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connectivity information for the core device.</p>",
+                        "smithy.api#jsonName": "ConnectivityInfo",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.greengrassv2#UpdateConnectivityInfoResponse": {
+            "type": "structure",
+            "members": {
+                "version": {
+                    "target": "com.amazonaws.greengrassv2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new version of the connectivity information for the core device.</p>",
+                        "smithy.api#jsonName": "Version"
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.greengrassv2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message about the connectivity information update request.</p>",
+                        "smithy.api#jsonName": "Message"
+                    }
+                }
+            }
+        },
         "com.amazonaws.greengrassv2#ValidationException": {
             "type": "structure",
             "members": {
@@ -4157,6 +4473,12 @@
                         "name": "OTHER"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.greengrassv2#connectivityInfoList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.greengrassv2#ConnectivityInfo"
             }
         }
     }

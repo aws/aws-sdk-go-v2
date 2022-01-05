@@ -38,6 +38,9 @@ type ListJobExecutionsForThingInput struct {
 	// This member is required.
 	ThingName *string
 
+	// The unique identifier you assigned to this job when it was created.
+	JobId *string
+
 	// The maximum number of results to be returned per request.
 	MaxResults *int32
 
