@@ -6,11 +6,10 @@
   "directories": {
     "doc": "docs"
   },
-  "dependencies": {},
   "devDependencies": {
     "autoprefixer": "^10.0.2",
-    "postcss": "^8.1.7",
-    "postcss-cli": "^8.2.0"
+    "postcss": "^8.4.5",
+    "postcss-cli": "^9.1.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

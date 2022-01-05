@@ -16,7 +16,7 @@ the [Docsy](https://www.docsy.dev/) Hugo theme for presentation and formatting o
     ```
    **Output**:
    ```
-   Hugo Static Site Generator v0.78.0-FD62817B/extended darwin/amd64 BuildDate: 2020-11-03T13:20:38Z
+   hugo v0.91.2-1798BD3F+extended darwin/amd64 BuildDate=2021-12-23T15:33:34Z VendorInfo=gohugoio
    ```
 
    This project requires that the `extended` version of Hugo is installed. Follow the download instructions to ensure

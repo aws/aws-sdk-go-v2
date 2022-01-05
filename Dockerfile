@@ -1,10 +1,10 @@
 FROM public.ecr.aws/amazonlinux/amazonlinux:latest AS hugo_build_env
 
-ARG NODEJS_LTS_DOWNLOAD_URL=https://nodejs.org/dist/v14.16.1/node-v14.16.1-linux-x64.tar.xz
-ARG NODEJS_LTS_DOWNLOAD_SHA256=85a89d2f68855282c87851c882d4c4bbea4cd7f888f603722f0240a6e53d89df
+ARG NODEJS_LTS_DOWNLOAD_URL=https://nodejs.org/dist/v16.13.1/node-v16.13.1-linux-x64.tar.xz
+ARG NODEJS_LTS_DOWNLOAD_SHA256=a3721f87cecc0b52b0be8587c20776ac7305db413751db02c55aa2bffac15198
 
-ARG HUGO_DOWNLOAD_URL=https://github.com/gohugoio/hugo/releases/download/v0.82.0/hugo_extended_0.82.0_Linux-64bit.tar.gz
-ARG HUGO_DOWNLOAD_SHA256=171b8f935acc60f74e1eb9edb73fc5e9afaa3affaed4ddafd072ada800ce8748
+ARG HUGO_DOWNLOAD_URL=https://github.com/gohugoio/hugo/releases/download/v0.91.2/hugo_extended_0.91.2_Linux-64bit.tar.gz
+ARG HUGO_DOWNLOAD_SHA256=e9e2b35ebef6ed41581eb18909b8ee02ee9285d209f7d9ecc5caf5207b7dc8e5
 
 RUN yum update -y && yum install -y tar xz gzip git coreutils make
 RUN curl -L -o nodejs.tar.xz ${NODEJS_LTS_DOWNLOAD_URL} && \
