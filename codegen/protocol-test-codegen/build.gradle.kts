@@ -15,12 +15,14 @@
 
 import software.amazon.smithy.gradle.tasks.SmithyBuild
 
+val smithyVersion: String by project
+
 plugins {
     id("software.amazon.smithy") version "0.5.3"
 }
 
 dependencies {
-    implementation("software.amazon.smithy:smithy-aws-protocol-tests:[1.14.0,1.15.0[")
+    implementation("software.amazon.smithy:smithy-aws-protocol-tests:$smithyVersion")
     implementation(project(":smithy-aws-go-codegen"))
 }
 

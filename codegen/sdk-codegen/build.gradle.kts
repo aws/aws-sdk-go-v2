@@ -18,11 +18,11 @@ import software.amazon.smithy.model.node.Node
 import software.amazon.smithy.model.shapes.ServiceShape
 import software.amazon.smithy.gradle.tasks.SmithyBuild
 import software.amazon.smithy.aws.traits.ServiceTrait
-import kotlin.streams.toList
 
 buildscript {
+    val smithyVersion: String by project
     dependencies {
-        "classpath"("software.amazon.smithy:smithy-aws-traits:[1.13.1,2.0.0[")
+        "classpath"("software.amazon.smithy:smithy-aws-traits:$smithyVersion")
     }
 }
 
