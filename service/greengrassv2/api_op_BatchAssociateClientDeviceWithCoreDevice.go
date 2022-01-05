@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associate a list of client devices with a core device. Use this API operation to
-// specify which client devices can discover a core device through cloud discovery.
-// With cloud discovery, client devices connect to IoT Greengrass to retrieve
-// associated core devices' connectivity information and certificates. For more
-// information, see Configure cloud discovery
+// Associates a list of client devices with a core device. Use this API operation
+// to specify which client devices can discover a core device through cloud
+// discovery. With cloud discovery, client devices connect to IoT Greengrass to
+// retrieve associated core devices' connectivity information and certificates. For
+// more information, see Configure cloud discovery
 // (https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-cloud-discovery.html)
 // in the IoT Greengrass V2 Developer Guide. Client devices are local IoT devices
 // that connect to and communicate with an IoT Greengrass core device over MQTT.

@@ -1681,7 +1681,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a dataset.</p>",
+                "smithy.api#documentation": "<p>Creates a dataset. This operation doesn't support datasets that include uploaded files as a source.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/accounts/{AwsAccountId}/data-sets",
@@ -2580,7 +2580,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates and starts a new SPICE ingestion on a dataset</p>\n\t\t\n\t\t       <p>Any ingestions operating on tagged datasets inherit the same tags automatically for use in\n\t\t\taccess control. For an example, see <a href=\"http://aws.amazon.com/premiumsupport/knowledge-center/iam-ec2-resource-tags/\">How do I create an IAM policy to control access to Amazon EC2 resources using\n\t\t\t\ttags?</a> in the Amazon Web Services Knowledge Center. Tags are visible on the tagged dataset, but not on the ingestion resource.</p>",
+                "smithy.api#documentation": "<p>Creates and starts a new SPICE ingestion for a dataset. You can manually refresh datasets in\n\t\t\tan Enterprise edition account 32 times in a 24-hour period. You can manually refresh\n\t\t\tdatasets in a Standard edition account 8 times in a 24-hour period. Each 24-hour period\n\t\t\tis measured starting 24 hours before the current date and time.</p>\n\t\t\n\t\t       <p>Any ingestions operating on tagged datasets inherit the same tags automatically for use in\n\t\t\taccess control. For an example, see <a href=\"http://aws.amazon.com/premiumsupport/knowledge-center/iam-ec2-resource-tags/\">How do I create an IAM policy to control access to Amazon EC2 resources using\n\t\t\t\ttags?</a> in the Amazon Web Services Knowledge Center. Tags are visible on the tagged dataset, but not on the ingestion resource.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/accounts/{AwsAccountId}/data-sets/{DataSetId}/ingestions/{IngestionId}",
@@ -6800,7 +6800,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes a dataset. </p>",
+                "smithy.api#documentation": "<p>Describes a dataset. This operation doesn't support datasets that include uploaded files as a source.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/accounts/{AwsAccountId}/data-sets/{DataSetId}",
@@ -17602,7 +17602,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a dataset.</p>",
+                "smithy.api#documentation": "<p>Updates a dataset. This operation doesn't support datasets that include uploaded files as a source.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/accounts/{AwsAccountId}/data-sets/{DataSetId}",

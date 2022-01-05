@@ -234,6 +234,94 @@ type DomainJoinInfo struct {
 	noSmithyDocumentSerde
 }
 
+// The application associated to an entitlement. Access is controlled based on user
+// attributes.
+type EntitledApplication struct {
+
+	// The identifier of the application.
+	//
+	// This member is required.
+	ApplicationIdentifier *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies an entitlement. Entitlements control access to specific applications
+// within a stack, based on user attributes. Entitlements apply to SAML 2.0
+// federated user identities. Amazon AppStream 2.0 user pool and streaming URL
+// users are entitled to all applications in a stack. Entitlements don't apply to
+// the desktop stream view application, or to applications managed by a dynamic app
+// provider using the Dynamic Application Framework.
+type Entitlement struct {
+
+	// Specifies whether all or selected apps are entitled.
+	//
+	// This member is required.
+	AppVisibility AppVisibility
+
+	// The attributes of the entitlement.
+	//
+	// This member is required.
+	Attributes []EntitlementAttribute
+
+	// The name of the entitlement.
+	//
+	// This member is required.
+	Name *string
+
+	// The name of the stack with which the entitlement is associated.
+	//
+	// This member is required.
+	StackName *string
+
+	// The time when the entitlement was created.
+	CreatedTime *time.Time
+
+	// The description of the entitlement.
+	Description *string
+
+	// The time when the entitlement was last modified.
+	LastModifiedTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// An attribute associated with an entitlement. Application entitlements work by
+// matching a supported SAML 2.0 attribute name to a value when a user identity
+// federates to an Amazon AppStream 2.0 SAML application.
+type EntitlementAttribute struct {
+
+	// A supported AWS IAM SAML PrincipalTag attribute that is matched to the
+	// associated value when a user identity federates into an Amazon AppStream 2.0
+	// SAML application. The following are valid values:
+	//
+	// * roles
+	//
+	// * department
+	//
+	// *
+	// organization
+	//
+	// * groups
+	//
+	// * title
+	//
+	// * costCenter
+	//
+	// * userType
+	//
+	// This member is required.
+	Name *string
+
+	// A value that is matched to a supported SAML attribute name when a user identity
+	// federates into an Amazon AppStream 2.0 SAML application.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes a fleet.
 type Fleet struct {
 

@@ -30,6 +30,26 @@ func (m *validateOpAssociateApplicationFleet) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAssociateApplicationToEntitlement struct {
+}
+
+func (*validateOpAssociateApplicationToEntitlement) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateApplicationToEntitlement) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateApplicationToEntitlementInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateApplicationToEntitlementInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAssociateFleet struct {
 }
 
@@ -165,6 +185,26 @@ func (m *validateOpCreateDirectoryConfig) HandleInitialize(ctx context.Context, 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateDirectoryConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateEntitlement struct {
+}
+
+func (*validateOpCreateEntitlement) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateEntitlement) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateEntitlementInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateEntitlementInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -370,6 +410,26 @@ func (m *validateOpDeleteDirectoryConfig) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteEntitlement struct {
+}
+
+func (*validateOpDeleteEntitlement) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteEntitlement) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteEntitlementInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteEntitlementInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteFleet struct {
 }
 
@@ -490,6 +550,26 @@ func (m *validateOpDeleteUser) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeEntitlements struct {
+}
+
+func (*validateOpDescribeEntitlements) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeEntitlements) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeEntitlementsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeEntitlementsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeImagePermissions struct {
 }
 
@@ -590,6 +670,26 @@ func (m *validateOpDisassociateApplicationFleet) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisassociateApplicationFromEntitlement struct {
+}
+
+func (*validateOpDisassociateApplicationFromEntitlement) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateApplicationFromEntitlement) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateApplicationFromEntitlementInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateApplicationFromEntitlementInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDisassociateFleet struct {
 }
 
@@ -685,6 +785,26 @@ func (m *validateOpListAssociatedStacks) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListAssociatedStacksInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListEntitledApplications struct {
+}
+
+func (*validateOpListEntitledApplications) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListEntitledApplications) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListEntitledApplicationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListEntitledApplicationsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -870,6 +990,26 @@ func (m *validateOpUpdateDirectoryConfig) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateEntitlement struct {
+}
+
+func (*validateOpUpdateEntitlement) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateEntitlement) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateEntitlementInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateEntitlementInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateFleet struct {
 }
 
@@ -934,6 +1074,10 @@ func addOpAssociateApplicationFleetValidationMiddleware(stack *middleware.Stack)
 	return stack.Initialize.Add(&validateOpAssociateApplicationFleet{}, middleware.After)
 }
 
+func addOpAssociateApplicationToEntitlementValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateApplicationToEntitlement{}, middleware.After)
+}
+
 func addOpAssociateFleetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateFleet{}, middleware.After)
 }
@@ -960,6 +1104,10 @@ func addOpCreateApplicationValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCreateDirectoryConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDirectoryConfig{}, middleware.After)
+}
+
+func addOpCreateEntitlementValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateEntitlement{}, middleware.After)
 }
 
 func addOpCreateFleetValidationMiddleware(stack *middleware.Stack) error {
@@ -1002,6 +1150,10 @@ func addOpDeleteDirectoryConfigValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpDeleteDirectoryConfig{}, middleware.After)
 }
 
+func addOpDeleteEntitlementValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteEntitlement{}, middleware.After)
+}
+
 func addOpDeleteFleetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteFleet{}, middleware.After)
 }
@@ -1026,6 +1178,10 @@ func addOpDeleteUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteUser{}, middleware.After)
 }
 
+func addOpDescribeEntitlementsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeEntitlements{}, middleware.After)
+}
+
 func addOpDescribeImagePermissionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeImagePermissions{}, middleware.After)
 }
@@ -1046,6 +1202,10 @@ func addOpDisassociateApplicationFleetValidationMiddleware(stack *middleware.Sta
 	return stack.Initialize.Add(&validateOpDisassociateApplicationFleet{}, middleware.After)
 }
 
+func addOpDisassociateApplicationFromEntitlementValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateApplicationFromEntitlement{}, middleware.After)
+}
+
 func addOpDisassociateFleetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateFleet{}, middleware.After)
 }
@@ -1064,6 +1224,10 @@ func addOpListAssociatedFleetsValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpListAssociatedStacksValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAssociatedStacks{}, middleware.After)
+}
+
+func addOpListEntitledApplicationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListEntitledApplications{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1100,6 +1264,10 @@ func addOpUpdateApplicationValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateDirectoryConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateDirectoryConfig{}, middleware.After)
+}
+
+func addOpUpdateEntitlementValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateEntitlement{}, middleware.After)
 }
 
 func addOpUpdateFleetValidationMiddleware(stack *middleware.Stack) error {
@@ -1165,6 +1333,41 @@ func validateComputeCapacity(v *types.ComputeCapacity) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ComputeCapacity"}
 	if v.DesiredInstances == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DesiredInstances"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEntitlementAttribute(v *types.EntitlementAttribute) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EntitlementAttribute"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEntitlementAttributeList(v []types.EntitlementAttribute) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EntitlementAttributeList"}
+	for i := range v {
+		if err := validateEntitlementAttribute(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1357,6 +1560,27 @@ func validateOpAssociateApplicationFleetInput(v *AssociateApplicationFleetInput)
 	}
 }
 
+func validateOpAssociateApplicationToEntitlementInput(v *AssociateApplicationToEntitlementInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateApplicationToEntitlementInput"}
+	if v.StackName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StackName"))
+	}
+	if v.EntitlementName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EntitlementName"))
+	}
+	if v.ApplicationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAssociateFleetInput(v *AssociateFleetInput) error {
 	if v == nil {
 		return nil
@@ -1511,6 +1735,34 @@ func validateOpCreateDirectoryConfigInput(v *CreateDirectoryConfigInput) error {
 	if v.ServiceAccountCredentials != nil {
 		if err := validateServiceAccountCredentials(v.ServiceAccountCredentials); err != nil {
 			invalidParams.AddNested("ServiceAccountCredentials", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateEntitlementInput(v *CreateEntitlementInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateEntitlementInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.StackName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StackName"))
+	}
+	if len(v.AppVisibility) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AppVisibility"))
+	}
+	if v.Attributes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Attributes"))
+	} else if v.Attributes != nil {
+		if err := validateEntitlementAttributeList(v.Attributes); err != nil {
+			invalidParams.AddNested("Attributes", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1718,6 +1970,24 @@ func validateOpDeleteDirectoryConfigInput(v *DeleteDirectoryConfigInput) error {
 	}
 }
 
+func validateOpDeleteEntitlementInput(v *DeleteEntitlementInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteEntitlementInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.StackName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StackName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteFleetInput(v *DeleteFleetInput) error {
 	if v == nil {
 		return nil
@@ -1814,6 +2084,21 @@ func validateOpDeleteUserInput(v *DeleteUserInput) error {
 	}
 }
 
+func validateOpDescribeEntitlementsInput(v *DescribeEntitlementsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeEntitlementsInput"}
+	if v.StackName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StackName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeImagePermissionsInput(v *DescribeImagePermissionsInput) error {
 	if v == nil {
 		return nil
@@ -1898,6 +2183,27 @@ func validateOpDisassociateApplicationFleetInput(v *DisassociateApplicationFleet
 	}
 }
 
+func validateOpDisassociateApplicationFromEntitlementInput(v *DisassociateApplicationFromEntitlementInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateApplicationFromEntitlementInput"}
+	if v.StackName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StackName"))
+	}
+	if v.EntitlementName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EntitlementName"))
+	}
+	if v.ApplicationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDisassociateFleetInput(v *DisassociateFleetInput) error {
 	if v == nil {
 		return nil
@@ -1971,6 +2277,24 @@ func validateOpListAssociatedStacksInput(v *ListAssociatedStacksInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListAssociatedStacksInput"}
 	if v.FleetName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FleetName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListEntitledApplicationsInput(v *ListEntitledApplicationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListEntitledApplicationsInput"}
+	if v.StackName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StackName"))
+	}
+	if v.EntitlementName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EntitlementName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2121,6 +2445,29 @@ func validateOpUpdateDirectoryConfigInput(v *UpdateDirectoryConfigInput) error {
 	if v.ServiceAccountCredentials != nil {
 		if err := validateServiceAccountCredentials(v.ServiceAccountCredentials); err != nil {
 			invalidParams.AddNested("ServiceAccountCredentials", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateEntitlementInput(v *UpdateEntitlementInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateEntitlementInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.StackName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StackName"))
+	}
+	if v.Attributes != nil {
+		if err := validateEntitlementAttributeList(v.Attributes); err != nil {
+			invalidParams.AddNested("Attributes", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

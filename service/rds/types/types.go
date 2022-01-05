@@ -637,7 +637,7 @@ type DBCluster struct {
 	// Specifies whether the DB cluster is encrypted.
 	StorageEncrypted bool
 
-	// The storage type associated with DB instance. This setting is only for
+	// The storage type associated with the DB cluster. This setting is only for
 	// non-Aurora Multi-AZ DB clusters.
 	StorageType *string
 
@@ -904,7 +904,14 @@ type DBClusterSnapshot struct {
 	// value.
 	SourceDBClusterSnapshotArn *string
 
-	// Specifies the status of this DB cluster snapshot.
+	// Specifies the status of this DB cluster snapshot. Valid statuses are the
+	// following:
+	//
+	// * available
+	//
+	// * copying
+	//
+	// * creating
 	Status *string
 
 	// Specifies whether the DB cluster snapshot is encrypted.

@@ -55,6 +55,10 @@ type DescribeJobTemplateOutput struct {
 	// An S3 link to the job document.
 	DocumentSource *string
 
+	// The configuration that determines how many retries are allowed for each failure
+	// type for a job.
+	JobExecutionsRetryConfig *types.JobExecutionsRetryConfig
+
 	// Allows you to create a staged rollout of a job.
 	JobExecutionsRolloutConfig *types.JobExecutionsRolloutConfig
 

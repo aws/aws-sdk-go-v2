@@ -44,6 +44,8 @@ type AddTagsInput struct {
 	ResourceId *string
 
 	// Contains a list of tags, up to a limit of 50
+	//
+	// This member is required.
 	TagsList []types.Tag
 
 	noSmithyDocumentSerde

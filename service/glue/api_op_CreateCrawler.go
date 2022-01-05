@@ -67,6 +67,8 @@ type CreateCrawlerInput struct {
 	// A description of the new crawler.
 	Description *string
 
+	LakeFormationConfiguration *types.LakeFormationConfiguration
+
 	// Specifies data lineage configuration settings for the crawler.
 	LineageConfiguration *types.LineageConfiguration
 

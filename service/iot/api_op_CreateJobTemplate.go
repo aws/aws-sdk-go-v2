@@ -59,6 +59,9 @@ type CreateJobTemplateInput struct {
 	// The ARN of the job to use as the basis for the job template.
 	JobArn *string
 
+	// Allows you to create the criteria to retry a job.
+	JobExecutionsRetryConfig *types.JobExecutionsRetryConfig
+
 	// Allows you to create a staged rollout of a job.
 	JobExecutionsRolloutConfig *types.JobExecutionsRolloutConfig
 

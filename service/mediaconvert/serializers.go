@@ -7724,6 +7724,11 @@ func awsRestjson1_serializeDocumentNoiseReducerTemporalFilterSettings(v *types.N
 		ok.String(string(v.PostTemporalSharpening))
 	}
 
+	if len(v.PostTemporalSharpeningStrength) > 0 {
+		ok := object.Key("postTemporalSharpeningStrength")
+		ok.String(string(v.PostTemporalSharpeningStrength))
+	}
+
 	if v.Speed != 0 {
 		ok := object.Key("speed")
 		ok.Integer(v.Speed)

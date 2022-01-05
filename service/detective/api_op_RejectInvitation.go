@@ -11,7 +11,10 @@ import (
 )
 
 // Rejects an invitation to contribute the account data to a behavior graph. This
-// operation must be called by a member account that has the INVITED status.
+// operation must be called by an invited member account that has the INVITED
+// status. RejectInvitation cannot be called by an organization account in the
+// organization behavior graph. In the organization behavior graph, organization
+// accounts do not receive an invitation.
 func (c *Client) RejectInvitation(ctx context.Context, params *RejectInvitationInput, optFns ...func(*Options)) (*RejectInvitationOutput, error) {
 	if params == nil {
 		params = &RejectInvitationInput{}

@@ -352,6 +352,50 @@ type Event struct {
 	noSmithyDocumentSerde
 }
 
+// A storage lake of event data against which you can run complex SQL-based
+// queries. An event data store can include events that you have logged on your
+// account from the last 90 to 2555 days (about three months to up to seven years).
+// To select events for an event data store, use advanced event selectors
+// (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html#creating-data-event-selectors-advanced).
+type EventDataStore struct {
+
+	// The advanced event selectors that were used to select events for the data store.
+	AdvancedEventSelectors []AdvancedEventSelector
+
+	// The timestamp of the event data store's creation.
+	CreatedTimestamp *time.Time
+
+	// The ARN of the event data store.
+	EventDataStoreArn *string
+
+	// Indicates whether the event data store includes events from all regions, or only
+	// from the region in which it was created.
+	MultiRegionEnabled *bool
+
+	// The name of the event data store.
+	Name *string
+
+	// Indicates that an event data store is collecting logged events for an
+	// organization.
+	OrganizationEnabled *bool
+
+	// The retention period, in days.
+	RetentionPeriod *int32
+
+	// The status of an event data store. Values are ENABLED and PENDING_DELETION.
+	Status EventDataStoreStatus
+
+	// Indicates whether the event data store is protected from termination.
+	TerminationProtectionEnabled *bool
+
+	// The timestamp showing when an event data store was updated, if applicable.
+	// UpdatedTimestamp is always either the same or newer than the time shown in
+	// CreatedTimestamp.
+	UpdatedTimestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Use event selectors to further specify the management and data event settings
 // for your trail. By default, trails created without specific event selectors will
 // be configured to log all read and write management events, and no data events.
@@ -404,8 +448,8 @@ type EventSelector struct {
 // A JSON string that contains a list of insight types that are logged on a trail.
 type InsightSelector struct {
 
-	// The type of Insights events to log on a trail. The valid Insights type in this
-	// release is ApiCallRateInsight.
+	// The type of insights to log on a trail. ApiCallRateInsight and
+	// ApiErrorRateInsight are valid insight types.
 	InsightType InsightType
 
 	noSmithyDocumentSerde
@@ -441,6 +485,55 @@ type PublicKey struct {
 
 	// The DER encoded public key value in PKCS#1 format.
 	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+// A SQL string of criteria about events that you want to collect in an event data
+// store.
+type Query struct {
+
+	// The creation time of a query.
+	CreationTime *time.Time
+
+	// The ID of a query.
+	QueryId *string
+
+	// The status of the query. This can be QUEUED, RUNNING, FINISHED, FAILED, or
+	// CANCELLED.
+	QueryStatus QueryStatus
+
+	noSmithyDocumentSerde
+}
+
+// Metadata about a query, such as the number of results.
+type QueryStatistics struct {
+
+	// The number of results returned.
+	ResultsCount *int32
+
+	// The total number of results returned by a query.
+	TotalResultsCount *int32
+
+	noSmithyDocumentSerde
+}
+
+// Gets metadata about a query, including the number of events that were matched,
+// the total number of events scanned, the query run time in milliseconds, and the
+// query's creation time.
+type QueryStatisticsForDescribeQuery struct {
+
+	// The creation time of the query.
+	CreationTime *time.Time
+
+	// The number of events that matched a query.
+	EventsMatched *int64
+
+	// The number of events that the query scanned in the event data store.
+	EventsScanned *int64
+
+	// The query's run time, in milliseconds.
+	ExecutionTimeInMillis *int32
 
 	noSmithyDocumentSerde
 }

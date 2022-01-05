@@ -112,6 +112,12 @@
                     "target": "com.amazonaws.lakeformation#GetTableObjects"
                 },
                 {
+                    "target": "com.amazonaws.lakeformation#GetTemporaryGluePartitionCredentials"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#GetTemporaryGlueTableCredentials"
+                },
+                {
                     "target": "com.amazonaws.lakeformation#GetWorkUnitResults"
                 },
                 {
@@ -191,6 +197,9 @@
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
             }
+        },
+        "com.amazonaws.lakeformation#AccessKeyIdString": {
+            "type": "string"
         },
         "com.amazonaws.lakeformation#AddLFTagsToResource": {
             "type": "operation",
@@ -320,6 +329,36 @@
             "traits": {
                 "smithy.api#documentation": "<p>A resource to be created or added already exists.</p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.lakeformation#AuditContext": {
+            "type": "structure",
+            "members": {
+                "AdditionalAuditContext": {
+                    "target": "com.amazonaws.lakeformation#AuditContextString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter engine can populate the 'AdditionalAuditContext' information with the request ID for you to track. This information will be displayed in CloudTrail log in your account.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure used to include auditing information on the privileged API. </p>"
+            }
+        },
+        "com.amazonaws.lakeformation#AuditContextString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"
+            }
+        },
+        "com.amazonaws.lakeformation#AuthorizedSessionTagValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lakeformation#NameString"
             }
         },
         "com.amazonaws.lakeformation#BatchGrantPermissions": {
@@ -874,6 +913,16 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.lakeformation#CredentialTimeoutDurationSecondInteger": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 900,
+                    "max": 43200
+                }
+            }
+        },
         "com.amazonaws.lakeformation#DataCellsFilter": {
             "type": "structure",
             "members": {
@@ -920,7 +969,7 @@
                 "ColumnWildcard": {
                     "target": "com.amazonaws.lakeformation#ColumnWildcard",
                     "traits": {
-                        "smithy.api#documentation": "<p>A wildcard with exclusions.</p>"
+                        "smithy.api#documentation": "<p>A wildcard with exclusions.</p>\n    \n         <p>You must specify either a <code>ColumnNames</code> list or the\n      <code>ColumnWildCard</code>. </p>"
                     }
                 }
             },
@@ -977,7 +1026,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The AWS Lake Formation principal. Supported principals are IAM users or IAM roles.</p>"
+                "smithy.api#documentation": "<p>The Lake Formation principal. Supported principals are IAM users\n      or IAM roles.</p>"
             }
         },
         "com.amazonaws.lakeformation#DataLakePrincipalList": {
@@ -1065,6 +1114,24 @@
                     "target": "com.amazonaws.lakeformation#TrustedResourceOwners",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of the resource-owning account IDs that the caller's account can use to share their user access details (user ARNs). The user ARNs can be logged in the resource owner's CloudTrail log.</p>\n\t\n\t        <p>You may want to specify this property when you are in a high-trust boundary, such as the same team or company. </p>"
+                    }
+                },
+                "AllowExternalDataFiltering": {
+                    "target": "com.amazonaws.lakeformation#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether to allow Amazon EMR clusters to access data managed by Lake Formation. </p>\n\t\n         <p>If true, you allow Amazon EMR clusters to access data in Amazon S3 locations that are registered with Lake Formation.</p>\n\t\n         <p>If false or null, no Amazon EMR clusters will be able to access data in Amazon S3 locations that are registered with Lake Formation.</p>\n \n         <p>For more information, see <a href=\"https://docs-aws.amazon.com/lake-formation/latest/dg/getting-started-setup.html#emr-switch\">(Optional) Allow Data Filtering on Amazon EMR</a>.</p>"
+                    }
+                },
+                "ExternalDataFilteringAllowList": {
+                    "target": "com.amazonaws.lakeformation#DataLakePrincipalList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the account IDs of Amazon Web Services accounts with Amazon EMR clusters that are to perform data filtering.></p>"
+                    }
+                },
+                "AuthorizedSessionTagValueList": {
+                    "target": "com.amazonaws.lakeformation#AuthorizedSessionTagValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lake Formation relies on a privileged process secured by Amazon EMR or the third party integrator to tag the user's role while assuming it. Lake Formation will publish the acceptable key-value pair, for example key = \"LakeFormationTrustedCaller\" and value = \"TRUE\" and the third party integrator must properly tag the temporary security credentials that will be used to call Lake Formation's administrative APIs.</p>"
                     }
                 }
             },
@@ -1614,6 +1681,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>Statistics related to the processing of a query statement.</p>"
             }
+        },
+        "com.amazonaws.lakeformation#ExpirationTimestamp": {
+            "type": "timestamp"
         },
         "com.amazonaws.lakeformation#ExpiredException": {
             "type": "structure",
@@ -2317,6 +2387,219 @@
                     "target": "com.amazonaws.lakeformation#TokenString",
                     "traits": {
                         "smithy.api#documentation": "<p>A continuation token indicating whether additional data is available.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#GetTemporaryGluePartitionCredentials": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lakeformation#GetTemporaryGluePartitionCredentialsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lakeformation#GetTemporaryGluePartitionCredentialsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lakeformation#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#OperationTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#PermissionTypeMismatchException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This API is identical to <code>GetTemporaryTableCredentials</code> except that this is used when the target Data Catalog resource is of type Partition.  Lake Formation restricts the permission of the vended credentials with the same scope down policy which restricts access to a single Amazon S3 prefix.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/GetTemporaryGluePartitionCredentials",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#GetTemporaryGluePartitionCredentialsRequest": {
+            "type": "structure",
+            "members": {
+                "TableArn": {
+                    "target": "com.amazonaws.lakeformation#ResourceArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the partitions' table.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Partition": {
+                    "target": "com.amazonaws.lakeformation#PartitionValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of partition values identifying a single partition.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Permissions": {
+                    "target": "com.amazonaws.lakeformation#PermissionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the request based on the user having been granted a list of specified permissions on the requested resource(s).</p>"
+                    }
+                },
+                "DurationSeconds": {
+                    "target": "com.amazonaws.lakeformation#CredentialTimeoutDurationSecondInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time period, between 900 and 21,600 seconds, for the timeout of the temporary credentials.</p>"
+                    }
+                },
+                "AuditContext": {
+                    "target": "com.amazonaws.lakeformation#AuditContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure representing context to access a resource (column names, query ID, etc).</p>"
+                    }
+                },
+                "SupportedPermissionTypes": {
+                    "target": "com.amazonaws.lakeformation#PermissionTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of supported permission types for the partition. Valid values are <code>COLUMN_PERMISSION</code> and <code>CELL_FILTER_PERMISSION</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#GetTemporaryGluePartitionCredentialsResponse": {
+            "type": "structure",
+            "members": {
+                "AccessKeyId": {
+                    "target": "com.amazonaws.lakeformation#AccessKeyIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The access key ID for the temporary credentials.</p>"
+                    }
+                },
+                "SecretAccessKey": {
+                    "target": "com.amazonaws.lakeformation#SecretAccessKeyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The secret key for the temporary credentials.</p>"
+                    }
+                },
+                "SessionToken": {
+                    "target": "com.amazonaws.lakeformation#SessionTokenString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The session token for the temporary credentials.</p>"
+                    }
+                },
+                "Expiration": {
+                    "target": "com.amazonaws.lakeformation#ExpirationTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the temporary credentials expire.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#GetTemporaryGlueTableCredentials": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lakeformation#GetTemporaryGlueTableCredentialsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lakeformation#GetTemporaryGlueTableCredentialsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lakeformation#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#OperationTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#PermissionTypeMismatchException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Allows a caller in a secure environment to assume a role with permission to access Amazon S3. In order to vend such credentials, Lake Formation assumes the role associated with a registered location, for example an Amazon S3 bucket, with a scope down policy which restricts the access to a single prefix.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/GetTemporaryGlueTableCredentials",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#GetTemporaryGlueTableCredentialsRequest": {
+            "type": "structure",
+            "members": {
+                "TableArn": {
+                    "target": "com.amazonaws.lakeformation#ResourceArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN identifying a table in the Data Catalog for the temporary credentials request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Permissions": {
+                    "target": "com.amazonaws.lakeformation#PermissionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the request based on the user having been granted a list of specified permissions on the requested resource(s).</p>"
+                    }
+                },
+                "DurationSeconds": {
+                    "target": "com.amazonaws.lakeformation#CredentialTimeoutDurationSecondInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time period, between 900 and 21,600 seconds, for the timeout of the temporary credentials.</p>"
+                    }
+                },
+                "AuditContext": {
+                    "target": "com.amazonaws.lakeformation#AuditContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure representing context to access a resource (column names, query ID, etc).</p>"
+                    }
+                },
+                "SupportedPermissionTypes": {
+                    "target": "com.amazonaws.lakeformation#PermissionTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of supported permission types for the table. Valid values are <code>COLUMN_PERMISSION</code> and <code>CELL_FILTER_PERMISSION</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#GetTemporaryGlueTableCredentialsResponse": {
+            "type": "structure",
+            "members": {
+                "AccessKeyId": {
+                    "target": "com.amazonaws.lakeformation#AccessKeyIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The access key ID for the temporary credentials.</p>"
+                    }
+                },
+                "SecretAccessKey": {
+                    "target": "com.amazonaws.lakeformation#SecretAccessKeyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The secret key for the temporary credentials.</p>"
+                    }
+                },
+                "SessionToken": {
+                    "target": "com.amazonaws.lakeformation#SessionTokenString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The session token for the temporary credentials.</p>"
+                    }
+                },
+                "Expiration": {
+                    "target": "com.amazonaws.lakeformation#ExpirationTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the temporary credentials expire.</p>"
                     }
                 }
             }
@@ -3421,6 +3704,21 @@
                 "smithy.api#documentation": "<p>A structure containing a list of partition values and table objects.</p>"
             }
         },
+        "com.amazonaws.lakeformation#PartitionValueList": {
+            "type": "structure",
+            "members": {
+                "Values": {
+                    "target": "com.amazonaws.lakeformation#ValueStringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of partition values.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains a list of values defining partitions.</p>"
+            }
+        },
         "com.amazonaws.lakeformation#PartitionValueString": {
             "type": "string",
             "traits": {
@@ -3519,6 +3817,48 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.lakeformation#Permission"
+            }
+        },
+        "com.amazonaws.lakeformation#PermissionType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "COLUMN_PERMISSION",
+                        "name": "COLUMN_PERMISSION"
+                    },
+                    {
+                        "value": "CELL_FILTER_PERMISSION",
+                        "name": "CELL_FILTER_PERMISSION"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lakeformation#PermissionTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lakeformation#PermissionType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#PermissionTypeMismatchException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.lakeformation#MessageString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message describing the problem.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The engine does not support filtering data based on the enforced permissions. For example, if you call the <code>GetTemporaryGlueTableCredentials</code> operation with <code>SupportedPermissionType</code> equal to <code>ColumnPermission</code>, but cell-level permissions exist on the table, this exception is thrown.</p>",
+                "smithy.api#error": "client"
             }
         },
         "com.amazonaws.lakeformation#PlanningStatistics": {
@@ -4350,6 +4690,12 @@
                     }
                 }
             }
+        },
+        "com.amazonaws.lakeformation#SecretAccessKeyString": {
+            "type": "string"
+        },
+        "com.amazonaws.lakeformation#SessionTokenString": {
+            "type": "string"
         },
         "com.amazonaws.lakeformation#StartQueryPlanning": {
             "type": "operation",
@@ -5265,6 +5611,20 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A response indicating the success of failure of the operation.</p>"
                     }
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#ValueString": {
+            "type": "string"
+        },
+        "com.amazonaws.lakeformation#ValueStringList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lakeformation#ValueString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
                 }
             }
         },

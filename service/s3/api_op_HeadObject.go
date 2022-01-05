@@ -170,11 +170,8 @@ type HeadObjectInput struct {
 	// object.
 	PartNumber int32
 
-	// Downloads the specified range bytes of an object. For more information about the
-	// HTTP Range header, see
-	// http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35
-	// (http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35). Amazon S3
-	// doesn't support retrieving multiple ranges of data per GET request.
+	// Because HeadObject returns only the metadata for an object, this parameter has
+	// no effect.
 	Range *string
 
 	// Confirms that the requester knows that they will be charged for the request.

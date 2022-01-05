@@ -28,6 +28,8 @@
         "api_op_GetQueryStatistics.go",
         "api_op_GetResourceLFTags.go",
         "api_op_GetTableObjects.go",
+        "api_op_GetTemporaryGluePartitionCredentials.go",
+        "api_op_GetTemporaryGlueTableCredentials.go",
         "api_op_GetWorkUnitResults.go",
         "api_op_GetWorkUnits.go",
         "api_op_GrantPermissions.go",

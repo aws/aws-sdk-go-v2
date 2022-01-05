@@ -364,6 +364,15 @@
                     "target": "com.amazonaws.glue#GetTriggers"
                 },
                 {
+                    "target": "com.amazonaws.glue#GetUnfilteredPartitionMetadata"
+                },
+                {
+                    "target": "com.amazonaws.glue#GetUnfilteredPartitionsMetadata"
+                },
+                {
+                    "target": "com.amazonaws.glue#GetUnfilteredTableMetadata"
+                },
+                {
                     "target": "com.amazonaws.glue#GetUserDefinedFunction"
                 },
                 {
@@ -563,6 +572,15 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.glue#AccountId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 12
+                }
+            }
+        },
         "com.amazonaws.glue#Action": {
             "type": "structure",
             "members": {
@@ -639,6 +657,23 @@
         },
         "com.amazonaws.glue#AttemptCount": {
             "type": "integer"
+        },
+        "com.amazonaws.glue#AuditContext": {
+            "type": "structure",
+            "members": {
+                "AdditionalAuditContext": {
+                    "target": "com.amazonaws.glue#AuditContextString"
+                }
+            }
+        },
+        "com.amazonaws.glue#AuditContextString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                }
+            }
         },
         "com.amazonaws.glue#BackfillError": {
             "type": "structure",
@@ -2302,6 +2337,12 @@
                         "smithy.api#documentation": "<p>A list of the tables to be synchronized.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "ConnectionName": {
+                    "target": "com.amazonaws.glue#ConnectionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the connection for an Amazon S3-backed Data Catalog table to be a target of the crawl when using a <code>Catalog</code> connection type paired with a <code>NETWORK</code> Connection type.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2682,6 +2723,23 @@
                     "max": 1024
                 },
                 "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"
+            }
+        },
+        "com.amazonaws.glue#ColumnRowFilter": {
+            "type": "structure",
+            "members": {
+                "ColumnName": {
+                    "target": "com.amazonaws.glue#NameString"
+                },
+                "RowFilterExpression": {
+                    "target": "com.amazonaws.glue#PredicateString"
+                }
+            }
+        },
+        "com.amazonaws.glue#ColumnRowFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#ColumnRowFilter"
             }
         },
         "com.amazonaws.glue#ColumnStatistics": {
@@ -3598,6 +3656,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the <code>SecurityConfiguration</code> structure to be used by this\n      crawler.</p>"
                     }
+                },
+                "LakeFormationConfiguration": {
+                    "target": "com.amazonaws.glue#LakeFormationConfiguration"
                 }
             },
             "traits": {
@@ -3820,6 +3881,12 @@
                     "target": "com.amazonaws.glue#CatalogTargetList",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies Glue Data Catalog targets.</p>"
+                    }
+                },
+                "DeltaTargets": {
+                    "target": "com.amazonaws.glue#DeltaTargetList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies Delta data store targets.</p>"
                     }
                 }
             },
@@ -4108,6 +4175,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies data lineage configuration settings for the crawler.</p>"
                     }
+                },
+                "LakeFormationConfiguration": {
+                    "target": "com.amazonaws.glue#LakeFormationConfiguration"
                 },
                 "Configuration": {
                     "target": "com.amazonaws.glue#CrawlerConfiguration",
@@ -7371,6 +7441,38 @@
                         "smithy.api#documentation": "<p>Name of the workflow specified in input.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.glue#DeltaTarget": {
+            "type": "structure",
+            "members": {
+                "DeltaTables": {
+                    "target": "com.amazonaws.glue#PathList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the Amazon S3 paths to the Delta tables.</p>"
+                    }
+                },
+                "ConnectionName": {
+                    "target": "com.amazonaws.glue#ConnectionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the connection to use to connect to the Delta table target.</p>"
+                    }
+                },
+                "WriteManifest": {
+                    "target": "com.amazonaws.glue#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to write the manifest files to the Delta table path.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies a Delta data store to crawl one or more Delta tables.</p>"
+            }
+        },
+        "com.amazonaws.glue#DeltaTargetList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#DeltaTarget"
             }
         },
         "com.amazonaws.glue#DescriptionString": {
@@ -11619,6 +11721,256 @@
                 }
             }
         },
+        "com.amazonaws.glue#GetUnfilteredPartitionMetadata": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#GetUnfilteredPartitionMetadataRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#GetUnfilteredPartitionMetadataResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#GlueEncryptionException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.glue#PermissionTypeMismatchException"
+                }
+            ]
+        },
+        "com.amazonaws.glue#GetUnfilteredPartitionMetadataRequest": {
+            "type": "structure",
+            "members": {
+                "CatalogId": {
+                    "target": "com.amazonaws.glue#CatalogIdString",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "DatabaseName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "TableName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "PartitionValues": {
+                    "target": "com.amazonaws.glue#ValueStringList",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "AuditContext": {
+                    "target": "com.amazonaws.glue#AuditContext"
+                },
+                "SupportedPermissionTypes": {
+                    "target": "com.amazonaws.glue#PermissionTypeList",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.glue#GetUnfilteredPartitionMetadataResponse": {
+            "type": "structure",
+            "members": {
+                "Partition": {
+                    "target": "com.amazonaws.glue#Partition"
+                },
+                "AuthorizedColumns": {
+                    "target": "com.amazonaws.glue#NameStringList"
+                },
+                "IsRegisteredWithLakeFormation": {
+                    "target": "com.amazonaws.glue#Boolean"
+                }
+            }
+        },
+        "com.amazonaws.glue#GetUnfilteredPartitionsMetadata": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#GetUnfilteredPartitionsMetadataRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#GetUnfilteredPartitionsMetadataResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#GlueEncryptionException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.glue#PermissionTypeMismatchException"
+                }
+            ],
+            "traits": {
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.glue#GetUnfilteredPartitionsMetadataRequest": {
+            "type": "structure",
+            "members": {
+                "CatalogId": {
+                    "target": "com.amazonaws.glue#CatalogIdString",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "DatabaseName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "TableName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "Expression": {
+                    "target": "com.amazonaws.glue#PredicateString"
+                },
+                "AuditContext": {
+                    "target": "com.amazonaws.glue#AuditContext"
+                },
+                "SupportedPermissionTypes": {
+                    "target": "com.amazonaws.glue#PermissionTypeList",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.glue#Token"
+                },
+                "Segment": {
+                    "target": "com.amazonaws.glue#Segment"
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.glue#PageSize"
+                }
+            }
+        },
+        "com.amazonaws.glue#GetUnfilteredPartitionsMetadataResponse": {
+            "type": "structure",
+            "members": {
+                "UnfilteredPartitions": {
+                    "target": "com.amazonaws.glue#UnfilteredPartitionList"
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.glue#Token"
+                }
+            }
+        },
+        "com.amazonaws.glue#GetUnfilteredTableMetadata": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#GetUnfilteredTableMetadataRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#GetUnfilteredTableMetadataResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#GlueEncryptionException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.glue#PermissionTypeMismatchException"
+                }
+            ]
+        },
+        "com.amazonaws.glue#GetUnfilteredTableMetadataRequest": {
+            "type": "structure",
+            "members": {
+                "CatalogId": {
+                    "target": "com.amazonaws.glue#CatalogIdString",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "DatabaseName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "AuditContext": {
+                    "target": "com.amazonaws.glue#AuditContext"
+                },
+                "SupportedPermissionTypes": {
+                    "target": "com.amazonaws.glue#PermissionTypeList",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.glue#GetUnfilteredTableMetadataResponse": {
+            "type": "structure",
+            "members": {
+                "Table": {
+                    "target": "com.amazonaws.glue#Table"
+                },
+                "AuthorizedColumns": {
+                    "target": "com.amazonaws.glue#NameStringList"
+                },
+                "IsRegisteredWithLakeFormation": {
+                    "target": "com.amazonaws.glue#Boolean"
+                },
+                "CellFilters": {
+                    "target": "com.amazonaws.glue#ColumnRowFilterList"
+                }
+            }
+        },
         "com.amazonaws.glue#GetUserDefinedFunction": {
             "type": "operation",
             "input": {
@@ -13100,6 +13452,17 @@
                 "smithy.api#documentation": "<p>Specifies configuration properties for a labeling set generation task run.</p>"
             }
         },
+        "com.amazonaws.glue#LakeFormationConfiguration": {
+            "type": "structure",
+            "members": {
+                "UseLakeFormationCredentials": {
+                    "target": "com.amazonaws.glue#NullableBoolean"
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.glue#AccountId"
+                }
+            }
+        },
         "com.amazonaws.glue#Language": {
             "type": "string",
             "traits": {
@@ -13979,6 +14342,12 @@
                     "max": 2056
                 },
                 "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
+            }
+        },
+        "com.amazonaws.glue#LocationStringList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#LocationString"
             }
         },
         "com.amazonaws.glue#LogGroup": {
@@ -15079,6 +15448,44 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.glue#Permission"
+            }
+        },
+        "com.amazonaws.glue#PermissionType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "COLUMN_PERMISSION",
+                        "name": "COLUMN_PERMISSION"
+                    },
+                    {
+                        "value": "CELL_FILTER_PERMISSION",
+                        "name": "CELL_FILTER_PERMISSION"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.glue#PermissionTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#PermissionType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.glue#PermissionTypeMismatchException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.glue#MessageString"
+                }
+            },
+            "traits": {
+                "smithy.api#error": "client"
             }
         },
         "com.amazonaws.glue#PhysicalConnectionRequirements": {
@@ -17860,6 +18267,9 @@
                         "smithy.api#documentation": "<p>The physical location of the table. By default, this takes the form of the warehouse\n      location, followed by the database location in the warehouse, followed by the table\n      name.</p>"
                     }
                 },
+                "AdditionalLocations": {
+                    "target": "com.amazonaws.glue#LocationStringList"
+                },
                 "InputFormat": {
                     "target": "com.amazonaws.glue#FormatString",
                     "traits": {
@@ -19118,6 +19528,26 @@
                 "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
             }
         },
+        "com.amazonaws.glue#UnfilteredPartition": {
+            "type": "structure",
+            "members": {
+                "Partition": {
+                    "target": "com.amazonaws.glue#Partition"
+                },
+                "AuthorizedColumns": {
+                    "target": "com.amazonaws.glue#NameStringList"
+                },
+                "IsRegisteredWithLakeFormation": {
+                    "target": "com.amazonaws.glue#Boolean"
+                }
+            }
+        },
+        "com.amazonaws.glue#UnfilteredPartitionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#UnfilteredPartition"
+            }
+        },
         "com.amazonaws.glue#UntagResource": {
             "type": "operation",
             "input": {
@@ -19625,6 +20055,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies data lineage configuration settings for the crawler.</p>"
                     }
+                },
+                "LakeFormationConfiguration": {
+                    "target": "com.amazonaws.glue#LakeFormationConfiguration"
                 },
                 "Configuration": {
                     "target": "com.amazonaws.glue#CrawlerConfiguration",

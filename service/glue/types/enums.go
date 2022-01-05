@@ -659,6 +659,24 @@ func (Permission) Values() []Permission {
 	}
 }
 
+type PermissionType string
+
+// Enum values for PermissionType
+const (
+	PermissionTypeColumnPermission     PermissionType = "COLUMN_PERMISSION"
+	PermissionTypeCellFilterPermission PermissionType = "CELL_FILTER_PERMISSION"
+)
+
+// Values returns all known values for PermissionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PermissionType) Values() []PermissionType {
+	return []PermissionType{
+		"COLUMN_PERMISSION",
+		"CELL_FILTER_PERMISSION",
+	}
+}
+
 type PrincipalType string
 
 // Enum values for PrincipalType

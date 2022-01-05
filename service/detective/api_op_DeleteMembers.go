@@ -11,11 +11,18 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes one or more member accounts from the administrator account's behavior
-// graph. This operation can only be called by a Detective administrator account.
-// That account cannot use DeleteMembers to delete their own account from the
-// behavior graph. To disable a behavior graph, the administrator account uses the
-// DeleteGraph API method.
+// Removes the specified member accounts from the behavior graph. The removed
+// accounts no longer contribute data to the behavior graph. This operation can
+// only be called by the administrator account for the behavior graph. For invited
+// accounts, the removed accounts are deleted from the list of accounts in the
+// behavior graph. To restore the account, the administrator account must send
+// another invitation. For organization accounts in the organization behavior
+// graph, the Detective administrator account can always enable the organization
+// account again. Organization accounts that are not enabled as member accounts are
+// not included in the ListMembers results for the organization behavior graph. An
+// administrator account cannot use DeleteMembers to remove their own account from
+// the behavior graph. To disable a behavior graph, the administrator account uses
+// the DeleteGraph API method.
 func (c *Client) DeleteMembers(ctx context.Context, params *DeleteMembersInput, optFns ...func(*Options)) (*DeleteMembersOutput, error) {
 	if params == nil {
 		params = &DeleteMembersInput{}
@@ -33,13 +40,14 @@ func (c *Client) DeleteMembers(ctx context.Context, params *DeleteMembersInput, 
 
 type DeleteMembersInput struct {
 
-	// The list of AWS account identifiers for the member accounts to delete from the
-	// behavior graph. You can delete up to 50 member accounts at a time.
+	// The list of Amazon Web Services account identifiers for the member accounts to
+	// remove from the behavior graph. You can remove up to 50 member accounts at a
+	// time.
 	//
 	// This member is required.
 	AccountIds []string
 
-	// The ARN of the behavior graph to delete members from.
+	// The ARN of the behavior graph to remove members from.
 	//
 	// This member is required.
 	GraphArn *string
@@ -49,11 +57,11 @@ type DeleteMembersInput struct {
 
 type DeleteMembersOutput struct {
 
-	// The list of AWS account identifiers for the member accounts that Detective
-	// successfully deleted from the behavior graph.
+	// The list of Amazon Web Services account identifiers for the member accounts that
+	// Detective successfully removed from the behavior graph.
 	AccountIds []string
 
-	// The list of member accounts that Detective was not able to delete from the
+	// The list of member accounts that Detective was not able to remove from the
 	// behavior graph. For each member account, provides the reason that the deletion
 	// could not be processed.
 	UnprocessedAccounts []types.UnprocessedAccount

@@ -2154,6 +2154,13 @@ func awsRestjson1_serializeOpDocumentCreateJobInput(v *CreateJobInput, value smi
 		ok.String(*v.DocumentSource)
 	}
 
+	if v.JobExecutionsRetryConfig != nil {
+		ok := object.Key("jobExecutionsRetryConfig")
+		if err := awsRestjson1_serializeDocumentJobExecutionsRetryConfig(v.JobExecutionsRetryConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.JobExecutionsRolloutConfig != nil {
 		ok := object.Key("jobExecutionsRolloutConfig")
 		if err := awsRestjson1_serializeDocumentJobExecutionsRolloutConfig(v.JobExecutionsRolloutConfig, ok); err != nil {
@@ -2305,6 +2312,13 @@ func awsRestjson1_serializeOpDocumentCreateJobTemplateInput(v *CreateJobTemplate
 	if v.JobArn != nil {
 		ok := object.Key("jobArn")
 		ok.String(*v.JobArn)
+	}
+
+	if v.JobExecutionsRetryConfig != nil {
+		ok := object.Key("jobExecutionsRetryConfig")
+		if err := awsRestjson1_serializeDocumentJobExecutionsRetryConfig(v.JobExecutionsRetryConfig, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.JobExecutionsRolloutConfig != nil {
@@ -10620,6 +10634,10 @@ func awsRestjson1_serializeOpHttpBindingsListJobExecutionsForThingInput(v *ListJ
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.JobId != nil {
+		encoder.SetQuery("jobId").String(*v.JobId)
+	}
+
 	if v.MaxResults != nil {
 		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
@@ -16123,6 +16141,13 @@ func awsRestjson1_serializeOpDocumentUpdateJobInput(v *UpdateJobInput, value smi
 		ok.String(*v.Description)
 	}
 
+	if v.JobExecutionsRetryConfig != nil {
+		ok := object.Key("jobExecutionsRetryConfig")
+		if err := awsRestjson1_serializeDocumentJobExecutionsRetryConfig(v.JobExecutionsRetryConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.JobExecutionsRolloutConfig != nil {
 		ok := object.Key("jobExecutionsRolloutConfig")
 		if err := awsRestjson1_serializeDocumentJobExecutionsRolloutConfig(v.JobExecutionsRolloutConfig, ok); err != nil {
@@ -18828,6 +18853,20 @@ func awsRestjson1_serializeDocumentIotSiteWiseAction(v *types.IotSiteWiseAction,
 	return nil
 }
 
+func awsRestjson1_serializeDocumentJobExecutionsRetryConfig(v *types.JobExecutionsRetryConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CriteriaList != nil {
+		ok := object.Key("criteriaList")
+		if err := awsRestjson1_serializeDocumentRetryCriteriaList(v.CriteriaList, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentJobExecutionsRolloutConfig(v *types.JobExecutionsRolloutConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -19607,6 +19646,36 @@ func awsRestjson1_serializeDocumentResources(v []string, value smithyjson.Value)
 	for i := range v {
 		av := array.Value()
 		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRetryCriteria(v *types.RetryCriteria, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.FailureType) > 0 {
+		ok := object.Key("failureType")
+		ok.String(string(v.FailureType))
+	}
+
+	if v.NumberOfRetries != nil {
+		ok := object.Key("numberOfRetries")
+		ok.Integer(*v.NumberOfRetries)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRetryCriteriaList(v []types.RetryCriteria, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentRetryCriteria(&v[i], av); err != nil {
+			return err
+		}
 	}
 	return nil
 }

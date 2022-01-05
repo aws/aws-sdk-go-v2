@@ -10,10 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Stops a transform job. When Amazon SageMaker receives a StopTransformJob
+// Stops a batch transform job. When Amazon SageMaker receives a StopTransformJob
 // request, the status of the job changes to Stopping. After Amazon SageMaker stops
-// the job, the status is set to Stopped. When you stop a transform job before it
-// is completed, Amazon SageMaker doesn't store the job's output in Amazon S3.
+// the job, the status is set to Stopped. When you stop a batch transform job
+// before it is completed, Amazon SageMaker doesn't store the job's output in
+// Amazon S3.
 func (c *Client) StopTransformJob(ctx context.Context, params *StopTransformJobInput, optFns ...func(*Options)) (*StopTransformJobOutput, error) {
 	if params == nil {
 		params = &StopTransformJobInput{}
@@ -31,7 +32,7 @@ func (c *Client) StopTransformJob(ctx context.Context, params *StopTransformJobI
 
 type StopTransformJobInput struct {
 
-	// The name of the transform job to stop.
+	// The name of the batch transform job to stop.
 	//
 	// This member is required.
 	TransformJobName *string

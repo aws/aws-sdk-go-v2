@@ -114,7 +114,7 @@ type CreateDomainInput struct {
 	// A collection of Domain settings.
 	DomainSettings *types.DomainSettings
 
-	// This member is deprecated and replaced with KmsKeyId.
+	// Use KmsKeyId.
 	//
 	// Deprecated: This property is deprecated, use KmsKeyId instead.
 	HomeEfsFileSystemKmsKeyId *string

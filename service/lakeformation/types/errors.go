@@ -180,6 +180,30 @@ func (e *OperationTimeoutException) ErrorMessage() string {
 func (e *OperationTimeoutException) ErrorCode() string             { return "OperationTimeoutException" }
 func (e *OperationTimeoutException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The engine does not support filtering data based on the enforced permissions.
+// For example, if you call the GetTemporaryGlueTableCredentials operation with
+// SupportedPermissionType equal to ColumnPermission, but cell-level permissions
+// exist on the table, this exception is thrown.
+type PermissionTypeMismatchException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *PermissionTypeMismatchException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *PermissionTypeMismatchException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *PermissionTypeMismatchException) ErrorCode() string {
+	return "PermissionTypeMismatchException"
+}
+func (e *PermissionTypeMismatchException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // Contains details about an error related to a resource which is not ready for a
 // transaction.
 type ResourceNotReadyException struct {

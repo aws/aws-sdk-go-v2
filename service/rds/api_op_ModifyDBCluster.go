@@ -188,8 +188,8 @@ type ModifyDBClusterInput struct {
 	// available engine versions for MySQL 5.6-compatible Aurora, use the following
 	// command: aws rds describe-db-engine-versions --engine aurora --query
 	// "DBEngineVersions[].EngineVersion" To list all of the available engine versions
-	// for MySQL 5.7-compatible Aurora, use the following command: aws rds
-	// describe-db-engine-versions --engine aurora-mysql --query
+	// for MySQL 5.7-compatible and MySQL 8.0-compatible Aurora, use the following
+	// command: aws rds describe-db-engine-versions --engine aurora-mysql --query
 	// "DBEngineVersions[].EngineVersion" To list all of the available engine versions
 	// for Aurora PostgreSQL, use the following command: aws rds
 	// describe-db-engine-versions --engine aurora-postgresql --query
@@ -308,8 +308,7 @@ type ModifyDBClusterInput struct {
 	ScalingConfiguration *types.ScalingConfiguration
 
 	// Specifies the storage type to be associated with the DB cluster. Valid values:
-	// standard | gp2 | io1 If you specify io1, you must also include a value for the
-	// Iops parameter. Default: io1 if the Iops parameter is specified, otherwise gp2
+	// io1 When specified, a value for the Iops parameter is required. Default: io1
 	// Valid for: Multi-AZ DB clusters only
 	StorageType *string
 

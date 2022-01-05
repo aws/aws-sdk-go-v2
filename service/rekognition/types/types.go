@@ -595,6 +595,10 @@ type Face struct {
 	// Unique identifier that Amazon Rekognition assigns to the input image.
 	ImageId *string
 
+	// The version of the face detect and storage model that was used when indexing the
+	// face vector.
+	IndexFacesModelVersion *string
+
 	noSmithyDocumentSerde
 }
 
