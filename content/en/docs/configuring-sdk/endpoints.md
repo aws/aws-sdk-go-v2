@@ -13,11 +13,11 @@ A [EndpointResolver]({{< apiref "aws#EndpointResolver" >}}) can be configured to
 logic for service clients. You can use a custom endpoint resolver to override a service's endpoint resolution logic
 for all endpoints, or a just specific regional endpoint. Custom endpoint resolver can trigger the service's endpoint 
 resolution logic to fallback if a custom resolver does not wish to resolve a requested endpoint. 
-[EndpointResolverFunc]({{< apiref "aws#EndpointResolverFunc" >}}) can be used to easily wrap functions to satisfy the 
-`EndpointResolver` interface.
+[EndpointResolverWithOptionsFunc]({{< apiref "aws#EndpointResolverWithOptionsFunc" >}}) can be used to easily wrap functions to satisfy the 
+`EndpointResolverWithOptions` interface.
 
 A `EndpointResolver` can be easily configured by passing the resolver wrapped with
-[WithEndpointResolver]({{< apiref "config#WithEndpointResolver" >}}) to
+[WithEndpointResolverWithOptions]({{< apiref "config#WithEndpointResolverWithOptions" >}}) to
 [LoadDefaultConfig]({{< apiref "config#LoadDefaultConfig" >}}), allowing for the ability to override endpoints when
 loading credentials, as well as configuring the resulting `aws.Config` with your custom endpoint resolver.
 
@@ -40,7 +40,7 @@ The following code snippet shows how a single service endpoint can be overridden
 fallback behavior for other endpoints:
 
 ```go
-customResolver := aws.EndpointResolverFunc(func(service, region string) (aws.Endpoint, error) {
+customResolver := aws.EndpointResolverWithOptionsFunc(func(service, region string, options ...interface{}) (aws.Endpoint, error) {
     if service == dynamodb.ServiceID && region == "us-west-2" {
         return aws.Endpoint{
             PartitionID:   "aws",
@@ -52,7 +52,7 @@ customResolver := aws.EndpointResolverFunc(func(service, region string) (aws.End
     return aws.Endpoint{}, &aws.EndpointNotFoundError{}
 })
 
-cfg, err := config.LoadDefaultConfig(context.TODO(), config.WithEndpointResolver(customResolver))
+cfg, err := config.LoadDefaultConfig(context.TODO(), config.WithEndpointResolverWithOptions(customResolver))
 ```
 
 ### Overriding Endpoint Without Fallback
@@ -61,7 +61,7 @@ The following code snippet shows how a single service endpoint can be overridden
 fallback behavior for other endpoints:
 
 ```go
-customResolver := aws.EndpointResolverFunc(func(service, region string) (aws.Endpoint, error) {
+customResolver := aws.EndpointResolverWithOptionsFunc(func(service, region string, options ...interface{}) (aws.Endpoint, error) {
     if service == dynamodb.ServiceID && region == "us-west-2" {
         return aws.Endpoint{
             PartitionID:   "aws",
@@ -72,7 +72,7 @@ customResolver := aws.EndpointResolverFunc(func(service, region string) (aws.End
     return aws.Endpoint{}, fmt.Errorf("unknown endpoint requested")
 })
 
-cfg, err := config.LoadDefaultConfig(context.TODO(), config.WithEndpointResolver(customResolver))
+cfg, err := config.LoadDefaultConfig(context.TODO(), config.WithEndpointResolverWithOptions(customResolver))
 ```
 
 ### Immutable Endpoints
@@ -89,7 +89,7 @@ resolved endpoint. You can prevent the SDK from mutating your custom endpoints b
 [HostnameImmutable]({{< apiref "aws#Endpoint.HostnameImmutable" >}}) to`true`. For example:
 
 ```go
-customResolver := aws.EndpointResolverFunc(func(service, region string) (aws.Endpoint, error) {
+customResolver := aws.EndpointResolverWithOptionsFunc(func(service, region string, options ...interface{}) (aws.Endpoint, error) {
     if service == dynamodb.ServiceID && region == "us-west-2" {
         return aws.Endpoint{
             PartitionID:   "aws",
@@ -101,6 +101,6 @@ customResolver := aws.EndpointResolverFunc(func(service, region string) (aws.End
     return aws.Endpoint{}, fmt.Errorf("unknown endpoint requested")
 })
 
-cfg, err := config.LoadDefaultConfig(context.TODO(), config.WithEndpointResolver(customResolver))
+cfg, err := config.LoadDefaultConfig(context.TODO(), config.WithEndpointResolverWithOptions(customResolver))
 ```
 
