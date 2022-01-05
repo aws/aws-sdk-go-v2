@@ -38,11 +38,11 @@ import (
 // control lists (ACLs) When creating a bucket using this operation, you can
 // optionally configure the bucket ACL to specify the accounts or groups that
 // should be granted specific permissions on the bucket. If your CreateBucket
-// request includes the BucketOwnerEnforced value for the x-amz-object-ownership
-// header, your request can either not specify an ACL or specify bucket owner full
-// control ACLs, such as the bucket-owner-full-control canned ACL or an equivalent
-// ACL expressed in the XML format. For more information, see Controlling object
-// ownership
+// request sets bucket owner enforced for S3 Object Ownership and specifies a
+// bucket ACL that provides access to an external Amazon Web Services account, your
+// request fails with a 400 error and returns the
+// InvalidBucketAclWithObjectOwnership error code. For more information, see
+// Controlling object ownership
 // (https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html)
 // in the Amazon S3 User Guide. There are two ways to grant the appropriate
 // permissions using the request headers.

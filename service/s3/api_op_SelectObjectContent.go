@@ -23,6 +23,8 @@ import (
 // action is not supported by Amazon S3 on Outposts. For more information about
 // Amazon S3 Select, see Selecting Content from Objects
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/selecting-content-from-objects.html)
+// and SELECT Command
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-glacier-select-sql-reference-select.html)
 // in the Amazon S3 User Guide. For more information about using SQL with Amazon S3
 // Select, see  SQL Reference for Amazon S3 Select and S3 Glacier Select
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-glacier-select-sql-reference.html)

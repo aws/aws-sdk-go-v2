@@ -53,13 +53,13 @@ type ModifyGlobalClusterInput struct {
 	// available engine versions for aurora (for MySQL 5.6-compatible Aurora), use the
 	// following command: aws rds describe-db-engine-versions --engine aurora --query
 	// '*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]' To list all of the
-	// available engine versions for aurora-mysql (for MySQL 5.7-compatible Aurora),
-	// use the following command: aws rds describe-db-engine-versions --engine
-	// aurora-mysql --query '*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]'
-	// To list all of the available engine versions for aurora-postgresql, use the
-	// following command: aws rds describe-db-engine-versions --engine
-	// aurora-postgresql --query '*[]|[?SupportsGlobalDatabases ==
-	// `true`].[EngineVersion]'
+	// available engine versions for aurora-mysql (for MySQL 5.7-compatible and MySQL
+	// 8.0-compatible Aurora), use the following command: aws rds
+	// describe-db-engine-versions --engine aurora-mysql --query
+	// '*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]' To list all of the
+	// available engine versions for aurora-postgresql, use the following command: aws
+	// rds describe-db-engine-versions --engine aurora-postgresql --query
+	// '*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]'
 	EngineVersion *string
 
 	// The DB cluster identifier for the global cluster being modified. This parameter

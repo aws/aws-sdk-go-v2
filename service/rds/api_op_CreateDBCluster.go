@@ -66,16 +66,16 @@ type CreateDBClusterInput struct {
 	// aurora (for MySQL 5.6-compatible Aurora)
 	//
 	// * aurora-mysql (for MySQL
-	// 5.7-compatible Aurora)
+	// 5.7-compatible and MySQL 8.0-compatible Aurora)
 	//
 	// * aurora-postgresql
 	//
 	// * mysql
 	//
-	// * postgres
+	// *
+	// postgres
 	//
-	// Valid for:
-	// Aurora DB clusters and Multi-AZ DB clusters
+	// Valid for: Aurora DB clusters and Multi-AZ DB clusters
 	//
 	// This member is required.
 	Engine *string
@@ -252,8 +252,8 @@ type CreateDBClusterInput struct {
 	// engine versions for MySQL 5.6-compatible Aurora, use the following command: aws
 	// rds describe-db-engine-versions --engine aurora --query
 	// "DBEngineVersions[].EngineVersion" To list all of the available engine versions
-	// for MySQL 5.7-compatible Aurora, use the following command: aws rds
-	// describe-db-engine-versions --engine aurora-mysql --query
+	// for MySQL 5.7-compatible and MySQL 8.0-compatible Aurora, use the following
+	// command: aws rds describe-db-engine-versions --engine aurora-mysql --query
 	// "DBEngineVersions[].EngineVersion" To list all of the available engine versions
 	// for Aurora PostgreSQL, use the following command: aws rds
 	// describe-db-engine-versions --engine aurora-postgresql --query
@@ -496,10 +496,9 @@ type CreateDBClusterInput struct {
 	StorageEncrypted *bool
 
 	// Specifies the storage type to be associated with the DB cluster. This setting is
-	// required to create a Multi-AZ DB cluster. Valid values: standard | gp2 | io1 If
-	// you specify io1, also include a value for the Iops parameter. Default: io1 if
-	// the Iops parameter is specified, otherwise gp2 Valid for: Multi-AZ DB clusters
-	// only
+	// required to create a Multi-AZ DB cluster. Valid values: io1 When specified, a
+	// value for the Iops parameter is required. Default: io1 Valid for: Multi-AZ DB
+	// clusters only
 	StorageType *string
 
 	// Tags to assign to the DB cluster. Valid for: Aurora DB clusters and Multi-AZ DB

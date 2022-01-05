@@ -61,10 +61,10 @@ type CreateDBParameterGroupInput struct {
 	// * aurora (for MySQL
 	// 5.6-compatible Aurora)
 	//
-	// * aurora-mysql (for MySQL 5.7-compatible Aurora)
+	// * aurora-mysql (for MySQL 5.7-compatible and MySQL
+	// 8.0-compatible Aurora)
 	//
-	// *
-	// aurora-postgresql
+	// * aurora-postgresql
 	//
 	// * mariadb
 	//
@@ -72,10 +72,10 @@ type CreateDBParameterGroupInput struct {
 	//
 	// * oracle-ee
 	//
-	// * oracle-ee-cdb
-	//
 	// *
-	// oracle-se2
+	// oracle-ee-cdb
+	//
+	// * oracle-se2
 	//
 	// * oracle-se2-cdb
 	//
@@ -83,10 +83,10 @@ type CreateDBParameterGroupInput struct {
 	//
 	// * sqlserver-ee
 	//
-	// * sqlserver-se
-	//
 	// *
-	// sqlserver-ex
+	// sqlserver-se
+	//
+	// * sqlserver-ex
 	//
 	// * sqlserver-web
 	//

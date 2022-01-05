@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a dataset.
+// Updates a dataset. This operation doesn't support datasets that include uploaded
+// files as a source.
 func (c *Client) UpdateDataSet(ctx context.Context, params *UpdateDataSetInput, optFns ...func(*Options)) (*UpdateDataSetOutput, error) {
 	if params == nil {
 		params = &UpdateDataSetInput{}
