@@ -101,6 +101,10 @@ type LoadOptions struct {
 	// from the EC2 Metadata service
 	UseEC2IMDSRegion *UseEC2IMDSRegion
 
+	// CredentialsCacheOptions is a function for setting the
+	// aws.CredentialsCacheOptions
+	CredentialsCacheOptions func(*aws.CredentialsCacheOptions)
+
 	// ProcessCredentialOptions is a function for setting
 	// the processcreds.Options
 	ProcessCredentialOptions func(*processcreds.Options)
@@ -361,6 +365,29 @@ func (o LoadOptions) getCredentialsProvider(ctx context.Context) (aws.Credential
 func WithCredentialsProvider(v aws.CredentialsProvider) LoadOptionsFunc {
 	return func(o *LoadOptions) error {
 		o.Credentials = v
+		return nil
+	}
+}
+
+// getCredentialsCacheOptionsProvider returns the wrapped function to set aws.CredentialsCacheOptions
+func (o LoadOptions) getCredentialsCacheOptions(ctx context.Context) (func(*aws.CredentialsCacheOptions), bool, error) {
+	if o.CredentialsCacheOptions == nil {
+		return nil, false, nil
+	}
+
+	return o.CredentialsCacheOptions, true, nil
+}
+
+// WithCredentialsCacheOptions is a helper function to construct functional
+// options that sets a function to modify the aws.CredentialsCacheOptions the
+// aws.CredentialsCache will be configured with, if the CredentialsCache is used
+// by the configuration loader.
+//
+// If multiple WithCredentialsCacheOptions calls are made, the last call
+// overrides the previous call values.
+func WithCredentialsCacheOptions(v func(*aws.CredentialsCacheOptions)) LoadOptionsFunc {
+	return func(o *LoadOptions) error {
+		o.CredentialsCacheOptions = v
 		return nil
 	}
 }

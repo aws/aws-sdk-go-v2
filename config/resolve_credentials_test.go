@@ -452,3 +452,22 @@ func TestSharedConfigCredentialSource(t *testing.T) {
 		})
 	}
 }
+
+func TestResolveCredentialsCacheOptions(t *testing.T) {
+	var cfg aws.Config
+	var optionsFnCalled bool
+
+	err := resolveCredentials(context.Background(), &cfg, configs{LoadOptions{
+		CredentialsCacheOptions: func(o *aws.CredentialsCacheOptions) {
+			optionsFnCalled = true
+			o.ExpiryWindow = time.Minute * 5
+		},
+	}})
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	if !optionsFnCalled {
+		t.Errorf("expect options to be called")
+	}
+}

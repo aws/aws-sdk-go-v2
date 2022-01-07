@@ -26,6 +26,8 @@ var implAsserts = map[string][]string{
 	"regionProvider":                           {envConfigType, sharedConfigType, loadOptionsType, ec2IMDSRegionType},
 	"credentialsProviderProvider":              {loadOptionsType},
 	"defaultRegionProvider":                    {loadOptionsType},
+	"credentialsCacheOptionsProvider":          {loadOptionsType},
+	"processCredentialOptions":                 {loadOptionsType},
 	"ec2RoleCredentialOptionsProvider":         {loadOptionsType},
 	"endpointCredentialOptionsProvider":        {loadOptionsType},
 	"assumeRoleCredentialOptionsProvider":      {loadOptionsType},

@@ -17,6 +17,11 @@ var (
 	_ clientLogModeProvider = &LoadOptions{}
 )
 
+// credentialsCacheOptionsProvider implementor assertions
+var (
+	_ credentialsCacheOptionsProvider = &LoadOptions{}
+)
+
 // credentialsProviderProvider implementor assertions
 var (
 	_ credentialsProviderProvider = &LoadOptions{}
@@ -66,6 +71,11 @@ var (
 // loggerProvider implementor assertions
 var (
 	_ loggerProvider = &LoadOptions{}
+)
+
+// processCredentialOptions implementor assertions
+var (
+	_ processCredentialOptions = &LoadOptions{}
 )
 
 // regionProvider implementor assertions
