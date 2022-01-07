@@ -63,7 +63,7 @@ weight = 1
 # Everything below this are Site Params
 
 [params]
-copyright = "Amazon Web Services, Inc. or its affiliates. All rights reserved."
+copyright = "Amazon Web Services, Inc. or its affiliates."
 
 # First one is picked as the Twitter card image if not set on page.
 # images = ["images/project-illustration.png"]

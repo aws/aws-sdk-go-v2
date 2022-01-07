@@ -57,7 +57,7 @@
     <lastmod>2021-01-15T13:01:18-08:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/unit-testing/</loc>
-    <lastmod>2021-07-30T07:03:10+09:00</lastmod>
+    <lastmod>2022-01-05T13:43:00-08:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/cloud9-go/</loc>
     <lastmod>2021-04-23T01:04:37+02:00</lastmod>
@@ -78,7 +78,7 @@
     <lastmod>2020-11-17T11:36:43-08:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/endpoints/</loc>
-    <lastmod>2021-01-15T09:43:09-08:00</lastmod>
+    <lastmod>2022-01-05T22:39:39+01:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/custom-http/</loc>
     <lastmod>2020-12-23T13:28:16-08:00</lastmod>
@@ -303,7 +303,7 @@
     <lastmod>2021-01-15T13:01:18-08:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/retries-timeouts/</loc>
-    <lastmod>2021-08-24T02:46:53+03:00</lastmod>
+    <lastmod>2021-10-28T17:33:53-05:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/dynamodb/scanitems/</loc>
     <lastmod>2021-01-15T13:01:18-08:00</lastmod>
