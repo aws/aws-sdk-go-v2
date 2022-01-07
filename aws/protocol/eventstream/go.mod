@@ -3,7 +3,7 @@ module github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream
 go 1.15
 
 require (
-	github.com/aws/smithy-go v1.9.0
+	github.com/aws/smithy-go v1.9.1
 	github.com/google/go-cmp v0.5.6 // indirect
 )
 
