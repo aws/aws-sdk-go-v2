@@ -1,3 +1,55 @@
+# Release (2022-01-07)
+
+## General Highlights
+* **Feature**: Updated `github.com/aws/smithy-go` to latest version
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/config`: [v1.12.0](config/CHANGELOG.md#v1120-2022-01-07)
+  * **Feature**: Add load option for CredentialCache. Adds a new member to the LoadOptions struct, CredentialsCacheOptions. This member allows specifying a function that will be used to configure the CredentialsCache. The CredentialsCacheOptions will only be used if the configuration loader will wrap the underlying credential provider in the CredentialsCache.
+* `github.com/aws/aws-sdk-go-v2/service/appstream`: [v1.12.0](service/appstream/CHANGELOG.md#v1120-2022-01-07)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/cloudtrail`: [v1.12.0](service/cloudtrail/CHANGELOG.md#v1120-2022-01-07)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/detective`: [v1.12.0](service/detective/CHANGELOG.md#v1120-2022-01-07)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.27.0](service/ec2/CHANGELOG.md#v1270-2022-01-07)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.15.0](service/ecs/CHANGELOG.md#v1150-2022-01-07)
+  * **Documentation**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.17.0](service/eks/CHANGELOG.md#v1170-2022-01-07)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.18.0](service/glue/CHANGELOG.md#v1180-2022-01-07)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/greengrassv2`: [v1.11.0](service/greengrassv2/CHANGELOG.md#v1110-2022-01-07)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.20.0](service/iot/CHANGELOG.md#v1200-2022-01-07)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/lakeformation`: [v1.12.0](service/lakeformation/CHANGELOG.md#v1120-2022-01-07)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.16.0](service/lambda/CHANGELOG.md#v1160-2022-01-07)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.17.0](service/mediaconvert/CHANGELOG.md#v1170-2022-01-07)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.17.0](service/quicksight/CHANGELOG.md#v1170-2022-01-07)
+  * **Documentation**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.15.0](service/rds/CHANGELOG.md#v1150-2022-01-07)
+  * **Documentation**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/rekognition`: [v1.14.0](service/rekognition/CHANGELOG.md#v1140-2022-01-07)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.23.0](service/s3/CHANGELOG.md#v1230-2022-01-07)
+  * **Documentation**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.17.0](service/s3control/CHANGELOG.md#v1170-2022-01-07)
+  * **Documentation**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/s3outposts`: [v1.9.0](service/s3outposts/CHANGELOG.md#v190-2022-01-07)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.22.0](service/sagemaker/CHANGELOG.md#v1220-2022-01-07)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/secretsmanager`: [v1.12.0](service/secretsmanager/CHANGELOG.md#v1120-2022-01-07)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/ssooidc`: [v1.9.0](service/ssooidc/CHANGELOG.md#v190-2022-01-07)
+  * **Feature**: API client updated
+
 # Release (2021-12-21)
 
 ## General Highlights
