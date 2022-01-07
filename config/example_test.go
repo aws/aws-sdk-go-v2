@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"path/filepath"
+	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
@@ -15,6 +16,18 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
+
+func ExampleWithCredentialsCacheOptions() {
+	cfg, err := config.LoadDefaultConfig(context.TODO(),
+		config.WithCredentialsCacheOptions(func(o *aws.CredentialsCacheOptions) {
+			o.ExpiryWindow = 10 * time.Minute
+		}),
+	)
+	if err != nil {
+		log.Fatal(err)
+	}
+	_ = cfg
+}
 
 func ExampleWithSharedConfigProfile() {
 	cfg, err := config.LoadDefaultConfig(context.TODO(),

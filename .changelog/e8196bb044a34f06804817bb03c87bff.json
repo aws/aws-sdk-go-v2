@@ -1,0 +1,8 @@
+{
+    "id": "e8196bb0-44a3-4f06-8048-17bb03c87bff",
+    "type": "feature",
+    "description": "Add load option for CredentialCache. Adds a new member to the LoadOptions struct, CredentialsCacheOptions. This member allows specifying a function that will be used to configure the CredentialsCache. The CredentialsCacheOptions will only be used if the configuration loader will wrap the underlying credential provider in the CredentialsCache.",
+    "modules": [
+        "config"
+    ]
+}
