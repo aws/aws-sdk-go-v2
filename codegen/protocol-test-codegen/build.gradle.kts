@@ -17,11 +17,22 @@ import software.amazon.smithy.gradle.tasks.SmithyBuild
 
 val smithyVersion: String by project
 
+buildscript {
+    val smithyVersion: String by project
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        "classpath"("software.amazon.smithy:smithy-cli:$smithyVersion")
+    }
+}
+
 plugins {
     id("software.amazon.smithy") version "0.5.3"
 }
 
 dependencies {
+	implementation("software.amazon.smithy:smithy-cli:$smithyVersion")
     implementation("software.amazon.smithy:smithy-aws-protocol-tests:$smithyVersion")
     implementation(project(":smithy-aws-go-codegen"))
 }
