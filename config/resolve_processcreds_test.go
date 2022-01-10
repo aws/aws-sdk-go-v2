@@ -2,11 +2,12 @@ package config
 
 import (
 	"context"
-	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"os"
 	"path/filepath"
 	"runtime"
 	"testing"
+
+	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 )
 
 func setupEnvForProcesscredsConfigFile() {

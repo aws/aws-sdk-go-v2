@@ -38,6 +38,18 @@ var (
 	_ defaultRegionProvider = &LoadOptions{}
 )
 
+// defaultsModeIMDSClientProvider implementor assertions
+var (
+	_ defaultsModeIMDSClientProvider = &LoadOptions{}
+)
+
+// defaultsModeProvider implementor assertions
+var (
+	_ defaultsModeProvider = &EnvConfig{}
+	_ defaultsModeProvider = &SharedConfig{}
+	_ defaultsModeProvider = &LoadOptions{}
+)
+
 // ec2IMDSRegionProvider implementor assertions
 var (
 	_ ec2IMDSRegionProvider = &LoadOptions{}
