@@ -17,6 +17,16 @@ import software.amazon.smithy.gradle.tasks.SmithyBuild
 
 val smithyVersion: String by project
 
+buildscript {
+    val smithyVersion: String by project
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        "classpath"("software.amazon.smithy:smithy-cli:$smithyVersion")
+    }
+}
+
 plugins {
     id("software.amazon.smithy") version "0.5.3"
 }
