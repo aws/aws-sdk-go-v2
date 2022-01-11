@@ -19,9 +19,15 @@ import software.amazon.smithy.model.shapes.ServiceShape
 import software.amazon.smithy.gradle.tasks.SmithyBuild
 import software.amazon.smithy.aws.traits.ServiceTrait
 
+val smithyVersion: String by project
+
 buildscript {
     val smithyVersion: String by project
+    repositories {
+        mavenCentral()
+    }
     dependencies {
+        "classpath"("software.amazon.smithy:smithy-cli:$smithyVersion")
         "classpath"("software.amazon.smithy:smithy-aws-traits:$smithyVersion")
     }
 }
