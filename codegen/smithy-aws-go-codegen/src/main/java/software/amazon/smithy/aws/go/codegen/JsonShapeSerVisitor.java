@@ -45,6 +45,7 @@ import software.amazon.smithy.model.traits.JsonNameTrait;
 import software.amazon.smithy.model.traits.TimestampFormatTrait;
 import software.amazon.smithy.model.traits.TimestampFormatTrait.Format;
 import software.amazon.smithy.utils.FunctionalUtils;
+import software.amazon.smithy.utils.SmithyBuilder;
 
 /**
  * Visitor to generate serialization functions for shapes in AWS JSON protocol
@@ -62,38 +63,27 @@ final class JsonShapeSerVisitor extends DocumentShapeSerVisitor {
     private final Predicate<MemberShape> memberFilter;
     private final GoPointableIndex pointableIndex;
     private final NullableIndex nullableIndex;
+    private final boolean supportJsonName;
 
     /**
-     * @param context The generation context.
+     * Returns a new builder for building the JsonShapeSerVisitor.
+     * @return Builder
      */
-    public JsonShapeSerVisitor(GenerationContext context) {
-        this(context, NoSerializeTrait.excludeNoSerializeMembers().and(FunctionalUtils.alwaysTrue()), null);
+    public static Builder builder() {
+        return new Builder();
     }
 
-    /**
-     * @param context      The generation context.
-     * @param memberFilter A filter that is applied to structure members. This is useful for
-     *                     members that won't be in the body.
-     */
-    public JsonShapeSerVisitor(GenerationContext context, Predicate<MemberShape> memberFilter) {
-        this(context, memberFilter, null);
-    }
-
-    /**
-     * @param context                The generation context.
-     * @param memberFilter           A filter that is applied to structure members. This is useful for
-     *                               members that won't be in the body.
-     * @param serializerNameProvider The serializer name provider.
-     */
-    public JsonShapeSerVisitor(
-            GenerationContext context,
-            Predicate<MemberShape> memberFilter,
-            SerializerNameProvider serializerNameProvider
-    ) {
-        super(context, serializerNameProvider);
-        this.memberFilter = NoSerializeTrait.excludeNoSerializeMembers().and(memberFilter);
-        this.pointableIndex = GoPointableIndex.of(context.getModel());
-        this.nullableIndex = NullableIndex.of(context.getModel());
+    protected JsonShapeSerVisitor(Builder builder) {
+        super(SmithyBuilder.requiredState("context", builder.context), builder.serNameProvider);
+        if (builder.memberFilter != null) {
+            this.memberFilter = builder.memberFilter;
+        } else {
+            this.memberFilter = NoSerializeTrait.excludeNoSerializeMembers().and(
+                    FunctionalUtils.alwaysTrue());
+        }
+        this.supportJsonName = builder.supportJsonName;
+        this.pointableIndex = GoPointableIndex.of(this.getContext().getModel());
+        this.nullableIndex = NullableIndex.of(this.getContext().getModel());
     }
 
     private DocumentMemberSerVisitor getMemberSerVisitor(MemberShape member, String source, String dest) {
@@ -217,8 +207,11 @@ final class JsonShapeSerVisitor extends DocumentShapeSerVisitor {
     }
 
     private String getSerializedMemberName(MemberShape memberShape) {
-        Optional<JsonNameTrait> jsonNameTrait = memberShape.getTrait(JsonNameTrait.class);
-        return jsonNameTrait.isPresent() ? jsonNameTrait.get().getValue() : memberShape.getMemberName();
+        if (this.supportJsonName) {
+            Optional<JsonNameTrait> jsonNameTrait = memberShape.getTrait(JsonNameTrait.class);
+            return jsonNameTrait.isPresent() ? jsonNameTrait.get().getValue() : memberShape.getMemberName();
+        }
+        return memberShape.getMemberName();
     }
 
     @Override
@@ -257,5 +250,39 @@ final class JsonShapeSerVisitor extends DocumentShapeSerVisitor {
         });
 
         writer.write("return nil");
+    }
+
+    public static final class Builder implements SmithyBuilder<JsonShapeSerVisitor> {
+        private GenerationContext context;
+        private Predicate<MemberShape> memberFilter;
+        private SerializerNameProvider serNameProvider;
+        private boolean supportJsonName;
+
+        private Builder() {}
+
+        public Builder context(GenerationContext context) {
+            this.context = context;
+            return this;
+        }
+
+        public Builder memberFilter(Predicate<MemberShape> filter) {
+            this.memberFilter = filter;
+            return this;
+        }
+
+        public Builder serializerNameProvider(SerializerNameProvider nameProvider) {
+            this.serNameProvider = nameProvider;
+            return this;
+        }
+
+        public Builder supportJsonName(boolean v) {
+            this.supportJsonName = v;
+            return this;
+        }
+
+        @Override
+        public JsonShapeSerVisitor build() {
+            return new JsonShapeSerVisitor(this);
+        }
     }
 }

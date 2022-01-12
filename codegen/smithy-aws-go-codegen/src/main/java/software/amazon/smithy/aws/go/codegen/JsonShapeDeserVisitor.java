@@ -43,6 +43,7 @@ import software.amazon.smithy.model.traits.JsonNameTrait;
 import software.amazon.smithy.model.traits.TimestampFormatTrait;
 import software.amazon.smithy.model.traits.TimestampFormatTrait.Format;
 import software.amazon.smithy.utils.FunctionalUtils;
+import software.amazon.smithy.utils.SmithyBuilder;
 
 /**
  * Visitor to generate deserialization functions for shapes in AWS JSON protocol
@@ -58,36 +59,20 @@ public class JsonShapeDeserVisitor extends DocumentShapeDeserVisitor {
     private static final Logger LOGGER = Logger.getLogger(JsonShapeDeserVisitor.class.getName());
 
     private final Predicate<MemberShape> memberFilter;
+    private final boolean supportJsonName;
 
     /**
-     * @param context The generation context.
+     * Returns a new builder for building the JsonShapeDeserVisitor.
+     * @return Builder
      */
-    public JsonShapeDeserVisitor(GenerationContext context) {
-        this(context, FunctionalUtils.alwaysTrue(), null);
+    public static Builder builder() {
+        return new Builder();
     }
 
-    /**
-     * @param context      The generation context.
-     * @param memberFilter A filter that is applied to structure members. This is useful for
-     *                     members that won't be in the body.
-     */
-    public JsonShapeDeserVisitor(GenerationContext context, Predicate<MemberShape> memberFilter) {
-        this(context, memberFilter, null);
-    }
-
-    /**
-     * @param context                  The generation context.
-     * @param memberFilter             A filter that is applied to structure members. This is useful for
-     *                                 members that won't be in the body.
-     * @param deserializerNameProvider The deserializer name provider.
-     */
-    public JsonShapeDeserVisitor(
-            GenerationContext context,
-            Predicate<MemberShape> memberFilter,
-            DeserializerNameProvider deserializerNameProvider
-    ) {
-        super(context, deserializerNameProvider);
-        this.memberFilter = memberFilter;
+    protected JsonShapeDeserVisitor(Builder builder) {
+        super(SmithyBuilder.requiredState("context", builder.context), builder.deserNameProvider);
+        this.memberFilter = builder.memberFilter != null ? builder.memberFilter : FunctionalUtils.alwaysTrue();
+        this.supportJsonName = builder.supportJsonName;
     }
 
     private JsonMemberDeserVisitor getMemberDeserVisitor(MemberShape member, String dataDest) {
@@ -138,7 +123,7 @@ public class JsonShapeDeserVisitor extends DocumentShapeDeserVisitor {
         GoWriter writer = context.getWriter().get();
 
         Symbol newUnmarshaler = ProtocolDocumentGenerator.Utilities.getInternalDocumentSymbolBuilder(
-                        context.getSettings(), ProtocolDocumentGenerator.INTERNAL_NEW_DOCUMENT_UNMARSHALER_FUNC)
+                context.getSettings(), ProtocolDocumentGenerator.INTERNAL_NEW_DOCUMENT_UNMARSHALER_FUNC)
                 .build();
 
         writer.write("*v = $T(value)", newUnmarshaler);
@@ -274,8 +259,12 @@ public class JsonShapeDeserVisitor extends DocumentShapeDeserVisitor {
     }
 
     private String getSerializedMemberName(MemberShape memberShape) {
-        Optional<JsonNameTrait> jsonNameTrait = memberShape.getTrait(JsonNameTrait.class);
-        return jsonNameTrait.isPresent() ? jsonNameTrait.get().getValue() : memberShape.getMemberName();
+        if (this.supportJsonName) {
+            Optional<JsonNameTrait> jsonNameTrait = memberShape.getTrait(JsonNameTrait.class);
+            return jsonNameTrait.isPresent() ? jsonNameTrait.get().getValue() : memberShape.getMemberName();
+        }
+        return memberShape.getMemberName();
+
     }
 
     /**
@@ -299,5 +288,39 @@ public class JsonShapeDeserVisitor extends DocumentShapeDeserVisitor {
         writer.write("shape, ok := value.($L)", targetType);
         writer.openBlock("if !ok {", "}", () -> writer.write("return fmt.Errorf(\"unexpected JSON type %v\", value)"));
         writer.write("");
+    }
+
+    public static final class Builder implements SmithyBuilder<JsonShapeDeserVisitor> {
+        private GenerationContext context;
+        private Predicate<MemberShape> memberFilter;
+        private DeserializerNameProvider deserNameProvider;
+        private boolean supportJsonName;
+
+        private Builder() {}
+
+        public Builder context(GenerationContext context) {
+            this.context = context;
+            return this;
+        }
+
+        public Builder memberFilter(Predicate<MemberShape> filter) {
+            this.memberFilter = filter;
+            return this;
+        }
+
+        public Builder deserializerNameProvider(DeserializerNameProvider nameProvider) {
+            this.deserNameProvider = nameProvider;
+            return this;
+        }
+
+        public Builder supportJsonName(boolean v) {
+            this.supportJsonName = v;
+            return this;
+        }
+
+        @Override
+        public JsonShapeDeserVisitor build() {
+            return new JsonShapeDeserVisitor(this);
+        }
     }
 }

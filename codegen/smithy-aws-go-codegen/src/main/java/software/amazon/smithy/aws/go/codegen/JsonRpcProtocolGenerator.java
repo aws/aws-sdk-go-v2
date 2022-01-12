@@ -91,7 +91,8 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
         }
 
         StructureShape input = ProtocolUtils.expectInput(context.getModel(), operation);
-        String functionName = ProtocolGenerator.getDocumentSerializerFunctionName(input, context.getService(), getProtocolName());
+        String functionName = ProtocolGenerator.getDocumentSerializerFunctionName(input, context.getService(),
+                getProtocolName());
 
         writer.addUseImports(SmithyGoDependency.SMITHY_JSON);
         writer.write("jsonEncoder := smithyjson.NewEncoder()");
@@ -108,7 +109,9 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
 
     @Override
     protected void generateDocumentBodyShapeSerializers(GenerationContext context, Set<Shape> shapes) {
-        JsonShapeSerVisitor visitor = new JsonShapeSerVisitor(context);
+        JsonShapeSerVisitor visitor = JsonShapeSerVisitor.builder()
+                .context(context)
+                .build();
         shapes.forEach(shape -> {
             if (generatedDocumentBodyShapeSerializers.contains(shape.toShapeId())) {
                 return;
@@ -122,7 +125,8 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
     protected void deserializeOutputDocument(GenerationContext context, OperationShape operation) {
         GoWriter writer = context.getWriter().get();
         StructureShape output = ProtocolUtils.expectOutput(context.getModel(), operation);
-        String functionName = ProtocolGenerator.getDocumentDeserializerFunctionName(output, context.getService(), getProtocolName());
+        String functionName = ProtocolGenerator.getDocumentDeserializerFunctionName(output, context.getService(),
+                getProtocolName());
         initializeJsonDecoder(writer, "response.Body");
         AwsProtocolUtils.decodeJsonIntoInterface(writer, "out, metadata, ");
         writer.write("err = $L(&output, shape)", functionName);
@@ -132,7 +136,9 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
 
     @Override
     protected void generateDocumentBodyShapeDeserializers(GenerationContext context, Set<Shape> shapes) {
-        JsonShapeDeserVisitor visitor = new JsonShapeDeserVisitor(context);
+        JsonShapeDeserVisitor visitor = JsonShapeDeserVisitor.builder()
+                .context(context)
+                .build();
         shapes.forEach(shape -> {
             if (generatedDocumentBodyShapeDeserializers.contains(shape.toShapeId())) {
                 return;
@@ -147,7 +153,8 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
     protected void deserializeError(GenerationContext context, StructureShape shape) {
         GoWriter writer = context.getWriter().get();
         Symbol symbol = context.getSymbolProvider().toSymbol(shape);
-        String functionName = ProtocolGenerator.getDocumentDeserializerFunctionName(shape, context.getService(), getProtocolName());
+        String functionName = ProtocolGenerator.getDocumentDeserializerFunctionName(shape, context.getService(),
+                getProtocolName());
 
         initializeJsonDecoder(writer, "errorBody");
         AwsProtocolUtils.decodeJsonIntoInterface(writer, "");
@@ -230,7 +237,7 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
 
             var hasBindings = targetShape.members().stream()
                     .filter(ms -> ms.getTrait(EventHeaderTrait.class).isPresent()
-                                  || ms.getTrait(EventPayloadTrait.class).isPresent())
+                            || ms.getTrait(EventPayloadTrait.class).isPresent())
                     .findAny();
             if (hasBindings.isPresent()) {
                 var payload = targetShape.members().stream()
@@ -258,8 +265,11 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
                     });
             var initialMessageMembers = streamInfo.getInitialMessageMembers()
                     .values();
-            inputShape.accept(new JsonShapeSerVisitor(context, initialMessageMembers::contains,
-                    (shape, serviceShape, proto) -> functionName));
+            inputShape.accept(JsonShapeSerVisitor.builder()
+                    .context(context)
+                    .memberFilter(initialMessageMembers::contains)
+                    .serializerNameProvider((shape, serviceShape, proto) -> functionName)
+                    .build());
         }
     }
 
@@ -305,13 +315,13 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
                                     payloadTarget, ctx.getService(), getProtocolName());
                             var ctxWriter = ctx.getWriter().get();
                             ctxWriter.openBlock("if err := $L(&$L, shape); err != nil {", "}", functionName, operand,
-                                            () -> handleDecodeError(ctxWriter))
+                                    () -> handleDecodeError(ctxWriter))
                                     .write("return nil");
                         });
 
                 var hasBindings = targetShape.members().stream()
                         .filter(ms -> ms.getTrait(EventHeaderTrait.class).isPresent()
-                                      || ms.getTrait(EventPayloadTrait.class).isPresent())
+                                || ms.getTrait(EventPayloadTrait.class).isPresent())
                         .findAny();
                 if (hasBindings.isPresent()) {
                     var payload = targetShape.members().stream()
@@ -338,13 +348,16 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
                         AwsProtocolUtils.initializeJsonEventMessageDeserializer(ctx, "nil,");
                         var ctxWriter = ctx.getWriter().get();
                         ctxWriter.openBlock("if err := $L(&$L, shape); err != nil {", "}", functionName, operand,
-                                        () -> handleDecodeError(ctxWriter, "nil,"))
+                                () -> handleDecodeError(ctxWriter, "nil,"))
                                 .write("return v, nil");
                     });
             var initialMessageMembers = streamInfo.getInitialMessageMembers()
                     .values();
-            outputShape.accept(new JsonShapeDeserVisitor(context, initialMessageMembers::contains,
-                    (shape, serviceShape, proto) -> functionName));
+            outputShape.accept(JsonShapeDeserVisitor.builder()
+                    .context(context)
+                    .memberFilter(initialMessageMembers::contains)
+                    .deserializerNameProvider((shape, serviceShape, proto) -> functionName)
+                    .build());
         }
     }
 
