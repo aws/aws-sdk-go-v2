@@ -15,7 +15,11 @@ import (
 // daily or monthly granularity. Management account in an organization have access
 // to member accounts. You can use GetDimensionValues in SAVINGS_PLANS to determine
 // the possible dimension values. You cannot group by any dimension values for
-// GetSavingsPlansUtilization.
+// GetSavingsPlansUtilization. GetSavingsPlansUtilization doesn't support filtering
+// by tags. GetSavingsPlansUtilization also doesn't support the OR operator between
+// filter dimensions. For the full request syntax with supported parameters, see
+// Examples
+// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetSavingsPlansUtilization.html#API_GetSavingsPlansUtilization_Examples).
 func (c *Client) GetSavingsPlansUtilization(ctx context.Context, params *GetSavingsPlansUtilizationInput, optFns ...func(*Options)) (*GetSavingsPlansUtilizationOutput, error) {
 	if params == nil {
 		params = &GetSavingsPlansUtilizationInput{}
@@ -61,6 +65,7 @@ type GetSavingsPlansUtilizationInput struct {
 	// Expression
 	// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
 	// object as the other operations, but only AND is supported among each dimension.
+	// Filtering by tags isn't supported.
 	Filter *types.Expression
 
 	// The granularity of the Amazon Web Services utillization data for your Savings

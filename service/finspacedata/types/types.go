@@ -44,7 +44,9 @@ type ChangesetErrorInfo struct {
 // A Changeset is unit of data in a Dataset.
 type ChangesetSummary struct {
 
-	// Milliseconds since UTC epoch
+	// Beginning time from which the Changeset is active. The value is determined as
+	// Epoch time in milliseconds. For example, the value for Monday, November 1, 2021
+	// 12:00:00 PM UTC is specified as 1635768000000.
 	ActiveFromTimestamp int64
 
 	// Time until which the Changeset is active. The value is determined as Epoch time
@@ -218,12 +220,24 @@ type DataViewDestinationTypeParams struct {
 	//
 	// * GLUE_TABLE - Glue table destination type.
 	//
+	// *
+	// S3 - S3 destination type.
+	//
 	// This member is required.
 	DestinationType *string
 
-	// Data View Export File Format
+	// Data view export file format.
+	//
+	// * PARQUET - Parquet export file format.
+	//
+	// *
+	// DELIMITED_TEXT - Delimited text export file format.
 	S3DestinationExportFileFormat ExportFileFormat
 
+	// Format Options for S3 Destination type. Here is an example of how you could
+	// specify the s3DestinationExportFileFormatOptions
+	//     { "header": "true",
+	// "delimiter": ",", "compression": "gzip" }
 	S3DestinationExportFileFormatOptions map[string]string
 
 	noSmithyDocumentSerde
@@ -333,7 +347,11 @@ type DataViewSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Permission group parameters for Dataset permissions.
+// Permission group parameters for Dataset permissions. Here is an example of how
+// you could specify the PermissionGroupParams:  { "permissionGroupId":
+// "0r6fCRtSTUk4XPfXQe3M0g", "datasetPermissions": [ {"permission":
+// "ViewDatasetDetails"}, {"permission": "AddDatasetData"}, {"permission":
+// "EditDatasetMetadata"}, {"permission": "DeleteDataset"} ] }
 type PermissionGroupParams struct {
 
 	// List of resource permissions.
@@ -345,7 +363,29 @@ type PermissionGroupParams struct {
 	noSmithyDocumentSerde
 }
 
-// Resource permission for a Dataset.
+// Resource permission for a dataset. When you create a dataset, all the other
+// members of the same user group inherit access to the dataset. You can only
+// create a dataset if your user group has application permission for Create
+// Datasets. The following is a list of valid dataset permissions that you can
+// apply:
+//
+// * ViewDatasetDetails
+//
+// * ReadDatasetDetails
+//
+// * AddDatasetData
+//
+// *
+// CreateSnapshot
+//
+// * EditDatasetMetadata
+//
+// * DeleteDataset
+//
+// For more information on
+// the ataset permissions, see Supported Dataset Permissions
+// (https://docs.aws.amazon.com/finspace/latest/userguide/managing-user-permissions.html#supported-dataset-permissions)
+// in the FinSpace User Guide.
 type ResourcePermission struct {
 
 	// Permission for a resource.

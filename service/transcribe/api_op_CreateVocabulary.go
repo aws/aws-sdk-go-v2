@@ -32,7 +32,7 @@ func (c *Client) CreateVocabulary(ctx context.Context, params *CreateVocabularyI
 type CreateVocabularyInput struct {
 
 	// The language code of the vocabulary entries. For a list of languages and their
-	// corresponding language codes, see transcribe-whatis.
+	// corresponding language codes, see table-language-matrix.
 	//
 	// This member is required.
 	LanguageCode types.LanguageCode
@@ -54,12 +54,13 @@ type CreateVocabularyInput struct {
 
 	// The S3 location of the text file that contains the definition of the custom
 	// vocabulary. The URI must be in the same region as the API endpoint that you are
-	// calling. The general form is: For more information about S3 object names, see
-	// Object Keys
+	// calling. The general form is: https://s3..amazonaws.com///  For example:
+	// https://s3.us-east-1.amazonaws.com/AWSDOC-EXAMPLE-BUCKET/vocab.txt For more
+	// information about S3 object names, see Object Keys
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys)
 	// in the Amazon S3 Developer Guide. For more information about custom
 	// vocabularies, see Custom vocabularies
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/how-vocabulary).
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html).
 	VocabularyFileUri *string
 
 	noSmithyDocumentSerde

@@ -35,7 +35,7 @@ type DeleteDatasetInput struct {
 	// This member is required.
 	DatasetId *string
 
-	// A token used to ensure idempotency.
+	// A token that ensures idempotency. This token expires in 10 minutes.
 	ClientToken *string
 
 	noSmithyDocumentSerde

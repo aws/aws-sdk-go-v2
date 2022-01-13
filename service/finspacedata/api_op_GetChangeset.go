@@ -46,7 +46,9 @@ type GetChangesetInput struct {
 // The response from a describe changeset operation
 type GetChangesetOutput struct {
 
-	// Milliseconds since UTC epoch
+	// Beginning time from which the Changeset is active. The value is determined as
+	// Epoch time in milliseconds. For example, the value for Monday, November 1, 2021
+	// 12:00:00 PM UTC is specified as 1635768000000.
 	ActiveFromTimestamp int64
 
 	// Time until which the Changeset is active. The value is determined as Epoch time
