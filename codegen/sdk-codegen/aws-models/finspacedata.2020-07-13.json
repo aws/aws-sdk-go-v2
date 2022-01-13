@@ -253,7 +253,8 @@
                 "activeFromTimestamp": {
                     "target": "com.amazonaws.finspacedata#TimestampEpoch",
                     "traits": {
-                        "smithy.api#box": {}
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>Beginning time from which the Changeset is active. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
                     }
                 },
                 "updatesChangesetId": {
@@ -465,7 +466,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.finspacedata#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token used to ensure idempotency.</p>",
+                        "smithy.api#documentation": "<p>A token that ensures idempotency. This token expires in 10 minutes.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -487,14 +488,14 @@
                 "sourceParams": {
                     "target": "com.amazonaws.finspacedata#SourceParams",
                     "traits": {
-                        "smithy.api#documentation": "<p>Options that define the location of the data being ingested.</p>",
+                        "smithy.api#documentation": "<p>Options that define the location of the data being ingested (<code>s3SourcePath</code>) and the source of the changeset (<code>sourceType</code>).</p>\n         <p>Both <code>s3SourcePath</code> and <code>sourceType</code> are required attributes.</p>\n         <p>Here is an example of how you could specify the <code>sourceParams</code>:</p>\n         <p>\n            <code>\n        \"sourceParams\": \n        {\n        \"s3SourcePath\": \"s3://finspace-landing-us-east-2-bk7gcfvitndqa6ebnvys4d/scratch/wr5hh8pwkpqqkxa4sxrmcw/ingestion/equity.csv\",\n        \"sourceType\": \"S3\"\n        }\n      </code>\n         </p>\n         <p>The S3 path that you specify must allow the FinSpace role access. To do that, you first need to configure the IAM policy on S3 bucket. For more information, see <a href=\"https://docs.aws.amazon.com/finspace/latest/data-api/fs-using-the-finspace-api.html#access-s3-buckets\">Loading data from an Amazon S3 Bucket using the FinSpace API</a>section.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "formatParams": {
                     "target": "com.amazonaws.finspacedata#FormatParams",
                     "traits": {
-                        "smithy.api#documentation": "<p>Options that define the structure of the source file(s) including the format type (<code>formatType</code>), header row (<code>withHeader</code>), data separation character (<code>separator</code>) and the type of compression (<code>compression</code>).\n    </p>\n         <p>\n            <code>formatType</code> is a required attribute and can have the following values:\n    </p>\n         <ul>\n            <li>\n               <p>\n                  <code>PARQUET</code> - Parquet source file format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CSV</code> - CSV source file format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>JSON</code> - JSON source file format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>XML</code> - XML source file format.</p>\n            </li>\n         </ul>\n    \n         <p>\n      \n      For example, you could specify the following for <code>formatParams</code>:\n     \n    <code>\n          \"formatParams\": \n        {\n         \"formatType\": \"CSV\",\n         \"withHeader\": \"true\",\n         \"separator\": \",\",\n         \"compression\":\"None\"\n         } \n    </code> \n         </p>",
+                        "smithy.api#documentation": "<p>Options that define the structure of the source file(s) including the format type (<code>formatType</code>), header row (<code>withHeader</code>), data separation character (<code>separator</code>) and the type of compression (<code>compression</code>).\n    </p>\n         <p>\n            <code>formatType</code> is a required attribute and can have the following values:\n    </p>\n         <ul>\n            <li>\n               <p>\n                  <code>PARQUET</code> - Parquet source file format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CSV</code> - CSV source file format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>JSON</code> - JSON source file format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>XML</code> - XML source file format.</p>\n            </li>\n         </ul>\n    \n         <p>Here is an example of how you could specify the <code>formatParams</code>:</p>\n         <p>\n            <code>\n          \"formatParams\": \n        {\n         \"formatType\": \"CSV\",\n         \"withHeader\": \"true\",\n         \"separator\": \",\",\n         \"compression\":\"None\"\n         } \n      </code> \n         </p>\n         <p>Note that if you only provide <code>formatType</code> as <code>CSV</code>, the rest of the attributes will automatically default to CSV values as following:</p>\n         <p>\n            <code>\n          {\n          \"withHeader\": \"true\",\n          \"separator\": \",\"\n           }\n        </code>\n         </p>\n         <p> For more information about supported file formats, see <a href=\"https://docs.aws.amazon.com/finspace/latest/userguide/supported-data-types.html\">Supported Data Types and File Formats</a> in the FinSpace User Guide.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -566,7 +567,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.finspacedata#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token used to ensure idempotency.</p>",
+                        "smithy.api#documentation": "<p>A token that ensures idempotency. This token expires in 10 minutes.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -681,7 +682,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.finspacedata#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token used to ensure idempotency.</p>",
+                        "smithy.api#documentation": "<p>A token that ensures idempotency. This token expires in 10 minutes.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -793,15 +794,21 @@
                 "destinationType": {
                     "target": "com.amazonaws.finspacedata#DataViewDestinationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Destination type for a Dataview.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>GLUE_TABLE</code> - Glue table destination type.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Destination type for a Dataview.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>GLUE_TABLE</code> - Glue table destination type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>S3</code> - S3 destination type.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "s3DestinationExportFileFormat": {
-                    "target": "com.amazonaws.finspacedata#ExportFileFormat"
+                    "target": "com.amazonaws.finspacedata#ExportFileFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Data view export file format.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PARQUET</code> - Parquet export file format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELIMITED_TEXT</code> - Delimited text export file format.</p>\n            </li>\n         </ul>"
+                    }
                 },
                 "s3DestinationExportFileFormatOptions": {
-                    "target": "com.amazonaws.finspacedata#S3DestinationFormatOptions"
+                    "target": "com.amazonaws.finspacedata#S3DestinationFormatOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Format Options for S3 Destination type.</p>\n         <p>Here is an example of how you could specify the <code>s3DestinationExportFileFormatOptions</code> \n         </p>\n         <p>\n            <code>\n        {\n        \"header\": \"true\",\n        \"delimiter\": \",\",\n        \"compression\": \"gzip\"\n        }</code>\n         </p>"
+                    }
                 }
             },
             "traits": {
@@ -1195,7 +1202,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.finspacedata#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token used to ensure idempotency.</p>",
+                        "smithy.api#documentation": "<p>A token that ensures idempotency. This token expires in 10 minutes.</p>",
                         "smithy.api#httpQuery": "clientToken",
                         "smithy.api#idempotencyToken": {}
                     }
@@ -1447,7 +1454,8 @@
                 "activeFromTimestamp": {
                     "target": "com.amazonaws.finspacedata#TimestampEpoch",
                     "traits": {
-                        "smithy.api#box": {}
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>Beginning time from which the Changeset is active. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
                     }
                 },
                 "updatesChangesetId": {
@@ -2244,7 +2252,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Permission group parameters for Dataset permissions.</p>"
+                "smithy.api#documentation": "<p>Permission group parameters for Dataset permissions.</p>\n         <p>Here is an example of how you could specify the <code>PermissionGroupParams</code>:</p>\n         <p>\n            <code>\n        {\n        \"permissionGroupId\": \"0r6fCRtSTUk4XPfXQe3M0g\",\n        \"datasetPermissions\": [\n        {\"permission\": \"ViewDatasetDetails\"},\n        {\"permission\": \"AddDatasetData\"},\n        {\"permission\": \"EditDatasetMetadata\"},\n        {\"permission\": \"DeleteDataset\"}\n        ]\n        }\n      </code>\n         </p>"
             }
         },
         "com.amazonaws.finspacedata#PhoneNumber": {
@@ -2282,7 +2290,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Resource permission for a Dataset.</p>"
+                "smithy.api#documentation": "<p>Resource permission for a dataset. When you create a dataset, all the other members of the same user group inherit access to the dataset. You can only create a dataset if your user group has application permission for Create Datasets.</p>\n         <p>The following is a list of valid dataset permissions that you can apply:\n  \n  </p>\n         <ul>\n            <li>\n               <p>\n                  <code>ViewDatasetDetails</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ReadDatasetDetails</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AddDatasetData</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CreateSnapshot</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>EditDatasetMetadata</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DeleteDataset</code>\n               </p>\n            </li>\n         </ul>\n         <p>For more information on the ataset permissions, see <a href=\"https://docs.aws.amazon.com/finspace/latest/userguide/managing-user-permissions.html#supported-dataset-permissions\">Supported Dataset Permissions</a> in the FinSpace User Guide.</p>"
             }
         },
         "com.amazonaws.finspacedata#ResourcePermissionsList": {
@@ -2486,7 +2494,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.finspacedata#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token used to ensure idempotency.</p>",
+                        "smithy.api#documentation": "<p>A token that ensures idempotency. This token expires in 10 minutes.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -2509,14 +2517,14 @@
                 "sourceParams": {
                     "target": "com.amazonaws.finspacedata#SourceParams",
                     "traits": {
-                        "smithy.api#documentation": "<p>Options that define the location of the data being ingested.</p>",
+                        "smithy.api#documentation": "<p>Options that define the location of the data being ingested (<code>s3SourcePath</code>) and the source of the changeset (<code>sourceType</code>).</p>\n         <p>Both <code>s3SourcePath</code> and <code>sourceType</code> are required attributes.</p>\n         <p>Here is an example of how you could specify the <code>sourceParams</code>:</p>\n         <p>\n            <code>\n        \"sourceParams\": \n        {\n        \"s3SourcePath\": \"s3://finspace-landing-us-east-2-bk7gcfvitndqa6ebnvys4d/scratch/wr5hh8pwkpqqkxa4sxrmcw/ingestion/equity.csv\",\n        \"sourceType\": \"S3\"\n        }\n      </code>\n         </p>\n         <p>The S3 path that you specify must allow the FinSpace role access. To do that, you first need to configure the IAM policy on S3 bucket. For more information, see <a href=\"https://docs.aws.amazon.com/finspace/latest/data-api/fs-using-the-finspace-api.html#access-s3-buckets\">Loading data from an Amazon S3 Bucket using the FinSpace API</a>section.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "formatParams": {
                     "target": "com.amazonaws.finspacedata#FormatParams",
                     "traits": {
-                        "smithy.api#documentation": "<p>Options that define the structure of the source file(s).</p>",
+                        "smithy.api#documentation": "<p>Options that define the structure of the source file(s) including the format type (<code>formatType</code>), header row (<code>withHeader</code>), data separation character (<code>separator</code>) and the type of compression (<code>compression</code>).\n    </p>\n         <p>\n            <code>formatType</code> is a required attribute and can have the following values:\n    </p>\n         <ul>\n            <li>\n               <p>\n                  <code>PARQUET</code> - Parquet source file format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CSV</code> - CSV source file format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>JSON</code> - JSON source file format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>XML</code> - XML source file format.</p>\n            </li>\n         </ul>\n    \n         <p>Here is an example of how you could specify the <code>formatParams</code>:</p>\n         <p>\n            <code>\n        \"formatParams\": \n        {\n        \"formatType\": \"CSV\",\n        \"withHeader\": \"true\",\n        \"separator\": \",\",\n        \"compression\":\"None\"\n        } \n      </code> \n         </p>\n         <p>Note that if you only provide <code>formatType</code> as <code>CSV</code>, the rest of the attributes will automatically default to CSV values as following:</p>\n         <p>\n            <code>\n        {\n        \"withHeader\": \"true\",\n        \"separator\": \",\"\n        }\n        </code>\n         </p>\n         <p> For more information about supported file formats, see <a href=\"https://docs.aws.amazon.com/finspace/latest/userguide/supported-data-types.html\">Supported Data Types and File Formats</a> in the FinSpace User Guide.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2588,7 +2596,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.finspacedata#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token used to ensure idempotency.</p>",
+                        "smithy.api#documentation": "<p>A token that ensures idempotency. This token expires in 10 minutes.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },

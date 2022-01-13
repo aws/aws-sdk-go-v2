@@ -615,7 +615,7 @@
                 "ownedBy": {
                     "target": "com.amazonaws.nimble#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user ID of the user that owns the streaming session.</p>"
+                        "smithy.api#documentation": "<p>The user ID of the user that owns the streaming session. The user that owns the\n            session will be logging into the session and interacting with the virtual\n            workstation.</p>"
                     }
                 },
                 "streamingImageId": {
@@ -2473,7 +2473,7 @@
                 "aws.iam#conditionKeys": [
                     "nimble:requesterPrincipalId"
                 ],
-                "smithy.api#documentation": "<p>Gets StreamingSession resource.</p>\n        <p>anvoke this operation to poll for a streaming session state while creating or deleting\n            a session.</p>",
+                "smithy.api#documentation": "<p>Gets StreamingSession resource.</p>\n        <p>Invoke this operation to poll for a streaming session state while creating or deleting\n            a session.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2020-08-01/studios/{studioId}/streaming-sessions/{sessionId}",
@@ -3205,6 +3205,16 @@
                         "aws.cloudformation#cfnExcludeProperty": {},
                         "smithy.api#documentation": "<p>The user ID of the user that most recently updated the resource.</p>"
                     }
+                },
+                "validationResults": {
+                    "target": "com.amazonaws.nimble#ValidationResults",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The list of the latest validation results.</p>",
+                        "smithy.api#tags": [
+                            "launch_profile_validation"
+                        ]
+                    }
                 }
             },
             "traits": {
@@ -3600,6 +3610,12 @@
                 ]
             }
         },
+        "com.amazonaws.nimble#LaunchProfileStateList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.nimble#LaunchProfileState"
+            }
+        },
         "com.amazonaws.nimble#LaunchProfileStatusCode": {
             "type": "string",
             "traits": {
@@ -3669,6 +3685,102 @@
                     "min": 1,
                     "max": 100
                 }
+            }
+        },
+        "com.amazonaws.nimble#LaunchProfileValidationState": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "VALIDATION_NOT_STARTED",
+                        "name": "VALIDATION_NOT_STARTED"
+                    },
+                    {
+                        "value": "VALIDATION_IN_PROGRESS",
+                        "name": "VALIDATION_IN_PROGRESS"
+                    },
+                    {
+                        "value": "VALIDATION_SUCCESS",
+                        "name": "VALIDATION_SUCCESS"
+                    },
+                    {
+                        "value": "VALIDATION_FAILED",
+                        "name": "VALIDATION_FAILED"
+                    },
+                    {
+                        "value": "VALIDATION_FAILED_INTERNAL_SERVER_ERROR",
+                        "name": "VALIDATION_FAILED_INTERNAL_SERVER_ERROR"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.nimble#LaunchProfileValidationStatusCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "VALIDATION_NOT_STARTED",
+                        "name": "VALIDATION_NOT_STARTED"
+                    },
+                    {
+                        "value": "VALIDATION_IN_PROGRESS",
+                        "name": "VALIDATION_IN_PROGRESS"
+                    },
+                    {
+                        "value": "VALIDATION_SUCCESS",
+                        "name": "VALIDATION_SUCCESS"
+                    },
+                    {
+                        "value": "VALIDATION_FAILED_INVALID_SUBNET_ROUTE_TABLE_ASSOCIATION",
+                        "name": "VALIDATION_FAILED_INVALID_SUBNET_ROUTE_TABLE_ASSOCIATION"
+                    },
+                    {
+                        "value": "VALIDATION_FAILED_SUBNET_NOT_FOUND",
+                        "name": "VALIDATION_FAILED_SUBNET_NOT_FOUND"
+                    },
+                    {
+                        "value": "VALIDATION_FAILED_INVALID_SECURITY_GROUP_ASSOCIATION",
+                        "name": "VALIDATION_FAILED_INVALID_SECURITY_GROUP_ASSOCIATION"
+                    },
+                    {
+                        "value": "VALIDATION_FAILED_INVALID_ACTIVE_DIRECTORY",
+                        "name": "VALIDATION_FAILED_INVALID_ACTIVE_DIRECTORY"
+                    },
+                    {
+                        "value": "VALIDATION_FAILED_UNAUTHORIZED",
+                        "name": "VALIDATION_FAILED_UNAUTHORIZED"
+                    },
+                    {
+                        "value": "VALIDATION_FAILED_INTERNAL_SERVER_ERROR",
+                        "name": "VALIDATION_FAILED_INTERNAL_SERVER_ERROR"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.nimble#LaunchProfileValidationStatusMessage": {
+            "type": "string"
+        },
+        "com.amazonaws.nimble#LaunchProfileValidationType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "VALIDATE_ACTIVE_DIRECTORY_STUDIO_COMPONENT",
+                        "name": "VALIDATE_ACTIVE_DIRECTORY_STUDIO_COMPONENT"
+                    },
+                    {
+                        "value": "VALIDATE_SUBNET_ASSOCIATION",
+                        "name": "VALIDATE_SUBNET_ASSOCIATION"
+                    },
+                    {
+                        "value": "VALIDATE_NETWORK_ACL_ASSOCIATION",
+                        "name": "VALIDATE_NETWORK_ACL_ASSOCIATION"
+                    },
+                    {
+                        "value": "VALIDATE_SECURITY_GROUP_ASSOCIATION",
+                        "name": "VALIDATE_SECURITY_GROUP_ASSOCIATION"
+                    }
+                ]
             }
         },
         "com.amazonaws.nimble#LaunchPurpose": {
@@ -4059,7 +4171,7 @@
                     }
                 },
                 "states": {
-                    "target": "com.amazonaws.nimble#StringList",
+                    "target": "com.amazonaws.nimble#LaunchProfileStateList",
                     "traits": {
                         "smithy.api#documentation": "<p>Filter this request to launch profiles in any of the given states.</p>",
                         "smithy.api#httpQuery": "states"
@@ -4359,7 +4471,7 @@
                     }
                 },
                 "states": {
-                    "target": "com.amazonaws.nimble#StringList",
+                    "target": "com.amazonaws.nimble#StudioComponentStateList",
                     "traits": {
                         "smithy.api#documentation": "<p>Filters the request to studio components that are in one of the given states. </p>",
                         "smithy.api#httpQuery": "states"
@@ -4374,7 +4486,7 @@
                     }
                 },
                 "types": {
-                    "target": "com.amazonaws.nimble#StringList",
+                    "target": "com.amazonaws.nimble#StudioComponentTypeList",
                     "traits": {
                         "smithy.api#documentation": "<p>Filters the request to studio components that are of one of the given types.</p>",
                         "smithy.api#httpQuery": "types"
@@ -5358,7 +5470,7 @@
                 "maxStoppedSessionLengthInMinutes": {
                     "target": "com.amazonaws.nimble#StreamConfigurationMaxStoppedSessionLengthInMinutes",
                     "traits": {
-                        "smithy.api#documentation": "<p>Integer that determines if you can start and stop your sessions and how long a session\n            can stay in the STOPPED state. The default value is 0. The maximum value is 5760.</p>\n        <p>If the value is missing or set to 0, your sessions can’t be stopped. If you then call\n            StopStreamingSession, the session fails. If the time that a session stays in the READY\n            state exceeds the maxSessionLengthInMinutes value, the session will automatically be\n            terminated by AWS (instead of stopped).</p>\n        <p>If the value is set to a positive number, the session can be stopped. You can call\n            StopStreamingSession to stop sessions in the READY state. If the time that a session\n            stays in the READY state exceeds the maxSessionLengthInMinutes value, the session will\n            automatically be stopped by AWS (instead of terminated).</p>",
+                        "smithy.api#documentation": "<p>Integer that determines if you can start and stop your sessions and how long a session\n            can stay in the STOPPED state. The default value is 0. The maximum value is 5760.</p>\n        <p>If the value is missing or set to 0, your sessions can’t be stopped. If you then call\n                <code>StopStreamingSession</code>, the session fails. If the time that a session\n            stays in the READY state exceeds the <code>maxSessionLengthInMinutes</code> value, the\n            session will automatically be terminated by AWS (instead of stopped).</p>\n        <p>If the value is set to a positive number, the session can be stopped. You can call\n                <code>StopStreamingSession</code> to stop sessions in the READY state. If the time\n            that a session stays in the READY state exceeds the\n                <code>maxSessionLengthInMinutes</code> value, the session will automatically be\n            stopped by AWS (instead of terminated).</p>",
                         "smithy.api#tags": [
                             "stop_start_streaming_session"
                         ]
@@ -5411,7 +5523,7 @@
                 "maxStoppedSessionLengthInMinutes": {
                     "target": "com.amazonaws.nimble#StreamConfigurationMaxStoppedSessionLengthInMinutes",
                     "traits": {
-                        "smithy.api#documentation": "<p>Integer that determines if you can start and stop your sessions and how long a session\n            can stay in the STOPPED state. The default value is 0. The maximum value is 5760.</p>\n        <p>If the value is missing or set to 0, your sessions can’t be stopped. If you then call\n            StopStreamingSession, the session fails. If the time that a session stays in the READY\n            state exceeds the maxSessionLengthInMinutes value, the session will automatically be\n            terminated by AWS (instead of stopped).</p>\n        <p>If the value is set to a positive number, the session can be stopped. You can call\n            StopStreamingSession to stop sessions in the READY state. If the time that a session\n            stays in the READY state exceeds the maxSessionLengthInMinutes value, the session will\n            automatically be stopped by AWS (instead of terminated).</p>",
+                        "smithy.api#documentation": "<p>Integer that determines if you can start and stop your sessions and how long a session\n            can stay in the STOPPED state. The default value is 0. The maximum value is 5760.</p>\n        <p>If the value is missing or set to 0, your sessions can’t be stopped. If you then call\n                <code>StopStreamingSession</code>, the session fails. If the time that a session\n            stays in the READY state exceeds the <code>maxSessionLengthInMinutes</code> value, the\n            session will automatically be terminated by AWS (instead of stopped).</p>\n        <p>If the value is set to a positive number, the session can be stopped. You can call\n                <code>StopStreamingSession</code> to stop sessions in the READY state. If the time\n            that a session stays in the READY state exceeds the\n                <code>maxSessionLengthInMinutes</code> value, the session will automatically be\n            stopped by AWS (instead of terminated).</p>",
                         "smithy.api#tags": [
                             "stop_start_streaming_session"
                         ]
@@ -5891,7 +6003,7 @@
                 "ownedBy": {
                     "target": "com.amazonaws.nimble#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user ID of the user that owns the streaming session.</p>"
+                        "smithy.api#documentation": "<p>The user ID of the user that owns the streaming session. The user that owns the\n            session will be logging into the session and interacting with the virtual\n            workstation.</p>"
                     }
                 },
                 "sessionId": {
@@ -6172,6 +6284,10 @@
                     {
                         "value": "STREAMING_SESSION_START_IN_PROGRESS",
                         "name": "STREAMING_SESSION_START_IN_PROGRESS"
+                    },
+                    {
+                        "value": "AMI_VALIDATION_ERROR",
+                        "name": "AMI_VALIDATION_ERROR"
                     }
                 ]
             }
@@ -6204,13 +6320,13 @@
                 "linux": {
                     "target": "com.amazonaws.nimble#StreamingSessionStorageRootPathLinux",
                     "traits": {
-                        "smithy.api#documentation": "<p>The folder path in Linux workstations where files are uploaded. The default path is\n                <code>$HOME/Downloads</code>.</p>"
+                        "smithy.api#documentation": "<p>The folder path in Linux workstations where files are uploaded.</p>"
                     }
                 },
                 "windows": {
                     "target": "com.amazonaws.nimble#StreamingSessionStorageRootPathWindows",
                     "traits": {
-                        "smithy.api#documentation": "<p>The folder path in Windows workstations where files are uploaded. The default path is\n                <code>%HOMEPATH%\\Downloads</code>.</p>"
+                        "smithy.api#documentation": "<p>The folder path in Windows workstations where files are uploaded.</p>"
                     }
                 }
             },
@@ -6264,7 +6380,7 @@
                 "ownedBy": {
                     "target": "com.amazonaws.nimble#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user ID of the user that owns the streaming session.</p>"
+                        "smithy.api#documentation": "<p>The user ID of the user that owns the streaming session. The user that owns the\n            session will be logging into the session and interacting with the virtual\n            workstation.</p>"
                     }
                 },
                 "state": {
@@ -6877,6 +6993,12 @@
                 ]
             }
         },
+        "com.amazonaws.nimble#StudioComponentStateList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.nimble#StudioComponentState"
+            }
+        },
         "com.amazonaws.nimble#StudioComponentStatusCode": {
             "type": "string",
             "traits": {
@@ -7041,6 +7163,12 @@
                         "name": "CUSTOM"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.nimble#StudioComponentTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.nimble#StudioComponentType"
             }
         },
         "com.amazonaws.nimble#StudioDisplayName": {
@@ -8164,6 +8292,48 @@
                 "smithy.api#documentation": "<p>One of the parameters in the request is invalid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.nimble#ValidationResult": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.nimble#LaunchProfileValidationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the validation result.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.nimble#LaunchProfileValidationState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current state.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "statusCode": {
+                    "target": "com.amazonaws.nimble#LaunchProfileValidationStatusCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status code. This will contain the failure reason if the state is\n                <code>VALIDATION_FAILED</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "statusMessage": {
+                    "target": "com.amazonaws.nimble#LaunchProfileValidationStatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status message for the validation result.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The launch profile validation result.</p>"
+            }
+        },
+        "com.amazonaws.nimble#ValidationResults": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.nimble#ValidationResult"
             }
         },
         "com.amazonaws.nimble#WindowsMountDrive": {

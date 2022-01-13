@@ -341,6 +341,16 @@
                 }
             }
         },
+        "com.amazonaws.databrew#BucketOwner": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 12,
+                    "max": 12
+                },
+                "smithy.api#pattern": "^[0-9]{12}$"
+            }
+        },
         "com.amazonaws.databrew#CatalogId": {
             "type": "string",
             "traits": {
@@ -5082,7 +5092,7 @@
                 "CheckExpression": {
                     "target": "com.amazonaws.databrew#Expression",
                     "traits": {
-                        "smithy.api#documentation": "<p>The expression which includes column references, condition names followed by \n            variable references, possibly grouped and combined with other conditions. For \n            example, <code>(:col1 starts_with :prefix1 or :col1 starts_with :prefix2) and \n            (:col1 ends_with :suffix1 or :col1 ends_with :suffix2)</code>. Column and value \n            references are substitution variables that should start with the ':' symbol.\n            Depending on the context, substitution variables' values can be either an actual \n            value or a column name. These values are defined in the SubstitutionMap.\n            If a CheckExpression starts with a column reference, then ColumnSelectors in the \n            rule should be null. If ColumnSelectors has been defined, then there should be no\n            columnn reference in the left side of a condition, for example, \n            <code>is_between :val1 and :val2</code>.</p>",
+                        "smithy.api#documentation": "<p>The expression which includes column references, condition names followed by \n            variable references, possibly grouped and combined with other conditions. For \n            example, <code>(:col1 starts_with :prefix1 or :col1 starts_with :prefix2) and \n            (:col1 ends_with :suffix1 or :col1 ends_with :suffix2)</code>. Column and value \n            references are substitution variables that should start with the ':' symbol.\n            Depending on the context, substitution variables' values can be either an actual \n            value or a column name. These values are defined in the SubstitutionMap.\n            If a CheckExpression starts with a column reference, then ColumnSelectors in the \n            rule should be null. If ColumnSelectors has been defined, then there should be no\n            columnn reference in the left side of a condition, for example, \n            <code>is_between :val1 and :val2</code>.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/databrew/latest/dg/profile.data-quality-available-checks.html\">Available checks</a>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5252,10 +5262,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The unique name of the object in the bucket.</p>"
                     }
+                },
+                "BucketOwner": {
+                    "target": "com.amazonaws.databrew#BucketOwner",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID of the bucket owner.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents an Amazon S3 location (bucket name and object key) where DataBrew can read\n            input data, or write output from a job.</p>"
+                "smithy.api#documentation": "<p>Represents an Amazon S3 location (bucket name, bucket owner, and object key) where DataBrew can read\n            input data, or write output from a job.</p>"
             }
         },
         "com.amazonaws.databrew#S3TableOutputOptions": {

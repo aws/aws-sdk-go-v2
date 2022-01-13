@@ -487,7 +487,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Sends a set of messages to the AWS IoT Events system. Each message payload is transformed into\n      the input you specify (<code>\"inputName\"</code>) and ingested into any detectors that monitor\n      that input. If multiple messages are sent, the order in which the messages are processed isn't\n      guaranteed. To guarantee ordering, you must send messages one at a time and wait for a\n      successful response.</p>",
+                "smithy.api#documentation": "<p>Sends a set of messages to the IoT Events system. Each message payload is transformed into\n      the input you specify (<code>\"inputName\"</code>) and ingested into any detectors that monitor\n      that input. If multiple messages are sent, the order in which the messages are processed isn't\n      guaranteed. To guarantee ordering, you must send messages one at a time and wait for a\n      successful response.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/inputs/messages",
@@ -1377,6 +1377,21 @@
         },
         "com.amazonaws.ioteventsdata#IotColumboDataService": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "IoT Events Data",
+                    "arnNamespace": "ioteventsdata",
+                    "cloudFormationName": "IoTEventsData",
+                    "cloudTrailEventSource": "ioteventsdata.amazonaws.com",
+                    "endpointPrefix": "data.iotevents"
+                },
+                "aws.auth#sigv4": {
+                    "name": "ioteventsdata"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>IoT Events monitors your equipment or device fleets for failures or changes in operation, and\n      triggers actions when such events occur. You can use IoT Events Data API commands to send inputs to\n      detectors, list detectors, and view or update a detector's status.</p>\n         <p> For more information, see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/what-is-iotevents.html\">What is IoT Events?</a> in the\n        <i>IoT Events Developer Guide</i>.</p>",
+                "smithy.api#title": "AWS IoT Events Data"
+            },
             "version": "2018-10-23",
             "operations": [
                 {
@@ -1412,22 +1427,7 @@
                 {
                     "target": "com.amazonaws.ioteventsdata#ListDetectors"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "IoT Events Data",
-                    "arnNamespace": "ioteventsdata",
-                    "cloudFormationName": "IoTEventsData",
-                    "cloudTrailEventSource": "ioteventsdata.amazonaws.com",
-                    "endpointPrefix": "data.iotevents"
-                },
-                "aws.auth#sigv4": {
-                    "name": "ioteventsdata"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>AWS IoT Events monitors your equipment or device fleets for failures or changes in operation, and\n      triggers actions when such events occur. You can use AWS IoT Events Data API commands to send inputs to\n      detectors, list detectors, and view or update a detector's status.</p>\n         <p> For more information, see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/what-is-iotevents.html\">What is AWS IoT Events?</a> in the\n        <i>AWS IoT Events Developer Guide</i>.</p>",
-                "smithy.api#title": "AWS IoT Events Data"
-            }
+            ]
         },
         "com.amazonaws.ioteventsdata#KeyValue": {
             "type": "string",
@@ -1993,7 +1993,7 @@
                 "timestamp": {
                     "target": "com.amazonaws.ioteventsdata#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of seconds which have elapsed on the timer.</p>",
+                        "smithy.api#documentation": "<p>The expiration time for the timer.</p>",
                         "smithy.api#required": {}
                     }
                 }

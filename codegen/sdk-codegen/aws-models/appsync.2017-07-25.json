@@ -1253,6 +1253,12 @@
                 },
                 "syncConfig": {
                     "target": "com.amazonaws.appsync#SyncConfig"
+                },
+                "maxBatchSize": {
+                    "target": "com.amazonaws.appsync#MaxBatchSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum batching size for a resolver.</p>"
+                    }
                 }
             }
         },
@@ -1473,6 +1479,12 @@
                     "target": "com.amazonaws.appsync#CachingConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>The caching configuration for the resolver.</p>"
+                    }
+                },
+                "maxBatchSize": {
+                    "target": "com.amazonaws.appsync#MaxBatchSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum batching size for a resolver.</p>"
                     }
                 }
             }
@@ -2481,6 +2493,12 @@
                 },
                 "syncConfig": {
                     "target": "com.amazonaws.appsync#SyncConfig"
+                },
+                "maxBatchSize": {
+                    "target": "com.amazonaws.appsync#MaxBatchSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum batching size for a resolver.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4050,6 +4068,16 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 65536
+                },
+                "smithy.api#pattern": "^.*$"
+            }
+        },
+        "com.amazonaws.appsync#MaxBatchSize": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 2000
                 }
             }
         },
@@ -4299,6 +4327,12 @@
                     "target": "com.amazonaws.appsync#CachingConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>The caching configuration for the resolver.</p>"
+                    }
+                },
+                "maxBatchSize": {
+                    "target": "com.amazonaws.appsync#MaxBatchSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum batching size for a resolver.</p>"
                     }
                 }
             },
@@ -4588,7 +4622,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 256
-                }
+                },
+                "smithy.api#pattern": "^[\\s\\w+-=\\.:/@]*$"
             }
         },
         "com.amazonaws.appsync#Type": {
@@ -5167,6 +5202,12 @@
                 },
                 "syncConfig": {
                     "target": "com.amazonaws.appsync#SyncConfig"
+                },
+                "maxBatchSize": {
+                    "target": "com.amazonaws.appsync#MaxBatchSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum batching size for a resolver.</p>"
+                    }
                 }
             }
         },
@@ -5389,6 +5430,12 @@
                     "target": "com.amazonaws.appsync#CachingConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>The caching configuration for the resolver.</p>"
+                    }
+                },
+                "maxBatchSize": {
+                    "target": "com.amazonaws.appsync#MaxBatchSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum batching size for a resolver.</p>"
                     }
                 }
             }
