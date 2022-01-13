@@ -1098,6 +1098,22 @@ func (UserGroupResolutionMode) Values() []UserGroupResolutionMode {
 	}
 }
 
+type WarningCode string
+
+// Enum values for WarningCode
+const (
+	WarningCodeQueryLanguageInvalidSyntax WarningCode = "QUERY_LANGUAGE_INVALID_SYNTAX"
+)
+
+// Values returns all known values for WarningCode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (WarningCode) Values() []WarningCode {
+	return []WarningCode{
+		"QUERY_LANGUAGE_INVALID_SYNTAX",
+	}
+}
+
 type WebCrawlerMode string
 
 // Enum values for WebCrawlerMode

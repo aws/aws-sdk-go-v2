@@ -2865,6 +2865,11 @@ func awsRestjson1_serializeDocumentAdvancedSecurityOptionsInput(v *types.Advance
 	object := value.Object()
 	defer object.Close()
 
+	if v.AnonymousAuthEnabled != nil {
+		ok := object.Key("AnonymousAuthEnabled")
+		ok.Boolean(*v.AnonymousAuthEnabled)
+	}
+
 	if v.Enabled != nil {
 		ok := object.Key("Enabled")
 		ok.Boolean(*v.Enabled)

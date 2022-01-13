@@ -33,6 +33,9 @@ type StartWorkflowRunInput struct {
 	// This member is required.
 	Name *string
 
+	// The workflow run properties for the new workflow run.
+	RunProperties map[string]string
+
 	noSmithyDocumentSerde
 }
 

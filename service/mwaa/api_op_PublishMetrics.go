@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// An operation for publishing metrics from the customers to the Ops plane.
+// Internal only. Publishes environment health metrics to Amazon CloudWatch.
 func (c *Client) PublishMetrics(ctx context.Context, params *PublishMetricsInput, optFns ...func(*Options)) (*PublishMetricsOutput, error) {
 	if params == nil {
 		params = &PublishMetricsInput{}
@@ -30,13 +30,15 @@ func (c *Client) PublishMetrics(ctx context.Context, params *PublishMetricsInput
 
 type PublishMetricsInput struct {
 
-	// Publishes environment metric data to Amazon CloudWatch.
+	// Internal only. The name of the environment.
 	//
 	// This member is required.
 	EnvironmentName *string
 
-	// Publishes metric data points to Amazon CloudWatch. CloudWatch associates the
-	// data points with the specified metrica.
+	// Internal only. Publishes metrics to Amazon CloudWatch. To learn more about the
+	// metrics published to Amazon CloudWatch, see Amazon MWAA performance metrics in
+	// Amazon CloudWatch
+	// (https://docs.aws.amazon.com/mwaa/latest/userguide/cw-metrics.html).
 	//
 	// This member is required.
 	MetricData []types.MetricDatum

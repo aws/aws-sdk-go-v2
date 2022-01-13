@@ -275,6 +275,7 @@ const (
 	SourceTypeDbCluster           SourceType = "db-cluster"
 	SourceTypeDbClusterSnapshot   SourceType = "db-cluster-snapshot"
 	SourceTypeCustomEngineVersion SourceType = "custom-engine-version"
+	SourceTypeDbProxy             SourceType = "db-proxy"
 )
 
 // Values returns all known values for SourceType. Note that this can be expanded
@@ -289,6 +290,7 @@ func (SourceType) Values() []SourceType {
 		"db-cluster",
 		"db-cluster-snapshot",
 		"custom-engine-version",
+		"db-proxy",
 	}
 }
 

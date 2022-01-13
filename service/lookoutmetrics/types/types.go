@@ -235,13 +235,9 @@ type AnomalyGroupTimeSeriesFeedback struct {
 type AppFlowConfig struct {
 
 	// name of the flow.
-	//
-	// This member is required.
 	FlowName *string
 
 	// An IAM role that gives Amazon Lookout for Metrics permission to access the flow.
-	//
-	// This member is required.
 	RoleArn *string
 
 	noSmithyDocumentSerde
@@ -252,8 +248,6 @@ type CloudWatchConfig struct {
 
 	// An IAM role that gives Amazon Lookout for Metrics permission to access data in
 	// Amazon CloudWatch.
-	//
-	// This member is required.
 	RoleArn *string
 
 	noSmithyDocumentSerde
@@ -514,44 +508,28 @@ type MetricSource struct {
 type RDSSourceConfig struct {
 
 	// A string identifying the database instance.
-	//
-	// This member is required.
 	DBInstanceIdentifier *string
 
 	// The host name of the database.
-	//
-	// This member is required.
 	DatabaseHost *string
 
 	// The name of the RDS database.
-	//
-	// This member is required.
 	DatabaseName *string
 
 	// The port number where the database can be accessed.
-	//
-	// This member is required.
 	DatabasePort int32
 
 	// The Amazon Resource Name (ARN) of the role.
-	//
-	// This member is required.
 	RoleArn *string
 
 	// The Amazon Resource Name (ARN) of the AWS Secrets Manager role.
-	//
-	// This member is required.
 	SecretManagerArn *string
 
 	// The name of the table in the database.
-	//
-	// This member is required.
 	TableName *string
 
 	// An object containing information about the Amazon Virtual Private Cloud (VPC)
 	// configuration.
-	//
-	// This member is required.
 	VpcConfiguration *VpcConfiguration
 
 	noSmithyDocumentSerde
@@ -561,43 +539,27 @@ type RDSSourceConfig struct {
 type RedshiftSourceConfig struct {
 
 	// A string identifying the Redshift cluster.
-	//
-	// This member is required.
 	ClusterIdentifier *string
 
 	// The name of the database host.
-	//
-	// This member is required.
 	DatabaseHost *string
 
 	// The Redshift database name.
-	//
-	// This member is required.
 	DatabaseName *string
 
 	// The port number where the database can be accessed.
-	//
-	// This member is required.
 	DatabasePort int32
 
 	// The Amazon Resource Name (ARN) of the role providing access to the database.
-	//
-	// This member is required.
 	RoleArn *string
 
 	// The Amazon Resource Name (ARN) of the AWS Secrets Manager role.
-	//
-	// This member is required.
 	SecretManagerArn *string
 
 	// The table name of the Redshift database.
-	//
-	// This member is required.
 	TableName *string
 
 	// Contains information about the Amazon Virtual Private Cloud (VPC) configuration.
-	//
-	// This member is required.
 	VpcConfiguration *VpcConfiguration
 
 	noSmithyDocumentSerde
@@ -607,17 +569,15 @@ type RedshiftSourceConfig struct {
 // source files.
 type S3SourceConfig struct {
 
-	// The ARN of an IAM role that has read and write access permissions to the source
-	// S3 bucket.
-	//
-	// This member is required.
-	RoleArn *string
-
 	// Contains information about a source file's formatting.
 	FileFormatDescriptor *FileFormatDescriptor
 
 	// A list of paths to the historical data files.
 	HistoricalDataPathList []string
+
+	// The ARN of an IAM role that has read and write access permissions to the source
+	// S3 bucket.
+	RoleArn *string
 
 	// A list of templated paths to the source files.
 	TemplatedPathList []string

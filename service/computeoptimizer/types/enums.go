@@ -206,6 +206,9 @@ const (
 	ExportableAutoScalingGroupFieldRecommendationOptionsEstimatedMonthlySavingsValue               ExportableAutoScalingGroupField = "RecommendationOptionsEstimatedMonthlySavingsValue"
 	ExportableAutoScalingGroupFieldEffectiveRecommendationPreferencesCpuVendorArchitectures        ExportableAutoScalingGroupField = "EffectiveRecommendationPreferencesCpuVendorArchitectures"
 	ExportableAutoScalingGroupFieldEffectiveRecommendationPreferencesEnhancedInfrastructureMetrics ExportableAutoScalingGroupField = "EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics"
+	ExportableAutoScalingGroupFieldEffectiveRecommendationPreferencesInferredWorkloadTypes         ExportableAutoScalingGroupField = "EffectiveRecommendationPreferencesInferredWorkloadTypes"
+	ExportableAutoScalingGroupFieldInferredWorkloadTypes                                           ExportableAutoScalingGroupField = "InferredWorkloadTypes"
+	ExportableAutoScalingGroupFieldRecommendationOptionsMigrationEffort                            ExportableAutoScalingGroupField = "RecommendationOptionsMigrationEffort"
 )
 
 // Values returns all known values for ExportableAutoScalingGroupField. Note that
@@ -265,6 +268,9 @@ func (ExportableAutoScalingGroupField) Values() []ExportableAutoScalingGroupFiel
 		"RecommendationOptionsEstimatedMonthlySavingsValue",
 		"EffectiveRecommendationPreferencesCpuVendorArchitectures",
 		"EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics",
+		"EffectiveRecommendationPreferencesInferredWorkloadTypes",
+		"InferredWorkloadTypes",
+		"RecommendationOptionsMigrationEffort",
 	}
 }
 
@@ -321,6 +327,9 @@ const (
 	ExportableInstanceFieldRecommendationOptionsEstimatedMonthlySavingsValue               ExportableInstanceField = "RecommendationOptionsEstimatedMonthlySavingsValue"
 	ExportableInstanceFieldEffectiveRecommendationPreferencesCpuVendorArchitectures        ExportableInstanceField = "EffectiveRecommendationPreferencesCpuVendorArchitectures"
 	ExportableInstanceFieldEffectiveRecommendationPreferencesEnhancedInfrastructureMetrics ExportableInstanceField = "EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics"
+	ExportableInstanceFieldEffectiveRecommendationPreferencesInferredWorkloadTypes         ExportableInstanceField = "EffectiveRecommendationPreferencesInferredWorkloadTypes"
+	ExportableInstanceFieldInferredWorkloadTypes                                           ExportableInstanceField = "InferredWorkloadTypes"
+	ExportableInstanceFieldRecommendationOptionsMigrationEffort                            ExportableInstanceField = "RecommendationOptionsMigrationEffort"
 )
 
 // Values returns all known values for ExportableInstanceField. Note that this can
@@ -377,6 +386,9 @@ func (ExportableInstanceField) Values() []ExportableInstanceField {
 		"RecommendationOptionsEstimatedMonthlySavingsValue",
 		"EffectiveRecommendationPreferencesCpuVendorArchitectures",
 		"EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics",
+		"EffectiveRecommendationPreferencesInferredWorkloadTypes",
+		"InferredWorkloadTypes",
+		"RecommendationOptionsMigrationEffort",
 	}
 }
 
@@ -590,6 +602,53 @@ func (FindingReasonCode) Values() []FindingReasonCode {
 	return []FindingReasonCode{
 		"MemoryOverprovisioned",
 		"MemoryUnderprovisioned",
+	}
+}
+
+type InferredWorkloadType string
+
+// Enum values for InferredWorkloadType
+const (
+	InferredWorkloadTypeAmazonEmr       InferredWorkloadType = "AmazonEmr"
+	InferredWorkloadTypeApacheCassandra InferredWorkloadType = "ApacheCassandra"
+	InferredWorkloadTypeApacheHadoop    InferredWorkloadType = "ApacheHadoop"
+	InferredWorkloadTypeMemcached       InferredWorkloadType = "Memcached"
+	InferredWorkloadTypeNginx           InferredWorkloadType = "Nginx"
+	InferredWorkloadTypePostgreSql      InferredWorkloadType = "PostgreSql"
+	InferredWorkloadTypeRedis           InferredWorkloadType = "Redis"
+)
+
+// Values returns all known values for InferredWorkloadType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InferredWorkloadType) Values() []InferredWorkloadType {
+	return []InferredWorkloadType{
+		"AmazonEmr",
+		"ApacheCassandra",
+		"ApacheHadoop",
+		"Memcached",
+		"Nginx",
+		"PostgreSql",
+		"Redis",
+	}
+}
+
+type InferredWorkloadTypesPreference string
+
+// Enum values for InferredWorkloadTypesPreference
+const (
+	InferredWorkloadTypesPreferenceActive   InferredWorkloadTypesPreference = "Active"
+	InferredWorkloadTypesPreferenceInactive InferredWorkloadTypesPreference = "Inactive"
+)
+
+// Values returns all known values for InferredWorkloadTypesPreference. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (InferredWorkloadTypesPreference) Values() []InferredWorkloadTypesPreference {
+	return []InferredWorkloadTypesPreference{
+		"Active",
+		"Inactive",
 	}
 }
 
@@ -878,6 +937,28 @@ func (MetricStatistic) Values() []MetricStatistic {
 	}
 }
 
+type MigrationEffort string
+
+// Enum values for MigrationEffort
+const (
+	MigrationEffortVeryLow MigrationEffort = "VeryLow"
+	MigrationEffortLow     MigrationEffort = "Low"
+	MigrationEffortMedium  MigrationEffort = "Medium"
+	MigrationEffortHigh    MigrationEffort = "High"
+)
+
+// Values returns all known values for MigrationEffort. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MigrationEffort) Values() []MigrationEffort {
+	return []MigrationEffort{
+		"VeryLow",
+		"Low",
+		"Medium",
+		"High",
+	}
+}
+
 type PlatformDifference string
 
 // Enum values for PlatformDifference
@@ -909,6 +990,7 @@ type RecommendationPreferenceName string
 // Enum values for RecommendationPreferenceName
 const (
 	RecommendationPreferenceNameEnhancedInfrastructureMetrics RecommendationPreferenceName = "EnhancedInfrastructureMetrics"
+	RecommendationPreferenceNameInferredWorkloadTypes         RecommendationPreferenceName = "InferredWorkloadTypes"
 )
 
 // Values returns all known values for RecommendationPreferenceName. Note that this
@@ -917,6 +999,7 @@ const (
 func (RecommendationPreferenceName) Values() []RecommendationPreferenceName {
 	return []RecommendationPreferenceName{
 		"EnhancedInfrastructureMetrics",
+		"InferredWorkloadTypes",
 	}
 }
 
@@ -950,6 +1033,7 @@ const (
 	ResourceTypeAutoScalingGroup ResourceType = "AutoScalingGroup"
 	ResourceTypeEbsVolume        ResourceType = "EbsVolume"
 	ResourceTypeLambdaFunction   ResourceType = "LambdaFunction"
+	ResourceTypeNotApplicable    ResourceType = "NotApplicable"
 )
 
 // Values returns all known values for ResourceType. Note that this can be expanded
@@ -961,6 +1045,7 @@ func (ResourceType) Values() []ResourceType {
 		"AutoScalingGroup",
 		"EbsVolume",
 		"LambdaFunction",
+		"NotApplicable",
 	}
 }
 

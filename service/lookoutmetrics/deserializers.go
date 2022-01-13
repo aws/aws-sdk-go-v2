@@ -1439,6 +1439,15 @@ func awsRestjson1_deserializeOpDocumentDescribeAnomalyDetectorOutput(v **Describ
 				sv.FailureReason = ptr.String(jtv)
 			}
 
+		case "FailureType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AnomalyDetectorFailureType to be of type string, got %T instead", value)
+				}
+				sv.FailureType = types.AnomalyDetectorFailureType(jtv)
+			}
+
 		case "KmsKeyArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3977,6 +3986,9 @@ func awsRestjson1_deserializeOpErrorUpdateMetricSet(response *smithyhttp.Respons
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
 
 	case strings.EqualFold("TooManyRequestsException", errorCode):
 		return awsRestjson1_deserializeErrorTooManyRequestsException(response, errorBody)

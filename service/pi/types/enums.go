@@ -22,11 +22,38 @@ func (DetailStatus) Values() []DetailStatus {
 	}
 }
 
+type FeatureStatus string
+
+// Enum values for FeatureStatus
+const (
+	FeatureStatusEnabled               FeatureStatus = "ENABLED"
+	FeatureStatusDisabled              FeatureStatus = "DISABLED"
+	FeatureStatusUnsupported           FeatureStatus = "UNSUPPORTED"
+	FeatureStatusEnabledPendingReboot  FeatureStatus = "ENABLED_PENDING_REBOOT"
+	FeatureStatusDisabledPendingReboot FeatureStatus = "DISABLED_PENDING_REBOOT"
+	FeatureStatusUnknown               FeatureStatus = "UNKNOWN"
+)
+
+// Values returns all known values for FeatureStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FeatureStatus) Values() []FeatureStatus {
+	return []FeatureStatus{
+		"ENABLED",
+		"DISABLED",
+		"UNSUPPORTED",
+		"ENABLED_PENDING_REBOOT",
+		"DISABLED_PENDING_REBOOT",
+		"UNKNOWN",
+	}
+}
+
 type ServiceType string
 
 // Enum values for ServiceType
 const (
-	ServiceTypeRds ServiceType = "RDS"
+	ServiceTypeRds   ServiceType = "RDS"
+	ServiceTypeDocdb ServiceType = "DOCDB"
 )
 
 // Values returns all known values for ServiceType. Note that this can be expanded
@@ -35,5 +62,6 @@ const (
 func (ServiceType) Values() []ServiceType {
 	return []ServiceType{
 		"RDS",
+		"DOCDB",
 	}
 }

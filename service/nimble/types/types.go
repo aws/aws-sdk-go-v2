@@ -154,6 +154,9 @@ type LaunchProfile struct {
 	// The user ID of the user that most recently updated the resource.
 	UpdatedBy *string
 
+	// The list of the latest validation results.
+	ValidationResults []ValidationResult
+
 	noSmithyDocumentSerde
 }
 
@@ -546,7 +549,9 @@ type StreamingSession struct {
 	// The ID of the launch profile used to control access from the streaming session.
 	LaunchProfileId *string
 
-	// The user ID of the user that owns the streaming session.
+	// The user ID of the user that owns the streaming session. The user that owns the
+	// session will be logging into the session and interacting with the virtual
+	// workstation.
 	OwnedBy *string
 
 	// The session ID.
@@ -601,12 +606,10 @@ type StreamingSession struct {
 // are uploaded.
 type StreamingSessionStorageRoot struct {
 
-	// The folder path in Linux workstations where files are uploaded. The default path
-	// is $HOME/Downloads.
+	// The folder path in Linux workstations where files are uploaded.
 	Linux *string
 
-	// The folder path in Windows workstations where files are uploaded. The default
-	// path is %HOMEPATH%\Downloads.
+	// The folder path in Windows workstations where files are uploaded.
 	Windows *string
 
 	noSmithyDocumentSerde
@@ -627,7 +630,9 @@ type StreamingSessionStream struct {
 	// The Unix epoch timestamp in seconds for when the resource expires.
 	ExpiresAt *time.Time
 
-	// The user ID of the user that owns the streaming session.
+	// The user ID of the user that owns the streaming session. The user that owns the
+	// session will be logging into the session and interacting with the virtual
+	// workstation.
 	OwnedBy *string
 
 	// The current state.
@@ -895,6 +900,33 @@ type StudioMembership struct {
 
 	// The Active Directory Security Identifier for this user, if available.
 	Sid *string
+
+	noSmithyDocumentSerde
+}
+
+// The launch profile validation result.
+type ValidationResult struct {
+
+	// The current state.
+	//
+	// This member is required.
+	State LaunchProfileValidationState
+
+	// The status code. This will contain the failure reason if the state is
+	// VALIDATION_FAILED.
+	//
+	// This member is required.
+	StatusCode LaunchProfileValidationStatusCode
+
+	// The status message for the validation result.
+	//
+	// This member is required.
+	StatusMessage *string
+
+	// The type of the validation result.
+	//
+	// This member is required.
+	Type LaunchProfileValidationType
 
 	noSmithyDocumentSerde
 }

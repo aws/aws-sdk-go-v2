@@ -50,10 +50,13 @@ type GetEffectiveRecommendationPreferencesOutput struct {
 	// Considers all applicable preferences that you might have set at the resource,
 	// account, and organization level. A status of Active confirms that the preference
 	// is applied in the latest recommendation refresh, and a status of Inactive
-	// confirms that it's not yet applied. To validate whether the preference is
-	// applied to your last generated set of recommendations, review the
+	// confirms that it's not yet applied to recommendations. To validate whether the
+	// preference is applied to your last generated set of recommendations, review the
 	// effectiveRecommendationPreferences value in the response of the
 	// GetAutoScalingGroupRecommendations and GetEC2InstanceRecommendations actions.
+	// For more information, see Enhanced infrastructure metrics
+	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html)
+	// in the Compute Optimizer User Guide.
 	EnhancedInfrastructureMetrics types.EnhancedInfrastructureMetrics
 
 	// Metadata pertaining to the operation's result.

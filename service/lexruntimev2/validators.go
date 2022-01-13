@@ -396,6 +396,74 @@ func validateMessages(v []types.Message) error {
 	}
 }
 
+func validateRuntimeHintDetails(v *types.RuntimeHintDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RuntimeHintDetails"}
+	if v.RuntimeHintValues == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuntimeHintValues"))
+	} else if v.RuntimeHintValues != nil {
+		if err := validateRuntimeHintValuesList(v.RuntimeHintValues); err != nil {
+			invalidParams.AddNested("RuntimeHintValues", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRuntimeHints(v *types.RuntimeHints) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RuntimeHints"}
+	if v.SlotHints != nil {
+		if err := validateSlotHintsIntentMap(v.SlotHints); err != nil {
+			invalidParams.AddNested("SlotHints", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRuntimeHintValue(v *types.RuntimeHintValue) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RuntimeHintValue"}
+	if v.Phrase == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Phrase"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRuntimeHintValuesList(v []types.RuntimeHintValue) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RuntimeHintValuesList"}
+	for i := range v {
+		if err := validateRuntimeHintValue(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSessionState(v *types.SessionState) error {
 	if v == nil {
 		return nil
@@ -414,6 +482,11 @@ func validateSessionState(v *types.SessionState) error {
 	if v.ActiveContexts != nil {
 		if err := validateActiveContextsList(v.ActiveContexts); err != nil {
 			invalidParams.AddNested("ActiveContexts", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RuntimeHints != nil {
+		if err := validateRuntimeHints(v.RuntimeHints); err != nil {
+			invalidParams.AddNested("RuntimeHints", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -436,6 +509,41 @@ func validateSlot(v *types.Slot) error {
 	if v.Values != nil {
 		if err := validateValues(v.Values); err != nil {
 			invalidParams.AddNested("Values", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSlotHintsIntentMap(v map[string]map[string]types.RuntimeHintDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SlotHintsIntentMap"}
+	for key := range v {
+		if err := validateSlotHintsSlotMap(v[key]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSlotHintsSlotMap(v map[string]types.RuntimeHintDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SlotHintsSlotMap"}
+	for key := range v {
+		value := v[key]
+		if err := validateRuntimeHintDetails(&value); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

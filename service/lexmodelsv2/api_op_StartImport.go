@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// Starts importing a bot or bot locale from a zip archive that you uploaded to an
-// S3 bucket.
+// Starts importing a bot, bot locale, or custom vocabulary from a zip archive that
+// you uploaded to an S3 bucket.
 func (c *Client) StartImport(ctx context.Context, params *StartImportInput, optFns ...func(*Options)) (*StartImportOutput, error) {
 	if params == nil {
 		params = &StartImportInput{}
@@ -46,12 +46,12 @@ type StartImportInput struct {
 	// This member is required.
 	MergeStrategy types.MergeStrategy
 
-	// Parameters for creating the bot or bot locale.
+	// Parameters for creating the bot, bot locale or custom vocabulary.
 	//
 	// This member is required.
 	ResourceSpecification *types.ImportResourceSpecification
 
-	// The password used to encrypt the zip archive that contains the bot or bot locale
+	// The password used to encrypt the zip archive that contains the resource
 	// definition. You should always encrypt the zip archive to protect it during
 	// transit between your site and Amazon Lex.
 	FilePassword *string
@@ -67,8 +67,8 @@ type StartImportOutput struct {
 	// A unique identifier for the import.
 	ImportId *string
 
-	// The current status of the import. When the status is Complete the bot or bot
-	// alias is ready to use.
+	// The current status of the import. When the status is Complete the bot, bot
+	// alias, or custom vocabulary is ready to use.
 	ImportStatus types.ImportStatus
 
 	// The strategy used when there was a name conflict between the imported resource
@@ -76,7 +76,7 @@ type StartImportOutput struct {
 	// resources are not overwritten and the import fails.
 	MergeStrategy types.MergeStrategy
 
-	// The parameters used when importing the bot or bot locale.
+	// The parameters used when importing the resource.
 	ResourceSpecification *types.ImportResourceSpecification
 
 	// Metadata pertaining to the operation's result.

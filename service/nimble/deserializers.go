@@ -8611,6 +8611,11 @@ func awsRestjson1_deserializeDocumentLaunchProfile(v **types.LaunchProfile, valu
 				sv.UpdatedBy = ptr.String(jtv)
 			}
 
+		case "validationResults":
+			if err := awsRestjson1_deserializeDocumentValidationResults(&sv.ValidationResults, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -11375,5 +11380,106 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentValidationResult(v **types.ValidationResult, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ValidationResult
+	if *v == nil {
+		sv = &types.ValidationResult{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "state":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LaunchProfileValidationState to be of type string, got %T instead", value)
+				}
+				sv.State = types.LaunchProfileValidationState(jtv)
+			}
+
+		case "statusCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LaunchProfileValidationStatusCode to be of type string, got %T instead", value)
+				}
+				sv.StatusCode = types.LaunchProfileValidationStatusCode(jtv)
+			}
+
+		case "statusMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LaunchProfileValidationStatusMessage to be of type string, got %T instead", value)
+				}
+				sv.StatusMessage = ptr.String(jtv)
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LaunchProfileValidationType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.LaunchProfileValidationType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentValidationResults(v *[]types.ValidationResult, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ValidationResult
+	if *v == nil {
+		cv = []types.ValidationResult{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ValidationResult
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentValidationResult(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }

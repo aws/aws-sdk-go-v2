@@ -8764,6 +8764,19 @@ func awsRestjson1_deserializeDocumentFunctionConfiguration(v **types.FunctionCon
 				sv.FunctionVersion = ptr.String(jtv)
 			}
 
+		case "maxBatchSize":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MaxBatchSize to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxBatchSize = int32(i64)
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9803,6 +9816,19 @@ func awsRestjson1_deserializeDocumentResolver(v **types.Resolver, value interfac
 					return fmt.Errorf("expected ResolverKind to be of type string, got %T instead", value)
 				}
 				sv.Kind = types.ResolverKind(jtv)
+			}
+
+		case "maxBatchSize":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MaxBatchSize to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxBatchSize = int32(i64)
 			}
 
 		case "pipelineConfig":

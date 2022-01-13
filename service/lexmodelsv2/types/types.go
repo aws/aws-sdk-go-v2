@@ -7,6 +7,16 @@ import (
 	"time"
 )
 
+// Provides settings that enable advanced recognition settings for slot values.
+type AdvancedRecognitionSetting struct {
+
+	// Enables using the slot values as a custom vocabulary for recognizing user
+	// utterances.
+	AudioRecognitionStrategy AudioRecognitionStrategy
+
+	noSmithyDocumentSerde
+}
+
 // Filters responses returned by the ListAggregatedUtterances operation.
 type AggregatedUtterancesFilter struct {
 
@@ -727,6 +737,49 @@ type CustomPayload struct {
 	noSmithyDocumentSerde
 }
 
+// Provides the parameters required for exporting a custom vocabulary.
+type CustomVocabularyExportSpecification struct {
+
+	// The identifier of the bot that contains the custom vocabulary to export.
+	//
+	// This member is required.
+	BotId *string
+
+	// The version of the bot that contains the custom vocabulary to export.
+	//
+	// This member is required.
+	BotVersion *string
+
+	// The locale of the bot that contains the custom vocabulary to export.
+	//
+	// This member is required.
+	LocaleId *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides the parameters required for importing a custom vocabulary.
+type CustomVocabularyImportSpecification struct {
+
+	// The identifier of the bot to import the custom vocabulary to.
+	//
+	// This member is required.
+	BotId *string
+
+	// The version of the bot to import the custom vocabulary to.
+	//
+	// This member is required.
+	BotVersion *string
+
+	// The identifier of the local to import the custom vocabulary to. The value must
+	// be en_GB.
+	//
+	// This member is required.
+	LocaleId *string
+
+	noSmithyDocumentSerde
+}
+
 // By default, data stored by Amazon Lex is encrypted. The DataPrivacy structure
 // provides settings that determine how Amazon Lex handles special cases of
 // securing the data for your bot.
@@ -824,7 +877,8 @@ type ExportFilter struct {
 	// This member is required.
 	Operator ExportFilterOperator
 
-	// The values to use to filter the response.
+	// The values to use to filter the response. The values must be Bot, BotLocale, or
+	// CustomVocabulary.
 	//
 	// This member is required.
 	Values []string
@@ -842,6 +896,9 @@ type ExportResourceSpecification struct {
 
 	// Parameters for exporting a bot locale.
 	BotLocaleExportSpecification *BotLocaleExportSpecification
+
+	// The parameters required to export a custom vocabulary.
+	CustomVocabularyExportSpecification *CustomVocabularyExportSpecification
 
 	noSmithyDocumentSerde
 }
@@ -1065,7 +1122,8 @@ type ImportFilter struct {
 	// This member is required.
 	Operator ImportFilterOperator
 
-	// The values to use to filter the response.
+	// The values to use to filter the response. The values must be Bot, BotLocale, or
+	// CustomVocabulary.
 	//
 	// This member is required.
 	Values []string
@@ -1083,6 +1141,9 @@ type ImportResourceSpecification struct {
 
 	// Parameters for importing a bot locale.
 	BotLocaleImportSpecification *BotLocaleImportSpecification
+
+	// Provides the parameters required for importing a custom vocabulary.
+	CustomVocabularyImportSpecification *CustomVocabularyImportSpecification
 
 	noSmithyDocumentSerde
 }
@@ -1121,6 +1182,9 @@ type ImportSummary struct {
 
 	// The name that you gave the imported resource.
 	ImportedResourceName *string
+
+	// The type of resource that was imported.
+	ImportedResourceType ImportResourceType
 
 	// The date and time that the import was last updated.
 	LastUpdatedDateTime *time.Time
@@ -1939,6 +2003,9 @@ type SlotValueSelectionSetting struct {
 	//
 	// This member is required.
 	ResolutionStrategy SlotValueResolutionStrategy
+
+	// Provides settings that enable advanced recognition settings for slot values.
+	AdvancedRecognitionSetting *AdvancedRecognitionSetting
 
 	// A regular expression used to validate the value of a slot.
 	RegexFilter *SlotValueRegexFilter

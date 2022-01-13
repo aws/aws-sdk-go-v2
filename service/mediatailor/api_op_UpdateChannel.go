@@ -40,6 +40,11 @@ type UpdateChannelInput struct {
 	// This member is required.
 	Outputs []types.RequestOutputItem
 
+	// The slate used to fill gaps between programs in the schedule. You must configure
+	// filler slate if your channel uses the LINEAR PlaybackMode. MediaTailor doesn't
+	// support filler slate for channels using the LOOP PlaybackMode.
+	FillerSlate *types.SlateSource
+
 	noSmithyDocumentSerde
 }
 

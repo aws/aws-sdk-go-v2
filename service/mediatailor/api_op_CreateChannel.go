@@ -50,7 +50,8 @@ type CreateChannelInput struct {
 	PlaybackMode types.PlaybackMode
 
 	// The slate used to fill gaps between programs in the schedule. You must configure
-	// filler slate if your channel uses a LINEAR PlaybackMode.
+	// filler slate if your channel uses the LINEAR PlaybackMode. MediaTailor doesn't
+	// support filler slate for channels using the LOOP PlaybackMode.
 	FillerSlate *types.SlateSource
 
 	// The tags to assign to the channel.

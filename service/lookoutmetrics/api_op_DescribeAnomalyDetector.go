@@ -57,8 +57,11 @@ type DescribeAnomalyDetectorOutput struct {
 	// The time at which the detector was created.
 	CreationTime *time.Time
 
-	// The reason that the detector failed, if any.
+	// The reason that the detector failed.
 	FailureReason *string
+
+	// The process that caused the detector to fail.
+	FailureType types.AnomalyDetectorFailureType
 
 	// The ARN of the KMS key to use to encrypt your data.
 	KmsKeyArn *string

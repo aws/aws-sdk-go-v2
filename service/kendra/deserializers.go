@@ -15249,6 +15249,89 @@ func awsAwsjson11_deserializeDocumentValueImportanceMap(v *map[string]int32, val
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentWarning(v **types.Warning, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Warning
+	if *v == nil {
+		sv = &types.Warning{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Code":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WarningCode to be of type string, got %T instead", value)
+				}
+				sv.Code = types.WarningCode(jtv)
+			}
+
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WarningMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentWarningList(v *[]types.Warning, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.Warning
+	if *v == nil {
+		cv = []types.Warning{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.Warning
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentWarning(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentWebCrawlerConfiguration(v **types.WebCrawlerConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -17762,6 +17845,11 @@ func awsAwsjson11_deserializeOpDocumentQueryOutput(v **QueryOutput, value interf
 					return err
 				}
 				sv.TotalNumberOfResults = ptr.Int32(int32(i64))
+			}
+
+		case "Warnings":
+			if err := awsAwsjson11_deserializeDocumentWarningList(&sv.Warnings, value); err != nil {
+				return err
 			}
 
 		default:

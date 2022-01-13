@@ -1917,6 +1917,11 @@ func awsAwsjson10_serializeOpDocumentPutRecommendationPreferencesInput(v *PutRec
 		ok.String(string(v.EnhancedInfrastructureMetrics))
 	}
 
+	if len(v.InferredWorkloadTypes) > 0 {
+		ok := object.Key("inferredWorkloadTypes")
+		ok.String(string(v.InferredWorkloadTypes))
+	}
+
 	if len(v.ResourceType) > 0 {
 		ok := object.Key("resourceType")
 		ok.String(string(v.ResourceType))

@@ -42,10 +42,11 @@ type CreateEnvironmentInput struct {
 	DagS3Path *string
 
 	// The Amazon Resource Name (ARN) of the execution role for your environment. An
-	// execution role is an AWS Identity and Access Management (IAM) role that grants
-	// MWAA permission to access AWS services and resources used by your environment.
-	// For example, arn:aws:iam::123456789:role/my-execution-role. To learn more, see
-	// Amazon MWAA Execution role
+	// execution role is an Amazon Web Services Identity and Access Management (IAM)
+	// role that grants MWAA permission to access Amazon Web Services services and
+	// resources used by your environment. For example,
+	// arn:aws:iam::123456789:role/my-execution-role. To learn more, see Amazon MWAA
+	// Execution role
 	// (https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-create-role.html).
 	//
 	// This member is required.
@@ -57,8 +58,8 @@ type CreateEnvironmentInput struct {
 	Name *string
 
 	// The VPC networking components used to secure and enable network traffic between
-	// the AWS resources for your environment. To learn more, see About networking on
-	// Amazon MWAA
+	// the Amazon Web Services resources for your environment. To learn more, see About
+	// networking on Amazon MWAA
 	// (https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html).
 	//
 	// This member is required.
@@ -79,8 +80,10 @@ type CreateEnvironmentInput struct {
 	// (https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-env-variables.html).
 	AirflowConfigurationOptions map[string]string
 
-	// The Apache Airflow version for your environment. For example, v1.10.12. If no
-	// value is specified, defaults to the latest version. Valid values: v1.10.12.
+	// The Apache Airflow version for your environment. If no value is specified,
+	// defaults to the latest version. Valid values: 1.10.12, 2.0.2. To learn more, see
+	// Apache Airflow versions on Amazon Managed Workflows for Apache Airflow (MWAA)
+	// (https://docs.aws.amazon.com/mwaa/latest/userguide/airflow-versions.html).
 	AirflowVersion *string
 
 	// The environment class type. Valid values: mw1.small, mw1.medium, mw1.large. To
@@ -88,14 +91,13 @@ type CreateEnvironmentInput struct {
 	// (https://docs.aws.amazon.com/mwaa/latest/userguide/environment-class.html).
 	EnvironmentClass *string
 
-	// The AWS Key Management Service (KMS) key to encrypt the data in your
-	// environment. You can use an AWS owned CMK, or a Customer managed CMK (advanced).
-	// To learn more, see Get started with Amazon Managed Workflows for Apache Airflow
-	// (https://docs.aws.amazon.com/mwaa/latest/userguide/get-started.html).
+	// The Amazon Web Services Key Management Service (KMS) key to encrypt the data in
+	// your environment. You can use an Amazon Web Services owned CMK, or a Customer
+	// managed CMK (advanced). To learn more, see Create an Amazon MWAA environment
+	// (https://docs.aws.amazon.com/mwaa/latest/userguide/create-environment.html).
 	KmsKey *string
 
-	// Defines the Apache Airflow logs to send to CloudWatch Logs: DagProcessingLogs,
-	// SchedulerLogs, TaskLogs, WebserverLogs, WorkerLogs.
+	// Defines the Apache Airflow logs to send to CloudWatch Logs.
 	LoggingConfiguration *types.LoggingConfigurationInput
 
 	// The maximum number of workers that you want to run in your environment. MWAA
@@ -136,12 +138,18 @@ type CreateEnvironmentInput struct {
 	// (https://docs.aws.amazon.com/mwaa/latest/userguide/working-dags-dependencies.html).
 	RequirementsS3Path *string
 
-	// The number of Apache Airflow schedulers to run in your environment.
+	// The number of Apache Airflow schedulers to run in your environment. Valid
+	// values:
+	//
+	// * v2.0.2 - Accepts between 2 to 5. Defaults to 2.
+	//
+	// * v1.10.12 - Accepts
+	// 1.
 	Schedulers *int32
 
 	// The key-value tag pairs you want to associate to your environment. For example,
-	// "Environment": "Staging". To learn more, see Tagging AWS resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).
+	// "Environment": "Staging". To learn more, see Tagging Amazon Web Services
+	// resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).
 	Tags map[string]string
 
 	// The Apache Airflow Web server access mode. To learn more, see Apache Airflow
@@ -149,12 +157,10 @@ type CreateEnvironmentInput struct {
 	// (https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-networking.html).
 	WebserverAccessMode types.WebserverAccessMode
 
-	// The day and time of the week to start weekly maintenance updates of your
-	// environment in the following format: DAY:HH:MM. For example: TUE:03:30. You can
-	// specify a start time in 30 minute increments only. Supported input includes the
-	// following:
-	//
-	// * MON|TUE|WED|THU|FRI|SAT|SUN:([01]\\d|2[0-3]):(00|30)
+	// The day and time of the week in Coordinated Universal Time (UTC) 24-hour
+	// standard time to start weekly maintenance updates of your environment in the
+	// following format: DAY:HH:MM. For example: TUE:03:30. You can specify a start
+	// time in 30 minute increments only.
 	WeeklyMaintenanceWindowStart *string
 
 	noSmithyDocumentSerde

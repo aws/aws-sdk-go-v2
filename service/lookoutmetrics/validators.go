@@ -620,39 +620,6 @@ func validateAnomalyGroupTimeSeriesFeedback(v *types.AnomalyGroupTimeSeriesFeedb
 	}
 }
 
-func validateAppFlowConfig(v *types.AppFlowConfig) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "AppFlowConfig"}
-	if v.RoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
-	}
-	if v.FlowName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FlowName"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateCloudWatchConfig(v *types.CloudWatchConfig) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "CloudWatchConfig"}
-	if v.RoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateLambdaConfiguration(v *types.LambdaConfiguration) error {
 	if v == nil {
 		return nil
@@ -711,21 +678,6 @@ func validateMetricSource(v *types.MetricSource) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "MetricSource"}
-	if v.S3SourceConfig != nil {
-		if err := validateS3SourceConfig(v.S3SourceConfig); err != nil {
-			invalidParams.AddNested("S3SourceConfig", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.AppFlowConfig != nil {
-		if err := validateAppFlowConfig(v.AppFlowConfig); err != nil {
-			invalidParams.AddNested("AppFlowConfig", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.CloudWatchConfig != nil {
-		if err := validateCloudWatchConfig(v.CloudWatchConfig); err != nil {
-			invalidParams.AddNested("CloudWatchConfig", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.RDSSourceConfig != nil {
 		if err := validateRDSSourceConfig(v.RDSSourceConfig); err != nil {
 			invalidParams.AddNested("RDSSourceConfig", err.(smithy.InvalidParamsError))
@@ -748,27 +700,7 @@ func validateRDSSourceConfig(v *types.RDSSourceConfig) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RDSSourceConfig"}
-	if v.DBInstanceIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DBInstanceIdentifier"))
-	}
-	if v.DatabaseHost == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DatabaseHost"))
-	}
-	if v.SecretManagerArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SecretManagerArn"))
-	}
-	if v.DatabaseName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
-	}
-	if v.TableName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
-	}
-	if v.RoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
-	}
-	if v.VpcConfiguration == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VpcConfiguration"))
-	} else if v.VpcConfiguration != nil {
+	if v.VpcConfiguration != nil {
 		if err := validateVpcConfiguration(v.VpcConfiguration); err != nil {
 			invalidParams.AddNested("VpcConfiguration", err.(smithy.InvalidParamsError))
 		}
@@ -785,45 +717,10 @@ func validateRedshiftSourceConfig(v *types.RedshiftSourceConfig) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RedshiftSourceConfig"}
-	if v.ClusterIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
-	}
-	if v.DatabaseHost == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DatabaseHost"))
-	}
-	if v.SecretManagerArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SecretManagerArn"))
-	}
-	if v.DatabaseName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
-	}
-	if v.TableName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
-	}
-	if v.RoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
-	}
-	if v.VpcConfiguration == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VpcConfiguration"))
-	} else if v.VpcConfiguration != nil {
+	if v.VpcConfiguration != nil {
 		if err := validateVpcConfiguration(v.VpcConfiguration); err != nil {
 			invalidParams.AddNested("VpcConfiguration", err.(smithy.InvalidParamsError))
 		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateS3SourceConfig(v *types.S3SourceConfig) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "S3SourceConfig"}
-	if v.RoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

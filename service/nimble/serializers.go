@@ -2293,7 +2293,7 @@ func awsRestjson1_serializeOpHttpBindingsListLaunchProfilesInput(v *ListLaunchPr
 
 	if v.States != nil {
 		for i := range v.States {
-			encoder.AddQuery("states").String(v.States[i])
+			encoder.AddQuery("states").String(string(v.States[i]))
 		}
 	}
 
@@ -2505,7 +2505,7 @@ func awsRestjson1_serializeOpHttpBindingsListStudioComponentsInput(v *ListStudio
 
 	if v.States != nil {
 		for i := range v.States {
-			encoder.AddQuery("states").String(v.States[i])
+			encoder.AddQuery("states").String(string(v.States[i]))
 		}
 	}
 
@@ -2520,7 +2520,7 @@ func awsRestjson1_serializeOpHttpBindingsListStudioComponentsInput(v *ListStudio
 
 	if v.Types != nil {
 		for i := range v.Types {
-			encoder.AddQuery("types").String(v.Types[i])
+			encoder.AddQuery("types").String(string(v.Types[i]))
 		}
 	}
 

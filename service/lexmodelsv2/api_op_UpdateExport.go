@@ -57,7 +57,8 @@ type UpdateExportOutput struct {
 	// available for download.
 	ExportStatus types.ExportStatus
 
-	// The file format used for the files that define the resource.
+	// The file format used for the files that define the resource. The TSV format is
+	// required to export a custom vocabulary only; otherwise use LexJson format.
 	FileFormat types.ImportExportFileFormat
 
 	// The date and time that the export was last updated.

@@ -4361,6 +4361,11 @@ func awsRestjson1_serializeDocumentS3Location(v *types.S3Location, value smithyj
 		ok.String(*v.Bucket)
 	}
 
+	if v.BucketOwner != nil {
+		ok := object.Key("BucketOwner")
+		ok.String(*v.BucketOwner)
+	}
+
 	if v.Key != nil {
 		ok := object.Key("Key")
 		ok.String(*v.Key)

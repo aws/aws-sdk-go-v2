@@ -50,6 +50,26 @@ func (m *validateOpGetDimensionKeyDetails) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetResourceMetadata struct {
+}
+
+func (*validateOpGetResourceMetadata) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetResourceMetadata) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetResourceMetadataInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetResourceMetadataInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetResourceMetrics struct {
 }
 
@@ -70,6 +90,46 @@ func (m *validateOpGetResourceMetrics) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListAvailableResourceDimensions struct {
+}
+
+func (*validateOpListAvailableResourceDimensions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAvailableResourceDimensions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAvailableResourceDimensionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAvailableResourceDimensionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListAvailableResourceMetrics struct {
+}
+
+func (*validateOpListAvailableResourceMetrics) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAvailableResourceMetrics) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAvailableResourceMetricsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAvailableResourceMetricsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpDescribeDimensionKeysValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeDimensionKeys{}, middleware.After)
 }
@@ -78,8 +138,20 @@ func addOpGetDimensionKeyDetailsValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpGetDimensionKeyDetails{}, middleware.After)
 }
 
+func addOpGetResourceMetadataValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetResourceMetadata{}, middleware.After)
+}
+
 func addOpGetResourceMetricsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetResourceMetrics{}, middleware.After)
+}
+
+func addOpListAvailableResourceDimensionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAvailableResourceDimensions{}, middleware.After)
+}
+
+func addOpListAvailableResourceMetricsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAvailableResourceMetrics{}, middleware.After)
 }
 
 func validateDimensionGroup(v *types.DimensionGroup) error {
@@ -197,6 +269,24 @@ func validateOpGetDimensionKeyDetailsInput(v *GetDimensionKeyDetailsInput) error
 	}
 }
 
+func validateOpGetResourceMetadataInput(v *GetResourceMetadataInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetResourceMetadataInput"}
+	if len(v.ServiceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceType"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetResourceMetricsInput(v *GetResourceMetricsInput) error {
 	if v == nil {
 		return nil
@@ -220,6 +310,48 @@ func validateOpGetResourceMetricsInput(v *GetResourceMetricsInput) error {
 	}
 	if v.EndTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAvailableResourceDimensionsInput(v *ListAvailableResourceDimensionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAvailableResourceDimensionsInput"}
+	if len(v.ServiceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceType"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if v.Metrics == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Metrics"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAvailableResourceMetricsInput(v *ListAvailableResourceMetricsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAvailableResourceMetricsInput"}
+	if len(v.ServiceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceType"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if v.MetricTypes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricTypes"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

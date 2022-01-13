@@ -40,8 +40,8 @@ type CreateProfileJobInput struct {
 	// This member is required.
 	Name *string
 
-	// Represents an Amazon S3 location (bucket name and object key) where DataBrew can
-	// read input data, or write output from a job.
+	// Represents an Amazon S3 location (bucket name, bucket owner, and object key)
+	// where DataBrew can read input data, or write output from a job.
 	//
 	// This member is required.
 	OutputLocation *types.S3Location

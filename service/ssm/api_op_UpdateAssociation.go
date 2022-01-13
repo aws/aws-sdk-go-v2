@@ -13,14 +13,22 @@ import (
 
 // Updates an association. You can update the association name and version, the
 // document version, schedule, parameters, and Amazon Simple Storage Service
-// (Amazon S3) output. In order to call this API operation, your Identity and
-// Access Management (IAM) user account, group, or role must be configured with
-// permission to call the DescribeAssociation API operation. If you don't have
-// permission to call DescribeAssociation, then you receive the following error: An
-// error occurred (AccessDeniedException) when calling the UpdateAssociation
-// operation: User: isn't authorized to perform: ssm:DescribeAssociation on
-// resource:  When you update an association, the association immediately runs
-// against the specified targets.
+// (Amazon S3) output. When you call UpdateAssociation, the system drops all
+// optional parameters from the request and overwrites the association with null
+// values for those parameters. This is by design. You must specify all optional
+// parameters in the call, even if you are not changing the parameters. This
+// includes the Name parameter. Before calling this API action, we recommend that
+// you call the DescribeAssociation API operation and make a note of all optional
+// parameters required for your UpdateAssociation call. In order to call this API
+// operation, your Identity and Access Management (IAM) user account, group, or
+// role must be configured with permission to call the DescribeAssociation API
+// operation. If you don't have permission to call DescribeAssociation, then you
+// receive the following error: An error occurred (AccessDeniedException) when
+// calling the UpdateAssociation operation: User: <user_arn> isn't authorized to
+// perform: ssm:DescribeAssociation on resource: <resource_arn> When you update an
+// association, the association immediately runs against the specified targets. You
+// can add the ApplyOnlyAtCronInterval parameter to run the association during the
+// next schedule run.
 func (c *Client) UpdateAssociation(ctx context.Context, params *UpdateAssociationInput, optFns ...func(*Options)) (*UpdateAssociationOutput, error) {
 	if params == nil {
 		params = &UpdateAssociationInput{}
@@ -77,7 +85,13 @@ type UpdateAssociationInput struct {
 	// The severity level to assign to the association.
 	ComplianceSeverity types.AssociationComplianceSeverity
 
-	// The document version you want update for the association.
+	// The document version you want update for the association. State Manager doesn't
+	// support running associations that use a new version of a document if that
+	// document is shared from another account. State Manager always runs the default
+	// version of a document if shared from another account, even though the Systems
+	// Manager console shows that a new version was processed. If you want to run an
+	// association using a new version of a document shared form another account, you
+	// must set the document version to default.
 	DocumentVersion *string
 
 	// The maximum number of targets allowed to run the association at the same time.

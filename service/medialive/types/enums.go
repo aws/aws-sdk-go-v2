@@ -2578,6 +2578,24 @@ func (HlsProgramDateTime) Values() []HlsProgramDateTime {
 	}
 }
 
+type HlsProgramDateTimeClock string
+
+// Enum values for HlsProgramDateTimeClock
+const (
+	HlsProgramDateTimeClockInitializeFromOutputTimecode HlsProgramDateTimeClock = "INITIALIZE_FROM_OUTPUT_TIMECODE"
+	HlsProgramDateTimeClockSystemClock                  HlsProgramDateTimeClock = "SYSTEM_CLOCK"
+)
+
+// Values returns all known values for HlsProgramDateTimeClock. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HlsProgramDateTimeClock) Values() []HlsProgramDateTimeClock {
+	return []HlsProgramDateTimeClock{
+		"INITIALIZE_FROM_OUTPUT_TIMECODE",
+		"SYSTEM_CLOCK",
+	}
+}
+
 type HlsRedundantManifest string
 
 // Enum values for HlsRedundantManifest

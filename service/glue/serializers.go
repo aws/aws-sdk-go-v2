@@ -16342,6 +16342,13 @@ func awsAwsjson11_serializeOpDocumentStartWorkflowRunInput(v *StartWorkflowRunIn
 		ok.String(*v.Name)
 	}
 
+	if v.RunProperties != nil {
+		ok := object.Key("RunProperties")
+		if err := awsAwsjson11_serializeDocumentWorkflowRunProperties(v.RunProperties, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
