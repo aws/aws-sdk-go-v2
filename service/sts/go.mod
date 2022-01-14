@@ -7,7 +7,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/internal/configsources v1.1.3
 	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.1.0
 	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.6.0
-	github.com/aws/smithy-go v1.9.2-0.20220113020543-dec09760da63
+	github.com/aws/smithy-go v1.10.0
 )
 
 replace github.com/aws/aws-sdk-go-v2 => ../../
