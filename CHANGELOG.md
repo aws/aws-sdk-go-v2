@@ -1,3 +1,81 @@
+# Release (2022-01-14)
+
+## General Highlights
+* **Feature**: Updated `github.com/aws/smithy-go` to latest version
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.13.0
+  * **Bug Fix**: Updates the Retry middleware to release the retry token, on subsequent attempts. This fixes #1413, and is based on PR #1424
+* `github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue`: [v1.6.0](feature/dynamodb/attributevalue/CHANGELOG.md#v160-2022-01-14)
+  * **Feature**: Adds new MarshalWithOptions and UnmarshalWithOptions helpers allowing Encoding and Decoding options to be specified when serializing AttributeValues. Addresses issue: https://github.com/aws/aws-sdk-go-v2/issues/1494
+* `github.com/aws/aws-sdk-go-v2/feature/dynamodbstreams/attributevalue`: [v1.6.0](feature/dynamodbstreams/attributevalue/CHANGELOG.md#v160-2022-01-14)
+  * **Feature**: Adds new MarshalWithOptions and UnmarshalWithOptions helpers allowing Encoding and Decoding options to be specified when serializing AttributeValues. Addresses issue: https://github.com/aws/aws-sdk-go-v2/issues/1494
+* `github.com/aws/aws-sdk-go-v2/service/appsync`: [v1.12.0](service/appsync/CHANGELOG.md#v1120-2022-01-14)
+  * **Feature**: Updated API models
+* `github.com/aws/aws-sdk-go-v2/service/autoscalingplans`: [v1.10.0](service/autoscalingplans/CHANGELOG.md#v1100-2022-01-14)
+  * **Documentation**: Updated API models
+* `github.com/aws/aws-sdk-go-v2/service/computeoptimizer`: [v1.15.0](service/computeoptimizer/CHANGELOG.md#v1150-2022-01-14)
+  * **Feature**: Updated API models
+* `github.com/aws/aws-sdk-go-v2/service/costexplorer`: [v1.15.0](service/costexplorer/CHANGELOG.md#v1150-2022-01-14)
+  * **Documentation**: Updated API models
+* `github.com/aws/aws-sdk-go-v2/service/databasemigrationservice`: [v1.16.0](service/databasemigrationservice/CHANGELOG.md#v1160-2022-01-14)
+  * **Documentation**: Updated API models
+* `github.com/aws/aws-sdk-go-v2/service/databrew`: [v1.16.0](service/databrew/CHANGELOG.md#v1160-2022-01-14)
+  * **Feature**: Updated API models
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.28.0](service/ec2/CHANGELOG.md#v1280-2022-01-14)
+  * **Feature**: Updated API models
+* `github.com/aws/aws-sdk-go-v2/service/elasticache`: [v1.18.0](service/elasticache/CHANGELOG.md#v1180-2022-01-14)
+  * **Feature**: Updated API models
+* `github.com/aws/aws-sdk-go-v2/service/elasticsearchservice`: [v1.13.0](service/elasticsearchservice/CHANGELOG.md#v1130-2022-01-14)
+  * **Feature**: Updated API models
+* `github.com/aws/aws-sdk-go-v2/service/finspacedata`: [v1.8.0](service/finspacedata/CHANGELOG.md#v180-2022-01-14)
+  * **Documentation**: Updated API models
+* `github.com/aws/aws-sdk-go-v2/service/fms`: [v1.13.0](service/fms/CHANGELOG.md#v1130-2022-01-14)
+  * **Documentation**: Updated API models
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.19.0](service/glue/CHANGELOG.md#v1190-2022-01-14)
+  * **Feature**: Updated API models
+* `github.com/aws/aws-sdk-go-v2/service/honeycode`: [v1.9.0](service/honeycode/CHANGELOG.md#v190-2022-01-14)
+  * **Feature**: Updated API models
+* `github.com/aws/aws-sdk-go-v2/service/identitystore`: [v1.12.0](service/identitystore/CHANGELOG.md#v1120-2022-01-14)
+  * **Documentation**: Updated API models
+* `github.com/aws/aws-sdk-go-v2/service/ioteventsdata`: [v1.9.0](service/ioteventsdata/CHANGELOG.md#v190-2022-01-14)
+  * **Documentation**: Updated API models
+* `github.com/aws/aws-sdk-go-v2/service/iotwireless`: [v1.16.0](service/iotwireless/CHANGELOG.md#v1160-2022-01-14)
+  * **Feature**: Updated API models
+* `github.com/aws/aws-sdk-go-v2/service/kendra`: [v1.20.0](service/kendra/CHANGELOG.md#v1200-2022-01-14)
+  * **Feature**: Updated API models
+* `github.com/aws/aws-sdk-go-v2/service/lexmodelsv2`: [v1.17.0](service/lexmodelsv2/CHANGELOG.md#v1170-2022-01-14)
+  * **Feature**: Updated API models
+* `github.com/aws/aws-sdk-go-v2/service/lexruntimev2`: [v1.12.0](service/lexruntimev2/CHANGELOG.md#v1120-2022-01-14)
+  * **Feature**: Updated API models
+* `github.com/aws/aws-sdk-go-v2/service/lookoutmetrics`: [v1.8.0](service/lookoutmetrics/CHANGELOG.md#v180-2022-01-14)
+  * **Feature**: Updated API models
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.17.0](service/medialive/CHANGELOG.md#v1170-2022-01-14)
+  * **Feature**: Updated API models
+* `github.com/aws/aws-sdk-go-v2/service/mediatailor`: [v1.13.0](service/mediatailor/CHANGELOG.md#v1130-2022-01-14)
+  * **Feature**: Updated API models
+* `github.com/aws/aws-sdk-go-v2/service/mwaa`: [v1.10.0](service/mwaa/CHANGELOG.md#v1100-2022-01-14)
+  * **Feature**: Updated API models
+* `github.com/aws/aws-sdk-go-v2/service/nimble`: [v1.10.0](service/nimble/CHANGELOG.md#v1100-2022-01-14)
+  * **Feature**: Updated API models
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.7.0](service/opensearch/CHANGELOG.md#v170-2022-01-14)
+  * **Feature**: Updated API models
+* `github.com/aws/aws-sdk-go-v2/service/pi`: [v1.12.0](service/pi/CHANGELOG.md#v1120-2022-01-14)
+  * **Feature**: Updated API models
+* `github.com/aws/aws-sdk-go-v2/service/pinpoint`: [v1.14.0](service/pinpoint/CHANGELOG.md#v1140-2022-01-14)
+  * **Feature**: Updated API models
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.16.0](service/rds/CHANGELOG.md#v1160-2022-01-14)
+  * **Feature**: Updated API models
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.20.0](service/ssm/CHANGELOG.md#v1200-2022-01-14)
+  * **Feature**: Updated API models
+* `github.com/aws/aws-sdk-go-v2/service/sso`: [v1.9.0](service/sso/CHANGELOG.md#v190-2022-01-14)
+  * **Documentation**: Updated API models
+* `github.com/aws/aws-sdk-go-v2/service/transcribe`: [v1.14.0](service/transcribe/CHANGELOG.md#v1140-2022-01-14)
+  * **Documentation**: Updated API models
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.14.0](service/workspaces/CHANGELOG.md#v1140-2022-01-14)
+  * **Feature**: Updated API models
+
 # Release (2022-01-07)
 
 ## General Highlights

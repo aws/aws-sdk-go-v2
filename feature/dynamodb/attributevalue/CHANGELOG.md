@@ -1,3 +1,9 @@
+# v1.6.0 (2022-01-14)
+
+* **Feature**: Adds new MarshalWithOptions and UnmarshalWithOptions helpers allowing Encoding and Decoding options to be specified when serializing AttributeValues. Addresses issue: https://github.com/aws/aws-sdk-go-v2/issues/1494
+* **Feature**: Updated `github.com/aws/smithy-go` to latest version
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.5.0 (2022-01-07)
 
 * **Feature**: Updated `github.com/aws/smithy-go` to latest version
