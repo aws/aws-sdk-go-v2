@@ -3,9 +3,9 @@ module github.com/aws/aws-sdk-go-v2/service/internal/eventstreamtesting
 go 1.15
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.12.0
-	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.1.0
-	github.com/aws/aws-sdk-go-v2/credentials v1.7.0
+	github.com/aws/aws-sdk-go-v2 v1.13.0
+	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.2.0
+	github.com/aws/aws-sdk-go-v2/credentials v1.8.0
 	golang.org/x/net v0.0.0-20211209124913-491a49abca63
 )
 

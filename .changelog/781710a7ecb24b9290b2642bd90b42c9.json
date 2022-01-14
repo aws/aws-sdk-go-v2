@@ -1,8 +1,0 @@
-{
-    "id": "781710a7-ecb2-4b92-90b2-642bd90b42c9",
-    "type": "bugfix",
-    "description": "Updates the Retry middleware to release the retry token, on subsequent attempts. This fixes #1413, and is based on PR #1424",
-    "modules": [
-        "."
-    ]
-}
