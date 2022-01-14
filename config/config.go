@@ -2,6 +2,7 @@ package config
 
 import (
 	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 )
 
@@ -52,6 +53,14 @@ var defaultAWSConfigResolvers = []awsConfigResolver{
 	// Sets the additional set of middleware stack mutators that will custom
 	// API client request pipeline middleware.
 	resolveAPIOptions,
+
+	// Resolves the DefaultsMode that should be used by SDK clients.
+	// If this mode is set to AutoDefaultsMode.
+	//
+	// Comes after HTTPClient and CustomCABundle to ensure the HTTP client is configured if provided before invoking
+	// IMDS if mode is auto. Comes before resolving credentials so that those subsequent clients use the configured
+	// auto mode.
+	resolveDefaultsModeOptions,
 
 	// Sets the resolved credentials the API clients will use for
 	// authentication. Provides the SDK's default credential chain.

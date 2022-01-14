@@ -225,3 +225,12 @@ use_fips_endpoint=False
 [profile UseFIPSEndpointInvalid]
 region = "us-west-2"
 use_fips_endpoint=invalid
+
+[profile autodefaultsmode]
+defaults_mode = auto
+
+[profile standarddefaultsmode]
+defaults_mode = standard
+
+[profile invaliddefaultsmode]
+defaults_mode = invalid

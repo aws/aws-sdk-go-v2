@@ -159,6 +159,23 @@ type LoadOptions struct {
 	// Specifies that SDK clients must resolve a FIPS endpoint for
 	// services.
 	UseFIPSEndpoint aws.FIPSEndpointState
+
+	// Specifies the SDK configuration mode for defaults.
+	DefaultsModeOptions DefaultsModeOptions
+}
+
+func (o LoadOptions) getDefaultsMode(ctx context.Context) (aws.DefaultsMode, bool, error) {
+	if len(o.DefaultsModeOptions.Mode) == 0 {
+		return "", false, nil
+	}
+	return o.DefaultsModeOptions.Mode, true, nil
+}
+
+func (o LoadOptions) getDefaultsModeIMDSClient(ctx context.Context) (*imds.Client, bool, error) {
+	if o.DefaultsModeOptions.IMDSClient == nil {
+		return nil, false, nil
+	}
+	return o.DefaultsModeOptions.IMDSClient, true, nil
 }
 
 // getRegion returns Region from config's LoadOptions
@@ -805,4 +822,21 @@ func (o LoadOptions) GetUseFIPSEndpoint(ctx context.Context) (value aws.FIPSEndp
 		return aws.FIPSEndpointStateUnset, false, nil
 	}
 	return o.UseFIPSEndpoint, true, nil
+}
+
+// WithDefaultsMode sets the SDK defaults configuration mode to the value provided.
+//
+// Zero or more functional options can be provided to provide configuration options for performing
+// environment discovery when using aws.AutoDefaultsMode.
+func WithDefaultsMode(mode aws.DefaultsMode, optFns ...func(options *DefaultsModeOptions)) LoadOptionsFunc {
+	do := DefaultsModeOptions{
+		Mode: mode,
+	}
+	for _, fn := range optFns {
+		fn(&do)
+	}
+	return func(options *LoadOptions) error {
+		options.DefaultsModeOptions = do
+		return nil
+	}
 }

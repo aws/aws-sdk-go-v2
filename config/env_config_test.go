@@ -1,16 +1,16 @@
 package config
 
 import (
-	"github.com/aws/aws-sdk-go-v2/feature/ec2/imds"
-	"github.com/google/go-cmp/cmp"
 	"os"
 	"reflect"
 	"strconv"
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/feature/ec2/imds"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/smithy-go/ptr"
+	"github.com/google/go-cmp/cmp"
 )
 
 var _ sharedConfigProfileProvider = (*EnvConfig)(nil)
@@ -365,6 +365,31 @@ func TestNewEnvConfig(t *testing.T) {
 		30: {
 			Env: map[string]string{
 				"AWS_USE_FIPS_ENDPOINT": "invalid",
+			},
+			WantErr: true,
+		},
+		31: {
+			Env: map[string]string{
+				"AWS_DEFAULTS_MODE": "auto",
+			},
+			Config: EnvConfig{
+				DefaultsMode: aws.DefaultsModeAuto,
+			},
+		},
+		32: {
+			Env: map[string]string{
+				"AWS_DEFAULTS_MODE": "standard",
+			},
+			Config: EnvConfig{
+				DefaultsMode: aws.DefaultsModeStandard,
+			},
+		},
+		33: {
+			Env: map[string]string{
+				"AWS_DEFAULTS_MODE": "invalid",
+			},
+			Config: EnvConfig{
+				DefaultsMode: aws.DefaultsMode("invalid"),
 			},
 			WantErr: true,
 		},

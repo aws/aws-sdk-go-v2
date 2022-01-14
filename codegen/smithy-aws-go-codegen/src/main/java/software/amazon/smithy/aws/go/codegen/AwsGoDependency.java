@@ -46,6 +46,7 @@ public class AwsGoDependency {
             null, Versions.SERVICE_INTERNAL_CONFIG, "internalConfig");
     public static final GoDependency SERVICE_INTERNAL_ENDPOINT_DISCOVERY = awsModuleDep("service/internal/endpoint-discovery",
             null, Versions.SERVICE_INTERNAL_ENDPOINT_DISCOVERY, "internalEndpointDiscovery");
+    public static final GoDependency AWS_DEFAULTS = aws("aws/defaults");
 
     public static final GoDependency REGEXP = SmithyGoDependency.stdlib("regexp");
 
