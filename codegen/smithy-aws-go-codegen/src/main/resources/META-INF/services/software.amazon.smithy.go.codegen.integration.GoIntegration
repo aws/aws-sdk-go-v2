@@ -1,5 +1,6 @@
 software.amazon.smithy.aws.go.codegen.AddProtocols
 software.amazon.smithy.aws.go.codegen.AddAwsConfigFields
+software.amazon.smithy.aws.go.codegen.ClientResolvedDefaultsMode
 software.amazon.smithy.aws.go.codegen.RegisterServiceMetadataMiddleware
 software.amazon.smithy.aws.go.codegen.AwsEventStreamIntegration
 software.amazon.smithy.aws.go.codegen.AssembleMiddlewareStack

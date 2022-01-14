@@ -54,6 +54,8 @@ public class AddAwsConfigFields implements GoIntegration {
     public static final String API_OPTIONS_CONFIG_NAME = "APIOptions";
     public static final String LOGGER_CONFIG_NAME = "Logger";
     public static final String LOG_MODE_CONFIG_NAME = "ClientLogMode";
+    public static final String DEFAULTS_MODE_CONFIG_NAME = "DefaultsMode";
+    public static final String RUNTIME_ENVIRONMENT_CONFIG_NAME = "RuntimeEnvironment";
 
     private static final String RESOLVE_HTTP_CLIENT = "resolveHTTPClient";
     private static final String RESOLVE_RETRYER = "resolveRetryer";
@@ -65,6 +67,24 @@ public class AddAwsConfigFields implements GoIntegration {
                     .name(REGION_CONFIG_NAME)
                     .type(getUniversalSymbol("string"))
                     .documentation("The region to send requests to. (Required)")
+                    .build(),
+            AwsConfigField.builder()
+                    .name(DEFAULTS_MODE_CONFIG_NAME)
+                    .type(getAwsCoreSymbol("DefaultsMode"))
+                    .documentation("""
+                                   The configuration DefaultsMode that the SDK should use when constructing
+                                   the clients initial default settings.
+                                   """)
+                    .build(),
+            AwsConfigField.builder()
+                    .name(RUNTIME_ENVIRONMENT_CONFIG_NAME)
+                    .type(getAwsCoreSymbol("RuntimeEnvironment"))
+                    .documentation("""
+                                   The RuntimeEnvironment configuration, only populated if the DefaultsMode is set to
+                                   AutoDefaultsMode and is initialized using `config.LoadDefaultConfig`. You should not
+                                   populate this structure programmatically, or rely on the values here within your
+                                   applications.
+                                   """)
                     .build(),
             AwsConfigField.builder()
                     .name(RETRYER_CONFIG_NAME)
@@ -193,13 +213,78 @@ public class AddAwsConfigFields implements GoIntegration {
     }
 
     private void writeHttpClientResolver(GoWriter writer) {
-        writer.openBlock("func $L(o *Options) {", "}", RESOLVE_HTTP_CLIENT, () -> {
-            writer.openBlock("if o.$L != nil {", "}", HTTP_CLIENT_CONFIG_NAME, () -> writer.write("return"));
-            writer.write("o.$L = $T()", HTTP_CLIENT_CONFIG_NAME,
-                    SymbolUtils.createValueSymbolBuilder("NewBuildableClient",
-                            AwsGoDependency.AWS_HTTP_TRANSPORT).build());
-        });
-        writer.write("");
+        writer.pushState();
+
+        writer.putContext("resolverName", RESOLVE_HTTP_CLIENT);
+        writer.putContext("optionName", HTTP_CLIENT_CONFIG_NAME);
+        writer.putContext("newClient", SymbolUtils.createValueSymbolBuilder("NewBuildableClient",
+                AwsGoDependency.AWS_HTTP_TRANSPORT).build());
+        writer.putContext("buildableType", SymbolUtils.createPointableSymbolBuilder("BuildableClient",
+                AwsGoDependency.AWS_HTTP_TRANSPORT).build());
+        writer.putContext("modeType", SymbolUtils.createValueSymbolBuilder("DefaultsMode",
+                AwsGoDependency.AWS_CORE).build());
+        writer.putContext("modeOption", DEFAULTS_MODE_CONFIG_NAME);
+        writer.putContext("runtimeOption", RUNTIME_ENVIRONMENT_CONFIG_NAME);
+        writer.putContext("autoModeType", SymbolUtils.createValueSymbolBuilder("DefaultsModeAuto",
+                AwsGoDependency.AWS_CORE).build());
+        writer.putContext("legacyModeType", SymbolUtils.createValueSymbolBuilder("DefaultsModeLegacy",
+                AwsGoDependency.AWS_CORE).build());
+        writer.putContext("regionOption", REGION_CONFIG_NAME);
+        writer.putContext("resolveAuto", SymbolUtils.createValueSymbolBuilder("ResolveDefaultsModeAuto",
+                AwsGoDependency.AWS_DEFAULTS).build());
+        writer.putContext("getConfig", SymbolUtils.createValueSymbolBuilder("GetModeConfiguration",
+                AwsGoDependency.AWS_DEFAULTS).build());
+        writer.putContext("dialer", SymbolUtils.createPointableSymbolBuilder("Dialer",
+                SmithyGoDependency.NET).build());
+        writer.putContext("transport", SymbolUtils.createPointableSymbolBuilder("Transport",
+                SmithyGoDependency.NET_HTTP).build());
+        writer.putContext("errorf", SymbolUtils.createPointableSymbolBuilder("Errorf",
+                SmithyGoDependency.FMT).build());
+
+        writer.write("""
+                     func $resolverName:L(o *Options) {
+                         var buildable $buildableType:P
+                         
+                         if o.$optionName:L != nil {
+                             var ok bool
+                             buildable, ok = o.$optionName:L.($buildableType:P)
+                             if !ok {
+                                 return
+                             }
+                         } else {
+                             buildable = $newClient:T()
+                         }
+                         
+                         var mode $modeType:T
+                         if ok := mode.SetFromString(string(o.$modeOption:L)); !ok {
+                             panic($errorf:T("unsupported defaults mode constant %v", mode))
+                         }
+                         
+                         if mode == $autoModeType:T {
+                             mode = $resolveAuto:T(o.$regionOption:L, o.$runtimeOption:L)
+                         }
+                         
+                         if mode != $legacyModeType:T {
+                             modeConfig, _ := $getConfig:T(mode)
+                             
+                             buildable = buildable.WithDialerOptions(func(dialer $dialer:P) {
+                                 if dialerTimeout, ok := modeConfig.GetConnectTimeout(); ok {
+                                     dialer.Timeout = dialerTimeout
+                                 }
+                             })
+                             
+                             buildable = buildable.WithTransportOptions(func(transport $transport:P) {
+                                 if tlsHandshakeTimeout, ok := modeConfig.GetTLSNegotiationTimeout(); ok {
+                                     transport.TLSHandshakeTimeout = tlsHandshakeTimeout
+                                 }
+                             })
+                         }
+                         
+                         o.$optionName:L = buildable
+                     }
+                     """);
+
+        writer.popState();
     }
 
     private void writeAwsConfigEndpointResolver(GoWriter writer) {

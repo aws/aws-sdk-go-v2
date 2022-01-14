@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/feature/ec2/imds"
 	"path/filepath"
 	"reflect"
 	"strconv"
@@ -13,6 +12,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/feature/ec2/imds"
 	"github.com/aws/aws-sdk-go-v2/internal/ini"
 	"github.com/aws/smithy-go/logging"
 	"github.com/aws/smithy-go/ptr"
@@ -509,6 +509,30 @@ func TestNewSharedConfig(t *testing.T) {
 				Region:          "us-west-2",
 				UseFIPSEndpoint: aws.FIPSEndpointStateDisabled,
 			},
+		},
+		"defaults mode auto": {
+			ConfigFilenames:      []string{testConfigFilename},
+			CredentialsFilenames: []string{testCredentialsFilename},
+			Profile:              "autodefaultsmode",
+			Expected: SharedConfig{
+				Profile:      "autodefaultsmode",
+				DefaultsMode: aws.DefaultsModeAuto,
+			},
+		},
+		"defaults mode standard": {
+			ConfigFilenames:      []string{testConfigFilename},
+			CredentialsFilenames: []string{testCredentialsFilename},
+			Profile:              "standarddefaultsmode",
+			Expected: SharedConfig{
+				Profile:      "standarddefaultsmode",
+				DefaultsMode: aws.DefaultsModeStandard,
+			},
+		},
+		"defaults mode invalid": {
+			ConfigFilenames:      []string{testConfigFilename},
+			CredentialsFilenames: []string{testCredentialsFilename},
+			Profile:              "invaliddefaultsmode",
+			Err:                  fmt.Errorf("failed to load defaults_mode from shared config, invalid value: invalid"),
 		},
 	}
 

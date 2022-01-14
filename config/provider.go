@@ -11,6 +11,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/credentials/processcreds"
 	"github.com/aws/aws-sdk-go-v2/credentials/ssocreds"
 	"github.com/aws/aws-sdk-go-v2/credentials/stscreds"
+	"github.com/aws/aws-sdk-go-v2/feature/ec2/imds"
 	"github.com/aws/smithy-go/logging"
 	"github.com/aws/smithy-go/middleware"
 )
@@ -464,5 +465,37 @@ func getSSOProviderOptions(ctx context.Context, configs configs) (v func(options
 			}
 		}
 	}
-	return
+	return v, found, err
+}
+
+type defaultsModeIMDSClientProvider interface {
+	getDefaultsModeIMDSClient(context.Context) (*imds.Client, bool, error)
+}
+
+func getDefaultsModeIMDSClient(ctx context.Context, configs configs) (v *imds.Client, found bool, err error) {
+	for _, c := range configs {
+		if p, ok := c.(defaultsModeIMDSClientProvider); ok {
+			v, found, err = p.getDefaultsModeIMDSClient(ctx)
+			if err != nil || found {
+				break
+			}
+		}
+	}
+	return v, found, err
+}
+
+type defaultsModeProvider interface {
+	getDefaultsMode(context.Context) (aws.DefaultsMode, bool, error)
+}
+
+func getDefaultsMode(ctx context.Context, configs configs) (v aws.DefaultsMode, found bool, err error) {
+	for _, c := range configs {
+		if p, ok := c.(defaultsModeProvider); ok {
+			v, found, err = p.getDefaultsMode(ctx)
+			if err != nil || found {
+				break
+			}
+		}
+	}
+	return v, found, err
 }

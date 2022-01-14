@@ -3,16 +3,22 @@ package config
 import (
 	"bytes"
 	"context"
+	"encoding/json"
 	"io/ioutil"
 	"net/http"
+	"net/http/httptest"
+	"os"
+	"strconv"
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
 	"github.com/aws/aws-sdk-go-v2/credentials"
+	"github.com/aws/aws-sdk-go-v2/feature/ec2/imds"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/smithy-go/logging"
+	"github.com/google/go-cmp/cmp"
 )
 
 func TestResolveCustomCABundle(t *testing.T) {
@@ -209,5 +215,167 @@ func TestResolveLogger(t *testing.T) {
 	_, ok := cfg.Logger.(logging.Nop)
 	if !ok {
 		t.Error("unexpected logger type")
+	}
+}
+
+func TestResolveDefaultsMode(t *testing.T) {
+	cases := []struct {
+		Mode                       aws.DefaultsMode
+		ExpectedDefaultsMode       aws.DefaultsMode
+		ExpectedRuntimeEnvironment aws.RuntimeEnvironment
+		WithIMDS                   func() *httptest.Server
+		Env                        map[string]string
+	}{
+		{
+			ExpectedDefaultsMode: aws.DefaultsModeLegacy,
+		},
+		{
+			Mode:                 aws.DefaultsModeStandard,
+			ExpectedDefaultsMode: aws.DefaultsModeStandard,
+		},
+		{
+			Mode:                 aws.DefaultsModeInRegion,
+			ExpectedDefaultsMode: aws.DefaultsModeInRegion,
+		},
+		{
+			Mode:                 aws.DefaultsModeCrossRegion,
+			ExpectedDefaultsMode: aws.DefaultsModeCrossRegion,
+		},
+		{
+			Mode:                 aws.DefaultsModeMobile,
+			ExpectedDefaultsMode: aws.DefaultsModeMobile,
+		},
+		{
+			Mode: aws.DefaultsModeAuto,
+			Env: map[string]string{
+				"AWS_EXECUTION_ENV": "envName",
+				"AWS_REGION":        "us-west-2",
+			},
+			WithIMDS: func() *httptest.Server {
+				return httptest.NewServer(http.HandlerFunc(
+					func(w http.ResponseWriter, r *http.Request) {
+						if r.URL.Path == "/latest/dynamic/instance-identity/document" {
+							out, _ := json.Marshal(&imds.InstanceIdentityDocument{
+								Region: "us-west-2",
+							})
+							w.Write(out)
+						} else if r.URL.Path == "/latest/api/token" {
+							header := w.Header()
+							// bounce the TTL header
+							const ttlHeader = "X-Aws-Ec2-Metadata-Token-Ttl-Seconds"
+							header.Set(ttlHeader, r.Header.Get(ttlHeader))
+							w.Write([]byte("validToken"))
+						} else {
+							w.Write([]byte(""))
+						}
+					}))
+			},
+			ExpectedDefaultsMode: aws.DefaultsModeAuto,
+			ExpectedRuntimeEnvironment: aws.RuntimeEnvironment{
+				EnvironmentIdentifier:     "envName",
+				Region:                    "us-west-2",
+				EC2InstanceMetadataRegion: "us-west-2",
+			},
+		},
+		{
+			Mode: aws.DefaultsModeAuto,
+			Env: map[string]string{
+				"AWS_EXECUTION_ENV": "envName",
+				"AWS_REGION":        "us-west-2",
+			},
+			WithIMDS: func() *httptest.Server {
+				return httptest.NewServer(http.HandlerFunc(
+					func(w http.ResponseWriter, r *http.Request) {
+						w.WriteHeader(500)
+					}))
+			},
+			ExpectedDefaultsMode: aws.DefaultsModeAuto,
+			ExpectedRuntimeEnvironment: aws.RuntimeEnvironment{
+				EnvironmentIdentifier:     "envName",
+				Region:                    "us-west-2",
+				EC2InstanceMetadataRegion: "",
+			},
+		},
+		{
+			Mode: aws.DefaultsModeAuto,
+			Env: map[string]string{
+				"AWS_EXECUTION_ENV":         "envName",
+				"AWS_REGION":                "us-west-2",
+				"AWS_EC2_METADATA_DISABLED": "true",
+			},
+			ExpectedDefaultsMode: aws.DefaultsModeAuto,
+			ExpectedRuntimeEnvironment: aws.RuntimeEnvironment{
+				EnvironmentIdentifier:     "envName",
+				Region:                    "us-west-2",
+				EC2InstanceMetadataRegion: "",
+			},
+		},
+		{
+			Mode: aws.DefaultsModeAuto,
+			Env: map[string]string{
+				"AWS_REGION":                "us-west-2",
+				"AWS_DEFAULT_REGION":        "other",
+				"AWS_EC2_METADATA_DISABLED": "true",
+			},
+			ExpectedDefaultsMode: aws.DefaultsModeAuto,
+			ExpectedRuntimeEnvironment: aws.RuntimeEnvironment{
+				Region: "us-west-2",
+			},
+		},
+		{
+			Mode: aws.DefaultsModeAuto,
+			Env: map[string]string{
+				"AWS_DEFAULT_REGION":        "us-west-2",
+				"AWS_EC2_METADATA_DISABLED": "true",
+			},
+			ExpectedDefaultsMode: aws.DefaultsModeAuto,
+			ExpectedRuntimeEnvironment: aws.RuntimeEnvironment{
+				Region: "us-west-2",
+			},
+		},
+	}
+
+	for i, tt := range cases {
+		t.Run(strconv.Itoa(i), func(t *testing.T) {
+			var server *httptest.Server
+			if tt.WithIMDS != nil {
+				server = tt.WithIMDS()
+				defer server.Close()
+			}
+			loadOptionsFunc := func(*LoadOptions) error {
+				return nil
+			}
+			if len(tt.Mode) != 0 {
+				loadOptionsFunc = WithDefaultsMode(tt.Mode, func(options *DefaultsModeOptions) {
+					if server != nil {
+						options.IMDSClient = imds.New(imds.Options{
+							Endpoint: server.URL,
+						})
+					}
+				})
+			}
+
+			if len(tt.Env) > 0 {
+				restoreEnv := awstesting.StashEnv()
+				defer awstesting.PopEnv(restoreEnv)
+
+				for key := range tt.Env {
+					_ = os.Setenv(key, tt.Env[key])
+				}
+			}
+
+			cfg, err := LoadDefaultConfig(context.Background(), loadOptionsFunc)
+			if err != nil {
+				t.Errorf("expect no error, got %v", err)
+			}
+
+			if diff := cmp.Diff(tt.ExpectedDefaultsMode, cfg.DefaultsMode); len(diff) > 0 {
+				t.Errorf(diff)
+			}
+
+			if diff := cmp.Diff(tt.ExpectedRuntimeEnvironment, cfg.RuntimeEnvironment); len(diff) > 0 {
+				t.Errorf(diff)
+			}
+		})
 	}
 }
