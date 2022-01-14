@@ -160,6 +160,34 @@ func (ConnectionState) Values() []ConnectionState {
 	}
 }
 
+type EndpointState string
+
+// Enum values for EndpointState
+const (
+	EndpointStateActive       EndpointState = "ACTIVE"
+	EndpointStateCreating     EndpointState = "CREATING"
+	EndpointStateUpdating     EndpointState = "UPDATING"
+	EndpointStateDeleting     EndpointState = "DELETING"
+	EndpointStateCreateFailed EndpointState = "CREATE_FAILED"
+	EndpointStateUpdateFailed EndpointState = "UPDATE_FAILED"
+	EndpointStateDeleteFailed EndpointState = "DELETE_FAILED"
+)
+
+// Values returns all known values for EndpointState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EndpointState) Values() []EndpointState {
+	return []EndpointState{
+		"ACTIVE",
+		"CREATING",
+		"UPDATING",
+		"DELETING",
+		"CREATE_FAILED",
+		"UPDATE_FAILED",
+		"DELETE_FAILED",
+	}
+}
+
 type EventSourceState string
 
 // Enum values for EventSourceState
@@ -277,6 +305,24 @@ func (ReplayState) Values() []ReplayState {
 		"COMPLETED",
 		"CANCELLED",
 		"FAILED",
+	}
+}
+
+type ReplicationState string
+
+// Enum values for ReplicationState
+const (
+	ReplicationStateEnabled  ReplicationState = "ENABLED"
+	ReplicationStateDisabled ReplicationState = "DISABLED"
+)
+
+// Values returns all known values for ReplicationState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ReplicationState) Values() []ReplicationState {
+	return []ReplicationState{
+		"ENABLED",
+		"DISABLED",
 	}
 }
 

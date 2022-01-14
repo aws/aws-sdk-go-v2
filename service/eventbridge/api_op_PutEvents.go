@@ -6,6 +6,7 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	ebcust "github.com/aws/aws-sdk-go-v2/service/eventbridge/internal/customizations"
 	"github.com/aws/aws-sdk-go-v2/service/eventbridge/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -35,6 +36,8 @@ type PutEventsInput struct {
 	//
 	// This member is required.
 	Entries []types.PutEventsRequestEntry
+
+	EndpointId *string
 
 	noSmithyDocumentSerde
 }
@@ -100,6 +103,12 @@ func (c *Client) addOperationPutEventsMiddlewares(stack *middleware.Stack, optio
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addPutEventsUpdateEndpoint(stack, options); err != nil {
+		return err
+	}
+	if err = swapWithCustomHTTPSignerMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPutEventsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -116,6 +125,24 @@ func (c *Client) addOperationPutEventsMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	return nil
+}
+
+// getPutEventsEndpointId returns a pointer to string denoting a provided member
+// value and a boolean indicating if the value is not nil
+func getPutEventsEndpointId(input interface{}) (*string, bool) {
+	in := input.(*PutEventsInput)
+	if in.EndpointId == nil {
+		return nil, false
+	}
+	return in.EndpointId, true
+}
+
+func addPutEventsUpdateEndpoint(stack *middleware.Stack, o Options) error {
+	return ebcust.UpdateEndpoint(stack, ebcust.UpdateEndpointOptions{
+		GetEndpointIDFromInput:  getPutEventsEndpointId,
+		EndpointResolver:        o.EndpointResolver,
+		EndpointResolverOptions: o.EndpointOptions,
+	})
 }
 
 func newServiceMetadataMiddleware_opPutEvents(region string) *awsmiddleware.RegisterServiceMetadata {

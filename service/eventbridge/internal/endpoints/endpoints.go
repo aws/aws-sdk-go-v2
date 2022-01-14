@@ -3,10 +3,12 @@
 package endpoints
 
 import (
+	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	endpoints "github.com/aws/aws-sdk-go-v2/internal/endpoints/v2"
 	"github.com/aws/smithy-go/logging"
 	"regexp"
+	"strings"
 )
 
 // Options is the endpoint resolver configuration options
@@ -434,4 +436,122 @@ var defaultPartitions = endpoints.Partitions{
 			},
 		},
 	},
+}
+
+// GetDNSSuffix returns the dnsSuffix URL component for the given partition id
+func GetDNSSuffix(id string, options Options) (string, error) {
+	variant := transformToSharedOptions(options).GetEndpointVariant()
+	switch {
+	case strings.EqualFold(id, "aws"):
+		switch variant {
+		case endpoints.DualStackVariant:
+			return "api.aws", nil
+
+		case endpoints.FIPSVariant:
+			return "amazonaws.com", nil
+
+		case endpoints.FIPSVariant | endpoints.DualStackVariant:
+			return "api.aws", nil
+
+		case 0:
+			return "amazonaws.com", nil
+
+		default:
+			return "", fmt.Errorf("unsupported endpoint variant %v, in partition %s", variant, id)
+
+		}
+
+	case strings.EqualFold(id, "aws-cn"):
+		switch variant {
+		case endpoints.DualStackVariant:
+			return "api.amazonwebservices.com.cn", nil
+
+		case endpoints.FIPSVariant:
+			return "amazonaws.com.cn", nil
+
+		case endpoints.FIPSVariant | endpoints.DualStackVariant:
+			return "api.amazonwebservices.com.cn", nil
+
+		case 0:
+			return "amazonaws.com.cn", nil
+
+		default:
+			return "", fmt.Errorf("unsupported endpoint variant %v, in partition %s", variant, id)
+
+		}
+
+	case strings.EqualFold(id, "aws-iso"):
+		switch variant {
+		case endpoints.FIPSVariant:
+			return "c2s.ic.gov", nil
+
+		case 0:
+			return "c2s.ic.gov", nil
+
+		default:
+			return "", fmt.Errorf("unsupported endpoint variant %v, in partition %s", variant, id)
+
+		}
+
+	case strings.EqualFold(id, "aws-iso-b"):
+		switch variant {
+		case endpoints.FIPSVariant:
+			return "sc2s.sgov.gov", nil
+
+		case 0:
+			return "sc2s.sgov.gov", nil
+
+		default:
+			return "", fmt.Errorf("unsupported endpoint variant %v, in partition %s", variant, id)
+
+		}
+
+	case strings.EqualFold(id, "aws-us-gov"):
+		switch variant {
+		case endpoints.DualStackVariant:
+			return "api.aws", nil
+
+		case endpoints.FIPSVariant:
+			return "amazonaws.com", nil
+
+		case endpoints.FIPSVariant | endpoints.DualStackVariant:
+			return "api.aws", nil
+
+		case 0:
+			return "amazonaws.com", nil
+
+		default:
+			return "", fmt.Errorf("unsupported endpoint variant %v, in partition %s", variant, id)
+
+		}
+
+	default:
+		return "", fmt.Errorf("unknown partition")
+
+	}
+}
+
+// GetDNSSuffixFromRegion returns the DNS suffix for the provided region and
+// options.
+func GetDNSSuffixFromRegion(region string, options Options) (string, error) {
+	switch {
+	case partitionRegexp.Aws.MatchString(region):
+		return GetDNSSuffix("aws", options)
+
+	case partitionRegexp.AwsCn.MatchString(region):
+		return GetDNSSuffix("aws-cn", options)
+
+	case partitionRegexp.AwsIso.MatchString(region):
+		return GetDNSSuffix("aws-iso", options)
+
+	case partitionRegexp.AwsIsoB.MatchString(region):
+		return GetDNSSuffix("aws-iso-b", options)
+
+	case partitionRegexp.AwsUsGov.MatchString(region):
+		return GetDNSSuffix("aws-us-gov", options)
+
+	default:
+		return GetDNSSuffix("aws", options)
+
+	}
 }

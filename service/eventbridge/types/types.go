@@ -561,6 +561,44 @@ type EcsParameters struct {
 	noSmithyDocumentSerde
 }
 
+type Endpoint struct {
+	Arn *string
+
+	CreationTime *time.Time
+
+	Description *string
+
+	EndpointId *string
+
+	EndpointUrl *string
+
+	EventBuses []EndpointEventBus
+
+	LastModifiedTime *time.Time
+
+	Name *string
+
+	ReplicationConfig *ReplicationConfig
+
+	RoleArn *string
+
+	RoutingConfig *RoutingConfig
+
+	State EndpointState
+
+	StateReason *string
+
+	noSmithyDocumentSerde
+}
+
+type EndpointEventBus struct {
+
+	// This member is required.
+	EventBusArn *string
+
+	noSmithyDocumentSerde
+}
+
 // An event bus receives events from a source and routes them to rules associated
 // with that event bus. Your account's default event bus receives events from
 // Amazon Web Services services. A custom event bus can receive events from your
@@ -609,6 +647,17 @@ type EventSource struct {
 	// is deactivated. If it is DELETED, you have created a matching event bus, but the
 	// event source has since been deleted.
 	State EventSourceState
+
+	noSmithyDocumentSerde
+}
+
+type FailoverConfig struct {
+
+	// This member is required.
+	Primary *Primary
+
+	// This member is required.
+	Secondary *Secondary
 
 	noSmithyDocumentSerde
 }
@@ -803,6 +852,14 @@ type PlacementStrategy struct {
 	// if you binpack on memory, a task is placed on the instance with the least amount
 	// of remaining memory (but still enough to run the task).
 	Type PlacementStrategyType
+
+	noSmithyDocumentSerde
+}
+
+type Primary struct {
+
+	// This member is required.
+	HealthCheck *string
 
 	noSmithyDocumentSerde
 }
@@ -1019,6 +1076,12 @@ type ReplayDestination struct {
 	noSmithyDocumentSerde
 }
 
+type ReplicationConfig struct {
+	State ReplicationState
+
+	noSmithyDocumentSerde
+}
+
 // A RetryPolicy object that includes information about the retry policy settings.
 type RetryPolicy struct {
 
@@ -1029,6 +1092,14 @@ type RetryPolicy struct {
 	// attempts continue until either the maximum number of attempts is made or until
 	// the duration of the MaximumEventAgeInSeconds is met.
 	MaximumRetryAttempts *int32
+
+	noSmithyDocumentSerde
+}
+
+type RoutingConfig struct {
+
+	// This member is required.
+	FailoverConfig *FailoverConfig
 
 	noSmithyDocumentSerde
 }
@@ -1135,6 +1206,14 @@ type SageMakerPipelineParameters struct {
 	// List of Parameter names and values for SageMaker Model Building Pipeline
 	// execution.
 	PipelineParameterList []SageMakerPipelineParameter
+
+	noSmithyDocumentSerde
+}
+
+type Secondary struct {
+
+	// This member is required.
+	Route *string
 
 	noSmithyDocumentSerde
 }
