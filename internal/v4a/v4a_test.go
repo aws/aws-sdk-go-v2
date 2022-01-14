@@ -13,7 +13,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/service/s3/internal/v4a/internal/crypto"
+	"github.com/aws/aws-sdk-go-v2/internal/v4a/internal/crypto"
 	"github.com/aws/smithy-go/logging"
 	"github.com/google/go-cmp/cmp"
 )

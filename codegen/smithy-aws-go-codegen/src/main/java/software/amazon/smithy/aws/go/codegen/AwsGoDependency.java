@@ -49,6 +49,8 @@ public class AwsGoDependency {
     public static final GoDependency AWS_DEFAULTS = aws("aws/defaults");
     public static final GoDependency SERVICE_INTERNAL_CHECKSUM = awsModuleDep("service/internal/checksum",
             null, Versions.SERVICE_INTERNAL_CHECKSUM, "internalChecksum");
+    public static final GoDependency INTERNAL_SIGV4A = awsModuleDep("internal/v4a",
+            null, Versions.INTERNAL_SIGV4A, "v4a");
 
     public static final GoDependency REGEXP = SmithyGoDependency.stdlib("regexp");
 
@@ -102,5 +104,6 @@ public class AwsGoDependency {
         private static final String INTERNAL_ENDPOINTS_V2 = "v2.0.0-00010101000000-000000000000";
         private static final String AWS_PROTOCOL_EVENTSTREAM = "v0.0.0-00010101000000-000000000000";
         private static final String SERVICE_INTERNAL_CHECKSUM = "v0.0.0-00010101000000-000000000000";
+        private static final String INTERNAL_SIGV4A = "v0.0.0-00010101000000-000000000000";
     }
 }

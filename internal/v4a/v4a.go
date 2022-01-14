@@ -1,5 +1,3 @@
-// TODO(GOSDK-1220): This signer has removed the conceptual knowledge of UNSIGNED-PAYLOAD and X-Amz-Content-Sha256
-
 package v4a
 
 import (
@@ -22,8 +20,8 @@ import (
 	"strings"
 	"time"
 
-	signerCrypto "github.com/aws/aws-sdk-go-v2/service/s3/internal/v4a/internal/crypto"
-	v4Internal "github.com/aws/aws-sdk-go-v2/service/s3/internal/v4a/internal/v4"
+	signerCrypto "github.com/aws/aws-sdk-go-v2/internal/v4a/internal/crypto"
+	v4Internal "github.com/aws/aws-sdk-go-v2/internal/v4a/internal/v4"
 	"github.com/aws/smithy-go/encoding/httpbinding"
 	"github.com/aws/smithy-go/logging"
 )

@@ -119,9 +119,9 @@ public class S3SignatureVersion4a implements GoIntegration {
             writer.openBlock("if o.$L == nil {", "}", fieldName, () -> writer.write("return"));
 
             Symbol adaptorSymbol = SymbolUtils.createPointableSymbolBuilder("SymmetricCredentialAdaptor",
-                    AwsCustomGoDependency.S3_SIGV4A_CUSTOMIZATION).build();
+                    AwsCustomGoDependency.INTERNAL_SIGV4A).build();
             Symbol credentialProvider = SymbolUtils.createPointableSymbolBuilder("CredentialsProvider",
-                    AwsCustomGoDependency.S3_SIGV4A_CUSTOMIZATION).build();
+                    AwsCustomGoDependency.INTERNAL_SIGV4A).build();
 
             writer.openBlock("if _, ok := o.$L.($T); ok {", "}", fieldName, credentialProvider,
                     () -> writer.write("return"));
@@ -144,7 +144,7 @@ public class S3SignatureVersion4a implements GoIntegration {
         writer.openBlock("type $L interface {", "}", V4A_SIGNER_INTERFACE_NAME, () -> {
             writer.addUseImports(SmithyGoDependency.CONTEXT);
             writer.addUseImports(AwsGoDependency.AWS_CORE);
-            writer.addUseImports(AwsCustomGoDependency.S3_SIGV4A_CUSTOMIZATION);
+            writer.addUseImports(AwsCustomGoDependency.INTERNAL_SIGV4A);
             writer.addUseImports(SmithyGoDependency.NET_HTTP);
             writer.addUseImports(SmithyGoDependency.TIME);
             writer.write("SignHTTP(ctx context.Context, credentials v4a.Credentials, r *http.Request, "
@@ -163,11 +163,11 @@ public class S3SignatureVersion4a implements GoIntegration {
 
     private void writeNewV4ASignerFunc(GoWriter writer, ServiceShape serviceShape) {
         Symbol signerSymbol = SymbolUtils.createValueSymbolBuilder("Signer",
-                AwsCustomGoDependency.S3_SIGV4A_CUSTOMIZATION).build();
+                AwsCustomGoDependency.INTERNAL_SIGV4A).build();
         Symbol newSignerSymbol = SymbolUtils.createValueSymbolBuilder("NewSigner",
-                AwsCustomGoDependency.S3_SIGV4A_CUSTOMIZATION).build();
+                AwsCustomGoDependency.INTERNAL_SIGV4A).build();
         Symbol signerOptionsSymbol = SymbolUtils.createPointableSymbolBuilder("SignerOptions",
-                AwsCustomGoDependency.S3_SIGV4A_CUSTOMIZATION).build();
+                AwsCustomGoDependency.INTERNAL_SIGV4A).build();
 
         writer.openBlock("func $L(o Options) *$T {", "}", NEW_SIGNER_FUNC_NAME, signerSymbol, () -> {
             writer.openBlock("return $T(func(so $P) {", "})", newSignerSymbol, signerOptionsSymbol, () -> {

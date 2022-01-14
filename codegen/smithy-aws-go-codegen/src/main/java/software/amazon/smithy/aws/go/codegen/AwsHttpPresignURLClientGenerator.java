@@ -556,7 +556,7 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
         }
 
         Symbol signerOptionsSymbol = SymbolUtils.createPointableSymbolBuilder(
-                "SignerOptions", AwsCustomGoDependency.S3_SIGV4A_CUSTOMIZATION).build();
+                "SignerOptions", AwsGoDependency.INTERNAL_SIGV4A).build();
 
         writer.writeDocs(
                 String.format("%s represents sigv4a presigner interface used by presign url client",
