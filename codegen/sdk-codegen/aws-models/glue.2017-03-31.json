@@ -18030,6 +18030,12 @@
                         "smithy.api#documentation": "<p>The name of the workflow to start.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "RunProperties": {
+                    "target": "com.amazonaws.glue#WorkflowRunProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The workflow run properties for the new workflow run.</p>"
+                    }
                 }
             }
         },

@@ -586,6 +586,11 @@ func awsRestjson1_serializeOpDocumentCreateFunctionInput(v *CreateFunctionInput,
 		ok.String(*v.FunctionVersion)
 	}
 
+	if v.MaxBatchSize != 0 {
+		ok := object.Key("maxBatchSize")
+		ok.Integer(v.MaxBatchSize)
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
@@ -833,6 +838,11 @@ func awsRestjson1_serializeOpDocumentCreateResolverInput(v *CreateResolverInput,
 	if len(v.Kind) > 0 {
 		ok := object.Key("kind")
 		ok.String(string(v.Kind))
+	}
+
+	if v.MaxBatchSize != 0 {
+		ok := object.Key("maxBatchSize")
+		ok.Integer(v.MaxBatchSize)
 	}
 
 	if v.PipelineConfig != nil {
@@ -3543,6 +3553,11 @@ func awsRestjson1_serializeOpDocumentUpdateFunctionInput(v *UpdateFunctionInput,
 		ok.String(*v.FunctionVersion)
 	}
 
+	if v.MaxBatchSize != 0 {
+		ok := object.Key("maxBatchSize")
+		ok.Integer(v.MaxBatchSize)
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
@@ -3800,6 +3815,11 @@ func awsRestjson1_serializeOpDocumentUpdateResolverInput(v *UpdateResolverInput,
 	if len(v.Kind) > 0 {
 		ok := object.Key("kind")
 		ok.String(string(v.Kind))
+	}
+
+	if v.MaxBatchSize != 0 {
+		ok := object.Key("maxBatchSize")
+		ok.Integer(v.MaxBatchSize)
 	}
 
 	if v.PipelineConfig != nil {

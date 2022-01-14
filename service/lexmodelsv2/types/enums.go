@@ -76,6 +76,22 @@ func (AssociatedTranscriptFilterName) Values() []AssociatedTranscriptFilterName 
 	}
 }
 
+type AudioRecognitionStrategy string
+
+// Enum values for AudioRecognitionStrategy
+const (
+	AudioRecognitionStrategyUseSlotValuesAsCustomVocabulary AudioRecognitionStrategy = "UseSlotValuesAsCustomVocabulary"
+)
+
+// Values returns all known values for AudioRecognitionStrategy. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AudioRecognitionStrategy) Values() []AudioRecognitionStrategy {
+	return []AudioRecognitionStrategy{
+		"UseSlotValuesAsCustomVocabulary",
+	}
+}
+
 type BotAliasStatus string
 
 // Enum values for BotAliasStatus
@@ -334,6 +350,30 @@ func (BuiltInSlotTypeSortAttribute) Values() []BuiltInSlotTypeSortAttribute {
 	}
 }
 
+type CustomVocabularyStatus string
+
+// Enum values for CustomVocabularyStatus
+const (
+	CustomVocabularyStatusReady     CustomVocabularyStatus = "Ready"
+	CustomVocabularyStatusDeleting  CustomVocabularyStatus = "Deleting"
+	CustomVocabularyStatusExporting CustomVocabularyStatus = "Exporting"
+	CustomVocabularyStatusImporting CustomVocabularyStatus = "Importing"
+	CustomVocabularyStatusCreating  CustomVocabularyStatus = "Creating"
+)
+
+// Values returns all known values for CustomVocabularyStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CustomVocabularyStatus) Values() []CustomVocabularyStatus {
+	return []CustomVocabularyStatus{
+		"Ready",
+		"Deleting",
+		"Exporting",
+		"Importing",
+		"Creating",
+	}
+}
+
 type Effect string
 
 // Enum values for Effect
@@ -429,6 +469,7 @@ type ImportExportFileFormat string
 // Enum values for ImportExportFileFormat
 const (
 	ImportExportFileFormatLexJson ImportExportFileFormat = "LexJson"
+	ImportExportFileFormatTsv     ImportExportFileFormat = "TSV"
 )
 
 // Values returns all known values for ImportExportFileFormat. Note that this can
@@ -437,6 +478,7 @@ const (
 func (ImportExportFileFormat) Values() []ImportExportFileFormat {
 	return []ImportExportFileFormat{
 		"LexJson",
+		"TSV",
 	}
 }
 
@@ -471,6 +513,26 @@ func (ImportFilterOperator) Values() []ImportFilterOperator {
 	return []ImportFilterOperator{
 		"CO",
 		"EQ",
+	}
+}
+
+type ImportResourceType string
+
+// Enum values for ImportResourceType
+const (
+	ImportResourceTypeBot              ImportResourceType = "Bot"
+	ImportResourceTypeBotLocale        ImportResourceType = "BotLocale"
+	ImportResourceTypeCustomVocabulary ImportResourceType = "CustomVocabulary"
+)
+
+// Values returns all known values for ImportResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ImportResourceType) Values() []ImportResourceType {
+	return []ImportResourceType{
+		"Bot",
+		"BotLocale",
+		"CustomVocabulary",
 	}
 }
 

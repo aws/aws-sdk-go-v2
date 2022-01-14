@@ -283,6 +283,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Describes the SAML application configured for a domain.</p>"
                     }
+                },
+                "AnonymousAuthDisableDate": {
+                    "target": "com.amazonaws.opensearch#DisableTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the Anonymous Auth Disable Date when Anonymous Auth is enabled.</p>"
+                    }
+                },
+                "AnonymousAuthEnabled": {
+                    "target": "com.amazonaws.opensearch#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>True if Anonymous auth is enabled. Anonymous auth can be enabled only when AdvancedSecurity is enabled on existing domains.</p>"
+                    }
                 }
             },
             "traits": {
@@ -315,6 +327,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The SAML application configuration for the domain.</p>"
                     }
+                },
+                "AnonymousAuthEnabled": {
+                    "target": "com.amazonaws.opensearch#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>True if Anonymous auth is enabled. Anonymous auth can be enabled only when AdvancedSecurity is enabled on existing domains.</p>"
+                    }
                 }
             },
             "traits": {
@@ -345,6 +363,24 @@
         },
         "com.amazonaws.opensearch#AmazonOpenSearchService": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "OpenSearch",
+                    "arnNamespace": "es",
+                    "cloudFormationName": "OpenSearch",
+                    "cloudTrailEventSource": "opensearch.amazonaws.com",
+                    "endpointPrefix": "es"
+                },
+                "aws.auth#sigv4": {
+                    "name": "es"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<fullname>Amazon OpenSearch Configuration Service</fullname>\n    <p>Use the Amazon OpenSearch configuration API to create, configure, and manage Amazon OpenSearch Service domains.</p>\n    <p>For sample code that uses the configuration API, see the <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/opensearch-configuration-samples.html\">\n      Amazon OpenSearch Service Developer Guide</a>.\n      The guide also contains <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/request-signing.html\">\n        sample\n        code for sending signed HTTP requests to the OpenSearch APIs</a>.\n    </p>\n    <p>The endpoint for configuration service requests is region-specific: es.<i>region</i>.amazonaws.com.\n      For example, es.us-east-1.amazonaws.com. For a current list of supported regions and endpoints,\n      see <a href=\"http://docs.aws.amazon.com/general/latest/gr/rande.html#service-regions\" target=\"_blank\">Regions and Endpoints</a>.\n    </p>",
+                "smithy.api#title": "Amazon OpenSearch Service",
+                "smithy.api#xmlNamespace": {
+                    "uri": "http://es.amazonaws.com/doc/2021-01-01/"
+                }
+            },
             "version": "2021-01-01",
             "operations": [
                 {
@@ -464,25 +500,7 @@
                 {
                     "target": "com.amazonaws.opensearch#UpgradeDomain"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "OpenSearch",
-                    "arnNamespace": "es",
-                    "cloudFormationName": "OpenSearch",
-                    "cloudTrailEventSource": "opensearch.amazonaws.com",
-                    "endpointPrefix": "es"
-                },
-                "aws.auth#sigv4": {
-                    "name": "es"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<fullname>Amazon OpenSearch Configuration Service</fullname>\n    <p>Use the Amazon OpenSearch configuration API to create, configure, and manage Amazon OpenSearch Service domains.</p>\n    <p>For sample code that uses the configuration API, see the <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/opensearch-configuration-samples.html\">\n      Amazon OpenSearch Service Developer Guide</a>.\n      The guide also contains <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/request-signing.html\">\n        sample\n        code for sending signed HTTP requests to the OpenSearch APIs</a>.\n    </p>\n    <p>The endpoint for configuration service requests is region-specific: es.<i>region</i>.amazonaws.com.\n      For example, es.us-east-1.amazonaws.com. For a current list of supported regions and endpoints,\n      see <a href=\"http://docs.aws.amazon.com/general/latest/gr/rande.html#service-regions\" target=\"_blank\">Regions and Endpoints</a>.\n    </p>",
-                "smithy.api#title": "Amazon OpenSearch Service",
-                "smithy.api#xmlNamespace": {
-                    "uri": "http://es.amazonaws.com/doc/2021-01-01/"
-                }
-            }
+            ]
         },
         "com.amazonaws.opensearch#AssociatePackage": {
             "type": "operation",
@@ -2613,6 +2631,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>Container for results from\n      <code>DescribeReservedInstances</code>\n    </p>"
             }
+        },
+        "com.amazonaws.opensearch#DisableTimestamp": {
+            "type": "timestamp"
         },
         "com.amazonaws.opensearch#DisabledOperationException": {
             "type": "structure",

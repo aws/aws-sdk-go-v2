@@ -434,6 +434,9 @@ type FunctionConfiguration struct {
 	// version of the template is supported.
 	FunctionVersion *string
 
+	// The maximum batching size for a resolver.
+	MaxBatchSize int32
+
 	// The name of the Function object.
 	Name *string
 
@@ -717,6 +720,9 @@ type Resolver struct {
 	// can use a pipeline resolver to run a GraphQL query against multiple data
 	// sources.
 	Kind ResolverKind
+
+	// The maximum batching size for a resolver.
+	MaxBatchSize int32
 
 	// The PipelineConfig.
 	PipelineConfig *PipelineConfig

@@ -90,6 +90,13 @@ type AdvancedOptionsStatus struct {
 // whether the internal database option is enabled.
 type AdvancedSecurityOptions struct {
 
+	// Specifies the Anonymous Auth Disable Date when Anonymous Auth is enabled.
+	AnonymousAuthDisableDate *time.Time
+
+	// True if Anonymous auth is enabled. Anonymous auth can be enabled only when
+	// AdvancedSecurity is enabled on existing domains.
+	AnonymousAuthEnabled *bool
+
 	// True if advanced security is enabled.
 	Enabled *bool
 
@@ -106,6 +113,10 @@ type AdvancedSecurityOptions struct {
 // whether the internal database option is enabled, master username and password
 // (if internal database is enabled), and master user ARN (if IAM is enabled).
 type AdvancedSecurityOptionsInput struct {
+
+	// True if Anonymous auth is enabled. Anonymous auth can be enabled only when
+	// AdvancedSecurity is enabled on existing domains.
+	AnonymousAuthEnabled *bool
 
 	// True if advanced security is enabled.
 	Enabled *bool

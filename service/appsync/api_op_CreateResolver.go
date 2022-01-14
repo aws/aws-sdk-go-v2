@@ -64,6 +64,9 @@ type CreateResolverInput struct {
 	// sources.
 	Kind types.ResolverKind
 
+	// The maximum batching size for a resolver.
+	MaxBatchSize int32
+
 	// The PipelineConfig.
 	PipelineConfig *types.PipelineConfig
 

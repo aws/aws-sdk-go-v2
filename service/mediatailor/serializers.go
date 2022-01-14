@@ -2555,6 +2555,13 @@ func awsRestjson1_serializeOpDocumentUpdateChannelInput(v *UpdateChannelInput, v
 	object := value.Object()
 	defer object.Close()
 
+	if v.FillerSlate != nil {
+		ok := object.Key("FillerSlate")
+		if err := awsRestjson1_serializeDocumentSlateSource(v.FillerSlate, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Outputs != nil {
 		ok := object.Key("Outputs")
 		if err := awsRestjson1_serializeDocumentRequestOutputs(v.Outputs, ok); err != nil {

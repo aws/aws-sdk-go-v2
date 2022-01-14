@@ -52,8 +52,7 @@ type CreateVocabularyFilterInput struct {
 	// The Amazon S3 location of a text file used as input to create the vocabulary
 	// filter. Only use characters from the character set defined for custom
 	// vocabularies. For a list of character sets, see Character Sets for Custom
-	// Vocabularies
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/how-vocabulary.html#charsets).
+	// Vocabularies (https://docs.aws.amazon.com/transcribe/latest/dg/charsets.html).
 	// The specified file must be less than 50 KB of UTF-8 characters. If you provide
 	// the location of a list of words in the VocabularyFilterFileUri parameter, you
 	// can't use the Words parameter.
@@ -62,8 +61,8 @@ type CreateVocabularyFilterInput struct {
 	// The words to use in the vocabulary filter. Only use characters from the
 	// character set defined for custom vocabularies. For a list of character sets, see
 	// Character Sets for Custom Vocabularies
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/how-vocabulary.html#charsets).
-	// If you provide a list of words in the Words parameter, you can't use the
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/charsets.html). If you provide
+	// a list of words in the Words parameter, you can't use the
 	// VocabularyFilterFileUri parameter.
 	Words []string
 

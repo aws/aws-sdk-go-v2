@@ -12,8 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the details of an Amazon Managed Workflows for Apache Airflow (MWAA)
-// environment.
+// Describes an Amazon Managed Workflows for Apache Airflow (MWAA) environment.
 func (c *Client) GetEnvironment(ctx context.Context, params *GetEnvironmentInput, optFns ...func(*Options)) (*GetEnvironmentOutput, error) {
 	if params == nil {
 		params = &GetEnvironmentInput{}

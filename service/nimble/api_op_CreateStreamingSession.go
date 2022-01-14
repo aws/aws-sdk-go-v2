@@ -47,7 +47,9 @@ type CreateStreamingSessionInput struct {
 	// The launch profile ID.
 	LaunchProfileId *string
 
-	// The user ID of the user that owns the streaming session.
+	// The user ID of the user that owns the streaming session. The user that owns the
+	// session will be logging into the session and interacting with the virtual
+	// workstation.
 	OwnedBy *string
 
 	// The ID of the streaming image.

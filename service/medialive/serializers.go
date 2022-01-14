@@ -7334,6 +7334,11 @@ func awsRestjson1_serializeDocumentHlsGroupSettings(v *types.HlsGroupSettings, v
 		ok.String(string(v.ProgramDateTime))
 	}
 
+	if len(v.ProgramDateTimeClock) > 0 {
+		ok := object.Key("programDateTimeClock")
+		ok.String(string(v.ProgramDateTimeClock))
+	}
+
 	if v.ProgramDateTimePeriod != 0 {
 		ok := object.Key("programDateTimePeriod")
 		ok.Integer(v.ProgramDateTimePeriod)

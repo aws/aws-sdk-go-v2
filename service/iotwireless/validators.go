@@ -430,6 +430,26 @@ func (m *validateOpDeleteMulticastGroup) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteQueuedMessages struct {
+}
+
+func (*validateOpDeleteQueuedMessages) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteQueuedMessages) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteQueuedMessagesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteQueuedMessagesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteServiceProfile struct {
 }
 
@@ -1050,6 +1070,26 @@ func (m *validateOpListMulticastGroupsByFuotaTask) HandleInitialize(ctx context.
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListQueuedMessages struct {
+}
+
+func (*validateOpListQueuedMessages) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListQueuedMessages) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListQueuedMessagesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListQueuedMessagesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -1554,6 +1594,10 @@ func addOpDeleteMulticastGroupValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpDeleteMulticastGroup{}, middleware.After)
 }
 
+func addOpDeleteQueuedMessagesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteQueuedMessages{}, middleware.After)
+}
+
 func addOpDeleteServiceProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteServiceProfile{}, middleware.After)
 }
@@ -1676,6 +1720,10 @@ func addOpGetWirelessGatewayTaskValidationMiddleware(stack *middleware.Stack) er
 
 func addOpListMulticastGroupsByFuotaTaskValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListMulticastGroupsByFuotaTask{}, middleware.After)
+}
+
+func addOpListQueuedMessagesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListQueuedMessages{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -2334,6 +2382,24 @@ func validateOpDeleteMulticastGroupInput(v *DeleteMulticastGroupInput) error {
 	}
 }
 
+func validateOpDeleteQueuedMessagesInput(v *DeleteQueuedMessagesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteQueuedMessagesInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.MessageId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MessageId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteServiceProfileInput(v *DeleteServiceProfileInput) error {
 	if v == nil {
 		return nil
@@ -2816,6 +2882,21 @@ func validateOpListMulticastGroupsByFuotaTaskInput(v *ListMulticastGroupsByFuota
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListMulticastGroupsByFuotaTaskInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListQueuedMessagesInput(v *ListQueuedMessagesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListQueuedMessagesInput"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}

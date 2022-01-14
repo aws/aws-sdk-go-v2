@@ -112,7 +112,7 @@ type CallAnalyticsJob struct {
 	// A value between zero and one that Amazon Transcribe assigned to the language
 	// that it identified in the source audio. This value appears only when you don't
 	// provide a single language code. Larger values indicate that Amazon Transcribe
-	// has higher confidence in the language that it identified
+	// has higher confidence in the language that it identified.
 	IdentifiedLanguageScore *float32
 
 	// If you know the language spoken between the customer and the agent, specify a
@@ -120,9 +120,9 @@ type CallAnalyticsJob struct {
 	// field blank, and Amazon Transcribe will use machine learning to automatically
 	// identify the language. To improve the accuracy of language identification, you
 	// can provide an array containing the possible language codes for the language
-	// spoken in your audio. Refer to Supported languages and language-specific
-	// features (https://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html)
-	// for additional information.
+	// spoken in your audio. Refer to Supported languages
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html) for
+	// additional information.
 	LanguageCode LanguageCode
 
 	// Describes the input media file in a transcription request.
@@ -168,8 +168,7 @@ type CallAnalyticsJobSettings struct {
 	// machine learning to identify the language for you. To improve the ability of
 	// Amazon Transcribe to correctly identify the language, you can provide an array
 	// of the languages that can be present in the audio. Refer to Supported languages
-	// and language-specific features
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html) for
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html) for
 	// additional information.
 	LanguageOptions []LanguageCode
 
@@ -356,19 +355,18 @@ type JobExecutionSettings struct {
 type LanguageIdSettings struct {
 
 	// The name of the language model you want to use when transcribing your audio. The
-	// model you specify must have the same language code as the transcription job; if
-	// the languages don't match, the language model won't be applied.
+	// model you specify must have the same language codes as the transcription job; if
+	// the languages don't match, the language model isn't be applied.
 	LanguageModelName *string
 
 	// The name of the vocabulary filter you want to use when transcribing your audio.
-	// The filter you specify must have the same language code as the transcription
-	// job; if the languages don't match, the vocabulary filter won't be applied.
+	// The filter you specify must have the same language codes as the transcription
+	// job; if the languages don't match, the vocabulary filter isn't be applied.
 	VocabularyFilterName *string
 
 	// The name of the vocabulary you want to use when processing your transcription
-	// job. The vocabulary you specify must have the same language code as the
-	// transcription job; if the languages don't match, the vocabulary won't be
-	// applied.
+	// job. The vocabulary you specify must have the same language codes as the
+	// transcription job; if the languages don't match, the vocabulary isn't applied.
 	VocabularyName *string
 
 	noSmithyDocumentSerde
@@ -416,8 +414,10 @@ type LanguageModel struct {
 type Media struct {
 
 	// The S3 object location of the input media file. The URI must be in the same
-	// region as the API endpoint that you are calling. The general form is: For
-	// example: For more information about S3 object names, see Object Keys
+	// region as the API endpoint that you are calling. The general form is:  s3:////
+	// For example:
+	// s3://AWSDOC-EXAMPLE-BUCKET/example.mp4s3://AWSDOC-EXAMPLE-BUCKET/mediadocs/example.mp4
+	// For more information about S3 object names, see Object Keys
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys)
 	// in the Amazon S3 Developer Guide.
 	MediaFileUri *string
@@ -483,14 +483,14 @@ type MedicalTranscriptionJob struct {
 	// Amazon Transcribe Medical can process. For more information, see Guidelines and
 	// Quotas
 	// (https://docs.aws.amazon.com/transcribe/latest/dg/limits-guidelines.html#limits)
-	// in the Amazon Transcribe Medical Guide
+	// in the Amazon Transcribe Medical Guide.
 	//
 	// * Invalid number of channels: number of
 	// channels too large- Your audio contains more channels than Amazon Transcribe
 	// Medical is configured to process. To request additional channels, see Amazon
 	// Transcribe Medical Endpoints and Quotas
 	// (https://docs.aws.amazon.com/general/latest/gr/transcribe-medical.html) in the
-	// Amazon Web Services General Reference
+	// Amazon Web Services General Reference.
 	FailureReason *string
 
 	// The language code for the language spoken in the source audio file. US English
@@ -507,9 +507,7 @@ type MedicalTranscriptionJob struct {
 	// The sample rate, in Hertz, of the source audio containing medical information.
 	// If you don't specify the sample rate, Amazon Transcribe Medical determines it
 	// for you. If you choose to specify the sample rate, it must match the rate
-	// detected by Amazon Transcribe Medical. In most cases, you should leave the
-	// MedicalMediaSampleHertz blank and let Amazon Transcribe Medical determine the
-	// sample rate.
+	// detected by Amazon Transcribe Medical.
 	MediaSampleRateHertz *int32
 
 	// The name for a given medical transcription job.
@@ -603,7 +601,7 @@ type MedicalTranscriptionSetting struct {
 	// alternative transcriptions of item. The alternative transcriptions also come
 	// with confidence scores provided by Amazon Transcribe Medical. You can't set both
 	// ShowSpeakerLabels and ChannelIdentification in the same request. If you set
-	// both, your request returns a BadRequestException
+	// both, your request returns a BadRequestException.
 	ChannelIdentification *bool
 
 	// The maximum number of alternatives that you tell the service to return. If you
@@ -871,7 +869,7 @@ type Subtitles struct {
 type SubtitlesOutput struct {
 
 	// Specify the output format for your subtitle file; if you select both SRT and VTT
-	// formats, two output files are genereated.
+	// formats, two output files are generated.
 	Formats []SubtitleFormat
 
 	// Choose the output location for your subtitle file. This location must be an S3
@@ -1025,7 +1023,7 @@ type TranscriptionJob struct {
 
 	// Language-specific settings that can be specified when language identification is
 	// enabled for your transcription job. These settings include VocabularyName,
-	// VocabularyFilterName, and LanguageModelNameLanguageModelName.
+	// VocabularyFilterName, and LanguageModelName.
 	LanguageIdSettings map[string]LanguageIdSettings
 
 	// An object that shows the optional array of languages inputted for transcription
@@ -1038,7 +1036,7 @@ type TranscriptionJob struct {
 	// The format of the input media file.
 	MediaFormat MediaFormat
 
-	// The sample rate, in Hertz, of the audio track in the input media file.
+	// The sample rate, in Hertz (Hz), of the audio track in the input media file.
 	MediaSampleRateHertz *int32
 
 	// An object containing the details of your custom language model.

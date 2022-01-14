@@ -81,7 +81,7 @@ type StartCallAnalyticsJobInput struct {
 	// ID:key/1234abcd-12ab-34cd-56ef1234567890ab"
 	//
 	// * ARN of a KMS Key Alias:
-	// "arn:aws:kms:region:account ID:alias/ExampleAlias"
+	// "arn:aws:kms:region:accountID:alias/ExampleAlias"
 	//
 	// If you don't specify an
 	// encryption key, the output of the call analytics job is encrypted with the
@@ -99,13 +99,13 @@ type StartCallAnalyticsJobInput struct {
 	//
 	// * s3://DOC-EXAMPLE-BUCKET1/folder/ f you specify a path, Amazon
 	// Transcribe saves the output of the analytics job as
-	// s3://DOC-EXAMPLE-BUCKET1/folder/your-transcription-job-name.json If you specify
+	// s3://DOC-EXAMPLE-BUCKET1/folder/your-transcription-job-name.json. If you specify
 	// a folder, you must provide a trailing slash.
 	//
 	// *
-	// s3://DOC-EXAMPLE-BUCKET1/folder/filename.json If you provide a path that has the
-	// filename specified, Amazon Transcribe saves the output of the analytics job as
-	// s3://DOC-EXAMPLEBUCKET1/folder/filename.json
+	// s3://DOC-EXAMPLE-BUCKET1/folder/filename.json. If you provide a path that has
+	// the filename specified, Amazon Transcribe saves the output of the analytics job
+	// as s3://DOC-EXAMPLEBUCKET1/folder/filename.json.
 	//
 	// You can specify an Amazon Web
 	// Services Key Management Service (KMS) key to encrypt the output of our analytics

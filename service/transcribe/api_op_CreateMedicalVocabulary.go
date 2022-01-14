@@ -42,14 +42,14 @@ type CreateMedicalVocabularyInput struct {
 	// The location in Amazon S3 of the text file you use to define your custom
 	// vocabulary. The URI must be in the same Amazon Web Services Region as the
 	// resource that you're calling. Enter information about your VocabularyFileUri in
-	// the following format:  https://s3..amazonaws.com///  The following is an example
+	// the following format: https://s3..amazonaws.com/// The following is an example
 	// URI for a vocabulary file that is stored in Amazon S3:
 	// https://s3.us-east-1.amazonaws.com/AWSDOC-EXAMPLE-BUCKET/vocab.txt For more
 	// information about Amazon S3 object names, see Object Keys
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys)
 	// in the Amazon S3 Developer Guide. For more information about custom
 	// vocabularies, see Medical Custom Vocabularies
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary-med).
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-med.html).
 	//
 	// This member is required.
 	VocabularyFileUri *string

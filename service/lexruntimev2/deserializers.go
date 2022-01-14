@@ -2792,6 +2792,152 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentRuntimeHintDetails(v **types.RuntimeHintDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RuntimeHintDetails
+	if *v == nil {
+		sv = &types.RuntimeHintDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "runtimeHintValues":
+			if err := awsRestjson1_deserializeDocumentRuntimeHintValuesList(&sv.RuntimeHintValues, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRuntimeHints(v **types.RuntimeHints, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RuntimeHints
+	if *v == nil {
+		sv = &types.RuntimeHints{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "slotHints":
+			if err := awsRestjson1_deserializeDocumentSlotHintsIntentMap(&sv.SlotHints, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRuntimeHintValue(v **types.RuntimeHintValue, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RuntimeHintValue
+	if *v == nil {
+		sv = &types.RuntimeHintValue{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "phrase":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RuntimeHintPhrase to be of type string, got %T instead", value)
+				}
+				sv.Phrase = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRuntimeHintValuesList(v *[]types.RuntimeHintValue, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RuntimeHintValue
+	if *v == nil {
+		cv = []types.RuntimeHintValue{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RuntimeHintValue
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentRuntimeHintValue(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentSentimentResponse(v **types.SentimentResponse, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3050,6 +3196,11 @@ func awsRestjson1_deserializeDocumentSessionState(v **types.SessionState, value 
 				sv.OriginatingRequestId = ptr.String(jtv)
 			}
 
+		case "runtimeHints":
+			if err := awsRestjson1_deserializeDocumentRuntimeHints(&sv.RuntimeHints, value); err != nil {
+				return err
+			}
+
 		case "sessionAttributes":
 			if err := awsRestjson1_deserializeDocumentStringMap(&sv.SessionAttributes, value); err != nil {
 				return err
@@ -3111,6 +3262,75 @@ func awsRestjson1_deserializeDocumentSlot(v **types.Slot, value interface{}) err
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSlotHintsIntentMap(v *map[string]map[string]types.RuntimeHintDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]map[string]types.RuntimeHintDetails
+	if *v == nil {
+		mv = map[string]map[string]types.RuntimeHintDetails{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal map[string]types.RuntimeHintDetails
+		mapVar := parsedVal
+		if err := awsRestjson1_deserializeDocumentSlotHintsSlotMap(&mapVar, value); err != nil {
+			return err
+		}
+		parsedVal = mapVar
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSlotHintsSlotMap(v *map[string]types.RuntimeHintDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]types.RuntimeHintDetails
+	if *v == nil {
+		mv = map[string]types.RuntimeHintDetails{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal types.RuntimeHintDetails
+		mapVar := parsedVal
+		destAddr := &mapVar
+		if err := awsRestjson1_deserializeDocumentRuntimeHintDetails(&destAddr, value); err != nil {
+			return err
+		}
+		parsedVal = *destAddr
+		mv[key] = parsedVal
+
+	}
+	*v = mv
 	return nil
 }
 

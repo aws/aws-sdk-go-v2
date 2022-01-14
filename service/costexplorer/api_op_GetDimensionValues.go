@@ -31,7 +31,8 @@ func (c *Client) GetDimensionValues(ctx context.Context, params *GetDimensionVal
 type GetDimensionValuesInput struct {
 
 	// The name of the dimension. Each Dimension is available for a different Context.
-	// For more information, see Context.
+	// For more information, see Context
+	// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetDimensionValues.html#awscostmanagement-GetDimensionValues-request-Context).
 	//
 	// This member is required.
 	Dimension types.Dimension

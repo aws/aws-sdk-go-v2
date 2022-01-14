@@ -80,6 +80,26 @@ func (AnomalyDetectionTaskStatus) Values() []AnomalyDetectionTaskStatus {
 	}
 }
 
+type AnomalyDetectorFailureType string
+
+// Enum values for AnomalyDetectorFailureType
+const (
+	AnomalyDetectorFailureTypeActivationFailure         AnomalyDetectorFailureType = "ACTIVATION_FAILURE"
+	AnomalyDetectorFailureTypeBackTestActivationFailure AnomalyDetectorFailureType = "BACK_TEST_ACTIVATION_FAILURE"
+	AnomalyDetectorFailureTypeDeletionFailure           AnomalyDetectorFailureType = "DELETION_FAILURE"
+)
+
+// Values returns all known values for AnomalyDetectorFailureType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AnomalyDetectorFailureType) Values() []AnomalyDetectorFailureType {
+	return []AnomalyDetectorFailureType{
+		"ACTIVATION_FAILURE",
+		"BACK_TEST_ACTIVATION_FAILURE",
+		"DELETION_FAILURE",
+	}
+}
+
 type AnomalyDetectorStatus string
 
 // Enum values for AnomalyDetectorStatus

@@ -274,7 +274,7 @@
         "com.amazonaws.honeycode#BatchErrorMessage": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^(?!\\s*$).+"
+                "smithy.api#pattern": "^(?!\\s*$).+$"
             }
         },
         "com.amazonaws.honeycode#BatchItemId": {
@@ -284,7 +284,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "^(?!\\s*$).+"
+                "smithy.api#pattern": "^(?!\\s*$).+$"
             }
         },
         "com.amazonaws.honeycode#BatchUpdateTableRows": {
@@ -541,7 +541,7 @@
                     "min": 32,
                     "max": 64
                 },
-                "smithy.api#pattern": "^(?!\\s*$).+"
+                "smithy.api#pattern": "^(?!\\s*$).+$"
             }
         },
         "com.amazonaws.honeycode#ColumnMetadata": {
@@ -812,7 +812,7 @@
                     "min": 0,
                     "max": 8192
                 },
-                "smithy.api#pattern": "[\\s\\S]*",
+                "smithy.api#pattern": "^[\\s\\S]*$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -929,7 +929,7 @@
                     "min": 0,
                     "max": 8192
                 },
-                "smithy.api#pattern": "[\\s\\S]*"
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.honeycode#Formula": {
@@ -939,7 +939,7 @@
                     "min": 0,
                     "max": 8192
                 },
-                "smithy.api#pattern": "^=.*",
+                "smithy.api#pattern": "^=",
                 "smithy.api#sensitive": {}
             }
         },
@@ -996,7 +996,7 @@
                 "appId": {
                     "target": "com.amazonaws.honeycode#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the app that contains the screem.</p>",
+                        "smithy.api#documentation": "<p>The ID of the app that contains the screen.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1634,6 +1634,70 @@
                 }
             }
         },
+        "com.amazonaws.honeycode#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.honeycode#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.honeycode#ListTagsForResourceResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.honeycode#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.honeycode#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.honeycode#RequestTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.honeycode#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.honeycode#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.honeycode#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.honeycode#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n            The ListTagsForResource API allows you to return a resource's tags.\n        </p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/tags/{resourceArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.honeycode#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.honeycode#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource's Amazon Resource Name (ARN).</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.honeycode#ListTagsForResourceResult": {
+            "type": "structure",
+            "members": {
+                "tags": {
+                    "target": "com.amazonaws.honeycode#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource's tags.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.honeycode#MaxResults": {
             "type": "integer",
             "traits": {
@@ -1657,7 +1721,7 @@
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#pattern": "^(?!\\s*$).+"
+                "smithy.api#pattern": "^(?!\\s*$).+$"
             }
         },
         "com.amazonaws.honeycode#QueryTableRows": {
@@ -1784,7 +1848,7 @@
                     "min": 0,
                     "max": 32767
                 },
-                "smithy.api#pattern": "[\\s\\S]*"
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.honeycode#RequestTimeoutException": {
@@ -1800,6 +1864,16 @@
                 "smithy.api#httpError": 504
             }
         },
+        "com.amazonaws.honeycode#ResourceArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^arn:aws:honeycode:.+:[0-9]{12}:.+:.+$"
+            }
+        },
         "com.amazonaws.honeycode#ResourceId": {
             "type": "string",
             "traits": {
@@ -1807,7 +1881,7 @@
                     "min": 36,
                     "max": 36
                 },
-                "smithy.api#pattern": "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}"
+                "smithy.api#pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
             }
         },
         "com.amazonaws.honeycode#ResourceIds": {
@@ -1921,7 +1995,7 @@
                     "min": 77,
                     "max": 77
                 },
-                "smithy.api#pattern": "row:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\\/[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}"
+                "smithy.api#pattern": "^row:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\\/[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
             }
         },
         "com.amazonaws.honeycode#RowIdList": {
@@ -1977,6 +2051,21 @@
         },
         "com.amazonaws.honeycode#SheetsPublicApiService": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Honeycode",
+                    "arnNamespace": "honeycode",
+                    "cloudFormationName": "Honeycode",
+                    "cloudTrailEventSource": "honeycode.amazonaws.com",
+                    "endpointPrefix": "honeycode"
+                },
+                "aws.auth#sigv4": {
+                    "name": "honeycode"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>\n      Amazon Honeycode is a fully managed service that allows you to quickly build mobile and web apps for teams—without\n      programming. Build Honeycode apps for managing almost anything, like projects, customers, operations, approvals,\n      resources, and even your team.\n    </p>",
+                "smithy.api#title": "Amazon Honeycode"
+            },
             "version": "2020-03-01",
             "operations": [
                 {
@@ -2010,27 +2099,21 @@
                     "target": "com.amazonaws.honeycode#ListTables"
                 },
                 {
+                    "target": "com.amazonaws.honeycode#ListTagsForResource"
+                },
+                {
                     "target": "com.amazonaws.honeycode#QueryTableRows"
                 },
                 {
                     "target": "com.amazonaws.honeycode#StartTableDataImportJob"
+                },
+                {
+                    "target": "com.amazonaws.honeycode#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.honeycode#UntagResource"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Honeycode",
-                    "arnNamespace": "honeycode",
-                    "cloudFormationName": "Honeycode",
-                    "cloudTrailEventSource": "honeycode.amazonaws.com",
-                    "endpointPrefix": "honeycode"
-                },
-                "aws.auth#sigv4": {
-                    "name": "honeycode"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>\n      Amazon Honeycode is a fully managed service that allows you to quickly build mobile and web apps for teams—without\n      programming. Build Honeycode apps for managing almost anything, like projects, customers, operations, approvals,\n      resources, and even your team.\n    </p>",
-                "smithy.api#title": "Amazon Honeycode"
-            }
+            ]
         },
         "com.amazonaws.honeycode#SourceDataColumnIndex": {
             "type": "integer",
@@ -2313,6 +2396,119 @@
                 "target": "com.amazonaws.honeycode#Table"
             }
         },
+        "com.amazonaws.honeycode#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[^\\n\\r\\x00\\x08\\x0B\\x0C\\x0E\\x1F]*$"
+            }
+        },
+        "com.amazonaws.honeycode#TagKeysList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.honeycode#TagKey"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of tag keys</p>",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.honeycode#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.honeycode#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.honeycode#TagResourceResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.honeycode#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.honeycode#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.honeycode#RequestTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.honeycode#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.honeycode#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.honeycode#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.honeycode#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n            The TagResource API allows you to add tags to an ARN-able resource. Resource includes workbook, table,\n            screen and screen-automation.\n        </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/tags/{resourceArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.honeycode#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.honeycode#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource's Amazon Resource Name (ARN).</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.honeycode#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags to apply to the resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.honeycode#TagResourceResult": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.honeycode#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[^\\n\\r\\x00\\x08\\x0B\\x0C\\x0E\\x1F]*$"
+            }
+        },
+        "com.amazonaws.honeycode#TagsMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.honeycode#TagKey"
+            },
+            "value": {
+                "target": "com.amazonaws.honeycode#TagValue"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A string to string map representing tags</p>",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.honeycode#ThrottlingException": {
             "type": "structure",
             "members": {
@@ -2328,6 +2524,71 @@
         },
         "com.amazonaws.honeycode#TimestampInMillis": {
             "type": "timestamp"
+        },
+        "com.amazonaws.honeycode#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.honeycode#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.honeycode#UntagResourceResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.honeycode#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.honeycode#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.honeycode#RequestTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.honeycode#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.honeycode#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.honeycode#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.honeycode#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n            The UntagResource API allows you to removes tags from an ARN-able resource. Resource includes workbook, table,\n            screen and screen-automation.\n        </p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/tags/{resourceArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.honeycode#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.honeycode#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource's Amazon Resource Name (ARN).</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tagKeys": {
+                    "target": "com.amazonaws.honeycode#TagKeysList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tag keys to remove from the resource.</p>",
+                        "smithy.api#httpQuery": "tagKeys",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.honeycode#UntagResourceResult": {
+            "type": "structure",
+            "members": {}
         },
         "com.amazonaws.honeycode#UpdateRowData": {
             "type": "structure",
@@ -2463,7 +2724,7 @@
         "com.amazonaws.honeycode#VariableName": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^(?!\\s*$).+",
+                "smithy.api#pattern": "^(?!\\s*$).+$",
                 "smithy.api#sensitive": {}
             }
         },

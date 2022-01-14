@@ -6992,6 +6992,31 @@ func awsRestjson1_deserializeDocumentAdvancedSecurityOptions(v **types.AdvancedS
 
 	for key, value := range shape {
 		switch key {
+		case "AnonymousAuthDisableDate":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.AnonymousAuthDisableDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected DisableTimestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "AnonymousAuthEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.AnonymousAuthEnabled = ptr.Bool(jtv)
+			}
+
 		case "Enabled":
 			if value != nil {
 				jtv, ok := value.(bool)

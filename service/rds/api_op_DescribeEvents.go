@@ -14,11 +14,11 @@ import (
 )
 
 // Returns events related to DB instances, DB clusters, DB parameter groups, DB
-// security groups, DB snapshots, and DB cluster snapshots for the past 14 days.
-// Events specific to a particular DB instances, DB clusters, DB parameter groups,
-// DB security groups, DB snapshots, and DB cluster snapshots group can be obtained
-// by providing the name as a parameter. By default, the past hour of events are
-// returned.
+// security groups, DB snapshots, DB cluster snapshots, and RDS Proxies for the
+// past 14 days. Events specific to a particular DB instance, DB cluster, DB
+// parameter group, DB security group, DB snapshot, DB cluster snapshot group, or
+// RDS Proxy can be obtained by providing the name as a parameter. By default, RDS
+// returns events that were generated in the past hour.
 func (c *Client) DescribeEvents(ctx context.Context, params *DescribeEventsInput, optFns ...func(*Options)) (*DescribeEventsOutput, error) {
 	if params == nil {
 		params = &DescribeEventsInput{}
@@ -87,6 +87,9 @@ type DescribeEventsInput struct {
 	//
 	// * If the source type is a DB
 	// cluster snapshot, a DBClusterSnapshotIdentifier value must be supplied.
+	//
+	// * If
+	// the source type is an RDS Proxy, a DBProxyName value must be supplied.
 	//
 	// * Can't
 	// end with a hyphen or contain two consecutive hyphens.

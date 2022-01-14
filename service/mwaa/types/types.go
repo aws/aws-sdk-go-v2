@@ -7,15 +7,18 @@ import (
 	"time"
 )
 
-// Internal only API.
+// Internal only. Represents the dimensions of a metric. To learn more about the
+// metrics published to Amazon CloudWatch, see Amazon MWAA performance metrics in
+// Amazon CloudWatch
+// (https://docs.aws.amazon.com/mwaa/latest/userguide/cw-metrics.html).
 type Dimension struct {
 
-	// Internal only API.
+	// Internal only. The name of the dimension.
 	//
 	// This member is required.
 	Name *string
 
-	// Internal only API.
+	// Internal only. The value of the dimension.
 	//
 	// This member is required.
 	Value *string
@@ -23,7 +26,7 @@ type Dimension struct {
 	noSmithyDocumentSerde
 }
 
-// The Amazon Managed Workflows for Apache Airflow (MWAA) environment.
+// Describes an Amazon Managed Workflows for Apache Airflow (MWAA) environment.
 type Environment struct {
 
 	// A list of key-value pairs containing the Apache Airflow configuration options
@@ -32,7 +35,7 @@ type Environment struct {
 	// (https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-env-variables.html).
 	AirflowConfigurationOptions map[string]string
 
-	// The Apache Airflow version on your environment. For example, v1.10.12.
+	// The Apache Airflow version on your environment. Valid values: 1.10.12, 2.0.2.
 	AirflowVersion *string
 
 	// The Amazon Resource Name (ARN) of the Amazon MWAA environment.
@@ -52,22 +55,20 @@ type Environment struct {
 	EnvironmentClass *string
 
 	// The Amazon Resource Name (ARN) of the execution role in IAM that allows MWAA to
-	// access AWS resources in your environment. For example,
+	// access Amazon Web Services resources in your environment. For example,
 	// arn:aws:iam::123456789:role/my-execution-role. To learn more, see Amazon MWAA
 	// Execution role
 	// (https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-create-role.html).
 	ExecutionRoleArn *string
 
-	// The Key Management Service (KMS) encryption key used to encrypt the data in your
-	// environment.
+	// The Amazon Web Services Key Management Service (KMS) encryption key used to
+	// encrypt the data in your environment.
 	KmsKey *string
 
-	// The status of the last update on the environment, and any errors that were
-	// encountered.
+	// The status of the last update on the environment.
 	LastUpdate *LastUpdate
 
-	// The Apache Airflow logs being sent to CloudWatch Logs: DagProcessingLogs,
-	// SchedulerLogs, TaskLogs, WebserverLogs, WorkerLogs.
+	// The Apache Airflow logs published to CloudWatch Logs.
 	LoggingConfiguration *LoggingConfiguration
 
 	// The maximum number of workers that run in your environment. For example, 20.
@@ -79,9 +80,9 @@ type Environment struct {
 	// The name of the Amazon MWAA environment. For example, MyMWAAEnvironment.
 	Name *string
 
-	// The VPC networking components used to secure and enable network traffic between
-	// the AWS resources for your environment. To learn more, see About networking on
-	// Amazon MWAA
+	// Describes the VPC networking components used to secure and enable network
+	// traffic between the Amazon Web Services resources for your environment. To learn
+	// more, see About networking on Amazon MWAA
 	// (https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html).
 	NetworkConfiguration *NetworkConfiguration
 
@@ -157,8 +158,8 @@ type Environment struct {
 	Status EnvironmentStatus
 
 	// The key-value tag pairs associated to your environment. For example,
-	// "Environment": "Staging". To learn more, see Tagging AWS resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).
+	// "Environment": "Staging". To learn more, see Tagging Amazon Web Services
+	// resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).
 	Tags map[string]string
 
 	// The Apache Airflow Web server access mode. To learn more, see Apache Airflow
@@ -171,15 +172,16 @@ type Environment struct {
 	// (https://docs.aws.amazon.com/mwaa/latest/userguide/access-airflow-ui.html).
 	WebserverUrl *string
 
-	// The day and time of the week that weekly maintenance updates are scheduled. For
-	// example: TUE:03:30.
+	// The day and time of the week in Coordinated Universal Time (UTC) 24-hour
+	// standard time that weekly maintenance updates are scheduled. For example:
+	// TUE:03:30.
 	WeeklyMaintenanceWindowStart *string
 
 	noSmithyDocumentSerde
 }
 
-// The status of the last update on the environment, and any errors that were
-// encountered.
+// Describes the status of the last update on the environment, and any errors that
+// were encountered.
 type LastUpdate struct {
 
 	// The day and time of the last update on the environment.
@@ -188,97 +190,90 @@ type LastUpdate struct {
 	// The error that was encountered during the last update of the environment.
 	Error *UpdateError
 
-	// The status of the last update on the environment. Valid values: SUCCESS,
-	// PENDING, FAILED.
+	// The source of the last update to the environment. Includes internal processes by
+	// Amazon MWAA, such as an environment maintenance update.
+	Source *string
+
+	// The status of the last update on the environment.
 	Status UpdateStatus
 
 	noSmithyDocumentSerde
 }
 
-// Defines the Apache Airflow logs to send to CloudWatch Logs: DagProcessingLogs,
-// SchedulerLogs, TaskLogs, WebserverLogs, WorkerLogs.
+// Describes the Apache Airflow log types that are published to CloudWatch Logs.
 type LoggingConfiguration struct {
 
-	// Defines the type of logs to send for the Apache Airflow log type (e.g.
-	// DagProcessingLogs). Valid values: CloudWatchLogGroupArn, Enabled, LogLevel.
+	// The Airflow DAG processing logs published to CloudWatch Logs and the log level.
 	DagProcessingLogs *ModuleLoggingConfiguration
 
-	// Defines the type of logs to send for the Apache Airflow log type (e.g.
-	// DagProcessingLogs). Valid values: CloudWatchLogGroupArn, Enabled, LogLevel.
+	// The Airflow scheduler logs published to CloudWatch Logs and the log level.
 	SchedulerLogs *ModuleLoggingConfiguration
 
-	// Defines the type of logs to send for the Apache Airflow log type (e.g.
-	// DagProcessingLogs). Valid values: CloudWatchLogGroupArn, Enabled, LogLevel.
+	// The Airflow task logs published to CloudWatch Logs and the log level.
 	TaskLogs *ModuleLoggingConfiguration
 
-	// Defines the type of logs to send for the Apache Airflow log type (e.g.
-	// DagProcessingLogs). Valid values: CloudWatchLogGroupArn, Enabled, LogLevel.
+	// The Airflow web server logs published to CloudWatch Logs and the log level.
 	WebserverLogs *ModuleLoggingConfiguration
 
-	// Defines the type of logs to send for the Apache Airflow log type (e.g.
-	// DagProcessingLogs). Valid values: CloudWatchLogGroupArn, Enabled, LogLevel.
+	// The Airflow worker logs published to CloudWatch Logs and the log level.
 	WorkerLogs *ModuleLoggingConfiguration
 
 	noSmithyDocumentSerde
 }
 
-// Defines the Apache Airflow logs to send to CloudWatch Logs: DagProcessingLogs,
-// SchedulerLogs, TaskLogs, WebserverLogs, WorkerLogs.
+// Defines the Apache Airflow log types to send to CloudWatch Logs.
 type LoggingConfigurationInput struct {
 
-	// Defines the type of logs to send for the Apache Airflow log type (e.g.
-	// DagProcessingLogs). Valid values: CloudWatchLogGroupArn, Enabled, LogLevel.
+	// Publishes Airflow DAG processing logs to CloudWatch Logs.
 	DagProcessingLogs *ModuleLoggingConfigurationInput
 
-	// Defines the type of logs to send for the Apache Airflow log type (e.g.
-	// DagProcessingLogs). Valid values: CloudWatchLogGroupArn, Enabled, LogLevel.
+	// Publishes Airflow scheduler logs to CloudWatch Logs.
 	SchedulerLogs *ModuleLoggingConfigurationInput
 
-	// Defines the type of logs to send for the Apache Airflow log type (e.g.
-	// DagProcessingLogs). Valid values: CloudWatchLogGroupArn, Enabled, LogLevel.
+	// Publishes Airflow task logs to CloudWatch Logs.
 	TaskLogs *ModuleLoggingConfigurationInput
 
-	// Defines the type of logs to send for the Apache Airflow log type (e.g.
-	// DagProcessingLogs). Valid values: CloudWatchLogGroupArn, Enabled, LogLevel.
+	// Publishes Airflow web server logs to CloudWatch Logs.
 	WebserverLogs *ModuleLoggingConfigurationInput
 
-	// Defines the type of logs to send for the Apache Airflow log type (e.g.
-	// DagProcessingLogs). Valid values: CloudWatchLogGroupArn, Enabled, LogLevel.
+	// Publishes Airflow worker logs to CloudWatch Logs.
 	WorkerLogs *ModuleLoggingConfigurationInput
 
 	noSmithyDocumentSerde
 }
 
-// Internal only API.
+// Internal only. Collects Apache Airflow metrics. To learn more about the metrics
+// published to Amazon CloudWatch, see Amazon MWAA performance metrics in Amazon
+// CloudWatch (https://docs.aws.amazon.com/mwaa/latest/userguide/cw-metrics.html).
 type MetricDatum struct {
 
-	// Internal only API.
+	// Internal only. The name of the metric.
 	//
 	// This member is required.
 	MetricName *string
 
-	// Internal only API.
+	// Internal only. The time the metric data was received.
 	//
 	// This member is required.
 	Timestamp *time.Time
 
-	// Internal only API.
+	// Internal only. The dimensions associated with the metric.
 	Dimensions []Dimension
 
-	// Internal only API.
+	// Internal only. The statistical values for the metric.
 	StatisticValues *StatisticSet
 
-	// Unit
+	// Internal only. The unit used to store the metric.
 	Unit Unit
 
-	// Internal only API.
+	// Internal only. The value for the metric.
 	Value *float64
 
 	noSmithyDocumentSerde
 }
 
-// Defines the type of logs to send for the Apache Airflow log type (e.g.
-// DagProcessingLogs). Valid values: CloudWatchLogGroupArn, Enabled, LogLevel.
+// Describes the Apache Airflow log details for the log type (e.g.
+// DagProcessingLogs).
 type ModuleLoggingConfiguration struct {
 
 	// The Amazon Resource Name (ARN) for the CloudWatch Logs group where the Apache
@@ -286,31 +281,27 @@ type ModuleLoggingConfiguration struct {
 	// arn:aws:logs:us-east-1:123456789012:log-group:airflow-MyMWAAEnvironment-MwaaEnvironment-DAGProcessing:*.
 	CloudWatchLogGroupArn *string
 
-	// Indicates whether to enable the Apache Airflow log type (e.g. DagProcessingLogs)
-	// in CloudWatch Logs.
+	// Indicates whether the Apache Airflow log type (e.g. DagProcessingLogs) is
+	// enabled.
 	Enabled *bool
 
-	// Defines the Apache Airflow logs to send for the log type (e.g.
-	// DagProcessingLogs) to CloudWatch Logs. Valid values: CRITICAL, ERROR, WARNING,
-	// INFO.
+	// The Apache Airflow log level for the log type (e.g. DagProcessingLogs).
 	LogLevel LoggingLevel
 
 	noSmithyDocumentSerde
 }
 
-// Defines the type of logs to send for the Apache Airflow log type (e.g.
-// DagProcessingLogs). Valid values: CloudWatchLogGroupArn, Enabled, LogLevel.
+// Enables the Apache Airflow log type (e.g. DagProcessingLogs) and defines the log
+// level to send to CloudWatch Logs (e.g. INFO).
 type ModuleLoggingConfigurationInput struct {
 
-	// Indicates whether to enable the Apache Airflow log type (e.g. DagProcessingLogs)
-	// in CloudWatch Logs.
+	// Indicates whether to enable the Apache Airflow log type (e.g.
+	// DagProcessingLogs).
 	//
 	// This member is required.
 	Enabled *bool
 
-	// Defines the Apache Airflow logs to send for the log type (e.g.
-	// DagProcessingLogs) to CloudWatch Logs. Valid values: CRITICAL, ERROR, WARNING,
-	// INFO.
+	// Defines the Apache Airflow log level (e.g. INFO) to send to CloudWatch Logs.
 	//
 	// This member is required.
 	LogLevel LoggingLevel
@@ -318,46 +309,45 @@ type ModuleLoggingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-// The VPC networking components used to secure and enable network traffic between
-// the AWS resources for your environment. To learn more, see About networking on
-// Amazon MWAA
+// Describes the VPC networking components used to secure and enable network
+// traffic between the Amazon Web Services resources for your environment. To learn
+// more, see About networking on Amazon MWAA
 // (https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html).
 type NetworkConfiguration struct {
 
-	// A list of 1 or more security group IDs. Accepts up to 5 security group IDs. A
-	// security group must be attached to the same VPC as the subnets. To learn more,
-	// see Security in your VPC on Amazon MWAA
-	// (https://docs.aws.amazon.com/mwaa/latest/userguide/vpc-security.html).
+	// A list of security group IDs. To learn more, see Security in your VPC on Amazon
+	// MWAA (https://docs.aws.amazon.com/mwaa/latest/userguide/vpc-security.html).
 	SecurityGroupIds []string
 
-	// A list of 2 subnet IDs. Required to create an environment. Must be private
-	// subnets in two different availability zones. A subnet must be attached to the
-	// same VPC as the security group.
+	// A list of subnet IDs. To learn more, see About networking on Amazon MWAA
+	// (https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html).
 	SubnetIds []string
 
 	noSmithyDocumentSerde
 }
 
-// Internal only API.
+// Internal only. Represents a set of statistics that describe a specific metric.
+// To learn more about the metrics published to Amazon CloudWatch, see Amazon MWAA
+// performance metrics in Amazon CloudWatch
+// (https://docs.aws.amazon.com/mwaa/latest/userguide/cw-metrics.html).
 type StatisticSet struct {
 
-	// Internal only API.
+	// Internal only. The maximum value of the sample set.
 	Maximum *float64
 
-	// Internal only API.
+	// Internal only. The minimum value of the sample set.
 	Minimum *float64
 
-	// Internal only API.
+	// Internal only. The number of samples used for the statistic set.
 	SampleCount *int32
 
-	// Internal only API.
+	// Internal only. The sum of values for the sample set.
 	Sum *float64
 
 	noSmithyDocumentSerde
 }
 
-// An object containing the error encountered with the last update: ErrorCode,
-// ErrorMessage.
+// Describes the error(s) encountered with the last update of the environment.
 type UpdateError struct {
 
 	// The error code that corresponds to the error with the last update.
@@ -369,15 +359,14 @@ type UpdateError struct {
 	noSmithyDocumentSerde
 }
 
-// The VPC networking components used to secure and enable network traffic between
-// the AWS resources for your environment. To learn more, see About networking on
-// Amazon MWAA
+// Defines the VPC networking components used to secure and enable network traffic
+// between the Amazon Web Services resources for your environment. To learn more,
+// see About networking on Amazon MWAA
 // (https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html).
 type UpdateNetworkConfigurationInput struct {
 
-	// A list of 1 or more security group IDs. Accepts up to 5 security group IDs. A
-	// security group must be attached to the same VPC as the subnets. To learn more,
-	// see Security in your VPC on Amazon MWAA
+	// A list of security group IDs. A security group must be attached to the same VPC
+	// as the subnets. To learn more, see Security in your VPC on Amazon MWAA
 	// (https://docs.aws.amazon.com/mwaa/latest/userguide/vpc-security.html).
 	//
 	// This member is required.

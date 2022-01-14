@@ -2995,6 +2995,11 @@ func awsAwsjson10_deserializeDocumentAutoScalingGroupRecommendation(v **types.Au
 				sv.Finding = types.Finding(jtv)
 			}
 
+		case "inferredWorkloadTypes":
+			if err := awsAwsjson10_deserializeDocumentInferredWorkloadTypes(&sv.InferredWorkloadTypes, value); err != nil {
+				return err
+			}
+
 		case "lastRefreshTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3089,6 +3094,15 @@ func awsAwsjson10_deserializeDocumentAutoScalingGroupRecommendationOption(v **ty
 		case "configuration":
 			if err := awsAwsjson10_deserializeDocumentAutoScalingGroupConfiguration(&sv.Configuration, value); err != nil {
 				return err
+			}
+
+		case "migrationEffort":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MigrationEffort to be of type string, got %T instead", value)
+				}
+				sv.MigrationEffort = types.MigrationEffort(jtv)
 			}
 
 		case "performanceRisk":
@@ -3497,6 +3511,15 @@ func awsAwsjson10_deserializeDocumentEffectiveRecommendationPreferences(v **type
 				sv.EnhancedInfrastructureMetrics = types.EnhancedInfrastructureMetrics(jtv)
 			}
 
+		case "inferredWorkloadTypes":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InferredWorkloadTypesPreference to be of type string, got %T instead", value)
+				}
+				sv.InferredWorkloadTypes = types.InferredWorkloadTypesPreference(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -3708,6 +3731,42 @@ func awsAwsjson10_deserializeDocumentGetRecommendationErrors(v *[]types.GetRecom
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentInferredWorkloadTypes(v *[]types.InferredWorkloadType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.InferredWorkloadType
+	if *v == nil {
+		cv = []types.InferredWorkloadType{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.InferredWorkloadType
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected InferredWorkloadType to be of type string, got %T instead", value)
+			}
+			col = types.InferredWorkloadType(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentInstanceRecommendation(v **types.InstanceRecommendation, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3773,6 +3832,11 @@ func awsAwsjson10_deserializeDocumentInstanceRecommendation(v **types.InstanceRe
 
 		case "findingReasonCodes":
 			if err := awsAwsjson10_deserializeDocumentInstanceRecommendationFindingReasonCodes(&sv.FindingReasonCodes, value); err != nil {
+				return err
+			}
+
+		case "inferredWorkloadTypes":
+			if err := awsAwsjson10_deserializeDocumentInferredWorkloadTypes(&sv.InferredWorkloadTypes, value); err != nil {
 				return err
 			}
 
@@ -3933,6 +3997,15 @@ func awsAwsjson10_deserializeDocumentInstanceRecommendationOption(v **types.Inst
 					return fmt.Errorf("expected InstanceType to be of type string, got %T instead", value)
 				}
 				sv.InstanceType = ptr.String(jtv)
+			}
+
+		case "migrationEffort":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MigrationEffort to be of type string, got %T instead", value)
+				}
+				sv.MigrationEffort = types.MigrationEffort(jtv)
 			}
 
 		case "performanceRisk":
@@ -5336,6 +5409,15 @@ func awsAwsjson10_deserializeDocumentRecommendationPreferencesDetail(v **types.R
 					return fmt.Errorf("expected EnhancedInfrastructureMetrics to be of type string, got %T instead", value)
 				}
 				sv.EnhancedInfrastructureMetrics = types.EnhancedInfrastructureMetrics(jtv)
+			}
+
+		case "inferredWorkloadTypes":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InferredWorkloadTypesPreference to be of type string, got %T instead", value)
+				}
+				sv.InferredWorkloadTypes = types.InferredWorkloadTypesPreference(jtv)
 			}
 
 		case "resourceType":

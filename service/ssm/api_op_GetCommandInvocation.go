@@ -179,18 +179,18 @@ type GetCommandInvocationOutput struct {
 	// against the MaxErrors limit of the parent command. This is a terminal state.
 	//
 	// *
-	// Canceled: The command was terminated before it was completed. This is a terminal
-	// state.
+	// Cancelled: The command was terminated before it was completed. This is a
+	// terminal state.
 	//
-	// * Undeliverable: The command can't be delivered to the managed node. The
-	// node might not exist or might not be responding. Undeliverable invocations don't
-	// count against the parent command's MaxErrors limit and don't contribute to
-	// whether the parent command status is Success or Incomplete. This is a terminal
-	// state.
+	// * Undeliverable: The command can't be delivered to the managed
+	// node. The node might not exist or might not be responding. Undeliverable
+	// invocations don't count against the parent command's MaxErrors limit and don't
+	// contribute to whether the parent command status is Success or Incomplete. This
+	// is a terminal state.
 	//
-	// * Terminated: The parent command exceeded its MaxErrors limit and
-	// subsequent command invocations were canceled by the system. This is a terminal
-	// state.
+	// * Terminated: The parent command exceeded its MaxErrors
+	// limit and subsequent command invocations were canceled by the system. This is a
+	// terminal state.
 	StatusDetails *string
 
 	// Metadata pertaining to the operation's result.

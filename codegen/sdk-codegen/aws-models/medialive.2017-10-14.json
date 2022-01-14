@@ -9862,8 +9862,15 @@
                 "ProgramDateTime": {
                     "target": "com.amazonaws.medialive#HlsProgramDateTime",
                     "traits": {
-                        "smithy.api#documentation": "Includes or excludes EXT-X-PROGRAM-DATE-TIME tag in .m3u8 manifest files. The value is calculated as follows: either the program date and time are initialized using the input timecode source, or the time is initialized using the input timecode source and the date is initialized using the timestampOffset.",
+                        "smithy.api#documentation": "Includes or excludes EXT-X-PROGRAM-DATE-TIME tag in .m3u8 manifest files. The value is calculated using the program date time clock.",
                         "smithy.api#jsonName": "programDateTime"
+                    }
+                },
+                "ProgramDateTimeClock": {
+                    "target": "com.amazonaws.medialive#HlsProgramDateTimeClock",
+                    "traits": {
+                        "smithy.api#documentation": "Specifies the algorithm used to drive the HLS EXT-X-PROGRAM-DATE-TIME clock. Options include:\n\nINITIALIZE_FROM_OUTPUT_TIMECODE: The PDT clock is initialized as a function of the first output timecode, then incremented by the EXTINF duration of each encoded segment.\n\nSYSTEM_CLOCK: The PDT clock is initialized as a function of the UTC wall clock, then incremented by the EXTINF duration of each encoded segment. If the PDT clock diverges from the wall clock by more than 500ms, it is resynchronized to the wall clock.",
+                        "smithy.api#jsonName": "programDateTimeClock"
                     }
                 },
                 "ProgramDateTimePeriod": {
@@ -10252,6 +10259,22 @@
                     {
                         "value": "INCLUDE",
                         "name": "INCLUDE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.medialive#HlsProgramDateTimeClock": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Hls Program Date Time Clock",
+                "smithy.api#enum": [
+                    {
+                        "value": "INITIALIZE_FROM_OUTPUT_TIMECODE",
+                        "name": "INITIALIZE_FROM_OUTPUT_TIMECODE"
+                    },
+                    {
+                        "value": "SYSTEM_CLOCK",
+                        "name": "SYSTEM_CLOCK"
                     }
                 ]
             }

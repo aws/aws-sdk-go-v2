@@ -55,7 +55,7 @@ type UpdateDatasetInput struct {
 	// The unique resource identifier for a Dataset.
 	Alias *string
 
-	// A token used to ensure idempotency.
+	// A token that ensures idempotency. This token expires in 10 minutes.
 	ClientToken *string
 
 	// A description for the Dataset.

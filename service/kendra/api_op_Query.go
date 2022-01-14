@@ -51,11 +51,6 @@ type QueryInput struct {
 	// This member is required.
 	IndexId *string
 
-	// The text to search for.
-	//
-	// This member is required.
-	QueryText *string
-
 	// Enables filtered searches based on document attributes. You can only provide one
 	// attribute filter; however, the AndAllFilters, NotFilter, and OrAllFilters
 	// parameters contain a list of other filters. The AttributeFilter parameter
@@ -92,6 +87,9 @@ type QueryInput struct {
 
 	// Sets the type of query. Only results for the specified query type are returned.
 	QueryResultTypeFilter types.QueryResultType
+
+	// The text to search for.
+	QueryText *string
 
 	// An array of document attributes to include in the response. No other document
 	// attributes are included in the response. By default all document attributes are
@@ -134,6 +132,13 @@ type QueryOutput struct {
 	// to 100 items. For example, if the search found 192 items, you can only retrieve
 	// the first 100 of the items.
 	TotalNumberOfResults *int32
+
+	// A list of warning codes and their messages on problems with your query. Amazon
+	// Kendra currently only supports one type of warning, which is a warning on
+	// invalid syntax used in the query. For examples of invalid query syntax, see
+	// Searching with advanced query syntax
+	// (https://docs.aws.amazon.com/kendra/latest/dg/searching-example.html#searching-index-query-syntax).
+	Warnings []types.Warning
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

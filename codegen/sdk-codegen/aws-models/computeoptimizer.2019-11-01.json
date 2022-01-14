@@ -201,6 +201,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An object that describes the effective recommendation preferences for the Auto Scaling group.</p>"
                     }
+                },
+                "inferredWorkloadTypes": {
+                    "target": "com.amazonaws.computeoptimizer#InferredWorkloadTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The applications that might be running on the instances in the Auto Scaling group\n            as inferred by Compute Optimizer.</p>\n\n        <p>Compute Optimizer can infer if one of the following applications might be running on\n            the instances:</p>\n\n        <ul>\n            <li>\n                <p>\n                  <code>AmazonEmr</code> - Infers that Amazon EMR might be running on\n                    the instances.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ApacheCassandra</code> - Infers that Apache Cassandra might be running\n                    on the instances.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ApacheHadoop</code> - Infers that Apache Hadoop might be running on the\n                    instances.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Memcached</code> - Infers that Memcached might be running on the\n                    instances.</p>\n            </li>\n            <li>\n                <p>\n                  <code>NGINX</code> - Infers that NGINX might be running on the\n                    instances.</p>\n            </li>\n            <li>\n                <p>\n                  <code>PostgreSql</code> - Infers that PostgreSQL might be running on the\n                    instances.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Redis</code> - Infers that Redis might be running on the\n                    instances.</p>\n            </li>\n         </ul>"
+                    }
                 }
             },
             "traits": {
@@ -238,6 +244,12 @@
                     "target": "com.amazonaws.computeoptimizer#SavingsOpportunity",
                     "traits": {
                         "smithy.api#documentation": "<p>An object that describes the savings opportunity for the Auto Scaling group\n            recommendation option. Savings opportunity includes the estimated monthly savings amount\n            and percentage.</p>"
+                    }
+                },
+                "migrationEffort": {
+                    "target": "com.amazonaws.computeoptimizer#MigrationEffort",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The level of effort required to migrate from the current instance type to the\n            recommended instance type.</p>\n\n        <p>For example, the migration effort is <code>Low</code> if Amazon EMR is the\n            inferred workload type and an Amazon Web Services Graviton instance type is recommended.\n            The migration effort is <code>Medium</code> if a workload type couldn't be inferred but\n            an Amazon Web Services Graviton instance type is recommended. The migration effort is\n                <code>VeryLow</code> if both the current and recommended instance types are of the\n            same CPU architecture.</p>"
                     }
                 }
             },
@@ -714,7 +726,13 @@
                 "enhancedInfrastructureMetrics": {
                     "target": "com.amazonaws.computeoptimizer#EnhancedInfrastructureMetrics",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes the activation status of the enhanced infrastructure metrics\n            preference.</p>\n        <p>A status of <code>Active</code> confirms that the preference is applied in the latest\n            recommendation refresh, and a status of <code>Inactive</code> confirms that it's not yet\n            applied.</p>"
+                        "smithy.api#documentation": "<p>Describes the activation status of the enhanced infrastructure metrics\n            preference.</p>\n        <p>A status of <code>Active</code> confirms that the preference is applied in the latest\n            recommendation refresh, and a status of <code>Inactive</code> confirms that it's not yet\n            applied to recommendations.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html\">Enhanced\n                infrastructure metrics</a> in the <i>Compute Optimizer User\n                Guide</i>.</p>"
+                    }
+                },
+                "inferredWorkloadTypes": {
+                    "target": "com.amazonaws.computeoptimizer#InferredWorkloadTypesPreference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the activation status of the inferred workload types preference.</p>\n\n        <p>A status of <code>Active</code> confirms that the preference is applied in the latest\n            recommendation refresh. A status of <code>Inactive</code> confirms that it's not yet\n            applied to recommendations.</p>"
                     }
                 }
             },
@@ -794,7 +812,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the estimated monthly savings amount possible for a given resource based on\n            On-Demand instance pricing</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/view-ec2-recommendations.html#ec2-savings-calculation\">Estimated monthly savings and savings opportunities</a> in the\n                    <i>Compute Optimizer User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Describes the estimated monthly savings amount possible, based on On-Demand instance\n            pricing, by adopting Compute Optimizer recommendations for a given resource.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/view-ec2-recommendations.html#ec2-savings-calculation\">Estimated monthly savings and savings opportunities</a> in the\n                    <i>Compute Optimizer User Guide</i>.</p>"
             }
         },
         "com.amazonaws.computeoptimizer#ExportAutoScalingGroupRecommendations": {
@@ -1410,6 +1428,18 @@
                     {
                         "value": "EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics",
                         "name": "EFFECTIVE_RECOMMENDATION_PREFERENCES_ENHANCED_INFRASTRUCTURE_METRICS"
+                    },
+                    {
+                        "value": "EffectiveRecommendationPreferencesInferredWorkloadTypes",
+                        "name": "EFFECTIVE_RECOMMENDATION_PREFERENCES_INFERRED_WORKLOAD_TYPES"
+                    },
+                    {
+                        "value": "InferredWorkloadTypes",
+                        "name": "INFERRED_WORKLOAD_TYPES"
+                    },
+                    {
+                        "value": "RecommendationOptionsMigrationEffort",
+                        "name": "RECOMMENDATION_OPTIONS_MIGRATION_EFFORT"
                     }
                 ]
             }
@@ -1619,6 +1649,18 @@
                     {
                         "value": "EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics",
                         "name": "EFFECTIVE_RECOMMENDATION_PREFERENCES_ENHANCED_INFRASTRUCTURE_METRICS"
+                    },
+                    {
+                        "value": "EffectiveRecommendationPreferencesInferredWorkloadTypes",
+                        "name": "EFFECTIVE_RECOMMENDATION_PREFERENCES_INFERRED_WORKLOAD_TYPES"
+                    },
+                    {
+                        "value": "InferredWorkloadTypes",
+                        "name": "INFERRED_WORKLOAD_TYPES"
+                    },
+                    {
+                        "value": "RecommendationOptionsMigrationEffort",
+                        "name": "RECOMMENDATION_OPTIONS_MIGRATION_EFFORT"
                     }
                 ]
             }
@@ -2440,7 +2482,7 @@
                 "enhancedInfrastructureMetrics": {
                     "target": "com.amazonaws.computeoptimizer#EnhancedInfrastructureMetrics",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the enhanced infrastructure metrics recommendation preference. Considers\n            all applicable preferences that you might have set at the resource, account, and\n            organization level.</p>\n        <p>A status of <code>Active</code> confirms that the preference is applied in the latest\n            recommendation refresh, and a status of <code>Inactive</code> confirms that it's not yet\n            applied.</p>\n        <p>To validate whether the preference is applied to your last generated set of\n            recommendations, review the <code>effectiveRecommendationPreferences</code> value in the\n            response of the <a>GetAutoScalingGroupRecommendations</a> and <a>GetEC2InstanceRecommendations</a> actions.</p>"
+                        "smithy.api#documentation": "<p>The status of the enhanced infrastructure metrics recommendation preference. Considers\n            all applicable preferences that you might have set at the resource, account, and\n            organization level.</p>\n        <p>A status of <code>Active</code> confirms that the preference is applied in the latest\n            recommendation refresh, and a status of <code>Inactive</code> confirms that it's not yet\n            applied to recommendations.</p>\n        <p>To validate whether the preference is applied to your last generated set of\n            recommendations, review the <code>effectiveRecommendationPreferences</code> value in the\n            response of the <a>GetAutoScalingGroupRecommendations</a> and <a>GetEC2InstanceRecommendations</a> actions.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html\">Enhanced\n                infrastructure metrics</a> in the <i>Compute Optimizer User\n                Guide</i>.</p>"
                     }
                 }
             }
@@ -2879,6 +2921,62 @@
         "com.amazonaws.computeoptimizer#IncludeMemberAccounts": {
             "type": "boolean"
         },
+        "com.amazonaws.computeoptimizer#InferredWorkloadType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "AmazonEmr",
+                        "name": "AMAZON_EMR"
+                    },
+                    {
+                        "value": "ApacheCassandra",
+                        "name": "APACHE_CASSANDRA"
+                    },
+                    {
+                        "value": "ApacheHadoop",
+                        "name": "APACHE_HADOOP"
+                    },
+                    {
+                        "value": "Memcached",
+                        "name": "MEMCACHED"
+                    },
+                    {
+                        "value": "Nginx",
+                        "name": "NGINX"
+                    },
+                    {
+                        "value": "PostgreSql",
+                        "name": "POSTGRE_SQL"
+                    },
+                    {
+                        "value": "Redis",
+                        "name": "REDIS"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.computeoptimizer#InferredWorkloadTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#InferredWorkloadType"
+            }
+        },
+        "com.amazonaws.computeoptimizer#InferredWorkloadTypesPreference": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Active",
+                        "name": "ACTIVE"
+                    },
+                    {
+                        "value": "Inactive",
+                        "name": "INACTIVE"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.computeoptimizer#InstanceArn": {
             "type": "string"
         },
@@ -2963,13 +3061,19 @@
                 "currentPerformanceRisk": {
                     "target": "com.amazonaws.computeoptimizer#CurrentPerformanceRisk",
                     "traits": {
-                        "smithy.api#documentation": "<p>The risk of the current instance not meeting the performance needs of its workloads.\n            The higher the risk, the more likely the current Lambda function requires\n            more memory.</p>"
+                        "smithy.api#documentation": "<p>The risk of the current instance not meeting the performance needs of its workloads.\n            The higher the risk, the more likely the current instance cannot meet the performance\n            requirements of its workload.</p>"
                     }
                 },
                 "effectiveRecommendationPreferences": {
                     "target": "com.amazonaws.computeoptimizer#EffectiveRecommendationPreferences",
                     "traits": {
                         "smithy.api#documentation": "<p>An object that describes the effective recommendation preferences for the\n            instance.</p>"
+                    }
+                },
+                "inferredWorkloadTypes": {
+                    "target": "com.amazonaws.computeoptimizer#InferredWorkloadTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The applications that might be running on the instance as inferred by Compute Optimizer.</p>\n\n        <p>Compute Optimizer can infer if one of the following applications might be running on\n            the instance:</p>\n\n        <ul>\n            <li>\n                <p>\n                  <code>AmazonEmr</code> - Infers that Amazon EMR might be running on\n                    the instance.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ApacheCassandra</code> - Infers that Apache Cassandra might be running\n                    on the instance.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ApacheHadoop</code> - Infers that Apache Hadoop might be running on the\n                    instance.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Memcached</code> - Infers that Memcached might be running on the\n                    instance.</p>\n            </li>\n            <li>\n                <p>\n                  <code>NGINX</code> - Infers that NGINX might be running on the\n                    instance.</p>\n            </li>\n            <li>\n                <p>\n                  <code>PostgreSql</code> - Infers that PostgreSQL might be running on the\n                    instance.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Redis</code> - Infers that Redis might be running on the\n                    instance.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -3091,6 +3195,12 @@
                     "target": "com.amazonaws.computeoptimizer#SavingsOpportunity",
                     "traits": {
                         "smithy.api#documentation": "<p>An object that describes the savings opportunity for the instance recommendation\n            option. Savings opportunity includes the estimated monthly savings amount and\n            percentage.</p>"
+                    }
+                },
+                "migrationEffort": {
+                    "target": "com.amazonaws.computeoptimizer#MigrationEffort",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The level of effort required to migrate from the current instance type to the\n            recommended instance type.</p>\n\n        <p>For example, the migration effort is <code>Low</code> if Amazon EMR is the\n            inferred workload type and an Amazon Web Services Graviton instance type is recommended.\n            The migration effort is <code>Medium</code> if a workload type couldn't be inferred but\n            an Amazon Web Services Graviton instance type is recommended. The migration effort is\n                <code>VeryLow</code> if both the current and recommended instance types are of the\n            same CPU architecture.</p>"
                     }
                 }
             },
@@ -3408,7 +3518,7 @@
                 "currentPerformanceRisk": {
                     "target": "com.amazonaws.computeoptimizer#CurrentPerformanceRisk",
                     "traits": {
-                        "smithy.api#documentation": "<p>The risk of the current Lambda function not meeting the performance needs\n            of its workloads. The higher the risk, the more likely the current Lambda\n            function configuration is underperforming in its workload.</p>"
+                        "smithy.api#documentation": "<p>The risk of the current Lambda function not meeting the performance needs\n            of its workloads. The higher the risk, the more likely the current Lambda\n            function requires more memory.</p>"
                     }
                 }
             },
@@ -3679,6 +3789,29 @@
                 "target": "com.amazonaws.computeoptimizer#MetricValue"
             }
         },
+        "com.amazonaws.computeoptimizer#MigrationEffort": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "VeryLow",
+                        "name": "VERY_LOW"
+                    },
+                    {
+                        "value": "Low",
+                        "name": "LOW"
+                    },
+                    {
+                        "value": "Medium",
+                        "name": "MEDIUM"
+                    },
+                    {
+                        "value": "High",
+                        "name": "HIGH"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.computeoptimizer#MinSize": {
             "type": "integer"
         },
@@ -3858,13 +3991,19 @@
                 "scope": {
                     "target": "com.amazonaws.computeoptimizer#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that describes the scope of the recommendation preference to create.</p>\n        <p>You can create recommendation preferences at the organization level (for management\n            accounts of an organization only), account level, and resource level. For more\n            information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html\">Activating\n                enhanced infrastructure metrics</a> in the <i>Compute Optimizer User\n                Guide</i>.</p>\n        <note>\n            <p>You cannot create recommendation preferences for Auto Scaling groups at the\n                organization and account levels. You can create recommendation preferences for\n                    Auto Scaling groups only at the resource level by specifying a scope name\n                of <code>ResourceArn</code> and a scope value of the Auto Scaling group Amazon\n                Resource Name (ARN). This will configure the preference for all instances that are\n                part of the specified the Auto Scaling group.</p>\n        </note>"
+                        "smithy.api#documentation": "<p>An object that describes the scope of the recommendation preference to create.</p>\n        <p>You can create recommendation preferences at the organization level (for management\n            accounts of an organization only), account level, and resource level. For more\n            information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html\">Activating\n                enhanced infrastructure metrics</a> in the <i>Compute Optimizer User\n                Guide</i>.</p>\n        <note>\n            <p>You cannot create recommendation preferences for Auto Scaling groups at the\n                organization and account levels. You can create recommendation preferences for\n                    Auto Scaling groups only at the resource level by specifying a scope name\n                of <code>ResourceArn</code> and a scope value of the Auto Scaling group Amazon\n                Resource Name (ARN). This will configure the preference for all instances that are\n                part of the specified Auto Scaling group. You also cannot create recommendation\n                preferences at the resource level for instances that are part of an Auto Scaling group. You can create recommendation preferences at the resource level only for\n                standalone instances.</p>\n        </note>"
                     }
                 },
                 "enhancedInfrastructureMetrics": {
                     "target": "com.amazonaws.computeoptimizer#EnhancedInfrastructureMetrics",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the enhanced infrastructure metrics recommendation preference to create\n            or update.</p>\n        <p>A status of <code>Active</code> confirms that the preference is applied in the latest\n            recommendation refresh, and a status of <code>Inactive</code> confirms that it's not yet\n            applied.</p>"
+                        "smithy.api#documentation": "<p>The status of the enhanced infrastructure metrics recommendation preference to create\n            or update.</p>\n        <p>Specify the <code>Active</code> status to activate the preference, or specify\n                <code>Inactive</code> to deactivate the preference.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html\">Enhanced\n                infrastructure metrics</a> in the <i>Compute Optimizer User\n                Guide</i>.</p>"
+                    }
+                },
+                "inferredWorkloadTypes": {
+                    "target": "com.amazonaws.computeoptimizer#InferredWorkloadTypesPreference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the inferred workload types recommendation preference to create or\n            update.</p>\n\n        <note>\n            <p>The inferred workload type feature is active by default. To deactivate it, create\n                a recommendation preference.</p>\n        </note>\n\n        <p>Specify the <code>Inactive</code> status to deactivate the feature, or specify\n                <code>Active</code> to activate it.</p>\n\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/inferred-workload-types.html\">Inferred workload\n                types</a> in the <i>Compute Optimizer User Guide</i>.</p>"
                     }
                 }
             }
@@ -3971,6 +4110,10 @@
                     {
                         "value": "EnhancedInfrastructureMetrics",
                         "name": "ENHANCED_INFRASTRUCTURE_METRICS"
+                    },
+                    {
+                        "value": "InferredWorkloadTypes",
+                        "name": "INFERRED_WORKLOAD_TYPES"
                     }
                 ]
             }
@@ -4013,7 +4156,13 @@
                 "enhancedInfrastructureMetrics": {
                     "target": "com.amazonaws.computeoptimizer#EnhancedInfrastructureMetrics",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the enhanced infrastructure metrics recommendation preference.</p>\n        <p>A status of <code>Active</code> confirms that the preference is applied in the latest\n            recommendation refresh, and a status of <code>Inactive</code> confirms that it's not yet\n            applied.</p>"
+                        "smithy.api#documentation": "<p>The status of the enhanced infrastructure metrics recommendation preference.</p>\n        <p>A status of <code>Active</code> confirms that the preference is applied in the latest\n            recommendation refresh, and a status of <code>Inactive</code> confirms that it's not yet\n            applied to recommendations.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html\">Enhanced\n                infrastructure metrics</a> in the <i>Compute Optimizer User\n                Guide</i>.</p>"
+                    }
+                },
+                "inferredWorkloadTypes": {
+                    "target": "com.amazonaws.computeoptimizer#InferredWorkloadTypesPreference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the inferred workload types recommendation preference.</p>\n\n        <p>A status of <code>Active</code> confirms that the preference is applied in the latest\n            recommendation refresh. A status of <code>Inactive</code> confirms that it's not yet\n            applied to recommendations.</p>"
                     }
                 }
             },
@@ -4193,6 +4342,10 @@
                     {
                         "value": "LambdaFunction",
                         "name": "LAMBDA_FUNCTION"
+                    },
+                    {
+                        "value": "NotApplicable",
+                        "name": "NOT_APPLICABLE"
                     }
                 ]
             }
@@ -4249,13 +4402,13 @@
                 "savingsOpportunityPercentage": {
                     "target": "com.amazonaws.computeoptimizer#SavingsOpportunityPercentage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The estimated monthly savings possible as a percentage of monthly cost.</p>"
+                        "smithy.api#documentation": "<p>The estimated monthly savings possible as a percentage of monthly cost by adopting\n                Compute Optimizer recommendations for a given resource.</p>"
                     }
                 },
                 "estimatedMonthlySavings": {
                     "target": "com.amazonaws.computeoptimizer#EstimatedMonthlySavings",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that describes the estimated monthly savings amount possible based on\n            On-Demand instance pricing.</p>"
+                        "smithy.api#documentation": "<p>An object that describes the estimated monthly savings amount possible, based on\n            On-Demand instance pricing, by adopting Compute Optimizer recommendations for a given\n            resource.</p>"
                     }
                 }
             },
@@ -4283,7 +4436,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the scope of a recommendation preference.</p>\n        <p>Recommendation preferences can be created at the organization level (for management\n            accounts of an organization only), account level, and resource level. For more\n            information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html\">Activating\n                enhanced infrastructure metrics</a> in the <i>Compute Optimizer User\n                Guide</i>.</p>\n        <note>\n            <p>You cannot create recommendation preferences for Auto Scaling groups at the\n                organization and account levels. You can create recommendation preferences for\n                    Auto Scaling groups only at the resource level by specifying a scope name\n                of <code>ResourceArn</code> and a scope value of the Auto Scaling group Amazon\n                Resource Name (ARN). This will configure the preference for all instances that are\n                part of the specified the Auto Scaling group.</p>\n        </note>"
+                "smithy.api#documentation": "<p>Describes the scope of a recommendation preference.</p>\n        <p>Recommendation preferences can be created at the organization level (for management\n            accounts of an organization only), account level, and resource level. For more\n            information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html\">Activating\n                enhanced infrastructure metrics</a> in the <i>Compute Optimizer User\n                Guide</i>.</p>\n        <note>\n            <p>You cannot create recommendation preferences for Auto Scaling groups at the\n                organization and account levels. You can create recommendation preferences for\n                    Auto Scaling groups only at the resource level by specifying a scope name\n                of <code>ResourceArn</code> and a scope value of the Auto Scaling group Amazon\n                Resource Name (ARN). This will configure the preference for all instances that are\n                part of the specified Auto Scaling group. You also cannot create recommendation\n                preferences at the resource level for instances that are part of an Auto Scaling group. You can create recommendation preferences at the resource level only for\n                standalone instances.</p>\n        </note>"
             }
         },
         "com.amazonaws.computeoptimizer#ScopeName": {

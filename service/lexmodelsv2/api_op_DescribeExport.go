@@ -62,7 +62,7 @@ type DescribeExportOutput struct {
 	// not be completed.
 	FailureReasons []string
 
-	// The file format used in the files that describe the bot or bot locale.
+	// The file format used in the files that describe the resource.
 	FileFormat types.ImportExportFileFormat
 
 	// The last date and time that the export was updated.

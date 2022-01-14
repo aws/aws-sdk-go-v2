@@ -199,7 +199,8 @@ type LogType string
 
 // Enum values for LogType
 const (
-	LogTypeSlowLog LogType = "slow-log"
+	LogTypeSlowLog   LogType = "slow-log"
+	LogTypeEngineLog LogType = "engine-log"
 )
 
 // Values returns all known values for LogType. Note that this can be expanded in
@@ -208,6 +209,7 @@ const (
 func (LogType) Values() []LogType {
 	return []LogType{
 		"slow-log",
+		"engine-log",
 	}
 }
 

@@ -16,7 +16,7 @@ import (
 	"time"
 )
 
-// Gets StreamingSession resource. anvoke this operation to poll for a streaming
+// Gets StreamingSession resource. Invoke this operation to poll for a streaming
 // session state while creating or deleting a session.
 func (c *Client) GetStreamingSession(ctx context.Context, params *GetStreamingSessionInput, optFns ...func(*Options)) (*GetStreamingSessionOutput, error) {
 	if params == nil {

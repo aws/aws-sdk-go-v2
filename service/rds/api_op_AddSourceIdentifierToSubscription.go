@@ -51,6 +51,9 @@ type AddSourceIdentifierToSubscriptionInput struct {
 	// * If the source type is a DB
 	// cluster snapshot, a DBClusterSnapshotIdentifier value must be supplied.
 	//
+	// * If
+	// the source type is an RDS Proxy, a DBProxyName value must be supplied.
+	//
 	// This member is required.
 	SourceIdentifier *string
 

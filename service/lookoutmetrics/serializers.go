@@ -2401,7 +2401,7 @@ func awsRestjson1_serializeDocumentRDSSourceConfig(v *types.RDSSourceConfig, val
 		ok.String(*v.DatabaseName)
 	}
 
-	{
+	if v.DatabasePort != 0 {
 		ok := object.Key("DatabasePort")
 		ok.Integer(v.DatabasePort)
 	}
@@ -2455,7 +2455,7 @@ func awsRestjson1_serializeDocumentRedshiftSourceConfig(v *types.RedshiftSourceC
 		ok.String(*v.DatabaseName)
 	}
 
-	{
+	if v.DatabasePort != 0 {
 		ok := object.Key("DatabasePort")
 		ok.Integer(v.DatabasePort)
 	}

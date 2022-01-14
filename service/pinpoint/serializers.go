@@ -10926,6 +10926,23 @@ func awsRestjson1_serializeDocumentInAppTemplateRequest(v *types.InAppTemplateRe
 	return nil
 }
 
+func awsRestjson1_serializeDocumentJourneyChannelSettings(v *types.JourneyChannelSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ConnectCampaignArn != nil {
+		ok := object.Key("ConnectCampaignArn")
+		ok.String(*v.ConnectCampaignArn)
+	}
+
+	if v.ConnectCampaignExecutionRoleArn != nil {
+		ok := object.Key("ConnectCampaignExecutionRoleArn")
+		ok.String(*v.ConnectCampaignExecutionRoleArn)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentJourneyCustomMessage(v *types.JourneyCustomMessage, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -12988,6 +13005,13 @@ func awsRestjson1_serializeDocumentWriteJourneyRequest(v *types.WriteJourneyRequ
 	if v.CreationDate != nil {
 		ok := object.Key("CreationDate")
 		ok.String(*v.CreationDate)
+	}
+
+	if v.JourneyChannelSettings != nil {
+		ok := object.Key("JourneyChannelSettings")
+		if err := awsRestjson1_serializeDocumentJourneyChannelSettings(v.JourneyChannelSettings, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.LastModifiedDate != nil {

@@ -1554,6 +1554,82 @@ func awsRestjson1_serializeOpHttpBindingsDeleteBotVersionInput(v *DeleteBotVersi
 	return nil
 }
 
+type awsRestjson1_serializeOpDeleteCustomVocabulary struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteCustomVocabulary) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteCustomVocabulary) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteCustomVocabularyInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/customvocabulary")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteCustomVocabularyInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteCustomVocabularyInput(v *DeleteCustomVocabularyInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.BotId == nil || len(*v.BotId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member botId must not be empty")}
+	}
+	if v.BotId != nil {
+		if err := encoder.SetURI("botId").String(*v.BotId); err != nil {
+			return err
+		}
+	}
+
+	if v.BotVersion == nil || len(*v.BotVersion) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member botVersion must not be empty")}
+	}
+	if v.BotVersion != nil {
+		if err := encoder.SetURI("botVersion").String(*v.BotVersion); err != nil {
+			return err
+		}
+	}
+
+	if v.LocaleId == nil || len(*v.LocaleId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member localeId must not be empty")}
+	}
+	if v.LocaleId != nil {
+		if err := encoder.SetURI("localeId").String(*v.LocaleId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpDeleteExport struct {
 }
 
@@ -2483,6 +2559,82 @@ func awsRestjson1_serializeOpHttpBindingsDescribeBotVersionInput(v *DescribeBotV
 	}
 	if v.BotVersion != nil {
 		if err := encoder.SetURI("botVersion").String(*v.BotVersion); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDescribeCustomVocabularyMetadata struct {
+}
+
+func (*awsRestjson1_serializeOpDescribeCustomVocabularyMetadata) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDescribeCustomVocabularyMetadata) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeCustomVocabularyMetadataInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/customvocabulary/DEFAULT/metadata")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDescribeCustomVocabularyMetadataInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDescribeCustomVocabularyMetadataInput(v *DescribeCustomVocabularyMetadataInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.BotId == nil || len(*v.BotId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member botId must not be empty")}
+	}
+	if v.BotId != nil {
+		if err := encoder.SetURI("botId").String(*v.BotId); err != nil {
+			return err
+		}
+	}
+
+	if v.BotVersion == nil || len(*v.BotVersion) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member botVersion must not be empty")}
+	}
+	if v.BotVersion != nil {
+		if err := encoder.SetURI("botVersion").String(*v.BotVersion); err != nil {
+			return err
+		}
+	}
+
+	if v.LocaleId == nil || len(*v.LocaleId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member localeId must not be empty")}
+	}
+	if v.LocaleId != nil {
+		if err := encoder.SetURI("localeId").String(*v.LocaleId); err != nil {
 			return err
 		}
 	}
@@ -3792,6 +3944,11 @@ func awsRestjson1_serializeOpDocumentListExportsInput(v *ListExportsInput, value
 		}
 	}
 
+	if v.LocaleId != nil {
+		ok := object.Key("localeId")
+		ok.String(*v.LocaleId)
+	}
+
 	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
 		ok.Integer(*v.MaxResults)
@@ -3887,6 +4044,11 @@ func awsRestjson1_serializeOpDocumentListImportsInput(v *ListImportsInput, value
 		if err := awsRestjson1_serializeDocumentImportFilters(v.Filters, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.LocaleId != nil {
+		ok := object.Key("localeId")
+		ok.String(*v.LocaleId)
 	}
 
 	if v.MaxResults != nil {
@@ -6000,6 +6162,18 @@ func awsRestjson1_serializeOpDocumentUpdateSlotTypeInput(v *UpdateSlotTypeInput,
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAdvancedRecognitionSetting(v *types.AdvancedRecognitionSetting, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.AudioRecognitionStrategy) > 0 {
+		ok := object.Key("audioRecognitionStrategy")
+		ok.String(string(v.AudioRecognitionStrategy))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAggregatedUtterancesFilter(v *types.AggregatedUtterancesFilter, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -6600,6 +6774,50 @@ func awsRestjson1_serializeDocumentCustomPayload(v *types.CustomPayload, value s
 	return nil
 }
 
+func awsRestjson1_serializeDocumentCustomVocabularyExportSpecification(v *types.CustomVocabularyExportSpecification, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BotId != nil {
+		ok := object.Key("botId")
+		ok.String(*v.BotId)
+	}
+
+	if v.BotVersion != nil {
+		ok := object.Key("botVersion")
+		ok.String(*v.BotVersion)
+	}
+
+	if v.LocaleId != nil {
+		ok := object.Key("localeId")
+		ok.String(*v.LocaleId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCustomVocabularyImportSpecification(v *types.CustomVocabularyImportSpecification, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BotId != nil {
+		ok := object.Key("botId")
+		ok.String(*v.BotId)
+	}
+
+	if v.BotVersion != nil {
+		ok := object.Key("botVersion")
+		ok.String(*v.BotVersion)
+	}
+
+	if v.LocaleId != nil {
+		ok := object.Key("localeId")
+		ok.String(*v.LocaleId)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentDataPrivacy(v *types.DataPrivacy, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -6714,6 +6932,13 @@ func awsRestjson1_serializeDocumentExportResourceSpecification(v *types.ExportRe
 	if v.BotLocaleExportSpecification != nil {
 		ok := object.Key("botLocaleExportSpecification")
 		if err := awsRestjson1_serializeDocumentBotLocaleExportSpecification(v.BotLocaleExportSpecification, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CustomVocabularyExportSpecification != nil {
+		ok := object.Key("customVocabularyExportSpecification")
+		if err := awsRestjson1_serializeDocumentCustomVocabularyExportSpecification(v.CustomVocabularyExportSpecification, ok); err != nil {
 			return err
 		}
 	}
@@ -6984,6 +7209,13 @@ func awsRestjson1_serializeDocumentImportResourceSpecification(v *types.ImportRe
 	if v.BotLocaleImportSpecification != nil {
 		ok := object.Key("botLocaleImportSpecification")
 		if err := awsRestjson1_serializeDocumentBotLocaleImportSpecification(v.BotLocaleImportSpecification, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CustomVocabularyImportSpecification != nil {
+		ok := object.Key("customVocabularyImportSpecification")
+		if err := awsRestjson1_serializeDocumentCustomVocabularyImportSpecification(v.CustomVocabularyImportSpecification, ok); err != nil {
 			return err
 		}
 	}
@@ -7865,6 +8097,13 @@ func awsRestjson1_serializeDocumentSlotValueRegexFilter(v *types.SlotValueRegexF
 func awsRestjson1_serializeDocumentSlotValueSelectionSetting(v *types.SlotValueSelectionSetting, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AdvancedRecognitionSetting != nil {
+		ok := object.Key("advancedRecognitionSetting")
+		if err := awsRestjson1_serializeDocumentAdvancedRecognitionSetting(v.AdvancedRecognitionSetting, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.RegexFilter != nil {
 		ok := object.Key("regexFilter")

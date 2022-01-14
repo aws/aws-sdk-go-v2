@@ -6682,6 +6682,9 @@ type WriteJourneyRequest struct {
 	// The date, in ISO 8601 format, when the journey was created.
 	CreationDate *string
 
+	// The channel-specific configurations for the journey.
+	JourneyChannelSettings *JourneyChannelSettings
+
 	// The date, in ISO 8601 format, when the journey was last modified.
 	LastModifiedDate *string
 

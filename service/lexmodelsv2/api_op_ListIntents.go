@@ -59,7 +59,9 @@ type ListIntentsInput struct {
 
 	// If the response from the ListIntents operation contains more results than
 	// specified in the maxResults parameter, a token is returned in the response. Use
-	// that token in the nextToken parameter to return the next page of results.
+	// the returned token in the nextToken parameter of a ListIntents request to return
+	// the next page of results. For a complete set of results, call the ListIntents
+	// operation until the nextToken returned in the response is null.
 	NextToken *string
 
 	// Determines the sort order for the response from the ListIntents operation. You

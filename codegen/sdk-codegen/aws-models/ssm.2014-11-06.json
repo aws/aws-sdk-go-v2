@@ -121,7 +121,7 @@
                 "IamRole": {
                     "target": "com.amazonaws.ssm#IamRole",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Identity and Access Management (IAM) role to assign to the managed\n   node.</p>"
+                        "smithy.api#documentation": "<p>The Identity and Access Management (IAM) role to assign to the managed node.</p>"
                     }
                 },
                 "RegistrationLimit": {
@@ -305,7 +305,7 @@
                     "name": "ssm"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>Amazon Web Services Systems Manager is a collection of capabilities that helps you automate management tasks such as\n   collecting system inventory, applying operating system (OS) patches, automating the creation of\n   Amazon Machine Images (AMIs), and configuring operating systems (OSs) and applications at scale.\n   Systems Manager lets you remotely and securely manage the configuration of your managed nodes. A\n    <i>managed node</i> is any Amazon Elastic Compute Cloud (Amazon EC2) instance, edge\n   device, or on-premises server or virtual machine (VM) that has been configured for\n   Systems Manager. </p>\n         <note>\n            <p>With support for IoT Greengrass Version 2 devices, the phrase <i>managed\n     instance</i> has been changed to <i>managed node</i> in most of the Systems Manager\n    documentation. The Systems Manager console, API\n    calls, error messages, and SSM documents still use the term instance.</p>\n         </note>\n         <p>This reference is intended to be used with the <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/\">Amazon Web Services Systems Manager User Guide</a>.</p>\n         <p>To get started, verify prerequisites and configure managed nodes. For more information, see\n    <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up.html\">Setting up\n    Amazon Web Services Systems Manager</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         <p class=\"title\">\n            <b>Related resources</b>\n         </p>\n         <ul>\n            <li>\n               <p>For information about how to use a Query API, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/making-api-requests.html\">Making API requests</a>. </p>\n            </li>\n            <li>\n               <p>For information about other API operations you can perform on EC2 instances, see the\n      <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/\">Amazon EC2 API Reference</a>.</p>\n            </li>\n            <li>\n               <p>For information about AppConfig, a capability of Systems Manager, see the <a href=\"https://docs.aws.amazon.com/appconfig/latest/userguide/\">AppConfig User Guide</a> and the <a href=\"https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/\">AppConfig API\n     Reference</a>.</p>\n            </li>\n            <li>\n               <p>For information about Incident Manager, a capability of Systems Manager, see the <a href=\"https://docs.aws.amazon.com/incident-manager/latest/userguide/\">Incident Manager User Guide</a>\n     and the <a href=\"https://docs.aws.amazon.com/incident-manager/latest/APIReference/\">Incident Manager API\n      Reference</a>.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Amazon Web Services Systems Manager is a collection of capabilities that helps you automate management tasks such as\n   collecting system inventory, applying operating system (OS) patches, automating the creation of\n   Amazon Machine Images (AMIs), and configuring operating systems (OSs) and applications at scale.\n   Systems Manager lets you remotely and securely manage the configuration of your managed nodes. A\n    <i>managed node</i> is any Amazon Elastic Compute Cloud (Amazon EC2) instance, edge device, or on-premises\n   server or virtual machine (VM) that has been configured for Systems Manager. </p>\n         <note>\n            <p>With support for IoT Greengrass core devices, the phrase <i>managed\n     instance</i> has been changed to <i>managed node</i> in most of the Systems Manager\n    documentation. The Systems Manager console, API calls, error messages, and SSM documents still use the\n    term <i>instance</i>.</p>\n         </note>\n         <p>This reference is intended to be used with the <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/\">Amazon Web Services Systems Manager User Guide</a>.</p>\n         <p>To get started, verify prerequisites and configure managed nodes. For more information, see\n    <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up.html\">Setting up\n    Amazon Web Services Systems Manager</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         <p class=\"title\">\n            <b>Related resources</b>\n         </p>\n         <ul>\n            <li>\n               <p>For information about how to use a Query API, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/making-api-requests.html\">Making API requests</a>. </p>\n            </li>\n            <li>\n               <p>For information about other API operations you can perform on EC2 instances, see the\n      <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/\">Amazon EC2 API Reference</a>.</p>\n            </li>\n            <li>\n               <p>For information about AppConfig, a capability of Systems Manager, see the <a href=\"https://docs.aws.amazon.com/appconfig/latest/userguide/\">AppConfig User Guide</a> and the <a href=\"https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/\">AppConfig API\n     Reference</a>.</p>\n            </li>\n            <li>\n               <p>For information about Incident Manager, a capability of Systems Manager, see the <a href=\"https://docs.aws.amazon.com/incident-manager/latest/userguide/\">Incident Manager User Guide</a>\n     and the <a href=\"https://docs.aws.amazon.com/incident-manager/latest/APIReference/\">Incident Manager API\n      Reference</a>.</p>\n            </li>\n         </ul>",
                 "smithy.api#title": "Amazon Simple Systems Manager (SSM)",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://ssm.amazonaws.com/doc/2014-11-06/"
@@ -847,7 +847,7 @@
                 "DocumentVersion": {
                     "target": "com.amazonaws.ssm#DocumentVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the document used in the association.</p>"
+                        "smithy.api#documentation": "<p>The version of the document used in the association.</p>\n         <important>\n            <p>State Manager doesn't support running associations that use a new version of a document if that document is shared from another account. State Manager always runs the <code>default</code> version of a document if shared from another account, even though the Systems Manager console shows that a new version was processed. If you want to run an association using a new version of a document shared form another account, you must set the document version to <code>default</code>.</p>\n         </important>"
                     }
                 },
                 "Targets": {
@@ -1038,7 +1038,7 @@
                 "MaxConcurrency": {
                     "target": "com.amazonaws.ssm#MaxConcurrency",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of targets allowed to run the association at the same time. You can\n   specify a number, for example 10, or a percentage of the target set, for example 10%. The default\n   value is 100%, which means all targets run the association at the same time.</p>\n         <p>If a new managed node starts and attempts to run an association while Systems Manager is running\n    <code>MaxConcurrency</code> associations, the association is allowed to run. During the next\n   association interval, the new managed node will process its association within the limit specified\n   for <code>MaxConcurrency</code>.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of targets allowed to run the association at the same time. You can\n   specify a number, for example 10, or a percentage of the target set, for example 10%. The default\n   value is 100%, which means all targets run the association at the same time.</p>\n         <p>If a new managed node starts and attempts to run an association while Systems Manager is running\n    <code>MaxConcurrency</code> associations, the association is allowed to run. During the next\n   association interval, the new managed node will process its association within the limit\n   specified for <code>MaxConcurrency</code>.</p>"
                     }
                 },
                 "ComplianceSeverity": {
@@ -1739,7 +1739,7 @@
                 "MaxConcurrency": {
                     "target": "com.amazonaws.ssm#MaxConcurrency",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of targets allowed to run the association at the same time. You can\n   specify a number, for example 10, or a percentage of the target set, for example 10%. The default\n   value is 100%, which means all targets run the association at the same time.</p>\n         <p>If a new managed node starts and attempts to run an association while Systems Manager is running\n    <code>MaxConcurrency</code> associations, the association is allowed to run. During the next\n   association interval, the new managed node will process its association within the limit specified\n   for <code>MaxConcurrency</code>.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of targets allowed to run the association at the same time. You can\n   specify a number, for example 10, or a percentage of the target set, for example 10%. The default\n   value is 100%, which means all targets run the association at the same time.</p>\n         <p>If a new managed node starts and attempts to run an association while Systems Manager is running\n    <code>MaxConcurrency</code> associations, the association is allowed to run. During the next\n   association interval, the new managed node will process its association within the limit\n   specified for <code>MaxConcurrency</code>.</p>"
                     }
                 },
                 "ComplianceSeverity": {
@@ -2808,7 +2808,7 @@
                 "ApprovedPatches": {
                     "target": "com.amazonaws.ssm#PatchIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of explicitly approved patches for the baseline.</p>\n         <p>For information about accepted formats for lists of approved patches and rejected patches,\n                        see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">About\n                        package name formats for approved and rejected patch lists</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A list of explicitly approved patches for the baseline.</p> \n         <p>For information about accepted formats for lists of approved patches and rejected patches,\n                        see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">About\n                        package name formats for approved and rejected patch lists</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "ApprovedPatchesComplianceLevel": {
@@ -2820,7 +2820,7 @@
                 "RejectedPatches": {
                     "target": "com.amazonaws.ssm#PatchIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of explicitly rejected patches for the baseline.</p>\n         <p>For information about accepted formats for lists of approved patches and rejected patches,\n                        see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">About\n                        package name formats for approved and rejected patch lists</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A list of explicitly rejected patches for the baseline.</p> \n         <p>For information about accepted formats for lists of approved patches and rejected patches,\n                        see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">About\n                        package name formats for approved and rejected patch lists</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "RejectedPatchesAction": {
@@ -2915,7 +2915,7 @@
                 "InstanceIds": {
                     "target": "com.amazonaws.ssm#InstanceIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Optional) A list of managed node IDs on which you want to cancel the command. If not provided,\n   the command is canceled on every node on which it was requested.</p>"
+                        "smithy.api#documentation": "<p>(Optional) A list of managed node IDs on which you want to cancel the command. If not\n   provided, the command is canceled on every node on which it was requested.</p>"
                     }
                 }
             },
@@ -2970,6 +2970,39 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the maintenance window execution that has been stopped.</p>"
                     }
+                }
+            }
+        },
+        "com.amazonaws.ssm#Category": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.ssm#CategoryEnumList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssm#Category"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 3
+                }
+            }
+        },
+        "com.amazonaws.ssm#CategoryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssm#Category"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 3
                 }
             }
         },
@@ -3098,7 +3131,7 @@
                 "StatusDetails": {
                     "target": "com.amazonaws.ssm#StatusDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>A detailed status of the command execution. <code>StatusDetails</code> includes more\n   information than <code>Status</code> because it includes states resulting from error and\n   concurrency control parameters. <code>StatusDetails</code> can show different results than\n   Status. For more information about these statuses, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html\">Understanding command\n    statuses</a> in the <i>Amazon Web Services Systems Manager User Guide</i>. StatusDetails can be one of the\n   following values:</p>\n         <ul>\n            <li>\n               <p>Pending: The command hasn't been sent to any managed nodes.</p>\n            </li>\n            <li>\n               <p>In Progress: The command has been sent to at least one managed node but hasn't reached a final\n     state on all managed nodes.</p>\n            </li>\n            <li>\n               <p>Success: The command successfully ran on all invocations. This is a terminal state.</p>\n            </li>\n            <li>\n               <p>Delivery Timed Out: The value of MaxErrors or more command invocations shows a status of\n     Delivery Timed Out. This is a terminal state.</p>\n            </li>\n            <li>\n               <p>Execution Timed Out: The value of MaxErrors or more command invocations shows a status of\n     Execution Timed Out. This is a terminal state.</p>\n            </li>\n            <li>\n               <p>Failed: The value of MaxErrors or more command invocations shows a status of Failed. This\n     is a terminal state.</p>\n            </li>\n            <li>\n               <p>Incomplete: The command was attempted on all managed nodes and one or more invocations\n     doesn't have a value of Success but not enough invocations failed for the status to be Failed.\n     This is a terminal state.</p>\n            </li>\n            <li>\n               <p>Canceled: The command was terminated before it was completed. This is a terminal\n     state.</p>\n            </li>\n            <li>\n               <p>Rate Exceeded: The number of managed nodes targeted by the command exceeded the account\n     limit for pending invocations. The system has canceled the command before running it on any\n     managed node. This is a terminal state.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A detailed status of the command execution. <code>StatusDetails</code> includes more\n   information than <code>Status</code> because it includes states resulting from error and\n   concurrency control parameters. <code>StatusDetails</code> can show different results than\n   Status. For more information about these statuses, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html\">Understanding command\n    statuses</a> in the <i>Amazon Web Services Systems Manager User Guide</i>. StatusDetails can be one of the\n   following values:</p>\n         <ul>\n            <li>\n               <p>Pending: The command hasn't been sent to any managed nodes.</p>\n            </li>\n            <li>\n               <p>In Progress: The command has been sent to at least one managed node but hasn't reached a\n     final state on all managed nodes.</p>\n            </li>\n            <li>\n               <p>Success: The command successfully ran on all invocations. This is a terminal state.</p>\n            </li>\n            <li>\n               <p>Delivery Timed Out: The value of MaxErrors or more command invocations shows a status of\n     Delivery Timed Out. This is a terminal state.</p>\n            </li>\n            <li>\n               <p>Execution Timed Out: The value of MaxErrors or more command invocations shows a status of\n     Execution Timed Out. This is a terminal state.</p>\n            </li>\n            <li>\n               <p>Failed: The value of MaxErrors or more command invocations shows a status of Failed. This\n     is a terminal state.</p>\n            </li>\n            <li>\n               <p>Incomplete: The command was attempted on all managed nodes and one or more invocations\n     doesn't have a value of Success but not enough invocations failed for the status to be Failed.\n     This is a terminal state.</p>\n            </li>\n            <li>\n               <p>Cancelled: The command was terminated before it was completed. This is a terminal\n     state.</p>\n            </li>\n            <li>\n               <p>Rate Exceeded: The number of managed nodes targeted by the command exceeded the account\n     limit for pending invocations. The system has canceled the command before running it on any\n     managed node. This is a terminal state.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "OutputS3Region": {
@@ -3140,7 +3173,7 @@
                 "CompletedCount": {
                     "target": "com.amazonaws.ssm#CompletedCount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of targets for which the command invocation reached a terminal state. Terminal\n   states include the following: Success, Failed, Execution Timed Out, Delivery Timed Out, Canceled,\n   Terminated, or Undeliverable.</p>"
+                        "smithy.api#documentation": "<p>The number of targets for which the command invocation reached a terminal state. Terminal\n   states include the following: Success, Failed, Execution Timed Out, Delivery Timed Out, Cancelled,\n   Terminated, or Undeliverable.</p>"
                     }
                 },
                 "ErrorCount": {
@@ -3203,7 +3236,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes a command filter.</p>\n         <note>\n            <p>A managed node ID can't be specified when a command status is <code>Pending</code> because the\n    command hasn't run on the node yet.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Describes a command filter.</p>\n         <note>\n            <p>A managed node ID can't be specified when a command status is <code>Pending</code> because\n    the command hasn't run on the node yet.</p>\n         </note>"
             }
         },
         "com.amazonaws.ssm#CommandFilterKey": {
@@ -3317,7 +3350,7 @@
                 "StatusDetails": {
                     "target": "com.amazonaws.ssm#StatusDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>A detailed status of the command execution for each invocation (each managed node targeted by\n   the command). StatusDetails includes more information than Status because it includes states\n   resulting from error and concurrency control parameters. StatusDetails can show different results\n   than Status. For more information about these statuses, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html\">Understanding command\n    statuses</a> in the <i>Amazon Web Services Systems Manager User Guide</i>. StatusDetails can be one of the\n   following values:</p>\n         <ul>\n            <li>\n               <p>Pending: The command hasn't been sent to the managed node.</p>\n            </li>\n            <li>\n               <p>In Progress: The command has been sent to the managed node but hasn't reached a terminal\n     state.</p>\n            </li>\n            <li>\n               <p>Success: The execution of the command or plugin was successfully completed. This is a\n     terminal state.</p>\n            </li>\n            <li>\n               <p>Delivery Timed Out: The command wasn't delivered to the managed node before the delivery\n     timeout expired. Delivery timeouts don't count against the parent command's\n      <code>MaxErrors</code> limit, but they do contribute to whether the parent command status is\n     Success or Incomplete. This is a terminal state.</p>\n            </li>\n            <li>\n               <p>Execution Timed Out: Command execution started on the managed node, but the execution wasn't\n     complete before the execution timeout expired. Execution timeouts count against the\n      <code>MaxErrors</code> limit of the parent command. This is a terminal state.</p>\n            </li>\n            <li>\n               <p>Failed: The command wasn't successful on the managed node. For a plugin, this indicates that\n     the result code wasn't zero. For a command invocation, this indicates that the result code for\n     one or more plugins wasn't zero. Invocation failures count against the <code>MaxErrors</code>\n     limit of the parent command. This is a terminal state.</p>\n            </li>\n            <li>\n               <p>Canceled: The command was terminated before it was completed. This is a terminal\n     state.</p>\n            </li>\n            <li>\n               <p>Undeliverable: The command can't be delivered to the managed node. The managed node might not\n     exist or might not be responding. Undeliverable invocations don't count against the parent\n     command's MaxErrors limit and don't contribute to whether the parent command status is Success\n     or Incomplete. This is a terminal state.</p>\n            </li>\n            <li>\n               <p>Terminated: The parent command exceeded its MaxErrors limit and subsequent command\n     invocations were canceled by the system. This is a terminal state.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A detailed status of the command execution for each invocation (each managed node targeted\n   by the command). StatusDetails includes more information than Status because it includes states\n   resulting from error and concurrency control parameters. StatusDetails can show different results\n   than Status. For more information about these statuses, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html\">Understanding command\n    statuses</a> in the <i>Amazon Web Services Systems Manager User Guide</i>. StatusDetails can be one of the\n   following values:</p>\n         <ul>\n            <li>\n               <p>Pending: The command hasn't been sent to the managed node.</p>\n            </li>\n            <li>\n               <p>In Progress: The command has been sent to the managed node but hasn't reached a terminal\n     state.</p>\n            </li>\n            <li>\n               <p>Success: The execution of the command or plugin was successfully completed. This is a\n     terminal state.</p>\n            </li>\n            <li>\n               <p>Delivery Timed Out: The command wasn't delivered to the managed node before the delivery\n     timeout expired. Delivery timeouts don't count against the parent command's\n      <code>MaxErrors</code> limit, but they do contribute to whether the parent command status is\n     Success or Incomplete. This is a terminal state.</p>\n            </li>\n            <li>\n               <p>Execution Timed Out: Command execution started on the managed node, but the execution\n     wasn't complete before the execution timeout expired. Execution timeouts count against the\n      <code>MaxErrors</code> limit of the parent command. This is a terminal state.</p>\n            </li>\n            <li>\n               <p>Failed: The command wasn't successful on the managed node. For a plugin, this indicates\n     that the result code wasn't zero. For a command invocation, this indicates that the result code\n     for one or more plugins wasn't zero. Invocation failures count against the\n      <code>MaxErrors</code> limit of the parent command. This is a terminal state.</p>\n            </li>\n            <li>\n               <p>Cancelled: The command was terminated before it was completed. This is a terminal\n     state.</p>\n            </li>\n            <li>\n               <p>Undeliverable: The command can't be delivered to the managed node. The managed node might\n     not exist or might not be responding. Undeliverable invocations don't count against the parent\n     command's MaxErrors limit and don't contribute to whether the parent command status is Success\n     or Incomplete. This is a terminal state.</p>\n            </li>\n            <li>\n               <p>Terminated: The parent command exceeded its MaxErrors limit and subsequent command\n     invocations were canceled by the system. This is a terminal state.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "TraceOutput": {
@@ -3364,7 +3397,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An invocation is a copy of a command sent to a specific managed node. A command can apply to one\n   or more managed nodes. A command invocation applies to one managed node. For example, if a user runs\n    <code>SendCommand</code> against three managed nodes, then a command invocation is created for\n   each requested managed node ID. A command invocation returns status and detail information about a\n   command you ran. </p>"
+                "smithy.api#documentation": "<p>An invocation is a copy of a command sent to a specific managed node. A command can apply to\n   one or more managed nodes. A command invocation applies to one managed node. For example, if a\n   user runs <code>SendCommand</code> against three managed nodes, then a command invocation is\n   created for each requested managed node ID. A command invocation returns status and detail\n   information about a command you ran. </p>"
             }
         },
         "com.amazonaws.ssm#CommandInvocationList": {
@@ -3445,7 +3478,7 @@
                 "StatusDetails": {
                     "target": "com.amazonaws.ssm#StatusDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>A detailed status of the plugin execution. <code>StatusDetails</code> includes more\n   information than Status because it includes states resulting from error and concurrency control\n   parameters. StatusDetails can show different results than Status. For more information about\n   these statuses, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html\">Understanding command\n    statuses</a> in the <i>Amazon Web Services Systems Manager User Guide</i>. StatusDetails can be one of the\n   following values:</p>\n         <ul>\n            <li>\n               <p>Pending: The command hasn't been sent to the managed node.</p>\n            </li>\n            <li>\n               <p>In Progress: The command has been sent to the managed node but hasn't reached a terminal\n     state.</p>\n            </li>\n            <li>\n               <p>Success: The execution of the command or plugin was successfully completed. This is a\n     terminal state.</p>\n            </li>\n            <li>\n               <p>Delivery Timed Out: The command wasn't delivered to the managed node before the delivery\n     timeout expired. Delivery timeouts don't count against the parent command's\n      <code>MaxErrors</code> limit, but they do contribute to whether the parent command status is\n     Success or Incomplete. This is a terminal state.</p>\n            </li>\n            <li>\n               <p>Execution Timed Out: Command execution started on the managed node, but the execution wasn't\n     complete before the execution timeout expired. Execution timeouts count against the\n      <code>MaxErrors</code> limit of the parent command. This is a terminal state.</p>\n            </li>\n            <li>\n               <p>Failed: The command wasn't successful on the managed node. For a plugin, this indicates that\n     the result code wasn't zero. For a command invocation, this indicates that the result code for\n     one or more plugins wasn't zero. Invocation failures count against the MaxErrors limit of the\n     parent command. This is a terminal state.</p>\n            </li>\n            <li>\n               <p>Canceled: The command was terminated before it was completed. This is a terminal\n     state.</p>\n            </li>\n            <li>\n               <p>Undeliverable: The command can't be delivered to the managed node. The managed node might not\n     exist, or it might not be responding. Undeliverable invocations don't count against the parent\n     command's MaxErrors limit, and they don't contribute to whether the parent command status is\n     Success or Incomplete. This is a terminal state.</p>\n            </li>\n            <li>\n               <p>Terminated: The parent command exceeded its MaxErrors limit and subsequent command\n     invocations were canceled by the system. This is a terminal state.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A detailed status of the plugin execution. <code>StatusDetails</code> includes more\n   information than Status because it includes states resulting from error and concurrency control\n   parameters. StatusDetails can show different results than Status. For more information about\n   these statuses, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html\">Understanding command\n    statuses</a> in the <i>Amazon Web Services Systems Manager User Guide</i>. StatusDetails can be one of the\n   following values:</p>\n         <ul>\n            <li>\n               <p>Pending: The command hasn't been sent to the managed node.</p>\n            </li>\n            <li>\n               <p>In Progress: The command has been sent to the managed node but hasn't reached a terminal\n     state.</p>\n            </li>\n            <li>\n               <p>Success: The execution of the command or plugin was successfully completed. This is a\n     terminal state.</p>\n            </li>\n            <li>\n               <p>Delivery Timed Out: The command wasn't delivered to the managed node before the delivery\n     timeout expired. Delivery timeouts don't count against the parent command's\n      <code>MaxErrors</code> limit, but they do contribute to whether the parent command status is\n     Success or Incomplete. This is a terminal state.</p>\n            </li>\n            <li>\n               <p>Execution Timed Out: Command execution started on the managed node, but the execution\n     wasn't complete before the execution timeout expired. Execution timeouts count against the\n      <code>MaxErrors</code> limit of the parent command. This is a terminal state.</p>\n            </li>\n            <li>\n               <p>Failed: The command wasn't successful on the managed node. For a plugin, this indicates\n     that the result code wasn't zero. For a command invocation, this indicates that the result code\n     for one or more plugins wasn't zero. Invocation failures count against the MaxErrors limit of\n     the parent command. This is a terminal state.</p>\n            </li>\n            <li>\n               <p>Cancelled: The command was terminated before it was completed. This is a terminal\n     state.</p>\n            </li>\n            <li>\n               <p>Undeliverable: The command can't be delivered to the managed node. The managed node might\n     not exist, or it might not be responding. Undeliverable invocations don't count against the\n     parent command's MaxErrors limit, and they don't contribute to whether the parent command\n     status is Success or Incomplete. This is a terminal state.</p>\n            </li>\n            <li>\n               <p>Terminated: The parent command exceeded its MaxErrors limit and subsequent command\n     invocations were canceled by the system. This is a terminal state.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ResponseCode": {
@@ -4124,7 +4157,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Generates an activation code and activation ID you can use to register your on-premises\n   servers, edge devices, or virtual machine (VM) with Amazon Web Services Systems Manager. Registering these machines with\n   Systems Manager makes it possible to manage them using Systems Manager capabilities. You use the activation code and\n   ID when installing SSM Agent on machines in your hybrid environment. For more information about\n   requirements for managing on-premises machines using Systems Manager, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-managedinstances.html\">Setting up\n    Amazon Web Services Systems Manager for hybrid environments</a> in the <i>Amazon Web Services Systems Manager User Guide</i>. </p>\n         <note>\n            <p>Amazon Elastic Compute Cloud (Amazon EC2) instances, edge devices, and on-premises servers and VMs that are configured for Systems Manager are all called <i>managed\n    nodes</i>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Generates an activation code and activation ID you can use to register your on-premises\n   servers, edge devices, or virtual machine (VM) with Amazon Web Services Systems Manager. Registering these machines with\n   Systems Manager makes it possible to manage them using Systems Manager capabilities. You use the activation code and\n   ID when installing SSM Agent on machines in your hybrid environment. For more information about\n   requirements for managing on-premises machines using Systems Manager, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-managedinstances.html\">Setting up\n    Amazon Web Services Systems Manager for hybrid environments</a> in the <i>Amazon Web Services Systems Manager User Guide</i>. </p>\n         <note>\n            <p>Amazon Elastic Compute Cloud (Amazon EC2) instances, edge devices, and on-premises servers and VMs that are\n    configured for Systems Manager are all called <i>managed nodes</i>.</p>\n         </note>"
             }
         },
         "com.amazonaws.ssm#CreateActivationRequest": {
@@ -4165,7 +4198,7 @@
                 "Tags": {
                     "target": "com.amazonaws.ssm#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optional metadata that you assign to a resource. Tags enable you to categorize a resource in\n   different ways, such as by purpose, owner, or environment. For example, you might want to tag an\n   activation to identify which servers or virtual machines (VMs) in your on-premises environment\n   you intend to activate. In this case, you could specify the following key-value pairs:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Key=OS,Value=Windows</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=Environment,Value=Production</code>\n               </p>\n            </li>\n         </ul>\n         <important>\n            <p>When you install SSM Agent on your on-premises servers and VMs, you specify an activation ID\n    and code. When you specify the activation ID and code, tags assigned to the activation are\n    automatically applied to the on-premises servers or VMs.</p>\n         </important>\n         <p>You can't add tags to or delete tags from an existing activation. You can tag your\n   on-premises servers, edge devices, and VMs after they connect to Systems Manager for the first time and are assigned a\n   managed node ID. This means they are listed in the Amazon Web Services Systems Manager console with an ID that is\n   prefixed with \"mi-\". For information about how to add tags to your managed nodes, see <a>AddTagsToResource</a>. For information about how to remove tags from your managed nodes,\n   see <a>RemoveTagsFromResource</a>.</p>"
+                        "smithy.api#documentation": "<p>Optional metadata that you assign to a resource. Tags enable you to categorize a resource in\n   different ways, such as by purpose, owner, or environment. For example, you might want to tag an\n   activation to identify which servers or virtual machines (VMs) in your on-premises environment\n   you intend to activate. In this case, you could specify the following key-value pairs:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Key=OS,Value=Windows</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=Environment,Value=Production</code>\n               </p>\n            </li>\n         </ul>\n         <important>\n            <p>When you install SSM Agent on your on-premises servers and VMs, you specify an activation ID\n    and code. When you specify the activation ID and code, tags assigned to the activation are\n    automatically applied to the on-premises servers or VMs.</p>\n         </important>\n         <p>You can't add tags to or delete tags from an existing activation. You can tag your\n   on-premises servers, edge devices, and VMs after they connect to Systems Manager for the first time and are\n   assigned a managed node ID. This means they are listed in the Amazon Web Services Systems Manager console with an ID that\n   is prefixed with \"mi-\". For information about how to add tags to your managed nodes, see <a>AddTagsToResource</a>. For information about how to remove tags from your managed nodes,\n   see <a>RemoveTagsFromResource</a>.</p>"
                     }
                 },
                 "RegistrationMetadata": {
@@ -4284,7 +4317,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Associates the specified Amazon Web Services Systems Manager document (SSM document) with the specified managed nodes\n   or targets.</p>\n         <p>When you associate a document with one or more managed nodes using IDs or tags,\n   Amazon Web Services Systems Manager Agent (SSM Agent) running on the managed node processes the document and configures the\n   node as specified.</p>\n         <p>If you associate a document with a managed node that already has an associated document, the\n   system returns the AssociationAlreadyExists exception.</p>"
+                "smithy.api#documentation": "<p>Associates the specified Amazon Web Services Systems Manager document (SSM document) with the specified managed nodes\n   or targets.</p>\n         <p>When you associate a document with one or more managed nodes using IDs or tags, Amazon Web Services Systems Manager\n   Agent (SSM Agent) running on the managed node processes the document and configures the node as\n   specified.</p>\n         <p>If you associate a document with a managed node that already has an associated document, the\n   system returns the AssociationAlreadyExists exception.</p>"
             }
         },
         "com.amazonaws.ssm#CreateAssociationBatchRequest": {
@@ -4319,14 +4352,14 @@
                 "Name": {
                     "target": "com.amazonaws.ssm#DocumentARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the SSM document that contains the configuration information for the managed node.\n   You can specify Command or Automation runbooks.</p>\n         <p>You can specify Amazon Web Services-predefined documents, documents you created, or a document that is\n   shared with you from another account.</p>\n         <p>For SSM documents that are shared with you from other Amazon Web Services accounts, you must specify the\n   complete SSM document ARN, in the following format:</p>\n         <p>\n            <code>arn:aws:ssm:<i>region</i>:<i>account-id</i>:document/<i>document-name</i>\n            </code>\n         </p>\n         <p>For example:</p>\n         <p>\n            <code>arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document</code>\n         </p>\n         <p>For Amazon Web Services-predefined documents and SSM documents you created in your account, you only need\n   to specify the document name. For example, <code>AWS-ApplyPatchBaseline</code> or\n    <code>My-Document</code>.</p>",
+                        "smithy.api#documentation": "<p>The name of the SSM document that contains the configuration information for the managed\n   node. You can specify Command or Automation runbooks.</p>\n         <p>You can specify Amazon Web Services-predefined documents, documents you created, or a document that is\n   shared with you from another account.</p>\n         <p>For SSM documents that are shared with you from other Amazon Web Services accounts, you must specify the\n   complete SSM document ARN, in the following format:</p>\n         <p>\n            <code>arn:aws:ssm:<i>region</i>:<i>account-id</i>:document/<i>document-name</i>\n            </code>\n         </p>\n         <p>For example:</p>\n         <p>\n            <code>arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document</code>\n         </p>\n         <p>For Amazon Web Services-predefined documents and SSM documents you created in your account, you only need\n   to specify the document name. For example, <code>AWS-ApplyPatchBaseline</code> or\n    <code>My-Document</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "InstanceId": {
                     "target": "com.amazonaws.ssm#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The managed node ID.</p>\n         <note>\n            <p>\n               <code>InstanceId</code> has been deprecated. To specify a managed node ID for an association,\n    use the <code>Targets</code> parameter. Requests that include the\n    parameter <code>InstanceID</code> with Systems Manager documents (SSM documents) that use schema version\n    2.0 or later will fail. In addition, if you use the parameter\n     <code>InstanceId</code>, you can't use the parameters <code>AssociationName</code>,\n     <code>DocumentVersion</code>, <code>MaxErrors</code>, <code>MaxConcurrency</code>,\n     <code>OutputLocation</code>, or <code>ScheduleExpression</code>. To use these parameters, you\n    must use the <code>Targets</code> parameter.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The managed node ID.</p>\n         <note>\n            <p>\n               <code>InstanceId</code> has been deprecated. To specify a managed node ID for an\n    association, use the <code>Targets</code> parameter. Requests that\n    include the parameter <code>InstanceID</code> with Systems Manager documents (SSM documents) that use\n    schema version 2.0 or later will fail. In addition, if you use the\n    parameter <code>InstanceId</code>, you can't use the parameters <code>AssociationName</code>,\n     <code>DocumentVersion</code>, <code>MaxErrors</code>, <code>MaxConcurrency</code>,\n     <code>OutputLocation</code>, or <code>ScheduleExpression</code>. To use these parameters, you\n    must use the <code>Targets</code> parameter.</p>\n         </note>"
                     }
                 },
                 "Parameters": {
@@ -4380,7 +4413,7 @@
                 "MaxConcurrency": {
                     "target": "com.amazonaws.ssm#MaxConcurrency",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of targets allowed to run the association at the same time. You can\n   specify a number, for example 10, or a percentage of the target set, for example 10%. The default\n   value is 100%, which means all targets run the association at the same time.</p>\n         <p>If a new managed node starts and attempts to run an association while Systems Manager is running\n    <code>MaxConcurrency</code> associations, the association is allowed to run. During the next\n   association interval, the new managed node will process its association within the limit specified\n   for <code>MaxConcurrency</code>.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of targets allowed to run the association at the same time. You can\n   specify a number, for example 10, or a percentage of the target set, for example 10%. The default\n   value is 100%, which means all targets run the association at the same time.</p>\n         <p>If a new managed node starts and attempts to run an association while Systems Manager is running\n    <code>MaxConcurrency</code> associations, the association is allowed to run. During the next\n   association interval, the new managed node will process its association within the limit\n   specified for <code>MaxConcurrency</code>.</p>"
                     }
                 },
                 "ComplianceSeverity": {
@@ -4448,13 +4481,13 @@
                 "DocumentVersion": {
                     "target": "com.amazonaws.ssm#DocumentVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The document version you want to associate with the target(s). Can be a specific version or\n   the default version.</p>"
+                        "smithy.api#documentation": "<p>The document version you want to associate with the target(s). Can be a specific version or\n   the default version.</p>\n         <important>\n            <p>State Manager doesn't support running associations that use a new version of a document if that document is shared from another account. State Manager always runs the <code>default</code> version of a document if shared from another account, even though the Systems Manager console shows that a new version was processed. If you want to run an association using a new version of a document shared form another account, you must set the document version to <code>default</code>.</p>\n         </important>"
                     }
                 },
                 "InstanceId": {
                     "target": "com.amazonaws.ssm#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The managed node ID.</p>\n         <note>\n            <p>\n               <code>InstanceId</code> has been deprecated. To specify a managed node ID for an association,\n    use the <code>Targets</code> parameter. Requests that include the\n    parameter <code>InstanceID</code> with Systems Manager documents (SSM documents) that use schema version\n    2.0 or later will fail. In addition, if you use the parameter\n     <code>InstanceId</code>, you can't use the parameters <code>AssociationName</code>,\n     <code>DocumentVersion</code>, <code>MaxErrors</code>, <code>MaxConcurrency</code>,\n     <code>OutputLocation</code>, or <code>ScheduleExpression</code>. To use these parameters, you\n    must use the <code>Targets</code> parameter.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The managed node ID.</p>\n         <note>\n            <p>\n               <code>InstanceId</code> has been deprecated. To specify a managed node ID for an\n    association, use the <code>Targets</code> parameter. Requests that\n    include the parameter <code>InstanceID</code> with Systems Manager documents (SSM documents) that use\n    schema version 2.0 or later will fail. In addition, if you use the\n    parameter <code>InstanceId</code>, you can't use the parameters <code>AssociationName</code>,\n     <code>DocumentVersion</code>, <code>MaxErrors</code>, <code>MaxConcurrency</code>,\n     <code>OutputLocation</code>, or <code>ScheduleExpression</code>. To use these parameters, you\n    must use the <code>Targets</code> parameter.</p>\n         </note>"
                     }
                 },
                 "Parameters": {
@@ -4502,7 +4535,7 @@
                 "MaxConcurrency": {
                     "target": "com.amazonaws.ssm#MaxConcurrency",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of targets allowed to run the association at the same time. You can\n   specify a number, for example 10, or a percentage of the target set, for example 10%. The default\n   value is 100%, which means all targets run the association at the same time.</p>\n         <p>If a new managed node starts and attempts to run an association while Systems Manager is running\n    <code>MaxConcurrency</code> associations, the association is allowed to run. During the next\n   association interval, the new managed node will process its association within the limit specified\n   for <code>MaxConcurrency</code>.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of targets allowed to run the association at the same time. You can\n   specify a number, for example 10, or a percentage of the target set, for example 10%. The default\n   value is 100%, which means all targets run the association at the same time.</p>\n         <p>If a new managed node starts and attempts to run an association while Systems Manager is running\n    <code>MaxConcurrency</code> associations, the association is allowed to run. During the next\n   association interval, the new managed node will process its association within the limit\n   specified for <code>MaxConcurrency</code>.</p>"
                     }
                 },
                 "ComplianceSeverity": {
@@ -4746,7 +4779,7 @@
                 "AllowUnassociatedTargets": {
                     "target": "com.amazonaws.ssm#MaintenanceWindowAllowUnassociatedTargets",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enables a maintenance window task to run on managed nodes, even if you haven't registered\n   those nodes as targets. If enabled, then you must specify the unregistered managed nodes (by\n   node ID) when you register a task with the maintenance window.</p>\n         <p>If you don't enable this option, then you must specify previously-registered targets when\n   you register a task with the maintenance window.</p>",
+                        "smithy.api#documentation": "<p>Enables a maintenance window task to run on managed nodes, even if you haven't registered\n   those nodes as targets. If enabled, then you must specify the unregistered managed nodes (by node\n   ID) when you register a task with the maintenance window.</p>\n         <p>If you don't enable this option, then you must specify previously-registered targets when\n   you register a task with the maintenance window.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5029,7 +5062,7 @@
                 "ApprovedPatches": {
                     "target": "com.amazonaws.ssm#PatchIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of explicitly approved patches for the baseline.</p>\n         <p>For information about accepted formats for lists of approved patches and rejected patches,\n                        see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">About\n                        package name formats for approved and rejected patch lists</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A list of explicitly approved patches for the baseline.</p> \n         <p>For information about accepted formats for lists of approved patches and rejected patches,\n                        see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">About\n                        package name formats for approved and rejected patch lists</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "ApprovedPatchesComplianceLevel": {
@@ -5048,7 +5081,7 @@
                 "RejectedPatches": {
                     "target": "com.amazonaws.ssm#PatchIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of explicitly rejected patches for the baseline.</p>\n         <p>For information about accepted formats for lists of approved patches and rejected patches,\n                        see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">About\n                        package name formats for approved and rejected patch lists</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A list of explicitly rejected patches for the baseline.</p> \n         <p>For information about accepted formats for lists of approved patches and rejected patches,\n                        see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">About\n                        package name formats for approved and rejected patch lists</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "RejectedPatchesAction": {
@@ -5258,7 +5291,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disassociates the specified Amazon Web Services Systems Manager document (SSM document) from the specified managed node.\n   If you created the association by using the <code>Targets</code> parameter, then you must delete\n   the association by using the association ID.</p>\n         <p>When you disassociate a document from a managed node, it doesn't change the configuration of\n   the node. To change the configuration state of a managed node after you disassociate a document,\n   you must create a new document with the desired configuration and associate it with the\n   node.</p>"
+                "smithy.api#documentation": "<p>Disassociates the specified Amazon Web Services Systems Manager document (SSM document) from the specified managed\n   node. If you created the association by using the <code>Targets</code> parameter, then you must\n   delete the association by using the association ID.</p>\n         <p>When you disassociate a document from a managed node, it doesn't change the configuration of\n   the node. To change the configuration state of a managed node after you disassociate a document,\n   you must create a new document with the desired configuration and associate it with the\n   node.</p>"
             }
         },
         "com.amazonaws.ssm#DeleteAssociationRequest": {
@@ -5273,7 +5306,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.ssm#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The managed node ID.</p>\n         <note>\n            <p>\n               <code>InstanceId</code> has been deprecated. To specify a managed node ID for an association,\n    use the <code>Targets</code> parameter. Requests that include the\n    parameter <code>InstanceID</code> with Systems Manager documents (SSM documents) that use schema version\n    2.0 or later will fail. In addition, if you use the parameter\n     <code>InstanceId</code>, you can't use the parameters <code>AssociationName</code>,\n     <code>DocumentVersion</code>, <code>MaxErrors</code>, <code>MaxConcurrency</code>,\n     <code>OutputLocation</code>, or <code>ScheduleExpression</code>. To use these parameters, you\n    must use the <code>Targets</code> parameter.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The managed node ID.</p>\n         <note>\n            <p>\n               <code>InstanceId</code> has been deprecated. To specify a managed node ID for an\n    association, use the <code>Targets</code> parameter. Requests that include the parameter\n     <code>InstanceID</code> with Systems Manager documents (SSM documents) that use schema version 2.0 or\n    later will fail. In addition, if you use the parameter <code>InstanceId</code>, you can't use\n    the parameters <code>AssociationName</code>, <code>DocumentVersion</code>,\n     <code>MaxErrors</code>, <code>MaxConcurrency</code>, <code>OutputLocation</code>, or\n     <code>ScheduleExpression</code>. To use these parameters, you must use the <code>Targets</code>\n    parameter.</p>\n         </note>"
                     }
                 },
                 "AssociationId": {
@@ -6229,7 +6262,7 @@
                 "AssociationVersion": {
                     "target": "com.amazonaws.ssm#AssociationVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify the association version to retrieve. To view the latest version, either specify\n    <code>$LATEST</code> for this parameter, or omit this parameter. To view a list of all\n   associations for a managed node, use <a>ListAssociations</a>. To get a list of versions\n   for a specific association, use <a>ListAssociationVersions</a>. </p>"
+                        "smithy.api#documentation": "<p>Specify the association version to retrieve. To view the latest version, either specify\n    <code>$LATEST</code> for this parameter, or omit this parameter. To view a list of all\n   associations for a managed node, use <a>ListAssociations</a>. To get a list of\n   versions for a specific association, use <a>ListAssociationVersions</a>. </p>"
                     }
                 }
             }
@@ -6856,7 +6889,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes one or more of your managed nodes, including information about the operating\n   system platform, the version of SSM Agent installed on the managed node, node status, and so\n   on.</p>\n         <p>If you specify one or more managed node IDs, it returns information for those managed nodes. If\n   you don't specify node IDs, it returns information for all your managed nodes. If you specify\n   a node ID that isn't valid or a node that you don't own, you receive an error.</p>\n         <note>\n            <p>The <code>IamRole</code> field for this API operation is the Identity and Access Management\n     (IAM) role assigned to on-premises managed nodes. This call doesn't return the\n     IAM role for EC2 instances.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Describes one or more of your managed nodes, including information about the operating\n   system platform, the version of SSM Agent installed on the managed node, node status, and so\n   on.</p>\n         <p>If you specify one or more managed node IDs, it returns information for those managed nodes.\n   If you don't specify node IDs, it returns information for all your managed nodes. If you specify\n   a node ID that isn't valid or a node that you don't own, you receive an error.</p>\n         <note>\n            <p>The <code>IamRole</code> field for this API operation is the Identity and Access Management\n     (IAM) role assigned to on-premises managed nodes. This call doesn't return the\n     IAM role for EC2 instances.</p>\n         </note>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -6871,7 +6904,7 @@
                 "InstanceInformationFilterList": {
                     "target": "com.amazonaws.ssm#InstanceInformationFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>This is a legacy method. We recommend that you don't use this method. Instead, use the\n    <code>Filters</code> data type. <code>Filters</code> enables you to return node information\n   by filtering based on tags applied to managed nodes.</p>\n         <note>\n            <p>Attempting to use <code>InstanceInformationFilterList</code> and <code>Filters</code> leads\n    to an exception error. </p>\n         </note>"
+                        "smithy.api#documentation": "<p>This is a legacy method. We recommend that you don't use this method. Instead, use the\n    <code>Filters</code> data type. <code>Filters</code> enables you to return node information by\n   filtering based on tags applied to managed nodes.</p>\n         <note>\n            <p>Attempting to use <code>InstanceInformationFilterList</code> and <code>Filters</code> leads\n    to an exception error. </p>\n         </note>"
                     }
                 },
                 "Filters": {
@@ -6958,7 +6991,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the high-level patch state for the managed nodes in the specified patch group.</p>",
+                "smithy.api#documentation": "<p>Retrieves the high-level patch state for the managed nodes in the specified patch\n   group.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -7080,7 +7113,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves information about the patches on the specified managed node and their state relative\n   to the patch baseline being used for the node.</p>",
+                "smithy.api#documentation": "<p>Retrieves information about the patches on the specified managed node and their state\n   relative to the patch baseline being used for the node.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -8106,14 +8139,14 @@
                     "target": "com.amazonaws.ssm#InstancesCount",
                     "traits": {
                         "smithy.api#box": {},
-                        "smithy.api#documentation": "<p>The number of managed nodes where patches that are specified as <code>Critical</code> for\n   compliance reporting in the patch baseline aren't installed. These patches might be missing, have\n   failed installation, were rejected, or were installed but awaiting a required managed node reboot.\n   The status of these managed nodes is <code>NON_COMPLIANT</code>.</p>"
+                        "smithy.api#documentation": "<p>The number of managed nodes where patches that are specified as <code>Critical</code> for\n   compliance reporting in the patch baseline aren't installed. These patches might be missing, have\n   failed installation, were rejected, or were installed but awaiting a required managed node\n   reboot. The status of these managed nodes is <code>NON_COMPLIANT</code>.</p>"
                     }
                 },
                 "InstancesWithSecurityNonCompliantPatches": {
                     "target": "com.amazonaws.ssm#InstancesCount",
                     "traits": {
                         "smithy.api#box": {},
-                        "smithy.api#documentation": "<p>The number of managed nodes where patches that are specified as <code>Security</code> in a\n   patch advisory aren't installed. These patches might be missing, have failed installation, were\n   rejected, or were installed but awaiting a required managed node reboot. The status of these managed\n   nodes is <code>NON_COMPLIANT</code>.</p>"
+                        "smithy.api#documentation": "<p>The number of managed nodes where patches that are specified as <code>Security</code> in a\n   patch advisory aren't installed. These patches might be missing, have failed installation, were\n   rejected, or were installed but awaiting a required managed node reboot. The status of these\n   managed nodes is <code>NON_COMPLIANT</code>.</p>"
                     }
                 },
                 "InstancesWithOtherNonCompliantPatches": {
@@ -8539,7 +8572,7 @@
                 "PlatformTypes": {
                     "target": "com.amazonaws.ssm#PlatformTypeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of OS platforms compatible with this SSM document. </p>"
+                        "smithy.api#documentation": "<p>The list of operating system (OS) platforms compatible with this SSM document. </p>"
                     }
                 },
                 "DocumentType": {
@@ -8625,10 +8658,22 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The current status of the review.</p>"
                     }
+                },
+                "Category": {
+                    "target": "com.amazonaws.ssm#CategoryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The classification of a document to help you identify and categorize its use.</p>"
+                    }
+                },
+                "CategoryEnum": {
+                    "target": "com.amazonaws.ssm#CategoryEnumList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value that identifies a document's category.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes a Amazon Web Services Systems Manager document (SSM document). </p>"
+                "smithy.api#documentation": "<p>Describes an Amazon Web Services Systems Manager document (SSM document). </p>"
             }
         },
         "com.amazonaws.ssm#DocumentDisplayName": {
@@ -9916,7 +9961,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.ssm#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Required) The ID of the managed node targeted by the command. A <i>managed node</i> can be an\n   Amazon Elastic Compute Cloud (Amazon EC2) instance, edge device, and on-premises server or VM in your hybrid environment that is configured for Amazon Web Services Systems Manager.</p>",
+                        "smithy.api#documentation": "<p>(Required) The ID of the managed node targeted by the command. A <i>managed\n    node</i> can be an Amazon Elastic Compute Cloud (Amazon EC2) instance, edge device, and on-premises server or VM\n   in your hybrid environment that is configured for Amazon Web Services Systems Manager.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -9940,7 +9985,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.ssm#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the managed node targeted by the command. A <i>managed node</i> can be an\n   Amazon Elastic Compute Cloud (Amazon EC2) instance, edge device, or on-premises server or VM in your hybrid environment that is configured for Amazon Web Services Systems Manager.</p>"
+                        "smithy.api#documentation": "<p>The ID of the managed node targeted by the command. A <i>managed node</i> can\n   be an Amazon Elastic Compute Cloud (Amazon EC2) instance, edge device, or on-premises server or VM in your hybrid\n   environment that is configured for Amazon Web Services Systems Manager.</p>"
                     }
                 },
                 "Comment": {
@@ -9970,7 +10015,7 @@
                 "ResponseCode": {
                     "target": "com.amazonaws.ssm#ResponseCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The error level response code for the plugin script. If the response code is\n   <code>-1</code>, then the command hasn't started running on the managed node, or it wasn't received\n   by the node.</p>"
+                        "smithy.api#documentation": "<p>The error level response code for the plugin script. If the response code is\n   <code>-1</code>, then the command hasn't started running on the managed node, or it wasn't\n   received by the node.</p>"
                     }
                 },
                 "ExecutionStartDateTime": {
@@ -10000,7 +10045,7 @@
                 "StatusDetails": {
                     "target": "com.amazonaws.ssm#StatusDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>A detailed status of the command execution for an invocation. <code>StatusDetails</code>\n   includes more information than <code>Status</code> because it includes states resulting from\n   error and concurrency control parameters. <code>StatusDetails</code> can show different results\n   than <code>Status</code>. For more information about these statuses, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html\">Understanding\n    command statuses</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.\n    <code>StatusDetails</code> can be one of the following values:</p>\n         <ul>\n            <li>\n               <p>Pending: The command hasn't been sent to the managed node.</p>\n            </li>\n            <li>\n               <p>In Progress: The command has been sent to the managed node but hasn't reached a terminal\n     state.</p>\n            </li>\n            <li>\n               <p>Delayed: The system attempted to send the command to the target, but the target wasn't\n     available. The managed node might not be available because of network issues, because the node\n     was stopped, or for similar reasons. The system will try to send the command again.</p>\n            </li>\n            <li>\n               <p>Success: The command or plugin ran successfully. This is a terminal state.</p>\n            </li>\n            <li>\n               <p>Delivery Timed Out: The command wasn't delivered to the managed node before the delivery\n     timeout expired. Delivery timeouts don't count against the parent command's\n      <code>MaxErrors</code> limit, but they do contribute to whether the parent command status is\n     Success or Incomplete. This is a terminal state.</p>\n            </li>\n            <li>\n               <p>Execution Timed Out: The command started to run on the managed node, but the execution wasn't\n     complete before the timeout expired. Execution timeouts count against the\n      <code>MaxErrors</code> limit of the parent command. This is a terminal state.</p>\n            </li>\n            <li>\n               <p>Failed: The command wasn't run successfully on the managed node. For a plugin, this indicates\n     that the result code wasn't zero. For a command invocation, this indicates that the result code\n     for one or more plugins wasn't zero. Invocation failures count against the\n      <code>MaxErrors</code> limit of the parent command. This is a terminal state.</p>\n            </li>\n            <li>\n               <p>Canceled: The command was terminated before it was completed. This is a terminal\n     state.</p>\n            </li>\n            <li>\n               <p>Undeliverable: The command can't be delivered to the managed node. The node might not\n     exist or might not be responding. Undeliverable invocations don't count against the parent\n     command's <code>MaxErrors</code> limit and don't contribute to whether the parent command\n     status is Success or Incomplete. This is a terminal state.</p>\n            </li>\n            <li>\n               <p>Terminated: The parent command exceeded its <code>MaxErrors</code> limit and subsequent\n     command invocations were canceled by the system. This is a terminal state.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A detailed status of the command execution for an invocation. <code>StatusDetails</code>\n   includes more information than <code>Status</code> because it includes states resulting from\n   error and concurrency control parameters. <code>StatusDetails</code> can show different results\n   than <code>Status</code>. For more information about these statuses, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html\">Understanding\n    command statuses</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.\n    <code>StatusDetails</code> can be one of the following values:</p>\n         <ul>\n            <li>\n               <p>Pending: The command hasn't been sent to the managed node.</p>\n            </li>\n            <li>\n               <p>In Progress: The command has been sent to the managed node but hasn't reached a terminal\n     state.</p>\n            </li>\n            <li>\n               <p>Delayed: The system attempted to send the command to the target, but the target wasn't\n     available. The managed node might not be available because of network issues, because the node\n     was stopped, or for similar reasons. The system will try to send the command again.</p>\n            </li>\n            <li>\n               <p>Success: The command or plugin ran successfully. This is a terminal state.</p>\n            </li>\n            <li>\n               <p>Delivery Timed Out: The command wasn't delivered to the managed node before the delivery\n     timeout expired. Delivery timeouts don't count against the parent command's\n      <code>MaxErrors</code> limit, but they do contribute to whether the parent command status is\n     Success or Incomplete. This is a terminal state.</p>\n            </li>\n            <li>\n               <p>Execution Timed Out: The command started to run on the managed node, but the execution\n     wasn't complete before the timeout expired. Execution timeouts count against the\n      <code>MaxErrors</code> limit of the parent command. This is a terminal state.</p>\n            </li>\n            <li>\n               <p>Failed: The command wasn't run successfully on the managed node. For a plugin, this\n     indicates that the result code wasn't zero. For a command invocation, this indicates that the\n     result code for one or more plugins wasn't zero. Invocation failures count against the\n      <code>MaxErrors</code> limit of the parent command. This is a terminal state.</p>\n            </li>\n            <li>\n               <p>Cancelled: The command was terminated before it was completed. This is a terminal\n     state.</p>\n            </li>\n            <li>\n               <p>Undeliverable: The command can't be delivered to the managed node. The node might not\n     exist or might not be responding. Undeliverable invocations don't count against the parent\n     command's <code>MaxErrors</code> limit and don't contribute to whether the parent command\n     status is Success or Incomplete. This is a terminal state.</p>\n            </li>\n            <li>\n               <p>Terminated: The parent command exceeded its <code>MaxErrors</code> limit and subsequent\n     command invocations were canceled by the system. This is a terminal state.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "StandardOutputContent": {
@@ -10049,7 +10094,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the Session Manager connection status for a managed node to determine whether it is running and\n   ready to receive Session Manager connections.</p>"
+                "smithy.api#documentation": "<p>Retrieves the Session Manager connection status for a managed node to determine whether it is running\n   and ready to receive Session Manager connections.</p>"
             }
         },
         "com.amazonaws.ssm#GetConnectionStatusRequest": {
@@ -10146,7 +10191,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the current snapshot for the patch baseline the managed node uses. This API is\n   primarily used by the <code>AWS-RunPatchBaseline</code> Systems Manager document (SSM document).</p>\n         <note>\n            <p>If you run the command locally, such as with the Command Line Interface (CLI), the system attempts to use your local Amazon Web Services credentials and the operation fails. To avoid\n    this, you can run the command in the Amazon Web Services Systems Manager console. Use Run Command, a capability of\n    Amazon Web Services Systems Manager, with an SSM document that enables you to target a managed node with a script or command.\n    For example, run the command using the <code>AWS-RunShellScript</code> document or the\n     <code>AWS-RunPowerShellScript</code> document.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Retrieves the current snapshot for the patch baseline the managed node uses. This API is\n   primarily used by the <code>AWS-RunPatchBaseline</code> Systems Manager document (SSM document).</p>\n         <note>\n            <p>If you run the command locally, such as with the Command Line Interface (CLI), the system attempts to use your local Amazon Web Services credentials and the operation fails. To avoid\n    this, you can run the command in the Amazon Web Services Systems Manager console. Use Run Command, a capability of\n    Amazon Web Services Systems Manager, with an SSM document that enables you to target a managed node with a script or\n    command. For example, run the command using the <code>AWS-RunShellScript</code> document or the\n     <code>AWS-RunPowerShellScript</code> document.</p>\n         </note>"
             }
         },
         "com.amazonaws.ssm#GetDeployablePatchSnapshotForInstanceRequest": {
@@ -10155,7 +10200,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.ssm#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the managed node for which the appropriate patch snapshot should be retrieved.</p>",
+                        "smithy.api#documentation": "<p>The ID of the managed node for which the appropriate patch snapshot should be\n   retrieved.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -10371,7 +10416,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Query inventory information. This includes managed node status, such as <code>Stopped</code> or\n    <code>Terminated</code>.</p>",
+                "smithy.api#documentation": "<p>Query inventory information. This includes managed node status, such as <code>Stopped</code>\n   or <code>Terminated</code>.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -12522,7 +12567,7 @@
                 "InstalledOtherCount": {
                     "target": "com.amazonaws.ssm#PatchInstalledOtherCount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of patches not specified in the patch baseline that are installed on the\n   managed node.</p>"
+                        "smithy.api#documentation": "<p>The number of patches not specified in the patch baseline that are installed on the managed\n   node.</p>"
                     }
                 },
                 "InstalledPendingRebootCount": {
@@ -12561,7 +12606,7 @@
                 "NotApplicableCount": {
                     "target": "com.amazonaws.ssm#PatchNotApplicableCount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of patches from the patch baseline that aren't applicable for the managed node and\n   therefore aren't installed on the node. This number may be truncated if the list of patch\n   names is very large. The number of patches beyond this limit are reported in\n    <code>UnreportedNotApplicableCount</code>.</p>"
+                        "smithy.api#documentation": "<p>The number of patches from the patch baseline that aren't applicable for the managed node\n   and therefore aren't installed on the node. This number may be truncated if the list of patch\n   names is very large. The number of patches beyond this limit are reported in\n    <code>UnreportedNotApplicableCount</code>.</p>"
                     }
                 },
                 "OperationStartTime": {
@@ -12588,27 +12633,27 @@
                 "LastNoRebootInstallOperationTime": {
                     "target": "com.amazonaws.ssm#DateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time of the last attempt to patch the managed node with <code>NoReboot</code> specified as\n   the reboot option.</p>"
+                        "smithy.api#documentation": "<p>The time of the last attempt to patch the managed node with <code>NoReboot</code> specified\n   as the reboot option.</p>"
                     }
                 },
                 "RebootOption": {
                     "target": "com.amazonaws.ssm#RebootOption",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the reboot option specified in the patch baseline.</p>\n         <note>\n            <p>Reboot options apply to <code>Install</code> operations only. Reboots aren't attempted for\n    Patch Manager <code>Scan</code> operations.</p>\n         </note>\n         <ul>\n            <li>\n               <p>\n                  <code>RebootIfNeeded</code>: Patch Manager tries to reboot the managed node if it installed\n     any patches, or if any patches are detected with a status of\n      <code>InstalledPendingReboot</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NoReboot</code>: Patch Manager attempts to install missing packages without trying\n     to reboot the system. Patches installed with this option are assigned a status of\n      <code>InstalledPendingReboot</code>. These patches might not be in effect until a reboot is\n     performed.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Indicates the reboot option specified in the patch baseline.</p>\n         <note>\n            <p>Reboot options apply to <code>Install</code> operations only. Reboots aren't attempted for\n    Patch Manager <code>Scan</code> operations.</p>\n         </note>\n         <ul>\n            <li>\n               <p>\n                  <code>RebootIfNeeded</code>: Patch Manager tries to reboot the managed node if it\n     installed any patches, or if any patches are detected with a status of\n      <code>InstalledPendingReboot</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NoReboot</code>: Patch Manager attempts to install missing packages without trying\n     to reboot the system. Patches installed with this option are assigned a status of\n      <code>InstalledPendingReboot</code>. These patches might not be in effect until a reboot is\n     performed.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "CriticalNonCompliantCount": {
                     "target": "com.amazonaws.ssm#PatchCriticalNonCompliantCount",
                     "traits": {
                         "smithy.api#box": {},
-                        "smithy.api#documentation": "<p>The number of managed nodes where patches that are specified as <code>Critical</code> for\n   compliance reporting in the patch baseline aren't installed. These patches might be missing, have\n   failed installation, were rejected, or were installed but awaiting a required managed node reboot.\n   The status of these managed nodes is <code>NON_COMPLIANT</code>.</p>"
+                        "smithy.api#documentation": "<p>The number of managed nodes where patches that are specified as <code>Critical</code> for\n   compliance reporting in the patch baseline aren't installed. These patches might be missing, have\n   failed installation, were rejected, or were installed but awaiting a required managed node\n   reboot. The status of these managed nodes is <code>NON_COMPLIANT</code>.</p>"
                     }
                 },
                 "SecurityNonCompliantCount": {
                     "target": "com.amazonaws.ssm#PatchSecurityNonCompliantCount",
                     "traits": {
                         "smithy.api#box": {},
-                        "smithy.api#documentation": "<p>The number of managed nodes where patches that are specified as <code>Security</code> in a\n   patch advisory aren't installed. These patches might be missing, have failed installation, were\n   rejected, or were installed but awaiting a required managed node reboot. The status of these managed\n   nodes is <code>NON_COMPLIANT</code>.</p>"
+                        "smithy.api#documentation": "<p>The number of managed nodes where patches that are specified as <code>Security</code> in a\n   patch advisory aren't installed. These patches might be missing, have failed installation, were\n   rejected, or were installed but awaiting a required managed node reboot. The status of these\n   managed nodes is <code>NON_COMPLIANT</code>.</p>"
                     }
                 },
                 "OtherNonCompliantCount": {
@@ -13399,7 +13444,7 @@
                     "code": "InvalidResourceType",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p>The resource type isn't valid. For example, if you are attempting to tag an EC2 instance, the\n   instance must be a registered managed node.</p>",
+                "smithy.api#documentation": "<p>The resource type isn't valid. For example, if you are attempting to tag an EC2 instance,\n   the instance must be a registered managed node.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -14079,7 +14124,7 @@
                 "Id": {
                     "target": "com.amazonaws.ssm#InventoryResultEntityId",
                     "traits": {
-                        "smithy.api#documentation": "<p>ID of the inventory result entity. For example, for managed node inventory the result\n   will be the managed node ID. For EC2 instance inventory, the result will be the instance ID.\n  </p>"
+                        "smithy.api#documentation": "<p>ID of the inventory result entity. For example, for managed node inventory the result will\n   be the managed node ID. For EC2 instance inventory, the result will be the instance ID. </p>"
                     }
                 },
                 "Data": {
@@ -14432,7 +14477,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns all State Manager associations in the current Amazon Web Services account and Amazon Web Services Region. You\n   can limit the results to a specific State Manager association document or managed node by specifying\n   a filter. State Manager is a capability of Amazon Web Services Systems Manager.</p>",
+                "smithy.api#documentation": "<p>Returns all State Manager associations in the current Amazon Web Services account and Amazon Web Services Region. You\n   can limit the results to a specific State Manager association document or managed node by\n   specifying a filter. State Manager is a capability of Amazon Web Services Systems Manager.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -14447,7 +14492,7 @@
                 "AssociationFilterList": {
                     "target": "com.amazonaws.ssm#AssociationFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more filters. Use a filter to return a more specific list of results.</p>\n         <note>\n            <p>Filtering associations using the <code>InstanceID</code> attribute only returns legacy\n    associations created using the <code>InstanceID</code> attribute. Associations targeting the\n    managed node that are part of the Target Attributes <code>ResourceGroup</code> or <code>Tags</code>\n    aren't returned.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>One or more filters. Use a filter to return a more specific list of results.</p>\n         <note>\n            <p>Filtering associations using the <code>InstanceID</code> attribute only returns legacy\n    associations created using the <code>InstanceID</code> attribute. Associations targeting the\n    managed node that are part of the Target Attributes <code>ResourceGroup</code> or\n     <code>Tags</code> aren't returned.</p>\n         </note>"
                     }
                 },
                 "MaxResults": {
@@ -14508,7 +14553,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>An invocation is copy of a command sent to a specific managed node. A command can apply to one\n   or more managed nodes. A command invocation applies to one managed node. For example, if a user runs\n    <code>SendCommand</code> against three managed nodes, then a command invocation is created for\n   each requested managed node ID. <code>ListCommandInvocations</code> provide status about command\n   execution.</p>",
+                "smithy.api#documentation": "<p>An invocation is copy of a command sent to a specific managed node. A command can apply to\n   one or more managed nodes. A command invocation applies to one managed node. For example, if a\n   user runs <code>SendCommand</code> against three managed nodes, then a command invocation is\n   created for each requested managed node ID. <code>ListCommandInvocations</code> provide status\n   about command execution.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -14623,7 +14668,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.ssm#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Optional) Lists commands issued against this managed node ID.</p>\n         <note>\n            <p>You can't specify a managed node ID in the same command that you specify <code>Status</code> =\n     <code>Pending</code>. This is because the command hasn't reached the managed node yet.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>(Optional) Lists commands issued against this managed node ID.</p>\n         <note>\n            <p>You can't specify a managed node ID in the same command that you specify\n     <code>Status</code> = <code>Pending</code>. This is because the command hasn't reached the\n    managed node yet.</p>\n         </note>"
                     }
                 },
                 "MaxResults": {
@@ -15614,7 +15659,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about an Amazon Simple Storage Service (Amazon S3) bucket to write\n   managed node-level logs to.</p>\n         <note>\n            <p>\n               <code>LoggingInfo</code> has been deprecated. To specify an Amazon Simple Storage Service (Amazon S3) bucket to contain logs, instead use the\n      <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure.\n      For information about how Amazon Web Services Systems Manager handles these options for the supported maintenance\n      window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Information about an Amazon Simple Storage Service (Amazon S3) bucket to write managed\n   node-level logs to.</p>\n         <note>\n            <p>\n               <code>LoggingInfo</code> has been deprecated. To specify an Amazon Simple Storage Service (Amazon S3) bucket to contain logs, instead use the\n      <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure.\n      For information about how Amazon Web Services Systems Manager handles these options for the supported maintenance\n      window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>\n         </note>"
             }
         },
         "com.amazonaws.ssm#Long": {
@@ -15635,7 +15680,7 @@
                 "Parameters": {
                     "target": "com.amazonaws.ssm#AutomationParameterMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parameters for the <code>AUTOMATION</code> task.</p>\n         <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p>\n         <note>\n            <p>\n               <code>LoggingInfo</code> has been deprecated. To specify an Amazon Simple Storage Service (Amazon S3) bucket to contain logs, instead use the\n      <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure.\n      For information about how Amazon Web Services Systems Manager handles these options for the supported maintenance\n      window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>\n   \n            <p>\n               <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs,\n      instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information\n      about how Systems Manager handles these options for the supported maintenance window task\n      types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>\n            <p>For <code>AUTOMATION</code> task types, Amazon Web Services Systems Manager ignores any values specified for these\n    parameters.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The parameters for the <code>AUTOMATION</code> task.</p>\n         <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p>\n         <note>\n            <p>\n               <code>LoggingInfo</code> has been deprecated. To specify an Amazon Simple Storage Service (Amazon S3) bucket to contain logs, instead use the\n      <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure.\n      For information about how Amazon Web Services Systems Manager handles these options for the supported maintenance\n      window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> \n            <p>\n               <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs,\n      instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information\n      about how Systems Manager handles these options for the supported maintenance window task\n      types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> \n            <p>For <code>AUTOMATION</code>\n    task types, Amazon Web Services Systems Manager ignores any values specified for these parameters.</p>\n         </note>"
                     }
                 }
             },
@@ -16170,7 +16215,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The parameters for a <code>LAMBDA</code> task type.</p>\n         <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p>\n         <note>\n            <p>\n               <code>LoggingInfo</code> has been deprecated. To specify an Amazon Simple Storage Service (Amazon S3) bucket to contain logs, instead use the\n      <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure.\n      For information about how Amazon Web Services Systems Manager handles these options for the supported maintenance\n      window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>\n   \n            <p>\n               <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs,\n      instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information\n      about how Systems Manager handles these options for the supported maintenance window task\n      types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>\n            <p>For Lambda tasks, Systems Manager ignores any values specified for TaskParameters and\n    LoggingInfo.</p>\n         </note>"
+                "smithy.api#documentation": "<p>The parameters for a <code>LAMBDA</code> task type.</p>\n         <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p>\n         <note>\n            <p>\n               <code>LoggingInfo</code> has been deprecated. To specify an Amazon Simple Storage Service (Amazon S3) bucket to contain logs, instead use the\n      <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure.\n      For information about how Amazon Web Services Systems Manager handles these options for the supported maintenance\n      window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> \n            <p>\n               <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs,\n      instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information\n      about how Systems Manager handles these options for the supported maintenance window task\n      types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> \n            <p>For Lambda tasks, Systems Manager ignores\n    any values specified for TaskParameters and LoggingInfo.</p>\n         </note>"
             }
         },
         "com.amazonaws.ssm#MaintenanceWindowLambdaPayload": {
@@ -16304,7 +16349,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The parameters for a <code>RUN_COMMAND</code> task type.</p>\n         <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p>\n         <note>\n            <p>\n               <code>LoggingInfo</code> has been deprecated. To specify an Amazon Simple Storage Service (Amazon S3) bucket to contain logs, instead use the\n      <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure.\n      For information about how Amazon Web Services Systems Manager handles these options for the supported maintenance\n      window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>\n   \n            <p>\n               <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs,\n      instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information\n      about how Systems Manager handles these options for the supported maintenance window task\n      types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>\n            <p>For <code>RUN_COMMAND</code> tasks, Systems Manager uses specified values for\n     <code>TaskParameters</code> and <code>LoggingInfo</code> only if no values are specified for\n     <code>TaskInvocationParameters</code>. </p>\n         </note>"
+                "smithy.api#documentation": "<p>The parameters for a <code>RUN_COMMAND</code> task type.</p>\n         <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p>\n         <note>\n            <p>\n               <code>LoggingInfo</code> has been deprecated. To specify an Amazon Simple Storage Service (Amazon S3) bucket to contain logs, instead use the\n      <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure.\n      For information about how Amazon Web Services Systems Manager handles these options for the supported maintenance\n      window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> \n            <p>\n               <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs,\n      instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information\n      about how Systems Manager handles these options for the supported maintenance window task\n      types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> \n            <p>For <code>RUN_COMMAND</code>\n    tasks, Systems Manager uses specified values for <code>TaskParameters</code> and <code>LoggingInfo</code>\n    only if no values are specified for <code>TaskInvocationParameters</code>. </p>\n         </note>"
             }
         },
         "com.amazonaws.ssm#MaintenanceWindowSchedule": {
@@ -16360,7 +16405,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The parameters for a <code>STEP_FUNCTIONS</code> task.</p>\n         <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p>\n         <note>\n            <p>\n               <code>LoggingInfo</code> has been deprecated. To specify an Amazon Simple Storage Service (Amazon S3) bucket to contain logs, instead use the\n      <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure.\n      For information about how Amazon Web Services Systems Manager handles these options for the supported maintenance\n      window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>\n   \n            <p>\n               <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs,\n      instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information\n      about how Systems Manager handles these options for the supported maintenance window task\n      types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>\n            <p>For Step Functions tasks, Systems Manager ignores any values specified for\n     <code>TaskParameters</code> and <code>LoggingInfo</code>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>The parameters for a <code>STEP_FUNCTIONS</code> task.</p>\n         <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p>\n         <note>\n            <p>\n               <code>LoggingInfo</code> has been deprecated. To specify an Amazon Simple Storage Service (Amazon S3) bucket to contain logs, instead use the\n      <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure.\n      For information about how Amazon Web Services Systems Manager handles these options for the supported maintenance\n      window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> \n            <p>\n               <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs,\n      instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information\n      about how Systems Manager handles these options for the supported maintenance window task\n      types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> \n            <p>For Step Functions tasks, Systems Manager\n    ignores any values specified for <code>TaskParameters</code> and\n    <code>LoggingInfo</code>.</p>\n         </note>"
             }
         },
         "com.amazonaws.ssm#MaintenanceWindowStringDateTime": {
@@ -19808,7 +19853,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about the state of a patch on a particular managed node as it relates to the patch\n   baseline used to patch the node.</p>"
+                "smithy.api#documentation": "<p>Information about the state of a patch on a particular managed node as it relates to the\n   patch baseline used to patch the node.</p>"
             }
         },
         "com.amazonaws.ssm#PatchComplianceDataList": {
@@ -20773,7 +20818,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Bulk update custom inventory items on one or more managed nodes. The request adds an inventory item,\n   if it doesn't already exist, or updates an inventory item, if it does exist.</p>"
+                "smithy.api#documentation": "<p>Bulk update custom inventory items on one or more managed nodes. The request adds an\n   inventory item, if it doesn't already exist, or updates an inventory item, if it does\n   exist.</p>"
             }
         },
         "com.amazonaws.ssm#PutInventoryMessage": {
@@ -22280,7 +22325,7 @@
                 "StreamUrl": {
                     "target": "com.amazonaws.ssm#StreamUrl",
                     "traits": {
-                        "smithy.api#documentation": "<p>A URL back to SSM Agent on the managed node that the Session Manager client uses to send commands and\n   receive output from the managed node. Format: <code>wss://ssmmessages.<b>region</b>.amazonaws.com/v1/data-channel/<b>session-id</b>?stream=(input|output)</code>.</p>\n         <p>\n            <b>region</b> represents the Region identifier for an\n\t\t\t\t\t\tAmazon Web Services Region supported by Amazon Web Services Systems Manager, such as <code>us-east-2</code> for the US East (Ohio) Region.\n\t\t\t\t\t\tFor a list of supported <b>region</b> values, see the <b>Region</b> column in <a href=\"https://docs.aws.amazon.com/general/latest/gr/ssm.html#ssm_region\">Systems Manager service endpoints</a> in the\n        <i>Amazon Web Services General Reference</i>.</p>\n         <p>\n            <b>session-id</b> represents the ID of a Session Manager session, such as\n    <code>1a2b3c4dEXAMPLE</code>.</p>"
+                        "smithy.api#documentation": "<p>A URL back to SSM Agent on the managed node that the Session Manager client uses to send commands and\n   receive output from the managed node. Format: <code>wss://ssmmessages.<b>region</b>.amazonaws.com/v1/data-channel/<b>session-id</b>?stream=(input|output)</code>.</p> \n         <p>\n            <b>region</b> represents the Region identifier for an\n\t\t\t\t\t\tAmazon Web Services Region supported by Amazon Web Services Systems Manager, such as <code>us-east-2</code> for the US East (Ohio) Region.\n\t\t\t\t\t\tFor a list of supported <b>region</b> values, see the <b>Region</b> column in <a href=\"https://docs.aws.amazon.com/general/latest/gr/ssm.html#ssm_region\">Systems Manager service endpoints</a> in the\n        <i>Amazon Web Services General Reference</i>.</p> \n         <p>\n            <b>session-id</b> represents the ID of a Session Manager session, such as\n    <code>1a2b3c4dEXAMPLE</code>.</p>"
                     }
                 }
             }
@@ -22643,7 +22688,7 @@
                 "InstanceIds": {
                     "target": "com.amazonaws.ssm#InstanceIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IDs of the managed nodes where the command should run. Specifying managed node IDs is most\n   useful when you are targeting a limited number of managed nodes, though you can specify up to 50\n   IDs.</p>\n         <p>To target a larger number of managed nodes, or if you prefer not to list individual node\n   IDs, we recommend using the <code>Targets</code> option instead. Using <code>Targets</code>,\n   which accepts tag key-value pairs to identify the managed nodes to send commands to, you can a\n   send command to tens, hundreds, or thousands of nodes at once.</p>\n         <p>For more information about how to use targets, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html\">Using targets and rate\n    controls to send commands to a fleet</a> in the\n   <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The IDs of the managed nodes where the command should run. Specifying managed node IDs is\n   most useful when you are targeting a limited number of managed nodes, though you can specify up\n   to 50 IDs.</p>\n         <p>To target a larger number of managed nodes, or if you prefer not to list individual node\n   IDs, we recommend using the <code>Targets</code> option instead. Using <code>Targets</code>,\n   which accepts tag key-value pairs to identify the managed nodes to send commands to, you can a\n   send command to tens, hundreds, or thousands of nodes at once.</p>\n         <p>For more information about how to use targets, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html\">Using targets and rate\n    controls to send commands to a fleet</a> in the\n   <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "Targets": {
@@ -23605,7 +23650,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Initiates a connection to a target (for example, a managed node) for a Session Manager session. Returns a\n   URL and token that can be used to open a WebSocket connection for sending input and receiving\n   outputs.</p>\n         <note>\n            <p>Amazon Web Services CLI usage: <code>start-session</code> is an interactive command that requires the Session Manager\n    plugin to be installed on the client machine making the call. For information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html\">Install\n     the Session Manager plugin for the Amazon Web Services CLI</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n            <p>Amazon Web Services Tools for PowerShell usage: Start-SSMSession isn't currently supported by Amazon Web Services Tools\n    for PowerShell on Windows local machines.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Initiates a connection to a target (for example, a managed node) for a Session Manager session.\n   Returns a URL and token that can be used to open a WebSocket connection for sending input and\n   receiving outputs.</p>\n         <note>\n            <p>Amazon Web Services CLI usage: <code>start-session</code> is an interactive command that requires the Session Manager\n    plugin to be installed on the client machine making the call. For information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html\">Install\n     the Session Manager plugin for the Amazon Web Services CLI</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n            <p>Amazon Web Services Tools for PowerShell usage: Start-SSMSession isn't currently supported by Amazon Web Services Tools\n    for PowerShell on Windows local machines.</p>\n         </note>"
             }
         },
         "com.amazonaws.ssm#StartSessionRequest": {
@@ -23656,7 +23701,7 @@
                 "StreamUrl": {
                     "target": "com.amazonaws.ssm#StreamUrl",
                     "traits": {
-                        "smithy.api#documentation": "<p>A URL back to SSM Agent on the managed node that the Session Manager client uses to send commands and\n   receive output from the node. Format: <code>wss://ssmmessages.<b>region</b>.amazonaws.com/v1/data-channel/<b>session-id</b>?stream=(input|output)</code>\n         </p>\n         <p>\n            <b>region</b> represents the Region identifier for an\n\t\t\t\t\t\tAmazon Web Services Region supported by Amazon Web Services Systems Manager, such as <code>us-east-2</code> for the US East (Ohio) Region.\n\t\t\t\t\t\tFor a list of supported <b>region</b> values, see the <b>Region</b> column in <a href=\"https://docs.aws.amazon.com/general/latest/gr/ssm.html#ssm_region\">Systems Manager service endpoints</a> in the\n        <i>Amazon Web Services General Reference</i>.</p>\n         <p>\n            <b>session-id</b> represents the ID of a Session Manager session, such as\n    <code>1a2b3c4dEXAMPLE</code>.</p>"
+                        "smithy.api#documentation": "<p>A URL back to SSM Agent on the managed node that the Session Manager client uses to send commands and\n   receive output from the node. Format: <code>wss://ssmmessages.<b>region</b>.amazonaws.com/v1/data-channel/<b>session-id</b>?stream=(input|output)</code>\n         </p> \n         <p>\n            <b>region</b> represents the Region identifier for an\n\t\t\t\t\t\tAmazon Web Services Region supported by Amazon Web Services Systems Manager, such as <code>us-east-2</code> for the US East (Ohio) Region.\n\t\t\t\t\t\tFor a list of supported <b>region</b> values, see the <b>Region</b> column in <a href=\"https://docs.aws.amazon.com/general/latest/gr/ssm.html#ssm_region\">Systems Manager service endpoints</a> in the\n        <i>Amazon Web Services General Reference</i>.</p> \n         <p>\n            <b>session-id</b> represents the ID of a Session Manager session, such as\n    <code>1a2b3c4dEXAMPLE</code>.</p>"
                     }
                 }
             }
@@ -24255,7 +24300,7 @@
                     "code": "TargetNotConnected",
                     "httpResponseCode": 430
                 },
-                "smithy.api#documentation": "<p>The specified target managed node for the session isn't fully configured for use with Session Manager. For\n   more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-getting-started.html\">Getting started with\n    Session Manager</a> in the <i>Amazon Web Services Systems Manager User Guide</i>. This error is also returned if you\n   attempt to start a session on a managed node that is located in a different account or Region</p>",
+                "smithy.api#documentation": "<p>The specified target managed node for the session isn't fully configured for use with Session Manager.\n   For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-getting-started.html\">Getting started with\n    Session Manager</a> in the <i>Amazon Web Services Systems Manager User Guide</i>. This error is also returned if you\n   attempt to start a session on a managed node that is located in a different account or\n   Region</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -24597,7 +24642,7 @@
                     "code": "UnsupportedPlatformType",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p>The document doesn't support the platform type of the given managed node ID(s). For example, you\n   sent an document for a Windows managed node to a Linux node.</p>",
+                "smithy.api#documentation": "<p>The document doesn't support the platform type of the given managed node ID(s). For example,\n   you sent an document for a Windows managed node to a Linux node.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -24648,7 +24693,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an association. You can update the association name and version, the document\n   version, schedule, parameters, and Amazon Simple Storage Service (Amazon S3) output. </p>\n         <p>In order to call this API operation, your Identity and Access Management (IAM) user\n   account, group, or role must be configured with permission to call the <a>DescribeAssociation</a> API operation. If you don't have permission to call\n    <code>DescribeAssociation</code>, then you receive the following error: <code>An error occurred\n    (AccessDeniedException) when calling the UpdateAssociation operation: User: <user_arn>\n    isn't authorized to perform: ssm:DescribeAssociation on resource:\n   <resource_arn></code>\n         </p>\n         <important>\n            <p>When you update an association, the association immediately runs against the specified\n    targets.</p>\n         </important>"
+                "smithy.api#documentation": "<p>Updates an association. You can update the association name and version, the document\n   version, schedule, parameters, and Amazon Simple Storage Service (Amazon S3) output. When you\n   call <code>UpdateAssociation</code>, the system drops all optional parameters from the request\n   and overwrites the association with null values for those parameters. This is by design. You must\n   specify all optional parameters in the call, even if you are not changing the parameters. This\n   includes the <code>Name</code> parameter. Before calling this API action, we recommend that you\n   call the <a>DescribeAssociation</a> API operation and make a note of all optional\n   parameters required for your <code>UpdateAssociation</code> call.</p>\n\n         <p>In order to call this API operation, your Identity and Access Management (IAM) user\n   account, group, or role must be configured with permission to call the <a>DescribeAssociation</a> API operation. If you don't have permission to call\n    <code>DescribeAssociation</code>, then you receive the following error: <code>An error occurred\n    (AccessDeniedException) when calling the UpdateAssociation operation: User: <user_arn>\n    isn't authorized to perform: ssm:DescribeAssociation on resource:\n   <resource_arn></code>\n         </p>\n         <important>\n            <p>When you update an association, the association immediately runs against the specified\n    targets. You can add the <code>ApplyOnlyAtCronInterval</code> parameter to run the association\n    during the next schedule run.</p>\n         </important>"
             }
         },
         "com.amazonaws.ssm#UpdateAssociationRequest": {
@@ -24670,7 +24715,7 @@
                 "DocumentVersion": {
                     "target": "com.amazonaws.ssm#DocumentVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The document version you want update for the association. </p>"
+                        "smithy.api#documentation": "<p>The document version you want update for the association. </p>\n         <important>\n            <p>State Manager doesn't support running associations that use a new version of a document if that document is shared from another account. State Manager always runs the <code>default</code> version of a document if shared from another account, even though the Systems Manager console shows that a new version was processed. If you want to run an association using a new version of a document shared form another account, you must set the document version to <code>default</code>.</p>\n         </important>"
                     }
                 },
                 "ScheduleExpression": {
@@ -24724,7 +24769,7 @@
                 "MaxConcurrency": {
                     "target": "com.amazonaws.ssm#MaxConcurrency",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of targets allowed to run the association at the same time. You can\n   specify a number, for example 10, or a percentage of the target set, for example 10%. The default\n   value is 100%, which means all targets run the association at the same time.</p>\n         <p>If a new managed node starts and attempts to run an association while Systems Manager is running\n    <code>MaxConcurrency</code> associations, the association is allowed to run. During the next\n   association interval, the new managed node will process its association within the limit specified\n   for <code>MaxConcurrency</code>.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of targets allowed to run the association at the same time. You can\n   specify a number, for example 10, or a percentage of the target set, for example 10%. The default\n   value is 100%, which means all targets run the association at the same time.</p>\n         <p>If a new managed node starts and attempts to run an association while Systems Manager is running\n    <code>MaxConcurrency</code> associations, the association is allowed to run. During the next\n   association interval, the new managed node will process its association within the limit\n   specified for <code>MaxConcurrency</code>.</p>"
                     }
                 },
                 "ComplianceSeverity": {
@@ -25854,7 +25899,7 @@
                 "ApprovedPatches": {
                     "target": "com.amazonaws.ssm#PatchIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of explicitly approved patches for the baseline.</p>\n         <p>For information about accepted formats for lists of approved patches and rejected patches,\n                        see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">About\n                        package name formats for approved and rejected patch lists</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A list of explicitly approved patches for the baseline.</p> \n         <p>For information about accepted formats for lists of approved patches and rejected patches,\n                        see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">About\n                        package name formats for approved and rejected patch lists</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "ApprovedPatchesComplianceLevel": {
@@ -25873,7 +25918,7 @@
                 "RejectedPatches": {
                     "target": "com.amazonaws.ssm#PatchIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of explicitly rejected patches for the baseline.</p>\n         <p>For information about accepted formats for lists of approved patches and rejected patches,\n                        see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">About\n                        package name formats for approved and rejected patch lists</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A list of explicitly rejected patches for the baseline.</p> \n         <p>For information about accepted formats for lists of approved patches and rejected patches,\n                        see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">About\n                        package name formats for approved and rejected patch lists</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "RejectedPatchesAction": {

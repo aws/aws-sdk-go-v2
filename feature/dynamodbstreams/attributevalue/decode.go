@@ -79,6 +79,53 @@ func Unmarshal(av types.AttributeValue, out interface{}) error {
 	return NewDecoder().Decode(av, out)
 }
 
+// UnmarshalWithOptions will unmarshal AttributeValues to Go value types.
+// Both generic interface{} and concrete types are valid unmarshal
+// destination types.
+//
+// Use the `optsFns` functional options to override the default configuration.
+//
+// UnmarshalWithOptions will allocate maps, slices, and pointers as needed to
+// unmarshal the AttributeValue into the provided type value.
+//
+// When unmarshaling AttributeValues into structs Unmarshal matches
+// the field names of the struct to the AttributeValue Map keys.
+// Initially it will look for exact field name matching, but will
+// fall back to case insensitive if not exact match is found.
+//
+// With the exception of omitempty, omitemptyelem, binaryset, numberset
+// and stringset all struct tags used by Marshal are also used by
+// UnmarshalWithOptions.
+//
+// When decoding AttributeValues to interfaces Unmarshal will use the
+// following types.
+//
+//		[]byte,                 AV Binary (B)
+//		[][]byte,               AV Binary Set (BS)
+//		bool,                   AV Boolean (BOOL)
+//		[]interface{},          AV List (L)
+//		map[string]interface{}, AV Map (M)
+//		float64,                AV Number (N)
+//		Number,                 AV Number (N) with UseNumber set
+//		[]float64,              AV Number Set (NS)
+//		[]Number,               AV Number Set (NS) with UseNumber set
+//		string,                 AV String (S)
+//		[]string,               AV String Set (SS)
+//
+// If the Decoder option, UseNumber is set numbers will be unmarshaled
+// as Number values instead of float64. Use this to maintain the original
+// string formating of the number as it was represented in the AttributeValue.
+// In addition provides additional opportunities to parse the number
+// string based on individual use cases.
+//
+// When unmarshaling any error that occurs will halt the unmarshal
+// and return the error.
+//
+// The output value provided must be a non-nil pointer
+func UnmarshalWithOptions(av types.AttributeValue, out interface{}, optFns ...func(options *DecoderOptions)) error {
+	return NewDecoder(optFns...).Decode(av, out)
+}
+
 // UnmarshalMap is an alias for Unmarshal which unmarshals from
 // a map of AttributeValues.
 //
@@ -87,12 +134,32 @@ func UnmarshalMap(m map[string]types.AttributeValue, out interface{}) error {
 	return NewDecoder().Decode(&types.AttributeValueMemberM{Value: m}, out)
 }
 
+// UnmarshalMapWithOptions is an alias for UnmarshalWithOptions which unmarshals from
+// a map of AttributeValues.
+//
+// Use the `optsFns` functional options to override the default configuration.
+//
+// The output value provided must be a non-nil pointer
+func UnmarshalMapWithOptions(m map[string]types.AttributeValue, out interface{}, optFns ...func(options *DecoderOptions)) error {
+	return NewDecoder(optFns...).Decode(&types.AttributeValueMemberM{Value: m}, out)
+}
+
 // UnmarshalList is an alias for Unmarshal func which unmarshals
 // a slice of AttributeValues.
 //
 // The output value provided must be a non-nil pointer
 func UnmarshalList(l []types.AttributeValue, out interface{}) error {
 	return NewDecoder().Decode(&types.AttributeValueMemberL{Value: l}, out)
+}
+
+// UnmarshalListWithOptions is an alias for UnmarshalWithOptions func which unmarshals
+// a slice of AttributeValues.
+//
+// Use the `optsFns` functional options to override the default configuration.
+//
+// The output value provided must be a non-nil pointer
+func UnmarshalListWithOptions(l []types.AttributeValue, out interface{}, optFns ...func(options *DecoderOptions)) error {
+	return NewDecoder(optFns...).Decode(&types.AttributeValueMemberL{Value: l}, out)
 }
 
 // UnmarshalListOfMaps is an alias for Unmarshal func which unmarshals a
@@ -109,6 +176,24 @@ func UnmarshalListOfMaps(l []map[string]types.AttributeValue, out interface{}) e
 	}
 
 	return UnmarshalList(items, out)
+}
+
+// UnmarshalListOfMapsWithOptions is an alias for UnmarshalWithOptions func which unmarshals a
+// slice of maps of attribute values.
+//
+// Use the `optsFns` functional options to override the default configuration.
+//
+// This is useful for when you need to unmarshal the Items from a Query API
+// call.
+//
+// The output value provided must be a non-nil pointer
+func UnmarshalListOfMapsWithOptions(l []map[string]types.AttributeValue, out interface{}, optFns ...func(options *DecoderOptions)) error {
+	items := make([]types.AttributeValue, len(l))
+	for i, m := range l {
+		items[i] = &types.AttributeValueMemberM{Value: m}
+	}
+
+	return UnmarshalListWithOptions(items, out, optFns...)
 }
 
 // DecoderOptions is a collection of options to configure how the decoder

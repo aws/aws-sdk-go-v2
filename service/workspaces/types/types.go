@@ -66,6 +66,24 @@ type ComputeType struct {
 	noSmithyDocumentSerde
 }
 
+// Describes an Amazon Connect client add-in.
+type ConnectClientAddIn struct {
+
+	// The client add-in identifier.
+	AddInId *string
+
+	// The name of the client add in.
+	Name *string
+
+	// The directory identifier for which the client add-in is configured.
+	ResourceId *string
+
+	// The endpoint URL of the client add-in.
+	URL *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes a connection alias. Connection aliases are used for cross-Region
 // redirection. For more information, see  Cross-Region Redirection for Amazon
 // WorkSpaces

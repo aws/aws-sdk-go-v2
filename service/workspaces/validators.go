@@ -90,6 +90,26 @@ func (m *validateOpCopyWorkspaceImage) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateConnectClientAddIn struct {
+}
+
+func (*validateOpCreateConnectClientAddIn) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateConnectClientAddIn) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateConnectClientAddInInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateConnectClientAddInInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateConnectionAlias struct {
 }
 
@@ -210,6 +230,26 @@ func (m *validateOpCreateWorkspaces) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteConnectClientAddIn struct {
+}
+
+func (*validateOpDeleteConnectClientAddIn) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteConnectClientAddIn) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteConnectClientAddInInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteConnectClientAddInInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteConnectionAlias struct {
 }
 
@@ -325,6 +365,26 @@ func (m *validateOpDescribeClientProperties) HandleInitialize(ctx context.Contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeClientPropertiesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeConnectClientAddIns struct {
+}
+
+func (*validateOpDescribeConnectClientAddIns) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeConnectClientAddIns) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeConnectClientAddInsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeConnectClientAddInsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -790,6 +850,26 @@ func (m *validateOpTerminateWorkspaces) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateConnectClientAddIn struct {
+}
+
+func (*validateOpUpdateConnectClientAddIn) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateConnectClientAddIn) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateConnectClientAddInInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateConnectClientAddInInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateConnectionAliasPermission struct {
 }
 
@@ -866,6 +946,10 @@ func addOpCopyWorkspaceImageValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpCopyWorkspaceImage{}, middleware.After)
 }
 
+func addOpCreateConnectClientAddInValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateConnectClientAddIn{}, middleware.After)
+}
+
 func addOpCreateConnectionAliasValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateConnectionAlias{}, middleware.After)
 }
@@ -890,6 +974,10 @@ func addOpCreateWorkspacesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateWorkspaces{}, middleware.After)
 }
 
+func addOpDeleteConnectClientAddInValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteConnectClientAddIn{}, middleware.After)
+}
+
 func addOpDeleteConnectionAliasValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteConnectionAlias{}, middleware.After)
 }
@@ -912,6 +1000,10 @@ func addOpDeregisterWorkspaceDirectoryValidationMiddleware(stack *middleware.Sta
 
 func addOpDescribeClientPropertiesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeClientProperties{}, middleware.After)
+}
+
+func addOpDescribeConnectClientAddInsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeConnectClientAddIns{}, middleware.After)
 }
 
 func addOpDescribeConnectionAliasPermissionsValidationMiddleware(stack *middleware.Stack) error {
@@ -1004,6 +1096,10 @@ func addOpStopWorkspacesValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpTerminateWorkspacesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTerminateWorkspaces{}, middleware.After)
+}
+
+func addOpUpdateConnectClientAddInValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateConnectClientAddIn{}, middleware.After)
 }
 
 func addOpUpdateConnectionAliasPermissionValidationMiddleware(stack *middleware.Stack) error {
@@ -1287,6 +1383,27 @@ func validateOpCopyWorkspaceImageInput(v *CopyWorkspaceImageInput) error {
 	}
 }
 
+func validateOpCreateConnectClientAddInInput(v *CreateConnectClientAddInInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateConnectClientAddInInput"}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.URL == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("URL"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateConnectionAliasInput(v *CreateConnectionAliasInput) error {
 	if v == nil {
 		return nil
@@ -1426,6 +1543,24 @@ func validateOpCreateWorkspacesInput(v *CreateWorkspacesInput) error {
 	}
 }
 
+func validateOpDeleteConnectClientAddInInput(v *DeleteConnectClientAddInInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteConnectClientAddInInput"}
+	if v.AddInId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AddInId"))
+	}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteConnectionAliasInput(v *DeleteConnectionAliasInput) error {
 	if v == nil {
 		return nil
@@ -1511,6 +1646,21 @@ func validateOpDescribeClientPropertiesInput(v *DescribeClientPropertiesInput) e
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeClientPropertiesInput"}
 	if v.ResourceIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeConnectClientAddInsInput(v *DescribeConnectClientAddInsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeConnectClientAddInsInput"}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1917,6 +2067,24 @@ func validateOpTerminateWorkspacesInput(v *TerminateWorkspacesInput) error {
 		if err := validateTerminateWorkspaceRequests(v.TerminateWorkspaceRequests); err != nil {
 			invalidParams.AddNested("TerminateWorkspaceRequests", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateConnectClientAddInInput(v *UpdateConnectClientAddInInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateConnectClientAddInInput"}
+	if v.AddInId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AddInId"))
+	}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

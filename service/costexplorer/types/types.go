@@ -764,8 +764,8 @@ type ElastiCacheInstanceDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Details about the Amazon ES instances that Amazon Web Services recommends that
-// you purchase.
+// Details about the Amazon OpenSearch Service instances that Amazon Web Services
+// recommends that you purchase.
 type ESInstanceDetails struct {
 
 	// Determines whether the recommendation is for a current-generation instance.
@@ -906,7 +906,8 @@ type InstanceDetails struct {
 	// The Amazon EC2 instances that Amazon Web Services recommends that you purchase.
 	EC2InstanceDetails *EC2InstanceDetails
 
-	// The Amazon ES instances that Amazon Web Services recommends that you purchase.
+	// The Amazon OpenSearch Service instances that Amazon Web Services recommends that
+	// you purchase.
 	ESInstanceDetails *ESInstanceDetails
 
 	// The ElastiCache instances that Amazon Web Services recommends that you purchase.

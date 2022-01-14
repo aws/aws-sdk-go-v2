@@ -13457,6 +13457,70 @@ func (m *awsEc2query_serializeOpDescribeExportTasks) HandleSerialize(ctx context
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsEc2query_serializeOpDescribeFastLaunchImages struct {
+}
+
+func (*awsEc2query_serializeOpDescribeFastLaunchImages) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsEc2query_serializeOpDescribeFastLaunchImages) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeFastLaunchImagesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("DescribeFastLaunchImages")
+	body.Key("Version").String("2016-11-15")
+
+	if err := awsEc2query_serializeOpDocumentDescribeFastLaunchImagesInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsEc2query_serializeOpDescribeFastSnapshotRestores struct {
 }
 
@@ -20753,6 +20817,70 @@ func (m *awsEc2query_serializeOpDisableEbsEncryptionByDefault) HandleSerialize(c
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsEc2query_serializeOpDisableFastLaunch struct {
+}
+
+func (*awsEc2query_serializeOpDisableFastLaunch) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsEc2query_serializeOpDisableFastLaunch) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DisableFastLaunchInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("DisableFastLaunch")
+	body.Key("Version").String("2016-11-15")
+
+	if err := awsEc2query_serializeOpDocumentDisableFastLaunchInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsEc2query_serializeOpDisableFastSnapshotRestores struct {
 }
 
@@ -22013,6 +22141,70 @@ func (m *awsEc2query_serializeOpEnableEbsEncryptionByDefault) HandleSerialize(ct
 	body.Key("Version").String("2016-11-15")
 
 	if err := awsEc2query_serializeOpDocumentEnableEbsEncryptionByDefaultInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsEc2query_serializeOpEnableFastLaunch struct {
+}
+
+func (*awsEc2query_serializeOpEnableFastLaunch) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsEc2query_serializeOpEnableFastLaunch) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*EnableFastLaunchInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("EnableFastLaunch")
+	body.Key("Version").String("2016-11-15")
+
+	if err := awsEc2query_serializeOpDocumentEnableFastLaunchInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -34501,6 +34693,53 @@ func awsEc2query_serializeDocumentExportToS3TaskSpecification(v *types.ExportToS
 	return nil
 }
 
+func awsEc2query_serializeDocumentFastLaunchImageIdList(v []string, value query.Value) error {
+	if len(v) == 0 {
+		return nil
+	}
+	array := value.Array("ImageId")
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsEc2query_serializeDocumentFastLaunchLaunchTemplateSpecificationRequest(v *types.FastLaunchLaunchTemplateSpecificationRequest, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.LaunchTemplateId != nil {
+		objectKey := object.Key("LaunchTemplateId")
+		objectKey.String(*v.LaunchTemplateId)
+	}
+
+	if v.LaunchTemplateName != nil {
+		objectKey := object.Key("LaunchTemplateName")
+		objectKey.String(*v.LaunchTemplateName)
+	}
+
+	if v.Version != nil {
+		objectKey := object.Key("Version")
+		objectKey.String(*v.Version)
+	}
+
+	return nil
+}
+
+func awsEc2query_serializeDocumentFastLaunchSnapshotConfigurationRequest(v *types.FastLaunchSnapshotConfigurationRequest, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.TargetResourceCount != nil {
+		objectKey := object.Key("TargetResourceCount")
+		objectKey.Integer(*v.TargetResourceCount)
+	}
+
+	return nil
+}
+
 func awsEc2query_serializeDocumentFederatedAuthenticationRequest(v *types.FederatedAuthenticationRequest, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -35501,6 +35740,11 @@ func awsEc2query_serializeDocumentInstanceMetadataOptionsRequest(v *types.Instan
 	if len(v.HttpTokens) > 0 {
 		objectKey := object.Key("HttpTokens")
 		objectKey.String(string(v.HttpTokens))
+	}
+
+	if len(v.InstanceMetadataTags) > 0 {
+		objectKey := object.Key("InstanceMetadataTags")
+		objectKey.String(string(v.InstanceMetadataTags))
 	}
 
 	return nil
@@ -36674,6 +36918,11 @@ func awsEc2query_serializeDocumentLaunchTemplateInstanceMetadataOptionsRequest(v
 	if len(v.HttpTokens) > 0 {
 		objectKey := object.Key("HttpTokens")
 		objectKey.String(string(v.HttpTokens))
+	}
+
+	if len(v.InstanceMetadataTags) > 0 {
+		objectKey := object.Key("InstanceMetadataTags")
+		objectKey.String(string(v.InstanceMetadataTags))
 	}
 
 	return nil
@@ -43183,6 +43432,11 @@ func awsEc2query_serializeOpDocumentCreateCapacityReservationInput(v *CreateCapa
 		objectKey.String(*v.OutpostArn)
 	}
 
+	if v.PlacementGroupArn != nil {
+		objectKey := object.Key("PlacementGroupArn")
+		objectKey.String(*v.PlacementGroupArn)
+	}
+
 	if v.TagSpecifications != nil {
 		objectKey := object.FlatKey("TagSpecifications")
 		if err := awsEc2query_serializeDocumentTagSpecificationList(v.TagSpecifications, objectKey); err != nil {
@@ -48120,6 +48374,42 @@ func awsEc2query_serializeOpDocumentDescribeExportTasksInput(v *DescribeExportTa
 	return nil
 }
 
+func awsEc2query_serializeOpDocumentDescribeFastLaunchImagesInput(v *DescribeFastLaunchImagesInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.DryRun != nil {
+		objectKey := object.Key("DryRun")
+		objectKey.Boolean(*v.DryRun)
+	}
+
+	if v.Filters != nil {
+		objectKey := object.FlatKey("Filter")
+		if err := awsEc2query_serializeDocumentFilterList(v.Filters, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.ImageIds != nil {
+		objectKey := object.FlatKey("ImageId")
+		if err := awsEc2query_serializeDocumentFastLaunchImageIdList(v.ImageIds, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		objectKey := object.Key("MaxResults")
+		objectKey.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		objectKey := object.Key("NextToken")
+		objectKey.String(*v.NextToken)
+	}
+
+	return nil
+}
+
 func awsEc2query_serializeOpDocumentDescribeFastSnapshotRestoresInput(v *DescribeFastSnapshotRestoresInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -51966,6 +52256,28 @@ func awsEc2query_serializeOpDocumentDisableEbsEncryptionByDefaultInput(v *Disabl
 	return nil
 }
 
+func awsEc2query_serializeOpDocumentDisableFastLaunchInput(v *DisableFastLaunchInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.DryRun != nil {
+		objectKey := object.Key("DryRun")
+		objectKey.Boolean(*v.DryRun)
+	}
+
+	if v.Force != nil {
+		objectKey := object.Key("Force")
+		objectKey.Boolean(*v.Force)
+	}
+
+	if v.ImageId != nil {
+		objectKey := object.Key("ImageId")
+		objectKey.String(*v.ImageId)
+	}
+
+	return nil
+}
+
 func awsEc2query_serializeOpDocumentDisableFastSnapshotRestoresInput(v *DisableFastSnapshotRestoresInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -52334,6 +52646,47 @@ func awsEc2query_serializeOpDocumentEnableEbsEncryptionByDefaultInput(v *EnableE
 	if v.DryRun != nil {
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(*v.DryRun)
+	}
+
+	return nil
+}
+
+func awsEc2query_serializeOpDocumentEnableFastLaunchInput(v *EnableFastLaunchInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.DryRun != nil {
+		objectKey := object.Key("DryRun")
+		objectKey.Boolean(*v.DryRun)
+	}
+
+	if v.ImageId != nil {
+		objectKey := object.Key("ImageId")
+		objectKey.String(*v.ImageId)
+	}
+
+	if v.LaunchTemplate != nil {
+		objectKey := object.Key("LaunchTemplate")
+		if err := awsEc2query_serializeDocumentFastLaunchLaunchTemplateSpecificationRequest(v.LaunchTemplate, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxParallelLaunches != nil {
+		objectKey := object.Key("MaxParallelLaunches")
+		objectKey.Integer(*v.MaxParallelLaunches)
+	}
+
+	if v.ResourceType != nil {
+		objectKey := object.Key("ResourceType")
+		objectKey.String(*v.ResourceType)
+	}
+
+	if v.SnapshotConfiguration != nil {
+		objectKey := object.Key("SnapshotConfiguration")
+		if err := awsEc2query_serializeDocumentFastLaunchSnapshotConfigurationRequest(v.SnapshotConfiguration, objectKey); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -54644,6 +54997,11 @@ func awsEc2query_serializeOpDocumentModifyInstanceMetadataOptionsInput(v *Modify
 	if v.InstanceId != nil {
 		objectKey := object.Key("InstanceId")
 		objectKey.String(*v.InstanceId)
+	}
+
+	if len(v.InstanceMetadataTags) > 0 {
+		objectKey := object.Key("InstanceMetadataTags")
+		objectKey.String(string(v.InstanceMetadataTags))
 	}
 
 	return nil

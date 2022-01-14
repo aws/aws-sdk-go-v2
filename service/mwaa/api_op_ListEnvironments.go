@@ -41,7 +41,7 @@ type ListEnvironmentsInput struct {
 
 type ListEnvironmentsOutput struct {
 
-	// Returns the list of Amazon MWAA environments.
+	// Returns a list of Amazon MWAA environments.
 	//
 	// This member is required.
 	Environments []string

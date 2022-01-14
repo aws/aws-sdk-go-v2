@@ -1368,6 +1368,7 @@
           "ap-south-1" : { },
           "ap-southeast-1" : { },
           "ap-southeast-2" : { },
+          "ap-southeast-3" : { },
           "ca-central-1" : { },
           "eu-central-1" : { },
           "eu-north-1" : { },
@@ -15338,12 +15339,25 @@
           } ]
         },
         "endpoints" : {
+          "fips-us-gov-east-1" : {
+            "credentialScope" : {
+              "region" : "us-gov-east-1"
+            },
+            "deprecated" : true,
+            "hostname" : "identitystore.us-gov-east-1.amazonaws.com"
+          },
           "fips-us-gov-west-1" : {
             "credentialScope" : {
               "region" : "us-gov-west-1"
             },
             "deprecated" : true,
             "hostname" : "identitystore.us-gov-west-1.amazonaws.com"
+          },
+          "us-gov-east-1" : {
+            "variants" : [ {
+              "hostname" : "identitystore.us-gov-east-1.amazonaws.com",
+              "tags" : [ "fips" ]
+            } ]
           },
           "us-gov-west-1" : {
             "variants" : [ {
@@ -15920,6 +15934,12 @@
       },
       "portal.sso" : {
         "endpoints" : {
+          "us-gov-east-1" : {
+            "credentialScope" : {
+              "region" : "us-gov-east-1"
+            },
+            "hostname" : "portal.sso.us-gov-east-1.amazonaws.com"
+          },
           "us-gov-west-1" : {
             "credentialScope" : {
               "region" : "us-gov-west-1"
@@ -17207,6 +17227,19 @@
             },
             "deprecated" : true,
             "hostname" : "dms.us-iso-east-1.c2s.ic.gov"
+          },
+          "us-iso-west-1" : {
+            "variants" : [ {
+              "hostname" : "dms.us-iso-west-1.c2s.ic.gov",
+              "tags" : [ "fips" ]
+            } ]
+          },
+          "us-iso-west-1-fips" : {
+            "credentialScope" : {
+              "region" : "us-iso-west-1"
+            },
+            "deprecated" : true,
+            "hostname" : "dms.us-iso-west-1.c2s.ic.gov"
           }
         }
       },

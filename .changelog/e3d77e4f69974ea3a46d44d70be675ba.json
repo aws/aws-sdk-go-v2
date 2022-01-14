@@ -1,0 +1,16 @@
+{
+    "id": "e3d77e4f-6997-4ea3-a46d-44d70be675ba",
+    "type": "documentation",
+    "description": "Updated API models",
+    "modules": [
+        "service/autoscalingplans",
+        "service/costexplorer",
+        "service/databasemigrationservice",
+        "service/finspacedata",
+        "service/fms",
+        "service/identitystore",
+        "service/ioteventsdata",
+        "service/sso",
+        "service/transcribe"
+    ]
+}

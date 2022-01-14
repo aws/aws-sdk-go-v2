@@ -49,7 +49,7 @@ type CreateDataViewInput struct {
 	// Flag to indicate Dataview should be updated automatically.
 	AutoUpdate bool
 
-	// A token used to ensure idempotency.
+	// A token that ensures idempotency. This token expires in 10 minutes.
 	ClientToken *string
 
 	// Ordered set of column names used to partition data.

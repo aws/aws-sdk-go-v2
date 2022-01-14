@@ -2037,7 +2037,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an new set of frequently asked question (FAQ) questions and answers.</p>"
+                "smithy.api#documentation": "<p>Creates an new set of frequently asked question (FAQ) questions and answers.</p>\n        <p>Adding FAQs to an index is an asynchronous operation.</p>"
             }
         },
         "com.amazonaws.kendra#CreateFaqRequest": {
@@ -4618,7 +4618,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A custom attribute value assigned to a document. </p>"
+                "smithy.api#documentation": "<p>A custom attribute value assigned to a document.</p>\n        <p>For more information on how to create custom document attributes, see \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/custom-attributes.html\">Custom \n                Attributes</a>.</p>"
             }
         },
         "com.amazonaws.kendra#DocumentAttributeCondition": {
@@ -4742,7 +4742,7 @@
                 "DateValue": {
                     "target": "com.amazonaws.kendra#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>A date expressed as an ISO 8601 string.</p>\n        <p>It is important for the time zone to be included \n            in the ISO 8601 date-time format. For example, \n            20120325T123010+01:00 is the ISO 8601 date-time format \n            for March 25th 2012 at 12:30PM (plus 10 seconds) in \n            Central European Time.</p>"
+                        "smithy.api#documentation": "<p>A date expressed as an ISO 8601 string.</p>\n        <p>It is important for the time zone to be included \n            in the ISO 8601 date-time format. For example, \n            2012-03-25T12:30:10+01:00 is the ISO 8601 date-time format \n            for March 25th 2012 at 12:30PM (plus 10 seconds) in \n            Central European Time.</p>"
                     }
                 }
             },
@@ -5757,7 +5757,12 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves search metrics data. The data provides a snapshot of how\n            your users interact with your search application and how effective\n            the application is.</p>"
+                "smithy.api#documentation": "<p>Retrieves search metrics data. The data provides a snapshot of how\n            your users interact with your search application and how effective\n            the application is.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
             }
         },
         "com.amazonaws.kendra#GetSnapshotsRequest": {
@@ -6114,7 +6119,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides the configuration information for invoking a Lambda function in \n            Lambda to alter document metadata and content when ingesting \n            documents into Amazon Kendra. You can configure your Lambda function using \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_PreExtractionHookConfiguration.html\">PreExtractionHookConfiguration</a> \n            if you want to apply advanced alterations on the original or raw documents. \n            If you want to apply advanced alterations on the Amazon Kendra structured documents, \n            you must configure your Lambda function using <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_PostExtractionHookConfiguration.html\">PostExtractionHookConfiguration</a>. \n            You can only invoke one Lambda function. However, this function can invoke other \n            functions it requires.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html\">Customizing document metadata\n                during the ingestion process</a>.</p>"
+                "smithy.api#documentation": "<p>Provides the configuration information for invoking a Lambda function in \n            Lambda to alter document metadata and content when ingesting \n            documents into Amazon Kendra. You can configure your Lambda function using \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_CustomDocumentEnrichmentConfiguration.html\">PreExtractionHookConfiguration</a> \n            if you want to apply advanced alterations on the original or raw documents. \n            If you want to apply advanced alterations on the Amazon Kendra structured documents, \n            you must configure your Lambda function using <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_CustomDocumentEnrichmentConfiguration.html\">PostExtractionHookConfiguration</a>. \n            You can only invoke one Lambda function. However, this function can invoke other \n            functions it requires.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html\">Customizing document metadata\n                during the ingestion process</a>.</p>"
             }
         },
         "com.amazonaws.kendra#Host": {
@@ -8141,8 +8146,7 @@
                 "QueryText": {
                     "target": "com.amazonaws.kendra#QueryText",
                     "traits": {
-                        "smithy.api#documentation": "<p>The text to search for.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The text to search for.</p>"
                     }
                 },
                 "AttributeFilter": {
@@ -8232,6 +8236,12 @@
                     "target": "com.amazonaws.kendra#Integer",
                     "traits": {
                         "smithy.api#documentation": "<p>The total number of items found by the search; however, you can only\n         retrieve up to 100 items. For example, if the search found 192 items,\n         you can only retrieve the first 100 of the items.</p>"
+                    }
+                },
+                "Warnings": {
+                    "target": "com.amazonaws.kendra#WarningList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of warning codes and their messages on problems with your query.</p>\n         <p>Amazon Kendra currently only supports one type of warning, which is a warning \n         on invalid syntax used in the query. For examples of invalid query syntax, \n         see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/searching-example.html#searching-index-query-syntax\">Searching \n            with advanced query syntax</a>.</p>"
                     }
                 }
             }
@@ -8460,8 +8470,7 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 1000
-                },
-                "smithy.api#pattern": "^\\P{C}*$"
+                }
             }
         },
         "com.amazonaws.kendra#ReadAccessType": {
@@ -10979,7 +10988,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides the configuration information to fetch access levels \n         of groups and users from an Amazon Web Services Single Sign On identity \n         source. This is useful for setting up user context filtering, where \n         Amazon Kendra filters search results for different users based on their \n         group's access to documents. You can also map your users to their \n         groups for user context filtering using the \n         <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_PutPrincipalMapping.html\">PutPrincipalMapping \n            operation</a>.</p>\n         <p>To set up an Amazon Web Services SSO identity source in the console to use with \n         Amazon Kendra, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/getting-started-aws-sso.html\">Getting started \n            with an Amazon Web Services SSO identity source</a>. You must also grant the required \n         permissions to use Amazon Web Services SSO with Amazon Kendra. For more information, see \n         <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html#iam-roles-aws-sso\">IAM roles for \n            Amazon Web Services SSO</a>.</p>"
+                "smithy.api#documentation": "<p>Provides the configuration information to fetch access levels \n         of groups and users from an Amazon Web Services Single Sign On identity \n         source. This is useful for setting up user context filtering, where \n         Amazon Kendra filters search results for different users based on their \n         group's access to documents. You can also map your users to their \n         groups for user context filtering using the \n         <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_PutPrincipalMapping.html\">PutPrincipalMapping \n            operation</a>.</p>\n         <p>To set up an Amazon Web Services SSO identity source in the console to use with \n         Amazon Kendra, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/getting-started-aws-sso.html\">Getting started \n            with an Amazon Web Services SSO identity source</a>. You must also grant the required \n         permissions to use Amazon Web Services SSO with Amazon Kendra. For more information, see \n         <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html#iam-roles-aws-sso\">IAM roles for \n            Amazon Web Services SSO</a>.</p>\n         <p>Amazon Kendra currently does not support using <code>UserGroupResolutionConfiguration</code> \n         with an Amazon Web Services organization member account for your Amazon Web Services SSO \n         identify source. You must create your index in the parent account for the organization \n         in order to use <code>UserGroupResolutionConfiguration</code>.</p>"
             }
         },
         "com.amazonaws.kendra#UserGroupResolutionMode": {
@@ -11112,6 +11121,59 @@
                     "max": 200
                 },
                 "smithy.api#pattern": "^[-0-9a-zA-Z]+$"
+            }
+        },
+        "com.amazonaws.kendra#Warning": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.kendra#WarningMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message that explains the problem with the query.</p>"
+                    }
+                },
+                "Code": {
+                    "target": "com.amazonaws.kendra#WarningCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The code used to show the type of warning for the query.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The warning code and message that explains a problem with a query.</p>"
+            }
+        },
+        "com.amazonaws.kendra#WarningCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "QUERY_LANGUAGE_INVALID_SYNTAX",
+                        "name": "QUERY_LANGUAGE_INVALID_SYNTAX"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.kendra#WarningList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendra#Warning"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.kendra#WarningMessage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^\\P{C}*$"
             }
         },
         "com.amazonaws.kendra#WebCrawlerConfiguration": {

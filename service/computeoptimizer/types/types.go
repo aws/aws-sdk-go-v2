@@ -87,6 +87,32 @@ type AutoScalingGroupRecommendation struct {
 	// instance type.
 	Finding Finding
 
+	// The applications that might be running on the instances in the Auto Scaling
+	// group as inferred by Compute Optimizer. Compute Optimizer can infer if one of
+	// the following applications might be running on the instances:
+	//
+	// * AmazonEmr -
+	// Infers that Amazon EMR might be running on the instances.
+	//
+	// * ApacheCassandra -
+	// Infers that Apache Cassandra might be running on the instances.
+	//
+	// * ApacheHadoop
+	// - Infers that Apache Hadoop might be running on the instances.
+	//
+	// * Memcached -
+	// Infers that Memcached might be running on the instances.
+	//
+	// * NGINX - Infers that
+	// NGINX might be running on the instances.
+	//
+	// * PostgreSql - Infers that PostgreSQL
+	// might be running on the instances.
+	//
+	// * Redis - Infers that Redis might be running
+	// on the instances.
+	InferredWorkloadTypes []InferredWorkloadType
+
 	// The timestamp of when the Auto Scaling group recommendation was last generated.
 	LastRefreshTimestamp *time.Time
 
@@ -110,6 +136,15 @@ type AutoScalingGroupRecommendationOption struct {
 
 	// An array of objects that describe an Auto Scaling group configuration.
 	Configuration *AutoScalingGroupConfiguration
+
+	// The level of effort required to migrate from the current instance type to the
+	// recommended instance type. For example, the migration effort is Low if Amazon
+	// EMR is the inferred workload type and an Amazon Web Services Graviton instance
+	// type is recommended. The migration effort is Medium if a workload type couldn't
+	// be inferred but an Amazon Web Services Graviton instance type is recommended.
+	// The migration effort is VeryLow if both the current and recommended instance
+	// types are of the same CPU architecture.
+	MigrationEffort MigrationEffort
 
 	// The performance risk of the Auto Scaling group configuration recommendation.
 	// Performance risk indicates the likelihood of the recommended instance type not
@@ -253,8 +288,17 @@ type EffectiveRecommendationPreferences struct {
 	// Describes the activation status of the enhanced infrastructure metrics
 	// preference. A status of Active confirms that the preference is applied in the
 	// latest recommendation refresh, and a status of Inactive confirms that it's not
-	// yet applied.
+	// yet applied to recommendations. For more information, see Enhanced
+	// infrastructure metrics
+	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html)
+	// in the Compute Optimizer User Guide.
 	EnhancedInfrastructureMetrics EnhancedInfrastructureMetrics
+
+	// Describes the activation status of the inferred workload types preference. A
+	// status of Active confirms that the preference is applied in the latest
+	// recommendation refresh. A status of Inactive confirms that it's not yet applied
+	// to recommendations.
+	InferredWorkloadTypes InferredWorkloadTypesPreference
 
 	noSmithyDocumentSerde
 }
@@ -274,9 +318,10 @@ type EnrollmentFilter struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the estimated monthly savings amount possible for a given resource
-// based on On-Demand instance pricing For more information, see Estimated monthly
-// savings and savings opportunities
+// Describes the estimated monthly savings amount possible, based on On-Demand
+// instance pricing, by adopting Compute Optimizer recommendations for a given
+// resource. For more information, see Estimated monthly savings and savings
+// opportunities
 // (https://docs.aws.amazon.com/compute-optimizer/latest/ug/view-ec2-recommendations.html#ec2-savings-calculation)
 // in the Compute Optimizer User Guide.
 type EstimatedMonthlySavings struct {
@@ -440,8 +485,8 @@ type InstanceRecommendation struct {
 	CurrentInstanceType *string
 
 	// The risk of the current instance not meeting the performance needs of its
-	// workloads. The higher the risk, the more likely the current Lambda function
-	// requires more memory.
+	// workloads. The higher the risk, the more likely the current instance cannot meet
+	// the performance requirements of its workload.
 	CurrentPerformanceRisk CurrentPerformanceRisk
 
 	// An object that describes the effective recommendation preferences for the
@@ -590,6 +635,31 @@ type InstanceRecommendation struct {
 	// in the Amazon Elastic Compute Cloud User Guide.
 	FindingReasonCodes []InstanceRecommendationFindingReasonCode
 
+	// The applications that might be running on the instance as inferred by Compute
+	// Optimizer. Compute Optimizer can infer if one of the following applications
+	// might be running on the instance:
+	//
+	// * AmazonEmr - Infers that Amazon EMR might be
+	// running on the instance.
+	//
+	// * ApacheCassandra - Infers that Apache Cassandra might
+	// be running on the instance.
+	//
+	// * ApacheHadoop - Infers that Apache Hadoop might be
+	// running on the instance.
+	//
+	// * Memcached - Infers that Memcached might be running
+	// on the instance.
+	//
+	// * NGINX - Infers that NGINX might be running on the
+	// instance.
+	//
+	// * PostgreSql - Infers that PostgreSQL might be running on the
+	// instance.
+	//
+	// * Redis - Infers that Redis might be running on the instance.
+	InferredWorkloadTypes []InferredWorkloadType
+
 	// The Amazon Resource Name (ARN) of the current instance.
 	InstanceArn *string
 
@@ -619,6 +689,15 @@ type InstanceRecommendationOption struct {
 
 	// The instance type of the instance recommendation.
 	InstanceType *string
+
+	// The level of effort required to migrate from the current instance type to the
+	// recommended instance type. For example, the migration effort is Low if Amazon
+	// EMR is the inferred workload type and an Amazon Web Services Graviton instance
+	// type is recommended. The migration effort is Medium if a workload type couldn't
+	// be inferred but an Amazon Web Services Graviton instance type is recommended.
+	// The migration effort is VeryLow if both the current and recommended instance
+	// types are of the same CPU architecture.
+	MigrationEffort MigrationEffort
 
 	// The performance risk of the instance recommendation option. Performance risk
 	// indicates the likelihood of the recommended instance type not meeting the
@@ -825,7 +904,7 @@ type LambdaFunctionRecommendation struct {
 
 	// The risk of the current Lambda function not meeting the performance needs of its
 	// workloads. The higher the risk, the more likely the current Lambda function
-	// configuration is underperforming in its workload.
+	// requires more memory.
 	CurrentPerformanceRisk CurrentPerformanceRisk
 
 	// The finding classification of the function. Findings for functions include:
@@ -1081,8 +1160,17 @@ type RecommendationPreferencesDetail struct {
 	// The status of the enhanced infrastructure metrics recommendation preference. A
 	// status of Active confirms that the preference is applied in the latest
 	// recommendation refresh, and a status of Inactive confirms that it's not yet
-	// applied.
+	// applied to recommendations. For more information, see Enhanced infrastructure
+	// metrics
+	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html)
+	// in the Compute Optimizer User Guide.
 	EnhancedInfrastructureMetrics EnhancedInfrastructureMetrics
+
+	// The status of the inferred workload types recommendation preference. A status of
+	// Active confirms that the preference is applied in the latest recommendation
+	// refresh. A status of Inactive confirms that it's not yet applied to
+	// recommendations.
+	InferredWorkloadTypes InferredWorkloadTypesPreference
 
 	// The target resource type of the recommendation preference to create. The
 	// Ec2Instance option encompasses standalone instances and instances that are part
@@ -1220,11 +1308,13 @@ type S3DestinationConfig struct {
 // in the Cost Management User Guide.
 type SavingsOpportunity struct {
 
-	// An object that describes the estimated monthly savings amount possible based on
-	// On-Demand instance pricing.
+	// An object that describes the estimated monthly savings amount possible, based on
+	// On-Demand instance pricing, by adopting Compute Optimizer recommendations for a
+	// given resource.
 	EstimatedMonthlySavings *EstimatedMonthlySavings
 
-	// The estimated monthly savings possible as a percentage of monthly cost.
+	// The estimated monthly savings possible as a percentage of monthly cost by
+	// adopting Compute Optimizer recommendations for a given resource.
 	SavingsOpportunityPercentage float64
 
 	noSmithyDocumentSerde
@@ -1240,8 +1330,10 @@ type SavingsOpportunity struct {
 // can create recommendation preferences for Auto Scaling groups only at the
 // resource level by specifying a scope name of ResourceArn and a scope value of
 // the Auto Scaling group Amazon Resource Name (ARN). This will configure the
-// preference for all instances that are part of the specified the Auto Scaling
-// group.
+// preference for all instances that are part of the specified Auto Scaling group.
+// You also cannot create recommendation preferences at the resource level for
+// instances that are part of an Auto Scaling group. You can create recommendation
+// preferences at the resource level only for standalone instances.
 type Scope struct {
 
 	// The name of the scope. The following scopes are possible:
