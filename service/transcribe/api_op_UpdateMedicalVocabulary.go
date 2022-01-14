@@ -34,7 +34,7 @@ func (c *Client) UpdateMedicalVocabulary(ctx context.Context, params *UpdateMedi
 type UpdateMedicalVocabularyInput struct {
 
 	// The language code of the language used for the entries in the updated
-	// vocabulary. US English (en-US) is the only valid language code in Amazon
+	// vocabulary. U.S. English (en-US) is the only valid language code in Amazon
 	// Transcribe Medical.
 	//
 	// This member is required.
@@ -56,7 +56,7 @@ type UpdateMedicalVocabularyInput struct {
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys)
 	// in the Amazon S3 Developer Guide. For more information about custom vocabularies
 	// in Amazon Transcribe Medical, see Medical Custom Vocabularies
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary).
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-med.html).
 	VocabularyFileUri *string
 
 	noSmithyDocumentSerde

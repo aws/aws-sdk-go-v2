@@ -41,8 +41,8 @@ type UpdateEnvironmentInput struct {
 	// (https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-env-variables.html).
 	AirflowConfigurationOptions map[string]string
 
-	// The Apache Airflow version for your environment. For example, v1.10.12. If no
-	// value is specified, defaults to the latest version. Valid values: v1.10.12.
+	// The Apache Airflow version for your environment. If no value is specified,
+	// defaults to the latest version. Valid values: 1.10.12, 2.0.2.
 	AirflowVersion *string
 
 	// The relative path to the DAGs folder on your Amazon S3 bucket. For example,
@@ -56,14 +56,13 @@ type UpdateEnvironmentInput struct {
 	EnvironmentClass *string
 
 	// The Amazon Resource Name (ARN) of the execution role in IAM that allows MWAA to
-	// access AWS resources in your environment. For example,
+	// access Amazon Web Services resources in your environment. For example,
 	// arn:aws:iam::123456789:role/my-execution-role. To learn more, see Amazon MWAA
 	// Execution role
 	// (https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-create-role.html).
 	ExecutionRoleArn *string
 
-	// Defines the Apache Airflow logs to send to CloudWatch Logs: DagProcessingLogs,
-	// SchedulerLogs, TaskLogs, WebserverLogs, WorkerLogs.
+	// The Apache Airflow log types to send to CloudWatch Logs.
 	LoggingConfiguration *types.LoggingConfigurationInput
 
 	// The maximum number of workers that you want to run in your environment. MWAA
@@ -81,8 +80,8 @@ type UpdateEnvironmentInput struct {
 	MinWorkers *int32
 
 	// The VPC networking components used to secure and enable network traffic between
-	// the AWS resources for your environment. To learn more, see About networking on
-	// Amazon MWAA
+	// the Amazon Web Services resources for your environment. To learn more, see About
+	// networking on Amazon MWAA
 	// (https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html).
 	NetworkConfiguration *types.UpdateNetworkConfigurationInput
 
@@ -125,12 +124,10 @@ type UpdateEnvironmentInput struct {
 	// (https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-networking.html).
 	WebserverAccessMode types.WebserverAccessMode
 
-	// The day and time of the week to start weekly maintenance updates of your
-	// environment in the following format: DAY:HH:MM. For example: TUE:03:30. You can
-	// specify a start time in 30 minute increments only. Supported input includes the
-	// following:
-	//
-	// * MON|TUE|WED|THU|FRI|SAT|SUN:([01]\\d|2[0-3]):(00|30)
+	// The day and time of the week in Coordinated Universal Time (UTC) 24-hour
+	// standard time to start weekly maintenance updates of your environment in the
+	// following format: DAY:HH:MM. For example: TUE:03:30. You can specify a start
+	// time in 30 minute increments only.
 	WeeklyMaintenanceWindowStart *string
 
 	noSmithyDocumentSerde

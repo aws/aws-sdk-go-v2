@@ -1793,6 +1793,72 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.iotwireless#DeleteQueuedMessages": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#DeleteQueuedMessagesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#DeleteQueuedMessagesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p> The operation to delete queued messages. </p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/wireless-devices/{Id}/data",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#DeleteQueuedMessagesRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.iotwireless#WirelessDeviceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Id of a given wireless device which messages will be deleted </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MessageId": {
+                    "target": "com.amazonaws.iotwireless#MessageId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>if messageID==\"*\", the queue for a particular wireless deviceId will be purged, otherwise, the specific message with messageId will be deleted </p>",
+                        "smithy.api#httpQuery": "messageId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WirelessDeviceType": {
+                    "target": "com.amazonaws.iotwireless#WirelessDeviceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The wireless device type, it is either Sidewalk or LoRaWAN. </p>",
+                        "smithy.api#httpQuery": "WirelessDeviceType"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#DeleteQueuedMessagesResponse": {
+            "type": "structure",
+            "members": {}
+        },
         "com.amazonaws.iotwireless#DeleteServiceProfile": {
             "type": "operation",
             "input": {
@@ -2710,6 +2776,41 @@
             "type": "double",
             "traits": {
                 "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.iotwireless#DownlinkQueueMessage": {
+            "type": "structure",
+            "members": {
+                "MessageId": {
+                    "target": "com.amazonaws.iotwireless#MessageId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The messageId allocated by IoT Wireless for tracing purpose</p>"
+                    }
+                },
+                "TransmitMode": {
+                    "target": "com.amazonaws.iotwireless#TransmitMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The transmit mode to use to send data to the wireless device. Can be: <code>0</code> for UM (unacknowledge mode) or <code>1</code> for AM (acknowledge mode).</p>"
+                    }
+                },
+                "ReceivedAt": {
+                    "target": "com.amazonaws.iotwireless#ISODateTimeString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp that Iot Wireless received the message.</p>"
+                    }
+                },
+                "LoRaWAN": {
+                    "target": "com.amazonaws.iotwireless#LoRaWANSendDataToDevice"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The message in downlink queue.</p>"
+            }
+        },
+        "com.amazonaws.iotwireless#DownlinkQueueMessagesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotwireless#DownlinkQueueMessage"
             }
         },
         "com.amazonaws.iotwireless#DrMax": {
@@ -5038,6 +5139,96 @@
                     "target": "com.amazonaws.iotwireless#SidewalkAccountList",
                     "traits": {
                         "smithy.api#documentation": "<p>The Sidewalk account credentials.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#ListQueuedMessages": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#ListQueuedMessagesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#ListQueuedMessagesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>The operation to list queued messages. </p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/wireless-devices/{Id}/data",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#ListQueuedMessagesRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.iotwireless#WirelessDeviceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Id of a given wireless device which the downlink packets are targeted </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.iotwireless#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>To retrieve the next set of results, the <code>nextToken</code> value from a previous response; otherwise <b>null</b> to receive the first set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.iotwireless#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in this operation.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "WirelessDeviceType": {
+                    "target": "com.amazonaws.iotwireless#WirelessDeviceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The wireless device type, it is either Sidewalk or LoRaWAN.</p>",
+                        "smithy.api#httpQuery": "WirelessDeviceType"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#ListQueuedMessagesResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.iotwireless#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>To retrieve the next set of results, the <code>nextToken</code> value from a previous response; otherwise <b>null</b> to receive the first set of results.</p>"
+                    }
+                },
+                "DownlinkQueueMessagesList": {
+                    "target": "com.amazonaws.iotwireless#DownlinkQueueMessagesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The messages in downlink queue.</p>"
                     }
                 }
             }
@@ -9268,7 +9459,7 @@
                     "name": "iotwireless"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>AWS IoT Wireless API documentation</p>",
+                "smithy.api#documentation": "<p>AWS IoT Wireless provides bi-directional communication between internet-connected wireless\n\t        devices and the AWS Cloud. To onboard both LoRaWAN and Sidewalk devices to AWS IoT, use the \n\t        IoT Wireless API. These wireless devices use the Low Power Wide Area Networking (LPWAN) \n\t        communication protocol to communicate with AWS IoT.</p>\n\t        <p>Using the API, you can perform create, read, update, and delete operations for your wireless\n\t        devices, gateways, destinations, and profiles. After onboarding your devices, you \n\t        can use the API operations to set log levels and monitor your devices with CloudWatch.</p>\n\t        <p>You can also use the API operations to create multicast groups and schedule a multicast session for\n\t        sending a downlink message to devices in the group. By using Firmware Updates Over-The-Air\n\t        (FUOTA) API operations, you can create a FUOTA task and schedule a session to update the firmware\n\t        of individual devices or an entire group of devices in a multicast group.</p>",
                 "smithy.api#title": "AWS IoT Wireless"
             },
             "version": "2020-11-22",
@@ -9335,6 +9526,9 @@
                 },
                 {
                     "target": "com.amazonaws.iotwireless#DeleteMulticastGroup"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#DeleteQueuedMessages"
                 },
                 {
                     "target": "com.amazonaws.iotwireless#DeleteServiceProfile"
@@ -9449,6 +9643,9 @@
                 },
                 {
                     "target": "com.amazonaws.iotwireless#ListPartnerAccounts"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ListQueuedMessages"
                 },
                 {
                     "target": "com.amazonaws.iotwireless#ListServiceProfiles"

@@ -45,7 +45,7 @@ type ListLaunchProfilesInput struct {
 	PrincipalId *string
 
 	// Filter this request to launch profiles in any of the given states.
-	States []string
+	States []types.LaunchProfileState
 
 	noSmithyDocumentSerde
 }

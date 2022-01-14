@@ -29,6 +29,20 @@
         ]
     },
     "shapes": {
+        "com.amazonaws.lexmodelsv2#AdvancedRecognitionSetting": {
+            "type": "structure",
+            "members": {
+                "audioRecognitionStrategy": {
+                    "target": "com.amazonaws.lexmodelsv2#AudioRecognitionStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enables using the slot values as a custom vocabulary for recognizing user utterances.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides settings that enable advanced recognition settings for slot values.</p>"
+            }
+        },
         "com.amazonaws.lexmodelsv2#AggregatedUtterancesFilter": {
             "type": "structure",
             "members": {
@@ -325,6 +339,17 @@
                     "min": 1,
                     "max": 1
                 }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AudioRecognitionStrategy": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "UseSlotValuesAsCustomVocabulary",
+                        "name": "UseSlotValuesAsCustomVocabulary"
+                    }
+                ]
             }
         },
         "com.amazonaws.lexmodelsv2#Boolean": {
@@ -3264,6 +3289,91 @@
                 }
             }
         },
+        "com.amazonaws.lexmodelsv2#CustomVocabularyExportSpecification": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the bot that contains the custom vocabulary to export.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#BotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the bot that contains the custom vocabulary to export.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locale of the bot that contains the custom vocabulary to export.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides the parameters required for exporting a custom vocabulary.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#CustomVocabularyImportSpecification": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the bot to import the custom vocabulary to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#DraftBotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the bot to import the custom vocabulary to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the local to import the custom vocabulary to. The value must\n      be <code>en_GB</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides the parameters required for importing a custom vocabulary.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#CustomVocabularyStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Ready",
+                        "name": "Ready"
+                    },
+                    {
+                        "value": "Deleting",
+                        "name": "Deleting"
+                    },
+                    {
+                        "value": "Exporting",
+                        "name": "Exporting"
+                    },
+                    {
+                        "value": "Importing",
+                        "name": "Importing"
+                    },
+                    {
+                        "value": "Creating",
+                        "name": "Creating"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.lexmodelsv2#DataPrivacy": {
             "type": "structure",
             "members": {
@@ -3642,6 +3752,101 @@
                     "target": "com.amazonaws.lexmodelsv2#BotStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>The current status of the bot. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DeleteCustomVocabulary": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#DeleteCustomVocabularyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#DeleteCustomVocabularyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#PreconditionFailedException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes a custom vocabulary from the specified locale\n      in the specified bot.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/customvocabulary",
+                    "code": 202
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DeleteCustomVocabularyRequest": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot to remove the custom\n      vocabulary from.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#DraftBotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the bot to remove the custom vocabulary\n      from.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locale identifier for the locale that contains the\n      custom vocabulary to remove.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DeleteCustomVocabularyResponse": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the bot that the custom vocabulary\n      was removed from.</p>"
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#DraftBotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the bot that the custom vocabulary\n         was removed from.</p>"
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locale identifier for the locale that the\n         custom vocabulary was removed from.</p>"
+                    }
+                },
+                "customVocabularyStatus": {
+                    "target": "com.amazonaws.lexmodelsv2#CustomVocabularyStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of removing the custom vocabulary.</p>"
                     }
                 }
             }
@@ -5153,6 +5358,110 @@
                 }
             }
         },
+        "com.amazonaws.lexmodelsv2#DescribeCustomVocabularyMetadata": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#DescribeCustomVocabularyMetadataRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#DescribeCustomVocabularyMetadataResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Provides metadata information about a custom vocabulary.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/customvocabulary/DEFAULT/metadata",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DescribeCustomVocabularyMetadataRequest": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot that contains the custom vocabulary.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#BotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The bot version of the bot to return metadata for.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locale to return the custom vocabulary information for.\n      The locale must be <code>en_GB</code>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DescribeCustomVocabularyMetadataResponse": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the bot that contains the custom vocabulary.</p>"
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#BotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the bot that contains the custom vocabulary to describe.</p>"
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locale that contains the custom vocabulary to describe.</p>"
+                    }
+                },
+                "customVocabularyStatus": {
+                    "target": "com.amazonaws.lexmodelsv2#CustomVocabularyStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the custom vocabulary. If the status is \n      <code>Ready</code> the custom vocabulary is ready to use.</p>"
+                    }
+                },
+                "creationDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the custom vocabulary was created.</p>"
+                    }
+                },
+                "lastUpdatedDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the custom vocabulary was last updated.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.lexmodelsv2#DescribeExport": {
             "type": "operation",
             "input": {
@@ -5253,7 +5562,7 @@
                 "fileFormat": {
                     "target": "com.amazonaws.lexmodelsv2#ImportExportFileFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>The file format used in the files that describe the bot or bot\n         locale.</p>"
+                        "smithy.api#documentation": "<p>The file format used in the files that describe the resource.\n      </p>"
                     }
                 },
                 "exportStatus": {
@@ -5382,7 +5691,7 @@
                 "resourceSpecification": {
                     "target": "com.amazonaws.lexmodelsv2#ImportResourceSpecification",
                     "traits": {
-                        "smithy.api#documentation": "<p>The specifications of the imported bot or bot locale.</p>"
+                        "smithy.api#documentation": "<p>The specifications of the imported bot, bot locale, or custom\n         vocabulary.</p>"
                     }
                 },
                 "importedResourceId": {
@@ -6075,7 +6384,7 @@
                 "values": {
                     "target": "com.amazonaws.lexmodelsv2#FilterValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>The values to use to filter the response.</p>",
+                        "smithy.api#documentation": "<p>The values to use to filter the response. The values must be\n            <code>Bot</code>, <code>BotLocale</code>, or\n            <code>CustomVocabulary</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6142,6 +6451,12 @@
                     "target": "com.amazonaws.lexmodelsv2#BotLocaleExportSpecification",
                     "traits": {
                         "smithy.api#documentation": "<p>Parameters for exporting a bot locale.</p>"
+                    }
+                },
+                "customVocabularyExportSpecification": {
+                    "target": "com.amazonaws.lexmodelsv2#CustomVocabularyExportSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameters required to export a custom vocabulary.</p>"
                     }
                 }
             },
@@ -6554,6 +6869,10 @@
                     {
                         "value": "LexJson",
                         "name": "LexJson"
+                    },
+                    {
+                        "value": "TSV",
+                        "name": "TSV"
                     }
                 ]
             }
@@ -6581,7 +6900,7 @@
                 "values": {
                     "target": "com.amazonaws.lexmodelsv2#FilterValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>The values to use to filter the response.</p>",
+                        "smithy.api#documentation": "<p>The values to use to filter the response. The values must be\n            <code>Bot</code>, <code>BotLocale</code>, or\n            <code>CustomVocabulary</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6649,10 +6968,32 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Parameters for importing a bot locale.</p>"
                     }
+                },
+                "customVocabularyImportSpecification": {
+                    "target": "com.amazonaws.lexmodelsv2#CustomVocabularyImportSpecification"
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Provides information about the bot or bot locale that you want to\n         import. You can specify the <code>botImportSpecification</code> or the\n            <code>botLocaleImportSpecification</code>, but not both.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ImportResourceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Bot",
+                        "name": "Bot"
+                    },
+                    {
+                        "value": "BotLocale",
+                        "name": "BotLocale"
+                    },
+                    {
+                        "value": "CustomVocabulary",
+                        "name": "CustomVocabulary"
+                    }
+                ]
             }
         },
         "com.amazonaws.lexmodelsv2#ImportSortAttribute": {
@@ -6754,6 +7095,12 @@
                     "target": "com.amazonaws.lexmodelsv2#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time that the import was last updated.</p>"
+                    }
+                },
+                "importedResourceType": {
+                    "target": "com.amazonaws.lexmodelsv2#ImportResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of resource that was imported.</p>"
                     }
                 }
             },
@@ -7190,6 +7537,9 @@
                     "target": "com.amazonaws.lexmodelsv2#DeleteBotVersion"
                 },
                 {
+                    "target": "com.amazonaws.lexmodelsv2#DeleteCustomVocabulary"
+                },
+                {
                     "target": "com.amazonaws.lexmodelsv2#DeleteExport"
                 },
                 {
@@ -7227,6 +7577,9 @@
                 },
                 {
                     "target": "com.amazonaws.lexmodelsv2#DescribeBotVersion"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#DescribeCustomVocabularyMetadata"
                 },
                 {
                     "target": "com.amazonaws.lexmodelsv2#DescribeExport"
@@ -7969,7 +8322,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.lexmodelsv2#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the response from the <code>ListBots</code> operation contains\n         more results than specified in the <code>maxResults</code> parameter, a\n         token is returned in the response. Use that token in the\n            <code>nextToken</code> parameter to return the next page of\n         results.</p>"
+                        "smithy.api#documentation": "<p>If the response from the <code>ListBots</code> operation contains\n         more results than specified in the <code>maxResults</code> parameter, a\n         token is returned in the response. </p>\n         <p>Use the returned token in the <code>nextToken</code> parameter of a\n            <code>ListBots</code> request to return the next page of results.\n         For a complete set of results, call the <code>ListBots</code> operation\n         until the <code>nextToken</code> returned in the response is\n         null.</p>"
                     }
                 }
             }
@@ -8191,7 +8544,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the exports for a bot or bot locale. Exports are kept in the\n         list for 7 days.</p>",
+                "smithy.api#documentation": "<p>Lists the exports for a bot, bot locale, or custom vocabulary.\n         Exports are kept in the list for 7 days.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/exports",
@@ -8240,7 +8593,13 @@
                 "nextToken": {
                     "target": "com.amazonaws.lexmodelsv2#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the response from the <code>ListExports</code> operation contains\n         more results that specified in the <code>maxResults</code> parameter, a\n         token is returned in the response. Use that token in the\n            <code>nextToken</code> parameter to return the next page of\n         results.</p>"
+                        "smithy.api#documentation": "<p>If the response from the <code>ListExports</code> operation contains\n         more results that specified in the <code>maxResults</code> parameter, a\n         token is returned in the response. </p>\n         <p>Use the returned token in the <code>nextToken</code> parameter of a\n            <code>ListExports</code> request to return the next page of results.\n         For a complete set of results, call the <code>ListExports</code>\n         operation until the <code>nextToken</code> returned in the response is\n         null.</p>"
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the resources that should be exported. If you\n      don't specify a resource type in the <code>filters</code> parameter,\n      both bot locales and custom vocabularies are exported.</p>"
                     }
                 }
             }
@@ -8271,6 +8630,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A token that indicates whether there are more results to return in a\n         response to the <code>ListExports</code> operation. If the\n            <code>nextToken</code> field is present, you send the contents as\n         the <code>nextToken</code> parameter of a <code>ListExports</code>\n         operation request to get the next page of results.</p>"
                     }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locale specified in the request.</p>"
+                    }
                 }
             }
         },
@@ -8294,7 +8659,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the imports for a bot or bot locale. Imports are kept in the\n         list for 7 days.</p>",
+                "smithy.api#documentation": "<p>Lists the imports for a bot, bot locale, or custom vocabulary.\n         Imports are kept in the list for 7 days.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/imports",
@@ -8343,7 +8708,13 @@
                 "nextToken": {
                     "target": "com.amazonaws.lexmodelsv2#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the response from the <code>ListImports</code> operation contains\n         more results than specified in the <code>maxResults</code> parameter, a\n         token is returned in the response. Use that token in the\n            <code>nextToken</code> parameter to return the next page of\n         results.</p>"
+                        "smithy.api#documentation": "<p>If the response from the <code>ListImports</code> operation contains\n         more results than specified in the <code>maxResults</code> parameter, a\n         token is returned in the response.</p>\n         <p>Use the returned token in the <code>nextToken</code> parameter of a\n            <code>ListImports</code> request to return the next page of results.\n         For a complete set of results, call the <code>ListImports</code>\n         operation until the <code>nextToken</code> returned in the response is\n         null.</p>"
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the locale that should be present in the list. If you\n         don't specify a resource type in the <code>filters</code> parameter,\n         the list contains both bot locales and custom vocabularies.</p>"
                     }
                 }
             }
@@ -8373,6 +8744,12 @@
                     "target": "com.amazonaws.lexmodelsv2#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>A token that indicates whether there are more results to return in a\n         response to the <code>ListImports</code> operation. If the\n            <code>nextToken</code> field is present, you send the contents as\n         the <code>nextToken</code> parameter of a <code>ListImports</code>\n         operation request to get the next page of results.</p>"
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locale specified in the request.</p>"
                     }
                 }
             }
@@ -8461,7 +8838,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.lexmodelsv2#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the response from the <code>ListIntents</code> operation contains\n         more results than specified in the <code>maxResults</code> parameter, a\n         token is returned in the response. Use that token in the\n            <code>nextToken</code> parameter to return the next page of\n         results.</p>"
+                        "smithy.api#documentation": "<p>If the response from the <code>ListIntents</code> operation contains\n         more results than specified in the <code>maxResults</code> parameter, a\n         token is returned in the response.</p>\n         <p>Use the returned token in the <code>nextToken</code> parameter of a\n            <code>ListIntents</code> request to return the next page of results.\n         For a complete set of results, call the <code>ListIntents</code>\n         operation until the <code>nextToken</code> returned in the response is\n         null.</p>"
                     }
                 }
             }
@@ -10486,6 +10863,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A regular expression used to validate the value of a slot.</p>"
                     }
+                },
+                "advancedRecognitionSetting": {
+                    "target": "com.amazonaws.lexmodelsv2#AdvancedRecognitionSetting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides settings that enable advanced recognition settings for slot\n         values.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10671,7 +11054,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts importing a bot or bot locale from a zip archive that you\n         uploaded to an S3 bucket.</p>",
+                "smithy.api#documentation": "<p>Starts importing a bot, bot locale, or custom vocabulary from a zip\n         archive that you uploaded to an S3 bucket.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/imports",
@@ -10692,7 +11075,7 @@
                 "resourceSpecification": {
                     "target": "com.amazonaws.lexmodelsv2#ImportResourceSpecification",
                     "traits": {
-                        "smithy.api#documentation": "<p>Parameters for creating the bot or bot locale.</p>",
+                        "smithy.api#documentation": "<p>Parameters for creating the bot, bot locale or custom\n         vocabulary.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -10706,7 +11089,7 @@
                 "filePassword": {
                     "target": "com.amazonaws.lexmodelsv2#ImportExportFilePassword",
                     "traits": {
-                        "smithy.api#documentation": "<p>The password used to encrypt the zip archive that contains the bot\n         or bot locale definition. You should always encrypt the zip archive to\n         protect it during transit between your site and Amazon Lex.</p>"
+                        "smithy.api#documentation": "<p>The password used to encrypt the zip archive that contains the\n         resource definition. You should always encrypt the zip archive to\n         protect it during transit between your site and Amazon Lex.</p>"
                     }
                 }
             }
@@ -10723,7 +11106,7 @@
                 "resourceSpecification": {
                     "target": "com.amazonaws.lexmodelsv2#ImportResourceSpecification",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parameters used when importing the bot or bot locale.</p>"
+                        "smithy.api#documentation": "<p>The parameters used when importing the resource.</p>"
                     }
                 },
                 "mergeStrategy": {
@@ -10735,7 +11118,7 @@
                 "importStatus": {
                     "target": "com.amazonaws.lexmodelsv2#ImportStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current status of the import. When the status is\n            <code>Complete</code> the bot or bot alias is ready to use.</p>"
+                        "smithy.api#documentation": "<p>The current status of the import. When the status is\n            <code>Complete</code> the bot, bot alias, or custom vocabulary is\n         ready to use.</p>"
                     }
                 },
                 "creationDateTime": {
@@ -11798,7 +12181,7 @@
                 "fileFormat": {
                     "target": "com.amazonaws.lexmodelsv2#ImportExportFileFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>The file format used for the files that define the resource.</p>"
+                        "smithy.api#documentation": "<p>The file format used for the files that define the resource. The\n            <code>TSV</code> format is required to export a custom vocabulary\n         only; otherwise use <code>LexJson</code> format.</p>"
                     }
                 },
                 "exportStatus": {

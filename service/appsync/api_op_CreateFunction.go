@@ -54,6 +54,9 @@ type CreateFunctionInput struct {
 	// The Function description.
 	Description *string
 
+	// The maximum batching size for a resolver.
+	MaxBatchSize int32
+
 	// The Function request mapping template. Functions support only the 2018-05-29
 	// version of the request mapping template.
 	RequestMappingTemplate *string

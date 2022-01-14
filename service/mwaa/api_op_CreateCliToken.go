@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create a CLI token to use Airflow CLI.
+// Creates a CLI token for the Airflow CLI. To learn more, see Creating an Apache
+// Airflow CLI token
+// (https://docs.aws.amazon.com/mwaa/latest/userguide/call-mwaa-apis-cli.html).
 func (c *Client) CreateCliToken(ctx context.Context, params *CreateCliTokenInput, optFns ...func(*Options)) (*CreateCliTokenOutput, error) {
 	if params == nil {
 		params = &CreateCliTokenInput{}
@@ -29,7 +31,7 @@ func (c *Client) CreateCliToken(ctx context.Context, params *CreateCliTokenInput
 
 type CreateCliTokenInput struct {
 
-	// Create a CLI token request for a MWAA environment.
+	// The name of the Amazon MWAA environment. For example, MyMWAAEnvironment.
 	//
 	// This member is required.
 	Name *string
@@ -39,10 +41,10 @@ type CreateCliTokenInput struct {
 
 type CreateCliTokenOutput struct {
 
-	// Create an Airflow CLI login token response for the provided JWT token.
+	// An Airflow CLI login token.
 	CliToken *string
 
-	// Create an Airflow CLI login token response for the provided webserver hostname.
+	// The Airflow web server hostname for the environment.
 	WebServerHostname *string
 
 	// Metadata pertaining to the operation's result.

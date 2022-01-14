@@ -42,10 +42,10 @@ type ListStudioComponentsInput struct {
 	NextToken *string
 
 	// Filters the request to studio components that are in one of the given states.
-	States []string
+	States []types.StudioComponentState
 
 	// Filters the request to studio components that are of one of the given types.
-	Types []string
+	Types []types.StudioComponentType
 
 	noSmithyDocumentSerde
 }

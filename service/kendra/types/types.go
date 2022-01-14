@@ -881,7 +881,9 @@ type Document struct {
 	noSmithyDocumentSerde
 }
 
-// A custom attribute value assigned to a document.
+// A custom attribute value assigned to a document. For more information on how to
+// create custom document attributes, see Custom Attributes
+// (https://docs.aws.amazon.com/kendra/latest/dg/custom-attributes.html).
 type DocumentAttribute struct {
 
 	// The identifier for the attribute.
@@ -970,9 +972,9 @@ type DocumentAttributeTarget struct {
 type DocumentAttributeValue struct {
 
 	// A date expressed as an ISO 8601 string. It is important for the time zone to be
-	// included in the ISO 8601 date-time format. For example, 20120325T123010+01:00 is
-	// the ISO 8601 date-time format for March 25th 2012 at 12:30PM (plus 10 seconds)
-	// in Central European Time.
+	// included in the ISO 8601 date-time format. For example,
+	// 2012-03-25T12:30:10+01:00 is the ISO 8601 date-time format for March 25th 2012
+	// at 12:30PM (plus 10 seconds) in Central European Time.
 	DateValue *time.Time
 
 	// A long integer value.
@@ -1478,12 +1480,12 @@ type Highlight struct {
 // to alter document metadata and content when ingesting documents into Amazon
 // Kendra. You can configure your Lambda function using
 // PreExtractionHookConfiguration
-// (https://docs.aws.amazon.com/kendra/latest/dg/API_PreExtractionHookConfiguration.html)
+// (https://docs.aws.amazon.com/kendra/latest/dg/API_CustomDocumentEnrichmentConfiguration.html)
 // if you want to apply advanced alterations on the original or raw documents. If
 // you want to apply advanced alterations on the Amazon Kendra structured
 // documents, you must configure your Lambda function using
 // PostExtractionHookConfiguration
-// (https://docs.aws.amazon.com/kendra/latest/dg/API_PostExtractionHookConfiguration.html).
+// (https://docs.aws.amazon.com/kendra/latest/dg/API_CustomDocumentEnrichmentConfiguration.html).
 // You can only invoke one Lambda function. However, this function can invoke other
 // functions it requires. For more information, see Customizing document metadata
 // during the ingestion process
@@ -2794,6 +2796,10 @@ type UserContext struct {
 // must also grant the required permissions to use Amazon Web Services SSO with
 // Amazon Kendra. For more information, see IAM roles for Amazon Web Services SSO
 // (https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html#iam-roles-aws-sso).
+// Amazon Kendra currently does not support using UserGroupResolutionConfiguration
+// with an Amazon Web Services organization member account for your Amazon Web
+// Services SSO identify source. You must create your index in the parent account
+// for the organization in order to use UserGroupResolutionConfiguration.
 type UserGroupResolutionConfiguration struct {
 
 	// The identity store provider (mode) you want to use to fetch access levels of
@@ -2831,6 +2837,18 @@ type UserTokenConfiguration struct {
 
 	// Information about the JWT token type configuration.
 	JwtTokenTypeConfiguration *JwtTokenTypeConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The warning code and message that explains a problem with a query.
+type Warning struct {
+
+	// The code used to show the type of warning for the query.
+	Code WarningCode
+
+	// The message that explains the problem with the query.
+	Message *string
 
 	noSmithyDocumentSerde
 }

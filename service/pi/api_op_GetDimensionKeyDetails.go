@@ -13,7 +13,7 @@ import (
 
 // Get the attributes of the specified dimension group for a DB instance or data
 // source. For example, if you specify a SQL ID, GetDimensionKeyDetails retrieves
-// the full text of the dimension db.sql.statement associated with this ID. This
+// the full text of the dimension db.sql.statementcassociated with this ID. This
 // operation is useful because GetResourceMetrics and DescribeDimensionKeys don't
 // support retrieval of large SQL statement text.
 func (c *Client) GetDimensionKeyDetails(ctx context.Context, params *GetDimensionKeyDetailsInput, optFns ...func(*Options)) (*GetDimensionKeyDetailsOutput, error) {
@@ -46,15 +46,15 @@ type GetDimensionKeyDetailsInput struct {
 	GroupIdentifier *string
 
 	// The ID for a data source from which to gather dimension data. This ID must be
-	// immutable and unique within an AWS Region. When a DB instance is the data
-	// source, specify its DbiResourceId value. For example, specify
+	// immutable and unique within an Amazon Web Services Region. When a DB instance is
+	// the data source, specify its DbiResourceId value. For example, specify
 	// db-ABCDEFGHIJKLMNOPQRSTU1VW2X.
 	//
 	// This member is required.
 	Identifier *string
 
-	// The AWS service for which Performance Insights returns data. The only valid
-	// value is RDS.
+	// The Amazon Web Services service for which Performance Insights returns data. The
+	// only valid value is RDS.
 	//
 	// This member is required.
 	ServiceType types.ServiceType

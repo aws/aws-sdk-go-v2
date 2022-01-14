@@ -18463,6 +18463,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether a journey should be refreshed on segment update.</p>"
                     }
+                },
+                "JourneyChannelSettings": {
+                    "target": "com.amazonaws.pinpoint#JourneyChannelSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The channel-specific configurations for the journey.</p>"
+                    }
                 }
             },
             "traits": {

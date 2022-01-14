@@ -598,7 +598,7 @@ type Timer struct {
 	// This member is required.
 	Name *string
 
-	// The number of seconds which have elapsed on the timer.
+	// The expiration time for the timer.
 	//
 	// This member is required.
 	Timestamp *time.Time

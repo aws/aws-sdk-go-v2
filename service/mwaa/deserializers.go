@@ -2080,6 +2080,15 @@ func awsRestjson1_deserializeDocumentLastUpdate(v **types.LastUpdate, value inte
 				return err
 			}
 
+		case "Source":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UpdateSource to be of type string, got %T instead", value)
+				}
+				sv.Source = ptr.String(jtv)
+			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)

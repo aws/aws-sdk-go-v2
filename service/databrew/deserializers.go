@@ -11493,6 +11493,15 @@ func awsRestjson1_deserializeDocumentS3Location(v **types.S3Location, value inte
 				sv.Bucket = ptr.String(jtv)
 			}
 
+		case "BucketOwner":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BucketOwner to be of type string, got %T instead", value)
+				}
+				sv.BucketOwner = ptr.String(jtv)
+			}
+
 		case "Key":
 			if value != nil {
 				jtv, ok := value.(string)

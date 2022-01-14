@@ -13,6 +13,7 @@ import (
 )
 
 // Creates an new set of frequently asked question (FAQ) questions and answers.
+// Adding FAQs to an index is an asynchronous operation.
 func (c *Client) CreateFaq(ctx context.Context, params *CreateFaqInput, optFns ...func(*Options)) (*CreateFaqOutput, error) {
 	if params == nil {
 		params = &CreateFaqInput{}

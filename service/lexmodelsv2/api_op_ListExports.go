@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the exports for a bot or bot locale. Exports are kept in the list for 7
-// days.
+// Lists the exports for a bot, bot locale, or custom vocabulary. Exports are kept
+// in the list for 7 days.
 func (c *Client) ListExports(ctx context.Context, params *ListExportsInput, optFns ...func(*Options)) (*ListExportsOutput, error) {
 	if params == nil {
 		params = &ListExportsInput{}
@@ -42,6 +42,11 @@ type ListExportsInput struct {
 	// filter and one string to filter on.
 	Filters []types.ExportFilter
 
+	// Specifies the resources that should be exported. If you don't specify a resource
+	// type in the filters parameter, both bot locales and custom vocabularies are
+	// exported.
+	LocaleId *string
+
 	// The maximum number of exports to return in each page of results. If there are
 	// fewer results than the max page size, only the actual number of results are
 	// returned.
@@ -49,7 +54,9 @@ type ListExportsInput struct {
 
 	// If the response from the ListExports operation contains more results that
 	// specified in the maxResults parameter, a token is returned in the response. Use
-	// that token in the nextToken parameter to return the next page of results.
+	// the returned token in the nextToken parameter of a ListExports request to return
+	// the next page of results. For a complete set of results, call the ListExports
+	// operation until the nextToken returned in the response is null.
 	NextToken *string
 
 	// Determines the field that the list of exports is sorted by. You can sort by the
@@ -72,6 +79,9 @@ type ListExportsOutput struct {
 	// there are more exports available, the nextToken field contains a token to get
 	// the next page of results.
 	ExportSummaries []types.ExportSummary
+
+	// The locale specified in the request.
+	LocaleId *string
 
 	// A token that indicates whether there are more results to return in a response to
 	// the ListExports operation. If the nextToken field is present, you send the

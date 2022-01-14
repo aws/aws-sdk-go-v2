@@ -120,8 +120,8 @@ type DatabaseInputDefinition struct {
 	// the input for DataBrew projects and jobs.
 	QueryString *string
 
-	// Represents an Amazon S3 location (bucket name and object key) where DataBrew can
-	// read input data, or write output from a job.
+	// Represents an Amazon S3 location (bucket name, bucket owner, and object key)
+	// where DataBrew can read input data, or write output from a job.
 	TempDirectory *S3Location
 
 	noSmithyDocumentSerde
@@ -978,7 +978,8 @@ type Rule struct {
 	// CheckExpression starts with a column reference, then ColumnSelectors in the rule
 	// should be null. If ColumnSelectors has been defined, then there should be no
 	// columnn reference in the left side of a condition, for example, is_between :val1
-	// and :val2.
+	// and :val2. For more information, see Available checks
+	// (https://docs.aws.amazon.com/databrew/latest/dg/profile.data-quality-available-checks.html)
 	//
 	// This member is required.
 	CheckExpression *string
@@ -1056,14 +1057,17 @@ type RulesetItem struct {
 	noSmithyDocumentSerde
 }
 
-// Represents an Amazon S3 location (bucket name and object key) where DataBrew can
-// read input data, or write output from a job.
+// Represents an Amazon S3 location (bucket name, bucket owner, and object key)
+// where DataBrew can read input data, or write output from a job.
 type S3Location struct {
 
 	// The Amazon S3 bucket name.
 	//
 	// This member is required.
 	Bucket *string
+
+	// The Amazon Web Services account ID of the bucket owner.
+	BucketOwner *string
 
 	// The unique name of the object in the bucket.
 	Key *string

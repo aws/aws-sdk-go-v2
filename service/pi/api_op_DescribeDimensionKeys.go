@@ -4,6 +4,7 @@ package pi
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/pi/types"
@@ -49,10 +50,10 @@ type DescribeDimensionKeysInput struct {
 	// This member is required.
 	GroupBy *types.DimensionGroup
 
-	// An immutable, AWS Region-unique identifier for a data source. Performance
-	// Insights gathers metrics from this data source. To use an Amazon RDS instance as
-	// a data source, you specify its DbiResourceId value. For example, specify
-	// db-FAIHNTYBKTGAUSUZQYPDS2GW4A
+	// An immutable, Amazon Web Services Region-unique identifier for a data source.
+	// Performance Insights gathers metrics from this data source. To use an Amazon RDS
+	// instance as a data source, you specify its DbiResourceId value. For example,
+	// specify db-FAIHNTYBKTGAUSUZQYPDS2GW4A.
 	//
 	// This member is required.
 	Identifier *string
@@ -77,8 +78,8 @@ type DescribeDimensionKeysInput struct {
 	// This member is required.
 	Metric *string
 
-	// The AWS service for which Performance Insights will return metrics. The only
-	// valid value for ServiceType is RDS.
+	// The Amazon Web Services service for which Performance Insights will return
+	// metrics. The only valid value for ServiceType is RDS.
 	//
 	// This member is required.
 	ServiceType types.ServiceType
@@ -90,6 +91,12 @@ type DescribeDimensionKeysInput struct {
 	//
 	// This member is required.
 	StartTime *time.Time
+
+	// Additional metrics for the top N dimension keys. If the specified dimension
+	// group in the GroupBy parameter is db.sql_tokenized, you can specify per-SQL
+	// metrics to get the values for the top N SQL digests. The response syntax is
+	// "AdditionalMetrics" : { "string" : "string" }.
+	AdditionalMetrics []string
 
 	// One or more filters to apply in the request. Restrictions:
 	//
@@ -152,9 +159,9 @@ type DescribeDimensionKeysOutput struct {
 	// The dimension keys that were requested.
 	Keys []types.DimensionKeyDescription
 
-	// An optional pagination token provided by a previous request. If this parameter
-	// is specified, the response includes only records beyond the token, up to the
-	// value specified by MaxRecords.
+	// A pagination token that indicates the response didn’t return all available
+	// records because MaxRecords was specified in the previous request. To get the
+	// remaining records, specify NextToken in a separate request with this value.
 	NextToken *string
 
 	// If PartitionBy was present in the request, PartitionKeys contains the breakdown
@@ -228,6 +235,99 @@ func (c *Client) addOperationDescribeDimensionKeysMiddlewares(stack *middleware.
 		return err
 	}
 	return nil
+}
+
+// DescribeDimensionKeysAPIClient is a client that implements the
+// DescribeDimensionKeys operation.
+type DescribeDimensionKeysAPIClient interface {
+	DescribeDimensionKeys(context.Context, *DescribeDimensionKeysInput, ...func(*Options)) (*DescribeDimensionKeysOutput, error)
+}
+
+var _ DescribeDimensionKeysAPIClient = (*Client)(nil)
+
+// DescribeDimensionKeysPaginatorOptions is the paginator options for
+// DescribeDimensionKeys
+type DescribeDimensionKeysPaginatorOptions struct {
+	// The maximum number of items to return in the response. If more items exist than
+	// the specified MaxRecords value, a pagination token is included in the response
+	// so that the remaining results can be retrieved.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeDimensionKeysPaginator is a paginator for DescribeDimensionKeys
+type DescribeDimensionKeysPaginator struct {
+	options   DescribeDimensionKeysPaginatorOptions
+	client    DescribeDimensionKeysAPIClient
+	params    *DescribeDimensionKeysInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeDimensionKeysPaginator returns a new DescribeDimensionKeysPaginator
+func NewDescribeDimensionKeysPaginator(client DescribeDimensionKeysAPIClient, params *DescribeDimensionKeysInput, optFns ...func(*DescribeDimensionKeysPaginatorOptions)) *DescribeDimensionKeysPaginator {
+	if params == nil {
+		params = &DescribeDimensionKeysInput{}
+	}
+
+	options := DescribeDimensionKeysPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeDimensionKeysPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeDimensionKeysPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next DescribeDimensionKeys page.
+func (p *DescribeDimensionKeysPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeDimensionKeysOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.DescribeDimensionKeys(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeDimensionKeys(region string) *awsmiddleware.RegisterServiceMetadata {

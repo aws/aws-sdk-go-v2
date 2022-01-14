@@ -4,6 +4,7 @@ package pi
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/pi/types"
@@ -42,9 +43,9 @@ type GetResourceMetricsInput struct {
 	// This member is required.
 	EndTime *time.Time
 
-	// An immutable, AWS Region-unique identifier for a data source. Performance
-	// Insights gathers metrics from this data source. To use a DB instance as a data
-	// source, specify its DbiResourceId value. For example, specify
+	// An immutable, Amazon Web Services Region-unique identifier for a data source.
+	// Performance Insights gathers metrics from this data source. To use a DB instance
+	// as a data source, specify its DbiResourceId value. For example, specify
 	// db-FAIHNTYBKTGAUSUZQYPDS2GW4A.
 	//
 	// This member is required.
@@ -57,8 +58,8 @@ type GetResourceMetricsInput struct {
 	// This member is required.
 	MetricQueries []types.MetricQuery
 
-	// The AWS service for which Performance Insights returns metrics. The only valid
-	// value for ServiceType is RDS.
+	// The Amazon Web Services service for which Performance Insights returns metrics.
+	// The only valid value for ServiceType is RDS.
 	//
 	// This member is required.
 	ServiceType types.ServiceType
@@ -116,9 +117,9 @@ type GetResourceMetricsOutput struct {
 	// to the value of the user-specified StartTime.
 	AlignedStartTime *time.Time
 
-	// An immutable, AWS Region-unique identifier for a data source. Performance
-	// Insights gathers metrics from this data source. To use a DB instance as a data
-	// source, you specify its DbiResourceId value - for example:
+	// An immutable, Amazon Web Services Region-unique identifier for a data source.
+	// Performance Insights gathers metrics from this data source. To use a DB instance
+	// as a data source, you specify its DbiResourceId value - for example:
 	// db-FAIHNTYBKTGAUSUZQYPDS2GW4A
 	Identifier *string
 
@@ -198,6 +199,99 @@ func (c *Client) addOperationGetResourceMetricsMiddlewares(stack *middleware.Sta
 		return err
 	}
 	return nil
+}
+
+// GetResourceMetricsAPIClient is a client that implements the GetResourceMetrics
+// operation.
+type GetResourceMetricsAPIClient interface {
+	GetResourceMetrics(context.Context, *GetResourceMetricsInput, ...func(*Options)) (*GetResourceMetricsOutput, error)
+}
+
+var _ GetResourceMetricsAPIClient = (*Client)(nil)
+
+// GetResourceMetricsPaginatorOptions is the paginator options for
+// GetResourceMetrics
+type GetResourceMetricsPaginatorOptions struct {
+	// The maximum number of items to return in the response. If more items exist than
+	// the specified MaxRecords value, a pagination token is included in the response
+	// so that the remaining results can be retrieved.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetResourceMetricsPaginator is a paginator for GetResourceMetrics
+type GetResourceMetricsPaginator struct {
+	options   GetResourceMetricsPaginatorOptions
+	client    GetResourceMetricsAPIClient
+	params    *GetResourceMetricsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetResourceMetricsPaginator returns a new GetResourceMetricsPaginator
+func NewGetResourceMetricsPaginator(client GetResourceMetricsAPIClient, params *GetResourceMetricsInput, optFns ...func(*GetResourceMetricsPaginatorOptions)) *GetResourceMetricsPaginator {
+	if params == nil {
+		params = &GetResourceMetricsInput{}
+	}
+
+	options := GetResourceMetricsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &GetResourceMetricsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetResourceMetricsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next GetResourceMetrics page.
+func (p *GetResourceMetricsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetResourceMetricsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.GetResourceMetrics(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetResourceMetrics(region string) *awsmiddleware.RegisterServiceMetadata {

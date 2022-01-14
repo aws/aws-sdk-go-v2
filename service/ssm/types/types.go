@@ -74,7 +74,13 @@ type Association struct {
 	// The association version.
 	AssociationVersion *string
 
-	// The version of the document used in the association.
+	// The version of the document used in the association. State Manager doesn't
+	// support running associations that use a new version of a document if that
+	// document is shared from another account. State Manager always runs the default
+	// version of a document if shared from another account, even though the Systems
+	// Manager console shows that a new version was processed. If you want to run an
+	// association using a new version of a document shared form another account, you
+	// must set the document version to default.
 	DocumentVersion *string
 
 	// The managed node ID.
@@ -848,7 +854,7 @@ type Command struct {
 
 	// The number of targets for which the command invocation reached a terminal state.
 	// Terminal states include the following: Success, Failed, Execution Timed Out,
-	// Delivery Timed Out, Canceled, Terminated, or Undeliverable.
+	// Delivery Timed Out, Cancelled, Terminated, or Undeliverable.
 	CompletedCount int32
 
 	// The number of targets for which the status is Delivery Timed Out.
@@ -953,7 +959,7 @@ type Command struct {
 	// doesn't have a value of Success but not enough invocations failed for the status
 	// to be Failed. This is a terminal state.
 	//
-	// * Canceled: The command was terminated
+	// * Cancelled: The command was terminated
 	// before it was completed. This is a terminal state.
 	//
 	// * Rate Exceeded: The number
@@ -1179,7 +1185,7 @@ type CommandInvocation struct {
 	// for one or more plugins wasn't zero. Invocation failures count against the
 	// MaxErrors limit of the parent command. This is a terminal state.
 	//
-	// * Canceled:
+	// * Cancelled:
 	// The command was terminated before it was completed. This is a terminal state.
 	//
 	// *
@@ -1290,7 +1296,7 @@ type CommandPlugin struct {
 	// for one or more plugins wasn't zero. Invocation failures count against the
 	// MaxErrors limit of the parent command. This is a terminal state.
 	//
-	// * Canceled:
+	// * Cancelled:
 	// The command was terminated before it was completed. This is a terminal state.
 	//
 	// *
@@ -1582,7 +1588,7 @@ type DocumentDefaultVersionDescription struct {
 	noSmithyDocumentSerde
 }
 
-// Describes a Amazon Web Services Systems Manager document (SSM document).
+// Describes an Amazon Web Services Systems Manager document (SSM document).
 type DocumentDescription struct {
 
 	// The version of the document currently approved for use in the organization.
@@ -1594,6 +1600,12 @@ type DocumentDescription struct {
 
 	// The user in your organization who created the document.
 	Author *string
+
+	// The classification of a document to help you identify and categorize its use.
+	Category []string
+
+	// The value that identifies a document's category.
+	CategoryEnum []string
 
 	// The date when the document was created.
 	CreatedDate *time.Time
@@ -1640,7 +1652,7 @@ type DocumentDescription struct {
 	// The version of the document that is currently under review.
 	PendingReviewVersion *string
 
-	// The list of OS platforms compatible with this SSM document.
+	// The list of operating system (OS) platforms compatible with this SSM document.
 	PlatformTypes []PlatformType
 
 	// A list of SSM documents required by a document. For example, an

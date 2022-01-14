@@ -97,6 +97,25 @@ type DeviceRegistrationStateEventConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The message in downlink queue.
+type DownlinkQueueMessage struct {
+
+	// LoRaWAN router info.
+	LoRaWAN *LoRaWANSendDataToDevice
+
+	// The messageId allocated by IoT Wireless for tracing purpose
+	MessageId *string
+
+	// The timestamp that Iot Wireless received the message.
+	ReceivedAt *string
+
+	// The transmit mode to use to send data to the wireless device. Can be: 0 for UM
+	// (unacknowledge mode) or 1 for AM (acknowledge mode).
+	TransmitMode *int32
+
+	noSmithyDocumentSerde
+}
+
 // List of FPort assigned for different LoRaWAN application packages to use
 type FPorts struct {
 

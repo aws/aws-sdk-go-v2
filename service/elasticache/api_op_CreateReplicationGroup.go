@@ -132,7 +132,7 @@ type CreateReplicationGroupInput struct {
 	// M5 node types: cache.m5.large, cache.m5.xlarge, cache.m5.2xlarge,
 	// cache.m5.4xlarge, cache.m5.12xlarge, cache.m5.24xlarge M4 node types:
 	// cache.m4.large, cache.m4.xlarge, cache.m4.2xlarge, cache.m4.4xlarge,
-	// cache.m4.10xlarge T4g node types (available only for Redis engine version 5.0.6
+	// cache.m4.10xlarge T4g node types (available only for Redis engine version 6.0
 	// onward and Memcached engine version 1.5.16 onward):
 	//
 	// cache.t4g.micro,

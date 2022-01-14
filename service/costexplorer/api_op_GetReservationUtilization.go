@@ -70,8 +70,7 @@ type GetReservationUtilizationInput struct {
 	// GetReservationUtilization uses the same Expression
 	// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
 	// object as the other operations, but only AND is supported among each dimension,
-	// and nesting is supported up to only one level deep. If there are multiple values
-	// for a dimension, they are OR'd together.
+	// and nesting is supported up to only one level deep.
 	Filter *types.Expression
 
 	// If GroupBy is set, Granularity can't be set. If Granularity isn't set, the

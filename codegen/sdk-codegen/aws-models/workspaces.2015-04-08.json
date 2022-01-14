@@ -112,8 +112,38 @@
                 "target": "com.amazonaws.workspaces#AccountModification"
             }
         },
+        "com.amazonaws.workspaces#AddInName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^.*$"
+            }
+        },
+        "com.amazonaws.workspaces#AddInUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^(http|https)\\://\\S+$"
+            }
+        },
         "com.amazonaws.workspaces#Alias": {
             "type": "string"
+        },
+        "com.amazonaws.workspaces#AmazonUuid": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 36,
+                    "max": 36
+                },
+                "smithy.api#pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+            }
         },
         "com.amazonaws.workspaces#Application": {
             "type": "string",
@@ -469,6 +499,44 @@
         "com.amazonaws.workspaces#ComputerName": {
             "type": "string"
         },
+        "com.amazonaws.workspaces#ConnectClientAddIn": {
+            "type": "structure",
+            "members": {
+                "AddInId": {
+                    "target": "com.amazonaws.workspaces#AmazonUuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client add-in identifier.</p>"
+                    }
+                },
+                "ResourceId": {
+                    "target": "com.amazonaws.workspaces#DirectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The directory identifier for which the client add-in is configured.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.workspaces#AddInName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the client add in.</p>"
+                    }
+                },
+                "URL": {
+                    "target": "com.amazonaws.workspaces#AddInUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The endpoint URL of the client add-in.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an Amazon Connect client add-in.</p>"
+            }
+        },
+        "com.amazonaws.workspaces#ConnectClientAddInList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workspaces#ConnectClientAddIn"
+            }
+        },
         "com.amazonaws.workspaces#ConnectionAlias": {
             "type": "structure",
             "members": {
@@ -757,6 +825,72 @@
                     "target": "com.amazonaws.workspaces#WorkspaceImageId",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the image.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workspaces#CreateConnectClientAddIn": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspaces#CreateConnectClientAddInRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspaces#CreateConnectClientAddInResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspaces#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#InvalidParameterValuesException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#ResourceAlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#ResourceCreationFailedException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a client-add-in for Amazon Connect within a directory. You can create only\n         one Amazon Connect client add-in within a directory.</p>\n      \n         <p>This client add-in allows WorkSpaces users to seamlessly connect to Amazon Connect.</p>"
+            }
+        },
+        "com.amazonaws.workspaces#CreateConnectClientAddInRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceId": {
+                    "target": "com.amazonaws.workspaces#DirectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The directory identifier for which to configure the client add-in.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.workspaces#AddInName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the client add-in.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "URL": {
+                    "target": "com.amazonaws.workspaces#AddInUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The endpoint URL of the Amazon Connect client add-in.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workspaces#CreateConnectClientAddInResult": {
+            "type": "structure",
+            "members": {
+                "AddInId": {
+                    "target": "com.amazonaws.workspaces#AmazonUuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client add-in identifier.</p>"
                     }
                 }
             }
@@ -1256,6 +1390,52 @@
                 "smithy.api#documentation": "<p>Describes the default values that are used to create WorkSpaces. For more information, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/update-directory-details.html\">Update Directory Details for Your WorkSpaces</a>.</p>"
             }
         },
+        "com.amazonaws.workspaces#DeleteConnectClientAddIn": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspaces#DeleteConnectClientAddInRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspaces#DeleteConnectClientAddInResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspaces#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#InvalidParameterValuesException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a client-add-in for Amazon Connect that is configured within a\n         directory.</p>"
+            }
+        },
+        "com.amazonaws.workspaces#DeleteConnectClientAddInRequest": {
+            "type": "structure",
+            "members": {
+                "AddInId": {
+                    "target": "com.amazonaws.workspaces#AmazonUuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the client add-in to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceId": {
+                    "target": "com.amazonaws.workspaces#DirectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The directory identifier for which the client add-in is configured.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workspaces#DeleteConnectClientAddInResult": {
+            "type": "structure",
+            "members": {}
+        },
         "com.amazonaws.workspaces#DeleteConnectionAlias": {
             "type": "operation",
             "input": {
@@ -1639,6 +1819,70 @@
                     "target": "com.amazonaws.workspaces#ClientPropertiesList",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the specified Amazon WorkSpaces clients.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workspaces#DescribeConnectClientAddIns": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspaces#DescribeConnectClientAddInsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspaces#DescribeConnectClientAddInsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspaces#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#InvalidParameterValuesException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a list of Amazon Connect client add-ins that have been created.</p>"
+            }
+        },
+        "com.amazonaws.workspaces#DescribeConnectClientAddInsRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceId": {
+                    "target": "com.amazonaws.workspaces#DirectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The directory identifier for which the client add-in is configured.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.workspaces#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If you received a <code>NextToken</code> from a previous call that was paginated,\n         provide this token to receive the next set of results.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.workspaces#Limit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of items to return.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workspaces#DescribeConnectClientAddInsResult": {
+            "type": "structure",
+            "members": {
+                "AddIns": {
+                    "target": "com.amazonaws.workspaces#ConnectClientAddInList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about client add-ins.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.workspaces#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are\n         no more results to return. </p>"
                     }
                 }
             }
@@ -4254,6 +4498,64 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.workspaces#UpdateConnectClientAddIn": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspaces#UpdateConnectClientAddInRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspaces#UpdateConnectClientAddInResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspaces#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#InvalidParameterValuesException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a Amazon Connect client add-in. Use this action to update the name and\n         endpoint URL of a Amazon Connect client add-in.</p>"
+            }
+        },
+        "com.amazonaws.workspaces#UpdateConnectClientAddInRequest": {
+            "type": "structure",
+            "members": {
+                "AddInId": {
+                    "target": "com.amazonaws.workspaces#AmazonUuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the client add-in to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceId": {
+                    "target": "com.amazonaws.workspaces#DirectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The directory identifier for which the client add-in is configured.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.workspaces#AddInName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the client add-in.</p>"
+                    }
+                },
+                "URL": {
+                    "target": "com.amazonaws.workspaces#AddInUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The endpoint URL of the Amazon Connect client add-in.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workspaces#UpdateConnectClientAddInResult": {
+            "type": "structure",
+            "members": {}
+        },
         "com.amazonaws.workspaces#UpdateConnectionAliasPermission": {
             "type": "operation",
             "input": {
@@ -5476,6 +5778,9 @@
                     "target": "com.amazonaws.workspaces#CopyWorkspaceImage"
                 },
                 {
+                    "target": "com.amazonaws.workspaces#CreateConnectClientAddIn"
+                },
+                {
                     "target": "com.amazonaws.workspaces#CreateConnectionAlias"
                 },
                 {
@@ -5492,6 +5797,9 @@
                 },
                 {
                     "target": "com.amazonaws.workspaces#CreateWorkspaces"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#DeleteConnectClientAddIn"
                 },
                 {
                     "target": "com.amazonaws.workspaces#DeleteConnectionAlias"
@@ -5519,6 +5827,9 @@
                 },
                 {
                     "target": "com.amazonaws.workspaces#DescribeClientProperties"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#DescribeConnectClientAddIns"
                 },
                 {
                     "target": "com.amazonaws.workspaces#DescribeConnectionAliases"
@@ -5612,6 +5923,9 @@
                 },
                 {
                     "target": "com.amazonaws.workspaces#TerminateWorkspaces"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#UpdateConnectClientAddIn"
                 },
                 {
                     "target": "com.amazonaws.workspaces#UpdateConnectionAliasPermission"

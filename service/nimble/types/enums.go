@@ -106,6 +106,85 @@ func (LaunchProfileStatusCode) Values() []LaunchProfileStatusCode {
 	}
 }
 
+type LaunchProfileValidationState string
+
+// Enum values for LaunchProfileValidationState
+const (
+	LaunchProfileValidationStateValidationNotStarted                LaunchProfileValidationState = "VALIDATION_NOT_STARTED"
+	LaunchProfileValidationStateValidationInProgress                LaunchProfileValidationState = "VALIDATION_IN_PROGRESS"
+	LaunchProfileValidationStateValidationSuccess                   LaunchProfileValidationState = "VALIDATION_SUCCESS"
+	LaunchProfileValidationStateValidationFailed                    LaunchProfileValidationState = "VALIDATION_FAILED"
+	LaunchProfileValidationStateValidationFailedInternalServerError LaunchProfileValidationState = "VALIDATION_FAILED_INTERNAL_SERVER_ERROR"
+)
+
+// Values returns all known values for LaunchProfileValidationState. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LaunchProfileValidationState) Values() []LaunchProfileValidationState {
+	return []LaunchProfileValidationState{
+		"VALIDATION_NOT_STARTED",
+		"VALIDATION_IN_PROGRESS",
+		"VALIDATION_SUCCESS",
+		"VALIDATION_FAILED",
+		"VALIDATION_FAILED_INTERNAL_SERVER_ERROR",
+	}
+}
+
+type LaunchProfileValidationStatusCode string
+
+// Enum values for LaunchProfileValidationStatusCode
+const (
+	LaunchProfileValidationStatusCodeValidationNotStarted                               LaunchProfileValidationStatusCode = "VALIDATION_NOT_STARTED"
+	LaunchProfileValidationStatusCodeValidationInProgress                               LaunchProfileValidationStatusCode = "VALIDATION_IN_PROGRESS"
+	LaunchProfileValidationStatusCodeValidationSuccess                                  LaunchProfileValidationStatusCode = "VALIDATION_SUCCESS"
+	LaunchProfileValidationStatusCodeValidationFailedInvalidSubnetRouteTableAssociation LaunchProfileValidationStatusCode = "VALIDATION_FAILED_INVALID_SUBNET_ROUTE_TABLE_ASSOCIATION"
+	LaunchProfileValidationStatusCodeValidationFailedSubnetNotFound                     LaunchProfileValidationStatusCode = "VALIDATION_FAILED_SUBNET_NOT_FOUND"
+	LaunchProfileValidationStatusCodeValidationFailedInvalidSecurityGroupAssociation    LaunchProfileValidationStatusCode = "VALIDATION_FAILED_INVALID_SECURITY_GROUP_ASSOCIATION"
+	LaunchProfileValidationStatusCodeValidationFailedInvalidActiveDirectory             LaunchProfileValidationStatusCode = "VALIDATION_FAILED_INVALID_ACTIVE_DIRECTORY"
+	LaunchProfileValidationStatusCodeValidationFailedUnauthorized                       LaunchProfileValidationStatusCode = "VALIDATION_FAILED_UNAUTHORIZED"
+	LaunchProfileValidationStatusCodeValidationFailedInternalServerError                LaunchProfileValidationStatusCode = "VALIDATION_FAILED_INTERNAL_SERVER_ERROR"
+)
+
+// Values returns all known values for LaunchProfileValidationStatusCode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (LaunchProfileValidationStatusCode) Values() []LaunchProfileValidationStatusCode {
+	return []LaunchProfileValidationStatusCode{
+		"VALIDATION_NOT_STARTED",
+		"VALIDATION_IN_PROGRESS",
+		"VALIDATION_SUCCESS",
+		"VALIDATION_FAILED_INVALID_SUBNET_ROUTE_TABLE_ASSOCIATION",
+		"VALIDATION_FAILED_SUBNET_NOT_FOUND",
+		"VALIDATION_FAILED_INVALID_SECURITY_GROUP_ASSOCIATION",
+		"VALIDATION_FAILED_INVALID_ACTIVE_DIRECTORY",
+		"VALIDATION_FAILED_UNAUTHORIZED",
+		"VALIDATION_FAILED_INTERNAL_SERVER_ERROR",
+	}
+}
+
+type LaunchProfileValidationType string
+
+// Enum values for LaunchProfileValidationType
+const (
+	LaunchProfileValidationTypeValidateActiveDirectoryStudioComponent LaunchProfileValidationType = "VALIDATE_ACTIVE_DIRECTORY_STUDIO_COMPONENT"
+	LaunchProfileValidationTypeValidateSubnetAssociation              LaunchProfileValidationType = "VALIDATE_SUBNET_ASSOCIATION"
+	LaunchProfileValidationTypeValidateNetworkAclAssociation          LaunchProfileValidationType = "VALIDATE_NETWORK_ACL_ASSOCIATION"
+	LaunchProfileValidationTypeValidateSecurityGroupAssociation       LaunchProfileValidationType = "VALIDATE_SECURITY_GROUP_ASSOCIATION"
+)
+
+// Values returns all known values for LaunchProfileValidationType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LaunchProfileValidationType) Values() []LaunchProfileValidationType {
+	return []LaunchProfileValidationType{
+		"VALIDATE_ACTIVE_DIRECTORY_STUDIO_COMPONENT",
+		"VALIDATE_SUBNET_ASSOCIATION",
+		"VALIDATE_NETWORK_ACL_ASSOCIATION",
+		"VALIDATE_SECURITY_GROUP_ASSOCIATION",
+	}
+}
+
 type StreamingClipboardMode string
 
 // Enum values for StreamingClipboardMode
@@ -280,6 +359,7 @@ const (
 	StreamingSessionStatusCodeStreamingSessionStarted          StreamingSessionStatusCode = "STREAMING_SESSION_STARTED"
 	StreamingSessionStatusCodeStreamingSessionStopInProgress   StreamingSessionStatusCode = "STREAMING_SESSION_STOP_IN_PROGRESS"
 	StreamingSessionStatusCodeStreamingSessionStartInProgress  StreamingSessionStatusCode = "STREAMING_SESSION_START_IN_PROGRESS"
+	StreamingSessionStatusCodeAmiValidationError               StreamingSessionStatusCode = "AMI_VALIDATION_ERROR"
 )
 
 // Values returns all known values for StreamingSessionStatusCode. Note that this
@@ -302,6 +382,7 @@ func (StreamingSessionStatusCode) Values() []StreamingSessionStatusCode {
 		"STREAMING_SESSION_STARTED",
 		"STREAMING_SESSION_STOP_IN_PROGRESS",
 		"STREAMING_SESSION_START_IN_PROGRESS",
+		"AMI_VALIDATION_ERROR",
 	}
 }
 

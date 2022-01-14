@@ -19020,6 +19020,15 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 				sv.ProgramDateTime = types.HlsProgramDateTime(jtv)
 			}
 
+		case "programDateTimeClock":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HlsProgramDateTimeClock to be of type string, got %T instead", value)
+				}
+				sv.ProgramDateTimeClock = types.HlsProgramDateTimeClock(jtv)
+			}
+
 		case "programDateTimePeriod":
 			if value != nil {
 				jtv, ok := value.(json.Number)

@@ -82,7 +82,7 @@ type CacheCluster struct {
 	// M5 node types: cache.m5.large, cache.m5.xlarge, cache.m5.2xlarge,
 	// cache.m5.4xlarge, cache.m5.12xlarge, cache.m5.24xlarge M4 node types:
 	// cache.m4.large, cache.m4.xlarge, cache.m4.2xlarge, cache.m4.4xlarge,
-	// cache.m4.10xlarge T4g node types (available only for Redis engine version 5.0.6
+	// cache.m4.10xlarge T4g node types (available only for Redis engine version 6.0
 	// onward and for Memcached engine version 1.5.16 onward): cache.t4g.micro,
 	// cache.t4g.small, cache.t4g.medium T3 node types: cache.t3.micro, cache.t3.small,
 	// cache.t3.medium T2 node types: cache.t2.micro, cache.t2.small,
@@ -287,7 +287,7 @@ type CacheEngineVersion struct {
 // M5 node types: cache.m5.large, cache.m5.xlarge, cache.m5.2xlarge,
 // cache.m5.4xlarge, cache.m5.12xlarge, cache.m5.24xlarge M4 node types:
 // cache.m4.large, cache.m4.xlarge, cache.m4.2xlarge, cache.m4.4xlarge,
-// cache.m4.10xlarge T4g node types (available only for Redis engine version 5.0.6
+// cache.m4.10xlarge T4g node types (available only for Redis engine version 6.0
 // onward and for Memcached engine version 1.5.16 onward): cache.t4g.micro,
 // cache.t4g.small, cache.t4g.medium T3 node types: cache.t3.micro, cache.t3.small,
 // cache.t3.medium T2 node types: cache.t2.micro, cache.t2.small,
@@ -867,7 +867,7 @@ type LogDeliveryConfiguration struct {
 	// Returns the log format, either JSON or TEXT.
 	LogFormat LogFormat
 
-	// Refers to slow-log (https://redis.io/commands/slowlog).
+	// Refers to slow-log (https://redis.io/commands/slowlog) or engine-log.
 	LogType LogType
 
 	// Returns an error message for the log delivery configuration.
@@ -896,7 +896,7 @@ type LogDeliveryConfigurationRequest struct {
 	// Specifies either JSON or TEXT
 	LogFormat LogFormat
 
-	// Refers to slow-log (https://redis.io/commands/slowlog).
+	// Refers to slow-log (https://redis.io/commands/slowlog) or engine-log..
 	LogType LogType
 
 	noSmithyDocumentSerde
@@ -1149,7 +1149,7 @@ type PendingLogDeliveryConfiguration struct {
 	// Returns the log format, either JSON or TEXT
 	LogFormat LogFormat
 
-	// Refers to slow-log (https://redis.io/commands/slowlog).
+	// Refers to slow-log (https://redis.io/commands/slowlog) or engine-log..
 	LogType LogType
 
 	noSmithyDocumentSerde
@@ -1400,7 +1400,7 @@ type ReservedCacheNode struct {
 	// M5 node types: cache.m5.large, cache.m5.xlarge, cache.m5.2xlarge,
 	// cache.m5.4xlarge, cache.m5.12xlarge, cache.m5.24xlarge M4 node types:
 	// cache.m4.large, cache.m4.xlarge, cache.m4.2xlarge, cache.m4.4xlarge,
-	// cache.m4.10xlarge T4g node types (available only for Redis engine version 5.0.6
+	// cache.m4.10xlarge T4g node types (available only for Redis engine version 6.0
 	// onward and Memcached engine version 1.5.16 onward): cache.t4g.micro,
 	// cache.t4g.small, cache.t4g.medium
 	//
@@ -1518,7 +1518,7 @@ type ReservedCacheNodesOffering struct {
 	// M5 node types: cache.m5.large, cache.m5.xlarge, cache.m5.2xlarge,
 	// cache.m5.4xlarge, cache.m5.12xlarge, cache.m5.24xlarge M4 node types:
 	// cache.m4.large, cache.m4.xlarge, cache.m4.2xlarge, cache.m4.4xlarge,
-	// cache.m4.10xlarge T4g node types (available only for Redis engine version 5.0.6
+	// cache.m4.10xlarge T4g node types (available only for Redis engine version 6.0
 	// onward and Memcached engine version 1.5.16 onward): cache.t4g.micro,
 	// cache.t4g.small, cache.t4g.medium T3 node types: cache.t3.micro, cache.t3.small,
 	// cache.t3.medium T2 node types: cache.t2.micro, cache.t2.small,
@@ -1732,7 +1732,7 @@ type Snapshot struct {
 	// M5 node types: cache.m5.large, cache.m5.xlarge, cache.m5.2xlarge,
 	// cache.m5.4xlarge, cache.m5.12xlarge, cache.m5.24xlarge M4 node types:
 	// cache.m4.large, cache.m4.xlarge, cache.m4.2xlarge, cache.m4.4xlarge,
-	// cache.m4.10xlarge T4g node types (available only for Redis engine version 5.0.6
+	// cache.m4.10xlarge T4g node types (available only for Redis engine version 6.0
 	// onward and Memcached engine version 1.5.16 onward): cache.t4g.micro,
 	// cache.t4g.small, cache.t4g.medium T3 node types: cache.t3.micro, cache.t3.small,
 	// cache.t3.medium T2 node types: cache.t2.micro, cache.t2.small,

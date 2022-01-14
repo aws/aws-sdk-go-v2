@@ -1117,6 +1117,16 @@
                 }
             }
         },
+        "com.amazonaws.lexruntimev2#Name": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^([0-9a-zA-Z][_-]?)+$"
+            }
+        },
         "com.amazonaws.lexruntimev2#NonEmptyString": {
             "type": "string",
             "traits": {
@@ -1690,6 +1700,71 @@
                 "smithy.api#httpError": 404
             }
         },
+        "com.amazonaws.lexruntimev2#RuntimeHintDetails": {
+            "type": "structure",
+            "members": {
+                "runtimeHintValues": {
+                    "target": "com.amazonaws.lexruntimev2#RuntimeHintValuesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more strings that Amazon Lex V2 should look for in the input to the\n         bot. Each phrase is given preference when deciding on slot\n         values.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides an array of phrases that should be given preference when\n         resolving values for a slot.</p>"
+            }
+        },
+        "com.amazonaws.lexruntimev2#RuntimeHintPhrase": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 140
+                }
+            }
+        },
+        "com.amazonaws.lexruntimev2#RuntimeHintValue": {
+            "type": "structure",
+            "members": {
+                "phrase": {
+                    "target": "com.amazonaws.lexruntimev2#RuntimeHintPhrase",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The phrase that Amazon Lex V2 should look for in the user's input to the\n         bot.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides the phrase that Amazon Lex V2 should look for in the user's input\n         to the bot.</p>"
+            }
+        },
+        "com.amazonaws.lexruntimev2#RuntimeHintValuesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexruntimev2#RuntimeHintValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.lexruntimev2#RuntimeHints": {
+            "type": "structure",
+            "members": {
+                "slotHints": {
+                    "target": "com.amazonaws.lexruntimev2#SlotHintsIntentMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the slots in the intent that should have runtime hints\n         added, and the phrases that should be added for each slot.</p>\n         <p>The first level of the <code>slotHints</code> map is the name of the\n         intent. The second level is the name of the slot within the intent. For\n         more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/using-hints.xml\">Using hints to improve\n            accuracy</a>.</p>\n         <p>The intent name and slot name must exist.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You can provide Amazon Lex V2 with hints to the phrases that a customer is\n         likely to use for a slot. When a slot with hints is resolved, the\n         phrases in the runtime hints are preferred in the resolution. You can\n         provide hints for a maximum of 100 intents. You can provide a maximum\n         of 100 slots.</p>\n         <p>Before you can use runtime hints with an existing bot, you must\n         first rebuild the bot.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/using-hints.xml\">Using hints to improve\n            accuracy</a>.</p>"
+            }
+        },
         "com.amazonaws.lexruntimev2#SensitiveNonEmptyString": {
             "type": "string",
             "traits": {
@@ -1808,7 +1883,13 @@
                 "originatingRequestId": {
                     "target": "com.amazonaws.lexruntimev2#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>A unique identifier for a specific request.</p>"
+                    }
+                },
+                "runtimeHints": {
+                    "target": "com.amazonaws.lexruntimev2#RuntimeHints",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Hints for phrases that a customer is likely to use \n      for a slot. Amazon Lex V2 uses the hints to help determine the correct\n      value of a slot.</p>"
                     }
                 }
             },
@@ -1855,6 +1936,24 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A value that Amazon Lex V2 uses to fulfill an intent. </p>"
+            }
+        },
+        "com.amazonaws.lexruntimev2#SlotHintsIntentMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.lexruntimev2#Name"
+            },
+            "value": {
+                "target": "com.amazonaws.lexruntimev2#SlotHintsSlotMap"
+            }
+        },
+        "com.amazonaws.lexruntimev2#SlotHintsSlotMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.lexruntimev2#Name"
+            },
+            "value": {
+                "target": "com.amazonaws.lexruntimev2#RuntimeHintDetails"
             }
         },
         "com.amazonaws.lexruntimev2#Slots": {

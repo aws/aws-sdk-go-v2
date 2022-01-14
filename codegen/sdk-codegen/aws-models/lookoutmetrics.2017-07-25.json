@@ -394,6 +394,25 @@
                 "smithy.api#pattern": "\\S"
             }
         },
+        "com.amazonaws.lookoutmetrics#AnomalyDetectorFailureType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ACTIVATION_FAILURE",
+                        "name": "ACTIVATION_FAILURE"
+                    },
+                    {
+                        "value": "BACK_TEST_ACTIVATION_FAILURE",
+                        "name": "BACK_TEST_ACTIVATION_FAILURE"
+                    },
+                    {
+                        "value": "DELETION_FAILURE",
+                        "name": "DELETION_FAILURE"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.lookoutmetrics#AnomalyDetectorName": {
             "type": "string",
             "traits": {
@@ -673,15 +692,13 @@
                 "RoleArn": {
                     "target": "com.amazonaws.lookoutmetrics#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>An IAM role that gives Amazon Lookout for Metrics permission to access the flow.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>An IAM role that gives Amazon Lookout for Metrics permission to access the flow.</p>"
                     }
                 },
                 "FlowName": {
                     "target": "com.amazonaws.lookoutmetrics#FlowName",
                     "traits": {
-                        "smithy.api#documentation": "<p> name of the flow.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p> name of the flow.</p>"
                     }
                 }
             },
@@ -786,8 +803,7 @@
                 "RoleArn": {
                     "target": "com.amazonaws.lookoutmetrics#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>An IAM role that gives Amazon Lookout for Metrics permission to access data in Amazon CloudWatch.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>An IAM role that gives Amazon Lookout for Metrics permission to access data in Amazon CloudWatch.</p>"
                     }
                 }
             },
@@ -1582,13 +1598,19 @@
                 "FailureReason": {
                     "target": "com.amazonaws.lookoutmetrics#ErrorMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The reason that the detector failed, if any.</p>"
+                        "smithy.api#documentation": "<p>The reason that the detector failed.</p>"
                     }
                 },
                 "KmsKeyArn": {
                     "target": "com.amazonaws.lookoutmetrics#KmsKeyArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the KMS key to use to encrypt your data.</p>"
+                    }
+                },
+                "FailureType": {
+                    "target": "com.amazonaws.lookoutmetrics#AnomalyDetectorFailureType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The process that caused the detector to fail.</p>"
                     }
                 }
             }
@@ -3364,58 +3386,50 @@
                 "DBInstanceIdentifier": {
                     "target": "com.amazonaws.lookoutmetrics#RDSDatabaseIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string identifying the database instance.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>A string identifying the database instance.</p>"
                     }
                 },
                 "DatabaseHost": {
                     "target": "com.amazonaws.lookoutmetrics#DatabaseHost",
                     "traits": {
-                        "smithy.api#documentation": "<p>The host name of the database.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The host name of the database.</p>"
                     }
                 },
                 "DatabasePort": {
                     "target": "com.amazonaws.lookoutmetrics#DatabasePort",
                     "traits": {
                         "smithy.api#box": {},
-                        "smithy.api#documentation": "<p>The port number where the database can be accessed.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The port number where the database can be accessed.</p>"
                     }
                 },
                 "SecretManagerArn": {
                     "target": "com.amazonaws.lookoutmetrics#PoirotSecretManagerArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Secrets Manager role.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Secrets Manager role.</p>"
                     }
                 },
                 "DatabaseName": {
                     "target": "com.amazonaws.lookoutmetrics#RDSDatabaseName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the RDS database.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The name of the RDS database.</p>"
                     }
                 },
                 "TableName": {
                     "target": "com.amazonaws.lookoutmetrics#TableName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the table in the database.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The name of the table in the database.</p>"
                     }
                 },
                 "RoleArn": {
                     "target": "com.amazonaws.lookoutmetrics#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the role.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the role.</p>"
                     }
                 },
                 "VpcConfiguration": {
                     "target": "com.amazonaws.lookoutmetrics#VpcConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object containing information about the Amazon Virtual Private Cloud (VPC) configuration.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>An object containing information about the Amazon Virtual Private Cloud (VPC) configuration.</p>"
                     }
                 }
             },
@@ -3449,58 +3463,50 @@
                 "ClusterIdentifier": {
                     "target": "com.amazonaws.lookoutmetrics#RedshiftClusterIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string identifying the Redshift cluster.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>A string identifying the Redshift cluster.</p>"
                     }
                 },
                 "DatabaseHost": {
                     "target": "com.amazonaws.lookoutmetrics#DatabaseHost",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the database host.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The name of the database host.</p>"
                     }
                 },
                 "DatabasePort": {
                     "target": "com.amazonaws.lookoutmetrics#DatabasePort",
                     "traits": {
                         "smithy.api#box": {},
-                        "smithy.api#documentation": "<p>The port number where the database can be accessed.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The port number where the database can be accessed.</p>"
                     }
                 },
                 "SecretManagerArn": {
                     "target": "com.amazonaws.lookoutmetrics#PoirotSecretManagerArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Secrets Manager role.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Secrets Manager role.</p>"
                     }
                 },
                 "DatabaseName": {
                     "target": "com.amazonaws.lookoutmetrics#RedshiftDatabaseName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Redshift database name.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The Redshift database name.</p>"
                     }
                 },
                 "TableName": {
                     "target": "com.amazonaws.lookoutmetrics#TableName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The table name of the Redshift database.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The table name of the Redshift database.</p>"
                     }
                 },
                 "RoleArn": {
                     "target": "com.amazonaws.lookoutmetrics#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the role providing access to the database.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the role providing access to the database.</p>"
                     }
                 },
                 "VpcConfiguration": {
                     "target": "com.amazonaws.lookoutmetrics#VpcConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains information about the Amazon Virtual Private Cloud (VPC) configuration.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Contains information about the Amazon Virtual Private Cloud (VPC) configuration.</p>"
                     }
                 }
             },
@@ -3563,8 +3569,7 @@
                 "RoleArn": {
                     "target": "com.amazonaws.lookoutmetrics#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of an IAM role that has read and write access permissions to the source S3 bucket.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The ARN of an IAM role that has read and write access permissions to the source S3 bucket.</p>"
                     }
                 },
                 "TemplatedPathList": {
@@ -4175,6 +4180,9 @@
                 },
                 {
                     "target": "com.amazonaws.lookoutmetrics#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutmetrics#ServiceQuotaExceededException"
                 },
                 {
                     "target": "com.amazonaws.lookoutmetrics#TooManyRequestsException"

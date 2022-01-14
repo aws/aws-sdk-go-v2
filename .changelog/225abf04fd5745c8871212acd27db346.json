@@ -1,0 +1,30 @@
+{
+    "id": "225abf04-fd57-45c8-8712-12acd27db346",
+    "type": "feature",
+    "description": "Updated API models",
+    "modules": [
+        "service/appsync",
+        "service/computeoptimizer",
+        "service/databrew",
+        "service/ec2",
+        "service/elasticache",
+        "service/elasticsearchservice",
+        "service/glue",
+        "service/honeycode",
+        "service/iotwireless",
+        "service/kendra",
+        "service/lexmodelsv2",
+        "service/lexruntimev2",
+        "service/lookoutmetrics",
+        "service/medialive",
+        "service/mediatailor",
+        "service/mwaa",
+        "service/nimble",
+        "service/opensearch",
+        "service/pi",
+        "service/pinpoint",
+        "service/rds",
+        "service/ssm",
+        "service/workspaces"
+    ]
+}

@@ -1115,6 +1115,59 @@ func awsRestjson1_serializeDocumentPlaybackCompletionEvent(v *types.PlaybackComp
 	return nil
 }
 
+func awsRestjson1_serializeDocumentRuntimeHintDetails(v *types.RuntimeHintDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RuntimeHintValues != nil {
+		ok := object.Key("runtimeHintValues")
+		if err := awsRestjson1_serializeDocumentRuntimeHintValuesList(v.RuntimeHintValues, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRuntimeHints(v *types.RuntimeHints, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SlotHints != nil {
+		ok := object.Key("slotHints")
+		if err := awsRestjson1_serializeDocumentSlotHintsIntentMap(v.SlotHints, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRuntimeHintValue(v *types.RuntimeHintValue, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Phrase != nil {
+		ok := object.Key("phrase")
+		ok.String(*v.Phrase)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRuntimeHintValuesList(v []types.RuntimeHintValue, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentRuntimeHintValue(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentSessionState(v *types.SessionState, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1143,6 +1196,13 @@ func awsRestjson1_serializeDocumentSessionState(v *types.SessionState, value smi
 	if v.OriginatingRequestId != nil {
 		ok := object.Key("originatingRequestId")
 		ok.String(*v.OriginatingRequestId)
+	}
+
+	if v.RuntimeHints != nil {
+		ok := object.Key("runtimeHints")
+		if err := awsRestjson1_serializeDocumentRuntimeHints(v.RuntimeHints, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.SessionAttributes != nil {
@@ -1178,6 +1238,36 @@ func awsRestjson1_serializeDocumentSlot(v *types.Slot, value smithyjson.Value) e
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSlotHintsIntentMap(v map[string]map[string]types.RuntimeHintDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		if vv := v[key]; vv == nil {
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentSlotHintsSlotMap(v[key], om); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSlotHintsSlotMap(v map[string]types.RuntimeHintDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		mapVar := v[key]
+		if err := awsRestjson1_serializeDocumentRuntimeHintDetails(&mapVar, om); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

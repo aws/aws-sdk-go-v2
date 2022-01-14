@@ -73,7 +73,7 @@ type DescribeImportOutput struct {
 	// resources are not overwritten and the import fails.
 	MergeStrategy types.MergeStrategy
 
-	// The specifications of the imported bot or bot locale.
+	// The specifications of the imported bot, bot locale, or custom vocabulary.
 	ResourceSpecification *types.ImportResourceSpecification
 
 	// Metadata pertaining to the operation's result.

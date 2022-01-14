@@ -3921,9 +3921,6 @@ func validateOpQueryInput(v *QueryInput) error {
 	if v.IndexId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IndexId"))
 	}
-	if v.QueryText == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("QueryText"))
-	}
 	if v.AttributeFilter != nil {
 		if err := validateAttributeFilter(v.AttributeFilter); err != nil {
 			invalidParams.AddNested("AttributeFilter", err.(smithy.InvalidParamsError))

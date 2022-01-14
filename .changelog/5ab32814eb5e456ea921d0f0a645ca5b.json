@@ -3,6 +3,7 @@
     "type": "feature",
     "description": "Adds new MarshalWithOptions and UnmarshalWithOptions helpers allowing Encoding and Decoding options to be specified when serializing AttributeValues. Addresses issue: https://github.com/aws/aws-sdk-go-v2/issues/1494",
     "modules": [
-        "feature/dynamodb/attributevalue"
+        "feature/dynamodb/attributevalue",
+        "feature/dynamodbstreams/attributevalue"
     ]
 }

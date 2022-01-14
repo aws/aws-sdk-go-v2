@@ -31,7 +31,7 @@ func (c *Client) GetScreenData(ctx context.Context, params *GetScreenDataInput, 
 
 type GetScreenDataInput struct {
 
-	// The ID of the app that contains the screem.
+	// The ID of the app that contains the screen.
 	//
 	// This member is required.
 	AppId *string
