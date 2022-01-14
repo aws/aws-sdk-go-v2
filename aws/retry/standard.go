@@ -52,8 +52,11 @@ var DefaultRetryableHTTPStatusCodes = map[int]struct{}{
 var DefaultRetryableErrorCodes = map[string]struct{}{
 	"RequestTimeout":          {},
 	"RequestTimeoutException": {},
+}
 
-	// Throttled status codes
+// DefaultThrottleErrorCodes provides the set of API error codes that are
+// considered throttle errors.
+var DefaultThrottleErrorCodes = map[string]struct{}{
 	"Throttling":                             {},
 	"ThrottlingException":                    {},
 	"ThrottledException":                     {},
@@ -82,6 +85,9 @@ var DefaultRetryables = []IsErrorRetryable{
 	RetryableErrorCode{
 		Codes: DefaultRetryableErrorCodes,
 	},
+	RetryableErrorCode{
+		Codes: DefaultThrottleErrorCodes,
+	},
 }
 
 // StandardOptions provides the functional options for configuring the standard
@@ -101,7 +107,7 @@ type StandardOptions struct {
 }
 
 // RateLimiter provides the interface for limiting the rate of request retries
-// allowed by the retrier.
+// allowed by the retryer.
 type RateLimiter interface {
 	GetToken(ctx context.Context, cost uint) (releaseToken func() error, err error)
 	AddTokens(uint) error
@@ -171,16 +177,25 @@ func (s *Standard) RetryDelay(attempt int, err error) (time.Duration, error) {
 	return s.backoff.BackoffDelay(attempt, err)
 }
 
+// GetAttemptToken returns the token to be released after then attempt completes.
+// The release token will add NoRetryIncrement to the RateLimiter token pool if
+// the attempt was successful. If the attempt failed, nothing will be done.
+func (s *Standard) GetAttemptToken(context.Context) (func(error) error, error) {
+	return s.GetInitialToken(), nil
+}
+
 // GetInitialToken returns a token for adding the NoRetryIncrement to the
 // RateLimiter token if the attempt completed successfully without error.
 //
 // InitialToken applies to result of the each attempt, including the first.
 // Whereas the RetryToken applies to the result of subsequent attempts.
+//
+// Deprecated: use GetAttemptToken instead.
 func (s *Standard) GetInitialToken() func(error) error {
-	return releaseToken(s.incrementTokens).release
+	return releaseToken(s.noRetryIncrement).release
 }
 
-func (s *Standard) incrementTokens() error {
+func (s *Standard) noRetryIncrement() error {
 	return s.options.RateLimiter.AddTokens(s.options.NoRetryIncrement)
 }
 

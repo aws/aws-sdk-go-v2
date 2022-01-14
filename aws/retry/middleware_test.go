@@ -11,7 +11,6 @@ import (
 	"testing"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/ratelimit"
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 	"github.com/aws/smithy-go/middleware"
@@ -90,26 +89,6 @@ func TestMetricsHeaderMiddleware(t *testing.T) {
 	}
 }
 
-type retryProvider struct {
-	Retryer aws.Retryer
-}
-
-func (t retryProvider) GetRetryer() aws.Retryer {
-	return t.Retryer
-}
-
-type mockHandler func(context.Context, interface{}) (interface{}, middleware.Metadata, error)
-
-func (m mockHandler) Handle(ctx context.Context, input interface{}) (
-	output interface{}, metadata middleware.Metadata, err error,
-) {
-	return m(ctx, input)
-}
-
-func (m mockHandler) ID() string {
-	return fmt.Sprintf("%T", m)
-}
-
 type testRequest struct {
 	DisableRewind bool
 }
@@ -119,13 +98,6 @@ func (r testRequest) RewindStream() error {
 		return fmt.Errorf("rewind disabled")
 	}
 	return nil
-}
-
-type mockRetryableError struct{ b bool }
-
-func (m mockRetryableError) RetryableError() bool { return m.b }
-func (m mockRetryableError) Error() string {
-	return fmt.Sprintf("mock retryable %t", m.b)
 }
 
 func TestAttemptMiddleware(t *testing.T) {
