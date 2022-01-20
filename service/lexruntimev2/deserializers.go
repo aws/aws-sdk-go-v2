@@ -424,7 +424,7 @@ func (m *awsRestjson1_deserializeOpPutSession) HandleDeserialize(ctx context.Con
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
 
-	err = awsRestjson1_deserializeOpDocumentPutSessionOutput(output, response.Body, int(response.ContentLength))
+	err = awsRestjson1_deserializeOpDocumentPutSessionOutput(output, response.Body)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
 	}
@@ -539,7 +539,7 @@ func awsRestjson1_deserializeOpHttpBindingsPutSessionOutput(v *PutSessionOutput,
 
 	return nil
 }
-func awsRestjson1_deserializeOpDocumentPutSessionOutput(v *PutSessionOutput, body io.ReadCloser, contentLength int) error {
+func awsRestjson1_deserializeOpDocumentPutSessionOutput(v *PutSessionOutput, body io.ReadCloser) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization of nil %T", v)
 	}
@@ -771,7 +771,7 @@ func (m *awsRestjson1_deserializeOpRecognizeUtterance) HandleDeserialize(ctx con
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
 
-	err = awsRestjson1_deserializeOpDocumentRecognizeUtteranceOutput(output, response.Body, int(response.ContentLength))
+	err = awsRestjson1_deserializeOpDocumentRecognizeUtteranceOutput(output, response.Body)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
 	}
@@ -901,7 +901,7 @@ func awsRestjson1_deserializeOpHttpBindingsRecognizeUtteranceOutput(v *Recognize
 
 	return nil
 }
-func awsRestjson1_deserializeOpDocumentRecognizeUtteranceOutput(v *RecognizeUtteranceOutput, body io.ReadCloser, contentLength int) error {
+func awsRestjson1_deserializeOpDocumentRecognizeUtteranceOutput(v *RecognizeUtteranceOutput, body io.ReadCloser) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization of nil %T", v)
 	}

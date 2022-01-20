@@ -4464,7 +4464,7 @@ func (m *awsRestjson1_deserializeOpDescribeInputDeviceThumbnail) HandleDeseriali
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
 
-	err = awsRestjson1_deserializeOpDocumentDescribeInputDeviceThumbnailOutput(output, response.Body, int(response.ContentLength))
+	err = awsRestjson1_deserializeOpDocumentDescribeInputDeviceThumbnailOutput(output, response.Body)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
 	}
@@ -4579,7 +4579,7 @@ func awsRestjson1_deserializeOpHttpBindingsDescribeInputDeviceThumbnailOutput(v 
 
 	return nil
 }
-func awsRestjson1_deserializeOpDocumentDescribeInputDeviceThumbnailOutput(v *DescribeInputDeviceThumbnailOutput, body io.ReadCloser, contentLength int) error {
+func awsRestjson1_deserializeOpDocumentDescribeInputDeviceThumbnailOutput(v *DescribeInputDeviceThumbnailOutput, body io.ReadCloser) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization of nil %T", v)
 	}

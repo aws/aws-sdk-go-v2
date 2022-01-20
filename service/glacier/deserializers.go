@@ -1769,7 +1769,7 @@ func (m *awsRestjson1_deserializeOpGetJobOutput) HandleDeserialize(ctx context.C
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
 
-	err = awsRestjson1_deserializeOpDocumentGetJobOutputOutput(output, response.Body, int(response.ContentLength))
+	err = awsRestjson1_deserializeOpDocumentGetJobOutputOutput(output, response.Body)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
 	}
@@ -1874,7 +1874,7 @@ func awsRestjson1_deserializeOpHttpBindingsGetJobOutputOutput(v *GetJobOutputOut
 
 	return nil
 }
-func awsRestjson1_deserializeOpDocumentGetJobOutputOutput(v *GetJobOutputOutput, body io.ReadCloser, contentLength int) error {
+func awsRestjson1_deserializeOpDocumentGetJobOutputOutput(v *GetJobOutputOutput, body io.ReadCloser) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization of nil %T", v)
 	}

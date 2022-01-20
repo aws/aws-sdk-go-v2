@@ -3355,7 +3355,7 @@ func (m *awsRestjson1_deserializeOpGetIntrospectionSchema) HandleDeserialize(ctx
 	output := &GetIntrospectionSchemaOutput{}
 	out.Result = output
 
-	err = awsRestjson1_deserializeOpDocumentGetIntrospectionSchemaOutput(output, response.Body, int(response.ContentLength))
+	err = awsRestjson1_deserializeOpDocumentGetIntrospectionSchemaOutput(output, response.Body, response.ContentLength)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
 	}
@@ -3426,14 +3426,14 @@ func awsRestjson1_deserializeOpErrorGetIntrospectionSchema(response *smithyhttp.
 	}
 }
 
-func awsRestjson1_deserializeOpDocumentGetIntrospectionSchemaOutput(v *GetIntrospectionSchemaOutput, body io.ReadCloser, contentLength int) error {
+func awsRestjson1_deserializeOpDocumentGetIntrospectionSchemaOutput(v *GetIntrospectionSchemaOutput, body io.ReadCloser, contentLength int64) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization of nil %T", v)
 	}
 
 	var buf bytes.Buffer
 	if contentLength > 0 {
-		buf.Grow(contentLength)
+		buf.Grow(int(contentLength))
 	} else {
 		buf.Grow(512)
 	}

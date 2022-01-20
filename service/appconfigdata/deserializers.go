@@ -50,7 +50,7 @@ func (m *awsRestjson1_deserializeOpGetLatestConfiguration) HandleDeserialize(ctx
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
 
-	err = awsRestjson1_deserializeOpDocumentGetLatestConfigurationOutput(output, response.Body, int(response.ContentLength))
+	err = awsRestjson1_deserializeOpDocumentGetLatestConfigurationOutput(output, response.Body, response.ContentLength)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
 	}
@@ -147,14 +147,14 @@ func awsRestjson1_deserializeOpHttpBindingsGetLatestConfigurationOutput(v *GetLa
 
 	return nil
 }
-func awsRestjson1_deserializeOpDocumentGetLatestConfigurationOutput(v *GetLatestConfigurationOutput, body io.ReadCloser, contentLength int) error {
+func awsRestjson1_deserializeOpDocumentGetLatestConfigurationOutput(v *GetLatestConfigurationOutput, body io.ReadCloser, contentLength int64) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization of nil %T", v)
 	}
 
 	var buf bytes.Buffer
 	if contentLength > 0 {
-		buf.Grow(contentLength)
+		buf.Grow(int(contentLength))
 	} else {
 		buf.Grow(512)
 	}

@@ -46,7 +46,7 @@ func (m *awsRestjson1_deserializeOpDeleteThingShadow) HandleDeserialize(ctx cont
 	output := &DeleteThingShadowOutput{}
 	out.Result = output
 
-	err = awsRestjson1_deserializeOpDocumentDeleteThingShadowOutput(output, response.Body, int(response.ContentLength))
+	err = awsRestjson1_deserializeOpDocumentDeleteThingShadowOutput(output, response.Body, response.ContentLength)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
 	}
@@ -129,14 +129,14 @@ func awsRestjson1_deserializeOpErrorDeleteThingShadow(response *smithyhttp.Respo
 	}
 }
 
-func awsRestjson1_deserializeOpDocumentDeleteThingShadowOutput(v *DeleteThingShadowOutput, body io.ReadCloser, contentLength int) error {
+func awsRestjson1_deserializeOpDocumentDeleteThingShadowOutput(v *DeleteThingShadowOutput, body io.ReadCloser, contentLength int64) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization of nil %T", v)
 	}
 
 	var buf bytes.Buffer
 	if contentLength > 0 {
-		buf.Grow(contentLength)
+		buf.Grow(int(contentLength))
 	} else {
 		buf.Grow(512)
 	}
@@ -385,7 +385,7 @@ func (m *awsRestjson1_deserializeOpGetThingShadow) HandleDeserialize(ctx context
 	output := &GetThingShadowOutput{}
 	out.Result = output
 
-	err = awsRestjson1_deserializeOpDocumentGetThingShadowOutput(output, response.Body, int(response.ContentLength))
+	err = awsRestjson1_deserializeOpDocumentGetThingShadowOutput(output, response.Body, response.ContentLength)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
 	}
@@ -468,14 +468,14 @@ func awsRestjson1_deserializeOpErrorGetThingShadow(response *smithyhttp.Response
 	}
 }
 
-func awsRestjson1_deserializeOpDocumentGetThingShadowOutput(v *GetThingShadowOutput, body io.ReadCloser, contentLength int) error {
+func awsRestjson1_deserializeOpDocumentGetThingShadowOutput(v *GetThingShadowOutput, body io.ReadCloser, contentLength int64) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization of nil %T", v)
 	}
 
 	var buf bytes.Buffer
 	if contentLength > 0 {
-		buf.Grow(contentLength)
+		buf.Grow(int(contentLength))
 	} else {
 		buf.Grow(512)
 	}
@@ -972,7 +972,7 @@ func (m *awsRestjson1_deserializeOpUpdateThingShadow) HandleDeserialize(ctx cont
 	output := &UpdateThingShadowOutput{}
 	out.Result = output
 
-	err = awsRestjson1_deserializeOpDocumentUpdateThingShadowOutput(output, response.Body, int(response.ContentLength))
+	err = awsRestjson1_deserializeOpDocumentUpdateThingShadowOutput(output, response.Body, response.ContentLength)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
 	}
@@ -1058,14 +1058,14 @@ func awsRestjson1_deserializeOpErrorUpdateThingShadow(response *smithyhttp.Respo
 	}
 }
 
-func awsRestjson1_deserializeOpDocumentUpdateThingShadowOutput(v *UpdateThingShadowOutput, body io.ReadCloser, contentLength int) error {
+func awsRestjson1_deserializeOpDocumentUpdateThingShadowOutput(v *UpdateThingShadowOutput, body io.ReadCloser, contentLength int64) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization of nil %T", v)
 	}
 
 	var buf bytes.Buffer
 	if contentLength > 0 {
-		buf.Grow(contentLength)
+		buf.Grow(int(contentLength))
 	} else {
 		buf.Grow(512)
 	}

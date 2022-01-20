@@ -44,7 +44,7 @@ func (m *awsRestjson1_deserializeOpGetRawMessageContent) HandleDeserialize(ctx c
 	output := &GetRawMessageContentOutput{}
 	out.Result = output
 
-	err = awsRestjson1_deserializeOpDocumentGetRawMessageContentOutput(output, response.Body, int(response.ContentLength))
+	err = awsRestjson1_deserializeOpDocumentGetRawMessageContentOutput(output, response.Body)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
 	}
@@ -106,7 +106,7 @@ func awsRestjson1_deserializeOpErrorGetRawMessageContent(response *smithyhttp.Re
 	}
 }
 
-func awsRestjson1_deserializeOpDocumentGetRawMessageContentOutput(v *GetRawMessageContentOutput, body io.ReadCloser, contentLength int) error {
+func awsRestjson1_deserializeOpDocumentGetRawMessageContentOutput(v *GetRawMessageContentOutput, body io.ReadCloser) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization of nil %T", v)
 	}

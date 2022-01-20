@@ -49,7 +49,7 @@ func (m *awsRestjson1_deserializeOpGetMedia) HandleDeserialize(ctx context.Conte
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
 
-	err = awsRestjson1_deserializeOpDocumentGetMediaOutput(output, response.Body, int(response.ContentLength))
+	err = awsRestjson1_deserializeOpDocumentGetMediaOutput(output, response.Body)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
 	}
@@ -138,7 +138,7 @@ func awsRestjson1_deserializeOpHttpBindingsGetMediaOutput(v *GetMediaOutput, res
 
 	return nil
 }
-func awsRestjson1_deserializeOpDocumentGetMediaOutput(v *GetMediaOutput, body io.ReadCloser, contentLength int) error {
+func awsRestjson1_deserializeOpDocumentGetMediaOutput(v *GetMediaOutput, body io.ReadCloser) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization of nil %T", v)
 	}

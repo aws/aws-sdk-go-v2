@@ -4537,7 +4537,7 @@ func (m *awsRestjson1_deserializeOpGetMapGlyphs) HandleDeserialize(ctx context.C
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
 
-	err = awsRestjson1_deserializeOpDocumentGetMapGlyphsOutput(output, response.Body, int(response.ContentLength))
+	err = awsRestjson1_deserializeOpDocumentGetMapGlyphsOutput(output, response.Body, response.ContentLength)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
 	}
@@ -4623,14 +4623,14 @@ func awsRestjson1_deserializeOpHttpBindingsGetMapGlyphsOutput(v *GetMapGlyphsOut
 
 	return nil
 }
-func awsRestjson1_deserializeOpDocumentGetMapGlyphsOutput(v *GetMapGlyphsOutput, body io.ReadCloser, contentLength int) error {
+func awsRestjson1_deserializeOpDocumentGetMapGlyphsOutput(v *GetMapGlyphsOutput, body io.ReadCloser, contentLength int64) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization of nil %T", v)
 	}
 
 	var buf bytes.Buffer
 	if contentLength > 0 {
-		buf.Grow(contentLength)
+		buf.Grow(int(contentLength))
 	} else {
 		buf.Grow(512)
 	}
@@ -4676,7 +4676,7 @@ func (m *awsRestjson1_deserializeOpGetMapSprites) HandleDeserialize(ctx context.
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
 
-	err = awsRestjson1_deserializeOpDocumentGetMapSpritesOutput(output, response.Body, int(response.ContentLength))
+	err = awsRestjson1_deserializeOpDocumentGetMapSpritesOutput(output, response.Body, response.ContentLength)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
 	}
@@ -4762,14 +4762,14 @@ func awsRestjson1_deserializeOpHttpBindingsGetMapSpritesOutput(v *GetMapSpritesO
 
 	return nil
 }
-func awsRestjson1_deserializeOpDocumentGetMapSpritesOutput(v *GetMapSpritesOutput, body io.ReadCloser, contentLength int) error {
+func awsRestjson1_deserializeOpDocumentGetMapSpritesOutput(v *GetMapSpritesOutput, body io.ReadCloser, contentLength int64) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization of nil %T", v)
 	}
 
 	var buf bytes.Buffer
 	if contentLength > 0 {
-		buf.Grow(contentLength)
+		buf.Grow(int(contentLength))
 	} else {
 		buf.Grow(512)
 	}
@@ -4815,7 +4815,7 @@ func (m *awsRestjson1_deserializeOpGetMapStyleDescriptor) HandleDeserialize(ctx 
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
 
-	err = awsRestjson1_deserializeOpDocumentGetMapStyleDescriptorOutput(output, response.Body, int(response.ContentLength))
+	err = awsRestjson1_deserializeOpDocumentGetMapStyleDescriptorOutput(output, response.Body, response.ContentLength)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
 	}
@@ -4901,14 +4901,14 @@ func awsRestjson1_deserializeOpHttpBindingsGetMapStyleDescriptorOutput(v *GetMap
 
 	return nil
 }
-func awsRestjson1_deserializeOpDocumentGetMapStyleDescriptorOutput(v *GetMapStyleDescriptorOutput, body io.ReadCloser, contentLength int) error {
+func awsRestjson1_deserializeOpDocumentGetMapStyleDescriptorOutput(v *GetMapStyleDescriptorOutput, body io.ReadCloser, contentLength int64) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization of nil %T", v)
 	}
 
 	var buf bytes.Buffer
 	if contentLength > 0 {
-		buf.Grow(contentLength)
+		buf.Grow(int(contentLength))
 	} else {
 		buf.Grow(512)
 	}
@@ -4954,7 +4954,7 @@ func (m *awsRestjson1_deserializeOpGetMapTile) HandleDeserialize(ctx context.Con
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
 
-	err = awsRestjson1_deserializeOpDocumentGetMapTileOutput(output, response.Body, int(response.ContentLength))
+	err = awsRestjson1_deserializeOpDocumentGetMapTileOutput(output, response.Body, response.ContentLength)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
 	}
@@ -5040,14 +5040,14 @@ func awsRestjson1_deserializeOpHttpBindingsGetMapTileOutput(v *GetMapTileOutput,
 
 	return nil
 }
-func awsRestjson1_deserializeOpDocumentGetMapTileOutput(v *GetMapTileOutput, body io.ReadCloser, contentLength int) error {
+func awsRestjson1_deserializeOpDocumentGetMapTileOutput(v *GetMapTileOutput, body io.ReadCloser, contentLength int64) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization of nil %T", v)
 	}
 
 	var buf bytes.Buffer
 	if contentLength > 0 {
-		buf.Grow(contentLength)
+		buf.Grow(int(contentLength))
 	} else {
 		buf.Grow(512)
 	}
