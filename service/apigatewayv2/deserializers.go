@@ -4267,7 +4267,7 @@ func (m *awsRestjson1_deserializeOpExportApi) HandleDeserialize(ctx context.Cont
 	output := &ExportApiOutput{}
 	out.Result = output
 
-	err = awsRestjson1_deserializeOpDocumentExportApiOutput(output, response.Body)
+	err = awsRestjson1_deserializeOpDocumentExportApiOutput(output, response.Body, int(response.ContentLength))
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
 	}
@@ -4335,17 +4335,24 @@ func awsRestjson1_deserializeOpErrorExportApi(response *smithyhttp.Response, met
 	}
 }
 
-func awsRestjson1_deserializeOpDocumentExportApiOutput(v *ExportApiOutput, body io.ReadCloser) error {
+func awsRestjson1_deserializeOpDocumentExportApiOutput(v *ExportApiOutput, body io.ReadCloser, contentLength int) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization of nil %T", v)
 	}
 
-	bs, err := ioutil.ReadAll(body)
+	var buf bytes.Buffer
+	if contentLength > 0 {
+		buf.Grow(contentLength)
+	} else {
+		buf.Grow(512)
+
+	}
+	_, err := buf.ReadFrom(body)
 	if err != nil {
 		return err
 	}
-	if len(bs) > 0 {
-		v.Body = bs
+	if buf.Len() > 0 {
+		v.Body = buf.Bytes()
 	}
 	return nil
 }

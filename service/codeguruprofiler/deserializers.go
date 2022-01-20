@@ -16,7 +16,6 @@ import (
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
-	"io/ioutil"
 	"math"
 	"strings"
 )
@@ -1465,7 +1464,7 @@ func (m *awsRestjson1_deserializeOpGetProfile) HandleDeserialize(ctx context.Con
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
 
-	err = awsRestjson1_deserializeOpDocumentGetProfileOutput(output, response.Body)
+	err = awsRestjson1_deserializeOpDocumentGetProfileOutput(output, response.Body, int(response.ContentLength))
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
 	}
@@ -1553,17 +1552,24 @@ func awsRestjson1_deserializeOpHttpBindingsGetProfileOutput(v *GetProfileOutput,
 
 	return nil
 }
-func awsRestjson1_deserializeOpDocumentGetProfileOutput(v *GetProfileOutput, body io.ReadCloser) error {
+func awsRestjson1_deserializeOpDocumentGetProfileOutput(v *GetProfileOutput, body io.ReadCloser, contentLength int) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization of nil %T", v)
 	}
 
-	bs, err := ioutil.ReadAll(body)
+	var buf bytes.Buffer
+	if contentLength > 0 {
+		buf.Grow(contentLength)
+	} else {
+		buf.Grow(512)
+
+	}
+	_, err := buf.ReadFrom(body)
 	if err != nil {
 		return err
 	}
-	if len(bs) > 0 {
-		v.Profile = bs
+	if buf.Len() > 0 {
+		v.Profile = buf.Bytes()
 	}
 	return nil
 }

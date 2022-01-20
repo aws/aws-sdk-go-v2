@@ -9172,7 +9172,7 @@ func (m *awsRestjson1_deserializeOpGetExport) HandleDeserialize(ctx context.Cont
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
 
-	err = awsRestjson1_deserializeOpDocumentGetExportOutput(output, response.Body)
+	err = awsRestjson1_deserializeOpDocumentGetExportOutput(output, response.Body, int(response.ContentLength))
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
 	}
@@ -9266,17 +9266,24 @@ func awsRestjson1_deserializeOpHttpBindingsGetExportOutput(v *GetExportOutput, r
 
 	return nil
 }
-func awsRestjson1_deserializeOpDocumentGetExportOutput(v *GetExportOutput, body io.ReadCloser) error {
+func awsRestjson1_deserializeOpDocumentGetExportOutput(v *GetExportOutput, body io.ReadCloser, contentLength int) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization of nil %T", v)
 	}
 
-	bs, err := ioutil.ReadAll(body)
+	var buf bytes.Buffer
+	if contentLength > 0 {
+		buf.Grow(contentLength)
+	} else {
+		buf.Grow(512)
+
+	}
+	_, err := buf.ReadFrom(body)
 	if err != nil {
 		return err
 	}
-	if len(bs) > 0 {
-		v.Body = bs
+	if buf.Len() > 0 {
+		v.Body = buf.Bytes()
 	}
 	return nil
 }
@@ -12172,7 +12179,7 @@ func (m *awsRestjson1_deserializeOpGetSdk) HandleDeserialize(ctx context.Context
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
 
-	err = awsRestjson1_deserializeOpDocumentGetSdkOutput(output, response.Body)
+	err = awsRestjson1_deserializeOpDocumentGetSdkOutput(output, response.Body, int(response.ContentLength))
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
 	}
@@ -12266,17 +12273,24 @@ func awsRestjson1_deserializeOpHttpBindingsGetSdkOutput(v *GetSdkOutput, respons
 
 	return nil
 }
-func awsRestjson1_deserializeOpDocumentGetSdkOutput(v *GetSdkOutput, body io.ReadCloser) error {
+func awsRestjson1_deserializeOpDocumentGetSdkOutput(v *GetSdkOutput, body io.ReadCloser, contentLength int) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization of nil %T", v)
 	}
 
-	bs, err := ioutil.ReadAll(body)
+	var buf bytes.Buffer
+	if contentLength > 0 {
+		buf.Grow(contentLength)
+	} else {
+		buf.Grow(512)
+
+	}
+	_, err := buf.ReadFrom(body)
 	if err != nil {
 		return err
 	}
-	if len(bs) > 0 {
-		v.Body = bs
+	if buf.Len() > 0 {
+		v.Body = buf.Bytes()
 	}
 	return nil
 }

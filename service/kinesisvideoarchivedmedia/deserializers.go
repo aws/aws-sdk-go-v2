@@ -50,7 +50,7 @@ func (m *awsRestjson1_deserializeOpGetClip) HandleDeserialize(ctx context.Contex
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
 
-	err = awsRestjson1_deserializeOpDocumentGetClipOutput(output, response.Body)
+	err = awsRestjson1_deserializeOpDocumentGetClipOutput(output, response.Body, int(response.ContentLength))
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
 	}
@@ -148,7 +148,7 @@ func awsRestjson1_deserializeOpHttpBindingsGetClipOutput(v *GetClipOutput, respo
 
 	return nil
 }
-func awsRestjson1_deserializeOpDocumentGetClipOutput(v *GetClipOutput, body io.ReadCloser) error {
+func awsRestjson1_deserializeOpDocumentGetClipOutput(v *GetClipOutput, body io.ReadCloser, contentLength int) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization of nil %T", v)
 	}
@@ -532,7 +532,7 @@ func (m *awsRestjson1_deserializeOpGetMediaForFragmentList) HandleDeserialize(ct
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
 
-	err = awsRestjson1_deserializeOpDocumentGetMediaForFragmentListOutput(output, response.Body)
+	err = awsRestjson1_deserializeOpDocumentGetMediaForFragmentListOutput(output, response.Body, int(response.ContentLength))
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
 	}
@@ -615,7 +615,7 @@ func awsRestjson1_deserializeOpHttpBindingsGetMediaForFragmentListOutput(v *GetM
 
 	return nil
 }
-func awsRestjson1_deserializeOpDocumentGetMediaForFragmentListOutput(v *GetMediaForFragmentListOutput, body io.ReadCloser) error {
+func awsRestjson1_deserializeOpDocumentGetMediaForFragmentListOutput(v *GetMediaForFragmentListOutput, body io.ReadCloser, contentLength int) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization of nil %T", v)
 	}

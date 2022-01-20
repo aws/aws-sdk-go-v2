@@ -217,7 +217,7 @@ func (m *awsRestjson1_deserializeOpGetSnapshotBlock) HandleDeserialize(ctx conte
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
 
-	err = awsRestjson1_deserializeOpDocumentGetSnapshotBlockOutput(output, response.Body)
+	err = awsRestjson1_deserializeOpDocumentGetSnapshotBlockOutput(output, response.Body, int(response.ContentLength))
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
 	}
@@ -320,7 +320,7 @@ func awsRestjson1_deserializeOpHttpBindingsGetSnapshotBlockOutput(v *GetSnapshot
 
 	return nil
 }
-func awsRestjson1_deserializeOpDocumentGetSnapshotBlockOutput(v *GetSnapshotBlockOutput, body io.ReadCloser) error {
+func awsRestjson1_deserializeOpDocumentGetSnapshotBlockOutput(v *GetSnapshotBlockOutput, body io.ReadCloser, contentLength int) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization of nil %T", v)
 	}

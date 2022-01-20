@@ -4157,7 +4157,7 @@ func (m *awsRestxml_deserializeOpGetBucketPolicy) HandleDeserialize(ctx context.
 	output := &GetBucketPolicyOutput{}
 	out.Result = output
 
-	err = awsRestxml_deserializeOpDocumentGetBucketPolicyOutput(output, response.Body)
+	err = awsRestxml_deserializeOpDocumentGetBucketPolicyOutput(output, response.Body, int(response.ContentLength))
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
 	}
@@ -4205,16 +4205,23 @@ func awsRestxml_deserializeOpErrorGetBucketPolicy(response *smithyhttp.Response,
 	}
 }
 
-func awsRestxml_deserializeOpDocumentGetBucketPolicyOutput(v *GetBucketPolicyOutput, body io.ReadCloser) error {
+func awsRestxml_deserializeOpDocumentGetBucketPolicyOutput(v *GetBucketPolicyOutput, body io.ReadCloser, contentLength int) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization of nil %T", v)
 	}
-	bs, err := ioutil.ReadAll(body)
+	var buf bytes.Buffer
+	if contentLength > 0 {
+		buf.Grow(contentLength)
+	} else {
+		buf.Grow(512)
+
+	}
+	_, err := buf.ReadFrom(body)
 	if err != nil {
 		return err
 	}
-	if len(bs) > 0 {
-		v.Policy = ptr.String(string(bs))
+	if buf.Len() > 0 {
+		v.Policy = ptr.String(buf.String())
 	}
 	return nil
 }
@@ -5129,7 +5136,7 @@ func (m *awsRestxml_deserializeOpGetObject) HandleDeserialize(ctx context.Contex
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
 
-	err = awsRestxml_deserializeOpDocumentGetObjectOutput(output, response.Body)
+	err = awsRestxml_deserializeOpDocumentGetObjectOutput(output, response.Body, int(response.ContentLength))
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
 	}
@@ -5386,7 +5393,7 @@ func awsRestxml_deserializeOpHttpBindingsGetObjectOutput(v *GetObjectOutput, res
 
 	return nil
 }
-func awsRestxml_deserializeOpDocumentGetObjectOutput(v *GetObjectOutput, body io.ReadCloser) error {
+func awsRestxml_deserializeOpDocumentGetObjectOutput(v *GetObjectOutput, body io.ReadCloser, contentLength int) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization of nil %T", v)
 	}
@@ -6163,7 +6170,7 @@ func (m *awsRestxml_deserializeOpGetObjectTorrent) HandleDeserialize(ctx context
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
 
-	err = awsRestxml_deserializeOpDocumentGetObjectTorrentOutput(output, response.Body)
+	err = awsRestxml_deserializeOpDocumentGetObjectTorrentOutput(output, response.Body, int(response.ContentLength))
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
 	}
@@ -6223,7 +6230,7 @@ func awsRestxml_deserializeOpHttpBindingsGetObjectTorrentOutput(v *GetObjectTorr
 
 	return nil
 }
-func awsRestxml_deserializeOpDocumentGetObjectTorrentOutput(v *GetObjectTorrentOutput, body io.ReadCloser) error {
+func awsRestxml_deserializeOpDocumentGetObjectTorrentOutput(v *GetObjectTorrentOutput, body io.ReadCloser, contentLength int) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization of nil %T", v)
 	}
