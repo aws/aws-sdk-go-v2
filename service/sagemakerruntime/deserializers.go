@@ -158,8 +158,8 @@ func awsRestjson1_deserializeOpDocumentInvokeEndpointOutput(v *InvokeEndpointOut
 		buf.Grow(contentLength)
 	} else {
 		buf.Grow(512)
-
 	}
+
 	_, err := buf.ReadFrom(body)
 	if err != nil {
 		return err

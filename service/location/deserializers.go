@@ -4633,8 +4633,8 @@ func awsRestjson1_deserializeOpDocumentGetMapGlyphsOutput(v *GetMapGlyphsOutput,
 		buf.Grow(contentLength)
 	} else {
 		buf.Grow(512)
-
 	}
+
 	_, err := buf.ReadFrom(body)
 	if err != nil {
 		return err
@@ -4772,8 +4772,8 @@ func awsRestjson1_deserializeOpDocumentGetMapSpritesOutput(v *GetMapSpritesOutpu
 		buf.Grow(contentLength)
 	} else {
 		buf.Grow(512)
-
 	}
+
 	_, err := buf.ReadFrom(body)
 	if err != nil {
 		return err
@@ -4911,8 +4911,8 @@ func awsRestjson1_deserializeOpDocumentGetMapStyleDescriptorOutput(v *GetMapStyl
 		buf.Grow(contentLength)
 	} else {
 		buf.Grow(512)
-
 	}
+
 	_, err := buf.ReadFrom(body)
 	if err != nil {
 		return err
@@ -5050,8 +5050,8 @@ func awsRestjson1_deserializeOpDocumentGetMapTileOutput(v *GetMapTileOutput, bod
 		buf.Grow(contentLength)
 	} else {
 		buf.Grow(512)
-
 	}
+
 	_, err := buf.ReadFrom(body)
 	if err != nil {
 		return err

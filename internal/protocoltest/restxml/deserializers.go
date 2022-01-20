@@ -1228,8 +1228,8 @@ func awsRestxml_deserializeOpDocumentHttpPayloadTraitsOutput(v *HttpPayloadTrait
 		buf.Grow(contentLength)
 	} else {
 		buf.Grow(512)
-
 	}
+
 	_, err := buf.ReadFrom(body)
 	if err != nil {
 		return err
@@ -1335,8 +1335,8 @@ func awsRestxml_deserializeOpDocumentHttpPayloadTraitsWithMediaTypeOutput(v *Htt
 		buf.Grow(contentLength)
 	} else {
 		buf.Grow(512)
-
 	}
+
 	_, err := buf.ReadFrom(body)
 	if err != nil {
 		return err

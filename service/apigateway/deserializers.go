@@ -9276,8 +9276,8 @@ func awsRestjson1_deserializeOpDocumentGetExportOutput(v *GetExportOutput, body 
 		buf.Grow(contentLength)
 	} else {
 		buf.Grow(512)
-
 	}
+
 	_, err := buf.ReadFrom(body)
 	if err != nil {
 		return err
@@ -12283,8 +12283,8 @@ func awsRestjson1_deserializeOpDocumentGetSdkOutput(v *GetSdkOutput, body io.Rea
 		buf.Grow(contentLength)
 	} else {
 		buf.Grow(512)
-
 	}
+
 	_, err := buf.ReadFrom(body)
 	if err != nil {
 		return err

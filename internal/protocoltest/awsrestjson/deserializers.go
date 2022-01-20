@@ -1269,8 +1269,8 @@ func awsRestjson1_deserializeOpDocumentHttpEnumPayloadOutput(v *HttpEnumPayloadO
 		buf.Grow(contentLength)
 	} else {
 		buf.Grow(512)
-
 	}
+
 	_, err := buf.ReadFrom(body)
 	if err != nil {
 		return err
@@ -1393,8 +1393,8 @@ func awsRestjson1_deserializeOpDocumentHttpPayloadTraitsOutput(v *HttpPayloadTra
 		buf.Grow(contentLength)
 	} else {
 		buf.Grow(512)
-
 	}
+
 	_, err := buf.ReadFrom(body)
 	if err != nil {
 		return err
@@ -1517,8 +1517,8 @@ func awsRestjson1_deserializeOpDocumentHttpPayloadTraitsWithMediaTypeOutput(v *H
 		buf.Grow(contentLength)
 	} else {
 		buf.Grow(512)
-
 	}
+
 	_, err := buf.ReadFrom(body)
 	if err != nil {
 		return err
@@ -2418,8 +2418,8 @@ func awsRestjson1_deserializeOpDocumentHttpStringPayloadOutput(v *HttpStringPayl
 		buf.Grow(contentLength)
 	} else {
 		buf.Grow(512)
-
 	}
+
 	_, err := buf.ReadFrom(body)
 	if err != nil {
 		return err
@@ -4237,8 +4237,8 @@ func awsRestjson1_deserializeOpDocumentMalformedAcceptWithPayloadOutput(v *Malfo
 		buf.Grow(contentLength)
 	} else {
 		buf.Grow(512)
-
 	}
+
 	_, err := buf.ReadFrom(body)
 	if err != nil {
 		return err
@@ -8830,8 +8830,8 @@ func awsRestjson1_deserializeOpDocumentTestPayloadBlobOutput(v *TestPayloadBlobO
 		buf.Grow(contentLength)
 	} else {
 		buf.Grow(512)
-
 	}
+
 	_, err := buf.ReadFrom(body)
 	if err != nil {
 		return err

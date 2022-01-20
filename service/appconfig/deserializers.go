@@ -1012,8 +1012,8 @@ func awsRestjson1_deserializeOpDocumentCreateHostedConfigurationVersionOutput(v 
 		buf.Grow(contentLength)
 	} else {
 		buf.Grow(512)
-
 	}
+
 	_, err := buf.ReadFrom(body)
 	if err != nil {
 		return err
@@ -1806,8 +1806,8 @@ func awsRestjson1_deserializeOpDocumentGetConfigurationOutput(v *GetConfiguratio
 		buf.Grow(contentLength)
 	} else {
 		buf.Grow(512)
-
 	}
+
 	_, err := buf.ReadFrom(body)
 	if err != nil {
 		return err
@@ -3006,8 +3006,8 @@ func awsRestjson1_deserializeOpDocumentGetHostedConfigurationVersionOutput(v *Ge
 		buf.Grow(contentLength)
 	} else {
 		buf.Grow(512)
-
 	}
+
 	_, err := buf.ReadFrom(body)
 	if err != nil {
 		return err

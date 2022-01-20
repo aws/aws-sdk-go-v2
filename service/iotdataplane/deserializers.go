@@ -139,8 +139,8 @@ func awsRestjson1_deserializeOpDocumentDeleteThingShadowOutput(v *DeleteThingSha
 		buf.Grow(contentLength)
 	} else {
 		buf.Grow(512)
-
 	}
+
 	_, err := buf.ReadFrom(body)
 	if err != nil {
 		return err
@@ -478,8 +478,8 @@ func awsRestjson1_deserializeOpDocumentGetThingShadowOutput(v *GetThingShadowOut
 		buf.Grow(contentLength)
 	} else {
 		buf.Grow(512)
-
 	}
+
 	_, err := buf.ReadFrom(body)
 	if err != nil {
 		return err
@@ -1068,8 +1068,8 @@ func awsRestjson1_deserializeOpDocumentUpdateThingShadowOutput(v *UpdateThingSha
 		buf.Grow(contentLength)
 	} else {
 		buf.Grow(512)
-
 	}
+
 	_, err := buf.ReadFrom(body)
 	if err != nil {
 		return err

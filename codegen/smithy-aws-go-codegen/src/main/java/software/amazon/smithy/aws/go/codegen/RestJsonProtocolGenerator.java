@@ -415,9 +415,9 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                             if (!targetShape.hasTrait(StreamingTrait.class)) {
                                 writer.addUseImports(SmithyGoDependency.BYTES);
                                 writer.write("var buf bytes.Buffer");
-                                writer.openBlock("if contentLength > 0 {", "}", () -> {
+                                writer.openBlock("if contentLength > 0 {", "", () -> {
                                     writer.write("buf.Grow(contentLength)");
-                                    writer.openBlock("} else {", "", () -> {
+                                    writer.openBlock("} else {", "}", () -> {
                                         writer.write("buf.Grow(512)");
                                     });
                                 });

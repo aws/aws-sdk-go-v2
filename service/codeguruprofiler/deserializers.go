@@ -1562,8 +1562,8 @@ func awsRestjson1_deserializeOpDocumentGetProfileOutput(v *GetProfileOutput, bod
 		buf.Grow(contentLength)
 	} else {
 		buf.Grow(512)
-
 	}
+
 	_, err := buf.ReadFrom(body)
 	if err != nil {
 		return err

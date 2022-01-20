@@ -3436,8 +3436,8 @@ func awsRestjson1_deserializeOpDocumentGetIntrospectionSchemaOutput(v *GetIntros
 		buf.Grow(contentLength)
 	} else {
 		buf.Grow(512)
-
 	}
+
 	_, err := buf.ReadFrom(body)
 	if err != nil {
 		return err
