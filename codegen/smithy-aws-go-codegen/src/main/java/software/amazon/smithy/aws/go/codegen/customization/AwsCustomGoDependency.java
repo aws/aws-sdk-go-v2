@@ -42,6 +42,7 @@ public final class AwsCustomGoDependency extends AwsGoDependency {
             "service/route53/internal/customizations", "route53cust");
     public static final GoDependency PRESIGNEDURL_CUSTOMIZATION = awsModuleDep(
             "service/internal/presigned-url", null, Versions.INTERNAL_PRESIGNURL, "presignedurlcust");
+    public static final GoDependency EVENTBRIDGE_CUSTOMIZATION = aws("service/eventbridge/internal/customizations", "ebcust");
 
     private AwsCustomGoDependency() {
         super();
