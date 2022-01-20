@@ -379,7 +379,7 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
                 shape.accept(new XmlShapeDeserVisitor(context, filterMemberShapes));
                 return;
             }
-            writer.openBlock("func $L(v $P, body io.ReadCloser) error {", "}", funcName, shapeSymbol, () -> {
+            writer.openBlock("func $L(v $P, body io.ReadCloser, contentLength int) error {", "}", funcName, shapeSymbol, () -> {
                 writer.openBlock("if v == nil {", "}", () -> {
                     writer.write("return fmt.Errorf(\"unsupported deserialization of nil %T\", v)");
                 });
@@ -391,18 +391,25 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
                     return;
                 }
 
-                writer.addUseImports(SmithyGoDependency.IOUTIL);
-                writer.write("bs, err := ioutil.ReadAll(body)");
+                writer.addUseImports(SmithyGoDependency.BYTES);
+                writer.write("var buf bytes.Buffer");
+                writer.openBlock("if contentLength > 0 {", "}", () -> {
+                    writer.write("buf.Grow(contentLength)");
+                    writer.openBlock("} else {", "", () -> {
+                        writer.write("buf.Grow(512)");
+                    });
+                });
+                writer.write("_, err := buf.ReadFrom(body)");
                 writer.write("if err != nil { return err }");
-                writer.openBlock("if len(bs) > 0 {", "}", () -> {
+                writer.openBlock("if buf.Len() > 0 {", "}", () -> {
                     if (targetShape.isBlobShape()) {
-                        writer.write("v.$L = bs", memberName);
+                        writer.write("v.$L = buf.Bytes()", memberName);
                     } else { // string
                         writer.addUseImports(SmithyGoDependency.SMITHY_PTR);
                         if (targetShape.hasTrait(EnumTrait.class)) {
-                            writer.write("v.$L = $T(bs)", memberName, symbolProvider.toSymbol(targetShape));
+                            writer.write("v.$L = $T(buf.Bytes())", memberName, symbolProvider.toSymbol(targetShape));
                         } else {
-                            writer.write("v.$L = ptr.String(string(bs))", memberName);
+                            writer.write("v.$L = ptr.String(buf.String())", memberName);
                         }
                     }
                 });
@@ -416,7 +423,7 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
             GoWriter writer, ServiceShape service, Shape shape
     ) {
         String deserFuncName = ProtocolGenerator.getDocumentDeserializerFunctionName(shape, service, getProtocolName());
-        writer.write("err = $L(output, response.Body)", deserFuncName);
+        writer.write("err = $L(output, response.Body, int(response.ContentLength))", deserFuncName);
         writer.openBlock("if err != nil {", "}", () -> {
             writer.addUseImports(SmithyGoDependency.SMITHY);
             writer.write(String.format("return out, metadata, &smithy.DeserializationError{Err:%s}",
