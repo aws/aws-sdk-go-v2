@@ -5732,7 +5732,7 @@ func (m *awsRestjson1_deserializeOpInvoke) HandleDeserialize(ctx context.Context
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
 
-	err = awsRestjson1_deserializeOpDocumentInvokeOutput(output, response.Body)
+	err = awsRestjson1_deserializeOpDocumentInvokeOutput(output, response.Body, response.ContentLength)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
 	}
@@ -5893,17 +5893,24 @@ func awsRestjson1_deserializeOpHttpBindingsInvokeOutput(v *InvokeOutput, respons
 
 	return nil
 }
-func awsRestjson1_deserializeOpDocumentInvokeOutput(v *InvokeOutput, body io.ReadCloser) error {
+func awsRestjson1_deserializeOpDocumentInvokeOutput(v *InvokeOutput, body io.ReadCloser, contentLength int64) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization of nil %T", v)
 	}
 
-	bs, err := ioutil.ReadAll(body)
+	var buf bytes.Buffer
+	if contentLength > 0 {
+		buf.Grow(int(contentLength))
+	} else {
+		buf.Grow(512)
+	}
+
+	_, err := buf.ReadFrom(body)
 	if err != nil {
 		return err
 	}
-	if len(bs) > 0 {
-		v.Payload = bs
+	if buf.Len() > 0 {
+		v.Payload = buf.Bytes()
 	}
 	return nil
 }

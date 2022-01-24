@@ -1200,7 +1200,7 @@ func (m *awsRestjson1_deserializeOpHttpEnumPayload) HandleDeserialize(ctx contex
 	output := &HttpEnumPayloadOutput{}
 	out.Result = output
 
-	err = awsRestjson1_deserializeOpDocumentHttpEnumPayloadOutput(output, response.Body)
+	err = awsRestjson1_deserializeOpDocumentHttpEnumPayloadOutput(output, response.Body, response.ContentLength)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
 	}
@@ -1259,17 +1259,24 @@ func awsRestjson1_deserializeOpErrorHttpEnumPayload(response *smithyhttp.Respons
 	}
 }
 
-func awsRestjson1_deserializeOpDocumentHttpEnumPayloadOutput(v *HttpEnumPayloadOutput, body io.ReadCloser) error {
+func awsRestjson1_deserializeOpDocumentHttpEnumPayloadOutput(v *HttpEnumPayloadOutput, body io.ReadCloser, contentLength int64) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization of nil %T", v)
 	}
 
-	bs, err := ioutil.ReadAll(body)
+	var buf bytes.Buffer
+	if contentLength > 0 {
+		buf.Grow(int(contentLength))
+	} else {
+		buf.Grow(512)
+	}
+
+	_, err := buf.ReadFrom(body)
 	if err != nil {
 		return err
 	}
-	if len(bs) > 0 {
-		v.Payload = types.StringEnum(bs)
+	if buf.Len() > 0 {
+		v.Payload = types.StringEnum(buf.Bytes())
 	}
 	return nil
 }
@@ -1305,7 +1312,7 @@ func (m *awsRestjson1_deserializeOpHttpPayloadTraits) HandleDeserialize(ctx cont
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
 
-	err = awsRestjson1_deserializeOpDocumentHttpPayloadTraitsOutput(output, response.Body)
+	err = awsRestjson1_deserializeOpDocumentHttpPayloadTraitsOutput(output, response.Body, response.ContentLength)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
 	}
@@ -1376,17 +1383,24 @@ func awsRestjson1_deserializeOpHttpBindingsHttpPayloadTraitsOutput(v *HttpPayloa
 
 	return nil
 }
-func awsRestjson1_deserializeOpDocumentHttpPayloadTraitsOutput(v *HttpPayloadTraitsOutput, body io.ReadCloser) error {
+func awsRestjson1_deserializeOpDocumentHttpPayloadTraitsOutput(v *HttpPayloadTraitsOutput, body io.ReadCloser, contentLength int64) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization of nil %T", v)
 	}
 
-	bs, err := ioutil.ReadAll(body)
+	var buf bytes.Buffer
+	if contentLength > 0 {
+		buf.Grow(int(contentLength))
+	} else {
+		buf.Grow(512)
+	}
+
+	_, err := buf.ReadFrom(body)
 	if err != nil {
 		return err
 	}
-	if len(bs) > 0 {
-		v.Blob = bs
+	if buf.Len() > 0 {
+		v.Blob = buf.Bytes()
 	}
 	return nil
 }
@@ -1422,7 +1436,7 @@ func (m *awsRestjson1_deserializeOpHttpPayloadTraitsWithMediaType) HandleDeseria
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
 
-	err = awsRestjson1_deserializeOpDocumentHttpPayloadTraitsWithMediaTypeOutput(output, response.Body)
+	err = awsRestjson1_deserializeOpDocumentHttpPayloadTraitsWithMediaTypeOutput(output, response.Body, response.ContentLength)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
 	}
@@ -1493,17 +1507,24 @@ func awsRestjson1_deserializeOpHttpBindingsHttpPayloadTraitsWithMediaTypeOutput(
 
 	return nil
 }
-func awsRestjson1_deserializeOpDocumentHttpPayloadTraitsWithMediaTypeOutput(v *HttpPayloadTraitsWithMediaTypeOutput, body io.ReadCloser) error {
+func awsRestjson1_deserializeOpDocumentHttpPayloadTraitsWithMediaTypeOutput(v *HttpPayloadTraitsWithMediaTypeOutput, body io.ReadCloser, contentLength int64) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization of nil %T", v)
 	}
 
-	bs, err := ioutil.ReadAll(body)
+	var buf bytes.Buffer
+	if contentLength > 0 {
+		buf.Grow(int(contentLength))
+	} else {
+		buf.Grow(512)
+	}
+
+	_, err := buf.ReadFrom(body)
 	if err != nil {
 		return err
 	}
-	if len(bs) > 0 {
-		v.Blob = bs
+	if buf.Len() > 0 {
+		v.Blob = buf.Bytes()
 	}
 	return nil
 }
@@ -2328,7 +2349,7 @@ func (m *awsRestjson1_deserializeOpHttpStringPayload) HandleDeserialize(ctx cont
 	output := &HttpStringPayloadOutput{}
 	out.Result = output
 
-	err = awsRestjson1_deserializeOpDocumentHttpStringPayloadOutput(output, response.Body)
+	err = awsRestjson1_deserializeOpDocumentHttpStringPayloadOutput(output, response.Body, response.ContentLength)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
 	}
@@ -2387,17 +2408,24 @@ func awsRestjson1_deserializeOpErrorHttpStringPayload(response *smithyhttp.Respo
 	}
 }
 
-func awsRestjson1_deserializeOpDocumentHttpStringPayloadOutput(v *HttpStringPayloadOutput, body io.ReadCloser) error {
+func awsRestjson1_deserializeOpDocumentHttpStringPayloadOutput(v *HttpStringPayloadOutput, body io.ReadCloser, contentLength int64) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization of nil %T", v)
 	}
 
-	bs, err := ioutil.ReadAll(body)
+	var buf bytes.Buffer
+	if contentLength > 0 {
+		buf.Grow(int(contentLength))
+	} else {
+		buf.Grow(512)
+	}
+
+	_, err := buf.ReadFrom(body)
 	if err != nil {
 		return err
 	}
-	if len(bs) > 0 {
-		v.Payload = ptr.String(string(bs))
+	if buf.Len() > 0 {
+		v.Payload = ptr.String(buf.String())
 	}
 	return nil
 }
@@ -4140,7 +4168,7 @@ func (m *awsRestjson1_deserializeOpMalformedAcceptWithPayload) HandleDeserialize
 	output := &MalformedAcceptWithPayloadOutput{}
 	out.Result = output
 
-	err = awsRestjson1_deserializeOpDocumentMalformedAcceptWithPayloadOutput(output, response.Body)
+	err = awsRestjson1_deserializeOpDocumentMalformedAcceptWithPayloadOutput(output, response.Body, response.ContentLength)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
 	}
@@ -4199,17 +4227,24 @@ func awsRestjson1_deserializeOpErrorMalformedAcceptWithPayload(response *smithyh
 	}
 }
 
-func awsRestjson1_deserializeOpDocumentMalformedAcceptWithPayloadOutput(v *MalformedAcceptWithPayloadOutput, body io.ReadCloser) error {
+func awsRestjson1_deserializeOpDocumentMalformedAcceptWithPayloadOutput(v *MalformedAcceptWithPayloadOutput, body io.ReadCloser, contentLength int64) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization of nil %T", v)
 	}
 
-	bs, err := ioutil.ReadAll(body)
+	var buf bytes.Buffer
+	if contentLength > 0 {
+		buf.Grow(int(contentLength))
+	} else {
+		buf.Grow(512)
+	}
+
+	_, err := buf.ReadFrom(body)
 	if err != nil {
 		return err
 	}
-	if len(bs) > 0 {
-		v.Payload = bs
+	if buf.Len() > 0 {
+		v.Payload = buf.Bytes()
 	}
 	return nil
 }
@@ -8714,7 +8749,7 @@ func (m *awsRestjson1_deserializeOpTestPayloadBlob) HandleDeserialize(ctx contex
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
 
-	err = awsRestjson1_deserializeOpDocumentTestPayloadBlobOutput(output, response.Body)
+	err = awsRestjson1_deserializeOpDocumentTestPayloadBlobOutput(output, response.Body, response.ContentLength)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
 	}
@@ -8785,17 +8820,24 @@ func awsRestjson1_deserializeOpHttpBindingsTestPayloadBlobOutput(v *TestPayloadB
 
 	return nil
 }
-func awsRestjson1_deserializeOpDocumentTestPayloadBlobOutput(v *TestPayloadBlobOutput, body io.ReadCloser) error {
+func awsRestjson1_deserializeOpDocumentTestPayloadBlobOutput(v *TestPayloadBlobOutput, body io.ReadCloser, contentLength int64) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization of nil %T", v)
 	}
 
-	bs, err := ioutil.ReadAll(body)
+	var buf bytes.Buffer
+	if contentLength > 0 {
+		buf.Grow(int(contentLength))
+	} else {
+		buf.Grow(512)
+	}
+
+	_, err := buf.ReadFrom(body)
 	if err != nil {
 		return err
 	}
-	if len(bs) > 0 {
-		v.Data = bs
+	if buf.Len() > 0 {
+		v.Data = buf.Bytes()
 	}
 	return nil
 }
