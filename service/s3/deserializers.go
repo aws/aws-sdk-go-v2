@@ -4157,7 +4157,7 @@ func (m *awsRestxml_deserializeOpGetBucketPolicy) HandleDeserialize(ctx context.
 	output := &GetBucketPolicyOutput{}
 	out.Result = output
 
-	err = awsRestxml_deserializeOpDocumentGetBucketPolicyOutput(output, response.Body)
+	err = awsRestxml_deserializeOpDocumentGetBucketPolicyOutput(output, response.Body, response.ContentLength)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
 	}
@@ -4205,16 +4205,23 @@ func awsRestxml_deserializeOpErrorGetBucketPolicy(response *smithyhttp.Response,
 	}
 }
 
-func awsRestxml_deserializeOpDocumentGetBucketPolicyOutput(v *GetBucketPolicyOutput, body io.ReadCloser) error {
+func awsRestxml_deserializeOpDocumentGetBucketPolicyOutput(v *GetBucketPolicyOutput, body io.ReadCloser, contentLength int64) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization of nil %T", v)
 	}
-	bs, err := ioutil.ReadAll(body)
+	var buf bytes.Buffer
+	if contentLength > 0 {
+		buf.Grow(int(contentLength))
+	} else {
+		buf.Grow(512)
+	}
+
+	_, err := buf.ReadFrom(body)
 	if err != nil {
 		return err
 	}
-	if len(bs) > 0 {
-		v.Policy = ptr.String(string(bs))
+	if buf.Len() > 0 {
+		v.Policy = ptr.String(buf.String())
 	}
 	return nil
 }

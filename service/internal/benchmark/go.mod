@@ -7,6 +7,8 @@ require (
 	github.com/aws/aws-sdk-go-v2 v1.13.0
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.13.0
 	github.com/aws/aws-sdk-go-v2/service/lexruntimeservice v1.10.0
+	github.com/aws/aws-sdk-go-v2/service/s3 v1.24.0 // indirect
+	github.com/aws/aws-sdk-go-v2/service/schemas v1.12.0 // indirect
 	github.com/aws/smithy-go v1.10.0
 )
 
@@ -23,3 +25,7 @@ replace github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding => ../../.
 replace github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery => ../../../service/internal/endpoint-discovery/
 
 replace github.com/aws/aws-sdk-go-v2/service/lexruntimeservice => ../../../service/lexruntimeservice/
+
+replace github.com/aws/aws-sdk-go-v2/service/s3 => ../../../service/s3/
+
+replace github.com/aws/aws-sdk-go-v2/service/schemas => ../../../service/schemas/

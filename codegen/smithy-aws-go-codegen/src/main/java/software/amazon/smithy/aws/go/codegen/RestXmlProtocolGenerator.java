@@ -105,7 +105,8 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
         writer.write("");
 
         Shape inputShape = ProtocolUtils.expectInput(context.getModel(), operation);
-        String functionName = ProtocolGenerator.getDocumentSerializerFunctionName(inputShape, context.getService(), getProtocolName());
+        String functionName = ProtocolGenerator.getDocumentSerializerFunctionName(inputShape, context.getService(),
+                getProtocolName());
 
         initalizeXmlEncoder(context, writer, inputShape, "root", "input");
 
@@ -116,7 +117,7 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
         writer.insertTrailingNewline();
 
         writer.openBlock("if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); "
-                         + "err != nil {", "}", () -> {
+                + "err != nil {", "}", () -> {
             writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
         });
     }
@@ -169,14 +170,16 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
                             .getTrait(XmlNamespaceTrait.class);
                     if (xmlNamespaceTrait.isPresent()) {
                         XmlNamespaceTrait namespace = xmlNamespaceTrait.get();
-                        writer.write("payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute($S, $S))",
+                        writer.write(
+                                "payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute($S, $S))",
                                 namespace.getPrefix().isPresent() ? namespace.getPrefix().get() : "", namespace.getUri()
                         );
                     }
 
                     String functionName = ProtocolGenerator.getDocumentSerializerFunctionName(
                             payloadShape, context.getService(), getProtocolName());
-                    writer.openBlock("if err := $L($L, xmlEncoder.RootElement(payloadRoot)); err != nil {", "}", functionName,
+                    writer.openBlock("if err := $L($L, xmlEncoder.RootElement(payloadRoot)); err != nil {", "}",
+                            functionName,
                             s, () -> {
                                 writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
                             });
@@ -188,7 +191,8 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
     @Override
     protected void generateDocumentBodyShapeSerializers(GenerationContext context, Set<Shape> shapes) {
         // filter shapes marked as attributes
-        XmlShapeSerVisitor visitor = new XmlShapeSerVisitor(context, memberShape -> !memberShape.hasTrait(XmlAttributeTrait.class));
+        XmlShapeSerVisitor visitor = new XmlShapeSerVisitor(context,
+                memberShape -> !memberShape.hasTrait(XmlAttributeTrait.class));
         shapes.forEach(shape -> {
             if (generatedDocumentBodyShapeSerializers.contains(shape.toShapeId())) {
                 return;
@@ -303,7 +307,8 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
 
             // if target shape is of type String or type Blob, then delegate deserializers for explicit payload shapes
             if (payloadShape.isStringShape() || payloadShape.isBlobShape()) {
-                writeMiddlewarePayloadBindingDeserializerDelegator(writer, context.getService(), targetShape);
+                writeMiddlewarePayloadBindingDeserializerDelegator(writer, context.getService(), targetShape,
+                        payloadShape);
                 return;
             }
             // for other payload target types we should deserialize using the appropriate document deserializer
@@ -366,7 +371,8 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
         GoWriter writer = context.getWriter().get();
         SymbolProvider symbolProvider = context.getSymbolProvider();
         Symbol shapeSymbol = symbolProvider.toSymbol(shape);
-        String funcName = ProtocolGenerator.getDocumentDeserializerFunctionName(shape, context.getService(), getProtocolName());
+        String funcName = ProtocolGenerator.getDocumentDeserializerFunctionName(shape, context.getService(),
+                getProtocolName());
 
         for (MemberShape memberShape : new TreeSet<>(shape.members())) {
             if (!filterMemberShapes.test(memberShape)) {
@@ -379,44 +385,66 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
                 shape.accept(new XmlShapeDeserVisitor(context, filterMemberShapes));
                 return;
             }
-            writer.openBlock("func $L(v $P, body io.ReadCloser) error {", "}", funcName, shapeSymbol, () -> {
-                writer.openBlock("if v == nil {", "}", () -> {
-                    writer.write("return fmt.Errorf(\"unsupported deserialization of nil %T\", v)");
-                });
-                writer.insertTrailingNewline();
 
-                if (targetShape.hasTrait(StreamingTrait.class)) {
-                    writer.write("v.$L = body", memberName);
-                    writer.write("return nil");
-                    return;
-                }
+            String contentLengthParam = "";
+            if (!targetShape.hasTrait(StreamingTrait.class)) {
+                contentLengthParam = "contentLength int64";
+            }
 
-                writer.addUseImports(SmithyGoDependency.IOUTIL);
-                writer.write("bs, err := ioutil.ReadAll(body)");
-                writer.write("if err != nil { return err }");
-                writer.openBlock("if len(bs) > 0 {", "}", () -> {
-                    if (targetShape.isBlobShape()) {
-                        writer.write("v.$L = bs", memberName);
-                    } else { // string
-                        writer.addUseImports(SmithyGoDependency.SMITHY_PTR);
-                        if (targetShape.hasTrait(EnumTrait.class)) {
-                            writer.write("v.$L = $T(bs)", memberName, symbolProvider.toSymbol(targetShape));
-                        } else {
-                            writer.write("v.$L = ptr.String(string(bs))", memberName);
+            writer.openBlock("func $L(v $P, body io.ReadCloser, $L) error {", "}",
+                    funcName, shapeSymbol, contentLengthParam, () -> {
+                        writer.openBlock("if v == nil {", "}", () -> {
+                            writer.write("return fmt.Errorf(\"unsupported deserialization of nil %T\", v)");
+                        });
+                        writer.insertTrailingNewline();
+
+                        if (targetShape.hasTrait(StreamingTrait.class)) {
+                            writer.write("v.$L = body", memberName);
+                            writer.write("return nil");
+                            return;
                         }
-                    }
-                });
-                writer.write("return nil");
-            });
+
+                        writer.addUseImports(SmithyGoDependency.BYTES);
+                        writer.write("var buf bytes.Buffer");
+                        writer.openBlock("if contentLength > 0 {", "", () -> {
+                            writer.write("buf.Grow(int(contentLength))");
+                            writer.openBlock("} else {", "}", () -> {
+                                writer.write("buf.Grow(512)");
+                            });
+                        });
+                        writer.write("_, err := buf.ReadFrom(body)");
+                        writer.write("if err != nil { return err }");
+                        writer.openBlock("if buf.Len() > 0 {", "}", () -> {
+                            if (targetShape.isBlobShape()) {
+                                writer.write("v.$L = buf.Bytes()", memberName);
+                            } else { // string
+                                writer.addUseImports(SmithyGoDependency.SMITHY_PTR);
+                                if (targetShape.hasTrait(EnumTrait.class)) {
+                                    writer.write("v.$L = $T(buf.Bytes())", memberName,
+                                            symbolProvider.toSymbol(targetShape));
+                                } else {
+                                    writer.write("v.$L = ptr.String(buf.String())", memberName);
+                                }
+                            }
+                        });
+                        writer.write("return nil");
+                    });
         }
     }
 
     // Writes middleware that delegates to deserializers for shapes that have explicit payload.
     private void writeMiddlewarePayloadBindingDeserializerDelegator(
-            GoWriter writer, ServiceShape service, Shape shape
+            GoWriter writer, ServiceShape service, Shape outputShape, Shape payloadShape
     ) {
-        String deserFuncName = ProtocolGenerator.getDocumentDeserializerFunctionName(shape, service, getProtocolName());
-        writer.write("err = $L(output, response.Body)", deserFuncName);
+        String deserFuncName = ProtocolGenerator.getDocumentDeserializerFunctionName(outputShape, service,
+                getProtocolName());
+
+        String contentLengthParam = "";
+        if (!payloadShape.hasTrait(StreamingTrait.class)) {
+            contentLengthParam = "response.ContentLength";
+        }
+
+        writer.write("err = $L(output, response.Body, $L)", deserFuncName, contentLengthParam);
         writer.openBlock("if err != nil {", "}", () -> {
             writer.addUseImports(SmithyGoDependency.SMITHY);
             writer.write(String.format("return out, metadata, &smithy.DeserializationError{Err:%s}",
@@ -486,11 +514,11 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
                 initalizeXmlEncoder(context, ctxWriter, payloadTarget, "root", operand);
 
                 ctxWriter.openBlock("if err := $L(input, xmlEncoder.RootElement(root)); err != nil {", "}",
-                                functionName, () -> {
-                                    ctxWriter.write("return &$T{Err: err}",
-                                            SymbolUtils.createValueSymbolBuilder("SerializationError",
-                                                    SmithyGoDependency.SMITHY).build());
-                                })
+                        functionName, () -> {
+                            ctxWriter.write("return &$T{Err: err}",
+                                    SymbolUtils.createValueSymbolBuilder("SerializationError",
+                                            SmithyGoDependency.SMITHY).build());
+                        })
                         .write("msg.Payload = xmlEncoder.Bytes()")
                         .write("return nil");
             });
@@ -499,7 +527,7 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
 
             var hasBindings = targetShape.members().stream()
                     .filter(ms -> ms.getTrait(EventHeaderTrait.class).isPresent()
-                                  || ms.getTrait(EventPayloadTrait.class).isPresent())
+                            || ms.getTrait(EventPayloadTrait.class).isPresent())
                     .findAny();
             if (hasBindings.isPresent()) {
                 var payload = targetShape.members().stream()
@@ -571,7 +599,7 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
                         (ctx, payloadTarget) -> {
                             var ctxWriter = ctx.getWriter().get();
                             ctxWriter.write("br := $T(msg.Payload)", SymbolUtils.createValueSymbolBuilder("NewReader",
-                                            SmithyGoDependency.BYTES).build())
+                                    SmithyGoDependency.BYTES).build())
                                     .write("output := &$T{}", context.getSymbolProvider().toSymbol(payloadTarget));
 
                             String functionName = ProtocolGenerator.getDocumentDeserializerFunctionName(
@@ -618,7 +646,7 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
 
                 var hasBindings = targetShape.members().stream()
                         .filter(ms -> ms.getTrait(EventHeaderTrait.class).isPresent()
-                                      || ms.getTrait(EventPayloadTrait.class).isPresent())
+                                || ms.getTrait(EventPayloadTrait.class).isPresent())
                         .findAny();
                 if (hasBindings.isPresent()) {
                     var payload = targetShape.members().stream()

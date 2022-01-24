@@ -1164,7 +1164,7 @@ func (m *awsRestxml_deserializeOpHttpPayloadTraits) HandleDeserialize(ctx contex
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
 
-	err = awsRestxml_deserializeOpDocumentHttpPayloadTraitsOutput(output, response.Body)
+	err = awsRestxml_deserializeOpDocumentHttpPayloadTraitsOutput(output, response.Body, response.ContentLength)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
 	}
@@ -1219,16 +1219,23 @@ func awsRestxml_deserializeOpHttpBindingsHttpPayloadTraitsOutput(v *HttpPayloadT
 
 	return nil
 }
-func awsRestxml_deserializeOpDocumentHttpPayloadTraitsOutput(v *HttpPayloadTraitsOutput, body io.ReadCloser) error {
+func awsRestxml_deserializeOpDocumentHttpPayloadTraitsOutput(v *HttpPayloadTraitsOutput, body io.ReadCloser, contentLength int64) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization of nil %T", v)
 	}
-	bs, err := ioutil.ReadAll(body)
+	var buf bytes.Buffer
+	if contentLength > 0 {
+		buf.Grow(int(contentLength))
+	} else {
+		buf.Grow(512)
+	}
+
+	_, err := buf.ReadFrom(body)
 	if err != nil {
 		return err
 	}
-	if len(bs) > 0 {
-		v.Blob = bs
+	if buf.Len() > 0 {
+		v.Blob = buf.Bytes()
 	}
 	return nil
 }
@@ -1264,7 +1271,7 @@ func (m *awsRestxml_deserializeOpHttpPayloadTraitsWithMediaType) HandleDeseriali
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
 
-	err = awsRestxml_deserializeOpDocumentHttpPayloadTraitsWithMediaTypeOutput(output, response.Body)
+	err = awsRestxml_deserializeOpDocumentHttpPayloadTraitsWithMediaTypeOutput(output, response.Body, response.ContentLength)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
 	}
@@ -1319,16 +1326,23 @@ func awsRestxml_deserializeOpHttpBindingsHttpPayloadTraitsWithMediaTypeOutput(v 
 
 	return nil
 }
-func awsRestxml_deserializeOpDocumentHttpPayloadTraitsWithMediaTypeOutput(v *HttpPayloadTraitsWithMediaTypeOutput, body io.ReadCloser) error {
+func awsRestxml_deserializeOpDocumentHttpPayloadTraitsWithMediaTypeOutput(v *HttpPayloadTraitsWithMediaTypeOutput, body io.ReadCloser, contentLength int64) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization of nil %T", v)
 	}
-	bs, err := ioutil.ReadAll(body)
+	var buf bytes.Buffer
+	if contentLength > 0 {
+		buf.Grow(int(contentLength))
+	} else {
+		buf.Grow(512)
+	}
+
+	_, err := buf.ReadFrom(body)
 	if err != nil {
 		return err
 	}
-	if len(bs) > 0 {
-		v.Blob = bs
+	if buf.Len() > 0 {
+		v.Blob = buf.Bytes()
 	}
 	return nil
 }

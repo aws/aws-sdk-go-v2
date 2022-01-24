@@ -15,7 +15,6 @@ import (
 	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
-	"io/ioutil"
 	"strings"
 )
 
@@ -3356,7 +3355,7 @@ func (m *awsRestjson1_deserializeOpGetIntrospectionSchema) HandleDeserialize(ctx
 	output := &GetIntrospectionSchemaOutput{}
 	out.Result = output
 
-	err = awsRestjson1_deserializeOpDocumentGetIntrospectionSchemaOutput(output, response.Body)
+	err = awsRestjson1_deserializeOpDocumentGetIntrospectionSchemaOutput(output, response.Body, response.ContentLength)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
 	}
@@ -3427,17 +3426,24 @@ func awsRestjson1_deserializeOpErrorGetIntrospectionSchema(response *smithyhttp.
 	}
 }
 
-func awsRestjson1_deserializeOpDocumentGetIntrospectionSchemaOutput(v *GetIntrospectionSchemaOutput, body io.ReadCloser) error {
+func awsRestjson1_deserializeOpDocumentGetIntrospectionSchemaOutput(v *GetIntrospectionSchemaOutput, body io.ReadCloser, contentLength int64) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization of nil %T", v)
 	}
 
-	bs, err := ioutil.ReadAll(body)
+	var buf bytes.Buffer
+	if contentLength > 0 {
+		buf.Grow(int(contentLength))
+	} else {
+		buf.Grow(512)
+	}
+
+	_, err := buf.ReadFrom(body)
 	if err != nil {
 		return err
 	}
-	if len(bs) > 0 {
-		v.Schema = bs
+	if buf.Len() > 0 {
+		v.Schema = buf.Bytes()
 	}
 	return nil
 }

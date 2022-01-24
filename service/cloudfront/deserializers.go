@@ -6048,7 +6048,7 @@ func (m *awsRestxml_deserializeOpGetFunction) HandleDeserialize(ctx context.Cont
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
 
-	err = awsRestxml_deserializeOpDocumentGetFunctionOutput(output, response.Body)
+	err = awsRestxml_deserializeOpDocumentGetFunctionOutput(output, response.Body, response.ContentLength)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
 	}
@@ -6114,16 +6114,23 @@ func awsRestxml_deserializeOpHttpBindingsGetFunctionOutput(v *GetFunctionOutput,
 
 	return nil
 }
-func awsRestxml_deserializeOpDocumentGetFunctionOutput(v *GetFunctionOutput, body io.ReadCloser) error {
+func awsRestxml_deserializeOpDocumentGetFunctionOutput(v *GetFunctionOutput, body io.ReadCloser, contentLength int64) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization of nil %T", v)
 	}
-	bs, err := ioutil.ReadAll(body)
+	var buf bytes.Buffer
+	if contentLength > 0 {
+		buf.Grow(int(contentLength))
+	} else {
+		buf.Grow(512)
+	}
+
+	_, err := buf.ReadFrom(body)
 	if err != nil {
 		return err
 	}
-	if len(bs) > 0 {
-		v.FunctionCode = bs
+	if buf.Len() > 0 {
+		v.FunctionCode = buf.Bytes()
 	}
 	return nil
 }
