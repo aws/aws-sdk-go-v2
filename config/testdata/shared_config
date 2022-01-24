@@ -13,6 +13,13 @@ aws_secret_access_key = SECRET
 [profile alt_profile_name]
 region = alt_profile_name_region
 
+[profile with_role_duration]
+duration_seconds = 3601
+
+[profile merged_profiles]
+duration_seconds = 3601
+role_arn = config_profile_arn
+
 [profile short_profile_name_first]
 region = short_profile_name_first_short
 

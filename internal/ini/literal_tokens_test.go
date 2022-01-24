@@ -196,3 +196,36 @@ func TestNewLiteralToken(t *testing.T) {
 		})
 	}
 }
+
+func TestNewStringValue(t *testing.T) {
+	const expect = "abc123"
+
+	actual, err := NewStringValue(expect)
+	if err != nil {
+		t.Fatalf("expect no error, %v", err)
+	}
+
+	if e, a := StringType, actual.Type; e != a {
+		t.Errorf("expect %v type got %v", e, a)
+	}
+	if e, a := expect, actual.str; e != a {
+		t.Errorf("expect %v string got %v", e, a)
+	}
+}
+
+func TestNewIntValue(t *testing.T) {
+	const expect int64 = 1234
+
+	actual, err := NewIntValue(expect)
+	if err != nil {
+		t.Fatalf("expect no error, %v", err)
+	}
+
+	if e, a := IntegerType, actual.Type; e != a {
+		t.Errorf("expect %v type got %v", e, a)
+	}
+	if e, a := expect, actual.integer; e != a {
+		t.Errorf("expect %v integer got %v", e, a)
+	}
+
+}

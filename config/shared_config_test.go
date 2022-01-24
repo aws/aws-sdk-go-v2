@@ -534,6 +534,36 @@ func TestNewSharedConfig(t *testing.T) {
 			Profile:              "invaliddefaultsmode",
 			Err:                  fmt.Errorf("failed to load defaults_mode from shared config, invalid value: invalid"),
 		},
+		"merged profiles across files": {
+			ConfigFilenames:      []string{testConfigFilename},
+			CredentialsFilenames: []string{testCredentialsFilename},
+			Profile:              "merged_profiles",
+			Expected: SharedConfig{
+				Profile:             "merged_profiles",
+				RoleARN:             "creds_profile_arn",
+				RoleDurationSeconds: aws.Duration(1023 * time.Second),
+			},
+		},
+		"merged profiles across config files": {
+			ConfigFilenames:      []string{testConfigFilename, testConfigFilename},
+			CredentialsFilenames: []string{},
+			Profile:              "merged_profiles",
+			Expected: SharedConfig{
+				Profile:             "merged_profiles",
+				RoleARN:             "config_profile_arn",
+				RoleDurationSeconds: aws.Duration(3601 * time.Second),
+			},
+		},
+		"merged profiles across credentials files": {
+			ConfigFilenames:      []string{},
+			CredentialsFilenames: []string{testCredentialsFilename, testCredentialsFilename},
+			Profile:              "merged_profiles",
+			Expected: SharedConfig{
+				Profile:             "merged_profiles",
+				RoleARN:             "creds_profile_arn",
+				RoleDurationSeconds: aws.Duration(1023 * time.Second),
+			},
+		},
 	}
 
 	for name, c := range cases {
@@ -592,6 +622,12 @@ func TestLoadSharedConfigFromSection(t *testing.T) {
 		"profile with partial creds": {
 			Profile:  "profile partial_creds",
 			Expected: SharedConfig{},
+		},
+		"profile with role duration": {
+			Profile: "profile with_role_duration",
+			Expected: SharedConfig{
+				RoleDurationSeconds: aws.Duration(3601 * time.Second),
+			},
 		},
 		"profile with complete creds": {
 			Profile: "profile complete_creds",
@@ -689,12 +725,12 @@ func TestLoadSharedConfigFromSection(t *testing.T) {
 				}
 				return
 			}
-
 			if err != nil {
 				t.Fatalf("expect no error, got %v", err)
 			}
-			if e, a := c.Expected, cfg; !reflect.DeepEqual(e, a) {
-				t.Errorf("expect %v, got %v", e, a)
+
+			if diff := cmp.Diff(c.Expected, cfg); diff != "" {
+				t.Errorf("expect shared config match\n%s", diff)
 			}
 		})
 	}
