@@ -2,6 +2,7 @@ package config
 
 import (
 	"context"
+	"fmt"
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -133,5 +134,15 @@ func TestConfigs_ResolveAWSConfig(t *testing.T) {
 
 	if diff := cmp.Diff(expectedSources, cfg.ConfigSources); len(diff) != 0 {
 		t.Errorf("expect config sources match, got diff: \n %s", diff)
+	}
+}
+
+func TestLoadDefaultConfig(t *testing.T) {
+	optWithErr := func(_ *LoadOptions) error {
+		return fmt.Errorf("some error")
+	}
+	_, err := LoadDefaultConfig(context.TODO(), optWithErr)
+	if err == nil {
+		t.Fatal("expect error when optFn returns error, got nil")
 	}
 }

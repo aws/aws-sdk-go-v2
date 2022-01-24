@@ -1,0 +1,8 @@
+{
+    "id": "450d4ca9-24cb-43e1-aaa6-6310a96b90d1",
+    "type": "bugfix",
+    "description": "Fixes LoadDefaultConfig handling of errors returned by passed in functional options. Previously errors returned from the LoadOptions passed into LoadDefaultConfig were incorrectly ignored. [#1562](https://github.com/aws/aws-sdk-go-v2/pull/1562). Thanks to [Pinglei Guo](https://github.com/pingleig) for submitting this PR.",
+    "modules": [
+        "config"
+    ]
+}
