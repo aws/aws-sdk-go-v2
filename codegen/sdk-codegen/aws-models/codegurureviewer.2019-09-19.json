@@ -31,6 +31,21 @@
     "shapes": {
         "com.amazonaws.codegurureviewer#AWSGuruFrontendService": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "CodeGuru Reviewer",
+                    "arnNamespace": "codeguru-reviewer",
+                    "cloudFormationName": "CodeGuruReviewer",
+                    "cloudTrailEventSource": "codegurureviewer.amazonaws.com",
+                    "endpointPrefix": "codeguru-reviewer"
+                },
+                "aws.auth#sigv4": {
+                    "name": "codeguru-reviewer"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>This section provides documentation for the Amazon CodeGuru Reviewer API operations. CodeGuru Reviewer is a service\n         that uses program analysis and machine learning to detect potential defects that are difficult for developers to find and recommends\n         fixes in your Java and Python code.</p>\n         \n         <p>By proactively detecting and providing recommendations for addressing code defects and implementing best practices, CodeGuru Reviewer\n            improves the overall quality and maintainability of your code base during the code review stage. For more information about CodeGuru Reviewer, see the \n            <i>\n               <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/welcome.html\">Amazon CodeGuru Reviewer User Guide</a>.</i>\n         </p>\n      \n         <p>\n         To improve the security of your CodeGuru Reviewer API calls, you can establish a private connection between your VPC and CodeGuru Reviewer by \n         creating an <i>interface VPC endpoint</i>. For more information, see \n         <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/vpc-interface-endpoints.html\">CodeGuru Reviewer and interface \n            VPC endpoints (Amazon Web Services PrivateLink)</a> in the <i>Amazon CodeGuru Reviewer User Guide</i>.\n      </p>",
+                "smithy.api#title": "Amazon CodeGuru Reviewer"
+            },
             "version": "2019-09-19",
             "operations": [
                 {
@@ -75,22 +90,7 @@
                 {
                     "target": "com.amazonaws.codegurureviewer#UntagResource"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "CodeGuru Reviewer",
-                    "arnNamespace": "codeguru-reviewer",
-                    "cloudFormationName": "CodeGuruReviewer",
-                    "cloudTrailEventSource": "codegurureviewer.amazonaws.com",
-                    "endpointPrefix": "codeguru-reviewer"
-                },
-                "aws.auth#sigv4": {
-                    "name": "codeguru-reviewer"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>This section provides documentation for the Amazon CodeGuru Reviewer API operations. CodeGuru Reviewer is a service\n         that uses program analysis and machine learning to detect potential defects that are difficult for developers to find and recommends\n         fixes in your Java and Python code.</p>\n         \n         <p>By proactively detecting and providing recommendations for addressing code defects and implementing best practices, CodeGuru Reviewer\n            improves the overall quality and maintainability of your code base during the code review stage. For more information about CodeGuru Reviewer, see the \n            <i>\n               <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/welcome.html\">Amazon CodeGuru Reviewer User Guide</a>.</i>\n         </p>\n      \n         <p>\n         To improve the security of your CodeGuru Reviewer API calls, you can establish a private connection between your VPC and CodeGuru Reviewer by \n         creating an <i>interface VPC endpoint</i>. For more information, see \n         <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/vpc-interface-endpoints.html\">CodeGuru Reviewer and interface \n            VPC endpoints (Amazon Web Services PrivateLink)</a> in the <i>Amazon CodeGuru Reviewer User Guide</i>.\n      </p>",
-                "smithy.api#title": "Amazon CodeGuru Reviewer"
-            }
+            ]
         },
         "com.amazonaws.codegurureviewer#AccessDeniedException": {
             "type": "structure",
@@ -719,6 +719,16 @@
                                 }
                             },
                             {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "CodeReview.State",
+                                        "expected": "Failed",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
                                 "state": "retry",
                                 "matcher": {
                                     "output": {
@@ -873,6 +883,16 @@
                                     "output": {
                                         "path": "RepositoryAssociation.State",
                                         "expected": "Associated",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "RepositoryAssociation.State",
+                                        "expected": "Failed",
                                         "comparator": "stringEquals"
                                     }
                                 }
@@ -1394,6 +1414,16 @@
                 }
             }
         },
+        "com.amazonaws.codegurureviewer#ListRecommendationsMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 300
+                }
+            }
+        },
         "com.amazonaws.codegurureviewer#ListRecommendationsRequest": {
             "type": "structure",
             "members": {
@@ -1405,7 +1435,7 @@
                     }
                 },
                 "MaxResults": {
-                    "target": "com.amazonaws.codegurureviewer#MaxResults",
+                    "target": "com.amazonaws.codegurureviewer#ListRecommendationsMaxResults",
                     "traits": {
                         "smithy.api#documentation": "<p>\n         The maximum number of results that are returned per call. The default is 100.\n      </p>",
                         "smithy.api#httpQuery": "MaxResults"
@@ -2729,7 +2759,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 2048
+                    "max": 5000
                 }
             }
         },

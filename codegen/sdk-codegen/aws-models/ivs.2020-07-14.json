@@ -673,6 +673,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Array of 1-50 maps, each of the form <code>string:string (key:value)</code>.</p>"
                     }
+                },
+                "thumbnailConfiguration": {
+                    "target": "com.amazonaws.ivs#ThumbnailConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A complex type that allows you to enable/disable the recording of thumbnails for a live\n      session and modify the interval at which thumbnails are generated for the live session.</p>"
+                    }
                 }
             }
         },
@@ -1731,7 +1737,7 @@
                 "streamSessions": {
                     "target": "com.amazonaws.ivs#StreamSessionList",
                     "traits": {
-                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#documentation": "<p>List of stream sessions.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1754,6 +1760,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.ivs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ivs#ValidationException"
                 }
             ],
             "traits": {
@@ -2114,6 +2123,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Array of 1-50 maps, each of the form <code>string:string (key:value)</code>.</p>"
                     }
+                },
+                "thumbnailConfiguration": {
+                    "target": "com.amazonaws.ivs#ThumbnailConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A complex type that allows you to enable/disable the recording of thumbnails for a live\n      session and modify the interval at which thumbnails are generated for the live session.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2204,6 +2219,21 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Summary information about a RecordingConfiguration.</p>"
+            }
+        },
+        "com.amazonaws.ivs#RecordingMode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "DISABLED",
+                        "name": "Disabled"
+                    },
+                    {
+                        "value": "INTERVAL",
+                        "name": "Interval"
+                    }
+                ]
             }
         },
         "com.amazonaws.ivs#ResourceArn": {
@@ -2837,6 +2867,15 @@
                 }
             }
         },
+        "com.amazonaws.ivs#TargetIntervalSeconds": {
+            "type": "long",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 5,
+                    "max": 60
+                }
+            }
+        },
         "com.amazonaws.ivs#ThrottlingException": {
             "type": "structure",
             "members": {
@@ -2851,6 +2890,26 @@
                 "smithy.api#documentation": "<p/>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.ivs#ThumbnailConfiguration": {
+            "type": "structure",
+            "members": {
+                "recordingMode": {
+                    "target": "com.amazonaws.ivs#RecordingMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Thumbnail recording mode. Default: <code>INTERVAL</code>.</p>"
+                    }
+                },
+                "targetIntervalSeconds": {
+                    "target": "com.amazonaws.ivs#TargetIntervalSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The targeted thumbnail-generation interval in seconds. This is configurable (and required)\n      only if <code>recordingMode</code> is <code>INTERVAL</code>. Default: 60.</p>\n         <p>\n            <b>Important:</b> Setting a value for <code>targetIntervalSeconds</code> does not guarantee that thumbnails\n      are generated at the specified interval. For thumbnails to be generated at the\n      <code>targetIntervalSeconds</code> interval, the <code>IDR/Keyframe</code> value for the input video must be less than\n      the <code>targetIntervalSeconds</code> value. See <a href=\"https://docs.aws.amazon.com/ivs/latest/userguide/streaming-config.html\"> Amazon IVS Streaming Configuration</a> for information on\n      setting <code>IDR/Keyframe</code> to the recommended value in video-encoder settings.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object representing a configuration of thumbnails for recorded video.</p>"
             }
         },
         "com.amazonaws.ivs#Time": {

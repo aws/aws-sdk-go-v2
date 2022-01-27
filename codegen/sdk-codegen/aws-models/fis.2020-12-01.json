@@ -64,7 +64,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes an action. For more information, see <a href=\"https://docs.aws.amazon.com/fis/latest/userguide/fis-actions-reference.html\">AWS FIS actions</a> \n         in the <i>AWS Fault Injection Simulator User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Describes an action. For more information, see <a href=\"https://docs.aws.amazon.com/fis/latest/userguide/fis-actions-reference.html\">FIS actions</a> \n         in the <i>Fault Injection Simulator User Guide</i>.</p>"
             }
         },
         "com.amazonaws.fis#ActionDescription": {
@@ -74,7 +74,7 @@
                     "min": 0,
                     "max": 512
                 },
-                "smithy.api#pattern": "[\\s\\S]+"
+                "smithy.api#pattern": "^[\\s\\S]+$"
             }
         },
         "com.amazonaws.fis#ActionId": {
@@ -84,7 +84,7 @@
                     "min": 0,
                     "max": 128
                 },
-                "smithy.api#pattern": "[\\S]+"
+                "smithy.api#pattern": "^[\\S]+$"
             }
         },
         "com.amazonaws.fis#ActionParameter": {
@@ -115,7 +115,7 @@
                     "min": 0,
                     "max": 512
                 },
-                "smithy.api#pattern": "[\\s\\S]+"
+                "smithy.api#pattern": "^[\\s\\S]+$"
             }
         },
         "com.amazonaws.fis#ActionParameterMap": {
@@ -134,7 +134,7 @@
                     "min": 0,
                     "max": 64
                 },
-                "smithy.api#pattern": "[\\S]+"
+                "smithy.api#pattern": "^[\\S]+$"
             }
         },
         "com.amazonaws.fis#ActionParameterRequired": {
@@ -208,7 +208,7 @@
                     "min": 0,
                     "max": 64
                 },
-                "smithy.api#pattern": "[\\S]+"
+                "smithy.api#pattern": "^[\\S]+$"
             }
         },
         "com.amazonaws.fis#ClientToken": {
@@ -218,7 +218,7 @@
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#pattern": "[\\S]+"
+                "smithy.api#pattern": "^[\\S]+$"
             }
         },
         "com.amazonaws.fis#ConflictException": {
@@ -229,6 +229,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ConflictException",
+                    "httpResponseCode": 409
+                },
                 "smithy.api#documentation": "<p>The request could not be processed because of a conflict.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
@@ -257,7 +261,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an experiment template. </p>\n         <p>To create a template, specify the following information: </p>\n         <ul>\n            <li>\n               <p>\n                  <b>Targets</b>: A target can be a specific resource\n               in your AWS environment, or one or more resources that match criteria that you\n               specify, for example, resources that have specific tags.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Actions</b>: The actions to carry out on the\n               target. You can specify multiple actions, the duration of each action, and when to start each action during an experiment.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Stop conditions</b>: If a stop condition is\n               triggered while an experiment is running, the experiment is automatically\n               stopped. You can define a stop condition as a CloudWatch alarm.</p>\n            </li>\n         </ul>\n         <p>For more information, see the <a href=\"https://docs.aws.amazon.com/fis/latest/userguide/\">AWS Fault Injection Simulator User Guide</a>.</p>",
+                "smithy.api#documentation": "<p>Creates an experiment template. </p>\n         <p>An experiment template includes the following components:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Targets</b>: A target can be a specific resource in \n               your Amazon Web Services environment, or one or more resources that match criteria that you\n               specify, for example, resources that have specific tags.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Actions</b>: The actions to carry out on the\n               target. You can specify multiple actions, the duration of each action, and when to start each action during an experiment.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Stop conditions</b>: If a stop condition is\n               triggered while an experiment is running, the experiment is automatically\n               stopped. You can define a stop condition as a CloudWatch alarm.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/fis/latest/userguide/experiment-templates.html\">Experiment templates</a>\n         in the <i>Fault Injection Simulator User Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/experimentTemplates",
@@ -271,7 +275,7 @@
                 "actionId": {
                     "target": "com.amazonaws.fis#ActionId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the action.</p>",
+                        "smithy.api#documentation": "<p>The ID of the action. The format of the action ID is: aws:<i>service-name</i>:<i>action-type</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -301,7 +305,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies an action for an experiment template.</p>"
+                "smithy.api#documentation": "<p>Specifies an action for an experiment template.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/fis/latest/userguide/actions.html\">Actions</a>\n         in the <i>Fault Injection Simulator User Guide</i>.</p>"
             }
         },
         "com.amazonaws.fis#CreateExperimentTemplateActionInputMap": {
@@ -327,7 +331,7 @@
                 "description": {
                     "target": "com.amazonaws.fis#ExperimentTemplateDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>A description for the experiment template. Can contain up to 64 letters (A-Z and a-z).</p>",
+                        "smithy.api#documentation": "<p>A description for the experiment template.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -354,7 +358,7 @@
                 "roleArn": {
                     "target": "com.amazonaws.fis#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that grants the AWS FIS service permission to perform service actions on your behalf.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that grants the FIS service permission to perform service actions on your behalf.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -410,7 +414,7 @@
                 "resourceType": {
                     "target": "com.amazonaws.fis#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS resource type. The resource type must be supported for the specified action.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services resource type. The resource type must be supported for the specified action.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -441,7 +445,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies a target for an experiment. You must specify at least one Amazon Resource Name (ARN) or \n         at least one resource tag. You cannot specify both ARNs and tags.</p>"
+                "smithy.api#documentation": "<p>Specifies a target for an experiment. You must specify at least one Amazon Resource Name (ARN) or \n         at least one resource tag. You cannot specify both ARNs and tags.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/fis/latest/userguide/targets.html\">Targets</a>\n         in the <i>Fault Injection Simulator User Guide</i>.</p>"
             }
         },
         "com.amazonaws.fis#CreateExperimentTemplateTargetInputMap": {
@@ -512,7 +516,7 @@
                     "min": 0,
                     "max": 1024
                 },
-                "smithy.api#pattern": "[\\s\\S]+"
+                "smithy.api#pattern": "^[\\s\\S]+$"
             }
         },
         "com.amazonaws.fis#Experiment": {
@@ -533,7 +537,7 @@
                 "roleArn": {
                     "target": "com.amazonaws.fis#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that grants the AWS FIS service permission to perform service actions on your behalf.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that grants the FIS service permission to perform service actions on your behalf.</p>"
                     }
                 },
                 "state": {
@@ -563,13 +567,13 @@
                 "creationTime": {
                     "target": "com.amazonaws.fis#CreationTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time the experiment was created.</p>"
+                        "smithy.api#documentation": "<p>The time that the experiment was created.</p>"
                     }
                 },
                 "startTime": {
                     "target": "com.amazonaws.fis#ExperimentStartTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time that the experiment was started.</p>"
+                        "smithy.api#documentation": "<p>The time that the experiment started.</p>"
                     }
                 },
                 "endTime": {
@@ -627,6 +631,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The state of the action.</p>"
                     }
+                },
+                "startTime": {
+                    "target": "com.amazonaws.fis#ExperimentActionStartTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the action started.</p>"
+                    }
+                },
+                "endTime": {
+                    "target": "com.amazonaws.fis#ExperimentActionEndTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the action ended.</p>"
+                    }
                 }
             },
             "traits": {
@@ -640,8 +656,11 @@
                     "min": 0,
                     "max": 512
                 },
-                "smithy.api#pattern": "[\\s\\S]+"
+                "smithy.api#pattern": "^[\\s\\S]+$"
             }
+        },
+        "com.amazonaws.fis#ExperimentActionEndTime": {
+            "type": "timestamp"
         },
         "com.amazonaws.fis#ExperimentActionMap": {
             "type": "map",
@@ -659,7 +678,7 @@
                     "min": 0,
                     "max": 64
                 },
-                "smithy.api#pattern": "[\\S]+"
+                "smithy.api#pattern": "^[\\S]+$"
             }
         },
         "com.amazonaws.fis#ExperimentActionParameter": {
@@ -669,7 +688,7 @@
                     "min": 0,
                     "max": 1024
                 },
-                "smithy.api#pattern": "[\\S]+"
+                "smithy.api#pattern": "^[\\S]+$"
             }
         },
         "com.amazonaws.fis#ExperimentActionParameterMap": {
@@ -688,7 +707,7 @@
                     "min": 0,
                     "max": 64
                 },
-                "smithy.api#pattern": "[\\S]+"
+                "smithy.api#pattern": "^[\\S]+$"
             }
         },
         "com.amazonaws.fis#ExperimentActionStartAfter": {
@@ -698,7 +717,7 @@
                     "min": 0,
                     "max": 64
                 },
-                "smithy.api#pattern": "[\\S]+"
+                "smithy.api#pattern": "^[\\S]+$"
             }
         },
         "com.amazonaws.fis#ExperimentActionStartAfterList": {
@@ -706,6 +725,9 @@
             "member": {
                 "target": "com.amazonaws.fis#ExperimentActionStartAfter"
             }
+        },
+        "com.amazonaws.fis#ExperimentActionStartTime": {
+            "type": "timestamp"
         },
         "com.amazonaws.fis#ExperimentActionState": {
             "type": "structure",
@@ -773,7 +795,7 @@
                     "min": 0,
                     "max": 512
                 },
-                "smithy.api#pattern": "[\\s\\S]+"
+                "smithy.api#pattern": "^[\\s\\S]+$"
             }
         },
         "com.amazonaws.fis#ExperimentActionTargetMap": {
@@ -792,7 +814,7 @@
                     "min": 0,
                     "max": 64
                 },
-                "smithy.api#pattern": "[\\S]+"
+                "smithy.api#pattern": "^[\\S]+$"
             }
         },
         "com.amazonaws.fis#ExperimentEndTime": {
@@ -805,7 +827,7 @@
                     "min": 0,
                     "max": 64
                 },
-                "smithy.api#pattern": "[\\S]+"
+                "smithy.api#pattern": "^[\\S]+$"
             }
         },
         "com.amazonaws.fis#ExperimentStartTime": {
@@ -873,7 +895,7 @@
                     "min": 0,
                     "max": 512
                 },
-                "smithy.api#pattern": "[\\s\\S]+"
+                "smithy.api#pattern": "^[\\s\\S]+$"
             }
         },
         "com.amazonaws.fis#ExperimentStopCondition": {
@@ -1017,7 +1039,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "[\\S]+"
+                "smithy.api#pattern": "^[\\S]+$"
             }
         },
         "com.amazonaws.fis#ExperimentTargetFilterValue": {
@@ -1027,7 +1049,7 @@
                     "min": 0,
                     "max": 128
                 },
-                "smithy.api#pattern": "[\\S]+"
+                "smithy.api#pattern": "^[\\S]+$"
             }
         },
         "com.amazonaws.fis#ExperimentTargetFilterValues": {
@@ -1052,7 +1074,7 @@
                     "min": 0,
                     "max": 64
                 },
-                "smithy.api#pattern": "[\\S]+"
+                "smithy.api#pattern": "^[\\S]+$"
             }
         },
         "com.amazonaws.fis#ExperimentTargetSelectionMode": {
@@ -1062,7 +1084,7 @@
                     "min": 0,
                     "max": 64
                 },
-                "smithy.api#pattern": "[\\S]+"
+                "smithy.api#pattern": "^[\\S]+$"
             }
         },
         "com.amazonaws.fis#ExperimentTemplate": {
@@ -1172,7 +1194,7 @@
                     "min": 0,
                     "max": 512
                 },
-                "smithy.api#pattern": "[\\s\\S]+"
+                "smithy.api#pattern": "^[\\s\\S]+$"
             }
         },
         "com.amazonaws.fis#ExperimentTemplateActionMap": {
@@ -1191,7 +1213,7 @@
                     "min": 0,
                     "max": 64
                 },
-                "smithy.api#pattern": "[\\S]+"
+                "smithy.api#pattern": "^[\\S]+$"
             }
         },
         "com.amazonaws.fis#ExperimentTemplateActionParameter": {
@@ -1201,7 +1223,7 @@
                     "min": 0,
                     "max": 1024
                 },
-                "smithy.api#pattern": "[\\S]+"
+                "smithy.api#pattern": "^[\\S]+$"
             }
         },
         "com.amazonaws.fis#ExperimentTemplateActionParameterMap": {
@@ -1220,7 +1242,7 @@
                     "min": 0,
                     "max": 64
                 },
-                "smithy.api#pattern": "[\\S]+"
+                "smithy.api#pattern": "^[\\S]+$"
             }
         },
         "com.amazonaws.fis#ExperimentTemplateActionStartAfter": {
@@ -1230,7 +1252,7 @@
                     "min": 0,
                     "max": 64
                 },
-                "smithy.api#pattern": "[\\S]+"
+                "smithy.api#pattern": "^[\\S]+$"
             }
         },
         "com.amazonaws.fis#ExperimentTemplateActionStartAfterList": {
@@ -1255,7 +1277,7 @@
                     "min": 0,
                     "max": 64
                 },
-                "smithy.api#pattern": "[\\S]+"
+                "smithy.api#pattern": "^[\\S]+$"
             }
         },
         "com.amazonaws.fis#ExperimentTemplateDescription": {
@@ -1265,7 +1287,7 @@
                     "min": 0,
                     "max": 512
                 },
-                "smithy.api#pattern": "[\\s\\S]+"
+                "smithy.api#pattern": "^[\\s\\S]+$"
             }
         },
         "com.amazonaws.fis#ExperimentTemplateId": {
@@ -1275,7 +1297,7 @@
                     "min": 0,
                     "max": 64
                 },
-                "smithy.api#pattern": "[\\S]+"
+                "smithy.api#pattern": "^[\\S]+$"
             }
         },
         "com.amazonaws.fis#ExperimentTemplateStopCondition": {
@@ -1425,7 +1447,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "[\\S]+"
+                "smithy.api#pattern": "^[\\S]+$"
             }
         },
         "com.amazonaws.fis#ExperimentTemplateTargetFilterValue": {
@@ -1435,7 +1457,7 @@
                     "min": 0,
                     "max": 128
                 },
-                "smithy.api#pattern": "[\\S]+"
+                "smithy.api#pattern": "^[\\S]+$"
             }
         },
         "com.amazonaws.fis#ExperimentTemplateTargetFilterValues": {
@@ -1463,7 +1485,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes a filter used for the target resource input in an experiment template.</p>"
+                "smithy.api#documentation": "<p>Specifies a filter used for the target resource input in an experiment template.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/fis/latest/userguide/targets.html#target-filters\">Resource filters</a>\n         in the <i>Fault Injection Simulator User Guide</i>.</p>"
             }
         },
         "com.amazonaws.fis#ExperimentTemplateTargetMap": {
@@ -1482,7 +1504,7 @@
                     "min": 0,
                     "max": 64
                 },
-                "smithy.api#pattern": "[\\S]+"
+                "smithy.api#pattern": "^[\\S]+$"
             }
         },
         "com.amazonaws.fis#ExperimentTemplateTargetSelectionMode": {
@@ -1492,11 +1514,26 @@
                     "min": 0,
                     "max": 64
                 },
-                "smithy.api#pattern": "[\\S]+"
+                "smithy.api#pattern": "^[\\S]+$"
             }
         },
         "com.amazonaws.fis#FaultInjectionSimulator": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "fis",
+                    "arnNamespace": "fis",
+                    "cloudFormationName": "Fis",
+                    "cloudTrailEventSource": "fis.amazonaws.com",
+                    "endpointPrefix": "fis"
+                },
+                "aws.auth#sigv4": {
+                    "name": "fis"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>Fault Injection Simulator is a managed service that enables you to perform fault injection \n           experiments on your Amazon Web Services workloads. For more information, see the <a href=\"https://docs.aws.amazon.com/fis/latest/userguide/\">Fault Injection Simulator User Guide</a>.</p>",
+                "smithy.api#title": "AWS Fault Injection Simulator"
+            },
             "version": "2020-12-01",
             "operations": [
                 {
@@ -1541,22 +1578,7 @@
                 {
                     "target": "com.amazonaws.fis#UpdateExperimentTemplate"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "fis",
-                    "arnNamespace": "fis",
-                    "cloudFormationName": "Fis",
-                    "cloudTrailEventSource": "fis.amazonaws.com",
-                    "endpointPrefix": "fis"
-                },
-                "aws.auth#sigv4": {
-                    "name": "fis"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>AWS Fault Injection Simulator is a managed service that enables you to perform fault injection \n           experiments on your AWS workloads. For more information, see the <a href=\"https://docs.aws.amazon.com/fis/latest/userguide/\">AWS Fault Injection Simulator User Guide</a>.</p>",
-                "smithy.api#title": "AWS Fault Injection Simulator"
-            }
+            ]
         },
         "com.amazonaws.fis#GetAction": {
             "type": "operation",
@@ -1575,7 +1597,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about the specified AWS FIS action.</p>",
+                "smithy.api#documentation": "<p>Gets information about the specified FIS action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/actions/{id}",
@@ -1722,7 +1744,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the available AWS FIS actions.</p>",
+                "smithy.api#documentation": "<p>Lists the available FIS actions.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/actions",
@@ -1975,7 +1997,7 @@
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#pattern": "[\\S]+"
+                "smithy.api#pattern": "^[\\S]+$"
             }
         },
         "com.amazonaws.fis#ResourceArn": {
@@ -1985,7 +2007,7 @@
                     "min": 20,
                     "max": 2048
                 },
-                "smithy.api#pattern": "[\\S]+"
+                "smithy.api#pattern": "^[\\S]+$"
             }
         },
         "com.amazonaws.fis#ResourceArnList": {
@@ -2008,6 +2030,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ResourceNotFoundException",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>The specified resource cannot be found.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -2020,7 +2046,7 @@
                     "min": 0,
                     "max": 64
                 },
-                "smithy.api#pattern": "[\\S]+"
+                "smithy.api#pattern": "^[\\S]+$"
             }
         },
         "com.amazonaws.fis#RoleArn": {
@@ -2030,7 +2056,7 @@
                     "min": 20,
                     "max": 2048
                 },
-                "smithy.api#pattern": "[\\S]+"
+                "smithy.api#pattern": "^[\\S]+$"
             }
         },
         "com.amazonaws.fis#ServiceQuotaExceededException": {
@@ -2041,6 +2067,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ServiceQuotaExceededException",
+                    "httpResponseCode": 402
+                },
                 "smithy.api#documentation": "<p>You have exceeded your service quota.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402
@@ -2121,7 +2151,7 @@
                     "min": 0,
                     "max": 64
                 },
-                "smithy.api#pattern": "[\\S]+"
+                "smithy.api#pattern": "^[\\S]+$"
             }
         },
         "com.amazonaws.fis#StopConditionValue": {
@@ -2131,7 +2161,7 @@
                     "min": 20,
                     "max": 2048
                 },
-                "smithy.api#pattern": "[\\s\\S]+"
+                "smithy.api#pattern": "^[\\s\\S]+$"
             }
         },
         "com.amazonaws.fis#StopExperiment": {
@@ -2190,7 +2220,7 @@
                     "min": 0,
                     "max": 128
                 },
-                "smithy.api#pattern": "[\\s\\S]+"
+                "smithy.api#pattern": "^[\\s\\S]+$"
             }
         },
         "com.amazonaws.fis#TagKeyList": {
@@ -2262,7 +2292,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "[\\s\\S]*"
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.fis#TargetResourceType": {
@@ -2272,7 +2302,7 @@
                     "min": 0,
                     "max": 128
                 },
-                "smithy.api#pattern": "[\\S]+"
+                "smithy.api#pattern": "^[\\S]+$"
             }
         },
         "com.amazonaws.fis#UntagResource": {
@@ -2429,7 +2459,7 @@
                 "roleArn": {
                     "target": "com.amazonaws.fis#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that grants the AWS FIS service permission to perform service actions on your behalf.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that grants the FIS service permission to perform service actions on your behalf.</p>"
                     }
                 }
             }
@@ -2478,7 +2508,7 @@
                 "resourceType": {
                     "target": "com.amazonaws.fis#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS resource type. The resource type must be supported for the specified action.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services resource type. The resource type must be supported for the specified action.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2529,6 +2559,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ValidationException",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The specified input is not valid, or fails to satisfy the constraints for the request.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
