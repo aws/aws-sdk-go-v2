@@ -106,6 +106,68 @@ type CreationInfo struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the destination file system in the replication configuration.
+type Destination struct {
+
+	// The ID of the destination Amazon EFS file system.
+	//
+	// This member is required.
+	FileSystemId *string
+
+	// The Amazon Web Services Region in which the destination file system is located.
+	//
+	// This member is required.
+	Region *string
+
+	// Describes the status of the destination Amazon EFS file system.
+	//
+	// This member is required.
+	Status ReplicationStatus
+
+	// The time when the most recent sync successfully completed on the destination
+	// file system. Any changes to data on the source file system that occurred prior
+	// to this time were successfully replicated to the destination file system. Any
+	// changes that occurred after this time might not be fully replicated.
+	LastReplicatedTimestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Describes the destination file system to create in the replication
+// configuration.
+type DestinationToCreate struct {
+
+	// To create a file system that uses One Zone storage, specify the name of the
+	// Availability Zone in which to create the destination file system.
+	AvailabilityZoneName *string
+
+	// Specifies the KMS key you want to use to encrypt the destination file system. If
+	// you do not specify a KMS key, EFS uses your default KMS key for Amazon EFS,
+	// /aws/elasticfilesystem. This ID can be in one of the following formats:
+	//
+	// * Key
+	// ID - A unique identifier of the key, for example
+	// 1234abcd-12ab-34cd-56ef-1234567890ab.
+	//
+	// * ARN - An Amazon Resource Name (ARN) for
+	// the key, for example
+	// arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab.
+	//
+	// *
+	// Key alias - A previously created display name for a key, for example
+	// alias/projectKey1.
+	//
+	// * Key alias ARN - An ARN for a key alias, for example
+	// arn:aws:kms:us-west-2:444455556666:alias/projectKey1.
+	KmsKeyId *string
+
+	// To create a file system that uses regional storage, specify the Amazon Web
+	// Services Region in which to create the destination file system.
+	Region *string
+
+	noSmithyDocumentSerde
+}
+
 // A description of the file system.
 type FileSystemDescription struct {
 
@@ -188,8 +250,7 @@ type FileSystemDescription struct {
 	// arn:aws:elasticfilesystem:us-west-2:1111333322228888:file-system/fs-01234567
 	FileSystemArn *string
 
-	// The ID of an Key Management Service customer master key (CMK) that was used to
-	// protect the encrypted file system.
+	// The ID of an KMS key used to protect the encrypted file system.
 	KmsKeyId *string
 
 	// You can add tags to a file system, including a Name tag. For more information,
@@ -335,6 +396,43 @@ type PosixUser struct {
 	// Secondary POSIX group IDs used for all file system operations using this access
 	// point.
 	SecondaryGids []int64
+
+	noSmithyDocumentSerde
+}
+
+type ReplicationConfigurationDescription struct {
+
+	// Describes when the replication configuration was created.
+	//
+	// This member is required.
+	CreationTime *time.Time
+
+	// Array of destination objects. Only one destination object is supported.
+	//
+	// This member is required.
+	Destinations []Destination
+
+	// The Amazon Resource Name (ARN) of the original source Amazon EFS file system in
+	// the replication configuration.
+	//
+	// This member is required.
+	OriginalSourceFileSystemArn *string
+
+	// The ARN of the current source file system in the replication configuration.
+	//
+	// This member is required.
+	SourceFileSystemArn *string
+
+	// The ID of the source Amazon EFS file system that is being replicated.
+	//
+	// This member is required.
+	SourceFileSystemId *string
+
+	// The Amazon Web Services Region in which the source Amazon EFS file system is
+	// located.
+	//
+	// This member is required.
+	SourceFileSystemRegion *string
 
 	noSmithyDocumentSerde
 }

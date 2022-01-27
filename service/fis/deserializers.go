@@ -2677,6 +2677,22 @@ func awsRestjson1_deserializeDocumentExperimentAction(v **types.ExperimentAction
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "endTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.EndTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected ExperimentActionEndTime to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "parameters":
 			if err := awsRestjson1_deserializeDocumentExperimentActionParameterMap(&sv.Parameters, value); err != nil {
 				return err
@@ -2685,6 +2701,22 @@ func awsRestjson1_deserializeDocumentExperimentAction(v **types.ExperimentAction
 		case "startAfter":
 			if err := awsRestjson1_deserializeDocumentExperimentActionStartAfterList(&sv.StartAfter, value); err != nil {
 				return err
+			}
+
+		case "startTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.StartTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected ExperimentActionStartTime to be a JSON Number, got %T instead", value)
+
+				}
 			}
 
 		case "state":

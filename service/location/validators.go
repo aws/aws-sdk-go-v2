@@ -170,6 +170,26 @@ func (m *validateOpCalculateRoute) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCalculateRouteMatrix struct {
+}
+
+func (*validateOpCalculateRouteMatrix) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCalculateRouteMatrix) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CalculateRouteMatrixInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCalculateRouteMatrixInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateGeofenceCollection struct {
 }
 
@@ -962,6 +982,10 @@ func addOpCalculateRouteValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCalculateRoute{}, middleware.After)
 }
 
+func addOpCalculateRouteMatrixValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCalculateRouteMatrix{}, middleware.After)
+}
+
 func addOpCreateGeofenceCollectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateGeofenceCollection{}, middleware.After)
 }
@@ -1373,6 +1397,27 @@ func validateOpCalculateRouteInput(v *CalculateRouteInput) error {
 	}
 	if v.DestinationPosition == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DestinationPosition"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCalculateRouteMatrixInput(v *CalculateRouteMatrixInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CalculateRouteMatrixInput"}
+	if v.CalculatorName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CalculatorName"))
+	}
+	if v.DeparturePositions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeparturePositions"))
+	}
+	if v.DestinationPositions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationPositions"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

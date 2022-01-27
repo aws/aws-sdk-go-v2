@@ -36563,6 +36563,46 @@ func awsAwsjson11_deserializeDocumentExplainability(v **types.Explainability, va
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentFailStepMetadata(v **types.FailStepMetadata, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FailStepMetadata
+	if *v == nil {
+		sv = &types.FailStepMetadata{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ErrorMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String3072 to be of type string, got %T instead", value)
+				}
+				sv.ErrorMessage = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentFeatureDefinition(v **types.FeatureDefinition, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -48180,6 +48220,11 @@ func awsAwsjson11_deserializeDocumentPipelineExecutionStepMetadata(v **types.Pip
 				return err
 			}
 
+		case "Fail":
+			if err := awsAwsjson11_deserializeDocumentFailStepMetadata(&sv.Fail, value); err != nil {
+				return err
+			}
+
 		case "Lambda":
 			if err := awsAwsjson11_deserializeDocumentLambdaStepMetadata(&sv.Lambda, value); err != nil {
 				return err
@@ -48276,6 +48321,15 @@ func awsAwsjson11_deserializeDocumentPipelineExecutionSummary(v **types.Pipeline
 					return fmt.Errorf("expected PipelineExecutionName to be of type string, got %T instead", value)
 				}
 				sv.PipelineExecutionDisplayName = ptr.String(jtv)
+			}
+
+		case "PipelineExecutionFailureReason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String3072 to be of type string, got %T instead", value)
+				}
+				sv.PipelineExecutionFailureReason = ptr.String(jtv)
 			}
 
 		case "PipelineExecutionStatus":

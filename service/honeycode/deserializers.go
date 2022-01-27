@@ -851,6 +851,9 @@ func awsRestjson1_deserializeOpErrorDescribeTableDataImportJob(response *smithyh
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
 
+	case strings.EqualFold("RequestTimeoutException", errorCode):
+		return awsRestjson1_deserializeErrorRequestTimeoutException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -895,6 +898,15 @@ func awsRestjson1_deserializeOpDocumentDescribeTableDataImportJobOutput(v **Desc
 
 	for key, value := range shape {
 		switch key {
+		case "errorCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ErrorCode to be of type string, got %T instead", value)
+				}
+				sv.ErrorCode = types.ErrorCode(jtv)
+			}
+
 		case "jobMetadata":
 			if err := awsRestjson1_deserializeDocumentTableDataImportJobMetadata(&sv.JobMetadata, value); err != nil {
 				return err
@@ -1229,6 +1241,9 @@ func awsRestjson1_deserializeOpErrorInvokeScreenAutomation(response *smithyhttp.
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
 
 	case strings.EqualFold("ServiceUnavailableException", errorCode):
 		return awsRestjson1_deserializeErrorServiceUnavailableException(response, errorBody)
@@ -2325,8 +2340,14 @@ func awsRestjson1_deserializeOpErrorStartTableDataImportJob(response *smithyhttp
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
 
+	case strings.EqualFold("RequestTimeoutException", errorCode):
+		return awsRestjson1_deserializeErrorRequestTimeoutException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
 
 	case strings.EqualFold("ServiceUnavailableException", errorCode):
 		return awsRestjson1_deserializeErrorServiceUnavailableException(response, errorBody)
@@ -3118,6 +3139,11 @@ func awsRestjson1_deserializeDocumentCell(v **types.Cell, value interface{}) err
 				sv.FormattedValue = ptr.String(jtv)
 			}
 
+		case "formattedValues":
+			if err := awsRestjson1_deserializeDocumentFormattedValuesList(&sv.FormattedValues, value); err != nil {
+				return err
+			}
+
 		case "formula":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3535,6 +3561,42 @@ func awsRestjson1_deserializeDocumentFailedBatchItems(v *[]types.FailedBatchItem
 			return err
 		}
 		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFormattedValuesList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected FormattedValue to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
 		cv = append(cv, col)
 
 	}

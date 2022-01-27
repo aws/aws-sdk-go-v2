@@ -14,9 +14,9 @@ import (
 
 // Creates a new IPSet, which is called a trusted IP list in the console user
 // interface. An IPSet is a list of IP addresses that are trusted for secure
-// communication with AWS infrastructure and applications. GuardDuty doesn't
-// generate findings for IP addresses that are included in IPSets. Only users from
-// the administrator account can use this operation.
+// communication with Amazon Web Services infrastructure and applications.
+// GuardDuty doesn't generate findings for IP addresses that are included in
+// IPSets. Only users from the administrator account can use this operation.
 func (c *Client) CreateIPSet(ctx context.Context, params *CreateIPSetInput, optFns ...func(*Options)) (*CreateIPSetOutput, error) {
 	if params == nil {
 		params = &CreateIPSetInput{}
@@ -51,8 +51,7 @@ type CreateIPSetInput struct {
 	// This member is required.
 	Format types.IpSetFormat
 
-	// The URI of the file that contains the IPSet. For example:
-	// https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
+	// The URI of the file that contains the IPSet.
 	//
 	// This member is required.
 	Location *string

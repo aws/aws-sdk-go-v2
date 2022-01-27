@@ -15,7 +15,7 @@ import (
 
 // Calculates a route
 // (https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html)
-// given the following required parameters: DeparturePostiton and
+// given the following required parameters: DeparturePosition and
 // DestinationPosition. Requires that you first create a route calculator resource
 // (https://docs.aws.amazon.com/location-routes/latest/APIReference/API_CreateRouteCalculator.html).
 // By default, a request that doesn't specify a departure time uses the best time
@@ -23,16 +23,17 @@ import (
 // Additional options include:
 //
 // * Specifying a departure time
-// (https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html#departure-time)
-// using either DepartureTime or DepartureNow. This calculates a route based on
+// (https://docs.aws.amazon.com/location/latest/developerguide/departure-time.html)
+// using either DepartureTime or DepartNow. This calculates a route based on
 // predictive traffic data at the given time. You can't specify both DepartureTime
-// and DepartureNow in a single request. Specifying both parameters returns a
+// and DepartNow in a single request. Specifying both parameters returns a
 // validation error.
 //
 // * Specifying a travel mode
-// (https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html#travel-mode)
-// using TravelMode. This lets you specify an additional route preference such as
-// CarModeOptions if traveling by Car, or TruckModeOptions if traveling by Truck.
+// (https://docs.aws.amazon.com/location/latest/developerguide/travel-mode.html)
+// using TravelMode sets the transportation mode used to calculate the routes. This
+// also lets you specify additional route preferences in CarModeOptions if
+// traveling by Car, or TruckModeOptions if traveling by Truck.
 func (c *Client) CalculateRoute(ctx context.Context, params *CalculateRouteInput, optFns ...func(*Options)) (*CalculateRouteOutput, error) {
 	if params == nil {
 		params = &CalculateRouteInput{}
@@ -64,7 +65,7 @@ type CalculateRouteInput struct {
 	//
 	// If you specify a departure that's
 	// not located on a road, Amazon Location moves the position to the nearest road
-	// (https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html#snap-to-nearby-road).
+	// (https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html).
 	// If Esri is the provider for your route calculator, specifying a route that is
 	// longer than 400 km returns a 400 RoutesValidationException error. Valid Values:
 	// [-180 to 180,-90 to 90]
@@ -81,7 +82,7 @@ type CalculateRouteInput struct {
 	// If you specify a destination
 	// that's not located on a road, Amazon Location moves the position to the nearest
 	// road
-	// (https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html#snap-to-nearby-road).
+	// (https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html).
 	// Valid Values: [-180 to 180,-90 to 90]
 	//
 	// This member is required.
@@ -115,16 +116,16 @@ type CalculateRouteInput struct {
 	IncludeLegGeometry *bool
 
 	// Specifies the mode of transport when calculating a route. Used in estimating the
-	// speed of travel and road compatibility. The TravelMode you specify determines
-	// how you specify route preferences:
+	// speed of travel and road compatibility. The TravelMode you specify also
+	// determines how you specify route preferences:
 	//
-	// * If traveling by Car use the CarModeOptions
+	// * If traveling by Car use the
+	// CarModeOptions parameter.
+	//
+	// * If traveling by Truck use the TruckModeOptions
 	// parameter.
 	//
-	// * If traveling by Truck use the TruckModeOptions parameter.
-	//
-	// Default
-	// Value: Car
+	// Default Value: Car
 	TravelMode types.TravelMode
 
 	// Specifies route preferences when traveling by Truck, such as avoiding routes
@@ -142,7 +143,7 @@ type CalculateRouteInput struct {
 	// If
 	// you specify a waypoint position that's not located on a road, Amazon Location
 	// moves the position to the nearest road
-	// (https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html#snap-to-nearby-road).
+	// (https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html).
 	// Specifying more than 23 waypoints returns a 400 ValidationException error. If
 	// Esri is the provider for your route calculator, specifying a route that is
 	// longer than 400 km returns a 400 RoutesValidationException error. Valid Values:
@@ -162,7 +163,7 @@ type CalculateRouteOutput struct {
 	// number of positions in the request. For example, a route with a departure
 	// position and destination position returns one leg with the positions snapped to
 	// a nearby road
-	// (https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html#snap-to-nearby-road):
+	// (https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html):
 	//
 	// *
 	// The StartPosition is the departure position.

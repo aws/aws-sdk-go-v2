@@ -24,10 +24,11 @@ type DataSource string
 
 // Enum values for DataSource
 const (
-	DataSourceFlowLogs   DataSource = "FLOW_LOGS"
-	DataSourceCloudTrail DataSource = "CLOUD_TRAIL"
-	DataSourceDnsLogs    DataSource = "DNS_LOGS"
-	DataSourceS3Logs     DataSource = "S3_LOGS"
+	DataSourceFlowLogs            DataSource = "FLOW_LOGS"
+	DataSourceCloudTrail          DataSource = "CLOUD_TRAIL"
+	DataSourceDnsLogs             DataSource = "DNS_LOGS"
+	DataSourceS3Logs              DataSource = "S3_LOGS"
+	DataSourceKubernetesAuditLogs DataSource = "KUBERNETES_AUDIT_LOGS"
 )
 
 // Values returns all known values for DataSource. Note that this can be expanded
@@ -39,6 +40,7 @@ func (DataSource) Values() []DataSource {
 		"CLOUD_TRAIL",
 		"DNS_LOGS",
 		"S3_LOGS",
+		"KUBERNETES_AUDIT_LOGS",
 	}
 }
 

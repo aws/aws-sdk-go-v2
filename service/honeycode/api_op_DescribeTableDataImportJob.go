@@ -69,6 +69,9 @@ type DescribeTableDataImportJobOutput struct {
 	// This member is required.
 	Message *string
 
+	// If job status is failed, error code to understand reason for the failure.
+	ErrorCode types.ErrorCode
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

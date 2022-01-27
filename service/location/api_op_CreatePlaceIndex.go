@@ -17,7 +17,10 @@ import (
 // to geocode addresses and other text queries by using the SearchPlaceIndexForText
 // operation, and reverse geocode coordinates by using the
 // SearchPlaceIndexForPosition operation, and enable autosuggestions by using the
-// SearchPlaceIndexForSuggestions operation.
+// SearchPlaceIndexForSuggestions operation. If your application is tracking or
+// routing assets you use in your business, such as delivery vehicles or employees,
+// you may only use HERE as your geolocation provider. See section 82 of the AWS
+// service terms (http://aws.amazon.com/service-terms) for more details.
 func (c *Client) CreatePlaceIndex(ctx context.Context, params *CreatePlaceIndexInput, optFns ...func(*Options)) (*CreatePlaceIndexOutput, error) {
 	if params == nil {
 		params = &CreatePlaceIndexInput{}
@@ -84,10 +87,10 @@ type CreatePlaceIndexInput struct {
 	// The optional description for the place index resource.
 	Description *string
 
-	// Optionally specifies the pricing plan for the place index resource. Defaults to
-	// RequestBasedUsage. For additional details and restrictions on each pricing plan
-	// option, see Amazon Location Service pricing
-	// (https://aws.amazon.com/location/pricing/).
+	// No longer used. If included, the only allowed value is RequestBasedUsage.
+	//
+	// Deprecated: Deprecated. If included, the only allowed value is
+	// RequestBasedUsage.
 	PricingPlan types.PricingPlan
 
 	// Applies one or more tags to the place index resource. A tag is a key-value pair

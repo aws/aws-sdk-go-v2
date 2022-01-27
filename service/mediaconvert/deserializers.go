@@ -6825,6 +6825,15 @@ func awsRestjson1_deserializeDocumentAv1Settings(v **types.Av1Settings, value in
 				sv.AdaptiveQuantization = types.Av1AdaptiveQuantization(jtv)
 			}
 
+		case "bitDepth":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Av1BitDepth to be of type string, got %T instead", value)
+				}
+				sv.BitDepth = types.Av1BitDepth(jtv)
+			}
+
 		case "framerateControl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8529,6 +8538,15 @@ func awsRestjson1_deserializeDocumentCmfcSettings(v **types.CmfcSettings, value 
 					return fmt.Errorf("expected CmfcScte35Source to be of type string, got %T instead", value)
 				}
 				sv.Scte35Source = types.CmfcScte35Source(jtv)
+			}
+
+		case "timedMetadata":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CmfcTimedMetadata to be of type string, got %T instead", value)
+				}
+				sv.TimedMetadata = types.CmfcTimedMetadata(jtv)
 			}
 
 		default:
@@ -13560,6 +13578,15 @@ func awsRestjson1_deserializeDocumentImscDestinationSettings(v **types.ImscDesti
 
 	for key, value := range shape {
 		switch key {
+		case "accessibility":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ImscAccessibilitySubs to be of type string, got %T instead", value)
+				}
+				sv.Accessibility = types.ImscAccessibilitySubs(jtv)
+			}
+
 		case "stylePassthrough":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13641,6 +13668,15 @@ func awsRestjson1_deserializeDocumentInput(v **types.Input, value interface{}) e
 					return fmt.Errorf("expected InputDenoiseFilter to be of type string, got %T instead", value)
 				}
 				sv.DenoiseFilter = types.InputDenoiseFilter(jtv)
+			}
+
+		case "dolbyVisionMetadataXml":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringMin14PatternS3XmlXMLHttpsXmlXML to be of type string, got %T instead", value)
+				}
+				sv.DolbyVisionMetadataXml = ptr.String(jtv)
 			}
 
 		case "fileInput":
@@ -13931,6 +13967,15 @@ func awsRestjson1_deserializeDocumentInputTemplate(v **types.InputTemplate, valu
 					return fmt.Errorf("expected InputDenoiseFilter to be of type string, got %T instead", value)
 				}
 				sv.DenoiseFilter = types.InputDenoiseFilter(jtv)
+			}
+
+		case "dolbyVisionMetadataXml":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringMin14PatternS3XmlXMLHttpsXmlXML to be of type string, got %T instead", value)
+				}
+				sv.DolbyVisionMetadataXml = ptr.String(jtv)
 			}
 
 		case "filterEnable":
@@ -16413,6 +16458,15 @@ func awsRestjson1_deserializeDocumentMpdSettings(v **types.MpdSettings, value in
 					return fmt.Errorf("expected MpdScte35Source to be of type string, got %T instead", value)
 				}
 				sv.Scte35Source = types.MpdScte35Source(jtv)
+			}
+
+		case "timedMetadata":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MpdTimedMetadata to be of type string, got %T instead", value)
+				}
+				sv.TimedMetadata = types.MpdTimedMetadata(jtv)
 			}
 
 		default:
@@ -19151,7 +19205,7 @@ func awsRestjson1_deserializeDocumentS3EncryptionSettings(v **types.S3Encryption
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected __stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932 to be of type string, got %T instead", value)
 				}
 				sv.KmsKeyArn = ptr.String(jtv)
 			}
@@ -21085,6 +21139,15 @@ func awsRestjson1_deserializeDocumentWebvttDestinationSettings(v **types.WebvttD
 
 	for key, value := range shape {
 		switch key {
+		case "accessibility":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WebvttAccessibilitySubs to be of type string, got %T instead", value)
+				}
+				sv.Accessibility = types.WebvttAccessibilitySubs(jtv)
+			}
+
 		case "stylePassthrough":
 			if value != nil {
 				jtv, ok := value.(string)

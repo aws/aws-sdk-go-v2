@@ -32,11 +32,6 @@ func (c *Client) SendSSHPublicKey(ctx context.Context, params *SendSSHPublicKeyI
 
 type SendSSHPublicKeyInput struct {
 
-	// The Availability Zone in which the EC2 instance was launched.
-	//
-	// This member is required.
-	AvailabilityZone *string
-
 	// The ID of the EC2 instance.
 	//
 	// This member is required.
@@ -52,6 +47,9 @@ type SendSSHPublicKeyInput struct {
 	//
 	// This member is required.
 	SSHPublicKey *string
+
+	// The Availability Zone in which the EC2 instance was launched.
+	AvailabilityZone *string
 
 	noSmithyDocumentSerde
 }

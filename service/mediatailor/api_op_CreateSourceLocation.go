@@ -47,6 +47,8 @@ type CreateSourceLocationInput struct {
 	// The optional configuration for the server that serves segments.
 	DefaultSegmentDeliveryConfiguration *types.DefaultSegmentDeliveryConfiguration
 
+	SegmentDeliveryConfigurations []types.SegmentDeliveryConfiguration
+
 	// The tags to assign to the source location.
 	Tags map[string]string
 
@@ -72,6 +74,8 @@ type CreateSourceLocationOutput struct {
 
 	// The timestamp that indicates when the source location was last modified.
 	LastModifiedTime *time.Time
+
+	SegmentDeliveryConfigurations []types.SegmentDeliveryConfiguration
 
 	// The name of the source location.
 	SourceLocationName *string

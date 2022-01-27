@@ -42,9 +42,10 @@ type UpdatePlaceIndexInput struct {
 	// Updates the description for the place index resource.
 	Description *string
 
-	// Updates the pricing plan for the place index resource. For more information
-	// about each pricing plan option restrictions, see Amazon Location Service pricing
-	// (https://aws.amazon.com/location/pricing/).
+	// No longer used. If included, the only allowed value is RequestBasedUsage.
+	//
+	// Deprecated: Deprecated. If included, the only allowed value is
+	// RequestBasedUsage.
 	PricingPlan types.PricingPlan
 
 	noSmithyDocumentSerde

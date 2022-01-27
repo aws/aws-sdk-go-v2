@@ -50,6 +50,11 @@ type CreateRecordingConfigurationInput struct {
 	// Array of 1-50 maps, each of the form string:string (key:value).
 	Tags map[string]string
 
+	// A complex type that allows you to enable/disable the recording of thumbnails for
+	// a live session and modify the interval at which thumbnails are generated for the
+	// live session.
+	ThumbnailConfiguration *types.ThumbnailConfiguration
+
 	noSmithyDocumentSerde
 }
 

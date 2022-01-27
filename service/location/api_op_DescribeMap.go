@@ -76,19 +76,17 @@ type DescribeMapOutput struct {
 	// This member is required.
 	MapName *string
 
-	// The pricing plan selected for the specified map resource. For additional details
-	// and restrictions on each pricing plan option, see Amazon Location Service
-	// pricing (https://aws.amazon.com/location/pricing/).
-	//
-	// This member is required.
-	PricingPlan types.PricingPlan
-
 	// The timestamp for when the map resource was last update in ISO 8601
 	// (https://www.iso.org/iso-8601-date-and-time-format.html) format:
 	// YYYY-MM-DDThh:mm:ss.sssZ.
 	//
 	// This member is required.
 	UpdateTime *time.Time
+
+	// No longer used. Always returns RequestBasedUsage.
+	//
+	// Deprecated: Deprecated. Always returns RequestBasedUsage.
+	PricingPlan types.PricingPlan
 
 	// Tags associated with the map resource.
 	Tags map[string]string

@@ -142,9 +142,6 @@ type ListFindingsInput struct {
 	// service.action.networkConnectionAction.protocol
 	//
 	// *
-	// service.action.networkConnectionAction.remoteIpDetails.city.cityName
-	//
-	// *
 	// service.action.networkConnectionAction.remoteIpDetails.country.countryName
 	//
 	// *

@@ -80,6 +80,22 @@ func (PricingPlan) Values() []PricingPlan {
 	}
 }
 
+type RouteMatrixErrorCode string
+
+// Values returns all known values for RouteMatrixErrorCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RouteMatrixErrorCode) Values() []RouteMatrixErrorCode {
+	return []RouteMatrixErrorCode{
+		"RouteNotFound",
+		"RouteTooLong",
+		"PositionsNotFound",
+		"DestinationPositionNotFound",
+		"DeparturePositionNotFound",
+		"OtherValidationError",
+	}
+}
+
 type TravelMode string
 
 // Values returns all known values for TravelMode. Note that this can be expanded

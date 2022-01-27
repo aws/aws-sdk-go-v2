@@ -46,6 +46,29 @@ func (e *EC2InstanceNotFoundException) ErrorMessage() string {
 func (e *EC2InstanceNotFoundException) ErrorCode() string             { return "EC2InstanceNotFoundException" }
 func (e *EC2InstanceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// Unable to connect because the instance is not in a valid state. Connecting to a
+// stopped or terminated instance is not supported. If the instance is stopped,
+// start your instance, and try to connect again.
+type EC2InstanceStateInvalidException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *EC2InstanceStateInvalidException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *EC2InstanceStateInvalidException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *EC2InstanceStateInvalidException) ErrorCode() string {
+	return "EC2InstanceStateInvalidException"
+}
+func (e *EC2InstanceStateInvalidException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The instance type is not supported for connecting via the serial console. Only
 // Nitro instance types are currently supported.
 type EC2InstanceTypeInvalidException struct {

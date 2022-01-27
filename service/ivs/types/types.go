@@ -205,6 +205,11 @@ type RecordingConfiguration struct {
 	// Array of 1-50 maps, each of the form string:string (key:value).
 	Tags map[string]string
 
+	// A complex type that allows you to enable/disable the recording of thumbnails for
+	// a live session and modify the interval at which thumbnails are generated for the
+	// live session.
+	ThumbnailConfiguration *ThumbnailConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -413,6 +418,27 @@ type StreamSummary struct {
 	// removed from viewerCount within 1 minute of when video playback ends. A value of
 	// -1 indicates that the request timed out; in this case, retry.
 	ViewerCount int64
+
+	noSmithyDocumentSerde
+}
+
+// An object representing a configuration of thumbnails for recorded video.
+type ThumbnailConfiguration struct {
+
+	// Thumbnail recording mode. Default: INTERVAL.
+	RecordingMode RecordingMode
+
+	// The targeted thumbnail-generation interval in seconds. This is configurable (and
+	// required) only if recordingMode is INTERVAL. Default: 60. Important: Setting a
+	// value for targetIntervalSeconds does not guarantee that thumbnails are generated
+	// at the specified interval. For thumbnails to be generated at the
+	// targetIntervalSeconds interval, the IDR/Keyframe value for the input video must
+	// be less than the targetIntervalSeconds value. See  Amazon IVS Streaming
+	// Configuration
+	// (https://docs.aws.amazon.com/ivs/latest/userguide/streaming-config.html) for
+	// information on setting IDR/Keyframe to the recommended value in video-encoder
+	// settings.
+	TargetIntervalSeconds int64
 
 	noSmithyDocumentSerde
 }

@@ -2644,6 +2644,7 @@ const (
 	InstanceTypeC6i16xlarge     InstanceType = "c6i.16xlarge"
 	InstanceTypeC6i24xlarge     InstanceType = "c6i.24xlarge"
 	InstanceTypeC6i32xlarge     InstanceType = "c6i.32xlarge"
+	InstanceTypeC6iMetal        InstanceType = "c6i.metal"
 	InstanceTypeCc14xlarge      InstanceType = "cc1.4xlarge"
 	InstanceTypeCc28xlarge      InstanceType = "cc2.8xlarge"
 	InstanceTypeCg14xlarge      InstanceType = "cg1.4xlarge"
@@ -2853,6 +2854,7 @@ const (
 	InstanceTypeM6i16xlarge     InstanceType = "m6i.16xlarge"
 	InstanceTypeM6i24xlarge     InstanceType = "m6i.24xlarge"
 	InstanceTypeM6i32xlarge     InstanceType = "m6i.32xlarge"
+	InstanceTypeM6iMetal        InstanceType = "m6i.metal"
 	InstanceTypeMac1Metal       InstanceType = "mac1.metal"
 	InstanceTypeP2Xlarge        InstanceType = "p2.xlarge"
 	InstanceTypeP28xlarge       InstanceType = "p2.8xlarge"
@@ -2952,6 +2954,16 @@ const (
 	InstanceTypeR6gd12xlarge    InstanceType = "r6gd.12xlarge"
 	InstanceTypeR6gd16xlarge    InstanceType = "r6gd.16xlarge"
 	InstanceTypeR6gdMetal       InstanceType = "r6gd.metal"
+	InstanceTypeR6iLarge        InstanceType = "r6i.large"
+	InstanceTypeR6iXlarge       InstanceType = "r6i.xlarge"
+	InstanceTypeR6i2xlarge      InstanceType = "r6i.2xlarge"
+	InstanceTypeR6i4xlarge      InstanceType = "r6i.4xlarge"
+	InstanceTypeR6i8xlarge      InstanceType = "r6i.8xlarge"
+	InstanceTypeR6i12xlarge     InstanceType = "r6i.12xlarge"
+	InstanceTypeR6i16xlarge     InstanceType = "r6i.16xlarge"
+	InstanceTypeR6i24xlarge     InstanceType = "r6i.24xlarge"
+	InstanceTypeR6i32xlarge     InstanceType = "r6i.32xlarge"
+	InstanceTypeR6iMetal        InstanceType = "r6i.metal"
 	InstanceTypeT1Micro         InstanceType = "t1.micro"
 	InstanceTypeT2Nano          InstanceType = "t2.nano"
 	InstanceTypeT2Micro         InstanceType = "t2.micro"
@@ -3118,6 +3130,7 @@ func (InstanceType) Values() []InstanceType {
 		"c6i.16xlarge",
 		"c6i.24xlarge",
 		"c6i.32xlarge",
+		"c6i.metal",
 		"cc1.4xlarge",
 		"cc2.8xlarge",
 		"cg1.4xlarge",
@@ -3327,6 +3340,7 @@ func (InstanceType) Values() []InstanceType {
 		"m6i.16xlarge",
 		"m6i.24xlarge",
 		"m6i.32xlarge",
+		"m6i.metal",
 		"mac1.metal",
 		"p2.xlarge",
 		"p2.8xlarge",
@@ -3426,6 +3440,16 @@ func (InstanceType) Values() []InstanceType {
 		"r6gd.12xlarge",
 		"r6gd.16xlarge",
 		"r6gd.metal",
+		"r6i.large",
+		"r6i.xlarge",
+		"r6i.2xlarge",
+		"r6i.4xlarge",
+		"r6i.8xlarge",
+		"r6i.12xlarge",
+		"r6i.16xlarge",
+		"r6i.24xlarge",
+		"r6i.32xlarge",
+		"r6i.metal",
 		"t1.micro",
 		"t2.nano",
 		"t2.micro",

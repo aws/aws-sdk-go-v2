@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Invites other AWS accounts (created as members of the current AWS account by
-// CreateMembers) to enable GuardDuty, and allow the current AWS account to view
-// and manage these accounts' findings on their behalf as the GuardDuty
-// administrator account.
+// Invites other Amazon Web Services accounts (created as members of the current
+// Amazon Web Services account by CreateMembers) to enable GuardDuty, and allow the
+// current Amazon Web Services account to view and manage these accounts' findings
+// on their behalf as the GuardDuty administrator account.
 func (c *Client) InviteMembers(ctx context.Context, params *InviteMembersInput, optFns ...func(*Options)) (*InviteMembersOutput, error) {
 	if params == nil {
 		params = &InviteMembersInput{}

@@ -558,6 +558,10 @@ type Av1Settings struct {
 	// (spatialAdaptiveQuantization).
 	AdaptiveQuantization Av1AdaptiveQuantization
 
+	// Specify the Bit depth (Av1BitDepth). You can choose 8-bit (BIT_8) or 10-bit
+	// (BIT_10).
+	BitDepth Av1BitDepth
+
 	// If you are using the console, use the Framerate setting to specify the frame
 	// rate for this output. If you want to keep the same frame rate as the input
 	// video, choose Follow source. If you want to do frame rate conversion, choose a
@@ -1575,6 +1579,10 @@ type CmfcSettings struct {
 	// input to also appear in this output. Choose None (NONE) if you don't want those
 	// SCTE-35 markers in this output.
 	Scte35Source CmfcScte35Source
+
+	// Applies to CMAF outputs. Use this setting to specify whether the service inserts
+	// the ID3 timed metadata from the input in this output.
+	TimedMetadata CmfcTimedMetadata
 
 	noSmithyDocumentSerde
 }
@@ -3190,11 +3198,16 @@ type H265QvbrSettings struct {
 // Settings for H265 codec
 type H265Settings struct {
 
-	// Specify the strength of any adaptive quantization filters that you enable. The
-	// value that you choose here applies to the following settings: Flicker adaptive
-	// quantization (flickerAdaptiveQuantization), Spatial adaptive quantization
-	// (spatialAdaptiveQuantization), and Temporal adaptive quantization
-	// (temporalAdaptiveQuantization).
+	// When you set Adaptive Quantization (H265AdaptiveQuantization) to Auto (AUTO), or
+	// leave blank, MediaConvert automatically applies quantization to improve the
+	// video quality of your output. Set Adaptive Quantization to Low (LOW), Medium
+	// (MEDIUM), High (HIGH), Higher (HIGHER), or Max (MAX) to manually control the
+	// strength of the quantization filter. When you do, you can specify a value for
+	// Spatial Adaptive Quantization (H265SpatialAdaptiveQuantization), Temporal
+	// Adaptive Quantization (H265TemporalAdaptiveQuantization), and Flicker Adaptive
+	// Quantization (H265FlickerAdaptiveQuantization), to further control the
+	// quantization filter. Set Adaptive Quantization to Off (OFF) to apply no
+	// quantization to your output.
 	AdaptiveQuantization H265AdaptiveQuantization
 
 	// Enables Alternate Transfer Function SEI message for outputs using Hybrid Log
@@ -4018,6 +4031,13 @@ type ImageInserter struct {
 // any required children when you set destinationType to IMSC.
 type ImscDestinationSettings struct {
 
+	// Specify whether to flag this caption track as accessibility in your HLS/CMAF
+	// parent manifest. When you choose ENABLED, MediaConvert includes the parameters
+	// CHARACTERISTICS="public.accessibility.describes-spoken-dialog,public.accessibility.describes-music-and-sound"
+	// and AUTOSELECT="YES" in the EXT-X-MEDIA entry for this track. When you keep the
+	// default choice, DISABLED, MediaConvert leaves this parameter out.
+	Accessibility ImscAccessibilitySubs
+
 	// Keep this setting enabled to have MediaConvert use the font style and position
 	// information from the captions source in the output. This option is available
 	// only when your input captions are IMSC, SMPTE-TT, or TTML. Disable this setting
@@ -4069,6 +4089,17 @@ type Input struct {
 	// Enable Denoise (InputDenoiseFilter) to filter noise from the input. Default is
 	// disabled. Only applicable to MPEG2, H.264, H.265, and uncompressed video inputs.
 	DenoiseFilter InputDenoiseFilter
+
+	// Use this setting only when your video source has Dolby Vision studio mastering
+	// metadata that is carried in a separate XML file. Specify the Amazon S3 location
+	// for the metadata XML file. MediaConvert uses this file to provide global and
+	// frame-level metadata for Dolby Vision preprocessing. When you specify a file
+	// here and your input also has interleaved global and frame level metadata,
+	// MediaConvert ignores the interleaved metadata and uses only the the metadata
+	// from this external XML file. Note that your IAM service role must grant
+	// MediaConvert read permissions to this file. For more information, see
+	// https://docs.aws.amazon.com/mediaconvert/latest/ug/iam-role.html.
+	DolbyVisionMetadataXml *string
 
 	// Specify the source file for your transcoding job. You can use multiple inputs in
 	// a single job. The service concatenates these inputs, in the order that you
@@ -4262,6 +4293,17 @@ type InputTemplate struct {
 	// Enable Denoise (InputDenoiseFilter) to filter noise from the input. Default is
 	// disabled. Only applicable to MPEG2, H.264, H.265, and uncompressed video inputs.
 	DenoiseFilter InputDenoiseFilter
+
+	// Use this setting only when your video source has Dolby Vision studio mastering
+	// metadata that is carried in a separate XML file. Specify the Amazon S3 location
+	// for the metadata XML file. MediaConvert uses this file to provide global and
+	// frame-level metadata for Dolby Vision preprocessing. When you specify a file
+	// here and your input also has interleaved global and frame level metadata,
+	// MediaConvert ignores the interleaved metadata and uses only the the metadata
+	// from this external XML file. Note that your IAM service role must grant
+	// MediaConvert read permissions to this file. For more information, see
+	// https://docs.aws.amazon.com/mediaconvert/latest/ug/iam-role.html.
+	DolbyVisionMetadataXml *string
 
 	// Specify how the transcoding service applies the denoise and deblock filters. You
 	// must also enable the filters separately, with Denoise (InputDenoiseFilter) and
@@ -5160,8 +5202,8 @@ type M3u8Settings struct {
 	// (sccXml).
 	Scte35Source M3u8Scte35Source
 
-	// Applies only to HLS outputs. Use this setting to specify whether the service
-	// inserts the ID3 timed metadata from the input in this output.
+	// Applies to HLS outputs. Use this setting to specify whether the service inserts
+	// the ID3 timed metadata from the input in this output.
 	TimedMetadata TimedMetadata
 
 	// Packet Identifier (PID) of the timed metadata stream in the transport stream.
@@ -5435,6 +5477,10 @@ type MpdSettings struct {
 	// input to also appear in this output. Choose None (NONE) if you don't want those
 	// SCTE-35 markers in this output.
 	Scte35Source MpdScte35Source
+
+	// Applies to DASH outputs. Use this setting to specify whether the service inserts
+	// the ID3 timed metadata from the input in this output.
+	TimedMetadata MpdTimedMetadata
 
 	noSmithyDocumentSerde
 }
@@ -7685,6 +7731,13 @@ type WavSettings struct {
 // When you work directly in your JSON job specification, include this object and
 // any required children when you set destinationType to WebVTT.
 type WebvttDestinationSettings struct {
+
+	// Specify whether to flag this caption track as accessibility in your HLS/CMAF
+	// parent manifest. When you choose ENABLED, MediaConvert includes the parameters
+	// CHARACTERISTICS="public.accessibility.describes-spoken-dialog,public.accessibility.describes-music-and-sound"
+	// and AUTOSELECT="YES" in the EXT-X-MEDIA entry for this track. When you keep the
+	// default choice, DISABLED, MediaConvert leaves this parameter out.
+	Accessibility WebvttAccessibilitySubs
 
 	// Set Style passthrough (StylePassthrough) to ENABLED to use the available style,
 	// color, and position information from your input captions. MediaConvert uses

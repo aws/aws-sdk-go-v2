@@ -64,20 +64,15 @@ type UpdateTrackerInput struct {
 	// control costs by reducing the number of geofence evaluations.
 	PositionFiltering types.PositionFiltering
 
-	// Updates the pricing plan for the tracker resource. For more information about
-	// each pricing plan option restrictions, see Amazon Location Service pricing
-	// (https://aws.amazon.com/location/pricing/).
+	// No longer used. If included, the only allowed value is RequestBasedUsage.
+	//
+	// Deprecated: Deprecated. If included, the only allowed value is
+	// RequestBasedUsage.
 	PricingPlan types.PricingPlan
 
-	// Updates the data provider for the tracker resource. A required value for the
-	// following pricing plans: MobileAssetTracking| MobileAssetManagement For more
-	// information about data providers
-	// (https://aws.amazon.com/location/data-providers/) and pricing plans
-	// (https://aws.amazon.com/location/pricing/), see the Amazon Location Service
-	// product page This can only be updated when updating the PricingPlan in the same
-	// request. Amazon Location Service uses PricingPlanDataSource to calculate billing
-	// for your tracker resource. Your data won't be shared with the data provider, and
-	// will remain in your AWS account and Region unless you move it.
+	// This parameter is no longer used.
+	//
+	// Deprecated: Deprecated. No longer allowed.
 	PricingPlanDataSource *string
 
 	noSmithyDocumentSerde

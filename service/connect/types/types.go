@@ -354,6 +354,35 @@ type CurrentMetricResult struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about a default vocabulary.
+type DefaultVocabulary struct {
+
+	// The identifier of the Amazon Connect instance. You can find the instanceId in
+	// the ARN of the instance.
+	//
+	// This member is required.
+	InstanceId *string
+
+	// The language code of the vocabulary entries. For a list of languages and their
+	// corresponding language codes, see What is Amazon Transcribe?
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-whatis.html)
+	//
+	// This member is required.
+	LanguageCode VocabularyLanguageCode
+
+	// The identifier of the custom vocabulary.
+	//
+	// This member is required.
+	VocabularyId *string
+
+	// A unique name of the custom vocabulary.
+	//
+	// This member is required.
+	VocabularyName *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about the dimensions for a set of metrics.
 type Dimensions struct {
 
@@ -389,8 +418,9 @@ type Filters struct {
 	// The channel to use to filter the metrics.
 	Channels []Channel
 
-	// The queues to use to filter the metrics. You can specify up to 100 queues per
-	// request.
+	// The queues to use to filter the metrics. You should specify at least one queue,
+	// and can specify up to 100 queues per request. The GetCurrentMetricsData API in
+	// particular requires a queue when you include a Filter in your request.
 	Queues []string
 
 	noSmithyDocumentSerde
@@ -413,6 +443,9 @@ type HierarchyGroup struct {
 
 	// The name of the hierarchy group.
 	Name *string
+
+	// The tags used to organize, track, or control access for this resource.
+	Tags map[string]string
 
 	noSmithyDocumentSerde
 }
@@ -1520,6 +1553,98 @@ type UserSummary struct {
 
 	// The Amazon Connect user name of the user account.
 	Username *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a custom vocabulary.
+type Vocabulary struct {
+
+	// The Amazon Resource Name (ARN) of the custom vocabulary.
+	//
+	// This member is required.
+	Arn *string
+
+	// The identifier of the custom vocabulary.
+	//
+	// This member is required.
+	Id *string
+
+	// The language code of the vocabulary entries. For a list of languages and their
+	// corresponding language codes, see What is Amazon Transcribe?
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-whatis.html)
+	//
+	// This member is required.
+	LanguageCode VocabularyLanguageCode
+
+	// The timestamp when the custom vocabulary was last modified.
+	//
+	// This member is required.
+	LastModifiedTime *time.Time
+
+	// A unique name of the custom vocabulary.
+	//
+	// This member is required.
+	Name *string
+
+	// The current state of the custom vocabulary.
+	//
+	// This member is required.
+	State VocabularyState
+
+	// The content of the custom vocabulary in plain-text format with a table of
+	// values. Each row in the table represents a word or a phrase, described with
+	// Phrase, IPA, SoundsLike, and DisplayAs fields. Separate the fields with TAB
+	// characters. For more information, see Create a custom vocabulary using a table
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html#create-vocabulary-table).
+	Content *string
+
+	// The reason why the custom vocabulary was not created.
+	FailureReason *string
+
+	// The tags used to organize, track, or control access for this resource.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about the custom vocabulary.
+type VocabularySummary struct {
+
+	// The Amazon Resource Name (ARN) of the custom vocabulary.
+	//
+	// This member is required.
+	Arn *string
+
+	// The identifier of the custom vocabulary.
+	//
+	// This member is required.
+	Id *string
+
+	// The language code of the vocabulary entries. For a list of languages and their
+	// corresponding language codes, see What is Amazon Transcribe?
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-whatis.html)
+	//
+	// This member is required.
+	LanguageCode VocabularyLanguageCode
+
+	// The timestamp when the custom vocabulary was last modified.
+	//
+	// This member is required.
+	LastModifiedTime *time.Time
+
+	// A unique name of the custom vocabulary.
+	//
+	// This member is required.
+	Name *string
+
+	// The current state of the custom vocabulary.
+	//
+	// This member is required.
+	State VocabularyState
+
+	// The reason why the custom vocabulary was not created.
+	FailureReason *string
 
 	noSmithyDocumentSerde
 }

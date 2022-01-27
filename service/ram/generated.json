@@ -21,6 +21,7 @@
         "api_op_GetResourceShareInvitations.go",
         "api_op_GetResourceShares.go",
         "api_op_ListPendingInvitationResources.go",
+        "api_op_ListPermissionVersions.go",
         "api_op_ListPermissions.go",
         "api_op_ListPrincipals.go",
         "api_op_ListResourceSharePermissions.go",

@@ -261,6 +261,44 @@ func (ParticipantRole) Values() []ParticipantRole {
 	}
 }
 
+type PiiEntityType string
+
+// Enum values for PiiEntityType
+const (
+	PiiEntityTypeBankAccountNumber PiiEntityType = "BANK_ACCOUNT_NUMBER"
+	PiiEntityTypeBankRouting       PiiEntityType = "BANK_ROUTING"
+	PiiEntityTypeCreditDebitNumber PiiEntityType = "CREDIT_DEBIT_NUMBER"
+	PiiEntityTypeCreditDebitCvv    PiiEntityType = "CREDIT_DEBIT_CVV"
+	PiiEntityTypeCreditDebitExpiry PiiEntityType = "CREDIT_DEBIT_EXPIRY"
+	PiiEntityTypePin               PiiEntityType = "PIN"
+	PiiEntityTypeEmail             PiiEntityType = "EMAIL"
+	PiiEntityTypeAddress           PiiEntityType = "ADDRESS"
+	PiiEntityTypeName              PiiEntityType = "NAME"
+	PiiEntityTypePhone             PiiEntityType = "PHONE"
+	PiiEntityTypeSsn               PiiEntityType = "SSN"
+	PiiEntityTypeAll               PiiEntityType = "ALL"
+)
+
+// Values returns all known values for PiiEntityType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PiiEntityType) Values() []PiiEntityType {
+	return []PiiEntityType{
+		"BANK_ACCOUNT_NUMBER",
+		"BANK_ROUTING",
+		"CREDIT_DEBIT_NUMBER",
+		"CREDIT_DEBIT_CVV",
+		"CREDIT_DEBIT_EXPIRY",
+		"PIN",
+		"EMAIL",
+		"ADDRESS",
+		"NAME",
+		"PHONE",
+		"SSN",
+		"ALL",
+	}
+}
+
 type RedactionOutput string
 
 // Enum values for RedactionOutput

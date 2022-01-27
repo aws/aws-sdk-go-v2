@@ -995,6 +995,11 @@ func awsRestjson1_deserializeOpDocumentCreateSourceLocationOutput(v **CreateSour
 				}
 			}
 
+		case "SegmentDeliveryConfigurations":
+			if err := awsRestjson1_deserializeDocument__listOfSegmentDeliveryConfiguration(&sv.SegmentDeliveryConfigurations, value); err != nil {
+				return err
+			}
+
 		case "SourceLocationName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2413,6 +2418,11 @@ func awsRestjson1_deserializeOpDocumentDescribeSourceLocationOutput(v **Describe
 					return fmt.Errorf("expected __timestampUnix to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "SegmentDeliveryConfigurations":
+			if err := awsRestjson1_deserializeDocument__listOfSegmentDeliveryConfiguration(&sv.SegmentDeliveryConfigurations, value); err != nil {
+				return err
 			}
 
 		case "SourceLocationName":
@@ -5571,6 +5581,11 @@ func awsRestjson1_deserializeOpDocumentUpdateSourceLocationOutput(v **UpdateSour
 				}
 			}
 
+		case "SegmentDeliveryConfigurations":
+			if err := awsRestjson1_deserializeDocument__listOfSegmentDeliveryConfiguration(&sv.SegmentDeliveryConfigurations, value); err != nil {
+				return err
+			}
+
 		case "SourceLocationName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6136,6 +6151,40 @@ func awsRestjson1_deserializeDocument__listOfScheduleEntry(v *[]types.ScheduleEn
 		var col types.ScheduleEntry
 		destAddr := &col
 		if err := awsRestjson1_deserializeDocumentScheduleEntry(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocument__listOfSegmentDeliveryConfiguration(v *[]types.SegmentDeliveryConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.SegmentDeliveryConfiguration
+	if *v == nil {
+		cv = []types.SegmentDeliveryConfiguration{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.SegmentDeliveryConfiguration
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentSegmentDeliveryConfiguration(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr
@@ -8127,6 +8176,55 @@ func awsRestjson1_deserializeDocumentSecretsManagerAccessTokenConfiguration(v **
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentSegmentDeliveryConfiguration(v **types.SegmentDeliveryConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SegmentDeliveryConfiguration
+	if *v == nil {
+		sv = &types.SegmentDeliveryConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "BaseUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.BaseUrl = ptr.String(jtv)
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentSlateSource(v **types.SlateSource, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8252,6 +8350,11 @@ func awsRestjson1_deserializeDocumentSourceLocation(v **types.SourceLocation, va
 					return fmt.Errorf("expected __timestampUnix to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "SegmentDeliveryConfigurations":
+			if err := awsRestjson1_deserializeDocument__listOfSegmentDeliveryConfiguration(&sv.SegmentDeliveryConfigurations, value); err != nil {
+				return err
 			}
 
 		case "SourceLocationName":

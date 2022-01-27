@@ -49,8 +49,7 @@ type CreateThreatIntelSetInput struct {
 	// This member is required.
 	Format types.ThreatIntelSetFormat
 
-	// The URI of the file that contains the ThreatIntelSet. For example:
-	// https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
+	// The URI of the file that contains the ThreatIntelSet.
 	//
 	// This member is required.
 	Location *string

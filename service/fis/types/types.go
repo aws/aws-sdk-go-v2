@@ -7,9 +7,9 @@ import (
 	"time"
 )
 
-// Describes an action. For more information, see AWS FIS actions
+// Describes an action. For more information, see FIS actions
 // (https://docs.aws.amazon.com/fis/latest/userguide/fis-actions-reference.html) in
-// the AWS Fault Injection Simulator User Guide.
+// the Fault Injection Simulator User Guide.
 type Action struct {
 
 	// The description for the action.
@@ -69,10 +69,13 @@ type ActionTarget struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies an action for an experiment template.
+// Specifies an action for an experiment template. For more information, see
+// Actions (https://docs.aws.amazon.com/fis/latest/userguide/actions.html) in the
+// Fault Injection Simulator User Guide.
 type CreateExperimentTemplateActionInput struct {
 
-	// The ID of the action.
+	// The ID of the action. The format of the action ID is:
+	// aws:service-name:action-type.
 	//
 	// This member is required.
 	ActionId *string
@@ -112,11 +115,13 @@ type CreateExperimentTemplateStopConditionInput struct {
 
 // Specifies a target for an experiment. You must specify at least one Amazon
 // Resource Name (ARN) or at least one resource tag. You cannot specify both ARNs
-// and tags.
+// and tags. For more information, see Targets
+// (https://docs.aws.amazon.com/fis/latest/userguide/targets.html) in the Fault
+// Injection Simulator User Guide.
 type CreateExperimentTemplateTargetInput struct {
 
-	// The AWS resource type. The resource type must be supported for the specified
-	// action.
+	// The Amazon Web Services resource type. The resource type must be supported for
+	// the specified action.
 	//
 	// This member is required.
 	ResourceType *string
@@ -157,7 +162,7 @@ type Experiment struct {
 	// The actions for the experiment.
 	Actions map[string]ExperimentAction
 
-	// The time the experiment was created.
+	// The time that the experiment was created.
 	CreationTime *time.Time
 
 	// The time that the experiment ended.
@@ -169,11 +174,11 @@ type Experiment struct {
 	// The ID of the experiment.
 	Id *string
 
-	// The Amazon Resource Name (ARN) of an IAM role that grants the AWS FIS service
+	// The Amazon Resource Name (ARN) of an IAM role that grants the FIS service
 	// permission to perform service actions on your behalf.
 	RoleArn *string
 
-	// The time that the experiment was started.
+	// The time that the experiment started.
 	StartTime *time.Time
 
 	// The state of the experiment.
@@ -200,11 +205,17 @@ type ExperimentAction struct {
 	// The description for the action.
 	Description *string
 
+	// The time that the action ended.
+	EndTime *time.Time
+
 	// The parameters for the action.
 	Parameters map[string]string
 
 	// The name of the action that must be completed before this action starts.
 	StartAfter []string
+
+	// The time that the action started.
+	StartTime *time.Time
 
 	// The state of the action.
 	State *ExperimentActionState
@@ -425,7 +436,10 @@ type ExperimentTemplateTargetFilter struct {
 	noSmithyDocumentSerde
 }
 
-// Describes a filter used for the target resource input in an experiment template.
+// Specifies a filter used for the target resource input in an experiment template.
+// For more information, see Resource filters
+// (https://docs.aws.amazon.com/fis/latest/userguide/targets.html#target-filters)
+// in the Fault Injection Simulator User Guide.
 type ExperimentTemplateTargetInputFilter struct {
 
 	// The attribute path for the filter.
@@ -484,8 +498,8 @@ type UpdateExperimentTemplateStopConditionInput struct {
 // Resource Name (ARN) or at least one resource tag. You cannot specify both.
 type UpdateExperimentTemplateTargetInput struct {
 
-	// The AWS resource type. The resource type must be supported for the specified
-	// action.
+	// The Amazon Web Services resource type. The resource type must be supported for
+	// the specified action.
 	//
 	// This member is required.
 	ResourceType *string

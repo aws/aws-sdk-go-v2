@@ -23,6 +23,12 @@ type Cell struct {
 	// different raw and formatted values.
 	FormattedValue *string
 
+	// A list of formatted values of the cell. This field is only returned when the
+	// cell is ROWSET format (aka multi-select or multi-record picklist). Values in the
+	// list are always represented as strings. The formattedValue field will be empty
+	// if this field is returned.
+	FormattedValues []string
+
 	// The formula contained in the cell. This field is empty if a cell does not have a
 	// formula.
 	Formula *string
@@ -55,9 +61,20 @@ type Cell struct {
 	// example, a cell containing a picklist to a table that displays task status might
 	// have "Completed" as the formatted value and
 	// "row:dfcefaee-5b37-4355-8f28-40c3e4ff5dd4/ca432b2f-b8eb-431d-9fb5-cbe0342f9f03"
-	// as the raw value. Cells with format AUTO or cells without any format that are
-	// auto-detected as one of the formats above will contain the raw and formatted
-	// values as mentioned above, based on the auto-detected formats. If there is no
+	// as the raw value. Cells with format ROWSET (aka multi-select or multi-record
+	// picklist) will by default have the first column of each of the linked rows as
+	// the formatted value in the list, and the rowset id of the linked rows as the raw
+	// value. For example, a cell containing a multi-select picklist to a table that
+	// contains items might have "Item A", "Item B" in the formatted value list and
+	// "rows:b742c1f4-6cb0-4650-a845-35eb86fcc2bb/
+	// [fdea123b-8f68-474a-aa8a-5ff87aa333af,6daf41f0-a138-4eee-89da-123086d36ecf]" as
+	// the raw value. Cells with format ATTACHMENT will have the name of the attachment
+	// as the formatted value and the attachment id as the raw value. For example, a
+	// cell containing an attachment named "image.jpeg" will have "image.jpeg" as the
+	// formatted value and "attachment:ca432b2f-b8eb-431d-9fb5-cbe0342f9f03" as the raw
+	// value. Cells with format AUTO or cells without any format that are auto-detected
+	// as one of the formats above will contain the raw and formatted values as
+	// mentioned above, based on the auto-detected formats. If there is no
 	// auto-detected format, the raw and formatted values will be the same as the data
 	// in the cell.
 	RawValue *string
@@ -66,11 +83,17 @@ type Cell struct {
 }
 
 // CellInput object contains the data needed to create or update cells in a table.
+// CellInput object has only a facts field or a fact field, but not both. A 400 bad
+// request will be thrown if both fact and facts field are present.
 type CellInput struct {
 
 	// Fact represents the data that is entered into a cell. This data can be free text
 	// or a formula. Formulas need to start with the equals (=) sign.
 	Fact *string
+
+	// A list representing the values that are entered into a ROWSET cell. Facts list
+	// can have either only values or rowIDs, and rowIDs should from the same table.
+	Facts []string
 
 	noSmithyDocumentSerde
 }

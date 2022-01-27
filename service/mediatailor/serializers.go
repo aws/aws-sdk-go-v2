@@ -497,6 +497,13 @@ func awsRestjson1_serializeOpDocumentCreateSourceLocationInput(v *CreateSourceLo
 		}
 	}
 
+	if v.SegmentDeliveryConfigurations != nil {
+		ok := object.Key("SegmentDeliveryConfigurations")
+		if err := awsRestjson1_serializeDocument__listOfSegmentDeliveryConfiguration(v.SegmentDeliveryConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("tags")
 		if err := awsRestjson1_serializeDocument__mapOf__string(v.Tags, ok); err != nil {
@@ -2666,6 +2673,13 @@ func awsRestjson1_serializeOpDocumentUpdateSourceLocationInput(v *UpdateSourceLo
 		}
 	}
 
+	if v.SegmentDeliveryConfigurations != nil {
+		ok := object.Key("SegmentDeliveryConfigurations")
+		if err := awsRestjson1_serializeDocument__listOfSegmentDeliveryConfiguration(v.SegmentDeliveryConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -2781,6 +2795,19 @@ func awsRestjson1_serializeDocument__listOfAvailMatchingCriteria(v []types.Avail
 	for i := range v {
 		av := array.Value()
 		if err := awsRestjson1_serializeDocumentAvailMatchingCriteria(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocument__listOfSegmentDeliveryConfiguration(v []types.SegmentDeliveryConfiguration, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentSegmentDeliveryConfiguration(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -3213,6 +3240,23 @@ func awsRestjson1_serializeDocumentSecretsManagerAccessTokenConfiguration(v *typ
 	if v.SecretStringKey != nil {
 		ok := object.Key("SecretStringKey")
 		ok.String(*v.SecretStringKey)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSegmentDeliveryConfiguration(v *types.SegmentDeliveryConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BaseUrl != nil {
+		ok := object.Key("BaseUrl")
+		ok.String(*v.BaseUrl)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
 	}
 
 	return nil

@@ -122,6 +122,9 @@ func awsAwsjson11_deserializeOpErrorSendSerialConsoleSSHPublicKey(response *smit
 	case strings.EqualFold("EC2InstanceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorEC2InstanceNotFoundException(response, errorBody)
 
+	case strings.EqualFold("EC2InstanceStateInvalidException", errorCode):
+		return awsAwsjson11_deserializeErrorEC2InstanceStateInvalidException(response, errorBody)
+
 	case strings.EqualFold("EC2InstanceTypeInvalidException", errorCode):
 		return awsAwsjson11_deserializeErrorEC2InstanceTypeInvalidException(response, errorBody)
 
@@ -257,6 +260,9 @@ func awsAwsjson11_deserializeOpErrorSendSSHPublicKey(response *smithyhttp.Respon
 	case strings.EqualFold("EC2InstanceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorEC2InstanceNotFoundException(response, errorBody)
 
+	case strings.EqualFold("EC2InstanceStateInvalidException", errorCode):
+		return awsAwsjson11_deserializeErrorEC2InstanceStateInvalidException(response, errorBody)
+
 	case strings.EqualFold("InvalidArgsException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidArgsException(response, errorBody)
 
@@ -331,6 +337,41 @@ func awsAwsjson11_deserializeErrorEC2InstanceNotFoundException(response *smithyh
 
 	output := &types.EC2InstanceNotFoundException{}
 	err := awsAwsjson11_deserializeDocumentEC2InstanceNotFoundException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
+func awsAwsjson11_deserializeErrorEC2InstanceStateInvalidException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.EC2InstanceStateInvalidException{}
+	err := awsAwsjson11_deserializeDocumentEC2InstanceStateInvalidException(&output, shape)
 
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -647,6 +688,46 @@ func awsAwsjson11_deserializeDocumentEC2InstanceNotFoundException(v **types.EC2I
 	var sv *types.EC2InstanceNotFoundException
 	if *v == nil {
 		sv = &types.EC2InstanceNotFoundException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentEC2InstanceStateInvalidException(v **types.EC2InstanceStateInvalidException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EC2InstanceStateInvalidException
+	if *v == nil {
+		sv = &types.EC2InstanceStateInvalidException{}
 	} else {
 		sv = *v
 	}
