@@ -1,0 +1,11 @@
+{
+    "id": "2431530f-536f-406f-869a-325ec51c4844",
+    "type": "documentation",
+    "description": "Updated to latest API model.",
+    "modules": [
+        "service/cloudtrail",
+        "service/codegurureviewer",
+        "service/ebs",
+        "service/route53recoveryreadiness"
+    ]
+}
