@@ -51,30 +51,31 @@ type AdvancedFieldSelector struct {
 	// eventName, resources.type, and resources.ARN.
 	//
 	// * readOnly - Optional. Can be set
-	// to Equals a value of true or false. A value of false logs both read and write
-	// events.
+	// to Equals a value of true or false. If you do not add this field, CloudTrail
+	// logs both both read and write events. A value of true logs only read events. A
+	// value of false logs only write events.
 	//
-	// * eventSource - For filtering management events only. This can be set
-	// only to NotEqualskms.amazonaws.com.
+	// * eventSource - For filtering management
+	// events only. This can be set only to NotEqualskms.amazonaws.com.
 	//
-	// * eventName - Can use any operator. You can
-	// use it to ﬁlter in or ﬁlter out any data event logged to CloudTrail, such as
-	// PutBucket or GetSnapshotBlock. You can have multiple values for this ﬁeld,
-	// separated by commas.
+	// * eventName -
+	// Can use any operator. You can use it to ﬁlter in or ﬁlter out any data event
+	// logged to CloudTrail, such as PutBucket or GetSnapshotBlock. You can have
+	// multiple values for this ﬁeld, separated by commas.
 	//
-	// * eventCategory - This is required. It must be set to
-	// Equals, and the value must be Management or Data.
+	// * eventCategory - This is
+	// required. It must be set to Equals, and the value must be Management or Data.
 	//
-	// * resources.type - This ﬁeld
-	// is required. resources.type can only use the Equals operator, and the value can
-	// be one of the following:
+	// *
+	// resources.type - This ﬁeld is required. resources.type can only use the Equals
+	// operator, and the value can be one of the following:
 	//
 	// * AWS::S3::Object
 	//
-	// * AWS::Lambda::Function
-	//
 	// *
-	// AWS::DynamoDB::Table
+	// AWS::Lambda::Function
+	//
+	// * AWS::DynamoDB::Table
 	//
 	// * AWS::S3Outposts::Object
 	//
@@ -90,60 +91,63 @@ type AdvancedFieldSelector struct {
 	//
 	// * AWS::DynamoDB::Stream
 	//
-	// You can
-	// have only one resources.type ﬁeld per selector. To log data events on more than
-	// one resource type, add another selector.
+	// *
+	// AWS::Glue::Table
 	//
-	// * resources.ARN - You can use any
-	// operator with resources.ARN, but if you use Equals or NotEquals, the value must
-	// exactly match the ARN of a valid resource of the type you've speciﬁed in the
-	// template as the value of resources.type. For example, if resources.type equals
-	// AWS::S3::Object, the ARN must be in one of the following formats. To log all
-	// data events for all objects in a specific S3 bucket, use the StartsWith
-	// operator, and include only the bucket ARN as the matching value. The trailing
-	// slash is intentional; do not exclude it. Replace the text between less than and
-	// greater than symbols (<>) with resource-specific information.
+	// You can have only one resources.type ﬁeld per selector. To log
+	// data events on more than one resource type, add another selector.
+	//
+	// *
+	// resources.ARN - You can use any operator with resources.ARN, but if you use
+	// Equals or NotEquals, the value must exactly match the ARN of a valid resource of
+	// the type you've speciﬁed in the template as the value of resources.type. For
+	// example, if resources.type equals AWS::S3::Object, the ARN must be in one of the
+	// following formats. To log all data events for all objects in a specific S3
+	// bucket, use the StartsWith operator, and include only the bucket ARN as the
+	// matching value. The trailing slash is intentional; do not exclude it. Replace
+	// the text between less than and greater than symbols (<>) with resource-specific
+	// information.
 	//
 	// * arn::s3:::/
 	//
-	// *
-	// arn::s3::://
-	//
-	// When resources.type equals AWS::S3::AccessPoint, and the operator
-	// is set to Equals or NotEquals, the ARN must be in one of the following formats.
-	// To log events on all objects in an S3 access point, we recommend that you use
-	// only the access point ARN, don’t include the object path, and use the StartsWith
-	// or NotStartsWith operators.
-	//
-	// * arn::s3:::accesspoint/
-	//
-	// *
-	// arn::s3:::accesspoint//object/
+	// * arn::s3::://
 	//
 	// When resources.type equals
-	// AWS::Lambda::Function, and the operator is set to Equals or NotEquals, the ARN
-	// must be in the following format:
+	// AWS::S3::AccessPoint, and the operator is set to Equals or NotEquals, the ARN
+	// must be in one of the following formats. To log events on all objects in an S3
+	// access point, we recommend that you use only the access point ARN, don’t include
+	// the object path, and use the StartsWith or NotStartsWith operators.
+	//
+	// *
+	// arn::s3:::accesspoint/
+	//
+	// * arn::s3:::accesspoint//object/
+	//
+	// When resources.type
+	// equals AWS::Lambda::Function, and the operator is set to Equals or NotEquals,
+	// the ARN must be in the following format:
 	//
 	// * arn::lambda:::function:
 	//
-	// When resources.type
-	// equals AWS::DynamoDB::Table, and the operator is set to Equals or NotEquals, the
-	// ARN must be in the following format:
-	//
-	// * arn::dynamodb:::table/
-	//
 	// When
-	// resources.type equals AWS::S3Outposts::Object, and the operator is set to Equals
-	// or NotEquals, the ARN must be in the following format:
+	// resources.type equals AWS::DynamoDB::Table, and the operator is set to Equals or
+	// NotEquals, the ARN must be in the following format:
 	//
 	// *
-	// arn::s3-outposts:::
+	// arn::dynamodb:::table/
 	//
-	// When resources.type equals AWS::ManagedBlockchain::Node,
-	// and the operator is set to Equals or NotEquals, the ARN must be in the following
+	// When resources.type equals AWS::S3Outposts::Object, and
+	// the operator is set to Equals or NotEquals, the ARN must be in the following
 	// format:
 	//
-	// * arn::managedblockchain:::nodes/
+	// * arn::s3-outposts:::
+	//
+	// When resources.type equals
+	// AWS::ManagedBlockchain::Node, and the operator is set to Equals or NotEquals,
+	// the ARN must be in the following format:
+	//
+	// *
+	// arn::managedblockchain:::nodes/
 	//
 	// When resources.type equals
 	// AWS::S3ObjectLambda::AccessPoint, and the operator is set to Equals or
@@ -163,6 +167,12 @@ type AdvancedFieldSelector struct {
 	// must be in the following format:
 	//
 	// * arn::dynamodb:::table//stream/
+	//
+	// When
+	// resources.type equals AWS::Glue::Table, and the operator is set to Equals or
+	// NotEquals, the ARN must be in the following format:
+	//
+	// * arn::glue:::table//
 	//
 	// This member is required.
 	Field *string
@@ -273,6 +283,9 @@ type DataResource struct {
 	// * AWS::S3::AccessPoint
 	//
 	// * AWS::DynamoDB::Stream
+	//
+	// *
+	// AWS::Glue::Table
 	Type *string
 
 	// An array of Amazon Resource Name (ARN) strings or partial ARN strings for the
@@ -424,7 +437,8 @@ type EventSelector struct {
 	// (disables the filter), or it can filter out Key Management Service or Amazon RDS
 	// Data API events by containing kms.amazonaws.com or rdsdata.amazonaws.com. By
 	// default, ExcludeManagementEventSources is empty, and KMS and Amazon RDS Data API
-	// events are logged to your trail.
+	// events are logged to your trail. You can exclude management event sources only
+	// in regions that support the event source.
 	ExcludeManagementEventSources []string
 
 	// Specify if you want your event selector to include management events for your

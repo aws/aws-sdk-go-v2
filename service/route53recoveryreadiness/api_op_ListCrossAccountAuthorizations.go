@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a collection of cross account readiness authorizations.
+// Lists the cross-account readiness authorizations that are in place for an
+// account.
 func (c *Client) ListCrossAccountAuthorizations(ctx context.Context, params *ListCrossAccountAuthorizationsInput, optFns ...func(*Options)) (*ListCrossAccountAuthorizationsOutput, error) {
 	if params == nil {
 		params = &ListCrossAccountAuthorizationsInput{}
@@ -29,10 +30,10 @@ func (c *Client) ListCrossAccountAuthorizations(ctx context.Context, params *Lis
 
 type ListCrossAccountAuthorizationsInput struct {
 
-	// Upper bound on number of records to return.
+	// The number of objects that you want to return with this call.
 	MaxResults int32
 
-	// A token used to resume pagination from the end of a previous request.
+	// The token that identifies which batch of results you want to see.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -40,10 +41,10 @@ type ListCrossAccountAuthorizationsInput struct {
 
 type ListCrossAccountAuthorizationsOutput struct {
 
-	// A list of CrossAccountAuthorizations
+	// A list of cross-account authorizations.
 	CrossAccountAuthorizations []string
 
-	// A token that can be used to resume pagination from the end of the collection.
+	// The token that identifies which batch of results you want to see.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -123,7 +124,7 @@ var _ ListCrossAccountAuthorizationsAPIClient = (*Client)(nil)
 // ListCrossAccountAuthorizationsPaginatorOptions is the paginator options for
 // ListCrossAccountAuthorizations
 type ListCrossAccountAuthorizationsPaginatorOptions struct {
-	// Upper bound on number of records to return.
+	// The number of objects that you want to return with this call.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

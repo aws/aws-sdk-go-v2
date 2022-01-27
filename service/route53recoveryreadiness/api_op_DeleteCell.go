@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an existing Cell.
+// Delete a cell. When successful, the response code is 204, with no response body.
 func (c *Client) DeleteCell(ctx context.Context, params *DeleteCellInput, optFns ...func(*Options)) (*DeleteCellOutput, error) {
 	if params == nil {
 		params = &DeleteCellInput{}
@@ -28,7 +28,7 @@ func (c *Client) DeleteCell(ctx context.Context, params *DeleteCellInput, optFns
 
 type DeleteCellInput struct {
 
-	// The Cell to delete
+	// The name of the cell.
 	//
 	// This member is required.
 	CellName *string

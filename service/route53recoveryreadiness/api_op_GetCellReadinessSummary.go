@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about readiness of a Cell.
+// Gets readiness for a cell. Aggregates the readiness of all the resources that
+// are associated with the cell into a single value.
 func (c *Client) GetCellReadinessSummary(ctx context.Context, params *GetCellReadinessSummaryInput, optFns ...func(*Options)) (*GetCellReadinessSummaryOutput, error) {
 	if params == nil {
 		params = &GetCellReadinessSummaryInput{}
@@ -30,15 +31,15 @@ func (c *Client) GetCellReadinessSummary(ctx context.Context, params *GetCellRea
 
 type GetCellReadinessSummaryInput struct {
 
-	// The name of the Cell
+	// The name of the cell.
 	//
 	// This member is required.
 	CellName *string
 
-	// Upper bound on number of records to return.
+	// The number of objects that you want to return with this call.
 	MaxResults int32
 
-	// A token used to resume pagination from the end of a previous request.
+	// The token that identifies which batch of results you want to see.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -46,13 +47,13 @@ type GetCellReadinessSummaryInput struct {
 
 type GetCellReadinessSummaryOutput struct {
 
-	// A token that can be used to resume pagination from the end of the collection.
+	// The token that identifies which batch of results you want to see.
 	NextToken *string
 
-	// The readiness at Cell level.
+	// The readiness at a cell level.
 	Readiness types.Readiness
 
-	// Summaries for the ReadinessChecks making up the Cell
+	// Summaries for the readiness checks that make up the cell.
 	ReadinessChecks []types.ReadinessCheckSummary
 
 	// Metadata pertaining to the operation's result.
@@ -135,7 +136,7 @@ var _ GetCellReadinessSummaryAPIClient = (*Client)(nil)
 // GetCellReadinessSummaryPaginatorOptions is the paginator options for
 // GetCellReadinessSummary
 type GetCellReadinessSummaryPaginatorOptions struct {
-	// Upper bound on number of records to return.
+	// The number of objects that you want to return with this call.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

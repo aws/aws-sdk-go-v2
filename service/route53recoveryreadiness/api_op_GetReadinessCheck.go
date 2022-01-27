@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about a ReadinessCheck.
+// Gets details about a readiness check.
 func (c *Client) GetReadinessCheck(ctx context.Context, params *GetReadinessCheckInput, optFns ...func(*Options)) (*GetReadinessCheckOutput, error) {
 	if params == nil {
 		params = &GetReadinessCheckInput{}
@@ -28,7 +28,7 @@ func (c *Client) GetReadinessCheck(ctx context.Context, params *GetReadinessChec
 
 type GetReadinessCheckInput struct {
 
-	// The ReadinessCheck to get
+	// Name of a readiness check.
 	//
 	// This member is required.
 	ReadinessCheckName *string
@@ -38,16 +38,16 @@ type GetReadinessCheckInput struct {
 
 type GetReadinessCheckOutput struct {
 
-	// Arn associated with ReadinessCheck
+	// The Amazon Resource Name (ARN) associated with a readiness check.
 	ReadinessCheckArn *string
 
-	// Name for a ReadinessCheck
+	// Name of a readiness check.
 	ReadinessCheckName *string
 
-	// Name of the ResourceSet to be checked
+	// Name of the resource set to be checked.
 	ResourceSet *string
 
-	// A collection of tags associated with a resource
+	// A collection of tags associated with a resource.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

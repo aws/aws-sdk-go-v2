@@ -12,7 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about a Recovery Group.
+// Displays a summary of information about a recovery group's readiness status.
+// Includes the readiness checks for resources in the recovery group and the
+// readiness status of each one.
 func (c *Client) GetRecoveryGroupReadinessSummary(ctx context.Context, params *GetRecoveryGroupReadinessSummaryInput, optFns ...func(*Options)) (*GetRecoveryGroupReadinessSummaryOutput, error) {
 	if params == nil {
 		params = &GetRecoveryGroupReadinessSummaryInput{}
@@ -30,15 +32,15 @@ func (c *Client) GetRecoveryGroupReadinessSummary(ctx context.Context, params *G
 
 type GetRecoveryGroupReadinessSummaryInput struct {
 
-	// The name of the RecoveryGroup
+	// The name of a recovery group.
 	//
 	// This member is required.
 	RecoveryGroupName *string
 
-	// Upper bound on number of records to return.
+	// The number of objects that you want to return with this call.
 	MaxResults int32
 
-	// A token used to resume pagination from the end of a previous request.
+	// The token that identifies which batch of results you want to see.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -46,13 +48,13 @@ type GetRecoveryGroupReadinessSummaryInput struct {
 
 type GetRecoveryGroupReadinessSummaryOutput struct {
 
-	// A token that can be used to resume pagination from the end of the collection.
+	// The token that identifies which batch of results you want to see.
 	NextToken *string
 
-	// The readiness at RecoveryGroup level.
+	// The readiness status at a recovery group level.
 	Readiness types.Readiness
 
-	// Summaries for the ReadinessChecks making up the RecoveryGroup
+	// Summaries of the readiness checks for the recovery group.
 	ReadinessChecks []types.ReadinessCheckSummary
 
 	// Metadata pertaining to the operation's result.
@@ -135,7 +137,7 @@ var _ GetRecoveryGroupReadinessSummaryAPIClient = (*Client)(nil)
 // GetRecoveryGroupReadinessSummaryPaginatorOptions is the paginator options for
 // GetRecoveryGroupReadinessSummary
 type GetRecoveryGroupReadinessSummaryPaginatorOptions struct {
-	// Upper bound on number of records to return.
+	// The number of objects that you want to return with this call.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

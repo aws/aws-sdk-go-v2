@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an exisiting Readiness Check.
+// Updates a readiness check.
 func (c *Client) UpdateReadinessCheck(ctx context.Context, params *UpdateReadinessCheckInput, optFns ...func(*Options)) (*UpdateReadinessCheckOutput, error) {
 	if params == nil {
 		params = &UpdateReadinessCheckInput{}
@@ -26,15 +26,15 @@ func (c *Client) UpdateReadinessCheck(ctx context.Context, params *UpdateReadine
 	return out, nil
 }
 
-// The new Readiness Check values
+// Name of a readiness check to describe.
 type UpdateReadinessCheckInput struct {
 
-	// The ReadinessCheck to update
+	// Name of a readiness check.
 	//
 	// This member is required.
 	ReadinessCheckName *string
 
-	// The name of the ResourceSet to check
+	// The name of the resource set to be checked.
 	//
 	// This member is required.
 	ResourceSetName *string
@@ -44,16 +44,16 @@ type UpdateReadinessCheckInput struct {
 
 type UpdateReadinessCheckOutput struct {
 
-	// Arn associated with ReadinessCheck
+	// The Amazon Resource Name (ARN) associated with a readiness check.
 	ReadinessCheckArn *string
 
-	// Name for a ReadinessCheck
+	// Name of a readiness check.
 	ReadinessCheckName *string
 
-	// Name of the ResourceSet to be checked
+	// Name of the resource set to be checked.
 	ResourceSet *string
 
-	// A collection of tags associated with a resource
+	// A collection of tags associated with a resource.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
