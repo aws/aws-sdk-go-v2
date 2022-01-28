@@ -2,9 +2,9 @@ module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.13.0
-	github.com/aws/aws-sdk-go-v2/config v1.13.0
+	github.com/aws/aws-sdk-go-v2/config v1.13.1
 	github.com/aws/aws-sdk-go-v2/service/acm v1.12.0
-	github.com/aws/aws-sdk-go-v2/service/apigateway v1.13.0
+	github.com/aws/aws-sdk-go-v2/service/apigateway v1.13.1
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.13.0
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.10.0
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.13.0
@@ -12,10 +12,10 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.19.0
 	github.com/aws/aws-sdk-go-v2/service/batch v1.14.0
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.18.0
-	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.14.0
+	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.14.1
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.11.0
 	github.com/aws/aws-sdk-go-v2/service/cloudsearch v1.11.0
-	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.13.0
+	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.13.1
 	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.15.0
 	github.com/aws/aws-sdk-go-v2/service/codebuild v1.17.0
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.11.0
@@ -23,7 +23,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.11.0
 	github.com/aws/aws-sdk-go-v2/service/codestar v1.9.0
 	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.12.0
-	github.com/aws/aws-sdk-go-v2/service/configservice v1.15.0
+	github.com/aws/aws-sdk-go-v2/service/configservice v1.16.0
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.11.0
 	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.16.0
 	github.com/aws/aws-sdk-go-v2/service/devicefarm v1.11.0
@@ -31,10 +31,10 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.11.0
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.15.0
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.13.0
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.28.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.29.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.14.0
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.16.0
-	github.com/aws/aws-sdk-go-v2/service/efs v1.13.0
+	github.com/aws/aws-sdk-go-v2/service/efs v1.14.0
 	github.com/aws/aws-sdk-go-v2/service/elasticache v1.18.0
 	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.12.0
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing v1.12.0
@@ -53,7 +53,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/iot v1.21.0
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.13.0
 	github.com/aws/aws-sdk-go-v2/service/kms v1.14.0
-	github.com/aws/aws-sdk-go-v2/service/lambda v1.17.0
+	github.com/aws/aws-sdk-go-v2/service/lambda v1.17.1
 	github.com/aws/aws-sdk-go-v2/service/lightsail v1.15.0
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.9.0
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.14.0
@@ -66,7 +66,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.17.0
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.10.0
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.13.0
-	github.com/aws/aws-sdk-go-v2/service/s3 v1.24.0
+	github.com/aws/aws-sdk-go-v2/service/s3 v1.24.1
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.18.0
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.13.0
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.11.0
