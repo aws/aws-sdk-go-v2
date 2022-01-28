@@ -1462,14 +1462,16 @@
                     "target": "com.amazonaws.macie2#__string",
                     "traits": {
                         "smithy.api#documentation": "<p>A custom name for the custom data identifier. The name can contain as many as 128 characters.</p> <p>We strongly recommend that you avoid including any sensitive data in the name of a custom data identifier. Other users of your account might be able to see this name, depending on the actions that they're allowed to perform in Amazon Macie.</p>",
-                        "smithy.api#jsonName": "name"
+                        "smithy.api#jsonName": "name",
+                        "smithy.api#required": {}
                     }
                 },
                 "regex": {
                     "target": "com.amazonaws.macie2#__string",
                     "traits": {
                         "smithy.api#documentation": "<p>The regular expression (<i>regex</i>) that defines the pattern to match. The expression can contain as many as 512 characters.</p>",
-                        "smithy.api#jsonName": "regex"
+                        "smithy.api#jsonName": "regex",
+                        "smithy.api#required": {}
                     }
                 },
                 "severityLevels": {

@@ -249,6 +249,26 @@ func (m *validateOpListPendingInvitationResources) HandleInitialize(ctx context.
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListPermissionVersions struct {
+}
+
+func (*validateOpListPermissionVersions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListPermissionVersions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListPermissionVersionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListPermissionVersionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListPrincipals struct {
 }
 
@@ -455,6 +475,10 @@ func addOpGetResourceSharesValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListPendingInvitationResourcesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListPendingInvitationResources{}, middleware.After)
+}
+
+func addOpListPermissionVersionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListPermissionVersions{}, middleware.After)
 }
 
 func addOpListPrincipalsValidationMiddleware(stack *middleware.Stack) error {
@@ -667,6 +691,21 @@ func validateOpListPendingInvitationResourcesInput(v *ListPendingInvitationResou
 	invalidParams := smithy.InvalidParamsError{Context: "ListPendingInvitationResourcesInput"}
 	if v.ResourceShareInvitationArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceShareInvitationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListPermissionVersionsInput(v *ListPermissionVersionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListPermissionVersionsInput"}
+	if v.PermissionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PermissionArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

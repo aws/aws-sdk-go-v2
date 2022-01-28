@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an existing Recovery Group.
+// Deletes a recovery group.
 func (c *Client) DeleteRecoveryGroup(ctx context.Context, params *DeleteRecoveryGroupInput, optFns ...func(*Options)) (*DeleteRecoveryGroupOutput, error) {
 	if params == nil {
 		params = &DeleteRecoveryGroupInput{}
@@ -28,7 +28,7 @@ func (c *Client) DeleteRecoveryGroup(ctx context.Context, params *DeleteRecovery
 
 type DeleteRecoveryGroupInput struct {
 
-	// The RecoveryGroup to delete
+	// The name of a recovery group.
 	//
 	// This member is required.
 	RecoveryGroupName *string

@@ -77,8 +77,8 @@ sync-api-models copy-attributevalue-feature min-go-version-% update-requires smi
 update-module-metadata download-modules-%
 
 generate: smithy-generate update-requires gen-repo-mod-replace update-module-metadata smithy-annotate-stable \
-gen-config-asserts copy-attributevalue-feature  gen-mod-dropreplace-smithy min-go-version-. tidy-modules-. \
-add-module-license-files gen-aws-ptrs format
+gen-config-asserts gen-internal-codegen copy-attributevalue-feature gen-mod-dropreplace-smithy min-go-version-. \
+tidy-modules-. add-module-license-files gen-aws-ptrs format
 
 smithy-generate:
 	cd codegen && ./gradlew clean build -Plog-tests && ./gradlew clean
@@ -115,6 +115,11 @@ gen-config-asserts:
 	cd config \
 	    && go mod tidy \
 	    && go generate
+
+gen-internal-codegen:
+	@echo "Generating internal/codegen"
+	cd internal/codegen \
+		&& go generate
 
 gen-repo-mod-replace:
 	@echo "Generating go.mod replace for repo modules"

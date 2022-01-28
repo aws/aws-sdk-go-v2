@@ -193,6 +193,43 @@ type CalculateRouteCarModeOptions struct {
 	noSmithyDocumentSerde
 }
 
+// A summary of the calculated route matrix.
+type CalculateRouteMatrixSummary struct {
+
+	// The data provider of traffic and road network data used to calculate the routes.
+	// Indicates one of the available providers:
+	//
+	// * Esri
+	//
+	// * Here
+	//
+	// For more information
+	// about data providers, see Amazon Location Service data providers
+	// (https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html).
+	//
+	// This member is required.
+	DataSource *string
+
+	// The unit of measurement for route distances.
+	//
+	// This member is required.
+	DistanceUnit DistanceUnit
+
+	// The count of error results in the route matrix. If this number is 0, all routes
+	// were calculated successfully.
+	//
+	// This member is required.
+	ErrorCount *int32
+
+	// The count of cells in the route matrix. Equal to the number of
+	// DeparturePositions multiplied by the number of DestinationPositions.
+	//
+	// This member is required.
+	RouteCount *int32
+
+	noSmithyDocumentSerde
+}
+
 // A summary of the calculated route.
 type CalculateRouteSummary struct {
 
@@ -401,7 +438,7 @@ type GeofenceGeometry struct {
 // number of positions in the request. For example, a route with a departure
 // position and destination position returns one leg with the positions snapped to
 // a nearby road
-// (https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html#snap-to-nearby-road):
+// (https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html):
 //
 // *
 // The StartPosition is the departure position.
@@ -438,14 +475,14 @@ type Leg struct {
 
 	// The terminating position of the leg. Follows the format [longitude,latitude]. If
 	// the EndPosition isn't located on a road, it's snapped to a nearby road
-	// (https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html#snap-to-nearby-road).
+	// (https://docs.aws.amazon.com/location/latest/developerguide/nap-to-nearby-road.html).
 	//
 	// This member is required.
 	EndPosition []float64
 
 	// The starting position of the leg. Follows the format [longitude,latitude]. If
 	// the StartPosition isn't located on a road, it's snapped to a nearby road
-	// (https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html#snap-to-nearby-road).
+	// (https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html).
 	//
 	// This member is required.
 	StartPosition []float64
@@ -528,13 +565,6 @@ type ListGeofenceCollectionsResponseEntry struct {
 	// This member is required.
 	Description *string
 
-	// The pricing plan for the specified geofence collection. For additional details
-	// and restrictions on each pricing plan option, see the Amazon Location Service
-	// pricing page (https://aws.amazon.com/location/pricing/).
-	//
-	// This member is required.
-	PricingPlan PricingPlan
-
 	// Specifies a timestamp for when the resource was last updated in ISO 8601
 	// (https://www.iso.org/iso-8601-date-and-time-format.html) format:
 	// YYYY-MM-DDThh:mm:ss.sssZ
@@ -542,7 +572,14 @@ type ListGeofenceCollectionsResponseEntry struct {
 	// This member is required.
 	UpdateTime *time.Time
 
-	// The specified data provider for the geofence collection.
+	// No longer used. Always returns RequestBasedUsage.
+	//
+	// Deprecated: Deprecated. Always returns RequestBasedUsage.
+	PricingPlan PricingPlan
+
+	// No longer used. Always returns an empty string.
+	//
+	// Deprecated: Deprecated. Unused.
 	PricingPlanDataSource *string
 
 	noSmithyDocumentSerde
@@ -622,19 +659,17 @@ type ListMapsResponseEntry struct {
 	// This member is required.
 	MapName *string
 
-	// The pricing plan for the specified map resource. For additional details and
-	// restrictions on each pricing plan option, see Amazon Location Service pricing
-	// (https://aws.amazon.com/location/pricing/).
-	//
-	// This member is required.
-	PricingPlan PricingPlan
-
 	// The timestamp for when the map resource was last updated in ISO 8601
 	// (https://www.iso.org/iso-8601-date-and-time-format.html) format:
 	// YYYY-MM-DDThh:mm:ss.sssZ.
 	//
 	// This member is required.
 	UpdateTime *time.Time
+
+	// No longer used. Always returns RequestBasedUsage.
+	//
+	// Deprecated: Deprecated. Always returns RequestBasedUsage.
+	PricingPlan PricingPlan
 
 	noSmithyDocumentSerde
 }
@@ -673,19 +708,17 @@ type ListPlaceIndexesResponseEntry struct {
 	// This member is required.
 	IndexName *string
 
-	// The pricing plan for the specified place index resource. For additional details
-	// and restrictions on each pricing plan option, see Amazon Location Service
-	// pricing (https://aws.amazon.com/location/pricing/).
-	//
-	// This member is required.
-	PricingPlan PricingPlan
-
 	// The timestamp for when the place index resource was last updated in ISO 8601
 	// (https://www.iso.org/iso-8601-date-and-time-format.html) format:
 	// YYYY-MM-DDThh:mm:ss.sssZ.
 	//
 	// This member is required.
 	UpdateTime *time.Time
+
+	// No longer used. Always returns RequestBasedUsage.
+	//
+	// Deprecated: Deprecated. Always returns RequestBasedUsage.
+	PricingPlan PricingPlan
 
 	noSmithyDocumentSerde
 }
@@ -726,13 +759,6 @@ type ListRouteCalculatorsResponseEntry struct {
 	// This member is required.
 	Description *string
 
-	// The pricing plan for the specified route calculator resource. For additional
-	// details and restrictions on each pricing plan option, see Amazon Location
-	// Service pricing (https://aws.amazon.com/location/pricing/).
-	//
-	// This member is required.
-	PricingPlan PricingPlan
-
 	// The timestamp when the route calculator resource was last updated in ISO 8601
 	// (https://www.iso.org/iso-8601-date-and-time-format.html) format:
 	// YYYY-MM-DDThh:mm:ss.sssZ.
@@ -741,6 +767,11 @@ type ListRouteCalculatorsResponseEntry struct {
 	//
 	// This member is required.
 	UpdateTime *time.Time
+
+	// Always returns RequestBasedUsage.
+	//
+	// Deprecated: Deprecated. Always returns RequestBasedUsage.
+	PricingPlan PricingPlan
 
 	noSmithyDocumentSerde
 }
@@ -760,13 +791,6 @@ type ListTrackersResponseEntry struct {
 	// This member is required.
 	Description *string
 
-	// The pricing plan for the specified tracker resource. For additional details and
-	// restrictions on each pricing plan option, see Amazon Location Service pricing
-	// (https://aws.amazon.com/location/pricing/).
-	//
-	// This member is required.
-	PricingPlan PricingPlan
-
 	// The name of the tracker resource.
 	//
 	// This member is required.
@@ -779,7 +803,14 @@ type ListTrackersResponseEntry struct {
 	// This member is required.
 	UpdateTime *time.Time
 
-	// The specified data provider for the tracker resource.
+	// Always returns RequestBasedUsage.
+	//
+	// Deprecated: Deprecated. Always returns RequestBasedUsage.
+	PricingPlan PricingPlan
+
+	// No longer used. Always returns an empty string.
+	//
+	// Deprecated: Deprecated. Unused.
 	PricingPlanDataSource *string
 
 	noSmithyDocumentSerde
@@ -919,6 +950,57 @@ type PositionalAccuracy struct {
 	//
 	// This member is required.
 	Horizontal *float64
+
+	noSmithyDocumentSerde
+}
+
+// The result for one SnappedDeparturePositionSnappedDestinationPosition pair.
+type RouteMatrixEntry struct {
+
+	// The total distance of travel for the route.
+	Distance *float64
+
+	// The expected duration of travel for the route.
+	DurationSeconds *float64
+
+	// An error corresponding to the calculation of a route between the
+	// DeparturePosition and DestinationPosition.
+	Error *RouteMatrixEntryError
+
+	noSmithyDocumentSerde
+}
+
+// An error corresponding to the calculation of a route between the
+// DeparturePosition and DestinationPosition. The error code can be one of the
+// following:
+//
+// * RouteNotFound - Unable to find a valid route with the given
+// parameters.
+//
+// * RouteTooLong - Route calculation went beyond the maximum size of
+// a route and was terminated before completion.
+//
+// * PositionsNotFound - One or more
+// of the input positions were not found on the route network.
+//
+// *
+// DestinationPositionNotFound - The destination position was not found on the
+// route network.
+//
+// * DeparturePositionNotFound - The departure position was not
+// found on the route network.
+//
+// * OtherValidationError - The given inputs were not
+// valid or a route was not found. More information is given in the error Message
+type RouteMatrixEntryError struct {
+
+	// The type of error which occurred for the route calculation.
+	//
+	// This member is required.
+	Code RouteMatrixErrorCode
+
+	// A message about the error that occurred for the route calculation.
+	Message *string
 
 	noSmithyDocumentSerde
 }

@@ -31,15 +31,6 @@
     "shapes": {
         "com.amazonaws.ec2instanceconnect#AWSEC2InstanceConnectService": {
             "type": "service",
-            "version": "2018-04-02",
-            "operations": [
-                {
-                    "target": "com.amazonaws.ec2instanceconnect#SendSerialConsoleSSHPublicKey"
-                },
-                {
-                    "target": "com.amazonaws.ec2instanceconnect#SendSSHPublicKey"
-                }
-            ],
             "traits": {
                 "aws.api#service": {
                     "sdkId": "EC2 Instance Connect",
@@ -54,7 +45,16 @@
                 "aws.protocols#awsJson1_1": {},
                 "smithy.api#documentation": "<p>Amazon EC2 Instance Connect enables system administrators to publish one-time use SSH\n            public keys to EC2, providing users a simple and secure way to connect to their\n            instances.</p>",
                 "smithy.api#title": "AWS EC2 Instance Connect"
-            }
+            },
+            "version": "2018-04-02",
+            "operations": [
+                {
+                    "target": "com.amazonaws.ec2instanceconnect#SendSerialConsoleSSHPublicKey"
+                },
+                {
+                    "target": "com.amazonaws.ec2instanceconnect#SendSSHPublicKey"
+                }
+            ]
         },
         "com.amazonaws.ec2instanceconnect#AuthException": {
             "type": "structure",
@@ -64,6 +64,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "Forbidden",
+                    "httpResponseCode": 403
+                },
                 "smithy.api#documentation": "<p>Either your AWS credentials are not valid or you do not have access to the EC2 instance.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
@@ -87,9 +91,30 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "EC2InstanceNotFound",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>The specified instance was not found.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.ec2instanceconnect#EC2InstanceStateInvalidException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.ec2instanceconnect#String"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "EC2InstanceStateInvalid",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>Unable to connect because the instance is not in a valid state. \n            Connecting to a stopped or terminated instance is not supported. If the instance is stopped, \n            start your instance, and try to connect again.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
             }
         },
         "com.amazonaws.ec2instanceconnect#EC2InstanceTypeInvalidException": {
@@ -100,6 +125,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "EC2InstanceTypeInvalid",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The instance type is not supported for connecting via the serial console. Only Nitro\n            instance types are currently supported.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -133,6 +162,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidArguments",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>One of the parameters is not valid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -145,7 +178,7 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 256,
+                    "min": 80,
                     "max": 4096
                 }
             }
@@ -164,6 +197,9 @@
                 },
                 {
                     "target": "com.amazonaws.ec2instanceconnect#EC2InstanceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ec2instanceconnect#EC2InstanceStateInvalidException"
                 },
                 {
                     "target": "com.amazonaws.ec2instanceconnect#InvalidArgsException"
@@ -206,8 +242,7 @@
                 "AvailabilityZone": {
                     "target": "com.amazonaws.ec2instanceconnect#AvailabilityZone",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Availability Zone in which the EC2 instance was launched.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The Availability Zone in which the EC2 instance was launched.</p>"
                     }
                 }
             }
@@ -243,6 +278,9 @@
                 },
                 {
                     "target": "com.amazonaws.ec2instanceconnect#EC2InstanceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ec2instanceconnect#EC2InstanceStateInvalidException"
                 },
                 {
                     "target": "com.amazonaws.ec2instanceconnect#EC2InstanceTypeInvalidException"
@@ -320,6 +358,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "SerialConsoleAccessDisabled",
+                    "httpResponseCode": 403
+                },
                 "smithy.api#documentation": "<p>Your account is not authorized to use the EC2 Serial Console. To authorize your\n            account, run the EnableSerialConsoleAccess API. For more information, see\n            <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_EnableSerialConsoleAccess.html\">EnableSerialConsoleAccess</a> in the <i>Amazon EC2 API Reference</i>.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
@@ -333,6 +375,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "SerialConsoleSessionLimitExceeded",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The instance currently has 1 active serial console session. Only 1 session is supported at a time.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -346,6 +392,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "SerialConsoleSessionUnavailable",
+                    "httpResponseCode": 500
+                },
                 "smithy.api#documentation": "<p>Unable to start a serial console session. Please try again.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
@@ -368,6 +418,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InternalServerError",
+                    "httpResponseCode": 500
+                },
                 "smithy.api#documentation": "<p>The service encountered an error. Follow the instructions in the error message and try again.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
@@ -387,6 +441,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "TooManyRequests",
+                    "httpResponseCode": 429
+                },
                 "smithy.api#documentation": "<p>The requests were made too frequently and have been throttled. Wait a while and try again. \n            To increase the limit on your request frequency, contact AWS Support.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429

@@ -671,6 +671,12 @@ const (
 	ResourceTypeEFSFileSystem                    ResourceType = "AWS::EFS::FileSystem"
 	ResourceTypeEKSCluster                       ResourceType = "AWS::EKS::Cluster"
 	ResourceTypeOpenSearchDomain                 ResourceType = "AWS::OpenSearch::Domain"
+	ResourceTypeTransitGateway                   ResourceType = "AWS::EC2::TransitGateway"
+	ResourceTypeKinesisStream                    ResourceType = "AWS::Kinesis::Stream"
+	ResourceTypeKinesisStreamConsumer            ResourceType = "AWS::Kinesis::StreamConsumer"
+	ResourceTypeCodeDeployApplication            ResourceType = "AWS::CodeDeploy::Application"
+	ResourceTypeCodeDeployDeploymentConfig       ResourceType = "AWS::CodeDeploy::DeploymentConfig"
+	ResourceTypeCodeDeployDeploymentGroup        ResourceType = "AWS::CodeDeploy::DeploymentGroup"
 )
 
 // Values returns all known values for ResourceType. Note that this can be expanded
@@ -787,6 +793,12 @@ func (ResourceType) Values() []ResourceType {
 		"AWS::EFS::FileSystem",
 		"AWS::EKS::Cluster",
 		"AWS::OpenSearch::Domain",
+		"AWS::EC2::TransitGateway",
+		"AWS::Kinesis::Stream",
+		"AWS::Kinesis::StreamConsumer",
+		"AWS::CodeDeploy::Application",
+		"AWS::CodeDeploy::DeploymentConfig",
+		"AWS::CodeDeploy::DeploymentGroup",
 	}
 }
 

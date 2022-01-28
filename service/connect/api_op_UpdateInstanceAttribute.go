@@ -31,8 +31,8 @@ func (c *Client) UpdateInstanceAttribute(ctx context.Context, params *UpdateInst
 type UpdateInstanceAttributeInput struct {
 
 	// The type of attribute. Only allowlisted customers can consume
-	// USE_CUSTOM_TTS_VOICES. To access this feature, contact AWS Support for
-	// allowlisting.
+	// USE_CUSTOM_TTS_VOICES. To access this feature, contact Amazon Web Services
+	// Support for allowlisting.
 	//
 	// This member is required.
 	AttributeType types.InstanceAttributeType

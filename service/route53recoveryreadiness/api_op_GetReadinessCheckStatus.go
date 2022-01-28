@@ -12,7 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about the status of a Readiness Check.
+// Gets the readiness status for an individual readiness check. To see the overall
+// readiness status for a recovery group, that considers the readiness status for
+// all the readiness checks in a recovery group, use
+// GetRecoveryGroupReadinessSummary.
 func (c *Client) GetReadinessCheckStatus(ctx context.Context, params *GetReadinessCheckStatusInput, optFns ...func(*Options)) (*GetReadinessCheckStatusOutput, error) {
 	if params == nil {
 		params = &GetReadinessCheckStatusInput{}
@@ -30,15 +33,15 @@ func (c *Client) GetReadinessCheckStatus(ctx context.Context, params *GetReadine
 
 type GetReadinessCheckStatusInput struct {
 
-	// The ReadinessCheck to get
+	// Name of a readiness check.
 	//
 	// This member is required.
 	ReadinessCheckName *string
 
-	// Upper bound on number of records to return.
+	// The number of objects that you want to return with this call.
 	MaxResults int32
 
-	// A token used to resume pagination from the end of a previous request.
+	// The token that identifies which batch of results you want to see.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -49,13 +52,13 @@ type GetReadinessCheckStatusOutput struct {
 	// Top level messages for readiness check status
 	Messages []types.Message
 
-	// A token that can be used to resume pagination from the end of the collection.
+	// The token that identifies which batch of results you want to see.
 	NextToken *string
 
 	// The readiness at rule level.
 	Readiness types.Readiness
 
-	// Summary of resources's readiness
+	// Summary of the readiness of resources.
 	Resources []types.ResourceResult
 
 	// Metadata pertaining to the operation's result.
@@ -138,7 +141,7 @@ var _ GetReadinessCheckStatusAPIClient = (*Client)(nil)
 // GetReadinessCheckStatusPaginatorOptions is the paginator options for
 // GetReadinessCheckStatus
 type GetReadinessCheckStatusPaginatorOptions struct {
-	// Upper bound on number of records to return.
+	// The number of objects that you want to return with this call.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

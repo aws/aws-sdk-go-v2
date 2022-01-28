@@ -13,7 +13,7 @@ import (
 )
 
 // Returns a list of publishing destinations associated with the specified
-// dectectorId.
+// detectorId.
 func (c *Client) ListPublishingDestinations(ctx context.Context, params *ListPublishingDestinationsInput, optFns ...func(*Options)) (*ListPublishingDestinationsOutput, error) {
 	if params == nil {
 		params = &ListPublishingDestinationsInput{}

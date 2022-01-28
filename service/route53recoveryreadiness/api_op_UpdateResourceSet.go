@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an existing Resource Set.
+// Updates a resource set.
 func (c *Client) UpdateResourceSet(ctx context.Context, params *UpdateResourceSetInput, optFns ...func(*Options)) (*UpdateResourceSetOutput, error) {
 	if params == nil {
 		params = &UpdateResourceSetInput{}
@@ -27,20 +27,29 @@ func (c *Client) UpdateResourceSet(ctx context.Context, params *UpdateResourceSe
 	return out, nil
 }
 
-// configuration for the desired
+// Name of a resource set.
 type UpdateResourceSetInput struct {
 
-	// The ResourceSet to update
+	// Name of a resource set.
 	//
 	// This member is required.
 	ResourceSetName *string
 
-	// AWS Resource Type of the resources in the ResourceSet
+	// The resource type of the resources in the resource set. Enter one of the
+	// following values for resource type: AWS::ApiGateway::Stage,
+	// AWS::ApiGatewayV2::Stage, AWS::AutoScaling::AutoScalingGroup,
+	// AWS::CloudWatch::Alarm, AWS::EC2::CustomerGateway, AWS::DynamoDB::Table,
+	// AWS::EC2::Volume, AWS::ElasticLoadBalancing::LoadBalancer,
+	// AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Lambda::Function,
+	// AWS::MSK::Cluster, AWS::RDS::DBCluster, AWS::Route53::HealthCheck,
+	// AWS::SQS::Queue, AWS::SNS::Topic, AWS::SNS::Subscription, AWS::EC2::VPC,
+	// AWS::EC2::VPNConnection, AWS::EC2::VPNGateway,
+	// AWS::Route53RecoveryReadiness::DNSTargetResource
 	//
 	// This member is required.
 	ResourceSetType *string
 
-	// A list of Resource objects
+	// A list of resource objects.
 	//
 	// This member is required.
 	Resources []types.Resource
@@ -50,19 +59,28 @@ type UpdateResourceSetInput struct {
 
 type UpdateResourceSetOutput struct {
 
-	// The arn for the ResourceSet
+	// The Amazon Resource Name (ARN) for the resource set.
 	ResourceSetArn *string
 
-	// The name of the ResourceSet
+	// The name of the resource set.
 	ResourceSetName *string
 
-	// AWS Resource Type of the resources in the ResourceSet
+	// The resource type of the resources in the resource set. Enter one of the
+	// following values for resource type: AWS::ApiGateway::Stage,
+	// AWS::ApiGatewayV2::Stage, AWS::AutoScaling::AutoScalingGroup,
+	// AWS::CloudWatch::Alarm, AWS::EC2::CustomerGateway, AWS::DynamoDB::Table,
+	// AWS::EC2::Volume, AWS::ElasticLoadBalancing::LoadBalancer,
+	// AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Lambda::Function,
+	// AWS::MSK::Cluster, AWS::RDS::DBCluster, AWS::Route53::HealthCheck,
+	// AWS::SQS::Queue, AWS::SNS::Topic, AWS::SNS::Subscription, AWS::EC2::VPC,
+	// AWS::EC2::VPNConnection, AWS::EC2::VPNGateway,
+	// AWS::Route53RecoveryReadiness::DNSTargetResource
 	ResourceSetType *string
 
-	// A list of Resource objects
+	// A list of resource objects.
 	Resources []types.Resource
 
-	// A collection of tags associated with a resource
+	// A collection of tags associated with a resource.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

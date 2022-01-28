@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an existing Resource Set.
+// Deletes a resource set.
 func (c *Client) DeleteResourceSet(ctx context.Context, params *DeleteResourceSetInput, optFns ...func(*Options)) (*DeleteResourceSetOutput, error) {
 	if params == nil {
 		params = &DeleteResourceSetInput{}
@@ -28,7 +28,7 @@ func (c *Client) DeleteResourceSet(ctx context.Context, params *DeleteResourceSe
 
 type DeleteResourceSetInput struct {
 
-	// The ResourceSet to delete
+	// Name of a resource set.
 	//
 	// This member is required.
 	ResourceSetName *string

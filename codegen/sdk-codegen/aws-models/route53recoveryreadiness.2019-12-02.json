@@ -51,7 +51,7 @@
                 "CellArn": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringMax256",
                     "traits": {
-                        "smithy.api#documentation": "The arn for the Cell",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the cell.</p>",
                         "smithy.api#jsonName": "cellArn",
                         "smithy.api#required": {}
                     }
@@ -59,7 +59,7 @@
                 "CellName": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringMax64PatternAAZAZ09Z",
                     "traits": {
-                        "smithy.api#documentation": "The name of the Cell",
+                        "smithy.api#documentation": "<p>The name of the cell.</p>",
                         "smithy.api#jsonName": "cellName",
                         "smithy.api#required": {}
                     }
@@ -67,7 +67,7 @@
                 "Cells": {
                     "target": "com.amazonaws.route53recoveryreadiness#__listOf__string",
                     "traits": {
-                        "smithy.api#documentation": "A list of Cell arns",
+                        "smithy.api#documentation": "<p>A list of cell ARNs.</p>",
                         "smithy.api#jsonName": "cells",
                         "smithy.api#required": {}
                     }
@@ -75,7 +75,7 @@
                 "ParentReadinessScopes": {
                     "target": "com.amazonaws.route53recoveryreadiness#__listOf__string",
                     "traits": {
-                        "smithy.api#documentation": "A list of Cell ARNs and/or RecoveryGroup ARNs",
+                        "smithy.api#documentation": "<p>The readiness scope for the cell, which can be a cell Amazon Resource Name (ARN) or a recovery group ARN. This is a list but currently can have only one element.</p>",
                         "smithy.api#jsonName": "parentReadinessScopes",
                         "smithy.api#required": {}
                     }
@@ -83,12 +83,13 @@
                 "Tags": {
                     "target": "com.amazonaws.route53recoveryreadiness#Tags",
                     "traits": {
+                        "smithy.api#documentation": "<p>Tags on the resources.</p>",
                         "smithy.api#jsonName": "tags"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "A Cell and its properties"
+                "smithy.api#documentation": "<p>Information about a cell.</p>"
             }
         },
         "com.amazonaws.route53recoveryreadiness#ConflictException": {
@@ -133,7 +134,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Creates a new Cell.",
+                "smithy.api#documentation": "<p>Creates a cell in an account.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/cells",
@@ -147,7 +148,7 @@
                 "CellName": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "The name of the Cell to create",
+                        "smithy.api#documentation": "<p>The name of the cell to create.</p>",
                         "smithy.api#jsonName": "cellName",
                         "smithy.api#required": {}
                     }
@@ -155,7 +156,7 @@
                 "Cells": {
                     "target": "com.amazonaws.route53recoveryreadiness#__listOf__string",
                     "traits": {
-                        "smithy.api#documentation": "A list of Cell arns contained within this Cell (for use in nested Cells, e.g. regions within which AZs)",
+                        "smithy.api#documentation": "<p>A list of cell Amazon Resource Names (ARNs) contained within this cell, for use in nested cells. For example, Availability Zones within specific Amazon Web Services Regions.</p>",
                         "smithy.api#jsonName": "cells"
                     }
                 },
@@ -165,9 +166,6 @@
                         "smithy.api#jsonName": "tags"
                     }
                 }
-            },
-            "traits": {
-                "smithy.api#documentation": "The Cell to create"
             }
         },
         "com.amazonaws.route53recoveryreadiness#CreateCellResponse": {
@@ -176,34 +174,35 @@
                 "CellArn": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringMax256",
                     "traits": {
-                        "smithy.api#documentation": "The arn for the Cell",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the cell.</p>",
                         "smithy.api#jsonName": "cellArn"
                     }
                 },
                 "CellName": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringMax64PatternAAZAZ09Z",
                     "traits": {
-                        "smithy.api#documentation": "The name of the Cell",
+                        "smithy.api#documentation": "<p>The name of the cell.</p>",
                         "smithy.api#jsonName": "cellName"
                     }
                 },
                 "Cells": {
                     "target": "com.amazonaws.route53recoveryreadiness#__listOf__string",
                     "traits": {
-                        "smithy.api#documentation": "A list of Cell arns",
+                        "smithy.api#documentation": "<p>A list of cell ARNs.</p>",
                         "smithy.api#jsonName": "cells"
                     }
                 },
                 "ParentReadinessScopes": {
                     "target": "com.amazonaws.route53recoveryreadiness#__listOf__string",
                     "traits": {
-                        "smithy.api#documentation": "A list of Cell ARNs and/or RecoveryGroup ARNs",
+                        "smithy.api#documentation": "<p>The readiness scope for the cell, which can be a cell Amazon Resource Name (ARN) or a recovery group ARN. This is a list but currently can have only one element.</p>",
                         "smithy.api#jsonName": "parentReadinessScopes"
                     }
                 },
                 "Tags": {
                     "target": "com.amazonaws.route53recoveryreadiness#Tags",
                     "traits": {
+                        "smithy.api#documentation": "<p>Tags on the resources.</p>",
                         "smithy.api#jsonName": "tags"
                     }
                 }
@@ -235,7 +234,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Create a new cross account readiness authorization.",
+                "smithy.api#documentation": "<p>Creates a cross-account readiness authorization. This lets you authorize another account to work with Route 53 Application Recovery Controller, for example, to check the readiness status of resources in a separate account.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/crossaccountauthorizations",
@@ -249,14 +248,11 @@
                 "CrossAccountAuthorization": {
                     "target": "com.amazonaws.route53recoveryreadiness#CrossAccountAuthorization",
                     "traits": {
-                        "smithy.api#documentation": "The cross account authorization",
+                        "smithy.api#documentation": "<p>The cross-account authorization.</p>",
                         "smithy.api#jsonName": "crossAccountAuthorization",
                         "smithy.api#required": {}
                     }
                 }
-            },
-            "traits": {
-                "smithy.api#documentation": "The cross account authorization"
             }
         },
         "com.amazonaws.route53recoveryreadiness#CreateCrossAccountAuthorizationResponse": {
@@ -265,7 +261,7 @@
                 "CrossAccountAuthorization": {
                     "target": "com.amazonaws.route53recoveryreadiness#CrossAccountAuthorization",
                     "traits": {
-                        "smithy.api#documentation": "The cross account authorization",
+                        "smithy.api#documentation": "<p>The cross-account authorization.</p>",
                         "smithy.api#jsonName": "crossAccountAuthorization"
                     }
                 }
@@ -297,7 +293,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Creates a new Readiness Check.",
+                "smithy.api#documentation": "<p>Creates a readiness check in an account. A readiness check monitors a resource set in your application, such as a set of Amazon Aurora instances, that Application Recovery Controller is auditing recovery readiness for. The audits run once every minute on every resource that's associated with a readiness check.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/readinesschecks",
@@ -311,7 +307,7 @@
                 "ReadinessCheckName": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "The name of the ReadinessCheck to create",
+                        "smithy.api#documentation": "<p>The name of the readiness check to create.</p>",
                         "smithy.api#jsonName": "readinessCheckName",
                         "smithy.api#required": {}
                     }
@@ -319,7 +315,7 @@
                 "ResourceSetName": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "The name of the ResourceSet to check",
+                        "smithy.api#documentation": "<p>The name of the resource set to check.</p>",
                         "smithy.api#jsonName": "resourceSetName",
                         "smithy.api#required": {}
                     }
@@ -330,9 +326,6 @@
                         "smithy.api#jsonName": "tags"
                     }
                 }
-            },
-            "traits": {
-                "smithy.api#documentation": "The ReadinessCheck to create"
             }
         },
         "com.amazonaws.route53recoveryreadiness#CreateReadinessCheckResponse": {
@@ -341,21 +334,21 @@
                 "ReadinessCheckArn": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringMax256",
                     "traits": {
-                        "smithy.api#documentation": "Arn associated with ReadinessCheck",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) associated with a readiness check.</p>",
                         "smithy.api#jsonName": "readinessCheckArn"
                     }
                 },
                 "ReadinessCheckName": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringMax64PatternAAZAZ09Z",
                     "traits": {
-                        "smithy.api#documentation": "Name for a ReadinessCheck",
+                        "smithy.api#documentation": "<p>Name of a readiness check.</p>",
                         "smithy.api#jsonName": "readinessCheckName"
                     }
                 },
                 "ResourceSet": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringMax64PatternAAZAZ09Z",
                     "traits": {
-                        "smithy.api#documentation": "Name of the ResourceSet to be checked",
+                        "smithy.api#documentation": "<p>Name of the resource set to be checked.</p>",
                         "smithy.api#jsonName": "resourceSet"
                     }
                 },
@@ -393,7 +386,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Creates a new Recovery Group.",
+                "smithy.api#documentation": "<p>Creates a recovery group in an account. A recovery group corresponds to an application and includes a list of the cells that make up the application.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/recoverygroups",
@@ -407,14 +400,14 @@
                 "Cells": {
                     "target": "com.amazonaws.route53recoveryreadiness#__listOf__string",
                     "traits": {
-                        "smithy.api#documentation": "A list of Cell arns",
+                        "smithy.api#documentation": "<p>A list of the cell Amazon Resource Names (ARNs) in the recovery group.</p>",
                         "smithy.api#jsonName": "cells"
                     }
                 },
                 "RecoveryGroupName": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "The name of the RecoveryGroup to create",
+                        "smithy.api#documentation": "<p>The name of the recovery group to create.</p>",
                         "smithy.api#jsonName": "recoveryGroupName",
                         "smithy.api#required": {}
                     }
@@ -425,9 +418,6 @@
                         "smithy.api#jsonName": "tags"
                     }
                 }
-            },
-            "traits": {
-                "smithy.api#documentation": "The RecoveryGroup to create"
             }
         },
         "com.amazonaws.route53recoveryreadiness#CreateRecoveryGroupResponse": {
@@ -436,27 +426,28 @@
                 "Cells": {
                     "target": "com.amazonaws.route53recoveryreadiness#__listOf__string",
                     "traits": {
-                        "smithy.api#documentation": "A list of Cell arns",
+                        "smithy.api#documentation": "<p>A list of a cell's Amazon Resource Names (ARNs).</p>",
                         "smithy.api#jsonName": "cells"
                     }
                 },
                 "RecoveryGroupArn": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringMax256",
                     "traits": {
-                        "smithy.api#documentation": "The arn for the RecoveryGroup",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the recovery group.</p>",
                         "smithy.api#jsonName": "recoveryGroupArn"
                     }
                 },
                 "RecoveryGroupName": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringMax64PatternAAZAZ09Z",
                     "traits": {
-                        "smithy.api#documentation": "The name of the RecoveryGroup",
+                        "smithy.api#documentation": "<p>The name of the recovery group.</p>",
                         "smithy.api#jsonName": "recoveryGroupName"
                     }
                 },
                 "Tags": {
                     "target": "com.amazonaws.route53recoveryreadiness#Tags",
                     "traits": {
+                        "smithy.api#documentation": "<p>The tags associated with the recovery group.</p>",
                         "smithy.api#jsonName": "tags"
                     }
                 }
@@ -488,7 +479,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Creates a new Resource Set.",
+                "smithy.api#documentation": "<p>Creates a resource set. A resource set is a set of resources of one type that span multiple cells. You can associate a resource set with a readiness check to monitor the resources for failover readiness.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/resourcesets",
@@ -502,7 +493,7 @@
                 "ResourceSetName": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "The name of the ResourceSet to create",
+                        "smithy.api#documentation": "<p>The name of the resource set to create.</p>",
                         "smithy.api#jsonName": "resourceSetName",
                         "smithy.api#required": {}
                     }
@@ -510,7 +501,7 @@
                 "ResourceSetType": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringPatternAWSAZaZ09AZaZ09",
                     "traits": {
-                        "smithy.api#documentation": "AWS Resource type of the resources in the ResourceSet",
+                        "smithy.api#documentation": "<p>The resource type of the resources in the resource set. Enter one of the following values for resource type:</p> <p>AWS::ApiGateway::Stage, AWS::ApiGatewayV2::Stage, AWS::AutoScaling::AutoScalingGroup, AWS::CloudWatch::Alarm, AWS::EC2::CustomerGateway, AWS::DynamoDB::Table, AWS::EC2::Volume, AWS::ElasticLoadBalancing::LoadBalancer, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Lambda::Function, AWS::MSK::Cluster, AWS::RDS::DBCluster, AWS::Route53::HealthCheck, AWS::SQS::Queue, AWS::SNS::Topic, AWS::SNS::Subscription, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::Route53RecoveryReadiness::DNSTargetResource</p>",
                         "smithy.api#jsonName": "resourceSetType",
                         "smithy.api#required": {}
                     }
@@ -518,7 +509,7 @@
                 "Resources": {
                     "target": "com.amazonaws.route53recoveryreadiness#__listOfResource",
                     "traits": {
-                        "smithy.api#documentation": "A list of Resource objects",
+                        "smithy.api#documentation": "<p>A list of resource objects in the resource set.</p>",
                         "smithy.api#jsonName": "resources",
                         "smithy.api#required": {}
                     }
@@ -526,12 +517,10 @@
                 "Tags": {
                     "target": "com.amazonaws.route53recoveryreadiness#Tags",
                     "traits": {
+                        "smithy.api#documentation": "<p>A tag to associate with the parameters for a resource set.</p>",
                         "smithy.api#jsonName": "tags"
                     }
                 }
-            },
-            "traits": {
-                "smithy.api#documentation": "The ResourceSet to create"
             }
         },
         "com.amazonaws.route53recoveryreadiness#CreateResourceSetResponse": {
@@ -540,28 +529,28 @@
                 "ResourceSetArn": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringMax256",
                     "traits": {
-                        "smithy.api#documentation": "The arn for the ResourceSet",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the resource set.</p>",
                         "smithy.api#jsonName": "resourceSetArn"
                     }
                 },
                 "ResourceSetName": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringMax64PatternAAZAZ09Z",
                     "traits": {
-                        "smithy.api#documentation": "The name of the ResourceSet",
+                        "smithy.api#documentation": "<p>The name of the resource set.</p>",
                         "smithy.api#jsonName": "resourceSetName"
                     }
                 },
                 "ResourceSetType": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringPatternAWSAZaZ09AZaZ09",
                     "traits": {
-                        "smithy.api#documentation": "AWS Resource Type of the resources in the ResourceSet",
+                        "smithy.api#documentation": "<p>The resource type of the resources in the resource set. Enter one of the following values for resource type:</p> <p>AWS::ApiGateway::Stage, AWS::ApiGatewayV2::Stage, AWS::AutoScaling::AutoScalingGroup, AWS::CloudWatch::Alarm, AWS::EC2::CustomerGateway, AWS::DynamoDB::Table, AWS::EC2::Volume, AWS::ElasticLoadBalancing::LoadBalancer, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Lambda::Function, AWS::MSK::Cluster, AWS::RDS::DBCluster, AWS::Route53::HealthCheck, AWS::SQS::Queue, AWS::SNS::Topic, AWS::SNS::Subscription, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::Route53RecoveryReadiness::DNSTargetResource</p>",
                         "smithy.api#jsonName": "resourceSetType"
                     }
                 },
                 "Resources": {
                     "target": "com.amazonaws.route53recoveryreadiness#__listOfResource",
                     "traits": {
-                        "smithy.api#documentation": "A list of Resource objects",
+                        "smithy.api#documentation": "<p>A list of resource objects.</p>",
                         "smithy.api#jsonName": "resources"
                     }
                 },
@@ -576,7 +565,7 @@
         "com.amazonaws.route53recoveryreadiness#CrossAccountAuthorization": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "A cross-account authorization, e.g. arn:aws:iam::123456789012:root"
+                "smithy.api#documentation": "<p>CrossAccountAuthorization</p>"
             }
         },
         "com.amazonaws.route53recoveryreadiness#DNSTargetResource": {
@@ -585,40 +574,41 @@
                 "DomainName": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "The DNS Name that acts as ingress point to a portion of application",
+                        "smithy.api#documentation": "<p>The domain name that acts as an ingress point to a portion of the customer application.</p>",
                         "smithy.api#jsonName": "domainName"
                     }
                 },
                 "HostedZoneArn": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "The Hosted Zone ARN that contains the DNS record with the provided name of target resource.",
+                        "smithy.api#documentation": "<p>The hosted zone Amazon Resource Name (ARN) that contains the DNS record with the provided name of the target resource.</p>",
                         "smithy.api#jsonName": "hostedZoneArn"
                     }
                 },
                 "RecordSetId": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "The R53 Set Id to uniquely identify a record given a Name and a Type",
+                        "smithy.api#documentation": "<p>The Route 53 record set ID that uniquely identifies a DNS record, given a name and a type.</p>",
                         "smithy.api#jsonName": "recordSetId"
                     }
                 },
                 "RecordType": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "The Type of DNS Record of target resource",
+                        "smithy.api#documentation": "<p>The type of DNS record of the target resource.</p>",
                         "smithy.api#jsonName": "recordType"
                     }
                 },
                 "TargetResource": {
                     "target": "com.amazonaws.route53recoveryreadiness#TargetResource",
                     "traits": {
+                        "smithy.api#documentation": "<p>The target resource of the DNS target resource.</p>",
                         "smithy.api#jsonName": "targetResource"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "A component for DNS/Routing Control Readiness Checks"
+                "smithy.api#documentation": "<p>A component for DNS/routing control readiness checks and architecture checks.</p>"
             }
         },
         "com.amazonaws.route53recoveryreadiness#DeleteCell": {
@@ -644,7 +634,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Deletes an existing Cell.",
+                "smithy.api#documentation": "<p>Delete a cell. When successful, the response code is 204, with no response body.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/cells/{CellName}",
@@ -658,7 +648,7 @@
                 "CellName": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "The Cell to delete",
+                        "smithy.api#documentation": "<p>The name of the cell.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -688,7 +678,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Delete cross account readiness authorization",
+                "smithy.api#documentation": "<p>Deletes cross account readiness authorization.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/crossaccountauthorizations/{CrossAccountAuthorization}",
@@ -702,7 +692,7 @@
                 "CrossAccountAuthorization": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "The cross account authorization",
+                        "smithy.api#documentation": "<p>The cross-account authorization.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -736,7 +726,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Deletes an existing Readiness Check.",
+                "smithy.api#documentation": "<p>Deletes a readiness check.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/readinesschecks/{ReadinessCheckName}",
@@ -750,7 +740,7 @@
                 "ReadinessCheckName": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "The ReadinessCheck to delete",
+                        "smithy.api#documentation": "<p>Name of a readiness check.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -780,7 +770,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Deletes an existing Recovery Group.",
+                "smithy.api#documentation": "<p>Deletes a recovery group.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/recoverygroups/{RecoveryGroupName}",
@@ -794,7 +784,7 @@
                 "RecoveryGroupName": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "The RecoveryGroup to delete",
+                        "smithy.api#documentation": "<p>The name of a recovery group.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -824,7 +814,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Deletes an existing Resource Set.",
+                "smithy.api#documentation": "<p>Deletes a resource set.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/resourcesets/{ResourceSetName}",
@@ -838,7 +828,7 @@
                 "ResourceSetName": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "The ResourceSet to delete",
+                        "smithy.api#documentation": "<p>Name of a resource set.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -871,7 +861,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Returns a collection of recommendations to improve resilliance and readiness check quality for a Recovery Group.",
+                "smithy.api#documentation": "<p>Gets recommendations about architecture designs for improving resiliency for an application, based on a recovery group.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/recoverygroups/{RecoveryGroupName}/architectureRecommendations",
@@ -885,21 +875,21 @@
                 "MaxResults": {
                     "target": "com.amazonaws.route53recoveryreadiness#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "Upper bound on number of records to return.",
+                        "smithy.api#documentation": "<p>The number of objects that you want to return with this call.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "A token that can be used to resume pagination from the end of the collection.",
+                        "smithy.api#documentation": "<p>The token that identifies which batch of results you want to see.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
                 "RecoveryGroupName": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "Name of RecoveryGroup (top level resource) to be analyzed.",
+                        "smithy.api#documentation": "<p>The name of a recovery group.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -912,21 +902,21 @@
                 "LastAuditTimestamp": {
                     "target": "com.amazonaws.route53recoveryreadiness#LastAuditTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "The time a Recovery Group was last assessed for recommendations in UTC ISO-8601 format.",
+                        "smithy.api#documentation": "<p>The time that a recovery group was last assessed for recommendations, in UTC ISO-8601 format.</p>",
                         "smithy.api#jsonName": "lastAuditTimestamp"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "A token that can be used to resume pagination from the end of the collection",
+                        "smithy.api#documentation": "<p>The token that identifies which batch of results you want to see.</p>",
                         "smithy.api#jsonName": "nextToken"
                     }
                 },
                 "Recommendations": {
                     "target": "com.amazonaws.route53recoveryreadiness#__listOfRecommendation",
                     "traits": {
-                        "smithy.api#documentation": "A list of recommendations for the customer's application",
+                        "smithy.api#documentation": "<p>A list of the recommendations for the customer's application.</p>",
                         "smithy.api#jsonName": "recommendations"
                     }
                 }
@@ -958,7 +948,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Returns information about a Cell.",
+                "smithy.api#documentation": "<p>Gets information about a cell including cell name, cell Amazon Resource Name (ARN), ARNs of nested cells for this cell, and a list of those cell ARNs with their associated recovery group ARNs.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/cells/{CellName}",
@@ -992,7 +982,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Returns information about readiness of a Cell.",
+                "smithy.api#documentation": "<p>Gets readiness for a cell. Aggregates the readiness of all the resources that are associated with the cell into a single value.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/cellreadiness/{CellName}",
@@ -1012,7 +1002,7 @@
                 "CellName": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "The name of the Cell",
+                        "smithy.api#documentation": "<p>The name of the cell.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1020,14 +1010,14 @@
                 "MaxResults": {
                     "target": "com.amazonaws.route53recoveryreadiness#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "Upper bound on number of records to return.",
+                        "smithy.api#documentation": "<p>The number of objects that you want to return with this call.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "A token used to resume pagination from the end of a previous request.",
+                        "smithy.api#documentation": "<p>The token that identifies which batch of results you want to see.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
@@ -1039,21 +1029,21 @@
                 "NextToken": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "A token that can be used to resume pagination from the end of the collection.",
+                        "smithy.api#documentation": "<p>The token that identifies which batch of results you want to see.</p>",
                         "smithy.api#jsonName": "nextToken"
                     }
                 },
                 "Readiness": {
                     "target": "com.amazonaws.route53recoveryreadiness#Readiness",
                     "traits": {
-                        "smithy.api#documentation": "The readiness at Cell level.",
+                        "smithy.api#documentation": "<p>The readiness at a cell level.</p>",
                         "smithy.api#jsonName": "readiness"
                     }
                 },
                 "ReadinessChecks": {
                     "target": "com.amazonaws.route53recoveryreadiness#__listOfReadinessCheckSummary",
                     "traits": {
-                        "smithy.api#documentation": "Summaries for the ReadinessChecks making up the Cell",
+                        "smithy.api#documentation": "<p>Summaries for the readiness checks that make up the cell.</p>",
                         "smithy.api#jsonName": "readinessChecks"
                     }
                 }
@@ -1065,7 +1055,7 @@
                 "CellName": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "The Cell to get",
+                        "smithy.api#documentation": "<p>The name of the cell.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1078,34 +1068,35 @@
                 "CellArn": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringMax256",
                     "traits": {
-                        "smithy.api#documentation": "The arn for the Cell",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the cell.</p>",
                         "smithy.api#jsonName": "cellArn"
                     }
                 },
                 "CellName": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringMax64PatternAAZAZ09Z",
                     "traits": {
-                        "smithy.api#documentation": "The name of the Cell",
+                        "smithy.api#documentation": "<p>The name of the cell.</p>",
                         "smithy.api#jsonName": "cellName"
                     }
                 },
                 "Cells": {
                     "target": "com.amazonaws.route53recoveryreadiness#__listOf__string",
                     "traits": {
-                        "smithy.api#documentation": "A list of Cell arns",
+                        "smithy.api#documentation": "<p>A list of cell ARNs.</p>",
                         "smithy.api#jsonName": "cells"
                     }
                 },
                 "ParentReadinessScopes": {
                     "target": "com.amazonaws.route53recoveryreadiness#__listOf__string",
                     "traits": {
-                        "smithy.api#documentation": "A list of Cell ARNs and/or RecoveryGroup ARNs",
+                        "smithy.api#documentation": "<p>The readiness scope for the cell, which can be a cell Amazon Resource Name (ARN) or a recovery group ARN. This is a list but currently can have only one element.</p>",
                         "smithy.api#jsonName": "parentReadinessScopes"
                     }
                 },
                 "Tags": {
                     "target": "com.amazonaws.route53recoveryreadiness#Tags",
                     "traits": {
+                        "smithy.api#documentation": "<p>Tags on the resources.</p>",
                         "smithy.api#jsonName": "tags"
                     }
                 }
@@ -1137,7 +1128,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Returns information about a ReadinessCheck.",
+                "smithy.api#documentation": "<p>Gets details about a readiness check.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/readinesschecks/{ReadinessCheckName}",
@@ -1151,7 +1142,7 @@
                 "ReadinessCheckName": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "The ReadinessCheck to get",
+                        "smithy.api#documentation": "<p>Name of a readiness check.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1184,7 +1175,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Returns detailed information about the status of an individual resource within a Readiness Check's Resource Set.",
+                "smithy.api#documentation": "<p>Gets individual readiness status for a readiness check. To see the overall readiness status for a recovery group, that considers the readiness status for all the readiness checks in the recovery group, use GetRecoveryGroupReadinessSummary.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/readinesschecks/{ReadinessCheckName}/resource/{ResourceIdentifier}/status",
@@ -1204,21 +1195,21 @@
                 "MaxResults": {
                     "target": "com.amazonaws.route53recoveryreadiness#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "Upper bound on number of records to return.",
+                        "smithy.api#documentation": "<p>The number of objects that you want to return with this call.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "A token used to resume pagination from the end of a previous request.",
+                        "smithy.api#documentation": "<p>The token that identifies which batch of results you want to see.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
                 "ReadinessCheckName": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "The ReadinessCheck to get",
+                        "smithy.api#documentation": "<p>Name of a readiness check.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1226,7 +1217,7 @@
                 "ResourceIdentifier": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "The resource ARN or component Id to get",
+                        "smithy.api#documentation": "<p>The resource identifier, which is the Amazon Resource Name (ARN) or the identifier generated for the resource by Application Recovery Controller (for example, for a DNS target resource).</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1239,21 +1230,21 @@
                 "NextToken": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "A token that can be used to resume pagination from the end of the collection.",
+                        "smithy.api#documentation": "<p>The token that identifies which batch of results you want to see.</p>",
                         "smithy.api#jsonName": "nextToken"
                     }
                 },
                 "Readiness": {
                     "target": "com.amazonaws.route53recoveryreadiness#Readiness",
                     "traits": {
-                        "smithy.api#documentation": "The readiness at rule level.",
+                        "smithy.api#documentation": "<p>The readiness at a rule level.</p>",
                         "smithy.api#jsonName": "readiness"
                     }
                 },
                 "Rules": {
                     "target": "com.amazonaws.route53recoveryreadiness#__listOfRuleResult",
                     "traits": {
-                        "smithy.api#documentation": "Details of the rules's results",
+                        "smithy.api#documentation": "<p>Details of the rule's results.</p>",
                         "smithy.api#jsonName": "rules"
                     }
                 }
@@ -1265,21 +1256,21 @@
                 "ReadinessCheckArn": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringMax256",
                     "traits": {
-                        "smithy.api#documentation": "Arn associated with ReadinessCheck",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) associated with a readiness check.</p>",
                         "smithy.api#jsonName": "readinessCheckArn"
                     }
                 },
                 "ReadinessCheckName": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringMax64PatternAAZAZ09Z",
                     "traits": {
-                        "smithy.api#documentation": "Name for a ReadinessCheck",
+                        "smithy.api#documentation": "<p>Name of a readiness check.</p>",
                         "smithy.api#jsonName": "readinessCheckName"
                     }
                 },
                 "ResourceSet": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringMax64PatternAAZAZ09Z",
                     "traits": {
-                        "smithy.api#documentation": "Name of the ResourceSet to be checked",
+                        "smithy.api#documentation": "<p>Name of the resource set to be checked.</p>",
                         "smithy.api#jsonName": "resourceSet"
                     }
                 },
@@ -1317,7 +1308,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Returns information about the status of a Readiness Check.",
+                "smithy.api#documentation": "<p>Gets the readiness status for an individual readiness check. To see the overall readiness status for a recovery group, that considers the readiness status for all the readiness checks in a recovery group, use GetRecoveryGroupReadinessSummary.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/readinesschecks/{ReadinessCheckName}/status",
@@ -1337,21 +1328,21 @@
                 "MaxResults": {
                     "target": "com.amazonaws.route53recoveryreadiness#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "Upper bound on number of records to return.",
+                        "smithy.api#documentation": "<p>The number of objects that you want to return with this call.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "A token used to resume pagination from the end of a previous request.",
+                        "smithy.api#documentation": "<p>The token that identifies which batch of results you want to see.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
                 "ReadinessCheckName": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "The ReadinessCheck to get",
+                        "smithy.api#documentation": "<p>Name of a readiness check.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1364,28 +1355,28 @@
                 "Messages": {
                     "target": "com.amazonaws.route53recoveryreadiness#__listOfMessage",
                     "traits": {
-                        "smithy.api#documentation": "Top level messages for readiness check status",
+                        "smithy.api#documentation": "<p>Top level messages for readiness check status</p>",
                         "smithy.api#jsonName": "messages"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "A token that can be used to resume pagination from the end of the collection.",
+                        "smithy.api#documentation": "<p>The token that identifies which batch of results you want to see.</p>",
                         "smithy.api#jsonName": "nextToken"
                     }
                 },
                 "Readiness": {
                     "target": "com.amazonaws.route53recoveryreadiness#Readiness",
                     "traits": {
-                        "smithy.api#documentation": "The readiness at rule level.",
+                        "smithy.api#documentation": "<p>The readiness at rule level.</p>",
                         "smithy.api#jsonName": "readiness"
                     }
                 },
                 "Resources": {
                     "target": "com.amazonaws.route53recoveryreadiness#__listOfResourceResult",
                     "traits": {
-                        "smithy.api#documentation": "Summary of resources's readiness",
+                        "smithy.api#documentation": "<p>Summary of the readiness of resources.</p>",
                         "smithy.api#jsonName": "resources"
                     }
                 }
@@ -1417,7 +1408,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Returns information about a Recovery Group.",
+                "smithy.api#documentation": "<p>Gets details about a recovery group, including a list of the cells that are included in it.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/recoverygroups/{RecoveryGroupName}",
@@ -1451,7 +1442,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Returns information about a Recovery Group.",
+                "smithy.api#documentation": "<p>Displays a summary of information about a recovery group's readiness status. Includes the readiness checks for resources in the recovery group and the readiness status of each one.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/recoverygroupreadiness/{RecoveryGroupName}",
@@ -1471,21 +1462,21 @@
                 "MaxResults": {
                     "target": "com.amazonaws.route53recoveryreadiness#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "Upper bound on number of records to return.",
+                        "smithy.api#documentation": "<p>The number of objects that you want to return with this call.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "A token used to resume pagination from the end of a previous request.",
+                        "smithy.api#documentation": "<p>The token that identifies which batch of results you want to see.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
                 "RecoveryGroupName": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "The name of the RecoveryGroup",
+                        "smithy.api#documentation": "<p>The name of a recovery group.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1498,21 +1489,21 @@
                 "NextToken": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "A token that can be used to resume pagination from the end of the collection.",
+                        "smithy.api#documentation": "<p>The token that identifies which batch of results you want to see.</p>",
                         "smithy.api#jsonName": "nextToken"
                     }
                 },
                 "Readiness": {
                     "target": "com.amazonaws.route53recoveryreadiness#Readiness",
                     "traits": {
-                        "smithy.api#documentation": "The readiness at RecoveryGroup level.",
+                        "smithy.api#documentation": "<p>The readiness status at a recovery group level.</p>",
                         "smithy.api#jsonName": "readiness"
                     }
                 },
                 "ReadinessChecks": {
                     "target": "com.amazonaws.route53recoveryreadiness#__listOfReadinessCheckSummary",
                     "traits": {
-                        "smithy.api#documentation": "Summaries for the ReadinessChecks making up the RecoveryGroup",
+                        "smithy.api#documentation": "<p>Summaries of the readiness checks for the recovery group.</p>",
                         "smithy.api#jsonName": "readinessChecks"
                     }
                 }
@@ -1524,7 +1515,7 @@
                 "RecoveryGroupName": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "The RecoveryGroup to get",
+                        "smithy.api#documentation": "<p>The name of a recovery group.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1537,27 +1528,28 @@
                 "Cells": {
                     "target": "com.amazonaws.route53recoveryreadiness#__listOf__string",
                     "traits": {
-                        "smithy.api#documentation": "A list of Cell arns",
+                        "smithy.api#documentation": "<p>A list of a cell's Amazon Resource Names (ARNs).</p>",
                         "smithy.api#jsonName": "cells"
                     }
                 },
                 "RecoveryGroupArn": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringMax256",
                     "traits": {
-                        "smithy.api#documentation": "The arn for the RecoveryGroup",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the recovery group.</p>",
                         "smithy.api#jsonName": "recoveryGroupArn"
                     }
                 },
                 "RecoveryGroupName": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringMax64PatternAAZAZ09Z",
                     "traits": {
-                        "smithy.api#documentation": "The name of the RecoveryGroup",
+                        "smithy.api#documentation": "<p>The name of the recovery group.</p>",
                         "smithy.api#jsonName": "recoveryGroupName"
                     }
                 },
                 "Tags": {
                     "target": "com.amazonaws.route53recoveryreadiness#Tags",
                     "traits": {
+                        "smithy.api#documentation": "<p>The tags associated with the recovery group.</p>",
                         "smithy.api#jsonName": "tags"
                     }
                 }
@@ -1589,7 +1581,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Returns information about a Resource Set.",
+                "smithy.api#documentation": "<p>Displays the details about a resource set, including a list of the resources in the set.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/resourcesets/{ResourceSetName}",
@@ -1603,7 +1595,7 @@
                 "ResourceSetName": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "The ResourceSet to get",
+                        "smithy.api#documentation": "<p>Name of a resource set.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1616,28 +1608,28 @@
                 "ResourceSetArn": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringMax256",
                     "traits": {
-                        "smithy.api#documentation": "The arn for the ResourceSet",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the resource set.</p>",
                         "smithy.api#jsonName": "resourceSetArn"
                     }
                 },
                 "ResourceSetName": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringMax64PatternAAZAZ09Z",
                     "traits": {
-                        "smithy.api#documentation": "The name of the ResourceSet",
+                        "smithy.api#documentation": "<p>The name of the resource set.</p>",
                         "smithy.api#jsonName": "resourceSetName"
                     }
                 },
                 "ResourceSetType": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringPatternAWSAZaZ09AZaZ09",
                     "traits": {
-                        "smithy.api#documentation": "AWS Resource Type of the resources in the ResourceSet",
+                        "smithy.api#documentation": "<p>The resource type of the resources in the resource set. Enter one of the following values for resource type:</p> <p>AWS::ApiGateway::Stage, AWS::ApiGatewayV2::Stage, AWS::AutoScaling::AutoScalingGroup, AWS::CloudWatch::Alarm, AWS::EC2::CustomerGateway, AWS::DynamoDB::Table, AWS::EC2::Volume, AWS::ElasticLoadBalancing::LoadBalancer, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Lambda::Function, AWS::MSK::Cluster, AWS::RDS::DBCluster, AWS::Route53::HealthCheck, AWS::SQS::Queue, AWS::SNS::Topic, AWS::SNS::Subscription, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::Route53RecoveryReadiness::DNSTargetResource</p>",
                         "smithy.api#jsonName": "resourceSetType"
                     }
                 },
                 "Resources": {
                     "target": "com.amazonaws.route53recoveryreadiness#__listOfResource",
                     "traits": {
-                        "smithy.api#documentation": "A list of Resource objects",
+                        "smithy.api#documentation": "<p>A list of resource objects.</p>",
                         "smithy.api#jsonName": "resources"
                     }
                 },
@@ -1668,7 +1660,7 @@
         "com.amazonaws.route53recoveryreadiness#LastAuditTimestamp": {
             "type": "timestamp",
             "traits": {
-                "smithy.api#documentation": "The time a Recovery Group was last assessed for recommendations in UTC ISO-8601 format",
+                "smithy.api#documentation": "<p>The time that a recovery group was last assessed for recommendations, in UTC ISO-8601 format.</p>",
                 "smithy.api#timestampFormat": "date-time"
             }
         },
@@ -1695,7 +1687,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Returns a collection of Cells.",
+                "smithy.api#documentation": "<p>Lists the cells for an account.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/cells",
@@ -1715,14 +1707,14 @@
                 "MaxResults": {
                     "target": "com.amazonaws.route53recoveryreadiness#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "Upper bound on number of records to return.",
+                        "smithy.api#documentation": "<p>The number of objects that you want to return with this call.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "A token used to resume pagination from the end of a previous request.",
+                        "smithy.api#documentation": "<p>The token that identifies which batch of results you want to see.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
@@ -1734,14 +1726,14 @@
                 "Cells": {
                     "target": "com.amazonaws.route53recoveryreadiness#__listOfCellOutput",
                     "traits": {
-                        "smithy.api#documentation": "A list of Cells",
+                        "smithy.api#documentation": "<p>A list of cells.</p>",
                         "smithy.api#jsonName": "cells"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "A token that can be used to resume pagination from the end of the collection.",
+                        "smithy.api#documentation": "<p>The token that identifies which batch of results you want to see.</p>",
                         "smithy.api#jsonName": "nextToken"
                     }
                 }
@@ -1770,7 +1762,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Returns a collection of cross account readiness authorizations.",
+                "smithy.api#documentation": "<p>Lists the cross-account readiness authorizations that are in place for an account.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/crossaccountauthorizations",
@@ -1790,14 +1782,14 @@
                 "MaxResults": {
                     "target": "com.amazonaws.route53recoveryreadiness#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "Upper bound on number of records to return.",
+                        "smithy.api#documentation": "<p>The number of objects that you want to return with this call.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "A token used to resume pagination from the end of a previous request.",
+                        "smithy.api#documentation": "<p>The token that identifies which batch of results you want to see.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
@@ -1809,14 +1801,14 @@
                 "CrossAccountAuthorizations": {
                     "target": "com.amazonaws.route53recoveryreadiness#__listOfCrossAccountAuthorization",
                     "traits": {
-                        "smithy.api#documentation": "A list of CrossAccountAuthorizations",
+                        "smithy.api#documentation": "<p>A list of cross-account authorizations.</p>",
                         "smithy.api#jsonName": "crossAccountAuthorizations"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "A token that can be used to resume pagination from the end of the collection.",
+                        "smithy.api#documentation": "<p>The token that identifies which batch of results you want to see.</p>",
                         "smithy.api#jsonName": "nextToken"
                     }
                 }
@@ -1845,7 +1837,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Returns a collection of Readiness Checks.",
+                "smithy.api#documentation": "<p>Lists the readiness checks for an account.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/readinesschecks",
@@ -1865,14 +1857,14 @@
                 "MaxResults": {
                     "target": "com.amazonaws.route53recoveryreadiness#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "Upper bound on number of records to return.",
+                        "smithy.api#documentation": "<p>The number of objects that you want to return with this call.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "A token used to resume pagination from the end of a previous request.",
+                        "smithy.api#documentation": "<p>The token that identifies which batch of results you want to see.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
@@ -1884,14 +1876,14 @@
                 "NextToken": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "A token that can be used to resume pagination from the end of the collection.",
+                        "smithy.api#documentation": "<p>The token that identifies which batch of results you want to see.</p>",
                         "smithy.api#jsonName": "nextToken"
                     }
                 },
                 "ReadinessChecks": {
                     "target": "com.amazonaws.route53recoveryreadiness#__listOfReadinessCheckOutput",
                     "traits": {
-                        "smithy.api#documentation": "A list of ReadinessCheck associated with the account",
+                        "smithy.api#documentation": "<p>A list of readiness checks associated with the account.</p>",
                         "smithy.api#jsonName": "readinessChecks"
                     }
                 }
@@ -1920,7 +1912,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Returns a collection of Recovery Groups.",
+                "smithy.api#documentation": "<p>Lists the recovery groups in an account.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/recoverygroups",
@@ -1940,14 +1932,14 @@
                 "MaxResults": {
                     "target": "com.amazonaws.route53recoveryreadiness#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "Upper bound on number of records to return.",
+                        "smithy.api#documentation": "<p>The number of objects that you want to return with this call.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "A token used to resume pagination from the end of a previous request.",
+                        "smithy.api#documentation": "<p>The token that identifies which batch of results you want to see.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
@@ -1959,14 +1951,14 @@
                 "NextToken": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "A token that can be used to resume pagination from the end of the collection.",
+                        "smithy.api#documentation": "<p>The token that identifies which batch of results you want to see.</p>",
                         "smithy.api#jsonName": "nextToken"
                     }
                 },
                 "RecoveryGroups": {
                     "target": "com.amazonaws.route53recoveryreadiness#__listOfRecoveryGroupOutput",
                     "traits": {
-                        "smithy.api#documentation": "A list of RecoveryGroups",
+                        "smithy.api#documentation": "<p>A list of recovery groups.</p>",
                         "smithy.api#jsonName": "recoveryGroups"
                     }
                 }
@@ -1995,7 +1987,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Returns a collection of Resource Sets.",
+                "smithy.api#documentation": "<p>Lists the resource sets in an account.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/resourcesets",
@@ -2015,14 +2007,14 @@
                 "MaxResults": {
                     "target": "com.amazonaws.route53recoveryreadiness#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "Upper bound on number of records to return.",
+                        "smithy.api#documentation": "<p>The number of objects that you want to return with this call.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "A token used to resume pagination from the end of a previous request.",
+                        "smithy.api#documentation": "<p>The token that identifies which batch of results you want to see.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
@@ -2034,14 +2026,14 @@
                 "NextToken": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "A token that can be used to resume pagination from the end of the collection.",
+                        "smithy.api#documentation": "<p>The token that identifies which batch of results you want to see.</p>",
                         "smithy.api#jsonName": "nextToken"
                     }
                 },
                 "ResourceSets": {
                     "target": "com.amazonaws.route53recoveryreadiness#__listOfResourceSetOutput",
                     "traits": {
-                        "smithy.api#documentation": "A list of ResourceSets associated with the account",
+                        "smithy.api#documentation": "<p>A list of resource sets associated with the account.</p>",
                         "smithy.api#jsonName": "resourceSets"
                     }
                 }
@@ -2070,7 +2062,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Returns a collection of rules that are applied as part of Readiness Checks.",
+                "smithy.api#documentation": "<p>Lists all readiness rules, or lists the readiness rules for a specific resource type.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/rules",
@@ -2090,7 +2082,7 @@
                 "ResourceType": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringMax64",
                     "traits": {
-                        "smithy.api#documentation": "The resource type the rule applies to.",
+                        "smithy.api#documentation": "<p>The resource type that the readiness rule applies to.</p>",
                         "smithy.api#jsonName": "resourceType",
                         "smithy.api#required": {}
                     }
@@ -2098,7 +2090,7 @@
                 "RuleDescription": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringMax256",
                     "traits": {
-                        "smithy.api#documentation": "A description of the rule",
+                        "smithy.api#documentation": "<p>The description of a readiness rule.</p>",
                         "smithy.api#jsonName": "ruleDescription",
                         "smithy.api#required": {}
                     }
@@ -2106,14 +2098,14 @@
                 "RuleId": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringMax64",
                     "traits": {
-                        "smithy.api#documentation": "The Rule's ID.",
+                        "smithy.api#documentation": "<p>The ID for the readiness rule.</p>",
                         "smithy.api#jsonName": "ruleId",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "A collection of rules used in a readiness check"
+                "smithy.api#documentation": "<p>Readiness rule information, including the resource type, rule ID, and rule description.</p>"
             }
         },
         "com.amazonaws.route53recoveryreadiness#ListRulesRequest": {
@@ -2122,21 +2114,21 @@
                 "MaxResults": {
                     "target": "com.amazonaws.route53recoveryreadiness#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "Upper bound on number of records to return.",
+                        "smithy.api#documentation": "<p>The number of objects that you want to return with this call.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "A token used to resume pagination from the end of a previous request.",
+                        "smithy.api#documentation": "<p>The token that identifies which batch of results you want to see.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
                 "ResourceType": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "Filter parameter which specifies the rules to return given a resource type.",
+                        "smithy.api#documentation": "<p>The resource type that a readiness rule applies to.</p>",
                         "smithy.api#httpQuery": "resourceType"
                     }
                 }
@@ -2148,14 +2140,14 @@
                 "NextToken": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "A token that can be used to resume pagination from the end of the collection.",
+                        "smithy.api#documentation": "<p>The token that identifies which batch of results you want to see.</p>",
                         "smithy.api#jsonName": "nextToken"
                     }
                 },
                 "Rules": {
                     "target": "com.amazonaws.route53recoveryreadiness#__listOfListRulesOutput",
                     "traits": {
-                        "smithy.api#documentation": "A list of rules",
+                        "smithy.api#documentation": "<p>A list of readiness rules for a specific resource type.</p>",
                         "smithy.api#jsonName": "rules"
                     }
                 }
@@ -2181,7 +2173,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Returns a list of the tags assigned to the specified resource.",
+                "smithy.api#documentation": "<p>Lists the tags for a resource.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/tags/{ResourceArn}",
@@ -2195,7 +2187,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "The Amazon Resource Name (ARN) for the resource. You can get this from the response to any request to the resource.",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for a resource.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2208,6 +2200,7 @@
                 "Tags": {
                     "target": "com.amazonaws.route53recoveryreadiness#Tags",
                     "traits": {
+                        "smithy.api#documentation": "<p></p>",
                         "smithy.api#jsonName": "tags"
                     }
                 }
@@ -2228,13 +2221,13 @@
                 "MessageText": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "The text of a readiness check message",
+                        "smithy.api#documentation": "<p>The text of a readiness check message.</p>",
                         "smithy.api#jsonName": "messageText"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Information relating to readiness check status"
+                "smithy.api#documentation": "<p>Information relating to readiness check status.</p>"
             }
         },
         "com.amazonaws.route53recoveryreadiness#NLBResource": {
@@ -2243,13 +2236,13 @@
                 "Arn": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "An NLB resource arn",
+                        "smithy.api#documentation": "<p>The Network Load Balancer resource Amazon Resource Name (ARN).</p>",
                         "smithy.api#jsonName": "arn"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "The NLB resource a DNS Target Resource points to"
+                "smithy.api#documentation": "<p>The Network Load Balancer resource that a DNS target resource points to.</p>"
             }
         },
         "com.amazonaws.route53recoveryreadiness#R53ResourceRecord": {
@@ -2258,26 +2251,26 @@
                 "DomainName": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "The DNS target name",
+                        "smithy.api#documentation": "<p>The DNS target domain name.</p>",
                         "smithy.api#jsonName": "domainName"
                     }
                 },
                 "RecordSetId": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "The Resource Record set id",
+                        "smithy.api#documentation": "<p>The Route 53 Resource Record Set ID.</p>",
                         "smithy.api#jsonName": "recordSetId"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "The Route 53 resource a DNS Target Resource record points to"
+                "smithy.api#documentation": "<p>The Route 53 resource that a DNS target resource record points to.</p>"
             }
         },
         "com.amazonaws.route53recoveryreadiness#Readiness": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "The readiness of an entire ReadinessCheck or an individual resource ARN.",
+                "smithy.api#documentation": "<p>The readiness status.</p>",
                 "smithy.api#enum": [
                     {
                         "value": "READY",
@@ -2304,7 +2297,7 @@
                 "ReadinessCheckArn": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringMax256",
                     "traits": {
-                        "smithy.api#documentation": "Arn associated with ReadinessCheck",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) associated with a readiness check.</p>",
                         "smithy.api#jsonName": "readinessCheckArn",
                         "smithy.api#required": {}
                     }
@@ -2312,14 +2305,14 @@
                 "ReadinessCheckName": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringMax64PatternAAZAZ09Z",
                     "traits": {
-                        "smithy.api#documentation": "Name for a ReadinessCheck",
+                        "smithy.api#documentation": "<p>Name of a readiness check.</p>",
                         "smithy.api#jsonName": "readinessCheckName"
                     }
                 },
                 "ResourceSet": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringMax64PatternAAZAZ09Z",
                     "traits": {
-                        "smithy.api#documentation": "Name of the ResourceSet to be checked",
+                        "smithy.api#documentation": "<p>Name of the resource set to be checked.</p>",
                         "smithy.api#jsonName": "resourceSet",
                         "smithy.api#required": {}
                     }
@@ -2332,7 +2325,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "A resource used for checking the readiness of a Resource Set"
+                "smithy.api#documentation": "<p>A readiness check.</p>"
             }
         },
         "com.amazonaws.route53recoveryreadiness#ReadinessCheckSummary": {
@@ -2341,26 +2334,26 @@
                 "Readiness": {
                     "target": "com.amazonaws.route53recoveryreadiness#Readiness",
                     "traits": {
-                        "smithy.api#documentation": "The readiness of this ReadinessCheck",
+                        "smithy.api#documentation": "<p>The readiness status of this readiness check.</p>",
                         "smithy.api#jsonName": "readiness"
                     }
                 },
                 "ReadinessCheckName": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "The name of a ReadinessCheck which is part of the given RecoveryGroup or Cell",
+                        "smithy.api#documentation": "<p>The name of a readiness check.</p>",
                         "smithy.api#jsonName": "readinessCheckName"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Summary of ReadinessCheck status, paginated in GetRecoveryGroupReadinessSummary and GetCellReadinessSummary"
+                "smithy.api#documentation": "<p>Summary of all readiness check statuses in a recovery group, paginated in GetRecoveryGroupReadinessSummary and GetCellReadinessSummary.</p>"
             }
         },
         "com.amazonaws.route53recoveryreadiness#ReadinessCheckTimestamp": {
             "type": "timestamp",
             "traits": {
-                "smithy.api#documentation": "The time the Cell was last checked for readiness, in ISO-8601 format, UTC.",
+                "smithy.api#documentation": "<p>The time (UTC) that the cell was last checked for readiness, in ISO-8601 format.</p>",
                 "smithy.api#timestampFormat": "date-time"
             }
         },
@@ -2370,14 +2363,14 @@
                 "RecommendationText": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "Guidance text for recommendation",
+                        "smithy.api#documentation": "<p>Text of the recommendations that are provided to make an application more recovery resilient.</p>",
                         "smithy.api#jsonName": "recommendationText",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Guidance for improving Recovery Group resilliancy"
+                "smithy.api#documentation": "<p>Recommendations that are provided to make an application more recovery resilient.</p>"
             }
         },
         "com.amazonaws.route53recoveryreadiness#RecoveryGroupOutput": {
@@ -2386,7 +2379,7 @@
                 "Cells": {
                     "target": "com.amazonaws.route53recoveryreadiness#__listOf__string",
                     "traits": {
-                        "smithy.api#documentation": "A list of Cell arns",
+                        "smithy.api#documentation": "<p>A list of a cell's Amazon Resource Names (ARNs).</p>",
                         "smithy.api#jsonName": "cells",
                         "smithy.api#required": {}
                     }
@@ -2394,7 +2387,7 @@
                 "RecoveryGroupArn": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringMax256",
                     "traits": {
-                        "smithy.api#documentation": "The arn for the RecoveryGroup",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the recovery group.</p>",
                         "smithy.api#jsonName": "recoveryGroupArn",
                         "smithy.api#required": {}
                     }
@@ -2402,7 +2395,7 @@
                 "RecoveryGroupName": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringMax64PatternAAZAZ09Z",
                     "traits": {
-                        "smithy.api#documentation": "The name of the RecoveryGroup",
+                        "smithy.api#documentation": "<p>The name of the recovery group.</p>",
                         "smithy.api#jsonName": "recoveryGroupName",
                         "smithy.api#required": {}
                     }
@@ -2410,12 +2403,13 @@
                 "Tags": {
                     "target": "com.amazonaws.route53recoveryreadiness#Tags",
                     "traits": {
+                        "smithy.api#documentation": "<p>The tags associated with the recovery group.</p>",
                         "smithy.api#jsonName": "tags"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "A Recovery Group generally containing multiple Cells"
+                "smithy.api#documentation": "<p>A representation of the application, typically containing multiple cells.</p>"
             }
         },
         "com.amazonaws.route53recoveryreadiness#Resource": {
@@ -2424,33 +2418,34 @@
                 "ComponentId": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "The component id of the resource, generated by the service when dnsTargetResource is used",
+                        "smithy.api#documentation": "<p>The component identifier of the resource, generated when DNS target resource is used.</p>",
                         "smithy.api#jsonName": "componentId"
                     }
                 },
                 "DnsTargetResource": {
                     "target": "com.amazonaws.route53recoveryreadiness#DNSTargetResource",
                     "traits": {
+                        "smithy.api#documentation": "<p>The DNS target resource.</p>",
                         "smithy.api#jsonName": "dnsTargetResource"
                     }
                 },
                 "ReadinessScopes": {
                     "target": "com.amazonaws.route53recoveryreadiness#__listOf__string",
                     "traits": {
-                        "smithy.api#documentation": "A list of RecoveryGroup ARNs and/or Cell ARNs that this resource is contained within.",
+                        "smithy.api#documentation": "<p>A list of recovery group Amazon Resource Names (ARNs) and cell ARNs that this resource is contained within.</p>",
                         "smithy.api#jsonName": "readinessScopes"
                     }
                 },
                 "ResourceArn": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "The ARN of the AWS resource, can be skipped if dnsTargetResource is used",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services resource.</p>",
                         "smithy.api#jsonName": "resourceArn"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "The resource element of a ResourceSet"
+                "smithy.api#documentation": "<p>The resource element of a resource set.</p>"
             }
         },
         "com.amazonaws.route53recoveryreadiness#ResourceNotFoundException": {
@@ -2475,14 +2470,14 @@
                 "ComponentId": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "The component id of the resource",
+                        "smithy.api#documentation": "<p>The component id of the resource.</p>",
                         "smithy.api#jsonName": "componentId"
                     }
                 },
                 "LastCheckedTimestamp": {
                     "target": "com.amazonaws.route53recoveryreadiness#ReadinessCheckTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "The time the resource was last checked for readiness, in ISO-8601 format, UTC.",
+                        "smithy.api#documentation": "<p>The time (UTC) that the resource was last checked for readiness, in ISO-8601 format.</p>",
                         "smithy.api#jsonName": "lastCheckedTimestamp",
                         "smithy.api#required": {}
                     }
@@ -2490,7 +2485,7 @@
                 "Readiness": {
                     "target": "com.amazonaws.route53recoveryreadiness#Readiness",
                     "traits": {
-                        "smithy.api#documentation": "The readiness of the resource.",
+                        "smithy.api#documentation": "<p>The readiness of a resource.</p>",
                         "smithy.api#jsonName": "readiness",
                         "smithy.api#required": {}
                     }
@@ -2498,13 +2493,13 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "The ARN of the resource",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource.</p>",
                         "smithy.api#jsonName": "resourceArn"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Result with status for an individual resource."
+                "smithy.api#documentation": "<p>The result of a successful Resource request, with status for an individual resource.</p>"
             }
         },
         "com.amazonaws.route53recoveryreadiness#ResourceSetOutput": {
@@ -2513,7 +2508,7 @@
                 "ResourceSetArn": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringMax256",
                     "traits": {
-                        "smithy.api#documentation": "The arn for the ResourceSet",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the resource set.</p>",
                         "smithy.api#jsonName": "resourceSetArn",
                         "smithy.api#required": {}
                     }
@@ -2521,7 +2516,7 @@
                 "ResourceSetName": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringMax64PatternAAZAZ09Z",
                     "traits": {
-                        "smithy.api#documentation": "The name of the ResourceSet",
+                        "smithy.api#documentation": "<p>The name of the resource set.</p>",
                         "smithy.api#jsonName": "resourceSetName",
                         "smithy.api#required": {}
                     }
@@ -2529,7 +2524,7 @@
                 "ResourceSetType": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringPatternAWSAZaZ09AZaZ09",
                     "traits": {
-                        "smithy.api#documentation": "AWS Resource Type of the resources in the ResourceSet",
+                        "smithy.api#documentation": "<p>The resource type of the resources in the resource set. Enter one of the following values for resource type:</p> <p>AWS::ApiGateway::Stage, AWS::ApiGatewayV2::Stage, AWS::AutoScaling::AutoScalingGroup, AWS::CloudWatch::Alarm, AWS::EC2::CustomerGateway, AWS::DynamoDB::Table, AWS::EC2::Volume, AWS::ElasticLoadBalancing::LoadBalancer, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Lambda::Function, AWS::MSK::Cluster, AWS::RDS::DBCluster, AWS::Route53::HealthCheck, AWS::SQS::Queue, AWS::SNS::Topic, AWS::SNS::Subscription, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::Route53RecoveryReadiness::DNSTargetResource</p>",
                         "smithy.api#jsonName": "resourceSetType",
                         "smithy.api#required": {}
                     }
@@ -2537,7 +2532,7 @@
                 "Resources": {
                     "target": "com.amazonaws.route53recoveryreadiness#__listOfResource",
                     "traits": {
-                        "smithy.api#documentation": "A list of Resource objects",
+                        "smithy.api#documentation": "<p>A list of resource objects.</p>",
                         "smithy.api#jsonName": "resources",
                         "smithy.api#required": {}
                     }
@@ -2550,11 +2545,26 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "A collection of resources of the same type"
+                "smithy.api#documentation": "<p>A collection of resources of the same type.</p>"
             }
         },
         "com.amazonaws.route53recoveryreadiness#Route53RecoveryReadiness": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Route53 Recovery Readiness",
+                    "arnNamespace": "route53-recovery-readiness",
+                    "cloudFormationName": "Route53RecoveryReadiness",
+                    "cloudTrailEventSource": "route53recoveryreadiness.amazonaws.com",
+                    "endpointPrefix": "route53-recovery-readiness"
+                },
+                "aws.auth#sigv4": {
+                    "name": "route53-recovery-readiness"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>Recovery readiness</p>",
+                "smithy.api#title": "AWS Route53 Recovery Readiness"
+            },
             "version": "2019-12-02",
             "operations": [
                 {
@@ -2653,22 +2663,7 @@
                 {
                     "target": "com.amazonaws.route53recoveryreadiness#UpdateResourceSet"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Route53 Recovery Readiness",
-                    "arnNamespace": "route53-recovery-readiness",
-                    "cloudFormationName": "Route53RecoveryReadiness",
-                    "cloudTrailEventSource": "route53recoveryreadiness.amazonaws.com",
-                    "endpointPrefix": "route53-recovery-readiness"
-                },
-                "aws.auth#sigv4": {
-                    "name": "route53-recovery-readiness"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "AWS Route53 Recovery Readiness",
-                "smithy.api#title": "AWS Route53 Recovery Readiness"
-            }
+            ]
         },
         "com.amazonaws.route53recoveryreadiness#RuleResult": {
             "type": "structure",
@@ -2676,7 +2671,7 @@
                 "LastCheckedTimestamp": {
                     "target": "com.amazonaws.route53recoveryreadiness#ReadinessCheckTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "The time the resource was last checked for readiness, in ISO-8601 format, UTC.",
+                        "smithy.api#documentation": "<p>The time the resource was last checked for readiness, in ISO-8601 format, UTC.</p>",
                         "smithy.api#jsonName": "lastCheckedTimestamp",
                         "smithy.api#required": {}
                     }
@@ -2684,7 +2679,7 @@
                 "Messages": {
                     "target": "com.amazonaws.route53recoveryreadiness#__listOfMessage",
                     "traits": {
-                        "smithy.api#documentation": "Details about the resource's readiness",
+                        "smithy.api#documentation": "<p>Details about the resource's readiness.</p>",
                         "smithy.api#jsonName": "messages",
                         "smithy.api#required": {}
                     }
@@ -2692,7 +2687,7 @@
                 "Readiness": {
                     "target": "com.amazonaws.route53recoveryreadiness#Readiness",
                     "traits": {
-                        "smithy.api#documentation": "The readiness at rule level.",
+                        "smithy.api#documentation": "<p>The readiness at rule level.</p>",
                         "smithy.api#jsonName": "readiness",
                         "smithy.api#required": {}
                     }
@@ -2700,14 +2695,14 @@
                 "RuleId": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "The identifier of the rule.",
+                        "smithy.api#documentation": "<p>The identifier of the rule.</p>",
                         "smithy.api#jsonName": "ruleId",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Result with status for an individual rule.."
+                "smithy.api#documentation": "<p>The result of a successful Rule request, with status for an individual rule.</p>"
             }
         },
         "com.amazonaws.route53recoveryreadiness#TagResource": {
@@ -2730,7 +2725,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Adds tags to the specified resource. You can specify one or more tags to add.",
+                "smithy.api#documentation": "<p>Adds a tag to a resource.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/tags/{ResourceArn}",
@@ -2744,7 +2739,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "The Amazon Resource Name (ARN) for the resource. You can get this from the response to any request to the resource.",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for a resource.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2752,6 +2747,7 @@
                 "Tags": {
                     "target": "com.amazonaws.route53recoveryreadiness#Tags",
                     "traits": {
+                        "smithy.api#documentation": "<p></p>",
                         "smithy.api#jsonName": "tags",
                         "smithy.api#required": {}
                     }
@@ -2771,7 +2767,7 @@
                 "target": "com.amazonaws.route53recoveryreadiness#__string"
             },
             "traits": {
-                "smithy.api#documentation": "A collection of tags associated with a resource"
+                "smithy.api#documentation": "<p>A collection of tags associated with a resource.</p>"
             }
         },
         "com.amazonaws.route53recoveryreadiness#TargetResource": {
@@ -2780,18 +2776,20 @@
                 "NLBResource": {
                     "target": "com.amazonaws.route53recoveryreadiness#NLBResource",
                     "traits": {
+                        "smithy.api#documentation": "<p>The Network Load Balancer Resource.</p>",
                         "smithy.api#jsonName": "nLBResource"
                     }
                 },
                 "R53Resource": {
                     "target": "com.amazonaws.route53recoveryreadiness#R53ResourceRecord",
                     "traits": {
+                        "smithy.api#documentation": "<p>The Route 53 resource.</p>",
                         "smithy.api#jsonName": "r53Resource"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "The target resource the R53 record points to"
+                "smithy.api#documentation": "<p>The target resource that the Route 53 record points to.</p>"
             }
         },
         "com.amazonaws.route53recoveryreadiness#ThrottlingException": {
@@ -2827,7 +2825,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Removes tags from the specified resource. You can specify one or more tags to remove.",
+                "smithy.api#documentation": "<p>Removes a tag from a resource.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/tags/{ResourceArn}",
@@ -2841,7 +2839,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "The Amazon Resource Name (ARN) for the resource. You can get this from the response to any request to the resource.",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for a resource.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2849,7 +2847,7 @@
                 "TagKeys": {
                     "target": "com.amazonaws.route53recoveryreadiness#__listOf__string",
                     "traits": {
-                        "smithy.api#documentation": "A comma-separated list of the tag keys to remove from the resource.",
+                        "smithy.api#documentation": "<p>The keys for tags you add to resources.</p>",
                         "smithy.api#httpQuery": "tagKeys",
                         "smithy.api#required": {}
                     }
@@ -2882,7 +2880,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Updates an existing Cell.",
+                "smithy.api#documentation": "<p>Updates a cell to replace the list of nested cells with a new list of nested cells.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/cells/{CellName}",
@@ -2896,7 +2894,7 @@
                 "CellName": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "The Cell to update",
+                        "smithy.api#documentation": "<p>The name of the cell.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2904,14 +2902,11 @@
                 "Cells": {
                     "target": "com.amazonaws.route53recoveryreadiness#__listOf__string",
                     "traits": {
-                        "smithy.api#documentation": "A list of Cell arns, completely replaces previous list",
+                        "smithy.api#documentation": "<p>A list of cell Amazon Resource Names (ARNs), which completely replaces the previous list.</p>",
                         "smithy.api#jsonName": "cells",
                         "smithy.api#required": {}
                     }
                 }
-            },
-            "traits": {
-                "smithy.api#documentation": "Parameters to update for the Cell"
             }
         },
         "com.amazonaws.route53recoveryreadiness#UpdateCellResponse": {
@@ -2920,34 +2915,35 @@
                 "CellArn": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringMax256",
                     "traits": {
-                        "smithy.api#documentation": "The arn for the Cell",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the cell.</p>",
                         "smithy.api#jsonName": "cellArn"
                     }
                 },
                 "CellName": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringMax64PatternAAZAZ09Z",
                     "traits": {
-                        "smithy.api#documentation": "The name of the Cell",
+                        "smithy.api#documentation": "<p>The name of the cell.</p>",
                         "smithy.api#jsonName": "cellName"
                     }
                 },
                 "Cells": {
                     "target": "com.amazonaws.route53recoveryreadiness#__listOf__string",
                     "traits": {
-                        "smithy.api#documentation": "A list of Cell arns",
+                        "smithy.api#documentation": "<p>A list of cell ARNs.</p>",
                         "smithy.api#jsonName": "cells"
                     }
                 },
                 "ParentReadinessScopes": {
                     "target": "com.amazonaws.route53recoveryreadiness#__listOf__string",
                     "traits": {
-                        "smithy.api#documentation": "A list of Cell ARNs and/or RecoveryGroup ARNs",
+                        "smithy.api#documentation": "<p>The readiness scope for the cell, which can be a cell Amazon Resource Name (ARN) or a recovery group ARN. This is a list but currently can have only one element.</p>",
                         "smithy.api#jsonName": "parentReadinessScopes"
                     }
                 },
                 "Tags": {
                     "target": "com.amazonaws.route53recoveryreadiness#Tags",
                     "traits": {
+                        "smithy.api#documentation": "<p>Tags on the resources.</p>",
                         "smithy.api#jsonName": "tags"
                     }
                 }
@@ -2979,7 +2975,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Updates an exisiting Readiness Check.",
+                "smithy.api#documentation": "<p>Updates a readiness check.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/readinesschecks/{ReadinessCheckName}",
@@ -2993,7 +2989,7 @@
                 "ReadinessCheckName": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "The ReadinessCheck to update",
+                        "smithy.api#documentation": "<p>Name of a readiness check.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3001,14 +2997,14 @@
                 "ResourceSetName": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "The name of the ResourceSet to check",
+                        "smithy.api#documentation": "<p>The name of the resource set to be checked.</p>",
                         "smithy.api#jsonName": "resourceSetName",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "The new Readiness Check values"
+                "smithy.api#documentation": "<p>Name of a readiness check to describe.</p>"
             }
         },
         "com.amazonaws.route53recoveryreadiness#UpdateReadinessCheckResponse": {
@@ -3017,21 +3013,21 @@
                 "ReadinessCheckArn": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringMax256",
                     "traits": {
-                        "smithy.api#documentation": "Arn associated with ReadinessCheck",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) associated with a readiness check.</p>",
                         "smithy.api#jsonName": "readinessCheckArn"
                     }
                 },
                 "ReadinessCheckName": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringMax64PatternAAZAZ09Z",
                     "traits": {
-                        "smithy.api#documentation": "Name for a ReadinessCheck",
+                        "smithy.api#documentation": "<p>Name of a readiness check.</p>",
                         "smithy.api#jsonName": "readinessCheckName"
                     }
                 },
                 "ResourceSet": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringMax64PatternAAZAZ09Z",
                     "traits": {
-                        "smithy.api#documentation": "Name of the ResourceSet to be checked",
+                        "smithy.api#documentation": "<p>Name of the resource set to be checked.</p>",
                         "smithy.api#jsonName": "resourceSet"
                     }
                 },
@@ -3069,7 +3065,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Updates an existing Recovery Group.",
+                "smithy.api#documentation": "<p>Updates a recovery group.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/recoverygroups/{RecoveryGroupName}",
@@ -3083,7 +3079,7 @@
                 "Cells": {
                     "target": "com.amazonaws.route53recoveryreadiness#__listOf__string",
                     "traits": {
-                        "smithy.api#documentation": "A list of Cell arns, completely replaces previous list",
+                        "smithy.api#documentation": "<p>A list of cell Amazon Resource Names (ARNs). This list completely replaces the previous list.</p>",
                         "smithy.api#jsonName": "cells",
                         "smithy.api#required": {}
                     }
@@ -3091,14 +3087,14 @@
                 "RecoveryGroupName": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "The RecoveryGroup to update",
+                        "smithy.api#documentation": "<p>The name of a recovery group.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Parameters to update for the RecoveryGroup"
+                "smithy.api#documentation": "<p>Name of a recovery group.</p>"
             }
         },
         "com.amazonaws.route53recoveryreadiness#UpdateRecoveryGroupResponse": {
@@ -3107,27 +3103,28 @@
                 "Cells": {
                     "target": "com.amazonaws.route53recoveryreadiness#__listOf__string",
                     "traits": {
-                        "smithy.api#documentation": "A list of Cell arns",
+                        "smithy.api#documentation": "<p>A list of a cell's Amazon Resource Names (ARNs).</p>",
                         "smithy.api#jsonName": "cells"
                     }
                 },
                 "RecoveryGroupArn": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringMax256",
                     "traits": {
-                        "smithy.api#documentation": "The arn for the RecoveryGroup",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the recovery group.</p>",
                         "smithy.api#jsonName": "recoveryGroupArn"
                     }
                 },
                 "RecoveryGroupName": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringMax64PatternAAZAZ09Z",
                     "traits": {
-                        "smithy.api#documentation": "The name of the RecoveryGroup",
+                        "smithy.api#documentation": "<p>The name of the recovery group.</p>",
                         "smithy.api#jsonName": "recoveryGroupName"
                     }
                 },
                 "Tags": {
                     "target": "com.amazonaws.route53recoveryreadiness#Tags",
                     "traits": {
+                        "smithy.api#documentation": "<p>The tags associated with the recovery group.</p>",
                         "smithy.api#jsonName": "tags"
                     }
                 }
@@ -3159,7 +3156,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Updates an existing Resource Set.",
+                "smithy.api#documentation": "<p>Updates a resource set.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/resourcesets/{ResourceSetName}",
@@ -3173,7 +3170,7 @@
                 "ResourceSetName": {
                     "target": "com.amazonaws.route53recoveryreadiness#__string",
                     "traits": {
-                        "smithy.api#documentation": "The ResourceSet to update",
+                        "smithy.api#documentation": "<p>Name of a resource set.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3181,7 +3178,7 @@
                 "ResourceSetType": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringPatternAWSAZaZ09AZaZ09",
                     "traits": {
-                        "smithy.api#documentation": "AWS Resource Type of the resources in the ResourceSet",
+                        "smithy.api#documentation": "<p>The resource type of the resources in the resource set. Enter one of the following values for resource type:</p> <p>AWS::ApiGateway::Stage, AWS::ApiGatewayV2::Stage, AWS::AutoScaling::AutoScalingGroup, AWS::CloudWatch::Alarm, AWS::EC2::CustomerGateway, AWS::DynamoDB::Table, AWS::EC2::Volume, AWS::ElasticLoadBalancing::LoadBalancer, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Lambda::Function, AWS::MSK::Cluster, AWS::RDS::DBCluster, AWS::Route53::HealthCheck, AWS::SQS::Queue, AWS::SNS::Topic, AWS::SNS::Subscription, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::Route53RecoveryReadiness::DNSTargetResource</p>",
                         "smithy.api#jsonName": "resourceSetType",
                         "smithy.api#required": {}
                     }
@@ -3189,14 +3186,14 @@
                 "Resources": {
                     "target": "com.amazonaws.route53recoveryreadiness#__listOfResource",
                     "traits": {
-                        "smithy.api#documentation": "A list of Resource objects",
+                        "smithy.api#documentation": "<p>A list of resource objects.</p>",
                         "smithy.api#jsonName": "resources",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "configuration for the desired"
+                "smithy.api#documentation": "<p>Name of a resource set.</p>"
             }
         },
         "com.amazonaws.route53recoveryreadiness#UpdateResourceSetResponse": {
@@ -3205,28 +3202,28 @@
                 "ResourceSetArn": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringMax256",
                     "traits": {
-                        "smithy.api#documentation": "The arn for the ResourceSet",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the resource set.</p>",
                         "smithy.api#jsonName": "resourceSetArn"
                     }
                 },
                 "ResourceSetName": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringMax64PatternAAZAZ09Z",
                     "traits": {
-                        "smithy.api#documentation": "The name of the ResourceSet",
+                        "smithy.api#documentation": "<p>The name of the resource set.</p>",
                         "smithy.api#jsonName": "resourceSetName"
                     }
                 },
                 "ResourceSetType": {
                     "target": "com.amazonaws.route53recoveryreadiness#__stringPatternAWSAZaZ09AZaZ09",
                     "traits": {
-                        "smithy.api#documentation": "AWS Resource Type of the resources in the ResourceSet",
+                        "smithy.api#documentation": "<p>The resource type of the resources in the resource set. Enter one of the following values for resource type:</p> <p>AWS::ApiGateway::Stage, AWS::ApiGatewayV2::Stage, AWS::AutoScaling::AutoScalingGroup, AWS::CloudWatch::Alarm, AWS::EC2::CustomerGateway, AWS::DynamoDB::Table, AWS::EC2::Volume, AWS::ElasticLoadBalancing::LoadBalancer, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Lambda::Function, AWS::MSK::Cluster, AWS::RDS::DBCluster, AWS::Route53::HealthCheck, AWS::SQS::Queue, AWS::SNS::Topic, AWS::SNS::Subscription, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::Route53RecoveryReadiness::DNSTargetResource</p>",
                         "smithy.api#jsonName": "resourceSetType"
                     }
                 },
                 "Resources": {
                     "target": "com.amazonaws.route53recoveryreadiness#__listOfResource",
                     "traits": {
-                        "smithy.api#documentation": "A list of Resource objects",
+                        "smithy.api#documentation": "<p>A list of resource objects.</p>",
                         "smithy.api#jsonName": "resources"
                     }
                 },

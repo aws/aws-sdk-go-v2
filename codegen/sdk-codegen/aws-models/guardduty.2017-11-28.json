@@ -255,6 +255,13 @@
                         "smithy.api#documentation": "<p>Information about the PORT_PROBE action described in this finding.</p>",
                         "smithy.api#jsonName": "portProbeAction"
                     }
+                },
+                "KubernetesApiCallAction": {
+                    "target": "com.amazonaws.guardduty#KubernetesApiCallAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the Kubernetes API call action described in this finding.</p>",
+                        "smithy.api#jsonName": "kubernetesApiCallAction"
+                    }
                 }
             },
             "traits": {
@@ -267,7 +274,7 @@
                 "AdminAccountId": {
                     "target": "com.amazonaws.guardduty#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID for the account.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID for the account.</p>",
                         "smithy.api#jsonName": "adminAccountId"
                     }
                 },
@@ -371,43 +378,56 @@
                 "Api": {
                     "target": "com.amazonaws.guardduty#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS API name.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services API name.</p>",
                         "smithy.api#jsonName": "api"
                     }
                 },
                 "CallerType": {
                     "target": "com.amazonaws.guardduty#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS API caller type.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services API caller type.</p>",
                         "smithy.api#jsonName": "callerType"
                     }
                 },
                 "DomainDetails": {
                     "target": "com.amazonaws.guardduty#DomainDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>The domain information for the AWS API call.</p>",
+                        "smithy.api#documentation": "<p>The domain information for the Amazon Web Services API call.</p>",
                         "smithy.api#jsonName": "domainDetails"
                     }
                 },
                 "ErrorCode": {
                     "target": "com.amazonaws.guardduty#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The error code of the failed AWS API action.</p>",
+                        "smithy.api#documentation": "<p>The error code of the failed Amazon Web Services API action.</p>",
                         "smithy.api#jsonName": "errorCode"
+                    }
+                },
+                "UserAgent": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#jsonName": "userAgent"
                     }
                 },
                 "RemoteIpDetails": {
                     "target": "com.amazonaws.guardduty#RemoteIpDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>The remote IP information of the connection that initiated the AWS API call.</p>",
+                        "smithy.api#documentation": "<p>The remote IP information of the connection that initiated the Amazon Web Services API call.</p>",
                         "smithy.api#jsonName": "remoteIpDetails"
                     }
                 },
                 "ServiceName": {
                     "target": "com.amazonaws.guardduty#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS service name whose API was invoked.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services service name whose API was invoked.</p>",
                         "smithy.api#jsonName": "serviceName"
+                    }
+                },
+                "RemoteAccountDetails": {
+                    "target": "com.amazonaws.guardduty#RemoteAccountDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the Amazon Web Services account that made the API call. This field appears if the call was made from outside your account.</p>",
+                        "smithy.api#jsonName": "remoteAccountDetails"
                     }
                 }
             },
@@ -667,6 +687,69 @@
                 "smithy.api#documentation": "<p>Contains information about the condition.</p>"
             }
         },
+        "com.amazonaws.guardduty#Container": {
+            "type": "structure",
+            "members": {
+                "ContainerRuntime": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The container runtime (such as, Docker or containerd) used to run the container.</p>",
+                        "smithy.api#jsonName": "containerRuntime"
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Container ID.</p>",
+                        "smithy.api#jsonName": "id"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Container name.</p>",
+                        "smithy.api#jsonName": "name"
+                    }
+                },
+                "Image": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Container image.</p>",
+                        "smithy.api#jsonName": "image"
+                    }
+                },
+                "ImagePrefix": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Part of the image name before the last slash. For example, imagePrefix for public.ecr.aws/amazonlinux/amazonlinux:latest would be public.ecr.aws/amazonlinux. If the image name is relative and does not have a slash, this field is empty.</p>",
+                        "smithy.api#jsonName": "imagePrefix"
+                    }
+                },
+                "VolumeMounts": {
+                    "target": "com.amazonaws.guardduty#VolumeMounts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Container volume mounts.</p>",
+                        "smithy.api#jsonName": "volumeMounts"
+                    }
+                },
+                "SecurityContext": {
+                    "target": "com.amazonaws.guardduty#SecurityContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Container security context.</p>",
+                        "smithy.api#jsonName": "securityContext"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details of a container.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#Containers": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#Container"
+            }
+        },
         "com.amazonaws.guardduty#CountBySeverity": {
             "type": "map",
             "key": {
@@ -846,7 +929,7 @@
                 "FindingCriteria": {
                     "target": "com.amazonaws.guardduty#FindingCriteria",
                     "traits": {
-                        "smithy.api#documentation": "<p>Represents the criteria to be used in the filter for querying findings.</p>\n         <p>You can only use the following attributes to query findings:</p>\n         <ul>\n            <li>\n               <p>accountId</p>\n            </li>\n            <li>\n               <p>region</p>\n            </li>\n            <li>\n               <p>confidence</p>\n            </li>\n            <li>\n               <p>id</p>\n            </li>\n            <li>\n               <p>resource.accessKeyDetails.accessKeyId</p>\n            </li>\n            <li>\n               <p>resource.accessKeyDetails.principalId</p>\n            </li>\n            <li>\n               <p>resource.accessKeyDetails.userName</p>\n            </li>\n            <li>\n               <p>resource.accessKeyDetails.userType</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.iamInstanceProfile.id</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.imageId</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.instanceId</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.outpostArn</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.ipv6Addresses</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.publicDnsName</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.publicIp</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.securityGroups.groupId</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.securityGroups.groupName</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.subnetId</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.vpcId</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.tags.key</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.tags.value</p>\n            </li>\n            <li>\n               <p>resource.resourceType</p>\n            </li>\n            <li>\n               <p>service.action.actionType</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.api</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.callerType</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.errorCode</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.remoteIpDetails.city.cityName</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.remoteIpDetails.country.countryName</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.remoteIpDetails.ipAddressV4</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.remoteIpDetails.organization.asn</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.serviceName</p>\n            </li>\n            <li>\n               <p>service.action.dnsRequestAction.domain</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.blocked</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.connectionDirection</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.localPortDetails.port</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.protocol</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.localIpDetails.ipAddressV4</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.remoteIpDetails.city.cityName</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.remoteIpDetails.country.countryName</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.remoteIpDetails.ipAddressV4</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.remoteIpDetails.organization.asn</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.remotePortDetails.port</p>\n            </li>\n            <li>\n               <p>service.additionalInfo.threatListName</p>\n            </li>\n            <li>\n               <p>service.archived</p>\n               <p>When this attribute is set to TRUE, only archived findings are listed. When it's set\n          to FALSE, only unarchived findings are listed. When this attribute is not set, all\n          existing findings are listed.</p>\n            </li>\n            <li>\n               <p>service.resourceRole</p>\n            </li>\n            <li>\n               <p>severity</p>\n            </li>\n            <li>\n               <p>type</p>\n            </li>\n            <li>\n               <p>updatedAt</p>\n               <p>Type: ISO 8601 string format: YYYY-MM-DDTHH:MM:SS.SSSZ or YYYY-MM-DDTHH:MM:SSZ\n          depending on whether the value contains milliseconds.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Represents the criteria to be used in the filter for querying findings.</p>\n         <p>You can only use the following attributes to query findings:</p>\n         <ul>\n            <li>\n               <p>accountId</p>\n            </li>\n            <li>\n               <p>region</p>\n            </li>\n            <li>\n               <p>confidence</p>\n            </li>\n            <li>\n               <p>id</p>\n            </li>\n            <li>\n               <p>resource.accessKeyDetails.accessKeyId</p>\n            </li>\n            <li>\n               <p>resource.accessKeyDetails.principalId</p>\n            </li>\n            <li>\n               <p>resource.accessKeyDetails.userName</p>\n            </li>\n            <li>\n               <p>resource.accessKeyDetails.userType</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.iamInstanceProfile.id</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.imageId</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.instanceId</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.outpostArn</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.ipv6Addresses</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.publicDnsName</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.publicIp</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.securityGroups.groupId</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.securityGroups.groupName</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.subnetId</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.vpcId</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.tags.key</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.tags.value</p>\n            </li>\n            <li>\n               <p>resource.resourceType</p>\n            </li>\n            <li>\n               <p>service.action.actionType</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.api</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.callerType</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.errorCode</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.remoteIpDetails.city.cityName</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.remoteIpDetails.country.countryName</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.remoteIpDetails.ipAddressV4</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.remoteIpDetails.organization.asn</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.serviceName</p>\n            </li>\n            <li>\n               <p>service.action.dnsRequestAction.domain</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.blocked</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.connectionDirection</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.localPortDetails.port</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.protocol</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.localIpDetails.ipAddressV4</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.remoteIpDetails.city.cityName</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.remoteIpDetails.country.countryName</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.remoteIpDetails.ipAddressV4</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.remoteIpDetails.organization.asn</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.remotePortDetails.port</p>\n            </li>\n            <li>\n               <p>service.additionalInfo.threatListName</p>\n            </li>\n            <li>\n               <p>resource.s3BucketDetails.publicAccess.effectivePermissions</p>\n            </li>\n            <li>\n               <p>resource.s3BucketDetails.name</p>\n            </li>\n            <li>\n               <p>resource.s3BucketDetails.tags.key</p>\n            </li>\n            <li>\n               <p>resource.s3BucketDetails.tags.value</p>\n            </li>\n            <li>\n               <p>resource.s3BucketDetails.type</p>\n            </li>\n            <li>\n               <p>service.archived</p>\n               <p>When this attribute is set to TRUE, only archived findings are listed. When it's set\n          to FALSE, only unarchived findings are listed. When this attribute is not set, all\n          existing findings are listed.</p>\n            </li>\n            <li>\n               <p>service.resourceRole</p>\n            </li>\n            <li>\n               <p>severity</p>\n            </li>\n            <li>\n               <p>type</p>\n            </li>\n            <li>\n               <p>updatedAt</p>\n               <p>Type: ISO 8601 string format: YYYY-MM-DDTHH:MM:SS.SSSZ or YYYY-MM-DDTHH:MM:SSZ\n          depending on whether the value contains milliseconds.</p>\n            </li>\n         </ul>",
                         "smithy.api#jsonName": "findingCriteria",
                         "smithy.api#required": {}
                     }
@@ -898,7 +981,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new IPSet, which is called a trusted IP list in the console user interface. An\n      IPSet is a list of IP addresses that are trusted for secure communication with AWS\n      infrastructure and applications. GuardDuty doesn't generate findings for IP addresses that are\n      included in IPSets. Only users from the administrator account can use this operation.</p>",
+                "smithy.api#documentation": "<p>Creates a new IPSet, which is called a trusted IP list in the console user interface. An\n      IPSet is a list of IP addresses that are trusted for secure communication with Amazon Web Services\n      infrastructure and applications. GuardDuty doesn't generate findings for IP addresses that are\n      included in IPSets. Only users from the administrator account can use this operation.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/detector/{DetectorId}/ipset",
@@ -937,7 +1020,7 @@
                 "Location": {
                     "target": "com.amazonaws.guardduty#Location",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URI of the file that contains the IPSet. For example:\n      https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.</p>",
+                        "smithy.api#documentation": "<p>The URI of the file that contains the IPSet. </p>",
                         "smithy.api#jsonName": "location",
                         "smithy.api#required": {}
                     }
@@ -997,7 +1080,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates member accounts of the current AWS account by specifying a list of AWS account\n      IDs. This step is a prerequisite for managing the associated member accounts either by\n      invitation or through an organization.</p>\n         <p>When using <code>Create Members</code> as an organizations delegated administrator this\n      action will enable GuardDuty in the added member accounts, with the exception of the\n      organization delegated administrator account, which must enable GuardDuty prior to being added as a\n      member.</p>\n         <p>If you are adding accounts by invitation use this action after GuardDuty has been enabled\n      in potential member accounts and before using <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html\">\n               <code>Invite\n        Members</code>\n            </a>.</p>",
+                "smithy.api#documentation": "<p>Creates member accounts of the current Amazon Web Services account by specifying a list of Amazon Web Services account\n      IDs. This step is a prerequisite for managing the associated member accounts either by\n      invitation or through an organization.</p>\n         <p>When using <code>Create Members</code> as an organizations delegated administrator this\n      action will enable GuardDuty in the added member accounts, with the exception of the\n      organization delegated administrator account, which must enable GuardDuty prior to being added as a\n      member.</p>\n         <p>If you are adding accounts by invitation use this action after GuardDuty has been enabled\n      in potential member accounts and before using <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html\">\n               <code>Invite\n        Members</code>\n            </a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/detector/{DetectorId}/member",
@@ -1222,7 +1305,7 @@
                 "Location": {
                     "target": "com.amazonaws.guardduty#Location",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URI of the file that contains the ThreatIntelSet. For example:\n      https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.</p>",
+                        "smithy.api#documentation": "<p>The URI of the file that contains the ThreatIntelSet. </p>",
                         "smithy.api#jsonName": "location",
                         "smithy.api#required": {}
                     }
@@ -1309,6 +1392,10 @@
                     {
                         "value": "S3_LOGS",
                         "name": "S3_LOGS"
+                    },
+                    {
+                        "value": "KUBERNETES_AUDIT_LOGS",
+                        "name": "KUBERNETES_AUDIT_LOGS"
                     }
                 ]
             }
@@ -1321,6 +1408,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Describes whether S3 data event logs are enabled as a data source.</p>",
                         "smithy.api#jsonName": "s3Logs"
+                    }
+                },
+                "Kubernetes": {
+                    "target": "com.amazonaws.guardduty#KubernetesConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes whether any Kubernetes logs are enabled as data sources.</p>",
+                        "smithy.api#jsonName": "kubernetes"
                     }
                 }
             },
@@ -1361,6 +1455,13 @@
                         "smithy.api#documentation": "<p>An object that contains information on the status of S3 Data event logs as a data\n      source.</p>",
                         "smithy.api#jsonName": "s3Logs",
                         "smithy.api#required": {}
+                    }
+                },
+                "Kubernetes": {
+                    "target": "com.amazonaws.guardduty#KubernetesConfigurationResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains information on the status of all Kubernetes data sources.</p>",
+                        "smithy.api#jsonName": "kubernetes"
                     }
                 }
             },
@@ -1410,7 +1511,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Declines invitations sent to the current member account by AWS accounts specified by their\n      account IDs.</p>",
+                "smithy.api#documentation": "<p>Declines invitations sent to the current member account by Amazon Web Services accounts specified by their\n      account IDs.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/invitation/decline",
@@ -1424,7 +1525,7 @@
                 "AccountIds": {
                     "target": "com.amazonaws.guardduty#AccountIds",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of account IDs of the AWS accounts that sent invitations to the current member\n      account that you want to decline invitations from.</p>",
+                        "smithy.api#documentation": "<p>A list of account IDs of the Amazon Web Services accounts that sent invitations to the current member\n      account that you want to decline invitations from.</p>",
                         "smithy.api#jsonName": "accountIds",
                         "smithy.api#required": {}
                     }
@@ -1630,7 +1731,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes invitations sent to the current member account by AWS accounts specified by their\n      account IDs.</p>",
+                "smithy.api#documentation": "<p>Deletes invitations sent to the current member account by Amazon Web Services accounts specified by their\n      account IDs.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/invitation/delete",
@@ -1644,7 +1745,7 @@
                 "AccountIds": {
                     "target": "com.amazonaws.guardduty#AccountIds",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of account IDs of the AWS accounts that sent invitations to the current member\n      account that you want to delete invitations from.</p>",
+                        "smithy.api#documentation": "<p>A list of account IDs of the Amazon Web Services accounts that sent invitations to the current member\n      account that you want to delete invitations from.</p>",
                         "smithy.api#jsonName": "accountIds",
                         "smithy.api#required": {}
                     }
@@ -2026,7 +2127,7 @@
                 "DestinationArn": {
                     "target": "com.amazonaws.guardduty#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the resource to publish to.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the resource to publish to.</p>\n         <p>To specify an S3 bucket folder use the following format:\n        <code>arn:aws:s3:::DOC-EXAMPLE-BUCKET/myFolder/</code>\n         </p>",
                         "smithy.api#jsonName": "destinationArn"
                     }
                 },
@@ -2120,7 +2221,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disables an AWS account within the Organization as the GuardDuty delegated\n      administrator.</p>",
+                "smithy.api#documentation": "<p>Disables an Amazon Web Services account within the Organization as the GuardDuty delegated\n      administrator.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/admin/disable",
@@ -2134,7 +2235,7 @@
                 "AdminAccountId": {
                     "target": "com.amazonaws.guardduty#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Account ID for the organizations account to be disabled as a GuardDuty delegated\n      administrator.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services Account ID for the organizations account to be disabled as a GuardDuty delegated\n      administrator.</p>",
                         "smithy.api#jsonName": "adminAccountId",
                         "smithy.api#required": {}
                     }
@@ -2269,7 +2370,7 @@
                 "Domain": {
                     "target": "com.amazonaws.guardduty#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The domain information for the AWS API call.</p>",
+                        "smithy.api#documentation": "<p>The domain information for the Amazon Web Services API call.</p>",
                         "smithy.api#jsonName": "domain"
                     }
                 }
@@ -2280,6 +2381,56 @@
         },
         "com.amazonaws.guardduty#Double": {
             "type": "double"
+        },
+        "com.amazonaws.guardduty#EksClusterDetails": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>EKS cluster name.</p>",
+                        "smithy.api#jsonName": "name"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>EKS cluster ARN.</p>",
+                        "smithy.api#jsonName": "arn"
+                    }
+                },
+                "VpcId": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC ID to which the EKS cluster is attached.</p>",
+                        "smithy.api#jsonName": "vpcId"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The EKS cluster status.</p>",
+                        "smithy.api#jsonName": "status"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.guardduty#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The EKS cluster tags.</p>",
+                        "smithy.api#jsonName": "tags"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.guardduty#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the EKS cluster was created.</p>",
+                        "smithy.api#jsonName": "createdAt"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about the EKS cluster involved in a Kubernetes finding.</p>"
+            }
         },
         "com.amazonaws.guardduty#Email": {
             "type": "string",
@@ -2307,7 +2458,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Enables an AWS account within the organization as the GuardDuty delegated\n      administrator.</p>",
+                "smithy.api#documentation": "<p>Enables an Amazon Web Services account within the organization as the GuardDuty delegated\n      administrator.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/admin/enable",
@@ -2321,7 +2472,7 @@
                 "AdminAccountId": {
                     "target": "com.amazonaws.guardduty#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Account ID for the organization account to be enabled as a GuardDuty delegated\n      administrator.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services Account ID for the organization account to be enabled as a GuardDuty delegated\n      administrator.</p>",
                         "smithy.api#jsonName": "adminAccountId",
                         "smithy.api#required": {}
                     }
@@ -3114,7 +3265,7 @@
                 "Location": {
                     "target": "com.amazonaws.guardduty#Location",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URI of the file that contains the IPSet. For example:\n      https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.</p>",
+                        "smithy.api#documentation": "<p>The URI of the file that contains the IPSet.</p>",
                         "smithy.api#jsonName": "location",
                         "smithy.api#required": {}
                     }
@@ -3435,7 +3586,7 @@
                 "Location": {
                     "target": "com.amazonaws.guardduty#Location",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URI of the file that contains the ThreatIntelSet. For example:\n      https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.</p>",
+                        "smithy.api#documentation": "<p>The URI of the file that contains the ThreatIntelSet. </p>",
                         "smithy.api#jsonName": "location",
                         "smithy.api#required": {}
                     }
@@ -3557,8 +3708,29 @@
                 }
             }
         },
+        "com.amazonaws.guardduty#Groups": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#String"
+            }
+        },
         "com.amazonaws.guardduty#GuardDutyAPIService": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "GuardDuty",
+                    "arnNamespace": "guardduty",
+                    "cloudFormationName": "GuardDuty",
+                    "cloudTrailEventSource": "guardduty.amazonaws.com",
+                    "endpointPrefix": "guardduty"
+                },
+                "aws.auth#sigv4": {
+                    "name": "guardduty"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>Amazon GuardDuty is a continuous security monitoring service that analyzes and processes\n      the following data sources: VPC Flow Logs, Amazon Web Services CloudTrail event logs, and DNS logs. It uses\n      threat intelligence feeds (such as lists of malicious IPs and domains) and machine learning to\n      identify unexpected, potentially unauthorized, and malicious activity within your Amazon Web Services\n      environment. This can include issues like escalations of privileges, uses of exposed\n      credentials, or communication with malicious IPs, URLs, or domains. For example, GuardDuty can\n      detect compromised EC2 instances that serve malware or mine bitcoin. </p>\n         <p>GuardDuty also monitors Amazon Web Services account access behavior for signs of compromise. Some examples\n      of this are unauthorized infrastructure deployments such as EC2 instances deployed in a Region\n      that has never been used, or unusual API calls like a password policy change to reduce\n      password strength. </p>\n         <p>GuardDuty informs you of the status of your Amazon Web Services environment by producing security findings\n      that you can view in the GuardDuty console or through Amazon CloudWatch events. For more\n      information, see the <i>\n               <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/what-is-guardduty.html\">Amazon\n          GuardDuty User Guide</a>\n            </i>. </p>",
+                "smithy.api#title": "Amazon GuardDuty"
+            },
             "version": "2017-11-28",
             "operations": [
                 {
@@ -3735,27 +3907,27 @@
                 {
                     "target": "com.amazonaws.guardduty#UpdateThreatIntelSet"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "GuardDuty",
-                    "arnNamespace": "guardduty",
-                    "cloudFormationName": "GuardDuty",
-                    "cloudTrailEventSource": "guardduty.amazonaws.com",
-                    "endpointPrefix": "guardduty"
-                },
-                "aws.auth#sigv4": {
-                    "name": "guardduty"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Amazon GuardDuty is a continuous security monitoring service that analyzes and processes\n      the following data sources: VPC Flow Logs, AWS CloudTrail event logs, and DNS logs. It uses\n      threat intelligence feeds (such as lists of malicious IPs and domains) and machine learning to\n      identify unexpected, potentially unauthorized, and malicious activity within your AWS\n      environment. This can include issues like escalations of privileges, uses of exposed\n      credentials, or communication with malicious IPs, URLs, or domains. For example, GuardDuty can\n      detect compromised EC2 instances that serve malware or mine bitcoin. </p>\n         <p>GuardDuty also monitors AWS account access behavior for signs of compromise. Some examples\n      of this are unauthorized infrastructure deployments such as EC2 instances deployed in a Region\n      that has never been used, or unusual API calls like a password policy change to reduce\n      password strength. </p>\n         <p>GuardDuty informs you of the status of your AWS environment by producing security findings\n      that you can view in the GuardDuty console or through Amazon CloudWatch events. For more\n      information, see the <i>\n               <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/what-is-guardduty.html\">Amazon\n          GuardDuty User Guide</a>\n            </i>. </p>",
-                "smithy.api#title": "Amazon GuardDuty"
-            }
+            ]
         },
         "com.amazonaws.guardduty#GuardDutyArn": {
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^arn:[A-Za-z_.-]{1,20}:guardduty:[A-Za-z0-9_/.-]{0,63}:\\d+:detector/[A-Za-z0-9_/.-]{32,264}$"
+            }
+        },
+        "com.amazonaws.guardduty#HostPath": {
+            "type": "structure",
+            "members": {
+                "Path": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Path of the file or directory on the host that the volume maps to.</p>",
+                        "smithy.api#jsonName": "path"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a pre-existing file or directory on the host machine that the volume maps to.</p>"
             }
         },
         "com.amazonaws.guardduty#IamInstanceProfile": {
@@ -3835,7 +4007,7 @@
                 "OutpostArn": {
                     "target": "com.amazonaws.guardduty#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Outpost. Only applicable to AWS Outposts\n      instances.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Outpost. Only applicable to Amazon Web Services Outposts\n      instances.</p>",
                         "smithy.api#jsonName": "outpostArn"
                     }
                 },
@@ -3971,7 +4143,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Invites other AWS accounts (created as members of the current AWS account by\n      CreateMembers) to enable GuardDuty, and allow the current AWS account to view and manage these\n      accounts' findings on their behalf as the GuardDuty administrator account.</p>",
+                "smithy.api#documentation": "<p>Invites other Amazon Web Services accounts (created as members of the current Amazon Web Services account by\n      CreateMembers) to enable GuardDuty, and allow the current Amazon Web Services account to view and manage these\n      accounts' findings on their behalf as the GuardDuty administrator account.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/detector/{DetectorId}/member/invite",
@@ -4118,6 +4290,234 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.guardduty#String"
+            }
+        },
+        "com.amazonaws.guardduty#KubernetesApiCallAction": {
+            "type": "structure",
+            "members": {
+                "RequestUri": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Kubernetes API request URI.</p>",
+                        "smithy.api#jsonName": "requestUri"
+                    }
+                },
+                "Verb": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Kubernetes API request HTTP verb.</p>",
+                        "smithy.api#jsonName": "verb"
+                    }
+                },
+                "SourceIps": {
+                    "target": "com.amazonaws.guardduty#SourceIps",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP of the  Kubernetes API caller and the IPs of any proxies or load balancers between the caller and the API endpoint.</p>",
+                        "smithy.api#jsonName": "sourceIps"
+                    }
+                },
+                "UserAgent": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user agent of the caller of the Kubernetes API.</p>",
+                        "smithy.api#jsonName": "userAgent"
+                    }
+                },
+                "RemoteIpDetails": {
+                    "target": "com.amazonaws.guardduty#RemoteIpDetails",
+                    "traits": {
+                        "smithy.api#jsonName": "remoteIpDetails"
+                    }
+                },
+                "StatusCode": {
+                    "target": "com.amazonaws.guardduty#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resulting HTTP response code of the Kubernetes API call action.</p>",
+                        "smithy.api#jsonName": "statusCode"
+                    }
+                },
+                "Parameters": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Parameters related to the Kubernetes API call action.</p>",
+                        "smithy.api#jsonName": "parameters"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the Kubernetes API call action described in this finding.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#KubernetesAuditLogsConfiguration": {
+            "type": "structure",
+            "members": {
+                "Enable": {
+                    "target": "com.amazonaws.guardduty#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of Kubernetes audit logs as a data source.</p>",
+                        "smithy.api#jsonName": "enable",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes whether Kubernetes audit logs are enabled as a data source.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#KubernetesAuditLogsConfigurationResult": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.guardduty#DataSourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that describes whether Kubernetes audit logs are enabled as a data source.</p>",
+                        "smithy.api#jsonName": "status",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes whether Kubernetes audit logs are enabled as a data source.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#KubernetesConfiguration": {
+            "type": "structure",
+            "members": {
+                "AuditLogs": {
+                    "target": "com.amazonaws.guardduty#KubernetesAuditLogsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of Kubernetes audit logs as a data source.</p>",
+                        "smithy.api#jsonName": "auditLogs",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes whether any Kubernetes data sources are enabled.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#KubernetesConfigurationResult": {
+            "type": "structure",
+            "members": {
+                "AuditLogs": {
+                    "target": "com.amazonaws.guardduty#KubernetesAuditLogsConfigurationResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes whether Kubernetes audit logs are enabled as a data source.</p>",
+                        "smithy.api#jsonName": "auditLogs",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes whether any Kubernetes logs will be enabled as a data source.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#KubernetesDetails": {
+            "type": "structure",
+            "members": {
+                "KubernetesUserDetails": {
+                    "target": "com.amazonaws.guardduty#KubernetesUserDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the Kubernetes user involved in a Kubernetes finding.</p>",
+                        "smithy.api#jsonName": "kubernetesUserDetails"
+                    }
+                },
+                "KubernetesWorkloadDetails": {
+                    "target": "com.amazonaws.guardduty#KubernetesWorkloadDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the Kubernetes workload involved in a Kubernetes finding.</p>",
+                        "smithy.api#jsonName": "kubernetesWorkloadDetails"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about Kubernetes resources such as a Kubernetes user or workload resource involved in a Kubernetes finding.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#KubernetesUserDetails": {
+            "type": "structure",
+            "members": {
+                "Username": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The username of the user who called the Kubernetes API.</p>",
+                        "smithy.api#jsonName": "username"
+                    }
+                },
+                "Uid": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user ID of the user who called the Kubernetes API.</p>",
+                        "smithy.api#jsonName": "uid"
+                    }
+                },
+                "Groups": {
+                    "target": "com.amazonaws.guardduty#Groups",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The groups that include the user who called the Kubernetes API.</p>",
+                        "smithy.api#jsonName": "groups"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about the Kubernetes user involved in a Kubernetes finding.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#KubernetesWorkloadDetails": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Kubernetes workload name.</p>",
+                        "smithy.api#jsonName": "name"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Kubernetes workload type (e.g. Pod, Deployment, etc.).</p>",
+                        "smithy.api#jsonName": "type"
+                    }
+                },
+                "Uid": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Kubernetes workload ID.</p>",
+                        "smithy.api#jsonName": "uid"
+                    }
+                },
+                "Namespace": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Kubernetes namespace that the workload is part of.</p>",
+                        "smithy.api#jsonName": "namespace"
+                    }
+                },
+                "HostNetwork": {
+                    "target": "com.amazonaws.guardduty#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the hostNetwork flag is enabled for the pods included in the workload.</p>",
+                        "smithy.api#jsonName": "hostNetwork"
+                    }
+                },
+                "Containers": {
+                    "target": "com.amazonaws.guardduty#Containers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Containers running as part of the Kubernetes workload.</p>",
+                        "smithy.api#jsonName": "containers"
+                    }
+                },
+                "Volumes": {
+                    "target": "com.amazonaws.guardduty#Volumes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Volumes used by the Kubernetes workload.</p>",
+                        "smithy.api#jsonName": "volumes"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about the Kubernetes workload involved in a Kubernetes finding.</p>"
             }
         },
         "com.amazonaws.guardduty#ListDetectors": {
@@ -4316,7 +4716,7 @@
                 "FindingCriteria": {
                     "target": "com.amazonaws.guardduty#FindingCriteria",
                     "traits": {
-                        "smithy.api#documentation": "<p>Represents the criteria used for querying findings. Valid values include:</p>\n         <ul>\n            <li>\n               <p>JSON field name</p>\n            </li>\n            <li>\n               <p>accountId</p>\n            </li>\n            <li>\n               <p>region</p>\n            </li>\n            <li>\n               <p>confidence</p>\n            </li>\n            <li>\n               <p>id</p>\n            </li>\n            <li>\n               <p>resource.accessKeyDetails.accessKeyId</p>\n            </li>\n            <li>\n               <p>resource.accessKeyDetails.principalId</p>\n            </li>\n            <li>\n               <p>resource.accessKeyDetails.userName</p>\n            </li>\n            <li>\n               <p>resource.accessKeyDetails.userType</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.iamInstanceProfile.id</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.imageId</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.instanceId</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.ipv6Addresses</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.publicDnsName</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.publicIp</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.securityGroups.groupId</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.securityGroups.groupName</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.subnetId</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.vpcId</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.tags.key</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.tags.value</p>\n            </li>\n            <li>\n               <p>resource.resourceType</p>\n            </li>\n            <li>\n               <p>service.action.actionType</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.api</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.callerType</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.remoteIpDetails.city.cityName</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.remoteIpDetails.country.countryName</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.remoteIpDetails.ipAddressV4</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.remoteIpDetails.organization.asn</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.serviceName</p>\n            </li>\n            <li>\n               <p>service.action.dnsRequestAction.domain</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.blocked</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.connectionDirection</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.localPortDetails.port</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.protocol</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.remoteIpDetails.city.cityName</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.remoteIpDetails.country.countryName</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.remoteIpDetails.ipAddressV4</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.remoteIpDetails.organization.asn</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.remotePortDetails.port</p>\n            </li>\n            <li>\n               <p>service.additionalInfo.threatListName</p>\n            </li>\n            <li>\n               <p>service.archived</p>\n               <p>When this attribute is set to 'true', only archived findings are listed. When it's set\n          to 'false', only unarchived findings are listed. When this attribute is not set, all\n          existing findings are listed.</p>\n            </li>\n            <li>\n               <p>service.resourceRole</p>\n            </li>\n            <li>\n               <p>severity</p>\n            </li>\n            <li>\n               <p>type</p>\n            </li>\n            <li>\n               <p>updatedAt</p>\n               <p>Type: Timestamp in Unix Epoch millisecond format: 1486685375000</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Represents the criteria used for querying findings. Valid values include:</p>\n         <ul>\n            <li>\n               <p>JSON field name</p>\n            </li>\n            <li>\n               <p>accountId</p>\n            </li>\n            <li>\n               <p>region</p>\n            </li>\n            <li>\n               <p>confidence</p>\n            </li>\n            <li>\n               <p>id</p>\n            </li>\n            <li>\n               <p>resource.accessKeyDetails.accessKeyId</p>\n            </li>\n            <li>\n               <p>resource.accessKeyDetails.principalId</p>\n            </li>\n            <li>\n               <p>resource.accessKeyDetails.userName</p>\n            </li>\n            <li>\n               <p>resource.accessKeyDetails.userType</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.iamInstanceProfile.id</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.imageId</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.instanceId</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.ipv6Addresses</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.publicDnsName</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.publicIp</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.securityGroups.groupId</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.securityGroups.groupName</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.subnetId</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.networkInterfaces.vpcId</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.tags.key</p>\n            </li>\n            <li>\n               <p>resource.instanceDetails.tags.value</p>\n            </li>\n            <li>\n               <p>resource.resourceType</p>\n            </li>\n            <li>\n               <p>service.action.actionType</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.api</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.callerType</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.remoteIpDetails.city.cityName</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.remoteIpDetails.country.countryName</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.remoteIpDetails.ipAddressV4</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.remoteIpDetails.organization.asn</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg</p>\n            </li>\n            <li>\n               <p>service.action.awsApiCallAction.serviceName</p>\n            </li>\n            <li>\n               <p>service.action.dnsRequestAction.domain</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.blocked</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.connectionDirection</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.localPortDetails.port</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.protocol</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.remoteIpDetails.country.countryName</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.remoteIpDetails.ipAddressV4</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.remoteIpDetails.organization.asn</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg</p>\n            </li>\n            <li>\n               <p>service.action.networkConnectionAction.remotePortDetails.port</p>\n            </li>\n            <li>\n               <p>service.additionalInfo.threatListName</p>\n            </li>\n            <li>\n               <p>service.archived</p>\n               <p>When this attribute is set to 'true', only archived findings are listed. When it's set\n          to 'false', only unarchived findings are listed. When this attribute is not set, all\n          existing findings are listed.</p>\n            </li>\n            <li>\n               <p>service.resourceRole</p>\n            </li>\n            <li>\n               <p>severity</p>\n            </li>\n            <li>\n               <p>type</p>\n            </li>\n            <li>\n               <p>updatedAt</p>\n               <p>Type: Timestamp in Unix Epoch millisecond format: 1486685375000</p>\n            </li>\n         </ul>",
                         "smithy.api#jsonName": "findingCriteria"
                     }
                 },
@@ -4460,7 +4860,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all GuardDuty membership invitations that were sent to the current AWS\n      account.</p>",
+                "smithy.api#documentation": "<p>Lists all GuardDuty membership invitations that were sent to the current Amazon Web Services\n      account.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/invitation",
@@ -4687,7 +5087,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of publishing destinations associated with the specified\n        <code>dectectorId</code>.</p>",
+                "smithy.api#documentation": "<p>Returns a list of publishing destinations associated with the specified\n        <code>detectorId</code>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/detector/{DetectorId}/publishingDestination",
@@ -5307,6 +5707,13 @@
                         "smithy.api#documentation": "<p>Describes whether S3 data event logs are enabled for new members of the\n      organization.</p>",
                         "smithy.api#jsonName": "s3Logs"
                     }
+                },
+                "Kubernetes": {
+                    "target": "com.amazonaws.guardduty#OrganizationKubernetesConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the configuration of Kubernetes data sources for new members of the organization.</p>",
+                        "smithy.api#jsonName": "kubernetes"
+                    }
                 }
             },
             "traits": {
@@ -5323,10 +5730,81 @@
                         "smithy.api#jsonName": "s3Logs",
                         "smithy.api#required": {}
                     }
+                },
+                "Kubernetes": {
+                    "target": "com.amazonaws.guardduty#OrganizationKubernetesConfigurationResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the configuration of Kubernetes data sources.</p>",
+                        "smithy.api#jsonName": "kubernetes"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>An object that contains information on which data sources are automatically enabled for\n      new members within the organization.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#OrganizationKubernetesAuditLogsConfiguration": {
+            "type": "structure",
+            "members": {
+                "AutoEnable": {
+                    "target": "com.amazonaws.guardduty#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that contains information on whether Kubernetes audit logs should be enabled\n      automatically as a data source for the organization.</p>",
+                        "smithy.api#jsonName": "autoEnable",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Organization-wide Kubernetes audit logs configuration.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#OrganizationKubernetesAuditLogsConfigurationResult": {
+            "type": "structure",
+            "members": {
+                "AutoEnable": {
+                    "target": "com.amazonaws.guardduty#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether Kubernetes audit logs data source should be auto-enabled for new members joining the organization.</p>",
+                        "smithy.api#jsonName": "autoEnable",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The current configuration of Kubernetes audit logs as a data source for the organization.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#OrganizationKubernetesConfiguration": {
+            "type": "structure",
+            "members": {
+                "AuditLogs": {
+                    "target": "com.amazonaws.guardduty#OrganizationKubernetesAuditLogsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether Kubernetes audit logs data source should be auto-enabled for new members joining the organization.</p>",
+                        "smithy.api#jsonName": "auditLogs",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Organization-wide Kubernetes data sources configurations.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#OrganizationKubernetesConfigurationResult": {
+            "type": "structure",
+            "members": {
+                "AuditLogs": {
+                    "target": "com.amazonaws.guardduty#OrganizationKubernetesAuditLogsConfigurationResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current configuration of Kubernetes audit logs as a data source for the organization.</p>",
+                        "smithy.api#jsonName": "auditLogs",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The current configuration of all Kubernetes data sources for the organization.</p>"
             }
         },
         "com.amazonaws.guardduty#OrganizationS3LogsConfiguration": {
@@ -5560,6 +6038,28 @@
                 }
             }
         },
+        "com.amazonaws.guardduty#RemoteAccountDetails": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID of the remote API caller.</p>",
+                        "smithy.api#jsonName": "accountId"
+                    }
+                },
+                "Affiliated": {
+                    "target": "com.amazonaws.guardduty#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details on whether the Amazon Web Services account of the remote API caller is related to your GuardDuty environment.  If this value is <code>True</code> the API caller is affiliated to your account in some way. If it is <code>False</code> the API caller is from outside your environment.</p>",
+                        "smithy.api#jsonName": "affiliated"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about the remote Amazon Web Services account that made the API call.</p>"
+            }
+        },
         "com.amazonaws.guardduty#RemoteIpDetails": {
             "type": "structure",
             "members": {
@@ -5649,16 +6149,30 @@
                         "smithy.api#jsonName": "instanceDetails"
                     }
                 },
+                "EksClusterDetails": {
+                    "target": "com.amazonaws.guardduty#EksClusterDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the EKS cluster involved in a Kubernetes finding.</p>",
+                        "smithy.api#jsonName": "eksClusterDetails"
+                    }
+                },
+                "KubernetesDetails": {
+                    "target": "com.amazonaws.guardduty#KubernetesDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the Kubernetes user and workload involved in a Kubernetes finding.</p>",
+                        "smithy.api#jsonName": "kubernetesDetails"
+                    }
+                },
                 "ResourceType": {
                     "target": "com.amazonaws.guardduty#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of AWS resource.</p>",
+                        "smithy.api#documentation": "<p>The type of Amazon Web Services resource.</p>",
                         "smithy.api#jsonName": "resourceType"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about the AWS resource associated with the activity that prompted\n      GuardDuty to generate a finding.</p>"
+                "smithy.api#documentation": "<p>Contains information about the Amazon Web Services resource associated with the activity that prompted\n      GuardDuty to generate a finding.</p>"
             }
         },
         "com.amazonaws.guardduty#ResourceList": {
@@ -5769,6 +6283,21 @@
                 "smithy.api#documentation": "<p>Describes whether S3 data event logs will be enabled as a data source.</p>"
             }
         },
+        "com.amazonaws.guardduty#SecurityContext": {
+            "type": "structure",
+            "members": {
+                "Privileged": {
+                    "target": "com.amazonaws.guardduty#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the container is privileged.</p>",
+                        "smithy.api#jsonName": "privileged"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Container security context.</p>"
+            }
+        },
         "com.amazonaws.guardduty#SecurityGroup": {
             "type": "structure",
             "members": {
@@ -5859,7 +6388,7 @@
                 "ServiceName": {
                     "target": "com.amazonaws.guardduty#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the AWS service (GuardDuty) that generated a finding.</p>",
+                        "smithy.api#documentation": "<p>The name of the Amazon Web Services service (GuardDuty) that generated a finding.</p>",
                         "smithy.api#jsonName": "serviceName"
                     }
                 },
@@ -5895,6 +6424,12 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains information about the criteria used for sorting findings.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#SourceIps": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#String"
             }
         },
         "com.amazonaws.guardduty#StartMonitoringMembers": {
@@ -6347,7 +6882,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.guardduty#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID.</p>",
                         "smithy.api#jsonName": "accountId",
                         "smithy.api#required": {}
                     }
@@ -6704,7 +7239,7 @@
                 "Location": {
                     "target": "com.amazonaws.guardduty#Location",
                     "traits": {
-                        "smithy.api#documentation": "<p>The updated URI of the file that contains the IPSet. For example:\n      https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.</p>",
+                        "smithy.api#documentation": "<p>The updated URI of the file that contains the IPSet. </p>",
                         "smithy.api#jsonName": "location"
                     }
                 },
@@ -7070,7 +7605,7 @@
                 "Resource": {
                     "target": "com.amazonaws.guardduty#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS resource that generated usage.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services resource that generated usage.</p>",
                         "smithy.api#jsonName": "resource"
                     }
                 },
@@ -7083,7 +7618,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information on the sum of usage based on an AWS resource.</p>"
+                "smithy.api#documentation": "<p>Contains information on the sum of usage based on an Amazon Web Services resource.</p>"
             }
         },
         "com.amazonaws.guardduty#UsageResourceResultList": {
@@ -7149,6 +7684,62 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains the result of GuardDuty usage. If a UsageStatisticType is provided the result for\n      other types will be null. </p>"
+            }
+        },
+        "com.amazonaws.guardduty#Volume": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Volume name.</p>",
+                        "smithy.api#jsonName": "name"
+                    }
+                },
+                "HostPath": {
+                    "target": "com.amazonaws.guardduty#HostPath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents a pre-existing file or directory on the host machine that the volume maps to.</p>",
+                        "smithy.api#jsonName": "hostPath"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Volume used by the Kubernetes workload.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#VolumeMount": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Volume mount name.</p>",
+                        "smithy.api#jsonName": "name"
+                    }
+                },
+                "MountPath": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Volume mount path.</p>",
+                        "smithy.api#jsonName": "mountPath"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Container volume mount.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#VolumeMounts": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#VolumeMount"
+            }
+        },
+        "com.amazonaws.guardduty#Volumes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#Volume"
             }
         }
     }

@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new Resource Set.
+// Creates a resource set. A resource set is a set of resources of one type that
+// span multiple cells. You can associate a resource set with a readiness check to
+// monitor the resources for failover readiness.
 func (c *Client) CreateResourceSet(ctx context.Context, params *CreateResourceSetInput, optFns ...func(*Options)) (*CreateResourceSetOutput, error) {
 	if params == nil {
 		params = &CreateResourceSetInput{}
@@ -27,25 +29,33 @@ func (c *Client) CreateResourceSet(ctx context.Context, params *CreateResourceSe
 	return out, nil
 }
 
-// The ResourceSet to create
 type CreateResourceSetInput struct {
 
-	// The name of the ResourceSet to create
+	// The name of the resource set to create.
 	//
 	// This member is required.
 	ResourceSetName *string
 
-	// AWS Resource type of the resources in the ResourceSet
+	// The resource type of the resources in the resource set. Enter one of the
+	// following values for resource type: AWS::ApiGateway::Stage,
+	// AWS::ApiGatewayV2::Stage, AWS::AutoScaling::AutoScalingGroup,
+	// AWS::CloudWatch::Alarm, AWS::EC2::CustomerGateway, AWS::DynamoDB::Table,
+	// AWS::EC2::Volume, AWS::ElasticLoadBalancing::LoadBalancer,
+	// AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Lambda::Function,
+	// AWS::MSK::Cluster, AWS::RDS::DBCluster, AWS::Route53::HealthCheck,
+	// AWS::SQS::Queue, AWS::SNS::Topic, AWS::SNS::Subscription, AWS::EC2::VPC,
+	// AWS::EC2::VPNConnection, AWS::EC2::VPNGateway,
+	// AWS::Route53RecoveryReadiness::DNSTargetResource
 	//
 	// This member is required.
 	ResourceSetType *string
 
-	// A list of Resource objects
+	// A list of resource objects in the resource set.
 	//
 	// This member is required.
 	Resources []types.Resource
 
-	// A collection of tags associated with a resource
+	// A tag to associate with the parameters for a resource set.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -53,19 +63,28 @@ type CreateResourceSetInput struct {
 
 type CreateResourceSetOutput struct {
 
-	// The arn for the ResourceSet
+	// The Amazon Resource Name (ARN) for the resource set.
 	ResourceSetArn *string
 
-	// The name of the ResourceSet
+	// The name of the resource set.
 	ResourceSetName *string
 
-	// AWS Resource Type of the resources in the ResourceSet
+	// The resource type of the resources in the resource set. Enter one of the
+	// following values for resource type: AWS::ApiGateway::Stage,
+	// AWS::ApiGatewayV2::Stage, AWS::AutoScaling::AutoScalingGroup,
+	// AWS::CloudWatch::Alarm, AWS::EC2::CustomerGateway, AWS::DynamoDB::Table,
+	// AWS::EC2::Volume, AWS::ElasticLoadBalancing::LoadBalancer,
+	// AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Lambda::Function,
+	// AWS::MSK::Cluster, AWS::RDS::DBCluster, AWS::Route53::HealthCheck,
+	// AWS::SQS::Queue, AWS::SNS::Topic, AWS::SNS::Subscription, AWS::EC2::VPC,
+	// AWS::EC2::VPNConnection, AWS::EC2::VPNGateway,
+	// AWS::Route53RecoveryReadiness::DNSTargetResource
 	ResourceSetType *string
 
-	// A list of Resource objects
+	// A list of resource objects.
 	Resources []types.Resource
 
-	// A collection of tags associated with a resource
+	// A collection of tags associated with a resource.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

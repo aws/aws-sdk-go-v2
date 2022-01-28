@@ -178,6 +178,9 @@
                     "target": "com.amazonaws.ram#ListPermissions"
                 },
                 {
+                    "target": "com.amazonaws.ram#ListPermissionVersions"
+                },
+                {
                     "target": "com.amazonaws.ram#ListPrincipals"
                 },
                 {
@@ -330,7 +333,7 @@
                 "permissionVersion": {
                     "target": "com.amazonaws.ram#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the version of the RAM permission to associate with the resource share. If you don't\n            specify this parameter, the operation uses the version designated as the default.</p>"
+                        "smithy.api#documentation": "<p>Specifies the version of the RAM permission to associate with the resource share. If you don't\n            specify this parameter, the operation uses the version designated as the default. You\n            can use the <a>ListPermissionVersions</a> operation to discover the available\n            versions of a permission.</p>"
                     }
                 }
             }
@@ -1540,6 +1543,92 @@
                     "target": "com.amazonaws.ram#ResourceList",
                     "traits": {
                         "smithy.api#documentation": "<p>An array of objects that contain the information about the resources included the\n            specified resource share.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.ram#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If present, this value indicates that more output is available than \n             is included in the current response. Use this value in the <code>NextToken</code> \n             request parameter in a subsequent call to the operation to get the next part of the \n             output. You should repeat this until the <code>NextToken</code> response element comes \n             back as <code>null</code>. This indicates that this is the last page of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ram#ListPermissionVersions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ram#ListPermissionVersionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ram#ListPermissionVersionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ram#InvalidNextTokenException"
+                },
+                {
+                    "target": "com.amazonaws.ram#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ram#MalformedArnException"
+                },
+                {
+                    "target": "com.amazonaws.ram#OperationNotPermittedException"
+                },
+                {
+                    "target": "com.amazonaws.ram#ServerInternalException"
+                },
+                {
+                    "target": "com.amazonaws.ram#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.ram#UnknownResourceException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the available versions of the specified RAM permission.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/listpermissionversions",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.ram#ListPermissionVersionsRequest": {
+            "type": "structure",
+            "members": {
+                "permissionArn": {
+                    "target": "com.amazonaws.ram#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resoure Name (ARN)</a> of the RAM permission whose versions you want to list. You\n            can use the <code>permissionVersion</code> parameter on the <a>AssociateResourceSharePermission</a> operation to specify a non-default\n            version to attach.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.ram#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies that you want to receive the next page of results. Valid \n             only if you received a <code>NextToken</code> response in the previous request. If you\n             did, it indicates that more output is available. Set this parameter to the value \n             provided by the previous call's <code>NextToken</code> response to request the \n             next page of results.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.ram#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the total number of results that you want included on each page \n             of the response. If you do not include this parameter, it defaults to a value that is \n             specific to the operation. If additional items exist beyond the number you specify, the\n             <code>NextToken</code> response element is returned with a value (not null).\n             Include the specified value as the <code>NextToken</code> request parameter in the next \n             call to the operation to get the next part of the results. Note that the service might \n             return fewer results than the maximum even when there are more results available. You \n             should check <code>NextToken</code> after every operation to ensure that you receive all\n             of the results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ram#ListPermissionVersionsResponse": {
+            "type": "structure",
+            "members": {
+                "permissions": {
+                    "target": "com.amazonaws.ram#ResourceSharePermissionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that contain details for each of the available versions.</p>"
                     }
                 },
                 "nextToken": {

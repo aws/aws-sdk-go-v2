@@ -44,32 +44,29 @@ type AdministrativeAction struct {
 	// system's storage capacity has been completed successfully, a
 	// STORAGE_OPTIMIZATION task starts.
 	//
-	// * For Windows, storage optimization is the
-	// process of migrating the file system data to the new, larger disks.
+	// * For Windows and ONTAP, storage optimization
+	// is the process of migrating the file system data to newer larger disks.
 	//
 	// * For
 	// Lustre, storage optimization consists of rebalancing the data across the
 	// existing and newly added file servers.
 	//
-	// * For OpenZFS, storage optimization
-	// consists of migrating data from the older smaller disks to the newer larger
-	// disks.
-	//
-	// You can track the storage-optimization progress using the
-	// ProgressPercent property. When STORAGE_OPTIMIZATION has been completed
-	// successfully, the parent FILE_SYSTEM_UPDATE action status changes to COMPLETED.
-	// For more information, see Managing storage capacity
+	// You can track the storage-optimization
+	// progress using the ProgressPercent property. When STORAGE_OPTIMIZATION has been
+	// completed successfully, the parent FILE_SYSTEM_UPDATE action status changes to
+	// COMPLETED. For more information, see Managing storage capacity
 	// (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html)
 	// in the Amazon FSx for Windows File Server User Guide, Managing storage and
 	// throughput capacity
 	// (https://docs.aws.amazon.com/fsx/latest/LustreGuide/managing-storage-capacity.html)
-	// in the Amazon FSx for Lustre User Guide, and Managing storage capacity
-	// (https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/managing-storage-capacity.html)
-	// in the Amazon FSx for OpenZFS User Guide.
+	// in the Amazon FSx for Lustre User Guide, and Managing storage capacity and
+	// provisioned IOPS
+	// (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-storage-capacity.html)
+	// in the Amazon FSx for NetApp ONTAP User Guide.
 	//
-	// * FILE_SYSTEM_ALIAS_ASSOCIATION - A
-	// file system update to associate a new Domain Name System (DNS) alias with the
-	// file system. For more information, see  AssociateFileSystemAliases
+	// * FILE_SYSTEM_ALIAS_ASSOCIATION
+	// - A file system update to associate a new Domain Name System (DNS) alias with
+	// the file system. For more information, see  AssociateFileSystemAliases
 	// (https://docs.aws.amazon.com/fsx/latest/APIReference/API_AssociateFileSystemAliases.html).
 	//
 	// *
@@ -481,7 +478,7 @@ type CreateFileSystemLustreConfiguration struct {
 	// temporary storage and shorter-term processing of data. The SCRATCH_2 deployment
 	// type provides in-transit encryption of data and higher burst throughput capacity
 	// than SCRATCH_1. Choose PERSISTENT_1 for longer-term storage and for
-	// throughput-focused workloads that aren’t latency-sensitive. a. PERSISTENT_1
+	// throughput-focused workloads that aren’t latency-sensitive. PERSISTENT_1
 	// supports encryption of data in transit, and is available in all Amazon Web
 	// Services Regions in which FSx for Lustre is available. Choose PERSISTENT_2 for
 	// longer-term storage and for latency-sensitive workloads that require the highest
@@ -593,7 +590,7 @@ type CreateFileSystemOntapConfiguration struct {
 	DeploymentType OntapDeploymentType
 
 	// Sets the throughput capacity for the file system that you're creating. Valid
-	// values are 512, 1024, and 2048 MBps.
+	// values are 128, 256, 512, 1024, and 2048 MBps.
 	//
 	// This member is required.
 	ThroughputCapacity *int32
@@ -866,7 +863,21 @@ type CreateOntapVolumeConfiguration struct {
 	// Describes the data tiering policy for an ONTAP volume. When enabled, Amazon FSx
 	// for ONTAP's intelligent tiering automatically transitions a volume's data
 	// between the file system's primary storage and capacity pool storage based on
-	// your access patterns.
+	// your access patterns. Valid tiering policies are the following:
+	//
+	// * SNAPSHOT_ONLY
+	// - (Default value) moves cold snapshots to the capacity pool storage tier.
+	//
+	// *
+	// AUTO - moves cold user data and snapshots to the capacity pool storage tier
+	// based on your access patterns.
+	//
+	// * ALL - moves all user data blocks in both the
+	// active file system and Snapshot copies to the storage pool tier.
+	//
+	// * NONE - keeps
+	// a volume's data in the primary storage tier, preventing it from being moved to
+	// the capacity pool tier.
 	TieringPolicy *TieringPolicy
 
 	noSmithyDocumentSerde
@@ -1460,7 +1471,7 @@ type DeleteVolumeOntapResponse struct {
 // A value that specifies whether to delete all child volumes and snapshots.
 type DeleteVolumeOpenZFSConfiguration struct {
 
-	// To delete the volume's children and snapshots, use the string
+	// To delete the volume's child volumes, snapshots, and clones, use the string
 	// DELETE_CHILD_VOLUMES_AND_SNAPSHOTS.
 	Options []DeleteOpenZFSVolumeOption
 
@@ -1510,7 +1521,8 @@ type FileSystem struct {
 	// OPENZFS.
 	FileSystemType FileSystemType
 
-	// The Lustre version of the Amazon FSx for Lustrefile system, either 2.10 or 2.12.
+	// The Lustre version of the Amazon FSx for Lustre file system, either 2.10 or
+	// 2.12.
 	FileSystemTypeVersion *string
 
 	// The ID of the Key Management Service (KMS) key used to encrypt the file system's
@@ -2572,7 +2584,21 @@ type Tag struct {
 // Describes the data tiering policy for an ONTAP volume. When enabled, Amazon FSx
 // for ONTAP's intelligent tiering automatically transitions a volume's data
 // between the file system's primary storage and capacity pool storage based on
-// your access patterns.
+// your access patterns. Valid tiering policies are the following:
+//
+// * SNAPSHOT_ONLY
+// - (Default value) moves cold snapshots to the capacity pool storage tier.
+//
+// *
+// AUTO - moves cold user data and snapshots to the capacity pool storage tier
+// based on your access patterns.
+//
+// * ALL - moves all user data blocks in both the
+// active file system and Snapshot copies to the storage pool tier.
+//
+// * NONE - keeps
+// a volume's data in the primary storage tier, preventing it from being moved to
+// the capacity pool tier.
 type TieringPolicy struct {
 
 	// Specifies the number of days that user data in a volume must remain inactive
@@ -2686,6 +2712,13 @@ type UpdateFileSystemOntapConfiguration struct {
 	// specifies 5 AM daily.
 	DailyAutomaticBackupStartTime *string
 
+	// The SSD IOPS (input/output operations per second) configuration for an Amazon
+	// FSx for NetApp ONTAP file system. The default is 3 IOPS per GB of storage
+	// capacity, but you can provision additional IOPS per GB of storage. The
+	// configuration consists of an IOPS mode (AUTOMATIC or USER_PROVISIONED), and in
+	// the case of USER_PROVISIONED IOPS, the total number of SSD IOPS provisioned.
+	DiskIopsConfiguration *DiskIopsConfiguration
+
 	// The ONTAP administrative password for the fsxadmin user.
 	FsxAdminPassword *string
 
@@ -2738,7 +2771,7 @@ type UpdateFileSystemOpenZFSConfiguration struct {
 	DiskIopsConfiguration *DiskIopsConfiguration
 
 	// The throughput of an Amazon FSx file system, measured in megabytes per second
-	// (MBps), in 2 to the nth increments, between 2^3 (8) and 2^11 (2048).
+	// (MBps), in 2 to the nth increments, between 2^3 (8) and 2^12 (4096).
 	ThroughputCapacity *int32
 
 	// A recurring weekly time, in the format D:HH:MM. D is the day of the week, for

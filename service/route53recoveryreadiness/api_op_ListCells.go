@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a collection of Cells.
+// Lists the cells for an account.
 func (c *Client) ListCells(ctx context.Context, params *ListCellsInput, optFns ...func(*Options)) (*ListCellsOutput, error) {
 	if params == nil {
 		params = &ListCellsInput{}
@@ -30,10 +30,10 @@ func (c *Client) ListCells(ctx context.Context, params *ListCellsInput, optFns .
 
 type ListCellsInput struct {
 
-	// Upper bound on number of records to return.
+	// The number of objects that you want to return with this call.
 	MaxResults int32
 
-	// A token used to resume pagination from the end of a previous request.
+	// The token that identifies which batch of results you want to see.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -41,10 +41,10 @@ type ListCellsInput struct {
 
 type ListCellsOutput struct {
 
-	// A list of Cells
+	// A list of cells.
 	Cells []types.CellOutput
 
-	// A token that can be used to resume pagination from the end of the collection.
+	// The token that identifies which batch of results you want to see.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -122,7 +122,7 @@ var _ ListCellsAPIClient = (*Client)(nil)
 
 // ListCellsPaginatorOptions is the paginator options for ListCells
 type ListCellsPaginatorOptions struct {
-	// Upper bound on number of records to return.
+	// The number of objects that you want to return with this call.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

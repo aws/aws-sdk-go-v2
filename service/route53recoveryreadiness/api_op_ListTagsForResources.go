@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of the tags assigned to the specified resource.
+// Lists the tags for a resource.
 func (c *Client) ListTagsForResources(ctx context.Context, params *ListTagsForResourcesInput, optFns ...func(*Options)) (*ListTagsForResourcesOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourcesInput{}
@@ -28,8 +28,7 @@ func (c *Client) ListTagsForResources(ctx context.Context, params *ListTagsForRe
 
 type ListTagsForResourcesInput struct {
 
-	// The Amazon Resource Name (ARN) for the resource. You can get this from the
-	// response to any request to the resource.
+	// The Amazon Resource Name (ARN) for a resource.
 	//
 	// This member is required.
 	ResourceArn *string
@@ -39,7 +38,7 @@ type ListTagsForResourcesInput struct {
 
 type ListTagsForResourcesOutput struct {
 
-	// A collection of tags associated with a resource
+	//
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

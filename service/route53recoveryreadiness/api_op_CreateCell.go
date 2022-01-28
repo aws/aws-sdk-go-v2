@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new Cell.
+// Creates a cell in an account.
 func (c *Client) CreateCell(ctx context.Context, params *CreateCellInput, optFns ...func(*Options)) (*CreateCellOutput, error) {
 	if params == nil {
 		params = &CreateCellInput{}
@@ -26,19 +26,19 @@ func (c *Client) CreateCell(ctx context.Context, params *CreateCellInput, optFns
 	return out, nil
 }
 
-// The Cell to create
 type CreateCellInput struct {
 
-	// The name of the Cell to create
+	// The name of the cell to create.
 	//
 	// This member is required.
 	CellName *string
 
-	// A list of Cell arns contained within this Cell (for use in nested Cells, e.g.
-	// regions within which AZs)
+	// A list of cell Amazon Resource Names (ARNs) contained within this cell, for use
+	// in nested cells. For example, Availability Zones within specific Amazon Web
+	// Services Regions.
 	Cells []string
 
-	// A collection of tags associated with a resource
+	// A collection of tags associated with a resource.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -46,19 +46,20 @@ type CreateCellInput struct {
 
 type CreateCellOutput struct {
 
-	// The arn for the Cell
+	// The Amazon Resource Name (ARN) for the cell.
 	CellArn *string
 
-	// The name of the Cell
+	// The name of the cell.
 	CellName *string
 
-	// A list of Cell arns
+	// A list of cell ARNs.
 	Cells []string
 
-	// A list of Cell ARNs and/or RecoveryGroup ARNs
+	// The readiness scope for the cell, which can be a cell Amazon Resource Name (ARN)
+	// or a recovery group ARN. This is a list but currently can have only one element.
 	ParentReadinessScopes []string
 
-	// A collection of tags associated with a resource
+	// Tags on the resources.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

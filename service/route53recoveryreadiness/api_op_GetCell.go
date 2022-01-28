@@ -10,7 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about a Cell.
+// Gets information about a cell including cell name, cell Amazon Resource Name
+// (ARN), ARNs of nested cells for this cell, and a list of those cell ARNs with
+// their associated recovery group ARNs.
 func (c *Client) GetCell(ctx context.Context, params *GetCellInput, optFns ...func(*Options)) (*GetCellOutput, error) {
 	if params == nil {
 		params = &GetCellInput{}
@@ -28,7 +30,7 @@ func (c *Client) GetCell(ctx context.Context, params *GetCellInput, optFns ...fu
 
 type GetCellInput struct {
 
-	// The Cell to get
+	// The name of the cell.
 	//
 	// This member is required.
 	CellName *string
@@ -38,19 +40,20 @@ type GetCellInput struct {
 
 type GetCellOutput struct {
 
-	// The arn for the Cell
+	// The Amazon Resource Name (ARN) for the cell.
 	CellArn *string
 
-	// The name of the Cell
+	// The name of the cell.
 	CellName *string
 
-	// A list of Cell arns
+	// A list of cell ARNs.
 	Cells []string
 
-	// A list of Cell ARNs and/or RecoveryGroup ARNs
+	// The readiness scope for the cell, which can be a cell Amazon Resource Name (ARN)
+	// or a recovery group ARN. This is a list but currently can have only one element.
 	ParentReadinessScopes []string
 
-	// A collection of tags associated with a resource
+	// Tags on the resources.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

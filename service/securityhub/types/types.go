@@ -7422,6 +7422,9 @@ type AwsSecurityFinding struct {
 	// A data type that describes the remediation options for a finding.
 	Remediation *Remediation
 
+	// Indicates whether the finding is a sample finding.
+	Sample bool
+
 	// A finding's severity.
 	Severity *Severity
 
@@ -7738,6 +7741,9 @@ type AwsSecurityFindingFilters struct {
 
 	// Specifies the type of the resource that details are provided for.
 	ResourceType []StringFilter
+
+	// Indicates whether or not sample findings are included in the filter results.
+	Sample []BooleanFilter
 
 	// The label of a finding's severity.
 	SeverityLabel []StringFilter
@@ -8203,6 +8209,15 @@ type BatchUpdateFindingsUnprocessedFinding struct {
 	//
 	// This member is required.
 	FindingIdentifier *AwsSecurityFindingIdentifier
+
+	noSmithyDocumentSerde
+}
+
+// Boolean filter for querying findings.
+type BooleanFilter struct {
+
+	// The value of the boolean.
+	Value bool
 
 	noSmithyDocumentSerde
 }

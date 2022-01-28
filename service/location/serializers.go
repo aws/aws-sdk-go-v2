@@ -731,6 +731,130 @@ func awsRestjson1_serializeOpDocumentCalculateRouteInput(v *CalculateRouteInput,
 	return nil
 }
 
+type awsRestjson1_serializeOpCalculateRouteMatrix struct {
+}
+
+func (*awsRestjson1_serializeOpCalculateRouteMatrix) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCalculateRouteMatrix) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CalculateRouteMatrixInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/routes/v0/calculators/{CalculatorName}/calculate/route-matrix")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsCalculateRouteMatrixInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCalculateRouteMatrixInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCalculateRouteMatrixInput(v *CalculateRouteMatrixInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.CalculatorName == nil || len(*v.CalculatorName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member CalculatorName must not be empty")}
+	}
+	if v.CalculatorName != nil {
+		if err := encoder.SetURI("CalculatorName").String(*v.CalculatorName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCalculateRouteMatrixInput(v *CalculateRouteMatrixInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CarModeOptions != nil {
+		ok := object.Key("CarModeOptions")
+		if err := awsRestjson1_serializeDocumentCalculateRouteCarModeOptions(v.CarModeOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DepartNow != nil {
+		ok := object.Key("DepartNow")
+		ok.Boolean(*v.DepartNow)
+	}
+
+	if v.DeparturePositions != nil {
+		ok := object.Key("DeparturePositions")
+		if err := awsRestjson1_serializeDocumentPositionList(v.DeparturePositions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DepartureTime != nil {
+		ok := object.Key("DepartureTime")
+		ok.String(smithytime.FormatDateTime(*v.DepartureTime))
+	}
+
+	if v.DestinationPositions != nil {
+		ok := object.Key("DestinationPositions")
+		if err := awsRestjson1_serializeDocumentPositionList(v.DestinationPositions, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.DistanceUnit) > 0 {
+		ok := object.Key("DistanceUnit")
+		ok.String(string(v.DistanceUnit))
+	}
+
+	if len(v.TravelMode) > 0 {
+		ok := object.Key("TravelMode")
+		ok.String(string(v.TravelMode))
+	}
+
+	if v.TruckModeOptions != nil {
+		ok := object.Key("TruckModeOptions")
+		if err := awsRestjson1_serializeDocumentCalculateRouteTruckModeOptions(v.TruckModeOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpCreateGeofenceCollection struct {
 }
 
@@ -4360,6 +4484,22 @@ func awsRestjson1_serializeDocumentPositionalAccuracy(v *types.PositionalAccurac
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPositionList(v [][]float64, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentPosition(v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

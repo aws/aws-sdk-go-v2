@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new Recovery Group.
+// Creates a recovery group in an account. A recovery group corresponds to an
+// application and includes a list of the cells that make up the application.
 func (c *Client) CreateRecoveryGroup(ctx context.Context, params *CreateRecoveryGroupInput, optFns ...func(*Options)) (*CreateRecoveryGroupOutput, error) {
 	if params == nil {
 		params = &CreateRecoveryGroupInput{}
@@ -26,18 +27,17 @@ func (c *Client) CreateRecoveryGroup(ctx context.Context, params *CreateRecovery
 	return out, nil
 }
 
-// The RecoveryGroup to create
 type CreateRecoveryGroupInput struct {
 
-	// The name of the RecoveryGroup to create
+	// The name of the recovery group to create.
 	//
 	// This member is required.
 	RecoveryGroupName *string
 
-	// A list of Cell arns
+	// A list of the cell Amazon Resource Names (ARNs) in the recovery group.
 	Cells []string
 
-	// A collection of tags associated with a resource
+	// A collection of tags associated with a resource.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -45,16 +45,16 @@ type CreateRecoveryGroupInput struct {
 
 type CreateRecoveryGroupOutput struct {
 
-	// A list of Cell arns
+	// A list of a cell's Amazon Resource Names (ARNs).
 	Cells []string
 
-	// The arn for the RecoveryGroup
+	// The Amazon Resource Name (ARN) for the recovery group.
 	RecoveryGroupArn *string
 
-	// The name of the RecoveryGroup
+	// The name of the recovery group.
 	RecoveryGroupName *string
 
-	// A collection of tags associated with a resource
+	// The tags associated with the recovery group.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

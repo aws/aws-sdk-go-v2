@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a collection of Recovery Groups.
+// Lists the recovery groups in an account.
 func (c *Client) ListRecoveryGroups(ctx context.Context, params *ListRecoveryGroupsInput, optFns ...func(*Options)) (*ListRecoveryGroupsOutput, error) {
 	if params == nil {
 		params = &ListRecoveryGroupsInput{}
@@ -30,10 +30,10 @@ func (c *Client) ListRecoveryGroups(ctx context.Context, params *ListRecoveryGro
 
 type ListRecoveryGroupsInput struct {
 
-	// Upper bound on number of records to return.
+	// The number of objects that you want to return with this call.
 	MaxResults int32
 
-	// A token used to resume pagination from the end of a previous request.
+	// The token that identifies which batch of results you want to see.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -41,10 +41,10 @@ type ListRecoveryGroupsInput struct {
 
 type ListRecoveryGroupsOutput struct {
 
-	// A token that can be used to resume pagination from the end of the collection.
+	// The token that identifies which batch of results you want to see.
 	NextToken *string
 
-	// A list of RecoveryGroups
+	// A list of recovery groups.
 	RecoveryGroups []types.RecoveryGroupOutput
 
 	// Metadata pertaining to the operation's result.
@@ -124,7 +124,7 @@ var _ ListRecoveryGroupsAPIClient = (*Client)(nil)
 // ListRecoveryGroupsPaginatorOptions is the paginator options for
 // ListRecoveryGroups
 type ListRecoveryGroupsPaginatorOptions struct {
-	// Upper bound on number of records to return.
+	// The number of objects that you want to return with this call.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

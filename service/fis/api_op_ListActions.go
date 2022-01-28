@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the available AWS FIS actions.
+// Lists the available FIS actions.
 func (c *Client) ListActions(ctx context.Context, params *ListActionsInput, optFns ...func(*Options)) (*ListActionsOutput, error) {
 	if params == nil {
 		params = &ListActionsInput{}

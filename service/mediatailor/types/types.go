@@ -772,6 +772,14 @@ type SecretsManagerAccessTokenConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+type SegmentDeliveryConfiguration struct {
+	BaseUrl *string
+
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
 // Slate VOD source configuration.
 type SlateSource struct {
 
@@ -814,6 +822,8 @@ type SourceLocation struct {
 
 	// The timestamp that indicates when the source location was last modified.
 	LastModifiedTime *time.Time
+
+	SegmentDeliveryConfigurations []SegmentDeliveryConfiguration
 
 	// The tags assigned to the source location.
 	Tags map[string]string

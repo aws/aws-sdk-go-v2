@@ -53,25 +53,15 @@ type CreateGeofenceCollectionInput struct {
 	// a key ID, key ARN, alias name, or alias ARN.
 	KmsKeyId *string
 
-	// Optionally specifies the pricing plan for the geofence collection. Defaults to
-	// RequestBasedUsage. For additional details and restrictions on each pricing plan
-	// option, see the Amazon Location Service pricing page
-	// (https://aws.amazon.com/location/pricing/).
+	// No longer used. If included, the only allowed value is RequestBasedUsage.
+	//
+	// Deprecated: Deprecated. If included, the only allowed value is
+	// RequestBasedUsage.
 	PricingPlan types.PricingPlan
 
-	// Specifies the data provider for the geofence collection.
+	// This parameter is no longer used.
 	//
-	// * Required value for
-	// the following pricing plans: MobileAssetTracking | MobileAssetManagement
-	//
-	// For
-	// more information about Data Providers
-	// (https://aws.amazon.com/location/data-providers/), and Pricing plans
-	// (https://aws.amazon.com/location/pricing/), see the Amazon Location Service
-	// product page. Amazon Location Service only uses PricingPlanDataSource to
-	// calculate billing for your geofence collection. Your data won't be shared with
-	// the data provider, and will remain in your AWS account or Region unless you move
-	// it. Valid Values: Esri | Here
+	// Deprecated: Deprecated. No longer allowed.
 	PricingPlanDataSource *string
 
 	// Applies one or more tags to the geofence collection. A tag is a key-value pair

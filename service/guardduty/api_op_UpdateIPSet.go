@@ -42,8 +42,7 @@ type UpdateIPSetInput struct {
 	// The updated Boolean value that specifies whether the IPSet is active or not.
 	Activate bool
 
-	// The updated URI of the file that contains the IPSet. For example:
-	// https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
+	// The updated URI of the file that contains the IPSet.
 	Location *string
 
 	// The unique ID that specifies the IPSet that you want to update.

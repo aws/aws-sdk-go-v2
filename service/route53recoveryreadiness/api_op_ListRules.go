@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a collection of rules that are applied as part of Readiness Checks.
+// Lists all readiness rules, or lists the readiness rules for a specific resource
+// type.
 func (c *Client) ListRules(ctx context.Context, params *ListRulesInput, optFns ...func(*Options)) (*ListRulesOutput, error) {
 	if params == nil {
 		params = &ListRulesInput{}
@@ -30,13 +31,13 @@ func (c *Client) ListRules(ctx context.Context, params *ListRulesInput, optFns .
 
 type ListRulesInput struct {
 
-	// Upper bound on number of records to return.
+	// The number of objects that you want to return with this call.
 	MaxResults int32
 
-	// A token used to resume pagination from the end of a previous request.
+	// The token that identifies which batch of results you want to see.
 	NextToken *string
 
-	// Filter parameter which specifies the rules to return given a resource type.
+	// The resource type that a readiness rule applies to.
 	ResourceType *string
 
 	noSmithyDocumentSerde
@@ -44,10 +45,10 @@ type ListRulesInput struct {
 
 type ListRulesOutput struct {
 
-	// A token that can be used to resume pagination from the end of the collection.
+	// The token that identifies which batch of results you want to see.
 	NextToken *string
 
-	// A list of rules
+	// A list of readiness rules for a specific resource type.
 	Rules []types.ListRulesOutput
 
 	// Metadata pertaining to the operation's result.
@@ -125,7 +126,7 @@ var _ ListRulesAPIClient = (*Client)(nil)
 
 // ListRulesPaginatorOptions is the paginator options for ListRules
 type ListRulesPaginatorOptions struct {
-	// Upper bound on number of records to return.
+	// The number of objects that you want to return with this call.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

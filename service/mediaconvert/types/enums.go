@@ -696,6 +696,24 @@ func (Av1AdaptiveQuantization) Values() []Av1AdaptiveQuantization {
 	}
 }
 
+type Av1BitDepth string
+
+// Enum values for Av1BitDepth
+const (
+	Av1BitDepthBit8  Av1BitDepth = "BIT_8"
+	Av1BitDepthBit10 Av1BitDepth = "BIT_10"
+)
+
+// Values returns all known values for Av1BitDepth. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (Av1BitDepth) Values() []Av1BitDepth {
+	return []Av1BitDepth{
+		"BIT_8",
+		"BIT_10",
+	}
+}
+
 type Av1FramerateControl string
 
 // Enum values for Av1FramerateControl
@@ -1674,6 +1692,24 @@ const (
 // ordering of this slice is not guaranteed to be stable across updates.
 func (CmfcScte35Source) Values() []CmfcScte35Source {
 	return []CmfcScte35Source{
+		"PASSTHROUGH",
+		"NONE",
+	}
+}
+
+type CmfcTimedMetadata string
+
+// Enum values for CmfcTimedMetadata
+const (
+	CmfcTimedMetadataPassthrough CmfcTimedMetadata = "PASSTHROUGH"
+	CmfcTimedMetadataNone        CmfcTimedMetadata = "NONE"
+)
+
+// Values returns all known values for CmfcTimedMetadata. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CmfcTimedMetadata) Values() []CmfcTimedMetadata {
+	return []CmfcTimedMetadata{
 		"PASSTHROUGH",
 		"NONE",
 	}
@@ -3536,6 +3572,7 @@ const (
 	H265AdaptiveQuantizationHigh   H265AdaptiveQuantization = "HIGH"
 	H265AdaptiveQuantizationHigher H265AdaptiveQuantization = "HIGHER"
 	H265AdaptiveQuantizationMax    H265AdaptiveQuantization = "MAX"
+	H265AdaptiveQuantizationAuto   H265AdaptiveQuantization = "AUTO"
 )
 
 // Values returns all known values for H265AdaptiveQuantization. Note that this can
@@ -3549,6 +3586,7 @@ func (H265AdaptiveQuantization) Values() []H265AdaptiveQuantization {
 		"HIGH",
 		"HIGHER",
 		"MAX",
+		"AUTO",
 	}
 }
 
@@ -4511,6 +4549,24 @@ func (HlsTimedMetadataId3Frame) Values() []HlsTimedMetadataId3Frame {
 	}
 }
 
+type ImscAccessibilitySubs string
+
+// Enum values for ImscAccessibilitySubs
+const (
+	ImscAccessibilitySubsDisabled ImscAccessibilitySubs = "DISABLED"
+	ImscAccessibilitySubsEnabled  ImscAccessibilitySubs = "ENABLED"
+)
+
+// Values returns all known values for ImscAccessibilitySubs. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ImscAccessibilitySubs) Values() []ImscAccessibilitySubs {
+	return []ImscAccessibilitySubs{
+		"DISABLED",
+		"ENABLED",
+	}
+}
+
 type ImscStylePassthrough string
 
 // Enum values for ImscStylePassthrough
@@ -4962,6 +5018,7 @@ const (
 	LanguageCodeOrj LanguageCode = "ORJ"
 	LanguageCodeQpc LanguageCode = "QPC"
 	LanguageCodeTng LanguageCode = "TNG"
+	LanguageCodeSrp LanguageCode = "SRP"
 )
 
 // Values returns all known values for LanguageCode. Note that this can be expanded
@@ -5160,6 +5217,7 @@ func (LanguageCode) Values() []LanguageCode {
 		"ORJ",
 		"QPC",
 		"TNG",
+		"SRP",
 	}
 }
 
@@ -5796,6 +5854,24 @@ const (
 // ordering of this slice is not guaranteed to be stable across updates.
 func (MpdScte35Source) Values() []MpdScte35Source {
 	return []MpdScte35Source{
+		"PASSTHROUGH",
+		"NONE",
+	}
+}
+
+type MpdTimedMetadata string
+
+// Enum values for MpdTimedMetadata
+const (
+	MpdTimedMetadataPassthrough MpdTimedMetadata = "PASSTHROUGH"
+	MpdTimedMetadataNone        MpdTimedMetadata = "NONE"
+)
+
+// Values returns all known values for MpdTimedMetadata. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MpdTimedMetadata) Values() []MpdTimedMetadata {
+	return []MpdTimedMetadata{
 		"PASSTHROUGH",
 		"NONE",
 	}
@@ -7523,6 +7599,24 @@ func (WavFormat) Values() []WavFormat {
 	return []WavFormat{
 		"RIFF",
 		"RF64",
+	}
+}
+
+type WebvttAccessibilitySubs string
+
+// Enum values for WebvttAccessibilitySubs
+const (
+	WebvttAccessibilitySubsDisabled WebvttAccessibilitySubs = "DISABLED"
+	WebvttAccessibilitySubsEnabled  WebvttAccessibilitySubs = "ENABLED"
+)
+
+// Values returns all known values for WebvttAccessibilitySubs. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (WebvttAccessibilitySubs) Values() []WebvttAccessibilitySubs {
+	return []WebvttAccessibilitySubs{
+		"DISABLED",
+		"ENABLED",
 	}
 }
 

@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an existing Cell.
+// Updates a cell to replace the list of nested cells with a new list of nested
+// cells.
 func (c *Client) UpdateCell(ctx context.Context, params *UpdateCellInput, optFns ...func(*Options)) (*UpdateCellOutput, error) {
 	if params == nil {
 		params = &UpdateCellInput{}
@@ -26,15 +27,15 @@ func (c *Client) UpdateCell(ctx context.Context, params *UpdateCellInput, optFns
 	return out, nil
 }
 
-// Parameters to update for the Cell
 type UpdateCellInput struct {
 
-	// The Cell to update
+	// The name of the cell.
 	//
 	// This member is required.
 	CellName *string
 
-	// A list of Cell arns, completely replaces previous list
+	// A list of cell Amazon Resource Names (ARNs), which completely replaces the
+	// previous list.
 	//
 	// This member is required.
 	Cells []string
@@ -44,19 +45,20 @@ type UpdateCellInput struct {
 
 type UpdateCellOutput struct {
 
-	// The arn for the Cell
+	// The Amazon Resource Name (ARN) for the cell.
 	CellArn *string
 
-	// The name of the Cell
+	// The name of the cell.
 	CellName *string
 
-	// A list of Cell arns
+	// A list of cell ARNs.
 	Cells []string
 
-	// A list of Cell ARNs and/or RecoveryGroup ARNs
+	// The readiness scope for the cell, which can be a cell Amazon Resource Name (ARN)
+	// or a recovery group ARN. This is a list but currently can have only one element.
 	ParentReadinessScopes []string
 
-	// A collection of tags associated with a resource
+	// Tags on the resources.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

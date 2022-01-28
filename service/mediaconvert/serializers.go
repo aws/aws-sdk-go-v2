@@ -3033,6 +3033,11 @@ func awsRestjson1_serializeDocumentAv1Settings(v *types.Av1Settings, value smith
 		ok.String(string(v.AdaptiveQuantization))
 	}
 
+	if len(v.BitDepth) > 0 {
+		ok := object.Key("bitDepth")
+		ok.String(string(v.BitDepth))
+	}
+
 	if len(v.FramerateControl) > 0 {
 		ok := object.Key("framerateControl")
 		ok.String(string(v.FramerateControl))
@@ -3855,6 +3860,11 @@ func awsRestjson1_serializeDocumentCmfcSettings(v *types.CmfcSettings, value smi
 	if len(v.Scte35Source) > 0 {
 		ok := object.Key("scte35Source")
 		ok.String(string(v.Scte35Source))
+	}
+
+	if len(v.TimedMetadata) > 0 {
+		ok := object.Key("timedMetadata")
+		ok.String(string(v.TimedMetadata))
 	}
 
 	return nil
@@ -6024,6 +6034,11 @@ func awsRestjson1_serializeDocumentImscDestinationSettings(v *types.ImscDestinat
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.Accessibility) > 0 {
+		ok := object.Key("accessibility")
+		ok.String(string(v.Accessibility))
+	}
+
 	if len(v.StylePassthrough) > 0 {
 		ok := object.Key("stylePassthrough")
 		ok.String(string(v.StylePassthrough))
@@ -6079,6 +6094,11 @@ func awsRestjson1_serializeDocumentInput(v *types.Input, value smithyjson.Value)
 	if len(v.DenoiseFilter) > 0 {
 		ok := object.Key("denoiseFilter")
 		ok.String(string(v.DenoiseFilter))
+	}
+
+	if v.DolbyVisionMetadataXml != nil {
+		ok := object.Key("dolbyVisionMetadataXml")
+		ok.String(*v.DolbyVisionMetadataXml)
 	}
 
 	if v.FileInput != nil {
@@ -6243,6 +6263,11 @@ func awsRestjson1_serializeDocumentInputTemplate(v *types.InputTemplate, value s
 	if len(v.DenoiseFilter) > 0 {
 		ok := object.Key("denoiseFilter")
 		ok.String(string(v.DenoiseFilter))
+	}
+
+	if v.DolbyVisionMetadataXml != nil {
+		ok := object.Key("dolbyVisionMetadataXml")
+		ok.String(*v.DolbyVisionMetadataXml)
 	}
 
 	if len(v.FilterEnable) > 0 {
@@ -7225,6 +7250,11 @@ func awsRestjson1_serializeDocumentMpdSettings(v *types.MpdSettings, value smith
 	if len(v.Scte35Source) > 0 {
 		ok := object.Key("scte35Source")
 		ok.String(string(v.Scte35Source))
+	}
+
+	if len(v.TimedMetadata) > 0 {
+		ok := object.Key("timedMetadata")
+		ok.String(string(v.TimedMetadata))
 	}
 
 	return nil
@@ -9011,6 +9041,11 @@ func awsRestjson1_serializeDocumentWavSettings(v *types.WavSettings, value smith
 func awsRestjson1_serializeDocumentWebvttDestinationSettings(v *types.WebvttDestinationSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.Accessibility) > 0 {
+		ok := object.Key("accessibility")
+		ok.String(string(v.Accessibility))
+	}
 
 	if len(v.StylePassthrough) > 0 {
 		ok := object.Key("stylePassthrough")

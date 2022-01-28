@@ -10,7 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create a new cross account readiness authorization.
+// Creates a cross-account readiness authorization. This lets you authorize another
+// account to work with Route 53 Application Recovery Controller, for example, to
+// check the readiness status of resources in a separate account.
 func (c *Client) CreateCrossAccountAuthorization(ctx context.Context, params *CreateCrossAccountAuthorizationInput, optFns ...func(*Options)) (*CreateCrossAccountAuthorizationOutput, error) {
 	if params == nil {
 		params = &CreateCrossAccountAuthorizationInput{}
@@ -26,10 +28,9 @@ func (c *Client) CreateCrossAccountAuthorization(ctx context.Context, params *Cr
 	return out, nil
 }
 
-// The cross account authorization
 type CreateCrossAccountAuthorizationInput struct {
 
-	// The cross account authorization
+	// The cross-account authorization.
 	//
 	// This member is required.
 	CrossAccountAuthorization *string
@@ -39,7 +40,7 @@ type CreateCrossAccountAuthorizationInput struct {
 
 type CreateCrossAccountAuthorizationOutput struct {
 
-	// The cross account authorization
+	// The cross-account authorization.
 	CrossAccountAuthorization *string
 
 	// Metadata pertaining to the operation's result.

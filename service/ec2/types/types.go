@@ -1405,6 +1405,22 @@ type ClientData struct {
 	noSmithyDocumentSerde
 }
 
+type ClientLoginBannerOptions struct {
+	BannerText *string
+
+	Enabled *bool
+
+	noSmithyDocumentSerde
+}
+
+type ClientLoginBannerResponseOptions struct {
+	BannerText *string
+
+	Enabled *bool
+
+	noSmithyDocumentSerde
+}
+
 // Describes the authentication methods used by a Client VPN endpoint. For more
 // information, see Authentication
 // (https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/client-authentication.html)
@@ -1546,6 +1562,8 @@ type ClientVpnEndpoint struct {
 	// The options for managing connection authorization for new client connections.
 	ClientConnectOptions *ClientConnectResponseOptions
 
+	ClientLoginBannerOptions *ClientLoginBannerResponseOptions
+
 	// The ID of the Client VPN endpoint.
 	ClientVpnEndpointId *string
 
@@ -1576,6 +1594,8 @@ type ClientVpnEndpoint struct {
 
 	// The ARN of the server certificate.
 	ServerCertificateArn *string
+
+	SessionTimeoutHours *int32
 
 	// Indicates whether split-tunnel is enabled in the Client VPN endpoint. For
 	// information about split-tunnel VPN endpoints, see Split-Tunnel Client VPN

@@ -89,9 +89,6 @@ func validateOpSendSSHPublicKeyInput(v *SendSSHPublicKeyInput) error {
 	if v.SSHPublicKey == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SSHPublicKey"))
 	}
-	if v.AvailabilityZone == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AvailabilityZone"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

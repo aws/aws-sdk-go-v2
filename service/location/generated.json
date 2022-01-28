@@ -15,6 +15,7 @@
         "api_op_BatchPutGeofence.go",
         "api_op_BatchUpdateDevicePosition.go",
         "api_op_CalculateRoute.go",
+        "api_op_CalculateRouteMatrix.go",
         "api_op_CreateGeofenceCollection.go",
         "api_op_CreateMap.go",
         "api_op_CreatePlaceIndex.go",

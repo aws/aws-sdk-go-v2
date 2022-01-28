@@ -33943,6 +33943,23 @@ func awsEc2query_serializeDocumentClientData(v *types.ClientData, value query.Va
 	return nil
 }
 
+func awsEc2query_serializeDocumentClientLoginBannerOptions(v *types.ClientLoginBannerOptions, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.BannerText != nil {
+		objectKey := object.Key("BannerText")
+		objectKey.String(*v.BannerText)
+	}
+
+	if v.Enabled != nil {
+		objectKey := object.Key("Enabled")
+		objectKey.Boolean(*v.Enabled)
+	}
+
+	return nil
+}
+
 func awsEc2query_serializeDocumentClientVpnAuthenticationRequest(v *types.ClientVpnAuthenticationRequest, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -43504,6 +43521,13 @@ func awsEc2query_serializeOpDocumentCreateClientVpnEndpointInput(v *CreateClient
 		}
 	}
 
+	if v.ClientLoginBannerOptions != nil {
+		objectKey := object.Key("ClientLoginBannerOptions")
+		if err := awsEc2query_serializeDocumentClientLoginBannerOptions(v.ClientLoginBannerOptions, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.ClientToken != nil {
 		objectKey := object.Key("ClientToken")
 		objectKey.String(*v.ClientToken)
@@ -43548,6 +43572,11 @@ func awsEc2query_serializeOpDocumentCreateClientVpnEndpointInput(v *CreateClient
 	if v.ServerCertificateArn != nil {
 		objectKey := object.Key("ServerCertificateArn")
 		objectKey.String(*v.ServerCertificateArn)
+	}
+
+	if v.SessionTimeoutHours != nil {
+		objectKey := object.Key("SessionTimeoutHours")
+		objectKey.Integer(*v.SessionTimeoutHours)
 	}
 
 	if v.SplitTunnel != nil {
@@ -54382,6 +54411,13 @@ func awsEc2query_serializeOpDocumentModifyClientVpnEndpointInput(v *ModifyClient
 		}
 	}
 
+	if v.ClientLoginBannerOptions != nil {
+		objectKey := object.Key("ClientLoginBannerOptions")
+		if err := awsEc2query_serializeDocumentClientLoginBannerOptions(v.ClientLoginBannerOptions, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.ClientVpnEndpointId != nil {
 		objectKey := object.Key("ClientVpnEndpointId")
 		objectKey.String(*v.ClientVpnEndpointId)
@@ -54426,6 +54462,11 @@ func awsEc2query_serializeOpDocumentModifyClientVpnEndpointInput(v *ModifyClient
 	if v.ServerCertificateArn != nil {
 		objectKey := object.Key("ServerCertificateArn")
 		objectKey.String(*v.ServerCertificateArn)
+	}
+
+	if v.SessionTimeoutHours != nil {
+		objectKey := object.Key("SessionTimeoutHours")
+		objectKey.Integer(*v.SessionTimeoutHours)
 	}
 
 	if v.SplitTunnel != nil {

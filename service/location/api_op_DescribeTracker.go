@@ -53,13 +53,6 @@ type DescribeTrackerOutput struct {
 	// This member is required.
 	Description *string
 
-	// The pricing plan selected for the specified tracker resource. For additional
-	// details and restrictions on each pricing plan option, see Amazon Location
-	// Service pricing (https://aws.amazon.com/location/pricing/).
-	//
-	// This member is required.
-	PricingPlan types.PricingPlan
-
 	// The Amazon Resource Name (ARN) for the tracker resource. Used when you need to
 	// specify a resource across all AWS.
 	//
@@ -89,7 +82,14 @@ type DescribeTrackerOutput struct {
 	// The position filtering method of the tracker resource.
 	PositionFiltering types.PositionFiltering
 
-	// The specified data provider for the tracker resource.
+	// Always returns RequestBasedUsage.
+	//
+	// Deprecated: Deprecated. Always returns RequestBasedUsage.
+	PricingPlan types.PricingPlan
+
+	// No longer used. Always returns an empty string.
+	//
+	// Deprecated: Deprecated. Unused.
 	PricingPlanDataSource *string
 
 	// The tags associated with the tracker resource.

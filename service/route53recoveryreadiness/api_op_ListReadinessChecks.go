@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a collection of Readiness Checks.
+// Lists the readiness checks for an account.
 func (c *Client) ListReadinessChecks(ctx context.Context, params *ListReadinessChecksInput, optFns ...func(*Options)) (*ListReadinessChecksOutput, error) {
 	if params == nil {
 		params = &ListReadinessChecksInput{}
@@ -30,10 +30,10 @@ func (c *Client) ListReadinessChecks(ctx context.Context, params *ListReadinessC
 
 type ListReadinessChecksInput struct {
 
-	// Upper bound on number of records to return.
+	// The number of objects that you want to return with this call.
 	MaxResults int32
 
-	// A token used to resume pagination from the end of a previous request.
+	// The token that identifies which batch of results you want to see.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -41,10 +41,10 @@ type ListReadinessChecksInput struct {
 
 type ListReadinessChecksOutput struct {
 
-	// A token that can be used to resume pagination from the end of the collection.
+	// The token that identifies which batch of results you want to see.
 	NextToken *string
 
-	// A list of ReadinessCheck associated with the account
+	// A list of readiness checks associated with the account.
 	ReadinessChecks []types.ReadinessCheckOutput
 
 	// Metadata pertaining to the operation's result.
@@ -124,7 +124,7 @@ var _ ListReadinessChecksAPIClient = (*Client)(nil)
 // ListReadinessChecksPaginatorOptions is the paginator options for
 // ListReadinessChecks
 type ListReadinessChecksPaginatorOptions struct {
-	// Upper bound on number of records to return.
+	// The number of objects that you want to return with this call.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

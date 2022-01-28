@@ -19,6 +19,9 @@
   [modules."feature/ec2/imds/internal/configtesting"]
     no_tag = true
 
+  [modules."internal/codegen"]
+    no_tag = true
+
   [modules."internal/configsources/configtesting"]
     no_tag = true
 

@@ -1421,6 +1421,22 @@
                 ]
             }
         },
+        "com.amazonaws.mediaconvert#Av1BitDepth": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Specify the Bit depth (Av1BitDepth). You can choose 8-bit (BIT_8) or 10-bit (BIT_10).",
+                "smithy.api#enum": [
+                    {
+                        "value": "BIT_8",
+                        "name": "BIT_8"
+                    },
+                    {
+                        "value": "BIT_10",
+                        "name": "BIT_10"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.mediaconvert#Av1FramerateControl": {
             "type": "string",
             "traits": {
@@ -1499,6 +1515,13 @@
                     "traits": {
                         "smithy.api#documentation": "Specify the strength of any adaptive quantization filters that you enable. The value that you choose here applies to Spatial adaptive quantization (spatialAdaptiveQuantization).",
                         "smithy.api#jsonName": "adaptiveQuantization"
+                    }
+                },
+                "BitDepth": {
+                    "target": "com.amazonaws.mediaconvert#Av1BitDepth",
+                    "traits": {
+                        "smithy.api#documentation": "Specify the Bit depth (Av1BitDepth). You can choose 8-bit (BIT_8) or 10-bit (BIT_10).",
+                        "smithy.api#jsonName": "bitDepth"
                     }
                 },
                 "FramerateControl": {
@@ -3491,10 +3514,33 @@
                         "smithy.api#documentation": "Ignore this setting unless you have SCTE-35 markers in your input video file. Choose Passthrough (PASSTHROUGH) if you want SCTE-35 markers that appear in your input to also appear in this output. Choose None (NONE) if you don't want those SCTE-35 markers in this output.",
                         "smithy.api#jsonName": "scte35Source"
                     }
+                },
+                "TimedMetadata": {
+                    "target": "com.amazonaws.mediaconvert#CmfcTimedMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "Applies to CMAF outputs. Use this setting to specify whether the service inserts the ID3 timed metadata from the input in this output.",
+                        "smithy.api#jsonName": "timedMetadata"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "These settings relate to the fragmented MP4 container for the segments in your CMAF outputs."
+            }
+        },
+        "com.amazonaws.mediaconvert#CmfcTimedMetadata": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Applies to CMAF outputs. Use this setting to specify whether the service inserts the ID3 timed metadata from the input in this output.",
+                "smithy.api#enum": [
+                    {
+                        "value": "PASSTHROUGH",
+                        "name": "PASSTHROUGH"
+                    },
+                    {
+                        "value": "NONE",
+                        "name": "NONE"
+                    }
+                ]
             }
         },
         "com.amazonaws.mediaconvert#ColorCorrector": {
@@ -8127,7 +8173,7 @@
         "com.amazonaws.mediaconvert#H265AdaptiveQuantization": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Specify the strength of any adaptive quantization filters that you enable. The value that you choose here applies to the following settings: Flicker adaptive quantization (flickerAdaptiveQuantization), Spatial adaptive quantization (spatialAdaptiveQuantization), and Temporal adaptive quantization (temporalAdaptiveQuantization).",
+                "smithy.api#documentation": "When you set Adaptive Quantization (H265AdaptiveQuantization) to Auto (AUTO), or leave blank, MediaConvert automatically applies quantization to improve the video quality of your output. Set Adaptive Quantization to Low (LOW), Medium (MEDIUM), High (HIGH), Higher (HIGHER), or Max (MAX) to manually control the strength of the quantization filter. When you do, you can specify a value for Spatial Adaptive Quantization (H265SpatialAdaptiveQuantization), Temporal Adaptive Quantization (H265TemporalAdaptiveQuantization), and Flicker Adaptive Quantization (H265FlickerAdaptiveQuantization), to further control the quantization filter. Set Adaptive Quantization to Off (OFF) to apply no quantization to your output.",
                 "smithy.api#enum": [
                     {
                         "value": "OFF",
@@ -8152,6 +8198,10 @@
                     {
                         "value": "MAX",
                         "name": "MAX"
+                    },
+                    {
+                        "value": "AUTO",
+                        "name": "AUTO"
                     }
                 ]
             }
@@ -8555,7 +8605,7 @@
                 "AdaptiveQuantization": {
                     "target": "com.amazonaws.mediaconvert#H265AdaptiveQuantization",
                     "traits": {
-                        "smithy.api#documentation": "Specify the strength of any adaptive quantization filters that you enable. The value that you choose here applies to the following settings: Flicker adaptive quantization (flickerAdaptiveQuantization), Spatial adaptive quantization (spatialAdaptiveQuantization), and Temporal adaptive quantization (temporalAdaptiveQuantization).",
+                        "smithy.api#documentation": "When you set Adaptive Quantization (H265AdaptiveQuantization) to Auto (AUTO), or leave blank, MediaConvert automatically applies quantization to improve the video quality of your output. Set Adaptive Quantization to Low (LOW), Medium (MEDIUM), High (HIGH), Higher (HIGHER), or Max (MAX) to manually control the strength of the quantization filter. When you do, you can specify a value for Spatial Adaptive Quantization (H265SpatialAdaptiveQuantization), Temporal Adaptive Quantization (H265TemporalAdaptiveQuantization), and Flicker Adaptive Quantization (H265FlickerAdaptiveQuantization), to further control the quantization filter. Set Adaptive Quantization to Off (OFF) to apply no quantization to your output.",
                         "smithy.api#jsonName": "adaptiveQuantization"
                     }
                 },
@@ -10041,9 +10091,32 @@
                 "smithy.api#documentation": "Use the image inserter feature to include a graphic overlay on your video. Enable or disable this feature for each input or output individually. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/graphic-overlay.html. This setting is disabled by default."
             }
         },
+        "com.amazonaws.mediaconvert#ImscAccessibilitySubs": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Specify whether to flag this caption track as accessibility in your HLS/CMAF parent manifest. When you choose ENABLED, MediaConvert includes the parameters CHARACTERISTICS=\"public.accessibility.describes-spoken-dialog,public.accessibility.describes-music-and-sound\" and AUTOSELECT=\"YES\" in the EXT-X-MEDIA entry for this track. When you keep the default choice, DISABLED, MediaConvert leaves this parameter out.",
+                "smithy.api#enum": [
+                    {
+                        "value": "DISABLED",
+                        "name": "DISABLED"
+                    },
+                    {
+                        "value": "ENABLED",
+                        "name": "ENABLED"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.mediaconvert#ImscDestinationSettings": {
             "type": "structure",
             "members": {
+                "Accessibility": {
+                    "target": "com.amazonaws.mediaconvert#ImscAccessibilitySubs",
+                    "traits": {
+                        "smithy.api#documentation": "Specify whether to flag this caption track as accessibility in your HLS/CMAF parent manifest. When you choose ENABLED, MediaConvert includes the parameters CHARACTERISTICS=\"public.accessibility.describes-spoken-dialog,public.accessibility.describes-music-and-sound\" and AUTOSELECT=\"YES\" in the EXT-X-MEDIA entry for this track. When you keep the default choice, DISABLED, MediaConvert leaves this parameter out.",
+                        "smithy.api#jsonName": "accessibility"
+                    }
+                },
                 "StylePassthrough": {
                     "target": "com.amazonaws.mediaconvert#ImscStylePassthrough",
                     "traits": {
@@ -10122,6 +10195,13 @@
                     "traits": {
                         "smithy.api#documentation": "Enable Denoise (InputDenoiseFilter) to filter noise from the input.  Default is disabled. Only applicable to MPEG2, H.264, H.265, and uncompressed video inputs.",
                         "smithy.api#jsonName": "denoiseFilter"
+                    }
+                },
+                "DolbyVisionMetadataXml": {
+                    "target": "com.amazonaws.mediaconvert#__stringMin14PatternS3XmlXMLHttpsXmlXML",
+                    "traits": {
+                        "smithy.api#documentation": "Use this setting only when your video source has Dolby Vision studio mastering metadata that is carried in a separate XML file. Specify the Amazon S3 location for the metadata XML file. MediaConvert uses this file to provide global and frame-level metadata for Dolby Vision preprocessing. When you specify a file here and your input also has interleaved global and frame level metadata, MediaConvert ignores the interleaved metadata and uses only the the metadata from this external XML file. Note that your IAM service role must grant MediaConvert read permissions to this file. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/iam-role.html.",
+                        "smithy.api#jsonName": "dolbyVisionMetadataXml"
                     }
                 },
                 "FileInput": {
@@ -10469,6 +10549,13 @@
                     "traits": {
                         "smithy.api#documentation": "Enable Denoise (InputDenoiseFilter) to filter noise from the input.  Default is disabled. Only applicable to MPEG2, H.264, H.265, and uncompressed video inputs.",
                         "smithy.api#jsonName": "denoiseFilter"
+                    }
+                },
+                "DolbyVisionMetadataXml": {
+                    "target": "com.amazonaws.mediaconvert#__stringMin14PatternS3XmlXMLHttpsXmlXML",
+                    "traits": {
+                        "smithy.api#documentation": "Use this setting only when your video source has Dolby Vision studio mastering metadata that is carried in a separate XML file. Specify the Amazon S3 location for the metadata XML file. MediaConvert uses this file to provide global and frame-level metadata for Dolby Vision preprocessing. When you specify a file here and your input also has interleaved global and frame level metadata, MediaConvert ignores the interleaved metadata and uses only the the metadata from this external XML file. Note that your IAM service role must grant MediaConvert read permissions to this file. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/iam-role.html.",
+                        "smithy.api#jsonName": "dolbyVisionMetadataXml"
                     }
                 },
                 "FilterEnable": {
@@ -12101,6 +12188,10 @@
                     {
                         "value": "TNG",
                         "name": "TNG"
+                    },
+                    {
+                        "value": "SRP",
+                        "name": "SRP"
                     }
                 ]
             }
@@ -13288,7 +13379,7 @@
                 "TimedMetadata": {
                     "target": "com.amazonaws.mediaconvert#TimedMetadata",
                     "traits": {
-                        "smithy.api#documentation": "Applies only to HLS outputs. Use this setting to specify whether the service inserts the ID3 timed metadata from the input in this output.",
+                        "smithy.api#documentation": "Applies to HLS outputs. Use this setting to specify whether the service inserts the ID3 timed metadata from the input in this output.",
                         "smithy.api#jsonName": "timedMetadata"
                     }
                 },
@@ -13975,10 +14066,33 @@
                         "smithy.api#documentation": "Ignore this setting unless you have SCTE-35 markers in your input video file. Choose Passthrough (PASSTHROUGH) if you want SCTE-35 markers that appear in your input to also appear in this output. Choose None (NONE) if you don't want those SCTE-35 markers in this output.",
                         "smithy.api#jsonName": "scte35Source"
                     }
+                },
+                "TimedMetadata": {
+                    "target": "com.amazonaws.mediaconvert#MpdTimedMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "Applies to DASH outputs. Use this setting to specify whether the service inserts the ID3 timed metadata from the input in this output.",
+                        "smithy.api#jsonName": "timedMetadata"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "These settings relate to the fragmented MP4 container for the segments in your DASH outputs."
+            }
+        },
+        "com.amazonaws.mediaconvert#MpdTimedMetadata": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Applies to DASH outputs. Use this setting to specify whether the service inserts the ID3 timed metadata from the input in this output.",
+                "smithy.api#enum": [
+                    {
+                        "value": "PASSTHROUGH",
+                        "name": "PASSTHROUGH"
+                    },
+                    {
+                        "value": "NONE",
+                        "name": "NONE"
+                    }
+                ]
             }
         },
         "com.amazonaws.mediaconvert#Mpeg2AdaptiveQuantization": {
@@ -16509,7 +16623,7 @@
                     }
                 },
                 "KmsKeyArn": {
-                    "target": "com.amazonaws.mediaconvert#__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+                    "target": "com.amazonaws.mediaconvert#__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932",
                     "traits": {
                         "smithy.api#documentation": "Optionally, specify the customer master key (CMK) that you want to use to encrypt the data key that AWS uses to encrypt your output content. Enter the Amazon Resource Name (ARN) of the CMK. To use this setting, you must also set Server-side encryption (S3ServerSideEncryptionType) to AWS KMS (SERVER_SIDE_ENCRYPTION_KMS). If you set Server-side encryption to AWS KMS but don't specify a CMK here, AWS uses the AWS managed CMK associated with Amazon S3.",
                         "smithy.api#jsonName": "kmsKeyArn"
@@ -17124,7 +17238,7 @@
         "com.amazonaws.mediaconvert#TimedMetadata": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Applies only to HLS outputs. Use this setting to specify whether the service inserts the ID3 timed metadata from the input in this output.",
+                "smithy.api#documentation": "Applies to HLS outputs. Use this setting to specify whether the service inserts the ID3 timed metadata from the input in this output.",
                 "smithy.api#enum": [
                     {
                         "value": "PASSTHROUGH",
@@ -18700,9 +18814,32 @@
                 "smithy.api#documentation": "Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to the value WAV."
             }
         },
+        "com.amazonaws.mediaconvert#WebvttAccessibilitySubs": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Specify whether to flag this caption track as accessibility in your HLS/CMAF parent manifest. When you choose ENABLED, MediaConvert includes the parameters CHARACTERISTICS=\"public.accessibility.describes-spoken-dialog,public.accessibility.describes-music-and-sound\" and AUTOSELECT=\"YES\" in the EXT-X-MEDIA entry for this track. When you keep the default choice, DISABLED, MediaConvert leaves this parameter out.",
+                "smithy.api#enum": [
+                    {
+                        "value": "DISABLED",
+                        "name": "DISABLED"
+                    },
+                    {
+                        "value": "ENABLED",
+                        "name": "ENABLED"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.mediaconvert#WebvttDestinationSettings": {
             "type": "structure",
             "members": {
+                "Accessibility": {
+                    "target": "com.amazonaws.mediaconvert#WebvttAccessibilitySubs",
+                    "traits": {
+                        "smithy.api#documentation": "Specify whether to flag this caption track as accessibility in your HLS/CMAF parent manifest. When you choose ENABLED, MediaConvert includes the parameters CHARACTERISTICS=\"public.accessibility.describes-spoken-dialog,public.accessibility.describes-music-and-sound\" and AUTOSELECT=\"YES\" in the EXT-X-MEDIA entry for this track. When you keep the default choice, DISABLED, MediaConvert leaves this parameter out.",
+                        "smithy.api#jsonName": "accessibility"
+                    }
+                },
                 "StylePassthrough": {
                     "target": "com.amazonaws.mediaconvert#WebvttStylePassthrough",
                     "traits": {
@@ -20632,6 +20769,15 @@
                 "smithy.api#pattern": "^((s3://(.*?)\\.(scc|SCC|ttml|TTML|dfxp|DFXP|stl|STL|srt|SRT|xml|XML|smi|SMI|vtt|VTT|webvtt|WEBVTT))|(https?://(.*?)\\.(scc|SCC|ttml|TTML|dfxp|DFXP|stl|STL|srt|SRT|xml|XML|smi|SMI|vtt|VTT|webvtt|WEBVTT)(\\?([^&=]+=[^&]+&)*[^&=]+=[^&]+)?))$"
             }
         },
+        "com.amazonaws.mediaconvert#__stringMin14PatternS3XmlXMLHttpsXmlXML": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 14
+                },
+                "smithy.api#pattern": "^((s3://(.*?)\\.(xml|XML))|(https?://(.*?)\\.(xml|XML)(\\?([^&=]+=[^&]+&)*[^&=]+=[^&]+)?))$"
+            }
+        },
         "com.amazonaws.mediaconvert#__stringMin16Max24PatternAZaZ0922AZaZ0916": {
             "type": "string",
             "traits": {
@@ -20828,10 +20974,10 @@
                 "smithy.api#pattern": "^arn:aws(-us-gov)?:acm:$"
             }
         },
-        "com.amazonaws.mediaconvert#__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912": {
+        "com.amazonaws.mediaconvert#__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^arn:aws(-us-gov|-cn)?:kms:[a-z-]{2,6}-(east|west|central|((north|south)(east|west)?))-[1-9]{1,2}:\\d{12}:key/[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+                "smithy.api#pattern": "^arn:aws(-us-gov|-cn)?:kms:[a-z-]{2,6}-(east|west|central|((north|south)(east|west)?))-[1-9]{1,2}:\\d{12}:key/([a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}|mrk-[a-fA-F0-9]{32})$"
             }
         },
         "com.amazonaws.mediaconvert#__stringPatternDD": {

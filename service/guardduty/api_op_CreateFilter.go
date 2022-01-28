@@ -169,20 +169,34 @@ type CreateFilterInput struct {
 	// *
 	// service.additionalInfo.threatListName
 	//
-	// * service.archived When this attribute is
-	// set to TRUE, only archived findings are listed. When it's set to FALSE, only
-	// unarchived findings are listed. When this attribute is not set, all existing
-	// findings are listed.
+	// *
+	// resource.s3BucketDetails.publicAccess.effectivePermissions
 	//
-	// * service.resourceRole
+	// *
+	// resource.s3BucketDetails.name
+	//
+	// * resource.s3BucketDetails.tags.key
+	//
+	// *
+	// resource.s3BucketDetails.tags.value
+	//
+	// * resource.s3BucketDetails.type
+	//
+	// *
+	// service.archived When this attribute is set to TRUE, only archived findings are
+	// listed. When it's set to FALSE, only unarchived findings are listed. When this
+	// attribute is not set, all existing findings are listed.
+	//
+	// *
+	// service.resourceRole
 	//
 	// * severity
 	//
 	// * type
 	//
-	// * updatedAt
-	// Type: ISO 8601 string format: YYYY-MM-DDTHH:MM:SS.SSSZ or YYYY-MM-DDTHH:MM:SSZ
-	// depending on whether the value contains milliseconds.
+	// * updatedAt Type: ISO 8601 string
+	// format: YYYY-MM-DDTHH:MM:SS.SSSZ or YYYY-MM-DDTHH:MM:SSZ depending on whether
+	// the value contains milliseconds.
 	//
 	// This member is required.
 	FindingCriteria *types.FindingCriteria

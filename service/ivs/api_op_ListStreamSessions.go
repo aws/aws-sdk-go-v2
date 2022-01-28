@@ -48,7 +48,7 @@ type ListStreamSessionsInput struct {
 
 type ListStreamSessionsOutput struct {
 
-	//
+	// List of stream sessions.
 	//
 	// This member is required.
 	StreamSessions []types.StreamSessionSummary

@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an existing Readiness Check.
+// Deletes a readiness check.
 func (c *Client) DeleteReadinessCheck(ctx context.Context, params *DeleteReadinessCheckInput, optFns ...func(*Options)) (*DeleteReadinessCheckOutput, error) {
 	if params == nil {
 		params = &DeleteReadinessCheckInput{}
@@ -28,7 +28,7 @@ func (c *Client) DeleteReadinessCheck(ctx context.Context, params *DeleteReadine
 
 type DeleteReadinessCheckInput struct {
 
-	// The ReadinessCheck to delete
+	// Name of a readiness check.
 	//
 	// This member is required.
 	ReadinessCheckName *string

@@ -7,71 +7,75 @@ import (
 	"time"
 )
 
-// A Cell and its properties
+// Information about a cell.
 type CellOutput struct {
 
-	// The arn for the Cell
+	// The Amazon Resource Name (ARN) for the cell.
 	//
 	// This member is required.
 	CellArn *string
 
-	// The name of the Cell
+	// The name of the cell.
 	//
 	// This member is required.
 	CellName *string
 
-	// A list of Cell arns
+	// A list of cell ARNs.
 	//
 	// This member is required.
 	Cells []string
 
-	// A list of Cell ARNs and/or RecoveryGroup ARNs
+	// The readiness scope for the cell, which can be a cell Amazon Resource Name (ARN)
+	// or a recovery group ARN. This is a list but currently can have only one element.
 	//
 	// This member is required.
 	ParentReadinessScopes []string
 
-	// A collection of tags associated with a resource
+	// Tags on the resources.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
 }
 
-// A component for DNS/Routing Control Readiness Checks
+// A component for DNS/routing control readiness checks and architecture checks.
 type DNSTargetResource struct {
 
-	// The DNS Name that acts as ingress point to a portion of application
+	// The domain name that acts as an ingress point to a portion of the customer
+	// application.
 	DomainName *string
 
-	// The Hosted Zone ARN that contains the DNS record with the provided name of
-	// target resource.
+	// The hosted zone Amazon Resource Name (ARN) that contains the DNS record with the
+	// provided name of the target resource.
 	HostedZoneArn *string
 
-	// The R53 Set Id to uniquely identify a record given a Name and a Type
+	// The Route 53 record set ID that uniquely identifies a DNS record, given a name
+	// and a type.
 	RecordSetId *string
 
-	// The Type of DNS Record of target resource
+	// The type of DNS record of the target resource.
 	RecordType *string
 
-	// The target resource the R53 record points to
+	// The target resource of the DNS target resource.
 	TargetResource *TargetResource
 
 	noSmithyDocumentSerde
 }
 
-// A collection of rules used in a readiness check
+// Readiness rule information, including the resource type, rule ID, and rule
+// description.
 type ListRulesOutput struct {
 
-	// The resource type the rule applies to.
+	// The resource type that the readiness rule applies to.
 	//
 	// This member is required.
 	ResourceType *string
 
-	// A description of the rule
+	// The description of a readiness rule.
 	//
 	// This member is required.
 	RuleDescription *string
 
-	// The Rule's ID.
+	// The ID for the readiness rule.
 	//
 	// This member is required.
 	RuleId *string
@@ -79,75 +83,77 @@ type ListRulesOutput struct {
 	noSmithyDocumentSerde
 }
 
-// Information relating to readiness check status
+// Information relating to readiness check status.
 type Message struct {
 
-	// The text of a readiness check message
+	// The text of a readiness check message.
 	MessageText *string
 
 	noSmithyDocumentSerde
 }
 
-// The NLB resource a DNS Target Resource points to
+// The Network Load Balancer resource that a DNS target resource points to.
 type NLBResource struct {
 
-	// An NLB resource arn
+	// The Network Load Balancer resource Amazon Resource Name (ARN).
 	Arn *string
 
 	noSmithyDocumentSerde
 }
 
-// The Route 53 resource a DNS Target Resource record points to
+// The Route 53 resource that a DNS target resource record points to.
 type R53ResourceRecord struct {
 
-	// The DNS target name
+	// The DNS target domain name.
 	DomainName *string
 
-	// The Resource Record set id
+	// The Route 53 Resource Record Set ID.
 	RecordSetId *string
 
 	noSmithyDocumentSerde
 }
 
-// A resource used for checking the readiness of a Resource Set
+// A readiness check.
 type ReadinessCheckOutput struct {
 
-	// Arn associated with ReadinessCheck
+	// The Amazon Resource Name (ARN) associated with a readiness check.
 	//
 	// This member is required.
 	ReadinessCheckArn *string
 
-	// Name of the ResourceSet to be checked
+	// Name of the resource set to be checked.
 	//
 	// This member is required.
 	ResourceSet *string
 
-	// Name for a ReadinessCheck
+	// Name of a readiness check.
 	ReadinessCheckName *string
 
-	// A collection of tags associated with a resource
+	// A collection of tags associated with a resource.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
 }
 
-// Summary of ReadinessCheck status, paginated in GetRecoveryGroupReadinessSummary
-// and GetCellReadinessSummary
+// Summary of all readiness check statuses in a recovery group, paginated in
+// GetRecoveryGroupReadinessSummary and GetCellReadinessSummary.
 type ReadinessCheckSummary struct {
 
-	// The readiness of this ReadinessCheck
+	// The readiness status of this readiness check.
 	Readiness Readiness
 
-	// The name of a ReadinessCheck which is part of the given RecoveryGroup or Cell
+	// The name of a readiness check.
 	ReadinessCheckName *string
 
 	noSmithyDocumentSerde
 }
 
-// Guidance for improving Recovery Group resilliancy
+// Recommendations that are provided to make an application more recovery
+// resilient.
 type Recommendation struct {
 
-	// Guidance text for recommendation
+	// Text of the recommendations that are provided to make an application more
+	// recovery resilient.
 	//
 	// This member is required.
 	RecommendationText *string
@@ -155,102 +161,113 @@ type Recommendation struct {
 	noSmithyDocumentSerde
 }
 
-// A Recovery Group generally containing multiple Cells
+// A representation of the application, typically containing multiple cells.
 type RecoveryGroupOutput struct {
 
-	// A list of Cell arns
+	// A list of a cell's Amazon Resource Names (ARNs).
 	//
 	// This member is required.
 	Cells []string
 
-	// The arn for the RecoveryGroup
+	// The Amazon Resource Name (ARN) for the recovery group.
 	//
 	// This member is required.
 	RecoveryGroupArn *string
 
-	// The name of the RecoveryGroup
+	// The name of the recovery group.
 	//
 	// This member is required.
 	RecoveryGroupName *string
 
-	// A collection of tags associated with a resource
+	// The tags associated with the recovery group.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
 }
 
-// The resource element of a ResourceSet
+// The resource element of a resource set.
 type Resource struct {
 
-	// The component id of the resource, generated by the service when
-	// dnsTargetResource is used
+	// The component identifier of the resource, generated when DNS target resource is
+	// used.
 	ComponentId *string
 
-	// A component for DNS/Routing Control Readiness Checks
+	// The DNS target resource.
 	DnsTargetResource *DNSTargetResource
 
-	// A list of RecoveryGroup ARNs and/or Cell ARNs that this resource is contained
-	// within.
+	// A list of recovery group Amazon Resource Names (ARNs) and cell ARNs that this
+	// resource is contained within.
 	ReadinessScopes []string
 
-	// The ARN of the AWS resource, can be skipped if dnsTargetResource is used
+	// The Amazon Resource Name (ARN) of the Amazon Web Services resource.
 	ResourceArn *string
 
 	noSmithyDocumentSerde
 }
 
-// Result with status for an individual resource.
+// The result of a successful Resource request, with status for an individual
+// resource.
 type ResourceResult struct {
 
-	// The time the resource was last checked for readiness, in ISO-8601 format, UTC.
+	// The time (UTC) that the resource was last checked for readiness, in ISO-8601
+	// format.
 	//
 	// This member is required.
 	LastCheckedTimestamp *time.Time
 
-	// The readiness of the resource.
+	// The readiness of a resource.
 	//
 	// This member is required.
 	Readiness Readiness
 
-	// The component id of the resource
+	// The component id of the resource.
 	ComponentId *string
 
-	// The ARN of the resource
+	// The Amazon Resource Name (ARN) of the resource.
 	ResourceArn *string
 
 	noSmithyDocumentSerde
 }
 
-// A collection of resources of the same type
+// A collection of resources of the same type.
 type ResourceSetOutput struct {
 
-	// The arn for the ResourceSet
+	// The Amazon Resource Name (ARN) for the resource set.
 	//
 	// This member is required.
 	ResourceSetArn *string
 
-	// The name of the ResourceSet
+	// The name of the resource set.
 	//
 	// This member is required.
 	ResourceSetName *string
 
-	// AWS Resource Type of the resources in the ResourceSet
+	// The resource type of the resources in the resource set. Enter one of the
+	// following values for resource type: AWS::ApiGateway::Stage,
+	// AWS::ApiGatewayV2::Stage, AWS::AutoScaling::AutoScalingGroup,
+	// AWS::CloudWatch::Alarm, AWS::EC2::CustomerGateway, AWS::DynamoDB::Table,
+	// AWS::EC2::Volume, AWS::ElasticLoadBalancing::LoadBalancer,
+	// AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Lambda::Function,
+	// AWS::MSK::Cluster, AWS::RDS::DBCluster, AWS::Route53::HealthCheck,
+	// AWS::SQS::Queue, AWS::SNS::Topic, AWS::SNS::Subscription, AWS::EC2::VPC,
+	// AWS::EC2::VPNConnection, AWS::EC2::VPNGateway,
+	// AWS::Route53RecoveryReadiness::DNSTargetResource
 	//
 	// This member is required.
 	ResourceSetType *string
 
-	// A list of Resource objects
+	// A list of resource objects.
 	//
 	// This member is required.
 	Resources []Resource
 
-	// A collection of tags associated with a resource
+	// A collection of tags associated with a resource.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
 }
 
-// Result with status for an individual rule..
+// The result of a successful Rule request, with status for an individual rule.
 type RuleResult struct {
 
 	// The time the resource was last checked for readiness, in ISO-8601 format, UTC.
@@ -258,7 +275,7 @@ type RuleResult struct {
 	// This member is required.
 	LastCheckedTimestamp *time.Time
 
-	// Details about the resource's readiness
+	// Details about the resource's readiness.
 	//
 	// This member is required.
 	Messages []Message
@@ -276,13 +293,13 @@ type RuleResult struct {
 	noSmithyDocumentSerde
 }
 
-// The target resource the R53 record points to
+// The target resource that the Route 53 record points to.
 type TargetResource struct {
 
-	// The NLB resource a DNS Target Resource points to
+	// The Network Load Balancer Resource.
 	NLBResource *NLBResource
 
-	// The Route 53 resource a DNS Target Resource record points to
+	// The Route 53 resource.
 	R53Resource *R53ResourceRecord
 
 	noSmithyDocumentSerde

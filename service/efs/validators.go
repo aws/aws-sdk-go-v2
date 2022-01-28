@@ -70,6 +70,26 @@ func (m *validateOpCreateMountTarget) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateReplicationConfiguration struct {
+}
+
+func (*validateOpCreateReplicationConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateReplicationConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateReplicationConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateReplicationConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateTags struct {
 }
 
@@ -165,6 +185,26 @@ func (m *validateOpDeleteMountTarget) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteMountTargetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteReplicationConfiguration struct {
+}
+
+func (*validateOpDeleteReplicationConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteReplicationConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteReplicationConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteReplicationConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -482,6 +522,10 @@ func addOpCreateMountTargetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateMountTarget{}, middleware.After)
 }
 
+func addOpCreateReplicationConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateReplicationConfiguration{}, middleware.After)
+}
+
 func addOpCreateTagsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateTags{}, middleware.After)
 }
@@ -500,6 +544,10 @@ func addOpDeleteFileSystemPolicyValidationMiddleware(stack *middleware.Stack) er
 
 func addOpDeleteMountTargetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteMountTarget{}, middleware.After)
+}
+
+func addOpDeleteReplicationConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteReplicationConfiguration{}, middleware.After)
 }
 
 func addOpDeleteTagsValidationMiddleware(stack *middleware.Stack) error {
@@ -739,6 +787,24 @@ func validateOpCreateMountTargetInput(v *CreateMountTargetInput) error {
 	}
 }
 
+func validateOpCreateReplicationConfigurationInput(v *CreateReplicationConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateReplicationConfigurationInput"}
+	if v.SourceFileSystemId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceFileSystemId"))
+	}
+	if v.Destinations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Destinations"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateTagsInput(v *CreateTagsInput) error {
 	if v == nil {
 		return nil
@@ -813,6 +879,21 @@ func validateOpDeleteMountTargetInput(v *DeleteMountTargetInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteMountTargetInput"}
 	if v.MountTargetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MountTargetId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteReplicationConfigurationInput(v *DeleteReplicationConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteReplicationConfigurationInput"}
+	if v.SourceFileSystemId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceFileSystemId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

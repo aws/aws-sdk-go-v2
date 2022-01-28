@@ -82,25 +82,15 @@ type CreateTrackerInput struct {
 	// is optional. If not specified, the default value is TimeBased.
 	PositionFiltering types.PositionFiltering
 
-	// Optionally specifies the pricing plan for the tracker resource. Defaults to
-	// RequestBasedUsage. For additional details and restrictions on each pricing plan
-	// option, see Amazon Location Service pricing
-	// (https://aws.amazon.com/location/pricing/).
+	// No longer used. If included, the only allowed value is RequestBasedUsage.
+	//
+	// Deprecated: Deprecated. If included, the only allowed value is
+	// RequestBasedUsage.
 	PricingPlan types.PricingPlan
 
-	// Specifies the data provider for the tracker resource.
+	// This parameter is no longer used.
 	//
-	// * Required value for the
-	// following pricing plans: MobileAssetTracking | MobileAssetManagement
-	//
-	// For more
-	// information about Data Providers
-	// (https://aws.amazon.com/location/data-providers/), and Pricing plans
-	// (https://aws.amazon.com/location/pricing/), see the Amazon Location Service
-	// product page. Amazon Location Service only uses PricingPlanDataSource to
-	// calculate billing for your tracker resource. Your data will not be shared with
-	// the data provider, and will remain in your AWS account or Region unless you move
-	// it. Valid values: Esri | Here
+	// Deprecated: Deprecated. No longer allowed.
 	PricingPlanDataSource *string
 
 	// Applies one or more tags to the tracker resource. A tag is a key-value pair

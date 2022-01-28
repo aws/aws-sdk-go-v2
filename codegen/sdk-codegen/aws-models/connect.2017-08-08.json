@@ -307,7 +307,7 @@
                     "name": "connect"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Amazon Connect is a cloud-based contact center solution that you use to set up and manage a customer\n   contact center and provide reliable customer engagement at any scale.</p>\n         <p>Amazon Connect provides metrics and real-time reporting that enable you to optimize contact routing.\n   You can also resolve customer issues more efficiently by getting customers in touch with the\n   appropriate agents.</p>\n         <p>There are limits to the number of Amazon Connect resources that you can create. There are also limits\n   to the number of requests that you can make per second. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">Amazon Connect\n    Service Quotas</a> in the <i>Amazon Connect Administrator Guide</i>.</p>\n         <p>You can connect programmatically to an AWS service by using an endpoint. For a list of Amazon Connect\n   endpoints, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/connect_region.html\">Amazon Connect\n    Endpoints</a>.</p>\n         <note>\n            <p>Working with contact flows? Check out the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html\">Amazon Connect Flow language</a>.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Amazon Connect is a cloud-based contact center solution that you use to set up and manage a customer\n   contact center and provide reliable customer engagement at any scale.</p>\n         <p>Amazon Connect provides metrics and real-time reporting that enable you to optimize contact routing.\n   You can also resolve customer issues more efficiently by getting customers in touch with the\n   appropriate agents.</p>\n         <p>There are limits to the number of Amazon Connect resources that you can create. There are also limits\n   to the number of requests that you can make per second. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">Amazon Connect\n    Service Quotas</a> in the <i>Amazon Connect Administrator Guide</i>.</p>\n         <p>You can connect programmatically to an Amazon Web Services service by using an endpoint. For a list of Amazon Connect\n   endpoints, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/connect_region.html\">Amazon Connect\n    Endpoints</a>.</p>\n         <note>\n            <p>Working with contact flows? Check out the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html\">Amazon Connect Flow language</a>.</p>\n         </note>",
                 "smithy.api#title": "Amazon Connect Service"
             },
             "version": "2017-08-08",
@@ -317,6 +317,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#AssociateBot"
+                },
+                {
+                    "target": "com.amazonaws.connect#AssociateDefaultVocabulary"
                 },
                 {
                     "target": "com.amazonaws.connect#AssociateInstanceStorageConfig"
@@ -376,6 +379,9 @@
                     "target": "com.amazonaws.connect#CreateUserHierarchyGroup"
                 },
                 {
+                    "target": "com.amazonaws.connect#CreateVocabulary"
+                },
+                {
                     "target": "com.amazonaws.connect#DeleteContactFlow"
                 },
                 {
@@ -404,6 +410,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#DeleteUserHierarchyGroup"
+                },
+                {
+                    "target": "com.amazonaws.connect#DeleteVocabulary"
                 },
                 {
                     "target": "com.amazonaws.connect#DescribeAgentStatus"
@@ -449,6 +458,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#DescribeUserHierarchyStructure"
+                },
+                {
+                    "target": "com.amazonaws.connect#DescribeVocabulary"
                 },
                 {
                     "target": "com.amazonaws.connect#DisassociateApprovedOrigin"
@@ -503,6 +515,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#ListContactReferences"
+                },
+                {
+                    "target": "com.amazonaws.connect#ListDefaultVocabularies"
                 },
                 {
                     "target": "com.amazonaws.connect#ListHoursOfOperations"
@@ -569,6 +584,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#ResumeContactRecording"
+                },
+                {
+                    "target": "com.amazonaws.connect#SearchVocabularies"
                 },
                 {
                     "target": "com.amazonaws.connect#StartChatContact"
@@ -833,6 +851,71 @@
                     }
                 }
             }
+        },
+        "com.amazonaws.connect#AssociateDefaultVocabulary": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#AssociateDefaultVocabularyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#AssociateDefaultVocabularyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Associates an existing vocabulary as the default. Contact Lens for Amazon Connect uses the vocabulary in post-call and real-time analysis sessions for the given language.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/default-vocabulary/{InstanceId}/{LanguageCode}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#AssociateDefaultVocabularyRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "LanguageCode": {
+                    "target": "com.amazonaws.connect#VocabularyLanguageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see \n<a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-whatis.html\">What is Amazon Transcribe?</a>\n         </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "VocabularyId": {
+                    "target": "com.amazonaws.connect#VocabularyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the custom vocabulary. If this is empty, the default is set to none.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#AssociateDefaultVocabularyResponse": {
+            "type": "structure",
+            "members": {}
         },
         "com.amazonaws.connect#AssociateInstanceStorageConfig": {
             "type": "operation",
@@ -1247,7 +1330,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about the attachment reference if the <code>referenceType</code> is <code>ATTACHMENT</code>. Otherwise, null.</p>"
+                "smithy.api#documentation": "<p>Information about the attachment reference if the <code>referenceType</code> is\n    <code>ATTACHMENT</code>. Otherwise, null.</p>"
             }
         },
         "com.amazonaws.connect#Attribute": {
@@ -1535,7 +1618,7 @@
                 "InitiationTimestamp": {
                     "target": "com.amazonaws.connect#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time this contact was initiated, in UTC time. For <code>INBOUND</code>, this is when the\n   contact arrived. For <code>OUTBOUND</code>, this is when the agent began dialing. For <code>CALLBACK</code>, this is when\n   the callback contact was created. For <code>TRANSFER</code> and <code>QUEUE_TRANSFER</code>, this is when the transfer was\n   initiated. For <code>API</code>, this is when the request arrived.</p>"
+                        "smithy.api#documentation": "<p>The date and time this contact was initiated, in UTC time. For <code>INBOUND</code>, this is\n   when the contact arrived. For <code>OUTBOUND</code>, this is when the agent began dialing. For\n    <code>CALLBACK</code>, this is when the callback contact was created. For <code>TRANSFER</code>\n   and <code>QUEUE_TRANSFER</code>, this is when the transfer was initiated. For <code>API</code>,\n   this is when the request arrived.</p>"
                     }
                 },
                 "DisconnectTimestamp": {
@@ -1553,7 +1636,7 @@
                 "ScheduledTimestamp": {
                     "target": "com.amazonaws.connect#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp, in Unix epoch time format, at which to start running the inbound flow. </p>"
+                        "smithy.api#documentation": "<p>The timestamp, in Unix epoch time format, at which to start running the inbound flow.\n  </p>"
                     }
                 }
             },
@@ -2543,7 +2626,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an AWS resource association with an Amazon Connect instance.</p>",
+                "smithy.api#documentation": "<p>Creates an Amazon Web Services resource association with an Amazon Connect instance.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/instance/{InstanceId}/integration-associations",
@@ -2825,7 +2908,7 @@
                 "QuickConnectId": {
                     "target": "com.amazonaws.connect#QuickConnectId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the quick connect. \n  </p>"
+                        "smithy.api#documentation": "<p>The identifier for the quick connect. </p>"
                     }
                 }
             }
@@ -3223,6 +3306,12 @@
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.connect#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
                 }
             }
         },
@@ -3327,6 +3416,119 @@
                     "target": "com.amazonaws.connect#ARN",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the user account.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#CreateVocabulary": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#CreateVocabularyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#CreateVocabularyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceConflictException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a custom vocabulary associated with your Amazon Connect instance. You can set a custom\n   vocabulary to be your default vocabulary for a given language. Contact Lens for Amazon Connect uses the default\n   vocabulary in post-call and real-time contact analysis sessions for that language.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/vocabulary/{InstanceId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#CreateVocabularyRequest": {
+            "type": "structure",
+            "members": {
+                "ClientToken": {
+                    "target": "com.amazonaws.connect#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If a create request is received more than once with same client token,\n   subsequent requests return the previous response without creating a vocabulary again.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "VocabularyName": {
+                    "target": "com.amazonaws.connect#VocabularyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique name of the custom vocabulary.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LanguageCode": {
+                    "target": "com.amazonaws.connect#VocabularyLanguageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see \n<a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-whatis.html\">What is Amazon Transcribe?</a>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Content": {
+                    "target": "com.amazonaws.connect#VocabularyContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content of the custom vocabulary in plain-text format with a table of values. Each row\n   in the table represents a word or a phrase, described with <code>Phrase</code>, <code>IPA</code>,\n    <code>SoundsLike</code>, and <code>DisplayAs</code> fields. Separate the fields with TAB\n   characters. The size limit is 50KB. For more information, see <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html#create-vocabulary-table\">Create a custom\n    vocabulary using a table</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.connect#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#CreateVocabularyResponse": {
+            "type": "structure",
+            "members": {
+                "VocabularyArn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the custom vocabulary.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "VocabularyId": {
+                    "target": "com.amazonaws.connect#VocabularyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the custom vocabulary.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.connect#VocabularyState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current state of the custom vocabulary.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             }
@@ -3500,6 +3702,48 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.connect#CurrentMetric"
+            }
+        },
+        "com.amazonaws.connect#DefaultVocabulary": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LanguageCode": {
+                    "target": "com.amazonaws.connect#VocabularyLanguageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see \n<a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-whatis.html\">What is Amazon Transcribe?</a>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "VocabularyId": {
+                    "target": "com.amazonaws.connect#VocabularyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the custom vocabulary.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "VocabularyName": {
+                    "target": "com.amazonaws.connect#VocabularyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique name of the custom vocabulary.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a default vocabulary.</p>"
+            }
+        },
+        "com.amazonaws.connect#DefaultVocabularyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#DefaultVocabulary"
             }
         },
         "com.amazonaws.connect#Delay": {
@@ -3738,7 +3982,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an AWS resource association from an Amazon Connect instance. The association must not have\n   any use cases associated with it.</p>",
+                "smithy.api#documentation": "<p>Deletes an Amazon Web Services resource association from an Amazon Connect instance. The association must not have\n   any use cases associated with it.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/instance/{InstanceId}/integration-associations/{IntegrationAssociationId}",
@@ -4036,6 +4280,90 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the user.</p>",
                         "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#DeleteVocabulary": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#DeleteVocabularyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#DeleteVocabularyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the vocabulary that has the given identifier.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/vocabulary-remove/{InstanceId}/{VocabularyId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#DeleteVocabularyRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "VocabularyId": {
+                    "target": "com.amazonaws.connect#VocabularyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the custom vocabulary.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#DeleteVocabularyResponse": {
+            "type": "structure",
+            "members": {
+                "VocabularyArn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the custom vocabulary.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "VocabularyId": {
+                    "target": "com.amazonaws.connect#VocabularyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the custom vocabulary.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.connect#VocabularyState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current state of the custom vocabulary.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5023,6 +5351,73 @@
                 }
             }
         },
+        "com.amazonaws.connect#DescribeVocabulary": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#DescribeVocabularyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#DescribeVocabularyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the specified vocabulary.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/vocabulary/{InstanceId}/{VocabularyId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#DescribeVocabularyRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "VocabularyId": {
+                    "target": "com.amazonaws.connect#VocabularyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the custom vocabulary.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#DescribeVocabularyResponse": {
+            "type": "structure",
+            "members": {
+                "Vocabulary": {
+                    "target": "com.amazonaws.connect#Vocabulary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of specific words that you want Contact Lens for Amazon Connect to recognize in your audio input. They\n   are generally domain-specific words and phrases, words that Contact Lens is not recognizing, or\n   proper nouns.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.connect#Description": {
             "type": "string",
             "traits": {
@@ -5623,7 +6018,7 @@
                 "Queues": {
                     "target": "com.amazonaws.connect#Queues",
                     "traits": {
-                        "smithy.api#documentation": "<p>The queues to use to filter the metrics. You can specify up to 100 queues per\n   request.</p>"
+                        "smithy.api#documentation": "<p>The queues to use to filter the metrics. You should specify at least one queue, and can specify up to 100 queues per\n   request.  The <code>GetCurrentMetricsData</code> API in particular requires a queue when you include a <code>Filter</code> in your request. </p>"
                     }
                 },
                 "Channels": {
@@ -5778,7 +6173,7 @@
                 "CurrentMetrics": {
                     "target": "com.amazonaws.connect#CurrentMetrics",
                     "traits": {
-                        "smithy.api#documentation": "<p>The metrics to retrieve. Specify the name and unit for each metric. The following metrics\n   are available. For a description of all the metrics, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html\">Real-time Metrics\n    Definitions</a> in the <i>Amazon Connect Administrator Guide</i>.</p>\n         <dl>\n            <dt>AGENTS_AFTER_CONTACT_WORK</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#aftercallwork-real-time\">ACW</a>\n               </p>\n\n            </dd>\n            <dt>AGENTS_AVAILABLE</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#available-real-time\">Available</a>\n               </p>\n            </dd>\n            <dt>AGENTS_ERROR</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#error-real-time\">Error</a>\n               </p>\n            </dd>\n            <dt>AGENTS_NON_PRODUCTIVE</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#non-productive-time-real-time\">NPT (Non-Productive Time)</a>\n               </p>\n            </dd>\n            <dt>AGENTS_ON_CALL</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#on-call-real-time\">On\n       contact</a>\n               </p>\n            </dd>\n            <dt>AGENTS_ON_CONTACT</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#on-call-real-time\">On\n       contact</a>\n               </p>\n            </dd>\n            <dt>AGENTS_ONLINE</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#online-real-time\">Online</a>\n               </p>\n            </dd>\n            <dt>AGENTS_STAFFED</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#staffed-real-time\">Staffed</a>\n               </p>\n            </dd>\n            <dt>CONTACTS_IN_QUEUE</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#in-queue-real-time\">In\n       queue</a>\n               </p>\n            </dd>\n            <dt>CONTACTS_SCHEDULED</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#scheduled-real-time\">Scheduled</a>\n               </p>\n            </dd>\n            <dt>OLDEST_CONTACT_AGE</dt>\n            <dd>\n               <p>Unit: SECONDS</p>\n               <p>When you use groupings, Unit says SECONDS and the Value is returned in SECONDS. </p>\n               <p>When you do not use groupings, Unit says SECONDS but the Value is returned in MILLISECONDS. For\n      example, if you get a response like this:</p>\n               <p>\n                  <code>{ \"Metric\": { \"Name\": \"OLDEST_CONTACT_AGE\", \"Unit\": \"SECONDS\" }, \"Value\": 24113.0\n     </code>}</p>\n               <p>The actual OLDEST_CONTACT_AGE is 24 seconds.</p>\n\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#oldest-real-time\">Oldest</a>\n               </p>\n            </dd>\n            <dt>SLOTS_ACTIVE</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#active-real-time\">Active</a>\n               </p>\n            </dd>\n            <dt>SLOTS_AVAILABLE</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#availability-real-time\">Availability</a>\n               </p>\n            </dd>\n         </dl>",
+                        "smithy.api#documentation": "<p>The metrics to retrieve. Specify the name and unit for each metric. The following metrics\n   are available. For a description of all the metrics, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html\">Real-time Metrics\n    Definitions</a> in the <i>Amazon Connect Administrator Guide</i>.</p>\n         <dl>\n            <dt>AGENTS_AFTER_CONTACT_WORK</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#aftercallwork-real-time\">ACW</a>\n               </p>\n\n            </dd>\n            <dt>AGENTS_AVAILABLE</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#available-real-time\">Available</a>\n               </p>\n            </dd>\n            <dt>AGENTS_ERROR</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#error-real-time\">Error</a>\n               </p>\n            </dd>\n            <dt>AGENTS_NON_PRODUCTIVE</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#non-productive-time-real-time\">NPT (Non-Productive Time)</a>\n               </p>\n            </dd>\n            <dt>AGENTS_ON_CALL</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#on-call-real-time\">On\n       contact</a>\n               </p>\n            </dd>\n            <dt>AGENTS_ON_CONTACT</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#on-call-real-time\">On\n       contact</a>\n               </p>\n            </dd>\n            <dt>AGENTS_ONLINE</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#online-real-time\">Online</a>\n               </p>\n            </dd>\n            <dt>AGENTS_STAFFED</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#staffed-real-time\">Staffed</a>\n               </p>\n            </dd>\n            <dt>CONTACTS_IN_QUEUE</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#in-queue-real-time\">In\n       queue</a>\n               </p>\n            </dd>\n            <dt>CONTACTS_SCHEDULED</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#scheduled-real-time\">Scheduled</a>\n               </p>\n            </dd>\n            <dt>OLDEST_CONTACT_AGE</dt>\n            <dd>\n               <p>Unit: SECONDS</p>\n               <p>When you use groupings, Unit says SECONDS and the Value is returned in SECONDS. </p>\n               <p>When you do not use groupings, Unit says SECONDS but the Value is returned in\n      MILLISECONDS. For example, if you get a response like this:</p>\n               <p>\n                  <code>{ \"Metric\": { \"Name\": \"OLDEST_CONTACT_AGE\", \"Unit\": \"SECONDS\" }, \"Value\": 24113.0\n      </code>}</p>\n               <p>The actual OLDEST_CONTACT_AGE is 24 seconds.</p>\n\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#oldest-real-time\">Oldest</a>\n               </p>\n            </dd>\n            <dt>SLOTS_ACTIVE</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#active-real-time\">Active</a>\n               </p>\n            </dd>\n            <dt>SLOTS_AVAILABLE</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#availability-real-time\">Availability</a>\n               </p>\n            </dd>\n         </dl>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6055,6 +6450,12 @@
                     "target": "com.amazonaws.connect#HierarchyPath",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the levels in the hierarchy group.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.connect#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
                     }
                 }
             },
@@ -7548,7 +7949,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>For the specified version of Amazon Lex, returns a paginated list of all the Amazon Lex bots currently associated with the\n   instance. </p>",
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>For the specified version of Amazon Lex, returns a paginated list of all the Amazon Lex bots currently\n   associated with the instance. </p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/instance/{InstanceId}/bots",
@@ -7889,6 +8290,92 @@
                     "target": "com.amazonaws.connect#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>\n         <important>\n            <p>This is always returned as null in the response.</p>\n         </important>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#ListDefaultVocabularies": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#ListDefaultVocabulariesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#ListDefaultVocabulariesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the default vocabularies for the specified Amazon Connect instance.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/default-vocabulary-summary/{InstanceId}",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "DefaultVocabularyList",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.connect#ListDefaultVocabulariesRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "LanguageCode": {
+                    "target": "com.amazonaws.connect#VocabularyLanguageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see \n<a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-whatis.html\">What is Amazon Transcribe?</a>\n         </p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.connect#MaxResult100",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#VocabularyNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous \nresponse in the next request to retrieve the next set of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#ListDefaultVocabulariesResponse": {
+            "type": "structure",
+            "members": {
+                "DefaultVocabularyList": {
+                    "target": "com.amazonaws.connect#DefaultVocabularyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of default vocabularies.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#VocabularyNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
                     }
                 }
             }
@@ -8246,7 +8733,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides summary information about the AWS resource associations for the specified Amazon Connect\n   instance.</p>",
+                "smithy.api#documentation": "<p>Provides summary information about the Amazon Web Services resource associations for the specified Amazon Connect\n   instance.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/instance/{InstanceId}/integration-associations",
@@ -8459,7 +8946,7 @@
                     "target": "com.amazonaws.connect#MaxResult25",
                     "traits": {
                         "smithy.api#box": {},
-                        "smithy.api#documentation": "<p>The maximum number of results to return per page. If no value is specified, the default is 10. </p>",
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page. If no value is specified, the default is 10.\n   </p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 }
@@ -11553,14 +12040,14 @@
                 "Value": {
                     "target": "com.amazonaws.connect#ReferenceValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>A valid value for the reference. For example, for a URL reference, a formatted URL that is displayed to an agent in the Contact Control Panel (CCP).</p>",
+                        "smithy.api#documentation": "<p>A valid value for the reference. For example, for a URL reference, a formatted URL that is\n   displayed to an agent in the Contact Control Panel (CCP).</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Type": {
                     "target": "com.amazonaws.connect#ReferenceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the reference. Only <code>URL</code> type can be added or updated on a contact.</p>",
+                        "smithy.api#documentation": "<p>The type of the reference. Only <code>URL</code> type can be added or updated on a\n   contact.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -11605,12 +12092,12 @@
                 "Attachment": {
                     "target": "com.amazonaws.connect#AttachmentReference",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the attachment reference if the <code>referenceType</code> is <code>ATTACHMENT</code>. Otherwise, null.</p>"
+                        "smithy.api#documentation": "<p>Information about the attachment reference if the <code>referenceType</code> is\n    <code>ATTACHMENT</code>. Otherwise, null.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains summary information about a reference. <code>ReferenceSummary</code> contains only one non null field between the URL and attachment based on the reference type.</p>"
+                "smithy.api#documentation": "<p>Contains summary information about a reference. <code>ReferenceSummary</code> contains only\n   one non null field between the URL and attachment based on the reference type.</p>"
             }
         },
         "com.amazonaws.connect#ReferenceSummaryList": {
@@ -12066,6 +12553,103 @@
                 "smithy.api#documentation": "<p>Information about the Amazon Simple Storage Service (Amazon S3) storage type.</p>"
             }
         },
+        "com.amazonaws.connect#SearchVocabularies": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#SearchVocabulariesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#SearchVocabulariesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Searches for vocabularies within a specific Amazon Connect instance using <code>State</code>, <code>NameStartsWith</code>, and <code>LanguageCode</code>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/vocabulary-summary/{InstanceId}",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "VocabularySummaryList",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.connect#SearchVocabulariesRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.connect#MaxResult100",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#VocabularyNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous \nresponse in the next request to retrieve the next set of results.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.connect#VocabularyState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current state of the custom vocabulary.</p>"
+                    }
+                },
+                "NameStartsWith": {
+                    "target": "com.amazonaws.connect#VocabularyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The starting pattern of the name of the vocabulary.</p>"
+                    }
+                },
+                "LanguageCode": {
+                    "target": "com.amazonaws.connect#VocabularyLanguageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see \n<a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-whatis.html\">What is Amazon Transcribe?</a>\n         </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#SearchVocabulariesResponse": {
+            "type": "structure",
+            "members": {
+                "VocabularySummaryList": {
+                    "target": "com.amazonaws.connect#VocabularySummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of the available custom vocabularies.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#VocabularyNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.connect#SecurityKey": {
             "type": "structure",
             "members": {
@@ -12450,7 +13034,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Initiates real-time message streaming for a new chat contact.</p>\n         <p> For more information about message streaming, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/chat-message-streaming.html\">Enable real-time chat message\n   streaming</a> in the <i>Amazon Connect Administrator Guide</i>.</p>",
+                "smithy.api#documentation": "<p> Initiates real-time message streaming for a new chat contact.</p>\n         <p> For more information about message streaming, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/chat-message-streaming.html\">Enable real-time chat message\n    streaming</a> in the <i>Amazon Connect Administrator Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/contact/start-streaming",
@@ -12536,7 +13120,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Places an outbound call to a contact, and then initiates the contact flow. It performs the\n   actions in the contact flow that's specified (in <code>ContactFlowId</code>).</p>\n  \n         <p>Agents do not initiate the outbound API, which means that they do not dial the contact. If\n   the contact flow places an outbound call to a contact, and then puts the contact in queue, the\n   call is then routed to the agent, like any other inbound case.</p>\n\n         <p>There is a 60-second dialing timeout for this operation. If the call is not connected after\n   60 seconds, it fails.</p>\n         <note>\n            <p>UK numbers with a 447 prefix are not allowed by default. Before you can dial these UK\n    mobile numbers, you must submit a service quota increase request. For more information, see\n     <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">Amazon Connect Service Quotas</a> in the <i>Amazon Connect Administrator Guide</i>. </p>\n         </note>\n         <note>\n            <p>Campaign calls are not allowed by default. Before you can make a call with \n    <code>TrafficType</code> = <code>CAMPAIGN</code>, you must submit a service quota increase request. For more information, see \n    <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">Amazon Connect Service Quotas</a> in the <i>Amazon Connect Administrator Guide</i>. </p>\n         </note>",
+                "smithy.api#documentation": "<p>Places an outbound call to a contact, and then initiates the contact flow. It performs the\n   actions in the contact flow that's specified (in <code>ContactFlowId</code>).</p>\n\n         <p>Agents do not initiate the outbound API, which means that they do not dial the contact. If\n   the contact flow places an outbound call to a contact, and then puts the contact in queue, the\n   call is then routed to the agent, like any other inbound case.</p>\n\n         <p>There is a 60-second dialing timeout for this operation. If the call is not connected after\n   60 seconds, it fails.</p>\n         <note>\n            <p>UK numbers with a 447 prefix are not allowed by default. Before you can dial these UK\n    mobile numbers, you must submit a service quota increase request. For more information, see\n     <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">Amazon Connect Service Quotas</a> in the <i>Amazon Connect Administrator Guide</i>. </p>\n         </note>\n         <note>\n            <p>Campaign calls are not allowed by default. Before you can make a call with\n     <code>TrafficType</code> = <code>CAMPAIGN</code>, you must submit a service quota increase\n    request. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">Amazon Connect Service Quotas</a>\n    in the <i>Amazon Connect Administrator Guide</i>. </p>\n         </note>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/contact/outbound-voice",
@@ -12608,7 +13192,7 @@
                 "TrafficType": {
                     "target": "com.amazonaws.connect#TrafficType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Denotes the class of traffic. Calls with different traffic types are handled differently by\n   Amazon Connect. The default value is <code>GENERAL</code>. Use <code>CAMPAIGN</code> if\n   <code>EnableAnswerMachineDetection</code> is set to <code>true</code>. For all other cases, use\n   <code>GENERAL</code>. </p>"
+                        "smithy.api#documentation": "<p>Denotes the class of traffic. Calls with different traffic types are handled differently by\n   Amazon Connect. The default value is <code>GENERAL</code>. Use <code>CAMPAIGN</code> if\n    <code>EnableAnswerMachineDetection</code> is set to <code>true</code>. For all other cases, use\n    <code>GENERAL</code>. </p>"
                     }
                 }
             }
@@ -13083,7 +13667,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds the specified tags to the specified resource.</p>\n         <p>The supported resource types are users, routing profiles, queues, quick connects, \n   contact flows, agent status, and hours of operation.</p>\n         <p>For sample policies that use tags, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security_iam_id-based-policy-examples.html\">Amazon Connect Identity-Based\n    Policy Examples</a> in the <i>Amazon Connect Administrator Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Adds the specified tags to the specified resource.</p>\n         <p>The supported resource types are users, routing profiles, queues, quick connects, contact\n   flows, agent status, and hours of operation.</p>\n         <p>For sample policies that use tags, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security_iam_id-based-policy-examples.html\">Amazon Connect Identity-Based\n    Policy Examples</a> in the <i>Amazon Connect Administrator Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/tags/{resourceArn}",
@@ -13576,7 +14160,7 @@
                 "Name": {
                     "target": "com.amazonaws.connect#ContactFlowName",
                     "traits": {
-                        "smithy.api#documentation": "<p>TThe name of the contact flow.</p>"
+                        "smithy.api#documentation": "<p>The name of the contact flow.</p>"
                     }
                 },
                 "Description": {
@@ -14055,7 +14639,7 @@
                 "AttributeType": {
                     "target": "com.amazonaws.connect#InstanceAttributeType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of attribute.</p>\n         <note>\n            <p>Only allowlisted customers can consume USE_CUSTOM_TTS_VOICES. To access this feature, contact AWS Support for allowlisting.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The type of attribute.</p>\n         <note>\n            <p>Only allowlisted customers can consume USE_CUSTOM_TTS_VOICES. To access this feature,\n    contact Amazon Web Services Support for allowlisting.</p>\n         </note>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -15565,6 +16149,294 @@
             "type": "double",
             "traits": {
                 "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.connect#Vocabulary": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.connect#VocabularyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique name of the custom vocabulary.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.connect#VocabularyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the custom vocabulary.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the custom vocabulary.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LanguageCode": {
+                    "target": "com.amazonaws.connect#VocabularyLanguageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see \n<a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-whatis.html\">What is Amazon Transcribe?</a>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.connect#VocabularyState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current state of the custom vocabulary.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.connect#VocabularyLastModifiedTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the custom vocabulary was last modified.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FailureReason": {
+                    "target": "com.amazonaws.connect#VocabularyFailureReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason why the custom vocabulary was not created.</p>"
+                    }
+                },
+                "Content": {
+                    "target": "com.amazonaws.connect#VocabularyContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content of the custom vocabulary in plain-text format with a table of values. Each row\n   in the table represents a word or a phrase, described with <code>Phrase</code>, <code>IPA</code>,\n    <code>SoundsLike</code>, and <code>DisplayAs</code> fields. Separate the fields with TAB\n   characters. For more information, see <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html#create-vocabulary-table\">Create a custom\n    vocabulary using a table</a>.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.connect#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a custom vocabulary.</p>"
+            }
+        },
+        "com.amazonaws.connect#VocabularyContent": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 60000
+                }
+            }
+        },
+        "com.amazonaws.connect#VocabularyFailureReason": {
+            "type": "string"
+        },
+        "com.amazonaws.connect#VocabularyId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.connect#VocabularyLanguageCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ar-AE",
+                        "name": "AR_AE"
+                    },
+                    {
+                        "value": "de-CH",
+                        "name": "DE_CH"
+                    },
+                    {
+                        "value": "de-DE",
+                        "name": "DE_DE"
+                    },
+                    {
+                        "value": "en-AB",
+                        "name": "EN_AB"
+                    },
+                    {
+                        "value": "en-AU",
+                        "name": "EN_AU"
+                    },
+                    {
+                        "value": "en-GB",
+                        "name": "EN_GB"
+                    },
+                    {
+                        "value": "en-IE",
+                        "name": "EN_IE"
+                    },
+                    {
+                        "value": "en-IN",
+                        "name": "EN_IN"
+                    },
+                    {
+                        "value": "en-US",
+                        "name": "EN_US"
+                    },
+                    {
+                        "value": "en-WL",
+                        "name": "EN_WL"
+                    },
+                    {
+                        "value": "es-ES",
+                        "name": "ES_ES"
+                    },
+                    {
+                        "value": "es-US",
+                        "name": "ES_US"
+                    },
+                    {
+                        "value": "fr-CA",
+                        "name": "FR_CA"
+                    },
+                    {
+                        "value": "fr-FR",
+                        "name": "FR_FR"
+                    },
+                    {
+                        "value": "hi-IN",
+                        "name": "HI_IN"
+                    },
+                    {
+                        "value": "it-IT",
+                        "name": "IT_IT"
+                    },
+                    {
+                        "value": "ja-JP",
+                        "name": "JA_JP"
+                    },
+                    {
+                        "value": "ko-KR",
+                        "name": "KO_KR"
+                    },
+                    {
+                        "value": "pt-BR",
+                        "name": "PT_BR"
+                    },
+                    {
+                        "value": "pt-PT",
+                        "name": "PT_PT"
+                    },
+                    {
+                        "value": "zh-CN",
+                        "name": "ZH_CN"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.connect#VocabularyLastModifiedTime": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.connect#VocabularyName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 140
+                },
+                "smithy.api#pattern": "^[0-9a-zA-Z._-]+$"
+            }
+        },
+        "com.amazonaws.connect#VocabularyNextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 131070
+                },
+                "smithy.api#pattern": "\\S"
+            }
+        },
+        "com.amazonaws.connect#VocabularyState": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CREATION_IN_PROGRESS",
+                        "name": "CREATION_IN_PROGRESS"
+                    },
+                    {
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
+                    },
+                    {
+                        "value": "CREATION_FAILED",
+                        "name": "CREATION_FAILED"
+                    },
+                    {
+                        "value": "DELETE_IN_PROGRESS",
+                        "name": "DELETE_IN_PROGRESS"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.connect#VocabularySummary": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.connect#VocabularyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique name of the custom vocabulary.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.connect#VocabularyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the custom vocabulary.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the custom vocabulary.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LanguageCode": {
+                    "target": "com.amazonaws.connect#VocabularyLanguageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see \n<a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-whatis.html\">What is Amazon Transcribe?</a>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.connect#VocabularyState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current state of the custom vocabulary.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.connect#VocabularyLastModifiedTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the custom vocabulary was last modified.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FailureReason": {
+                    "target": "com.amazonaws.connect#VocabularyFailureReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason why the custom vocabulary was not created.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains summary information about the custom vocabulary.</p>"
+            }
+        },
+        "com.amazonaws.connect#VocabularySummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#VocabularySummary"
             }
         },
         "com.amazonaws.connect#VoiceRecordingConfiguration": {
