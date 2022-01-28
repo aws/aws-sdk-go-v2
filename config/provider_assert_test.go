@@ -98,6 +98,20 @@ var (
 	_ regionProvider = &UseEC2IMDSRegion{}
 )
 
+// retryMaxAttemptsProvider implementor assertions
+var (
+	_ retryMaxAttemptsProvider = &EnvConfig{}
+	_ retryMaxAttemptsProvider = &SharedConfig{}
+	_ retryMaxAttemptsProvider = &LoadOptions{}
+)
+
+// retryModeProvider implementor assertions
+var (
+	_ retryModeProvider = &EnvConfig{}
+	_ retryModeProvider = &SharedConfig{}
+	_ retryModeProvider = &LoadOptions{}
+)
+
 // retryProvider implementor assertions
 var (
 	_ retryProvider = &LoadOptions{}

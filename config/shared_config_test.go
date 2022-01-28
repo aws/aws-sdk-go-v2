@@ -534,6 +534,46 @@ func TestNewSharedConfig(t *testing.T) {
 			Profile:              "invaliddefaultsmode",
 			Err:                  fmt.Errorf("failed to load defaults_mode from shared config, invalid value: invalid"),
 		},
+		"retry options auto": {
+			ConfigFilenames:      []string{testConfigFilename},
+			CredentialsFilenames: []string{testCredentialsFilename},
+			Profile:              "retryunset",
+			Expected: SharedConfig{
+				Profile: "retryunset",
+			},
+		},
+		"retry options standard": {
+			ConfigFilenames:      []string{testConfigFilename},
+			CredentialsFilenames: []string{testCredentialsFilename},
+			Profile:              "retrywithstandard",
+			Expected: SharedConfig{
+				Profile:          "retrywithstandard",
+				RetryMode:        aws.RetryModeStandard,
+				RetryMaxAttempts: 5,
+			},
+		},
+		"retry options adaptive": {
+			ConfigFilenames:      []string{testConfigFilename},
+			CredentialsFilenames: []string{testCredentialsFilename},
+			Profile:              "retrywithadaptive",
+			Expected: SharedConfig{
+				Profile:          "retrywithadaptive",
+				RetryMode:        aws.RetryModeAdaptive,
+				RetryMaxAttempts: 4,
+			},
+		},
+		"retry options invalid": {
+			ConfigFilenames:      []string{testConfigFilename},
+			CredentialsFilenames: []string{testCredentialsFilename},
+			Profile:              "retrywithinvalidmode",
+			Err:                  fmt.Errorf("failed to load retry_mode from shared config, unknown RetryMode, invalid"),
+		},
+		"retry options invalid retry attempts": {
+			ConfigFilenames:      []string{testConfigFilename},
+			CredentialsFilenames: []string{testCredentialsFilename},
+			Profile:              "retrywithinvalidattempts",
+			Err:                  fmt.Errorf("failed to load max_attempts from shared config, invalid value max_attempts=invalid, expect integer"),
+		},
 		"merged profiles across files": {
 			ConfigFilenames:      []string{testConfigFilename},
 			CredentialsFilenames: []string{testCredentialsFilename},

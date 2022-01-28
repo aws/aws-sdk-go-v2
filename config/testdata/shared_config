@@ -241,3 +241,19 @@ defaults_mode = standard
 
 [profile invaliddefaultsmode]
 defaults_mode = invalid
+
+[profile retryunset]
+
+[profile retrywithstandard]
+retry_mode = standard
+max_attempts = 5
+
+[profile retrywithadaptive]
+retry_mode = adaptive
+max_attempts = 4
+
+[profile retrywithinvalidmode]
+retry_mode = invalid
+
+[profile retrywithinvalidattempts]
+max_attempts = invalid

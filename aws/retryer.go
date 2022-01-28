@@ -6,6 +6,38 @@ import (
 	"time"
 )
 
+// RetryMode provides the mode the API client will use to create a retryer
+// based on.
+type RetryMode string
+
+const (
+	// Standard model provides rate limited retry attempts with exponential
+	// backoff delay.
+	RetryModeStandard RetryMode = "standard"
+
+	// Adaptive model provides attempt send rate limiting on throttle responses
+	// in addition to standard mode's retry rate limiting.
+	//
+	// Adaptive retry mode is experimental and is subject to change in the
+	// future.
+	RetryModeAdaptive RetryMode = "adaptive"
+)
+
+// ParseRetryMode attempts to parse a RetryMode from the given string.
+// Returning error if the value is not a known RetryMode.
+func ParseRetryMode(v string) (mode RetryMode, err error) {
+	switch v {
+	case "standard":
+		return RetryModeStandard, nil
+	case "adaptive":
+		return RetryModeAdaptive, nil
+	default:
+		return mode, fmt.Errorf("unknown RetryMode, %v", v)
+	}
+}
+
+func (m RetryMode) String() string { return string(m) }
+
 // Retryer is an interface to determine if a given error from a
 // attempt should be retried, and if so what backoff delay to apply. The
 // default implementation used by most services is the retry package's Standard
