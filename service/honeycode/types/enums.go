@@ -2,6 +2,48 @@
 
 package types
 
+type ErrorCode string
+
+// Enum values for ErrorCode
+const (
+	ErrorCodeAccessDenied              ErrorCode = "ACCESS_DENIED"
+	ErrorCodeInvalidUrlError           ErrorCode = "INVALID_URL_ERROR"
+	ErrorCodeInvalidImportOptionsError ErrorCode = "INVALID_IMPORT_OPTIONS_ERROR"
+	ErrorCodeInvalidTableIdError       ErrorCode = "INVALID_TABLE_ID_ERROR"
+	ErrorCodeInvalidTableColumnIdError ErrorCode = "INVALID_TABLE_COLUMN_ID_ERROR"
+	ErrorCodeTableNotFoundError        ErrorCode = "TABLE_NOT_FOUND_ERROR"
+	ErrorCodeFileEmptyError            ErrorCode = "FILE_EMPTY_ERROR"
+	ErrorCodeInvalidFileTypeError      ErrorCode = "INVALID_FILE_TYPE_ERROR"
+	ErrorCodeFileParsingError          ErrorCode = "FILE_PARSING_ERROR"
+	ErrorCodeFileSizeLimitError        ErrorCode = "FILE_SIZE_LIMIT_ERROR"
+	ErrorCodeFileNotFoundError         ErrorCode = "FILE_NOT_FOUND_ERROR"
+	ErrorCodeUnknownError              ErrorCode = "UNKNOWN_ERROR"
+	ErrorCodeResourceNotFoundError     ErrorCode = "RESOURCE_NOT_FOUND_ERROR"
+	ErrorCodeSystemLimitError          ErrorCode = "SYSTEM_LIMIT_ERROR"
+)
+
+// Values returns all known values for ErrorCode. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (ErrorCode) Values() []ErrorCode {
+	return []ErrorCode{
+		"ACCESS_DENIED",
+		"INVALID_URL_ERROR",
+		"INVALID_IMPORT_OPTIONS_ERROR",
+		"INVALID_TABLE_ID_ERROR",
+		"INVALID_TABLE_COLUMN_ID_ERROR",
+		"TABLE_NOT_FOUND_ERROR",
+		"FILE_EMPTY_ERROR",
+		"INVALID_FILE_TYPE_ERROR",
+		"FILE_PARSING_ERROR",
+		"FILE_SIZE_LIMIT_ERROR",
+		"FILE_NOT_FOUND_ERROR",
+		"UNKNOWN_ERROR",
+		"RESOURCE_NOT_FOUND_ERROR",
+		"SYSTEM_LIMIT_ERROR",
+	}
+}
+
 type Format string
 
 // Enum values for Format
@@ -17,6 +59,7 @@ const (
 	FormatAccounting Format = "ACCOUNTING"
 	FormatContact    Format = "CONTACT"
 	FormatRowlink    Format = "ROWLINK"
+	FormatRowset     Format = "ROWSET"
 )
 
 // Values returns all known values for Format. Note that this can be expanded in
@@ -35,6 +78,7 @@ func (Format) Values() []Format {
 		"ACCOUNTING",
 		"CONTACT",
 		"ROWLINK",
+		"ROWSET",
 	}
 }
 

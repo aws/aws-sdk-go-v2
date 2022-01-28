@@ -480,6 +480,27 @@ func (e *PolicyNotFound) ErrorMessage() string {
 func (e *PolicyNotFound) ErrorCode() string             { return "PolicyNotFound" }
 func (e *PolicyNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// Returned if the specified file system did not have a replication configuration.
+type ReplicationNotFound struct {
+	Message *string
+
+	ErrorCode_ *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ReplicationNotFound) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ReplicationNotFound) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ReplicationNotFound) ErrorCode() string             { return "ReplicationNotFound" }
+func (e *ReplicationNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // Returned if the size of SecurityGroups specified in the request is greater than
 // five.
 type SecurityGroupLimitExceeded struct {

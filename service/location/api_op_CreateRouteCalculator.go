@@ -16,7 +16,10 @@ import (
 // Creates a route calculator resource in your AWS account. You can send requests
 // to a route calculator resource to estimate travel time, distance, and get
 // directions. A route calculator sources traffic and road network data from your
-// chosen data provider.
+// chosen data provider. If your application is tracking or routing assets you use
+// in your business, such as delivery vehicles or employees, you may only use HERE
+// as your geolocation provider. See section 82 of the AWS service terms
+// (http://aws.amazon.com/service-terms) for more details.
 func (c *Client) CreateRouteCalculator(ctx context.Context, params *CreateRouteCalculatorInput, optFns ...func(*Options)) (*CreateRouteCalculatorOutput, error) {
 	if params == nil {
 		params = &CreateRouteCalculatorInput{}
@@ -79,10 +82,10 @@ type CreateRouteCalculatorInput struct {
 	// The optional description for the route calculator resource.
 	Description *string
 
-	// Optionally specifies the pricing plan for the route calculator resource.
-	// Defaults to RequestBasedUsage. For additional details and restrictions on each
-	// pricing plan option, see Amazon Location Service pricing
-	// (https://aws.amazon.com/location/pricing/).
+	// No longer used. If included, the only allowed value is RequestBasedUsage.
+	//
+	// Deprecated: Deprecated. If included, the only allowed value is
+	// RequestBasedUsage.
 	PricingPlan types.PricingPlan
 
 	// Applies one or more tags to the route calculator resource. A tag is a key-value

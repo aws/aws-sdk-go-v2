@@ -83,13 +83,6 @@ type DescribeRouteCalculatorOutput struct {
 	// This member is required.
 	Description *string
 
-	// The pricing plan selected for the specified route calculator resource. For
-	// additional details and restrictions on each pricing plan option, see Amazon
-	// Location Service pricing (https://aws.amazon.com/location/pricing/).
-	//
-	// This member is required.
-	PricingPlan types.PricingPlan
-
 	// The timestamp when the route calculator resource was last updated in ISO 8601
 	// (https://www.iso.org/iso-8601-date-and-time-format.html) format:
 	// YYYY-MM-DDThh:mm:ss.sssZ.
@@ -98,6 +91,11 @@ type DescribeRouteCalculatorOutput struct {
 	//
 	// This member is required.
 	UpdateTime *time.Time
+
+	// Always returns RequestBasedUsage.
+	//
+	// Deprecated: Deprecated. Always returns RequestBasedUsage.
+	PricingPlan types.PricingPlan
 
 	// Tags associated with route calculator resource.
 	Tags map[string]string

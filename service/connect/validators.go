@@ -50,6 +50,26 @@ func (m *validateOpAssociateBot) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAssociateDefaultVocabulary struct {
+}
+
+func (*validateOpAssociateDefaultVocabulary) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateDefaultVocabulary) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateDefaultVocabularyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateDefaultVocabularyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAssociateInstanceStorageConfig struct {
 }
 
@@ -430,6 +450,26 @@ func (m *validateOpCreateUser) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateVocabulary struct {
+}
+
+func (*validateOpCreateVocabulary) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateVocabulary) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateVocabularyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateVocabularyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteContactFlow struct {
 }
 
@@ -625,6 +665,26 @@ func (m *validateOpDeleteUser) HandleInitialize(ctx context.Context, in middlewa
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteUserInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteVocabulary struct {
+}
+
+func (*validateOpDeleteVocabulary) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteVocabulary) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteVocabularyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteVocabularyInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -925,6 +985,26 @@ func (m *validateOpDescribeUser) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeUserInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeVocabulary struct {
+}
+
+func (*validateOpDescribeVocabulary) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeVocabulary) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeVocabularyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeVocabularyInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1285,6 +1365,26 @@ func (m *validateOpListContactReferences) HandleInitialize(ctx context.Context, 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListContactReferencesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListDefaultVocabularies struct {
+}
+
+func (*validateOpListDefaultVocabularies) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListDefaultVocabularies) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListDefaultVocabulariesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListDefaultVocabulariesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1705,6 +1805,26 @@ func (m *validateOpResumeContactRecording) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpResumeContactRecordingInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpSearchVocabularies struct {
+}
+
+func (*validateOpSearchVocabularies) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSearchVocabularies) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SearchVocabulariesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSearchVocabulariesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2558,6 +2678,10 @@ func addOpAssociateBotValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateBot{}, middleware.After)
 }
 
+func addOpAssociateDefaultVocabularyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateDefaultVocabulary{}, middleware.After)
+}
+
 func addOpAssociateInstanceStorageConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateInstanceStorageConfig{}, middleware.After)
 }
@@ -2634,6 +2758,10 @@ func addOpCreateUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateUser{}, middleware.After)
 }
 
+func addOpCreateVocabularyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateVocabulary{}, middleware.After)
+}
+
 func addOpDeleteContactFlowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteContactFlow{}, middleware.After)
 }
@@ -2672,6 +2800,10 @@ func addOpDeleteUserHierarchyGroupValidationMiddleware(stack *middleware.Stack) 
 
 func addOpDeleteUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteUser{}, middleware.After)
+}
+
+func addOpDeleteVocabularyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteVocabulary{}, middleware.After)
 }
 
 func addOpDescribeAgentStatusValidationMiddleware(stack *middleware.Stack) error {
@@ -2732,6 +2864,10 @@ func addOpDescribeUserHierarchyStructureValidationMiddleware(stack *middleware.S
 
 func addOpDescribeUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeUser{}, middleware.After)
+}
+
+func addOpDescribeVocabularyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeVocabulary{}, middleware.After)
 }
 
 func addOpDisassociateApprovedOriginValidationMiddleware(stack *middleware.Stack) error {
@@ -2804,6 +2940,10 @@ func addOpListContactFlowsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListContactReferencesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListContactReferences{}, middleware.After)
+}
+
+func addOpListDefaultVocabulariesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListDefaultVocabularies{}, middleware.After)
 }
 
 func addOpListHoursOfOperationsValidationMiddleware(stack *middleware.Stack) error {
@@ -2888,6 +3028,10 @@ func addOpListUsersValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpResumeContactRecordingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpResumeContactRecording{}, middleware.After)
+}
+
+func addOpSearchVocabulariesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSearchVocabularies{}, middleware.After)
 }
 
 func addOpStartChatContactValidationMiddleware(stack *middleware.Stack) error {
@@ -3612,6 +3756,24 @@ func validateOpAssociateBotInput(v *AssociateBotInput) error {
 	}
 }
 
+func validateOpAssociateDefaultVocabularyInput(v *AssociateDefaultVocabularyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateDefaultVocabularyInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if len(v.LanguageCode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("LanguageCode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAssociateInstanceStorageConfigInput(v *AssociateInstanceStorageConfigInput) error {
 	if v == nil {
 		return nil
@@ -4043,6 +4205,30 @@ func validateOpCreateUserInput(v *CreateUserInput) error {
 	}
 }
 
+func validateOpCreateVocabularyInput(v *CreateVocabularyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateVocabularyInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.VocabularyName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VocabularyName"))
+	}
+	if len(v.LanguageCode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("LanguageCode"))
+	}
+	if v.Content == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Content"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteContactFlowInput(v *DeleteContactFlowInput) error {
 	if v == nil {
 		return nil
@@ -4215,6 +4401,24 @@ func validateOpDeleteUserInput(v *DeleteUserInput) error {
 	}
 	if v.UserId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteVocabularyInput(v *DeleteVocabularyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteVocabularyInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.VocabularyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VocabularyId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4482,6 +4686,24 @@ func validateOpDescribeUserInput(v *DescribeUserInput) error {
 	}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeVocabularyInput(v *DescribeVocabularyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeVocabularyInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.VocabularyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VocabularyId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4827,6 +5049,21 @@ func validateOpListContactReferencesInput(v *ListContactReferencesInput) error {
 	}
 }
 
+func validateOpListDefaultVocabulariesInput(v *ListDefaultVocabulariesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListDefaultVocabulariesInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListHoursOfOperationsInput(v *ListHoursOfOperationsInput) error {
 	if v == nil {
 		return nil
@@ -5155,6 +5392,21 @@ func validateOpResumeContactRecordingInput(v *ResumeContactRecordingInput) error
 	}
 	if v.InitialContactId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InitialContactId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSearchVocabulariesInput(v *SearchVocabulariesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchVocabulariesInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

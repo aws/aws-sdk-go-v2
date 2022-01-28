@@ -630,6 +630,26 @@ func (m *validateOpGetEventPrediction) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetEventPredictionMetadata struct {
+}
+
+func (*validateOpGetEventPredictionMetadata) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetEventPredictionMetadata) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetEventPredictionMetadataInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetEventPredictionMetadataInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetModelVersion struct {
 }
 
@@ -665,6 +685,26 @@ func (m *validateOpGetRules) HandleInitialize(ctx context.Context, in middleware
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetRulesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListEventPredictions struct {
+}
+
+func (*validateOpListEventPredictions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListEventPredictions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListEventPredictionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListEventPredictionsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1214,12 +1254,20 @@ func addOpGetEventPredictionValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpGetEventPrediction{}, middleware.After)
 }
 
+func addOpGetEventPredictionMetadataValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetEventPredictionMetadata{}, middleware.After)
+}
+
 func addOpGetModelVersionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetModelVersion{}, middleware.After)
 }
 
 func addOpGetRulesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetRules{}, middleware.After)
+}
+
+func addOpListEventPredictionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListEventPredictions{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1471,6 +1519,24 @@ func validateModelVersion(v *types.ModelVersion) error {
 	}
 	if v.ModelVersionNumber == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ModelVersionNumber"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePredictionTimeRange(v *types.PredictionTimeRange) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PredictionTimeRange"}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	}
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2212,6 +2278,33 @@ func validateOpGetEventPredictionInput(v *GetEventPredictionInput) error {
 	}
 }
 
+func validateOpGetEventPredictionMetadataInput(v *GetEventPredictionMetadataInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetEventPredictionMetadataInput"}
+	if v.EventId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventId"))
+	}
+	if v.EventTypeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventTypeName"))
+	}
+	if v.DetectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
+	}
+	if v.DetectorVersionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DetectorVersionId"))
+	}
+	if v.PredictionTimestamp == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PredictionTimestamp"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetModelVersionInput(v *GetModelVersionInput) error {
 	if v == nil {
 		return nil
@@ -2240,6 +2333,23 @@ func validateOpGetRulesInput(v *GetRulesInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetRulesInput"}
 	if v.DetectorId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListEventPredictionsInput(v *ListEventPredictionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListEventPredictionsInput"}
+	if v.PredictionTimeRange != nil {
+		if err := validatePredictionTimeRange(v.PredictionTimeRange); err != nil {
+			invalidParams.AddNested("PredictionTimeRange", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

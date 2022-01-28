@@ -40,7 +40,7 @@ type UpdateExperimentTemplateInput struct {
 	// A description for the template.
 	Description *string
 
-	// The Amazon Resource Name (ARN) of an IAM role that grants the AWS FIS service
+	// The Amazon Resource Name (ARN) of an IAM role that grants the FIS service
 	// permission to perform service actions on your behalf.
 	RoleArn *string
 

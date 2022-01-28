@@ -225,6 +225,70 @@ type EntityType struct {
 	noSmithyDocumentSerde
 }
 
+// The details of the external (Amazon Sagemaker) model evaluated for generating
+// predictions.
+type EvaluatedExternalModel struct {
+
+	// Input variables use for generating predictions.
+	InputVariables map[string]string
+
+	// The endpoint of the external (Amazon Sagemaker) model.
+	ModelEndpoint *string
+
+	// Output variables.
+	OutputVariables map[string]string
+
+	// Indicates whether event variables were used to generate predictions.
+	UseEventVariables *bool
+
+	noSmithyDocumentSerde
+}
+
+// The model version evaluated for generating prediction.
+type EvaluatedModelVersion struct {
+
+	// Evaluations generated for the model version.
+	Evaluations []ModelVersionEvaluation
+
+	// The model ID.
+	ModelId *string
+
+	// The model type. Valid values: ONLINE_FRAUD_INSIGHTS | TRANSACTION_FRAUD_INSIGHTS
+	ModelType *string
+
+	// The model version.
+	ModelVersion *string
+
+	noSmithyDocumentSerde
+}
+
+// The details of the rule used for evaluating variable values.
+type EvaluatedRule struct {
+
+	// Indicates whether the rule was evaluated.
+	Evaluated *bool
+
+	// The rule expression.
+	Expression *string
+
+	// The rule expression value.
+	ExpressionWithValues *string
+
+	// Indicates whether the rule matched.
+	Matched *bool
+
+	// The rule outcome.
+	Outcomes []string
+
+	// The rule ID.
+	RuleId *string
+
+	// The rule version.
+	RuleVersion *string
+
+	noSmithyDocumentSerde
+}
+
 // The event details.
 type Event struct {
 
@@ -252,6 +316,30 @@ type Event struct {
 	// The timestamp associated with the label to update. The timestamp must be
 	// specified using ISO 8601 standard in UTC.
 	LabelTimestamp *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the summary of an event prediction.
+type EventPredictionSummary struct {
+
+	// The detector ID.
+	DetectorId *string
+
+	// The detector version ID.
+	DetectorVersionId *string
+
+	// The event ID.
+	EventId *string
+
+	// The timestamp of the event.
+	EventTimestamp *string
+
+	// The event type.
+	EventTypeName *string
+
+	// The timestamp when the prediction was generated.
+	PredictionTimestamp *string
 
 	noSmithyDocumentSerde
 }
@@ -291,6 +379,22 @@ type EventType struct {
 
 	// The event type name.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the summary of an event variable that was evaluated for
+// generating prediction.
+type EventVariableSummary struct {
+
+	// The event variable name.
+	Name *string
+
+	// The event variable source.
+	Source *string
+
+	// The value of the event variable.
+	Value *string
 
 	noSmithyDocumentSerde
 }
@@ -401,6 +505,16 @@ type FileValidationMessage struct {
 
 	// The message type.
 	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// A conditional statement for filtering a list of past predictions.
+type FilterCondition struct {
+
+	// A statement containing a resource property and a value to specify filter
+	// condition.
+	Value *string
 
 	noSmithyDocumentSerde
 }
@@ -717,6 +831,21 @@ type ModelVersionDetail struct {
 	noSmithyDocumentSerde
 }
 
+// The model version evalutions.
+type ModelVersionEvaluation struct {
+
+	// The evaluation score generated for the model version.
+	EvaluationScore *string
+
+	// The output variable name.
+	OutputVariableName *string
+
+	// The prediction explanations generated for the model version.
+	PredictionExplanations *PredictionExplanations
+
+	noSmithyDocumentSerde
+}
+
 // The outcome.
 type Outcome struct {
 
@@ -734,6 +863,32 @@ type Outcome struct {
 
 	// The outcome name.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// The prediction explanations that provide insight into how each event variable
+// impacted the model version's fraud prediction score.
+type PredictionExplanations struct {
+
+	// The details of the event variable's impact on the prediction score.
+	VariableImpactExplanations []VariableImpactExplanation
+
+	noSmithyDocumentSerde
+}
+
+// The time period for when the predictions were generated.
+type PredictionTimeRange struct {
+
+	// The end time of the time period for when the predictions were generated.
+	//
+	// This member is required.
+	EndTime *string
+
+	// The start time of the time period for when the predictions were generated.
+	//
+	// This member is required.
+	StartTime *string
 
 	noSmithyDocumentSerde
 }
@@ -937,6 +1092,30 @@ type VariableEntry struct {
 	// SHIPPING_ADDRESS_L2 | SHIPPING_CITY | SHIPPING_COUNTRY | SHIPPING_NAME |
 	// SHIPPING_PHONE | SHIPPING_STATE | SHIPPING_ZIP | USERAGENT
 	VariableType *string
+
+	noSmithyDocumentSerde
+}
+
+// The details of the event variable's impact on the prediction score.
+type VariableImpactExplanation struct {
+
+	// The event variable name.
+	EventVariableName *string
+
+	// The raw, uninterpreted value represented as log-odds of the fraud. These values
+	// are usually between -10 to +10, but range from - infinity to + infinity.
+	//
+	// * A
+	// positive value indicates that the variable drove the risk score up.
+	//
+	// * A
+	// negative value indicates that the variable drove the risk score down.
+	LogOddsImpact *float32
+
+	// The event variable's relative impact in terms of magnitude on the prediction
+	// scores. The relative impact values consist of a numerical rating (0-5, 5 being
+	// the highest) and direction (increased/decreased) impact of the fraud risk.
+	RelativeImpact *string
 
 	noSmithyDocumentSerde
 }

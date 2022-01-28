@@ -58,6 +58,24 @@ func (RecordingConfigurationState) Values() []RecordingConfigurationState {
 	}
 }
 
+type RecordingMode string
+
+// Enum values for RecordingMode
+const (
+	RecordingModeDisabled RecordingMode = "DISABLED"
+	RecordingModeInterval RecordingMode = "INTERVAL"
+)
+
+// Values returns all known values for RecordingMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RecordingMode) Values() []RecordingMode {
+	return []RecordingMode{
+		"DISABLED",
+		"INTERVAL",
+	}
+}
+
 type StreamHealth string
 
 // Enum values for StreamHealth

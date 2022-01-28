@@ -1357,6 +1357,13 @@ func awsRestjson1_serializeDocumentCellInput(v *types.CellInput, value smithyjso
 		ok.String(*v.Fact)
 	}
 
+	if v.Facts != nil {
+		ok := object.Key("facts")
+		if err := awsRestjson1_serializeDocumentFactList(v.Facts, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -1430,6 +1437,17 @@ func awsRestjson1_serializeDocumentDestinationOptions(v *types.DestinationOption
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFactList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 

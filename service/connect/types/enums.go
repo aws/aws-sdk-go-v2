@@ -1250,6 +1250,84 @@ func (UseCaseType) Values() []UseCaseType {
 	}
 }
 
+type VocabularyLanguageCode string
+
+// Enum values for VocabularyLanguageCode
+const (
+	VocabularyLanguageCodeArAe VocabularyLanguageCode = "ar-AE"
+	VocabularyLanguageCodeDeCh VocabularyLanguageCode = "de-CH"
+	VocabularyLanguageCodeDeDe VocabularyLanguageCode = "de-DE"
+	VocabularyLanguageCodeEnAb VocabularyLanguageCode = "en-AB"
+	VocabularyLanguageCodeEnAu VocabularyLanguageCode = "en-AU"
+	VocabularyLanguageCodeEnGb VocabularyLanguageCode = "en-GB"
+	VocabularyLanguageCodeEnIe VocabularyLanguageCode = "en-IE"
+	VocabularyLanguageCodeEnIn VocabularyLanguageCode = "en-IN"
+	VocabularyLanguageCodeEnUs VocabularyLanguageCode = "en-US"
+	VocabularyLanguageCodeEnWl VocabularyLanguageCode = "en-WL"
+	VocabularyLanguageCodeEsEs VocabularyLanguageCode = "es-ES"
+	VocabularyLanguageCodeEsUs VocabularyLanguageCode = "es-US"
+	VocabularyLanguageCodeFrCa VocabularyLanguageCode = "fr-CA"
+	VocabularyLanguageCodeFrFr VocabularyLanguageCode = "fr-FR"
+	VocabularyLanguageCodeHiIn VocabularyLanguageCode = "hi-IN"
+	VocabularyLanguageCodeItIt VocabularyLanguageCode = "it-IT"
+	VocabularyLanguageCodeJaJp VocabularyLanguageCode = "ja-JP"
+	VocabularyLanguageCodeKoKr VocabularyLanguageCode = "ko-KR"
+	VocabularyLanguageCodePtBr VocabularyLanguageCode = "pt-BR"
+	VocabularyLanguageCodePtPt VocabularyLanguageCode = "pt-PT"
+	VocabularyLanguageCodeZhCn VocabularyLanguageCode = "zh-CN"
+)
+
+// Values returns all known values for VocabularyLanguageCode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (VocabularyLanguageCode) Values() []VocabularyLanguageCode {
+	return []VocabularyLanguageCode{
+		"ar-AE",
+		"de-CH",
+		"de-DE",
+		"en-AB",
+		"en-AU",
+		"en-GB",
+		"en-IE",
+		"en-IN",
+		"en-US",
+		"en-WL",
+		"es-ES",
+		"es-US",
+		"fr-CA",
+		"fr-FR",
+		"hi-IN",
+		"it-IT",
+		"ja-JP",
+		"ko-KR",
+		"pt-BR",
+		"pt-PT",
+		"zh-CN",
+	}
+}
+
+type VocabularyState string
+
+// Enum values for VocabularyState
+const (
+	VocabularyStateCreationInProgress VocabularyState = "CREATION_IN_PROGRESS"
+	VocabularyStateActive             VocabularyState = "ACTIVE"
+	VocabularyStateCreationFailed     VocabularyState = "CREATION_FAILED"
+	VocabularyStateDeleteInProgress   VocabularyState = "DELETE_IN_PROGRESS"
+)
+
+// Values returns all known values for VocabularyState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (VocabularyState) Values() []VocabularyState {
+	return []VocabularyState{
+		"CREATION_IN_PROGRESS",
+		"ACTIVE",
+		"CREATION_FAILED",
+		"DELETE_IN_PROGRESS",
+	}
+}
+
 type VoiceRecordingTrack string
 
 // Enum values for VoiceRecordingTrack

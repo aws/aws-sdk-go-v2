@@ -5323,7 +5323,7 @@
                 "AsyncInferenceConfig": {
                     "target": "com.amazonaws.sagemaker#AsyncInferenceConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies configuration for how an endpoint performs asynchronous inference. \n            This is a required field in order for your Endpoint to be invoked using \n            <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_runtime_InvokeEndpoint.html\">\n               <code>InvokeEndpointAsync</code>\n            </a>.</p>"
+                        "smithy.api#documentation": "<p>Specifies configuration for how an endpoint performs asynchronous inference. \n            This is a required field in order for your Endpoint to be invoked using\n            <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_runtime_InvokeEndpointAsync.html\">InvokeEndpointAsync</a>.</p>"
                     }
                 }
             }
@@ -17425,6 +17425,20 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#FailStepMetadata": {
+            "type": "structure",
+            "members": {
+                "ErrorMessage": {
+                    "target": "com.amazonaws.sagemaker#String3072",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message that you define and then is processed and rendered by \n         the Fail step when the error occurs.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The container for the metadata for Fail step.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#FailureReason": {
             "type": "string",
             "traits": {
@@ -24434,7 +24448,7 @@
                 "ModelPackageType": {
                     "target": "com.amazonaws.sagemaker#ModelPackageType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A filter that returns onlyl the model packages of the specified type. This can be one\n            of the following values.</p>\n        <ul>\n            <li>\n                <p>\n                  <code>VERSIONED</code> - List only versioned models.</p>\n            </li>\n            <li>\n                <p>\n                  <code>UNVERSIONED</code> - List only unversioined models.</p>\n            </li>\n            <li>\n                <p>\n                  <code>BOTH</code> - List both versioned and unversioned models.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A filter that returns only the model packages of the specified type. This can be one\n            of the following values.</p>\n        <ul>\n            <li>\n                <p>\n                  <code>UNVERSIONED</code> - List only unversioined models. \n                    This is the default value if no <code>ModelPackageType</code> is specified.</p>\n            </li>\n            <li>\n                <p>\n                  <code>VERSIONED</code> - List only versioned models.</p>\n            </li>\n            <li>\n                <p>\n                  <code>BOTH</code> - List both versioned and unversioned models.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "NextToken": {
@@ -30911,7 +30925,7 @@
                 "AttemptCount": {
                     "target": "com.amazonaws.sagemaker#IntegerValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current attempt of the execution step. For more information, see <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/sagemaker/latest/dg/pipelines-retry-policy.html\">Retry Policy for Amazon SageMaker Pipelines steps</a>.</p>"
+                        "smithy.api#documentation": "<p>The current attempt of the execution step. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines-retry-policy.html\">Retry Policy for SageMaker Pipelines steps</a>.</p>"
                     }
                 },
                 "FailureReason": {
@@ -31017,6 +31031,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The configurations and outcomes of an EMR step execution.</p>"
                     }
+                },
+                "Fail": {
+                    "target": "com.amazonaws.sagemaker#FailStepMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configurations and outcomes of a Fail step execution.</p>"
+                    }
                 }
             },
             "traits": {
@@ -31054,6 +31074,12 @@
                     "target": "com.amazonaws.sagemaker#PipelineExecutionName",
                     "traits": {
                         "smithy.api#documentation": "<p>The display name of the pipeline execution.</p>"
+                    }
+                },
+                "PipelineExecutionFailureReason": {
+                    "target": "com.amazonaws.sagemaker#String3072",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message generated by SageMaker Pipelines describing why the pipeline execution failed.</p>"
                     }
                 }
             },
@@ -36910,7 +36936,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Stops a pipeline execution.</p>\n\n         <p>\n            <b>Callback Step</b>\n         </p>\n         <p>A pipeline execution won't stop while a callback step is running.\n        When you call <code>StopPipelineExecution</code>\n        on a pipeline execution with a running callback step, Amazon SageMaker Pipelines sends an\n        additional Amazon SQS message to the specified SQS queue. The body of the SQS message\n        contains a \"Status\" field which is set to \"Stopping\".</p>\n         <p>You should add logic to your Amazon SQS message consumer to take any needed action (for\n        example, resource cleanup) upon receipt of the message followed by a call to\n        <code>SendPipelineExecutionStepSuccess</code> or\n        <code>SendPipelineExecutionStepFailure</code>.</p>\n         <p>Only when Amazon SageMaker Pipelines receives one of these calls will it stop the pipeline execution.</p>\n\n         <p>\n            <b>Lambda Step</b>\n         </p>\n         <p>A pipeline execution can't be stopped while a lambda step is running because the Lambda\n        function invoked by the lambda step can't be stopped. If you attempt to stop the execution\n        while the Lambda function is running, the pipeline waits for the Lambda function to finish\n        or until the timeout is hit, whichever occurs first, and then stops. If the Lambda function\n        finishes, the pipeline execution status is <code>Stopped</code>. If the timeout is hit\n        the pipeline execution status is <code>Failed</code>.</p>"
+                "smithy.api#documentation": "<p>Stops a pipeline execution.</p>\n\n         <p>\n            <b>Callback Step</b>\n         </p>\n         <p>A pipeline execution won't stop while a callback step is running.\n        When you call <code>StopPipelineExecution</code>\n        on a pipeline execution with a running callback step, SageMaker Pipelines sends an\n        additional Amazon SQS message to the specified SQS queue. The body of the SQS message\n        contains a \"Status\" field which is set to \"Stopping\".</p>\n         <p>You should add logic to your Amazon SQS message consumer to take any needed action (for\n        example, resource cleanup) upon receipt of the message followed by a call to\n        <code>SendPipelineExecutionStepSuccess</code> or\n        <code>SendPipelineExecutionStepFailure</code>.</p>\n         <p>Only when SageMaker Pipelines receives one of these calls will it stop the pipeline execution.</p>\n\n         <p>\n            <b>Lambda Step</b>\n         </p>\n         <p>A pipeline execution can't be stopped while a lambda step is running because the Lambda\n        function invoked by the lambda step can't be stopped. If you attempt to stop the execution\n        while the Lambda function is running, the pipeline waits for the Lambda function to finish\n        or until the timeout is hit, whichever occurs first, and then stops. If the Lambda function\n        finishes, the pipeline execution status is <code>Stopped</code>. If the timeout is hit\n        the pipeline execution status is <code>Failed</code>.</p>"
             }
         },
         "com.amazonaws.sagemaker#StopPipelineExecutionRequest": {
@@ -37088,6 +37114,15 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 256
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#String3072": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 3072
                 }
             }
         },

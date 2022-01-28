@@ -49,8 +49,7 @@ type GetIPSetOutput struct {
 	// This member is required.
 	Format types.IpSetFormat
 
-	// The URI of the file that contains the IPSet. For example:
-	// https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
+	// The URI of the file that contains the IPSet.
 	//
 	// This member is required.
 	Location *string

@@ -110,6 +110,26 @@ func (m *validateOpCreateMetricSet) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeactivateAnomalyDetector struct {
+}
+
+func (*validateOpDeactivateAnomalyDetector) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeactivateAnomalyDetector) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeactivateAnomalyDetectorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeactivateAnomalyDetectorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteAlert struct {
 }
 
@@ -488,6 +508,10 @@ func addOpCreateAnomalyDetectorValidationMiddleware(stack *middleware.Stack) err
 
 func addOpCreateMetricSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateMetricSet{}, middleware.After)
+}
+
+func addOpDeactivateAnomalyDetectorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeactivateAnomalyDetector{}, middleware.After)
 }
 
 func addOpDeleteAlertValidationMiddleware(stack *middleware.Stack) error {
@@ -880,6 +904,21 @@ func validateOpCreateMetricSetInput(v *CreateMetricSetInput) error {
 		if err := validateMetricSource(v.MetricSource); err != nil {
 			invalidParams.AddNested("MetricSource", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeactivateAnomalyDetectorInput(v *DeactivateAnomalyDetectorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeactivateAnomalyDetectorInput"}
+	if v.AnomalyDetectorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AnomalyDetectorArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

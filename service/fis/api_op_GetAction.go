@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about the specified AWS FIS action.
+// Gets information about the specified FIS action.
 func (c *Client) GetAction(ctx context.Context, params *GetActionInput, optFns ...func(*Options)) (*GetActionOutput, error) {
 	if params == nil {
 		params = &GetActionInput{}

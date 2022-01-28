@@ -10319,6 +10319,30 @@
                     {
                         "value": "AWS::OpenSearch::Domain",
                         "name": "OpenSearchDomain"
+                    },
+                    {
+                        "value": "AWS::EC2::TransitGateway",
+                        "name": "TransitGateway"
+                    },
+                    {
+                        "value": "AWS::Kinesis::Stream",
+                        "name": "KinesisStream"
+                    },
+                    {
+                        "value": "AWS::Kinesis::StreamConsumer",
+                        "name": "KinesisStreamConsumer"
+                    },
+                    {
+                        "value": "AWS::CodeDeploy::Application",
+                        "name": "CodeDeployApplication"
+                    },
+                    {
+                        "value": "AWS::CodeDeploy::DeploymentConfig",
+                        "name": "CodeDeployDeploymentConfig"
+                    },
+                    {
+                        "value": "AWS::CodeDeploy::DeploymentGroup",
+                        "name": "CodeDeployDeploymentGroup"
                     }
                 ]
             }
@@ -10766,6 +10790,24 @@
         },
         "com.amazonaws.configservice#StarlingDoveService": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Config Service",
+                    "arnNamespace": "config",
+                    "cloudFormationName": "Config",
+                    "cloudTrailEventSource": "configservice.amazonaws.com",
+                    "endpointPrefix": "config"
+                },
+                "aws.auth#sigv4": {
+                    "name": "config"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<fullname>Config</fullname>\n\n\t\t       <p>Config provides a way to keep track of the configurations\n\t\t\tof all the Amazon Web Services resources associated with your Amazon Web Services account. You can\n\t\t\tuse Config to get the current and historical configurations of\n\t\t\teach Amazon Web Services resource and also to get information about the relationship\n\t\t\tbetween the resources. An Amazon Web Services resource can be an Amazon Compute\n\t\t\tCloud (Amazon EC2) instance, an Elastic Block Store (EBS) volume, an\n\t\t\telastic network Interface (ENI), or a security group. For a complete\n\t\t\tlist of resources currently supported by Config, see <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources\">Supported Amazon Web Services resources</a>.</p>\n\n\t\t       <p>You can access and manage Config through the Amazon Web Services Management\n\t\t\tConsole, the Amazon Web Services Command Line Interface (Amazon Web Services CLI), the Config\n\t\t\tAPI, or the Amazon Web Services SDKs for Config. This reference guide contains\n\t\t\tdocumentation for the Config API and the Amazon Web Services CLI commands that\n\t\t\tyou can use to manage Config. The Config API uses the\n\t\t\tSignature Version 4 protocol for signing requests. For more\n\t\t\tinformation about how to sign a request with this protocol, see\n\t\t\t\t<a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature\n\t\t\t\tVersion 4 Signing Process</a>. For detailed information\n\t\t\tabout Config features and their associated actions or commands,\n\t\t\tas well as how to work with Amazon Web Services Management Console, see <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/WhatIsConfig.html\">What Is Config</a> in the <i>Config Developer\n\t\t\t\tGuide</i>.</p>",
+                "smithy.api#title": "AWS Config",
+                "smithy.api#xmlNamespace": {
+                    "uri": "http://config.amazonaws.com/doc/2014-11-12/"
+                }
+            },
             "version": "2014-11-12",
             "operations": [
                 {
@@ -11026,25 +11068,7 @@
                 {
                     "target": "com.amazonaws.configservice#UntagResource"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Config Service",
-                    "arnNamespace": "config",
-                    "cloudFormationName": "Config",
-                    "cloudTrailEventSource": "configservice.amazonaws.com",
-                    "endpointPrefix": "config"
-                },
-                "aws.auth#sigv4": {
-                    "name": "config"
-                },
-                "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<fullname>Config</fullname>\n\n\t\t       <p>Config provides a way to keep track of the configurations\n\t\t\tof all the Amazon Web Services resources associated with your Amazon Web Services account. You can\n\t\t\tuse Config to get the current and historical configurations of\n\t\t\teach Amazon Web Services resource and also to get information about the relationship\n\t\t\tbetween the resources. An Amazon Web Services resource can be an Amazon Compute\n\t\t\tCloud (Amazon EC2) instance, an Elastic Block Store (EBS) volume, an\n\t\t\telastic network Interface (ENI), or a security group. For a complete\n\t\t\tlist of resources currently supported by Config, see <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources\">Supported Amazon Web Services resources</a>.</p>\n\n\t\t       <p>You can access and manage Config through the Amazon Web Services Management\n\t\t\tConsole, the Amazon Web Services Command Line Interface (Amazon Web Services CLI), the Config\n\t\t\tAPI, or the Amazon Web Services SDKs for Config. This reference guide contains\n\t\t\tdocumentation for the Config API and the Amazon Web Services CLI commands that\n\t\t\tyou can use to manage Config. The Config API uses the\n\t\t\tSignature Version 4 protocol for signing requests. For more\n\t\t\tinformation about how to sign a request with this protocol, see\n\t\t\t\t<a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature\n\t\t\t\tVersion 4 Signing Process</a>. For detailed information\n\t\t\tabout Config features and their associated actions or commands,\n\t\t\tas well as how to work with Amazon Web Services Management Console, see <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/WhatIsConfig.html\">What Is Config</a> in the <i>Config Developer\n\t\t\t\tGuide</i>.</p>",
-                "smithy.api#title": "AWS Config",
-                "smithy.api#xmlNamespace": {
-                    "uri": "http://config.amazonaws.com/doc/2014-11-12/"
-                }
-            }
+            ]
         },
         "com.amazonaws.configservice#StartConfigRulesEvaluation": {
             "type": "operation",

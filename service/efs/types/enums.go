@@ -46,6 +46,28 @@ func (PerformanceMode) Values() []PerformanceMode {
 	}
 }
 
+type ReplicationStatus string
+
+// Enum values for ReplicationStatus
+const (
+	ReplicationStatusEnabled  ReplicationStatus = "ENABLED"
+	ReplicationStatusEnabling ReplicationStatus = "ENABLING"
+	ReplicationStatusDeleting ReplicationStatus = "DELETING"
+	ReplicationStatusError    ReplicationStatus = "ERROR"
+)
+
+// Values returns all known values for ReplicationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ReplicationStatus) Values() []ReplicationStatus {
+	return []ReplicationStatus{
+		"ENABLED",
+		"ENABLING",
+		"DELETING",
+		"ERROR",
+	}
+}
+
 type Resource string
 
 // Enum values for Resource

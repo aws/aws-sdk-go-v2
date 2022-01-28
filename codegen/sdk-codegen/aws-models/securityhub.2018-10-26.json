@@ -12338,6 +12338,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>In a <code>BatchImportFindings</code> request, finding providers use <code>FindingProviderFields</code> to provide and update their own values for confidence, criticality, related findings, severity, and types.</p>"
                     }
+                },
+                "Sample": {
+                    "target": "com.amazonaws.securityhub#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the finding is a sample finding.</p>"
+                    }
                 }
             },
             "traits": {
@@ -12921,6 +12927,12 @@
                     "target": "com.amazonaws.securityhub#StringFilterList",
                     "traits": {
                         "smithy.api#documentation": "<p>One or more finding types that the finding provider assigned to the finding. Uses the format of <code>namespace/category/classifier</code>\n         that classify a finding.</p>\n         <p>Valid namespace values are: Software and Configuration Checks | TTPs | Effects | Unusual\n         Behaviors | Sensitive Data Identifications</p>"
+                    }
+                },
+                "Sample": {
+                    "target": "com.amazonaws.securityhub#BooleanFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether or not sample findings are included in the filter results.</p>"
                     }
                 }
             },
@@ -13794,6 +13806,26 @@
         },
         "com.amazonaws.securityhub#Boolean": {
             "type": "boolean"
+        },
+        "com.amazonaws.securityhub#BooleanFilter": {
+            "type": "structure",
+            "members": {
+                "Value": {
+                    "target": "com.amazonaws.securityhub#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the boolean.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Boolean filter for querying findings.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#BooleanFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#BooleanFilter"
+            }
         },
         "com.amazonaws.securityhub#CategoryList": {
             "type": "list",

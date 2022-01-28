@@ -87,6 +87,7 @@ const (
 	AnomalyDetectorFailureTypeActivationFailure         AnomalyDetectorFailureType = "ACTIVATION_FAILURE"
 	AnomalyDetectorFailureTypeBackTestActivationFailure AnomalyDetectorFailureType = "BACK_TEST_ACTIVATION_FAILURE"
 	AnomalyDetectorFailureTypeDeletionFailure           AnomalyDetectorFailureType = "DELETION_FAILURE"
+	AnomalyDetectorFailureTypeDeactivationFailure       AnomalyDetectorFailureType = "DEACTIVATION_FAILURE"
 )
 
 // Values returns all known values for AnomalyDetectorFailureType. Note that this
@@ -97,6 +98,7 @@ func (AnomalyDetectorFailureType) Values() []AnomalyDetectorFailureType {
 		"ACTIVATION_FAILURE",
 		"BACK_TEST_ACTIVATION_FAILURE",
 		"DELETION_FAILURE",
+		"DEACTIVATION_FAILURE",
 	}
 }
 
@@ -113,6 +115,8 @@ const (
 	AnomalyDetectorStatusBackTestActivating AnomalyDetectorStatus = "BACK_TEST_ACTIVATING"
 	AnomalyDetectorStatusBackTestActive     AnomalyDetectorStatus = "BACK_TEST_ACTIVE"
 	AnomalyDetectorStatusBackTestComplete   AnomalyDetectorStatus = "BACK_TEST_COMPLETE"
+	AnomalyDetectorStatusDeactivated        AnomalyDetectorStatus = "DEACTIVATED"
+	AnomalyDetectorStatusDeactivating       AnomalyDetectorStatus = "DEACTIVATING"
 )
 
 // Values returns all known values for AnomalyDetectorStatus. Note that this can be
@@ -129,6 +133,8 @@ func (AnomalyDetectorStatus) Values() []AnomalyDetectorStatus {
 		"BACK_TEST_ACTIVATING",
 		"BACK_TEST_ACTIVE",
 		"BACK_TEST_COMPLETE",
+		"DEACTIVATED",
+		"DEACTIVATING",
 	}
 }
 

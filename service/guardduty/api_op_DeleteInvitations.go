@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes invitations sent to the current member account by AWS accounts specified
-// by their account IDs.
+// Deletes invitations sent to the current member account by Amazon Web Services
+// accounts specified by their account IDs.
 func (c *Client) DeleteInvitations(ctx context.Context, params *DeleteInvitationsInput, optFns ...func(*Options)) (*DeleteInvitationsOutput, error) {
 	if params == nil {
 		params = &DeleteInvitationsInput{}
@@ -30,8 +30,8 @@ func (c *Client) DeleteInvitations(ctx context.Context, params *DeleteInvitation
 
 type DeleteInvitationsInput struct {
 
-	// A list of account IDs of the AWS accounts that sent invitations to the current
-	// member account that you want to delete invitations from.
+	// A list of account IDs of the Amazon Web Services accounts that sent invitations
+	// to the current member account that you want to delete invitations from.
 	//
 	// This member is required.
 	AccountIds []string

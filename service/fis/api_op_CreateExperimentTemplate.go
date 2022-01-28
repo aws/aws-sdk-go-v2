@@ -12,24 +12,25 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an experiment template. To create a template, specify the following
-// information:
+// Creates an experiment template. An experiment template includes the following
+// components:
 //
-// * Targets: A target can be a specific resource in your AWS
-// environment, or one or more resources that match criteria that you specify, for
-// example, resources that have specific tags.
+// * Targets: A target can be a specific resource in your Amazon Web
+// Services environment, or one or more resources that match criteria that you
+// specify, for example, resources that have specific tags.
 //
-// * Actions: The actions to carry out
-// on the target. You can specify multiple actions, the duration of each action,
-// and when to start each action during an experiment.
+// * Actions: The actions
+// to carry out on the target. You can specify multiple actions, the duration of
+// each action, and when to start each action during an experiment.
 //
-// * Stop conditions: If a
-// stop condition is triggered while an experiment is running, the experiment is
-// automatically stopped. You can define a stop condition as a CloudWatch
-// alarm.
+// * Stop
+// conditions: If a stop condition is triggered while an experiment is running, the
+// experiment is automatically stopped. You can define a stop condition as a
+// CloudWatch alarm.
 //
-// For more information, see the AWS Fault Injection Simulator User Guide
-// (https://docs.aws.amazon.com/fis/latest/userguide/).
+// For more information, see Experiment templates
+// (https://docs.aws.amazon.com/fis/latest/userguide/experiment-templates.html) in
+// the Fault Injection Simulator User Guide.
 func (c *Client) CreateExperimentTemplate(ctx context.Context, params *CreateExperimentTemplateInput, optFns ...func(*Options)) (*CreateExperimentTemplateOutput, error) {
 	if params == nil {
 		params = &CreateExperimentTemplateInput{}
@@ -58,13 +59,12 @@ type CreateExperimentTemplateInput struct {
 	// This member is required.
 	ClientToken *string
 
-	// A description for the experiment template. Can contain up to 64 letters (A-Z and
-	// a-z).
+	// A description for the experiment template.
 	//
 	// This member is required.
 	Description *string
 
-	// The Amazon Resource Name (ARN) of an IAM role that grants the AWS FIS service
+	// The Amazon Resource Name (ARN) of an IAM role that grants the FIS service
 	// permission to perform service actions on your behalf.
 	//
 	// This member is required.

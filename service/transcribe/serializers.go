@@ -2268,6 +2268,13 @@ func awsAwsjson11_serializeDocumentContentRedaction(v *types.ContentRedaction, v
 	object := value.Object()
 	defer object.Close()
 
+	if v.PiiEntityTypes != nil {
+		ok := object.Key("PiiEntityTypes")
+		if err := awsAwsjson11_serializeDocumentPiiEntityTypes(v.PiiEntityTypes, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.RedactionOutput) > 0 {
 		ok := object.Key("RedactionOutput")
 		ok.String(string(v.RedactionOutput))
@@ -2518,6 +2525,17 @@ func awsAwsjson11_serializeDocumentPhrases(v []string, value smithyjson.Value) e
 	for i := range v {
 		av := array.Value()
 		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPiiEntityTypes(v []types.PiiEntityType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
 	}
 	return nil
 }

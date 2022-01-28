@@ -409,6 +409,10 @@
                     {
                         "value": "DELETION_FAILURE",
                         "name": "DELETION_FAILURE"
+                    },
+                    {
+                        "value": "DEACTIVATION_FAILURE",
+                        "name": "DEACTIVATION_FAILURE"
                     }
                 ]
             }
@@ -462,6 +466,14 @@
                     {
                         "value": "BACK_TEST_COMPLETE",
                         "name": "BACK_TEST_COMPLETE"
+                    },
+                    {
+                        "value": "DEACTIVATED",
+                        "name": "DEACTIVATED"
+                    },
+                    {
+                        "value": "DEACTIVATING",
+                        "name": "DEACTIVATING"
                     }
                 ]
             }
@@ -1246,6 +1258,59 @@
                 },
                 "smithy.api#pattern": "\\S"
             }
+        },
+        "com.amazonaws.lookoutmetrics#DeactivateAnomalyDetector": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutmetrics#DeactivateAnomalyDetectorRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutmetrics#DeactivateAnomalyDetectorResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutmetrics#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutmetrics#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutmetrics#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutmetrics#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutmetrics#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutmetrics#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deactivates an anomaly detector.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/DeactivateAnomalyDetector",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lookoutmetrics#DeactivateAnomalyDetectorRequest": {
+            "type": "structure",
+            "members": {
+                "AnomalyDetectorArn": {
+                    "target": "com.amazonaws.lookoutmetrics#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the anomaly detector.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutmetrics#DeactivateAnomalyDetectorResponse": {
+            "type": "structure",
+            "members": {}
         },
         "com.amazonaws.lookoutmetrics#DeleteAlert": {
             "type": "operation",
@@ -2959,6 +3024,9 @@
                 },
                 {
                     "target": "com.amazonaws.lookoutmetrics#CreateMetricSet"
+                },
+                {
+                    "target": "com.amazonaws.lookoutmetrics#DeactivateAnomalyDetector"
                 },
                 {
                     "target": "com.amazonaws.lookoutmetrics#DeleteAlert"

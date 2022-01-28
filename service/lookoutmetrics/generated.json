@@ -12,6 +12,7 @@
         "api_op_CreateAlert.go",
         "api_op_CreateAnomalyDetector.go",
         "api_op_CreateMetricSet.go",
+        "api_op_DeactivateAnomalyDetector.go",
         "api_op_DeleteAlert.go",
         "api_op_DeleteAnomalyDetector.go",
         "api_op_DescribeAlert.go",

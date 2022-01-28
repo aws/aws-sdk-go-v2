@@ -67,13 +67,6 @@ type DescribeGeofenceCollectionOutput struct {
 	// This member is required.
 	Description *string
 
-	// The pricing plan selected for the specified geofence collection. For additional
-	// details and restrictions on each pricing plan option, see the Amazon Location
-	// Service pricing page (https://aws.amazon.com/location/pricing/).
-	//
-	// This member is required.
-	PricingPlan types.PricingPlan
-
 	// The timestamp for when the geofence collection was last updated in ISO 8601
 	// (https://www.iso.org/iso-8601-date-and-time-format.html) format:
 	// YYYY-MM-DDThh:mm:ss.sssZ
@@ -86,7 +79,14 @@ type DescribeGeofenceCollectionOutput struct {
 	// assigned to the Amazon Location resource
 	KmsKeyId *string
 
-	// The specified data provider for the geofence collection.
+	// No longer used. Always returns RequestBasedUsage.
+	//
+	// Deprecated: Deprecated. Always returns RequestBasedUsage.
+	PricingPlan types.PricingPlan
+
+	// No longer used. Always returns an empty string.
+	//
+	// Deprecated: Deprecated. Unused.
 	PricingPlanDataSource *string
 
 	// Displays the key, value pairs of tags associated with this resource.

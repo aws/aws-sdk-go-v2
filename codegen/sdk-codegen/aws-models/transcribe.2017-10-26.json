@@ -468,6 +468,12 @@
                         "smithy.api#documentation": "<p>The output transcript file stored in either the default S3 bucket or in a bucket you\n            specify.</p>\n        <p>When you choose <code>redacted</code> Amazon Transcribe outputs only the redacted \n            transcript.</p>\n        <p>When you choose <code>redacted_and_unredacted</code> Amazon Transcribe outputs both the \n            redacted and unredacted transcripts.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "PiiEntityTypes": {
+                    "target": "com.amazonaws.transcribe#PiiEntityTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The types of personally identifiable information (PII) you want to redact in your\n            transcript.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3492,6 +3498,73 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.transcribe#Phrase"
+            }
+        },
+        "com.amazonaws.transcribe#PiiEntityType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "BANK_ACCOUNT_NUMBER",
+                        "name": "BANK_ACCOUNT_NUMBER"
+                    },
+                    {
+                        "value": "BANK_ROUTING",
+                        "name": "BANK_ROUTING"
+                    },
+                    {
+                        "value": "CREDIT_DEBIT_NUMBER",
+                        "name": "CREDIT_DEBIT_NUMBER"
+                    },
+                    {
+                        "value": "CREDIT_DEBIT_CVV",
+                        "name": "CREDIT_DEBIT_CVV"
+                    },
+                    {
+                        "value": "CREDIT_DEBIT_EXPIRY",
+                        "name": "CREDIT_DEBIT_EXPIRY"
+                    },
+                    {
+                        "value": "PIN",
+                        "name": "PIN"
+                    },
+                    {
+                        "value": "EMAIL",
+                        "name": "EMAIL"
+                    },
+                    {
+                        "value": "ADDRESS",
+                        "name": "ADDRESS"
+                    },
+                    {
+                        "value": "NAME",
+                        "name": "NAME"
+                    },
+                    {
+                        "value": "PHONE",
+                        "name": "PHONE"
+                    },
+                    {
+                        "value": "SSN",
+                        "name": "SSN"
+                    },
+                    {
+                        "value": "ALL",
+                        "name": "ALL"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.transcribe#PiiEntityTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.transcribe#PiiEntityType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 11
+                }
             }
         },
         "com.amazonaws.transcribe#RedactionOutput": {

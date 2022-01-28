@@ -10,7 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new Readiness Check.
+// Creates a readiness check in an account. A readiness check monitors a resource
+// set in your application, such as a set of Amazon Aurora instances, that
+// Application Recovery Controller is auditing recovery readiness for. The audits
+// run once every minute on every resource that's associated with a readiness
+// check.
 func (c *Client) CreateReadinessCheck(ctx context.Context, params *CreateReadinessCheckInput, optFns ...func(*Options)) (*CreateReadinessCheckOutput, error) {
 	if params == nil {
 		params = &CreateReadinessCheckInput{}
@@ -26,20 +30,19 @@ func (c *Client) CreateReadinessCheck(ctx context.Context, params *CreateReadine
 	return out, nil
 }
 
-// The ReadinessCheck to create
 type CreateReadinessCheckInput struct {
 
-	// The name of the ReadinessCheck to create
+	// The name of the readiness check to create.
 	//
 	// This member is required.
 	ReadinessCheckName *string
 
-	// The name of the ResourceSet to check
+	// The name of the resource set to check.
 	//
 	// This member is required.
 	ResourceSetName *string
 
-	// A collection of tags associated with a resource
+	// A collection of tags associated with a resource.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -47,16 +50,16 @@ type CreateReadinessCheckInput struct {
 
 type CreateReadinessCheckOutput struct {
 
-	// Arn associated with ReadinessCheck
+	// The Amazon Resource Name (ARN) associated with a readiness check.
 	ReadinessCheckArn *string
 
-	// Name for a ReadinessCheck
+	// Name of a readiness check.
 	ReadinessCheckName *string
 
-	// Name of the ResourceSet to be checked
+	// Name of the resource set to be checked.
 	ResourceSet *string
 
-	// A collection of tags associated with a resource
+	// A collection of tags associated with a resource.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

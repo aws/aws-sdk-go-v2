@@ -3293,6 +3293,13 @@ func awsAwsjson11_serializeDocumentUpdateFileSystemOntapConfiguration(v *types.U
 		ok.String(*v.DailyAutomaticBackupStartTime)
 	}
 
+	if v.DiskIopsConfiguration != nil {
+		ok := object.Key("DiskIopsConfiguration")
+		if err := awsAwsjson11_serializeDocumentDiskIopsConfiguration(v.DiskIopsConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.FsxAdminPassword != nil {
 		ok := object.Key("FsxAdminPassword")
 		ok.String(*v.FsxAdminPassword)

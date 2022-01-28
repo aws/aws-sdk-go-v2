@@ -290,6 +290,23 @@ func codeReviewCompletedStateRetryable(ctx context.Context, input *DescribeCodeR
 			return false, fmt.Errorf("error evaluating waiter state: %w", err)
 		}
 
+		expectedValue := "Failed"
+		value, ok := pathValue.(types.JobState)
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected types.JobState value, got %T", pathValue)
+		}
+
+		if string(value) == expectedValue {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("CodeReview.State", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
 		expectedValue := "Pending"
 		value, ok := pathValue.(types.JobState)
 		if !ok {

@@ -328,6 +328,13 @@ func awsRestjson1_serializeOpDocumentCreateRecordingConfigurationInput(v *Create
 		}
 	}
 
+	if v.ThumbnailConfiguration != nil {
+		ok := object.Key("thumbnailConfiguration")
+		if err := awsRestjson1_serializeDocumentThumbnailConfiguration(v.ThumbnailConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -2143,5 +2150,22 @@ func awsRestjson1_serializeDocumentTags(v map[string]string, value smithyjson.Va
 		om := object.Key(key)
 		om.String(v[key])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentThumbnailConfiguration(v *types.ThumbnailConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.RecordingMode) > 0 {
+		ok := object.Key("recordingMode")
+		ok.String(string(v.RecordingMode))
+	}
+
+	if v.TargetIntervalSeconds != 0 {
+		ok := object.Key("targetIntervalSeconds")
+		ok.Long(v.TargetIntervalSeconds)
+	}
+
 	return nil
 }

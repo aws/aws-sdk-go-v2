@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Declines invitations sent to the current member account by AWS accounts
-// specified by their account IDs.
+// Declines invitations sent to the current member account by Amazon Web Services
+// accounts specified by their account IDs.
 func (c *Client) DeclineInvitations(ctx context.Context, params *DeclineInvitationsInput, optFns ...func(*Options)) (*DeclineInvitationsOutput, error) {
 	if params == nil {
 		params = &DeclineInvitationsInput{}
@@ -30,8 +30,8 @@ func (c *Client) DeclineInvitations(ctx context.Context, params *DeclineInvitati
 
 type DeclineInvitationsInput struct {
 
-	// A list of account IDs of the AWS accounts that sent invitations to the current
-	// member account that you want to decline invitations from.
+	// A list of account IDs of the Amazon Web Services accounts that sent invitations
+	// to the current member account that you want to decline invitations from.
 	//
 	// This member is required.
 	AccountIds []string

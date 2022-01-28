@@ -499,13 +499,19 @@
                 "rawValue": {
                     "target": "com.amazonaws.honeycode#RawValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The raw value of the data contained in the cell. The raw value depends on the format of the data in the\n            cell. However the attribute in the API return value is always a string containing the raw value.\n        </p>\n        <p>\n            Cells with format DATE, DATE_TIME or TIME have the raw value as a floating point\n            number where the whole number represents the number of days since 1/1/1900 and the fractional part\n            represents the fraction of the day since midnight. For example, a cell with date 11/3/2020 has the raw value\n            \"44138\". A cell with the time 9:00 AM has the raw value \"0.375\" and a cell with date/time value of\n            11/3/2020 9:00 AM has the raw value \"44138.375\". Notice that even though the raw value is a number in all\n            three cases, it is still represented as a string.\n        </p>\n        <p>\n            Cells with format NUMBER, CURRENCY, PERCENTAGE and ACCOUNTING have the raw value of the data as the number\n            representing the data being displayed. For example, the number 1.325 with two decimal places in the format\n            will have it's raw value as \"1.325\" and formatted value as \"1.33\". A currency value for\n            $10 will have the raw value as \"10\" and formatted value as \"$10.00\". A value representing 20% with two\n            decimal places in the format will have its raw value as \"0.2\" and the formatted value as \"20.00%\". An\n            accounting value of -$25 will have \"-25\" as the raw value and \"$  (25.00)\" as the formatted value.\n        </p>\n        <p>\n            Cells with format TEXT will have the raw text as the raw value. For example, a cell with text \"John Smith\"\n            will have \"John Smith\" as both the raw value and the formatted value.\n        </p>\n        <p>\n            Cells with format CONTACT will have the name of the contact as a formatted value and the email address of\n            the contact as the raw value. For example, a contact for John Smith will have \"John Smith\" as the\n            formatted value and \"john.smith@example.com\" as the raw value.\n        </p>\n        <p>\n            Cells with format ROWLINK (aka picklist) will have the first column of the linked row as the formatted value\n            and the row id of the linked row as the raw value. For example, a cell containing a picklist to a table\n            that displays task status might have \"Completed\" as the formatted value and\n            \"row:dfcefaee-5b37-4355-8f28-40c3e4ff5dd4/ca432b2f-b8eb-431d-9fb5-cbe0342f9f03\" as the raw value.\n        </p>\n        <p>\n            Cells with format AUTO or cells without any format that are auto-detected as one of the formats above will\n            contain the raw and formatted values as mentioned above, based on the auto-detected formats. If there is no\n            auto-detected format, the raw and formatted values will be the same as the data in the cell.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The raw value of the data contained in the cell. The raw value depends on the format of the data in the\n            cell. However the attribute in the API return value is always a string containing the raw value.\n        </p>\n        <p>\n            Cells with format DATE, DATE_TIME or TIME have the raw value as a floating point\n            number where the whole number represents the number of days since 1/1/1900 and the fractional part\n            represents the fraction of the day since midnight. For example, a cell with date 11/3/2020 has the raw value\n            \"44138\". A cell with the time 9:00 AM has the raw value \"0.375\" and a cell with date/time value of\n            11/3/2020 9:00 AM has the raw value \"44138.375\". Notice that even though the raw value is a number in all\n            three cases, it is still represented as a string.\n        </p>\n        <p>\n            Cells with format NUMBER, CURRENCY, PERCENTAGE and ACCOUNTING have the raw value of the data as the number\n            representing the data being displayed. For example, the number 1.325 with two decimal places in the format\n            will have it's raw value as \"1.325\" and formatted value as \"1.33\". A currency value for\n            $10 will have the raw value as \"10\" and formatted value as \"$10.00\". A value representing 20% with two\n            decimal places in the format will have its raw value as \"0.2\" and the formatted value as \"20.00%\". An\n            accounting value of -$25 will have \"-25\" as the raw value and \"$  (25.00)\" as the formatted value.\n        </p>\n        <p>\n            Cells with format TEXT will have the raw text as the raw value. For example, a cell with text \"John Smith\"\n            will have \"John Smith\" as both the raw value and the formatted value.\n        </p>\n        <p>\n            Cells with format CONTACT will have the name of the contact as a formatted value and the email address of\n            the contact as the raw value. For example, a contact for John Smith will have \"John Smith\" as the\n            formatted value and \"john.smith@example.com\" as the raw value.\n        </p>\n        <p>\n            Cells with format ROWLINK (aka picklist) will have the first column of the linked row as the formatted value\n            and the row id of the linked row as the raw value. For example, a cell containing a picklist to a table\n            that displays task status might have \"Completed\" as the formatted value and\n            \"row:dfcefaee-5b37-4355-8f28-40c3e4ff5dd4/ca432b2f-b8eb-431d-9fb5-cbe0342f9f03\" as the raw value.\n        </p>\n        <p>\n            Cells with format ROWSET (aka multi-select or multi-record picklist) will by default have the first column\n            of each of the linked rows as the formatted value in the list, and the rowset id of the linked rows as the\n            raw value. For example, a cell containing a multi-select picklist to a table that contains items might have\n            \"Item A\", \"Item B\" in the formatted value list and \"rows:b742c1f4-6cb0-4650-a845-35eb86fcc2bb/\n            [fdea123b-8f68-474a-aa8a-5ff87aa333af,6daf41f0-a138-4eee-89da-123086d36ecf]\" as the raw value.\n        </p>\n        <p>\n            Cells with format ATTACHMENT will have the name of the attachment as the formatted value and the attachment\n            id as the raw value. For example, a cell containing an attachment named \"image.jpeg\" will have\n            \"image.jpeg\" as the formatted value and \"attachment:ca432b2f-b8eb-431d-9fb5-cbe0342f9f03\" as the raw value.\n        </p>\n        <p>\n            Cells with format AUTO or cells without any format that are auto-detected as one of the formats above will\n            contain the raw and formatted values as mentioned above, based on the auto-detected formats. If there is no\n            auto-detected format, the raw and formatted values will be the same as the data in the cell.\n        </p>"
                     }
                 },
                 "formattedValue": {
                     "target": "com.amazonaws.honeycode#FormattedValue",
                     "traits": {
                         "smithy.api#documentation": "<p>\n            The formatted value of the cell. This is the value that you see displayed in the cell in the UI.\n        </p>\n        <p>\n            Note that the formatted value of a cell is always represented as a string irrespective of the data that is\n            stored in the cell. For example, if a cell contains a date, the formatted value of the cell is the string\n            representation of the formatted date being shown in the cell in the UI. See details in the rawValue field\n            below for how cells of different formats will have different raw and formatted values.\n        </p>"
+                    }
+                },
+                "formattedValues": {
+                    "target": "com.amazonaws.honeycode#FormattedValuesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            A list of formatted values of the cell. This field is only returned when the cell is ROWSET format\n            (aka multi-select or multi-record picklist). Values in the list are always represented as strings.\n            The formattedValue field will be empty if this field is returned.\n        </p>"
                     }
                 }
             },
@@ -522,10 +528,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n            Fact represents the data that is entered into a cell. This data can be free text or a formula. Formulas need\n            to start with the equals (=) sign.\n        </p>"
                     }
+                },
+                "facts": {
+                    "target": "com.amazonaws.honeycode#FactList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            A list representing the values that are entered into a ROWSET cell. Facts list can have either only values\n            or rowIDs, and rowIDs should from the same table.\n        </p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            CellInput object contains the data needed to create or update cells in a table.\n        </p>"
+                "smithy.api#documentation": "<p>\n            CellInput object contains the data needed to create or update cells in a table.\n        </p>\n        <note>\n            <p>\n                CellInput object has only a facts field or a fact field, but not both. A 400 bad request will be\n                thrown if both fact and facts field are present.\n            </p>\n        </note>"
             }
         },
         "com.amazonaws.honeycode#Cells": {
@@ -701,6 +713,9 @@
                     "target": "com.amazonaws.honeycode#InternalServerException"
                 },
                 {
+                    "target": "com.amazonaws.honeycode#RequestTimeoutException"
+                },
+                {
                     "target": "com.amazonaws.honeycode#ResourceNotFoundException"
                 },
                 {
@@ -774,6 +789,12 @@
                         "smithy.api#documentation": "<p>\n            The metadata about the job that was submitted for import.\n        </p>",
                         "smithy.api#required": {}
                     }
+                },
+                "errorCode": {
+                    "target": "com.amazonaws.honeycode#ErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            If job status is failed, error code to understand reason for the failure.\n        </p>"
+                    }
                 }
             }
         },
@@ -802,6 +823,69 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.honeycode#ErrorCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ACCESS_DENIED",
+                        "name": "AccessDenied"
+                    },
+                    {
+                        "value": "INVALID_URL_ERROR",
+                        "name": "InvalidUrlError"
+                    },
+                    {
+                        "value": "INVALID_IMPORT_OPTIONS_ERROR",
+                        "name": "InvalidImportOptionsError"
+                    },
+                    {
+                        "value": "INVALID_TABLE_ID_ERROR",
+                        "name": "InvalidTableIdError"
+                    },
+                    {
+                        "value": "INVALID_TABLE_COLUMN_ID_ERROR",
+                        "name": "InvalidTableColumnIdError"
+                    },
+                    {
+                        "value": "TABLE_NOT_FOUND_ERROR",
+                        "name": "TableNotFoundError"
+                    },
+                    {
+                        "value": "FILE_EMPTY_ERROR",
+                        "name": "FileEmptyError"
+                    },
+                    {
+                        "value": "INVALID_FILE_TYPE_ERROR",
+                        "name": "InvalidFileTypeError"
+                    },
+                    {
+                        "value": "FILE_PARSING_ERROR",
+                        "name": "FileParsingError"
+                    },
+                    {
+                        "value": "FILE_SIZE_LIMIT_ERROR",
+                        "name": "FileSizeLimitError"
+                    },
+                    {
+                        "value": "FILE_NOT_FOUND_ERROR",
+                        "name": "FileNotFoundError"
+                    },
+                    {
+                        "value": "UNKNOWN_ERROR",
+                        "name": "UnknownError"
+                    },
+                    {
+                        "value": "RESOURCE_NOT_FOUND_ERROR",
+                        "name": "ResourceNotFoundError"
+                    },
+                    {
+                        "value": "SYSTEM_LIMIT_ERROR",
+                        "name": "SystemLimitError"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.honeycode#ErrorMessage": {
             "type": "string"
         },
@@ -814,6 +898,18 @@
                 },
                 "smithy.api#pattern": "^[\\s\\S]*$",
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.honeycode#FactList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.honeycode#Fact"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 220
+                }
             }
         },
         "com.amazonaws.honeycode#FailedBatchItem": {
@@ -918,6 +1014,10 @@
                     {
                         "value": "ROWLINK",
                         "name": "Rowlink"
+                    },
+                    {
+                        "value": "ROWSET",
+                        "name": "Rowset"
                     }
                 ]
             }
@@ -930,6 +1030,18 @@
                     "max": 8192
                 },
                 "smithy.api#pattern": "^[\\s\\S]*$"
+            }
+        },
+        "com.amazonaws.honeycode#FormattedValuesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.honeycode#FormattedValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 220
+                }
             }
         },
         "com.amazonaws.honeycode#Formula": {
@@ -1223,6 +1335,9 @@
                 },
                 {
                     "target": "com.amazonaws.honeycode#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.honeycode#ServiceQuotaExceededException"
                 },
                 {
                     "target": "com.amazonaws.honeycode#ServiceUnavailableException"
@@ -2017,7 +2132,8 @@
                     "min": 1,
                     "max": 8000
                 },
-                "smithy.api#pattern": "^https:\\/\\/[^\\n\\r\\x00\\x08\\x0B\\x0C\\x0E\\x1F]*$"
+                "smithy.api#pattern": "^https:\\/\\/[^\\n\\r\\x00\\x08\\x0B\\x0C\\x0E\\x1F]*$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.honeycode#ServiceQuotaExceededException": {
@@ -2153,7 +2269,13 @@
                     "target": "com.amazonaws.honeycode#InternalServerException"
                 },
                 {
+                    "target": "com.amazonaws.honeycode#RequestTimeoutException"
+                },
+                {
                     "target": "com.amazonaws.honeycode#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.honeycode#ServiceQuotaExceededException"
                 },
                 {
                     "target": "com.amazonaws.honeycode#ServiceUnavailableException"
@@ -2724,6 +2846,10 @@
         "com.amazonaws.honeycode#VariableName": {
             "type": "string",
             "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
                 "smithy.api#pattern": "^(?!\\s*$).+$",
                 "smithy.api#sensitive": {}
             }

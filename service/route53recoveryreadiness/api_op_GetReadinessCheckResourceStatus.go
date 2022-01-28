@@ -12,8 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns detailed information about the status of an individual resource within a
-// Readiness Check's Resource Set.
+// Gets individual readiness status for a readiness check. To see the overall
+// readiness status for a recovery group, that considers the readiness status for
+// all the readiness checks in the recovery group, use
+// GetRecoveryGroupReadinessSummary.
 func (c *Client) GetReadinessCheckResourceStatus(ctx context.Context, params *GetReadinessCheckResourceStatusInput, optFns ...func(*Options)) (*GetReadinessCheckResourceStatusOutput, error) {
 	if params == nil {
 		params = &GetReadinessCheckResourceStatusInput{}
@@ -31,20 +33,22 @@ func (c *Client) GetReadinessCheckResourceStatus(ctx context.Context, params *Ge
 
 type GetReadinessCheckResourceStatusInput struct {
 
-	// The ReadinessCheck to get
+	// Name of a readiness check.
 	//
 	// This member is required.
 	ReadinessCheckName *string
 
-	// The resource ARN or component Id to get
+	// The resource identifier, which is the Amazon Resource Name (ARN) or the
+	// identifier generated for the resource by Application Recovery Controller (for
+	// example, for a DNS target resource).
 	//
 	// This member is required.
 	ResourceIdentifier *string
 
-	// Upper bound on number of records to return.
+	// The number of objects that you want to return with this call.
 	MaxResults int32
 
-	// A token used to resume pagination from the end of a previous request.
+	// The token that identifies which batch of results you want to see.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -52,13 +56,13 @@ type GetReadinessCheckResourceStatusInput struct {
 
 type GetReadinessCheckResourceStatusOutput struct {
 
-	// A token that can be used to resume pagination from the end of the collection.
+	// The token that identifies which batch of results you want to see.
 	NextToken *string
 
-	// The readiness at rule level.
+	// The readiness at a rule level.
 	Readiness types.Readiness
 
-	// Details of the rules's results
+	// Details of the rule's results.
 	Rules []types.RuleResult
 
 	// Metadata pertaining to the operation's result.
@@ -141,7 +145,7 @@ var _ GetReadinessCheckResourceStatusAPIClient = (*Client)(nil)
 // GetReadinessCheckResourceStatusPaginatorOptions is the paginator options for
 // GetReadinessCheckResourceStatus
 type GetReadinessCheckResourceStatusPaginatorOptions struct {
-	// Upper bound on number of records to return.
+	// The number of objects that you want to return with this call.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

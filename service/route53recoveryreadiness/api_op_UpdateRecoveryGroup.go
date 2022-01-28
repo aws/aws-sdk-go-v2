@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an existing Recovery Group.
+// Updates a recovery group.
 func (c *Client) UpdateRecoveryGroup(ctx context.Context, params *UpdateRecoveryGroupInput, optFns ...func(*Options)) (*UpdateRecoveryGroupOutput, error) {
 	if params == nil {
 		params = &UpdateRecoveryGroupInput{}
@@ -26,15 +26,16 @@ func (c *Client) UpdateRecoveryGroup(ctx context.Context, params *UpdateRecovery
 	return out, nil
 }
 
-// Parameters to update for the RecoveryGroup
+// Name of a recovery group.
 type UpdateRecoveryGroupInput struct {
 
-	// A list of Cell arns, completely replaces previous list
+	// A list of cell Amazon Resource Names (ARNs). This list completely replaces the
+	// previous list.
 	//
 	// This member is required.
 	Cells []string
 
-	// The RecoveryGroup to update
+	// The name of a recovery group.
 	//
 	// This member is required.
 	RecoveryGroupName *string
@@ -44,16 +45,16 @@ type UpdateRecoveryGroupInput struct {
 
 type UpdateRecoveryGroupOutput struct {
 
-	// A list of Cell arns
+	// A list of a cell's Amazon Resource Names (ARNs).
 	Cells []string
 
-	// The arn for the RecoveryGroup
+	// The Amazon Resource Name (ARN) for the recovery group.
 	RecoveryGroupArn *string
 
-	// The name of the RecoveryGroup
+	// The name of the recovery group.
 	RecoveryGroupName *string
 
-	// A collection of tags associated with a resource
+	// The tags associated with the recovery group.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

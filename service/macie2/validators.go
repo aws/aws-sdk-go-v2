@@ -927,6 +927,12 @@ func validateOpCreateCustomDataIdentifierInput(v *CreateCustomDataIdentifierInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateCustomDataIdentifierInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Regex == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Regex"))
+	}
 	if v.SeverityLevels != nil {
 		if err := validateSeverityLevelList(v.SeverityLevels); err != nil {
 			invalidParams.AddNested("SeverityLevels", err.(smithy.InvalidParamsError))

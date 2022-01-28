@@ -133,8 +133,7 @@ type UpdateFileSystemOutput struct {
 	// arn:aws:elasticfilesystem:us-west-2:1111333322228888:file-system/fs-01234567
 	FileSystemArn *string
 
-	// The ID of an Key Management Service customer master key (CMK) that was used to
-	// protect the encrypted file system.
+	// The ID of an KMS key used to protect the encrypted file system.
 	KmsKeyId *string
 
 	// You can add tags to a file system, including a Name tag. For more information,

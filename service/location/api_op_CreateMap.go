@@ -14,7 +14,11 @@ import (
 )
 
 // Creates a map resource in your AWS account, which provides map tiles of
-// different styles sourced from global location data providers.
+// different styles sourced from global location data providers. If your
+// application is tracking or routing assets you use in your business, such as
+// delivery vehicles or employees, you may only use HERE as your geolocation
+// provider. See section 82 of the AWS service terms
+// (http://aws.amazon.com/service-terms) for more details.
 func (c *Client) CreateMap(ctx context.Context, params *CreateMapInput, optFns ...func(*Options)) (*CreateMapOutput, error) {
 	if params == nil {
 		params = &CreateMapInput{}
@@ -54,10 +58,10 @@ type CreateMapInput struct {
 	// An optional description for the map resource.
 	Description *string
 
-	// Optionally specifies the pricing plan for the map resource. Defaults to
-	// RequestBasedUsage. For additional details and restrictions on each pricing plan
-	// option, see Amazon Location Service pricing
-	// (https://aws.amazon.com/location/pricing/).
+	// No longer used. If included, the only allowed value is RequestBasedUsage.
+	//
+	// Deprecated: Deprecated. If included, the only allowed value is
+	// RequestBasedUsage.
 	PricingPlan types.PricingPlan
 
 	// Applies one or more tags to the map resource. A tag is a key-value pair helps

@@ -221,6 +221,8 @@ const (
 	TierSapHanaSingleNode                  Tier = "SAP_HANA_SINGLE_NODE"
 	TierSapHanaHighAvailability            Tier = "SAP_HANA_HIGH_AVAILABILITY"
 	TierSqlServerFailoverClusterInstance   Tier = "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE"
+	TierSharepoint                         Tier = "SHAREPOINT"
+	TierActiveDirectory                    Tier = "ACTIVE_DIRECTORY"
 )
 
 // Values returns all known values for Tier. Note that this can be expanded in the
@@ -244,5 +246,7 @@ func (Tier) Values() []Tier {
 		"SAP_HANA_SINGLE_NODE",
 		"SAP_HANA_HIGH_AVAILABILITY",
 		"SQL_SERVER_FAILOVER_CLUSTER_INSTANCE",
+		"SHAREPOINT",
+		"ACTIVE_DIRECTORY",
 	}
 }

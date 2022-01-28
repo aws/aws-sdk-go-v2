@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Delete cross account readiness authorization
+// Deletes cross account readiness authorization.
 func (c *Client) DeleteCrossAccountAuthorization(ctx context.Context, params *DeleteCrossAccountAuthorizationInput, optFns ...func(*Options)) (*DeleteCrossAccountAuthorizationOutput, error) {
 	if params == nil {
 		params = &DeleteCrossAccountAuthorizationInput{}
@@ -28,7 +28,7 @@ func (c *Client) DeleteCrossAccountAuthorization(ctx context.Context, params *De
 
 type DeleteCrossAccountAuthorizationInput struct {
 
-	// The cross account authorization
+	// The cross-account authorization.
 	//
 	// This member is required.
 	CrossAccountAuthorization *string

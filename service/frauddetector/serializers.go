@@ -1996,6 +1996,61 @@ func (m *awsAwsjson11_serializeOpGetEventPrediction) HandleSerialize(ctx context
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpGetEventPredictionMetadata struct {
+}
+
+func (*awsAwsjson11_serializeOpGetEventPredictionMetadata) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpGetEventPredictionMetadata) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetEventPredictionMetadataInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHawksNestServiceFacade.GetEventPredictionMetadata")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentGetEventPredictionMetadataInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpGetEventTypes struct {
 }
 
@@ -2471,6 +2526,61 @@ func (m *awsAwsjson11_serializeOpGetVariables) HandleSerialize(ctx context.Conte
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentGetVariablesInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpListEventPredictions struct {
+}
+
+func (*awsAwsjson11_serializeOpListEventPredictions) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpListEventPredictions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListEventPredictionsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHawksNestServiceFacade.ListEventPredictions")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentListEventPredictionsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3710,6 +3820,18 @@ func awsAwsjson11_serializeDocumentExternalModelEndpointDataBlobMap(v map[string
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentFilterCondition(v *types.FilterCondition, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Value != nil {
+		ok := object.Key("value")
+		ok.String(*v.Value)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentIngestedEventsDetail(v *types.IngestedEventsDetail, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3945,6 +4067,23 @@ func awsAwsjson11_serializeDocumentNonEmptyListOfStrings(v []string, value smith
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPredictionTimeRange(v *types.PredictionTimeRange, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EndTime != nil {
+		ok := object.Key("endTime")
+		ok.String(*v.EndTime)
+	}
+
+	if v.StartTime != nil {
+		ok := object.Key("startTime")
+		ok.String(*v.StartTime)
+	}
+
 	return nil
 }
 
@@ -4919,6 +5058,38 @@ func awsAwsjson11_serializeOpDocumentGetEventPredictionInput(v *GetEventPredicti
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentGetEventPredictionMetadataInput(v *GetEventPredictionMetadataInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DetectorId != nil {
+		ok := object.Key("detectorId")
+		ok.String(*v.DetectorId)
+	}
+
+	if v.DetectorVersionId != nil {
+		ok := object.Key("detectorVersionId")
+		ok.String(*v.DetectorVersionId)
+	}
+
+	if v.EventId != nil {
+		ok := object.Key("eventId")
+		ok.String(*v.EventId)
+	}
+
+	if v.EventTypeName != nil {
+		ok := object.Key("eventTypeName")
+		ok.String(*v.EventTypeName)
+	}
+
+	if v.PredictionTimestamp != nil {
+		ok := object.Key("predictionTimestamp")
+		ok.String(*v.PredictionTimestamp)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentGetEventTypesInput(v *GetEventTypesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5105,6 +5276,58 @@ func awsAwsjson11_serializeOpDocumentGetVariablesInput(v *GetVariablesInput, val
 	if v.NextToken != nil {
 		ok := object.Key("nextToken")
 		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentListEventPredictionsInput(v *ListEventPredictionsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DetectorId != nil {
+		ok := object.Key("detectorId")
+		if err := awsAwsjson11_serializeDocumentFilterCondition(v.DetectorId, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DetectorVersionId != nil {
+		ok := object.Key("detectorVersionId")
+		if err := awsAwsjson11_serializeDocumentFilterCondition(v.DetectorVersionId, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EventId != nil {
+		ok := object.Key("eventId")
+		if err := awsAwsjson11_serializeDocumentFilterCondition(v.EventId, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EventType != nil {
+		ok := object.Key("eventType")
+		if err := awsAwsjson11_serializeDocumentFilterCondition(v.EventType, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("maxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.PredictionTimeRange != nil {
+		ok := object.Key("predictionTimeRange")
+		if err := awsAwsjson11_serializeDocumentPredictionTimeRange(v.PredictionTimeRange, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

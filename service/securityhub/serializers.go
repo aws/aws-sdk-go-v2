@@ -15564,6 +15564,11 @@ func awsRestjson1_serializeDocumentAwsSecurityFinding(v *types.AwsSecurityFindin
 		}
 	}
 
+	if v.Sample {
+		ok := object.Key("Sample")
+		ok.Boolean(v.Sample)
+	}
+
 	if v.SchemaVersion != nil {
 		ok := object.Key("SchemaVersion")
 		ok.String(*v.SchemaVersion)
@@ -16178,6 +16183,13 @@ func awsRestjson1_serializeDocumentAwsSecurityFindingFilters(v *types.AwsSecurit
 	if v.ResourceType != nil {
 		ok := object.Key("ResourceType")
 		if err := awsRestjson1_serializeDocumentStringFilterList(v.ResourceType, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Sample != nil {
+		ok := object.Key("Sample")
+		if err := awsRestjson1_serializeDocumentBooleanFilterList(v.Sample, ok); err != nil {
 			return err
 		}
 	}
@@ -16807,6 +16819,31 @@ func awsRestjson1_serializeDocumentBatchImportFindingsRequestFindingList(v []typ
 	for i := range v {
 		av := array.Value()
 		if err := awsRestjson1_serializeDocumentAwsSecurityFinding(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentBooleanFilter(v *types.BooleanFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Value {
+		ok := object.Key("Value")
+		ok.Boolean(v.Value)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentBooleanFilterList(v []types.BooleanFilter, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentBooleanFilter(&v[i], av); err != nil {
 			return err
 		}
 	}

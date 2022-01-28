@@ -96,27 +96,26 @@ type CreateFileSystemInput struct {
 	// (https://docs.aws.amazon.com/efs/latest/ug/awsbackup.html#automatic-backups) in
 	// the Amazon EFS User Guide. Default is false. However, if you specify an
 	// AvailabilityZoneName, the default is true. Backup is not available in all Amazon
-	// Web Services Regionswhere Amazon EFS is available.
+	// Web Services Regions where Amazon EFS is available.
 	Backup *bool
 
 	// A Boolean value that, if true, creates an encrypted file system. When creating
-	// an encrypted file system, you have the option of specifying
-	// CreateFileSystemRequest$KmsKeyId for an existing Key Management Service (KMS
-	// customer master key (CMK). If you don't specify a CMK, then the default CMK for
-	// Amazon EFS, /aws/elasticfilesystem, is used to protect the encrypted file
-	// system.
+	// an encrypted file system, you have the option of specifying an existing Key
+	// Management Service key (KMS key). If you don't specify a KMS key, then the
+	// default KMS key for Amazon EFS, /aws/elasticfilesystem, is used to protect the
+	// encrypted file system.
 	Encrypted *bool
 
-	// The ID of the KMS CMK that you want to use to protect the encrypted file system.
+	// The ID of the KMS key that you want to use to protect the encrypted file system.
 	// This parameter is only required if you want to use a non-default KMS key. If
-	// this parameter is not specified, the default CMK for Amazon EFS is used. This ID
-	// can be in one of the following formats:
+	// this parameter is not specified, the default KMS key for Amazon EFS is used. You
+	// can specify a KMS key ID using the following formats:
 	//
-	// * Key ID - A unique identifier of the
-	// key, for example 1234abcd-12ab-34cd-56ef-1234567890ab.
+	// * Key ID - A unique
+	// identifier of the key, for example 1234abcd-12ab-34cd-56ef-1234567890ab.
 	//
-	// * ARN - An Amazon
-	// Resource Name (ARN) for the key, for example
+	// * ARN
+	// - An Amazon Resource Name (ARN) for the key, for example
 	// arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab.
 	//
 	// *
@@ -126,9 +125,9 @@ type CreateFileSystemInput struct {
 	// * Key alias ARN - An ARN for a key alias, for example
 	// arn:aws:kms:us-west-2:444455556666:alias/projectKey1.
 	//
-	// If KmsKeyId is specified,
-	// the CreateFileSystemRequest$Encrypted parameter must be set to true. EFS accepts
-	// only symmetric KMS keys. You cannot use asymmetric KMS keys with EFS file
+	// If you use KmsKeyId, you
+	// must set the CreateFileSystemRequest$Encrypted parameter to true. EFS accepts
+	// only symmetric KMS keys. You cannot use asymmetric KMS keys with Amazon EFS file
 	// systems.
 	KmsKeyId *string
 
@@ -253,8 +252,7 @@ type CreateFileSystemOutput struct {
 	// arn:aws:elasticfilesystem:us-west-2:1111333322228888:file-system/fs-01234567
 	FileSystemArn *string
 
-	// The ID of an Key Management Service customer master key (CMK) that was used to
-	// protect the encrypted file system.
+	// The ID of an KMS key used to protect the encrypted file system.
 	KmsKeyId *string
 
 	// You can add tags to a file system, including a Name tag. For more information,

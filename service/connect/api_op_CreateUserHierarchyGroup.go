@@ -43,6 +43,9 @@ type CreateUserHierarchyGroupInput struct {
 	// level one if the parent group ID is null.
 	ParentGroupId *string
 
+	// The tags used to organize, track, or control access for this resource.
+	Tags map[string]string
+
 	noSmithyDocumentSerde
 }
 

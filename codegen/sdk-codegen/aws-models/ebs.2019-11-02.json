@@ -349,6 +349,21 @@
         },
         "com.amazonaws.ebs#Ebs": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "EBS",
+                    "arnNamespace": "ebs",
+                    "cloudFormationName": "EBS",
+                    "cloudTrailEventSource": "ebs.amazonaws.com",
+                    "endpointPrefix": "ebs"
+                },
+                "aws.auth#sigv4": {
+                    "name": "ebs"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>You can use the Amazon Elastic Block Store (Amazon EBS) direct APIs to create Amazon EBS snapshots, write data directly to \n    \t\tyour snapshots, read data on your snapshots, and identify the differences or changes between \n    \t\ttwo snapshots. If you’re an independent software vendor (ISV) who offers backup services for \n    \t\tAmazon EBS, the EBS direct APIs make it more efficient and cost-effective to track incremental changes on \n    \t\tyour Amazon EBS volumes through snapshots. This can be done without having to create new volumes \n    \t\tfrom snapshots, and then use Amazon Elastic Compute Cloud (Amazon EC2) instances to compare the differences.</p>\n    \t\t\n    \t    <p>You can create incremental snapshots directly from data on-premises into volumes and the \n    \t\tcloud to use for quick disaster recovery. With the ability to write and read snapshots, you can \n    \t\twrite your on-premises data to an snapshot during a disaster. Then after recovery, you can \n    \t\trestore it back to Amazon Web Services or on-premises from the snapshot. You no longer need to build and \n    \t\tmaintain complex mechanisms to copy data to and from Amazon EBS.</p>\n\n\n        <p>This API reference provides detailed information about the actions, data types,\n            parameters, and errors of the EBS direct APIs. For more information about the elements that\n            make up the EBS direct APIs, and examples of how to use them effectively, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-accessing-snapshot.html\">Accessing the Contents of an Amazon EBS Snapshot</a> in the <i>Amazon Elastic Compute Cloud User\n                Guide</i>. For more information about the supported Amazon Web Services Regions, endpoints,\n            and service quotas for the EBS direct APIs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/ebs-service.html\">Amazon Elastic Block Store Endpoints and Quotas</a> in\n            the <i>Amazon Web Services General Reference</i>.</p>",
+                "smithy.api#title": "Amazon Elastic Block Store"
+            },
             "version": "2019-11-02",
             "operations": [
                 {
@@ -369,22 +384,7 @@
                 {
                     "target": "com.amazonaws.ebs#StartSnapshot"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "EBS",
-                    "arnNamespace": "ebs",
-                    "cloudFormationName": "EBS",
-                    "cloudTrailEventSource": "ebs.amazonaws.com",
-                    "endpointPrefix": "ebs"
-                },
-                "aws.auth#sigv4": {
-                    "name": "ebs"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>You can use the Amazon Elastic Block Store (Amazon EBS) direct APIs to create Amazon EBS snapshots, write data directly to \n    \t\tyour snapshots, read data on your snapshots, and identify the differences or changes between \n    \t\ttwo snapshots. If you’re an independent software vendor (ISV) who offers backup services for \n    \t\tAmazon EBS, the EBS direct APIs make it more efficient and cost-effective to track incremental changes on \n    \t\tyour Amazon EBS volumes through snapshots. This can be done without having to create new volumes \n    \t\tfrom snapshots, and then use Amazon Elastic Compute Cloud (Amazon EC2) instances to compare the differences.</p>\n    \t\t\n    \t    <p>You can create incremental snapshots directly from data on-premises into volumes and the \n    \t\tcloud to use for quick disaster recovery. With the ability to write and read snapshots, you can \n    \t\twrite your on-premises data to an snapshot during a disaster. Then after recovery, you can \n    \t\trestore it back to Amazon Web Services or on-premises from the snapshot. You no longer need to build and \n    \t\tmaintain complex mechanisms to copy data to and from Amazon EBS.</p>\n\n\n        <p>This API reference provides detailed information about the actions, data types,\n            parameters, and errors of the EBS direct APIs. For more information about the elements that\n            make up the EBS direct APIs, and examples of how to use them effectively, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-accessing-snapshot.html\">Accessing the Contents of an Amazon EBS Snapshot</a> in the <i>Amazon Elastic Compute Cloud User\n                Guide</i>. For more information about the supported Amazon Web Services Regions, endpoints,\n            and service quotas for the EBS direct APIs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/ebs-service.html\">Amazon Elastic Block Store Endpoints and Quotas</a> in\n            the <i>Amazon Web Services General Reference</i>.</p>",
-                "smithy.api#title": "Amazon Elastic Block Store"
-            }
+            ]
         },
         "com.amazonaws.ebs#ErrorMessage": {
             "type": "string",
@@ -591,21 +591,21 @@
                 "NextToken": {
                     "target": "com.amazonaws.ebs#PageToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to request the next page of results.</p>",
+                        "smithy.api#documentation": "<p>The token to request the next page of results.</p>\n        <p>If you specify <b>NextToken</b>, then \n            <b>StartingBlockIndex</b> is ignored.</p>",
                         "smithy.api#httpQuery": "pageToken"
                     }
                 },
                 "MaxResults": {
                     "target": "com.amazonaws.ebs#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of results to return.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of blocks to be returned by the request.</p>\n        <p>Even if additional blocks can be retrieved from the snapshot, the request can \n            return less blocks than <b>MaxResults</b> or an empty \n            array of blocks.</p>\n        <p>To retrieve the next set of blocks from the snapshot, make another request with \n            the returned <b>NextToken</b> value. The value of \n            <b>NextToken</b> is <code>null</code> when there are no \n            more blocks to return.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 },
                 "StartingBlockIndex": {
                     "target": "com.amazonaws.ebs#BlockIndex",
                     "traits": {
-                        "smithy.api#documentation": "<p>The block index from which the comparison should start.</p>\n        <p>The list in the response will start from this block index or the next valid block\n            index in the snapshots.</p>",
+                        "smithy.api#documentation": "<p>The block index from which the comparison should start.</p>\n        <p>The list in the response will start from this block index or the next valid block\n            index in the snapshots.</p>\n        <p>If you specify <b>NextToken</b>, then \n            <b>StartingBlockIndex</b> is ignored.</p>",
                         "smithy.api#httpQuery": "startingBlockIndex"
                     }
                 }
@@ -702,21 +702,21 @@
                 "NextToken": {
                     "target": "com.amazonaws.ebs#PageToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to request the next page of results.</p>",
+                        "smithy.api#documentation": "<p>The token to request the next page of results.</p>\n        <p>If you specify <b>NextToken</b>, then \n            <b>StartingBlockIndex</b> is ignored.</p>",
                         "smithy.api#httpQuery": "pageToken"
                     }
                 },
                 "MaxResults": {
                     "target": "com.amazonaws.ebs#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of results to return.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of blocks to be returned by the request.</p>\n        <p>Even if additional blocks can be retrieved from the snapshot, the request can \n            return less blocks than <b>MaxResults</b> or an empty \n            array of blocks.</p>\n        <p>To retrieve the next set of blocks from the snapshot, make another request with \n            the returned <b>NextToken</b> value. The value of \n            <b>NextToken</b> is <code>null</code> when there are no \n            more blocks to return.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 },
                 "StartingBlockIndex": {
                     "target": "com.amazonaws.ebs#BlockIndex",
                     "traits": {
-                        "smithy.api#documentation": "<p>The block index from which the list should start. The list in the response will start\n            from this block index or the next valid block index in the snapshot.</p>",
+                        "smithy.api#documentation": "<p>The block index from which the list should start. The list in the response will start\n            from this block index or the next valid block index in the snapshot.</p>\n        <p>If you specify <b>NextToken</b>, then \n            <b>StartingBlockIndex</b> is ignored.</p>",
                         "smithy.api#httpQuery": "startingBlockIndex"
                     }
                 }

@@ -76,6 +76,9 @@ type Action struct {
 	// Information about the DNS_REQUEST action described in this finding.
 	DnsRequestAction *DnsRequestAction
 
+	// Information about the Kubernetes API call action described in this finding.
+	KubernetesApiCallAction *KubernetesApiCallAction
+
 	// Information about the NETWORK_CONNECTION action described in this finding.
 	NetworkConnectionAction *NetworkConnectionAction
 
@@ -89,7 +92,7 @@ type Action struct {
 // administrator.
 type AdminAccount struct {
 
-	// The AWS account ID for the account.
+	// The Amazon Web Services account ID for the account.
 	AdminAccountId *string
 
 	// Indicates whether the account is enabled as the delegated administrator.
@@ -101,23 +104,30 @@ type AdminAccount struct {
 // Contains information about the API action.
 type AwsApiCallAction struct {
 
-	// The AWS API name.
+	// The Amazon Web Services API name.
 	Api *string
 
-	// The AWS API caller type.
+	// The Amazon Web Services API caller type.
 	CallerType *string
 
-	// The domain information for the AWS API call.
+	// The domain information for the Amazon Web Services API call.
 	DomainDetails *DomainDetails
 
-	// The error code of the failed AWS API action.
+	// The error code of the failed Amazon Web Services API action.
 	ErrorCode *string
 
-	// The remote IP information of the connection that initiated the AWS API call.
+	// The details of the Amazon Web Services account that made the API call. This
+	// field appears if the call was made from outside your account.
+	RemoteAccountDetails *RemoteAccountDetails
+
+	// The remote IP information of the connection that initiated the Amazon Web
+	// Services API call.
 	RemoteIpDetails *RemoteIpDetails
 
-	// The AWS service name whose API was invoked.
+	// The Amazon Web Services service name whose API was invoked.
 	ServiceName *string
+
+	UserAgent *string
 
 	noSmithyDocumentSerde
 }
@@ -260,6 +270,36 @@ type Condition struct {
 	noSmithyDocumentSerde
 }
 
+// Details of a container.
+type Container struct {
+
+	// The container runtime (such as, Docker or containerd) used to run the container.
+	ContainerRuntime *string
+
+	// Container ID.
+	Id *string
+
+	// Container image.
+	Image *string
+
+	// Part of the image name before the last slash. For example, imagePrefix for
+	// public.ecr.aws/amazonlinux/amazonlinux:latest would be
+	// public.ecr.aws/amazonlinux. If the image name is relative and does not have a
+	// slash, this field is empty.
+	ImagePrefix *string
+
+	// Container name.
+	Name *string
+
+	// Container security context.
+	SecurityContext *SecurityContext
+
+	// Container volume mounts.
+	VolumeMounts []VolumeMount
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about the country where the remote IP address is located.
 type Country struct {
 
@@ -274,6 +314,9 @@ type Country struct {
 
 // Contains information about which data sources are enabled.
 type DataSourceConfigurations struct {
+
+	// Describes whether any Kubernetes logs are enabled as data sources.
+	Kubernetes *KubernetesConfiguration
 
 	// Describes whether S3 data event logs are enabled as a data source.
 	S3Logs *S3LogsConfiguration
@@ -306,6 +349,10 @@ type DataSourceConfigurationsResult struct {
 	//
 	// This member is required.
 	S3Logs *S3LogsConfigurationResult
+
+	// An object that contains information on the status of all Kubernetes data
+	// sources.
+	Kubernetes *KubernetesConfigurationResult
 
 	noSmithyDocumentSerde
 }
@@ -353,7 +400,8 @@ type Destination struct {
 // an S3 bucket, and the ARN of the KMS key to use to encrypt published findings.
 type DestinationProperties struct {
 
-	// The ARN of the resource to publish to.
+	// The ARN of the resource to publish to. To specify an S3 bucket folder use the
+	// following format: arn:aws:s3:::DOC-EXAMPLE-BUCKET/myFolder/
 	DestinationArn *string
 
 	// The ARN of the KMS key to use for encryption.
@@ -385,8 +433,32 @@ type DnsRequestAction struct {
 // Contains information about the domain.
 type DomainDetails struct {
 
-	// The domain information for the AWS API call.
+	// The domain information for the Amazon Web Services API call.
 	Domain *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about the EKS cluster involved in a Kubernetes finding.
+type EksClusterDetails struct {
+
+	// EKS cluster ARN.
+	Arn *string
+
+	// The timestamp when the EKS cluster was created.
+	CreatedAt *time.Time
+
+	// EKS cluster name.
+	Name *string
+
+	// The EKS cluster status.
+	Status *string
+
+	// The EKS cluster tags.
+	Tags []Tag
+
+	// The VPC ID to which the EKS cluster is attached.
+	VpcId *string
 
 	noSmithyDocumentSerde
 }
@@ -429,8 +501,8 @@ type Finding struct {
 	// This member is required.
 	Region *string
 
-	// Contains information about the AWS resource associated with the activity that
-	// prompted GuardDuty to generate a finding.
+	// Contains information about the Amazon Web Services resource associated with the
+	// activity that prompted GuardDuty to generate a finding.
 	//
 	// This member is required.
 	Resource *Resource
@@ -515,6 +587,16 @@ type GeoLocation struct {
 	noSmithyDocumentSerde
 }
 
+// Represents a pre-existing file or directory on the host machine that the volume
+// maps to.
+type HostPath struct {
+
+	// Path of the file or directory on the host that the volume maps to.
+	Path *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about the EC2 instance profile.
 type IamInstanceProfile struct {
 
@@ -557,8 +639,8 @@ type InstanceDetails struct {
 	// The elastic network interface information of the EC2 instance.
 	NetworkInterfaces []NetworkInterface
 
-	// The Amazon Resource Name (ARN) of the AWS Outpost. Only applicable to AWS
-	// Outposts instances.
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Outpost. Only
+	// applicable to Amazon Web Services Outposts instances.
 	OutpostArn *string
 
 	// The platform of the EC2 instance.
@@ -588,6 +670,134 @@ type Invitation struct {
 
 	// The status of the relationship between the inviter and invitee accounts.
 	RelationshipStatus *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the Kubernetes API call action described in this finding.
+type KubernetesApiCallAction struct {
+
+	// Parameters related to the Kubernetes API call action.
+	Parameters *string
+
+	// Contains information about the remote IP address of the connection.
+	RemoteIpDetails *RemoteIpDetails
+
+	// The Kubernetes API request URI.
+	RequestUri *string
+
+	// The IP of the Kubernetes API caller and the IPs of any proxies or load balancers
+	// between the caller and the API endpoint.
+	SourceIps []string
+
+	// The resulting HTTP response code of the Kubernetes API call action.
+	StatusCode int32
+
+	// The user agent of the caller of the Kubernetes API.
+	UserAgent *string
+
+	// The Kubernetes API request HTTP verb.
+	Verb *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes whether Kubernetes audit logs are enabled as a data source.
+type KubernetesAuditLogsConfiguration struct {
+
+	// The status of Kubernetes audit logs as a data source.
+	//
+	// This member is required.
+	Enable bool
+
+	noSmithyDocumentSerde
+}
+
+// Describes whether Kubernetes audit logs are enabled as a data source.
+type KubernetesAuditLogsConfigurationResult struct {
+
+	// A value that describes whether Kubernetes audit logs are enabled as a data
+	// source.
+	//
+	// This member is required.
+	Status DataSourceStatus
+
+	noSmithyDocumentSerde
+}
+
+// Describes whether any Kubernetes data sources are enabled.
+type KubernetesConfiguration struct {
+
+	// The status of Kubernetes audit logs as a data source.
+	//
+	// This member is required.
+	AuditLogs *KubernetesAuditLogsConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Describes whether any Kubernetes logs will be enabled as a data source.
+type KubernetesConfigurationResult struct {
+
+	// Describes whether Kubernetes audit logs are enabled as a data source.
+	//
+	// This member is required.
+	AuditLogs *KubernetesAuditLogsConfigurationResult
+
+	noSmithyDocumentSerde
+}
+
+// Details about Kubernetes resources such as a Kubernetes user or workload
+// resource involved in a Kubernetes finding.
+type KubernetesDetails struct {
+
+	// Details about the Kubernetes user involved in a Kubernetes finding.
+	KubernetesUserDetails *KubernetesUserDetails
+
+	// Details about the Kubernetes workload involved in a Kubernetes finding.
+	KubernetesWorkloadDetails *KubernetesWorkloadDetails
+
+	noSmithyDocumentSerde
+}
+
+// Details about the Kubernetes user involved in a Kubernetes finding.
+type KubernetesUserDetails struct {
+
+	// The groups that include the user who called the Kubernetes API.
+	Groups []string
+
+	// The user ID of the user who called the Kubernetes API.
+	Uid *string
+
+	// The username of the user who called the Kubernetes API.
+	Username *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about the Kubernetes workload involved in a Kubernetes finding.
+type KubernetesWorkloadDetails struct {
+
+	// Containers running as part of the Kubernetes workload.
+	Containers []Container
+
+	// Whether the hostNetwork flag is enabled for the pods included in the workload.
+	HostNetwork bool
+
+	// Kubernetes workload name.
+	Name *string
+
+	// Kubernetes namespace that the workload is part of.
+	Namespace *string
+
+	// Kubernetes workload type (e.g. Pod, Deployment, etc.).
+	Type *string
+
+	// Kubernetes workload ID.
+	Uid *string
+
+	// Volumes used by the Kubernetes workload.
+	Volumes []Volume
 
 	noSmithyDocumentSerde
 }
@@ -771,6 +981,10 @@ type Organization struct {
 // be automatically enabled for new members within the organization.
 type OrganizationDataSourceConfigurations struct {
 
+	// Describes the configuration of Kubernetes data sources for new members of the
+	// organization.
+	Kubernetes *OrganizationKubernetesConfiguration
+
 	// Describes whether S3 data event logs are enabled for new members of the
 	// organization.
 	S3Logs *OrganizationS3LogsConfiguration
@@ -786,6 +1000,58 @@ type OrganizationDataSourceConfigurationsResult struct {
 	//
 	// This member is required.
 	S3Logs *OrganizationS3LogsConfigurationResult
+
+	// Describes the configuration of Kubernetes data sources.
+	Kubernetes *OrganizationKubernetesConfigurationResult
+
+	noSmithyDocumentSerde
+}
+
+// Organization-wide Kubernetes audit logs configuration.
+type OrganizationKubernetesAuditLogsConfiguration struct {
+
+	// A value that contains information on whether Kubernetes audit logs should be
+	// enabled automatically as a data source for the organization.
+	//
+	// This member is required.
+	AutoEnable bool
+
+	noSmithyDocumentSerde
+}
+
+// The current configuration of Kubernetes audit logs as a data source for the
+// organization.
+type OrganizationKubernetesAuditLogsConfigurationResult struct {
+
+	// Whether Kubernetes audit logs data source should be auto-enabled for new members
+	// joining the organization.
+	//
+	// This member is required.
+	AutoEnable bool
+
+	noSmithyDocumentSerde
+}
+
+// Organization-wide Kubernetes data sources configurations.
+type OrganizationKubernetesConfiguration struct {
+
+	// Whether Kubernetes audit logs data source should be auto-enabled for new members
+	// joining the organization.
+	//
+	// This member is required.
+	AuditLogs *OrganizationKubernetesAuditLogsConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The current configuration of all Kubernetes data sources for the organization.
+type OrganizationKubernetesConfigurationResult struct {
+
+	// The current configuration of Kubernetes audit logs as a data source for the
+	// organization.
+	//
+	// This member is required.
+	AuditLogs *OrganizationKubernetesAuditLogsConfigurationResult
 
 	noSmithyDocumentSerde
 }
@@ -904,6 +1170,22 @@ type PublicAccess struct {
 	noSmithyDocumentSerde
 }
 
+// Contains details about the remote Amazon Web Services account that made the API
+// call.
+type RemoteAccountDetails struct {
+
+	// The Amazon Web Services account ID of the remote API caller.
+	AccountId *string
+
+	// Details on whether the Amazon Web Services account of the remote API caller is
+	// related to your GuardDuty environment. If this value is True the API caller is
+	// affiliated to your account in some way. If it is False the API caller is from
+	// outside your environment.
+	Affiliated bool
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about the remote IP address of the connection.
 type RemoteIpDetails struct {
 
@@ -937,19 +1219,25 @@ type RemotePortDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about the AWS resource associated with the activity that
-// prompted GuardDuty to generate a finding.
+// Contains information about the Amazon Web Services resource associated with the
+// activity that prompted GuardDuty to generate a finding.
 type Resource struct {
 
 	// The IAM access key details (IAM user information) of a user that engaged in the
 	// activity that prompted GuardDuty to generate a finding.
 	AccessKeyDetails *AccessKeyDetails
 
+	// Details about the EKS cluster involved in a Kubernetes finding.
+	EksClusterDetails *EksClusterDetails
+
 	// The information about the EC2 instance associated with the activity that
 	// prompted GuardDuty to generate a finding.
 	InstanceDetails *InstanceDetails
 
-	// The type of AWS resource.
+	// Details about the Kubernetes user and workload involved in a Kubernetes finding.
+	KubernetesDetails *KubernetesDetails
+
+	// The type of Amazon Web Services resource.
 	ResourceType *string
 
 	// Contains information on the S3 bucket.
@@ -1011,6 +1299,15 @@ type S3LogsConfigurationResult struct {
 	noSmithyDocumentSerde
 }
 
+// Container security context.
+type SecurityContext struct {
+
+	// Whether the container is privileged.
+	Privileged bool
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about the security groups associated with the EC2 instance.
 type SecurityGroup struct {
 
@@ -1052,7 +1349,8 @@ type Service struct {
 	// The resource role information for this finding.
 	ResourceRole *string
 
-	// The name of the AWS service (GuardDuty) that generated a finding.
+	// The name of the Amazon Web Services service (GuardDuty) that generated a
+	// finding.
 	ServiceName *string
 
 	// Feedback that was submitted about the finding.
@@ -1114,7 +1412,7 @@ type Total struct {
 // Contains information about the accounts that weren't processed.
 type UnprocessedAccount struct {
 
-	// The AWS account ID.
+	// The Amazon Web Services account ID.
 	//
 	// This member is required.
 	AccountId *string
@@ -1169,10 +1467,11 @@ type UsageDataSourceResult struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information on the sum of usage based on an AWS resource.
+// Contains information on the sum of usage based on an Amazon Web Services
+// resource.
 type UsageResourceResult struct {
 
-	// The AWS resource that generated usage.
+	// The Amazon Web Services resource that generated usage.
 	Resource *string
 
 	// Represents the sum total of usage for the specified resource type.
@@ -1197,6 +1496,31 @@ type UsageStatistics struct {
 	// Lists the top 50 resources that have generated the most GuardDuty usage, in
 	// order from most to least expensive.
 	TopResources []UsageResourceResult
+
+	noSmithyDocumentSerde
+}
+
+// Volume used by the Kubernetes workload.
+type Volume struct {
+
+	// Represents a pre-existing file or directory on the host machine that the volume
+	// maps to.
+	HostPath *HostPath
+
+	// Volume name.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Container volume mount.
+type VolumeMount struct {
+
+	// Volume mount path.
+	MountPath *string
+
+	// Volume mount name.
+	Name *string
 
 	noSmithyDocumentSerde
 }

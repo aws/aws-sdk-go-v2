@@ -1351,6 +1351,42 @@ func validateDataSourceConfigurations(v *types.DataSourceConfigurations) error {
 			invalidParams.AddNested("S3Logs", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Kubernetes != nil {
+		if err := validateKubernetesConfiguration(v.Kubernetes); err != nil {
+			invalidParams.AddNested("Kubernetes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateKubernetesAuditLogsConfiguration(v *types.KubernetesAuditLogsConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "KubernetesAuditLogsConfiguration"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateKubernetesConfiguration(v *types.KubernetesConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "KubernetesConfiguration"}
+	if v.AuditLogs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AuditLogs"))
+	} else if v.AuditLogs != nil {
+		if err := validateKubernetesAuditLogsConfiguration(v.AuditLogs); err != nil {
+			invalidParams.AddNested("AuditLogs", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1366,6 +1402,42 @@ func validateOrganizationDataSourceConfigurations(v *types.OrganizationDataSourc
 	if v.S3Logs != nil {
 		if err := validateOrganizationS3LogsConfiguration(v.S3Logs); err != nil {
 			invalidParams.AddNested("S3Logs", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Kubernetes != nil {
+		if err := validateOrganizationKubernetesConfiguration(v.Kubernetes); err != nil {
+			invalidParams.AddNested("Kubernetes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOrganizationKubernetesAuditLogsConfiguration(v *types.OrganizationKubernetesAuditLogsConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OrganizationKubernetesAuditLogsConfiguration"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOrganizationKubernetesConfiguration(v *types.OrganizationKubernetesConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OrganizationKubernetesConfiguration"}
+	if v.AuditLogs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AuditLogs"))
+	} else if v.AuditLogs != nil {
+		if err := validateOrganizationKubernetesAuditLogsConfiguration(v.AuditLogs); err != nil {
+			invalidParams.AddNested("AuditLogs", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

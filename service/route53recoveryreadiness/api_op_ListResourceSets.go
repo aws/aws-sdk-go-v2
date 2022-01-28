@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a collection of Resource Sets.
+// Lists the resource sets in an account.
 func (c *Client) ListResourceSets(ctx context.Context, params *ListResourceSetsInput, optFns ...func(*Options)) (*ListResourceSetsOutput, error) {
 	if params == nil {
 		params = &ListResourceSetsInput{}
@@ -30,10 +30,10 @@ func (c *Client) ListResourceSets(ctx context.Context, params *ListResourceSetsI
 
 type ListResourceSetsInput struct {
 
-	// Upper bound on number of records to return.
+	// The number of objects that you want to return with this call.
 	MaxResults int32
 
-	// A token used to resume pagination from the end of a previous request.
+	// The token that identifies which batch of results you want to see.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -41,10 +41,10 @@ type ListResourceSetsInput struct {
 
 type ListResourceSetsOutput struct {
 
-	// A token that can be used to resume pagination from the end of the collection.
+	// The token that identifies which batch of results you want to see.
 	NextToken *string
 
-	// A list of ResourceSets associated with the account
+	// A list of resource sets associated with the account.
 	ResourceSets []types.ResourceSetOutput
 
 	// Metadata pertaining to the operation's result.
@@ -123,7 +123,7 @@ var _ ListResourceSetsAPIClient = (*Client)(nil)
 
 // ListResourceSetsPaginatorOptions is the paginator options for ListResourceSets
 type ListResourceSetsPaginatorOptions struct {
-	// Upper bound on number of records to return.
+	// The number of objects that you want to return with this call.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

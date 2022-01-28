@@ -33799,6 +33799,15 @@ func awsRestjson1_deserializeDocumentAwsSecurityFinding(v **types.AwsSecurityFin
 				return err
 			}
 
+		case "Sample":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Sample = jtv
+			}
+
 		case "SchemaVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -34296,6 +34305,11 @@ func awsRestjson1_deserializeDocumentAwsSecurityFindingFilters(v **types.AwsSecu
 
 		case "ResourceType":
 			if err := awsRestjson1_deserializeDocumentStringFilterList(&sv.ResourceType, value); err != nil {
+				return err
+			}
+
+		case "Sample":
+			if err := awsRestjson1_deserializeDocumentBooleanFilterList(&sv.Sample, value); err != nil {
 				return err
 			}
 
@@ -35704,6 +35718,80 @@ func awsRestjson1_deserializeDocumentBatchUpdateFindingsUnprocessedFindingsList(
 		var col types.BatchUpdateFindingsUnprocessedFinding
 		destAddr := &col
 		if err := awsRestjson1_deserializeDocumentBatchUpdateFindingsUnprocessedFinding(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentBooleanFilter(v **types.BooleanFilter, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BooleanFilter
+	if *v == nil {
+		sv = &types.BooleanFilter{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Value":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Value = jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentBooleanFilterList(v *[]types.BooleanFilter, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.BooleanFilter
+	if *v == nil {
+		cv = []types.BooleanFilter{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.BooleanFilter
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentBooleanFilter(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr

@@ -2838,6 +2838,14 @@
                     {
                         "value": "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE",
                         "name": "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE"
+                    },
+                    {
+                        "value": "SHAREPOINT",
+                        "name": "SHAREPOINT"
+                    },
+                    {
+                        "value": "ACTIVE_DIRECTORY",
+                        "name": "ACTIVE_DIRECTORY"
                     }
                 ],
                 "smithy.api#length": {

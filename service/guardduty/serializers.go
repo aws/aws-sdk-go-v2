@@ -4676,6 +4676,13 @@ func awsRestjson1_serializeDocumentDataSourceConfigurations(v *types.DataSourceC
 	object := value.Object()
 	defer object.Close()
 
+	if v.Kubernetes != nil {
+		ok := object.Key("kubernetes")
+		if err := awsRestjson1_serializeDocumentKubernetesConfiguration(v.Kubernetes, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.S3Logs != nil {
 		ok := object.Key("s3Logs")
 		if err := awsRestjson1_serializeDocumentS3LogsConfiguration(v.S3Logs, ok); err != nil {
@@ -4783,6 +4790,32 @@ func awsRestjson1_serializeDocumentFindingTypes(v []string, value smithyjson.Val
 	return nil
 }
 
+func awsRestjson1_serializeDocumentKubernetesAuditLogsConfiguration(v *types.KubernetesAuditLogsConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	{
+		ok := object.Key("enable")
+		ok.Boolean(v.Enable)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentKubernetesConfiguration(v *types.KubernetesConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AuditLogs != nil {
+		ok := object.Key("auditLogs")
+		if err := awsRestjson1_serializeDocumentKubernetesAuditLogsConfiguration(v.AuditLogs, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentNeq(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -4809,9 +4842,42 @@ func awsRestjson1_serializeDocumentOrganizationDataSourceConfigurations(v *types
 	object := value.Object()
 	defer object.Close()
 
+	if v.Kubernetes != nil {
+		ok := object.Key("kubernetes")
+		if err := awsRestjson1_serializeDocumentOrganizationKubernetesConfiguration(v.Kubernetes, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.S3Logs != nil {
 		ok := object.Key("s3Logs")
 		if err := awsRestjson1_serializeDocumentOrganizationS3LogsConfiguration(v.S3Logs, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentOrganizationKubernetesAuditLogsConfiguration(v *types.OrganizationKubernetesAuditLogsConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	{
+		ok := object.Key("autoEnable")
+		ok.Boolean(v.AutoEnable)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentOrganizationKubernetesConfiguration(v *types.OrganizationKubernetesConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AuditLogs != nil {
+		ok := object.Key("auditLogs")
+		if err := awsRestjson1_serializeDocumentOrganizationKubernetesAuditLogsConfiguration(v.AuditLogs, ok); err != nil {
 			return err
 		}
 	}

@@ -60,7 +60,8 @@ type AssociateResourceSharePermissionInput struct {
 
 	// Specifies the version of the RAM permission to associate with the resource
 	// share. If you don't specify this parameter, the operation uses the version
-	// designated as the default.
+	// designated as the default. You can use the ListPermissionVersions operation to
+	// discover the available versions of a permission.
 	PermissionVersion *int32
 
 	// Specifies whether the specified permission should replace or add to the existing

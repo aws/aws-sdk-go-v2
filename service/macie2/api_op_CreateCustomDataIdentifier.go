@@ -31,6 +31,21 @@ func (c *Client) CreateCustomDataIdentifier(ctx context.Context, params *CreateC
 
 type CreateCustomDataIdentifierInput struct {
 
+	// A custom name for the custom data identifier. The name can contain as many as
+	// 128 characters. We strongly recommend that you avoid including any sensitive
+	// data in the name of a custom data identifier. Other users of your account might
+	// be able to see this name, depending on the actions that they're allowed to
+	// perform in Amazon Macie.
+	//
+	// This member is required.
+	Name *string
+
+	// The regular expression (regex) that defines the pattern to match. The expression
+	// can contain as many as 512 characters.
+	//
+	// This member is required.
+	Regex *string
+
 	// A unique, case-sensitive token that you provide to ensure the idempotency of the
 	// request.
 	ClientToken *string
@@ -61,17 +76,6 @@ type CreateCustomDataIdentifierInput struct {
 	// to text that matches the regular expression. The distance can be 1-300
 	// characters. The default value is 50.
 	MaximumMatchDistance int32
-
-	// A custom name for the custom data identifier. The name can contain as many as
-	// 128 characters. We strongly recommend that you avoid including any sensitive
-	// data in the name of a custom data identifier. Other users of your account might
-	// be able to see this name, depending on the actions that they're allowed to
-	// perform in Amazon Macie.
-	Name *string
-
-	// The regular expression (regex) that defines the pattern to match. The expression
-	// can contain as many as 512 characters.
-	Regex *string
 
 	// The severity to assign to findings that the custom data identifier produces,
 	// based on the number of occurrences of text that matches the custom data

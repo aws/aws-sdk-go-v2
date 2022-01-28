@@ -796,6 +796,9 @@
                         "smithy.api#required": {}
                     }
                 },
+                "SegmentDeliveryConfigurations": {
+                    "target": "com.amazonaws.mediatailor#__listOfSegmentDeliveryConfiguration"
+                },
                 "SourceLocationName": {
                     "target": "com.amazonaws.mediatailor#__string",
                     "traits": {
@@ -851,6 +854,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp that indicates when the source location was last modified.</p>"
                     }
+                },
+                "SegmentDeliveryConfigurations": {
+                    "target": "com.amazonaws.mediatailor#__listOfSegmentDeliveryConfiguration"
                 },
                 "SourceLocationName": {
                     "target": "com.amazonaws.mediatailor#__string",
@@ -1570,6 +1576,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp that indicates when the source location was last modified.</p>"
                     }
+                },
+                "SegmentDeliveryConfigurations": {
+                    "target": "com.amazonaws.mediatailor#__listOfSegmentDeliveryConfiguration"
                 },
                 "SourceLocationName": {
                     "target": "com.amazonaws.mediatailor#__string",
@@ -3537,6 +3546,17 @@
                 "smithy.api#documentation": "<p>AWS Secrets Manager access token configuration parameters. For information about Secrets Manager access token authentication, see <a href=\"https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-access-configuration-access-token.html\">Working with AWS Secrets Manager access token authentication</a>.</p>"
             }
         },
+        "com.amazonaws.mediatailor#SegmentDeliveryConfiguration": {
+            "type": "structure",
+            "members": {
+                "BaseUrl": {
+                    "target": "com.amazonaws.mediatailor#__string"
+                },
+                "Name": {
+                    "target": "com.amazonaws.mediatailor#__string"
+                }
+            }
+        },
         "com.amazonaws.mediatailor#SlateSource": {
             "type": "structure",
             "members": {
@@ -3597,6 +3617,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp that indicates when the source location was last modified.</p>"
                     }
+                },
+                "SegmentDeliveryConfigurations": {
+                    "target": "com.amazonaws.mediatailor#__listOfSegmentDeliveryConfiguration"
                 },
                 "SourceLocationName": {
                     "target": "com.amazonaws.mediatailor#__string",
@@ -3988,6 +4011,9 @@
                         "smithy.api#required": {}
                     }
                 },
+                "SegmentDeliveryConfigurations": {
+                    "target": "com.amazonaws.mediatailor#__listOfSegmentDeliveryConfiguration"
+                },
                 "SourceLocationName": {
                     "target": "com.amazonaws.mediatailor#__string",
                     "traits": {
@@ -4036,6 +4062,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp that indicates when the source location was last modified.</p>"
                     }
+                },
+                "SegmentDeliveryConfigurations": {
+                    "target": "com.amazonaws.mediatailor#__listOfSegmentDeliveryConfiguration"
                 },
                 "SourceLocationName": {
                     "target": "com.amazonaws.mediatailor#__string",
@@ -4269,6 +4298,12 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.mediatailor#ScheduleEntry"
+            }
+        },
+        "com.amazonaws.mediatailor#__listOfSegmentDeliveryConfiguration": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mediatailor#SegmentDeliveryConfiguration"
             }
         },
         "com.amazonaws.mediatailor#__listOfSourceLocation": {

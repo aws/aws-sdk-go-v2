@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about a Recovery Group.
+// Gets details about a recovery group, including a list of the cells that are
+// included in it.
 func (c *Client) GetRecoveryGroup(ctx context.Context, params *GetRecoveryGroupInput, optFns ...func(*Options)) (*GetRecoveryGroupOutput, error) {
 	if params == nil {
 		params = &GetRecoveryGroupInput{}
@@ -28,7 +29,7 @@ func (c *Client) GetRecoveryGroup(ctx context.Context, params *GetRecoveryGroupI
 
 type GetRecoveryGroupInput struct {
 
-	// The RecoveryGroup to get
+	// The name of a recovery group.
 	//
 	// This member is required.
 	RecoveryGroupName *string
@@ -38,16 +39,16 @@ type GetRecoveryGroupInput struct {
 
 type GetRecoveryGroupOutput struct {
 
-	// A list of Cell arns
+	// A list of a cell's Amazon Resource Names (ARNs).
 	Cells []string
 
-	// The arn for the RecoveryGroup
+	// The Amazon Resource Name (ARN) for the recovery group.
 	RecoveryGroupArn *string
 
-	// The name of the RecoveryGroup
+	// The name of the recovery group.
 	RecoveryGroupName *string
 
-	// A collection of tags associated with a resource
+	// The tags associated with the recovery group.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

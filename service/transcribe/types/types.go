@@ -268,6 +268,10 @@ type ContentRedaction struct {
 	// This member is required.
 	RedactionType RedactionType
 
+	// The types of personally identifiable information (PII) you want to redact in
+	// your transcript.
+	PiiEntityTypes []PiiEntityType
+
 	noSmithyDocumentSerde
 }
 

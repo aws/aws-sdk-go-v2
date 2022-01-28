@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// Returns a collection of recommendations to improve resilliance and readiness
-// check quality for a Recovery Group.
+// Gets recommendations about architecture designs for improving resiliency for an
+// application, based on a recovery group.
 func (c *Client) GetArchitectureRecommendations(ctx context.Context, params *GetArchitectureRecommendationsInput, optFns ...func(*Options)) (*GetArchitectureRecommendationsOutput, error) {
 	if params == nil {
 		params = &GetArchitectureRecommendationsInput{}
@@ -31,15 +31,15 @@ func (c *Client) GetArchitectureRecommendations(ctx context.Context, params *Get
 
 type GetArchitectureRecommendationsInput struct {
 
-	// Name of RecoveryGroup (top level resource) to be analyzed.
+	// The name of a recovery group.
 	//
 	// This member is required.
 	RecoveryGroupName *string
 
-	// Upper bound on number of records to return.
+	// The number of objects that you want to return with this call.
 	MaxResults int32
 
-	// A token that can be used to resume pagination from the end of the collection.
+	// The token that identifies which batch of results you want to see.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -47,14 +47,14 @@ type GetArchitectureRecommendationsInput struct {
 
 type GetArchitectureRecommendationsOutput struct {
 
-	// The time a Recovery Group was last assessed for recommendations in UTC ISO-8601
-	// format.
+	// The time that a recovery group was last assessed for recommendations, in UTC
+	// ISO-8601 format.
 	LastAuditTimestamp *time.Time
 
-	// A token that can be used to resume pagination from the end of the collection
+	// The token that identifies which batch of results you want to see.
 	NextToken *string
 
-	// A list of recommendations for the customer's application
+	// A list of the recommendations for the customer's application.
 	Recommendations []types.Recommendation
 
 	// Metadata pertaining to the operation's result.
