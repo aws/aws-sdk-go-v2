@@ -1,3 +1,8 @@
+# v1.13.0 (2022-01-28)
+
+* **Feature**: Updated to latest API model.
+* **Bug Fix**: Updates SDK API client deserialization to pre-allocate byte slice and string response payloads, [#1565](https://github.com/aws/aws-sdk-go-v2/pull/1565). Thanks to [Tyson Mote](https://github.com/tysonmote) for submitting this PR.
+
 # v1.12.0 (2022-01-14)
 
 * **Feature**: Updated `github.com/aws/smithy-go` to latest version

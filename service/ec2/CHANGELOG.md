@@ -1,3 +1,7 @@
+# v1.29.0 (2022-01-28)
+
+* **Feature**: Updated to latest API model.
+
 # v1.28.0 (2022-01-14)
 
 * **Feature**: Updated API models

@@ -1,3 +1,73 @@
+# Release (2022-01-28)
+
+## General Highlights
+* **Bug Fix**: Fixes the SDK's handling of `duration_sections` in the shared credentials file or specified in multiple shared config and shared credentials files under the same profile. [#1568](https://github.com/aws/aws-sdk-go-v2/pull/1568). Thanks to [Amir Szekely](https://github.com/kichik) for help reproduce this bug.
+* **Bug Fix**: Updates SDK API client deserialization to pre-allocate byte slice and string response payloads, [#1565](https://github.com/aws/aws-sdk-go-v2/pull/1565). Thanks to [Tyson Mote](https://github.com/tysonmote) for submitting this PR.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/config`: [v1.13.1](config/CHANGELOG.md#v1131-2022-01-28)
+  * **Bug Fix**: Fixes LoadDefaultConfig handling of errors returned by passed in functional options. Previously errors returned from the LoadOptions passed into LoadDefaultConfig were incorrectly ignored. [#1562](https://github.com/aws/aws-sdk-go-v2/pull/1562). Thanks to [Pinglei Guo](https://github.com/pingleig) for submitting this PR.
+  * **Bug Fix**: Updates `config` module to use os.UserHomeDir instead of hard coded environment variable for OS. [#1563](https://github.com/aws/aws-sdk-go-v2/pull/1563)
+* `github.com/aws/aws-sdk-go-v2/service/applicationinsights`: [v1.13.0](service/applicationinsights/CHANGELOG.md#v1130-2022-01-28)
+  * **Feature**: Updated to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/cloudtrail`: [v1.13.1](service/cloudtrail/CHANGELOG.md#v1131-2022-01-28)
+  * **Documentation**: Updated to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/codegurureviewer`: [v1.13.1](service/codegurureviewer/CHANGELOG.md#v1131-2022-01-28)
+  * **Documentation**: Updated to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/configservice`: [v1.16.0](service/configservice/CHANGELOG.md#v1160-2022-01-28)
+  * **Feature**: Updated to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.17.0](service/connect/CHANGELOG.md#v1170-2022-01-28)
+  * **Feature**: Updated to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/ebs`: [v1.12.1](service/ebs/CHANGELOG.md#v1121-2022-01-28)
+  * **Documentation**: Updated to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.29.0](service/ec2/CHANGELOG.md#v1290-2022-01-28)
+  * **Feature**: Updated to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/ec2instanceconnect`: [v1.11.0](service/ec2instanceconnect/CHANGELOG.md#v1110-2022-01-28)
+  * **Feature**: Updated to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/efs`: [v1.14.0](service/efs/CHANGELOG.md#v1140-2022-01-28)
+  * **Feature**: Updated to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/fis`: [v1.10.0](service/fis/CHANGELOG.md#v1100-2022-01-28)
+  * **Feature**: Updated to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/frauddetector`: [v1.17.0](service/frauddetector/CHANGELOG.md#v1170-2022-01-28)
+  * **Feature**: Updated to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.18.0](service/fsx/CHANGELOG.md#v1180-2022-01-28)
+  * **Feature**: Updated to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/greengrass`: [v1.11.0](service/greengrass/CHANGELOG.md#v1110-2022-01-28)
+  * **Feature**: Updated to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/greengrassv2`: [v1.13.0](service/greengrassv2/CHANGELOG.md#v1130-2022-01-28)
+  * **Feature**: Updated to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.11.0](service/guardduty/CHANGELOG.md#v1110-2022-01-28)
+  * **Feature**: Updated to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/honeycode`: [v1.10.0](service/honeycode/CHANGELOG.md#v1100-2022-01-28)
+  * **Feature**: Updated to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/ivs`: [v1.14.0](service/ivs/CHANGELOG.md#v1140-2022-01-28)
+  * **Feature**: Updated to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/kafka`: [v1.15.0](service/kafka/CHANGELOG.md#v1150-2022-01-28)
+  * **Feature**: Updated to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/location`: [v1.13.0](service/location/CHANGELOG.md#v1130-2022-01-28)
+  * **Feature**: Updated to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/lookoutmetrics`: [v1.9.0](service/lookoutmetrics/CHANGELOG.md#v190-2022-01-28)
+  * **Feature**: Updated to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/macie2`: [v1.18.0](service/macie2/CHANGELOG.md#v1180-2022-01-28)
+  * **Feature**: Updated to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.19.0](service/mediaconvert/CHANGELOG.md#v1190-2022-01-28)
+  * **Feature**: Updated to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/mediatailor`: [v1.14.0](service/mediatailor/CHANGELOG.md#v1140-2022-01-28)
+  * **Feature**: Updated to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/ram`: [v1.14.0](service/ram/CHANGELOG.md#v1140-2022-01-28)
+  * **Feature**: Updated to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/route53recoveryreadiness`: [v1.6.1](service/route53recoveryreadiness/CHANGELOG.md#v161-2022-01-28)
+  * **Documentation**: Updated to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.24.0](service/sagemaker/CHANGELOG.md#v1240-2022-01-28)
+  * **Feature**: Updated to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.17.0](service/securityhub/CHANGELOG.md#v1170-2022-01-28)
+  * **Feature**: Updated to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/storagegateway`: [v1.14.0](service/storagegateway/CHANGELOG.md#v1140-2022-01-28)
+  * **Feature**: Updated to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/transcribe`: [v1.15.0](service/transcribe/CHANGELOG.md#v1150-2022-01-28)
+  * **Feature**: Updated to latest API model.
+
 # Release (2022-01-14)
 
 ## General Highlights

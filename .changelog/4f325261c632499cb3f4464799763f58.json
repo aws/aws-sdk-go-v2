@@ -1,8 +1,0 @@
-{
-    "id": "4f325261-c632-499c-b3f4-464799763f58",
-    "type": "bugfix",
-    "description": "Updates `config` module to use os.UserHomeDir instead of hard coded environment variable for OS. [#1563](https://github.com/aws/aws-sdk-go-v2/pull/1563)",
-    "modules": [
-        "config"
-    ]
-}
