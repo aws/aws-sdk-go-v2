@@ -122,9 +122,9 @@ func (r *Attempt) handleAttempt(
 	}()
 
 	//------------------------------
-	// Get Initial (aka Send) Token
+	// Get Attempt Token
 	//------------------------------
-	releaseSendToken, err := r.retryer.GetAttemptToken(ctx)
+	releaseAttemptToken, err := r.retryer.GetAttemptToken(ctx)
 	if err != nil {
 		return out, attemptResult, nopRelease, fmt.Errorf(
 			"failed to get retry Send token, %w", err)
@@ -165,8 +165,8 @@ func (r *Attempt) handleAttempt(
 		return out, attemptResult, nopRelease, fmt.Errorf(
 			"failed to release retry token after request error, %w", err)
 	}
-	// Release the initial send token based on the state of the attempt's error (if any).
-	if releaseError := releaseSendToken(err); releaseError != nil && err != nil {
+	// Release the attempt token based on the state of the attempt's error (if any).
+	if releaseError := releaseAttemptToken(err); releaseError != nil && err != nil {
 		return out, attemptResult, nopRelease, fmt.Errorf(
 			"failed to release initial token after request error, %w", err)
 	}

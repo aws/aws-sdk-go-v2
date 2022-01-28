@@ -2,6 +2,7 @@ package retry
 
 import (
 	"context"
+	"fmt"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws/ratelimit"
@@ -90,6 +91,11 @@ var DefaultRetryables = []IsErrorRetryable{
 	},
 }
 
+// DefaultTimeouts provides the set of timeout checks that are used by default.
+var DefaultTimeouts = []IsErrorTimeout{
+	TimeouterError{},
+}
+
 // StandardOptions provides the functional options for configuring the standard
 // retryable, and delay behavior.
 type StandardOptions struct {
@@ -131,6 +137,7 @@ func NewStandard(fnOpts ...func(*StandardOptions)) *Standard {
 		MaxAttempts: DefaultMaxAttempts,
 		MaxBackoff:  DefaultMaxBackoff,
 		Retryables:  DefaultRetryables,
+		Timeouts:    DefaultTimeouts,
 
 		RateLimiter:      ratelimit.NewTokenRateLimit(DefaultRetryRateTokens),
 		RetryCost:        DefaultRetryCost,
@@ -139,6 +146,9 @@ func NewStandard(fnOpts ...func(*StandardOptions)) *Standard {
 	}
 	for _, fn := range fnOpts {
 		fn(&o)
+	}
+	if o.MaxAttempts <= 0 {
+		o.MaxAttempts = DefaultMaxAttempts
 	}
 
 	backoff := o.Backoff
@@ -201,15 +211,16 @@ func (s *Standard) noRetryIncrement() error {
 
 // GetRetryToken attempts to deduct the retry cost from the retry token pool.
 // Returning the token release function, or error.
-func (s *Standard) GetRetryToken(ctx context.Context, err error) (func(error) error, error) {
+func (s *Standard) GetRetryToken(ctx context.Context, opErr error) (func(error) error, error) {
 	cost := s.options.RetryCost
-	if s.timeout.IsErrorTimeout(err).Bool() {
+
+	if s.timeout.IsErrorTimeout(opErr).Bool() {
 		cost = s.options.RetryTimeoutCost
 	}
 
 	fn, err := s.options.RateLimiter.GetToken(ctx, cost)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to get rate limit token, %w", err)
 	}
 
 	return releaseToken(fn).release, nil

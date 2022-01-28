@@ -1,26 +1,32 @@
-package retry_test
+package retry
 
 import (
+	"bytes"
+	"context"
 	"fmt"
+	"io/ioutil"
+	"net/http"
+	"strconv"
 	"testing"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/retry"
+	"github.com/aws/aws-sdk-go-v2/aws/ratelimit"
+	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-var _ aws.Retryer = (*retry.Standard)(nil)
+var _ aws.Retryer = (*Standard)(nil)
 
 func TestStandard_IsErrorRetryable(t *testing.T) {
 	cases := map[string]struct {
-		Retryable retry.IsErrorRetryable
+		Retryable IsErrorRetryable
 		Err       error
 		Expect    bool
 	}{
 		"is retryable": {
 			Expect: true,
 			Err:    fmt.Errorf("expected error"),
-			Retryable: retry.IsErrorRetryableFunc(
+			Retryable: IsErrorRetryableFunc(
 				func(error) aws.Ternary {
 					return aws.TrueTernary
 				}),
@@ -28,7 +34,7 @@ func TestStandard_IsErrorRetryable(t *testing.T) {
 		"is not retryable": {
 			Expect: false,
 			Err:    fmt.Errorf("expected error"),
-			Retryable: retry.IsErrorRetryableFunc(
+			Retryable: IsErrorRetryableFunc(
 				func(error) aws.Ternary {
 					return aws.FalseTernary
 				}),
@@ -36,7 +42,7 @@ func TestStandard_IsErrorRetryable(t *testing.T) {
 		"unknown retryable": {
 			Expect: false,
 			Err:    fmt.Errorf("expected error"),
-			Retryable: retry.IsErrorRetryableFunc(
+			Retryable: IsErrorRetryableFunc(
 				func(error) aws.Ternary {
 					return aws.UnknownTernary
 				}),
@@ -45,9 +51,9 @@ func TestStandard_IsErrorRetryable(t *testing.T) {
 
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			r := retry.NewStandard(func(o *retry.StandardOptions) {
-				o.Retryables = []retry.IsErrorRetryable{
-					retry.IsErrorRetryableFunc(
+			r := NewStandard(func(o *StandardOptions) {
+				o.Retryables = []IsErrorRetryable{
+					IsErrorRetryableFunc(
 						func(err error) aws.Ternary {
 							if e, a := c.Err, err; e != a {
 								t.Fatalf("expect %v, error, got %v", e, a)
@@ -79,7 +85,7 @@ func TestStandard_MaxAttempts(t *testing.T) {
 
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			r := retry.NewStandard(func(o *retry.StandardOptions) {
+			r := NewStandard(func(o *StandardOptions) {
 				if c.Max != 0 {
 					o.MaxAttempts = c.Max
 				} else {
@@ -95,7 +101,7 @@ func TestStandard_MaxAttempts(t *testing.T) {
 
 func TestStandard_RetryDelay(t *testing.T) {
 	cases := map[string]struct {
-		Backoff     retry.BackoffDelayer
+		Backoff     BackoffDelayer
 		Attempt     int
 		Err         error
 		Assert      func(*testing.T, time.Duration, error)
@@ -107,7 +113,7 @@ func TestStandard_RetryDelay(t *testing.T) {
 			Err:         fmt.Errorf("expected error"),
 			ExpectDelay: 10 * time.Millisecond,
 
-			Backoff: retry.BackoffDelayerFunc(
+			Backoff: BackoffDelayerFunc(
 				func(attempt int, err error) (time.Duration, error) {
 					return 10 * time.Millisecond, nil
 				}),
@@ -117,7 +123,7 @@ func TestStandard_RetryDelay(t *testing.T) {
 			Err:         fmt.Errorf("expected error"),
 			ExpectDelay: 0,
 			ExpectErr:   fmt.Errorf("failed get delay"),
-			Backoff: retry.BackoffDelayerFunc(
+			Backoff: BackoffDelayerFunc(
 				func(attempt int, err error) (time.Duration, error) {
 					return 0, fmt.Errorf("failed get delay")
 				}),
@@ -126,8 +132,8 @@ func TestStandard_RetryDelay(t *testing.T) {
 
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			r := retry.NewStandard(func(o *retry.StandardOptions) {
-				o.Backoff = retry.BackoffDelayerFunc(
+			r := NewStandard(func(o *StandardOptions) {
+				o.Backoff = BackoffDelayerFunc(
 					func(attempt int, err error) (time.Duration, error) {
 						if e, a := c.Err, err; e != a {
 							t.Errorf("expect %v error, got %v", e, a)
@@ -155,4 +161,118 @@ func TestStandard_RetryDelay(t *testing.T) {
 			}
 		})
 	}
+}
+
+func TestStandard_retryEventuallySucceeds(t *testing.T) {
+	ratelimiter := ratelimit.NewTokenRateLimit(500)
+	retryer := NewStandard(func(o *StandardOptions) {
+		o.MaxAttempts = 3
+		o.RateLimiter = ratelimiter
+		backoff := NewExponentialJitterBackoff(20 * time.Second)
+		backoff.randFloat64 = func() (float64, error) {
+			return 0.5, nil
+		}
+		o.Backoff = backoff
+	})
+
+	attempts := []struct {
+		responseErr      error
+		expectRetryable  bool
+		expectRetryQuota uint
+		expectDelay      time.Duration
+	}{
+		{
+			responseErr:      newStubResponseError(500),
+			expectRetryable:  true,
+			expectRetryQuota: 495,
+			expectDelay:      1 * time.Second,
+		},
+		{
+			responseErr:      newStubResponseError(500),
+			expectRetryable:  true,
+			expectRetryQuota: 490,
+			expectDelay:      2 * time.Second,
+		},
+		{
+			expectRetryQuota: 496,
+			// Refill 5 cost of retry + 1 successful response
+		},
+		{
+			responseErr:      newStubResponseError(500),
+			expectRetryable:  true,
+			expectRetryQuota: 491,
+			expectDelay:      8 * time.Second,
+		},
+		{
+			responseErr:      newStubTimeoutError(),
+			expectRetryable:  true,
+			expectRetryQuota: 481,
+			expectDelay:      20 * time.Second,
+		},
+		{
+			expectRetryQuota: 492,
+			// Refill 10 cost of retry + 1 successful response
+		},
+	}
+
+	retryToken := nopRelease
+	for i, attempt := range attempts {
+		t.Run(strconv.Itoa(i+1), func(t *testing.T) {
+			attemptToken, err := retryer.GetAttemptToken(context.Background())
+			if err != nil {
+				t.Fatalf("failed to get attempt token, %v", err)
+			}
+
+			if err := retryToken(attempt.responseErr); err != nil {
+				t.Fatalf("expect release retry token not to fail, %v", err)
+			}
+			if err := attemptToken(attempt.responseErr); err != nil {
+				t.Fatalf("expect release attempt token not to fail, %v", err)
+			}
+
+			if attempt.responseErr != nil {
+				isRetryable := retryer.IsErrorRetryable(attempt.responseErr)
+				if e, a := attempt.expectRetryable, isRetryable; e != a {
+					t.Errorf("expect %v retryable, got %v", e, a)
+				}
+
+				retryToken = nopRelease
+				if isRetryable {
+					retryToken, err = retryer.GetRetryToken(context.Background(), attempt.responseErr)
+					if err != nil {
+						t.Fatalf("expect get retry token not to fail, %v", err)
+					}
+				}
+
+				retryDelay, err := retryer.RetryDelay(i+1, attempt.responseErr)
+				if err != nil {
+					t.Fatalf("expect no retry delay error, got %v", err)
+				}
+				if e, a := attempt.expectDelay, retryDelay; e != a {
+					t.Fatalf("expect %v retry delay, got %v", e, a)
+				}
+			}
+
+			if e, a := attempt.expectRetryQuota, ratelimiter.Remaining(); e != a {
+				t.Errorf("expect %v remaining tokens, got %v", e, a)
+			}
+		})
+	}
+
+}
+
+func newStubResponseError(statusCode int) *smithyhttp.ResponseError {
+	return &smithyhttp.ResponseError{
+		Response: &smithyhttp.Response{
+			Response: &http.Response{
+				StatusCode: statusCode,
+				Header:     http.Header{},
+				Body:       ioutil.NopCloser(bytes.NewReader(nil)),
+			},
+		},
+	}
+}
+
+func newStubTimeoutError() *mockTimeoutErr {
+	return &mockTimeoutErr{timeout: true}
 }
