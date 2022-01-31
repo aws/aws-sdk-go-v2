@@ -335,6 +335,8 @@ func (c EnvConfig) getDefaultsMode(ctx context.Context) (aws.DefaultsMode, bool,
 	return c.DefaultsMode, true, nil
 }
 
+// GetRetryMaxAttempts returns the value of AWS_MAX_ATTEMPTS if was specified,
+// and not 0.
 func (c EnvConfig) GetRetryMaxAttempts(ctx context.Context) (int, bool, error) {
 	if c.RetryMaxAttempts == 0 {
 		return 0, false, nil
@@ -342,6 +344,8 @@ func (c EnvConfig) GetRetryMaxAttempts(ctx context.Context) (int, bool, error) {
 	return c.RetryMaxAttempts, true, nil
 }
 
+// GetRetryMode returns the RetryMode of AWS_RETRY_MODE if was specified, and a
+// valid value.
 func (c EnvConfig) GetRetryMode(ctx context.Context) (aws.RetryMode, bool, error) {
 	if len(c.RetryMode) == 0 {
 		return "", false, nil

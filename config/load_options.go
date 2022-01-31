@@ -196,6 +196,8 @@ func (o LoadOptions) getDefaultsMode(ctx context.Context) (aws.DefaultsMode, boo
 	return o.DefaultsModeOptions.Mode, true, nil
 }
 
+// GetRetryMaxAttempts returns the RetryMaxAttempts if specified in the
+// LoadOptions and not 0.
 func (o LoadOptions) GetRetryMaxAttempts(ctx context.Context) (int, bool, error) {
 	if o.RetryMaxAttempts == 0 {
 		return 0, false, nil
@@ -203,6 +205,7 @@ func (o LoadOptions) GetRetryMaxAttempts(ctx context.Context) (int, bool, error)
 	return o.RetryMaxAttempts, true, nil
 }
 
+// GetRetryMode returns the RetryMode specified in the LoadOptions.
 func (o LoadOptions) GetRetryMode(ctx context.Context) (aws.RetryMode, bool, error) {
 	if len(o.RetryMode) == 0 {
 		return "", false, nil

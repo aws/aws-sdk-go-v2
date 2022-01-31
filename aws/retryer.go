@@ -11,12 +11,12 @@ import (
 type RetryMode string
 
 const (
-	// Standard model provides rate limited retry attempts with exponential
-	// backoff delay.
+	// RetryModeStandard model provides rate limited retry attempts with
+	// exponential backoff delay.
 	RetryModeStandard RetryMode = "standard"
 
-	// Adaptive model provides attempt send rate limiting on throttle responses
-	// in addition to standard mode's retry rate limiting.
+	// RetryModeAdaptive model provides attempt send rate limiting on throttle
+	// responses in addition to standard mode's retry rate limiting.
 	//
 	// Adaptive retry mode is experimental and is subject to change in the
 	// future.
