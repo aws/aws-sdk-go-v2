@@ -99,6 +99,17 @@ type Options struct {
 	// The region to send requests to. (Required)
 	Region string
 
+	// RetryMaxAttempts specifies the maximum number attempts an API client will call
+	// an operation that fails with a retryable error. API Clients will only use this
+	// value to construct a retryer if the Config.Retryer member is not nil. This value
+	// will be ignored if Retryer is not nil.
+	RetryMaxAttempts int
+
+	// RetryMode specifies the retry model the API client will be created with. API
+	// Clients will only use this value to construct a retryer if the Config.Retryer
+	// member is not nil. This value will be ignored if Retryer is not nil.
+	RetryMode aws.RetryMode
+
 	// Retryer guides how HTTP requests should be retried in case of recoverable
 	// failures. When nil the API client will use a default retryer.
 	Retryer aws.Retryer
@@ -214,6 +225,8 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		ClientLogMode:      cfg.ClientLogMode,
 	}
 	resolveAWSRetryerProvider(cfg, &opts)
+	resolveAWSRetryMaxAttempts(cfg, &opts)
+	resolveAWSRetryMode(cfg, &opts)
 	resolveAWSEndpointResolver(cfg, &opts)
 	resolveUseDualStackEndpoint(cfg, &opts)
 	resolveUseFIPSEndpoint(cfg, &opts)
@@ -265,7 +278,17 @@ func resolveRetryer(o *Options) {
 	if o.Retryer != nil {
 		return
 	}
-	o.Retryer = retry.NewStandard()
+
+	switch o.RetryMode {
+	case aws.RetryModeAdaptive:
+		o.Retryer = retry.NewAdaptiveMode(func(oo *retry.AdaptiveModeOptions) {
+			oo.MaxAttempts = o.RetryMaxAttempts
+		})
+	default:
+		o.Retryer = retry.NewStandard(func(oo *retry.StandardOptions) {
+			oo.MaxAttempts = o.RetryMaxAttempts
+		})
+	}
 }
 
 func resolveAWSRetryerProvider(cfg aws.Config, o *Options) {
@@ -273,6 +296,19 @@ func resolveAWSRetryerProvider(cfg aws.Config, o *Options) {
 		return
 	}
 	o.Retryer = cfg.Retryer()
+}
+
+func resolveAWSRetryMode(cfg aws.Config, o *Options) {
+	if len(cfg.RetryMode) == 0 {
+		return
+	}
+	o.RetryMode = cfg.RetryMode
+}
+func resolveAWSRetryMaxAttempts(cfg aws.Config, o *Options) {
+	if cfg.RetryMaxAttempts == 0 {
+		return
+	}
+	o.RetryMaxAttempts = cfg.RetryMaxAttempts
 }
 
 func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
