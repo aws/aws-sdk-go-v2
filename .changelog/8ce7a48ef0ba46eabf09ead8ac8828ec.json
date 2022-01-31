@@ -1,0 +1,8 @@
+{
+    "id": "8ce7a48e-f0ba-46ea-bf09-ead8ac8828ec",
+    "type": "feature",
+    "description": "Add new AdaptiveMode retryer to aws/retry package. This new retryer uses dynamic token bucketing with client ratelimiting when throttle responses are received.",
+    "modules": [
+        "."
+    ]
+}
