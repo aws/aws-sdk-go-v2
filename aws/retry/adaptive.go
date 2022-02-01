@@ -147,7 +147,6 @@ func (a *AdaptiveMode) GetInitialToken() (releaseToken func(error) error) {
 // middleware to get a send token prior to calling the temp and releasing
 // the send token after the attempt has been made.
 func (a *AdaptiveMode) GetAttemptToken(ctx context.Context) (func(error) error, error) {
-	// TODO maximum number of wait attempts?
 	for {
 		acquiredToken, waitTryAgain := a.rateLimit.AcquireToken(a.options.RequestCost)
 		if acquiredToken {
