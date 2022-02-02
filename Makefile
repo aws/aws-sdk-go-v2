@@ -72,7 +72,7 @@ all: generate unit
 ###################
 .PHONY: generate smithy-generate smithy-build smithy-build-% smithy-clean smithy-go-publish-local format \
 gen-config-asserts gen-repo-mod-replace gen-mod-replace-smithy gen-mod-dropreplace-smithy gen-aws-ptrs tidy-modules-% \
-add-module-license-files sync-models sync-endpoints-model sync-endpoints.json clone-v1-models gen-endpoint-prefix.json \
+add-module-license-files sync-models sync-endpoints-model sync-endpoints.json clone-v1-models gen-internal-codegen \
 sync-api-models copy-attributevalue-feature min-go-version-% update-requires smithy-annotate-stable \
 update-module-metadata download-modules-%
 
@@ -171,12 +171,6 @@ sync-endpoints.json:
 clone-v1-models:
 	rm -rf /tmp/aws-sdk-go-model-sync
 	git clone https://github.com/aws/aws-sdk-go.git --depth 1 /tmp/aws-sdk-go-model-sync
-
-gen-endpoint-prefix.json: clone-v1-models
-	cd internal/repotools/cmd/endpointPrefix && \
-		go run . \
-			-m '/tmp/aws-sdk-go-model-sync/models/apis/*/*/api-2.json' \
-			-o ${ENDPOINT_PREFIX_JSON}
 
 sync-api-models:
 	cd internal/repotools/cmd/syncAPIModels && \
