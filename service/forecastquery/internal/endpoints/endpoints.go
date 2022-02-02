@@ -106,28 +106,28 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname:          "forecast.{region}.api.aws",
+				Hostname:          "forecastquery.{region}.api.aws",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname:          "forecast-fips.{region}.amazonaws.com",
+				Hostname:          "forecastquery-fips.{region}.amazonaws.com",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
 			}: {
-				Hostname:          "forecast-fips.{region}.api.aws",
+				Hostname:          "forecastquery-fips.{region}.api.aws",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: 0,
 			}: {
-				Hostname:          "forecast.{region}.amazonaws.com",
+				Hostname:          "forecastquery.{region}.amazonaws.com",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
@@ -159,7 +159,7 @@ var defaultPartitions = endpoints.Partitions{
 			endpoints.EndpointKey{
 				Region: "fips-us-east-1",
 			}: endpoints.Endpoint{
-				Hostname: "forecast-fips.us-east-1.amazonaws.com",
+				Hostname: "forecastquery-fips.us-east-1.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-east-1",
 				},
@@ -168,7 +168,7 @@ var defaultPartitions = endpoints.Partitions{
 			endpoints.EndpointKey{
 				Region: "fips-us-east-2",
 			}: endpoints.Endpoint{
-				Hostname: "forecast-fips.us-east-2.amazonaws.com",
+				Hostname: "forecastquery-fips.us-east-2.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-east-2",
 				},
@@ -177,7 +177,7 @@ var defaultPartitions = endpoints.Partitions{
 			endpoints.EndpointKey{
 				Region: "fips-us-west-2",
 			}: endpoints.Endpoint{
-				Hostname: "forecast-fips.us-west-2.amazonaws.com",
+				Hostname: "forecastquery-fips.us-west-2.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-west-2",
 				},
@@ -190,7 +190,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "us-east-1",
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname: "forecast-fips.us-east-1.amazonaws.com",
+				Hostname: "forecastquery-fips.us-east-1.amazonaws.com",
 			},
 			endpoints.EndpointKey{
 				Region: "us-east-2",
@@ -199,7 +199,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "us-east-2",
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname: "forecast-fips.us-east-2.amazonaws.com",
+				Hostname: "forecastquery-fips.us-east-2.amazonaws.com",
 			},
 			endpoints.EndpointKey{
 				Region: "us-west-2",
@@ -208,7 +208,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "us-west-2",
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname: "forecast-fips.us-west-2.amazonaws.com",
+				Hostname: "forecastquery-fips.us-west-2.amazonaws.com",
 			},
 		},
 	},
@@ -218,28 +218,28 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname:          "forecast.{region}.api.amazonwebservices.com.cn",
+				Hostname:          "forecastquery.{region}.api.amazonwebservices.com.cn",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname:          "forecast-fips.{region}.amazonaws.com.cn",
+				Hostname:          "forecastquery-fips.{region}.amazonaws.com.cn",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
 			}: {
-				Hostname:          "forecast-fips.{region}.api.amazonwebservices.com.cn",
+				Hostname:          "forecastquery-fips.{region}.api.amazonwebservices.com.cn",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: 0,
 			}: {
-				Hostname:          "forecast.{region}.amazonaws.com.cn",
+				Hostname:          "forecastquery.{region}.amazonaws.com.cn",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
@@ -253,14 +253,14 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname:          "forecast-fips.{region}.c2s.ic.gov",
+				Hostname:          "forecastquery-fips.{region}.c2s.ic.gov",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: 0,
 			}: {
-				Hostname:          "forecast.{region}.c2s.ic.gov",
+				Hostname:          "forecastquery.{region}.c2s.ic.gov",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
@@ -274,14 +274,14 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname:          "forecast-fips.{region}.sc2s.sgov.gov",
+				Hostname:          "forecastquery-fips.{region}.sc2s.sgov.gov",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: 0,
 			}: {
-				Hostname:          "forecast.{region}.sc2s.sgov.gov",
+				Hostname:          "forecastquery.{region}.sc2s.sgov.gov",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
@@ -295,28 +295,28 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname:          "forecast.{region}.api.aws",
+				Hostname:          "forecastquery.{region}.api.aws",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname:          "forecast-fips.{region}.amazonaws.com",
+				Hostname:          "forecastquery-fips.{region}.amazonaws.com",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
 			}: {
-				Hostname:          "forecast-fips.{region}.api.aws",
+				Hostname:          "forecastquery-fips.{region}.api.aws",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: 0,
 			}: {
-				Hostname:          "forecast.{region}.amazonaws.com",
+				Hostname:          "forecastquery.{region}.amazonaws.com",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},

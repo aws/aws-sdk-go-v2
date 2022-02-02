@@ -197,7 +197,19 @@ public final class EndpointGenerator implements Runnable {
             arnNamespace = serviceTrait.getArnNamespace();
         }
 
-        endpointPrefix = getEndpointPrefix(resolvedSdkID, arnNamespace);
+        String endpointPrefix;
+        if (builder.endpointPrefix != null) {
+            endpointPrefix = builder.endpointPrefix;
+        } else {
+            endpointPrefix = serviceTrait.getEndpointPrefix();
+        }
+
+        if (endpointPrefix.length() == 0) {
+            endpointPrefix = arnNamespace;
+        }
+
+        this.endpointPrefix = endpointPrefix;
+
         endpointData = Node.parse(IoUtils.readUtf8Resource(getClass(), "endpoints.json")).expectObjectNode();
 
         validateVersion();
@@ -209,15 +221,6 @@ public final class EndpointGenerator implements Runnable {
         if (version != ENDPOINT_MODEL_VERSION) {
             throw new CodegenException("Invalid endpoints.json version. Expected version 3, found " + version);
         }
-    }
-
-    // Get service's endpoint prefix from a known list. If not found, fallback to ArnNamespace
-    private String getEndpointPrefix(ServiceShape service) {
-        ObjectNode endpointPrefixData = Node.parse(IoUtils.readUtf8Resource(getClass(), "endpoint-prefix.json"))
-                .expectObjectNode();
-        ServiceTrait serviceTrait = service.getTrait(ServiceTrait.class)
-                .orElseThrow(() -> new CodegenException("No service trait found on " + service.getId()));
-        return endpointPrefixData.getStringMemberOrDefault(serviceTrait.getSdkId(), serviceTrait.getArnNamespace());
     }
 
     private String getEndpointPrefix(String sdkId, String arnNamespace) {
@@ -1229,6 +1232,7 @@ public final class EndpointGenerator implements Runnable {
         private boolean modelQueryHelpers;
         private String sdkID;
         private String arnNamespace;
+        private String endpointPrefix;
 
         public Builder settings(GoSettings settings) {
             this.settings = settings;
@@ -1262,6 +1266,11 @@ public final class EndpointGenerator implements Runnable {
 
         public Builder arnNamespace(String arnNamespace) {
             this.arnNamespace = arnNamespace;
+            return this;
+        }
+
+        public Builder endpointPrefix(String endpointPrefix) {
+            this.endpointPrefix = endpointPrefix;
             return this;
         }
 
