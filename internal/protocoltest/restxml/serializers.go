@@ -15,6 +15,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"math"
 	"net/http"
+	"strconv"
+	"strings"
 	"time"
 )
 
@@ -1892,7 +1894,12 @@ func awsRestxml_serializeOpHttpBindingsInputAndOutputWithHeadersInput(v *InputAn
 		locationName := "X-Enumlist"
 		for i := range v.HeaderEnumList {
 			if len(v.HeaderEnumList[i]) > 0 {
-				encoder.AddHeader(locationName).String(string(v.HeaderEnumList[i]))
+				escaped := string(v.HeaderEnumList[i])
+				if strings.Index(string(v.HeaderEnumList[i]), `,`) != -1 || strings.Index(string(v.HeaderEnumList[i]), `"`) != -1 {
+					escaped = strconv.Quote(string(v.HeaderEnumList[i]))
+				}
+
+				encoder.AddHeader(locationName).String(string(escaped))
 			}
 		}
 	}
@@ -1940,7 +1947,12 @@ func awsRestxml_serializeOpHttpBindingsInputAndOutputWithHeadersInput(v *InputAn
 		locationName := "X-Stringlist"
 		for i := range v.HeaderStringList {
 			if len(v.HeaderStringList[i]) > 0 {
-				encoder.AddHeader(locationName).String(v.HeaderStringList[i])
+				escaped := v.HeaderStringList[i]
+				if strings.Index(v.HeaderStringList[i], `,`) != -1 || strings.Index(v.HeaderStringList[i], `"`) != -1 {
+					escaped = strconv.Quote(v.HeaderStringList[i])
+				}
+
+				encoder.AddHeader(locationName).String(escaped)
 			}
 		}
 	}
@@ -1949,7 +1961,12 @@ func awsRestxml_serializeOpHttpBindingsInputAndOutputWithHeadersInput(v *InputAn
 		locationName := "X-Stringset"
 		for i := range v.HeaderStringSet {
 			if len(v.HeaderStringSet[i]) > 0 {
-				encoder.AddHeader(locationName).String(v.HeaderStringSet[i])
+				escaped := v.HeaderStringSet[i]
+				if strings.Index(v.HeaderStringSet[i], `,`) != -1 || strings.Index(v.HeaderStringSet[i], `"`) != -1 {
+					escaped = strconv.Quote(v.HeaderStringSet[i])
+				}
+
+				encoder.AddHeader(locationName).String(escaped)
 			}
 		}
 	}
@@ -2214,7 +2231,12 @@ func awsRestxml_serializeOpHttpBindingsNullAndEmptyHeadersClientInput(v *NullAnd
 		locationName := "X-C"
 		for i := range v.C {
 			if len(v.C[i]) > 0 {
-				encoder.AddHeader(locationName).String(v.C[i])
+				escaped := v.C[i]
+				if strings.Index(v.C[i], `,`) != -1 || strings.Index(v.C[i], `"`) != -1 {
+					escaped = strconv.Quote(v.C[i])
+				}
+
+				encoder.AddHeader(locationName).String(escaped)
 			}
 		}
 	}
@@ -2282,7 +2304,12 @@ func awsRestxml_serializeOpHttpBindingsNullAndEmptyHeadersServerInput(v *NullAnd
 		locationName := "X-C"
 		for i := range v.C {
 			if len(v.C[i]) > 0 {
-				encoder.AddHeader(locationName).String(v.C[i])
+				escaped := v.C[i]
+				if strings.Index(v.C[i], `,`) != -1 || strings.Index(v.C[i], `"`) != -1 {
+					escaped = strconv.Quote(v.C[i])
+				}
+
+				encoder.AddHeader(locationName).String(escaped)
 			}
 		}
 	}

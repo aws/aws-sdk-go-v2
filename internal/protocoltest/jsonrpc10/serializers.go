@@ -216,7 +216,12 @@ func (m *awsAwsjson10_serializeOpGreetingWithErrors) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("JsonRpc10.GreetingWithErrors")
 
-	if request, err = request.SetStream(strings.NewReader(`{}`)); err != nil {
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentGreetingWithErrorsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -589,6 +594,18 @@ func awsAwsjson10_serializeOpDocumentEndpointWithHostLabelOperationInput(v *Endp
 	if v.Label != nil {
 		ok := object.Key("label")
 		ok.String(*v.Label)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentGreetingWithErrorsInput(v *GreetingWithErrorsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Greeting != nil {
+		ok := object.Key("greeting")
+		ok.String(*v.Greeting)
 	}
 
 	return nil

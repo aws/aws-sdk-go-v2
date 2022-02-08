@@ -84,6 +84,7 @@ func TestClient_FlattenedXmlMapWithXmlNamespace_awsRestxmlDeserialize(t *testing
 				APIOptions: []func(*middleware.Stack) error{
 					func(s *middleware.Stack) error {
 						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
 						return nil
 					},
 				},

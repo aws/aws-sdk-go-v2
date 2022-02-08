@@ -236,8 +236,9 @@ func awsRestjson1_serializeOpHttpBindingsPostContentInput(v *PostContentInput, e
 
 	if v.ActiveContexts != nil && len(*v.ActiveContexts) > 0 {
 		locationName := "X-Amz-Lex-Active-Contexts"
-		encoded := ptr.String(base64.StdEncoding.EncodeToString([]byte(*v.ActiveContexts)))
-		encoder.SetHeader(locationName).String(*encoded)
+		encodedVal := base64.StdEncoding.EncodeToString([]byte(*v.ActiveContexts))
+		encodedPtr := ptr.String(encodedVal)
+		encoder.SetHeader(locationName).String(*encodedPtr)
 	}
 
 	if v.BotAlias == nil || len(*v.BotAlias) == 0 {
@@ -265,14 +266,16 @@ func awsRestjson1_serializeOpHttpBindingsPostContentInput(v *PostContentInput, e
 
 	if v.RequestAttributes != nil && len(*v.RequestAttributes) > 0 {
 		locationName := "X-Amz-Lex-Request-Attributes"
-		encoded := ptr.String(base64.StdEncoding.EncodeToString([]byte(*v.RequestAttributes)))
-		encoder.SetHeader(locationName).String(*encoded)
+		encodedVal := base64.StdEncoding.EncodeToString([]byte(*v.RequestAttributes))
+		encodedPtr := ptr.String(encodedVal)
+		encoder.SetHeader(locationName).String(*encodedPtr)
 	}
 
 	if v.SessionAttributes != nil && len(*v.SessionAttributes) > 0 {
 		locationName := "X-Amz-Lex-Session-Attributes"
-		encoded := ptr.String(base64.StdEncoding.EncodeToString([]byte(*v.SessionAttributes)))
-		encoder.SetHeader(locationName).String(*encoded)
+		encodedVal := base64.StdEncoding.EncodeToString([]byte(*v.SessionAttributes))
+		encodedPtr := ptr.String(encodedVal)
+		encoder.SetHeader(locationName).String(*encodedPtr)
 	}
 
 	if v.UserId == nil || len(*v.UserId) == 0 {

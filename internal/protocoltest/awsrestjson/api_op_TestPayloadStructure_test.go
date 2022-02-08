@@ -56,7 +56,6 @@ func TestClient_TestPayloadStructure_awsRestjson1Serialize(t *testing.T) {
 		// Serializes a payload targeting a structure
 		"RestJsonTestPayloadStructure": {
 			Params: &TestPayloadStructureInput{
-				TestId: ptr.String("t-12345"),
 				PayloadConfig: &types.PayloadConfig{
 					Data: ptr.Int32(25),
 				},
@@ -85,7 +84,8 @@ func TestClient_TestPayloadStructure_awsRestjson1Serialize(t *testing.T) {
 			ExpectURIPath: "/payload",
 			ExpectQuery:   []smithytesting.QueryItem{},
 			ExpectHeader: http.Header{
-				"Content-Type": []string{"application/json"},
+				"Content-Type":  []string{"application/json"},
+				"X-Amz-Test-Id": []string{"t-12345"},
 			},
 			RequireHeader: []string{
 				"Content-Length",
@@ -131,6 +131,7 @@ func TestClient_TestPayloadStructure_awsRestjson1Serialize(t *testing.T) {
 				APIOptions: []func(*middleware.Stack) error{
 					func(s *middleware.Stack) error {
 						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
 						return nil
 					},
 				},

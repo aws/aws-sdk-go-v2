@@ -80,6 +80,7 @@ func TestClient_GreetingWithErrors_awsAwsqueryDeserialize(t *testing.T) {
 				APIOptions: []func(*middleware.Stack) error{
 					func(s *middleware.Stack) error {
 						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
 						return nil
 					},
 				},
@@ -178,6 +179,7 @@ func TestClient_GreetingWithErrors_InvalidGreeting_awsAwsqueryDeserialize(t *tes
 				APIOptions: []func(*middleware.Stack) error{
 					func(s *middleware.Stack) error {
 						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
 						return nil
 					},
 				},
@@ -293,6 +295,7 @@ func TestClient_GreetingWithErrors_CustomCodeError_awsAwsqueryDeserialize(t *tes
 				APIOptions: []func(*middleware.Stack) error{
 					func(s *middleware.Stack) error {
 						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
 						return nil
 					},
 				},
@@ -413,6 +416,7 @@ func TestClient_GreetingWithErrors_ComplexError_awsAwsqueryDeserialize(t *testin
 				APIOptions: []func(*middleware.Stack) error{
 					func(s *middleware.Stack) error {
 						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
 						return nil
 					},
 				},

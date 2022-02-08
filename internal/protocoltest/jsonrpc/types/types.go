@@ -65,7 +65,7 @@ type KitchenSink struct {
 
 	String_ *string
 
-	StructWithLocationName *StructWithLocationName
+	StructWithJsonName *StructWithJsonName
 
 	Timestamp *time.Time
 
@@ -168,7 +168,7 @@ type SimpleStruct struct {
 	noSmithyDocumentSerde
 }
 
-type StructWithLocationName struct {
+type StructWithJsonName struct {
 	Value *string
 
 	noSmithyDocumentSerde

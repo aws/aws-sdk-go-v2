@@ -1088,7 +1088,7 @@ func awsAwsjson10_deserializeDocumentComplexNestedErrorData(v **types.ComplexNes
 
 	for key, value := range shape {
 		switch key {
-		case "Fooooo":
+		case "Foo":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {

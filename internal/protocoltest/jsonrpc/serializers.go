@@ -852,9 +852,9 @@ func awsAwsjson11_serializeDocumentKitchenSink(v *types.KitchenSink, value smith
 		ok.String(*v.String_)
 	}
 
-	if v.StructWithLocationName != nil {
-		ok := object.Key("StructWithLocationName")
-		if err := awsAwsjson11_serializeDocumentStructWithLocationName(v.StructWithLocationName, ok); err != nil {
+	if v.StructWithJsonName != nil {
+		ok := object.Key("StructWithJsonName")
+		if err := awsAwsjson11_serializeDocumentStructWithJsonName(v.StructWithJsonName, ok); err != nil {
 			return err
 		}
 	}
@@ -1078,12 +1078,12 @@ func awsAwsjson11_serializeDocumentSimpleStruct(v *types.SimpleStruct, value smi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStructWithLocationName(v *types.StructWithLocationName, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentStructWithJsonName(v *types.StructWithJsonName, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	if v.Value != nil {
-		ok := object.Key("RenamedMember")
+		ok := object.Key("Value")
 		ok.String(*v.Value)
 	}
 
@@ -1427,9 +1427,9 @@ func awsAwsjson11_serializeOpDocumentKitchenSinkOperationInput(v *KitchenSinkOpe
 		ok.String(*v.String_)
 	}
 
-	if v.StructWithLocationName != nil {
-		ok := object.Key("StructWithLocationName")
-		if err := awsAwsjson11_serializeDocumentStructWithLocationName(v.StructWithLocationName, ok); err != nil {
+	if v.StructWithJsonName != nil {
+		ok := object.Key("StructWithJsonName")
+		if err := awsAwsjson11_serializeDocumentStructWithJsonName(v.StructWithJsonName, ok); err != nil {
 			return err
 		}
 	}
