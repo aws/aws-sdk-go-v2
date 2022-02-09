@@ -111,7 +111,7 @@ public class AddAwsConfigFields implements GoIntegration {
                     .documentation("""
                             RetryMaxAttempts specifies the maximum number attempts an API client
                             will call an operation that fails with a retryable error.
-                                                        
+
                             API Clients will only use this value to construct a retryer if the
                             Config.Retryer member is not nil. This value will be ignored if
                             Retryer is not nil.
@@ -124,7 +124,7 @@ public class AddAwsConfigFields implements GoIntegration {
                     .type(getAwsCoreSymbol("RetryMode"))
                     .documentation("""
                             RetryMode specifies the retry model the API client will be created with.
-                                                        
+
                             API Clients will only use this value to construct a retryer if the
                             Config.Retryer member is not nil. This value will be ignored if
                             Retryer is not nil.
@@ -260,26 +260,36 @@ public class AddAwsConfigFields implements GoIntegration {
                     if o.$retryerOption:L != nil {
                         return
                     }
-                    
-                    switch o.$retryModeOption:L {
-                    case $retryModeAdaptive:T:
-                        o.$retryerOption:L = $newAdaptiveMode:T(func(oo *$adaptiveModeOptions:T) {
-                            oo.MaxAttempts = o.$retryMaxAttemptsOption:L
-                        })
-                    default:
-                        o.$retryerOption:L = $newStandard:T(func(oo *$standardOptions:T) {
-                            oo.MaxAttempts = o.$retryMaxAttemptsOption:L
+
+                    var standardOptions []func(*$standardOptions:T)
+                    if v := o.$retryMaxAttemptsOption:L; v != 0 {
+                        standardOptions = append(standardOptions, func(so *$standardOptions:T) {
+                            so.MaxAttempts = v
                         })
                     }
+
+                    switch o.$retryModeOption:L {
+                    case $retryModeAdaptive:T:
+                        var adaptiveOptions []func(*$adaptiveModeOptions:T)
+                        if len(standardOptions) != 0 {
+                            adaptiveOptions = append(adaptiveOptions, func(ao *$adaptiveModeOptions:T) {
+                                ao.StandardOptions = append(ao.StandardOptions, standardOptions...)
+                            })
+                        }
+                        o.$retryerOption:L = $newAdaptiveMode:T(adaptiveOptions...)
+
+                    default:
+                        o.$retryerOption:L = $newStandard:T(standardOptions...)
+                    }
                 }
-                                
+
                 func $retryerResolveAwsConfig:L(cfg aws.Config, o *Options) {
                     if cfg.$retryerOption:L == nil {
                         return
                     }
                     o.$retryerOption:L = cfg.$retryerOption:L()
                 }
-                                
+
                 func $retryModeResolveAwsConfig:L(cfg aws.Config, o *Options) {
                     if len(cfg.$retryModeOption:L) == 0 {
                         return
@@ -329,7 +339,7 @@ public class AddAwsConfigFields implements GoIntegration {
         writer.write("""
                 func $resolverName:L(o *Options) {
                     var buildable $buildableType:P
-                    
+
                     if o.$optionName:L != nil {
                         var ok bool
                         buildable, ok = o.$optionName:L.($buildableType:P)
@@ -339,32 +349,32 @@ public class AddAwsConfigFields implements GoIntegration {
                     } else {
                         buildable = $newClient:T()
                     }
-                    
+
                     var mode $modeType:T
                     if ok := mode.SetFromString(string(o.$modeOption:L)); !ok {
                         panic($errorf:T("unsupported defaults mode constant %v", mode))
                     }
-                    
+
                     if mode == $autoModeType:T {
                         mode = $resolveAuto:T(o.$regionOption:L, o.$runtimeOption:L)
                     }
-                    
+
                     if mode != $legacyModeType:T {
                         modeConfig, _ := $getConfig:T(mode)
-                        
+
                         buildable = buildable.WithDialerOptions(func(dialer $dialer:P) {
                             if dialerTimeout, ok := modeConfig.GetConnectTimeout(); ok {
                                 dialer.Timeout = dialerTimeout
                             }
                         })
-                        
+
                         buildable = buildable.WithTransportOptions(func(transport $transport:P) {
                             if tlsHandshakeTimeout, ok := modeConfig.GetTLSNegotiationTimeout(); ok {
                                 transport.TLSHandshakeTimeout = tlsHandshakeTimeout
                             }
                         })
                     }
-                    
+
                     o.$optionName:L = buildable
                 }
                 """);

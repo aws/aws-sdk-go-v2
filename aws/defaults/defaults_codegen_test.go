@@ -3,6 +3,7 @@
 package defaults
 
 import (
+	"aws"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"time"
@@ -19,24 +20,28 @@ func v1TestResolver(mode aws.DefaultsMode) (Configuration, error) {
 	case aws.DefaultsModeCrossRegion:
 		settings := Configuration{
 			ConnectTimeout:        aws.Duration(2800 * time.Millisecond),
+			RetryMode:             aws.RetryMode("standard"),
 			TLSNegotiationTimeout: aws.Duration(2800 * time.Millisecond),
 		}
 		return settings, nil
 	case aws.DefaultsModeInRegion:
 		settings := Configuration{
 			ConnectTimeout:        aws.Duration(1000 * time.Millisecond),
+			RetryMode:             aws.RetryMode("standard"),
 			TLSNegotiationTimeout: aws.Duration(1000 * time.Millisecond),
 		}
 		return settings, nil
 	case aws.DefaultsModeMobile:
 		settings := Configuration{
 			ConnectTimeout:        aws.Duration(10000 * time.Millisecond),
+			RetryMode:             aws.RetryMode("adaptive"),
 			TLSNegotiationTimeout: aws.Duration(11000 * time.Millisecond),
 		}
 		return settings, nil
 	case aws.DefaultsModeStandard:
 		settings := Configuration{
 			ConnectTimeout:        aws.Duration(2000 * time.Millisecond),
+			RetryMode:             aws.RetryMode("standard"),
 			TLSNegotiationTimeout: aws.Duration(2000 * time.Millisecond),
 		}
 		return settings, nil

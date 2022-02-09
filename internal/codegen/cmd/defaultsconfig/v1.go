@@ -13,6 +13,20 @@ import (
 	codegen "github.com/aws/aws-sdk-go-v2/internal/codegen/defaults"
 )
 
+func renderRetryMode(context *generationContext, base interface{}, modifier Modifier) (string, error) {
+	value, err := applyBaseModifier(base, modifier)
+	if err != nil {
+		return "", err
+	}
+
+	v, ok := value.(string)
+	if !ok {
+		return "", fmt.Errorf("expect retryMode as string, got %T", base)
+	}
+
+	return fmt.Sprintf("aws.RetryMode(%q)", v), nil
+}
+
 func renderPtrTimeMillisecond(context *generationContext, base interface{}, modifier Modifier) (string, error) {
 	context.AddImport("time", "")
 
@@ -35,6 +49,10 @@ type ConfigurationValue struct {
 }
 
 var supportedConfigKeys = map[string]ConfigurationValue{
+	"retryMode": {
+		FieldName: "RetryMode",
+		Setter:    renderRetryMode,
+	},
 	"connectTimeoutInMillis": {
 		FieldName: "ConnectTimeout",
 		Setter:    renderPtrTimeMillisecond,

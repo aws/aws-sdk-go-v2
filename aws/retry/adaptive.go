@@ -6,7 +6,6 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/ratelimit"
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 )
 
@@ -27,30 +26,39 @@ var DefaultThrottles = []IsErrorThrottle{
 // AdaptiveModeOptions provides the functional options for configuring the
 // adaptive retry mode, and delay behavior.
 type AdaptiveModeOptions struct {
+	// If the adaptive token bucket is empty, when an attempt will be made
+	// AdaptiveMode will sleep until a token is available. This can occur when
+	// attempts fail with throttle errors. Use this option to disable the sleep
+	// until token is available, and return error immediately.
 	FailOnNoAttemptTokens bool
-	RequestCost           uint
 
+	// The cost of an attempt from the AdaptiveMode's adaptive token bucket.
+	RequestCost uint
+
+	// Set of strategies to determine if the attempt failed due to a throttle
+	// error.
+	//
+	// It is safe to append to this list in NewAdaptiveMode's functional options.
 	Throttles []IsErrorThrottle
 
-	MaxAttempts int
-
-	MaxBackoff time.Duration
-	Backoff    BackoffDelayer
-
-	Retryables []IsErrorRetryable
-	Timeouts   []IsErrorTimeout
-
-	RetryRateLimiter RateLimiter
-	RetryCost        uint
-	RetryTimeoutCost uint
-	NoRetryIncrement uint
+	// Set of options for standard retry mode that AdaptiveMode is built on top
+	// of. AdaptiveMode may apply its own defaults to Standard retry mode that
+	// are different than the defaults of NewStandard. Use these options to
+	// override the default options.
+	StandardOptions []func(*StandardOptions)
 }
 
 // AdaptiveMode provides an experimental retry strategy that expands on the
-// Standard retry strategy, adding client send rate limits. The send rate limit
-// is initially unrestricted, but becomes restricted when the attempt fails
-// with for a throttle error. Eventually unrestricted send rate limit is
-// restored once attempts no longer are failing for throttle errors.
+// Standard retry strategy, adding client attempt rate limits. The attempt rate
+// limit is initially unrestricted, but becomes restricted when the attempt
+// fails with for a throttle error. When restricted AdaptiveMode may need to
+// sleep before an attempt is made, if too many throttles have been received.
+// AdaptiveMode's sleep can be canceled with context cancel. Set
+// AdaptiveModeOptions FailOnNoAttemptTokens to change the behavior from sleep,
+// to fail fast.
+//
+// Eventually unrestricted attempt rate limit will be restored once attempts no
+// longer are failing due to throttle errors.
 type AdaptiveMode struct {
 	options   AdaptiveModeOptions
 	throttles IsErrorThrottles
@@ -61,43 +69,18 @@ type AdaptiveMode struct {
 
 // NewAdaptiveMode returns an initialized AdaptiveMode retry strategy.
 func NewAdaptiveMode(optFns ...func(*AdaptiveModeOptions)) *AdaptiveMode {
-	adaptiveOptions := AdaptiveModeOptions{
+	o := AdaptiveModeOptions{
 		RequestCost: DefaultRequestCost,
-		Throttles:   DefaultThrottles,
-
-		MaxAttempts: DefaultMaxAttempts,
-		MaxBackoff:  DefaultMaxBackoff,
-		Retryables:  DefaultRetryables,
-
-		RetryRateLimiter: ratelimit.NewTokenRateLimit(DefaultRetryRateTokens),
-		RetryCost:        DefaultRetryCost,
-		RetryTimeoutCost: DefaultRetryTimeoutCost,
-		NoRetryIncrement: DefaultNoRetryIncrement,
+		Throttles:   append([]IsErrorThrottle{}, DefaultThrottles...),
 	}
 	for _, fn := range optFns {
-		fn(&adaptiveOptions)
+		fn(&o)
 	}
 
-	baseRetryer := NewStandard(func(o *StandardOptions) {
-		o.MaxAttempts = adaptiveOptions.MaxAttempts
-		o.MaxBackoff = adaptiveOptions.MaxBackoff
-		o.Backoff = adaptiveOptions.Backoff
-		o.Retryables = adaptiveOptions.Retryables
-		o.Timeouts = adaptiveOptions.Timeouts
-		o.RateLimiter = adaptiveOptions.RetryRateLimiter
-		o.RetryCost = adaptiveOptions.RetryCost
-		o.RetryTimeoutCost = adaptiveOptions.RetryTimeoutCost
-		o.NoRetryIncrement = adaptiveOptions.NoRetryIncrement
-	})
-
-	throttles := make([]IsErrorThrottle, len(adaptiveOptions.Throttles))
-	copy(throttles, adaptiveOptions.Throttles)
-
 	return &AdaptiveMode{
-		options: adaptiveOptions,
-
-		throttles: throttles,
-		retryer:   baseRetryer,
+		options:   o,
+		throttles: IsErrorThrottles(o.Throttles),
+		retryer:   NewStandard(o.StandardOptions...),
 		rateLimit: newAdaptiveRateLimit(),
 	}
 }
@@ -142,10 +125,10 @@ func (a *AdaptiveMode) GetInitialToken() (releaseToken func(error) error) {
 	return nopRelease
 }
 
-// GetAttemptToken returns the send token that can be used to rate limit
+// GetAttemptToken returns the attempt token that can be used to rate limit
 // attempt calls. Will be used by the SDK's retry package's Attempt
-// middleware to get a send token prior to calling the temp and releasing
-// the send token after the attempt has been made.
+// middleware to get a attempt token prior to calling the temp and releasing
+// the attempt token after the attempt has been made.
 func (a *AdaptiveMode) GetAttemptToken(ctx context.Context) (func(error) error, error) {
 	for {
 		acquiredToken, waitTryAgain := a.rateLimit.AcquireToken(a.options.RequestCost)

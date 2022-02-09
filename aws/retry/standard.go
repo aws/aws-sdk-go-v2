@@ -99,20 +99,45 @@ var DefaultTimeouts = []IsErrorTimeout{
 // StandardOptions provides the functional options for configuring the standard
 // retryable, and delay behavior.
 type StandardOptions struct {
+	// Maximum number of attempts that should be made.
 	MaxAttempts int
-	MaxBackoff  time.Duration
-	Backoff     BackoffDelayer
 
+	// MaxBackoff duration between retried attempts.
+	MaxBackoff time.Duration
+
+	// Provides the backoff strategy the retryer will use to determine the
+	// delay between retry attempts.
+	Backoff BackoffDelayer
+
+	// Set of strategies to determine if the attempt should be retried based on
+	// the error response received.
+	//
+	// It is safe to append to this list in NewStandard's functional options.
 	Retryables []IsErrorRetryable
-	Timeouts   []IsErrorTimeout
 
-	RateLimiter      RateLimiter
-	RetryCost        uint
+	// Set of strategies to determine if the attempt failed due to a timeout
+	// error.
+	//
+	// It is safe to append to this list in NewStandard's functional options.
+	Timeouts []IsErrorTimeout
+
+	// Provides the rate limiting strategy for rate limiting attempt retries
+	// across all attempts the retryer is being used with.
+	RateLimiter RateLimiter
+
+	// The cost to deduct from the RateLimiter's token bucket per retry.
+	RetryCost uint
+
+	// The cost to deduct from the RateLimiter's token bucket per retry caused
+	// by timeout error.
 	RetryTimeoutCost uint
+
+	// The cost to payback to the RateLimiter's token bucket for successful
+	// attempts.
 	NoRetryIncrement uint
 }
 
-// RateLimiter provides the interface for limiting the rate of request retries
+// RateLimiter provides the interface for limiting the rate of attempt retries
 // allowed by the retryer.
 type RateLimiter interface {
 	GetToken(ctx context.Context, cost uint) (releaseToken func() error, err error)
@@ -120,7 +145,7 @@ type RateLimiter interface {
 }
 
 // Standard is the standard retry pattern for the SDK. It uses a set of
-// retryable checks to determine of the failed request should be retried, and
+// retryable checks to determine of the failed attempt should be retried, and
 // what retry delay should be used.
 type Standard struct {
 	options StandardOptions
@@ -136,8 +161,8 @@ func NewStandard(fnOpts ...func(*StandardOptions)) *Standard {
 	o := StandardOptions{
 		MaxAttempts: DefaultMaxAttempts,
 		MaxBackoff:  DefaultMaxBackoff,
-		Retryables:  DefaultRetryables,
-		Timeouts:    DefaultTimeouts,
+		Retryables:  append([]IsErrorRetryable{}, DefaultRetryables...),
+		Timeouts:    append([]IsErrorTimeout{}, DefaultTimeouts...),
 
 		RateLimiter:      ratelimit.NewTokenRateLimit(DefaultRetryRateTokens),
 		RetryCost:        DefaultRetryCost,
@@ -156,17 +181,11 @@ func NewStandard(fnOpts ...func(*StandardOptions)) *Standard {
 		backoff = NewExponentialJitterBackoff(o.MaxBackoff)
 	}
 
-	rs := make([]IsErrorRetryable, len(o.Retryables))
-	copy(rs, o.Retryables)
-
-	ts := make([]IsErrorTimeout, len(o.Timeouts))
-	copy(ts, o.Timeouts)
-
 	return &Standard{
 		options:   o,
 		backoff:   backoff,
-		retryable: IsErrorRetryables(rs),
-		timeout:   IsErrorTimeouts(ts),
+		retryable: IsErrorRetryables(o.Retryables),
+		timeout:   IsErrorTimeouts(o.Timeouts),
 	}
 }
 

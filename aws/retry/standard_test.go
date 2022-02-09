@@ -17,6 +17,41 @@ import (
 
 var _ aws.Retryer = (*Standard)(nil)
 
+func TestStandard_copyOptions(t *testing.T) {
+	origDefaultRetryables := DefaultRetryables
+	defer func() {
+		DefaultRetryables = origDefaultRetryables
+	}()
+	DefaultRetryables = append([]IsErrorRetryable{}, DefaultRetryables...)
+
+	origDefaultTimeouts := DefaultTimeouts
+	defer func() {
+		DefaultTimeouts = origDefaultTimeouts
+	}()
+	DefaultTimeouts = append([]IsErrorTimeout{}, DefaultTimeouts...)
+
+	a := NewStandard(func(ao *StandardOptions) {
+		ao.Retryables[0] = nil
+		ao.Timeouts[0] = nil
+	})
+
+	if DefaultRetryables[0] == nil {
+		t.Errorf("expect no change to global var")
+	}
+
+	if a.options.Retryables[0] != nil {
+		t.Errorf("expect retryables to be changed")
+	}
+
+	if DefaultTimeouts[0] == nil {
+		t.Errorf("expect no change to global var")
+	}
+
+	if a.options.Timeouts[0] != nil {
+		t.Errorf("expect timeouts to be changed")
+	}
+}
+
 func TestStandard_IsErrorRetryable(t *testing.T) {
 	cases := map[string]struct {
 		Retryable IsErrorRetryable
