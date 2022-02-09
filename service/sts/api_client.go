@@ -273,15 +273,25 @@ func resolveRetryer(o *Options) {
 		return
 	}
 
+	var standardOptions []func(*retry.StandardOptions)
+	if v := o.RetryMaxAttempts; v != 0 {
+		standardOptions = append(standardOptions, func(so *retry.StandardOptions) {
+			so.MaxAttempts = v
+		})
+	}
+
 	switch o.RetryMode {
 	case aws.RetryModeAdaptive:
-		o.Retryer = retry.NewAdaptiveMode(func(oo *retry.AdaptiveModeOptions) {
-			oo.MaxAttempts = o.RetryMaxAttempts
-		})
+		var adaptiveOptions []func(*retry.AdaptiveModeOptions)
+		if len(standardOptions) != 0 {
+			adaptiveOptions = append(adaptiveOptions, func(ao *retry.AdaptiveModeOptions) {
+				ao.StandardOptions = append(ao.StandardOptions, standardOptions...)
+			})
+		}
+		o.Retryer = retry.NewAdaptiveMode(adaptiveOptions...)
+
 	default:
-		o.Retryer = retry.NewStandard(func(oo *retry.StandardOptions) {
-			oo.MaxAttempts = o.RetryMaxAttempts
-		})
+		o.Retryer = retry.NewStandard(standardOptions...)
 	}
 }
 

@@ -3,7 +3,6 @@
 package defaults
 
 import (
-	"aws"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"time"
