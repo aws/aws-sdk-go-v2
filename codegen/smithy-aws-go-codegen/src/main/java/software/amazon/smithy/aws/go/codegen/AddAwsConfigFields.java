@@ -67,6 +67,8 @@ public class AddAwsConfigFields implements GoIntegration {
     private static final String RESOLVE_AWS_CONFIG_RETRY_MODE = "resolveAWSRetryMode";
     private static final String RESOLVE_AWS_CONFIG_RETRYER_PROVIDER = "resolveAWSRetryerProvider";
 
+    private static final String FINALIZE_RETRY_MAX_ATTEMPTS_OPTIONS = "finalizeRetryMaxAttemptOptions";
+
     private static final List<AwsConfigField> AWS_CONFIG_FIELDS = ListUtils.of(
             AwsConfigField.builder()
                     .name(REGION_CONFIG_NAME)
@@ -95,9 +97,9 @@ public class AddAwsConfigFields implements GoIntegration {
                     .name(RETRYER_CONFIG_NAME)
                     .type(getAwsCoreSymbol("Retryer"))
                     .documentation("""
-                            Retryer guides how HTTP requests should be retried in case of
-                            recoverable failures. When nil the API client will use a default
-                            retryer.
+                            Retryer guides how HTTP requests should be retried in case of recoverable failures.
+                            When nil the API client will use a default retryer. The kind of default retry created
+                            by the API client can be changed with the RetryMode option.
                             """)
                     .addConfigFieldResolvers(getClientInitializationResolver(
                             SymbolUtils.createValueSymbolBuilder(RESOLVE_RETRYER).build())
@@ -111,24 +113,41 @@ public class AddAwsConfigFields implements GoIntegration {
                     .type(getUniversalSymbol("int"))
                     .documentation("""
                             RetryMaxAttempts specifies the maximum number attempts an API client
-                            will call an operation that fails with a retryable error.
+                            will call an operation that fails with a retryable error. A value of 0 is ignored,
+                            and will not be used to configure the API client created default retryer, or modify
+                            per operation call's retry max attempts.
 
-                            API Clients will only use this value to construct a retryer if the
-                            Config.Retryer member is not nil. This value will be ignored if
+                            When creating a new API Clients this member will only be used if the
+                            Retryer Options member is nil. This value will be ignored if
                             Retryer is not nil.
+                            
+                            If specified in an operation call's functional options with a value that
+                            is different than the constructed client's Options, the Client's Retryer
+                            will be wrapped to use the operation's specific RetryMaxAttempts value.
                             """)
                     .awsResolveFunction(SymbolUtils.createValueSymbolBuilder(RESOLVE_AWS_CONFIG_RETRY_MAX_ATTEMPTS)
                             .build())
+                     .addConfigFieldResolvers(ConfigFieldResolver.builder()
+                             .location(ConfigFieldResolver.Location.OPERATION)
+                             .target(ConfigFieldResolver.Target.FINALIZATION)
+                             .withClientInput(true)
+                             .resolver(SymbolUtils.createValueSymbolBuilder(
+                                     FINALIZE_RETRY_MAX_ATTEMPTS_OPTIONS).build())
+                             .build())
                     .build(),
+
             AwsConfigField.builder()
                     .name(RETRY_MODE_CONFIG_NAME)
                     .type(getAwsCoreSymbol("RetryMode"))
                     .documentation("""
-                            RetryMode specifies the retry model the API client will be created with.
+                            RetryMode specifies the retry mode the API client will be created with,
+                            if Retryer option is not also specified.
 
-                            API Clients will only use this value to construct a retryer if the
-                            Config.Retryer member is not nil. This value will be ignored if
+                            When creating a new API Clients this member will only be used if the
+                            Retryer Options member is nil. This value will be ignored if
                             Retryer is not nil.
+                            
+                            Currently does not support per operation call overrides, may in the future.
                             """)
                     .awsResolveFunction(SymbolUtils.createValueSymbolBuilder(RESOLVE_AWS_CONFIG_RETRY_MODE)
                             .build())
@@ -217,6 +236,9 @@ public class AddAwsConfigFields implements GoIntegration {
             writeAwsConfigConstructor(model, serviceShape, w);
             writeAwsDefaultResolvers(w);
         });
+        goDelegator.useShapeTestWriter(serviceShape, w -> {
+            writerAwsDefaultResolversTests(w);
+        });
     }
 
     private static ConfigFieldResolver.Builder getClientInitializationResolver(Symbol resolver) {
@@ -229,12 +251,16 @@ public class AddAwsConfigFields implements GoIntegration {
     private void writeAwsDefaultResolvers(GoWriter writer) {
         writeHttpClientResolver(writer);
         writeRetryerResolvers(writer);
+        writeRetryMaxAttemptsFinalizeResolver(writer);
         writeAwsConfigEndpointResolver(writer);
+    }
+
+    private void writerAwsDefaultResolversTests(GoWriter writer) {
+        writeRetryResolverTests(writer);
     }
 
     private void writeRetryerResolvers(GoWriter writer) {
         writer.pushState();
-
 
         writer.putContext("resolvedDefaultsMode",
                 ClientResolvedDefaultsMode.RESOLVED_DEFAULTS_MODE_CONFIG_NAME);
@@ -318,6 +344,171 @@ public class AddAwsConfigFields implements GoIntegration {
                         return
                     }
                     o.$retryMaxAttemptsOption:L = cfg.$retryMaxAttemptsOption:L
+                }
+                """);
+
+        writer.popState();
+    }
+
+    private void writeRetryMaxAttemptsFinalizeResolver(GoWriter writer) {
+        writer.pushState();
+
+        writer.putContext("finalizeResolveName", FINALIZE_RETRY_MAX_ATTEMPTS_OPTIONS);
+        writer.putContext("withMaxAttempts", SymbolUtils.createValueSymbolBuilder("AddWithMaxAttempts",
+                AwsGoDependency.AWS_RETRY).build());
+
+        writer.write("""
+                func $finalizeResolveName:L(o *Options, client Client) {
+                    if v := o.RetryMaxAttempts; v == 0 || v == client.options.RetryMaxAttempts {
+                        return
+                    }
+                    
+                    o.Retryer = $withMaxAttempts:T(o.Retryer, o.RetryMaxAttempts)
+                }
+                """);
+
+        writer.popState();
+    }
+
+    private void writeRetryResolverTests(GoWriter writer) {
+        writer.pushState();
+
+        writer.putContext("retryModeOptions", "Client_resolveRetryOptions");
+        writer.putContext("retryerType", getAwsCoreSymbol("Retryer"));
+
+        writer.putContext("retryModeType", getAwsCoreSymbol("RetryMode"));
+        writer.putContext("retryModeStandard", getAwsCoreSymbol("RetryModeStandard"));
+        writer.putContext("retryModeAdaptive", getAwsCoreSymbol("RetryModeAdaptive"));
+
+        writer.putContext("defaultsModeType", getAwsCoreSymbol("DefaultsMode"));
+        writer.putContext("defaultsModeStandard", getAwsCoreSymbol("DefaultsModeStandard"));
+
+        writer.putContext("ctxBackground", SymbolUtils.createValueSymbolBuilder("Background",
+                SmithyGoDependency.CONTEXT).build());
+        writer.putContext("stack", SymbolUtils.createValueSymbolBuilder("Stack",
+                SmithyGoDependency.SMITHY_MIDDLEWARE).build());
+
+        writer.putContext("smithyClientDoFunc", SymbolUtils.createValueSymbolBuilder("ClientDoFunc",
+                SmithyGoDependency.SMITHY_HTTP_TRANSPORT).build());
+        writer.putContext("httpRequest", SymbolUtils.createValueSymbolBuilder("Request",
+                SmithyGoDependency.NET_HTTP).build());
+        writer.putContext("httpResponse", SymbolUtils.createValueSymbolBuilder("Response",
+                SmithyGoDependency.NET_HTTP).build());
+        writer.putContext("httpHeader", SymbolUtils.createValueSymbolBuilder("Header",
+                SmithyGoDependency.NET_HTTP).build());
+        writer.putContext("newStringReader", SymbolUtils.createValueSymbolBuilder("NewReader",
+                SmithyGoDependency.STRINGS).build());
+        writer.putContext("nopCloser", SymbolUtils.createValueSymbolBuilder("NopCloser",
+                SmithyGoDependency.IOUTIL).build());
+
+
+        writer.addUseImports(SmithyGoDependency.TESTING);
+        writer.write("""
+                func Test$retryModeOptions:L(t *testing.T) {
+                    nopClient := $smithyClientDoFunc:T(func(_ *$httpRequest:T) (*$httpResponse:T, error) {
+                        return &$httpResponse:T{
+                            StatusCode: 200,
+                            Header: $httpHeader:T{},
+                            Body: $nopCloser:T($newStringReader:T("")),
+                        }, nil
+                    })
+                    
+                    cases := map[string]struct{
+                        defaultsMode       $defaultsModeType:T
+                        retryer            $retryerType:T
+                        retryMaxAttempts   int
+                        opRetryMaxAttempts *int
+                        retryMode          $retryModeType:T
+                        expectClientRetryMode   $retryModeType:T
+                        expectClientMaxAttempts int
+                        expectOpMaxAttempts     int
+                    }{
+                        "defaults": {
+                            defaultsMode: $defaultsModeStandard:T,
+                            expectClientRetryMode: $retryModeStandard:T,
+                            expectClientMaxAttempts: 3,
+                            expectOpMaxAttempts: 3,
+                        },
+                        "custom default retry": {
+                            retryMode: $retryModeAdaptive:T,
+                            retryMaxAttempts: 10,
+                            expectClientRetryMode: $retryModeAdaptive:T,
+                            expectClientMaxAttempts: 10,
+                            expectOpMaxAttempts: 10,
+                        },
+                        "custom op max attempts": {
+                            retryMode: $retryModeAdaptive:T,
+                            retryMaxAttempts: 10,
+                            opRetryMaxAttempts: aws.Int(2),
+                            expectClientRetryMode: $retryModeAdaptive:T,
+                            expectClientMaxAttempts: 10,
+                            expectOpMaxAttempts: 2,
+                        },
+                        "custom op no change max attempts": {
+                            retryMode: $retryModeAdaptive:T,
+                            retryMaxAttempts: 10,
+                            opRetryMaxAttempts: aws.Int(10),
+                            expectClientRetryMode: $retryModeAdaptive:T,
+                            expectClientMaxAttempts: 10,
+                            expectOpMaxAttempts: 10,
+                        },
+                        "custom op 0 max attempts": {
+                            retryMode: $retryModeAdaptive:T,
+                            retryMaxAttempts: 10,
+                            opRetryMaxAttempts: aws.Int(0),
+                            expectClientRetryMode: $retryModeAdaptive:T,
+                            expectClientMaxAttempts: 10,
+                            expectOpMaxAttempts: 10,
+                        },
+                    }
+
+                    for name, c := range cases {
+                        t.Run(name, func(t *testing.T) {
+                            client := NewFromConfig(aws.Config{
+                                DefaultsMode:     c.defaultsMode,
+                                Retryer:          func() func() $retryerType:T {
+                                    if c.retryer == nil { return nil }
+
+                                    return func() $retryerType:T { return c.retryer }
+                                }(),
+                                HTTPClient: nopClient,
+                                RetryMaxAttempts: c.retryMaxAttempts,
+                                RetryMode:        c.retryMode,
+                            })
+
+                            if e, a := c.expectClientRetryMode, client.options.RetryMode; e != a {
+                                t.Errorf("expect %v retry mode, got %v", e, a)
+                            }
+                            if e, a := c.expectClientMaxAttempts, client.options.Retryer.MaxAttempts(); e != a {
+                                t.Errorf("expect %v max attempts, got %v", e, a)
+                            }
+
+                            _, _, err := client.invokeOperation($ctxBackground:T(), "mockOperation", struct{}{},
+                                []func(*Options){
+                                    func(o *Options) {
+                                        if c.opRetryMaxAttempts == nil {
+                                            return
+                                        }
+                                        o.RetryMaxAttempts = *c.opRetryMaxAttempts
+                                    },
+                                },
+                                func(s *$stack:T, o Options) error {
+                                    s.Initialize.Clear()
+                                    s.Serialize.Clear()
+                                    s.Build.Clear()
+                                    s.Finalize.Clear()
+                                    s.Deserialize.Clear()
+
+                                    if e, a := c.expectOpMaxAttempts, o.Retryer.MaxAttempts(); e != a {
+                                        t.Errorf("expect %v op max attempts, got %v", e, a)
+                                    }
+                                    return nil
+                                })
+                            if err != nil {
+                                t.Fatalf("expect no operation error, got %v", err)
+                            }
+                        })
+                    }
                 }
                 """);
 
