@@ -569,7 +569,7 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Serialize(t *testing.T) {
 		// Serializes structure members with locationName traits
 		"serializes_structure_members_with_locationname_traits": {
 			Params: &KitchenSinkOperationInput{
-				StructWithLocationName: &types.StructWithLocationName{
+				StructWithJsonName: &types.StructWithJsonName{
 					Value: ptr.String("some-value"),
 				},
 			},
@@ -584,7 +584,7 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Serialize(t *testing.T) {
 			},
 			BodyMediaType: "application/json",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{"StructWithLocationName":{"RenamedMember":"some-value"}}`))
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{"StructWithJsonName":{"Value":"some-value"}}`))
 			},
 		},
 		// Serializes empty structure shapes
@@ -698,6 +698,7 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Serialize(t *testing.T) {
 				APIOptions: []func(*middleware.Stack) error{
 					func(s *middleware.Stack) error {
 						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
 						return nil
 					},
 				},
@@ -1132,6 +1133,7 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Deserialize(t *testing.T) {
 				APIOptions: []func(*middleware.Stack) error{
 					func(s *middleware.Stack) error {
 						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
 						return nil
 					},
 				},

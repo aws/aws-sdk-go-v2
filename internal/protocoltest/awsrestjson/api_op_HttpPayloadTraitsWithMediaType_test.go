@@ -97,6 +97,7 @@ func TestClient_HttpPayloadTraitsWithMediaType_awsRestjson1Serialize(t *testing.
 				APIOptions: []func(*middleware.Stack) error{
 					func(s *middleware.Stack) error {
 						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
 						return nil
 					},
 				},
@@ -192,6 +193,7 @@ func TestClient_HttpPayloadTraitsWithMediaType_awsRestjson1Deserialize(t *testin
 				APIOptions: []func(*middleware.Stack) error{
 					func(s *middleware.Stack) error {
 						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
 						return nil
 					},
 				},

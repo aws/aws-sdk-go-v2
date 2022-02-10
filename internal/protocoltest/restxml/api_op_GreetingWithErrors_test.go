@@ -74,6 +74,7 @@ func TestClient_GreetingWithErrors_awsRestxmlDeserialize(t *testing.T) {
 				APIOptions: []func(*middleware.Stack) error{
 					func(s *middleware.Stack) error {
 						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
 						return nil
 					},
 				},
@@ -173,6 +174,7 @@ func TestClient_GreetingWithErrors_InvalidGreeting_awsRestxmlDeserialize(t *test
 				APIOptions: []func(*middleware.Stack) error{
 					func(s *middleware.Stack) error {
 						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
 						return nil
 					},
 				},
@@ -296,6 +298,7 @@ func TestClient_GreetingWithErrors_ComplexError_awsRestxmlDeserialize(t *testing
 				APIOptions: []func(*middleware.Stack) error{
 					func(s *middleware.Stack) error {
 						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
 						return nil
 					},
 				},

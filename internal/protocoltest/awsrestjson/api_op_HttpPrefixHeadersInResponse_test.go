@@ -19,13 +19,13 @@ import (
 	"testing"
 )
 
-func TestClient_HttpPrefixHeadersResponse_awsRestjson1Deserialize(t *testing.T) {
+func TestClient_HttpPrefixHeadersInResponse_awsRestjson1Deserialize(t *testing.T) {
 	cases := map[string]struct {
 		StatusCode    int
 		Header        http.Header
 		BodyMediaType string
 		Body          []byte
-		ExpectResult  *HttpPrefixHeadersResponseOutput
+		ExpectResult  *HttpPrefixHeadersInResponseOutput
 	}{
 		// (de)serializes all response headers
 		"HttpPrefixHeadersResponse": {
@@ -34,7 +34,7 @@ func TestClient_HttpPrefixHeadersResponse_awsRestjson1Deserialize(t *testing.T) 
 				"Hello": []string{"Hello"},
 				"X-Foo": []string{"Foo"},
 			},
-			ExpectResult: &HttpPrefixHeadersResponseOutput{
+			ExpectResult: &HttpPrefixHeadersInResponseOutput{
 				PrefixHeaders: map[string]string{
 					"x-foo": "Foo",
 					"hello": "Hello",
@@ -73,6 +73,7 @@ func TestClient_HttpPrefixHeadersResponse_awsRestjson1Deserialize(t *testing.T) 
 				APIOptions: []func(*middleware.Stack) error{
 					func(s *middleware.Stack) error {
 						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
 						return nil
 					},
 				},
@@ -84,8 +85,8 @@ func TestClient_HttpPrefixHeadersResponse_awsRestjson1Deserialize(t *testing.T) 
 				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
 				Region:                   "us-west-2",
 			})
-			var params HttpPrefixHeadersResponseInput
-			result, err := client.HttpPrefixHeadersResponse(context.Background(), &params)
+			var params HttpPrefixHeadersInResponseInput
+			result, err := client.HttpPrefixHeadersInResponse(context.Background(), &params)
 			if err != nil {
 				t.Fatalf("expect nil err, got %v", err)
 			}

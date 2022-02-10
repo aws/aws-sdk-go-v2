@@ -122,7 +122,7 @@ func TestClient_XmlUnions_awsRestxmlSerialize(t *testing.T) {
 			`))
 			},
 		},
-		// Serializes union union member
+		// Serializes union member
 		"XmlUnionsWithUnionMember": {
 			Params: &XmlUnionsInput{
 				UnionValue: &types.XmlUnionShapeMemberUnionValue{Value: &types.XmlUnionShapeMemberBooleanValue{Value: true}},
@@ -181,6 +181,7 @@ func TestClient_XmlUnions_awsRestxmlSerialize(t *testing.T) {
 				APIOptions: []func(*middleware.Stack) error{
 					func(s *middleware.Stack) error {
 						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
 						return nil
 					},
 				},
@@ -299,7 +300,7 @@ func TestClient_XmlUnions_awsRestxmlDeserialize(t *testing.T) {
 				UnionValue: &types.XmlUnionShapeMemberBooleanValue{Value: true},
 			},
 		},
-		// Serializes union union member
+		// Serializes union member
 		"XmlUnionsWithUnionMember": {
 			StatusCode: 200,
 			Header: http.Header{
@@ -350,6 +351,7 @@ func TestClient_XmlUnions_awsRestxmlDeserialize(t *testing.T) {
 				APIOptions: []func(*middleware.Stack) error{
 					func(s *middleware.Stack) error {
 						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
 						return nil
 					},
 				},

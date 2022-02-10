@@ -124,6 +124,21 @@ type PayloadConfig struct {
 	noSmithyDocumentSerde
 }
 
+// The following types satisfy this interface:
+//  PlayerActionMemberQuit
+type PlayerAction interface {
+	isPlayerAction()
+}
+
+// Quit the game.
+type PlayerActionMemberQuit struct {
+	Value Unit
+
+	noSmithyDocumentSerde
+}
+
+func (*PlayerActionMemberQuit) isPlayerAction() {}
+
 type RecursiveShapesInputOutputNested1 struct {
 	Foo *string
 
@@ -189,6 +204,10 @@ type GreetingStruct struct {
 	noSmithyDocumentSerde
 }
 
+type Unit struct {
+	noSmithyDocumentSerde
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
@@ -200,5 +219,6 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isMyUnion()     {}
-func (*UnknownUnionMember) isSimpleUnion() {}
+func (*UnknownUnionMember) isMyUnion()      {}
+func (*UnknownUnionMember) isPlayerAction() {}
+func (*UnknownUnionMember) isSimpleUnion()  {}

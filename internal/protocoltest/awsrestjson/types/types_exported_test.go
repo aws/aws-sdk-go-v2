@@ -62,6 +62,24 @@ var _ *types.GreetingStruct
 var _ *time.Time
 var _ []byte
 
+func ExamplePlayerAction_outputUsage() {
+	var union types.PlayerAction
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.PlayerActionMemberQuit:
+		_ = v.Value // Value is types.Unit
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.Unit
+
 func ExampleSimpleUnion_outputUsage() {
 	var union types.SimpleUnion
 	// type switches can be used to check the union value
