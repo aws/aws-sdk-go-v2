@@ -7,6 +7,7 @@
     },
     "files": [
         "api_client.go",
+        "api_client_test.go",
         "api_op_CreateBudget.go",
         "api_op_CreateBudgetAction.go",
         "api_op_CreateNotification.go",

@@ -7,6 +7,7 @@
     },
     "files": [
         "api_client.go",
+        "api_client_test.go",
         "api_op_BatchDetectDominantLanguage.go",
         "api_op_BatchDetectEntities.go",
         "api_op_BatchDetectKeyPhrases.go",

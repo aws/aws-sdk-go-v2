@@ -8,6 +8,7 @@
     },
     "files": [
         "api_client.go",
+        "api_client_test.go",
         "api_op_AcceptInputDeviceTransfer.go",
         "api_op_BatchDelete.go",
         "api_op_BatchStart.go",

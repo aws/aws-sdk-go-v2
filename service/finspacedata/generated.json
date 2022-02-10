@@ -7,6 +7,7 @@
     },
     "files": [
         "api_client.go",
+        "api_client_test.go",
         "api_op_CreateChangeset.go",
         "api_op_CreateDataView.go",
         "api_op_CreateDataset.go",

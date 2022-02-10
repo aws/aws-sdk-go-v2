@@ -7,6 +7,7 @@
     },
     "files": [
         "api_client.go",
+        "api_client_test.go",
         "api_op_CreateCell.go",
         "api_op_CreateCrossAccountAuthorization.go",
         "api_op_CreateReadinessCheck.go",

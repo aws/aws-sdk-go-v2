@@ -7,6 +7,7 @@
     },
     "files": [
         "api_client.go",
+        "api_client_test.go",
         "api_op_DescribeEntitiesDetectionV2Job.go",
         "api_op_DescribeICD10CMInferenceJob.go",
         "api_op_DescribePHIDetectionJob.go",

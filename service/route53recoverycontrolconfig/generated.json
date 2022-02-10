@@ -8,6 +8,7 @@
     },
     "files": [
         "api_client.go",
+        "api_client_test.go",
         "api_op_CreateCluster.go",
         "api_op_CreateControlPanel.go",
         "api_op_CreateRoutingControl.go",

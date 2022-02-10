@@ -8,6 +8,7 @@
     },
     "files": [
         "api_client.go",
+        "api_client_test.go",
         "api_op_AcceptEulas.go",
         "api_op_CreateLaunchProfile.go",
         "api_op_CreateStreamingImage.go",

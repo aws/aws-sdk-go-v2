@@ -8,6 +8,7 @@
     },
     "files": [
         "api_client.go",
+        "api_client_test.go",
         "api_op_AddListenerCertificates.go",
         "api_op_AddTags.go",
         "api_op_CreateListener.go",

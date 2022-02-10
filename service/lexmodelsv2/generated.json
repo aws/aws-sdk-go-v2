@@ -8,6 +8,7 @@
     },
     "files": [
         "api_client.go",
+        "api_client_test.go",
         "api_op_BuildBotLocale.go",
         "api_op_CreateBot.go",
         "api_op_CreateBotAlias.go",

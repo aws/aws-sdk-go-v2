@@ -7,6 +7,7 @@
     },
     "files": [
         "api_client.go",
+        "api_client_test.go",
         "api_op_CreateReplicationConfigurationTemplate.go",
         "api_op_DeleteJob.go",
         "api_op_DeleteRecoveryInstance.go",

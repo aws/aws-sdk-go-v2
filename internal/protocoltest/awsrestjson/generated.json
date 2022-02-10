@@ -8,6 +8,7 @@
     },
     "files": [
         "api_client.go",
+        "api_client_test.go",
         "api_op_AllQueryStringTypes.go",
         "api_op_AllQueryStringTypes_test.go",
         "api_op_ConstantAndVariableQueryString.go",

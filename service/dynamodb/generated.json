@@ -10,6 +10,7 @@
     },
     "files": [
         "api_client.go",
+        "api_client_test.go",
         "api_op_BatchExecuteStatement.go",
         "api_op_BatchGetItem.go",
         "api_op_BatchWriteItem.go",

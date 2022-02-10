@@ -7,6 +7,7 @@
     },
     "files": [
         "api_client.go",
+        "api_client_test.go",
         "api_op_CreateBackupPlan.go",
         "api_op_CreateBackupSelection.go",
         "api_op_CreateBackupVault.go",

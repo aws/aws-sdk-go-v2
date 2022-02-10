@@ -9,6 +9,7 @@
     },
     "files": [
         "api_client.go",
+        "api_client_test.go",
         "api_op_AcceptReservedInstancesExchangeQuote.go",
         "api_op_AcceptTransitGatewayMulticastDomainAssociations.go",
         "api_op_AcceptTransitGatewayPeeringAttachment.go",

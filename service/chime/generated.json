@@ -7,6 +7,7 @@
     },
     "files": [
         "api_client.go",
+        "api_client_test.go",
         "api_op_AssociatePhoneNumberWithUser.go",
         "api_op_AssociatePhoneNumbersWithVoiceConnector.go",
         "api_op_AssociatePhoneNumbersWithVoiceConnectorGroup.go",

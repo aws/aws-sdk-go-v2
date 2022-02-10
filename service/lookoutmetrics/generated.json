@@ -7,6 +7,7 @@
     },
     "files": [
         "api_client.go",
+        "api_client_test.go",
         "api_op_ActivateAnomalyDetector.go",
         "api_op_BackTestAnomalyDetector.go",
         "api_op_CreateAlert.go",
