@@ -26,6 +26,7 @@ import java.util.logging.Logger;
 
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.codegen.core.SymbolProvider;
+import software.amazon.smithy.aws.go.codegen.ClientResolvedDefaultsMode;
 import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoWriter;
@@ -234,8 +235,13 @@ public class AddAwsConfigFields implements GoIntegration {
     private void writeRetryerResolvers(GoWriter writer) {
         writer.pushState();
 
-        writer.putContext("resolverName", RESOLVE_RETRYER);
 
+        writer.putContext("resolvedDefaultsMode",
+                ClientResolvedDefaultsMode.RESOLVED_DEFAULTS_MODE_CONFIG_NAME);
+        writer.putContext("getConfig", SymbolUtils.createValueSymbolBuilder("GetModeConfiguration",
+                AwsGoDependency.AWS_DEFAULTS).build());
+
+        writer.putContext("resolverName", RESOLVE_RETRYER);
         writer.putContext("retryerOption", RETRYER_CONFIG_NAME);
         writer.putContext("retryModeOption", RETRY_MODE_CONFIG_NAME);
         writer.putContext("retryMaxAttemptsOption", RETRY_MAX_ATTEMPTS_CONFIG_NAME);
@@ -245,6 +251,7 @@ public class AddAwsConfigFields implements GoIntegration {
         writer.putContext("retryMaxAttemptsResolveAwsConfig", RESOLVE_AWS_CONFIG_RETRY_MAX_ATTEMPTS);
 
         writer.putContext("retryModeAdaptive", getAwsCoreSymbol("RetryModeAdaptive"));
+        writer.putContext("retryModeStandard", getAwsCoreSymbol("RetryModeStandard"));
 
         writer.putContext("newStandard", SymbolUtils.createValueSymbolBuilder("NewStandard",
                 AwsGoDependency.AWS_RETRY).build());
@@ -259,6 +266,16 @@ public class AddAwsConfigFields implements GoIntegration {
                 func $resolverName:L(o *Options) {
                     if o.$retryerOption:L != nil {
                         return
+                    }
+
+                    if len(o.$retryModeOption:L) == 0 {
+                        modeConfig, err := $getConfig:T(o.$resolvedDefaultsMode:L)
+                        if err == nil {
+                            o.$retryModeOption:L = modeConfig.RetryMode
+                        }
+                    }
+                    if len(o.$retryModeOption:L) == 0 {
+                        o.$retryModeOption:L = $retryModeStandard:T
                     }
 
                     var standardOptions []func(*$standardOptions:T)
@@ -311,22 +328,14 @@ public class AddAwsConfigFields implements GoIntegration {
         writer.pushState();
 
         writer.putContext("resolverName", RESOLVE_HTTP_CLIENT);
+        writer.putContext("resolvedDefaultsMode", ClientResolvedDefaultsMode.RESOLVED_DEFAULTS_MODE_CONFIG_NAME);
         writer.putContext("optionName", HTTP_CLIENT_CONFIG_NAME);
         writer.putContext("newClient", SymbolUtils.createValueSymbolBuilder("NewBuildableClient",
                 AwsGoDependency.AWS_HTTP_TRANSPORT).build());
         writer.putContext("buildableType", SymbolUtils.createPointableSymbolBuilder("BuildableClient",
                 AwsGoDependency.AWS_HTTP_TRANSPORT).build());
-        writer.putContext("modeType", SymbolUtils.createValueSymbolBuilder("DefaultsMode",
-                AwsGoDependency.AWS_CORE).build());
-        writer.putContext("modeOption", DEFAULTS_MODE_CONFIG_NAME);
-        writer.putContext("runtimeOption", RUNTIME_ENVIRONMENT_CONFIG_NAME);
-        writer.putContext("autoModeType", SymbolUtils.createValueSymbolBuilder("DefaultsModeAuto",
-                AwsGoDependency.AWS_CORE).build());
         writer.putContext("legacyModeType", SymbolUtils.createValueSymbolBuilder("DefaultsModeLegacy",
                 AwsGoDependency.AWS_CORE).build());
-        writer.putContext("regionOption", REGION_CONFIG_NAME);
-        writer.putContext("resolveAuto", SymbolUtils.createValueSymbolBuilder("ResolveDefaultsModeAuto",
-                AwsGoDependency.AWS_DEFAULTS).build());
         writer.putContext("getConfig", SymbolUtils.createValueSymbolBuilder("GetModeConfiguration",
                 AwsGoDependency.AWS_DEFAULTS).build());
         writer.putContext("dialer", SymbolUtils.createPointableSymbolBuilder("Dialer",
@@ -350,18 +359,8 @@ public class AddAwsConfigFields implements GoIntegration {
                         buildable = $newClient:T()
                     }
 
-                    var mode $modeType:T
-                    if ok := mode.SetFromString(string(o.$modeOption:L)); !ok {
-                        panic($errorf:T("unsupported defaults mode constant %v", mode))
-                    }
-
-                    if mode == $autoModeType:T {
-                        mode = $resolveAuto:T(o.$regionOption:L, o.$runtimeOption:L)
-                    }
-
-                    if mode != $legacyModeType:T {
-                        modeConfig, _ := $getConfig:T(mode)
-
+                    modeConfig, err := $getConfig:T(o.$resolvedDefaultsMode:L)
+                    if err == nil {
                         buildable = buildable.WithDialerOptions(func(dialer $dialer:P) {
                             if dialerTimeout, ok := modeConfig.GetConnectTimeout(); ok {
                                 dialer.Timeout = dialerTimeout

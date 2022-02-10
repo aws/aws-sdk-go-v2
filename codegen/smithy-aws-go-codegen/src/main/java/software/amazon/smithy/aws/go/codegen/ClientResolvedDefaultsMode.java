@@ -33,7 +33,8 @@ import software.amazon.smithy.utils.ListUtils;
  * Records the initial resolve DefaultsMode when the client is constructed.
  */
 public class ClientResolvedDefaultsMode implements GoIntegration {
-    private static final String RESOLVED_DEFAULTS_MODE_CONFIG_NAME = "resolvedDefaultsMode";
+    public static final String RESOLVED_DEFAULTS_MODE_CONFIG_NAME = "resolvedDefaultsMode";
+
     private static final String RESOLVE_RESOLVED_DEFAULTS_MODE = "setResolvedDefaultsMode";
 
     private static final ConfigField CONFIG_FIELD = ConfigField.builder()
@@ -83,6 +84,17 @@ public class ClientResolvedDefaultsMode implements GoIntegration {
                      """);
 
         writer.popState();
+    }
+
+    /**
+     * Gets the sort order of the customization from -128 to 127, with lowest
+     * executed first.
+     *
+     * @return Returns the sort order, defaults to -50.
+     */
+    @Override
+    public byte getOrder() {
+        return -50;
     }
 
     @Override
