@@ -70,6 +70,25 @@ func TestClient_InputAndOutputWithHeaders_awsRestjson1Serialize(t *testing.T) {
 				return smithytesting.CompareReaderEmpty(actual)
 			},
 		},
+		// Tests requests with string list header bindings that require quoting
+		"RestJsonInputAndOutputWithQuotedStringHeaders": {
+			Params: &InputAndOutputWithHeadersInput{
+				HeaderStringList: []string{
+					"b,c",
+					"\"def\"",
+					"a",
+				},
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/InputAndOutputWithHeaders",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"X-StringList": []string{"\"b,c\", \"\\\"def\\\"\", a"},
+			},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
 		// Tests requests with numeric header bindings
 		"RestJsonInputAndOutputWithNumericHeaders": {
 			Params: &InputAndOutputWithHeadersInput{
@@ -250,6 +269,7 @@ func TestClient_InputAndOutputWithHeaders_awsRestjson1Serialize(t *testing.T) {
 				APIOptions: []func(*middleware.Stack) error{
 					func(s *middleware.Stack) error {
 						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
 						return nil
 					},
 				},
@@ -318,6 +338,20 @@ func TestClient_InputAndOutputWithHeaders_awsRestjson1Deserialize(t *testing.T) 
 					"a",
 					"b",
 					"c",
+				},
+			},
+		},
+		// Tests responses with string list header bindings that require quoting
+		"RestJsonInputAndOutputWithQuotedStringHeaders": {
+			StatusCode: 200,
+			Header: http.Header{
+				"X-StringList": []string{"\"b,c\", \"\\\"def\\\"\", a"},
+			},
+			ExpectResult: &InputAndOutputWithHeadersOutput{
+				HeaderStringList: []string{
+					"b,c",
+					"\"def\"",
+					"a",
 				},
 			},
 		},
@@ -462,6 +496,7 @@ func TestClient_InputAndOutputWithHeaders_awsRestjson1Deserialize(t *testing.T) 
 				APIOptions: []func(*middleware.Stack) error{
 					func(s *middleware.Stack) error {
 						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
 						return nil
 					},
 				},

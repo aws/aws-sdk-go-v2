@@ -76,6 +76,7 @@ func TestClient_GreetingWithErrors_InvalidGreeting_awsAwsjson10Deserialize(t *te
 				APIOptions: []func(*middleware.Stack) error{
 					func(s *middleware.Stack) error {
 						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
 						return nil
 					},
 				},
@@ -284,6 +285,7 @@ func TestClient_GreetingWithErrors_FooError_awsAwsjson10Deserialize(t *testing.T
 				APIOptions: []func(*middleware.Stack) error{
 					func(s *middleware.Stack) error {
 						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
 						return nil
 					},
 				},
@@ -357,7 +359,7 @@ func TestClient_GreetingWithErrors_ComplexError_awsAwsjson10Deserialize(t *testi
 			    "__type": "aws.protocoltests.json10#ComplexError",
 			    "TopLevel": "Top level",
 			    "Nested": {
-			        "Fooooo": "bar"
+			        "Foo": "bar"
 			    }
 			}`),
 			ExpectError: &types.ComplexError{
@@ -411,6 +413,7 @@ func TestClient_GreetingWithErrors_ComplexError_awsAwsjson10Deserialize(t *testi
 				APIOptions: []func(*middleware.Stack) error{
 					func(s *middleware.Stack) error {
 						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
 						return nil
 					},
 				},

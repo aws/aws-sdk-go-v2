@@ -37,6 +37,8 @@ func (c *Client) GreetingWithErrors(ctx context.Context, params *GreetingWithErr
 }
 
 type GreetingWithErrorsInput struct {
+	Greeting *string
+
 	noSmithyDocumentSerde
 }
 

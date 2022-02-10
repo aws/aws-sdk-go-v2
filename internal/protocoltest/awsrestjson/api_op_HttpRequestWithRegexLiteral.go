@@ -9,43 +9,42 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Clients that perform this test extract all headers from the response.
-func (c *Client) HttpPrefixHeadersResponse(ctx context.Context, params *HttpPrefixHeadersResponseInput, optFns ...func(*Options)) (*HttpPrefixHeadersResponseOutput, error) {
+func (c *Client) HttpRequestWithRegexLiteral(ctx context.Context, params *HttpRequestWithRegexLiteralInput, optFns ...func(*Options)) (*HttpRequestWithRegexLiteralOutput, error) {
 	if params == nil {
-		params = &HttpPrefixHeadersResponseInput{}
+		params = &HttpRequestWithRegexLiteralInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "HttpPrefixHeadersResponse", params, optFns, c.addOperationHttpPrefixHeadersResponseMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "HttpRequestWithRegexLiteral", params, optFns, c.addOperationHttpRequestWithRegexLiteralMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*HttpPrefixHeadersResponseOutput)
+	out := result.(*HttpRequestWithRegexLiteralOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type HttpPrefixHeadersResponseInput struct {
+type HttpRequestWithRegexLiteralInput struct {
+
+	// This member is required.
+	Str *string
+
 	noSmithyDocumentSerde
 }
 
-type HttpPrefixHeadersResponseOutput struct {
-
-	// Map keys will be normalized to lower-case.
-	PrefixHeaders map[string]string
-
+type HttpRequestWithRegexLiteralOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationHttpPrefixHeadersResponseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpHttpPrefixHeadersResponse{}, middleware.After)
+func (c *Client) addOperationHttpRequestWithRegexLiteralMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpHttpRequestWithRegexLiteral{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpHttpPrefixHeadersResponse{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpHttpRequestWithRegexLiteral{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -79,7 +78,10 @@ func (c *Client) addOperationHttpPrefixHeadersResponseMiddlewares(stack *middlew
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opHttpPrefixHeadersResponse(options.Region), middleware.Before); err != nil {
+	if err = addOpHttpRequestWithRegexLiteralValidationMiddleware(stack); err != nil {
+		return err
+	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opHttpRequestWithRegexLiteral(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -94,10 +96,10 @@ func (c *Client) addOperationHttpPrefixHeadersResponseMiddlewares(stack *middlew
 	return nil
 }
 
-func newServiceMetadataMiddleware_opHttpPrefixHeadersResponse(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opHttpRequestWithRegexLiteral(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "HttpPrefixHeadersResponse",
+		OperationName: "HttpRequestWithRegexLiteral",
 	}
 }

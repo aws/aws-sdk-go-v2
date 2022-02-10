@@ -26,7 +26,6 @@ func (c *Client) JsonUnions(ctx context.Context, params *JsonUnionsInput, optFns
 	return out, nil
 }
 
-// A shared structure that contains a single union member.
 type JsonUnionsInput struct {
 
 	// A union with a representative set of types for members.
@@ -35,7 +34,6 @@ type JsonUnionsInput struct {
 	noSmithyDocumentSerde
 }
 
-// A shared structure that contains a single union member.
 type JsonUnionsOutput struct {
 
 	// A union with a representative set of types for members.

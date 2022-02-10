@@ -75,7 +75,7 @@ type KitchenSinkOperationInput struct {
 
 	String_ *string
 
-	StructWithLocationName *types.StructWithLocationName
+	StructWithJsonName *types.StructWithJsonName
 
 	Timestamp *time.Time
 
@@ -132,7 +132,7 @@ type KitchenSinkOperationOutput struct {
 
 	String_ *string
 
-	StructWithLocationName *types.StructWithLocationName
+	StructWithJsonName *types.StructWithJsonName
 
 	Timestamp *time.Time
 

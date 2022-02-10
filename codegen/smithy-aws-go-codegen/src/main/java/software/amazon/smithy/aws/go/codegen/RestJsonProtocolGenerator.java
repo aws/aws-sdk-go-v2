@@ -101,7 +101,11 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         }
 
         Shape inputShape = ProtocolUtils.expectInput(model, operation);
-        inputShape.accept(new JsonShapeSerVisitor(context, documentBindings::contains));
+        inputShape.accept(JsonShapeSerVisitor.builder()
+                .context(context)
+                .memberFilter(documentBindings::contains)
+                .supportJsonName(true)
+                .build());
     }
 
     @Override
@@ -205,7 +209,10 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
 
     @Override
     protected void generateDocumentBodyShapeSerializers(GenerationContext context, Set<Shape> shapes) {
-        JsonShapeSerVisitor visitor = new JsonShapeSerVisitor(context);
+        JsonShapeSerVisitor visitor = JsonShapeSerVisitor.builder()
+                .context(context)
+                .supportJsonName(true)
+                .build();
         shapes.forEach(shape -> {
             if (generatedDocumentBodyShapeSerializers.contains(shape.toShapeId())) {
                 return;
@@ -326,7 +333,11 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         GoWriter writer = context.getWriter().get();
 
         if (documentBindings.size() != 0) {
-            outputShape.accept(new JsonShapeDeserVisitor(context, documentBindings::contains));
+            outputShape.accept(JsonShapeDeserVisitor.builder()
+                    .context(context)
+                    .memberFilter(documentBindings::contains)
+                    .supportJsonName(true)
+                    .build());
         }
 
         Set<MemberShape> payloadBindings = bindingIndex.getResponseBindings(operation, HttpBinding.Location.PAYLOAD)
@@ -385,7 +396,10 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
 
     @Override
     protected void generateDocumentBodyShapeDeserializers(GenerationContext context, Set<Shape> shapes) {
-        JsonShapeDeserVisitor visitor = new JsonShapeDeserVisitor(context);
+        JsonShapeDeserVisitor visitor = JsonShapeDeserVisitor.builder()
+                .context(context)
+                .supportJsonName(true)
+                .build();
         shapes.forEach(shape -> {
             if (generatedDocumentBodyShapeDeserializers.contains(shape.toShapeId())) {
                 return;
@@ -459,7 +473,11 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                             writer.write("return nil");
                         });
             } else {
-                shape.accept(new JsonShapeDeserVisitor(context, filterMemberShapes));
+                shape.accept(JsonShapeDeserVisitor.builder()
+                        .context(context)
+                        .memberFilter(filterMemberShapes)
+                        .supportJsonName(true)
+                        .build());
             }
         }
     }

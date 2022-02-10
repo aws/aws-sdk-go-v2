@@ -71,6 +71,7 @@ final class AwsProtocolUtils {
                             writer.openBlock("[]func($P) error{", "},", stackSymbol, () -> {
                                 writer.openBlock("func(s $P) error {", "},", stackSymbol, () -> {
                                     writer.write("s.Finalize.Clear()");
+                                    writer.write("s.Initialize.Remove(`OperationInputValidation`)");
                                     writer.write("return nil");
                                 });
                             });

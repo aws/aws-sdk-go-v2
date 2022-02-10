@@ -102,6 +102,7 @@ func TestClient_HttpPayloadWithStructure_awsRestjson1Serialize(t *testing.T) {
 				APIOptions: []func(*middleware.Stack) error{
 					func(s *middleware.Stack) error {
 						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
 						return nil
 					},
 				},
@@ -201,6 +202,7 @@ func TestClient_HttpPayloadWithStructure_awsRestjson1Deserialize(t *testing.T) {
 				APIOptions: []func(*middleware.Stack) error{
 					func(s *middleware.Stack) error {
 						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
 						return nil
 					},
 				},

@@ -1490,7 +1490,7 @@ func awsAwsjson11_deserializeDocumentComplexNestedErrorData(v **types.ComplexNes
 
 	for key, value := range shape {
 		switch key {
-		case "Fooooo":
+		case "Foo":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1982,8 +1982,8 @@ func awsAwsjson11_deserializeDocumentKitchenSink(v **types.KitchenSink, value in
 				sv.String_ = ptr.String(jtv)
 			}
 
-		case "StructWithLocationName":
-			if err := awsAwsjson11_deserializeDocumentStructWithLocationName(&sv.StructWithLocationName, value); err != nil {
+		case "StructWithJsonName":
+			if err := awsAwsjson11_deserializeDocumentStructWithJsonName(&sv.StructWithJsonName, value); err != nil {
 				return err
 			}
 
@@ -2553,7 +2553,7 @@ func awsAwsjson11_deserializeDocumentSimpleStruct(v **types.SimpleStruct, value 
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentStructWithLocationName(v **types.StructWithLocationName, value interface{}) error {
+func awsAwsjson11_deserializeDocumentStructWithJsonName(v **types.StructWithJsonName, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2566,16 +2566,16 @@ func awsAwsjson11_deserializeDocumentStructWithLocationName(v **types.StructWith
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var sv *types.StructWithLocationName
+	var sv *types.StructWithJsonName
 	if *v == nil {
-		sv = &types.StructWithLocationName{}
+		sv = &types.StructWithJsonName{}
 	} else {
 		sv = *v
 	}
 
 	for key, value := range shape {
 		switch key {
-		case "RenamedMember":
+		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3281,8 +3281,8 @@ func awsAwsjson11_deserializeOpDocumentKitchenSinkOperationOutput(v **KitchenSin
 				sv.String_ = ptr.String(jtv)
 			}
 
-		case "StructWithLocationName":
-			if err := awsAwsjson11_deserializeDocumentStructWithLocationName(&sv.StructWithLocationName, value); err != nil {
+		case "StructWithJsonName":
+			if err := awsAwsjson11_deserializeDocumentStructWithJsonName(&sv.StructWithJsonName, value); err != nil {
 				return err
 			}
 
