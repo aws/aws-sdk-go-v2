@@ -5,6 +5,7 @@ import (
 	"flag"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/config"
+	"github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 	"log"
 )
@@ -17,6 +18,11 @@ var (
 func init() {
 	flag.StringVar(&tableName, "table", "", "The `name` of the DynamoDB table to list item from.")
 	flag.StringVar(&region, "region", "", "The `region` of your AWS project.")
+}
+
+type Record struct {
+	ID   string
+	URLs []string
 }
 
 func main() {
@@ -44,10 +50,13 @@ func main() {
 	if err != nil {
 		log.Fatalf("Query API call failed: %s", err)
 	}
-	for _, i := range scan.Items {
-		for k, v := range i {
-			log.Printf("item %s: %v", k, v)
-		}
+	var records []Record
+	err = attributevalue.UnmarshalListOfMaps(scan.Items, &records)
+	if err != nil {
+		return
+	}
+	for _, record := range records {
+		log.Printf("Record : %v", record)
 	}
 
 }
