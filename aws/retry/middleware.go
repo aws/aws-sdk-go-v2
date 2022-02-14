@@ -121,6 +121,15 @@ func (r *Attempt) handleAttempt(
 		attemptResult.Err = err
 	}()
 
+	// Short circuit if this attempt never can succeed because the context is
+	// canceled. This reduces the chance of token pools being modified for
+	// attempts that will not be made
+	select {
+	case <-ctx.Done():
+		return out, attemptResult, nopRelease, ctx.Err()
+	default:
+	}
+
 	//------------------------------
 	// Get Attempt Token
 	//------------------------------
