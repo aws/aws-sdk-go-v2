@@ -7,6 +7,7 @@
     },
     "files": [
         "api_client.go",
+        "api_client_test.go",
         "api_op_DeleteObject.go",
         "api_op_DescribeObject.go",
         "api_op_GetObject.go",

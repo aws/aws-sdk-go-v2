@@ -7,6 +7,7 @@
     },
     "files": [
         "api_client.go",
+        "api_client_test.go",
         "api_op_AcceptSharedDirectory.go",
         "api_op_AddIpRoutes.go",
         "api_op_AddRegion.go",

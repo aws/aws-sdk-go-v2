@@ -77,6 +77,10 @@ const (
 	useFIPSEndpointKey = "use_fips_endpoint"
 
 	defaultsModeKey = "defaults_mode"
+
+	// Retry options
+	retryMaxAttemptsKey = "max_attempts"
+	retryModeKey        = "retry_mode"
 )
 
 // defaultSharedConfigProfile allows for swapping the default profile for testing
@@ -199,6 +203,17 @@ type SharedConfig struct {
 	//
 	// defaults_mode=standard
 	DefaultsMode aws.DefaultsMode
+
+	// Specifies the maximum number attempts an API client will call an
+	// operation that fails with a retryable error.
+	//
+	// max_attempts=3
+	RetryMaxAttempts int
+
+	// Specifies the retry model the API client will be created with.
+	//
+	// retry_mode=standard
+	RetryMode aws.RetryMode
 }
 
 func (c SharedConfig) getDefaultsMode(ctx context.Context) (value aws.DefaultsMode, ok bool, err error) {
@@ -207,6 +222,25 @@ func (c SharedConfig) getDefaultsMode(ctx context.Context) (value aws.DefaultsMo
 	}
 
 	return c.DefaultsMode, true, nil
+}
+
+// GetRetryMaxAttempts returns the maximum number of attempts an API client
+// created Retryer should attempt an operation call before failing.
+func (c SharedConfig) GetRetryMaxAttempts(ctx context.Context) (value int, ok bool, err error) {
+	if c.RetryMaxAttempts == 0 {
+		return 0, false, nil
+	}
+
+	return c.RetryMaxAttempts, true, nil
+}
+
+// GetRetryMode returns the model the API client should create its Retryer in.
+func (c SharedConfig) GetRetryMode(ctx context.Context) (value aws.RetryMode, ok bool, err error) {
+	if len(c.RetryMode) == 0 {
+		return "", false, nil
+	}
+
+	return c.RetryMode, true, nil
 }
 
 // GetS3UseARNRegion returns if the S3 service should allow ARNs to direct the region
@@ -609,6 +643,7 @@ func mergeSections(dst, src ini.Sections) error {
 			useDualStackEndpoint,
 			useFIPSEndpointKey,
 			defaultsModeKey,
+			retryModeKey,
 		}
 		for i := range stringKeys {
 			if err := mergeStringKey(&srcSection, &dstSection, sectionName, stringKeys[i]); err != nil {
@@ -616,7 +651,10 @@ func mergeSections(dst, src ini.Sections) error {
 			}
 		}
 
-		intKeys := []string{roleDurationSecondsKey}
+		intKeys := []string{
+			roleDurationSecondsKey,
+			retryMaxAttemptsKey,
+		}
 		for i := range intKeys {
 			if err := mergeIntKey(&srcSection, &dstSection, sectionName, intKeys[i]); err != nil {
 				return err
@@ -826,6 +864,13 @@ func (c *SharedConfig) setFromIniSection(profile string, section ini.Section) er
 		return fmt.Errorf("failed to load %s from shared config, %w", defaultsModeKey, err)
 	}
 
+	if err := updateInt(&c.RetryMaxAttempts, section, retryMaxAttemptsKey); err != nil {
+		return fmt.Errorf("failed to load %s from shared config, %w", retryMaxAttemptsKey, err)
+	}
+	if err := updateRetryMode(&c.RetryMode, section, retryModeKey); err != nil {
+		return fmt.Errorf("failed to load %s from shared config, %w", retryModeKey, err)
+	}
+
 	// Shared Credentials
 	creds := aws.Credentials{
 		AccessKeyID:     section.String(accessKeyIDKey),
@@ -848,6 +893,17 @@ func updateDefaultsMode(mode *aws.DefaultsMode, section ini.Section, key string)
 	value := section.String(key)
 	if ok := mode.SetFromString(value); !ok {
 		return fmt.Errorf("invalid value: %s", value)
+	}
+	return nil
+}
+
+func updateRetryMode(mode *aws.RetryMode, section ini.Section, key string) (err error) {
+	if !section.Has(key) {
+		return nil
+	}
+	value := section.String(key)
+	if *mode, err = aws.ParseRetryMode(value); err != nil {
+		return err
 	}
 	return nil
 }
@@ -1077,6 +1133,24 @@ func updateString(dst *string, section ini.Section, key string) {
 		return
 	}
 	*dst = section.String(key)
+}
+
+// updateInt will only update the dst with the value in the section key, key
+// is present in the section.
+//
+// Down casts the INI integer value from a int64 to an int, which could be
+// different bit size depending on platform.
+func updateInt(dst *int, section ini.Section, key string) error {
+	if !section.Has(key) {
+		return nil
+	}
+	if vt, _ := section.ValueType(key); vt != ini.IntegerType {
+		return fmt.Errorf("invalid value %s=%s, expect integer",
+			key, section.String(key))
+
+	}
+	*dst = int(section.Int(key))
+	return nil
 }
 
 // updateBool will only update the dst with the value in the section key, key

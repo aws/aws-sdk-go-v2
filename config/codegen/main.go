@@ -42,6 +42,8 @@ var implAsserts = map[string][]string{
 	"ec2IMDSRegionProvider":                    {loadOptionsType},
 	"defaultsModeProvider":                     {envConfigType, sharedConfigType, loadOptionsType},
 	"defaultsModeIMDSClientProvider":           {loadOptionsType},
+	"retryMaxAttemptsProvider":                 {envConfigType, sharedConfigType, loadOptionsType},
+	"retryModeProvider":                        {envConfigType, sharedConfigType, loadOptionsType},
 }
 
 var tplProviderTests = template.Must(template.New("tplProviderTests").Funcs(map[string]interface{}{

@@ -33,7 +33,8 @@ import software.amazon.smithy.utils.ListUtils;
  * Records the initial resolve DefaultsMode when the client is constructed.
  */
 public class ClientResolvedDefaultsMode implements GoIntegration {
-    private static final String RESOLVED_DEFAULTS_MODE_CONFIG_NAME = "resolvedDefaultsMode";
+    public static final String RESOLVED_DEFAULTS_MODE_CONFIG_NAME = "resolvedDefaultsMode";
+
     private static final String RESOLVE_RESOLVED_DEFAULTS_MODE = "setResolvedDefaultsMode";
 
     private static final ConfigField CONFIG_FIELD = ConfigField.builder()
@@ -41,10 +42,12 @@ public class ClientResolvedDefaultsMode implements GoIntegration {
             .type(SymbolUtils.createValueSymbolBuilder("DefaultsMode", AwsGoDependency.AWS_CORE)
                     .build())
             .documentation("""
-                           The initial DefaultsMode used when the client options were constructed. If the
-                           DefaultsMode was set to aws.AutoDefaultsMode this will store what the resolved value
-                           was at that point in time.
-                           """)
+                    The initial DefaultsMode used when the client options were constructed. If the
+                    DefaultsMode was set to aws.AutoDefaultsMode this will store what the resolved value
+                    was at that point in time.
+                            
+                    Currently does not support per operation call overrides, may in the future.
+                    """)
             .build();
 
     private void writeSetResolvedDefaultsMode(GoWriter writer) {
@@ -53,36 +56,47 @@ public class ClientResolvedDefaultsMode implements GoIntegration {
         writer.putContext("resolverName", RESOLVE_RESOLVED_DEFAULTS_MODE);
         writer.putContext("resolvedOption", RESOLVED_DEFAULTS_MODE_CONFIG_NAME);
         writer.putContext("modeType", SymbolUtils.createValueSymbolBuilder("DefaultsMode",
-                        AwsGoDependency.AWS_CORE)
+                AwsGoDependency.AWS_CORE)
                 .build());
         writer.putContext("modeOption", AddAwsConfigFields.DEFAULTS_MODE_CONFIG_NAME);
         writer.putContext("autoResolve", SymbolUtils.createValueSymbolBuilder("ResolveDefaultsModeAuto",
-                        AwsGoDependency.AWS_DEFAULTS)
+                AwsGoDependency.AWS_DEFAULTS)
                 .build());
         writer.putContext("autoMode", SymbolUtils.createValueSymbolBuilder("DefaultsModeAuto",
-                        AwsGoDependency.AWS_CORE)
+                AwsGoDependency.AWS_CORE)
                 .build());
         writer.putContext("region", "Region");
         writer.putContext("envOption", AddAwsConfigFields.RUNTIME_ENVIRONMENT_CONFIG_NAME);
 
         writer.write("""
-                     func $resolverName:L(o *Options) {
-                         if len(o.$resolvedOption:L) > 0 {
-                             return
-                         }
-                         
-                         var mode $modeType:T
-                         mode.SetFromString(string(o.$modeOption:L))
-                         
-                         if mode == $autoMode:T {
-                             mode = $autoResolve:T(o.$region:L, o.$envOption:L)
-                         }
-                         
-                         o.$resolvedOption:L = mode
-                     }
-                     """);
+                func $resolverName:L(o *Options) {
+                    if len(o.$resolvedOption:L) > 0 {
+                        return
+                    }
+                    
+                    var mode $modeType:T
+                    mode.SetFromString(string(o.$modeOption:L))
+                    
+                    if mode == $autoMode:T {
+                        mode = $autoResolve:T(o.$region:L, o.$envOption:L)
+                    }
+                    
+                    o.$resolvedOption:L = mode
+                }
+                """);
 
         writer.popState();
+    }
+
+    /**
+     * Gets the sort order of the customization from -128 to 127, with lowest
+     * executed first.
+     *
+     * @return Returns the sort order, defaults to -50.
+     */
+    @Override
+    public byte getOrder() {
+        return -50;
     }
 
     @Override

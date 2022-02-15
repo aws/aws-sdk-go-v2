@@ -8,6 +8,7 @@
     },
     "files": [
         "api_client.go",
+        "api_client_test.go",
         "api_op_CompareFaces.go",
         "api_op_CreateCollection.go",
         "api_op_CreateDataset.go",

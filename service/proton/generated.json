@@ -8,6 +8,7 @@
     },
     "files": [
         "api_client.go",
+        "api_client_test.go",
         "api_op_AcceptEnvironmentAccountConnection.go",
         "api_op_CancelEnvironmentDeployment.go",
         "api_op_CancelServiceInstanceDeployment.go",

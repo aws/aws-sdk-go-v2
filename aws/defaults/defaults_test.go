@@ -1,10 +1,11 @@
 package defaults
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"strconv"
 	"testing"
 	"time"
+
+	"github.com/aws/aws-sdk-go-v2/aws"
 
 	"github.com/google/go-cmp/cmp"
 )
@@ -19,6 +20,7 @@ func TestConfigV1(t *testing.T) {
 			Expected: Configuration{
 				ConnectTimeout:        aws.Duration(2000 * time.Millisecond),
 				TLSNegotiationTimeout: aws.Duration(2000 * time.Millisecond),
+				RetryMode:             aws.RetryModeStandard,
 			},
 		},
 		{
@@ -26,6 +28,7 @@ func TestConfigV1(t *testing.T) {
 			Expected: Configuration{
 				ConnectTimeout:        aws.Duration(1000 * time.Millisecond),
 				TLSNegotiationTimeout: aws.Duration(1000 * time.Millisecond),
+				RetryMode:             aws.RetryModeStandard,
 			},
 		},
 		{
@@ -33,6 +36,7 @@ func TestConfigV1(t *testing.T) {
 			Expected: Configuration{
 				ConnectTimeout:        aws.Duration(2800 * time.Millisecond),
 				TLSNegotiationTimeout: aws.Duration(2800 * time.Millisecond),
+				RetryMode:             aws.RetryModeStandard,
 			},
 		},
 		{
@@ -40,6 +44,7 @@ func TestConfigV1(t *testing.T) {
 			Expected: Configuration{
 				ConnectTimeout:        aws.Duration(10000 * time.Millisecond),
 				TLSNegotiationTimeout: aws.Duration(11000 * time.Millisecond),
+				RetryMode:             aws.RetryModeAdaptive,
 			},
 		},
 	}

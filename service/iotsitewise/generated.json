@@ -8,6 +8,7 @@
     },
     "files": [
         "api_client.go",
+        "api_client_test.go",
         "api_op_AssociateAssets.go",
         "api_op_AssociateTimeSeriesToAssetProperty.go",
         "api_op_BatchAssociateProjectAssets.go",

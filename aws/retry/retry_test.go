@@ -1,11 +1,14 @@
-package retry_test
+package retry
 
 import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/retry"
 )
+
+var _ aws.RetryerV2 = (*withIsErrorRetryable)(nil)
+var _ aws.RetryerV2 = (*withMaxAttempts)(nil)
+var _ aws.RetryerV2 = (*withMaxBackoffDelay)(nil)
 
 func TestAddWithErrorCodes(t *testing.T) {
 	cases := map[string]struct {
@@ -22,7 +25,7 @@ func TestAddWithErrorCodes(t *testing.T) {
 		},
 	}
 
-	r := retry.AddWithErrorCodes(aws.NopRetryer{}, "Error1", "Error2")
+	r := AddWithErrorCodes(aws.NopRetryer{}, "Error1", "Error2")
 
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {

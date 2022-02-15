@@ -7,6 +7,7 @@
     },
     "files": [
         "api_client.go",
+        "api_client_test.go",
         "api_op_AssociateFirewallRuleGroup.go",
         "api_op_AssociateResolverEndpointIpAddress.go",
         "api_op_AssociateResolverQueryLogConfig.go",

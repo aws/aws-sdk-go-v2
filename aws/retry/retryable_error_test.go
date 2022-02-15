@@ -1,4 +1,4 @@
-package retry_test
+package retry
 
 import (
 	"fmt"
@@ -7,7 +7,6 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/retry"
 )
 
 type mockTemporaryError struct{ b bool }
@@ -141,7 +140,7 @@ func TestRetryConnectionErrors(t *testing.T) {
 
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			var r retry.RetryableConnectionError
+			var r RetryableConnectionError
 
 			retryable := r.IsErrorRetryable(c.Err)
 			if e, a := c.Retryable, retryable; e != a {
@@ -173,7 +172,7 @@ func TestRetryHTTPStatusCodes(t *testing.T) {
 		},
 	}
 
-	r := retry.RetryableHTTPStatusCode{Codes: map[int]struct{}{
+	r := RetryableHTTPStatusCode{Codes: map[int]struct{}{
 		500: {},
 		502: {},
 	}}
@@ -193,13 +192,13 @@ func TestRetryErrorCodes(t *testing.T) {
 		Expect aws.Ternary
 	}{
 		"retryable code": {
-			Err: &retry.MaxAttemptsError{
+			Err: &MaxAttemptsError{
 				Err: &mockErrorCodeError{code: "ErrorCode1"},
 			},
 			Expect: aws.TrueTernary,
 		},
 		"not retryable code": {
-			Err: &retry.MaxAttemptsError{
+			Err: &MaxAttemptsError{
 				Err: &mockErrorCodeError{code: "SomeErroCode"},
 			},
 			Expect: aws.UnknownTernary,
@@ -210,7 +209,7 @@ func TestRetryErrorCodes(t *testing.T) {
 		},
 	}
 
-	r := retry.RetryableErrorCode{Codes: map[string]struct{}{
+	r := RetryableErrorCode{Codes: map[string]struct{}{
 		"ErrorCode1": {},
 		"ErrorCode2": {},
 	}}
@@ -251,9 +250,9 @@ func TestCanceledError(t *testing.T) {
 		},
 	}
 
-	r := retry.IsErrorRetryables{
-		retry.NoRetryCanceledError{},
-		retry.RetryableError{},
+	r := IsErrorRetryables{
+		NoRetryCanceledError{},
+		RetryableError{},
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {

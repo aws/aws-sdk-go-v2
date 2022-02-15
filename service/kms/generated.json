@@ -7,6 +7,7 @@
     },
     "files": [
         "api_client.go",
+        "api_client_test.go",
         "api_op_CancelKeyDeletion.go",
         "api_op_ConnectCustomKeyStore.go",
         "api_op_CreateAlias.go",

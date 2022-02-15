@@ -7,6 +7,7 @@
     },
     "files": [
         "api_client.go",
+        "api_client_test.go",
         "api_op_AnalyzeDocument.go",
         "api_op_AnalyzeExpense.go",
         "api_op_AnalyzeID.go",

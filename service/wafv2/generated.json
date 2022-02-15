@@ -7,6 +7,7 @@
     },
     "files": [
         "api_client.go",
+        "api_client_test.go",
         "api_op_AssociateWebACL.go",
         "api_op_CheckCapacity.go",
         "api_op_CreateIPSet.go",

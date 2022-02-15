@@ -26,6 +26,7 @@ import java.util.logging.Logger;
 
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.codegen.core.SymbolProvider;
+import software.amazon.smithy.aws.go.codegen.ClientResolvedDefaultsMode;
 import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoWriter;
@@ -50,6 +51,8 @@ public class AddAwsConfigFields implements GoIntegration {
     public static final String ENDPOINT_RESOLVER_CONFIG_NAME = "EndpointResolver";
     public static final String AWS_ENDPOINT_RESOLVER_WITH_OPTIONS = "EndpointResolverWithOptions";
     public static final String HTTP_CLIENT_CONFIG_NAME = "HTTPClient";
+    public static final String RETRY_MAX_ATTEMPTS_CONFIG_NAME = "RetryMaxAttempts";
+    public static final String RETRY_MODE_CONFIG_NAME = "RetryMode";
     public static final String RETRYER_CONFIG_NAME = "Retryer";
     public static final String API_OPTIONS_CONFIG_NAME = "APIOptions";
     public static final String LOGGER_CONFIG_NAME = "Logger";
@@ -60,7 +63,11 @@ public class AddAwsConfigFields implements GoIntegration {
     private static final String RESOLVE_HTTP_CLIENT = "resolveHTTPClient";
     private static final String RESOLVE_RETRYER = "resolveRetryer";
     private static final String RESOLVE_AWS_CONFIG_ENDPOINT_RESOLVER = "resolveAWSEndpointResolver";
+    private static final String RESOLVE_AWS_CONFIG_RETRY_MAX_ATTEMPTS = "resolveAWSRetryMaxAttempts";
+    private static final String RESOLVE_AWS_CONFIG_RETRY_MODE = "resolveAWSRetryMode";
     private static final String RESOLVE_AWS_CONFIG_RETRYER_PROVIDER = "resolveAWSRetryerProvider";
+
+    private static final String FINALIZE_RETRY_MAX_ATTEMPTS_OPTIONS = "finalizeRetryMaxAttemptOptions";
 
     private static final List<AwsConfigField> AWS_CONFIG_FIELDS = ListUtils.of(
             AwsConfigField.builder()
@@ -72,31 +79,77 @@ public class AddAwsConfigFields implements GoIntegration {
                     .name(DEFAULTS_MODE_CONFIG_NAME)
                     .type(getAwsCoreSymbol("DefaultsMode"))
                     .documentation("""
-                                   The configuration DefaultsMode that the SDK should use when constructing
-                                   the clients initial default settings.
-                                   """)
+                            The configuration DefaultsMode that the SDK should use when constructing
+                            the clients initial default settings.
+                            """)
                     .build(),
             AwsConfigField.builder()
                     .name(RUNTIME_ENVIRONMENT_CONFIG_NAME)
                     .type(getAwsCoreSymbol("RuntimeEnvironment"))
                     .documentation("""
-                                   The RuntimeEnvironment configuration, only populated if the DefaultsMode is set to
-                                   AutoDefaultsMode and is initialized using `config.LoadDefaultConfig`. You should not
-                                   populate this structure programmatically, or rely on the values here within your
-                                   applications.
-                                   """)
+                            The RuntimeEnvironment configuration, only populated if the DefaultsMode is set to
+                            AutoDefaultsMode and is initialized using `config.LoadDefaultConfig`. You should not
+                            populate this structure programmatically, or rely on the values here within your
+                            applications.
+                            """)
                     .build(),
             AwsConfigField.builder()
                     .name(RETRYER_CONFIG_NAME)
                     .type(getAwsCoreSymbol("Retryer"))
-                    .documentation("Retryer guides how HTTP requests should be retried in case of\n"
-                                   + "recoverable failures. When nil the API client will use a default\n"
-                                   + "retryer.")
+                    .documentation("""
+                            Retryer guides how HTTP requests should be retried in case of recoverable failures.
+                            When nil the API client will use a default retryer. The kind of default retry created
+                            by the API client can be changed with the RetryMode option.
+                            """)
                     .addConfigFieldResolvers(getClientInitializationResolver(
                             SymbolUtils.createValueSymbolBuilder(RESOLVE_RETRYER).build())
                             .build()
                     )
                     .awsResolveFunction(SymbolUtils.createValueSymbolBuilder(RESOLVE_AWS_CONFIG_RETRYER_PROVIDER)
+                            .build())
+                    .build(),
+            AwsConfigField.builder()
+                    .name(RETRY_MAX_ATTEMPTS_CONFIG_NAME)
+                    .type(getUniversalSymbol("int"))
+                    .documentation("""
+                            RetryMaxAttempts specifies the maximum number attempts an API client
+                            will call an operation that fails with a retryable error. A value of 0 is ignored,
+                            and will not be used to configure the API client created default retryer, or modify
+                            per operation call's retry max attempts.
+
+                            When creating a new API Clients this member will only be used if the
+                            Retryer Options member is nil. This value will be ignored if
+                            Retryer is not nil.
+                            
+                            If specified in an operation call's functional options with a value that
+                            is different than the constructed client's Options, the Client's Retryer
+                            will be wrapped to use the operation's specific RetryMaxAttempts value.
+                            """)
+                    .awsResolveFunction(SymbolUtils.createValueSymbolBuilder(RESOLVE_AWS_CONFIG_RETRY_MAX_ATTEMPTS)
+                            .build())
+                     .addConfigFieldResolvers(ConfigFieldResolver.builder()
+                             .location(ConfigFieldResolver.Location.OPERATION)
+                             .target(ConfigFieldResolver.Target.FINALIZATION)
+                             .withClientInput(true)
+                             .resolver(SymbolUtils.createValueSymbolBuilder(
+                                     FINALIZE_RETRY_MAX_ATTEMPTS_OPTIONS).build())
+                             .build())
+                    .build(),
+
+            AwsConfigField.builder()
+                    .name(RETRY_MODE_CONFIG_NAME)
+                    .type(getAwsCoreSymbol("RetryMode"))
+                    .documentation("""
+                            RetryMode specifies the retry mode the API client will be created with,
+                            if Retryer option is not also specified.
+
+                            When creating a new API Clients this member will only be used if the
+                            Retryer Options member is nil. This value will be ignored if
+                            Retryer is not nil.
+                            
+                            Currently does not support per operation call overrides, may in the future.
+                            """)
+                    .awsResolveFunction(SymbolUtils.createValueSymbolBuilder(RESOLVE_AWS_CONFIG_RETRY_MODE)
                             .build())
                     .build(),
             AwsConfigField.builder()
@@ -183,6 +236,9 @@ public class AddAwsConfigFields implements GoIntegration {
             writeAwsConfigConstructor(model, serviceShape, w);
             writeAwsDefaultResolvers(w);
         });
+        goDelegator.useShapeTestWriter(serviceShape, w -> {
+            writerAwsDefaultResolversTests(w);
+        });
     }
 
     private static ConfigFieldResolver.Builder getClientInitializationResolver(Symbol resolver) {
@@ -195,43 +251,282 @@ public class AddAwsConfigFields implements GoIntegration {
     private void writeAwsDefaultResolvers(GoWriter writer) {
         writeHttpClientResolver(writer);
         writeRetryerResolvers(writer);
+        writeRetryMaxAttemptsFinalizeResolver(writer);
         writeAwsConfigEndpointResolver(writer);
     }
 
+    private void writerAwsDefaultResolversTests(GoWriter writer) {
+        writeRetryResolverTests(writer);
+    }
+
     private void writeRetryerResolvers(GoWriter writer) {
-        writer.openBlock("func $L(o *Options) {", "}", RESOLVE_RETRYER, () -> {
-            writer.openBlock("if o.$L != nil {", "}", RETRYER_CONFIG_NAME, () -> writer.write("return"));
-            writer.write("o.$L = $T()", RETRYER_CONFIG_NAME, SymbolUtils.createValueSymbolBuilder("NewStandard",
-                    AwsGoDependency.AWS_RETRY).build());
-        });
-        writer.write("");
-        writer.openBlock("func $L(cfg aws.Config, o *Options) {", "}", RESOLVE_AWS_CONFIG_RETRYER_PROVIDER, () -> {
-            writer.openBlock("if cfg.$L == nil {", "}", RETRYER_CONFIG_NAME, () -> writer.write("return"));
-            writer.write("o.$L = cfg.$L()", RETRYER_CONFIG_NAME, RETRYER_CONFIG_NAME);
-        });
-        writer.write("");
+        writer.pushState();
+
+        writer.putContext("resolvedDefaultsMode",
+                ClientResolvedDefaultsMode.RESOLVED_DEFAULTS_MODE_CONFIG_NAME);
+        writer.putContext("getConfig", SymbolUtils.createValueSymbolBuilder("GetModeConfiguration",
+                AwsGoDependency.AWS_DEFAULTS).build());
+
+        writer.putContext("resolverName", RESOLVE_RETRYER);
+        writer.putContext("retryerOption", RETRYER_CONFIG_NAME);
+        writer.putContext("retryModeOption", RETRY_MODE_CONFIG_NAME);
+        writer.putContext("retryMaxAttemptsOption", RETRY_MAX_ATTEMPTS_CONFIG_NAME);
+
+        writer.putContext("retryerResolveAwsConfig", RESOLVE_AWS_CONFIG_RETRYER_PROVIDER);
+        writer.putContext("retryModeResolveAwsConfig", RESOLVE_AWS_CONFIG_RETRY_MODE);
+        writer.putContext("retryMaxAttemptsResolveAwsConfig", RESOLVE_AWS_CONFIG_RETRY_MAX_ATTEMPTS);
+
+        writer.putContext("retryModeAdaptive", getAwsCoreSymbol("RetryModeAdaptive"));
+        writer.putContext("retryModeStandard", getAwsCoreSymbol("RetryModeStandard"));
+
+        writer.putContext("newStandard", SymbolUtils.createValueSymbolBuilder("NewStandard",
+                AwsGoDependency.AWS_RETRY).build());
+        writer.putContext("standardOptions", SymbolUtils.createPointableSymbolBuilder("StandardOptions",
+                AwsGoDependency.AWS_RETRY).build());
+        writer.putContext("newAdaptiveMode", SymbolUtils.createPointableSymbolBuilder("NewAdaptiveMode",
+                AwsGoDependency.AWS_RETRY).build());
+        writer.putContext("adaptiveModeOptions", SymbolUtils.createValueSymbolBuilder("AdaptiveModeOptions",
+                AwsGoDependency.AWS_RETRY).build());
+
+        writer.write("""
+                func $resolverName:L(o *Options) {
+                    if o.$retryerOption:L != nil {
+                        return
+                    }
+
+                    if len(o.$retryModeOption:L) == 0 {
+                        modeConfig, err := $getConfig:T(o.$resolvedDefaultsMode:L)
+                        if err == nil {
+                            o.$retryModeOption:L = modeConfig.RetryMode
+                        }
+                    }
+                    if len(o.$retryModeOption:L) == 0 {
+                        o.$retryModeOption:L = $retryModeStandard:T
+                    }
+
+                    var standardOptions []func(*$standardOptions:T)
+                    if v := o.$retryMaxAttemptsOption:L; v != 0 {
+                        standardOptions = append(standardOptions, func(so *$standardOptions:T) {
+                            so.MaxAttempts = v
+                        })
+                    }
+
+                    switch o.$retryModeOption:L {
+                    case $retryModeAdaptive:T:
+                        var adaptiveOptions []func(*$adaptiveModeOptions:T)
+                        if len(standardOptions) != 0 {
+                            adaptiveOptions = append(adaptiveOptions, func(ao *$adaptiveModeOptions:T) {
+                                ao.StandardOptions = append(ao.StandardOptions, standardOptions...)
+                            })
+                        }
+                        o.$retryerOption:L = $newAdaptiveMode:T(adaptiveOptions...)
+
+                    default:
+                        o.$retryerOption:L = $newStandard:T(standardOptions...)
+                    }
+                }
+
+                func $retryerResolveAwsConfig:L(cfg aws.Config, o *Options) {
+                    if cfg.$retryerOption:L == nil {
+                        return
+                    }
+                    o.$retryerOption:L = cfg.$retryerOption:L()
+                }
+
+                func $retryModeResolveAwsConfig:L(cfg aws.Config, o *Options) {
+                    if len(cfg.$retryModeOption:L) == 0 {
+                        return
+                    }
+                    o.$retryModeOption:L = cfg.$retryModeOption:L
+                }
+                func $retryMaxAttemptsResolveAwsConfig:L(cfg aws.Config, o *Options) {
+                    if cfg.$retryMaxAttemptsOption:L == 0 {
+                        return
+                    }
+                    o.$retryMaxAttemptsOption:L = cfg.$retryMaxAttemptsOption:L
+                }
+                """);
+
+        writer.popState();
+    }
+
+    private void writeRetryMaxAttemptsFinalizeResolver(GoWriter writer) {
+        writer.pushState();
+
+        writer.putContext("finalizeResolveName", FINALIZE_RETRY_MAX_ATTEMPTS_OPTIONS);
+        writer.putContext("withMaxAttempts", SymbolUtils.createValueSymbolBuilder("AddWithMaxAttempts",
+                AwsGoDependency.AWS_RETRY).build());
+
+        writer.write("""
+                func $finalizeResolveName:L(o *Options, client Client) {
+                    if v := o.RetryMaxAttempts; v == 0 || v == client.options.RetryMaxAttempts {
+                        return
+                    }
+                    
+                    o.Retryer = $withMaxAttempts:T(o.Retryer, o.RetryMaxAttempts)
+                }
+                """);
+
+        writer.popState();
+    }
+
+    private void writeRetryResolverTests(GoWriter writer) {
+        writer.pushState();
+
+        writer.putContext("retryModeOptions", "Client_resolveRetryOptions");
+        writer.putContext("retryerType", getAwsCoreSymbol("Retryer"));
+
+        writer.putContext("retryModeType", getAwsCoreSymbol("RetryMode"));
+        writer.putContext("retryModeStandard", getAwsCoreSymbol("RetryModeStandard"));
+        writer.putContext("retryModeAdaptive", getAwsCoreSymbol("RetryModeAdaptive"));
+
+        writer.putContext("defaultsModeType", getAwsCoreSymbol("DefaultsMode"));
+        writer.putContext("defaultsModeStandard", getAwsCoreSymbol("DefaultsModeStandard"));
+
+        writer.putContext("ctxBackground", SymbolUtils.createValueSymbolBuilder("Background",
+                SmithyGoDependency.CONTEXT).build());
+        writer.putContext("stack", SymbolUtils.createValueSymbolBuilder("Stack",
+                SmithyGoDependency.SMITHY_MIDDLEWARE).build());
+
+        writer.putContext("smithyClientDoFunc", SymbolUtils.createValueSymbolBuilder("ClientDoFunc",
+                SmithyGoDependency.SMITHY_HTTP_TRANSPORT).build());
+        writer.putContext("httpRequest", SymbolUtils.createValueSymbolBuilder("Request",
+                SmithyGoDependency.NET_HTTP).build());
+        writer.putContext("httpResponse", SymbolUtils.createValueSymbolBuilder("Response",
+                SmithyGoDependency.NET_HTTP).build());
+        writer.putContext("httpHeader", SymbolUtils.createValueSymbolBuilder("Header",
+                SmithyGoDependency.NET_HTTP).build());
+        writer.putContext("newStringReader", SymbolUtils.createValueSymbolBuilder("NewReader",
+                SmithyGoDependency.STRINGS).build());
+        writer.putContext("nopCloser", SymbolUtils.createValueSymbolBuilder("NopCloser",
+                SmithyGoDependency.IOUTIL).build());
+
+
+        writer.addUseImports(SmithyGoDependency.TESTING);
+        writer.write("""
+                func Test$retryModeOptions:L(t *testing.T) {
+                    nopClient := $smithyClientDoFunc:T(func(_ *$httpRequest:T) (*$httpResponse:T, error) {
+                        return &$httpResponse:T{
+                            StatusCode: 200,
+                            Header: $httpHeader:T{},
+                            Body: $nopCloser:T($newStringReader:T("")),
+                        }, nil
+                    })
+                    
+                    cases := map[string]struct{
+                        defaultsMode       $defaultsModeType:T
+                        retryer            $retryerType:T
+                        retryMaxAttempts   int
+                        opRetryMaxAttempts *int
+                        retryMode          $retryModeType:T
+                        expectClientRetryMode   $retryModeType:T
+                        expectClientMaxAttempts int
+                        expectOpMaxAttempts     int
+                    }{
+                        "defaults": {
+                            defaultsMode: $defaultsModeStandard:T,
+                            expectClientRetryMode: $retryModeStandard:T,
+                            expectClientMaxAttempts: 3,
+                            expectOpMaxAttempts: 3,
+                        },
+                        "custom default retry": {
+                            retryMode: $retryModeAdaptive:T,
+                            retryMaxAttempts: 10,
+                            expectClientRetryMode: $retryModeAdaptive:T,
+                            expectClientMaxAttempts: 10,
+                            expectOpMaxAttempts: 10,
+                        },
+                        "custom op max attempts": {
+                            retryMode: $retryModeAdaptive:T,
+                            retryMaxAttempts: 10,
+                            opRetryMaxAttempts: aws.Int(2),
+                            expectClientRetryMode: $retryModeAdaptive:T,
+                            expectClientMaxAttempts: 10,
+                            expectOpMaxAttempts: 2,
+                        },
+                        "custom op no change max attempts": {
+                            retryMode: $retryModeAdaptive:T,
+                            retryMaxAttempts: 10,
+                            opRetryMaxAttempts: aws.Int(10),
+                            expectClientRetryMode: $retryModeAdaptive:T,
+                            expectClientMaxAttempts: 10,
+                            expectOpMaxAttempts: 10,
+                        },
+                        "custom op 0 max attempts": {
+                            retryMode: $retryModeAdaptive:T,
+                            retryMaxAttempts: 10,
+                            opRetryMaxAttempts: aws.Int(0),
+                            expectClientRetryMode: $retryModeAdaptive:T,
+                            expectClientMaxAttempts: 10,
+                            expectOpMaxAttempts: 10,
+                        },
+                    }
+
+                    for name, c := range cases {
+                        t.Run(name, func(t *testing.T) {
+                            client := NewFromConfig(aws.Config{
+                                DefaultsMode:     c.defaultsMode,
+                                Retryer:          func() func() $retryerType:T {
+                                    if c.retryer == nil { return nil }
+
+                                    return func() $retryerType:T { return c.retryer }
+                                }(),
+                                HTTPClient: nopClient,
+                                RetryMaxAttempts: c.retryMaxAttempts,
+                                RetryMode:        c.retryMode,
+                            })
+
+                            if e, a := c.expectClientRetryMode, client.options.RetryMode; e != a {
+                                t.Errorf("expect %v retry mode, got %v", e, a)
+                            }
+                            if e, a := c.expectClientMaxAttempts, client.options.Retryer.MaxAttempts(); e != a {
+                                t.Errorf("expect %v max attempts, got %v", e, a)
+                            }
+
+                            _, _, err := client.invokeOperation($ctxBackground:T(), "mockOperation", struct{}{},
+                                []func(*Options){
+                                    func(o *Options) {
+                                        if c.opRetryMaxAttempts == nil {
+                                            return
+                                        }
+                                        o.RetryMaxAttempts = *c.opRetryMaxAttempts
+                                    },
+                                },
+                                func(s *$stack:T, o Options) error {
+                                    s.Initialize.Clear()
+                                    s.Serialize.Clear()
+                                    s.Build.Clear()
+                                    s.Finalize.Clear()
+                                    s.Deserialize.Clear()
+
+                                    if e, a := c.expectOpMaxAttempts, o.Retryer.MaxAttempts(); e != a {
+                                        t.Errorf("expect %v op max attempts, got %v", e, a)
+                                    }
+                                    return nil
+                                })
+                            if err != nil {
+                                t.Fatalf("expect no operation error, got %v", err)
+                            }
+                        })
+                    }
+                }
+                """);
+
+        writer.popState();
     }
 
     private void writeHttpClientResolver(GoWriter writer) {
         writer.pushState();
 
         writer.putContext("resolverName", RESOLVE_HTTP_CLIENT);
+        writer.putContext("resolvedDefaultsMode", ClientResolvedDefaultsMode.RESOLVED_DEFAULTS_MODE_CONFIG_NAME);
         writer.putContext("optionName", HTTP_CLIENT_CONFIG_NAME);
         writer.putContext("newClient", SymbolUtils.createValueSymbolBuilder("NewBuildableClient",
                 AwsGoDependency.AWS_HTTP_TRANSPORT).build());
         writer.putContext("buildableType", SymbolUtils.createPointableSymbolBuilder("BuildableClient",
                 AwsGoDependency.AWS_HTTP_TRANSPORT).build());
-        writer.putContext("modeType", SymbolUtils.createValueSymbolBuilder("DefaultsMode",
-                AwsGoDependency.AWS_CORE).build());
-        writer.putContext("modeOption", DEFAULTS_MODE_CONFIG_NAME);
-        writer.putContext("runtimeOption", RUNTIME_ENVIRONMENT_CONFIG_NAME);
-        writer.putContext("autoModeType", SymbolUtils.createValueSymbolBuilder("DefaultsModeAuto",
-                AwsGoDependency.AWS_CORE).build());
         writer.putContext("legacyModeType", SymbolUtils.createValueSymbolBuilder("DefaultsModeLegacy",
                 AwsGoDependency.AWS_CORE).build());
-        writer.putContext("regionOption", REGION_CONFIG_NAME);
-        writer.putContext("resolveAuto", SymbolUtils.createValueSymbolBuilder("ResolveDefaultsModeAuto",
-                AwsGoDependency.AWS_DEFAULTS).build());
         writer.putContext("getConfig", SymbolUtils.createValueSymbolBuilder("GetModeConfiguration",
                 AwsGoDependency.AWS_DEFAULTS).build());
         writer.putContext("dialer", SymbolUtils.createPointableSymbolBuilder("Dialer",
@@ -242,47 +537,37 @@ public class AddAwsConfigFields implements GoIntegration {
                 SmithyGoDependency.FMT).build());
 
         writer.write("""
-                     func $resolverName:L(o *Options) {
-                         var buildable $buildableType:P
-                         
-                         if o.$optionName:L != nil {
-                             var ok bool
-                             buildable, ok = o.$optionName:L.($buildableType:P)
-                             if !ok {
-                                 return
-                             }
-                         } else {
-                             buildable = $newClient:T()
-                         }
-                         
-                         var mode $modeType:T
-                         if ok := mode.SetFromString(string(o.$modeOption:L)); !ok {
-                             panic($errorf:T("unsupported defaults mode constant %v", mode))
-                         }
-                         
-                         if mode == $autoModeType:T {
-                             mode = $resolveAuto:T(o.$regionOption:L, o.$runtimeOption:L)
-                         }
-                         
-                         if mode != $legacyModeType:T {
-                             modeConfig, _ := $getConfig:T(mode)
-                             
-                             buildable = buildable.WithDialerOptions(func(dialer $dialer:P) {
-                                 if dialerTimeout, ok := modeConfig.GetConnectTimeout(); ok {
-                                     dialer.Timeout = dialerTimeout
-                                 }
-                             })
-                             
-                             buildable = buildable.WithTransportOptions(func(transport $transport:P) {
-                                 if tlsHandshakeTimeout, ok := modeConfig.GetTLSNegotiationTimeout(); ok {
-                                     transport.TLSHandshakeTimeout = tlsHandshakeTimeout
-                                 }
-                             })
-                         }
-                         
-                         o.$optionName:L = buildable
-                     }
-                     """);
+                func $resolverName:L(o *Options) {
+                    var buildable $buildableType:P
+
+                    if o.$optionName:L != nil {
+                        var ok bool
+                        buildable, ok = o.$optionName:L.($buildableType:P)
+                        if !ok {
+                            return
+                        }
+                    } else {
+                        buildable = $newClient:T()
+                    }
+
+                    modeConfig, err := $getConfig:T(o.$resolvedDefaultsMode:L)
+                    if err == nil {
+                        buildable = buildable.WithDialerOptions(func(dialer $dialer:P) {
+                            if dialerTimeout, ok := modeConfig.GetConnectTimeout(); ok {
+                                dialer.Timeout = dialerTimeout
+                            }
+                        })
+
+                        buildable = buildable.WithTransportOptions(func(transport $transport:P) {
+                            if tlsHandshakeTimeout, ok := modeConfig.GetTLSNegotiationTimeout(); ok {
+                                transport.TLSHandshakeTimeout = tlsHandshakeTimeout
+                            }
+                        })
+                    }
+
+                    o.$optionName:L = buildable
+                }
+                """);
 
         writer.popState();
     }
@@ -296,13 +581,13 @@ public class AddAwsConfigFields implements GoIntegration {
         writer.putContext("awsResolverWithOptions", AWS_ENDPOINT_RESOLVER_WITH_OPTIONS);
         writer.putContext("newResolver", EndpointGenerator.RESOLVER_CONSTRUCTOR_NAME);
         writer.write("""
-                     func $resolverName:L(cfg aws.Config, o *Options) {
-                         if cfg.$awsResolver:L == nil && cfg.$awsResolverWithOptions:L == nil {
-                             return
-                         }
-                         o.$clientOption:L = $wrapperHelper:L(cfg.$awsResolver:L, cfg.$awsResolverWithOptions:L, $newResolver:L())
-                     }
-                     """);
+                func $resolverName:L(cfg aws.Config, o *Options) {
+                    if cfg.$awsResolver:L == nil && cfg.$awsResolverWithOptions:L == nil {
+                        return
+                    }
+                    o.$clientOption:L = $wrapperHelper:L(cfg.$awsResolver:L, cfg.$awsResolverWithOptions:L, $newResolver:L())
+                }
+                """);
         writer.popState();
     }
 

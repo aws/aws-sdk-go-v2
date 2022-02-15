@@ -7,6 +7,7 @@
     },
     "files": [
         "api_client.go",
+        "api_client_test.go",
         "api_op_CompleteSnapshot.go",
         "api_op_GetSnapshotBlock.go",
         "api_op_ListChangedBlocks.go",

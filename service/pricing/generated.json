@@ -7,6 +7,7 @@
     },
     "files": [
         "api_client.go",
+        "api_client_test.go",
         "api_op_DescribeServices.go",
         "api_op_GetAttributeValues.go",
         "api_op_GetProducts.go",

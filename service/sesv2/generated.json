@@ -7,6 +7,7 @@
     },
     "files": [
         "api_client.go",
+        "api_client_test.go",
         "api_op_CreateConfigurationSet.go",
         "api_op_CreateConfigurationSetEventDestination.go",
         "api_op_CreateContact.go",

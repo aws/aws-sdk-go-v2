@@ -7,6 +7,7 @@
     },
     "files": [
         "api_client.go",
+        "api_client_test.go",
         "api_op_CreateAlarmModel.go",
         "api_op_CreateDetectorModel.go",
         "api_op_CreateInput.go",

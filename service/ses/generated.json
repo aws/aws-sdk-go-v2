@@ -8,6 +8,7 @@
     },
     "files": [
         "api_client.go",
+        "api_client_test.go",
         "api_op_CloneReceiptRuleSet.go",
         "api_op_CreateConfigurationSet.go",
         "api_op_CreateConfigurationSetEventDestination.go",

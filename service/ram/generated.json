@@ -7,6 +7,7 @@
     },
     "files": [
         "api_client.go",
+        "api_client_test.go",
         "api_op_AcceptResourceShareInvitation.go",
         "api_op_AssociateResourceShare.go",
         "api_op_AssociateResourceSharePermission.go",

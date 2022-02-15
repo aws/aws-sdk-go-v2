@@ -7,6 +7,7 @@
     },
     "files": [
         "api_client.go",
+        "api_client_test.go",
         "api_op_AllocateStaticIp.go",
         "api_op_AttachCertificateToDistribution.go",
         "api_op_AttachDisk.go",

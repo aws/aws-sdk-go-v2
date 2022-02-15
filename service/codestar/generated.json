@@ -7,6 +7,7 @@
     },
     "files": [
         "api_client.go",
+        "api_client_test.go",
         "api_op_AssociateTeamMember.go",
         "api_op_CreateProject.go",
         "api_op_CreateUserProfile.go",
