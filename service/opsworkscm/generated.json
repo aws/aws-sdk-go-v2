@@ -8,6 +8,7 @@
     },
     "files": [
         "api_client.go",
+        "api_client_test.go",
         "api_op_AssociateNode.go",
         "api_op_CreateBackup.go",
         "api_op_CreateServer.go",

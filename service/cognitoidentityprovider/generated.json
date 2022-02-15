@@ -7,6 +7,7 @@
     },
     "files": [
         "api_client.go",
+        "api_client_test.go",
         "api_op_AddCustomAttributes.go",
         "api_op_AdminAddUserToGroup.go",
         "api_op_AdminConfirmSignUp.go",

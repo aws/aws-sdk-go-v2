@@ -7,6 +7,7 @@
     },
     "files": [
         "api_client.go",
+        "api_client_test.go",
         "api_op_AddNotificationChannel.go",
         "api_op_DescribeAccountHealth.go",
         "api_op_DescribeAccountOverview.go",

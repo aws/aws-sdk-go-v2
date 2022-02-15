@@ -8,6 +8,7 @@
     },
     "files": [
         "api_client.go",
+        "api_client_test.go",
         "api_op_AssociateAlias.go",
         "api_op_CreateCachePolicy.go",
         "api_op_CreateCloudFrontOriginAccessIdentity.go",

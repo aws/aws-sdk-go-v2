@@ -7,6 +7,7 @@
     },
     "files": [
         "api_client.go",
+        "api_client_test.go",
         "api_op_AssociateAwsAccountWithPartnerAccount.go",
         "api_op_AssociateMulticastGroupWithFuotaTask.go",
         "api_op_AssociateWirelessDeviceWithFuotaTask.go",

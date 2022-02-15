@@ -8,6 +8,7 @@
     },
     "files": [
         "api_client.go",
+        "api_client_test.go",
         "api_op_AttachInstances.go",
         "api_op_AttachLoadBalancerTargetGroups.go",
         "api_op_AttachLoadBalancers.go",

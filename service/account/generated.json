@@ -7,6 +7,7 @@
     },
     "files": [
         "api_client.go",
+        "api_client_test.go",
         "api_op_DeleteAlternateContact.go",
         "api_op_GetAlternateContact.go",
         "api_op_PutAlternateContact.go",

@@ -8,6 +8,7 @@
     },
     "files": [
         "api_client.go",
+        "api_client_test.go",
         "api_op_CreateDiscoverer.go",
         "api_op_CreateRegistry.go",
         "api_op_CreateSchema.go",

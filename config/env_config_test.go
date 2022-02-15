@@ -393,6 +393,36 @@ func TestNewEnvConfig(t *testing.T) {
 			},
 			WantErr: true,
 		},
+		34: {
+			Env: map[string]string{
+				"AWS_MAX_ATTEMPTS": "2",
+			},
+			Config: EnvConfig{
+				RetryMaxAttempts: 2,
+			},
+		},
+		35: {
+			Env: map[string]string{
+				"AWS_MAX_ATTEMPTS": "invalid",
+			},
+			Config:  EnvConfig{},
+			WantErr: true,
+		},
+		36: {
+			Env: map[string]string{
+				"AWS_RETRY_MODE": "adaptive",
+			},
+			Config: EnvConfig{
+				RetryMode: aws.RetryModeAdaptive,
+			},
+		},
+		37: {
+			Env: map[string]string{
+				"AWS_RETRY_MODE": "invalid",
+			},
+			Config:  EnvConfig{},
+			WantErr: true,
+		},
 	}
 
 	for i, c := range cases {

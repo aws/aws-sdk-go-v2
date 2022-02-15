@@ -7,6 +7,7 @@
     },
     "files": [
         "api_client.go",
+        "api_client_test.go",
         "api_op_DescribeGroup.go",
         "api_op_DescribeUser.go",
         "api_op_ListGroups.go",

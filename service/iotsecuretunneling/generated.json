@@ -7,6 +7,7 @@
     },
     "files": [
         "api_client.go",
+        "api_client_test.go",
         "api_op_CloseTunnel.go",
         "api_op_DescribeTunnel.go",
         "api_op_ListTagsForResource.go",

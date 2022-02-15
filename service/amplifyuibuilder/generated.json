@@ -7,6 +7,7 @@
     },
     "files": [
         "api_client.go",
+        "api_client_test.go",
         "api_op_CreateComponent.go",
         "api_op_CreateTheme.go",
         "api_op_DeleteComponent.go",

@@ -7,6 +7,7 @@
     },
     "files": [
         "api_client.go",
+        "api_client_test.go",
         "api_op_AddCustomRoutingEndpoints.go",
         "api_op_AdvertiseByoipCidr.go",
         "api_op_AllowCustomRoutingTraffic.go",

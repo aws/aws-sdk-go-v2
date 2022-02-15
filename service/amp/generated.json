@@ -8,6 +8,7 @@
     },
     "files": [
         "api_client.go",
+        "api_client_test.go",
         "api_op_CreateAlertManagerDefinition.go",
         "api_op_CreateRuleGroupsNamespace.go",
         "api_op_CreateWorkspace.go",

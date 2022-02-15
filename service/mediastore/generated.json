@@ -7,6 +7,7 @@
     },
     "files": [
         "api_client.go",
+        "api_client_test.go",
         "api_op_CreateContainer.go",
         "api_op_DeleteContainer.go",
         "api_op_DeleteContainerPolicy.go",

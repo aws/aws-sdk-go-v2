@@ -8,6 +8,7 @@
     },
     "files": [
         "api_client.go",
+        "api_client_test.go",
         "api_op_AssociateEncryptionConfig.go",
         "api_op_AssociateIdentityProviderConfig.go",
         "api_op_CreateAddon.go",
