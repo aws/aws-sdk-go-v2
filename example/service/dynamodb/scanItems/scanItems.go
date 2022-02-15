@@ -53,7 +53,7 @@ func main() {
 	var records []Record
 	err = attributevalue.UnmarshalListOfMaps(scan.Items, &records)
 	if err != nil {
-		return
+		log.Fatalf("unable to unmarshal records: %v", err)
 	}
 	for _, record := range records {
 		log.Printf("Record : %v", record)
