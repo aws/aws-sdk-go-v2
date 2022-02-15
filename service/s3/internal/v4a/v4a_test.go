@@ -15,6 +15,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/s3/internal/v4a/internal/crypto"
 	"github.com/aws/smithy-go/logging"
+	"github.com/google/go-cmp/cmp"
 )
 
 const (
@@ -222,6 +223,74 @@ func TestPresignHTTP_BodyWithArrayRequest(t *testing.T) {
 	}
 	if e, a := "us-east-1", q.Get("X-Amz-Region-Set"); e != a {
 		t.Errorf("expect %v, got %v", e, a)
+	}
+}
+func TestSign_buildCanonicalHeaders(t *testing.T) {
+	serviceName := "mockAPI"
+	region := "mock-region"
+	endpoint := "https://" + serviceName + "." + region + ".amazonaws.com"
+
+	req, err := http.NewRequest("POST", endpoint, nil)
+	if err != nil {
+		t.Fatalf("failed to create request, %v", err)
+	}
+
+	req.Header.Set("FooInnerSpace", "   inner      space    ")
+	req.Header.Set("FooLeadingSpace", "    leading-space")
+	req.Header.Add("FooMultipleSpace", "no-space")
+	req.Header.Add("FooMultipleSpace", "\ttab-space")
+	req.Header.Add("FooMultipleSpace", "trailing-space    ")
+	req.Header.Set("FooNoSpace", "no-space")
+	req.Header.Set("FooTabSpace", "\ttab-space\t")
+	req.Header.Set("FooTrailingSpace", "trailing-space    ")
+	req.Header.Set("FooWrappedSpace", "   wrapped-space    ")
+
+	credProvider := &SymmetricCredentialAdaptor{
+		SymmetricProvider: staticCredentialsProvider{
+			Value: aws.Credentials{
+				AccessKeyID:     accessKey,
+				SecretAccessKey: secretKey,
+			},
+		},
+	}
+	key, err := credProvider.RetrievePrivateKey(context.Background())
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	ctx := &httpSigner{
+		Request:     req,
+		ServiceName: serviceName,
+		RegionSet:   []string{region},
+		Credentials: key,
+		Time:        time.Date(2021, 10, 20, 12, 42, 0, 0, time.UTC),
+	}
+
+	build, err := ctx.Build()
+	if err != nil {
+		t.Fatalf("expected no error, got %v", err)
+	}
+
+	expectCanonicalString := strings.Join([]string{
+		`POST`,
+		`/`,
+		``,
+		`fooinnerspace:inner space`,
+		`fooleadingspace:leading-space`,
+		`foomultiplespace:no-space,tab-space,trailing-space`,
+		`foonospace:no-space`,
+		`footabspace:tab-space`,
+		`footrailingspace:trailing-space`,
+		`foowrappedspace:wrapped-space`,
+		`host:mockAPI.mock-region.amazonaws.com`,
+		`x-amz-date:20211020T124200Z`,
+		`x-amz-region-set:mock-region`,
+		``,
+		`fooinnerspace;fooleadingspace;foomultiplespace;foonospace;footabspace;footrailingspace;foowrappedspace;host;x-amz-date;x-amz-region-set`,
+		``,
+	}, "\n")
+	if diff := cmp.Diff(expectCanonicalString, build.CanonicalString); diff != "" {
+		t.Errorf("expect match, got\n%s", diff)
 	}
 }
 
