@@ -1,6 +1,7 @@
 package attributevalue
 
 import (
+	"encoding"
 	"fmt"
 	"reflect"
 	"strconv"
@@ -380,6 +381,7 @@ type Encoder struct {
 // the `opts` functional options to override the default configuration.
 func NewEncoder(optFns ...func(*EncoderOptions)) *Encoder {
 	options := EncoderOptions{
+		TagKey:        defaultTagKey,
 		NullEmptySets: true,
 	}
 	for _, fn := range optFns {
@@ -497,9 +499,9 @@ func (e *Encoder) encodeStruct(v reflect.Value, fieldTag tag) (types.AttributeVa
 func (e *Encoder) encodeMap(v reflect.Value, fieldTag tag) (types.AttributeValue, error) {
 	m := &types.AttributeValueMemberM{Value: map[string]types.AttributeValue{}}
 	for _, key := range v.MapKeys() {
-		keyName := fmt.Sprint(key.Interface())
-		if keyName == "" {
-			return nil, &InvalidMarshalError{msg: "map key cannot be empty"}
+		keyName, err := mapKeyAsString(key, fieldTag)
+		if err != nil {
+			return nil, err
 		}
 
 		elemVal := v.MapIndex(key)
@@ -517,6 +519,40 @@ func (e *Encoder) encodeMap(v reflect.Value, fieldTag tag) (types.AttributeValue
 	}
 
 	return m, nil
+}
+
+func mapKeyAsString(keyVal reflect.Value, fieldTag tag) (keyStr string, err error) {
+	defer func() {
+		if err != nil {
+			return
+		}
+		if keyStr == "" {
+			err = &InvalidMarshalError{msg: "map key cannot be empty"}
+		}
+	}()
+
+	if k, ok := keyVal.Interface().(encoding.TextMarshaler); ok {
+		b, err := k.MarshalText()
+		if err != nil {
+			return "", fmt.Errorf("failed to marshal text, %w", err)
+		}
+		return string(b), err
+	}
+
+	switch keyVal.Kind() {
+	case reflect.Bool,
+		reflect.String,
+		reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64,
+		reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64,
+		reflect.Float32, reflect.Float64:
+
+		return fmt.Sprint(keyVal.Interface()), nil
+
+	default:
+		return "", &InvalidMarshalError{
+			msg: "map key type not supported, must be string, number, bool, or TextMarshaler",
+		}
+	}
 }
 
 func (e *Encoder) encodeSlice(v reflect.Value, fieldTag tag) (types.AttributeValue, error) {

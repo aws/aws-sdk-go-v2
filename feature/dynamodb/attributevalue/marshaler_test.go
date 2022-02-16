@@ -520,7 +520,7 @@ func compareObjects(t *testing.T, expected interface{}, actual interface{}) {
 }
 
 func BenchmarkMarshalOneMember(b *testing.B) {
-	fieldCache = fieldCacher{}
+	fieldCache = &fieldCacher{}
 
 	simple := simpleMarshalStruct{
 		String:  "abc",
@@ -547,7 +547,7 @@ func BenchmarkMarshalOneMember(b *testing.B) {
 }
 
 func BenchmarkMarshalTwoMembers(b *testing.B) {
-	fieldCache = fieldCacher{}
+	fieldCache = &fieldCacher{}
 
 	simple := simpleMarshalStruct{
 		String:  "abc",
@@ -576,7 +576,7 @@ func BenchmarkMarshalTwoMembers(b *testing.B) {
 }
 
 func BenchmarkUnmarshalOneMember(b *testing.B) {
-	fieldCache = fieldCacher{}
+	fieldCache = &fieldCacher{}
 
 	myStructAVMap, _ := Marshal(simpleMarshalStruct{
 		String:  "abc",
@@ -605,7 +605,7 @@ func BenchmarkUnmarshalOneMember(b *testing.B) {
 }
 
 func BenchmarkUnmarshalTwoMembers(b *testing.B) {
-	fieldCache = fieldCacher{}
+	fieldCache = &fieldCacher{}
 
 	myStructAVMap, _ := Marshal(simpleMarshalStruct{
 		String:  "abc",

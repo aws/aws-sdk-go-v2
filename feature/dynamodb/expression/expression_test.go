@@ -384,7 +384,7 @@ func TestUpdate(t *testing.T) {
 							setOperation: {
 								{
 									name: NameBuilder{
-										name: "foo",
+										names: []string{"foo"},
 									},
 									value: ValueBuilder{
 										value: 5,
@@ -407,7 +407,7 @@ func TestUpdate(t *testing.T) {
 							setOperation: {
 								{
 									name: NameBuilder{
-										name: "foo",
+										names: []string{"foo"},
 									},
 									value: ValueBuilder{
 										value: 5,
@@ -416,7 +416,7 @@ func TestUpdate(t *testing.T) {
 								},
 								{
 									name: NameBuilder{
-										name: "bar",
+										names: []string{"bar"},
 									},
 									value: ValueBuilder{
 										value: 6,
@@ -425,7 +425,7 @@ func TestUpdate(t *testing.T) {
 								},
 								{
 									name: NameBuilder{
-										name: "baz",
+										names: []string{"baz"},
 									},
 									value: ValueBuilder{
 										value: 7,
@@ -496,7 +496,7 @@ func TestNames(t *testing.T) {
 					condition: ConditionBuilder{
 						operandList: []OperandBuilder{
 							NameBuilder{
-								name: "foo",
+								names: []string{"foo"},
 							},
 							ValueBuilder{
 								value: 5,
@@ -507,7 +507,7 @@ func TestNames(t *testing.T) {
 					filter: ConditionBuilder{
 						operandList: []OperandBuilder{
 							NameBuilder{
-								name: "bar",
+								names: []string{"bar"},
 							},
 							ValueBuilder{
 								value: 6,
@@ -518,13 +518,13 @@ func TestNames(t *testing.T) {
 					projection: ProjectionBuilder{
 						names: []NameBuilder{
 							{
-								name: "foo",
+								names: []string{"foo"},
 							},
 							{
-								name: "bar",
+								names: []string{"bar"},
 							},
 							{
-								name: "baz",
+								names: []string{"baz"},
 							},
 						},
 					},
@@ -618,7 +618,7 @@ func TestValues(t *testing.T) {
 					condition: ConditionBuilder{
 						operandList: []OperandBuilder{
 							NameBuilder{
-								name: "foo",
+								names: []string{"foo"},
 							},
 							ValueBuilder{
 								value: 5,
@@ -629,7 +629,7 @@ func TestValues(t *testing.T) {
 					filter: ConditionBuilder{
 						operandList: []OperandBuilder{
 							NameBuilder{
-								name: "bar",
+								names: []string{"bar"},
 							},
 							ValueBuilder{
 								value: 6,
@@ -640,13 +640,13 @@ func TestValues(t *testing.T) {
 					projection: ProjectionBuilder{
 						names: []NameBuilder{
 							{
-								name: "foo",
+								names: []string{"foo"},
 							},
 							{
-								name: "bar",
+								names: []string{"bar"},
 							},
 							{
-								name: "baz",
+								names: []string{"baz"},
 							},
 						},
 					},
@@ -702,7 +702,7 @@ func TestBuildChildTrees(t *testing.T) {
 					condition: ConditionBuilder{
 						operandList: []OperandBuilder{
 							NameBuilder{
-								name: "foo",
+								names: []string{"foo"},
 							},
 							ValueBuilder{
 								value: 5,
@@ -713,7 +713,7 @@ func TestBuildChildTrees(t *testing.T) {
 					filter: ConditionBuilder{
 						operandList: []OperandBuilder{
 							NameBuilder{
-								name: "bar",
+								names: []string{"bar"},
 							},
 							ValueBuilder{
 								value: 6,
@@ -724,13 +724,13 @@ func TestBuildChildTrees(t *testing.T) {
 					projection: ProjectionBuilder{
 						names: []NameBuilder{
 							{
-								name: "foo",
+								names: []string{"foo"},
 							},
 							{
-								name: "bar",
+								names: []string{"bar"},
 							},
 							{
-								name: "baz",
+								names: []string{"baz"},
 							},
 						},
 					},
