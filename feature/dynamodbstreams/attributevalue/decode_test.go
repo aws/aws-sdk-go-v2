@@ -335,7 +335,10 @@ func TestUnmarshalMapError(t *testing.T) {
 			},
 			actual:   &map[int]interface{}{},
 			expected: nil,
-			err:      &UnmarshalTypeError{Value: "map string key", Type: reflect.TypeOf(int(0))},
+			err: &UnmarshalTypeError{
+				Value: `map key "BOOL"`,
+				Type:  reflect.TypeOf(int(0)),
+			},
 		},
 	}
 
@@ -764,4 +767,198 @@ func TestDecodeAliasType(t *testing.T) {
 	if !reflect.DeepEqual(expect, actual) {
 		t.Errorf("expect:\n%v\nactual:\n%v", expect, actual)
 	}
+}
+
+type testUnmarshalMapKeyComplex struct {
+	Foo string
+}
+
+func (t *testUnmarshalMapKeyComplex) UnmarshalText(b []byte) error {
+	t.Foo = string(b)
+	return nil
+}
+func (t *testUnmarshalMapKeyComplex) UnmarshalDynamoDBStreamsAttributeValue(av types.AttributeValue) error {
+	avM, ok := av.(*types.AttributeValueMemberM)
+	if !ok {
+		return fmt.Errorf("unexpected AttributeValue type %T, %v", av, av)
+	}
+	avFoo, ok := avM.Value["foo"]
+	if !ok {
+		return nil
+	}
+
+	avS, ok := avFoo.(*types.AttributeValueMemberS)
+	if !ok {
+		return fmt.Errorf("unexpected Foo AttributeValue type, %T, %v", avM, avM)
+	}
+
+	t.Foo = avS.Value
+
+	return nil
+}
+
+func TestUnmarshalMap_keyTypes(t *testing.T) {
+	type StrAlias string
+	type IntAlias int
+	type BoolAlias bool
+
+	cases := map[string]struct {
+		input      map[string]types.AttributeValue
+		expectVal  interface{}
+		expectType func() interface{}
+	}{
+		"string key": {
+			input: map[string]types.AttributeValue{
+				"a": &types.AttributeValueMemberN{Value: "123"},
+				"b": &types.AttributeValueMemberS{Value: "efg"},
+			},
+			expectType: func() interface{} { return map[string]interface{}{} },
+			expectVal: map[string]interface{}{
+				"a": 123.,
+				"b": "efg",
+			},
+		},
+		"string alias key": {
+			input: map[string]types.AttributeValue{
+				"a": &types.AttributeValueMemberN{Value: "123"},
+				"b": &types.AttributeValueMemberS{Value: "efg"},
+			},
+			expectType: func() interface{} { return map[StrAlias]interface{}{} },
+			expectVal: map[StrAlias]interface{}{
+				"a": 123.,
+				"b": "efg",
+			},
+		},
+		"Number key": {
+			input: map[string]types.AttributeValue{
+				"1": &types.AttributeValueMemberN{Value: "123"},
+				"2": &types.AttributeValueMemberS{Value: "efg"},
+			},
+			expectType: func() interface{} { return map[Number]interface{}{} },
+			expectVal: map[Number]interface{}{
+				Number("1"): 123.,
+				Number("2"): "efg",
+			},
+		},
+		"int key": {
+			input: map[string]types.AttributeValue{
+				"1": &types.AttributeValueMemberN{Value: "123"},
+				"2": &types.AttributeValueMemberS{Value: "efg"},
+			},
+			expectType: func() interface{} { return map[int]interface{}{} },
+			expectVal: map[int]interface{}{
+				1: 123.,
+				2: "efg",
+			},
+		},
+		"int alias key": {
+			input: map[string]types.AttributeValue{
+				"1": &types.AttributeValueMemberN{Value: "123"},
+				"2": &types.AttributeValueMemberS{Value: "efg"},
+			},
+			expectType: func() interface{} { return map[IntAlias]interface{}{} },
+			expectVal: map[IntAlias]interface{}{
+				1: 123.,
+				2: "efg",
+			},
+		},
+		"bool key": {
+			input: map[string]types.AttributeValue{
+				"true":  &types.AttributeValueMemberN{Value: "123"},
+				"false": &types.AttributeValueMemberS{Value: "efg"},
+			},
+			expectType: func() interface{} { return map[bool]interface{}{} },
+			expectVal: map[bool]interface{}{
+				true:  123.,
+				false: "efg",
+			},
+		},
+		"bool alias key": {
+			input: map[string]types.AttributeValue{
+				"true":  &types.AttributeValueMemberN{Value: "123"},
+				"false": &types.AttributeValueMemberS{Value: "efg"},
+			},
+			expectType: func() interface{} { return map[BoolAlias]interface{}{} },
+			expectVal: map[BoolAlias]interface{}{
+				true:  123.,
+				false: "efg",
+			},
+		},
+		"textMarshaler key": {
+			input: map[string]types.AttributeValue{
+				"Foo:1": &types.AttributeValueMemberN{Value: "123"},
+				"Foo:2": &types.AttributeValueMemberS{Value: "efg"},
+			},
+			expectType: func() interface{} { return map[testTextMarshaler]interface{}{} },
+			expectVal: map[testTextMarshaler]interface{}{
+				{Foo: "1"}: 123.,
+				{Foo: "2"}: "efg",
+			},
+		},
+		"textMarshaler DDBAvMarshaler key": {
+			input: map[string]types.AttributeValue{
+				"1": &types.AttributeValueMemberN{Value: "123"},
+				"2": &types.AttributeValueMemberS{Value: "efg"},
+			},
+			expectType: func() interface{} { return map[testUnmarshalMapKeyComplex]interface{}{} },
+			expectVal: map[testUnmarshalMapKeyComplex]interface{}{
+				{Foo: "1"}: 123.,
+				{Foo: "2"}: "efg",
+			},
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			actualVal := c.expectType()
+			err := UnmarshalMap(c.input, &actualVal)
+			if err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
+			t.Logf("expectType, %T", actualVal)
+
+			if diff := cmp.Diff(c.expectVal, actualVal); diff != "" {
+				t.Errorf("expect value match\n%s", diff)
+			}
+		})
+	}
+}
+
+func TestUnmarshalMap_keyPtrTypes(t *testing.T) {
+	input := map[string]types.AttributeValue{
+		"Foo:1": &types.AttributeValueMemberN{Value: "123"},
+		"Foo:2": &types.AttributeValueMemberS{Value: "efg"},
+	}
+
+	expectVal := map[*testTextMarshaler]interface{}{
+		{Foo: "1"}: 123.,
+		{Foo: "2"}: "efg",
+	}
+
+	actualVal := map[*testTextMarshaler]interface{}{}
+	err := UnmarshalMap(input, &actualVal)
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+	t.Logf("expectType, %T", actualVal)
+
+	if e, a := len(expectVal), len(actualVal); e != a {
+		t.Errorf("expect %v values, got %v", e, a)
+	}
+
+	for k, v := range expectVal {
+		var found bool
+		for ak, av := range actualVal {
+			if *k == *ak {
+				found = true
+				if diff := cmp.Diff(v, av); diff != "" {
+					t.Errorf("expect value match\n%s", diff)
+				}
+			}
+		}
+		if !found {
+			t.Errorf("expect %v key not found", *k)
+		}
+	}
+
 }

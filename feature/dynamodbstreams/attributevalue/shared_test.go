@@ -1,17 +1,36 @@
 package attributevalue
 
 import (
-	smithydocument "github.com/aws/smithy-go/document"
-	"github.com/google/go-cmp/cmp/cmpopts"
+	"fmt"
 	"reflect"
 	"strings"
 	"testing"
 	"time"
 
+	smithydocument "github.com/aws/smithy-go/document"
+	"github.com/google/go-cmp/cmp/cmpopts"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodbstreams/types"
 	"github.com/google/go-cmp/cmp"
 )
+
+type testTextMarshaler struct {
+	Foo string
+}
+
+func (t *testTextMarshaler) UnmarshalText(b []byte) error {
+	if !strings.HasPrefix(string(b), "Foo:") {
+		return fmt.Errorf(`missing "Foo:" prefix`)
+	}
+
+	t.Foo = string(b)[len("Foo:"):]
+	return nil
+}
+
+func (t testTextMarshaler) MarshalText() ([]byte, error) {
+	return []byte("Foo:" + t.Foo), nil
+}
 
 type testBinarySetStruct struct {
 	Binarys [][]byte `dynamodbav:",binaryset"`
