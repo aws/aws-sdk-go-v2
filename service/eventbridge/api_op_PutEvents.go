@@ -13,6 +13,7 @@ import (
 )
 
 // Sends custom events to Amazon EventBridge so that they can be matched to rules.
+// PutEvents will only process nested JSON up to 1100 levels deep.
 func (c *Client) PutEvents(ctx context.Context, params *PutEventsInput, optFns ...func(*Options)) (*PutEventsOutput, error) {
 	if params == nil {
 		params = &PutEventsInput{}
@@ -37,6 +38,9 @@ type PutEventsInput struct {
 	// This member is required.
 	Entries []types.PutEventsRequestEntry
 
+	// The URL subdomain of the endpoint. For example, if the URL for Endpoint is
+	// abcde.veo.endpoints.event.amazonaws.com, then the EndpointId is abcde.veo. When
+	// using Java, you must include auth-crt on the class path.
 	EndpointId *string
 
 	noSmithyDocumentSerde

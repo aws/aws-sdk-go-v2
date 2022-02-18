@@ -11,6 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Update an existing endpoint. For more information about global endpoints, see
+// Making applications Regional-fault tolerant with global endpoints and event
+// replication
+// (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-global-endpoints.html)
+// in the Amazon EventBridge User Guide..
 func (c *Client) UpdateEndpoint(ctx context.Context, params *UpdateEndpointInput, optFns ...func(*Options)) (*UpdateEndpointOutput, error) {
 	if params == nil {
 		params = &UpdateEndpointInput{}
@@ -28,39 +33,59 @@ func (c *Client) UpdateEndpoint(ctx context.Context, params *UpdateEndpointInput
 
 type UpdateEndpointInput struct {
 
+	// The name of the endpoint you want to update.
+	//
 	// This member is required.
 	Name *string
 
+	// A description for the endpoint.
 	Description *string
 
+	// Define event buses used for replication.
 	EventBuses []types.EndpointEventBus
 
+	// Whether event replication was enabled or disabled by this request.
 	ReplicationConfig *types.ReplicationConfig
 
+	// The ARN of the role used by event replication for this request.
 	RoleArn *string
 
+	// Configure the routing policy, including the health check and secondary Region..
 	RoutingConfig *types.RoutingConfig
 
 	noSmithyDocumentSerde
 }
 
 type UpdateEndpointOutput struct {
+
+	// The ARN of the endpoint you updated in this request.
 	Arn *string
 
+	// The ID of the endpoint you updated in this request.
 	EndpointId *string
 
+	// The URL of the endpoint you updated in this request.
 	EndpointUrl *string
 
+	// The event buses used for replication for the endpoint you updated in this
+	// request.
 	EventBuses []types.EndpointEventBus
 
+	// The name of the endpoint you updated in this request.
 	Name *string
 
+	// Whether event replication was enabled or disabled for the endpoint you updated
+	// in this request.
 	ReplicationConfig *types.ReplicationConfig
 
+	// The ARN of the role used by event replication for the endpoint you updated in
+	// this request.
 	RoleArn *string
 
+	// The routing configuration you updated in this request.
 	RoutingConfig *types.RoutingConfig
 
+	// The state of the endpoint you updated in this request.
 	State types.EndpointState
 
 	// Metadata pertaining to the operation's result.

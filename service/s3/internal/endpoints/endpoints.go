@@ -800,3 +800,28 @@ func GetDNSSuffix(id string, options Options) (string, error) {
 
 	}
 }
+
+// GetDNSSuffixFromRegion returns the DNS suffix for the provided region and
+// options.
+func GetDNSSuffixFromRegion(region string, options Options) (string, error) {
+	switch {
+	case partitionRegexp.Aws.MatchString(region):
+		return GetDNSSuffix("aws", options)
+
+	case partitionRegexp.AwsCn.MatchString(region):
+		return GetDNSSuffix("aws-cn", options)
+
+	case partitionRegexp.AwsIso.MatchString(region):
+		return GetDNSSuffix("aws-iso", options)
+
+	case partitionRegexp.AwsIsoB.MatchString(region):
+		return GetDNSSuffix("aws-iso-b", options)
+
+	case partitionRegexp.AwsUsGov.MatchString(region):
+		return GetDNSSuffix("aws-us-gov", options)
+
+	default:
+		return GetDNSSuffix("aws", options)
+
+	}
+}

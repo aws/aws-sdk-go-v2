@@ -561,38 +561,61 @@ type EcsParameters struct {
 	noSmithyDocumentSerde
 }
 
+// An global endpoint used to improve your application's availability by making it
+// regional-fault tolerant. For more information about global endpoints, see Making
+// applications Regional-fault tolerant with global endpoints and event replication
+// (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-global-endpoints.html)
+// in the Amazon EventBridge User Guide..
 type Endpoint struct {
+
+	// The ARN of the endpoint.
 	Arn *string
 
+	// The time the endpoint was created.
 	CreationTime *time.Time
 
+	// A description for the endpoint.
 	Description *string
 
+	// The URL subdomain of the endpoint. For example, if the URL for Endpoint is
+	// abcde.veo.endpoints.event.amazonaws.com, then the EndpointId is abcde.veo.
 	EndpointId *string
 
+	// The URL of the endpoint.
 	EndpointUrl *string
 
+	// The event buses being used by the endpoint.
 	EventBuses []EndpointEventBus
 
+	// The last time the endpoint was modified.
 	LastModifiedTime *time.Time
 
+	// The name of the endpoint.
 	Name *string
 
+	// Whether event replication was enabled or disabled for this endpoint.
 	ReplicationConfig *ReplicationConfig
 
+	// The ARN of the role used by event replication for the endpoint.
 	RoleArn *string
 
+	// The routing configuration of the endpoint.
 	RoutingConfig *RoutingConfig
 
+	// The current state of the endpoint.
 	State EndpointState
 
+	// The reason the endpoint is in its current state.
 	StateReason *string
 
 	noSmithyDocumentSerde
 }
 
+// The event buses the endpoint is associated with.
 type EndpointEventBus struct {
 
+	// The ARN of the event bus the endpoint is associated with.
+	//
 	// This member is required.
 	EventBusArn *string
 
@@ -651,11 +674,18 @@ type EventSource struct {
 	noSmithyDocumentSerde
 }
 
+// The failover configuration for an endpoint. This includes what triggers failover
+// and what happens when it's triggered.
 type FailoverConfig struct {
 
+	// The main Region of the endpoint.
+	//
 	// This member is required.
 	Primary *Primary
 
+	// The Region that events are routed to when failover is triggered or event
+	// replication is enabled.
+	//
 	// This member is required.
 	Secondary *Secondary
 
@@ -856,8 +886,12 @@ type PlacementStrategy struct {
 	noSmithyDocumentSerde
 }
 
+// The primary Region of the endpoint.
 type Primary struct {
 
+	// The ARN of the health check used by the endpoint to determine whether failover
+	// is triggered.
+	//
 	// This member is required.
 	HealthCheck *string
 
@@ -867,7 +901,7 @@ type Primary struct {
 // Represents an event to be submitted.
 type PutEventsRequestEntry struct {
 
-	// A valid JSON string. There is no other schema imposed. The JSON string may
+	// A valid JSON object. There is no other schema imposed. The JSON object may
 	// contain fields and nested subobjects.
 	Detail *string
 
@@ -876,7 +910,10 @@ type PutEventsRequestEntry struct {
 
 	// The name or ARN of the event bus to receive the event. Only the rules that are
 	// associated with this event bus are used to match the event. If you omit this,
-	// the default event bus is used.
+	// the default event bus is used. If you're using a global endpoint with a custom
+	// bus, you must enter the name, not the ARN, of the event bus in either the
+	// primary or secondary Region here and the corresponding event bus in the other
+	// Region will be determined based on the endpoint referenced by the EndpointId.
 	EventBusName *string
 
 	// Amazon Web Services resources, identified by Amazon Resource Name (ARN), which
@@ -1076,7 +1113,10 @@ type ReplayDestination struct {
 	noSmithyDocumentSerde
 }
 
+// Endpoints can replicate all events to the secondary Region.
 type ReplicationConfig struct {
+
+	// The state of event replication.
 	State ReplicationState
 
 	noSmithyDocumentSerde
@@ -1096,8 +1136,12 @@ type RetryPolicy struct {
 	noSmithyDocumentSerde
 }
 
+// The routing configuration of the endpoint.
 type RoutingConfig struct {
 
+	// The failover configuration for an endpoint. This includes what triggers failover
+	// and what happens when it's triggered.
+	//
 	// This member is required.
 	FailoverConfig *FailoverConfig
 
@@ -1210,8 +1254,12 @@ type SageMakerPipelineParameters struct {
 	noSmithyDocumentSerde
 }
 
+// The secondary Region that processes events when failover is triggered or
+// replication is enabled.
 type Secondary struct {
 
+	// Defines the secondary Region.
+	//
 	// This member is required.
 	Route *string
 

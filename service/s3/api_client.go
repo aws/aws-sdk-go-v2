@@ -482,6 +482,7 @@ func resolveCredentialProvider(o *Options) {
 	if o.Credentials == nil {
 		return
 	}
+
 	if _, ok := o.Credentials.(v4a.CredentialsProvider); ok {
 		return
 	}
@@ -489,11 +490,11 @@ func resolveCredentialProvider(o *Options) {
 	switch o.Credentials.(type) {
 	case aws.AnonymousCredentials, *aws.AnonymousCredentials:
 		return
-
 	}
 
 	o.Credentials = &v4a.SymmetricCredentialAdaptor{SymmetricProvider: o.Credentials}
 }
+
 func swapWithCustomHTTPSignerMiddleware(stack *middleware.Stack, o Options) error {
 	mw := s3cust.NewSignHTTPRequestMiddleware(s3cust.SignHTTPRequestMiddlewareOptions{
 		CredentialsProvider: o.Credentials,
@@ -501,11 +502,14 @@ func swapWithCustomHTTPSignerMiddleware(stack *middleware.Stack, o Options) erro
 		V4aSigner:           o.httpSignerV4a,
 		LogSigning:          o.ClientLogMode.IsSigning(),
 	})
+
 	return s3cust.RegisterSigningMiddleware(stack, mw)
 }
 
 type httpSignerV4a interface {
-	SignHTTP(ctx context.Context, credentials v4a.Credentials, r *http.Request, payloadHash string, service string, regionSet []string, signingTime time.Time, optFns ...func(*v4a.SignerOptions)) error
+	SignHTTP(ctx context.Context, credentials v4a.Credentials, r *http.Request, payloadHash,
+		service string, regionSet []string, signingTime time.Time,
+		optFns ...func(*v4a.SignerOptions)) error
 }
 
 func resolveHTTPSignerV4a(o *Options) {

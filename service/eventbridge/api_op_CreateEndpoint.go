@@ -11,6 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Creates a global endpoint. Global endpoints improve your application's
+// availability by making it regional-fault tolerant. To do this, you define a
+// primary and secondary Region with event buses in each Region. You also create a
+// Amazon Route 53 health check that will tell EventBridge to route events to the
+// secondary Region when an "unhealthy" state is encountered and events will be
+// routed back to the primary Region when the health check reports a "healthy"
+// state.
 func (c *Client) CreateEndpoint(ctx context.Context, params *CreateEndpointInput, optFns ...func(*Options)) (*CreateEndpointOutput, error) {
 	if params == nil {
 		params = &CreateEndpointInput{}
@@ -28,37 +35,56 @@ func (c *Client) CreateEndpoint(ctx context.Context, params *CreateEndpointInput
 
 type CreateEndpointInput struct {
 
+	// Define the event buses used. The names of the event buses must be identical in
+	// each Region.
+	//
 	// This member is required.
 	EventBuses []types.EndpointEventBus
 
+	// The name of the global endpoint. For example,
+	// "Name":"us-east-2-custom_bus_A-endpoint".
+	//
 	// This member is required.
 	Name *string
 
+	// Configure the routing policy, including the health check and secondary Region..
+	//
 	// This member is required.
 	RoutingConfig *types.RoutingConfig
 
+	// A description of the global endpoint.
 	Description *string
 
+	// Enable or disable event replication.
 	ReplicationConfig *types.ReplicationConfig
 
+	// The ARN of the role used for replication.
 	RoleArn *string
 
 	noSmithyDocumentSerde
 }
 
 type CreateEndpointOutput struct {
+
+	// The ARN of the endpoint that was created by this request.
 	Arn *string
 
+	// The event buses used by this request.
 	EventBuses []types.EndpointEventBus
 
+	// The name of the endpoint that was created by this request.
 	Name *string
 
+	// Whether event replication was enabled or disabled by this request.
 	ReplicationConfig *types.ReplicationConfig
 
+	// The ARN of the role used by event replication for this request.
 	RoleArn *string
 
+	// The routing configuration defined by this request.
 	RoutingConfig *types.RoutingConfig
 
+	// The state of the endpoint that was created by this request.
 	State types.EndpointState
 
 	// Metadata pertaining to the operation's result.
