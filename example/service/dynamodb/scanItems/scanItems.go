@@ -20,6 +20,7 @@ func init() {
 	flag.StringVar(&region, "region", "", "The `region` of your AWS project.")
 }
 
+// Record holds info about the records returned by Scan
 type Record struct {
 	ID   string
 	URLs []string
