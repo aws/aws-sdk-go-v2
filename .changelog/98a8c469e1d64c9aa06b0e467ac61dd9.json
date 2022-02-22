@@ -1,0 +1,9 @@
+{
+    "id": "98a8c469-e1d6-4c9a-a06b-0e467ac61dd9",
+    "type": "bugfix",
+    "description": "Fixes [#1569](https://github.com/aws/aws-sdk-go-v2/issues/1569) inconsistent serialization of Go struct field names",
+    "modules": [
+        "feature/dynamodb/attributevalue",
+        "feature/dynamodbstreams/attributevalue"
+    ]
+}

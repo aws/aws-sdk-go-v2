@@ -599,7 +599,7 @@ func TestUpdateBuildChildNodes(t *testing.T) {
 				{
 					mode: setOperation,
 					name: NameBuilder{
-						name: "foo",
+						names: []string{"foo"},
 					},
 					value: ValueBuilder{
 						value: 5,
@@ -608,7 +608,7 @@ func TestUpdateBuildChildNodes(t *testing.T) {
 				{
 					mode: setOperation,
 					name: NameBuilder{
-						name: "bar",
+						names: []string{"bar"},
 					},
 					value: ValueBuilder{
 						value: 6,
@@ -617,7 +617,7 @@ func TestUpdateBuildChildNodes(t *testing.T) {
 				{
 					mode: setOperation,
 					name: NameBuilder{
-						name: "baz",
+						names: []string{"baz"},
 					},
 					value: ValueBuilder{
 						value: 7,
@@ -626,7 +626,7 @@ func TestUpdateBuildChildNodes(t *testing.T) {
 				{
 					mode: setOperation,
 					name: NameBuilder{
-						name: "qux",
+						names: []string{"qux"},
 					},
 					value: ValueBuilder{
 						value: 8,

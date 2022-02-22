@@ -1,11 +1,13 @@
 package expression
 
 import (
-	"reflect"
 	"strings"
 	"testing"
 
+	"github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
+	"github.com/google/go-cmp/cmp"
+	"github.com/google/go-cmp/cmp/cmpopts"
 )
 
 // opeErrorMode will help with error cases and checking error types
@@ -23,6 +25,11 @@ const (
 )
 
 func TestBuildOperand(t *testing.T) {
+	type mockStructValue struct {
+		A string `dynamodbav:"ddbA" tagb:"TagB"`
+		B string
+	}
+
 	cases := []struct {
 		name     string
 		input    OperandBuilder
@@ -43,6 +50,37 @@ func TestBuildOperand(t *testing.T) {
 			expected: exprNode{
 				names:   []string{"foo", "foo"},
 				fmtExpr: "$n.$n",
+			},
+		},
+		{
+			name:  "struct value",
+			input: ValueWithOptions(mockStructValue{A: "abc123", B: "efg456"}),
+			expected: exprNode{
+				values: []types.AttributeValue{
+					&types.AttributeValueMemberM{Value: map[string]types.AttributeValue{
+						"ddbA": &types.AttributeValueMemberS{Value: "abc123"},
+						"B":    &types.AttributeValueMemberS{Value: "efg456"},
+					}},
+				},
+				fmtExpr: "$v",
+			},
+		},
+		{
+			name: "struct value with TagKey",
+			input: ValueWithOptions(mockStructValue{A: "abc123", B: "efg456"},
+				func(o *ValueBuilderOptions) {
+					o.EncoderOptions = append(o.EncoderOptions, func(o *attributevalue.EncoderOptions) {
+						o.TagKey = "tagb"
+					})
+				}),
+			expected: exprNode{
+				values: []types.AttributeValue{
+					&types.AttributeValueMemberM{Value: map[string]types.AttributeValue{
+						"TagB": &types.AttributeValueMemberS{Value: "abc123"},
+						"B":    &types.AttributeValueMemberS{Value: "efg456"},
+					}},
+				},
+				fmtExpr: "$v",
 			},
 		},
 		{
@@ -182,11 +220,46 @@ func TestBuildOperand(t *testing.T) {
 			},
 		},
 		{
+			name:  "no split name",
+			input: NameNoDotSplit("foo.bar"),
+			expected: exprNode{
+				names:   []string{"foo.bar"},
+				fmtExpr: "$n",
+			},
+		},
+		{
 			name:  "nested name with index",
 			input: Name("foo.bar[0].baz"),
 			expected: exprNode{
 				names:   []string{"foo", "bar", "baz"},
 				fmtExpr: "$n.$n[0].$n",
+			},
+		},
+		{
+			name:  "no split name with index",
+			input: NameNoDotSplit("foo.bar[0]"),
+			expected: exprNode{
+				names:   []string{"foo.bar"},
+				fmtExpr: "$n[0]",
+			},
+		},
+		{
+			name:  "no split name append name",
+			input: NameNoDotSplit("foo.bar").AppendName(Name("foo.bar")),
+			expected: exprNode{
+				names:   []string{"foo.bar", "foo", "bar"},
+				fmtExpr: "$n.$n.$n",
+			},
+		},
+		{
+			name: "no split name append name with list index",
+			input: NameNoDotSplit("foo.bar").
+				AppendName(Name("foo.bar")).
+				AppendName(Name("[0]")).
+				AppendName(Name("abc123")),
+			expected: exprNode{
+				names:   []string{"foo.bar", "foo", "bar", "abc123"},
+				fmtExpr: "$n.$n.$n[0].$n",
 			},
 		},
 		{
@@ -238,19 +311,30 @@ func TestBuildOperand(t *testing.T) {
 			if c.err != noOperandError {
 				if err == nil {
 					t.Errorf("expect error %q, got no error", c.err)
-				} else {
-					if e, a := string(c.err), err.Error(); !strings.Contains(a, e) {
-						t.Errorf("expect %q error message to be in %q", e, a)
-					}
+				} else if e, a := string(c.err), err.Error(); !strings.Contains(a, e) {
+					t.Errorf("expect %q error message to be in %q", e, a)
 				}
-			} else {
-				if err != nil {
-					t.Errorf("expect no error, got unexpected Error %q", err)
-				}
+				return
+			}
+			if err != nil {
+				t.Fatalf("expect no error, got unexpected Error %q", err)
+			}
 
-				if e, a := c.expected, operand.exprNode; !reflect.DeepEqual(a, e) {
-					t.Errorf("expect %v, got %v", e, a)
-				}
+			cmpOptions := cmp.Options{
+				cmp.AllowUnexported(exprNode{}),
+				cmpopts.IgnoreUnexported(types.AttributeValueMemberM{}),
+				cmpopts.IgnoreUnexported(types.AttributeValueMemberN{}),
+				cmpopts.IgnoreUnexported(types.AttributeValueMemberNS{}),
+				cmpopts.IgnoreUnexported(types.AttributeValueMemberBOOL{}),
+				cmpopts.IgnoreUnexported(types.AttributeValueMemberB{}),
+				cmpopts.IgnoreUnexported(types.AttributeValueMemberBS{}),
+				cmpopts.IgnoreUnexported(types.AttributeValueMemberL{}),
+				cmpopts.IgnoreUnexported(types.AttributeValueMemberS{}),
+				cmpopts.IgnoreUnexported(types.AttributeValueMemberSS{}),
+				cmpopts.IgnoreUnexported(types.AttributeValueMemberNULL{}),
+			}
+			if diff := cmp.Diff(c.expected, operand.exprNode, cmpOptions...); diff != "" {
+				t.Errorf("expect operand match\n%s", diff)
 			}
 		})
 	}

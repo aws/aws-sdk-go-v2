@@ -5,6 +5,8 @@ import (
 	"sort"
 )
 
+const defaultTagKey = "dynamodbav"
+
 type field struct {
 	tag
 
@@ -46,7 +48,12 @@ type structFieldOptions struct {
 // unionStructFields returns a list of fields for the given type. Type info is cached
 // to avoid repeated calls into the reflect package
 func unionStructFields(t reflect.Type, opts structFieldOptions) *cachedFields {
-	if cached, ok := fieldCache.Load(t); ok {
+	key := fieldCacheKey{
+		typ:  t,
+		opts: opts,
+	}
+
+	if cached, ok := fieldCache.Load(key); ok {
 		return cached
 	}
 
@@ -62,7 +69,7 @@ func unionStructFields(t reflect.Type, opts structFieldOptions) *cachedFields {
 		fs.fieldsByName[f.Name] = i
 	}
 
-	cached, _ := fieldCache.LoadOrStore(t, fs)
+	cached, _ := fieldCache.LoadOrStore(key, fs)
 	return cached
 }
 
@@ -105,7 +112,7 @@ func enumFields(t reflect.Type, opts structFieldOptions) []field {
 				fieldTag := tag{}
 				fieldTag.parseAVTag(sf.Tag)
 				// Because MarshalOptions.TagKey must be explicitly set.
-				if opts.TagKey != "" && fieldTag == (tag{}) {
+				if opts.TagKey != "" && opts.TagKey != defaultTagKey {
 					fieldTag.parseStructTag(opts.TagKey, sf.Tag)
 				}
 

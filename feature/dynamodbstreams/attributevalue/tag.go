@@ -18,7 +18,7 @@ type tag struct {
 }
 
 func (t *tag) parseAVTag(structTag reflect.StructTag) {
-	tagStr := structTag.Get("dynamodbav")
+	tagStr := structTag.Get(defaultTagKey)
 	if len(tagStr) == 0 {
 		return
 	}

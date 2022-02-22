@@ -1,0 +1,8 @@
+{
+    "id": "2096a6be-b82d-44be-a4a4-69c197f6de40",
+    "type": "feature",
+    "description": "Add support for expression names with dots via new NameBuilder function NameNoDotSplit, related to [aws/aws-sdk-go#2570](https://github.com/aws/aws-sdk-go/issues/2570)",
+    "modules": [
+        "feature/dynamodb/expression"
+    ]
+}
