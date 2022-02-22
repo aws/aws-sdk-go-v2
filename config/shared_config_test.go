@@ -574,6 +574,15 @@ func TestNewSharedConfig(t *testing.T) {
 			Profile:              "retrywithinvalidattempts",
 			Err:                  fmt.Errorf("failed to load max_attempts from shared config, invalid value max_attempts=invalid, expect integer"),
 		},
+		"ca bundle options": {
+			ConfigFilenames:      []string{testConfigFilename},
+			CredentialsFilenames: []string{testCredentialsFilename},
+			Profile:              "with_ca_bundle",
+			Expected: SharedConfig{
+				Profile:        "with_ca_bundle",
+				CustomCABundle: "custom_ca_bundle_file.pem",
+			},
+		},
 		"merged profiles across files": {
 			ConfigFilenames:      []string{testConfigFilename},
 			CredentialsFilenames: []string{testCredentialsFilename},
