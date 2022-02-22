@@ -1,12 +1,13 @@
 package attributevalue
 
 import (
-	smithydocument "github.com/aws/smithy-go/document"
-	"github.com/google/go-cmp/cmp/cmpopts"
 	"reflect"
 	"strconv"
 	"testing"
 	"time"
+
+	smithydocument "github.com/aws/smithy-go/document"
+	"github.com/google/go-cmp/cmp/cmpopts"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
@@ -364,5 +365,132 @@ func TestEncoderFieldByIndex(t *testing.T) {
 	}
 	if f.Kind() != reflect.Int || f.Int() != int64(outer.Inner) {
 		t.Error("expected f to be of kind Int with value equal to outer.Inner")
+	}
+}
+
+func TestMarshalMap_keyTypes(t *testing.T) {
+	type StrAlias string
+	type IntAlias int
+	type BoolAlias bool
+
+	cases := map[string]struct {
+		input    interface{}
+		expectAV map[string]types.AttributeValue
+	}{
+		"string key": {
+			input: map[string]interface{}{
+				"a": 123,
+				"b": "efg",
+			},
+			expectAV: map[string]types.AttributeValue{
+				"a": &types.AttributeValueMemberN{Value: "123"},
+				"b": &types.AttributeValueMemberS{Value: "efg"},
+			},
+		},
+		"string alias key": {
+			input: map[StrAlias]interface{}{
+				"a": 123,
+				"b": "efg",
+			},
+			expectAV: map[string]types.AttributeValue{
+				"a": &types.AttributeValueMemberN{Value: "123"},
+				"b": &types.AttributeValueMemberS{Value: "efg"},
+			},
+		},
+		"Number key": {
+			input: map[Number]interface{}{
+				Number("1"): 123,
+				Number("2"): "efg",
+			},
+			expectAV: map[string]types.AttributeValue{
+				"1": &types.AttributeValueMemberN{Value: "123"},
+				"2": &types.AttributeValueMemberS{Value: "efg"},
+			},
+		},
+		"int key": {
+			input: map[int]interface{}{
+				1: 123,
+				2: "efg",
+			},
+			expectAV: map[string]types.AttributeValue{
+				"1": &types.AttributeValueMemberN{Value: "123"},
+				"2": &types.AttributeValueMemberS{Value: "efg"},
+			},
+		},
+		"int alias key": {
+			input: map[IntAlias]interface{}{
+				1: 123,
+				2: "efg",
+			},
+			expectAV: map[string]types.AttributeValue{
+				"1": &types.AttributeValueMemberN{Value: "123"},
+				"2": &types.AttributeValueMemberS{Value: "efg"},
+			},
+		},
+		"bool key": {
+			input: map[bool]interface{}{
+				true:  123,
+				false: "efg",
+			},
+			expectAV: map[string]types.AttributeValue{
+				"true":  &types.AttributeValueMemberN{Value: "123"},
+				"false": &types.AttributeValueMemberS{Value: "efg"},
+			},
+		},
+		"bool alias key": {
+			input: map[BoolAlias]interface{}{
+				true:  123,
+				false: "efg",
+			},
+			expectAV: map[string]types.AttributeValue{
+				"true":  &types.AttributeValueMemberN{Value: "123"},
+				"false": &types.AttributeValueMemberS{Value: "efg"},
+			},
+		},
+		"textMarshaler key": {
+			input: map[testTextMarshaler]interface{}{
+				{Foo: "1"}: 123,
+				{Foo: "2"}: "efg",
+			},
+			expectAV: map[string]types.AttributeValue{
+				"Foo:1": &types.AttributeValueMemberN{Value: "123"},
+				"Foo:2": &types.AttributeValueMemberS{Value: "efg"},
+			},
+		},
+		"textMarshaler ptr key": {
+			input: map[*testTextMarshaler]interface{}{
+				{Foo: "1"}: 123,
+				{Foo: "2"}: "efg",
+			},
+			expectAV: map[string]types.AttributeValue{
+				"Foo:1": &types.AttributeValueMemberN{Value: "123"},
+				"Foo:2": &types.AttributeValueMemberS{Value: "efg"},
+			},
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			av, err := MarshalMap(c.input)
+			if err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
+
+			cmpOptions := cmp.Options{
+				cmpopts.IgnoreUnexported(types.AttributeValueMemberM{}),
+				cmpopts.IgnoreUnexported(types.AttributeValueMemberN{}),
+				cmpopts.IgnoreUnexported(types.AttributeValueMemberNS{}),
+				cmpopts.IgnoreUnexported(types.AttributeValueMemberBOOL{}),
+				cmpopts.IgnoreUnexported(types.AttributeValueMemberB{}),
+				cmpopts.IgnoreUnexported(types.AttributeValueMemberBS{}),
+				cmpopts.IgnoreUnexported(types.AttributeValueMemberL{}),
+				cmpopts.IgnoreUnexported(types.AttributeValueMemberS{}),
+				cmpopts.IgnoreUnexported(types.AttributeValueMemberSS{}),
+				cmpopts.IgnoreUnexported(types.AttributeValueMemberNULL{}),
+			}
+			if diff := cmp.Diff(c.expectAV, av, cmpOptions...); diff != "" {
+				t.Errorf("expect attribute value match\n%s", diff)
+			}
+		})
 	}
 }

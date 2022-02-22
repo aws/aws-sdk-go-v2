@@ -18,7 +18,16 @@ import (
 //     // Create a ValueBuilder representing the string "aValue"
 //     valueBuilder := expression.Value("aValue")
 type ValueBuilder struct {
-	value interface{}
+	value   interface{}
+	options ValueBuilderOptions
+}
+
+// ValueBuilderOptions provides the options for how a value is built, and
+// encoded in the expression.
+type ValueBuilderOptions struct {
+	// Use functional options to specify how the value will be encoded. If the
+	// value is already an AttributeValue, the EncoderOptions will be ignored.
+	EncoderOptions []func(*attributevalue.EncoderOptions)
 }
 
 // NameBuilder represents a name of a top level item attribute or a nested
@@ -32,7 +41,7 @@ type ValueBuilder struct {
 //     // Create a NameBuilder representing the item attribute "aName"
 //     nameBuilder := expression.Name("aName")
 type NameBuilder struct {
-	name string
+	names []string
 }
 
 // SizeBuilder represents the output of the function size ("someName"), which
@@ -132,8 +141,75 @@ type OperandBuilder interface {
 //     // Use Name() to create a condition expression
 //     condition := expression.Name("foo").Equal(expression.Name("bar"))
 func Name(name string) NameBuilder {
+	if len(name) == 0 {
+		return NameBuilder{}
+	}
+
 	return NameBuilder{
-		name: name,
+		names: strings.Split(name, "."),
+	}
+}
+
+// AppendName to adds additional name fields, returning a new NameBuilder. Can
+// be used to append list indexes and map fields to the Expression attribute
+// name.
+//
+// Leading or trailing dots(`.`) for Names that are not created with
+// NameNoDotSplit will result in an error when the expression is built. The
+// dot(`.`) will be added automatically as needed.
+func (nb NameBuilder) AppendName(field NameBuilder) NameBuilder {
+	names := make([]string, 0, len(nb.names)+len(field.names))
+	names = append(names, nb.names...)
+	names = append(names, field.names...)
+
+	// If the name being append starts with a list index it to the name being
+	// appended to. This allows list indexes to be appended to names. If there
+	// is a syntax error in the name, it will be caught when the expression is
+	// built via BuildOperand method.
+	if len(nb.names) != 0 && len(field.names) != 0 {
+		lastLeftName := len(nb.names) - 1
+		firstRightName := lastLeftName + 1
+		if v := names[firstRightName]; len(v) > 0 && v[0] == '[' {
+			if end := strings.Index(v, "]"); end != -1 {
+				names[lastLeftName] += v[0 : end+1]
+				names[firstRightName] = v[end+1:]
+				// Remove the name if it is empty after moving the index.
+				if len(names[firstRightName]) == 0 {
+					copy(names[firstRightName:], names[firstRightName+1:])
+					names[len(names)-1] = ""
+					names = names[:len(names)-1]
+				}
+			}
+		}
+	}
+
+	return NameBuilder{
+		names: names,
+	}
+}
+
+// NameNoDotSplit returns a NameBuilder. The argument should represent the
+// desired item attribute. The name will not be split on dots. The name may end
+// with square brackets for list indexes. Square brackets will not be
+// considered a part of the NameLiteral.
+//
+// Use NameBuilder.WithField method to add subsequent map field names.
+// Use NameBuilder.WithListIndex method to add list index to the name.
+//
+// See: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.Attributes.html
+//
+// Example:
+//
+//     // Specify a name containing dots, and should not be split.
+//     name := expression.NameLiteral("Top.Level")
+//
+//     // Specify a nested attribute
+//     nested := expression.Name("Record[6].SongList")
+//     // Use Name() to create a condition expression
+//     condition := expression.Name("foo").Equal(expression.Name("bar"))
+func NameNoDotSplit(name string) NameBuilder {
+	return NameBuilder{
+		names: []string{name},
 	}
 }
 
@@ -154,6 +230,37 @@ func Name(name string) NameBuilder {
 func Value(value interface{}) ValueBuilder {
 	return ValueBuilder{
 		value: value,
+	}
+}
+
+// ValueWithOptions creates a ValueBuilder and sets its value to the argument. The value
+// will be marshalled using the attributevalue package, unless it is of
+// type types.AttributeValue, where it will be used directly.
+//
+// The ValueBuilderOptions functional options parameter allows you to specify
+// how the value will be encoded. Including options like AttributeValue
+// encoding struct tag. If value is already an DynamoDB AttributeValue,
+// encoding options will have not effect.
+//
+// Empty slices and maps will be encoded as their respective empty types.AttributeValue
+// types. If a NULL value is required, pass a dynamodb.AttributeValue, e.g.:
+// emptyList := &types.AttributeValueMemberNULL{Value: true}
+//
+// Example:
+//
+//     // Use Value() to create a condition expression
+//     condition := expression.Name("foo").Equal(expression.Value(10))
+//     // Use Value() to set the value of a set expression.
+//     update := Set(expression.Name("greets"), expression.Value(&types.AttributeValueMemberS{Value: "hello"}))
+func ValueWithOptions(value interface{}, optFns ...func(*ValueBuilderOptions)) ValueBuilder {
+	var options ValueBuilderOptions
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return ValueBuilder{
+		value:   value,
+		options: options,
 	}
 }
 
@@ -455,7 +562,10 @@ func IfNotExists(name NameBuilder, setValue OperandBuilder) SetValueBuilder {
 //
 //     // Use IfNotExists() to set item attribute "someName" to value 5 if
 //     // "someName" does not exist yet. (Prevents overwrite)
-//     update, err := expression.Set(expression.Name("someName"), expression.Name("someName").IfNotExists(expression.Value(5)))
+//     update, err := expression.Set(
+//         expression.Name("someName"),
+//         expression.Name("someName").IfNotExists(expression.Value(5)),
+//     )
 //
 // Expression Equivalent:
 //
@@ -473,9 +583,10 @@ func (nb NameBuilder) IfNotExists(rightOperand OperandBuilder) SetValueBuilder {
 // Builder is called. BuildOperand() should never be called externally.
 // BuildOperand() aliases all strings to avoid stepping over DynamoDB's reserved
 // words.
+//
 // More information on reserved words at http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
 func (nb NameBuilder) BuildOperand() (Operand, error) {
-	if nb.name == "" {
+	if len(nb.names) == 0 {
 		return Operand{}, newUnsetParameterError("BuildOperand", "NameBuilder")
 	}
 
@@ -483,12 +594,14 @@ func (nb NameBuilder) BuildOperand() (Operand, error) {
 		names: []string{},
 	}
 
-	nameSplit := strings.Split(nb.name, ".")
-	fmtNames := make([]string, 0, len(nameSplit))
-
-	for _, word := range nameSplit {
+	fmtNames := make([]string, 0, len(nb.names))
+	for _, word := range nb.names {
 		var substr string
 		if word == "" {
+			return Operand{}, newInvalidParameterError("BuildOperand", "NameBuilder")
+		}
+
+		if idx := strings.Index(word, "]"); idx != -1 && idx != len(word)-1 {
 			return Operand{}, newInvalidParameterError("BuildOperand", "NameBuilder")
 		}
 
@@ -554,7 +667,7 @@ func (vb ValueBuilder) BuildOperand() (Operand, error) {
 	case types.AttributeValue:
 		expr = v
 	default:
-		expr, err = attributevalue.Marshal(vb.value)
+		expr, err = attributevalue.MarshalWithOptions(vb.value, vb.options.EncoderOptions...)
 		if err != nil {
 			return Operand{}, newInvalidParameterError("BuildOperand", "ValueBuilder")
 		}

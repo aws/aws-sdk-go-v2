@@ -1,25 +1,31 @@
 package attributevalue
 
 import (
+	"reflect"
 	"strings"
 	"sync"
 )
 
-var fieldCache fieldCacher
+var fieldCache = &fieldCacher{}
+
+type fieldCacheKey struct {
+	typ  reflect.Type
+	opts structFieldOptions
+}
 
 type fieldCacher struct {
 	cache sync.Map
 }
 
-func (c *fieldCacher) Load(t interface{}) (*cachedFields, bool) {
-	if v, ok := c.cache.Load(t); ok {
+func (c *fieldCacher) Load(key fieldCacheKey) (*cachedFields, bool) {
+	if v, ok := c.cache.Load(key); ok {
 		return v.(*cachedFields), true
 	}
 	return nil, false
 }
 
-func (c *fieldCacher) LoadOrStore(t interface{}, fs *cachedFields) (*cachedFields, bool) {
-	v, ok := c.cache.LoadOrStore(t, fs)
+func (c *fieldCacher) LoadOrStore(key fieldCacheKey, fs *cachedFields) (*cachedFields, bool) {
+	v, ok := c.cache.LoadOrStore(key, fs)
 	return v.(*cachedFields), ok
 }
 
