@@ -145,6 +145,36 @@ func TestAssumeRoleProvider_MFAWithNoToken(t *testing.T) {
 	}
 }
 
+func TestAssumeRoleProvider_WithSourceIdentity(t *testing.T) {
+	const sourceIdentity = "Source-Identity"
+
+	stub := &mockAssumeRole{
+		TestInput: func(in *sts.AssumeRoleInput) {
+			if e, a := sourceIdentity, *in.SourceIdentity; e != a {
+				t.Fatalf("expect %v, got %v", e, a)
+			}
+		},
+	}
+	p := stscreds.NewAssumeRoleProvider(stub, roleARN, func(options *stscreds.AssumeRoleOptions) {
+		options.SourceIdentity = aws.String(sourceIdentity)
+	})
+
+	creds, err := p.Retrieve(context.Background())
+	if err != nil {
+		t.Fatalf("Expect no error, %v", err)
+	}
+
+	if e, a := roleARN, creds.AccessKeyID; e != a {
+		t.Errorf("Expect access key ID to be reflected role ARN")
+	}
+	if e, a := "assumedSecretAccessKey", creds.SecretAccessKey; e != a {
+		t.Errorf("Expect secret access key to match")
+	}
+	if e, a := "assumedSessionToken", creds.SessionToken; e != a {
+		t.Errorf("Expect session token to match")
+	}
+}
+
 func TestAssumeRoleProvider_WithTags(t *testing.T) {
 	stub := &mockAssumeRole{
 		TestInput: func(in *sts.AssumeRoleInput) {
