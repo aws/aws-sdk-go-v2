@@ -1281,7 +1281,7 @@
                 "CacheParameterGroupFamily": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the cache parameter group family that this cache parameter group is compatible with.</p>\n        <p>Valid values are: \n    <code>memcached1.4</code> | \n     <code>memcached1.5</code> | \n      <code>memcached1.6</code> | \n    <code>redis2.6</code> | \n    <code>redis2.8</code> |\n    <code>redis3.2</code> |\n    <code>redis4.0</code> |\n     <code>redis5.0</code> | \n      <code>redis6.0</code> | \n    </p>"
+                        "smithy.api#documentation": "<p>The name of the cache parameter group family that this cache parameter group is compatible with.</p>\n        <p>Valid values are: \n    <code>memcached1.4</code> | \n     <code>memcached1.5</code> | \n      <code>memcached1.6</code> | \n    <code>redis2.6</code> | \n    <code>redis2.8</code> |\n    <code>redis3.2</code> |\n    <code>redis4.0</code> |\n     <code>redis5.0</code> | \n      <code>redis6.x</code> | \n    </p>"
                     }
                 },
                 "Description": {
@@ -2141,7 +2141,7 @@
                 "PreferredMaintenanceWindow": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the weekly time range during which maintenance\n            on the cluster is performed. It is specified as a range in\n            the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum\n            maintenance window is a 60 minute period.\n            Valid values for <code>ddd</code> are:</p>"
+                        "smithy.api#documentation": "<p>Specifies the weekly time range during which maintenance\n            on the cluster is performed. It is specified as a range in\n            the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum\n            maintenance window is a 60 minute period.\n           </p>"
                     }
                 },
                 "Port": {
@@ -2262,7 +2262,7 @@
                 "CacheParameterGroupFamily": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the cache parameter group family that the cache parameter group can be used with.</p>\n        <p>Valid values are: \n    <code>memcached1.4</code> | \n     <code>memcached1.5</code> | \n      <code>memcached1.6</code> | \n    <code>redis2.6</code> | \n    <code>redis2.8</code> |\n    <code>redis3.2</code> |\n    <code>redis4.0</code> |\n     <code>redis5.0</code> | \n      <code>redis6.0</code> | \n            <code>redis6.2</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The name of the cache parameter group family that the cache parameter group can be used with.</p>\n        <p>Valid values are: \n    <code>memcached1.4</code> | \n     <code>memcached1.5</code> | \n      <code>memcached1.6</code> | \n    <code>redis2.6</code> | \n    <code>redis2.8</code> |\n    <code>redis3.2</code> |\n    <code>redis4.0</code> |\n     <code>redis5.0</code> | \n      <code>redis6.x</code> \n         </p>",
                         "smithy.api#required": {}
                     }
                 },

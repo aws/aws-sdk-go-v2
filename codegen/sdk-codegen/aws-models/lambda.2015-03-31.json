@@ -2951,6 +2951,42 @@
                     "code": 200
                 },
                 "smithy.waiters#waitable": {
+                    "FunctionActiveV2": {
+                        "documentation": "Waits for the function's State to be Active. This waiter uses GetFunction API. This should be used after new function creation.",
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "Configuration.State",
+                                        "expected": "Active",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "Configuration.State",
+                                        "expected": "Failed",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "retry",
+                                "matcher": {
+                                    "output": {
+                                        "path": "Configuration.State",
+                                        "expected": "Pending",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ],
+                        "minDelay": 1
+                    },
                     "FunctionExists": {
                         "acceptors": [
                             {
@@ -2963,6 +2999,42 @@
                                 "state": "retry",
                                 "matcher": {
                                     "errorType": "ResourceNotFoundException"
+                                }
+                            }
+                        ],
+                        "minDelay": 1
+                    },
+                    "FunctionUpdatedV2": {
+                        "documentation": "Waits for the function's LastUpdateStatus to be Successful. This waiter uses GetFunction API. This should be used after function updates.",
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "Configuration.LastUpdateStatus",
+                                        "expected": "Successful",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "Configuration.LastUpdateStatus",
+                                        "expected": "Failed",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "retry",
+                                "matcher": {
+                                    "output": {
+                                        "path": "Configuration.LastUpdateStatus",
+                                        "expected": "InProgress",
+                                        "comparator": "stringEquals"
+                                    }
                                 }
                             }
                         ],
@@ -3120,7 +3192,7 @@
                 },
                 "smithy.waiters#waitable": {
                     "FunctionActive": {
-                        "documentation": "Waits for the function's State to be Active.",
+                        "documentation": "Waits for the function's State to be Active. This waiter uses GetFunctionConfiguration API. This should be used after new function creation.",
                         "acceptors": [
                             {
                                 "state": "success",
@@ -3156,7 +3228,7 @@
                         "minDelay": 5
                     },
                     "FunctionUpdated": {
-                        "documentation": "Waits for the function's LastUpdateStatus to be Successful.",
+                        "documentation": "Waits for the function's LastUpdateStatus to be Successful. This waiter uses GetFunctionConfiguration API. This should be used after function updates.",
                         "acceptors": [
                             {
                                 "state": "success",
@@ -6728,6 +6800,10 @@
                         "name": "dotnetcore31"
                     },
                     {
+                        "value": "dotnet6",
+                        "name": "dotnet6"
+                    },
+                    {
                         "value": "nodejs4.3-edge",
                         "name": "nodejs43edge"
                     },
@@ -7688,7 +7764,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a Lambda function's code. If code signing is enabled for the function, the code package must be signed\n      by a trusted publisher. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-trustedcode.html\">Configuring code signing</a>.</p>\n    \n         <p>The function's code is locked when you publish a version. You can't modify the code of a published version,\n      only the unpublished version.</p>\n         <note>\n            <p>For a function defined as a container image, Lambda resolves the image tag to an image digest. In Amazon ECR, if\n        you update the image tag to a new image, Lambda does not automatically update the function.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Updates a Lambda function's code. If code signing is enabled for the function, the code package must be signed\n      by a trusted publisher. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-trustedcode.html\">Configuring code signing</a>.</p>\n    \n         <p>If the function's package type is <code>Image</code>, you must specify the code package in <code>ImageUri</code> as \n      the URI of a\n      <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-images.html\">container image</a> \n      in the Amazon ECR registry.\n       </p>\n    \n         <p>If the function's package type is <code>Zip</code>, you must specify the deployment\n      package as a <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html#gettingstarted-package-zip\">.zip file\n        archive</a>. Enter the Amazon S3 bucket and key of the code .zip file location.\n      You can also provide the function code inline using the <code>ZipFile</code> field. </p>\n         <p>The code in the deployment package must be compatible with the target instruction set\n      architecture of the function (<code>x86-64</code> or <code>arm64</code>). </p>\n    \n         <p>The function's code is locked when you publish a version. You can't modify the code of a published version,\n      only the unpublished version.</p>\n         <note>\n            <p>For a function defined as a container image, Lambda resolves the image tag to an image digest. In Amazon ECR, if\n      you update the image tag to a new image, Lambda does not automatically update the function.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/2015-03-31/functions/{FunctionName}/code",
@@ -7710,19 +7786,19 @@
                 "ZipFile": {
                     "target": "com.amazonaws.lambda#Blob",
                     "traits": {
-                        "smithy.api#documentation": "<p>The base64-encoded contents of the deployment package. Amazon Web Services SDK and Amazon Web Services CLI clients handle the encoding for\n      you.</p>"
+                        "smithy.api#documentation": "<p>The base64-encoded contents of the deployment package. Amazon Web Services SDK and Amazon Web Services CLI clients \nhandle the encoding for you. Use only with a function defined with a .zip file archive deployment package.</p>"
                     }
                 },
                 "S3Bucket": {
                     "target": "com.amazonaws.lambda#S3Bucket",
                     "traits": {
-                        "smithy.api#documentation": "<p>An Amazon S3 bucket in the same Amazon Web Services Region as your function. The bucket can be in a different Amazon Web Services account.</p>"
+                        "smithy.api#documentation": "<p>An Amazon S3 bucket in the same Amazon Web Services Region as your function. The bucket can be in a different \nAmazon Web Services account. Use only with a function defined with a .zip file archive deployment package.</p>"
                     }
                 },
                 "S3Key": {
                     "target": "com.amazonaws.lambda#S3Key",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 key of the deployment package.</p>"
+                        "smithy.api#documentation": "<p>The Amazon S3 key of the deployment package. Use only with a function defined with a .zip file archive deployment package.</p>"
                     }
                 },
                 "S3ObjectVersion": {
@@ -7734,7 +7810,7 @@
                 "ImageUri": {
                     "target": "com.amazonaws.lambda#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>URI of a container image in the Amazon ECR registry.</p>"
+                        "smithy.api#documentation": "<p>URI of a container image in the Amazon ECR registry. Do not use for a function defined\n    with a .zip file archive.</p>"
                     }
                 },
                 "Publish": {

@@ -59,7 +59,7 @@
                 "userDataOverride": {
                     "target": "com.amazonaws.imagebuilder#UserDataOverride",
                     "traits": {
-                        "smithy.api#documentation": "<p>Use this property to provide commands or a command script to run when you launch \n\t\t\tyour build instance.</p>\n\t\t       <note>\n\t\t\t         <p>The userDataOverride property replaces any commands that Image Builder might have added to ensure\n\t\t\t\tthat Systems Manager is installed on your Linux build instance. If you override the user data,\n\t\t\t\tmake sure that you add commands to install Systems Manager, if it is not pre-installed on your\n\t\t\t\tbase image.</p>\n\t\t       </note>"
+                        "smithy.api#documentation": "<p>Use this property to provide commands or a command script to run when you launch \n\t\t\tyour build instance.</p>\n\t\t       <p>The userDataOverride property replaces any commands that Image Builder might have added to ensure\n\t\t\tthat Systems Manager is installed on your Linux build instance. If you override the user data,\n\t\t\tmake sure that you add commands to install Systems Manager, if it is not pre-installed on your\n\t\t\tbase image.</p>\n\t\t       <note>\n\t\t\t         <p>The user data is always base 64 encoded. For example, the \n\t\t\t\tfollowing commands are encoded as <code>IyEvYmluL2Jhc2gKbWtkaXIgLXAgL3Zhci9iYi8KdG91Y2ggL3Zhci$</code>:</p>\n\t\t\t\n\t\t\t         <p>\n               <i>#!/bin/bash</i>\n            </p>\n\t\t\t         <p>mkdir -p /var/bb/</p>\n\t\t\t         <p>touch /var</p>\n\t\t       </note>"
                     }
                 }
             },
@@ -386,7 +386,7 @@
                 "data": {
                     "target": "com.amazonaws.imagebuilder#ComponentData",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data of the component.</p>"
+                        "smithy.api#documentation": "<p>Component data contains the YAML document content for the component.</p>"
                     }
                 },
                 "kmsKeyId": {
@@ -1097,7 +1097,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new component that can be used to build, validate, test, and assess your\n\t\t\timage.</p>",
+                "smithy.api#documentation": "<p>Creates a new component that can be used to build, validate, test, and assess your\n\t\t\timage. The component is based on a YAML document that you specify using exactly one \n\t\t\tof the following methods:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>Inline, using the <code>data</code> property in the request body.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>A URL that points to a YAML document file stored in Amazon S3, using the \n\t\t\t\t\t<code>uri</code> property in the request body.</p>\n\t\t\t         </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/CreateComponent",
@@ -1150,13 +1150,13 @@
                 "data": {
                     "target": "com.amazonaws.imagebuilder#InlineComponentData",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data of the component. Used to specify the data inline. Either <code>data</code> or\n\t\t\t<code>uri</code> can be used to specify the data within the component.</p>"
+                        "smithy.api#documentation": "<p>Component <code>data</code> contains inline YAML document content for the component. \n\t\t\tAlternatively, you can specify the <code>uri</code> of a YAML document file stored in \n\t\t\tAmazon S3. However, you cannot specify both properties.</p>"
                     }
                 },
                 "uri": {
                     "target": "com.amazonaws.imagebuilder#Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>The uri of the component. Must be an Amazon S3 URL and the requester must have permission to\n\t\t\taccess the Amazon S3 bucket. If you use Amazon S3, you can specify component content up to your service\n\t\t\tquota. Either <code>data</code> or <code>uri</code> can be used to specify the data within the\n\t\t\tcomponent.</p>"
+                        "smithy.api#documentation": "<p>The <code>uri</code> of a YAML component document file. This must be an S3 URL \n\t\t\t(<code>s3://bucket/key</code>), and the requester must have permission to access \n\t\t\tthe S3 bucket it points to. If you use Amazon S3, you can specify component content \n\t\t\tup to your service quota.</p>\n\t\t       <p>Alternatively, you can specify the YAML document inline, using the component \n\t\t\t<code>data</code> property. You cannot specify both properties.</p>"
                     }
                 },
                 "kmsKeyId": {
@@ -2642,6 +2642,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Configure export settings to deliver disk images created from your image build, \n\t\t\tusing a file format that is compatible with your VMs in that Region.</p>"
                     }
+                },
+                "fastLaunchConfigurations": {
+                    "target": "com.amazonaws.imagebuilder#FastLaunchConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Windows faster-launching configurations to use for AMI distribution.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2918,6 +2924,97 @@
         },
         "com.amazonaws.imagebuilder#ErrorMessage": {
             "type": "string"
+        },
+        "com.amazonaws.imagebuilder#FastLaunchConfiguration": {
+            "type": "structure",
+            "members": {
+                "enabled": {
+                    "target": "com.amazonaws.imagebuilder#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Boolean that represents the current state of faster launching for the \n\t\t\tWindows AMI. Set to <code>true</code> to start using Windows faster launching, or \n\t\t\t<code>false</code> to stop using it.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "snapshotConfiguration": {
+                    "target": "com.amazonaws.imagebuilder#FastLaunchSnapshotConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration settings for managing the number of snapshots that are \n\t\t\tcreated from pre-provisioned instances for the Windows AMI when faster \n\t\t\tlaunching is enabled.</p>"
+                    }
+                },
+                "maxParallelLaunches": {
+                    "target": "com.amazonaws.imagebuilder#MaxParallelLaunches",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of parallel instances that are launched for creating \n\t\t\tresources.</p>"
+                    }
+                },
+                "launchTemplate": {
+                    "target": "com.amazonaws.imagebuilder#FastLaunchLaunchTemplateSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The launch template that the fast-launch enabled Windows AMI uses when it \n\t\t\tlaunches Windows instances to create pre-provisioned snapshots.</p>"
+                    }
+                },
+                "accountId": {
+                    "target": "com.amazonaws.imagebuilder#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The owner account ID for the fast-launch enabled Windows AMI.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Define and configure faster launching for output Windows AMIs.</p>"
+            }
+        },
+        "com.amazonaws.imagebuilder#FastLaunchConfigurationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.imagebuilder#FastLaunchConfiguration"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#FastLaunchLaunchTemplateSpecification": {
+            "type": "structure",
+            "members": {
+                "launchTemplateId": {
+                    "target": "com.amazonaws.imagebuilder#LaunchTemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the launch template to use for faster launching for a Windows AMI.</p>"
+                    }
+                },
+                "launchTemplateName": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the launch template to use for faster launching for a Windows AMI.</p>"
+                    }
+                },
+                "launchTemplateVersion": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the launch template to use for faster launching for a Windows AMI.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Identifies the launch template that the associated Windows AMI uses for \n\t\t\tlaunching an instance when faster launching is enabled.</p>\n\t\t       <note>\n\t\t\t         <p>You can specify either the <code>launchTemplateName</code> or the \n\t\t\t\t<code>launchTemplateId</code>, but not both.</p>\n\t\t       </note>"
+            }
+        },
+        "com.amazonaws.imagebuilder#FastLaunchSnapshotConfiguration": {
+            "type": "structure",
+            "members": {
+                "targetResourceCount": {
+                    "target": "com.amazonaws.imagebuilder#TargetResourceCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of pre-provisioned snapshots to keep on hand for a fast-launch enabled \n\t\t\tWindows AMI.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration settings for creating and managing pre-provisioned snapshots \n\t\t\tfor a fast-launch enabled Windows AMI.</p>"
+            }
         },
         "com.amazonaws.imagebuilder#Filter": {
             "type": "structure",
@@ -6354,6 +6451,16 @@
                 "smithy.api#documentation": "<p>Logging configuration defines where Image Builder uploads your logs.</p>"
             }
         },
+        "com.amazonaws.imagebuilder#MaxParallelLaunches": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 10000
+                }
+            }
+        },
         "com.amazonaws.imagebuilder#NonEmptyString": {
             "type": "string",
             "traits": {
@@ -7290,6 +7397,16 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The container repository where the output container image is stored.</p>"
+            }
+        },
+        "com.amazonaws.imagebuilder#TargetResourceCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 10000
+                }
             }
         },
         "com.amazonaws.imagebuilder#Timezone": {

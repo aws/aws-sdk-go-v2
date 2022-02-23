@@ -76,7 +76,7 @@
                 "Split": {
                     "target": "com.amazonaws.comprehend#Split",
                     "traits": {
-                        "smithy.api#documentation": "<p>The purpose of the data you've provided in the augmented manifest. You can either train or test this data. If you don't specify, the default is train.</p>\n         <p>TRAIN - all of the documents in the manifest will be used for training. If no test documents are provided, Amazon Comprehend will automatically reserve a portion of the training documents for testing.</p>\n         <p> TEST - all of the documents in the manifest will be used for testing.</p>"
+                        "smithy.api#documentation": "<p>The purpose of the data you've provided in the augmented manifest. You can either train or\n      test this data. If you don't specify, the default is train.</p>\n         <p>TRAIN - all of the documents in the manifest will be used for training. If no test\n      documents are provided, Amazon Comprehend will automatically reserve a portion of the training\n      documents for testing.</p>\n         <p> TEST - all of the documents in the manifest will be used for testing.</p>"
                     }
                 },
                 "AttributeNames": {
@@ -89,19 +89,19 @@
                 "AnnotationDataS3Uri": {
                     "target": "com.amazonaws.comprehend#S3Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>The S3 prefix to the annotation files that are referred in the augmented manifest file.</p>"
+                        "smithy.api#documentation": "<p>The S3 prefix to the annotation files that are referred in the augmented manifest\n      file.</p>"
                     }
                 },
                 "SourceDocumentsS3Uri": {
                     "target": "com.amazonaws.comprehend#S3Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>The S3 prefix to the source files (PDFs) that are referred to in the augmented manifest file.</p>"
+                        "smithy.api#documentation": "<p>The S3 prefix to the source files (PDFs) that are referred to in the augmented manifest\n      file.</p>"
                     }
                 },
                 "DocumentType": {
                     "target": "com.amazonaws.comprehend#AugmentedManifestsDocumentTypeFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of augmented manifest. PlainTextDocument or SemiStructuredDocument. If you don't specify, the default is PlainTextDocument. </p>\n         <ul>\n            <li>\n               <p>\n                  <code>PLAIN_TEXT_DOCUMENT</code> A document type that represents any unicode text that is encoded in UTF-8.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SEMI_STRUCTURED_DOCUMENT</code> A document type with positional and structural context, like a PDF. For training with Amazon Comprehend, only PDFs are supported. \n         For inference, Amazon Comprehend support PDFs, DOCX and TXT.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The type of augmented manifest. PlainTextDocument or SemiStructuredDocument. If you don't\n      specify, the default is PlainTextDocument. </p>\n         <ul>\n            <li>\n               <p>\n                  <code>PLAIN_TEXT_DOCUMENT</code> A document type that represents any unicode text that\n          is encoded in UTF-8.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SEMI_STRUCTURED_DOCUMENT</code> A document type with positional and structural\n          context, like a PDF. For training with Amazon Comprehend, only PDFs are supported. For\n          inference, Amazon Comprehend support PDFs, DOCX and TXT.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -511,7 +511,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The result of calling the  operation. The operation\n      returns one object that is successfully processed by the operation.</p>"
+                "smithy.api#documentation": "<p>The result of calling the  operation. The\n      operation returns one object that is successfully processed by the operation.</p>"
             }
         },
         "com.amazonaws.comprehend#BatchDetectSyntaxRequest": {
@@ -539,7 +539,7 @@
                 "ResultList": {
                     "target": "com.amazonaws.comprehend#ListOfDetectSyntaxResult",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of  objects containing the results\n      of the operation. The results are sorted in ascending order by the <code>Index</code> field\n      and match the order of the documents in the input list. If all of the documents contain an\n      error, the <code>ResultList</code> is empty.</p>",
+                        "smithy.api#documentation": "<p>A list of  objects containing the\n      results of the operation. The results are sorted in ascending order by the <code>Index</code>\n      field and match the order of the documents in the input list. If all of the documents contain\n      an error, the <code>ResultList</code> is empty.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -816,6 +816,21 @@
         },
         "com.amazonaws.comprehend#Comprehend_20171127": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Comprehend",
+                    "arnNamespace": "comprehend",
+                    "cloudFormationName": "Comprehend",
+                    "cloudTrailEventSource": "comprehend.amazonaws.com",
+                    "endpointPrefix": "comprehend"
+                },
+                "aws.auth#sigv4": {
+                    "name": "comprehend"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<p>Amazon Comprehend is an AWS service for gaining insight into the content of documents.\n      Use these actions to determine the topics contained in your documents, the topics they\n      discuss, the predominant sentiment expressed in them, the predominant language used, and\n      more.</p>",
+                "smithy.api#title": "Amazon Comprehend"
+            },
             "version": "2017-11-27",
             "operations": [
                 {
@@ -858,6 +873,9 @@
                     "target": "com.amazonaws.comprehend#DeleteEntityRecognizer"
                 },
                 {
+                    "target": "com.amazonaws.comprehend#DeleteResourcePolicy"
+                },
+                {
                     "target": "com.amazonaws.comprehend#DescribeDocumentClassificationJob"
                 },
                 {
@@ -885,6 +903,9 @@
                     "target": "com.amazonaws.comprehend#DescribePiiEntitiesDetectionJob"
                 },
                 {
+                    "target": "com.amazonaws.comprehend#DescribeResourcePolicy"
+                },
+                {
                     "target": "com.amazonaws.comprehend#DescribeSentimentDetectionJob"
                 },
                 {
@@ -907,6 +928,9 @@
                 },
                 {
                     "target": "com.amazonaws.comprehend#DetectSyntax"
+                },
+                {
+                    "target": "com.amazonaws.comprehend#ImportModel"
                 },
                 {
                     "target": "com.amazonaws.comprehend#ListDocumentClassificationJobs"
@@ -949,6 +973,9 @@
                 },
                 {
                     "target": "com.amazonaws.comprehend#ListTopicsDetectionJobs"
+                },
+                {
+                    "target": "com.amazonaws.comprehend#PutResourcePolicy"
                 },
                 {
                     "target": "com.amazonaws.comprehend#StartDocumentClassificationJob"
@@ -1007,22 +1034,7 @@
                 {
                     "target": "com.amazonaws.comprehend#UpdateEndpoint"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Comprehend",
-                    "arnNamespace": "comprehend",
-                    "cloudFormationName": "Comprehend",
-                    "cloudTrailEventSource": "comprehend.amazonaws.com",
-                    "endpointPrefix": "comprehend"
-                },
-                "aws.auth#sigv4": {
-                    "name": "comprehend"
-                },
-                "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>Amazon Comprehend is an AWS service for gaining insight into the content of documents.\n      Use these actions to determine the topics contained in your documents, the topics they\n      discuss, the predominant sentiment expressed in them, the predominant language used, and\n      more.</p>",
-                "smithy.api#title": "Amazon Comprehend"
-            }
+            ]
         },
         "com.amazonaws.comprehend#ConcurrentModificationException": {
             "type": "structure",
@@ -1144,7 +1156,7 @@
                 "VersionName": {
                     "target": "com.amazonaws.comprehend#VersionName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version name given to the newly created classifier. \n      Version names can have a maximum of 256 characters. Alphanumeric characters, hyphens (-) and underscores (_) are allowed. \n      The version name must be unique among all models with the same classifier name in the account/AWS Region.</p>"
+                        "smithy.api#documentation": "<p>The version name given to the newly created classifier. Version names can have a maximum\n      of 256 characters. Alphanumeric characters, hyphens (-) and underscores (_) are allowed. The\n      version name must be unique among all models with the same classifier name in the account/AWS\n      Region.</p>"
                     }
                 },
                 "DataAccessRoleArn": {
@@ -1210,6 +1222,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt\n      trained custom models. The ModelKmsKeyId can be either of the following formats:</p>\n         <ul>\n            <li>\n               <p>KMS Key ID: <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n               </p>\n            </li>\n            <li>\n               <p>Amazon Resource Name (ARN) of a KMS Key:\n            <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n               </p>\n            </li>\n         </ul>"
                     }
+                },
+                "ModelPolicy": {
+                    "target": "com.amazonaws.comprehend#Policy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource-based policy to attach to your custom document classifier model. You can use\n      this policy to allow another AWS account to import your custom model.</p>\n         <p>Provide your policy as a JSON body that you enter as a UTF-8 encoded string without line\n      breaks. To provide valid JSON, enclose the attribute names and values in double quotes. If the\n      JSON body is also enclosed in double quotes, then you must escape the double quotes that are\n      inside the policy:</p>\n         <p>\n            <code>\"{\\\"attribute\\\": \\\"value\\\", \\\"attribute\\\": [\\\"value\\\"]}\"</code>\n         </p>\n         <p>To avoid escaping quotes, you can use single quotes to enclose the policy and double\n      quotes to enclose the JSON names and values:</p>\n         <p>\n            <code>'{\"attribute\": \"value\", \"attribute\": [\"value\"]}'</code>\n         </p>"
+                    }
                 }
             }
         },
@@ -1259,7 +1277,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a model-specific endpoint for synchronous inference for a previously trained\n      custom model\n      </p>"
+                "smithy.api#documentation": "<p>Creates a model-specific endpoint for synchronous inference for a previously trained\n      custom model </p>"
             }
         },
         "com.amazonaws.comprehend#CreateEndpointRequest": {
@@ -1369,7 +1387,7 @@
                 "VersionName": {
                     "target": "com.amazonaws.comprehend#VersionName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version name given to the newly created recognizer. \n      Version names can be a maximum of 256 characters. Alphanumeric characters, hyphens (-) and underscores (_) are allowed. \n      The version name must be unique among all models with the same recognizer name in the account/ AWS Region.</p>"
+                        "smithy.api#documentation": "<p>The version name given to the newly created recognizer. Version names can be a maximum of\n      256 characters. Alphanumeric characters, hyphens (-) and underscores (_) are allowed. The\n      version name must be unique among all models with the same recognizer name in the account/ AWS\n      Region.</p>"
                     }
                 },
                 "DataAccessRoleArn": {
@@ -1422,6 +1440,12 @@
                     "target": "com.amazonaws.comprehend#KmsKeyId",
                     "traits": {
                         "smithy.api#documentation": "<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt\n      trained custom models. The ModelKmsKeyId can be either of the following formats</p>\n         <ul>\n            <li>\n               <p>KMS Key ID: <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n               </p>\n            </li>\n            <li>\n               <p>Amazon Resource Name (ARN) of a KMS Key:\n            <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n               </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "ModelPolicy": {
+                    "target": "com.amazonaws.comprehend#Policy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON resource-based policy to attach to your custom entity recognizer model. You can\n      use this policy to allow another AWS account to import your custom model.</p>\n         <p>Provide your JSON as a UTF-8 encoded string without line breaks. To provide valid JSON for\n      your policy, enclose the attribute names and values in double quotes. If the JSON body is also\n      enclosed in double quotes, then you must escape the double quotes that are inside the\n      policy:</p>\n         <p>\n            <code>\"{\\\"attribute\\\": \\\"value\\\", \\\"attribute\\\": [\\\"value\\\"]}\"</code>\n         </p>\n         <p>To avoid escaping quotes, you can use single quotes to enclose the policy and double\n      quotes to enclose the JSON names and values:</p>\n         <p>\n            <code>'{\"attribute\": \"value\", \"attribute\": [\"value\"]}'</code>\n         </p>"
                     }
                 }
             }
@@ -1593,6 +1617,51 @@
             }
         },
         "com.amazonaws.comprehend#DeleteEntityRecognizerResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.comprehend#DeleteResourcePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.comprehend#DeleteResourcePolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.comprehend#DeleteResourcePolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.comprehend#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.comprehend#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.comprehend#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a resource-based policy that is attached to a custom model.</p>"
+            }
+        },
+        "com.amazonaws.comprehend#DeleteResourcePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.comprehend#ComprehendModelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the custom model version that has the policy to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PolicyRevisionId": {
+                    "target": "com.amazonaws.comprehend#PolicyRevisionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The revision ID of the policy to delete.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.comprehend#DeleteResourcePolicyResponse": {
             "type": "structure",
             "members": {}
         },
@@ -2031,6 +2100,70 @@
             "members": {
                 "PiiEntitiesDetectionJobProperties": {
                     "target": "com.amazonaws.comprehend#PiiEntitiesDetectionJobProperties"
+                }
+            }
+        },
+        "com.amazonaws.comprehend#DescribeResourcePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.comprehend#DescribeResourcePolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.comprehend#DescribeResourcePolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.comprehend#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.comprehend#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.comprehend#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the details of a resource-based policy that is attached to a custom model, including\n      the JSON body of the policy.</p>"
+            }
+        },
+        "com.amazonaws.comprehend#DescribeResourcePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.comprehend#ComprehendModelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the policy to describe.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.comprehend#DescribeResourcePolicyResponse": {
+            "type": "structure",
+            "members": {
+                "ResourcePolicy": {
+                    "target": "com.amazonaws.comprehend#Policy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON body of the resource-based policy.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.comprehend#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the policy was created.</p>"
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.comprehend#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the policy was last modified.</p>"
+                    }
+                },
+                "PolicyRevisionId": {
+                    "target": "com.amazonaws.comprehend#PolicyRevisionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The revision ID of the policy. Each time you modify a policy, Amazon Comprehend assigns a\n      new revision ID, and it deletes the prior version of the policy.</p>"
+                    }
                 }
             }
         },
@@ -2722,7 +2855,7 @@
                 "TestS3Uri": {
                     "target": "com.amazonaws.comprehend#S3Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 URI for the input data. \n      The Amazon S3 bucket must be in the same AWS Region as the API endpoint that you are calling.\n      The URI can point to a single input file or it can provide the prefix for a collection of input files. </p>"
+                        "smithy.api#documentation": "<p>The Amazon S3 URI for the input data. The Amazon S3 bucket must be in the same AWS Region\n      as the API endpoint that you are calling. The URI can point to a single input file or it can\n      provide the prefix for a collection of input files. </p>"
                     }
                 },
                 "LabelDelimiter": {
@@ -2881,6 +3014,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The version name that you assigned to the document classifier.</p>"
                     }
+                },
+                "SourceModelArn": {
+                    "target": "com.amazonaws.comprehend#DocumentClassifierArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the source model. This model was imported from a\n      different AWS account to create the document classifier model in your AWS account.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2975,7 +3114,7 @@
         "com.amazonaws.comprehend#DocumentReadFeatureTypes": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>A list of the types of analyses to perform. This field specifies what feature types need to be extracted from the document where entity recognition is \n      expected.</p>\n    \n         <ul>\n            <li>\n               <p>\n                  <code>TABLES</code> - Add TABLES to the list to return information about the tables\n          that are detected in the input document. </p>\n            </li>\n            <li>\n               <p>\n                  <code>FORMS</code> - Add FORMS to return detected form data. </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>A list of the types of analyses to perform. This field specifies what feature types\n      need to be extracted from the document where entity recognition is expected.</p>\n\n         <ul>\n            <li>\n               <p>\n                  <code>TABLES</code> - Add TABLES to the list to return information about the tables\n          that are detected in the input document. </p>\n            </li>\n            <li>\n               <p>\n                  <code>FORMS</code> - Add FORMS to return detected form data. </p>\n            </li>\n         </ul>",
                 "smithy.api#enum": [
                     {
                         "value": "TABLES",
@@ -3009,14 +3148,14 @@
                 "DocumentReadAction": {
                     "target": "com.amazonaws.comprehend#DocumentReadAction",
                     "traits": {
-                        "smithy.api#documentation": "<p>This enum field will start with two values which will apply to PDFs:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>TEXTRACT_DETECT_DOCUMENT_TEXT</code> - The service calls DetectDocumentText for PDF documents per page.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TEXTRACT_ANALYZE_DOCUMENT</code> - The service calls AnalyzeDocument for PDF documents per page.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>This enum field will start with two values which will apply to PDFs:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>TEXTRACT_DETECT_DOCUMENT_TEXT</code> - The service calls DetectDocumentText\n          for PDF documents per page.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TEXTRACT_ANALYZE_DOCUMENT</code> - The service calls AnalyzeDocument for PDF\n          documents per page.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "DocumentReadMode": {
                     "target": "com.amazonaws.comprehend#DocumentReadMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>This enum field provides two values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SERVICE_DEFAULT</code> - use service defaults for Document reading. For Digital PDF it would mean using an internal parser instead of Textract APIs</p>\n            </li>\n            <li>\n               <p>\n                  <code>FORCE_DOCUMENT_READ_ACTION</code> - Always use specified action for DocumentReadAction, including Digital PDF.\n        </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>This enum field provides two values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SERVICE_DEFAULT</code> - use service defaults for Document reading. For\n          Digital PDF it would mean using an internal parser instead of Textract APIs</p>\n            </li>\n            <li>\n               <p>\n                  <code>FORCE_DOCUMENT_READ_ACTION</code> - Always use specified action for\n          DocumentReadAction, including Digital PDF. </p>\n            </li>\n         </ul>"
                     }
                 },
                 "FeatureTypes": {
@@ -3079,7 +3218,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides information for filtering a list of dominant language detection jobs. For more\n      information, see the  operation.</p>"
+                "smithy.api#documentation": "<p>Provides information for filtering a list of dominant language detection jobs. For more\n      information, see the \n      operation.</p>"
             }
         },
         "com.amazonaws.comprehend#DominantLanguageDetectionJobProperties": {
@@ -3236,7 +3375,7 @@
                 "DesiredModelArn": {
                     "target": "com.amazonaws.comprehend#ComprehendModelArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>ARN of the new model to use for updating an existing endpoint. This ARN is going to be different from the model ARN when the update is in progress</p>"
+                        "smithy.api#documentation": "<p>ARN of the new model to use for updating an existing endpoint. This ARN is going to be\n      different from the model ARN when the update is in progress</p>"
                     }
                 },
                 "DesiredInferenceUnits": {
@@ -3272,7 +3411,7 @@
                 "DesiredDataAccessRoleArn": {
                     "target": "com.amazonaws.comprehend#IamRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>Data access role ARN to use in case the new model is encrypted with a customer KMS key.</p>"
+                        "smithy.api#documentation": "<p>Data access role ARN to use in case the new model is encrypted with a customer KMS\n      key.</p>"
                     }
                 }
             },
@@ -3514,7 +3653,7 @@
                 "TestS3Uri": {
                     "target": "com.amazonaws.comprehend#S3Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>This specifies the Amazon S3 location where the test annotations for an entity recognizer are located. \n      The URI must be in the same AWS Region as the API endpoint that you are calling.</p>"
+                        "smithy.api#documentation": "<p>This specifies the Amazon S3 location where the test annotations for an entity recognizer\n      are located. The URI must be in the same AWS Region as the API endpoint that you are\n      calling.</p>"
                     }
                 }
             },
@@ -3566,13 +3705,13 @@
                 "TestS3Uri": {
                     "target": "com.amazonaws.comprehend#S3Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p> Specifies the Amazon S3 location where the test documents for an entity recognizer are located. \n      The URI must be in the same AWS Region as the API endpoint that you are calling.</p>"
+                        "smithy.api#documentation": "<p> Specifies the Amazon S3 location where the test documents for an entity recognizer are\n      located. The URI must be in the same AWS Region as the API endpoint that you are\n      calling.</p>"
                     }
                 },
                 "InputFormat": {
                     "target": "com.amazonaws.comprehend#InputFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p> Specifies how the text in an input file should be processed. This is optional, and the default is ONE_DOC_PER_LINE.\n      \n      ONE_DOC_PER_FILE - Each file is considered a separate document. Use this option when you are processing large documents, such as newspaper articles or scientific papers.\n      \n      ONE_DOC_PER_LINE - Each line in a file is considered a separate document. Use this option when you are processing many short documents, such as text messages.</p>"
+                        "smithy.api#documentation": "<p> Specifies how the text in an input file should be processed. This is optional, and the\n      default is ONE_DOC_PER_LINE. ONE_DOC_PER_FILE - Each file is considered a separate document.\n      Use this option when you are processing large documents, such as newspaper articles or\n      scientific papers. ONE_DOC_PER_LINE - Each line in a file is considered a separate document.\n      Use this option when you are processing many short documents, such as text messages.</p>"
                     }
                 }
             },
@@ -3865,6 +4004,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The version name you assigned to the entity recognizer.</p>"
                     }
+                },
+                "SourceModelArn": {
+                    "target": "com.amazonaws.comprehend#EntityRecognizerArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the source model. This model was imported from a\n      different AWS account to create the entity recognizer model in your AWS account.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3971,7 +4116,7 @@
                     "min": 0,
                     "max": 64
                 },
-                "smithy.api#pattern": "^(?:(?!\\\\n+|\\\\t+|\\\\r+|[\\r\\t\\n,]).)+$"
+                "smithy.api#pattern": "^(?![^\\n\\r\\t,]*\\\\n|\\\\r|\\\\t)[^\\n\\r\\t,]+$"
             }
         },
         "com.amazonaws.comprehend#EntityTypesEvaluationMetrics": {
@@ -4165,6 +4310,100 @@
                 "smithy.api#pattern": "^arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+$"
             }
         },
+        "com.amazonaws.comprehend#ImportModel": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.comprehend#ImportModelRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.comprehend#ImportModelResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.comprehend#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.comprehend#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.comprehend#KmsKeyValidationException"
+                },
+                {
+                    "target": "com.amazonaws.comprehend#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.comprehend#ResourceLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.comprehend#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.comprehend#ResourceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.comprehend#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.comprehend#TooManyTagsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new custom model that replicates a source custom model that you import. The\n      source model can be in your AWS account or another one.</p>\n         <p>If the source model is in another AWS account, then it must have a resource-based policy\n      that authorizes you to import it.</p>\n         <p>The source model must be in the same AWS region that you're using when you import. You\n      can't import a model that's in a different region.</p>"
+            }
+        },
+        "com.amazonaws.comprehend#ImportModelRequest": {
+            "type": "structure",
+            "members": {
+                "SourceModelArn": {
+                    "target": "com.amazonaws.comprehend#ComprehendModelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the custom model to import.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ModelName": {
+                    "target": "com.amazonaws.comprehend#ComprehendArnName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name to assign to the custom model that is created in Amazon Comprehend by this\n      import.</p>"
+                    }
+                },
+                "VersionName": {
+                    "target": "com.amazonaws.comprehend#VersionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version name given to the custom model that is created by this import. Version names\n      can have a maximum of 256 characters. Alphanumeric characters, hyphens (-) and underscores (_)\n      are allowed. The version name must be unique among all models with the same classifier name in\n      the account/AWS Region.</p>"
+                    }
+                },
+                "ModelKmsKeyId": {
+                    "target": "com.amazonaws.comprehend#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt\n      trained custom models. The ModelKmsKeyId can be either of the following formats:</p>\n         <ul>\n            <li>\n               <p>KMS Key ID: <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n               </p>\n            </li>\n            <li>\n               <p>Amazon Resource Name (ARN) of a KMS Key:\n            <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n               </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "DataAccessRoleArn": {
+                    "target": "com.amazonaws.comprehend#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that allows\n      Amazon Comprehend to use Amazon Key Management Service (KMS) to encrypt or decrypt the custom\n      model.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.comprehend#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags to be associated with the custom model that is created by this import. A tag is a\n      key-value pair that adds as a metadata to a resource used by Amazon Comprehend. For example, a\n      tag with \"Sales\" as the key might be added to a resource to indicate its use by the sales\n      department.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.comprehend#ImportModelResponse": {
+            "type": "structure",
+            "members": {
+                "ModelArn": {
+                    "target": "com.amazonaws.comprehend#ComprehendModelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the custom model being imported.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.comprehend#InferenceUnitsInteger": {
             "type": "integer",
             "traits": {
@@ -4193,7 +4432,7 @@
                 "DocumentReaderConfig": {
                     "target": "com.amazonaws.comprehend#DocumentReaderConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The document reader config field applies only for InputDataConfig of StartEntitiesDetectionJob. </p>\n         <p>Use DocumentReaderConfig to provide specifications about how you want your inference documents read.\n      Currently it applies for PDF documents in StartEntitiesDetectionJob custom inference.</p>"
+                        "smithy.api#documentation": "<p>The document reader config field applies only for InputDataConfig of\n      StartEntitiesDetectionJob. </p>\n         <p>Use DocumentReaderConfig to provide specifications about how you want your inference\n      documents read. Currently it applies for PDF documents in StartEntitiesDetectionJob custom\n      inference.</p>"
                     }
                 }
             },
@@ -6098,6 +6337,85 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Provides configuration parameters for the output of PII entity detection jobs.</p>"
+            }
+        },
+        "com.amazonaws.comprehend#Policy": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20000
+                },
+                "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+$"
+            }
+        },
+        "com.amazonaws.comprehend#PolicyRevisionId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[0-9A-Fa-f]+$"
+            }
+        },
+        "com.amazonaws.comprehend#PutResourcePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.comprehend#PutResourcePolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.comprehend#PutResourcePolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.comprehend#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.comprehend#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.comprehend#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Attaches a resource-based policy to a custom model. You can use this policy to authorize\n      an entity in another AWS account to import the custom model, which replicates it in Amazon\n      Comprehend in their account.</p>"
+            }
+        },
+        "com.amazonaws.comprehend#PutResourcePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.comprehend#ComprehendModelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the custom model to attach the policy to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourcePolicy": {
+                    "target": "com.amazonaws.comprehend#Policy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON resource-based policy to attach to your custom model. Provide your JSON as a\n      UTF-8 encoded string without line breaks. To provide valid JSON for your policy, enclose the\n      attribute names and values in double quotes. If the JSON body is also enclosed in double\n      quotes, then you must escape the double quotes that are inside the policy:</p>\n         <p>\n            <code>\"{\\\"attribute\\\": \\\"value\\\", \\\"attribute\\\": [\\\"value\\\"]}\"</code>\n         </p>\n         <p>To avoid escaping quotes, you can use single quotes to enclose the policy and double\n      quotes to enclose the JSON names and values:</p>\n         <p>\n            <code>'{\"attribute\": \"value\", \"attribute\": [\"value\"]}'</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PolicyRevisionId": {
+                    "target": "com.amazonaws.comprehend#PolicyRevisionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The revision ID that Amazon Comprehend assigned to the policy that you are updating. If\n      you are creating a new policy that has no prior version, don't use this parameter. Amazon\n      Comprehend creates the revision ID for you.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.comprehend#PutResourcePolicyResponse": {
+            "type": "structure",
+            "members": {
+                "PolicyRevisionId": {
+                    "target": "com.amazonaws.comprehend#PolicyRevisionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The revision ID of the policy. Each time you modify a policy, Amazon Comprehend assigns a\n      new revision ID, and it deletes the prior version of the policy.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.comprehend#RedactionConfig": {

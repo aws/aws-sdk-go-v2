@@ -1746,7 +1746,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a recommender with the recipe (a Domain dataset group use case) you specify. \n      You create recommenders for a Domain dataset group and specify the recommender's Amazon Resource Name (ARN) when you make a\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html\">GetRecommendations</a>\n      request.\n     </p>\n    \n    \n    \n         <p>\n            <b>Status</b>\n         </p>\n         <p>A recommender can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>\n            </li>\n            <li>\n               <p>DELETE PENDING > DELETE IN_PROGRESS</p>\n            </li>\n         </ul>\n         <p>To get the recommender status, call <a>DescribeRecommender</a>.</p>\n         <note>\n            <p>Wait until the <code>status</code> of the recommender\n        is <code>ACTIVE</code> before asking the recommender for recommendations.</p>\n         </note>\n         <p class=\"title\">\n            <b>Related APIs</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>ListRecommenders</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DescribeRecommender</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>UpdateRecommender</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteRecommender</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Creates a recommender with the recipe (a Domain dataset group use case) you specify. \n      You create recommenders for a Domain dataset group and specify the recommender's Amazon Resource Name (ARN) when you make a\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html\">GetRecommendations</a>\n      request.\n     </p>\n    \n         <p>\n            <b>Minimum recommendation requests per second</b>\n         </p>\n    \n         <p>When you create a recommender, you can configure the recommender's minimum recommendation requests per second. The minimum recommendation requests per second\n      (<code>minRecommendationRequestsPerSecond</code>) specifies the baseline recommendation request throughput provisioned by\n      Amazon Personalize. The default minRecommendationRequestsPerSecond is <code>1</code>. A recommendation request is a single <code>GetRecommendations</code> operation.\n      Request throughput is measured in requests per second and Amazon Personalize uses your requests per second to derive\n      your requests per hour and the price of your recommender usage.\n    </p>\n         <p>\n      If your requests per second increases beyond\n      <code>minRecommendationRequestsPerSecond</code>, Amazon Personalize auto-scales the provisioned capacity up and down,\n      but never below <code>minRecommendationRequestsPerSecond</code>.\n      There's a short time delay while the capacity is increased that might cause loss of\n      requests.</p>\n         <p>\n      Your bill is the greater of either the minimum requests per hour (based on minRecommendationRequestsPerSecond)\n      or the actual number of requests. The actual request throughput used is calculated as the average requests/second within a one-hour window.\n      \n      We recommend starting with the default <code>minRecommendationRequestsPerSecond</code>, track\n      your usage using Amazon CloudWatch metrics, and then increase the <code>minRecommendationRequestsPerSecond</code>\n      as necessary.\n    </p>\n    \n         <p>\n            <b>Status</b>\n         </p>\n         <p>A recommender can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>\n            </li>\n            <li>\n               <p>DELETE PENDING > DELETE IN_PROGRESS</p>\n            </li>\n         </ul>\n         <p>To get the recommender status, call <a>DescribeRecommender</a>.</p>\n         <note>\n            <p>Wait until the <code>status</code> of the recommender\n        is <code>ACTIVE</code> before asking the recommender for recommendations.</p>\n         </note>\n         <p class=\"title\">\n            <b>Related APIs</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>ListRecommenders</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DescribeRecommender</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>UpdateRecommender</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteRecommender</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -5670,6 +5670,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the exploration configuration hyperparameters, including <code>explorationWeight</code> and \n      <code>explorationItemAgeCutOff</code>, you want to use to configure the amount of item exploration Amazon Personalize uses when\n      recommending items. Provide <code>itemExplorationConfig</code> data only if your recommenders generate personalized recommendations for a user\n      (not popular items or similar items).</p>"
                     }
+                },
+                "minRecommendationRequestsPerSecond": {
+                    "target": "com.amazonaws.personalize#TransactionsPerSecond",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the requested minimum provisioned recommendation requests per second that\n      Amazon Personalize will support.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5767,7 +5773,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides a summary of the properties of a recommender update. For a complete listing, call the\n      <a>DescribeRecommender</a> API.</p>"
+                "smithy.api#documentation": "<p>Provides a summary of the properties of a recommender update. For a complete listing, call the\n      DescribeRecommender API operation.</p>"
             }
         },
         "com.amazonaws.personalize#Recommenders": {
@@ -5859,7 +5865,7 @@
                 "kmsKeyArn": {
                     "target": "com.amazonaws.personalize#KmsKeyArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Key Management Service (KMS) key that Amazon Personalize uses to\n      encrypt or decrypt the input and output files of a batch inference job.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Key Management Service (KMS) key that Amazon Personalize uses to\n      encrypt or decrypt the input and output files.</p>"
                     }
                 }
             },

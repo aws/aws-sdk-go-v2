@@ -2166,6 +2166,14 @@
                     {
                         "value": "ModelDeploymentError",
                         "name": "MODEL_DEPLOYMENT_ERROR"
+                    },
+                    {
+                        "value": "GeneratingModelInsightsReport",
+                        "name": "GENERATING_MODEL_INSIGHTS_REPORT"
+                    },
+                    {
+                        "value": "ModelInsightsError",
+                        "name": "MODEL_INSIGHTS_ERROR"
                     }
                 ]
             }
@@ -2798,6 +2806,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon S3 prefix to the explainability artifacts generated for the AutoML\n         candidate.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "ModelInsights": {
+                    "target": "com.amazonaws.sagemaker#ModelInsightsLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 prefix to the model insight artifacts generated for the AutoML\n         candidate.</p>"
                     }
                 }
             },
@@ -27290,6 +27304,14 @@
                 "smithy.api#documentation": "<p>Input object for the model.</p>"
             }
         },
+        "com.amazonaws.sagemaker#ModelInsightsLocation": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
         "com.amazonaws.sagemaker#ModelLatencyThreshold": {
             "type": "structure",
             "members": {
@@ -37633,6 +37655,10 @@
                     {
                         "value": "NVIDIA",
                         "name": "NVIDIA"
+                    },
+                    {
+                        "value": "NNA",
+                        "name": "NNA"
                     }
                 ]
             }

@@ -452,6 +452,14 @@
                     {
                         "value": "SELECTION_ELEMENT",
                         "name": "SELECTION_ELEMENT"
+                    },
+                    {
+                        "value": "MERGED_CELL",
+                        "name": "MERGED_CELL"
+                    },
+                    {
+                        "value": "TITLE",
+                        "name": "TITLE"
                     }
                 ]
             }
@@ -687,6 +695,10 @@
                     {
                         "value": "VALUE",
                         "name": "VALUE"
+                    },
+                    {
+                        "value": "COLUMN_HEADER",
+                        "name": "COLUMN_HEADER"
                     }
                 ]
             }
@@ -1779,6 +1791,14 @@
                     {
                         "value": "COMPLEX_FEATURES",
                         "name": "COMPLEX_FEATURES"
+                    },
+                    {
+                        "value": "MERGED_CELL",
+                        "name": "MERGED_CELL"
+                    },
+                    {
+                        "value": "TITLE",
+                        "name": "TITLE"
                     }
                 ]
             }

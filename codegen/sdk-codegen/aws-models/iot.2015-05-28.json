@@ -21546,6 +21546,18 @@
                     {
                         "value": "THING_GROUP",
                         "name": "THING_GROUP"
+                    },
+                    {
+                        "value": "CLIENT_ID",
+                        "name": "CLIENT_ID"
+                    },
+                    {
+                        "value": "SOURCE_IP",
+                        "name": "SOURCE_IP"
+                    },
+                    {
+                        "value": "PRINCIPAL_ID",
+                        "name": "PRINCIPAL_ID"
                     }
                 ]
             }
