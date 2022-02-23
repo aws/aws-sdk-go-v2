@@ -22,7 +22,7 @@ const (
 var implAsserts = map[string][]string{
 	"sharedConfigProfileProvider":              {envConfigType, loadOptionsType},
 	"sharedConfigFilesProvider":                {envConfigType, loadOptionsType},
-	"customCABundleProvider":                   {envConfigType, loadOptionsType},
+	"customCABundleProvider":                   {envConfigType, sharedConfigType, loadOptionsType},
 	"regionProvider":                           {envConfigType, sharedConfigType, loadOptionsType, ec2IMDSRegionType},
 	"credentialsProviderProvider":              {loadOptionsType},
 	"defaultRegionProvider":                    {loadOptionsType},

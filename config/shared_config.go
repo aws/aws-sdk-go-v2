@@ -1,9 +1,12 @@
 package config
 
 import (
+	"bytes"
 	"context"
 	"errors"
 	"fmt"
+	"io"
+	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
@@ -81,6 +84,8 @@ const (
 	// Retry options
 	retryMaxAttemptsKey = "max_attempts"
 	retryModeKey        = "retry_mode"
+
+	caBundleKey = "ca_bundle"
 )
 
 // defaultSharedConfigProfile allows for swapping the default profile for testing
@@ -171,12 +176,14 @@ type SharedConfig struct {
 	// s3_use_arn_region=true
 	S3UseARNRegion *bool
 
-	// Specifies the EC2 Instance Metadata Service default endpoint selection mode (IPv4 or IPv6)
+	// Specifies the EC2 Instance Metadata Service default endpoint selection
+	// mode (IPv4 or IPv6)
 	//
 	// ec2_metadata_service_endpoint_mode=IPv6
 	EC2IMDSEndpointMode imds.EndpointModeState
 
-	// Specifies the EC2 Instance Metadata Service endpoint to use. If specified it overrides EC2IMDSEndpointMode.
+	// Specifies the EC2 Instance Metadata Service endpoint to use. If
+	// specified it overrides EC2IMDSEndpointMode.
 	//
 	// ec2_metadata_service_endpoint=http://fd00:ec2::254
 	EC2IMDSEndpoint string
@@ -214,6 +221,22 @@ type SharedConfig struct {
 	//
 	// retry_mode=standard
 	RetryMode aws.RetryMode
+
+	// Sets the path to a custom Credentials Authority (CA) Bundle PEM file
+	// that the SDK will use instead of the system's root CA bundle. Only use
+	// this if you want to configure the SDK to use a custom set of CAs.
+	//
+	// Enabling this option will attempt to merge the Transport into the SDK's
+	// HTTP client. If the client's Transport is not a http.Transport an error
+	// will be returned. If the Transport's TLS config is set this option will
+	// cause the SDK to overwrite the Transport's TLS config's  RootCAs value.
+	//
+	// Setting a custom HTTPClient in the aws.Config options will override this
+	// setting. To use this option and custom HTTP client, the HTTP client
+	// needs to be provided when creating the config. Not the service client.
+	//
+	//  ca_bundle=$HOME/my_custom_ca_bundle
+	CustomCABundle string
 }
 
 func (c SharedConfig) getDefaultsMode(ctx context.Context) (value aws.DefaultsMode, ok bool, err error) {
@@ -321,6 +344,19 @@ func (c SharedConfig) GetUseFIPSEndpoint(ctx context.Context) (value aws.FIPSEnd
 	}
 
 	return c.UseFIPSEndpoint, true, nil
+}
+
+// GetCustomCABundle returns the custom CA bundle's PEM bytes if the file was
+func (c SharedConfig) getCustomCABundle(context.Context) (io.Reader, bool, error) {
+	if len(c.CustomCABundle) == 0 {
+		return nil, false, nil
+	}
+
+	b, err := ioutil.ReadFile(c.CustomCABundle)
+	if err != nil {
+		return nil, false, err
+	}
+	return bytes.NewReader(b), true, nil
 }
 
 // loadSharedConfigIgnoreNotExist is an alias for loadSharedConfig with the
@@ -870,6 +906,8 @@ func (c *SharedConfig) setFromIniSection(profile string, section ini.Section) er
 	if err := updateRetryMode(&c.RetryMode, section, retryModeKey); err != nil {
 		return fmt.Errorf("failed to load %s from shared config, %w", retryModeKey, err)
 	}
+
+	updateString(&c.CustomCABundle, section, caBundleKey)
 
 	// Shared Credentials
 	creds := aws.Credentials{

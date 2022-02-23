@@ -30,6 +30,7 @@ var (
 // customCABundleProvider implementor assertions
 var (
 	_ customCABundleProvider = &EnvConfig{}
+	_ customCABundleProvider = &SharedConfig{}
 	_ customCABundleProvider = &LoadOptions{}
 )
 
