@@ -136,8 +136,6 @@ type Options struct {
 	// The HTTP client to invoke API calls with. Defaults to client's default HTTP
 	// implementation if nil.
 	HTTPClient HTTPClient
-
-	clientInitializedOptions map[struct{}]interface{}
 }
 
 // WithAPIOptions returns a functional option for setting the Client's APIOptions
@@ -165,11 +163,6 @@ func (o Options) Copy() Options {
 	to := o
 	to.APIOptions = make([]func(*middleware.Stack) error, len(o.APIOptions))
 	copy(to.APIOptions, o.APIOptions)
-
-	to.clientInitializedOptions = make(map[struct{}]interface{}, len(o.clientInitializedOptions))
-	for k, v := range o.clientInitializedOptions {
-		to.clientInitializedOptions[k] = v
-	}
 
 	return to
 }
