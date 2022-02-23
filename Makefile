@@ -163,7 +163,7 @@ add-module-license-files:
 
 sync-models: sync-endpoints-model sync-api-models
 
-sync-endpoints-model: sync-endpoints.json gen-endpoint-prefix.json
+sync-endpoints-model: sync-endpoints.json
 
 sync-endpoints.json:
 	[[ ! -z "${ENDPOINTS_MODEL}" ]] && cp ${ENDPOINTS_MODEL} ${ENDPOINTS_JSON} || echo "ENDPOINTS_MODEL not set, must not be empty"
