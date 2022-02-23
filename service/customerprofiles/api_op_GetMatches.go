@@ -47,11 +47,9 @@ import (
 //
 // * FullName
 //
-// * BusinessName
-//
-// For
-// example, two or more profiles—with spelling mistakes such as John Doe and Jhn
-// Doe, or different casing email addresses such as JOHN_DOE@ANYCOMPANY.COM and
+// For example, two or
+// more profiles—with spelling mistakes such as John Doe and Jhn Doe, or different
+// casing email addresses such as JOHN_DOE@ANYCOMPANY.COM and
 // johndoe@anycompany.com, or different phone number formats such as 555-010-0000
 // and +1-555-010-0000—can be detected as belonging to the same customer John Doe
 // and merged into a unified profile.

@@ -1320,6 +1320,10 @@ type RecommenderConfig struct {
 	// personalized recommendations for a user (not popular items or similar items).
 	ItemExplorationConfig map[string]string
 
+	// Specifies the requested minimum provisioned recommendation requests per second
+	// that Amazon Personalize will support.
+	MinRecommendationRequestsPerSecond *int32
+
 	noSmithyDocumentSerde
 }
 
@@ -1362,7 +1366,7 @@ type RecommenderSummary struct {
 }
 
 // Provides a summary of the properties of a recommender update. For a complete
-// listing, call the DescribeRecommender API.
+// listing, call the DescribeRecommender API operation.
 type RecommenderUpdateSummary struct {
 
 	// The date and time (in Unix format) that the recommender update was created.
@@ -1398,8 +1402,7 @@ type S3DataConfig struct {
 	Path *string
 
 	// The Amazon Resource Name (ARN) of the Key Management Service (KMS) key that
-	// Amazon Personalize uses to encrypt or decrypt the input and output files of a
-	// batch inference job.
+	// Amazon Personalize uses to encrypt or decrypt the input and output files.
 	KmsKeyArn *string
 
 	noSmithyDocumentSerde

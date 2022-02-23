@@ -8795,6 +8795,11 @@ func awsAwsjson11_deserializeDocumentDataSourceConfiguration(v **types.DataSourc
 				return err
 			}
 
+		case "FsxConfiguration":
+			if err := awsAwsjson11_deserializeDocumentFsxConfiguration(&sv.FsxConfiguration, value); err != nil {
+				return err
+			}
+
 		case "GoogleDriveConfiguration":
 			if err := awsAwsjson11_deserializeDocumentGoogleDriveConfiguration(&sv.GoogleDriveConfiguration, value); err != nil {
 				return err
@@ -10860,6 +10865,84 @@ func awsAwsjson11_deserializeDocumentFaqSummaryItems(v *[]types.FaqSummary, valu
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentFsxConfiguration(v **types.FsxConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FsxConfiguration
+	if *v == nil {
+		sv = &types.FsxConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ExclusionPatterns":
+			if err := awsAwsjson11_deserializeDocumentDataSourceInclusionsExclusionsStrings(&sv.ExclusionPatterns, value); err != nil {
+				return err
+			}
+
+		case "FieldMappings":
+			if err := awsAwsjson11_deserializeDocumentDataSourceToIndexFieldMappingList(&sv.FieldMappings, value); err != nil {
+				return err
+			}
+
+		case "FileSystemId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FileSystemId to be of type string, got %T instead", value)
+				}
+				sv.FileSystemId = ptr.String(jtv)
+			}
+
+		case "FileSystemType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FsxFileSystemType to be of type string, got %T instead", value)
+				}
+				sv.FileSystemType = types.FsxFileSystemType(jtv)
+			}
+
+		case "InclusionPatterns":
+			if err := awsAwsjson11_deserializeDocumentDataSourceInclusionsExclusionsStrings(&sv.InclusionPatterns, value); err != nil {
+				return err
+			}
+
+		case "SecretArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SecretArn to be of type string, got %T instead", value)
+				}
+				sv.SecretArn = ptr.String(jtv)
+			}
+
+		case "VpcConfiguration":
+			if err := awsAwsjson11_deserializeDocumentDataSourceVpcConfiguration(&sv.VpcConfiguration, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

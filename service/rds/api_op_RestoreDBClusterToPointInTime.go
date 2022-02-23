@@ -118,7 +118,7 @@ type RestoreDBClusterToPointInTimeInput struct {
 
 	// The DB subnet group name to use for the new DB cluster. Constraints: If
 	// supplied, must match the name of an existing DBSubnetGroup. Example:
-	// mySubnetgroup Valid for: Aurora DB clusters and Multi-AZ DB clusters
+	// mydbsubnetgroup Valid for: Aurora DB clusters and Multi-AZ DB clusters
 	DBSubnetGroupName *string
 
 	// A value that indicates whether the DB cluster has deletion protection enabled.

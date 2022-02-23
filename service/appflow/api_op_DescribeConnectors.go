@@ -37,6 +37,10 @@ type DescribeConnectorsInput struct {
 	// The type of connector, such as Salesforce, Amplitude, and so on.
 	ConnectorTypes []types.ConnectorType
 
+	// The maximum number of items that should be returned in the result set. The
+	// default is 20.
+	MaxResults *int32
+
 	// The pagination token for the next page of data.
 	NextToken *string
 
@@ -47,6 +51,9 @@ type DescribeConnectorsOutput struct {
 
 	// The configuration that is applied to the connectors used in the flow.
 	ConnectorConfigurations map[string]types.ConnectorConfiguration
+
+	// Information about the connectors supported in Amazon AppFlow.
+	Connectors []types.ConnectorDetail
 
 	// The pagination token for the next page of data.
 	NextToken *string
@@ -128,6 +135,10 @@ var _ DescribeConnectorsAPIClient = (*Client)(nil)
 // DescribeConnectorsPaginatorOptions is the paginator options for
 // DescribeConnectors
 type DescribeConnectorsPaginatorOptions struct {
+	// The maximum number of items that should be returned in the result set. The
+	// default is 20.
+	Limit int32
+
 	// Set to true if pagination should stop if the service returns a pagination token
 	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
@@ -149,6 +160,9 @@ func NewDescribeConnectorsPaginator(client DescribeConnectorsAPIClient, params *
 	}
 
 	options := DescribeConnectorsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
 
 	for _, fn := range optFns {
 		fn(&options)
@@ -176,6 +190,12 @@ func (p *DescribeConnectorsPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	params := *p.params
 	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.DescribeConnectors(ctx, &params, optFns...)
 	if err != nil {

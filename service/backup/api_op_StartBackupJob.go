@@ -58,7 +58,7 @@ type StartBackupJobInput struct {
 	BackupOptions map[string]string
 
 	// A value in minutes during which a successfully started backup must complete, or
-	// else AWS Backup will cancel the job. This value is optional. This value begins
+	// else Backup will cancel the job. This value is optional. This value begins
 	// counting down from when the backup was scheduled. It does not add additional
 	// time for StartWindowMinutes, or if the backup started later than scheduled.
 	CompleteWindowMinutes *int64
@@ -71,11 +71,15 @@ type StartBackupJobInput struct {
 	// The lifecycle defines when a protected resource is transitioned to cold storage
 	// and when it expires. Backup will transition and expire backups automatically
 	// according to the lifecycle that you define. Backups transitioned to cold storage
-	// must be stored in cold storage for a minimum of 90 days. Therefore, the “expire
-	// after days” setting must be 90 days greater than the “transition to cold after
+	// must be stored in cold storage for a minimum of 90 days. Therefore, the
+	// “retention” setting must be 90 days greater than the “transition to cold after
 	// days” setting. The “transition to cold after days” setting cannot be changed
-	// after a backup has been transitioned to cold. Only Amazon EFS file system
-	// backups can be transitioned to cold storage.
+	// after a backup has been transitioned to cold. Only resource types that support
+	// full Backup management can transition their backups to cold storage. Those
+	// resource types are listed in the "Full Backup management" section of the
+	// Feature availability by resource
+	// (https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource)
+	// table. Backup ignores this expression for other resource types.
 	Lifecycle *types.Lifecycle
 
 	// To help organize your resources, you can assign your own metadata to the

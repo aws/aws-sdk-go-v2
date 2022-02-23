@@ -67,9 +67,9 @@ type ListStackSetsInput struct {
 	// of results.
 	MaxResults *int32
 
-	// If the previous paginated request didn't return all of the remaining results,
-	// the response object's NextToken parameter value is set to a token. To retrieve
-	// the next set of results, call ListStackSets again and assign that token to the
+	// If the previous paginated request didn't return all the remaining results, the
+	// response object's NextToken parameter value is set to a token. To retrieve the
+	// next set of results, call ListStackSets again and assign that token to the
 	// request object's NextToken parameter. If there are no remaining results, the
 	// previous response object's NextToken parameter is set to null.
 	NextToken *string

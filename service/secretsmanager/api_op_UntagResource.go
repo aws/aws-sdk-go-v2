@@ -15,7 +15,12 @@ import (
 // metadata is unchanged. If you use tags as part of your security strategy, then
 // removing a tag can change permissions. If successfully completing this operation
 // would result in you losing your permissions for this secret, then the operation
-// is blocked and returns an Access Denied error.
+// is blocked and returns an Access Denied error. Required permissions:
+// secretsmanager:UntagResource. For more information, see  IAM policy actions for
+// Secrets Manager
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions)
+// and Authentication and access control in Secrets Manager
+// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}

@@ -108,8 +108,9 @@ type GetReservationCoverageInput struct {
 	// GetReservationCoverage uses the same Expression
 	// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
 	// object as the other operations, but only AND is supported among each dimension.
-	// You can nest only one level deep. If you don't provide a SERVICE filter, Cost
-	// Explorer defaults to EC2. Cost category is also supported.
+	// You can nest only one level deep. If there are multiple values for a dimension,
+	// they are OR'd together. If you don't provide a SERVICE filter, Cost Explorer
+	// defaults to EC2. Cost category is also supported.
 	Filter *types.Expression
 
 	// The granularity of the Amazon Web Services cost data for the reservation. Valid
@@ -132,10 +133,12 @@ type GetReservationCoverageInput struct {
 	//
 	// * INSTANCE_TYPE
 	//
-	// * LINKED_ACCOUNT
+	// * INVOICING_ENTITY
 	//
 	// *
-	// OPERATING_SYSTEM
+	// LINKED_ACCOUNT
+	//
+	// * OPERATING_SYSTEM
 	//
 	// * PLATFORM
 	//

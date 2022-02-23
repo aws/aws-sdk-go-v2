@@ -75,17 +75,17 @@ type GetCostAndUsageInput struct {
 	// that account's usage of that service. You can nest Expression objects to define
 	// any combination of dimension filters. For more information, see Expression
 	// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html).
-	// The default values are EQUALS and CASE_SENSITIVE. Valid values for MatchOptions
-	// for Dimensions are EQUALS and CASE_SENSITIVE. Valid values for MatchOptions for
-	// CostCategories and Tags are EQUALS, ABSENT, and CASE_SENSITIVE.
+	// Valid values for MatchOptions for CostCategories and Tags are EQUALS, ABSENT,
+	// and CASE_SENSITIVE. The default values are EQUALS and CASE_SENSITIVE. Valid
+	// values for MatchOptions for Dimensions are EQUALS and CASE_SENSITIVE.
 	Filter *types.Expression
 
 	// You can group Amazon Web Services costs using up to two different groups, either
 	// dimensions, tag keys, cost categories, or any two group by types. Valid values
-	// for the DIMENSION type are AZ, INSTANCE_TYPE, LEGAL_ENTITY_NAME, LINKED_ACCOUNT,
-	// OPERATION, PLATFORM, PURCHASE_TYPE, SERVICE, TENANCY, RECORD_TYPE, and
-	// USAGE_TYPE. When you group by the TAG type and include a valid tag key, you get
-	// all tag values, including empty strings.
+	// for the DIMENSION type are AZ, INSTANCE_TYPE, LEGAL_ENTITY_NAME,
+	// INVOICING_ENTITY, LINKED_ACCOUNT, OPERATION, PLATFORM, PURCHASE_TYPE, SERVICE,
+	// TENANCY, RECORD_TYPE, and USAGE_TYPE. When you group by the TAG type and include
+	// a valid tag key, you get all tag values, including empty strings.
 	GroupBy []types.GroupDefinition
 
 	// The token to retrieve the next set of results. Amazon Web Services provides the

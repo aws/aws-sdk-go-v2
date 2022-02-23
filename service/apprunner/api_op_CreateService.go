@@ -33,8 +33,9 @@ func (c *Client) CreateService(ctx context.Context, params *CreateServiceInput, 
 
 type CreateServiceInput struct {
 
-	// A name for the new service. It must be unique across all the running App Runner
-	// services in your Amazon Web Services account in the Amazon Web Services Region.
+	// A name for the App Runner service. It must be unique across all the running App
+	// Runner services in your Amazon Web Services account in the Amazon Web Services
+	// Region.
 	//
 	// This member is required.
 	ServiceName *string
@@ -46,25 +47,30 @@ type CreateServiceInput struct {
 	SourceConfiguration *types.SourceConfiguration
 
 	// The Amazon Resource Name (ARN) of an App Runner automatic scaling configuration
-	// resource that you want to associate with your service. If not provided, App
-	// Runner associates the latest revision of a default auto scaling configuration.
+	// resource that you want to associate with the App Runner service. If not
+	// provided, App Runner associates the latest revision of a default auto scaling
+	// configuration.
 	AutoScalingConfigurationArn *string
 
 	// An optional custom encryption key that App Runner uses to encrypt the copy of
 	// your source repository that it maintains and your service logs. By default, App
-	// Runner uses an Amazon Web Services managed CMK.
+	// Runner uses an Amazon Web Services managed key.
 	EncryptionConfiguration *types.EncryptionConfiguration
 
 	// The settings for the health check that App Runner performs to monitor the health
-	// of your service.
+	// of the App Runner service.
 	HealthCheckConfiguration *types.HealthCheckConfiguration
 
 	// The runtime configuration of instances (scaling units) of the App Runner
 	// service.
 	InstanceConfiguration *types.InstanceConfiguration
 
-	// An optional list of metadata items that you can associate with your service
-	// resource. A tag is a key-value pair.
+	// Configuration settings related to network traffic of the web application that
+	// the App Runner service runs.
+	NetworkConfiguration *types.NetworkConfiguration
+
+	// An optional list of metadata items that you can associate with the App Runner
+	// service resource. A tag is a key-value pair.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

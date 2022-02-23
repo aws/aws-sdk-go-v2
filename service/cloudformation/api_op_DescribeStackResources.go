@@ -52,11 +52,11 @@ type DescribeStackResourcesInput struct {
 	// Cloud (EC2) instance, PhysicalResourceId corresponds to the InstanceId. You can
 	// pass the EC2 InstanceId to DescribeStackResources to find which stack the
 	// instance belongs to and what other resources are part of the stack. Required:
-	// Conditional. If you do not specify PhysicalResourceId, you must specify
+	// Conditional. If you don't specify PhysicalResourceId, you must specify
 	// StackName. Default: There is no default value.
 	PhysicalResourceId *string
 
-	// The name or the unique stack ID that is associated with the stack, which are not
+	// The name or the unique stack ID that is associated with the stack, which aren't
 	// always interchangeable:
 	//
 	// * Running stacks: You can specify either the stack's
@@ -65,8 +65,8 @@ type DescribeStackResourcesInput struct {
 	// * Deleted stacks: You must specify the unique
 	// stack ID.
 	//
-	// Default: There is no default value. Required: Conditional. If you do
-	// not specify StackName, you must specify PhysicalResourceId.
+	// Default: There is no default value. Required: Conditional. If you
+	// don't specify StackName, you must specify PhysicalResourceId.
 	StackName *string
 
 	noSmithyDocumentSerde

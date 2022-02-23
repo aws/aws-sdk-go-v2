@@ -16989,6 +16989,11 @@ func awsAwsjson11_serializeOpDocumentUpdateTableInput(v *UpdateTableInput, value
 		ok.String(*v.TransactionId)
 	}
 
+	if v.VersionId != nil {
+		ok := object.Key("VersionId")
+		ok.String(*v.VersionId)
+	}
+
 	return nil
 }
 

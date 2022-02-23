@@ -572,7 +572,19 @@ type MetricDefinitionConfig struct {
 
 	// The entity, such as a user or session, that does an action that causes a metric
 	// value to be recorded. An example is userDetails.userID.
+	//
+	// This member is required.
 	EntityIdKey *string
+
+	// A name for the metric.
+	//
+	// This member is required.
+	Name *string
+
+	// The value that is tracked to produce the metric.
+	//
+	// This member is required.
+	ValueKey *string
 
 	// The EventBridge event pattern that defines how the metric is recorded. For more
 	// information about EventBridge event patterns, see Amazon EventBridge event
@@ -582,14 +594,8 @@ type MetricDefinitionConfig struct {
 	// This value conforms to the media type: application/json
 	EventPattern *string
 
-	// A name for the metric.
-	Name *string
-
 	// A label for the units that the metric is measuring.
 	UnitLabel *string
-
-	// The value that is tracked to produce the metric.
-	ValueKey *string
 
 	noSmithyDocumentSerde
 }

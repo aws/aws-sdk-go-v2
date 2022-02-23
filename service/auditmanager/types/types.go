@@ -758,6 +758,8 @@ type ControlSet struct {
 type CreateAssessmentFrameworkControl struct {
 
 	// The unique identifier of the control.
+	//
+	// This member is required.
 	Id *string
 
 	noSmithyDocumentSerde
@@ -1304,13 +1306,15 @@ type SourceKeyword struct {
 // This doesn't contain the control set ID.
 type UpdateAssessmentFrameworkControlSet struct {
 
+	// The list of controls that are contained within the control set.
+	//
+	// This member is required.
+	Controls []CreateAssessmentFrameworkControl
+
 	// The name of the control set.
 	//
 	// This member is required.
 	Name *string
-
-	// The list of controls that are contained within the control set.
-	Controls []CreateAssessmentFrameworkControl
 
 	// The unique identifier for the control set.
 	Id *string

@@ -553,9 +553,6 @@ func validateGreengrassConfiguration(v *types.GreengrassConfiguration) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GreengrassConfiguration"}
-	if v.CompilerOptions == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CompilerOptions"))
-	}
 	if v.TargetPlatform != nil {
 		if err := validateTargetPlatform(v.TargetPlatform); err != nil {
 			invalidParams.AddNested("TargetPlatform", err.(smithy.InvalidParamsError))

@@ -17,9 +17,9 @@ import (
 // Amazon S3 bucket location. You can use either method regardless of how the
 // original script was uploaded. Use the Version parameter to track updates to the
 // script. If the call is successful, the updated metadata is stored in the script
-// record and a revised script is uploaded to the Amazon GameLift service. Once the
-// script is updated and acquired by a fleet instance, the new version is used for
-// all new game sessions. Learn more Amazon GameLift Realtime Servers
+// record and a revised script is uploaded to the Amazon Web Services service. Once
+// the script is updated and acquired by a fleet instance, the new version is used
+// for all new game sessions. Learn more Amazon Web Services Realtime Servers
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/realtime-intro.html)
 // Related actions CreateScript | ListScripts | DescribeScript | UpdateScript |
 // DeleteScript | All APIs by task
@@ -54,11 +54,11 @@ type UpdateScriptInput struct {
 	// The location of the Amazon S3 bucket where a zipped file containing your
 	// Realtime scripts is stored. The storage location must specify the Amazon S3
 	// bucket name, the zip file name (the "key"), and a role ARN that allows Amazon
-	// GameLift to access the Amazon S3 storage location. The S3 bucket must be in the
-	// same Region where you want to create a new script. By default, Amazon GameLift
-	// uploads the latest version of the zip file; if you have S3 object versioning
-	// turned on, you can use the ObjectVersion parameter to specify an earlier
-	// version.
+	// Web Services to access the Amazon S3 storage location. The S3 bucket must be in
+	// the same Region where you want to create a new script. By default, Amazon Web
+	// Services uploads the latest version of the zip file; if you have S3 object
+	// versioning turned on, you can use the ObjectVersion parameter to specify an
+	// earlier version.
 	StorageLocation *types.S3Location
 
 	// Version information that is associated with a build or script. Version strings
@@ -67,9 +67,9 @@ type UpdateScriptInput struct {
 
 	// A data object containing your Realtime scripts and dependencies as a zip file.
 	// The zip file can have one or multiple files. Maximum size of a zip file is 5 MB.
-	// When using the AWS CLI tool to create a script, this parameter is set to the zip
-	// file name. It must be prepended with the string "fileb://" to indicate that the
-	// file data is a binary object. For example: --zip-file
+	// When using the Amazon Web Services CLI tool to create a script, this parameter
+	// is set to the zip file name. It must be prepended with the string "fileb://" to
+	// indicate that the file data is a binary object. For example: --zip-file
 	// fileb://myRealtimeScript.zip.
 	ZipFile []byte
 
@@ -83,7 +83,7 @@ type UpdateScriptOutput struct {
 	// from an S3 bucket under your account, the storage location reflects the
 	// information that was provided in the CreateScript request; (2) If the script
 	// file was uploaded from a local zip file, the storage location reflects an S3
-	// location controls by the Amazon GameLift service.
+	// location controls by the Amazon Web Services service.
 	Script *types.Script
 
 	// Metadata pertaining to the operation's result.

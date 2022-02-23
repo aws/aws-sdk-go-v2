@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Assigns tags to the specified resource.
+// Assigns tags to the specified retention rule.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -29,12 +29,12 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the resource to which to assign the tags.
+	// The Amazon Resource Name (ARN) of the retention rule.
 	//
 	// This member is required.
 	ResourceArn *string
 
-	// Information about the tags to assign to the resource.
+	// Information about the tags to assign to the retention rule.
 	//
 	// This member is required.
 	Tags []types.Tag

@@ -24,9 +24,9 @@ import (
 // product on AWS Marketplace, enabling you to guard against unauthorized use. Your
 // container image that integrates with RegisterUsage is only required to guard
 // against unauthorized use at container startup, as such a
-// CustomerNotSubscribedException/PlatformNotSupportedException will only be thrown
-// on the initial call to RegisterUsage. Subsequent calls from the same Amazon ECS
-// task instance (e.g. task-id) or Amazon EKS pod will not throw a
+// CustomerNotSubscribedException or PlatformNotSupportedException will only be
+// thrown on the initial call to RegisterUsage. Subsequent calls from the same
+// Amazon ECS task instance (e.g. task-id) or Amazon EKS pod will not throw a
 // CustomerNotSubscribedException, even if the customer unsubscribes while the
 // Amazon ECS task or Amazon EKS pod is still running.
 //

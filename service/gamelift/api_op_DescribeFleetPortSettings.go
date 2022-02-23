@@ -59,8 +59,8 @@ type DescribeFleetPortSettingsInput struct {
 	// This member is required.
 	FleetId *string
 
-	// A remote location to check for status of port setting updates. Use the AWS
-	// Region code format, such as us-west-2.
+	// A remote location to check for status of port setting updates. Use the Amazon
+	// Web Services Region code format, such as us-west-2.
 	Location *string
 
 	noSmithyDocumentSerde
@@ -82,8 +82,8 @@ type DescribeFleetPortSettingsOutput struct {
 	// The port settings for the requested fleet ID.
 	InboundPermissions []types.IpPermission
 
-	// The requested fleet location, expressed as an AWS Region code, such as
-	// us-west-2.
+	// The requested fleet location, expressed as an Amazon Web Services Region code,
+	// such as us-west-2.
 	Location *string
 
 	// The current status of updates to the fleet's port settings in the requested

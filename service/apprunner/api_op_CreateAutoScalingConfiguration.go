@@ -14,14 +14,15 @@ import (
 // Create an App Runner automatic scaling configuration resource. App Runner
 // requires this resource when you create App Runner services that require
 // non-default auto scaling settings. You can share an auto scaling configuration
-// across multiple services. Create multiple revisions of a configuration by using
-// the same AutoScalingConfigurationName and different
-// AutoScalingConfigurationRevision values. When you create a service, you can set
-// it to use the latest active revision of an auto scaling configuration or a
-// specific revision. Configure a higher MinSize to increase the spread of your App
-// Runner service over more Availability Zones in the Amazon Web Services Region.
-// The tradeoff is a higher minimal cost. Configure a lower MaxSize to control your
-// cost. The tradeoff is lower responsiveness during peak demand.
+// across multiple services. Create multiple revisions of a configuration by
+// calling this action multiple times using the same AutoScalingConfigurationName.
+// The call returns incremental AutoScalingConfigurationRevision values. When you
+// create a service, you can set it to use the latest active revision of an auto
+// scaling configuration or a specific revision. Configure a higher MinSize to
+// increase the spread of your App Runner service over more Availability Zones in
+// the Amazon Web Services Region. The tradeoff is a higher minimal cost. Configure
+// a lower MaxSize to control your cost. The tradeoff is lower responsiveness
+// during peak demand.
 func (c *Client) CreateAutoScalingConfiguration(ctx context.Context, params *CreateAutoScalingConfigurationInput, optFns ...func(*Options)) (*CreateAutoScalingConfigurationOutput, error) {
 	if params == nil {
 		params = &CreateAutoScalingConfigurationInput{}
@@ -42,7 +43,12 @@ type CreateAutoScalingConfigurationInput struct {
 	// A name for the auto scaling configuration. When you use it for the first time in
 	// an Amazon Web Services Region, App Runner creates revision number 1 of this
 	// name. When you use the same name in subsequent calls, App Runner creates
-	// incremental revisions of the configuration.
+	// incremental revisions of the configuration. The name DefaultConfiguration is
+	// reserved (it's the configuration that App Runner uses if you don't provide a
+	// custome one). You can't use it to create a new auto scaling configuration, and
+	// you can't create a revision of it. When you want to use your own auto scaling
+	// configuration for your App Runner service, create a configuration with a
+	// different name, and then provide it when you create or update your service.
 	//
 	// This member is required.
 	AutoScalingConfigurationName *string

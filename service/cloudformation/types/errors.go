@@ -46,7 +46,7 @@ func (e *CFNRegistryException) ErrorCode() string             { return "CFNRegis
 func (e *CFNRegistryException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified change set name or ID doesn't exit. To view valid change sets for
-// a stack, use the ListChangeSets action.
+// a stack, use the ListChangeSets operation.
 type ChangeSetNotFoundException struct {
 	Message *string
 
@@ -148,7 +148,7 @@ func (e *InvalidOperationException) ErrorFault() smithy.ErrorFault { return smit
 
 // Error reserved for use by the CloudFormation CLI
 // (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html).
-// CloudFormation does not return this error to users.
+// CloudFormation doesn't return this error to users.
 type InvalidStateTransitionException struct {
 	Message *string
 
@@ -168,7 +168,7 @@ func (e *InvalidStateTransitionException) ErrorCode() string             { retur
 func (e *InvalidStateTransitionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The quota for the resource has already been reached. For information on resource
-// and stack limitations, see Limits
+// and stack limitations, see CloudFormation quotas
 // (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html)
 // in the CloudFormation User Guide.
 type LimitExceededException struct {
@@ -270,7 +270,7 @@ func (e *OperationNotFoundException) ErrorFault() smithy.ErrorFault { return smi
 
 // Error reserved for use by the CloudFormation CLI
 // (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html).
-// CloudFormation does not return this error to users.
+// CloudFormation doesn't return this error to users.
 type OperationStatusCheckFailedException struct {
 	Message *string
 
@@ -310,7 +310,7 @@ func (e *StackInstanceNotFoundException) ErrorMessage() string {
 func (e *StackInstanceNotFoundException) ErrorCode() string             { return "StackInstanceNotFoundException" }
 func (e *StackInstanceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified stack ARN doesn’t exist or stack doesn’t exist corresponding to
+// The specified stack ARN doesn't exist or stack doesn't exist corresponding to
 // the ARN in input.
 type StackNotFoundException struct {
 	Message *string
@@ -409,7 +409,7 @@ func (e *TokenAlreadyExistsException) ErrorMessage() string {
 func (e *TokenAlreadyExistsException) ErrorCode() string             { return "TokenAlreadyExistsException" }
 func (e *TokenAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified extension configuration cannot be found.
+// The specified extension configuration can't be found.
 type TypeConfigurationNotFoundException struct {
 	Message *string
 
@@ -432,7 +432,7 @@ func (e *TypeConfigurationNotFoundException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// The specified extension does not exist in the CloudFormation registry.
+// The specified extension doesn't exist in the CloudFormation registry.
 type TypeNotFoundException struct {
 	Message *string
 

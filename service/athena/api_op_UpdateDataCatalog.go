@@ -30,8 +30,9 @@ func (c *Client) UpdateDataCatalog(ctx context.Context, params *UpdateDataCatalo
 type UpdateDataCatalogInput struct {
 
 	// The name of the data catalog to update. The catalog name must be unique for the
-	// Amazon Web Services account and can use a maximum of 128 alphanumeric,
-	// underscore, at sign, or hyphen characters.
+	// Amazon Web Services account and can use a maximum of 127 alphanumeric,
+	// underscore, at sign, or hyphen characters. The remainder of the length
+	// constraint of 256 is reserved for use by Athena.
 	//
 	// This member is required.
 	Name *string

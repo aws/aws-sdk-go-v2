@@ -53,6 +53,11 @@ type GetSupportedResourceTypesOutput struct {
 	// Service
 	//
 	// * Storage Gateway for Storage Gateway
+	//
+	// * DocDB for Amazon DocumentDB
+	// (with MongoDB compatibility)
+	//
+	// * Neptune for Amazon Neptune
 	ResourceTypes []string
 
 	// Metadata pertaining to the operation's result.

@@ -93,7 +93,9 @@ type TestIdentityProviderOutput struct {
 	// This member is required.
 	Url *string
 
-	// A message that indicates whether the test was successful or not.
+	// A message that indicates whether the test was successful or not. If an empty
+	// string is returned, the most likely cause is that the authentication failed due
+	// to an incorrect username or password.
 	Message *string
 
 	// The response that is returned from your API Gateway.

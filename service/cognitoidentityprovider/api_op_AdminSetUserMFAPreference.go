@@ -11,11 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets the user's multi-factor authentication (MFA) preference, including which
-// MFA options are enabled and if any are preferred. Only one factor can be set as
+// The user's multi-factor authentication (MFA) preference, including which MFA
+// options are activated, and if any are preferred. Only one factor can be set as
 // preferred. The preferred MFA factor will be used to authenticate a user if
-// multiple factors are enabled. If multiple options are enabled and no preference
-// is set, a challenge to choose an MFA option will be returned during sign in.
+// multiple factors are activated. If multiple options are activated and no
+// preference is set, a challenge to choose an MFA option will be returned during
+// sign-in.
 func (c *Client) AdminSetUserMFAPreference(ctx context.Context, params *AdminSetUserMFAPreferenceInput, optFns ...func(*Options)) (*AdminSetUserMFAPreferenceOutput, error) {
 	if params == nil {
 		params = &AdminSetUserMFAPreferenceInput{}

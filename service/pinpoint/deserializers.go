@@ -21054,6 +21054,15 @@ func awsRestjson1_deserializeDocumentApplicationResponse(v **types.ApplicationRe
 				sv.Arn = ptr.String(jtv)
 			}
 
+		case "CreationDate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.CreationDate = ptr.String(jtv)
+			}
+
 		case "Id":
 			if value != nil {
 				jtv, ok := value.(string)

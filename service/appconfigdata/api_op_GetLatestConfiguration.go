@@ -11,15 +11,21 @@ import (
 )
 
 // Retrieves the latest deployed configuration. This API may return empty
-// Configuration data if the client already has the latest version. See
-// StartConfigurationSession to obtain an InitialConfigurationToken to call this
-// API. Each call to GetLatestConfiguration returns a new ConfigurationToken
-// (NextPollConfigurationToken in the response). This new token MUST be provided to
-// the next call to GetLatestConfiguration when polling for configuration updates.
-// To avoid excess charges, we recommend that you include the
-// ClientConfigurationVersion value with every call to GetConfiguration. This value
-// must be saved on your client. Subsequent calls to GetConfiguration must pass
-// this value by using the ClientConfigurationVersion parameter.
+// configuration data if the client already has the latest version. For more
+// information about this API action and to view example CLI commands that show how
+// to use it with the StartConfigurationSession API action, see Receiving the
+// configuration
+// (http://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-retrieving-the-configuration)
+// in the AppConfig User Guide. Note the following important information.
+//
+// * Each
+// configuration token is only valid for one call to GetLatestConfiguration. The
+// GetLatestConfiguration response includes a NextPollConfigurationToken that
+// should always replace the token used for the just-completed call in preparation
+// for the next one.
+//
+// * GetLatestConfiguration is a priced call. For more
+// information, see Pricing (https://aws.amazon.com/systems-manager/pricing/).
 func (c *Client) GetLatestConfiguration(ctx context.Context, params *GetLatestConfigurationInput, optFns ...func(*Options)) (*GetLatestConfigurationOutput, error) {
 	if params == nil {
 		params = &GetLatestConfigurationInput{}
@@ -35,7 +41,6 @@ func (c *Client) GetLatestConfiguration(ctx context.Context, params *GetLatestCo
 	return out, nil
 }
 
-// Request parameters for the GetLatestConfiguration API
 type GetLatestConfigurationInput struct {
 
 	// Token describing the current state of the configuration session. To obtain a
@@ -50,11 +55,10 @@ type GetLatestConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-// Response parameters for the GetLatestConfiguration API
 type GetLatestConfigurationOutput struct {
 
-	// The data of the configuration. Note that this may be empty if the client already
-	// has the latest version of configuration.
+	// The data of the configuration. This may be empty if the client already has the
+	// latest version of configuration.
 	Configuration []byte
 
 	// A standard MIME type describing the format of the configuration content.
@@ -65,7 +69,7 @@ type GetLatestConfigurationOutput struct {
 	NextPollConfigurationToken *string
 
 	// The amount of time the client should wait before polling for configuration
-	// updates again. See RequiredMinimumPollIntervalInSeconds to set the desired poll
+	// updates again. Use RequiredMinimumPollIntervalInSeconds to set the desired poll
 	// interval.
 	NextPollIntervalInSeconds int32
 

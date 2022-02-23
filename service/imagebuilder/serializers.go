@@ -4166,6 +4166,13 @@ func awsRestjson1_serializeDocumentDistribution(v *types.Distribution, value smi
 		}
 	}
 
+	if v.FastLaunchConfigurations != nil {
+		ok := object.Key("fastLaunchConfigurations")
+		if err := awsRestjson1_serializeDocumentFastLaunchConfigurationList(v.FastLaunchConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.LaunchTemplateConfigurations != nil {
 		ok := object.Key("launchTemplateConfigurations")
 		if err := awsRestjson1_serializeDocumentLaunchTemplateConfigurationList(v.LaunchTemplateConfigurations, ok); err != nil {
@@ -4250,6 +4257,89 @@ func awsRestjson1_serializeDocumentEbsInstanceBlockDeviceSpecification(v *types.
 	if len(v.VolumeType) > 0 {
 		ok := object.Key("volumeType")
 		ok.String(string(v.VolumeType))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFastLaunchConfiguration(v *types.FastLaunchConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AccountId != nil {
+		ok := object.Key("accountId")
+		ok.String(*v.AccountId)
+	}
+
+	{
+		ok := object.Key("enabled")
+		ok.Boolean(v.Enabled)
+	}
+
+	if v.LaunchTemplate != nil {
+		ok := object.Key("launchTemplate")
+		if err := awsRestjson1_serializeDocumentFastLaunchLaunchTemplateSpecification(v.LaunchTemplate, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxParallelLaunches != nil {
+		ok := object.Key("maxParallelLaunches")
+		ok.Integer(*v.MaxParallelLaunches)
+	}
+
+	if v.SnapshotConfiguration != nil {
+		ok := object.Key("snapshotConfiguration")
+		if err := awsRestjson1_serializeDocumentFastLaunchSnapshotConfiguration(v.SnapshotConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFastLaunchConfigurationList(v []types.FastLaunchConfiguration, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentFastLaunchConfiguration(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFastLaunchLaunchTemplateSpecification(v *types.FastLaunchLaunchTemplateSpecification, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LaunchTemplateId != nil {
+		ok := object.Key("launchTemplateId")
+		ok.String(*v.LaunchTemplateId)
+	}
+
+	if v.LaunchTemplateName != nil {
+		ok := object.Key("launchTemplateName")
+		ok.String(*v.LaunchTemplateName)
+	}
+
+	if v.LaunchTemplateVersion != nil {
+		ok := object.Key("launchTemplateVersion")
+		ok.String(*v.LaunchTemplateVersion)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFastLaunchSnapshotConfiguration(v *types.FastLaunchSnapshotConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TargetResourceCount != nil {
+		ok := object.Key("targetResourceCount")
+		ok.Integer(*v.TargetResourceCount)
 	}
 
 	return nil

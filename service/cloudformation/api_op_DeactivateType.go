@@ -12,10 +12,10 @@ import (
 )
 
 // Deactivates a public extension that was previously activated in this account and
-// region. Once deactivated, an extension cannot be used in any CloudFormation
+// region. Once deactivated, an extension can't be used in any CloudFormation
 // operation. This includes stack update operations where the stack template
 // includes the extension, even if no updates are being made to the extension. In
-// addition, deactivated extensions are not automatically updated if a new version
+// addition, deactivated extensions aren't automatically updated if a new version
 // of the extension is released.
 func (c *Client) DeactivateType(ctx context.Context, params *DeactivateTypeInput, optFns ...func(*Options)) (*DeactivateTypeOutput, error) {
 	if params == nil {

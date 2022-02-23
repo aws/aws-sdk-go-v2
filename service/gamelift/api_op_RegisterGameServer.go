@@ -54,7 +54,7 @@ type RegisterGameServerInput struct {
 
 	// A custom string that uniquely identifies the game server to register. Game
 	// server IDs are developer-defined and must be unique across all game server
-	// groups in your AWS account.
+	// groups in your Amazon Web Services account.
 	//
 	// This member is required.
 	GameServerId *string

@@ -30,7 +30,8 @@ func (c *Client) CreateUserImportJob(ctx context.Context, params *CreateUserImpo
 // Represents the request to create the user import job.
 type CreateUserImportJobInput struct {
 
-	// The role ARN for the Amazon CloudWatch Logging role for the user import job.
+	// The role ARN for the Amazon CloudWatch Logs Logging role for the user import
+	// job.
 	//
 	// This member is required.
 	CloudWatchLogsRoleArn *string

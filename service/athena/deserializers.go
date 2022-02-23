@@ -4103,6 +4103,63 @@ func awsAwsjson11_deserializeErrorTooManyRequestsException(response *smithyhttp.
 	return output
 }
 
+func awsAwsjson11_deserializeDocumentAthenaError(v **types.AthenaError, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AthenaError
+	if *v == nil {
+		sv = &types.AthenaError{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ErrorCategory":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ErrorCategory to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ErrorCategory = ptr.Int32(int32(i64))
+			}
+
+		case "ErrorType":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ErrorType to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ErrorType = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentColumn(v **types.Column, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5642,6 +5699,11 @@ func awsAwsjson11_deserializeDocumentQueryExecutionStatus(v **types.QueryExecuti
 
 	for key, value := range shape {
 		switch key {
+		case "AthenaError":
+			if err := awsAwsjson11_deserializeDocumentAthenaError(&sv.AthenaError, value); err != nil {
+				return err
+			}
+
 		case "CompletionDateTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -5775,6 +5837,15 @@ func awsAwsjson11_deserializeDocumentResultConfiguration(v **types.ResultConfigu
 		case "EncryptionConfiguration":
 			if err := awsAwsjson11_deserializeDocumentEncryptionConfiguration(&sv.EncryptionConfiguration, value); err != nil {
 				return err
+			}
+
+		case "ExpectedBucketOwner":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ExpectedBucketOwner = ptr.String(jtv)
 			}
 
 		case "OutputLocation":

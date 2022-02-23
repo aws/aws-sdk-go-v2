@@ -65,7 +65,7 @@ type StartFleetActionsInput struct {
 	FleetId *string
 
 	// The fleet location to restart fleet actions for. Specify a location in the form
-	// of an AWS Region code, such as us-west-2.
+	// of an Amazon Web Services Region code, such as us-west-2.
 	Location *string
 
 	noSmithyDocumentSerde

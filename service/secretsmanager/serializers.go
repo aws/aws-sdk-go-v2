@@ -1317,6 +1317,16 @@ func awsAwsjson11_serializeDocumentRotationRulesType(v *types.RotationRulesType,
 		ok.Long(v.AutomaticallyAfterDays)
 	}
 
+	if v.Duration != nil {
+		ok := object.Key("Duration")
+		ok.String(*v.Duration)
+	}
+
+	if v.ScheduleExpression != nil {
+		ok := object.Key("ScheduleExpression")
+		ok.String(*v.ScheduleExpression)
+	}
+
 	return nil
 }
 
@@ -1741,6 +1751,11 @@ func awsAwsjson11_serializeOpDocumentRotateSecretInput(v *RotateSecretInput, val
 	if v.ClientRequestToken != nil {
 		ok := object.Key("ClientRequestToken")
 		ok.String(*v.ClientRequestToken)
+	}
+
+	if v.RotateImmediately {
+		ok := object.Key("RotateImmediately")
+		ok.Boolean(v.RotateImmediately)
 	}
 
 	if v.RotationLambdaARN != nil {

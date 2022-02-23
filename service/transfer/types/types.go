@@ -10,8 +10,9 @@ import (
 // Each step type has its own StepDetails structure.
 type CopyStepDetails struct {
 
-	// Specifies the location for the file being copied. Only applicable for the Copy
-	// type of workflow steps.
+	// Specifies the location for the file being copied. Only applicable for Copy type
+	// workflow steps. Use ${Transfer:username} in this field to parametrize the
+	// destination prefix by username.
 	DestinationFileLocation *InputFileLocation
 
 	// The name of the step, used as an identifier.
@@ -21,6 +22,18 @@ type CopyStepDetails struct {
 	// name. The default is FALSE.
 	OverwriteExisting OverwriteExisting
 
+	// Specifies which file to use as input to the workflow step: either the output
+	// from the previous step, or the originally uploaded file for the workflow.
+	//
+	// *
+	// Enter ${previous.file} to use the previous file as the input. In this case, this
+	// workflow step uses the output file from the previous workflow step as input.
+	// This is the default value.
+	//
+	// * Enter ${original.file} to use the
+	// originally-uploaded file location as input for this step.
+	SourceFileLocation *string
+
 	noSmithyDocumentSerde
 }
 
@@ -29,6 +42,18 @@ type CustomStepDetails struct {
 
 	// The name of the step, used as an identifier.
 	Name *string
+
+	// Specifies which file to use as input to the workflow step: either the output
+	// from the previous step, or the originally uploaded file for the workflow.
+	//
+	// *
+	// Enter ${previous.file} to use the previous file as the input. In this case, this
+	// workflow step uses the output file from the previous workflow step as input.
+	// This is the default value.
+	//
+	// * Enter ${original.file} to use the
+	// originally-uploaded file location as input for this step.
+	SourceFileLocation *string
 
 	// The ARN for the lambda function that is being called.
 	Target *string
@@ -44,6 +69,18 @@ type DeleteStepDetails struct {
 
 	// The name of the step, used as an identifier.
 	Name *string
+
+	// Specifies which file to use as input to the workflow step: either the output
+	// from the previous step, or the originally uploaded file for the workflow.
+	//
+	// *
+	// Enter ${previous.file} to use the previous file as the input. In this case, this
+	// workflow step uses the output file from the previous workflow step as input.
+	// This is the default value.
+	//
+	// * Enter ${original.file} to use the
+	// originally-uploaded file location as input for this step.
+	SourceFileLocation *string
 
 	noSmithyDocumentSerde
 }
@@ -242,6 +279,10 @@ type DescribedServer struct {
 	// logging for Amazon S3 or Amazon EFS events. When set, user activity can be
 	// viewed in your CloudWatch logs.
 	LoggingRole *string
+
+	PostAuthenticationLoginBanner *string
+
+	PreAuthenticationLoginBanner *string
 
 	// The protocol settings that are configured for your server. Use the PassiveIp
 	// parameter to indicate passive mode. Enter a single dotted-quad IPv4 address,
@@ -523,14 +564,7 @@ type FileLocation struct {
 
 // Represents an object that contains entries and targets for
 // HomeDirectoryMappings. The following is an Entry and Target pair example for
-// chroot. [ { "Entry:": "/", "Target": "/bucket_name/home/mydirectory" } ] If the
-// target of a logical directory entry does not exist in Amazon S3 or EFS, the
-// entry is ignored. As a workaround, you can use the Amazon S3 API or EFS API to
-// create 0 byte objects as place holders for your directory. If using the CLI, use
-// the s3api or efsapi call instead of s3 or efs so you can use the put-object
-// operation. For example, you use the following: aws s3api put-object --bucket
-// bucketname --key path/to/folder/. Make sure that the end of the key name ends in
-// a / for it to be considered a folder.
+// chroot. [ { "Entry:": "/", "Target": "/bucket_name/home/mydirectory" } ]
 type HomeDirectoryMapEntry struct {
 
 	// Represents an entry for HomeDirectoryMappings.
@@ -966,6 +1000,18 @@ type TagStepDetails struct {
 
 	// The name of the step, used as an identifier.
 	Name *string
+
+	// Specifies which file to use as input to the workflow step: either the output
+	// from the previous step, or the originally uploaded file for the workflow.
+	//
+	// *
+	// Enter ${previous.file} to use the previous file as the input. In this case, this
+	// workflow step uses the output file from the previous workflow step as input.
+	// This is the default value.
+	//
+	// * Enter ${original.file} to use the
+	// originally-uploaded file location as input for this step.
+	SourceFileLocation *string
 
 	// Array that contains from 1 to 10 key/value pairs.
 	Tags []S3Tag

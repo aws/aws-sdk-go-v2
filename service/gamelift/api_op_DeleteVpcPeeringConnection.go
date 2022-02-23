@@ -14,12 +14,13 @@ import (
 // valid authorization for the VPC peering connection that you want to delete. You
 // can check for an authorization by calling DescribeVpcPeeringAuthorizations or
 // request a new one using CreateVpcPeeringAuthorization. Once a valid
-// authorization exists, call this operation from the AWS account that is used to
-// manage the Amazon GameLift fleets. Identify the connection to delete by the
-// connection ID and fleet ID. If successful, the connection is removed. Related
-// actions CreateVpcPeeringAuthorization | DescribeVpcPeeringAuthorizations |
-// DeleteVpcPeeringAuthorization | CreateVpcPeeringConnection |
-// DescribeVpcPeeringConnections | DeleteVpcPeeringConnection | All APIs by task
+// authorization exists, call this operation from the Amazon Web Services account
+// that is used to manage the Amazon Web Services fleets. Identify the connection
+// to delete by the connection ID and fleet ID. If successful, the connection is
+// removed. Related actions CreateVpcPeeringAuthorization |
+// DescribeVpcPeeringAuthorizations | DeleteVpcPeeringAuthorization |
+// CreateVpcPeeringConnection | DescribeVpcPeeringConnections |
+// DeleteVpcPeeringConnection | All APIs by task
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) DeleteVpcPeeringConnection(ctx context.Context, params *DeleteVpcPeeringConnectionInput, optFns ...func(*Options)) (*DeleteVpcPeeringConnectionOutput, error) {
 	if params == nil {

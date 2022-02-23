@@ -69,12 +69,12 @@ type ListTypesInput struct {
 	// process updates to the type during stack update operations.
 	//
 	// * IMMUTABLE: The
-	// resource type does not include an update handler, so the type cannot be updated
+	// resource type doesn't include an update handler, so the type can't be updated
 	// and must instead be replaced during stack update operations.
 	//
 	// *
-	// NON_PROVISIONABLE: The resource type does not include create, read, and delete
-	// handlers, and therefore cannot actually be provisioned.
+	// NON_PROVISIONABLE: The resource type doesn't include create, read, and delete
+	// handlers, and therefore can't actually be provisioned.
 	//
 	// The default is
 	// FULLY_MUTABLE.
@@ -108,8 +108,8 @@ type ListTypesInput struct {
 
 type ListTypesOutput struct {
 
-	// If the request doesn't return all of the remaining results, NextToken is set to
-	// a token. To retrieve the next set of results, call this action again and assign
+	// If the request doesn't return all the remaining results, NextToken is set to a
+	// token. To retrieve the next set of results, call this action again and assign
 	// that token to the request object's NextToken parameter. If the request returns
 	// all results, NextToken is set to null.
 	NextToken *string

@@ -116,6 +116,22 @@ func (Format) Values() []Format {
 	}
 }
 
+type GeneratedManifestFormat string
+
+// Enum values for GeneratedManifestFormat
+const (
+	GeneratedManifestFormatS3InventoryReportCsv20211130 GeneratedManifestFormat = "S3InventoryReport_CSV_20211130"
+)
+
+// Values returns all known values for GeneratedManifestFormat. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (GeneratedManifestFormat) Values() []GeneratedManifestFormat {
+	return []GeneratedManifestFormat{
+		"S3InventoryReport_CSV_20211130",
+	}
+}
+
 type JobManifestFieldName string
 
 // Enum values for JobManifestFieldName
@@ -321,6 +337,7 @@ const (
 	OperationNameS3InitiateRestoreObject OperationName = "S3InitiateRestoreObject"
 	OperationNameS3PutObjectLegalHold    OperationName = "S3PutObjectLegalHold"
 	OperationNameS3PutObjectRetention    OperationName = "S3PutObjectRetention"
+	OperationNameS3ReplicateObject       OperationName = "S3ReplicateObject"
 )
 
 // Values returns all known values for OperationName. Note that this can be
@@ -336,6 +353,7 @@ func (OperationName) Values() []OperationName {
 		"S3InitiateRestoreObject",
 		"S3PutObjectLegalHold",
 		"S3PutObjectRetention",
+		"S3ReplicateObject",
 	}
 }
 
@@ -352,6 +370,28 @@ const (
 func (OutputSchemaVersion) Values() []OutputSchemaVersion {
 	return []OutputSchemaVersion{
 		"V_1",
+	}
+}
+
+type ReplicationStatus string
+
+// Enum values for ReplicationStatus
+const (
+	ReplicationStatusCompleted ReplicationStatus = "COMPLETED"
+	ReplicationStatusFailed    ReplicationStatus = "FAILED"
+	ReplicationStatusReplica   ReplicationStatus = "REPLICA"
+	ReplicationStatusNone      ReplicationStatus = "NONE"
+)
+
+// Values returns all known values for ReplicationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ReplicationStatus) Values() []ReplicationStatus {
+	return []ReplicationStatus{
+		"COMPLETED",
+		"FAILED",
+		"REPLICA",
+		"NONE",
 	}
 }
 
@@ -563,6 +603,7 @@ const (
 	S3StorageClassGlacier            S3StorageClass = "GLACIER"
 	S3StorageClassIntelligentTiering S3StorageClass = "INTELLIGENT_TIERING"
 	S3StorageClassDeepArchive        S3StorageClass = "DEEP_ARCHIVE"
+	S3StorageClassGlacierIr          S3StorageClass = "GLACIER_IR"
 )
 
 // Values returns all known values for S3StorageClass. Note that this can be
@@ -576,6 +617,7 @@ func (S3StorageClass) Values() []S3StorageClass {
 		"GLACIER",
 		"INTELLIGENT_TIERING",
 		"DEEP_ARCHIVE",
+		"GLACIER_IR",
 	}
 }
 

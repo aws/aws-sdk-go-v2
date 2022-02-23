@@ -1979,6 +1979,11 @@ func awsAwsjson11_serializeDocumentResultConfiguration(v *types.ResultConfigurat
 		}
 	}
 
+	if v.ExpectedBucketOwner != nil {
+		ok := object.Key("ExpectedBucketOwner")
+		ok.String(*v.ExpectedBucketOwner)
+	}
+
 	if v.OutputLocation != nil {
 		ok := object.Key("OutputLocation")
 		ok.String(*v.OutputLocation)
@@ -1998,6 +2003,11 @@ func awsAwsjson11_serializeDocumentResultConfigurationUpdates(v *types.ResultCon
 		}
 	}
 
+	if v.ExpectedBucketOwner != nil {
+		ok := object.Key("ExpectedBucketOwner")
+		ok.String(*v.ExpectedBucketOwner)
+	}
+
 	if v.OutputLocation != nil {
 		ok := object.Key("OutputLocation")
 		ok.String(*v.OutputLocation)
@@ -2006,6 +2016,11 @@ func awsAwsjson11_serializeDocumentResultConfigurationUpdates(v *types.ResultCon
 	if v.RemoveEncryptionConfiguration != nil {
 		ok := object.Key("RemoveEncryptionConfiguration")
 		ok.Boolean(*v.RemoveEncryptionConfiguration)
+	}
+
+	if v.RemoveExpectedBucketOwner != nil {
+		ok := object.Key("RemoveExpectedBucketOwner")
+		ok.Boolean(*v.RemoveExpectedBucketOwner)
 	}
 
 	if v.RemoveOutputLocation != nil {

@@ -43,7 +43,7 @@ type UsageAllocation struct {
 
 // A UsageRecord indicates a quantity of usage for a given product, customer,
 // dimension and time. Multiple requests with the same UsageRecords as input will
-// be deduplicated to prevent double charges.
+// be de-duplicated to prevent double charges.
 type UsageRecord struct {
 
 	// The CustomerIdentifier is obtained through the ResolveCustomer operation and
@@ -52,9 +52,8 @@ type UsageRecord struct {
 	// This member is required.
 	CustomerIdentifier *string
 
-	// During the process of registering a product on AWS Marketplace, up to eight
-	// dimensions are specified. These represent different units of value in your
-	// application.
+	// During the process of registering a product on AWS Marketplace, dimensions are
+	// specified. These represent different units of value in your application.
 	//
 	// This member is required.
 	Dimension *string
@@ -84,20 +83,29 @@ type UsageRecordResult struct {
 	// The MeteringRecordId is a unique identifier for this metering event.
 	MeteringRecordId *string
 
-	// The UsageRecordResult Status indicates the status of an individual UsageRecord
+	// The UsageRecordResultStatus indicates the status of an individual UsageRecord
 	// processed by BatchMeterUsage.
 	//
 	// * Success- The UsageRecord was accepted and
 	// honored by BatchMeterUsage.
 	//
 	// * CustomerNotSubscribed- The CustomerIdentifier
-	// specified is not subscribed to your product. The UsageRecord was not honored.
-	// Future UsageRecords for this customer will fail until the customer subscribes to
-	// your product.
+	// specified is not able to use your product. The UsageRecord was not honored.
+	// There are three causes for this result:
 	//
-	// * DuplicateRecord- Indicates that the UsageRecord was invalid and
-	// not honored. A previously metered UsageRecord had the same customer, dimension,
-	// and time, but a different quantity.
+	// * The customer identifier is
+	// invalid.
+	//
+	// * The customer identifier provided in the metering record does not
+	// have an active agreement or subscription with this product. Future UsageRecords
+	// for this customer will fail until the customer subscribes to your product.
+	//
+	// *
+	// The customer's AWS account was suspended.
+	//
+	// * DuplicateRecord- Indicates that the
+	// UsageRecord was invalid and not honored. A previously metered UsageRecord had
+	// the same customer, dimension, and time, but a different quantity.
 	Status UsageRecordResultStatus
 
 	// The UsageRecord that was part of the BatchMeterUsage request.

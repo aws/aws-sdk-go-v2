@@ -74,6 +74,17 @@ type CreateEntityRecognizerInput struct {
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	ModelKmsKeyId *string
 
+	// The JSON resource-based policy to attach to your custom entity recognizer model.
+	// You can use this policy to allow another AWS account to import your custom
+	// model. Provide your JSON as a UTF-8 encoded string without line breaks. To
+	// provide valid JSON for your policy, enclose the attribute names and values in
+	// double quotes. If the JSON body is also enclosed in double quotes, then you must
+	// escape the double quotes that are inside the policy: "{\"attribute\": \"value\",
+	// \"attribute\": [\"value\"]}" To avoid escaping quotes, you can use single quotes
+	// to enclose the policy and double quotes to enclose the JSON names and values:
+	// '{"attribute": "value", "attribute": ["value"]}'
+	ModelPolicy *string
+
 	// Tags to be associated with the entity recognizer being created. A tag is a
 	// key-value pair that adds as a metadata to a resource used by Amazon Comprehend.
 	// For example, a tag with "Sales" as the key might be added to a resource to

@@ -110,6 +110,26 @@ func (m *validateOpGetExperimentTemplate) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetTargetResourceType struct {
+}
+
+func (*validateOpGetTargetResourceType) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetTargetResourceType) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetTargetResourceTypeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetTargetResourceTypeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -248,6 +268,10 @@ func addOpGetExperimentValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetExperimentTemplateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetExperimentTemplate{}, middleware.After)
+}
+
+func addOpGetTargetResourceTypeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetTargetResourceType{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -580,6 +604,21 @@ func validateOpGetExperimentTemplateInput(v *GetExperimentTemplateInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetExperimentTemplateInput"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetTargetResourceTypeInput(v *GetTargetResourceTypeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetTargetResourceTypeInput"}
+	if v.ResourceType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

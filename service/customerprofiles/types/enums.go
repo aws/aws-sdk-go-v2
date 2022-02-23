@@ -466,6 +466,34 @@ func (StandardIdentifier) Values() []StandardIdentifier {
 	}
 }
 
+type Status string
+
+// Enum values for Status
+const (
+	StatusNotStarted Status = "NOT_STARTED"
+	StatusInProgress Status = "IN_PROGRESS"
+	StatusComplete   Status = "COMPLETE"
+	StatusFailed     Status = "FAILED"
+	StatusSplit      Status = "SPLIT"
+	StatusRetry      Status = "RETRY"
+	StatusCancelled  Status = "CANCELLED"
+)
+
+// Values returns all known values for Status. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Status) Values() []Status {
+	return []Status{
+		"NOT_STARTED",
+		"IN_PROGRESS",
+		"COMPLETE",
+		"FAILED",
+		"SPLIT",
+		"RETRY",
+		"CANCELLED",
+	}
+}
+
 type TaskType string
 
 // Enum values for TaskType
@@ -511,6 +539,22 @@ func (TriggerType) Values() []TriggerType {
 		"Scheduled",
 		"Event",
 		"OnDemand",
+	}
+}
+
+type WorkflowType string
+
+// Enum values for WorkflowType
+const (
+	WorkflowTypeAppflowIntegration WorkflowType = "APPFLOW_INTEGRATION"
+)
+
+// Values returns all known values for WorkflowType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (WorkflowType) Values() []WorkflowType {
+	return []WorkflowType{
+		"APPFLOW_INTEGRATION",
 	}
 }
 

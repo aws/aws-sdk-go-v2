@@ -117,17 +117,18 @@ type ModifyDBClusterInput struct {
 	// The name of the DB parameter group to apply to all instances of the DB cluster.
 	// When you apply a parameter group using the DBInstanceParameterGroupName
 	// parameter, the DB cluster isn't rebooted automatically. Also, parameter changes
-	// aren't applied during the next maintenance window but instead are applied
-	// immediately. Default: The existing name setting Constraints:
+	// are applied immediately rather than during the next maintenance window. Default:
+	// The existing name setting Constraints:
 	//
-	// * The DB parameter
-	// group must be in the same DB parameter group family as this DB cluster.
+	// * The DB parameter group must be in the
+	// same DB parameter group family as this DB cluster.
 	//
 	// * The
-	// DBInstanceParameterGroupName parameter is only valid in combination with the
-	// AllowMajorVersionUpgrade parameter.
+	// DBInstanceParameterGroupName parameter is valid in combination with the
+	// AllowMajorVersionUpgrade parameter for a major version upgrade only.
 	//
-	// Valid for: Aurora DB clusters only
+	// Valid for:
+	// Aurora DB clusters only
 	DBInstanceParameterGroupName *string
 
 	// A value that indicates whether the DB cluster has deletion protection enabled.

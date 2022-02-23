@@ -52,7 +52,7 @@ type AdminUpdateDeviceStatusInput struct {
 	noSmithyDocumentSerde
 }
 
-// The status response from the request to update the device, as an administrator.
+// The status response to the request to update the device, as an administrator.
 type AdminUpdateDeviceStatusOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

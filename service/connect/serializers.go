@@ -7207,6 +7207,11 @@ func awsRestjson1_serializeOpDocumentStartChatContactInput(v *StartChatContactIn
 		}
 	}
 
+	if v.ChatDurationInMinutes != nil {
+		ok := object.Key("ChatDurationInMinutes")
+		ok.Integer(*v.ChatDurationInMinutes)
+	}
+
 	if v.ClientToken != nil {
 		ok := object.Key("ClientToken")
 		ok.String(*v.ClientToken)

@@ -69,7 +69,7 @@ type DescribeInstancesInput struct {
 	Limit *int32
 
 	// The name of a location to retrieve instance information for, in the form of an
-	// AWS Region code such as us-west-2.
+	// Amazon Web Services Region code such as us-west-2.
 	Location *string
 
 	// A token that indicates the start of the next sequential page of results. Use the

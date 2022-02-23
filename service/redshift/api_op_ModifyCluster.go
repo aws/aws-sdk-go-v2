@@ -173,8 +173,7 @@ type ModifyClusterInput struct {
 	// * Must contain one number.
 	//
 	// * Can be any printable ASCII character
-	// (ASCII code 33 to 126) except ' (single quote), " (double quote), \, /, @, or
-	// space.
+	// (ASCII code 33-126) except ' (single quote), " (double quote), \, /, or @.
 	MasterUserPassword *string
 
 	// The new identifier for the cluster. Constraints:

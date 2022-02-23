@@ -53,8 +53,7 @@ type ConfirmDeviceInput struct {
 // Confirms the device response.
 type ConfirmDeviceOutput struct {
 
-	// Indicates whether the user confirmation is necessary to confirm the device
-	// response.
+	// Indicates whether the user confirmation must confirm the device response.
 	UserConfirmationNecessary bool
 
 	// Metadata pertaining to the operation's result.

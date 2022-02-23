@@ -11,28 +11,29 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new user in the specified user pool. If MessageAction is not set, the
+// Creates a new user in the specified user pool. If MessageAction isn't set, the
 // default is to send a welcome message via email or phone (SMS). This action might
-// generate an SMS text message. Starting June 1, 2021, U.S. telecom carriers
-// require that you register an origination phone number before you can send SMS
-// messages to U.S. phone numbers. If you use SMS text messages in Amazon Cognito,
-// you must register a phone number with Amazon Pinpoint
-// (https://console.aws.amazon.com/pinpoint/home/). Cognito will use the the
-// registered number automatically. Otherwise, Cognito users that must receive SMS
-// messages might be unable to sign up, activate their accounts, or sign in. If you
-// have never used SMS text messages with Amazon Cognito or any other Amazon Web
-// Service, Amazon SNS might place your account in SMS sandbox. In sandbox mode
-// (https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html) , you’ll have
-// limitations, such as sending messages to only verified phone numbers. After
+// generate an SMS text message. Starting June 1, 2021, US telecom carriers require
+// you to register an origination phone number before you can send SMS messages to
+// U.S. phone numbers. If you use SMS text messages in Amazon Cognito, you must
+// register a phone number with Amazon Pinpoint
+// (https://console.aws.amazon.com/pinpoint/home/). Amazon Cognito will use the
+// registered number automatically. Otherwise, Amazon Cognito users that must
+// receive SMS messages might be unable to sign up, activate their accounts, or
+// sign in. If you have never used SMS text messages with Amazon Cognito or any
+// other Amazon Web Service, Amazon Simple Notification Service might place your
+// account in SMS sandbox. In sandbox mode
+// (https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html) , you will have
+// limitations, such as sending messages only to verified phone numbers. After
 // testing in the sandbox environment, you can move out of the SMS sandbox and into
-// production. For more information, see  SMS message settings for Cognito User
-// Pools
+// production. For more information, see  SMS message settings for Amazon Cognito
+// User Pools
 // (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html)
 // in the Amazon Cognito Developer Guide. This message is based on a template that
 // you configured in your call to create or update a user pool. This template
 // includes your custom sign-up instructions and placeholders for user name and
-// temporary password. Alternatively, you can call AdminCreateUser with “SUPPRESS”
-// for the MessageAction parameter, and Amazon Cognito will not send any email. In
+// temporary password. Alternatively, you can call AdminCreateUser with SUPPRESS
+// for the MessageAction parameter, and Amazon Cognito won't send any email. In
 // either case, the user will be in the FORCE_CHANGE_PASSWORD state until they sign
 // in and change their password. AdminCreateUser requires developer credentials.
 func (c *Client) AdminCreateUser(ctx context.Context, params *AdminCreateUserInput, optFns ...func(*Options)) (*AdminCreateUserOutput, error) {
@@ -60,7 +61,7 @@ type AdminCreateUserInput struct {
 
 	// The username for the user. Must be unique within the user pool. Must be a UTF-8
 	// string between 1 and 128 characters. After the user is created, the username
-	// cannot be changed.
+	// can't be changed.
 	//
 	// This member is required.
 	Username *string
@@ -77,28 +78,27 @@ type AdminCreateUserInput struct {
 	// needs. For more information, see Customizing User Pool Workflows with Lambda
 	// Triggers
 	// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html)
-	// in the Amazon Cognito Developer Guide. Take the following limitations into
-	// consideration when you use the ClientMetadata parameter:
+	// in the Amazon Cognito Developer Guide. When you use the ClientMetadata
+	// parameter, remember that Amazon Cognito won't do the following:
 	//
-	// * Amazon Cognito does
-	// not store the ClientMetadata value. This data is available only to Lambda
-	// triggers that are assigned to a user pool to support custom workflows. If your
-	// user pool configuration does not include triggers, the ClientMetadata parameter
-	// serves no purpose.
+	// * Store the
+	// ClientMetadata value. This data is available only to Lambda triggers that are
+	// assigned to a user pool to support custom workflows. If your user pool
+	// configuration doesn't include triggers, the ClientMetadata parameter serves no
+	// purpose.
 	//
-	// * Amazon Cognito does not validate the ClientMetadata
-	// value.
+	// * Validate the ClientMetadata value.
 	//
-	// * Amazon Cognito does not encrypt the the ClientMetadata value, so don't
-	// use it to provide sensitive information.
+	// * Encrypt the ClientMetadata
+	// value. Don't use Amazon Cognito to provide sensitive information.
 	ClientMetadata map[string]string
 
 	// Specify "EMAIL" if email will be used to send the welcome message. Specify "SMS"
-	// if the phone number will be used. The default value is "SMS". More than one
-	// value can be specified.
+	// if the phone number will be used. The default value is "SMS". You can specify
+	// more than one value.
 	DesiredDeliveryMediums []types.DeliveryMediumType
 
-	// This parameter is only used if the phone_number_verified or email_verified
+	// This parameter is used only if the phone_number_verified or email_verified
 	// attribute is set to True. Otherwise, it is ignored. If this parameter is set to
 	// True and the phone number or email address specified in the UserAttributes
 	// parameter already exists as an alias with a different user, the API call will
@@ -108,16 +108,16 @@ type AdminCreateUserInput struct {
 	// exists. The default value is False.
 	ForceAliasCreation bool
 
-	// Set to "RESEND" to resend the invitation message to a user that already exists
-	// and reset the expiration limit on the user's account. Set to "SUPPRESS" to
-	// suppress sending the message. Only one value can be specified.
+	// Set to RESEND to resend the invitation message to a user that already exists and
+	// reset the expiration limit on the user's account. Set to SUPPRESS to suppress
+	// sending the message. You can specify only one value.
 	MessageAction types.MessageActionType
 
 	// The user's temporary password. This password must conform to the password policy
 	// that you specified when you created the user pool. The temporary password is
 	// valid only once. To complete the Admin Create User flow, the user must enter the
-	// temporary password in the sign-in page along with a new password to be used in
-	// all future sign-ins. This parameter is not required. If you do not specify a
+	// temporary password in the sign-in page, along with a new password to be used in
+	// all future sign-ins. This parameter isn't required. If you don't specify a
 	// value, Amazon Cognito generates one for you. The temporary password can only be
 	// used until the user account expiration limit that you specified when you created
 	// the user pool. To reset the account after that time limit, you must call
@@ -128,16 +128,16 @@ type AdminCreateUserInput struct {
 	// to be set for the user to be created. You can create a user without specifying
 	// any attributes other than Username. However, any attributes that you specify as
 	// required (when creating a user pool or in the Attributes tab of the console)
-	// must be supplied either by you (in your call to AdminCreateUser) or by the user
-	// (when he or she signs up in response to your welcome message). For custom
+	// either you should supply (in your call to AdminCreateUser) or the user should
+	// supply (when they sign up in response to your welcome message). For custom
 	// attributes, you must prepend the custom: prefix to the attribute name. To send a
 	// message inviting the user to sign up, you must specify the user's email address
-	// or phone number. This can be done in your call to AdminCreateUser or in the
-	// Users tab of the Amazon Cognito console for managing your user pools. In your
-	// call to AdminCreateUser, you can set the email_verified attribute to True, and
-	// you can set the phone_number_verified attribute to True. (You can also do this
-	// by calling AdminUpdateUserAttributes
-	// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminUpdateUserAttributes.html).)
+	// or phone number. You can do this in your call to AdminCreateUser or in the Users
+	// tab of the Amazon Cognito console for managing your user pools. In your call to
+	// AdminCreateUser, you can set the email_verified attribute to True, and you can
+	// set the phone_number_verified attribute to True. You can also do this by calling
+	// AdminUpdateUserAttributes
+	// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminUpdateUserAttributes.html).
 	//
 	// *
 	// email: The email address of the user to whom the message that contains the code
@@ -158,7 +158,7 @@ type AdminCreateUserInput struct {
 	// domain. To configure custom validation, you must create a Pre Sign-up Lambda
 	// trigger for the user pool as described in the Amazon Cognito Developer Guide.
 	// The Lambda trigger receives the validation data and uses it in the validation
-	// process. The user's validation data is not persisted.
+	// process. The user's validation data isn't persisted.
 	ValidationData []types.AttributeType
 
 	noSmithyDocumentSerde

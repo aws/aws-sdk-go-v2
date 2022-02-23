@@ -36,6 +36,24 @@ func (EncryptionKeyType) Values() []EncryptionKeyType {
 	}
 }
 
+type Formality string
+
+// Enum values for Formality
+const (
+	FormalityFormal   Formality = "FORMAL"
+	FormalityInformal Formality = "INFORMAL"
+)
+
+// Values returns all known values for Formality. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Formality) Values() []Formality {
+	return []Formality{
+		"FORMAL",
+		"INFORMAL",
+	}
+}
+
 type JobStatus string
 
 // Enum values for JobStatus

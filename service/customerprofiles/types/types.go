@@ -44,6 +44,115 @@ type Address struct {
 	noSmithyDocumentSerde
 }
 
+// Details for workflow of type APPFLOW_INTEGRATION.
+type AppflowIntegration struct {
+
+	// The configurations that control how Customer Profiles retrieves data from the
+	// source, Amazon AppFlow. Customer Profiles uses this information to create an
+	// AppFlow flow on behalf of customers.
+	//
+	// This member is required.
+	FlowDefinition *FlowDefinition
+
+	// Batches in workflow of type APPFLOW_INTEGRATION.
+	Batches []Batch
+
+	noSmithyDocumentSerde
+}
+
+// Structure holding all APPFLOW_INTEGRATION specific workflow attributes.
+type AppflowIntegrationWorkflowAttributes struct {
+
+	// The name of the AppFlow connector profile used for ingestion.
+	//
+	// This member is required.
+	ConnectorProfileName *string
+
+	// Specifies the source connector type, such as Salesforce, ServiceNow, and
+	// Marketo. Indicates source of ingestion.
+	//
+	// This member is required.
+	SourceConnectorType SourceConnectorType
+
+	// The Amazon Resource Name (ARN) of the IAM role. Customer Profiles assumes this
+	// role to create resources on your behalf as part of workflow execution.
+	RoleArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Workflow specific execution metrics for APPFLOW_INTEGRATION workflow.
+type AppflowIntegrationWorkflowMetrics struct {
+
+	// Number of records processed in APPFLOW_INTEGRATION workflow.
+	//
+	// This member is required.
+	RecordsProcessed int64
+
+	// Total steps completed in APPFLOW_INTEGRATION workflow.
+	//
+	// This member is required.
+	StepsCompleted int64
+
+	// Total steps in APPFLOW_INTEGRATION workflow.
+	//
+	// This member is required.
+	TotalSteps int64
+
+	noSmithyDocumentSerde
+}
+
+// Workflow step details for APPFLOW_INTEGRATION workflow.
+type AppflowIntegrationWorkflowStep struct {
+
+	// End datetime of records pulled in batch during execution of workflow step for
+	// APPFLOW_INTEGRATION workflow.
+	//
+	// This member is required.
+	BatchRecordsEndTime *string
+
+	// Start datetime of records pulled in batch during execution of workflow step for
+	// APPFLOW_INTEGRATION workflow.
+	//
+	// This member is required.
+	BatchRecordsStartTime *string
+
+	// Creation timestamp of workflow step for APPFLOW_INTEGRATION workflow.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// Message indicating execution of workflow step for APPFLOW_INTEGRATION workflow.
+	//
+	// This member is required.
+	ExecutionMessage *string
+
+	// Name of the flow created during execution of workflow step. APPFLOW_INTEGRATION
+	// workflow type creates an appflow flow during workflow step execution on the
+	// customers behalf.
+	//
+	// This member is required.
+	FlowName *string
+
+	// Last updated timestamp for workflow step for APPFLOW_INTEGRATION workflow.
+	//
+	// This member is required.
+	LastUpdatedAt *time.Time
+
+	// Total number of records processed during execution of workflow step for
+	// APPFLOW_INTEGRATION workflow.
+	//
+	// This member is required.
+	RecordsProcessed int64
+
+	// Workflow step status for APPFLOW_INTEGRATION workflow.
+	//
+	// This member is required.
+	Status Status
+
+	noSmithyDocumentSerde
+}
+
 // Configuration settings for how to perform the auto-merging of profiles.
 type AutoMerging struct {
 
@@ -61,6 +170,24 @@ type AutoMerging struct {
 	// meet at least one of the requirements in the matching attributes list, they will
 	// be merged.
 	Consolidation *Consolidation
+
+	noSmithyDocumentSerde
+}
+
+// Batch defines the boundaries for ingestion for each step in APPFLOW_INTEGRATION
+// workflow. APPFLOW_INTEGRATION workflow splits ingestion based on these
+// boundaries.
+type Batch struct {
+
+	// End time of batch to split ingestion.
+	//
+	// This member is required.
+	EndTime *time.Time
+
+	// Start time of batch to split ingestion.
+	//
+	// This member is required.
+	StartTime *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -341,6 +468,15 @@ type IncrementalPullConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration data for integration workflow.
+type IntegrationConfig struct {
+
+	// Configuration data for APPFLOW_INTEGRATION workflow type.
+	AppflowIntegration *AppflowIntegration
+
+	noSmithyDocumentSerde
+}
+
 // The day and time when do you want to start the Identity Resolution Job every
 // week.
 type JobSchedule struct {
@@ -433,6 +569,9 @@ type ListIntegrationItem struct {
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
 
+	// Unique identifier for the workflow.
+	WorkflowId *string
+
 	noSmithyDocumentSerde
 }
 
@@ -488,6 +627,42 @@ type ListProfileObjectTypeTemplateItem struct {
 
 	// A unique identifier for the object template.
 	TemplateId *string
+
+	noSmithyDocumentSerde
+}
+
+// A workflow in list of workflows.
+type ListWorkflowsItem struct {
+
+	// Creation timestamp for workflow.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// Last updated timestamp for workflow.
+	//
+	// This member is required.
+	LastUpdatedAt *time.Time
+
+	// Status of workflow execution.
+	//
+	// This member is required.
+	Status Status
+
+	// Description for workflow execution status.
+	//
+	// This member is required.
+	StatusDescription *string
+
+	// Unique identifier for the workflow.
+	//
+	// This member is required.
+	WorkflowId *string
+
+	// The type of workflow. The only supported value is APPFLOW_INTEGRATION.
+	//
+	// This member is required.
+	WorkflowType WorkflowType
 
 	noSmithyDocumentSerde
 }
@@ -942,6 +1117,33 @@ type UpdateAddress struct {
 
 	// The state in which a customer lives.
 	State *string
+
+	noSmithyDocumentSerde
+}
+
+// Structure to hold workflow attributes.
+type WorkflowAttributes struct {
+
+	// Workflow attributes specific to APPFLOW_INTEGRATION workflow.
+	AppflowIntegration *AppflowIntegrationWorkflowAttributes
+
+	noSmithyDocumentSerde
+}
+
+// Generic object containing workflow execution metrics.
+type WorkflowMetrics struct {
+
+	// Workflow execution metrics for APPFLOW_INTEGRATION workflow.
+	AppflowIntegration *AppflowIntegrationWorkflowMetrics
+
+	noSmithyDocumentSerde
+}
+
+// List containing steps in workflow.
+type WorkflowStepItem struct {
+
+	// Workflow step information specific to APPFLOW_INTEGRATION workflow.
+	AppflowIntegration *AppflowIntegrationWorkflowStep
 
 	noSmithyDocumentSerde
 }

@@ -54,11 +54,10 @@ type UpdateExperienceInput struct {
 	// The name of your Amazon Kendra experience you want to update.
 	Name *string
 
-	// The Amazon Resource Name (ARN) of a role with permission to access Query
-	// operations, QuerySuggestions operations, SubmitFeedback operations, and Amazon
-	// Web Services SSO that stores your user and group information. For more
-	// information, see IAM roles for Amazon Kendra
-	// (https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html).
+	// The Amazon Resource Name (ARN) of a role with permission to access Query API,
+	// QuerySuggestions API, SubmitFeedback API, and Amazon Web Services SSO that
+	// stores your user and group information. For more information, see IAM roles for
+	// Amazon Kendra (https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html).
 	RoleArn *string
 
 	noSmithyDocumentSerde

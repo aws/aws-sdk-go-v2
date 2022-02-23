@@ -33,7 +33,8 @@ import (
 // matchmaking data for all current players in the game session being backfilled.
 // Optionally, specify the GameSession ARN. If successful, a match backfill ticket
 // is created and returned with status set to QUEUED. Track the status of backfill
-// tickets using the same method for tracking tickets for new matches. Learn more
+// tickets using the same method for tracking tickets for new matches. Only game
+// sessions created by FlexMatch are supported for match backfill. Learn more
 // Backfill existing games with FlexMatch
 // (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-backfill.html)
 // Matchmaking events
@@ -78,11 +79,13 @@ type StartMatchBackfillInput struct {
 	// for all players who are currently assigned to the game session. The matchmaker
 	// data is in JSON syntax, formatted as a string. For more details, see  Match Data
 	// (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-server.html#match-server-data).
+	// The backfill request must specify the team membership for every player. Do not
+	// specify team if you are not using backfill.
 	//
-	// *
-	// LatencyInMs -- If the matchmaker uses player latency, include a latency value,
-	// in milliseconds, for the Region that the game session is currently in. Do not
-	// include latency values for any other Region.
+	// * LatencyInMs -- If the matchmaker
+	// uses player latency, include a latency value, in milliseconds, for the Region
+	// that the game session is currently in. Do not include latency values for any
+	// other Region.
 	//
 	// This member is required.
 	Players []types.Player
@@ -92,8 +95,8 @@ type StartMatchBackfillInput struct {
 	GameSessionArn *string
 
 	// A unique identifier for a matchmaking ticket. If no ticket ID is specified here,
-	// Amazon GameLift will generate one in the form of a UUID. Use this identifier to
-	// track the match backfill ticket status and retrieve match results.
+	// Amazon Web Services will generate one in the form of a UUID. Use this identifier
+	// to track the match backfill ticket status and retrieve match results.
 	TicketId *string
 
 	noSmithyDocumentSerde

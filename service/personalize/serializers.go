@@ -3464,6 +3464,11 @@ func awsAwsjson11_serializeDocumentRecommenderConfig(v *types.RecommenderConfig,
 		}
 	}
 
+	if v.MinRecommendationRequestsPerSecond != nil {
+		ok := object.Key("minRecommendationRequestsPerSecond")
+		ok.Integer(*v.MinRecommendationRequestsPerSecond)
+	}
+
 	return nil
 }
 

@@ -315,6 +315,7 @@ const (
 	DataSourceTypeGoogledrive DataSourceType = "GOOGLEDRIVE"
 	DataSourceTypeWebcrawler  DataSourceType = "WEBCRAWLER"
 	DataSourceTypeWorkdocs    DataSourceType = "WORKDOCS"
+	DataSourceTypeFsx         DataSourceType = "FSX"
 )
 
 // Values returns all known values for DataSourceType. Note that this can be
@@ -333,6 +334,7 @@ func (DataSourceType) Values() []DataSourceType {
 		"GOOGLEDRIVE",
 		"WEBCRAWLER",
 		"WORKDOCS",
+		"FSX",
 	}
 }
 
@@ -499,6 +501,22 @@ func (FaqStatus) Values() []FaqStatus {
 		"ACTIVE",
 		"DELETING",
 		"FAILED",
+	}
+}
+
+type FsxFileSystemType string
+
+// Enum values for FsxFileSystemType
+const (
+	FsxFileSystemTypeWindows FsxFileSystemType = "WINDOWS"
+)
+
+// Values returns all known values for FsxFileSystemType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FsxFileSystemType) Values() []FsxFileSystemType {
+	return []FsxFileSystemType{
+		"WINDOWS",
 	}
 }
 

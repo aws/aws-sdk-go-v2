@@ -18,7 +18,7 @@ import (
 // You can use S3 Batch Operations to perform large-scale batch actions on Amazon
 // S3 objects. Batch Operations can run a single action on lists of Amazon S3
 // objects that you specify. For more information, see S3 Batch Operations
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-basics.html) in the
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/batch-ops.html) in the
 // Amazon S3 User Guide. This action creates a S3 Batch Operations job. Related
 // actions include:
 //
@@ -68,11 +68,6 @@ type CreateJobInput struct {
 	// This member is required.
 	ClientRequestToken *string
 
-	// Configuration parameters for the manifest.
-	//
-	// This member is required.
-	Manifest *types.JobManifest
-
 	// The action that you want this job to perform on every object listed in the
 	// manifest. For more information about the available actions, see Operations
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-actions.html) in the
@@ -105,6 +100,13 @@ type CreateJobInput struct {
 	// A description for this job. You can use any string within the permitted length.
 	// Descriptions don't need to be unique and can be used for multiple jobs.
 	Description *string
+
+	// Configuration parameters for the manifest.
+	Manifest *types.JobManifest
+
+	// The attribute container for the ManifestGenerator details. Jobs must be created
+	// with either a manifest file or a ManifestGenerator, but not both.
+	ManifestGenerator types.JobManifestGenerator
 
 	// A set of tags to associate with the S3 Batch Operations job. This is an optional
 	// parameter.

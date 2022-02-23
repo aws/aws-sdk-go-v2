@@ -37,7 +37,7 @@ type SubmitFeedbackInput struct {
 	IndexId *string
 
 	// The identifier of the specific query for which you are submitting feedback. The
-	// query ID is returned in the response to the Query operation.
+	// query ID is returned in the response to the Query API.
 	//
 	// This member is required.
 	QueryId *string

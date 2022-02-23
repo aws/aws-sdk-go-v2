@@ -381,8 +381,9 @@ type CreateDBInstanceInput struct {
 	// default DB security group for the database engine.
 	DBSecurityGroups []string
 
-	// A DB subnet group to associate with this DB instance. If there is no DB subnet
-	// group, then it is a non-VPC DB instance.
+	// A DB subnet group to associate with this DB instance. Constraints: Must match
+	// the name of an existing DBSubnetGroup. Must not be default. Example:
+	// mydbsubnetgroup
 	DBSubnetGroupName *string
 
 	// A value that indicates whether the DB instance has deletion protection enabled.

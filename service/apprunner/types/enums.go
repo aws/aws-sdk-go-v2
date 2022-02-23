@@ -111,6 +111,24 @@ func (CustomDomainAssociationStatus) Values() []CustomDomainAssociationStatus {
 	}
 }
 
+type EgressType string
+
+// Enum values for EgressType
+const (
+	EgressTypeDefault EgressType = "DEFAULT"
+	EgressTypeVpc     EgressType = "VPC"
+)
+
+// Values returns all known values for EgressType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (EgressType) Values() []EgressType {
+	return []EgressType{
+		"DEFAULT",
+		"VPC",
+	}
+}
+
 type HealthCheckProtocol string
 
 // Enum values for HealthCheckProtocol
@@ -219,8 +237,11 @@ type Runtime string
 
 // Enum values for Runtime
 const (
-	RuntimePython3  Runtime = "PYTHON_3"
-	RuntimeNodejs12 Runtime = "NODEJS_12"
+	RuntimePython3    Runtime = "PYTHON_3"
+	RuntimeNodejs12   Runtime = "NODEJS_12"
+	RuntimeNodejs14   Runtime = "NODEJS_14"
+	RuntimeCorretto8  Runtime = "CORRETTO_8"
+	RuntimeCorretto11 Runtime = "CORRETTO_11"
 )
 
 // Values returns all known values for Runtime. Note that this can be expanded in
@@ -230,6 +251,9 @@ func (Runtime) Values() []Runtime {
 	return []Runtime{
 		"PYTHON_3",
 		"NODEJS_12",
+		"NODEJS_14",
+		"CORRETTO_8",
+		"CORRETTO_11",
 	}
 }
 
@@ -272,5 +296,23 @@ const (
 func (SourceCodeVersionType) Values() []SourceCodeVersionType {
 	return []SourceCodeVersionType{
 		"BRANCH",
+	}
+}
+
+type VpcConnectorStatus string
+
+// Enum values for VpcConnectorStatus
+const (
+	VpcConnectorStatusActive   VpcConnectorStatus = "ACTIVE"
+	VpcConnectorStatusInactive VpcConnectorStatus = "INACTIVE"
+)
+
+// Values returns all known values for VpcConnectorStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (VpcConnectorStatus) Values() []VpcConnectorStatus {
+	return []VpcConnectorStatus{
+		"ACTIVE",
+		"INACTIVE",
 	}
 }

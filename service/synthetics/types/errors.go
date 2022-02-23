@@ -45,6 +45,25 @@ func (e *InternalServerException) ErrorMessage() string {
 func (e *InternalServerException) ErrorCode() string             { return "InternalServerException" }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
+// One of the input resources is larger than is allowed.
+type RequestEntityTooLargeException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *RequestEntityTooLargeException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *RequestEntityTooLargeException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *RequestEntityTooLargeException) ErrorCode() string             { return "RequestEntityTooLargeException" }
+func (e *RequestEntityTooLargeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // One of the specified resources was not found.
 type ResourceNotFoundException struct {
 	Message *string

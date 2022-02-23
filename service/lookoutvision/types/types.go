@@ -115,13 +115,6 @@ type DetectAnomalyResult struct {
 // existing component with the same component name and component version.
 type GreengrassConfiguration struct {
 
-	// Additional compiler options for the Greengrass component. Currently, only NVIDIA
-	// Graphics Processing Units (GPU) are supported. For more information, see
-	// Compiler options in the Amazon Lookout for Vision Developer Guide.
-	//
-	// This member is required.
-	CompilerOptions *string
-
 	// A name for the AWS IoT Greengrass component.
 	//
 	// This member is required.
@@ -131,6 +124,13 @@ type GreengrassConfiguration struct {
 	//
 	// This member is required.
 	S3OutputLocation *S3Location
+
+	// Additional compiler options for the Greengrass component. Currently, only NVIDIA
+	// Graphics Processing Units (GPU) are supported. If you specify TargetPlatform,
+	// you must specify CompilerOptions. If you specify TargetDevice, don't specify
+	// CompilerOptions. For more information, see Compiler options in the Amazon
+	// Lookout for Vision Developer Guide.
+	CompilerOptions *string
 
 	// A description for the AWS IoT Greengrass component.
 	ComponentDescription *string

@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a snapshot copy grant that permits Amazon Redshift to use a customer
-// master key (CMK) from Key Management Service (KMS) to encrypt copied snapshots
-// in a destination region. For more information about managing snapshot copy
-// grants, go to Amazon Redshift Database Encryption
+// Creates a snapshot copy grant that permits Amazon Redshift to use an encrypted
+// symmetric key from Key Management Service (KMS) to encrypt copied snapshots in a
+// destination region. For more information about managing snapshot copy grants, go
+// to Amazon Redshift Database Encryption
 // (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html)
 // in the Amazon Redshift Cluster Management Guide.
 func (c *Client) CreateSnapshotCopyGrant(ctx context.Context, params *CreateSnapshotCopyGrantInput, optFns ...func(*Options)) (*CreateSnapshotCopyGrantOutput, error) {
@@ -55,7 +55,7 @@ type CreateSnapshotCopyGrantInput struct {
 	// This member is required.
 	SnapshotCopyGrantName *string
 
-	// The unique identifier of the customer master key (CMK) to which to grant Amazon
+	// The unique identifier of the encrypted symmetric key to which to grant Amazon
 	// Redshift permission. If no key is specified, the default key is used.
 	KmsKeyId *string
 
@@ -68,7 +68,7 @@ type CreateSnapshotCopyGrantInput struct {
 type CreateSnapshotCopyGrantOutput struct {
 
 	// The snapshot copy grant that grants Amazon Redshift permission to encrypt copied
-	// snapshots with the specified customer master key (CMK) from Amazon Web Services
+	// snapshots with the specified encrypted symmetric key from Amazon Web Services
 	// KMS in the destination region. For more information about managing snapshot copy
 	// grants, go to Amazon Redshift Database Encryption
 	// (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html)

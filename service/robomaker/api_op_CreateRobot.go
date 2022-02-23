@@ -12,7 +12,12 @@ import (
 	"time"
 )
 
-// Creates a robot.
+// Creates a robot. This API is no longer supported and will throw an error if
+// used.
+//
+// Deprecated: AWS RoboMaker is unable to process this request as the support for
+// the AWS RoboMaker application deployment feature has ended. For additional
+// information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.
 func (c *Client) CreateRobot(ctx context.Context, params *CreateRobotInput, optFns ...func(*Options)) (*CreateRobotOutput, error) {
 	if params == nil {
 		params = &CreateRobotInput{}

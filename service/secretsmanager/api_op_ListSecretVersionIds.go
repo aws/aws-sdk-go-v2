@@ -14,8 +14,11 @@ import (
 
 // Lists the versions for a secret. To list the secrets in the account, use
 // ListSecrets. To get the secret value from SecretString or SecretBinary, call
-// GetSecretValue. Minimum permissions To run this command, you must have
-// secretsmanager:ListSecretVersionIds permissions.
+// GetSecretValue. Required permissions: secretsmanager:ListSecretVersionIds. For
+// more information, see  IAM policy actions for Secrets Manager
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions)
+// and Authentication and access control in Secrets Manager
+// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 func (c *Client) ListSecretVersionIds(ctx context.Context, params *ListSecretVersionIdsInput, optFns ...func(*Options)) (*ListSecretVersionIdsOutput, error) {
 	if params == nil {
 		params = &ListSecretVersionIdsInput{}

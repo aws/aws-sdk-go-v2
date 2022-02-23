@@ -90,6 +90,26 @@ func (m *validateOpCreateService) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateVpcConnector struct {
+}
+
+func (*validateOpCreateVpcConnector) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateVpcConnector) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateVpcConnectorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateVpcConnectorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteAutoScalingConfiguration struct {
 }
 
@@ -150,6 +170,26 @@ func (m *validateOpDeleteService) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteVpcConnector struct {
+}
+
+func (*validateOpDeleteVpcConnector) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteVpcConnector) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteVpcConnectorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteVpcConnectorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeAutoScalingConfiguration struct {
 }
 
@@ -205,6 +245,26 @@ func (m *validateOpDescribeService) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeServiceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeVpcConnector struct {
+}
+
+func (*validateOpDescribeVpcConnector) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeVpcConnector) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeVpcConnectorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeVpcConnectorInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -406,6 +466,10 @@ func addOpCreateServiceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateService{}, middleware.After)
 }
 
+func addOpCreateVpcConnectorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateVpcConnector{}, middleware.After)
+}
+
 func addOpDeleteAutoScalingConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAutoScalingConfiguration{}, middleware.After)
 }
@@ -418,6 +482,10 @@ func addOpDeleteServiceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteService{}, middleware.After)
 }
 
+func addOpDeleteVpcConnectorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteVpcConnector{}, middleware.After)
+}
+
 func addOpDescribeAutoScalingConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeAutoScalingConfiguration{}, middleware.After)
 }
@@ -428,6 +496,10 @@ func addOpDescribeCustomDomainsValidationMiddleware(stack *middleware.Stack) err
 
 func addOpDescribeServiceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeService{}, middleware.After)
+}
+
+func addOpDescribeVpcConnectorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeVpcConnector{}, middleware.After)
 }
 
 func addOpDisassociateCustomDomainValidationMiddleware(stack *middleware.Stack) error {
@@ -679,6 +751,24 @@ func validateOpCreateServiceInput(v *CreateServiceInput) error {
 	}
 }
 
+func validateOpCreateVpcConnectorInput(v *CreateVpcConnectorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateVpcConnectorInput"}
+	if v.VpcConnectorName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcConnectorName"))
+	}
+	if v.Subnets == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Subnets"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteAutoScalingConfigurationInput(v *DeleteAutoScalingConfigurationInput) error {
 	if v == nil {
 		return nil
@@ -724,6 +814,21 @@ func validateOpDeleteServiceInput(v *DeleteServiceInput) error {
 	}
 }
 
+func validateOpDeleteVpcConnectorInput(v *DeleteVpcConnectorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteVpcConnectorInput"}
+	if v.VpcConnectorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcConnectorArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeAutoScalingConfigurationInput(v *DescribeAutoScalingConfigurationInput) error {
 	if v == nil {
 		return nil
@@ -761,6 +866,21 @@ func validateOpDescribeServiceInput(v *DescribeServiceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeServiceInput"}
 	if v.ServiceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServiceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeVpcConnectorInput(v *DescribeVpcConnectorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeVpcConnectorInput"}
+	if v.VpcConnectorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcConnectorArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

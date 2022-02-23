@@ -38,7 +38,7 @@ type DescribeStackResourceInput struct {
 	// This member is required.
 	LogicalResourceId *string
 
-	// The name or the unique stack ID that is associated with the stack, which are not
+	// The name or the unique stack ID that's associated with the stack, which aren't
 	// always interchangeable:
 	//
 	// * Running stacks: You can specify either the stack's

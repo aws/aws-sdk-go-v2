@@ -39,25 +39,25 @@ type GetRuleInput struct {
 
 type GetRuleOutput struct {
 
-	// The description assigned to the retention rule.
+	// The retention rule description.
 	Description *string
 
 	// The unique ID of the retention rule.
 	Identifier *string
 
-	// The resource tags used to identify resources that are to be retained by the
-	// retention rule.
+	// Information about the resource tags used to identify resources that are retained
+	// by the retention rule.
 	ResourceTags []types.ResourceTag
 
-	// The resource type retained by the retention rule. Currently, only Amazon EBS
-	// snapshots are supported.
+	// The resource type retained by the retention rule.
 	ResourceType types.ResourceType
 
-	// Information about the period for which the retention rule retains resources.
+	// Information about the retention period for which the retention rule is to retain
+	// resources.
 	RetentionPeriod *types.RetentionPeriod
 
 	// The state of the retention rule. Only retention rules that are in the available
-	// state retain snapshots.
+	// state retain resources.
 	Status types.RuleStatus
 
 	// Metadata pertaining to the operation's result.

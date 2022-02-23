@@ -3299,6 +3299,9 @@ func awsAwsjson11_deserializeOpErrorCreateRegistry(response *smithyhttp.Response
 	case strings.EqualFold("AlreadyExistsException", errorCode):
 		return awsAwsjson11_deserializeErrorAlreadyExistsException(response, errorBody)
 
+	case strings.EqualFold("ConcurrentModificationException", errorCode):
+		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)
+
 	case strings.EqualFold("InternalServiceException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalServiceException(response, errorBody)
 
@@ -3421,6 +3424,9 @@ func awsAwsjson11_deserializeOpErrorCreateSchema(response *smithyhttp.Response, 
 
 	case strings.EqualFold("AlreadyExistsException", errorCode):
 		return awsAwsjson11_deserializeErrorAlreadyExistsException(response, errorBody)
+
+	case strings.EqualFold("ConcurrentModificationException", errorCode):
+		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)
 
 	case strings.EqualFold("EntityNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorEntityNotFoundException(response, errorBody)
@@ -34024,6 +34030,15 @@ func awsAwsjson11_deserializeDocumentTable(v **types.Table, value interface{}) e
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "VersionId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VersionString to be of type string, got %T instead", value)
+				}
+				sv.VersionId = ptr.String(jtv)
 			}
 
 		case "ViewExpandedText":

@@ -31,22 +31,23 @@ func (c *Client) ListRules(ctx context.Context, params *ListRulesInput, optFns .
 type ListRulesInput struct {
 
 	// The resource type retained by the retention rule. Only retention rules that
-	// retain the specified resource type are listed.
+	// retain the specified resource type are listed. Currently, only Amazon EBS
+	// snapshots and EBS-backed AMIs are supported. To list retention rules that retain
+	// snapshots, specify EBS_SNAPSHOT. To list retention rules that retain EBS-backed
+	// AMIs, specify EC2_IMAGE.
 	//
 	// This member is required.
 	ResourceType types.ResourceType
 
-	// The maximum number of results to return for the request in a single page. The
-	// remaining results can be seen by sending another request with the returned
-	// nextToken value. This value can be between 5 and 500. If maxResults is given a
-	// larger value than 500, you receive an error.
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, make another call with the returned NextToken value.
 	MaxResults *int32
 
-	// The token to use to retrieve the next page of results.
+	// The token for the next page of results.
 	NextToken *string
 
-	// The tags used to identify resources that are to be retained by the retention
-	// rule.
+	// Information about the resource tags used to identify resources that are retained
+	// by the retention rule.
 	ResourceTags []types.ResourceTag
 
 	noSmithyDocumentSerde
@@ -139,10 +140,8 @@ var _ ListRulesAPIClient = (*Client)(nil)
 
 // ListRulesPaginatorOptions is the paginator options for ListRules
 type ListRulesPaginatorOptions struct {
-	// The maximum number of results to return for the request in a single page. The
-	// remaining results can be seen by sending another request with the returned
-	// nextToken value. This value can be between 5 and 500. If maxResults is given a
-	// larger value than 500, you receive an error.
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, make another call with the returned NextToken value.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

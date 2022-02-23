@@ -11,11 +11,20 @@ import (
 )
 
 // Deletes a game session queue. Once a queue is successfully deleted, unfulfilled
-// StartGameSessionPlacement requests that reference the queue will fail. To delete
-// a queue, specify the queue name. Learn more  Using Multi-Region Queues
+// StartGameSessionPlacement
+// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_StartGameSessionPlacement.html)
+// requests that reference the queue will fail. To delete a queue, specify the
+// queue name. Learn more  Using Multi-Region Queues
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/queues-intro.html)
-// Related actions CreateGameSessionQueue | DescribeGameSessionQueues |
-// UpdateGameSessionQueue | DeleteGameSessionQueue | All APIs by task
+// Related actions CreateGameSessionQueue
+// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateGameSessionQueue.html)
+// | DescribeGameSessionQueues
+// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeGameSessionQueues.html)
+// | UpdateGameSessionQueue
+// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateGameSessionQueue.html)
+// | DeleteGameSessionQueue
+// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_DeleteGameSessionQueue.html)
+// | All APIs by task
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) DeleteGameSessionQueue(ctx context.Context, params *DeleteGameSessionQueueInput, optFns ...func(*Options)) (*DeleteGameSessionQueueOutput, error) {
 	if params == nil {

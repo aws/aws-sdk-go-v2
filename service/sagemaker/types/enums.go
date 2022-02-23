@@ -463,6 +463,8 @@ const (
 	AutoMLJobSecondaryStatusExplainabilityError            AutoMLJobSecondaryStatus = "ExplainabilityError"
 	AutoMLJobSecondaryStatusDeployingModel                 AutoMLJobSecondaryStatus = "DeployingModel"
 	AutoMLJobSecondaryStatusModelDeploymentError           AutoMLJobSecondaryStatus = "ModelDeploymentError"
+	AutoMLJobSecondaryStatusGeneratingModelInsightsReport  AutoMLJobSecondaryStatus = "GeneratingModelInsightsReport"
+	AutoMLJobSecondaryStatusModelInsightsError             AutoMLJobSecondaryStatus = "ModelInsightsError"
 )
 
 // Values returns all known values for AutoMLJobSecondaryStatus. Note that this can
@@ -485,6 +487,8 @@ func (AutoMLJobSecondaryStatus) Values() []AutoMLJobSecondaryStatus {
 		"ExplainabilityError",
 		"DeployingModel",
 		"ModelDeploymentError",
+		"GeneratingModelInsightsReport",
+		"ModelInsightsError",
 	}
 }
 
@@ -3908,6 +3912,7 @@ const (
 	TargetPlatformAcceleratorIntelGraphics TargetPlatformAccelerator = "INTEL_GRAPHICS"
 	TargetPlatformAcceleratorMali          TargetPlatformAccelerator = "MALI"
 	TargetPlatformAcceleratorNvidia        TargetPlatformAccelerator = "NVIDIA"
+	TargetPlatformAcceleratorNna           TargetPlatformAccelerator = "NNA"
 )
 
 // Values returns all known values for TargetPlatformAccelerator. Note that this
@@ -3918,6 +3923,7 @@ func (TargetPlatformAccelerator) Values() []TargetPlatformAccelerator {
 		"INTEL_GRAPHICS",
 		"MALI",
 		"NVIDIA",
+		"NNA",
 	}
 }
 

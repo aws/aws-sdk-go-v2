@@ -1806,6 +1806,11 @@ func awsAwsjson11_serializeDocumentCopyStepDetails(v *types.CopyStepDetails, val
 		ok.String(string(v.OverwriteExisting))
 	}
 
+	if v.SourceFileLocation != nil {
+		ok := object.Key("SourceFileLocation")
+		ok.String(*v.SourceFileLocation)
+	}
+
 	return nil
 }
 
@@ -1816,6 +1821,11 @@ func awsAwsjson11_serializeDocumentCustomStepDetails(v *types.CustomStepDetails,
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
+	}
+
+	if v.SourceFileLocation != nil {
+		ok := object.Key("SourceFileLocation")
+		ok.String(*v.SourceFileLocation)
 	}
 
 	if v.Target != nil {
@@ -1838,6 +1848,11 @@ func awsAwsjson11_serializeDocumentDeleteStepDetails(v *types.DeleteStepDetails,
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
+	}
+
+	if v.SourceFileLocation != nil {
+		ok := object.Key("SourceFileLocation")
+		ok.String(*v.SourceFileLocation)
 	}
 
 	return nil
@@ -2171,6 +2186,11 @@ func awsAwsjson11_serializeDocumentTagStepDetails(v *types.TagStepDetails, value
 		ok.String(*v.Name)
 	}
 
+	if v.SourceFileLocation != nil {
+		ok := object.Key("SourceFileLocation")
+		ok.String(*v.SourceFileLocation)
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsAwsjson11_serializeDocumentS3Tags(v.Tags, ok); err != nil {
@@ -2362,6 +2382,16 @@ func awsAwsjson11_serializeOpDocumentCreateServerInput(v *CreateServerInput, val
 	if v.LoggingRole != nil {
 		ok := object.Key("LoggingRole")
 		ok.String(*v.LoggingRole)
+	}
+
+	if v.PostAuthenticationLoginBanner != nil {
+		ok := object.Key("PostAuthenticationLoginBanner")
+		ok.String(*v.PostAuthenticationLoginBanner)
+	}
+
+	if v.PreAuthenticationLoginBanner != nil {
+		ok := object.Key("PreAuthenticationLoginBanner")
+		ok.String(*v.PreAuthenticationLoginBanner)
 	}
 
 	if v.ProtocolDetails != nil {
@@ -3032,6 +3062,16 @@ func awsAwsjson11_serializeOpDocumentUpdateServerInput(v *UpdateServerInput, val
 	if v.LoggingRole != nil {
 		ok := object.Key("LoggingRole")
 		ok.String(*v.LoggingRole)
+	}
+
+	if v.PostAuthenticationLoginBanner != nil {
+		ok := object.Key("PostAuthenticationLoginBanner")
+		ok.String(*v.PostAuthenticationLoginBanner)
+	}
+
+	if v.PreAuthenticationLoginBanner != nil {
+		ok := object.Key("PreAuthenticationLoginBanner")
+		ok.String(*v.PreAuthenticationLoginBanner)
 	}
 
 	if v.ProtocolDetails != nil {

@@ -11,20 +11,20 @@ import (
 )
 
 // Responds to the authentication challenge. This action might generate an SMS text
-// message. Starting June 1, 2021, U.S. telecom carriers require that you register
-// an origination phone number before you can send SMS messages to U.S. phone
-// numbers. If you use SMS text messages in Amazon Cognito, you must register a
-// phone number with Amazon Pinpoint
-// (https://console.aws.amazon.com/pinpoint/home/). Cognito will use the the
-// registered number automatically. Otherwise, Cognito users that must receive SMS
-// messages might be unable to sign up, activate their accounts, or sign in. If you
-// have never used SMS text messages with Amazon Cognito or any other Amazon Web
-// Service, Amazon SNS might place your account in SMS sandbox. In sandbox mode
-// (https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html) , you’ll have
-// limitations, such as sending messages to only verified phone numbers. After
+// message. Starting June 1, 2021, US telecom carriers require you to register an
+// origination phone number before you can send SMS messages to U.S. phone numbers.
+// If you use SMS text messages in Amazon Cognito, you must register a phone number
+// with Amazon Pinpoint (https://console.aws.amazon.com/pinpoint/home/). Amazon
+// Cognito will use the registered number automatically. Otherwise, Amazon Cognito
+// users that must receive SMS messages might be unable to sign up, activate their
+// accounts, or sign in. If you have never used SMS text messages with Amazon
+// Cognito or any other Amazon Web Service, Amazon Simple Notification Service
+// might place your account in SMS sandbox. In sandbox mode
+// (https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html) , you will have
+// limitations, such as sending messages only to verified phone numbers. After
 // testing in the sandbox environment, you can move out of the SMS sandbox and into
-// production. For more information, see  SMS message settings for Cognito User
-// Pools
+// production. For more information, see  SMS message settings for Amazon Cognito
+// User Pools
 // (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html)
 // in the Amazon Cognito Developer Guide.
 func (c *Client) RespondToAuthChallenge(ctx context.Context, params *RespondToAuthChallengeInput, optFns ...func(*Options)) (*RespondToAuthChallengeOutput, error) {
@@ -47,7 +47,7 @@ type RespondToAuthChallengeInput struct {
 
 	// The challenge name. For more information, see InitiateAuth
 	// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_InitiateAuth.html).
-	// ADMIN_NO_SRP_AUTH is not a valid value.
+	// ADMIN_NO_SRP_AUTH isn't a valid value.
 	//
 	// This member is required.
 	ChallengeName types.ChallengeNameType
@@ -63,29 +63,31 @@ type RespondToAuthChallengeInput struct {
 
 	// The challenge responses. These are inputs corresponding to the value of
 	// ChallengeName, for example: SECRET_HASH (if app client is configured with client
-	// secret) applies to all inputs below (including SOFTWARE_TOKEN_MFA).
+	// secret) applies to all of the inputs that follow (including
+	// SOFTWARE_TOKEN_MFA).
 	//
-	// * SMS_MFA:
-	// SMS_MFA_CODE, USERNAME.
+	// * SMS_MFA: SMS_MFA_CODE, USERNAME.
 	//
-	// * PASSWORD_VERIFIER: PASSWORD_CLAIM_SIGNATURE,
-	// PASSWORD_CLAIM_SECRET_BLOCK, TIMESTAMP, USERNAME.
+	// * PASSWORD_VERIFIER:
+	// PASSWORD_CLAIM_SIGNATURE, PASSWORD_CLAIM_SECRET_BLOCK, TIMESTAMP, USERNAME.
+	// PASSWORD_VERIFIER requires DEVICE_KEY when signing in with a remembered
+	// device.
 	//
-	// * NEW_PASSWORD_REQUIRED:
-	// NEW_PASSWORD, any other required attributes, USERNAME.
+	// * NEW_PASSWORD_REQUIRED: NEW_PASSWORD, any other required attributes,
+	// USERNAME.
 	//
-	// * SOFTWARE_TOKEN_MFA:
-	// USERNAME and SOFTWARE_TOKEN_MFA_CODE are required attributes.
+	// * SOFTWARE_TOKEN_MFA: USERNAME and SOFTWARE_TOKEN_MFA_CODE are
+	// required attributes.
 	//
-	// * DEVICE_SRP_AUTH
-	// requires USERNAME, DEVICE_KEY, SRP_A (and SECRET_HASH).
+	// * DEVICE_SRP_AUTH requires USERNAME, DEVICE_KEY, SRP_A
+	// (and SECRET_HASH).
 	//
-	// *
-	// DEVICE_PASSWORD_VERIFIER requires everything that PASSWORD_VERIFIER requires
-	// plus DEVICE_KEY.
+	// * DEVICE_PASSWORD_VERIFIER requires everything that
+	// PASSWORD_VERIFIER requires, plus DEVICE_KEY.
 	//
-	// * MFA_SETUP requires USERNAME, plus you need to use the
-	// session value returned by VerifySoftwareToken in the Session parameter.
+	// * MFA_SETUP requires USERNAME,
+	// plus you must use the session value returned by VerifySoftwareToken in the
+	// Session parameter.
 	ChallengeResponses map[string]string
 
 	// A map of custom key-value pairs that you can provide as input for any custom
@@ -101,26 +103,25 @@ type RespondToAuthChallengeInput struct {
 	// the clientMetadata value to enhance your workflow for your specific needs. For
 	// more information, see Customizing User Pool Workflows with Lambda Triggers
 	// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html)
-	// in the Amazon Cognito Developer Guide. Take the following limitations into
-	// consideration when you use the ClientMetadata parameter:
+	// in the Amazon Cognito Developer Guide. When you use the ClientMetadata
+	// parameter, remember that Amazon Cognito won't do the following:
 	//
-	// * Amazon Cognito does
-	// not store the ClientMetadata value. This data is available only to Lambda
-	// triggers that are assigned to a user pool to support custom workflows. If your
-	// user pool configuration does not include triggers, the ClientMetadata parameter
-	// serves no purpose.
+	// * Store the
+	// ClientMetadata value. This data is available only to Lambda triggers that are
+	// assigned to a user pool to support custom workflows. If your user pool
+	// configuration doesn't include triggers, the ClientMetadata parameter serves no
+	// purpose.
 	//
-	// * Amazon Cognito does not validate the ClientMetadata
-	// value.
+	// * Validate the ClientMetadata value.
 	//
-	// * Amazon Cognito does not encrypt the the ClientMetadata value, so don't
-	// use it to provide sensitive information.
+	// * Encrypt the ClientMetadata
+	// value. Don't use Amazon Cognito to provide sensitive information.
 	ClientMetadata map[string]string
 
-	// The session which should be passed both ways in challenge-response calls to the
+	// The session that should be passed both ways in challenge-response calls to the
 	// service. If InitiateAuth or RespondToAuthChallenge API call determines that the
-	// caller needs to go through another challenge, they return a session with other
-	// challenge parameters. This session should be passed as it is to the next
+	// caller must pass another challenge, they return a session with other challenge
+	// parameters. This session should be passed as it is to the next
 	// RespondToAuthChallenge API call.
 	Session *string
 
@@ -147,10 +148,10 @@ type RespondToAuthChallengeOutput struct {
 	// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_InitiateAuth.html).
 	ChallengeParameters map[string]string
 
-	// The session which should be passed both ways in challenge-response calls to the
-	// service. If the caller needs to go through another challenge, they return a
-	// session with other challenge parameters. This session should be passed as it is
-	// to the next RespondToAuthChallenge API call.
+	// The session that should be passed both ways in challenge-response calls to the
+	// service. If the caller must pass another challenge, they return a session with
+	// other challenge parameters. This session should be passed as it is to the next
+	// RespondToAuthChallenge API call.
 	Session *string
 
 	// Metadata pertaining to the operation's result.

@@ -2043,6 +2043,162 @@ func awsRestjson1_deserializeOpDocumentDescribeDomainAutoTunesOutput(v **Describ
 	return nil
 }
 
+type awsRestjson1_deserializeOpDescribeDomainChangeProgress struct {
+}
+
+func (*awsRestjson1_deserializeOpDescribeDomainChangeProgress) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpDescribeDomainChangeProgress) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorDescribeDomainChangeProgress(response, &metadata)
+	}
+	output := &DescribeDomainChangeProgressOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentDescribeDomainChangeProgressOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorDescribeDomainChangeProgress(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("BaseException", errorCode):
+		return awsRestjson1_deserializeErrorBaseException(response, errorBody)
+
+	case strings.EqualFold("InternalException", errorCode):
+		return awsRestjson1_deserializeErrorInternalException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentDescribeDomainChangeProgressOutput(v **DescribeDomainChangeProgressOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *DescribeDomainChangeProgressOutput
+	if *v == nil {
+		sv = &DescribeDomainChangeProgressOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ChangeProgressStatus":
+			if err := awsRestjson1_deserializeDocumentChangeProgressStatusDetails(&sv.ChangeProgressStatus, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 type awsRestjson1_deserializeOpDescribeDomainConfig struct {
 }
 
@@ -6207,6 +6363,11 @@ func awsRestjson1_deserializeOpDocumentUpgradeDomainOutput(v **UpgradeDomainOutp
 				return err
 			}
 
+		case "ChangeProgressDetails":
+			if err := awsRestjson1_deserializeDocumentChangeProgressDetails(&sv.ChangeProgressDetails, value); err != nil {
+				return err
+			}
+
 		case "DomainName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7564,6 +7725,256 @@ func awsRestjson1_deserializeDocumentBaseException(v **types.BaseException, valu
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentChangeProgressDetails(v **types.ChangeProgressDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ChangeProgressDetails
+	if *v == nil {
+		sv = &types.ChangeProgressDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ChangeId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GUID to be of type string, got %T instead", value)
+				}
+				sv.ChangeId = ptr.String(jtv)
+			}
+
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Message to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentChangeProgressStage(v **types.ChangeProgressStage, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ChangeProgressStage
+	if *v == nil {
+		sv = &types.ChangeProgressStage{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Description to be of type string, got %T instead", value)
+				}
+				sv.Description = ptr.String(jtv)
+			}
+
+		case "LastUpdated":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastUpdated = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected LastUpdated to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ChangeProgressStageName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ChangeProgressStageStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentChangeProgressStageList(v *[]types.ChangeProgressStage, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ChangeProgressStage
+	if *v == nil {
+		cv = []types.ChangeProgressStage{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ChangeProgressStage
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentChangeProgressStage(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentChangeProgressStatusDetails(v **types.ChangeProgressStatusDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ChangeProgressStatusDetails
+	if *v == nil {
+		sv = &types.ChangeProgressStatusDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ChangeId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GUID to be of type string, got %T instead", value)
+				}
+				sv.ChangeId = ptr.String(jtv)
+			}
+
+		case "ChangeProgressStages":
+			if err := awsRestjson1_deserializeDocumentChangeProgressStageList(&sv.ChangeProgressStages, value); err != nil {
+				return err
+			}
+
+		case "CompletedProperties":
+			if err := awsRestjson1_deserializeDocumentStringList(&sv.CompletedProperties, value); err != nil {
+				return err
+			}
+
+		case "PendingProperties":
+			if err := awsRestjson1_deserializeDocumentStringList(&sv.PendingProperties, value); err != nil {
+				return err
+			}
+
+		case "StartTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.StartTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected UpdateTimestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OverallChangeStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.OverallChangeStatus(jtv)
+			}
+
+		case "TotalNumberOfStages":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TotalNumberOfStages to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TotalNumberOfStages = int32(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentClusterConfig(v **types.ClusterConfig, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8088,6 +8499,11 @@ func awsRestjson1_deserializeDocumentDomainConfig(v **types.DomainConfig, value 
 				return err
 			}
 
+		case "ChangeProgressDetails":
+			if err := awsRestjson1_deserializeDocumentChangeProgressDetails(&sv.ChangeProgressDetails, value); err != nil {
+				return err
+			}
+
 		case "ClusterConfig":
 			if err := awsRestjson1_deserializeDocumentClusterConfigStatus(&sv.ClusterConfig, value); err != nil {
 				return err
@@ -8584,6 +9000,11 @@ func awsRestjson1_deserializeDocumentDomainStatus(v **types.DomainStatus, value 
 
 		case "AutoTuneOptions":
 			if err := awsRestjson1_deserializeDocumentAutoTuneOptionsOutput(&sv.AutoTuneOptions, value); err != nil {
+				return err
+			}
+
+		case "ChangeProgressDetails":
+			if err := awsRestjson1_deserializeDocumentChangeProgressDetails(&sv.ChangeProgressDetails, value); err != nil {
 				return err
 			}
 

@@ -12,23 +12,23 @@ import (
 )
 
 // Disables the user from signing in with the specified external (SAML or social)
-// identity provider. If the user to disable is a Cognito User Pools native
-// username + password user, they are not permitted to use their password to
-// sign-in. If the user to disable is a linked external IdP user, any link between
-// that user and an existing user is removed. The next time the external user (no
-// longer attached to the previously linked DestinationUser) signs in, they must
-// create a new user account. See AdminLinkProviderForUser
+// identity provider. If the user to disable is a Amazon Cognito User Pools native
+// username + password user, they aren't permitted to use their password to sign
+// in. If the user to deactivate is a linked external identity provider (IdP) user,
+// any link between that user and an existing user is removed. The next time the
+// external user (no longer attached to the previously linked DestinationUser)
+// signs in, they must create a new user account. See AdminLinkProviderForUser
 // (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminLinkProviderForUser.html).
 // This action is enabled only for admin access and requires developer credentials.
 // The ProviderName must match the value specified when creating an IdP for the
-// pool. To disable a native username + password user, the ProviderName value must
-// be Cognito and the ProviderAttributeName must be Cognito_Subject, with the
-// ProviderAttributeValue being the name that is used in the user pool for the
+// pool. To deactivate a native username + password user, the ProviderName value
+// must be Cognito and the ProviderAttributeName must be Cognito_Subject. The
+// ProviderAttributeValue must be the name that is used in the user pool for the
 // user. The ProviderAttributeName must always be Cognito_Subject for social
 // identity providers. The ProviderAttributeValue must always be the exact subject
 // that was used when the user was originally linked as a source user. For
 // de-linking a SAML identity, there are two scenarios. If the linked identity has
-// not yet been used to sign-in, the ProviderAttributeName and
+// not yet been used to sign in, the ProviderAttributeName and
 // ProviderAttributeValue must be the same values that were used for the SourceUser
 // when the identities were originally linked using  AdminLinkProviderForUser call.
 // (If the linking was done with ProviderAttributeName set to Cognito_Subject, the

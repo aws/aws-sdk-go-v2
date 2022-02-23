@@ -14,7 +14,7 @@ import (
 
 // Creates a JSON document that specifies a set of resources to assign to a backup
 // plan. For examples, see Assigning resources programmatically
-// (https://docs.aws.amazon.com/assigning-resources.html#assigning-resources-json).
+// (https://docs.aws.amazon.com/aws-backup/latest/devguide/assigning-resources.html#assigning-resources-json).
 func (c *Client) CreateBackupSelection(ctx context.Context, params *CreateBackupSelectionInput, optFns ...func(*Options)) (*CreateBackupSelectionOutput, error) {
 	if params == nil {
 		params = &CreateBackupSelectionInput{}

@@ -6,7 +6,8 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
-// Details describing why the request was invalid
+// Detailed information about the input that failed to satisfy the constraints
+// specified by a call.
 //
 // The following types satisfy this interface:
 //  BadRequestDetailsMemberInvalidParameters
@@ -14,7 +15,7 @@ type BadRequestDetails interface {
 	isBadRequestDetails()
 }
 
-// Present if the Reason for the bad request was 'InvalidParameters'
+// One or more specified parameters are not valid for the call.
 type BadRequestDetailsMemberInvalidParameters struct {
 	Value map[string]InvalidParameterDetail
 
@@ -23,11 +24,10 @@ type BadRequestDetailsMemberInvalidParameters struct {
 
 func (*BadRequestDetailsMemberInvalidParameters) isBadRequestDetails() {}
 
-// Contains details about an invalid parameter.
+// Information about an invalid parameter.
 type InvalidParameterDetail struct {
 
-	// Detail describing why an individual parameter did not satisfy the constraints
-	// specified by the service
+	// The reason the parameter is invalid.
 	Problem InvalidParameterProblem
 
 	noSmithyDocumentSerde

@@ -21,6 +21,7 @@
         "api_op_DeletePackage.go",
         "api_op_DescribeDomain.go",
         "api_op_DescribeDomainAutoTunes.go",
+        "api_op_DescribeDomainChangeProgress.go",
         "api_op_DescribeDomainConfig.go",
         "api_op_DescribeDomains.go",
         "api_op_DescribeInboundConnections.go",

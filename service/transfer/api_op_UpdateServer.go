@@ -113,6 +113,10 @@ type UpdateServerInput struct {
 	// viewed in your CloudWatch logs.
 	LoggingRole *string
 
+	PostAuthenticationLoginBanner *string
+
+	PreAuthenticationLoginBanner *string
+
 	// The protocol settings that are configured for your server. Use the PassiveIp
 	// parameter to indicate passive mode (for FTP and FTPS protocols). Enter a single
 	// dotted-quad IPv4 address, such as the external IP address of a firewall, router,

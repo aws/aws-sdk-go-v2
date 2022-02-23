@@ -11,7 +11,12 @@ import (
 )
 
 // Cancels the scheduled deletion of a secret by removing the DeletedDate time
-// stamp. You can access a secret again after it has been restored.
+// stamp. You can access a secret again after it has been restored. Required
+// permissions: secretsmanager:RestoreSecret. For more information, see  IAM policy
+// actions for Secrets Manager
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions)
+// and Authentication and access control in Secrets Manager
+// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 func (c *Client) RestoreSecret(ctx context.Context, params *RestoreSecretInput, optFns ...func(*Options)) (*RestoreSecretOutput, error) {
 	if params == nil {
 		params = &RestoreSecretInput{}

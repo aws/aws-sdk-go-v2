@@ -43,6 +43,10 @@ type ListExperimentsInput struct {
 	// token from a previous ListExperiments operation.
 	NextToken *string
 
+	// Use this optional parameter to limit the returned results to only the
+	// experiments with the status that you specify here.
+	Status types.ExperimentStatus
+
 	noSmithyDocumentSerde
 }
 

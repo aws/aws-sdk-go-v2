@@ -94,7 +94,14 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 	BackupTarget *string
 
 	// A value that indicates whether to copy all tags from the restored DB instance to
-	// snapshots of the DB instance. By default, tags are not copied.
+	// snapshots of the DB instance. In most cases, tags aren't copied by default.
+	// However, when you restore a DB instance from a DB snapshot, RDS checks whether
+	// you specify new tags. If yes, the new tags are added to the restored DB
+	// instance. If there are no new tags, RDS looks for the tags from the source DB
+	// instance for the DB snapshot, and then adds those tags to the restored DB
+	// instance. For more information, see  Copying tags to DB instance snapshots
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html#USER_Tagging.CopyTags)
+	// in the Amazon RDS User Guide.
 	CopyTagsToSnapshot *bool
 
 	// The instance profile associated with the underlying Amazon EC2 instance of an
@@ -113,8 +120,7 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 	// For the list of permissions required for the IAM role, see
 	// Configure IAM and your VPC
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-setup-orcl.html#custom-setup-orcl.iam-vpc)
-	// in the Amazon Relational Database Service User Guide. This setting is required
-	// for RDS Custom.
+	// in the Amazon RDS User Guide. This setting is required for RDS Custom.
 	CustomIamInstanceProfile *string
 
 	// The compute and memory capacity of the Amazon RDS DB instance, for example
@@ -149,7 +155,7 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 	DBParameterGroupName *string
 
 	// The DB subnet group name to use for the new instance. Constraints: If supplied,
-	// must match the name of an existing DBSubnetGroup. Example: mySubnetgroup
+	// must match the name of an existing DBSubnetGroup. Example: mydbsubnetgroup
 	DBSubnetGroupName *string
 
 	// A value that indicates whether the DB instance has deletion protection enabled.

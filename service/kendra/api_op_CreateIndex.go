@@ -12,11 +12,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new Amazon Kendra index. Index creation is an asynchronous operation.
-// To determine if index creation has completed, check the Status field returned
-// from a call to DescribeIndex. The Status field is set to ACTIVE when the index
-// is ready to use. Once the index is active you can index your documents using the
-// BatchPutDocument operation or using one of the supported data sources.
+// Creates a new Amazon Kendra index. Index creation is an asynchronous API. To
+// determine if index creation has completed, check the Status field returned from
+// a call to DescribeIndex. The Status field is set to ACTIVE when the index is
+// ready to use. Once the index is active you can index your documents using the
+// BatchPutDocument API or using one of the supported data sources.
 func (c *Client) CreateIndex(ctx context.Context, params *CreateIndexInput, optFns ...func(*Options)) (*CreateIndexOutput, error) {
 	if params == nil {
 		params = &CreateIndexInput{}
@@ -41,15 +41,15 @@ type CreateIndexInput struct {
 
 	// An Identity and Access Management(IAM) role that gives Amazon Kendra permissions
 	// to access your Amazon CloudWatch logs and metrics. This is also the role used
-	// when you use the BatchPutDocument operation to index documents from an Amazon S3
+	// when you use the BatchPutDocument API to index documents from an Amazon S3
 	// bucket.
 	//
 	// This member is required.
 	RoleArn *string
 
 	// A token that you provide to identify the request to create an index. Multiple
-	// calls to the CreateIndex operation with the same client token will create only
-	// one index.
+	// calls to the CreateIndex API with the same client token will create only one
+	// index.
 	ClientToken *string
 
 	// A description for the index.

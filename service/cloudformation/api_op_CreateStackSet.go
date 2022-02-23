@@ -138,7 +138,7 @@ type CreateStackSetInput struct {
 	// capability. For more information, see Using CloudFormation Macros to Perform
 	// Custom Processing on Templates
 	// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html).
-	// Stack sets with service-managed permissions do not currently support the use of
+	// Stack sets with service-managed permissions don't currently support the use of
 	// macros in templates. (This includes the AWS::Include
 	// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/create-reusable-transform-function-snippets-and-add-to-your-template-with-aws-include-transform.html)
 	// and AWS::Serverless

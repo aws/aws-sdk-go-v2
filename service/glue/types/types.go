@@ -3477,6 +3477,8 @@ type Table struct {
 	// The last time that the table was updated.
 	UpdateTime *time.Time
 
+	VersionId *string
+
 	// If the table is a view, the expanded text of the view; otherwise null.
 	ViewExpandedText *string
 

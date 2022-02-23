@@ -120,8 +120,7 @@ type CreateExperimentTemplateStopConditionInput struct {
 // Injection Simulator User Guide.
 type CreateExperimentTemplateTargetInput struct {
 
-	// The Amazon Web Services resource type. The resource type must be supported for
-	// the specified action.
+	// The resource type. The resource type must be supported for the specified action.
 	//
 	// This member is required.
 	ResourceType *string
@@ -146,6 +145,9 @@ type CreateExperimentTemplateTargetInput struct {
 
 	// The filters to apply to identify target resources using specific attributes.
 	Filters []ExperimentTemplateTargetInputFilter
+
+	// The resource type parameters.
+	Parameters map[string]string
 
 	// The Amazon Resource Names (ARNs) of the resources.
 	ResourceArns []string
@@ -289,6 +291,9 @@ type ExperimentTarget struct {
 	// The filters to apply to identify target resources using specific attributes.
 	Filters []ExperimentTargetFilter
 
+	// The resource type parameters.
+	Parameters map[string]string
+
 	// The Amazon Resource Names (ARNs) of the resources.
 	ResourceArns []string
 
@@ -409,6 +414,9 @@ type ExperimentTemplateTarget struct {
 	// The filters to apply to identify target resources using specific attributes.
 	Filters []ExperimentTemplateTargetFilter
 
+	// The resource type parameters.
+	Parameters map[string]string
+
 	// The Amazon Resource Names (ARNs) of the targets.
 	ResourceArns []string
 
@@ -451,6 +459,46 @@ type ExperimentTemplateTargetInputFilter struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// Describes a resource type.
+type TargetResourceType struct {
+
+	// A description of the resource type.
+	Description *string
+
+	// The parameters for the resource type.
+	Parameters map[string]TargetResourceTypeParameter
+
+	// The resource type.
+	ResourceType *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the parameters for a resource type. Use parameters to determine which
+// tasks are identified during target resolution.
+type TargetResourceTypeParameter struct {
+
+	// A description of the parameter.
+	Description *string
+
+	// Indicates whether the parameter is required.
+	Required bool
+
+	noSmithyDocumentSerde
+}
+
+// Describes a resource type.
+type TargetResourceTypeSummary struct {
+
+	// A description of the resource type.
+	Description *string
+
+	// The resource type.
+	ResourceType *string
 
 	noSmithyDocumentSerde
 }
@@ -498,8 +546,7 @@ type UpdateExperimentTemplateStopConditionInput struct {
 // Resource Name (ARN) or at least one resource tag. You cannot specify both.
 type UpdateExperimentTemplateTargetInput struct {
 
-	// The Amazon Web Services resource type. The resource type must be supported for
-	// the specified action.
+	// The resource type. The resource type must be supported for the specified action.
 	//
 	// This member is required.
 	ResourceType *string
@@ -511,6 +558,9 @@ type UpdateExperimentTemplateTargetInput struct {
 
 	// The filters to apply to identify target resources using specific attributes.
 	Filters []ExperimentTemplateTargetInputFilter
+
+	// The resource type parameters.
+	Parameters map[string]string
 
 	// The Amazon Resource Names (ARNs) of the targets.
 	ResourceArns []string

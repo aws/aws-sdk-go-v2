@@ -35,7 +35,7 @@ type AdminEnableUserInput struct {
 	// This member is required.
 	UserPoolId *string
 
-	// The user name of the user you wish to enable.
+	// The user name of the user you want to enable.
 	//
 	// This member is required.
 	Username *string

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about a CloudFormation extension publisher. If you do not
+// Returns information about a CloudFormation extension publisher. If you don't
 // supply a PublisherId, and you have registered as an extension publisher,
 // DescribePublisher returns information about your own publisher account. For more
 // information on registering as a publisher, see:
@@ -40,7 +40,7 @@ func (c *Client) DescribePublisher(ctx context.Context, params *DescribePublishe
 
 type DescribePublisherInput struct {
 
-	// The ID of the extension publisher. If you do not supply a PublisherId, and you
+	// The ID of the extension publisher. If you don't supply a PublisherId, and you
 	// have registered as an extension publisher, DescribePublisher returns information
 	// about your own publisher account.
 	PublisherId *string

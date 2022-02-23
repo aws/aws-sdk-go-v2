@@ -106,6 +106,26 @@ func (ChangeAction) Values() []ChangeAction {
 	}
 }
 
+type ChangeSetHooksStatus string
+
+// Enum values for ChangeSetHooksStatus
+const (
+	ChangeSetHooksStatusPlanning    ChangeSetHooksStatus = "PLANNING"
+	ChangeSetHooksStatusPlanned     ChangeSetHooksStatus = "PLANNED"
+	ChangeSetHooksStatusUnavailable ChangeSetHooksStatus = "UNAVAILABLE"
+)
+
+// Values returns all known values for ChangeSetHooksStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ChangeSetHooksStatus) Values() []ChangeSetHooksStatus {
+	return []ChangeSetHooksStatus{
+		"PLANNING",
+		"PLANNED",
+		"UNAVAILABLE",
+	}
+}
+
 type ChangeSetStatus string
 
 // Enum values for ChangeSetStatus
@@ -297,6 +317,9 @@ const (
 	HandlerErrorCodeNetworkFailure           HandlerErrorCode = "NetworkFailure"
 	HandlerErrorCodeInternalFailure          HandlerErrorCode = "InternalFailure"
 	HandlerErrorCodeInvalidTypeConfiguration HandlerErrorCode = "InvalidTypeConfiguration"
+	HandlerErrorCodeHandlerInternalFailure   HandlerErrorCode = "HandlerInternalFailure"
+	HandlerErrorCodeNonCompliant             HandlerErrorCode = "NonCompliant"
+	HandlerErrorCodeUnknown                  HandlerErrorCode = "Unknown"
 )
 
 // Values returns all known values for HandlerErrorCode. Note that this can be
@@ -319,6 +342,81 @@ func (HandlerErrorCode) Values() []HandlerErrorCode {
 		"NetworkFailure",
 		"InternalFailure",
 		"InvalidTypeConfiguration",
+		"HandlerInternalFailure",
+		"NonCompliant",
+		"Unknown",
+	}
+}
+
+type HookFailureMode string
+
+// Enum values for HookFailureMode
+const (
+	HookFailureModeFail HookFailureMode = "FAIL"
+	HookFailureModeWarn HookFailureMode = "WARN"
+)
+
+// Values returns all known values for HookFailureMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HookFailureMode) Values() []HookFailureMode {
+	return []HookFailureMode{
+		"FAIL",
+		"WARN",
+	}
+}
+
+type HookInvocationPoint string
+
+// Enum values for HookInvocationPoint
+const (
+	HookInvocationPointPreProvision HookInvocationPoint = "PRE_PROVISION"
+)
+
+// Values returns all known values for HookInvocationPoint. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HookInvocationPoint) Values() []HookInvocationPoint {
+	return []HookInvocationPoint{
+		"PRE_PROVISION",
+	}
+}
+
+type HookStatus string
+
+// Enum values for HookStatus
+const (
+	HookStatusHookInProgress        HookStatus = "HOOK_IN_PROGRESS"
+	HookStatusHookCompleteSucceeded HookStatus = "HOOK_COMPLETE_SUCCEEDED"
+	HookStatusHookCompleteFailed    HookStatus = "HOOK_COMPLETE_FAILED"
+	HookStatusHookFailed            HookStatus = "HOOK_FAILED"
+)
+
+// Values returns all known values for HookStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (HookStatus) Values() []HookStatus {
+	return []HookStatus{
+		"HOOK_IN_PROGRESS",
+		"HOOK_COMPLETE_SUCCEEDED",
+		"HOOK_COMPLETE_FAILED",
+		"HOOK_FAILED",
+	}
+}
+
+type HookTargetType string
+
+// Enum values for HookTargetType
+const (
+	HookTargetTypeResource HookTargetType = "RESOURCE"
+)
+
+// Values returns all known values for HookTargetType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HookTargetType) Values() []HookTargetType {
+	return []HookTargetType{
+		"RESOURCE",
 	}
 }
 
@@ -484,6 +582,7 @@ type RegistryType string
 const (
 	RegistryTypeResource RegistryType = "RESOURCE"
 	RegistryTypeModule   RegistryType = "MODULE"
+	RegistryTypeHook     RegistryType = "HOOK"
 )
 
 // Values returns all known values for RegistryType. Note that this can be expanded
@@ -493,6 +592,7 @@ func (RegistryType) Values() []RegistryType {
 	return []RegistryType{
 		"RESOURCE",
 		"MODULE",
+		"HOOK",
 	}
 }
 
@@ -983,6 +1083,7 @@ type ThirdPartyType string
 const (
 	ThirdPartyTypeResource ThirdPartyType = "RESOURCE"
 	ThirdPartyTypeModule   ThirdPartyType = "MODULE"
+	ThirdPartyTypeHook     ThirdPartyType = "HOOK"
 )
 
 // Values returns all known values for ThirdPartyType. Note that this can be
@@ -992,6 +1093,7 @@ func (ThirdPartyType) Values() []ThirdPartyType {
 	return []ThirdPartyType{
 		"RESOURCE",
 		"MODULE",
+		"HOOK",
 	}
 }
 

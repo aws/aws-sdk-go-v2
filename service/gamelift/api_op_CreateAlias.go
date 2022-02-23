@@ -14,7 +14,7 @@ import (
 // Creates an alias for a fleet. In most situations, you can use an alias ID in
 // place of a fleet ID. An alias provides a level of abstraction for a fleet that
 // is useful when redirecting player traffic from one fleet to another, such as
-// when updating your game build. Amazon GameLift supports two types of routing
+// when updating your game build. Amazon Web Services supports two types of routing
 // strategies for aliases: simple and terminal. A simple alias points to an active
 // fleet. A terminal alias is used to display messaging or link to a URL instead of
 // routing players to an active fleet. For example, you might use a terminal alias
@@ -60,13 +60,14 @@ type CreateAliasInput struct {
 	Description *string
 
 	// A list of labels to assign to the new alias resource. Tags are developer-defined
-	// key-value pairs. Tagging AWS resources are useful for resource management,
-	// access management and cost allocation. For more information, see  Tagging AWS
-	// Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in
-	// the AWS General Reference. Once the resource is created, you can use
+	// key-value pairs. Tagging Amazon Web Services resources are useful for resource
+	// management, access management and cost allocation. For more information, see
+	// Tagging Amazon Web Services Resources
+	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the Amazon
+	// Web Services General Reference. Once the resource is created, you can use
 	// TagResource, UntagResource, and ListTagsForResource to add, remove, and view
-	// tags. The maximum tag limit may be lower than stated. See the AWS General
-	// Reference for actual tagging limits.
+	// tags. The maximum tag limit may be lower than stated. See the Amazon Web
+	// Services General Reference for actual tagging limits.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

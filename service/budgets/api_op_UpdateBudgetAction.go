@@ -29,7 +29,7 @@ func (c *Client) UpdateBudgetAction(ctx context.Context, params *UpdateBudgetAct
 
 type UpdateBudgetActionInput struct {
 
-	// The account ID of the user. It should be a 12-digit number.
+	// The account ID of the user. It's a 12-digit number.
 	//
 	// This member is required.
 	AccountId *string
@@ -69,7 +69,7 @@ type UpdateBudgetActionInput struct {
 
 type UpdateBudgetActionOutput struct {
 
-	// The account ID of the user. It should be a 12-digit number.
+	// The account ID of the user. It's a 12-digit number.
 	//
 	// This member is required.
 	AccountId *string

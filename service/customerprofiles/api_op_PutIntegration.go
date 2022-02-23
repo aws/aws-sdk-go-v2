@@ -95,6 +95,9 @@ type PutIntegrationOutput struct {
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
 
+	// Unique identifier for the workflow.
+	WorkflowId *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

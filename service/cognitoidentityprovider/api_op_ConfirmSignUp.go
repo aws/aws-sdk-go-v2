@@ -40,7 +40,7 @@ type ConfirmSignUpInput struct {
 	// This member is required.
 	ConfirmationCode *string
 
-	// The user name of the user whose registration you wish to confirm.
+	// The user name of the user whose registration you want to confirm.
 	//
 	// This member is required.
 	Username *string
@@ -61,20 +61,19 @@ type ConfirmSignUpInput struct {
 	// your specific needs. For more information, see Customizing User Pool Workflows
 	// with Lambda Triggers
 	// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html)
-	// in the Amazon Cognito Developer Guide. Take the following limitations into
-	// consideration when you use the ClientMetadata parameter:
+	// in the Amazon Cognito Developer Guide. When you use the ClientMetadata
+	// parameter, remember that Amazon Cognito won't do the following:
 	//
-	// * Amazon Cognito does
-	// not store the ClientMetadata value. This data is available only to Lambda
-	// triggers that are assigned to a user pool to support custom workflows. If your
-	// user pool configuration does not include triggers, the ClientMetadata parameter
-	// serves no purpose.
+	// * Store the
+	// ClientMetadata value. This data is available only to Lambda triggers that are
+	// assigned to a user pool to support custom workflows. If your user pool
+	// configuration doesn't include triggers, the ClientMetadata parameter serves no
+	// purpose.
 	//
-	// * Amazon Cognito does not validate the ClientMetadata
-	// value.
+	// * Validate the ClientMetadata value.
 	//
-	// * Amazon Cognito does not encrypt the the ClientMetadata value, so don't
-	// use it to provide sensitive information.
+	// * Encrypt the ClientMetadata
+	// value. Don't use Amazon Cognito to provide sensitive information.
 	ClientMetadata map[string]string
 
 	// Boolean to be specified to force user confirmation irrespective of existing

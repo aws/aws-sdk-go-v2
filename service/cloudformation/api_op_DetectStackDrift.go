@@ -30,7 +30,7 @@ import (
 // monitor the progress of a detect stack drift operation. Once the drift detection
 // operation has completed, use DescribeStackResourceDrifts to return drift
 // information about the stack and its resources. When detecting drift on a stack,
-// CloudFormation does not detect drift on any nested stacks belonging to that
+// CloudFormation doesn't detect drift on any nested stacks belonging to that
 // stack. Perform DetectStackDrift directly on the nested stack itself.
 func (c *Client) DetectStackDrift(ctx context.Context, params *DetectStackDriftInput, optFns ...func(*Options)) (*DetectStackDriftOutput, error) {
 	if params == nil {

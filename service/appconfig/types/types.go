@@ -22,7 +22,7 @@ type Application struct {
 }
 
 // Detailed information about the input that failed to satisfy the constraints
-// specified by an AWS service.
+// specified by a call.
 //
 // The following types satisfy this interface:
 //  BadRequestDetailsMemberInvalidConfiguration
@@ -55,9 +55,12 @@ type ConfigurationProfileSummary struct {
 	// The name of the configuration profile.
 	Name *string
 
-	// The type of configurations that the configuration profile contains. A
-	// configuration can be a feature flag used for enabling or disabling new features
-	// or a free-form configuration used to introduce changes to your application.
+	// The type of configurations contained in the profile. AppConfig supports feature
+	// flags and freeform configurations. We recommend you create feature flag
+	// configurations to enable or disable new features and freeform configurations to
+	// distribute configurations to an application. When calling this API, enter one of
+	// the following values for Type: AWS.AppConfig.FeatureFlags
+	//     AWS.Freeform
 	Type *string
 
 	// The types of validators in the configuration profile.
@@ -247,9 +250,9 @@ type Monitor struct {
 
 // A validator provides a syntactic or semantic check to ensure the configuration
 // that you want to deploy functions as intended. To validate your application
-// configuration data, you provide a schema or a Lambda function that runs against
-// the configuration. The configuration deployment or update can only proceed when
-// the configuration data is valid.
+// configuration data, you provide a schema or an Amazon Web Services Lambda
+// function that runs against the configuration. The configuration deployment or
+// update can only proceed when the configuration data is valid.
 type Validator struct {
 
 	// Either the JSON Schema content or the Amazon Resource Name (ARN) of an Lambda

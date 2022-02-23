@@ -6,6 +6,7 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -87,6 +88,9 @@ type UpgradeDomainOutput struct {
 	// information, see  Advanced cluster parameters
 	// (http://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#createdomain-configure-advanced-options).
 	AdvancedOptions map[string]string
+
+	// Specifies change details of the domain configuration change.
+	ChangeProgressDetails *types.ChangeProgressDetails
 
 	// The name of an domain. Domain names are unique across the domains owned by an
 	// account within an AWS region. Domain names start with a letter or number and can

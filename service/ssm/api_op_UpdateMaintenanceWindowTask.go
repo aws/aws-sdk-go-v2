@@ -109,19 +109,25 @@ type UpdateMaintenanceWindowTaskInput struct {
 	LoggingInfo *types.LoggingInfo
 
 	// The new MaxConcurrency value you want to specify. MaxConcurrency is the number
-	// of targets that are allowed to run this task in parallel. For maintenance window
-	// tasks without a target specified, you can't supply a value for this option.
-	// Instead, the system inserts a placeholder value of 1, which may be reported in
-	// the response to this command. This value doesn't affect the running of your task
-	// and can be ignored.
+	// of targets that are allowed to run this task, in parallel. Although this element
+	// is listed as "Required: No", a value can be omitted only when you are
+	// registering or updating a targetless task
+	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html)
+	// You must provide a value in all other cases. For maintenance window tasks
+	// without a target specified, you can't supply a value for this option. Instead,
+	// the system inserts a placeholder value of 1. This value doesn't affect the
+	// running of your task.
 	MaxConcurrency *string
 
 	// The new MaxErrors value to specify. MaxErrors is the maximum number of errors
-	// that are allowed before the task stops being scheduled. For maintenance window
-	// tasks without a target specified, you can't supply a value for this option.
-	// Instead, the system inserts a placeholder value of 1, which may be reported in
-	// the response to this command. This value doesn't affect the running of your task
-	// and can be ignored.
+	// that are allowed before the task stops being scheduled. Although this element is
+	// listed as "Required: No", a value can be omitted only when you are registering
+	// or updating a targetless task
+	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html)
+	// You must provide a value in all other cases. For maintenance window tasks
+	// without a target specified, you can't supply a value for this option. Instead,
+	// the system inserts a placeholder value of 1. This value doesn't affect the
+	// running of your task.
 	MaxErrors *string
 
 	// The new task name to specify.

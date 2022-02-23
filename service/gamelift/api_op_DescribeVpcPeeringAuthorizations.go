@@ -11,12 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves valid VPC peering authorizations that are pending for the AWS account.
-// This operation returns all VPC peering authorizations and requests for peering.
-// This includes those initiated and received by this account. Related actions
-// CreateVpcPeeringAuthorization | DescribeVpcPeeringAuthorizations |
-// DeleteVpcPeeringAuthorization | CreateVpcPeeringConnection |
-// DescribeVpcPeeringConnections | DeleteVpcPeeringConnection | All APIs by task
+// Retrieves valid VPC peering authorizations that are pending for the Amazon Web
+// Services account. This operation returns all VPC peering authorizations and
+// requests for peering. This includes those initiated and received by this
+// account. Related actions CreateVpcPeeringAuthorization |
+// DescribeVpcPeeringAuthorizations | DeleteVpcPeeringAuthorization |
+// CreateVpcPeeringConnection | DescribeVpcPeeringConnections |
+// DeleteVpcPeeringConnection | All APIs by task
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) DescribeVpcPeeringAuthorizations(ctx context.Context, params *DescribeVpcPeeringAuthorizationsInput, optFns ...func(*Options)) (*DescribeVpcPeeringAuthorizationsOutput, error) {
 	if params == nil {
@@ -40,7 +41,7 @@ type DescribeVpcPeeringAuthorizationsInput struct {
 type DescribeVpcPeeringAuthorizationsOutput struct {
 
 	// A collection of objects that describe all valid VPC peering operations for the
-	// current AWS account.
+	// current Amazon Web Services account.
 	VpcPeeringAuthorizations []types.VpcPeeringAuthorization
 
 	// Metadata pertaining to the operation's result.

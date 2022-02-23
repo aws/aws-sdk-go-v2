@@ -11,7 +11,7 @@ import (
 )
 
 // Removes the specified tags from an Amazon Cognito user pool. You can use this
-// action up to 5 times per second, per account
+// action up to 5 times per second, per account.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}

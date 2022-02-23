@@ -17,7 +17,9 @@ import (
 // buyer's AWS account using credentials from the EC2 instance, ECS task, or EKS
 // pod. MeterUsage can optionally include multiple usage allocations, to provide
 // customers with usage data split into buckets by tags that you define (or allow
-// the customer to define).
+// the customer to define). Usage records are expected to be submitted as quickly
+// as possible after the event that is being recorded, and are not accepted more
+// than 6 hours after the event.
 func (c *Client) MeterUsage(ctx context.Context, params *MeterUsageInput, optFns ...func(*Options)) (*MeterUsageOutput, error) {
 	if params == nil {
 		params = &MeterUsageInput{}

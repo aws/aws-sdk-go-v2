@@ -56,6 +56,70 @@ type AmplitudeSourceProperties struct {
 	noSmithyDocumentSerde
 }
 
+// The API key credentials required for API key authentication.
+type ApiKeyCredentials struct {
+
+	// The API key required for API key authentication.
+	//
+	// This member is required.
+	ApiKey *string
+
+	// The API secret key required for API key authentication.
+	ApiSecretKey *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the authentication config that the connector
+// supports.
+type AuthenticationConfig struct {
+
+	// Contains information required for custom authentication.
+	CustomAuthConfigs []CustomAuthConfig
+
+	// Indicates whether API key authentication is supported by the connector
+	IsApiKeyAuthSupported bool
+
+	// Indicates whether basic authentication is supported by the connector.
+	IsBasicAuthSupported bool
+
+	// Indicates whether custom authentication is supported by the connector
+	IsCustomAuthSupported bool
+
+	// Indicates whether OAuth 2.0 authentication is supported by the connector.
+	IsOAuth2Supported bool
+
+	// Contains the default values required for OAuth 2.0 authentication.
+	OAuth2Defaults *OAuth2Defaults
+
+	noSmithyDocumentSerde
+}
+
+// Information about required authentication parameters.
+type AuthParameter struct {
+
+	// Contains default values for this authentication parameter that are supplied by
+	// the connector.
+	ConnectorSuppliedValues []string
+
+	// A description about the authentication parameter.
+	Description *string
+
+	// Indicates whether this authentication parameter is required.
+	IsRequired bool
+
+	// Indicates whether this authentication parameter is a sensitive field.
+	IsSensitiveField bool
+
+	// The authentication key required to authenticate with the connector.
+	Key *string
+
+	// Label used for authentication parameter.
+	Label *string
+
+	noSmithyDocumentSerde
+}
+
 // The basic auth credentials required for basic authentication.
 type BasicAuthCredentials struct {
 
@@ -75,15 +139,51 @@ type BasicAuthCredentials struct {
 // The configuration settings related to a given connector.
 type ConnectorConfiguration struct {
 
+	// The authentication config required for the connector.
+	AuthenticationConfig *AuthenticationConfig
+
 	// Specifies whether the connector can be used as a destination.
 	CanUseAsDestination bool
 
 	// Specifies whether the connector can be used as a source.
 	CanUseAsSource bool
 
+	// The Amazon Resource Name (ARN) for the registered connector.
+	ConnectorArn *string
+
+	// A description about the connector.
+	ConnectorDescription *string
+
+	// The label used for registering the connector.
+	ConnectorLabel *string
+
 	// Specifies connector-specific metadata such as oAuthScopes, supportedRegions,
 	// privateLinkServiceUrl, and so on.
 	ConnectorMetadata *ConnectorMetadata
+
+	// The connection modes that the connector supports.
+	ConnectorModes []string
+
+	// The connector name.
+	ConnectorName *string
+
+	// The owner who developed the connector.
+	ConnectorOwner *string
+
+	// The configuration required for registering the connector.
+	ConnectorProvisioningConfig *ConnectorProvisioningConfig
+
+	// The provisioning type used to register the connector.
+	ConnectorProvisioningType ConnectorProvisioningType
+
+	// The required connector runtime settings.
+	ConnectorRuntimeSettings []ConnectorRuntimeSetting
+
+	// The connector type.
+	ConnectorType ConnectorType
+
+	// The connector version.
+	ConnectorVersion *string
 
 	// Specifies if PrivateLink is enabled for that connector.
 	IsPrivateLinkEnabled bool
@@ -91,14 +191,71 @@ type ConnectorConfiguration struct {
 	// Specifies if a PrivateLink endpoint URL is required.
 	IsPrivateLinkEndpointUrlRequired bool
 
+	// Logo URL of the connector.
+	LogoURL *string
+
+	// The date on which the connector was registered.
+	RegisteredAt *time.Time
+
+	// Information about who registered the connector.
+	RegisteredBy *string
+
+	// A list of API versions that are supported by the connector.
+	SupportedApiVersions []string
+
 	// Lists the connectors that are available for use as destinations.
 	SupportedDestinationConnectors []ConnectorType
+
+	// A list of operators supported by the connector.
+	SupportedOperators []Operators
 
 	// Specifies the supported flow frequency for that connector.
 	SupportedSchedulingFrequencies []ScheduleFrequencyType
 
 	// Specifies the supported trigger types for the flow.
 	SupportedTriggerTypes []TriggerType
+
+	// A list of write operations supported by the connector.
+	SupportedWriteOperations []WriteOperationType
+
+	noSmithyDocumentSerde
+}
+
+// Information about the registered connector.
+type ConnectorDetail struct {
+
+	// The application type of the connector.
+	ApplicationType *string
+
+	// A description about the registered connector.
+	ConnectorDescription *string
+
+	// A label used for the connector.
+	ConnectorLabel *string
+
+	// The connection mode that the connector supports.
+	ConnectorModes []string
+
+	// The name of the connector.
+	ConnectorName *string
+
+	// The owner of the connector.
+	ConnectorOwner *string
+
+	// The provisioning type that the connector uses.
+	ConnectorProvisioningType ConnectorProvisioningType
+
+	// The connector type.
+	ConnectorType ConnectorType
+
+	// The connector version.
+	ConnectorVersion *string
+
+	// The time at which the connector was registered.
+	RegisteredAt *time.Time
+
+	// The user who registered the connector.
+	RegisteredBy *string
 
 	noSmithyDocumentSerde
 }
@@ -135,6 +292,12 @@ type ConnectorEntityField struct {
 	// This member is required.
 	Identifier *string
 
+	// A map that has specific properties related to the ConnectorEntityField.
+	CustomProperties map[string]string
+
+	// Default value that can be assigned to this field.
+	DefaultValue *string
+
 	// A description of the connector entity field.
 	Description *string
 
@@ -142,8 +305,17 @@ type ConnectorEntityField struct {
 	// destination.
 	DestinationProperties *DestinationFieldProperties
 
+	// Booelan value that indicates whether this field is deprecated or not.
+	IsDeprecated bool
+
+	// Booelan value that indicates whether this field can be used as a primary key.
+	IsPrimaryKey bool
+
 	// The label applied to a connector entity field.
 	Label *string
+
+	// The parent identifier of the connector field.
+	ParentIdentifier *string
 
 	// The properties that can be applied to a field when the connector is being used
 	// as a source.
@@ -247,6 +419,9 @@ type ConnectorOperator struct {
 	// The operation to be performed on the provided Amplitude source fields.
 	Amplitude AmplitudeConnectorOperator
 
+	// Operators supported by the custom connector.
+	CustomConnector Operator
+
 	// The operation to be performed on the provided Datadog source fields.
 	Datadog DatadogConnectorOperator
 
@@ -302,6 +477,9 @@ type ConnectorProfile struct {
 	// Indicates the connection mode and if it is public or private.
 	ConnectionMode ConnectionMode
 
+	// The label for the connector profile being created.
+	ConnectorLabel *string
+
 	// The Amazon Resource Name (ARN) of the connector profile.
 	ConnectorProfileArn *string
 
@@ -352,6 +530,10 @@ type ConnectorProfileCredentials struct {
 
 	// The connector-specific credentials required when using Amplitude.
 	Amplitude *AmplitudeConnectorProfileCredentials
+
+	// The connector-specific profile credentials that are required when using the
+	// custom connector.
+	CustomConnector *CustomConnectorProfileCredentials
 
 	// The connector-specific credentials required when using Datadog.
 	Datadog *DatadogConnectorProfileCredentials
@@ -410,6 +592,9 @@ type ConnectorProfileProperties struct {
 	// The connector-specific properties required by Amplitude.
 	Amplitude *AmplitudeConnectorProfileProperties
 
+	// The properties required by the custom connector.
+	CustomConnector *CustomConnectorProfileProperties
+
 	// The connector-specific properties required by Datadog.
 	Datadog *DatadogConnectorProfileProperties
 
@@ -457,6 +642,153 @@ type ConnectorProfileProperties struct {
 
 	// The connector-specific properties required by Zendesk.
 	Zendesk *ZendeskConnectorProfileProperties
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the configuration of the connector being registered.
+type ConnectorProvisioningConfig struct {
+
+	// Contains information about the configuration of the lambda which is being
+	// registered as the connector.
+	Lambda *LambdaConnectorProvisioningConfig
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the connector runtime settings that are required for
+// flow execution.
+type ConnectorRuntimeSetting struct {
+
+	// Contains default values for the connector runtime setting that are supplied by
+	// the connector.
+	ConnectorSuppliedValueOptions []string
+
+	// Data type of the connector runtime setting.
+	DataType *string
+
+	// A description about the connector runtime setting.
+	Description *string
+
+	// Indicates whether this connector runtime setting is required.
+	IsRequired bool
+
+	// Contains value information about the connector runtime setting.
+	Key *string
+
+	// A label used for connector runtime setting.
+	Label *string
+
+	// Indicates the scope of the connector runtime setting.
+	Scope *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration information required for custom authentication.
+type CustomAuthConfig struct {
+
+	// Information about authentication parameters required for authentication.
+	AuthParameters []AuthParameter
+
+	// The authentication type that the custom connector uses.
+	CustomAuthenticationType *string
+
+	noSmithyDocumentSerde
+}
+
+// The custom credentials required for custom authentication.
+type CustomAuthCredentials struct {
+
+	// The custom authentication type that the connector uses.
+	//
+	// This member is required.
+	CustomAuthenticationType *string
+
+	// A map that holds custom authentication credentials.
+	CredentialsMap map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// The properties that are applied when the custom connector is being used as a
+// destination.
+type CustomConnectorDestinationProperties struct {
+
+	// The entity specified in the custom connector as a destination in the flow.
+	//
+	// This member is required.
+	EntityName *string
+
+	// The custom properties that are specific to the connector when it's used as a
+	// destination in the flow.
+	CustomProperties map[string]string
+
+	// The settings that determine how Amazon AppFlow handles an error when placing
+	// data in the custom connector as destination.
+	ErrorHandlingConfig *ErrorHandlingConfig
+
+	// The name of the field that Amazon AppFlow uses as an ID when performing a write
+	// operation such as update, delete, or upsert.
+	IdFieldNames []string
+
+	// Specifies the type of write operation to be performed in the custom connector
+	// when it's used as destination.
+	WriteOperationType WriteOperationType
+
+	noSmithyDocumentSerde
+}
+
+// The connector-specific profile credentials that are required when using the
+// custom connector.
+type CustomConnectorProfileCredentials struct {
+
+	// The authentication type that the custom connector uses for authenticating while
+	// creating a connector profile.
+	//
+	// This member is required.
+	AuthenticationType AuthenticationType
+
+	// The API keys required for the authentication of the user.
+	ApiKey *ApiKeyCredentials
+
+	// The basic credentials that are required for the authentication of the user.
+	Basic *BasicAuthCredentials
+
+	// If the connector uses the custom authentication mechanism, this holds the
+	// required credentials.
+	Custom *CustomAuthCredentials
+
+	// The OAuth 2.0 credentials required for the authentication of the user.
+	Oauth2 *OAuth2Credentials
+
+	noSmithyDocumentSerde
+}
+
+// The profile properties required by the custom connector.
+type CustomConnectorProfileProperties struct {
+
+	// The OAuth 2.0 properties required for OAuth 2.0 authentication.
+	OAuth2Properties *OAuth2Properties
+
+	// A map of properties that are required to create a profile for the custom
+	// connector.
+	ProfileProperties map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// The properties that are applied when the custom connector is being used as a
+// source.
+type CustomConnectorSourceProperties struct {
+
+	// The entity specified in the custom connector as a source in the flow.
+	//
+	// This member is required.
+	EntityName *string
+
+	// Custom properties that are required to use the custom connector as a source.
+	CustomProperties map[string]string
 
 	noSmithyDocumentSerde
 }
@@ -531,6 +863,9 @@ type DatadogSourceProperties struct {
 // This stores the information that is required to query a particular connector.
 type DestinationConnectorProperties struct {
 
+	// The properties that are required to query the custom Connector.
+	CustomConnector *CustomConnectorDestinationProperties
+
 	// The properties required to query Amazon Connect Customer Profiles.
 	CustomerProfiles *CustomerProfilesDestinationProperties
 
@@ -548,6 +883,9 @@ type DestinationConnectorProperties struct {
 
 	// The properties required to query Amazon S3.
 	S3 *S3DestinationProperties
+
+	// The properties required to query SAPOData.
+	SAPOData *SAPODataDestinationProperties
 
 	// The properties required to query Salesforce.
 	Salesforce *SalesforceDestinationProperties
@@ -570,6 +908,9 @@ type DestinationFieldProperties struct {
 
 	// Specifies if the destination field can be created by the current user.
 	IsCreatable bool
+
+	// Specifies whether the field can use the default value during a Create operation.
+	IsDefaultedOnCreate bool
 
 	// Specifies if the destination field can have a null value.
 	IsNullable bool
@@ -603,6 +944,9 @@ type DestinationFlowConfig struct {
 	//
 	// This member is required.
 	DestinationConnectorProperties *DestinationConnectorProperties
+
+	// The API version that the destination connector uses.
+	ApiVersion *string
 
 	// The name of the connector profile. This name must be unique for each connector
 	// profile in the Amazon Web Services account.
@@ -784,9 +1128,21 @@ type FieldTypeDetails struct {
 	// This member is required.
 	FilterOperators []Operator
 
+	// This is the allowable length range for this field's value.
+	FieldLengthRange *Range
+
+	// The range of values this field can hold.
+	FieldValueRange *Range
+
+	// The date format that the field supports.
+	SupportedDateFormat *string
+
 	// The list of values that a field can contain. For example, a Boolean fieldType
 	// can have two values: "true" and "false".
 	SupportedValues []string
+
+	// The regular expression pattern for the field name.
+	ValueRegexPattern *string
 
 	noSmithyDocumentSerde
 }
@@ -803,6 +1159,9 @@ type FlowDefinition struct {
 
 	// A user-entered description of the flow.
 	Description *string
+
+	// The label of the destination connector in the flow.
+	DestinationConnectorLabel *string
 
 	// Specifies the destination connector type, such as Salesforce, Amazon S3,
 	// Amplitude, and so on.
@@ -826,6 +1185,9 @@ type FlowDefinition struct {
 
 	// Specifies the account user name that most recently updated the flow.
 	LastUpdatedBy *string
+
+	// The label of the source connector in the flow.
+	SourceConnectorLabel *string
 
 	// Specifies the source connector type, such as Salesforce, Amazon S3, Amplitude,
 	// and so on.
@@ -1005,6 +1367,18 @@ type InforNexusSourceProperties struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about the configuration of the lambda which is being
+// registered as the connector.
+type LambdaConnectorProvisioningConfig struct {
+
+	// Lambda ARN of the connector being registered.
+	//
+	// This member is required.
+	LambdaArn *string
+
+	noSmithyDocumentSerde
+}
+
 // The properties that are applied when Amazon Lookout for Metrics is used as a
 // destination.
 type LookoutMetricsDestinationProperties struct {
@@ -1058,6 +1432,63 @@ type MarketoSourceProperties struct {
 	//
 	// This member is required.
 	Object *string
+
+	noSmithyDocumentSerde
+}
+
+// The OAuth 2.0 credentials required for OAuth 2.0 authentication.
+type OAuth2Credentials struct {
+
+	// The access token used to access the connector on your behalf.
+	AccessToken *string
+
+	// The identifier for the desired client.
+	ClientId *string
+
+	// The client secret used by the OAuth client to authenticate to the authorization
+	// server.
+	ClientSecret *string
+
+	// Used by select connectors for which the OAuth workflow is supported, such as
+	// Salesforce, Google Analytics, Marketo, Zendesk, and Slack.
+	OAuthRequest *ConnectorOAuthRequest
+
+	// The refresh token used to refresh an expired access token.
+	RefreshToken *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the default values required for OAuth 2.0 authentication.
+type OAuth2Defaults struct {
+
+	// Auth code URLs that can be used for OAuth 2.0 authentication.
+	AuthCodeUrls []string
+
+	// OAuth 2.0 grant types supported by the connector.
+	Oauth2GrantTypesSupported []OAuth2GrantType
+
+	// OAuth 2.0 scopes that the connector supports.
+	OauthScopes []string
+
+	// Token URLs that can be used for OAuth 2.0 authentication.
+	TokenUrls []string
+
+	noSmithyDocumentSerde
+}
+
+// The OAuth 2.0 properties required for OAuth 2.0 authentication.
+type OAuth2Properties struct {
+
+	// The OAuth 2.0 grant type used by connector for OAuth 2.0 authentication.
+	//
+	// This member is required.
+	OAuth2GrantType OAuth2GrantType
+
+	// The token URL required for OAuth 2.0 authentication.
+	//
+	// This member is required.
+	TokenUrl *string
 
 	noSmithyDocumentSerde
 }
@@ -1138,6 +1569,18 @@ type PrivateConnectionProvisioningState struct {
 
 	// Specifies the private connection provisioning status.
 	Status PrivateConnectionProvisioningStatus
+
+	noSmithyDocumentSerde
+}
+
+// The range of values that the property supports.
+type Range struct {
+
+	// Maximum value supported by the field.
+	Maximum float64
+
+	// Minimum value supported by the field.
+	Minimum float64
 
 	noSmithyDocumentSerde
 }
@@ -1420,6 +1863,38 @@ type SAPODataConnectorProfileProperties struct {
 	noSmithyDocumentSerde
 }
 
+// The properties that are applied when using SAPOData as a flow destination
+type SAPODataDestinationProperties struct {
+
+	// The object path specified in the SAPOData flow destination.
+	//
+	// This member is required.
+	ObjectPath *string
+
+	// The settings that determine how Amazon AppFlow handles an error when placing
+	// data in the destination. For example, this setting would determine if the flow
+	// should fail after one insertion error, or continue and attempt to insert every
+	// record regardless of the initial failure. ErrorHandlingConfig is a part of the
+	// destination connector details.
+	ErrorHandlingConfig *ErrorHandlingConfig
+
+	// A list of field names that can be used as an ID field when performing a write
+	// operation.
+	IdFieldNames []string
+
+	// Determines how Amazon AppFlow handles the success response that it gets from the
+	// connector after placing data. For example, this setting would determine where to
+	// write the response from a destination connector upon a successful insert
+	// operation.
+	SuccessResponseHandlingConfig *SuccessResponseHandlingConfig
+
+	// The possible write operations in the destination connector. When this value is
+	// not provided, this defaults to the INSERT operation.
+	WriteOperationType WriteOperationType
+
+	noSmithyDocumentSerde
+}
+
 // The connector metadata specific to SAPOData.
 type SAPODataMetadata struct {
 	noSmithyDocumentSerde
@@ -1694,6 +2169,10 @@ type SourceConnectorProperties struct {
 	// Specifies the information that is required for querying Amplitude.
 	Amplitude *AmplitudeSourceProperties
 
+	// The properties that are applied when the custom connector is being used as a
+	// source.
+	CustomConnector *CustomConnectorSourceProperties
+
 	// Specifies the information that is required for querying Datadog.
 	Datadog *DatadogSourceProperties
 
@@ -1749,6 +2228,9 @@ type SourceFieldProperties struct {
 	// Indicates whether the field can be returned in a search result.
 	IsRetrievable bool
 
+	// Indicates if this timestamp field can be used for incremental queries.
+	IsTimestampFieldForIncrementalQueries bool
+
 	noSmithyDocumentSerde
 }
 
@@ -1767,6 +2249,9 @@ type SourceFlowConfig struct {
 	// This member is required.
 	SourceConnectorProperties *SourceConnectorProperties
 
+	// The API version of the connector when it's used as a source in the flow.
+	ApiVersion *string
+
 	// The name of the connector profile. This name must be unique for each connector
 	// profile in the Amazon Web Services account.
 	ConnectorProfileName *string
@@ -1775,6 +2260,21 @@ type SourceFlowConfig struct {
 	// configuration is provided, the fields specified in the configuration are used
 	// when querying for the incremental data pull.
 	IncrementalPullConfig *IncrementalPullConfig
+
+	noSmithyDocumentSerde
+}
+
+// Determines how Amazon AppFlow handles the success response that it gets from the
+// connector after placing data. For example, this setting would determine where to
+// write the response from the destination connector upon a successful insert
+// operation.
+type SuccessResponseHandlingConfig struct {
+
+	// The name of the Amazon S3 bucket.
+	BucketName *string
+
+	// The Amazon S3 bucket prefix.
+	BucketPrefix *string
 
 	noSmithyDocumentSerde
 }

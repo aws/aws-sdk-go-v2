@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new OAuth2.0 resource server and defines custom scopes in it.
+// Creates a new OAuth2.0 resource server and defines custom scopes within it.
 func (c *Client) CreateResourceServer(ctx context.Context, params *CreateResourceServerInput, optFns ...func(*Options)) (*CreateResourceServerOutput, error) {
 	if params == nil {
 		params = &CreateResourceServerInput{}
@@ -30,7 +30,7 @@ func (c *Client) CreateResourceServer(ctx context.Context, params *CreateResourc
 type CreateResourceServerInput struct {
 
 	// A unique resource server identifier for the resource server. This could be an
-	// HTTPS endpoint where the resource server is located. For example,
+	// HTTPS endpoint where the resource server is located, such as
 	// https://my-weather-api.example.com.
 	//
 	// This member is required.
@@ -46,7 +46,8 @@ type CreateResourceServerInput struct {
 	// This member is required.
 	UserPoolId *string
 
-	// A list of scopes. Each scope is map, where the keys are name and description.
+	// A list of scopes. Each scope is a key-value map with the keys name and
+	// description.
 	Scopes []types.ResourceServerScopeType
 
 	noSmithyDocumentSerde

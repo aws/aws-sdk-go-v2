@@ -15248,6 +15248,11 @@ func awsAwsjson10_deserializeOpDocumentExecuteStatementOutput(v **ExecuteStateme
 				return err
 			}
 
+		case "LastEvaluatedKey":
+			if err := awsAwsjson10_deserializeDocumentKey(&sv.LastEvaluatedKey, value); err != nil {
+				return err
+			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)

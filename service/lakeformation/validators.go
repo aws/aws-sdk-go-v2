@@ -1962,9 +1962,6 @@ func validateOpUpdateTableObjectsInput(v *UpdateTableObjectsInput) error {
 	if v.TableName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
 	}
-	if v.TransactionId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TransactionId"))
-	}
 	if v.WriteOperations == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WriteOperations"))
 	} else if v.WriteOperations != nil {

@@ -1162,6 +1162,38 @@ func addOpValidateAssessmentReportIntegrityValidationMiddleware(stack *middlewar
 	return stack.Initialize.Add(&validateOpValidateAssessmentReportIntegrity{}, middleware.After)
 }
 
+func validateCreateAssessmentFrameworkControl(v *types.CreateAssessmentFrameworkControl) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAssessmentFrameworkControl"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCreateAssessmentFrameworkControls(v []types.CreateAssessmentFrameworkControl) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAssessmentFrameworkControls"}
+	for i := range v {
+		if err := validateCreateAssessmentFrameworkControl(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCreateAssessmentFrameworkControlSet(v *types.CreateAssessmentFrameworkControlSet) error {
 	if v == nil {
 		return nil
@@ -1169,6 +1201,11 @@ func validateCreateAssessmentFrameworkControlSet(v *types.CreateAssessmentFramew
 	invalidParams := smithy.InvalidParamsError{Context: "CreateAssessmentFrameworkControlSet"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Controls != nil {
+		if err := validateCreateAssessmentFrameworkControls(v.Controls); err != nil {
+			invalidParams.AddNested("Controls", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1201,6 +1238,13 @@ func validateUpdateAssessmentFrameworkControlSet(v *types.UpdateAssessmentFramew
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateAssessmentFrameworkControlSet"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Controls == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Controls"))
+	} else if v.Controls != nil {
+		if err := validateCreateAssessmentFrameworkControls(v.Controls); err != nil {
+			invalidParams.AddNested("Controls", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

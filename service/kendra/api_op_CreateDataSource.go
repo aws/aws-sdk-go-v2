@@ -55,7 +55,7 @@ type CreateDataSourceInput struct {
 	Type types.DataSourceType
 
 	// A token that you provide to identify the request to create a data source.
-	// Multiple calls to the CreateDataSource operation with the same client token will
+	// Multiple calls to the CreateDataSource API with the same client token will
 	// create only one data source.
 	ClientToken *string
 
@@ -91,11 +91,11 @@ type CreateDataSourceInput struct {
 	// all other data sources.
 	RoleArn *string
 
-	// Sets the frequency that Amazon Kendra will check the documents in your
-	// repository and update the index. If you don't set a schedule Amazon Kendra will
-	// not periodically update the index. You can call the StartDataSourceSyncJob
-	// operation to update the index. You can't specify the Schedule parameter when the
-	// Type parameter is set to CUSTOM. If you do, you receive a ValidationException
+	// Sets the frequency for Amazon Kendra to check the documents in your repository
+	// and update the index. If you don't set a schedule Amazon Kendra will not
+	// periodically update the index. You can call the StartDataSourceSyncJob API to
+	// update the index. You can't specify the Schedule parameter when the Type
+	// parameter is set to CUSTOM. If you do, you receive a ValidationException
 	// exception.
 	Schedule *string
 
