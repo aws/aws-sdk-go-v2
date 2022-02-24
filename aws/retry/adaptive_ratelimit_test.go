@@ -257,7 +257,7 @@ func TestSecondsFloat64(t *testing.T) {
 	}
 }
 
-const epsilon float64 = 0.000000000000001
+const epsilon float64 = 0.000000000001
 
 // floatEqual compares two float values to determine if they are "equal"
 // within the range of epsilon.
