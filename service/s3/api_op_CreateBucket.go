@@ -198,9 +198,7 @@ type CreateBucketInput struct {
 
 type CreateBucketOutput struct {
 
-	// Specifies the Region where the bucket will be created. If you are creating a
-	// bucket on the US East (N. Virginia) Region (us-east-1), you do not need to
-	// specify the location.
+	// A forward slash followed by the name of the bucket.
 	Location *string
 
 	// Metadata pertaining to the operation's result.
