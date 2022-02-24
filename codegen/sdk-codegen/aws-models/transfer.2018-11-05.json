@@ -2187,6 +2187,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Accesses",
                     "pageSize": "MaxResults"
                 }
             }
@@ -2270,6 +2271,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Executions",
                     "pageSize": "MaxResults"
                 }
             }
@@ -2350,6 +2352,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "SecurityPolicyNames",
                     "pageSize": "MaxResults"
                 }
             }
@@ -2416,6 +2419,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Servers",
                     "pageSize": "MaxResults"
                 }
             }
@@ -2482,6 +2486,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Tags",
                     "pageSize": "MaxResults"
                 }
             }
@@ -2563,6 +2568,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Users",
                     "pageSize": "MaxResults"
                 }
             }
@@ -2643,6 +2649,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Workflows",
                     "pageSize": "MaxResults"
                 }
             }
