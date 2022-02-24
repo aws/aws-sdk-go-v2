@@ -1,0 +1,8 @@
+{
+    "id": "c20280f2-553b-4e53-b47b-0a09069c5b4b",
+    "type": "release",
+    "description": "New module for computing checksums",
+    "modules": [
+        "service/internal/checksum"
+    ]
+}
