@@ -1,5 +1,6 @@
 # Lint rules to ignore
 LINTIGNORESINGLEFIGHT='internal/sync/singleflight/singleflight.go:.+error should be the last type'
+LINT_IGNORE_S3MANAGER_INPUT='feature/s3/manager/upload.go:.+struct field SSEKMSKeyId should be SSEKMSKeyID'
 
 UNIT_TEST_TAGS=
 BUILD_TAGS=-tags "example,codegen,integration,ec2env,perftest"
@@ -447,6 +448,7 @@ lint:
 	@echo "go lint SDK and vendor packages"
 	@lint=`golint ./...`; \
 	dolint=`echo "$$lint" | grep -E -v \
+	-e ${LINT_IGNORE_S3MANAGER_INPUT} \
 	-e ${LINTIGNORESINGLEFIGHT}`; \
 	echo "$$dolint"; \
 	if [ "$$dolint" != "" ]; then exit 1; fi

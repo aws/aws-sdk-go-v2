@@ -348,16 +348,16 @@ func (d *downloader) downloadRange(rng string) {
 
 // downloadChunk downloads the chunk from s3
 func (d *downloader) downloadChunk(chunk dlchunk) error {
-	in := &s3.GetObjectInput{}
-	awsutil.Copy(in, d.in)
+	var params s3.GetObjectInput
+	awsutil.Copy(&params, d.in)
 
 	// Get the next byte range of data
-	in.Range = aws.String(chunk.ByteRange())
+	params.Range = aws.String(chunk.ByteRange())
 
 	var n int64
 	var err error
 	for retry := 0; retry <= d.partBodyMaxRetries; retry++ {
-		n, err = d.tryDownloadChunk(in, &chunk)
+		n, err = d.tryDownloadChunk(&params, &chunk)
 		if err == nil {
 			break
 		}
@@ -374,8 +374,9 @@ func (d *downloader) downloadChunk(chunk dlchunk) error {
 
 		chunk.cur = 0
 
-		d.cfg.Logger.Logf(logging.Debug, "object part body download interrupted %s, err, %v, retrying attempt %d",
-			aws.ToString(in.Key), err, retry)
+		d.cfg.Logger.Logf(logging.Debug,
+			"object part body download interrupted %s, err, %v, retrying attempt %d",
+			aws.ToString(params.Key), err, retry)
 	}
 
 	d.incrWritten(n)
@@ -383,14 +384,14 @@ func (d *downloader) downloadChunk(chunk dlchunk) error {
 	return err
 }
 
-func (d *downloader) tryDownloadChunk(in *s3.GetObjectInput, w io.Writer) (int64, error) {
+func (d *downloader) tryDownloadChunk(params *s3.GetObjectInput, w io.Writer) (int64, error) {
 	cleanup := func() {}
 	if d.cfg.BufferProvider != nil {
 		w, cleanup = d.cfg.BufferProvider.GetReadFrom(w)
 	}
 	defer cleanup()
 
-	resp, err := d.cfg.S3.GetObject(d.ctx, in, d.cfg.ClientOptions...)
+	resp, err := d.cfg.S3.GetObject(d.ctx, params, d.cfg.ClientOptions...)
 	if err != nil {
 		return 0, err
 	}

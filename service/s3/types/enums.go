@@ -178,6 +178,44 @@ func (BucketVersioningStatus) Values() []BucketVersioningStatus {
 	}
 }
 
+type ChecksumAlgorithm string
+
+// Enum values for ChecksumAlgorithm
+const (
+	ChecksumAlgorithmCrc32  ChecksumAlgorithm = "CRC32"
+	ChecksumAlgorithmCrc32c ChecksumAlgorithm = "CRC32C"
+	ChecksumAlgorithmSha1   ChecksumAlgorithm = "SHA1"
+	ChecksumAlgorithmSha256 ChecksumAlgorithm = "SHA256"
+)
+
+// Values returns all known values for ChecksumAlgorithm. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ChecksumAlgorithm) Values() []ChecksumAlgorithm {
+	return []ChecksumAlgorithm{
+		"CRC32",
+		"CRC32C",
+		"SHA1",
+		"SHA256",
+	}
+}
+
+type ChecksumMode string
+
+// Enum values for ChecksumMode
+const (
+	ChecksumModeEnabled ChecksumMode = "ENABLED"
+)
+
+// Values returns all known values for ChecksumMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ChecksumMode) Values() []ChecksumMode {
+	return []ChecksumMode{
+		"ENABLED",
+	}
+}
+
 type CompressionType string
 
 // Enum values for CompressionType
@@ -470,6 +508,7 @@ const (
 	InventoryOptionalFieldObjectLockLegalHoldStatus    InventoryOptionalField = "ObjectLockLegalHoldStatus"
 	InventoryOptionalFieldIntelligentTieringAccessTier InventoryOptionalField = "IntelligentTieringAccessTier"
 	InventoryOptionalFieldBucketKeyStatus              InventoryOptionalField = "BucketKeyStatus"
+	InventoryOptionalFieldChecksumAlgorithm            InventoryOptionalField = "ChecksumAlgorithm"
 )
 
 // Values returns all known values for InventoryOptionalField. Note that this can
@@ -489,6 +528,7 @@ func (InventoryOptionalField) Values() []InventoryOptionalField {
 		"ObjectLockLegalHoldStatus",
 		"IntelligentTieringAccessTier",
 		"BucketKeyStatus",
+		"ChecksumAlgorithm",
 	}
 }
 
@@ -579,6 +619,30 @@ func (MFADeleteStatus) Values() []MFADeleteStatus {
 	return []MFADeleteStatus{
 		"Enabled",
 		"Disabled",
+	}
+}
+
+type ObjectAttributes string
+
+// Enum values for ObjectAttributes
+const (
+	ObjectAttributesEtag         ObjectAttributes = "ETag"
+	ObjectAttributesChecksum     ObjectAttributes = "Checksum"
+	ObjectAttributesObjectParts  ObjectAttributes = "ObjectParts"
+	ObjectAttributesStorageClass ObjectAttributes = "StorageClass"
+	ObjectAttributesObjectSize   ObjectAttributes = "ObjectSize"
+)
+
+// Values returns all known values for ObjectAttributes. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ObjectAttributes) Values() []ObjectAttributes {
+	return []ObjectAttributes{
+		"ETag",
+		"Checksum",
+		"ObjectParts",
+		"StorageClass",
+		"ObjectSize",
 	}
 }
 

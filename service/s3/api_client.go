@@ -13,6 +13,7 @@ import (
 	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
 	internalConfig "github.com/aws/aws-sdk-go-v2/internal/configsources"
 	acceptencodingcust "github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding"
+	internalChecksum "github.com/aws/aws-sdk-go-v2/service/internal/checksum"
 	presignedurlcust "github.com/aws/aws-sdk-go-v2/service/internal/presigned-url"
 	"github.com/aws/aws-sdk-go-v2/service/internal/s3shared"
 	s3sharedconfig "github.com/aws/aws-sdk-go-v2/service/internal/s3shared/config"
@@ -524,6 +525,53 @@ func newDefaultV4aSigner(o Options) *v4a.Signer {
 
 func addMetadataRetrieverMiddleware(stack *middleware.Stack) error {
 	return s3shared.AddMetadataRetrieverMiddleware(stack)
+}
+
+// ComputedInputChecksumsMetadata provides information about the algorithms used to
+// compute the checksum(s) of the input payload.
+type ComputedInputChecksumsMetadata struct {
+	// ComputedChecksums is a map of algorithm name to checksum value of the computed
+	// input payload's checksums.
+	ComputedChecksums map[string]string
+}
+
+// GetComputedInputChecksumsMetadata retrieves from the result metadata the map of
+// algorithms and input payload checksums values.
+func GetComputedInputChecksumsMetadata(m middleware.Metadata) (ComputedInputChecksumsMetadata, bool) {
+	values, ok := internalChecksum.GetComputedInputChecksums(m)
+	if !ok {
+		return ComputedInputChecksumsMetadata{}, false
+	}
+	return ComputedInputChecksumsMetadata{
+		ComputedChecksums: values,
+	}, true
+
+}
+
+// ChecksumValidationMetadata contains metadata such as the checksum algorithm used
+// for data integrity validation.
+type ChecksumValidationMetadata struct {
+	// AlgorithmsUsed is the set of the checksum algorithms used to validate the
+	// response payload. The response payload must be completely read in order for the
+	// checksum validation to be performed. An error is returned by the operation
+	// output's response io.ReadCloser if the computed checksums are invalid.
+	AlgorithmsUsed []string
+}
+
+// GetChecksumValidationMetadata returns the set of algorithms that will be used to
+// validate the response payload with. The response payload must be completely read
+// in order for the checksum validation to be performed. An error is returned by
+// the operation output's response io.ReadCloser if the computed checksums are
+// invalid. Returns false if no checksum algorithm used metadata was found.
+func GetChecksumValidationMetadata(m middleware.Metadata) (ChecksumValidationMetadata, bool) {
+	values, ok := internalChecksum.GetOutputValidationAlgorithmsUsed(m)
+	if !ok {
+		return ChecksumValidationMetadata{}, false
+	}
+	return ChecksumValidationMetadata{
+		AlgorithmsUsed: append(make([]string, 0, len(values)), values...),
+	}, true
+
 }
 
 // nopGetBucketAccessor is no-op accessor for operation that don't support bucket

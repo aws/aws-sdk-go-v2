@@ -215,6 +215,44 @@ type BucketLoggingStatus struct {
 	noSmithyDocumentSerde
 }
 
+// Contains all the possible checksum or digest values for an object.
+type Checksum struct {
+
+	// The base64-encoded, 32-bit CRC32 checksum of the object. This will only be
+	// present if it was uploaded with the object. With multipart uploads, this may not
+	// be a checksum value of the object. For more information about how checksums are
+	// calculated with multipart uploads, see  Checking object integrity
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums)
+	// in the Amazon S3 User Guide.
+	ChecksumCRC32 *string
+
+	// The base64-encoded, 32-bit CRC32C checksum of the object. This will only be
+	// present if it was uploaded with the object. With multipart uploads, this may not
+	// be a checksum value of the object. For more information about how checksums are
+	// calculated with multipart uploads, see  Checking object integrity
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums)
+	// in the Amazon S3 User Guide.
+	ChecksumCRC32C *string
+
+	// The base64-encoded, 160-bit SHA-1 digest of the object. This will only be
+	// present if it was uploaded with the object. With multipart uploads, this may not
+	// be a checksum value of the object. For more information about how checksums are
+	// calculated with multipart uploads, see  Checking object integrity
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums)
+	// in the Amazon S3 User Guide.
+	ChecksumSHA1 *string
+
+	// The base64-encoded, 256-bit SHA-256 digest of the object. This will only be
+	// present if it was uploaded with the object. With multipart uploads, this may not
+	// be a checksum value of the object. For more information about how checksums are
+	// calculated with multipart uploads, see  Checking object integrity
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums)
+	// in the Amazon S3 User Guide.
+	ChecksumSHA256 *string
+
+	noSmithyDocumentSerde
+}
+
 // Container for all (if there are any) keys between Prefix and the next occurrence
 // of the string specified by a delimiter. CommonPrefixes lists keys that act like
 // subdirectories in the directory specified by Prefix. For example, if the prefix
@@ -240,6 +278,38 @@ type CompletedMultipartUpload struct {
 
 // Details of the parts that were uploaded.
 type CompletedPart struct {
+
+	// The base64-encoded, 32-bit CRC32 checksum of the object. This will only be
+	// present if it was uploaded with the object. With multipart uploads, this may not
+	// be a checksum value of the object. For more information about how checksums are
+	// calculated with multipart uploads, see  Checking object integrity
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums)
+	// in the Amazon S3 User Guide.
+	ChecksumCRC32 *string
+
+	// The base64-encoded, 32-bit CRC32C checksum of the object. This will only be
+	// present if it was uploaded with the object. With multipart uploads, this may not
+	// be a checksum value of the object. For more information about how checksums are
+	// calculated with multipart uploads, see  Checking object integrity
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums)
+	// in the Amazon S3 User Guide.
+	ChecksumCRC32C *string
+
+	// The base64-encoded, 160-bit SHA-1 digest of the object. This will only be
+	// present if it was uploaded with the object. With multipart uploads, this may not
+	// be a checksum value of the object. For more information about how checksums are
+	// calculated with multipart uploads, see  Checking object integrity
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums)
+	// in the Amazon S3 User Guide.
+	ChecksumSHA1 *string
+
+	// The base64-encoded, 256-bit SHA-256 digest of the object. This will only be
+	// present if it was uploaded with the object. With multipart uploads, this may not
+	// be a checksum value of the object. For more information about how checksums are
+	// calculated with multipart uploads, see  Checking object integrity
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums)
+	// in the Amazon S3 User Guide.
+	ChecksumSHA256 *string
 
 	// Entity tag returned when the part was uploaded.
 	ETag *string
@@ -287,6 +357,38 @@ type ContinuationEvent struct {
 // Container for all response elements.
 type CopyObjectResult struct {
 
+	// The base64-encoded, 32-bit CRC32 checksum of the object. This will only be
+	// present if it was uploaded with the object. With multipart uploads, this may not
+	// be a checksum value of the object. For more information about how checksums are
+	// calculated with multipart uploads, see  Checking object integrity
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums)
+	// in the Amazon S3 User Guide.
+	ChecksumCRC32 *string
+
+	// The base64-encoded, 32-bit CRC32C checksum of the object. This will only be
+	// present if it was uploaded with the object. With multipart uploads, this may not
+	// be a checksum value of the object. For more information about how checksums are
+	// calculated with multipart uploads, see  Checking object integrity
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums)
+	// in the Amazon S3 User Guide.
+	ChecksumCRC32C *string
+
+	// The base64-encoded, 160-bit SHA-1 digest of the object. This will only be
+	// present if it was uploaded with the object. With multipart uploads, this may not
+	// be a checksum value of the object. For more information about how checksums are
+	// calculated with multipart uploads, see  Checking object integrity
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums)
+	// in the Amazon S3 User Guide.
+	ChecksumSHA1 *string
+
+	// The base64-encoded, 256-bit SHA-256 digest of the object. This will only be
+	// present if it was uploaded with the object. With multipart uploads, this may not
+	// be a checksum value of the object. For more information about how checksums are
+	// calculated with multipart uploads, see  Checking object integrity
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums)
+	// in the Amazon S3 User Guide.
+	ChecksumSHA256 *string
+
 	// Returns the ETag of the new object. The ETag reflects only changes to the
 	// contents of an object, not its metadata.
 	ETag *string
@@ -299,6 +401,38 @@ type CopyObjectResult struct {
 
 // Container for all response elements.
 type CopyPartResult struct {
+
+	// The base64-encoded, 32-bit CRC32 checksum of the object. This will only be
+	// present if it was uploaded with the object. With multipart uploads, this may not
+	// be a checksum value of the object. For more information about how checksums are
+	// calculated with multipart uploads, see  Checking object integrity
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums)
+	// in the Amazon S3 User Guide.
+	ChecksumCRC32 *string
+
+	// The base64-encoded, 32-bit CRC32C checksum of the object. This will only be
+	// present if it was uploaded with the object. With multipart uploads, this may not
+	// be a checksum value of the object. For more information about how checksums are
+	// calculated with multipart uploads, see  Checking object integrity
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums)
+	// in the Amazon S3 User Guide.
+	ChecksumCRC32C *string
+
+	// The base64-encoded, 160-bit SHA-1 digest of the object. This will only be
+	// present if it was uploaded with the object. With multipart uploads, this may not
+	// be a checksum value of the object. For more information about how checksums are
+	// calculated with multipart uploads, see  Checking object integrity
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums)
+	// in the Amazon S3 User Guide.
+	ChecksumSHA1 *string
+
+	// The base64-encoded, 256-bit SHA-256 digest of the object. This will only be
+	// present if it was uploaded with the object. With multipart uploads, this may not
+	// be a checksum value of the object. For more information about how checksums are
+	// calculated with multipart uploads, see  Checking object integrity
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums)
+	// in the Amazon S3 User Guide.
+	ChecksumSHA256 *string
 
 	// Entity tag of the object.
 	ETag *string
@@ -1658,6 +1792,35 @@ type FilterRule struct {
 	noSmithyDocumentSerde
 }
 
+// A collection of parts associated with a multipart upload.
+type GetObjectAttributesParts struct {
+
+	// Indicates whether the returned list of parts is truncated. A value of true
+	// indicates that the list was truncated. A list can be truncated if the number of
+	// parts exceeds the limit returned in the MaxParts element.
+	IsTruncated bool
+
+	// The maximum number of parts allowed in the response.
+	MaxParts int32
+
+	// When a list is truncated, this element specifies the last part in the list, as
+	// well as the value to use for the PartNumberMarker request parameter in a
+	// subsequent request.
+	NextPartNumberMarker *string
+
+	// The marker for the current part.
+	PartNumberMarker *string
+
+	// A container for elements related to a particular part. A response can contain
+	// zero or more Parts elements.
+	Parts []ObjectPart
+
+	// The total number of parts.
+	TotalPartsCount int32
+
+	noSmithyDocumentSerde
+}
+
 // Container for S3 Glacier job parameters.
 type GlacierJobParameters struct {
 
@@ -2060,7 +2223,7 @@ type LifecycleRule struct {
 
 	// The Filter is used to identify objects that a Lifecycle Rule applies to. A
 	// Filter must have exactly one of Prefix, Tag, or And specified. Filter is
-	// required if the LifecycleRule does not containt a Prefix element.
+	// required if the LifecycleRule does not contain a Prefix element.
 	Filter LifecycleRuleFilter
 
 	// Unique identifier for the rule. The value cannot be longer than 255 characters.
@@ -2335,6 +2498,9 @@ func (*MetricsFilterMemberTag) isMetricsFilter() {}
 // Container for the MultipartUpload for the Amazon S3 object.
 type MultipartUpload struct {
 
+	// The algorithm that was used to create a checksum of the object.
+	ChecksumAlgorithm ChecksumAlgorithm
+
 	// Date and time at which the multipart upload was initiated.
 	Initiated *time.Time
 
@@ -2449,6 +2615,9 @@ type NotificationConfigurationFilter struct {
 // An object consists of data and its descriptive metadata.
 type Object struct {
 
+	// The algorithm that was used to create a checksum of the object.
+	ChecksumAlgorithm []ChecksumAlgorithm
+
 	// The entity tag is a hash of the object. The ETag reflects changes only to the
 	// contents of an object, not its metadata. The ETag may or may not be an MD5
 	// digest of the object data. Whether or not it is depends on how the object was
@@ -2521,10 +2690,10 @@ type ObjectLockConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// A Legal Hold configuration for an object.
+// A legal hold configuration for an object.
 type ObjectLockLegalHold struct {
 
-	// Indicates whether the specified object has a Legal Hold in place.
+	// Indicates whether the specified object has a legal hold in place.
 	Status ObjectLockLegalHoldStatus
 
 	noSmithyDocumentSerde
@@ -2554,8 +2723,56 @@ type ObjectLockRule struct {
 	noSmithyDocumentSerde
 }
 
+// A container for elements related to an individual part.
+type ObjectPart struct {
+
+	// This header can be used as a data integrity check to verify that the data
+	// received is the same data that was originally sent. This header specifies the
+	// base64-encoded, 32-bit CRC32 checksum of the object. For more information, see
+	// Checking object integrity
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html)
+	// in the Amazon S3 User Guide.
+	ChecksumCRC32 *string
+
+	// The base64-encoded, 32-bit CRC32C checksum of the object. This will only be
+	// present if it was uploaded with the object. With multipart uploads, this may not
+	// be a checksum value of the object. For more information about how checksums are
+	// calculated with multipart uploads, see  Checking object integrity
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums)
+	// in the Amazon S3 User Guide.
+	ChecksumCRC32C *string
+
+	// The base64-encoded, 160-bit SHA-1 digest of the object. This will only be
+	// present if it was uploaded with the object. With multipart uploads, this may not
+	// be a checksum value of the object. For more information about how checksums are
+	// calculated with multipart uploads, see  Checking object integrity
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums)
+	// in the Amazon S3 User Guide.
+	ChecksumSHA1 *string
+
+	// The base64-encoded, 256-bit SHA-256 digest of the object. This will only be
+	// present if it was uploaded with the object. With multipart uploads, this may not
+	// be a checksum value of the object. For more information about how checksums are
+	// calculated with multipart uploads, see  Checking object integrity
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums)
+	// in the Amazon S3 User Guide.
+	ChecksumSHA256 *string
+
+	// The part number identifying the part. This value is a positive integer between 1
+	// and 10,000.
+	PartNumber int32
+
+	// The size of the uploaded part in bytes.
+	Size int64
+
+	noSmithyDocumentSerde
+}
+
 // The version of an object.
 type ObjectVersion struct {
+
+	// The algorithm that was used to create a checksum of the object.
+	ChecksumAlgorithm []ChecksumAlgorithm
 
 	// The entity tag is an MD5 hash of that version of the object.
 	ETag *string
@@ -2658,6 +2875,38 @@ type ParquetInput struct {
 // Container for elements related to a part.
 type Part struct {
 
+	// This header can be used as a data integrity check to verify that the data
+	// received is the same data that was originally sent. This header specifies the
+	// base64-encoded, 32-bit CRC32 checksum of the object. For more information, see
+	// Checking object integrity
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html)
+	// in the Amazon S3 User Guide.
+	ChecksumCRC32 *string
+
+	// The base64-encoded, 32-bit CRC32C checksum of the object. This will only be
+	// present if it was uploaded with the object. With multipart uploads, this may not
+	// be a checksum value of the object. For more information about how checksums are
+	// calculated with multipart uploads, see  Checking object integrity
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums)
+	// in the Amazon S3 User Guide.
+	ChecksumCRC32C *string
+
+	// The base64-encoded, 160-bit SHA-1 digest of the object. This will only be
+	// present if it was uploaded with the object. With multipart uploads, this may not
+	// be a checksum value of the object. For more information about how checksums are
+	// calculated with multipart uploads, see  Checking object integrity
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums)
+	// in the Amazon S3 User Guide.
+	ChecksumSHA1 *string
+
+	// This header can be used as a data integrity check to verify that the data
+	// received is the same data that was originally sent. This header specifies the
+	// base64-encoded, 256-bit SHA-256 digest of the object. For more information, see
+	// Checking object integrity
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html)
+	// in the Amazon S3 User Guide.
+	ChecksumSHA256 *string
+
 	// Entity tag returned when the part was uploaded.
 	ETag *string
 
@@ -2720,7 +2969,7 @@ type PublicAccessBlockConfiguration struct {
 	// this bucket and objects in this bucket. Setting this element to TRUE causes the
 	// following behavior:
 	//
-	// * PUT Bucket acl and PUT Object acl calls fail if the
+	// * PUT Bucket ACL and PUT Object ACL calls fail if the
 	// specified ACL is public.
 	//
 	// * PUT Object calls fail if the request includes a
@@ -3190,7 +3439,7 @@ type ScanRange struct {
 
 	// Specifies the start of the byte range. This parameter is optional. Valid values:
 	// non-negative integers. The default value is 0. If only start is supplied, it
-	// means scan from that point to the end of the file.For example; 50 means scan
+	// means scan from that point to the end of the file. For example, 50 means scan
 	// from byte 50 until the end of the file.
 	Start int64
 

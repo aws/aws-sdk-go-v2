@@ -12,6 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
+	s3types "github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
 
 func TestPutObject_PresignURL(t *testing.T) {
@@ -183,6 +184,52 @@ func TestPutObject_PresignURL(t *testing.T) {
 				},
 			},
 			expectError: "Multi-Region access point ARNs are disabled",
+		},
+		"standard case with checksum preset checksum": {
+			input: s3.PutObjectInput{
+				Bucket:            aws.String("mock-bucket"),
+				Key:               aws.String("mockkey"),
+				Body:              strings.NewReader("hello world"),
+				ChecksumAlgorithm: s3types.ChecksumAlgorithmCrc32c,
+				ChecksumCRC32:     aws.String("DUoRhQ=="),
+			},
+			expectPresignedURLHost: "https://mock-bucket.s3.us-west-2.amazonaws.com/mockkey?",
+			expectRequestURIQuery: []string{
+				"X-Amz-Expires=900",
+				"X-Amz-Credential",
+				"X-Amz-Date",
+				"x-id=PutObject",
+				"X-Amz-Signature",
+				"X-Amz-Checksum-Crc32",
+			},
+			expectMethod: "PUT",
+			expectSignedHeader: http.Header{
+				"Content-Length": []string{"11"},
+				"Content-Type":   []string{"application/octet-stream"},
+				"Host":           []string{"mock-bucket.s3.us-west-2.amazonaws.com"},
+			},
+		},
+		"standard case with checksum empty body": {
+			input: s3.PutObjectInput{
+				Bucket:            aws.String("mock-bucket"),
+				Key:               aws.String("mockkey"),
+				Body:              strings.NewReader(""),
+				ChecksumAlgorithm: s3types.ChecksumAlgorithmCrc32c,
+				ChecksumCRC32:     aws.String("AAAAAA=="),
+			},
+			expectPresignedURLHost: "https://mock-bucket.s3.us-west-2.amazonaws.com/mockkey?",
+			expectRequestURIQuery: []string{
+				"X-Amz-Expires=900",
+				"X-Amz-Credential",
+				"X-Amz-Date",
+				"x-id=PutObject",
+				"X-Amz-Signature",
+				"X-Amz-Checksum-Crc32",
+			},
+			expectMethod: "PUT",
+			expectSignedHeader: http.Header{
+				"Host": []string{"mock-bucket.s3.us-west-2.amazonaws.com"},
+			},
 		},
 	}
 
