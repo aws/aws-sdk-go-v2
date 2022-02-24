@@ -1,9 +1,0 @@
-{
-    "id": "db81731f-a3ab-450e-9ea3-535a0d4aaedd",
-    "type": "feature",
-    "description": "Fixes [#645](https://github.com/aws/aws-sdk-go-v2/issues/645), [#411](https://github.com/aws/aws-sdk-go-v2/issues/411) by adding support for (un)marshaling AttributeValue maps to Go maps key types of string, number, bool, and types implementing encoding.Text(un)Marshaler interface",
-    "modules": [
-        "feature/dynamodb/attributevalue",
-        "feature/dynamodbstreams/attributevalue"
-    ]
-}

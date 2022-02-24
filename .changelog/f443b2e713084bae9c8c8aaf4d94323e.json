@@ -1,8 +1,0 @@
-{
-    "id": "f443b2e7-1308-4bae-9c8c-8aaf4d94323e",
-    "type": "feature",
-    "description": "Adds support for `SourceIdentity` to `stscreds.AssumeRoleProvider` [#1588](https://github.com/aws/aws-sdk-go-v2/pull/1588). Fixes [#1575](https://github.com/aws/aws-sdk-go-v2/issues/1575)",
-    "modules": [
-        "credentials"
-    ]
-}
