@@ -47,7 +47,23 @@ import (
 // zones, this means that the NS and SOA records are not yet available on all Route
 // 53 DNS servers. When the NS and SOA records are available, the status of the
 // zone changes to INSYNC. The CreateHostedZone request requires the caller to have
-// an ec2:DescribeVpcs permission.
+// an ec2:DescribeVpcs permission. When creating private hosted zones, the Amazon
+// VPC must belong to the same partition where the hosted zone is created. A
+// partition is a group of Amazon Web Services Regions. Each Amazon Web Services
+// account is scoped to one partition. The following are the supported
+// partitions:
+//
+// * aws - Amazon Web Services Regions
+//
+// * aws-cn - China Regions
+//
+// *
+// aws-us-gov - Amazon Web Services GovCloud (US) Region
+//
+// For more information, see
+// Access Management
+// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
+// the Amazon Web Services General Reference.
 func (c *Client) CreateHostedZone(ctx context.Context, params *CreateHostedZoneInput, optFns ...func(*Options)) (*CreateHostedZoneOutput, error) {
 	if params == nil {
 		params = &CreateHostedZoneInput{}

@@ -9,9 +9,10 @@ import (
 
 // Describes an access key for an Amazon Lightsail bucket. Access keys grant full
 // programmatic access to the specified bucket and its objects. You can have a
-// maximum of two access keys per bucket. Use the CreateBucketAccessKey action to
-// create an access key for a specific bucket. For more information about access
-// keys, see Creating access keys for a bucket in Amazon Lightsail
+// maximum of two access keys per bucket. Use the CreateBucketAccessKey
+// (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_CreateBucketAccessKey.html)
+// action to create an access key for a specific bucket. For more information about
+// access keys, see Creating access keys for a bucket in Amazon Lightsail
 // (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-creating-bucket-access-keys)
 // in the Amazon Lightsail Developer Guide. The secretAccessKey value is returned
 // only in response to the CreateBucketAccessKey action. You can get a secret
@@ -27,9 +28,10 @@ type AccessKey struct {
 	CreatedAt *time.Time
 
 	// An object that describes the last time the access key was used. This object does
-	// not include data in the response of a CreateBucketAccessKey action. If the
-	// access key has not been used, the region and serviceName values are N/A, and the
-	// lastUsedDate value is null.
+	// not include data in the response of a CreateBucketAccessKey
+	// (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_CreateBucketAccessKey.html)
+	// action. If the access key has not been used, the region and serviceName values
+	// are N/A, and the lastUsedDate value is null.
 	LastUsed *AccessKeyLastUsed
 
 	// The secret access key used to sign requests. You should store the secret access
@@ -45,7 +47,9 @@ type AccessKey struct {
 }
 
 // Describes the last time an access key was used. This object does not include
-// data in the response of a CreateBucketAccessKey action.
+// data in the response of a CreateBucketAccessKey
+// (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_CreateBucketAccessKey.html)
+// action.
 type AccessKeyLastUsed struct {
 
 	// The date and time when the access key was most recently used. This value is null
@@ -404,8 +408,9 @@ type Bucket struct {
 
 	// Indicates whether the bundle that is currently applied to a bucket can be
 	// changed to another bundle. You can update a bucket's bundle only one time within
-	// a monthly AWS billing cycle. Use the UpdateBucketBundle action to change a
-	// bucket's bundle.
+	// a monthly AWS billing cycle. Use the UpdateBucketBundle
+	// (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_UpdateBucketBundle.html)
+	// action to change a bucket's bundle.
 	AbleToUpdateBundle *bool
 
 	// An object that describes the access log configuration for the bucket.
@@ -419,7 +424,9 @@ type Bucket struct {
 
 	// The ID of the bundle currently applied to the bucket. A bucket bundle specifies
 	// the monthly cost, storage space, and data transfer quota for a bucket. Use the
-	// UpdateBucketBundle action to change the bundle of a bucket.
+	// UpdateBucketBundle
+	// (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_UpdateBucketBundle.html)
+	// action to change the bundle of a bucket.
 	BundleId *string
 
 	// The timestamp when the distribution was created.
@@ -452,8 +459,9 @@ type Bucket struct {
 	ResourceType *string
 
 	// An array of objects that describe Lightsail instances that have access to the
-	// bucket. Use the SetResourceAccessForBucket action to update the instances that
-	// have access to a bucket.
+	// bucket. Use the SetResourceAccessForBucket
+	// (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_SetResourceAccessForBucket.html)
+	// action to update the instances that have access to a bucket.
 	ResourcesReceivingAccess []ResourceReceivingAccess
 
 	// An object that describes the state of the bucket.
@@ -629,8 +637,7 @@ type CacheBehavior struct {
 // to specify a directory, file, or file type that your distribution will cache.
 // Alternately, if the distribution's cacheBehavior is dont-cache, then a per-path
 // cache behavior can be used to specify a directory, file, or file type that your
-// distribution will not cache. if the cacheBehavior's behavior is set to 'cache',
-// then
+// distribution will not cache.
 type CacheBehaviorPerPath struct {
 
 	// The cache behavior for the specified path. You can specify one of the following
@@ -1836,9 +1843,9 @@ type HostKeyAttributes struct {
 }
 
 // Describes the origin resource of an Amazon Lightsail content delivery network
-// (CDN) distribution. An origin can be a Lightsail instance or load balancer. A
-// distribution pulls content from an origin, caches it, and serves it to viewers
-// via a worldwide network of edge servers.
+// (CDN) distribution. An origin can be a Lightsail instance, bucket, or load
+// balancer. A distribution pulls content from an origin, caches it, and serves it
+// to viewers via a worldwide network of edge servers.
 type InputOrigin struct {
 
 	// The name of the origin resource.
@@ -2530,8 +2537,8 @@ type LightsailDistribution struct {
 	Name *string
 
 	// An object that describes the origin resource of the distribution, such as a
-	// Lightsail instance or load balancer. The distribution pulls, caches, and serves
-	// content from the origin.
+	// Lightsail instance, bucket, or load balancer. The distribution pulls, caches,
+	// and serves content from the origin.
 	Origin *Origin
 
 	// The public DNS of the origin.
@@ -2999,9 +3006,9 @@ type Operation struct {
 }
 
 // Describes the origin resource of an Amazon Lightsail content delivery network
-// (CDN) distribution. An origin can be a Lightsail instance or load balancer. A
-// distribution pulls content from an origin, caches it, and serves it to viewers
-// via a worldwide network of edge servers.
+// (CDN) distribution. An origin can be a Lightsail instance, bucket, or load
+// balancer. A distribution pulls content from an origin, caches it, and serves it
+// to viewers via a worldwide network of edge servers.
 type Origin struct {
 
 	// The name of the origin resource.

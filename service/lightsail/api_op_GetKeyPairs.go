@@ -29,6 +29,10 @@ func (c *Client) GetKeyPairs(ctx context.Context, params *GetKeyPairsInput, optF
 
 type GetKeyPairsInput struct {
 
+	// A Boolean value that indicates whether to include the default key pair in the
+	// response of your request.
+	IncludeDefaultKeyPair *bool
+
 	// The token to advance to the next page of results from your request. To get a
 	// page token, perform an initial GetKeyPairs request. If your results are
 	// paginated, the response will return a next page token that you can specify as

@@ -113,8 +113,8 @@ type UpdateAutoScalingGroupInput struct {
 	// marking it unhealthy due to a failed health check. The default value is 0. For
 	// more information, see Health check grace period
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html#health-check-grace-period)
-	// in the Amazon EC2 Auto Scaling User Guide. Conditional: Required if you are
-	// adding an ELB health check.
+	// in the Amazon EC2 Auto Scaling User Guide. Required if you are adding an ELB
+	// health check.
 	HealthCheckGracePeriod *int32
 
 	// The service to use for the health checks. The valid values are EC2 and ELB. If

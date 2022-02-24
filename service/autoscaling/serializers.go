@@ -4476,6 +4476,18 @@ func awsAwsquery_serializeDocumentInstanceRequirements(v *types.InstanceRequirem
 	return nil
 }
 
+func awsAwsquery_serializeDocumentInstanceReusePolicy(v *types.InstanceReusePolicy, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.ReuseOnScaleIn != nil {
+		objectKey := object.Key("ReuseOnScaleIn")
+		objectKey.Boolean(*v.ReuseOnScaleIn)
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeDocumentInstancesDistribution(v *types.InstancesDistribution, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -6933,6 +6945,13 @@ func awsAwsquery_serializeOpDocumentPutWarmPoolInput(v *PutWarmPoolInput, value 
 	if v.AutoScalingGroupName != nil {
 		objectKey := object.Key("AutoScalingGroupName")
 		objectKey.String(*v.AutoScalingGroupName)
+	}
+
+	if v.InstanceReusePolicy != nil {
+		objectKey := object.Key("InstanceReusePolicy")
+		if err := awsAwsquery_serializeDocumentInstanceReusePolicy(v.InstanceReusePolicy, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.MaxGroupPreparedCapacity != nil {

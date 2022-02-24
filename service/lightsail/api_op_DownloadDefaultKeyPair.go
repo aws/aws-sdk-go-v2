@@ -8,9 +8,12 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"time"
 )
 
-// Downloads the default SSH key pair from the user's account.
+// Downloads the regional Amazon Lightsail default key pair. This action also
+// creates a Lightsail default key pair if a default key pair does not currently
+// exist in the Amazon Web Services Region.
 func (c *Client) DownloadDefaultKeyPair(ctx context.Context, params *DownloadDefaultKeyPairInput, optFns ...func(*Options)) (*DownloadDefaultKeyPairOutput, error) {
 	if params == nil {
 		params = &DownloadDefaultKeyPairInput{}
@@ -31,6 +34,9 @@ type DownloadDefaultKeyPairInput struct {
 }
 
 type DownloadDefaultKeyPairOutput struct {
+
+	// The timestamp when the default key pair was created.
+	CreatedAt *time.Time
 
 	// A base64-encoded RSA private key.
 	PrivateKeyBase64 *string

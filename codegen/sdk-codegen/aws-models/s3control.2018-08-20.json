@@ -6137,6 +6137,29 @@
                 ]
             }
         },
+        "com.amazonaws.s3control#S3ChecksumAlgorithm": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CRC32",
+                        "name": "CRC32"
+                    },
+                    {
+                        "value": "CRC32C",
+                        "name": "CRC32C"
+                    },
+                    {
+                        "value": "SHA1",
+                        "name": "SHA1"
+                    },
+                    {
+                        "value": "SHA256",
+                        "name": "SHA256"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.s3control#S3ContentLength": {
             "type": "long",
             "traits": {
@@ -6248,6 +6271,12 @@
                     "target": "com.amazonaws.s3control#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether Amazon S3 should use an S3 Bucket Key for object encryption with\n         server-side encryption using Amazon Web Services KMS (SSE-KMS). Setting this header to <code>true</code>\n         causes Amazon S3 to use an S3 Bucket Key for object encryption with SSE-KMS.</p>\n         <p>Specifying this header with an <i>object</i> action doesn’t affect\n            <i>bucket-level</i> settings for S3 Bucket Key.</p>"
+                    }
+                },
+                "ChecksumAlgorithm": {
+                    "target": "com.amazonaws.s3control#S3ChecksumAlgorithm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the algorithm you want Amazon S3 to use to create the checksum. For more information\n            see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/CheckingObjectIntegrity.xml\">\n                Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
                     }
                 }
             },

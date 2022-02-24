@@ -33364,6 +33364,22 @@ func awsAwsjson11_deserializeOpDocumentDownloadDefaultKeyPairOutput(v **Download
 
 	for key, value := range shape {
 		switch key {
+		case "createdAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreatedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected IsoDate to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "privateKeyBase64":
 			if value != nil {
 				jtv, ok := value.(string)

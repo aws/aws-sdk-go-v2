@@ -10557,6 +10557,58 @@ func awsAwsquery_deserializeDocumentInstanceRequirements(v **types.InstanceRequi
 	return nil
 }
 
+func awsAwsquery_deserializeDocumentInstanceReusePolicy(v **types.InstanceReusePolicy, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.InstanceReusePolicy
+	if *v == nil {
+		sv = &types.InstanceReusePolicy{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("ReuseOnScaleIn", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected ReuseOnScaleIn to be of type *bool, got %T instead", val)
+				}
+				sv.ReuseOnScaleIn = ptr.Bool(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsquery_deserializeDocumentInstances(v *[]types.Instance, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -16039,6 +16091,12 @@ func awsAwsquery_deserializeDocumentWarmPoolConfiguration(v **types.WarmPoolConf
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("InstanceReusePolicy", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentInstanceReusePolicy(&sv.InstanceReusePolicy, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("MaxGroupPreparedCapacity", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

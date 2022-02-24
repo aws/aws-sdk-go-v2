@@ -58,39 +58,56 @@ import (
 // previous step. To use the same resource policy for all the CloudWatch Logs log
 // groups that you created for query logging configurations, replace the hosted
 // zone name with , for example:
-// arn:aws:logs:us-east-1:123412341234:log-group:/aws/route53/ You can't use the
-// CloudWatch console to create or edit a resource policy. You must use the
-// CloudWatch API, one of the Amazon Web Services SDKs, or the CLI.
+// arn:aws:logs:us-east-1:123412341234:log-group:/aws/route53/ To avoid the
+// confused deputy problem, a security issue where an entity without a permission
+// for an action can coerce a more-privileged entity to perform it, you can
+// optionally limit the permissions that a service has to a resource in a
+// resource-based policy by supplying the following values:
 //
-// Log Streams
-// and Edge Locations When Route 53 finishes creating the configuration for DNS
-// query logging, it does the following:
+// * For aws:SourceArn,
+// supply the hosted zone ARN used in creating the query logging configuration. For
+// example, aws:SourceArn: arn:aws:route53:::hostedzone/hosted zone ID.
 //
-// * Creates a log stream for an edge
-// location the first time that the edge location responds to DNS queries for the
-// specified hosted zone. That log stream is used to log all queries that Route 53
-// responds to for that edge location.
+// * For
+// aws:SourceAccount, supply the account ID for the account that creates the query
+// logging configuration. For example, aws:SourceAccount:111111111111.
 //
-// * Begins to send query logs to the
-// applicable log stream.
+// For more
+// information, see The confused deputy problem
+// (https://docs.aws.amazon.com/IAM/latest/UserGuide/confused-deputy.html) in the
+// Amazon Web Services IAM User Guide. You can't use the CloudWatch console to
+// create or edit a resource policy. You must use the CloudWatch API, one of the
+// Amazon Web Services SDKs, or the CLI.
 //
-// The name of each log stream is in the following format:
-// hosted zone ID/edge location code  The edge location code is a three-letter code
-// and an arbitrarily assigned number, for example, DFW3. The three-letter code
-// typically corresponds with the International Air Transport Association airport
-// code for an airport near the edge location. (These abbreviations might change in
-// the future.) For a list of edge locations, see "The Route 53 Global Network" on
-// the Route 53 Product Details (http://aws.amazon.com/route53/details/) page.
-// Queries That Are Logged Query logs contain only the queries that DNS resolvers
-// forward to Route 53. If a DNS resolver has already cached the response to a
-// query (such as the IP address for a load balancer for example.com), the resolver
-// will continue to return the cached response. It doesn't forward another query to
-// Route 53 until the TTL for the corresponding resource record set expires.
-// Depending on how many DNS queries are submitted for a resource record set, and
-// depending on the TTL for that resource record set, query logs might contain
-// information about only one query out of every several thousand queries that are
-// submitted to DNS. For more information about how DNS works, see Routing Internet
-// Traffic to Your Website or Web Application
+// Log Streams and Edge Locations When Route
+// 53 finishes creating the configuration for DNS query logging, it does the
+// following:
+//
+// * Creates a log stream for an edge location the first time that the
+// edge location responds to DNS queries for the specified hosted zone. That log
+// stream is used to log all queries that Route 53 responds to for that edge
+// location.
+//
+// * Begins to send query logs to the applicable log stream.
+//
+// The name
+// of each log stream is in the following format:  hosted zone ID/edge location
+// code  The edge location code is a three-letter code and an arbitrarily assigned
+// number, for example, DFW3. The three-letter code typically corresponds with the
+// International Air Transport Association airport code for an airport near the
+// edge location. (These abbreviations might change in the future.) For a list of
+// edge locations, see "The Route 53 Global Network" on the Route 53 Product
+// Details (http://aws.amazon.com/route53/details/) page. Queries That Are Logged
+// Query logs contain only the queries that DNS resolvers forward to Route 53. If a
+// DNS resolver has already cached the response to a query (such as the IP address
+// for a load balancer for example.com), the resolver will continue to return the
+// cached response. It doesn't forward another query to Route 53 until the TTL for
+// the corresponding resource record set expires. Depending on how many DNS queries
+// are submitted for a resource record set, and depending on the TTL for that
+// resource record set, query logs might contain information about only one query
+// out of every several thousand queries that are submitted to DNS. For more
+// information about how DNS works, see Routing Internet Traffic to Your Website or
+// Web Application
 // (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/welcome-dns-service.html)
 // in the Amazon Route 53 Developer Guide. Log File Format For a list of the values
 // in each query log and the format of each value, see Logging DNS Queries

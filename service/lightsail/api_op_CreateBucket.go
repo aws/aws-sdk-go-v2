@@ -44,8 +44,12 @@ type CreateBucketInput struct {
 
 	// The ID of the bundle to use for the bucket. A bucket bundle specifies the
 	// monthly cost, storage space, and data transfer quota for a bucket. Use the
-	// GetBucketBundles action to get a list of bundle IDs that you can specify. Use
-	// the UpdateBucketBundle action to change the bundle after the bucket is created.
+	// GetBucketBundles
+	// (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetBucketBundles.html)
+	// action to get a list of bundle IDs that you can specify. Use the
+	// UpdateBucketBundle
+	// (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_UpdateBucketBundle.html)
+	// action to change the bundle after the bucket is created.
 	//
 	// This member is required.
 	BundleId *string
@@ -58,7 +62,9 @@ type CreateBucketInput struct {
 	EnableObjectVersioning *bool
 
 	// The tag keys and optional values to add to the bucket during creation. Use the
-	// TagResource action to tag the bucket after it's created.
+	// TagResource
+	// (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_TagResource.html)
+	// action to tag the bucket after it's created.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

@@ -10216,6 +10216,19 @@ func awsRestjson1_deserializeDocumentOutput(v **types.Output, value interface{})
 				return err
 			}
 
+		case "MaxOutputFiles":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MaxOutputFiles to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxOutputFiles = ptr.Int32(int32(i64))
+			}
+
 		case "Overwrite":
 			if value != nil {
 				jtv, ok := value.(bool)
