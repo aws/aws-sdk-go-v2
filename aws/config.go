@@ -115,7 +115,7 @@ type Config struct {
 	DefaultsMode DefaultsMode
 
 	// The RuntimeEnvironment configuration, only populated if the DefaultsMode
-	// is set to AutoDefaultsMode and is initialized by
+	// is set to DefaultsModeAuto and is initialized by
 	// `config.LoadDefaultConfig`. You should not populate this structure
 	// programmatically, or rely on the values here within your applications.
 	RuntimeEnvironment RuntimeEnvironment
