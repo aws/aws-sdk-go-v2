@@ -53,8 +53,8 @@ type UpdateDistributionInput struct {
 	IsEnabled *bool
 
 	// An object that describes the origin resource for the distribution, such as a
-	// Lightsail instance or load balancer. The distribution pulls, caches, and serves
-	// content from the origin.
+	// Lightsail instance, bucket, or load balancer. The distribution pulls, caches,
+	// and serves content from the origin.
 	Origin *types.InputOrigin
 
 	noSmithyDocumentSerde

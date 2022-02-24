@@ -38,7 +38,9 @@ type GetBucketsInput struct {
 	BucketName *string
 
 	// A Boolean value that indicates whether to include Lightsail instances that were
-	// given access to the bucket using the SetResourceAccessForBucket action.
+	// given access to the bucket using the SetResourceAccessForBucket
+	// (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_SetResourceAccessForBucket.html)
+	// action.
 	IncludeConnectedResources *bool
 
 	// The token to advance to the next page of results from your request. To get a

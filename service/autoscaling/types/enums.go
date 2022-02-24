@@ -240,6 +240,7 @@ const (
 	LifecycleStateWarmedTerminated         LifecycleState = "Warmed:Terminated"
 	LifecycleStateWarmedStopped            LifecycleState = "Warmed:Stopped"
 	LifecycleStateWarmedRunning            LifecycleState = "Warmed:Running"
+	LifecycleStateWarmedHibernated         LifecycleState = "Warmed:Hibernated"
 )
 
 // Values returns all known values for LifecycleState. Note that this can be
@@ -269,6 +270,7 @@ func (LifecycleState) Values() []LifecycleState {
 		"Warmed:Terminated",
 		"Warmed:Stopped",
 		"Warmed:Running",
+		"Warmed:Hibernated",
 	}
 }
 
@@ -517,8 +519,9 @@ type WarmPoolState string
 
 // Enum values for WarmPoolState
 const (
-	WarmPoolStateStopped WarmPoolState = "Stopped"
-	WarmPoolStateRunning WarmPoolState = "Running"
+	WarmPoolStateStopped    WarmPoolState = "Stopped"
+	WarmPoolStateRunning    WarmPoolState = "Running"
+	WarmPoolStateHibernated WarmPoolState = "Hibernated"
 )
 
 // Values returns all known values for WarmPoolState. Note that this can be
@@ -528,6 +531,7 @@ func (WarmPoolState) Values() []WarmPoolState {
 	return []WarmPoolState{
 		"Stopped",
 		"Running",
+		"Hibernated",
 	}
 }
 

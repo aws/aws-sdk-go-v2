@@ -25,6 +25,24 @@ import (
 // the Amazon Web Services service that created and owns the hosted zone. For
 // example, if a hosted zone was created by Amazon Elastic File System (Amazon
 // EFS), the value of Owner is efs.amazonaws.com.
+//
+// When listing private hosted
+// zones, the hosted zone and the Amazon VPC must belong to the same partition
+// where the hosted zones were created. A partition is a group of Amazon Web
+// Services Regions. Each Amazon Web Services account is scoped to one partition.
+// The following are the supported partitions:
+//
+// * aws - Amazon Web Services
+// Regions
+//
+// * aws-cn - China Regions
+//
+// * aws-us-gov - Amazon Web Services GovCloud
+// (US) Region
+//
+// For more information, see Access Management
+// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
+// the Amazon Web Services General Reference.
 func (c *Client) ListHostedZonesByVPC(ctx context.Context, params *ListHostedZonesByVPCInput, optFns ...func(*Options)) (*ListHostedZonesByVPCOutput, error) {
 	if params == nil {
 		params = &ListHostedZonesByVPCInput{}

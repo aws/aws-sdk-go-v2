@@ -13,7 +13,9 @@ import (
 
 // Returns all export snapshot records created as a result of the export snapshot
 // operation. An export snapshot record can be used to create a new Amazon EC2
-// instance and its related resources with the CreateCloudFormationStack action.
+// instance and its related resources with the CreateCloudFormationStack
+// (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_CreateCloudFormationStack.html)
+// action.
 func (c *Client) GetExportSnapshotRecords(ctx context.Context, params *GetExportSnapshotRecordsInput, optFns ...func(*Options)) (*GetExportSnapshotRecordsOutput, error) {
 	if params == nil {
 		params = &GetExportSnapshotRecordsInput{}

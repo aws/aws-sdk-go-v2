@@ -10465,6 +10465,11 @@ func awsAwsjson11_serializeOpDocumentDeleteKeyPairInput(v *DeleteKeyPairInput, v
 	object := value.Object()
 	defer object.Close()
 
+	if v.ExpectedFingerprint != nil {
+		ok := object.Key("expectedFingerprint")
+		ok.String(*v.ExpectedFingerprint)
+	}
+
 	if v.KeyPairName != nil {
 		ok := object.Key("keyPairName")
 		ok.String(*v.KeyPairName)
@@ -11321,6 +11326,11 @@ func awsAwsjson11_serializeOpDocumentGetKeyPairInput(v *GetKeyPairInput, value s
 func awsAwsjson11_serializeOpDocumentGetKeyPairsInput(v *GetKeyPairsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.IncludeDefaultKeyPair != nil {
+		ok := object.Key("includeDefaultKeyPair")
+		ok.Boolean(*v.IncludeDefaultKeyPair)
+	}
 
 	if v.PageToken != nil {
 		ok := object.Key("pageToken")

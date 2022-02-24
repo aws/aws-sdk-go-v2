@@ -45,6 +45,11 @@ type PutWarmPoolInput struct {
 	// This member is required.
 	AutoScalingGroupName *string
 
+	// Indicates whether instances in the Auto Scaling group can be returned to the
+	// warm pool on scale in. The default is to terminate instances in the Auto Scaling
+	// group when the group scales in.
+	InstanceReusePolicy *types.InstanceReusePolicy
+
 	// Specifies the maximum number of instances that are allowed to be in the warm
 	// pool or in any state except Terminated for the Auto Scaling group. This is an
 	// optional property. Specify it only if you do not want the warm pool size to be

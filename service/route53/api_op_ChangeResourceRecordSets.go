@@ -51,8 +51,7 @@ import (
 // an existing resource record set that has the specified values.
 //
 // * UPSERT: If a
-// resource record set does not already exist, Amazon Web Services creates it. If a
-// resource set does exist, Route 53 updates it with the values in the
+// resource set exists Route 53 updates it with the values in the
 // request.
 //
 // Syntaxes for Creating, Updating, and Deleting Resource Record Sets The

@@ -10,15 +10,19 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates or updates a lifecycle hook for the specified Auto Scaling group. A
-// lifecycle hook enables an Auto Scaling group to be aware of events in the Auto
-// Scaling instance lifecycle, and then perform a custom action when the
-// corresponding lifecycle event occurs. This step is a part of the procedure for
-// adding a lifecycle hook to an Auto Scaling group:
+// Creates or updates a lifecycle hook for the specified Auto Scaling group.
+// Lifecycle hooks let you create solutions that are aware of events in the Auto
+// Scaling instance lifecycle, and then perform a custom action on instances when
+// the corresponding lifecycle event occurs. This step is a part of the procedure
+// for adding a lifecycle hook to an Auto Scaling group:
 //
-// * (Optional) Create a Lambda
-// function and a rule that allows Amazon EventBridge to invoke your Lambda
-// function when Amazon EC2 Auto Scaling launches or terminates instances.
+// * (Optional) Create a
+// launch template or launch configuration with a user data script that runs while
+// an instance is in a wait state due to a lifecycle hook.
+//
+// * (Optional) Create a
+// Lambda function and a rule that allows Amazon EventBridge to invoke your Lambda
+// function when an instance is put into a wait state due to a lifecycle hook.
 //
 // *
 // (Optional) Create a notification target and an IAM role. The target can be
@@ -30,14 +34,14 @@ import (
 // terminate.
 //
 // * If you need more time, record the lifecycle action heartbeat to
-// keep the instance in a pending state using the RecordLifecycleActionHeartbeat
-// API call.
+// keep the instance in a wait state using the RecordLifecycleActionHeartbeat API
+// call.
 //
-// * If you finish before the timeout period ends, send a callback by
-// using the CompleteLifecycleAction API call.
+// * If you finish before the timeout period ends, send a callback by using
+// the CompleteLifecycleAction API call.
 //
-// For more information, see Amazon
-// EC2 Auto Scaling lifecycle hooks
+// For more information, see Amazon EC2 Auto
+// Scaling lifecycle hooks
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html) in
 // the Amazon EC2 Auto Scaling User Guide. If you exceed your maximum limit of
 // lifecycle hooks, which by default is 50 per Auto Scaling group, the call fails.
@@ -112,9 +116,9 @@ type PutLifecycleHookInput struct {
 	NotificationTargetARN *string
 
 	// The ARN of the IAM role that allows the Auto Scaling group to publish to the
-	// specified notification target, for example, an Amazon SNS topic or an Amazon SQS
-	// queue. Required for new lifecycle hooks, but optional when updating existing
-	// hooks.
+	// specified notification target. Valid only if the notification target is an
+	// Amazon SNS topic or an Amazon SQS queue. Required for new lifecycle hooks, but
+	// optional when updating existing hooks.
 	RoleARN *string
 
 	noSmithyDocumentSerde
