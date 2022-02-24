@@ -911,7 +911,7 @@ func (o LoadOptions) GetUseFIPSEndpoint(ctx context.Context) (value aws.FIPSEndp
 // WithDefaultsMode sets the SDK defaults configuration mode to the value provided.
 //
 // Zero or more functional options can be provided to provide configuration options for performing
-// environment discovery when using aws.AutoDefaultsMode.
+// environment discovery when using aws.DefaultsModeAuto.
 func WithDefaultsMode(mode aws.DefaultsMode, optFns ...func(options *DefaultsModeOptions)) LoadOptionsFunc {
 	do := DefaultsModeOptions{
 		Mode: mode,

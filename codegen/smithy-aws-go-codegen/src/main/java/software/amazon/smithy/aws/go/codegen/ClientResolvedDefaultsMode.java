@@ -43,7 +43,7 @@ public class ClientResolvedDefaultsMode implements GoIntegration {
                     .build())
             .documentation("""
                     The initial DefaultsMode used when the client options were constructed. If the
-                    DefaultsMode was set to aws.AutoDefaultsMode this will store what the resolved value
+                    DefaultsMode was set to aws.DefaultsModeAuto this will store what the resolved value
                     was at that point in time.
                             
                     Currently does not support per operation call overrides, may in the future.

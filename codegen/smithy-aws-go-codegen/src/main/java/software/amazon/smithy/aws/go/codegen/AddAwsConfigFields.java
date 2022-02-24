@@ -88,7 +88,7 @@ public class AddAwsConfigFields implements GoIntegration {
                     .type(getAwsCoreSymbol("RuntimeEnvironment"))
                     .documentation("""
                             The RuntimeEnvironment configuration, only populated if the DefaultsMode is set to
-                            AutoDefaultsMode and is initialized using `config.LoadDefaultConfig`. You should not
+                            DefaultsModeAuto and is initialized using `config.LoadDefaultConfig`. You should not
                             populate this structure programmatically, or rely on the values here within your
                             applications.
                             """)

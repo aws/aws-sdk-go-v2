@@ -124,7 +124,7 @@ type Options struct {
 	Retryer aws.Retryer
 
 	// The RuntimeEnvironment configuration, only populated if the DefaultsMode is set
-	// to AutoDefaultsMode and is initialized using config.LoadDefaultConfig. You
+	// to DefaultsModeAuto and is initialized using config.LoadDefaultConfig. You
 	// should not populate this structure programmatically, or rely on the values here
 	// within your applications.
 	RuntimeEnvironment aws.RuntimeEnvironment
@@ -140,7 +140,7 @@ type Options struct {
 	UseDualstack bool
 
 	// The initial DefaultsMode used when the client options were constructed. If the
-	// DefaultsMode was set to aws.AutoDefaultsMode this will store what the resolved
+	// DefaultsMode was set to aws.DefaultsModeAuto this will store what the resolved
 	// value was at that point in time. Currently does not support per operation call
 	// overrides, may in the future.
 	resolvedDefaultsMode aws.DefaultsMode
