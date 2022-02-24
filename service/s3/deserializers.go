@@ -295,6 +295,58 @@ func awsRestxml_deserializeOpDocumentCompleteMultipartUploadOutput(v **CompleteM
 				sv.Bucket = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("ChecksumCRC32", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ChecksumCRC32 = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("ChecksumCRC32C", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ChecksumCRC32C = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("ChecksumSHA1", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ChecksumSHA1 = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("ChecksumSHA256", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ChecksumSHA256 = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("ETag", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -777,6 +829,11 @@ func awsRestxml_deserializeOpHttpBindingsCreateMultipartUploadOutput(v *CreateMu
 			return err
 		}
 		v.BucketKeyEnabled = vv
+	}
+
+	if headerValues := response.Header.Values("x-amz-checksum-algorithm"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.ChecksumAlgorithm = types.ChecksumAlgorithm(headerValues[0])
 	}
 
 	if headerValues := response.Header.Values("x-amz-request-charged"); len(headerValues) != 0 {
@@ -5214,6 +5271,26 @@ func awsRestxml_deserializeOpHttpBindingsGetObjectOutput(v *GetObjectOutput, res
 		v.CacheControl = ptr.String(headerValues[0])
 	}
 
+	if headerValues := response.Header.Values("x-amz-checksum-crc32"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.ChecksumCRC32 = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("x-amz-checksum-crc32c"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.ChecksumCRC32C = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("x-amz-checksum-sha1"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.ChecksumSHA1 = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("x-amz-checksum-sha256"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.ChecksumSHA256 = ptr.String(headerValues[0])
+	}
+
 	if headerValues := response.Header.Values("Content-Disposition"); len(headerValues) != 0 {
 		headerValues[0] = strings.TrimSpace(headerValues[0])
 		v.ContentDisposition = ptr.String(headerValues[0])
@@ -5550,6 +5627,237 @@ func awsRestxml_deserializeOpDocumentGetObjectAclOutput(v **GetObjectAclOutput, 
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsRestxml_deserializeDocumentOwner(&sv.Owner, nodeDecoder); err != nil {
 				return err
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+type awsRestxml_deserializeOpGetObjectAttributes struct {
+}
+
+func (*awsRestxml_deserializeOpGetObjectAttributes) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpGetObjectAttributes) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestxml_deserializeOpErrorGetObjectAttributes(response, &metadata)
+	}
+	output := &GetObjectAttributesOutput{}
+	out.Result = output
+
+	err = awsRestxml_deserializeOpHttpBindingsGetObjectAttributesOutput(output, response)
+	if err != nil {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(response.Body, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return out, metadata, nil
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	err = awsRestxml_deserializeOpDocumentGetObjectAttributesOutput(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestxml_deserializeOpErrorGetObjectAttributes(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
+	if err != nil {
+		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
+	}
+	errorBody.Seek(0, io.SeekStart)
+	switch {
+	case strings.EqualFold("NoSuchKey", errorCode):
+		return awsRestxml_deserializeErrorNoSuchKey(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestxml_deserializeOpHttpBindingsGetObjectAttributesOutput(v *GetObjectAttributesOutput, response *smithyhttp.Response) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization for nil %T", v)
+	}
+
+	if headerValues := response.Header.Values("x-amz-delete-marker"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		vv, err := strconv.ParseBool(headerValues[0])
+		if err != nil {
+			return err
+		}
+		v.DeleteMarker = vv
+	}
+
+	if headerValues := response.Header.Values("Last-Modified"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		t, err := smithytime.ParseHTTPDate(headerValues[0])
+		if err != nil {
+			return err
+		}
+		v.LastModified = ptr.Time(t)
+	}
+
+	if headerValues := response.Header.Values("x-amz-request-charged"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.RequestCharged = types.RequestCharged(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("x-amz-version-id"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.VersionId = ptr.String(headerValues[0])
+	}
+
+	return nil
+}
+func awsRestxml_deserializeOpDocumentGetObjectAttributesOutput(v **GetObjectAttributesOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *GetObjectAttributesOutput
+	if *v == nil {
+		sv = &GetObjectAttributesOutput{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("Checksum", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentChecksum(&sv.Checksum, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("ETag", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ETag = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("ObjectParts", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentGetObjectAttributesParts(&sv.ObjectParts, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("ObjectSize", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.ObjectSize = i64
+			}
+
+		case strings.EqualFold("StorageClass", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.StorageClass = types.StorageClass(xtv)
 			}
 
 		default:
@@ -6556,6 +6864,26 @@ func awsRestxml_deserializeOpHttpBindingsHeadObjectOutput(v *HeadObjectOutput, r
 	if headerValues := response.Header.Values("Cache-Control"); len(headerValues) != 0 {
 		headerValues[0] = strings.TrimSpace(headerValues[0])
 		v.CacheControl = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("x-amz-checksum-crc32"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.ChecksumCRC32 = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("x-amz-checksum-crc32c"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.ChecksumCRC32C = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("x-amz-checksum-sha1"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.ChecksumSHA1 = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("x-amz-checksum-sha256"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.ChecksumSHA256 = ptr.String(headerValues[0])
 	}
 
 	if headerValues := response.Header.Values("Content-Disposition"); len(headerValues) != 0 {
@@ -8874,6 +9202,19 @@ func awsRestxml_deserializeOpDocumentListPartsOutput(v **ListPartsOutput, decode
 				sv.Bucket = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("ChecksumAlgorithm", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ChecksumAlgorithm = types.ChecksumAlgorithm(xtv)
+			}
+
 		case strings.EqualFold("Initiator", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsRestxml_deserializeDocumentInitiator(&sv.Initiator, nodeDecoder); err != nil {
@@ -10442,6 +10783,26 @@ func awsRestxml_deserializeOpHttpBindingsPutObjectOutput(v *PutObjectOutput, res
 		v.BucketKeyEnabled = vv
 	}
 
+	if headerValues := response.Header.Values("x-amz-checksum-crc32"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.ChecksumCRC32 = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("x-amz-checksum-crc32c"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.ChecksumCRC32C = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("x-amz-checksum-sha1"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.ChecksumSHA1 = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("x-amz-checksum-sha256"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.ChecksumSHA256 = ptr.String(headerValues[0])
+	}
+
 	if headerValues := response.Header.Values("ETag"); len(headerValues) != 0 {
 		headerValues[0] = strings.TrimSpace(headerValues[0])
 		v.ETag = ptr.String(headerValues[0])
@@ -11253,6 +11614,26 @@ func awsRestxml_deserializeOpHttpBindingsUploadPartOutput(v *UploadPartOutput, r
 			return err
 		}
 		v.BucketKeyEnabled = vv
+	}
+
+	if headerValues := response.Header.Values("x-amz-checksum-crc32"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.ChecksumCRC32 = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("x-amz-checksum-crc32c"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.ChecksumCRC32C = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("x-amz-checksum-sha1"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.ChecksumSHA1 = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("x-amz-checksum-sha256"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.ChecksumSHA256 = ptr.String(headerValues[0])
 	}
 
 	if headerValues := response.Header.Values("ETag"); len(headerValues) != 0 {
@@ -13067,6 +13448,174 @@ func awsRestxml_deserializeDocumentBucketsUnwrapped(v *[]types.Bucket, decoder s
 	*v = sv
 	return nil
 }
+func awsRestxml_deserializeDocumentChecksum(v **types.Checksum, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.Checksum
+	if *v == nil {
+		sv = &types.Checksum{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("ChecksumCRC32", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ChecksumCRC32 = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("ChecksumCRC32C", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ChecksumCRC32C = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("ChecksumSHA1", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ChecksumSHA1 = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("ChecksumSHA256", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ChecksumSHA256 = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestxml_deserializeDocumentChecksumAlgorithmList(v *[]types.ChecksumAlgorithm, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []types.ChecksumAlgorithm
+	if *v == nil {
+		sv = make([]types.ChecksumAlgorithm, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		memberDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		decoder = memberDecoder
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col types.ChecksumAlgorithm
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				col = types.ChecksumAlgorithm(xtv)
+			}
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestxml_deserializeDocumentChecksumAlgorithmListUnwrapped(v *[]types.ChecksumAlgorithm, decoder smithyxml.NodeDecoder) error {
+	var sv []types.ChecksumAlgorithm
+	if *v == nil {
+		sv = make([]types.ChecksumAlgorithm, 0)
+	} else {
+		sv = *v
+	}
+
+	switch {
+	default:
+		var mv types.ChecksumAlgorithm
+		t := decoder.StartEl
+		_ = t
+		val, err := decoder.Value()
+		if err != nil {
+			return err
+		}
+		if val == nil {
+			break
+		}
+		{
+			xtv := string(val)
+			mv = types.ChecksumAlgorithm(xtv)
+		}
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
 func awsRestxml_deserializeDocumentCommonPrefix(v **types.CommonPrefix, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13268,6 +13817,58 @@ func awsRestxml_deserializeDocumentCopyObjectResult(v **types.CopyObjectResult, 
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("ChecksumCRC32", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ChecksumCRC32 = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("ChecksumCRC32C", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ChecksumCRC32C = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("ChecksumSHA1", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ChecksumSHA1 = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("ChecksumSHA256", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ChecksumSHA256 = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("ETag", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -13334,6 +13935,58 @@ func awsRestxml_deserializeDocumentCopyPartResult(v **types.CopyPartResult, deco
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("ChecksumCRC32", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ChecksumCRC32 = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("ChecksumCRC32C", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ChecksumCRC32C = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("ChecksumSHA1", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ChecksumSHA1 = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("ChecksumSHA256", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ChecksumSHA256 = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("ETag", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -14724,6 +15377,124 @@ func awsRestxml_deserializeDocumentFilterRuleListUnwrapped(v *[]types.FilterRule
 	*v = sv
 	return nil
 }
+func awsRestxml_deserializeDocumentGetObjectAttributesParts(v **types.GetObjectAttributesParts, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.GetObjectAttributesParts
+	if *v == nil {
+		sv = &types.GetObjectAttributesParts{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("IsTruncated", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected IsTruncated to be of type *bool, got %T instead", val)
+				}
+				sv.IsTruncated = xtv
+			}
+
+		case strings.EqualFold("MaxParts", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.MaxParts = int32(i64)
+			}
+
+		case strings.EqualFold("NextPartNumberMarker", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.NextPartNumberMarker = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("PartNumberMarker", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.PartNumberMarker = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("Part", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentPartsListUnwrapped(&sv.Parts, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("PartsCount", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.TotalPartsCount = int32(i64)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestxml_deserializeDocumentGrant(v **types.Grant, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -16943,6 +17714,19 @@ func awsRestxml_deserializeDocumentMultipartUpload(v **types.MultipartUpload, de
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("ChecksumAlgorithm", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ChecksumAlgorithm = types.ChecksumAlgorithm(xtv)
+			}
+
 		case strings.EqualFold("Initiated", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -17522,6 +18306,12 @@ func awsRestxml_deserializeDocumentObject(v **types.Object, decoder smithyxml.No
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("ChecksumAlgorithm", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentChecksumAlgorithmListUnwrapped(&sv.ChecksumAlgorithm, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("ETag", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -17967,6 +18757,128 @@ func awsRestxml_deserializeDocumentObjectNotInActiveTierError(v **types.ObjectNo
 	return nil
 }
 
+func awsRestxml_deserializeDocumentObjectPart(v **types.ObjectPart, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.ObjectPart
+	if *v == nil {
+		sv = &types.ObjectPart{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("ChecksumCRC32", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ChecksumCRC32 = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("ChecksumCRC32C", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ChecksumCRC32C = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("ChecksumSHA1", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ChecksumSHA1 = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("ChecksumSHA256", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ChecksumSHA256 = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("PartNumber", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.PartNumber = int32(i64)
+			}
+
+		case strings.EqualFold("Size", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.Size = i64
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestxml_deserializeDocumentObjectVersion(v **types.ObjectVersion, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -17989,6 +18901,12 @@ func awsRestxml_deserializeDocumentObjectVersion(v **types.ObjectVersion, decode
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("ChecksumAlgorithm", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentChecksumAlgorithmListUnwrapped(&sv.ChecksumAlgorithm, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("ETag", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -18422,6 +19340,58 @@ func awsRestxml_deserializeDocumentPart(v **types.Part, decoder smithyxml.NodeDe
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("ChecksumCRC32", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ChecksumCRC32 = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("ChecksumCRC32C", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ChecksumCRC32C = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("ChecksumSHA1", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ChecksumSHA1 = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("ChecksumSHA256", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ChecksumSHA256 = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("ETag", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -18560,6 +19530,74 @@ func awsRestxml_deserializeDocumentPartsUnwrapped(v *[]types.Part, decoder smith
 		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 		destAddr := &mv
 		if err := awsRestxml_deserializeDocumentPart(&destAddr, nodeDecoder); err != nil {
+			return err
+		}
+		mv = *destAddr
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
+func awsRestxml_deserializeDocumentPartsList(v *[]types.ObjectPart, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []types.ObjectPart
+	if *v == nil {
+		sv = make([]types.ObjectPart, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col types.ObjectPart
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsRestxml_deserializeDocumentObjectPart(&destAddr, nodeDecoder); err != nil {
+				return err
+			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestxml_deserializeDocumentPartsListUnwrapped(v *[]types.ObjectPart, decoder smithyxml.NodeDecoder) error {
+	var sv []types.ObjectPart
+	if *v == nil {
+		sv = make([]types.ObjectPart, 0)
+	} else {
+		sv = *v
+	}
+
+	switch {
+	default:
+		var mv types.ObjectPart
+		t := decoder.StartEl
+		_ = t
+		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		destAddr := &mv
+		if err := awsRestxml_deserializeDocumentObjectPart(&destAddr, nodeDecoder); err != nil {
 			return err
 		}
 		mv = *destAddr

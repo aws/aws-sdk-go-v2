@@ -8,6 +8,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/internal/configsources v1.1.4
 	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.2.0
 	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.7.0
+	github.com/aws/aws-sdk-go-v2/service/internal/checksum v0.0.0-00010101000000-000000000000
 	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.7.0
 	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v1.11.0
 	github.com/aws/smithy-go v1.10.1-0.20220223172659-66863935410f
@@ -23,6 +24,8 @@ replace github.com/aws/aws-sdk-go-v2/internal/configsources => ../../internal/co
 replace github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 => ../../internal/endpoints/v2/
 
 replace github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding => ../../service/internal/accept-encoding/
+
+replace github.com/aws/aws-sdk-go-v2/service/internal/checksum => ../../service/internal/checksum/
 
 replace github.com/aws/aws-sdk-go-v2/service/internal/presigned-url => ../../service/internal/presigned-url/
 

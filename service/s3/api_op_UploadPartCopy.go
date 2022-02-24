@@ -38,7 +38,7 @@ import (
 // Amazon S3 User Guide.
 //
 // * For information about copying objects using a single
-// atomic action vs. the multipart upload, see Operations on Objects
+// atomic action vs. a multipart upload, see Operations on Objects
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectOperations.html) in the
 // Amazon S3 User Guide.
 //
@@ -148,9 +148,9 @@ type UploadPartCopyInput struct {
 	// you must direct requests to the S3 on Outposts hostname. The S3 on Outposts
 	// hostname takes the form
 	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When using
-	// this action using S3 on Outposts through the Amazon Web Services SDKs, you
+	// this action with S3 on Outposts through the Amazon Web Services SDKs, you
 	// provide the Outposts bucket ARN in place of the bucket name. For more
-	// information about S3 on Outposts ARNs, see Using S3 on Outposts
+	// information about S3 on Outposts ARNs, see Using Amazon S3 on Outposts
 	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html) in the
 	// Amazon S3 User Guide.
 	//
@@ -166,7 +166,7 @@ type UploadPartCopyInput struct {
 	// For objects not accessed through an access point, specify the name of the source
 	// bucket and key of the source object, separated by a slash (/). For example, to
 	// copy the object reports/january.pdf from the bucket awsexamplebucket, use
-	// awsexamplebucket/reports/january.pdf. The value must be URL encoded.
+	// awsexamplebucket/reports/january.pdf. The value must be URL-encoded.
 	//
 	// * For
 	// objects accessed through access points, specify the Amazon Resource Name (ARN)
@@ -183,7 +183,7 @@ type UploadPartCopyInput struct {
 	// reports/january.pdf through outpost my-outpost owned by account 123456789012 in
 	// Region us-west-2, use the URL encoding of
 	// arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/object/reports/january.pdf.
-	// The value must be URL encoded.
+	// The value must be URL-encoded.
 	//
 	// To copy a specific version of an object, append
 	// ?versionId= to the value (for example,
@@ -244,19 +244,19 @@ type UploadPartCopyInput struct {
 	CopySourceSSECustomerKeyMD5 *string
 
 	// The account ID of the expected destination bucket owner. If the destination
-	// bucket is owned by a different account, the request will fail with an HTTP 403
-	// (Access Denied) error.
+	// bucket is owned by a different account, the request fails with the HTTP status
+	// code 403 Forbidden (access denied).
 	ExpectedBucketOwner *string
 
 	// The account ID of the expected source bucket owner. If the source bucket is
-	// owned by a different account, the request will fail with an HTTP 403 (Access
-	// Denied) error.
+	// owned by a different account, the request fails with the HTTP status code 403
+	// Forbidden (access denied).
 	ExpectedSourceBucketOwner *string
 
 	// Confirms that the requester knows that they will be charged for the request.
 	// Bucket owners need not specify this parameter in their requests. For information
-	// about downloading objects from requester pays buckets, see Downloading Objects
-	// in Requestor Pays Buckets
+	// about downloading objects from Requester Pays buckets, see Downloading Objects
+	// in Requester Pays Buckets
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html)
 	// in the Amazon S3 User Guide.
 	RequestPayer types.RequestPayer

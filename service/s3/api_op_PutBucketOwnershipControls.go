@@ -6,6 +6,7 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	internalChecksum "github.com/aws/aws-sdk-go-v2/service/internal/checksum"
 	s3cust "github.com/aws/aws-sdk-go-v2/service/s3/internal/customizations"
 	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 	"github.com/aws/smithy-go/middleware"
@@ -58,7 +59,8 @@ type PutBucketOwnershipControlsInput struct {
 	ContentMD5 *string
 
 	// The account ID of the expected bucket owner. If the bucket is owned by a
-	// different account, the request will fail with an HTTP 403 (Access Denied) error.
+	// different account, the request fails with the HTTP status code 403 Forbidden
+	// (access denied).
 	ExpectedBucketOwner *string
 
 	noSmithyDocumentSerde
@@ -119,9 +121,6 @@ func (c *Client) addOperationPutBucketOwnershipControlsMiddlewares(stack *middle
 	if err = swapWithCustomHTTPSignerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddContentChecksumMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addOpPutBucketOwnershipControlsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -129,6 +128,9 @@ func (c *Client) addOperationPutBucketOwnershipControlsMiddlewares(stack *middle
 		return err
 	}
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addPutBucketOwnershipControlsInputChecksumMiddlewares(stack, options); err != nil {
 		return err
 	}
 	if err = addPutBucketOwnershipControlsUpdateEndpoint(stack, options); err != nil {
@@ -156,6 +158,16 @@ func newServiceMetadataMiddleware_opPutBucketOwnershipControls(region string) *a
 		SigningName:   "s3",
 		OperationName: "PutBucketOwnershipControls",
 	}
+}
+
+func addPutBucketOwnershipControlsInputChecksumMiddlewares(stack *middleware.Stack, options Options) error {
+	return internalChecksum.AddInputMiddleware(stack, internalChecksum.InputMiddlewareOptions{
+		GetAlgorithm:                     nil,
+		RequireChecksum:                  true,
+		EnableTrailingChecksum:           false,
+		EnableComputeSHA256PayloadHash:   true,
+		EnableDecodedContentLengthHeader: true,
+	})
 }
 
 // getPutBucketOwnershipControlsBucketMember returns a pointer to string denoting a

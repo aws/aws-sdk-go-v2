@@ -14,6 +14,7 @@ import (
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"net/http"
+	"strconv"
 	"strings"
 )
 
@@ -176,6 +177,26 @@ func awsRestxml_serializeOpHttpBindingsCompleteMultipartUploadInput(v *CompleteM
 		}
 	}
 
+	if v.ChecksumCRC32 != nil && len(*v.ChecksumCRC32) > 0 {
+		locationName := "X-Amz-Checksum-Crc32"
+		encoder.SetHeader(locationName).String(*v.ChecksumCRC32)
+	}
+
+	if v.ChecksumCRC32C != nil && len(*v.ChecksumCRC32C) > 0 {
+		locationName := "X-Amz-Checksum-Crc32c"
+		encoder.SetHeader(locationName).String(*v.ChecksumCRC32C)
+	}
+
+	if v.ChecksumSHA1 != nil && len(*v.ChecksumSHA1) > 0 {
+		locationName := "X-Amz-Checksum-Sha1"
+		encoder.SetHeader(locationName).String(*v.ChecksumSHA1)
+	}
+
+	if v.ChecksumSHA256 != nil && len(*v.ChecksumSHA256) > 0 {
+		locationName := "X-Amz-Checksum-Sha256"
+		encoder.SetHeader(locationName).String(*v.ChecksumSHA256)
+	}
+
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
 		locationName := "X-Amz-Expected-Bucket-Owner"
 		encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
@@ -193,6 +214,21 @@ func awsRestxml_serializeOpHttpBindingsCompleteMultipartUploadInput(v *CompleteM
 	if len(v.RequestPayer) > 0 {
 		locationName := "X-Amz-Request-Payer"
 		encoder.SetHeader(locationName).String(string(v.RequestPayer))
+	}
+
+	if v.SSECustomerAlgorithm != nil && len(*v.SSECustomerAlgorithm) > 0 {
+		locationName := "X-Amz-Server-Side-Encryption-Customer-Algorithm"
+		encoder.SetHeader(locationName).String(*v.SSECustomerAlgorithm)
+	}
+
+	if v.SSECustomerKey != nil && len(*v.SSECustomerKey) > 0 {
+		locationName := "X-Amz-Server-Side-Encryption-Customer-Key"
+		encoder.SetHeader(locationName).String(*v.SSECustomerKey)
+	}
+
+	if v.SSECustomerKeyMD5 != nil && len(*v.SSECustomerKeyMD5) > 0 {
+		locationName := "X-Amz-Server-Side-Encryption-Customer-Key-Md5"
+		encoder.SetHeader(locationName).String(*v.SSECustomerKeyMD5)
 	}
 
 	if v.UploadId != nil {
@@ -270,6 +306,11 @@ func awsRestxml_serializeOpHttpBindingsCopyObjectInput(v *CopyObjectInput, encod
 	if v.CacheControl != nil && len(*v.CacheControl) > 0 {
 		locationName := "Cache-Control"
 		encoder.SetHeader(locationName).String(*v.CacheControl)
+	}
+
+	if len(v.ChecksumAlgorithm) > 0 {
+		locationName := "X-Amz-Checksum-Algorithm"
+		encoder.SetHeader(locationName).String(string(v.ChecksumAlgorithm))
 	}
 
 	if v.ContentDisposition != nil && len(*v.ContentDisposition) > 0 {
@@ -652,6 +693,11 @@ func awsRestxml_serializeOpHttpBindingsCreateMultipartUploadInput(v *CreateMulti
 	if v.CacheControl != nil && len(*v.CacheControl) > 0 {
 		locationName := "Cache-Control"
 		encoder.SetHeader(locationName).String(*v.CacheControl)
+	}
+
+	if len(v.ChecksumAlgorithm) > 0 {
+		locationName := "X-Amz-Checksum-Algorithm"
+		encoder.SetHeader(locationName).String(string(v.ChecksumAlgorithm))
 	}
 
 	if v.ContentDisposition != nil && len(*v.ContentDisposition) > 0 {
@@ -1792,6 +1838,11 @@ func awsRestxml_serializeOpHttpBindingsDeleteObjectsInput(v *DeleteObjectsInput,
 	if v.BypassGovernanceRetention {
 		locationName := "X-Amz-Bypass-Governance-Retention"
 		encoder.SetHeader(locationName).Boolean(v.BypassGovernanceRetention)
+	}
+
+	if len(v.ChecksumAlgorithm) > 0 {
+		locationName := "X-Amz-Sdk-Checksum-Algorithm"
+		encoder.SetHeader(locationName).String(string(v.ChecksumAlgorithm))
 	}
 
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
@@ -3277,6 +3328,11 @@ func awsRestxml_serializeOpHttpBindingsGetObjectInput(v *GetObjectInput, encoder
 		}
 	}
 
+	if len(v.ChecksumMode) > 0 {
+		locationName := "X-Amz-Checksum-Mode"
+		encoder.SetHeader(locationName).String(string(v.ChecksumMode))
+	}
+
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
 		locationName := "X-Amz-Expected-Bucket-Owner"
 		encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
@@ -3443,6 +3499,126 @@ func awsRestxml_serializeOpHttpBindingsGetObjectAclInput(v *GetObjectAclInput, e
 	if len(v.RequestPayer) > 0 {
 		locationName := "X-Amz-Request-Payer"
 		encoder.SetHeader(locationName).String(string(v.RequestPayer))
+	}
+
+	if v.VersionId != nil {
+		encoder.SetQuery("versionId").String(*v.VersionId)
+	}
+
+	return nil
+}
+
+type awsRestxml_serializeOpGetObjectAttributes struct {
+}
+
+func (*awsRestxml_serializeOpGetObjectAttributes) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestxml_serializeOpGetObjectAttributes) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetObjectAttributesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/{Bucket}/{Key+}?attributes")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestxml_serializeOpHttpBindingsGetObjectAttributesInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestxml_serializeOpHttpBindingsGetObjectAttributesInput(v *GetObjectAttributesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.Bucket == nil || len(*v.Bucket) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
+	if v.Bucket != nil {
+		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
+			return err
+		}
+	}
+
+	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+	}
+
+	if v.Key == nil || len(*v.Key) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Key must not be empty")}
+	}
+	if v.Key != nil {
+		if err := encoder.SetURI("Key").String(*v.Key); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxParts != 0 {
+		locationName := "X-Amz-Max-Parts"
+		encoder.SetHeader(locationName).Integer(v.MaxParts)
+	}
+
+	if v.ObjectAttributes != nil {
+		locationName := "X-Amz-Object-Attributes"
+		for i := range v.ObjectAttributes {
+			if len(v.ObjectAttributes[i]) > 0 {
+				escaped := string(v.ObjectAttributes[i])
+				if strings.Index(string(v.ObjectAttributes[i]), `,`) != -1 || strings.Index(string(v.ObjectAttributes[i]), `"`) != -1 {
+					escaped = strconv.Quote(string(v.ObjectAttributes[i]))
+				}
+
+				encoder.AddHeader(locationName).String(string(escaped))
+			}
+		}
+	}
+
+	if v.PartNumberMarker != nil && len(*v.PartNumberMarker) > 0 {
+		locationName := "X-Amz-Part-Number-Marker"
+		encoder.SetHeader(locationName).String(*v.PartNumberMarker)
+	}
+
+	if len(v.RequestPayer) > 0 {
+		locationName := "X-Amz-Request-Payer"
+		encoder.SetHeader(locationName).String(string(v.RequestPayer))
+	}
+
+	if v.SSECustomerAlgorithm != nil && len(*v.SSECustomerAlgorithm) > 0 {
+		locationName := "X-Amz-Server-Side-Encryption-Customer-Algorithm"
+		encoder.SetHeader(locationName).String(*v.SSECustomerAlgorithm)
+	}
+
+	if v.SSECustomerKey != nil && len(*v.SSECustomerKey) > 0 {
+		locationName := "X-Amz-Server-Side-Encryption-Customer-Key"
+		encoder.SetHeader(locationName).String(*v.SSECustomerKey)
+	}
+
+	if v.SSECustomerKeyMD5 != nil && len(*v.SSECustomerKeyMD5) > 0 {
+		locationName := "X-Amz-Server-Side-Encryption-Customer-Key-Md5"
+		encoder.SetHeader(locationName).String(*v.SSECustomerKeyMD5)
 	}
 
 	if v.VersionId != nil {
@@ -4014,6 +4190,11 @@ func awsRestxml_serializeOpHttpBindingsHeadObjectInput(v *HeadObjectInput, encod
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
+	}
+
+	if len(v.ChecksumMode) > 0 {
+		locationName := "X-Amz-Checksum-Mode"
+		encoder.SetHeader(locationName).String(string(v.ChecksumMode))
 	}
 
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
@@ -4834,6 +5015,21 @@ func awsRestxml_serializeOpHttpBindingsListPartsInput(v *ListPartsInput, encoder
 		encoder.SetHeader(locationName).String(string(v.RequestPayer))
 	}
 
+	if v.SSECustomerAlgorithm != nil && len(*v.SSECustomerAlgorithm) > 0 {
+		locationName := "X-Amz-Server-Side-Encryption-Customer-Algorithm"
+		encoder.SetHeader(locationName).String(*v.SSECustomerAlgorithm)
+	}
+
+	if v.SSECustomerKey != nil && len(*v.SSECustomerKey) > 0 {
+		locationName := "X-Amz-Server-Side-Encryption-Customer-Key"
+		encoder.SetHeader(locationName).String(*v.SSECustomerKey)
+	}
+
+	if v.SSECustomerKeyMD5 != nil && len(*v.SSECustomerKeyMD5) > 0 {
+		locationName := "X-Amz-Server-Side-Encryption-Customer-Key-Md5"
+		encoder.SetHeader(locationName).String(*v.SSECustomerKeyMD5)
+	}
+
 	if v.UploadId != nil {
 		encoder.SetQuery("uploadId").String(*v.UploadId)
 	}
@@ -4917,6 +5113,11 @@ func awsRestxml_serializeOpHttpBindingsPutBucketAccelerateConfigurationInput(v *
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
+	}
+
+	if len(v.ChecksumAlgorithm) > 0 {
+		locationName := "X-Amz-Sdk-Checksum-Algorithm"
+		encoder.SetHeader(locationName).String(string(v.ChecksumAlgorithm))
 	}
 
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
@@ -5008,6 +5209,11 @@ func awsRestxml_serializeOpHttpBindingsPutBucketAclInput(v *PutBucketAclInput, e
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
+	}
+
+	if len(v.ChecksumAlgorithm) > 0 {
+		locationName := "X-Amz-Sdk-Checksum-Algorithm"
+		encoder.SetHeader(locationName).String(string(v.ChecksumAlgorithm))
 	}
 
 	if v.ContentMD5 != nil && len(*v.ContentMD5) > 0 {
@@ -5216,6 +5422,11 @@ func awsRestxml_serializeOpHttpBindingsPutBucketCorsInput(v *PutBucketCorsInput,
 		}
 	}
 
+	if len(v.ChecksumAlgorithm) > 0 {
+		locationName := "X-Amz-Sdk-Checksum-Algorithm"
+		encoder.SetHeader(locationName).String(string(v.ChecksumAlgorithm))
+	}
+
 	if v.ContentMD5 != nil && len(*v.ContentMD5) > 0 {
 		locationName := "Content-Md5"
 		encoder.SetHeader(locationName).String(*v.ContentMD5)
@@ -5305,6 +5516,11 @@ func awsRestxml_serializeOpHttpBindingsPutBucketEncryptionInput(v *PutBucketEncr
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
+	}
+
+	if len(v.ChecksumAlgorithm) > 0 {
+		locationName := "X-Amz-Sdk-Checksum-Algorithm"
+		encoder.SetHeader(locationName).String(string(v.ChecksumAlgorithm))
 	}
 
 	if v.ContentMD5 != nil && len(*v.ContentMD5) > 0 {
@@ -5573,6 +5789,11 @@ func awsRestxml_serializeOpHttpBindingsPutBucketLifecycleConfigurationInput(v *P
 		}
 	}
 
+	if len(v.ChecksumAlgorithm) > 0 {
+		locationName := "X-Amz-Sdk-Checksum-Algorithm"
+		encoder.SetHeader(locationName).String(string(v.ChecksumAlgorithm))
+	}
+
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
 		locationName := "X-Amz-Expected-Bucket-Owner"
 		encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
@@ -5657,6 +5878,11 @@ func awsRestxml_serializeOpHttpBindingsPutBucketLoggingInput(v *PutBucketLogging
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
+	}
+
+	if len(v.ChecksumAlgorithm) > 0 {
+		locationName := "X-Amz-Sdk-Checksum-Algorithm"
+		encoder.SetHeader(locationName).String(string(v.ChecksumAlgorithm))
 	}
 
 	if v.ContentMD5 != nil && len(*v.ContentMD5) > 0 {
@@ -6010,6 +6236,11 @@ func awsRestxml_serializeOpHttpBindingsPutBucketPolicyInput(v *PutBucketPolicyIn
 		}
 	}
 
+	if len(v.ChecksumAlgorithm) > 0 {
+		locationName := "X-Amz-Sdk-Checksum-Algorithm"
+		encoder.SetHeader(locationName).String(string(v.ChecksumAlgorithm))
+	}
+
 	if v.ConfirmRemoveSelfBucketAccess {
 		locationName := "X-Amz-Confirm-Remove-Self-Bucket-Access"
 		encoder.SetHeader(locationName).Boolean(v.ConfirmRemoveSelfBucketAccess)
@@ -6104,6 +6335,11 @@ func awsRestxml_serializeOpHttpBindingsPutBucketReplicationInput(v *PutBucketRep
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
+	}
+
+	if len(v.ChecksumAlgorithm) > 0 {
+		locationName := "X-Amz-Sdk-Checksum-Algorithm"
+		encoder.SetHeader(locationName).String(string(v.ChecksumAlgorithm))
 	}
 
 	if v.ContentMD5 != nil && len(*v.ContentMD5) > 0 {
@@ -6202,6 +6438,11 @@ func awsRestxml_serializeOpHttpBindingsPutBucketRequestPaymentInput(v *PutBucket
 		}
 	}
 
+	if len(v.ChecksumAlgorithm) > 0 {
+		locationName := "X-Amz-Sdk-Checksum-Algorithm"
+		encoder.SetHeader(locationName).String(string(v.ChecksumAlgorithm))
+	}
+
 	if v.ContentMD5 != nil && len(*v.ContentMD5) > 0 {
 		locationName := "Content-Md5"
 		encoder.SetHeader(locationName).String(*v.ContentMD5)
@@ -6293,6 +6534,11 @@ func awsRestxml_serializeOpHttpBindingsPutBucketTaggingInput(v *PutBucketTagging
 		}
 	}
 
+	if len(v.ChecksumAlgorithm) > 0 {
+		locationName := "X-Amz-Sdk-Checksum-Algorithm"
+		encoder.SetHeader(locationName).String(string(v.ChecksumAlgorithm))
+	}
+
 	if v.ContentMD5 != nil && len(*v.ContentMD5) > 0 {
 		locationName := "Content-Md5"
 		encoder.SetHeader(locationName).String(*v.ContentMD5)
@@ -6382,6 +6628,11 @@ func awsRestxml_serializeOpHttpBindingsPutBucketVersioningInput(v *PutBucketVers
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
+	}
+
+	if len(v.ChecksumAlgorithm) > 0 {
+		locationName := "X-Amz-Sdk-Checksum-Algorithm"
+		encoder.SetHeader(locationName).String(string(v.ChecksumAlgorithm))
 	}
 
 	if v.ContentMD5 != nil && len(*v.ContentMD5) > 0 {
@@ -6480,6 +6731,11 @@ func awsRestxml_serializeOpHttpBindingsPutBucketWebsiteInput(v *PutBucketWebsite
 		}
 	}
 
+	if len(v.ChecksumAlgorithm) > 0 {
+		locationName := "X-Amz-Sdk-Checksum-Algorithm"
+		encoder.SetHeader(locationName).String(string(v.ChecksumAlgorithm))
+	}
+
 	if v.ContentMD5 != nil && len(*v.ContentMD5) > 0 {
 		locationName := "Content-Md5"
 		encoder.SetHeader(locationName).String(*v.ContentMD5)
@@ -6572,6 +6828,31 @@ func awsRestxml_serializeOpHttpBindingsPutObjectInput(v *PutObjectInput, encoder
 	if v.CacheControl != nil && len(*v.CacheControl) > 0 {
 		locationName := "Cache-Control"
 		encoder.SetHeader(locationName).String(*v.CacheControl)
+	}
+
+	if len(v.ChecksumAlgorithm) > 0 {
+		locationName := "X-Amz-Sdk-Checksum-Algorithm"
+		encoder.SetHeader(locationName).String(string(v.ChecksumAlgorithm))
+	}
+
+	if v.ChecksumCRC32 != nil && len(*v.ChecksumCRC32) > 0 {
+		locationName := "X-Amz-Checksum-Crc32"
+		encoder.SetHeader(locationName).String(*v.ChecksumCRC32)
+	}
+
+	if v.ChecksumCRC32C != nil && len(*v.ChecksumCRC32C) > 0 {
+		locationName := "X-Amz-Checksum-Crc32c"
+		encoder.SetHeader(locationName).String(*v.ChecksumCRC32C)
+	}
+
+	if v.ChecksumSHA1 != nil && len(*v.ChecksumSHA1) > 0 {
+		locationName := "X-Amz-Checksum-Sha1"
+		encoder.SetHeader(locationName).String(*v.ChecksumSHA1)
+	}
+
+	if v.ChecksumSHA256 != nil && len(*v.ChecksumSHA256) > 0 {
+		locationName := "X-Amz-Checksum-Sha256"
+		encoder.SetHeader(locationName).String(*v.ChecksumSHA256)
 	}
 
 	if v.ContentDisposition != nil && len(*v.ContentDisposition) > 0 {
@@ -6803,6 +7084,11 @@ func awsRestxml_serializeOpHttpBindingsPutObjectAclInput(v *PutObjectAclInput, e
 		}
 	}
 
+	if len(v.ChecksumAlgorithm) > 0 {
+		locationName := "X-Amz-Sdk-Checksum-Algorithm"
+		encoder.SetHeader(locationName).String(string(v.ChecksumAlgorithm))
+	}
+
 	if v.ContentMD5 != nil && len(*v.ContentMD5) > 0 {
 		locationName := "Content-Md5"
 		encoder.SetHeader(locationName).String(*v.ContentMD5)
@@ -6937,6 +7223,11 @@ func awsRestxml_serializeOpHttpBindingsPutObjectLegalHoldInput(v *PutObjectLegal
 		}
 	}
 
+	if len(v.ChecksumAlgorithm) > 0 {
+		locationName := "X-Amz-Sdk-Checksum-Algorithm"
+		encoder.SetHeader(locationName).String(string(v.ChecksumAlgorithm))
+	}
+
 	if v.ContentMD5 != nil && len(*v.ContentMD5) > 0 {
 		locationName := "Content-Md5"
 		encoder.SetHeader(locationName).String(*v.ContentMD5)
@@ -7046,6 +7337,11 @@ func awsRestxml_serializeOpHttpBindingsPutObjectLockConfigurationInput(v *PutObj
 		}
 	}
 
+	if len(v.ChecksumAlgorithm) > 0 {
+		locationName := "X-Amz-Sdk-Checksum-Algorithm"
+		encoder.SetHeader(locationName).String(string(v.ChecksumAlgorithm))
+	}
+
 	if v.ContentMD5 != nil && len(*v.ContentMD5) > 0 {
 		locationName := "Content-Md5"
 		encoder.SetHeader(locationName).String(*v.ContentMD5)
@@ -7150,6 +7446,11 @@ func awsRestxml_serializeOpHttpBindingsPutObjectRetentionInput(v *PutObjectReten
 	if v.BypassGovernanceRetention {
 		locationName := "X-Amz-Bypass-Governance-Retention"
 		encoder.SetHeader(locationName).Boolean(v.BypassGovernanceRetention)
+	}
+
+	if len(v.ChecksumAlgorithm) > 0 {
+		locationName := "X-Amz-Sdk-Checksum-Algorithm"
+		encoder.SetHeader(locationName).String(string(v.ChecksumAlgorithm))
 	}
 
 	if v.ContentMD5 != nil && len(*v.ContentMD5) > 0 {
@@ -7261,6 +7562,11 @@ func awsRestxml_serializeOpHttpBindingsPutObjectTaggingInput(v *PutObjectTagging
 		}
 	}
 
+	if len(v.ChecksumAlgorithm) > 0 {
+		locationName := "X-Amz-Sdk-Checksum-Algorithm"
+		encoder.SetHeader(locationName).String(string(v.ChecksumAlgorithm))
+	}
+
 	if v.ContentMD5 != nil && len(*v.ContentMD5) > 0 {
 		locationName := "Content-Md5"
 		encoder.SetHeader(locationName).String(*v.ContentMD5)
@@ -7370,6 +7676,11 @@ func awsRestxml_serializeOpHttpBindingsPutPublicAccessBlockInput(v *PutPublicAcc
 		}
 	}
 
+	if len(v.ChecksumAlgorithm) > 0 {
+		locationName := "X-Amz-Sdk-Checksum-Algorithm"
+		encoder.SetHeader(locationName).String(string(v.ChecksumAlgorithm))
+	}
+
 	if v.ContentMD5 != nil && len(*v.ContentMD5) > 0 {
 		locationName := "Content-Md5"
 		encoder.SetHeader(locationName).String(*v.ContentMD5)
@@ -7459,6 +7770,11 @@ func awsRestxml_serializeOpHttpBindingsRestoreObjectInput(v *RestoreObjectInput,
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
+	}
+
+	if len(v.ChecksumAlgorithm) > 0 {
+		locationName := "X-Amz-Sdk-Checksum-Algorithm"
+		encoder.SetHeader(locationName).String(string(v.ChecksumAlgorithm))
 	}
 
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
@@ -7737,6 +8053,31 @@ func awsRestxml_serializeOpHttpBindingsUploadPartInput(v *UploadPartInput, encod
 		}
 	}
 
+	if len(v.ChecksumAlgorithm) > 0 {
+		locationName := "X-Amz-Sdk-Checksum-Algorithm"
+		encoder.SetHeader(locationName).String(string(v.ChecksumAlgorithm))
+	}
+
+	if v.ChecksumCRC32 != nil && len(*v.ChecksumCRC32) > 0 {
+		locationName := "X-Amz-Checksum-Crc32"
+		encoder.SetHeader(locationName).String(*v.ChecksumCRC32)
+	}
+
+	if v.ChecksumCRC32C != nil && len(*v.ChecksumCRC32C) > 0 {
+		locationName := "X-Amz-Checksum-Crc32c"
+		encoder.SetHeader(locationName).String(*v.ChecksumCRC32C)
+	}
+
+	if v.ChecksumSHA1 != nil && len(*v.ChecksumSHA1) > 0 {
+		locationName := "X-Amz-Checksum-Sha1"
+		encoder.SetHeader(locationName).String(*v.ChecksumSHA1)
+	}
+
+	if v.ChecksumSHA256 != nil && len(*v.ChecksumSHA256) > 0 {
+		locationName := "X-Amz-Checksum-Sha256"
+		encoder.SetHeader(locationName).String(*v.ChecksumSHA256)
+	}
+
 	if v.ContentLength != 0 {
 		locationName := "Content-Length"
 		encoder.SetHeader(locationName).Long(v.ContentLength)
@@ -8012,6 +8353,26 @@ func awsRestxml_serializeOpHttpBindingsWriteGetObjectResponseInput(v *WriteGetOb
 	if v.CacheControl != nil && len(*v.CacheControl) > 0 {
 		locationName := "X-Amz-Fwd-Header-Cache-Control"
 		encoder.SetHeader(locationName).String(*v.CacheControl)
+	}
+
+	if v.ChecksumCRC32 != nil && len(*v.ChecksumCRC32) > 0 {
+		locationName := "X-Amz-Fwd-Header-X-Amz-Checksum-Crc32"
+		encoder.SetHeader(locationName).String(*v.ChecksumCRC32)
+	}
+
+	if v.ChecksumCRC32C != nil && len(*v.ChecksumCRC32C) > 0 {
+		locationName := "X-Amz-Fwd-Header-X-Amz-Checksum-Crc32c"
+		encoder.SetHeader(locationName).String(*v.ChecksumCRC32C)
+	}
+
+	if v.ChecksumSHA1 != nil && len(*v.ChecksumSHA1) > 0 {
+		locationName := "X-Amz-Fwd-Header-X-Amz-Checksum-Sha1"
+		encoder.SetHeader(locationName).String(*v.ChecksumSHA1)
+	}
+
+	if v.ChecksumSHA256 != nil && len(*v.ChecksumSHA256) > 0 {
+		locationName := "X-Amz-Fwd-Header-X-Amz-Checksum-Sha256"
+		encoder.SetHeader(locationName).String(*v.ChecksumSHA256)
 	}
 
 	if v.ContentDisposition != nil && len(*v.ContentDisposition) > 0 {
@@ -8540,6 +8901,50 @@ func awsRestxml_serializeDocumentCompletedMultipartUpload(v *types.CompletedMult
 
 func awsRestxml_serializeDocumentCompletedPart(v *types.CompletedPart, value smithyxml.Value) error {
 	defer value.Close()
+	if v.ChecksumCRC32 != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "ChecksumCRC32",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.ChecksumCRC32)
+	}
+	if v.ChecksumCRC32C != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "ChecksumCRC32C",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.ChecksumCRC32C)
+	}
+	if v.ChecksumSHA1 != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "ChecksumSHA1",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.ChecksumSHA1)
+	}
+	if v.ChecksumSHA256 != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "ChecksumSHA256",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.ChecksumSHA256)
+	}
 	if v.ETag != nil {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
