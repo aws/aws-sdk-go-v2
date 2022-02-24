@@ -56,7 +56,7 @@ var defaultAWSConfigResolvers = []awsConfigResolver{
 	resolveAPIOptions,
 
 	// Resolves the DefaultsMode that should be used by SDK clients. If this
-	// mode is set to AutoDefaultsMode.
+	// mode is set to DefaultsModeAuto.
 	//
 	// Comes after HTTPClient and CustomCABundle to ensure the HTTP client is
 	// configured if provided before invoking IMDS if mode is auto. Comes
