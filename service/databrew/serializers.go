@@ -4085,6 +4085,11 @@ func awsRestjson1_serializeDocumentOutput(v *types.Output, value smithyjson.Valu
 		}
 	}
 
+	if v.MaxOutputFiles != nil {
+		ok := object.Key("MaxOutputFiles")
+		ok.Integer(*v.MaxOutputFiles)
+	}
+
 	if v.Overwrite {
 		ok := object.Key("Overwrite")
 		ok.Boolean(v.Overwrite)

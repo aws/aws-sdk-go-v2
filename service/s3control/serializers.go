@@ -5891,6 +5891,17 @@ func awsRestxml_serializeDocumentS3CopyObjectOperation(v *types.S3CopyObjectOper
 		el := value.MemberElement(root)
 		el.String(string(v.CannedAccessControlList))
 	}
+	if len(v.ChecksumAlgorithm) > 0 {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "ChecksumAlgorithm",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(string(v.ChecksumAlgorithm))
+	}
 	if len(v.MetadataDirective) > 0 {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{

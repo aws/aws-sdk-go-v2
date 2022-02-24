@@ -34,8 +34,9 @@ func (c *Client) DeleteBucketAccessKey(ctx context.Context, params *DeleteBucket
 
 type DeleteBucketAccessKeyInput struct {
 
-	// The ID of the access key to delete. Use the GetBucketAccessKeys action to get a
-	// list of access key IDs that you can specify.
+	// The ID of the access key to delete. Use the GetBucketAccessKeys
+	// (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetBucketAccessKeys.html)
+	// action to get a list of access key IDs that you can specify.
 	//
 	// This member is required.
 	AccessKeyId *string

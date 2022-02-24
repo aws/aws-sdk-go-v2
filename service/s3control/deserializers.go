@@ -13348,6 +13348,19 @@ func awsRestxml_deserializeDocumentS3CopyObjectOperation(v **types.S3CopyObjectO
 				sv.CannedAccessControlList = types.S3CannedAccessControlList(xtv)
 			}
 
+		case strings.EqualFold("ChecksumAlgorithm", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ChecksumAlgorithm = types.S3ChecksumAlgorithm(xtv)
+			}
+
 		case strings.EqualFold("MetadataDirective", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

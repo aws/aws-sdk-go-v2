@@ -1200,6 +1200,12 @@ type S3CopyObjectOperation struct {
 	//
 	CannedAccessControlList S3CannedAccessControlList
 
+	// Indicates the algorithm you want Amazon S3 to use to create the checksum. For
+	// more information see  Checking object integrity
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/CheckingObjectIntegrity.xml)
+	// in the Amazon S3 User Guide.
+	ChecksumAlgorithm S3ChecksumAlgorithm
+
 	//
 	MetadataDirective S3MetadataDirective
 

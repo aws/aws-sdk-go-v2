@@ -13,7 +13,9 @@ import (
 
 // Returns the bundles that you can apply to a Amazon Lightsail bucket. The bucket
 // bundle specifies the monthly cost, storage quota, and data transfer quota for a
-// bucket. Use the UpdateBucketBundle action to update the bundle for a bucket.
+// bucket. Use the UpdateBucketBundle
+// (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_UpdateBucketBundle.html)
+// action to update the bundle for a bucket.
 func (c *Client) GetBucketBundles(ctx context.Context, params *GetBucketBundlesInput, optFns ...func(*Options)) (*GetBucketBundlesOutput, error) {
 	if params == nil {
 		params = &GetBucketBundlesInput{}

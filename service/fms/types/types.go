@@ -141,6 +141,9 @@ type AwsVPCSecurityGroupViolation struct {
 // Details of the resource that is not protected by the policy.
 type ComplianceViolator struct {
 
+	// Metadata about the resource that doesn't comply with the policy scope.
+	Metadata map[string]string
+
 	// The resource ID.
 	ResourceId *string
 
@@ -426,6 +429,45 @@ type ExpectedRoute struct {
 	noSmithyDocumentSerde
 }
 
+// Contains details about the firewall subnet that violates the policy scope.
+type FirewallSubnetIsOutOfScopeViolation struct {
+
+	// The ID of the firewall subnet that violates the policy scope.
+	FirewallSubnetId *string
+
+	// The Availability Zone of the firewall subnet that violates the policy scope.
+	SubnetAvailabilityZone *string
+
+	// The Availability Zone ID of the firewall subnet that violates the policy scope.
+	SubnetAvailabilityZoneId *string
+
+	// The VPC endpoint ID of the firewall subnet that violates the policy scope.
+	VpcEndpointId *string
+
+	// The VPC ID of the firewall subnet that violates the policy scope.
+	VpcId *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the actions that you can take to remediate scope
+// violations caused by your policy's FirewallCreationConfig.
+// FirewallCreationConfig is an optional configuration that you can use to choose
+// which Availability Zones Firewall Manager creates Network Firewall endpoints in.
+type FMSPolicyUpdateFirewallCreationConfigAction struct {
+
+	// Describes the remedial action.
+	Description *string
+
+	// A FirewallCreationConfig that you can copy into your current policy's
+	// SecurityServiceData
+	// (https://docs.aws.amazon.com/fms/2018-01-01/APIReference/API_SecurityServicePolicyData.html)
+	// in order to remedy scope violations.
+	FirewallCreationConfig *string
+
+	noSmithyDocumentSerde
+}
+
 // Violation detail for an internet gateway route with an inactive state in the
 // customer subnet route table or Network Firewall subnet route table.
 type NetworkFirewallBlackHoleRouteDetectedViolation struct {
@@ -629,6 +671,22 @@ type NetworkFirewallMissingSubnetViolation struct {
 	noSmithyDocumentSerde
 }
 
+// Configures the firewall policy deployment model of Network Firewall. For
+// information about Network Firewall deployment models, see Network Firewall
+// example architectures with routing
+// (https://docs.aws.amazon.com/network-firewall/latest/developerguide/architectures.html)
+// in the Network Firewall Developer Guide.
+type NetworkFirewallPolicy struct {
+
+	// Defines the deployment model to use for the firewall policy. To use a
+	// distributed model, set PolicyOption
+	// (https://docs.aws.amazon.com/fms/2018-01-01/APIReference/API_PolicyOption.html)
+	// to NULL.
+	FirewallDeploymentModel FirewallDeploymentModel
+
+	noSmithyDocumentSerde
+}
+
 // The definition of the Network Firewall firewall policy.
 type NetworkFirewallPolicyDescription struct {
 
@@ -731,6 +789,8 @@ type Policy struct {
 	// If set to True, resources with the tags that are specified in the ResourceTag
 	// array are not in scope of the policy. If set to False, and the ResourceTag array
 	// is not null, only resources with the specified tags are in scope of the policy.
+	// This option isn't available for the centralized deployment model when creating
+	// policies to configure Network Firewall.
 	//
 	// This member is required.
 	ExcludeResourceTags bool
@@ -800,6 +860,9 @@ type Policy struct {
 	// together in a single map, separated with a comma. For example, the following is
 	// a valid map: {“ACCOUNT” : [“accountID1”, “accountID2”], “ORG_UNIT” : [“ouid111”,
 	// “ouid112”]}.
+	//
+	// This option isn't available for the centralized deployment model
+	// when creating policies to configure Network Firewall.
 	ExcludeMap map[string][]string
 
 	// Specifies the Amazon Web Services account IDs and Organizations organizational
@@ -824,6 +887,9 @@ type Policy struct {
 	// together in a single map, separated with a comma. For example, the following is
 	// a valid map: {“ACCOUNT” : [“accountID1”, “accountID2”], “ORG_UNIT” : [“ouid111”,
 	// “ouid112”]}.
+	//
+	// This option isn't available for the centralized deployment model
+	// when creating policies to configure Network Firewall.
 	IncludeMap map[string][]string
 
 	// The ID of the Firewall Manager policy.
@@ -905,6 +971,16 @@ type PolicyComplianceStatus struct {
 
 	// The Amazon Web Services account that created the Firewall Manager policy.
 	PolicyOwner *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the Network Firewall firewall policy options to configure a centralized
+// deployment model.
+type PolicyOption struct {
+
+	// Defines the deployment model to use for the firewall policy.
+	NetworkFirewallPolicy *NetworkFirewallPolicy
 
 	noSmithyDocumentSerde
 }
@@ -1062,6 +1138,9 @@ type RemediationAction struct {
 	// Information about the ReplaceRouteTableAssociation action in the Amazon EC2 API.
 	EC2ReplaceRouteTableAssociationAction *EC2ReplaceRouteTableAssociationAction
 
+	// The remedial action to take when updating a firewall configuration.
+	FMSPolicyUpdateFirewallCreationConfigAction *FMSPolicyUpdateFirewallCreationConfigAction
+
 	noSmithyDocumentSerde
 }
 
@@ -1126,6 +1205,9 @@ type ResourceViolation struct {
 	// group that's already associated.
 	DnsRuleGroupPriorityConflictViolation *DnsRuleGroupPriorityConflictViolation
 
+	// Contains details about the firewall subnet that violates the policy scope.
+	FirewallSubnetIsOutOfScopeViolation *FirewallSubnetIsOutOfScopeViolation
+
 	// Violation detail for an internet gateway route with an inactive state in the
 	// customer subnet route table or Network Firewall subnet route table.
 	NetworkFirewallBlackHoleRouteDetectedViolation *NetworkFirewallBlackHoleRouteDetectedViolation
@@ -1169,6 +1251,9 @@ type ResourceViolation struct {
 	// remediation action is a list of individual remediation actions.
 	PossibleRemediationActions *PossibleRemediationActions
 
+	// Contains details about the route endpoint that violates the policy scope.
+	RouteHasOutOfScopeEndpointViolation *RouteHasOutOfScopeEndpointViolation
+
 	noSmithyDocumentSerde
 }
 
@@ -1186,6 +1271,48 @@ type Route struct {
 
 	// The type of target for the route.
 	TargetType TargetType
+
+	noSmithyDocumentSerde
+}
+
+// Contains details about the route endpoint that violates the policy scope.
+type RouteHasOutOfScopeEndpointViolation struct {
+
+	// The route table associated with the current firewall subnet.
+	CurrentFirewallSubnetRouteTable *string
+
+	// The current route table associated with the Internet Gateway.
+	CurrentInternetGatewayRouteTable *string
+
+	// The ID of the firewall subnet.
+	FirewallSubnetId *string
+
+	// The list of firewall subnet routes.
+	FirewallSubnetRoutes []Route
+
+	// The ID of the Internet Gateway.
+	InternetGatewayId *string
+
+	// The routes in the route table associated with the Internet Gateway.
+	InternetGatewayRoutes []Route
+
+	// The ID of the route table.
+	RouteTableId *string
+
+	// The subnet's Availability Zone.
+	SubnetAvailabilityZone *string
+
+	// The ID of the subnet's Availability Zone.
+	SubnetAvailabilityZoneId *string
+
+	// The ID of the subnet associated with the route that violates the policy scope.
+	SubnetId *string
+
+	// The list of routes that violate the route table.
+	ViolatingRoutes []Route
+
+	// The VPC ID of the route that violates the policy scope.
+	VpcId *string
 
 	noSmithyDocumentSerde
 }
@@ -1256,11 +1383,124 @@ type SecurityServicePolicyData struct {
 	// Valid values for preProcessRuleGroups are between 1 and 99. Valid values for
 	// postProcessRuleGroups are between 9901 and 10000.
 	//
-	// * Example:
-	// NETWORK_FIREWALL"{\"type\":\"NETWORK_FIREWALL\",\"networkFirewallStatelessRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-west-1:1234567891011:stateless-rulegroup/rulegroup2\",\"priority\":10}],\"networkFirewallStatelessDefaultActions\":[\"aws:pass\",\"custom1\"],\"networkFirewallStatelessFragmentDefaultActions\":[\"custom2\",\"aws:pass\"],\"networkFirewallStatelessCustomActions\":[{\"actionName\":\"custom1\",\"actionDefinition\":{\"publishMetricAction\":{\"dimensions\":[{\"value\":\"dimension1\"}]}}},{\"actionName\":\"custom2\",\"actionDefinition\":{\"publishMetricAction\":{\"dimensions\":[{\"value\":\"dimension2\"}]}}}],\"networkFirewallStatefulRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-west-1:1234567891011:stateful-rulegroup/rulegroup1\"}],\"networkFirewallOrchestrationConfig\":{\"singleFirewallEndpointPerVPC\":true,\"allowedIPV4CidrList\":[\"10.24.34.0/28\"]}
+	// * Example: NETWORK_FIREWALL -
+	// Centralized deployment model.
+	// "{\"type\":\"NETWORK_FIREWALL\",\"awsNetworkFirewallConfig\":{\"networkFirewallStatelessRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-east-1:123456789011:stateless-rulegroup/test\",\"priority\":1}],\"networkFirewallStatelessDefaultActions\":[\"aws:forward_to_sfe\",\"customActionName\"],\"networkFirewallStatelessFragmentDefaultActions\":[\"aws:forward_to_sfe\",\"customActionName\"],\"networkFirewallStatelessCustomActions\":[{\"actionName\":\"customActionName\",\"actionDefinition\":{\"publishMetricAction\":{\"dimensions\":[{\"value\":\"metricdimensionvalue\"}]}}}],\"networkFirewallStatefulRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-east-1:123456789011:stateful-rulegroup/test\"}],\"networkFirewallLoggingConfiguration\":{\"logDestinationConfigs\":[{\"logDestinationType\":\"S3\",\"logType\":\"ALERT\",\"logDestination\":{\"bucketName\":\"s3-bucket-name\"}},{\"logDestinationType\":\"S3\",\"logType\":\"FLOW\",\"logDestination\":{\"bucketName\":\"s3-bucket-name\"}}],\"overrideExistingConfig\":true}},\"firewallDeploymentModel\":{\"centralizedFirewallDeploymentModel\":{\"centralizedFirewallOrchestrationConfig\":{\"inspectionVpcIds\":[{\"resourceId\":\"vpc-1234\",\"accountId\":\"123456789011\"}],\"firewallCreationConfig\":{\"endpointLocation\":{\"availabilityZoneConfigList\":[{\"availabilityZoneId\":null,\"availabilityZoneName\":\"us-east-1a\",\"allowedIPV4CidrList\":[\"10.0.0.0/28\"]}]}},\"allowedIPV4CidrList\":[]}}}}"
+	// To use the centralized deployment model, you must set PolicyOption
+	// (https://docs.aws.amazon.com/fms/2018-01-01/APIReference/API_PolicyOption.html)
+	// to CENTRALIZED.
+	//
+	// * Example: NETWORK_FIREWALL - Distributed deployment model with
+	// automatic Availability Zone configuration. With automatic Availbility Zone
+	// configuration, Firewall Manager chooses which Availability Zones to create the
+	// endpoints in. "{ \"type\": \"NETWORK_FIREWALL\",
+	// \"networkFirewallStatelessRuleGroupReferences\": [ { \"resourceARN\":
+	// \"arn:aws:network-firewall:us-east-1:123456789011:stateless-rulegroup/test\",
+	// \"priority\": 1 } ], \"networkFirewallStatelessDefaultActions\": [
+	// \"aws:forward_to_sfe\", \"customActionName\" ],
+	// \"networkFirewallStatelessFragmentDefaultActions\": [ \"aws:forward_to_sfe\",
+	// \"customActionName\" ], \"networkFirewallStatelessCustomActions\": [ {
+	// \"actionName\": \"customActionName\", \"actionDefinition\": {
+	// \"publishMetricAction\": { \"dimensions\": [ { \"value\":
+	// \"metricdimensionvalue\" } ] } } } ],
+	// \"networkFirewallStatefulRuleGroupReferences\": [ { \"resourceARN\":
+	// \"arn:aws:network-firewall:us-east-1:123456789011:stateful-rulegroup/test\" } ],
+	// \"networkFirewallOrchestrationConfig\": { \"singleFirewallEndpointPerVPC\":
+	// false, \"allowedIPV4CidrList\": [ \"10.0.0.0/28\", \"192.168.0.0/28\" ],
+	// \"routeManagementAction\": \"OFF\" }, \"networkFirewallLoggingConfiguration\": {
+	// \"logDestinationConfigs\": [ { \"logDestinationType\": \"S3\", \"logType\":
+	// \"ALERT\", \"logDestination\": { \"bucketName\": \"s3-bucket-name\" } }, {
+	// \"logDestinationType\": \"S3\", \"logType\": \"FLOW\", \"logDestination\": {
+	// \"bucketName\": \"s3-bucket-name\" } } ], \"overrideExistingConfig\": true } }"
+	// To use the distributed deployment model, you must set PolicyOption
+	// (https://docs.aws.amazon.com/fms/2018-01-01/APIReference/API_PolicyOption.html)
+	// to NULL.
+	//
+	// * Example: NETWORK_FIREWALL - Distributed deployment model with
+	// automatic Availability Zone configuration, and route management. "{ \"type\":
+	// \"NETWORK_FIREWALL\", \"networkFirewallStatelessRuleGroupReferences\": [ {
+	// \"resourceARN\":
+	// \"arn:aws:network-firewall:us-east-1:123456789011:stateless-rulegroup/test\",
+	// \"priority\": 1 } ], \"networkFirewallStatelessDefaultActions\": [
+	// \"aws:forward_to_sfe\", \"customActionName\" ],
+	// \"networkFirewallStatelessFragmentDefaultActions\": [ \"aws:forward_to_sfe\",
+	// \"customActionName\" ], \"networkFirewallStatelessCustomActions\": [ {
+	// \"actionName\": \"customActionName\", \"actionDefinition\": {
+	// \"publishMetricAction\": { \"dimensions\": [ { \"value\":
+	// \"metricdimensionvalue\" } ] } } } ],
+	// \"networkFirewallStatefulRuleGroupReferences\": [ { \"resourceARN\":
+	// \"arn:aws:network-firewall:us-east-1:123456789011:stateful-rulegroup/test\" } ],
+	// \"networkFirewallOrchestrationConfig\": { \"singleFirewallEndpointPerVPC\":
+	// false, \"allowedIPV4CidrList\": [ \"10.0.0.0/28\", \"192.168.0.0/28\" ],
+	// \"routeManagementAction\": \"MONITOR\", \"routeManagementTargetTypes\": [
+	// \"InternetGateway\" ] }, \"networkFirewallLoggingConfiguration\": {
+	// \"logDestinationConfigs\": [ { \"logDestinationType\": \"S3\", \"logType\":
+	// \"ALERT\", \"logDestination\": { \"bucketName\": \"s3-bucket-name\" } }, {
+	// \"logDestinationType\": \"S3\", \"logType\": \"FLOW\", \"logDestination\": {
+	// \"bucketName\": \"s3-bucket-name\" } } ], \"overrideExistingConfig\": true }
 	// }"
 	//
-	// * Specification for SHIELD_ADVANCED for Amazon CloudFront distributions
+	// * Example: NETWORK_FIREWALL - Distributed deployment model with custom
+	// Availability Zone configuration. With custom Availability Zone configuration,
+	// you define which specific Availability Zones to create endpoints in by
+	// configuring firewallCreationConfig. "{
+	// \"type\":\"NETWORK_FIREWALL\",\"networkFirewallStatelessRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-east-1:123456789011:stateless-rulegroup/test\",\"priority\":1}],
+	// \"networkFirewallStatelessDefaultActions\":[ \"aws:forward_to_sfe\",
+	// \"customActionName\" ], \"networkFirewallStatelessFragmentDefaultActions\":[
+	// \"aws:forward_to_sfe\", \"fragmentcustomactionname\" ],
+	// \"networkFirewallStatelessCustomActions\":[ {
+	// \"actionName\":\"customActionName\", \"actionDefinition\":{
+	// \"publishMetricAction\":{ \"dimensions\":[ { \"value\":\"metricdimensionvalue\"
+	// } ] } } }, { \"actionName\":\"fragmentcustomactionname\", \"actionDefinition\":{
+	// \"publishMetricAction\":{ \"dimensions\":[ {
+	// \"value\":\"fragmentmetricdimensionvalue\" } ] } } } ],
+	// \"networkFirewallStatefulRuleGroupReferences\":[ {
+	// \"resourceARN\":\"arn:aws:network-firewall:us-east-1:123456789011:stateful-rulegroup/test\"
+	// } ], \"networkFirewallOrchestrationConfig\":{ \"firewallCreationConfig\":{
+	// \"endpointLocation\":{ \"availabilityZoneConfigList\":[ {
+	// \"availabilityZoneId\":null, \"availabilityZoneName\":\"us-east-1a\",
+	// \"allowedIPV4CidrList\":[ \"10.0.0.0/28\" ] }, { ¯\"availabilityZoneId\":null,
+	// \"availabilityZoneName\":\"us-east-1b\", \"allowedIPV4CidrList\":[
+	// \"10.0.0.0/28\" ] } ] } }, \"singleFirewallEndpointPerVPC\":false,
+	// \"allowedIPV4CidrList\":null, \"routeManagementAction\":\"OFF\",
+	// \"networkFirewallLoggingConfiguration\":{ \"logDestinationConfigs\":[ {
+	// \"logDestinationType\":\"S3\", \"logType\":\"ALERT\", \"logDestination\":{
+	// \"bucketName\":\"s3-bucket-name\" } }, { \"logDestinationType\":\"S3\",
+	// \"logType\":\"FLOW\", \"logDestination\":{ \"bucketName\":\"s3-bucket-name\" } }
+	// ], \"overrideExistingConfig\":boolean } }"
+	//
+	// * Example: NETWORK_FIREWALL -
+	// Distributed deployment model with custom Availability Zone configuration, and
+	// route management. "{
+	// \"type\":\"NETWORK_FIREWALL\",\"networkFirewallStatelessRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-east-1:123456789011:stateless-rulegroup/test\",\"priority\":1}],
+	// \"networkFirewallStatelessDefaultActions\":[ \"aws:forward_to_sfe\",
+	// \"customActionName\" ], \"networkFirewallStatelessFragmentDefaultActions\":[
+	// \"aws:forward_to_sfe\", \"fragmentcustomactionname\" ],
+	// \"networkFirewallStatelessCustomActions\":[ {
+	// \"actionName\":\"customActionName\", \"actionDefinition\":{
+	// \"publishMetricAction\":{ \"dimensions\":[ { \"value\":\"metricdimensionvalue\"
+	// } ] } } }, { \"actionName\":\"fragmentcustomactionname\", \"actionDefinition\":{
+	// \"publishMetricAction\":{ \"dimensions\":[ {
+	// \"value\":\"fragmentmetricdimensionvalue\" } ] } } } ],
+	// \"networkFirewallStatefulRuleGroupReferences\":[ {
+	// \"resourceARN\":\"arn:aws:network-firewall:us-east-1:123456789011:stateful-rulegroup/test\"
+	// } ], \"networkFirewallOrchestrationConfig\":{ \"firewallCreationConfig\":{
+	// \"endpointLocation\":{ \"availabilityZoneConfigList\":[ {
+	// \"availabilityZoneId\":null, \"availabilityZoneName\":\"us-east-1a\",
+	// \"allowedIPV4CidrList\":[ \"10.0.0.0/28\" ] }, { ¯\"availabilityZoneId\":null,
+	// \"availabilityZoneName\":\"us-east-1b\", \"allowedIPV4CidrList\":[
+	// \"10.0.0.0/28\" ] } ] } }, \"singleFirewallEndpointPerVPC\":false,
+	// \"allowedIPV4CidrList\":null, \"routeManagementAction\":\"MONITOR\",
+	// \"routeManagementTargetTypes\":[ \"InternetGateway\" ],
+	// \"routeManagementConfig\":{ \"allowCrossAZTrafficIfNoEndpoint\":true } },
+	// \"networkFirewallLoggingConfiguration\":{ \"logDestinationConfigs\":[ {
+	// \"logDestinationType\":\"S3\", \"logType\":\"ALERT\", \"logDestination\":{
+	// \"bucketName\":\"s3-bucket-name\" } }, { \"logDestinationType\":\"S3\",
+	// \"logType\":\"FLOW\", \"logDestination\":{ \"bucketName\":\"s3-bucket-name\" } }
+	// ], \"overrideExistingConfig\":boolean } }"
+	//
+	// * Specification for SHIELD_ADVANCED
+	// for Amazon CloudFront distributions
 	// "{\"type\":\"SHIELD_ADVANCED\",\"automaticResponseConfiguration\":
 	// {\"automaticResponseStatus\":\"ENABLED|IGNORED|DISABLED\",
 	// \"automaticResponseAction\":\"BLOCK|COUNT\"},
@@ -1307,6 +1547,10 @@ type SecurityServicePolicyData struct {
 	// * Example:
 	// SECURITY_GROUPS_USAGE_AUDIT"{\"type\":\"SECURITY_GROUPS_USAGE_AUDIT\",\"deleteUnusedSecurityGroups\":true,\"coalesceRedundantSecurityGroups\":true}"
 	ManagedServiceData *string
+
+	// Contains the Network Firewall firewall policy options to configure a centralized
+	// deployment model.
+	PolicyOption *PolicyOption
 
 	noSmithyDocumentSerde
 }
@@ -1397,7 +1641,9 @@ type ViolationDetail struct {
 	// Brief description for the requested resource.
 	ResourceDescription *string
 
-	// The ResourceTag objects associated with the resource.
+	// The ResourceTag objects associated with the resource. This option isn't
+	// available for the centralized deployment model when creating policies to
+	// configure Network Firewall.
 	ResourceTags []Tag
 
 	noSmithyDocumentSerde

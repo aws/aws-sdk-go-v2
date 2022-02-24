@@ -86,6 +86,22 @@ func (DestinationType) Values() []DestinationType {
 	}
 }
 
+type FirewallDeploymentModel string
+
+// Enum values for FirewallDeploymentModel
+const (
+	FirewallDeploymentModelCentralized FirewallDeploymentModel = "CENTRALIZED"
+)
+
+// Values returns all known values for FirewallDeploymentModel. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FirewallDeploymentModel) Values() []FirewallDeploymentModel {
+	return []FirewallDeploymentModel{
+		"CENTRALIZED",
+	}
+}
+
 type PolicyComplianceStatusType string
 
 // Enum values for PolicyComplianceStatusType
@@ -215,6 +231,8 @@ const (
 	ViolationReasonBlackHoleRouteDetected                  ViolationReason = "BLACK_HOLE_ROUTE_DETECTED"
 	ViolationReasonBlackHoleRouteDetectedInFirewallSubnet  ViolationReason = "BLACK_HOLE_ROUTE_DETECTED_IN_FIREWALL_SUBNET"
 	ViolationReasonResourceMissingDnsFirewall              ViolationReason = "RESOURCE_MISSING_DNS_FIREWALL"
+	ViolationReasonFirewallSubnetIsOutOfScope              ViolationReason = "FIREWALL_SUBNET_IS_OUT_OF_SCOPE"
+	ViolationReasonRouteHasOutOfScopeEndpoint              ViolationReason = "ROUTE_HAS_OUT_OF_SCOPE_ENDPOINT"
 )
 
 // Values returns all known values for ViolationReason. Note that this can be
@@ -247,5 +265,7 @@ func (ViolationReason) Values() []ViolationReason {
 		"BLACK_HOLE_ROUTE_DETECTED",
 		"BLACK_HOLE_ROUTE_DETECTED_IN_FIREWALL_SUBNET",
 		"RESOURCE_MISSING_DNS_FIREWALL",
+		"FIREWALL_SUBNET_IS_OUT_OF_SCOPE",
+		"ROUTE_HAS_OUT_OF_SCOPE_ENDPOINT",
 	}
 }

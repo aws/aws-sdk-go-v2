@@ -1553,6 +1553,18 @@ func awsAwsjson11_serializeDocumentCustomerPolicyScopeMap(v map[string][]string,
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentNetworkFirewallPolicy(v *types.NetworkFirewallPolicy, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.FirewallDeploymentModel) > 0 {
+		ok := object.Key("FirewallDeploymentModel")
+		ok.String(string(v.FirewallDeploymentModel))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentPolicy(v *types.Policy, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1623,6 +1635,20 @@ func awsAwsjson11_serializeDocumentPolicy(v *types.Policy, value smithyjson.Valu
 	if v.SecurityServicePolicyData != nil {
 		ok := object.Key("SecurityServicePolicyData")
 		if err := awsAwsjson11_serializeDocumentSecurityServicePolicyData(v.SecurityServicePolicyData, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPolicyOption(v *types.PolicyOption, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.NetworkFirewallPolicy != nil {
+		ok := object.Key("NetworkFirewallPolicy")
+		if err := awsAwsjson11_serializeDocumentNetworkFirewallPolicy(v.NetworkFirewallPolicy, ok); err != nil {
 			return err
 		}
 	}
@@ -1767,6 +1793,13 @@ func awsAwsjson11_serializeDocumentSecurityServicePolicyData(v *types.SecuritySe
 	if v.ManagedServiceData != nil {
 		ok := object.Key("ManagedServiceData")
 		ok.String(*v.ManagedServiceData)
+	}
+
+	if v.PolicyOption != nil {
+		ok := object.Key("PolicyOption")
+		if err := awsAwsjson11_serializeDocumentPolicyOption(v.PolicyOption, ok); err != nil {
+			return err
+		}
 	}
 
 	if len(v.Type) > 0 {
