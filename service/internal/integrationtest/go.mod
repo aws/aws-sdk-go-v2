@@ -9,7 +9,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.11.0
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.14.0
 	github.com/aws/aws-sdk-go-v2/service/athena v1.13.0
-	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.20.0
+	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.21.0
 	github.com/aws/aws-sdk-go-v2/service/batch v1.15.0
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.19.0
 	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.15.0
@@ -54,7 +54,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.14.0
 	github.com/aws/aws-sdk-go-v2/service/kms v1.15.0
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.18.0
-	github.com/aws/aws-sdk-go-v2/service/lightsail v1.16.0
+	github.com/aws/aws-sdk-go-v2/service/lightsail v1.17.0
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.10.0
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.15.0
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.12.0
@@ -63,11 +63,11 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/rds v1.17.0
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.20.0
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.16.0
-	github.com/aws/aws-sdk-go-v2/service/route53 v1.18.0
+	github.com/aws/aws-sdk-go-v2/service/route53 v1.19.0
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.11.0
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.14.0
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.25.0
-	github.com/aws/aws-sdk-go-v2/service/s3control v1.19.0
+	github.com/aws/aws-sdk-go-v2/service/s3control v1.20.0
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.14.0
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.12.0
 	github.com/aws/aws-sdk-go-v2/service/ses v1.13.0
