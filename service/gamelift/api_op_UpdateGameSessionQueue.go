@@ -16,8 +16,15 @@ import (
 // name to be updated and provide the new settings. When updating destinations,
 // provide a complete list of destinations. Learn more  Using Multi-Region Queues
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/queues-intro.html)
-// Related actions CreateGameSessionQueue | DescribeGameSessionQueues |
-// UpdateGameSessionQueue | DeleteGameSessionQueue | All APIs by task
+// Related actions CreateGameSessionQueue
+// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateGameSessionQueue.html)
+// | DescribeGameSessionQueues
+// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeGameSessionQueues.html)
+// | UpdateGameSessionQueue
+// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateGameSessionQueue.html)
+// | DeleteGameSessionQueue
+// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_DeleteGameSessionQueue.html)
+// | All APIs by task
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) UpdateGameSessionQueue(ctx context.Context, params *UpdateGameSessionQueueInput, optFns ...func(*Options)) (*UpdateGameSessionQueueOutput, error) {
 	if params == nil {
@@ -54,9 +61,10 @@ type UpdateGameSessionQueueInput struct {
 	Destinations []types.GameSessionQueueDestination
 
 	// A list of locations where a queue is allowed to place new game sessions.
-	// Locations are specified in the form of AWS Region codes, such as us-west-2. If
-	// this parameter is not set, game sessions can be placed in any queue location. To
-	// remove an existing filter configuration, pass in an empty set.
+	// Locations are specified in the form of Amazon Web Services Region codes, such as
+	// us-west-2. If this parameter is not set, game sessions can be placed in any
+	// queue location. To remove an existing filter configuration, pass in an empty
+	// set.
 	FilterConfiguration *types.FilterConfiguration
 
 	// An SNS topic ARN that is set up to receive game session placement notifications.

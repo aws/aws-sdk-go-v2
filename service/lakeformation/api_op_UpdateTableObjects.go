@@ -40,11 +40,6 @@ type UpdateTableObjectsInput struct {
 	// This member is required.
 	TableName *string
 
-	// The transaction at which to do the write.
-	//
-	// This member is required.
-	TransactionId *string
-
 	// A list of WriteOperation objects that define an object to add to or delete from
 	// the manifest for a governed table.
 	//
@@ -54,6 +49,9 @@ type UpdateTableObjectsInput struct {
 	// The catalog containing the governed table to update. Defaults to the caller’s
 	// account ID.
 	CatalogId *string
+
+	// The transaction at which to do the write.
+	TransactionId *string
 
 	noSmithyDocumentSerde
 }

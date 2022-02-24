@@ -12,10 +12,10 @@ import (
 )
 
 // Disables the automatic copying of snapshots from one region to another region
-// for a specified cluster. If your cluster and its snapshots are encrypted using a
-// customer master key (CMK) from Key Management Service, use
+// for a specified cluster. If your cluster and its snapshots are encrypted using
+// an encrypted symmetric key from Key Management Service, use
 // DeleteSnapshotCopyGrant to delete the grant that grants Amazon Redshift
-// permission to the CMK in the destination region.
+// permission to the key in the destination region.
 func (c *Client) DisableSnapshotCopy(ctx context.Context, params *DisableSnapshotCopyInput, optFns ...func(*Options)) (*DisableSnapshotCopyOutput, error) {
 	if params == nil {
 		params = &DisableSnapshotCopyInput{}

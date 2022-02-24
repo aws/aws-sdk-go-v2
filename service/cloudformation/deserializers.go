@@ -1741,6 +1741,114 @@ func awsAwsquery_deserializeOpErrorDescribeChangeSet(response *smithyhttp.Respon
 	}
 }
 
+type awsAwsquery_deserializeOpDescribeChangeSetHooks struct {
+}
+
+func (*awsAwsquery_deserializeOpDescribeChangeSetHooks) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsquery_deserializeOpDescribeChangeSetHooks) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsquery_deserializeOpErrorDescribeChangeSetHooks(response, &metadata)
+	}
+	output := &DescribeChangeSetHooksOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(response.Body, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return out, metadata, nil
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("DescribeChangeSetHooksResult")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+	err = awsAwsquery_deserializeOpDocumentDescribeChangeSetHooksOutput(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsquery_deserializeOpErrorDescribeChangeSetHooks(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
+	if err != nil {
+		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
+	}
+	errorBody.Seek(0, io.SeekStart)
+	switch {
+	case strings.EqualFold("ChangeSetNotFound", errorCode):
+		return awsAwsquery_deserializeErrorChangeSetNotFoundException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsquery_deserializeOpDescribePublisher struct {
 }
 
@@ -8730,6 +8838,23 @@ func awsAwsquery_deserializeDocumentChange(v **types.Change, decoder smithyxml.N
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("HookInvocationCount", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.HookInvocationCount = ptr.Int32(int32(i64))
+			}
+
 		case strings.EqualFold("ResourceChange", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentResourceChange(&sv.ResourceChange, nodeDecoder); err != nil {
@@ -8831,6 +8956,311 @@ func awsAwsquery_deserializeDocumentChangesUnwrapped(v *[]types.Change, decoder 
 	*v = sv
 	return nil
 }
+func awsAwsquery_deserializeDocumentChangeSetHook(v **types.ChangeSetHook, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.ChangeSetHook
+	if *v == nil {
+		sv = &types.ChangeSetHook{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("FailureMode", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.FailureMode = types.HookFailureMode(xtv)
+			}
+
+		case strings.EqualFold("InvocationPoint", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.InvocationPoint = types.HookInvocationPoint(xtv)
+			}
+
+		case strings.EqualFold("TargetDetails", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentChangeSetHookTargetDetails(&sv.TargetDetails, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("TypeConfigurationVersionId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.TypeConfigurationVersionId = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("TypeName", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.TypeName = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("TypeVersionId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.TypeVersionId = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentChangeSetHookResourceTargetDetails(v **types.ChangeSetHookResourceTargetDetails, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.ChangeSetHookResourceTargetDetails
+	if *v == nil {
+		sv = &types.ChangeSetHookResourceTargetDetails{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("LogicalResourceId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.LogicalResourceId = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("ResourceAction", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ResourceAction = types.ChangeAction(xtv)
+			}
+
+		case strings.EqualFold("ResourceType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ResourceType = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentChangeSetHooks(v *[]types.ChangeSetHook, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []types.ChangeSetHook
+	if *v == nil {
+		sv = make([]types.ChangeSetHook, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col types.ChangeSetHook
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsAwsquery_deserializeDocumentChangeSetHook(&destAddr, nodeDecoder); err != nil {
+				return err
+			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentChangeSetHooksUnwrapped(v *[]types.ChangeSetHook, decoder smithyxml.NodeDecoder) error {
+	var sv []types.ChangeSetHook
+	if *v == nil {
+		sv = make([]types.ChangeSetHook, 0)
+	} else {
+		sv = *v
+	}
+
+	switch {
+	default:
+		var mv types.ChangeSetHook
+		t := decoder.StartEl
+		_ = t
+		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		destAddr := &mv
+		if err := awsAwsquery_deserializeDocumentChangeSetHook(&destAddr, nodeDecoder); err != nil {
+			return err
+		}
+		mv = *destAddr
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
+func awsAwsquery_deserializeDocumentChangeSetHookTargetDetails(v **types.ChangeSetHookTargetDetails, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.ChangeSetHookTargetDetails
+	if *v == nil {
+		sv = &types.ChangeSetHookTargetDetails{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("ResourceTargetDetails", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentChangeSetHookResourceTargetDetails(&sv.ResourceTargetDetails, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("TargetType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.TargetType = types.HookTargetType(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsquery_deserializeDocumentChangeSetNotFoundException(v **types.ChangeSetNotFoundException, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -12903,6 +13333,71 @@ func awsAwsquery_deserializeDocumentStackEvent(v **types.StackEvent, decoder smi
 			{
 				xtv := string(val)
 				sv.EventId = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("HookFailureMode", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.HookFailureMode = types.HookFailureMode(xtv)
+			}
+
+		case strings.EqualFold("HookInvocationPoint", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.HookInvocationPoint = types.HookInvocationPoint(xtv)
+			}
+
+		case strings.EqualFold("HookStatus", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.HookStatus = types.HookStatus(xtv)
+			}
+
+		case strings.EqualFold("HookStatusReason", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.HookStatusReason = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("HookType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.HookType = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("LogicalResourceId", t.Name.Local):
@@ -18458,6 +18953,126 @@ func awsAwsquery_deserializeOpDocumentDescribeAccountLimitsOutput(v **DescribeAc
 			{
 				xtv := string(val)
 				sv.NextToken = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeOpDocumentDescribeChangeSetHooksOutput(v **DescribeChangeSetHooksOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *DescribeChangeSetHooksOutput
+	if *v == nil {
+		sv = &DescribeChangeSetHooksOutput{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("ChangeSetId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ChangeSetId = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("ChangeSetName", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ChangeSetName = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("Hooks", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentChangeSetHooks(&sv.Hooks, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("NextToken", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.NextToken = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("StackId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.StackId = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("StackName", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.StackName = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("Status", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Status = types.ChangeSetHooksStatus(xtv)
 			}
 
 		default:

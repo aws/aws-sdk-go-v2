@@ -11,7 +11,12 @@ import (
 )
 
 // Deletes the resource-based permission policy attached to the secret. To attach a
-// policy to a secret, use PutResourcePolicy.
+// policy to a secret, use PutResourcePolicy. Required permissions:
+// secretsmanager:DeleteResourcePolicy. For more information, see  IAM policy
+// actions for Secrets Manager
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions)
+// and Authentication and access control in Secrets Manager
+// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 func (c *Client) DeleteResourcePolicy(ctx context.Context, params *DeleteResourcePolicyInput, optFns ...func(*Options)) (*DeleteResourcePolicyOutput, error) {
 	if params == nil {
 		params = &DeleteResourcePolicyInput{}

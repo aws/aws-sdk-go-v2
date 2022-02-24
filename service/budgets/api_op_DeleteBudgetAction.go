@@ -29,7 +29,7 @@ func (c *Client) DeleteBudgetAction(ctx context.Context, params *DeleteBudgetAct
 
 type DeleteBudgetActionInput struct {
 
-	// The account ID of the user. It should be a 12-digit number.
+	// The account ID of the user. It's a 12-digit number.
 	//
 	// This member is required.
 	AccountId *string
@@ -50,7 +50,7 @@ type DeleteBudgetActionInput struct {
 
 type DeleteBudgetActionOutput struct {
 
-	// The account ID of the user. It should be a 12-digit number.
+	// The account ID of the user. It's a 12-digit number.
 	//
 	// This member is required.
 	AccountId *string

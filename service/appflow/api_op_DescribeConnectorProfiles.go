@@ -34,6 +34,11 @@ func (c *Client) DescribeConnectorProfiles(ctx context.Context, params *Describe
 
 type DescribeConnectorProfilesInput struct {
 
+	// The name of the connector. The name is unique for each ConnectorRegistration in
+	// your Amazon Web Services account. Only needed if calling for CUSTOMCONNECTOR
+	// connector type/.
+	ConnectorLabel *string
+
 	// The name of the connector profile. The name is unique for each ConnectorProfile
 	// in the Amazon Web Services account.
 	ConnectorProfileNames []string

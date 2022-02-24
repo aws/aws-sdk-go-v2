@@ -41,7 +41,11 @@ import (
 // security strategy, then adding or removing a tag can change permissions. If
 // successfully completing this operation would result in you losing your
 // permissions for this secret, then the operation is blocked and returns an Access
-// Denied error.
+// Denied error. Required permissions: secretsmanager:TagResource. For more
+// information, see  IAM policy actions for Secrets Manager
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions)
+// and Authentication and access control in Secrets Manager
+// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}

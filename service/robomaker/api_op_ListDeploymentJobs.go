@@ -13,7 +13,13 @@ import (
 )
 
 // Returns a list of deployment jobs for a fleet. You can optionally provide
-// filters to retrieve specific deployment jobs.
+// filters to retrieve specific deployment jobs. This API will no longer be
+// supported as of May 2, 2022. Use it to remove resources that were created for
+// Deployment Service.
+//
+// Deprecated: Support for the AWS RoboMaker application deployment feature has
+// ended. For additional information, see
+// https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.
 func (c *Client) ListDeploymentJobs(ctx context.Context, params *ListDeploymentJobsInput, optFns ...func(*Options)) (*ListDeploymentJobsOutput, error) {
 	if params == nil {
 		params = &ListDeploymentJobsInput{}

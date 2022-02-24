@@ -12,22 +12,22 @@ import (
 )
 
 // Searches an active index. Use this API to search your documents using query. The
-// Query operation enables to do faceted search and to filter results based on
-// document attributes. It also enables you to provide user context that Amazon
-// Kendra uses to enforce document access control in the search results. Amazon
-// Kendra searches your index for text content and question and answer (FAQ)
-// content. By default the response contains three types of results.
+// Query API enables to do faceted search and to filter results based on document
+// attributes. It also enables you to provide user context that Amazon Kendra uses
+// to enforce document access control in the search results. Amazon Kendra searches
+// your index for text content and question and answer (FAQ) content. By default
+// the response contains three types of results.
 //
-// * Relevant
-// passages
+// * Relevant passages
 //
-// * Matching FAQs
+// * Matching
+// FAQs
 //
 // * Relevant documents
 //
-// You can specify that the query
-// return only one type of result using the QueryResultTypeConfig parameter. Each
-// query returns the 100 most relevant results.
+// You can specify that the query return only one type
+// of result using the QueryResultTypeConfig parameter. Each query returns the 100
+// most relevant results.
 func (c *Client) Query(ctx context.Context, params *QueryInput, optFns ...func(*Options)) (*QueryOutput, error) {
 	if params == nil {
 		params = &QueryInput{}
@@ -46,7 +46,7 @@ func (c *Client) Query(ctx context.Context, params *QueryInput, optFns ...func(*
 type QueryInput struct {
 
 	// The unique identifier of the index to search. The identifier is returned in the
-	// response from the CreateIndex operation.
+	// response from the CreateIndex API.
 	//
 	// This member is required.
 	IndexId *string

@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the header information for the .csv file to be used as input for the user
-// import job.
+// Gets the header information for the comma-separated value (CSV) file to be used
+// as input for the user import job.
 func (c *Client) GetCSVHeader(ctx context.Context, params *GetCSVHeaderInput, optFns ...func(*Options)) (*GetCSVHeaderOutput, error) {
 	if params == nil {
 		params = &GetCSVHeaderInput{}
@@ -27,7 +27,7 @@ func (c *Client) GetCSVHeader(ctx context.Context, params *GetCSVHeaderInput, op
 	return out, nil
 }
 
-// Represents the request to get the header information for the .csv file for the
+// Represents the request to get the header information of the CSV file for the
 // user import job.
 type GetCSVHeaderInput struct {
 
@@ -40,10 +40,10 @@ type GetCSVHeaderInput struct {
 }
 
 // Represents the response from the server to the request to get the header
-// information for the .csv file for the user import job.
+// information of the CSV file for the user import job.
 type GetCSVHeaderOutput struct {
 
-	// The header information for the .csv file for the user import job.
+	// The header information of the CSV file for the user import job.
 	CSVHeader []string
 
 	// The user pool ID for the user pool that the users are to be imported into.

@@ -468,7 +468,7 @@ type CacheParameterGroup struct {
 
 	// The name of the cache parameter group family that this cache parameter group is
 	// compatible with. Valid values are: memcached1.4 | memcached1.5 | memcached1.6 |
-	// redis2.6 | redis2.8 | redis3.2 | redis4.0 | redis5.0 | redis6.0 |
+	// redis2.6 | redis2.8 | redis3.2 | redis4.0 | redis5.0 | redis6.x |
 	CacheParameterGroupFamily *string
 
 	// The name of the cache parameter group.

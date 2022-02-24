@@ -33,7 +33,7 @@ func (c *Client) ListStackResources(ctx context.Context, params *ListStackResour
 // The input for the ListStackResource action.
 type ListStackResourcesInput struct {
 
-	// The name or the unique stack ID that is associated with the stack, which are not
+	// The name or the unique stack ID that is associated with the stack, which aren't
 	// always interchangeable:
 	//
 	// * Running stacks: You can specify either the stack's

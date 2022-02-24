@@ -134,7 +134,8 @@ type RestoreDBInstanceFromS3Input struct {
 	// default DB security group for the database engine.
 	DBSecurityGroups []string
 
-	// A DB subnet group to associate with this DB instance.
+	// A DB subnet group to associate with this DB instance. Constraints: If supplied,
+	// must match the name of an existing DBSubnetGroup. Example: mydbsubnetgroup
 	DBSubnetGroupName *string
 
 	// A value that indicates whether the DB instance has deletion protection enabled.

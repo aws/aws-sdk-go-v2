@@ -46,7 +46,7 @@ type UpdateContactFlowMetadataInput struct {
 	// The description of the contact flow.
 	Description *string
 
-	// The name of the contact flow.
+	// TThe name of the contact flow.
 	Name *string
 
 	noSmithyDocumentSerde

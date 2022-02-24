@@ -310,6 +310,26 @@ func (m *validateOpDisassociateWebACL) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGenerateMobileSdkReleaseUrl struct {
+}
+
+func (*validateOpGenerateMobileSdkReleaseUrl) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGenerateMobileSdkReleaseUrl) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GenerateMobileSdkReleaseUrlInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGenerateMobileSdkReleaseUrlInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetIPSet struct {
 }
 
@@ -365,6 +385,26 @@ func (m *validateOpGetManagedRuleSet) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetManagedRuleSetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetMobileSdkRelease struct {
+}
+
+func (*validateOpGetMobileSdkRelease) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetMobileSdkRelease) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetMobileSdkReleaseInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetMobileSdkReleaseInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -585,6 +625,26 @@ func (m *validateOpListManagedRuleSets) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListManagedRuleSetsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListMobileSdkReleases struct {
+}
+
+func (*validateOpListMobileSdkReleases) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListMobileSdkReleases) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListMobileSdkReleasesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListMobileSdkReleasesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -950,6 +1010,10 @@ func addOpDisassociateWebACLValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpDisassociateWebACL{}, middleware.After)
 }
 
+func addOpGenerateMobileSdkReleaseUrlValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGenerateMobileSdkReleaseUrl{}, middleware.After)
+}
+
 func addOpGetIPSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetIPSet{}, middleware.After)
 }
@@ -960,6 +1024,10 @@ func addOpGetLoggingConfigurationValidationMiddleware(stack *middleware.Stack) e
 
 func addOpGetManagedRuleSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetManagedRuleSet{}, middleware.After)
+}
+
+func addOpGetMobileSdkReleaseValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetMobileSdkRelease{}, middleware.After)
 }
 
 func addOpGetPermissionPolicyValidationMiddleware(stack *middleware.Stack) error {
@@ -1004,6 +1072,10 @@ func addOpListLoggingConfigurationsValidationMiddleware(stack *middleware.Stack)
 
 func addOpListManagedRuleSetsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListManagedRuleSets{}, middleware.After)
+}
+
+func addOpListMobileSdkReleasesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListMobileSdkReleases{}, middleware.After)
 }
 
 func addOpListRegexPatternSetsValidationMiddleware(stack *middleware.Stack) error {
@@ -1713,6 +1785,45 @@ func validateLoggingFilter(v *types.LoggingFilter) error {
 	}
 }
 
+func validateManagedRuleGroupConfig(v *types.ManagedRuleGroupConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ManagedRuleGroupConfig"}
+	if v.UsernameField != nil {
+		if err := validateUsernameField(v.UsernameField); err != nil {
+			invalidParams.AddNested("UsernameField", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PasswordField != nil {
+		if err := validatePasswordField(v.PasswordField); err != nil {
+			invalidParams.AddNested("PasswordField", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateManagedRuleGroupConfigs(v []types.ManagedRuleGroupConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ManagedRuleGroupConfigs"}
+	for i := range v {
+		if err := validateManagedRuleGroupConfig(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateManagedRuleGroupStatement(v *types.ManagedRuleGroupStatement) error {
 	if v == nil {
 		return nil
@@ -1732,6 +1843,11 @@ func validateManagedRuleGroupStatement(v *types.ManagedRuleGroupStatement) error
 	if v.ScopeDownStatement != nil {
 		if err := validateStatement(v.ScopeDownStatement); err != nil {
 			invalidParams.AddNested("ScopeDownStatement", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ManagedRuleGroupConfigs != nil {
+		if err := validateManagedRuleGroupConfigs(v.ManagedRuleGroupConfigs); err != nil {
+			invalidParams.AddNested("ManagedRuleGroupConfigs", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1788,6 +1904,21 @@ func validateOverrideAction(v *types.OverrideAction) error {
 		if err := validateCountAction(v.Count); err != nil {
 			invalidParams.AddNested("Count", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePasswordField(v *types.PasswordField) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PasswordField"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2288,6 +2419,21 @@ func validateTimeWindow(v *types.TimeWindow) error {
 	}
 }
 
+func validateUsernameField(v *types.UsernameField) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UsernameField"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateVisibilityConfig(v *types.VisibilityConfig) error {
 	if v == nil {
 		return nil
@@ -2696,6 +2842,24 @@ func validateOpDisassociateWebACLInput(v *DisassociateWebACLInput) error {
 	}
 }
 
+func validateOpGenerateMobileSdkReleaseUrlInput(v *GenerateMobileSdkReleaseUrlInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GenerateMobileSdkReleaseUrlInput"}
+	if len(v.Platform) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Platform"))
+	}
+	if v.ReleaseVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReleaseVersion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetIPSetInput(v *GetIPSetInput) error {
 	if v == nil {
 		return nil
@@ -2745,6 +2909,24 @@ func validateOpGetManagedRuleSetInput(v *GetManagedRuleSetInput) error {
 	}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetMobileSdkReleaseInput(v *GetMobileSdkReleaseInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetMobileSdkReleaseInput"}
+	if len(v.Platform) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Platform"))
+	}
+	if v.ReleaseVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReleaseVersion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2950,6 +3132,21 @@ func validateOpListManagedRuleSetsInput(v *ListManagedRuleSetsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListManagedRuleSetsInput"}
 	if len(v.Scope) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Scope"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListMobileSdkReleasesInput(v *ListMobileSdkReleasesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListMobileSdkReleasesInput"}
+	if len(v.Platform) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Platform"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

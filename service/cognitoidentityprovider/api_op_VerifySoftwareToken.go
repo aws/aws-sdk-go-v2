@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Use this API to register a user's entered TOTP code and mark the user's software
-// token MFA status as "verified" if successful. The request takes an access token
-// or a session string, but not both.
+// Use this API to register a user's entered time-based one-time password (TOTP)
+// code and mark the user's software token MFA status as "verified" if successful.
+// The request takes an access token or a session string, but not both.
 func (c *Client) VerifySoftwareToken(ctx context.Context, params *VerifySoftwareTokenInput, optFns ...func(*Options)) (*VerifySoftwareTokenOutput, error) {
 	if params == nil {
 		params = &VerifySoftwareTokenInput{}
@@ -31,8 +31,8 @@ func (c *Client) VerifySoftwareToken(ctx context.Context, params *VerifySoftware
 
 type VerifySoftwareTokenInput struct {
 
-	// The one time password computed using the secret code returned by
-	// AssociateSoftwareToken"
+	// The one- time password computed using the secret code returned by
+	// AssociateSoftwareToken
 	// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AssociateSoftwareToken.html).
 	//
 	// This member is required.
@@ -44,7 +44,7 @@ type VerifySoftwareTokenInput struct {
 	// The friendly device name.
 	FriendlyDeviceName *string
 
-	// The session which should be passed both ways in challenge-response calls to the
+	// The session that should be passed both ways in challenge-response calls to the
 	// service.
 	Session *string
 
@@ -53,7 +53,7 @@ type VerifySoftwareTokenInput struct {
 
 type VerifySoftwareTokenOutput struct {
 
-	// The session which should be passed both ways in challenge-response calls to the
+	// The session that should be passed both ways in challenge-response calls to the
 	// service.
 	Session *string
 

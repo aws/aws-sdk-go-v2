@@ -14,6 +14,11 @@ import (
 // secret. For more information about permissions policies attached to a secret,
 // see Permissions policies attached to a secret
 // (https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access_resource-policies.html).
+// Required permissions: secretsmanager:GetResourcePolicy. For more information,
+// see  IAM policy actions for Secrets Manager
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions)
+// and Authentication and access control in Secrets Manager
+// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 func (c *Client) GetResourcePolicy(ctx context.Context, params *GetResourcePolicyInput, optFns ...func(*Options)) (*GetResourcePolicyOutput, error) {
 	if params == nil {
 		params = &GetResourcePolicyInput{}

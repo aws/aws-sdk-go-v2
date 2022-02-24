@@ -10,15 +10,37 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves information about a configuration. AppConfig uses the value of the
-// ClientConfigurationVersion parameter to identify the configuration version on
-// your clients. If you don’t send ClientConfigurationVersion with each call to
-// GetConfiguration, your clients receive the current configuration. You are
-// charged each time your clients receive a configuration. To avoid excess charges,
-// we recommend that you include the ClientConfigurationVersion value with every
-// call to GetConfiguration. This value must be saved on your client. Subsequent
-// calls to GetConfiguration must pass this value by using the
-// ClientConfigurationVersion parameter.
+// Retrieves the latest deployed configuration. Note the following important
+// information.
+//
+// * This API action has been deprecated. Calls to receive
+// configuration data should use the StartConfigurationSession
+// (https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_appconfigdata_StartConfigurationSession.html)
+// and GetLatestConfiguration
+// (https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_appconfigdata_GetLatestConfiguration.html)
+// APIs instead.
+//
+// * GetConfiguration is a priced call. For more information, see
+// Pricing (https://aws.amazon.com/systems-manager/pricing/).
+//
+// * AppConfig uses the
+// value of the ClientConfigurationVersion parameter to identify the configuration
+// version on your clients. If you don’t send ClientConfigurationVersion with each
+// call to GetConfiguration, your clients receive the current configuration. You
+// are charged each time your clients receive a configuration. To avoid excess
+// charges, we recommend you use the StartConfigurationSession
+// (https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/StartConfigurationSession.html)
+// and GetLatestConfiguration
+// (https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/GetLatestConfiguration.html)
+// APIs, which track the client configuration version on your behalf. If you choose
+// to continue using GetConfiguration, we recommend that you include the
+// ClientConfigurationVersion value with every call to GetConfiguration. The value
+// to use for ClientConfigurationVersion comes from the ConfigurationVersion
+// attribute returned by GetConfiguration when there is new or updated data, and
+// should be saved for subsequent calls to GetConfiguration.
+//
+// Deprecated: This API has been deprecated in favor of the GetLatestConfiguration
+// API used in conjunction with StartConfigurationSession.
 func (c *Client) GetConfiguration(ctx context.Context, params *GetConfigurationInput, optFns ...func(*Options)) (*GetConfigurationOutput, error) {
 	if params == nil {
 		params = &GetConfigurationInput{}
@@ -83,13 +105,11 @@ type GetConfigurationOutput struct {
 	// The configuration version.
 	ConfigurationVersion *string
 
-	// The content of the configuration or the configuration data. Compare the
-	// configuration version numbers of the configuration cached locally on your
-	// machine and the configuration number in the the header. If the configuration
-	// numbers are the same, the content can be ignored. The Content section only
-	// appears if the system finds new or updated configuration data. If the system
-	// doesn't find new or updated configuration data, then the Content section is not
-	// returned.
+	// The content of the configuration or the configuration data. The Content
+	// attribute only contains data if the system finds new or updated configuration
+	// data. If there is no new or updated data and ClientConfigurationVersion matches
+	// the version of the current configuration, AppConfig returns a 204 No Content
+	// HTTP response code and the Content value will be empty.
 	Content []byte
 
 	// A standard MIME type describing the format of the configuration content. For

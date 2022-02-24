@@ -34,7 +34,7 @@ type AdminDisableUserInput struct {
 	// This member is required.
 	UserPoolId *string
 
-	// The user name of the user you wish to disable.
+	// The user name of the user you want to disable.
 	//
 	// This member is required.
 	Username *string

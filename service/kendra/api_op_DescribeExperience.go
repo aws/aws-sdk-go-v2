@@ -78,8 +78,8 @@ type DescribeExperienceOutput struct {
 	Name *string
 
 	// Shows the Amazon Resource Name (ARN) of a role with permission to access Query
-	// operations, QuerySuggestions operations, SubmitFeedback operations, and Amazon
-	// Web Services SSO that stores your user and group information.
+	// API, QuerySuggestions API, SubmitFeedback API, and Amazon Web Services SSO that
+	// stores your user and group information.
 	RoleArn *string
 
 	// The current processing status of your Amazon Kendra experience. When the status

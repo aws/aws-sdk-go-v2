@@ -1725,6 +1725,11 @@ func validateDataSourceConfiguration(v *types.DataSourceConfiguration) error {
 			invalidParams.AddNested("WorkDocsConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.FsxConfiguration != nil {
+		if err := validateFsxConfiguration(v.FsxConfiguration); err != nil {
+			invalidParams.AddNested("FsxConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2108,6 +2113,36 @@ func validateEntityPersonaConfigurationList(v []types.EntityPersonaConfiguration
 	for i := range v {
 		if err := validateEntityPersonaConfiguration(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFsxConfiguration(v *types.FsxConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FsxConfiguration"}
+	if v.FileSystemId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileSystemId"))
+	}
+	if len(v.FileSystemType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("FileSystemType"))
+	}
+	if v.VpcConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcConfiguration"))
+	} else if v.VpcConfiguration != nil {
+		if err := validateDataSourceVpcConfiguration(v.VpcConfiguration); err != nil {
+			invalidParams.AddNested("VpcConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FieldMappings != nil {
+		if err := validateDataSourceToIndexFieldMappingList(v.FieldMappings); err != nil {
+			invalidParams.AddNested("FieldMappings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

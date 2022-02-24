@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides the feedback for an authentication event whether it was from a valid
+// Provides the feedback for an authentication event, whether it was from a valid
 // user or not. This feedback is used for improving the risk evaluation decision
 // for the user pool as part of Amazon Cognito advanced security.
 func (c *Client) UpdateAuthEventFeedback(ctx context.Context, params *UpdateAuthEventFeedbackInput, optFns ...func(*Options)) (*UpdateAuthEventFeedbackOutput, error) {

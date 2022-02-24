@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new Amazon GameLift build resource for your game server binary files.
-// Game server binaries must be combined into a zip file for use with Amazon
-// GameLift. When setting up a new game build for GameLift, we recommend using the
-// AWS CLI command upload-build
+// Creates a new Amazon Web Services build resource for your game server binary
+// files. Game server binaries must be combined into a zip file for use with Amazon
+// Web Services. When setting up a new game build for GameLift, we recommend using
+// the Amazon Web Services CLI command upload-build
 // (https://docs.aws.amazon.com/cli/latest/reference/gamelift/upload-build.html) .
 // This helper command combines two tasks: (1) it uploads your build files from a
 // file directory to a GameLift Amazon S3 location, and (2) it creates a new build
@@ -22,25 +22,25 @@ import (
 //
 // * To
 // create a new game build with build files that are in an Amazon S3 location under
-// an AWS account that you control. To use this option, you must first give Amazon
-// GameLift access to the Amazon S3 bucket. With permissions in place, call
-// CreateBuild and specify a build name, operating system, and the Amazon S3
-// storage location of your game build.
+// an Amazon Web Services account that you control. To use this option, you must
+// first give Amazon Web Services access to the Amazon S3 bucket. With permissions
+// in place, call CreateBuild and specify a build name, operating system, and the
+// Amazon S3 storage location of your game build.
 //
-// * To directly upload your build files to a
-// GameLift Amazon S3 location. To use this option, first call CreateBuild and
-// specify a build name and operating system. This operation creates a new build
-// resource and also returns an Amazon S3 location with temporary access
-// credentials. Use the credentials to manually upload your build files to the
-// specified Amazon S3 location. For more information, see Uploading Objects
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/UploadingObjects.html) in the
-// Amazon S3 Developer Guide. Build files can be uploaded to the GameLift Amazon S3
-// location once only; that can't be updated.
+// * To directly upload your build
+// files to a GameLift Amazon S3 location. To use this option, first call
+// CreateBuild and specify a build name and operating system. This operation
+// creates a new build resource and also returns an Amazon S3 location with
+// temporary access credentials. Use the credentials to manually upload your build
+// files to the specified Amazon S3 location. For more information, see Uploading
+// Objects (https://docs.aws.amazon.com/AmazonS3/latest/dev/UploadingObjects.html)
+// in the Amazon S3 Developer Guide. Build files can be uploaded to the GameLift
+// Amazon S3 location once only; that can't be updated.
 //
-// If successful, this operation
-// creates a new build resource with a unique build ID and places it in INITIALIZED
-// status. A build must be in READY status before you can create fleets with it.
-// Learn more Uploading Your Game
+// If successful, this
+// operation creates a new build resource with a unique build ID and places it in
+// INITIALIZED status. A build must be in READY status before you can create fleets
+// with it. Learn more Uploading Your Game
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-intro.html)
 // Create a Build with Files in Amazon S3
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-cli-uploading.html#gamelift-build-cli-uploading-create-build)
@@ -81,18 +81,21 @@ type CreateBuildInput struct {
 	// parameter only when creating a build with files stored in an Amazon S3 bucket
 	// that you own. The storage location must specify an Amazon S3 bucket name and
 	// key. The location must also specify a role ARN that you set up to allow Amazon
-	// GameLift to access your Amazon S3 bucket. The S3 bucket and your new build must
-	// be in the same Region.
+	// Web Services to access your Amazon S3 bucket. The S3 bucket and your new build
+	// must be in the same Region. If a StorageLocation is specified, the size of your
+	// file can be found in your Amazon S3 bucket. Amazon Web Services will report a
+	// SizeOnDisk of 0.
 	StorageLocation *types.S3Location
 
 	// A list of labels to assign to the new build resource. Tags are developer-defined
-	// key-value pairs. Tagging AWS resources are useful for resource management,
-	// access management and cost allocation. For more information, see  Tagging AWS
-	// Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in
-	// the AWS General Reference. Once the resource is created, you can use
+	// key-value pairs. Tagging Amazon Web Services resources are useful for resource
+	// management, access management and cost allocation. For more information, see
+	// Tagging Amazon Web Services Resources
+	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the Amazon
+	// Web Services General Reference. Once the resource is created, you can use
 	// TagResource, UntagResource, and ListTagsForResource to add, remove, and view
-	// tags. The maximum tag limit may be lower than stated. See the AWS General
-	// Reference for actual tagging limits.
+	// tags. The maximum tag limit may be lower than stated. See the Amazon Web
+	// Services General Reference for actual tagging limits.
 	Tags []types.Tag
 
 	// Version information that is associated with a build or script. Version strings
@@ -113,8 +116,8 @@ type CreateBuildOutput struct {
 
 	// This element is returned only when the operation is called without a storage
 	// location. It contains credentials to use when you are uploading a build file to
-	// an Amazon S3 bucket that is owned by Amazon GameLift. Credentials have a limited
-	// life span. To refresh these credentials, call RequestUploadCredentials.
+	// an Amazon S3 bucket that is owned by Amazon Web Services. Credentials have a
+	// limited life span. To refresh these credentials, call RequestUploadCredentials.
 	UploadCredentials *types.AwsCredentials
 
 	// Metadata pertaining to the operation's result.

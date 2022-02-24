@@ -242,12 +242,18 @@
                         "smithy.api#required": {}
                     }
                 },
+                "ProvisionedThroughput": {
+                    "target": "com.amazonaws.kafka#ProvisionedThroughput",
+                    "traits": {
+                        "smithy.api#documentation": "EBS volume provisioned throughput information.",
+                        "smithy.api#jsonName": "provisionedThroughput"
+                    }
+                },
                 "VolumeSizeGB": {
                     "target": "com.amazonaws.kafka#__integer",
                     "traits": {
                         "smithy.api#documentation": "<p>Size of the EBS volume to update.</p>",
-                        "smithy.api#jsonName": "volumeSizeGB",
-                        "smithy.api#required": {}
+                        "smithy.api#jsonName": "volumeSizeGB"
                     }
                 }
             },
@@ -1959,6 +1965,13 @@
         "com.amazonaws.kafka#EBSStorageInfo": {
             "type": "structure",
             "members": {
+                "ProvisionedThroughput": {
+                    "target": "com.amazonaws.kafka#ProvisionedThroughput",
+                    "traits": {
+                        "smithy.api#documentation": "EBS volume provisioned throughput information.",
+                        "smithy.api#jsonName": "provisionedThroughput"
+                    }
+                },
                 "VolumeSize": {
                     "target": "com.amazonaws.kafka#__integerMin1Max16384",
                     "traits": {
@@ -3687,6 +3700,28 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Provisioned cluster request.</p>"
+            }
+        },
+        "com.amazonaws.kafka#ProvisionedThroughput": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.kafka#__boolean",
+                    "traits": {
+                        "smithy.api#documentation": "Provisioned throughput is enabled or not.",
+                        "smithy.api#jsonName": "enabled"
+                    }
+                },
+                "VolumeThroughput": {
+                    "target": "com.amazonaws.kafka#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "Throughput value of the EBS volumes for the data drive on each kafka broker node in MiB per second.",
+                        "smithy.api#jsonName": "volumeThroughput"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Contains information about provisioned throughput for EBS storage volumes attached to kafka broker nodes."
             }
         },
         "com.amazonaws.kafka#PublicAccess": {

@@ -412,12 +412,7 @@ type Cluster struct {
 	// default value is true if a value is not provided when creating a cluster using
 	// the EMR API RunJobFlow command, the CLI create-cluster
 	// (https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html)
-	// command, or the Amazon Web Services Management Console. IAM principals that are
-	// allowed to perform actions on the cluster can use the SetVisibleToAllUsers
-	// action to change the value on a running cluster. For more information, see
-	// Understanding the EMR Cluster VisibleToAllUsers Setting
-	// (https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_iam_emr-with-iam.html#security_set_visible_to_all_users)
-	// in the Amazon EMRManagement Guide.
+	// command, or the Amazon Web Services Management Console.
 	VisibleToAllUsers bool
 
 	noSmithyDocumentSerde
@@ -1234,7 +1229,7 @@ type InstanceGroupDetail struct {
 	// This member is required.
 	Market MarketType
 
-	// State of instance group. The following values are deprecated: STARTING,
+	// State of instance group. The following values are no longer supported: STARTING,
 	// TERMINATED, and FAILED.
 	//
 	// This member is required.
@@ -1566,12 +1561,7 @@ type JobFlowDetail struct {
 	// true if a value is not provided when creating a cluster using the EMR API
 	// RunJobFlow command, the CLI create-cluster
 	// (https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html)
-	// command, or the Amazon Web Services Management Console. IAM principals that are
-	// authorized to perform actions on the cluster can use the SetVisibleToAllUsers
-	// action to change the value on a running cluster. For more information, see
-	// Understanding the EMR Cluster VisibleToAllUsers Setting
-	// (https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_iam_emr-with-iam.html#security_set_visible_to_all_users)
-	// in the Amazon EMRManagement Guide.
+	// command, or the Amazon Web Services Management Console.
 	VisibleToAllUsers bool
 
 	noSmithyDocumentSerde
@@ -2336,7 +2326,11 @@ type SimplifiedApplication struct {
 // determines the defined duration, provisioning timeout behavior, and allocation
 // strategy. The instance fleet configuration is available only in Amazon EMR
 // versions 4.8.0 and later, excluding 5.0.x versions. Spot Instance allocation
-// strategy is available in Amazon EMR version 5.12.1 and later.
+// strategy is available in Amazon EMR version 5.12.1 and later. Spot Instances
+// with a defined duration (also known as Spot blocks) are no longer available to
+// new customers from July 1, 2021. For customers who have previously used the
+// feature, we will continue to support Spot Instances with a defined duration
+// until December 31, 2022.
 type SpotProvisioningSpecification struct {
 
 	// The action to take when TargetSpotCapacity has not been fulfilled when the
@@ -2369,7 +2363,11 @@ type SpotProvisioningSpecification struct {
 	// are 60, 120, 180, 240, 300, or 360. The duration period starts as soon as a Spot
 	// Instance receives its instance ID. At the end of the duration, Amazon EC2 marks
 	// the Spot Instance for termination and provides a Spot Instance termination
-	// notice, which gives the instance a two-minute warning before it terminates.
+	// notice, which gives the instance a two-minute warning before it terminates. Spot
+	// Instances with a defined duration (also known as Spot blocks) are no longer
+	// available to new customers from July 1, 2021. For customers who have previously
+	// used the feature, we will continue to support Spot Instances with a defined
+	// duration until December 31, 2022.
 	BlockDurationMinutes *int32
 
 	noSmithyDocumentSerde
@@ -2701,7 +2699,7 @@ type VolumeSpecification struct {
 	// This member is required.
 	SizeInGB *int32
 
-	// The volume type. Volume types supported are gp2, io1, standard.
+	// The volume type. Volume types supported are gp2, io1, and standard.
 	//
 	// This member is required.
 	VolumeType *string

@@ -1156,6 +1156,11 @@ func validateDistribution(v *types.Distribution) error {
 			invalidParams.AddNested("S3ExportConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.FastLaunchConfigurations != nil {
+		if err := validateFastLaunchConfigurationList(v.FastLaunchConfigurations); err != nil {
+			invalidParams.AddNested("FastLaunchConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1170,6 +1175,35 @@ func validateDistributionList(v []types.Distribution) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DistributionList"}
 	for i := range v {
 		if err := validateDistribution(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFastLaunchConfiguration(v *types.FastLaunchConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FastLaunchConfiguration"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFastLaunchConfigurationList(v []types.FastLaunchConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FastLaunchConfigurationList"}
+	for i := range v {
+		if err := validateFastLaunchConfiguration(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

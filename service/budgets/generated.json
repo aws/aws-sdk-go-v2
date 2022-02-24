@@ -21,6 +21,7 @@
         "api_op_DescribeBudgetActionHistories.go",
         "api_op_DescribeBudgetActionsForAccount.go",
         "api_op_DescribeBudgetActionsForBudget.go",
+        "api_op_DescribeBudgetNotificationsForAccount.go",
         "api_op_DescribeBudgetPerformanceHistory.go",
         "api_op_DescribeBudgets.go",
         "api_op_DescribeNotificationsForBudget.go",

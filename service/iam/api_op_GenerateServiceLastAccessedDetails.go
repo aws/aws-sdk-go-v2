@@ -14,9 +14,9 @@ import (
 // Generates a report that includes details about when an IAM resource (user,
 // group, role, or policy) was last used in an attempt to access Amazon Web
 // Services services. Recent activity usually appears within four hours. IAM
-// reports activity for the last 365 days, or less if your Region began supporting
-// this feature within the last year. For more information, see Regions where data
-// is tracked
+// reports activity for at least the last 400 days, or less if your Region began
+// supporting this feature within the last year. For more information, see Regions
+// where data is tracked
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#access-advisor_tracking-period).
 // The service last accessed data includes all attempts to access an Amazon Web
 // Services API, not just the successful ones. This includes all attempts that were

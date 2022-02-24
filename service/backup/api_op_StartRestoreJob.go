@@ -88,22 +88,34 @@ type StartRestoreJobInput struct {
 	// Starts a job to restore a recovery point for one of the following resources:
 	//
 	// *
-	// DynamoDB for Amazon DynamoDB
+	// Aurora for Amazon Aurora
 	//
-	// * EBS for Amazon Elastic Block Store
+	// * DocumentDB for Amazon DocumentDB (with MongoDB
+	// compatibility)
 	//
-	// * EC2 for
-	// Amazon Elastic Compute Cloud
+	// * DynamoDB for Amazon DynamoDB
 	//
-	// * EFS for Amazon Elastic File System
+	// * EBS for Amazon Elastic Block
+	// Store
 	//
-	// * RDS for
-	// Amazon Relational Database Service
+	// * EC2 for Amazon Elastic Compute Cloud
 	//
-	// * Aurora for Amazon Aurora
+	// * EFS for Amazon Elastic File
+	// System
 	//
-	// * Storage
-	// Gateway for Storage Gateway
+	// * FSx for Amazon FSx
+	//
+	// * Neptune for Amazon Neptune
+	//
+	// * RDS for Amazon
+	// Relational Database Service
+	//
+	// * Storage Gateway for Storage Gateway
+	//
+	// * S3 for
+	// Amazon S3
+	//
+	// * VirtualMachine for virtual machines
 	ResourceType *string
 
 	noSmithyDocumentSerde

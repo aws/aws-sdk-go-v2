@@ -12,10 +12,10 @@ import (
 )
 
 // Updates a stack as specified in the template. After the call completes
-// successfully, the stack update starts. You can check the status of the stack via
-// the DescribeStacks action. To get a copy of the template for an existing stack,
-// you can use the GetTemplate action. For more information about creating an
-// update template, updating a stack, and monitoring the progress of the update,
+// successfully, the stack update starts. You can check the status of the stack
+// through the DescribeStacks action. To get a copy of the template for an existing
+// stack, you can use the GetTemplate action. For more information about creating
+// an update template, updating a stack, and monitoring the progress of the update,
 // see Updating a Stack
 // (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks.html).
 func (c *Client) UpdateStack(ctx context.Context, params *UpdateStackInput, optFns ...func(*Options)) (*UpdateStackOutput, error) {
@@ -166,7 +166,7 @@ type UpdateStackInput struct {
 	// The Amazon Resource Name (ARN) of an Identity and Access Management (IAM) role
 	// that CloudFormation assumes to update the stack. CloudFormation uses the role's
 	// credentials to make calls on your behalf. CloudFormation always uses this role
-	// for all future operations on the stack. As long as users have permission to
+	// for all future operations on the stack. Provided that users have permission to
 	// operate on the stack, CloudFormation uses this role even if the users don't have
 	// permission to pass it. Ensure that the role grants least privilege. If you don't
 	// specify a value, CloudFormation uses the role that was previously associated
@@ -181,7 +181,7 @@ type UpdateStackInput struct {
 	// Structure containing a new stack policy body. You can specify either the
 	// StackPolicyBody or the StackPolicyURL parameter, but not both. You might update
 	// the stack policy, for example, in order to protect a new resource that you
-	// created during a stack update. If you do not specify a stack policy, the current
+	// created during a stack update. If you don't specify a stack policy, the current
 	// policy that is associated with the stack is unchanged.
 	StackPolicyBody *string
 
@@ -205,7 +205,7 @@ type UpdateStackInput struct {
 	// policy (max size: 16KB) located in an S3 bucket in the same Region as the stack.
 	// You can specify either the StackPolicyBody or the StackPolicyURL parameter, but
 	// not both. You might update the stack policy, for example, in order to protect a
-	// new resource that you created during a stack update. If you do not specify a
+	// new resource that you created during a stack update. If you don't specify a
 	// stack policy, the current policy that is associated with the stack is unchanged.
 	StackPolicyURL *string
 
@@ -225,7 +225,7 @@ type UpdateStackInput struct {
 	TemplateBody *string
 
 	// Location of file containing the template body. The URL must point to a template
-	// that is located in an Amazon S3 bucket or a Systems Manager document. For more
+	// that's located in an Amazon S3 bucket or a Systems Manager document. For more
 	// information, go to Template Anatomy
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html)
 	// in the CloudFormation User Guide. Conditional: You must specify only one of the

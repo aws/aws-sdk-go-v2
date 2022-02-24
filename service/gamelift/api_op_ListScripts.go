@@ -13,7 +13,8 @@ import (
 )
 
 // Retrieves script records for all Realtime scripts that are associated with the
-// AWS account in use. Learn more Amazon GameLift Realtime Servers
+// Amazon Web Services account in use. Learn more Amazon Web Services Realtime
+// Servers
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/realtime-intro.html)
 // Related actions CreateScript | ListScripts | DescribeScript | UpdateScript |
 // DeleteScript | All APIs by task

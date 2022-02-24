@@ -43,7 +43,7 @@
                     "name": "appconfig"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Use AppConfig, a capability of Amazon Web Services Systems Manager, to create, manage, and quickly deploy\n         application configurations. AppConfig supports controlled deployments to applications of\n         any size and includes built-in validation checks and monitoring. You can use AppConfig with\n         applications hosted on Amazon EC2 instances, Lambda, containers, mobile applications, or IoT\n         devices.</p>\n         <p>To prevent errors when deploying application configurations, especially for production\n         systems where a simple typo could cause an unexpected outage, AppConfig includes\n         validators. A validator provides a syntactic or semantic check to ensure that the\n         configuration you want to deploy works as intended. To validate your application\n         configuration data, you provide a schema or a Lambda function that runs against the\n         configuration. The configuration deployment or update can only proceed when the\n         configuration data is valid.</p>\n         <p>During a configuration deployment, AppConfig monitors the application to ensure that the\n         deployment is successful. If the system encounters an error, AppConfig rolls back the\n         change to minimize impact for your application users. You can configure a deployment\n         strategy for each application or environment that includes deployment criteria, including\n         velocity, bake time, and alarms to monitor. Similar to error monitoring, if a deployment\n         triggers an alarm, AppConfig automatically rolls back to the previous version. </p>\n         <p>AppConfig supports multiple use cases. Here are some examples:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Application tuning</b>: Use AppConfig to carefully\n               introduce changes to your application that can only be tested with production\n               traffic.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Feature toggle</b>: Use AppConfig to turn on new\n               features that require a timely deployment, such as a product launch or announcement.\n            </p>\n            </li>\n            <li>\n               <p>\n                  <b>Allow list</b>: Use AppConfig to allow premium\n               subscribers to access paid content. </p>\n            </li>\n            <li>\n               <p>\n                  <b>Operational issues</b>: Use AppConfig to reduce\n               stress on your application when a dependency or other external factor impacts the\n               system.</p>\n            </li>\n         </ul>\n         <p>This reference is intended to be used with the <a href=\"http://docs.aws.amazon.com/appconfig/latest/userguide/what-is-appconfig.html\">AppConfig User Guide</a>.</p>",
+                "smithy.api#documentation": "<p>Use AppConfig, a capability of Amazon Web Services Systems Manager, to create, manage, and quickly deploy\n         application configurations. AppConfig supports controlled deployments to applications of\n         any size and includes built-in validation checks and monitoring. You can use AppConfig with\n         applications hosted on Amazon EC2 instances, Lambda, containers, mobile applications, or IoT\n         devices.</p>\n         <p>To prevent errors when deploying application configurations, especially for production\n         systems where a simple typo could cause an unexpected outage, AppConfig includes\n         validators. A validator provides a syntactic or semantic check to ensure that the\n         configuration you want to deploy works as intended. To validate your application\n         configuration data, you provide a schema or an Amazon Web Services Lambda function that runs against\n         the configuration. The configuration deployment or update can only proceed when the\n         configuration data is valid.</p>\n         <p>During a configuration deployment, AppConfig monitors the application to ensure that the\n         deployment is successful. If the system encounters an error, AppConfig rolls back the\n         change to minimize impact for your application users. You can configure a deployment\n         strategy for each application or environment that includes deployment criteria, including\n         velocity, bake time, and alarms to monitor. Similar to error monitoring, if a deployment\n         triggers an alarm, AppConfig automatically rolls back to the previous version. </p>\n         <p>AppConfig supports multiple use cases. Here are some examples:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Feature flags</b>: Use AppConfig to turn on new\n               features that require a timely deployment, such as a product launch or announcement.\n            </p>\n            </li>\n            <li>\n               <p>\n                  <b>Application tuning</b>: Use AppConfig to carefully\n               introduce changes to your application that can only be tested with production\n               traffic.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Allow list</b>: Use AppConfig to allow premium\n               subscribers to access paid content. </p>\n            </li>\n            <li>\n               <p>\n                  <b>Operational issues</b>: Use AppConfig to reduce\n               stress on your application when a dependency or other external factor impacts the\n               system.</p>\n            </li>\n         </ul>\n         <p>This reference is intended to be used with the <a href=\"http://docs.aws.amazon.com/appconfig/latest/userguide/what-is-appconfig.html\">AppConfig User Guide</a>.</p>",
                 "smithy.api#title": "Amazon AppConfig"
             },
             "version": "2019-10-09",
@@ -211,12 +211,12 @@
                 "InvalidConfiguration": {
                     "target": "com.amazonaws.appconfig#InvalidConfigurationDetailList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Detailed information about the bad request exception error when creating a hosted configuration version.</p>"
+                        "smithy.api#documentation": "<p>Detailed information about the bad request exception error when creating a hosted\n         configuration version.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Detailed information about the input that failed to satisfy the constraints specified by an AWS service.</p>"
+                "smithy.api#documentation": "<p>Detailed information about the input that failed to satisfy the constraints specified by\n         a call.</p>"
             }
         },
         "com.amazonaws.appconfig#BadRequestException": {
@@ -272,7 +272,7 @@
                 "Content": {
                     "target": "com.amazonaws.appconfig#Blob",
                     "traits": {
-                        "smithy.api#documentation": "<p>The content of the configuration or the configuration data.</p>\n         <important>\n            <p>Compare the configuration version numbers of the configuration cached locally on your\n            machine and the configuration number in the the header. If the configuration numbers are\n            the same, the content can be ignored. The <code>Content</code> section only appears if\n            the system finds new or updated configuration data. If the system doesn't find new or\n            updated configuration data, then the <code>Content</code> section is not\n            returned.</p>\n         </important>",
+                        "smithy.api#documentation": "<p>The content of the configuration or the configuration data.</p>\n         <important>\n            <p>The <code>Content</code> attribute only contains data if the system finds new or\n            updated configuration data. If there is no new or updated data and\n               <code>ClientConfigurationVersion</code> matches the version of the current\n            configuration, AppConfig returns a <code>204 No Content</code> HTTP response code and\n            the <code>Content</code> value will be empty.</p>\n         </important>",
                         "smithy.api#httpPayload": {}
                     }
                 },
@@ -340,7 +340,7 @@
                 "Type": {
                     "target": "com.amazonaws.appconfig#ConfigurationProfileType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of configurations that the configuration profile contains. A configuration can\n         be a feature flag used for enabling or disabling new features or a free-form configuration\n         used for distributing configurations to your application. </p>"
+                        "smithy.api#documentation": "<p>The type of configurations contained in the profile. AppConfig supports <code>feature\n            flags</code> and <code>freeform</code> configurations. We recommend you create feature\n         flag configurations to enable or disable new features and freeform configurations to\n         distribute configurations to an application. When calling this API, enter one of the\n         following values for <code>Type</code>:</p>\n         <p>\n            <code>AWS.AppConfig.FeatureFlags</code>\n         </p>\n         <p>\n            <code>AWS.Freeform</code>\n         </p>"
                     }
                 }
             }
@@ -381,7 +381,7 @@
                 "Type": {
                     "target": "com.amazonaws.appconfig#ConfigurationProfileType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of configurations that the configuration profile contains. A configuration can\n         be a feature flag used for enabling or disabling new features or a free-form configuration\n         used to introduce changes to your application.</p>"
+                        "smithy.api#documentation": "<p>The type of configurations contained in the profile. AppConfig supports <code>feature\n            flags</code> and <code>freeform</code> configurations. We recommend you create feature\n         flag configurations to enable or disable new features and freeform configurations to\n         distribute configurations to an application. When calling this API, enter one of the\n         following values for <code>Type</code>:</p>\n         <p>\n            <code>AWS.AppConfig.FeatureFlags</code>\n         </p>\n         <p>\n            <code>AWS.Freeform</code>\n         </p>"
                     }
                 }
             },
@@ -500,7 +500,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a configuration profile, which is information that enables AppConfig to access\n         the configuration source. Valid configuration sources include the AppConfig hosted\n         configuration store, Amazon Web Services Systems Manager (SSM) documents, SSM Parameter Store parameters, Amazon S3\n         objects, or any <a href=\"http://docs.aws.amazon.com/codepipeline/latest/userguide/integrations-action-type.html#integrations-source\">integration source\n            action</a> supported by CodePipeline. A configuration profile includes the following\n         information:</p>\n      \n         <ul>\n            <li>\n               <p>The URI location of the configuration data.</p>\n            </li>\n            <li>\n               <p>The Identity and Access Management (IAM) role that provides access to the configuration data.</p>\n            </li>\n            <li>\n               <p>A validator for the configuration data. Available validators include either a JSON\n               Schema or an Lambda function.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"http://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-creating-configuration-and-profile.html\">Create a\n            Configuration and a Configuration Profile</a> in the <i>AppConfig User\n            Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Creates a configuration profile, which is information that enables AppConfig to access\n         the configuration source. Valid configuration sources include the AppConfig hosted\n         configuration store, Amazon Web Services Systems Manager (SSM) documents, SSM Parameter Store parameters, Amazon S3\n         objects, or any <a href=\"http://docs.aws.amazon.com/codepipeline/latest/userguide/integrations-action-type.html#integrations-source\">integration source\n            action</a> supported by CodePipeline. A configuration profile includes the following\n         information:</p>\n      \n         <ul>\n            <li>\n               <p>The URI location of the configuration data.</p>\n            </li>\n            <li>\n               <p>The Identity and Access Management (IAM) role that provides access to the configuration data.</p>\n            </li>\n            <li>\n               <p>A validator for the configuration data. Available validators include either a JSON\n               Schema or an Amazon Web Services Lambda function.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"http://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-creating-configuration-and-profile.html\">Create a\n            Configuration and a Configuration Profile</a> in the <i>AppConfig User\n            Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/applications/{ApplicationId}/configurationprofiles",
@@ -560,7 +560,7 @@
                 "Type": {
                     "target": "com.amazonaws.appconfig#ConfigurationProfileType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of configurations that the configuration profile contains. A configuration can\n         be a feature flag used for enabling or disabling new features or a free-form configuration\n         used for distributing configurations to your application.</p>"
+                        "smithy.api#documentation": "<p>The type of configurations contained in the profile. AppConfig supports <code>feature\n            flags</code> and <code>freeform</code> configurations. We recommend you create feature\n         flag configurations to enable or disable new features and freeform configurations to\n         distribute configurations to an application. When calling this API, enter one of the\n         following values for <code>Type</code>:</p>\n         <p>\n            <code>AWS.AppConfig.FeatureFlags</code>\n         </p>\n         <p>\n            <code>AWS.Freeform</code>\n         </p>"
                     }
                 }
             }
@@ -1584,7 +1584,10 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves information about a configuration.</p>\n         <important>\n            <p>AppConfig uses the value of the <code>ClientConfigurationVersion</code> parameter to\n            identify the configuration version on your clients. If you don’t send\n               <code>ClientConfigurationVersion</code> with each call to\n               <code>GetConfiguration</code>, your clients receive the current configuration. You\n            are charged each time your clients receive a configuration.</p>\n            <p>To avoid excess charges, we recommend that you include the\n               <code>ClientConfigurationVersion</code> value with every call to\n               <code>GetConfiguration</code>. This value must be saved on your client. Subsequent\n            calls to <code>GetConfiguration</code> must pass this value by using the\n               <code>ClientConfigurationVersion</code> parameter. </p>\n         </important>",
+                "smithy.api#deprecated": {
+                    "message": "This API has been deprecated in favor of the GetLatestConfiguration API used in conjunction with StartConfigurationSession."
+                },
+                "smithy.api#documentation": "<p>Retrieves the latest deployed configuration.</p>\n\n         <important>\n            <p>Note the following important information.</p>\n            <ul>\n               <li>\n                  <p>This API action has been deprecated. Calls to receive configuration data should\n                  use the <a href=\"https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_appconfigdata_StartConfigurationSession.html\">StartConfigurationSession</a> and <a href=\"https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_appconfigdata_GetLatestConfiguration.html\">GetLatestConfiguration</a> APIs instead. </p>\n               </li>\n               <li>\n                  <p>\n                     <code>GetConfiguration</code> is a priced call. For more information, see\n                     <a href=\"https://aws.amazon.com/systems-manager/pricing/\">Pricing</a>.</p>\n               </li>\n               <li>\n                  <p>AppConfig uses the value of the <code>ClientConfigurationVersion</code>\n                  parameter to identify the configuration version on your clients. If you don’t send\n                     <code>ClientConfigurationVersion</code> with each call to\n                     <code>GetConfiguration</code>, your clients receive the current configuration.\n                  You are charged each time your clients receive a configuration.</p>\n                  <p>To avoid excess charges, we recommend you use the <a href=\"https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/StartConfigurationSession.html\">StartConfigurationSession</a> and <a href=\"https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/GetLatestConfiguration.html\">GetLatestConfiguration</a> APIs, which track the client configuration\n                  version on your behalf. If you choose to continue using\n                     <code>GetConfiguration</code>, we recommend that you include the\n                     <code>ClientConfigurationVersion</code> value with every call to\n                     <code>GetConfiguration</code>. The value to use for\n                     <code>ClientConfigurationVersion</code> comes from the\n                     <code>ConfigurationVersion</code> attribute returned by\n                     <code>GetConfiguration</code> when there is new or updated data, and should be\n                  saved for subsequent calls to <code>GetConfiguration</code>.</p>\n               </li>\n            </ul>\n         </important>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/applications/{Application}/environments/{Environment}/configurations/{Configuration}",
@@ -2050,13 +2053,13 @@
                 "Constraint": {
                     "target": "com.amazonaws.appconfig#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The invalid or out-of-range validation constraint in your JSON schema that failed validation.</p>"
+                        "smithy.api#documentation": "<p>The invalid or out-of-range validation constraint in your JSON schema that failed\n         validation.</p>"
                     }
                 },
                 "Location": {
                     "target": "com.amazonaws.appconfig#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Location of the validation constraint in the configuration JSON schema that failed validation.</p>"
+                        "smithy.api#documentation": "<p>Location of the validation constraint in the configuration JSON schema that failed\n         validation.</p>"
                     }
                 },
                 "Reason": {
@@ -2073,7 +2076,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Detailed information about the bad request exception error when creating a hosted configuration version.</p>"
+                "smithy.api#documentation": "<p>Detailed information about the bad request exception error when creating a hosted\n         configuration version.</p>"
             }
         },
         "com.amazonaws.appconfig#InvalidConfigurationDetailList": {
@@ -2200,7 +2203,7 @@
                 "Type": {
                     "target": "com.amazonaws.appconfig#ConfigurationProfileType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A filter based on the type of configurations that the configuration profile contains. A\n         configuration can be a feature flag or a free-form configuration.</p>",
+                        "smithy.api#documentation": "<p>A filter based on the type of configurations that the configuration profile contains. A\n         configuration can be a feature flag or a freeform configuration.</p>",
                         "smithy.api#httpQuery": "type"
                     }
                 }
@@ -2276,7 +2279,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the deployments for an environment.</p>",
+                "smithy.api#documentation": "<p>Lists the deployments for an environment in descending deployment number order.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/applications/{ApplicationId}/environments/{EnvironmentId}/deployments",
@@ -2312,14 +2315,14 @@
                     "target": "com.amazonaws.appconfig#MaxResults",
                     "traits": {
                         "smithy.api#box": {},
-                        "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that\n         you can specify in a subsequent call to get the next set of results.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of items that may be returned for this call. If there are items that\n         have not yet been returned, the response will include a non-null <code>NextToken</code>\n         that you can provide in a subsequent call to get the next set of results.</p>",
                         "smithy.api#httpQuery": "max_results"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.appconfig#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token to start the list. Use this token to get the next set of results.</p>",
+                        "smithy.api#documentation": "<p>The token returned by a prior call to this operation indicating the next set of results\n         to be returned. If not specified, the operation will return the first set of\n         results.</p>",
                         "smithy.api#httpQuery": "next_token"
                     }
                 }
@@ -3352,7 +3355,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A validator provides a syntactic or semantic check to ensure the configuration that you\n         want to deploy functions as intended. To validate your application configuration data, you\n         provide a schema or a Lambda function that runs against the configuration. The\n         configuration deployment or update can only proceed when the configuration data is\n         valid.</p>"
+                "smithy.api#documentation": "<p>A validator provides a syntactic or semantic check to ensure the configuration that you\n         want to deploy functions as intended. To validate your application configuration data, you\n         provide a schema or an Amazon Web Services Lambda function that runs against the configuration. The\n         configuration deployment or update can only proceed when the configuration data is\n         valid.</p>"
             }
         },
         "com.amazonaws.appconfig#ValidatorList": {

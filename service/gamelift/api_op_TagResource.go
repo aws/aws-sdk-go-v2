@@ -11,11 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Assigns a tag to a GameLift resource. AWS resource tags provide an additional
-// management tool set. You can use tags to organize resources, create IAM
-// permissions policies to manage access to groups of resources, customize AWS cost
-// breakdowns, etc. This operation handles the permissions necessary to manage tags
-// for the following GameLift resource types:
+// Assigns a tag to a GameLift resource. Amazon Web Services resource tags provide
+// an additional management tool set. You can use tags to organize resources,
+// create IAM permissions policies to manage access to groups of resources,
+// customize Amazon Web Services cost breakdowns, etc. This operation handles the
+// permissions necessary to manage tags for the following GameLift resource
+// types:
 //
 // * Build
 //
@@ -23,22 +24,22 @@ import (
 //
 // * Fleet
 //
-// *
-// Alias
+// * Alias
 //
 // * GameSessionQueue
 //
-// * MatchmakingConfiguration
+// *
+// MatchmakingConfiguration
 //
 // * MatchmakingRuleSet
 //
-// To
-// add a tag to a resource, specify the unique ARN value for the resource and
-// provide a tag list containing one or more tags. The operation succeeds even if
-// the list includes tags that are already assigned to the specified resource.
-// Learn more Tagging AWS Resources
-// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the AWS
-// General Reference  AWS Tagging Strategies
+// To add a tag to a resource,
+// specify the unique ARN value for the resource and provide a tag list containing
+// one or more tags. The operation succeeds even if the list includes tags that are
+// already assigned to the specified resource. Learn more Tagging Amazon Web
+// Services Resources
+// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the Amazon
+// Web Services General Reference  Amazon Web Services Tagging Strategies
 // (http://aws.amazon.com/answers/account-management/aws-tagging-strategies/)
 // Related actions TagResource | UntagResource | ListTagsForResource | All APIs by
 // task
@@ -72,7 +73,7 @@ type TagResourceInput struct {
 
 	// A list of one or more tags to assign to the specified GameLift resource. Tags
 	// are developer-defined and structured as key-value pairs. The maximum tag limit
-	// may be lower than stated. See  Tagging AWS Resources
+	// may be lower than stated. See  Tagging Amazon Web Services Resources
 	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) for actual
 	// tagging limits.
 	//

@@ -61,6 +61,24 @@
         },
         "com.amazonaws.apprunner#AppRunner": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "AppRunner",
+                    "arnNamespace": "apprunner",
+                    "cloudFormationName": "AppRunner",
+                    "cloudTrailEventSource": "apprunner.amazonaws.com",
+                    "endpointPrefix": "apprunner"
+                },
+                "aws.auth#sigv4": {
+                    "name": "apprunner"
+                },
+                "aws.protocols#awsJson1_0": {},
+                "smithy.api#documentation": "<fullname>App Runner</fullname>\n\n    \n\n         <p>App Runner is an application service that provides a fast, simple, and cost-effective way to go directly from an existing container image or source code\n      to a running service in the Amazon Web Services Cloud in seconds. You don't need to learn new technologies, decide which compute service to use, or understand how to\n      provision and configure Amazon Web Services resources.</p>\n         <p>App Runner connects directly to your container registry or source code repository. It provides an automatic delivery pipeline with fully managed operations,\n      high performance, scalability, and security.</p>\n         <p>For more information about App Runner, see the <a href=\"https://docs.aws.amazon.com/apprunner/latest/dg/\">App Runner Developer Guide</a>.\n      For release information, see the <a href=\"https://docs.aws.amazon.com/apprunner/latest/relnotes/\">App Runner Release Notes</a>.</p>\n         <p>\n       To install the Software Development Kits (SDKs), Integrated\n      Development Environment (IDE) Toolkits, and command line tools that you can use to access the API, see <a href=\"http://aws.amazon.com/tools/\">Tools for\n        Amazon Web Services</a>.</p>\n         <p>\n            <b>Endpoints</b>\n         </p>\n         <p>For a list of Region-specific endpoints that App Runner supports, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/apprunner.html\">App Runner\n        endpoints and quotas</a> in the <i>Amazon Web Services General Reference</i>.</p>",
+                "smithy.api#title": "AWS App Runner",
+                "smithy.api#xmlNamespace": {
+                    "uri": "http://apprunner.amazonaws.com/doc/2020-05-15/"
+                }
+            },
             "version": "2020-05-15",
             "operations": [
                 {
@@ -76,6 +94,9 @@
                     "target": "com.amazonaws.apprunner#CreateService"
                 },
                 {
+                    "target": "com.amazonaws.apprunner#CreateVpcConnector"
+                },
+                {
                     "target": "com.amazonaws.apprunner#DeleteAutoScalingConfiguration"
                 },
                 {
@@ -85,6 +106,9 @@
                     "target": "com.amazonaws.apprunner#DeleteService"
                 },
                 {
+                    "target": "com.amazonaws.apprunner#DeleteVpcConnector"
+                },
+                {
                     "target": "com.amazonaws.apprunner#DescribeAutoScalingConfiguration"
                 },
                 {
@@ -92,6 +116,9 @@
                 },
                 {
                     "target": "com.amazonaws.apprunner#DescribeService"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#DescribeVpcConnector"
                 },
                 {
                     "target": "com.amazonaws.apprunner#DisassociateCustomDomain"
@@ -112,6 +139,9 @@
                     "target": "com.amazonaws.apprunner#ListTagsForResource"
                 },
                 {
+                    "target": "com.amazonaws.apprunner#ListVpcConnectors"
+                },
+                {
                     "target": "com.amazonaws.apprunner#PauseService"
                 },
                 {
@@ -129,25 +159,7 @@
                 {
                     "target": "com.amazonaws.apprunner#UpdateService"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "AppRunner",
-                    "arnNamespace": "apprunner",
-                    "cloudFormationName": "AppRunner",
-                    "cloudTrailEventSource": "apprunner.amazonaws.com",
-                    "endpointPrefix": "apprunner"
-                },
-                "aws.auth#sigv4": {
-                    "name": "apprunner"
-                },
-                "aws.protocols#awsJson1_0": {},
-                "smithy.api#documentation": "<fullname>App Runner</fullname>\n\n    \n\n         <p>App Runner is an application service that provides a fast, simple, and cost-effective way to go directly from an existing container image or source code\n      to a running service in the Amazon Web Services Cloud in seconds. You don't need to learn new technologies, decide which compute service to use, or understand how to\n      provision and configure Amazon Web Services resources.</p>\n         <p>App Runner connects directly to your container registry or source code repository. It provides an automatic delivery pipeline with fully managed operations,\n      high performance, scalability, and security.</p>\n         <p>For more information about App Runner, see the <a href=\"https://docs.aws.amazon.com/apprunner/latest/dg/\">App Runner Developer Guide</a>.\n      For release information, see the <a href=\"https://docs.aws.amazon.com/apprunner/latest/relnotes/\">App Runner Release Notes</a>.</p>\n         <p>\n       To install the Software Development Kits (SDKs), Integrated\n      Development Environment (IDE) Toolkits, and command line tools that you can use to access the API, see <a href=\"http://aws.amazon.com/tools/\">Tools for\n        Amazon Web Services</a>.</p>\n         <p>\n            <b>Endpoints</b>\n         </p>\n         <p>For a list of Region-specific endpoints that App Runner supports, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/apprunner.html\">App Runner\n        endpoints and quotas</a> in the <i>Amazon Web Services General Reference</i>.</p>",
-                "smithy.api#title": "AWS App Runner",
-                "smithy.api#xmlNamespace": {
-                    "uri": "http://apprunner.amazonaws.com/doc/2020-05-15/"
-                }
-            }
+            ]
         },
         "com.amazonaws.apprunner#AppRunnerResourceArn": {
             "type": "string",
@@ -318,7 +330,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes an App Runner automatic scaling configuration resource. Multiple revisions of a configuration have the same\n        <code>AutoScalingConfigurationName</code> and different <code>AutoScalingConfigurationRevision</code> values.</p>\n         <p>A higher <code>MinSize</code> increases the spread of your App Runner service over more Availability Zones in the Amazon Web Services Region. The tradeoff is a higher\n      minimal cost.</p>\n         <p>A lower <code>MaxSize</code> controls your cost. The tradeoff is lower responsiveness during peak demand.</p>"
+                "smithy.api#documentation": "<p>Describes an App Runner automatic scaling configuration resource.</p>\n         <p>A higher <code>MinSize</code> increases the spread of your App Runner service over more Availability Zones in the Amazon Web Services Region. The tradeoff is a higher\n      minimal cost.</p>\n         <p>A lower <code>MaxSize</code> controls your cost. The tradeoff is lower responsiveness during peak demand.</p>\n         <p>Multiple revisions of a configuration might have the same <code>AutoScalingConfigurationName</code> and different\n        <code>AutoScalingConfigurationRevision</code> values.</p>"
             }
         },
         "com.amazonaws.apprunner#AutoScalingConfigurationName": {
@@ -384,6 +396,7 @@
         "com.amazonaws.apprunner#BuildCommand": {
             "type": "string",
             "traits": {
+                "smithy.api#pattern": "^[^\\x0a\\x0d]+$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -692,7 +705,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Create an App Runner automatic scaling configuration resource. App Runner requires this resource\n      when you create App Runner services that require non-default auto scaling settings. You can share an\n      auto scaling configuration across multiple services.</p>\n         <p>Create multiple revisions of a configuration by using the same <code>AutoScalingConfigurationName</code> and different\n        <code>AutoScalingConfigurationRevision</code> values. When you create a service, you can set it to use the latest active revision of an auto scaling\n      configuration or a specific revision.</p>\n         <p>Configure a higher <code>MinSize</code> to increase the spread of your App Runner service over more Availability Zones in the Amazon Web Services Region. The tradeoff is\n      a higher minimal cost.</p>\n         <p>Configure a lower <code>MaxSize</code> to control your cost. The tradeoff is lower responsiveness during peak demand.</p>"
+                "smithy.api#documentation": "<p>Create an App Runner automatic scaling configuration resource. App Runner requires this resource\n      when you create App Runner services that require non-default auto scaling settings. You can share an\n      auto scaling configuration across multiple services.</p>\n         <p>Create multiple revisions of a configuration by calling this action multiple times using the same <code>AutoScalingConfigurationName</code>. The call\n      returns incremental <code>AutoScalingConfigurationRevision</code> values. When you create a service, you can set it to use the latest active revision of\n      an auto scaling configuration or a specific revision.</p>\n         <p>Configure a higher <code>MinSize</code> to increase the spread of your App Runner service over more Availability Zones in the Amazon Web Services Region. The tradeoff is\n      a higher minimal cost.</p>\n         <p>Configure a lower <code>MaxSize</code> to control your cost. The tradeoff is lower responsiveness during peak demand.</p>"
             }
         },
         "com.amazonaws.apprunner#CreateAutoScalingConfigurationRequest": {
@@ -701,7 +714,7 @@
                 "AutoScalingConfigurationName": {
                     "target": "com.amazonaws.apprunner#AutoScalingConfigurationName",
                     "traits": {
-                        "smithy.api#documentation": "<p>A name for the auto scaling configuration. When you use it for the first time in an Amazon Web Services Region, App Runner creates revision number <code>1</code> of this\n      name. When you use the same name in subsequent calls, App Runner creates incremental revisions of the configuration.</p>",
+                        "smithy.api#documentation": "<p>A name for the auto scaling configuration. When you use it for the first time in an Amazon Web Services Region, App Runner creates revision number <code>1</code> of this\n      name. When you use the same name in subsequent calls, App Runner creates incremental revisions of the configuration.</p>\n         <note>\n            <p>The name <code>DefaultConfiguration</code> is reserved (it's the configuration that App Runner uses if you don't provide a custome one). You can't use it\n        to create a new auto scaling configuration, and you can't create a revision of it.</p>\n            <p>When you want to use your own auto scaling configuration for your App Runner service, <i>create a configuration with a different name</i>,\n        and then provide it when you create or update your service.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -832,7 +845,7 @@
                 "ServiceName": {
                     "target": "com.amazonaws.apprunner#ServiceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>A name for the new service. It must be unique across all the running App Runner services in your Amazon Web Services account in the Amazon Web Services Region.</p>",
+                        "smithy.api#documentation": "<p>A name for the App Runner service. It must be unique across all the running App Runner services in your Amazon Web Services account in the Amazon Web Services Region.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -852,25 +865,31 @@
                 "Tags": {
                     "target": "com.amazonaws.apprunner#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional list of metadata items that you can associate with your service resource. A tag is a key-value pair.</p>"
+                        "smithy.api#documentation": "<p>An optional list of metadata items that you can associate with the App Runner service resource. A tag is a key-value pair.</p>"
                     }
                 },
                 "EncryptionConfiguration": {
                     "target": "com.amazonaws.apprunner#EncryptionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional custom encryption key that App Runner uses to encrypt the copy of your source repository that it maintains and your service logs. By default,\n      App Runner uses an Amazon Web Services managed CMK.</p>"
+                        "smithy.api#documentation": "<p>An optional custom encryption key that App Runner uses to encrypt the copy of your source repository that it maintains and your service logs. By default,\n      App Runner uses an Amazon Web Services managed key.</p>"
                     }
                 },
                 "HealthCheckConfiguration": {
                     "target": "com.amazonaws.apprunner#HealthCheckConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The settings for the health check that App Runner performs to monitor the health of your service.</p>"
+                        "smithy.api#documentation": "<p>The settings for the health check that App Runner performs to monitor the health of the App Runner service.</p>"
                     }
                 },
                 "AutoScalingConfigurationArn": {
                     "target": "com.amazonaws.apprunner#AppRunnerResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an App Runner automatic scaling configuration resource that you want to associate with your service. If not provided, App Runner\n      associates the latest revision of a default auto scaling configuration.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an App Runner automatic scaling configuration resource that you want to associate with the App Runner service. If not provided,\n      App Runner associates the latest revision of a default auto scaling configuration.</p>"
+                    }
+                },
+                "NetworkConfiguration": {
+                    "target": "com.amazonaws.apprunner#NetworkConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration settings related to network traffic of the web application that the App Runner service runs.</p>"
                     }
                 }
             }
@@ -889,6 +908,72 @@
                     "target": "com.amazonaws.apprunner#UUID",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique ID of the asynchronous operation that this request started. You can use it combined with the <a href=\"https://docs.aws.amazon.com/apprunner/latest/api/API_ListOperations.html\">ListOperations</a> call to track the operation's progress.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#CreateVpcConnector": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apprunner#CreateVpcConnectorRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apprunner#CreateVpcConnectorResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apprunner#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#ServiceQuotaExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Create an App Runner VPC connector resource. App Runner requires this resource when you want to associate your App Runner service to a custom Amazon Virtual Private Cloud\n        (Amazon VPC).</p>"
+            }
+        },
+        "com.amazonaws.apprunner#CreateVpcConnectorRequest": {
+            "type": "structure",
+            "members": {
+                "VpcConnectorName": {
+                    "target": "com.amazonaws.apprunner#VpcConnectorName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name for the VPC connector.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Subnets": {
+                    "target": "com.amazonaws.apprunner#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of IDs of subnets that App Runner should use when it associates your service with a custom Amazon VPC. Specify IDs of subnets of a single\n        Amazon VPC. App Runner determines the Amazon VPC from the subnets you specify.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SecurityGroups": {
+                    "target": "com.amazonaws.apprunner#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of IDs of security groups that App Runner should use for access to Amazon Web Services resources under the specified subnets. If not specified, App Runner uses the\n      default security group of the Amazon VPC. The default security group allows all outbound traffic.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.apprunner#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of metadata items that you can associate with your VPC connector resource. A tag is a key-value pair.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#CreateVpcConnectorResponse": {
+            "type": "structure",
+            "members": {
+                "VpcConnector": {
+                    "target": "com.amazonaws.apprunner#VpcConnector",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the App Runner VPC connector that's created by this request.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1120,6 +1205,53 @@
                 }
             }
         },
+        "com.amazonaws.apprunner#DeleteVpcConnector": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apprunner#DeleteVpcConnectorRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apprunner#DeleteVpcConnectorResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apprunner#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Delete an App Runner VPC connector resource. You can't delete a\n      connector that's used by one or more App Runner services.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#DeleteVpcConnectorRequest": {
+            "type": "structure",
+            "members": {
+                "VpcConnectorArn": {
+                    "target": "com.amazonaws.apprunner#AppRunnerResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the App Runner VPC connector that you want to delete.</p>\n         <p>The ARN must be a full VPC connector ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#DeleteVpcConnectorResponse": {
+            "type": "structure",
+            "members": {
+                "VpcConnector": {
+                    "target": "com.amazonaws.apprunner#VpcConnector",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the App Runner VPC connector that this request just deleted.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.apprunner#DescribeAutoScalingConfiguration": {
             "type": "operation",
             "input": {
@@ -1308,6 +1440,53 @@
                 }
             }
         },
+        "com.amazonaws.apprunner#DescribeVpcConnector": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apprunner#DescribeVpcConnectorRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apprunner#DescribeVpcConnectorResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apprunner#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Return a description of an App Runner VPC connector resource.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#DescribeVpcConnectorRequest": {
+            "type": "structure",
+            "members": {
+                "VpcConnectorArn": {
+                    "target": "com.amazonaws.apprunner#AppRunnerResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the App Runner VPC connector that you want a description for.</p>\n         <p>The ARN must be a full VPC connector ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#DescribeVpcConnectorResponse": {
+            "type": "structure",
+            "members": {
+                "VpcConnector": {
+                    "target": "com.amazonaws.apprunner#VpcConnector",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the App Runner VPC connector that you specified in this request.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.apprunner#DisassociateCustomDomain": {
             "type": "operation",
             "input": {
@@ -1385,7 +1564,43 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 255
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9*.-]{1,255}$"
+            }
+        },
+        "com.amazonaws.apprunner#EgressConfiguration": {
+            "type": "structure",
+            "members": {
+                "EgressType": {
+                    "target": "com.amazonaws.apprunner#EgressType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of egress configuration.</p>\n         <p>Set to <code>DEFAULT</code> for access to resources hosted on public networks.</p>\n         <p>Set to <code>VPC</code> to associate your service to a custom VPC specified by <code>VpcConnectorArn</code>.</p>"
+                    }
+                },
+                "VpcConnectorArn": {
+                    "target": "com.amazonaws.apprunner#AppRunnerResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the App Runner VPC connector that you want to associate with your App Runner service. Only valid when <code>EgressType =\n        VPC</code>.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes configuration settings related to outbound network traffic of an App Runner service.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#EgressType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "DEFAULT",
+                        "name": "DEFAULT"
+                    },
+                    {
+                        "value": "VPC",
+                        "name": "VPC"
+                    }
+                ]
             }
         },
         "com.amazonaws.apprunner#EncryptionConfiguration": {
@@ -1529,7 +1744,7 @@
                     }
                 },
                 "StartCommand": {
-                    "target": "com.amazonaws.apprunner#String",
+                    "target": "com.amazonaws.apprunner#StartCommand",
                     "traits": {
                         "smithy.api#documentation": "<p>An optional command that App Runner runs to start the application in the source image. If specified, this command overrides the Docker image’s default start\n      command.</p>"
                     }
@@ -2014,6 +2229,66 @@
                 }
             }
         },
+        "com.amazonaws.apprunner#ListVpcConnectors": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apprunner#ListVpcConnectorsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apprunner#ListVpcConnectorsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apprunner#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of App Runner VPC connectors in your Amazon Web Services account.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.apprunner#ListVpcConnectorsRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.apprunner#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to include in each response (result page). It's used for a paginated request.</p>\n         <p>If you don't specify <code>MaxResults</code>, the request retrieves all available results in a single response.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.apprunner#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token from a previous result page. It's used for a paginated request. The request retrieves the next result page. All other parameter values must be\n      identical to the ones that are specified in the initial request.</p>\n         <p>If you don't specify <code>NextToken</code>, the request retrieves the first result page.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#ListVpcConnectorsResponse": {
+            "type": "structure",
+            "members": {
+                "VpcConnectors": {
+                    "target": "com.amazonaws.apprunner#VpcConnectors",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of information records for VPC connectors. In a paginated request, the request returns up to <code>MaxResults</code> records for each\n      call.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.apprunner#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token that you can pass in a subsequent request to get the next result page. It's returned in a paginated request.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.apprunner#MaxResults": {
             "type": "integer",
             "traits": {
@@ -2032,6 +2307,20 @@
                     "max": 4
                 },
                 "smithy.api#pattern": "^2048|3072|4096|(2|3|4) GB$"
+            }
+        },
+        "com.amazonaws.apprunner#NetworkConfiguration": {
+            "type": "structure",
+            "members": {
+                "EgressConfiguration": {
+                    "target": "com.amazonaws.apprunner#EgressConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Network configuration settings for outbound message traffic.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes configuration settings related to network traffic of an App Runner service. Consists of embedded objects for each configurable network\n      feature.</p>"
             }
         },
         "com.amazonaws.apprunner#NextToken": {
@@ -2329,6 +2618,18 @@
                     {
                         "value": "NODEJS_12",
                         "name": "NODEJS_12"
+                    },
+                    {
+                        "value": "NODEJS_14",
+                        "name": "NODEJS_14"
+                    },
+                    {
+                        "value": "CORRETTO_8",
+                        "name": "CORRETTO_8"
+                    },
+                    {
+                        "value": "CORRETTO_11",
+                        "name": "CORRETTO_11"
                     }
                 ]
             }
@@ -2345,12 +2646,22 @@
         "com.amazonaws.apprunner#RuntimeEnvironmentVariablesKey": {
             "type": "string",
             "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 51200
+                },
+                "smithy.api#pattern": ".*",
                 "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.apprunner#RuntimeEnvironmentVariablesValue": {
             "type": "string",
             "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 51200
+                },
+                "smithy.api#pattern": ".*",
                 "smithy.api#sensitive": {}
             }
         },
@@ -2429,7 +2740,7 @@
                 "EncryptionConfiguration": {
                     "target": "com.amazonaws.apprunner#EncryptionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The encryption key that App Runner uses to encrypt the service logs and the copy of the source repository that App Runner maintains for the service. It can be\n      either a customer-provided encryption key or an Amazon Web Services managed CMK.</p>"
+                        "smithy.api#documentation": "<p>The encryption key that App Runner uses to encrypt the service logs and the copy of the source repository that App Runner maintains for the service. It can be\n      either a customer-provided encryption key or an Amazon Web Services managed key.</p>"
                     }
                 },
                 "HealthCheckConfiguration": {
@@ -2442,6 +2753,13 @@
                     "target": "com.amazonaws.apprunner#AutoScalingConfigurationSummary",
                     "traits": {
                         "smithy.api#documentation": "<p>Summary information for the App Runner automatic scaling configuration resource that's associated with this service.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NetworkConfiguration": {
+                    "target": "com.amazonaws.apprunner#NetworkConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration settings related to network traffic of the web application that this service runs.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2652,6 +2970,7 @@
         "com.amazonaws.apprunner#StartCommand": {
             "type": "string",
             "traits": {
+                "smithy.api#pattern": "^[^\\x0a\\x0d]+$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -2710,6 +3029,12 @@
                     "max": 51200
                 },
                 "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.apprunner#StringList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.apprunner#String"
             }
         },
         "com.amazonaws.apprunner#Tag": {
@@ -2926,13 +3251,19 @@
                 "AutoScalingConfigurationArn": {
                     "target": "com.amazonaws.apprunner#AppRunnerResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an App Runner automatic scaling configuration resource that you want to associate with your service.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an App Runner automatic scaling configuration resource that you want to associate with the App Runner service.</p>"
                     }
                 },
                 "HealthCheckConfiguration": {
                     "target": "com.amazonaws.apprunner#HealthCheckConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The settings for the health check that App Runner performs to monitor the health of your service.</p>"
+                        "smithy.api#documentation": "<p>The settings for the health check that App Runner performs to monitor the health of the App Runner service.</p>"
+                    }
+                },
+                "NetworkConfiguration": {
+                    "target": "com.amazonaws.apprunner#NetworkConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration settings related to network traffic of the web application that the App Runner service runs.</p>"
                     }
                 }
             }
@@ -2954,6 +3285,93 @@
                         "smithy.api#required": {}
                     }
                 }
+            }
+        },
+        "com.amazonaws.apprunner#VpcConnector": {
+            "type": "structure",
+            "members": {
+                "VpcConnectorName": {
+                    "target": "com.amazonaws.apprunner#VpcConnectorName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer-provided VPC connector name.</p>"
+                    }
+                },
+                "VpcConnectorArn": {
+                    "target": "com.amazonaws.apprunner#AppRunnerResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of this VPC connector.</p>"
+                    }
+                },
+                "VpcConnectorRevision": {
+                    "target": "com.amazonaws.apprunner#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The revision of this VPC connector. It's unique among all the active connectors (<code>\"Status\": \"ACTIVE\"</code>) that share the same\n      <code>Name</code>.</p>\n         <note>\n            <p>At this time, App Runner supports only one revision per name.</p>\n         </note>"
+                    }
+                },
+                "Subnets": {
+                    "target": "com.amazonaws.apprunner#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of IDs of subnets that App Runner uses for your service. All IDs are of subnets of a single Amazon VPC.</p>"
+                    }
+                },
+                "SecurityGroups": {
+                    "target": "com.amazonaws.apprunner#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of IDs of security groups that App Runner uses for access to Amazon Web Services resources under the specified subnets. If not specified, App Runner uses the default\n      security group of the Amazon VPC. The default security group allows all outbound traffic.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.apprunner#VpcConnectorStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current state of the VPC connector. If the status of a connector revision is <code>INACTIVE</code>, it was deleted and can't be\n      used. Inactive connector revisions are permanently removed some time after they are deleted.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.apprunner#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the VPC connector was created. It's in Unix time stamp format.</p>"
+                    }
+                },
+                "DeletedAt": {
+                    "target": "com.amazonaws.apprunner#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the VPC connector was deleted. It's in Unix time stamp format.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an App Runner VPC connector resource. A VPC connector describes the Amazon Virtual Private Cloud (Amazon VPC) that an App Runner service is\n      associated with, and the subnets and security group that are used.</p>\n         <p>Multiple revisions of a connector might have the same <code>Name</code> and different <code>Revision</code> values.</p>\n         <note>\n            <p>At this time, App Runner supports only one revision per name.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.apprunner#VpcConnectorName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 4,
+                    "max": 40
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9][A-Za-z0-9\\-_]{3,39}$"
+            }
+        },
+        "com.amazonaws.apprunner#VpcConnectorStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
+                    },
+                    {
+                        "value": "INACTIVE",
+                        "name": "INACTIVE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.apprunner#VpcConnectors": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.apprunner#VpcConnector"
             }
         }
     }

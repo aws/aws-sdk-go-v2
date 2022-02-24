@@ -56,23 +56,35 @@ type ListBackupJobsInput struct {
 
 	// Returns only backup jobs for the specified resources:
 	//
-	// * DynamoDB for Amazon
-	// DynamoDB
+	// * Aurora for Amazon
+	// Aurora
+	//
+	// * DocumentDB for Amazon DocumentDB (with MongoDB compatibility)
+	//
+	// *
+	// DynamoDB for Amazon DynamoDB
 	//
 	// * EBS for Amazon Elastic Block Store
 	//
-	// * EC2 for Amazon Elastic Compute
-	// Cloud
+	// * EC2 for
+	// Amazon Elastic Compute Cloud
 	//
 	// * EFS for Amazon Elastic File System
 	//
-	// * RDS for Amazon Relational
-	// Database Service
+	// * FSx for
+	// Amazon FSx
 	//
-	// * Aurora for Amazon Aurora
+	// * Neptune for Amazon Neptune
 	//
-	// * Storage Gateway for Storage
-	// Gateway
+	// * RDS for Amazon Relational Database
+	// Service
+	//
+	// * Storage Gateway for Storage Gateway
+	//
+	// * S3 for Amazon S3
+	//
+	// *
+	// VirtualMachine for virtual machines
 	ByResourceType *string
 
 	// Returns only backup jobs that are in the specified state.

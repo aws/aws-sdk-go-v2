@@ -1982,6 +1982,10 @@ type CandidateArtifactLocations struct {
 	// This member is required.
 	Explainability *string
 
+	// The Amazon S3 prefix to the model insight artifacts generated for the AutoML
+	// candidate.
+	ModelInsights *string
+
 	noSmithyDocumentSerde
 }
 

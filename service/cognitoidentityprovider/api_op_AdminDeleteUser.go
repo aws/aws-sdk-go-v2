@@ -35,7 +35,7 @@ type AdminDeleteUserInput struct {
 	// This member is required.
 	UserPoolId *string
 
-	// The user name of the user you wish to delete.
+	// The user name of the user you want to delete.
 	//
 	// This member is required.
 	Username *string

@@ -43,7 +43,7 @@ type ListConfigurationProfilesInput struct {
 	NextToken *string
 
 	// A filter based on the type of configurations that the configuration profile
-	// contains. A configuration can be a feature flag or a free-form configuration.
+	// contains. A configuration can be a feature flag or a freeform configuration.
 	Type *string
 
 	noSmithyDocumentSerde

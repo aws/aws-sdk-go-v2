@@ -51,6 +51,8 @@ const (
 	BackupVaultEventRecoveryPointModified BackupVaultEvent = "RECOVERY_POINT_MODIFIED"
 	BackupVaultEventBackupPlanCreated     BackupVaultEvent = "BACKUP_PLAN_CREATED"
 	BackupVaultEventBackupPlanModified    BackupVaultEvent = "BACKUP_PLAN_MODIFIED"
+	BackupVaultEventS3BackupObjectFailed  BackupVaultEvent = "S3_BACKUP_OBJECT_FAILED"
+	BackupVaultEventS3RestoreObjectFailed BackupVaultEvent = "S3_RESTORE_OBJECT_FAILED"
 )
 
 // Values returns all known values for BackupVaultEvent. Note that this can be
@@ -73,6 +75,8 @@ func (BackupVaultEvent) Values() []BackupVaultEvent {
 		"RECOVERY_POINT_MODIFIED",
 		"BACKUP_PLAN_CREATED",
 		"BACKUP_PLAN_MODIFIED",
+		"S3_BACKUP_OBJECT_FAILED",
+		"S3_RESTORE_OBJECT_FAILED",
 	}
 }
 

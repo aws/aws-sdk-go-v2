@@ -31,8 +31,7 @@ func (c *Client) GetDimensionValues(ctx context.Context, params *GetDimensionVal
 type GetDimensionValuesInput struct {
 
 	// The name of the dimension. Each Dimension is available for a different Context.
-	// For more information, see Context
-	// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetDimensionValues.html#awscostmanagement-GetDimensionValues-request-Context).
+	// For more information, see Context.
 	//
 	// This member is required.
 	Dimension types.Dimension
@@ -56,17 +55,40 @@ type GetDimensionValuesInput struct {
 	// * AZ - The Availability Zone. An example is us-east-1a.
 	//
 	// *
-	// DATABASE_ENGINE - The Amazon Relational Database Service database. Examples are
-	// Aurora or MySQL.
+	// BILLING_ENTITY - The Amazon Web Services seller that your account is with.
+	// Possible values are the following: - Amazon Web Services(Amazon Web Services):
+	// The entity that sells Amazon Web Services services. - AISPL (Amazon Internet
+	// Services Pvt. Ltd.): The local Indian entity that is an acting reseller for
+	// Amazon Web Services services in India. - Amazon Web Services Marketplace: The
+	// entity that supports the sale of solutions built on Amazon Web Services by
+	// third-party software providers.
 	//
-	// * INSTANCE_TYPE - The type of Amazon EC2 instance. An example
-	// is m4.xlarge.
+	// * CACHE_ENGINE - The Amazon ElastiCache
+	// operating system. Examples are Windows or Linux.
 	//
-	// * LEGAL_ENTITY_NAME - The name of the organization that sells you
-	// Amazon Web Services services, such as Amazon Web Services.
+	// * DEPLOYMENT_OPTION - The
+	// scope of Amazon Relational Database Service deployments. Valid values are
+	// SingleAZ and MultiAZ.
 	//
-	// * LINKED_ACCOUNT -
-	// The description in the attribute map that includes the full name of the member
+	// * DATABASE_ENGINE - The Amazon Relational Database
+	// Service database. Examples are Aurora or MySQL.
+	//
+	// * INSTANCE_TYPE - The type of
+	// Amazon EC2 instance. An example is m4.xlarge.
+	//
+	// * INSTANCE_TYPE_FAMILY - A family
+	// of instance types optimized to fit different use cases. Examples are Compute
+	// Optimized (C4, C5, C6g, C7g etc.), Memory Optimization (R4, R5n, R5b, R6g
+	// etc).
+	//
+	// * INVOICING_ENTITY - The name of the entity issuing the Amazon Web
+	// Services invoice.
+	//
+	// * LEGAL_ENTITY_NAME - The name of the organization that sells
+	// you Amazon Web Services services, such as Amazon Web Services.
+	//
+	// * LINKED_ACCOUNT
+	// - The description in the attribute map that includes the full name of the member
 	// account. The value field contains the Amazon Web Services ID of the member
 	// account.
 	//
@@ -83,8 +105,20 @@ type GetDimensionValuesInput struct {
 	// which this usage is related. Examples include On-Demand Instances and Standard
 	// Reserved Instances.
 	//
+	// * RESERVATION_ID - The unique identifier for an Amazon Web
+	// Services Reservation Instance.
+	//
+	// * SAVINGS_PLAN_ARN - The unique identifier for
+	// your Savings Plans.
+	//
+	// * SAVINGS_PLANS_TYPE - Type of Savings Plans (EC2 Instance
+	// or Compute).
+	//
 	// * SERVICE - The Amazon Web Services service such as Amazon
 	// DynamoDB.
+	//
+	// * TENANCY - The tenancy of a resource. Examples are shared or
+	// dedicated.
 	//
 	// * USAGE_TYPE - The type of usage. An example is
 	// DataTransfer-In-Bytes. The response for the GetDimensionValues operation
@@ -160,7 +194,7 @@ type GetDimensionValuesInput struct {
 	// of the member account.
 	//
 	// * SAVINGS_PLAN_ARN - The unique identifier for your
-	// Savings Plan
+	// Savings Plans.
 	Context types.Context
 
 	// Use Expression to filter by cost or by usage. There are two patterns:

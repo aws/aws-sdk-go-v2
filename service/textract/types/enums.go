@@ -13,6 +13,8 @@ const (
 	BlockTypeTable            BlockType = "TABLE"
 	BlockTypeCell             BlockType = "CELL"
 	BlockTypeSelectionElement BlockType = "SELECTION_ELEMENT"
+	BlockTypeMergedCell       BlockType = "MERGED_CELL"
+	BlockTypeTitle            BlockType = "TITLE"
 )
 
 // Values returns all known values for BlockType. Note that this can be expanded in
@@ -27,6 +29,8 @@ func (BlockType) Values() []BlockType {
 		"TABLE",
 		"CELL",
 		"SELECTION_ELEMENT",
+		"MERGED_CELL",
+		"TITLE",
 	}
 }
 
@@ -52,8 +56,9 @@ type EntityType string
 
 // Enum values for EntityType
 const (
-	EntityTypeKey   EntityType = "KEY"
-	EntityTypeValue EntityType = "VALUE"
+	EntityTypeKey          EntityType = "KEY"
+	EntityTypeValue        EntityType = "VALUE"
+	EntityTypeColumnHeader EntityType = "COLUMN_HEADER"
 )
 
 // Values returns all known values for EntityType. Note that this can be expanded
@@ -63,6 +68,7 @@ func (EntityType) Values() []EntityType {
 	return []EntityType{
 		"KEY",
 		"VALUE",
+		"COLUMN_HEADER",
 	}
 }
 
@@ -113,6 +119,8 @@ const (
 	RelationshipTypeValue           RelationshipType = "VALUE"
 	RelationshipTypeChild           RelationshipType = "CHILD"
 	RelationshipTypeComplexFeatures RelationshipType = "COMPLEX_FEATURES"
+	RelationshipTypeMergedCell      RelationshipType = "MERGED_CELL"
+	RelationshipTypeTitle           RelationshipType = "TITLE"
 )
 
 // Values returns all known values for RelationshipType. Note that this can be
@@ -123,6 +131,8 @@ func (RelationshipType) Values() []RelationshipType {
 		"VALUE",
 		"CHILD",
 		"COMPLEX_FEATURES",
+		"MERGED_CELL",
+		"TITLE",
 	}
 }
 

@@ -65,7 +65,7 @@ type DescribeChangeSetOutput struct {
 	// acknowledged when the change set was created.
 	Capabilities []types.Capability
 
-	// The ARN of the change set.
+	// The Amazon Resource Name (ARN) of the change set.
 	ChangeSetId *string
 
 	// The name of the change set.
@@ -82,7 +82,7 @@ type DescribeChangeSetOutput struct {
 	Description *string
 
 	// If the change set execution status is AVAILABLE, you can execute the change set.
-	// If you can’t execute the change set, the status indicates why. For example, a
+	// If you can't execute the change set, the status indicates why. For example, a
 	// change set might be in an UNAVAILABLE state because CloudFormation is still
 	// creating it or in an OBSOLETE state because the stack was already updated.
 	ExecutionStatus types.ExecutionStatus
@@ -116,10 +116,11 @@ type DescribeChangeSetOutput struct {
 	// set hierarchy.
 	RootChangeSetId *string
 
-	// The ARN of the stack that is associated with the change set.
+	// The Amazon Resource Name (ARN) of the stack that's associated with the change
+	// set.
 	StackId *string
 
-	// The name of the stack that is associated with the change set.
+	// The name of the stack that's associated with the change set.
 	StackName *string
 
 	// The current status of the change set, such as CREATE_IN_PROGRESS,

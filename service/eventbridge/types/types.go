@@ -509,7 +509,7 @@ type EcsParameters struct {
 	// Specifies the launch type on which your task is running. The launch type that
 	// you specify here must match one of the launch type (compatibilities) of the
 	// target task. The FARGATE value is supported only in the Regions where Fargate
-	// witt Amazon ECS is supported. For more information, see Fargate on Amazon ECS
+	// with Amazon ECS is supported. For more information, see Fargate on Amazon ECS
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS-Fargate.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	LaunchType LaunchType
@@ -836,7 +836,7 @@ type PutEventsRequestEntry struct {
 	// call is used.
 	Time *time.Time
 
-	// An X-Ray trade header, which is an http header (X-Amzn-Trace-Id) that contains
+	// An X-Ray trace header, which is an http header (X-Amzn-Trace-Id) that contains
 	// the trace-id associated with the event. To learn more about X-Ray trace headers,
 	// see Tracing header
 	// (https://docs.aws.amazon.com/xray/latest/devguide/xray-concepts.html#xray-concepts-tracingheader)
@@ -846,7 +846,9 @@ type PutEventsRequestEntry struct {
 	noSmithyDocumentSerde
 }
 
-// Represents an event that failed to be submitted.
+// Represents an event that failed to be submitted. For information about the
+// errors that are common to all actions, see Common Errors
+// (https://docs.aws.amazon.com/eventbridge/latest/APIReference/CommonErrors.html).
 type PutEventsResultEntry struct {
 
 	// The error code that indicates why the event submission failed.
@@ -1182,7 +1184,8 @@ type Target struct {
 	// This member is required.
 	Arn *string
 
-	// The ID of the target. We recommend using a memorable and unique string.
+	// The ID of the target within the specified rule. Use this ID to reference the
+	// target when updating the rule. We recommend using a memorable and unique string.
 	//
 	// This member is required.
 	Id *string

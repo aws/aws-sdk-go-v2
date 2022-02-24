@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Gets information about a Amazon Kendra data source.
+// Gets information about an Amazon Kendra data source.
 func (c *Client) DescribeDataSource(ctx context.Context, params *DescribeDataSourceInput, optFns ...func(*Options)) (*DescribeDataSourceOutput, error) {
 	if params == nil {
 		params = &DescribeDataSourceInput{}
@@ -88,7 +88,7 @@ type DescribeDataSourceOutput struct {
 	// access its resources.
 	RoleArn *string
 
-	// The schedule that Amazon Kendra will update the data source.
+	// The schedule for Amazon Kendra to update the index.
 	Schedule *string
 
 	// The current status of the data source. When the status is ACTIVE the data source

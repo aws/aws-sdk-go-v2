@@ -79,7 +79,8 @@ type CreateDocumentInput struct {
 	// YAML, or TEXT. JSON is the default format.
 	DocumentFormat types.DocumentFormat
 
-	// The type of document to create.
+	// The type of document to create. The DeploymentStrategy document type is an
+	// internal-use-only document type reserved for AppConfig.
 	DocumentType types.DocumentType
 
 	// A list of SSM documents required by a document. This parameter is used

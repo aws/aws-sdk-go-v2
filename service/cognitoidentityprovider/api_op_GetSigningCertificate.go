@@ -26,7 +26,7 @@ func (c *Client) GetSigningCertificate(ctx context.Context, params *GetSigningCe
 	return out, nil
 }
 
-// Request to get a signing certificate from Cognito.
+// Request to get a signing certificate from Amazon Cognito.
 type GetSigningCertificateInput struct {
 
 	// The user pool ID.
@@ -37,7 +37,7 @@ type GetSigningCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
-// Response from Cognito for a signing certificate request.
+// Response from Amazon Cognito for a signing certificate request.
 type GetSigningCertificateOutput struct {
 
 	// The signing certificate.

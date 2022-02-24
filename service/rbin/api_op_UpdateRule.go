@@ -14,7 +14,7 @@ import (
 // Updates an existing Recycle Bin retention rule. For more information, see
 // Update Recycle Bin retention rules
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/recycle-bin-working-with-rules.html#recycle-bin-update-rule)
-// in the Amazon EC2 User Guide.
+// in the Amazon Elastic Compute Cloud User Guide.
 func (c *Client) UpdateRule(ctx context.Context, params *UpdateRuleInput, optFns ...func(*Options)) (*UpdateRuleOutput, error) {
 	if params == nil {
 		params = &UpdateRuleInput{}
@@ -32,7 +32,7 @@ func (c *Client) UpdateRule(ctx context.Context, params *UpdateRuleInput, optFns
 
 type UpdateRuleInput struct {
 
-	// The unique ID of the retention rule to update.
+	// The unique ID of the retention rule.
 	//
 	// This member is required.
 	Identifier *string
@@ -40,17 +40,22 @@ type UpdateRuleInput struct {
 	// The retention rule description.
 	Description *string
 
-	// Information about the resource tags to use to identify resources that are to be
-	// retained by the retention rule. The retention rule retains only deleted
-	// snapshots that have one or more of the specified tag key and value pairs. If a
-	// snapshot is deleted, but it does not have any of the specified tag key and value
-	// pairs, it is immediately deleted without being retained by the retention rule.
-	// You can add the same tag key and value pair to a maximum or five retention
-	// rules.
+	// Specifies the resource tags to use to identify resources that are to be retained
+	// by a tag-level retention rule. For tag-level retention rules, only deleted
+	// resources, of the specified resource type, that have one or more of the
+	// specified tag key and value pairs are retained. If a resource is deleted, but it
+	// does not have any of the specified tag key and value pairs, it is immediately
+	// deleted without being retained by the retention rule. You can add the same tag
+	// key and value pair to a maximum or five retention rules. To create a
+	// Region-level retention rule, omit this parameter. A Region-level retention rule
+	// does not have any resource tags specified. It retains all deleted resources of
+	// the specified resource type in the Region in which the rule is created, even if
+	// the resources are not tagged.
 	ResourceTags []types.ResourceTag
 
 	// The resource type to be retained by the retention rule. Currently, only Amazon
-	// EBS snapshots are supported.
+	// EBS snapshots and EBS-backed AMIs are supported. To retain snapshots, specify
+	// EBS_SNAPSHOT. To retain EBS-backed AMIs, specify EC2_IMAGE.
 	ResourceType types.ResourceType
 
 	// Information about the retention period for which the retention rule is to retain
@@ -75,12 +80,12 @@ type UpdateRuleOutput struct {
 	// The resource type retained by the retention rule.
 	ResourceType types.ResourceType
 
-	// Information about the retention period for which a retention rule is to retain
+	// Information about the retention period for which the retention rule is to retain
 	// resources.
 	RetentionPeriod *types.RetentionPeriod
 
 	// The state of the retention rule. Only retention rules that are in the available
-	// state retain snapshots.
+	// state retain resources.
 	Status types.RuleStatus
 
 	// Metadata pertaining to the operation's result.

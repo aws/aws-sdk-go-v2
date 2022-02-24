@@ -82,8 +82,8 @@ type ListStackSetOperationResultsOutput struct {
 	NextToken *string
 
 	// A list of StackSetOperationResultSummary structures that contain information
-	// about the specified operation results, for accounts and Regions that are
-	// included in the operation.
+	// about the specified operation results, for accounts and Amazon Web Services
+	// Regions that are included in the operation.
 	Summaries []types.StackSetOperationResultSummary
 
 	// Metadata pertaining to the operation's result.

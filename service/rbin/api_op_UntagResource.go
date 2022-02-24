@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Unassigns a tag from a resource.
+// Unassigns a tag from a retention rule.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}
@@ -28,12 +28,13 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the resource from which to unassign the tags.
+	// The Amazon Resource Name (ARN) of the retention rule.
 	//
 	// This member is required.
 	ResourceArn *string
 
-	// Information about the tags to unassign from the resource.
+	// The tag keys of the tags to unassign. All tags that have the specified tag key
+	// are unassigned.
 	//
 	// This member is required.
 	TagKeys []string

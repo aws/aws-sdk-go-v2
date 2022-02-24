@@ -841,6 +841,61 @@ func (m *awsAwsjson11_serializeOpDisassociateWebACL) HandleSerialize(ctx context
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpGenerateMobileSdkReleaseUrl struct {
+}
+
+func (*awsAwsjson11_serializeOpGenerateMobileSdkReleaseUrl) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpGenerateMobileSdkReleaseUrl) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GenerateMobileSdkReleaseUrlInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSWAF_20190729.GenerateMobileSdkReleaseUrl")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentGenerateMobileSdkReleaseUrlInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpGetIPSet struct {
 }
 
@@ -991,6 +1046,61 @@ func (m *awsAwsjson11_serializeOpGetManagedRuleSet) HandleSerialize(ctx context.
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentGetManagedRuleSetInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpGetMobileSdkRelease struct {
+}
+
+func (*awsAwsjson11_serializeOpGetMobileSdkRelease) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpGetMobileSdkRelease) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetMobileSdkReleaseInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSWAF_20190729.GetMobileSdkRelease")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentGetMobileSdkReleaseInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1651,6 +1761,61 @@ func (m *awsAwsjson11_serializeOpListManagedRuleSets) HandleSerialize(ctx contex
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentListManagedRuleSetsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpListMobileSdkReleases struct {
+}
+
+func (*awsAwsjson11_serializeOpListMobileSdkReleases) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpListMobileSdkReleases) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListMobileSdkReleasesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSWAF_20190729.ListMobileSdkReleases")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentListMobileSdkReleasesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3208,6 +3373,50 @@ func awsAwsjson11_serializeDocumentLoggingFilter(v *types.LoggingFilter, value s
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentManagedRuleGroupConfig(v *types.ManagedRuleGroupConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LoginPath != nil {
+		ok := object.Key("LoginPath")
+		ok.String(*v.LoginPath)
+	}
+
+	if v.PasswordField != nil {
+		ok := object.Key("PasswordField")
+		if err := awsAwsjson11_serializeDocumentPasswordField(v.PasswordField, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.PayloadType) > 0 {
+		ok := object.Key("PayloadType")
+		ok.String(string(v.PayloadType))
+	}
+
+	if v.UsernameField != nil {
+		ok := object.Key("UsernameField")
+		if err := awsAwsjson11_serializeDocumentUsernameField(v.UsernameField, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentManagedRuleGroupConfigs(v []types.ManagedRuleGroupConfig, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentManagedRuleGroupConfig(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentManagedRuleGroupStatement(v *types.ManagedRuleGroupStatement, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3215,6 +3424,13 @@ func awsAwsjson11_serializeDocumentManagedRuleGroupStatement(v *types.ManagedRul
 	if v.ExcludedRules != nil {
 		ok := object.Key("ExcludedRules")
 		if err := awsAwsjson11_serializeDocumentExcludedRules(v.ExcludedRules, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ManagedRuleGroupConfigs != nil {
+		ok := object.Key("ManagedRuleGroupConfigs")
+		if err := awsAwsjson11_serializeDocumentManagedRuleGroupConfigs(v.ManagedRuleGroupConfigs, ok); err != nil {
 			return err
 		}
 	}
@@ -3302,6 +3518,18 @@ func awsAwsjson11_serializeDocumentOverrideAction(v *types.OverrideAction, value
 		if err := awsAwsjson11_serializeDocumentNoneAction(v.None, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPasswordField(v *types.PasswordField, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Identifier != nil {
+		ok := object.Key("Identifier")
+		ok.String(*v.Identifier)
 	}
 
 	return nil
@@ -3857,6 +4085,18 @@ func awsAwsjson11_serializeDocumentUriPath(v *types.UriPath, value smithyjson.Va
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentUsernameField(v *types.UsernameField, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Identifier != nil {
+		ok := object.Key("Identifier")
+		ok.String(*v.Identifier)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentVersionsToPublish(v map[string]types.VersionToPublish, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4351,6 +4591,23 @@ func awsAwsjson11_serializeOpDocumentDisassociateWebACLInput(v *DisassociateWebA
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentGenerateMobileSdkReleaseUrlInput(v *GenerateMobileSdkReleaseUrlInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Platform) > 0 {
+		ok := object.Key("Platform")
+		ok.String(string(v.Platform))
+	}
+
+	if v.ReleaseVersion != nil {
+		ok := object.Key("ReleaseVersion")
+		ok.String(*v.ReleaseVersion)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentGetIPSetInput(v *GetIPSetInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4402,6 +4659,23 @@ func awsAwsjson11_serializeOpDocumentGetManagedRuleSetInput(v *GetManagedRuleSet
 	if len(v.Scope) > 0 {
 		ok := object.Key("Scope")
 		ok.String(string(v.Scope))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentGetMobileSdkReleaseInput(v *GetMobileSdkReleaseInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Platform) > 0 {
+		ok := object.Key("Platform")
+		ok.String(string(v.Platform))
+	}
+
+	if v.ReleaseVersion != nil {
+		ok := object.Key("ReleaseVersion")
+		ok.String(*v.ReleaseVersion)
 	}
 
 	return nil
@@ -4683,6 +4957,28 @@ func awsAwsjson11_serializeOpDocumentListManagedRuleSetsInput(v *ListManagedRule
 	if len(v.Scope) > 0 {
 		ok := object.Key("Scope")
 		ok.String(string(v.Scope))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentListMobileSdkReleasesInput(v *ListMobileSdkReleasesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Limit != nil {
+		ok := object.Key("Limit")
+		ok.Integer(*v.Limit)
+	}
+
+	if v.NextMarker != nil {
+		ok := object.Key("NextMarker")
+		ok.String(*v.NextMarker)
+	}
+
+	if len(v.Platform) > 0 {
+		ok := object.Key("Platform")
+		ok.String(string(v.Platform))
 	}
 
 	return nil

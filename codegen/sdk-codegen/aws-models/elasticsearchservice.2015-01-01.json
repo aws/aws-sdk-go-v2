@@ -401,6 +401,9 @@
                     "target": "com.amazonaws.elasticsearchservice#DescribeDomainAutoTunes"
                 },
                 {
+                    "target": "com.amazonaws.elasticsearchservice#DescribeDomainChangeProgress"
+                },
+                {
                     "target": "com.amazonaws.elasticsearchservice#DescribeElasticsearchDomain"
                 },
                 {
@@ -932,6 +935,135 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The result of a <code>CancelElasticsearchServiceSoftwareUpdate</code> operation. Contains the status of the update.</p>"
+            }
+        },
+        "com.amazonaws.elasticsearchservice#ChangeProgressDetails": {
+            "type": "structure",
+            "members": {
+                "ChangeId": {
+                    "target": "com.amazonaws.elasticsearchservice#GUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique change identifier associated with a specific domain configuration change.</p>"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.elasticsearchservice#Message",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains an optional message associated with the domain configuration change.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies change details of the domain configuration change.</p>"
+            }
+        },
+        "com.amazonaws.elasticsearchservice#ChangeProgressStage": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.elasticsearchservice#ChangeProgressStageName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the specific progress stage.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.elasticsearchservice#ChangeProgressStageStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The overall status of a specific progress stage.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.elasticsearchservice#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the progress stage.</p>"
+                    }
+                },
+                "LastUpdated": {
+                    "target": "com.amazonaws.elasticsearchservice#LastUpdated",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last updated timestamp of the progress stage.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A progress stage details of a specific domain configuration change.</p>"
+            }
+        },
+        "com.amazonaws.elasticsearchservice#ChangeProgressStageList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.elasticsearchservice#ChangeProgressStage"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The list of progress stages of a specific domain configuration change.</p>"
+            }
+        },
+        "com.amazonaws.elasticsearchservice#ChangeProgressStageName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
+        "com.amazonaws.elasticsearchservice#ChangeProgressStageStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.elasticsearchservice#ChangeProgressStatusDetails": {
+            "type": "structure",
+            "members": {
+                "ChangeId": {
+                    "target": "com.amazonaws.elasticsearchservice#GUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique change identifier associated with a specific domain configuration change.</p>"
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.elasticsearchservice#UpdateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the configuration change is made on the domain.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.elasticsearchservice#OverallChangeStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The overall status of the domain configuration change. This field can take the following values: <code>PENDING</code>, <code>PROCESSING</code>, <code>COMPLETED</code> and <code>FAILED</code></p>"
+                    }
+                },
+                "PendingProperties": {
+                    "target": "com.amazonaws.elasticsearchservice#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of properties involved in the domain configuration change that are still in pending.</p>"
+                    }
+                },
+                "CompletedProperties": {
+                    "target": "com.amazonaws.elasticsearchservice#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of properties involved in the domain configuration change that are completed.</p>"
+                    }
+                },
+                "TotalNumberOfStages": {
+                    "target": "com.amazonaws.elasticsearchservice#TotalNumberOfStages",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of stages required for the configuration change.</p>"
+                    }
+                },
+                "ChangeProgressStages": {
+                    "target": "com.amazonaws.elasticsearchservice#ChangeProgressStageList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specific stages that the domain is going through to perform the configuration change.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The progress details of a specific domain configuration change.</p>"
             }
         },
         "com.amazonaws.elasticsearchservice#CloudWatchLogsLogGroupArn": {
@@ -1801,6 +1933,74 @@
                 "smithy.api#documentation": "<p>The result of <code>DescribeDomainAutoTunes</code> request. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information. </p>"
             }
         },
+        "com.amazonaws.elasticsearchservice#DescribeDomainChangeProgress": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.elasticsearchservice#DescribeDomainChangeProgressRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.elasticsearchservice#DescribeDomainChangeProgressResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.elasticsearchservice#BaseException"
+                },
+                {
+                    "target": "com.amazonaws.elasticsearchservice#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.elasticsearchservice#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.elasticsearchservice#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about the current blue/green deployment happening on a domain, including\n        a change ID, status, and progress stages.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2015-01-01/es/domain/{DomainName}/progress",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.elasticsearchservice#DescribeDomainChangeProgressRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.elasticsearchservice#DomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain you want to get the progress information about.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ChangeId": {
+                    "target": "com.amazonaws.elasticsearchservice#GUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specific change ID for which you want to get progress information. This is an optional parameter.\n        If omitted, the service returns information about the most recent configuration change.\n      </p>",
+                        "smithy.api#httpQuery": "changeid"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Container for the parameters to the <code>DescribeDomainChangeProgress</code> operation. Specifies the\n        domain name and optional change specific identity for which you want progress information.\n      </p>"
+            }
+        },
+        "com.amazonaws.elasticsearchservice#DescribeDomainChangeProgressResponse": {
+            "type": "structure",
+            "members": {
+                "ChangeProgressStatus": {
+                    "target": "com.amazonaws.elasticsearchservice#ChangeProgressStatusDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Progress information for the configuration change that is requested in the <code>DescribeDomainChangeProgress</code> request.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The result of a <code>DescribeDomainChangeProgress</code> request. Contains the progress information of\n        the requested domain change.\n      </p>"
+            }
+        },
         "com.amazonaws.elasticsearchservice#DescribeElasticsearchDomain": {
             "type": "operation",
             "input": {
@@ -2525,6 +2725,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>Container for results from <code>DescribeReservedElasticsearchInstances</code></p>"
             }
+        },
+        "com.amazonaws.elasticsearchservice#Description": {
+            "type": "string"
         },
         "com.amazonaws.elasticsearchservice#DisableTimestamp": {
             "type": "timestamp"
@@ -3404,6 +3607,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies <code>AutoTuneOptions</code> for the domain. </p>"
                     }
+                },
+                "ChangeProgressDetails": {
+                    "target": "com.amazonaws.elasticsearchservice#ChangeProgressDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies change details of the domain configuration change.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3556,6 +3765,12 @@
                     "target": "com.amazonaws.elasticsearchservice#AutoTuneOptionsOutput",
                     "traits": {
                         "smithy.api#documentation": "<p>The current status of the Elasticsearch domain's Auto-Tune options.</p>"
+                    }
+                },
+                "ChangeProgressDetails": {
+                    "target": "com.amazonaws.elasticsearchservice#ChangeProgressDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies change details of the domain configuration change.</p>"
                     }
                 }
             },
@@ -5116,6 +5331,30 @@
                 "target": "com.amazonaws.elasticsearchservice#OutboundCrossClusterSearchConnection"
             }
         },
+        "com.amazonaws.elasticsearchservice#OverallChangeStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The overall status value of the domain configuration change.</p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "PENDING",
+                        "name": "PENDING"
+                    },
+                    {
+                        "value": "PROCESSING",
+                        "name": "PROCESSING"
+                    },
+                    {
+                        "value": "COMPLETED",
+                        "name": "COMPLETED"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.elasticsearchservice#OwnerId": {
             "type": "string",
             "traits": {
@@ -6322,6 +6561,9 @@
                 ]
             }
         },
+        "com.amazonaws.elasticsearchservice#TotalNumberOfStages": {
+            "type": "integer"
+        },
         "com.amazonaws.elasticsearchservice#UIntValue": {
             "type": "integer",
             "traits": {
@@ -6656,6 +6898,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n      This flag, when set to True, indicates that an Upgrade Eligibility Check needs to be performed.\n      This will not actually perform the Upgrade.\n    </p>"
                     }
+                },
+                "ChangeProgressDetails": {
+                    "target": "com.amazonaws.elasticsearchservice#ChangeProgressDetails"
                 }
             },
             "traits": {

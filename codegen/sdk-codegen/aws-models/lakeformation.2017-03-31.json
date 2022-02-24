@@ -5523,8 +5523,7 @@
                 "TransactionId": {
                     "target": "com.amazonaws.lakeformation#TransactionIdString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The transaction at which to do the write.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The transaction at which to do the write.</p>"
                     }
                 },
                 "WriteOperations": {

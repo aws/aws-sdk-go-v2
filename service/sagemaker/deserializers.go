@@ -30523,6 +30523,15 @@ func awsAwsjson11_deserializeDocumentCandidateArtifactLocations(v **types.Candid
 				sv.Explainability = ptr.String(jtv)
 			}
 
+		case "ModelInsights":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ModelInsightsLocation to be of type string, got %T instead", value)
+				}
+				sv.ModelInsights = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

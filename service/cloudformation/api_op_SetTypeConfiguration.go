@@ -16,11 +16,11 @@ import (
 // extension, refer to the ConfigurationSchema element of DescribeType. For more
 // information, see Configuring extensions at the account level
 // (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration)
-// in the CloudFormation User Guide. It is strongly recommended that you use
-// dynamic references to restrict sensitive configuration definitions, such as
-// third-party credentials. For more details on dynamic references, see Using
-// dynamic references to specify template values (https://docs.aws.amazon.com/) in
-// the CloudFormation User Guide.
+// in the CloudFormation User Guide. It's strongly recommended that you use dynamic
+// references to restrict sensitive configuration definitions, such as third-party
+// credentials. For more details on dynamic references, see Using dynamic
+// references to specify template values (https://docs.aws.amazon.com/) in the
+// CloudFormation User Guide.
 func (c *Client) SetTypeConfiguration(ctx context.Context, params *SetTypeConfigurationInput, optFns ...func(*Options)) (*SetTypeConfigurationOutput, error) {
 	if params == nil {
 		params = &SetTypeConfigurationInput{}

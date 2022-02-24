@@ -110,6 +110,26 @@ func (m *validateOpDescribeConnectorEntity) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeConnector struct {
+}
+
+func (*validateOpDescribeConnector) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeConnector) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeConnectorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeConnectorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeFlowExecutionRecords struct {
 }
 
@@ -170,6 +190,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRegisterConnector struct {
+}
+
+func (*validateOpRegisterConnector) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRegisterConnector) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RegisterConnectorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRegisterConnectorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartFlow struct {
 }
 
@@ -225,6 +265,26 @@ func (m *validateOpTagResource) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpTagResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUnregisterConnector struct {
+}
+
+func (*validateOpUnregisterConnector) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUnregisterConnector) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UnregisterConnectorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUnregisterConnectorInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -310,6 +370,10 @@ func addOpDescribeConnectorEntityValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpDescribeConnectorEntity{}, middleware.After)
 }
 
+func addOpDescribeConnectorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeConnector{}, middleware.After)
+}
+
 func addOpDescribeFlowExecutionRecordsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeFlowExecutionRecords{}, middleware.After)
 }
@@ -322,6 +386,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
+func addOpRegisterConnectorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRegisterConnector{}, middleware.After)
+}
+
 func addOpStartFlowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartFlow{}, middleware.After)
 }
@@ -332,6 +400,10 @@ func addOpStopFlowValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
+}
+
+func addOpUnregisterConnectorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUnregisterConnector{}, middleware.After)
 }
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -371,6 +443,21 @@ func validateAmplitudeSourceProperties(v *types.AmplitudeSourceProperties) error
 	invalidParams := smithy.InvalidParamsError{Context: "AmplitudeSourceProperties"}
 	if v.Object == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Object"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateApiKeyCredentials(v *types.ApiKeyCredentials) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ApiKeyCredentials"}
+	if v.ApiKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApiKey"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -503,6 +590,11 @@ func validateConnectorProfileCredentials(v *types.ConnectorProfileCredentials) e
 			invalidParams.AddNested("SAPOData", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.CustomConnector != nil {
+		if err := validateCustomConnectorProfileCredentials(v.CustomConnector); err != nil {
+			invalidParams.AddNested("CustomConnector", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -569,6 +661,120 @@ func validateConnectorProfileProperties(v *types.ConnectorProfileProperties) err
 		if err := validateSAPODataConnectorProfileProperties(v.SAPOData); err != nil {
 			invalidParams.AddNested("SAPOData", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.CustomConnector != nil {
+		if err := validateCustomConnectorProfileProperties(v.CustomConnector); err != nil {
+			invalidParams.AddNested("CustomConnector", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConnectorProvisioningConfig(v *types.ConnectorProvisioningConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConnectorProvisioningConfig"}
+	if v.Lambda != nil {
+		if err := validateLambdaConnectorProvisioningConfig(v.Lambda); err != nil {
+			invalidParams.AddNested("Lambda", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomAuthCredentials(v *types.CustomAuthCredentials) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomAuthCredentials"}
+	if v.CustomAuthenticationType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CustomAuthenticationType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomConnectorDestinationProperties(v *types.CustomConnectorDestinationProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomConnectorDestinationProperties"}
+	if v.EntityName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomConnectorProfileCredentials(v *types.CustomConnectorProfileCredentials) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomConnectorProfileCredentials"}
+	if len(v.AuthenticationType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthenticationType"))
+	}
+	if v.Basic != nil {
+		if err := validateBasicAuthCredentials(v.Basic); err != nil {
+			invalidParams.AddNested("Basic", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ApiKey != nil {
+		if err := validateApiKeyCredentials(v.ApiKey); err != nil {
+			invalidParams.AddNested("ApiKey", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Custom != nil {
+		if err := validateCustomAuthCredentials(v.Custom); err != nil {
+			invalidParams.AddNested("Custom", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomConnectorProfileProperties(v *types.CustomConnectorProfileProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomConnectorProfileProperties"}
+	if v.OAuth2Properties != nil {
+		if err := validateOAuth2Properties(v.OAuth2Properties); err != nil {
+			invalidParams.AddNested("OAuth2Properties", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomConnectorSourceProperties(v *types.CustomConnectorSourceProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomConnectorSourceProperties"}
+	if v.EntityName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -688,6 +894,16 @@ func validateDestinationConnectorProperties(v *types.DestinationConnectorPropert
 	if v.Zendesk != nil {
 		if err := validateZendeskDestinationProperties(v.Zendesk); err != nil {
 			invalidParams.AddNested("Zendesk", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CustomConnector != nil {
+		if err := validateCustomConnectorDestinationProperties(v.CustomConnector); err != nil {
+			invalidParams.AddNested("CustomConnector", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SAPOData != nil {
+		if err := validateSAPODataDestinationProperties(v.SAPOData); err != nil {
+			invalidParams.AddNested("SAPOData", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -898,6 +1114,21 @@ func validateInforNexusSourceProperties(v *types.InforNexusSourceProperties) err
 	}
 }
 
+func validateLambdaConnectorProvisioningConfig(v *types.LambdaConnectorProvisioningConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LambdaConnectorProvisioningConfig"}
+	if v.LambdaArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LambdaArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMarketoConnectorProfileCredentials(v *types.MarketoConnectorProfileCredentials) error {
 	if v == nil {
 		return nil
@@ -938,6 +1169,24 @@ func validateMarketoSourceProperties(v *types.MarketoSourceProperties) error {
 	invalidParams := smithy.InvalidParamsError{Context: "MarketoSourceProperties"}
 	if v.Object == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Object"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOAuth2Properties(v *types.OAuth2Properties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OAuth2Properties"}
+	if v.TokenUrl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TokenUrl"))
+	}
+	if len(v.OAuth2GrantType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("OAuth2GrantType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1142,6 +1391,21 @@ func validateSAPODataConnectorProfileProperties(v *types.SAPODataConnectorProfil
 		if err := validateOAuthProperties(v.OAuthProperties); err != nil {
 			invalidParams.AddNested("OAuthProperties", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSAPODataDestinationProperties(v *types.SAPODataDestinationProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SAPODataDestinationProperties"}
+	if v.ObjectPath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ObjectPath"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1421,6 +1685,11 @@ func validateSourceConnectorProperties(v *types.SourceConnectorProperties) error
 	if v.Zendesk != nil {
 		if err := validateZendeskSourceProperties(v.Zendesk); err != nil {
 			invalidParams.AddNested("Zendesk", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CustomConnector != nil {
+		if err := validateCustomConnectorSourceProperties(v.CustomConnector); err != nil {
+			invalidParams.AddNested("CustomConnector", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1818,6 +2087,21 @@ func validateOpDescribeConnectorEntityInput(v *DescribeConnectorEntityInput) err
 	}
 }
 
+func validateOpDescribeConnectorInput(v *DescribeConnectorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeConnectorInput"}
+	if len(v.ConnectorType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectorType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeFlowExecutionRecordsInput(v *DescribeFlowExecutionRecordsInput) error {
 	if v == nil {
 		return nil
@@ -1855,6 +2139,23 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRegisterConnectorInput(v *RegisterConnectorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RegisterConnectorInput"}
+	if v.ConnectorProvisioningConfig != nil {
+		if err := validateConnectorProvisioningConfig(v.ConnectorProvisioningConfig); err != nil {
+			invalidParams.AddNested("ConnectorProvisioningConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1903,6 +2204,21 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 	}
 	if v.Tags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUnregisterConnectorInput(v *UnregisterConnectorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UnregisterConnectorInput"}
+	if v.ConnectorLabel == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectorLabel"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -1042,6 +1042,10 @@ type DBEngineVersion struct {
 	// the CreateDBInstance action.
 	SupportedTimezones []Timezone
 
+	// A value that indicates whether the engine version supports Babelfish for Aurora
+	// PostgreSQL.
+	SupportsBabelfish bool
+
 	// A value that indicates whether you can use Aurora global databases with a
 	// specific DB engine version.
 	SupportsGlobalDatabases bool
@@ -3521,6 +3525,10 @@ type UpgradeTarget struct {
 
 	// A list of the supported DB engine modes for the target engine version.
 	SupportedEngineModes []string
+
+	// A value that indicates whether you can use Babelfish for Aurora PostgreSQL with
+	// the target engine version.
+	SupportsBabelfish *bool
 
 	// A value that indicates whether you can use Aurora global databases with the
 	// target engine version.

@@ -930,6 +930,11 @@ func awsAwsjson11_serializeDocumentTranslationSettings(v *types.TranslationSetti
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.Formality) > 0 {
+		ok := object.Key("Formality")
+		ok.String(string(v.Formality))
+	}
+
 	if len(v.Profanity) > 0 {
 		ok := object.Key("Profanity")
 		ok.String(string(v.Profanity))

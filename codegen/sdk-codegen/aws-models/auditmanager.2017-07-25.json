@@ -2530,7 +2530,8 @@
                 "id": {
                     "target": "com.amazonaws.auditmanager#UUID",
                     "traits": {
-                        "smithy.api#documentation": "<p> The unique identifier of the control. </p>"
+                        "smithy.api#documentation": "<p> The unique identifier of the control. </p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -7358,7 +7359,8 @@
                 "controls": {
                     "target": "com.amazonaws.auditmanager#CreateAssessmentFrameworkControls",
                     "traits": {
-                        "smithy.api#documentation": "<p> The list of controls that are contained within the control set. </p>"
+                        "smithy.api#documentation": "<p> The list of controls that are contained within the control set. </p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -7370,6 +7372,11 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.auditmanager#UpdateAssessmentFrameworkControlSet"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
             }
         },
         "com.amazonaws.auditmanager#UpdateAssessmentFrameworkRequest": {

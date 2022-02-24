@@ -30,7 +30,7 @@ func (c *Client) UpdateOpsMetadata(ctx context.Context, params *UpdateOpsMetadat
 
 type UpdateOpsMetadataInput struct {
 
-	// The Amazon Resoure Name (ARN) of the OpsMetadata Object to update.
+	// The Amazon Resource Name (ARN) of the OpsMetadata Object to update.
 	//
 	// This member is required.
 	OpsMetadataArn *string

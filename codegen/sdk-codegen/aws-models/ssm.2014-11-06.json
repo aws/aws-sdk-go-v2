@@ -82,7 +82,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A list of of Amazon Web Services accounts where the current document is shared and the version shared with\n   each account.</p>"
+                "smithy.api#documentation": "<p>A list of Amazon Web Services accounts where the current document is shared and the version shared with\n   each account.</p>"
             }
         },
         "com.amazonaws.ssm#Accounts": {
@@ -847,7 +847,7 @@
                 "DocumentVersion": {
                     "target": "com.amazonaws.ssm#DocumentVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the document used in the association.</p>\n         <important>\n            <p>State Manager doesn't support running associations that use a new version of a document if that document is shared from another account. State Manager always runs the <code>default</code> version of a document if shared from another account, even though the Systems Manager console shows that a new version was processed. If you want to run an association using a new version of a document shared form another account, you must set the document version to <code>default</code>.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>The version of the document used in the association.</p>\n         <important>\n            <p>State Manager doesn't support running associations that use a new version of a document if\n    that document is shared from another account. State Manager always runs the <code>default</code>\n    version of a document if shared from another account, even though the Systems Manager console shows that a\n    new version was processed. If you want to run an association using a new version of a document\n    shared form another account, you must set the document version to <code>default</code>.</p>\n         </important>"
                     }
                 },
                 "Targets": {
@@ -2808,7 +2808,7 @@
                 "ApprovedPatches": {
                     "target": "com.amazonaws.ssm#PatchIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of explicitly approved patches for the baseline.</p> \n         <p>For information about accepted formats for lists of approved patches and rejected patches,\n                        see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">About\n                        package name formats for approved and rejected patch lists</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A list of explicitly approved patches for the baseline.</p>\n         <p>For information about accepted formats for lists of approved patches and rejected patches,\n                        see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">About\n                        package name formats for approved and rejected patch lists</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "ApprovedPatchesComplianceLevel": {
@@ -2820,7 +2820,7 @@
                 "RejectedPatches": {
                     "target": "com.amazonaws.ssm#PatchIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of explicitly rejected patches for the baseline.</p> \n         <p>For information about accepted formats for lists of approved patches and rejected patches,\n                        see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">About\n                        package name formats for approved and rejected patch lists</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A list of explicitly rejected patches for the baseline.</p>\n         <p>For information about accepted formats for lists of approved patches and rejected patches,\n                        see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">About\n                        package name formats for approved and rejected patch lists</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "RejectedPatchesAction": {
@@ -3173,7 +3173,7 @@
                 "CompletedCount": {
                     "target": "com.amazonaws.ssm#CompletedCount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of targets for which the command invocation reached a terminal state. Terminal\n   states include the following: Success, Failed, Execution Timed Out, Delivery Timed Out, Cancelled,\n   Terminated, or Undeliverable.</p>"
+                        "smithy.api#documentation": "<p>The number of targets for which the command invocation reached a terminal state. Terminal\n   states include the following: Success, Failed, Execution Timed Out, Delivery Timed Out,\n   Cancelled, Terminated, or Undeliverable.</p>"
                     }
                 },
                 "ErrorCount": {
@@ -4481,7 +4481,7 @@
                 "DocumentVersion": {
                     "target": "com.amazonaws.ssm#DocumentVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The document version you want to associate with the target(s). Can be a specific version or\n   the default version.</p>\n         <important>\n            <p>State Manager doesn't support running associations that use a new version of a document if that document is shared from another account. State Manager always runs the <code>default</code> version of a document if shared from another account, even though the Systems Manager console shows that a new version was processed. If you want to run an association using a new version of a document shared form another account, you must set the document version to <code>default</code>.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>The document version you want to associate with the target(s). Can be a specific version or\n   the default version.</p>\n         <important>\n            <p>State Manager doesn't support running associations that use a new version of a document if\n    that document is shared from another account. State Manager always runs the <code>default</code>\n    version of a document if shared from another account, even though the Systems Manager console shows that a\n    new version was processed. If you want to run an association using a new version of a document\n    shared form another account, you must set the document version to <code>default</code>.</p>\n         </important>"
                     }
                 },
                 "InstanceId": {
@@ -4657,7 +4657,7 @@
                 "DocumentType": {
                     "target": "com.amazonaws.ssm#DocumentType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of document to create.</p>"
+                        "smithy.api#documentation": "<p>The type of document to create.</p>\n         <note>\n            <p>The <code>DeploymentStrategy</code> document type is an internal-use-only document type\n    reserved for AppConfig.</p>\n         </note>"
                     }
                 },
                 "DocumentFormat": {
@@ -5062,7 +5062,7 @@
                 "ApprovedPatches": {
                     "target": "com.amazonaws.ssm#PatchIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of explicitly approved patches for the baseline.</p> \n         <p>For information about accepted formats for lists of approved patches and rejected patches,\n                        see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">About\n                        package name formats for approved and rejected patch lists</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A list of explicitly approved patches for the baseline.</p>\n         <p>For information about accepted formats for lists of approved patches and rejected patches,\n                        see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">About\n                        package name formats for approved and rejected patch lists</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "ApprovedPatchesComplianceLevel": {
@@ -5081,7 +5081,7 @@
                 "RejectedPatches": {
                     "target": "com.amazonaws.ssm#PatchIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of explicitly rejected patches for the baseline.</p> \n         <p>For information about accepted formats for lists of approved patches and rejected patches,\n                        see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">About\n                        package name formats for approved and rejected patch lists</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A list of explicitly rejected patches for the baseline.</p>\n         <p>For information about accepted formats for lists of approved patches and rejected patches,\n                        see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">About\n                        package name formats for approved and rejected patch lists</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "RejectedPatchesAction": {
@@ -8920,7 +8920,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>One or more filters. Use a filter to return a more specific list of documents.</p>\n         <p>For keys, you can specify one or more tags that have been applied to a document. </p>\n         <p>You can also use Amazon Web Services-provided keys, some of which have specific allowed values. These keys\n   and their associated values are as follows:</p>\n         <dl>\n            <dt>DocumentType</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>\n                        <code>ApplicationConfiguration</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ApplicationConfigurationSchema</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Automation</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ChangeCalendar</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Command</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>DeploymentStrategy</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Package</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Policy</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Session</code>\n                     </p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>Owner</dt>\n            <dd>\n               <p>Note that only one <code>Owner</code> can be specified in a request. For example:\n       <code>Key=Owner,Values=Self</code>.</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>Amazon</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Private</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Public</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Self</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ThirdParty</code>\n                     </p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>PlatformTypes</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>\n                        <code>Linux</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Windows</code>\n                     </p>\n                  </li>\n               </ul>\n            </dd>\n         </dl>\n         <p>\n            <code>Name</code> is another Amazon Web Services-provided key. If you use <code>Name</code> as a key, you\n   can use a name prefix to return a list of documents. For example, in the Amazon Web Services CLI, to return a list\n   of all documents that begin with <code>Te</code>, run the following command:</p>\n         <p>\n            <code>aws ssm list-documents --filters Key=Name,Values=Te</code>\n         </p>\n         <p>You can also use the <code>TargetType</code> Amazon Web Services-provided key. For a list of valid\n   resource type values that can be used with this key, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">Amazon Web Services resource and\n    property types reference</a> in the <i>CloudFormation User Guide</i>.</p>\n         <p>If you specify more than two keys, only documents that are identified by all the tags are\n   returned in the results. If you specify more than two values for a key, documents that are\n   identified by any of the values are returned in the results.</p>\n         <p>To specify a custom key-value pair, use the format\n    <code>Key=tag:tagName,Values=valueName</code>.</p>\n         <p>For example, if you created a key called region and are using the Amazon Web Services CLI to call the\n    <code>list-documents</code> command: </p>\n         <p>\n            <code>aws ssm list-documents --filters Key=tag:region,Values=east,west\n    Key=Owner,Values=Self</code>\n         </p>"
+                "smithy.api#documentation": "<p>One or more filters. Use a filter to return a more specific list of documents.</p>\n         <p>For keys, you can specify one or more tags that have been applied to a document. </p>\n         <p>You can also use Amazon Web Services-provided keys, some of which have specific allowed values. These keys\n   and their associated values are as follows:</p>\n         <dl>\n            <dt>DocumentType</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>\n                        <code>ApplicationConfiguration</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ApplicationConfigurationSchema</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Automation</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ChangeCalendar</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Command</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Package</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Policy</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Session</code>\n                     </p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>Owner</dt>\n            <dd>\n               <p>Note that only one <code>Owner</code> can be specified in a request. For example:\n       <code>Key=Owner,Values=Self</code>.</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>Amazon</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Private</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Public</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Self</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ThirdParty</code>\n                     </p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>PlatformTypes</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>\n                        <code>Linux</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Windows</code>\n                     </p>\n                  </li>\n               </ul>\n            </dd>\n         </dl>\n         <p>\n            <code>Name</code> is another Amazon Web Services-provided key. If you use <code>Name</code> as a key, you\n   can use a name prefix to return a list of documents. For example, in the Amazon Web Services CLI, to return a list\n   of all documents that begin with <code>Te</code>, run the following command:</p>\n         <p>\n            <code>aws ssm list-documents --filters Key=Name,Values=Te</code>\n         </p>\n         <p>You can also use the <code>TargetType</code> Amazon Web Services-provided key. For a list of valid\n   resource type values that can be used with this key, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">Amazon Web Services resource and\n    property types reference</a> in the <i>CloudFormation User Guide</i>.</p>\n         <p>If you specify more than two keys, only documents that are identified by all the tags are\n   returned in the results. If you specify more than two values for a key, documents that are\n   identified by any of the values are returned in the results.</p>\n         <p>To specify a custom key-value pair, use the format\n    <code>Key=tag:tagName,Values=valueName</code>.</p>\n         <p>For example, if you created a key called region and are using the Amazon Web Services CLI to call the\n    <code>list-documents</code> command: </p>\n         <p>\n            <code>aws ssm list-documents --filters Key=tag:region,Values=east,west\n    Key=Owner,Values=Self</code>\n         </p>"
             }
         },
         "com.amazonaws.ssm#DocumentKeyValuesFilterKey": {
@@ -11578,7 +11578,7 @@
                 "Path": {
                     "target": "com.amazonaws.ssm#PSParameterName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The hierarchy for the parameter. Hierarchies start with a forward slash (/). The hierachy is\n   the parameter name except the last part of the parameter. For the API call to succeeed, the last\n   part of the parameter name can't be in the path. A parameter name hierarchy can have a maximum of\n   15 levels. Here is an example of a hierarchy: <code>/Finance/Prod/IAD/WinServ2016/license33\n   </code>\n         </p>",
+                        "smithy.api#documentation": "<p>The hierarchy for the parameter. Hierarchies start with a forward slash (/). The hierarchy\n   is the parameter name except the last part of the parameter. For the API call to succeed, the\n   last part of the parameter name can't be in the path. A parameter name hierarchy can have a\n   maximum of 15 levels. Here is an example of a hierarchy:\n    <code>/Finance/Prod/IAD/WinServ2016/license33 </code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -15680,7 +15680,7 @@
                 "Parameters": {
                     "target": "com.amazonaws.ssm#AutomationParameterMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parameters for the <code>AUTOMATION</code> task.</p>\n         <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p>\n         <note>\n            <p>\n               <code>LoggingInfo</code> has been deprecated. To specify an Amazon Simple Storage Service (Amazon S3) bucket to contain logs, instead use the\n      <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure.\n      For information about how Amazon Web Services Systems Manager handles these options for the supported maintenance\n      window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> \n            <p>\n               <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs,\n      instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information\n      about how Systems Manager handles these options for the supported maintenance window task\n      types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> \n            <p>For <code>AUTOMATION</code>\n    task types, Amazon Web Services Systems Manager ignores any values specified for these parameters.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The parameters for the <code>AUTOMATION</code> task.</p>\n         <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p>\n         <note>\n            <p>\n               <code>LoggingInfo</code> has been deprecated. To specify an Amazon Simple Storage Service (Amazon S3) bucket to contain logs, instead use the\n      <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure.\n      For information about how Amazon Web Services Systems Manager handles these options for the supported maintenance\n      window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>\n   \n            <p>\n               <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs,\n      instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information\n      about how Systems Manager handles these options for the supported maintenance window task\n      types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>\n            <p>For <code>AUTOMATION</code> task types, Amazon Web Services Systems Manager ignores any values specified for these\n    parameters.</p>\n         </note>"
                     }
                 }
             },
@@ -16215,7 +16215,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The parameters for a <code>LAMBDA</code> task type.</p>\n         <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p>\n         <note>\n            <p>\n               <code>LoggingInfo</code> has been deprecated. To specify an Amazon Simple Storage Service (Amazon S3) bucket to contain logs, instead use the\n      <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure.\n      For information about how Amazon Web Services Systems Manager handles these options for the supported maintenance\n      window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> \n            <p>\n               <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs,\n      instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information\n      about how Systems Manager handles these options for the supported maintenance window task\n      types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> \n            <p>For Lambda tasks, Systems Manager ignores\n    any values specified for TaskParameters and LoggingInfo.</p>\n         </note>"
+                "smithy.api#documentation": "<p>The parameters for a <code>LAMBDA</code> task type.</p>\n         <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p>\n         <note>\n            <p>\n               <code>LoggingInfo</code> has been deprecated. To specify an Amazon Simple Storage Service (Amazon S3) bucket to contain logs, instead use the\n      <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure.\n      For information about how Amazon Web Services Systems Manager handles these options for the supported maintenance\n      window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>\n   \n            <p>\n               <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs,\n      instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information\n      about how Systems Manager handles these options for the supported maintenance window task\n      types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>\n            <p>For Lambda tasks, Systems Manager ignores any values specified for TaskParameters and\n    LoggingInfo.</p>\n         </note>"
             }
         },
         "com.amazonaws.ssm#MaintenanceWindowLambdaPayload": {
@@ -16349,7 +16349,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The parameters for a <code>RUN_COMMAND</code> task type.</p>\n         <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p>\n         <note>\n            <p>\n               <code>LoggingInfo</code> has been deprecated. To specify an Amazon Simple Storage Service (Amazon S3) bucket to contain logs, instead use the\n      <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure.\n      For information about how Amazon Web Services Systems Manager handles these options for the supported maintenance\n      window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> \n            <p>\n               <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs,\n      instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information\n      about how Systems Manager handles these options for the supported maintenance window task\n      types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> \n            <p>For <code>RUN_COMMAND</code>\n    tasks, Systems Manager uses specified values for <code>TaskParameters</code> and <code>LoggingInfo</code>\n    only if no values are specified for <code>TaskInvocationParameters</code>. </p>\n         </note>"
+                "smithy.api#documentation": "<p>The parameters for a <code>RUN_COMMAND</code> task type.</p>\n         <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p>\n         <note>\n            <p>\n               <code>LoggingInfo</code> has been deprecated. To specify an Amazon Simple Storage Service (Amazon S3) bucket to contain logs, instead use the\n      <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure.\n      For information about how Amazon Web Services Systems Manager handles these options for the supported maintenance\n      window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>\n   \n            <p>\n               <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs,\n      instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information\n      about how Systems Manager handles these options for the supported maintenance window task\n      types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>\n            <p>For <code>RUN_COMMAND</code> tasks, Systems Manager uses specified values for\n     <code>TaskParameters</code> and <code>LoggingInfo</code> only if no values are specified for\n     <code>TaskInvocationParameters</code>. </p>\n         </note>"
             }
         },
         "com.amazonaws.ssm#MaintenanceWindowSchedule": {
@@ -16405,7 +16405,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The parameters for a <code>STEP_FUNCTIONS</code> task.</p>\n         <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p>\n         <note>\n            <p>\n               <code>LoggingInfo</code> has been deprecated. To specify an Amazon Simple Storage Service (Amazon S3) bucket to contain logs, instead use the\n      <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure.\n      For information about how Amazon Web Services Systems Manager handles these options for the supported maintenance\n      window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> \n            <p>\n               <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs,\n      instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information\n      about how Systems Manager handles these options for the supported maintenance window task\n      types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> \n            <p>For Step Functions tasks, Systems Manager\n    ignores any values specified for <code>TaskParameters</code> and\n    <code>LoggingInfo</code>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>The parameters for a <code>STEP_FUNCTIONS</code> task.</p>\n         <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p>\n         <note>\n            <p>\n               <code>LoggingInfo</code> has been deprecated. To specify an Amazon Simple Storage Service (Amazon S3) bucket to contain logs, instead use the\n      <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure.\n      For information about how Amazon Web Services Systems Manager handles these options for the supported maintenance\n      window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>\n   \n            <p>\n               <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs,\n      instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information\n      about how Systems Manager handles these options for the supported maintenance window task\n      types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>\n            <p>For Step Functions tasks, Systems Manager ignores any values specified for\n     <code>TaskParameters</code> and <code>LoggingInfo</code>.</p>\n         </note>"
             }
         },
         "com.amazonaws.ssm#MaintenanceWindowStringDateTime": {
@@ -16537,13 +16537,13 @@
                 "MaxConcurrency": {
                     "target": "com.amazonaws.ssm#MaxConcurrency",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of targets this task can be run for, in parallel.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of targets this task can be run for, in parallel.</p>\n         <note>\n            <p>Although this element is listed as \"Required: No\", a value can be omitted only when you are\n    registering or updating a <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html\">targetless\n     task</a> You must provide a value in all other cases.</p>\n            <p>For maintenance window tasks without a target specified, you can't supply a value for this\n    option. Instead, the system inserts a placeholder value of <code>1</code>. This value doesn't\n    affect the running of your task.</p>\n         </note>"
                     }
                 },
                 "MaxErrors": {
                     "target": "com.amazonaws.ssm#MaxErrors",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of errors allowed before this task stops being scheduled.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of errors allowed before this task stops being scheduled.</p>\n         <note>\n            <p>Although this element is listed as \"Required: No\", a value can be omitted only when you are\n    registering or updating a <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html\">targetless\n     task</a> You must provide a value in all other cases.</p>\n            <p>For maintenance window tasks without a target specified, you can't supply a value for this\n    option. Instead, the system inserts a placeholder value of <code>1</code>. This value doesn't\n    affect the running of your task.</p>\n         </note>"
                     }
                 },
                 "Name": {
@@ -18902,13 +18902,13 @@
                 "Type": {
                     "target": "com.amazonaws.ssm#ParameterType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of parameter. Valid values include the following: <code>String</code>,\n    <code>StringList</code>, and <code>SecureString</code>.</p>"
+                        "smithy.api#documentation": "<p>The type of parameter. Valid values include the following: <code>String</code>,\n    <code>StringList</code>, and <code>SecureString</code>.</p>\n         <note>\n            <p>If type is <code>StringList</code>, the system returns a comma-separated string with no\n    spaces between commas in the <code>Value</code> field.</p>\n         </note>"
                     }
                 },
                 "Value": {
                     "target": "com.amazonaws.ssm#PSParameterValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parameter value.</p>"
+                        "smithy.api#documentation": "<p>The parameter value.</p>\n         <note>\n            <p>If type is <code>StringList</code>, the system returns a comma-separated string with no\n    spaces between commas in the <code>Value</code> field.</p>\n         </note>"
                     }
                 },
                 "Version": {
@@ -19090,7 +19090,7 @@
                 "PolicyType": {
                     "target": "com.amazonaws.ssm#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of policy. Parameter Store, a capablility of Amazon Web Services Systems Manager, supports the following\n   policy types: Expiration, ExpirationNotification, and NoChangeNotification. </p>"
+                        "smithy.api#documentation": "<p>The type of policy. Parameter Store, a capability of Amazon Web Services Systems Manager, supports the following\n   policy types: Expiration, ExpirationNotification, and NoChangeNotification. </p>"
                     }
                 },
                 "PolicyStatus": {
@@ -19827,7 +19827,7 @@
                 "Severity": {
                     "target": "com.amazonaws.ssm#PatchSeverity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The severity of the patchsuch as <code>Critical</code>, <code>Important</code>, and\n    <code>Moderate</code>.</p>",
+                        "smithy.api#documentation": "<p>The severity of the patch such as <code>Critical</code>, <code>Important</code>, and\n    <code>Moderate</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -20982,7 +20982,7 @@
                 "DataType": {
                     "target": "com.amazonaws.ssm#ParameterDataType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data type for a <code>String</code> parameter. Supported data types include plain text\n   and Amazon Machine Image (AMI) IDs.</p>\n         <p>\n            <b>The following data type values are supported.</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>text</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>aws:ec2:image</code>\n               </p>\n            </li>\n         </ul>\n         <p>When you create a <code>String</code> parameter and specify <code>aws:ec2:image</code>,\n   Amazon Web Services Systems Manager validates the parameter value is in the required format, such as\n    <code>ami-12345abcdeEXAMPLE</code>, and that the specified AMI is available in your\n   Amazon Web Services account. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-ec2-aliases.html\">Native parameter support\n    for Amazon Machine Image (AMI) IDs</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The data type for a <code>String</code> parameter. Supported data types include plain text\n   and Amazon Machine Image (AMI) IDs.</p>\n         <p>\n            <b>The following data type values are supported.</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>text</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>aws:ec2:image</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>aws:ssm:integration</code>\n               </p>\n            </li>\n         </ul>\n         <p>When you create a <code>String</code> parameter and specify <code>aws:ec2:image</code>,\n   Amazon Web Services Systems Manager validates the parameter value is in the required format, such as\n    <code>ami-12345abcdeEXAMPLE</code>, and that the specified AMI is available in your\n   Amazon Web Services account. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-ec2-aliases.html\">Native parameter support\n    for Amazon Machine Image (AMI) IDs</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 }
             }
@@ -21320,13 +21320,13 @@
                 "MaxConcurrency": {
                     "target": "com.amazonaws.ssm#MaxConcurrency",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of targets this task can be run for in parallel.</p>\n         <note>\n            <p>For maintenance window tasks without a target specified, you can't supply a value for this\n    option. Instead, the system inserts a placeholder value of <code>1</code>. This value doesn't\n    affect the running of your task.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The maximum number of targets this task can be run for, in parallel.</p>\n         <note>\n            <p>Although this element is listed as \"Required: No\", a value can be omitted only when you are\n    registering or updating a <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html\">targetless\n     task</a> You must provide a value in all other cases.</p>\n            <p>For maintenance window tasks without a target specified, you can't supply a value for this\n    option. Instead, the system inserts a placeholder value of <code>1</code>. This value doesn't\n    affect the running of your task.</p>\n         </note>"
                     }
                 },
                 "MaxErrors": {
                     "target": "com.amazonaws.ssm#MaxErrors",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of errors allowed before this task stops being scheduled.</p>\n         <note>\n            <p>For maintenance window tasks without a target specified, you can't supply a value for this\n    option. Instead, the system inserts a placeholder value of <code>1</code>. This value doesn't\n    affect the running of your task.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The maximum number of errors allowed before this task stops being scheduled.</p>\n         <note>\n            <p>Although this element is listed as \"Required: No\", a value can be omitted only when you are\n    registering or updating a <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html\">targetless\n     task</a> You must provide a value in all other cases.</p>\n            <p>For maintenance window tasks without a target specified, you can't supply a value for this\n    option. Instead, the system inserts a placeholder value of <code>1</code>. This value doesn't\n    affect the running of your task.</p>\n         </note>"
                     }
                 },
                 "LoggingInfo": {
@@ -22325,7 +22325,7 @@
                 "StreamUrl": {
                     "target": "com.amazonaws.ssm#StreamUrl",
                     "traits": {
-                        "smithy.api#documentation": "<p>A URL back to SSM Agent on the managed node that the Session Manager client uses to send commands and\n   receive output from the managed node. Format: <code>wss://ssmmessages.<b>region</b>.amazonaws.com/v1/data-channel/<b>session-id</b>?stream=(input|output)</code>.</p> \n         <p>\n            <b>region</b> represents the Region identifier for an\n\t\t\t\t\t\tAmazon Web Services Region supported by Amazon Web Services Systems Manager, such as <code>us-east-2</code> for the US East (Ohio) Region.\n\t\t\t\t\t\tFor a list of supported <b>region</b> values, see the <b>Region</b> column in <a href=\"https://docs.aws.amazon.com/general/latest/gr/ssm.html#ssm_region\">Systems Manager service endpoints</a> in the\n        <i>Amazon Web Services General Reference</i>.</p> \n         <p>\n            <b>session-id</b> represents the ID of a Session Manager session, such as\n    <code>1a2b3c4dEXAMPLE</code>.</p>"
+                        "smithy.api#documentation": "<p>A URL back to SSM Agent on the managed node that the Session Manager client uses to send commands and\n   receive output from the managed node. Format: <code>wss://ssmmessages.<b>region</b>.amazonaws.com/v1/data-channel/<b>session-id</b>?stream=(input|output)</code>.</p>\n         <p>\n            <b>region</b> represents the Region identifier for an\n\t\t\t\t\t\tAmazon Web Services Region supported by Amazon Web Services Systems Manager, such as <code>us-east-2</code> for the US East (Ohio) Region.\n\t\t\t\t\t\tFor a list of supported <b>region</b> values, see the <b>Region</b> column in <a href=\"https://docs.aws.amazon.com/general/latest/gr/ssm.html#ssm_region\">Systems Manager service endpoints</a> in the\n        <i>Amazon Web Services General Reference</i>.</p>\n         <p>\n            <b>session-id</b> represents the ID of a Session Manager session, such as\n    <code>1a2b3c4dEXAMPLE</code>.</p>"
                     }
                 }
             }
@@ -23701,7 +23701,7 @@
                 "StreamUrl": {
                     "target": "com.amazonaws.ssm#StreamUrl",
                     "traits": {
-                        "smithy.api#documentation": "<p>A URL back to SSM Agent on the managed node that the Session Manager client uses to send commands and\n   receive output from the node. Format: <code>wss://ssmmessages.<b>region</b>.amazonaws.com/v1/data-channel/<b>session-id</b>?stream=(input|output)</code>\n         </p> \n         <p>\n            <b>region</b> represents the Region identifier for an\n\t\t\t\t\t\tAmazon Web Services Region supported by Amazon Web Services Systems Manager, such as <code>us-east-2</code> for the US East (Ohio) Region.\n\t\t\t\t\t\tFor a list of supported <b>region</b> values, see the <b>Region</b> column in <a href=\"https://docs.aws.amazon.com/general/latest/gr/ssm.html#ssm_region\">Systems Manager service endpoints</a> in the\n        <i>Amazon Web Services General Reference</i>.</p> \n         <p>\n            <b>session-id</b> represents the ID of a Session Manager session, such as\n    <code>1a2b3c4dEXAMPLE</code>.</p>"
+                        "smithy.api#documentation": "<p>A URL back to SSM Agent on the managed node that the Session Manager client uses to send commands and\n   receive output from the node. Format: <code>wss://ssmmessages.<b>region</b>.amazonaws.com/v1/data-channel/<b>session-id</b>?stream=(input|output)</code>\n         </p>\n         <p>\n            <b>region</b> represents the Region identifier for an\n\t\t\t\t\t\tAmazon Web Services Region supported by Amazon Web Services Systems Manager, such as <code>us-east-2</code> for the US East (Ohio) Region.\n\t\t\t\t\t\tFor a list of supported <b>region</b> values, see the <b>Region</b> column in <a href=\"https://docs.aws.amazon.com/general/latest/gr/ssm.html#ssm_region\">Systems Manager service endpoints</a> in the\n        <i>Amazon Web Services General Reference</i>.</p>\n         <p>\n            <b>session-id</b> represents the ID of a Session Manager session, such as\n    <code>1a2b3c4dEXAMPLE</code>.</p>"
                     }
                 }
             }
@@ -24357,14 +24357,11 @@
             },
             "errors": [
                 {
-                    "target": "com.amazonaws.ssm#DoesNotExistException"
-                },
-                {
                     "target": "com.amazonaws.ssm#InternalServerError"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Permanently ends a session and closes the data connection between the Session Manager client and\n   SSM Agent on the managed node. A terminated session isn't be resumed.</p>"
+                "smithy.api#documentation": "<p>Permanently ends a session and closes the data connection between the Session Manager client and\n   SSM Agent on the managed node. A terminated session can't be resumed.</p>"
             }
         },
         "com.amazonaws.ssm#TerminateSessionRequest": {
@@ -24693,7 +24690,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an association. You can update the association name and version, the document\n   version, schedule, parameters, and Amazon Simple Storage Service (Amazon S3) output. When you\n   call <code>UpdateAssociation</code>, the system drops all optional parameters from the request\n   and overwrites the association with null values for those parameters. This is by design. You must\n   specify all optional parameters in the call, even if you are not changing the parameters. This\n   includes the <code>Name</code> parameter. Before calling this API action, we recommend that you\n   call the <a>DescribeAssociation</a> API operation and make a note of all optional\n   parameters required for your <code>UpdateAssociation</code> call.</p>\n\n         <p>In order to call this API operation, your Identity and Access Management (IAM) user\n   account, group, or role must be configured with permission to call the <a>DescribeAssociation</a> API operation. If you don't have permission to call\n    <code>DescribeAssociation</code>, then you receive the following error: <code>An error occurred\n    (AccessDeniedException) when calling the UpdateAssociation operation: User: <user_arn>\n    isn't authorized to perform: ssm:DescribeAssociation on resource:\n   <resource_arn></code>\n         </p>\n         <important>\n            <p>When you update an association, the association immediately runs against the specified\n    targets. You can add the <code>ApplyOnlyAtCronInterval</code> parameter to run the association\n    during the next schedule run.</p>\n         </important>"
+                "smithy.api#documentation": "<p>Updates an association. You can update the association name and version, the document\n   version, schedule, parameters, and Amazon Simple Storage Service (Amazon S3) output. When you\n   call <code>UpdateAssociation</code>, the system removes all optional parameters from the request\n   and overwrites the association with null values for those parameters. This is by design. You must\n   specify all optional parameters in the call, even if you are not changing the parameters. This\n   includes the <code>Name</code> parameter. Before calling this API action, we recommend that you\n   call the <a>DescribeAssociation</a> API operation and make a note of all optional\n   parameters required for your <code>UpdateAssociation</code> call.</p>\n\n         <p>In order to call this API operation, your Identity and Access Management (IAM) user\n   account, group, or role must be configured with permission to call the <a>DescribeAssociation</a> API operation. If you don't have permission to call\n    <code>DescribeAssociation</code>, then you receive the following error: <code>An error occurred\n    (AccessDeniedException) when calling the UpdateAssociation operation: User: <user_arn>\n    isn't authorized to perform: ssm:DescribeAssociation on resource:\n   <resource_arn></code>\n         </p>\n         <important>\n            <p>When you update an association, the association immediately runs against the specified\n    targets. You can add the <code>ApplyOnlyAtCronInterval</code> parameter to run the association\n    during the next schedule run.</p>\n         </important>"
             }
         },
         "com.amazonaws.ssm#UpdateAssociationRequest": {
@@ -24715,7 +24712,7 @@
                 "DocumentVersion": {
                     "target": "com.amazonaws.ssm#DocumentVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The document version you want update for the association. </p>\n         <important>\n            <p>State Manager doesn't support running associations that use a new version of a document if that document is shared from another account. State Manager always runs the <code>default</code> version of a document if shared from another account, even though the Systems Manager console shows that a new version was processed. If you want to run an association using a new version of a document shared form another account, you must set the document version to <code>default</code>.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>The document version you want update for the association. </p>\n         <important>\n            <p>State Manager doesn't support running associations that use a new version of a document if\n    that document is shared from another account. State Manager always runs the <code>default</code>\n    version of a document if shared from another account, even though the Systems Manager console shows that a\n    new version was processed. If you want to run an association using a new version of a document\n    shared form another account, you must set the document version to <code>default</code>.</p>\n         </important>"
                     }
                 },
                 "ScheduleExpression": {
@@ -25150,7 +25147,7 @@
                 "StartDate": {
                     "target": "com.amazonaws.ssm#MaintenanceWindowStringDateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time zone that the scheduled maintenance window executions are based on, in Internet\n   Assigned Numbers Authority (IANA) format. For example: \"America/Los_Angeles\", \"UTC\", or\n   \"Asia/Seoul\". For more information, see the <a href=\"https://www.iana.org/time-zones\">Time\n    Zone Database</a> on the IANA website.</p>"
+                        "smithy.api#documentation": "<p>The date and time, in ISO-8601 Extended format, for when you want the maintenance window to\n   become active. <code>StartDate</code> allows you to delay activation of the maintenance window\n   until the specified future date.</p>"
                     }
                 },
                 "EndDate": {
@@ -25481,13 +25478,13 @@
                 "MaxConcurrency": {
                     "target": "com.amazonaws.ssm#MaxConcurrency",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new <code>MaxConcurrency</code> value you want to specify. <code>MaxConcurrency</code>\n   is the number of targets that are allowed to run this task in parallel.</p>\n         <note>\n            <p>For maintenance window tasks without a target specified, you can't supply a value for this\n    option. Instead, the system inserts a placeholder value of <code>1</code>, which may be reported\n    in the response to this command. This value doesn't affect the running of your task and can be\n    ignored.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The new <code>MaxConcurrency</code> value you want to specify. <code>MaxConcurrency</code>\n   is the number of targets that are allowed to run this task, in parallel.</p>\n         <note>\n            <p>Although this element is listed as \"Required: No\", a value can be omitted only when you are\n    registering or updating a <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html\">targetless\n     task</a> You must provide a value in all other cases.</p>\n            <p>For maintenance window tasks without a target specified, you can't supply a value for this\n    option. Instead, the system inserts a placeholder value of <code>1</code>. This value doesn't\n    affect the running of your task.</p>\n         </note>"
                     }
                 },
                 "MaxErrors": {
                     "target": "com.amazonaws.ssm#MaxErrors",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new <code>MaxErrors</code> value to specify. <code>MaxErrors</code> is the maximum\n   number of errors that are allowed before the task stops being scheduled.</p>\n         <note>\n            <p>For maintenance window tasks without a target specified, you can't supply a value for this\n    option. Instead, the system inserts a placeholder value of <code>1</code>, which may be reported\n    in the response to this command. This value doesn't affect the running of your task and can be\n    ignored.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The new <code>MaxErrors</code> value to specify. <code>MaxErrors</code> is the maximum\n   number of errors that are allowed before the task stops being scheduled.</p>\n         <note>\n            <p>Although this element is listed as \"Required: No\", a value can be omitted only when you are\n    registering or updating a <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html\">targetless\n     task</a> You must provide a value in all other cases.</p>\n            <p>For maintenance window tasks without a target specified, you can't supply a value for this\n    option. Instead, the system inserts a placeholder value of <code>1</code>. This value doesn't\n    affect the running of your task.</p>\n         </note>"
                     }
                 },
                 "LoggingInfo": {
@@ -25819,7 +25816,7 @@
                 "OpsMetadataArn": {
                     "target": "com.amazonaws.ssm#OpsMetadataArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resoure Name (ARN) of the OpsMetadata Object to update.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the OpsMetadata Object to update.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -25899,7 +25896,7 @@
                 "ApprovedPatches": {
                     "target": "com.amazonaws.ssm#PatchIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of explicitly approved patches for the baseline.</p> \n         <p>For information about accepted formats for lists of approved patches and rejected patches,\n                        see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">About\n                        package name formats for approved and rejected patch lists</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A list of explicitly approved patches for the baseline.</p>\n         <p>For information about accepted formats for lists of approved patches and rejected patches,\n                        see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">About\n                        package name formats for approved and rejected patch lists</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "ApprovedPatchesComplianceLevel": {
@@ -25918,7 +25915,7 @@
                 "RejectedPatches": {
                     "target": "com.amazonaws.ssm#PatchIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of explicitly rejected patches for the baseline.</p> \n         <p>For information about accepted formats for lists of approved patches and rejected patches,\n                        see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">About\n                        package name formats for approved and rejected patch lists</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A list of explicitly rejected patches for the baseline.</p>\n         <p>For information about accepted formats for lists of approved patches and rejected patches,\n                        see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">About\n                        package name formats for approved and rejected patch lists</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "RejectedPatchesAction": {

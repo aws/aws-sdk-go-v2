@@ -376,7 +376,7 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname:          "acm-fips.{region}.amazonaws.com",
+				Hostname:          "acm.{region}.amazonaws.com",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},

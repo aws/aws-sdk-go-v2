@@ -37,8 +37,8 @@ type CreateNotificationInput struct {
 	// This member is required.
 	AccountId *string
 
-	// The name of the budget that you want AWS to notify you about. Budget names must
-	// be unique within an account.
+	// The name of the budget that you want Amazon Web Services to notify you about.
+	// Budget names must be unique within an account.
 	//
 	// This member is required.
 	BudgetName *string

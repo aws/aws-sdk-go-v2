@@ -146,8 +146,8 @@ type CreateDBClusterInput struct {
 
 	// A DB subnet group to associate with this DB cluster. This setting is required to
 	// create a Multi-AZ DB cluster. Constraints: Must match the name of an existing
-	// DBSubnetGroup. Must not be default. Example: mySubnetgroup Valid for: Aurora DB
-	// clusters and Multi-AZ DB clusters
+	// DBSubnetGroup. Must not be default. Example: mydbsubnetgroup Valid for: Aurora
+	// DB clusters and Multi-AZ DB clusters
 	DBSubnetGroupName *string
 
 	// The name for your database of up to 64 alphanumeric characters. If you do not

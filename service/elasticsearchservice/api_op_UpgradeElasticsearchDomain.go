@@ -6,6 +6,7 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,6 +53,9 @@ type UpgradeElasticsearchDomainInput struct {
 
 // Container for response returned by UpgradeElasticsearchDomain operation.
 type UpgradeElasticsearchDomainOutput struct {
+
+	// Specifies change details of the domain configuration change.
+	ChangeProgressDetails *types.ChangeProgressDetails
 
 	// The name of an Elasticsearch domain. Domain names are unique across the domains
 	// owned by an account within an AWS region. Domain names start with a letter or

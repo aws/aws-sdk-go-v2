@@ -645,6 +645,10 @@ type DataShareAssociation struct {
 	// datashare.
 	ConsumerIdentifier *string
 
+	// The Amazon Web Services Region of the consumer accounts that have an association
+	// with a producer datashare.
+	ConsumerRegion *string
+
 	// The creation date of the datashare that is associated.
 	CreatedDate *time.Time
 
@@ -1764,15 +1768,15 @@ type Snapshot struct {
 }
 
 // The snapshot copy grant that grants Amazon Redshift permission to encrypt copied
-// snapshots with the specified customer master key (CMK) from Amazon Web Services
+// snapshots with the specified encrypted symmetric key from Amazon Web Services
 // KMS in the destination region. For more information about managing snapshot copy
 // grants, go to Amazon Redshift Database Encryption
 // (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html)
 // in the Amazon Redshift Cluster Management Guide.
 type SnapshotCopyGrant struct {
 
-	// The unique identifier of the customer master key (CMK) in Amazon Web Services
-	// KMS to which Amazon Redshift is granted permission.
+	// The unique identifier of the encrypted symmetric key in Amazon Web Services KMS
+	// to which Amazon Redshift is granted permission.
 	KmsKeyId *string
 
 	// The name of the snapshot copy grant.

@@ -26,7 +26,11 @@ import (
 // DeletionDate and cancel the deletion of the secret. In a secret scheduled for
 // deletion, you cannot access the encrypted secret value. To access that
 // information, first cancel the deletion with RestoreSecret and then retrieve the
-// information.
+// information. Required permissions: secretsmanager:DeleteSecret. For more
+// information, see  IAM policy actions for Secrets Manager
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions)
+// and Authentication and access control in Secrets Manager
+// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 func (c *Client) DeleteSecret(ctx context.Context, params *DeleteSecretInput, optFns ...func(*Options)) (*DeleteSecretOutput, error) {
 	if params == nil {
 		params = &DeleteSecretInput{}

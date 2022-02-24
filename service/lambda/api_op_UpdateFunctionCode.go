@@ -15,11 +15,20 @@ import (
 // the code package must be signed by a trusted publisher. For more information,
 // see Configuring code signing
 // (https://docs.aws.amazon.com/lambda/latest/dg/configuration-trustedcode.html).
-// The function's code is locked when you publish a version. You can't modify the
-// code of a published version, only the unpublished version. For a function
-// defined as a container image, Lambda resolves the image tag to an image digest.
-// In Amazon ECR, if you update the image tag to a new image, Lambda does not
-// automatically update the function.
+// If the function's package type is Image, you must specify the code package in
+// ImageUri as the URI of a container image
+// (https://docs.aws.amazon.com/lambda/latest/dg/lambda-images.html) in the Amazon
+// ECR registry. If the function's package type is Zip, you must specify the
+// deployment package as a .zip file archive
+// (https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html#gettingstarted-package-zip).
+// Enter the Amazon S3 bucket and key of the code .zip file location. You can also
+// provide the function code inline using the ZipFile field. The code in the
+// deployment package must be compatible with the target instruction set
+// architecture of the function (x86-64 or arm64). The function's code is locked
+// when you publish a version. You can't modify the code of a published version,
+// only the unpublished version. For a function defined as a container image,
+// Lambda resolves the image tag to an image digest. In Amazon ECR, if you update
+// the image tag to a new image, Lambda does not automatically update the function.
 func (c *Client) UpdateFunctionCode(ctx context.Context, params *UpdateFunctionCodeInput, optFns ...func(*Options)) (*UpdateFunctionCodeOutput, error) {
 	if params == nil {
 		params = &UpdateFunctionCodeInput{}
@@ -63,7 +72,8 @@ type UpdateFunctionCodeInput struct {
 	// modifying the function code.
 	DryRun bool
 
-	// URI of a container image in the Amazon ECR registry.
+	// URI of a container image in the Amazon ECR registry. Do not use for a function
+	// defined with a .zip file archive.
 	ImageUri *string
 
 	// Set to true to publish a new version of the function after updating the code.
@@ -76,17 +86,20 @@ type UpdateFunctionCodeInput struct {
 	RevisionId *string
 
 	// An Amazon S3 bucket in the same Amazon Web Services Region as your function. The
-	// bucket can be in a different Amazon Web Services account.
+	// bucket can be in a different Amazon Web Services account. Use only with a
+	// function defined with a .zip file archive deployment package.
 	S3Bucket *string
 
-	// The Amazon S3 key of the deployment package.
+	// The Amazon S3 key of the deployment package. Use only with a function defined
+	// with a .zip file archive deployment package.
 	S3Key *string
 
 	// For versioned objects, the version of the deployment package object to use.
 	S3ObjectVersion *string
 
 	// The base64-encoded contents of the deployment package. Amazon Web Services SDK
-	// and Amazon Web Services CLI clients handle the encoding for you.
+	// and Amazon Web Services CLI clients handle the encoding for you. Use only with a
+	// function defined with a .zip file archive deployment package.
 	ZipFile []byte
 
 	noSmithyDocumentSerde

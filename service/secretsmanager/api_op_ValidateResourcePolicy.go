@@ -25,6 +25,13 @@ import (
 //
 // * Verifies the policy does
 // not lock out a caller.
+//
+// Required permissions:
+// secretsmanager:ValidateResourcePolicy. For more information, see  IAM policy
+// actions for Secrets Manager
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions)
+// and Authentication and access control in Secrets Manager
+// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 func (c *Client) ValidateResourcePolicy(ctx context.Context, params *ValidateResourcePolicyInput, optFns ...func(*Options)) (*ValidateResourcePolicyOutput, error) {
 	if params == nil {
 		params = &ValidateResourcePolicyInput{}

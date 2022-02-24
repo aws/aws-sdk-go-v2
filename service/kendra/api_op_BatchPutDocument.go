@@ -11,14 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds one or more documents to an index. The BatchPutDocument operation enables
-// you to ingest inline documents or a set of documents stored in an Amazon S3
-// bucket. Use this operation to ingest your text and unstructured text into an
-// index, add custom attributes to the documents, and to attach an access control
-// list to the documents added to the index. The documents are indexed
-// asynchronously. You can see the progress of the batch using Amazon Web Services
-// CloudWatch. Any error messages related to processing the batch are sent to your
-// Amazon Web Services CloudWatch log.
+// Adds one or more documents to an index. The BatchPutDocument API enables you to
+// ingest inline documents or a set of documents stored in an Amazon S3 bucket. Use
+// this API to ingest your text and unstructured text into an index, add custom
+// attributes to the documents, and to attach an access control list to the
+// documents added to the index. The documents are indexed asynchronously. You can
+// see the progress of the batch using Amazon Web Services CloudWatch. Any error
+// messages related to processing the batch are sent to your Amazon Web Services
+// CloudWatch log.
 func (c *Client) BatchPutDocument(ctx context.Context, params *BatchPutDocumentInput, optFns ...func(*Options)) (*BatchPutDocumentOutput, error) {
 	if params == nil {
 		params = &BatchPutDocumentInput{}
@@ -36,44 +36,40 @@ func (c *Client) BatchPutDocument(ctx context.Context, params *BatchPutDocumentI
 
 type BatchPutDocumentInput struct {
 
-	// One or more documents to add to the index. Documents can include custom
-	// attributes. For example, 'DataSourceId' and 'DataSourceSyncJobId' are custom
-	// attributes that provide information on the synchronization of documents running
-	// on a data source. Note, 'DataSourceSyncJobId' could be an optional custom
-	// attribute as Amazon Kendra will use the ID of a running sync job. Documents have
-	// the following file size limits.
+	// One or more documents to add to the index. Documents have the following file
+	// size limits.
 	//
 	// * 5 MB total size for inline documents
 	//
-	// * 50 MB
-	// total size for files from an S3 bucket
+	// * 50 MB total size for
+	// files from an S3 bucket
 	//
 	// * 5 MB extracted text for any file
 	//
-	// For
-	// more information about file size and transaction per second quotas, see Quotas
+	// For more
+	// information about file size and transaction per second quotas, see Quotas
 	// (https://docs.aws.amazon.com/kendra/latest/dg/quotas.html).
 	//
 	// This member is required.
 	Documents []types.Document
 
 	// The identifier of the index to add the documents to. You need to create the
-	// index first using the CreateIndex operation.
+	// index first using the CreateIndex API.
 	//
 	// This member is required.
 	IndexId *string
 
 	// Configuration information for altering your document metadata and content during
-	// the document ingestion process when you use the BatchPutDocument operation. For
-	// more information on how to create, modify and delete document metadata, or make
-	// other content alterations when you ingest documents into Amazon Kendra, see
+	// the document ingestion process when you use the BatchPutDocument API. For more
+	// information on how to create, modify and delete document metadata, or make other
+	// content alterations when you ingest documents into Amazon Kendra, see
 	// Customizing document metadata during the ingestion process
 	// (https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html).
 	CustomDocumentEnrichmentConfiguration *types.CustomDocumentEnrichmentConfiguration
 
 	// The Amazon Resource Name (ARN) of a role that is allowed to run the
-	// BatchPutDocument operation. For more information, see IAM Roles for Amazon
-	// Kendra (https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html).
+	// BatchPutDocument API. For more information, see IAM Roles for Amazon Kendra
+	// (https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html).
 	RoleArn *string
 
 	noSmithyDocumentSerde

@@ -307,7 +307,7 @@
                     "name": "connect"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Amazon Connect is a cloud-based contact center solution that you use to set up and manage a customer\n   contact center and provide reliable customer engagement at any scale.</p>\n         <p>Amazon Connect provides metrics and real-time reporting that enable you to optimize contact routing.\n   You can also resolve customer issues more efficiently by getting customers in touch with the\n   appropriate agents.</p>\n         <p>There are limits to the number of Amazon Connect resources that you can create. There are also limits\n   to the number of requests that you can make per second. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">Amazon Connect\n    Service Quotas</a> in the <i>Amazon Connect Administrator Guide</i>.</p>\n         <p>You can connect programmatically to an Amazon Web Services service by using an endpoint. For a list of Amazon Connect\n   endpoints, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/connect_region.html\">Amazon Connect\n    Endpoints</a>.</p>\n         <note>\n            <p>Working with contact flows? Check out the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html\">Amazon Connect Flow language</a>.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Amazon Connect is a cloud-based contact center solution that you use to set up and manage a customer\n   contact center and provide reliable customer engagement at any scale.</p>\n         <p>Amazon Connect provides metrics and real-time reporting that enable you to optimize contact routing.\n   You can also resolve customer issues more efficiently by getting customers in touch with the\n   appropriate agents.</p>\n         <p>There are limits to the number of Amazon Connect resources that you can create. There are also limits\n   to the number of requests that you can make per second. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">Amazon Connect\n    Service Quotas</a> in the <i>Amazon Connect Administrator Guide</i>.</p>\n         <p>You can connect programmatically to an Amazon Web Services service by using an endpoint. For\n   a list of Amazon Connect endpoints, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/connect_region.html\">Amazon Connect Endpoints</a>.</p>\n         <note>\n            <p>Working with contact flows? Check out the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html\">Amazon Connect Flow language</a>.</p>\n         </note>",
                 "smithy.api#title": "Amazon Connect Service"
             },
             "version": "2017-08-08",
@@ -1465,6 +1465,16 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 100
+                }
+            }
+        },
+        "com.amazonaws.connect#ChatDurationInMinutes": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 60,
+                    "max": 10080
                 }
             }
         },
@@ -3495,7 +3505,7 @@
                 "Content": {
                     "target": "com.amazonaws.connect#VocabularyContent",
                     "traits": {
-                        "smithy.api#documentation": "<p>The content of the custom vocabulary in plain-text format with a table of values. Each row\n   in the table represents a word or a phrase, described with <code>Phrase</code>, <code>IPA</code>,\n    <code>SoundsLike</code>, and <code>DisplayAs</code> fields. Separate the fields with TAB\n   characters. The size limit is 50KB. For more information, see <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html#create-vocabulary-table\">Create a custom\n    vocabulary using a table</a>.</p>",
+                        "smithy.api#documentation": "<p>The content of the custom vocabulary in plain-text format with a table of values. Each row\n   in the table represents a word or a phrase, described with <code>Phrase</code>, <code>IPA</code>,\n   <code>SoundsLike</code>, and <code>DisplayAs</code> fields. Separate the fields with TAB\n   characters. The size limit is 50KB. For more information, see <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html#create-vocabulary-table\">Create a custom\n    vocabulary using a table</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3982,7 +3992,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an Amazon Web Services resource association from an Amazon Connect instance. The association must not have\n   any use cases associated with it.</p>",
+                "smithy.api#documentation": "<p>Deletes an Amazon Web Services resource association from an Amazon Connect instance. The association\n   must not have any use cases associated with it.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/instance/{InstanceId}/integration-associations/{IntegrationAssociationId}",
@@ -6018,7 +6028,7 @@
                 "Queues": {
                     "target": "com.amazonaws.connect#Queues",
                     "traits": {
-                        "smithy.api#documentation": "<p>The queues to use to filter the metrics. You should specify at least one queue, and can specify up to 100 queues per\n   request.  The <code>GetCurrentMetricsData</code> API in particular requires a queue when you include a <code>Filter</code> in your request. </p>"
+                        "smithy.api#documentation": "<p>The queues to use to filter the metrics. You should specify at least one queue, and can\n   specify up to 100 queues per request. The <code>GetCurrentMetricsData</code> API in particular\n   requires a queue when you include a <code>Filter</code> in your request. </p>"
                     }
                 },
                 "Channels": {
@@ -8733,7 +8743,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides summary information about the Amazon Web Services resource associations for the specified Amazon Connect\n   instance.</p>",
+                "smithy.api#documentation": "<p>Provides summary information about the Amazon Web Services resource associations for the\n   specified Amazon Connect instance.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/instance/{InstanceId}/integration-associations",
@@ -12864,7 +12874,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Initiates a contact flow to start a new chat for the customer. Response of this API provides\n   a token required to obtain credentials from the <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> API in the Amazon Connect Participant Service.</p>\n\n         <p>When a new chat contact is successfully created, clients must subscribe to the participant’s\n   connection for the created chat within 5 minutes. This is achieved by invoking <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> with WEBSOCKET and CONNECTION_CREDENTIALS. </p>\n\n         <p>A 429 error occurs in two situations:</p>\n         <ul>\n            <li>\n               <p>API rate limit is exceeded. API TPS throttling returns a <code>TooManyRequests</code>\n     exception.</p>\n            </li>\n            <li>\n               <p>The <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">quota for concurrent active\n      chats</a> is exceeded. Active chat throttling returns a\n      <code>LimitExceededException</code>.</p>\n            </li>\n         </ul>\n\n         <p>For more information about chat, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/chat.html\">Chat</a> in the <i>Amazon Connect Administrator\n    Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Initiates a contact flow to start a new chat for the customer. Response of this API provides\n   a token required to obtain credentials from the <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> API in the Amazon Connect Participant Service.</p>\n\n         <p>When a new chat contact is successfully created, clients must subscribe to the participant’s\n   connection for the created chat within 5 minutes. This is achieved by invoking <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> with WEBSOCKET and CONNECTION_CREDENTIALS. </p>\n\n         <p>A 429 error occurs in the following situations:</p>\n         <ul>\n            <li>\n               <p>API rate limit is exceeded. API TPS throttling returns a <code>TooManyRequests</code>\n     exception.</p>\n            </li>\n            <li>\n               <p>The <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">quota for concurrent active\n      chats</a> is exceeded. Active chat throttling returns a\n      <code>LimitExceededException</code>.</p>    \n            </li>\n         </ul>\n         <p>If you use the <code>ChatDurationInMinutes</code> parameter and receive a 400 error, your account may\n   not support the ability to configure custom chat durations. For more information, contact Amazon Web Services Support.     \n  </p>\n\n         <p>For more information about chat, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/chat.html\">Chat</a> in the <i>Amazon Connect Administrator\n    Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/contact/chat",
@@ -12913,6 +12923,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n   request.</p>",
                         "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "ChatDurationInMinutes": {
+                    "target": "com.amazonaws.connect#ChatDurationInMinutes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total duration of the newly started chat session. If not specified, the chat session duration defaults to 25 hour. \n   The minumum configurable time is 60 minutes. The maximum configurable time is 10,080 minutes (7 days).</p>"
                     }
                 }
             }
@@ -14160,7 +14176,7 @@
                 "Name": {
                     "target": "com.amazonaws.connect#ContactFlowName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the contact flow.</p>"
+                        "smithy.api#documentation": "<p>TThe name of the contact flow.</p>"
                     }
                 },
                 "Description": {

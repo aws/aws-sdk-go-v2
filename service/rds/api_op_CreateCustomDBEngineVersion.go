@@ -13,28 +13,35 @@ import (
 )
 
 // Creates a custom DB engine version (CEV). A CEV is a binary volume snapshot of a
-// database engine and specific AMI. The only supported engine is Oracle Database
-// 19c Enterprise Edition with the January 2021 or later RU/RUR. Amazon RDS, which
-// is a fully managed service, supplies the Amazon Machine Image (AMI) and database
-// software. The Amazon RDS database software is preinstalled, so you need only
-// select a DB engine and version, and create your database. With Amazon RDS Custom
-// for Oracle, you upload your database installation files in Amazon S3. When you
-// create a custom engine version, you specify the files in a JSON document called
-// a CEV manifest. This document describes installation .zip files stored in Amazon
-// S3. RDS Custom creates your CEV from the installation files that you provided.
-// This service model is called Bring Your Own Media (BYOM). Creation takes
-// approximately two hours. If creation fails, RDS Custom issues RDS-EVENT-0196
-// with the message Creation failed for custom engine version, and includes details
-// about the failure. For example, the event prints missing files. After you create
-// the CEV, it is available for use. You can create multiple CEVs, and create
-// multiple RDS Custom instances from any CEV. You can also change the status of a
-// CEV to make it available or inactive. The MediaImport service that imports files
-// from Amazon S3 to create CEVs isn't integrated with Amazon Web Services
-// CloudTrail. If you turn on data logging for Amazon RDS in CloudTrail, calls to
-// the CreateCustomDbEngineVersion event aren't logged. However, you might see
-// calls from the API gateway that accesses your Amazon S3 bucket. These calls
-// originate from the MediaImport service for the CreateCustomDbEngineVersion
-// event. For more information, see  Creating a CEV
+// database engine and specific AMI. The supported engines are the following:
+//
+// *
+// Oracle Database 12.1 Enterprise Edition with the January 2021 or later RU/RUR
+//
+// *
+// Oracle Database 19c Enterprise Edition with the January 2021 or later
+// RU/RUR
+//
+// Amazon RDS, which is a fully managed service, supplies the Amazon
+// Machine Image (AMI) and database software. The Amazon RDS database software is
+// preinstalled, so you need only select a DB engine and version, and create your
+// database. With Amazon RDS Custom for Oracle, you upload your database
+// installation files in Amazon S3. When you create a custom engine version, you
+// specify the files in a JSON document called a CEV manifest. This document
+// describes installation .zip files stored in Amazon S3. RDS Custom creates your
+// CEV from the installation files that you provided. This service model is called
+// Bring Your Own Media (BYOM). Creation takes approximately two hours. If creation
+// fails, RDS Custom issues RDS-EVENT-0196 with the message Creation failed for
+// custom engine version, and includes details about the failure. For example, the
+// event prints missing files. After you create the CEV, it is available for use.
+// You can create multiple CEVs, and create multiple RDS Custom instances from any
+// CEV. You can also change the status of a CEV to make it available or inactive.
+// The MediaImport service that imports files from Amazon S3 to create CEVs isn't
+// integrated with Amazon Web Services CloudTrail. If you turn on data logging for
+// Amazon RDS in CloudTrail, calls to the CreateCustomDbEngineVersion event aren't
+// logged. However, you might see calls from the API gateway that accesses your
+// Amazon S3 bucket. These calls originate from the MediaImport service for the
+// CreateCustomDbEngineVersion event. For more information, see  Creating a CEV
 // (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.html#custom-cev.create)
 // in the Amazon RDS User Guide.
 func (c *Client) CreateCustomDBEngineVersion(ctx context.Context, params *CreateCustomDBEngineVersionInput, optFns ...func(*Options)) (*CreateCustomDBEngineVersionOutput, error) {
@@ -194,6 +201,10 @@ type CreateCustomDBEngineVersionOutput struct {
 	// A list of the time zones supported by this engine for the Timezone parameter of
 	// the CreateDBInstance action.
 	SupportedTimezones []types.Timezone
+
+	// A value that indicates whether the engine version supports Babelfish for Aurora
+	// PostgreSQL.
+	SupportsBabelfish bool
 
 	// A value that indicates whether you can use Aurora global databases with a
 	// specific DB engine version.

@@ -21,7 +21,9 @@ type AdditionalInstanceConfiguration struct {
 	// Image Builder might have added to ensure that Systems Manager is installed on
 	// your Linux build instance. If you override the user data, make sure that you add
 	// commands to install Systems Manager, if it is not pre-installed on your base
-	// image.
+	// image. The user data is always base 64 encoded. For example, the following
+	// commands are encoded as IyEvYmluL2Jhc2gKbWtkaXIgLXAgL3Zhci9iYi8KdG91Y2ggL3Zhci$:
+	// #!/bin/bash mkdir -p /var/bb/ touch /var
 	UserDataOverride *string
 
 	noSmithyDocumentSerde
@@ -87,7 +89,7 @@ type Component struct {
 	// The change description of the component.
 	ChangeDescription *string
 
-	// The data of the component.
+	// Component data contains the YAML document content for the component.
 	Data *string
 
 	// The date that the component was created.
@@ -471,6 +473,9 @@ type Distribution struct {
 	// specific Region.
 	ContainerDistributionConfiguration *ContainerDistributionConfiguration
 
+	// The Windows faster-launching configurations to use for AMI distribution.
+	FastLaunchConfigurations []FastLaunchConfiguration
+
 	// A group of launchTemplateConfiguration settings that apply to image distribution
 	// for specified accounts.
 	LaunchTemplateConfigurations []LaunchTemplateConfiguration
@@ -572,6 +577,64 @@ type EbsInstanceBlockDeviceSpecification struct {
 
 	// Use to override the device's volume type.
 	VolumeType EbsVolumeType
+
+	noSmithyDocumentSerde
+}
+
+// Define and configure faster launching for output Windows AMIs.
+type FastLaunchConfiguration struct {
+
+	// A Boolean that represents the current state of faster launching for the Windows
+	// AMI. Set to true to start using Windows faster launching, or false to stop using
+	// it.
+	//
+	// This member is required.
+	Enabled bool
+
+	// The owner account ID for the fast-launch enabled Windows AMI.
+	AccountId *string
+
+	// The launch template that the fast-launch enabled Windows AMI uses when it
+	// launches Windows instances to create pre-provisioned snapshots.
+	LaunchTemplate *FastLaunchLaunchTemplateSpecification
+
+	// The maximum number of parallel instances that are launched for creating
+	// resources.
+	MaxParallelLaunches *int32
+
+	// Configuration settings for managing the number of snapshots that are created
+	// from pre-provisioned instances for the Windows AMI when faster launching is
+	// enabled.
+	SnapshotConfiguration *FastLaunchSnapshotConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Identifies the launch template that the associated Windows AMI uses for
+// launching an instance when faster launching is enabled. You can specify either
+// the launchTemplateName or the launchTemplateId, but not both.
+type FastLaunchLaunchTemplateSpecification struct {
+
+	// The ID of the launch template to use for faster launching for a Windows AMI.
+	LaunchTemplateId *string
+
+	// The name of the launch template to use for faster launching for a Windows AMI.
+	LaunchTemplateName *string
+
+	// The version of the launch template to use for faster launching for a Windows
+	// AMI.
+	LaunchTemplateVersion *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration settings for creating and managing pre-provisioned snapshots for a
+// fast-launch enabled Windows AMI.
+type FastLaunchSnapshotConfiguration struct {
+
+	// The number of pre-provisioned snapshots to keep on hand for a fast-launch
+	// enabled Windows AMI.
+	TargetResourceCount *int32
 
 	noSmithyDocumentSerde
 }

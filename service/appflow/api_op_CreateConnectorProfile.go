@@ -56,6 +56,11 @@ type CreateConnectorProfileInput struct {
 	// This member is required.
 	ConnectorType types.ConnectorType
 
+	// The label of the connector. The label is unique for each ConnectorRegistration
+	// in your Amazon Web Services account. Only needed if calling for CUSTOMCONNECTOR
+	// connector type/.
+	ConnectorLabel *string
+
 	// The ARN (Amazon Resource Name) of the Key Management Service (KMS) key you
 	// provide for encryption. This is required if you do not want to use the Amazon
 	// AppFlow-managed KMS key. If you don't provide anything here, Amazon AppFlow uses

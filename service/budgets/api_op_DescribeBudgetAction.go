@@ -29,7 +29,7 @@ func (c *Client) DescribeBudgetAction(ctx context.Context, params *DescribeBudge
 
 type DescribeBudgetActionInput struct {
 
-	// The account ID of the user. It should be a 12-digit number.
+	// The account ID of the user. It's a 12-digit number.
 	//
 	// This member is required.
 	AccountId *string
@@ -50,7 +50,7 @@ type DescribeBudgetActionInput struct {
 
 type DescribeBudgetActionOutput struct {
 
-	// The account ID of the user. It should be a 12-digit number.
+	// The account ID of the user. It's a 12-digit number.
 	//
 	// This member is required.
 	AccountId *string

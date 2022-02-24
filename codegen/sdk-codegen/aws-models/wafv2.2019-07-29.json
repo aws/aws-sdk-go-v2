@@ -97,6 +97,9 @@
                     "target": "com.amazonaws.wafv2#DisassociateWebACL"
                 },
                 {
+                    "target": "com.amazonaws.wafv2#GenerateMobileSdkReleaseUrl"
+                },
+                {
                     "target": "com.amazonaws.wafv2#GetIPSet"
                 },
                 {
@@ -104,6 +107,9 @@
                 },
                 {
                     "target": "com.amazonaws.wafv2#GetManagedRuleSet"
+                },
+                {
+                    "target": "com.amazonaws.wafv2#GetMobileSdkRelease"
                 },
                 {
                     "target": "com.amazonaws.wafv2#GetPermissionPolicy"
@@ -140,6 +146,9 @@
                 },
                 {
                     "target": "com.amazonaws.wafv2#ListManagedRuleSets"
+                },
+                {
+                    "target": "com.amazonaws.wafv2#ListMobileSdkReleases"
                 },
                 {
                     "target": "com.amazonaws.wafv2#ListRegexPatternSets"
@@ -1709,7 +1718,7 @@
                 "Addresses": {
                     "target": "com.amazonaws.wafv2#IPAddresses",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains an array of strings that specify one or more IP addresses or blocks of IP addresses in Classless Inter-Domain Routing (CIDR) notation. WAF supports all IPv4 and IPv6 CIDR ranges except for /0. </p>\n         <p>Examples: </p>\n         <ul>\n            <li>\n               <p>To configure WAF to allow, block, or count requests that originated from the IP address 192.0.2.44, specify <code>192.0.2.44/32</code>.</p>\n            </li>\n            <li>\n               <p>To configure WAF to allow, block, or count requests that originated from IP addresses from 192.0.2.0 to 192.0.2.255, specify \n               <code>192.0.2.0/24</code>.</p>\n            </li>\n            <li>\n               <p>To configure WAF to allow, block, or count requests that originated from the IP address 1111:0000:0000:0000:0000:0000:0000:0111, specify <code>1111:0000:0000:0000:0000:0000:0000:0111/128</code>.</p>\n            </li>\n            <li>\n               <p>To configure WAF to allow, block, or count requests that originated from IP addresses 1111:0000:0000:0000:0000:0000:0000:0000 to 1111:0000:0000:0000:ffff:ffff:ffff:ffff, specify <code>1111:0000:0000:0000:0000:0000:0000:0000/64</code>.</p>\n            </li>\n         </ul>\n         <p>For more information about CIDR notation, see the Wikipedia entry <a href=\"https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing\">Classless Inter-Domain Routing</a>.</p>",
+                        "smithy.api#documentation": "<p>Contains an array of strings that specifies zero or more IP addresses or blocks of IP addresses in Classless Inter-Domain Routing (CIDR) notation. WAF supports all IPv4 and IPv6 CIDR ranges except for /0. </p>\n         <p>Example address strings: </p>\n         <ul>\n            <li>\n               <p>To configure WAF to allow, block, or count requests that originated from the IP address 192.0.2.44, specify <code>192.0.2.44/32</code>.</p>\n            </li>\n            <li>\n               <p>To configure WAF to allow, block, or count requests that originated from IP addresses from 192.0.2.0 to 192.0.2.255, specify \n               <code>192.0.2.0/24</code>.</p>\n            </li>\n            <li>\n               <p>To configure WAF to allow, block, or count requests that originated from the IP address 1111:0000:0000:0000:0000:0000:0000:0111, specify <code>1111:0000:0000:0000:0000:0000:0000:0111/128</code>.</p>\n            </li>\n            <li>\n               <p>To configure WAF to allow, block, or count requests that originated from IP addresses 1111:0000:0000:0000:0000:0000:0000:0000 to 1111:0000:0000:0000:ffff:ffff:ffff:ffff, specify <code>1111:0000:0000:0000:0000:0000:0000:0000/64</code>.</p>\n            </li>\n         </ul>\n         <p>For more information about CIDR notation, see the Wikipedia entry <a href=\"https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing\">Classless Inter-Domain Routing</a>.</p> \n         <p>Example JSON <code>Addresses</code> specifications: </p>\n         <ul>\n            <li>\n               <p>Empty array: <code>\"Addresses\": []</code> \n               </p>\n            </li>\n            <li>\n               <p>Array with one address: <code>\"Addresses\": [\"192.0.2.44/32\"]</code> \n               </p>\n            </li>\n            <li>\n               <p>Array with three addresses: <code>\"Addresses\": [\"192.0.2.44/32\", \"192.0.2.0/24\", \"192.0.0.0/16\"]</code> \n               </p>\n            </li>\n            <li>\n               <p>INVALID specification: <code>\"Addresses\": [\"\"]</code> INVALID </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2805,6 +2814,9 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.wafv2#DownloadUrl": {
+            "type": "string"
+        },
         "com.amazonaws.wafv2#EntityDescription": {
             "type": "string",
             "traits": {
@@ -2890,6 +2902,16 @@
                         "name": "NO_MATCH"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.wafv2#FieldIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                },
+                "smithy.api#pattern": "\\S"
             }
         },
         "com.amazonaws.wafv2#FieldToMatch": {
@@ -3148,6 +3170,62 @@
                 ]
             }
         },
+        "com.amazonaws.wafv2#GenerateMobileSdkReleaseUrl": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wafv2#GenerateMobileSdkReleaseUrlRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.wafv2#GenerateMobileSdkReleaseUrlResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wafv2#WAFInternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.wafv2#WAFInvalidOperationException"
+                },
+                {
+                    "target": "com.amazonaws.wafv2#WAFInvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.wafv2#WAFNonexistentItemException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Generates a presigned download URL for the specified release of the mobile SDK.</p>\n         <p>The mobile SDK is not generally available. Customers who have access to the mobile SDK can use it to establish and manage Security Token Service (STS) security tokens for use in HTTP(S) requests from a mobile device to WAF. For more information, see \n<a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html\">WAF client application integration</a> in the <i>WAF Developer Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.wafv2#GenerateMobileSdkReleaseUrlRequest": {
+            "type": "structure",
+            "members": {
+                "Platform": {
+                    "target": "com.amazonaws.wafv2#Platform",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The device platform.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ReleaseVersion": {
+                    "target": "com.amazonaws.wafv2#VersionKeyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The release version. For the latest available version, specify <code>LATEST</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.wafv2#GenerateMobileSdkReleaseUrlResponse": {
+            "type": "structure",
+            "members": {
+                "Url": {
+                    "target": "com.amazonaws.wafv2#DownloadUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The presigned download URL for the specified SDK release.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.wafv2#GeoMatchStatement": {
             "type": "structure",
             "members": {
@@ -3351,6 +3429,62 @@
                     "target": "com.amazonaws.wafv2#LockToken",
                     "traits": {
                         "smithy.api#documentation": "<p>A token used for optimistic locking. WAF returns a token to your <code>get</code> and <code>list</code> requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like <code>update</code> and <code>delete</code>. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another <code>get</code>, and use the new token returned by that operation. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.wafv2#GetMobileSdkRelease": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wafv2#GetMobileSdkReleaseRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.wafv2#GetMobileSdkReleaseResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wafv2#WAFInternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.wafv2#WAFInvalidOperationException"
+                },
+                {
+                    "target": "com.amazonaws.wafv2#WAFInvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.wafv2#WAFNonexistentItemException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves information for the specified mobile SDK release, including release notes and tags.</p>\n         <p>The mobile SDK is not generally available. Customers who have access to the mobile SDK can use it to establish and manage Security Token Service (STS) security tokens for use in HTTP(S) requests from a mobile device to WAF. For more information, see \n<a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html\">WAF client application integration</a> in the <i>WAF Developer Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.wafv2#GetMobileSdkReleaseRequest": {
+            "type": "structure",
+            "members": {
+                "Platform": {
+                    "target": "com.amazonaws.wafv2#Platform",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The device platform.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ReleaseVersion": {
+                    "target": "com.amazonaws.wafv2#VersionKeyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The release version. For the latest available version, specify <code>LATEST</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.wafv2#GetMobileSdkReleaseResponse": {
+            "type": "structure",
+            "members": {
+                "MobileSdkRelease": {
+                    "target": "com.amazonaws.wafv2#MobileSdkRelease",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information for a specified SDK release, including release notes and tags.</p>"
                     }
                 }
             }
@@ -3828,6 +3962,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A token used for optimistic locking. WAF returns a token to your <code>get</code> and <code>list</code> requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like <code>update</code> and <code>delete</code>. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another <code>get</code>, and use the new token returned by that operation. </p>"
                     }
+                },
+                "ApplicationIntegrationURL": {
+                    "target": "com.amazonaws.wafv2#OutputUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL to use in SDK integrations with Amazon Web Services managed rule groups. For example, you can use the integration SDKs with the account takeover prevention managed rule group <code>AWSManagedRulesATPRuleSet</code>. This is only populated if you are using a rule group in your web ACL that integrates with your applications in this way. For more information, see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html\">WAF client application integration</a> in the <i>WAF Developer Guide</i>.</p>"
+                    }
                 }
             }
         },
@@ -3984,13 +4124,13 @@
                 "Addresses": {
                     "target": "com.amazonaws.wafv2#IPAddresses",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains an array of strings that specify one or more IP addresses or blocks of IP addresses in Classless Inter-Domain Routing (CIDR) notation. WAF supports all IPv4 and IPv6 CIDR ranges except for /0. </p>\n         <p>Examples: </p>\n         <ul>\n            <li>\n               <p>To configure WAF to allow, block, or count requests that originated from the IP address 192.0.2.44, specify <code>192.0.2.44/32</code>.</p>\n            </li>\n            <li>\n               <p>To configure WAF to allow, block, or count requests that originated from IP addresses from 192.0.2.0 to 192.0.2.255, specify \n               <code>192.0.2.0/24</code>.</p>\n            </li>\n            <li>\n               <p>To configure WAF to allow, block, or count requests that originated from the IP address 1111:0000:0000:0000:0000:0000:0000:0111, specify <code>1111:0000:0000:0000:0000:0000:0000:0111/128</code>.</p>\n            </li>\n            <li>\n               <p>To configure WAF to allow, block, or count requests that originated from IP addresses 1111:0000:0000:0000:0000:0000:0000:0000 to 1111:0000:0000:0000:ffff:ffff:ffff:ffff, specify <code>1111:0000:0000:0000:0000:0000:0000:0000/64</code>.</p>\n            </li>\n         </ul>\n         <p>For more information about CIDR notation, see the Wikipedia entry <a href=\"https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing\">Classless Inter-Domain Routing</a>.</p>",
+                        "smithy.api#documentation": "<p>Contains an array of strings that specifies zero or more IP addresses or blocks of IP addresses in Classless Inter-Domain Routing (CIDR) notation. WAF supports all IPv4 and IPv6 CIDR ranges except for /0. </p>\n         <p>Example address strings: </p>\n         <ul>\n            <li>\n               <p>To configure WAF to allow, block, or count requests that originated from the IP address 192.0.2.44, specify <code>192.0.2.44/32</code>.</p>\n            </li>\n            <li>\n               <p>To configure WAF to allow, block, or count requests that originated from IP addresses from 192.0.2.0 to 192.0.2.255, specify \n               <code>192.0.2.0/24</code>.</p>\n            </li>\n            <li>\n               <p>To configure WAF to allow, block, or count requests that originated from the IP address 1111:0000:0000:0000:0000:0000:0000:0111, specify <code>1111:0000:0000:0000:0000:0000:0000:0111/128</code>.</p>\n            </li>\n            <li>\n               <p>To configure WAF to allow, block, or count requests that originated from IP addresses 1111:0000:0000:0000:0000:0000:0000:0000 to 1111:0000:0000:0000:ffff:ffff:ffff:ffff, specify <code>1111:0000:0000:0000:0000:0000:0000:0000/64</code>.</p>\n            </li>\n         </ul>\n         <p>For more information about CIDR notation, see the Wikipedia entry <a href=\"https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing\">Classless Inter-Domain Routing</a>.</p> \n         <p>Example JSON <code>Addresses</code> specifications: </p>\n         <ul>\n            <li>\n               <p>Empty array: <code>\"Addresses\": []</code> \n               </p>\n            </li>\n            <li>\n               <p>Array with one address: <code>\"Addresses\": [\"192.0.2.44/32\"]</code> \n               </p>\n            </li>\n            <li>\n               <p>Array with three addresses: <code>\"Addresses\": [\"192.0.2.44/32\", \"192.0.2.0/24\", \"192.0.0.0/16\"]</code> \n               </p>\n            </li>\n            <li>\n               <p>INVALID specification: <code>\"Addresses\": [\"\"]</code> INVALID </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains one or more IP addresses or blocks of IP addresses specified in Classless\n         Inter-Domain Routing (CIDR) notation. WAF supports all IPv4 and IPv6 CIDR ranges\n         except for /0. For information about CIDR notation, see the Wikipedia entry <a href=\"https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing\">Classless\n            Inter-Domain Routing</a>. </p>\n         <p>WAF assigns an ARN to each <code>IPSet</code> that you create. To use an IP set in a\n         rule, you provide the ARN to the <a>Rule</a> statement <a>IPSetReferenceStatement</a>. </p>"
+                "smithy.api#documentation": "<p>Contains zero or more IP addresses or blocks of IP addresses specified in Classless\n         Inter-Domain Routing (CIDR) notation. WAF supports all IPv4 and IPv6 CIDR ranges\n         except for /0. For information about CIDR notation, see the Wikipedia entry <a href=\"https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing\">Classless\n            Inter-Domain Routing</a>. </p>\n         <p>WAF assigns an ARN to each <code>IPSet</code> that you create. To use an IP set in a\n         rule, you provide the ARN to the <a>Rule</a> statement <a>IPSetReferenceStatement</a>. </p>"
             }
         },
         "com.amazonaws.wafv2#IPSetForwardedIPConfig": {
@@ -4649,6 +4789,70 @@
                 }
             }
         },
+        "com.amazonaws.wafv2#ListMobileSdkReleases": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wafv2#ListMobileSdkReleasesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.wafv2#ListMobileSdkReleasesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wafv2#WAFInternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.wafv2#WAFInvalidOperationException"
+                },
+                {
+                    "target": "com.amazonaws.wafv2#WAFInvalidParameterException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a list of the available releases for the mobile SDK and the specified device platform. </p>\n         <p>The mobile SDK is not generally available. Customers who have access to the mobile SDK can use it to establish and manage Security Token Service (STS) security tokens for use in HTTP(S) requests from a mobile device to WAF. For more information, see \n<a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html\">WAF client application integration</a> in the <i>WAF Developer Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.wafv2#ListMobileSdkReleasesRequest": {
+            "type": "structure",
+            "members": {
+                "Platform": {
+                    "target": "com.amazonaws.wafv2#Platform",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The device platform to retrieve the list for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextMarker": {
+                    "target": "com.amazonaws.wafv2#NextMarker",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When you request a list of objects with a <code>Limit</code> setting, if the number of objects that are still available\n         for retrieval exceeds the limit, WAF returns a <code>NextMarker</code> \n         value in the response. To retrieve the next batch of objects, provide the marker from the prior call in your next request.</p>"
+                    }
+                },
+                "Limit": {
+                    "target": "com.amazonaws.wafv2#PaginationLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of objects that you want WAF to return for this request. If more \n          objects are available, in the response, WAF provides a \n         <code>NextMarker</code> value that you can use in a subsequent call to get the next batch of objects.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.wafv2#ListMobileSdkReleasesResponse": {
+            "type": "structure",
+            "members": {
+                "ReleaseSummaries": {
+                    "target": "com.amazonaws.wafv2#ReleaseSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>High level information for the available SDK releases. </p>"
+                    }
+                },
+                "NextMarker": {
+                    "target": "com.amazonaws.wafv2#NextMarker",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When you request a list of objects with a <code>Limit</code> setting, if the number of objects that are still available\n         for retrieval exceeds the limit, WAF returns a <code>NextMarker</code> \n         value in the response. To retrieve the next batch of objects, provide the marker from the prior call in your next request.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.wafv2#ListRegexPatternSets": {
             "type": "operation",
             "input": {
@@ -5004,7 +5208,7 @@
                 "LogDestinationConfigs": {
                     "target": "com.amazonaws.wafv2#LogDestinationConfigs",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the logging destinations that you want to associate\n         with the web ACL.</p>",
+                        "smithy.api#documentation": "<p>The logging destination configuration that you want to associate\n         with the web ACL.</p>\n         <note>\n            <p>You can associate one logging destination to a web ACL.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5028,7 +5232,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Defines an association between logging destinations and a web ACL\n         resource, for logging from WAF. As part of the association, you can specify parts of\n         the standard logging fields to keep out of the logs and you can specify filters so that you\n         log only a subset of the logging records. </p>\n         <p>For information about configuring web ACL logging destinations, see \n           <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/logging.html\">Logging web ACL traffic information</a> \n               in the <i>WAF Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Defines an association between logging destinations and a web ACL\n         resource, for logging from WAF. As part of the association, you can specify parts of\n         the standard logging fields to keep out of the logs and you can specify filters so that you\n         log only a subset of the logging records. </p>\n         <note>\n            <p>You can define one logging destination per web ACL.</p>\n         </note>\n         <p>You can access information about the traffic that WAF inspects using the following\n         steps:</p>\n         <ol>\n            <li>\n               <p>Create your logging destination. You can use an Amazon CloudWatch Logs log group, an Amazon Simple Storage Service (Amazon S3) bucket, or an Amazon Kinesis Data Firehose. \n                 For information about configuring logging destinations and the permissions that are required for each, see \n                 <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/logging.html\">Logging web ACL traffic information</a> \n                 in the <i>WAF Developer Guide</i>.</p>\n            </li>\n            <li>\n               <p>Associate your logging destination to your web ACL using a\n                  <code>PutLoggingConfiguration</code> request.</p>\n            </li>\n         </ol>\n         <p>When you successfully enable logging using a <code>PutLoggingConfiguration</code>\n          request, WAF creates an additional role or policy that is required to write\n              logs to the logging destination. For an Amazon CloudWatch Logs log group, WAF creates a resource policy on the log group.\n          For an Amazon S3 bucket, WAF creates a bucket policy. For an Amazon Kinesis Data Firehose, WAF creates a service-linked role.</p> \n         <p>For additional information about web ACL logging, see \n           <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/logging.html\">Logging web ACL traffic information</a> \n               in the <i>WAF Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.wafv2#LoggingConfigurations": {
@@ -5057,6 +5261,59 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Filtering that specifies which web requests are kept in the logs and which are dropped,\n         defined for a web ACL's <a>LoggingConfiguration</a>. </p>\n         <p>You can filter on the rule action and on the web request labels that were applied by\n         matching rules during web ACL evaluation. </p>"
+            }
+        },
+        "com.amazonaws.wafv2#LoginPathString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "\\S"
+            }
+        },
+        "com.amazonaws.wafv2#ManagedRuleGroupConfig": {
+            "type": "structure",
+            "members": {
+                "LoginPath": {
+                    "target": "com.amazonaws.wafv2#LoginPathString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path of the login endpoint for your application. For example, for the URL <code>https://example.com/web/login</code>, you would provide the path <code>/web/login</code>.</p>"
+                    }
+                },
+                "PayloadType": {
+                    "target": "com.amazonaws.wafv2#PayloadType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The payload type for your login endpoint, either JSON or form encoded.</p>"
+                    }
+                },
+                "UsernameField": {
+                    "target": "com.amazonaws.wafv2#UsernameField",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about your login page username field. </p>"
+                    }
+                },
+                "PasswordField": {
+                    "target": "com.amazonaws.wafv2#PasswordField",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about your login page password field. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Additional information that's used by a managed rule group. Most managed rule groups don't require this.</p>\n         <p>Use this for the account takeover prevention managed rule group \n      <code>AWSManagedRulesATPRuleSet</code>, to provide information about the sign-in page of your application. </p>"
+            }
+        },
+        "com.amazonaws.wafv2#ManagedRuleGroupConfigs": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wafv2#ManagedRuleGroupConfig"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
             }
         },
         "com.amazonaws.wafv2#ManagedRuleGroupStatement": {
@@ -5092,6 +5349,12 @@
                     "target": "com.amazonaws.wafv2#Statement",
                     "traits": {
                         "smithy.api#documentation": "<p>An optional nested statement that narrows the scope of the web requests that are\n         evaluated by the managed rule group. Requests are only evaluated by the rule group if they\n         match the scope-down statement. You can use any nestable <a>Statement</a> in the\n         scope-down statement, and you can nest statements at any level, the same as you can for a\n         rule statement. </p>"
+                    }
+                },
+                "ManagedRuleGroupConfigs": {
+                    "target": "com.amazonaws.wafv2#ManagedRuleGroupConfigs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional information that's used by a managed rule group. Most managed rule groups don't require this.</p>\n         <p>Use this for the account takeover prevention managed rule group \n      <code>AWSManagedRulesATPRuleSet</code>, to provide information about the sign-in page of your application. </p>"
                     }
                 }
             },
@@ -5321,6 +5584,38 @@
                 "smithy.api#pattern": "^[\\w#:\\.\\-/]+$"
             }
         },
+        "com.amazonaws.wafv2#MobileSdkRelease": {
+            "type": "structure",
+            "members": {
+                "ReleaseVersion": {
+                    "target": "com.amazonaws.wafv2#VersionKeyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The release version. </p>"
+                    }
+                },
+                "Timestamp": {
+                    "target": "com.amazonaws.wafv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the release. </p>"
+                    }
+                },
+                "ReleaseNotes": {
+                    "target": "com.amazonaws.wafv2#ReleaseNotes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Notes describing the release.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.wafv2#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags that are associated with the release. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information for a release of the mobile SDK, including release notes and tags.</p>\n         <p>The mobile SDK is not generally available. Customers who have access to the mobile SDK can use it to establish and manage Security Token Service (STS) security tokens for use in HTTP(S) requests from a mobile device to WAF. For more information, see \n<a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html\">WAF client application integration</a> in the <i>WAF Developer Guide</i>.</p>"
+            }
+        },
         "com.amazonaws.wafv2#NextMarker": {
             "type": "string",
             "traits": {
@@ -5367,6 +5662,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>A logical rule statement used to combine other rule statements with OR logic. You provide more than one <a>Statement</a> within the <code>OrStatement</code>. </p>"
             }
+        },
+        "com.amazonaws.wafv2#OutputUrl": {
+            "type": "string"
         },
         "com.amazonaws.wafv2#OverrideAction": {
             "type": "structure",
@@ -5629,6 +5927,14 @@
                     {
                         "value": "LOG_DESTINATION",
                         "name": "LOG_DESTINATION"
+                    },
+                    {
+                        "value": "MANAGED_RULE_GROUP_CONFIG",
+                        "name": "MANAGED_RULE_GROUP_CONFIG"
+                    },
+                    {
+                        "value": "PAYLOAD_TYPE",
+                        "name": "PAYLOAD_TYPE"
                     }
                 ]
             }
@@ -5639,6 +5945,51 @@
                 "smithy.api#length": {
                     "min": 1
                 }
+            }
+        },
+        "com.amazonaws.wafv2#PasswordField": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.wafv2#FieldIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the password field. For example <code>/form/password</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about your login page password field, used in a <code>ManagedRuleGroupConfig</code>. </p>"
+            }
+        },
+        "com.amazonaws.wafv2#PayloadType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "JSON",
+                        "name": "JSON"
+                    },
+                    {
+                        "value": "FORM_ENCODED",
+                        "name": "FORM_ENCODED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.wafv2#Platform": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "IOS",
+                        "name": "IOS"
+                    },
+                    {
+                        "value": "ANDROID",
+                        "name": "ANDROID"
+                    }
+                ]
             }
         },
         "com.amazonaws.wafv2#PolicyString": {
@@ -5725,7 +6076,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Enables the specified <a>LoggingConfiguration</a>, to start logging from a\n         web ACL, according to the configuration provided.</p>\n         <p>You can access information about all traffic that WAF inspects using the following\n         steps:</p>\n         <ol>\n            <li>\n               <p>Create your logging destination. You can use an Amazon CloudWatch Logs log group, an Amazon Simple Storage Service (Amazon S3) bucket, or an Amazon Kinesis Data Firehose. \n                 For information about configuring logging destinations and the permissions that are required for each, see \n                 <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/logging.html\">Logging web ACL traffic information</a> \n                 in the <i>WAF Developer Guide</i>.</p>\n            </li>\n            <li>\n               <p>Associate your logging destination to your web ACL using a\n                  <code>PutLoggingConfiguration</code> request.</p>\n            </li>\n         </ol>\n         <p>When you successfully enable logging using a <code>PutLoggingConfiguration</code>\n          request, WAF creates an additional role or policy that is required to write\n              logs to the logging destination. For an Amazon CloudWatch Logs log group, WAF creates a resource policy on the log group.\n          For an Amazon S3 bucket, WAF creates a bucket policy. For an Amazon Kinesis Data Firehose, WAF creates a service-linked role.</p>\n         <note>\n            <p>This operation completely replaces the mutable specifications that you already have for the logging configuration with the ones that you provide to this call. To modify the logging configuration, retrieve it by calling <a>GetLoggingConfiguration</a>, update the settings as needed, and then provide the complete logging configuration specification to this call.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Enables the specified <a>LoggingConfiguration</a>, to start logging from a\n         web ACL, according to the configuration provided. </p>\n         <note>\n            <p>You can define one logging destination per web ACL.</p>\n         </note>\n         <p>You can access information about the traffic that WAF inspects using the following\n         steps:</p>\n         <ol>\n            <li>\n               <p>Create your logging destination. You can use an Amazon CloudWatch Logs log group, an Amazon Simple Storage Service (Amazon S3) bucket, or an Amazon Kinesis Data Firehose. \n                 For information about configuring logging destinations and the permissions that are required for each, see \n                 <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/logging.html\">Logging web ACL traffic information</a> \n                 in the <i>WAF Developer Guide</i>.</p>\n            </li>\n            <li>\n               <p>Associate your logging destination to your web ACL using a\n                  <code>PutLoggingConfiguration</code> request.</p>\n            </li>\n         </ol>\n         <p>When you successfully enable logging using a <code>PutLoggingConfiguration</code>\n          request, WAF creates an additional role or policy that is required to write\n              logs to the logging destination. For an Amazon CloudWatch Logs log group, WAF creates a resource policy on the log group.\n          For an Amazon S3 bucket, WAF creates a bucket policy. For an Amazon Kinesis Data Firehose, WAF creates a service-linked role.</p> \n         <p>For additional information about web ACL logging, see \n           <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/logging.html\">Logging web ACL traffic information</a> \n               in the <i>WAF Developer Guide</i>.</p> \n         <note>\n            <p>This operation completely replaces the mutable specifications that you already have for the logging configuration with the ones that you provide to this call. To modify the logging configuration, retrieve it by calling <a>GetLoggingConfiguration</a>, update the settings as needed, and then provide the complete logging configuration specification to this call.</p>\n         </note>"
             }
         },
         "com.amazonaws.wafv2#PutLoggingConfigurationRequest": {
@@ -6150,6 +6501,35 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.wafv2#Regex"
+            }
+        },
+        "com.amazonaws.wafv2#ReleaseNotes": {
+            "type": "string"
+        },
+        "com.amazonaws.wafv2#ReleaseSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wafv2#ReleaseSummary"
+            }
+        },
+        "com.amazonaws.wafv2#ReleaseSummary": {
+            "type": "structure",
+            "members": {
+                "ReleaseVersion": {
+                    "target": "com.amazonaws.wafv2#VersionKeyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The release version. </p>"
+                    }
+                },
+                "Timestamp": {
+                    "target": "com.amazonaws.wafv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the release. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>High level information for an SDK release. </p>"
             }
         },
         "com.amazonaws.wafv2#ResourceArn": {
@@ -7255,7 +7635,7 @@
                 "Addresses": {
                     "target": "com.amazonaws.wafv2#IPAddresses",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains an array of strings that specify one or more IP addresses or blocks of IP addresses in Classless Inter-Domain Routing (CIDR) notation. WAF supports all IPv4 and IPv6 CIDR ranges except for /0. </p>\n         <p>Examples: </p>\n         <ul>\n            <li>\n               <p>To configure WAF to allow, block, or count requests that originated from the IP address 192.0.2.44, specify <code>192.0.2.44/32</code>.</p>\n            </li>\n            <li>\n               <p>To configure WAF to allow, block, or count requests that originated from IP addresses from 192.0.2.0 to 192.0.2.255, specify \n               <code>192.0.2.0/24</code>.</p>\n            </li>\n            <li>\n               <p>To configure WAF to allow, block, or count requests that originated from the IP address 1111:0000:0000:0000:0000:0000:0000:0111, specify <code>1111:0000:0000:0000:0000:0000:0000:0111/128</code>.</p>\n            </li>\n            <li>\n               <p>To configure WAF to allow, block, or count requests that originated from IP addresses 1111:0000:0000:0000:0000:0000:0000:0000 to 1111:0000:0000:0000:ffff:ffff:ffff:ffff, specify <code>1111:0000:0000:0000:0000:0000:0000:0000/64</code>.</p>\n            </li>\n         </ul>\n         <p>For more information about CIDR notation, see the Wikipedia entry <a href=\"https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing\">Classless Inter-Domain Routing</a>.</p>",
+                        "smithy.api#documentation": "<p>Contains an array of strings that specifies zero or more IP addresses or blocks of IP addresses in Classless Inter-Domain Routing (CIDR) notation. WAF supports all IPv4 and IPv6 CIDR ranges except for /0. </p>\n         <p>Example address strings: </p>\n         <ul>\n            <li>\n               <p>To configure WAF to allow, block, or count requests that originated from the IP address 192.0.2.44, specify <code>192.0.2.44/32</code>.</p>\n            </li>\n            <li>\n               <p>To configure WAF to allow, block, or count requests that originated from IP addresses from 192.0.2.0 to 192.0.2.255, specify \n               <code>192.0.2.0/24</code>.</p>\n            </li>\n            <li>\n               <p>To configure WAF to allow, block, or count requests that originated from the IP address 1111:0000:0000:0000:0000:0000:0000:0111, specify <code>1111:0000:0000:0000:0000:0000:0000:0111/128</code>.</p>\n            </li>\n            <li>\n               <p>To configure WAF to allow, block, or count requests that originated from IP addresses 1111:0000:0000:0000:0000:0000:0000:0000 to 1111:0000:0000:0000:ffff:ffff:ffff:ffff, specify <code>1111:0000:0000:0000:0000:0000:0000:0000/64</code>.</p>\n            </li>\n         </ul>\n         <p>For more information about CIDR notation, see the Wikipedia entry <a href=\"https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing\">Classless Inter-Domain Routing</a>.</p> \n         <p>Example JSON <code>Addresses</code> specifications: </p>\n         <ul>\n            <li>\n               <p>Empty array: <code>\"Addresses\": []</code> \n               </p>\n            </li>\n            <li>\n               <p>Array with one address: <code>\"Addresses\": [\"192.0.2.44/32\"]</code> \n               </p>\n            </li>\n            <li>\n               <p>Array with three addresses: <code>\"Addresses\": [\"192.0.2.44/32\", \"192.0.2.0/24\", \"192.0.0.0/16\"]</code> \n               </p>\n            </li>\n            <li>\n               <p>INVALID specification: <code>\"Addresses\": [\"\"]</code> INVALID </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7716,6 +8096,21 @@
                 "smithy.api#documentation": "<p>The path component of the URI of a web request. This is the part of a web request that identifies a resource. For example, <code>/images/daily-ad.jpg</code>.</p>\n         <p>This is used only to indicate the web request component for WAF to inspect, in the <a>FieldToMatch</a> specification. </p> \n         <p>JSON specification: <code>\"UriPath\": {}</code>\n         </p>"
             }
         },
+        "com.amazonaws.wafv2#UsernameField": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.wafv2#FieldIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the username field. For example <code>/form/username</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about your login page username field, used in a <code>ManagedRuleGroupConfig</code>. </p>"
+            }
+        },
         "com.amazonaws.wafv2#VendorName": {
             "type": "string",
             "traits": {
@@ -7928,7 +8323,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The operation failed because you don't have the permissions that your logging configuration requires. For information, see \n           <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/logging.html\">Logging web ACL traffic information</a> \n               in the <i>WAF Developer Guide</i>.</p>",
+                "smithy.api#documentation": "<p>The operation failed because you don't have the permissions that your logging configuration requires. For information, see\n           <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/logging.html\">Logging web ACL traffic information</a>\n               in the <i>WAF Developer Guide</i>.</p>",
                 "smithy.api#error": "client"
             }
         },

@@ -213,7 +213,7 @@ type ModifyDBInstanceInput struct {
 	// the change. The change is applied during the next maintenance window, unless you
 	// enable ApplyImmediately. This parameter doesn't apply to RDS Custom.
 	// Constraints: If supplied, must match the name of an existing DBSubnetGroup.
-	// Example: mySubnetGroup
+	// Example: mydbsubnetgroup
 	DBSubnetGroupName *string
 
 	// A value that indicates whether the DB instance has deletion protection enabled.

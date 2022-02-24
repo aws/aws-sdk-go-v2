@@ -148,7 +148,7 @@ type RestoreDBClusterFromS3Input struct {
 
 	// A DB subnet group to associate with the restored DB cluster. Constraints: If
 	// supplied, must match the name of an existing DBSubnetGroup. Example:
-	// mySubnetgroup
+	// mydbsubnetgroup
 	DBSubnetGroupName *string
 
 	// The database name for the restored DB cluster.

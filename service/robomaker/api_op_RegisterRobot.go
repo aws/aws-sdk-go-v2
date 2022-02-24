@@ -10,7 +10,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Registers a robot with a fleet.
+// Registers a robot with a fleet. This API is no longer supported and will throw
+// an error if used.
+//
+// Deprecated: AWS RoboMaker is unable to process this request as the support for
+// the AWS RoboMaker application deployment feature has ended. For additional
+// information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.
 func (c *Client) RegisterRobot(ctx context.Context, params *RegisterRobotInput, optFns ...func(*Options)) (*RegisterRobotOutput, error) {
 	if params == nil {
 		params = &RegisterRobotInput{}

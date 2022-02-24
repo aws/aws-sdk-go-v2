@@ -39,7 +39,7 @@ type DescribeStackEventsInput struct {
 	// A string that identifies the next page of events that you want to retrieve.
 	NextToken *string
 
-	// The name or the unique stack ID that is associated with the stack, which are not
+	// The name or the unique stack ID that's associated with the stack, which aren't
 	// always interchangeable:
 	//
 	// * Running stacks: You can specify either the stack's

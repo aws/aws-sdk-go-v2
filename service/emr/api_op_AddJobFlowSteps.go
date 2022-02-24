@@ -27,7 +27,9 @@ import (
 // step to be considered complete, the main function must exit with a zero exit
 // code and all Hadoop jobs started while the step was running must have completed
 // and run successfully. You can only add steps to a cluster that is in one of the
-// following states: STARTING, BOOTSTRAPPING, RUNNING, or WAITING.
+// following states: STARTING, BOOTSTRAPPING, RUNNING, or WAITING. The string
+// values passed into HadoopJarStep object cannot exceed a total of 10240
+// characters.
 func (c *Client) AddJobFlowSteps(ctx context.Context, params *AddJobFlowStepsInput, optFns ...func(*Options)) (*AddJobFlowStepsOutput, error) {
 	if params == nil {
 		params = &AddJobFlowStepsInput{}

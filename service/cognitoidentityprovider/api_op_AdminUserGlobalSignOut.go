@@ -12,7 +12,7 @@ import (
 
 // Signs out users from all devices, as an administrator. It also invalidates all
 // refresh tokens issued to a user. The user's current access and Id tokens remain
-// valid until their expiry. Access and Id tokens expire one hour after they are
+// valid until their expiry. Access and Id tokens expire one hour after they're
 // issued. Calling this action requires developer credentials.
 func (c *Client) AdminUserGlobalSignOut(ctx context.Context, params *AdminUserGlobalSignOutInput, optFns ...func(*Options)) (*AdminUserGlobalSignOutOutput, error) {
 	if params == nil {

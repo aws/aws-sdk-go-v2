@@ -8133,6 +8133,11 @@ func awsAwsquery_serializeOpDocumentAssociateDataShareConsumerInput(v *Associate
 		objectKey.String(*v.ConsumerArn)
 	}
 
+	if v.ConsumerRegion != nil {
+		objectKey := object.Key("ConsumerRegion")
+		objectKey.String(*v.ConsumerRegion)
+	}
+
 	if v.DataShareArn != nil {
 		objectKey := object.Key("DataShareArn")
 		objectKey.String(*v.DataShareArn)
@@ -10330,6 +10335,11 @@ func awsAwsquery_serializeOpDocumentDisassociateDataShareConsumerInput(v *Disass
 	if v.ConsumerArn != nil {
 		objectKey := object.Key("ConsumerArn")
 		objectKey.String(*v.ConsumerArn)
+	}
+
+	if v.ConsumerRegion != nil {
+		objectKey := object.Key("ConsumerRegion")
+		objectKey.String(*v.ConsumerRegion)
 	}
 
 	if v.DataShareArn != nil {

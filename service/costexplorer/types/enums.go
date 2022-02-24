@@ -240,6 +240,7 @@ const (
 	DimensionPaymentOption              Dimension = "PAYMENT_OPTION"
 	DimensionAgreementEndDateTimeAfter  Dimension = "AGREEMENT_END_DATE_TIME_AFTER"
 	DimensionAgreementEndDateTimeBefore Dimension = "AGREEMENT_END_DATE_TIME_BEFORE"
+	DimensionInvoicingEntity            Dimension = "INVOICING_ENTITY"
 )
 
 // Values returns all known values for Dimension. Note that this can be expanded in
@@ -278,6 +279,7 @@ func (Dimension) Values() []Dimension {
 		"PAYMENT_OPTION",
 		"AGREEMENT_END_DATE_TIME_AFTER",
 		"AGREEMENT_END_DATE_TIME_BEFORE",
+		"INVOICING_ENTITY",
 	}
 }
 

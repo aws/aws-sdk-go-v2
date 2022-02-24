@@ -12,9 +12,9 @@ import (
 )
 
 // Retrieves all tags that are assigned to a GameLift resource. Resource tags are
-// used to organize AWS resources for a range of purposes. This operation handles
-// the permissions necessary to manage tags for the following GameLift resource
-// types:
+// used to organize Amazon Web Services resources for a range of purposes. This
+// operation handles the permissions necessary to manage tags for the following
+// GameLift resource types:
 //
 // * Build
 //
@@ -24,17 +24,18 @@ import (
 //
 // * Alias
 //
-// * GameSessionQueue
-//
 // *
-// MatchmakingConfiguration
+// GameSessionQueue
+//
+// * MatchmakingConfiguration
 //
 // * MatchmakingRuleSet
 //
-// To list tags for a resource,
-// specify the unique ARN value for the resource. Learn more Tagging AWS Resources
-// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the AWS
-// General Reference  AWS Tagging Strategies
+// To list tags
+// for a resource, specify the unique ARN value for the resource. Learn more
+// Tagging Amazon Web Services Resources
+// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the Amazon
+// Web Services General Reference  Amazon Web Services Tagging Strategies
 // (http://aws.amazon.com/answers/account-management/aws-tagging-strategies/)
 // Related actions TagResource | UntagResource | ListTagsForResource | All APIs by
 // task

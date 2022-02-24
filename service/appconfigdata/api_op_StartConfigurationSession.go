@@ -10,8 +10,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts a configuration session used to retrieve a deployed configuration. See
-// the GetLatestConfiguration API for more details.
+// Starts a configuration session used to retrieve a deployed configuration. For
+// more information about this API action and to view example CLI commands that
+// show how to use it with the GetLatestConfiguration API action, see Receiving the
+// configuration
+// (http://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-retrieving-the-configuration)
+// in the AppConfig User Guide.
 func (c *Client) StartConfigurationSession(ctx context.Context, params *StartConfigurationSessionInput, optFns ...func(*Options)) (*StartConfigurationSessionOutput, error) {
 	if params == nil {
 		params = &StartConfigurationSessionInput{}
@@ -27,7 +31,6 @@ func (c *Client) StartConfigurationSession(ctx context.Context, params *StartCon
 	return out, nil
 }
 
-// Request parameters for the StartConfigurationSession API.
 type StartConfigurationSessionInput struct {
 
 	// The application ID or the application name.
@@ -45,22 +48,21 @@ type StartConfigurationSessionInput struct {
 	// This member is required.
 	EnvironmentIdentifier *string
 
-	// The interval at which your client will poll for configuration. If provided, the
-	// service will throw a BadRequestException if the client polls before the
-	// specified poll interval. By default, client poll intervals are not enforced.
+	// Sets a constraint on a session. If you specify a value of, for example, 60
+	// seconds, then the client that established the session can't call
+	// GetLatestConfiguration more frequently then every 60 seconds.
 	RequiredMinimumPollIntervalInSeconds *int32
 
 	noSmithyDocumentSerde
 }
 
-// Response parameters for the StartConfigurationSession API.
 type StartConfigurationSessionOutput struct {
 
 	// Token encapsulating state about the configuration session. Provide this token to
 	// the GetLatestConfiguration API to retrieve configuration data. This token should
 	// only be used once in your first call to GetLatestConfiguration. You MUST use the
-	// new token in the GetConfiguration response (NextPollConfigurationToken) in each
-	// subsequent call to GetLatestConfiguration.
+	// new token in the GetLatestConfiguration response (NextPollConfigurationToken) in
+	// each subsequent call to GetLatestConfiguration.
 	InitialConfigurationToken *string
 
 	// Metadata pertaining to the operation's result.

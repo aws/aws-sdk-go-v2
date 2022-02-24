@@ -31,6 +31,21 @@
     "shapes": {
         "com.amazonaws.athena#AmazonAthena": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Athena",
+                    "arnNamespace": "athena",
+                    "cloudFormationName": "Athena",
+                    "cloudTrailEventSource": "athena.amazonaws.com",
+                    "endpointPrefix": "athena"
+                },
+                "aws.auth#sigv4": {
+                    "name": "athena"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<p>Amazon Athena is an interactive query service that lets you use standard SQL\n            to analyze data directly in Amazon S3. You can point Athena at your\n            data in Amazon S3 and run ad-hoc queries and get results in seconds. Athena is serverless, so there is no infrastructure to set up or manage. You pay\n            only for the queries you run. Athena scales automatically—executing queries\n            in parallel—so results are fast, even with large datasets and complex queries. For more\n            information, see <a href=\"http://docs.aws.amazon.com/athena/latest/ug/what-is.html\">What is Amazon Athena</a> in the <i>Amazon Athena User\n                Guide</i>.</p>\n        <p>If you connect to Athena using the JDBC driver, use version 1.1.0 of the\n            driver or later with the Amazon Athena API. Earlier version drivers do not\n            support the API. For more information and to download the driver, see <a href=\"https://docs.aws.amazon.com/athena/latest/ug/connect-with-jdbc.html\">Accessing\n                    Amazon Athena with JDBC</a>.</p>\n        <p>For code samples using the Amazon Web Services SDK for Java, see <a href=\"https://docs.aws.amazon.com/athena/latest/ug/code-samples.html\">Examples and\n                Code Samples</a> in the <i>Amazon Athena User\n            Guide</i>.</p>",
+                "smithy.api#title": "Amazon Athena"
+            },
             "version": "2017-05-18",
             "operations": [
                 {
@@ -135,22 +150,7 @@
                 {
                     "target": "com.amazonaws.athena#UpdateWorkGroup"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Athena",
-                    "arnNamespace": "athena",
-                    "cloudFormationName": "Athena",
-                    "cloudTrailEventSource": "athena.amazonaws.com",
-                    "endpointPrefix": "athena"
-                },
-                "aws.auth#sigv4": {
-                    "name": "athena"
-                },
-                "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>Amazon Athena is an interactive query service that lets you use standard SQL\n            to analyze data directly in Amazon S3. You can point Athena at your\n            data in Amazon S3 and run ad-hoc queries and get results in seconds. Athena is serverless, so there is no infrastructure to set up or manage. You pay\n            only for the queries you run. Athena scales automatically—executing queries\n            in parallel—so results are fast, even with large datasets and complex queries. For more\n            information, see <a href=\"http://docs.aws.amazon.com/athena/latest/ug/what-is.html\">What is Amazon Athena</a> in the <i>Amazon Athena User\n                Guide</i>.</p>\n        <p>If you connect to Athena using the JDBC driver, use version 1.1.0 of the\n            driver or later with the Amazon Athena API. Earlier version drivers do not\n            support the API. For more information and to download the driver, see <a href=\"https://docs.aws.amazon.com/athena/latest/ug/connect-with-jdbc.html\">Accessing\n                    Amazon Athena with JDBC</a>.</p>\n        <p>For code samples using the Amazon Web Services SDK for Java, see <a href=\"https://docs.aws.amazon.com/athena/latest/ug/code-samples.html\">Examples and\n                Code Samples</a> in the <i>Amazon Athena User\n            Guide</i>.</p>",
-                "smithy.api#title": "Amazon Athena"
-            }
+            ]
         },
         "com.amazonaws.athena#AmazonResourceName": {
             "type": "string",
@@ -159,6 +159,26 @@
                     "min": 1,
                     "max": 1011
                 }
+            }
+        },
+        "com.amazonaws.athena#AthenaError": {
+            "type": "structure",
+            "members": {
+                "ErrorCategory": {
+                    "target": "com.amazonaws.athena#ErrorCategory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An integer value that specifies the category of a query failure error. The following\n            list shows the category for each integer value.</p>\n        <p>\n            <b>1</b> - System</p>\n        <p>\n            <b>2</b> - User</p>\n        <p>\n            <b>3</b> - Unknown</p>"
+                    }
+                },
+                "ErrorType": {
+                    "target": "com.amazonaws.athena#ErrorType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An integer value that provides specific information about an Athena query\n            error. For the meaning of specific values, see the <a href=\"https://docs.aws.amazon.com/athena/latest/ug/error-reference.html#error-reference-error-type-reference\">Error Type Reference</a> in the <i>Amazon Athena User\n                Guide</i>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information about an Athena query error. The\n                <code>AthenaError</code> feature provides standardized error information to help you\n            understand failed queries and take steps after a query failure occurs.\n                <code>AthenaError</code> includes an <code>ErrorCategory</code> field that specifies\n            whether the cause of the failed query is due to system error, user error, or unknown\n            error.</p>"
             }
         },
         "com.amazonaws.athena#BatchGetNamedQuery": {
@@ -451,7 +471,7 @@
                 "Name": {
                     "target": "com.amazonaws.athena#CatalogNameString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the data catalog to create. The catalog name must be unique for the\n                Amazon Web Services account and can use a maximum of 128 alphanumeric, underscore, at\n            sign, or hyphen characters.</p>",
+                        "smithy.api#documentation": "<p>The name of the data catalog to create. The catalog name must be unique for the\n                Amazon Web Services account and can use a maximum of 127 alphanumeric, underscore, at\n            sign, or hyphen characters. The remainder of the length constraint of 256 is reserved\n            for use by Athena.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -679,7 +699,7 @@
                 "Name": {
                     "target": "com.amazonaws.athena#CatalogNameString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the data catalog. The catalog name must be unique for the Amazon Web Services account and can use a maximum of 128 alphanumeric, underscore, at sign,\n            or hyphen characters.</p>",
+                        "smithy.api#documentation": "<p>The name of the data catalog. The catalog name must be unique for the Amazon Web Services account and can use a maximum of 127 alphanumeric, underscore, at sign,\n            or hyphen characters. The remainder of the length constraint of 256 is reserved for use\n            by Athena.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -713,7 +733,7 @@
                 "CatalogName": {
                     "target": "com.amazonaws.athena#CatalogNameString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the data catalog.</p>"
+                        "smithy.api#documentation": "<p>The name of the data catalog. The catalog name is unique for the Amazon Web Services account and can use a maximum of 127 alphanumeric, underscore, at sign,\n            or hyphen characters. The remainder of the length constraint of 256 is reserved for use\n            by Athena.</p>"
                     }
                 },
                 "Type": {
@@ -1055,6 +1075,16 @@
                 }
             }
         },
+        "com.amazonaws.athena#ErrorCategory": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 3
+                }
+            }
+        },
         "com.amazonaws.athena#ErrorCode": {
             "type": "string",
             "traits": {
@@ -1067,6 +1097,16 @@
         },
         "com.amazonaws.athena#ErrorMessage": {
             "type": "string"
+        },
+        "com.amazonaws.athena#ErrorType": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 9999
+                }
+            }
         },
         "com.amazonaws.athena#ExpressionString": {
             "type": "string",
@@ -2478,7 +2518,7 @@
                 "Database": {
                     "target": "com.amazonaws.athena#DatabaseString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the database used in the query execution. The database must exist in the catalog.</p>"
+                        "smithy.api#documentation": "<p>The name of the database used in the query execution. The database must exist in the\n            catalog.</p>"
                     }
                 },
                 "Catalog": {
@@ -2616,6 +2656,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time that the query completed.</p>"
                     }
+                },
+                "AthenaError": {
+                    "target": "com.amazonaws.athena#AthenaError",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides information about an Athena query error.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2660,6 +2706,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>If query results are encrypted in Amazon S3, indicates the encryption option\n            used (for example, <code>SSE-KMS</code> or <code>CSE-KMS</code>) and key information.\n            This is a client-side setting. If workgroup settings override client-side settings, then\n            the query uses the encryption configuration that is specified for the workgroup, and\n            also uses the location for storing query results specified in the workgroup. See <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a> and <a href=\"https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html\">Workgroup Settings Override Client-Side Settings</a>.</p>"
                     }
+                },
+                "ExpectedBucketOwner": {
+                    "target": "com.amazonaws.athena#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that you expect to be the owner of the Amazon S3 bucket specified by <a>ResultConfiguration$OutputLocation</a>.\n            If set, Athena uses the value for <code>ExpectedBucketOwner</code> when it\n            makes Amazon S3 calls to your specified output location. If the\n            <code>ExpectedBucketOwner</code>\n            Amazon Web Services account ID does not match the actual owner of the Amazon S3\n            bucket, the call fails with a permissions error.</p>\n        <p>This is a client-side setting. If workgroup settings override client-side settings,\n            then the query uses the <code>ExpectedBucketOwner</code> setting that is specified for\n            the workgroup, and also uses the location for storing query results specified in the\n            workgroup. See <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a>\n            and <a href=\"https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html\">Workgroup Settings Override Client-Side Settings</a>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2678,7 +2730,7 @@
                 "RemoveOutputLocation": {
                     "target": "com.amazonaws.athena#BoxedBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>If set to \"true\", indicates that the previously-specified query results location (also\n            known as a client-side setting) for queries in this workgroup should be ignored and set\n            to null. If set to \"false\" or not set, and a value is present in the\n                <code>OutputLocation</code> in <code>ResultConfigurationUpdates</code> (the\n            client-side setting), the <code>OutputLocation</code> in the workgroup's\n                <code>ResultConfiguration</code> will be updated with the new value. For more\n            information, see <a href=\"https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html\">Workgroup Settings Override\n                Client-Side Settings</a>.</p>"
+                        "smithy.api#documentation": "<p>If set to \"true\", indicates that the previously-specified query results location (also\n            known as a client-side setting) for queries in this workgroup should be ignored and set\n            to null. If set to \"false\" or not set, and a value is present in the\n            <code>OutputLocation</code> in <code>ResultConfigurationUpdates</code> (the\n            client-side setting), the <code>OutputLocation</code> in the workgroup's\n            <code>ResultConfiguration</code> will be updated with the new value. For more\n            information, see <a href=\"https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html\">Workgroup Settings Override\n                Client-Side Settings</a>.</p>"
                     }
                 },
                 "EncryptionConfiguration": {
@@ -2691,6 +2743,18 @@
                     "target": "com.amazonaws.athena#BoxedBoolean",
                     "traits": {
                         "smithy.api#documentation": "<p>If set to \"true\", indicates that the previously-specified encryption configuration\n            (also known as the client-side setting) for queries in this workgroup should be ignored\n            and set to null. If set to \"false\" or not set, and a value is present in the\n                <code>EncryptionConfiguration</code> in <code>ResultConfigurationUpdates</code> (the\n            client-side setting), the <code>EncryptionConfiguration</code> in the workgroup's\n                <code>ResultConfiguration</code> will be updated with the new value. For more\n            information, see <a href=\"https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html\">Workgroup Settings Override\n                Client-Side Settings</a>.</p>"
+                    }
+                },
+                "ExpectedBucketOwner": {
+                    "target": "com.amazonaws.athena#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that you expect to be the owner of the Amazon S3 bucket specified by <a>ResultConfiguration$OutputLocation</a>.\n            If set, Athena uses the value for <code>ExpectedBucketOwner</code> when it\n            makes Amazon S3 calls to your specified output location. If the\n            <code>ExpectedBucketOwner</code>\n            Amazon Web Services account ID does not match the actual owner of the Amazon S3\n            bucket, the call fails with a permissions error.</p>\n        \n        <p>If workgroup settings override client-side settings, then the query uses the\n            <code>ExpectedBucketOwner</code> setting that is specified for the workgroup, and\n            also uses the location for storing query results specified in the workgroup. See <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a> and <a href=\"https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html\">Workgroup Settings Override Client-Side Settings</a>.</p>"
+                    }
+                },
+                "RemoveExpectedBucketOwner": {
+                    "target": "com.amazonaws.athena#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If set to \"true\", removes the Amazon Web Services account ID previously specified for\n            <a>ResultConfiguration$ExpectedBucketOwner</a>. If set to \"false\" or not\n            set, and a value is present in the <code>ExpectedBucketOwner</code> in\n            <code>ResultConfigurationUpdates</code> (the client-side setting), the\n            <code>ExpectedBucketOwner</code> in the workgroup's <code>ResultConfiguration</code>\n            is updated with the new value. For more information, see <a href=\"https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html\">Workgroup Settings Override\n                Client-Side Settings</a>.</p>"
                     }
                 }
             },
@@ -3241,7 +3305,7 @@
                 "Name": {
                     "target": "com.amazonaws.athena#CatalogNameString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the data catalog to update. The catalog name must be unique for the\n                Amazon Web Services account and can use a maximum of 128 alphanumeric, underscore, at\n            sign, or hyphen characters.</p>",
+                        "smithy.api#documentation": "<p>The name of the data catalog to update. The catalog name must be unique for the\n                Amazon Web Services account and can use a maximum of 127 alphanumeric, underscore, at\n            sign, or hyphen characters. The remainder of the length constraint of 256 is reserved\n            for use by Athena.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3452,7 +3516,7 @@
                 "RequesterPaysEnabled": {
                     "target": "com.amazonaws.athena#BoxedBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>If set to <code>true</code>, allows members assigned to a workgroup to reference\n                Amazon S3 Requester Pays buckets in queries. If set to <code>false</code>,\n            workgroup members cannot query data from Requester Pays buckets, and queries that\n            retrieve data from Requester Pays buckets cause an error. The default is\n                <code>false</code>. For more information about Requester Pays buckets, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/RequesterPaysBuckets.html\">Requester\n                    Pays Buckets</a> in the <i>Amazon Simple Storage Service Developer\n                Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>If set to <code>true</code>, allows members assigned to a workgroup to reference\n                Amazon S3 Requester Pays buckets in queries. If set to <code>false</code>,\n            workgroup members cannot query data from Requester Pays buckets, and queries that\n            retrieve data from Requester Pays buckets cause an error. The default is\n                <code>false</code>. For more information about Requester Pays buckets, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/RequesterPaysBuckets.html\">Requester\n                Pays Buckets</a> in the <i>Amazon Simple Storage Service Developer\n                Guide</i>.</p>"
                     }
                 },
                 "EngineVersion": {

@@ -31,6 +31,9 @@ func (c *Client) ListConnectorEntities(ctx context.Context, params *ListConnecto
 
 type ListConnectorEntitiesInput struct {
 
+	// The version of the API that's used by the connector.
+	ApiVersion *string
+
 	// The name of the connector profile. The name is unique for each ConnectorProfile
 	// in the Amazon Web Services account, and is used to query the downstream
 	// connector.

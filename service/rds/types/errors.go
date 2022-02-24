@@ -2312,7 +2312,7 @@ func (e *SnapshotQuotaExceededFault) ErrorMessage() string {
 func (e *SnapshotQuotaExceededFault) ErrorCode() string             { return "SnapshotQuotaExceeded" }
 func (e *SnapshotQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// SNS has responded that there is a problem with the SND topic specified.
+// SNS has responded that there is a problem with the SNS topic specified.
 type SNSInvalidTopicFault struct {
 	Message *string
 

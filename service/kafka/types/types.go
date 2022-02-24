@@ -17,9 +17,10 @@ type BrokerEBSVolumeInfo struct {
 	// This member is required.
 	KafkaBrokerNodeId *string
 
+	// EBS volume provisioned throughput information.
+	ProvisionedThroughput *ProvisionedThroughput
+
 	// Size of the EBS volume to update.
-	//
-	// This member is required.
 	VolumeSizeGB int32
 
 	noSmithyDocumentSerde
@@ -412,6 +413,9 @@ type ConnectivityInfo struct {
 // broker nodes.
 type EBSStorageInfo struct {
 
+	// EBS volume provisioned throughput information.
+	ProvisionedThroughput *ProvisionedThroughput
+
 	// The size in GiB of the EBS volume for the data drive on each broker node.
 	VolumeSize int32
 
@@ -744,6 +748,20 @@ type ProvisionedRequest struct {
 
 	// The settings for open monitoring.
 	OpenMonitoring *OpenMonitoringInfo
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about provisioned throughput for EBS storage volumes
+// attached to kafka broker nodes.
+type ProvisionedThroughput struct {
+
+	// Provisioned throughput is enabled or not.
+	Enabled bool
+
+	// Throughput value of the EBS volumes for the data drive on each kafka broker node
+	// in MiB per second.
+	VolumeThroughput int32
 
 	noSmithyDocumentSerde
 }

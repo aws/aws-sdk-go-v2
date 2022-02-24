@@ -4213,6 +4213,15 @@ func awsAwsjson11_deserializeDocumentCopyStepDetails(v **types.CopyStepDetails, 
 				sv.OverwriteExisting = types.OverwriteExisting(jtv)
 			}
 
+		case "SourceFileLocation":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SourceFileLocation to be of type string, got %T instead", value)
+				}
+				sv.SourceFileLocation = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -4251,6 +4260,15 @@ func awsAwsjson11_deserializeDocumentCustomStepDetails(v **types.CustomStepDetai
 					return fmt.Errorf("expected WorkflowStepName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "SourceFileLocation":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SourceFileLocation to be of type string, got %T instead", value)
+				}
+				sv.SourceFileLocation = ptr.String(jtv)
 			}
 
 		case "Target":
@@ -4313,6 +4331,15 @@ func awsAwsjson11_deserializeDocumentDeleteStepDetails(v **types.DeleteStepDetai
 					return fmt.Errorf("expected WorkflowStepName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "SourceFileLocation":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SourceFileLocation to be of type string, got %T instead", value)
+				}
+				sv.SourceFileLocation = ptr.String(jtv)
 			}
 
 		default:
@@ -4655,6 +4682,24 @@ func awsAwsjson11_deserializeDocumentDescribedServer(v **types.DescribedServer, 
 					return fmt.Errorf("expected Role to be of type string, got %T instead", value)
 				}
 				sv.LoggingRole = ptr.String(jtv)
+			}
+
+		case "PostAuthenticationLoginBanner":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PostAuthenticationLoginBanner to be of type string, got %T instead", value)
+				}
+				sv.PostAuthenticationLoginBanner = ptr.String(jtv)
+			}
+
+		case "PreAuthenticationLoginBanner":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PreAuthenticationLoginBanner to be of type string, got %T instead", value)
+				}
+				sv.PreAuthenticationLoginBanner = ptr.String(jtv)
 			}
 
 		case "ProtocolDetails":
@@ -7113,6 +7158,15 @@ func awsAwsjson11_deserializeDocumentTagStepDetails(v **types.TagStepDetails, va
 					return fmt.Errorf("expected WorkflowStepName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "SourceFileLocation":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SourceFileLocation to be of type string, got %T instead", value)
+				}
+				sv.SourceFileLocation = ptr.String(jtv)
 			}
 
 		case "Tags":

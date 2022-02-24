@@ -87,7 +87,7 @@ func (e *InvalidNextTokenException) ErrorMessage() string {
 func (e *InvalidNextTokenException) ErrorCode() string             { return "InvalidNextTokenException" }
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The parameter name is invalid value.
+// The parameter name or value is invalid.
 type InvalidParameterException struct {
 	Message *string
 

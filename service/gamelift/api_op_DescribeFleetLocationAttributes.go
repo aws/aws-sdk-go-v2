@@ -65,7 +65,7 @@ type DescribeFleetLocationAttributesInput struct {
 	Limit *int32
 
 	// A list of fleet locations to retrieve information for. Specify locations in the
-	// form of an AWS Region code, such as us-west-2.
+	// form of an Amazon Web Services Region code, such as us-west-2.
 	Locations []string
 
 	// A token that indicates the start of the next sequential page of results. Use the

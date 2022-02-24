@@ -11,9 +11,9 @@ import (
 )
 
 // Removes a tag that is assigned to a GameLift resource. Resource tags are used to
-// organize AWS resources for a range of purposes. This operation handles the
-// permissions necessary to manage tags for the following GameLift resource
-// types:
+// organize Amazon Web Services resources for a range of purposes. This operation
+// handles the permissions necessary to manage tags for the following GameLift
+// resource types:
 //
 // * Build
 //
@@ -34,9 +34,9 @@ import (
 // specify the unique ARN value for the resource and provide a string list
 // containing one or more tags to be removed. This operation succeeds even if the
 // list includes tags that are not currently assigned to the specified resource.
-// Learn more Tagging AWS Resources
-// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the AWS
-// General Reference  AWS Tagging Strategies
+// Learn more Tagging Amazon Web Services Resources
+// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the Amazon
+// Web Services General Reference  Amazon Web Services Tagging Strategies
 // (http://aws.amazon.com/answers/account-management/aws-tagging-strategies/)
 // Related actions TagResource | UntagResource | ListTagsForResource | All APIs by
 // task
@@ -69,8 +69,8 @@ type UntagResourceInput struct {
 	ResourceARN *string
 
 	// A list of one or more tag keys to remove from the specified GameLift resource.
-	// An AWS resource can have only one tag with a specific tag key, so specifying the
-	// tag key identifies which tag to remove.
+	// An Amazon Web Services resource can have only one tag with a specific tag key,
+	// so specifying the tag key identifies which tag to remove.
 	//
 	// This member is required.
 	TagKeys []string

@@ -44,8 +44,8 @@ type CreateExperienceInput struct {
 	Name *string
 
 	// A token that you provide to identify the request to create your Amazon Kendra
-	// experience. Multiple calls to the CreateExperience operation with the same
-	// client token creates only one Amazon Kendra experience.
+	// experience. Multiple calls to the CreateExperience API with the same client
+	// token creates only one Amazon Kendra experience.
 	ClientToken *string
 
 	// Provides the configuration information for your Amazon Kendra experience. This
@@ -57,11 +57,10 @@ type CreateExperienceInput struct {
 	// A description for your Amazon Kendra experience.
 	Description *string
 
-	// The Amazon Resource Name (ARN) of a role with permission to access Query
-	// operations, QuerySuggestions operations, SubmitFeedback operations, and Amazon
-	// Web Services SSO that stores your user and group information. For more
-	// information, see IAM roles for Amazon Kendra
-	// (https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html).
+	// The Amazon Resource Name (ARN) of a role with permission to access Query API,
+	// QuerySuggestions API, SubmitFeedback API, and Amazon Web Services SSO that
+	// stores your user and group information. For more information, see IAM roles for
+	// Amazon Kendra (https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html).
 	RoleArn *string
 
 	noSmithyDocumentSerde

@@ -71,7 +71,7 @@ type RunJobFlowInput struct {
 	// Applies to Amazon EMR releases 4.0 and later. A case-insensitive list of
 	// applications for Amazon EMR to install and configure when launching the cluster.
 	// For a list of applications available for each Amazon EMR release version, see
-	// the Amazon EMR Release Guide
+	// the Amazon EMRRelease Guide
 	// (https://docs.aws.amazon.com/emr/latest/ReleaseGuide/).
 	Applications []types.Application
 
@@ -237,10 +237,12 @@ type RunJobFlowInput struct {
 	// instances.
 	Tags []types.Tag
 
-	// Set this value to true so that IAM principals in the Amazon Web Services account
-	// associated with the cluster can perform EMR actions on the cluster that their
-	// IAM policies allow. This value defaults to true for clusters created using the
-	// EMR API or the CLI create-cluster
+	// The VisibleToAllUsers parameter is no longer supported. By default, the value is
+	// set to true. Setting it to false now has no effect. Set this value to true so
+	// that IAM principals in the Amazon Web Services account associated with the
+	// cluster can perform EMR actions on the cluster that their IAM policies allow.
+	// This value defaults to true for clusters created using the EMR API or the CLI
+	// create-cluster
 	// (https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html)
 	// command. When set to false, only the IAM principal that created the cluster and
 	// the Amazon Web Services account root user can perform EMR actions for the

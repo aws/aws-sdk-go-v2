@@ -46,7 +46,9 @@ type CreateAppInput struct {
 	// The automated branch creation glob patterns for an Amplify app.
 	AutoBranchCreationPatterns []string
 
-	// The credentials for basic authorization for an Amplify app.
+	// The credentials for basic authorization for an Amplify app. You must
+	// base64-encode the authorization credentials and provide them in the format
+	// user:password.
 	BasicAuthCredentials *string
 
 	// The build specification (build spec) for an Amplify app.

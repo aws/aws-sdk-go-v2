@@ -54,8 +54,7 @@ type CreateFaqInput struct {
 	S3Path *types.S3Path
 
 	// A token that you provide to identify the request to create a FAQ. Multiple calls
-	// to the CreateFaqRequest operation with the same client token will create only
-	// one FAQ.
+	// to the CreateFaqRequest API with the same client token will create only one FAQ.
 	ClientToken *string
 
 	// A description of the FAQ.

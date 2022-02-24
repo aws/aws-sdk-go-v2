@@ -83,8 +83,8 @@ type ListStackInstancesInput struct {
 
 type ListStackInstancesOutput struct {
 
-	// If the request doesn't return all of the remaining results, NextToken is set to
-	// a token. To retrieve the next set of results, call ListStackInstances again and
+	// If the request doesn't return all the remaining results, NextToken is set to a
+	// token. To retrieve the next set of results, call ListStackInstances again and
 	// assign that token to the request object's NextToken parameter. If the request
 	// returns all results, NextToken is set to null.
 	NextToken *string

@@ -82,6 +82,7 @@ type PutPermissionInput struct {
 	// to. If you later want to revoke the permission for this external account,
 	// specify this StatementId when you run RemovePermission
 	// (https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_RemovePermission.html).
+	// Each StatementId must be unique.
 	StatementId *string
 
 	noSmithyDocumentSerde

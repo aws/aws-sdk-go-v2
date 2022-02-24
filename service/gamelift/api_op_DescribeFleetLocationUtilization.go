@@ -51,7 +51,7 @@ type DescribeFleetLocationUtilizationInput struct {
 	FleetId *string
 
 	// The fleet location to retrieve utilization information for. Specify a location
-	// in the form of an AWS Region code, such as us-west-2.
+	// in the form of an Amazon Web Services Region code, such as us-west-2.
 	//
 	// This member is required.
 	Location *string

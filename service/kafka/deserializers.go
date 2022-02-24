@@ -6863,6 +6863,11 @@ func awsRestjson1_deserializeDocumentBrokerEBSVolumeInfo(v **types.BrokerEBSVolu
 				sv.KafkaBrokerNodeId = ptr.String(jtv)
 			}
 
+		case "provisionedThroughput":
+			if err := awsRestjson1_deserializeDocumentProvisionedThroughput(&sv.ProvisionedThroughput, value); err != nil {
+				return err
+			}
+
 		case "volumeSizeGB":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8114,6 +8119,11 @@ func awsRestjson1_deserializeDocumentEBSStorageInfo(v **types.EBSStorageInfo, va
 
 	for key, value := range shape {
 		switch key {
+		case "provisionedThroughput":
+			if err := awsRestjson1_deserializeDocumentProvisionedThroughput(&sv.ProvisionedThroughput, value); err != nil {
+				return err
+			}
+
 		case "volumeSize":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -9223,6 +9233,59 @@ func awsRestjson1_deserializeDocumentProvisioned(v **types.Provisioned, value in
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.ZookeeperConnectStringTls = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentProvisionedThroughput(v **types.ProvisionedThroughput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ProvisionedThroughput
+	if *v == nil {
+		sv = &types.ProvisionedThroughput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "enabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Enabled = jtv
+			}
+
+		case "volumeThroughput":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.VolumeThroughput = int32(i64)
 			}
 
 		default:

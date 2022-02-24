@@ -24,7 +24,12 @@ import (
 // AWSCURRENT, Secrets Manager automatically moves the label AWSPREVIOUS to the
 // version that AWSCURRENT was removed from. If this action results in the last
 // label being removed from a version, then the version is considered to be
-// 'deprecated' and can be deleted by Secrets Manager.
+// 'deprecated' and can be deleted by Secrets Manager. Required permissions:
+// secretsmanager:UpdateSecretVersionStage. For more information, see  IAM policy
+// actions for Secrets Manager
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions)
+// and Authentication and access control in Secrets Manager
+// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 func (c *Client) UpdateSecretVersionStage(ctx context.Context, params *UpdateSecretVersionStageInput, optFns ...func(*Options)) (*UpdateSecretVersionStageOutput, error) {
 	if params == nil {
 		params = &UpdateSecretVersionStageInput{}

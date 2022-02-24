@@ -13,7 +13,12 @@ import (
 )
 
 // Returns a list of fleets. You can optionally provide filters to retrieve
-// specific fleets.
+// specific fleets. This API will no longer be supported as of May 2, 2022. Use it
+// to remove resources that were created for Deployment Service.
+//
+// Deprecated: Support for the AWS RoboMaker application deployment feature has
+// ended. For additional information, see
+// https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.
 func (c *Client) ListFleets(ctx context.Context, params *ListFleetsInput, optFns ...func(*Options)) (*ListFleetsOutput, error) {
 	if params == nil {
 		params = &ListFleetsInput{}

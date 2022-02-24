@@ -1351,6 +1351,12 @@
                         "smithy.api#documentation": "<p>A string-to-string map of key-value pairs that identifies the tags that are associated with the application. Each tag consists of a required tag key and an associated tag value.</p>",
                         "smithy.api#jsonName": "tags"
                     }
+                },
+                "CreationDate": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the Application was created.</p>"
+                    }
                 }
             },
             "traits": {

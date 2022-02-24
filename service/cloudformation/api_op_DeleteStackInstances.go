@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes stack instances for the specified accounts, in the specified Regions.
+// Deletes stack instances for the specified accounts, in the specified Amazon Web
+// Services Regions.
 func (c *Client) DeleteStackInstances(ctx context.Context, params *DeleteStackInstancesInput, optFns ...func(*Options)) (*DeleteStackInstancesOutput, error) {
 	if params == nil {
 		params = &DeleteStackInstancesInput{}
@@ -30,7 +31,7 @@ func (c *Client) DeleteStackInstances(ctx context.Context, params *DeleteStackIn
 
 type DeleteStackInstancesInput struct {
 
-	// The Regions where you want to delete stack set instances.
+	// The Amazon Web Services Regions where you want to delete stack set instances.
 	//
 	// This member is required.
 	Regions []string

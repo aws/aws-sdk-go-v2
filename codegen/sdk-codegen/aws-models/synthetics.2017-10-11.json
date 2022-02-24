@@ -258,7 +258,7 @@
                 "ZipFile": {
                     "target": "com.amazonaws.synthetics#Blob",
                     "traits": {
-                        "smithy.api#documentation": "<p>If you input your canary script directly into the canary instead of referring to an S3\n         location, the value of this parameter is the base64-encoded contents of the .zip file that \n         contains the script. It must be smaller than 256 Kb.</p>"
+                        "smithy.api#documentation": "<p>If you input your canary script directly into the canary instead of referring to an S3\n         location, the value of this parameter is the base64-encoded contents of the .zip file that \n         contains the script. It must be smaller than 225 Kb.</p>\n         <p>For large canary scripts, we recommend that you use an S3 location instead of inputting it \n      directly with this parameter.</p>"
                     }
                 },
                 "Handler": {
@@ -684,6 +684,9 @@
                     "target": "com.amazonaws.synthetics#InternalServerException"
                 },
                 {
+                    "target": "com.amazonaws.synthetics#RequestEntityTooLargeException"
+                },
+                {
                     "target": "com.amazonaws.synthetics#ValidationException"
                 }
             ],
@@ -855,7 +858,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This operation returns a list of the canaries in your account, along with full details\n      about each canary.</p>\n        <p>This operation does not have resource-level authorization, so if a user is able to use\n            <code>DescribeCanaries</code>, the user can see all of the canaries in the account. A\n         deny policy can only be used to restrict access to all canaries. It cannot be used on\n         specific resources. </p>",
+                "smithy.api#documentation": "<p>This operation returns a list of the canaries in your account, along with full details\n      about each canary.</p>\n         <p>This operation supports resource-level authorization using an IAM policy and \n      the <code>Names</code> parameter. If you specify the <code>Names</code> parameter, the operation is successful only if you have authorization to view\n         all the canaries that you specify in your request. If you do not have permission to view any of \n         the canaries, the request fails with a 403 response.</p>\n         <p>You are required to use the <code>Names</code> parameter if you are logged on to a user or role that has an \n         IAM policy that restricts which canaries that you are allowed to view. For more information, \n         see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Restricted.html\">\n            Limiting a user to viewing specific canaries</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/canaries",
@@ -885,7 +888,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Use this operation to see information from the most recent run of each canary that you have created.</p>",
+                "smithy.api#documentation": "<p>Use this operation to see information from the most recent run of each canary that you have created.</p>\n    \n         <p>This operation supports resource-level authorization using an IAM policy and \n         the <code>Names</code> parameter. If you specify the <code>Names</code> parameter, the operation is successful only if you have authorization to view\n         all the canaries that you specify in your request. If you do not have permission to view any of \n         the canaries, the request fails with a 403 response.</p>\n         <p>You are required to use the <code>Names</code> parameter if you are logged on to a user or role that has an \n         IAM policy that restricts which canaries that you are allowed to view. For more information, \n         see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Restricted.html\">\n            Limiting a user to viewing specific canaries</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/canaries/last-run",
@@ -895,6 +898,18 @@
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
                     "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.synthetics#DescribeCanariesLastRunNameFilter": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.synthetics#CanaryName"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
                 }
             }
         },
@@ -911,6 +926,12 @@
                     "target": "com.amazonaws.synthetics#MaxSize100",
                     "traits": {
                         "smithy.api#documentation": "<p>Specify this parameter to limit how many runs are returned each time you use\n         the <code>DescribeLastRun</code> operation. If you omit this parameter, the default of 100 is used.</p>"
+                    }
+                },
+                "Names": {
+                    "target": "com.amazonaws.synthetics#DescribeCanariesLastRunNameFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this parameter to return only canaries that match the names that you specify here. You can\n         specify as many as five canary names.</p>\n         <p>If you specify this parameter, the operation is successful only if you have authorization to view\n         all the canaries that you specify in your request. If you do not have permission to view any of \n         the canaries, the request fails with a 403 response.</p>\n         <p>You are required to use the <code>Names</code> parameter if you are logged on to a user or role that has an \n         IAM policy that restricts which canaries that you are allowed to view. For more information, \n         see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Restricted.html\">\n            Limiting a user to viewing specific canaries</a>.</p>"
                     }
                 }
             }
@@ -932,6 +953,18 @@
                 }
             }
         },
+        "com.amazonaws.synthetics#DescribeCanariesNameFilter": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.synthetics#CanaryName"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
         "com.amazonaws.synthetics#DescribeCanariesRequest": {
             "type": "structure",
             "members": {
@@ -945,6 +978,12 @@
                     "target": "com.amazonaws.synthetics#MaxCanaryResults",
                     "traits": {
                         "smithy.api#documentation": "<p>Specify this parameter to limit how many canaries are returned each time you use\n      the <code>DescribeCanaries</code> operation. If you omit this parameter, the default of 100 is used.</p>"
+                    }
+                },
+                "Names": {
+                    "target": "com.amazonaws.synthetics#DescribeCanariesNameFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this parameter to return only canaries that match the names that you specify here. You can\n         specify as many as five canary names.</p>\n         <p>If you specify this parameter, the operation is successful only if you have authorization to view\n         all the canaries that you specify in your request. If you do not have permission to view any of \n         the canaries, the request fails with a 403 response.</p>\n         <p>You are required to use this parameter if you are logged on to a user or role that has an \n         IAM policy that restricts which canaries that you are allowed to view. For more information, \n         see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Restricted.html\">\n            Limiting a user to viewing specific canaries</a>.</p>"
                     }
                 }
             }
@@ -1341,6 +1380,19 @@
                 "smithy.api#box": {}
             }
         },
+        "com.amazonaws.synthetics#RequestEntityTooLargeException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.synthetics#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>One of the input resources is larger than is allowed.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 413
+            }
+        },
         "com.amazonaws.synthetics#ResourceNotFoundException": {
             "type": "structure",
             "members": {
@@ -1559,6 +1611,21 @@
         },
         "com.amazonaws.synthetics#Synthetics": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "synthetics",
+                    "arnNamespace": "synthetics",
+                    "cloudFormationName": "Synthetics",
+                    "cloudTrailEventSource": "synthetics.amazonaws.com",
+                    "endpointPrefix": "synthetics"
+                },
+                "aws.auth#sigv4": {
+                    "name": "synthetics"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<fullname>Amazon CloudWatch Synthetics</fullname>\n         <p>You can use Amazon CloudWatch Synthetics to continually monitor your services. You can\n         create and manage <i>canaries</i>, which are modular, lightweight scripts \n         that monitor your endpoints and APIs\n            from the outside-in. You can set up your canaries to run\n         24 hours a day, once per minute. The canaries help you check the availability and latency\n         of your web services and troubleshoot anomalies by investigating load time data,\n         screenshots of the UI, logs, and metrics. The canaries seamlessly integrate with CloudWatch\n         ServiceLens to help you trace the causes of impacted nodes in your applications. For more\n         information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ServiceLens.html\">Using ServiceLens to Monitor\n            the Health of Your Applications</a> in the <i>Amazon CloudWatch User\n            Guide</i>.</p>\n      \n         <p>Before you create and manage canaries, be aware of the security considerations. For more\n         information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/servicelens_canaries_security.html\">Security\n            Considerations for Synthetics Canaries</a>.</p>",
+                "smithy.api#title": "Synthetics"
+            },
             "version": "2017-10-11",
             "operations": [
                 {
@@ -1600,22 +1667,7 @@
                 {
                     "target": "com.amazonaws.synthetics#UpdateCanary"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "synthetics",
-                    "arnNamespace": "synthetics",
-                    "cloudFormationName": "Synthetics",
-                    "cloudTrailEventSource": "synthetics.amazonaws.com",
-                    "endpointPrefix": "synthetics"
-                },
-                "aws.auth#sigv4": {
-                    "name": "synthetics"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<fullname>Amazon CloudWatch Synthetics</fullname>\n         <p>You can use Amazon CloudWatch Synthetics to continually monitor your services. You can\n         create and manage <i>canaries</i>, which are modular, lightweight scripts \n         that monitor your endpoints and APIs\n            from the outside-in. You can set up your canaries to run\n         24 hours a day, once per minute. The canaries help you check the availability and latency\n         of your web services and troubleshoot anomalies by investigating load time data,\n         screenshots of the UI, logs, and metrics. The canaries seamlessly integrate with CloudWatch\n         ServiceLens to help you trace the causes of impacted nodes in your applications. For more\n         information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ServiceLens.html\">Using ServiceLens to Monitor\n            the Health of Your Applications</a> in the <i>Amazon CloudWatch User\n            Guide</i>.</p>\n      \n         <p>Before you create and manage canaries, be aware of the security considerations. For more\n         information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/servicelens_canaries_security.html\">Security\n            Considerations for Synthetics Canaries</a>.</p>",
-                "smithy.api#title": "Synthetics"
-            }
+            ]
         },
         "com.amazonaws.synthetics#TagKey": {
             "type": "string",
@@ -1800,6 +1852,9 @@
                 },
                 {
                     "target": "com.amazonaws.synthetics#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.synthetics#RequestEntityTooLargeException"
                 },
                 {
                     "target": "com.amazonaws.synthetics#ResourceNotFoundException"

@@ -1825,6 +1825,10 @@
                     {
                         "value": "OTHER",
                         "name": "OTHER"
+                    },
+                    {
+                        "value": "AUTOMATION",
+                        "name": "AUTOMATION"
                     }
                 ]
             }
@@ -2950,6 +2954,29 @@
         },
         "com.amazonaws.ssmincidents#SSMIncidents": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "SSM Incidents",
+                    "arnNamespace": "ssm-incidents",
+                    "cloudFormationName": "SSMIncidents",
+                    "cloudTrailEventSource": "ssm-incidents.amazonaws.com",
+                    "endpointPrefix": "ssm-incidents"
+                },
+                "aws.auth#sigv4": {
+                    "name": "ssm-incidents"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#cors": {
+                    "additionalAllowedHeaders": [
+                        "x-amz-content-sha256",
+                        "x-amz-user-agent",
+                        "content-type",
+                        "x-amzn-platform-id"
+                    ]
+                },
+                "smithy.api#documentation": "<p>Systems Manager Incident Manager is an incident management console designed to help users\n      mitigate and recover from incidents affecting their Amazon Web Services-hosted applications. An\n      incident is any unplanned interruption or reduction in quality of services. </p>\n         <p>Incident Manager increases incident resolution by notifying responders of impact,\n      highlighting relevant troubleshooting data, and providing collaboration tools to get services\n      back up and running. To achieve the primary goal of reducing the time-to-resolution of\n      critical incidents, Incident Manager automates response plans and enables responder\n      team escalation. </p>",
+                "smithy.api#title": "AWS Systems Manager Incident Manager"
+            },
             "version": "2018-05-10",
             "operations": [
                 {
@@ -3039,30 +3066,7 @@
                 {
                     "target": "com.amazonaws.ssmincidents#UpdateTimelineEvent"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "SSM Incidents",
-                    "arnNamespace": "ssm-incidents",
-                    "cloudFormationName": "SSMIncidents",
-                    "cloudTrailEventSource": "ssm-incidents.amazonaws.com",
-                    "endpointPrefix": "ssm-incidents"
-                },
-                "aws.auth#sigv4": {
-                    "name": "ssm-incidents"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#cors": {
-                    "additionalAllowedHeaders": [
-                        "x-amz-content-sha256",
-                        "x-amz-user-agent",
-                        "content-type",
-                        "x-amzn-platform-id"
-                    ]
-                },
-                "smithy.api#documentation": "<p>Systems Manager Incident Manager is an incident management console designed to help users\n      mitigate and recover from incidents affecting their Amazon Web Services-hosted applications. An\n      incident is any unplanned interruption or reduction in quality of services. </p>\n         <p>Incident Manager increases incident resolution by notifying responders of impact,\n      highlighting relevant troubleshooting data, and providing collaboration tools to get services\n      back up and running. To achieve the primary goal of reducing the time-to-resolution of\n      critical incidents, Incident Manager automates response plans and enables responder\n      team escalation. </p>",
-                "smithy.api#title": "AWS Systems Manager Incident Manager"
-            }
+            ]
         },
         "com.amazonaws.ssmincidents#ServiceCode": {
             "type": "string",
@@ -3413,10 +3417,20 @@
         "com.amazonaws.ssmincidents#TagMap": {
             "type": "map",
             "key": {
-                "target": "com.amazonaws.ssmincidents#TagKey"
+                "target": "com.amazonaws.ssmincidents#TagKey",
+                "traits": {
+                    "smithy.api#tags": [
+                        "logs_investigations"
+                    ]
+                }
             },
             "value": {
-                "target": "com.amazonaws.ssmincidents#TagValue"
+                "target": "com.amazonaws.ssmincidents#TagValue",
+                "traits": {
+                    "smithy.api#tags": [
+                        "logs_investigations"
+                    ]
+                }
             },
             "traits": {
                 "smithy.api#length": {

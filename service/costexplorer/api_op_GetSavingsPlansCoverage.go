@@ -27,12 +27,8 @@ import (
 //
 // * INSTANCE_FAMILY
 //
-// GetSavingsPlansCoverage
-// doesn't support filtering by tags. GetSavingsPlansCoverage also doesn't support
-// the OR operator between filter dimensions. For the full request syntax with
-// supported parameters, see Examples
-// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetSavingsPlansCoverage.html#API_GetSavingsPlansCoverage_Examples).
-// To determine valid values for a dimension, use the GetDimensionValues operation.
+// To determine valid
+// values for a dimension, use the GetDimensionValues operation.
 func (c *Client) GetSavingsPlansCoverage(ctx context.Context, params *GetSavingsPlansCoverageInput, optFns ...func(*Options)) (*GetSavingsPlansCoverageOutput, error) {
 	if params == nil {
 		params = &GetSavingsPlansCoverageInput{}
@@ -73,7 +69,8 @@ type GetSavingsPlansCoverageInput struct {
 	// Expression
 	// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
 	// object as the other operations, but only AND is supported among each dimension.
-	// Cost category is supported. Tags are not supported.
+	// If there are multiple values for a dimension, they are OR'd together. Cost
+	// category is also supported.
 	Filter *types.Expression
 
 	// The granularity of the Amazon Web Services cost data for your Savings Plans.

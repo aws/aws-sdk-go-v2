@@ -153,7 +153,9 @@ type CanaryCodeInput struct {
 
 	// If you input your canary script directly into the canary instead of referring to
 	// an S3 location, the value of this parameter is the base64-encoded contents of
-	// the .zip file that contains the script. It must be smaller than 256 Kb.
+	// the .zip file that contains the script. It must be smaller than 225 Kb. For
+	// large canary scripts, we recommend that you use an S3 location instead of
+	// inputting it directly with this parameter.
 	ZipFile []byte
 
 	noSmithyDocumentSerde

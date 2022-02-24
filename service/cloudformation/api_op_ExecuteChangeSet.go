@@ -18,7 +18,7 @@ import (
 // stack. If a stack policy is associated with the stack, CloudFormation enforces
 // the policy during the update. You can't specify a temporary stack policy that
 // overrides the current policy. To create a change set for the entire stack
-// hierachy, IncludeNestedStacks must have been set to True.
+// hierarchy, IncludeNestedStacks must have been set to True.
 func (c *Client) ExecuteChangeSet(ctx context.Context, params *ExecuteChangeSetInput, optFns ...func(*Options)) (*ExecuteChangeSetOutput, error) {
 	if params == nil {
 		params = &ExecuteChangeSetInput{}
@@ -37,8 +37,8 @@ func (c *Client) ExecuteChangeSet(ctx context.Context, params *ExecuteChangeSetI
 // The input for the ExecuteChangeSet action.
 type ExecuteChangeSetInput struct {
 
-	// The name or ARN of the change set that you want use to update the specified
-	// stack.
+	// The name or Amazon Resource Name (ARN) of the change set that you want use to
+	// update the specified stack.
 	//
 	// This member is required.
 	ChangeSetName *string
@@ -54,8 +54,8 @@ type ExecuteChangeSetInput struct {
 	// Default: True
 	DisableRollback *bool
 
-	// If you specified the name of a change set, specify the stack name or ID (ARN)
-	// that is associated with the change set you want to execute.
+	// If you specified the name of a change set, specify the stack name or Amazon
+	// Resource Name (ARN) that's associated with the change set you want to execute.
 	StackName *string
 
 	noSmithyDocumentSerde

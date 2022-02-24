@@ -479,6 +479,19 @@ func awsRestxml_serializeOpDocumentCreateJobInput(v *CreateJobInput, value smith
 			return err
 		}
 	}
+	if v.ManifestGenerator != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "ManifestGenerator",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentJobManifestGenerator(v.ManifestGenerator, el); err != nil {
+			return err
+		}
+	}
 	if v.Operation != nil {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
@@ -4581,6 +4594,37 @@ func awsRestxml_serializeDocumentExclude(v *types.Exclude, value smithyxml.Value
 	return nil
 }
 
+func awsRestxml_serializeDocumentGeneratedManifestEncryption(v *types.GeneratedManifestEncryption, value smithyxml.Value) error {
+	defer value.Close()
+	if v.SSEKMS != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "SSE-KMS",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentSSEKMSEncryption(v.SSEKMS, el); err != nil {
+			return err
+		}
+	}
+	if v.SSES3 != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "SSE-S3",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentSSES3Encryption(v.SSES3, el); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestxml_serializeDocumentInclude(v *types.Include, value smithyxml.Value) error {
 	defer value.Close()
 	if v.Buckets != nil {
@@ -4652,6 +4696,80 @@ func awsRestxml_serializeDocumentJobManifestFieldList(v []types.JobManifestField
 	for i := range v {
 		am := array.Member()
 		am.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentJobManifestGenerator(v types.JobManifestGenerator, value smithyxml.Value) error {
+	defer value.Close()
+	switch uv := v.(type) {
+	case *types.JobManifestGeneratorMemberS3JobManifestGenerator:
+		customMemberNameAttr := []smithyxml.Attr{}
+		customMemberName := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "S3JobManifestGenerator",
+			},
+			Attr: customMemberNameAttr,
+		}
+		av := value.MemberElement(customMemberName)
+		if err := awsRestxml_serializeDocumentS3JobManifestGenerator(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentJobManifestGeneratorFilter(v *types.JobManifestGeneratorFilter, value smithyxml.Value) error {
+	defer value.Close()
+	if v.CreatedAfter != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "CreatedAfter",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(smithytime.FormatDateTime(*v.CreatedAfter))
+	}
+	if v.CreatedBefore != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "CreatedBefore",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(smithytime.FormatDateTime(*v.CreatedBefore))
+	}
+	if v.EligibleForReplication {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "EligibleForReplication",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Boolean(v.EligibleForReplication)
+	}
+	if v.ObjectReplicationStatuses != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "ObjectReplicationStatuses",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentReplicationStatusFilterList(v.ObjectReplicationStatuses, el); err != nil {
+			return err
+		}
 	}
 	return nil
 }
@@ -4826,6 +4944,19 @@ func awsRestxml_serializeDocumentJobOperation(v *types.JobOperation, value smith
 		}
 		el := value.MemberElement(root)
 		if err := awsRestxml_serializeDocumentS3SetObjectTaggingOperation(v.S3PutObjectTagging, el); err != nil {
+			return err
+		}
+	}
+	if v.S3ReplicateObject != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "S3ReplicateObject",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentS3ReplicateObjectOperation(v.S3ReplicateObject, el); err != nil {
 			return err
 		}
 	}
@@ -5577,6 +5708,19 @@ func awsRestxml_serializeDocumentRegions(v []string, value smithyxml.Value) erro
 	return nil
 }
 
+func awsRestxml_serializeDocumentReplicationStatusFilterList(v []types.ReplicationStatus, value smithyxml.Value) error {
+	var array *smithyxml.Array
+	if !value.IsFlattened() {
+		defer value.Close()
+	}
+	array = value.Array()
+	for i := range v {
+		am := array.Member()
+		am.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsRestxml_serializeDocumentS3AccessControlList(v *types.S3AccessControlList, value smithyxml.Value) error {
 	defer value.Close()
 	if v.Grants != nil {
@@ -6022,6 +6166,132 @@ func awsRestxml_serializeDocumentS3InitiateRestoreObjectOperation(v *types.S3Ini
 	return nil
 }
 
+func awsRestxml_serializeDocumentS3JobManifestGenerator(v *types.S3JobManifestGenerator, value smithyxml.Value) error {
+	defer value.Close()
+	{
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "EnableManifestOutput",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Boolean(v.EnableManifestOutput)
+	}
+	if v.ExpectedBucketOwner != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "ExpectedBucketOwner",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.ExpectedBucketOwner)
+	}
+	if v.Filter != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Filter",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentJobManifestGeneratorFilter(v.Filter, el); err != nil {
+			return err
+		}
+	}
+	if v.ManifestOutputLocation != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "ManifestOutputLocation",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentS3ManifestOutputLocation(v.ManifestOutputLocation, el); err != nil {
+			return err
+		}
+	}
+	if v.SourceBucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "SourceBucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.SourceBucket)
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentS3ManifestOutputLocation(v *types.S3ManifestOutputLocation, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
+	if v.ExpectedManifestBucketOwner != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "ExpectedManifestBucketOwner",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.ExpectedManifestBucketOwner)
+	}
+	if v.ManifestEncryption != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "ManifestEncryption",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentGeneratedManifestEncryption(v.ManifestEncryption, el); err != nil {
+			return err
+		}
+	}
+	if len(v.ManifestFormat) > 0 {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "ManifestFormat",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(string(v.ManifestFormat))
+	}
+	if v.ManifestPrefix != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "ManifestPrefix",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.ManifestPrefix)
+	}
+	return nil
+}
+
 func awsRestxml_serializeDocumentS3ObjectLockLegalHold(v *types.S3ObjectLockLegalHold, value smithyxml.Value) error {
 	defer value.Close()
 	if len(v.Status) > 0 {
@@ -6190,6 +6460,11 @@ func awsRestxml_serializeDocumentS3ObjectOwner(v *types.S3ObjectOwner, value smi
 		el := value.MemberElement(root)
 		el.String(*v.ID)
 	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentS3ReplicateObjectOperation(v *types.S3ReplicateObjectOperation, value smithyxml.Value) error {
+	defer value.Close()
 	return nil
 }
 
@@ -6440,7 +6715,28 @@ func awsRestxml_serializeDocumentSSEKMS(v *types.SSEKMS, value smithyxml.Value) 
 	return nil
 }
 
+func awsRestxml_serializeDocumentSSEKMSEncryption(v *types.SSEKMSEncryption, value smithyxml.Value) error {
+	defer value.Close()
+	if v.KeyId != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "KeyId",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.KeyId)
+	}
+	return nil
+}
+
 func awsRestxml_serializeDocumentSSES3(v *types.SSES3, value smithyxml.Value) error {
+	defer value.Close()
+	return nil
+}
+
+func awsRestxml_serializeDocumentSSES3Encryption(v *types.SSES3Encryption, value smithyxml.Value) error {
 	defer value.Close()
 	return nil
 }

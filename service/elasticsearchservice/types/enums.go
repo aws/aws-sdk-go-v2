@@ -402,6 +402,28 @@ func (OutboundCrossClusterSearchConnectionStatusCode) Values() []OutboundCrossCl
 	}
 }
 
+type OverallChangeStatus string
+
+// Enum values for OverallChangeStatus
+const (
+	OverallChangeStatusPending    OverallChangeStatus = "PENDING"
+	OverallChangeStatusProcessing OverallChangeStatus = "PROCESSING"
+	OverallChangeStatusCompleted  OverallChangeStatus = "COMPLETED"
+	OverallChangeStatusFailed     OverallChangeStatus = "FAILED"
+)
+
+// Values returns all known values for OverallChangeStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OverallChangeStatus) Values() []OverallChangeStatus {
+	return []OverallChangeStatus{
+		"PENDING",
+		"PROCESSING",
+		"COMPLETED",
+		"FAILED",
+	}
+}
+
 type PackageStatus string
 
 // Enum values for PackageStatus

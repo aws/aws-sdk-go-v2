@@ -19,11 +19,6 @@ import (
 // GetSavingsPlanUtilizationDetails by providing individual dates. You can use
 // GetDimensionValues in SAVINGS_PLANS to determine the possible dimension values.
 // GetSavingsPlanUtilizationDetails internally groups data by SavingsPlansArn.
-// GetSavingsPlansUtilizationDetails doesn't support filtering by tags.
-// GetSavingsPlansUtilizationDetails also doesn't support the OR operator between
-// filter dimensions. For the full request syntax with supported parameters, see
-// Examples
-// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetSavingsPlansUtilizationDetails.html#API_GetSavingsPlansUtilizationDetails_Examples).
 func (c *Client) GetSavingsPlansUtilizationDetails(ctx context.Context, params *GetSavingsPlansUtilizationDetailsInput, optFns ...func(*Options)) (*GetSavingsPlansUtilizationDetailsOutput, error) {
 	if params == nil {
 		params = &GetSavingsPlansUtilizationDetailsInput{}
@@ -69,7 +64,6 @@ type GetSavingsPlansUtilizationDetailsInput struct {
 	// GetSavingsPlansUtilizationDetails uses the same Expression
 	// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
 	// object as the other operations, but only AND is supported among each dimension.
-	// Filtering by tags isn't supported.
 	Filter *types.Expression
 
 	// The number of items to be returned in a response. The default is 20, with a

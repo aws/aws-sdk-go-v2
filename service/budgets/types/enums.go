@@ -92,6 +92,24 @@ func (ApprovalModel) Values() []ApprovalModel {
 	}
 }
 
+type AutoAdjustType string
+
+// Enum values for AutoAdjustType
+const (
+	AutoAdjustTypeHistorical AutoAdjustType = "HISTORICAL"
+	AutoAdjustTypeForecast   AutoAdjustType = "FORECAST"
+)
+
+// Values returns all known values for AutoAdjustType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AutoAdjustType) Values() []AutoAdjustType {
+	return []AutoAdjustType{
+		"HISTORICAL",
+		"FORECAST",
+	}
+}
+
 type BudgetType string
 
 // Enum values for BudgetType

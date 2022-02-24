@@ -73,8 +73,8 @@ type CreateClusterInput struct {
 	// * Must contain one number.
 	//
 	// * Can be any printable ASCII
-	// character (ASCII code 33 to 126) except ' (single quote), " (double quote), \,
-	// /, @, or space.
+	// character (ASCII code 33-126) except ' (single quote), " (double quote), \, /,
+	// or @.
 	//
 	// This member is required.
 	MasterUserPassword *string
@@ -242,9 +242,11 @@ type CreateClusterInput struct {
 
 	// A list of Identity and Access Management (IAM) roles that can be used by the
 	// cluster to access other Amazon Web Services services. You must supply the IAM
-	// roles in their Amazon Resource Name (ARN) format. You can supply up to 10 IAM
-	// roles in a single request. A cluster can have up to 10 IAM roles associated with
-	// it at any time.
+	// roles in their Amazon Resource Name (ARN) format. The maximum number of IAM
+	// roles that you can associate is subject to a quota. For more information, go to
+	// Quotas and limits
+	// (https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html)
+	// in the Amazon Redshift Cluster Management Guide.
 	IamRoles []string
 
 	// The Key Management Service (KMS) key ID of the encryption key that you want to

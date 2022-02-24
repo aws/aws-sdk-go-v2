@@ -13,7 +13,11 @@ import (
 // Removes the link between the replica secret and the primary secret and promotes
 // the replica to a primary secret in the replica Region. You must call this
 // operation from the Region in which you want to promote the replica to a primary
-// secret.
+// secret. Required permissions: secretsmanager:StopReplicationToReplica. For more
+// information, see  IAM policy actions for Secrets Manager
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions)
+// and Authentication and access control in Secrets Manager
+// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 func (c *Client) StopReplicationToReplica(ctx context.Context, params *StopReplicationToReplicaInput, optFns ...func(*Options)) (*StopReplicationToReplicaOutput, error) {
 	if params == nil {
 		params = &StopReplicationToReplicaInput{}

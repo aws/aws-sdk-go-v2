@@ -1961,6 +1961,126 @@ func awsAwsjson11_deserializeOpErrorDisassociateWebACL(response *smithyhttp.Resp
 	}
 }
 
+type awsAwsjson11_deserializeOpGenerateMobileSdkReleaseUrl struct {
+}
+
+func (*awsAwsjson11_deserializeOpGenerateMobileSdkReleaseUrl) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpGenerateMobileSdkReleaseUrl) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorGenerateMobileSdkReleaseUrl(response, &metadata)
+	}
+	output := &GenerateMobileSdkReleaseUrlOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentGenerateMobileSdkReleaseUrlOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorGenerateMobileSdkReleaseUrl(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("WAFInternalErrorException", errorCode):
+		return awsAwsjson11_deserializeErrorWAFInternalErrorException(response, errorBody)
+
+	case strings.EqualFold("WAFInvalidOperationException", errorCode):
+		return awsAwsjson11_deserializeErrorWAFInvalidOperationException(response, errorBody)
+
+	case strings.EqualFold("WAFInvalidParameterException", errorCode):
+		return awsAwsjson11_deserializeErrorWAFInvalidParameterException(response, errorBody)
+
+	case strings.EqualFold("WAFNonexistentItemException", errorCode):
+		return awsAwsjson11_deserializeErrorWAFNonexistentItemException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsjson11_deserializeOpGetIPSet struct {
 }
 
@@ -2259,6 +2379,126 @@ func (m *awsAwsjson11_deserializeOpGetManagedRuleSet) HandleDeserialize(ctx cont
 }
 
 func awsAwsjson11_deserializeOpErrorGetManagedRuleSet(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("WAFInternalErrorException", errorCode):
+		return awsAwsjson11_deserializeErrorWAFInternalErrorException(response, errorBody)
+
+	case strings.EqualFold("WAFInvalidOperationException", errorCode):
+		return awsAwsjson11_deserializeErrorWAFInvalidOperationException(response, errorBody)
+
+	case strings.EqualFold("WAFInvalidParameterException", errorCode):
+		return awsAwsjson11_deserializeErrorWAFInvalidParameterException(response, errorBody)
+
+	case strings.EqualFold("WAFNonexistentItemException", errorCode):
+		return awsAwsjson11_deserializeErrorWAFNonexistentItemException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsjson11_deserializeOpGetMobileSdkRelease struct {
+}
+
+func (*awsAwsjson11_deserializeOpGetMobileSdkRelease) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpGetMobileSdkRelease) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorGetMobileSdkRelease(response, &metadata)
+	}
+	output := &GetMobileSdkReleaseOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentGetMobileSdkReleaseOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorGetMobileSdkRelease(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -3684,6 +3924,123 @@ func (m *awsAwsjson11_deserializeOpListManagedRuleSets) HandleDeserialize(ctx co
 }
 
 func awsAwsjson11_deserializeOpErrorListManagedRuleSets(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("WAFInternalErrorException", errorCode):
+		return awsAwsjson11_deserializeErrorWAFInternalErrorException(response, errorBody)
+
+	case strings.EqualFold("WAFInvalidOperationException", errorCode):
+		return awsAwsjson11_deserializeErrorWAFInvalidOperationException(response, errorBody)
+
+	case strings.EqualFold("WAFInvalidParameterException", errorCode):
+		return awsAwsjson11_deserializeErrorWAFInvalidParameterException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsjson11_deserializeOpListMobileSdkReleases struct {
+}
+
+func (*awsAwsjson11_deserializeOpListMobileSdkReleases) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpListMobileSdkReleases) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorListMobileSdkReleases(response, &metadata)
+	}
+	output := &ListMobileSdkReleasesOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentListMobileSdkReleasesOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorListMobileSdkReleases(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -8664,6 +9021,99 @@ func awsAwsjson11_deserializeDocumentLoggingFilter(v **types.LoggingFilter, valu
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentManagedRuleGroupConfig(v **types.ManagedRuleGroupConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ManagedRuleGroupConfig
+	if *v == nil {
+		sv = &types.ManagedRuleGroupConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "LoginPath":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LoginPathString to be of type string, got %T instead", value)
+				}
+				sv.LoginPath = ptr.String(jtv)
+			}
+
+		case "PasswordField":
+			if err := awsAwsjson11_deserializeDocumentPasswordField(&sv.PasswordField, value); err != nil {
+				return err
+			}
+
+		case "PayloadType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PayloadType to be of type string, got %T instead", value)
+				}
+				sv.PayloadType = types.PayloadType(jtv)
+			}
+
+		case "UsernameField":
+			if err := awsAwsjson11_deserializeDocumentUsernameField(&sv.UsernameField, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentManagedRuleGroupConfigs(v *[]types.ManagedRuleGroupConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ManagedRuleGroupConfig
+	if *v == nil {
+		cv = []types.ManagedRuleGroupConfig{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ManagedRuleGroupConfig
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentManagedRuleGroupConfig(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentManagedRuleGroupStatement(v **types.ManagedRuleGroupStatement, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8688,6 +9138,11 @@ func awsAwsjson11_deserializeDocumentManagedRuleGroupStatement(v **types.Managed
 		switch key {
 		case "ExcludedRules":
 			if err := awsAwsjson11_deserializeDocumentExcludedRules(&sv.ExcludedRules, value); err != nil {
+				return err
+			}
+
+		case "ManagedRuleGroupConfigs":
+			if err := awsAwsjson11_deserializeDocumentManagedRuleGroupConfigs(&sv.ManagedRuleGroupConfigs, value); err != nil {
 				return err
 			}
 
@@ -9268,6 +9723,76 @@ func awsAwsjson11_deserializeDocumentMethod(v **types.Method, value interface{})
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentMobileSdkRelease(v **types.MobileSdkRelease, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MobileSdkRelease
+	if *v == nil {
+		sv = &types.MobileSdkRelease{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ReleaseNotes":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ReleaseNotes to be of type string, got %T instead", value)
+				}
+				sv.ReleaseNotes = ptr.String(jtv)
+			}
+
+		case "ReleaseVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VersionKeyString to be of type string, got %T instead", value)
+				}
+				sv.ReleaseVersion = ptr.String(jtv)
+			}
+
+		case "Tags":
+			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
+				return err
+			}
+
+		case "Timestamp":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Timestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentNoneAction(v **types.NoneAction, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -9401,6 +9926,46 @@ func awsAwsjson11_deserializeDocumentOverrideAction(v **types.OverrideAction, va
 		case "None":
 			if err := awsAwsjson11_deserializeDocumentNoneAction(&sv.None, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentPasswordField(v **types.PasswordField, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PasswordField
+	if *v == nil {
+		sv = &types.PasswordField{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Identifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FieldIdentifier to be of type string, got %T instead", value)
+				}
+				sv.Identifier = ptr.String(jtv)
 			}
 
 		default:
@@ -9973,6 +10538,96 @@ func awsAwsjson11_deserializeDocumentRegularExpressionList(v *[]types.Regex, val
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentReleaseSummaries(v *[]types.ReleaseSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ReleaseSummary
+	if *v == nil {
+		cv = []types.ReleaseSummary{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ReleaseSummary
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentReleaseSummary(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentReleaseSummary(v **types.ReleaseSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ReleaseSummary
+	if *v == nil {
+		sv = &types.ReleaseSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ReleaseVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VersionKeyString to be of type string, got %T instead", value)
+				}
+				sv.ReleaseVersion = ptr.String(jtv)
+			}
+
+		case "Timestamp":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Timestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -11297,6 +11952,46 @@ func awsAwsjson11_deserializeDocumentUriPath(v **types.UriPath, value interface{
 
 	for key, value := range shape {
 		switch key {
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentUsernameField(v **types.UsernameField, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.UsernameField
+	if *v == nil {
+		sv = &types.UsernameField{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Identifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FieldIdentifier to be of type string, got %T instead", value)
+				}
+				sv.Identifier = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -12917,6 +13612,46 @@ func awsAwsjson11_deserializeOpDocumentDisassociateWebACLOutput(v **Disassociate
 	return nil
 }
 
+func awsAwsjson11_deserializeOpDocumentGenerateMobileSdkReleaseUrlOutput(v **GenerateMobileSdkReleaseUrlOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *GenerateMobileSdkReleaseUrlOutput
+	if *v == nil {
+		sv = &GenerateMobileSdkReleaseUrlOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Url":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DownloadUrl to be of type string, got %T instead", value)
+				}
+				sv.Url = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeOpDocumentGetIPSetOutput(v **GetIPSetOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13031,6 +13766,42 @@ func awsAwsjson11_deserializeOpDocumentGetManagedRuleSetOutput(v **GetManagedRul
 
 		case "ManagedRuleSet":
 			if err := awsAwsjson11_deserializeDocumentManagedRuleSet(&sv.ManagedRuleSet, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeOpDocumentGetMobileSdkReleaseOutput(v **GetMobileSdkReleaseOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *GetMobileSdkReleaseOutput
+	if *v == nil {
+		sv = &GetMobileSdkReleaseOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "MobileSdkRelease":
+			if err := awsAwsjson11_deserializeDocumentMobileSdkRelease(&sv.MobileSdkRelease, value); err != nil {
 				return err
 			}
 
@@ -13326,6 +14097,15 @@ func awsAwsjson11_deserializeOpDocumentGetWebACLOutput(v **GetWebACLOutput, valu
 
 	for key, value := range shape {
 		switch key {
+		case "ApplicationIntegrationURL":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OutputUrl to be of type string, got %T instead", value)
+				}
+				sv.ApplicationIntegrationURL = ptr.String(jtv)
+			}
+
 		case "LockToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13563,6 +14343,51 @@ func awsAwsjson11_deserializeOpDocumentListManagedRuleSetsOutput(v **ListManaged
 					return fmt.Errorf("expected NextMarker to be of type string, got %T instead", value)
 				}
 				sv.NextMarker = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeOpDocumentListMobileSdkReleasesOutput(v **ListMobileSdkReleasesOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *ListMobileSdkReleasesOutput
+	if *v == nil {
+		sv = &ListMobileSdkReleasesOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "NextMarker":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NextMarker to be of type string, got %T instead", value)
+				}
+				sv.NextMarker = ptr.String(jtv)
+			}
+
+		case "ReleaseSummaries":
+			if err := awsAwsjson11_deserializeDocumentReleaseSummaries(&sv.ReleaseSummaries, value); err != nil {
+				return err
 			}
 
 		default:

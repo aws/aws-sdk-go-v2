@@ -26644,6 +26644,22 @@ func awsAwsquery_deserializeDocumentDBEngineVersion(v **types.DBEngineVersion, d
 				return err
 			}
 
+		case strings.EqualFold("SupportsBabelfish", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
+				}
+				sv.SupportsBabelfish = xtv
+			}
+
 		case strings.EqualFold("SupportsGlobalDatabases", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -44271,6 +44287,22 @@ func awsAwsquery_deserializeDocumentUpgradeTarget(v **types.UpgradeTarget, decod
 				return err
 			}
 
+		case strings.EqualFold("SupportsBabelfish", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", val)
+				}
+				sv.SupportsBabelfish = ptr.Bool(xtv)
+			}
+
 		case strings.EqualFold("SupportsGlobalDatabases", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -45969,6 +46001,22 @@ func awsAwsquery_deserializeOpDocumentCreateCustomDBEngineVersionOutput(v **Crea
 				return err
 			}
 
+		case strings.EqualFold("SupportsBabelfish", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
+				}
+				sv.SupportsBabelfish = xtv
+			}
+
 		case strings.EqualFold("SupportsGlobalDatabases", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -47063,6 +47111,22 @@ func awsAwsquery_deserializeOpDocumentDeleteCustomDBEngineVersionOutput(v **Dele
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentSupportedTimezonesList(&sv.SupportedTimezones, nodeDecoder); err != nil {
 				return err
+			}
+
+		case strings.EqualFold("SupportsBabelfish", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
+				}
+				sv.SupportsBabelfish = xtv
 			}
 
 		case strings.EqualFold("SupportsGlobalDatabases", t.Name.Local):
@@ -50677,6 +50741,22 @@ func awsAwsquery_deserializeOpDocumentModifyCustomDBEngineVersionOutput(v **Modi
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentSupportedTimezonesList(&sv.SupportedTimezones, nodeDecoder); err != nil {
 				return err
+			}
+
+		case strings.EqualFold("SupportsBabelfish", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
+				}
+				sv.SupportsBabelfish = xtv
 			}
 
 		case strings.EqualFold("SupportsGlobalDatabases", t.Name.Local):

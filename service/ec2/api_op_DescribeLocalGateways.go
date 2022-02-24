@@ -38,26 +38,20 @@ type DescribeLocalGatewaysInput struct {
 	DryRun *bool
 
 	// One or more filters.
-	Filters []types.Filter
-
-	// One or more filters.
 	//
 	// * local-gateway-id - The ID of a local gateway.
 	//
 	// *
-	// local-gateway-route-table-id - The ID of the local gateway route table.
+	// outpost-arn - The Amazon Resource Name (ARN) of the Outpost.
 	//
-	// *
-	// local-gateway-route-table-virtual-interface-group-association-id - The ID of the
-	// association.
+	// * owner-id - The
+	// ID of the Amazon Web Services account that owns the local gateway.
 	//
-	// * local-gateway-route-table-virtual-interface-group-id - The ID of
-	// the virtual interface group.
-	//
-	// * outpost-arn - The Amazon Resource Name (ARN) of
-	// the Outpost.
-	//
-	// * state - The state of the association.
+	// * state -
+	// The state of the association.
+	Filters []types.Filter
+
+	// The IDs of the local gateways.
 	LocalGatewayIds []string
 
 	// The maximum number of results to return with a single call. To retrieve the

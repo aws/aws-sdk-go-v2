@@ -593,6 +593,9 @@
                 },
                 {
                     "target": "com.amazonaws.evidently#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.evidently#ValidationException"
                 }
             ],
             "traits": {
@@ -1364,7 +1367,7 @@
                     "min": 1,
                     "max": 127
                 },
-                "smithy.api#pattern": "[-a-zA-Z0-9._]*"
+                "smithy.api#pattern": "^[-a-zA-Z0-9._]*$"
             }
         },
         "com.amazonaws.evidently#ExperimentReport": {
@@ -1774,7 +1777,7 @@
                     "min": 1,
                     "max": 127
                 },
-                "smithy.api#pattern": "[-a-zA-Z0-9._]*"
+                "smithy.api#pattern": "^[-a-zA-Z0-9._]*$"
             }
         },
         "com.amazonaws.evidently#FeatureResource": {
@@ -1924,6 +1927,9 @@
                 },
                 {
                     "target": "com.amazonaws.evidently#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.evidently#ValidationException"
                 }
             ],
             "traits": {
@@ -2178,6 +2184,9 @@
                 },
                 {
                     "target": "com.amazonaws.evidently#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.evidently#ValidationException"
                 }
             ],
             "traits": {
@@ -2286,7 +2295,7 @@
                     "min": 1,
                     "max": 127
                 },
-                "smithy.api#pattern": "[-a-zA-Z0-9._]*"
+                "smithy.api#pattern": "^[-a-zA-Z0-9._]*$"
             }
         },
         "com.amazonaws.evidently#GroupToWeightMap": {
@@ -2554,7 +2563,7 @@
                     "min": 1,
                     "max": 127
                 },
-                "smithy.api#pattern": "[-a-zA-Z0-9._]*"
+                "smithy.api#pattern": "^[-a-zA-Z0-9._]*$"
             }
         },
         "com.amazonaws.evidently#LaunchResource": {
@@ -2660,6 +2669,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.evidently#AccessDeniedException"
+                },
+                {
                     "target": "com.amazonaws.evidently#ResourceNotFoundException"
                 },
                 {
@@ -2705,6 +2717,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The token to use when requesting the next set of results. You received this token from a previous \n       <code>ListExperiments</code> operation.</p>",
                         "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.evidently#ExperimentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this optional parameter to limit the returned results to only the experiments with the status that you specify here.</p>",
+                        "smithy.api#httpQuery": "status"
                     }
                 }
             }
@@ -2866,6 +2885,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The token to use when requesting the next set of results. You received this token from a previous \n       <code>ListLaunches</code> operation.</p>",
                         "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.evidently#LaunchStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this optional parameter to limit the returned results to only the launches with the status that you specify here.</p>",
+                        "smithy.api#httpQuery": "status"
                     }
                 }
             }
@@ -3095,19 +3121,22 @@
                 "name": {
                     "target": "com.amazonaws.evidently#CwDimensionSafeName",
                     "traits": {
-                        "smithy.api#documentation": "<p>A name for the metric.</p>"
+                        "smithy.api#documentation": "<p>A name for the metric.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "entityIdKey": {
                     "target": "com.amazonaws.evidently#JsonPath",
                     "traits": {
-                        "smithy.api#documentation": "<p>The entity, such as a user or session, that does an action that causes a metric\n       value to be recorded. An example is <code>userDetails.userID</code>.</p>"
+                        "smithy.api#documentation": "<p>The entity, such as a user or session, that does an action that causes a metric\n       value to be recorded. An example is <code>userDetails.userID</code>.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "valueKey": {
                     "target": "com.amazonaws.evidently#JsonPath",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value that is tracked to produce the metric.</p>"
+                        "smithy.api#documentation": "<p>The value that is tracked to produce the metric.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "eventPattern": {
@@ -3469,7 +3498,7 @@
                     "min": 1,
                     "max": 127
                 },
-                "smithy.api#pattern": "[-a-zA-Z0-9._]*"
+                "smithy.api#pattern": "^[-a-zA-Z0-9._]*$"
             }
         },
         "com.amazonaws.evidently#ProjectRef": {
@@ -4142,6 +4171,9 @@
                     "target": "com.amazonaws.evidently#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.evidently#ConflictException"
+                },
+                {
                     "target": "com.amazonaws.evidently#ResourceNotFoundException"
                 },
                 {
@@ -4573,7 +4605,7 @@
                     "min": 1,
                     "max": 127
                 },
-                "smithy.api#pattern": "[-a-zA-Z0-9._]*"
+                "smithy.api#pattern": "^[-a-zA-Z0-9._]*$"
             }
         },
         "com.amazonaws.evidently#TreatmentNameList": {
@@ -5268,7 +5300,7 @@
                     "min": 1,
                     "max": 127
                 },
-                "smithy.api#pattern": "[-a-zA-Z0-9._]*"
+                "smithy.api#pattern": "^[-a-zA-Z0-9._]*$"
             }
         },
         "com.amazonaws.evidently#VariationNameList": {

@@ -24,6 +24,7 @@ type ResourceType string
 // Enum values for ResourceType
 const (
 	ResourceTypeEbsSnapshot ResourceType = "EBS_SNAPSHOT"
+	ResourceTypeEc2Image    ResourceType = "EC2_IMAGE"
 )
 
 // Values returns all known values for ResourceType. Note that this can be expanded
@@ -32,6 +33,7 @@ const (
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"EBS_SNAPSHOT",
+		"EC2_IMAGE",
 	}
 }
 

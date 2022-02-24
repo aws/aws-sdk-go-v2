@@ -5045,6 +5045,11 @@ func awsAwsjson10_serializeOpDocumentExecuteStatementInput(v *ExecuteStatementIn
 		ok.Boolean(*v.ConsistentRead)
 	}
 
+	if v.Limit != nil {
+		ok := object.Key("Limit")
+		ok.Integer(*v.Limit)
+	}
+
 	if v.NextToken != nil {
 		ok := object.Key("NextToken")
 		ok.String(*v.NextToken)

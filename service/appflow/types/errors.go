@@ -7,6 +7,25 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+// AppFlow/Requester has invalid or missing permissions.
+type AccessDeniedException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *AccessDeniedException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *AccessDeniedException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
+func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // There was a conflict when processing the request (for example, a flow with the
 // given name already exists within the account. Check for conflicting resource
 // names and try again.
@@ -127,6 +146,26 @@ func (e *ServiceQuotaExceededException) ErrorMessage() string {
 }
 func (e *ServiceQuotaExceededException) ErrorCode() string             { return "ServiceQuotaExceededException" }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// API calls have exceeded the maximum allowed API request rate per account and per
+// Region.
+type ThrottlingException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ThrottlingException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ThrottlingException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
+func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The requested operation is not supported for the current flow.
 type UnsupportedOperationException struct {

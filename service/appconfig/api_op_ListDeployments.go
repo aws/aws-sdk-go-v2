@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the deployments for an environment.
+// Lists the deployments for an environment in descending deployment number order.
 func (c *Client) ListDeployments(ctx context.Context, params *ListDeploymentsInput, optFns ...func(*Options)) (*ListDeploymentsOutput, error) {
 	if params == nil {
 		params = &ListDeploymentsInput{}
@@ -40,11 +40,15 @@ type ListDeploymentsInput struct {
 	// This member is required.
 	EnvironmentId *string
 
-	// The maximum number of items to return for this call. The call also returns a
-	// token that you can specify in a subsequent call to get the next set of results.
+	// The maximum number of items that may be returned for this call. If there are
+	// items that have not yet been returned, the response will include a non-null
+	// NextToken that you can provide in a subsequent call to get the next set of
+	// results.
 	MaxResults int32
 
-	// A token to start the list. Use this token to get the next set of results.
+	// The token returned by a prior call to this operation indicating the next set of
+	// results to be returned. If not specified, the operation will return the first
+	// set of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -138,8 +142,10 @@ var _ ListDeploymentsAPIClient = (*Client)(nil)
 
 // ListDeploymentsPaginatorOptions is the paginator options for ListDeployments
 type ListDeploymentsPaginatorOptions struct {
-	// The maximum number of items to return for this call. The call also returns a
-	// token that you can specify in a subsequent call to get the next set of results.
+	// The maximum number of items that may be returned for this call. If there are
+	// items that have not yet been returned, the response will include a non-null
+	// NextToken that you can provide in a subsequent call to get the next set of
+	// results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -61,6 +61,16 @@ type GetWebACLInput struct {
 
 type GetWebACLOutput struct {
 
+	// The URL to use in SDK integrations with Amazon Web Services managed rule groups.
+	// For example, you can use the integration SDKs with the account takeover
+	// prevention managed rule group AWSManagedRulesATPRuleSet. This is only populated
+	// if you are using a rule group in your web ACL that integrates with your
+	// applications in this way. For more information, see WAF client application
+	// integration
+	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html)
+	// in the WAF Developer Guide.
+	ApplicationIntegrationURL *string
+
 	// A token used for optimistic locking. WAF returns a token to your get and list
 	// requests, to mark the state of the entity at the time of the request. To make
 	// changes to the entity associated with the token, you provide the token to

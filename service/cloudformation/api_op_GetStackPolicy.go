@@ -30,7 +30,7 @@ func (c *Client) GetStackPolicy(ctx context.Context, params *GetStackPolicyInput
 // The input for the GetStackPolicy action.
 type GetStackPolicyInput struct {
 
-	// The name or unique stack ID that is associated with the stack whose policy you
+	// The name or unique stack ID that's associated with the stack whose policy you
 	// want to get.
 	//
 	// This member is required.

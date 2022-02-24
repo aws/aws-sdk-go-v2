@@ -1900,7 +1900,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a custom DB engine version (CEV). A CEV is a binary volume snapshot of a database engine and specific\n            AMI. The only supported engine is Oracle Database 19c Enterprise Edition with the January 2021 or later\n            RU/RUR.</p>\n        <p>Amazon RDS, which is a fully managed service, supplies the Amazon Machine Image (AMI) and database software.\n            The Amazon RDS database software is preinstalled, so you need only select a DB engine and version, and create\n            your database. With Amazon RDS Custom for Oracle, you upload your database installation files in Amazon S3.</p> \n        <p>When you create a custom engine version, you specify the files in a JSON document called a CEV manifest. \n            This document describes installation .zip files stored in Amazon S3. RDS Custom creates your CEV from \n            the installation files that you provided. This service model is called Bring Your Own Media (BYOM).</p>\n        <p>Creation takes approximately two hours. If creation fails, RDS Custom issues <code>RDS-EVENT-0196</code> with \n            the message <code>Creation failed for custom engine version</code>, and includes details about the failure. \n            For example, the event prints missing files.</p>\n        <p>After you create the CEV, it is available for use. You can create multiple CEVs, and create multiple \n            RDS Custom instances from any CEV. You can also change the status of a CEV to make it available or\n            inactive.</p>\n        <note>\n            <p>The MediaImport service that imports files from Amazon S3 to create CEVs isn't integrated with \n            Amazon Web Services CloudTrail. If you turn on data logging for Amazon RDS in CloudTrail, calls to the \n            <code>CreateCustomDbEngineVersion</code> event aren't logged. However, you might see calls from the \n            API gateway that accesses your Amazon S3 bucket. These calls originate from the MediaImport service for \n            the <code>CreateCustomDbEngineVersion</code> event.</p>\n         </note>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.html#custom-cev.create\">\n                Creating a CEV</a> in the <i>Amazon RDS User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Creates a custom DB engine version (CEV). A CEV is a binary volume snapshot of a database engine and specific\n            AMI. The supported engines are the following:</p>\n        <ul>\n            <li>\n               <p> Oracle Database 12.1 Enterprise Edition with the January 2021 or later RU/RUR</p>\n            </li>\n            <li>\n               <p> Oracle Database 19c Enterprise Edition with the January 2021 or later RU/RUR</p>\n            </li>\n         </ul>\n        <p>Amazon RDS, which is a fully managed service, supplies the Amazon Machine Image (AMI) and database software.\n            The Amazon RDS database software is preinstalled, so you need only select a DB engine and version, and create\n            your database. With Amazon RDS Custom for Oracle, you upload your database installation files in Amazon S3.</p> \n        <p>When you create a custom engine version, you specify the files in a JSON document called a CEV manifest. \n            This document describes installation .zip files stored in Amazon S3. RDS Custom creates your CEV from \n            the installation files that you provided. This service model is called Bring Your Own Media (BYOM).</p>\n        <p>Creation takes approximately two hours. If creation fails, RDS Custom issues <code>RDS-EVENT-0196</code> with \n            the message <code>Creation failed for custom engine version</code>, and includes details about the failure. \n            For example, the event prints missing files.</p>\n        <p>After you create the CEV, it is available for use. You can create multiple CEVs, and create multiple \n            RDS Custom instances from any CEV. You can also change the status of a CEV to make it available or\n            inactive.</p>\n        <note>\n            <p>The MediaImport service that imports files from Amazon S3 to create CEVs isn't integrated with \n            Amazon Web Services CloudTrail. If you turn on data logging for Amazon RDS in CloudTrail, calls to the \n            <code>CreateCustomDbEngineVersion</code> event aren't logged. However, you might see calls from the \n            API gateway that accesses your Amazon S3 bucket. These calls originate from the MediaImport service for \n            the <code>CreateCustomDbEngineVersion</code> event.</p>\n         </note>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.html#custom-cev.create\">\n                Creating a CEV</a> in the <i>Amazon RDS User Guide</i>.</p>"
             }
         },
         "com.amazonaws.rds#CreateCustomDBEngineVersionMessage": {
@@ -2151,7 +2151,7 @@
                 "DBSubnetGroupName": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A DB subnet group to associate with this DB cluster.</p>\n         <p>This setting is required to create a Multi-AZ DB cluster.</p>     \n         <p>Constraints: Must match the name of an existing DBSubnetGroup. Must not be default.</p>\n         <p>Example: <code>mySubnetgroup</code>\n         </p>\n         <p>Valid for: Aurora DB clusters and Multi-AZ DB clusters</p>"
+                        "smithy.api#documentation": "<p>A DB subnet group to associate with this DB cluster.</p>\n         <p>This setting is required to create a Multi-AZ DB cluster.</p>     \n         <p>Constraints: Must match the name of an existing DBSubnetGroup. Must not be default.</p>\n         <p>Example: <code>mydbsubnetgroup</code>\n         </p>\n         <p>Valid for: Aurora DB clusters and Multi-AZ DB clusters</p>"
                     }
                 },
                 "Engine": {
@@ -2652,7 +2652,7 @@
                 "DBSubnetGroupName": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A DB subnet group to associate with this DB instance.</p>\n         <p>If there is no DB subnet group, then it is a non-VPC DB instance.</p>"
+                        "smithy.api#documentation": "<p>A DB subnet group to associate with this DB instance.</p>\n         <p>Constraints: Must match the name of an existing DBSubnetGroup. Must not be default.</p>\n         <p>Example: <code>mydbsubnetgroup</code>\n         </p>"
                     }
                 },
                 "PreferredMaintenanceWindow": {
@@ -3042,7 +3042,7 @@
                 "DBSubnetGroupName": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a DB subnet group for the DB instance. The new DB instance is created in the VPC associated with the DB subnet group. If no DB subnet group is specified, then the new DB instance isn't created in a VPC.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Can only be specified if the source DB instance identifier specifies a DB instance in another Amazon Web Services Region.</p>\n            </li>\n            <li>\n               <p>If supplied, must match the name of an existing DBSubnetGroup.</p>\n            </li>\n            <li>\n               <p>The specified DB subnet group must be in the same Amazon Web Services Region in which the operation is running.</p>\n            </li>\n            <li>\n              <p>All read replicas in one Amazon Web Services Region that are created from the same source DB\n                    instance must either:></p>\n              <ul>\n                  <li>\n                     <p>Specify DB subnet groups from the same VPC. All these read replicas are created in the same\n                            VPC.</p>\n                  </li>\n                  <li>\n                     <p>Not specify a DB subnet group. All these read replicas are created outside of any\n                            VPC.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>Example: <code>mySubnetgroup</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Specifies a DB subnet group for the DB instance. The new DB instance is created in the VPC associated with the DB subnet group. If no DB subnet group is specified, then the new DB instance isn't created in a VPC.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Can only be specified if the source DB instance identifier specifies a DB instance in another Amazon Web Services Region.</p>\n            </li>\n            <li>\n               <p>If supplied, must match the name of an existing DBSubnetGroup.</p>\n            </li>\n            <li>\n               <p>The specified DB subnet group must be in the same Amazon Web Services Region in which the operation is running.</p>\n            </li>\n            <li>\n              <p>All read replicas in one Amazon Web Services Region that are created from the same source DB\n                    instance must either:></p>\n              <ul>\n                  <li>\n                     <p>Specify DB subnet groups from the same VPC. All these read replicas are created in the same\n                            VPC.</p>\n                  </li>\n                  <li>\n                     <p>Not specify a DB subnet group. All these read replicas are created outside of any\n                            VPC.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>Example: <code>mydbsubnetgroup</code>\n         </p>"
                     }
                 },
                 "VpcSecurityGroupIds": {
@@ -3584,7 +3584,7 @@
                 "DBSubnetGroupName": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name for the DB subnet group. This value is stored as a lowercase string.</p>\n         <p>Constraints: Must contain no more than 255 letters, numbers, periods, underscores, spaces, or hyphens. Must not be default.</p>\n         <p>Example: <code>mySubnetgroup</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The name for the DB subnet group. This value is stored as a lowercase string.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n              <p>Must contain no more than 255 letters, numbers, periods, underscores, spaces, or hyphens.</p>\n            </li>\n            <li>\n              <p>Must not be default.</p>\n            </li>\n            <li>\n              <p>First character must be a letter.</p>\n            </li>\n         </ul>\n         <p>Example: <code>mydbsubnetgroup</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5503,6 +5503,12 @@
                 },
                 "TagList": {
                     "target": "com.amazonaws.rds#TagList"
+                },
+                "SupportsBabelfish": {
+                    "target": "com.amazonaws.rds#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that indicates whether the engine version supports Babelfish for Aurora PostgreSQL.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8456,7 +8462,7 @@
                 "DBSubnetGroupName": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the database subnet group to delete.</p>\n         <note>\n            <p>You can't delete the default subnet group.</p>\n         </note>\n         <p>Constraints:</p>\n         <p>Constraints: Must match the name of an existing DBSubnetGroup. Must not be default.</p>\n         <p>Example: <code>mySubnetgroup</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The name of the database subnet group to delete.</p>\n         <note>\n            <p>You can't delete the default subnet group.</p>\n         </note>\n         <p>Constraints: Must match the name of an existing DBSubnetGroup. Must not be default.</p>\n         <p>Example: <code>mydbsubnetgroup</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -9317,7 +9323,7 @@
                 "Filters": {
                     "target": "com.amazonaws.rds#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A filter that specifies one or more DB clusters to describe.</p>\n         <p>Supported filters:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>clone-group-id</code> - Accepts clone group identifiers. \n\t\t\t  The results list will only include information about\n              the DB clusters associated with these clone groups.</p>\n            </li>\n            <li>\n               <p>\n                  <code>db-cluster-id</code> - Accepts DB cluster identifiers and DB \n              cluster Amazon Resource Names (ARNs). The results list will only include information about\n              the DB clusters identified by these ARNs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>domain</code> - Accepts Active Directory directory IDs. \n              The results list will only include information about\n              the DB clusters associated with these domains.</p>\n            </li>\n            <li>\n               <p>\n                  <code>engine</code> - Accepts engine names. \n              The results list will only include information about\n              the DB clusters for these engines.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A filter that specifies one or more DB clusters to describe.</p>\n         <p>Supported filters:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>clone-group-id</code> - Accepts clone group identifiers. \n\t\t\t  The results list only includes information about\n              the DB clusters associated with these clone groups.</p>\n            </li>\n            <li>\n               <p>\n                  <code>db-cluster-id</code> - Accepts DB cluster identifiers and DB \n              cluster Amazon Resource Names (ARNs). The results list only includes information about\n              the DB clusters identified by these ARNs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>domain</code> - Accepts Active Directory directory IDs. \n              The results list only includes information about\n              the DB clusters associated with these domains.</p>\n            </li>\n            <li>\n               <p>\n                  <code>engine</code> - Accepts engine names. \n              The results list only includes information about\n              the DB clusters for these engines.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "MaxRecords": {
@@ -9385,7 +9391,7 @@
                 "Filters": {
                     "target": "com.amazonaws.rds#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>This parameter isn't currently supported.</p>"
+                        "smithy.api#documentation": "<p>A filter that specifies one or more DB engine versions to describe.</p>\n         <p>Supported filters:</p>\n         <ul>\n            <li>\n              <p>\n                  <code>db-parameter-group-family</code> - Accepts parameter groups family names. \n                  The results list only includes information about\n                  the DB engine versions for these parameter group families.\n              </p>             \n            </li>\n            <li>\n              <p>\n                  <code>engine</code> - Accepts engine names. \n                  The results list only includes information about\n                  the DB engine versions for these engines.\n              </p>             \n            </li>\n            <li>\n              <p>\n                  <code>engine-mode</code> - Accepts DB engine modes. \n                  The results list only includes information about\n                  the DB engine versions for these engine modes. Valid \n                  DB engine modes are the following:\n              </p>\n              <ul>\n                  <li>\n                      <p>\n                        <code>global</code>\n                     </p>\n                  </li>\n                  <li>\n                      <p>\n                        <code>multimaster</code>\n                     </p>\n                  </li>\n                  <li>\n                      <p>\n                        <code>parallelquery</code>\n                     </p>\n                  </li>\n                  <li>\n                      <p>\n                        <code>provisioned</code>\n                     </p>\n                  </li>\n                  <li>\n                      <p>\n                        <code>serverless</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n              <p>\n                  <code>engine-version</code> - Accepts engine versions. \n                  The results list only includes information about\n                  the DB engine versions for these engine versions.\n              </p>\n            </li>\n            <li>\n              <p>\n                  <code>status</code> - Accepts engine version statuses. \n                  The results list only includes information about\n                  the DB engine versions for these statuses. Valid statuses \n                  are the following:\n              </p>\n              <ul>\n                  <li>\n                      <p>\n                        <code>available</code>\n                     </p>\n                  </li>\n                  <li>\n                      <p>\n                        <code>deprecated</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
                     }
                 },
                 "MaxRecords": {
@@ -9659,7 +9665,7 @@
                 "Filters": {
                     "target": "com.amazonaws.rds#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A filter that specifies one or more DB instances to describe.</p>\n         <p>Supported filters:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>db-cluster-id</code> - Accepts DB cluster identifiers and DB \n              cluster Amazon Resource Names (ARNs). The results list will only include information about \n              the DB instances associated with the DB clusters identified by these ARNs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>db-instance-id</code> - Accepts DB instance identifiers and DB \n              instance Amazon Resource Names (ARNs). The results list will only include information about\n              the DB instances identified by these ARNs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>dbi-resource-id</code> - Accepts DB instance resource identifiers. The results list will \n              only include information about the DB instances identified by these DB instance resource identifiers.</p>\n            </li>\n            <li>\n               <p>\n                  <code>domain</code> - Accepts Active Directory directory IDs. The results list will only \n              include information about the DB instances associated with these domains.</p>\n            </li>\n            <li>\n               <p>\n                  <code>engine</code> - Accepts engine names. The results list will only include information \n              about the DB instances for these engines.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A filter that specifies one or more DB instances to describe.</p>\n         <p>Supported filters:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>db-cluster-id</code> - Accepts DB cluster identifiers and DB \n              cluster Amazon Resource Names (ARNs). The results list only includes information about \n              the DB instances associated with the DB clusters identified by these ARNs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>db-instance-id</code> - Accepts DB instance identifiers and DB \n              instance Amazon Resource Names (ARNs). The results list only includes information about\n              the DB instances identified by these ARNs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>dbi-resource-id</code> - Accepts DB instance resource identifiers. The results list will \n              only include information about the DB instances identified by these DB instance resource identifiers.</p>\n            </li>\n            <li>\n               <p>\n                  <code>domain</code> - Accepts Active Directory directory IDs. The results list only includes \n              information about the DB instances associated with these domains.</p>\n            </li>\n            <li>\n               <p>\n                  <code>engine</code> - Accepts engine names. The results list only includes information \n              about the DB instances for these engines.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "MaxRecords": {
@@ -11283,7 +11289,7 @@
                 "Filters": {
                     "target": "com.amazonaws.rds#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A filter that specifies one or more resources to return pending maintenance actions for.</p>\n         <p>Supported filters:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>db-cluster-id</code> - Accepts DB cluster identifiers and DB \n              cluster Amazon Resource Names (ARNs). The results list will only include pending maintenance \n              actions for the DB clusters identified by these ARNs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>db-instance-id</code> - Accepts DB instance identifiers and DB \n            instance ARNs. The results list will only include pending maintenance \n            actions for the DB instances identified by these ARNs.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A filter that specifies one or more resources to return pending maintenance actions for.</p>\n         <p>Supported filters:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>db-cluster-id</code> - Accepts DB cluster identifiers and DB \n              cluster Amazon Resource Names (ARNs). The results list only includes pending maintenance \n              actions for the DB clusters identified by these ARNs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>db-instance-id</code> - Accepts DB instance identifiers and DB \n            instance ARNs. The results list only includes pending maintenance \n            actions for the DB instances identified by these ARNs.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Marker": {
@@ -13966,7 +13972,7 @@
                 "DBInstanceParameterGroupName": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the DB parameter group to apply to all instances of the DB cluster. </p>\n         <note>\n            <p>When you apply a parameter group using the <code>DBInstanceParameterGroupName</code> parameter, the DB\n                cluster isn't rebooted automatically. Also, parameter changes aren't\n                applied during the next maintenance window but instead are applied immediately.</p>\n         </note>  \n         <p>Default: The existing name setting</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>The DB parameter group must be in the same DB parameter group family as this DB cluster.</p>\n            </li>\n            <li>\n               <p>The <code>DBInstanceParameterGroupName</code> parameter is only valid in combination with \n              the <code>AllowMajorVersionUpgrade</code> parameter.</p>\n            </li>\n         </ul>\n         <p>Valid for: Aurora DB clusters only</p>"
+                        "smithy.api#documentation": "<p>The name of the DB parameter group to apply to all instances of the DB cluster. </p>\n         <note>\n            <p>When you apply a parameter group using the <code>DBInstanceParameterGroupName</code> parameter, the DB\n          cluster isn't rebooted automatically. Also, parameter changes are applied immediately rather than \n             during the next maintenance window.</p>\n         </note>  \n         <p>Default: The existing name setting</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>The DB parameter group must be in the same DB parameter group family as this DB cluster.</p>\n            </li>\n            <li>\n               <p>The <code>DBInstanceParameterGroupName</code> parameter is valid in combination with the\n              <code>AllowMajorVersionUpgrade</code> parameter for a major version upgrade only.</p>\n            </li>\n         </ul>\n         <p>Valid for: Aurora DB clusters only</p>"
                     }
                 },
                 "Domain": {
@@ -14287,7 +14293,7 @@
                 "DBSubnetGroupName": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new DB subnet group for the DB instance.\n          You can use this parameter to move your DB instance to a different VPC.\n          \n          If your DB instance isn't in a VPC, you can also use this parameter to move your DB instance into a VPC.\n          For more information, see \n          <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Non-VPC2VPC\">Working with a DB instance in a VPC</a> \n          in the <i>Amazon RDS User Guide</i>.\n      </p>\n         <p>Changing the subnet group causes an outage during the change. \n        The change is applied during the next maintenance window,\n        unless you enable <code>ApplyImmediately</code>.</p>\n         <p> This parameter doesn't apply to RDS Custom.</p>\n         <p>Constraints: If supplied, must match the name of an existing DBSubnetGroup.</p>\n         <p>Example: <code>mySubnetGroup</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The new DB subnet group for the DB instance.\n          You can use this parameter to move your DB instance to a different VPC.\n          \n          If your DB instance isn't in a VPC, you can also use this parameter to move your DB instance into a VPC.\n          For more information, see \n          <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Non-VPC2VPC\">Working with a DB instance in a VPC</a> \n          in the <i>Amazon RDS User Guide</i>.\n      </p>\n         <p>Changing the subnet group causes an outage during the change. \n        The change is applied during the next maintenance window,\n        unless you enable <code>ApplyImmediately</code>.</p>\n         <p> This parameter doesn't apply to RDS Custom.</p>\n         <p>Constraints: If supplied, must match the name of an existing DBSubnetGroup.</p>\n         <p>Example: <code>mydbsubnetgroup</code>\n         </p>"
                     }
                 },
                 "DBSecurityGroups": {
@@ -14966,7 +14972,7 @@
                 "DBSubnetGroupName": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name for the DB subnet group. This value is stored as a lowercase string.\n          You can't modify the default subnet group.\n      </p>\n         <p>Constraints: Must match the name of an existing DBSubnetGroup. Must not be default.</p>\n         <p>Example: <code>mySubnetgroup</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The name for the DB subnet group. This value is stored as a lowercase string.\n          You can't modify the default subnet group.\n      </p>\n         <p>Constraints: Must match the name of an existing DBSubnetGroup. Must not be default.</p>\n         <p>Example: <code>mydbsubnetgroup</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -17628,7 +17634,7 @@
                 "DBSubnetGroupName": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A DB subnet group to associate with the restored DB cluster.</p>\n        <p>Constraints: If supplied, must match the name of an existing DBSubnetGroup.\n        </p>\n        <p>Example: <code>mySubnetgroup</code>\n        </p>"
+                        "smithy.api#documentation": "<p>A DB subnet group to associate with the restored DB cluster.</p>\n        <p>Constraints: If supplied, must match the name of an existing DBSubnetGroup.</p>\n        <p>Example: <code>mydbsubnetgroup</code>\n         </p>"
                     }
                 },
                 "Engine": {
@@ -17893,7 +17899,7 @@
                 "DBSubnetGroupName": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the DB subnet group to use for the new DB cluster.</p>    \n         <p>Constraints: If supplied, must match the name of an existing DB subnet group.</p>\n         <p>Example: <code>mySubnetgroup</code>\n         </p>\n         <p>Valid for: Aurora DB clusters and Multi-AZ DB clusters</p>"
+                        "smithy.api#documentation": "<p>The name of the DB subnet group to use for the new DB cluster.</p>    \n         <p>Constraints: If supplied, must match the name of an existing DB subnet group.</p>\n         <p>Example: <code>mydbsubnetgroup</code>\n         </p>\n         <p>Valid for: Aurora DB clusters and Multi-AZ DB clusters</p>"
                     }
                 },
                 "DatabaseName": {
@@ -17989,7 +17995,7 @@
                 "DBClusterInstanceClass": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The compute and memory capacity of the each DB instance in the Multi-AZ DB cluster, for example db.m6g.xlarge.\n            Not all DB instance classes are available in all Amazon Web Services Regions, or for all database engines.</p>      \n        <p>For the full list of DB instance classes, and availability for your engine, see\n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html\">DB Instance Class</a> in the <i>Amazon RDS User Guide.</i>\n        </p>\n        <p>Valid for: Aurora DB clusters and Multi-AZ DB clusters</p>"
+                        "smithy.api#documentation": "<p>The compute and memory capacity of the each DB instance in the Multi-AZ DB cluster, for example db.m6g.xlarge.\n            Not all DB instance classes are available in all Amazon Web Services Regions, or for all database engines.</p>      \n        <p>For the full list of DB instance classes, and availability for your engine, see\n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html\">DB Instance Class</a> in the <i>Amazon RDS User Guide.</i>\n        </p>\n        <p>Valid for: Multi-AZ DB clusters only</p>"
                     }
                 },
                 "StorageType": {
@@ -18135,7 +18141,7 @@
                 "DBSubnetGroupName": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The DB subnet group name to use for the new DB cluster.</p>   \n         <p>Constraints: If supplied, must match the name of an existing DBSubnetGroup.</p>\n         <p>Example: <code>mySubnetgroup</code>\n         </p>\n         <p>Valid for: Aurora DB clusters and Multi-AZ DB clusters</p>"
+                        "smithy.api#documentation": "<p>The DB subnet group name to use for the new DB cluster.</p>   \n         <p>Constraints: If supplied, must match the name of an existing DBSubnetGroup.</p>\n         <p>Example: <code>mydbsubnetgroup</code>\n         </p>\n         <p>Valid for: Aurora DB clusters and Multi-AZ DB clusters</p>"
                     }
                 },
                 "OptionGroupName": {
@@ -18368,7 +18374,7 @@
                 "DBSubnetGroupName": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The DB subnet group name to use for the new instance.</p>\n         <p>Constraints: If supplied, must match the name of an existing DBSubnetGroup.</p>\n         <p>Example: <code>mySubnetgroup</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The DB subnet group name to use for the new instance.</p>\n         <p>Constraints: If supplied, must match the name of an existing DBSubnetGroup.</p>\n         <p>Example: <code>mydbsubnetgroup</code>\n         </p>"
                     }
                 },
                 "MultiAZ": {
@@ -18455,7 +18461,7 @@
                 "CopyTagsToSnapshot": {
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that indicates whether to copy all tags from the restored DB instance to snapshots of the DB instance. By default, tags are not copied.</p>"
+                        "smithy.api#documentation": "<p>A value that indicates whether to copy all tags from the restored DB instance to snapshots of the DB instance.</p>\n         <p>In most cases, tags aren't copied by default. However, when you restore a DB instance from a DB snapshot, RDS checks whether you \n          specify new tags. If yes, the new tags are added to the restored DB instance. If there are no new tags, RDS looks for the tags from\n          the source DB instance for the DB snapshot, and then adds those tags to the restored DB instance.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html#USER_Tagging.CopyTags\">\n          Copying tags to DB instance snapshots</a> in the <i>Amazon RDS User Guide</i>.</p>"
                     }
                 },
                 "DomainIAMRoleName": {
@@ -18509,7 +18515,7 @@
                 "CustomIamInstanceProfile": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The instance profile associated with the underlying Amazon EC2 instance of an \n            RDS Custom DB instance. The instance profile must meet the following requirements:</p>\n        <ul>\n            <li>\n               <p>The profile must exist in your account.</p>\n            </li>\n            <li>\n               <p>The profile must have an IAM role that Amazon EC2 has permissions to assume.</p>\n            </li>\n            <li>\n               <p>The instance profile name and the associated IAM role name must start with the prefix <code>AWSRDSCustom</code>.</p>\n            </li>\n         </ul>\n        <p>For the list of permissions required for the IAM role, see \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-setup-orcl.html#custom-setup-orcl.iam-vpc\">\n                Configure IAM and your VPC</a> in the <i>Amazon Relational Database Service\n                    User Guide</i>.</p>\n        <p>This setting is required for RDS Custom.</p>"
+                        "smithy.api#documentation": "<p>The instance profile associated with the underlying Amazon EC2 instance of an \n            RDS Custom DB instance. The instance profile must meet the following requirements:</p>\n        <ul>\n            <li>\n               <p>The profile must exist in your account.</p>\n            </li>\n            <li>\n               <p>The profile must have an IAM role that Amazon EC2 has permissions to assume.</p>\n            </li>\n            <li>\n               <p>The instance profile name and the associated IAM role name must start with the prefix <code>AWSRDSCustom</code>.</p>\n            </li>\n         </ul>\n        <p>For the list of permissions required for the IAM role, see \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-setup-orcl.html#custom-setup-orcl.iam-vpc\">\n                Configure IAM and your VPC</a> in the <i>Amazon RDS User Guide</i>.</p>\n        <p>This setting is required for RDS Custom.</p>"
                     }
                 },
                 "BackupTarget": {
@@ -18665,7 +18671,7 @@
                 "DBSubnetGroupName": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A DB subnet group to associate with this DB instance.</p>"
+                        "smithy.api#documentation": "<p>A DB subnet group to associate with this DB instance.</p>\n        <p>Constraints: If supplied, must match the name of an existing DBSubnetGroup.</p>\n        <p>Example: <code>mydbsubnetgroup</code>\n         </p>"
                     }
                 },
                 "PreferredMaintenanceWindow": {
@@ -19009,7 +19015,7 @@
                 "DBSubnetGroupName": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The DB subnet group name to use for the new instance.</p>\n         <p>Constraints: If supplied, must match the name of an existing DBSubnetGroup.</p>\n         <p>Example: <code>mySubnetgroup</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The DB subnet group name to use for the new instance.</p>\n         <p>Constraints: If supplied, must match the name of an existing DBSubnetGroup.</p>\n         <p>Example: <code>mydbsubnetgroup</code>\n         </p>"
                     }
                 },
                 "MultiAZ": {
@@ -19292,7 +19298,7 @@
                     "code": "SNSInvalidTopic",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p>SNS has responded that there is a problem with the SND topic specified.</p>",
+                "smithy.api#documentation": "<p>SNS has responded that there is a problem with the SNS topic specified.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -20594,6 +20600,12 @@
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>A value that indicates whether you can use Aurora global databases with the target engine version.</p>"
+                    }
+                },
+                "SupportsBabelfish": {
+                    "target": "com.amazonaws.rds#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that indicates whether you can use Babelfish for Aurora PostgreSQL with the target engine version.</p>"
                     }
                 }
             },

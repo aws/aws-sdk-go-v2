@@ -662,7 +662,7 @@ type ImmunityTimeProperty struct {
 	noSmithyDocumentSerde
 }
 
-// Contains one or more IP addresses or blocks of IP addresses specified in
+// Contains zero or more IP addresses or blocks of IP addresses specified in
 // Classless Inter-Domain Routing (CIDR) notation. WAF supports all IPv4 and IPv6
 // CIDR ranges except for /0. For information about CIDR notation, see the
 // Wikipedia entry Classless Inter-Domain Routing
@@ -676,20 +676,21 @@ type IPSet struct {
 	// This member is required.
 	ARN *string
 
-	// Contains an array of strings that specify one or more IP addresses or blocks of
-	// IP addresses in Classless Inter-Domain Routing (CIDR) notation. WAF supports all
-	// IPv4 and IPv6 CIDR ranges except for /0. Examples:
+	// Contains an array of strings that specifies zero or more IP addresses or blocks
+	// of IP addresses in Classless Inter-Domain Routing (CIDR) notation. WAF supports
+	// all IPv4 and IPv6 CIDR ranges except for /0. Example address strings:
 	//
-	// * To configure WAF to allow,
-	// block, or count requests that originated from the IP address 192.0.2.44, specify
-	// 192.0.2.44/32.
+	// * To
+	// configure WAF to allow, block, or count requests that originated from the IP
+	// address 192.0.2.44, specify 192.0.2.44/32.
 	//
-	// * To configure WAF to allow, block, or count requests that
-	// originated from IP addresses from 192.0.2.0 to 192.0.2.255, specify
-	// 192.0.2.0/24.
+	// * To configure WAF to allow, block,
+	// or count requests that originated from IP addresses from 192.0.2.0 to
+	// 192.0.2.255, specify 192.0.2.0/24.
 	//
-	// * To configure WAF to allow, block, or count requests that
-	// originated from the IP address 1111:0000:0000:0000:0000:0000:0000:0111, specify
+	// * To configure WAF to allow, block, or count
+	// requests that originated from the IP address
+	// 1111:0000:0000:0000:0000:0000:0000:0111, specify
 	// 1111:0000:0000:0000:0000:0000:0000:0111/128.
 	//
 	// * To configure WAF to allow,
@@ -700,7 +701,19 @@ type IPSet struct {
 	//
 	// For more information about CIDR
 	// notation, see the Wikipedia entry Classless Inter-Domain Routing
-	// (https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing).
+	// (https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing). Example JSON
+	// Addresses specifications:
+	//
+	// * Empty array: "Addresses": []
+	//
+	// * Array with one
+	// address: "Addresses": ["192.0.2.44/32"]
+	//
+	// * Array with three addresses:
+	// "Addresses": ["192.0.2.44/32", "192.0.2.0/24", "192.0.0.0/16"]
+	//
+	// * INVALID
+	// specification: "Addresses": [""] INVALID
 	//
 	// This member is required.
 	Addresses []string
@@ -998,14 +1011,34 @@ type LabelSummary struct {
 // Defines an association between logging destinations and a web ACL resource, for
 // logging from WAF. As part of the association, you can specify parts of the
 // standard logging fields to keep out of the logs and you can specify filters so
-// that you log only a subset of the logging records. For information about
-// configuring web ACL logging destinations, see Logging web ACL traffic
-// information (https://docs.aws.amazon.com/waf/latest/developerguide/logging.html)
-// in the WAF Developer Guide.
+// that you log only a subset of the logging records. You can define one logging
+// destination per web ACL. You can access information about the traffic that WAF
+// inspects using the following steps:
+//
+// * Create your logging destination. You can
+// use an Amazon CloudWatch Logs log group, an Amazon Simple Storage Service
+// (Amazon S3) bucket, or an Amazon Kinesis Data Firehose. For information about
+// configuring logging destinations and the permissions that are required for each,
+// see Logging web ACL traffic information
+// (https://docs.aws.amazon.com/waf/latest/developerguide/logging.html) in the WAF
+// Developer Guide.
+//
+// * Associate your logging destination to your web ACL using a
+// PutLoggingConfiguration request.
+//
+// When you successfully enable logging using a
+// PutLoggingConfiguration request, WAF creates an additional role or policy that
+// is required to write logs to the logging destination. For an Amazon CloudWatch
+// Logs log group, WAF creates a resource policy on the log group. For an Amazon S3
+// bucket, WAF creates a bucket policy. For an Amazon Kinesis Data Firehose, WAF
+// creates a service-linked role. For additional information about web ACL logging,
+// see Logging web ACL traffic information
+// (https://docs.aws.amazon.com/waf/latest/developerguide/logging.html) in the WAF
+// Developer Guide.
 type LoggingConfiguration struct {
 
-	// The Amazon Resource Names (ARNs) of the logging destinations that you want to
-	// associate with the web ACL.
+	// The logging destination configuration that you want to associate with the web
+	// ACL. You can associate one logging destination to a web ACL.
 	//
 	// This member is required.
 	LogDestinationConfigs []string
@@ -1055,6 +1088,28 @@ type LoggingFilter struct {
 	noSmithyDocumentSerde
 }
 
+// Additional information that's used by a managed rule group. Most managed rule
+// groups don't require this. Use this for the account takeover prevention managed
+// rule group AWSManagedRulesATPRuleSet, to provide information about the sign-in
+// page of your application.
+type ManagedRuleGroupConfig struct {
+
+	// The path of the login endpoint for your application. For example, for the URL
+	// https://example.com/web/login, you would provide the path /web/login.
+	LoginPath *string
+
+	// Details about your login page password field.
+	PasswordField *PasswordField
+
+	// The payload type for your login endpoint, either JSON or form encoded.
+	PayloadType PayloadType
+
+	// Details about your login page username field.
+	UsernameField *UsernameField
+
+	noSmithyDocumentSerde
+}
+
 // A rule statement used to run the rules that are defined in a managed rule group.
 // To use this, provide the vendor name and the name of the rule group in this
 // statement. You can retrieve the required names by calling
@@ -1080,6 +1135,12 @@ type ManagedRuleGroupStatement struct {
 	// were Count. This is a useful option for testing the rules in a rule group
 	// without modifying how they handle your web traffic.
 	ExcludedRules []ExcludedRule
+
+	// Additional information that's used by a managed rule group. Most managed rule
+	// groups don't require this. Use this for the account takeover prevention managed
+	// rule group AWSManagedRulesATPRuleSet, to provide information about the sign-in
+	// page of your application.
+	ManagedRuleGroupConfigs []ManagedRuleGroupConfig
 
 	// An optional nested statement that narrows the scope of the web requests that are
 	// evaluated by the managed rule group. Requests are only evaluated by the rule
@@ -1290,6 +1351,30 @@ type Method struct {
 	noSmithyDocumentSerde
 }
 
+// Information for a release of the mobile SDK, including release notes and tags.
+// The mobile SDK is not generally available. Customers who have access to the
+// mobile SDK can use it to establish and manage Security Token Service (STS)
+// security tokens for use in HTTP(S) requests from a mobile device to WAF. For
+// more information, see WAF client application integration
+// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html)
+// in the WAF Developer Guide.
+type MobileSdkRelease struct {
+
+	// Notes describing the release.
+	ReleaseNotes *string
+
+	// The release version.
+	ReleaseVersion *string
+
+	// Tags that are associated with the release.
+	Tags []Tag
+
+	// The timestamp of the release.
+	Timestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Specifies that WAF should do nothing. This is used for the OverrideAction
 // setting on a Rule when the rule uses a rule group reference statement. This is
 // used in the context of other settings, for example to specify values for
@@ -1343,6 +1428,17 @@ type OverrideAction struct {
 	// Don't override the rule group evaluation result. This is the most common
 	// setting.
 	None *NoneAction
+
+	noSmithyDocumentSerde
+}
+
+// Details about your login page password field, used in a ManagedRuleGroupConfig.
+type PasswordField struct {
+
+	// The name of the password field. For example /form/password.
+	//
+	// This member is required.
+	Identifier *string
 
 	noSmithyDocumentSerde
 }
@@ -1563,6 +1659,18 @@ type RegexPatternSetSummary struct {
 	// The name of the data type instance. You cannot change the name after you create
 	// the instance.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// High level information for an SDK release.
+type ReleaseSummary struct {
+
+	// The release version.
+	ReleaseVersion *string
+
+	// The timestamp of the release.
+	Timestamp *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -2326,6 +2434,17 @@ type TimeWindow struct {
 // used only to indicate the web request component for WAF to inspect, in the
 // FieldToMatch specification. JSON specification: "UriPath": {}
 type UriPath struct {
+	noSmithyDocumentSerde
+}
+
+// Details about your login page username field, used in a ManagedRuleGroupConfig.
+type UsernameField struct {
+
+	// The name of the username field. For example /form/username.
+	//
+	// This member is required.
+	Identifier *string
+
 	noSmithyDocumentSerde
 }
 
