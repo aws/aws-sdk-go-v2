@@ -6,7 +6,7 @@ require (
 	github.com/aws/aws-sdk-go-v2 v1.13.0
 	github.com/aws/aws-sdk-go-v2/internal/configsources v1.1.4
 	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.2.0
-	github.com/aws/smithy-go v1.10.1-0.20220223172659-66863935410f
+	github.com/aws/smithy-go v1.11.0
 	github.com/google/go-cmp v0.5.7
 )
 
