@@ -1,8 +1,0 @@
-{
-    "id": "b0f90f9a-379a-4810-aa1d-91602c4b0ade",
-    "type": "feature",
-    "description": "Adds new interface aws.RetryerV2, replacing aws.Retryer and deprecating the GetInitialToken method in favor of GetAttemptToken so Context can be provided. The SDK will use aws.RetryerV2 internally. Wrapping aws.Retryers as aws.RetryerV2 automatically.",
-    "modules": [
-        "."
-    ]
-}

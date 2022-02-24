@@ -1,8 +1,0 @@
-{
-    "id": "27f9f69c-b24c-4739-b308-3970df0c3fe7",
-    "type": "bugfix",
-    "description": "Fixed an issue that resulted in the wrong service endpoints being constructed.",
-    "modules": [
-        "service/forecastquery"
-    ]
-}

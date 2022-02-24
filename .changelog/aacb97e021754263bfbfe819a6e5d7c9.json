@@ -1,8 +1,0 @@
-{
-    "id": "aacb97e0-2175-4263-bfbf-e819a6e5d7c9",
-    "type": "feature",
-    "description": "Adds support for the `ca_bundle` parameter in shared config and credentials files. The usage of the file is the same as environment variable, `AWS_CA_BUNDLE`, but sourced from shared config. Fixes [#1589](https://github.com/aws/aws-sdk-go-v2/issues/1589)",
-    "modules": [
-        "config"
-    ]
-}
