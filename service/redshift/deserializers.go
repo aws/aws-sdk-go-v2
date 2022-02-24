@@ -23528,6 +23528,19 @@ func awsAwsquery_deserializeDocumentDataShareAssociation(v **types.DataShareAsso
 				sv.ConsumerIdentifier = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("ConsumerRegion", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ConsumerRegion = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("CreatedDate", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

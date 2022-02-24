@@ -33,9 +33,9 @@ type DeleteUserAttributesInput struct {
 	// This member is required.
 	AccessToken *string
 
-	// An array of strings representing the user attribute names you wish to delete.
-	// For custom attributes, you must prepend the custom: prefix to the attribute
-	// name.
+	// An array of strings representing the user attribute names you want to delete.
+	// For custom attributes, you must prependattach the custom: prefix to the front of
+	// the attribute name.
 	//
 	// This member is required.
 	UserAttributeNames []string

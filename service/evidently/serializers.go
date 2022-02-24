@@ -1355,6 +1355,10 @@ func awsRestjson1_serializeOpHttpBindingsListExperimentsInput(v *ListExperiments
 		}
 	}
 
+	if len(v.Status) > 0 {
+		encoder.SetQuery("status").String(string(v.Status))
+	}
+
 	return nil
 }
 
@@ -1485,6 +1489,10 @@ func awsRestjson1_serializeOpHttpBindingsListLaunchesInput(v *ListLaunchesInput,
 		if err := encoder.SetURI("project").String(*v.Project); err != nil {
 			return err
 		}
+	}
+
+	if len(v.Status) > 0 {
+		encoder.SetQuery("status").String(string(v.Status))
 	}
 
 	return nil

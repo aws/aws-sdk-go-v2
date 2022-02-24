@@ -13,7 +13,7 @@ import (
 
 // Updates the Secure Sockets Layer (SSL) certificate for the custom domain for
 // your user pool. You can use this operation to provide the Amazon Resource Name
-// (ARN) of a new certificate to Amazon Cognito. You cannot use it to change the
+// (ARN) of a new certificate to Amazon Cognito. You can't use it to change the
 // domain for a user pool. A custom domain is used to host the Amazon Cognito
 // hosted UI, which provides sign-up and sign-in pages for your application. When
 // you set up a custom domain, you provide a certificate that you manage with
@@ -25,10 +25,10 @@ import (
 // replace your existing certificate with a new one, ACM gives the new certificate
 // a new ARN. To apply the new certificate to your custom domain, you must provide
 // this ARN to Amazon Cognito. When you add your new certificate in ACM, you must
-// choose US East (N. Virginia) as the Region. After you submit your request,
-// Amazon Cognito requires up to 1 hour to distribute your new certificate to your
-// custom domain. For more information about adding a custom domain to your user
-// pool, see Using Your Own Domain for the Hosted UI
+// choose US East (N. Virginia) as the Amazon Web Services Region. After you submit
+// your request, Amazon Cognito requires up to 1 hour to distribute your new
+// certificate to your custom domain. For more information about adding a custom
+// domain to your user pool, see Using Your Own Domain for the Hosted UI
 // (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-add-custom-domain.html).
 func (c *Client) UpdateUserPoolDomain(ctx context.Context, params *UpdateUserPoolDomainInput, optFns ...func(*Options)) (*UpdateUserPoolDomainOutput, error) {
 	if params == nil {
@@ -56,15 +56,15 @@ type UpdateUserPoolDomainInput struct {
 	CustomDomainConfig *types.CustomDomainConfigType
 
 	// The domain name for the custom domain that hosts the sign-up and sign-in pages
-	// for your application. For example: auth.example.com. This string can include
-	// only lowercase letters, numbers, and hyphens. Do not use a hyphen for the first
-	// or last character. Use periods to separate subdomain names.
+	// for your application. One example might be auth.example.com. This string can
+	// include only lowercase letters, numbers, and hyphens. Don't use a hyphen for the
+	// first or last character. Use periods to separate subdomain names.
 	//
 	// This member is required.
 	Domain *string
 
-	// The ID of the user pool that is associated with the custom domain that you are
-	// updating the certificate for.
+	// The ID of the user pool that is associated with the custom domain whose
+	// certificate you're updating.
 	//
 	// This member is required.
 	UserPoolId *string

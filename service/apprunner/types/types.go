@@ -24,12 +24,13 @@ type AuthenticationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Describes an App Runner automatic scaling configuration resource. Multiple
-// revisions of a configuration have the same AutoScalingConfigurationName and
-// different AutoScalingConfigurationRevision values. A higher MinSize increases
-// the spread of your App Runner service over more Availability Zones in the Amazon
-// Web Services Region. The tradeoff is a higher minimal cost. A lower MaxSize
-// controls your cost. The tradeoff is lower responsiveness during peak demand.
+// Describes an App Runner automatic scaling configuration resource. A higher
+// MinSize increases the spread of your App Runner service over more Availability
+// Zones in the Amazon Web Services Region. The tradeoff is a higher minimal cost.
+// A lower MaxSize controls your cost. The tradeoff is lower responsiveness during
+// peak demand. Multiple revisions of a configuration might have the same
+// AutoScalingConfigurationName and different AutoScalingConfigurationRevision
+// values.
 type AutoScalingConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of this auto scaling configuration.
@@ -275,6 +276,22 @@ type CustomDomain struct {
 	noSmithyDocumentSerde
 }
 
+// Describes configuration settings related to outbound network traffic of an App
+// Runner service.
+type EgressConfiguration struct {
+
+	// The type of egress configuration. Set to DEFAULT for access to resources hosted
+	// on public networks. Set to VPC to associate your service to a custom VPC
+	// specified by VpcConnectorArn.
+	EgressType EgressType
+
+	// The Amazon Resource Name (ARN) of the App Runner VPC connector that you want to
+	// associate with your App Runner service. Only valid when EgressType = VPC.
+	VpcConnectorArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes a custom encryption key that App Runner uses to encrypt copies of the
 // source repository and service logs.
 type EncryptionConfiguration struct {
@@ -382,6 +399,16 @@ type InstanceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Describes configuration settings related to network traffic of an App Runner
+// service. Consists of embedded objects for each configurable network feature.
+type NetworkConfiguration struct {
+
+	// Network configuration settings for outbound message traffic.
+	EgressConfiguration *EgressConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // Provides summary information for an operation that occurred on an App Runner
 // service.
 type OperationSummary struct {
@@ -444,6 +471,12 @@ type Service struct {
 	// This member is required.
 	InstanceConfiguration *InstanceConfiguration
 
+	// Configuration settings related to network traffic of the web application that
+	// this service runs.
+	//
+	// This member is required.
+	NetworkConfiguration *NetworkConfiguration
+
 	// The Amazon Resource Name (ARN) of this service.
 	//
 	// This member is required.
@@ -500,7 +533,7 @@ type Service struct {
 
 	// The encryption key that App Runner uses to encrypt the service logs and the copy
 	// of the source repository that App Runner maintains for the service. It can be
-	// either a customer-provided encryption key or an Amazon Web Services managed CMK.
+	// either a customer-provided encryption key or an Amazon Web Services managed key.
 	EncryptionConfiguration *EncryptionConfiguration
 
 	// The settings for the health check that App Runner performs to monitor the health
@@ -619,6 +652,48 @@ type Tag struct {
 
 	// The value of the tag.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes an App Runner VPC connector resource. A VPC connector describes the
+// Amazon Virtual Private Cloud (Amazon VPC) that an App Runner service is
+// associated with, and the subnets and security group that are used. Multiple
+// revisions of a connector might have the same Name and different Revision values.
+// At this time, App Runner supports only one revision per name.
+type VpcConnector struct {
+
+	// The time when the VPC connector was created. It's in Unix time stamp format.
+	CreatedAt *time.Time
+
+	// The time when the VPC connector was deleted. It's in Unix time stamp format.
+	DeletedAt *time.Time
+
+	// A list of IDs of security groups that App Runner uses for access to Amazon Web
+	// Services resources under the specified subnets. If not specified, App Runner
+	// uses the default security group of the Amazon VPC. The default security group
+	// allows all outbound traffic.
+	SecurityGroups []string
+
+	// The current state of the VPC connector. If the status of a connector revision is
+	// INACTIVE, it was deleted and can't be used. Inactive connector revisions are
+	// permanently removed some time after they are deleted.
+	Status VpcConnectorStatus
+
+	// A list of IDs of subnets that App Runner uses for your service. All IDs are of
+	// subnets of a single Amazon VPC.
+	Subnets []string
+
+	// The Amazon Resource Name (ARN) of this VPC connector.
+	VpcConnectorArn *string
+
+	// The customer-provided VPC connector name.
+	VpcConnectorName *string
+
+	// The revision of this VPC connector. It's unique among all the active connectors
+	// ("Status": "ACTIVE") that share the same Name. At this time, App Runner supports
+	// only one revision per name.
+	VpcConnectorRevision int32
 
 	noSmithyDocumentSerde
 }

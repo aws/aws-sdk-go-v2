@@ -14,9 +14,10 @@ import (
 
 // This operation is used with the GameLift FleetIQ solution and game server
 // groups. Retrieves information on all game servers groups that exist in the
-// current AWS account for the selected Region. Use the pagination parameters to
-// retrieve results in a set of sequential segments. Learn more GameLift FleetIQ
-// Guide (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
+// current Amazon Web Services account for the selected Region. Use the pagination
+// parameters to retrieve results in a set of sequential segments. Learn more
+// GameLift FleetIQ Guide
+// (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
 // Related actions CreateGameServerGroup | ListGameServerGroups |
 // DescribeGameServerGroup | UpdateGameServerGroup | DeleteGameServerGroup |
 // ResumeGameServerGroup | SuspendGameServerGroup | DescribeGameServerInstances |

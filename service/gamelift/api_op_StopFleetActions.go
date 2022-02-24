@@ -68,7 +68,7 @@ type StopFleetActionsInput struct {
 	FleetId *string
 
 	// The fleet location to stop fleet actions for. Specify a location in the form of
-	// an AWS Region code, such as us-west-2.
+	// an Amazon Web Services Region code, such as us-west-2.
 	Location *string
 
 	noSmithyDocumentSerde

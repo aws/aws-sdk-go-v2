@@ -15,17 +15,17 @@ import (
 // makes it available for use in CloudFormation templates in your Amazon Web
 // Services account, and includes:
 //
-// * Validating the extension schema
+// * Validating the extension schema.
 //
 // *
-// Determining which handlers, if any, have been specified for the extension
+// Determining which handlers, if any, have been specified for the extension.
 //
 // *
-// Making the extension available for use in your account
+// Making the extension available for use in your account.
 //
 // For more information on
-// how to develop extensions and ready them for registeration, see Creating
-// Resource Providers
+// how to develop extensions and ready them for registration, see Creating Resource
+// Providers
 // (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-types.html)
 // in the CloudFormation CLI User Guide. You can have a maximum of 50 resource
 // extension versions registered at a time. This maximum is per account and per
@@ -54,13 +54,13 @@ func (c *Client) RegisterType(ctx context.Context, params *RegisterTypeInput, op
 
 type RegisterTypeInput struct {
 
-	// A url to the S3 bucket containing the extension project package that contains
-	// the neccessary files for the extension you want to register. For information on
+	// A URL to the S3 bucket containing the extension project package that contains
+	// the necessary files for the extension you want to register. For information on
 	// generating a schema handler package for the extension you want to register, see
 	// submit
 	// (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-cli-submit.html)
 	// in the CloudFormation CLI User Guide. The user registering the extension must be
-	// able to access the package in the S3 bucket. That is, the user needs to have
+	// able to access the package in the S3 bucket. That's, the user needs to have
 	// GetObject (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
 	// permissions for the schema handler package. For more information, see Actions,
 	// Resources, and Condition Keys for Amazon S3
@@ -80,7 +80,7 @@ type RegisterTypeInput struct {
 	// company_or_organization::service::type::MODULE.
 	//
 	// The following organization
-	// namespaces are reserved and cannot be used in your extension names:
+	// namespaces are reserved and can't be used in your extension names:
 	//
 	// * Alexa
 	//
@@ -100,7 +100,7 @@ type RegisterTypeInput struct {
 
 	// A unique identifier that acts as an idempotency key for this registration
 	// request. Specifying a client request token prevents CloudFormation from
-	// generating more than one version of an extension from the same registeration
+	// generating more than one version of an extension from the same registration
 	// request, even if the request is submitted multiple times.
 	ClientRequestToken *string
 

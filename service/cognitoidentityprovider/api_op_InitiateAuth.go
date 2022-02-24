@@ -11,20 +11,20 @@ import (
 )
 
 // Initiates the authentication flow. This action might generate an SMS text
-// message. Starting June 1, 2021, U.S. telecom carriers require that you register
-// an origination phone number before you can send SMS messages to U.S. phone
-// numbers. If you use SMS text messages in Amazon Cognito, you must register a
-// phone number with Amazon Pinpoint
-// (https://console.aws.amazon.com/pinpoint/home/). Cognito will use the the
-// registered number automatically. Otherwise, Cognito users that must receive SMS
-// messages might be unable to sign up, activate their accounts, or sign in. If you
-// have never used SMS text messages with Amazon Cognito or any other Amazon Web
-// Service, Amazon SNS might place your account in SMS sandbox. In sandbox mode
-// (https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html) , you’ll have
-// limitations, such as sending messages to only verified phone numbers. After
+// message. Starting June 1, 2021, US telecom carriers require you to register an
+// origination phone number before you can send SMS messages to U.S. phone numbers.
+// If you use SMS text messages in Amazon Cognito, you must register a phone number
+// with Amazon Pinpoint (https://console.aws.amazon.com/pinpoint/home/). Amazon
+// Cognito will use the registered number automatically. Otherwise, Amazon Cognito
+// users that must receive SMS messages might be unable to sign up, activate their
+// accounts, or sign in. If you have never used SMS text messages with Amazon
+// Cognito or any other Amazon Web Service, Amazon Simple Notification Service
+// might place your account in SMS sandbox. In sandbox mode
+// (https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html) , you will have
+// limitations, such as sending messages only to verified phone numbers. After
 // testing in the sandbox environment, you can move out of the SMS sandbox and into
-// production. For more information, see  SMS message settings for Cognito User
-// Pools
+// production. For more information, see  SMS message settings for Amazon Cognito
+// User Pools
 // (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html)
 // in the Amazon Cognito Developer Guide.
 func (c *Client) InitiateAuth(ctx context.Context, params *InitiateAuthInput, optFns ...func(*Options)) (*InitiateAuthOutput, error) {
@@ -45,42 +45,37 @@ func (c *Client) InitiateAuth(ctx context.Context, params *InitiateAuthInput, op
 // Initiates the authentication request.
 type InitiateAuthInput struct {
 
-	// The authentication flow for this call to execute. The API action will depend on
-	// this value. For example:
+	// The authentication flow for this call to run. The API action will depend on this
+	// value. For example:
 	//
-	// * REFRESH_TOKEN_AUTH will take in a valid refresh
-	// token and return new tokens.
+	// * REFRESH_TOKEN_AUTH takes in a valid refresh token and
+	// returns new tokens.
 	//
-	// * USER_SRP_AUTH will take in USERNAME and SRP_A
-	// and return the SRP variables to be used for next challenge execution.
+	// * USER_SRP_AUTH takes in USERNAME and SRP_A and returns the
+	// SRP variables to be used for next challenge execution.
 	//
-	// *
-	// USER_PASSWORD_AUTH will take in USERNAME and PASSWORD and return the next
-	// challenge or tokens.
+	// * USER_PASSWORD_AUTH
+	// takes in USERNAME and PASSWORD and returns the next challenge or tokens.
 	//
-	// Valid values include:
+	// Valid
+	// values include:
 	//
-	// * USER_SRP_AUTH: Authentication
-	// flow for the Secure Remote Password (SRP) protocol.
+	// * USER_SRP_AUTH: Authentication flow for the Secure Remote
+	// Password (SRP) protocol.
 	//
-	// *
-	// REFRESH_TOKEN_AUTH/REFRESH_TOKEN: Authentication flow for refreshing the access
-	// token and ID token by supplying a valid refresh token.
+	// * REFRESH_TOKEN_AUTH/REFRESH_TOKEN: Authentication
+	// flow for refreshing the access token and ID token by supplying a valid refresh
+	// token.
 	//
-	// * CUSTOM_AUTH: Custom
-	// authentication flow.
+	// * CUSTOM_AUTH: Custom authentication flow.
 	//
-	// * USER_PASSWORD_AUTH: Non-SRP authentication flow;
-	// USERNAME and PASSWORD are passed directly. If a user migration Lambda trigger is
-	// set, this flow will invoke the user migration Lambda if the USERNAME is not
-	// found in the user pool.
+	// * USER_PASSWORD_AUTH:
+	// Non-SRP authentication flow; USERNAME and PASSWORD are passed directly. If a
+	// user migration Lambda trigger is set, this flow will invoke the user migration
+	// Lambda if it doesn't find the USERNAME in the user pool.
 	//
-	// * ADMIN_USER_PASSWORD_AUTH: Admin-based user password
-	// authentication. This replaces the ADMIN_NO_SRP_AUTH authentication flow. In this
-	// flow, Cognito receives the password in the request instead of using the SRP
-	// process to verify passwords.
-	//
-	// ADMIN_NO_SRP_AUTH is not a valid value.
+	// ADMIN_NO_SRP_AUTH
+	// isn't a valid value.
 	//
 	// This member is required.
 	AuthFlow types.AuthFlowType
@@ -95,7 +90,7 @@ type InitiateAuthInput struct {
 	AnalyticsMetadata *types.AnalyticsMetadataType
 
 	// The authentication parameters. These are inputs corresponding to the AuthFlow
-	// that you are invoking. The required values depend on the value of AuthFlow:
+	// that you're invoking. The required values depend on the value of AuthFlow:
 	//
 	// *
 	// For USER_SRP_AUTH: USERNAME (required), SRP_A (required), SECRET_HASH (required
@@ -132,7 +127,7 @@ type InitiateAuthInput struct {
 	// code in Lambda, you can process the validationData value to enhance your
 	// workflow for your specific needs. When you use the InitiateAuth API action,
 	// Amazon Cognito also invokes the functions for the following triggers, but it
-	// does not provide the ClientMetadata value as input:
+	// doesn't provide the ClientMetadata value as input:
 	//
 	// * Post authentication
 	//
@@ -151,20 +146,19 @@ type InitiateAuthInput struct {
 	// For more information, see Customizing User
 	// Pool Workflows with Lambda Triggers
 	// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html)
-	// in the Amazon Cognito Developer Guide. Take the following limitations into
-	// consideration when you use the ClientMetadata parameter:
+	// in the Amazon Cognito Developer Guide. When you use the ClientMetadata
+	// parameter, remember that Amazon Cognito won't do the following:
 	//
-	// * Amazon Cognito does
-	// not store the ClientMetadata value. This data is available only to Lambda
-	// triggers that are assigned to a user pool to support custom workflows. If your
-	// user pool configuration does not include triggers, the ClientMetadata parameter
-	// serves no purpose.
+	// * Store the
+	// ClientMetadata value. This data is available only to Lambda triggers that are
+	// assigned to a user pool to support custom workflows. If your user pool
+	// configuration doesn't include triggers, the ClientMetadata parameter serves no
+	// purpose.
 	//
-	// * Amazon Cognito does not validate the ClientMetadata
-	// value.
+	// * Validate the ClientMetadata value.
 	//
-	// * Amazon Cognito does not encrypt the the ClientMetadata value, so don't
-	// use it to provide sensitive information.
+	// * Encrypt the ClientMetadata
+	// value. Don't use Amazon Cognito to provide sensitive information.
 	ClientMetadata map[string]string
 
 	// Contextual data such as the user's device fingerprint, IP address, or location
@@ -178,22 +172,22 @@ type InitiateAuthInput struct {
 // Initiates the authentication response.
 type InitiateAuthOutput struct {
 
-	// The result of the authentication response. This is only returned if the caller
-	// does not need to pass another challenge. If the caller does need to pass another
-	// challenge before it gets tokens, ChallengeName, ChallengeParameters, and Session
-	// are returned.
+	// The result of the authentication response. This result is only returned if the
+	// caller doesn't need to pass another challenge. If the caller does need to pass
+	// another challenge before it gets tokens, ChallengeName, ChallengeParameters, and
+	// Session are returned.
 	AuthenticationResult *types.AuthenticationResultType
 
-	// The name of the challenge which you are responding to with this call. This is
-	// returned to you in the AdminInitiateAuth response if you need to pass another
-	// challenge. Valid values include the following. Note that all of these challenges
-	// require USERNAME and SECRET_HASH (if applicable) in the parameters.
+	// The name of the challenge that you're responding to with this call. This name is
+	// returned in the AdminInitiateAuth response if you must pass another challenge.
+	// Valid values include the following. Note that all of these challenges require
+	// USERNAME and SECRET_HASH (if applicable) in the parameters.
 	//
-	// * SMS_MFA:
-	// Next challenge is to supply an SMS_MFA_CODE, delivered via SMS.
+	// * SMS_MFA: Next
+	// challenge is to supply an SMS_MFA_CODE, delivered via SMS.
 	//
-	// *
-	// PASSWORD_VERIFIER: Next challenge is to supply PASSWORD_CLAIM_SIGNATURE,
+	// * PASSWORD_VERIFIER:
+	// Next challenge is to supply PASSWORD_CLAIM_SIGNATURE,
 	// PASSWORD_CLAIM_SECRET_BLOCK, and TIMESTAMP after the client-side SRP
 	// calculations.
 	//
@@ -201,8 +195,8 @@ type InitiateAuthOutput struct {
 	// authentication flow determines that the user should pass another challenge
 	// before tokens are issued.
 	//
-	// * DEVICE_SRP_AUTH: If device tracking was enabled on
-	// your user pool and the previous challenges were passed, this challenge is
+	// * DEVICE_SRP_AUTH: If device tracking was activated
+	// on your user pool and the previous challenges were passed, this challenge is
 	// returned so that Amazon Cognito can start tracking this device.
 	//
 	// *
@@ -214,26 +208,26 @@ type InitiateAuthOutput struct {
 	// and any other required attributes.
 	//
 	// * MFA_SETUP: For users who are required to
-	// setup an MFA factor before they can sign-in. The MFA types enabled for the user
-	// pool will be listed in the challenge parameters MFA_CAN_SETUP value. To setup
-	// software token MFA, use the session returned here from InitiateAuth as an input
-	// to AssociateSoftwareToken, and use the session returned by VerifySoftwareToken
+	// setup an MFA factor before they can sign in. The MFA types activated for the
+	// user pool will be listed in the challenge parameters MFA_CAN_SETUP value. To set
+	// up software token MFA, use the session returned here from InitiateAuth as an
+	// input to AssociateSoftwareToken. Use the session returned by VerifySoftwareToken
 	// as an input to RespondToAuthChallenge with challenge name MFA_SETUP to complete
-	// sign-in. To setup SMS MFA, users will need help from an administrator to add a
-	// phone number to their account and then call InitiateAuth again to restart
-	// sign-in.
+	// sign-in. To set up SMS MFA, an administrator should help the user to add a phone
+	// number to their account, and then the user should call InitiateAuth again to
+	// restart sign-in.
 	ChallengeName types.ChallengeNameType
 
-	// The challenge parameters. These are returned to you in the InitiateAuth response
-	// if you need to pass another challenge. The responses in this parameter should be
-	// used to compute inputs to the next call (RespondToAuthChallenge). All challenges
-	// require USERNAME and SECRET_HASH (if applicable).
+	// The challenge parameters. These are returned in the InitiateAuth response if you
+	// must pass another challenge. The responses in this parameter should be used to
+	// compute inputs to the next call (RespondToAuthChallenge). All challenges require
+	// USERNAME and SECRET_HASH (if applicable).
 	ChallengeParameters map[string]string
 
-	// The session which should be passed both ways in challenge-response calls to the
-	// service. If the caller needs to go through another challenge, they return a
-	// session with other challenge parameters. This session should be passed as it is
-	// to the next RespondToAuthChallenge API call.
+	// The session that should pass both ways in challenge-response calls to the
+	// service. If the caller must pass another challenge, they return a session with
+	// other challenge parameters. This session should be passed as it is to the next
+	// RespondToAuthChallenge API call.
 	Session *string
 
 	// Metadata pertaining to the operation's result.

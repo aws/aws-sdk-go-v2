@@ -483,6 +483,11 @@ type DocumentClassifierProperties struct {
 	// Provides output results configuration parameters for custom classifier jobs.
 	OutputDataConfig *DocumentClassifierOutputDataConfig
 
+	// The Amazon Resource Name (ARN) of the source model. This model was imported from
+	// a different AWS account to create the document classifier model in your AWS
+	// account.
+	SourceModelArn *string
+
 	// The status of the document classifier. If the status is TRAINED the classifier
 	// is ready to use. If the status is FAILED you can see additional information
 	// about why the classifier wasn't trained in the Message field.
@@ -1126,6 +1131,11 @@ type EntityRecognizerProperties struct {
 
 	// Provides information about an entity recognizer.
 	RecognizerMetadata *EntityRecognizerMetadata
+
+	// The Amazon Resource Name (ARN) of the source model. This model was imported from
+	// a different AWS account to create the entity recognizer model in your AWS
+	// account.
+	SourceModelArn *string
 
 	// Provides the status of the entity recognizer.
 	Status ModelStatus

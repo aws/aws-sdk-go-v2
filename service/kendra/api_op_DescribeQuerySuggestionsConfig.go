@@ -69,7 +69,7 @@ type DescribeQuerySuggestionsConfigOutput struct {
 	// query suggestions for your users. You can change the mode using the
 	// UpdateQuerySuggestionsConfig
 	// (https://docs.aws.amazon.com/kendra/latest/dg/API_UpdateQuerySuggestionsConfig.html)
-	// operation.
+	// API.
 	Mode types.Mode
 
 	// Shows how recent your queries are in your query log time window (in days).

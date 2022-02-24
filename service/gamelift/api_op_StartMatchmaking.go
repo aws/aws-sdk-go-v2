@@ -25,8 +25,8 @@ import (
 // status set to QUEUED. Track matchmaking events to respond as needed and acquire
 // game session connection information for successfully completed matches. Ticket
 // status updates are tracked using event notification through Amazon Simple
-// Notification Service (SNS), which is defined in the matchmaking configuration.
-// Learn more  Add FlexMatch to a game client
+// Notification Service, which is defined in the matchmaking configuration. Learn
+// more  Add FlexMatch to a game client
 // (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-client.html)
 // Set Up FlexMatch event notification
 // (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-notification.html)
@@ -69,8 +69,8 @@ type StartMatchmakingInput struct {
 	Players []types.Player
 
 	// A unique identifier for a matchmaking ticket. If no ticket ID is specified here,
-	// Amazon GameLift will generate one in the form of a UUID. Use this identifier to
-	// track the matchmaking ticket status and retrieve match results.
+	// Amazon Web Services will generate one in the form of a UUID. Use this identifier
+	// to track the matchmaking ticket status and retrieve match results.
 	TicketId *string
 
 	noSmithyDocumentSerde

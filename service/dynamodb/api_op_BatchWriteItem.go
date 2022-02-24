@@ -14,19 +14,24 @@ import (
 )
 
 // The BatchWriteItem operation puts or deletes multiple items in one or more
-// tables. A single call to BatchWriteItem can write up to 16 MB of data, which can
-// comprise as many as 25 put or delete requests. Individual items to be written
-// can be as large as 400 KB. BatchWriteItem cannot update items. To update items,
-// use the UpdateItem action. The individual PutItem and DeleteItem operations
-// specified in BatchWriteItem are atomic; however BatchWriteItem as a whole is
-// not. If any requested operations fail because the table's provisioned throughput
-// is exceeded or an internal processing failure occurs, the failed operations are
-// returned in the UnprocessedItems response parameter. You can investigate and
-// optionally resend the requests. Typically, you would call BatchWriteItem in a
-// loop. Each iteration would check for unprocessed items and submit a new
-// BatchWriteItem request with those unprocessed items until all items have been
-// processed. If none of the items can be processed due to insufficient provisioned
-// throughput on all of the tables in the request, then BatchWriteItem returns a
+// tables. A single call to BatchWriteItem can transmit up to 16MB of data over the
+// network, consisting of up to 25 item put or delete operations. While individual
+// items can be up to 400 KB once stored, it's important to note that an item's
+// representation might be greater than 400KB while being sent in DynamoDB's JSON
+// format for the API call. For more details on this distinction, see Naming Rules
+// and Data Types
+// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html).
+// BatchWriteItem cannot update items. To update items, use the UpdateItem action.
+// The individual PutItem and DeleteItem operations specified in BatchWriteItem are
+// atomic; however BatchWriteItem as a whole is not. If any requested operations
+// fail because the table's provisioned throughput is exceeded or an internal
+// processing failure occurs, the failed operations are returned in the
+// UnprocessedItems response parameter. You can investigate and optionally resend
+// the requests. Typically, you would call BatchWriteItem in a loop. Each iteration
+// would check for unprocessed items and submit a new BatchWriteItem request with
+// those unprocessed items until all items have been processed. If none of the
+// items can be processed due to insufficient provisioned throughput on all of the
+// tables in the request, then BatchWriteItem returns a
 // ProvisionedThroughputExceededException. If DynamoDB returns any unprocessed
 // items, you should retry the batch operation on those items. However, we strongly
 // recommend that you use an exponential backoff algorithm. If you retry the batch

@@ -3774,6 +3774,13 @@ func awsAwsjson11_serializeDocumentDataSourceConfiguration(v *types.DataSourceCo
 		}
 	}
 
+	if v.FsxConfiguration != nil {
+		ok := object.Key("FsxConfiguration")
+		if err := awsAwsjson11_serializeDocumentFsxConfiguration(v.FsxConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.GoogleDriveConfiguration != nil {
 		ok := object.Key("GoogleDriveConfiguration")
 		if err := awsAwsjson11_serializeDocumentGoogleDriveConfiguration(v.GoogleDriveConfiguration, ok); err != nil {
@@ -4446,6 +4453,56 @@ func awsAwsjson11_serializeDocumentFaqIdsList(v []string, value smithyjson.Value
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentFsxConfiguration(v *types.FsxConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ExclusionPatterns != nil {
+		ok := object.Key("ExclusionPatterns")
+		if err := awsAwsjson11_serializeDocumentDataSourceInclusionsExclusionsStrings(v.ExclusionPatterns, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FieldMappings != nil {
+		ok := object.Key("FieldMappings")
+		if err := awsAwsjson11_serializeDocumentDataSourceToIndexFieldMappingList(v.FieldMappings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FileSystemId != nil {
+		ok := object.Key("FileSystemId")
+		ok.String(*v.FileSystemId)
+	}
+
+	if len(v.FileSystemType) > 0 {
+		ok := object.Key("FileSystemType")
+		ok.String(string(v.FileSystemType))
+	}
+
+	if v.InclusionPatterns != nil {
+		ok := object.Key("InclusionPatterns")
+		if err := awsAwsjson11_serializeDocumentDataSourceInclusionsExclusionsStrings(v.InclusionPatterns, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SecretArn != nil {
+		ok := object.Key("SecretArn")
+		ok.String(*v.SecretArn)
+	}
+
+	if v.VpcConfiguration != nil {
+		ok := object.Key("VpcConfiguration")
+		if err := awsAwsjson11_serializeDocumentDataSourceVpcConfiguration(v.VpcConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 

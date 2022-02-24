@@ -52,25 +52,25 @@ type DescribeDBInstancesInput struct {
 	// filters:
 	//
 	// * db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon
-	// Resource Names (ARNs). The results list will only include information about the
-	// DB instances associated with the DB clusters identified by these ARNs.
+	// Resource Names (ARNs). The results list only includes information about the DB
+	// instances associated with the DB clusters identified by these ARNs.
 	//
 	// *
 	// db-instance-id - Accepts DB instance identifiers and DB instance Amazon Resource
-	// Names (ARNs). The results list will only include information about the DB
-	// instances identified by these ARNs.
+	// Names (ARNs). The results list only includes information about the DB instances
+	// identified by these ARNs.
 	//
-	// * dbi-resource-id - Accepts DB instance
-	// resource identifiers. The results list will only include information about the
-	// DB instances identified by these DB instance resource identifiers.
+	// * dbi-resource-id - Accepts DB instance resource
+	// identifiers. The results list will only include information about the DB
+	// instances identified by these DB instance resource identifiers.
 	//
 	// * domain -
-	// Accepts Active Directory directory IDs. The results list will only include
+	// Accepts Active Directory directory IDs. The results list only includes
 	// information about the DB instances associated with these domains.
 	//
 	// * engine -
-	// Accepts engine names. The results list will only include information about the
-	// DB instances for these engines.
+	// Accepts engine names. The results list only includes information about the DB
+	// instances for these engines.
 	Filters []types.Filter
 
 	// An optional pagination token provided by a previous DescribeDBInstances request.

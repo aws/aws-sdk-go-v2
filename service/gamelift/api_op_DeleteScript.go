@@ -16,7 +16,8 @@ import (
 // deleting a script, be sure to terminate all fleets that are deployed with the
 // script being deleted. Fleet instances periodically check for script updates, and
 // if the script record no longer exists, the instance will go into an error state
-// and be unable to host game sessions. Learn more Amazon GameLift Realtime Servers
+// and be unable to host game sessions. Learn more Amazon Web Services Realtime
+// Servers
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/realtime-intro.html)
 // Related actions CreateScript | ListScripts | DescribeScript | UpdateScript |
 // DeleteScript | All APIs by task

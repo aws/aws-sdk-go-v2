@@ -273,6 +273,19 @@ type Exclude struct {
 	noSmithyDocumentSerde
 }
 
+// The encryption configuration to use when storing the generated manifest.
+type GeneratedManifestEncryption struct {
+
+	// Configuration details on how SSE-KMS is used to encrypt generated manifest
+	// objects.
+	SSEKMS *SSEKMSEncryption
+
+	// Specifies the use of SSE-S3 to encrypt generated manifest objects.
+	SSES3 *SSES3Encryption
+
+	noSmithyDocumentSerde
+}
+
 // A container for what Amazon S3 Storage Lens configuration includes.
 type Include struct {
 
@@ -305,6 +318,10 @@ type JobDescriptor struct {
 	// failure.
 	FailureReasons []JobFailure
 
+	// The attribute of the JobDescriptor containing details about the job's generated
+	// manifest.
+	GeneratedManifestDescriptor *S3GeneratedManifestDescriptor
+
 	// The Amazon Resource Name (ARN) for this job.
 	JobArn *string
 
@@ -313,6 +330,9 @@ type JobDescriptor struct {
 
 	// The configuration information for the specified job's manifest object.
 	Manifest *JobManifest
+
+	// The manifest generator that was used to generate a job manifest for this job.
+	ManifestGenerator JobManifestGenerator
 
 	// The operation that the specified job is configured to run on the objects listed
 	// in the manifest.
@@ -419,6 +439,45 @@ type JobManifest struct {
 	noSmithyDocumentSerde
 }
 
+// Configures the type of the job's ManifestGenerator.
+//
+// The following types satisfy this interface:
+//  JobManifestGeneratorMemberS3JobManifestGenerator
+type JobManifestGenerator interface {
+	isJobManifestGenerator()
+}
+
+// The S3 job ManifestGenerator's configuration details.
+type JobManifestGeneratorMemberS3JobManifestGenerator struct {
+	Value S3JobManifestGenerator
+
+	noSmithyDocumentSerde
+}
+
+func (*JobManifestGeneratorMemberS3JobManifestGenerator) isJobManifestGenerator() {}
+
+// The filter used to describe a set of objects for the job's manifest.
+type JobManifestGeneratorFilter struct {
+
+	// If provided, the generated manifest should include only source bucket objects
+	// that were created after this time.
+	CreatedAfter *time.Time
+
+	// If provided, the generated manifest should include only source bucket objects
+	// that were created before this time.
+	CreatedBefore *time.Time
+
+	// Include objects in the generated manifest only if they are eligible for
+	// replication according to the Replication configuration on the source bucket.
+	EligibleForReplication bool
+
+	// If provided, the generated manifest should include only source bucket objects
+	// that have one of the specified Replication statuses.
+	ObjectReplicationStatuses []ReplicationStatus
+
+	noSmithyDocumentSerde
+}
+
 // Contains the information required to locate a manifest object.
 type JobManifestLocation struct {
 
@@ -504,6 +563,10 @@ type JobOperation struct {
 	// the manifest.
 	S3PutObjectTagging *S3SetObjectTaggingOperation
 
+	// Directs the specified job to invoke ReplicateObject on every object in the job's
+	// manifest.
+	S3ReplicateObject *S3ReplicateObjectOperation
+
 	noSmithyDocumentSerde
 }
 
@@ -516,6 +579,9 @@ type JobProgressSummary struct {
 
 	//
 	NumberOfTasksSucceeded int64
+
+	// The JobTimers attribute of a job's progress summary.
+	Timers *JobTimers
 
 	//
 	TotalNumberOfTasks int64
@@ -546,6 +612,15 @@ type JobReport struct {
 	// Indicates whether the job-completion report will include details of all tasks or
 	// only failed tasks.
 	ReportScope JobReportScope
+
+	noSmithyDocumentSerde
+}
+
+// Provides timing details for the job.
+type JobTimers struct {
+
+	// Indicates the elapsed time in seconds the job has been in the Active job state.
+	ElapsedTimeInActiveSeconds int64
 
 	noSmithyDocumentSerde
 }
@@ -1131,7 +1206,9 @@ type S3CopyObjectOperation struct {
 	//
 	ModifiedSinceConstraint *time.Time
 
-	//
+	// If you don't provide this parameter, Amazon S3 copies all the metadata from the
+	// original objects. If you specify an empty set, the new objects will have no
+	// tags. Otherwise, Amazon S3 assigns the supplied tags to the new objects.
 	NewObjectMetadata *S3ObjectMetadata
 
 	//
@@ -1184,6 +1261,20 @@ type S3DeleteObjectTaggingOperation struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the specified job's generated manifest. Batch Operations jobs created
+// with a ManifestGenerator populate details of this descriptor after execution of
+// the ManifestGenerator.
+type S3GeneratedManifestDescriptor struct {
+
+	// The format of the generated manifest.
+	Format GeneratedManifestFormat
+
+	// Contains the information required to locate a manifest object.
+	Location *JobManifestLocation
+
+	noSmithyDocumentSerde
+}
+
 //
 type S3Grant struct {
 
@@ -1217,24 +1308,78 @@ type S3Grantee struct {
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOSTrestore.html#RESTObjectPOSTrestore-restore-request).
 type S3InitiateRestoreObjectOperation struct {
 
-	// This argument specifies how long the S3 Glacier Flexible Retrieval or S3 Glacier
-	// Deep Archive object remains available in Amazon S3. S3 Initiate Restore Object
-	// jobs that target S3 Glacier Flexible Retrieval and S3 Glacier Deep Archive
-	// objects require ExpirationInDays set to 1 or greater. Conversely, do not set
-	// ExpirationInDays when creating S3 Initiate Restore Object jobs that target S3
-	// Intelligent-Tiering Archive Access and Deep Archive Access tier objects. Objects
-	// in S3 Intelligent-Tiering archive access tiers are not subject to restore
-	// expiry, so specifying ExpirationInDays results in restore request failure. S3
-	// Batch Operations jobs can operate either on S3 Glacier Flexible Retrieval and S3
-	// Glacier Deep Archive storage class objects or on S3 Intelligent-Tiering Archive
-	// Access and Deep Archive Access storage tier objects, but not both types in the
-	// same job. If you need to restore objects of both types you must create separate
-	// Batch Operations jobs.
+	// This argument specifies how long the S3 Glacier or S3 Glacier Deep Archive
+	// object remains available in Amazon S3. S3 Initiate Restore Object jobs that
+	// target S3 Glacier and S3 Glacier Deep Archive objects require ExpirationInDays
+	// set to 1 or greater. Conversely, do not set ExpirationInDays when creating S3
+	// Initiate Restore Object jobs that target S3 Intelligent-Tiering Archive Access
+	// and Deep Archive Access tier objects. Objects in S3 Intelligent-Tiering archive
+	// access tiers are not subject to restore expiry, so specifying ExpirationInDays
+	// results in restore request failure. S3 Batch Operations jobs can operate either
+	// on S3 Glacier and S3 Glacier Deep Archive storage class objects or on S3
+	// Intelligent-Tiering Archive Access and Deep Archive Access storage tier objects,
+	// but not both types in the same job. If you need to restore objects of both types
+	// you must create separate Batch Operations jobs.
 	ExpirationInDays *int32
 
 	// S3 Batch Operations supports STANDARD and BULK retrieval tiers, but not the
 	// EXPEDITED retrieval tier.
 	GlacierJobTier S3GlacierJobTier
+
+	noSmithyDocumentSerde
+}
+
+// The container for the service that will create the S3 manifest.
+type S3JobManifestGenerator struct {
+
+	// Determines whether or not to write the job's generated manifest to a bucket.
+	//
+	// This member is required.
+	EnableManifestOutput bool
+
+	// The source bucket used by the ManifestGenerator.
+	//
+	// This member is required.
+	SourceBucket *string
+
+	// The Amazon Web Services account ID that owns the bucket the generated manifest
+	// is written to. If provided the generated manifest bucket's owner Amazon Web
+	// Services account ID must match this value, else the job fails.
+	ExpectedBucketOwner *string
+
+	// Specifies rules the S3JobManifestGenerator should use to use to decide whether
+	// an object in the source bucket should or should not be included in the generated
+	// job manifest.
+	Filter *JobManifestGeneratorFilter
+
+	// Specifies the location the generated manifest will be written to.
+	ManifestOutputLocation *S3ManifestOutputLocation
+
+	noSmithyDocumentSerde
+}
+
+// Location details for where the generated manifest should be written.
+type S3ManifestOutputLocation struct {
+
+	// The bucket ARN the generated manifest should be written to.
+	//
+	// This member is required.
+	Bucket *string
+
+	// The format of the generated manifest.
+	//
+	// This member is required.
+	ManifestFormat GeneratedManifestFormat
+
+	// The Account ID that owns the bucket the generated manifest is written to.
+	ExpectedManifestBucketOwner *string
+
+	// Specifies what encryption should be used when the generated manifest objects are
+	// written.
+	ManifestEncryption *GeneratedManifestEncryption
+
+	// Prefix identifying one or more objects to which the manifest applies.
+	ManifestPrefix *string
 
 	noSmithyDocumentSerde
 }
@@ -1300,6 +1445,12 @@ type S3ObjectOwner struct {
 	//
 	ID *string
 
+	noSmithyDocumentSerde
+}
+
+// Directs the specified job to invoke ReplicateObject on every object in the job's
+// manifest.
+type S3ReplicateObjectOperation struct {
 	noSmithyDocumentSerde
 }
 
@@ -1433,8 +1584,26 @@ type SSEKMS struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for the use of SSE-KMS to encrypt generated manifest objects.
+type SSEKMSEncryption struct {
+
+	// Specifies the ID of the Amazon Web Services Key Management Service (Amazon Web
+	// Services KMS) symmetric customer managed key to use for encrypting generated
+	// manifest objects.
+	//
+	// This member is required.
+	KeyId *string
+
+	noSmithyDocumentSerde
+}
+
 //
 type SSES3 struct {
+	noSmithyDocumentSerde
+}
+
+// Configuration for the use of SSE-S3 to encrypt generated manifest objects.
+type SSES3Encryption struct {
 	noSmithyDocumentSerde
 }
 
@@ -1593,4 +1762,5 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnknownUnionMember) isJobManifestGenerator()              {}
 func (*UnknownUnionMember) isObjectLambdaContentTransformation() {}

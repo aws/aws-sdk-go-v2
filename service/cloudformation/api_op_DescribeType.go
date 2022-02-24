@@ -84,7 +84,7 @@ type DescribeTypeOutput struct {
 	ConfigurationSchema *string
 
 	// The ID of the default version of the extension. The default version is used when
-	// the extension version is not specified. This applies only to private extensions
+	// the extension version isn't specified. This applies only to private extensions
 	// you have registered in your account. For public extensions, both those provided
 	// by Amazon and published by third parties, CloudFormation returns null. For more
 	// information, see RegisterType
@@ -149,7 +149,7 @@ type DescribeTypeOutput struct {
 	LastUpdated *time.Time
 
 	// The latest version of a public extension that is available for use. This only
-	// applies if you specify a public extension, and you do not specify a version. For
+	// applies if you specify a public extension, and you don't specify a version. For
 	// all other requests, CloudFormation returns null.
 	LatestPublicVersion *string
 
@@ -183,19 +183,18 @@ type DescribeTypeOutput struct {
 	// process updates to the type during stack update operations.
 	//
 	// * IMMUTABLE: The
-	// resource type does not include an update handler, so the type cannot be updated
+	// resource type doesn't include an update handler, so the type can't be updated
 	// and must instead be replaced during stack update operations.
 	//
 	// *
-	// NON_PROVISIONABLE: The resource type does not include all of the following
-	// handlers, and therefore cannot actually be provisioned.
+	// NON_PROVISIONABLE: The resource type doesn't include all the following handlers,
+	// and therefore can't actually be provisioned.
 	//
 	// * create
 	//
 	// * read
 	//
-	// *
-	// delete
+	// * delete
 	ProvisioningType types.ProvisioningType
 
 	// The version number of a public third-party extension. This applies only if you
@@ -206,7 +205,7 @@ type DescribeTypeOutput struct {
 
 	// The publisher ID of the extension publisher. This applies only to public
 	// third-party extensions. For private registered extensions, and extensions
-	// provided by Amazon, CloudFormation returns null.
+	// provided by Amazon Web Services, CloudFormation returns null.
 	PublisherId *string
 
 	// For extensions that are modules, the public third-party extensions that must be
@@ -236,14 +235,14 @@ type DescribeTypeOutput struct {
 	TypeName *string
 
 	// The contract test status of the registered extension version. To return the
-	// extension test status of a specifc extension version, you must specify
+	// extension test status of a specific extension version, you must specify
 	// VersionId. This applies only to registered private extension versions.
-	// CloudFormation does not return this information for public extensions, whether
-	// or not they are activated in your account.
+	// CloudFormation doesn't return this information for public extensions, whether or
+	// not they are activated in your account.
 	//
-	// * PASSED: The extension has passed
-	// all its contract tests. An extension must have a test status of PASSED before it
-	// can be published. For more information, see Publishing extensions to make them
+	// * PASSED: The extension has passed all
+	// its contract tests. An extension must have a test status of PASSED before it can
+	// be published. For more information, see Publishing extensions to make them
 	// available for public use
 	// (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-publish.html)
 	// in the CloudFormation Command Line Interface User Guide.
@@ -255,12 +254,12 @@ type DescribeTypeOutput struct {
 	// are currently being performed on the extension.
 	//
 	// * NOT_TESTED: Contract tests
-	// have not been performed on the extension.
+	// haven't been performed on the extension.
 	TypeTestsStatus types.TypeTestsStatus
 
 	// The description of the test status. To return the extension test status of a
-	// specifc extension version, you must specify VersionId. This applies only to
-	// registered private extension versions. CloudFormation does not return this
+	// specific extension version, you must specify VersionId. This applies only to
+	// registered private extension versions. CloudFormation doesn't return this
 	// information for public extensions, whether or not they are activated in your
 	// account.
 	TypeTestsStatusDescription *string
@@ -272,8 +271,8 @@ type DescribeTypeOutput struct {
 	// usable within the account in which it is registered. CloudFormation marks any
 	// extensions you register as PRIVATE.
 	//
-	// * PUBLIC: The extension is publically
-	// visible and usable within any Amazon account.
+	// * PUBLIC: The extension is publicly visible
+	// and usable within any Amazon account.
 	Visibility types.Visibility
 
 	// Metadata pertaining to the operation's result.

@@ -195,6 +195,147 @@
                 "smithy.api#documentation": "<p>A generic address associated with the customer that is not mailing, shipping, or\n         billing.</p>"
             }
         },
+        "com.amazonaws.customerprofiles#AppflowIntegration": {
+            "type": "structure",
+            "members": {
+                "FlowDefinition": {
+                    "target": "com.amazonaws.customerprofiles#FlowDefinition",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "Batches": {
+                    "target": "com.amazonaws.customerprofiles#Batches",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Batches in workflow of type <code>APPFLOW_INTEGRATION</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details for workflow of type <code>APPFLOW_INTEGRATION</code>.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#AppflowIntegrationWorkflowAttributes": {
+            "type": "structure",
+            "members": {
+                "SourceConnectorType": {
+                    "target": "com.amazonaws.customerprofiles#SourceConnectorType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the source connector type, such as Salesforce, ServiceNow, and Marketo. Indicates source of ingestion.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ConnectorProfileName": {
+                    "target": "com.amazonaws.customerprofiles#ConnectorProfileName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the AppFlow connector profile used for ingestion.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role. Customer Profiles assumes this role to create resources on your behalf as part of workflow execution.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Structure holding all <code>APPFLOW_INTEGRATION</code> specific workflow attributes.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#AppflowIntegrationWorkflowMetrics": {
+            "type": "structure",
+            "members": {
+                "RecordsProcessed": {
+                    "target": "com.amazonaws.customerprofiles#long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Number of records processed in <code>APPFLOW_INTEGRATION</code> workflow.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StepsCompleted": {
+                    "target": "com.amazonaws.customerprofiles#long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Total steps completed in <code>APPFLOW_INTEGRATION</code> workflow.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TotalSteps": {
+                    "target": "com.amazonaws.customerprofiles#long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Total steps in <code>APPFLOW_INTEGRATION</code> workflow.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Workflow specific execution metrics for <code>APPFLOW_INTEGRATION</code> workflow.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#AppflowIntegrationWorkflowStep": {
+            "type": "structure",
+            "members": {
+                "FlowName": {
+                    "target": "com.amazonaws.customerprofiles#FlowName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the flow created during execution of workflow step. <code>APPFLOW_INTEGRATION</code> workflow type creates an appflow flow during workflow step execution on the customers behalf.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.customerprofiles#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Workflow step status for <code>APPFLOW_INTEGRATION</code> workflow.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExecutionMessage": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Message indicating execution of workflow step for <code>APPFLOW_INTEGRATION</code> workflow.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RecordsProcessed": {
+                    "target": "com.amazonaws.customerprofiles#long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Total number of records processed during execution of workflow step for <code>APPFLOW_INTEGRATION</code> workflow.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "BatchRecordsStartTime": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Start datetime of records pulled in batch during execution of workflow step for <code>APPFLOW_INTEGRATION</code> workflow.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "BatchRecordsEndTime": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>End datetime of records pulled in batch during execution of workflow step for <code>APPFLOW_INTEGRATION</code> workflow.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Creation timestamp of workflow step for <code>APPFLOW_INTEGRATION</code> workflow.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastUpdatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Last updated timestamp for workflow step for <code>APPFLOW_INTEGRATION</code> workflow.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Workflow step details for <code>APPFLOW_INTEGRATION</code> workflow.</p>"
+            }
+        },
         "com.amazonaws.customerprofiles#AttributeSourceIdMap": {
             "type": "map",
             "key": {
@@ -251,6 +392,34 @@
                 "smithy.api#documentation": "<p>The input you provided is invalid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.customerprofiles#Batch": {
+            "type": "structure",
+            "members": {
+                "StartTime": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Start time of batch to split ingestion.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>End time of batch to split ingestion.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Batch defines the boundaries for ingestion for each step in <code>APPFLOW_INTEGRATION</code> workflow. <code>APPFLOW_INTEGRATION</code> workflow splits ingestion based on these boundaries.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#Batches": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#Batch"
             }
         },
         "com.amazonaws.customerprofiles#BucketName": {
@@ -507,6 +676,106 @@
                 }
             }
         },
+        "com.amazonaws.customerprofiles#CreateIntegrationWorkflow": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#CreateIntegrationWorkflowRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#CreateIntegrationWorkflowResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n\tCreates an integration workflow. An integration workflow is an async process which ingests historic data and sets up an integration for ongoing updates. The supported Amazon AppFlow sources are Salesforce, ServiceNow, and Marketo.\n\t</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/domains/{DomainName}/workflows/integrations",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#CreateIntegrationWorkflowRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "WorkflowType": {
+                    "target": "com.amazonaws.customerprofiles#WorkflowType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of workflow. The only supported value is APPFLOW_INTEGRATION.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IntegrationConfig": {
+                    "target": "com.amazonaws.customerprofiles#IntegrationConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration data for integration workflow.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ObjectTypeName": {
+                    "target": "com.amazonaws.customerprofiles#typeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the profile object type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.customerprofiles#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role. Customer Profiles assumes this role to create resources on your behalf as part of workflow execution.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.customerprofiles#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#CreateIntegrationWorkflowResponse": {
+            "type": "structure",
+            "members": {
+                "WorkflowId": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique identifier for the workflow.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message indicating create request was received.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.customerprofiles#CreateProfile": {
             "type": "operation",
             "input": {
@@ -718,6 +987,9 @@
                     "target": "com.amazonaws.customerprofiles#CreateDomain"
                 },
                 {
+                    "target": "com.amazonaws.customerprofiles#CreateIntegrationWorkflow"
+                },
+                {
                     "target": "com.amazonaws.customerprofiles#CreateProfile"
                 },
                 {
@@ -739,6 +1011,9 @@
                     "target": "com.amazonaws.customerprofiles#DeleteProfileObjectType"
                 },
                 {
+                    "target": "com.amazonaws.customerprofiles#DeleteWorkflow"
+                },
+                {
                     "target": "com.amazonaws.customerprofiles#GetAutoMergingPreview"
                 },
                 {
@@ -758,6 +1033,12 @@
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#GetProfileObjectTypeTemplate"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#GetWorkflow"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#GetWorkflowSteps"
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#ListAccountIntegrations"
@@ -782,6 +1063,9 @@
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ListWorkflows"
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#MergeProfiles"
@@ -1254,6 +1538,65 @@
                     }
                 }
             }
+        },
+        "com.amazonaws.customerprofiles#DeleteWorkflow": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#DeleteWorkflowRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#DeleteWorkflowResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the specified workflow and all its corresponding resources. This is an async process.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/domains/{DomainName}/workflows/{WorkflowId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#DeleteWorkflowRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "WorkflowId": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique identifier for the workflow.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#DeleteWorkflowResponse": {
+            "type": "structure",
+            "members": {}
         },
         "com.amazonaws.customerprofiles#DestinationField": {
             "type": "string",
@@ -2029,6 +2372,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A map in which each key is an event type from an external application such as Segment or Shopify, and each value is an <code>ObjectTypeName</code> (template) used to ingest the event.\nIt supports the following event types: <code>SegmentIdentify</code>, <code>ShopifyCreateCustomers</code>, <code>ShopifyUpdateCustomers</code>, <code>ShopifyCreateDraftOrders</code>, \n<code>ShopifyUpdateDraftOrders</code>, <code>ShopifyCreateOrders</code>, and <code>ShopifyUpdatedOrders</code>.</p>"
                     }
+                },
+                "WorkflowId": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique identifier for the workflow.</p>"
+                    }
                 }
             }
         },
@@ -2058,7 +2407,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Before calling this API, use <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_CreateDomain.html\">CreateDomain</a> or\n            <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UpdateDomain.html\">UpdateDomain</a> to\n         enable identity resolution: set <code>Matching</code> to true.</p>\n         <p>GetMatches returns potentially matching profiles, based on the results of the latest run\n         of a machine learning process. </p>\n         <important>\n            <p>The process of matching duplicate profiles. If <code>Matching</code> = <code>true</code>, Amazon Connect Customer Profiles starts a weekly\nbatch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every \nSaturday at 12AM UTC to detect duplicate profiles in your domains. </p>\n            <p>After the Identity Resolution Job completes, use the \n<a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html\">GetMatches</a>\nAPI to return and review the results. Or, if you have configured <code>ExportingConfig</code> in the <code>MatchingRequest</code>, you can download the results from\nS3.</p>\n         </important>\n\n         <p>Amazon Connect uses the following profile attributes to identify matches:</p>\n         <ul>\n            <li>\n               <p>PhoneNumber</p>\n            </li>\n            <li>\n               <p>HomePhoneNumber</p>\n            </li>\n            <li>\n               <p>BusinessPhoneNumber</p>\n            </li>\n            <li>\n               <p>MobilePhoneNumber</p>\n            </li>\n            <li>\n               <p>EmailAddress</p>\n            </li>\n            <li>\n               <p>PersonalEmailAddress</p>\n            </li>\n            <li>\n               <p>BusinessEmailAddress</p>\n            </li>\n            <li>\n               <p>FullName</p>\n            </li>\n            <li>\n               <p>BusinessName</p>\n            </li>\n         </ul>\n         <p>For example, two or more profiles—with spelling mistakes such as <b>John Doe</b> and <b>Jhn Doe</b>, or different casing\n         email addresses such as <b>JOHN_DOE@ANYCOMPANY.COM</b> and\n            <b>johndoe@anycompany.com</b>, or different phone number\n         formats such as <b>555-010-0000</b> and <b>+1-555-010-0000</b>—can be detected as belonging to the same customer <b>John Doe</b> and merged into a unified profile.</p>",
+                "smithy.api#documentation": "<p>Before calling this API, use <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_CreateDomain.html\">CreateDomain</a> or\n            <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UpdateDomain.html\">UpdateDomain</a> to\n         enable identity resolution: set <code>Matching</code> to true.</p>\n         <p>GetMatches returns potentially matching profiles, based on the results of the latest run\n         of a machine learning process. </p>\n         <important>\n            <p>The process of matching duplicate profiles. If <code>Matching</code> = <code>true</code>, Amazon Connect Customer Profiles starts a weekly\nbatch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every \nSaturday at 12AM UTC to detect duplicate profiles in your domains. </p>\n            <p>After the Identity Resolution Job completes, use the \n<a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html\">GetMatches</a>\nAPI to return and review the results. Or, if you have configured <code>ExportingConfig</code> in the <code>MatchingRequest</code>, you can download the results from\nS3.</p>\n         </important>\n\n         <p>Amazon Connect uses the following profile attributes to identify matches:</p>\n         <ul>\n            <li>\n               <p>PhoneNumber</p>\n            </li>\n            <li>\n               <p>HomePhoneNumber</p>\n            </li>\n            <li>\n               <p>BusinessPhoneNumber</p>\n            </li>\n            <li>\n               <p>MobilePhoneNumber</p>\n            </li>\n            <li>\n               <p>EmailAddress</p>\n            </li>\n            <li>\n               <p>PersonalEmailAddress</p>\n            </li>\n            <li>\n               <p>BusinessEmailAddress</p>\n            </li>\n            <li>\n               <p>FullName</p>\n            </li>\n         </ul>\n         <p>For example, two or more profiles—with spelling mistakes such as <b>John Doe</b> and <b>Jhn Doe</b>, or different casing\n         email addresses such as <b>JOHN_DOE@ANYCOMPANY.COM</b> and\n            <b>johndoe@anycompany.com</b>, or different phone number\n         formats such as <b>555-010-0000</b> and <b>+1-555-010-0000</b>—can be detected as belonging to the same customer <b>John Doe</b> and merged into a unified profile.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/domains/{DomainName}/matches",
@@ -2350,6 +2699,212 @@
                 }
             }
         },
+        "com.amazonaws.customerprofiles#GetWorkflow": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#GetWorkflowRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#GetWorkflowResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get details of specified workflow.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/domains/{DomainName}/workflows/{WorkflowId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#GetWorkflowRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "WorkflowId": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique identifier for the workflow.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#GetWorkflowResponse": {
+            "type": "structure",
+            "members": {
+                "WorkflowId": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique identifier for the workflow.</p>"
+                    }
+                },
+                "WorkflowType": {
+                    "target": "com.amazonaws.customerprofiles#WorkflowType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of workflow. The only supported value is APPFLOW_INTEGRATION.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.customerprofiles#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Status of workflow execution.</p>"
+                    }
+                },
+                "ErrorDescription": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Workflow error messages during execution (if any).</p>"
+                    }
+                },
+                "StartDate": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp that represents when workflow execution started.</p>"
+                    }
+                },
+                "LastUpdatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp that represents when workflow execution last updated.</p>"
+                    }
+                },
+                "Attributes": {
+                    "target": "com.amazonaws.customerprofiles#WorkflowAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Attributes provided for workflow execution.</p>"
+                    }
+                },
+                "Metrics": {
+                    "target": "com.amazonaws.customerprofiles#WorkflowMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Workflow specific execution metrics.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#GetWorkflowSteps": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#GetWorkflowStepsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#GetWorkflowStepsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get granular list of steps in workflow.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/domains/{DomainName}/workflows/{WorkflowId}/steps",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#GetWorkflowStepsRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "WorkflowId": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique identifier for the workflow.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.customerprofiles#token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous \nresponse in the next request to retrieve the next set of results.</p>",
+                        "smithy.api#httpQuery": "next-token"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.customerprofiles#maxSize100",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
+                        "smithy.api#httpQuery": "max-results"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#GetWorkflowStepsResponse": {
+            "type": "structure",
+            "members": {
+                "WorkflowId": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique identifier for the workflow.</p>"
+                    }
+                },
+                "WorkflowType": {
+                    "target": "com.amazonaws.customerprofiles#WorkflowType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of workflow. The only supported value is APPFLOW_INTEGRATION.</p>"
+                    }
+                },
+                "Items": {
+                    "target": "com.amazonaws.customerprofiles#WorkflowStepsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List containing workflow step details.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.customerprofiles#token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.customerprofiles#IdentityResolutionJob": {
             "type": "structure",
             "members": {
@@ -2459,6 +3014,20 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Specifies the configuration used when importing incremental records from the\n         source.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#IntegrationConfig": {
+            "type": "structure",
+            "members": {
+                "AppflowIntegration": {
+                    "target": "com.amazonaws.customerprofiles#AppflowIntegration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration data for <code>APPFLOW_INTEGRATION</code> workflow type.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration data for integration workflow.</p>"
             }
         },
         "com.amazonaws.customerprofiles#IntegrationList": {
@@ -2648,6 +3217,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of objects returned per page.</p>",
                         "smithy.api#httpQuery": "max-results"
+                    }
+                },
+                "IncludeHidden": {
+                    "target": "com.amazonaws.customerprofiles#optionalBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Boolean to indicate if hidden integration should be returned. Defaults to <code>False</code>.</p>",
+                        "smithy.api#httpQuery": "include-hidden"
                     }
                 }
             }
@@ -2900,6 +3476,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A map in which each key is an event type from an external application such as Segment or Shopify, and each value is an <code>ObjectTypeName</code> (template) used to ingest the event.\nIt supports the following event types: <code>SegmentIdentify</code>, <code>ShopifyCreateCustomers</code>, <code>ShopifyUpdateCustomers</code>, <code>ShopifyCreateDraftOrders</code>, \n<code>ShopifyUpdateDraftOrders</code>, <code>ShopifyCreateOrders</code>, and <code>ShopifyUpdatedOrders</code>.</p>"
                     }
+                },
+                "WorkflowId": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique identifier for the workflow.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2963,6 +3545,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of objects returned per page.</p>",
                         "smithy.api#httpQuery": "max-results"
+                    }
+                },
+                "IncludeHidden": {
+                    "target": "com.amazonaws.customerprofiles#optionalBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Boolean to indicate if hidden integration should be returned. Defaults to <code>False</code>.</p>",
+                        "smithy.api#httpQuery": "include-hidden"
                     }
                 }
             }
@@ -3370,6 +3959,158 @@
                     "target": "com.amazonaws.customerprofiles#TagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#ListWorkflows": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#ListWorkflowsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#ListWorkflowsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Query to list all workflows.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/domains/{DomainName}/workflows",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#ListWorkflowsItem": {
+            "type": "structure",
+            "members": {
+                "WorkflowType": {
+                    "target": "com.amazonaws.customerprofiles#WorkflowType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of workflow. The only supported value is APPFLOW_INTEGRATION.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WorkflowId": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique identifier for the workflow.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.customerprofiles#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Status of workflow execution.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StatusDescription": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Description for workflow execution status.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Creation timestamp for workflow.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastUpdatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Last updated timestamp for workflow.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A workflow in list of workflows.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#ListWorkflowsRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "WorkflowType": {
+                    "target": "com.amazonaws.customerprofiles#WorkflowType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of workflow. The only supported value is APPFLOW_INTEGRATION.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.customerprofiles#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Status of workflow execution.</p>"
+                    }
+                },
+                "QueryStartDate": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Retrieve workflows started after timestamp.</p>"
+                    }
+                },
+                "QueryEndDate": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Retrieve workflows ended after timestamp.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.customerprofiles#token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous \nresponse in the next request to retrieve the next set of results.</p>",
+                        "smithy.api#httpQuery": "next-token"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.customerprofiles#maxSize100",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
+                        "smithy.api#httpQuery": "max-results"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#ListWorkflowsResponse": {
+            "type": "structure",
+            "members": {
+                "Items": {
+                    "target": "com.amazonaws.customerprofiles#WorkflowList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List containing workflow details.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.customerprofiles#token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
                     }
                 }
             }
@@ -4148,6 +4889,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A map in which each key is an event type from an external application such as Segment or Shopify, and each value is an <code>ObjectTypeName</code> (template) used to ingest the event.\nIt supports the following event types: <code>SegmentIdentify</code>, <code>ShopifyCreateCustomers</code>, <code>ShopifyUpdateCustomers</code>, <code>ShopifyCreateDraftOrders</code>, \n<code>ShopifyUpdateDraftOrders</code>, <code>ShopifyCreateOrders</code>, and <code>ShopifyUpdatedOrders</code>.</p>"
                     }
+                },
+                "WorkflowId": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique identifier for the workflow.</p>"
+                    }
                 }
             }
         },
@@ -4423,6 +5170,16 @@
                 "smithy.api#documentation": "<p>The requested resource does not exist, or access was denied.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.customerprofiles#RoleArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^arn:aws:iam:.*:[0-9]+:"
             }
         },
         "com.amazonaws.customerprofiles#S3ConnectorOperator": {
@@ -5109,6 +5866,41 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.customerprofiles#StandardIdentifier"
+            }
+        },
+        "com.amazonaws.customerprofiles#Status": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "NOT_STARTED",
+                        "name": "NOT_STARTED"
+                    },
+                    {
+                        "value": "IN_PROGRESS",
+                        "name": "IN_PROGRESS"
+                    },
+                    {
+                        "value": "COMPLETE",
+                        "name": "COMPLETE"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    },
+                    {
+                        "value": "SPLIT",
+                        "name": "SPLIT"
+                    },
+                    {
+                        "value": "RETRY",
+                        "name": "RETRY"
+                    },
+                    {
+                        "value": "CANCELLED",
+                        "name": "CANCELLED"
+                    }
+                ]
             }
         },
         "com.amazonaws.customerprofiles#TagArn": {
@@ -5839,6 +6631,71 @@
                         "smithy.api#required": {}
                     }
                 }
+            }
+        },
+        "com.amazonaws.customerprofiles#WorkflowAttributes": {
+            "type": "structure",
+            "members": {
+                "AppflowIntegration": {
+                    "target": "com.amazonaws.customerprofiles#AppflowIntegrationWorkflowAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Workflow attributes specific to <code>APPFLOW_INTEGRATION</code> workflow.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Structure to hold workflow attributes.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#WorkflowList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#ListWorkflowsItem"
+            }
+        },
+        "com.amazonaws.customerprofiles#WorkflowMetrics": {
+            "type": "structure",
+            "members": {
+                "AppflowIntegration": {
+                    "target": "com.amazonaws.customerprofiles#AppflowIntegrationWorkflowMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Workflow execution metrics for <code>APPFLOW_INTEGRATION</code> workflow.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Generic object containing workflow execution metrics.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#WorkflowStepItem": {
+            "type": "structure",
+            "members": {
+                "AppflowIntegration": {
+                    "target": "com.amazonaws.customerprofiles#AppflowIntegrationWorkflowStep",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Workflow step information specific to <code>APPFLOW_INTEGRATION</code> workflow.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>List containing steps in workflow.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#WorkflowStepsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#WorkflowStepItem"
+            }
+        },
+        "com.amazonaws.customerprofiles#WorkflowType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "APPFLOW_INTEGRATION",
+                        "name": "APPFLOW_INTEGRATION"
+                    }
+                ]
             }
         },
         "com.amazonaws.customerprofiles#ZendeskConnectorOperator": {

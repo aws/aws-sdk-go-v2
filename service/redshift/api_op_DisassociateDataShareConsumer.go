@@ -38,6 +38,10 @@ type DisassociateDataShareConsumerInput struct {
 	// datashare is removed from.
 	ConsumerArn *string
 
+	// From a datashare consumer account, removes association of a datashare from all
+	// the existing and future namespaces in the specified Amazon Web Services Region.
+	ConsumerRegion *string
+
 	// A value that specifies whether association for the datashare is removed from the
 	// entire account.
 	DisassociateEntireAccount *bool

@@ -18,8 +18,11 @@ import (
 // information about finding secrets in the console, see Enhanced search
 // capabilities for secrets in Secrets Manager
 // (https://docs.aws.amazon.com/secretsmanager/latest/userguide/manage_search-secret.html).
-// Minimum permissions To run this command, you must have
-// secretsmanager:ListSecrets permissions.
+// Required permissions: secretsmanager:ListSecrets. For more information, see  IAM
+// policy actions for Secrets Manager
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions)
+// and Authentication and access control in Secrets Manager
+// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 func (c *Client) ListSecrets(ctx context.Context, params *ListSecretsInput, optFns ...func(*Options)) (*ListSecretsOutput, error) {
 	if params == nil {
 		params = &ListSecretsInput{}

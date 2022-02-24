@@ -14,10 +14,10 @@ import (
 // request takes an access token or a session string, but not both. Calling
 // AssociateSoftwareToken immediately disassociates the existing software token
 // from the user account. If the user doesn't subsequently verify the software
-// token, their account is essentially set up to authenticate without MFA. If MFA
-// config is set to Optional at the user pool level, the user can then login
-// without MFA. However, if MFA is set to Required for the user pool, the user will
-// be asked to setup a new software token MFA during sign in.
+// token, their account is set up to authenticate without MFA. If MFA config is set
+// to Optional at the user pool level, the user can then log in without MFA.
+// However, if MFA is set to Required for the user pool, the user is asked to set
+// up a new software token MFA during sign-in.
 func (c *Client) AssociateSoftwareToken(ctx context.Context, params *AssociateSoftwareTokenInput, optFns ...func(*Options)) (*AssociateSoftwareTokenOutput, error) {
 	if params == nil {
 		params = &AssociateSoftwareTokenInput{}
@@ -38,7 +38,7 @@ type AssociateSoftwareTokenInput struct {
 	// The access token.
 	AccessToken *string
 
-	// The session which should be passed both ways in challenge-response calls to the
+	// The session that should be passed both ways in challenge-response calls to the
 	// service. This allows authentication of the user as part of the MFA setup
 	// process.
 	Session *string
@@ -48,11 +48,11 @@ type AssociateSoftwareTokenInput struct {
 
 type AssociateSoftwareTokenOutput struct {
 
-	// A unique generated shared secret code that is used in the TOTP algorithm to
-	// generate a one time code.
+	// A unique generated shared secret code that is used in the time-based one-time
+	// password (TOTP) algorithm to generate a one-time code.
 	SecretCode *string
 
-	// The session which should be passed both ways in challenge-response calls to the
+	// The session that should be passed both ways in challenge-response calls to the
 	// service. This allows authentication of the user as part of the MFA setup
 	// process.
 	Session *string

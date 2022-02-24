@@ -21,7 +21,7 @@ import (
 // the created chat within 5 minutes. This is achieved by invoking
 // CreateParticipantConnection
 // (https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html)
-// with WEBSOCKET and CONNECTION_CREDENTIALS. A 429 error occurs in two
+// with WEBSOCKET and CONNECTION_CREDENTIALS. A 429 error occurs in the following
 // situations:
 //
 // * API rate limit is exceeded. API TPS throttling returns a
@@ -31,10 +31,12 @@ import (
 // (https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html)
 // is exceeded. Active chat throttling returns a LimitExceededException.
 //
-// For more
-// information about chat, see Chat
-// (https://docs.aws.amazon.com/connect/latest/adminguide/chat.html) in the Amazon
-// Connect Administrator Guide.
+// If you
+// use the ChatDurationInMinutes parameter and receive a 400 error, your account
+// may not support the ability to configure custom chat durations. For more
+// information, contact Amazon Web Services Support. For more information about
+// chat, see Chat (https://docs.aws.amazon.com/connect/latest/adminguide/chat.html)
+// in the Amazon Connect Administrator Guide.
 func (c *Client) StartChatContact(ctx context.Context, params *StartChatContactInput, optFns ...func(*Options)) (*StartChatContactOutput, error) {
 	if params == nil {
 		params = &StartChatContactInput{}
@@ -79,6 +81,11 @@ type StartChatContactInput struct {
 	// key-value pairs per contact. Attribute keys can include only alphanumeric, dash,
 	// and underscore characters.
 	Attributes map[string]string
+
+	// The total duration of the newly started chat session. If not specified, the chat
+	// session duration defaults to 25 hour. The minumum configurable time is 60
+	// minutes. The maximum configurable time is 10,080 minutes (7 days).
+	ChatDurationInMinutes *int32
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request.

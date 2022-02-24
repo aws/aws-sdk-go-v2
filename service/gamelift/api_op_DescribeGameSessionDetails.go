@@ -32,12 +32,12 @@ import (
 //
 // * To retrieve details for a
 // specific game session, provide the game session ID. This approach looks for the
-// game session ID in all fleets that reside in the AWS Region defined in the
-// request.
+// game session ID in all fleets that reside in the Amazon Web Services Region
+// defined in the request.
 //
-// Use the pagination parameters to retrieve results as a set of
-// sequential pages. If successful, a GameSessionDetail object is returned for each
-// game session that matches the request. Learn more Find a game session
+// Use the pagination parameters to retrieve results as a
+// set of sequential pages. If successful, a GameSessionDetail object is returned
+// for each game session that matches the request. Learn more Find a game session
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-client-api.html#gamelift-sdk-client-api-find)
 // Related actions CreateGameSession | DescribeGameSessions |
 // DescribeGameSessionDetails | SearchGameSessions | UpdateGameSession |
@@ -78,7 +78,8 @@ type DescribeGameSessionDetailsInput struct {
 	Limit *int32
 
 	// A fleet location to get game sessions for. You can specify a fleet's home Region
-	// or a remote location. Use the AWS Region code format, such as us-west-2.
+	// or a remote location. Use the Amazon Web Services Region code format, such as
+	// us-west-2.
 	Location *string
 
 	// A token that indicates the start of the next sequential page of results. Use the

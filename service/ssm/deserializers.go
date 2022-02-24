@@ -14257,9 +14257,6 @@ func awsAwsjson11_deserializeOpErrorTerminateSession(response *smithyhttp.Respon
 	}
 
 	switch {
-	case strings.EqualFold("DoesNotExistException", errorCode):
-		return awsAwsjson11_deserializeErrorDoesNotExistException(response, errorBody)
-
 	case strings.EqualFold("InternalServerError", errorCode):
 		return awsAwsjson11_deserializeErrorInternalServerError(response, errorBody)
 

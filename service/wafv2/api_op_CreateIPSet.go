@@ -32,20 +32,21 @@ func (c *Client) CreateIPSet(ctx context.Context, params *CreateIPSetInput, optF
 
 type CreateIPSetInput struct {
 
-	// Contains an array of strings that specify one or more IP addresses or blocks of
-	// IP addresses in Classless Inter-Domain Routing (CIDR) notation. WAF supports all
-	// IPv4 and IPv6 CIDR ranges except for /0. Examples:
+	// Contains an array of strings that specifies zero or more IP addresses or blocks
+	// of IP addresses in Classless Inter-Domain Routing (CIDR) notation. WAF supports
+	// all IPv4 and IPv6 CIDR ranges except for /0. Example address strings:
 	//
-	// * To configure WAF to allow,
-	// block, or count requests that originated from the IP address 192.0.2.44, specify
-	// 192.0.2.44/32.
+	// * To
+	// configure WAF to allow, block, or count requests that originated from the IP
+	// address 192.0.2.44, specify 192.0.2.44/32.
 	//
-	// * To configure WAF to allow, block, or count requests that
-	// originated from IP addresses from 192.0.2.0 to 192.0.2.255, specify
-	// 192.0.2.0/24.
+	// * To configure WAF to allow, block,
+	// or count requests that originated from IP addresses from 192.0.2.0 to
+	// 192.0.2.255, specify 192.0.2.0/24.
 	//
-	// * To configure WAF to allow, block, or count requests that
-	// originated from the IP address 1111:0000:0000:0000:0000:0000:0000:0111, specify
+	// * To configure WAF to allow, block, or count
+	// requests that originated from the IP address
+	// 1111:0000:0000:0000:0000:0000:0000:0111, specify
 	// 1111:0000:0000:0000:0000:0000:0000:0111/128.
 	//
 	// * To configure WAF to allow,
@@ -56,7 +57,19 @@ type CreateIPSetInput struct {
 	//
 	// For more information about CIDR
 	// notation, see the Wikipedia entry Classless Inter-Domain Routing
-	// (https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing).
+	// (https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing). Example JSON
+	// Addresses specifications:
+	//
+	// * Empty array: "Addresses": []
+	//
+	// * Array with one
+	// address: "Addresses": ["192.0.2.44/32"]
+	//
+	// * Array with three addresses:
+	// "Addresses": ["192.0.2.44/32", "192.0.2.0/24", "192.0.0.0/16"]
+	//
+	// * INVALID
+	// specification: "Addresses": [""] INVALID
 	//
 	// This member is required.
 	Addresses []string

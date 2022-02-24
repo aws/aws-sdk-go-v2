@@ -11,7 +11,7 @@ import (
 )
 
 // Permanently ends a session and closes the data connection between the Session
-// Manager client and SSM Agent on the managed node. A terminated session isn't be
+// Manager client and SSM Agent on the managed node. A terminated session can't be
 // resumed.
 func (c *Client) TerminateSession(ctx context.Context, params *TerminateSessionInput, optFns ...func(*Options)) (*TerminateSessionOutput, error) {
 	if params == nil {

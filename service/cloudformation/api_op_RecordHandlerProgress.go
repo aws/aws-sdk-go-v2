@@ -14,7 +14,7 @@ import (
 // Reports progress of a resource handler to CloudFormation. Reserved for use by
 // the CloudFormation CLI
 // (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html).
-// Do not use this API in your code.
+// Don't use this API in your code.
 func (c *Client) RecordHandlerProgress(ctx context.Context, params *RecordHandlerProgressInput, optFns ...func(*Options)) (*RecordHandlerProgressOutput, error) {
 	if params == nil {
 		params = &RecordHandlerProgressInput{}

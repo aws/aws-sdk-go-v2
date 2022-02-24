@@ -57,7 +57,8 @@ type GetSchemaVersionOutput struct {
 	// The date and time the schema version was created.
 	CreatedTime *string
 
-	// The data format of the schema definition. Currently AVRO and JSON are supported.
+	// The data format of the schema definition. Currently AVRO, JSON and PROTOBUF are
+	// supported.
 	DataFormat types.DataFormat
 
 	// The Amazon Resource Name (ARN) of the schema.

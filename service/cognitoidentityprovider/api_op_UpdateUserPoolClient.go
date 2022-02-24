@@ -48,7 +48,7 @@ type UpdateUserPoolClientInput struct {
 	// This member is required.
 	UserPoolId *string
 
-	// The time limit, after which the access token is no longer valid and cannot be
+	// The time limit after which the access token is no longer valid and can't be
 	// used.
 	AccessTokenValidity *int32
 
@@ -62,7 +62,7 @@ type UpdateUserPoolClientInput struct {
 	AllowedOAuthFlows []types.OAuthFlowType
 
 	// Set to true if the client is allowed to follow the OAuth protocol when
-	// interacting with Cognito user pools.
+	// interacting with Amazon Cognito user pools.
 	AllowedOAuthFlowsUserPoolClient bool
 
 	// The allowed OAuth scopes. Possible values provided by OAuth are: phone, email,
@@ -72,10 +72,10 @@ type UpdateUserPoolClientInput struct {
 	AllowedOAuthScopes []string
 
 	// The Amazon Pinpoint analytics configuration for collecting metrics for this user
-	// pool. In regions where Pinpoint is not available, Cognito User Pools only
-	// supports sending events to Amazon Pinpoint projects in us-east-1. In regions
-	// where Pinpoint is available, Cognito User Pools will support sending events to
-	// Amazon Pinpoint projects within that same region.
+	// pool. In Amazon Web Services Regions where isn't available, User Pools only
+	// supports sending events to Amazon Pinpoint projects in us-east-1. In Regions
+	// where Pinpoint is available, User Pools will support sending events to Amazon
+	// Pinpoint projects within that same Region.
 	AnalyticsConfiguration *types.AnalyticsConfigurationType
 
 	// A list of allowed redirect (callback) URLs for the identity providers. A
@@ -113,76 +113,71 @@ type UpdateUserPoolClientInput struct {
 	// callback URLs such as myapp://example are also supported.
 	DefaultRedirectURI *string
 
-	// Enables or disables token revocation. For more information about revoking
+	// Activates or deactivates token revocation. For more information about revoking
 	// tokens, see RevokeToken
 	// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_RevokeToken.html).
 	EnableTokenRevocation *bool
 
 	// The authentication flows that are supported by the user pool clients. Flow names
-	// without the ALLOW_ prefix are deprecated in favor of new names with the ALLOW_
-	// prefix. Note that values with ALLOW_ prefix cannot be used along with values
-	// without ALLOW_ prefix. Valid values include:
-	//
-	// * ALLOW_ADMIN_USER_PASSWORD_AUTH:
-	// Enable admin based user password authentication flow ADMIN_USER_PASSWORD_AUTH.
-	// This setting replaces the ADMIN_NO_SRP_AUTH setting. With this authentication
-	// flow, Cognito receives the password in the request instead of using the SRP
-	// (Secure Remote Password protocol) protocol to verify passwords.
+	// without the ALLOW_ prefix are no longer supported in favor of new names with the
+	// ALLOW_ prefix. Note that values with ALLOW_ prefix must be used only along with
+	// values with the ALLOW_ prefix. Valid values include:
 	//
 	// *
-	// ALLOW_CUSTOM_AUTH: Enable Lambda trigger based authentication.
+	// ALLOW_ADMIN_USER_PASSWORD_AUTH: Enable admin based user password authentication
+	// flow ADMIN_USER_PASSWORD_AUTH. This setting replaces the ADMIN_NO_SRP_AUTH
+	// setting. With this authentication flow, Amazon Cognito receives the password in
+	// the request instead of using the Secure Remote Password (SRP) protocol to verify
+	// passwords.
+	//
+	// * ALLOW_CUSTOM_AUTH: Enable Lambda trigger based authentication.
 	//
 	// *
 	// ALLOW_USER_PASSWORD_AUTH: Enable user password-based authentication. In this
-	// flow, Cognito receives the password in the request instead of using the SRP
-	// protocol to verify passwords.
+	// flow, Amazon Cognito receives the password in the request instead of using the
+	// SRP protocol to verify passwords.
 	//
-	// * ALLOW_USER_SRP_AUTH: Enable SRP based
+	// * ALLOW_USER_SRP_AUTH: Enable SRP-based
 	// authentication.
 	//
 	// * ALLOW_REFRESH_TOKEN_AUTH: Enable authflow to refresh tokens.
 	ExplicitAuthFlows []types.ExplicitAuthFlowsType
 
-	// The time limit, after which the ID token is no longer valid and cannot be used.
+	// The time limit after which the ID token is no longer valid and can't be used.
 	IdTokenValidity *int32
 
 	// A list of allowed logout URLs for the identity providers.
 	LogoutURLs []string
 
-	// Use this setting to choose which errors and responses are returned by Cognito
-	// APIs during authentication, account confirmation, and password recovery when the
-	// user does not exist in the user pool. When set to ENABLED and the user does not
-	// exist, authentication returns an error indicating either the username or
-	// password was incorrect, and account confirmation and password recovery return a
-	// response indicating a code was sent to a simulated destination. When set to
-	// LEGACY, those APIs will return a UserNotFoundException exception if the user
-	// does not exist in the user pool. Valid values include:
+	// Errors and responses that you want Amazon Cognito APIs to return during
+	// authentication, account confirmation, and password recovery when the user
+	// doesn't exist in the user pool. When set to ENABLED and the user doesn't exist,
+	// authentication returns an error indicating either the username or password was
+	// incorrect. Account confirmation and password recovery return a response
+	// indicating a code was sent to a simulated destination. When set to LEGACY, those
+	// APIs return a UserNotFoundException exception if the user doesn't exist in the
+	// user pool. Valid values include:
 	//
-	// * ENABLED - This
-	// prevents user existence-related errors.
+	// * ENABLED - This prevents user
+	// existence-related errors.
 	//
-	// * LEGACY - This represents the old
-	// behavior of Cognito where user existence related errors are not
-	// prevented.
-	//
-	// After February 15th 2020, the value of PreventUserExistenceErrors
-	// will default to ENABLED for newly created user pool clients if no value is
-	// provided.
+	// * LEGACY - This represents the early behavior of
+	// Amazon Cognito where user existence related errors aren't prevented.
 	PreventUserExistenceErrors types.PreventUserExistenceErrorTypes
 
 	// The read-only attributes of the user pool.
 	ReadAttributes []string
 
 	// The time limit, in days, after which the refresh token is no longer valid and
-	// cannot be used.
+	// can't be used.
 	RefreshTokenValidity int32
 
 	// A list of provider names for the identity providers that are supported on this
 	// client.
 	SupportedIdentityProviders []string
 
-	// The units in which the validity times are represented in. Default for
-	// RefreshToken is days, and default for ID and access tokens are hours.
+	// The units in which the validity times are represented. Default for RefreshToken
+	// is days, and default for ID and access tokens is hours.
 	TokenValidityUnits *types.TokenValidityUnitsType
 
 	// The writeable attributes of the user pool.
@@ -195,8 +190,8 @@ type UpdateUserPoolClientInput struct {
 // client.
 type UpdateUserPoolClientOutput struct {
 
-	// The user pool client value from the response from the server when an update user
-	// pool client request is made.
+	// The user pool client value from the response from the server when you request to
+	// update the user pool client.
 	UserPoolClient *types.UserPoolClientType
 
 	// Metadata pertaining to the operation's result.

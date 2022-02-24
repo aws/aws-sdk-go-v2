@@ -12,7 +12,11 @@ import (
 
 // Generates a random password. We recommend that you specify the maximum length
 // and include every character type that the system you are generating a password
-// for can support.
+// for can support. Required permissions: secretsmanager:GetRandomPassword. For
+// more information, see  IAM policy actions for Secrets Manager
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions)
+// and Authentication and access control in Secrets Manager
+// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 func (c *Client) GetRandomPassword(ctx context.Context, params *GetRandomPasswordInput, optFns ...func(*Options)) (*GetRandomPasswordOutput, error) {
 	if params == nil {
 		params = &GetRandomPasswordInput{}

@@ -29,7 +29,7 @@ import (
 // When you are satisfied with the changes the change set will make, execute the
 // change set by using the ExecuteChangeSet action. CloudFormation doesn't make
 // changes until you execute the change set. To create a change set for the entire
-// stack hierachy, set IncludeNestedStacks to True.
+// stack hierarchy, set IncludeNestedStacks to True.
 func (c *Client) CreateChangeSet(ctx context.Context, params *CreateChangeSetInput, optFns ...func(*Options)) (*CreateChangeSetOutput, error) {
 	if params == nil {
 		params = &CreateChangeSetInput{}
@@ -50,8 +50,8 @@ type CreateChangeSetInput struct {
 
 	// The name of the change set. The name must be unique among all change sets that
 	// are associated with the specified stack. A change set name can contain only
-	// alphanumeric, case sensitive characters and hyphens. It must start with an
-	// alphabetic character and cannot exceed 128 characters.
+	// alphanumeric, case sensitive characters, and hyphens. It must start with an
+	// alphabetical character and can't exceed 128 characters.
 	//
 	// This member is required.
 	ChangeSetName *string
@@ -117,7 +117,7 @@ type CreateChangeSetInput struct {
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html)
 	//
 	// For
-	// more information, see Acknowledging IAM Resources in CloudFormation Templates
+	// more information, see Acknowledging IAM resources in CloudFormation templates
 	// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities).
 	//
 	// *
@@ -133,13 +133,13 @@ type CreateChangeSetInput struct {
 	// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/create-reusable-transform-function-snippets-and-add-to-your-template-with-aws-include-transform.html)
 	// and AWS::Serverless
 	// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html)
-	// transforms, which are macros hosted by CloudFormation. This capacity does not
+	// transforms, which are macros hosted by CloudFormation. This capacity doesn't
 	// apply to creating change sets, and specifying it when creating change sets has
 	// no effect. If you want to create a stack from a stack template that contains
 	// macros and nested stacks, you must create or update the stack directly from the
 	// template using the CreateStack or UpdateStack action, and specifying this
-	// capability. For more information on macros, see Using CloudFormation Macros to
-	// Perform Custom Processing on Templates
+	// capability. For more information on macros, see Using CloudFormation macros to
+	// perform custom processing on templates
 	// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html).
 	Capabilities []types.Capability
 
@@ -183,7 +183,7 @@ type CreateChangeSetInput struct {
 	// resource type that you're updating, the stack update fails. By default,
 	// CloudFormation grants permissions to all resource types. Identity and Access
 	// Management (IAM) uses this parameter for condition keys in IAM policies for
-	// CloudFormation. For more information, see Controlling Access with Identity and
+	// CloudFormation. For more information, see Controlling access with Identity and
 	// Access Management
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html)
 	// in the CloudFormation User Guide.
@@ -195,12 +195,12 @@ type CreateChangeSetInput struct {
 	// The Amazon Resource Name (ARN) of an Identity and Access Management (IAM) role
 	// that CloudFormation assumes when executing the change set. CloudFormation uses
 	// the role's credentials to make calls on your behalf. CloudFormation uses this
-	// role for all future operations on the stack. As long as users have permission to
-	// operate on the stack, CloudFormation uses this role even if the users don't have
-	// permission to pass it. Ensure that the role grants least privilege. If you don't
-	// specify a value, CloudFormation uses the role that was previously associated
-	// with the stack. If no role is available, CloudFormation uses a temporary session
-	// that is generated from your user credentials.
+	// role for all future operations on the stack. Provided that users have permission
+	// to operate on the stack, CloudFormation uses this role even if the users don't
+	// have permission to pass it. Ensure that the role grants least permission. If you
+	// don't specify a value, CloudFormation uses the role that was previously
+	// associated with the stack. If no role is available, CloudFormation uses a
+	// temporary session that is generated from your user credentials.
 	RoleARN *string
 
 	// The rollback triggers for CloudFormation to monitor during stack creation and
@@ -218,13 +218,13 @@ type CreateChangeSetInput struct {
 	TemplateBody *string
 
 	// The location of the file that contains the revised template. The URL must point
-	// to a template (max size: 460,800 bytes) that is located in an S3 bucket or a
-	// Systems Manager document. CloudFormation generates the change set by comparing
+	// to a template (max size: 460,800 bytes) that's located in an Amazon S3 bucket or
+	// a Systems Manager document. CloudFormation generates the change set by comparing
 	// this template with the stack that you specified. Conditional: You must specify
 	// only TemplateBody or TemplateURL.
 	TemplateURL *string
 
-	// Whether to reuse the template that is associated with the stack to create the
+	// Whether to reuse the template that's associated with the stack to create the
 	// change set.
 	UsePreviousTemplate *bool
 

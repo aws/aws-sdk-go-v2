@@ -25,7 +25,7 @@ import (
 // required; and the maximum time allowed for a matchmaking attempt. When using
 // FlexMatch with GameLift hosting, you also need to identify the game session
 // queue to use when starting a game session for the match. In addition, you must
-// set up an Amazon Simple Notification Service (SNS) topic to receive matchmaking
+// set up an Amazon Simple Notification Service topic to receive matchmaking
 // notifications. Provide the topic ARN in the matchmaking configuration. An
 // alternative method, continuously polling ticket status with DescribeMatchmaking,
 // is only suitable for games in development with low matchmaking usage. Learn more
@@ -160,14 +160,14 @@ type CreateMatchmakingConfigurationInput struct {
 	NotificationTarget *string
 
 	// A list of labels to assign to the new matchmaking configuration resource. Tags
-	// are developer-defined key-value pairs. Tagging AWS resources are useful for
-	// resource management, access management and cost allocation. For more
-	// information, see  Tagging AWS Resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the AWS
-	// General Reference. Once the resource is created, you can use TagResource,
-	// UntagResource, and ListTagsForResource to add, remove, and view tags. The
-	// maximum tag limit may be lower than stated. See the AWS General Reference for
-	// actual tagging limits.
+	// are developer-defined key-value pairs. Tagging Amazon Web Services resources are
+	// useful for resource management, access management and cost allocation. For more
+	// information, see  Tagging Amazon Web Services Resources
+	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the Amazon
+	// Web Services General Reference. Once the resource is created, you can use
+	// TagResource, UntagResource, and ListTagsForResource to add, remove, and view
+	// tags. The maximum tag limit may be lower than stated. See the Amazon Web
+	// Services General Reference for actual tagging limits.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

@@ -250,6 +250,26 @@ func (m *validateOpDeleteStackSet) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeChangeSetHooks struct {
+}
+
+func (*validateOpDescribeChangeSetHooks) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeChangeSetHooks) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeChangeSetHooksInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeChangeSetHooksInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeChangeSet struct {
 }
 
@@ -918,6 +938,10 @@ func addOpDeleteStackSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteStackSet{}, middleware.After)
 }
 
+func addOpDescribeChangeSetHooksValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeChangeSetHooks{}, middleware.After)
+}
+
 func addOpDescribeChangeSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeChangeSet{}, middleware.After)
 }
@@ -1398,6 +1422,21 @@ func validateOpDeleteStackSetInput(v *DeleteStackSetInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteStackSetInput"}
 	if v.StackSetName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StackSetName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeChangeSetHooksInput(v *DescribeChangeSetHooksInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeChangeSetHooksInput"}
+	if v.ChangeSetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChangeSetName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -31,6 +31,11 @@ import (
 // already exists, and you specify the same secret data, the operation succeeds but
 // does nothing. However, if the secret data is different, then the operation fails
 // because you can't modify an existing version; you can only create new ones.
+// Required permissions: secretsmanager:PutSecretValue. For more information, see
+// IAM policy actions for Secrets Manager
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions)
+// and Authentication and access control in Secrets Manager
+// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 func (c *Client) PutSecretValue(ctx context.Context, params *PutSecretValueInput, optFns ...func(*Options)) (*PutSecretValueOutput, error) {
 	if params == nil {
 		params = &PutSecretValueInput{}

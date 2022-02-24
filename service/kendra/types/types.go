@@ -24,7 +24,7 @@ type AclConfiguration struct {
 
 	// A list of groups, separated by semi-colons, that filters a query response based
 	// on user context. The document is only returned to users that are in one of the
-	// groups specified in the UserContext field of the Query operation.
+	// groups specified in the UserContext field of the Query API.
 	//
 	// This member is required.
 	AllowedGroupsColumnName *string
@@ -155,7 +155,7 @@ type BasicAuthenticationConfiguration struct {
 }
 
 // Provides information about documents that could not be removed from an index by
-// the BatchDeleteDocument operation.
+// the BatchDeleteDocument API.
 type BatchDeleteDocumentResponseFailedDocument struct {
 
 	// The error code for why the document couldn't be removed from the index.
@@ -230,7 +230,7 @@ type CapacityUnitsConfiguration struct {
 }
 
 // Gathers information about when a particular result was clicked by a user. Your
-// application uses the SubmitFeedback operation to provide click information.
+// application uses the SubmitFeedback API to provide click information.
 type ClickFeedback struct {
 
 	// The Unix timestamp of the date and time that the result was clicked.
@@ -270,7 +270,7 @@ type ColumnConfiguration struct {
 
 	// An array of objects that map database column names to the corresponding fields
 	// in an index. You must first create the fields in the index using the UpdateIndex
-	// operation.
+	// API.
 	FieldMappings []DataSourceToIndexFieldMapping
 
 	noSmithyDocumentSerde
@@ -283,7 +283,7 @@ type ConfluenceAttachmentConfiguration struct {
 
 	// Defines how attachment metadata fields should be mapped to index fields. Before
 	// you can map a field, you must first create an index field with a matching type
-	// using the console or the UpdateIndex operation. If you specify the
+	// using the console or the UpdateIndex API. If you specify the
 	// AttachentFieldMappings parameter, you must specify at least one field mapping.
 	AttachmentFieldMappings []ConfluenceAttachmentToIndexFieldMapping
 
@@ -296,11 +296,11 @@ type ConfluenceAttachmentConfiguration struct {
 
 // Defines the mapping between a field in the Confluence data source to a Amazon
 // Kendra index field. You must first create the index field using the UpdateIndex
-// operation.
+// API.
 type ConfluenceAttachmentToIndexFieldMapping struct {
 
 	// The name of the field in the data source. You must first create the index field
-	// using the UpdateIndex operation.
+	// using the UpdateIndex API.
 	DataSourceFieldName ConfluenceAttachmentFieldName
 
 	// The format for date fields in the data source. If the field specified in
@@ -317,12 +317,12 @@ type ConfluenceAttachmentToIndexFieldMapping struct {
 
 // Specifies the blog settings for the Confluence data source. Blogs are always
 // indexed unless filtered from the index by the ExclusionPatterns or
-// InclusionPatterns fields in the ConfluenceConfiguration type.
+// InclusionPatterns fields in the ConfluenceConfiguration object.
 type ConfluenceBlogConfiguration struct {
 
 	// Defines how blog metadata fields should be mapped to index fields. Before you
 	// can map a field, you must first create an index field with a matching type using
-	// the console or the UpdateIndex operation. If you specify the BlogFieldMappings
+	// the console or the UpdateIndex API. If you specify the BlogFieldMappings
 	// parameter, you must specify at least one field mapping.
 	BlogFieldMappings []ConfluenceBlogToIndexFieldMapping
 
@@ -331,7 +331,7 @@ type ConfluenceBlogConfiguration struct {
 
 // Defines the mapping between a blog field in the Confluence data source to a
 // Amazon Kendra index field. You must first create the index field using the
-// UpdateIndex operation.
+// UpdateIndex API.
 type ConfluenceBlogToIndexFieldMapping struct {
 
 	// The name of the field in the data source.
@@ -418,7 +418,7 @@ type ConfluencePageConfiguration struct {
 
 	// Defines how page metadata fields should be mapped to index fields. Before you
 	// can map a field, you must first create an index field with a matching type using
-	// the console or the UpdateIndex operation. If you specify the PageFieldMappings
+	// the console or the UpdateIndex API. If you specify the PageFieldMappings
 	// parameter, you must specify at least one field mapping.
 	PageFieldMappings []ConfluencePageToIndexFieldMapping
 
@@ -427,7 +427,7 @@ type ConfluencePageConfiguration struct {
 
 // Defines the mapping between a field in the Confluence data source to a Amazon
 // Kendra index field. You must first create the index field using the UpdateIndex
-// operation.
+// API.
 type ConfluencePageToIndexFieldMapping struct {
 
 	// The name of the field in the data source.
@@ -472,16 +472,16 @@ type ConfluenceSpaceConfiguration struct {
 
 	// Defines how space metadata fields should be mapped to index fields. Before you
 	// can map a field, you must first create an index field with a matching type using
-	// the console or the UpdateIndex operation. If you specify the SpaceFieldMappings
+	// the console or the UpdateIndex API. If you specify the SpaceFieldMappings
 	// parameter, you must specify at least one field mapping.
 	SpaceFieldMappings []ConfluenceSpaceToIndexFieldMapping
 
 	noSmithyDocumentSerde
 }
 
-// Defines the mapping between a field in the Confluence data source to a Amazon
+// Defines the mapping between a field in the Confluence data source to an Amazon
 // Kendra index field. You must first create the index field using the UpdateIndex
-// operation.
+// API.
 type ConfluenceSpaceToIndexFieldMapping struct {
 
 	// The name of the field in the data source.
@@ -546,7 +546,7 @@ type ContentSourceConfiguration struct {
 	// experience.
 	DataSourceIds []string
 
-	// TRUE to use documents you indexed directly using the BatchPutDocument operation.
+	// TRUE to use documents you indexed directly using the BatchPutDocument API.
 	DirectPutContent bool
 
 	// The identifier of the FAQs that you want to use for your Amazon Kendra
@@ -634,6 +634,10 @@ type DataSourceConfiguration struct {
 	// Provides information necessary to create a data source connector for a database.
 	DatabaseConfiguration *DatabaseConfiguration
 
+	// Provides the configuration information to connect to Amazon FSx as your data
+	// source.
+	FsxConfiguration *FsxConfiguration
+
 	// Provides configuration for data sources that connect to Google Drive.
 	GoogleDriveConfiguration *GoogleDriveConfiguration
 
@@ -658,8 +662,8 @@ type DataSourceConfiguration struct {
 	// Provides the configuration information required for Amazon Kendra Web Crawler.
 	WebCrawlerConfiguration *WebCrawlerConfiguration
 
-	// Provides the configuration information to connect to WorkDocs as your data
-	// source.
+	// Provides the configuration information to connect to Amazon WorkDocs as your
+	// data source.
 	WorkDocsConfiguration *WorkDocsConfiguration
 
 	noSmithyDocumentSerde
@@ -684,8 +688,8 @@ type DataSourceGroup struct {
 	noSmithyDocumentSerde
 }
 
-// Summary information for a Amazon Kendra data source. Returned in a call to the
-// DescribeDataSource operation.
+// Summary information for an Amazon Kendra data source. Returned in a call to the
+// DescribeDataSource API.
 type DataSourceSummary struct {
 
 	// The UNIX datetime that the data source was created.
@@ -717,18 +721,18 @@ type DataSourceSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Provides information about a synchronization job.
+// Provides information about a data source synchronization job.
 type DataSourceSyncJob struct {
 
 	// If the reason that the synchronization failed is due to an error with the
 	// underlying data source, this field contains a code that identifies the error.
 	DataSourceErrorCode *string
 
-	// The UNIX datetime that the synchronization job was completed.
+	// The UNIX datetime that the synchronization job completed.
 	EndTime *time.Time
 
-	// If the Status field is set to FAILED, the ErrorCode field contains a the reason
-	// that the synchronization failed.
+	// If the Status field is set to FAILED, the ErrorCode field indicates the reason
+	// the synchronization failed.
 	ErrorCode ErrorCode
 
 	// If the Status field is set to ERROR, the ErrorMessage field contains a
@@ -743,7 +747,7 @@ type DataSourceSyncJob struct {
 	// connector.
 	Metrics *DataSourceSyncJobMetrics
 
-	// The UNIX datetime that the synchronization job was started.
+	// The UNIX datetime that the synchronization job started.
 	StartTime *time.Time
 
 	// The execution status of the synchronization job. When the Status field is set to
@@ -802,7 +806,7 @@ type DataSourceSyncJobMetricTarget struct {
 }
 
 // Maps a column or attribute in the data source to an index field. You must first
-// create the fields in the index using the UpdateIndex operation.
+// create the fields in the index using the UpdateIndex API.
 type DataSourceToIndexFieldMapping struct {
 
 	// The name of the column or attribute in the data source.
@@ -854,14 +858,18 @@ type Document struct {
 
 	// Custom attributes to apply to the document. Use the custom attributes to provide
 	// additional information for searching, to provide facets for refining searches,
-	// and to provide additional information in the query response.
+	// and to provide additional information in the query response. For example,
+	// 'DataSourceId' and 'DataSourceSyncJobId' are custom attributes that provide
+	// information on the synchronization of documents running on a data source. Note,
+	// 'DataSourceSyncJobId' could be an optional custom attribute as Amazon Kendra
+	// will use the ID of a running sync job.
 	Attributes []DocumentAttribute
 
 	// The contents of the document. Documents passed to the Blob parameter must be
 	// base64 encoded. Your code might not need to encode the document file bytes if
-	// you're using an Amazon Web Services SDK to call Amazon Kendra operations. If you
-	// are calling the Amazon Kendra endpoint directly using REST, you must base64
-	// encode the contents before sending.
+	// you're using an Amazon Web Services SDK to call Amazon Kendra APIs. If you are
+	// calling the Amazon Kendra endpoint directly using REST, you must base64 encode
+	// the contents before sending.
 	Blob []byte
 
 	// The file type of the document in the Blob field.
@@ -1160,8 +1168,8 @@ type EntityPersonaConfiguration struct {
 type ExperienceConfiguration struct {
 
 	// The identifiers of your data sources and FAQs. Or, you can specify that you want
-	// to use documents indexed via the BatchPutDocument operation. This is the content
-	// you want to use for your Amazon Kendra experience.
+	// to use documents indexed via the BatchPutDocument API. This is the content you
+	// want to use for your Amazon Kendra experience.
 	ContentSourceConfiguration *ContentSourceConfiguration
 
 	// The Amazon Web Services SSO field name that contains the identifiers of your
@@ -1319,6 +1327,70 @@ type FaqSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Provides the configuration information to connect to Amazon FSx as your data
+// source.
+type FsxConfiguration struct {
+
+	// The identifier of the Amazon FSx file system. You can find your file system ID
+	// on the file system dashboard in the Amazon FSx console. For information on how
+	// to create a file system in Amazon FSx console, using Windows File Server as an
+	// example, see Amazon FSx Getting started guide
+	// (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/getting-started-step1.html).
+	//
+	// This member is required.
+	FileSystemId *string
+
+	// The Amazon FSx file system type. Windows is currently the only supported type.
+	//
+	// This member is required.
+	FileSystemType FsxFileSystemType
+
+	// Provides the configuration information for connecting to an Amazon Virtual
+	// Private Cloud for your Amazon FSx. Your Amazon FSx instance must reside inside
+	// your VPC.
+	//
+	// This member is required.
+	VpcConfiguration *DataSourceVpcConfiguration
+
+	// A list of regular expression patterns to exclude certain files in your Amazon
+	// FSx file system. Files that match the patterns are excluded from the index.
+	// Files that don’t match the patterns are included in the index. If a file matches
+	// both an inclusion pattern and an exclusion pattern, the exclusion pattern takes
+	// precedence and the file isn't included in the index.
+	ExclusionPatterns []string
+
+	// A list of DataSourceToIndexFieldMapping objects that map Amazon FSx data source
+	// attributes or field names to Amazon Kendra index field names in Amazon Kendra.
+	// To create custom fields, use the UpdateIndex API before you map to Amazon FSx
+	// fields. For more information, see Mapping data source fields
+	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The Amazon
+	// FSx data source field names must exist in your Amazon FSx custom metadata.
+	FieldMappings []DataSourceToIndexFieldMapping
+
+	// A list of regular expression patterns to include certain files in your Amazon
+	// FSx file system. Files that match the patterns are included in the index. Files
+	// that don't match the patterns are excluded from the index. If a file matches
+	// both an inclusion pattern and an exclusion pattern, the exclusion pattern takes
+	// precedence and the file isn't included in the index.
+	InclusionPatterns []string
+
+	// The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the
+	// key-value pairs required to connect to your Amazon FSx file system. Windows is
+	// currently the only supported type. The secret must contain a JSON structure with
+	// the following keys:
+	//
+	// * username—The Active Directory user name, along with the
+	// Domain Name System (DNS) domain name. For example, user@corp.example.com. The
+	// Active Directory user account must have read and mounting access to the Amazon
+	// FSx file system for Windows.
+	//
+	// * password—The password of the active directory
+	// user with read and mounting access Amazon FSx Windows file system.
+	SecretArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Provides configuration information for data sources that connect to Google
 // Drive.
 type GoogleDriveConfiguration struct {
@@ -1356,7 +1428,7 @@ type GoogleDriveConfiguration struct {
 	// Defines mapping between a field in the Google Drive and a Amazon Kendra index
 	// field. If you are using the console, you can define index fields when creating
 	// the mapping. If you are using the API, you must first create the field using the
-	// UpdateIndex operation.
+	// UpdateIndex API.
 	FieldMappings []DataSourceToIndexFieldMapping
 
 	// A list of regular expression patterns that apply to path on Google Drive. Items
@@ -1529,7 +1601,7 @@ type IndexConfigurationSummary struct {
 	// This member is required.
 	Status IndexStatus
 
-	// The Unix timestamp when the index was last updated by the UpdateIndex operation.
+	// The Unix timestamp when the index was last updated by the UpdateIndex API.
 	//
 	// This member is required.
 	UpdatedAt *time.Time
@@ -1539,7 +1611,7 @@ type IndexConfigurationSummary struct {
 	Edition IndexEdition
 
 	// A unique identifier for the index. Use this to identify the index when you are
-	// using operations such as Query, DescribeIndex, UpdateIndex, and DeleteIndex.
+	// using APIs such as Query, DescribeIndex, UpdateIndex, and DeleteIndex.
 	Id *string
 
 	// The name of the index.
@@ -1926,7 +1998,7 @@ type Relevance struct {
 }
 
 // Provides feedback on how relevant a document is to a search. Your application
-// uses the SubmitFeedback operation to provide relevance information.
+// uses the SubmitFeedback API to provide relevance information.
 type RelevanceFeedback struct {
 
 	// Whether to document was relevant or not relevant to the search.
@@ -2470,8 +2542,8 @@ type SharePointConfiguration struct {
 
 	// A list of DataSourceToIndexFieldMapping objects that map Microsoft SharePoint
 	// attributes to custom fields in the Amazon Kendra index. You must first create
-	// the index fields using the UpdateIndex operation before you map SharePoint
-	// attributes. For more information, see Mapping Data Source Fields
+	// the index fields using the UpdateIndex API before you map SharePoint attributes.
+	// For more information, see Mapping Data Source Fields
 	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html).
 	FieldMappings []DataSourceToIndexFieldMapping
 
@@ -2787,7 +2859,7 @@ type UserContext struct {
 // for setting up user context filtering, where Amazon Kendra filters search
 // results for different users based on their group's access to documents. You can
 // also map your users to their groups for user context filtering using the
-// PutPrincipalMapping operation
+// PutPrincipalMapping API
 // (https://docs.aws.amazon.com/kendra/latest/dg/API_PutPrincipalMapping.html). To
 // set up an Amazon Web Services SSO identity source in the console to use with
 // Amazon Kendra, see Getting started with an Amazon Web Services SSO identity
@@ -2798,8 +2870,8 @@ type UserContext struct {
 // (https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html#iam-roles-aws-sso).
 // Amazon Kendra currently does not support using UserGroupResolutionConfiguration
 // with an Amazon Web Services organization member account for your Amazon Web
-// Services SSO identify source. You must create your index in the parent account
-// for the organization in order to use UserGroupResolutionConfiguration.
+// Services SSO identify source. You must create your index in the management
+// account for the organization in order to use UserGroupResolutionConfiguration.
 type UserGroupResolutionConfiguration struct {
 
 	// The identity store provider (mode) you want to use to fetch access levels of
@@ -2955,8 +3027,8 @@ type WorkDocsConfiguration struct {
 
 	// A list of DataSourceToIndexFieldMapping objects that map Amazon WorkDocs field
 	// names to custom index field names in Amazon Kendra. You must first create the
-	// custom index fields using the UpdateIndex operation before you map to Amazon
-	// WorkDocs fields. For more information, see Mapping Data Source Fields
+	// custom index fields using the UpdateIndex API before you map to Amazon WorkDocs
+	// fields. For more information, see Mapping Data Source Fields
 	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The Amazon
 	// WorkDocs data source field names need to exist in your Amazon WorkDocs custom
 	// metadata.

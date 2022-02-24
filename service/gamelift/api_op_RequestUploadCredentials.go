@@ -12,11 +12,11 @@ import (
 )
 
 // Retrieves a fresh set of credentials for use when uploading a new set of game
-// build files to Amazon GameLift's Amazon S3. This is done as part of the build
-// creation process; see CreateBuild. To request new credentials, specify the build
-// ID as returned with an initial CreateBuild request. If successful, a new set of
-// credentials are returned, along with the S3 storage location associated with the
-// build ID. Learn more  Create a Build with Files in S3
+// build files to Amazon Web Services's Amazon S3. This is done as part of the
+// build creation process; see CreateBuild. To request new credentials, specify the
+// build ID as returned with an initial CreateBuild request. If successful, a new
+// set of credentials are returned, along with the S3 storage location associated
+// with the build ID. Learn more  Create a Build with Files in S3
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-cli-uploading.html#gamelift-build-cli-uploading-create-build)
 // Related actions CreateBuild | ListBuilds | DescribeBuild | UpdateBuild |
 // DeleteBuild | All APIs by task
@@ -54,9 +54,9 @@ type RequestUploadCredentialsOutput struct {
 	// Amazon S3 path and key, identifying where the game build files are stored.
 	StorageLocation *types.S3Location
 
-	// AWS credentials required when uploading a game build to the storage location.
-	// These credentials have a limited lifespan and are valid only for the build they
-	// were issued for.
+	// Amazon Web Services credentials required when uploading a game build to the
+	// storage location. These credentials have a limited lifespan and are valid only
+	// for the build they were issued for.
 	UploadCredentials *types.AwsCredentials
 
 	// Metadata pertaining to the operation's result.

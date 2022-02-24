@@ -239,6 +239,9 @@ func awsAwsjson11_deserializeOpErrorCreateSecret(response *smithyhttp.Response, 
 	}
 
 	switch {
+	case strings.EqualFold("DecryptionFailure", errorCode):
+		return awsAwsjson11_deserializeErrorDecryptionFailure(response, errorBody)
+
 	case strings.EqualFold("EncryptionFailure", errorCode):
 		return awsAwsjson11_deserializeErrorEncryptionFailure(response, errorBody)
 
@@ -1454,6 +1457,9 @@ func awsAwsjson11_deserializeOpErrorPutSecretValue(response *smithyhttp.Response
 	}
 
 	switch {
+	case strings.EqualFold("DecryptionFailure", errorCode):
+		return awsAwsjson11_deserializeErrorDecryptionFailure(response, errorBody)
+
 	case strings.EqualFold("EncryptionFailure", errorCode):
 		return awsAwsjson11_deserializeErrorEncryptionFailure(response, errorBody)
 
@@ -2379,6 +2385,9 @@ func awsAwsjson11_deserializeOpErrorUpdateSecret(response *smithyhttp.Response, 
 	}
 
 	switch {
+	case strings.EqualFold("DecryptionFailure", errorCode):
+		return awsAwsjson11_deserializeErrorDecryptionFailure(response, errorBody)
+
 	case strings.EqualFold("EncryptionFailure", errorCode):
 		return awsAwsjson11_deserializeErrorEncryptionFailure(response, errorBody)
 
@@ -3748,6 +3757,24 @@ func awsAwsjson11_deserializeDocumentRotationRulesType(v **types.RotationRulesTy
 					return err
 				}
 				sv.AutomaticallyAfterDays = i64
+			}
+
+		case "Duration":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DurationType to be of type string, got %T instead", value)
+				}
+				sv.Duration = ptr.String(jtv)
+			}
+
+		case "ScheduleExpression":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ScheduleExpressionType to be of type string, got %T instead", value)
+				}
+				sv.ScheduleExpression = ptr.String(jtv)
 			}
 
 		default:

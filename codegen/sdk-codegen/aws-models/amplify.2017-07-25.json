@@ -50,6 +50,24 @@
         },
         "com.amazonaws.amplify#Amplify": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Amplify",
+                    "arnNamespace": "amplify",
+                    "cloudFormationName": "Amplify",
+                    "cloudTrailEventSource": "amplify.amazonaws.com",
+                    "endpointPrefix": "amplify"
+                },
+                "aws.auth#sigv4": {
+                    "name": "amplify"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>Amplify enables developers to develop and deploy cloud-powered mobile and web apps.\n            The Amplify Console provides a continuous delivery and hosting service for web\n            applications. For more information, see the <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/welcome.html\">Amplify Console User Guide</a>. The\n            Amplify Framework is a comprehensive set of SDKs, libraries, tools, and documentation\n            for client app development. For more information, see the <a href=\"https://docs.amplify.aws/\">Amplify Framework.</a>\n         </p>",
+                "smithy.api#title": "AWS Amplify",
+                "smithy.api#xmlNamespace": {
+                    "uri": "http://amplify.amazonaws.com"
+                }
+            },
             "version": "2017-07-25",
             "operations": [
                 {
@@ -163,25 +181,7 @@
                 {
                     "target": "com.amazonaws.amplify#UpdateWebhook"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Amplify",
-                    "arnNamespace": "amplify",
-                    "cloudFormationName": "Amplify",
-                    "cloudTrailEventSource": "amplify.amazonaws.com",
-                    "endpointPrefix": "amplify"
-                },
-                "aws.auth#sigv4": {
-                    "name": "amplify"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Amplify enables developers to develop and deploy cloud-powered mobile and web apps.\n            The Amplify Console provides a continuous delivery and hosting service for web\n            applications. For more information, see the <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/welcome.html\">Amplify Console User Guide</a>. The\n            Amplify Framework is a comprehensive set of SDKs, libraries, tools, and documentation\n            for client app development. For more information, see the <a href=\"https://docs.amplify.aws/\">Amplify Framework.</a>\n         </p>",
-                "smithy.api#title": "AWS Amplify",
-                "smithy.api#xmlNamespace": {
-                    "uri": "http://amplify.amazonaws.com"
-                }
-            }
+            ]
         },
         "com.amazonaws.amplify#App": {
             "type": "structure",
@@ -291,7 +291,7 @@
                 "basicAuthCredentials": {
                     "target": "com.amazonaws.amplify#BasicAuthCredentials",
                     "traits": {
-                        "smithy.api#documentation": "<p> The basic authorization credentials for branches for the Amplify app. </p>"
+                        "smithy.api#documentation": "<p> The basic authorization credentials for branches for the Amplify app. You must base64-encode the authorization credentials and provide them in the format <code>user:password</code>.</p>"
                     }
                 },
                 "customRules": {
@@ -357,7 +357,7 @@
                     "min": 1,
                     "max": 20
                 },
-                "smithy.api#pattern": "d[a-z0-9]+"
+                "smithy.api#pattern": "^d[a-z0-9]+$"
             }
         },
         "com.amazonaws.amplify#Apps": {
@@ -475,7 +475,7 @@
                 "basicAuthCredentials": {
                     "target": "com.amazonaws.amplify#BasicAuthCredentials",
                     "traits": {
-                        "smithy.api#documentation": "<p> The basic authorization credentials for the autocreated branch. </p>"
+                        "smithy.api#documentation": "<p> The basic authorization credentials for the autocreated branch. You must base64-encode the authorization credentials and provide them in the format <code>user:password</code>.</p>"
                     }
                 },
                 "enableBasicAuth": {
@@ -550,7 +550,7 @@
                     "min": 0,
                     "max": 1000
                 },
-                "smithy.api#pattern": "^$|^arn:aws:iam::\\d{12}:role.+"
+                "smithy.api#pattern": "^$|^arn:aws:iam::\\d{12}:role.+$"
             }
         },
         "com.amazonaws.amplify#BackendEnvironment": {
@@ -768,7 +768,7 @@
                 "basicAuthCredentials": {
                     "target": "com.amazonaws.amplify#BasicAuthCredentials",
                     "traits": {
-                        "smithy.api#documentation": "<p> The basic authorization credentials for a branch of an Amplify app. </p>"
+                        "smithy.api#documentation": "<p> The basic authorization credentials for a branch of an Amplify app. You must base64-encode the authorization credentials and provide them in the format <code>user:password</code>.</p>"
                     }
                 },
                 "buildSpec": {
@@ -1018,7 +1018,7 @@
                 "basicAuthCredentials": {
                     "target": "com.amazonaws.amplify#BasicAuthCredentials",
                     "traits": {
-                        "smithy.api#documentation": "<p> The credentials for basic authorization for an Amplify app. </p>"
+                        "smithy.api#documentation": "<p> The credentials for basic authorization for an Amplify app. You must base64-encode the authorization credentials and provide them in the format <code>user:password</code>.</p>"
                     }
                 },
                 "customRules": {
@@ -1257,7 +1257,7 @@
                 "basicAuthCredentials": {
                     "target": "com.amazonaws.amplify#BasicAuthCredentials",
                     "traits": {
-                        "smithy.api#documentation": "<p> The basic authorization credentials for the branch. </p>"
+                        "smithy.api#documentation": "<p> The basic authorization credentials for the branch. You must base64-encode the authorization credentials and provide them in the format <code>user:password</code>.</p>"
                     }
                 },
                 "enableBasicAuth": {
@@ -3992,7 +3992,7 @@
         "com.amazonaws.amplify#ResourceArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^arn:aws:amplify:.*"
+                "smithy.api#pattern": "^arn:aws:amplify:"
             }
         },
         "com.amazonaws.amplify#ResourceNotFoundException": {
@@ -4883,7 +4883,7 @@
                 "basicAuthCredentials": {
                     "target": "com.amazonaws.amplify#BasicAuthCredentials",
                     "traits": {
-                        "smithy.api#documentation": "<p> The basic authorization credentials for an Amplify app. </p>"
+                        "smithy.api#documentation": "<p> The basic authorization credentials for an Amplify app. You must base64-encode the authorization credentials and provide them in the format <code>user:password</code>.</p>"
                     }
                 },
                 "customRules": {
@@ -5052,7 +5052,7 @@
                 "basicAuthCredentials": {
                     "target": "com.amazonaws.amplify#BasicAuthCredentials",
                     "traits": {
-                        "smithy.api#documentation": "<p> The basic authorization credentials for the branch. </p>"
+                        "smithy.api#documentation": "<p> The basic authorization credentials for the branch. You must base64-encode the authorization credentials and provide them in the format <code>user:password</code>.</p>"
                     }
                 },
                 "enableBasicAuth": {

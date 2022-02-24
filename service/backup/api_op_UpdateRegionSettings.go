@@ -33,9 +33,12 @@ func (c *Client) UpdateRegionSettings(ctx context.Context, params *UpdateRegionS
 
 type UpdateRegionSettingsInput struct {
 
-	// Enables or disables  Backup's advanced DynamoDB backup features
-	// (https://docs.aws.amazon.com/aws-backup/latest/devguide/advanced-ddb-backup.html)
-	// for the Region.
+	// Enables or disables full Backup management of backups for a resource type. To
+	// enable full Backup management for DynamoDB along with  Backup's advanced
+	// DynamoDB backup features
+	// (https://docs.aws.amazon.com/aws-backup/latest/devguide/advanced-ddb-backup.html),
+	// follow the procedure to  enable advanced DynamoDB backup programmatically
+	// (https://docs.aws.amazon.com/aws-backup/latest/devguide/advanced-ddb-backup.html#advanced-ddb-backup-enable-cli).
 	ResourceTypeManagementPreference map[string]bool
 
 	// Updates the list of services along with the opt-in preferences for the Region.

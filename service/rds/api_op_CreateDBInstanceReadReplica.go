@@ -172,7 +172,7 @@ type CreateDBInstanceReadReplicaInput struct {
 	// group. All these read replicas are created outside of any VPC.
 	//
 	// Example:
-	// mySubnetgroup
+	// mydbsubnetgroup
 	DBSubnetGroupName *string
 
 	// A value that indicates whether the DB instance has deletion protection enabled.

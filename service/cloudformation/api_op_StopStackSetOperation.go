@@ -12,7 +12,8 @@ import (
 )
 
 // Stops an in-progress operation on a stack set and its associated stack
-// instances.
+// instances. StackSets will cancel all the unstarted stack instance deployments
+// and wait for those are in-progress to complete.
 func (c *Client) StopStackSetOperation(ctx context.Context, params *StopStackSetOperationInput, optFns ...func(*Options)) (*StopStackSetOperationOutput, error) {
 	if params == nil {
 		params = &StopStackSetOperationInput{}

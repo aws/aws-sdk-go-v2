@@ -24,7 +24,7 @@ import (
 // For more information, see Testing your public extension prior to
 // publishing
 // (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html#publish-extension-testing)
-// in the CloudFormation CLI User Guide. If you do not specify a version,
+// in the CloudFormation CLI User Guide. If you don't specify a version,
 // CloudFormation uses the default version of the extension in your account and
 // region for testing. To perform testing, CloudFormation assumes the execution
 // role specified when the type was registered. For more information, see
@@ -54,7 +54,7 @@ func (c *Client) TestType(ctx context.Context, params *TestTypeInput, optFns ...
 
 type TestTypeInput struct {
 
-	// The Amazon Resource Number (ARN) of the extension. Conditional: You must specify
+	// The Amazon Resource Name (ARN) of the extension. Conditional: You must specify
 	// Arn, or TypeName and Type.
 	Arn *string
 
@@ -84,7 +84,7 @@ type TestTypeInput struct {
 	TypeName *string
 
 	// The version of the extension to test. You can specify the version id with either
-	// Arn, or with TypeName and Type. If you do not specify a version, CloudFormation
+	// Arn, or with TypeName and Type. If you don't specify a version, CloudFormation
 	// uses the default version of the extension in this account and region for
 	// testing.
 	VersionId *string
@@ -94,7 +94,7 @@ type TestTypeInput struct {
 
 type TestTypeOutput struct {
 
-	// The Amazon Resource Number (ARN) of the extension.
+	// The Amazon Resource Name (ARN) of the extension.
 	TypeVersionArn *string
 
 	// Metadata pertaining to the operation's result.

@@ -272,6 +272,13 @@ func awsRestjson1_serializeOpDocumentDescribeCanariesInput(v *DescribeCanariesIn
 		ok.Integer(*v.MaxResults)
 	}
 
+	if v.Names != nil {
+		ok := object.Key("Names")
+		if err := awsRestjson1_serializeDocumentDescribeCanariesNameFilter(v.Names, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.NextToken != nil {
 		ok := object.Key("NextToken")
 		ok.String(*v.NextToken)
@@ -343,6 +350,13 @@ func awsRestjson1_serializeOpDocumentDescribeCanariesLastRunInput(v *DescribeCan
 	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
 		ok.Integer(*v.MaxResults)
+	}
+
+	if v.Names != nil {
+		ok := object.Key("Names")
+		if err := awsRestjson1_serializeDocumentDescribeCanariesLastRunNameFilter(v.Names, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.NextToken != nil {
@@ -1166,6 +1180,28 @@ func awsRestjson1_serializeDocumentCanaryScheduleInput(v *types.CanaryScheduleIn
 		ok.String(*v.Expression)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDescribeCanariesLastRunNameFilter(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDescribeCanariesNameFilter(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 

@@ -44,6 +44,9 @@ type PutBackupVaultNotificationsInput struct {
 	// * RESTORE_JOB_STARTED | RESTORE_JOB_COMPLETED |
 	// RECOVERY_POINT_MODIFIED
 	//
+	// * S3_BACKUP_OBJECT_FAILED |
+	// S3_RESTORE_OBJECT_FAILED
+	//
 	// Ignore the list below because it includes deprecated
 	// events. Refer to the list above.
 	//

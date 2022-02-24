@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a collection of fleet resources in an AWS Region. You can call this
-// operation to get fleets in a previously selected default Region (see
+// Retrieves a collection of fleet resources in an Amazon Web Services Region. You
+// can call this operation to get fleets in a previously selected default Region
+// (see
 // https://docs.aws.amazon.com/credref/latest/refdocs/setting-global-region.html
 // (https://docs.aws.amazon.com/credref/latest/refdocs/setting-global-region.html)or
 // specify a Region in your request. You can filter the result set to find only

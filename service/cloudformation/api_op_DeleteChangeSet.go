@@ -42,7 +42,7 @@ type DeleteChangeSetInput struct {
 	ChangeSetName *string
 
 	// If you specified the name of a change set to delete, specify the stack name or
-	// ID (ARN) that is associated with it.
+	// Amazon Resource Name (ARN) that's associated with it.
 	StackName *string
 
 	noSmithyDocumentSerde

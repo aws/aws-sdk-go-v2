@@ -12,11 +12,11 @@ import (
 
 // When specifying RollbackStack, you preserve the state of previously provisioned
 // resources when an operation fails. You can check the status of the stack through
-// the DescribeStacks API. Rolls back the specified stack to the last known stable
-// state from CREATE_FAILED or UPDATE_FAILED stack statuses. This operation will
-// delete a stack if it doesn't contain a last known stable state. A last known
-// stable state includes any status in a *_COMPLETE. This includes the following
-// stack statuses.
+// the DescribeStacks operation. Rolls back the specified stack to the last known
+// stable state from CREATE_FAILED or UPDATE_FAILED stack statuses. This operation
+// will delete a stack if it doesn't contain a last known stable state. A last
+// known stable state includes any status in a *_COMPLETE. This includes the
+// following stack statuses.
 //
 // * CREATE_COMPLETE
 //
@@ -45,7 +45,7 @@ func (c *Client) RollbackStack(ctx context.Context, params *RollbackStackInput, 
 
 type RollbackStackInput struct {
 
-	// The name that is associated with the stack.
+	// The name that's associated with the stack.
 	//
 	// This member is required.
 	StackName *string

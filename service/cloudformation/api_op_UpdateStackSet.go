@@ -13,10 +13,11 @@ import (
 )
 
 // Updates the stack set, and associated stack instances in the specified accounts
-// and Regions. Even if the stack set operation created by updating the stack set
-// fails (completely or partially, below or above a specified failure tolerance),
-// the stack set is updated with your changes. Subsequent CreateStackInstances
-// calls on the specified stack set use the updated stack set.
+// and Amazon Web Services Regions. Even if the stack set operation created by
+// updating the stack set fails (completely or partially, below or above a
+// specified failure tolerance), the stack set is updated with your changes.
+// Subsequent CreateStackInstances calls on the specified stack set use the updated
+// stack set.
 func (c *Client) UpdateStackSet(ctx context.Context, params *UpdateStackSetInput, optFns ...func(*Options)) (*UpdateStackSetOutput, error) {
 	if params == nil {
 		params = &UpdateStackSetInput{}
@@ -40,17 +41,17 @@ type UpdateStackSetInput struct {
 	StackSetName *string
 
 	// [Self-managed permissions] The accounts in which to update associated stack
-	// instances. If you specify accounts, you must also specify the Regions in which
-	// to update stack set instances. To update all the stack instances associated with
-	// this stack set, do not specify the Accounts or Regions properties. If the stack
-	// set update includes changes to the template (that is, if the TemplateBody or
-	// TemplateURL properties are specified), or the Parameters property,
-	// CloudFormation marks all stack instances with a status of OUTDATED prior to
-	// updating the stack instances in the specified accounts and Regions. If the stack
-	// set update does not include changes to the template or parameters,
-	// CloudFormation updates the stack instances in the specified accounts and
-	// Regions, while leaving all other stack instances with their existing stack
-	// instance status.
+	// instances. If you specify accounts, you must also specify the Amazon Web
+	// Services Regions in which to update stack set instances. To update all the stack
+	// instances associated with this stack set, don't specify the Accounts or Regions
+	// properties. If the stack set update includes changes to the template (that is,
+	// if the TemplateBody or TemplateURL properties are specified), or the Parameters
+	// property, CloudFormation marks all stack instances with a status of OUTDATED
+	// prior to updating the stack instances in the specified accounts and Amazon Web
+	// Services Regions. If the stack set update does not include changes to the
+	// template or parameters, CloudFormation updates the stack instances in the
+	// specified accounts and Amazon Web Services Regions, while leaving all other
+	// stack instances with their existing stack instance status.
 	Accounts []string
 
 	// The Amazon Resource Number (ARN) of the IAM role to use to update this stack
@@ -67,7 +68,7 @@ type UpdateStackSetInput struct {
 
 	// [Service-managed permissions] Describes whether StackSets automatically deploys
 	// to Organizations accounts that are added to a target organization or
-	// organizational unit (OU). If you specify AutoDeployment, do not specify
+	// organizational unit (OU). If you specify AutoDeployment, don't specify
 	// DeploymentTargets or Regions.
 	AutoDeployment *types.AutoDeployment
 
@@ -168,10 +169,10 @@ type UpdateStackSetInput struct {
 	// update includes changes to the template (that is, if TemplateBody or TemplateURL
 	// is specified), or the Parameters, CloudFormation marks all stack instances with
 	// a status of OUTDATED prior to updating the stack instances in the specified
-	// accounts and Regions. If the stack set update does not include changes to the
-	// template or parameters, CloudFormation updates the stack instances in the
-	// specified accounts and Regions, while leaving all other stack instances with
-	// their existing stack instance status.
+	// accounts and Amazon Web Services Regions. If the stack set update doesn't
+	// include changes to the template or parameters, CloudFormation updates the stack
+	// instances in the specified accounts and Regions, while leaving all other stack
+	// instances with their existing stack instance status.
 	DeploymentTargets *types.DeploymentTargets
 
 	// A brief description of updates that you are making.
@@ -223,17 +224,17 @@ type UpdateStackSetInput struct {
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-service-managed.html).
 	PermissionModel types.PermissionModels
 
-	// The Regions in which to update associated stack instances. If you specify
-	// Regions, you must also specify accounts in which to update stack set instances.
-	// To update all the stack instances associated with this stack set, do not specify
-	// the Accounts or Regions properties. If the stack set update includes changes to
-	// the template (that is, if the TemplateBody or TemplateURL properties are
-	// specified), or the Parameters property, CloudFormation marks all stack instances
-	// with a status of OUTDATED prior to updating the stack instances in the specified
-	// accounts and Regions. If the stack set update does not include changes to the
-	// template or parameters, CloudFormation updates the stack instances in the
-	// specified accounts and Regions, while leaving all other stack instances with
-	// their existing stack instance status.
+	// The Amazon Web Services Regions in which to update associated stack instances.
+	// If you specify Regions, you must also specify accounts in which to update stack
+	// set instances. To update all the stack instances associated with this stack set,
+	// do not specify the Accounts or Regions properties. If the stack set update
+	// includes changes to the template (that is, if the TemplateBody or TemplateURL
+	// properties are specified), or the Parameters property, CloudFormation marks all
+	// stack instances with a status of OUTDATED prior to updating the stack instances
+	// in the specified accounts and Regions. If the stack set update does not include
+	// changes to the template or parameters, CloudFormation updates the stack
+	// instances in the specified accounts and Regions, while leaving all other stack
+	// instances with their existing stack instance status.
 	Regions []string
 
 	// The key-value pairs to associate with this stack set and the stacks created from
@@ -247,7 +248,7 @@ type UpdateStackSetInput struct {
 	//
 	// * If you
 	// specify any tags using this parameter, you must specify all the tags that you
-	// want associated with this stack set, even tags you've specifed before (for
+	// want associated with this stack set, even tags you've specified before (for
 	// example, when creating the stack set or during a previous update of the stack
 	// set.). Any tags that you don't include in the updated list of tags are removed
 	// from the stack set, and therefore from the stacks and resources as well.

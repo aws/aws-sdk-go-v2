@@ -15,14 +15,14 @@ import (
 // EC2 instances. The new instances conform to the fleet's instance type,
 // auto-scaling, and other configuration settings. This operation cannot be used
 // with fleets that don't support remote locations. Fleets can have multiple
-// locations only if they reside in AWS Regions that support this feature (see
-// CreateFleet for the complete list) and were created after the feature was
-// released in March 2021. To add fleet locations, specify the fleet to be updated
-// and provide a list of one or more locations. If successful, this operation
-// returns the list of added locations with their status set to NEW. GameLift
-// initiates the process of starting an instance in each added location. You can
-// track the status of each new location by monitoring location creation events
-// using DescribeFleetEvents. Alternatively, you can poll location status by
+// locations only if they reside in Amazon Web Services Regions that support this
+// feature (see CreateFleet for the complete list) and were created after the
+// feature was released in March 2021. To add fleet locations, specify the fleet to
+// be updated and provide a list of one or more locations. If successful, this
+// operation returns the list of added locations with their status set to NEW.
+// GameLift initiates the process of starting an instance in each added location.
+// You can track the status of each new location by monitoring location creation
+// events using DescribeFleetEvents. Alternatively, you can poll location status by
 // calling DescribeFleetLocationAttributes. After a location status becomes ACTIVE,
 // you can adjust the location's capacity as needed with UpdateFleetCapacity. Learn
 // more Setting up fleets
@@ -59,8 +59,8 @@ type CreateFleetLocationsInput struct {
 	FleetId *string
 
 	// A list of locations to deploy additional instances to and manage as part of the
-	// fleet. You can add any GameLift-supported AWS Region as a remote location, in
-	// the form of an AWS Region code such as us-west-2.
+	// fleet. You can add any GameLift-supported Amazon Web Services Region as a remote
+	// location, in the form of an Amazon Web Services Region code such as us-west-2.
 	//
 	// This member is required.
 	Locations []types.LocationConfiguration

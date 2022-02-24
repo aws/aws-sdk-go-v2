@@ -77,13 +77,13 @@ type UpdateGameServerGroupInput struct {
 	// dropped from the game. Protected instances cannot be terminated while there are
 	// active game servers running except in the event of a forced game server group
 	// deletion (see ). An exception to this is with Spot Instances, which can be
-	// terminated by AWS regardless of protection status. This property is set to
-	// NO_PROTECTION by default.
+	// terminated by Amazon Web Services regardless of protection status. This property
+	// is set to NO_PROTECTION by default.
 	GameServerProtectionPolicy types.GameServerProtectionPolicy
 
-	// An updated list of EC2 instance types to use in the Auto Scaling group. The
-	// instance definitions must specify at least two different instance types that are
-	// supported by GameLift FleetIQ. This updated list replaces the entire current
+	// An updated list of Amazon EC2 instance types to use in the Auto Scaling group.
+	// The instance definitions must specify at least two different instance types that
+	// are supported by GameLift FleetIQ. This updated list replaces the entire current
 	// list of instance definitions for the game server group. For more information on
 	// instance types, see EC2 Instance Types
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the
@@ -97,7 +97,8 @@ type UpdateGameServerGroupInput struct {
 
 	// The Amazon Resource Name (ARN
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) for an IAM
-	// role that allows Amazon GameLift to access your EC2 Auto Scaling groups.
+	// role that allows Amazon Web Services to access your Amazon EC2 Auto Scaling
+	// groups.
 	RoleArn *string
 
 	noSmithyDocumentSerde

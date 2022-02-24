@@ -12,6 +12,11 @@ import (
 )
 
 // Creates a fleet, a logical group of robots running the same robot application.
+// This API is no longer supported and will throw an error if used.
+//
+// Deprecated: AWS RoboMaker is unable to process this request as the support for
+// the AWS RoboMaker application deployment feature has ended. For additional
+// information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.
 func (c *Client) CreateFleet(ctx context.Context, params *CreateFleetInput, optFns ...func(*Options)) (*CreateFleetOutput, error) {
 	if params == nil {
 		params = &CreateFleetInput{}

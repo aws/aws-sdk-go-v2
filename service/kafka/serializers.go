@@ -2672,7 +2672,14 @@ func awsRestjson1_serializeDocumentBrokerEBSVolumeInfo(v *types.BrokerEBSVolumeI
 		ok.String(*v.KafkaBrokerNodeId)
 	}
 
-	{
+	if v.ProvisionedThroughput != nil {
+		ok := object.Key("provisionedThroughput")
+		if err := awsRestjson1_serializeDocumentProvisionedThroughput(v.ProvisionedThroughput, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VolumeSizeGB != 0 {
 		ok := object.Key("volumeSizeGB")
 		ok.Integer(v.VolumeSizeGB)
 	}
@@ -2832,6 +2839,13 @@ func awsRestjson1_serializeDocumentConnectivityInfo(v *types.ConnectivityInfo, v
 func awsRestjson1_serializeDocumentEBSStorageInfo(v *types.EBSStorageInfo, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ProvisionedThroughput != nil {
+		ok := object.Key("provisionedThroughput")
+		if err := awsRestjson1_serializeDocumentProvisionedThroughput(v.ProvisionedThroughput, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.VolumeSize != 0 {
 		ok := object.Key("volumeSize")
@@ -3052,6 +3066,23 @@ func awsRestjson1_serializeDocumentProvisionedRequest(v *types.ProvisionedReques
 		if err := awsRestjson1_serializeDocumentOpenMonitoringInfo(v.OpenMonitoring, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentProvisionedThroughput(v *types.ProvisionedThroughput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Enabled {
+		ok := object.Key("enabled")
+		ok.Boolean(v.Enabled)
+	}
+
+	if v.VolumeThroughput != 0 {
+		ok := object.Key("volumeThroughput")
+		ok.Integer(v.VolumeThroughput)
 	}
 
 	return nil

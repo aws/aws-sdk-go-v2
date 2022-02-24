@@ -11168,6 +11168,11 @@ func awsRestjson1_deserializeDocumentDistribution(v **types.Distribution, value 
 				return err
 			}
 
+		case "fastLaunchConfigurations":
+			if err := awsRestjson1_deserializeDocumentFastLaunchConfigurationList(&sv.FastLaunchConfigurations, value); err != nil {
+				return err
+			}
+
 		case "launchTemplateConfigurations":
 			if err := awsRestjson1_deserializeDocumentLaunchTemplateConfigurationList(&sv.LaunchTemplateConfigurations, value); err != nil {
 				return err
@@ -11558,6 +11563,214 @@ func awsRestjson1_deserializeDocumentEbsInstanceBlockDeviceSpecification(v **typ
 					return fmt.Errorf("expected EbsVolumeType to be of type string, got %T instead", value)
 				}
 				sv.VolumeType = types.EbsVolumeType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFastLaunchConfiguration(v **types.FastLaunchConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FastLaunchConfiguration
+	if *v == nil {
+		sv = &types.FastLaunchConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "accountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
+				}
+				sv.AccountId = ptr.String(jtv)
+			}
+
+		case "enabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Enabled = jtv
+			}
+
+		case "launchTemplate":
+			if err := awsRestjson1_deserializeDocumentFastLaunchLaunchTemplateSpecification(&sv.LaunchTemplate, value); err != nil {
+				return err
+			}
+
+		case "maxParallelLaunches":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MaxParallelLaunches to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxParallelLaunches = ptr.Int32(int32(i64))
+			}
+
+		case "snapshotConfiguration":
+			if err := awsRestjson1_deserializeDocumentFastLaunchSnapshotConfiguration(&sv.SnapshotConfiguration, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFastLaunchConfigurationList(v *[]types.FastLaunchConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.FastLaunchConfiguration
+	if *v == nil {
+		cv = []types.FastLaunchConfiguration{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.FastLaunchConfiguration
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentFastLaunchConfiguration(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFastLaunchLaunchTemplateSpecification(v **types.FastLaunchLaunchTemplateSpecification, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FastLaunchLaunchTemplateSpecification
+	if *v == nil {
+		sv = &types.FastLaunchLaunchTemplateSpecification{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "launchTemplateId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LaunchTemplateId to be of type string, got %T instead", value)
+				}
+				sv.LaunchTemplateId = ptr.String(jtv)
+			}
+
+		case "launchTemplateName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.LaunchTemplateName = ptr.String(jtv)
+			}
+
+		case "launchTemplateVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.LaunchTemplateVersion = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFastLaunchSnapshotConfiguration(v **types.FastLaunchSnapshotConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FastLaunchSnapshotConfiguration
+	if *v == nil {
+		sv = &types.FastLaunchSnapshotConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "targetResourceCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TargetResourceCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TargetResourceCount = ptr.Int32(int32(i64))
 			}
 
 		default:

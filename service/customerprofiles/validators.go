@@ -50,6 +50,26 @@ func (m *validateOpCreateDomain) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateIntegrationWorkflow struct {
+}
+
+func (*validateOpCreateIntegrationWorkflow) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateIntegrationWorkflow) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateIntegrationWorkflowInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateIntegrationWorkflowInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateProfile struct {
 }
 
@@ -185,6 +205,26 @@ func (m *validateOpDeleteProfileObjectType) HandleInitialize(ctx context.Context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteProfileObjectTypeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteWorkflow struct {
+}
+
+func (*validateOpDeleteWorkflow) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteWorkflow) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteWorkflowInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteWorkflowInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -330,6 +370,46 @@ func (m *validateOpGetProfileObjectTypeTemplate) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetWorkflow struct {
+}
+
+func (*validateOpGetWorkflow) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetWorkflow) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetWorkflowInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetWorkflowInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetWorkflowSteps struct {
+}
+
+func (*validateOpGetWorkflowSteps) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetWorkflowSteps) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetWorkflowStepsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetWorkflowStepsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListAccountIntegrations struct {
 }
 
@@ -445,6 +525,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListWorkflows struct {
+}
+
+func (*validateOpListWorkflows) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListWorkflows) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListWorkflowsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListWorkflowsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -638,6 +738,10 @@ func addOpCreateDomainValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDomain{}, middleware.After)
 }
 
+func addOpCreateIntegrationWorkflowValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateIntegrationWorkflow{}, middleware.After)
+}
+
 func addOpCreateProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateProfile{}, middleware.After)
 }
@@ -664,6 +768,10 @@ func addOpDeleteProfileObjectValidationMiddleware(stack *middleware.Stack) error
 
 func addOpDeleteProfileObjectTypeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteProfileObjectType{}, middleware.After)
+}
+
+func addOpDeleteWorkflowValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteWorkflow{}, middleware.After)
 }
 
 func addOpGetAutoMergingPreviewValidationMiddleware(stack *middleware.Stack) error {
@@ -694,6 +802,14 @@ func addOpGetProfileObjectTypeTemplateValidationMiddleware(stack *middleware.Sta
 	return stack.Initialize.Add(&validateOpGetProfileObjectTypeTemplate{}, middleware.After)
 }
 
+func addOpGetWorkflowValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetWorkflow{}, middleware.After)
+}
+
+func addOpGetWorkflowStepsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetWorkflowSteps{}, middleware.After)
+}
+
 func addOpListAccountIntegrationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAccountIntegrations{}, middleware.After)
 }
@@ -716,6 +832,10 @@ func addOpListProfileObjectTypesValidationMiddleware(stack *middleware.Stack) er
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpListWorkflowsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListWorkflows{}, middleware.After)
 }
 
 func addOpMergeProfilesValidationMiddleware(stack *middleware.Stack) error {
@@ -754,6 +874,30 @@ func addOpUpdateProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateProfile{}, middleware.After)
 }
 
+func validateAppflowIntegration(v *types.AppflowIntegration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AppflowIntegration"}
+	if v.FlowDefinition == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowDefinition"))
+	} else if v.FlowDefinition != nil {
+		if err := validateFlowDefinition(v.FlowDefinition); err != nil {
+			invalidParams.AddNested("FlowDefinition", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Batches != nil {
+		if err := validateBatches(v.Batches); err != nil {
+			invalidParams.AddNested("Batches", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAutoMerging(v *types.AutoMerging) error {
 	if v == nil {
 		return nil
@@ -770,6 +914,41 @@ func validateAutoMerging(v *types.AutoMerging) error {
 	if v.ConflictResolution != nil {
 		if err := validateConflictResolution(v.ConflictResolution); err != nil {
 			invalidParams.AddNested("ConflictResolution", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBatch(v *types.Batch) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Batch"}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	}
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBatches(v []types.Batch) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Batches"}
+	for i := range v {
+		if err := validateBatch(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -856,6 +1035,23 @@ func validateFlowDefinition(v *types.FlowDefinition) error {
 	} else if v.TriggerConfig != nil {
 		if err := validateTriggerConfig(v.TriggerConfig); err != nil {
 			invalidParams.AddNested("TriggerConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIntegrationConfig(v *types.IntegrationConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IntegrationConfig"}
+	if v.AppflowIntegration != nil {
+		if err := validateAppflowIntegration(v.AppflowIntegration); err != nil {
+			invalidParams.AddNested("AppflowIntegration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1214,6 +1410,37 @@ func validateOpCreateDomainInput(v *CreateDomainInput) error {
 	}
 }
 
+func validateOpCreateIntegrationWorkflowInput(v *CreateIntegrationWorkflowInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateIntegrationWorkflowInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if len(v.WorkflowType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkflowType"))
+	}
+	if v.IntegrationConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IntegrationConfig"))
+	} else if v.IntegrationConfig != nil {
+		if err := validateIntegrationConfig(v.IntegrationConfig); err != nil {
+			invalidParams.AddNested("IntegrationConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ObjectTypeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ObjectTypeName"))
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateProfileInput(v *CreateProfileInput) error {
 	if v == nil {
 		return nil
@@ -1338,6 +1565,24 @@ func validateOpDeleteProfileObjectTypeInput(v *DeleteProfileObjectTypeInput) err
 	}
 	if v.ObjectTypeName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ObjectTypeName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteWorkflowInput(v *DeleteWorkflowInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteWorkflowInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.WorkflowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkflowId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1474,6 +1719,42 @@ func validateOpGetProfileObjectTypeTemplateInput(v *GetProfileObjectTypeTemplate
 	}
 }
 
+func validateOpGetWorkflowInput(v *GetWorkflowInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetWorkflowInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.WorkflowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkflowId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetWorkflowStepsInput(v *GetWorkflowStepsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetWorkflowStepsInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.WorkflowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkflowId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListAccountIntegrationsInput(v *ListAccountIntegrationsInput) error {
 	if v == nil {
 		return nil
@@ -1567,6 +1848,21 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListWorkflowsInput(v *ListWorkflowsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListWorkflowsInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -12,12 +12,12 @@ import (
 
 // Sets the specified user's password in a user pool as an administrator. Works on
 // any user. The password can be temporary or permanent. If it is temporary, the
-// user status will be placed into the FORCE_CHANGE_PASSWORD state. When the user
-// next tries to sign in, the InitiateAuth/AdminInitiateAuth response will contain
-// the NEW_PASSWORD_REQUIRED challenge. If the user does not sign in before it
-// expires, the user will not be able to sign in and their password will need to be
-// reset by an administrator. Once the user has set a new password, or the password
-// is permanent, the user status will be set to Confirmed.
+// user status enters the FORCE_CHANGE_PASSWORD state. When the user next tries to
+// sign in, the InitiateAuth/AdminInitiateAuth response will contain the
+// NEW_PASSWORD_REQUIRED challenge. If the user doesn't sign in before it expires,
+// the user won't be able to sign in, and an administrator must reset their
+// password. Once the user has set a new password, or the password is permanent,
+// the user status is set to Confirmed.
 func (c *Client) AdminSetUserPassword(ctx context.Context, params *AdminSetUserPasswordInput, optFns ...func(*Options)) (*AdminSetUserPasswordOutput, error) {
 	if params == nil {
 		params = &AdminSetUserPasswordInput{}
@@ -45,7 +45,7 @@ type AdminSetUserPasswordInput struct {
 	// This member is required.
 	UserPoolId *string
 
-	// The user name of the user whose password you wish to set.
+	// The user name of the user whose password you want to set.
 	//
 	// This member is required.
 	Username *string

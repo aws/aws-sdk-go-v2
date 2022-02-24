@@ -18,8 +18,15 @@ import (
 // requested queue. When specifying a list of queues, objects are returned only for
 // queues that currently exist in the Region. Learn more  View Your Queues
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/queues-console.html)
-// Related actions CreateGameSessionQueue | DescribeGameSessionQueues |
-// UpdateGameSessionQueue | DeleteGameSessionQueue | All APIs by task
+// Related actions CreateGameSessionQueue
+// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateGameSessionQueue.html)
+// | DescribeGameSessionQueues
+// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeGameSessionQueues.html)
+// | UpdateGameSessionQueue
+// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateGameSessionQueue.html)
+// | DeleteGameSessionQueue
+// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_DeleteGameSessionQueue.html)
+// | All APIs by task
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) DescribeGameSessionQueues(ctx context.Context, params *DescribeGameSessionQueuesInput, optFns ...func(*Options)) (*DescribeGameSessionQueuesOutput, error) {
 	if params == nil {

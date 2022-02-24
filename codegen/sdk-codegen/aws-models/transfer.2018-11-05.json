@@ -110,12 +110,21 @@
                     }
                 },
                 "DestinationFileLocation": {
-                    "target": "com.amazonaws.transfer#InputFileLocation"
+                    "target": "com.amazonaws.transfer#InputFileLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the location for the file being copied. Only applicable for Copy type workflow\n      steps. Use <code>${Transfer:username}</code> in this field to parametrize the destination\n      prefix by username.</p>"
+                    }
                 },
                 "OverwriteExisting": {
                     "target": "com.amazonaws.transfer#OverwriteExisting",
                     "traits": {
                         "smithy.api#documentation": "<p>A flag that indicates whether or not to overwrite an existing file of the same name.\n      The default is <code>FALSE</code>.</p>"
+                    }
+                },
+                "SourceFileLocation": {
+                    "target": "com.amazonaws.transfer#SourceFileLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies which file to use as input to the workflow step: either the output from the previous step, or the originally uploaded file\n    for the workflow.</p>\n         <ul>\n            <li>\n               <p>Enter <code>${previous.file}</code> to use the previous file as the input.\n          In this case, this workflow step uses the output file from the previous workflow step as input.\n          This is the default value.</p>\n            </li>\n            <li>\n               <p>Enter <code>${original.file}</code> to use the originally-uploaded file location as input for this step.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -170,7 +179,7 @@
                 "HomeDirectoryMappings": {
                     "target": "com.amazonaws.transfer#HomeDirectoryMappings",
                     "traits": {
-                        "smithy.api#documentation": "<p>Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should\n      be visible to your user and how you want to make them visible. You must specify the\n        <code>Entry</code> and <code>Target</code> pair, where <code>Entry</code> shows how the path\n      is made visible and <code>Target</code> is the actual Amazon S3 or Amazon EFS path. If you\n      only specify a target, it is displayed as is. You also must ensure that your Amazon Web Services Identity\n      and Access Management (IAM) role provides access to paths in <code>Target</code>. This value\n      can only be set when <code>HomeDirectoryType</code> is set to\n      <i>LOGICAL</i>.</p>\n         <p>The following is an <code>Entry</code> and <code>Target</code> pair example.</p>\n         <p>\n            <code>[ { \"Entry\": \"/directory1\", \"Target\": \"/bucket_name/home/mydirectory\" } ]</code>\n         </p>\n         <p>In most cases, you can use this value instead of the session policy to lock down your\n      user to the designated home directory (\"<code>chroot</code>\"). To do this, you can set\n        <code>Entry</code> to <code>/</code> and set <code>Target</code> to the\n        <code>HomeDirectory</code> parameter value.</p>\n         <p>The following is an <code>Entry</code> and <code>Target</code> pair example for <code>chroot</code>.</p>\n         <p>\n            <code>[ { \"Entry:\": \"/\", \"Target\": \"/bucket_name/home/mydirectory\" } ]</code>\n         </p>\n \n         <note>\n            <p>If the target of a logical directory entry does not exist in Amazon S3 or EFS, the entry is\n        ignored. As a workaround, you can use the Amazon S3 API or EFS API to create 0 byte objects as place\n        holders for your directory. If using the CLI, use the <code>s3api</code> or <code>efsapi</code> call instead of\n        <code>s3</code> or <code>efs</code> so you can use the put-object operation. For example, you use the\n        following: <code>aws s3api put-object --bucket bucketname --key path/to/folder/</code>. Make\n        sure that the end of the key name ends in a <code>/</code> for it to be considered a folder.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should\n      be visible to your user and how you want to make them visible. You must specify the\n        <code>Entry</code> and <code>Target</code> pair, where <code>Entry</code> shows how the path\n      is made visible and <code>Target</code> is the actual Amazon S3 or Amazon EFS path. If you\n      only specify a target, it is displayed as is. You also must ensure that your Amazon Web Services Identity\n      and Access Management (IAM) role provides access to paths in <code>Target</code>. This value\n      can only be set when <code>HomeDirectoryType</code> is set to\n      <i>LOGICAL</i>.</p>\n         <p>The following is an <code>Entry</code> and <code>Target</code> pair example.</p>\n         <p>\n            <code>[ { \"Entry\": \"/directory1\", \"Target\": \"/bucket_name/home/mydirectory\" } ]</code>\n         </p>\n         <p>In most cases, you can use this value instead of the session policy to lock down your\n      user to the designated home directory (\"<code>chroot</code>\"). To do this, you can set\n        <code>Entry</code> to <code>/</code> and set <code>Target</code> to the\n        <code>HomeDirectory</code> parameter value.</p>\n         <p>The following is an <code>Entry</code> and <code>Target</code> pair example for <code>chroot</code>.</p>\n         <p>\n            <code>[ { \"Entry:\": \"/\", \"Target\": \"/bucket_name/home/mydirectory\" } ]</code>\n         </p>"
                     }
                 },
                 "Policy": {
@@ -310,6 +319,12 @@
                         "smithy.api#documentation": "<p>Specifies the Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access Management (IAM) role that allows a server to turn\n      on Amazon CloudWatch logging for Amazon S3 or Amazon EFS events. When set, user activity can be viewed in\n      your CloudWatch logs.</p>"
                     }
                 },
+                "PostAuthenticationLoginBanner": {
+                    "target": "com.amazonaws.transfer#PostAuthenticationLoginBanner"
+                },
+                "PreAuthenticationLoginBanner": {
+                    "target": "com.amazonaws.transfer#PreAuthenticationLoginBanner"
+                },
                 "Protocols": {
                     "target": "com.amazonaws.transfer#Protocols",
                     "traits": {
@@ -401,7 +416,7 @@
                 "HomeDirectoryMappings": {
                     "target": "com.amazonaws.transfer#HomeDirectoryMappings",
                     "traits": {
-                        "smithy.api#documentation": "<p>Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should\n      be visible to your user and how you want to make them visible. You must specify the\n        <code>Entry</code> and <code>Target</code> pair, where <code>Entry</code> shows how the path\n      is made visible and <code>Target</code> is the actual Amazon S3 or Amazon EFS path. If you\n      only specify a target, it is displayed as is. You also must ensure that your Amazon Web Services Identity\n      and Access Management (IAM) role provides access to paths in <code>Target</code>. This value\n      can only be set when <code>HomeDirectoryType</code> is set to\n      <i>LOGICAL</i>.</p>\n\n         <p>The following is an <code>Entry</code> and <code>Target</code> pair example.</p>\n\n         <p>\n            <code>[ { \"Entry\": \"/directory1\", \"Target\":\n        \"/bucket_name/home/mydirectory\" } ]</code>\n         </p>\n\n         <p>In most cases, you can use this value instead of the session policy to lock your user\n      down to the designated home directory (\"<code>chroot</code>\"). To do this, you can set\n        <code>Entry</code> to <code>/</code> and set <code>Target</code> to the HomeDirectory\n      parameter value.</p>\n         <p>The following is an <code>Entry</code> and <code>Target</code> pair example for <code>chroot</code>.</p>\n         <p>\n            <code>[ { \"Entry:\": \"/\", \"Target\": \"/bucket_name/home/mydirectory\" } ]</code>\n         </p>\n \n         <note>\n            <p>If the target of a logical directory entry does not exist in Amazon S3 or EFS, the entry is\n        ignored. As a workaround, you can use the Amazon S3 API or EFS API to create 0 byte objects as place\n        holders for your directory. If using the CLI, use the <code>s3api</code> or <code>efsapi</code> call instead of\n        <code>s3</code> or <code>efs</code> so you can use the put-object operation. For example, you use the\n        following: <code>aws s3api put-object --bucket bucketname --key path/to/folder/</code>. Make\n        sure that the end of the key name ends in a <code>/</code> for it to be considered a folder.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should\n      be visible to your user and how you want to make them visible. You must specify the\n        <code>Entry</code> and <code>Target</code> pair, where <code>Entry</code> shows how the path\n      is made visible and <code>Target</code> is the actual Amazon S3 or Amazon EFS path. If you\n      only specify a target, it is displayed as is. You also must ensure that your Amazon Web Services Identity\n      and Access Management (IAM) role provides access to paths in <code>Target</code>. This value\n      can only be set when <code>HomeDirectoryType</code> is set to\n      <i>LOGICAL</i>.</p>\n\n         <p>The following is an <code>Entry</code> and <code>Target</code> pair example.</p>\n\n         <p>\n            <code>[ { \"Entry\": \"/directory1\", \"Target\":\n        \"/bucket_name/home/mydirectory\" } ]</code>\n         </p>\n\n         <p>In most cases, you can use this value instead of the session policy to lock your user\n      down to the designated home directory (\"<code>chroot</code>\"). To do this, you can set\n        <code>Entry</code> to <code>/</code> and set <code>Target</code> to the HomeDirectory\n      parameter value.</p>\n         <p>The following is an <code>Entry</code> and <code>Target</code> pair example for <code>chroot</code>.</p>\n         <p>\n            <code>[ { \"Entry:\": \"/\", \"Target\": \"/bucket_name/home/mydirectory\" } ]</code>\n         </p>"
                     }
                 },
                 "Policy": {
@@ -563,6 +578,12 @@
                     "target": "com.amazonaws.transfer#CustomStepTimeoutSeconds",
                     "traits": {
                         "smithy.api#documentation": "<p>Timeout, in seconds, for the step.</p>"
+                    }
+                },
+                "SourceFileLocation": {
+                    "target": "com.amazonaws.transfer#SourceFileLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies which file to use as input to the workflow step: either the output from the previous step, or the originally uploaded file\n    for the workflow.</p>\n         <ul>\n            <li>\n               <p>Enter <code>${previous.file}</code> to use the previous file as the input.\n          In this case, this workflow step uses the output file from the previous workflow step as input.\n          This is the default value.</p>\n            </li>\n            <li>\n               <p>Enter <code>${original.file}</code> to use the originally-uploaded file location as input for this step.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -747,6 +768,12 @@
                     "target": "com.amazonaws.transfer#WorkflowStepName",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the step, used as an identifier.</p>"
+                    }
+                },
+                "SourceFileLocation": {
+                    "target": "com.amazonaws.transfer#SourceFileLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies which file to use as input to the workflow step: either the output from the previous step, or the originally uploaded file\n    for the workflow.</p>\n         <ul>\n            <li>\n               <p>Enter <code>${previous.file}</code> to use the previous file as the input.\n          In this case, this workflow step uses the output file from the previous workflow step as input.\n          This is the default value.</p>\n            </li>\n            <li>\n               <p>Enter <code>${original.file}</code> to use the originally-uploaded file location as input for this step.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -1385,6 +1412,12 @@
                         "smithy.api#documentation": "<p>Specifies the Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access Management (IAM) role that allows a server to turn\n      on Amazon CloudWatch logging for Amazon S3 or Amazon EFS events. When set, user activity can be viewed in\n      your CloudWatch logs.</p>"
                     }
                 },
+                "PostAuthenticationLoginBanner": {
+                    "target": "com.amazonaws.transfer#PostAuthenticationLoginBanner"
+                },
+                "PreAuthenticationLoginBanner": {
+                    "target": "com.amazonaws.transfer#PreAuthenticationLoginBanner"
+                },
                 "Protocols": {
                     "target": "com.amazonaws.transfer#Protocols",
                     "traits": {
@@ -1606,9 +1639,9 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 100
+                    "max": 65536
                 },
-                "smithy.api#pattern": "^(\\/|(\\/(?!\\.)+[^$#<>;`|&?{}^*/\\n]+){1,4})$"
+                "smithy.api#pattern": "^[^\\x00]+$"
             }
         },
         "com.amazonaws.transfer#EndpointDetails": {
@@ -1870,7 +1903,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents an object that contains entries and targets for\n        <code>HomeDirectoryMappings</code>.</p>\n         <p>The following is an <code>Entry</code> and <code>Target</code> pair example for <code>chroot</code>.</p>\n         <p>\n            <code>[ { \"Entry:\": \"/\", \"Target\": \"/bucket_name/home/mydirectory\" } ]</code>\n         </p>\n \n         <note>\n            <p>If the target of a logical directory entry does not exist in Amazon S3 or EFS, the entry is\n        ignored. As a workaround, you can use the Amazon S3 API or EFS API to create 0 byte objects as place\n        holders for your directory. If using the CLI, use the <code>s3api</code> or <code>efsapi</code> call instead of\n        <code>s3</code> or <code>efs</code> so you can use the put-object operation. For example, you use the\n        following: <code>aws s3api put-object --bucket bucketname --key path/to/folder/</code>. Make\n        sure that the end of the key name ends in a <code>/</code> for it to be considered a folder.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Represents an object that contains entries and targets for\n        <code>HomeDirectoryMappings</code>.</p>\n         <p>The following is an <code>Entry</code> and <code>Target</code> pair example for <code>chroot</code>.</p>\n         <p>\n            <code>[ { \"Entry:\": \"/\", \"Target\": \"/bucket_name/home/mydirectory\" } ]</code>\n         </p>"
             }
         },
         "com.amazonaws.transfer#HomeDirectoryMappings": {
@@ -3036,6 +3069,26 @@
                 "smithy.api#documentation": "<p>The full POSIX identity, including user ID (<code>Uid</code>), group ID\n      (<code>Gid</code>), and any secondary groups IDs (<code>SecondaryGids</code>), that controls\n      your users' access to your Amazon EFS file systems. The POSIX permissions that are set on\n      files and directories in your file system determine the level of access your users get when\n      transferring files into and out of your Amazon EFS file systems.</p>"
             }
         },
+        "com.amazonaws.transfer#PostAuthenticationLoginBanner": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^[\\x09-\\x0D\\x20-\\x7E]*$"
+            }
+        },
+        "com.amazonaws.transfer#PreAuthenticationLoginBanner": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^[\\x09-\\x0D\\x20-\\x7E]*$"
+            }
+        },
         "com.amazonaws.transfer#Protocol": {
             "type": "string",
             "traits": {
@@ -3494,6 +3547,16 @@
                 "smithy.api#pattern": "^[\\w-]*$"
             }
         },
+        "com.amazonaws.transfer#SourceFileLocation": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^\\$\\{(\\w+.)+\\w+\\}$"
+            }
+        },
         "com.amazonaws.transfer#SourceIp": {
             "type": "string",
             "traits": {
@@ -3799,6 +3862,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Array that contains from 1 to 10 key/value pairs.</p>"
                     }
+                },
+                "SourceFileLocation": {
+                    "target": "com.amazonaws.transfer#SourceFileLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies which file to use as input to the workflow step: either the output from the previous step, or the originally uploaded file\n    for the workflow.</p>\n         <ul>\n            <li>\n               <p>Enter <code>${previous.file}</code> to use the previous file as the input.\n          In this case, this workflow step uses the output file from the previous workflow step as input.\n          This is the default value.</p>\n            </li>\n            <li>\n               <p>Enter <code>${original.file}</code> to use the originally-uploaded file location as input for this step.</p>\n            </li>\n         </ul>"
+                    }
                 }
             },
             "traits": {
@@ -3908,7 +3977,7 @@
                 "Message": {
                     "target": "com.amazonaws.transfer#Message",
                     "traits": {
-                        "smithy.api#documentation": "<p>A message that indicates whether the test was successful or not.</p>"
+                        "smithy.api#documentation": "<p>A message that indicates whether the test was successful or not.</p>\n         <note>\n            <p>If an empty string is returned, the most likely cause is that the authentication failed due to an incorrect username or password.</p>\n         </note>"
                     }
                 },
                 "Url": {
@@ -4161,7 +4230,7 @@
                 "HomeDirectoryMappings": {
                     "target": "com.amazonaws.transfer#HomeDirectoryMappings",
                     "traits": {
-                        "smithy.api#documentation": "<p>Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should\n      be visible to your user and how you want to make them visible. You must specify the\n        <code>Entry</code> and <code>Target</code> pair, where <code>Entry</code> shows how the path\n      is made visible and <code>Target</code> is the actual Amazon S3 or Amazon EFS path. If you\n      only specify a target, it is displayed as is. You also must ensure that your Amazon Web Services Identity\n      and Access Management (IAM) role provides access to paths in <code>Target</code>. This value\n      can only be set when <code>HomeDirectoryType</code> is set to\n      <i>LOGICAL</i>.</p>\n         <p>The following is an <code>Entry</code> and <code>Target</code> pair example.</p>\n         <p>\n            <code>[ { \"Entry\": \"/directory1\", \"Target\": \"/bucket_name/home/mydirectory\" } ]</code>\n         </p>\n         <p>In most cases, you can use this value instead of the session policy to lock down your\n        user to the designated home directory (\"<code>chroot</code>\"). To do this, you can set\n        <code>Entry</code> to <code>/</code> and set <code>Target</code> to the\n        <code>HomeDirectory</code> parameter value.</p>\n         <p>The following is an <code>Entry</code> and <code>Target</code> pair example for <code>chroot</code>.</p>\n         <p>\n            <code>[ { \"Entry:\": \"/\", \"Target\": \"/bucket_name/home/mydirectory\" } ]</code>\n         </p>\n   \n         <note>\n            <p>If the target of a logical directory entry does not exist in Amazon S3 or EFS, the entry is\n        ignored. As a workaround, you can use the Amazon S3 API or EFS API to create 0 byte objects as place\n        holders for your directory. If using the CLI, use the <code>s3api</code> or <code>efsapi</code> call instead of\n        <code>s3</code> or <code>efs</code> so you can use the put-object operation. For example, you use the\n        following: <code>aws s3api put-object --bucket bucketname --key path/to/folder/</code>. Make\n        sure that the end of the key name ends in a <code>/</code> for it to be considered a folder.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should\n      be visible to your user and how you want to make them visible. You must specify the\n        <code>Entry</code> and <code>Target</code> pair, where <code>Entry</code> shows how the path\n      is made visible and <code>Target</code> is the actual Amazon S3 or Amazon EFS path. If you\n      only specify a target, it is displayed as is. You also must ensure that your Amazon Web Services Identity\n      and Access Management (IAM) role provides access to paths in <code>Target</code>. This value\n      can only be set when <code>HomeDirectoryType</code> is set to\n      <i>LOGICAL</i>.</p>\n         <p>The following is an <code>Entry</code> and <code>Target</code> pair example.</p>\n         <p>\n            <code>[ { \"Entry\": \"/directory1\", \"Target\": \"/bucket_name/home/mydirectory\" } ]</code>\n         </p>\n         <p>In most cases, you can use this value instead of the session policy to lock down your\n        user to the designated home directory (\"<code>chroot</code>\"). To do this, you can set\n        <code>Entry</code> to <code>/</code> and set <code>Target</code> to the\n        <code>HomeDirectory</code> parameter value.</p>\n         <p>The following is an <code>Entry</code> and <code>Target</code> pair example for <code>chroot</code>.</p>\n         <p>\n            <code>[ { \"Entry:\": \"/\", \"Target\": \"/bucket_name/home/mydirectory\" } ]</code>\n         </p>"
                     }
                 },
                 "Policy": {
@@ -4297,6 +4366,12 @@
                         "smithy.api#documentation": "<p>Specifies the Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access Management (IAM) role that allows a server to turn\n      on Amazon CloudWatch logging for Amazon S3 or Amazon EFS events. When set, user activity can be viewed in\n      your CloudWatch logs.</p>"
                     }
                 },
+                "PostAuthenticationLoginBanner": {
+                    "target": "com.amazonaws.transfer#PostAuthenticationLoginBanner"
+                },
+                "PreAuthenticationLoginBanner": {
+                    "target": "com.amazonaws.transfer#PreAuthenticationLoginBanner"
+                },
                 "Protocols": {
                     "target": "com.amazonaws.transfer#Protocols",
                     "traits": {
@@ -4383,7 +4458,7 @@
                 "HomeDirectoryMappings": {
                     "target": "com.amazonaws.transfer#HomeDirectoryMappings",
                     "traits": {
-                        "smithy.api#documentation": "<p>Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should\n      be visible to your user and how you want to make them visible. You must specify the\n        <code>Entry</code> and <code>Target</code> pair, where <code>Entry</code> shows how the path\n      is made visible and <code>Target</code> is the actual Amazon S3 or Amazon EFS path. If you\n      only specify a target, it is displayed as is. You also must ensure that your Amazon Web Services Identity\n      and Access Management (IAM) role provides access to paths in <code>Target</code>. This value\n      can only be set when <code>HomeDirectoryType</code> is set to\n      <i>LOGICAL</i>.</p>\n\n         <p>The following is an <code>Entry</code> and <code>Target</code> pair example.</p>\n         <p>\n            <code>[ { \"Entry\": \"/directory1\", \"Target\":\n        \"/bucket_name/home/mydirectory\" } ]</code>\n         </p>\n\n         <p>In most cases, you can use this value instead of the session policy to lock down your\n      user to the designated home directory (\"<code>chroot</code>\"). To do this, you can set\n        <code>Entry</code> to '/' and set <code>Target</code> to the HomeDirectory\n      parameter value.</p>\n\n         <p>The following is an <code>Entry</code> and <code>Target</code> pair example for <code>chroot</code>.</p>\n         <p>\n            <code>[ { \"Entry:\": \"/\", \"Target\": \"/bucket_name/home/mydirectory\" } ]</code>\n         </p>\n \n         <note>\n            <p>If the target of a logical directory entry does not exist in Amazon S3 or EFS, the entry is\n        ignored. As a workaround, you can use the Amazon S3 API or EFS API to create 0 byte objects as place\n        holders for your directory. If using the CLI, use the <code>s3api</code> or <code>efsapi</code> call instead of\n        <code>s3</code> or <code>efs</code> so you can use the put-object operation. For example, you use the\n        following: <code>aws s3api put-object --bucket bucketname --key path/to/folder/</code>. Make\n        sure that the end of the key name ends in a <code>/</code> for it to be considered a folder.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should\n      be visible to your user and how you want to make them visible. You must specify the\n        <code>Entry</code> and <code>Target</code> pair, where <code>Entry</code> shows how the path\n      is made visible and <code>Target</code> is the actual Amazon S3 or Amazon EFS path. If you\n      only specify a target, it is displayed as is. You also must ensure that your Amazon Web Services Identity\n      and Access Management (IAM) role provides access to paths in <code>Target</code>. This value\n      can only be set when <code>HomeDirectoryType</code> is set to\n      <i>LOGICAL</i>.</p>\n\n         <p>The following is an <code>Entry</code> and <code>Target</code> pair example.</p>\n         <p>\n            <code>[ { \"Entry\": \"/directory1\", \"Target\":\n        \"/bucket_name/home/mydirectory\" } ]</code>\n         </p>\n\n         <p>In most cases, you can use this value instead of the session policy to lock down your\n      user to the designated home directory (\"<code>chroot</code>\"). To do this, you can set\n        <code>Entry</code> to '/' and set <code>Target</code> to the HomeDirectory\n      parameter value.</p>\n\n         <p>The following is an <code>Entry</code> and <code>Target</code> pair example for <code>chroot</code>.</p>\n         <p>\n            <code>[ { \"Entry:\": \"/\", \"Target\": \"/bucket_name/home/mydirectory\" } ]</code>\n         </p>"
                     }
                 },
                 "Policy": {

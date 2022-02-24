@@ -80,6 +80,18 @@ type CreateDocumentClassifierInput struct {
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	ModelKmsKeyId *string
 
+	// The resource-based policy to attach to your custom document classifier model.
+	// You can use this policy to allow another AWS account to import your custom
+	// model. Provide your policy as a JSON body that you enter as a UTF-8 encoded
+	// string without line breaks. To provide valid JSON, enclose the attribute names
+	// and values in double quotes. If the JSON body is also enclosed in double quotes,
+	// then you must escape the double quotes that are inside the policy:
+	// "{\"attribute\": \"value\", \"attribute\": [\"value\"]}" To avoid escaping
+	// quotes, you can use single quotes to enclose the policy and double quotes to
+	// enclose the JSON names and values: '{"attribute": "value", "attribute":
+	// ["value"]}'
+	ModelPolicy *string
+
 	// Enables the addition of output results configuration parameters for custom
 	// classifier jobs.
 	OutputDataConfig *types.DocumentClassifierOutputDataConfig

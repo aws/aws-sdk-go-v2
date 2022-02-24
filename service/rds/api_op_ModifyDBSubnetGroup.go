@@ -33,7 +33,7 @@ type ModifyDBSubnetGroupInput struct {
 
 	// The name for the DB subnet group. This value is stored as a lowercase string.
 	// You can't modify the default subnet group. Constraints: Must match the name of
-	// an existing DBSubnetGroup. Must not be default. Example: mySubnetgroup
+	// an existing DBSubnetGroup. Must not be default. Example: mydbsubnetgroup
 	//
 	// This member is required.
 	DBSubnetGroupName *string

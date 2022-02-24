@@ -13,13 +13,18 @@ import (
 	"time"
 )
 
-// Deploys a specific version of a robot application to robots in a fleet. The
-// robot application must have a numbered applicationVersion for consistency
-// reasons. To create a new version, use CreateRobotApplicationVersion or see
-// Creating a Robot Application Version
+// Deploys a specific version of a robot application to robots in a fleet. This API
+// is no longer supported and will throw an error if used. The robot application
+// must have a numbered applicationVersion for consistency reasons. To create a new
+// version, use CreateRobotApplicationVersion or see Creating a Robot Application
+// Version
 // (https://docs.aws.amazon.com/robomaker/latest/dg/create-robot-application-version.html).
 // After 90 days, deployment jobs expire and will be deleted. They will no longer
 // be accessible.
+//
+// Deprecated: AWS RoboMaker is unable to process this request as the support for
+// the AWS RoboMaker application deployment feature has ended. For additional
+// information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.
 func (c *Client) CreateDeploymentJob(ctx context.Context, params *CreateDeploymentJobInput, optFns ...func(*Options)) (*CreateDeploymentJobOutput, error) {
 	if params == nil {
 		params = &CreateDeploymentJobInput{}

@@ -482,6 +482,21 @@
                 ]
             }
         },
+        "com.amazonaws.translate#Formality": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "FORMAL",
+                        "name": "FORMAL"
+                    },
+                    {
+                        "value": "INFORMAL",
+                        "name": "INFORMAL"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.translate#GetParallelData": {
             "type": "operation",
             "input": {
@@ -2110,6 +2125,9 @@
         "com.amazonaws.translate#TranslationSettings": {
             "type": "structure",
             "members": {
+                "Formality": {
+                    "target": "com.amazonaws.translate#Formality"
+                },
                 "Profanity": {
                     "target": "com.amazonaws.translate#Profanity",
                     "traits": {

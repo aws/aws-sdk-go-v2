@@ -12,8 +12,7 @@ import (
 )
 
 // Updates the name and scopes of resource server. All other fields are read-only.
-// If you don't provide a value for an attribute, it will be set to the default
-// value.
+// If you don't provide a value for an attribute, it is set to the default value.
 func (c *Client) UpdateResourceServer(ctx context.Context, params *UpdateResourceServerInput, optFns ...func(*Options)) (*UpdateResourceServerOutput, error) {
 	if params == nil {
 		params = &UpdateResourceServerInput{}

@@ -37,8 +37,8 @@ import (
 // You can restrict new player access by using UpdateGameSession to change the game
 // session's player session creation policy. Game session logs are retained for all
 // active game sessions for 14 days. To access the logs, call GetGameSessionLogUrl
-// to download the log files. Available in GameLift Local. Learn more Start a game
-// session
+// to download the log files. Available in Amazon Web Services Local. Learn more
+// Start a game session
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)
 // Related actions CreateGameSession | DescribeGameSessions |
 // DescribeGameSessionDetails | SearchGameSessions | UpdateGameSession |
@@ -89,12 +89,14 @@ type CreateGameSessionInput struct {
 
 	// A set of custom properties for a game session, formatted as key:value pairs.
 	// These properties are passed to a game server process in the GameSession object
-	// with a request to start a new game session.
+	// with a request to start a new game session (see Start a Game Session
+	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
 	GameProperties []types.GameProperty
 
 	// A set of custom game session properties, formatted as a single string value.
 	// This data is passed to a game server process in the GameSession object with a
-	// request to start a new game session.
+	// request to start a new game session (see Start a Game Session
+	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
 	GameSessionData *string
 
 	// This parameter is no longer preferred. Please use IdempotencyToken instead.
@@ -115,7 +117,7 @@ type CreateGameSessionInput struct {
 
 	// A fleet's remote location to place the new game session in. If this parameter is
 	// not set, the new game session is placed in the fleet's home Region. Specify a
-	// remote location with an AWS Region code such as us-west-2.
+	// remote location with an Amazon Web Services Region code such as us-west-2.
 	Location *string
 
 	// A descriptive label that is associated with a game session. Session names do not

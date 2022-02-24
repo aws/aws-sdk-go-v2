@@ -16,6 +16,7 @@ import (
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
+	"math"
 	"strings"
 )
 
@@ -538,6 +539,159 @@ func awsRestjson1_deserializeOpErrorDeleteFlow(response *smithyhttp.Response, me
 	}
 }
 
+type awsRestjson1_deserializeOpDescribeConnector struct {
+}
+
+func (*awsRestjson1_deserializeOpDescribeConnector) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpDescribeConnector) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorDescribeConnector(response, &metadata)
+	}
+	output := &DescribeConnectorOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentDescribeConnectorOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorDescribeConnector(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentDescribeConnectorOutput(v **DescribeConnectorOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *DescribeConnectorOutput
+	if *v == nil {
+		sv = &DescribeConnectorOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "connectorConfiguration":
+			if err := awsRestjson1_deserializeDocumentConnectorConfiguration(&sv.ConnectorConfiguration, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 type awsRestjson1_deserializeOpDescribeConnectorEntity struct {
 }
 
@@ -994,6 +1148,11 @@ func awsRestjson1_deserializeOpDocumentDescribeConnectorsOutput(v **DescribeConn
 		switch key {
 		case "connectorConfigurations":
 			if err := awsRestjson1_deserializeDocumentConnectorConfigurationsMap(&sv.ConnectorConfigurations, value); err != nil {
+				return err
+			}
+
+		case "connectors":
+			if err := awsRestjson1_deserializeDocumentConnectorList(&sv.Connectors, value); err != nil {
 				return err
 			}
 
@@ -1615,6 +1774,165 @@ func awsRestjson1_deserializeOpDocumentListConnectorEntitiesOutput(v **ListConne
 	return nil
 }
 
+type awsRestjson1_deserializeOpListConnectors struct {
+}
+
+func (*awsRestjson1_deserializeOpListConnectors) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpListConnectors) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorListConnectors(response, &metadata)
+	}
+	output := &ListConnectorsOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentListConnectorsOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorListConnectors(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentListConnectorsOutput(v **ListConnectorsOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *ListConnectorsOutput
+	if *v == nil {
+		sv = &ListConnectorsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "connectors":
+			if err := awsRestjson1_deserializeDocumentConnectorList(&sv.Connectors, value); err != nil {
+				return err
+			}
+
+		case "nextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 type awsRestjson1_deserializeOpListFlows struct {
 }
 
@@ -1916,6 +2234,181 @@ func awsRestjson1_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+type awsRestjson1_deserializeOpRegisterConnector struct {
+}
+
+func (*awsRestjson1_deserializeOpRegisterConnector) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpRegisterConnector) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorRegisterConnector(response, &metadata)
+	}
+	output := &RegisterConnectorOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentRegisterConnectorOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorRegisterConnector(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
+	case strings.EqualFold("ConnectorAuthenticationException", errorCode):
+		return awsRestjson1_deserializeErrorConnectorAuthenticationException(response, errorBody)
+
+	case strings.EqualFold("ConnectorServerException", errorCode):
+		return awsRestjson1_deserializeErrorConnectorServerException(response, errorBody)
+
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentRegisterConnectorOutput(v **RegisterConnectorOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *RegisterConnectorOutput
+	if *v == nil {
+		sv = &RegisterConnectorOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "connectorArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ARN to be of type string, got %T instead", value)
+				}
+				sv.ConnectorArn = ptr.String(jtv)
 			}
 
 		default:
@@ -2363,6 +2856,95 @@ func awsRestjson1_deserializeOpErrorTagResource(response *smithyhttp.Response, m
 	}
 }
 
+type awsRestjson1_deserializeOpUnregisterConnector struct {
+}
+
+func (*awsRestjson1_deserializeOpUnregisterConnector) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpUnregisterConnector) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorUnregisterConnector(response, &metadata)
+	}
+	output := &UnregisterConnectorOutput{}
+	out.Result = output
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorUnregisterConnector(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsRestjson1_deserializeOpUntagResource struct {
 }
 
@@ -2784,6 +3366,42 @@ func awsRestjson1_deserializeOpDocumentUpdateFlowOutput(v **UpdateFlowOutput, va
 	return nil
 }
 
+func awsRestjson1_deserializeErrorAccessDeniedException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.AccessDeniedException{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	err := awsRestjson1_deserializeDocumentAccessDeniedException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+
+	return output
+}
+
 func awsRestjson1_deserializeErrorConflictException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.ConflictException{}
 	var buff [1024]byte
@@ -3000,6 +3618,42 @@ func awsRestjson1_deserializeErrorServiceQuotaExceededException(response *smithy
 	return output
 }
 
+func awsRestjson1_deserializeErrorThrottlingException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.ThrottlingException{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	err := awsRestjson1_deserializeDocumentThrottlingException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+
+	return output
+}
+
 func awsRestjson1_deserializeErrorUnsupportedOperationException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.UnsupportedOperationException{}
 	var buff [1024]byte
@@ -3070,6 +3724,46 @@ func awsRestjson1_deserializeErrorValidationException(response *smithyhttp.Respo
 	errorBody.Seek(0, io.SeekStart)
 
 	return output
+}
+
+func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDeniedException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AccessDeniedException
+	if *v == nil {
+		sv = &types.AccessDeniedException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
 }
 
 func awsRestjson1_deserializeDocumentAggregationConfig(v **types.AggregationConfig, value interface{}) error {
@@ -3214,6 +3908,234 @@ func awsRestjson1_deserializeDocumentAmplitudeSourceProperties(v **types.Amplitu
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAuthCodeUrlList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected AuthCodeUrl to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAuthenticationConfig(v **types.AuthenticationConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AuthenticationConfig
+	if *v == nil {
+		sv = &types.AuthenticationConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "customAuthConfigs":
+			if err := awsRestjson1_deserializeDocumentCustomAuthConfigList(&sv.CustomAuthConfigs, value); err != nil {
+				return err
+			}
+
+		case "isApiKeyAuthSupported":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsApiKeyAuthSupported = jtv
+			}
+
+		case "isBasicAuthSupported":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsBasicAuthSupported = jtv
+			}
+
+		case "isCustomAuthSupported":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsCustomAuthSupported = jtv
+			}
+
+		case "isOAuth2Supported":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsOAuth2Supported = jtv
+			}
+
+		case "oAuth2Defaults":
+			if err := awsRestjson1_deserializeDocumentOAuth2Defaults(&sv.OAuth2Defaults, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAuthParameter(v **types.AuthParameter, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AuthParameter
+	if *v == nil {
+		sv = &types.AuthParameter{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "connectorSuppliedValues":
+			if err := awsRestjson1_deserializeDocumentConnectorSuppliedValueList(&sv.ConnectorSuppliedValues, value); err != nil {
+				return err
+			}
+
+		case "description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Description to be of type string, got %T instead", value)
+				}
+				sv.Description = ptr.String(jtv)
+			}
+
+		case "isRequired":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsRequired = jtv
+			}
+
+		case "isSensitiveField":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsSensitiveField = jtv
+			}
+
+		case "key":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Key to be of type string, got %T instead", value)
+				}
+				sv.Key = ptr.String(jtv)
+			}
+
+		case "label":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Label to be of type string, got %T instead", value)
+				}
+				sv.Label = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAuthParameterList(v *[]types.AuthParameter, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AuthParameter
+	if *v == nil {
+		cv = []types.AuthParameter{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AuthParameter
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAuthParameter(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3316,6 +4238,11 @@ func awsRestjson1_deserializeDocumentConnectorConfiguration(v **types.ConnectorC
 
 	for key, value := range shape {
 		switch key {
+		case "authenticationConfig":
+			if err := awsRestjson1_deserializeDocumentAuthenticationConfig(&sv.AuthenticationConfig, value); err != nil {
+				return err
+			}
+
 		case "canUseAsDestination":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -3334,9 +4261,96 @@ func awsRestjson1_deserializeDocumentConnectorConfiguration(v **types.ConnectorC
 				sv.CanUseAsSource = jtv
 			}
 
+		case "connectorArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ARN to be of type string, got %T instead", value)
+				}
+				sv.ConnectorArn = ptr.String(jtv)
+			}
+
+		case "connectorDescription":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConnectorDescription to be of type string, got %T instead", value)
+				}
+				sv.ConnectorDescription = ptr.String(jtv)
+			}
+
+		case "connectorLabel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConnectorLabel to be of type string, got %T instead", value)
+				}
+				sv.ConnectorLabel = ptr.String(jtv)
+			}
+
 		case "connectorMetadata":
 			if err := awsRestjson1_deserializeDocumentConnectorMetadata(&sv.ConnectorMetadata, value); err != nil {
 				return err
+			}
+
+		case "connectorModes":
+			if err := awsRestjson1_deserializeDocumentConnectorModeList(&sv.ConnectorModes, value); err != nil {
+				return err
+			}
+
+		case "connectorName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConnectorName to be of type string, got %T instead", value)
+				}
+				sv.ConnectorName = ptr.String(jtv)
+			}
+
+		case "connectorOwner":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConnectorOwner to be of type string, got %T instead", value)
+				}
+				sv.ConnectorOwner = ptr.String(jtv)
+			}
+
+		case "connectorProvisioningConfig":
+			if err := awsRestjson1_deserializeDocumentConnectorProvisioningConfig(&sv.ConnectorProvisioningConfig, value); err != nil {
+				return err
+			}
+
+		case "connectorProvisioningType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConnectorProvisioningType to be of type string, got %T instead", value)
+				}
+				sv.ConnectorProvisioningType = types.ConnectorProvisioningType(jtv)
+			}
+
+		case "connectorRuntimeSettings":
+			if err := awsRestjson1_deserializeDocumentConnectorRuntimeSettingList(&sv.ConnectorRuntimeSettings, value); err != nil {
+				return err
+			}
+
+		case "connectorType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConnectorType to be of type string, got %T instead", value)
+				}
+				sv.ConnectorType = types.ConnectorType(jtv)
+			}
+
+		case "connectorVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConnectorVersion to be of type string, got %T instead", value)
+				}
+				sv.ConnectorVersion = ptr.String(jtv)
 			}
 
 		case "isPrivateLinkEnabled":
@@ -3357,8 +4371,52 @@ func awsRestjson1_deserializeDocumentConnectorConfiguration(v **types.ConnectorC
 				sv.IsPrivateLinkEndpointUrlRequired = jtv
 			}
 
+		case "logoURL":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LogoURL to be of type string, got %T instead", value)
+				}
+				sv.LogoURL = ptr.String(jtv)
+			}
+
+		case "registeredAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.RegisteredAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Date to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "registeredBy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RegisteredBy to be of type string, got %T instead", value)
+				}
+				sv.RegisteredBy = ptr.String(jtv)
+			}
+
+		case "supportedApiVersions":
+			if err := awsRestjson1_deserializeDocumentSupportedApiVersionList(&sv.SupportedApiVersions, value); err != nil {
+				return err
+			}
+
 		case "supportedDestinationConnectors":
 			if err := awsRestjson1_deserializeDocumentConnectorTypeList(&sv.SupportedDestinationConnectors, value); err != nil {
+				return err
+			}
+
+		case "supportedOperators":
+			if err := awsRestjson1_deserializeDocumentSupportedOperatorList(&sv.SupportedOperators, value); err != nil {
 				return err
 			}
 
@@ -3369,6 +4427,11 @@ func awsRestjson1_deserializeDocumentConnectorConfiguration(v **types.ConnectorC
 
 		case "supportedTriggerTypes":
 			if err := awsRestjson1_deserializeDocumentTriggerTypeList(&sv.SupportedTriggerTypes, value); err != nil {
+				return err
+			}
+
+		case "supportedWriteOperations":
+			if err := awsRestjson1_deserializeDocumentSupportedWriteOperationList(&sv.SupportedWriteOperations, value); err != nil {
 				return err
 			}
 
@@ -3413,6 +4476,139 @@ func awsRestjson1_deserializeDocumentConnectorConfigurationsMap(v *map[string]ty
 
 	}
 	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentConnectorDetail(v **types.ConnectorDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ConnectorDetail
+	if *v == nil {
+		sv = &types.ConnectorDetail{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "applicationType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ApplicationType to be of type string, got %T instead", value)
+				}
+				sv.ApplicationType = ptr.String(jtv)
+			}
+
+		case "connectorDescription":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConnectorDescription to be of type string, got %T instead", value)
+				}
+				sv.ConnectorDescription = ptr.String(jtv)
+			}
+
+		case "connectorLabel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConnectorLabel to be of type string, got %T instead", value)
+				}
+				sv.ConnectorLabel = ptr.String(jtv)
+			}
+
+		case "connectorModes":
+			if err := awsRestjson1_deserializeDocumentConnectorModeList(&sv.ConnectorModes, value); err != nil {
+				return err
+			}
+
+		case "connectorName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConnectorName to be of type string, got %T instead", value)
+				}
+				sv.ConnectorName = ptr.String(jtv)
+			}
+
+		case "connectorOwner":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConnectorOwner to be of type string, got %T instead", value)
+				}
+				sv.ConnectorOwner = ptr.String(jtv)
+			}
+
+		case "connectorProvisioningType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConnectorProvisioningType to be of type string, got %T instead", value)
+				}
+				sv.ConnectorProvisioningType = types.ConnectorProvisioningType(jtv)
+			}
+
+		case "connectorType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConnectorType to be of type string, got %T instead", value)
+				}
+				sv.ConnectorType = types.ConnectorType(jtv)
+			}
+
+		case "connectorVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConnectorVersion to be of type string, got %T instead", value)
+				}
+				sv.ConnectorVersion = ptr.String(jtv)
+			}
+
+		case "registeredAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.RegisteredAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Date to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "registeredBy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RegisteredBy to be of type string, got %T instead", value)
+				}
+				sv.RegisteredBy = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -3496,6 +4692,20 @@ func awsRestjson1_deserializeDocumentConnectorEntityField(v **types.ConnectorEnt
 
 	for key, value := range shape {
 		switch key {
+		case "customProperties":
+			if err := awsRestjson1_deserializeDocumentCustomProperties(&sv.CustomProperties, value); err != nil {
+				return err
+			}
+
+		case "defaultValue":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.DefaultValue = ptr.String(jtv)
+			}
+
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3519,6 +4729,24 @@ func awsRestjson1_deserializeDocumentConnectorEntityField(v **types.ConnectorEnt
 				sv.Identifier = ptr.String(jtv)
 			}
 
+		case "isDeprecated":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsDeprecated = jtv
+			}
+
+		case "isPrimaryKey":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsPrimaryKey = jtv
+			}
+
 		case "label":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3526,6 +4754,15 @@ func awsRestjson1_deserializeDocumentConnectorEntityField(v **types.ConnectorEnt
 					return fmt.Errorf("expected Label to be of type string, got %T instead", value)
 				}
 				sv.Label = ptr.String(jtv)
+			}
+
+		case "parentIdentifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Identifier to be of type string, got %T instead", value)
+				}
+				sv.ParentIdentifier = ptr.String(jtv)
 			}
 
 		case "sourceProperties":
@@ -3646,6 +4883,40 @@ func awsRestjson1_deserializeDocumentConnectorEntityMap(v *map[string][]types.Co
 
 	}
 	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentConnectorList(v *[]types.ConnectorDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ConnectorDetail
+	if *v == nil {
+		cv = []types.ConnectorDetail{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ConnectorDetail
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentConnectorDetail(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -3785,6 +5056,42 @@ func awsRestjson1_deserializeDocumentConnectorMetadata(v **types.ConnectorMetada
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentConnectorModeList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ConnectorMode to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentConnectorOperator(v **types.ConnectorOperator, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3814,6 +5121,15 @@ func awsRestjson1_deserializeDocumentConnectorOperator(v **types.ConnectorOperat
 					return fmt.Errorf("expected AmplitudeConnectorOperator to be of type string, got %T instead", value)
 				}
 				sv.Amplitude = types.AmplitudeConnectorOperator(jtv)
+			}
+
+		case "CustomConnector":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Operator to be of type string, got %T instead", value)
+				}
+				sv.CustomConnector = types.Operator(jtv)
 			}
 
 		case "Datadog":
@@ -3982,6 +5298,15 @@ func awsRestjson1_deserializeDocumentConnectorProfile(v **types.ConnectorProfile
 				sv.ConnectionMode = types.ConnectionMode(jtv)
 			}
 
+		case "connectorLabel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConnectorLabel to be of type string, got %T instead", value)
+				}
+				sv.ConnectorLabel = ptr.String(jtv)
+			}
+
 		case "connectorProfileArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4130,6 +5455,11 @@ func awsRestjson1_deserializeDocumentConnectorProfileProperties(v **types.Connec
 				return err
 			}
 
+		case "CustomConnector":
+			if err := awsRestjson1_deserializeDocumentCustomConnectorProfileProperties(&sv.CustomConnector, value); err != nil {
+				return err
+			}
+
 		case "Datadog":
 			if err := awsRestjson1_deserializeDocumentDatadogConnectorProfileProperties(&sv.Datadog, value); err != nil {
 				return err
@@ -4219,6 +5549,166 @@ func awsRestjson1_deserializeDocumentConnectorProfileProperties(v **types.Connec
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentConnectorProvisioningConfig(v **types.ConnectorProvisioningConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ConnectorProvisioningConfig
+	if *v == nil {
+		sv = &types.ConnectorProvisioningConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "lambda":
+			if err := awsRestjson1_deserializeDocumentLambdaConnectorProvisioningConfig(&sv.Lambda, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentConnectorRuntimeSetting(v **types.ConnectorRuntimeSetting, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ConnectorRuntimeSetting
+	if *v == nil {
+		sv = &types.ConnectorRuntimeSetting{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "connectorSuppliedValueOptions":
+			if err := awsRestjson1_deserializeDocumentConnectorSuppliedValueOptionList(&sv.ConnectorSuppliedValueOptions, value); err != nil {
+				return err
+			}
+
+		case "dataType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConnectorRuntimeSettingDataType to be of type string, got %T instead", value)
+				}
+				sv.DataType = ptr.String(jtv)
+			}
+
+		case "description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Description to be of type string, got %T instead", value)
+				}
+				sv.Description = ptr.String(jtv)
+			}
+
+		case "isRequired":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsRequired = jtv
+			}
+
+		case "key":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Key to be of type string, got %T instead", value)
+				}
+				sv.Key = ptr.String(jtv)
+			}
+
+		case "label":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Label to be of type string, got %T instead", value)
+				}
+				sv.Label = ptr.String(jtv)
+			}
+
+		case "scope":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConnectorRuntimeSettingScope to be of type string, got %T instead", value)
+				}
+				sv.Scope = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentConnectorRuntimeSettingList(v *[]types.ConnectorRuntimeSetting, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ConnectorRuntimeSetting
+	if *v == nil {
+		cv = []types.ConnectorRuntimeSetting{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ConnectorRuntimeSetting
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentConnectorRuntimeSetting(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentConnectorServerException(v **types.ConnectorServerException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4259,6 +5749,78 @@ func awsRestjson1_deserializeDocumentConnectorServerException(v **types.Connecto
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentConnectorSuppliedValueList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ConnectorSuppliedValue to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentConnectorSuppliedValueOptionList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ConnectorSuppliedValue to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentConnectorTypeList(v *[]types.ConnectorType, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4292,6 +5854,235 @@ func awsRestjson1_deserializeDocumentConnectorTypeList(v *[]types.ConnectorType,
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCustomAuthConfig(v **types.CustomAuthConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CustomAuthConfig
+	if *v == nil {
+		sv = &types.CustomAuthConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "authParameters":
+			if err := awsRestjson1_deserializeDocumentAuthParameterList(&sv.AuthParameters, value); err != nil {
+				return err
+			}
+
+		case "customAuthenticationType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CustomAuthenticationType to be of type string, got %T instead", value)
+				}
+				sv.CustomAuthenticationType = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCustomAuthConfigList(v *[]types.CustomAuthConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.CustomAuthConfig
+	if *v == nil {
+		cv = []types.CustomAuthConfig{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.CustomAuthConfig
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentCustomAuthConfig(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCustomConnectorDestinationProperties(v **types.CustomConnectorDestinationProperties, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CustomConnectorDestinationProperties
+	if *v == nil {
+		sv = &types.CustomConnectorDestinationProperties{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "customProperties":
+			if err := awsRestjson1_deserializeDocumentCustomProperties(&sv.CustomProperties, value); err != nil {
+				return err
+			}
+
+		case "entityName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EntityName to be of type string, got %T instead", value)
+				}
+				sv.EntityName = ptr.String(jtv)
+			}
+
+		case "errorHandlingConfig":
+			if err := awsRestjson1_deserializeDocumentErrorHandlingConfig(&sv.ErrorHandlingConfig, value); err != nil {
+				return err
+			}
+
+		case "idFieldNames":
+			if err := awsRestjson1_deserializeDocumentIdFieldNameList(&sv.IdFieldNames, value); err != nil {
+				return err
+			}
+
+		case "writeOperationType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WriteOperationType to be of type string, got %T instead", value)
+				}
+				sv.WriteOperationType = types.WriteOperationType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCustomConnectorProfileProperties(v **types.CustomConnectorProfileProperties, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CustomConnectorProfileProperties
+	if *v == nil {
+		sv = &types.CustomConnectorProfileProperties{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "oAuth2Properties":
+			if err := awsRestjson1_deserializeDocumentOAuth2Properties(&sv.OAuth2Properties, value); err != nil {
+				return err
+			}
+
+		case "profileProperties":
+			if err := awsRestjson1_deserializeDocumentProfilePropertiesMap(&sv.ProfileProperties, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCustomConnectorSourceProperties(v **types.CustomConnectorSourceProperties, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CustomConnectorSourceProperties
+	if *v == nil {
+		sv = &types.CustomConnectorSourceProperties{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "customProperties":
+			if err := awsRestjson1_deserializeDocumentCustomProperties(&sv.CustomProperties, value); err != nil {
+				return err
+			}
+
+		case "entityName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EntityName to be of type string, got %T instead", value)
+				}
+				sv.EntityName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -4372,6 +6163,42 @@ func awsRestjson1_deserializeDocumentCustomerProfilesMetadata(v **types.Customer
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCustomProperties(v *map[string]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]string
+	if *v == nil {
+		mv = map[string]string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected CustomPropertyValue to be of type string, got %T instead", value)
+			}
+			parsedVal = jtv
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
 	return nil
 }
 
@@ -4508,6 +6335,11 @@ func awsRestjson1_deserializeDocumentDestinationConnectorProperties(v **types.De
 
 	for key, value := range shape {
 		switch key {
+		case "CustomConnector":
+			if err := awsRestjson1_deserializeDocumentCustomConnectorDestinationProperties(&sv.CustomConnector, value); err != nil {
+				return err
+			}
+
 		case "CustomerProfiles":
 			if err := awsRestjson1_deserializeDocumentCustomerProfilesDestinationProperties(&sv.CustomerProfiles, value); err != nil {
 				return err
@@ -4540,6 +6372,11 @@ func awsRestjson1_deserializeDocumentDestinationConnectorProperties(v **types.De
 
 		case "Salesforce":
 			if err := awsRestjson1_deserializeDocumentSalesforceDestinationProperties(&sv.Salesforce, value); err != nil {
+				return err
+			}
+
+		case "SAPOData":
+			if err := awsRestjson1_deserializeDocumentSAPODataDestinationProperties(&sv.SAPOData, value); err != nil {
 				return err
 			}
 
@@ -4596,6 +6433,15 @@ func awsRestjson1_deserializeDocumentDestinationFieldProperties(v **types.Destin
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
 				sv.IsCreatable = jtv
+			}
+
+		case "isDefaultedOnCreate":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsDefaultedOnCreate = jtv
 			}
 
 		case "isNullable":
@@ -4661,6 +6507,15 @@ func awsRestjson1_deserializeDocumentDestinationFlowConfig(v **types.Destination
 
 	for key, value := range shape {
 		switch key {
+		case "apiVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ApiVersion to be of type string, got %T instead", value)
+				}
+				sv.ApiVersion = ptr.String(jtv)
+			}
+
 		case "connectorProfileName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5305,6 +7160,11 @@ func awsRestjson1_deserializeDocumentFieldTypeDetails(v **types.FieldTypeDetails
 
 	for key, value := range shape {
 		switch key {
+		case "fieldLengthRange":
+			if err := awsRestjson1_deserializeDocumentRange(&sv.FieldLengthRange, value); err != nil {
+				return err
+			}
+
 		case "fieldType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5314,14 +7174,37 @@ func awsRestjson1_deserializeDocumentFieldTypeDetails(v **types.FieldTypeDetails
 				sv.FieldType = ptr.String(jtv)
 			}
 
+		case "fieldValueRange":
+			if err := awsRestjson1_deserializeDocumentRange(&sv.FieldValueRange, value); err != nil {
+				return err
+			}
+
 		case "filterOperators":
 			if err := awsRestjson1_deserializeDocumentFilterOperatorList(&sv.FilterOperators, value); err != nil {
 				return err
 			}
 
+		case "supportedDateFormat":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SupportedDateFormat = ptr.String(jtv)
+			}
+
 		case "supportedValues":
 			if err := awsRestjson1_deserializeDocumentSupportedValueList(&sv.SupportedValues, value); err != nil {
 				return err
+			}
+
+		case "valueRegexPattern":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ValueRegexPattern = ptr.String(jtv)
 			}
 
 		default:
@@ -5425,6 +7308,15 @@ func awsRestjson1_deserializeDocumentFlowDefinition(v **types.FlowDefinition, va
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "destinationConnectorLabel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConnectorLabel to be of type string, got %T instead", value)
+				}
+				sv.DestinationConnectorLabel = ptr.String(jtv)
+			}
+
 		case "destinationConnectorType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5489,6 +7381,15 @@ func awsRestjson1_deserializeDocumentFlowDefinition(v **types.FlowDefinition, va
 					return fmt.Errorf("expected UpdatedBy to be of type string, got %T instead", value)
 				}
 				sv.LastUpdatedBy = ptr.String(jtv)
+			}
+
+		case "sourceConnectorLabel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConnectorLabel to be of type string, got %T instead", value)
+				}
+				sv.SourceConnectorLabel = ptr.String(jtv)
 			}
 
 		case "sourceConnectorType":
@@ -6037,6 +7938,46 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentLambdaConnectorProvisioningConfig(v **types.LambdaConnectorProvisioningConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LambdaConnectorProvisioningConfig
+	if *v == nil {
+		sv = &types.LambdaConnectorProvisioningConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "lambdaArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ARN to be of type string, got %T instead", value)
+				}
+				sv.LambdaArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentLookoutMetricsDestinationProperties(v **types.LookoutMetricsDestinationProperties, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6168,6 +8109,142 @@ func awsRestjson1_deserializeDocumentMarketoSourceProperties(v **types.MarketoSo
 					return fmt.Errorf("expected Object to be of type string, got %T instead", value)
 				}
 				sv.Object = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentOAuth2Defaults(v **types.OAuth2Defaults, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OAuth2Defaults
+	if *v == nil {
+		sv = &types.OAuth2Defaults{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "authCodeUrls":
+			if err := awsRestjson1_deserializeDocumentAuthCodeUrlList(&sv.AuthCodeUrls, value); err != nil {
+				return err
+			}
+
+		case "oauth2GrantTypesSupported":
+			if err := awsRestjson1_deserializeDocumentOAuth2GrantTypeSupportedList(&sv.Oauth2GrantTypesSupported, value); err != nil {
+				return err
+			}
+
+		case "oauthScopes":
+			if err := awsRestjson1_deserializeDocumentOAuthScopeList(&sv.OauthScopes, value); err != nil {
+				return err
+			}
+
+		case "tokenUrls":
+			if err := awsRestjson1_deserializeDocumentTokenUrlList(&sv.TokenUrls, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentOAuth2GrantTypeSupportedList(v *[]types.OAuth2GrantType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.OAuth2GrantType
+	if *v == nil {
+		cv = []types.OAuth2GrantType{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.OAuth2GrantType
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected OAuth2GrantType to be of type string, got %T instead", value)
+			}
+			col = types.OAuth2GrantType(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentOAuth2Properties(v **types.OAuth2Properties, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OAuth2Properties
+	if *v == nil {
+		sv = &types.OAuth2Properties{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "oAuth2GrantType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OAuth2GrantType to be of type string, got %T instead", value)
+				}
+				sv.OAuth2GrantType = types.OAuth2GrantType(jtv)
+			}
+
+		case "tokenUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TokenUrl to be of type string, got %T instead", value)
+				}
+				sv.TokenUrl = ptr.String(jtv)
 			}
 
 		default:
@@ -6365,6 +8442,141 @@ func awsRestjson1_deserializeDocumentPrivateConnectionProvisioningState(v **type
 					return fmt.Errorf("expected PrivateConnectionProvisioningStatus to be of type string, got %T instead", value)
 				}
 				sv.Status = types.PrivateConnectionProvisioningStatus(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentProfilePropertiesMap(v *map[string]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]string
+	if *v == nil {
+		mv = map[string]string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ProfilePropertyValue to be of type string, got %T instead", value)
+			}
+			parsedVal = jtv
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRange(v **types.Range, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Range
+	if *v == nil {
+		sv = &types.Range{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "maximum":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Maximum = f64
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Maximum = f64
+
+				default:
+					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "minimum":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Minimum = f64
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Minimum = f64
+
+				default:
+					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+
+				}
 			}
 
 		default:
@@ -7127,6 +9339,70 @@ func awsRestjson1_deserializeDocumentSAPODataConnectorProfileProperties(v **type
 					return fmt.Errorf("expected PrivateLinkServiceName to be of type string, got %T instead", value)
 				}
 				sv.PrivateLinkServiceName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSAPODataDestinationProperties(v **types.SAPODataDestinationProperties, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SAPODataDestinationProperties
+	if *v == nil {
+		sv = &types.SAPODataDestinationProperties{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "errorHandlingConfig":
+			if err := awsRestjson1_deserializeDocumentErrorHandlingConfig(&sv.ErrorHandlingConfig, value); err != nil {
+				return err
+			}
+
+		case "idFieldNames":
+			if err := awsRestjson1_deserializeDocumentIdFieldNameList(&sv.IdFieldNames, value); err != nil {
+				return err
+			}
+
+		case "objectPath":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Object to be of type string, got %T instead", value)
+				}
+				sv.ObjectPath = ptr.String(jtv)
+			}
+
+		case "successResponseHandlingConfig":
+			if err := awsRestjson1_deserializeDocumentSuccessResponseHandlingConfig(&sv.SuccessResponseHandlingConfig, value); err != nil {
+				return err
+			}
+
+		case "writeOperationType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WriteOperationType to be of type string, got %T instead", value)
+				}
+				sv.WriteOperationType = types.WriteOperationType(jtv)
 			}
 
 		default:
@@ -7953,6 +10229,11 @@ func awsRestjson1_deserializeDocumentSourceConnectorProperties(v **types.SourceC
 				return err
 			}
 
+		case "CustomConnector":
+			if err := awsRestjson1_deserializeDocumentCustomConnectorSourceProperties(&sv.CustomConnector, value); err != nil {
+				return err
+			}
+
 		case "Datadog":
 			if err := awsRestjson1_deserializeDocumentDatadogSourceProperties(&sv.Datadog, value); err != nil {
 				return err
@@ -8072,6 +10353,15 @@ func awsRestjson1_deserializeDocumentSourceFieldProperties(v **types.SourceField
 				sv.IsRetrievable = jtv
 			}
 
+		case "isTimestampFieldForIncrementalQueries":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsTimestampFieldForIncrementalQueries = jtv
+			}
+
 		default:
 			_, _ = key, value
 
@@ -8139,6 +10429,15 @@ func awsRestjson1_deserializeDocumentSourceFlowConfig(v **types.SourceFlowConfig
 
 	for key, value := range shape {
 		switch key {
+		case "apiVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ApiVersion to be of type string, got %T instead", value)
+				}
+				sv.ApiVersion = ptr.String(jtv)
+			}
+
 		case "connectorProfileName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8176,6 +10475,91 @@ func awsRestjson1_deserializeDocumentSourceFlowConfig(v **types.SourceFlowConfig
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentSuccessResponseHandlingConfig(v **types.SuccessResponseHandlingConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SuccessResponseHandlingConfig
+	if *v == nil {
+		sv = &types.SuccessResponseHandlingConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "bucketName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BucketName to be of type string, got %T instead", value)
+				}
+				sv.BucketName = ptr.String(jtv)
+			}
+
+		case "bucketPrefix":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BucketPrefix to be of type string, got %T instead", value)
+				}
+				sv.BucketPrefix = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSupportedApiVersionList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected SupportedApiVersion to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentSupportedFieldTypeDetails(v **types.SupportedFieldTypeDetails, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8209,6 +10593,42 @@ func awsRestjson1_deserializeDocumentSupportedFieldTypeDetails(v **types.Support
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSupportedOperatorList(v *[]types.Operators, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.Operators
+	if *v == nil {
+		cv = []types.Operators{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.Operators
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected Operators to be of type string, got %T instead", value)
+			}
+			col = types.Operators(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -8447,6 +10867,82 @@ func awsRestjson1_deserializeDocumentTasks(v *[]types.Task, value interface{}) e
 			return err
 		}
 		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ThrottlingException
+	if *v == nil {
+		sv = &types.ThrottlingException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTokenUrlList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected TokenUrl to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
 		cv = append(cv, col)
 
 	}

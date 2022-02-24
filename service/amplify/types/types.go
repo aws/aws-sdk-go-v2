@@ -77,7 +77,9 @@ type App struct {
 	// Describes the automated branch creation glob patterns for the Amplify app.
 	AutoBranchCreationPatterns []string
 
-	// The basic authorization credentials for branches for the Amplify app.
+	// The basic authorization credentials for branches for the Amplify app. You must
+	// base64-encode the authorization credentials and provide them in the format
+	// user:password.
 	BasicAuthCredentials *string
 
 	// Describes the content of the build specification (build spec) for the Amplify
@@ -129,7 +131,9 @@ type Artifact struct {
 // Describes the automated branch creation configuration.
 type AutoBranchCreationConfig struct {
 
-	// The basic authorization credentials for the autocreated branch.
+	// The basic authorization credentials for the autocreated branch. You must
+	// base64-encode the authorization credentials and provide them in the format
+	// user:password.
 	BasicAuthCredentials *string
 
 	// The build specification (build spec) for the autocreated branch.
@@ -295,7 +299,9 @@ type Branch struct {
 	// Amplify app.
 	BackendEnvironmentArn *string
 
-	// The basic authorization credentials for a branch of an Amplify app.
+	// The basic authorization credentials for a branch of an Amplify app. You must
+	// base64-encode the authorization credentials and provide them in the format
+	// user:password.
 	BasicAuthCredentials *string
 
 	// The build specification (build spec) content for the branch of an Amplify app.

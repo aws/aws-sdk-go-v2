@@ -83,8 +83,19 @@ type ListUsersInput struct {
 	//
 	// * sub
 	//
-	// Custom attributes are not searchable. For more
-	// information, see Searching for Users Using the ListUsers API
+	// Custom attributes aren't searchable. You can also list
+	// users with a client-side filter. The server-side filter matches no more than 1
+	// attribute. For an advanced search, use a client-side filter with the --query
+	// parameter of the list-users action in the CLI. When you use a client-side
+	// filter, ListUsers returns a paginated list of zero or more users. You can
+	// receive multiple pages in a row with zero results. Repeat the query with each
+	// pagination token that is returned until you receive a null pagination token
+	// value, and then review the combined result. For more information about
+	// server-side and client-side filtering, see FilteringCLI output
+	// (https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-filter.html) in the
+	// Command Line Interface User Guide
+	// (https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-filter.html). For
+	// more information, see Searching for Users Using the ListUsers API
 	// (https://docs.aws.amazon.com/cognito/latest/developerguide/how-to-manage-user-accounts.html#cognito-user-pools-searching-for-users-using-listusers-api)
 	// and Examples of Using the ListUsers API
 	// (https://docs.aws.amazon.com/cognito/latest/developerguide/how-to-manage-user-accounts.html#cognito-user-pools-searching-for-users-listusers-api-examples)

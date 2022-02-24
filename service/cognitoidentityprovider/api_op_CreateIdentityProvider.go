@@ -65,38 +65,41 @@ type CreateIdentityProviderInput struct {
 	//
 	// * authorize_scopes
 	//
-	// * For OIDC
-	// providers:
+	// * For OpenID
+	// Connect (OIDC) providers:
 	//
 	// * client_id
 	//
 	// * client_secret
 	//
-	// * attributes_request_method
-	//
 	// *
-	// oidc_issuer
+	// attributes_request_method
+	//
+	// * oidc_issuer
 	//
 	// * authorize_scopes
 	//
-	// * authorize_url if not available from discovery
-	// URL specified by oidc_issuer key
+	// * authorize_url if
+	// not available from discovery URL specified by oidc_issuer key
 	//
-	// * token_url if not available from discovery
-	// URL specified by oidc_issuer key
+	// * token_url if
+	// not available from discovery URL specified by oidc_issuer key
 	//
-	// * attributes_url if not available from
-	// discovery URL specified by oidc_issuer key
+	// * attributes_url
+	// if not available from discovery URL specified by oidc_issuer key
 	//
-	// * jwks_uri if not available from
-	// discovery URL specified by oidc_issuer key
-	//
-	// * For SAML providers:
+	// * jwks_uri if
+	// not available from discovery URL specified by oidc_issuer key
 	//
 	// *
-	// MetadataFile OR MetadataURL
+	// attributes_url_add_attributes a read-only property that is set automatically
 	//
-	// * IDPSignout optional
+	// *
+	// For SAML providers:
+	//
+	// * MetadataFile OR MetadataURL
+	//
+	// * IDPSignout (optional)
 	//
 	// This member is required.
 	ProviderDetails map[string]string

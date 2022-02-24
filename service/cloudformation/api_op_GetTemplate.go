@@ -13,7 +13,7 @@ import (
 
 // Returns the template body for a specified stack. You can get the template for
 // running or deleted stacks. For deleted stacks, GetTemplate returns the template
-// for up to 90 days after the stack has been deleted. If the template does not
+// for up to 90 days after the stack has been deleted. If the template doesn't
 // exist, a ValidationError is returned.
 func (c *Client) GetTemplate(ctx context.Context, params *GetTemplateInput, optFns ...func(*Options)) (*GetTemplateOutput, error) {
 	if params == nil {
@@ -38,7 +38,7 @@ type GetTemplateInput struct {
 	// the StackName.
 	ChangeSetName *string
 
-	// The name or the unique stack ID that is associated with the stack, which are not
+	// The name or the unique stack ID that's associated with the stack, which aren't
 	// always interchangeable:
 	//
 	// * Running stacks: You can specify either the stack's

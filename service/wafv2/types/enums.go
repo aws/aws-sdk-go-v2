@@ -793,6 +793,8 @@ const (
 	ParameterExceptionFieldChangePropagationStatus        ParameterExceptionField = "CHANGE_PROPAGATION_STATUS"
 	ParameterExceptionFieldAssociableResource             ParameterExceptionField = "ASSOCIABLE_RESOURCE"
 	ParameterExceptionFieldLogDestination                 ParameterExceptionField = "LOG_DESTINATION"
+	ParameterExceptionFieldManagedRuleGroupConfig         ParameterExceptionField = "MANAGED_RULE_GROUP_CONFIG"
+	ParameterExceptionFieldPayloadType                    ParameterExceptionField = "PAYLOAD_TYPE"
 )
 
 // Values returns all known values for ParameterExceptionField. Note that this can
@@ -857,6 +859,44 @@ func (ParameterExceptionField) Values() []ParameterExceptionField {
 		"CHANGE_PROPAGATION_STATUS",
 		"ASSOCIABLE_RESOURCE",
 		"LOG_DESTINATION",
+		"MANAGED_RULE_GROUP_CONFIG",
+		"PAYLOAD_TYPE",
+	}
+}
+
+type PayloadType string
+
+// Enum values for PayloadType
+const (
+	PayloadTypeJson        PayloadType = "JSON"
+	PayloadTypeFormEncoded PayloadType = "FORM_ENCODED"
+)
+
+// Values returns all known values for PayloadType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (PayloadType) Values() []PayloadType {
+	return []PayloadType{
+		"JSON",
+		"FORM_ENCODED",
+	}
+}
+
+type Platform string
+
+// Enum values for Platform
+const (
+	PlatformIos     Platform = "IOS"
+	PlatformAndroid Platform = "ANDROID"
+)
+
+// Values returns all known values for Platform. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Platform) Values() []Platform {
+	return []Platform{
+		"IOS",
+		"ANDROID",
 	}
 }
 

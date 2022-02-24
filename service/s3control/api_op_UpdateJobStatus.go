@@ -18,7 +18,7 @@ import (
 // Updates the status for the specified job. Use this action to confirm that you
 // want to run a job or to cancel an existing job. For more information, see S3
 // Batch Operations
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-basics.html) in the
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/batch-ops.html) in the
 // Amazon S3 User Guide. Related actions include:
 //
 // * CreateJob

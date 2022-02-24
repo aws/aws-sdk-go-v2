@@ -30,7 +30,7 @@ func (c *Client) DescribeBudgetActionHistories(ctx context.Context, params *Desc
 
 type DescribeBudgetActionHistoriesInput struct {
 
-	// The account ID of the user. It should be a 12-digit number.
+	// The account ID of the user. It's a 12-digit number.
 	//
 	// This member is required.
 	AccountId *string
@@ -53,7 +53,7 @@ type DescribeBudgetActionHistoriesInput struct {
 	// A generic string.
 	NextToken *string
 
-	// The period of time that is covered by a budget. The period has a start date and
+	// The period of time that's covered by a budget. The period has a start date and
 	// an end date. The start date must come before the end date. There are no
 	// restrictions on the end date.
 	TimePeriod *types.TimePeriod

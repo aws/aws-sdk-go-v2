@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Stops a running synchronization job. You can't stop a scheduled synchronization
-// job.
+// Stops a synchronization job that is currently running. You can't stop a
+// scheduled synchronization job.
 func (c *Client) StopDataSourceSyncJob(ctx context.Context, params *StopDataSourceSyncJobInput, optFns ...func(*Options)) (*StopDataSourceSyncJobOutput, error) {
 	if params == nil {
 		params = &StopDataSourceSyncJobInput{}

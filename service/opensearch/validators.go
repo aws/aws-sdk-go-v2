@@ -250,6 +250,26 @@ func (m *validateOpDescribeDomainAutoTunes) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeDomainChangeProgress struct {
+}
+
+func (*validateOpDescribeDomainChangeProgress) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeDomainChangeProgress) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeDomainChangeProgressInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeDomainChangeProgressInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeDomainConfig struct {
 }
 
@@ -676,6 +696,10 @@ func addOpDeletePackageValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDescribeDomainAutoTunesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeDomainAutoTunes{}, middleware.After)
+}
+
+func addOpDescribeDomainChangeProgressValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeDomainChangeProgress{}, middleware.After)
 }
 
 func addOpDescribeDomainConfigValidationMiddleware(stack *middleware.Stack) error {
@@ -1120,6 +1144,21 @@ func validateOpDescribeDomainAutoTunesInput(v *DescribeDomainAutoTunesInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeDomainAutoTunesInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeDomainChangeProgressInput(v *DescribeDomainChangeProgressInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeDomainChangeProgressInput"}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}

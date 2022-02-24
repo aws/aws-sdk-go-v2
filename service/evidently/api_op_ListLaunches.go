@@ -42,6 +42,10 @@ type ListLaunchesInput struct {
 	// token from a previous ListLaunches operation.
 	NextToken *string
 
+	// Use this optional parameter to limit the returned results to only the launches
+	// with the status that you specify here.
+	Status types.LaunchStatus
+
 	noSmithyDocumentSerde
 }
 

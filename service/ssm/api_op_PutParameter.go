@@ -89,12 +89,14 @@ type PutParameterInput struct {
 	//
 	// * aws:ec2:image
 	//
-	// When you create a String parameter and
-	// specify aws:ec2:image, Amazon Web Services Systems Manager validates the
-	// parameter value is in the required format, such as ami-12345abcdeEXAMPLE, and
-	// that the specified AMI is available in your Amazon Web Services account. For
-	// more information, see Native parameter support for Amazon Machine Image (AMI)
-	// IDs
+	// * aws:ssm:integration
+	//
+	// When you create a
+	// String parameter and specify aws:ec2:image, Amazon Web Services Systems Manager
+	// validates the parameter value is in the required format, such as
+	// ami-12345abcdeEXAMPLE, and that the specified AMI is available in your Amazon
+	// Web Services account. For more information, see Native parameter support for
+	// Amazon Machine Image (AMI) IDs
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-ec2-aliases.html)
 	// in the Amazon Web Services Systems Manager User Guide.
 	DataType *string

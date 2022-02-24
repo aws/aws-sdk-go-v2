@@ -1478,6 +1478,23 @@ func validateDeleteMultiRegionAccessPointInput(v *types.DeleteMultiRegionAccessP
 	}
 }
 
+func validateGeneratedManifestEncryption(v *types.GeneratedManifestEncryption) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GeneratedManifestEncryption"}
+	if v.SSEKMS != nil {
+		if err := validateSSEKMSEncryption(v.SSEKMS); err != nil {
+			invalidParams.AddNested("SSEKMS", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateJobManifest(v *types.JobManifest) error {
 	if v == nil {
 		return nil
@@ -1496,6 +1513,25 @@ func validateJobManifest(v *types.JobManifest) error {
 		if err := validateJobManifestLocation(v.Location); err != nil {
 			invalidParams.AddNested("Location", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateJobManifestGenerator(v types.JobManifestGenerator) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "JobManifestGenerator"}
+	switch uv := v.(type) {
+	case *types.JobManifestGeneratorMemberS3JobManifestGenerator:
+		if err := validateS3JobManifestGenerator(&uv.Value); err != nil {
+			invalidParams.AddNested("[S3JobManifestGenerator]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1902,6 +1938,49 @@ func validateS3CopyObjectOperation(v *types.S3CopyObjectOperation) error {
 	}
 }
 
+func validateS3JobManifestGenerator(v *types.S3JobManifestGenerator) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3JobManifestGenerator"}
+	if v.SourceBucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceBucket"))
+	}
+	if v.ManifestOutputLocation != nil {
+		if err := validateS3ManifestOutputLocation(v.ManifestOutputLocation); err != nil {
+			invalidParams.AddNested("ManifestOutputLocation", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3ManifestOutputLocation(v *types.S3ManifestOutputLocation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3ManifestOutputLocation"}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
+	if v.ManifestEncryption != nil {
+		if err := validateGeneratedManifestEncryption(v.ManifestEncryption); err != nil {
+			invalidParams.AddNested("ManifestEncryption", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.ManifestFormat) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ManifestFormat"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateS3ObjectLockLegalHold(v *types.S3ObjectLockLegalHold) error {
 	if v == nil {
 		return nil
@@ -2025,6 +2104,21 @@ func validateSSEKMS(v *types.SSEKMS) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SSEKMS"}
+	if v.KeyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSSEKMSEncryption(v *types.SSEKMSEncryption) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SSEKMSEncryption"}
 	if v.KeyId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("KeyId"))
 	}
@@ -2281,9 +2375,7 @@ func validateOpCreateJobInput(v *CreateJobInput) error {
 	if v.ClientRequestToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
 	}
-	if v.Manifest == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Manifest"))
-	} else if v.Manifest != nil {
+	if v.Manifest != nil {
 		if err := validateJobManifest(v.Manifest); err != nil {
 			invalidParams.AddNested("Manifest", err.(smithy.InvalidParamsError))
 		}
@@ -2294,6 +2386,11 @@ func validateOpCreateJobInput(v *CreateJobInput) error {
 	if v.Tags != nil {
 		if err := validateS3TagSet(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ManifestGenerator != nil {
+		if err := validateJobManifestGenerator(v.ManifestGenerator); err != nil {
+			invalidParams.AddNested("ManifestGenerator", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

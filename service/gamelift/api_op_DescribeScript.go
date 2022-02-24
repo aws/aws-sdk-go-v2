@@ -13,7 +13,7 @@ import (
 
 // Retrieves properties for a Realtime script. To request a script record, specify
 // the script ID. If successful, an object containing the script properties is
-// returned. Learn more Amazon GameLift Realtime Servers
+// returned. Learn more Amazon Web Services Realtime Servers
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/realtime-intro.html)
 // Related actions CreateScript | ListScripts | DescribeScript | UpdateScript |
 // DeleteScript | All APIs by task

@@ -270,6 +270,26 @@ func (m *validateOpDescribeBudget) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeBudgetNotificationsForAccount struct {
+}
+
+func (*validateOpDescribeBudgetNotificationsForAccount) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeBudgetNotificationsForAccount) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeBudgetNotificationsForAccountInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeBudgetNotificationsForAccountInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeBudgetPerformanceHistory struct {
 }
 
@@ -502,6 +522,10 @@ func addOpDescribeBudgetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeBudget{}, middleware.After)
 }
 
+func addOpDescribeBudgetNotificationsForAccountValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeBudgetNotificationsForAccount{}, middleware.After)
+}
+
 func addOpDescribeBudgetPerformanceHistoryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeBudgetPerformanceHistory{}, middleware.After)
 }
@@ -553,6 +577,26 @@ func validateActionThreshold(v *types.ActionThreshold) error {
 	}
 }
 
+func validateAutoAdjustData(v *types.AutoAdjustData) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutoAdjustData"}
+	if len(v.AutoAdjustType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AutoAdjustType"))
+	}
+	if v.HistoricalOptions != nil {
+		if err := validateHistoricalOptions(v.HistoricalOptions); err != nil {
+			invalidParams.AddNested("HistoricalOptions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateBudget(v *types.Budget) error {
 	if v == nil {
 		return nil
@@ -581,6 +625,11 @@ func validateBudget(v *types.Budget) error {
 	}
 	if len(v.BudgetType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("BudgetType"))
+	}
+	if v.AutoAdjustData != nil {
+		if err := validateAutoAdjustData(v.AutoAdjustData); err != nil {
+			invalidParams.AddNested("AutoAdjustData", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -632,6 +681,21 @@ func validateDefinition(v *types.Definition) error {
 		if err := validateSsmActionDefinition(v.SsmActionDefinition); err != nil {
 			invalidParams.AddNested("SsmActionDefinition", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHistoricalOptions(v *types.HistoricalOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HistoricalOptions"}
+	if v.BudgetAdjustmentPeriod == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BudgetAdjustmentPeriod"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1149,6 +1213,21 @@ func validateOpDescribeBudgetInput(v *DescribeBudgetInput) error {
 	}
 	if v.BudgetName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BudgetName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeBudgetNotificationsForAccountInput(v *DescribeBudgetNotificationsForAccountInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeBudgetNotificationsForAccountInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -13,7 +13,14 @@ import (
 )
 
 // Creates a new component that can be used to build, validate, test, and assess
-// your image.
+// your image. The component is based on a YAML document that you specify using
+// exactly one of the following methods:
+//
+// * Inline, using the data property in the
+// request body.
+//
+// * A URL that points to a YAML document file stored in Amazon S3,
+// using the uri property in the request body.
 func (c *Client) CreateComponent(ctx context.Context, params *CreateComponentInput, optFns ...func(*Options)) (*CreateComponentOutput, error) {
 	if params == nil {
 		params = &CreateComponentInput{}
@@ -64,8 +71,9 @@ type CreateComponentInput struct {
 	// component.
 	ChangeDescription *string
 
-	// The data of the component. Used to specify the data inline. Either data or uri
-	// can be used to specify the data within the component.
+	// Component data contains inline YAML document content for the component.
+	// Alternatively, you can specify the uri of a YAML document file stored in Amazon
+	// S3. However, you cannot specify both properties.
 	Data *string
 
 	// The description of the component. Describes the contents of the component.
@@ -82,10 +90,11 @@ type CreateComponentInput struct {
 	// The tags of the component.
 	Tags map[string]string
 
-	// The uri of the component. Must be an Amazon S3 URL and the requester must have
-	// permission to access the Amazon S3 bucket. If you use Amazon S3, you can specify
-	// component content up to your service quota. Either data or uri can be used to
-	// specify the data within the component.
+	// The uri of a YAML component document file. This must be an S3 URL
+	// (s3://bucket/key), and the requester must have permission to access the S3
+	// bucket it points to. If you use Amazon S3, you can specify component content up
+	// to your service quota. Alternatively, you can specify the YAML document inline,
+	// using the component data property. You cannot specify both properties.
 	Uri *string
 
 	noSmithyDocumentSerde

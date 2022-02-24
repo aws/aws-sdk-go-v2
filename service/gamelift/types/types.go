@@ -62,7 +62,7 @@ type AttributeValue struct {
 	// value is 100 characters.
 	SDM map[string]float64
 
-	// For a list of up to 10 strings. Maximum length for each string is 100
+	// For a list of up to 100 strings. Maximum length for each string is 100
 	// characters. Duplicate values are not recognized; all occurrences of the repeated
 	// value after the first of a repeated value are ignored.
 	SL []string
@@ -70,15 +70,15 @@ type AttributeValue struct {
 	noSmithyDocumentSerde
 }
 
-// Temporary access credentials used for uploading game build files to Amazon
-// GameLift. They are valid for a limited time. If they expire before you upload
+// Temporary access credentials used for uploading game build files to Amazon Web
+// Services. They are valid for a limited time. If they expire before you upload
 // your game build, get a new set by calling RequestUploadCredentials.
 type AwsCredentials struct {
 
-	// Temporary key allowing access to the Amazon GameLift S3 account.
+	// Temporary key allowing access to the Amazon Web Services S3 account.
 	AccessKeyId *string
 
-	// Temporary secret key allowing access to the Amazon GameLift S3 account.
+	// Temporary secret key allowing access to the Amazon Web Services S3 account.
 	SecretAccessKey *string
 
 	// Token used to associate a specific build ID with the files uploaded using these
@@ -117,7 +117,8 @@ type Build struct {
 	OperatingSystem OperatingSystem
 
 	// File size of the uploaded game build, expressed in bytes. When the build status
-	// is INITIALIZED, this value is 0.
+	// is INITIALIZED or when using a custom Amazon S3 storage location, this value is
+	// 0.
 	SizeOnDisk *int64
 
 	// Current status of the build. Possible build statuses include the following:
@@ -179,10 +180,10 @@ type DesiredPlayerSession struct {
 	noSmithyDocumentSerde
 }
 
-// Resource capacity settings. Fleet capacity is measured in EC2 instances. Pending
-// and terminating counts are non-zero when the fleet capacity is adjusting to a
-// scaling event or if access to resources is temporarily affected. EC2 instance
-// counts are part of FleetCapacity.
+// Resource capacity settings. Fleet capacity is measured in Amazon EC2 instances.
+// Pending and terminating counts are non-zero when the fleet capacity is adjusting
+// to a scaling event or if access to resources is temporarily affected. EC2
+// instance counts are part of FleetCapacity.
 type EC2InstanceCounts struct {
 
 	// Actual number of instances that are ready to host game sessions.
@@ -211,26 +212,28 @@ type EC2InstanceCounts struct {
 	noSmithyDocumentSerde
 }
 
-// The GameLift service limits for an EC2 instance type and current utilization.
-// GameLift allows AWS accounts a maximum number of instances, per instance type,
-// per AWS Region or location, for use with GameLift. You can request an limit
-// increase for your account by using the Service limits page in the GameLift
-// console. Related actions DescribeEC2InstanceLimits
+// The GameLift service limits for an Amazon EC2 instance type and current
+// utilization. GameLift allows Amazon Web Services accounts a maximum number of
+// instances, per instance type, per Amazon Web Services Region or location, for
+// use with GameLift. You can request an limit increase for your account by using
+// the Service limits page in the GameLift console. Related actions
+// DescribeEC2InstanceLimits
 type EC2InstanceLimit struct {
 
 	// The number of instances for the specified type and location that are currently
-	// being used by the AWS account.
+	// being used by the Amazon Web Services account.
 	CurrentInstances *int32
 
-	// The name of an EC2 instance type. See Amazon EC2 Instance Types
-	// (http://aws.amazon.com/ec2/instance-types/) for detailed descriptions.
+	// The name of an Amazon EC2 instance type. See Amazon Elastic Compute Cloud
+	// Instance Types (http://aws.amazon.com/ec2/instance-types/) for detailed
+	// descriptions.
 	EC2InstanceType EC2InstanceType
 
 	// The number of instances that is allowed for the specified instance type and
 	// location.
 	InstanceLimit *int32
 
-	// An AWS Region code, such as us-west-2.
+	// An Amazon Web Services Region code, such as us-west-2.
 	Location *string
 
 	noSmithyDocumentSerde
@@ -242,86 +245,108 @@ type EC2InstanceLimit struct {
 // actions DescribeFleetEvents
 type Event struct {
 
-	// The type of event being logged. Fleet creation events (ordered by fleet creation
-	// activity):
+	// The type of event being logged. Fleet state transition events:
 	//
-	// * FLEET_CREATED -- A fleet resource was successfully created with a
-	// status of NEW. Event messaging includes the fleet ID.
+	// * FLEET_CREATED
+	// -- A fleet resource was successfully created with a status of NEW. Event
+	// messaging includes the fleet ID.
 	//
-	// * FLEET_STATE_DOWNLOADING
-	// -- Fleet status changed from NEW to DOWNLOADING. The compressed build has
-	// started downloading to a fleet instance for installation.
+	// * FLEET_STATE_DOWNLOADING -- Fleet status
+	// changed from NEW to DOWNLOADING. The compressed build has started downloading to
+	// a fleet instance for installation.
 	//
-	// *
-	// FLEET_BINARY_DOWNLOAD_FAILED -- The build failed to download to the fleet
-	// instance.
+	// * FLEET_STATE_VALIDATING -- Fleet status
+	// changed from DOWNLOADING to VALIDATING. GameLift has successfully downloaded the
+	// build and is now validating the build files.
 	//
-	// * FLEET_CREATION_EXTRACTING_BUILD – The game server build was
-	// successfully downloaded to an instance, and the build files are now being
-	// extracted from the uploaded build and saved to an instance. Failure at this
-	// stage prevents a fleet from moving to ACTIVE status. Logs for this stage display
-	// a list of the files that are extracted and saved on the instance. Access the
-	// logs by using the URL in PreSignedLogUrl.
-	//
-	// * FLEET_CREATION_RUNNING_INSTALLER –
-	// The game server build files were successfully extracted, and the GameLift is now
-	// running the build's install script (if one is included). Failure in this stage
-	// prevents a fleet from moving to ACTIVE status. Logs for this stage list the
-	// installation steps and whether or not the install completed successfully. Access
-	// the logs by using the URL in PreSignedLogUrl.
+	// * FLEET_STATE_BUILDING -- Fleet
+	// status changed from VALIDATING to BUILDING. GameLift has successfully verified
+	// the build files and is now running the installation scripts.
 	//
 	// *
-	// FLEET_CREATION_VALIDATING_RUNTIME_CONFIG -- The build process was successful,
-	// and the GameLift is now verifying that the game server launch paths, which are
-	// specified in the fleet's runtime configuration, exist. If any listed launch path
-	// exists, GameLift tries to launch a game server process and waits for the process
-	// to report ready. Failures in this stage prevent a fleet from moving to ACTIVE
-	// status. Logs for this stage list the launch paths in the runtime configuration
-	// and indicate whether each is found. Access the logs by using the URL in
-	// PreSignedLogUrl.
+	// FLEET_STATE_ACTIVATING -- Fleet status changed from BUILDING to ACTIVATING.
+	// GameLift is trying to launch an instance and test the connectivity between the
+	// build and the GameLift Service via the Server SDK.
 	//
-	// * FLEET_STATE_VALIDATING -- Fleet status changed from
-	// DOWNLOADING to VALIDATING.
+	// * FLEET_STATE_ACTIVE -- The
+	// fleet's status changed from ACTIVATING to ACTIVE. The fleet is now ready to host
+	// game sessions.
+	//
+	// * FLEET_STATE_ERROR -- The Fleet's status changed to ERROR.
+	// Describe the fleet event message for more details.
+	//
+	// Fleet creation events
+	// (ordered by fleet creation activity):
+	//
+	// * FLEET_BINARY_DOWNLOAD_FAILED -- The
+	// build failed to download to the fleet instance.
+	//
+	// *
+	// FLEET_CREATION_EXTRACTING_BUILD -- The game server build was successfully
+	// downloaded to an instance, and the build files are now being extracted from the
+	// uploaded build and saved to an instance. Failure at this stage prevents a fleet
+	// from moving to ACTIVE status. Logs for this stage display a list of the files
+	// that are extracted and saved on the instance. Access the logs by using the URL
+	// in PreSignedLogUrl.
+	//
+	// * FLEET_CREATION_RUNNING_INSTALLER -- The game server build
+	// files were successfully extracted, and the GameLift is now running the build's
+	// install script (if one is included). Failure in this stage prevents a fleet from
+	// moving to ACTIVE status. Logs for this stage list the installation steps and
+	// whether or not the install completed successfully. Access the logs by using the
+	// URL in PreSignedLogUrl.
+	//
+	// * FLEET_CREATION_VALIDATING_RUNTIME_CONFIG -- The build
+	// process was successful, and the GameLift is now verifying that the game server
+	// launch paths, which are specified in the fleet's runtime configuration, exist.
+	// If any listed launch path exists, GameLift tries to launch a game server process
+	// and waits for the process to report ready. Failures in this stage prevent a
+	// fleet from moving to ACTIVE status. Logs for this stage list the launch paths in
+	// the runtime configuration and indicate whether each is found. Access the logs by
+	// using the URL in PreSignedLogUrl.
 	//
 	// * FLEET_VALIDATION_LAUNCH_PATH_NOT_FOUND --
 	// Validation of the runtime configuration failed because the executable specified
 	// in a launch path does not exist on the instance.
-	//
-	// * FLEET_STATE_BUILDING --
-	// Fleet status changed from VALIDATING to BUILDING.
 	//
 	// *
 	// FLEET_VALIDATION_EXECUTABLE_RUNTIME_FAILURE -- Validation of the runtime
 	// configuration failed because the executable specified in a launch path failed to
 	// run on the fleet instance.
 	//
-	// * FLEET_STATE_ACTIVATING -- Fleet status changed
-	// from BUILDING to ACTIVATING.
-	//
-	// * FLEET_ACTIVATION_FAILED - The fleet failed to
-	// successfully complete one of the steps in the fleet activation process. This
-	// event code indicates that the game build was successfully downloaded to a fleet
-	// instance, built, and validated, but was not able to start a server process.
-	// Learn more at  Debug Fleet Creation Issues
-	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html#fleets-creating-debug-creation)
+	// * FLEET_VALIDATION_TIMED_OUT -- Validation of the
+	// fleet at the end of creation timed out. Try fleet creation again.
 	//
 	// *
-	// FLEET_STATE_ACTIVE -- The fleet's status changed from ACTIVATING to ACTIVE. The
-	// fleet is now ready to host game sessions.
+	// FLEET_ACTIVATION_FAILED -- The fleet failed to successfully complete one of the
+	// steps in the fleet activation process. This event code indicates that the game
+	// build was successfully downloaded to a fleet instance, built, and validated, but
+	// was not able to start a server process. For more information, see Debug Fleet
+	// Creation Issues
+	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html#fleets-creating-debug-creation).
+	//
+	// *
+	// FLEET_ACTIVATION_FAILED_NO_INSTANCES -- Fleet creation was not able to obtain
+	// any instances based on the input fleet attributes. Try again at a different time
+	// or choose a different combination of fleet attributes such as fleet type,
+	// instance type, etc.
+	//
+	// * FLEET_INITIALIZATION_FAILED -- A generic exception
+	// occurred during fleet creation. Describe the fleet event message for more
+	// details.
 	//
 	// VPC peering events:
 	//
-	// *
-	// FLEET_VPC_PEERING_SUCCEEDED -- A VPC peering connection has been established
-	// between the VPC for an GameLift fleet and a VPC in your AWS account.
+	// * FLEET_VPC_PEERING_SUCCEEDED -- A VPC peering
+	// connection has been established between the VPC for an GameLift fleet and a VPC
+	// in your Amazon Web Services account.
 	//
-	// *
-	// FLEET_VPC_PEERING_FAILED -- A requested VPC peering connection has failed. Event
-	// details and status information (see DescribeVpcPeeringConnections) provide
-	// additional detail. A common reason for peering failure is that the two VPCs have
-	// overlapping CIDR blocks of IPv4 addresses. To resolve this, change the CIDR
-	// block for the VPC in your AWS account. For more information on VPC peering
-	// failures, see
+	// * FLEET_VPC_PEERING_FAILED -- A requested
+	// VPC peering connection has failed. Event details and status information (see
+	// DescribeVpcPeeringConnections) provide additional detail. A common reason for
+	// peering failure is that the two VPCs have overlapping CIDR blocks of IPv4
+	// addresses. To resolve this, change the CIDR block for the VPC in your Amazon Web
+	// Services account. For more information on VPC peering failures, see
 	// https://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide/invalid-peering-configurations.html
 	// (https://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide/invalid-peering-configurations.html)
 	//
@@ -334,22 +359,64 @@ type Event struct {
 	// * INSTANCE_INTERRUPTED -- A spot instance was
 	// interrupted by EC2 with a two-minute notification.
 	//
-	// Other fleet events:
+	// Spot process events:
 	//
 	// *
-	// FLEET_SCALING_EVENT -- A change was made to the fleet's capacity settings
-	// (desired instances, minimum/maximum scaling limits). Event messaging includes
-	// the new capacity settings.
+	// SERVER_PROCESS_INVALID_PATH -- The game server executable or script could not be
+	// found based on the Fleet runtime configuration. Check that the launch path is
+	// correct based on the operating system of the Fleet.
 	//
-	// * FLEET_NEW_GAME_SESSION_PROTECTION_POLICY_UPDATED
-	// -- A change was made to the fleet's game session protection policy setting.
-	// Event messaging includes both the old and new policy setting.
+	// *
+	// SERVER_PROCESS_SDK_INITIALIZATION_TIMEOUT -- The server process did not call
+	// InitSDK() within the time expected. Check your game session log to see why
+	// InitSDK() was not called in time.
 	//
-	// * FLEET_DELETED
-	// -- A request to delete a fleet was initiated.
+	// * SERVER_PROCESS_PROCESS_READY_TIMEOUT -- The
+	// server process did not call ProcessReady() within the time expected after
+	// calling InitSDK(). Check your game session log to see why ProcessReady() was not
+	// called in time.
 	//
-	// * GENERIC_EVENT -- An unspecified
-	// event has occurred.
+	// * SERVER_PROCESS_CRASHED -- The server process exited without
+	// calling ProcessEnding(). Check your game session log to see why ProcessEnding()
+	// was not called.
+	//
+	// * SERVER_PROCESS_TERMINATED_UNHEALTHY -- The server process did
+	// not report a valid health check for too long and was therefore terminated by
+	// GameLift. Check your game session log to see if the thread became stuck
+	// processing a synchronous task for too long.
+	//
+	// * SERVER_PROCESS_FORCE_TERMINATED
+	// -- The server process did not exit cleanly after OnProcessTerminate() was sent
+	// within the time expected. Check your game session log to see why termination
+	// took longer than expected.
+	//
+	// * SERVER_PROCESS_PROCESS_EXIT_TIMEOUT -- The server
+	// process did not exit cleanly within the time expected after calling
+	// ProcessEnding(). Check your game session log to see why termination took longer
+	// than expected.
+	//
+	// Game session events:
+	//
+	// * GAME_SESSION_ACTIVATION_TIMEOUT --
+	// GameSession failed to activate within the expected time. Check your game session
+	// log to see why ActivateGameSession() took longer to complete than
+	// expected.
+	//
+	// Other fleet events:
+	//
+	// * FLEET_SCALING_EVENT -- A change was made to
+	// the fleet's capacity settings (desired instances, minimum/maximum scaling
+	// limits). Event messaging includes the new capacity settings.
+	//
+	// *
+	// FLEET_NEW_GAME_SESSION_PROTECTION_POLICY_UPDATED -- A change was made to the
+	// fleet's game session protection policy setting. Event messaging includes both
+	// the old and new policy setting.
+	//
+	// * FLEET_DELETED -- A request to delete a fleet
+	// was initiated.
+	//
+	// * GENERIC_EVENT -- An unspecified event has occurred.
 	EventCode EventCode
 
 	// A unique identifier for a fleet event.
@@ -380,8 +447,8 @@ type Event struct {
 // configurations are part of a GameSessionQueue.
 type FilterConfiguration struct {
 
-	// A list of locations to allow game session placement in, in the form of AWS
-	// Region codes such as us-west-2.
+	// A list of locations to allow game session placement in, in the form of Amazon
+	// Web Services Region codes such as us-west-2.
 	AllowedLocations []string
 
 	noSmithyDocumentSerde
@@ -425,19 +492,20 @@ type FleetAttributes struct {
 	// The kind of instances, On-Demand or Spot, that this fleet uses.
 	FleetType FleetType
 
-	// A unique identifier for an AWS IAM role that manages access to your AWS
-	// services. With an instance role ARN set, any application that runs on an
-	// instance in this fleet can assume the role, including install scripts, server
+	// A unique identifier for an IAM role that manages access to your Amazon Web
+	// Services services. With an instance role ARN set, any application that runs on
+	// an instance in this fleet can assume the role, including install scripts, server
 	// processes, and daemons (background processes). Create a role or look up a role's
-	// ARN by using the IAM dashboard (https://console.aws.amazon.com/iam/) in the AWS
-	// Management Console. Learn more about using on-box credentials for your game
-	// servers at  Access external resources from a game server
+	// ARN by using the IAM dashboard (https://console.aws.amazon.com/iam/) in the
+	// Amazon Web Services Management Console. Learn more about using on-box
+	// credentials for your game servers at  Access external resources from a game
+	// server
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html).
 	InstanceRoleArn *string
 
-	// The EC2 instance type that determines the computing resources of each instance
-	// in the fleet. Instance type defines the CPU, memory, storage, and networking
-	// capacity. See Amazon EC2 Instance Types
+	// The Amazon EC2 instance type that determines the computing resources of each
+	// instance in the fleet. Instance type defines the CPU, memory, storage, and
+	// networking capacity. See Amazon Elastic Compute Cloud Instance Types
 	// (http://aws.amazon.com/ec2/instance-types/) for detailed descriptions.
 	InstanceType EC2InstanceType
 
@@ -530,8 +598,12 @@ type FleetAttributes struct {
 
 // Current resource capacity settings in a specified fleet or location. The
 // location value might refer to a fleet's remote location or its home Region.
-// Related actions DescribeFleetCapacity | DescribeFleetLocationCapacity |
-// UpdateFleetCapacity
+// Related actions DescribeFleetCapacity
+// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetCapacity.html)
+// | DescribeFleetLocationCapacity
+// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetLocationCapacity.html)
+// | UpdateFleetCapacity
+// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateFleetCapacity.html)
 type FleetCapacity struct {
 
 	// The Amazon Resource Name (ARN
@@ -547,14 +619,14 @@ type FleetCapacity struct {
 	// The current instance count and capacity settings for the fleet location.
 	InstanceCounts *EC2InstanceCounts
 
-	// The EC2 instance type that is used for all instances in a fleet. The instance
-	// type determines the computing resources in use, including CPU, memory, storage,
-	// and networking capacity. See Amazon EC2 Instance Types
-	// (http://aws.amazon.com/ec2/instance-types/) for detailed descriptions.
+	// The Amazon EC2 instance type that is used for all instances in a fleet. The
+	// instance type determines the computing resources in use, including CPU, memory,
+	// storage, and networking capacity. See Amazon Elastic Compute Cloud Instance
+	// Types (http://aws.amazon.com/ec2/instance-types/) for detailed descriptions.
 	InstanceType EC2InstanceType
 
-	// The fleet location for the instance count information, expressed as an AWS
-	// Region code, such as us-west-2.
+	// The fleet location for the instance count information, expressed as an Amazon
+	// Web Services Region code, such as us-west-2.
 	Location *string
 
 	noSmithyDocumentSerde
@@ -587,8 +659,8 @@ type FleetUtilization struct {
 	// A unique identifier for the fleet associated with the location.
 	FleetId *string
 
-	// The fleet location for the fleet utilization information, expressed as an AWS
-	// Region code, such as us-west-2.
+	// The fleet location for the fleet utilization information, expressed as an Amazon
+	// Web Services Region code, such as us-west-2.
 	Location *string
 
 	// The maximum number of players allowed across all game sessions that are
@@ -655,8 +727,8 @@ type GameServer struct {
 	GameServerGroupName *string
 
 	// A custom string that uniquely identifies the game server. Game server IDs are
-	// developer-defined and are unique across all game server groups in an AWS
-	// account.
+	// developer-defined and are unique across all game server groups in an Amazon Web
+	// Services account.
 	GameServerId *string
 
 	// The unique identifier for the instance where the game server is running. This ID
@@ -698,19 +770,19 @@ type GameServer struct {
 
 // This data type is used with the GameLift FleetIQ and game server groups.
 // Properties that describe a game server group resource. A game server group
-// manages certain properties related to a corresponding EC2 Auto Scaling group. A
-// game server group is created by a successful call to CreateGameServerGroup and
-// deleted by calling DeleteGameServerGroup. Game server group activity can be
-// temporarily suspended and resumed by calling SuspendGameServerGroup and
-// ResumeGameServerGroup, respectively. Related actions CreateGameServerGroup |
-// ListGameServerGroups | DescribeGameServerGroup | UpdateGameServerGroup |
-// DeleteGameServerGroup | ResumeGameServerGroup | SuspendGameServerGroup |
-// DescribeGameServerInstances | All APIs by task
+// manages certain properties related to a corresponding Amazon EC2 Auto Scaling
+// group. A game server group is created by a successful call to
+// CreateGameServerGroup and deleted by calling DeleteGameServerGroup. Game server
+// group activity can be temporarily suspended and resumed by calling
+// SuspendGameServerGroup and ResumeGameServerGroup, respectively. Related actions
+// CreateGameServerGroup | ListGameServerGroups | DescribeGameServerGroup |
+// UpdateGameServerGroup | DeleteGameServerGroup | ResumeGameServerGroup |
+// SuspendGameServerGroup | DescribeGameServerInstances | All APIs by task
 // (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/reference-awssdk-fleetiq.html)
 type GameServerGroup struct {
 
-	// A generated unique ID for the EC2 Auto Scaling group that is associated with
-	// this game server group.
+	// A generated unique ID for the Amazon EC2 Auto Scaling group that is associated
+	// with this game server group.
 	AutoScalingGroupArn *string
 
 	// Indicates how GameLift FleetIQ balances the use of Spot Instances and On-Demand
@@ -743,7 +815,7 @@ type GameServerGroup struct {
 	GameServerGroupArn *string
 
 	// A developer-defined identifier for the game server group. The name is unique for
-	// each Region in each AWS account.
+	// each Region in each Amazon Web Services account.
 	GameServerGroupName *string
 
 	// A flag that indicates whether instances in the game server group are protected
@@ -752,11 +824,12 @@ type GameServerGroup struct {
 	// dropped from the game. Protected instances cannot be terminated while there are
 	// active game servers running except in the event of a forced game server group
 	// deletion (see ). An exception to this is with Spot Instances, which can be
-	// terminated by AWS regardless of protection status.
+	// terminated by Amazon Web Services regardless of protection status.
 	GameServerProtectionPolicy GameServerProtectionPolicy
 
-	// The set of EC2 instance types that GameLift FleetIQ can use when balancing and
-	// automatically scaling instances in the corresponding Auto Scaling group.
+	// The set of Amazon EC2 instance types that GameLift FleetIQ can use when
+	// balancing and automatically scaling instances in the corresponding Auto Scaling
+	// group.
 	InstanceDefinitions []InstanceDefinition
 
 	// A timestamp that indicates when this game server group was last updated.
@@ -764,7 +837,8 @@ type GameServerGroup struct {
 
 	// The Amazon Resource Name (ARN
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) for an IAM
-	// role that allows Amazon GameLift to access your EC2 Auto Scaling groups.
+	// role that allows Amazon Web Services to access your Amazon EC2 Auto Scaling
+	// groups.
 	RoleArn *string
 
 	// The current status of the game server group. Possible statuses include:
@@ -774,24 +848,25 @@ type GameServerGroup struct {
 	//
 	// *
 	// ACTIVATING - GameLift FleetIQ is setting up a game server group, which includes
-	// creating an Auto Scaling group in your AWS account.
+	// creating an Auto Scaling group in your Amazon Web Services account.
 	//
-	// * ACTIVE - The game server
-	// group has been successfully created.
+	// * ACTIVE -
+	// The game server group has been successfully created.
 	//
-	// * DELETE_SCHEDULED - A request to delete
-	// the game server group has been received.
+	// * DELETE_SCHEDULED - A
+	// request to delete the game server group has been received.
 	//
-	// * DELETING - GameLift FleetIQ has
-	// received a valid DeleteGameServerGroup() request and is processing it. GameLift
-	// FleetIQ must first complete and release hosts before it deletes the Auto Scaling
-	// group and the game server group.
+	// * DELETING -
+	// GameLift FleetIQ has received a valid DeleteGameServerGroup() request and is
+	// processing it. GameLift FleetIQ must first complete and release hosts before it
+	// deletes the Auto Scaling group and the game server group.
 	//
-	// * DELETED - The game server group has been
-	// successfully deleted.
+	// * DELETED - The game
+	// server group has been successfully deleted.
 	//
-	// * ERROR - The asynchronous processes of activating or
-	// deleting a game server group has failed, resulting in an error state.
+	// * ERROR - The asynchronous
+	// processes of activating or deleting a game server group has failed, resulting in
+	// an error state.
 	Status GameServerGroupStatus
 
 	// Additional information about the current game server group status. This
@@ -849,7 +924,8 @@ type GameServerInstance struct {
 	GameServerGroupArn *string
 
 	// A developer-defined identifier for the game server group that includes the game
-	// server instance. The name is unique for each Region in each AWS account.
+	// server instance. The name is unique for each Region in each Amazon Web Services
+	// account.
 	GameServerGroupName *string
 
 	// The unique identifier for the instance where the game server is running. This ID
@@ -925,13 +1001,16 @@ type GameSession struct {
 
 	// A set of custom properties for a game session, formatted as key:value pairs.
 	// These properties are passed to a game server process in the GameSession object
-	// with a request to start a new game session. You can search for active game
-	// sessions based on this custom data with SearchGameSessions.
+	// with a request to start a new game session (see Start a Game Session
+	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
+	// You can search for active game sessions based on this custom data with
+	// SearchGameSessions.
 	GameProperties []GameProperty
 
 	// A set of custom game session properties, formatted as a single string value.
 	// This data is passed to a game server process in the GameSession object with a
-	// request to start a new game session.
+	// request to start a new game session (see Start a Game Session
+	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
 	GameSessionData *string
 
 	// A unique identifier for the game session. A game session ARN has the following
@@ -943,8 +1022,8 @@ type GameSession struct {
 	IpAddress *string
 
 	// The fleet location where the game session is running. This value might specify
-	// the fleet's home Region or a remote location. Location is expressed as an AWS
-	// Region code such as us-west-2.
+	// the fleet's home Region or a remote location. Location is expressed as an Amazon
+	// Web Services Region code such as us-west-2.
 	Location *string
 
 	// Information about the matchmaking process that was used to create the game
@@ -955,7 +1034,8 @@ type GameSession struct {
 	// (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-server.html#match-server-data).
 	// Matchmaker data is useful when requesting match backfills, and is updated
 	// whenever new players are added during a successful backfill (see
-	// StartMatchBackfill).
+	// StartMatchBackfill
+	// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_StartMatchBackfill.html)).
 	MatchmakerData *string
 
 	// The maximum number of players that can be connected simultaneously to the game
@@ -1144,7 +1224,7 @@ type GameSessionPlacement struct {
 	PlacementId *string
 
 	// A set of values, expressed in milliseconds, that indicates the amount of latency
-	// that a player experiences when connected to AWS Regions.
+	// that a player experiences when connected to @aws; Regions.
 	PlayerLatencies []PlayerLatency
 
 	// The port number for the game session. To connect to a GameLift game server, an
@@ -1184,8 +1264,12 @@ type GameSessionPlacement struct {
 
 // Configuration for a game session placement mechanism that processes requests for
 // new game sessions. A queue can be used on its own or as part of a matchmaking
-// solution. Related actions CreateGameSessionQueue | DescribeGameSessionQueues |
-// UpdateGameSessionQueue
+// solution. Related actions CreateGameSessionQueue
+// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateGameSessionQueue.html)
+// | DescribeGameSessionQueues
+// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeGameSessionQueues.html)
+// | UpdateGameSessionQueue
+// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateGameSessionQueue.html)
 type GameSessionQueue struct {
 
 	// Information that is added to all events that are related to this game session
@@ -1198,8 +1282,9 @@ type GameSessionQueue struct {
 	Destinations []GameSessionQueueDestination
 
 	// A list of locations where a queue is allowed to place new game sessions.
-	// Locations are specified in the form of AWS Region codes, such as us-west-2. If
-	// this parameter is not set, game sessions can be placed in any queue location.
+	// Locations are specified in the form of Amazon Web Services Region codes, such as
+	// us-west-2. If this parameter is not set, game sessions can be placed in any
+	// queue location.
 	FilterConfiguration *FilterConfiguration
 
 	// The Amazon Resource Name (ARN
@@ -1294,8 +1379,8 @@ type Instance struct {
 	// IP address that is assigned to the instance.
 	IpAddress *string
 
-	// The fleet location of the instance, expressed as an AWS Region code, such as
-	// us-west-2.
+	// The fleet location of the instance, expressed as an Amazon Web Services Region
+	// code, such as us-west-2.
 	Location *string
 
 	// Operating system that is running on this instance.
@@ -1318,7 +1403,7 @@ type Instance struct {
 	// event of a problem.
 	Status InstanceStatus
 
-	// EC2 instance type that defines the computing resources of this instance.
+	// Amazon EC2 instance type that defines the computing resources of this instance.
 	Type EC2InstanceType
 
 	noSmithyDocumentSerde
@@ -1369,7 +1454,7 @@ type InstanceCredentials struct {
 // with the list of viable instance types.
 type InstanceDefinition struct {
 
-	// An EC2 instance type designation.
+	// An Amazon EC2 instance type designation.
 	//
 	// This member is required.
 	InstanceType GameServerGroupInstanceType
@@ -1380,7 +1465,8 @@ type InstanceDefinition struct {
 	// the most cost-effective options. For detailed information on weighting instance
 	// capacity, see Instance Weighting
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-weighting.html)
-	// in the Amazon EC2 Auto Scaling User Guide. Default value is "1".
+	// in the Amazon Elastic Compute Cloud Auto Scaling User Guide. Default value is
+	// "1".
 	WeightedCapacity *string
 
 	noSmithyDocumentSerde
@@ -1394,7 +1480,9 @@ type InstanceDefinition struct {
 // TCP messaging and one for UDP. Related actions DescribeFleetPortSettings
 type IpPermission struct {
 
-	// A starting value for a range of allowed port numbers.
+	// A starting value for a range of allowed port numbers. For fleets using Linux
+	// builds, only port 22, 443, 1026-60000 are valid. For fleets using Windows
+	// builds, only port 443, 1026-60000 are valid.
 	//
 	// This member is required.
 	FromPort *int32
@@ -1412,7 +1500,9 @@ type IpPermission struct {
 	Protocol IpProtocol
 
 	// An ending value for a range of allowed port numbers. Port numbers are
-	// end-inclusive. This value must be higher than FromPort.
+	// end-inclusive. This value must be higher than FromPort. For fleets using Linux
+	// builds, only port 22, 443, 1026-60000 are valid. For fleets using Windows
+	// builds, only port 443, 1026-60000 are valid.
 	//
 	// This member is required.
 	ToPort *int32
@@ -1420,21 +1510,22 @@ type IpPermission struct {
 	noSmithyDocumentSerde
 }
 
-// This data type is used with the GameLift FleetIQ and game server groups. An EC2
-// launch template that contains configuration settings and game server code to be
-// deployed to all instances in a game server group. The launch template is
-// specified when creating a new game server group with CreateGameServerGroup.
+// This data type is used with the GameLift FleetIQ and game server groups. An
+// Amazon EC2 launch template that contains configuration settings and game server
+// code to be deployed to all instances in a game server group. The launch template
+// is specified when creating a new game server group with CreateGameServerGroup.
 type LaunchTemplateSpecification struct {
 
-	// A unique identifier for an existing EC2 launch template.
+	// A unique identifier for an existing Amazon EC2 launch template.
 	LaunchTemplateId *string
 
-	// A readable identifier for an existing EC2 launch template.
+	// A readable identifier for an existing Amazon EC2 launch template.
 	LaunchTemplateName *string
 
-	// The version of the EC2 launch template to use. If no version is specified, the
-	// default version will be used. With Amazon EC2, you can specify a default version
-	// for a launch template. If none is set, the default is the first version created.
+	// The version of the Amazon EC2 launch template to use. If no version is
+	// specified, the default version will be used. With Amazon Elastic Compute Cloud,
+	// you can specify a default version for a launch template. If none is set, the
+	// default is the first version created.
 	Version *string
 
 	noSmithyDocumentSerde
@@ -1460,9 +1551,10 @@ type LocationAttributes struct {
 
 // A remote location where a multi-location fleet can deploy EC2 instances for game
 // hosting. Related actions CreateFleet
+// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateFleet.html)
 type LocationConfiguration struct {
 
-	// An AWS Region code, such as us-west-2.
+	// An Amazon Web Services Region code, such as us-west-2.
 	Location *string
 
 	noSmithyDocumentSerde
@@ -1476,7 +1568,8 @@ type LocationConfiguration struct {
 // DeleteFleetLocations
 type LocationState struct {
 
-	// The fleet location, expressed as an AWS Region code such as us-west-2.
+	// The fleet location, expressed as an Amazon Web Services Region code such as
+	// us-west-2.
 	Location *string
 
 	// The life-cycle status of a fleet location.
@@ -1795,7 +1888,7 @@ type PlacedPlayerSession struct {
 type Player struct {
 
 	// A set of values, expressed in milliseconds, that indicates the amount of latency
-	// that a player experiences when connected to AWS Regions. If this property is
+	// that a player experiences when connected to @aws; Regions. If this property is
 	// present, FlexMatch considers placing the match only in Regions for which latency
 	// is reported. If a matchmaker has a rule that evaluates player latency, players
 	// must report latency in order to be matched. If no latency is reported in this
@@ -1918,7 +2011,7 @@ type PlayerSession struct {
 	// A unique identifier for a player session.
 	PlayerSessionId *string
 
-	// Port number for the game session. To connect to a Amazon GameLift server
+	// Port number for the game session. To connect to a Amazon Web Services server
 	// process, an app needs both the IP address and port number.
 	Port *int32
 
@@ -1971,8 +2064,8 @@ type PlayerSession struct {
 type PriorityConfiguration struct {
 
 	// The prioritization order to use for fleet locations, when the PriorityOrder
-	// property includes LOCATION. Locations are identified by AWS Region codes such as
-	// us-west-2. Each location can only be listed once.
+	// property includes LOCATION. Locations are identified by Amazon Web Services
+	// Region codes such as us-west-2. Each location can only be listed once.
 	LocationOrder []string
 
 	// The recommended sequence to use when prioritizing where to place new game
@@ -2076,8 +2169,8 @@ type RuntimeConfiguration struct {
 }
 
 // The location in Amazon S3 where build or script files are stored for access by
-// Amazon GameLift. This location is specified in CreateBuild, CreateScript, and
-// UpdateScript requests.
+// Amazon Web Services. This location is specified in CreateBuild, CreateScript,
+// and UpdateScript requests.
 type S3Location struct {
 
 	// An Amazon S3 bucket identifier. This is the name of the S3 bucket. GameLift
@@ -2089,14 +2182,14 @@ type S3Location struct {
 	Key *string
 
 	// The version of the file, if object versioning is turned on for the bucket.
-	// Amazon GameLift uses this information when retrieving files from an S3 bucket
-	// that you own. Use this parameter to specify a specific version of the file. If
-	// not set, the latest version of the file is retrieved.
+	// Amazon Web Services uses this information when retrieving files from an S3
+	// bucket that you own. Use this parameter to specify a specific version of the
+	// file. If not set, the latest version of the file is retrieved.
 	ObjectVersion *string
 
 	// The Amazon Resource Name (ARN
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) for an IAM
-	// role that allows Amazon GameLift to access the S3 bucket.
+	// role that allows Amazon Web Services to access the S3 bucket.
 	RoleArn *string
 
 	noSmithyDocumentSerde
@@ -2127,12 +2220,12 @@ type ScalingPolicy struct {
 	// A unique identifier for the fleet that is associated with this scaling policy.
 	FleetId *string
 
-	//
+	// The fleet location.
 	Location *string
 
-	// Name of the Amazon GameLift-defined metric that is used to trigger a scaling
-	// adjustment. For detailed descriptions of fleet metrics, see Monitor Amazon
-	// GameLift with Amazon CloudWatch
+	// Name of the Amazon Web Services-defined metric that is used to trigger a scaling
+	// adjustment. For detailed descriptions of fleet metrics, see Monitor Amazon Web
+	// Services with Amazon CloudWatch
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html).
 	//
 	// *
@@ -2274,8 +2367,8 @@ type Script struct {
 	SizeOnDisk *int64
 
 	// The location in Amazon S3 where build or script files are stored for access by
-	// Amazon GameLift. This location is specified in CreateBuild, CreateScript, and
-	// UpdateScript requests.
+	// Amazon Web Services. This location is specified in CreateBuild, CreateScript,
+	// and UpdateScript requests.
 	StorageLocation *S3Location
 
 	// Version information that is associated with a build or script. Version strings
@@ -2317,21 +2410,24 @@ type ServerProcess struct {
 	noSmithyDocumentSerde
 }
 
-// A label that can be assigned to a GameLift resource. Learn more Tagging AWS
-// Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in
-// the AWS General Reference  AWS Tagging Strategies
+// A label that can be assigned to a GameLift resource. Learn more Tagging Amazon
+// Web Services Resources
+// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the Amazon
+// Web Services General Reference  Amazon Web Services Tagging Strategies
 // (http://aws.amazon.com/answers/account-management/aws-tagging-strategies/)
 // Related actions TagResource | UntagResource | ListTagsForResource | All APIs by
 // task
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 type Tag struct {
 
-	// The key for a developer-defined key:value pair for tagging an AWS resource.
+	// The key for a developer-defined key:value pair for tagging an Amazon Web
+	// Services resource.
 	//
 	// This member is required.
 	Key *string
 
-	// The value for a developer-defined key:value pair for tagging an AWS resource.
+	// The value for a developer-defined key:value pair for tagging an Amazon Web
+	// Services resource.
 	//
 	// This member is required.
 	Value *string
@@ -2341,12 +2437,13 @@ type Tag struct {
 
 // Settings for a target-based scaling policy (see ScalingPolicy. A target-based
 // policy tracks a particular fleet metric specifies a target value for the metric.
-// As player usage changes, the policy triggers Amazon GameLift to adjust capacity
-// so that the metric returns to the target value. The target configuration
-// specifies settings as needed for the target based policy, including the target
-// value. Related actions DescribeFleetCapacity | UpdateFleetCapacity |
-// DescribeEC2InstanceLimits | PutScalingPolicy | DescribeScalingPolicies |
-// DeleteScalingPolicy | StopFleetActions | StartFleetActions | All APIs by task
+// As player usage changes, the policy triggers Amazon Web Services to adjust
+// capacity so that the metric returns to the target value. The target
+// configuration specifies settings as needed for the target based policy,
+// including the target value. Related actions DescribeFleetCapacity |
+// UpdateFleetCapacity | DescribeEC2InstanceLimits | PutScalingPolicy |
+// DescribeScalingPolicies | DeleteScalingPolicy | StopFleetActions |
+// StartFleetActions | All APIs by task
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 type TargetConfiguration struct {
 
@@ -2380,7 +2477,7 @@ type TargetTrackingConfiguration struct {
 }
 
 // Represents an authorization for a VPC peering connection between the VPC for an
-// Amazon GameLift fleet and another VPC on an account you have access to. This
+// Amazon Web Services fleet and another VPC on an account you have access to. This
 // authorization must exist and be valid for the peering connection to be
 // established. Authorizations are valid for 24 hours after they are issued.
 // Related actions CreateVpcPeeringAuthorization | DescribeVpcPeeringAuthorizations
@@ -2398,9 +2495,9 @@ type VpcPeeringAuthorization struct {
 	// "1469498468.057").
 	ExpirationTime *time.Time
 
-	// A unique identifier for the AWS account that you use to manage your GameLift
-	// fleet. You can find your Account ID in the AWS Management Console under account
-	// settings.
+	// A unique identifier for the Amazon Web Services account that you use to manage
+	// your GameLift fleet. You can find your Account ID in the Amazon Web Services
+	// Management Console under account settings.
 	GameLiftAwsAccountId *string
 
 	//
@@ -2408,21 +2505,22 @@ type VpcPeeringAuthorization struct {
 
 	// A unique identifier for a VPC with resources to be accessed by your GameLift
 	// fleet. The VPC must be in the same Region as your fleet. To look up a VPC ID,
-	// use the VPC Dashboard (https://console.aws.amazon.com/vpc/) in the AWS
-	// Management Console. Learn more about VPC peering in VPC Peering with GameLift
-	// Fleets
+	// use the VPC Dashboard (https://console.aws.amazon.com/vpc/) in the Amazon Web
+	// Services Management Console. Learn more about VPC peering in VPC Peering with
+	// GameLift Fleets
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html).
 	PeerVpcId *string
 
 	noSmithyDocumentSerde
 }
 
-// Represents a peering connection between a VPC on one of your AWS accounts and
-// the VPC for your Amazon GameLift fleets. This record may be for an active
-// peering connection or a pending connection that has not yet been established.
-// Related actions CreateVpcPeeringAuthorization | DescribeVpcPeeringAuthorizations
-// | DeleteVpcPeeringAuthorization | CreateVpcPeeringConnection |
-// DescribeVpcPeeringConnections | DeleteVpcPeeringConnection | All APIs by task
+// Represents a peering connection between a VPC on one of your Amazon Web Services
+// accounts and the VPC for your Amazon Web Services fleets. This record may be for
+// an active peering connection or a pending connection that has not yet been
+// established. Related actions CreateVpcPeeringAuthorization |
+// DescribeVpcPeeringAuthorizations | DeleteVpcPeeringAuthorization |
+// CreateVpcPeeringConnection | DescribeVpcPeeringConnections |
+// DeleteVpcPeeringConnection | All APIs by task
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 type VpcPeeringConnection struct {
 
@@ -2431,13 +2529,13 @@ type VpcPeeringConnection struct {
 	// with the GameLift fleet resource for this connection.
 	FleetArn *string
 
-	// A unique identifier for the fleet. This ID determines the ID of the Amazon
-	// GameLift VPC for your fleet.
+	// A unique identifier for the fleet. This ID determines the ID of the Amazon Web
+	// Services VPC for your fleet.
 	FleetId *string
 
-	// A unique identifier for the VPC that contains the Amazon GameLift fleet for this
-	// connection. This VPC is managed by Amazon GameLift and does not appear in your
-	// AWS account.
+	// A unique identifier for the VPC that contains the Amazon Web Services fleet for
+	// this connection. This VPC is managed by Amazon Web Services and does not appear
+	// in your Amazon Web Services account.
 	GameLiftVpcId *string
 
 	// CIDR block of IPv4 addresses assigned to the VPC peering connection for the
@@ -2447,9 +2545,9 @@ type VpcPeeringConnection struct {
 
 	// A unique identifier for a VPC with resources to be accessed by your GameLift
 	// fleet. The VPC must be in the same Region as your fleet. To look up a VPC ID,
-	// use the VPC Dashboard (https://console.aws.amazon.com/vpc/) in the AWS
-	// Management Console. Learn more about VPC peering in VPC Peering with GameLift
-	// Fleets
+	// use the VPC Dashboard (https://console.aws.amazon.com/vpc/) in the Amazon Web
+	// Services Management Console. Learn more about VPC peering in VPC Peering with
+	// GameLift Fleets
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html).
 	PeerVpcId *string
 

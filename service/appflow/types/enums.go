@@ -36,6 +36,28 @@ func (AmplitudeConnectorOperator) Values() []AmplitudeConnectorOperator {
 	}
 }
 
+type AuthenticationType string
+
+// Enum values for AuthenticationType
+const (
+	AuthenticationTypeOauth2 AuthenticationType = "OAUTH2"
+	AuthenticationTypeApikey AuthenticationType = "APIKEY"
+	AuthenticationTypeBasic  AuthenticationType = "BASIC"
+	AuthenticationTypeCustom AuthenticationType = "CUSTOM"
+)
+
+// Values returns all known values for AuthenticationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AuthenticationType) Values() []AuthenticationType {
+	return []AuthenticationType{
+		"OAUTH2",
+		"APIKEY",
+		"BASIC",
+		"CUSTOM",
+	}
+}
+
 type ConnectionMode string
 
 // Enum values for ConnectionMode
@@ -51,6 +73,22 @@ func (ConnectionMode) Values() []ConnectionMode {
 	return []ConnectionMode{
 		"Public",
 		"Private",
+	}
+}
+
+type ConnectorProvisioningType string
+
+// Enum values for ConnectorProvisioningType
+const (
+	ConnectorProvisioningTypeLambda ConnectorProvisioningType = "LAMBDA"
+)
+
+// Values returns all known values for ConnectorProvisioningType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectorProvisioningType) Values() []ConnectorProvisioningType {
+	return []ConnectorProvisioningType{
+		"LAMBDA",
 	}
 }
 
@@ -80,6 +118,7 @@ const (
 	ConnectorTypeHoneycode        ConnectorType = "Honeycode"
 	ConnectorTypeCustomerprofiles ConnectorType = "CustomerProfiles"
 	ConnectorTypeSapodata         ConnectorType = "SAPOData"
+	ConnectorTypeCustomconnector  ConnectorType = "CustomConnector"
 )
 
 // Values returns all known values for ConnectorType. Note that this can be
@@ -109,6 +148,7 @@ func (ConnectorType) Values() []ConnectorType {
 		"Honeycode",
 		"CustomerProfiles",
 		"SAPOData",
+		"CustomConnector",
 	}
 }
 
@@ -393,6 +433,24 @@ func (MarketoConnectorOperator) Values() []MarketoConnectorOperator {
 	}
 }
 
+type OAuth2GrantType string
+
+// Enum values for OAuth2GrantType
+const (
+	OAuth2GrantTypeClientCredentials OAuth2GrantType = "CLIENT_CREDENTIALS"
+	OAuth2GrantTypeAuthorizationCode OAuth2GrantType = "AUTHORIZATION_CODE"
+)
+
+// Values returns all known values for OAuth2GrantType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OAuth2GrantType) Values() []OAuth2GrantType {
+	return []OAuth2GrantType{
+		"CLIENT_CREDENTIALS",
+		"AUTHORIZATION_CODE",
+	}
+}
+
 type Operator string
 
 // Enum values for Operator
@@ -490,6 +548,62 @@ func (OperatorPropertiesKeys) Values() []OperatorPropertiesKeys {
 		"CONCAT_FORMAT",
 		"SUBFIELD_CATEGORY_MAP",
 		"EXCLUDE_SOURCE_FIELDS_LIST",
+	}
+}
+
+type Operators string
+
+// Enum values for Operators
+const (
+	OperatorsProjection           Operators = "PROJECTION"
+	OperatorsLessThan             Operators = "LESS_THAN"
+	OperatorsGreaterThan          Operators = "GREATER_THAN"
+	OperatorsContains             Operators = "CONTAINS"
+	OperatorsBetween              Operators = "BETWEEN"
+	OperatorsLessThanOrEqualTo    Operators = "LESS_THAN_OR_EQUAL_TO"
+	OperatorsGreaterThanOrEqualTo Operators = "GREATER_THAN_OR_EQUAL_TO"
+	OperatorsEqualTo              Operators = "EQUAL_TO"
+	OperatorsNotEqualTo           Operators = "NOT_EQUAL_TO"
+	OperatorsAddition             Operators = "ADDITION"
+	OperatorsMultiplication       Operators = "MULTIPLICATION"
+	OperatorsDivision             Operators = "DIVISION"
+	OperatorsSubtraction          Operators = "SUBTRACTION"
+	OperatorsMaskAll              Operators = "MASK_ALL"
+	OperatorsMaskFirstN           Operators = "MASK_FIRST_N"
+	OperatorsMaskLastN            Operators = "MASK_LAST_N"
+	OperatorsValidateNonNull      Operators = "VALIDATE_NON_NULL"
+	OperatorsValidateNonZero      Operators = "VALIDATE_NON_ZERO"
+	OperatorsValidateNonNegative  Operators = "VALIDATE_NON_NEGATIVE"
+	OperatorsValidateNumeric      Operators = "VALIDATE_NUMERIC"
+	OperatorsNoOp                 Operators = "NO_OP"
+)
+
+// Values returns all known values for Operators. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Operators) Values() []Operators {
+	return []Operators{
+		"PROJECTION",
+		"LESS_THAN",
+		"GREATER_THAN",
+		"CONTAINS",
+		"BETWEEN",
+		"LESS_THAN_OR_EQUAL_TO",
+		"GREATER_THAN_OR_EQUAL_TO",
+		"EQUAL_TO",
+		"NOT_EQUAL_TO",
+		"ADDITION",
+		"MULTIPLICATION",
+		"DIVISION",
+		"SUBTRACTION",
+		"MASK_ALL",
+		"MASK_FIRST_N",
+		"MASK_LAST_N",
+		"VALIDATE_NON_NULL",
+		"VALIDATE_NON_ZERO",
+		"VALIDATE_NON_NEGATIVE",
+		"VALIDATE_NUMERIC",
+		"NO_OP",
 	}
 }
 
@@ -947,14 +1061,15 @@ type TaskType string
 
 // Enum values for TaskType
 const (
-	TaskTypeArithmetic TaskType = "Arithmetic"
-	TaskTypeFilter     TaskType = "Filter"
-	TaskTypeMap        TaskType = "Map"
-	TaskTypeMapAll     TaskType = "Map_all"
-	TaskTypeMask       TaskType = "Mask"
-	TaskTypeMerge      TaskType = "Merge"
-	TaskTypeTruncate   TaskType = "Truncate"
-	TaskTypeValidate   TaskType = "Validate"
+	TaskTypeArithmetic  TaskType = "Arithmetic"
+	TaskTypeFilter      TaskType = "Filter"
+	TaskTypeMap         TaskType = "Map"
+	TaskTypeMapAll      TaskType = "Map_all"
+	TaskTypeMask        TaskType = "Mask"
+	TaskTypeMerge       TaskType = "Merge"
+	TaskTypePassthrough TaskType = "Passthrough"
+	TaskTypeTruncate    TaskType = "Truncate"
+	TaskTypeValidate    TaskType = "Validate"
 )
 
 // Values returns all known values for TaskType. Note that this can be expanded in
@@ -968,6 +1083,7 @@ func (TaskType) Values() []TaskType {
 		"Map_all",
 		"Mask",
 		"Merge",
+		"Passthrough",
 		"Truncate",
 		"Validate",
 	}
@@ -1098,6 +1214,7 @@ const (
 	WriteOperationTypeInsert WriteOperationType = "INSERT"
 	WriteOperationTypeUpsert WriteOperationType = "UPSERT"
 	WriteOperationTypeUpdate WriteOperationType = "UPDATE"
+	WriteOperationTypeDelete WriteOperationType = "DELETE"
 )
 
 // Values returns all known values for WriteOperationType. Note that this can be
@@ -1108,6 +1225,7 @@ func (WriteOperationType) Values() []WriteOperationType {
 		"INSERT",
 		"UPSERT",
 		"UPDATE",
+		"DELETE",
 	}
 }
 

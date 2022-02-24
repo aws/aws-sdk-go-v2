@@ -11,26 +11,30 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a fleet of Amazon Elastic Compute Cloud (Amazon EC2) instances to host
-// your custom game server or Realtime Servers. Use this operation to configure the
-// computing resources for your fleet and provide instructions for running game
-// servers on each instance. Most GameLift fleets can deploy instances to multiple
-// locations, including the home Region (where the fleet is created) and an
-// optional set of remote locations. Fleets that are created in the following AWS
-// Regions support multiple locations: us-east-1 (N. Virginia), us-west-2 (Oregon),
-// eu-central-1 (Frankfurt), eu-west-1 (Ireland), ap-southeast-2 (Sydney),
-// ap-northeast-1 (Tokyo), and ap-northeast-2 (Seoul). Fleets that are created in
-// other GameLift Regions can deploy instances in the fleet's home Region only. All
-// fleet instances use the same configuration regardless of location; however, you
-// can adjust capacity settings and turn auto-scaling on/off for each location. To
-// create a fleet, choose the hardware for your instances, specify a game server
-// build or Realtime script to deploy, and provide a runtime configuration to
-// direct GameLift how to start and run game servers on each instance in the fleet.
-// Set permissions for inbound traffic to your game servers, and enable optional
-// features as needed. When creating a multi-location fleet, provide a list of
-// additional remote locations. If successful, this operation creates a new Fleet
-// resource and places it in NEW status, which prompts GameLift to initiate the
-// fleet creation workflow
+// Creates a fleet of Amazon Elastic Compute Cloud (Amazon Elastic Compute Cloud)
+// instances to host your custom game server or Realtime Servers. Use this
+// operation to configure the computing resources for your fleet and provide
+// instructions for running game servers on each instance. Most GameLift fleets can
+// deploy instances to multiple locations, including the home Region (where the
+// fleet is created) and an optional set of remote locations. Fleets that are
+// created in the following Amazon Web Services Regions support multiple locations:
+// us-east-1 (N. Virginia), us-west-2 (Oregon), eu-central-1 (Frankfurt), eu-west-1
+// (Ireland), ap-southeast-2 (Sydney), ap-northeast-1 (Tokyo), and ap-northeast-2
+// (Seoul). Fleets that are created in other GameLift Regions can deploy instances
+// in the fleet's home Region only. All fleet instances use the same configuration
+// regardless of location; however, you can adjust capacity settings and turn
+// auto-scaling on/off for each location. To create a fleet, choose the hardware
+// for your instances, specify a game server build or Realtime script to deploy,
+// and provide a runtime configuration to direct GameLift how to start and run game
+// servers on each instance in the fleet. Set permissions for inbound traffic to
+// your game servers, and enable optional features as needed. When creating a
+// multi-location fleet, provide a list of additional remote locations. If you need
+// to debug your fleet, fetch logs, view performance metrics or other actions on
+// the fleet, create the development fleet with port 22/3389 open. As a best
+// practice, we recommend opening ports for remote access only when you need them
+// and closing them when you're finished. If successful, this operation creates a
+// new Fleet resource and places it in NEW status, which prompts GameLift to
+// initiate the fleet creation workflow
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creation-workflow.html).
 // You can track fleet creation by checking fleet status using
 // DescribeFleetAttributes and DescribeFleetLocationAttributes/, or by monitoring
@@ -67,11 +71,12 @@ func (c *Client) CreateFleet(ctx context.Context, params *CreateFleetInput, optF
 // Represents the input for a request operation.
 type CreateFleetInput struct {
 
-	// The GameLift-supported EC2 instance type to use for all fleet instances.
+	// The GameLift-supported Amazon EC2 instance type to use for all fleet instances.
 	// Instance type determines the computing resources that will be used to host your
 	// game servers, including CPU, memory, storage, and networking capacity. See
-	// Amazon EC2 Instance Types (http://aws.amazon.com/ec2/instance-types/) for
-	// detailed descriptions of EC2 instance types.
+	// Amazon Elastic Compute Cloud Instance Types
+	// (http://aws.amazon.com/ec2/instance-types/) for detailed descriptions of Amazon
+	// EC2 instance types.
 	//
 	// This member is required.
 	EC2InstanceType types.EC2InstanceType
@@ -90,12 +95,11 @@ type CreateFleetInput struct {
 	// Prompts GameLift to generate a TLS/SSL certificate for the fleet. TLS
 	// certificates are used for encrypting traffic between game clients and the game
 	// servers that are running on GameLift. By default, the CertificateConfiguration
-	// is set to DISABLED. Learn more at Securing Client/Server Communication
-	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-howitworks.html#gamelift-howitworks-security).
-	// This property cannot be changed after the fleet is created. Note: This feature
-	// requires the AWS Certificate Manager (ACM) service, which is not available in
-	// all AWS regions. When working in a region that does not support this feature, a
-	// fleet creation request with certificate generation fails with a 4xx error.
+	// is set to DISABLED. This property cannot be changed after the fleet is created.
+	// Note: This feature requires the Amazon Web Services Certificate Manager (ACM)
+	// service, which is not available in all Amazon Web Services regions. When working
+	// in a region that does not support this feature, a fleet creation request with
+	// certificate generation fails with a 4xx error.
 	CertificateConfiguration *types.CertificateConfiguration
 
 	// A human-readable description of the fleet.
@@ -114,23 +118,24 @@ type CreateFleetInput struct {
 	// This property cannot be changed after the fleet is created.
 	FleetType types.FleetType
 
-	// A unique identifier for an AWS IAM role that manages access to your AWS
-	// services. With an instance role ARN set, any application that runs on an
-	// instance in this fleet can assume the role, including install scripts, server
+	// A unique identifier for an IAM role that manages access to your Amazon Web
+	// Services services. With an instance role ARN set, any application that runs on
+	// an instance in this fleet can assume the role, including install scripts, server
 	// processes, and daemons (background processes). Create a role or look up a role's
-	// ARN by using the IAM dashboard (https://console.aws.amazon.com/iam/) in the AWS
-	// Management Console. Learn more about using on-box credentials for your game
-	// servers at  Access external resources from a game server
+	// ARN by using the IAM dashboard (https://console.aws.amazon.com/iam/) in the
+	// Amazon Web Services Management Console. Learn more about using on-box
+	// credentials for your game servers at  Access external resources from a game
+	// server
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html).
 	// This property cannot be changed after the fleet is created.
 	InstanceRoleArn *string
 
 	// A set of remote locations to deploy additional instances to and manage as part
-	// of the fleet. This parameter can only be used when creating fleets in AWS
-	// Regions that support multiple locations. You can add any GameLift-supported AWS
-	// Region as a remote location, in the form of an AWS Region code such as
-	// us-west-2. To create a fleet with instances in the home Region only, omit this
-	// parameter.
+	// of the fleet. This parameter can only be used when creating fleets in Amazon Web
+	// Services Regions that support multiple locations. You can add any
+	// GameLift-supported Amazon Web Services Region as a remote location, in the form
+	// of an Amazon Web Services Region code such as us-west-2. To create a fleet with
+	// instances in the home Region only, omit this parameter.
 	Locations []types.LocationConfiguration
 
 	// This parameter is no longer used. To specify where GameLift should store log
@@ -140,10 +145,10 @@ type CreateFleetInput struct {
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api-ref.html#gamelift-sdk-server-api-ref-dataypes-process).
 	LogPaths []string
 
-	// The name of an AWS CloudWatch metric group to add this fleet to. A metric group
-	// is used to aggregate the metrics for multiple fleets. You can specify an
-	// existing metric group name or set a new name to create a new metric group. A
-	// fleet can be included in only one metric group at a time.
+	// The name of an Amazon Web Services CloudWatch metric group to add this fleet to.
+	// A metric group is used to aggregate the metrics for multiple fleets. You can
+	// specify an existing metric group name or set a new name to create a new metric
+	// group. A fleet can be included in only one metric group at a time.
 	MetricGroups []string
 
 	// The status of termination protection for active game sessions on the fleet. By
@@ -159,15 +164,15 @@ type CreateFleetInput struct {
 	NewGameSessionProtectionPolicy types.ProtectionPolicy
 
 	// Used when peering your GameLift fleet with a VPC, the unique identifier for the
-	// AWS account that owns the VPC. You can find your account ID in the AWS
-	// Management Console under account settings.
+	// Amazon Web Services account that owns the VPC. You can find your account ID in
+	// the Amazon Web Services Management Console under account settings.
 	PeerVpcAwsAccountId *string
 
 	// A unique identifier for a VPC with resources to be accessed by your GameLift
 	// fleet. The VPC must be in the same Region as your fleet. To look up a VPC ID,
-	// use the VPC Dashboard (https://console.aws.amazon.com/vpc/) in the AWS
-	// Management Console. Learn more about VPC peering in VPC Peering with GameLift
-	// Fleets
+	// use the VPC Dashboard (https://console.aws.amazon.com/vpc/) in the Amazon Web
+	// Services Management Console. Learn more about VPC peering in VPC Peering with
+	// GameLift Fleets
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html).
 	PeerVpcId *string
 
@@ -201,13 +206,14 @@ type CreateFleetInput struct {
 	ServerLaunchPath *string
 
 	// A list of labels to assign to the new fleet resource. Tags are developer-defined
-	// key-value pairs. Tagging AWS resources are useful for resource management,
-	// access management and cost allocation. For more information, see  Tagging AWS
-	// Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in
-	// the AWS General Reference. Once the fleet is created, you can use TagResource,
-	// UntagResource, and ListTagsForResource to add, remove, and view tags. The
-	// maximum tag limit may be lower than stated. See the AWS General Reference for
-	// actual tagging limits.
+	// key-value pairs. Tagging Amazon Web Services resources are useful for resource
+	// management, access management and cost allocation. For more information, see
+	// Tagging Amazon Web Services Resources
+	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the Amazon
+	// Web Services General Reference. Once the fleet is created, you can use
+	// TagResource, UntagResource, and ListTagsForResource to add, remove, and view
+	// tags. The maximum tag limit may be lower than stated. See the Amazon Web
+	// Services General Reference for actual tagging limits.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

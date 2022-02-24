@@ -32,7 +32,11 @@ import (
 // significant delay in returning the result. If the secret is in a different
 // Amazon Web Services account from the credentials calling the API, then you can't
 // use aws/secretsmanager to encrypt the secret, and you must create and use a
-// customer managed KMS key.
+// customer managed KMS key. Required permissions: secretsmanager:CreateSecret. For
+// more information, see  IAM policy actions for Secrets Manager
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions)
+// and Authentication and access control in Secrets Manager
+// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 func (c *Client) CreateSecret(ctx context.Context, params *CreateSecretInput, optFns ...func(*Options)) (*CreateSecretOutput, error) {
 	if params == nil {
 		params = &CreateSecretInput{}

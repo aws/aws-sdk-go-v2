@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists a history of user activity and any risks detected as part of Amazon
-// Cognito advanced security.
+// A history of user activity and any risks detected as part of Amazon Cognito
+// advanced security.
 func (c *Client) AdminListUserAuthEvents(ctx context.Context, params *AdminListUserAuthEventsInput, optFns ...func(*Options)) (*AdminListUserAuthEventsOutput, error) {
 	if params == nil {
 		params = &AdminListUserAuthEventsInput{}

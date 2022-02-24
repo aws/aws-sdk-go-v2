@@ -106,8 +106,7 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// all Amazon Web Services Regions, or for all database engines. For the full list
 	// of DB instance classes, and availability for your engine, see DB Instance Class
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html)
-	// in the Amazon RDS User Guide. Valid for: Aurora DB clusters and Multi-AZ DB
-	// clusters
+	// in the Amazon RDS User Guide. Valid for: Multi-AZ DB clusters only
 	DBClusterInstanceClass *string
 
 	// The name of the DB cluster parameter group to associate with this DB cluster. If
@@ -131,7 +130,7 @@ type RestoreDBClusterFromSnapshotInput struct {
 
 	// The name of the DB subnet group to use for the new DB cluster. Constraints: If
 	// supplied, must match the name of an existing DB subnet group. Example:
-	// mySubnetgroup Valid for: Aurora DB clusters and Multi-AZ DB clusters
+	// mydbsubnetgroup Valid for: Aurora DB clusters and Multi-AZ DB clusters
 	DBSubnetGroupName *string
 
 	// The database name for the restored DB cluster. Valid for: Aurora DB clusters and

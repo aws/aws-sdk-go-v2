@@ -21,6 +21,7 @@
         "api_op_DeleteOutboundCrossClusterSearchConnection.go",
         "api_op_DeletePackage.go",
         "api_op_DescribeDomainAutoTunes.go",
+        "api_op_DescribeDomainChangeProgress.go",
         "api_op_DescribeElasticsearchDomain.go",
         "api_op_DescribeElasticsearchDomainConfig.go",
         "api_op_DescribeElasticsearchDomains.go",

@@ -12,13 +12,18 @@ import (
 )
 
 // Retrieves the contents of the encrypted fields SecretString or SecretBinary from
-// the specified version of a secret, whichever contains content. For information
-// about retrieving the secret value in the console, see Retrieve secrets
+// the specified version of a secret, whichever contains content. We recommend that
+// you cache your secret values by using client-side caching. Caching secrets
+// improves speed and reduces your costs. For more information, see Cache secrets
+// for your applications
 // (https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieving-secrets.html).
-// To run this command, you must have secretsmanager:GetSecretValue permissions. If
-// the secret is encrypted using a customer-managed key instead of the Amazon Web
-// Services managed key aws/secretsmanager, then you also need kms:Decrypt
-// permissions for that key.
+// Required permissions: secretsmanager:GetSecretValue. If the secret is encrypted
+// using a customer-managed key instead of the Amazon Web Services managed key
+// aws/secretsmanager, then you also need kms:Decrypt permissions for that key. For
+// more information, see  IAM policy actions for Secrets Manager
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions)
+// and Authentication and access control in Secrets Manager
+// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 func (c *Client) GetSecretValue(ctx context.Context, params *GetSecretValueInput, optFns ...func(*Options)) (*GetSecretValueOutput, error) {
 	if params == nil {
 		params = &GetSecretValueInput{}

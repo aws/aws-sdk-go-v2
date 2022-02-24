@@ -144,6 +144,10 @@ type ModifyCustomDBEngineVersionOutput struct {
 	// the CreateDBInstance action.
 	SupportedTimezones []types.Timezone
 
+	// A value that indicates whether the engine version supports Babelfish for Aurora
+	// PostgreSQL.
+	SupportsBabelfish bool
+
 	// A value that indicates whether you can use Aurora global databases with a
 	// specific DB engine version.
 	SupportsGlobalDatabases bool

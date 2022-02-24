@@ -76,10 +76,12 @@ type UpdateConfigurationProfileOutput struct {
 	// specified LocationUri.
 	RetrievalRoleArn *string
 
-	// The type of configurations that the configuration profile contains. A
-	// configuration can be a feature flag used for enabling or disabling new features
-	// or a free-form configuration used for distributing configurations to your
-	// application.
+	// The type of configurations contained in the profile. AppConfig supports feature
+	// flags and freeform configurations. We recommend you create feature flag
+	// configurations to enable or disable new features and freeform configurations to
+	// distribute configurations to an application. When calling this API, enter one of
+	// the following values for Type: AWS.AppConfig.FeatureFlags
+	//     AWS.Freeform
 	Type *string
 
 	// A list of methods for validating the configuration.

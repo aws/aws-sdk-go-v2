@@ -31,7 +31,7 @@ func (c *Client) CancelUpdateStack(ctx context.Context, params *CancelUpdateStac
 // The input for the CancelUpdateStack action.
 type CancelUpdateStackInput struct {
 
-	// The name or the unique stack ID that is associated with the stack.
+	// The name or the unique stack ID that's associated with the stack.
 	//
 	// This member is required.
 	StackName *string

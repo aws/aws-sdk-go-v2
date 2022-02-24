@@ -865,6 +865,27 @@ func validateLaunchGroupConfigList(v []types.LaunchGroupConfig) error {
 	}
 }
 
+func validateMetricDefinitionConfig(v *types.MetricDefinitionConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetricDefinitionConfig"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.EntityIdKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityIdKey"))
+	}
+	if v.ValueKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ValueKey"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMetricGoalConfig(v *types.MetricGoalConfig) error {
 	if v == nil {
 		return nil
@@ -872,6 +893,10 @@ func validateMetricGoalConfig(v *types.MetricGoalConfig) error {
 	invalidParams := smithy.InvalidParamsError{Context: "MetricGoalConfig"}
 	if v.MetricDefinition == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MetricDefinition"))
+	} else if v.MetricDefinition != nil {
+		if err := validateMetricDefinitionConfig(v.MetricDefinition); err != nil {
+			invalidParams.AddNested("MetricDefinition", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -904,6 +929,10 @@ func validateMetricMonitorConfig(v *types.MetricMonitorConfig) error {
 	invalidParams := smithy.InvalidParamsError{Context: "MetricMonitorConfig"}
 	if v.MetricDefinition == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MetricDefinition"))
+	} else if v.MetricDefinition != nil {
+		if err := validateMetricDefinitionConfig(v.MetricDefinition); err != nil {
+			invalidParams.AddNested("MetricDefinition", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -14,21 +14,21 @@ import (
 
 // Detect drift on a stack set. When CloudFormation performs drift detection on a
 // stack set, it performs drift detection on the stack associated with each stack
-// instance in the stack set. For more information, see How CloudFormation Performs
-// Drift Detection on a Stack Set
+// instance in the stack set. For more information, see How CloudFormation performs
+// drift detection on a stack set
 // (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-drift.html).
 // DetectStackSetDrift returns the OperationId of the stack set drift detection
 // operation. Use this operation id with DescribeStackSetOperation to monitor the
 // progress of the drift detection operation. The drift detection operation may
 // take some time, depending on the number of stack instances included in the stack
-// set, as well as the number of resources included in each stack. Once the
+// set, in addition to the number of resources included in each stack. Once the
 // operation has completed, use the following actions to return drift
 // information:
 //
 // * Use DescribeStackSet to return detailed information about the
 // stack set, including detailed information about the last completed drift
 // operation performed on the stack set. (Information about drift operations that
-// are in progress is not included.)
+// are in progress isn't included.)
 //
 // * Use ListStackInstances to return a list of
 // stack instances belonging to the stack set, including the drift status and last
@@ -39,8 +39,8 @@ import (
 // and last drift time checked.
 //
 // For more information on performing a drift
-// detection operation on a stack set, see Detecting Unmanaged Changes in Stack
-// Sets
+// detection operation on a stack set, see Detecting unmanaged changes in stack
+// sets
 // (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-drift.html).
 // You can only run a single drift detection operation on a given stack set at one
 // time. To stop a drift detection stack set operation, use StopStackSetOperation.
@@ -96,7 +96,7 @@ type DetectStackSetDriftInput struct {
 
 type DetectStackSetDriftOutput struct {
 
-	// The ID of the drift detection stack set operation. you can use this operation id
+	// The ID of the drift detection stack set operation. You can use this operation ID
 	// with DescribeStackSetOperation to monitor the progress of the drift detection
 	// operation.
 	OperationId *string

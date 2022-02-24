@@ -7,6 +7,27 @@ import (
 	"time"
 )
 
+// Provides information about an Athena query error. The AthenaError feature
+// provides standardized error information to help you understand failed queries
+// and take steps after a query failure occurs. AthenaError includes an
+// ErrorCategory field that specifies whether the cause of the failed query is due
+// to system error, user error, or unknown error.
+type AthenaError struct {
+
+	// An integer value that specifies the category of a query failure error. The
+	// following list shows the category for each integer value. 1 - System 2 - User 3
+	// - Unknown
+	ErrorCategory *int32
+
+	// An integer value that provides specific information about an Athena query error.
+	// For the meaning of specific values, see the Error Type Reference
+	// (https://docs.aws.amazon.com/athena/latest/ug/error-reference.html#error-reference-error-type-reference)
+	// in the Amazon Athena User Guide.
+	ErrorType *int32
+
+	noSmithyDocumentSerde
+}
+
 // Contains metadata for a column in a table.
 type Column struct {
 
@@ -87,8 +108,9 @@ type Database struct {
 type DataCatalog struct {
 
 	// The name of the data catalog. The catalog name must be unique for the Amazon Web
-	// Services account and can use a maximum of 128 alphanumeric, underscore, at sign,
-	// or hyphen characters.
+	// Services account and can use a maximum of 127 alphanumeric, underscore, at sign,
+	// or hyphen characters. The remainder of the length constraint of 256 is reserved
+	// for use by Athena.
 	//
 	// This member is required.
 	Name *string
@@ -141,7 +163,10 @@ type DataCatalog struct {
 // The summary information for the data catalog, which includes its name and type.
 type DataCatalogSummary struct {
 
-	// The name of the data catalog.
+	// The name of the data catalog. The catalog name is unique for the Amazon Web
+	// Services account and can use a maximum of 127 alphanumeric, underscore, at sign,
+	// or hyphen characters. The remainder of the length constraint of 256 is reserved
+	// for use by Athena.
 	CatalogName *string
 
 	// The data catalog type.
@@ -361,6 +386,9 @@ type QueryExecutionStatistics struct {
 // applicable) for the query execution.
 type QueryExecutionStatus struct {
 
+	// Provides information about an Athena query error.
+	AthenaError *AthenaError
+
 	// The date and time that the query completed.
 	CompletionDateTime *time.Time
 
@@ -399,6 +427,20 @@ type ResultConfiguration struct {
 	// (https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html).
 	EncryptionConfiguration *EncryptionConfiguration
 
+	// The Amazon Web Services account ID that you expect to be the owner of the Amazon
+	// S3 bucket specified by ResultConfiguration$OutputLocation. If set, Athena uses
+	// the value for ExpectedBucketOwner when it makes Amazon S3 calls to your
+	// specified output location. If the ExpectedBucketOwner Amazon Web Services
+	// account ID does not match the actual owner of the Amazon S3 bucket, the call
+	// fails with a permissions error. This is a client-side setting. If workgroup
+	// settings override client-side settings, then the query uses the
+	// ExpectedBucketOwner setting that is specified for the workgroup, and also uses
+	// the location for storing query results specified in the workgroup. See
+	// WorkGroupConfiguration$EnforceWorkGroupConfiguration and Workgroup Settings
+	// Override Client-Side Settings
+	// (https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html).
+	ExpectedBucketOwner *string
+
 	// The location in Amazon S3 where your query results are stored, such as
 	// s3://path/to/query/bucket/. To run the query, you must specify the query results
 	// location using one of the ways: either for individual queries using either this
@@ -421,6 +463,20 @@ type ResultConfigurationUpdates struct {
 	// The encryption configuration for the query results.
 	EncryptionConfiguration *EncryptionConfiguration
 
+	// The Amazon Web Services account ID that you expect to be the owner of the Amazon
+	// S3 bucket specified by ResultConfiguration$OutputLocation. If set, Athena uses
+	// the value for ExpectedBucketOwner when it makes Amazon S3 calls to your
+	// specified output location. If the ExpectedBucketOwner Amazon Web Services
+	// account ID does not match the actual owner of the Amazon S3 bucket, the call
+	// fails with a permissions error. If workgroup settings override client-side
+	// settings, then the query uses the ExpectedBucketOwner setting that is specified
+	// for the workgroup, and also uses the location for storing query results
+	// specified in the workgroup. See
+	// WorkGroupConfiguration$EnforceWorkGroupConfiguration and Workgroup Settings
+	// Override Client-Side Settings
+	// (https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html).
+	ExpectedBucketOwner *string
+
 	// The location in Amazon S3 where your query results are stored, such as
 	// s3://path/to/query/bucket/. For more information, see Query Results
 	// (https://docs.aws.amazon.com/athena/latest/ug/querying.html) If workgroup
@@ -440,6 +496,15 @@ type ResultConfigurationUpdates struct {
 	// see Workgroup Settings Override Client-Side Settings
 	// (https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html).
 	RemoveEncryptionConfiguration *bool
+
+	// If set to "true", removes the Amazon Web Services account ID previously
+	// specified for ResultConfiguration$ExpectedBucketOwner. If set to "false" or not
+	// set, and a value is present in the ExpectedBucketOwner in
+	// ResultConfigurationUpdates (the client-side setting), the ExpectedBucketOwner in
+	// the workgroup's ResultConfiguration is updated with the new value. For more
+	// information, see Workgroup Settings Override Client-Side Settings
+	// (https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html).
+	RemoveExpectedBucketOwner *bool
 
 	// If set to "true", indicates that the previously-specified query results location
 	// (also known as a client-side setting) for queries in this workgroup should be

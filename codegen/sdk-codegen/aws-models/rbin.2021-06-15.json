@@ -43,7 +43,7 @@
                     "name": "rbin"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>This is the <i>Recycle Bin API Reference</i>. This documentation provides \n      descriptions and syntax for each of the actions and data types in Recycle Bin.</p>\n    \n         <p>Recycle Bin is a snapshot recovery feature that enables you to restore accidentally \n      deleted snapshots. When using Recycle Bin, if your snapshots are deleted, they are retained \n      in the Recycle Bin for a time period that you specify.</p> \n    \n         <p>You can restore a snapshot from the Recycle Bin at any time before its retention period \n      expires. After you restore a snapshot from the Recycle Bin, the snapshot is removed from the \n      Recycle Bin, and you can then use it in the same way you use any other snapshot in your \n      account. If the retention period expires and the snapshot is not restored, the snapshot is \n      permanently deleted from the Recycle Bin and is no longer available for recovery. For more \n      information about Recycle Bin, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-recycle-bin.html\">\n        Recycle Bin</a> in the <i>Amazon EC2 User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>This is the <i>Recycle Bin API Reference</i>. This documentation provides \n      descriptions and syntax for each of the actions and data types in Recycle Bin.</p>\n    \n         <p>Recycle Bin is a resource recovery feature that enables you to restore accidentally \n      deleted snapshots and EBS-backed AMIs. When using Recycle Bin, if your resources are \n      deleted, they are retained in the Recycle Bin for a time period that you specify.</p> \n    \n         <p>You can restore a resource from the Recycle Bin at any time before its retention period \n      expires. After you restore a resource from the Recycle Bin, the resource is removed from the \n      Recycle Bin, and you can then use it in the same way you use any other resource of that type \n      in your account. If the retention period expires and the resource is not restored, the resource \n      is permanently deleted from the Recycle Bin and is no longer available for recovery. For more \n      information about Recycle Bin, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-recycle-bin.html\">\n        Recycle Bin</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
                 "smithy.api#title": "Amazon Recycle Bin"
             },
             "version": "2021-06-15",
@@ -94,7 +94,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a Recycle Bin retention rule. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/recycle-bin-working-with-rules.html#recycle-bin-create-rule\">\n      Create Recycle Bin retention rules</a> in the <i>Amazon EC2 User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Creates a Recycle Bin retention rule. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/recycle-bin-working-with-rules.html#recycle-bin-create-rule\">\n      Create Recycle Bin retention rules</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/rules",
@@ -115,7 +115,7 @@
                 "Description": {
                     "target": "com.amazonaws.rbin#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p>A brief description for the retention rule.</p>"
+                        "smithy.api#documentation": "<p>The retention rule description.</p>"
                     }
                 },
                 "Tags": {
@@ -127,14 +127,14 @@
                 "ResourceType": {
                     "target": "com.amazonaws.rbin#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource type to be retained by the retention rule. Currently, only Amazon EBS snapshots are \n      supported.</p>",
+                        "smithy.api#documentation": "<p>The resource type to be retained by the retention rule. Currently, only Amazon EBS snapshots \n      and EBS-backed AMIs are supported. To retain snapshots, specify <code>EBS_SNAPSHOT</code>. To \n      retain EBS-backed AMIs, specify <code>EC2_IMAGE</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ResourceTags": {
                     "target": "com.amazonaws.rbin#ResourceTags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the resource tags to use to identify resources that are to be retained \n      by the retention rule. The retention rule retains only deleted snapshots that have one or more \n      of the specified tag key and value pairs. If a snapshot is deleted, but it does not have \n      any of the specified tag key and value pairs, it is immediately deleted without being retained \n      by the retention rule.</p>\n         <p>You can add the same tag key and value pair to a maximum or five retention rules.</p>"
+                        "smithy.api#documentation": "<p>Specifies the resource tags to use to identify resources that are to be retained by a \n  tag-level retention rule. For tag-level retention rules, only deleted resources, of the specified resource type, that \n  have one or more of the specified tag key and value pairs are retained. If a resource is deleted, but it does not have \n  any of the specified tag key and value pairs, it is immediately deleted without being retained by the retention rule.</p>\n         <p>You can add the same tag key and value pair to a maximum or five retention rules.</p>\n         <p>To create a Region-level retention rule, omit this parameter. A Region-level retention rule \n      does not have any resource tags specified. It retains all deleted resources of the specified \n      resource type in the Region in which the rule is created, even if the resources are not tagged.</p>"
                     }
                 }
             }
@@ -145,7 +145,7 @@
                 "Identifier": {
                     "target": "com.amazonaws.rbin#RuleIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the retention rule.</p>"
+                        "smithy.api#documentation": "<p>The unique ID of the retention rule.</p>"
                     }
                 },
                 "RetentionPeriod": {
@@ -160,7 +160,7 @@
                 "Tags": {
                     "target": "com.amazonaws.rbin#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags assigned to the retention rule.</p>"
+                        "smithy.api#documentation": "<p>Information about the tags assigned to the retention rule.</p>"
                     }
                 },
                 "ResourceType": {
@@ -178,7 +178,7 @@
                 "Status": {
                     "target": "com.amazonaws.rbin#RuleStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The state of the retention rule. Only retention rules that are in the <code>available</code> state retain snapshots.</p>"
+                        "smithy.api#documentation": "<p>The state of the retention rule. Only retention rules that are in the <code>available</code> \n      state retain resources.</p>"
                     }
                 }
             }
@@ -203,7 +203,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a Recycle Bin retention rule. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/recycle-bin-working-with-rules.html#recycle-bin-delete-rule\">\n      Delete Recycle Bin retention rules</a> in the <i>Amazon EC2 User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Deletes a Recycle Bin retention rule. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/recycle-bin-working-with-rules.html#recycle-bin-delete-rule\">\n      Delete Recycle Bin retention rules</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/rules/{Identifier}",
@@ -217,7 +217,7 @@
                 "Identifier": {
                     "target": "com.amazonaws.rbin#RuleIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique ID of the retention rule to delete.</p>",
+                        "smithy.api#documentation": "<p>The unique ID of the retention rule.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -290,31 +290,31 @@
                 "Description": {
                     "target": "com.amazonaws.rbin#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p>The description assigned to the retention rule.</p>"
+                        "smithy.api#documentation": "<p>The retention rule description.</p>"
                     }
                 },
                 "ResourceType": {
                     "target": "com.amazonaws.rbin#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource type retained by the retention rule. Currently, only Amazon EBS snapshots are supported.</p>"
+                        "smithy.api#documentation": "<p>The resource type retained by the retention rule.</p>"
                     }
                 },
                 "RetentionPeriod": {
                     "target": "com.amazonaws.rbin#RetentionPeriod",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the period for which the retention rule retains resources.</p>"
+                        "smithy.api#documentation": "<p>Information about the retention period for which the retention rule is to retain resources.</p>"
                     }
                 },
                 "ResourceTags": {
                     "target": "com.amazonaws.rbin#ResourceTags",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource tags used to identify resources that are to be retained by the retention rule.</p>"
+                        "smithy.api#documentation": "<p>Information about the resource tags used to identify resources that are retained by the retention \n      rule.</p>"
                     }
                 },
                 "Status": {
                     "target": "com.amazonaws.rbin#RuleStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The state of the retention rule. Only retention rules that are in the <code>available</code> state retain snapshots.</p>"
+                        "smithy.api#documentation": "<p>The state of the retention rule. Only retention rules that are in the <code>available</code> \n      state retain resources.</p>"
                     }
                 }
             }
@@ -368,26 +368,26 @@
                 "MaxResults": {
                     "target": "com.amazonaws.rbin#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the returned <code>nextToken</code> value. This value can be between 5 and 500. If <code>maxResults</code> is given a larger value than 500, you receive an error.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call.\n\tTo retrieve the remaining results, make another call with the returned <code>NextToken</code> value.</p>"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.rbin#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results.</p>"
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
                     }
                 },
                 "ResourceType": {
                     "target": "com.amazonaws.rbin#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource type retained by the retention rule. Only retention rules that retain the specified resource type \n      are listed.</p>",
+                        "smithy.api#documentation": "<p>The resource type retained by the retention rule. Only retention rules that retain \n      the specified resource type are listed. Currently, only Amazon EBS snapshots and EBS-backed \n      AMIs are supported. To list retention rules that retain snapshots, specify \n      <code>EBS_SNAPSHOT</code>. To list retention rules that retain EBS-backed AMIs, specify \n      <code>EC2_IMAGE</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ResourceTags": {
                     "target": "com.amazonaws.rbin#ResourceTags",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags used to identify resources that are to be retained by the retention rule.</p>"
+                        "smithy.api#documentation": "<p>Information about the resource tags used to identify resources that are retained by the retention \n      rule.</p>"
                     }
                 }
             }
@@ -429,7 +429,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the tags assigned a specific resource.</p>",
+                "smithy.api#documentation": "<p>Lists the tags assigned to a retention rule.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/tags/{ResourceArn}",
@@ -443,7 +443,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.rbin#RuleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource for which to list the tags.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the retention rule.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -456,7 +456,7 @@
                 "Tags": {
                     "target": "com.amazonaws.rbin#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the tags assigned to the resource.</p>"
+                        "smithy.api#documentation": "<p>Information about the tags assigned to the retention rule.</p>"
                     }
                 }
             }
@@ -525,7 +525,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about a resource tag used to identify resources that are to be retained by a Recycle Bin retention rule.</p>"
+                "smithy.api#documentation": "<p>Information about the resource tags used to identify resources that are retained by the retention \n      rule.</p>"
             }
         },
         "com.amazonaws.rbin#ResourceTagKey": {
@@ -559,6 +559,10 @@
                     {
                         "value": "EBS_SNAPSHOT",
                         "name": "EBS_SNAPSHOT"
+                    },
+                    {
+                        "value": "EC2_IMAGE",
+                        "name": "EC2_IMAGE"
                     }
                 ]
             }
@@ -582,7 +586,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about the retention period for which a retention rule is to retain resources.</p>"
+                "smithy.api#documentation": "<p>Information about the retention period for which the retention rule is to retain resources.</p>"
             }
         },
         "com.amazonaws.rbin#RetentionPeriodUnit": {
@@ -649,13 +653,13 @@
                 "Description": {
                     "target": "com.amazonaws.rbin#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p>The description for the retention rule.</p>"
+                        "smithy.api#documentation": "<p>The retention rule description.</p>"
                     }
                 },
                 "RetentionPeriod": {
                     "target": "com.amazonaws.rbin#RetentionPeriod",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the retention period for which the retention rule retains resources</p>"
+                        "smithy.api#documentation": "<p>Information about the retention period for which the retention rule is to retain resources.</p>"
                     }
                 }
             },
@@ -718,7 +722,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about the tags assigned to a Recycle Bin retention rule.</p>"
+                "smithy.api#documentation": "<p>Information about the tags to assign to the retention rule.</p>"
             }
         },
         "com.amazonaws.rbin#TagKey": {
@@ -778,7 +782,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Assigns tags to the specified resource.</p>",
+                "smithy.api#documentation": "<p>Assigns tags to the specified retention rule.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/tags/{ResourceArn}",
@@ -792,7 +796,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.rbin#RuleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to which to assign the tags.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the retention rule.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -800,7 +804,7 @@
                 "Tags": {
                     "target": "com.amazonaws.rbin#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the tags to assign to the resource.</p>",
+                        "smithy.api#documentation": "<p>Information about the tags to assign to the retention rule.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -840,7 +844,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Unassigns a tag from a resource.</p>",
+                "smithy.api#documentation": "<p>Unassigns a tag from a retention rule.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/tags/{ResourceArn}",
@@ -854,7 +858,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.rbin#RuleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource from which to unassign the tags.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the retention rule.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -862,7 +866,7 @@
                 "TagKeys": {
                     "target": "com.amazonaws.rbin#TagKeyList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the tags to unassign from the resource.</p>",
+                        "smithy.api#documentation": "<p>The tag keys of the tags to unassign. All tags that have the specified tag key are unassigned.</p>",
                         "smithy.api#httpQuery": "tagKeys",
                         "smithy.api#required": {}
                     }
@@ -893,7 +897,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an existing Recycle Bin retention rule. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/recycle-bin-working-with-rules.html#recycle-bin-update-rule\">\n      Update Recycle Bin retention rules</a> in the <i>Amazon EC2 User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Updates an existing Recycle Bin retention rule. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/recycle-bin-working-with-rules.html#recycle-bin-update-rule\">\n      Update Recycle Bin retention rules</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/rules/{Identifier}",
@@ -907,7 +911,7 @@
                 "Identifier": {
                     "target": "com.amazonaws.rbin#RuleIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique ID of the retention rule to update.</p>",
+                        "smithy.api#documentation": "<p>The unique ID of the retention rule.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -927,13 +931,13 @@
                 "ResourceType": {
                     "target": "com.amazonaws.rbin#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource type to be retained by the retention rule. Currently, only Amazon EBS snapshots are supported.</p>"
+                        "smithy.api#documentation": "<p>The resource type to be retained by the retention rule. Currently, only Amazon EBS snapshots \n      and EBS-backed AMIs are supported. To retain snapshots, specify <code>EBS_SNAPSHOT</code>. To \n      retain EBS-backed AMIs, specify <code>EC2_IMAGE</code>.</p>"
                     }
                 },
                 "ResourceTags": {
                     "target": "com.amazonaws.rbin#ResourceTags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the resource tags to use to identify resources that are to be retained \n      by the retention rule. The retention rule retains only deleted snapshots that have one or more \n      of the specified tag key and value pairs. If a snapshot is deleted, but it does not have \n      any of the specified tag key and value pairs, it is immediately deleted without being retained \n      by the retention rule. </p>\n         <p>You can add the same tag key and value pair to a maximum or five retention rules.</p>"
+                        "smithy.api#documentation": "<p>Specifies the resource tags to use to identify resources that are to be retained by a \n  tag-level retention rule. For tag-level retention rules, only deleted resources, of the specified resource type, that \n  have one or more of the specified tag key and value pairs are retained. If a resource is deleted, but it does not have \n  any of the specified tag key and value pairs, it is immediately deleted without being retained by the retention rule.</p>\n         <p>You can add the same tag key and value pair to a maximum or five retention rules.</p>\n         <p>To create a Region-level retention rule, omit this parameter. A Region-level retention rule \n      does not have any resource tags specified. It retains all deleted resources of the specified \n      resource type in the Region in which the rule is created, even if the resources are not tagged.</p>"
                     }
                 }
             }
@@ -971,7 +975,7 @@
                 "Status": {
                     "target": "com.amazonaws.rbin#RuleStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The state of the retention rule. Only retention rules that are in the <code>available</code> state retain snapshots.</p>"
+                        "smithy.api#documentation": "<p>The state of the retention rule. Only retention rules that are in the <code>available</code> \n      state retain resources.</p>"
                     }
                 }
             }

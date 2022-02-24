@@ -37,7 +37,8 @@ func (c *Client) CreateSchema(ctx context.Context, params *CreateSchemaInput, op
 
 type CreateSchemaInput struct {
 
-	// The data format of the schema definition. Currently AVRO and JSON are supported.
+	// The data format of the schema definition. Currently AVRO, JSON and PROTOBUF are
+	// supported.
 	//
 	// This member is required.
 	DataFormat types.DataFormat
@@ -119,7 +120,8 @@ type CreateSchemaOutput struct {
 	// The schema compatibility mode.
 	Compatibility types.Compatibility
 
-	// The data format of the schema definition. Currently AVRO and JSON are supported.
+	// The data format of the schema definition. Currently AVRO, JSON and PROTOBUF are
+	// supported.
 	DataFormat types.DataFormat
 
 	// A description of the schema if specified when created.

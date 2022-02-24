@@ -19,8 +19,8 @@ import (
 )
 
 // Returns the description for the specified stack; if no stack name was specified,
-// then it returns the description for all the stacks created. If the stack does
-// not exist, an ValidationError is returned.
+// then it returns the description for all the stacks created. If the stack doesn't
+// exist, an ValidationError is returned.
 func (c *Client) DescribeStacks(ctx context.Context, params *DescribeStacksInput, optFns ...func(*Options)) (*DescribeStacksOutput, error) {
 	if params == nil {
 		params = &DescribeStacksInput{}
@@ -42,7 +42,7 @@ type DescribeStacksInput struct {
 	// A string that identifies the next page of stacks that you want to retrieve.
 	NextToken *string
 
-	// The name or the unique stack ID that is associated with the stack, which are not
+	// The name or the unique stack ID that's associated with the stack, which aren't
 	// always interchangeable:
 	//
 	// * Running stacks: You can specify either the stack's

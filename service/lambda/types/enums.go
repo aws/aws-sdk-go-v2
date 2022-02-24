@@ -260,6 +260,7 @@ const (
 	RuntimeDotnetcore20 Runtime = "dotnetcore2.0"
 	RuntimeDotnetcore21 Runtime = "dotnetcore2.1"
 	RuntimeDotnetcore31 Runtime = "dotnetcore3.1"
+	RuntimeDotnet6      Runtime = "dotnet6"
 	RuntimeNodejs43edge Runtime = "nodejs4.3-edge"
 	RuntimeGo1x         Runtime = "go1.x"
 	RuntimeRuby25       Runtime = "ruby2.5"
@@ -292,6 +293,7 @@ func (Runtime) Values() []Runtime {
 		"dotnetcore2.0",
 		"dotnetcore2.1",
 		"dotnetcore3.1",
+		"dotnet6",
 		"nodejs4.3-edge",
 		"go1.x",
 		"ruby2.5",

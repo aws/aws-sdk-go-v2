@@ -59,7 +59,7 @@ type GetSchemaByDefinitionOutput struct {
 	// The date and time the schema was created.
 	CreatedTime *string
 
-	// The data format of the schema definition. Currently only AVRO and JSON are
+	// The data format of the schema definition. Currently AVRO, JSON and PROTOBUF are
 	// supported.
 	DataFormat types.DataFormat
 

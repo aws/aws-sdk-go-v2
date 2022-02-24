@@ -308,6 +308,69 @@ type AWSDomainInformation struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies change details of the domain configuration change.
+type ChangeProgressDetails struct {
+
+	// The unique change identifier associated with a specific domain configuration
+	// change.
+	ChangeId *string
+
+	// Contains an optional message associated with the domain configuration change.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// A progress stage details of a specific domain configuration change.
+type ChangeProgressStage struct {
+
+	// The description of the progress stage.
+	Description *string
+
+	// The last updated timestamp of the progress stage.
+	LastUpdated *time.Time
+
+	// The name of the specific progress stage.
+	Name *string
+
+	// The overall status of a specific progress stage.
+	Status *string
+
+	noSmithyDocumentSerde
+}
+
+// The progress details of a specific domain configuration change.
+type ChangeProgressStatusDetails struct {
+
+	// The unique change identifier associated with a specific domain configuration
+	// change.
+	ChangeId *string
+
+	// The specific stages that the domain is going through to perform the
+	// configuration change.
+	ChangeProgressStages []ChangeProgressStage
+
+	// The list of properties involved in the domain configuration change that are
+	// completed.
+	CompletedProperties []string
+
+	// The list of properties involved in the domain configuration change that are
+	// still in pending.
+	PendingProperties []string
+
+	// The time at which the configuration change is made on the domain.
+	StartTime *time.Time
+
+	// The overall status of the domain configuration change. This field can take the
+	// following values: PENDING, PROCESSING, COMPLETED and FAILED
+	Status OverallChangeStatus
+
+	// The total number of stages required for the configuration change.
+	TotalNumberOfStages int32
+
+	noSmithyDocumentSerde
+}
+
 // The configuration for the domain cluster, such as the type and number of
 // instances.
 type ClusterConfig struct {
@@ -461,6 +524,9 @@ type DomainConfig struct {
 
 	// Specifies AutoTuneOptions for the domain.
 	AutoTuneOptions *AutoTuneOptionsStatus
+
+	// Specifies change details of the domain configuration change.
+	ChangeProgressDetails *ChangeProgressDetails
 
 	// The ClusterConfig for the domain.
 	ClusterConfig *ClusterConfigStatus
@@ -636,6 +702,9 @@ type DomainStatus struct {
 
 	// The current status of the domain's Auto-Tune options.
 	AutoTuneOptions *AutoTuneOptionsOutput
+
+	// Specifies change details of the domain configuration change.
+	ChangeProgressDetails *ChangeProgressDetails
 
 	// The CognitoOptions for the specified domain. For more information, see
 	// Configuring Amazon Cognito authentication for OpenSearch Dashboards

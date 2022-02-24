@@ -43,8 +43,8 @@ func (c *Client) DescribeScalingPolicies(ctx context.Context, params *DescribeSc
 // Represents the input for a request operation.
 type DescribeScalingPoliciesInput struct {
 
-	// A unique identifier for the fleet to retrieve scaling policies for. You can use
-	// either the fleet ID or ARN value.
+	// A unique identifier for the fleet for which to retrieve scaling policies. You
+	// can use either the fleet ID or ARN value.
 	//
 	// This member is required.
 	FleetId *string
@@ -53,7 +53,8 @@ type DescribeScalingPoliciesInput struct {
 	// get results as a set of sequential pages.
 	Limit *int32
 
-	// CONTENT TODO
+	// The fleet location. If you don't specify this value, the response contains the
+	// scaling policies of every location in the fleet.
 	Location *string
 
 	// A token that indicates the start of the next sequential page of results. Use the

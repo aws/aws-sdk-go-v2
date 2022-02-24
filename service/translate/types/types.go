@@ -438,6 +438,7 @@ type TextTranslationJobProperties struct {
 
 // Settings that configure the translation output.
 type TranslationSettings struct {
+	Formality Formality
 
 	// Enable the profanity setting if you want Amazon Translate to mask profane words
 	// and phrases in your translation output. To mask profane words and phrases,

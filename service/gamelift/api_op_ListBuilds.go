@@ -12,11 +12,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves build resources for all builds associated with the AWS account in use.
-// You can limit results to builds that are in a specific status by using the
-// Status parameter. Use the pagination parameters to retrieve results in a set of
-// sequential pages. Build resources are not listed in any particular order. Learn
-// more  Upload a Custom Server Build
+// Retrieves build resources for all builds associated with the Amazon Web Services
+// account in use. You can limit results to builds that are in a specific status by
+// using the Status parameter. Use the pagination parameters to retrieve results in
+// a set of sequential pages. Build resources are not listed in any particular
+// order. Learn more  Upload a Custom Server Build
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-intro.html)
 // Related actions CreateBuild | ListBuilds | DescribeBuild | UpdateBuild |
 // DeleteBuild | All APIs by task

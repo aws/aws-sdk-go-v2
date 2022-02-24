@@ -17,8 +17,8 @@ import (
 // (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-protect-stacks.html)
 // in the CloudFormation User Guide. For nested stacks
 // (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html),
-// termination protection is set on the root stack and cannot be changed directly
-// on the nested stack.
+// termination protection is set on the root stack and can't be changed directly on
+// the nested stack.
 func (c *Client) UpdateTerminationProtection(ctx context.Context, params *UpdateTerminationProtectionInput, optFns ...func(*Options)) (*UpdateTerminationProtectionOutput, error) {
 	if params == nil {
 		params = &UpdateTerminationProtectionInput{}

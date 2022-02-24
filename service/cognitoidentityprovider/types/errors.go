@@ -48,7 +48,7 @@ func (e *CodeDeliveryFailureException) ErrorMessage() string {
 func (e *CodeDeliveryFailureException) ErrorCode() string             { return "CodeDeliveryFailureException" }
 func (e *CodeDeliveryFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This exception is thrown if the provided code does not match what the server was
+// This exception is thrown if the provided code doesn't match what the server was
 // expecting.
 type CodeMismatchException struct {
 	Message *string
@@ -190,7 +190,7 @@ func (e *InternalErrorException) ErrorMessage() string {
 func (e *InternalErrorException) ErrorCode() string             { return "InternalErrorException" }
 func (e *InternalErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// This exception is thrown when Amazon Cognito is not allowed to use your email
+// This exception is thrown when Amazon Cognito isn't allowed to use your email
 // identity. HTTP status code: 400.
 type InvalidEmailRoleAccessPolicyException struct {
 	Message *string
@@ -214,8 +214,8 @@ func (e *InvalidEmailRoleAccessPolicyException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// This exception is thrown when the Amazon Cognito service encounters an invalid
-// Lambda response.
+// This exception is thrown when Amazon Cognito encounters an invalid Lambda
+// response.
 type InvalidLambdaResponseException struct {
 	Message *string
 
@@ -234,7 +234,7 @@ func (e *InvalidLambdaResponseException) ErrorMessage() string {
 func (e *InvalidLambdaResponseException) ErrorCode() string             { return "InvalidLambdaResponseException" }
 func (e *InvalidLambdaResponseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This exception is thrown when the specified OAuth flow is invalid.
+// This exception is thrown when the specified OAuth flow is not valid.
 type InvalidOAuthFlowException struct {
 	Message *string
 
@@ -273,8 +273,7 @@ func (e *InvalidParameterException) ErrorMessage() string {
 func (e *InvalidParameterException) ErrorCode() string             { return "InvalidParameterException" }
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This exception is thrown when the Amazon Cognito service encounters an invalid
-// password.
+// This exception is thrown when Amazon Cognito encounters an invalid password.
 type InvalidPasswordException struct {
 	Message *string
 
@@ -293,7 +292,7 @@ func (e *InvalidPasswordException) ErrorMessage() string {
 func (e *InvalidPasswordException) ErrorCode() string             { return "InvalidPasswordException" }
 func (e *InvalidPasswordException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This exception is returned when the role provided for SMS configuration does not
+// This exception is returned when the role provided for SMS configuration doesn't
 // have permission to publish using Amazon SNS.
 type InvalidSmsRoleAccessPolicyException struct {
 	Message *string
@@ -317,8 +316,8 @@ func (e *InvalidSmsRoleAccessPolicyException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// This exception is thrown when the trust relationship is invalid for the role
-// provided for SMS configuration. This can happen if you do not trust
+// This exception is thrown when the trust relationship is not valid for the role
+// provided for SMS configuration. This can happen if you don't trust
 // cognito-idp.amazonaws.com or the external ID provided in the role does not match
 // what is provided in the SMS configuration for the user pool.
 type InvalidSmsRoleTrustRelationshipException struct {
@@ -343,7 +342,7 @@ func (e *InvalidSmsRoleTrustRelationshipException) ErrorFault() smithy.ErrorFaul
 	return smithy.FaultClient
 }
 
-// This exception is thrown when the user pool configuration is invalid.
+// This exception is thrown when the user pool configuration is not valid.
 type InvalidUserPoolConfigurationException struct {
 	Message *string
 
@@ -386,7 +385,7 @@ func (e *LimitExceededException) ErrorMessage() string {
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This exception is thrown when Amazon Cognito cannot find a multi-factor
+// This exception is thrown when Amazon Cognito can't find a multi-factor
 // authentication (MFA) method.
 type MFAMethodNotFoundException struct {
 	Message *string
@@ -406,7 +405,7 @@ func (e *MFAMethodNotFoundException) ErrorMessage() string {
 func (e *MFAMethodNotFoundException) ErrorCode() string             { return "MFAMethodNotFoundException" }
 func (e *MFAMethodNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This exception is thrown when a user is not authorized.
+// This exception is thrown when a user isn't authorized.
 type NotAuthorizedException struct {
 	Message *string
 
@@ -463,7 +462,7 @@ func (e *PreconditionNotMetException) ErrorMessage() string {
 func (e *PreconditionNotMetException) ErrorCode() string             { return "PreconditionNotMetException" }
 func (e *PreconditionNotMetException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This exception is thrown when the Amazon Cognito service cannot find the
+// This exception is thrown when the Amazon Cognito service can't find the
 // requested resource.
 type ResourceNotFoundException struct {
 	Message *string
@@ -483,7 +482,7 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This exception is thrown when the specified scope does not exist.
+// This exception is thrown when the specified scope doesn't exist.
 type ScopeDoesNotExistException struct {
 	Message *string
 
@@ -502,8 +501,8 @@ func (e *ScopeDoesNotExistException) ErrorMessage() string {
 func (e *ScopeDoesNotExistException) ErrorCode() string             { return "ScopeDoesNotExistException" }
 func (e *ScopeDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This exception is thrown when the software token TOTP multi-factor
-// authentication (MFA) is not enabled for the user pool.
+// This exception is thrown when the software token time-based one-time password
+// (TOTP) multi-factor authentication (MFA) isn't activated for the user pool.
 type SoftwareTokenMFANotFoundException struct {
 	Message *string
 
@@ -525,7 +524,7 @@ func (e *SoftwareTokenMFANotFoundException) ErrorCode() string {
 func (e *SoftwareTokenMFANotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This exception is thrown when the user has made too many failed attempts for a
-// given action (e.g., sign in).
+// given action, such as sign-in.
 type TooManyFailedAttemptsException struct {
 	Message *string
 
@@ -564,7 +563,7 @@ func (e *TooManyRequestsException) ErrorMessage() string {
 func (e *TooManyRequestsException) ErrorCode() string             { return "TooManyRequestsException" }
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This exception is thrown when the request is not authorized. This can happen due
+// Exception that is thrown when the request isn't authorized. This can happen due
 // to an invalid access token in the request.
 type UnauthorizedException struct {
 	Message *string
@@ -584,8 +583,8 @@ func (e *UnauthorizedException) ErrorMessage() string {
 func (e *UnauthorizedException) ErrorCode() string             { return "UnauthorizedException" }
 func (e *UnauthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This exception is thrown when the Amazon Cognito service encounters an
-// unexpected exception with the Lambda service.
+// This exception is thrown when Amazon Cognito encounters an unexpected exception
+// with Lambda.
 type UnexpectedLambdaException struct {
 	Message *string
 
@@ -604,7 +603,7 @@ func (e *UnexpectedLambdaException) ErrorMessage() string {
 func (e *UnexpectedLambdaException) ErrorCode() string             { return "UnexpectedLambdaException" }
 func (e *UnexpectedLambdaException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This exception is thrown when the specified identifier is not supported.
+// This exception is thrown when the specified identifier isn't supported.
 type UnsupportedIdentityProviderException struct {
 	Message *string
 
@@ -627,7 +626,7 @@ func (e *UnsupportedIdentityProviderException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// This exception is thrown when you attempt to perform an operation that is not
+// Exception that is thrown when you attempt to perform an operation that isn't
 // enabled for the user pool client.
 type UnsupportedOperationException struct {
 	Message *string
@@ -647,7 +646,7 @@ func (e *UnsupportedOperationException) ErrorMessage() string {
 func (e *UnsupportedOperationException) ErrorCode() string             { return "UnsupportedOperationException" }
 func (e *UnsupportedOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This exception is thrown when an unsupported token is passed to an operation.
+// Exception that is thrown when an unsupported token is passed to an operation.
 type UnsupportedTokenTypeException struct {
 	Message *string
 
@@ -685,7 +684,7 @@ func (e *UnsupportedUserStateException) ErrorMessage() string {
 func (e *UnsupportedUserStateException) ErrorCode() string             { return "UnsupportedUserStateException" }
 func (e *UnsupportedUserStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This exception is thrown when you are trying to modify a user pool while a user
+// This exception is thrown when you're trying to modify a user pool while a user
 // import job is in progress for that pool.
 type UserImportInProgressException struct {
 	Message *string
@@ -745,7 +744,7 @@ func (e *UsernameExistsException) ErrorMessage() string {
 func (e *UsernameExistsException) ErrorCode() string             { return "UsernameExistsException" }
 func (e *UsernameExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This exception is thrown when a user is not confirmed successfully.
+// This exception is thrown when a user isn't confirmed successfully.
 type UserNotConfirmedException struct {
 	Message *string
 
@@ -764,7 +763,7 @@ func (e *UserNotConfirmedException) ErrorMessage() string {
 func (e *UserNotConfirmedException) ErrorCode() string             { return "UserNotConfirmedException" }
 func (e *UserNotConfirmedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This exception is thrown when a user is not found.
+// This exception is thrown when a user isn't found.
 type UserNotFoundException struct {
 	Message *string
 
@@ -783,7 +782,7 @@ func (e *UserNotFoundException) ErrorMessage() string {
 func (e *UserNotFoundException) ErrorCode() string             { return "UserNotFoundException" }
 func (e *UserNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This exception is thrown when user pool add-ons are not enabled.
+// This exception is thrown when user pool add-ons aren't enabled.
 type UserPoolAddOnNotEnabledException struct {
 	Message *string
 
@@ -804,7 +803,7 @@ func (e *UserPoolAddOnNotEnabledException) ErrorCode() string {
 }
 func (e *UserPoolAddOnNotEnabledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This exception is thrown when a user pool tag cannot be set or updated.
+// This exception is thrown when a user pool tag can't be set or updated.
 type UserPoolTaggingException struct {
 	Message *string
 

@@ -52,7 +52,7 @@ type DescribeFleetLocationCapacityInput struct {
 	FleetId *string
 
 	// The fleet location to retrieve capacity information for. Specify a location in
-	// the form of an AWS Region code, such as us-west-2.
+	// the form of an Amazon Web Services Region code, such as us-west-2.
 	//
 	// This member is required.
 	Location *string

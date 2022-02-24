@@ -128,7 +128,7 @@ type RestoreDBInstanceToPointInTimeInput struct {
 	DBParameterGroupName *string
 
 	// The DB subnet group name to use for the new instance. Constraints: If supplied,
-	// must match the name of an existing DBSubnetGroup. Example: mySubnetgroup
+	// must match the name of an existing DBSubnetGroup. Example: mydbsubnetgroup
 	DBSubnetGroupName *string
 
 	// A value that indicates whether the DB instance has deletion protection enabled.

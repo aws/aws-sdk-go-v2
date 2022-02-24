@@ -6,8 +6,8 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
-// Information about a resource tag used to identify resources that are to be
-// retained by a Recycle Bin retention rule.
+// Information about the resource tags used to identify resources that are retained
+// by the retention rule.
 type ResourceTag struct {
 
 	// The tag key.
@@ -21,7 +21,7 @@ type ResourceTag struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the retention period for which a retention rule is to retain
+// Information about the retention period for which the retention rule is to retain
 // resources.
 type RetentionPeriod struct {
 
@@ -43,20 +43,20 @@ type RetentionPeriod struct {
 // Information about a Recycle Bin retention rule.
 type RuleSummary struct {
 
-	// The description for the retention rule.
+	// The retention rule description.
 	Description *string
 
 	// The unique ID of the retention rule.
 	Identifier *string
 
-	// Information about the retention period for which the retention rule retains
-	// resources
+	// Information about the retention period for which the retention rule is to retain
+	// resources.
 	RetentionPeriod *RetentionPeriod
 
 	noSmithyDocumentSerde
 }
 
-// Information about the tags assigned to a Recycle Bin retention rule.
+// Information about the tags to assign to the retention rule.
 type Tag struct {
 
 	// The tag key.

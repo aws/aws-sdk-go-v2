@@ -2384,7 +2384,7 @@
                 "DataFormat": {
                     "target": "com.amazonaws.glue#DataFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data format of the schema definition. Currently <code>AVRO</code> and <code>JSON</code> are supported.</p>",
+                        "smithy.api#documentation": "<p>The data format of the schema definition. Currently <code>AVRO</code>, <code>JSON</code> and <code>PROTOBUF</code> are supported.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5084,6 +5084,9 @@
                     "target": "com.amazonaws.glue#AlreadyExistsException"
                 },
                 {
+                    "target": "com.amazonaws.glue#ConcurrentModificationException"
+                },
+                {
                     "target": "com.amazonaws.glue#InternalServiceException"
                 },
                 {
@@ -5166,6 +5169,9 @@
                     "target": "com.amazonaws.glue#AlreadyExistsException"
                 },
                 {
+                    "target": "com.amazonaws.glue#ConcurrentModificationException"
+                },
+                {
                     "target": "com.amazonaws.glue#EntityNotFoundException"
                 },
                 {
@@ -5201,7 +5207,7 @@
                 "DataFormat": {
                     "target": "com.amazonaws.glue#DataFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data format of the schema definition. Currently <code>AVRO</code> and <code>JSON</code> are supported.</p>",
+                        "smithy.api#documentation": "<p>The data format of the schema definition. Currently <code>AVRO</code>, <code>JSON</code> and <code>PROTOBUF</code> are supported.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5267,7 +5273,7 @@
                 "DataFormat": {
                     "target": "com.amazonaws.glue#DataFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data format of the schema definition. Currently <code>AVRO</code> and <code>JSON</code> are supported.</p>"
+                        "smithy.api#documentation": "<p>The data format of the schema definition. Currently <code>AVRO</code>, <code>JSON</code> and <code>PROTOBUF</code> are supported.</p>"
                     }
                 },
                 "Compatibility": {
@@ -5991,6 +5997,10 @@
                     {
                         "value": "JSON",
                         "name": "JSON"
+                    },
+                    {
+                        "value": "PROTOBUF",
+                        "name": "PROTOBUF"
                     }
                 ]
             }
@@ -10815,7 +10825,7 @@
                 "DataFormat": {
                     "target": "com.amazonaws.glue#DataFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data format of the schema definition. Currently only <code>AVRO</code> and <code>JSON</code> are supported.</p>"
+                        "smithy.api#documentation": "<p>The data format of the schema definition. Currently <code>AVRO</code>, <code>JSON</code> and <code>PROTOBUF</code> are supported.</p>"
                     }
                 },
                 "Status": {
@@ -10880,7 +10890,7 @@
                 "DataFormat": {
                     "target": "com.amazonaws.glue#DataFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data format of the schema definition. Currently <code>AVRO</code> and <code>JSON</code> are supported.</p>"
+                        "smithy.api#documentation": "<p>The data format of the schema definition. Currently <code>AVRO</code>, <code>JSON</code> and <code>PROTOBUF</code> are supported.</p>"
                     }
                 },
                 "Compatibility": {
@@ -10994,7 +11004,7 @@
                 "DataFormat": {
                     "target": "com.amazonaws.glue#DataFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data format of the schema definition. Currently <code>AVRO</code> and <code>JSON</code> are supported.</p>"
+                        "smithy.api#documentation": "<p>The data format of the schema definition. Currently <code>AVRO</code>, <code>JSON</code> and <code>PROTOBUF</code> are supported.</p>"
                     }
                 },
                 "SchemaArn": {
@@ -18506,6 +18516,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the Data Catalog in which the table resides.</p>"
                     }
+                },
+                "VersionId": {
+                    "target": "com.amazonaws.glue#VersionString"
                 }
             },
             "traits": {
@@ -20849,6 +20862,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The transaction ID at which to update the table contents. </p>"
                     }
+                },
+                "VersionId": {
+                    "target": "com.amazonaws.glue#VersionString"
                 }
             }
         },

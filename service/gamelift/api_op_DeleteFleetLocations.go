@@ -48,8 +48,8 @@ type DeleteFleetLocationsInput struct {
 	// This member is required.
 	FleetId *string
 
-	// The list of fleet locations to delete. Specify locations in the form of an AWS
-	// Region code, such as us-west-2.
+	// The list of fleet locations to delete. Specify locations in the form of an
+	// Amazon Web Services Region code, such as us-west-2.
 	//
 	// This member is required.
 	Locations []string
