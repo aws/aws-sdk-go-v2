@@ -6,7 +6,7 @@ require (
 	github.com/aws/aws-sdk-go-v2 v1.14.0
 	github.com/aws/aws-sdk-go-v2/config v1.14.0
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.25.0
-	github.com/aws/aws-sdk-go-v2/service/s3control v1.19.0
+	github.com/aws/aws-sdk-go-v2/service/s3control v1.20.0
 )
 
 replace github.com/aws/aws-sdk-go-v2 => ../../../../

@@ -1,3 +1,19 @@
+# Release (2022-02-24.2)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.21.0](service/autoscaling/CHANGELOG.md#v1210-2022-02-242)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/databrew`: [v1.18.0](service/databrew/CHANGELOG.md#v1180-2022-02-242)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/fms`: [v1.15.0](service/fms/CHANGELOG.md#v1150-2022-02-242)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/lightsail`: [v1.17.0](service/lightsail/CHANGELOG.md#v1170-2022-02-242)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/route53`: [v1.19.0](service/route53/CHANGELOG.md#v1190-2022-02-242)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.20.0](service/s3control/CHANGELOG.md#v1200-2022-02-242)
+  * **Feature**: API client updated
+
 # Release (2022-02-24)
 
 ## General Highlights
