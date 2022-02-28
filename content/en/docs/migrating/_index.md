@@ -889,7 +889,7 @@ constructor method [manager.NewUploader]({{< apiref "feature/s3/manager#" >}}) f
 [s3.NewDownloader]({{< apiref v1="service/s3/s3manager#NewDownloader" >}}) and
 [s3.NewDownloaderWithClient]({{< apiref v1="service/s3/s3manager#NewDownloaderWithClient" >}}) have been replaced with a
 single constructor method [manager.NewDownloader]({{< apiref "feature/s3/manager#NewDownloader" >}}) for creating a
-Dwonload manager client.
+Download manager client.
 
 ### {{% alias service=CFlong %}} Signing Utilities
 
