@@ -66,6 +66,11 @@ func (m *validateOutputPayloadChecksum) HandleDeserialize(
 		return out, metadata, err
 	}
 
+	// If there is no validation mode specified nothing is supported.
+	if mode := getContextOutputValidationMode(ctx); mode != "ENABLED" {
+		return out, metadata, err
+	}
+
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
 		return out, metadata, &smithy.DeserializationError{
