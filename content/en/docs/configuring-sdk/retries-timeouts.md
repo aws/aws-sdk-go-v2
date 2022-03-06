@@ -24,7 +24,7 @@ Property | Default
 Max Number of Attempts | 3
 Max Back Off Delay | 20 seconds
 
-When a retryable error occurs while invoking your request, the standard retryer will use it's provided configuration
+When a retryable error occurs while invoking your request, the standard retryer will use its provided configuration
 to delay and subsequently retry the request. Retries add to the overall latency of your request, and you must configure
 retryer if the default configuration does not meet your application requirements.
 
