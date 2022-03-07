@@ -23,6 +23,7 @@ func TestValidateOutputPayloadChecksum(t *testing.T) {
 	cases := map[string]struct {
 		response                 *smithyhttp.Response
 		validateOptions          func(*validateOutputPayloadChecksum)
+		modifyContext            func(context.Context) context.Context
 		expectHaveAlgorithmsUsed bool
 		expectAlgorithmsUsed     []string
 		expectErr                string
@@ -31,6 +32,9 @@ func TestValidateOutputPayloadChecksum(t *testing.T) {
 		expectPayload            []byte
 	}{
 		"success": {
+			modifyContext: func(ctx context.Context) context.Context {
+				return setContextOutputValidationMode(ctx, "ENABLED")
+			},
 			response: &smithyhttp.Response{
 				Response: &http.Response{
 					StatusCode: 200,
@@ -47,6 +51,9 @@ func TestValidateOutputPayloadChecksum(t *testing.T) {
 			expectPayload:            []byte("hello world"),
 		},
 		"failure": {
+			modifyContext: func(ctx context.Context) context.Context {
+				return setContextOutputValidationMode(ctx, "ENABLED")
+			},
 			response: &smithyhttp.Response{
 				Response: &http.Response{
 					StatusCode: 200,
@@ -61,6 +68,9 @@ func TestValidateOutputPayloadChecksum(t *testing.T) {
 			expectReadErr: "checksum did not match",
 		},
 		"read error": {
+			modifyContext: func(ctx context.Context) context.Context {
+				return setContextOutputValidationMode(ctx, "ENABLED")
+			},
 			response: &smithyhttp.Response{
 				Response: &http.Response{
 					StatusCode: 200,
@@ -75,6 +85,9 @@ func TestValidateOutputPayloadChecksum(t *testing.T) {
 			expectReadErr: "some read error",
 		},
 		"unsupported algorithm": {
+			modifyContext: func(ctx context.Context) context.Context {
+				return setContextOutputValidationMode(ctx, "ENABLED")
+			},
 			response: &smithyhttp.Response{
 				Response: &http.Response{
 					StatusCode: 200,
@@ -89,7 +102,39 @@ func TestValidateOutputPayloadChecksum(t *testing.T) {
 			expectLogged:  "no supported checksum",
 			expectPayload: []byte("hello world"),
 		},
+		"no output validation model": {
+			response: &smithyhttp.Response{
+				Response: &http.Response{
+					StatusCode: 200,
+					Header: func() http.Header {
+						h := http.Header{}
+						return h
+					}(),
+					Body: ioutil.NopCloser(strings.NewReader("hello world")),
+				},
+			},
+			expectPayload: []byte("hello world"),
+		},
+		"unknown output validation model": {
+			modifyContext: func(ctx context.Context) context.Context {
+				return setContextOutputValidationMode(ctx, "something else")
+			},
+			response: &smithyhttp.Response{
+				Response: &http.Response{
+					StatusCode: 200,
+					Header: func() http.Header {
+						h := http.Header{}
+						return h
+					}(),
+					Body: ioutil.NopCloser(strings.NewReader("hello world")),
+				},
+			},
+			expectPayload: []byte("hello world"),
+		},
 		"success ignore multipart checksum": {
+			modifyContext: func(ctx context.Context) context.Context {
+				return setContextOutputValidationMode(ctx, "ENABLED")
+			},
 			response: &smithyhttp.Response{
 				Response: &http.Response{
 					StatusCode: 200,
@@ -109,6 +154,9 @@ func TestValidateOutputPayloadChecksum(t *testing.T) {
 			expectPayload:            []byte("hello world"),
 		},
 		"success skip ignore multipart checksum": {
+			modifyContext: func(ctx context.Context) context.Context {
+				return setContextOutputValidationMode(ctx, "ENABLED")
+			},
 			response: &smithyhttp.Response{
 				Response: &http.Response{
 					StatusCode: 200,
@@ -135,6 +183,10 @@ func TestValidateOutputPayloadChecksum(t *testing.T) {
 				func(classification logging.Classification, format string, v ...interface{}) {
 					fmt.Fprintf(&logged, format, v...)
 				}))
+
+			if c.modifyContext != nil {
+				ctx = c.modifyContext(ctx)
+			}
 
 			validateOutput := validateOutputPayloadChecksum{
 				Algorithms: []Algorithm{
@@ -187,10 +239,8 @@ func TestValidateOutputPayloadChecksum(t *testing.T) {
 				return
 			}
 
-			if c.expectLogged != "" {
-				if e, a := c.expectLogged, logged.String(); !strings.Contains(a, e) {
-					t.Errorf("expected %q logged in:\n%s", e, a)
-				}
+			if e, a := c.expectLogged, logged.String(); !strings.Contains(a, e) || !((e == "") == (a == "")) {
+				t.Errorf("expected %q logged in:\n%s", e, a)
 			}
 
 			if diff := cmp.Diff(string(c.expectPayload), string(actualPayload)); diff != "" {
