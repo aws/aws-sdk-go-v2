@@ -1,8 +1,0 @@
-{
-    "id": "edf955b5-73ab-4b06-98bf-39bc04a8946e",
-    "type": "feature",
-    "description": "AWS Elemental MediaConvert SDK has added support for reading timecode from AVCHD sources and now provides the ability to segment WebVTT at the same interval as the video and audio in HLS packages.",
-    "modules": [
-        "service/mediaconvert"
-    ]
-}
