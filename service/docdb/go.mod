@@ -7,7 +7,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/internal/configsources v1.1.5
 	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.3.0
 	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.8.0
-	github.com/aws/smithy-go v1.11.1-0.20220308004241-26b41c98827d
+	github.com/aws/smithy-go v1.11.1
 	github.com/jmespath/go-jmespath v0.4.0
 )
 
