@@ -1,3 +1,85 @@
+# Release (2022-03-08)
+
+## General Highlights
+* **Feature**: Updated `github.com/aws/smithy-go` to latest version
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/amplify`: [v1.11.0](service/amplify/CHANGELOG.md#v1110-2022-03-08)
+  * **Feature**: Updated service client model to latest release.
+* `github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder`: [v1.5.0](service/amplifyuibuilder/CHANGELOG.md#v150-2022-03-08)
+  * **Feature**: Updated service client model to latest release.
+* `github.com/aws/aws-sdk-go-v2/service/appflow`: [v1.14.0](service/appflow/CHANGELOG.md#v1140-2022-03-08)
+  * **Feature**: Updated service client model to latest release.
+* `github.com/aws/aws-sdk-go-v2/service/apprunner`: [v1.11.0](service/apprunner/CHANGELOG.md#v1110-2022-03-08)
+  * **Feature**: Updated service client model to latest release.
+* `github.com/aws/aws-sdk-go-v2/service/athena`: [v1.14.0](service/athena/CHANGELOG.md#v1140-2022-03-08)
+  * **Feature**: Updated service client model to latest release.
+* `github.com/aws/aws-sdk-go-v2/service/braket`: [v1.15.0](service/braket/CHANGELOG.md#v1150-2022-03-08)
+  * **Feature**: Updated service client model to latest release.
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmeetings`: [v1.7.0](service/chimesdkmeetings/CHANGELOG.md#v170-2022-03-08)
+  * **Feature**: Updated service client model to latest release.
+* `github.com/aws/aws-sdk-go-v2/service/cloudtrail`: [v1.15.0](service/cloudtrail/CHANGELOG.md#v1150-2022-03-08)
+  * **Feature**: Updated service client model to latest release.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.19.0](service/connect/CHANGELOG.md#v1190-2022-03-08)
+  * **Feature**: Updated service client model to latest release.
+* `github.com/aws/aws-sdk-go-v2/service/devopsguru`: [v1.16.0](service/devopsguru/CHANGELOG.md#v1160-2022-03-08)
+  * **Feature**: Updated service client model to latest release.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.31.0](service/ec2/CHANGELOG.md#v1310-2022-03-08)
+  * **Feature**: Updated service client model to latest release.
+* `github.com/aws/aws-sdk-go-v2/service/ecr`: [v1.16.0](service/ecr/CHANGELOG.md#v1160-2022-03-08)
+  * **Feature**: Updated service client model to latest release.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.18.0](service/ecs/CHANGELOG.md#v1180-2022-03-08)
+  * **Feature**: Updated service client model to latest release.
+* `github.com/aws/aws-sdk-go-v2/service/elasticache`: [v1.20.0](service/elasticache/CHANGELOG.md#v1200-2022-03-08)
+  * **Documentation**: Updated service client model to latest release.
+* `github.com/aws/aws-sdk-go-v2/service/finspacedata`: [v1.10.0](service/finspacedata/CHANGELOG.md#v1100-2022-03-08)
+  * **Feature**: Updated service client model to latest release.
+* `github.com/aws/aws-sdk-go-v2/service/fis`: [v1.12.0](service/fis/CHANGELOG.md#v1120-2022-03-08)
+  * **Feature**: Updated service client model to latest release.
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.20.0](service/fsx/CHANGELOG.md#v1200-2022-03-08)
+  * **Feature**: Updated service client model to latest release.
+* `github.com/aws/aws-sdk-go-v2/service/gamelift`: [v1.14.0](service/gamelift/CHANGELOG.md#v1140-2022-03-08)
+  * **Documentation**: Updated service client model to latest release.
+* `github.com/aws/aws-sdk-go-v2/service/greengrassv2`: [v1.15.0](service/greengrassv2/CHANGELOG.md#v1150-2022-03-08)
+  * **Documentation**: Updated service client model to latest release.
+* `github.com/aws/aws-sdk-go-v2/service/internal/checksum`: [v1.1.0](service/internal/checksum/CHANGELOG.md#v110-2022-03-08)
+  * **Feature**:  Updates the SDK's checksum validation logic to require opt-in to output response payload validation. The SDK was always preforming output response payload checksum validation, not respecting the output validation model option. Fixes [#1606](https://github.com/aws/aws-sdk-go-v2/issues/1606)
+* `github.com/aws/aws-sdk-go-v2/service/kafkaconnect`: [v1.8.0](service/kafkaconnect/CHANGELOG.md#v180-2022-03-08)
+  * **Feature**: Updated service client model to latest release.
+* `github.com/aws/aws-sdk-go-v2/service/kendra`: [v1.22.0](service/kendra/CHANGELOG.md#v1220-2022-03-08)
+  * **Feature**: Updated service client model to latest release.
+* `github.com/aws/aws-sdk-go-v2/service/keyspaces`: [v1.0.0](service/keyspaces/CHANGELOG.md#v100-2022-03-08)
+  * **Release**: New AWS service client module
+* `github.com/aws/aws-sdk-go-v2/service/macie`: [v1.14.0](service/macie/CHANGELOG.md#v1140-2022-03-08)
+  * **Documentation**: Updated service client model to latest release.
+* `github.com/aws/aws-sdk-go-v2/service/mediapackage`: [v1.15.0](service/mediapackage/CHANGELOG.md#v1150-2022-03-08)
+  * **Feature**: Updated service client model to latest release.
+* `github.com/aws/aws-sdk-go-v2/service/mgn`: [v1.13.0](service/mgn/CHANGELOG.md#v1130-2022-03-08)
+  * **Feature**: Updated service client model to latest release.
+* `github.com/aws/aws-sdk-go-v2/service/migrationhubrefactorspaces`: [v1.5.0](service/migrationhubrefactorspaces/CHANGELOG.md#v150-2022-03-08)
+  * **Documentation**: Updated service client model to latest release.
+* `github.com/aws/aws-sdk-go-v2/service/mq`: [v1.12.0](service/mq/CHANGELOG.md#v1120-2022-03-08)
+  * **Feature**: Updated service client model to latest release.
+* `github.com/aws/aws-sdk-go-v2/service/panorama`: [v1.6.0](service/panorama/CHANGELOG.md#v160-2022-03-08)
+  * **Feature**: Updated service client model to latest release.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.18.0](service/rds/CHANGELOG.md#v1180-2022-03-08)
+  * **Documentation**: Updated service client model to latest release.
+* `github.com/aws/aws-sdk-go-v2/service/route53recoverycluster`: [v1.8.0](service/route53recoverycluster/CHANGELOG.md#v180-2022-03-08)
+  * **Feature**: Updated service client model to latest release.
+* `github.com/aws/aws-sdk-go-v2/service/servicecatalogappregistry`: [v1.12.0](service/servicecatalogappregistry/CHANGELOG.md#v1120-2022-03-08)
+  * **Documentation**: Updated service client model to latest release.
+* `github.com/aws/aws-sdk-go-v2/service/sqs`: [v1.18.0](service/sqs/CHANGELOG.md#v1180-2022-03-08)
+  * **Feature**: Updated service client model to latest release.
+* `github.com/aws/aws-sdk-go-v2/service/sts`: [v1.16.0](service/sts/CHANGELOG.md#v1160-2022-03-08)
+  * **Documentation**: Updated service client model to latest release.
+* `github.com/aws/aws-sdk-go-v2/service/synthetics`: [v1.14.0](service/synthetics/CHANGELOG.md#v1140-2022-03-08)
+  * **Documentation**: Updated service client model to latest release.
+* `github.com/aws/aws-sdk-go-v2/service/timestreamquery`: [v1.13.0](service/timestreamquery/CHANGELOG.md#v1130-2022-03-08)
+  * **Documentation**: Updated service client model to latest release.
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.17.0](service/transfer/CHANGELOG.md#v1170-2022-03-08)
+  * **Feature**: Updated service client model to latest release.
+
 # Release (2022-02-24.2)
 
 ## Module Highlights
