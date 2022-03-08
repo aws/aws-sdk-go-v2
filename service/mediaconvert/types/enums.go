@@ -2984,6 +2984,24 @@ func (EmbeddedTerminateCaptions) Values() []EmbeddedTerminateCaptions {
 	}
 }
 
+type EmbeddedTimecodeOverride string
+
+// Enum values for EmbeddedTimecodeOverride
+const (
+	EmbeddedTimecodeOverrideNone    EmbeddedTimecodeOverride = "NONE"
+	EmbeddedTimecodeOverrideUseMdpm EmbeddedTimecodeOverride = "USE_MDPM"
+)
+
+// Values returns all known values for EmbeddedTimecodeOverride. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EmbeddedTimecodeOverride) Values() []EmbeddedTimecodeOverride {
+	return []EmbeddedTimecodeOverride{
+		"NONE",
+		"USE_MDPM",
+	}
+}
+
 type F4vMoovPlacement string
 
 // Enum values for F4vMoovPlacement
@@ -4177,6 +4195,25 @@ func (HlsCaptionLanguageSetting) Values() []HlsCaptionLanguageSetting {
 		"INSERT",
 		"OMIT",
 		"NONE",
+	}
+}
+
+type HlsCaptionSegmentLengthControl string
+
+// Enum values for HlsCaptionSegmentLengthControl
+const (
+	HlsCaptionSegmentLengthControlLargeSegments HlsCaptionSegmentLengthControl = "LARGE_SEGMENTS"
+	HlsCaptionSegmentLengthControlMatchVideo    HlsCaptionSegmentLengthControl = "MATCH_VIDEO"
+)
+
+// Values returns all known values for HlsCaptionSegmentLengthControl. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (HlsCaptionSegmentLengthControl) Values() []HlsCaptionSegmentLengthControl {
+	return []HlsCaptionSegmentLengthControl{
+		"LARGE_SEGMENTS",
+		"MATCH_VIDEO",
 	}
 }
 
