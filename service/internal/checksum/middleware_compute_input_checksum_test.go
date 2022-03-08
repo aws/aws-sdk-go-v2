@@ -167,6 +167,52 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 					"CRC32": "AAAAAA==",
 				},
 			},
+			"https empty stream unseekable": {
+				initContext: func(ctx context.Context) context.Context {
+					return setContextInputAlgorithm(ctx, string(AlgorithmCRC32))
+				},
+				buildInput: middleware.BuildInput{
+					Request: func() *smithyhttp.Request {
+						r := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+						r.URL, _ = url.Parse("https://example.aws")
+						r.ContentLength = 0
+						r = requestMust(r.SetStream(&bytes.Buffer{}))
+						return r
+					}(),
+				},
+				expectHeader: http.Header{
+					"X-Amz-Checksum-Crc32": []string{"AAAAAA=="},
+				},
+				expectContentLength: 0,
+				expectPayload:       nil,
+				expectPayloadHash:   "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+				expectChecksumMetadata: map[string]string{
+					"CRC32": "AAAAAA==",
+				},
+			},
+			"http empty stream unseekable": {
+				initContext: func(ctx context.Context) context.Context {
+					return setContextInputAlgorithm(ctx, string(AlgorithmCRC32))
+				},
+				buildInput: middleware.BuildInput{
+					Request: func() *smithyhttp.Request {
+						r := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+						r.URL, _ = url.Parse("http://example.aws")
+						r.ContentLength = 0
+						r = requestMust(r.SetStream(&bytes.Buffer{}))
+						return r
+					}(),
+				},
+				expectHeader: http.Header{
+					"X-Amz-Checksum-Crc32": []string{"AAAAAA=="},
+				},
+				expectContentLength: 0,
+				expectPayload:       nil,
+				expectPayloadHash:   "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+				expectChecksumMetadata: map[string]string{
+					"CRC32": "AAAAAA==",
+				},
+			},
 			"https nil stream": {
 				initContext: func(ctx context.Context) context.Context {
 					return setContextInputAlgorithm(ctx, string(AlgorithmCRC32))
@@ -430,7 +476,7 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 						return r
 					}(),
 				},
-				expectErr:      "failed to rewind stream",
+				expectErr:      "unseekable stream is not supported",
 				expectBuildErr: true,
 			},
 			"http unseekable stream": {

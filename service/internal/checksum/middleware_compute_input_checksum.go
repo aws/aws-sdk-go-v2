@@ -461,6 +461,12 @@ func setMD5Checksum(ctx context.Context, req *smithyhttp.Request) (string, error
 	if stream == nil {
 		return "", nil
 	}
+
+	if !req.IsStreamSeekable() {
+		return "", fmt.Errorf(
+			"unseekable stream is not supported for computing md5 checksum")
+	}
+
 	v, err := computeMD5Checksum(stream)
 	if err != nil {
 		return "", err
