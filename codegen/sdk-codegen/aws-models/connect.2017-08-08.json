@@ -7337,6 +7337,10 @@
                     {
                         "value": "AGENT_EVENTS",
                         "name": "AGENT_EVENTS"
+                    },
+                    {
+                        "value": "REAL_TIME_CONTACT_ANALYSIS_SEGMENTS",
+                        "name": "REAL_TIME_CONTACT_ANALYSIS_SEGMENTS"
                     }
                 ]
             }

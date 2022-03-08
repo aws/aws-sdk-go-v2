@@ -1,6 +1,68 @@
 {
     "smithy": "1.0",
     "shapes": {
+        "com.amazonaws.amplifyuibuilder#ActionParameters": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.amplifyuibuilder#ComponentProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of navigation action. Valid values are <code>url</code> and <code>anchor</code>. This value is required for a navigation action.</p>"
+                    }
+                },
+                "url": {
+                    "target": "com.amazonaws.amplifyuibuilder#ComponentProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL to the location to open. Specify this value for a navigation action.</p>"
+                    }
+                },
+                "anchor": {
+                    "target": "com.amazonaws.amplifyuibuilder#ComponentProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTML anchor link to the location to open. Specify this value for a navigation action.</p>"
+                    }
+                },
+                "target": {
+                    "target": "com.amazonaws.amplifyuibuilder#ComponentProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The element within the same component to modify when the action occurs.</p>"
+                    }
+                },
+                "global": {
+                    "target": "com.amazonaws.amplifyuibuilder#ComponentProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the user should be signed out globally. Specify this value for an auth sign out action.</p>"
+                    }
+                },
+                "model": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the data model. Use when the action performs an operation on an Amplify DataStore\n      model.</p>"
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.amplifyuibuilder#ComponentProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the component that the <code>ActionParameters</code> apply to.</p>"
+                    }
+                },
+                "fields": {
+                    "target": "com.amazonaws.amplifyuibuilder#ComponentProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A dictionary of key-value pairs mapping Amplify Studio properties to fields in a data model. Use when the action\n      performs an operation on an Amplify DataStore model.</p>"
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.amplifyuibuilder#MutationActionSetStateParameter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A key-value pair that specifies the state property name and its initial value.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the event action configuration for an element of a <code>Component</code>\n      or <code>ComponentChild</code>. Use for the workflow feature in Amplify Studio\n      that allows you to bind events and actions to components. <code>ActionParameters</code>\n      defines the action that is performed when an event occurs on the component.</p>"
+            }
+        },
         "com.amazonaws.amplifyuibuilder#AmplifyUIBuilder": {
             "type": "service",
             "traits": {
@@ -8,15 +70,14 @@
                     "sdkId": "AmplifyUIBuilder",
                     "arnNamespace": "amplifyuibuilder",
                     "cloudFormationName": "AmplifyUIBuilder",
-                    "cloudTrailEventSource": "amplifyuibuilder.amazonaws.com",
-                    "endpointPrefix": "amplifyuibuilder"
+                    "cloudTrailEventSource": "amplifyuibuilder.amazonaws.com"
                 },
                 "aws.auth#sigv4": {
                     "name": "amplifyuibuilder"
                 },
                 "aws.protocols#restJson1": {},
                 "smithy.api#cors": {},
-                "smithy.api#documentation": "<p>The Amplify UI Builder API provides a programmatic interface for creating and configuring\n      user interface (UI) component libraries and themes for use in your Amplify applications. You\n      can then connect these UI components to an application's backend Amazon Web Services\n      resources.</p>\n         <p>You can also use the Amplify Studio visual designer to create UI components and model data\n      for an app. For more information, see <a href=\"https://docs.amplify.aws/console/adminui/intro\">Introduction</a> in the\n        <i>Amplify Docs</i>.</p>\n         <p>The Amplify Framework is a comprehensive set of SDKs, libraries, tools, and documentation\n      for client app development. For more information, see the <a href=\"https://docs.amplify.aws/\">Amplify Framework</a>. For more information about\n      deploying an Amplify application to Amazon Web Services, see the <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/welcome.html\">Amplify Console User Guide</a>.</p>",
+                "smithy.api#documentation": "<p>The Amplify UI Builder API provides a programmatic interface for creating\n      and configuring user interface (UI) component libraries and themes for use in your Amplify applications. You can then connect these UI components to an application's\n      backend Amazon Web Services resources.</p>\n         <p>You can also use the Amplify Studio visual designer to create UI components\n      and model data for an app. For more information, see <a href=\"https://docs.amplify.aws/console/adminui/intro\">Introduction</a> in the\n        <i>Amplify Docs</i>.</p>\n         <p>The Amplify Framework is a comprehensive set of SDKs, libraries, tools, and\n      documentation for client app development. For more information, see the <a href=\"https://docs.amplify.aws/\">Amplify Framework</a>. For more information about\n      deploying an Amplify application to Amazon Web Services, see the <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/welcome.html\">Amplify User Guide</a>.</p>",
                 "smithy.api#title": "AWS Amplify UI Builder"
             },
             "version": "2021-08-11",
@@ -50,7 +111,7 @@
                 "environmentName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the backend environment that is a part of the Amplify app.</p>",
+                        "smithy.api#documentation": "<p>The name of the backend environment that is a part of the Amplify\n      app.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -77,14 +138,14 @@
                 "componentType": {
                     "target": "com.amazonaws.amplifyuibuilder#ComponentType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the component. This can be an Amplify custom UI component or another custom\n      component.</p>",
+                        "smithy.api#documentation": "<p>The type of the component. This can be an Amplify custom UI component or\n      another custom component.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "properties": {
                     "target": "com.amazonaws.amplifyuibuilder#ComponentProperties",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes the component's properties.</p>",
+                        "smithy.api#documentation": "<p>Describes the component's properties. You can't specify <code>tags</code> as a valid\n      property for <code>properties</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -97,34 +158,34 @@
                 "variants": {
                     "target": "com.amazonaws.amplifyuibuilder#ComponentVariants",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of the component's variants. A variant is a unique style configuration of a\n      main component.</p>",
+                        "smithy.api#documentation": "<p>A list of the component's variants. A variant is a unique style configuration of a main\n      component.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "overrides": {
                     "target": "com.amazonaws.amplifyuibuilder#ComponentOverrides",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes the component's properties that can be overriden in a customized instance of the\n      component.</p>",
+                        "smithy.api#documentation": "<p>Describes the component's properties that can be overriden in a customized instance of the\n      component. You can't specify <code>tags</code> as a valid property for\n      <code>overrides</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "bindingProperties": {
                     "target": "com.amazonaws.amplifyuibuilder#ComponentBindingProperties",
                     "traits": {
-                        "smithy.api#documentation": "<p>The information to connect a component's properties to data at runtime.</p>",
+                        "smithy.api#documentation": "<p>The information to connect a component's properties to data at runtime. You can't specify\n        <code>tags</code> as a valid property for <code>bindingProperties</code>.</p>\n         <p/>",
                         "smithy.api#required": {}
                     }
                 },
                 "collectionProperties": {
                     "target": "com.amazonaws.amplifyuibuilder#ComponentCollectionProperties",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data binding configuration for the component's properties. Use this for a collection component.</p>"
+                        "smithy.api#documentation": "<p>The data binding configuration for the component's properties. Use this for a collection\n      component. You can't specify <code>tags</code> as a valid property for\n        <code>collectionProperties</code>.</p>"
                     }
                 },
                 "createdAt": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "aws.cloudformation#cfnMutability": "read",
+                        "aws.cloudformation#cfnExcludeProperty": {},
                         "smithy.api#documentation": "<p>The time that the component was created.</p>",
                         "smithy.api#required": {},
                         "smithy.api#timestampFormat": "date-time"
@@ -133,7 +194,7 @@
                 "modifiedAt": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "aws.cloudformation#cfnMutability": "read",
+                        "aws.cloudformation#cfnExcludeProperty": {},
                         "smithy.api#documentation": "<p>The time that the component was modified.</p>",
                         "smithy.api#timestampFormat": "date-time"
                     }
@@ -144,10 +205,22 @@
                         "aws.cloudformation#cfnMutability": "create-and-read",
                         "smithy.api#documentation": "<p>One or more key-value pairs to use when tagging the component.</p>"
                     }
+                },
+                "events": {
+                    "target": "com.amazonaws.amplifyuibuilder#ComponentEvents",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the events that can be raised on the component. Use for the workflow feature in Amplify Studio that allows you to\n      bind events and actions to components.</p>"
+                    }
+                },
+                "schemaVersion": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The schema version of the component when it was imported.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the configuration settings for a user interface (UI) element for an Amplify app. A\n      component is configured as a primary, stand-alone UI element. Use <code>ComponentChild</code>\n      to configure an instance of a <code>Component</code>. A <code>ComponentChild</code> instance\n      inherits the configuration of the main <code>Component</code>.</p>",
+                "smithy.api#documentation": "<p>Contains the configuration settings for a user interface (UI) element for an Amplify app. A component is configured as a primary, stand-alone UI element. Use\n        <code>ComponentChild</code> to configure an instance of a <code>Component</code>. A\n        <code>ComponentChild</code> instance inherits the configuration of the main\n        <code>Component</code>.</p>",
                 "smithy.api#references": [
                     {
                         "resource": "com.amazonaws.amplifyuibuilder#ComponentResource"
@@ -260,7 +333,7 @@
                 "properties": {
                     "target": "com.amazonaws.amplifyuibuilder#ComponentProperties",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes the properties of the child component.</p>",
+                        "smithy.api#documentation": "<p>Describes the properties of the child component. You can't specify <code>tags</code> as a\n      valid property for <code>properties</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -268,6 +341,12 @@
                     "target": "com.amazonaws.amplifyuibuilder#ComponentChildList",
                     "traits": {
                         "smithy.api#documentation": "<p>The list of <code>ComponentChild</code> instances for this component.</p>"
+                    }
+                },
+                "events": {
+                    "target": "com.amazonaws.amplifyuibuilder#ComponentEvents",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the events that can be raised on the child component. Use for the workflow feature in Amplify Studio that allows you to\n      bind events and actions to components.</p>"
                     }
                 }
             },
@@ -328,6 +407,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The value to assign to the property if the condition is not met.</p>"
                     }
+                },
+                "operandType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the property to evaluate.</p>"
+                    }
                 }
             },
             "traits": {
@@ -365,6 +450,35 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes the configuration for binding a component's properties to data.</p>"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ComponentEvent": {
+            "type": "structure",
+            "members": {
+                "action": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action to perform when a specific event is raised.</p>"
+                    }
+                },
+                "parameters": {
+                    "target": "com.amazonaws.amplifyuibuilder#ActionParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes information about the action.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the configuration of an event. You can bind an event and a corresponding\n      action to a <code>Component</code> or a <code>ComponentChild</code>. A button click\n      is an example of an event. </p>"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ComponentEvents": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "com.amazonaws.amplifyuibuilder#ComponentEvent"
             }
         },
         "com.amazonaws.amplifyuibuilder#ComponentList": {
@@ -427,7 +541,7 @@
                 "collectionBindingProperties": {
                     "target": "com.amazonaws.amplifyuibuilder#ComponentPropertyBindingProperties",
                     "traits": {
-                        "smithy.api#documentation": "<p>The information to bind the component property to data at runtime. Use this for collection components.</p>"
+                        "smithy.api#documentation": "<p>The information to bind the component property to data at runtime. Use this for collection\n      components.</p>"
                     }
                 },
                 "defaultValue": {
@@ -463,19 +577,19 @@
                 "concat": {
                     "target": "com.amazonaws.amplifyuibuilder#ComponentPropertyList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of component properties to concatenate to create the value to assign to this component property.</p>"
+                        "smithy.api#documentation": "<p>A list of component properties to concatenate to create the value to assign to this\n      component property.</p>"
                     }
                 },
                 "condition": {
                     "target": "com.amazonaws.amplifyuibuilder#ComponentConditionProperty",
                     "traits": {
-                        "smithy.api#documentation": "<p>The conditional expression to use to assign a value to the component property..</p>"
+                        "smithy.api#documentation": "<p>The conditional expression to use to assign a value to the component property.</p>"
                     }
                 },
                 "configured": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the user configured the property in Amplify Studio after importing it.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the user configured the property in Amplify Studio after\n      importing it.</p>"
                     }
                 },
                 "type": {
@@ -487,12 +601,24 @@
                 "importedValue": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The default value assigned to property when the component is imported into an app.</p>"
+                        "smithy.api#documentation": "<p>The default value assigned to the property when the component is imported into an\n      app.</p>"
+                    }
+                },
+                "componentName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the component that is affected by an event.</p>"
+                    }
+                },
+                "property": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the component's property that is affected by an event.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the configuration for all of a component's properties. Use\n        <code>ComponentProperty</code> to specify the values to render or bind by\n      default.</p>"
+                "smithy.api#documentation": "<p>Describes the configuration for all of a component's properties. Use\n        <code>ComponentProperty</code> to specify the values to render or bind by default.</p>"
             }
         },
         "com.amazonaws.amplifyuibuilder#ComponentPropertyBindingProperties": {
@@ -557,16 +683,13 @@
             ],
             "traits": {
                 "aws.api#arn": {
-                    "template": "app/{appId}/environment/{environmentName}/components/{id}",
-                    "absolute": false,
-                    "noAccount": false,
-                    "noRegion": false
+                    "template": "app/{appId}/environment/{environmentName}/components/{id}"
                 },
                 "aws.cloudformation#cfnResource": {
+                    "name": "Component",
                     "additionalSchemas": [
                         "com.amazonaws.amplifyuibuilder#Component"
-                    ],
-                    "name": "Component"
+                    ]
                 }
             }
         },
@@ -583,7 +706,7 @@
                 "environmentName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the backend environment that is a part of the Amplify app.</p>",
+                        "smithy.api#documentation": "<p>The name of the backend environment that is a part of the Amplify\n      app.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -634,13 +757,13 @@
                 "variantValues": {
                     "target": "com.amazonaws.amplifyuibuilder#ComponentVariantValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>The combination of variants that comprise this variant.</p>"
+                        "smithy.api#documentation": "<p>The combination of variants that comprise this variant. You can't specify\n        <code>tags</code> as a valid property for <code>variantValues</code>.</p>"
                     }
                 },
                 "overrides": {
                     "target": "com.amazonaws.amplifyuibuilder#ComponentOverrides",
                     "traits": {
-                        "smithy.api#documentation": "<p>The properties of the component variant that can be overriden when customizing an instance\n      of the component.</p>"
+                        "smithy.api#documentation": "<p>The properties of the component variant that can be overriden when customizing an instance\n      of the component. You can't specify <code>tags</code> as a valid property for\n        <code>overrides</code>.</p>"
                     }
                 }
             },
@@ -686,11 +809,13 @@
                 }
             ],
             "traits": {
+                "aws.iam#requiredActions": [
+                    "amplify:GetApp"
+                ],
                 "smithy.api#documentation": "<p>Creates a new component for an Amplify app.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/app/{appId}/environment/{environmentName}/components",
-                    "code": 200
+                    "method": "POST"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -714,7 +839,7 @@
                 "componentType": {
                     "target": "com.amazonaws.amplifyuibuilder#ComponentType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The component type. This can be an Amplify custom UI component or another custom\n      component.</p>",
+                        "smithy.api#documentation": "<p>The component type. This can be an Amplify custom UI component or another\n      custom component.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -755,13 +880,25 @@
                 "collectionProperties": {
                     "target": "com.amazonaws.amplifyuibuilder#ComponentCollectionProperties",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data binding configuration for customizing a component's properties. Use this for a collection component.</p>"
+                        "smithy.api#documentation": "<p>The data binding configuration for customizing a component's properties. Use this for a\n      collection component.</p>"
                     }
                 },
                 "tags": {
                     "target": "com.amazonaws.amplifyuibuilder#Tags",
                     "traits": {
                         "smithy.api#documentation": "<p>One or more key-value pairs to use when tagging the component data.</p>"
+                    }
+                },
+                "events": {
+                    "target": "com.amazonaws.amplifyuibuilder#ComponentEvents",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The event configuration for the component. Use for the workflow feature in Amplify Studio that allows you to bind events and actions to components.</p>"
+                    }
+                },
+                "schemaVersion": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The schema version of the component when it was imported.</p>"
                     }
                 }
             },
@@ -783,7 +920,7 @@
                 "environmentName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the backend environment that is a part of the Amplify app.</p>",
+                        "smithy.api#documentation": "<p>The name of the backend environment that is a part of the Amplify\n      app.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -843,11 +980,13 @@
                 }
             ],
             "traits": {
+                "aws.iam#requiredActions": [
+                    "amplify:GetApp"
+                ],
                 "smithy.api#documentation": "<p>Creates a theme to apply to the components in an Amplify app.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/app/{appId}/environment/{environmentName}/themes",
-                    "code": 200
+                    "method": "POST"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -900,7 +1039,7 @@
                 "environmentName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the backend environment that is a part of the Amplify app.</p>",
+                        "smithy.api#documentation": "<p>The name of the backend environment that is a part of the Amplify\n      app.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -942,6 +1081,9 @@
             "input": {
                 "target": "com.amazonaws.amplifyuibuilder#DeleteComponentRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.amplifyuibuilder#InternalServerException"
@@ -954,11 +1096,13 @@
                 }
             ],
             "traits": {
+                "aws.iam#requiredActions": [
+                    "amplify:GetApp"
+                ],
                 "smithy.api#documentation": "<p>Deletes a component from an Amplify app.</p>",
                 "smithy.api#http": {
-                    "method": "DELETE",
                     "uri": "/app/{appId}/environment/{environmentName}/components/{id}",
-                    "code": 200
+                    "method": "DELETE"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -969,7 +1113,7 @@
                 "appId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique ID of the Amplify app associated with the component to delete.</p>",
+                        "smithy.api#documentation": "<p>The unique ID of the Amplify app associated with the component to\n      delete.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -977,7 +1121,7 @@
                 "environmentName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the backend environment that is a part of the Amplify app.</p>",
+                        "smithy.api#documentation": "<p>The name of the backend environment that is a part of the Amplify\n      app.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -997,6 +1141,9 @@
             "input": {
                 "target": "com.amazonaws.amplifyuibuilder#DeleteThemeRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.amplifyuibuilder#InternalServerException"
@@ -1009,11 +1156,13 @@
                 }
             ],
             "traits": {
+                "aws.iam#requiredActions": [
+                    "amplify:GetApp"
+                ],
                 "smithy.api#documentation": "<p>Deletes a theme from an Amplify app.</p>",
                 "smithy.api#http": {
-                    "method": "DELETE",
                     "uri": "/app/{appId}/environment/{environmentName}/themes/{id}",
-                    "code": 200
+                    "method": "DELETE"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -1024,7 +1173,7 @@
                 "appId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique ID of the Amplify app associated with the theme to delete.</p>",
+                        "smithy.api#documentation": "<p>The unique ID of the Amplify app associated with the theme to\n      delete.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1032,7 +1181,7 @@
                 "environmentName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the backend environment that is a part of the Amplify app.</p>",
+                        "smithy.api#documentation": "<p>The name of the backend environment that is a part of the Amplify\n      app.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1063,9 +1212,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Exchanges an access code for a token.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/tokens/{provider}",
-                    "code": 200
+                    "method": "POST"
                 }
             }
         },
@@ -1158,11 +1306,15 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Exports component configurations to code that is ready to integrate into an Amplify\n      app.</p>",
+                "smithy.api#documentation": "<p>Exports component configurations to code that is ready to integrate into an Amplify app.</p>",
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/export/app/{appId}/environment/{environmentName}/components",
-                    "code": 200
+                    "method": "GET"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "entities"
                 },
                 "smithy.api#readonly": {}
             }
@@ -1181,9 +1333,16 @@
                 "environmentName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the backend environment that is a part of the Amplify app.</p>",
+                        "smithy.api#documentation": "<p>The name of the backend environment that is a part of the Amplify\n      app.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to request the next page of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
                     }
                 }
             }
@@ -1196,6 +1355,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Represents the configuration of the exported components.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token that's included if more results are available.</p>"
                     }
                 }
             }
@@ -1217,11 +1382,15 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Exports theme configurations to code that is ready to integrate into an Amplify\n      app.</p>",
+                "smithy.api#documentation": "<p>Exports theme configurations to code that is ready to integrate into an Amplify app.</p>",
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/export/app/{appId}/environment/{environmentName}/themes",
-                    "code": 200
+                    "method": "GET"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "entities"
                 },
                 "smithy.api#readonly": {}
             }
@@ -1244,6 +1413,13 @@
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to request the next page of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
                 }
             }
         },
@@ -1255,6 +1431,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Represents the configuration of the exported themes.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token that's included if more results are available.</p>"
                     }
                 }
             }
@@ -1310,11 +1492,13 @@
                 }
             ],
             "traits": {
+                "aws.iam#requiredActions": [
+                    "amplify:GetApp"
+                ],
                 "smithy.api#documentation": "<p>Returns an existing component for an Amplify app.</p>",
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/app/{appId}/environment/{environmentName}/components/{id}",
-                    "code": 200
+                    "method": "GET"
                 },
                 "smithy.api#readonly": {}
             }
@@ -1381,11 +1565,13 @@
                 }
             ],
             "traits": {
+                "aws.iam#requiredActions": [
+                    "amplify:GetApp"
+                ],
                 "smithy.api#documentation": "<p>Returns an existing theme for an Amplify app.</p>",
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/app/{appId}/environment/{environmentName}/themes/{id}",
-                    "code": 200
+                    "method": "GET"
                 },
                 "smithy.api#readonly": {}
             }
@@ -1481,17 +1667,19 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a list of components for a specified Amplify app and backend environment.</p>",
+                "aws.iam#requiredActions": [
+                    "amplify:GetApp"
+                ],
+                "smithy.api#documentation": "<p>Retrieves a list of components for a specified Amplify app and backend\n      environment.</p>",
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/app/{appId}/environment/{environmentName}/components",
-                    "code": 200
+                    "method": "GET"
                 },
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
-                    "items": "entities",
-                    "pageSize": "maxResults"
+                    "pageSize": "maxResults",
+                    "items": "entities"
                 },
                 "smithy.api#readonly": {}
             }
@@ -1519,7 +1707,7 @@
                 "environmentName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the backend environment that is a part of the Amplify app.</p>",
+                        "smithy.api#documentation": "<p>The name of the backend environment that is a part of the Amplify\n      app.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1575,17 +1763,19 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a list of themes for a specified Amplify app and backend environment.</p>",
+                "aws.iam#requiredActions": [
+                    "amplify:GetApp"
+                ],
+                "smithy.api#documentation": "<p>Retrieves a list of themes for a specified Amplify app and backend\n      environment.</p>",
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/app/{appId}/environment/{environmentName}/themes",
-                    "code": 200
+                    "method": "GET"
                 },
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
-                    "items": "entities",
-                    "pageSize": "maxResults"
+                    "pageSize": "maxResults",
+                    "items": "entities"
                 },
                 "smithy.api#readonly": {}
             }
@@ -1613,7 +1803,7 @@
                 "environmentName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the backend environment that is a part of the Amplify app.</p>",
+                        "smithy.api#documentation": "<p>The name of the backend environment that is a part of the Amplify\n      app.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1652,6 +1842,35 @@
                 }
             }
         },
+        "com.amazonaws.amplifyuibuilder#MutationActionSetStateParameter": {
+            "type": "structure",
+            "members": {
+                "componentName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the component that is being modified.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "property": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the component property to apply the state configuration to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "set": {
+                    "target": "com.amazonaws.amplifyuibuilder#ComponentProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state configuration to assign to the property.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the state configuration when an action modifies a property of another\n      element within the same component.</p>"
+            }
+        },
         "com.amazonaws.amplifyuibuilder#Predicate": {
             "type": "structure",
             "members": {
@@ -1687,7 +1906,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Stores information for generating Amplify DataStore queries. Use a <code>Predicate</code>\n      to retrieve a subset of the data in a collection.</p>"
+                "smithy.api#documentation": "<p>Stores information for generating Amplify DataStore queries. Use a\n        <code>Predicate</code> to retrieve a subset of the data in a collection.</p>"
             }
         },
         "com.amazonaws.amplifyuibuilder#PredicateList": {
@@ -1712,9 +1931,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Refreshes a previously issued access token that might have expired.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/tokens/{provider}/refresh",
-                    "code": 200
+                    "method": "POST"
                 }
             }
         },
@@ -1896,7 +2114,7 @@
                 "environmentName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the backend environment that is a part of the Amplify app.</p>",
+                        "smithy.api#documentation": "<p>The name of the backend environment that is a part of the Amplify\n      app.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1917,7 +2135,7 @@
                 "createdAt": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "aws.cloudformation#cfnMutability": "read",
+                        "aws.cloudformation#cfnExcludeProperty": {},
                         "smithy.api#documentation": "<p>The time that the theme was created.</p>",
                         "smithy.api#required": {},
                         "smithy.api#timestampFormat": "date-time"
@@ -1926,7 +2144,7 @@
                 "modifiedAt": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "aws.cloudformation#cfnMutability": "read",
+                        "aws.cloudformation#cfnExcludeProperty": {},
                         "smithy.api#documentation": "<p>The time that the theme was modified.</p>",
                         "smithy.api#timestampFormat": "date-time"
                     }
@@ -2011,16 +2229,13 @@
             ],
             "traits": {
                 "aws.api#arn": {
-                    "template": "app/{appId}/environment/{environmentName}/themes/{id}",
-                    "absolute": false,
-                    "noAccount": false,
-                    "noRegion": false
+                    "template": "app/{appId}/environment/{environmentName}/themes/{id}"
                 },
                 "aws.cloudformation#cfnResource": {
+                    "name": "Theme",
                     "additionalSchemas": [
                         "com.amazonaws.amplifyuibuilder#Theme"
-                    ],
-                    "name": "Theme"
+                    ]
                 }
             }
         },
@@ -2144,11 +2359,13 @@
                 }
             ],
             "traits": {
+                "aws.iam#requiredActions": [
+                    "amplify:GetApp"
+                ],
                 "smithy.api#documentation": "<p>Updates an existing component.</p>",
                 "smithy.api#http": {
-                    "method": "PATCH",
                     "uri": "/app/{appId}/environment/{environmentName}/components/{id}",
-                    "code": 200
+                    "method": "PATCH"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -2177,7 +2394,7 @@
                 "componentType": {
                     "target": "com.amazonaws.amplifyuibuilder#ComponentType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the component. This can be an Amplify custom UI component or another custom\n      component.</p>"
+                        "smithy.api#documentation": "<p>The type of the component. This can be an Amplify custom UI component or\n      another custom component.</p>"
                     }
                 },
                 "properties": {
@@ -2213,7 +2430,19 @@
                 "collectionProperties": {
                     "target": "com.amazonaws.amplifyuibuilder#ComponentCollectionProperties",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration for binding a component's properties to a data model. Use this for a collection component.</p>"
+                        "smithy.api#documentation": "<p>The configuration for binding a component's properties to a data model. Use this for a\n      collection component.</p>"
+                    }
+                },
+                "events": {
+                    "target": "com.amazonaws.amplifyuibuilder#ComponentEvents",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The event configuration for the component. Use for the workflow feature in Amplify Studio that allows you to bind events and actions to components.</p>"
+                    }
+                },
+                "schemaVersion": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The schema version of the component when it was imported.</p>"
                     }
                 }
             },
@@ -2300,11 +2529,13 @@
                 }
             ],
             "traits": {
+                "aws.iam#requiredActions": [
+                    "amplify:GetApp"
+                ],
                 "smithy.api#documentation": "<p>Updates an existing theme.</p>",
                 "smithy.api#http": {
-                    "method": "PATCH",
                     "uri": "/app/{appId}/environment/{environmentName}/themes/{id}",
-                    "code": 200
+                    "method": "PATCH"
                 },
                 "smithy.api#idempotent": {}
             }

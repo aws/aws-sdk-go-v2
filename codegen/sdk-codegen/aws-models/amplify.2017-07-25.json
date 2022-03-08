@@ -36,6 +36,7 @@
                     "min": 1,
                     "max": 255
                 },
+                "smithy.api#pattern": "^(?s).+$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -223,7 +224,7 @@
                 "repository": {
                     "target": "com.amazonaws.amplify#Repository",
                     "traits": {
-                        "smithy.api#documentation": "<p> The repository for the Amplify app. </p>",
+                        "smithy.api#documentation": "<p> The Git repository for the Amplify app. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -291,7 +292,7 @@
                 "basicAuthCredentials": {
                     "target": "com.amazonaws.amplify#BasicAuthCredentials",
                     "traits": {
-                        "smithy.api#documentation": "<p> The basic authorization credentials for branches for the Amplify app. You must base64-encode the authorization credentials and provide them in the format <code>user:password</code>.</p>"
+                        "smithy.api#documentation": "<p> The basic authorization credentials for branches for the Amplify app. You must\n            base64-encode the authorization credentials and provide them in the format\n                <code>user:password</code>.</p>"
                     }
                 },
                 "customRules": {
@@ -334,6 +335,12 @@
                     "target": "com.amazonaws.amplify#AutoBranchCreationConfig",
                     "traits": {
                         "smithy.api#documentation": "<p> Describes the automated branch creation configuration for the Amplify app. </p>"
+                    }
+                },
+                "repositoryCloneMethod": {
+                    "target": "com.amazonaws.amplify#RepositoryCloneMethod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authentication protocol to use to access the Git repository for an Amplify app.\n            For a GitHub repository, specify <code>TOKEN</code>. For an Amazon Web Services CodeCommit repository,\n            specify <code>SIGV4</code>. For GitLab and Bitbucket repositories, specify\n                <code>SSH</code>.</p>"
                     }
                 }
             },
@@ -403,7 +410,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 255
-                }
+                },
+                "smithy.api#pattern": "^(?s)"
             }
         },
         "com.amazonaws.amplify#ArtifactUrl": {
@@ -475,7 +483,7 @@
                 "basicAuthCredentials": {
                     "target": "com.amazonaws.amplify#BasicAuthCredentials",
                     "traits": {
-                        "smithy.api#documentation": "<p> The basic authorization credentials for the autocreated branch. You must base64-encode the authorization credentials and provide them in the format <code>user:password</code>.</p>"
+                        "smithy.api#documentation": "<p> The basic authorization credentials for the autocreated branch. You must\n            base64-encode the authorization credentials and provide them in the format\n                <code>user:password</code>.</p>"
                     }
                 },
                 "enableBasicAuth": {
@@ -487,7 +495,7 @@
                 "enablePerformanceMode": {
                     "target": "com.amazonaws.amplify#EnablePerformanceMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enables performance mode for the branch.</p>\n        <p>Performance mode optimizes for faster hosting performance by keeping content cached at the edge for a longer interval. When performance mode is enabled, hosting configuration or code changes can take up to 10 minutes to roll out. </p>"
+                        "smithy.api#documentation": "<p>Enables performance mode for the branch.</p>\n        <p>Performance mode optimizes for faster hosting performance by keeping content cached at\n            the edge for a longer interval. When performance mode is enabled, hosting configuration\n            or code changes can take up to 10 minutes to roll out. </p>"
                     }
                 },
                 "buildSpec": {
@@ -519,7 +527,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 2048
-                }
+                },
+                "smithy.api#pattern": "^(?s).+$"
             }
         },
         "com.amazonaws.amplify#AutoBranchCreationPatterns": {
@@ -534,7 +543,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 2048
-                }
+                },
+                "smithy.api#pattern": "^(?s).+$"
             }
         },
         "com.amazonaws.amplify#AutoSubDomainCreationPatterns": {
@@ -605,9 +615,10 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
+                    "min": 0,
                     "max": 1000
-                }
+                },
+                "smithy.api#pattern": "^(?s)"
             }
         },
         "com.amazonaws.amplify#BackendEnvironments": {
@@ -636,6 +647,7 @@
                     "min": 0,
                     "max": 2000
                 },
+                "smithy.api#pattern": "^(?s)",
                 "smithy.api#sensitive": {}
             }
         },
@@ -756,7 +768,7 @@
                 "enablePerformanceMode": {
                     "target": "com.amazonaws.amplify#EnablePerformanceMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enables performance mode for the branch.</p>\n        <p>Performance mode optimizes for faster hosting performance by keeping content cached at the edge for a longer interval. When performance mode is enabled, hosting configuration or code changes can take up to 10 minutes to roll out. </p>"
+                        "smithy.api#documentation": "<p>Enables performance mode for the branch.</p>\n        <p>Performance mode optimizes for faster hosting performance by keeping content cached at\n            the edge for a longer interval. When performance mode is enabled, hosting configuration\n            or code changes can take up to 10 minutes to roll out. </p>"
                     }
                 },
                 "thumbnailUrl": {
@@ -768,7 +780,7 @@
                 "basicAuthCredentials": {
                     "target": "com.amazonaws.amplify#BasicAuthCredentials",
                     "traits": {
-                        "smithy.api#documentation": "<p> The basic authorization credentials for a branch of an Amplify app. You must base64-encode the authorization credentials and provide them in the format <code>user:password</code>.</p>"
+                        "smithy.api#documentation": "<p> The basic authorization credentials for a branch of an Amplify app. You must\n            base64-encode the authorization credentials and provide them in the format\n                <code>user:password</code>.</p>"
                     }
                 },
                 "buildSpec": {
@@ -832,7 +844,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 1000
-                }
+                },
+                "smithy.api#pattern": "^(?s)"
             }
         },
         "com.amazonaws.amplify#BranchName": {
@@ -841,7 +854,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 255
-                }
+                },
+                "smithy.api#pattern": "^(?s).+$"
             }
         },
         "com.amazonaws.amplify#Branches": {
@@ -863,7 +877,9 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 25000
-                }
+                },
+                "smithy.api#pattern": "^(?s).+$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.amplify#CertificateVerificationDNSRecord": {
@@ -884,7 +900,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 255
-                }
+                },
+                "smithy.api#pattern": "^(?s)"
             }
         },
         "com.amazonaws.amplify#CommitMessage": {
@@ -893,7 +910,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 10000
-                }
+                },
+                "smithy.api#pattern": "^(?s)"
             }
         },
         "com.amazonaws.amplify#CommitTime": {
@@ -903,9 +921,10 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
+                    "min": 0,
                     "max": 2048
-                }
+                },
+                "smithy.api#pattern": "^(?s)"
             }
         },
         "com.amazonaws.amplify#Context": {
@@ -1018,7 +1037,7 @@
                 "basicAuthCredentials": {
                     "target": "com.amazonaws.amplify#BasicAuthCredentials",
                     "traits": {
-                        "smithy.api#documentation": "<p> The credentials for basic authorization for an Amplify app. You must base64-encode the authorization credentials and provide them in the format <code>user:password</code>.</p>"
+                        "smithy.api#documentation": "<p> The credentials for basic authorization for an Amplify app. You must base64-encode\n            the authorization credentials and provide them in the format\n            <code>user:password</code>.</p>"
                     }
                 },
                 "customRules": {
@@ -1257,7 +1276,7 @@
                 "basicAuthCredentials": {
                     "target": "com.amazonaws.amplify#BasicAuthCredentials",
                     "traits": {
-                        "smithy.api#documentation": "<p> The basic authorization credentials for the branch. You must base64-encode the authorization credentials and provide them in the format <code>user:password</code>.</p>"
+                        "smithy.api#documentation": "<p> The basic authorization credentials for the branch. You must base64-encode the\n            authorization credentials and provide them in the format\n            <code>user:password</code>.</p>"
                     }
                 },
                 "enableBasicAuth": {
@@ -1269,7 +1288,7 @@
                 "enablePerformanceMode": {
                     "target": "com.amazonaws.amplify#EnablePerformanceMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enables performance mode for the branch.</p>\n        <p>Performance mode optimizes for faster hosting performance by keeping content cached at the edge for a longer interval. When performance mode is enabled, hosting configuration or code changes can take up to 10 minutes to roll out. </p>"
+                        "smithy.api#documentation": "<p>Enables performance mode for the branch.</p>\n        <p>Performance mode optimizes for faster hosting performance by keeping content cached at\n            the edge for a longer interval. When performance mode is enabled, hosting configuration\n            or code changes can take up to 10 minutes to roll out. </p>"
                     }
                 },
                 "tags": {
@@ -1632,9 +1651,10 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
+                    "min": 0,
                     "max": 25000
-                }
+                },
+                "smithy.api#pattern": "^(?s)"
             }
         },
         "com.amazonaws.amplify#CustomRule": {
@@ -1657,7 +1677,7 @@
                 "status": {
                     "target": "com.amazonaws.amplify#Status",
                     "traits": {
-                        "smithy.api#documentation": "<p> The status code for a URL rewrite or redirect rule. </p>\n        \n        <dl>\n            <dt>200</dt>\n            <dd>\n                    <p>Represents a 200 rewrite rule.</p>\n                </dd>\n            <dt>301</dt>\n            <dd>\n                    <p>Represents a 301 (moved pemanently) redirect rule. This and all future requests should be directed to the target URL. </p>\n                </dd>\n            <dt>302</dt>\n            <dd>\n                    <p>Represents a 302 temporary redirect rule.</p>\n                </dd>\n            <dt>404</dt>\n            <dd>\n                    <p>Represents a 404 redirect rule.</p>\n                </dd>\n            <dt>404-200</dt>\n            <dd>\n                    <p>Represents a 404 rewrite rule.</p>\n                </dd>\n         </dl>"
+                        "smithy.api#documentation": "<p> The status code for a URL rewrite or redirect rule. </p>\n\n        <dl>\n            <dt>200</dt>\n            <dd>\n                    <p>Represents a 200 rewrite rule.</p>\n                </dd>\n            <dt>301</dt>\n            <dd>\n                    <p>Represents a 301 (moved pemanently) redirect rule. This and all future\n                        requests should be directed to the target URL. </p>\n                </dd>\n            <dt>302</dt>\n            <dd>\n                    <p>Represents a 302 temporary redirect rule.</p>\n                </dd>\n            <dt>404</dt>\n            <dd>\n                    <p>Represents a 404 redirect rule.</p>\n                </dd>\n            <dt>404-200</dt>\n            <dd>\n                    <p>Represents a 404 rewrite rule.</p>\n                </dd>\n         </dl>"
                     }
                 },
                 "condition": {
@@ -2138,7 +2158,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 1000
-                }
+                },
+                "smithy.api#pattern": "^(?s).+$"
             }
         },
         "com.amazonaws.amplify#Description": {
@@ -2147,7 +2168,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 1000
-                }
+                },
+                "smithy.api#pattern": "^(?s)"
             }
         },
         "com.amazonaws.amplify#DisplayName": {
@@ -2156,7 +2178,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 255
-                }
+                },
+                "smithy.api#pattern": "^(?s)"
             }
         },
         "com.amazonaws.amplify#DomainAssociation": {
@@ -2253,8 +2276,9 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 255
-                }
+                    "max": 64
+                },
+                "smithy.api#pattern": "^(((?!-)[A-Za-z0-9-]{0,62}[A-Za-z0-9])\\.)+((?!-)[A-Za-z0-9-]{1,62}[A-Za-z0-9])(\\.)?$"
             }
         },
         "com.amazonaws.amplify#DomainPrefix": {
@@ -2263,7 +2287,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 255
-                }
+                },
+                "smithy.api#pattern": "^(?s)"
             }
         },
         "com.amazonaws.amplify#DomainStatus": {
@@ -2368,7 +2393,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 255
-                }
+                },
+                "smithy.api#pattern": "^(?s)"
             }
         },
         "com.amazonaws.amplify#EnvValue": {
@@ -2376,8 +2402,9 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 1000
-                }
+                    "max": 5500
+                },
+                "smithy.api#pattern": "^(?s)"
             }
         },
         "com.amazonaws.amplify#EnvironmentName": {
@@ -2386,7 +2413,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 255
-                }
+                },
+                "smithy.api#pattern": "^(?s).+$"
             }
         },
         "com.amazonaws.amplify#EnvironmentVariables": {
@@ -2422,7 +2450,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 255
-                }
+                },
+                "smithy.api#pattern": "^(?s)"
             }
         },
         "com.amazonaws.amplify#FileUploadUrls": {
@@ -2440,7 +2469,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 255
-                }
+                },
+                "smithy.api#pattern": "^(?s)"
             }
         },
         "com.amazonaws.amplify#GenerateAccessLogs": {
@@ -3051,7 +3081,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 255
-                }
+                },
+                "smithy.api#pattern": "^[0-9]+$"
             }
         },
         "com.amazonaws.amplify#JobReason": {
@@ -3060,7 +3091,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 255
-                }
+                },
+                "smithy.api#pattern": "^(?s)"
             }
         },
         "com.amazonaws.amplify#JobStatus": {
@@ -3875,7 +3907,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 32
-                }
+                },
+                "smithy.api#pattern": "^(?s)"
             }
         },
         "com.amazonaws.amplify#MaxResults": {
@@ -3893,7 +3926,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 255
-                }
+                },
+                "smithy.api#pattern": "^(?s).+$"
             }
         },
         "com.amazonaws.amplify#NextToken": {
@@ -3902,7 +3936,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 2000
-                }
+                },
+                "smithy.api#pattern": "^(?s)"
             }
         },
         "com.amazonaws.amplify#NotFoundException": {
@@ -3925,6 +3960,7 @@
                     "min": 0,
                     "max": 1000
                 },
+                "smithy.api#pattern": "^(?s)",
                 "smithy.api#sensitive": {}
             }
         },
@@ -3935,6 +3971,10 @@
                     {
                         "value": "WEB",
                         "name": "WEB"
+                    },
+                    {
+                        "value": "WEB_DYNAMIC",
+                        "name": "WEB_DYNAMIC"
                     }
                 ]
             }
@@ -3977,7 +4017,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 20
-                }
+                },
+                "smithy.api#pattern": "^(?s)"
             }
         },
         "com.amazonaws.amplify#Repository": {
@@ -3986,12 +4027,36 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 1000
-                }
+                },
+                "smithy.api#pattern": "^(?s)"
+            }
+        },
+        "com.amazonaws.amplify#RepositoryCloneMethod": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SSH",
+                        "name": "SSH"
+                    },
+                    {
+                        "value": "TOKEN",
+                        "name": "TOKEN"
+                    },
+                    {
+                        "value": "SIGV4",
+                        "name": "SIGV4"
+                    }
+                ]
             }
         },
         "com.amazonaws.amplify#ResourceArn": {
             "type": "string",
             "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                },
                 "smithy.api#pattern": "^arn:aws:amplify:"
             }
         },
@@ -4030,9 +4095,10 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
+                    "min": 0,
                     "max": 1000
-                }
+                },
+                "smithy.api#pattern": "^(?s)"
             }
         },
         "com.amazonaws.amplify#Source": {
@@ -4041,7 +4107,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 2048
-                }
+                },
+                "smithy.api#pattern": "^(?s).+$"
             }
         },
         "com.amazonaws.amplify#SourceUrl": {
@@ -4049,8 +4116,9 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 1000
-                }
+                    "max": 3000
+                },
+                "smithy.api#pattern": "^(?s)"
             }
         },
         "com.amazonaws.amplify#StackName": {
@@ -4059,7 +4127,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 255
-                }
+                },
+                "smithy.api#pattern": "^(?s).+$"
             }
         },
         "com.amazonaws.amplify#Stage": {
@@ -4293,7 +4362,8 @@
                 "smithy.api#length": {
                     "min": 3,
                     "max": 7
-                }
+                },
+                "smithy.api#pattern": "^.{3,7}$"
             }
         },
         "com.amazonaws.amplify#StatusReason": {
@@ -4557,7 +4627,12 @@
         "com.amazonaws.amplify#TTL": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p> The content Time to Live (TTL) for the website in seconds. </p>"
+                "smithy.api#documentation": "<p> The content Time to Live (TTL) for the website in seconds. </p>",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 32
+                },
+                "smithy.api#pattern": "^\\d*$"
             }
         },
         "com.amazonaws.amplify#TagKey": {
@@ -4592,7 +4667,7 @@
             },
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
+                    "min": 0,
                     "max": 50
                 }
             }
@@ -4661,7 +4736,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 256
-                }
+                },
+                "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
             }
         },
         "com.amazonaws.amplify#Target": {
@@ -4670,7 +4746,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 2048
-                }
+                },
+                "smithy.api#pattern": "^(?s).+$"
             }
         },
         "com.amazonaws.amplify#TestArtifactsUrl": {
@@ -4883,7 +4960,7 @@
                 "basicAuthCredentials": {
                     "target": "com.amazonaws.amplify#BasicAuthCredentials",
                     "traits": {
-                        "smithy.api#documentation": "<p> The basic authorization credentials for an Amplify app. You must base64-encode the authorization credentials and provide them in the format <code>user:password</code>.</p>"
+                        "smithy.api#documentation": "<p> The basic authorization credentials for an Amplify app. You must base64-encode the\n            authorization credentials and provide them in the format\n            <code>user:password</code>.</p>"
                     }
                 },
                 "customRules": {
@@ -5052,7 +5129,7 @@
                 "basicAuthCredentials": {
                     "target": "com.amazonaws.amplify#BasicAuthCredentials",
                     "traits": {
-                        "smithy.api#documentation": "<p> The basic authorization credentials for the branch. You must base64-encode the authorization credentials and provide them in the format <code>user:password</code>.</p>"
+                        "smithy.api#documentation": "<p> The basic authorization credentials for the branch. You must base64-encode the\n            authorization credentials and provide them in the format\n            <code>user:password</code>.</p>"
                     }
                 },
                 "enableBasicAuth": {
@@ -5064,7 +5141,7 @@
                 "enablePerformanceMode": {
                     "target": "com.amazonaws.amplify#EnablePerformanceMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enables performance mode for the branch.</p>\n        <p>Performance mode optimizes for faster hosting performance by keeping content cached at the edge for a longer interval. When performance mode is enabled, hosting configuration or code changes can take up to 10 minutes to roll out. </p>"
+                        "smithy.api#documentation": "<p>Enables performance mode for the branch.</p>\n        <p>Performance mode optimizes for faster hosting performance by keeping content cached at\n            the edge for a longer interval. When performance mode is enabled, hosting configuration\n            or code changes can take up to 10 minutes to roll out. </p>"
                     }
                 },
                 "buildSpec": {
@@ -5185,8 +5262,7 @@
                 "subDomainSettings": {
                     "target": "com.amazonaws.amplify#SubDomainSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p> Describes the settings for the subdomain. </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p> Describes the settings for the subdomain. </p>"
                     }
                 },
                 "autoSubDomainCreationPatterns": {
@@ -5388,7 +5464,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 255
-                }
+                },
+                "smithy.api#pattern": "^(?s)"
             }
         },
         "com.amazonaws.amplify#WebhookUrl": {

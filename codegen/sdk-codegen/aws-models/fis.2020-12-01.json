@@ -221,6 +221,16 @@
                 "smithy.api#pattern": "^[\\S]+$"
             }
         },
+        "com.amazonaws.fis#CloudWatchLogGroupArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^[\\S]+$"
+            }
+        },
         "com.amazonaws.fis#ConflictException": {
             "type": "structure",
             "members": {
@@ -317,6 +327,33 @@
                 "target": "com.amazonaws.fis#CreateExperimentTemplateActionInput"
             }
         },
+        "com.amazonaws.fis#CreateExperimentTemplateLogConfigurationInput": {
+            "type": "structure",
+            "members": {
+                "cloudWatchLogsConfiguration": {
+                    "target": "com.amazonaws.fis#ExperimentTemplateCloudWatchLogsLogConfigurationInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for experiment logging to Amazon CloudWatch Logs.</p>"
+                    }
+                },
+                "s3Configuration": {
+                    "target": "com.amazonaws.fis#ExperimentTemplateS3LogConfigurationInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for experiment logging to Amazon S3.</p>"
+                    }
+                },
+                "logSchemaVersion": {
+                    "target": "com.amazonaws.fis#LogSchemaVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The schema version.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the configuration for experiment logging.</p>"
+            }
+        },
         "com.amazonaws.fis#CreateExperimentTemplateRequest": {
             "type": "structure",
             "members": {
@@ -366,6 +403,12 @@
                     "target": "com.amazonaws.fis#TagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The tags to apply to the experiment template.</p>"
+                    }
+                },
+                "logConfiguration": {
+                    "target": "com.amazonaws.fis#CreateExperimentTemplateLogConfigurationInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for experiment logging.</p>"
                     }
                 }
             }
@@ -592,6 +635,12 @@
                     "target": "com.amazonaws.fis#TagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The tags for the experiment.</p>"
+                    }
+                },
+                "logConfiguration": {
+                    "target": "com.amazonaws.fis#ExperimentLogConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for experiment logging.</p>"
                     }
                 }
             },
@@ -823,6 +872,20 @@
                 "smithy.api#pattern": "^[\\S]+$"
             }
         },
+        "com.amazonaws.fis#ExperimentCloudWatchLogsLogConfiguration": {
+            "type": "structure",
+            "members": {
+                "logGroupArn": {
+                    "target": "com.amazonaws.fis#CloudWatchLogGroupArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the destination Amazon CloudWatch Logs log group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the configuration for experiment logging to Amazon CloudWatch Logs.</p>"
+            }
+        },
         "com.amazonaws.fis#ExperimentEndTime": {
             "type": "timestamp"
         },
@@ -834,6 +897,52 @@
                     "max": 64
                 },
                 "smithy.api#pattern": "^[\\S]+$"
+            }
+        },
+        "com.amazonaws.fis#ExperimentLogConfiguration": {
+            "type": "structure",
+            "members": {
+                "cloudWatchLogsConfiguration": {
+                    "target": "com.amazonaws.fis#ExperimentCloudWatchLogsLogConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for experiment logging to Amazon CloudWatch Logs.</p>"
+                    }
+                },
+                "s3Configuration": {
+                    "target": "com.amazonaws.fis#ExperimentS3LogConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for experiment logging to Amazon S3.</p>"
+                    }
+                },
+                "logSchemaVersion": {
+                    "target": "com.amazonaws.fis#LogSchemaVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The schema version.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the configuration for experiment logging.</p>"
+            }
+        },
+        "com.amazonaws.fis#ExperimentS3LogConfiguration": {
+            "type": "structure",
+            "members": {
+                "bucketName": {
+                    "target": "com.amazonaws.fis#S3BucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the destination bucket.</p>"
+                    }
+                },
+                "prefix": {
+                    "target": "com.amazonaws.fis#S3ObjectKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The bucket prefix.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the configuration for experiment logging to Amazon S3.</p>"
             }
         },
         "com.amazonaws.fis#ExperimentStartTime": {
@@ -1183,6 +1292,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The tags for the experiment template.</p>"
                     }
+                },
+                "logConfiguration": {
+                    "target": "com.amazonaws.fis#ExperimentTemplateLogConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for experiment logging.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1320,6 +1435,35 @@
                 "smithy.api#pattern": "^[\\S]+$"
             }
         },
+        "com.amazonaws.fis#ExperimentTemplateCloudWatchLogsLogConfiguration": {
+            "type": "structure",
+            "members": {
+                "logGroupArn": {
+                    "target": "com.amazonaws.fis#CloudWatchLogGroupArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the destination Amazon CloudWatch Logs log group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the configuration for experiment logging to Amazon CloudWatch Logs.</p>"
+            }
+        },
+        "com.amazonaws.fis#ExperimentTemplateCloudWatchLogsLogConfigurationInput": {
+            "type": "structure",
+            "members": {
+                "logGroupArn": {
+                    "target": "com.amazonaws.fis#CloudWatchLogGroupArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the destination Amazon CloudWatch Logs log group.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the configuration for experiment logging to Amazon CloudWatch Logs.</p>"
+            }
+        },
         "com.amazonaws.fis#ExperimentTemplateDescription": {
             "type": "string",
             "traits": {
@@ -1338,6 +1482,73 @@
                     "max": 64
                 },
                 "smithy.api#pattern": "^[\\S]+$"
+            }
+        },
+        "com.amazonaws.fis#ExperimentTemplateLogConfiguration": {
+            "type": "structure",
+            "members": {
+                "cloudWatchLogsConfiguration": {
+                    "target": "com.amazonaws.fis#ExperimentTemplateCloudWatchLogsLogConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for experiment logging to Amazon CloudWatch Logs.</p>"
+                    }
+                },
+                "s3Configuration": {
+                    "target": "com.amazonaws.fis#ExperimentTemplateS3LogConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for experiment logging to Amazon S3.</p>"
+                    }
+                },
+                "logSchemaVersion": {
+                    "target": "com.amazonaws.fis#LogSchemaVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The schema version.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the configuration for experiment logging.</p>"
+            }
+        },
+        "com.amazonaws.fis#ExperimentTemplateS3LogConfiguration": {
+            "type": "structure",
+            "members": {
+                "bucketName": {
+                    "target": "com.amazonaws.fis#S3BucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the destination bucket.</p>"
+                    }
+                },
+                "prefix": {
+                    "target": "com.amazonaws.fis#S3ObjectKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The bucket prefix.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the configuration for experiment logging to Amazon S3.</p>"
+            }
+        },
+        "com.amazonaws.fis#ExperimentTemplateS3LogConfigurationInput": {
+            "type": "structure",
+            "members": {
+                "bucketName": {
+                    "target": "com.amazonaws.fis#S3BucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the destination bucket.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "prefix": {
+                    "target": "com.amazonaws.fis#S3ObjectKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The bucket prefix.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the configuration for experiment logging to Amazon S3.</p>"
             }
         },
         "com.amazonaws.fis#ExperimentTemplateStopCondition": {
@@ -2193,6 +2404,12 @@
                 }
             }
         },
+        "com.amazonaws.fis#LogSchemaVersion": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
         "com.amazonaws.fis#NextToken": {
             "type": "string",
             "traits": {
@@ -2250,6 +2467,26 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^[\\S]+$"
+            }
+        },
+        "com.amazonaws.fis#S3BucketName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 63
+                },
+                "smithy.api#pattern": "^[\\S]+$"
+            }
+        },
+        "com.amazonaws.fis#S3ObjectKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[\\s\\S]+$"
             }
         },
         "com.amazonaws.fis#ServiceQuotaExceededException": {
@@ -2729,6 +2966,32 @@
                 "target": "com.amazonaws.fis#UpdateExperimentTemplateActionInputItem"
             }
         },
+        "com.amazonaws.fis#UpdateExperimentTemplateLogConfigurationInput": {
+            "type": "structure",
+            "members": {
+                "cloudWatchLogsConfiguration": {
+                    "target": "com.amazonaws.fis#ExperimentTemplateCloudWatchLogsLogConfigurationInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for experiment logging to Amazon CloudWatch Logs.</p>"
+                    }
+                },
+                "s3Configuration": {
+                    "target": "com.amazonaws.fis#ExperimentTemplateS3LogConfigurationInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for experiment logging to Amazon S3.</p>"
+                    }
+                },
+                "logSchemaVersion": {
+                    "target": "com.amazonaws.fis#LogSchemaVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The schema version.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the configuration for experiment logging.</p>"
+            }
+        },
         "com.amazonaws.fis#UpdateExperimentTemplateRequest": {
             "type": "structure",
             "members": {
@@ -2768,6 +3031,12 @@
                     "target": "com.amazonaws.fis#RoleArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that grants the FIS service permission to perform service actions on your behalf.</p>"
+                    }
+                },
+                "logConfiguration": {
+                    "target": "com.amazonaws.fis#UpdateExperimentTemplateLogConfigurationInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for experiment logging.</p>"
                     }
                 }
             }
