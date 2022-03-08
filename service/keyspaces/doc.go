@@ -16,7 +16,10 @@
 // supported CQL APIs, see Supported Cassandra APIs, operations, and data types in
 // Amazon Keyspaces
 // (https://docs.aws.amazon.com/keyspaces/latest/devguide/cassandra-apis.html) in
-// the Amazon Keyspaces Developer Guide. For more information about Amazon Web
+// the Amazon Keyspaces Developer Guide. To learn how Amazon Keyspaces API actions
+// are tracked in CloudTrail, see Amazon Keyspaces information in CloudTrail
+// (https://docs.aws.amazon.com/keyspaces/latest/devguide/logging-using-cloudtrail.html#service-name-info-in-cloudtrail)
+// in the Amazon Keyspaces Developer Guide. For more information about Amazon Web
 // Services APIs, for example how to implement retry logic or how to sign Amazon
 // Web Services API requests, see Amazon Web Services APIs
 // (https://docs.aws.amazon.com/general/latest/gr/aws-apis.html) in the General

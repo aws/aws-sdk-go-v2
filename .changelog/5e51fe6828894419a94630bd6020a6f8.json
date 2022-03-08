@@ -1,0 +1,8 @@
+{
+    "id": "5e51fe68-2889-4419-a946-30bd6020a6f8",
+    "type": "feature",
+    "description": "Introducing a new enum for NodeGroup error code: Ec2SubnetMissingIpv6Assignment",
+    "modules": [
+        "service/eks"
+    ]
+}

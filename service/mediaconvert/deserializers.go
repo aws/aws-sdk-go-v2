@@ -12865,6 +12865,15 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 				sv.CaptionLanguageSetting = types.HlsCaptionLanguageSetting(jtv)
 			}
 
+		case "captionSegmentLengthControl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HlsCaptionSegmentLengthControl to be of type string, got %T instead", value)
+				}
+				sv.CaptionSegmentLengthControl = types.HlsCaptionSegmentLengthControl(jtv)
+			}
+
 		case "clientCache":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20506,6 +20515,15 @@ func awsRestjson1_deserializeDocumentVideoSelector(v **types.VideoSelector, valu
 					return fmt.Errorf("expected ColorSpaceUsage to be of type string, got %T instead", value)
 				}
 				sv.ColorSpaceUsage = types.ColorSpaceUsage(jtv)
+			}
+
+		case "embeddedTimecodeOverride":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EmbeddedTimecodeOverride to be of type string, got %T instead", value)
+				}
+				sv.EmbeddedTimecodeOverride = types.EmbeddedTimecodeOverride(jtv)
 			}
 
 		case "hdr10Metadata":

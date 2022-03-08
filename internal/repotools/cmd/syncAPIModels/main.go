@@ -124,8 +124,7 @@ func findSmithyModels(modelPath string) (map[string]SourceModel, error) {
 				}
 
 				sdkID := shape.Traits.Service.SDKID
-				sdkID = strings.ReplaceAll(sdkID, " ", "")
-				sdkID = strings.ReplaceAll(sdkID, "-", "")
+				sdkID = strings.ReplaceAll(sdkID, " ", "-")
 				sdkID = strings.ToLower(sdkID)
 				if o, ok := models[sdkID]; ok {
 					return fmt.Errorf("two smithy models have same sdkId %s, 1:%s 2:%s",
@@ -136,7 +135,7 @@ func findSmithyModels(modelPath string) (map[string]SourceModel, error) {
 					SDKID:       sdkID,
 					Version:     shape.Version,
 					SrcFilepath: path,
-					DstFilename: fmt.Sprintf("%s.%s.json", sdkID, shape.Version),
+					DstFilename: sdkID + ".json",
 				}
 			}
 

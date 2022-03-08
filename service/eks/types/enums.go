@@ -318,6 +318,7 @@ const (
 	NodegroupIssueCodeAccessDenied                         NodegroupIssueCode = "AccessDenied"
 	NodegroupIssueCodeInternalFailure                      NodegroupIssueCode = "InternalFailure"
 	NodegroupIssueCodeClusterUnreachable                   NodegroupIssueCode = "ClusterUnreachable"
+	NodegroupIssueCodeEc2SubnetMissingIpv6Assignment       NodegroupIssueCode = "Ec2SubnetMissingIpv6Assignment"
 )
 
 // Values returns all known values for NodegroupIssueCode. Note that this can be
@@ -343,6 +344,7 @@ func (NodegroupIssueCode) Values() []NodegroupIssueCode {
 		"AccessDenied",
 		"InternalFailure",
 		"ClusterUnreachable",
+		"Ec2SubnetMissingIpv6Assignment",
 	}
 }
 
