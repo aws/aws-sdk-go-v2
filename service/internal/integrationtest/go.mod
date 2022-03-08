@@ -9,7 +9,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.12.0
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.15.0
 	github.com/aws/aws-sdk-go-v2/service/athena v1.14.0
-	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.22.0
+	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.22.1
 	github.com/aws/aws-sdk-go-v2/service/batch v1.16.0
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.20.0
 	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.16.0
@@ -42,7 +42,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/elasticsearchservice v1.15.0
 	github.com/aws/aws-sdk-go-v2/service/elastictranscoder v1.13.0
 	github.com/aws/aws-sdk-go-v2/service/emr v1.17.0
-	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.15.0
+	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.15.1
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.14.0
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.14.0
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.13.0
@@ -75,7 +75,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/shield v1.16.0
 	github.com/aws/aws-sdk-go-v2/service/sms v1.12.0
 	github.com/aws/aws-sdk-go-v2/service/snowball v1.15.0
-	github.com/aws/aws-sdk-go-v2/service/sns v1.17.0
+	github.com/aws/aws-sdk-go-v2/service/sns v1.17.1
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.18.0
 	github.com/aws/aws-sdk-go-v2/service/ssm v1.22.0
 	github.com/aws/aws-sdk-go-v2/service/sts v1.16.0
