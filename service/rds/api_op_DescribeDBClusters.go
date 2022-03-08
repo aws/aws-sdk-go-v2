@@ -19,9 +19,8 @@ import (
 // in the Amazon Aurora User Guide. For more information on Multi-AZ DB clusters,
 // see  Multi-AZ deployments with two readable standby DB instances
 // (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
-// in the Amazon RDS User Guide. The Multi-AZ DB clusters feature is in preview and
-// is subject to change. This operation can also return information for Amazon
-// Neptune DB instances and Amazon DocumentDB instances.
+// in the Amazon RDS User Guide. This operation can also return information for
+// Amazon Neptune DB instances and Amazon DocumentDB instances.
 func (c *Client) DescribeDBClusters(ctx context.Context, params *DescribeDBClustersInput, optFns ...func(*Options)) (*DescribeDBClustersOutput, error) {
 	if params == nil {
 		params = &DescribeDBClustersInput{}

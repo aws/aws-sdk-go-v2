@@ -50,7 +50,7 @@ type DeleteRouteInput struct {
 
 type DeleteRouteOutput struct {
 
-	// he ID of the application that the route belongs to.
+	// The ID of the application that the route belongs to.
 	ApplicationId *string
 
 	// The Amazon Resource Name (ARN) of the route.

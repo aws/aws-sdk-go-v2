@@ -13,7 +13,7 @@ import (
 
 // Updates connectivity information for a Greengrass core device. Connectivity
 // information includes endpoints and ports where client devices can connect to an
-// MQTT broker on the core device. When a client device calls the Greengrass
+// MQTT broker on the core device. When a client device calls the IoT Greengrass
 // discovery API
 // (https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-discover-api.html),
 // IoT Greengrass returns connectivity information for all of the core devices

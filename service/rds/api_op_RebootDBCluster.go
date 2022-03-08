@@ -17,8 +17,7 @@ import (
 // changes to take effect. Rebooting a DB cluster restarts the database engine
 // service. Rebooting a DB cluster results in a momentary outage, during which the
 // DB cluster status is set to rebooting. Use this operation only for a non-Aurora
-// Multi-AZ DB cluster. The Multi-AZ DB clusters feature is in preview and is
-// subject to change. For more information on Multi-AZ DB clusters, see  Multi-AZ
+// Multi-AZ DB cluster. For more information on Multi-AZ DB clusters, see  Multi-AZ
 // deployments with two readable standby DB instances
 // (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
 // in the Amazon RDS User Guide.
@@ -67,8 +66,7 @@ type RebootDBClusterOutput struct {
 	// in the Amazon Aurora User Guide. For more information on Multi-AZ DB clusters,
 	// see  Multi-AZ deployments with two readable standby DB instances
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
-	// in the Amazon RDS User Guide. The Multi-AZ DB clusters feature is in preview and
-	// is subject to change.
+	// in the Amazon RDS User Guide.
 	DBCluster *types.DBCluster
 
 	// Metadata pertaining to the operation's result.

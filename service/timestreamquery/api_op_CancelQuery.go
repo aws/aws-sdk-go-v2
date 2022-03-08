@@ -17,7 +17,7 @@ import (
 // cancellation is an idempotent operation, subsequent cancellation requests will
 // return a CancellationMessage, indicating that the query has already been
 // canceled. See code sample
-// (https://docs.aws.amazon.com/Timestream/latest/developerguide/code-samples.cancel-query.html)
+// (https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.cancel-query.html)
 // for details.
 func (c *Client) CancelQuery(ctx context.Context, params *CancelQueryInput, optFns ...func(*Options)) (*CancelQueryOutput, error) {
 	if params == nil {

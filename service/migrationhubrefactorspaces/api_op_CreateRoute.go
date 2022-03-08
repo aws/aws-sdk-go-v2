@@ -29,10 +29,11 @@ import (
 // Spaces routes traffic over the public internet.
 //
 // * If the service has an Lambda
-// function endpoint, then Refactor Spaces uses the API Gateway Lambda
-// integration.
+// function endpoint, then Refactor Spaces configures the Lambda function's
+// resource policy to allow the application's API Gateway to invoke the
+// function.
 //
-// A health check is performed on the service when the route is
+// A one-time health check is performed on the service when the route is
 // created. If the health check fails, the route transitions to FAILED, and no
 // traffic is sent to the service. For Lambda functions, the Lambda function state
 // is checked. If the function is not active, the function configuration is updated
@@ -49,7 +50,10 @@ import (
 // groups
 // (https://docs.aws.amazon.com/elasticloadbalancing/latest/application/target-group-health-checks.html).
 // The health check is considered successful if at least one target within the
-// target group transitions to a healthy state.
+// target group transitions to a healthy state. Services can have HTTP or HTTPS URL
+// endpoints. For HTTPS URLs, publicly-signed certificates are supported. Private
+// Certificate Authorities (CAs) are permitted only if the CA's domain is publicly
+// resolvable.
 func (c *Client) CreateRoute(ctx context.Context, params *CreateRouteInput, optFns ...func(*Options)) (*CreateRouteOutput, error) {
 	if params == nil {
 		params = &CreateRouteInput{}
@@ -135,11 +139,11 @@ type CreateRouteOutput struct {
 	// The route type of the route.
 	RouteType types.RouteType
 
-	// The ID of service in which the rute iscreated. Traffic that matches this route
+	// The ID of service in which the route is created. Traffic that matches this route
 	// is forwarded to this service.
 	ServiceId *string
 
-	// he current state of the route.
+	// The current state of the route.
 	State types.RouteState
 
 	// The tags assigned to the created route. A tag is a label that you assign to an

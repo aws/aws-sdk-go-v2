@@ -91,7 +91,7 @@ type ApplicationSummary struct {
 	// The unique identifier of the application.
 	ApplicationId *string
 
-	// he Amazon Resource Name (ARN) of the application.
+	// The Amazon Resource Name (ARN) of the application.
 	Arn *string
 
 	// The Amazon Web Services account ID of the application creator.
@@ -112,7 +112,8 @@ type ApplicationSummary struct {
 	// The name of the application.
 	Name *string
 
-	// The Amazon Web Services account ID of the application owner.
+	// The Amazon Web Services account ID of the application owner (which is always the
+	// same as the environment owner account ID).
 	OwnerAccountId *string
 
 	// The proxy type of the proxy created within the application.

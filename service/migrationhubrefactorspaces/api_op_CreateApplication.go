@@ -16,8 +16,8 @@ import (
 // Creates an Amazon Web Services Migration Hub Refactor Spaces application. The
 // account that owns the environment also owns the applications created inside the
 // environment, regardless of the account that creates the application. Refactor
-// Spaces provisions the Amazon API Gateway and Network Load Balancer for the
-// application proxy inside your account.
+// Spaces provisions an Amazon API Gateway, API Gateway VPC link, and Network Load
+// Balancer for the application proxy inside your account.
 func (c *Client) CreateApplication(ctx context.Context, params *CreateApplicationInput, optFns ...func(*Options)) (*CreateApplicationOutput, error) {
 	if params == nil {
 		params = &CreateApplicationInput{}
@@ -101,7 +101,8 @@ type CreateApplicationOutput struct {
 	// The name of the application.
 	Name *string
 
-	// The Amazon Web Services account ID of the application owner.
+	// The Amazon Web Services account ID of the application owner (which is always the
+	// same as the environment owner account ID).
 	OwnerAccountId *string
 
 	// The proxy type of the proxy created within the application.
