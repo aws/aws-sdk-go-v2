@@ -202,8 +202,9 @@ type Profile string
 
 // Enum values for Profile
 const (
-	ProfileNone    Profile = "NONE"
-	ProfileHbbtv15 Profile = "HBBTV_1_5"
+	ProfileNone       Profile = "NONE"
+	ProfileHbbtv15    Profile = "HBBTV_1_5"
+	ProfileHybridcast Profile = "HYBRIDCAST"
 )
 
 // Values returns all known values for Profile. Note that this can be expanded in
@@ -213,6 +214,7 @@ func (Profile) Values() []Profile {
 	return []Profile{
 		"NONE",
 		"HBBTV_1_5",
+		"HYBRIDCAST",
 	}
 }
 

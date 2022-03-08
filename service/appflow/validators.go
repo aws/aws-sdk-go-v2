@@ -896,6 +896,11 @@ func validateDestinationConnectorProperties(v *types.DestinationConnectorPropert
 			invalidParams.AddNested("Zendesk", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Marketo != nil {
+		if err := validateMarketoDestinationProperties(v.Marketo); err != nil {
+			invalidParams.AddNested("Marketo", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.CustomConnector != nil {
 		if err := validateCustomConnectorDestinationProperties(v.CustomConnector); err != nil {
 			invalidParams.AddNested("CustomConnector", err.(smithy.InvalidParamsError))
@@ -1154,6 +1159,21 @@ func validateMarketoConnectorProfileProperties(v *types.MarketoConnectorProfileP
 	invalidParams := smithy.InvalidParamsError{Context: "MarketoConnectorProfileProperties"}
 	if v.InstanceUrl == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceUrl"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMarketoDestinationProperties(v *types.MarketoDestinationProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MarketoDestinationProperties"}
+	if v.Object == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Object"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -48,7 +48,7 @@ type GetDataViewInput struct {
 // database and table name
 type GetDataViewOutput struct {
 
-	// Time range to use for the Dataview. The value is determined as Epoch time in
+	// Time range to use for the Dataview. The value is determined as epoch time in
 	// milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM
 	// UTC is specified as 1635768000000.
 	AsOfTimestamp int64
@@ -57,7 +57,7 @@ type GetDataViewOutput struct {
 	AutoUpdate bool
 
 	// The timestamp at which the Dataview was created in FinSpace. The value is
-	// determined as Epoch time in milliseconds. For example, the value for Monday,
+	// determined as epoch time in milliseconds. For example, the value for Monday,
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
 	CreateTime int64
 
@@ -76,7 +76,7 @@ type GetDataViewOutput struct {
 	// Information about an error that occurred for the Dataview.
 	ErrorInfo *types.DataViewErrorInfo
 
-	// The last time that a Dataview was modified. The value is determined as Epoch
+	// The last time that a Dataview was modified. The value is determined as epoch
 	// time in milliseconds. For example, the value for Monday, November 1, 2021
 	// 12:00:00 PM UTC is specified as 1635768000000.
 	LastModifiedTime int64
@@ -89,25 +89,25 @@ type GetDataViewOutput struct {
 
 	// The status of a Dataview creation.
 	//
-	// * RUNNING - Dataview creation is running.
+	// * RUNNING – Dataview creation is running.
 	//
 	// *
-	// STARTING - Dataview creation is starting.
+	// STARTING – Dataview creation is starting.
 	//
-	// * FAILED - Dataview creation has
+	// * FAILED – Dataview creation has
 	// failed.
 	//
-	// * CANCELLED - Dataview creation has been cancelled.
+	// * CANCELLED – Dataview creation has been cancelled.
 	//
-	// * TIMEOUT -
+	// * TIMEOUT –
 	// Dataview creation has timed out.
 	//
-	// * SUCCESS - Dataview creation has
+	// * SUCCESS – Dataview creation has
 	// succeeded.
 	//
-	// * PENDING - Dataview creation is pending.
+	// * PENDING – Dataview creation is pending.
 	//
-	// * FAILED_CLEANUP_FAILED -
+	// * FAILED_CLEANUP_FAILED –
 	// Dataview creation failed and resource cleanup failed.
 	Status types.DataViewStatus
 

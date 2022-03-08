@@ -95,6 +95,7 @@ const (
 	QueryStatusFinished  QueryStatus = "FINISHED"
 	QueryStatusFailed    QueryStatus = "FAILED"
 	QueryStatusCancelled QueryStatus = "CANCELLED"
+	QueryStatusTimedOut  QueryStatus = "TIMED_OUT"
 )
 
 // Values returns all known values for QueryStatus. Note that this can be expanded
@@ -107,6 +108,7 @@ func (QueryStatus) Values() []QueryStatus {
 		"FINISHED",
 		"FAILED",
 		"CANCELLED",
+		"TIMED_OUT",
 	}
 }
 

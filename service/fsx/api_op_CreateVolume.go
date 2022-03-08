@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an Amazon FSx for NetApp ONTAP or Amazon FSx for OpenZFS storage volume.
+// Creates an FSx for ONTAP or Amazon FSx for OpenZFS storage volume.
 func (c *Client) CreateVolume(ctx context.Context, params *CreateVolumeInput, optFns ...func(*Options)) (*CreateVolumeOutput, error) {
 	if params == nil {
 		params = &CreateVolumeInput{}

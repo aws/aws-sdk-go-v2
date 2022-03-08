@@ -81,15 +81,15 @@ type RunTaskInput struct {
 	// can specify up to 10 tasks for each call.
 	Count *int32
 
-	// Specifies whether to enable Amazon ECS managed tags for the task. For more
+	// Specifies whether to use Amazon ECS managed tags for the task. For more
 	// information, see Tagging Your Amazon ECS Resources
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	EnableECSManagedTags bool
 
-	// Determines whether to enable the execute command functionality for the
-	// containers in this task. If true, this enables execute command functionality on
-	// all containers in the task.
+	// Determines whether to use the execute command functionality for the containers
+	// in this task. If true, this enables execute command functionality on all
+	// containers in the task.
 	EnableExecuteCommand bool
 
 	// The name of the task group to associate with the task. The default value is the

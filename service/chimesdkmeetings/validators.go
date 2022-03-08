@@ -344,31 +344,11 @@ func validateEngineTranscribeMedicalSettings(v *types.EngineTranscribeMedicalSet
 	}
 }
 
-func validateEngineTranscribeSettings(v *types.EngineTranscribeSettings) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "EngineTranscribeSettings"}
-	if len(v.LanguageCode) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("LanguageCode"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateTranscriptionConfiguration(v *types.TranscriptionConfiguration) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TranscriptionConfiguration"}
-	if v.EngineTranscribeSettings != nil {
-		if err := validateEngineTranscribeSettings(v.EngineTranscribeSettings); err != nil {
-			invalidParams.AddNested("EngineTranscribeSettings", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.EngineTranscribeMedicalSettings != nil {
 		if err := validateEngineTranscribeMedicalSettings(v.EngineTranscribeMedicalSettings); err != nil {
 			invalidParams.AddNested("EngineTranscribeMedicalSettings", err.(smithy.InvalidParamsError))

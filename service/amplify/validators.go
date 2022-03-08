@@ -1563,9 +1563,7 @@ func validateOpUpdateDomainAssociationInput(v *UpdateDomainAssociationInput) err
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}
-	if v.SubDomainSettings == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SubDomainSettings"))
-	} else if v.SubDomainSettings != nil {
+	if v.SubDomainSettings != nil {
 		if err := validateSubDomainSettings(v.SubDomainSettings); err != nil {
 			invalidParams.AddNested("SubDomainSettings", err.(smithy.InvalidParamsError))
 		}

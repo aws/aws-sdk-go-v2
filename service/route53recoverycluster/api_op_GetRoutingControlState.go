@@ -13,15 +13,29 @@ import (
 
 // Get the state for a routing control. A routing control is a simple on/off switch
 // that you can use to route traffic to cells. When the state is On, traffic flows
-// to a cell. When it's off, traffic does not flow. Before you can create a routing
-// control, you first must create a cluster to host the control. For more
-// information, see CreateCluster
-// (https://docs.aws.amazon.com/recovery-cluster/latest/api/cluster.html). Access
-// one of the endpoints for the cluster to get or update the routing control state
-// to redirect traffic. For more information about working with routing controls,
-// see Routing control
-// (https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.html) in the
-// Route 53 Application Recovery Controller Developer Guide.
+// to a cell. When it's Off, traffic does not flow. Before you can create a routing
+// control, you must first create a cluster to host the control in a control panel.
+// For more information, see  Create routing control structures
+// (https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.create.html)
+// in the Amazon Route 53 Application Recovery Controller Developer Guide. Then you
+// access one of the endpoints for the cluster to get or update the routing control
+// state to redirect traffic. You must specify Regional endpoints when you work
+// with API cluster operations to get or update routing control states in
+// Application Recovery Controller. To see a code example for getting a routing
+// control state, including accessing Regional cluster endpoints in sequence, see
+// API examples
+// (https://docs.aws.amazon.com/r53recovery/latest/dg/service_code_examples_actions.html)
+// in the Amazon Route 53 Application Recovery Controller Developer Guide. Learn
+// more about working with routing controls in the following topics in the Amazon
+// Route 53 Application Recovery Controller Developer Guide:
+//
+// * Viewing and
+// updating routing control states
+// (https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.update.html)
+//
+// *
+// Working with routing controls overall
+// (https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.html)
 func (c *Client) GetRoutingControlState(ctx context.Context, params *GetRoutingControlStateInput, optFns ...func(*Options)) (*GetRoutingControlStateOutput, error) {
 	if params == nil {
 		params = &GetRoutingControlStateInput{}

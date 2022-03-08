@@ -426,12 +426,13 @@ type InstanceStorageResourceType string
 
 // Enum values for InstanceStorageResourceType
 const (
-	InstanceStorageResourceTypeChatTranscripts     InstanceStorageResourceType = "CHAT_TRANSCRIPTS"
-	InstanceStorageResourceTypeCallRecordings      InstanceStorageResourceType = "CALL_RECORDINGS"
-	InstanceStorageResourceTypeScheduledReports    InstanceStorageResourceType = "SCHEDULED_REPORTS"
-	InstanceStorageResourceTypeMediaStreams        InstanceStorageResourceType = "MEDIA_STREAMS"
-	InstanceStorageResourceTypeContactTraceRecords InstanceStorageResourceType = "CONTACT_TRACE_RECORDS"
-	InstanceStorageResourceTypeAgentEvents         InstanceStorageResourceType = "AGENT_EVENTS"
+	InstanceStorageResourceTypeChatTranscripts                 InstanceStorageResourceType = "CHAT_TRANSCRIPTS"
+	InstanceStorageResourceTypeCallRecordings                  InstanceStorageResourceType = "CALL_RECORDINGS"
+	InstanceStorageResourceTypeScheduledReports                InstanceStorageResourceType = "SCHEDULED_REPORTS"
+	InstanceStorageResourceTypeMediaStreams                    InstanceStorageResourceType = "MEDIA_STREAMS"
+	InstanceStorageResourceTypeContactTraceRecords             InstanceStorageResourceType = "CONTACT_TRACE_RECORDS"
+	InstanceStorageResourceTypeAgentEvents                     InstanceStorageResourceType = "AGENT_EVENTS"
+	InstanceStorageResourceTypeRealTimeContactAnalysisSegments InstanceStorageResourceType = "REAL_TIME_CONTACT_ANALYSIS_SEGMENTS"
 )
 
 // Values returns all known values for InstanceStorageResourceType. Note that this
@@ -445,6 +446,7 @@ func (InstanceStorageResourceType) Values() []InstanceStorageResourceType {
 		"MEDIA_STREAMS",
 		"CONTACT_TRACE_RECORDS",
 		"AGENT_EVENTS",
+		"REAL_TIME_CONTACT_ANALYSIS_SEGMENTS",
 	}
 }
 

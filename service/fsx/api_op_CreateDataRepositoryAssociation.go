@@ -61,7 +61,10 @@ type CreateDataRepositoryAssociationInput struct {
 	// link another data repository with file system path /ns1/ns2. This path specifies
 	// where in your file system files will be exported from or imported to. This file
 	// system directory can be linked to only one Amazon S3 bucket, and no other S3
-	// bucket can be linked to the directory.
+	// bucket can be linked to the directory. If you specify only a forward slash (/)
+	// as the file system path, you can link only 1 data repository to the file system.
+	// You can only specify "/" as the file system path for the first data repository
+	// associated with a file system.
 	//
 	// This member is required.
 	FileSystemPath *string

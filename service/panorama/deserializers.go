@@ -1844,6 +1844,11 @@ func awsRestjson1_deserializeOpDocumentDescribeDeviceOutput(v **DescribeDeviceOu
 
 	for key, value := range shape {
 		switch key {
+		case "AlternateSoftwares":
+			if err := awsRestjson1_deserializeDocumentAlternateSoftwares(&sv.AlternateSoftwares, value); err != nil {
+				return err
+			}
+
 		case "Arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1908,6 +1913,15 @@ func awsRestjson1_deserializeOpDocumentDescribeDeviceOutput(v **DescribeDeviceOu
 					return fmt.Errorf("expected DeviceId to be of type string, got %T instead", value)
 				}
 				sv.DeviceId = ptr.String(jtv)
+			}
+
+		case "LatestAlternateSoftware":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LatestAlternateSoftware to be of type string, got %T instead", value)
+				}
+				sv.LatestAlternateSoftware = ptr.String(jtv)
 			}
 
 		case "LatestSoftware":
@@ -3394,7 +3408,7 @@ func awsRestjson1_deserializeOpDocumentDescribePackageVersionOutput(v **Describe
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.IsLatestPatch = ptr.Bool(jtv)
+				sv.IsLatestPatch = jtv
 			}
 
 		case "OwnerAccount":
@@ -6124,6 +6138,80 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAlternateSoftwareMetadata(v **types.AlternateSoftwareMetadata, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AlternateSoftwareMetadata
+	if *v == nil {
+		sv = &types.AlternateSoftwareMetadata{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Version":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Version to be of type string, got %T instead", value)
+				}
+				sv.Version = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAlternateSoftwares(v *[]types.AlternateSoftwareMetadata, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AlternateSoftwareMetadata
+	if *v == nil {
+		cv = []types.AlternateSoftwareMetadata{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AlternateSoftwareMetadata
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAlternateSoftwareMetadata(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentApplicationInstance(v **types.ApplicationInstance, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7198,6 +7286,11 @@ func awsRestjson1_deserializeDocumentNetworkPayload(v **types.NetworkPayload, va
 				return err
 			}
 
+		case "Ntp":
+			if err := awsRestjson1_deserializeDocumentNtpPayload(&sv.Ntp, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -7236,6 +7329,27 @@ func awsRestjson1_deserializeDocumentNetworkStatus(v **types.NetworkStatus, valu
 
 		case "Ethernet1Status":
 			if err := awsRestjson1_deserializeDocumentEthernetStatus(&sv.Ethernet1Status, value); err != nil {
+				return err
+			}
+
+		case "LastUpdatedTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastUpdatedTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected LastUpdatedTime to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "NtpStatus":
+			if err := awsRestjson1_deserializeDocumentNtpStatus(&sv.NtpStatus, value); err != nil {
 				return err
 			}
 
@@ -7849,6 +7963,136 @@ func awsRestjson1_deserializeDocumentNodesList(v *[]types.Node, value interface{
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNtpPayload(v **types.NtpPayload, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NtpPayload
+	if *v == nil {
+		sv = &types.NtpPayload{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "NtpServers":
+			if err := awsRestjson1_deserializeDocumentNtpServerList(&sv.NtpServers, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNtpServerList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected IpAddressOrServerName to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNtpStatus(v **types.NtpStatus, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NtpStatus
+	if *v == nil {
+		sv = &types.NtpStatus{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ConnectionStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkConnectionStatus to be of type string, got %T instead", value)
+				}
+				sv.ConnectionStatus = types.NetworkConnectionStatus(jtv)
+			}
+
+		case "IpAddress":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IpAddress to be of type string, got %T instead", value)
+				}
+				sv.IpAddress = ptr.String(jtv)
+			}
+
+		case "NtpServerName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NtpServerName to be of type string, got %T instead", value)
+				}
+				sv.NtpServerName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -8472,7 +8716,7 @@ func awsRestjson1_deserializeDocumentPackageVersionOutputConfig(v **types.Packag
 				if !ok {
 					return fmt.Errorf("expected MarkLatestPatch to be of type *bool, got %T instead", value)
 				}
-				sv.MarkLatest = ptr.Bool(jtv)
+				sv.MarkLatest = jtv
 			}
 
 		case "PackageName":

@@ -261,8 +261,8 @@ func (e *InactiveEventDataStoreException) ErrorCode() string {
 }
 func (e *InactiveEventDataStoreException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified query cannot be canceled because it is in the FINISHED, FAILED, or
-// CANCELLED state.
+// The specified query cannot be canceled because it is in the FINISHED, FAILED,
+// TIMED_OUT, or CANCELLED state.
 type InactiveQueryException struct {
 	Message *string
 

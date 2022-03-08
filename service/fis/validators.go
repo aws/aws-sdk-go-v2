@@ -331,6 +331,31 @@ func validateCreateExperimentTemplateActionInputMap(v map[string]types.CreateExp
 	}
 }
 
+func validateCreateExperimentTemplateLogConfigurationInput(v *types.CreateExperimentTemplateLogConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateExperimentTemplateLogConfigurationInput"}
+	if v.CloudWatchLogsConfiguration != nil {
+		if err := validateExperimentTemplateCloudWatchLogsLogConfigurationInput(v.CloudWatchLogsConfiguration); err != nil {
+			invalidParams.AddNested("CloudWatchLogsConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.S3Configuration != nil {
+		if err := validateExperimentTemplateS3LogConfigurationInput(v.S3Configuration); err != nil {
+			invalidParams.AddNested("S3Configuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LogSchemaVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LogSchemaVersion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCreateExperimentTemplateStopConditionInput(v *types.CreateExperimentTemplateStopConditionInput) error {
 	if v == nil {
 		return nil
@@ -404,6 +429,36 @@ func validateCreateExperimentTemplateTargetInputMap(v map[string]types.CreateExp
 	}
 }
 
+func validateExperimentTemplateCloudWatchLogsLogConfigurationInput(v *types.ExperimentTemplateCloudWatchLogsLogConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExperimentTemplateCloudWatchLogsLogConfigurationInput"}
+	if v.LogGroupArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LogGroupArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateExperimentTemplateS3LogConfigurationInput(v *types.ExperimentTemplateS3LogConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExperimentTemplateS3LogConfigurationInput"}
+	if v.BucketName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BucketName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateExperimentTemplateTargetFilterInputList(v []types.ExperimentTemplateTargetInputFilter) error {
 	if v == nil {
 		return nil
@@ -431,6 +486,28 @@ func validateExperimentTemplateTargetInputFilter(v *types.ExperimentTemplateTarg
 	}
 	if v.Values == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateExperimentTemplateLogConfigurationInput(v *types.UpdateExperimentTemplateLogConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateExperimentTemplateLogConfigurationInput"}
+	if v.CloudWatchLogsConfiguration != nil {
+		if err := validateExperimentTemplateCloudWatchLogsLogConfigurationInput(v.CloudWatchLogsConfiguration); err != nil {
+			invalidParams.AddNested("CloudWatchLogsConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.S3Configuration != nil {
+		if err := validateExperimentTemplateS3LogConfigurationInput(v.S3Configuration); err != nil {
+			invalidParams.AddNested("S3Configuration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -544,6 +621,11 @@ func validateOpCreateExperimentTemplateInput(v *CreateExperimentTemplateInput) e
 	}
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.LogConfiguration != nil {
+		if err := validateCreateExperimentTemplateLogConfigurationInput(v.LogConfiguration); err != nil {
+			invalidParams.AddNested("LogConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -724,6 +806,11 @@ func validateOpUpdateExperimentTemplateInput(v *UpdateExperimentTemplateInput) e
 	if v.Targets != nil {
 		if err := validateUpdateExperimentTemplateTargetInputMap(v.Targets); err != nil {
 			invalidParams.AddNested("Targets", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LogConfiguration != nil {
+		if err := validateUpdateExperimentTemplateLogConfigurationInput(v.LogConfiguration); err != nil {
+			invalidParams.AddNested("LogConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

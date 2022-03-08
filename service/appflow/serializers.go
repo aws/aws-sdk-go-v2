@@ -2515,6 +2515,13 @@ func awsRestjson1_serializeDocumentDestinationConnectorProperties(v *types.Desti
 		}
 	}
 
+	if v.Marketo != nil {
+		ok := object.Key("Marketo")
+		if err := awsRestjson1_serializeDocumentMarketoDestinationProperties(v.Marketo, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Redshift != nil {
 		ok := object.Key("Redshift")
 		if err := awsRestjson1_serializeDocumentRedshiftDestinationProperties(v.Redshift, ok); err != nil {
@@ -2918,6 +2925,25 @@ func awsRestjson1_serializeDocumentMarketoConnectorProfileProperties(v *types.Ma
 	if v.InstanceUrl != nil {
 		ok := object.Key("instanceUrl")
 		ok.String(*v.InstanceUrl)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMarketoDestinationProperties(v *types.MarketoDestinationProperties, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ErrorHandlingConfig != nil {
+		ok := object.Key("errorHandlingConfig")
+		if err := awsRestjson1_serializeDocumentErrorHandlingConfig(v.ErrorHandlingConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Object != nil {
+		ok := object.Key("object")
+		ok.String(*v.Object)
 	}
 
 	return nil

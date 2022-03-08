@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves detailed Job log with paging.
+// Retrieves detailed job log items with paging.
 func (c *Client) DescribeJobLogItems(ctx context.Context, params *DescribeJobLogItemsInput, optFns ...func(*Options)) (*DescribeJobLogItemsOutput, error) {
 	if params == nil {
 		params = &DescribeJobLogItemsInput{}

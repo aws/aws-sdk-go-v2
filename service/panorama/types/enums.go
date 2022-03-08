@@ -181,6 +181,7 @@ type NetworkConnectionStatus string
 const (
 	NetworkConnectionStatusConnected    NetworkConnectionStatus = "CONNECTED"
 	NetworkConnectionStatusNotConnected NetworkConnectionStatus = "NOT_CONNECTED"
+	NetworkConnectionStatusConnecting   NetworkConnectionStatus = "CONNECTING"
 )
 
 // Values returns all known values for NetworkConnectionStatus. Note that this can
@@ -190,6 +191,7 @@ func (NetworkConnectionStatus) Values() []NetworkConnectionStatus {
 	return []NetworkConnectionStatus{
 		"CONNECTED",
 		"NOT_CONNECTED",
+		"CONNECTING",
 	}
 }
 
@@ -279,7 +281,8 @@ type PackageImportJobType string
 
 // Enum values for PackageImportJobType
 const (
-	PackageImportJobTypeNodePackageVersion PackageImportJobType = "NODE_PACKAGE_VERSION"
+	PackageImportJobTypeNodePackageVersion            PackageImportJobType = "NODE_PACKAGE_VERSION"
+	PackageImportJobTypeMarketplaceNodePackageVersion PackageImportJobType = "MARKETPLACE_NODE_PACKAGE_VERSION"
 )
 
 // Values returns all known values for PackageImportJobType. Note that this can be
@@ -288,6 +291,7 @@ const (
 func (PackageImportJobType) Values() []PackageImportJobType {
 	return []PackageImportJobType{
 		"NODE_PACKAGE_VERSION",
+		"MARKETPLACE_NODE_PACKAGE_VERSION",
 	}
 }
 

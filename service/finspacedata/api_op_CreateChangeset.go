@@ -31,17 +31,17 @@ func (c *Client) CreateChangeset(ctx context.Context, params *CreateChangesetInp
 // The request for a CreateChangeset operation.
 type CreateChangesetInput struct {
 
-	// Option to indicate how a Changeset will be applied to a Dataset.
+	// The option to indicate how a Changeset will be applied to a Dataset.
 	//
-	// * REPLACE -
-	// Changeset will be considered as a replacement to all prior loaded Changesets.
+	// * REPLACE
+	// – Changeset will be considered as a replacement to all prior loaded
+	// Changesets.
 	//
-	// *
-	// APPEND - Changeset will be considered as an addition to the end of all prior
-	// loaded Changesets.
+	// * APPEND – Changeset will be considered as an addition to the end
+	// of all prior loaded Changesets.
 	//
-	// * MODIFY - Changeset is considered as a replacement to a
-	// specific prior ingested Changeset.
+	// * MODIFY – Changeset is considered as a
+	// replacement to a specific prior ingested Changeset.
 	//
 	// This member is required.
 	ChangeType types.ChangeType
@@ -57,15 +57,15 @@ type CreateChangesetInput struct {
 	// (separator) and the type of compression (compression). formatType is a required
 	// attribute and can have the following values:
 	//
-	// * PARQUET - Parquet source file
+	// * PARQUET – Parquet source file
 	// format.
 	//
-	// * CSV - CSV source file format.
+	// * CSV – CSV source file format.
 	//
-	// * JSON - JSON source file format.
+	// * JSON – JSON source file format.
 	//
 	// *
-	// XML - XML source file format.
+	// XML – XML source file format.
 	//
 	// Here is an example of how you could specify the
 	// formatParams:  "formatParams": { "formatType": "CSV", "withHeader": "true",
@@ -89,7 +89,8 @@ type CreateChangesetInput struct {
 	// access. To do that, you first need to configure the IAM policy on S3 bucket. For
 	// more information, see Loading data from an Amazon S3 Bucket using the FinSpace
 	// API
-	// (https://docs.aws.amazon.com/finspace/latest/data-api/fs-using-the-finspace-api.html#access-s3-buckets)section.
+	// (https://docs.aws.amazon.com/finspace/latest/data-api/fs-using-the-finspace-api.html#access-s3-buckets)
+	// section.
 	//
 	// This member is required.
 	SourceParams map[string]string

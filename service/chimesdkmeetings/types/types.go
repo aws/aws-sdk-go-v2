@@ -104,11 +104,6 @@ type EngineTranscribeMedicalSettings struct {
 // Settings specific to the Amazon Transcribe engine.
 type EngineTranscribeSettings struct {
 
-	// The language code specified for the Amazon Transcribe engine.
-	//
-	// This member is required.
-	LanguageCode TranscribeLanguageCode
-
 	// Set this field to PII to identify personally identifiable information in the
 	// transcription output.
 	ContentIdentificationType TranscribeContentIdentificationType
@@ -125,8 +120,18 @@ type EngineTranscribeSettings struct {
 	// partial results to change.
 	EnablePartialResultsStabilization bool
 
+	// Automatically identifies the language spoken in media files.
+	IdentifyLanguage bool
+
+	// The language code specified for the Amazon Transcribe engine.
+	LanguageCode TranscribeLanguageCode
+
 	// The name of the language model used during transcription.
 	LanguageModelName *string
+
+	// Language codes for the languages that you want to identify. You must provide at
+	// least 2 codes.
+	LanguageOptions *string
 
 	// The stabity level of a partial results transcription. Determines how stable you
 	// want the transcription results to be. A higher level means the transcription
@@ -140,6 +145,9 @@ type EngineTranscribeSettings struct {
 	// CREDIT_DEBIT_EXPIRY, PIN, EMAIL, ADDRESS, NAME, PHONE, SSN, and ALL.
 	// PiiEntityTypes is an optional parameter with a default value of ALL.
 	PiiEntityTypes *string
+
+	// Language code for the preferred language.
+	PreferredLanguage TranscribeLanguageCode
 
 	// The AWS Region passed to Amazon Transcribe. If you don't specify a Region,
 	// Amazon Chime uses the meeting's Region.
@@ -200,7 +208,8 @@ type Meeting struct {
 	// The Region in which you create the meeting. Available values: af-south-1,
 	// ap-northeast-1, ap-northeast-2, ap-south-1, ap-southeast-1, ap-southeast-2,
 	// ca-central-1, eu-central-1, eu-north-1, eu-south-1, eu-west-1, eu-west-2,
-	// eu-west-3, sa-east-1, us-east-1, us-east-2, us-west-1, us-west-2.
+	// eu-west-3, sa-east-1, us-east-1, us-east-2, us-west-1, us-west-2. Available
+	// values in AWS GovCloud (US) Regions: us-gov-east-1, us-gov-west-1.
 	MediaRegion *string
 
 	// The features available to a meeting, such as Amazon Voice Focus.
@@ -215,7 +224,7 @@ type Meeting struct {
 	noSmithyDocumentSerde
 }
 
-// The configuration settings of the features available to a meeting.
+// The configuration settings of the features available to a meeting.>
 type MeetingFeaturesConfiguration struct {
 
 	// The configuration settings for the audio features available to a meeting.

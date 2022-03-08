@@ -59,6 +59,9 @@ type DescribeCustomPluginOutput struct {
 	// The name of the custom plugin.
 	Name *string
 
+	// Details about the state of a custom plugin.
+	StateDescription *types.StateDescription
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

@@ -56,7 +56,7 @@ type DataReplicationInfo struct {
 	// Request to query the time when data replication will be complete.
 	EtaDateTime *string
 
-	// Request to query data replication lag durating.
+	// Request to query data replication lag duration.
 	LagDuration *string
 
 	// Request to query data replication last snapshot time.
@@ -104,7 +104,7 @@ type DataReplicationInitiation struct {
 	noSmithyDocumentSerde
 }
 
-// Data replication intiation step.
+// Data replication initiation step.
 type DataReplicationInitiationStep struct {
 
 	// Request to query data initiation step name.
@@ -125,7 +125,7 @@ type DescribeJobsRequestFilters struct {
 	// Request to describe Job log filters by job ID.
 	JobIDs []string
 
-	// Request to describe Job log by last date.
+	// Request to describe job log items by last date.
 	ToDate *string
 
 	noSmithyDocumentSerde
@@ -208,7 +208,7 @@ type Job struct {
 	// Job status.
 	Status JobStatus
 
-	// Tags associated with spcific Job.
+	// Tags associated with specific Job.
 	Tags map[string]string
 
 	// Job type.
@@ -250,16 +250,16 @@ type JobLogEventData struct {
 	noSmithyDocumentSerde
 }
 
-// Configure launced instance.
+// Launched instance.
 type LaunchedInstance struct {
 
-	// Configure launced instance EC2 ID.
+	// Launched instance EC2 ID.
 	Ec2InstanceID *string
 
-	// Configure launced instance first boot.
+	// Launched instance first boot.
 	FirstBoot FirstBoot
 
-	// Configure launced instance Job ID.
+	// Launched instance Job ID.
 	JobID *string
 
 	noSmithyDocumentSerde
@@ -349,7 +349,7 @@ type LifeCycleLastCutoverReverted struct {
 // Lifecycle last Test.
 type LifeCycleLastTest struct {
 
-	// Lifecycle last Test finlized.
+	// Lifecycle last Test finalized.
 	Finalized *LifeCycleLastTestFinalized
 
 	// Lifecycle last Test initiated.
@@ -361,7 +361,7 @@ type LifeCycleLastTest struct {
 	noSmithyDocumentSerde
 }
 
-// Lifecycle last Test finlized.
+// Lifecycle last Test finalized.
 type LifeCycleLastTestFinalized struct {
 
 	// Lifecycle Test failed API call date and time.
@@ -442,12 +442,15 @@ type ReplicationConfigurationReplicatedDisk struct {
 	// Replication Configuration replicated disk staging disk type.
 	StagingDiskType ReplicationConfigurationReplicatedDiskStagingDiskType
 
+	// Replication Configuration replicated disk throughput.
+	Throughput int64
+
 	noSmithyDocumentSerde
 }
 
 type ReplicationConfigurationTemplate struct {
 
-	// Replication Configuration template template ID.
+	// Replication Configuration template ID.
 	//
 	// This member is required.
 	ReplicationConfigurationTemplateID *string
@@ -459,7 +462,7 @@ type ReplicationConfigurationTemplate struct {
 	// Service Security group.
 	AssociateDefaultSecurityGroup *bool
 
-	// Replication Configuration template bandwidth throtting.
+	// Replication Configuration template bandwidth throttling.
 	BandwidthThrottling int64
 
 	// Replication Configuration template create Public IP.
@@ -468,7 +471,7 @@ type ReplicationConfigurationTemplate struct {
 	// Replication Configuration template data plane routing.
 	DataPlaneRouting ReplicationConfigurationDataPlaneRouting
 
-	// Replication Configuration template use dedault large Staging Disk type.
+	// Replication Configuration template use default large Staging Disk type.
 	DefaultLargeStagingDiskType ReplicationConfigurationDefaultLargeStagingDiskType
 
 	// Replication Configuration template EBS encryption.

@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a single vCenter client by ID.
+// Deletes a given vCenter client by ID.
 func (c *Client) DeleteVcenterClient(ctx context.Context, params *DeleteVcenterClientInput, optFns ...func(*Options)) (*DeleteVcenterClientOutput, error) {
 	if params == nil {
 		params = &DeleteVcenterClientInput{}

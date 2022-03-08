@@ -265,6 +265,51 @@ func awsRestjson1_serializeOpHttpBindingsDescribeAnomalyInput(v *DescribeAnomaly
 	return nil
 }
 
+type awsRestjson1_serializeOpDescribeEventSourcesConfig struct {
+}
+
+func (*awsRestjson1_serializeOpDescribeEventSourcesConfig) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDescribeEventSourcesConfig) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeEventSourcesConfigInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/event-sources")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDescribeEventSourcesConfigInput(v *DescribeEventSourcesConfigInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpDescribeFeedback struct {
 }
 
@@ -1775,6 +1820,76 @@ func awsRestjson1_serializeOpDocumentStartCostEstimationInput(v *StartCostEstima
 	return nil
 }
 
+type awsRestjson1_serializeOpUpdateEventSourcesConfig struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateEventSourcesConfig) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateEventSourcesConfig) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateEventSourcesConfigInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/event-sources")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateEventSourcesConfigInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateEventSourcesConfigInput(v *UpdateEventSourcesConfigInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateEventSourcesConfigInput(v *UpdateEventSourcesConfigInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EventSources != nil {
+		ok := object.Key("EventSources")
+		if err := awsRestjson1_serializeDocumentEventSourcesConfig(v.EventSources, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpUpdateResourceCollection struct {
 }
 
@@ -1931,6 +2046,18 @@ func awsRestjson1_serializeDocumentAccountIdList(v []string, value smithyjson.Va
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAmazonCodeGuruProfilerIntegration(v *types.AmazonCodeGuruProfilerIntegration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Status) > 0 {
+		ok := object.Key("Status")
+		ok.String(string(v.Status))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentCloudFormationCollection(v *types.CloudFormationCollection, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2014,6 +2141,20 @@ func awsRestjson1_serializeDocumentEndTimeRange(v *types.EndTimeRange, value smi
 	if v.ToTime != nil {
 		ok := object.Key("ToTime")
 		ok.Double(smithytime.FormatEpochSeconds(*v.ToTime))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEventSourcesConfig(v *types.EventSourcesConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AmazonCodeGuruProfiler != nil {
+		ok := object.Key("AmazonCodeGuruProfiler")
+		if err := awsRestjson1_serializeDocumentAmazonCodeGuruProfilerIntegration(v.AmazonCodeGuruProfiler, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

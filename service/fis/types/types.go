@@ -96,6 +96,23 @@ type CreateExperimentTemplateActionInput struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies the configuration for experiment logging.
+type CreateExperimentTemplateLogConfigurationInput struct {
+
+	// The schema version.
+	//
+	// This member is required.
+	LogSchemaVersion *int32
+
+	// The configuration for experiment logging to Amazon CloudWatch Logs.
+	CloudWatchLogsConfiguration *ExperimentTemplateCloudWatchLogsLogConfigurationInput
+
+	// The configuration for experiment logging to Amazon S3.
+	S3Configuration *ExperimentTemplateS3LogConfigurationInput
+
+	noSmithyDocumentSerde
+}
+
 // Specifies a stop condition for an experiment template.
 type CreateExperimentTemplateStopConditionInput struct {
 
@@ -176,6 +193,9 @@ type Experiment struct {
 	// The ID of the experiment.
 	Id *string
 
+	// The configuration for experiment logging.
+	LogConfiguration *ExperimentLogConfiguration
+
 	// The Amazon Resource Name (ARN) of an IAM role that grants the FIS service
 	// permission to perform service actions on your behalf.
 	RoleArn *string
@@ -236,6 +256,43 @@ type ExperimentActionState struct {
 
 	// The state of the action.
 	Status ExperimentActionStatus
+
+	noSmithyDocumentSerde
+}
+
+// Describes the configuration for experiment logging to Amazon CloudWatch Logs.
+type ExperimentCloudWatchLogsLogConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of the destination Amazon CloudWatch Logs log
+	// group.
+	LogGroupArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the configuration for experiment logging.
+type ExperimentLogConfiguration struct {
+
+	// The configuration for experiment logging to Amazon CloudWatch Logs.
+	CloudWatchLogsConfiguration *ExperimentCloudWatchLogsLogConfiguration
+
+	// The schema version.
+	LogSchemaVersion *int32
+
+	// The configuration for experiment logging to Amazon S3.
+	S3Configuration *ExperimentS3LogConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Describes the configuration for experiment logging to Amazon S3.
+type ExperimentS3LogConfiguration struct {
+
+	// The name of the destination bucket.
+	BucketName *string
+
+	// The bucket prefix.
+	Prefix *string
 
 	noSmithyDocumentSerde
 }
@@ -339,6 +396,9 @@ type ExperimentTemplate struct {
 	// The time the experiment template was last updated.
 	LastUpdateTime *time.Time
 
+	// The configuration for experiment logging.
+	LogConfiguration *ExperimentTemplateLogConfiguration
+
 	// The Amazon Resource Name (ARN) of an IAM role.
 	RoleArn *string
 
@@ -371,6 +431,69 @@ type ExperimentTemplateAction struct {
 
 	// The targets for the action.
 	Targets map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the configuration for experiment logging to Amazon CloudWatch Logs.
+type ExperimentTemplateCloudWatchLogsLogConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of the destination Amazon CloudWatch Logs log
+	// group.
+	LogGroupArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the configuration for experiment logging to Amazon CloudWatch Logs.
+type ExperimentTemplateCloudWatchLogsLogConfigurationInput struct {
+
+	// The Amazon Resource Name (ARN) of the destination Amazon CloudWatch Logs log
+	// group.
+	//
+	// This member is required.
+	LogGroupArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the configuration for experiment logging.
+type ExperimentTemplateLogConfiguration struct {
+
+	// The configuration for experiment logging to Amazon CloudWatch Logs.
+	CloudWatchLogsConfiguration *ExperimentTemplateCloudWatchLogsLogConfiguration
+
+	// The schema version.
+	LogSchemaVersion *int32
+
+	// The configuration for experiment logging to Amazon S3.
+	S3Configuration *ExperimentTemplateS3LogConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Describes the configuration for experiment logging to Amazon S3.
+type ExperimentTemplateS3LogConfiguration struct {
+
+	// The name of the destination bucket.
+	BucketName *string
+
+	// The bucket prefix.
+	Prefix *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the configuration for experiment logging to Amazon S3.
+type ExperimentTemplateS3LogConfigurationInput struct {
+
+	// The name of the destination bucket.
+	//
+	// This member is required.
+	BucketName *string
+
+	// The bucket prefix.
+	Prefix *string
 
 	noSmithyDocumentSerde
 }
@@ -521,6 +644,21 @@ type UpdateExperimentTemplateActionInputItem struct {
 
 	// The targets for the action.
 	Targets map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the configuration for experiment logging.
+type UpdateExperimentTemplateLogConfigurationInput struct {
+
+	// The configuration for experiment logging to Amazon CloudWatch Logs.
+	CloudWatchLogsConfiguration *ExperimentTemplateCloudWatchLogsLogConfigurationInput
+
+	// The schema version.
+	LogSchemaVersion *int32
+
+	// The configuration for experiment logging to Amazon S3.
+	S3Configuration *ExperimentTemplateS3LogConfigurationInput
 
 	noSmithyDocumentSerde
 }

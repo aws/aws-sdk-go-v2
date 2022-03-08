@@ -10096,6 +10096,9 @@ func validateOpCreateIpamPoolInput(v *CreateIpamPoolInput) error {
 	if v.IpamScopeId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IpamScopeId"))
 	}
+	if len(v.AddressFamily) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AddressFamily"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

@@ -57,7 +57,7 @@ type UpdateServicePrimaryTaskSetInput struct {
 
 type UpdateServicePrimaryTaskSetOutput struct {
 
-	// Details about the task set.
+	// etails about the task set.
 	TaskSet *types.TaskSet
 
 	// Metadata pertaining to the operation's result.

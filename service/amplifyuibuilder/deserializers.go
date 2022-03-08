@@ -836,6 +836,15 @@ func awsRestjson1_deserializeOpDocumentExportComponentsOutput(v **ExportComponen
 				return err
 			}
 
+		case "nextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -984,6 +993,15 @@ func awsRestjson1_deserializeOpDocumentExportThemesOutput(v **ExportThemesOutput
 		case "entities":
 			if err := awsRestjson1_deserializeDocumentThemeList(&sv.Entities, value); err != nil {
 				return err
+			}
+
+		case "nextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		default:
@@ -2269,6 +2287,86 @@ func awsRestjson1_deserializeErrorServiceQuotaExceededException(response *smithy
 	return output
 }
 
+func awsRestjson1_deserializeDocumentActionParameters(v **types.ActionParameters, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ActionParameters
+	if *v == nil {
+		sv = &types.ActionParameters{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "anchor":
+			if err := awsRestjson1_deserializeDocumentComponentProperty(&sv.Anchor, value); err != nil {
+				return err
+			}
+
+		case "fields":
+			if err := awsRestjson1_deserializeDocumentComponentProperties(&sv.Fields, value); err != nil {
+				return err
+			}
+
+		case "global":
+			if err := awsRestjson1_deserializeDocumentComponentProperty(&sv.Global, value); err != nil {
+				return err
+			}
+
+		case "id":
+			if err := awsRestjson1_deserializeDocumentComponentProperty(&sv.Id, value); err != nil {
+				return err
+			}
+
+		case "model":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Model = ptr.String(jtv)
+			}
+
+		case "state":
+			if err := awsRestjson1_deserializeDocumentMutationActionSetStateParameter(&sv.State, value); err != nil {
+				return err
+			}
+
+		case "target":
+			if err := awsRestjson1_deserializeDocumentComponentProperty(&sv.Target, value); err != nil {
+				return err
+			}
+
+		case "type":
+			if err := awsRestjson1_deserializeDocumentComponentProperty(&sv.Type, value); err != nil {
+				return err
+			}
+
+		case "url":
+			if err := awsRestjson1_deserializeDocumentComponentProperty(&sv.Url, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentComponent(v **types.Component, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -2346,6 +2444,11 @@ func awsRestjson1_deserializeDocumentComponent(v **types.Component, value interf
 				sv.EnvironmentName = ptr.String(jtv)
 			}
 
+		case "events":
+			if err := awsRestjson1_deserializeDocumentComponentEvents(&sv.Events, value); err != nil {
+				return err
+			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2385,6 +2488,15 @@ func awsRestjson1_deserializeDocumentComponent(v **types.Component, value interf
 		case "properties":
 			if err := awsRestjson1_deserializeDocumentComponentProperties(&sv.Properties, value); err != nil {
 				return err
+			}
+
+		case "schemaVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SchemaVersion = ptr.String(jtv)
 			}
 
 		case "sourceId":
@@ -2630,6 +2742,11 @@ func awsRestjson1_deserializeDocumentComponentChild(v **types.ComponentChild, va
 				sv.ComponentType = ptr.String(jtv)
 			}
 
+		case "events":
+			if err := awsRestjson1_deserializeDocumentComponentEvents(&sv.Events, value); err != nil {
+				return err
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2767,6 +2884,15 @@ func awsRestjson1_deserializeDocumentComponentConditionProperty(v **types.Compon
 				sv.Operand = ptr.String(jtv)
 			}
 
+		case "operandType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.OperandType = ptr.String(jtv)
+			}
+
 		case "operator":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2851,6 +2977,86 @@ func awsRestjson1_deserializeDocumentComponentDataConfiguration(v **types.Compon
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentComponentEvent(v **types.ComponentEvent, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ComponentEvent
+	if *v == nil {
+		sv = &types.ComponentEvent{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "action":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Action = ptr.String(jtv)
+			}
+
+		case "parameters":
+			if err := awsRestjson1_deserializeDocumentActionParameters(&sv.Parameters, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentComponentEvents(v *map[string]types.ComponentEvent, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]types.ComponentEvent
+	if *v == nil {
+		mv = map[string]types.ComponentEvent{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal types.ComponentEvent
+		mapVar := parsedVal
+		destAddr := &mapVar
+		if err := awsRestjson1_deserializeDocumentComponentEvent(&destAddr, value); err != nil {
+			return err
+		}
+		parsedVal = *destAddr
+		mv[key] = parsedVal
+
+	}
+	*v = mv
 	return nil
 }
 
@@ -3030,6 +3236,15 @@ func awsRestjson1_deserializeDocumentComponentProperty(v **types.ComponentProper
 				return err
 			}
 
+		case "componentName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ComponentName = ptr.String(jtv)
+			}
+
 		case "concat":
 			if err := awsRestjson1_deserializeDocumentComponentPropertyList(&sv.Concat, value); err != nil {
 				return err
@@ -3083,6 +3298,15 @@ func awsRestjson1_deserializeDocumentComponentProperty(v **types.ComponentProper
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Model = ptr.String(jtv)
+			}
+
+		case "property":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Property = ptr.String(jtv)
 			}
 
 		case "type":
@@ -3614,6 +3838,60 @@ func awsRestjson1_deserializeDocumentInvalidParameterException(v **types.Invalid
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMutationActionSetStateParameter(v **types.MutationActionSetStateParameter, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MutationActionSetStateParameter
+	if *v == nil {
+		sv = &types.MutationActionSetStateParameter{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "componentName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ComponentName = ptr.String(jtv)
+			}
+
+		case "property":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Property = ptr.String(jtv)
+			}
+
+		case "set":
+			if err := awsRestjson1_deserializeDocumentComponentProperty(&sv.Set, value); err != nil {
+				return err
 			}
 
 		default:

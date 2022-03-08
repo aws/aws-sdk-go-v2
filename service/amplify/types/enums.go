@@ -86,7 +86,8 @@ type Platform string
 
 // Enum values for Platform
 const (
-	PlatformWeb Platform = "WEB"
+	PlatformWeb        Platform = "WEB"
+	PlatformWebDynamic Platform = "WEB_DYNAMIC"
 )
 
 // Values returns all known values for Platform. Note that this can be expanded in
@@ -95,6 +96,27 @@ const (
 func (Platform) Values() []Platform {
 	return []Platform{
 		"WEB",
+		"WEB_DYNAMIC",
+	}
+}
+
+type RepositoryCloneMethod string
+
+// Enum values for RepositoryCloneMethod
+const (
+	RepositoryCloneMethodSsh   RepositoryCloneMethod = "SSH"
+	RepositoryCloneMethodToken RepositoryCloneMethod = "TOKEN"
+	RepositoryCloneMethodSigv4 RepositoryCloneMethod = "SIGV4"
+)
+
+// Values returns all known values for RepositoryCloneMethod. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RepositoryCloneMethod) Values() []RepositoryCloneMethod {
+	return []RepositoryCloneMethod{
+		"SSH",
+		"TOKEN",
+		"SIGV4",
 	}
 }
 

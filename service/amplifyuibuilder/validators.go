@@ -346,6 +346,58 @@ func addOpUpdateThemeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateTheme{}, middleware.After)
 }
 
+func validateActionParameters(v *types.ActionParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ActionParameters"}
+	if v.Type != nil {
+		if err := validateComponentProperty(v.Type); err != nil {
+			invalidParams.AddNested("Type", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Url != nil {
+		if err := validateComponentProperty(v.Url); err != nil {
+			invalidParams.AddNested("Url", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Anchor != nil {
+		if err := validateComponentProperty(v.Anchor); err != nil {
+			invalidParams.AddNested("Anchor", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Target != nil {
+		if err := validateComponentProperty(v.Target); err != nil {
+			invalidParams.AddNested("Target", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Global != nil {
+		if err := validateComponentProperty(v.Global); err != nil {
+			invalidParams.AddNested("Global", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Id != nil {
+		if err := validateComponentProperty(v.Id); err != nil {
+			invalidParams.AddNested("Id", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Fields != nil {
+		if err := validateComponentProperties(v.Fields); err != nil {
+			invalidParams.AddNested("Fields", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.State != nil {
+		if err := validateMutationActionSetStateParameter(v.State); err != nil {
+			invalidParams.AddNested("State", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateComponentChild(v *types.ComponentChild) error {
 	if v == nil {
 		return nil
@@ -367,6 +419,11 @@ func validateComponentChild(v *types.ComponentChild) error {
 	if v.Children != nil {
 		if err := validateComponentChildList(v.Children); err != nil {
 			invalidParams.AddNested("Children", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Events != nil {
+		if err := validateComponentEvents(v.Events); err != nil {
+			invalidParams.AddNested("Events", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -444,6 +501,41 @@ func validateComponentDataConfiguration(v *types.ComponentDataConfiguration) err
 	if v.Sort != nil {
 		if err := validateSortPropertyList(v.Sort); err != nil {
 			invalidParams.AddNested("Sort", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateComponentEvent(v *types.ComponentEvent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ComponentEvent"}
+	if v.Parameters != nil {
+		if err := validateActionParameters(v.Parameters); err != nil {
+			invalidParams.AddNested("Parameters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateComponentEvents(v map[string]types.ComponentEvent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ComponentEvents"}
+	for key := range v {
+		value := v[key]
+		if err := validateComponentEvent(&value); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -577,6 +669,11 @@ func validateCreateComponentData(v *types.CreateComponentData) error {
 			invalidParams.AddNested("CollectionProperties", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Events != nil {
+		if err := validateComponentEvents(v.Events); err != nil {
+			invalidParams.AddNested("Events", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -656,6 +753,31 @@ func validateFormBindings(v map[string]types.FormBindingElement) error {
 	}
 }
 
+func validateMutationActionSetStateParameter(v *types.MutationActionSetStateParameter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MutationActionSetStateParameter"}
+	if v.ComponentName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ComponentName"))
+	}
+	if v.Property == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Property"))
+	}
+	if v.Set == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Set"))
+	} else if v.Set != nil {
+		if err := validateComponentProperty(v.Set); err != nil {
+			invalidParams.AddNested("Set", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRefreshTokenRequestBody(v *types.RefreshTokenRequestBody) error {
 	if v == nil {
 		return nil
@@ -724,6 +846,11 @@ func validateUpdateComponentData(v *types.UpdateComponentData) error {
 	if v.CollectionProperties != nil {
 		if err := validateComponentCollectionProperties(v.CollectionProperties); err != nil {
 			invalidParams.AddNested("CollectionProperties", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Events != nil {
+		if err := validateComponentEvents(v.Events); err != nil {
+			invalidParams.AddNested("Events", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

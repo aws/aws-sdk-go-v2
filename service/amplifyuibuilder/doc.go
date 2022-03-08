@@ -13,6 +13,6 @@
 // Amplify Framework is a comprehensive set of SDKs, libraries, tools, and
 // documentation for client app development. For more information, see the Amplify
 // Framework (https://docs.amplify.aws/). For more information about deploying an
-// Amplify application to Amazon Web Services, see the Amplify Console User Guide
+// Amplify application to Amazon Web Services, see the Amplify User Guide
 // (https://docs.aws.amazon.com/amplify/latest/userguide/welcome.html).
 package amplifyuibuilder

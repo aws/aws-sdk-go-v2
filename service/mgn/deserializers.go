@@ -2254,6 +2254,15 @@ func awsRestjson1_deserializeOpDocumentGetLaunchConfigurationOutput(v **GetLaunc
 
 	for key, value := range shape {
 		switch key {
+		case "bootMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BootMode to be of type string, got %T instead", value)
+				}
+				sv.BootMode = types.BootMode(jtv)
+			}
+
 		case "copyPrivateIp":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -4311,6 +4320,15 @@ func awsRestjson1_deserializeOpDocumentUpdateLaunchConfigurationOutput(v **Updat
 
 	for key, value := range shape {
 		switch key {
+		case "bootMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BootMode to be of type string, got %T instead", value)
+				}
+				sv.BootMode = types.BootMode(jtv)
+			}
+
 		case "copyPrivateIp":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -7439,6 +7457,19 @@ func awsRestjson1_deserializeDocumentReplicationConfigurationReplicatedDisk(v **
 					return fmt.Errorf("expected ReplicationConfigurationReplicatedDiskStagingDiskType to be of type string, got %T instead", value)
 				}
 				sv.StagingDiskType = types.ReplicationConfigurationReplicatedDiskStagingDiskType(jtv)
+			}
+
+		case "throughput":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PositiveInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Throughput = i64
 			}
 
 		default:

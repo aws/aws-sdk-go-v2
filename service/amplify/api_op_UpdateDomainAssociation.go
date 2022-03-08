@@ -40,11 +40,6 @@ type UpdateDomainAssociationInput struct {
 	// This member is required.
 	DomainName *string
 
-	// Describes the settings for the subdomain.
-	//
-	// This member is required.
-	SubDomainSettings []types.SubDomainSetting
-
 	// Sets the branch patterns for automatic subdomain creation.
 	AutoSubDomainCreationPatterns []string
 
@@ -54,6 +49,9 @@ type UpdateDomainAssociationInput struct {
 
 	// Enables the automated creation of subdomains for branches.
 	EnableAutoSubDomain *bool
+
+	// Describes the settings for the subdomain.
+	SubDomainSettings []types.SubDomainSetting
 
 	noSmithyDocumentSerde
 }

@@ -2479,6 +2479,11 @@ func awsAwsjson11_serializeDocumentCreateOpenZFSVolumeConfiguration(v *types.Cre
 		ok.Boolean(*v.ReadOnly)
 	}
 
+	if v.RecordSizeKiB != nil {
+		ok := object.Key("RecordSizeKiB")
+		ok.Integer(*v.RecordSizeKiB)
+	}
+
 	if v.StorageCapacityQuotaGiB != nil {
 		ok := object.Key("StorageCapacityQuotaGiB")
 		ok.Integer(*v.StorageCapacityQuotaGiB)
@@ -2613,11 +2618,29 @@ func awsAwsjson11_serializeDocumentDeleteFileSystemOpenZFSConfiguration(v *types
 		}
 	}
 
+	if v.Options != nil {
+		ok := object.Key("Options")
+		if err := awsAwsjson11_serializeDocumentDeleteFileSystemOpenZFSOptions(v.Options, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SkipFinalBackup != nil {
 		ok := object.Key("SkipFinalBackup")
 		ok.Boolean(*v.SkipFinalBackup)
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentDeleteFileSystemOpenZFSOptions(v []types.DeleteFileSystemOpenZFSOption, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
 	return nil
 }
 
@@ -2850,6 +2873,11 @@ func awsAwsjson11_serializeDocumentOpenZFSCreateRootVolumeConfiguration(v *types
 	if v.ReadOnly != nil {
 		ok := object.Key("ReadOnly")
 		ok.Boolean(*v.ReadOnly)
+	}
+
+	if v.RecordSizeKiB != nil {
+		ok := object.Key("RecordSizeKiB")
+		ok.Integer(*v.RecordSizeKiB)
 	}
 
 	if v.UserAndGroupQuotas != nil {
@@ -3451,6 +3479,11 @@ func awsAwsjson11_serializeDocumentUpdateOpenZFSVolumeConfiguration(v *types.Upd
 	if v.ReadOnly != nil {
 		ok := object.Key("ReadOnly")
 		ok.Boolean(*v.ReadOnly)
+	}
+
+	if v.RecordSizeKiB != nil {
+		ok := object.Key("RecordSizeKiB")
+		ok.Integer(*v.RecordSizeKiB)
 	}
 
 	if v.StorageCapacityQuotaGiB != nil {

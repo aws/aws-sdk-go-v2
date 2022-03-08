@@ -550,6 +550,26 @@ func (m *validateOpUpdateDataCatalog) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateNamedQuery struct {
+}
+
+func (*validateOpUpdateNamedQuery) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateNamedQuery) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateNamedQueryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateNamedQueryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdatePreparedStatement struct {
 }
 
@@ -698,12 +718,31 @@ func addOpUpdateDataCatalogValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateDataCatalog{}, middleware.After)
 }
 
+func addOpUpdateNamedQueryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateNamedQuery{}, middleware.After)
+}
+
 func addOpUpdatePreparedStatementValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdatePreparedStatement{}, middleware.After)
 }
 
 func addOpUpdateWorkGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateWorkGroup{}, middleware.After)
+}
+
+func validateAclConfiguration(v *types.AclConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AclConfiguration"}
+	if len(v.S3AclOption) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("S3AclOption"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateEncryptionConfiguration(v *types.EncryptionConfiguration) error {
@@ -731,6 +770,11 @@ func validateResultConfiguration(v *types.ResultConfiguration) error {
 			invalidParams.AddNested("EncryptionConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.AclConfiguration != nil {
+		if err := validateAclConfiguration(v.AclConfiguration); err != nil {
+			invalidParams.AddNested("AclConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -746,6 +790,11 @@ func validateResultConfigurationUpdates(v *types.ResultConfigurationUpdates) err
 	if v.EncryptionConfiguration != nil {
 		if err := validateEncryptionConfiguration(v.EncryptionConfiguration); err != nil {
 			invalidParams.AddNested("EncryptionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AclConfiguration != nil {
+		if err := validateAclConfiguration(v.AclConfiguration); err != nil {
+			invalidParams.AddNested("AclConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1238,6 +1287,27 @@ func validateOpUpdateDataCatalogInput(v *UpdateDataCatalogInput) error {
 	}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateNamedQueryInput(v *UpdateNamedQueryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateNamedQueryInput"}
+	if v.NamedQueryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NamedQueryId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.QueryString == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryString"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

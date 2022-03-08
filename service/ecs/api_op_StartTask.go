@@ -49,7 +49,7 @@ type StartTaskInput struct {
 	// your task. If you do not specify a cluster, the default cluster is assumed.
 	Cluster *string
 
-	// Specifies whether to enable Amazon ECS managed tags for the task. For more
+	// Specifies whether to use Amazon ECS managed tags for the task. For more
 	// information, see Tagging Your Amazon ECS Resources
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html)
 	// in the Amazon Elastic Container Service Developer Guide.

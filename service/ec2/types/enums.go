@@ -2185,6 +2185,7 @@ const (
 	ImageAttributeNameBlockDeviceMapping ImageAttributeName = "blockDeviceMapping"
 	ImageAttributeNameSriovNetSupport    ImageAttributeName = "sriovNetSupport"
 	ImageAttributeNameBootMode           ImageAttributeName = "bootMode"
+	ImageAttributeNameLastLaunchedTime   ImageAttributeName = "lastLaunchedTime"
 )
 
 // Values returns all known values for ImageAttributeName. Note that this can be
@@ -2200,6 +2201,7 @@ func (ImageAttributeName) Values() []ImageAttributeName {
 		"blockDeviceMapping",
 		"sriovNetSupport",
 		"bootMode",
+		"lastLaunchedTime",
 	}
 }
 
@@ -5078,6 +5080,7 @@ const (
 	ResourceTypeSpotFleetRequest                                       ResourceType = "spot-fleet-request"
 	ResourceTypeSpotInstancesRequest                                   ResourceType = "spot-instances-request"
 	ResourceTypeSubnet                                                 ResourceType = "subnet"
+	ResourceTypeSubnetCidrReservation                                  ResourceType = "subnet-cidr-reservation"
 	ResourceTypeTrafficMirrorFilter                                    ResourceType = "traffic-mirror-filter"
 	ResourceTypeTrafficMirrorSession                                   ResourceType = "traffic-mirror-session"
 	ResourceTypeTrafficMirrorTarget                                    ResourceType = "traffic-mirror-target"
@@ -5152,6 +5155,7 @@ func (ResourceType) Values() []ResourceType {
 		"spot-fleet-request",
 		"spot-instances-request",
 		"subnet",
+		"subnet-cidr-reservation",
 		"traffic-mirror-filter",
 		"traffic-mirror-session",
 		"traffic-mirror-target",

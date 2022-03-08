@@ -669,6 +669,18 @@ type ScaleOutPolicyUpdate struct {
 	noSmithyDocumentSerde
 }
 
+// Details about the state of a resource.
+type StateDescription struct {
+
+	// A code that describes the state of a resource.
+	Code *string
+
+	// A message that describes the state of a resource.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about the VPC in which the connector resides.
 type Vpc struct {
 
