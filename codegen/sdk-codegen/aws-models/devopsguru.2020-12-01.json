@@ -167,6 +167,20 @@
                 }
             }
         },
+        "com.amazonaws.devopsguru#AmazonCodeGuruProfilerIntegration": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.devopsguru#EventSourceOptInStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the CodeGuru Profiler integration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about your account's integration with Amazon CodeGuru Profiler.</p>"
+            }
+        },
         "com.amazonaws.devopsguru#AnomalyDescription": {
             "type": "string"
         },
@@ -227,7 +241,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The Amazon Web Services resources in which DevOps Guru detected unusual behavior that resulted in \n      \tthe generation of an anomaly. When DevOps Guru detects multiple related anomalies, it creates \n      and insight with details about the anomalous behavior and suggestions about how to correct the \n      problem.</p>"
+                "smithy.api#documentation": "<p>The Amazon Web Services resources in which DevOps Guru detected unusual behavior that resulted in the\n\t\t\tgeneration of an anomaly. When DevOps Guru detects multiple related anomalies, it creates and\n\t\t\tinsight with details about the anomalous behavior and suggestions about how to correct\n\t\t\tthe problem.</p>"
             }
         },
         "com.amazonaws.devopsguru#AnomalyResources": {
@@ -255,6 +269,9 @@
                 ]
             }
         },
+        "com.amazonaws.devopsguru#AnomalySource": {
+            "type": "string"
+        },
         "com.amazonaws.devopsguru#AnomalySourceDetails": {
             "type": "structure",
             "members": {
@@ -267,12 +284,38 @@
                 "PerformanceInsightsMetrics": {
                     "target": "com.amazonaws.devopsguru#PerformanceInsightsMetricsDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of <code>PerformanceInsightsMetricsDetail</code> objects that contain information\n   \t\tabout analyzed Performance Insights metrics that show anomalous behavior.</p>"
+                        "smithy.api#documentation": "<p>An array of <code>PerformanceInsightsMetricsDetail</code> objects that contain\n\t\t\tinformation about analyzed Performance Insights metrics that show anomalous behavior.</p>"
                     }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p> Details about the source of the anomalous operational data that triggered the\n\t\t\tanomaly.</p>"
+            }
+        },
+        "com.amazonaws.devopsguru#AnomalySourceMetadata": {
+            "type": "structure",
+            "members": {
+                "Source": {
+                    "target": "com.amazonaws.devopsguru#AnomalySource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source of the anomaly.</p>"
+                    }
+                },
+                "SourceResourceName": {
+                    "target": "com.amazonaws.devopsguru#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the anomaly's resource.</p>"
+                    }
+                },
+                "SourceResourceType": {
+                    "target": "com.amazonaws.devopsguru#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The anomaly's resource type.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Metadata about an anomaly. The anomaly is detected using analysis of the metric data\u2028 over a period of time</p>"
             }
         },
         "com.amazonaws.devopsguru#AnomalyStatus": {
@@ -384,6 +427,9 @@
                     "target": "com.amazonaws.devopsguru#DescribeAnomaly"
                 },
                 {
+                    "target": "com.amazonaws.devopsguru#DescribeEventSourcesConfig"
+                },
+                {
                     "target": "com.amazonaws.devopsguru#DescribeFeedback"
                 },
                 {
@@ -442,6 +488,9 @@
                 },
                 {
                     "target": "com.amazonaws.devopsguru#StartCostEstimation"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#UpdateEventSourcesConfig"
                 },
                 {
                     "target": "com.amazonaws.devopsguru#UpdateResourceCollection"
@@ -566,7 +615,7 @@
                 "StatusCode": {
                     "target": "com.amazonaws.devopsguru#CloudWatchMetricDataStatusCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>This is an enum of the status showing whether the metric value pair list has partial or\n\t\t\tcomplete data, or if there was an error.</p>"
+                        "smithy.api#documentation": "<p>This is an enum of the status showing whether the metric value pair list has partial\n\t\t\tor complete data, or if there was an error.</p>"
                     }
                 }
             },
@@ -758,7 +807,7 @@
                 "Tags": {
                     "target": "com.amazonaws.devopsguru#TagCostEstimationResourceCollectionFilters",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services tags used to filter the resource collection that is used for \n   \t\ta cost estimate.</p>\n   \t     <p>Tags help you identify and organize your Amazon Web Services resources. Many Amazon Web Services services support\n   \t\ttagging, so you can assign the same tag to resources from different services to indicate\n   \t\tthat the resources are related. For example, you can assign the same tag to an Amazon DynamoDB\n   \t\ttable resource that you assign to an Lambda function. For more information about\n   \t\tusing tags, see the <a href=\"https://d1.awsstatic.com/whitepapers/aws-tagging-best-practices.pdf\">Tagging\n   \t\t\tbest practices</a> whitepaper. </p>\n   \t     <p>Each Amazon Web Services tag has two parts. </p>\n   \t     <ul>\n            <li>\n   \t\t\t         <p>A tag <i>key</i> (for example, <code>CostCenter</code>,\n   \t\t\t\t<code>Environment</code>, <code>Project</code>, or <code>Secret</code>). Tag\n   \t\t\t\t<i>keys</i> are case-sensitive.</p>\n   \t\t       </li>\n            <li>\n   \t\t\t         <p>An optional field known as a tag <i>value</i> (for example,\n   \t\t\t\t<code>111122223333</code>, <code>Production</code>, or a team\n   \t\t\t\tname). Omitting the tag <i>value</i> is the same as using an empty\n   \t\t\t\tstring. Like tag <i>keys</i>, tag <i>values</i> are\n   \t\t\t\tcase-sensitive.</p>\n   \t\t       </li>\n         </ul>\n   \t     <p>Together these are known as <i>key</i>-<i>value</i> pairs.</p>\n   \t     <important>\n\t\t          <p>The string used for a <i>key</i> in a tag that you use to define your resource coverage must begin with the\n\t\t\tprefix <code>Devops-guru-</code>. The tag <i>key</i> might be\n\t\t\t<code>Devops-guru-deployment-application</code> or\n\t\t\t<code>Devops-guru-rds-application</code>. While <i>keys</i> are case-sensitive, the\n\t\t\tcase of <i>key</i> characters don't matter to DevOps Guru. For example, DevOps Guru works with a\n\t\t\t<i>key</i> named <code>devops-guru-rds</code> and a <i>key</i> named\n\t\t\t<code>DevOps-Guru-RDS</code>. Possible <i>key</i>/<i>value</i> pairs in your\n\t\t\tapplication might be <code>Devops-Guru-production-application/RDS</code> or\n\t\t\t<code>Devops-Guru-production-application/containers</code>.</p>\n\t        </important>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services tags used to filter the resource collection that is used for a cost\n\t\t\testimate.</p> \n         <p>Tags help you identify and organize your Amazon Web Services resources. Many Amazon Web Services services support\n   \t\ttagging, so you can assign the same tag to resources from different services to indicate\n   \t\tthat the resources are related. For example, you can assign the same tag to an Amazon DynamoDB\n   \t\ttable resource that you assign to an Lambda function. For more information about\n   \t\tusing tags, see the <a href=\"https://d1.awsstatic.com/whitepapers/aws-tagging-best-practices.pdf\">Tagging\n   \t\t\tbest practices</a> whitepaper. </p>\n   \t     <p>Each Amazon Web Services tag has two parts. </p>\n   \t     <ul>\n            <li>\n   \t\t\t         <p>A tag <i>key</i> (for example, <code>CostCenter</code>,\n   \t\t\t\t<code>Environment</code>, <code>Project</code>, or <code>Secret</code>). Tag\n   \t\t\t\t<i>keys</i> are case-sensitive.</p>\n   \t\t       </li>\n            <li>\n   \t\t\t         <p>An optional field known as a tag <i>value</i> (for example,\n   \t\t\t\t<code>111122223333</code>, <code>Production</code>, or a team\n   \t\t\t\tname). Omitting the tag <i>value</i> is the same as using an empty\n   \t\t\t\tstring. Like tag <i>keys</i>, tag <i>values</i> are\n   \t\t\t\tcase-sensitive.</p>\n   \t\t       </li>\n         </ul>\n   \t     <p>Together these are known as <i>key</i>-<i>value</i> pairs.</p>\n   \t     <important>\n\t\t          <p>The string used for a <i>key</i> in a tag that you use to define your resource coverage must begin with the\n\t\t\tprefix <code>Devops-guru-</code>. The tag <i>key</i> might be\n\t\t\t<code>Devops-guru-deployment-application</code> or\n\t\t\t<code>Devops-guru-rds-application</code>. While <i>keys</i> are case-sensitive, the\n\t\t\tcase of <i>key</i> characters don't matter to DevOps Guru. For example, DevOps Guru works with a\n\t\t\t<i>key</i> named <code>devops-guru-rds</code> and a <i>key</i> named\n\t\t\t<code>DevOps-Guru-RDS</code>. Possible <i>key</i>/<i>value</i> pairs in your\n\t\t\tapplication might be <code>Devops-Guru-production-application/RDS</code> or\n\t\t\t<code>Devops-Guru-production-application/containers</code>.</p>\n\t        </important>"
                     }
                 }
             },
@@ -1053,6 +1102,52 @@
                     "target": "com.amazonaws.devopsguru#ReactiveAnomaly",
                     "traits": {
                         "smithy.api#documentation": "<p> A <code>ReactiveAnomaly</code> object that represents the requested anomaly. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#DescribeEventSourcesConfig": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.devopsguru#DescribeEventSourcesConfigRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.devopsguru#DescribeEventSourcesConfigResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.devopsguru#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This operation lists details about a DevOps Guru event source that is shared with your\u2028 account.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/event-sources",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#DescribeEventSourcesConfigRequest": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.devopsguru#DescribeEventSourcesConfigResponse": {
+            "type": "structure",
+            "members": {
+                "EventSources": {
+                    "target": "com.amazonaws.devopsguru#EventSourcesConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the event source.</p>"
                     }
                 }
             }
@@ -1419,7 +1514,7 @@
                 "CloudFormation": {
                     "target": "com.amazonaws.devopsguru#CloudFormationHealths",
                     "traits": {
-                        "smithy.api#documentation": "<p>The returned <code>CloudFormationHealthOverview</code> object that contains an\n\t\t\t<code>InsightHealthOverview</code> object with the requested system health\n\t\t\tinformation.</p>"
+                        "smithy.api#documentation": "<p>The returned <code>CloudFormationHealthOverview</code> object that contains an\n\t\t\t\t<code>InsightHealthOverview</code> object with the requested system health\n\t\t\tinformation.</p>"
                     }
                 },
                 "Service": {
@@ -1527,7 +1622,7 @@
                 "Tags": {
                     "target": "com.amazonaws.devopsguru#TagHealths",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services tags that are used by resources in the resource collection.</p>\n   \t     <p>Tags help you identify and organize your Amazon Web Services resources. Many Amazon Web Services services support\n   \t\ttagging, so you can assign the same tag to resources from different services to indicate\n   \t\tthat the resources are related. For example, you can assign the same tag to an Amazon DynamoDB\n   \t\ttable resource that you assign to an Lambda function. For more information about\n   \t\tusing tags, see the <a href=\"https://d1.awsstatic.com/whitepapers/aws-tagging-best-practices.pdf\">Tagging\n   \t\t\tbest practices</a> whitepaper. </p>\n   \t     <p>Each Amazon Web Services tag has two parts. </p>\n   \t     <ul>\n            <li>\n   \t\t\t         <p>A tag <i>key</i> (for example, <code>CostCenter</code>,\n   \t\t\t\t<code>Environment</code>, <code>Project</code>, or <code>Secret</code>). Tag\n   \t\t\t\t<i>keys</i> are case-sensitive.</p>\n   \t\t       </li>\n            <li>\n   \t\t\t         <p>An optional field known as a tag <i>value</i> (for example,\n   \t\t\t\t<code>111122223333</code>, <code>Production</code>, or a team\n   \t\t\t\tname). Omitting the tag <i>value</i> is the same as using an empty\n   \t\t\t\tstring. Like tag <i>keys</i>, tag <i>values</i> are\n   \t\t\t\tcase-sensitive.</p>\n   \t\t       </li>\n         </ul>\n   \t     <p>Together these are known as <i>key</i>-<i>value</i> pairs.</p>\n   \t     <important>\n\t\t          <p>The string used for a <i>key</i> in a tag that you use to define your resource coverage must begin with the\n\t\t\tprefix <code>Devops-guru-</code>. The tag <i>key</i> might be\n\t\t\t<code>Devops-guru-deployment-application</code> or\n\t\t\t<code>Devops-guru-rds-application</code>. While <i>keys</i> are case-sensitive, the\n\t\t\tcase of <i>key</i> characters don't matter to DevOps Guru. For example, DevOps Guru works with a\n\t\t\t<i>key</i> named <code>devops-guru-rds</code> and a <i>key</i> named\n\t\t\t<code>DevOps-Guru-RDS</code>. Possible <i>key</i>/<i>value</i> pairs in your\n\t\t\tapplication might be <code>Devops-Guru-production-application/RDS</code> or\n\t\t\t<code>Devops-Guru-production-application/containers</code>.</p>\n\t        </important>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services tags that are used by resources in the resource collection.</p>\n\t\t       <p>Tags help you identify and organize your Amazon Web Services resources. Many Amazon Web Services services support\n   \t\ttagging, so you can assign the same tag to resources from different services to indicate\n   \t\tthat the resources are related. For example, you can assign the same tag to an Amazon DynamoDB\n   \t\ttable resource that you assign to an Lambda function. For more information about\n   \t\tusing tags, see the <a href=\"https://d1.awsstatic.com/whitepapers/aws-tagging-best-practices.pdf\">Tagging\n   \t\t\tbest practices</a> whitepaper. </p>\n   \t     <p>Each Amazon Web Services tag has two parts. </p>\n   \t     <ul>\n            <li>\n   \t\t\t         <p>A tag <i>key</i> (for example, <code>CostCenter</code>,\n   \t\t\t\t<code>Environment</code>, <code>Project</code>, or <code>Secret</code>). Tag\n   \t\t\t\t<i>keys</i> are case-sensitive.</p>\n   \t\t       </li>\n            <li>\n   \t\t\t         <p>An optional field known as a tag <i>value</i> (for example,\n   \t\t\t\t<code>111122223333</code>, <code>Production</code>, or a team\n   \t\t\t\tname). Omitting the tag <i>value</i> is the same as using an empty\n   \t\t\t\tstring. Like tag <i>keys</i>, tag <i>values</i> are\n   \t\t\t\tcase-sensitive.</p>\n   \t\t       </li>\n         </ul>\n   \t     <p>Together these are known as <i>key</i>-<i>value</i> pairs.</p>\n   \t     <important>\n\t\t          <p>The string used for a <i>key</i> in a tag that you use to define your resource coverage must begin with the\n\t\t\tprefix <code>Devops-guru-</code>. The tag <i>key</i> might be\n\t\t\t<code>Devops-guru-deployment-application</code> or\n\t\t\t<code>Devops-guru-rds-application</code>. While <i>keys</i> are case-sensitive, the\n\t\t\tcase of <i>key</i> characters don't matter to DevOps Guru. For example, DevOps Guru works with a\n\t\t\t<i>key</i> named <code>devops-guru-rds</code> and a <i>key</i> named\n\t\t\t<code>DevOps-Guru-RDS</code>. Possible <i>key</i>/<i>value</i> pairs in your\n\t\t\tapplication might be <code>Devops-Guru-production-application/RDS</code> or\n\t\t\t<code>Devops-Guru-production-application/containers</code>.</p>\n\t        </important>"
                     }
                 }
             }
@@ -1786,6 +1881,35 @@
                 "smithy.api#pattern": "^[a-z]+[a-z0-9]*\\.amazonaws\\.com|aws\\.events$"
             }
         },
+        "com.amazonaws.devopsguru#EventSourceOptInStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ENABLED",
+                        "name": "ENABLED"
+                    },
+                    {
+                        "value": "DISABLED",
+                        "name": "DISABLED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.devopsguru#EventSourcesConfig": {
+            "type": "structure",
+            "members": {
+                "AmazonCodeGuruProfiler": {
+                    "target": "com.amazonaws.devopsguru#AmazonCodeGuruProfilerIntegration",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the event sources.</p>"
+            }
+        },
         "com.amazonaws.devopsguru#EventTimeRange": {
             "type": "structure",
             "members": {
@@ -1979,6 +2103,9 @@
                     }
                 }
             }
+        },
+        "com.amazonaws.devopsguru#InsightDescription": {
+            "type": "string"
         },
         "com.amazonaws.devopsguru#InsightFeedback": {
             "type": "structure",
@@ -3115,13 +3242,13 @@
                 "Group": {
                     "target": "com.amazonaws.devopsguru#PerformanceInsightsMetricGroup",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the dimension group. Its valid values are:</p>\n   \t\n   \t     <ul>\n            <li>\n   \t\t\t         <p>\n   \t\t\t\t           <code>db</code> - The name of the database to which the client is connected (only Aurora PostgreSQL, Amazon RDS PostgreSQL,\n   \t\t\t\tAurora MySQL, Amazon RDS MySQL, and MariaDB)</p>\n   \t\t       </li>\n            <li>\n   \t\t\t         <p>\n   \t\t\t\t           <code>db.application</code> - The name of the application that is connected to the database (only Aurora\n   \t\t\t\tPostgreSQL and RDS PostgreSQL)</p>\n   \t\t       </li>\n            <li>\n   \t\t\t         <p>\n   \t\t\t\t           <code>db.host</code> - The host name of the connected client (all engines)</p>\n   \t\t       </li>\n            <li>\n   \t\t\t         <p>\n   \t\t\t\t           <code>db.session_type</code> - The type of the current session (only Aurora PostgreSQL and RDS PostgreSQL)</p>\n   \t\t       </li>\n            <li>\n   \t\t\t         <p>\n   \t\t\t\t           <code>db.sql</code> - The SQL that is currently executing (all engines)</p>\n   \t\t       </li>\n            <li>\n   \t\t\t         <p>\n   \t\t\t\t           <code>db.sql_tokenized</code> - The SQL digest (all engines)</p>\n   \t\t       </li>\n            <li>\n   \t\t\t         <p>\n   \t\t\t\t           <code>db.wait_event</code> - The event for which the database backend is waiting  (all engines)</p>\n   \t\t       </li>\n            <li>\n   \t\t\t         <p>\n   \t\t\t\t           <code>db.wait_event_type</code> - The type of event for which the database backend is waiting (all engines)</p>\n   \t\t       </li>\n            <li>\n   \t\t\t         <p>\n   \t\t\t\t           <code>db.user</code> - The user logged in to the database (all engines)</p>\n   \t\t       </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The name of the dimension group. Its valid values are:</p>\n\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>\n\t\t\t\t\t             <code>db</code> - The name of the database to which the client is connected\n\t\t\t\t\t(only Aurora PostgreSQL, Amazon RDS PostgreSQL, Aurora MySQL, Amazon RDS MySQL, and MariaDB)</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n\t\t\t\t\t             <code>db.application</code> - The name of the application that is connected to\n\t\t\t\t\tthe database (only Aurora PostgreSQL and RDS PostgreSQL)</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n\t\t\t\t\t             <code>db.host</code> - The host name of the connected client (all\n\t\t\t\t\tengines)</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n\t\t\t\t\t             <code>db.session_type</code> - The type of the current session (only Aurora PostgreSQL\n\t\t\t\t\tand RDS PostgreSQL)</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n\t\t\t\t\t             <code>db.sql</code> - The SQL that is currently executing (all engines)</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n\t\t\t\t\t             <code>db.sql_tokenized</code> - The SQL digest (all engines)</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n\t\t\t\t\t             <code>db.wait_event</code> - The event for which the database backend is waiting\n\t\t\t\t\t(all engines)</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n\t\t\t\t\t             <code>db.wait_event_type</code> - The type of event for which the database\n\t\t\t\t\tbackend is waiting (all engines)</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n\t\t\t\t\t             <code>db.user</code> - The user logged in to the database (all engines)</p>\n\t\t\t         </li>\n         </ul>"
                     }
                 },
                 "Dimensions": {
                     "target": "com.amazonaws.devopsguru#PerformanceInsightsMetricDimensions",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of specific dimensions from a dimension group. If this parameter is not present,\n   \t\tthen it signifies that all of the dimensions in the group were requested or are present in\n   \t\tthe response.</p>\n   \t     <p>Valid values for elements in the <code>Dimensions</code> array are:</p>\n   \t\n   \t     <ul>\n            <li>\n   \t\t\t         <p>\n   \t\t\t\t           <code>db.application.name</code> - The name of the application that is connected to the database (only\n   \t\t\t\tAurora PostgreSQL and RDS PostgreSQL)</p>\n   \t\t       </li>\n            <li>\n   \t\t\t         <p>\n   \t\t\t\t           <code>db.host.id</code> - The host ID of the connected client (all engines)</p>\n   \t\t       </li>\n            <li>\n   \t\t\t         <p>\n   \t\t\t\t           <code>db.host.name</code> - The host name of the connected client (all engines)</p>\n   \t\t       </li>\n            <li>\n   \t\t\t         <p>\n   \t\t\t\t           <code>db.name</code> - The name of the database to which the client is connected (only Aurora PostgreSQL, Amazon RDS\n   \t\t\t\tPostgreSQL, Aurora MySQL, Amazon RDS MySQL, and MariaDB)</p>\n   \t\t       </li>\n            <li>\n   \t\t\t         <p>\n   \t\t\t\t           <code>db.session_type.name</code> - The type of the current session (only Aurora PostgreSQL and RDS PostgreSQL)</p>\n   \t\t       </li>\n            <li>\n   \t\t\t         <p>\n   \t\t\t\t           <code>db.sql.id</code> - The SQL ID generated by Performance Insights (all engines)</p>\n   \t\t       </li>\n            <li>\n   \t\t\t         <p>\n   \t\t\t\t           <code>db.sql.db_id</code> - The SQL ID generated by the database (all engines)</p>\n   \t\t       </li>\n            <li>\n   \t\t\t         <p>\n   \t\t\t\t           <code>db.sql.statement</code> - The SQL text that is being executed (all engines)</p>\n   \t\t       </li>\n            <li>\n   \t\t\t         <p>\n   \t\t\t\t           <code>db.sql.tokenized_id</code>\n   \t\t\t         </p>\n   \t\t       </li>\n            <li>\n   \t\t\t         <p>\n   \t\t\t\t           <code>db.sql_tokenized.id</code> - The SQL digest ID generated by Performance Insights (all engines)</p>\n   \t\t       </li>\n            <li>\n   \t\t\t         <p>\n   \t\t\t\t           <code>db.sql_tokenized.db_id</code> - SQL digest ID generated by the database (all engines)</p>\n   \t\t       </li>\n            <li>\n   \t\t\t         <p>\n   \t\t\t\t           <code>db.sql_tokenized.statement</code> - The SQL digest text (all engines)</p>\n   \t\t       </li>\n            <li>\n   \t\t\t         <p>\n   \t\t\t\t           <code>db.user.id</code> - The ID of the user logged in to the database (all engines)</p>\n   \t\t       </li>\n            <li>\n   \t\t\t         <p>\n   \t\t\t\t           <code>db.user.name</code> - The name of the user logged in to the database (all engines)</p>\n   \t\t       </li>\n            <li>\n   \t\t\t         <p>\n   \t\t\t\t           <code>db.wait_event.name</code> - The event for which the backend is waiting (all engines)</p>\n   \t\t       </li>\n            <li>\n   \t\t\t         <p>\n   \t\t\t\t           <code>db.wait_event.type</code> - The type of event for which the backend is waiting (all engines)</p>\n   \t\t       </li>\n            <li>\n   \t\t\t         <p>\n   \t\t\t\t           <code>db.wait_event_type.name</code> - The name of the event type for which the backend is waiting (all\n   \t\t\t\tengines)</p>\n   \t\t       </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A list of specific dimensions from a dimension group. If this parameter is not\n\t\t\tpresent, then it signifies that all of the dimensions in the group were requested or are\n\t\t\tpresent in the response.</p>\n\t\t       <p>Valid values for elements in the <code>Dimensions</code> array are:</p>\n\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>\n\t\t\t\t\t             <code>db.application.name</code> - The name of the application that is connected\n\t\t\t\t\tto the database (only Aurora PostgreSQL and RDS PostgreSQL)</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n\t\t\t\t\t             <code>db.host.id</code> - The host ID of the connected client (all\n\t\t\t\t\tengines)</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n\t\t\t\t\t             <code>db.host.name</code> - The host name of the connected client (all\n\t\t\t\t\tengines)</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n\t\t\t\t\t             <code>db.name</code> - The name of the database to which the client is connected\n\t\t\t\t\t(only Aurora PostgreSQL, Amazon RDS PostgreSQL, Aurora MySQL, Amazon RDS MySQL, and MariaDB)</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n\t\t\t\t\t             <code>db.session_type.name</code> - The type of the current session (only Aurora\n\t\t\t\t\tPostgreSQL and RDS PostgreSQL)</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n\t\t\t\t\t             <code>db.sql.id</code> - The SQL ID generated by Performance Insights (all engines)</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n\t\t\t\t\t             <code>db.sql.db_id</code> - The SQL ID generated by the database (all\n\t\t\t\t\tengines)</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n\t\t\t\t\t             <code>db.sql.statement</code> - The SQL text that is being executed (all\n\t\t\t\t\tengines)</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n\t\t\t\t\t             <code>db.sql.tokenized_id</code>\n\t\t\t\t           </p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n\t\t\t\t\t             <code>db.sql_tokenized.id</code> - The SQL digest ID generated by Performance Insights (all\n\t\t\t\t\tengines)</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n\t\t\t\t\t             <code>db.sql_tokenized.db_id</code> - SQL digest ID generated by the database\n\t\t\t\t\t(all engines)</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n\t\t\t\t\t             <code>db.sql_tokenized.statement</code> - The SQL digest text (all\n\t\t\t\t\tengines)</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n\t\t\t\t\t             <code>db.user.id</code> - The ID of the user logged in to the database (all\n\t\t\t\t\tengines)</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n\t\t\t\t\t             <code>db.user.name</code> - The name of the user logged in to the database (all\n\t\t\t\t\tengines)</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n\t\t\t\t\t             <code>db.wait_event.name</code> - The event for which the backend is waiting\n\t\t\t\t\t(all engines)</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n\t\t\t\t\t             <code>db.wait_event.type</code> - The type of event for which the backend is\n\t\t\t\t\twaiting (all engines)</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n\t\t\t\t\t             <code>db.wait_event_type.name</code> - The name of the event type for which the\n\t\t\t\t\tbackend is waiting (all engines)</p>\n\t\t\t         </li>\n         </ul>"
                     }
                 },
                 "Limit": {
@@ -3132,7 +3259,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A logical grouping of Performance Insights metrics for a related subject area. For example, the\n   \t\t<code>db.sql</code> dimension group consists of the following dimensions:\n   \t\t<code>db.sql.id</code>, <code>db.sql.db_id</code>, <code>db.sql.statement</code>, and\n   \t\t<code>db.sql.tokenized_id</code>.</p>\n   \t     <note>\n   \t\t       <p>Each response element returns a maximum of 500 bytes. For larger elements, such as SQL statements, \n   \t\t\tonly the first 500 bytes are returned.</p>\n   \t     </note>\n   \t\n   \t     <p>Amazon RDS Performance Insights enables you to monitor and explore different \n   \t\tdimensions of database load based on data captured from a running DB instance. \n   \t\tDB load is measured as average active sessions. Performance Insights provides the \n   \t\tdata to API consumers as a two-dimensional time-series dataset. The time dimension \n   \t\tprovides DB load data for each time point in the queried time range. Each time point \n   \t\tdecomposes overall load in relation to the requested dimensions, measured at that \n   \t\ttime point. Examples include SQL, Wait event, User, and Host. </p>\n   \t\n   \t     <ul>\n            <li>\n   \t\t\t         <p>To learn more about Performance Insights and Amazon Aurora DB instances, go to the <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights.html\"> Amazon Aurora User Guide</a>.\n   \t\t\t</p>\n   \t\t       </li>\n            <li>\n   \t\t\t         <p>To learn more about Performance Insights and Amazon RDS DB instances, go to the <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html\"> Amazon RDS User Guide</a>.\n   \t\t\t</p>\n   \t\t       </li>\n         </ul>"
+                "smithy.api#documentation": "<p>A logical grouping of Performance Insights metrics for a related subject area. For example, the\n\t\t\t\t<code>db.sql</code> dimension group consists of the following dimensions:\n\t\t\t\t<code>db.sql.id</code>, <code>db.sql.db_id</code>, <code>db.sql.statement</code>,\n\t\t\tand <code>db.sql.tokenized_id</code>.</p>\n\t\t       <note>\n\t\t\t         <p>Each response element returns a maximum of 500 bytes. For larger elements, such as\n\t\t\t\tSQL statements, only the first 500 bytes are returned.</p>\n\t\t       </note> \n         <p>Amazon RDS Performance Insights enables you to monitor and explore different \n   \t\tdimensions of database load based on data captured from a running DB instance. \n   \t\tDB load is measured as average active sessions. Performance Insights provides the \n   \t\tdata to API consumers as a two-dimensional time-series dataset. The time dimension \n   \t\tprovides DB load data for each time point in the queried time range. Each time point \n   \t\tdecomposes overall load in relation to the requested dimensions, measured at that \n   \t\ttime point. Examples include SQL, Wait event, User, and Host. </p>\n   \t\n   \t     <ul>\n            <li>\n   \t\t\t         <p>To learn more about Performance Insights and Amazon Aurora DB instances, go to the <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights.html\"> Amazon Aurora User Guide</a>.\n   \t\t\t</p>\n   \t\t       </li>\n            <li>\n   \t\t\t         <p>To learn more about Performance Insights and Amazon RDS DB instances, go to the <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html\"> Amazon RDS User Guide</a>.\n   \t\t\t</p>\n   \t\t       </li>\n         </ul>"
             }
         },
         "com.amazonaws.devopsguru#PerformanceInsightsMetricDimensions": {
@@ -3181,24 +3308,24 @@
                 "Metric": {
                     "target": "com.amazonaws.devopsguru#PerformanceInsightsMetricName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the meteric used used when querying an Performance Insights <code>GetResourceMetrics</code> API for \n   \tanomaly metrics.</p>\n   \t\n   \t     <p>Valid values for <code>Metric</code> are:</p>\n   \t\n   \t     <ul>\n            <li>\n   \t\t\t         <p>\n   \t\t\t\t           <code>db.load.avg</code> - a scaled representation of the number of active sessions\n   \t\t\t\tfor the database engine.</p>\n   \t\t       </li>\n            <li>\n   \t\t\t         <p>\n   \t\t\t\t           <code>db.sampledload.avg</code> - the raw number of active sessions for the\n   \t\t\t\tdatabase engine.</p>\n   \t\t       </li>\n         </ul>\n   \t     <p>If the number of active sessions is less than an internal Performance Insights threshold, <code>db.load.avg</code> and <code>db.sampledload.avg</code> \n   \t\tare the same value. If the number of active sessions is greater than the internal threshold, Performance Insights samples the active sessions, with <code>db.load.avg</code> \n   \t\tshowing the scaled values, <code>db.sampledload.avg</code> showing the raw values, and <code>db.sampledload.avg</code> less than <code>db.load.avg</code>. \n   \t\tFor most use cases, you can query <code>db.load.avg</code> only. </p>"
+                        "smithy.api#documentation": "<p>The name of the meteric used used when querying an Performance Insights\n\t\t\t\t<code>GetResourceMetrics</code> API for anomaly metrics.</p>\n\n\t\t       <p>Valid values for <code>Metric</code> are:</p>\n\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>\n\t\t\t\t\t             <code>db.load.avg</code> - a scaled representation of the number of active sessions for the\n\t\t\t\t\tdatabase engine.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n\t\t\t\t\t             <code>db.sampledload.avg</code> - the raw number of active sessions for the database\n\t\t\t\t\tengine.</p>\n\t\t\t         </li>\n         </ul>\n\t\t       <p>If the number of active sessions is less than an internal Performance Insights threshold,\n\t\t\t\t<code>db.load.avg</code> and <code>db.sampledload.avg</code> are the same value. If\n\t\t\tthe number of active sessions is greater than the internal threshold, Performance Insights samples the active sessions, with\n\t\t\t\t<code>db.load.avg</code> showing the scaled values, <code>db.sampledload.avg</code>\n\t\t\tshowing the raw values, and <code>db.sampledload.avg</code> less than\n\t\t\t\t<code>db.load.avg</code>. For most use cases, you can query <code>db.load.avg</code>\n\t\t\tonly. </p>"
                     }
                 },
                 "GroupBy": {
                     "target": "com.amazonaws.devopsguru#PerformanceInsightsMetricDimensionGroup",
                     "traits": {
-                        "smithy.api#documentation": "<p>The specification for how to aggregate the data points from a Performance Insights <code>GetResourceMetrics</code> API query. The \n   \t\tPerformance Insights query returns all of the dimensions within that group,\n   \t\tunless you provide the names of specific dimensions within that group. You can also request\n   \t\tthat Performance Insights return a limited number of values for a dimension.</p>"
+                        "smithy.api#documentation": "<p>The specification for how to aggregate the data points from a Performance Insights\n\t\t\t\t<code>GetResourceMetrics</code> API query. The Performance Insights query returns all of the\n\t\t\tdimensions within that group, unless you provide the names of specific dimensions within\n\t\t\tthat group. You can also request that Performance Insights return a limited number of values for a\n\t\t\tdimension.</p>"
                     }
                 },
                 "Filter": {
                     "target": "com.amazonaws.devopsguru#PerformanceInsightsMetricFilterMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more filters to apply to a Performance Insights <code>GetResourceMetrics</code> API query. Restrictions:</p>\n   \t     <ul>\n            <li>\n   \t\t\t         <p>Any number of filters by the same dimension, as specified in the <code>GroupBy</code> parameter.</p>\n   \t\t       </li>\n            <li>\n   \t\t\t         <p>A single filter for any other dimension in this dimension group.</p>\n   \t\t       </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>One or more filters to apply to a Performance Insights <code>GetResourceMetrics</code> API query.\n\t\t\tRestrictions:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>Any number of filters by the same dimension, as specified in the\n\t\t\t\t\t\t<code>GroupBy</code> parameter.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>A single filter for any other dimension in this dimension group.</p>\n\t\t\t         </li>\n         </ul>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A single query to be processed. Use these parameters to \n   \t\tquery the Performance Insights <code>GetResourceMetrics</code> API to retrieve the metrics \n   \t\tfor an anomaly. For more information, see <code>\n               <a href=\"https://docs.aws.amazon.com/performance-insights/latest/APIReference/API_GetResourceMetrics.html\">GetResourceMetrics</a>\n            </code> \n   \tin the <i>Amazon RDS Performance Insights API Reference</i>.</p>\n   \t\n   \t     <p>Amazon RDS Performance Insights enables you to monitor and explore different \n   \t\tdimensions of database load based on data captured from a running DB instance. \n   \t\tDB load is measured as average active sessions. Performance Insights provides the \n   \t\tdata to API consumers as a two-dimensional time-series dataset. The time dimension \n   \t\tprovides DB load data for each time point in the queried time range. Each time point \n   \t\tdecomposes overall load in relation to the requested dimensions, measured at that \n   \t\ttime point. Examples include SQL, Wait event, User, and Host. </p>\n   \t\n   \t     <ul>\n            <li>\n   \t\t\t         <p>To learn more about Performance Insights and Amazon Aurora DB instances, go to the <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights.html\"> Amazon Aurora User Guide</a>.\n   \t\t\t</p>\n   \t\t       </li>\n            <li>\n   \t\t\t         <p>To learn more about Performance Insights and Amazon RDS DB instances, go to the <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html\"> Amazon RDS User Guide</a>.\n   \t\t\t</p>\n   \t\t       </li>\n         </ul>"
+                "smithy.api#documentation": "<p>A single query to be processed. Use these parameters to query the Performance Insights\n\t\t\t\t<code>GetResourceMetrics</code> API to retrieve the metrics for an anomaly. For more\n\t\t\tinformation, see <code>\n               <a href=\"https://docs.aws.amazon.com/performance-insights/latest/APIReference/API_GetResourceMetrics.html\">GetResourceMetrics</a>\n            </code> in the <i>Amazon RDS Performance Insights API\n\t\t\t\tReference</i>.</p> \n         <p>Amazon RDS Performance Insights enables you to monitor and explore different \n   \t\tdimensions of database load based on data captured from a running DB instance. \n   \t\tDB load is measured as average active sessions. Performance Insights provides the \n   \t\tdata to API consumers as a two-dimensional time-series dataset. The time dimension \n   \t\tprovides DB load data for each time point in the queried time range. Each time point \n   \t\tdecomposes overall load in relation to the requested dimensions, measured at that \n   \t\ttime point. Examples include SQL, Wait event, User, and Host. </p>\n   \t\n   \t     <ul>\n            <li>\n   \t\t\t         <p>To learn more about Performance Insights and Amazon Aurora DB instances, go to the <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights.html\"> Amazon Aurora User Guide</a>.\n   \t\t\t</p>\n   \t\t       </li>\n            <li>\n   \t\t\t         <p>To learn more about Performance Insights and Amazon RDS DB instances, go to the <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html\"> Amazon RDS User Guide</a>.\n   \t\t\t</p>\n   \t\t       </li>\n         </ul>"
             }
         },
         "com.amazonaws.devopsguru#PerformanceInsightsMetricUnit": {
@@ -3222,13 +3349,13 @@
                 "MetricQuery": {
                     "target": "com.amazonaws.devopsguru#PerformanceInsightsMetricQuery",
                     "traits": {
-                        "smithy.api#documentation": "<p>A single query to be processed for the metric. For more information, see \n   \t\t<code>\n               <a href=\"https://docs.aws.amazon.com/devops-guru/latest/APIReference/API_PerformanceInsightsMetricQuery.html\">PerformanceInsightsMetricQuery</a>\n            </code>.</p>"
+                        "smithy.api#documentation": "<p>A single query to be processed for the metric. For more information, see <code>\n               <a href=\"https://docs.aws.amazon.com/devops-guru/latest/APIReference/API_PerformanceInsightsMetricQuery.html\">PerformanceInsightsMetricQuery</a>\n            </code>.</p>"
                     }
                 },
                 "ReferenceData": {
                     "target": "com.amazonaws.devopsguru#PerformanceInsightsReferenceDataList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      \tFor more information, see \n      \t<code>\n               <a href=\"https://docs.aws.amazon.com/devops-guru/latest/APIReference/API_PerformanceInsightsReferenceData.html\">PerformanceInsightsReferenceData</a>\n            </code>.\n      </p>"
+                        "smithy.api#documentation": "<p> For more information, see <code>\n               <a href=\"https://docs.aws.amazon.com/devops-guru/latest/APIReference/API_PerformanceInsightsReferenceData.html\">PerformanceInsightsReferenceData</a>\n            </code>. </p>"
                     }
                 },
                 "StatsAtAnomaly": {
@@ -3245,7 +3372,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Details about Performance Insights metrics.</p>\n   \t\n   \t     <p>Amazon RDS Performance Insights enables you to monitor and explore different \n   \t\tdimensions of database load based on data captured from a running DB instance. \n   \t\tDB load is measured as average active sessions. Performance Insights provides the \n   \t\tdata to API consumers as a two-dimensional time-series dataset. The time dimension \n   \t\tprovides DB load data for each time point in the queried time range. Each time point \n   \t\tdecomposes overall load in relation to the requested dimensions, measured at that \n   \t\ttime point. Examples include SQL, Wait event, User, and Host. </p>\n   \t\n   \t     <ul>\n            <li>\n   \t\t\t         <p>To learn more about Performance Insights and Amazon Aurora DB instances, go to the <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights.html\"> Amazon Aurora User Guide</a>.\n   \t\t\t</p>\n   \t\t       </li>\n            <li>\n   \t\t\t         <p>To learn more about Performance Insights and Amazon RDS DB instances, go to the <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html\"> Amazon RDS User Guide</a>.\n   \t\t\t</p>\n   \t\t       </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Details about Performance Insights metrics.</p> \n         <p>Amazon RDS Performance Insights enables you to monitor and explore different \n   \t\tdimensions of database load based on data captured from a running DB instance. \n   \t\tDB load is measured as average active sessions. Performance Insights provides the \n   \t\tdata to API consumers as a two-dimensional time-series dataset. The time dimension \n   \t\tprovides DB load data for each time point in the queried time range. Each time point \n   \t\tdecomposes overall load in relation to the requested dimensions, measured at that \n   \t\ttime point. Examples include SQL, Wait event, User, and Host. </p>\n   \t\n   \t     <ul>\n            <li>\n   \t\t\t         <p>To learn more about Performance Insights and Amazon Aurora DB instances, go to the <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights.html\"> Amazon Aurora User Guide</a>.\n   \t\t\t</p>\n   \t\t       </li>\n            <li>\n   \t\t\t         <p>To learn more about Performance Insights and Amazon RDS DB instances, go to the <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html\"> Amazon RDS User Guide</a>.\n   \t\t\t</p>\n   \t\t       </li>\n         </ul>"
             }
         },
         "com.amazonaws.devopsguru#PerformanceInsightsMetricsDetails": {
@@ -3260,18 +3387,18 @@
                 "ReferenceScalar": {
                     "target": "com.amazonaws.devopsguru#PerformanceInsightsReferenceScalar",
                     "traits": {
-                        "smithy.api#documentation": "<p>A scalar value DevOps Guru for a metric that DevOps Guru compares to actual metric values. This reference value is used \n      to determine if an actual metric value should be considered anomalous.</p>"
+                        "smithy.api#documentation": "<p>A scalar value DevOps Guru for a metric that DevOps Guru compares to actual metric values. This\n\t\t\treference value is used to determine if an actual metric value should be considered\n\t\t\tanomalous.</p>"
                     }
                 },
                 "ReferenceMetric": {
                     "target": "com.amazonaws.devopsguru#PerformanceInsightsReferenceMetric",
                     "traits": {
-                        "smithy.api#documentation": "<p>A metric that DevOps Guru compares to actual metric values. This reference metric is used \n   \t\tto determine if an actual metric should be considered anomalous.</p>"
+                        "smithy.api#documentation": "<p>A metric that DevOps Guru compares to actual metric values. This reference metric is used to\n\t\t\tdetermine if an actual metric should be considered anomalous.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Reference scalar values and other metrics that DevOps Guru displays on a graph in its console along with the actual metrics it \n      analyzed. Compare these reference values to your actual metrics to help you understand anomalous behavior that DevOps Guru detected.</p>"
+                "smithy.api#documentation": "<p>Reference scalar values and other metrics that DevOps Guru displays on a graph in its\n\t\t\tconsole along with the actual metrics it analyzed. Compare these reference values to\n\t\t\tyour actual metrics to help you understand anomalous behavior that DevOps Guru\n\t\t\tdetected.</p>"
             }
         },
         "com.amazonaws.devopsguru#PerformanceInsightsReferenceData": {
@@ -3286,12 +3413,12 @@
                 "ComparisonValues": {
                     "target": "com.amazonaws.devopsguru#PerformanceInsightsReferenceComparisonValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>The specific reference values used to evaluate the Performance Insights. For more information, see \n\t\t\t<code>\n               <a href=\"https://docs.aws.amazon.com/devops-guru/latest/APIReference/API_PerformanceInsightsReferenceComparisonValues.html\">PerformanceInsightsReferenceComparisonValues</a>\n            </code>.\n\t\t</p>"
+                        "smithy.api#documentation": "<p>The specific reference values used to evaluate the Performance Insights. For more information, see\n\t\t\t\t\t<code>\n               <a href=\"https://docs.aws.amazon.com/devops-guru/latest/APIReference/API_PerformanceInsightsReferenceComparisonValues.html\">PerformanceInsightsReferenceComparisonValues</a>\n            </code>. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Reference data used to evaluate Performance Insights to determine if its performance \n      is anomalous or not.</p>"
+                "smithy.api#documentation": "<p>Reference data used to evaluate Performance Insights to determine if its performance is anomalous or\n\t\t\tnot.</p>"
             }
         },
         "com.amazonaws.devopsguru#PerformanceInsightsReferenceDataList": {
@@ -3328,7 +3455,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A reference value to compare Performance Insights metrics against to determine if the metrics \n      demonstrate anomalous behavior.</p>"
+                "smithy.api#documentation": "<p>A reference value to compare Performance Insights metrics against to determine if the metrics\n\t\t\tdemonstrate anomalous behavior.</p>"
             }
         },
         "com.amazonaws.devopsguru#PerformanceInsightsStat": {
@@ -3452,6 +3579,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p> A threshold that was exceeded by behavior in analyzed resources. Exceeding this\n\t\t\tthreshold is related to the anomalous behavior that generated this anomaly. </p>"
                     }
+                },
+                "SourceMetadata": {
+                    "target": "com.amazonaws.devopsguru#AnomalySourceMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata for the anomaly.</p>"
+                    }
+                },
+                "AnomalyResources": {
+                    "target": "com.amazonaws.devopsguru#AnomalyResources",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about a resource in which DevOps Guru detected anomalous behavior.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3517,6 +3656,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p> A threshold that was exceeded by behavior in analyzed resources. Exceeding this\n\t\t\tthreshold is related to the anomalous behavior that generated this anomaly. </p>"
                     }
+                },
+                "SourceMetadata": {
+                    "target": "com.amazonaws.devopsguru#AnomalySourceMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the metadata of the source.</p>"
+                    }
+                },
+                "AnomalyResources": {
+                    "target": "com.amazonaws.devopsguru#AnomalyResources",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about a resource in which DevOps Guru detected anomalous behavior.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3563,6 +3714,12 @@
                     "target": "com.amazonaws.devopsguru#SsmOpsItemId",
                     "traits": {
                         "smithy.api#documentation": "<p> The ID of the Amazon Web Services System Manager OpsItem created for this insight. You must enable\n\t\t\tthe creation of OpstItems insights before they are created for each insight. </p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.devopsguru#InsightDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the proactive insight.</p>"
                     }
                 }
             },
@@ -3659,7 +3816,7 @@
                 "Severity": {
                     "target": "com.amazonaws.devopsguru#InsightSeverity",
                     "traits": {
-                        "smithy.api#documentation": "<p> An array of severity values used to search for insights. For more information, see \n\t<a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-insights.html#understanding-insights-severities\">Understanding \n\tinsight severities</a> in the <i>Amazon DevOps Guru User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p> An array of severity values used to search for insights.\n\t\t\tFor more information, see \n\t<a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-insights.html#understanding-insights-severities\">Understanding \n\tinsight severities</a> in the <i>Amazon DevOps Guru User Guide</i>.</p>"
                     }
                 },
                 "Status": {
@@ -3682,7 +3839,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Details about a proactive insight. This object is returned by\n\t\t\t<code>DescribeInsight</code>.</p>"
+                "smithy.api#documentation": "<p>Details about a proactive insight. This object is returned by\n\t\t\t\t<code>DescribeInsight</code>.</p>"
             }
         },
         "com.amazonaws.devopsguru#ProactiveOrganizationInsights": {
@@ -3947,6 +4104,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p> The ID of the Amazon Web Services System Manager OpsItem created for this insight. You must enable\n\t\t\tthe creation of OpstItems insights before they are created for each insight. </p>"
                     }
+                },
+                "Description": {
+                    "target": "com.amazonaws.devopsguru#InsightDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the reactive insight.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4039,7 +4202,7 @@
                 "Severity": {
                     "target": "com.amazonaws.devopsguru#InsightSeverity",
                     "traits": {
-                        "smithy.api#documentation": "<p> An array of severity values used to search for insights. For more information, see \n\t<a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-insights.html#understanding-insights-severities\">Understanding \n\tinsight severities</a> in the <i>Amazon DevOps Guru User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p> An array of severity values used to search for insights.\n\t\t\tFor more information, see \n\t<a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-insights.html#understanding-insights-severities\">Understanding \n\tinsight severities</a> in the <i>Amazon DevOps Guru User Guide</i>.</p>"
                     }
                 },
                 "Status": {
@@ -4059,7 +4222,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about a reactive insight. This object is returned by\n\t\t\t<code>DescribeInsight</code>.</p>"
+                "smithy.api#documentation": "<p>Information about a reactive insight. This object is returned by\n\t\t\t\t<code>DescribeInsight</code>.</p>"
             }
         },
         "com.amazonaws.devopsguru#ReactiveOrganizationInsights": {
@@ -4106,11 +4269,20 @@
                     "traits": {
                         "smithy.api#documentation": "<p> Anomalies that are related to the problem. Use these Anomalies to learn more about\n\t\t\twhat's happening and to help address the issue. </p>"
                     }
+                },
+                "Category": {
+                    "target": "com.amazonaws.devopsguru#RecommendationCategory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The category type of the recommendation.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p> Recommendation information to help you remediate detected anomalous behavior that\n\t\t\tgenerated an insight. </p>"
             }
+        },
+        "com.amazonaws.devopsguru#RecommendationCategory": {
+            "type": "string"
         },
         "com.amazonaws.devopsguru#RecommendationDescription": {
             "type": "string"
@@ -4168,7 +4340,7 @@
                 "Type": {
                     "target": "com.amazonaws.devopsguru#RecommendationRelatedAnomalyResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p> The type of the resource. Resource types take the same form that is \n\t\t\tused by Amazon Web Services CloudFormation resource type identifiers, <code>service-provider::service-name::data-type-name</code>. \n\t\t\tFor example, <code>AWS::RDS::DBCluster</code>. For more information, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">Amazon Web Services resource and \n\t\t\t\tproperty types reference</a> in the <i>Amazon Web Services CloudFormation User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p> The type of the resource. Resource types take the same form that is used by Amazon Web Services CloudFormation\n\t\t\tresource type identifiers, <code>service-provider::service-name::data-type-name</code>.\n\t\t\tFor example, <code>AWS::RDS::DBCluster</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">Amazon Web Services\n\t\t\t\tresource and property types reference</a> in the <i>Amazon Web Services CloudFormation User\n\t\t\t\tGuide</i>.</p>"
                     }
                 }
             },
@@ -4388,7 +4560,7 @@
                 "Tags": {
                     "target": "com.amazonaws.devopsguru#TagCollections",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services tags that are used by resources in the resource collection.</p>\n   \t     <p>Tags help you identify and organize your Amazon Web Services resources. Many Amazon Web Services services support\n   \t\ttagging, so you can assign the same tag to resources from different services to indicate\n   \t\tthat the resources are related. For example, you can assign the same tag to an Amazon DynamoDB\n   \t\ttable resource that you assign to an Lambda function. For more information about\n   \t\tusing tags, see the <a href=\"https://d1.awsstatic.com/whitepapers/aws-tagging-best-practices.pdf\">Tagging\n   \t\t\tbest practices</a> whitepaper. </p>\n   \t     <p>Each Amazon Web Services tag has two parts. </p>\n   \t     <ul>\n            <li>\n   \t\t\t         <p>A tag <i>key</i> (for example, <code>CostCenter</code>,\n   \t\t\t\t<code>Environment</code>, <code>Project</code>, or <code>Secret</code>). Tag\n   \t\t\t\t<i>keys</i> are case-sensitive.</p>\n   \t\t       </li>\n            <li>\n   \t\t\t         <p>An optional field known as a tag <i>value</i> (for example,\n   \t\t\t\t<code>111122223333</code>, <code>Production</code>, or a team\n   \t\t\t\tname). Omitting the tag <i>value</i> is the same as using an empty\n   \t\t\t\tstring. Like tag <i>keys</i>, tag <i>values</i> are\n   \t\t\t\tcase-sensitive.</p>\n   \t\t       </li>\n         </ul>\n   \t     <p>Together these are known as <i>key</i>-<i>value</i> pairs.</p>\n   \t     <important>\n\t\t          <p>The string used for a <i>key</i> in a tag that you use to define your resource coverage must begin with the\n\t\t\tprefix <code>Devops-guru-</code>. The tag <i>key</i> might be\n\t\t\t<code>Devops-guru-deployment-application</code> or\n\t\t\t<code>Devops-guru-rds-application</code>. While <i>keys</i> are case-sensitive, the\n\t\t\tcase of <i>key</i> characters don't matter to DevOps Guru. For example, DevOps Guru works with a\n\t\t\t<i>key</i> named <code>devops-guru-rds</code> and a <i>key</i> named\n\t\t\t<code>DevOps-Guru-RDS</code>. Possible <i>key</i>/<i>value</i> pairs in your\n\t\t\tapplication might be <code>Devops-Guru-production-application/RDS</code> or\n\t\t\t<code>Devops-Guru-production-application/containers</code>.</p>\n\t        </important>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services tags that are used by resources in the resource collection.</p>\n\t\t       <p>Tags help you identify and organize your Amazon Web Services resources. Many Amazon Web Services services support\n   \t\ttagging, so you can assign the same tag to resources from different services to indicate\n   \t\tthat the resources are related. For example, you can assign the same tag to an Amazon DynamoDB\n   \t\ttable resource that you assign to an Lambda function. For more information about\n   \t\tusing tags, see the <a href=\"https://d1.awsstatic.com/whitepapers/aws-tagging-best-practices.pdf\">Tagging\n   \t\t\tbest practices</a> whitepaper. </p>\n   \t     <p>Each Amazon Web Services tag has two parts. </p>\n   \t     <ul>\n            <li>\n   \t\t\t         <p>A tag <i>key</i> (for example, <code>CostCenter</code>,\n   \t\t\t\t<code>Environment</code>, <code>Project</code>, or <code>Secret</code>). Tag\n   \t\t\t\t<i>keys</i> are case-sensitive.</p>\n   \t\t       </li>\n            <li>\n   \t\t\t         <p>An optional field known as a tag <i>value</i> (for example,\n   \t\t\t\t<code>111122223333</code>, <code>Production</code>, or a team\n   \t\t\t\tname). Omitting the tag <i>value</i> is the same as using an empty\n   \t\t\t\tstring. Like tag <i>keys</i>, tag <i>values</i> are\n   \t\t\t\tcase-sensitive.</p>\n   \t\t       </li>\n         </ul>\n   \t     <p>Together these are known as <i>key</i>-<i>value</i> pairs.</p>\n   \t     <important>\n\t\t          <p>The string used for a <i>key</i> in a tag that you use to define your resource coverage must begin with the\n\t\t\tprefix <code>Devops-guru-</code>. The tag <i>key</i> might be\n\t\t\t<code>Devops-guru-deployment-application</code> or\n\t\t\t<code>Devops-guru-rds-application</code>. While <i>keys</i> are case-sensitive, the\n\t\t\tcase of <i>key</i> characters don't matter to DevOps Guru. For example, DevOps Guru works with a\n\t\t\t<i>key</i> named <code>devops-guru-rds</code> and a <i>key</i> named\n\t\t\t<code>DevOps-Guru-RDS</code>. Possible <i>key</i>/<i>value</i> pairs in your\n\t\t\tapplication might be <code>Devops-Guru-production-application/RDS</code> or\n\t\t\t<code>Devops-Guru-production-application/containers</code>.</p>\n\t        </important>"
                     }
                 }
             },
@@ -4408,7 +4580,7 @@
                 "Tags": {
                     "target": "com.amazonaws.devopsguru#TagCollectionFilters",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services tags used to filter the resources in the resource collection.</p>\n   \t     <p>Tags help you identify and organize your Amazon Web Services resources. Many Amazon Web Services services support\n   \t\ttagging, so you can assign the same tag to resources from different services to indicate\n   \t\tthat the resources are related. For example, you can assign the same tag to an Amazon DynamoDB\n   \t\ttable resource that you assign to an Lambda function. For more information about\n   \t\tusing tags, see the <a href=\"https://d1.awsstatic.com/whitepapers/aws-tagging-best-practices.pdf\">Tagging\n   \t\t\tbest practices</a> whitepaper. </p>\n   \t     <p>Each Amazon Web Services tag has two parts. </p>\n   \t     <ul>\n            <li>\n   \t\t\t         <p>A tag <i>key</i> (for example, <code>CostCenter</code>,\n   \t\t\t\t<code>Environment</code>, <code>Project</code>, or <code>Secret</code>). Tag\n   \t\t\t\t<i>keys</i> are case-sensitive.</p>\n   \t\t       </li>\n            <li>\n   \t\t\t         <p>An optional field known as a tag <i>value</i> (for example,\n   \t\t\t\t<code>111122223333</code>, <code>Production</code>, or a team\n   \t\t\t\tname). Omitting the tag <i>value</i> is the same as using an empty\n   \t\t\t\tstring. Like tag <i>keys</i>, tag <i>values</i> are\n   \t\t\t\tcase-sensitive.</p>\n   \t\t       </li>\n         </ul>\n   \t     <p>Together these are known as <i>key</i>-<i>value</i> pairs.</p>\n   \t     <important>\n\t\t          <p>The string used for a <i>key</i> in a tag that you use to define your resource coverage must begin with the\n\t\t\tprefix <code>Devops-guru-</code>. The tag <i>key</i> might be\n\t\t\t<code>Devops-guru-deployment-application</code> or\n\t\t\t<code>Devops-guru-rds-application</code>. While <i>keys</i> are case-sensitive, the\n\t\t\tcase of <i>key</i> characters don't matter to DevOps Guru. For example, DevOps Guru works with a\n\t\t\t<i>key</i> named <code>devops-guru-rds</code> and a <i>key</i> named\n\t\t\t<code>DevOps-Guru-RDS</code>. Possible <i>key</i>/<i>value</i> pairs in your\n\t\t\tapplication might be <code>Devops-Guru-production-application/RDS</code> or\n\t\t\t<code>Devops-Guru-production-application/containers</code>.</p>\n\t        </important>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services tags used to filter the resources in the resource collection.</p>\n\t\t       <p>Tags help you identify and organize your Amazon Web Services resources. Many Amazon Web Services services support\n   \t\ttagging, so you can assign the same tag to resources from different services to indicate\n   \t\tthat the resources are related. For example, you can assign the same tag to an Amazon DynamoDB\n   \t\ttable resource that you assign to an Lambda function. For more information about\n   \t\tusing tags, see the <a href=\"https://d1.awsstatic.com/whitepapers/aws-tagging-best-practices.pdf\">Tagging\n   \t\t\tbest practices</a> whitepaper. </p>\n   \t     <p>Each Amazon Web Services tag has two parts. </p>\n   \t     <ul>\n            <li>\n   \t\t\t         <p>A tag <i>key</i> (for example, <code>CostCenter</code>,\n   \t\t\t\t<code>Environment</code>, <code>Project</code>, or <code>Secret</code>). Tag\n   \t\t\t\t<i>keys</i> are case-sensitive.</p>\n   \t\t       </li>\n            <li>\n   \t\t\t         <p>An optional field known as a tag <i>value</i> (for example,\n   \t\t\t\t<code>111122223333</code>, <code>Production</code>, or a team\n   \t\t\t\tname). Omitting the tag <i>value</i> is the same as using an empty\n   \t\t\t\tstring. Like tag <i>keys</i>, tag <i>values</i> are\n   \t\t\t\tcase-sensitive.</p>\n   \t\t       </li>\n         </ul>\n   \t     <p>Together these are known as <i>key</i>-<i>value</i> pairs.</p>\n   \t     <important>\n\t\t          <p>The string used for a <i>key</i> in a tag that you use to define your resource coverage must begin with the\n\t\t\tprefix <code>Devops-guru-</code>. The tag <i>key</i> might be\n\t\t\t<code>Devops-guru-deployment-application</code> or\n\t\t\t<code>Devops-guru-rds-application</code>. While <i>keys</i> are case-sensitive, the\n\t\t\tcase of <i>key</i> characters don't matter to DevOps Guru. For example, DevOps Guru works with a\n\t\t\t<i>key</i> named <code>devops-guru-rds</code> and a <i>key</i> named\n\t\t\t<code>DevOps-Guru-RDS</code>. Possible <i>key</i>/<i>value</i> pairs in your\n\t\t\tapplication might be <code>Devops-Guru-production-application/RDS</code> or\n\t\t\t<code>Devops-Guru-production-application/containers</code>.</p>\n\t        </important>"
                     }
                 }
             },
@@ -4663,7 +4835,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Returns a list of insights in your organization. You can specify which insights are\n\t\t\treturned by their start time, one or more statuses (<code>ONGOING</code>,\n\t\t\t<code>CLOSED</code>, and <code>CLOSED</code>), one or more severities\n\t\t\t(<code>LOW</code>, <code>MEDIUM</code>, and <code>HIGH</code>), and type\n\t\t\t(<code>REACTIVE</code> or <code>PROACTIVE</code>). </p>\n\t\t       <p> Use the <code>Filters</code> parameter to specify status and severity search\n\t\t\tparameters. Use the <code>Type</code> parameter to specify <code>REACTIVE</code> or\n\t\t\t<code>PROACTIVE</code> in your search. </p>",
+                "smithy.api#documentation": "<p> Returns a list of insights in your organization. You can specify which insights are\n\t\t\treturned by their start time, one or more statuses (<code>ONGOING</code>,\n\t\t\t\t<code>CLOSED</code>, and <code>CLOSED</code>), one or more severities\n\t\t\t\t(<code>LOW</code>, <code>MEDIUM</code>, and <code>HIGH</code>), and type\n\t\t\t\t(<code>REACTIVE</code> or <code>PROACTIVE</code>). </p>\n\t\t       <p> Use the <code>Filters</code> parameter to specify status and severity search\n\t\t\tparameters. Use the <code>Type</code> parameter to specify <code>REACTIVE</code> or\n\t\t\t\t<code>PROACTIVE</code> in your search. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/organization/insights/search",
@@ -4749,7 +4921,7 @@
                 "Type": {
                     "target": "com.amazonaws.devopsguru#InsightType",
                     "traits": {
-                        "smithy.api#documentation": "<p> The type of insights you are searching for (<code>REACTIVE</code> or\n\t\t\t<code>PROACTIVE</code>). </p>",
+                        "smithy.api#documentation": "<p> The type of insights you are searching for (<code>REACTIVE</code> or\n\t\t\t\t<code>PROACTIVE</code>). </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5155,13 +5327,13 @@
                 "TagValues": {
                     "target": "com.amazonaws.devopsguru#TagValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>The values in an Amazon Web Services tag collection.</p>\n   \t     <p>The tag's <i>value</i> is an optional field used to associate a string with \n\t\t\t\t\tthe tag <i>key</i> (for example, <code>111122223333</code>, <code>Production</code>, or a team\n   \t\t\t\tname). The <i>key</i> and <i>value</i> are the tag's <i>key</i> pair. \n   \t\t\t\tOmitting the tag <i>value</i> is the same as using an empty\n   \t\t\t\tstring. Like tag <i>keys</i>, tag <i>values</i> are\n   \t\t\t\tcase-sensitive. You can specify a maximum of 256 characters for a tag value.</p>",
+                        "smithy.api#documentation": "<p>The values in an Amazon Web Services tag collection.</p> \n         <p>The tag's <i>value</i> is an optional field used to associate a string with \n\t\t\t\t\tthe tag <i>key</i> (for example, <code>111122223333</code>, <code>Production</code>, or a team\n   \t\t\t\tname). The <i>key</i> and <i>value</i> are the tag's <i>key</i> pair. \n   \t\t\t\tOmitting the tag <i>value</i> is the same as using an empty\n   \t\t\t\tstring. Like tag <i>keys</i>, tag <i>values</i> are\n   \t\t\t\tcase-sensitive. You can specify a maximum of 256 characters for a tag value.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A collection of Amazon Web Services stags.</p>\n   \t     <p>Tags help you identify and organize your Amazon Web Services resources. Many Amazon Web Services services support\n   \t\ttagging, so you can assign the same tag to resources from different services to indicate\n   \t\tthat the resources are related. For example, you can assign the same tag to an Amazon DynamoDB\n   \t\ttable resource that you assign to an Lambda function. For more information about\n   \t\tusing tags, see the <a href=\"https://d1.awsstatic.com/whitepapers/aws-tagging-best-practices.pdf\">Tagging\n   \t\t\tbest practices</a> whitepaper. </p>\n   \t     <p>Each Amazon Web Services tag has two parts. </p>\n   \t     <ul>\n            <li>\n   \t\t\t         <p>A tag <i>key</i> (for example, <code>CostCenter</code>,\n   \t\t\t\t<code>Environment</code>, <code>Project</code>, or <code>Secret</code>). Tag\n   \t\t\t\t<i>keys</i> are case-sensitive.</p>\n   \t\t       </li>\n            <li>\n   \t\t\t         <p>An optional field known as a tag <i>value</i> (for example,\n   \t\t\t\t<code>111122223333</code>, <code>Production</code>, or a team\n   \t\t\t\tname). Omitting the tag <i>value</i> is the same as using an empty\n   \t\t\t\tstring. Like tag <i>keys</i>, tag <i>values</i> are\n   \t\t\t\tcase-sensitive.</p>\n   \t\t       </li>\n         </ul>\n   \t     <p>Together these are known as <i>key</i>-<i>value</i> pairs.</p>\n   \t     <important>\n\t\t          <p>The string used for a <i>key</i> in a tag that you use to define your resource coverage must begin with the\n\t\t\tprefix <code>Devops-guru-</code>. The tag <i>key</i> might be\n\t\t\t<code>Devops-guru-deployment-application</code> or\n\t\t\t<code>Devops-guru-rds-application</code>. While <i>keys</i> are case-sensitive, the\n\t\t\tcase of <i>key</i> characters don't matter to DevOps Guru. For example, DevOps Guru works with a\n\t\t\t<i>key</i> named <code>devops-guru-rds</code> and a <i>key</i> named\n\t\t\t<code>DevOps-Guru-RDS</code>. Possible <i>key</i>/<i>value</i> pairs in your\n\t\t\tapplication might be <code>Devops-Guru-production-application/RDS</code> or\n\t\t\t<code>Devops-Guru-production-application/containers</code>.</p>\n\t        </important>"
+                "smithy.api#documentation": "<p>A collection of Amazon Web Services stags.</p> \n         <p>Tags help you identify and organize your Amazon Web Services resources. Many Amazon Web Services services support\n   \t\ttagging, so you can assign the same tag to resources from different services to indicate\n   \t\tthat the resources are related. For example, you can assign the same tag to an Amazon DynamoDB\n   \t\ttable resource that you assign to an Lambda function. For more information about\n   \t\tusing tags, see the <a href=\"https://d1.awsstatic.com/whitepapers/aws-tagging-best-practices.pdf\">Tagging\n   \t\t\tbest practices</a> whitepaper. </p>\n   \t     <p>Each Amazon Web Services tag has two parts. </p>\n   \t     <ul>\n            <li>\n   \t\t\t         <p>A tag <i>key</i> (for example, <code>CostCenter</code>,\n   \t\t\t\t<code>Environment</code>, <code>Project</code>, or <code>Secret</code>). Tag\n   \t\t\t\t<i>keys</i> are case-sensitive.</p>\n   \t\t       </li>\n            <li>\n   \t\t\t         <p>An optional field known as a tag <i>value</i> (for example,\n   \t\t\t\t<code>111122223333</code>, <code>Production</code>, or a team\n   \t\t\t\tname). Omitting the tag <i>value</i> is the same as using an empty\n   \t\t\t\tstring. Like tag <i>keys</i>, tag <i>values</i> are\n   \t\t\t\tcase-sensitive.</p>\n   \t\t       </li>\n         </ul>\n   \t     <p>Together these are known as <i>key</i>-<i>value</i> pairs.</p>\n   \t     <important>\n\t\t          <p>The string used for a <i>key</i> in a tag that you use to define your resource coverage must begin with the\n\t\t\tprefix <code>Devops-guru-</code>. The tag <i>key</i> might be\n\t\t\t<code>Devops-guru-deployment-application</code> or\n\t\t\t<code>Devops-guru-rds-application</code>. While <i>keys</i> are case-sensitive, the\n\t\t\tcase of <i>key</i> characters don't matter to DevOps Guru. For example, DevOps Guru works with a\n\t\t\t<i>key</i> named <code>devops-guru-rds</code> and a <i>key</i> named\n\t\t\t<code>DevOps-Guru-RDS</code>. Possible <i>key</i>/<i>value</i> pairs in your\n\t\t\tapplication might be <code>Devops-Guru-production-application/RDS</code> or\n\t\t\t<code>Devops-Guru-production-application/containers</code>.</p>\n\t        </important>"
             }
         },
         "com.amazonaws.devopsguru#TagCollectionFilter": {
@@ -5177,13 +5349,13 @@
                 "TagValues": {
                     "target": "com.amazonaws.devopsguru#TagValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>The values in an Amazon Web Services tag collection.</p>\n   \t     <p>The tag's <i>value</i> is an optional field used to associate a string with \n\t\t\t\t\tthe tag <i>key</i> (for example, <code>111122223333</code>, <code>Production</code>, or a team\n   \t\t\t\tname). The <i>key</i> and <i>value</i> are the tag's <i>key</i> pair. \n   \t\t\t\tOmitting the tag <i>value</i> is the same as using an empty\n   \t\t\t\tstring. Like tag <i>keys</i>, tag <i>values</i> are\n   \t\t\t\tcase-sensitive. You can specify a maximum of 256 characters for a tag value.</p>",
+                        "smithy.api#documentation": "<p>The values in an Amazon Web Services tag collection.</p> \n         <p>The tag's <i>value</i> is an optional field used to associate a string with \n\t\t\t\t\tthe tag <i>key</i> (for example, <code>111122223333</code>, <code>Production</code>, or a team\n   \t\t\t\tname). The <i>key</i> and <i>value</i> are the tag's <i>key</i> pair. \n   \t\t\t\tOmitting the tag <i>value</i> is the same as using an empty\n   \t\t\t\tstring. Like tag <i>keys</i>, tag <i>values</i> are\n   \t\t\t\tcase-sensitive. You can specify a maximum of 256 characters for a tag value.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A collection of Amazon Web Services tags used to filter insights. This is used to return insights generated from \n      only resources that contain the tags in the tag collection.</p>"
+                "smithy.api#documentation": "<p>A collection of Amazon Web Services tags used to filter insights. This is used to return insights\n\t\t\tgenerated from only resources that contain the tags in the tag collection.</p>"
             }
         },
         "com.amazonaws.devopsguru#TagCollectionFilters": {
@@ -5211,13 +5383,13 @@
                 "TagValues": {
                     "target": "com.amazonaws.devopsguru#CostEstimationTagValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>The values in an Amazon Web Services tag collection.</p>\n   \t     <p>The tag's <i>value</i> is an optional field used to associate a string with \n\t\t\t\t\tthe tag <i>key</i> (for example, <code>111122223333</code>, <code>Production</code>, or a team\n   \t\t\t\tname). The <i>key</i> and <i>value</i> are the tag's <i>key</i> pair. \n   \t\t\t\tOmitting the tag <i>value</i> is the same as using an empty\n   \t\t\t\tstring. Like tag <i>keys</i>, tag <i>values</i> are\n   \t\t\t\tcase-sensitive. You can specify a maximum of 256 characters for a tag value.</p>",
+                        "smithy.api#documentation": "<p>The values in an Amazon Web Services tag collection.</p> \n         <p>The tag's <i>value</i> is an optional field used to associate a string with \n\t\t\t\t\tthe tag <i>key</i> (for example, <code>111122223333</code>, <code>Production</code>, or a team\n   \t\t\t\tname). The <i>key</i> and <i>value</i> are the tag's <i>key</i> pair. \n   \t\t\t\tOmitting the tag <i>value</i> is the same as using an empty\n   \t\t\t\tstring. Like tag <i>keys</i>, tag <i>values</i> are\n   \t\t\t\tcase-sensitive. You can specify a maximum of 256 characters for a tag value.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about a collection of Amazon Web Services resources that are identified by an \n   \t\tAmazon Web Services tag. This collection of resources is used to create a monthly cost estimate\n   \t\tfor DevOps Guru to analyze Amazon Web Services resources. The maximum number of tags you can specify for a\n   \t\tcost estimate is one. The estimate created is for the cost to analyze the Amazon Web Services\n   \t\tresources defined by the tag. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html\">Stacks</a> in the\n   \t\t<i>Amazon Web Services CloudFormation User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Information about a collection of Amazon Web Services resources that are identified by an Amazon Web Services tag.\n\t\t\tThis collection of resources is used to create a monthly cost estimate for DevOps Guru to\n\t\t\tanalyze Amazon Web Services resources. The maximum number of tags you can specify for a cost estimate\n\t\t\tis one. The estimate created is for the cost to analyze the Amazon Web Services resources defined by\n\t\t\tthe tag. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html\">Stacks</a> in the\n\t\t\t\t<i>Amazon Web Services CloudFormation User Guide</i>.</p>"
             }
         },
         "com.amazonaws.devopsguru#TagCostEstimationResourceCollectionFilters": {
@@ -5238,18 +5410,18 @@
                 "TagValue": {
                     "target": "com.amazonaws.devopsguru#TagValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value in an Amazon Web Services tag.</p>\n   \t     <p>The tag's <i>value</i> is an optional field used to associate a string with \n\t\t\t\t\tthe tag <i>key</i> (for example, <code>111122223333</code>, <code>Production</code>, or a team\n   \t\t\t\tname). The <i>key</i> and <i>value</i> are the tag's <i>key</i> pair. \n   \t\t\t\tOmitting the tag <i>value</i> is the same as using an empty\n   \t\t\t\tstring. Like tag <i>keys</i>, tag <i>values</i> are\n   \t\t\t\tcase-sensitive. You can specify a maximum of 256 characters for a tag value.</p>"
+                        "smithy.api#documentation": "<p>The value in an Amazon Web Services tag.</p> \n         <p>The tag's <i>value</i> is an optional field used to associate a string with \n\t\t\t\t\tthe tag <i>key</i> (for example, <code>111122223333</code>, <code>Production</code>, or a team\n   \t\t\t\tname). The <i>key</i> and <i>value</i> are the tag's <i>key</i> pair. \n   \t\t\t\tOmitting the tag <i>value</i> is the same as using an empty\n   \t\t\t\tstring. Like tag <i>keys</i>, tag <i>values</i> are\n   \t\t\t\tcase-sensitive. You can specify a maximum of 256 characters for a tag value.</p>"
                     }
                 },
                 "Insight": {
                     "target": "com.amazonaws.devopsguru#InsightHealth",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the health of the Amazon Web Services resources in your account that are\n\t\t\tspecified by an Amazon Web Services tag, including the number of open proactive, open reactive\n\t\t\tinsights, and the Mean Time to Recover (MTTR) of closed insights. </p>"
+                        "smithy.api#documentation": "<p>Information about the health of the Amazon Web Services resources in your account that are specified\n\t\t\tby an Amazon Web Services tag, including the number of open proactive, open reactive insights, and the\n\t\t\tMean Time to Recover (MTTR) of closed insights. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> Information about the health of Amazon Web Services resources in your account that are specified by\n   \t\tan Amazon Web Services tag <i>key</i>. </p>"
+                "smithy.api#documentation": "<p> Information about the health of Amazon Web Services resources in your account that are specified by\n\t\t\tan Amazon Web Services tag <i>key</i>. </p>"
             }
         },
         "com.amazonaws.devopsguru#TagHealths": {
@@ -5362,6 +5534,52 @@
                 "smithy.api#documentation": "<p> Contains the names of Amazon Web Services CloudFormation stacks used to update a collection of stacks.\n\t\t\tYou can specify up to 500 Amazon Web Services CloudFormation stacks.</p>"
             }
         },
+        "com.amazonaws.devopsguru#UpdateEventSourcesConfig": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.devopsguru#UpdateEventSourcesConfigRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.devopsguru#UpdateEventSourcesConfigResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.devopsguru#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the event source configuration.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/event-sources",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#UpdateEventSourcesConfigRequest": {
+            "type": "structure",
+            "members": {
+                "EventSources": {
+                    "target": "com.amazonaws.devopsguru#EventSourcesConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the event source.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#UpdateEventSourcesConfigResponse": {
+            "type": "structure",
+            "members": {}
+        },
         "com.amazonaws.devopsguru#UpdateResourceCollection": {
             "type": "operation",
             "input": {
@@ -5423,7 +5641,7 @@
                 "Tags": {
                     "target": "com.amazonaws.devopsguru#UpdateTagCollectionFilters",
                     "traits": {
-                        "smithy.api#documentation": "<p>The updated Amazon Web Services tags used to filter the resources in the resource collection.</p>\n   \t     <p>Tags help you identify and organize your Amazon Web Services resources. Many Amazon Web Services services support\n   \t\ttagging, so you can assign the same tag to resources from different services to indicate\n   \t\tthat the resources are related. For example, you can assign the same tag to an Amazon DynamoDB\n   \t\ttable resource that you assign to an Lambda function. For more information about\n   \t\tusing tags, see the <a href=\"https://d1.awsstatic.com/whitepapers/aws-tagging-best-practices.pdf\">Tagging\n   \t\t\tbest practices</a> whitepaper. </p>\n   \t     <p>Each Amazon Web Services tag has two parts. </p>\n   \t     <ul>\n            <li>\n   \t\t\t         <p>A tag <i>key</i> (for example, <code>CostCenter</code>,\n   \t\t\t\t<code>Environment</code>, <code>Project</code>, or <code>Secret</code>). Tag\n   \t\t\t\t<i>keys</i> are case-sensitive.</p>\n   \t\t       </li>\n            <li>\n   \t\t\t         <p>An optional field known as a tag <i>value</i> (for example,\n   \t\t\t\t<code>111122223333</code>, <code>Production</code>, or a team\n   \t\t\t\tname). Omitting the tag <i>value</i> is the same as using an empty\n   \t\t\t\tstring. Like tag <i>keys</i>, tag <i>values</i> are\n   \t\t\t\tcase-sensitive.</p>\n   \t\t       </li>\n         </ul>\n   \t     <p>Together these are known as <i>key</i>-<i>value</i> pairs.</p>\n   \t     <important>\n\t\t          <p>The string used for a <i>key</i> in a tag that you use to define your resource coverage must begin with the\n\t\t\tprefix <code>Devops-guru-</code>. The tag <i>key</i> might be\n\t\t\t<code>Devops-guru-deployment-application</code> or\n\t\t\t<code>Devops-guru-rds-application</code>. While <i>keys</i> are case-sensitive, the\n\t\t\tcase of <i>key</i> characters don't matter to DevOps Guru. For example, DevOps Guru works with a\n\t\t\t<i>key</i> named <code>devops-guru-rds</code> and a <i>key</i> named\n\t\t\t<code>DevOps-Guru-RDS</code>. Possible <i>key</i>/<i>value</i> pairs in your\n\t\t\tapplication might be <code>Devops-Guru-production-application/RDS</code> or\n\t\t\t<code>Devops-Guru-production-application/containers</code>.</p>\n\t        </important>"
+                        "smithy.api#documentation": "<p>The updated Amazon Web Services tags used to filter the resources in the resource collection.</p>\n\t\t       <p>Tags help you identify and organize your Amazon Web Services resources. Many Amazon Web Services services support\n   \t\ttagging, so you can assign the same tag to resources from different services to indicate\n   \t\tthat the resources are related. For example, you can assign the same tag to an Amazon DynamoDB\n   \t\ttable resource that you assign to an Lambda function. For more information about\n   \t\tusing tags, see the <a href=\"https://d1.awsstatic.com/whitepapers/aws-tagging-best-practices.pdf\">Tagging\n   \t\t\tbest practices</a> whitepaper. </p>\n   \t     <p>Each Amazon Web Services tag has two parts. </p>\n   \t     <ul>\n            <li>\n   \t\t\t         <p>A tag <i>key</i> (for example, <code>CostCenter</code>,\n   \t\t\t\t<code>Environment</code>, <code>Project</code>, or <code>Secret</code>). Tag\n   \t\t\t\t<i>keys</i> are case-sensitive.</p>\n   \t\t       </li>\n            <li>\n   \t\t\t         <p>An optional field known as a tag <i>value</i> (for example,\n   \t\t\t\t<code>111122223333</code>, <code>Production</code>, or a team\n   \t\t\t\tname). Omitting the tag <i>value</i> is the same as using an empty\n   \t\t\t\tstring. Like tag <i>keys</i>, tag <i>values</i> are\n   \t\t\t\tcase-sensitive.</p>\n   \t\t       </li>\n         </ul>\n   \t     <p>Together these are known as <i>key</i>-<i>value</i> pairs.</p>\n   \t     <important>\n\t\t          <p>The string used for a <i>key</i> in a tag that you use to define your resource coverage must begin with the\n\t\t\tprefix <code>Devops-guru-</code>. The tag <i>key</i> might be\n\t\t\t<code>Devops-guru-deployment-application</code> or\n\t\t\t<code>Devops-guru-rds-application</code>. While <i>keys</i> are case-sensitive, the\n\t\t\tcase of <i>key</i> characters don't matter to DevOps Guru. For example, DevOps Guru works with a\n\t\t\t<i>key</i> named <code>devops-guru-rds</code> and a <i>key</i> named\n\t\t\t<code>DevOps-Guru-RDS</code>. Possible <i>key</i>/<i>value</i> pairs in your\n\t\t\tapplication might be <code>Devops-Guru-production-application/RDS</code> or\n\t\t\t<code>Devops-Guru-production-application/containers</code>.</p>\n\t        </important>"
                     }
                 }
             },
@@ -5539,13 +5757,13 @@
                 "TagValues": {
                     "target": "com.amazonaws.devopsguru#UpdateTagValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>The values in an Amazon Web Services tag collection.</p>\n   \t     <p>The tag's <i>value</i> is an optional field used to associate a string with \n\t\t\t\t\tthe tag <i>key</i> (for example, <code>111122223333</code>, <code>Production</code>, or a team\n   \t\t\t\tname). The <i>key</i> and <i>value</i> are the tag's <i>key</i> pair. \n   \t\t\t\tOmitting the tag <i>value</i> is the same as using an empty\n   \t\t\t\tstring. Like tag <i>keys</i>, tag <i>values</i> are\n   \t\t\t\tcase-sensitive. You can specify a maximum of 256 characters for a tag value.</p>",
+                        "smithy.api#documentation": "<p>The values in an Amazon Web Services tag collection.</p> \n         <p>The tag's <i>value</i> is an optional field used to associate a string with \n\t\t\t\t\tthe tag <i>key</i> (for example, <code>111122223333</code>, <code>Production</code>, or a team\n   \t\t\t\tname). The <i>key</i> and <i>value</i> are the tag's <i>key</i> pair. \n   \t\t\t\tOmitting the tag <i>value</i> is the same as using an empty\n   \t\t\t\tstring. Like tag <i>keys</i>, tag <i>values</i> are\n   \t\t\t\tcase-sensitive. You can specify a maximum of 256 characters for a tag value.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A new collection of Amazon Web Services resources that are defined by an Amazon Web Services tag or tag \n      <i>key</i>/<i>value</i> pair.</p>"
+                "smithy.api#documentation": "<p>A new collection of Amazon Web Services resources that are defined by an Amazon Web Services tag or tag\n\t\t\t<i>key</i>/<i>value</i> pair.</p>"
             }
         },
         "com.amazonaws.devopsguru#UpdateTagCollectionFilters": {

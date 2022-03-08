@@ -59,7 +59,7 @@ type DescribeQueryOutput struct {
 	QueryStatistics *types.QueryStatisticsForDescribeQuery
 
 	// The status of a query. Values for QueryStatus include QUEUED, RUNNING, FINISHED,
-	// FAILED, or CANCELLED
+	// FAILED, TIMED_OUT, or CANCELLED
 	QueryStatus types.QueryStatus
 
 	// The SQL code of a query.

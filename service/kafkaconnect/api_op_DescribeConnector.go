@@ -89,6 +89,9 @@ type DescribeConnectorOutput struct {
 	// Amazon Web Services resources.
 	ServiceExecutionRoleArn *string
 
+	// Details about the state of a connector.
+	StateDescription *types.StateDescription
+
 	// Specifies which worker configuration was used for the connector.
 	WorkerConfiguration *types.WorkerConfigurationDescription
 

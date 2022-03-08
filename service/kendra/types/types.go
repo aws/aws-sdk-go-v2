@@ -349,7 +349,8 @@ type ConfluenceBlogToIndexFieldMapping struct {
 	noSmithyDocumentSerde
 }
 
-// Provides configuration information for data sources that connect to Confluence.
+// Provides the configuration information to connect to Confluence as your data
+// source.
 type ConfluenceConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the
@@ -499,7 +500,7 @@ type ConfluenceSpaceToIndexFieldMapping struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the information necessary to connect to a database.
+// Provides the configuration information that's required to connect to a database.
 type ConnectionConfiguration struct {
 
 	// The name of the host for the database. Can be either a string
@@ -537,8 +538,8 @@ type ConnectionConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Configuration information for your content sources, such as data sources, FAQs,
-// and content indexed directly via BatchPutDocument
+// Provides the configuration information for your content sources, such as data
+// sources, FAQs, and content indexed directly via BatchPutDocument
 // (https://docs.aws.amazon.com/kendra/latest/dg/API_BatchPutDocument.html).
 type ContentSourceConfiguration struct {
 
@@ -552,6 +553,26 @@ type ContentSourceConfiguration struct {
 	// The identifier of the FAQs that you want to use for your Amazon Kendra
 	// experience.
 	FaqIds []string
+
+	noSmithyDocumentSerde
+}
+
+// A corrected misspelled word in a query.
+type Correction struct {
+
+	// The zero-based location in the response string or text where the corrected word
+	// starts.
+	BeginOffset *int32
+
+	// The string or text of a corrected misspelled word in a query.
+	CorrectedTerm *string
+
+	// The zero-based location in the response string or text where the corrected word
+	// ends.
+	EndOffset *int32
+
+	// The string or text of a misspelled word in a query.
+	Term *string
 
 	noSmithyDocumentSerde
 }
@@ -592,7 +613,7 @@ type CustomDocumentEnrichmentConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the information necessary to connect a database to an index.
+// Provides the configuration information to connect to a index.
 type DatabaseConfiguration struct {
 
 	// Information about where the index should get the document information from the
@@ -601,7 +622,7 @@ type DatabaseConfiguration struct {
 	// This member is required.
 	ColumnConfiguration *ColumnConfiguration
 
-	// The information necessary to connect to a database.
+	// Configuration information that's required to connect to a database.
 	//
 	// This member is required.
 	ConnectionConfiguration *ConnectionConfiguration
@@ -619,44 +640,48 @@ type DatabaseConfiguration struct {
 	// identifiers when querying a database data source.
 	SqlConfiguration *SqlConfiguration
 
-	// Provides information for connecting to an Amazon VPC.
+	// Provides the configuration information to connect to an Amazon VPC.
 	VpcConfiguration *DataSourceVpcConfiguration
 
 	noSmithyDocumentSerde
 }
 
-// Configuration information for an Amazon Kendra data source.
+// Provides the configuration information for an Amazon Kendra data source.
 type DataSourceConfiguration struct {
 
 	// Provides configuration information for connecting to a Confluence data source.
 	ConfluenceConfiguration *ConfluenceConfiguration
 
-	// Provides information necessary to create a data source connector for a database.
+	// Provides the configuration information to connect to a database as your data
+	// source.
 	DatabaseConfiguration *DatabaseConfiguration
 
 	// Provides the configuration information to connect to Amazon FSx as your data
 	// source.
 	FsxConfiguration *FsxConfiguration
 
-	// Provides configuration for data sources that connect to Google Drive.
+	// Provides the configuration information to connect to Google Drive as your data
+	// source.
 	GoogleDriveConfiguration *GoogleDriveConfiguration
 
-	// Provides configuration for data sources that connect to Microsoft OneDrive.
+	// Provides the configuration information to connect to Microsoft OneDrive as your
+	// data source.
 	OneDriveConfiguration *OneDriveConfiguration
 
-	// Provides information to create a data source connector for a document repository
-	// in an Amazon S3 bucket.
+	// Provides the configuration information to connect to an Amazon S3 bucket as your
+	// data source.
 	S3Configuration *S3DataSourceConfiguration
 
-	// Provides configuration information for data sources that connect to a Salesforce
-	// site.
+	// Provides the configuration information to connect to Salesforce as your data
+	// source.
 	SalesforceConfiguration *SalesforceConfiguration
 
-	// Provides configuration for data sources that connect to ServiceNow instances.
+	// Provides the configuration information to connect to ServiceNow as your data
+	// source.
 	ServiceNowConfiguration *ServiceNowConfiguration
 
-	// Provides information necessary to create a data source connector for a Microsoft
-	// SharePoint site.
+	// Provides the configuration information to connect to Microsoft SharePoint as
+	// your data source.
 	SharePointConfiguration *SharePointConfiguration
 
 	// Provides the configuration information required for Amazon Kendra Web Crawler.
@@ -825,7 +850,7 @@ type DataSourceToIndexFieldMapping struct {
 	noSmithyDocumentSerde
 }
 
-// Provides information for connecting to an Amazon VPC.
+// Provides the configuration information to connect to an Amazon VPC.
 type DataSourceVpcConfiguration struct {
 
 	// A list of identifiers of security groups within your Amazon VPC. The security
@@ -1099,7 +1124,7 @@ type DocumentsMetadataConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the configuration information of users or groups in your Amazon Web
+// Provides the configuration information for users or groups in your Amazon Web
 // Services SSO identity source to grant access your Amazon Kendra experience.
 type EntityConfiguration struct {
 
@@ -1138,7 +1163,7 @@ type EntityDisplayData struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the configuration information of users or groups in your Amazon Web
+// Provides the configuration information for users or groups in your Amazon Web
 // Services SSO identity source for access to your Amazon Kendra experience.
 // Specific permissions are defined for each user or group once they are granted
 // access to your Amazon Kendra experience.
@@ -1162,7 +1187,7 @@ type EntityPersonaConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the configuration information for your Amazon Kendra experience. This
+// Provides the configuration information for your Amazon Kendra experience. This
 // includes the data source IDs and/or FAQ IDs, and user or group information to
 // grant access to your Amazon Kendra experience.
 type ExperienceConfiguration struct {
@@ -1179,7 +1204,7 @@ type ExperienceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the configuration information of the endpoint for your Amazon Kendra
+// Provides the configuration information for the endpoint for your Amazon Kendra
 // experience.
 type ExperienceEndpoint struct {
 
@@ -1345,9 +1370,8 @@ type FsxConfiguration struct {
 	// This member is required.
 	FileSystemType FsxFileSystemType
 
-	// Provides the configuration information for connecting to an Amazon Virtual
-	// Private Cloud for your Amazon FSx. Your Amazon FSx instance must reside inside
-	// your VPC.
+	// Configuration information for connecting to an Amazon Virtual Private Cloud for
+	// your Amazon FSx. Your Amazon FSx instance must reside inside your VPC.
 	//
 	// This member is required.
 	VpcConfiguration *DataSourceVpcConfiguration
@@ -1360,9 +1384,9 @@ type FsxConfiguration struct {
 	ExclusionPatterns []string
 
 	// A list of DataSourceToIndexFieldMapping objects that map Amazon FSx data source
-	// attributes or field names to Amazon Kendra index field names in Amazon Kendra.
-	// To create custom fields, use the UpdateIndex API before you map to Amazon FSx
-	// fields. For more information, see Mapping data source fields
+	// attributes or field names to Amazon Kendra index field names. To create custom
+	// fields, use the UpdateIndex API before you map to Amazon FSx fields. For more
+	// information, see Mapping data source fields
 	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The Amazon
 	// FSx data source field names must exist in your Amazon FSx custom metadata.
 	FieldMappings []DataSourceToIndexFieldMapping
@@ -1384,15 +1408,16 @@ type FsxConfiguration struct {
 	// Active Directory user account must have read and mounting access to the Amazon
 	// FSx file system for Windows.
 	//
-	// * password—The password of the active directory
-	// user with read and mounting access Amazon FSx Windows file system.
+	// * password—The password of the Active Directory
+	// user account with read and mounting access to the Amazon FSx Windows file
+	// system.
 	SecretArn *string
 
 	noSmithyDocumentSerde
 }
 
-// Provides configuration information for data sources that connect to Google
-// Drive.
+// Provides the configuration information to connect to Google Drive as your data
+// source.
 type GoogleDriveConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of a Secrets Managersecret that contains the
@@ -1587,7 +1612,7 @@ type HookConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// A summary of information about an index.
+// A summary of information on the configuration of an index.
 type IndexConfigurationSummary struct {
 
 	// The Unix timestamp when the index was created.
@@ -1660,7 +1685,7 @@ type InlineCustomDocumentEnrichmentConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Configuration information for the JSON token type.
+// Provides the configuration information for the JSON token type.
 type JsonTokenTypeConfiguration struct {
 
 	// The group attribute field.
@@ -1676,7 +1701,7 @@ type JsonTokenTypeConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Configuration information for the JWT token type.
+// Provides the configuration information for the JWT token type.
 type JwtTokenTypeConfiguration struct {
 
 	// The location of the key.
@@ -1730,7 +1755,8 @@ type MemberUser struct {
 	noSmithyDocumentSerde
 }
 
-// Provides configuration information for data sources that connect to OneDrive.
+// Provides the configuration information to connect to OneDrive as your data
+// source.
 type OneDriveConfiguration struct {
 
 	// A list of user accounts whose documents should be indexed.
@@ -2015,8 +2041,7 @@ type RelevanceFeedback struct {
 	noSmithyDocumentSerde
 }
 
-// Provides configuration information for a data source to index documents in an
-// Amazon S3 bucket.
+// Provides the configuration information to connect to an Amazon S3 bucket.
 type S3DataSourceConfiguration struct {
 
 	// The name of the bucket that contains the documents.
@@ -2089,8 +2114,8 @@ type S3Path struct {
 	noSmithyDocumentSerde
 }
 
-// Defines configuration for syncing a Salesforce chatter feed. The contents of the
-// object comes from the Salesforce FeedItem table.
+// The configuration information for syncing a Salesforce chatter feed. The
+// contents of the object comes from the Salesforce FeedItem table.
 type SalesforceChatterFeedConfiguration struct {
 
 	// The name of the column in the Salesforce FeedItem table that contains the
@@ -2175,8 +2200,8 @@ type SalesforceConfiguration struct {
 	// articles, but not both.
 	KnowledgeArticleConfiguration *SalesforceKnowledgeArticleConfiguration
 
-	// Provides configuration information for processing attachments to Salesforce
-	// standard objects.
+	// Configuration information for processing attachments to Salesforce standard
+	// objects.
 	StandardObjectAttachmentConfiguration *SalesforceStandardObjectAttachmentConfiguration
 
 	// Specifies the Salesforce standard objects that Amazon Kendra indexes.
@@ -2210,8 +2235,8 @@ type SalesforceCustomKnowledgeArticleTypeConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies configuration information for the knowledge article types that Amazon
-// Kendra indexes. Amazon Kendra indexes standard knowledge articles and the
+// Provides the configuration information for the knowledge article types that
+// Amazon Kendra indexes. Amazon Kendra indexes standard knowledge articles and the
 // standard fields of knowledge articles, or the custom fields of custom knowledge
 // articles, but not both
 type SalesforceKnowledgeArticleConfiguration struct {
@@ -2222,16 +2247,16 @@ type SalesforceKnowledgeArticleConfiguration struct {
 	// This member is required.
 	IncludedStates []SalesforceKnowledgeArticleState
 
-	// Provides configuration information for custom Salesforce knowledge articles.
+	// Configuration information for custom Salesforce knowledge articles.
 	CustomKnowledgeArticleTypeConfigurations []SalesforceCustomKnowledgeArticleTypeConfiguration
 
-	// Provides configuration information for standard Salesforce knowledge articles.
+	// Configuration information for standard Salesforce knowledge articles.
 	StandardKnowledgeArticleTypeConfiguration *SalesforceStandardKnowledgeArticleTypeConfiguration
 
 	noSmithyDocumentSerde
 }
 
-// Provides configuration information for standard Salesforce knowledge articles.
+// Configuration information for standard Salesforce knowledge articles.
 type SalesforceStandardKnowledgeArticleTypeConfiguration struct {
 
 	// The name of the field that contains the document data to index.
@@ -2250,7 +2275,7 @@ type SalesforceStandardKnowledgeArticleTypeConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Provides configuration information for processing attachments to Salesforce
+// Provides the configuration information for processing attachments to Salesforce
 // standard objects.
 type SalesforceStandardObjectAttachmentConfiguration struct {
 
@@ -2264,7 +2289,7 @@ type SalesforceStandardObjectAttachmentConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies configuration information for indexing a single standard object.
+// Provides the configuration information for indexing a single standard object.
 type SalesforceStandardObjectConfiguration struct {
 
 	// The name of the field in the standard object table that contains the document
@@ -2325,7 +2350,7 @@ type Search struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the configuration information of the seed or starting point URLs to
+// Provides the configuration information for the seed or starting point URLs to
 // crawl. When selecting websites to index, you must adhere to the Amazon
 // Acceptable Use Policy (https://aws.amazon.com/aup/) and all other Amazon terms.
 // Remember that you must only use Amazon Kendra Web Crawler to index your own
@@ -2369,7 +2394,7 @@ type ServerSideEncryptionConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Provides configuration information required to connect to a ServiceNow data
+// Provides the configuration information to connect to ServiceNow as your data
 // source.
 type ServiceNowConfiguration struct {
 
@@ -2403,18 +2428,17 @@ type ServiceNowConfiguration struct {
 	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-servicenow.html).
 	AuthenticationType ServiceNowAuthenticationType
 
-	// Provides configuration information for crawling knowledge articles in the
-	// ServiceNow site.
+	// Configuration information for crawling knowledge articles in the ServiceNow
+	// site.
 	KnowledgeArticleConfiguration *ServiceNowKnowledgeArticleConfiguration
 
-	// Provides configuration information for crawling service catalogs in the
-	// ServiceNow site.
+	// Configuration information for crawling service catalogs in the ServiceNow site.
 	ServiceCatalogConfiguration *ServiceNowServiceCatalogConfiguration
 
 	noSmithyDocumentSerde
 }
 
-// Provides configuration information for crawling knowledge articles in the
+// Provides the configuration information for crawling knowledge articles in the
 // ServiceNow site.
 type ServiceNowKnowledgeArticleConfiguration struct {
 
@@ -2455,7 +2479,7 @@ type ServiceNowKnowledgeArticleConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Provides configuration information for crawling service catalog items in the
+// Provides the configuration information for crawling service catalog items in the
 // ServiceNow site
 type ServiceNowServiceCatalogConfiguration struct {
 
@@ -2494,8 +2518,8 @@ type ServiceNowServiceCatalogConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Provides configuration information for connecting to a Microsoft SharePoint data
-// source.
+// Provides the configuration information to connect to Microsoft SharePoint as
+// your data source.
 type SharePointConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of credentials stored in Secrets Manager. The
@@ -2564,13 +2588,13 @@ type SharePointConfiguration struct {
 	// document crawler.
 	UseChangeLog bool
 
-	// Provides information for connecting to an Amazon VPC.
+	// Provides the configuration information to connect to an Amazon VPC.
 	VpcConfiguration *DataSourceVpcConfiguration
 
 	noSmithyDocumentSerde
 }
 
-// Provides the configuration information of the sitemap URLs to crawl. When
+// Provides the configuration information for the sitemap URLs to crawl. When
 // selecting websites to index, you must adhere to the Amazon Acceptable Use Policy
 // (https://aws.amazon.com/aup/) and all other Amazon terms. Remember that you must
 // only use Amazon Kendra Web Crawler to index your own webpages, or webpages that
@@ -2631,7 +2655,36 @@ type SortingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Provides information that configures Amazon Kendra to use a SQL database.
+// A query with suggested spell corrections.
+type SpellCorrectedQuery struct {
+
+	// The corrected misspelled word or words in a query.
+	Corrections []Correction
+
+	// The query with the suggested spell corrections.
+	SuggestedQueryText *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides the configuration information for suggested query spell corrections.
+// Suggested spell corrections are based on words that appear in your indexed
+// documents and how closely a corrected word matches a misspelled word. This
+// feature is designed with certain defaults or limits. For information on the
+// current limits and how to request more support for some limits, see the Spell
+// Checker documentation
+// (https://docs.aws.amazon.com/kendra/latest/dg/query-spell-check.html).
+type SpellCorrectionConfiguration struct {
+
+	// TRUE to suggest spell corrections for queries.
+	//
+	// This member is required.
+	IncludeQuerySpellCheckSuggestions bool
+
+	noSmithyDocumentSerde
+}
+
+// Provides the configuration information to use a SQL database.
 type SqlConfiguration struct {
 
 	// Determines whether Amazon Kendra encloses SQL identifiers for tables and column
@@ -2808,15 +2861,15 @@ type TimeRange struct {
 // index.
 type Urls struct {
 
-	// Provides the configuration of the seed or starting point URLs of the websites
-	// you want to crawl. You can choose to crawl only the website host names, or the
-	// website host names with subdomains, or the website host names with subdomains
-	// and other domains that the webpages link to. You can list up to 100 seed URLs.
+	// Configuration of the seed or starting point URLs of the websites you want to
+	// crawl. You can choose to crawl only the website host names, or the website host
+	// names with subdomains, or the website host names with subdomains and other
+	// domains that the webpages link to. You can list up to 100 seed URLs.
 	SeedUrlConfiguration *SeedUrlConfiguration
 
-	// Provides the configuration of the sitemap URLs of the websites you want to
-	// crawl. Only URLs belonging to the same website host names are crawled. You can
-	// list up to three sitemap URLs.
+	// Configuration of the sitemap URLs of the websites you want to crawl. Only URLs
+	// belonging to the same website host names are crawled. You can list up to three
+	// sitemap URLs.
 	SiteMapsConfiguration *SiteMapsConfiguration
 
 	noSmithyDocumentSerde
@@ -2885,7 +2938,7 @@ type UserGroupResolutionConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Configuration information for the identifiers of your users.
+// Provides the configuration information for the identifiers of your users.
 type UserIdentityConfiguration struct {
 
 	// The Amazon Web Services SSO field name that contains the identifiers of your
@@ -2901,7 +2954,7 @@ type UserIdentityConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Provides configuration information for a token configuration.
+// Provides the configuration information for a token.
 type UserTokenConfiguration struct {
 
 	// Information about the JSON token type configuration.
@@ -2941,13 +2994,13 @@ type WebCrawlerConfiguration struct {
 	// This member is required.
 	Urls *Urls
 
-	// Provides configuration information required to connect to websites using
-	// authentication. You can connect to websites using basic authentication of user
-	// name and password. You must provide the website host name and port number. For
-	// example, the host name of https://a.example.com/page1.html is "a.example.com"
-	// and the port is 443, the standard port for HTTPS. You use a secret in Secrets
-	// Manager (https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html)
-	// to store your authentication credentials.
+	// Configuration information required to connect to websites using authentication.
+	// You can connect to websites using basic authentication of user name and
+	// password. You must provide the website host name and port number. For example,
+	// the host name of https://a.example.com/page1.html is "a.example.com" and the
+	// port is 443, the standard port for HTTPS. You use a secret in Secrets Manager
+	// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html) to
+	// store your authentication credentials.
 	AuthenticationConfiguration *AuthenticationConfiguration
 
 	// Specifies the number of levels in a website that you want to crawl. The first
@@ -2974,13 +3027,13 @@ type WebCrawlerConfiguration struct {
 	// minute is 300.
 	MaxUrlsPerMinuteCrawlRate *int32
 
-	// Provides configuration information required to connect to your internal websites
-	// via a web proxy. You must provide the website host name and port number. For
-	// example, the host name of https://a.example.com/page1.html is "a.example.com"
-	// and the port is 443, the standard port for HTTPS. Web proxy credentials are
-	// optional and you can use them to connect to a web proxy server that requires
-	// basic authentication. To store web proxy credentials, you use a secret in
-	// Secrets Manager
+	// Configuration information required to connect to your internal websites via a
+	// web proxy. You must provide the website host name and port number. For example,
+	// the host name of https://a.example.com/page1.html is "a.example.com" and the
+	// port is 443, the standard port for HTTPS. Web proxy credentials are optional and
+	// you can use them to connect to a web proxy server that requires basic
+	// authentication. To store web proxy credentials, you use a secret in Secrets
+	// Manager
 	// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html).
 	ProxyConfiguration *ProxyConfiguration
 

@@ -17,45 +17,48 @@ import (
 // https://aws.amazon.com/service-terms (https://aws.amazon.com/service-terms)
 // ("Beta Terms"). These Beta Terms apply to your participation in this preview.
 // Modifies the parameters of a service. For services using the rolling update
-// (ECS) deployment controller, the desired count, deployment configuration,
-// network configuration, task placement constraints and strategies, or task
-// definition used can be updated. For services using the blue/green (CODE_DEPLOY)
-// deployment controller, only the desired count, deployment configuration, task
-// placement constraints and strategies, and health check grace period can be
-// updated using this API. If the network configuration, platform version, or task
-// definition need to be updated, a new CodeDeploy deployment is created. For more
-// information, see CreateDeployment
+// (ECS) you can update the desired count, the deployment configuration, the
+// network configuration, load balancers, service registries, enable ECS managed
+// tags option, propagate tags option, task placement constraints and strategies,
+// and the task definition. When you update any of these parameters, Amazon ECS
+// starts new tasks with the new configuration. For services using the blue/green
+// (CODE_DEPLOY) deployment controller, only the desired count, deployment
+// configuration, task placement constraints and strategies, enable ECS managed
+// tags option, and propagate tags can be updated using this API. If the network
+// configuration, platform version, task definition, or load balancer need to be
+// updated, create a new CodeDeploy deployment. For more information, see
+// CreateDeployment
 // (https://docs.aws.amazon.com/codedeploy/latest/APIReference/API_CreateDeployment.html)
 // in the CodeDeploy API Reference. For services using an external deployment
 // controller, you can update only the desired count, task placement constraints
-// and strategies, and health check grace period using this API. If the launch
-// type, load balancer, network configuration, platform version, or task definition
-// need to be updated, create a new task set. For more information, see
-// CreateTaskSet. You can add to or subtract from the number of instantiations of a
-// task definition in a service by specifying the cluster that the service is
-// running in and a new desiredCount parameter. If you have updated the Docker
-// image of your application, you can create a new task definition with that image
-// and deploy it to your service. The service scheduler uses the minimum healthy
-// percent and maximum percent parameters (in the service's deployment
-// configuration) to determine the deployment strategy. If your updated Docker
-// image uses the same tag as what is in the existing task definition for your
-// service (for example, my_image:latest), you don't need to create a new revision
-// of your task definition. You can update the service using the forceNewDeployment
-// option. The new tasks launched by the deployment pull the current image/tag
-// combination from your repository when they start. You can also update the
-// deployment configuration of a service. When a deployment is triggered by
-// updating the task definition of a service, the service scheduler uses the
-// deployment configuration parameters, minimumHealthyPercent and maximumPercent,
-// to determine the deployment strategy.
+// and strategies, health check grace period, enable ECS managed tags option, and
+// propagate tags option, using this API. If the launch type, load balancer,
+// network configuration, platform version, or task definition need to be updated,
+// create a new task set For more information, see CreateTaskSet. You can add to or
+// subtract from the number of instantiations of a task definition in a service by
+// specifying the cluster that the service is running in and a new desiredCount
+// parameter. If you have updated the Docker image of your application, you can
+// create a new task definition with that image and deploy it to your service. The
+// service scheduler uses the minimum healthy percent and maximum percent
+// parameters (in the service's deployment configuration) to determine the
+// deployment strategy. If your updated Docker image uses the same tag as what is
+// in the existing task definition for your service (for example, my_image:latest),
+// you don't need to create a new revision of your task definition. You can update
+// the service using the forceNewDeployment option. The new tasks launched by the
+// deployment pull the current image/tag combination from your repository when they
+// start. You can also update the deployment configuration of a service. When a
+// deployment is triggered by updating the task definition of a service, the
+// service scheduler uses the deployment configuration parameters,
+// minimumHealthyPercent and maximumPercent, to determine the deployment
+// strategy.
 //
-// * If minimumHealthyPercent is below 100%,
-// the scheduler can ignore desiredCount temporarily during a deployment. For
-// example, if desiredCount is four tasks, a minimum of 50% allows the scheduler to
-// stop two existing tasks before starting two new tasks. Tasks for services that
-// don't use a load balancer are considered healthy if they're in the RUNNING
-// state. Tasks for services that use a load balancer are considered healthy if
-// they're in the RUNNING state and the container instance they're hosted on is
-// reported as healthy by the load balancer.
+// * If minimumHealthyPercent is below 100%, the scheduler can ignore
+// desiredCount temporarily during a deployment. For example, if desiredCount is
+// four tasks, a minimum of 50% allows the scheduler to stop two existing tasks
+// before starting two new tasks. Tasks for services that don't use a load balancer
+// are considered healthy if they're in the RUNNING state. Tasks for services that
+// use a load balancer are considered healthy if they're in the RUNNING state and
+// are reported as healthy by the load balancer.
 //
 // * The maximumPercent parameter
 // represents an upper limit on the number of running tasks during a deployment.
@@ -105,6 +108,20 @@ import (
 // container instance in an optimal Availability Zone (based on the previous
 // steps), favoring container instances with the largest number of running tasks
 // for this service.
+//
+// You must have a service-linked role when you update any of
+// the following service properties. If you specified a custom IAM role when you
+// created the service, Amazon ECS automatically replaces the roleARN
+// (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_Service.html#ECS-Type-Service-roleArn)
+// associated with the service with the ARN of your service-linked role. For more
+// information, see Service-linked roles
+// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html)
+// in the Amazon Elastic Container Service Developer Guide.
+//
+// * loadBalancers,
+//
+// *
+// serviceRegistries
 func (c *Client) UpdateService(ctx context.Context, params *UpdateServiceInput, optFns ...func(*Options)) (*UpdateServiceOutput, error) {
 	if params == nil {
 		params = &UpdateServiceInput{}
@@ -161,6 +178,15 @@ type UpdateServiceInput struct {
 	// service.
 	DesiredCount *int32
 
+	// Determines whether to turn on Amazon ECS managed tags for the tasks in the
+	// service. For more information, see Tagging Your Amazon ECS Resources
+	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html)
+	// in the Amazon Elastic Container Service Developer Guide. Only tasks launched
+	// after the update will reflect the update. To update the tags on all tasks, set
+	// forceNewDeployment to true, so that Amazon ECS starts new tasks with the updated
+	// tags.
+	EnableECSManagedTags *bool
+
 	// If true, this enables execute command functionality on all task containers. If
 	// you do not want to override the value that was set when the service was created,
 	// you can set this to null when performing this action.
@@ -183,6 +209,15 @@ type UpdateServiceInput struct {
 	// prevent the ECS service scheduler from marking tasks as unhealthy and stopping
 	// them before they have time to come up.
 	HealthCheckGracePeriodSeconds *int32
+
+	// A list of Elastic Load Balancing load balancer objects. It contains the load
+	// balancer name, the container name, and the container port to access from the
+	// load balancer. The container name is as it appears in a container definition.
+	// When you add, update, or remove a load balancer configuration, Amazon ECS starts
+	// new tasks with the updated Elastic Load Balancing configuration, and then stops
+	// the old tasks when the new tasks are running. You can remove existing
+	// loadBalancers by passing an empty list.
+	LoadBalancers []types.LoadBalancer
 
 	// An object representing the network configuration for the service.
 	NetworkConfiguration *types.NetworkConfiguration
@@ -211,6 +246,22 @@ type UpdateServiceInput struct {
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	PlatformVersion *string
+
+	// Determines whether to propagate the tags from the task definition or the service
+	// to the task. If no value is specified, the tags aren't propagated. Only tasks
+	// launched after the update will reflect the update. To update the tags on all
+	// tasks, set forceNewDeployment to true, so that Amazon ECS starts new tasks with
+	// the updated tags.
+	PropagateTags types.PropagateTags
+
+	// The details for the service discovery registries to assign to this service. For
+	// more information, see Service Discovery
+	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html).
+	// When you add, update, or remove the service registries configuration, Amazon ECS
+	// starts new tasks with the updated service registries configuration, and then
+	// stops the old tasks when the new tasks are running. You can remove existing
+	// serviceRegistries by passing an empty list.
+	ServiceRegistries []types.ServiceRegistry
 
 	// The family and revision (family:revision) or full ARN of the task definition to
 	// run in your service. If a revision is not specified, the latest ACTIVE revision

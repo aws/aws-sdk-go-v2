@@ -2889,6 +2889,11 @@ func awsRestjson1_deserializeDocumentExperiment(v **types.Experiment, value inte
 				sv.Id = ptr.String(jtv)
 			}
 
+		case "logConfiguration":
+			if err := awsRestjson1_deserializeDocumentExperimentLogConfiguration(&sv.LogConfiguration, value); err != nil {
+				return err
+			}
+
 		case "roleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3233,6 +3238,149 @@ func awsRestjson1_deserializeDocumentExperimentActionTargetMap(v *map[string]str
 
 	}
 	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentExperimentCloudWatchLogsLogConfiguration(v **types.ExperimentCloudWatchLogsLogConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ExperimentCloudWatchLogsLogConfiguration
+	if *v == nil {
+		sv = &types.ExperimentCloudWatchLogsLogConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "logGroupArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CloudWatchLogGroupArn to be of type string, got %T instead", value)
+				}
+				sv.LogGroupArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentExperimentLogConfiguration(v **types.ExperimentLogConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ExperimentLogConfiguration
+	if *v == nil {
+		sv = &types.ExperimentLogConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "cloudWatchLogsConfiguration":
+			if err := awsRestjson1_deserializeDocumentExperimentCloudWatchLogsLogConfiguration(&sv.CloudWatchLogsConfiguration, value); err != nil {
+				return err
+			}
+
+		case "logSchemaVersion":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected LogSchemaVersion to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.LogSchemaVersion = ptr.Int32(int32(i64))
+			}
+
+		case "s3Configuration":
+			if err := awsRestjson1_deserializeDocumentExperimentS3LogConfiguration(&sv.S3Configuration, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentExperimentS3LogConfiguration(v **types.ExperimentS3LogConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ExperimentS3LogConfiguration
+	if *v == nil {
+		sv = &types.ExperimentS3LogConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "bucketName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3BucketName to be of type string, got %T instead", value)
+				}
+				sv.BucketName = ptr.String(jtv)
+			}
+
+		case "prefix":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3ObjectKey to be of type string, got %T instead", value)
+				}
+				sv.Prefix = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -3809,6 +3957,11 @@ func awsRestjson1_deserializeDocumentExperimentTemplate(v **types.ExperimentTemp
 				}
 			}
 
+		case "logConfiguration":
+			if err := awsRestjson1_deserializeDocumentExperimentTemplateLogConfiguration(&sv.LogConfiguration, value); err != nil {
+				return err
+			}
+
 		case "roleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4046,6 +4199,149 @@ func awsRestjson1_deserializeDocumentExperimentTemplateActionTargetMap(v *map[st
 
 	}
 	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentExperimentTemplateCloudWatchLogsLogConfiguration(v **types.ExperimentTemplateCloudWatchLogsLogConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ExperimentTemplateCloudWatchLogsLogConfiguration
+	if *v == nil {
+		sv = &types.ExperimentTemplateCloudWatchLogsLogConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "logGroupArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CloudWatchLogGroupArn to be of type string, got %T instead", value)
+				}
+				sv.LogGroupArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentExperimentTemplateLogConfiguration(v **types.ExperimentTemplateLogConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ExperimentTemplateLogConfiguration
+	if *v == nil {
+		sv = &types.ExperimentTemplateLogConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "cloudWatchLogsConfiguration":
+			if err := awsRestjson1_deserializeDocumentExperimentTemplateCloudWatchLogsLogConfiguration(&sv.CloudWatchLogsConfiguration, value); err != nil {
+				return err
+			}
+
+		case "logSchemaVersion":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected LogSchemaVersion to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.LogSchemaVersion = ptr.Int32(int32(i64))
+			}
+
+		case "s3Configuration":
+			if err := awsRestjson1_deserializeDocumentExperimentTemplateS3LogConfiguration(&sv.S3Configuration, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentExperimentTemplateS3LogConfiguration(v **types.ExperimentTemplateS3LogConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ExperimentTemplateS3LogConfiguration
+	if *v == nil {
+		sv = &types.ExperimentTemplateS3LogConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "bucketName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3BucketName to be of type string, got %T instead", value)
+				}
+				sv.BucketName = ptr.String(jtv)
+			}
+
+		case "prefix":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3ObjectKey to be of type string, got %T instead", value)
+				}
+				sv.Prefix = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

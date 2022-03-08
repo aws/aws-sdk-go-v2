@@ -19,7 +19,7 @@ import (
 //
 // * You are using VPC endpoints
 // (Amazon Web Services PrivateLink) with Timestream
-// (https://docs.aws.amazon.com/Timestream/latest/developerguide/VPCEndpoints)
+// (https://docs.aws.amazon.com/timestream/latest/developerguide/VPCEndpoints)
 //
 // *
 // Your application uses a programming language that does not yet have SDK
@@ -30,7 +30,7 @@ import (
 // For
 // detailed information on how and when to use and implement DescribeEndpoints, see
 // The Endpoint Discovery Pattern
-// (https://docs.aws.amazon.com/Timestream/latest/developerguide/Using.API.html#Using-API.endpoint-discovery).
+// (https://docs.aws.amazon.com/timestream/latest/developerguide/Using.API.html#Using-API.endpoint-discovery).
 func (c *Client) DescribeEndpoints(ctx context.Context, params *DescribeEndpointsInput, optFns ...func(*Options)) (*DescribeEndpointsOutput, error) {
 	if params == nil {
 		params = &DescribeEndpointsInput{}

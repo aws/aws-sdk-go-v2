@@ -59,10 +59,10 @@ type CreateDataSourceInput struct {
 	// create only one data source.
 	ClientToken *string
 
-	// The connector configuration information that is required to access the
-	// repository. You can't specify the Configuration parameter when the Type
-	// parameter is set to CUSTOM. If you do, you receive a ValidationException
-	// exception. The Configuration parameter is required for all other data sources.
+	// Configuration information that is required to access the data source repository.
+	// You can't specify the Configuration parameter when the Type parameter is set to
+	// CUSTOM. If you do, you receive a ValidationException exception. The
+	// Configuration parameter is required for all other data sources.
 	Configuration *types.DataSourceConfiguration
 
 	// Configuration information for altering document metadata and content during the

@@ -86,6 +86,22 @@ func (QueryExecutionState) Values() []QueryExecutionState {
 	}
 }
 
+type S3AclOption string
+
+// Enum values for S3AclOption
+const (
+	S3AclOptionBucketOwnerFullControl S3AclOption = "BUCKET_OWNER_FULL_CONTROL"
+)
+
+// Values returns all known values for S3AclOption. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (S3AclOption) Values() []S3AclOption {
+	return []S3AclOption{
+		"BUCKET_OWNER_FULL_CONTROL",
+	}
+}
+
 type StatementType string
 
 // Enum values for StatementType

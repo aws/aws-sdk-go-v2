@@ -12,10 +12,10 @@ import (
 )
 
 // Cancels a query if the query is not in a terminated state, such as CANCELLED,
-// FAILED or FINISHED. You must specify an ARN value for EventDataStore. The ID of
-// the query that you want to cancel is also required. When you run CancelQuery,
-// the query status might show as CANCELLED even if the operation is not yet
-// finished.
+// FAILED, TIMED_OUT, or FINISHED. You must specify an ARN value for
+// EventDataStore. The ID of the query that you want to cancel is also required.
+// When you run CancelQuery, the query status might show as CANCELLED even if the
+// operation is not yet finished.
 func (c *Client) CancelQuery(ctx context.Context, params *CancelQueryInput, optFns ...func(*Options)) (*CancelQueryOutput, error) {
 	if params == nil {
 		params = &CancelQueryInput{}

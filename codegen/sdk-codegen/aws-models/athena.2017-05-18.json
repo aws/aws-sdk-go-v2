@@ -29,6 +29,21 @@
         ]
     },
     "shapes": {
+        "com.amazonaws.athena#AclConfiguration": {
+            "type": "structure",
+            "members": {
+                "S3AclOption": {
+                    "target": "com.amazonaws.athena#S3AclOption",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 canned ACL that Athena should specify when storing\n            query results. Currently the only supported canned ACL is\n                <code>BUCKET_OWNER_FULL_CONTROL</code>. If a query runs in a workgroup and the\n            workgroup overrides client-side settings, then the Amazon S3 canned ACL\n            specified in the workgroup's settings is used for all queries that run in the workgroup.\n            For more information about Amazon S3 canned ACLs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#canned-acl\">Canned ACL</a> in the <i>Amazon S3 User\n                Guide</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Indicates that an Amazon S3 canned ACL should be set to control ownership of\n            stored query results. When Athena stores query results in Amazon S3,\n            the canned ACL is set with the <code>x-amz-acl</code> request header. For more\n            information about S3 Object Ownership, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html#object-ownership-overview\">Object Ownership settings</a> in the <i>Amazon S3 User\n                Guide</i>.</p>"
+            }
+        },
         "com.amazonaws.athena#AmazonAthena": {
             "type": "service",
             "traits": {
@@ -145,6 +160,9 @@
                     "target": "com.amazonaws.athena#UpdateDataCatalog"
                 },
                 {
+                    "target": "com.amazonaws.athena#UpdateNamedQuery"
+                },
+                {
                     "target": "com.amazonaws.athena#UpdatePreparedStatement"
                 },
                 {
@@ -167,7 +185,7 @@
                 "ErrorCategory": {
                     "target": "com.amazonaws.athena#ErrorCategory",
                     "traits": {
-                        "smithy.api#documentation": "<p>An integer value that specifies the category of a query failure error. The following\n            list shows the category for each integer value.</p>\n        <p>\n            <b>1</b> - System</p>\n        <p>\n            <b>2</b> - User</p>\n        <p>\n            <b>3</b> - Unknown</p>"
+                        "smithy.api#documentation": "<p>An integer value that specifies the category of a query failure error. The following\n            list shows the category for each integer value.</p>\n        <p>\n            <b>1</b> - System</p>\n        <p>\n            <b>2</b> - User</p>\n        <p>\n            <b>3</b> - Other</p>"
                     }
                 },
                 "ErrorType": {
@@ -178,7 +196,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides information about an Athena query error. The\n                <code>AthenaError</code> feature provides standardized error information to help you\n            understand failed queries and take steps after a query failure occurs.\n                <code>AthenaError</code> includes an <code>ErrorCategory</code> field that specifies\n            whether the cause of the failed query is due to system error, user error, or unknown\n            error.</p>"
+                "smithy.api#documentation": "<p>Provides information about an Athena query error. The\n                <code>AthenaError</code> feature provides standardized error information to help you\n            understand failed queries and take steps after a query failure occurs.\n                <code>AthenaError</code> includes an <code>ErrorCategory</code> field that specifies\n            whether the cause of the failed query is due to system error, user error, or other\n            error.</p>"
             }
         },
         "com.amazonaws.athena#BatchGetNamedQuery": {
@@ -2320,7 +2338,7 @@
                 "QueryString": {
                     "target": "com.amazonaws.athena#QueryString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The SQL query statements that comprise the query.</p>",
+                        "smithy.api#documentation": "<p>The SQL statements that make up the query.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2338,7 +2356,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A query, where <code>QueryString</code> is the list of SQL query statements that\n            comprise the query.</p>"
+                "smithy.api#documentation": "<p>A query, where <code>QueryString</code> contains the SQL statements that\n            make up the query.</p>"
+            }
+        },
+        "com.amazonaws.athena#NamedQueryDescriptionString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                }
             }
         },
         "com.amazonaws.athena#NamedQueryId": {
@@ -2712,6 +2739,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Web Services account ID that you expect to be the owner of the Amazon S3 bucket specified by <a>ResultConfiguration$OutputLocation</a>.\n            If set, Athena uses the value for <code>ExpectedBucketOwner</code> when it\n            makes Amazon S3 calls to your specified output location. If the\n            <code>ExpectedBucketOwner</code>\n            Amazon Web Services account ID does not match the actual owner of the Amazon S3\n            bucket, the call fails with a permissions error.</p>\n        <p>This is a client-side setting. If workgroup settings override client-side settings,\n            then the query uses the <code>ExpectedBucketOwner</code> setting that is specified for\n            the workgroup, and also uses the location for storing query results specified in the\n            workgroup. See <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a>\n            and <a href=\"https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html\">Workgroup Settings Override Client-Side Settings</a>.</p>"
                     }
+                },
+                "AclConfiguration": {
+                    "target": "com.amazonaws.athena#AclConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates that an Amazon S3 canned ACL should be set to control ownership of\n            stored query results. Currently the only supported canned ACL is\n                <code>BUCKET_OWNER_FULL_CONTROL</code>. This is a client-side setting. If workgroup\n            settings override client-side settings, then the query uses the ACL configuration that\n            is specified for the workgroup, and also uses the location for storing query results\n            specified in the workgroup. For more information, see <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a> and <a href=\"https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html\">Workgroup Settings Override Client-Side Settings</a>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2756,6 +2789,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>If set to \"true\", removes the Amazon Web Services account ID previously specified for\n            <a>ResultConfiguration$ExpectedBucketOwner</a>. If set to \"false\" or not\n            set, and a value is present in the <code>ExpectedBucketOwner</code> in\n            <code>ResultConfigurationUpdates</code> (the client-side setting), the\n            <code>ExpectedBucketOwner</code> in the workgroup's <code>ResultConfiguration</code>\n            is updated with the new value. For more information, see <a href=\"https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html\">Workgroup Settings Override\n                Client-Side Settings</a>.</p>"
                     }
+                },
+                "AclConfiguration": {
+                    "target": "com.amazonaws.athena#AclConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ACL configuration for the query results.</p>"
+                    }
+                },
+                "RemoveAclConfiguration": {
+                    "target": "com.amazonaws.athena#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If set to <code>true</code>, indicates that the previously-specified ACL configuration\n            for queries in this workgroup should be ignored and set to null. If set to\n                <code>false</code> or not set, and a value is present in the\n                <code>AclConfiguration</code> of <code>ResultConfigurationUpdates</code>, the\n                <code>AclConfiguration</code> in the workgroup's <code>ResultConfiguration</code> is\n            updated with the new value. For more information, see <a href=\"https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html\">Workgroup Settings Override\n                Client-Side Settings</a>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2779,7 +2824,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The metadata and rows that comprise a query result set. The metadata describes the\n            column structure and data types. To return a <code>ResultSet</code> object, use <a>GetQueryResults</a>.</p>"
+                "smithy.api#documentation": "<p>The metadata and rows that make up a query result set. The metadata describes the\n            column structure and data types. To return a <code>ResultSet</code> object, use <a>GetQueryResults</a>.</p>"
             }
         },
         "com.amazonaws.athena#ResultSetMetadata": {
@@ -2807,13 +2852,24 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The rows that comprise a query result table.</p>"
+                "smithy.api#documentation": "<p>The rows that make up a query result table.</p>"
             }
         },
         "com.amazonaws.athena#RowList": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.athena#Row"
+            }
+        },
+        "com.amazonaws.athena#S3AclOption": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "BUCKET_OWNER_FULL_CONTROL",
+                        "name": "BUCKET_OWNER_FULL_CONTROL"
+                    }
+                ]
             }
         },
         "com.amazonaws.athena#StartQueryExecution": {
@@ -3331,6 +3387,63 @@
             }
         },
         "com.amazonaws.athena#UpdateDataCatalogOutput": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.athena#UpdateNamedQuery": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.athena#UpdateNamedQueryInput"
+            },
+            "output": {
+                "target": "com.amazonaws.athena#UpdateNamedQueryOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.athena#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.athena#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a <a>NamedQuery</a> object. The database or workgroup cannot be updated.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.athena#UpdateNamedQueryInput": {
+            "type": "structure",
+            "members": {
+                "NamedQueryId": {
+                    "target": "com.amazonaws.athena#NamedQueryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier (UUID) of the query.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.athena#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the query.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.athena#NamedQueryDescriptionString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The query description.</p>"
+                    }
+                },
+                "QueryString": {
+                    "target": "com.amazonaws.athena#QueryString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The contents of the query with all query statements.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.athena#UpdateNamedQueryOutput": {
             "type": "structure",
             "members": {}
         },

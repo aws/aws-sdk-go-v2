@@ -40,6 +40,7 @@
         "api_op_TagResource.go",
         "api_op_UntagResource.go",
         "api_op_UpdateDataCatalog.go",
+        "api_op_UpdateNamedQuery.go",
         "api_op_UpdatePreparedStatement.go",
         "api_op_UpdateWorkGroup.go",
         "deserializers.go",

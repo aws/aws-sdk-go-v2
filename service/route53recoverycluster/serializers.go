@@ -179,6 +179,17 @@ func (m *awsAwsjson10_serializeOpUpdateRoutingControlStates) HandleSerialize(ctx
 
 	return next.HandleSerialize(ctx, in)
 }
+func awsAwsjson10_serializeDocumentArns(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentUpdateRoutingControlStateEntries(v []types.UpdateRoutingControlStateEntry, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -235,12 +246,26 @@ func awsAwsjson10_serializeOpDocumentUpdateRoutingControlStateInput(v *UpdateRou
 		ok.String(string(v.RoutingControlState))
 	}
 
+	if v.SafetyRulesToOverride != nil {
+		ok := object.Key("SafetyRulesToOverride")
+		if err := awsAwsjson10_serializeDocumentArns(v.SafetyRulesToOverride, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
 func awsAwsjson10_serializeOpDocumentUpdateRoutingControlStatesInput(v *UpdateRoutingControlStatesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.SafetyRulesToOverride != nil {
+		ok := object.Key("SafetyRulesToOverride")
+		if err := awsAwsjson10_serializeDocumentArns(v.SafetyRulesToOverride, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.UpdateRoutingControlStateEntries != nil {
 		ok := object.Key("UpdateRoutingControlStateEntries")

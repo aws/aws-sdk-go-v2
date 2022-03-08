@@ -878,6 +878,9 @@ type DestinationConnectorProperties struct {
 	// The properties required to query Amazon Lookout for Metrics.
 	LookoutMetrics *LookoutMetricsDestinationProperties
 
+	// The properties required to query Marketo.
+	Marketo *MarketoDestinationProperties
+
 	// The properties required to query Amazon Redshift.
 	Redshift *RedshiftDestinationProperties
 
@@ -1416,6 +1419,25 @@ type MarketoConnectorProfileProperties struct {
 	//
 	// This member is required.
 	InstanceUrl *string
+
+	noSmithyDocumentSerde
+}
+
+// The properties that Amazon AppFlow applies when you use Marketo as a flow
+// destination.
+type MarketoDestinationProperties struct {
+
+	// The object specified in the Marketo flow destination.
+	//
+	// This member is required.
+	Object *string
+
+	// The settings that determine how Amazon AppFlow handles an error when placing
+	// data in the destination. For example, this setting would determine if the flow
+	// should fail after one insertion error, or continue and attempt to insert every
+	// record regardless of the initial failure. ErrorHandlingConfig is a part of the
+	// destination connector details.
+	ErrorHandlingConfig *ErrorHandlingConfig
 
 	noSmithyDocumentSerde
 }

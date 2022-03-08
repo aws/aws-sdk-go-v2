@@ -6874,6 +6874,11 @@ func awsAwsjson11_serializeOpDocumentUpdateServiceInput(v *UpdateServiceInput, v
 		ok.Integer(*v.DesiredCount)
 	}
 
+	if v.EnableECSManagedTags != nil {
+		ok := object.Key("enableECSManagedTags")
+		ok.Boolean(*v.EnableECSManagedTags)
+	}
+
 	if v.EnableExecuteCommand != nil {
 		ok := object.Key("enableExecuteCommand")
 		ok.Boolean(*v.EnableExecuteCommand)
@@ -6887,6 +6892,13 @@ func awsAwsjson11_serializeOpDocumentUpdateServiceInput(v *UpdateServiceInput, v
 	if v.HealthCheckGracePeriodSeconds != nil {
 		ok := object.Key("healthCheckGracePeriodSeconds")
 		ok.Integer(*v.HealthCheckGracePeriodSeconds)
+	}
+
+	if v.LoadBalancers != nil {
+		ok := object.Key("loadBalancers")
+		if err := awsAwsjson11_serializeDocumentLoadBalancers(v.LoadBalancers, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.NetworkConfiguration != nil {
@@ -6915,9 +6927,21 @@ func awsAwsjson11_serializeOpDocumentUpdateServiceInput(v *UpdateServiceInput, v
 		ok.String(*v.PlatformVersion)
 	}
 
+	if len(v.PropagateTags) > 0 {
+		ok := object.Key("propagateTags")
+		ok.String(string(v.PropagateTags))
+	}
+
 	if v.Service != nil {
 		ok := object.Key("service")
 		ok.String(*v.Service)
+	}
+
+	if v.ServiceRegistries != nil {
+		ok := object.Key("serviceRegistries")
+		if err := awsAwsjson11_serializeDocumentServiceRegistries(v.ServiceRegistries, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.TaskDefinition != nil {

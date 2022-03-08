@@ -54,7 +54,7 @@ type DescribePackageVersionOutput struct {
 	// Whether the version is the latest available.
 	//
 	// This member is required.
-	IsLatestPatch *bool
+	IsLatestPatch bool
 
 	// The version's ID.
 	//

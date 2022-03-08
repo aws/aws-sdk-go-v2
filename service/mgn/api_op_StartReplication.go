@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts replication on source server by ID.
+// Starts replication for SNAPSHOT_SHIPPING agents.
 func (c *Client) StartReplication(ctx context.Context, params *StartReplicationInput, optFns ...func(*Options)) (*StartReplicationOutput, error) {
 	if params == nil {
 		params = &StartReplicationInput{}

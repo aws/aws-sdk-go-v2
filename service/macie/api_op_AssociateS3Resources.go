@@ -11,11 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates specified S3 resources with Amazon Macie Classic for monitoring and
-// data classification. If memberAccountId isn't specified, the action associates
-// specified S3 resources with Macie Classic for the current Macie Classic
-// administrator account. If memberAccountId is specified, the action associates
-// specified S3 resources with Macie Classic for the specified member account.
+// (Discontinued) Associates specified S3 resources with Amazon Macie Classic for
+// monitoring and data classification. If memberAccountId isn't specified, the
+// action associates specified S3 resources with Macie Classic for the current
+// Macie Classic administrator account. If memberAccountId is specified, the action
+// associates specified S3 resources with Macie Classic for the specified member
+// account.
 func (c *Client) AssociateS3Resources(ctx context.Context, params *AssociateS3ResourcesInput, optFns ...func(*Options)) (*AssociateS3ResourcesOutput, error) {
 	if params == nil {
 		params = &AssociateS3ResourcesInput{}
@@ -33,14 +34,14 @@ func (c *Client) AssociateS3Resources(ctx context.Context, params *AssociateS3Re
 
 type AssociateS3ResourcesInput struct {
 
-	// The S3 resources that you want to associate with Amazon Macie Classic for
-	// monitoring and data classification.
+	// (Discontinued) The S3 resources that you want to associate with Amazon Macie
+	// Classic for monitoring and data classification.
 	//
 	// This member is required.
 	S3Resources []types.S3ResourceClassification
 
-	// The ID of the Amazon Macie Classic member account whose resources you want to
-	// associate with Macie Classic.
+	// (Discontinued) The ID of the Amazon Macie Classic member account whose resources
+	// you want to associate with Macie Classic.
 	MemberAccountId *string
 
 	noSmithyDocumentSerde
@@ -48,8 +49,8 @@ type AssociateS3ResourcesInput struct {
 
 type AssociateS3ResourcesOutput struct {
 
-	// S3 resources that couldn't be associated with Amazon Macie Classic. An error
-	// code and an error message are provided for each failed item.
+	// (Discontinued) S3 resources that couldn't be associated with Amazon Macie
+	// Classic. An error code and an error message are provided for each failed item.
 	FailedS3Resources []types.FailedS3Resource
 
 	// Metadata pertaining to the operation's result.

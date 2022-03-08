@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a package.
+// Deletes a package. To delete a package, you need permission to call
+// s3:DeleteObject in addition to permissions for the AWS Panorama API.
 func (c *Client) DeletePackage(ctx context.Context, params *DeletePackageInput, optFns ...func(*Options)) (*DeletePackageOutput, error) {
 	if params == nil {
 		params = &DeletePackageInput{}
@@ -35,7 +36,7 @@ type DeletePackageInput struct {
 
 	// Delete the package even if it has artifacts stored in its access point. Deletes
 	// the package's artifacts from Amazon S3.
-	ForceDelete *bool
+	ForceDelete bool
 
 	noSmithyDocumentSerde
 }

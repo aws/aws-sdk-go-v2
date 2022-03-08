@@ -39,7 +39,7 @@ type ListChangesetsInput struct {
 	// The maximum number of results per page.
 	MaxResults int32
 
-	// A token indicating where a results page should begin.
+	// A token that indicates where a results page should begin.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -52,7 +52,7 @@ type ListChangesetsOutput struct {
 	// List of Changesets found.
 	Changesets []types.ChangesetSummary
 
-	// A token indicating where a results page should begin.
+	// A token that indicates where a results page should begin.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

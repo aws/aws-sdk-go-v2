@@ -499,6 +499,10 @@ func awsRestjson1_serializeOpHttpBindingsExportComponentsInput(v *ExportComponen
 		}
 	}
 
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
 	return nil
 }
 
@@ -564,6 +568,10 @@ func awsRestjson1_serializeOpHttpBindingsExportThemesInput(v *ExportThemesInput,
 		if err := encoder.SetURI("environmentName").String(*v.EnvironmentName); err != nil {
 			return err
 		}
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
 	}
 
 	return nil
@@ -1158,6 +1166,74 @@ func awsRestjson1_serializeOpHttpBindingsUpdateThemeInput(v *UpdateThemeInput, e
 	return nil
 }
 
+func awsRestjson1_serializeDocumentActionParameters(v *types.ActionParameters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Anchor != nil {
+		ok := object.Key("anchor")
+		if err := awsRestjson1_serializeDocumentComponentProperty(v.Anchor, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Fields != nil {
+		ok := object.Key("fields")
+		if err := awsRestjson1_serializeDocumentComponentProperties(v.Fields, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Global != nil {
+		ok := object.Key("global")
+		if err := awsRestjson1_serializeDocumentComponentProperty(v.Global, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Id != nil {
+		ok := object.Key("id")
+		if err := awsRestjson1_serializeDocumentComponentProperty(v.Id, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Model != nil {
+		ok := object.Key("model")
+		ok.String(*v.Model)
+	}
+
+	if v.State != nil {
+		ok := object.Key("state")
+		if err := awsRestjson1_serializeDocumentMutationActionSetStateParameter(v.State, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Target != nil {
+		ok := object.Key("target")
+		if err := awsRestjson1_serializeDocumentComponentProperty(v.Target, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Type != nil {
+		ok := object.Key("type")
+		if err := awsRestjson1_serializeDocumentComponentProperty(v.Type, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Url != nil {
+		ok := object.Key("url")
+		if err := awsRestjson1_serializeDocumentComponentProperty(v.Url, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentComponentBindingProperties(v map[string]types.ComponentBindingPropertiesValue, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1256,6 +1332,13 @@ func awsRestjson1_serializeDocumentComponentChild(v *types.ComponentChild, value
 		ok.String(*v.ComponentType)
 	}
 
+	if v.Events != nil {
+		ok := object.Key("events")
+		if err := awsRestjson1_serializeDocumentComponentEvents(v.Events, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
@@ -1319,6 +1402,11 @@ func awsRestjson1_serializeDocumentComponentConditionProperty(v *types.Component
 		ok.String(*v.Operand)
 	}
 
+	if v.OperandType != nil {
+		ok := object.Key("operandType")
+		ok.String(*v.OperandType)
+	}
+
 	if v.Operator != nil {
 		ok := object.Key("operator")
 		ok.String(*v.Operator)
@@ -1369,6 +1457,39 @@ func awsRestjson1_serializeDocumentComponentDataConfiguration(v *types.Component
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentComponentEvent(v *types.ComponentEvent, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Action != nil {
+		ok := object.Key("action")
+		ok.String(*v.Action)
+	}
+
+	if v.Parameters != nil {
+		ok := object.Key("parameters")
+		if err := awsRestjson1_serializeDocumentActionParameters(v.Parameters, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentComponentEvents(v map[string]types.ComponentEvent, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		mapVar := v[key]
+		if err := awsRestjson1_serializeDocumentComponentEvent(&mapVar, om); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -1438,6 +1559,11 @@ func awsRestjson1_serializeDocumentComponentProperty(v *types.ComponentProperty,
 		}
 	}
 
+	if v.ComponentName != nil {
+		ok := object.Key("componentName")
+		ok.String(*v.ComponentName)
+	}
+
 	if v.Concat != nil {
 		ok := object.Key("concat")
 		if err := awsRestjson1_serializeDocumentComponentPropertyList(v.Concat, ok); err != nil {
@@ -1475,6 +1601,11 @@ func awsRestjson1_serializeDocumentComponentProperty(v *types.ComponentProperty,
 	if v.Model != nil {
 		ok := object.Key("model")
 		ok.String(*v.Model)
+	}
+
+	if v.Property != nil {
+		ok := object.Key("property")
+		ok.String(*v.Property)
 	}
 
 	if v.Type != nil {
@@ -1600,6 +1731,13 @@ func awsRestjson1_serializeDocumentCreateComponentData(v *types.CreateComponentD
 		ok.String(*v.ComponentType)
 	}
 
+	if v.Events != nil {
+		ok := object.Key("events")
+		if err := awsRestjson1_serializeDocumentComponentEvents(v.Events, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
@@ -1617,6 +1755,11 @@ func awsRestjson1_serializeDocumentCreateComponentData(v *types.CreateComponentD
 		if err := awsRestjson1_serializeDocumentComponentProperties(v.Properties, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.SchemaVersion != nil {
+		ok := object.Key("schemaVersion")
+		ok.String(*v.SchemaVersion)
 	}
 
 	if v.SourceId != nil {
@@ -1730,6 +1873,30 @@ func awsRestjson1_serializeDocumentIdentifierList(v []string, value smithyjson.V
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMutationActionSetStateParameter(v *types.MutationActionSetStateParameter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ComponentName != nil {
+		ok := object.Key("componentName")
+		ok.String(*v.ComponentName)
+	}
+
+	if v.Property != nil {
+		ok := object.Key("property")
+		ok.String(*v.Property)
+	}
+
+	if v.Set != nil {
+		ok := object.Key("set")
+		if err := awsRestjson1_serializeDocumentComponentProperty(v.Set, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -1916,6 +2083,13 @@ func awsRestjson1_serializeDocumentUpdateComponentData(v *types.UpdateComponentD
 		ok.String(*v.ComponentType)
 	}
 
+	if v.Events != nil {
+		ok := object.Key("events")
+		if err := awsRestjson1_serializeDocumentComponentEvents(v.Events, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Id != nil {
 		ok := object.Key("id")
 		ok.String(*v.Id)
@@ -1938,6 +2112,11 @@ func awsRestjson1_serializeDocumentUpdateComponentData(v *types.UpdateComponentD
 		if err := awsRestjson1_serializeDocumentComponentProperties(v.Properties, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.SchemaVersion != nil {
+		ok := object.Key("schemaVersion")
+		ok.String(*v.SchemaVersion)
 	}
 
 	if v.SourceId != nil {

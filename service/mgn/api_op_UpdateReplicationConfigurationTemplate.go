@@ -83,7 +83,7 @@ type UpdateReplicationConfigurationTemplateInput struct {
 
 type UpdateReplicationConfigurationTemplateOutput struct {
 
-	// Replication Configuration template template ID.
+	// Replication Configuration template ID.
 	//
 	// This member is required.
 	ReplicationConfigurationTemplateID *string
@@ -95,7 +95,7 @@ type UpdateReplicationConfigurationTemplateOutput struct {
 	// Service Security group.
 	AssociateDefaultSecurityGroup *bool
 
-	// Replication Configuration template bandwidth throtting.
+	// Replication Configuration template bandwidth throttling.
 	BandwidthThrottling int64
 
 	// Replication Configuration template create Public IP.
@@ -104,7 +104,7 @@ type UpdateReplicationConfigurationTemplateOutput struct {
 	// Replication Configuration template data plane routing.
 	DataPlaneRouting types.ReplicationConfigurationDataPlaneRouting
 
-	// Replication Configuration template use dedault large Staging Disk type.
+	// Replication Configuration template use default large Staging Disk type.
 	DefaultLargeStagingDiskType types.ReplicationConfigurationDefaultLargeStagingDiskType
 
 	// Replication Configuration template EBS encryption.

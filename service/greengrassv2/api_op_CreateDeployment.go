@@ -20,8 +20,7 @@ import (
 // previous deployment. IoT Greengrass applies the new deployment to the target
 // devices. Every deployment has a revision number that indicates how many
 // deployment revisions you define for a target. Use this operation to create a new
-// revision of an existing deployment. This operation returns the revision number
-// of the new deployment when you create it. For more information, see the Create
+// revision of an existing deployment. For more information, see the Create
 // deployments
 // (https://docs.aws.amazon.com/greengrass/v2/developerguide/create-deployments.html)
 // in the IoT Greengrass V2 Developer Guide.

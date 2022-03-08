@@ -45,9 +45,8 @@ type DescribeDataSourceInput struct {
 
 type DescribeDataSourceOutput struct {
 
-	// Information that describes where the data source is located and how the data
-	// source is configured. The specific information in the description depends on the
-	// data source provider.
+	// Describes how the data source is configured. The specific information in the
+	// description depends on the data source provider.
 	Configuration *types.DataSourceConfiguration
 
 	// The Unix timestamp of when the data source was created.

@@ -7,7 +7,8 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// You do not have required permissions to access the requested resource.
+// (Discontinued) You do not have required permissions to access the requested
+// resource.
 type AccessDeniedException struct {
 	Message *string
 
@@ -28,7 +29,7 @@ func (e *AccessDeniedException) ErrorMessage() string {
 func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Internal server error.
+// (Discontinued) Internal server error.
 type InternalException struct {
 	Message *string
 
@@ -49,8 +50,8 @@ func (e *InternalException) ErrorMessage() string {
 func (e *InternalException) ErrorCode() string             { return "InternalException" }
 func (e *InternalException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The request was rejected because an invalid or out-of-range value was supplied
-// for an input parameter.
+// (Discontinued) The request was rejected because an invalid or out-of-range value
+// was supplied for an input parameter.
 type InvalidInputException struct {
 	Message *string
 
@@ -72,8 +73,9 @@ func (e *InvalidInputException) ErrorMessage() string {
 func (e *InvalidInputException) ErrorCode() string             { return "InvalidInputException" }
 func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request was rejected because it attempted to create resources beyond the
-// current AWS account limits. The error code describes the limit exceeded.
+// (Discontinued) The request was rejected because it attempted to create resources
+// beyond the current Amazon Web Services account quotas. The error code describes
+// the quota exceeded.
 type LimitExceededException struct {
 	Message *string
 

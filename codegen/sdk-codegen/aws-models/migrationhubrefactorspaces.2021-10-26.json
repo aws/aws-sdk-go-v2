@@ -109,7 +109,7 @@
                 "NlbName": {
                     "target": "com.amazonaws.migrationhubrefactorspaces#NlbName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Network Load Balancer that is configured by the API Gateway proxy. </p>"
+                        "smithy.api#documentation": "<p>The name of the Network Load Balancer that is configured by the API Gateway proxy.\n    </p>"
                     }
                 },
                 "EndpointType": {
@@ -179,7 +179,7 @@
                 "NlbName": {
                     "target": "com.amazonaws.migrationhubrefactorspaces#NlbName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Network Load Balancer that is configured by the API Gateway proxy. </p>"
+                        "smithy.api#documentation": "<p>The name of the Network Load Balancer that is configured by the API Gateway proxy.\n    </p>"
                     }
                 },
                 "EndpointType": {
@@ -264,13 +264,13 @@
                 "Arn": {
                     "target": "com.amazonaws.migrationhubrefactorspaces#ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>he Amazon Resource Name (ARN) of the application. </p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the application. </p>"
                     }
                 },
                 "OwnerAccountId": {
                     "target": "com.amazonaws.migrationhubrefactorspaces#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services account ID of the application owner.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID of the application owner (which is always the same as\n      the environment owner account ID).</p>"
                     }
                 },
                 "CreatedByAccountId": {
@@ -436,7 +436,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Amazon Web Services Migration Hub Refactor Spaces application. The account that owns the environment also owns the\n      applications created inside the environment, regardless of the account that creates the\n      application. Refactor Spaces provisions the Amazon API Gateway and Network Load Balancer for\n      the application proxy inside your account.</p>",
+                "smithy.api#documentation": "<p>Creates an Amazon Web Services Migration Hub Refactor Spaces application. The account that owns the environment also owns the\n      applications created inside the environment, regardless of the account that creates the\n      application. Refactor Spaces provisions an Amazon API Gateway, API Gateway VPC link, and\n        Network Load Balancer for the application proxy inside your account.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/environments/{EnvironmentIdentifier}/applications",
@@ -515,7 +515,7 @@
                 "OwnerAccountId": {
                     "target": "com.amazonaws.migrationhubrefactorspaces#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services account ID of the application owner.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID of the application owner (which is always the same as\n      the environment owner account ID).</p>"
                     }
                 },
                 "CreatedByAccountId": {
@@ -612,7 +612,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Amazon Web Services Migration Hub Refactor Spaces environment. The caller owns the environment resource, and they\n      are referred to as the <i>environment owner</i>. The environment owner has\n      cross-account visibility and control of Refactor Spaces resources that are added to the environment\n      by other accounts that the environment is shared with. When creating an environment, Refactor Spaces\n      provisions a transit gateway in your account.</p>",
+                "smithy.api#documentation": "<p>Creates an Amazon Web Services Migration Hub Refactor Spaces environment. The caller owns the environment resource, and all\n      Refactor Spaces applications, services, and routes created within the environment. They are referred\n      to as the <i>environment owner</i>. The environment owner has cross-account\n      visibility and control of Refactor Spaces resources that are added to the environment by other\n      accounts that the environment is shared with. When creating an environment, Refactor Spaces\n      provisions a transit gateway in your account.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/environments",
@@ -755,7 +755,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Amazon Web Services Migration Hub Refactor Spaces route. The account owner of the service resource is always the\n      environment owner, regardless of which account creates the route. Routes target a service in\n      the application. If an application does not have any routes, then the first route must be\n      created as a <code>DEFAULT</code>\n            <code>RouteType</code>.</p>\n         <p>When you create a route, Refactor Spaces configures the Amazon API Gateway to send traffic\n      to the target service as follows:</p>\n         <ul>\n            <li>\n               <p>If the service has a URL endpoint, and the endpoint resolves to a private IP address,\n          Refactor Spaces routes traffic using the API Gateway VPC link. </p>\n            </li>\n            <li>\n               <p>If the service has a URL endpoint, and the endpoint resolves to a public IP address,\n          Refactor Spaces routes traffic over the public internet.</p>\n            </li>\n            <li>\n               <p>If the service has an Lambda function endpoint, then Refactor Spaces uses\n          the API Gateway\n          Lambda integration.</p>\n            </li>\n         </ul>\n         <p>A health check is performed on the service when the route is created. If the health check\n      fails, the route transitions to <code>FAILED</code>, and no traffic is sent to the service.</p>\n         <p>For Lambda functions, the Lambda function state is checked. If\n      the function is not active, the function configuration is updated so that Lambda\n      resources are provisioned. If the Lambda state is <code>Failed</code>, then the\n      route creation fails. For more information, see the <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/API_GetFunctionConfiguration.html#SSS-GetFunctionConfiguration-response-State\">GetFunctionConfiguration's State response parameter</a> in the <i>Lambda Developer Guide</i>.</p> \n         <p>For public URLs, a connection is opened to the public endpoint. If the URL is not reachable,\n      the health check fails. For private URLs, a target group is created and the target group\n      health check is run.</p> \n         <p>The <code>HealthCheckProtocol</code>, <code>HealthCheckPort</code>, and\n        <code>HealthCheckPath</code> are the same protocol, port, and path specified in the URL or\n      health URL, if used. All other settings use the default values, as described in <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/application/target-group-health-checks.html\">Health checks\n        for your target groups</a>. The health check is considered successful if at least one\n      target within the target group transitions to a healthy state.</p>",
+                "smithy.api#documentation": "<p>Creates an Amazon Web Services Migration Hub Refactor Spaces route. The account owner of the service resource is always the\n      environment owner, regardless of which account creates the route. Routes target a service in\n      the application. If an application does not have any routes, then the first route must be\n      created as a <code>DEFAULT</code>\n            <code>RouteType</code>.</p>\n         <p>When you create a route, Refactor Spaces configures the Amazon API Gateway to send traffic\n      to the target service as follows:</p>\n         <ul>\n            <li>\n               <p>If the service has a URL endpoint, and the endpoint resolves to a private IP address,\n          Refactor Spaces routes traffic using the API Gateway VPC link. </p>\n            </li>\n            <li>\n               <p>If the service has a URL endpoint, and the endpoint resolves to a public IP address,\n          Refactor Spaces routes traffic over the public internet.</p>\n            </li>\n            <li>\n               <p>If the service has an Lambda function endpoint, then Refactor Spaces\n          configures the Lambda function's resource policy to allow the application's\n            API Gateway to invoke the function.</p>\n            </li>\n         </ul>\n         <p>A one-time health check is performed on the service when the route is created. If the\n      health check fails, the route transitions to <code>FAILED</code>, and no traffic is sent to\n      the service.</p>\n         <p>For Lambda functions, the Lambda function state is checked. If the\n      function is not active, the function configuration is updated so that Lambda\n      resources are provisioned. If the Lambda state is <code>Failed</code>, then the\n      route creation fails. For more information, see the <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/API_GetFunctionConfiguration.html#SSS-GetFunctionConfiguration-response-State\">GetFunctionConfiguration's State response parameter</a> in the <i>Lambda Developer Guide</i>.</p>\n         <p>For public URLs, a connection is opened to the public endpoint. If the URL is not\n      reachable, the health check fails. For private URLs, a target group is created and the target\n      group health check is run.</p>\n         <p>The <code>HealthCheckProtocol</code>, <code>HealthCheckPort</code>, and\n        <code>HealthCheckPath</code> are the same protocol, port, and path specified in the URL or\n      health URL, if used. All other settings use the default values, as described in <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/application/target-group-health-checks.html\">Health checks\n        for your target groups</a>. The health check is considered successful if at least one\n      target within the target group transitions to a healthy state.</p>\n         <p>Services can have HTTP or HTTPS URL endpoints. For HTTPS URLs, publicly-signed\n      certificates are supported. Private Certificate Authorities (CAs) are permitted only if the\n      CA's domain is publicly resolvable.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/environments/{EnvironmentIdentifier}/applications/{ApplicationIdentifier}/routes",
@@ -853,7 +853,7 @@
                 "ServiceId": {
                     "target": "com.amazonaws.migrationhubrefactorspaces#ServiceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of service in which the rute iscreated. Traffic that matches this route is\n      forwarded to this service.</p>"
+                        "smithy.api#documentation": "<p>The ID of service in which the route is created. Traffic that matches this route is\n      forwarded to this service.</p>"
                     }
                 },
                 "ApplicationId": {
@@ -871,7 +871,7 @@
                 "State": {
                     "target": "com.amazonaws.migrationhubrefactorspaces#RouteState",
                     "traits": {
-                        "smithy.api#documentation": "<p>he current state of the route. </p>"
+                        "smithy.api#documentation": "<p>The current state of the route. </p>"
                     }
                 },
                 "Tags": {
@@ -926,7 +926,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Amazon Web Services Migration Hub Refactor Spaces service. The account owner of the service is always the\n      environment owner, regardless of which account in the environment creates the service.\n      Services have either a URL endpoint in a virtual private cloud (VPC), or a Lambda\n      function endpoint.</p>\n         <important>\n            <p>If an Amazon Web Services resourceis launched in a service VPC, and you want it to be\n        accessible to all of an environment’s services with VPCs and routes, apply the\n          <code>RefactorSpacesSecurityGroup</code> to the resource. Alternatively, to add more\n        cross-account constraints, apply your own security group.</p>\n         </important>",
+                "smithy.api#documentation": "<p>Creates an Amazon Web Services Migration Hub Refactor Spaces service. The account owner of the service is always the\n      environment owner, regardless of which account in the environment creates the service.\n      Services have either a URL endpoint in a virtual private cloud (VPC), or a Lambda\n      function endpoint.</p>\n         <important>\n            <p>If an Amazon Web Services resource is launched in a service VPC, and you want it to be\n        accessible to all of an environment’s services with VPCs and routes, apply the\n          <code>RefactorSpacesSecurityGroup</code> to the resource. Alternatively, to add more\n        cross-account constraints, apply your own security group.</p>\n         </important>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/environments/{EnvironmentIdentifier}/applications/{ApplicationIdentifier}/services",
@@ -1436,7 +1436,7 @@
                 "ApplicationId": {
                     "target": "com.amazonaws.migrationhubrefactorspaces#ApplicationId",
                     "traits": {
-                        "smithy.api#documentation": "<p>he ID of the application that the route belongs to.</p>"
+                        "smithy.api#documentation": "<p>The ID of the application that the route belongs to.</p>"
                     }
                 },
                 "State": {
@@ -1713,7 +1713,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The summary information for environments as a response to <code>ListEnvironments</code>. </p>"
+                "smithy.api#documentation": "<p>The summary information for environments as a response to <code>ListEnvironments</code>.\n    </p>"
             }
         },
         "com.amazonaws.migrationhubrefactorspaces#EnvironmentVpc": {
@@ -2038,7 +2038,7 @@
                 "OwnerAccountId": {
                     "target": "com.amazonaws.migrationhubrefactorspaces#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services account ID of the application owner.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID of the application owner (which is always the same as\n      the environment owner account ID).</p>"
                     }
                 },
                 "CreatedByAccountId": {
@@ -2802,8 +2802,8 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
-                    "items": "ApplicationSummaryList",
-                    "pageSize": "MaxResults"
+                    "pageSize": "MaxResults",
+                    "items": "ApplicationSummaryList"
                 },
                 "smithy.api#readonly": {}
             }
@@ -2878,7 +2878,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all the virtual private clouds (VPCs) that are part of an Amazon Web Services Migration Hub Refactor Spaces environment. </p>",
+                "smithy.api#documentation": "<p>Lists all Amazon Web Services Migration Hub Refactor Spaces service virtual private clouds (VPCs) that are part of the\n      environment. </p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/environments/{EnvironmentIdentifier}/vpcs",
@@ -2887,8 +2887,8 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
-                    "items": "EnvironmentVpcList",
-                    "pageSize": "MaxResults"
+                    "pageSize": "MaxResults",
+                    "items": "EnvironmentVpcList"
                 },
                 "smithy.api#readonly": {}
             }
@@ -2972,8 +2972,8 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
-                    "items": "EnvironmentSummaryList",
-                    "pageSize": "MaxResults"
+                    "pageSize": "MaxResults",
+                    "items": "EnvironmentSummaryList"
                 },
                 "smithy.api#readonly": {}
             }
@@ -3055,8 +3055,8 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
-                    "items": "RouteSummaryList",
-                    "pageSize": "MaxResults"
+                    "pageSize": "MaxResults",
+                    "items": "RouteSummaryList"
                 },
                 "smithy.api#readonly": {}
             }
@@ -3154,8 +3154,8 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
-                    "items": "ServiceSummaryList",
-                    "pageSize": "MaxResults"
+                    "pageSize": "MaxResults",
+                    "items": "ServiceSummaryList"
                 },
                 "smithy.api#readonly": {}
             }
@@ -3235,8 +3235,7 @@
                 "smithy.api#documentation": "<p>Lists the tags of a resource. The caller account must be the same as the resource’s\n        <code>OwnerAccountId</code>. Listing tags in other accounts is not supported. </p>",
                 "smithy.api#http": {
                     "method": "GET",
-                    "uri": "/tags/{ResourceArn}",
-                    "code": 200
+                    "uri": "/tags/{ResourceArn}"
                 },
                 "smithy.api#readonly": {}
             }
@@ -3394,7 +3393,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Attaches a resource-based permission policy to the Amazon Web Services Migration Hub Refactor Spaces environment. The policy\n      must contain the same actions and condition statements as the\n        <code>arn:aws:ram::aws:permission/AWSRAMDefaultPermissionRefactorSpacesEnvironment</code>\n      permission in Resource Access Manager. The policy must not contain new lines or blank lines. </p>",
+                "smithy.api#documentation": "<p>Attaches a resource-based permission policy to the Amazon Web Services Migration Hub Refactor Spaces environment. The policy\n      must contain the same actions and condition statements as the\n        <code>arn:aws:ram::aws:permission/AWSRAMDefaultPermissionRefactorSpacesEnvironment</code>\n      permission in Resource Access Manager. The policy must not contain new lines or blank lines.\n    </p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/resourcepolicy",
@@ -3431,29 +3430,27 @@
             "traits": {
                 "aws.api#service": {
                     "sdkId": "Migration Hub Refactor Spaces",
-                    "arnNamespace": "refactor-spaces",
-                    "cloudFormationName": "RefactorSpaces",
-                    "cloudTrailEventSource": "refactor-spaces.amazonaws.com",
-                    "endpointPrefix": "refactor-spaces"
+                    "arnNamespace": "refactor-spaces"
                 },
                 "aws.auth#sigv4": {
                     "name": "refactor-spaces"
                 },
                 "aws.protocols#restJson1": {},
                 "smithy.api#cors": {
+                    "additionalExposedHeaders": [
+                        "x-amzn-errortype",
+                        "x-amzn-requestid",
+                        "x-amzn-errormessage",
+                        "x-amzn-trace-id",
+                        "x-amz-apigw-id",
+                        "date"
+                    ],
                     "additionalAllowedHeaders": [
                         "content-type"
                     ],
-                    "additionalExposedHeaders": [
-                        "date",
-                        "x-amz-apigw-id",
-                        "x-amzn-trace-id",
-                        "x-amzn-errortype",
-                        "x-amzn-requestid",
-                        "x-amzn-errormessage"
-                    ]
+                    "origin": "*"
                 },
-                "smithy.api#documentation": "<fullname>Amazon Web Services Migration Hub Refactor Spaces</fullname>\n\n         <p>This API reference provides descriptions, syntax, and other details about each of the\n      actions and data types for Amazon Web Services Migration Hub Refactor Spaces (Refactor Spaces). The topic for each action shows the API\n      request parameters and the response. Alternatively, you can use one of the Amazon Web Services SDKs to\n      access an API that is tailored to the programming language or platform that you're using. For\n      more information, see <a href=\"http://aws.amazon.com/tools/#SDKs\">Amazon Web Services SDKs</a>.</p>",
+                "smithy.api#documentation": "<fullname>Amazon Web Services Migration Hub Refactor Spaces</fullname>\n   \n         <p>This API reference provides descriptions, syntax, and other details about each of the\n      actions and data types for Amazon Web Services Migration Hub Refactor Spaces (Refactor Spaces). The topic for each action shows the API\n      request parameters and the response. Alternatively, you can use one of the Amazon Web Services SDKs to\n      access an API that is tailored to the programming language or platform that you're using. For\n      more information, see <a href=\"http://aws.amazon.com/tools/#SDKs\">Amazon Web Services SDKs</a>.</p>\n    \n         <p>To share Refactor Spaces environments with other Amazon Web Services accounts or with Organizations\n        and their OUs, use Resource Access Manager's <code>CreateResourceShare</code> API. See <a href=\"https://docs.aws.amazon.com/ram/latest/APIReference/API_CreateResourceShare.html\">CreateResourceShare</a> in the <i>Amazon Web Services RAM API Reference</i>.</p>",
                 "smithy.api#title": "AWS Migration Hub Refactor Spaces"
             },
             "version": "2021-10-26",
@@ -4065,8 +4062,7 @@
                 "smithy.api#documentation": "<p>Removes the tags of a given resource. Tags are metadata which can be used to manage a\n      resource. To tag a resource, the caller account must be the same as the resource’s\n        <code>OwnerAccountId</code>. Tagging resources in other accounts is not supported.</p>\n         <note>\n            <p>Amazon Web Services Migration Hub Refactor Spaces does not propagate tags to orchestrated resources, such as an\n        environment’s transit gateway.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
-                    "uri": "/tags/{ResourceArn}",
-                    "code": 200
+                    "uri": "/tags/{ResourceArn}"
                 }
             }
         },
@@ -4165,8 +4161,7 @@
                 "smithy.api#documentation": "<p>Adds to or modifies the tags of the given resource. Tags are metadata which can be used to\n      manage a resource. To untag a resource, the caller account must be the same as the resource’s\n        <code>OwnerAccountId</code>. Untagging resources across accounts is not supported. </p>",
                 "smithy.api#http": {
                     "method": "DELETE",
-                    "uri": "/tags/{ResourceArn}",
-                    "code": 200
+                    "uri": "/tags/{ResourceArn}"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -4229,7 +4224,7 @@
                 "ActivationState": {
                     "target": "com.amazonaws.migrationhubrefactorspaces#RouteActivationState",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether traffic is forwarded to this route’s service after the route is created. </p>",
+                        "smithy.api#documentation": "<p>Indicates whether traffic is forwarded to this route’s service after the route is created.\n    </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4322,7 +4317,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The input does not satisfy the constraints specified by an Amazon Web Service. </p>",
+                "smithy.api#documentation": "<p>The input does not satisfy the constraints specified by an Amazon Web Service.\n    </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }

@@ -40,6 +40,9 @@ type DescribeDeviceInput struct {
 
 type DescribeDeviceOutput struct {
 
+	// Beta software releases available for the device.
+	AlternateSoftwares []types.AlternateSoftwareMetadata
+
 	// The device's ARN.
 	Arn *string
 
@@ -60,6 +63,9 @@ type DescribeDeviceOutput struct {
 
 	// The device's ID.
 	DeviceId *string
+
+	// The most recent beta software release.
+	LatestAlternateSoftware *string
 
 	// The latest software version available for the device.
 	LatestSoftware *string

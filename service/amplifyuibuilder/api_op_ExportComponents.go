@@ -4,6 +4,7 @@ package amplifyuibuilder
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder/types"
@@ -40,6 +41,9 @@ type ExportComponentsInput struct {
 	// This member is required.
 	EnvironmentName *string
 
+	// The token to request the next page of results.
+	NextToken *string
+
 	noSmithyDocumentSerde
 }
 
@@ -49,6 +53,9 @@ type ExportComponentsOutput struct {
 	//
 	// This member is required.
 	Entities []types.Component
+
+	// The pagination token that's included if more results are available.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -117,6 +124,84 @@ func (c *Client) addOperationExportComponentsMiddlewares(stack *middleware.Stack
 		return err
 	}
 	return nil
+}
+
+// ExportComponentsAPIClient is a client that implements the ExportComponents
+// operation.
+type ExportComponentsAPIClient interface {
+	ExportComponents(context.Context, *ExportComponentsInput, ...func(*Options)) (*ExportComponentsOutput, error)
+}
+
+var _ ExportComponentsAPIClient = (*Client)(nil)
+
+// ExportComponentsPaginatorOptions is the paginator options for ExportComponents
+type ExportComponentsPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ExportComponentsPaginator is a paginator for ExportComponents
+type ExportComponentsPaginator struct {
+	options   ExportComponentsPaginatorOptions
+	client    ExportComponentsAPIClient
+	params    *ExportComponentsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewExportComponentsPaginator returns a new ExportComponentsPaginator
+func NewExportComponentsPaginator(client ExportComponentsAPIClient, params *ExportComponentsInput, optFns ...func(*ExportComponentsPaginatorOptions)) *ExportComponentsPaginator {
+	if params == nil {
+		params = &ExportComponentsInput{}
+	}
+
+	options := ExportComponentsPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ExportComponentsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ExportComponentsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ExportComponents page.
+func (p *ExportComponentsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ExportComponentsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	result, err := p.client.ExportComponents(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opExportComponents(region string) *awsmiddleware.RegisterServiceMetadata {

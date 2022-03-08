@@ -23,15 +23,15 @@ import (
 // in the Amazon Elastic Container Service Developer Guide. Tasks for services that
 // don't use a load balancer are considered healthy if they're in the RUNNING
 // state. Tasks for services that use a load balancer are considered healthy if
-// they're in the RUNNING state and the container instance that they're hosted on
-// is reported as healthy by the load balancer. There are two service scheduler
-// strategies available:
+// they're in the RUNNING state and are reported as healthy by the load balancer.
+// There are two service scheduler strategies available:
 //
-// * REPLICA - The replica scheduling strategy places and
-// maintains your desired number of tasks across your cluster. By default, the
-// service scheduler spreads tasks across Availability Zones. You can use task
-// placement strategies and constraints to customize task placement decisions. For
-// more information, see Service Scheduler Concepts
+// * REPLICA - The replica
+// scheduling strategy places and maintains your desired number of tasks across
+// your cluster. By default, the service scheduler spreads tasks across
+// Availability Zones. You can use task placement strategies and constraints to
+// customize task placement decisions. For more information, see Service Scheduler
+// Concepts
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html)
 // in the Amazon Elastic Container Service Developer Guide.
 //
@@ -166,7 +166,7 @@ type CreateServiceInput struct {
 	// isn't specified. If schedulingStrategy is DAEMON then this isn't required.
 	DesiredCount *int32
 
-	// Specifies whether to enable Amazon ECS managed tags for the tasks within the
+	// Specifies whether to turn on Amazon ECS managed tags for the tasks within the
 	// service. For more information, see Tagging Your Amazon ECS Resources
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html)
 	// in the Amazon Elastic Container Service Developer Guide.
@@ -181,9 +181,12 @@ type CreateServiceInput struct {
 	// unhealthy Elastic Load Balancing target health checks after a task has first
 	// started. This is only used when your service is configured to use a load
 	// balancer. If your service has a load balancer defined and you don't specify a
-	// health check grace period value, the default value of 0 is used. If your
-	// service's tasks take a while to start and respond to Elastic Load Balancing
-	// health checks, you can specify a health check grace period of up to
+	// health check grace period value, the default value of 0 is used. If you do not
+	// use an Elastic Load Balancing, we recomend that you use the startPeriod in the
+	// task definition healtch check parameters. For more information, see Health check
+	// (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_HealthCheck.html).
+	// If your service's tasks take a while to start and respond to Elastic Load
+	// Balancing health checks, you can specify a health check grace period of up to
 	// 2,147,483,647 seconds (about 69 years). During that time, the Amazon ECS service
 	// scheduler ignores health check status. This grace period can prevent the service
 	// scheduler from marking tasks as unhealthy and stopping them before they have
@@ -226,28 +229,26 @@ type CreateServiceInput struct {
 	// The load balancer can also have up to two listeners: a required listener for
 	// production traffic and an optional listener that you can use to perform
 	// validation tests with Lambda functions before routing production traffic to it.
-	// After you create a service using the ECS deployment controller, the load
-	// balancer name or target group ARN, container name, and container port that's
-	// specified in the service definition are immutable. If you use the CODE_DEPLOY
-	// deployment controller, these values can be changed when updating the service.
-	// For Application Load Balancers and Network Load Balancers, this object must
-	// contain the load balancer target group ARN, the container name, and the
-	// container port to access from the load balancer. The container name must be as
-	// it appears in a container definition. The load balancer name parameter must be
-	// omitted. When a task from this service is placed on a container instance, the
-	// container instance and port combination is registered as a target in the target
-	// group that's specified here. For Classic Load Balancers, this object must
-	// contain the load balancer name, the container name , and the container port to
-	// access from the load balancer. The container name must be as it appears in a
-	// container definition. The target group ARN parameter must be omitted. When a
-	// task from this service is placed on a container instance, the container instance
-	// is registered with the load balancer that's specified here. Services with tasks
-	// that use the awsvpc network mode (for example, those with the Fargate launch
-	// type) only support Application Load Balancers and Network Load Balancers.
-	// Classic Load Balancers aren't supported. Also, when you create any target groups
-	// for these services, you must choose ip as the target type, not instance. This is
-	// because tasks that use the awsvpc network mode are associated with an elastic
-	// network interface, not an Amazon EC2 instance.
+	// If you use the CODE_DEPLOY deployment controller, these values can be changed
+	// when updating the service. For Application Load Balancers and Network Load
+	// Balancers, this object must contain the load balancer target group ARN, the
+	// container name, and the container port to access from the load balancer. The
+	// container name must be as it appears in a container definition. The load
+	// balancer name parameter must be omitted. When a task from this service is placed
+	// on a container instance, the container instance and port combination is
+	// registered as a target in the target group that's specified here. For Classic
+	// Load Balancers, this object must contain the load balancer name, the container
+	// name , and the container port to access from the load balancer. The container
+	// name must be as it appears in a container definition. The target group ARN
+	// parameter must be omitted. When a task from this service is placed on a
+	// container instance, the container instance is registered with the load balancer
+	// that's specified here. Services with tasks that use the awsvpc network mode (for
+	// example, those with the Fargate launch type) only support Application Load
+	// Balancers and Network Load Balancers. Classic Load Balancers aren't supported.
+	// Also, when you create any target groups for these services, you must choose ip
+	// as the target type, not instance. This is because tasks that use the awsvpc
+	// network mode are associated with an elastic network interface, not an Amazon EC2
+	// instance.
 	LoadBalancers []types.LoadBalancer
 
 	// The network configuration for the service. This parameter is required for task

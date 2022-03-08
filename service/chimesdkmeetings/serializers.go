@@ -942,6 +942,11 @@ func awsRestjson1_serializeDocumentEngineTranscribeSettings(v *types.EngineTrans
 		ok.Boolean(v.EnablePartialResultsStabilization)
 	}
 
+	if v.IdentifyLanguage {
+		ok := object.Key("IdentifyLanguage")
+		ok.Boolean(v.IdentifyLanguage)
+	}
+
 	if len(v.LanguageCode) > 0 {
 		ok := object.Key("LanguageCode")
 		ok.String(string(v.LanguageCode))
@@ -952,6 +957,11 @@ func awsRestjson1_serializeDocumentEngineTranscribeSettings(v *types.EngineTrans
 		ok.String(*v.LanguageModelName)
 	}
 
+	if v.LanguageOptions != nil {
+		ok := object.Key("LanguageOptions")
+		ok.String(*v.LanguageOptions)
+	}
+
 	if len(v.PartialResultsStability) > 0 {
 		ok := object.Key("PartialResultsStability")
 		ok.String(string(v.PartialResultsStability))
@@ -960,6 +970,11 @@ func awsRestjson1_serializeDocumentEngineTranscribeSettings(v *types.EngineTrans
 	if v.PiiEntityTypes != nil {
 		ok := object.Key("PiiEntityTypes")
 		ok.String(*v.PiiEntityTypes)
+	}
+
+	if len(v.PreferredLanguage) > 0 {
+		ok := object.Key("PreferredLanguage")
+		ok.String(string(v.PreferredLanguage))
 	}
 
 	if len(v.Region) > 0 {

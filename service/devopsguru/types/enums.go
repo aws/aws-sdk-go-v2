@@ -188,6 +188,24 @@ func (EventDataSource) Values() []EventDataSource {
 	}
 }
 
+type EventSourceOptInStatus string
+
+// Enum values for EventSourceOptInStatus
+const (
+	EventSourceOptInStatusEnabled  EventSourceOptInStatus = "ENABLED"
+	EventSourceOptInStatusDisabled EventSourceOptInStatus = "DISABLED"
+)
+
+// Values returns all known values for EventSourceOptInStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EventSourceOptInStatus) Values() []EventSourceOptInStatus {
+	return []EventSourceOptInStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type InsightFeedbackOption string
 
 // Enum values for InsightFeedbackOption

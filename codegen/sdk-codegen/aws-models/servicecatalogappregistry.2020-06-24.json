@@ -31,6 +31,21 @@
     "shapes": {
         "com.amazonaws.servicecatalogappregistry#AWS242AppRegistry": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Service Catalog AppRegistry",
+                    "arnNamespace": "servicecatalog",
+                    "cloudFormationName": "ServiceCatalogAppRegistry",
+                    "cloudTrailEventSource": "servicecatalogappregistry.amazonaws.com",
+                    "endpointPrefix": "servicecatalog-appregistry"
+                },
+                "aws.auth#sigv4": {
+                    "name": "servicecatalog"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p> Amazon Web Services Service Catalog AppRegistry enables organizations to understand the application context of their Amazon Web Services resources. AppRegistry provides a repository of your applications, their resources, and the application metadata that you use within your enterprise.</p>",
+                "smithy.api#title": "AWS Service Catalog App Registry"
+            },
             "version": "2020-06-24",
             "operations": [
                 {
@@ -96,22 +111,7 @@
                 {
                     "target": "com.amazonaws.servicecatalogappregistry#UpdateAttributeGroup"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Service Catalog AppRegistry",
-                    "arnNamespace": "servicecatalog",
-                    "cloudFormationName": "ServiceCatalogAppRegistry",
-                    "cloudTrailEventSource": "servicecatalogappregistry.amazonaws.com",
-                    "endpointPrefix": "servicecatalog-appregistry"
-                },
-                "aws.auth#sigv4": {
-                    "name": "servicecatalog"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p> Amazon Web Services Service Catalog AppRegistry enables organizations to understand the application context of their Amazon Web Services resources. AppRegistry provides a repository of your applications, their resources, and the application metadata that you use within your enterprise.</p>",
-                "smithy.api#title": "AWS Service Catalog App Registry"
-            }
+            ]
         },
         "com.amazonaws.servicecatalogappregistry#Application": {
             "type": "structure",
@@ -2107,6 +2107,9 @@
                 "name": {
                     "target": "com.amazonaws.servicecatalogappregistry#Name",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "Name update for application is deprecated."
+                        },
                         "smithy.api#documentation": "<p>The new name of the application. The name must be unique in the region in which you are updating the application.</p>"
                     }
                 },
@@ -2174,6 +2177,9 @@
                 "name": {
                     "target": "com.amazonaws.servicecatalogappregistry#Name",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "Name update for attribute group is deprecated."
+                        },
                         "smithy.api#documentation": "<p>The new name of the attribute group. The name must be unique in the region in which you are\n       updating the attribute group.</p>"
                     }
                 },

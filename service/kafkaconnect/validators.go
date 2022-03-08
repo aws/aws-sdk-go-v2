@@ -90,6 +90,26 @@ func (m *validateOpDeleteConnector) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteCustomPlugin struct {
+}
+
+func (*validateOpDeleteCustomPlugin) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteCustomPlugin) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteCustomPluginInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteCustomPluginInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeConnector struct {
 }
 
@@ -184,6 +204,10 @@ func addOpCreateWorkerConfigurationValidationMiddleware(stack *middleware.Stack)
 
 func addOpDeleteConnectorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteConnector{}, middleware.After)
+}
+
+func addOpDeleteCustomPluginValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteCustomPlugin{}, middleware.After)
 }
 
 func addOpDescribeConnectorValidationMiddleware(stack *middleware.Stack) error {
@@ -756,6 +780,21 @@ func validateOpDeleteConnectorInput(v *DeleteConnectorInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteConnectorInput"}
 	if v.ConnectorArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConnectorArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteCustomPluginInput(v *DeleteCustomPluginInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteCustomPluginInput"}
+	if v.CustomPluginArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CustomPluginArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

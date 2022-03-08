@@ -2,6 +2,52 @@
 
 package types
 
+type ApiAccess string
+
+// Enum values for ApiAccess
+const (
+	ApiAccessEnabled  ApiAccess = "ENABLED"
+	ApiAccessDisabled ApiAccess = "DISABLED"
+)
+
+// Values returns all known values for ApiAccess. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (ApiAccess) Values() []ApiAccess {
+	return []ApiAccess{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
+type ApplicationPermission string
+
+// Enum values for ApplicationPermission
+const (
+	ApplicationPermissionCreateDataset           ApplicationPermission = "CreateDataset"
+	ApplicationPermissionManageClusters          ApplicationPermission = "ManageClusters"
+	ApplicationPermissionManageUsersAndGroups    ApplicationPermission = "ManageUsersAndGroups"
+	ApplicationPermissionManageAttributeSets     ApplicationPermission = "ManageAttributeSets"
+	ApplicationPermissionViewAuditData           ApplicationPermission = "ViewAuditData"
+	ApplicationPermissionAccessNotebooks         ApplicationPermission = "AccessNotebooks"
+	ApplicationPermissionGetTemporaryCredentials ApplicationPermission = "GetTemporaryCredentials"
+)
+
+// Values returns all known values for ApplicationPermission. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ApplicationPermission) Values() []ApplicationPermission {
+	return []ApplicationPermission{
+		"CreateDataset",
+		"ManageClusters",
+		"ManageUsersAndGroups",
+		"ManageAttributeSets",
+		"ViewAuditData",
+		"AccessNotebooks",
+		"GetTemporaryCredentials",
+	}
+}
+
 type ChangeType string
 
 // Enum values for ChangeType
@@ -217,5 +263,43 @@ func (LocationType) Values() []LocationType {
 	return []LocationType{
 		"INGESTION",
 		"SAGEMAKER",
+	}
+}
+
+type UserStatus string
+
+// Enum values for UserStatus
+const (
+	UserStatusCreating UserStatus = "CREATING"
+	UserStatusEnabled  UserStatus = "ENABLED"
+	UserStatusDisabled UserStatus = "DISABLED"
+)
+
+// Values returns all known values for UserStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (UserStatus) Values() []UserStatus {
+	return []UserStatus{
+		"CREATING",
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
+type UserType string
+
+// Enum values for UserType
+const (
+	UserTypeSuperUser UserType = "SUPER_USER"
+	UserTypeAppUser   UserType = "APP_USER"
+)
+
+// Values returns all known values for UserType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (UserType) Values() []UserType {
+	return []UserType{
+		"SUPER_USER",
+		"APP_USER",
 	}
 }

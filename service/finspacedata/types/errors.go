@@ -30,6 +30,8 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 type ConflictException struct {
 	Message *string
 
+	Reason *string
+
 	noSmithyDocumentSerde
 }
 
@@ -88,6 +90,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 type ResourceNotFoundException struct {
 	Message *string
 
+	Reason *string
+
 	noSmithyDocumentSerde
 }
 
@@ -125,6 +129,8 @@ func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // The input fails to satisfy the constraints specified by an AWS service.
 type ValidationException struct {
 	Message *string
+
+	Reason *string
 
 	noSmithyDocumentSerde
 }

@@ -52,13 +52,13 @@ type CreateReplicationConfigurationTemplateInput struct {
 	// This member is required.
 	DataPlaneRouting types.ReplicationConfigurationDataPlaneRouting
 
-	// Request to configure the Staging Disk EBS volume type to "gp2" during
+	// Request to configure the default large staging disk EBS volume type during
 	// Replication Settings template creation.
 	//
 	// This member is required.
 	DefaultLargeStagingDiskType types.ReplicationConfigurationDefaultLargeStagingDiskType
 
-	// Request to configure EBS enryption during Replication Settings template
+	// Request to configure EBS encryption during Replication Settings template
 	// creation.
 	//
 	// This member is required.
@@ -70,8 +70,8 @@ type CreateReplicationConfigurationTemplateInput struct {
 	// This member is required.
 	ReplicationServerInstanceType *string
 
-	// Request to configure the Replication Server Secuirity group ID during
-	// Replication Settings template creation.
+	// Request to configure the Replication Server Security group ID during Replication
+	// Settings template creation.
 	//
 	// This member is required.
 	ReplicationServersSecurityGroupsIDs []string
@@ -82,7 +82,7 @@ type CreateReplicationConfigurationTemplateInput struct {
 	// This member is required.
 	StagingAreaSubnetId *string
 
-	// Request to configure Staiging Area tags during Replication Settings template
+	// Request to configure Staging Area tags during Replication Settings template
 	// creation.
 	//
 	// This member is required.
@@ -94,7 +94,7 @@ type CreateReplicationConfigurationTemplateInput struct {
 	// This member is required.
 	UseDedicatedReplicationServer *bool
 
-	// Request to configure an EBS enryption key during Replication Settings template
+	// Request to configure an EBS encryption key during Replication Settings template
 	// creation.
 	EbsEncryptionKeyArn *string
 
@@ -106,7 +106,7 @@ type CreateReplicationConfigurationTemplateInput struct {
 
 type CreateReplicationConfigurationTemplateOutput struct {
 
-	// Replication Configuration template template ID.
+	// Replication Configuration template ID.
 	//
 	// This member is required.
 	ReplicationConfigurationTemplateID *string
@@ -118,7 +118,7 @@ type CreateReplicationConfigurationTemplateOutput struct {
 	// Service Security group.
 	AssociateDefaultSecurityGroup *bool
 
-	// Replication Configuration template bandwidth throtting.
+	// Replication Configuration template bandwidth throttling.
 	BandwidthThrottling int64
 
 	// Replication Configuration template create Public IP.
@@ -127,7 +127,7 @@ type CreateReplicationConfigurationTemplateOutput struct {
 	// Replication Configuration template data plane routing.
 	DataPlaneRouting types.ReplicationConfigurationDataPlaneRouting
 
-	// Replication Configuration template use dedault large Staging Disk type.
+	// Replication Configuration template use default large Staging Disk type.
 	DefaultLargeStagingDiskType types.ReplicationConfigurationDefaultLargeStagingDiskType
 
 	// Replication Configuration template EBS encryption.

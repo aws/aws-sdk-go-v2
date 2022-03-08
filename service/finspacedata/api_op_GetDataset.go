@@ -45,7 +45,7 @@ type GetDatasetOutput struct {
 	Alias *string
 
 	// The timestamp at which the Dataset was created in FinSpace. The value is
-	// determined as Epoch time in milliseconds. For example, the value for Monday,
+	// determined as epoch time in milliseconds. For example, the value for Monday,
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
 	CreateTime int64
 
@@ -63,14 +63,14 @@ type GetDatasetOutput struct {
 
 	// The format in which Dataset data is structured.
 	//
-	// * TABULAR - Data is structured
+	// * TABULAR – Data is structured
 	// in a tabular format.
 	//
-	// * NON_TABULAR - Data is structured in a non-tabular
+	// * NON_TABULAR – Data is structured in a non-tabular
 	// format.
 	Kind types.DatasetKind
 
-	// The last time that the Dataset was modified. The value is determined as Epoch
+	// The last time that the Dataset was modified. The value is determined as epoch
 	// time in milliseconds. For example, the value for Monday, November 1, 2021
 	// 12:00:00 PM UTC is specified as 1635768000000.
 	LastModifiedTime int64
@@ -80,15 +80,15 @@ type GetDatasetOutput struct {
 
 	// Status of the Dataset creation.
 	//
-	// * PENDING - Dataset is pending creation.
+	// * PENDING – Dataset is pending creation.
 	//
 	// *
-	// FAILED - Dataset creation has failed.
+	// FAILED – Dataset creation has failed.
 	//
-	// * SUCCESS - Dataset creation has
+	// * SUCCESS – Dataset creation has
 	// succeeded.
 	//
-	// * RUNNING - Dataset creation is running.
+	// * RUNNING – Dataset creation is running.
 	Status types.DatasetStatus
 
 	// Metadata pertaining to the operation's result.

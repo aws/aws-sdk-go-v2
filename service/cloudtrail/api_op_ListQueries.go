@@ -17,7 +17,7 @@ import (
 // specify an ARN value for EventDataStore. Optionally, to shorten the list of
 // results, you can specify a time range, formatted as timestamps, by adding
 // StartTime and EndTime parameters, and a QueryStatus value. Valid values for
-// QueryStatus include QUEUED, RUNNING, FINISHED, FAILED, or CANCELLED.
+// QueryStatus include QUEUED, RUNNING, FINISHED, FAILED, TIMED_OUT, or CANCELLED.
 func (c *Client) ListQueries(ctx context.Context, params *ListQueriesInput, optFns ...func(*Options)) (*ListQueriesOutput, error) {
 	if params == nil {
 		params = &ListQueriesInput{}
@@ -52,7 +52,7 @@ type ListQueriesInput struct {
 	NextToken *string
 
 	// The status of queries that you want to return in results. Valid values for
-	// QueryStatus include QUEUED, RUNNING, FINISHED, FAILED, or CANCELLED.
+	// QueryStatus include QUEUED, RUNNING, FINISHED, FAILED, TIMED_OUT, or CANCELLED.
 	QueryStatus types.QueryStatus
 
 	// Use with EndTime to bound a ListQueries request, and limit its results to only

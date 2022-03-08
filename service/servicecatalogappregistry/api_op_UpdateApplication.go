@@ -39,6 +39,8 @@ type UpdateApplicationInput struct {
 
 	// The new name of the application. The name must be unique in the region in which
 	// you are updating the application.
+	//
+	// Deprecated: Name update for application is deprecated.
 	Name *string
 
 	noSmithyDocumentSerde

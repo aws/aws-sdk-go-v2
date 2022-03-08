@@ -1,0 +1,17 @@
+{
+    "id": "7f051288-ceed-4db6-8463-fb7566817a82",
+    "type": "documentation",
+    "description": "Updated service client model to latest release.",
+    "modules": [
+        "service/elasticache",
+        "service/gamelift",
+        "service/greengrassv2",
+        "service/macie",
+        "service/migrationhubrefactorspaces",
+        "service/rds",
+        "service/servicecatalogappregistry",
+        "service/sts",
+        "service/synthetics",
+        "service/timestreamquery"
+    ]
+}

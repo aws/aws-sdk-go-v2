@@ -513,8 +513,8 @@ type Query struct {
 	// The ID of a query.
 	QueryId *string
 
-	// The status of the query. This can be QUEUED, RUNNING, FINISHED, FAILED, or
-	// CANCELLED.
+	// The status of the query. This can be QUEUED, RUNNING, FINISHED, FAILED,
+	// TIMED_OUT, or CANCELLED.
 	QueryStatus QueryStatus
 
 	noSmithyDocumentSerde
@@ -522,6 +522,11 @@ type Query struct {
 
 // Metadata about a query, such as the number of results.
 type QueryStatistics struct {
+
+	// The total bytes that the query scanned in the event data store. This value
+	// matches the number of bytes for which your account is billed for the query,
+	// unless the query is still running.
+	BytesScanned *int64
 
 	// The number of results returned.
 	ResultsCount *int32
@@ -536,6 +541,11 @@ type QueryStatistics struct {
 // the total number of events scanned, the query run time in milliseconds, and the
 // query's creation time.
 type QueryStatisticsForDescribeQuery struct {
+
+	// The total bytes that the query scanned in the event data store. This value
+	// matches the number of bytes for which your account is billed for the query,
+	// unless the query is still running.
+	BytesScanned *int64
 
 	// The creation time of the query.
 	CreationTime *time.Time

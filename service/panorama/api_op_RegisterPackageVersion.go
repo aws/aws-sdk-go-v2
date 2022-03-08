@@ -44,7 +44,7 @@ type RegisterPackageVersionInput struct {
 	PatchVersion *string
 
 	// Whether to mark the new version as the latest version.
-	MarkLatest *bool
+	MarkLatest bool
 
 	// An owner account.
 	OwnerAccount *string

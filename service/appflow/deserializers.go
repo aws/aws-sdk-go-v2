@@ -6360,6 +6360,11 @@ func awsRestjson1_deserializeDocumentDestinationConnectorProperties(v **types.De
 				return err
 			}
 
+		case "Marketo":
+			if err := awsRestjson1_deserializeDocumentMarketoDestinationProperties(&sv.Marketo, value); err != nil {
+				return err
+			}
+
 		case "Redshift":
 			if err := awsRestjson1_deserializeDocumentRedshiftDestinationProperties(&sv.Redshift, value); err != nil {
 				return err
@@ -8038,6 +8043,51 @@ func awsRestjson1_deserializeDocumentMarketoConnectorProfileProperties(v **types
 					return fmt.Errorf("expected InstanceUrl to be of type string, got %T instead", value)
 				}
 				sv.InstanceUrl = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMarketoDestinationProperties(v **types.MarketoDestinationProperties, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MarketoDestinationProperties
+	if *v == nil {
+		sv = &types.MarketoDestinationProperties{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "errorHandlingConfig":
+			if err := awsRestjson1_deserializeDocumentErrorHandlingConfig(&sv.ErrorHandlingConfig, value); err != nil {
+				return err
+			}
+
+		case "object":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Object to be of type string, got %T instead", value)
+				}
+				sv.Object = ptr.String(jtv)
 			}
 
 		default:

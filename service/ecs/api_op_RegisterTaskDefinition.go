@@ -229,8 +229,8 @@ type RegisterTaskDefinitionInput struct {
 
 	// The configuration details for the App Mesh proxy. For tasks hosted on Amazon EC2
 	// instances, the container instances require at least version 1.26.0 of the
-	// container agent and at least version 1.26.0-1 of the ecs-init package to enable
-	// a proxy configuration. If your container instances are launched from the Amazon
+	// container agent and at least version 1.26.0-1 of the ecs-init package to use a
+	// proxy configuration. If your container instances are launched from the Amazon
 	// ECS-optimized AMI version 20190301 or later, then they contain the required
 	// versions of the container agent and ecs-init. For more information, see Amazon
 	// ECS-optimized AMI versions

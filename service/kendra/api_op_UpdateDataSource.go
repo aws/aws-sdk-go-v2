@@ -39,7 +39,7 @@ type UpdateDataSourceInput struct {
 	// This member is required.
 	IndexId *string
 
-	// Configuration information for an Amazon Kendra data source.
+	// Configuration information for an Amazon Kendra data source you want to update.
 	Configuration *types.DataSourceConfiguration
 
 	// Configuration information for altering document metadata and content during the

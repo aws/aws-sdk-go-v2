@@ -7,6 +7,15 @@ import (
 	"time"
 )
 
+// Details about a beta appliance software update.
+type AlternateSoftwareMetadata struct {
+
+	// The appliance software version.
+	Version *string
+
+	noSmithyDocumentSerde
+}
+
 // An application instance on a device.
 type ApplicationInstance struct {
 
@@ -218,6 +227,9 @@ type NetworkPayload struct {
 	// Settings for Ethernet port 1.
 	Ethernet1 *EthernetPayload
 
+	// Network time protocol (NTP) server settings.
+	Ntp *NtpPayload
+
 	noSmithyDocumentSerde
 }
 
@@ -229,6 +241,12 @@ type NetworkStatus struct {
 
 	// The status of Ethernet port 1.
 	Ethernet1Status *EthernetStatus
+
+	// When the network status changed.
+	LastUpdatedTime *time.Time
+
+	// Details about a network time protocol (NTP) server connection.
+	NtpStatus *NtpStatus
 
 	noSmithyDocumentSerde
 }
@@ -395,6 +413,33 @@ type NodeOutputPort struct {
 	noSmithyDocumentSerde
 }
 
+// Network time protocol (NTP) server settings. Use this option to connect to local
+// NTP servers instead of pool.ntp.org.
+type NtpPayload struct {
+
+	// NTP servers to use, in order of preference.
+	//
+	// This member is required.
+	NtpServers []string
+
+	noSmithyDocumentSerde
+}
+
+// Details about an NTP server connection.
+type NtpStatus struct {
+
+	// The connection's status.
+	ConnectionStatus NetworkConnectionStatus
+
+	// The IP address of the server.
+	IpAddress *string
+
+	// The domain name of the server.
+	NtpServerName *string
+
+	noSmithyDocumentSerde
+}
+
 // An over-the-air update (OTA) job configuration.
 type OTAJobConfig struct {
 
@@ -557,7 +602,7 @@ type PackageVersionOutputConfig struct {
 	PackageVersion *string
 
 	// Indicates that the version is recommended for all users.
-	MarkLatest *bool
+	MarkLatest bool
 
 	noSmithyDocumentSerde
 }

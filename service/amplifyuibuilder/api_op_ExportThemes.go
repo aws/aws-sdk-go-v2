@@ -4,6 +4,7 @@ package amplifyuibuilder
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder/types"
@@ -40,6 +41,9 @@ type ExportThemesInput struct {
 	// This member is required.
 	EnvironmentName *string
 
+	// The token to request the next page of results.
+	NextToken *string
+
 	noSmithyDocumentSerde
 }
 
@@ -49,6 +53,9 @@ type ExportThemesOutput struct {
 	//
 	// This member is required.
 	Entities []types.Theme
+
+	// The pagination token that's included if more results are available.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -117,6 +124,83 @@ func (c *Client) addOperationExportThemesMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	return nil
+}
+
+// ExportThemesAPIClient is a client that implements the ExportThemes operation.
+type ExportThemesAPIClient interface {
+	ExportThemes(context.Context, *ExportThemesInput, ...func(*Options)) (*ExportThemesOutput, error)
+}
+
+var _ ExportThemesAPIClient = (*Client)(nil)
+
+// ExportThemesPaginatorOptions is the paginator options for ExportThemes
+type ExportThemesPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ExportThemesPaginator is a paginator for ExportThemes
+type ExportThemesPaginator struct {
+	options   ExportThemesPaginatorOptions
+	client    ExportThemesAPIClient
+	params    *ExportThemesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewExportThemesPaginator returns a new ExportThemesPaginator
+func NewExportThemesPaginator(client ExportThemesAPIClient, params *ExportThemesInput, optFns ...func(*ExportThemesPaginatorOptions)) *ExportThemesPaginator {
+	if params == nil {
+		params = &ExportThemesInput{}
+	}
+
+	options := ExportThemesPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ExportThemesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ExportThemesPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ExportThemes page.
+func (p *ExportThemesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ExportThemesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	result, err := p.client.ExportThemes(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opExportThemes(region string) *awsmiddleware.RegisterServiceMetadata {

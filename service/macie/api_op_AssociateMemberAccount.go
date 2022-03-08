@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates a specified AWS account with Amazon Macie Classic as a member
-// account.
+// (Discontinued) Associates a specified Amazon Web Services account with Amazon
+// Macie Classic as a member account.
 func (c *Client) AssociateMemberAccount(ctx context.Context, params *AssociateMemberAccountInput, optFns ...func(*Options)) (*AssociateMemberAccountOutput, error) {
 	if params == nil {
 		params = &AssociateMemberAccountInput{}
@@ -29,8 +29,8 @@ func (c *Client) AssociateMemberAccount(ctx context.Context, params *AssociateMe
 
 type AssociateMemberAccountInput struct {
 
-	// The ID of the AWS account that you want to associate with Amazon Macie Classic
-	// as a member account.
+	// (Discontinued) The ID of the Amazon Web Services account that you want to
+	// associate with Amazon Macie Classic as a member account.
 	//
 	// This member is required.
 	MemberAccountId *string

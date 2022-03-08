@@ -580,8 +580,8 @@ func awsRestjson1_serializeOpHttpBindingsDeletePackageInput(v *DeletePackageInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ForceDelete != nil {
-		encoder.SetQuery("ForceDelete").Boolean(*v.ForceDelete)
+	if v.ForceDelete {
+		encoder.SetQuery("ForceDelete").Boolean(v.ForceDelete)
 	}
 
 	if v.PackageId == nil || len(*v.PackageId) == 0 {
@@ -2022,9 +2022,9 @@ func awsRestjson1_serializeOpDocumentRegisterPackageVersionInput(v *RegisterPack
 	object := value.Object()
 	defer object.Close()
 
-	if v.MarkLatest != nil {
+	if v.MarkLatest {
 		ok := object.Key("MarkLatest")
-		ok.Boolean(*v.MarkLatest)
+		ok.Boolean(v.MarkLatest)
 	}
 
 	if v.OwnerAccount != nil {
@@ -2458,6 +2458,38 @@ func awsRestjson1_serializeDocumentNetworkPayload(v *types.NetworkPayload, value
 		}
 	}
 
+	if v.Ntp != nil {
+		ok := object.Key("Ntp")
+		if err := awsRestjson1_serializeDocumentNtpPayload(v.Ntp, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentNtpPayload(v *types.NtpPayload, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.NtpServers != nil {
+		ok := object.Key("NtpServers")
+		if err := awsRestjson1_serializeDocumentNtpServerList(v.NtpServers, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentNtpServerList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 
@@ -2519,9 +2551,9 @@ func awsRestjson1_serializeDocumentPackageVersionOutputConfig(v *types.PackageVe
 	object := value.Object()
 	defer object.Close()
 
-	if v.MarkLatest != nil {
+	if v.MarkLatest {
 		ok := object.Key("MarkLatest")
-		ok.Boolean(*v.MarkLatest)
+		ok.Boolean(v.MarkLatest)
 	}
 
 	if v.PackageName != nil {

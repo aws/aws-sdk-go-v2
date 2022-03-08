@@ -65,8 +65,8 @@ type GetQueryResultsOutput struct {
 	// Shows the count of query results.
 	QueryStatistics *types.QueryStatistics
 
-	// The status of the query. Values include QUEUED, RUNNING, FINISHED, FAILED, or
-	// CANCELLED.
+	// The status of the query. Values include QUEUED, RUNNING, FINISHED, FAILED,
+	// TIMED_OUT, or CANCELLED.
 	QueryStatus types.QueryStatus
 
 	// Metadata pertaining to the operation's result.

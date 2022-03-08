@@ -35,24 +35,23 @@ import (
 // replacement tasks are considered healthy. Tasks for services that do not use a
 // load balancer are considered healthy if they're in the RUNNING state. Tasks for
 // services that use a load balancer are considered healthy if they're in the
-// RUNNING state and the container instance they're hosted on is reported as
-// healthy by the load balancer.
+// RUNNING state and are reported as healthy by the load balancer..
 //
-// * The maximumPercent parameter represents an
-// upper limit on the number of running tasks during task replacement. You can use
-// this to define the replacement batch size. For example, if desiredCount is four
-// tasks, a maximum of 200% starts four new tasks before stopping the four tasks to
-// be drained, provided that the cluster resources required to do this are
-// available. If the maximum is 100%, then replacement tasks can't start until the
-// draining tasks have stopped.
+// * The
+// maximumPercent parameter represents an upper limit on the number of running
+// tasks during task replacement. You can use this to define the replacement batch
+// size. For example, if desiredCount is four tasks, a maximum of 200% starts four
+// new tasks before stopping the four tasks to be drained, provided that the
+// cluster resources required to do this are available. If the maximum is 100%,
+// then replacement tasks can't start until the draining tasks have stopped.
 //
-// Any PENDING or RUNNING tasks that do not belong to
-// a service aren't affected. You must wait for them to finish or stop them
-// manually. A container instance has completed draining when it has no more
-// RUNNING tasks. You can verify this using ListTasks. When a container instance
-// has been drained, you can set a container instance to ACTIVE status and once it
-// has reached that status the Amazon ECS scheduler can begin scheduling tasks on
-// the instance again.
+// Any
+// PENDING or RUNNING tasks that do not belong to a service aren't affected. You
+// must wait for them to finish or stop them manually. A container instance has
+// completed draining when it has no more RUNNING tasks. You can verify this using
+// ListTasks. When a container instance has been drained, you can set a container
+// instance to ACTIVE status and once it has reached that status the Amazon ECS
+// scheduler can begin scheduling tasks on the instance again.
 func (c *Client) UpdateContainerInstancesState(ctx context.Context, params *UpdateContainerInstancesStateInput, optFns ...func(*Options)) (*UpdateContainerInstancesStateOutput, error) {
 	if params == nil {
 		params = &UpdateContainerInstancesStateInput{}

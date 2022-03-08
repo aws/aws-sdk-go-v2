@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes specified S3 resources from being monitored by Amazon Macie Classic. If
-// memberAccountId isn't specified, the action removes specified S3 resources from
-// Macie Classic for the current Macie Classic administrator account. If
-// memberAccountId is specified, the action removes specified S3 resources from
-// Macie Classic for the specified member account.
+// (Discontinued) Removes specified S3 resources from being monitored by Amazon
+// Macie Classic. If memberAccountId isn't specified, the action removes specified
+// S3 resources from Macie Classic for the current Macie Classic administrator
+// account. If memberAccountId is specified, the action removes specified S3
+// resources from Macie Classic for the specified member account.
 func (c *Client) DisassociateS3Resources(ctx context.Context, params *DisassociateS3ResourcesInput, optFns ...func(*Options)) (*DisassociateS3ResourcesOutput, error) {
 	if params == nil {
 		params = &DisassociateS3ResourcesInput{}
@@ -33,14 +33,14 @@ func (c *Client) DisassociateS3Resources(ctx context.Context, params *Disassocia
 
 type DisassociateS3ResourcesInput struct {
 
-	// The S3 resources (buckets or prefixes) that you want to remove from being
-	// monitored and classified by Amazon Macie Classic.
+	// (Discontinued) The S3 resources (buckets or prefixes) that you want to remove
+	// from being monitored and classified by Amazon Macie Classic.
 	//
 	// This member is required.
 	AssociatedS3Resources []types.S3Resource
 
-	// The ID of the Amazon Macie Classic member account whose resources you want to
-	// remove from being monitored by Macie Classic.
+	// (Discontinued) The ID of the Amazon Macie Classic member account whose resources
+	// you want to remove from being monitored by Macie Classic.
 	MemberAccountId *string
 
 	noSmithyDocumentSerde
@@ -48,9 +48,9 @@ type DisassociateS3ResourcesInput struct {
 
 type DisassociateS3ResourcesOutput struct {
 
-	// S3 resources that couldn't be removed from being monitored and classified by
-	// Amazon Macie Classic. An error code and an error message are provided for each
-	// failed item.
+	// (Discontinued) S3 resources that couldn't be removed from being monitored and
+	// classified by Amazon Macie Classic. An error code and an error message are
+	// provided for each failed item.
 	FailedS3Resources []types.FailedS3Resource
 
 	// Metadata pertaining to the operation's result.

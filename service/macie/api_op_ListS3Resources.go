@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all the S3 resources associated with Amazon Macie Classic. If
-// memberAccountId isn't specified, the action lists the S3 resources associated
+// (Discontinued) Lists all the S3 resources associated with Amazon Macie Classic.
+// If memberAccountId isn't specified, the action lists the S3 resources associated
 // with Macie Classic for the current Macie Classic administrator account. If
 // memberAccountId is specified, the action lists the S3 resources associated with
 // Macie Classic for the specified member account.
@@ -34,18 +34,18 @@ func (c *Client) ListS3Resources(ctx context.Context, params *ListS3ResourcesInp
 
 type ListS3ResourcesInput struct {
 
-	// Use this parameter to indicate the maximum number of items that you want in the
-	// response. The default value is 250.
+	// (Discontinued) Use this parameter to indicate the maximum number of items that
+	// you want in the response. The default value is 250.
 	MaxResults *int32
 
-	// The Amazon Macie Classic member account ID whose associated S3 resources you
-	// want to list.
+	// (Discontinued) The Amazon Macie Classic member account ID whose associated S3
+	// resources you want to list.
 	MemberAccountId *string
 
-	// Use this parameter when paginating results. Set its value to null on your first
-	// call to the ListS3Resources action. Subsequent calls to the action fill
-	// nextToken in the request with the value of nextToken from the previous response
-	// to continue listing data.
+	// (Discontinued) Use this parameter when paginating results. Set its value to null
+	// on your first call to the ListS3Resources action. Subsequent calls to the action
+	// fill nextToken in the request with the value of nextToken from the previous
+	// response to continue listing data.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -53,13 +53,13 @@ type ListS3ResourcesInput struct {
 
 type ListS3ResourcesOutput struct {
 
-	// When a response is generated, if there is more data to be listed, this parameter
-	// is present in the response and contains the value to use for the nextToken
-	// parameter in a subsequent pagination request. If there is no more data to be
-	// listed, this parameter is set to null.
+	// (Discontinued) When a response is generated, if there is more data to be listed,
+	// this parameter is present in the response and contains the value to use for the
+	// nextToken parameter in a subsequent pagination request. If there is no more data
+	// to be listed, this parameter is set to null.
 	NextToken *string
 
-	// A list of the associated S3 resources returned by the action.
+	// (Discontinued) A list of the associated S3 resources returned by the action.
 	S3Resources []types.S3ResourceClassification
 
 	// Metadata pertaining to the operation's result.
@@ -138,8 +138,8 @@ var _ ListS3ResourcesAPIClient = (*Client)(nil)
 
 // ListS3ResourcesPaginatorOptions is the paginator options for ListS3Resources
 type ListS3ResourcesPaginatorOptions struct {
-	// Use this parameter to indicate the maximum number of items that you want in the
-	// response. The default value is 250.
+	// (Discontinued) Use this parameter to indicate the maximum number of items that
+	// you want in the response. The default value is 250.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

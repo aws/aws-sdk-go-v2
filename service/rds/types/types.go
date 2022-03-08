@@ -351,8 +351,7 @@ type CustomAvailabilityZone struct {
 // in the Amazon Aurora User Guide. For more information on Multi-AZ DB clusters,
 // see  Multi-AZ deployments with two readable standby DB instances
 // (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
-// in the Amazon RDS User Guide. The Multi-AZ DB clusters feature is in preview and
-// is subject to change.
+// in the Amazon RDS User Guide.
 type DBCluster struct {
 
 	// The name of the Amazon Kinesis data stream used for the database activity
@@ -2899,10 +2898,9 @@ type OrderableDBInstanceOption struct {
 	// A list of the supported DB engine modes.
 	SupportedEngineModes []string
 
-	// Whether DB instances can be configured as a Multi-AZ DB cluster. The Multi-AZ DB
-	// clusters feature is in preview and is subject to change. For more information on
-	// Multi-AZ DB clusters, see  Multi-AZ deployments with two readable standby DB
-	// instances
+	// Whether DB instances can be configured as a Multi-AZ DB cluster. For more
+	// information on Multi-AZ DB clusters, see  Multi-AZ deployments with two readable
+	// standby DB instances
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
 	// in the Amazon RDS User Guide.
 	SupportsClusters bool

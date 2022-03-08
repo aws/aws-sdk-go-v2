@@ -91,6 +91,13 @@ func awsRestjson1_serializeOpDocumentCreateExperimentTemplateInput(v *CreateExpe
 		ok.String(*v.Description)
 	}
 
+	if v.LogConfiguration != nil {
+		ok := object.Key("logConfiguration")
+		if err := awsRestjson1_serializeDocumentCreateExperimentTemplateLogConfigurationInput(v.LogConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.RoleArn != nil {
 		ok := object.Key("roleArn")
 		ok.String(*v.RoleArn)
@@ -1066,6 +1073,13 @@ func awsRestjson1_serializeOpDocumentUpdateExperimentTemplateInput(v *UpdateExpe
 		ok.String(*v.Description)
 	}
 
+	if v.LogConfiguration != nil {
+		ok := object.Key("logConfiguration")
+		if err := awsRestjson1_serializeDocumentUpdateExperimentTemplateLogConfigurationInput(v.LogConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.RoleArn != nil {
 		ok := object.Key("roleArn")
 		ok.String(*v.RoleArn)
@@ -1137,6 +1151,32 @@ func awsRestjson1_serializeDocumentCreateExperimentTemplateActionInputMap(v map[
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCreateExperimentTemplateLogConfigurationInput(v *types.CreateExperimentTemplateLogConfigurationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CloudWatchLogsConfiguration != nil {
+		ok := object.Key("cloudWatchLogsConfiguration")
+		if err := awsRestjson1_serializeDocumentExperimentTemplateCloudWatchLogsLogConfigurationInput(v.CloudWatchLogsConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LogSchemaVersion != nil {
+		ok := object.Key("logSchemaVersion")
+		ok.Integer(*v.LogSchemaVersion)
+	}
+
+	if v.S3Configuration != nil {
+		ok := object.Key("s3Configuration")
+		if err := awsRestjson1_serializeDocumentExperimentTemplateS3LogConfigurationInput(v.S3Configuration, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -1259,6 +1299,35 @@ func awsRestjson1_serializeDocumentExperimentTemplateActionTargetMap(v map[strin
 		om := object.Key(key)
 		om.String(v[key])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentExperimentTemplateCloudWatchLogsLogConfigurationInput(v *types.ExperimentTemplateCloudWatchLogsLogConfigurationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LogGroupArn != nil {
+		ok := object.Key("logGroupArn")
+		ok.String(*v.LogGroupArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentExperimentTemplateS3LogConfigurationInput(v *types.ExperimentTemplateS3LogConfigurationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BucketName != nil {
+		ok := object.Key("bucketName")
+		ok.String(*v.BucketName)
+	}
+
+	if v.Prefix != nil {
+		ok := object.Key("prefix")
+		ok.String(*v.Prefix)
+	}
+
 	return nil
 }
 
@@ -1387,6 +1456,32 @@ func awsRestjson1_serializeDocumentUpdateExperimentTemplateActionInputMap(v map[
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentUpdateExperimentTemplateLogConfigurationInput(v *types.UpdateExperimentTemplateLogConfigurationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CloudWatchLogsConfiguration != nil {
+		ok := object.Key("cloudWatchLogsConfiguration")
+		if err := awsRestjson1_serializeDocumentExperimentTemplateCloudWatchLogsLogConfigurationInput(v.CloudWatchLogsConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LogSchemaVersion != nil {
+		ok := object.Key("logSchemaVersion")
+		ok.Integer(*v.LogSchemaVersion)
+	}
+
+	if v.S3Configuration != nil {
+		ok := object.Key("s3Configuration")
+		if err := awsRestjson1_serializeDocumentExperimentTemplateS3LogConfigurationInput(v.S3Configuration, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 

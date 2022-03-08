@@ -43,9 +43,7 @@ type UpdateExperienceInput struct {
 	// This member is required.
 	IndexId *string
 
-	// Provides the user configuration information. This includes the Amazon Web
-	// Services SSO field name that contains the identifiers of your users, such as
-	// their emails.
+	// Configuration information for your Amazon Kendra you want to update.
 	Configuration *types.ExperienceConfiguration
 
 	// The description of your Amazon Kendra experience you want to update.

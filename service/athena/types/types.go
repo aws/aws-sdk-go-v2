@@ -7,16 +7,39 @@ import (
 	"time"
 )
 
+// Indicates that an Amazon S3 canned ACL should be set to control ownership of
+// stored query results. When Athena stores query results in Amazon S3, the canned
+// ACL is set with the x-amz-acl request header. For more information about S3
+// Object Ownership, see Object Ownership settings
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html#object-ownership-overview)
+// in the Amazon S3 User Guide.
+type AclConfiguration struct {
+
+	// The Amazon S3 canned ACL that Athena should specify when storing query results.
+	// Currently the only supported canned ACL is BUCKET_OWNER_FULL_CONTROL. If a query
+	// runs in a workgroup and the workgroup overrides client-side settings, then the
+	// Amazon S3 canned ACL specified in the workgroup's settings is used for all
+	// queries that run in the workgroup. For more information about Amazon S3 canned
+	// ACLs, see Canned ACL
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#canned-acl)
+	// in the Amazon S3 User Guide.
+	//
+	// This member is required.
+	S3AclOption S3AclOption
+
+	noSmithyDocumentSerde
+}
+
 // Provides information about an Athena query error. The AthenaError feature
 // provides standardized error information to help you understand failed queries
 // and take steps after a query failure occurs. AthenaError includes an
 // ErrorCategory field that specifies whether the cause of the failed query is due
-// to system error, user error, or unknown error.
+// to system error, user error, or other error.
 type AthenaError struct {
 
 	// An integer value that specifies the category of a query failure error. The
 	// following list shows the category for each integer value. 1 - System 2 - User 3
-	// - Unknown
+	// - Other
 	ErrorCategory *int32
 
 	// An integer value that provides specific information about an Athena query error.
@@ -222,8 +245,7 @@ type EngineVersion struct {
 	noSmithyDocumentSerde
 }
 
-// A query, where QueryString is the list of SQL query statements that comprise the
-// query.
+// A query, where QueryString contains the SQL statements that make up the query.
 type NamedQuery struct {
 
 	// The database to which the query belongs.
@@ -236,7 +258,7 @@ type NamedQuery struct {
 	// This member is required.
 	Name *string
 
-	// The SQL query statements that comprise the query.
+	// The SQL statements that make up the query.
 	//
 	// This member is required.
 	QueryString *string
@@ -417,6 +439,17 @@ type QueryExecutionStatus struct {
 // uses the workgroup settings.
 type ResultConfiguration struct {
 
+	// Indicates that an Amazon S3 canned ACL should be set to control ownership of
+	// stored query results. Currently the only supported canned ACL is
+	// BUCKET_OWNER_FULL_CONTROL. This is a client-side setting. If workgroup settings
+	// override client-side settings, then the query uses the ACL configuration that is
+	// specified for the workgroup, and also uses the location for storing query
+	// results specified in the workgroup. For more information, see
+	// WorkGroupConfiguration$EnforceWorkGroupConfiguration and Workgroup Settings
+	// Override Client-Side Settings
+	// (https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html).
+	AclConfiguration *AclConfiguration
+
 	// If query results are encrypted in Amazon S3, indicates the encryption option
 	// used (for example, SSE-KMS or CSE-KMS) and key information. This is a
 	// client-side setting. If workgroup settings override client-side settings, then
@@ -460,6 +493,9 @@ type ResultConfiguration struct {
 // and encryption configuration for the query results.
 type ResultConfigurationUpdates struct {
 
+	// The ACL configuration for the query results.
+	AclConfiguration *AclConfiguration
+
 	// The encryption configuration for the query results.
 	EncryptionConfiguration *EncryptionConfiguration
 
@@ -486,6 +522,15 @@ type ResultConfigurationUpdates struct {
 	// EnforceWorkGroupConfiguration (true/false) in the WorkGroupConfiguration. See
 	// WorkGroupConfiguration$EnforceWorkGroupConfiguration.
 	OutputLocation *string
+
+	// If set to true, indicates that the previously-specified ACL configuration for
+	// queries in this workgroup should be ignored and set to null. If set to false or
+	// not set, and a value is present in the AclConfiguration of
+	// ResultConfigurationUpdates, the AclConfiguration in the workgroup's
+	// ResultConfiguration is updated with the new value. For more information, see
+	// Workgroup Settings Override Client-Side Settings
+	// (https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html).
+	RemoveAclConfiguration *bool
 
 	// If set to "true", indicates that the previously-specified encryption
 	// configuration (also known as the client-side setting) for queries in this
@@ -519,7 +564,7 @@ type ResultConfigurationUpdates struct {
 	noSmithyDocumentSerde
 }
 
-// The metadata and rows that comprise a query result set. The metadata describes
+// The metadata and rows that make up a query result set. The metadata describes
 // the column structure and data types. To return a ResultSet object, use
 // GetQueryResults.
 type ResultSet struct {
@@ -544,7 +589,7 @@ type ResultSetMetadata struct {
 	noSmithyDocumentSerde
 }
 
-// The rows that comprise a query result table.
+// The rows that make up a query result table.
 type Row struct {
 
 	// The data that populates a row in a query result table.

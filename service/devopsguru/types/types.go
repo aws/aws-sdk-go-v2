@@ -39,6 +39,15 @@ type AccountInsightHealth struct {
 	noSmithyDocumentSerde
 }
 
+// Information about your account's integration with Amazon CodeGuru Profiler.
+type AmazonCodeGuruProfilerIntegration struct {
+
+	// The status of the CodeGuru Profiler integration.
+	Status EventSourceOptInStatus
+
+	noSmithyDocumentSerde
+}
+
 // A time range that specifies when DevOps Guru opens and then closes an anomaly.
 // This is different from AnomalyTimeRange, which specifies the time range when
 // DevOps Guru actually observes the anomalous behavior.
@@ -81,6 +90,22 @@ type AnomalySourceDetails struct {
 	// An array of PerformanceInsightsMetricsDetail objects that contain information
 	// about analyzed Performance Insights metrics that show anomalous behavior.
 	PerformanceInsightsMetrics []PerformanceInsightsMetricsDetail
+
+	noSmithyDocumentSerde
+}
+
+// Metadata about an anomaly. The anomaly is detected using analysis of the metric
+// data  over a period of time
+type AnomalySourceMetadata struct {
+
+	// The source of the anomaly.
+	Source *string
+
+	// The name of the anomaly's resource.
+	SourceResourceName *string
+
+	// The anomaly's resource type.
+	SourceResourceType *string
 
 	noSmithyDocumentSerde
 }
@@ -344,6 +369,15 @@ type EventResource struct {
 
 	// The type of resource that emitted an event.
 	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the event sources.
+type EventSourcesConfig struct {
+
+	//
+	AmazonCodeGuruProfiler *AmazonCodeGuruProfilerIntegration
 
 	noSmithyDocumentSerde
 }
@@ -889,6 +923,9 @@ type ProactiveAnomaly struct {
 	// the anomaly is opened and the time when it is closed.
 	AnomalyReportedTimeRange *AnomalyReportedTimeRange
 
+	// Information about a resource in which DevOps Guru detected anomalous behavior.
+	AnomalyResources []AnomalyResource
+
 	// A time range that specifies when the observed unusual behavior in an anomaly
 	// started and ended. This is different from AnomalyReportedTimeRange, which
 	// specifies the time range when DevOps Guru opens and then closes an anomaly.
@@ -929,6 +966,9 @@ type ProactiveAnomaly struct {
 	// anomaly. The one supported source is Amazon CloudWatch metrics.
 	SourceDetails *AnomalySourceDetails
 
+	// The metadata for the anomaly.
+	SourceMetadata *AnomalySourceMetadata
+
 	// The status of a proactive anomaly.
 	Status AnomalyStatus
 
@@ -944,6 +984,9 @@ type ProactiveAnomalySummary struct {
 	// An AnomalyReportedTimeRange object that specifies the time range between when
 	// the anomaly is opened and the time when it is closed.
 	AnomalyReportedTimeRange *AnomalyReportedTimeRange
+
+	// Information about a resource in which DevOps Guru detected anomalous behavior.
+	AnomalyResources []AnomalyResource
 
 	// A time range that specifies when the observed unusual behavior in an anomaly
 	// started and ended. This is different from AnomalyReportedTimeRange, which
@@ -985,6 +1028,9 @@ type ProactiveAnomalySummary struct {
 	// anomaly. The one supported source is Amazon CloudWatch metrics.
 	SourceDetails *AnomalySourceDetails
 
+	// Returns the metadata of the source.
+	SourceMetadata *AnomalySourceMetadata
+
 	// The status of the anomaly.
 	Status AnomalyStatus
 
@@ -996,6 +1042,9 @@ type ProactiveAnomalySummary struct {
 
 // Details about a proactive insight. This object is returned by ListInsights.
 type ProactiveInsight struct {
+
+	// Describes the proactive insight.
+	Description *string
 
 	// The ID of the proactive insight.
 	Id *string
@@ -1268,6 +1317,9 @@ type ReactiveAnomalySummary struct {
 // Information about a reactive insight. This object is returned by ListInsights.
 type ReactiveInsight struct {
 
+	// Describes the reactive insight.
+	Description *string
+
 	// The ID of a reactive insight.
 	Id *string
 
@@ -1393,6 +1445,9 @@ type ReactiveOrganizationInsightSummary struct {
 // Recommendation information to help you remediate detected anomalous behavior
 // that generated an insight.
 type Recommendation struct {
+
+	// The category type of the recommendation.
+	Category *string
 
 	// A description of the problem.
 	Description *string
