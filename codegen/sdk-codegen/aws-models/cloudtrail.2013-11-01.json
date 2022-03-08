@@ -245,7 +245,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Cancels a query if the query is not in a terminated state, such as <code>CANCELLED</code>, <code>FAILED</code> or <code>FINISHED</code>. You must specify an ARN value for <code>EventDataStore</code>. \n         The ID of the query that you want to cancel is also required. When you run <code>CancelQuery</code>, the query status might \n         show as <code>CANCELLED</code> even if the operation is not yet finished.</p>",
+                "smithy.api#documentation": "<p>Cancels a query if the query is not in a terminated state, such as <code>CANCELLED</code>, <code>FAILED</code>, <code>TIMED_OUT</code>, or <code>FINISHED</code>. You must specify an ARN value for <code>EventDataStore</code>.\n         The ID of the query that you want to cancel is also required. When you run <code>CancelQuery</code>, the query status might \n         show as <code>CANCELLED</code> even if the operation is not yet finished.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -1152,7 +1152,7 @@
                 "QueryStatus": {
                     "target": "com.amazonaws.cloudtrail#QueryStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of a query. Values for <code>QueryStatus</code> include <code>QUEUED</code>, <code>RUNNING</code>, \n         <code>FINISHED</code>, <code>FAILED</code>, or <code>CANCELLED</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The status of a query. Values for <code>QueryStatus</code> include <code>QUEUED</code>, <code>RUNNING</code>, \n         <code>FINISHED</code>, <code>FAILED</code>, <code>TIMED_OUT</code>, or <code>CANCELLED</code>\n         </p>"
                     }
                 },
                 "QueryStatistics": {
@@ -1883,7 +1883,7 @@
                 "QueryStatus": {
                     "target": "com.amazonaws.cloudtrail#QueryStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the query. Values include <code>QUEUED</code>, <code>RUNNING</code>, <code>FINISHED</code>, <code>FAILED</code>, \n         or <code>CANCELLED</code>.</p>"
+                        "smithy.api#documentation": "<p>The status of the query. Values include <code>QUEUED</code>, <code>RUNNING</code>, <code>FINISHED</code>, <code>FAILED</code>, \n         <code>TIMED_OUT</code>, or <code>CANCELLED</code>.</p>"
                     }
                 },
                 "QueryStatistics": {
@@ -2146,7 +2146,7 @@
                     "code": "InactiveQuery",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p>The specified query cannot be canceled because it is in the <code>FINISHED</code>, <code>FAILED</code>, or \n         <code>CANCELLED</code> state.</p>",
+                "smithy.api#documentation": "<p>The specified query cannot be canceled because it is in the <code>FINISHED</code>, <code>FAILED</code>, <code>TIMED_OUT</code>, or\n         <code>CANCELLED</code> state.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -3008,7 +3008,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of queries and query statuses for the past seven days. You must specify an ARN value for \n         <code>EventDataStore</code>. Optionally, to shorten the list of results, you can specify a time range, \n         formatted as timestamps, by adding <code>StartTime</code> and <code>EndTime</code> parameters, and a \n         <code>QueryStatus</code> value. Valid values for <code>QueryStatus</code> include <code>QUEUED</code>, <code>RUNNING</code>, \n         <code>FINISHED</code>, <code>FAILED</code>, or <code>CANCELLED</code>.</p>",
+                "smithy.api#documentation": "<p>Returns a list of queries and query statuses for the past seven days. You must specify an ARN value for \n         <code>EventDataStore</code>. Optionally, to shorten the list of results, you can specify a time range, \n         formatted as timestamps, by adding <code>StartTime</code> and <code>EndTime</code> parameters, and a \n         <code>QueryStatus</code> value. Valid values for <code>QueryStatus</code> include <code>QUEUED</code>, <code>RUNNING</code>, \n         <code>FINISHED</code>, <code>FAILED</code>, <code>TIMED_OUT</code>, or <code>CANCELLED</code>.</p>",
                 "smithy.api#idempotent": {},
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
@@ -3064,7 +3064,7 @@
                 "QueryStatus": {
                     "target": "com.amazonaws.cloudtrail#QueryStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of queries that you want to return in results. Valid values for <code>QueryStatus</code> include <code>QUEUED</code>, <code>RUNNING</code>, \n         <code>FINISHED</code>, <code>FAILED</code>, or <code>CANCELLED</code>.</p>"
+                        "smithy.api#documentation": "<p>The status of queries that you want to return in results. Valid values for <code>QueryStatus</code> include <code>QUEUED</code>, <code>RUNNING</code>, \n         <code>FINISHED</code>, <code>FAILED</code>, <code>TIMED_OUT</code>, or <code>CANCELLED</code>.</p>"
                     }
                 }
             }
@@ -3807,7 +3807,7 @@
                 "QueryStatus": {
                     "target": "com.amazonaws.cloudtrail#QueryStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the query. This can be <code>QUEUED</code>, <code>RUNNING</code>, <code>FINISHED</code>, <code>FAILED</code>, \n         or <code>CANCELLED</code>.</p>"
+                        "smithy.api#documentation": "<p>The status of the query. This can be <code>QUEUED</code>, <code>RUNNING</code>, <code>FINISHED</code>, <code>FAILED</code>, \n         <code>TIMED_OUT</code>, or <code>CANCELLED</code>.</p>"
                     }
                 },
                 "CreationTime": {
@@ -3892,6 +3892,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The total number of results returned by a query.</p>"
                     }
+                },
+                "BytesScanned": {
+                    "target": "com.amazonaws.cloudtrail#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total bytes that the query scanned in the event data store. This value matches the number of\n         bytes for which your account is billed for the query, unless the query is still running.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3911,6 +3917,12 @@
                     "target": "com.amazonaws.cloudtrail#Long",
                     "traits": {
                         "smithy.api#documentation": "<p>The number of events that the query scanned in the event data store.</p>"
+                    }
+                },
+                "BytesScanned": {
+                    "target": "com.amazonaws.cloudtrail#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total bytes that the query scanned in the event data store. This value matches the number of \n      bytes for which your account is billed for the query, unless the query is still running.</p>"
                     }
                 },
                 "ExecutionTimeInMillis": {
@@ -3953,6 +3965,10 @@
                     {
                         "value": "CANCELLED",
                         "name": "CANCELLED"
+                    },
+                    {
+                        "value": "TIMED_OUT",
+                        "name": "TIMED_OUT"
                     }
                 ]
             }

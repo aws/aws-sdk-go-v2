@@ -19,8 +19,7 @@ import (
 // in the Amazon Aurora User Guide. For more information on Multi-AZ DB clusters,
 // see  Multi-AZ deployments with two readable standby DB instances
 // (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
-// in the Amazon RDS User Guide. The Multi-AZ DB clusters feature is in preview and
-// is subject to change.
+// in the Amazon RDS User Guide.
 func (c *Client) ModifyDBCluster(ctx context.Context, params *ModifyDBClusterInput, optFns ...func(*Options)) (*ModifyDBClusterOutput, error) {
 	if params == nil {
 		params = &ModifyDBClusterInput{}
@@ -94,12 +93,25 @@ type ModifyDBClusterInput struct {
 	BackupRetentionPeriod *int32
 
 	// The configuration setting for the log types to be enabled for export to
-	// CloudWatch Logs for a specific DB cluster. Valid for: Aurora DB clusters only
+	// CloudWatch Logs for a specific DB cluster. The values in the list depend on the
+	// DB engine being used. RDS for MySQL Possible values are error, general, and
+	// slowquery. RDS for PostgreSQL Possible values are postgresql and upgrade. Aurora
+	// MySQL Possible values are audit, error, general, and slowquery. Aurora
+	// PostgreSQL Possible value is postgresql. For more information about exporting
+	// CloudWatch Logs for Amazon RDS, see Publishing Database Logs to Amazon
+	// CloudWatch Logs
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch)
+	// in the Amazon Relational Database Service User Guide. For more information about
+	// exporting CloudWatch Logs for Amazon Aurora, see Publishing Database Logs to
+	// Amazon CloudWatch Logs
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch)
+	// in the Amazon Aurora User Guide. Valid for: Aurora DB clusters and Multi-AZ DB
+	// clusters
 	CloudwatchLogsExportConfiguration *types.CloudwatchLogsExportConfiguration
 
 	// A value that indicates whether to copy all tags from the DB cluster to snapshots
 	// of the DB cluster. The default is not to copy them. Valid for: Aurora DB
-	// clusters only
+	// clusters and Multi-AZ DB clusters
 	CopyTagsToSnapshot *bool
 
 	// The compute and memory capacity of each DB instance in the Multi-AZ DB cluster,
@@ -337,8 +349,7 @@ type ModifyDBClusterOutput struct {
 	// in the Amazon Aurora User Guide. For more information on Multi-AZ DB clusters,
 	// see  Multi-AZ deployments with two readable standby DB instances
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
-	// in the Amazon RDS User Guide. The Multi-AZ DB clusters feature is in preview and
-	// is subject to change.
+	// in the Amazon RDS User Guide.
 	DBCluster *types.DBCluster
 
 	// Metadata pertaining to the operation's result.

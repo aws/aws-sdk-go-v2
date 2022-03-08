@@ -1887,6 +1887,11 @@ func awsRestjson1_serializeOpDocumentUpdateLaunchConfigurationInput(v *UpdateLau
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.BootMode) > 0 {
+		ok := object.Key("bootMode")
+		ok.String(string(v.BootMode))
+	}
+
 	if v.CopyPrivateIp != nil {
 		ok := object.Key("copyPrivateIp")
 		ok.Boolean(*v.CopyPrivateIp)
@@ -2417,6 +2422,11 @@ func awsRestjson1_serializeDocumentReplicationConfigurationReplicatedDisk(v *typ
 	if len(v.StagingDiskType) > 0 {
 		ok := object.Key("stagingDiskType")
 		ok.String(string(v.StagingDiskType))
+	}
+
+	if v.Throughput != 0 {
+		ok := object.Key("throughput")
+		ok.Long(v.Throughput)
 	}
 
 	return nil

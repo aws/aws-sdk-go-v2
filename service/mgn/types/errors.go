@@ -145,7 +145,7 @@ func (e *ThrottlingException) ErrorMessage() string {
 func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Unitialized account exception.
+// Uninitialized account exception.
 type UninitializedAccountException struct {
 	Message *string
 

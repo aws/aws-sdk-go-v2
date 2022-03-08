@@ -7,5 +7,5 @@
 // create Amazon Chime SDK meetings, set the AWS Regions for meetings, create and
 // manage users, and send and receive meeting notifications. For more information
 // about the meeting APIs, see Amazon Chime SDK meetings
-// (http://amazonaws.com/chime/latest/APIReference/API_Operations_Amazon_Chime_SDK_meetings).
+// (https://docs.aws.amazon.com/chime/latest/APIReference/API_Operations_Amazon_Chime_SDK_Meetings.html).
 package chimesdkmeetings

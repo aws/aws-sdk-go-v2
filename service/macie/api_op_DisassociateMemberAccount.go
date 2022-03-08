@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes the specified member account from Amazon Macie Classic.
+// (Discontinued) Removes the specified member account from Amazon Macie Classic.
 func (c *Client) DisassociateMemberAccount(ctx context.Context, params *DisassociateMemberAccountInput, optFns ...func(*Options)) (*DisassociateMemberAccountOutput, error) {
 	if params == nil {
 		params = &DisassociateMemberAccountInput{}
@@ -28,7 +28,8 @@ func (c *Client) DisassociateMemberAccount(ctx context.Context, params *Disassoc
 
 type DisassociateMemberAccountInput struct {
 
-	// The ID of the member account that you want to remove from Amazon Macie Classic.
+	// (Discontinued) The ID of the member account that you want to remove from Amazon
+	// Macie Classic.
 	//
 	// This member is required.
 	MemberAccountId *string

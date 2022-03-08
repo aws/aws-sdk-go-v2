@@ -29,7 +29,7 @@ func (c *Client) GetReplicationConfiguration(ctx context.Context, params *GetRep
 
 type GetReplicationConfigurationInput struct {
 
-	// Request to get Replication Configuaration by Source Server ID.
+	// Request to get Replication Configuration by Source Server ID.
 	//
 	// This member is required.
 	SourceServerID *string

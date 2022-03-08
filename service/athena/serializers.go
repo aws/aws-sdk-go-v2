@@ -1775,6 +1775,61 @@ func (m *awsAwsjson11_serializeOpUpdateDataCatalog) HandleSerialize(ctx context.
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpUpdateNamedQuery struct {
+}
+
+func (*awsAwsjson11_serializeOpUpdateNamedQuery) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpUpdateNamedQuery) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateNamedQueryInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonAthena.UpdateNamedQuery")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentUpdateNamedQueryInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpUpdatePreparedStatement struct {
 }
 
@@ -1884,6 +1939,18 @@ func (m *awsAwsjson11_serializeOpUpdateWorkGroup) HandleSerialize(ctx context.Co
 
 	return next.HandleSerialize(ctx, in)
 }
+func awsAwsjson11_serializeDocumentAclConfiguration(v *types.AclConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.S3AclOption) > 0 {
+		ok := object.Key("S3AclOption")
+		ok.String(string(v.S3AclOption))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentEncryptionConfiguration(v *types.EncryptionConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1972,6 +2039,13 @@ func awsAwsjson11_serializeDocumentResultConfiguration(v *types.ResultConfigurat
 	object := value.Object()
 	defer object.Close()
 
+	if v.AclConfiguration != nil {
+		ok := object.Key("AclConfiguration")
+		if err := awsAwsjson11_serializeDocumentAclConfiguration(v.AclConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.EncryptionConfiguration != nil {
 		ok := object.Key("EncryptionConfiguration")
 		if err := awsAwsjson11_serializeDocumentEncryptionConfiguration(v.EncryptionConfiguration, ok); err != nil {
@@ -1996,6 +2070,13 @@ func awsAwsjson11_serializeDocumentResultConfigurationUpdates(v *types.ResultCon
 	object := value.Object()
 	defer object.Close()
 
+	if v.AclConfiguration != nil {
+		ok := object.Key("AclConfiguration")
+		if err := awsAwsjson11_serializeDocumentAclConfiguration(v.AclConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.EncryptionConfiguration != nil {
 		ok := object.Key("EncryptionConfiguration")
 		if err := awsAwsjson11_serializeDocumentEncryptionConfiguration(v.EncryptionConfiguration, ok); err != nil {
@@ -2011,6 +2092,11 @@ func awsAwsjson11_serializeDocumentResultConfigurationUpdates(v *types.ResultCon
 	if v.OutputLocation != nil {
 		ok := object.Key("OutputLocation")
 		ok.String(*v.OutputLocation)
+	}
+
+	if v.RemoveAclConfiguration != nil {
+		ok := object.Key("RemoveAclConfiguration")
+		ok.Boolean(*v.RemoveAclConfiguration)
 	}
 
 	if v.RemoveEncryptionConfiguration != nil {
@@ -2805,6 +2891,33 @@ func awsAwsjson11_serializeOpDocumentUpdateDataCatalogInput(v *UpdateDataCatalog
 	if len(v.Type) > 0 {
 		ok := object.Key("Type")
 		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentUpdateNamedQueryInput(v *UpdateNamedQueryInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Description != nil {
+		ok := object.Key("Description")
+		ok.String(*v.Description)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.NamedQueryId != nil {
+		ok := object.Key("NamedQueryId")
+		ok.String(*v.NamedQueryId)
+	}
+
+	if v.QueryString != nil {
+		ok := object.Key("QueryString")
+		ok.String(*v.QueryString)
 	}
 
 	return nil

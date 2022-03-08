@@ -1438,7 +1438,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides configuration information for data sources that connect\n            to Confluence.</p>"
+                "smithy.api#documentation": "<p>Provides the configuration information to connect to Confluence \n            as your data source.</p>"
             }
         },
         "com.amazonaws.kendra#ConfluencePageConfiguration": {
@@ -1723,7 +1723,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides the information necessary to connect to a\n            database.</p>"
+                "smithy.api#documentation": "<p>Provides the configuration information that's required to connect to a\n            database.</p>"
             }
         },
         "com.amazonaws.kendra#ContentSourceConfiguration": {
@@ -1749,7 +1749,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configuration information for your content sources, such as data sources, \n            FAQs, and content indexed directly via <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_BatchPutDocument.html\">BatchPutDocument</a>.</p>"
+                "smithy.api#documentation": "<p>Provides the configuration information for your content sources, such as data sources, \n            FAQs, and content indexed directly via <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_BatchPutDocument.html\">BatchPutDocument</a>.</p>"
             }
         },
         "com.amazonaws.kendra#ContentType": {
@@ -1777,6 +1777,44 @@
                         "name": "PPT"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.kendra#Correction": {
+            "type": "structure",
+            "members": {
+                "BeginOffset": {
+                    "target": "com.amazonaws.kendra#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The zero-based location in the response string or text where \n            the corrected word starts.</p>"
+                    }
+                },
+                "EndOffset": {
+                    "target": "com.amazonaws.kendra#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The zero-based location in the response string or text where \n            the corrected word ends.</p>"
+                    }
+                },
+                "Term": {
+                    "target": "com.amazonaws.kendra#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The string or text of a misspelled word in a query.</p>"
+                    }
+                },
+                "CorrectedTerm": {
+                    "target": "com.amazonaws.kendra#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The string or text of a corrected misspelled word in a query.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A corrected misspelled word in a query.</p>"
+            }
+        },
+        "com.amazonaws.kendra#CorrectionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendra#Correction"
             }
         },
         "com.amazonaws.kendra#CrawlDepth": {
@@ -1854,7 +1892,7 @@
                 "Configuration": {
                     "target": "com.amazonaws.kendra#DataSourceConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The connector configuration information that is required to access the\n      repository.</p>\n         <p>You can't specify the <code>Configuration</code> parameter when the\n        <code>Type</code> parameter is set to <code>CUSTOM</code>. If you do,\n      you receive a <code>ValidationException</code> exception.</p>\n         <p>The <code>Configuration</code> parameter is required for all other\n      data sources.</p>"
+                        "smithy.api#documentation": "<p>Configuration information that is required to access the data source \n      repository.</p>\n         <p>You can't specify the <code>Configuration</code> parameter when the\n        <code>Type</code> parameter is set to <code>CUSTOM</code>. If you do,\n      you receive a <code>ValidationException</code> exception.</p>\n         <p>The <code>Configuration</code> parameter is required for all other\n      data sources.</p>"
                     }
                 },
                 "Description": {
@@ -1975,7 +2013,7 @@
                 "Configuration": {
                     "target": "com.amazonaws.kendra#ExperienceConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides the configuration information for your Amazon Kendra experience. This includes\n            <code>ContentSourceConfiguration</code>, which specifies the data source IDs \n            and/or FAQ IDs, and <code>UserIdentityConfiguration</code>, which specifies the \n            user or group information to grant access to your Amazon Kendra experience.</p>"
+                        "smithy.api#documentation": "<p>Configuration information for your Amazon Kendra experience. This includes\n            <code>ContentSourceConfiguration</code>, which specifies the data source IDs \n            and/or FAQ IDs, and <code>UserIdentityConfiguration</code>, which specifies the \n            user or group information to grant access to your Amazon Kendra experience.</p>"
                     }
                 },
                 "Description": {
@@ -2463,37 +2501,37 @@
                 "S3Configuration": {
                     "target": "com.amazonaws.kendra#S3DataSourceConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides information to create a data source connector for a\n            document repository in an Amazon S3 bucket.</p>"
+                        "smithy.api#documentation": "<p>Provides the configuration information to connect to an Amazon S3 \n            bucket as your data source.</p>"
                     }
                 },
                 "SharePointConfiguration": {
                     "target": "com.amazonaws.kendra#SharePointConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides information necessary to create a data source connector\n            for a Microsoft SharePoint site.</p>"
+                        "smithy.api#documentation": "<p>Provides the configuration information to connect to Microsoft SharePoint \n            as your data source.</p>"
                     }
                 },
                 "DatabaseConfiguration": {
                     "target": "com.amazonaws.kendra#DatabaseConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides information necessary to create a data source connector\n            for a database.</p>"
+                        "smithy.api#documentation": "<p>Provides the configuration information to connect to a database as \n            your data source.</p>"
                     }
                 },
                 "SalesforceConfiguration": {
                     "target": "com.amazonaws.kendra#SalesforceConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides configuration information for data sources that connect\n            to a Salesforce site.</p>"
+                        "smithy.api#documentation": "<p>Provides the configuration information to connect to \n            Salesforce as your data source.</p>"
                     }
                 },
                 "OneDriveConfiguration": {
                     "target": "com.amazonaws.kendra#OneDriveConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides configuration for data sources that connect to Microsoft\n            OneDrive.</p>"
+                        "smithy.api#documentation": "<p>Provides the configuration information to connect to Microsoft\n            OneDrive as your data source.</p>"
                     }
                 },
                 "ServiceNowConfiguration": {
                     "target": "com.amazonaws.kendra#ServiceNowConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides configuration for data sources that connect to ServiceNow\n            instances.</p>"
+                        "smithy.api#documentation": "<p>Provides the configuration information to connect to ServiceNow\n            as your data source.</p>"
                     }
                 },
                 "ConfluenceConfiguration": {
@@ -2505,7 +2543,7 @@
                 "GoogleDriveConfiguration": {
                     "target": "com.amazonaws.kendra#GoogleDriveConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides configuration for data sources that connect to Google\n            Drive. </p>"
+                        "smithy.api#documentation": "<p>Provides the configuration information to connect to Google\n            Drive as your data source. </p>"
                     }
                 },
                 "WebCrawlerConfiguration": {
@@ -2525,7 +2563,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configuration information for an Amazon Kendra data source.</p>"
+                "smithy.api#documentation": "<p>Provides the configuration information for an Amazon Kendra data source.</p>"
             }
         },
         "com.amazonaws.kendra#DataSourceDateFieldFormat": {
@@ -2567,7 +2605,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n         Data source information for user context filtering.\n      </p>"
+                "smithy.api#documentation": "<p>Data source information for user context filtering.</p>"
             }
         },
         "com.amazonaws.kendra#DataSourceGroups": {
@@ -2998,7 +3036,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides information for connecting to an Amazon VPC.</p>"
+                "smithy.api#documentation": "<p>Provides the configuration information to connect to an Amazon VPC.</p>"
             }
         },
         "com.amazonaws.kendra#DatabaseConfiguration": {
@@ -3014,7 +3052,7 @@
                 "ConnectionConfiguration": {
                     "target": "com.amazonaws.kendra#ConnectionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The information necessary to connect to a database.</p>",
+                        "smithy.api#documentation": "<p>Configuration information that's required to connect to a database.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3042,7 +3080,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides the information necessary to connect a database to an\n            index. </p>"
+                "smithy.api#documentation": "<p>Provides the configuration information to connect to a \n            index. </p>"
             }
         },
         "com.amazonaws.kendra#DatabaseEngineType": {
@@ -3523,7 +3561,7 @@
                 "Configuration": {
                     "target": "com.amazonaws.kendra#DataSourceConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information that describes where the data source is located and how\n      the data source is configured. The specific information in the description\n      depends on the data source provider.</p>"
+                        "smithy.api#documentation": "<p>Describes how the data source is configured. The specific information in the description\n      depends on the data source provider.</p>"
                     }
                 },
                 "CreatedAt": {
@@ -5070,7 +5108,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides the configuration information of users or groups in \n            your Amazon Web Services SSO identity source to grant access your Amazon Kendra \n            experience.</p>"
+                "smithy.api#documentation": "<p>Provides the configuration information for users or groups in \n            your Amazon Web Services SSO identity source to grant access your Amazon Kendra \n            experience.</p>"
             }
         },
         "com.amazonaws.kendra#EntityDisplayData": {
@@ -5152,7 +5190,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides the configuration information of users or groups in your \n            Amazon Web Services SSO identity source for access to your Amazon Kendra experience. \n            Specific permissions are defined for each user or group once they are \n            granted access to your Amazon Kendra experience.</p>"
+                "smithy.api#documentation": "<p>Provides the configuration information for users or groups in your \n            Amazon Web Services SSO identity source for access to your Amazon Kendra experience. \n            Specific permissions are defined for each user or group once they are \n            granted access to your Amazon Kendra experience.</p>"
             }
         },
         "com.amazonaws.kendra#EntityPersonaConfigurationList": {
@@ -5260,7 +5298,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the configuration information for your Amazon Kendra experience. This includes \n            the data source IDs and/or FAQ IDs, and user or group information to grant access \n            to your Amazon Kendra experience.</p>"
+                "smithy.api#documentation": "<p>Provides the configuration information for your Amazon Kendra experience. This includes \n            the data source IDs and/or FAQ IDs, and user or group information to grant access \n            to your Amazon Kendra experience.</p>"
             }
         },
         "com.amazonaws.kendra#ExperienceEndpoint": {
@@ -5280,7 +5318,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides the configuration information of the endpoint for your Amazon Kendra\n            experience.</p>"
+                "smithy.api#documentation": "<p>Provides the configuration information for the endpoint for your Amazon Kendra\n            experience.</p>"
             }
         },
         "com.amazonaws.kendra#ExperienceEndpoints": {
@@ -5697,14 +5735,14 @@
                 "VpcConfiguration": {
                     "target": "com.amazonaws.kendra#DataSourceVpcConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides the configuration information for connecting to an \n            Amazon Virtual Private Cloud for your Amazon FSx. Your Amazon FSx \n            instance must reside inside your VPC.</p>",
+                        "smithy.api#documentation": "<p>Configuration information for connecting to an \n            Amazon Virtual Private Cloud for your Amazon FSx. Your Amazon FSx \n            instance must reside inside your VPC.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "SecretArn": {
                     "target": "com.amazonaws.kendra#SecretArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an Secrets Manager secret that \n            contains the key-value pairs required to connect to your Amazon FSx \n            file system. Windows is currently the only supported type. The secret must \n            contain a JSON structure with the following keys:</p>\n        <ul>\n            <li>\n                <p>username—The Active Directory user name, along with the \n                    Domain Name System (DNS) domain name. For example, \n                    <i>user@corp.example.com</i>. The Active Directory \n                    user account must have read and mounting access to the \n                    Amazon FSx file system for Windows.</p>\n            </li>\n            <li>\n                <p>password—The password of the active directory user with \n                    read and mounting access Amazon FSx Windows file system.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an Secrets Manager secret that \n            contains the key-value pairs required to connect to your Amazon FSx \n            file system. Windows is currently the only supported type. The secret must \n            contain a JSON structure with the following keys:</p>\n        <ul>\n            <li>\n                <p>username—The Active Directory user name, along with the \n                    Domain Name System (DNS) domain name. For example, \n                    <i>user@corp.example.com</i>. The Active Directory \n                    user account must have read and mounting access to the \n                    Amazon FSx file system for Windows.</p>\n            </li>\n            <li>\n                <p>password—The password of the Active Directory user account with \n                    read and mounting access to the Amazon FSx Windows file system.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "InclusionPatterns": {
@@ -5722,7 +5760,7 @@
                 "FieldMappings": {
                     "target": "com.amazonaws.kendra#DataSourceToIndexFieldMappingList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <code>DataSourceToIndexFieldMapping</code> objects that \n            map Amazon FSx data source attributes or field names to Amazon Kendra \n            index field names in Amazon Kendra. To create custom fields, use the \n            <code>UpdateIndex</code> API before you map to Amazon FSx fields. \n            For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html\">Mapping \n                data source fields</a>. The Amazon FSx data source field names \n            must exist in your Amazon FSx custom metadata.</p>"
+                        "smithy.api#documentation": "<p>A list of <code>DataSourceToIndexFieldMapping</code> objects that \n            map Amazon FSx data source attributes or field names to Amazon Kendra \n            index field names. To create custom fields, use the \n            <code>UpdateIndex</code> API before you map to Amazon FSx fields. \n            For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html\">Mapping \n                data source fields</a>. The Amazon FSx data source field names \n            must exist in your Amazon FSx custom metadata.</p>"
                     }
                 }
             },
@@ -5964,7 +6002,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides configuration information for data sources that connect\n            to Google Drive.</p>"
+                "smithy.api#documentation": "<p>Provides the configuration information to connect to \n            Google Drive as your data source.</p>"
             }
         },
         "com.amazonaws.kendra#GroupAttributeField": {
@@ -6280,7 +6318,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A summary of information about an index.</p>"
+                "smithy.api#documentation": "<p>A summary of information on the configuration of an index.</p>"
             }
         },
         "com.amazonaws.kendra#IndexConfigurationSummaryList": {
@@ -6541,7 +6579,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configuration information for the JSON token type.</p>"
+                "smithy.api#documentation": "<p>Provides the configuration information for the JSON token type.</p>"
             }
         },
         "com.amazonaws.kendra#JwtTokenTypeConfiguration": {
@@ -6592,7 +6630,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configuration information for the JWT token type.</p>"
+                "smithy.api#documentation": "<p>Provides the configuration information for the JWT token type.</p>"
             }
         },
         "com.amazonaws.kendra#KeyLocation": {
@@ -7255,7 +7293,7 @@
                 "IndexConfigurationSummaryItems": {
                     "target": "com.amazonaws.kendra#IndexConfigurationSummaryList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of summary information for one or more indexes.</p>"
+                        "smithy.api#documentation": "<p>An array of summary information on the configuration of one or more indexes.</p>"
                     }
                 },
                 "NextToken": {
@@ -7808,7 +7846,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides configuration information for data sources that connect\n            to OneDrive.</p>"
+                "smithy.api#documentation": "<p>Provides the configuration information to connect\n            to OneDrive as your data source.</p>"
             }
         },
         "com.amazonaws.kendra#OneDriveUser": {
@@ -8292,6 +8330,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Provides an identifier for a specific user. The\n            <code>VisitorId</code> should be a unique identifier, such as a\n         GUID. Don't use personally identifiable information, such as the user's\n         email address, as the <code>VisitorId</code>.</p>"
                     }
+                },
+                "SpellCorrectionConfiguration": {
+                    "target": "com.amazonaws.kendra#SpellCorrectionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enables suggested spell corrections for queries.</p>"
+                    }
                 }
             }
         },
@@ -8326,6 +8370,12 @@
                     "target": "com.amazonaws.kendra#WarningList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of warning codes and their messages on problems with your query.</p>\n         <p>Amazon Kendra currently only supports one type of warning, which is a warning \n         on invalid syntax used in the query. For examples of invalid query syntax, \n         see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/searching-example.html#searching-index-query-syntax\">Searching \n            with advanced query syntax</a>.</p>"
+                    }
+                },
+                "SpellCorrectedQueries": {
+                    "target": "com.amazonaws.kendra#SpellCorrectedQueryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of information related to suggested spell corrections for a query.</p>"
                     }
                 }
             }
@@ -8773,7 +8823,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides configuration information for a data source to index\n            documents in an Amazon S3 bucket.</p>"
+                "smithy.api#documentation": "<p>Provides the configuration information to connect to \n            an Amazon S3 bucket.</p>"
             }
         },
         "com.amazonaws.kendra#S3ObjectKey": {
@@ -8837,7 +8887,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Defines configuration for syncing a Salesforce chatter feed. The\n            contents of the object comes from the Salesforce FeedItem\n            table.</p>"
+                "smithy.api#documentation": "<p>The configuration information for syncing a Salesforce chatter feed. The\n            contents of the object comes from the Salesforce FeedItem\n            table.</p>"
             }
         },
         "com.amazonaws.kendra#SalesforceChatterFeedIncludeFilterType": {
@@ -8911,7 +8961,7 @@
                 "StandardObjectAttachmentConfiguration": {
                     "target": "com.amazonaws.kendra#SalesforceStandardObjectAttachmentConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides configuration information for processing attachments to\n            Salesforce standard objects. </p>"
+                        "smithy.api#documentation": "<p>Configuration information for processing attachments to\n            Salesforce standard objects. </p>"
                     }
                 },
                 "IncludeAttachmentFilePatterns": {
@@ -9000,18 +9050,18 @@
                 "StandardKnowledgeArticleTypeConfiguration": {
                     "target": "com.amazonaws.kendra#SalesforceStandardKnowledgeArticleTypeConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides configuration information for standard Salesforce\n            knowledge articles.</p>"
+                        "smithy.api#documentation": "<p>Configuration information for standard Salesforce\n            knowledge articles.</p>"
                     }
                 },
                 "CustomKnowledgeArticleTypeConfigurations": {
                     "target": "com.amazonaws.kendra#SalesforceCustomKnowledgeArticleTypeConfigurationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides configuration information for custom Salesforce knowledge\n            articles.</p>"
+                        "smithy.api#documentation": "<p>Configuration information for custom Salesforce knowledge\n            articles.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies configuration information for the knowledge article\n            types that Amazon Kendra indexes. Amazon Kendra indexes standard knowledge\n            articles and the standard fields of knowledge articles, or the\n            custom fields of custom knowledge articles, but not both </p>"
+                "smithy.api#documentation": "<p>Provides the configuration information for the knowledge article\n            types that Amazon Kendra indexes. Amazon Kendra indexes standard knowledge\n            articles and the standard fields of knowledge articles, or the\n            custom fields of custom knowledge articles, but not both </p>"
             }
         },
         "com.amazonaws.kendra#SalesforceKnowledgeArticleState": {
@@ -9069,7 +9119,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides configuration information for standard Salesforce\n            knowledge articles.</p>"
+                "smithy.api#documentation": "<p>Configuration information for standard Salesforce\n            knowledge articles.</p>"
             }
         },
         "com.amazonaws.kendra#SalesforceStandardObjectAttachmentConfiguration": {
@@ -9089,7 +9139,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides configuration information for processing attachments to\n            Salesforce standard objects. </p>"
+                "smithy.api#documentation": "<p>Provides the configuration information for processing attachments to\n            Salesforce standard objects. </p>"
             }
         },
         "com.amazonaws.kendra#SalesforceStandardObjectConfiguration": {
@@ -9123,7 +9173,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies configuration information for indexing a single standard\n            object.</p>"
+                "smithy.api#documentation": "<p>Provides the configuration information for indexing a single standard\n            object.</p>"
             }
         },
         "com.amazonaws.kendra#SalesforceStandardObjectConfigurationList": {
@@ -9340,7 +9390,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides the configuration information of the seed or starting point URLs to crawl.</p>\n        <p>\n            <i>When selecting websites to index, you must adhere to \n            the <a href=\"https://aws.amazon.com/aup/\">Amazon Acceptable Use Policy</a> \n            and all other Amazon terms. Remember that you must only use Amazon Kendra Web \n            Crawler to index your own webpages, or webpages that you have authorization \n            to index.</i>\n         </p>"
+                "smithy.api#documentation": "<p>Provides the configuration information for the seed or starting point URLs to crawl.</p>\n        <p>\n            <i>When selecting websites to index, you must adhere to \n            the <a href=\"https://aws.amazon.com/aup/\">Amazon Acceptable Use Policy</a> \n            and all other Amazon terms. Remember that you must only use Amazon Kendra Web \n            Crawler to index your own webpages, or webpages that you have authorization \n            to index.</i>\n         </p>"
             }
         },
         "com.amazonaws.kendra#SeedUrlList": {
@@ -9426,13 +9476,13 @@
                 "KnowledgeArticleConfiguration": {
                     "target": "com.amazonaws.kendra#ServiceNowKnowledgeArticleConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides configuration information for crawling knowledge articles\n            in the ServiceNow site.</p>"
+                        "smithy.api#documentation": "<p>Configuration information for crawling knowledge articles\n            in the ServiceNow site.</p>"
                     }
                 },
                 "ServiceCatalogConfiguration": {
                     "target": "com.amazonaws.kendra#ServiceNowServiceCatalogConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides configuration information for crawling service catalogs\n            in the ServiceNow site.</p>"
+                        "smithy.api#documentation": "<p>Configuration information for crawling service catalogs\n            in the ServiceNow site.</p>"
                     }
                 },
                 "AuthenticationType": {
@@ -9443,7 +9493,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides configuration information required to connect to a\n            ServiceNow data source.</p>"
+                "smithy.api#documentation": "<p>Provides the configuration information to connect to \n            ServiceNow as your data source.</p>"
             }
         },
         "com.amazonaws.kendra#ServiceNowHostUrl": {
@@ -9504,7 +9554,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides configuration information for crawling knowledge articles\n            in the ServiceNow site.</p>"
+                "smithy.api#documentation": "<p>Provides the configuration information for crawling knowledge articles\n            in the ServiceNow site.</p>"
             }
         },
         "com.amazonaws.kendra#ServiceNowKnowledgeArticleFilterQuery": {
@@ -9559,7 +9609,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides configuration information for crawling service catalog\n            items in the ServiceNow site</p>"
+                "smithy.api#documentation": "<p>Provides the configuration information for crawling service catalog\n            items in the ServiceNow site</p>"
             }
         },
         "com.amazonaws.kendra#ServiceQuotaExceededException": {
@@ -9649,7 +9699,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides configuration information for connecting to a Microsoft\n            SharePoint data source.</p>"
+                "smithy.api#documentation": "<p>Provides the configuration information to connect to Microsoft\n            SharePoint as your data source.</p>"
             }
         },
         "com.amazonaws.kendra#SharePointUrlList": {
@@ -9715,7 +9765,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides the configuration information of the sitemap URLs to crawl.</p>\n        <p>\n            <i>When selecting websites to index, you must adhere to \n            the <a href=\"https://aws.amazon.com/aup/\">Amazon Acceptable Use Policy</a> \n            and all other Amazon terms. Remember that you must only use Amazon Kendra Web \n            Crawler to index your own webpages, or webpages that you have authorization \n            to index.</i>\n         </p>"
+                "smithy.api#documentation": "<p>Provides the configuration information for the sitemap URLs to crawl.</p>\n        <p>\n            <i>When selecting websites to index, you must adhere to \n            the <a href=\"https://aws.amazon.com/aup/\">Amazon Acceptable Use Policy</a> \n            and all other Amazon terms. Remember that you must only use Amazon Kendra Web \n            Crawler to index your own webpages, or webpages that you have authorization \n            to index.</i>\n         </p>"
             }
         },
         "com.amazonaws.kendra#SiteMapsList": {
@@ -9785,6 +9835,47 @@
                 "smithy.api#documentation": "<p>Specifies the document attribute to use to sort the response to a\n            Amazon Kendra query. You can specify a single attribute for sorting. The\n            attribute must have the <code>Sortable</code> flag set to\n            <code>true</code>, otherwise Amazon Kendra returns an exception.</p>\n        <p>You can sort attributes of the following types.</p>\n        <ul>\n            <li>\n                <p>Date value</p>\n            </li>\n            <li>\n                <p>Long value</p>\n            </li>\n            <li>\n                <p>String value</p>\n            </li>\n         </ul>\n        <p>You can't sort attributes of the following type.</p>\n        <ul>\n            <li>\n                <p>String list value</p>\n            </li>\n         </ul>"
             }
         },
+        "com.amazonaws.kendra#SpellCorrectedQuery": {
+            "type": "structure",
+            "members": {
+                "SuggestedQueryText": {
+                    "target": "com.amazonaws.kendra#SuggestedQueryText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The query with the suggested spell corrections.</p>"
+                    }
+                },
+                "Corrections": {
+                    "target": "com.amazonaws.kendra#CorrectionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The corrected misspelled word or words in a query.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A query with suggested spell corrections. </p>"
+            }
+        },
+        "com.amazonaws.kendra#SpellCorrectedQueryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendra#SpellCorrectedQuery"
+            }
+        },
+        "com.amazonaws.kendra#SpellCorrectionConfiguration": {
+            "type": "structure",
+            "members": {
+                "IncludeQuerySpellCheckSuggestions": {
+                    "target": "com.amazonaws.kendra#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <code>TRUE</code> to suggest spell corrections for queries.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides the configuration information for suggested query spell corrections.</p>\n        <p>Suggested spell corrections are based on words that appear in your indexed documents \n            and how closely a corrected word matches a misspelled word.</p>\n        <p>This feature is designed with certain defaults or limits. For information on the \n            current limits and how to request more support for some limits, see the \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/query-spell-check.html\">Spell \n                Checker documentation</a>.</p>"
+            }
+        },
         "com.amazonaws.kendra#SqlConfiguration": {
             "type": "structure",
             "members": {
@@ -9796,7 +9887,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides information that configures Amazon Kendra to use a SQL\n            database.</p>"
+                "smithy.api#documentation": "<p>Provides the configuration information to use a SQL\n            database.</p>"
             }
         },
         "com.amazonaws.kendra#StartDataSourceSyncJob": {
@@ -10038,6 +10129,15 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 6
+                }
+            }
+        },
+        "com.amazonaws.kendra#SuggestedQueryText": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
                 }
             }
         },
@@ -10562,7 +10662,7 @@
                 "Configuration": {
                     "target": "com.amazonaws.kendra#DataSourceConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configuration information for an Amazon Kendra data source.</p>"
+                        "smithy.api#documentation": "<p>Configuration information for an Amazon Kendra data source you want to update.</p>"
                     }
                 },
                 "Description": {
@@ -10658,7 +10758,7 @@
                 "Configuration": {
                     "target": "com.amazonaws.kendra#ExperienceConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides the user configuration information. This includes the Amazon Web Services SSO\n            field name that contains the identifiers of your users, such as their emails.</p>"
+                        "smithy.api#documentation": "<p>Configuration information for your Amazon Kendra you want to update.</p>"
                     }
                 },
                 "Description": {
@@ -10732,7 +10832,7 @@
                 "DocumentMetadataConfigurationUpdates": {
                     "target": "com.amazonaws.kendra#DocumentMetadataConfigurationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The document metadata to update. </p>"
+                        "smithy.api#documentation": "<p>The document metadata you want to update.</p>"
                     }
                 },
                 "CapacityUnits": {
@@ -10989,13 +11089,13 @@
                 "SeedUrlConfiguration": {
                     "target": "com.amazonaws.kendra#SeedUrlConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides the configuration of the seed or starting point URLs of the websites \n            you want to crawl.</p>\n        <p>You can choose to crawl only the website host names, or the website host names \n            with subdomains, or the website host names with subdomains and other domains \n            that the webpages link to.</p>\n        <p>You can list up to 100 seed URLs.</p>"
+                        "smithy.api#documentation": "<p>Configuration of the seed or starting point URLs of the websites \n            you want to crawl.</p>\n        <p>You can choose to crawl only the website host names, or the website host names \n            with subdomains, or the website host names with subdomains and other domains \n            that the webpages link to.</p>\n        <p>You can list up to 100 seed URLs.</p>"
                     }
                 },
                 "SiteMapsConfiguration": {
                     "target": "com.amazonaws.kendra#SiteMapsConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides the configuration of the sitemap URLs of the websites you want to crawl.</p>\n        <p>Only URLs belonging to the same website host names are crawled. You can list up to \n            three sitemap URLs.</p>"
+                        "smithy.api#documentation": "<p>Configuration of the sitemap URLs of the websites you want to crawl.</p>\n        <p>Only URLs belonging to the same website host names are crawled. You can list up to \n            three sitemap URLs.</p>"
                     }
                 }
             },
@@ -11111,7 +11211,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configuration information for the identifiers of your users.</p>"
+                "smithy.api#documentation": "<p>Provides the configuration information for the identifiers of your users.</p>"
             }
         },
         "com.amazonaws.kendra#UserNameAttributeField": {
@@ -11141,7 +11241,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides configuration information for a token configuration.</p>"
+                "smithy.api#documentation": "<p>Provides the configuration information for a token.</p>"
             }
         },
         "com.amazonaws.kendra#UserTokenConfigurationList": {
@@ -11309,13 +11409,13 @@
                 "ProxyConfiguration": {
                     "target": "com.amazonaws.kendra#ProxyConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides configuration information required to connect to your internal \n            websites via a web proxy.</p>\n        <p>You must provide the website host name and port number. For example, the \n            host name of https://a.example.com/page1.html is \"a.example.com\" and the \n            port is 443, the standard port for HTTPS.</p>\n        <p>Web proxy credentials are optional and you can use them to connect to a \n            web proxy server that requires basic authentication. To store web proxy \n            credentials, you use a secret in <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html\">Secrets Manager</a>.</p>"
+                        "smithy.api#documentation": "<p>Configuration information required to connect to your internal \n            websites via a web proxy.</p>\n        <p>You must provide the website host name and port number. For example, the \n            host name of https://a.example.com/page1.html is \"a.example.com\" and the \n            port is 443, the standard port for HTTPS.</p>\n        <p>Web proxy credentials are optional and you can use them to connect to a \n            web proxy server that requires basic authentication. To store web proxy \n            credentials, you use a secret in <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html\">Secrets Manager</a>.</p>"
                     }
                 },
                 "AuthenticationConfiguration": {
                     "target": "com.amazonaws.kendra#AuthenticationConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides configuration information required to connect to websites using \n            authentication.</p>\n        <p>You can connect to websites using basic authentication of user name and password.</p>\n        <p>You must provide the website host name and port number. For example, the host name \n            of https://a.example.com/page1.html is \"a.example.com\" and the port is 443, the \n            standard port for HTTPS. You use a secret in <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html\">Secrets Manager</a> to store \n            your authentication credentials.</p>"
+                        "smithy.api#documentation": "<p>Configuration information required to connect to websites using \n            authentication.</p>\n        <p>You can connect to websites using basic authentication of user name and password.</p>\n        <p>You must provide the website host name and port number. For example, the host name \n            of https://a.example.com/page1.html is \"a.example.com\" and the port is 443, the \n            standard port for HTTPS. You use a secret in <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html\">Secrets Manager</a> to store \n            your authentication credentials.</p>"
                     }
                 }
             },

@@ -83,7 +83,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An optional category of meeting features that contains audio-specific configurations, such as operating parameters for Amazon Voice Focus.</p>"
+                "smithy.api#documentation": "<p>An optional category of meeting features that contains audio-specific configurations, such as operating parameters for Amazon Voice Focus. </p>"
             }
         },
         "com.amazonaws.chimesdkmeetings#BadRequestException": {
@@ -205,7 +205,7 @@
                     "name": "chime"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>The Amazon Chime SDK meetings APIs in this section allow software developers to create Amazon Chime SDK meetings, set the AWS Regions for meetings, create and manage users, and send and \n            receive meeting notifications. For more information \n            about the meeting APIs, see <a href=\"http://amazonaws.com/chime/latest/APIReference/API_Operations_Amazon_Chime_SDK_meetings\">Amazon Chime SDK meetings</a>.</p>",
+                "smithy.api#documentation": "<p>The Amazon Chime SDK meetings APIs in this section allow software developers to create Amazon Chime SDK meetings, set the AWS Regions for meetings, create and manage users, and send and \n            receive meeting notifications. For more information about the meeting APIs, see <a href=\"https://docs.aws.amazon.com/chime/latest/APIReference/API_Operations_Amazon_Chime_SDK_Meetings.html\">Amazon Chime SDK meetings</a>.</p>",
                 "smithy.api#title": "Amazon Chime SDK Meetings"
             },
             "version": "2021-07-15",
@@ -425,7 +425,7 @@
                 "MediaRegion": {
                     "target": "com.amazonaws.chimesdkmeetings#MediaRegion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Region in which to create the meeting.</p>\n       \n         <p>\n           Available values: \n           <code>af-south-1</code>\n           , \n           <code>ap-northeast-1</code>\n           , \n           <code>ap-northeast-2</code>\n           , \n           <code>ap-south-1</code>\n           , \n           <code>ap-southeast-1</code>\n           , \n           <code>ap-southeast-2</code>\n           , \n           <code>ca-central-1</code>\n           , \n           <code>eu-central-1</code>\n           , \n           <code>eu-north-1</code>\n           , \n           <code>eu-south-1</code>\n           , \n           <code>eu-west-1</code>\n           , \n           <code>eu-west-2</code>\n           , \n           <code>eu-west-3</code>\n           , \n           <code>sa-east-1</code>\n           , \n           <code>us-east-1</code>\n           , \n           <code>us-east-2</code>\n           , \n           <code>us-west-1</code>\n           , \n           <code>us-west-2</code>\n           .\n       </p>",
+                        "smithy.api#documentation": "<p>The Region in which to create the meeting.</p>\n       \n         <p>\n           Available values: \n           <code>af-south-1</code>, \n           <code>ap-northeast-1</code>, \n           <code>ap-northeast-2</code>, \n           <code>ap-south-1</code>, \n           <code>ap-southeast-1</code>, \n           <code>ap-southeast-2</code>,           \n           <code>ca-central-1</code>, \n           <code>eu-central-1</code>, \n           <code>eu-north-1</code>, \n           <code>eu-south-1</code>, \n           <code>eu-west-1</code>, \n           <code>eu-west-2</code>, \n           <code>eu-west-3</code>,            \n           <code>sa-east-1</code>, \n           <code>us-east-1</code>, \n           <code>us-east-2</code>, \n           <code>us-west-1</code>, \n           <code>us-west-2</code>.\n       </p>\n         <p>Available values in AWS GovCloud (US) Regions: <code>us-gov-east-1</code>, <code>us-gov-west-1</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -512,7 +512,7 @@
                 "MediaRegion": {
                     "target": "com.amazonaws.chimesdkmeetings#MediaRegion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Region in which to create the meeting.</p>",
+                        "smithy.api#documentation": "<p>The Region in which to create the meeting.</p>\n       \n         <p>\n           Available values: \n           <code>af-south-1</code>, \n           <code>ap-northeast-1</code>, \n           <code>ap-northeast-2</code>, \n           <code>ap-south-1</code>, \n           <code>ap-southeast-1</code>, \n           <code>ap-southeast-2</code>,           \n           <code>ca-central-1</code>, \n           <code>eu-central-1</code>, \n           <code>eu-north-1</code>, \n           <code>eu-south-1</code>, \n           <code>eu-west-1</code>, \n           <code>eu-west-2</code>, \n           <code>eu-west-3</code>,            \n           <code>sa-east-1</code>, \n           <code>us-east-1</code>, \n           <code>us-east-2</code>, \n           <code>us-west-1</code>, \n           <code>us-west-2</code>.\n       </p>\n         <p>Available values in AWS GovCloud (US) Regions: <code>us-gov-east-1</code>, <code>us-gov-west-1</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -716,8 +716,7 @@
                 "LanguageCode": {
                     "target": "com.amazonaws.chimesdkmeetings#TranscribeLanguageCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code specified for the Amazon Transcribe engine.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The language code specified for the Amazon Transcribe engine.</p>"
                     }
                 },
                 "VocabularyFilterMethod": {
@@ -771,13 +770,31 @@
                 "PiiEntityTypes": {
                     "target": "com.amazonaws.chimesdkmeetings#TranscribePiiEntityTypes",
                     "traits": {
-                        "smithy.api#documentation": "<p>Lists the PII entity types you want to identify or redact. To specify entity types, you must enable <code>ContentIdentificationType</code> or <code>ContentRedactionType</code>.</p>\n            \n            <p>PIIEntityTypes must be comma-separated. The available values are: \n                <code>BANK_ACCOUNT_NUMBER</code>, <code>BANK_ROUTING, CREDIT_DEBIT_NUMBER</code>, <code>CREDIT_DEBIT_CVV</code>, <code>CREDIT_DEBIT_EXPIRY</code>, <code>PIN</code>, <code>EMAIL</code>, \n                <code>ADDRESS</code>, <code>NAME</code>, <code>PHONE</code>, <code>SSN</code>, and <code>ALL</code>.</p>\n            \n            <p>\n            <code>PiiEntityTypes</code> is an optional parameter with a default value of <code>ALL</code>.</p>"
+                        "smithy.api#documentation": "<p>Lists the PII entity types you want to identify or redact. To specify entity types, you must enable <code>ContentIdentificationType</code> or <code>ContentRedactionType</code>.</p>\n        \n        <p>\n            <code>PIIEntityTypes</code> must be comma-separated. The available values are: \n            <code>BANK_ACCOUNT_NUMBER</code>, <code>BANK_ROUTING, CREDIT_DEBIT_NUMBER</code>, <code>CREDIT_DEBIT_CVV</code>, <code>CREDIT_DEBIT_EXPIRY</code>, <code>PIN</code>, <code>EMAIL</code>, \n            <code>ADDRESS</code>, <code>NAME</code>, <code>PHONE</code>, <code>SSN</code>, and <code>ALL</code>.</p>\n        \n        <p>\n            <code>PiiEntityTypes</code> is an optional parameter with a default value of <code>ALL</code>.</p>"
                     }
                 },
                 "LanguageModelName": {
                     "target": "com.amazonaws.chimesdkmeetings#TranscribeLanguageModelName",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the language model used during transcription.</p>"
+                    }
+                },
+                "IdentifyLanguage": {
+                    "target": "com.amazonaws.chimesdkmeetings#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Automatically identifies the language spoken in media files.</p>"
+                    }
+                },
+                "LanguageOptions": {
+                    "target": "com.amazonaws.chimesdkmeetings#TranscribeLanguageOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Language codes for the languages that you want to identify. You must provide at least 2 codes.</p>"
+                    }
+                },
+                "PreferredLanguage": {
+                    "target": "com.amazonaws.chimesdkmeetings#TranscribeLanguageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Language code for the preferred language.</p>"
                     }
                 }
             },
@@ -1143,7 +1160,7 @@
                 "MediaRegion": {
                     "target": "com.amazonaws.chimesdkmeetings#MediaRegion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Region in which you create the meeting. Available values: <code>af-south-1</code>, <code>ap-northeast-1</code>, \n            <code>ap-northeast-2</code>, <code>ap-south-1</code>, <code>ap-southeast-1</code>, <code>ap-southeast-2</code>, <code>ca-central-1</code>, \n            <code>eu-central-1</code>, <code>eu-north-1</code>, <code>eu-south-1</code>,\n            <code>eu-west-1</code>, <code>eu-west-2</code>, <code>eu-west-3</code>,\n            <code>sa-east-1</code>, <code>us-east-1</code>, <code>us-east-2</code>,\n            <code>us-west-1</code>, <code>us-west-2</code>.</p>"
+                        "smithy.api#documentation": "<p>The Region in which you create the meeting. Available values: <code>af-south-1</code>, <code>ap-northeast-1</code>, \n            <code>ap-northeast-2</code>, <code>ap-south-1</code>, <code>ap-southeast-1</code>, <code>ap-southeast-2</code>, <code>ca-central-1</code>, \n            <code>eu-central-1</code>, <code>eu-north-1</code>, <code>eu-south-1</code>,\n            <code>eu-west-1</code>, <code>eu-west-2</code>, <code>eu-west-3</code>,\n            <code>sa-east-1</code>, <code>us-east-1</code>, <code>us-east-2</code>,\n            <code>us-west-1</code>, <code>us-west-2</code>.</p>\n        <p>Available values in AWS GovCloud (US) Regions: <code>us-gov-east-1</code>, <code>us-gov-west-1</code>.</p>"
                     }
                 },
                 "MediaPlacement": {
@@ -1189,7 +1206,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration settings of the features available to a meeting.</p>"
+                "smithy.api#documentation": "<p>The configuration settings of the features available to a meeting.></p>"
             }
         },
         "com.amazonaws.chimesdkmeetings#NotFoundException": {
@@ -1480,6 +1497,16 @@
                     "max": 200
                 },
                 "smithy.api#pattern": "^[0-9a-zA-Z._-]+$"
+            }
+        },
+        "com.amazonaws.chimesdkmeetings#TranscribeLanguageOptions": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                },
+                "smithy.api#pattern": "^[a-zA-Z-,]+$"
             }
         },
         "com.amazonaws.chimesdkmeetings#TranscribeMedicalContentIdentificationType": {

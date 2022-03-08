@@ -40,6 +40,9 @@ type UpdateExperimentTemplateInput struct {
 	// A description for the template.
 	Description *string
 
+	// The configuration for experiment logging.
+	LogConfiguration *types.UpdateExperimentTemplateLogConfigurationInput
+
 	// The Amazon Resource Name (ARN) of an IAM role that grants the FIS service
 	// permission to perform service actions on your behalf.
 	RoleArn *string

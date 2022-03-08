@@ -254,6 +254,23 @@ func (DataRepositoryTaskType) Values() []DataRepositoryTaskType {
 	}
 }
 
+type DeleteFileSystemOpenZFSOption string
+
+// Enum values for DeleteFileSystemOpenZFSOption
+const (
+	DeleteFileSystemOpenZFSOptionDeleteChildVolumesAndSnapshots DeleteFileSystemOpenZFSOption = "DELETE_CHILD_VOLUMES_AND_SNAPSHOTS"
+)
+
+// Values returns all known values for DeleteFileSystemOpenZFSOption. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (DeleteFileSystemOpenZFSOption) Values() []DeleteFileSystemOpenZFSOption {
+	return []DeleteFileSystemOpenZFSOption{
+		"DELETE_CHILD_VOLUMES_AND_SNAPSHOTS",
+	}
+}
+
 type DeleteOpenZFSVolumeOption string
 
 // Enum values for DeleteOpenZFSVolumeOption
@@ -541,6 +558,7 @@ type OpenZFSDataCompressionType string
 const (
 	OpenZFSDataCompressionTypeNone OpenZFSDataCompressionType = "NONE"
 	OpenZFSDataCompressionTypeZstd OpenZFSDataCompressionType = "ZSTD"
+	OpenZFSDataCompressionTypeLz4  OpenZFSDataCompressionType = "LZ4"
 )
 
 // Values returns all known values for OpenZFSDataCompressionType. Note that this
@@ -550,6 +568,7 @@ func (OpenZFSDataCompressionType) Values() []OpenZFSDataCompressionType {
 	return []OpenZFSDataCompressionType{
 		"NONE",
 		"ZSTD",
+		"LZ4",
 	}
 }
 

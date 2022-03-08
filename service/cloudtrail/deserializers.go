@@ -9148,6 +9148,19 @@ func awsAwsjson11_deserializeDocumentQueryStatistics(v **types.QueryStatistics, 
 
 	for key, value := range shape {
 		switch key {
+		case "BytesScanned":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.BytesScanned = ptr.Int64(i64)
+			}
+
 		case "ResultsCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -9205,6 +9218,19 @@ func awsAwsjson11_deserializeDocumentQueryStatisticsForDescribeQuery(v **types.Q
 
 	for key, value := range shape {
 		switch key {
+		case "BytesScanned":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.BytesScanned = ptr.Int64(i64)
+			}
+
 		case "CreationTime":
 			if value != nil {
 				switch jtv := value.(type) {

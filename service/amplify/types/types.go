@@ -61,7 +61,7 @@ type App struct {
 	// This member is required.
 	Platform Platform
 
-	// The repository for the Amplify app.
+	// The Git repository for the Amplify app.
 	//
 	// This member is required.
 	Repository *string
@@ -105,6 +105,12 @@ type App struct {
 
 	// Describes the information about a production branch of the Amplify app.
 	ProductionBranch *ProductionBranch
+
+	// The authentication protocol to use to access the Git repository for an Amplify
+	// app. For a GitHub repository, specify TOKEN. For an Amazon Web Services
+	// CodeCommit repository, specify SIGV4. For GitLab and Bitbucket repositories,
+	// specify SSH.
+	RepositoryCloneMethod RepositoryCloneMethod
 
 	// The tag for the Amplify app.
 	Tags map[string]string

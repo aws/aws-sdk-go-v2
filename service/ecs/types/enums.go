@@ -746,6 +746,7 @@ type PropagateTags string
 const (
 	PropagateTagsTaskDefinition PropagateTags = "TASK_DEFINITION"
 	PropagateTagsService        PropagateTags = "SERVICE"
+	PropagateTagsNone           PropagateTags = "NONE"
 )
 
 // Values returns all known values for PropagateTags. Note that this can be
@@ -755,6 +756,7 @@ func (PropagateTags) Values() []PropagateTags {
 	return []PropagateTags{
 		"TASK_DEFINITION",
 		"SERVICE",
+		"NONE",
 	}
 }
 

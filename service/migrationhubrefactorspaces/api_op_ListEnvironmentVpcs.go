@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all the virtual private clouds (VPCs) that are part of an Amazon Web
-// Services Migration Hub Refactor Spaces environment.
+// Lists all Amazon Web Services Migration Hub Refactor Spaces service virtual
+// private clouds (VPCs) that are part of the environment.
 func (c *Client) ListEnvironmentVpcs(ctx context.Context, params *ListEnvironmentVpcsInput, optFns ...func(*Options)) (*ListEnvironmentVpcsOutput, error) {
 	if params == nil {
 		params = &ListEnvironmentVpcsInput{}

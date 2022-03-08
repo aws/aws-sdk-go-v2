@@ -17,7 +17,7 @@ import (
 // Amazon Timestream data. Query will time out after 60 seconds. You must update
 // the default timeout in the SDK to support a timeout of 60 seconds. See the code
 // sample
-// (https://docs.aws.amazon.com/Timestream/latest/developerguide/code-samples.run-query.html)
+// (https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.run-query.html)
 // for details. Your query request will fail in the following cases:
 //
 // * If you

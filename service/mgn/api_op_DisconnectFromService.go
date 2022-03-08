@@ -16,13 +16,13 @@ import (
 // Migration Service for enabling the replication of these source servers will be
 // terminated / deleted within 90 minutes. Launched Test or Cutover instances will
 // NOT be terminated. If the agent on the source server has not been prevented from
-// communciating with the Application Migration Service service, then it will
+// communicating with the Application Migration Service service, then it will
 // receive a command to uninstall itself (within approximately 10 minutes). The
 // following properties of the SourceServer will be changed immediately:
 // dataReplicationInfo.dataReplicationState will be set to DISCONNECTED; The
 // totalStorageBytes property for each of dataReplicationInfo.replicatedDisks will
 // be set to zero; dataReplicationInfo.lagDuration and
-// dataReplicationInfo.lagDurationwill be nullified.
+// dataReplicationInfo.lagDuration will be nullified.
 func (c *Client) DisconnectFromService(ctx context.Context, params *DisconnectFromServiceInput, optFns ...func(*Options)) (*DisconnectFromServiceOutput, error) {
 	if params == nil {
 		params = &DisconnectFromServiceInput{}

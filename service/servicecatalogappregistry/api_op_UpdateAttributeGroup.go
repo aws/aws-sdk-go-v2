@@ -44,6 +44,8 @@ type UpdateAttributeGroupInput struct {
 
 	// The new name of the attribute group. The name must be unique in the region in
 	// which you are updating the attribute group.
+	//
+	// Deprecated: Name update for attribute group is deprecated.
 	Name *string
 
 	noSmithyDocumentSerde

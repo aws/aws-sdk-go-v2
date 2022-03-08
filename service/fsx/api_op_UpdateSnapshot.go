@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the name of a snapshot.
+// Updates the name of an Amazon FSx for OpenZFS snapshot.
 func (c *Client) UpdateSnapshot(ctx context.Context, params *UpdateSnapshotInput, optFns ...func(*Options)) (*UpdateSnapshotOutput, error) {
 	if params == nil {
 		params = &UpdateSnapshotInput{}

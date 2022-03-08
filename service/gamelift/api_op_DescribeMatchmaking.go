@@ -20,9 +20,9 @@ import (
 // practice can cause you to exceed your API limit, which results in errors.
 // Instead, as a best practice, set up an Amazon Simple Notification Service to
 // receive notifications, and provide the topic ARN in the matchmaking
-// configuration. Continuously poling ticket status with DescribeMatchmaking should
-// only be used for games in development with low matchmaking usage. Learn more
-// Add FlexMatch to a game client
+// configuration. Continuously polling ticket status with DescribeMatchmaking
+// should only be used for games in development with low matchmaking usage. Learn
+// more  Add FlexMatch to a game client
 // (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-client.html)
 // Set Up FlexMatch event notification
 // (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-notification.html)

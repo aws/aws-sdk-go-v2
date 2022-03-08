@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all vCenter clients.
+// Returns a list of the installed vCenter clients.
 func (c *Client) DescribeVcenterClients(ctx context.Context, params *DescribeVcenterClientsInput, optFns ...func(*Options)) (*DescribeVcenterClientsOutput, error) {
 	if params == nil {
 		params = &DescribeVcenterClientsInput{}

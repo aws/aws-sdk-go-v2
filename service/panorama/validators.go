@@ -721,6 +721,26 @@ func validateNetworkPayload(v *types.NetworkPayload) error {
 			invalidParams.AddNested("Ethernet1", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Ntp != nil {
+		if err := validateNtpPayload(v.Ntp); err != nil {
+			invalidParams.AddNested("Ntp", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNtpPayload(v *types.NtpPayload) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NtpPayload"}
+	if v.NtpServers == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NtpServers"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

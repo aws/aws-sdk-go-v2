@@ -615,8 +615,7 @@ func (e *SourceBackupUnavailable) ErrorMessage() string {
 func (e *SourceBackupUnavailable) ErrorCode() string             { return "SourceBackupUnavailable" }
 func (e *SourceBackupUnavailable) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// No Amazon FSx for NetApp ONTAP SVMs were found based upon the supplied
-// parameters.
+// No FSx for ONTAP SVMs were found based upon the supplied parameters.
 type StorageVirtualMachineNotFound struct {
 	Message *string
 
@@ -654,8 +653,7 @@ func (e *UnsupportedOperation) ErrorMessage() string {
 func (e *UnsupportedOperation) ErrorCode() string             { return "UnsupportedOperation" }
 func (e *UnsupportedOperation) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// No Amazon FSx for NetApp ONTAP volumes were found based upon the supplied
-// parameters.
+// No Amazon FSx volumes were found based upon the supplied parameters.
 type VolumeNotFound struct {
 	Message *string
 

@@ -39,7 +39,7 @@ type ListDataViewsInput struct {
 	// The maximum number of results per page.
 	MaxResults int32
 
-	// A token indicating where a results page should begin.
+	// A token that indicates where a results page should begin.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -50,7 +50,7 @@ type ListDataViewsOutput struct {
 	// A list of Dataviews.
 	DataViews []types.DataViewSummary
 
-	// A token indicating where a results page should begin.
+	// A token that indicates where a results page should begin.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

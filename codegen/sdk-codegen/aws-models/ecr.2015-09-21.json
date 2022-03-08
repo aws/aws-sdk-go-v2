@@ -353,7 +353,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Checks the availability of one or more image layers in a repository.</p>\n        <p>When an image is pushed to a repository, each image layer is checked to verify if it\n            has been uploaded before. If it has been uploaded, then the image layer is\n            skipped.</p> \n         <note>\n            <p>This operation is used by the Amazon ECR proxy and is not generally used by\n        customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Checks the availability of one or more image layers in a repository.</p>\n        <p>When an image is pushed to a repository, each image layer is checked to verify if it\n            has been uploaded before. If it has been uploaded, then the image layer is\n            skipped.</p>\n        <note>\n            <p>This operation is used by the Amazon ECR proxy and is not generally used by\n        customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p>\n         </note>"
             }
         },
         "com.amazonaws.ecr#BatchCheckLayerAvailabilityRequest": {
@@ -651,7 +651,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Informs Amazon ECR that the image layer upload has completed for a specified registry,\n            repository name, and upload ID. You can optionally provide a <code>sha256</code> digest\n            of the image layer for data validation purposes.</p>\n        <p>When an image is pushed, the CompleteLayerUpload API is called once per each new image\n            layer to verify that the upload has completed.</p> \n         <note>\n            <p>This operation is used by the Amazon ECR proxy and is not generally used by\n        customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Informs Amazon ECR that the image layer upload has completed for a specified registry,\n            repository name, and upload ID. You can optionally provide a <code>sha256</code> digest\n            of the image layer for data validation purposes.</p>\n        <p>When an image is pushed, the CompleteLayerUpload API is called once per each new image\n            layer to verify that the upload has completed.</p>\n        <note>\n            <p>This operation is used by the Amazon ECR proxy and is not generally used by\n        customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p>\n         </note>"
             }
         },
         "com.amazonaws.ecr#CompleteLayerUploadRequest": {
@@ -2143,7 +2143,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the pre-signed Amazon S3 download URL corresponding to an image layer. You can\n            only get URLs for image layers that are referenced in an image.</p>\n        <p>When an image is pulled, the GetDownloadUrlForLayer API is called once per image layer\n            that is not already cached.</p> \n         <note>\n            <p>This operation is used by the Amazon ECR proxy and is not generally used by\n        customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Retrieves the pre-signed Amazon S3 download URL corresponding to an image layer. You can\n            only get URLs for image layers that are referenced in an image.</p>\n        <p>When an image is pulled, the GetDownloadUrlForLayer API is called once per image layer\n            that is not already cached.</p>\n        <note>\n            <p>This operation is used by the Amazon ECR proxy and is not generally used by\n        customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p>\n         </note>"
             }
         },
         "com.amazonaws.ecr#GetDownloadUrlForLayerRequest": {
@@ -2703,6 +2703,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The artifact media type of the image.</p>"
                     }
+                },
+                "lastRecordedPullTime": {
+                    "target": "com.amazonaws.ecr#RecordedPullTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time, expressed in standard JavaScript date format, when Amazon ECR recorded\n            the last image pull.</p>\n        <note>\n            <p>Amazon ECR refreshes the last image pull timestamp at least once every 24 hours. For\n                example, if you pull an image once a day then the <code>lastRecordedPullTime</code>\n                timestamp will indicate the exact time that the image was last pulled. However, if\n                you pull an image once an hour, because Amazon ECR refreshes the\n                    <code>lastRecordedPullTime</code> timestamp at least once every 24 hours, the\n                result may not be the exact time that the image was last pulled.</p>\n        </note>"
+                    }
                 }
             },
             "traits": {
@@ -3116,7 +3122,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Notifies Amazon ECR that you intend to upload an image layer.</p>\n        <p>When an image is pushed, the InitiateLayerUpload API is called once per image layer\n            that has not already been uploaded. Whether or not an image layer has been uploaded is\n            determined by the BatchCheckLayerAvailability API action.</p> \n         <note>\n            <p>This operation is used by the Amazon ECR proxy and is not generally used by\n        customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Notifies Amazon ECR that you intend to upload an image layer.</p>\n        <p>When an image is pushed, the InitiateLayerUpload API is called once per image layer\n            that has not already been uploaded. Whether or not an image layer has been uploaded is\n            determined by the BatchCheckLayerAvailability API action.</p>\n        <note>\n            <p>This operation is used by the Amazon ECR proxy and is not generally used by\n        customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p>\n         </note>"
             }
         },
         "com.amazonaws.ecr#InitiateLayerUploadRequest": {
@@ -4116,7 +4122,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the image scanning configuration for the specified repository.</p>"
+                "smithy.api#documentation": "<important>\n            <p>The <code>PutImageScanningConfiguration</code> API is being deprecated, in favor\n                of specifying the image scanning configuration at the registry level. For more\n                information, see <a>PutRegistryScanningConfiguration</a>.</p>\n        </important>\n        <p>Updates the image scanning configuration for the specified repository.</p>"
             }
         },
         "com.amazonaws.ecr#PutImageScanningConfigurationRequest": {
@@ -4390,7 +4396,7 @@
                 "scanType": {
                     "target": "com.amazonaws.ecr#ScanType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The scanning type to set for the registry.</p>\n        <p>By default, the <code>BASIC</code> scan type is used. When basic scanning is set, you\n            may specify filters to determine which individual repositories, or all repositories, are\n            scanned when new images are pushed. Alternatively, you can do manual scans of images\n            with basic scanning.</p>\n        <p>When the <code>ENHANCED</code> scan type is set, Amazon Inspector provides automated, continuous\n            scanning of all repositories in your registry.</p>"
+                        "smithy.api#documentation": "<p>The scanning type to set for the registry.</p>\n        <p>When a registry scanning configuration is not defined, by default the\n                <code>BASIC</code> scan type is used. When basic scanning is used, you may specify\n            filters to determine which individual repositories, or all repositories, are scanned\n            when new images are pushed to those repositories. Alternatively, you can do manual scans\n            of images with basic scanning.</p>\n        <p>When the <code>ENHANCED</code> scan type is set, Amazon Inspector provides automated\n            vulnerability scanning. You may choose between continuous scanning or scan on push and\n            you may specify filters to determine which individual repositories, or all repositories,\n            are scanned.</p>"
                     }
                 },
                 "rules": {
@@ -4484,6 +4490,9 @@
         "com.amazonaws.ecr#RecommendationText": {
             "type": "string"
         },
+        "com.amazonaws.ecr#RecordedPullTimestamp": {
+            "type": "timestamp"
+        },
         "com.amazonaws.ecr#ReferenceUrlsList": {
             "type": "list",
             "member": {
@@ -4565,7 +4574,7 @@
                 "scanFrequency": {
                     "target": "com.amazonaws.ecr#ScanFrequency",
                     "traits": {
-                        "smithy.api#documentation": "<p>The frequency that scans are performed at for a private registry.</p>",
+                        "smithy.api#documentation": "<p>The frequency that scans are performed at for a private registry. When the\n                <code>ENHANCED</code> scan type is specified, the supported scan frequencies are\n                <code>CONTINUOUS_SCAN</code> and <code>SCAN_ON_PUSH</code>. When the\n                <code>BASIC</code> scan type is specified, the <code>SCAN_ON_PUSH</code> and\n                <code>MANUAL</code> scan frequencies are supported.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5546,12 +5555,12 @@
                 "Value": {
                     "target": "com.amazonaws.ecr#TagValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The optional part of a key-value pair that make up a tag. A <code>value</code> acts as\n            a descriptor within a tag category (key).</p>"
+                        "smithy.api#documentation": "<p>A <code>value</code> acts as a descriptor within a tag category (key).</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The metadata that you apply to a resource to help you categorize and organize them.\n            Each tag consists of a key and an optional value, both of which you define.\n            Tag keys can have a maximum character length of 128 characters, and tag values can have\n            a maximum length of 256 characters.</p>"
+                "smithy.api#documentation": "<p>The metadata to apply to a resource to help you categorize and organize them. Each tag\n            consists of a key and a value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have\n            a maximum length of 256 characters.</p>"
             }
         },
         "com.amazonaws.ecr#TagKey": {
@@ -5784,7 +5793,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Uploads an image layer part to Amazon ECR.</p>\n        <p>When an image is pushed, each new image layer is uploaded in parts. The maximum size\n            of each image layer part can be 20971520 bytes (or about 20MB). The UploadLayerPart API\n            is called once per each new image layer part.</p> \n         <note>\n            <p>This operation is used by the Amazon ECR proxy and is not generally used by\n        customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Uploads an image layer part to Amazon ECR.</p>\n        <p>When an image is pushed, each new image layer is uploaded in parts. The maximum size\n            of each image layer part can be 20971520 bytes (or about 20MB). The UploadLayerPart API\n            is called once per each new image layer part.</p>\n        <note>\n            <p>This operation is used by the Amazon ECR proxy and is not generally used by\n        customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p>\n         </note>"
             }
         },
         "com.amazonaws.ecr#UploadLayerPartRequest": {

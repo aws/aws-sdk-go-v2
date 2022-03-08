@@ -3173,6 +3173,12 @@
                         "smithy.api#documentation": "<p>The properties required to query Zendesk.</p>"
                     }
                 },
+                "Marketo": {
+                    "target": "com.amazonaws.appflow#MarketoDestinationProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The properties required to query Marketo.</p>"
+                    }
+                },
                 "CustomConnector": {
                     "target": "com.amazonaws.appflow#CustomConnectorDestinationProperties",
                     "traits": {
@@ -4748,6 +4754,24 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p> The connector-specific profile properties required when using Marketo. </p>"
+            }
+        },
+        "com.amazonaws.appflow#MarketoDestinationProperties": {
+            "type": "structure",
+            "members": {
+                "object": {
+                    "target": "com.amazonaws.appflow#Object",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The object specified in the Marketo flow destination.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "errorHandlingConfig": {
+                    "target": "com.amazonaws.appflow#ErrorHandlingConfig"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The properties that Amazon AppFlow applies when you use Marketo as a flow destination.</p>"
             }
         },
         "com.amazonaws.appflow#MarketoMetadata": {

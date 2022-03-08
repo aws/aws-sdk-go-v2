@@ -7,6 +7,48 @@ import (
 	"time"
 )
 
+// Represents the event action configuration for an element of a Component or
+// ComponentChild. Use for the workflow feature in Amplify Studio that allows you
+// to bind events and actions to components. ActionParameters defines the action
+// that is performed when an event occurs on the component.
+type ActionParameters struct {
+
+	// The HTML anchor link to the location to open. Specify this value for a
+	// navigation action.
+	Anchor *ComponentProperty
+
+	// A dictionary of key-value pairs mapping Amplify Studio properties to fields in a
+	// data model. Use when the action performs an operation on an Amplify DataStore
+	// model.
+	Fields map[string]ComponentProperty
+
+	// Specifies whether the user should be signed out globally. Specify this value for
+	// an auth sign out action.
+	Global *ComponentProperty
+
+	// The unique ID of the component that the ActionParameters apply to.
+	Id *ComponentProperty
+
+	// The name of the data model. Use when the action performs an operation on an
+	// Amplify DataStore model.
+	Model *string
+
+	// A key-value pair that specifies the state property name and its initial value.
+	State *MutationActionSetStateParameter
+
+	// The element within the same component to modify when the action occurs.
+	Target *ComponentProperty
+
+	// The type of navigation action. Valid values are url and anchor. This value is
+	// required for a navigation action.
+	Type *ComponentProperty
+
+	// The URL to the location to open. Specify this value for a navigation action.
+	Url *ComponentProperty
+
+	noSmithyDocumentSerde
+}
+
 // Contains the configuration settings for a user interface (UI) element for an
 // Amplify app. A component is configured as a primary, stand-alone UI element. Use
 // ComponentChild to configure an instance of a Component. A ComponentChild
@@ -18,7 +60,8 @@ type Component struct {
 	// This member is required.
 	AppId *string
 
-	// The information to connect a component's properties to data at runtime.
+	// The information to connect a component's properties to data at runtime. You
+	// can't specify tags as a valid property for bindingProperties.
 	//
 	// This member is required.
 	BindingProperties map[string]ComponentBindingPropertiesValue
@@ -50,12 +93,14 @@ type Component struct {
 	Name *string
 
 	// Describes the component's properties that can be overriden in a customized
-	// instance of the component.
+	// instance of the component. You can't specify tags as a valid property for
+	// overrides.
 	//
 	// This member is required.
 	Overrides map[string]map[string]string
 
-	// Describes the component's properties.
+	// Describes the component's properties. You can't specify tags as a valid property
+	// for properties.
 	//
 	// This member is required.
 	Properties map[string]ComponentProperty
@@ -70,11 +115,20 @@ type Component struct {
 	Children []ComponentChild
 
 	// The data binding configuration for the component's properties. Use this for a
-	// collection component.
+	// collection component. You can't specify tags as a valid property for
+	// collectionProperties.
 	CollectionProperties map[string]ComponentDataConfiguration
+
+	// Describes the events that can be raised on the component. Use for the workflow
+	// feature in Amplify Studio that allows you to bind events and actions to
+	// components.
+	Events map[string]ComponentEvent
 
 	// The time that the component was modified.
 	ModifiedAt *time.Time
+
+	// The schema version of the component when it was imported.
+	SchemaVersion *string
 
 	// The unique ID of the component in its original source system, such as Figma.
 	SourceId *string
@@ -146,13 +200,19 @@ type ComponentChild struct {
 	// This member is required.
 	Name *string
 
-	// Describes the properties of the child component.
+	// Describes the properties of the child component. You can't specify tags as a
+	// valid property for properties.
 	//
 	// This member is required.
 	Properties map[string]ComponentProperty
 
 	// The list of ComponentChild instances for this component.
 	Children []ComponentChild
+
+	// Describes the events that can be raised on the child component. Use for the
+	// workflow feature in Amplify Studio that allows you to bind events and actions to
+	// components.
+	Events map[string]ComponentEvent
 
 	noSmithyDocumentSerde
 }
@@ -170,6 +230,9 @@ type ComponentConditionProperty struct {
 
 	// The value of the property to evaluate.
 	Operand *string
+
+	// The type of the property to evaluate.
+	OperandType *string
 
 	// The operator to use to perform the evaluation, such as eq to represent equals.
 	Operator *string
@@ -205,6 +268,20 @@ type ComponentDataConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the configuration of an event. You can bind an event and a
+// corresponding action to a Component or a ComponentChild. A button click is an
+// example of an event.
+type ComponentEvent struct {
+
+	// The action to perform when a specific event is raised.
+	Action *string
+
+	// Describes information about the action.
+	Parameters *ActionParameters
+
+	noSmithyDocumentSerde
+}
+
 // Describes the configuration for all of a component's properties. Use
 // ComponentProperty to specify the values to render or bind by default.
 type ComponentProperty struct {
@@ -219,11 +296,14 @@ type ComponentProperty struct {
 	// collection components.
 	CollectionBindingProperties *ComponentPropertyBindingProperties
 
+	// The name of the component that is affected by an event.
+	ComponentName *string
+
 	// A list of component properties to concatenate to create the value to assign to
 	// this component property.
 	Concat []ComponentProperty
 
-	// The conditional expression to use to assign a value to the component property..
+	// The conditional expression to use to assign a value to the component property.
 	Condition *ComponentConditionProperty
 
 	// Specifies whether the user configured the property in Amplify Studio after
@@ -236,12 +316,15 @@ type ComponentProperty struct {
 	// An event that occurs in your app. Use this for workflow data binding.
 	Event *string
 
-	// The default value assigned to property when the component is imported into an
-	// app.
+	// The default value assigned to the property when the component is imported into
+	// an app.
 	ImportedValue *string
 
 	// The data model to use to assign a value to the component property.
 	Model *string
+
+	// The name of the component's property that is affected by an event.
+	Property *string
 
 	// The component type.
 	Type *string
@@ -308,10 +391,12 @@ type ComponentSummary struct {
 type ComponentVariant struct {
 
 	// The properties of the component variant that can be overriden when customizing
-	// an instance of the component.
+	// an instance of the component. You can't specify tags as a valid property for
+	// overrides.
 	Overrides map[string]map[string]string
 
-	// The combination of variants that comprise this variant.
+	// The combination of variants that comprise this variant. You can't specify tags
+	// as a valid property for variantValues.
 	VariantValues map[string]string
 
 	noSmithyDocumentSerde
@@ -358,6 +443,13 @@ type CreateComponentData struct {
 	// The data binding configuration for customizing a component's properties. Use
 	// this for a collection component.
 	CollectionProperties map[string]ComponentDataConfiguration
+
+	// The event configuration for the component. Use for the workflow feature in
+	// Amplify Studio that allows you to bind events and actions to components.
+	Events map[string]ComponentEvent
+
+	// The schema version of the component when it was imported.
+	SchemaVersion *string
 
 	// The unique ID of the component in its original source system, such as Figma.
 	SourceId *string
@@ -419,6 +511,28 @@ type FormBindingElement struct {
 	//
 	// This member is required.
 	Property *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents the state configuration when an action modifies a property of another
+// element within the same component.
+type MutationActionSetStateParameter struct {
+
+	// The name of the component that is being modified.
+	//
+	// This member is required.
+	ComponentName *string
+
+	// The name of the component property to apply the state configuration to.
+	//
+	// This member is required.
+	Property *string
+
+	// The state configuration to assign to the property.
+	//
+	// This member is required.
+	Set *ComponentProperty
 
 	noSmithyDocumentSerde
 }
@@ -587,6 +701,10 @@ type UpdateComponentData struct {
 	// custom component.
 	ComponentType *string
 
+	// The event configuration for the component. Use for the workflow feature in
+	// Amplify Studio that allows you to bind events and actions to components.
+	Events map[string]ComponentEvent
+
 	// The unique ID of the component to update.
 	Id *string
 
@@ -598,6 +716,9 @@ type UpdateComponentData struct {
 
 	// Describes the component's properties.
 	Properties map[string]ComponentProperty
+
+	// The schema version of the component when it was imported.
+	SchemaVersion *string
 
 	// The unique ID of the component in its original source system, such as Figma.
 	SourceId *string

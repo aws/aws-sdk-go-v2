@@ -17,10 +17,10 @@ import (
 // Cutover instances will NOT be terminated. The AWS Replication Agent will receive
 // a command to uninstall itself (within 10 minutes). The following properties of
 // the SourceServer will be changed immediately:
-// dataReplicationInfo.dataReplicationState will be to DISCONNECTED; The
+// dataReplicationInfo.dataReplicationState will be changed to DISCONNECTED; The
 // SourceServer.lifeCycle.state will be changed to CUTOVER; The totalStorageBytes
 // property fo each of dataReplicationInfo.replicatedDisks will be set to zero;
-// dataReplicationInfo.lagDuration and dataReplicationInfo.lagDurationwill be
+// dataReplicationInfo.lagDuration and dataReplicationInfo.lagDuration will be
 // nullified.
 func (c *Client) FinalizeCutover(ctx context.Context, params *FinalizeCutoverInput, optFns ...func(*Options)) (*FinalizeCutoverOutput, error) {
 	if params == nil {
@@ -39,7 +39,7 @@ func (c *Client) FinalizeCutover(ctx context.Context, params *FinalizeCutoverInp
 
 type FinalizeCutoverInput struct {
 
-	// Request to finalize Cutover by Soure Server ID.
+	// Request to finalize Cutover by Source Server ID.
 	//
 	// This member is required.
 	SourceServerID *string

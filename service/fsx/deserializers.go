@@ -9910,6 +9910,19 @@ func awsAwsjson11_deserializeDocumentOpenZFSVolumeConfiguration(v **types.OpenZF
 				sv.ReadOnly = ptr.Bool(jtv)
 			}
 
+		case "RecordSizeKiB":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected IntegerRecordSizeKiB to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.RecordSizeKiB = ptr.Int32(int32(i64))
+			}
+
 		case "StorageCapacityQuotaGiB":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10305,6 +10318,11 @@ func awsAwsjson11_deserializeDocumentSnapshot(v **types.Snapshot, value interfac
 					return fmt.Errorf("expected SnapshotLifecycle to be of type string, got %T instead", value)
 				}
 				sv.Lifecycle = types.SnapshotLifecycle(jtv)
+			}
+
+		case "LifecycleTransitionReason":
+			if err := awsAwsjson11_deserializeDocumentLifecycleTransitionReason(&sv.LifecycleTransitionReason, value); err != nil {
+				return err
 			}
 
 		case "Name":

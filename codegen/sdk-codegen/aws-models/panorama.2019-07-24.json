@@ -1,33 +1,5 @@
 {
     "smithy": "1.0",
-    "metadata": {
-        "suppressions": [
-            {
-                "id": "HttpMethodSemantics",
-                "namespace": "*"
-            },
-            {
-                "id": "HttpResponseCodeSemantics",
-                "namespace": "*"
-            },
-            {
-                "id": "PaginatedTrait",
-                "namespace": "*"
-            },
-            {
-                "id": "HttpHeaderTrait",
-                "namespace": "*"
-            },
-            {
-                "id": "HttpUriConflict",
-                "namespace": "*"
-            },
-            {
-                "id": "Service",
-                "namespace": "*"
-            }
-        ]
-    },
     "shapes": {
         "com.amazonaws.panorama#AccessDeniedException": {
             "type": "structure",
@@ -43,6 +15,26 @@
                 "smithy.api#documentation": "<p>The requestor does not have permission to access the target action or resource.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.panorama#AlternateSoftwareMetadata": {
+            "type": "structure",
+            "members": {
+                "Version": {
+                    "target": "com.amazonaws.panorama#Version",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The appliance software version.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about a beta appliance software update.</p>"
+            }
+        },
+        "com.amazonaws.panorama#AlternateSoftwares": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.panorama#AlternateSoftwareMetadata"
             }
         },
         "com.amazonaws.panorama#ApplicationInstance": {
@@ -230,10 +222,7 @@
             }
         },
         "com.amazonaws.panorama#Boolean": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.panorama#Bucket": {
             "type": "string"
@@ -882,7 +871,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a package.</p>",
+                "smithy.api#documentation": "<p>Deletes a package.</p>\n        <note>\n            <p>To delete a package, you need permission to call <code>s3:DeleteObject</code>\n                in addition to permissions for the AWS Panorama API.</p>\n        </note>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/packages/{PackageId}",
@@ -1466,6 +1455,18 @@
                     "target": "com.amazonaws.panorama#LeaseExpirationTime",
                     "traits": {
                         "smithy.api#documentation": "<p>The device's lease expiration time.</p>"
+                    }
+                },
+                "AlternateSoftwares": {
+                    "target": "com.amazonaws.panorama#AlternateSoftwares",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Beta software releases available for the device.</p>"
+                    }
+                },
+                "LatestAlternateSoftware": {
+                    "target": "com.amazonaws.panorama#LatestAlternateSoftware",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The most recent beta software release.</p>"
                     }
                 }
             }
@@ -2488,6 +2489,16 @@
                 "smithy.api#pattern": "^((25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)\\.(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)\\.(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)\\.(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d))(:(6553[0-5]|655[0-2]\\d|65[0-4]\\d{2}|6[0-4]\\d{3}|[1-5]\\d{4}|[1-9]\\d{0,3}))?$"
             }
         },
+        "com.amazonaws.panorama#IpAddressOrServerName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "(^([a-z0-9]+(-[a-z0-9]+)*\\.)+[a-z]{2,}$)|(^((25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)\\.(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)\\.(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)\\.(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d))(:(6553[0-5]|655[0-2]\\d|65[0-4]\\d{2}|6[0-4]\\d{3}|[1-5]\\d{4}|[1-9]\\d{0,3}))?$)"
+            }
+        },
         "com.amazonaws.panorama#Job": {
             "type": "structure",
             "members": {
@@ -2576,6 +2587,15 @@
         },
         "com.amazonaws.panorama#LastUpdatedTime": {
             "type": "timestamp"
+        },
+        "com.amazonaws.panorama#LatestAlternateSoftware": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
         },
         "com.amazonaws.panorama#LatestSoftware": {
             "type": "string",
@@ -3398,10 +3418,7 @@
             }
         },
         "com.amazonaws.panorama#MarkLatestPatch": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.panorama#Mask": {
             "type": "string",
@@ -3436,6 +3453,10 @@
                     {
                         "value": "NOT_CONNECTED",
                         "name": "NOT_CONNECTED"
+                    },
+                    {
+                        "value": "CONNECTING",
+                        "name": "CONNECTING"
                     }
                 ]
             }
@@ -3453,6 +3474,12 @@
                     "target": "com.amazonaws.panorama#EthernetPayload",
                     "traits": {
                         "smithy.api#documentation": "<p>Settings for Ethernet port 1.</p>"
+                    }
+                },
+                "Ntp": {
+                    "target": "com.amazonaws.panorama#NtpPayload",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Network time protocol (NTP) server settings.</p>"
                     }
                 }
             },
@@ -3473,6 +3500,18 @@
                     "target": "com.amazonaws.panorama#EthernetStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>The status of Ethernet port 1.</p>"
+                    }
+                },
+                "NtpStatus": {
+                    "target": "com.amazonaws.panorama#NtpStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about a network time protocol (NTP) server connection.</p>"
+                    }
+                },
+                "LastUpdatedTime": {
+                    "target": "com.amazonaws.panorama#LastUpdatedTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the network status changed.</p>"
                     }
                 }
             },
@@ -3925,6 +3964,67 @@
                 "target": "com.amazonaws.panorama#Node"
             }
         },
+        "com.amazonaws.panorama#NtpPayload": {
+            "type": "structure",
+            "members": {
+                "NtpServers": {
+                    "target": "com.amazonaws.panorama#NtpServerList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>NTP servers to use, in order of preference.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Network time protocol (NTP) server settings. Use this option to connect to local NTP\n            servers instead of <code>pool.ntp.org</code>.</p>"
+            }
+        },
+        "com.amazonaws.panorama#NtpServerList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.panorama#IpAddressOrServerName"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.panorama#NtpServerName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.panorama#NtpStatus": {
+            "type": "structure",
+            "members": {
+                "ConnectionStatus": {
+                    "target": "com.amazonaws.panorama#NetworkConnectionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection's status.</p>"
+                    }
+                },
+                "IpAddress": {
+                    "target": "com.amazonaws.panorama#IpAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address of the server.</p>"
+                    }
+                },
+                "NtpServerName": {
+                    "target": "com.amazonaws.panorama#NtpServerName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain name of the server.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about an NTP server connection.</p>"
+            }
+        },
         "com.amazonaws.panorama#OTAJobConfig": {
             "type": "structure",
             "members": {
@@ -3955,6 +4055,22 @@
         },
         "com.amazonaws.panorama#OmniCloudServiceLambda": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Panorama",
+                    "arnNamespace": "panorama",
+                    "cloudFormationName": "OmniCloudServiceLambda",
+                    "cloudTrailEventSource": "panorama.amazonaws.com",
+                    "endpointPrefix": "panorama"
+                },
+                "aws.auth#sigv4": {
+                    "name": "panorama"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#cors": {},
+                "smithy.api#documentation": "<fullname>AWS Panorama</fullname>\n         <p>\n            <b>Overview</b>\n         </p>\n         <p>This is the <i>AWS Panorama API Reference</i>. For an introduction to the service, see \n           <a href=\"https://docs.aws.amazon.com/panorama/latest/dev/panorama-welcome.html\">What is AWS Panorama?</a> \n           in the <i>AWS Panorama Developer Guide</i>.</p>",
+                "smithy.api#title": "AWS Panorama"
+            },
             "version": "2019-07-24",
             "operations": [
                 {
@@ -4056,22 +4172,7 @@
                 {
                     "target": "com.amazonaws.panorama#UpdateDeviceMetadata"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Panorama",
-                    "arnNamespace": "panorama",
-                    "cloudFormationName": "Panorama",
-                    "cloudTrailEventSource": "panorama.amazonaws.com",
-                    "endpointPrefix": "panorama"
-                },
-                "aws.auth#sigv4": {
-                    "name": "panorama"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<fullname>AWS Panorama</fullname>\n         <p>\n            <b>Overview</b>\n         </p>\n         <p>This is the <i>AWS Panorama API Reference</i>. For an introduction to the service, see \n           <a href=\"https://docs.aws.amazon.com/panorama/latest/dev/panorama-welcome.html\">What is AWS Panorama?</a> \n           in the <i>AWS Panorama Developer Guide</i>.</p>",
-                "smithy.api#title": "AWS Panorama"
-            }
+            ]
         },
         "com.amazonaws.panorama#OutPutS3Location": {
             "type": "structure",
@@ -4244,6 +4345,10 @@
                     {
                         "value": "NODE_PACKAGE_VERSION",
                         "name": "NODE_PACKAGE_VERSION"
+                    },
+                    {
+                        "value": "MARKETPLACE_NODE_PACKAGE_VERSION",
+                        "name": "MARKETPLACE_NODE_PACKAGE_VERSION"
                     }
                 ]
             }
@@ -5373,6 +5478,15 @@
                         "name": "OTHER"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.panorama#Version": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
             }
         }
     }

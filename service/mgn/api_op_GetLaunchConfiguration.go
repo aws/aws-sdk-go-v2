@@ -39,28 +39,31 @@ type GetLaunchConfigurationInput struct {
 
 type GetLaunchConfigurationOutput struct {
 
+	// Launch configuration boot mode.
+	BootMode types.BootMode
+
 	// Copy Private IP during Launch Configuration.
 	CopyPrivateIp *bool
 
 	// Copy Tags during Launch Configuration.
 	CopyTags *bool
 
-	// Configure EC2 lauch configuration template ID.
+	// Launch configuration EC2 Launch template ID.
 	Ec2LaunchTemplateID *string
 
-	// Configure launch dispostion for launch configuration.
+	// Launch disposition for launch configuration.
 	LaunchDisposition types.LaunchDisposition
 
-	// Configure launch configuration OS licensing.
+	// Launch configuration OS licensing.
 	Licensing *types.Licensing
 
-	// Configure launch configuration name.
+	// Launch configuration name.
 	Name *string
 
-	// Configure launch configuration Source Server ID.
+	// Launch configuration Source Server ID.
 	SourceServerID *string
 
-	// Configure launch configuration Target instance type right sizing method.
+	// Launch configuration Target instance type right sizing method.
 	TargetInstanceTypeRightSizingMethod types.TargetInstanceTypeRightSizingMethod
 
 	// Metadata pertaining to the operation's result.

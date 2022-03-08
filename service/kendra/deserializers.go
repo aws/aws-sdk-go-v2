@@ -8643,6 +8643,115 @@ func awsAwsjson11_deserializeDocumentContentSourceConfiguration(v **types.Conten
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentCorrection(v **types.Correction, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Correction
+	if *v == nil {
+		sv = &types.Correction{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "BeginOffset":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.BeginOffset = ptr.Int32(int32(i64))
+			}
+
+		case "CorrectedTerm":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.CorrectedTerm = ptr.String(jtv)
+			}
+
+		case "EndOffset":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.EndOffset = ptr.Int32(int32(i64))
+			}
+
+		case "Term":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Term = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentCorrectionList(v *[]types.Correction, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.Correction
+	if *v == nil {
+		cv = []types.Correction{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.Correction
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentCorrection(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentCustomDocumentEnrichmentConfiguration(v **types.CustomDocumentEnrichmentConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -14250,6 +14359,85 @@ func awsAwsjson11_deserializeDocumentSnapshotsDataRecords(v *[][]string, value i
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentSpellCorrectedQuery(v **types.SpellCorrectedQuery, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SpellCorrectedQuery
+	if *v == nil {
+		sv = &types.SpellCorrectedQuery{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Corrections":
+			if err := awsAwsjson11_deserializeDocumentCorrectionList(&sv.Corrections, value); err != nil {
+				return err
+			}
+
+		case "SuggestedQueryText":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SuggestedQueryText to be of type string, got %T instead", value)
+				}
+				sv.SuggestedQueryText = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentSpellCorrectedQueryList(v *[]types.SpellCorrectedQuery, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.SpellCorrectedQuery
+	if *v == nil {
+		cv = []types.SpellCorrectedQuery{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.SpellCorrectedQuery
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentSpellCorrectedQuery(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentSqlConfiguration(v **types.SqlConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -17914,6 +18102,11 @@ func awsAwsjson11_deserializeOpDocumentQueryOutput(v **QueryOutput, value interf
 
 		case "ResultItems":
 			if err := awsAwsjson11_deserializeDocumentQueryResultItemList(&sv.ResultItems, value); err != nil {
+				return err
+			}
+
+		case "SpellCorrectedQueries":
+			if err := awsAwsjson11_deserializeDocumentSpellCorrectedQueryList(&sv.SpellCorrectedQueries, value); err != nil {
 				return err
 			}
 

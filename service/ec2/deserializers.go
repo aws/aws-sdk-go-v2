@@ -128183,6 +128183,12 @@ func awsEc2query_deserializeOpDocumentDescribeImageAttributeOutput(v **DescribeI
 				return err
 			}
 
+		case strings.EqualFold("lastLaunchedTime", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentAttributeValue(&sv.LastLaunchedTime, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("launchPermission", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsEc2query_deserializeDocumentLaunchPermissionList(&sv.LaunchPermissions, nodeDecoder); err != nil {

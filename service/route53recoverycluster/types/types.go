@@ -6,10 +6,10 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
-// A routing control state.
+// A routing control state entry.
 type UpdateRoutingControlStateEntry struct {
 
-	// The Amazon Resource Number (ARN) for the routing control state entry.
+	// The Amazon Resource Number (ARN) for a routing control state entry.
 	//
 	// This member is required.
 	RoutingControlArn *string

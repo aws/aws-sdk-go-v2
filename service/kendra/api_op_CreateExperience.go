@@ -48,10 +48,10 @@ type CreateExperienceInput struct {
 	// token creates only one Amazon Kendra experience.
 	ClientToken *string
 
-	// Provides the configuration information for your Amazon Kendra experience. This
-	// includes ContentSourceConfiguration, which specifies the data source IDs and/or
-	// FAQ IDs, and UserIdentityConfiguration, which specifies the user or group
-	// information to grant access to your Amazon Kendra experience.
+	// Configuration information for your Amazon Kendra experience. This includes
+	// ContentSourceConfiguration, which specifies the data source IDs and/or FAQ IDs,
+	// and UserIdentityConfiguration, which specifies the user or group information to
+	// grant access to your Amazon Kendra experience.
 	Configuration *types.ExperienceConfiguration
 
 	// A description for your Amazon Kendra experience.

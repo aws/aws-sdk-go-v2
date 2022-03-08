@@ -104,6 +104,9 @@ type QueryInput struct {
 	// that Amazon Kendra determines for the result.
 	SortingConfiguration *types.SortingConfiguration
 
+	// Enables suggested spell corrections for queries.
+	SpellCorrectionConfiguration *types.SpellCorrectionConfiguration
+
 	// The user context token or user and group information.
 	UserContext *types.UserContext
 
@@ -127,6 +130,9 @@ type QueryOutput struct {
 
 	// The results of the search.
 	ResultItems []types.QueryResultItem
+
+	// A list of information related to suggested spell corrections for a query.
+	SpellCorrectedQueries []types.SpellCorrectedQuery
 
 	// The total number of items found by the search; however, you can only retrieve up
 	// to 100 items. For example, if the search found 192 items, you can only retrieve

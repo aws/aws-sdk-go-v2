@@ -45,8 +45,8 @@ type AttachmentStateChange struct {
 }
 
 // An attribute is a name-value pair that's associated with an Amazon ECS object.
-// Attributes enable you to extend the Amazon ECS data model by adding custom
-// metadata to your resources. For more information, see Attributes
+// Use attributes to extend the Amazon ECS data model by adding custom metadata to
+// your resources. For more information, see Attributes
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html#attributes)
 // in the Amazon Elastic Container Service Developer Guide.
 type Attribute struct {
@@ -394,7 +394,7 @@ type ClusterConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The settings to use when creating a cluster. This parameter is used to enable
+// The settings to use when creating a cluster. This parameter is used to turn on
 // CloudWatch Container Insights for a cluster.
 type ClusterSetting struct {
 
@@ -538,7 +538,7 @@ type ContainerDefinition struct {
 	// contain multiple dependencies. When a dependency is defined for container
 	// startup, for container shutdown it is reversed. For tasks using the EC2 launch
 	// type, the container instances require at least version 1.26.0 of the container
-	// agent to enable container dependencies. However, we recommend using the latest
+	// agent to turn on container dependencies. However, we recommend using the latest
 	// container agent version. For information about checking your agent version and
 	// updating to the latest version, see Updating the Amazon ECS Container Agent
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html)
@@ -952,7 +952,7 @@ type ContainerDefinition struct {
 	// later.
 	//
 	// For tasks using the EC2 launch type, your container instances require at
-	// least version 1.26.0 of the container agent to enable a container start timeout
+	// least version 1.26.0 of the container agent to use a container start timeout
 	// value. However, we recommend using the latest container agent version. For
 	// information about checking your agent version and updating to the latest
 	// version, see Updating the Amazon ECS Container Agent
@@ -983,7 +983,7 @@ type ContainerDefinition struct {
 	// neither the stopTimeout parameter or the ECS_CONTAINER_STOP_TIMEOUT agent
 	// configuration variable are set, then the default values of 30 seconds for Linux
 	// containers and 30 seconds on Windows containers are used. Your container
-	// instances require at least version 1.26.0 of the container agent to enable a
+	// instances require at least version 1.26.0 of the container agent to use a
 	// container stop timeout value. However, we recommend using the latest container
 	// agent version. For information about checking your agent version and updating to
 	// the latest version, see Updating the Amazon ECS Container Agent
@@ -1080,7 +1080,7 @@ type ContainerDefinition struct {
 // The dependencies defined for container startup and shutdown. A container can
 // contain multiple dependencies. When a dependency is defined for container
 // startup, for container shutdown it is reversed. Your Amazon ECS container
-// instances require at least version 1.26.0 of the container agent to enable
+// instances require at least version 1.26.0 of the container agent to use
 // container dependencies. However, we recommend using the latest container agent
 // version. For information about checking your agent version and updating to the
 // latest version, see Updating the Amazon ECS Container Agent
@@ -1442,20 +1442,19 @@ type Deployment struct {
 // update (ECS) deployment type that aren't behind a Classic Load Balancer. The
 // deployment circuit breaker determines whether a service deployment will fail if
 // the service can't reach a steady state. If enabled, a service deployment will
-// transition to a failed state and stop launching new tasks. You can also enable
-// Amazon ECS to roll back your service to the last completed deployment after a
-// failure. For more information, see Rolling update
+// transition to a failed state and stop launching new tasks. You can also
+// configure Amazon ECS to roll back your service to the last completed deployment
+// after a failure. For more information, see Rolling update
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html)
 // in the Amazon Elastic Container Service Developer Guide.
 type DeploymentCircuitBreaker struct {
 
-	// Determines whether to enable the deployment circuit breaker logic for the
-	// service.
+	// Determines whether to use the deployment circuit breaker logic for the service.
 	//
 	// This member is required.
 	Enable bool
 
-	// Determines whether to enable Amazon ECS to roll back the service if a service
+	// Determines whether to configure Amazon ECS to roll back the service if a service
 	// deployment fails. If rollback is enabled, when a service deployment fails, the
 	// service is rolled back to the last deployment that completed successfully.
 	//
@@ -1659,11 +1658,10 @@ type EFSVolumeConfiguration struct {
 	// path set on the EFS access point.
 	RootDirectory *string
 
-	// Determines whether to enable encryption for Amazon EFS data in transit between
-	// the Amazon ECS host and the Amazon EFS server. Transit encryption must be
-	// enabled if Amazon EFS IAM authorization is used. If this parameter is omitted,
-	// the default value of DISABLED is used. For more information, see Encrypting Data
-	// in Transit
+	// Determines whether to use encryption for Amazon EFS data in transit between the
+	// Amazon ECS host and the Amazon EFS server. Transit encryption must be enabled if
+	// Amazon EFS IAM authorization is used. If this parameter is omitted, the default
+	// value of DISABLED is used. For more information, see Encrypting Data in Transit
 	// (https://docs.aws.amazon.com/efs/latest/ug/encryption-in-transit.html) in the
 	// Amazon Elastic File System User Guide.
 	TransitEncryption EFSTransitEncryption
@@ -1722,12 +1720,8 @@ type EnvironmentFile struct {
 // storage
 // (https://docs.aws.amazon.com/AmazonECS/latest/userguide/using_data_volumes.html)
 // in the Amazon ECS User Guide for Fargate. This parameter is only supported for
-// tasks hosted on Fargate using the following platform versions:
-//
-// * Linux platform
-// version 1.4.0 or later.
-//
-// * Windows platform version 1.0.0 or later.
+// tasks hosted on Fargate using Linux platform version 1.4.0 or later. This
+// parameter is not supported for Windows containers on Fargate.
 type EphemeralStorage struct {
 
 	// The total amount, in GiB, of ephemeral storage to set for the task. The minimum
@@ -1773,8 +1767,8 @@ type ExecuteCommandConfiguration struct {
 // can be sent to CloudWatch Logs or an Amazon S3 bucket.
 type ExecuteCommandLogConfiguration struct {
 
-	// Determines whether to enable encryption on the CloudWatch logs. If not
-	// specified, encryption will be disabled.
+	// Determines whether to use encryption on the CloudWatch logs. If not specified,
+	// encryption will be disabled.
 	CloudWatchEncryptionEnabled bool
 
 	// The name of the CloudWatch log group to send logs to. The CloudWatch log group
@@ -2209,7 +2203,15 @@ type LinuxParameters struct {
 
 // The load balancer configuration to use with a service or task set. For specific
 // notes and restrictions regarding the use of load balancers with services and
-// task sets, see the CreateService and CreateTaskSet actions.
+// task sets, see the CreateService and CreateTaskSet actions. When you add,
+// update, or remove a load blaancer configuration, Amazon ECS starts a new
+// deployment with the updated Elastic Load Balancing configuration. This causes
+// tasks to register to and deregister from load balancers. We recommend that you
+// verify this on a test environment before you update the Elastic Load Balancing
+// configuration. A service-linked role is required for services that use multiple
+// target groups. For more information, see Service-linked roles
+// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html)
+// in the Amazon Elastic Container Service Developer Guide.
 type LoadBalancer struct {
 
 	// The name of the container (as it appears in a container definition) to associate
@@ -2393,7 +2395,7 @@ type ManagedScaling struct {
 	// out at one time. If this parameter is omitted, the default value of 1 is used.
 	MinimumScalingStepSize *int32
 
-	// Determines whether to enable managed scaling for the capacity provider.
+	// Determines whether to use managed scaling for the capacity provider.
 	Status ManagedScalingStatus
 
 	// The target capacity value for the capacity provider. The specified value must be
@@ -2593,8 +2595,8 @@ type PortMapping struct {
 
 // The configuration details for the App Mesh proxy. For tasks that use the EC2
 // launch type, the container instances require at least version 1.26.0 of the
-// container agent and at least version 1.26.0-1 of the ecs-init package to enable
-// a proxy configuration. If your container instances are launched from the Amazon
+// container agent and at least version 1.26.0-1 of the ecs-init package to use a
+// proxy configuration. If your container instances are launched from the Amazon
 // ECS optimized AMI version 20190301 or later, then they contain the required
 // versions of the container agent and ecs-init. For more information, see Amazon
 // ECS-optimized Linux AMI
@@ -2771,7 +2773,13 @@ type Secret struct {
 
 	// The secret to expose to the container. The supported values are either the full
 	// ARN of the Secrets Manager secret or the full ARN of the parameter in the SSM
-	// Parameter Store. If the SSM Parameter Store parameter exists in the same Region
+	// Parameter Store. For information about the require Identity and Access
+	// Management permissions, see Required IAM permissions for Amazon ECS secrets
+	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data-secrets.html#secrets-iam)
+	// (for Secrets Manager) or Required IAM permissions for Amazon ECS secrets
+	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data-parameters.html)
+	// (for Systems Manager Parameter store) in the Amazon Elastic Container Service
+	// Developer Guide. If the SSM Parameter Store parameter exists in the same Region
 	// as the task you're launching, then you can use either the full ARN or name of
 	// the parameter. If the parameter exists in a different Region, then the full ARN
 	// must be specified.
@@ -2815,8 +2823,8 @@ type Service struct {
 	// CreateService, and it can be modified with UpdateService.
 	DesiredCount int32
 
-	// Determines whether to enable Amazon ECS managed tags for the tasks in the
-	// service. For more information, see Tagging Your Amazon ECS Resources
+	// Determines whether to use Amazon ECS managed tags for the tasks in the service.
+	// For more information, see Tagging Your Amazon ECS Resources
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	EnableECSManagedTags bool
@@ -2895,7 +2903,7 @@ type Service struct {
 	// placement decisions.
 	//
 	// * DAEMON-The daemon scheduling strategy deploys exactly
-	// one task on each active container instance. This taskmeets all of the task
+	// one task on each active container instance. This task meets all of the task
 	// placement constraints that you specify in your cluster. The service scheduler
 	// also evaluates the task placement constraints for running tasks. It stop tasks
 	// that don't meet the placement constraints. Fargate tasks don't support the
@@ -2981,7 +2989,11 @@ type ServiceEvent struct {
 	noSmithyDocumentSerde
 }
 
-// The details for the service registry.
+// The details for the service registry. Each service may be associated with one
+// service registry. Multiple service registries for each service are not
+// supported. When you add, update, or remove the service registries configuration,
+// Amazon ECS starts a new deployment. New tasks are registered and deregistered to
+// the updated service registry configuration.
 type ServiceRegistry struct {
 
 	// The container name value to be used for your service discovery service. It's
@@ -3021,7 +3033,7 @@ type Session struct {
 	// The ID of the execute command session.
 	SessionId *string
 
-	// A URL back to managed agent on the container that the SSM Session Manager client
+	// A URL to the managed agent on the container that the SSM Session Manager client
 	// uses to send commands and receive output from the container.
 	StreamUrl *string
 
@@ -3286,7 +3298,21 @@ type Task struct {
 	StartedBy *string
 
 	// The stop code indicating why a task was stopped. The stoppedReason might contain
-	// additional details.
+	// additional details. The following are valid values:
+	//
+	// * TaskFailedToStart
+	//
+	// *
+	// EssentialContainerExited
+	//
+	// * UserInitiated
+	//
+	// * TerminationNotice
+	//
+	// *
+	// ServiceSchedulerInitiated
+	//
+	// * SpotInterruption
 	StopCode TaskStopCode
 
 	// The Unix timestamp for the time when the task was stopped. More specifically,
@@ -3522,8 +3548,8 @@ type TaskDefinition struct {
 
 	// The configuration details for the App Mesh proxy. Your Amazon ECS container
 	// instances require at least version 1.26.0 of the container agent and at least
-	// version 1.26.0-1 of the ecs-init package to enable a proxy configuration. If
-	// your container instances are launched from the Amazon ECS optimized AMI version
+	// version 1.26.0-1 of the ecs-init package to use a proxy configuration. If your
+	// container instances are launched from the Amazon ECS optimized AMI version
 	// 20190301 or later, they contain the required versions of the container agent and
 	// ecs-init. For more information, see Amazon ECS-optimized Linux AMI
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html)

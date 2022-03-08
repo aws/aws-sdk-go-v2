@@ -58,7 +58,22 @@
                     "target": "com.amazonaws.finspacedata#CreateDataView"
                 },
                 {
+                    "target": "com.amazonaws.finspacedata#CreatePermissionGroup"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#CreateUser"
+                },
+                {
                     "target": "com.amazonaws.finspacedata#DeleteDataset"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#DeletePermissionGroup"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#DisableUser"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#EnableUser"
                 },
                 {
                     "target": "com.amazonaws.finspacedata#GetChangeset"
@@ -73,6 +88,9 @@
                     "target": "com.amazonaws.finspacedata#GetProgrammaticAccessCredentials"
                 },
                 {
+                    "target": "com.amazonaws.finspacedata#GetUser"
+                },
+                {
                     "target": "com.amazonaws.finspacedata#GetWorkingLocation"
                 },
                 {
@@ -85,10 +103,25 @@
                     "target": "com.amazonaws.finspacedata#ListDataViews"
                 },
                 {
+                    "target": "com.amazonaws.finspacedata#ListPermissionGroups"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ListUsers"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ResetUserPassword"
+                },
+                {
                     "target": "com.amazonaws.finspacedata#UpdateChangeset"
                 },
                 {
                     "target": "com.amazonaws.finspacedata#UpdateDataset"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#UpdatePermissionGroup"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#UpdateUser"
                 }
             ]
         },
@@ -113,6 +146,62 @@
                     "max": 255
                 },
                 "smithy.api#pattern": "^alias\\/\\S+$"
+            }
+        },
+        "com.amazonaws.finspacedata#ApiAccess": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ENABLED",
+                        "name": "ENABLED"
+                    },
+                    {
+                        "value": "DISABLED",
+                        "name": "DISABLED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.finspacedata#ApplicationPermission": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CreateDataset",
+                        "name": "CreateDataset"
+                    },
+                    {
+                        "value": "ManageClusters",
+                        "name": "ManageClusters"
+                    },
+                    {
+                        "value": "ManageUsersAndGroups",
+                        "name": "ManageUsersAndGroups"
+                    },
+                    {
+                        "value": "ManageAttributeSets",
+                        "name": "ManageAttributeSets"
+                    },
+                    {
+                        "value": "ViewAuditData",
+                        "name": "ViewAuditData"
+                    },
+                    {
+                        "value": "AccessNotebooks",
+                        "name": "AccessNotebooks"
+                    },
+                    {
+                        "value": "GetTemporaryCredentials",
+                        "name": "GetTemporaryCredentials"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.finspacedata#ApplicationPermissionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.finspacedata#ApplicationPermission"
             }
         },
         "com.amazonaws.finspacedata#Boolean": {
@@ -159,7 +248,7 @@
                 "errorCategory": {
                     "target": "com.amazonaws.finspacedata#ErrorCategory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The category of the error.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>VALIDATION</code> -The inputs to this request are invalid.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SERVICE_QUOTA_EXCEEDED</code> - Service quotas have been exceeded. Please\n          contact AWS support to increase quotas.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACCESS_DENIED</code> - Missing required permission to perform this\n          request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RESOURCE_NOT_FOUND</code> - One or more inputs to this request were not\n          found.</p>\n            </li>\n            <li>\n               <p>\n                  <code>THROTTLING</code> - The system temporarily lacks sufficient resources to process\n          the request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INTERNAL_SERVICE_EXCEPTION</code> - An internal service error has\n          occurred.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CANCELLED</code> - Cancelled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>USER_RECOVERABLE</code> - A user recoverable error has occurred.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The category of the error.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>VALIDATION</code> – The inputs to this request are invalid.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SERVICE_QUOTA_EXCEEDED</code> – Service quotas have been exceeded. Please\n          contact AWS support to increase quotas.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACCESS_DENIED</code> – Missing required permission to perform this\n          request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RESOURCE_NOT_FOUND</code> – One or more inputs to this request were not\n          found.</p>\n            </li>\n            <li>\n               <p>\n                  <code>THROTTLING</code> – The system temporarily lacks sufficient resources to process\n          the request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INTERNAL_SERVICE_EXCEPTION</code> – An internal service error has\n          occurred.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CANCELLED</code> – Cancelled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>USER_RECOVERABLE</code> – A user recoverable error has occurred.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -210,7 +299,7 @@
                 "changeType": {
                     "target": "com.amazonaws.finspacedata#ChangeType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Type that indicates how a Changeset is applied to a Dataset.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>REPLACE</code> - Changeset is considered as a replacement to all prior loaded\n          Changesets.</p>\n            </li>\n            <li>\n               <p>\n                  <code>APPEND</code> - Changeset is considered as an addition to the end of all prior\n          loaded Changesets.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MODIFY</code> - Changeset is considered as a replacement to a specific prior\n          ingested Changeset.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Type that indicates how a Changeset is applied to a Dataset.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>REPLACE</code> – Changeset is considered as a replacement to all prior loaded\n          Changesets.</p>\n            </li>\n            <li>\n               <p>\n                  <code>APPEND</code> – Changeset is considered as an addition to the end of all prior\n          loaded Changesets.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MODIFY</code> – Changeset is considered as a replacement to a specific prior\n          ingested Changeset.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "sourceParams": {
@@ -228,13 +317,13 @@
                 "createTime": {
                     "target": "com.amazonaws.finspacedata#TimestampEpoch",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp at which the Changeset was created in FinSpace. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
+                        "smithy.api#documentation": "<p>The timestamp at which the Changeset was created in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
                     }
                 },
                 "status": {
                     "target": "com.amazonaws.finspacedata#IngestionStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Status of the Changeset ingestion.</p>\n         <ul>\n            <li> \n               <p>\n                  <code>PENDING</code> - Changeset is pending creation.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> - Changeset creation has failed.</p>\n            </li>\n            <li> \n               <p>\n                  <code>SUCCESS</code> - Changeset creation has succeeded.</p>\n            </li>\n            <li> \n               <p>\n                  <code>RUNNING</code> - Changeset creation is running.</p>\n            </li>\n            <li> \n               <p>\n                  <code>STOP_REQUESTED</code> - User requested Changeset creation to stop.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Status of the Changeset ingestion.</p>\n         <ul>\n            <li> \n               <p>\n                  <code>PENDING</code> – Changeset is pending creation.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> – Changeset creation has failed.</p>\n            </li>\n            <li> \n               <p>\n                  <code>SUCCESS</code> – Changeset creation has succeeded.</p>\n            </li>\n            <li> \n               <p>\n                  <code>RUNNING</code> – Changeset creation is running.</p>\n            </li>\n            <li> \n               <p>\n                  <code>STOP_REQUESTED</code> – User requested Changeset creation to stop.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "errorInfo": {
@@ -247,14 +336,14 @@
                     "target": "com.amazonaws.finspacedata#TimestampEpoch",
                     "traits": {
                         "smithy.api#box": {},
-                        "smithy.api#documentation": "<p>Time until which the Changeset is active. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
+                        "smithy.api#documentation": "<p>Time until which the Changeset is active. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
                     }
                 },
                 "activeFromTimestamp": {
                     "target": "com.amazonaws.finspacedata#TimestampEpoch",
                     "traits": {
                         "smithy.api#box": {},
-                        "smithy.api#documentation": "<p>Beginning time from which the Changeset is active. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
+                        "smithy.api#documentation": "<p>Beginning time from which the Changeset is active. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
                     }
                 },
                 "updatesChangesetId": {
@@ -347,13 +436,13 @@
                 "dataType": {
                     "target": "com.amazonaws.finspacedata#ColumnDataType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Data type of a column.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>STRING</code> - A String data type.</p>\n               <p>\n                  <code>CHAR</code> - A char data type.</p>\n               <p>\n                  <code>INTEGER</code> - An integer data type.</p>\n               <p>\n                  <code>TINYINT</code> - A tinyint data type.</p>\n               <p>\n                  <code>SMALLINT</code> - A smallint data type.</p>\n               <p>\n                  <code>BIGINT</code> - A bigint data type.</p>\n               <p>\n                  <code>FLOAT</code> - A float data type.</p>\n               <p>\n                  <code>DOUBLE</code> - A double data type.</p>\n               <p>\n                  <code>DATE</code> - A date data type.</p>\n               <p>\n                  <code>DATETIME</code> - A datetime data type.</p>\n               <p>\n                  <code>BOOLEAN</code> - A boolean data type.</p>\n               <p>\n                  <code>BINARY</code> - A binary data type.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Data type of a column.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>STRING</code> – A String data type.</p>\n               <p>\n                  <code>CHAR</code> – A char data type.</p>\n               <p>\n                  <code>INTEGER</code> – An integer data type.</p>\n               <p>\n                  <code>TINYINT</code> – A tinyint data type.</p>\n               <p>\n                  <code>SMALLINT</code> – A smallint data type.</p>\n               <p>\n                  <code>BIGINT</code> – A bigint data type.</p>\n               <p>\n                  <code>FLOAT</code> – A float data type.</p>\n               <p>\n                  <code>DOUBLE</code> – A double data type.</p>\n               <p>\n                  <code>DATE</code> – A date data type.</p>\n               <p>\n                  <code>DATETIME</code> – A datetime data type.</p>\n               <p>\n                  <code>BOOLEAN</code> – A boolean data type.</p>\n               <p>\n                  <code>BINARY</code> – A binary data type.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "columnName": {
                     "target": "com.amazonaws.finspacedata#ColumnName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Name for a column.</p>"
+                        "smithy.api#documentation": "<p>The name of a column.</p>"
                     }
                 },
                 "columnDescription": {
@@ -411,6 +500,9 @@
             "type": "structure",
             "members": {
                 "message": {
+                    "target": "com.amazonaws.finspacedata#ErrorMessage2"
+                },
+                "reason": {
                     "target": "com.amazonaws.finspacedata#ErrorMessage2"
                 }
             },
@@ -481,21 +573,21 @@
                 "changeType": {
                     "target": "com.amazonaws.finspacedata#ChangeType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Option to indicate how a Changeset will be applied to a Dataset.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>REPLACE</code> - Changeset will be considered as a replacement to all prior\n          loaded Changesets.</p>\n            </li>\n            <li>\n               <p>\n                  <code>APPEND</code> - Changeset will be considered as an addition to the end of all\n          prior loaded Changesets.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MODIFY</code> - Changeset is considered as a replacement to a specific prior ingested Changeset.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The option to indicate how a Changeset will be applied to a Dataset.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>REPLACE</code> – Changeset will be considered as a replacement to all prior\n          loaded Changesets.</p>\n            </li>\n            <li>\n               <p>\n                  <code>APPEND</code> – Changeset will be considered as an addition to the end of all\n          prior loaded Changesets.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MODIFY</code> – Changeset is considered as a replacement to a specific prior ingested Changeset.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "sourceParams": {
                     "target": "com.amazonaws.finspacedata#SourceParams",
                     "traits": {
-                        "smithy.api#documentation": "<p>Options that define the location of the data being ingested (<code>s3SourcePath</code>) and the source of the changeset (<code>sourceType</code>).</p>\n         <p>Both <code>s3SourcePath</code> and <code>sourceType</code> are required attributes.</p>\n         <p>Here is an example of how you could specify the <code>sourceParams</code>:</p>\n         <p>\n            <code>\n        \"sourceParams\": \n        {\n        \"s3SourcePath\": \"s3://finspace-landing-us-east-2-bk7gcfvitndqa6ebnvys4d/scratch/wr5hh8pwkpqqkxa4sxrmcw/ingestion/equity.csv\",\n        \"sourceType\": \"S3\"\n        }\n      </code>\n         </p>\n         <p>The S3 path that you specify must allow the FinSpace role access. To do that, you first need to configure the IAM policy on S3 bucket. For more information, see <a href=\"https://docs.aws.amazon.com/finspace/latest/data-api/fs-using-the-finspace-api.html#access-s3-buckets\">Loading data from an Amazon S3 Bucket using the FinSpace API</a>section.</p>",
+                        "smithy.api#documentation": "<p>Options that define the location of the data being ingested (<code>s3SourcePath</code>) and the source of the changeset (<code>sourceType</code>).</p>\n         <p>Both <code>s3SourcePath</code> and <code>sourceType</code> are required attributes.</p>\n         <p>Here is an example of how you could specify the <code>sourceParams</code>:</p>\n         <p>\n            <code>\n        \"sourceParams\": \n        {\n        \"s3SourcePath\": \"s3://finspace-landing-us-east-2-bk7gcfvitndqa6ebnvys4d/scratch/wr5hh8pwkpqqkxa4sxrmcw/ingestion/equity.csv\",\n        \"sourceType\": \"S3\"\n        }\n      </code>\n         </p>\n         <p>The S3 path that you specify must allow the FinSpace role access. To do that, you first need to configure the IAM policy on S3 bucket. For more information, see <a href=\"https://docs.aws.amazon.com/finspace/latest/data-api/fs-using-the-finspace-api.html#access-s3-buckets\">Loading data from an Amazon S3 Bucket using the FinSpace API</a> section.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "formatParams": {
                     "target": "com.amazonaws.finspacedata#FormatParams",
                     "traits": {
-                        "smithy.api#documentation": "<p>Options that define the structure of the source file(s) including the format type (<code>formatType</code>), header row (<code>withHeader</code>), data separation character (<code>separator</code>) and the type of compression (<code>compression</code>).\n    </p>\n         <p>\n            <code>formatType</code> is a required attribute and can have the following values:\n    </p>\n         <ul>\n            <li>\n               <p>\n                  <code>PARQUET</code> - Parquet source file format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CSV</code> - CSV source file format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>JSON</code> - JSON source file format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>XML</code> - XML source file format.</p>\n            </li>\n         </ul>\n    \n         <p>Here is an example of how you could specify the <code>formatParams</code>:</p>\n         <p>\n            <code>\n          \"formatParams\": \n        {\n         \"formatType\": \"CSV\",\n         \"withHeader\": \"true\",\n         \"separator\": \",\",\n         \"compression\":\"None\"\n         } \n      </code> \n         </p>\n         <p>Note that if you only provide <code>formatType</code> as <code>CSV</code>, the rest of the attributes will automatically default to CSV values as following:</p>\n         <p>\n            <code>\n          {\n          \"withHeader\": \"true\",\n          \"separator\": \",\"\n           }\n        </code>\n         </p>\n         <p> For more information about supported file formats, see <a href=\"https://docs.aws.amazon.com/finspace/latest/userguide/supported-data-types.html\">Supported Data Types and File Formats</a> in the FinSpace User Guide.</p>",
+                        "smithy.api#documentation": "<p>Options that define the structure of the source file(s) including the format type (<code>formatType</code>), header row (<code>withHeader</code>), data separation character (<code>separator</code>) and the type of compression (<code>compression</code>).\n    </p>\n         <p>\n            <code>formatType</code> is a required attribute and can have the following values:\n    </p>\n         <ul>\n            <li>\n               <p>\n                  <code>PARQUET</code> – Parquet source file format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CSV</code> – CSV source file format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>JSON</code> – JSON source file format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>XML</code> – XML source file format.</p>\n            </li>\n         </ul>\n    \n         <p>Here is an example of how you could specify the <code>formatParams</code>:</p>\n         <p>\n            <code>\n          \"formatParams\": \n        {\n         \"formatType\": \"CSV\",\n         \"withHeader\": \"true\",\n         \"separator\": \",\",\n         \"compression\":\"None\"\n         } \n      </code> \n         </p>\n         <p>Note that if you only provide <code>formatType</code> as <code>CSV</code>, the rest of the attributes will automatically default to CSV values as following:</p>\n         <p>\n            <code>\n          {\n          \"withHeader\": \"true\",\n          \"separator\": \",\"\n           }\n        </code>\n         </p>\n         <p> For more information about supported file formats, see <a href=\"https://docs.aws.amazon.com/finspace/latest/userguide/supported-data-types.html\">Supported Data Types and File Formats</a> in the FinSpace User Guide.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -601,7 +693,7 @@
                     "target": "com.amazonaws.finspacedata#TimestampEpoch",
                     "traits": {
                         "smithy.api#box": {},
-                        "smithy.api#documentation": "<p>Beginning time to use for the Dataview. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
+                        "smithy.api#documentation": "<p>Beginning time to use for the Dataview. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
                     }
                 },
                 "destinationTypeParams": {
@@ -696,7 +788,7 @@
                 "kind": {
                     "target": "com.amazonaws.finspacedata#DatasetKind",
                     "traits": {
-                        "smithy.api#documentation": "<p>The format in which Dataset data is structured.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>TABULAR</code> - Data is structured in a tabular format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NON_TABULAR</code> - Data is structured in a non-tabular format.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The format in which Dataset data is structured.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>TABULAR</code> – Data is structured in a tabular format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NON_TABULAR</code> – Data is structured in a non-tabular format.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -750,6 +842,184 @@
                 "smithy.api#documentation": "The response from a CreateDataset operation"
             }
         },
+        "com.amazonaws.finspacedata#CreatePermissionGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.finspacedata#CreatePermissionGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.finspacedata#CreatePermissionGroupResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.finspacedata#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a group of permissions for various actions that a user can perform in FinSpace.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/permission-group",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#CreatePermissionGroupRequest": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.finspacedata#PermissionGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the permission group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.finspacedata#PermissionGroupDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A brief description for the permission group.</p>"
+                    }
+                },
+                "applicationPermissions": {
+                    "target": "com.amazonaws.finspacedata#ApplicationPermissionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The option to indicate FinSpace application permissions that are granted to a specific group.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CreateDataset</code> – Group members can create new datasets.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ManageClusters</code> – Group members can manage Apache Spark clusters from FinSpace notebooks.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ManageUsersAndGroups</code> – Group members can manage users and permission groups.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ManageAttributeSets</code> – Group members can manage attribute sets.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ViewAuditData</code> – Group members can view audit data.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AccessNotebooks</code> – Group members will have access to FinSpace notebooks.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GetTemporaryCredentials</code> – Group members can get temporary API credentials.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.finspacedata#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that ensures idempotency. This token expires in 10 minutes.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#CreatePermissionGroupResponse": {
+            "type": "structure",
+            "members": {
+                "permissionGroupId": {
+                    "target": "com.amazonaws.finspacedata#PermissionGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the permission group.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#CreateUser": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.finspacedata#CreateUserRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.finspacedata#CreateUserResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.finspacedata#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new user in FinSpace.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/user",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#CreateUserRequest": {
+            "type": "structure",
+            "members": {
+                "emailAddress": {
+                    "target": "com.amazonaws.finspacedata#Email",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The email address of the user that you want to register. The email address serves as a uniquer identifier for each user and cannot be changed after it's created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.finspacedata#UserType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The option to indicate the type of user. Use one of the following options to specify this parameter:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SUPER_USER</code> – A user with permission to all the functionality and data in FinSpace.</p>\n            </li>\n            <li>\n               <p>\n                  <code>APP_USER</code> – A user with specific permissions in FinSpace. The users are assigned permissions by adding them to a permission group.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "firstName": {
+                    "target": "com.amazonaws.finspacedata#FirstName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The first name of the user that you want to register.</p>"
+                    }
+                },
+                "lastName": {
+                    "target": "com.amazonaws.finspacedata#LastName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last name of the user that you want to register.</p>"
+                    }
+                },
+                "ApiAccess": {
+                    "target": "com.amazonaws.finspacedata#ApiAccess",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The option to indicate whether the user can use the <code>GetProgrammaticAccessCredentials</code> API to obtain credentials that can then be used to access other FinSpace Data API operations.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ENABLED</code> – The user has permissions to use the APIs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED</code> – The user does not have permissions to use any APIs.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "apiAccessPrincipalArn": {
+                    "target": "com.amazonaws.finspacedata#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN identifier of an AWS user or role that is allowed to call the <code>GetProgrammaticAccessCredentials</code> API to obtain a credentials token for a specific FinSpace user. This must be an IAM role within your FinSpace account.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.finspacedata#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that ensures idempotency. This token expires in 10 minutes.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#CreateUserResponse": {
+            "type": "structure",
+            "members": {
+                "userId": {
+                    "target": "com.amazonaws.finspacedata#UserId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the user.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.finspacedata#Credentials": {
             "type": "structure",
             "members": {
@@ -794,14 +1064,14 @@
                 "destinationType": {
                     "target": "com.amazonaws.finspacedata#DataViewDestinationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Destination type for a Dataview.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>GLUE_TABLE</code> - Glue table destination type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>S3</code> - S3 destination type.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Destination type for a Dataview.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>GLUE_TABLE</code> – Glue table destination type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>S3</code> – S3 destination type.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "s3DestinationExportFileFormat": {
                     "target": "com.amazonaws.finspacedata#ExportFileFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>Data view export file format.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PARQUET</code> - Parquet export file format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELIMITED_TEXT</code> - Delimited text export file format.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Data view export file format.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PARQUET</code> – Parquet export file format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELIMITED_TEXT</code> – Delimited text export file format.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "s3DestinationExportFileFormatOptions": {
@@ -827,7 +1097,7 @@
                 "errorCategory": {
                     "target": "com.amazonaws.finspacedata#ErrorCategory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The category of the error.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>VALIDATION</code> -The inputs to this request are invalid.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SERVICE_QUOTA_EXCEEDED</code> - Service quotas have been exceeded. Please\n          contact AWS support to increase quotas.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACCESS_DENIED</code> - Missing required permission to perform this\n          request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RESOURCE_NOT_FOUND</code> - One or more inputs to this request were not\n          found.</p>\n            </li>\n            <li>\n               <p>\n                  <code>THROTTLING</code> - The system temporarily lacks sufficient resources to process\n          the request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INTERNAL_SERVICE_EXCEPTION</code> - An internal service error has\n          occurred.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CANCELLED</code> - Cancelled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>USER_RECOVERABLE</code> - A user recoverable error has occurred.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The category of the error.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>VALIDATION</code> – The inputs to this request are invalid.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SERVICE_QUOTA_EXCEEDED</code> – Service quotas have been exceeded. Please\n          contact AWS support to increase quotas.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACCESS_DENIED</code> – Missing required permission to perform this\n          request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RESOURCE_NOT_FOUND</code> – One or more inputs to this request were not\n          found.</p>\n            </li>\n            <li>\n               <p>\n                  <code>THROTTLING</code> – The system temporarily lacks sufficient resources to process\n          the request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INTERNAL_SERVICE_EXCEPTION</code> – An internal service error has\n          occurred.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CANCELLED</code> – Cancelled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>USER_RECOVERABLE</code> – A user recoverable error has occurred.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -919,7 +1189,7 @@
                     "target": "com.amazonaws.finspacedata#TimestampEpoch",
                     "traits": {
                         "smithy.api#box": {},
-                        "smithy.api#documentation": "<p>Time range to use for the Dataview. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
+                        "smithy.api#documentation": "<p>Time range to use for the Dataview. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
                     }
                 },
                 "partitionColumns": {
@@ -937,7 +1207,7 @@
                 "status": {
                     "target": "com.amazonaws.finspacedata#DataViewStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of a Dataview creation.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>RUNNING</code> - Dataview creation is running.</p> \n            </li>\n            <li>\n               <p>\n                  <code>STARTING</code> - Dataview creation is starting.</p> \n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> - Dataview creation has failed.</p> \n            </li>\n            <li>\n               <p>\n                  <code>CANCELLED</code> - Dataview creation has been cancelled.</p> \n            </li>\n            <li>\n               <p>\n                  <code>TIMEOUT</code> - Dataview creation has timed out.</p> \n            </li>\n            <li>\n               <p>\n                  <code>SUCCESS</code> - Dataview creation has succeeded.</p> \n            </li>\n            <li>\n               <p>\n                  <code>PENDING</code> - Dataview creation is pending.</p> \n            </li>\n            <li>\n               <p>\n                  <code>FAILED_CLEANUP_FAILED</code> - Dataview creation failed and resource cleanup failed.</p> \n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The status of a Dataview creation.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>RUNNING</code> – Dataview creation is running.</p> \n            </li>\n            <li>\n               <p>\n                  <code>STARTING</code> – Dataview creation is starting.</p> \n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> – Dataview creation has failed.</p> \n            </li>\n            <li>\n               <p>\n                  <code>CANCELLED</code> – Dataview creation has been cancelled.</p> \n            </li>\n            <li>\n               <p>\n                  <code>TIMEOUT</code> – Dataview creation has timed out.</p> \n            </li>\n            <li>\n               <p>\n                  <code>SUCCESS</code> – Dataview creation has succeeded.</p> \n            </li>\n            <li>\n               <p>\n                  <code>PENDING</code> – Dataview creation is pending.</p> \n            </li>\n            <li>\n               <p>\n                  <code>FAILED_CLEANUP_FAILED</code> – Dataview creation failed and resource cleanup failed.</p> \n            </li>\n         </ul>"
                     }
                 },
                 "errorInfo": {
@@ -961,13 +1231,13 @@
                 "createTime": {
                     "target": "com.amazonaws.finspacedata#TimestampEpoch",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp at which the Dataview was created in FinSpace. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
+                        "smithy.api#documentation": "<p>The timestamp at which the Dataview was created in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
                     }
                 },
                 "lastModifiedTime": {
                     "target": "com.amazonaws.finspacedata#TimestampEpoch",
                     "traits": {
-                        "smithy.api#documentation": "<p>The last time that a Dataview was modified. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
+                        "smithy.api#documentation": "<p>The last time that a Dataview was modified. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
                     }
                 }
             },
@@ -999,7 +1269,7 @@
                 "kind": {
                     "target": "com.amazonaws.finspacedata#DatasetKind",
                     "traits": {
-                        "smithy.api#documentation": "<p>The format in which Dataset data is structured.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>TABULAR</code> - Data is structured in a tabular format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NON_TABULAR</code> - Data is structured in a non-tabular format.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The format in which Dataset data is structured.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>TABULAR</code> – Data is structured in a tabular format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NON_TABULAR</code> – Data is structured in a non-tabular format.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "datasetDescription": {
@@ -1017,13 +1287,13 @@
                 "createTime": {
                     "target": "com.amazonaws.finspacedata#TimestampEpoch",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp at which the Dataset was created in FinSpace. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
+                        "smithy.api#documentation": "<p>The timestamp at which the Dataset was created in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
                     }
                 },
                 "lastModifiedTime": {
                     "target": "com.amazonaws.finspacedata#TimestampEpoch",
                     "traits": {
-                        "smithy.api#documentation": "<p>The last time that the Dataset was modified. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
+                        "smithy.api#documentation": "<p>The last time that the Dataset was modified. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
                     }
                 },
                 "schemaDefinition": {
@@ -1101,7 +1371,7 @@
                 "name": {
                     "target": "com.amazonaws.finspacedata#OwnerName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Name of the Dataset owner.</p>"
+                        "smithy.api#documentation": "<p>The name of the Dataset owner.</p>"
                     }
                 },
                 "phoneNumber": {
@@ -1234,15 +1504,226 @@
                 "smithy.api#documentation": "The response from an DeleteDataset operation"
             }
         },
+        "com.amazonaws.finspacedata#DeletePermissionGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.finspacedata#DeletePermissionGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.finspacedata#DeletePermissionGroupResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.finspacedata#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a permission group. This action is irreversible.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/permission-group/{permissionGroupId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#DeletePermissionGroupRequest": {
+            "type": "structure",
+            "members": {
+                "permissionGroupId": {
+                    "target": "com.amazonaws.finspacedata#PermissionGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the permission group that you want to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.finspacedata#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that ensures idempotency. This token expires in 10 minutes.</p>",
+                        "smithy.api#httpQuery": "clientToken",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#DeletePermissionGroupResponse": {
+            "type": "structure",
+            "members": {
+                "permissionGroupId": {
+                    "target": "com.amazonaws.finspacedata#PermissionGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the deleted permission group.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#DisableUser": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.finspacedata#DisableUserRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.finspacedata#DisableUserResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.finspacedata#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Denies access to the FinSpace web application and API for the specified user.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/user/{userId}/disable",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#DisableUserRequest": {
+            "type": "structure",
+            "members": {
+                "userId": {
+                    "target": "com.amazonaws.finspacedata#UserId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the user account that you want to disable.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.finspacedata#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that ensures idempotency. This token expires in 10 minutes.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#DisableUserResponse": {
+            "type": "structure",
+            "members": {
+                "userId": {
+                    "target": "com.amazonaws.finspacedata#UserId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the disabled user account.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.finspacedata#Email": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Email of Dataset Owner",
                 "smithy.api#length": {
                     "min": 4,
                     "max": 320
                 },
-                "smithy.api#pattern": "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}$"
+                "smithy.api#pattern": "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.finspacedata#EnableUser": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.finspacedata#EnableUserRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.finspacedata#EnableUserResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.finspacedata#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p> Allows the specified user to access the FinSpace web application and API.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/user/{userId}/enable",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#EnableUserRequest": {
+            "type": "structure",
+            "members": {
+                "userId": {
+                    "target": "com.amazonaws.finspacedata#UserId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the user account that you want to enable.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.finspacedata#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that ensures idempotency. This token expires in 10 minutes.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#EnableUserResponse": {
+            "type": "structure",
+            "members": {
+                "userId": {
+                    "target": "com.amazonaws.finspacedata#UserId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the enabled user account.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.finspacedata#ErrorCategory": {
@@ -1312,6 +1793,17 @@
                         "name": "DELIMITED_TEXT"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.finspacedata#FirstName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                },
+                "smithy.api#pattern": "\\S",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.finspacedata#FormatParams": {
@@ -1411,7 +1903,7 @@
                 "changeType": {
                     "target": "com.amazonaws.finspacedata#ChangeType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Type that indicates how a Changeset is applied to a Dataset.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>REPLACE</code> - Changeset is considered as a replacement to all prior loaded Changesets.</p>\n            </li>\n            <li>\n               <p>\n                  <code>APPEND</code> - Changeset is considered as an addition to the end of all prior loaded Changesets.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MODIFY</code> - Changeset is considered as a replacement to a specific prior ingested Changeset.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Type that indicates how a Changeset is applied to a Dataset.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>REPLACE</code> – Changeset is considered as a replacement to all prior loaded Changesets.</p>\n            </li>\n            <li>\n               <p>\n                  <code>APPEND</code> – Changeset is considered as an addition to the end of all prior loaded Changesets.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MODIFY</code> – Changeset is considered as a replacement to a specific prior ingested Changeset.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "sourceParams": {
@@ -1429,7 +1921,7 @@
                 "createTime": {
                     "target": "com.amazonaws.finspacedata#TimestampEpoch",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp at which the Changeset was created in FinSpace. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
+                        "smithy.api#documentation": "<p>The timestamp at which the Changeset was created in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
                     }
                 },
                 "status": {
@@ -1448,14 +1940,14 @@
                     "target": "com.amazonaws.finspacedata#TimestampEpoch",
                     "traits": {
                         "smithy.api#box": {},
-                        "smithy.api#documentation": "<p>Time until which the Changeset is active. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
+                        "smithy.api#documentation": "<p>Time until which the Changeset is active. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
                     }
                 },
                 "activeFromTimestamp": {
                     "target": "com.amazonaws.finspacedata#TimestampEpoch",
                     "traits": {
                         "smithy.api#box": {},
-                        "smithy.api#documentation": "<p>Beginning time from which the Changeset is active. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
+                        "smithy.api#documentation": "<p>Beginning time from which the Changeset is active. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
                     }
                 },
                 "updatesChangesetId": {
@@ -1558,7 +2050,7 @@
                     "target": "com.amazonaws.finspacedata#TimestampEpoch",
                     "traits": {
                         "smithy.api#box": {},
-                        "smithy.api#documentation": "<p>Time range to use for the Dataview. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
+                        "smithy.api#documentation": "<p>Time range to use for the Dataview. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
                     }
                 },
                 "errorInfo": {
@@ -1570,13 +2062,13 @@
                 "lastModifiedTime": {
                     "target": "com.amazonaws.finspacedata#TimestampEpoch",
                     "traits": {
-                        "smithy.api#documentation": "<p>The last time that a Dataview was modified. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
+                        "smithy.api#documentation": "<p>The last time that a Dataview was modified. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
                     }
                 },
                 "createTime": {
                     "target": "com.amazonaws.finspacedata#TimestampEpoch",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp at which the Dataview was created in FinSpace. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
+                        "smithy.api#documentation": "<p>The timestamp at which the Dataview was created in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
                     }
                 },
                 "sortColumns": {
@@ -1606,7 +2098,7 @@
                 "status": {
                     "target": "com.amazonaws.finspacedata#DataViewStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of a Dataview creation.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>RUNNING</code> - Dataview creation is running.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STARTING</code> - Dataview creation is starting.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> - Dataview creation has failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CANCELLED</code> - Dataview creation has been cancelled.</p>\n            </li>\n            <li> \n               <p>\n                  <code>TIMEOUT</code> - Dataview creation has timed out.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUCCESS</code> - Dataview creation has succeeded.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PENDING</code> - Dataview creation is pending.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED_CLEANUP_FAILED</code> - Dataview creation failed and resource cleanup failed.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The status of a Dataview creation.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>RUNNING</code> – Dataview creation is running.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STARTING</code> – Dataview creation is starting.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> – Dataview creation has failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CANCELLED</code> – Dataview creation has been cancelled.</p>\n            </li>\n            <li> \n               <p>\n                  <code>TIMEOUT</code> – Dataview creation has timed out.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUCCESS</code> – Dataview creation has succeeded.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PENDING</code> – Dataview creation is pending.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED_CLEANUP_FAILED</code> – Dataview creation failed and resource cleanup failed.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -1691,7 +2183,7 @@
                 "kind": {
                     "target": "com.amazonaws.finspacedata#DatasetKind",
                     "traits": {
-                        "smithy.api#documentation": "<p>The format in which Dataset data is structured.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>TABULAR</code> - Data is structured in a tabular format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NON_TABULAR</code> - Data is structured in a non-tabular format.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The format in which Dataset data is structured.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>TABULAR</code> – Data is structured in a tabular format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NON_TABULAR</code> – Data is structured in a non-tabular format.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "datasetDescription": {
@@ -1703,13 +2195,13 @@
                 "createTime": {
                     "target": "com.amazonaws.finspacedata#TimestampEpoch",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp at which the Dataset was created in FinSpace. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
+                        "smithy.api#documentation": "<p>The timestamp at which the Dataset was created in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
                     }
                 },
                 "lastModifiedTime": {
                     "target": "com.amazonaws.finspacedata#TimestampEpoch",
                     "traits": {
-                        "smithy.api#documentation": "<p>The last time that the Dataset was modified. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
+                        "smithy.api#documentation": "<p>The last time that the Dataset was modified. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
                     }
                 },
                 "schemaDefinition": {
@@ -1727,7 +2219,7 @@
                 "status": {
                     "target": "com.amazonaws.finspacedata#DatasetStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Status of the Dataset creation.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PENDING</code> - Dataset is pending creation.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> - Dataset creation has failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUCCESS</code> - Dataset creation has succeeded.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RUNNING</code> - Dataset creation is running.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Status of the Dataset creation.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PENDING</code> – Dataset is pending creation.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> – Dataset creation has failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUCCESS</code> – Dataset creation has succeeded.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RUNNING</code> – Dataset creation is running.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -1809,6 +2301,136 @@
                 "smithy.api#documentation": "Response for GetProgrammaticAccessCredentials operation"
             }
         },
+        "com.amazonaws.finspacedata#GetUser": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.finspacedata#GetUserRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.finspacedata#GetUserResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.finspacedata#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves details for a specific user.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/user/{userId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#GetUserRequest": {
+            "type": "structure",
+            "members": {
+                "userId": {
+                    "target": "com.amazonaws.finspacedata#UserId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the user to get data for.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#GetUserResponse": {
+            "type": "structure",
+            "members": {
+                "userId": {
+                    "target": "com.amazonaws.finspacedata#UserId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the user account that is retrieved.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.finspacedata#UserStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the user account. </p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATING</code> – The user account creation is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ENABLED</code> – The user account is created and is currently active.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED</code> – The user account is currently inactive.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "firstName": {
+                    "target": "com.amazonaws.finspacedata#FirstName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The first name of the user.</p>"
+                    }
+                },
+                "lastName": {
+                    "target": "com.amazonaws.finspacedata#LastName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last name of the user.</p>"
+                    }
+                },
+                "emailAddress": {
+                    "target": "com.amazonaws.finspacedata#Email",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The email address that is associated with the user.</p>"
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.finspacedata#UserType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the type of user.  </p>\n         <ul>\n            <li>\n               <p>\n                  <code>SUPER_USER</code> – A user with permission to all the functionality and data in FinSpace.</p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>\n                  <code>APP_USER</code> – A user with specific permissions in FinSpace. The users are assigned permissions by adding them to a permissions group.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "apiAccess": {
+                    "target": "com.amazonaws.finspacedata#ApiAccess",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the user can use the <code>GetProgrammaticAccessCredentials</code> API to obtain credentials that can then be used to access other FinSpace Data API operations. </p>\n         <ul>\n            <li>\n               <p>\n                  <code>ENABLED</code> – The user has permissions to use the APIs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED</code> – The user does not have permissions to use any APIs.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "apiAccessPrincipalArn": {
+                    "target": "com.amazonaws.finspacedata#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN identifier of an AWS user or role that is allowed to call the <code>GetProgrammaticAccessCredentials</code> API to obtain a credentials token for a specific FinSpace user. This must be an IAM role within your FinSpace account.</p>"
+                    }
+                },
+                "createTime": {
+                    "target": "com.amazonaws.finspacedata#TimestampEpoch",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the user account was created in FinSpace. The value is determined as epoch time in milliseconds. </p>"
+                    }
+                },
+                "lastEnabledTime": {
+                    "target": "com.amazonaws.finspacedata#TimestampEpoch",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the last time the user account was enabled. The value is determined as epoch time in milliseconds.</p>"
+                    }
+                },
+                "lastDisabledTime": {
+                    "target": "com.amazonaws.finspacedata#TimestampEpoch",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the last time the user account was disabled. The value is determined as epoch time in milliseconds.</p>"
+                    }
+                },
+                "lastModifiedTime": {
+                    "target": "com.amazonaws.finspacedata#TimestampEpoch",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the last time the user account was updated. The value is determined as epoch time in milliseconds.</p>"
+                    }
+                },
+                "lastLoginTime": {
+                    "target": "com.amazonaws.finspacedata#TimestampEpoch",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the last time that the user logged into their account. The value is determined as epoch time in milliseconds.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.finspacedata#GetWorkingLocation": {
             "type": "operation",
             "input": {
@@ -1846,7 +2468,7 @@
                 "locationType": {
                     "target": "com.amazonaws.finspacedata#locationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify the type of the working location.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SAGEMAKER</code> - Use the Amazon S3 location as a temporary location to store data content when\n          working with FinSpace Notebooks that run on SageMaker studio.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INGESTION</code> - Use the Amazon S3 location as a staging location to copy your\n          data content and then use the location with the Changeset creation operation.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specify the type of the working location.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SAGEMAKER</code> – Use the Amazon S3 location as a temporary location to store data content when\n          working with FinSpace Notebooks that run on SageMaker studio.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INGESTION</code> – Use the Amazon S3 location as a staging location to copy your\n          data content and then use the location with the Changeset creation operation.</p>\n            </li>\n         </ul>"
                     }
                 }
             }
@@ -1922,6 +2544,17 @@
                 "smithy.api#documentation": "<p>The request processing has failed because of an unknown error, exception or\n      failure.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.finspacedata#LastName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                },
+                "smithy.api#pattern": "\\S",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.finspacedata#LimitExceededException": {
@@ -2001,7 +2634,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.finspacedata#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token indicating where a results page should begin.</p>",
+                        "smithy.api#documentation": "<p>A token that indicates where a results page should begin.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
@@ -2022,7 +2655,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.finspacedata#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token indicating where a results page should begin.</p>"
+                        "smithy.api#documentation": "<p>A token that indicates where a results page should begin.</p>"
                     }
                 }
             },
@@ -2083,7 +2716,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.finspacedata#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token indicating where a results page should begin.</p>",
+                        "smithy.api#documentation": "<p>A token that indicates where a results page should begin.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -2106,7 +2739,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.finspacedata#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token indicating where a results page should begin.</p>"
+                        "smithy.api#documentation": "<p>A token that indicates where a results page should begin.</p>"
                     }
                 },
                 "dataViews": {
@@ -2162,7 +2795,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.finspacedata#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token indicating where a results page should begin.</p>",
+                        "smithy.api#documentation": "<p>A token that indicates where a results page should begin.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -2191,12 +2824,158 @@
                 "nextToken": {
                     "target": "com.amazonaws.finspacedata#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token indicating where a results page should begin.</p>"
+                        "smithy.api#documentation": "<p>A token that indicates where a results page should begin.</p>"
                     }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "Response for the ListDatasets operation"
+            }
+        },
+        "com.amazonaws.finspacedata#ListPermissionGroups": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.finspacedata#ListPermissionGroupsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.finspacedata#ListPermissionGroupsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.finspacedata#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all available permission groups in FinSpace.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/permission-group",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#ListPermissionGroupsRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.finspacedata#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that indicates where a results page should begin.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.finspacedata#ResultLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results per page.</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#ListPermissionGroupsResponse": {
+            "type": "structure",
+            "members": {
+                "permissionGroups": {
+                    "target": "com.amazonaws.finspacedata#PermissionGroupList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of all the permission groups.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.finspacedata#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that indicates where a results page should begin.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#ListUsers": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.finspacedata#ListUsersRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.finspacedata#ListUsersResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.finspacedata#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all available user accounts in FinSpace.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/user",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#ListUsersRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.finspacedata#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that indicates where a results page should begin.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.finspacedata#ResultLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results per page.</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#ListUsersResponse": {
+            "type": "structure",
+            "members": {
+                "users": {
+                    "target": "com.amazonaws.finspacedata#UserList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of all the user accounts.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.finspacedata#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that indicates where a results page should begin.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.finspacedata#OwnerName": {
@@ -2225,14 +3004,97 @@
                 "smithy.api#documentation": "DataView Partition Column List"
             }
         },
+        "com.amazonaws.finspacedata#Password": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 8,
+                    "max": 20
+                },
+                "smithy.api#pattern": "\\S",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.finspacedata#PermissionGroup": {
+            "type": "structure",
+            "members": {
+                "permissionGroupId": {
+                    "target": "com.amazonaws.finspacedata#PermissionGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The unique identifier for the permission group.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.finspacedata#PermissionGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the permission group.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.finspacedata#PermissionGroupDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A brief description for the permission group.</p>"
+                    }
+                },
+                "applicationPermissions": {
+                    "target": "com.amazonaws.finspacedata#ApplicationPermissionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the permissions that are granted to a specific group for accessing the FinSpace application.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CreateDataset</code> – Group members can create new datasets.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ManageClusters</code> – Group members can manage Apache Spark clusters from FinSpace notebooks.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ManageUsersAndGroups</code> – Group members can manage users and permission groups.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ManageAttributeSets</code> – Group members can manage attribute sets.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ViewAuditData</code> – Group members can view audit data.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AccessNotebooks</code> – Group members will have access to FinSpace notebooks.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GetTemporaryCredentials</code> – Group members can get temporary API credentials.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "createTime": {
+                    "target": "com.amazonaws.finspacedata#TimestampEpoch",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the group was created in FinSpace. The value is determined as epoch time in milliseconds.\n    </p>"
+                    }
+                },
+                "lastModifiedTime": {
+                    "target": "com.amazonaws.finspacedata#TimestampEpoch",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the last time the permission group was updated. The value is determined as epoch time in milliseconds.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The structure for a permission group.</p>"
+            }
+        },
+        "com.amazonaws.finspacedata#PermissionGroupDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4000
+                },
+                "smithy.api#pattern": "\\S",
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.finspacedata#PermissionGroupId": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Id of the associated PermissionGroup",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 26
-                }
+                },
+                "smithy.api#pattern": "\\S"
+            }
+        },
+        "com.amazonaws.finspacedata#PermissionGroupList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.finspacedata#PermissionGroup"
+            }
+        },
+        "com.amazonaws.finspacedata#PermissionGroupName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "\\S",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.finspacedata#PermissionGroupParams": {
@@ -2241,7 +3103,7 @@
                 "permissionGroupId": {
                     "target": "com.amazonaws.finspacedata#PermissionGroupId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the PermissionGroup.</p>"
+                        "smithy.api#documentation": "<p>The unique identifier for the <code>PermissionGroup</code>.</p>"
                     }
                 },
                 "datasetPermissions": {
@@ -2266,10 +3128,87 @@
                 "smithy.api#pattern": "^[\\+0-9\\#\\,\\(][\\+0-9\\-\\.\\/\\(\\)\\,\\#\\s]+$"
             }
         },
+        "com.amazonaws.finspacedata#ResetUserPassword": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.finspacedata#ResetUserPasswordRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.finspacedata#ResetUserPasswordResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.finspacedata#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Resets the password for a specified user ID and generates a temporary one. Only a superuser can reset password for other users. Resetting the password immediately invalidates the previous password associated with the user.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/user/{userId}/password",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#ResetUserPasswordRequest": {
+            "type": "structure",
+            "members": {
+                "userId": {
+                    "target": "com.amazonaws.finspacedata#UserId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the user that a temporary password is requested for.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.finspacedata#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that ensures idempotency. This token expires in 10 minutes.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#ResetUserPasswordResponse": {
+            "type": "structure",
+            "members": {
+                "userId": {
+                    "target": "com.amazonaws.finspacedata#UserId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the user that a new password is generated for.</p>"
+                    }
+                },
+                "temporaryPassword": {
+                    "target": "com.amazonaws.finspacedata#Password",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A randomly generated temporary password for the requested user account. This password expires in 7 days.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.finspacedata#ResourceNotFoundException": {
             "type": "structure",
             "members": {
                 "message": {
+                    "target": "com.amazonaws.finspacedata#ErrorMessage2"
+                },
+                "reason": {
                     "target": "com.amazonaws.finspacedata#ErrorMessage2"
                 }
             },
@@ -2290,7 +3229,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Resource permission for a dataset. When you create a dataset, all the other members of the same user group inherit access to the dataset. You can only create a dataset if your user group has application permission for Create Datasets.</p>\n         <p>The following is a list of valid dataset permissions that you can apply:\n  \n  </p>\n         <ul>\n            <li>\n               <p>\n                  <code>ViewDatasetDetails</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ReadDatasetDetails</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AddDatasetData</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CreateSnapshot</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>EditDatasetMetadata</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DeleteDataset</code>\n               </p>\n            </li>\n         </ul>\n         <p>For more information on the ataset permissions, see <a href=\"https://docs.aws.amazon.com/finspace/latest/userguide/managing-user-permissions.html#supported-dataset-permissions\">Supported Dataset Permissions</a> in the FinSpace User Guide.</p>"
+                "smithy.api#documentation": "<p>Resource permission for a dataset. When you create a dataset, all the other members of the same user group inherit access to the dataset. You can only create a dataset if your user group has application permission for Create Datasets.</p>\n         <p>The following is a list of valid dataset permissions that you can apply:\n  \n  </p>\n         <ul>\n            <li>\n               <p>\n                  <code>ViewDatasetDetails</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ReadDatasetDetails</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AddDatasetData</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CreateSnapshot</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>EditDatasetMetadata</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DeleteDataset</code>\n               </p>\n            </li>\n         </ul>\n         <p>For more information on the dataset permissions, see <a href=\"https://docs.aws.amazon.com/finspace/latest/userguide/managing-user-permissions.html#supported-dataset-permissions\">Supported Dataset Permissions</a> in the FinSpace User Guide.</p>"
             }
         },
         "com.amazonaws.finspacedata#ResourcePermissionsList": {
@@ -2310,6 +3249,16 @@
                     "min": 1,
                     "max": 100
                 }
+            }
+        },
+        "com.amazonaws.finspacedata#RoleArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"
             }
         },
         "com.amazonaws.finspacedata#S3DestinationFormatOptions": {
@@ -2524,7 +3473,7 @@
                 "formatParams": {
                     "target": "com.amazonaws.finspacedata#FormatParams",
                     "traits": {
-                        "smithy.api#documentation": "<p>Options that define the structure of the source file(s) including the format type (<code>formatType</code>), header row (<code>withHeader</code>), data separation character (<code>separator</code>) and the type of compression (<code>compression</code>).\n    </p>\n         <p>\n            <code>formatType</code> is a required attribute and can have the following values:\n    </p>\n         <ul>\n            <li>\n               <p>\n                  <code>PARQUET</code> - Parquet source file format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CSV</code> - CSV source file format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>JSON</code> - JSON source file format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>XML</code> - XML source file format.</p>\n            </li>\n         </ul>\n    \n         <p>Here is an example of how you could specify the <code>formatParams</code>:</p>\n         <p>\n            <code>\n        \"formatParams\": \n        {\n        \"formatType\": \"CSV\",\n        \"withHeader\": \"true\",\n        \"separator\": \",\",\n        \"compression\":\"None\"\n        } \n      </code> \n         </p>\n         <p>Note that if you only provide <code>formatType</code> as <code>CSV</code>, the rest of the attributes will automatically default to CSV values as following:</p>\n         <p>\n            <code>\n        {\n        \"withHeader\": \"true\",\n        \"separator\": \",\"\n        }\n        </code>\n         </p>\n         <p> For more information about supported file formats, see <a href=\"https://docs.aws.amazon.com/finspace/latest/userguide/supported-data-types.html\">Supported Data Types and File Formats</a> in the FinSpace User Guide.</p>",
+                        "smithy.api#documentation": "<p>Options that define the structure of the source file(s) including the format type (<code>formatType</code>), header row (<code>withHeader</code>), data separation character (<code>separator</code>) and the type of compression (<code>compression</code>).\n    </p>\n         <p>\n            <code>formatType</code> is a required attribute and can have the following values:\n    </p>\n         <ul>\n            <li>\n               <p>\n                  <code>PARQUET</code> – Parquet source file format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CSV</code> – CSV source file format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>JSON</code> – JSON source file format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>XML</code> – XML source file format.</p>\n            </li>\n         </ul>\n    \n         <p>Here is an example of how you could specify the <code>formatParams</code>:</p>\n         <p>\n            <code>\n        \"formatParams\": \n        {\n        \"formatType\": \"CSV\",\n        \"withHeader\": \"true\",\n        \"separator\": \",\",\n        \"compression\":\"None\"\n        } \n      </code> \n         </p>\n         <p>Note that if you only provide <code>formatType</code> as <code>CSV</code>, the rest of the attributes will automatically default to CSV values as following:</p>\n         <p>\n            <code>\n        {\n        \"withHeader\": \"true\",\n        \"separator\": \",\"\n        }\n        </code>\n         </p>\n         <p> For more information about supported file formats, see <a href=\"https://docs.aws.amazon.com/finspace/latest/userguide/supported-data-types.html\">Supported Data Types and File Formats</a> in the FinSpace User Guide.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2618,7 +3567,7 @@
                 "kind": {
                     "target": "com.amazonaws.finspacedata#DatasetKind",
                     "traits": {
-                        "smithy.api#documentation": "<p>The format in which the Dataset data is structured.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>TABULAR</code> - Data is structured in a tabular format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NON_TABULAR</code> - Data is structured in a non-tabular format.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The format in which the Dataset data is structured.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>TABULAR</code> – Data is structured in a tabular format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NON_TABULAR</code> – Data is structured in a non-tabular format.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2659,10 +3608,333 @@
                 "smithy.api#documentation": "The response from an UpdateDataset operation"
             }
         },
+        "com.amazonaws.finspacedata#UpdatePermissionGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.finspacedata#UpdatePermissionGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.finspacedata#UpdatePermissionGroupResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.finspacedata#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Modifies the details of a permission group. You cannot modify a <code>permissionGroupID</code>.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/permission-group/{permissionGroupId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#UpdatePermissionGroupRequest": {
+            "type": "structure",
+            "members": {
+                "permissionGroupId": {
+                    "target": "com.amazonaws.finspacedata#PermissionGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the permission group to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.finspacedata#PermissionGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the permission group.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.finspacedata#PermissionGroupDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A brief description for the permission group.</p>"
+                    }
+                },
+                "applicationPermissions": {
+                    "target": "com.amazonaws.finspacedata#ApplicationPermissionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The permissions that are granted to a specific group for accessing the FinSpace application.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CreateDataset</code> – Group members can create new datasets.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ManageClusters</code> – Group members can manage Apache Spark clusters from FinSpace notebooks.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ManageUsersAndGroups</code> – Group members can manage users and permission groups.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ManageAttributeSets</code> – Group members can manage attribute sets.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ViewAuditData</code> – Group members can view audit data.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AccessNotebooks</code> – Group members will have access to FinSpace notebooks.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GetTemporaryCredentials</code> – Group members can get temporary API credentials.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.finspacedata#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that ensures idempotency. This token expires in 10 minutes.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#UpdatePermissionGroupResponse": {
+            "type": "structure",
+            "members": {
+                "permissionGroupId": {
+                    "target": "com.amazonaws.finspacedata#PermissionGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the updated permission group.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#UpdateUser": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.finspacedata#UpdateUserRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.finspacedata#UpdateUserResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.finspacedata#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Modifies the details of the specified user account. You cannot update the <code>userId</code> for a user.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/user/{userId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#UpdateUserRequest": {
+            "type": "structure",
+            "members": {
+                "userId": {
+                    "target": "com.amazonaws.finspacedata#UserId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the user account to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.finspacedata#UserType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The option to indicate the type of user.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SUPER_USER</code>– A user with permission to all the functionality and data in FinSpace.</p>\n            </li>\n            <li>\n               <p>\n                  <code>APP_USER</code> – A user with specific permissions in FinSpace. The users are assigned permissions by adding them to a permissions group.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "firstName": {
+                    "target": "com.amazonaws.finspacedata#FirstName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The first name of the user.</p>"
+                    }
+                },
+                "lastName": {
+                    "target": "com.amazonaws.finspacedata#LastName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last name of the user.</p>"
+                    }
+                },
+                "apiAccess": {
+                    "target": "com.amazonaws.finspacedata#ApiAccess",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The option to indicate whether the user can use the <code>GetProgrammaticAccessCredentials</code> API to obtain credentials that can then be used to access other FinSpace Data API operations.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ENABLED</code> – The user has permissions to use the APIs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED</code> – The user does not have permissions to use any APIs.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "apiAccessPrincipalArn": {
+                    "target": "com.amazonaws.finspacedata#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN identifier of an AWS user or role that is allowed to call the <code>GetProgrammaticAccessCredentials</code> API to obtain a credentials token for a specific FinSpace user. This must be an IAM role within your FinSpace account.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.finspacedata#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that ensures idempotency. This token expires in 10 minutes.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#UpdateUserResponse": {
+            "type": "structure",
+            "members": {
+                "userId": {
+                    "target": "com.amazonaws.finspacedata#UserId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the updated user account.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#User": {
+            "type": "structure",
+            "members": {
+                "userId": {
+                    "target": "com.amazonaws.finspacedata#UserId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the user.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.finspacedata#UserStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the user account. </p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATING</code> – The user account creation is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ENABLED</code> – The user account is created and is currently active.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED</code> – The user account is currently inactive.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "firstName": {
+                    "target": "com.amazonaws.finspacedata#FirstName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The first name of the user.</p>"
+                    }
+                },
+                "lastName": {
+                    "target": "com.amazonaws.finspacedata#LastName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The last name of the user.</p>"
+                    }
+                },
+                "emailAddress": {
+                    "target": "com.amazonaws.finspacedata#Email",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The email address of the user. The email address serves as a uniquer identifier for each user and cannot be changed after it's created.</p>"
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.finspacedata#UserType",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Indicates the type of user.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SUPER_USER</code> – A user with permission to all the functionality and data in FinSpace.</p>\n            </li>\n            <li>\n               <p>\n                  <code>APP_USER</code> – A user with specific permissions in FinSpace. The users are assigned permissions by adding them to a permissions group.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "apiAccess": {
+                    "target": "com.amazonaws.finspacedata#ApiAccess",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the user can use the <code>GetProgrammaticAccessCredentials</code> API to obtain credentials that can then be used to access other FinSpace Data API operations.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ENABLED</code> – The user has permissions to use the APIs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED</code> – The user does not have permissions to use any APIs.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "apiAccessPrincipalArn": {
+                    "target": "com.amazonaws.finspacedata#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN identifier of an AWS user or role that is allowed to call the <code>GetProgrammaticAccessCredentials</code> API to obtain a credentials token for a specific FinSpace user. This must be an IAM role within your FinSpace account.</p>"
+                    }
+                },
+                "createTime": {
+                    "target": "com.amazonaws.finspacedata#TimestampEpoch",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the user account was created in FinSpace. The value is determined as epoch time in milliseconds. </p>"
+                    }
+                },
+                "lastEnabledTime": {
+                    "target": "com.amazonaws.finspacedata#TimestampEpoch",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Describes the last time the user account was enabled. The value is determined as epoch time in milliseconds.\n    </p>"
+                    }
+                },
+                "lastDisabledTime": {
+                    "target": "com.amazonaws.finspacedata#TimestampEpoch",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the last time the user account was disabled. The value is determined as epoch time in milliseconds.</p>"
+                    }
+                },
+                "lastModifiedTime": {
+                    "target": "com.amazonaws.finspacedata#TimestampEpoch",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the last time the user account was updated. The value is determined as epoch time in milliseconds.\n    </p>"
+                    }
+                },
+                "lastLoginTime": {
+                    "target": "com.amazonaws.finspacedata#TimestampEpoch",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the last time that the user logged into their account. The value is determined as epoch time in milliseconds.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of the user account.</p>"
+            }
+        },
+        "com.amazonaws.finspacedata#UserId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 26
+                },
+                "smithy.api#pattern": "\\S"
+            }
+        },
+        "com.amazonaws.finspacedata#UserList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.finspacedata#User"
+            }
+        },
+        "com.amazonaws.finspacedata#UserStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CREATING",
+                        "name": "CREATING"
+                    },
+                    {
+                        "value": "ENABLED",
+                        "name": "ENABLED"
+                    },
+                    {
+                        "value": "DISABLED",
+                        "name": "DISABLED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.finspacedata#UserType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SUPER_USER",
+                        "name": "SUPER_USER"
+                    },
+                    {
+                        "value": "APP_USER",
+                        "name": "APP_USER"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.finspacedata#ValidationException": {
             "type": "structure",
             "members": {
                 "message": {
+                    "target": "com.amazonaws.finspacedata#ErrorMessage2"
+                },
+                "reason": {
                     "target": "com.amazonaws.finspacedata#ErrorMessage2"
                 }
             },

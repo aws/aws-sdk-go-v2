@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all Amazon Macie Classic member accounts for the current Macie Classic
-// administrator account.
+// (Discontinued) Lists all Amazon Macie Classic member accounts for the current
+// Macie Classic administrator account.
 func (c *Client) ListMemberAccounts(ctx context.Context, params *ListMemberAccountsInput, optFns ...func(*Options)) (*ListMemberAccountsOutput, error) {
 	if params == nil {
 		params = &ListMemberAccountsInput{}
@@ -31,14 +31,14 @@ func (c *Client) ListMemberAccounts(ctx context.Context, params *ListMemberAccou
 
 type ListMemberAccountsInput struct {
 
-	// Use this parameter to indicate the maximum number of items that you want in the
-	// response. The default value is 250.
+	// (Discontinued) Use this parameter to indicate the maximum number of items that
+	// you want in the response. The default value is 250.
 	MaxResults *int32
 
-	// Use this parameter when paginating results. Set the value of this parameter to
-	// null on your first call to the ListMemberAccounts action. Subsequent calls to
-	// the action fill nextToken in the request with the value of nextToken from the
-	// previous response to continue listing data.
+	// (Discontinued) Use this parameter when paginating results. Set the value of this
+	// parameter to null on your first call to the ListMemberAccounts action.
+	// Subsequent calls to the action fill nextToken in the request with the value of
+	// nextToken from the previous response to continue listing data.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -46,14 +46,15 @@ type ListMemberAccountsInput struct {
 
 type ListMemberAccountsOutput struct {
 
-	// A list of the Amazon Macie Classic member accounts returned by the action. The
-	// current Macie Classic administrator account is also included in this list.
+	// (Discontinued) A list of the Amazon Macie Classic member accounts returned by
+	// the action. The current Macie Classic administrator account is also included in
+	// this list.
 	MemberAccounts []types.MemberAccount
 
-	// When a response is generated, if there is more data to be listed, this parameter
-	// is present in the response and contains the value to use for the nextToken
-	// parameter in a subsequent pagination request. If there is no more data to be
-	// listed, this parameter is set to null.
+	// (Discontinued) When a response is generated, if there is more data to be listed,
+	// this parameter is present in the response and contains the value to use for the
+	// nextToken parameter in a subsequent pagination request. If there is no more data
+	// to be listed, this parameter is set to null.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -133,8 +134,8 @@ var _ ListMemberAccountsAPIClient = (*Client)(nil)
 // ListMemberAccountsPaginatorOptions is the paginator options for
 // ListMemberAccounts
 type ListMemberAccountsPaginatorOptions struct {
-	// Use this parameter to indicate the maximum number of items that you want in the
-	// response. The default value is 250.
+	// (Discontinued) Use this parameter to indicate the maximum number of items that
+	// you want in the response. The default value is 250.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

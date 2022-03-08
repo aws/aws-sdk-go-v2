@@ -70,7 +70,7 @@ type CreateClusterInput struct {
 	// operation.
 	DefaultCapacityProviderStrategy []types.CapacityProviderStrategyItem
 
-	// The setting to use when creating a cluster. This parameter is used to enable
+	// The setting to use when creating a cluster. This parameter is used to turn on
 	// CloudWatch Container Insights for a cluster. If this value is specified, it
 	// overrides the containerInsights value set with PutAccountSetting or
 	// PutAccountSettingDefault.

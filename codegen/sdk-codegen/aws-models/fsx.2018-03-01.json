@@ -1208,7 +1208,7 @@
                 "FileSystemPath": {
                     "target": "com.amazonaws.fsx#Namespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>A path on the file system that points to a high-level directory (such\n            as <code>/ns1/</code>) or subdirectory (such as <code>/ns1/subdir/</code>)\n            that will be mapped 1-1 with <code>DataRepositoryPath</code>.\n            The leading forward slash in the name is required. Two data repository\n            associations cannot have overlapping file system paths. For example, if\n            a data repository is associated with file system path <code>/ns1/</code>,\n            then you cannot link another data repository with file system\n            path <code>/ns1/ns2</code>.</p>\n        <p>This path specifies where in your file system files will be exported\n            from or imported to. This file system directory can be linked to only one\n            Amazon S3 bucket, and no other S3 bucket can be linked to the directory.</p>",
+                        "smithy.api#documentation": "<p>A path on the file system that points to a high-level directory (such\n            as <code>/ns1/</code>) or subdirectory (such as <code>/ns1/subdir/</code>)\n            that will be mapped 1-1 with <code>DataRepositoryPath</code>.\n            The leading forward slash in the name is required. Two data repository\n            associations cannot have overlapping file system paths. For example, if\n            a data repository is associated with file system path <code>/ns1/</code>,\n            then you cannot link another data repository with file system\n            path <code>/ns1/ns2</code>.</p>\n        <p>This path specifies where in your file system files will be exported\n            from or imported to. This file system directory can be linked to only one\n            Amazon S3 bucket, and no other S3 bucket can be linked to the directory.</p>\n        <note>\n            <p>If you specify only a forward slash (<code>/</code>) as the file system\n            path, you can link only 1 data repository to the file system. You can only specify\n            \"/\" as the file system path for the first data repository associated with a file system.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1428,7 +1428,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new Amazon FSx for Lustre, Amazon FSx for Windows File\n            Server, or Amazon FSx for OpenZFS file system from an existing Amazon FSx backup.</p>\n        \n        <p>If a file system with the specified client request token exists and the parameters\n            match, this operation returns the description of the file system. If a client request\n            token with the specified by the file system exists and the parameters don't match, this\n            call returns <code>IncompatibleParameterError</code>. If a file system with the\n            specified client request token doesn't exist, this operation does the following:</p>\n        \n        <ul>\n            <li>\n                <p>Creates a new Amazon FSx file system from backup with an assigned ID,\n                    and an initial lifecycle state of <code>CREATING</code>.</p>\n            </li>\n            <li>\n                <p>Returns the description of the file system.</p>\n            </li>\n         </ul>\n\n        <p>Parameters like the Active Directory, default share name, automatic backup, and backup\n            settings default to the parameters of the file system that was backed up, unless\n            overridden. You can explicitly supply other settings.</p>\n\n        <p>By using the idempotent operation, you can retry a\n                <code>CreateFileSystemFromBackup</code> call without the risk of creating an extra\n            file system. This approach can be useful when an initial call fails in a way that makes\n            it unclear whether a file system was created. Examples are if a transport level timeout\n            occurred, or your connection was reset. If you use the same client request token and the\n            initial call created a file system, the client receives a success message as long as the\n            parameters are the same.</p>\n        <note>\n            <p>The <code>CreateFileSystemFromBackup</code> call returns while the file system's\n                lifecycle state is still <code>CREATING</code>. You can check the file-system\n                creation status by calling the <a href=\"https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeFileSystems.html\">\n                    DescribeFileSystems</a> operation, which returns the file system state along\n                with other information.</p>\n        </note>"
+                "smithy.api#documentation": "<p>Creates a new Amazon FSx for Lustre, Amazon FSx for Windows File\n            Server, or Amazon FSx for OpenZFS file system from an existing Amazon FSx backup.</p>\n        \n        <p>If a file system with the specified client request token exists and the parameters\n            match, this operation returns the description of the file system. If a file system\n            with the specified client request token exists but the parameters don't match, this\n            call returns <code>IncompatibleParameterError</code>. If a file system with the\n            specified client request token doesn't exist, this operation does the following:</p>\n        \n        <ul>\n            <li>\n                <p>Creates a new Amazon FSx file system from backup with an assigned ID,\n                    and an initial lifecycle state of <code>CREATING</code>.</p>\n            </li>\n            <li>\n                <p>Returns the description of the file system.</p>\n            </li>\n         </ul>\n\n        <p>Parameters like the Active Directory, default share name, automatic backup, and backup\n            settings default to the parameters of the file system that was backed up, unless\n            overridden. You can explicitly supply other settings.</p>\n\n        <p>By using the idempotent operation, you can retry a\n                <code>CreateFileSystemFromBackup</code> call without the risk of creating an extra\n            file system. This approach can be useful when an initial call fails in a way that makes\n            it unclear whether a file system was created. Examples are if a transport level timeout\n            occurred, or your connection was reset. If you use the same client request token and the\n            initial call created a file system, the client receives a success message as long as the\n            parameters are the same.</p>\n        <note>\n            <p>The <code>CreateFileSystemFromBackup</code> call returns while the file system's\n                lifecycle state is still <code>CREATING</code>. You can check the file-system\n                creation status by calling the <a href=\"https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeFileSystems.html\">\n                    DescribeFileSystems</a> operation, which returns the file system state along\n                with other information.</p>\n        </note>"
             }
         },
         "com.amazonaws.fsx#CreateFileSystemFromBackupRequest": {
@@ -1551,7 +1551,7 @@
                 "AutoImportPolicy": {
                     "target": "com.amazonaws.fsx#AutoImportPolicyType",
                     "traits": {
-                        "smithy.api#documentation": "<p> (Optional) Available with <code>Scratch</code> and <code>Persistent_1</code> deployment types. When you \n            create your file system, your existing S3 objects appear as file and directory listings. \n            Use this property to choose how Amazon FSx keeps your file and directory listings up to date \n            as you add or modify objects in your linked S3 bucket. <code>AutoImportPolicy</code> can\n            have the following values:</p>\n        <ul>\n            <li>\n               <p>\n                  <code>NONE</code> - (Default) AutoImport is off. Amazon FSx only updates \n                file and directory listings from the linked S3 bucket \n                when the file system is created. FSx does not update file and directory \n                listings for any new or changed objects after choosing this option.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NEW</code> - AutoImport is on. Amazon FSx automatically imports\n                directory listings of any new objects added to the linked S3 bucket that \n                do not currently exist in the FSx file system. </p>\n            </li>\n            <li>\n               <p>\n                  <code>NEW_CHANGED</code> - AutoImport is on. Amazon FSx automatically imports \n                file and directory listings of any new objects added to the S3 bucket and any \n                existing objects that are changed in the S3 bucket after you choose this option.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NEW_CHANGED_DELETED</code> - AutoImport is on. Amazon FSx automatically\n                imports file and directory listings of any new objects added to the S3 bucket, any \n                existing objects that are changed in the S3 bucket, and any objects that were deleted\n                in the S3 bucket.</p>\n            </li>\n         </ul>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/autoimport-data-repo.html\">\n            Automatically import updates from your S3 bucket</a>.</p>\n        <note>\n            <p>This parameter is not supported for file systems with the <code>Persistent_2</code> deployment type.\n            Instead, use <code>CreateDataRepositoryAssociation\"</code> to create\n            a data repository association to link your Lustre file system to a data repository.</p>\n         </note>"
+                        "smithy.api#documentation": "<p> (Optional) Available with <code>Scratch</code> and <code>Persistent_1</code> deployment types. When you \n            create your file system, your existing S3 objects appear as file and directory listings. \n            Use this property to choose how Amazon FSx keeps your file and directory listings up to date \n            as you add or modify objects in your linked S3 bucket. <code>AutoImportPolicy</code> can\n            have the following values:</p>\n        <ul>\n            <li>\n               <p>\n                  <code>NONE</code> - (Default) AutoImport is off. Amazon FSx only updates \n                file and directory listings from the linked S3 bucket \n                when the file system is created. FSx does not update file and directory \n                listings for any new or changed objects after choosing this option.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NEW</code> - AutoImport is on. Amazon FSx automatically imports\n                directory listings of any new objects added to the linked S3 bucket that \n                do not currently exist in the FSx file system. </p>\n            </li>\n            <li>\n               <p>\n                  <code>NEW_CHANGED</code> - AutoImport is on. Amazon FSx automatically imports \n                file and directory listings of any new objects added to the S3 bucket and any \n                existing objects that are changed in the S3 bucket after you choose this option.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NEW_CHANGED_DELETED</code> - AutoImport is on. Amazon FSx automatically\n                imports file and directory listings of any new objects added to the S3 bucket, any \n                existing objects that are changed in the S3 bucket, and any objects that were deleted\n                in the S3 bucket.</p>\n            </li>\n         </ul>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/older-deployment-types.html#legacy-auto-import-from-s3\">\n            Automatically import updates from your S3 bucket</a>.</p>\n        <note>\n            <p>This parameter is not supported for file systems with the <code>Persistent_2</code> deployment type.\n            Instead, use <code>CreateDataRepositoryAssociation</code> to create\n            a data repository association to link your Lustre file system to a data repository.</p>\n         </note>"
                     }
                 },
                 "PerUnitStorageThroughput": {
@@ -1614,7 +1614,7 @@
                 "EndpointIpAddressRange": {
                     "target": "com.amazonaws.fsx#IpAddressRange",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the IP address range in which the endpoints to access your file system\n            will be created. By default, Amazon FSx selects an unused IP address range for you\n            from the 198.19.* range.</p>"
+                        "smithy.api#documentation": "<p>Specifies the IP address range in which the endpoints to access your file system\n            will be created. By default, Amazon FSx selects an unused IP address range for you\n            from the 198.19.* range.</p>\n        <important>\n            <p>The Endpoint IP address range you select for your file system\n            must exist outside the VPC's CIDR range and must be at least /30 or larger.</p>\n        </important>"
                     }
                 },
                 "FsxAdminPassword": {
@@ -1680,7 +1680,7 @@
                 "DeploymentType": {
                     "target": "com.amazonaws.fsx#OpenZFSDeploymentType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the file system deployment type. Amazon FSx for OpenZFS supports\n                <code>SINGLE_AZ_1</code>. <code>SINGLE_AZ_1</code> is a file system configured for a\n            single Availability Zone (AZ) of redundancy.</p>",
+                        "smithy.api#documentation": "<p>Specifies the file system deployment type. Amazon FSx for OpenZFS supports\n            <code>SINGLE_AZ_1</code>. <code>SINGLE_AZ_1</code> deployment type is configured for redundancy\n            within a single Availability Zone.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1705,7 +1705,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The OpenZFS configuration properties for the file system that you are creating.</p>"
+                "smithy.api#documentation": "<p>The Amazon FSx for OpenZFS configuration properties for the file system that you are creating.</p>"
             }
         },
         "com.amazonaws.fsx#CreateFileSystemRequest": {
@@ -1947,32 +1947,38 @@
                 "ParentVolumeId": {
                     "target": "com.amazonaws.fsx#VolumeId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the volume to use as the parent volume. </p>",
+                        "smithy.api#documentation": "<p>The ID of the volume to use as the parent volume of the volume that you are creating.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "StorageCapacityReservationGiB": {
-                    "target": "com.amazonaws.fsx#IntegerNoMax",
+                    "target": "com.amazonaws.fsx#IntegerNoMaxFromNegativeOne",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of storage in gibibytes (GiB) to reserve from the parent volume. You can't\n            reserve more storage than the parent volume has reserved.</p>"
+                        "smithy.api#documentation": "<p>Specifies the amount of storage in gibibytes (GiB) to reserve from the parent volume. Setting\n            <code>StorageCapacityReservationGiB</code> guarantees that the specified amount of storage space\n            on the parent volume will always be available for the volume. \n            You can't reserve more storage than the parent volume has. To <i>not</i> specify a storage capacity \n            reservation, set this to <code>0</code> or <code>-1</code>. For more information, see \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/managing-volumes.html#volume-properties\">Volume properties</a> \n            in the <i>Amazon FSx for OpenZFS User Guide</i>.</p>"
                     }
                 },
                 "StorageCapacityQuotaGiB": {
-                    "target": "com.amazonaws.fsx#IntegerNoMax",
+                    "target": "com.amazonaws.fsx#IntegerNoMaxFromNegativeOne",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum amount of storage in gibibytes (GiB) that the volume can use from its\n            parent. You can specify a quota larger than the storage on the parent volume.</p>"
+                        "smithy.api#documentation": "<p>Sets the maximum storage size in gibibytes (GiB) for the volume. You can specify \n            a quota that is larger than the storage on the parent volume. A volume quota limits \n            the amount of storage that the volume can consume to the configured amount, but does not \n            guarantee the space will be available on the parent volume. To guarantee quota space, you must also set \n            <code>StorageCapacityReservationGiB</code>. To <i>not</i> specify a storage capacity quota, set this to <code>-1</code>.\n        </p>\n        <p>For more information, see \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/managing-volumes.html#volume-properties\">Volume properties</a> \n            in the <i>Amazon FSx for OpenZFS User Guide</i>.</p>"
+                    }
+                },
+                "RecordSizeKiB": {
+                    "target": "com.amazonaws.fsx#IntegerRecordSizeKiB",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the suggested block size for a volume in a ZFS dataset, in kibibytes (KiB). Valid values are 4, 8,\n            16, 32, 64, 128, 256, 512, or 1024 KiB. The default is 128 KiB.\n            We recommend using the default setting for the majority of use cases. \n            Generally, workloads that write in fixed small or large record sizes \n            may benefit from setting a custom record size, like database workloads \n            (small record size) or media streaming workloads (large record size). \n            For additional guidance on when\n            to set a custom record size, see \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/performance.html#record-size-performance\">\n            ZFS Record size</a> in the <i>Amazon FSx for OpenZFS User Guide</i>.</p>"
                     }
                 },
                 "DataCompressionType": {
                     "target": "com.amazonaws.fsx#OpenZFSDataCompressionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the method used to compress the data on the volume. Unless the compression\n            type is specified, volumes inherit the <code>DataCompressionType</code> value of their\n            parent volume.</p>\n        <ul>\n            <li>\n                <p>\n                  <code>NONE</code> - Doesn't compress the data on the volume.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ZSTD</code> - Compresses the data in the volume using the Zstandard\n                    (ZSTD) compression algorithm. This algorithm reduces the amount of space used on\n                    your volume and has very little impact on compute resources.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specifies the method used to compress the data on the volume. The compression\n            type is <code>NONE</code> by default.</p>\n        <ul>\n            <li>\n                <p>\n                  <code>NONE</code> - Doesn't compress the data on the volume.\n                    <code>NONE</code> is the default.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ZSTD</code> - Compresses the data in the volume using the Zstandard\n                    (ZSTD) compression algorithm. ZSTD compression provides a higher level of \n                    data compression and higher read throughput performance than LZ4 compression.</p>\n            </li>\n            <li>\n                <p>\n                  <code>LZ4</code> - Compresses the data in the volume using the LZ4\n                    compression algorithm. LZ4 compression provides a lower level of compression \n                    and higher write throughput performance than ZSTD compression.</p>\n            </li>\n         </ul>\n        <p>For more information about volume compression types and the performance of your Amazon FSx for OpenZFS file system,\n            see <a href=\"https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/performance.html#performance-tips-zfs\">\n                Tips for maximizing performance</a> File system and volume settings in the <i>Amazon FSx for OpenZFS User Guide</i>.</p>"
                     }
                 },
                 "CopyTagsToSnapshots": {
                     "target": "com.amazonaws.fsx#Flag",
                     "traits": {
-                        "smithy.api#documentation": "<p>A Boolean value indicating whether tags for the volume should be copied to snapshots.\n            This value defaults to <code>false</code>. If it's set to <code>true</code>, all tags\n            for the volume are copied to snapshots where the user doesn't specify tags. If this\n            value is <code>true</code>, and you specify one or more tags, only the specified tags\n            are copied to snapshots. If you specify one or more tags when creating the snapshot, no\n            tags are copied from the volume, regardless of this value. </p>"
+                        "smithy.api#documentation": "<p>A Boolean value indicating whether tags for the volume should be copied to snapshots.\n            This value defaults to <code>false</code>. If it's set to <code>true</code>, all tags\n            for the volume are copied to snapshots where the user doesn't specify tags. If this\n            value is <code>true</code>, and you specify one or more tags, only the specified tags\n            are copied to snapshots. If you specify one or more tags when creating the snapshot, no\n            tags are copied from the volume, regardless of this value.</p>"
                     }
                 },
                 "OriginSnapshot": {
@@ -1984,24 +1990,24 @@
                 "ReadOnly": {
                     "target": "com.amazonaws.fsx#ReadOnly",
                     "traits": {
-                        "smithy.api#documentation": "<p>A Boolean value indicating whether the volume is read-only. </p>"
+                        "smithy.api#documentation": "<p>A Boolean value indicating whether the volume is read-only.</p>"
                     }
                 },
                 "NfsExports": {
                     "target": "com.amazonaws.fsx#OpenZFSNfsExports",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration object for mounting a Network File System (NFS) file system. </p>"
+                        "smithy.api#documentation": "<p>The configuration object for mounting a Network File System (NFS) file system.</p>"
                     }
                 },
                 "UserAndGroupQuotas": {
                     "target": "com.amazonaws.fsx#OpenZFSUserAndGroupQuotas",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object specifying how much storage users or groups can use on the volume. </p>"
+                        "smithy.api#documentation": "<p>An object specifying how much storage users or groups can use on the volume.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the configuration of the OpenZFS volume that you are creating.</p>"
+                "smithy.api#documentation": "<p>Specifies the configuration of the Amazon FSx for OpenZFS volume that you are creating.</p>"
             }
         },
         "com.amazonaws.fsx#CreateSnapshot": {
@@ -2027,7 +2033,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a snapshot of an existing Amazon FSx for OpenZFS file system. With\n            snapshots, you can easily undo file changes and compare file versions by restoring the\n            volume to a previous version.</p>\n        <p>If a snapshot with the specified client request token exists, and the parameters\n            match, this operation returns the description of the existing snapshot. If a snapshot\n            with the specified client request token exists, and the parameters don't match, this\n            operation returns <code>IncompatibleParameterError</code>. If a snapshot with the\n            specified client request token doesn't exist, <code>CreateSnapshot</code> does the\n            following: </p>\n        <ul>\n            <li>\n                <p>Creates a new OpenZFS snapshot with an assigned ID, and an initial lifecycle\n                    state of <code>CREATING</code>.</p>\n            </li>\n            <li>\n                <p>Returns the description of the snapshot.</p>\n            </li>\n         </ul>\n        <p>By using the idempotent operation, you can retry a <code>CreateSnapshot</code>\n            operation without the risk of creating an extra snapshot. This approach can be useful\n            when an initial call fails in a way that makes it unclear whether a snapshot was\n            created. If you use the same client request token and the initial call created a\n            snapshot, the operation returns a successful result because all the parameters are the\n            same.</p>\n        <p>The <code>CreateSnapshot</code> operation returns while the snapshot's lifecycle state\n            is still <code>CREATING</code>. You can check the snapshot creation status by calling\n            the <a href=\"https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeSnapshots.html\">DescribeSnapshots</a> operation, which returns the snapshot state along with\n            other information. </p>",
+                "smithy.api#documentation": "<p>Creates a snapshot of an existing Amazon FSx for OpenZFS volume. With\n            snapshots, you can easily undo file changes and compare file versions by restoring the\n            volume to a previous version.</p>\n        <p>If a snapshot with the specified client request token exists, and the parameters\n            match, this operation returns the description of the existing snapshot. If a snapshot\n            with the specified client request token exists, and the parameters don't match, this\n            operation returns <code>IncompatibleParameterError</code>. If a snapshot with the\n            specified client request token doesn't exist, <code>CreateSnapshot</code> does the\n            following:</p>\n        <ul>\n            <li>\n                <p>Creates a new OpenZFS snapshot with an assigned ID, and an initial lifecycle\n                    state of <code>CREATING</code>.</p>\n            </li>\n            <li>\n                <p>Returns the description of the snapshot.</p>\n            </li>\n         </ul>\n        <p>By using the idempotent operation, you can retry a <code>CreateSnapshot</code>\n            operation without the risk of creating an extra snapshot. This approach can be useful\n            when an initial call fails in a way that makes it unclear whether a snapshot was\n            created. If you use the same client request token and the initial call created a\n            snapshot, the operation returns a successful result because all the parameters are the\n            same.</p>\n        <p>The <code>CreateSnapshot</code> operation returns while the snapshot's lifecycle state\n            is still <code>CREATING</code>. You can check the snapshot creation status by calling\n            the <a href=\"https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeSnapshots.html\">DescribeSnapshots</a> operation, which returns the snapshot state along with\n            other information.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -2214,7 +2220,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Amazon FSx for NetApp ONTAP or Amazon FSx for OpenZFS storage\n            volume.</p>"
+                "smithy.api#documentation": "<p>Creates an FSx for ONTAP or Amazon FSx for OpenZFS storage volume.</p>"
             }
         },
         "com.amazonaws.fsx#CreateVolumeFromBackup": {
@@ -2420,7 +2426,7 @@
                 "FileSystemPath": {
                     "target": "com.amazonaws.fsx#Namespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>A path on the file system that points to a high-level directory (such\n            as <code>/ns1/</code>) or subdirectory (such as <code>/ns1/subdir/</code>)\n            that will be mapped 1-1 with <code>DataRepositoryPath</code>.\n            The leading forward slash in the name is required. Two data repository\n            associations cannot have overlapping file system paths. For example, if\n            a data repository is associated with file system path <code>/ns1/</code>,\n            then you cannot link another data repository with file system\n            path <code>/ns1/ns2</code>.</p>\n        <p>This path specifies where in your file system files will be exported\n            from or imported to. This file system directory can be linked to only one\n            Amazon S3 bucket, and no other S3 bucket can be linked to the directory. </p>"
+                        "smithy.api#documentation": "<p>A path on the file system that points to a high-level directory (such\n            as <code>/ns1/</code>) or subdirectory (such as <code>/ns1/subdir/</code>)\n            that will be mapped 1-1 with <code>DataRepositoryPath</code>.\n            The leading forward slash in the name is required. Two data repository\n            associations cannot have overlapping file system paths. For example, if\n            a data repository is associated with file system path <code>/ns1/</code>,\n            then you cannot link another data repository with file system\n            path <code>/ns1/ns2</code>.</p>\n        <p>This path specifies where in your file system files will be exported\n            from or imported to. This file system directory can be linked to only one\n            Amazon S3 bucket, and no other S3 bucket can be linked to the directory.</p>\n        <note>\n            <p>If you specify only a forward slash (<code>/</code>) as the file system\n            path, you can link only 1 data repository to the file system. You can only specify\n            \"/\" as the file system path for the first data repository associated with a file system.</p>\n         </note>"
                     }
                 },
                 "DataRepositoryPath": {
@@ -3137,15 +3143,47 @@
                 "SkipFinalBackup": {
                     "target": "com.amazonaws.fsx#Flag",
                     "traits": {
-                        "smithy.api#documentation": "<p>By default, Amazon FSx for OpenZFS takes a final backup on your behalf when\n            the <code>DeleteFileSystem</code> operation is invoked. Doing this helps protect you\n            from data loss, and we highly recommend taking the final backup. If you want to skip\n            this backup, use this\n            value\n            to do so. </p>"
+                        "smithy.api#documentation": "<p>By default, Amazon FSx for OpenZFS takes a final backup on your behalf when\n            the <code>DeleteFileSystem</code> operation is invoked. Doing this helps protect you\n            from data loss, and we highly recommend taking the final backup. If you want to skip\n            taking a final backup, set this value to <code>true</code>.</p>"
                     }
                 },
                 "FinalBackupTags": {
-                    "target": "com.amazonaws.fsx#Tags"
+                    "target": "com.amazonaws.fsx#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags to apply to the file system's final backup.</p>"
+                    }
+                },
+                "Options": {
+                    "target": "com.amazonaws.fsx#DeleteFileSystemOpenZFSOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>To delete a file system if there are child volumes present below the root volume,\n            use the string <code>DELETE_CHILD_VOLUMES_AND_SNAPSHOTS</code>. If your file system\n            has child volumes and you don't use this option, the delete request will fail.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration object for the OpenZFS file system used in the\n                <code>DeleteFileSystem</code> operation.</p>"
+                "smithy.api#documentation": "<p>The configuration object for the Amazon FSx for OpenZFS file system used in the\n                <code>DeleteFileSystem</code> operation.</p>"
+            }
+        },
+        "com.amazonaws.fsx#DeleteFileSystemOpenZFSOption": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "DELETE_CHILD_VOLUMES_AND_SNAPSHOTS",
+                        "name": "DELETE_CHILD_VOLUMES_AND_SNAPSHOTS"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.fsx#DeleteFileSystemOpenZFSOptions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.fsx#DeleteFileSystemOpenZFSOption"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
             }
         },
         "com.amazonaws.fsx#DeleteFileSystemOpenZFSResponse": {
@@ -3311,7 +3349,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the Amazon FSx snapshot. After deletion, the snapshot no longer\n            exists, and its data is gone. Deleting a snapshot doesn't affect snapshots stored in a\n            file system backup. </p>\n        <p>The <code>DeleteSnapshot</code> operation returns instantly. The snapshot appears with\n            the lifecycle status of <code>DELETING</code> until the deletion is complete.</p>",
+                "smithy.api#documentation": "<p>Deletes an Amazon FSx for OpenZFS snapshot. After deletion, the snapshot no longer\n            exists, and its data is gone. Deleting a snapshot doesn't affect snapshots stored in a\n            file system backup. </p>\n        <p>The <code>DeleteSnapshot</code> operation returns instantly. The snapshot appears with\n            the lifecycle status of <code>DELETING</code> until the deletion is complete.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -3936,7 +3974,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the description of specific Amazon FSx snapshots, if a\n                <code>SnapshotIds</code> value is provided. Otherwise, this operation returns all\n            snapshots owned by your Amazon Web Services account in the Amazon Web Services Region of\n            the endpoint that you're calling.</p>\n        <p>When retrieving all snapshots, you can optionally specify the <code>MaxResults</code>\n            parameter to limit the number of snapshots in a response. If more backups remain,\n                Amazon FSx returns a <code>NextToken</code> value in the response. In this\n            case, send a later request with the <code>NextToken</code> request parameter set to the\n            value of <code>NextToken</code> from the last response. </p>\n        <p>Use this operation in an iterative process to retrieve a list of your snapshots.\n                <code>DescribeSnapshots</code> is called first without a <code>NextToken</code>\n            value. Then the operation continues to be called with the <code>NextToken</code>\n            parameter set to the value of the last <code>NextToken</code> value until a response has\n            no <code>NextToken</code> value.</p>\n        <p>When using this operation, keep the following in mind:</p>\n        <ul>\n            <li>\n                <p>The operation might return fewer than the <code>MaxResults</code> value of\n                    snapshot descriptions while still including a <code>NextToken</code>\n                    value.</p>\n            </li>\n            <li>\n                <p>The order of snapshots returned in the response of one\n                        <code>DescribeSnapshots</code> call and the order of backups returned across\n                    the responses of a multi-call iteration is unspecified. </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Returns the description of specific Amazon FSx for OpenZFS snapshots, if a\n                <code>SnapshotIds</code> value is provided. Otherwise, this operation returns all\n            snapshots owned by your Amazon Web Services account in the Amazon Web Services Region of\n            the endpoint that you're calling.</p>\n        <p>When retrieving all snapshots, you can optionally specify the <code>MaxResults</code>\n            parameter to limit the number of snapshots in a response. If more backups remain,\n                Amazon FSx returns a <code>NextToken</code> value in the response. In this\n            case, send a later request with the <code>NextToken</code> request parameter set to the\n            value of <code>NextToken</code> from the last response. </p>\n        <p>Use this operation in an iterative process to retrieve a list of your snapshots.\n                <code>DescribeSnapshots</code> is called first without a <code>NextToken</code>\n            value. Then the operation continues to be called with the <code>NextToken</code>\n            parameter set to the value of the last <code>NextToken</code> value until a response has\n            no <code>NextToken</code> value.</p>\n        <p>When using this operation, keep the following in mind:</p>\n        <ul>\n            <li>\n                <p>The operation might return fewer than the <code>MaxResults</code> value of\n                    snapshot descriptions while still including a <code>NextToken</code>\n                    value.</p>\n            </li>\n            <li>\n                <p>The order of snapshots returned in the response of one\n                        <code>DescribeSnapshots</code> call and the order of backups returned across\n                    the responses of a multi-call iteration is unspecified. </p>\n            </li>\n         </ul>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -4813,6 +4851,26 @@
                 }
             }
         },
+        "com.amazonaws.fsx#IntegerNoMaxFromNegativeOne": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": -1,
+                    "max": 2147483647
+                }
+            }
+        },
+        "com.amazonaws.fsx#IntegerRecordSizeKiB": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 4,
+                    "max": 1024
+                }
+            }
+        },
         "com.amazonaws.fsx#InternalServerError": {
             "type": "structure",
             "members": {
@@ -5324,7 +5382,7 @@
                     "min": 1,
                     "max": 4096
                 },
-                "smithy.api#pattern": "^[^\\u0000\\u0085\\u2028\\u2029\\r\\n]{3,4096}$"
+                "smithy.api#pattern": "^[^\\u0000\\u0085\\u2028\\u2029\\r\\n]{1,4096}$"
             }
         },
         "com.amazonaws.fsx#NetBiosAlias": {
@@ -5432,7 +5490,7 @@
                 "EndpointIpAddressRange": {
                     "target": "com.amazonaws.fsx#IpAddressRange",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IP address range in which the endpoints to access your file system\n            are created.</p>"
+                        "smithy.api#documentation": "<p>The IP address range in which the endpoints to access your file system\n            are created.</p>\n        <important>\n            <p>The Endpoint IP address range you select for your file system\n            must exist outside the VPC's CIDR range and must be at least /30 or larger.\n            If you do not specify this optional parameter, Amazon FSx will automatically\n            select a CIDR block for you.</p>\n         </important>"
                     }
                 },
                 "Endpoints": {
@@ -5560,14 +5618,14 @@
                 "Clients": {
                     "target": "com.amazonaws.fsx#OpenZFSClients",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that specifies who can mount the file system. You can provide a wildcard\n            character (<code>*</code>), an IP address (<code>0.0.0.0</code>), or a CIDR address\n                (<code>192.0.2.0/24</code>. By default, Amazon FSx uses the wildcard\n            character when specifying the client. </p>",
+                        "smithy.api#documentation": "<p>A value that specifies who can mount the file system. You can provide a wildcard\n            character (<code>*</code>), an IP address (<code>0.0.0.0</code>), or a CIDR address\n                (<code>192.0.2.0/24</code>). By default, Amazon FSx uses the wildcard\n            character when specifying the client. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Options": {
                     "target": "com.amazonaws.fsx#OpenZFSNfsExportOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The options to use when mounting the file system. For a list of options that you can\n            use with Network File System (NFS), see the <a href=\"https://linux.die.net/man/5/exports\">exports(5) - Linux man page</a>. When\n            choosing your options, consider the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>crossmount</code> is used by default. If you don't specify\n                        <code>crossmount</code> when changing the client configuration, you won't be\n                    able to see or access snapshots in your file system's snapshot directory.</p>\n            </li>\n            <li>\n                <p>\n                  <code>sync</code> is used by default. If you instead specify\n                        <code>async</code>, the system acknowledges writes before writing to disk.\n                    If the system crashes before the writes are finished, you lose the unwritten\n                    data. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The options to use when mounting the file system. For a list of options that you can\n            use with Network File System (NFS), see the <a href=\"https://linux.die.net/man/5/exports\">exports(5) - Linux man page</a>. When\n            choosing your options, consider the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>crossmnt</code> is used by default. If you don't specify\n                    <code>crossmnt</code> when changing the client configuration, you won't be\n                    able to see or access snapshots in your file system's snapshot directory.</p>\n            </li>\n            <li>\n                <p>\n                  <code>sync</code> is used by default. If you instead specify\n                        <code>async</code>, the system acknowledges writes before writing to disk.\n                    If the system crashes before the writes are finished, you lose the unwritten\n                    data. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5616,10 +5674,16 @@
         "com.amazonaws.fsx#OpenZFSCreateRootVolumeConfiguration": {
             "type": "structure",
             "members": {
+                "RecordSizeKiB": {
+                    "target": "com.amazonaws.fsx#IntegerRecordSizeKiB",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the record size of an OpenZFS root volume, in kibibytes (KiB). Valid values are 4, 8,\n        16, 32, 64, 128, 256, 512, or 1024 KiB. The default is 128 KiB. Most workloads should use the \n        default record size. Database workflows can benefit from a smaller record size, while streaming \n        workflows can benefit from a larger record size. For additional guidance on setting a custom record \n        size, see <a href=\"https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/performance.html#performance-tips-zfs\">\n        Tips for maximizing performance</a> in the\n        <i>Amazon FSx for OpenZFS User Guide</i>.</p>"
+                    }
+                },
                 "DataCompressionType": {
                     "target": "com.amazonaws.fsx#OpenZFSDataCompressionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the method used to compress the data on the volume. Unless the compression\n            type is specified, volumes inherit the <code>DataCompressionType</code> value of their\n            parent volume.</p>\n        <ul>\n            <li>\n                <p>\n                  <code>NONE</code> - Doesn't compress the data on the volume.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ZSTD</code> - Compresses the data in the volume using the ZStandard\n                    (ZSTD) compression algorithm. This algorithm reduces the amount of space used on\n                    your volume and has very little impact on compute resources.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specifies the method used to compress the data on the volume. The compression\n            type is <code>NONE</code> by default.</p>\n        <ul>\n            <li>\n                <p>\n                  <code>NONE</code> - Doesn't compress the data on the volume.\n                    <code>NONE</code> is the default.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ZSTD</code> - Compresses the data in the volume using the Zstandard\n                    (ZSTD) compression algorithm. Compared to LZ4, Z-Standard provides a better\n                    compression ratio to minimize on-disk storage utilization.</p>\n            </li>\n            <li>\n                <p>\n                  <code>LZ4</code> - Compresses the data in the volume using the LZ4\n                    compression algorithm. Compared to Z-Standard, LZ4 is less compute-intensive\n                    and delivers higher write throughput speeds.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "NfsExports": {
@@ -5637,7 +5701,7 @@
                 "CopyTagsToSnapshots": {
                     "target": "com.amazonaws.fsx#Flag",
                     "traits": {
-                        "smithy.api#documentation": "<p>A Boolean value indicating whether tags for the volume should be copied to snapshots.\n            This value defaults to <code>false</code>. If it's set to <code>true</code>, all tags\n            for the volume are copied to snapshots where the user doesn't specify tags. If this\n            value is <code>true</code> and you specify one or more tags, only the specified tags are\n            copied to snapshots. If you specify one or more tags when creating the snapshot, no tags\n            are copied from the volume, regardless of this value. </p>"
+                        "smithy.api#documentation": "<p>A Boolean value indicating whether tags for the volume should be copied to snapshots\n            of the volume. This value defaults to <code>false</code>. If it's set to <code>true</code>,\n            all tags for the volume are copied to snapshots where the user doesn't specify tags. If this\n            value is <code>true</code> and you specify one or more tags, only the specified tags are\n            copied to snapshots. If you specify one or more tags when creating the snapshot, no tags\n            are copied from the volume, regardless of this value. </p>"
                     }
                 },
                 "ReadOnly": {
@@ -5662,6 +5726,10 @@
                     {
                         "value": "ZSTD",
                         "name": "ZSTD"
+                    },
+                    {
+                        "value": "LZ4",
+                        "name": "LZ4"
                     }
                 ]
             }
@@ -5707,7 +5775,7 @@
                 "ThroughputCapacity": {
                     "target": "com.amazonaws.fsx#MegabytesPerSecond",
                     "traits": {
-                        "smithy.api#documentation": "<p>The throughput of an Amazon FSx file system, measured in megabytes per second\n            (MBps), in 2 to the nth increments, between 2^3 (8) and 2^11 (2048). </p>"
+                        "smithy.api#documentation": "<p>The throughput of an Amazon FSx file system, measured in megabytes per second\n            (MBps). Valid values are 64, 128, 256, 512, 1024, 2048, 3072, or 4096 MB/s.</p>"
                     }
                 },
                 "WeeklyMaintenanceStartTime": {
@@ -5739,7 +5807,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The Network File System NFS) configurations for mounting an Amazon FSx for\n            OpenZFS file system. </p>"
+                "smithy.api#documentation": "<p>The Network File System (NFS) configurations for mounting an Amazon FSx for\n            OpenZFS file system. </p>"
             }
         },
         "com.amazonaws.fsx#OpenZFSNfsExportOption": {
@@ -5876,16 +5944,22 @@
                         "smithy.api#documentation": "<p>The maximum amount of storage in gibibtyes (GiB) that the volume can use from its\n            parent. You can specify a quota larger than the storage on the parent volume.</p>"
                     }
                 },
+                "RecordSizeKiB": {
+                    "target": "com.amazonaws.fsx#IntegerRecordSizeKiB",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The record size of an OpenZFS volume, in kibibytes (KiB). Valid values are 4, 8,\n            16, 32, 64, 128, 256, 512, or 1024 KiB. The default is 128 KiB.\n            Most workloads should use the default record size. For guidance on when\n            to set a custom record size, see the\n            <i>Amazon FSx for OpenZFS User Guide</i>.</p>"
+                    }
+                },
                 "DataCompressionType": {
                     "target": "com.amazonaws.fsx#OpenZFSDataCompressionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The method used to compress the data on the volume. Unless a compression type is\n            specified, volumes inherit the <code>DataCompressionType</code> value of their parent\n            volume.</p>\n        <ul>\n            <li>\n                <p>\n                  <code>NONE</code> - Doesn't compress the data on the volume.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ZSTD</code> - Compresses the data in the volume using the Zstandard\n                    (ZSTD) compression algorithm. This algorithm reduces the amount of space used on\n                    your volume and has very little impact on compute resources.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specifies the method used to compress the data on the volume. The compression\n            type is <code>NONE</code> by default.</p>\n        <ul>\n            <li>\n                <p>\n                  <code>NONE</code> - Doesn't compress the data on the volume.\n                    <code>NONE</code> is the default.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ZSTD</code> - Compresses the data in the volume using the Zstandard\n                    (ZSTD) compression algorithm. Compared to LZ4, Z-Standard provides a better\n                    compression ratio to minimize on-disk storage utilization.</p>\n            </li>\n            <li>\n                <p>\n                  <code>LZ4</code> - Compresses the data in the volume using the LZ4\n                    compression algorithm. Compared to Z-Standard, LZ4 is less compute-intensive\n                    and delivers higher write throughput speeds.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "CopyTagsToSnapshots": {
                     "target": "com.amazonaws.fsx#Flag",
                     "traits": {
-                        "smithy.api#documentation": "<p>A Boolean value indicating whether tags for the volume should be copied to snapshots.\n            This value defaults to <code>false</code>. If it's set to <code>true</code>, all tags\n            for the volume are copied to snapshots where the user doesn't specify tags. If this\n            value is <code>true</code> and you specify one or more tags, only the specified tags are\n            copied to snapshots. If you specify one or more tags when creating the snapshot, no tags\n            are copied from the volume, regardless of this value. </p>"
+                        "smithy.api#documentation": "<p>A Boolean value indicating whether tags for the volume should be copied to snapshots.\n            This value defaults to <code>false</code>. If it's set to <code>true</code>, all tags\n            for the volume are copied to snapshots where the user doesn't specify tags. If this\n            value is <code>true</code> and you specify one or more tags, only the specified tags are\n            copied to snapshots. If you specify one or more tags when creating the snapshot, no tags\n            are copied from the volume, regardless of this value.</p>"
                     }
                 },
                 "OriginSnapshot": {
@@ -5903,13 +5977,13 @@
                 "NfsExports": {
                     "target": "com.amazonaws.fsx#OpenZFSNfsExports",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration object for mounting a Network File System (NFS) file\n            system.</p>"
+                        "smithy.api#documentation": "<p>The configuration object for mounting a Network File System (NFS)\n            file system.</p>"
                     }
                 },
                 "UserAndGroupQuotas": {
                     "target": "com.amazonaws.fsx#OpenZFSUserAndGroupQuotas",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object specifying how much storage users or groups can use on the volume. </p>"
+                        "smithy.api#documentation": "<p>An object specifying how much storage users or groups can use on the volume.</p>"
                     }
                 }
             },
@@ -6509,6 +6583,9 @@
                         "smithy.api#documentation": "<p>The lifecycle status of the snapshot.</p>\n        <ul>\n            <li>\n                <p>\n                  <code>PENDING</code> - Amazon FSx hasn't started creating the\n                    snapshot.</p>\n            </li>\n            <li>\n                <p>\n                  <code>CREATING</code> - Amazon FSx is creating the snapshot.</p>\n            </li>\n            <li>\n                <p>\n                  <code>DELETING</code> - Amazon FSx is deleting the snapshot.</p>\n            </li>\n            <li>\n                <p>\n                  <code>AVAILABLE</code> - The snapshot is fully available.</p>\n            </li>\n         </ul>"
                     }
                 },
+                "LifecycleTransitionReason": {
+                    "target": "com.amazonaws.fsx#LifecycleTransitionReason"
+                },
                 "Tags": {
                     "target": "com.amazonaws.fsx#Tags"
                 },
@@ -6963,7 +7040,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>No Amazon FSx for NetApp ONTAP SVMs were found based upon the supplied parameters.</p>",
+                "smithy.api#documentation": "<p>No FSx for ONTAP SVMs were found based upon the supplied parameters.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -7580,13 +7657,13 @@
                 "CopyTagsToBackups": {
                     "target": "com.amazonaws.fsx#Flag",
                     "traits": {
-                        "smithy.api#documentation": "<p>A Boolean value indicating whether tags for the file system should be copied to\n            backups. This value defaults to <code>false</code>. If it's set to <code>true</code>,\n            all tags for the file system are copied to all automatic and user-initiated backups\n            where the user doesn't specify tags. If this value is <code>true</code> and you specify\n            one or more tags, only the specified tags are copied to backups. If you specify one or\n            more tags when creating a user-initiated backup, no tags are copied from the file\n            system, regardless of this value. </p>"
+                        "smithy.api#documentation": "<p>A Boolean value indicating whether tags for the file system should be copied to\n            backups. This value defaults to <code>false</code>. If it's set to <code>true</code>,\n            all tags for the file system are copied to all automatic and user-initiated backups\n            where the user doesn't specify tags. If this value is <code>true</code> and you specify\n            one or more tags, only the specified tags are copied to backups. If you specify one or\n            more tags when creating a user-initiated backup, no tags are copied from the file\n            system, regardless of this value.</p>"
                     }
                 },
                 "CopyTagsToVolumes": {
                     "target": "com.amazonaws.fsx#Flag",
                     "traits": {
-                        "smithy.api#documentation": "<p>A Boolean value indicating whether tags for the volume should be copied to snapshots.\n            This value defaults to <code>false</code>. If it's set to <code>true</code>, all tags\n            for the volume are copied to snapshots where the user doesn't specify tags. If this\n            value is <code>true</code> and you specify one or more tags, only the specified tags are\n            copied to snapshots. If you specify one or more tags when creating the snapshot, no tags\n            are copied from the volume, regardless of this value. </p>"
+                        "smithy.api#documentation": "<p>A Boolean value indicating whether tags for the volume should be copied to snapshots.\n            This value defaults to <code>false</code>. If it's set to <code>true</code>, all tags\n            for the volume are copied to snapshots where the user doesn't specify tags. If this\n            value is <code>true</code> and you specify one or more tags, only the specified tags are\n            copied to snapshots. If you specify one or more tags when creating the snapshot, no tags\n            are copied from the volume, regardless of this value.</p>"
                     }
                 },
                 "DailyAutomaticBackupStartTime": {
@@ -7595,7 +7672,7 @@
                 "ThroughputCapacity": {
                     "target": "com.amazonaws.fsx#MegabytesPerSecond",
                     "traits": {
-                        "smithy.api#documentation": "<p>The throughput of an Amazon FSx file system, measured in megabytes per second\n            (MBps), in 2 to the nth increments, between 2^3 (8) and 2^12 (4096). </p>"
+                        "smithy.api#documentation": "<p>The throughput of an Amazon FSx file system, measured in megabytes per second\n            (MBps). Valid values are 64, 128, 256, 512, 1024, 2048, 3072, or 4096 MB/s.</p>"
                     }
                 },
                 "WeeklyMaintenanceStartTime": {
@@ -7755,21 +7832,27 @@
             "type": "structure",
             "members": {
                 "StorageCapacityReservationGiB": {
-                    "target": "com.amazonaws.fsx#IntegerNoMax",
+                    "target": "com.amazonaws.fsx#IntegerNoMaxFromNegativeOne",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of storage in gibibytes (GiB) to reserve from the parent volume. You can't\n            reserve more storage than the parent volume has reserved.</p>"
+                        "smithy.api#documentation": "<p>The amount of storage in gibibytes (GiB) to reserve from the parent volume.\n            You can't reserve more storage than the parent volume has reserved. You can specify\n            a value of <code>-1</code> to unset a volume's storage capacity reservation.</p>"
                     }
                 },
                 "StorageCapacityQuotaGiB": {
-                    "target": "com.amazonaws.fsx#IntegerNoMax",
+                    "target": "com.amazonaws.fsx#IntegerNoMaxFromNegativeOne",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>\n        <p>The maximum amount of storage in gibibytes (GiB) that the volume can use from its\n            parent. You can specify a quota larger than the storage on the parent volume.</p>"
+                        "smithy.api#documentation": "<p>The maximum amount of storage in gibibytes (GiB) that the volume can use from its\n            parent. You can specify a quota larger than the storage on the parent volume. You\n            can specify a value of <code>-1</code> to unset a volume's storage capacity quota.</p>"
+                    }
+                },
+                "RecordSizeKiB": {
+                    "target": "com.amazonaws.fsx#IntegerRecordSizeKiB",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the record size of an OpenZFS volume, in kibibytes (KiB). Valid values are 4, 8,\n            16, 32, 64, 128, 256, 512, or 1024 KiB. The default is 128 KiB.\n            Most workloads should use the default record size. Database workflows can benefit from a smaller \n            record size, while streaming workflows can benefit from a larger record size. For additional guidance on when\n            to set a custom record size, see <a href=\"https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/performance.html#performance-tips-zfs\">\n                Tips for maximizing performance</a> in the\n            <i>Amazon FSx for OpenZFS User Guide</i>.</p>"
                     }
                 },
                 "DataCompressionType": {
                     "target": "com.amazonaws.fsx#OpenZFSDataCompressionType",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>\n        <p>Specifies the method used to compress the data on the volume. Unless the compression\n            type is specified, volumes inherit the <code>DataCompressionType</code> value of their\n            parent volume.</p>\n        <ul>\n            <li>\n                <p>\n                  <code>NONE</code> - Doesn't compress the data on the volume.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ZSTD</code> - Compresses the data in the volume using the Zstandard\n                    (ZSTD) compression algorithm. This algorithm reduces the amount of space used on\n                    your volume and has very little impact on compute resources.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specifies the method used to compress the data on the volume. The compression\n            type is <code>NONE</code> by default.</p>\n        <ul>\n            <li>\n                <p>\n                  <code>NONE</code> - Doesn't compress the data on the volume.\n                    <code>NONE</code> is the default.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ZSTD</code> - Compresses the data in the volume using the Zstandard\n                    (ZSTD) compression algorithm. Compared to LZ4, Z-Standard provides a better\n                    compression ratio to minimize on-disk storage utilization.</p>\n            </li>\n            <li>\n                <p>\n                  <code>LZ4</code> - Compresses the data in the volume using the LZ4\n                    compression algorithm. Compared to Z-Standard, LZ4 is less compute-intensive\n                    and delivers higher write throughput speeds.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "NfsExports": {
@@ -7792,7 +7875,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Used to specify changes to the OpenZFS configuration for the volume that you are\n            updating.</p>"
+                "smithy.api#documentation": "<p>Used to specify changes to the OpenZFS configuration for the volume\n            that you are updating.</p>"
             }
         },
         "com.amazonaws.fsx#UpdateSnapshot": {
@@ -7815,7 +7898,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the name of a snapshot. </p>",
+                "smithy.api#documentation": "<p>Updates the name of an Amazon FSx for OpenZFS snapshot.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -7831,7 +7914,7 @@
                 "Name": {
                     "target": "com.amazonaws.fsx#SnapshotName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the snapshot to update. </p>",
+                        "smithy.api#documentation": "<p>The name of the snapshot to update.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8228,7 +8311,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>No Amazon FSx for NetApp ONTAP volumes were found based upon the supplied parameters.</p>",
+                "smithy.api#documentation": "<p>No Amazon FSx volumes were found based upon the supplied parameters.</p>",
                 "smithy.api#error": "client"
             }
         },

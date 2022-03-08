@@ -133,9 +133,13 @@ type Canary struct {
 // directly, the script code is contained in the value of Zipfile.
 type CanaryCodeInput struct {
 
-	// The entry point to use for the source code when running the canary. This value
-	// must end with the string .handler. The string is limited to 29 characters or
-	// fewer.
+	// The entry point to use for the source code when running the canary. For canaries
+	// that use the syn-python-selenium-1.0 runtime or a syn-nodejs.puppeteer runtime
+	// earlier than syn-nodejs.puppeteer-3.4, the handler must be specified as
+	// fileName.handler. For syn-python-selenium-1.1, syn-nodejs.puppeteer-3.4, and
+	// later runtimes, the handler can be specified as  fileName.functionName , or you
+	// can specify a folder where canary scripts reside as
+	// folder/fileName.functionName .
 	//
 	// This member is required.
 	Handler *string

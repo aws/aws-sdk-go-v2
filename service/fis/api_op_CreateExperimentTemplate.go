@@ -75,6 +75,9 @@ type CreateExperimentTemplateInput struct {
 	// This member is required.
 	StopConditions []types.CreateExperimentTemplateStopConditionInput
 
+	// The configuration for experiment logging.
+	LogConfiguration *types.CreateExperimentTemplateLogConfigurationInput
+
 	// The tags to apply to the experiment template.
 	Tags map[string]string
 

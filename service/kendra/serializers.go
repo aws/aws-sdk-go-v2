@@ -5691,6 +5691,18 @@ func awsAwsjson11_serializeDocumentSortingConfiguration(v *types.SortingConfigur
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentSpellCorrectionConfiguration(v *types.SpellCorrectionConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	{
+		ok := object.Key("IncludeQuerySpellCheckSuggestions")
+		ok.Boolean(v.IncludeQuerySpellCheckSuggestions)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentSqlConfiguration(v *types.SqlConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -7182,6 +7194,13 @@ func awsAwsjson11_serializeOpDocumentQueryInput(v *QueryInput, value smithyjson.
 	if v.SortingConfiguration != nil {
 		ok := object.Key("SortingConfiguration")
 		if err := awsAwsjson11_serializeDocumentSortingConfiguration(v.SortingConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SpellCorrectionConfiguration != nil {
+		ok := object.Key("SpellCorrectionConfiguration")
+		if err := awsAwsjson11_serializeDocumentSpellCorrectionConfiguration(v.SpellCorrectionConfiguration, ok); err != nil {
 			return err
 		}
 	}

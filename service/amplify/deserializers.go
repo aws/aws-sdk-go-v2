@@ -6259,6 +6259,15 @@ func awsRestjson1_deserializeDocumentApp(v **types.App, value interface{}) error
 				sv.Repository = ptr.String(jtv)
 			}
 
+		case "repositoryCloneMethod":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RepositoryCloneMethod to be of type string, got %T instead", value)
+				}
+				sv.RepositoryCloneMethod = types.RepositoryCloneMethod(jtv)
+			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err

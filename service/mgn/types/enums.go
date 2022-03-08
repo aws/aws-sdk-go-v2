@@ -2,6 +2,24 @@
 
 package types
 
+type BootMode string
+
+// Enum values for BootMode
+const (
+	BootModeLegacyBios BootMode = "LEGACY_BIOS"
+	BootModeUefi       BootMode = "UEFI"
+)
+
+// Values returns all known values for BootMode. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (BootMode) Values() []BootMode {
+	return []BootMode{
+		"LEGACY_BIOS",
+		"UEFI",
+	}
+}
+
 type ChangeServerLifeCycleStateSourceServerLifecycleState string
 
 // Enum values for ChangeServerLifeCycleStateSourceServerLifecycleState
@@ -396,6 +414,7 @@ type ReplicationConfigurationDefaultLargeStagingDiskType string
 const (
 	ReplicationConfigurationDefaultLargeStagingDiskTypeGp2 ReplicationConfigurationDefaultLargeStagingDiskType = "GP2"
 	ReplicationConfigurationDefaultLargeStagingDiskTypeSt1 ReplicationConfigurationDefaultLargeStagingDiskType = "ST1"
+	ReplicationConfigurationDefaultLargeStagingDiskTypeGp3 ReplicationConfigurationDefaultLargeStagingDiskType = "GP3"
 )
 
 // Values returns all known values for
@@ -406,6 +425,7 @@ func (ReplicationConfigurationDefaultLargeStagingDiskType) Values() []Replicatio
 	return []ReplicationConfigurationDefaultLargeStagingDiskType{
 		"GP2",
 		"ST1",
+		"GP3",
 	}
 }
 
@@ -438,6 +458,8 @@ const (
 	ReplicationConfigurationReplicatedDiskStagingDiskTypeSc1      ReplicationConfigurationReplicatedDiskStagingDiskType = "SC1"
 	ReplicationConfigurationReplicatedDiskStagingDiskTypeSt1      ReplicationConfigurationReplicatedDiskStagingDiskType = "ST1"
 	ReplicationConfigurationReplicatedDiskStagingDiskTypeStandard ReplicationConfigurationReplicatedDiskStagingDiskType = "STANDARD"
+	ReplicationConfigurationReplicatedDiskStagingDiskTypeGp3      ReplicationConfigurationReplicatedDiskStagingDiskType = "GP3"
+	ReplicationConfigurationReplicatedDiskStagingDiskTypeIo2      ReplicationConfigurationReplicatedDiskStagingDiskType = "IO2"
 )
 
 // Values returns all known values for
@@ -452,6 +474,8 @@ func (ReplicationConfigurationReplicatedDiskStagingDiskType) Values() []Replicat
 		"SC1",
 		"ST1",
 		"STANDARD",
+		"GP3",
+		"IO2",
 	}
 }
 

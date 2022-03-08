@@ -11,28 +11,28 @@ type ChangesetErrorInfo struct {
 
 	// The category of the error.
 	//
-	// * VALIDATION -The inputs to this request are
+	// * VALIDATION – The inputs to this request are
 	// invalid.
 	//
-	// * SERVICE_QUOTA_EXCEEDED - Service quotas have been exceeded. Please
+	// * SERVICE_QUOTA_EXCEEDED – Service quotas have been exceeded. Please
 	// contact AWS support to increase quotas.
 	//
-	// * ACCESS_DENIED - Missing required
+	// * ACCESS_DENIED – Missing required
 	// permission to perform this request.
 	//
-	// * RESOURCE_NOT_FOUND - One or more inputs
+	// * RESOURCE_NOT_FOUND – One or more inputs
 	// to this request were not found.
 	//
-	// * THROTTLING - The system temporarily lacks
+	// * THROTTLING – The system temporarily lacks
 	// sufficient resources to process the request.
 	//
-	// * INTERNAL_SERVICE_EXCEPTION - An
+	// * INTERNAL_SERVICE_EXCEPTION – An
 	// internal service error has occurred.
 	//
-	// * CANCELLED - Cancelled.
+	// * CANCELLED – Cancelled.
 	//
 	// *
-	// USER_RECOVERABLE - A user recoverable error has occurred.
+	// USER_RECOVERABLE – A user recoverable error has occurred.
 	ErrorCategory ErrorCategory
 
 	// The text of the error message.
@@ -45,25 +45,25 @@ type ChangesetErrorInfo struct {
 type ChangesetSummary struct {
 
 	// Beginning time from which the Changeset is active. The value is determined as
-	// Epoch time in milliseconds. For example, the value for Monday, November 1, 2021
+	// epoch time in milliseconds. For example, the value for Monday, November 1, 2021
 	// 12:00:00 PM UTC is specified as 1635768000000.
 	ActiveFromTimestamp int64
 
-	// Time until which the Changeset is active. The value is determined as Epoch time
+	// Time until which the Changeset is active. The value is determined as epoch time
 	// in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM
 	// UTC is specified as 1635768000000.
 	ActiveUntilTimestamp int64
 
 	// Type that indicates how a Changeset is applied to a Dataset.
 	//
-	// * REPLACE -
+	// * REPLACE –
 	// Changeset is considered as a replacement to all prior loaded Changesets.
 	//
 	// *
-	// APPEND - Changeset is considered as an addition to the end of all prior loaded
+	// APPEND – Changeset is considered as an addition to the end of all prior loaded
 	// Changesets.
 	//
-	// * MODIFY - Changeset is considered as a replacement to a specific
+	// * MODIFY – Changeset is considered as a replacement to a specific
 	// prior ingested Changeset.
 	ChangeType ChangeType
 
@@ -74,7 +74,7 @@ type ChangesetSummary struct {
 	ChangesetId *string
 
 	// The timestamp at which the Changeset was created in FinSpace. The value is
-	// determined as Epoch time in milliseconds. For example, the value for Monday,
+	// determined as epoch time in milliseconds. For example, the value for Monday,
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
 	CreateTime int64
 
@@ -93,18 +93,18 @@ type ChangesetSummary struct {
 
 	// Status of the Changeset ingestion.
 	//
-	// * PENDING - Changeset is pending
+	// * PENDING – Changeset is pending
 	// creation.
 	//
-	// * FAILED - Changeset creation has failed.
+	// * FAILED – Changeset creation has failed.
 	//
-	// * SUCCESS - Changeset
+	// * SUCCESS – Changeset
 	// creation has succeeded.
 	//
-	// * RUNNING - Changeset creation is running.
+	// * RUNNING – Changeset creation is running.
 	//
 	// *
-	// STOP_REQUESTED - User requested Changeset creation to stop.
+	// STOP_REQUESTED – User requested Changeset creation to stop.
 	Status IngestionStatus
 
 	// The unique identifier of the updated Changeset.
@@ -122,16 +122,16 @@ type ColumnDefinition struct {
 	// Description for a column.
 	ColumnDescription *string
 
-	// Name for a column.
+	// The name of a column.
 	ColumnName *string
 
 	// Data type of a column.
 	//
-	// * STRING - A String data type. CHAR - A char data type.
-	// INTEGER - An integer data type. TINYINT - A tinyint data type. SMALLINT - A
-	// smallint data type. BIGINT - A bigint data type. FLOAT - A float data type.
-	// DOUBLE - A double data type. DATE - A date data type. DATETIME - A datetime data
-	// type. BOOLEAN - A boolean data type. BINARY - A binary data type.
+	// * STRING – A String data type. CHAR – A char data type.
+	// INTEGER – An integer data type. TINYINT – A tinyint data type. SMALLINT – A
+	// smallint data type. BIGINT – A bigint data type. FLOAT – A float data type.
+	// DOUBLE – A double data type. DATE – A date data type. DATETIME – A datetime data
+	// type. BOOLEAN – A boolean data type. BINARY – A binary data type.
 	DataType ColumnDataType
 
 	noSmithyDocumentSerde
@@ -159,7 +159,7 @@ type Dataset struct {
 	Alias *string
 
 	// The timestamp at which the Dataset was created in FinSpace. The value is
-	// determined as Epoch time in milliseconds. For example, the value for Monday,
+	// determined as epoch time in milliseconds. For example, the value for Monday,
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
 	CreateTime int64
 
@@ -177,14 +177,14 @@ type Dataset struct {
 
 	// The format in which Dataset data is structured.
 	//
-	// * TABULAR - Data is structured
+	// * TABULAR – Data is structured
 	// in a tabular format.
 	//
-	// * NON_TABULAR - Data is structured in a non-tabular
+	// * NON_TABULAR – Data is structured in a non-tabular
 	// format.
 	Kind DatasetKind
 
-	// The last time that the Dataset was modified. The value is determined as Epoch
+	// The last time that the Dataset was modified. The value is determined as epoch
 	// time in milliseconds. For example, the value for Monday, November 1, 2021
 	// 12:00:00 PM UTC is specified as 1635768000000.
 	LastModifiedTime int64
@@ -204,7 +204,7 @@ type DatasetOwnerInfo struct {
 	// Email address for the Dataset owner.
 	Email *string
 
-	// Name of the Dataset owner.
+	// The name of the Dataset owner.
 	Name *string
 
 	// Phone number for the Dataset owner.
@@ -218,20 +218,20 @@ type DataViewDestinationTypeParams struct {
 
 	// Destination type for a Dataview.
 	//
-	// * GLUE_TABLE - Glue table destination type.
+	// * GLUE_TABLE – Glue table destination type.
 	//
 	// *
-	// S3 - S3 destination type.
+	// S3 – S3 destination type.
 	//
 	// This member is required.
 	DestinationType *string
 
 	// Data view export file format.
 	//
-	// * PARQUET - Parquet export file format.
+	// * PARQUET – Parquet export file format.
 	//
 	// *
-	// DELIMITED_TEXT - Delimited text export file format.
+	// DELIMITED_TEXT – Delimited text export file format.
 	S3DestinationExportFileFormat ExportFileFormat
 
 	// Format Options for S3 Destination type. Here is an example of how you could
@@ -248,28 +248,28 @@ type DataViewErrorInfo struct {
 
 	// The category of the error.
 	//
-	// * VALIDATION -The inputs to this request are
+	// * VALIDATION – The inputs to this request are
 	// invalid.
 	//
-	// * SERVICE_QUOTA_EXCEEDED - Service quotas have been exceeded. Please
+	// * SERVICE_QUOTA_EXCEEDED – Service quotas have been exceeded. Please
 	// contact AWS support to increase quotas.
 	//
-	// * ACCESS_DENIED - Missing required
+	// * ACCESS_DENIED – Missing required
 	// permission to perform this request.
 	//
-	// * RESOURCE_NOT_FOUND - One or more inputs
+	// * RESOURCE_NOT_FOUND – One or more inputs
 	// to this request were not found.
 	//
-	// * THROTTLING - The system temporarily lacks
+	// * THROTTLING – The system temporarily lacks
 	// sufficient resources to process the request.
 	//
-	// * INTERNAL_SERVICE_EXCEPTION - An
+	// * INTERNAL_SERVICE_EXCEPTION – An
 	// internal service error has occurred.
 	//
-	// * CANCELLED - Cancelled.
+	// * CANCELLED – Cancelled.
 	//
 	// *
-	// USER_RECOVERABLE - A user recoverable error has occurred.
+	// USER_RECOVERABLE – A user recoverable error has occurred.
 	ErrorCategory ErrorCategory
 
 	// The text of the error message.
@@ -281,7 +281,7 @@ type DataViewErrorInfo struct {
 // Structure for the summary of a Dataview.
 type DataViewSummary struct {
 
-	// Time range to use for the Dataview. The value is determined as Epoch time in
+	// Time range to use for the Dataview. The value is determined as epoch time in
 	// milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM
 	// UTC is specified as 1635768000000.
 	AsOfTimestamp int64
@@ -290,7 +290,7 @@ type DataViewSummary struct {
 	AutoUpdate bool
 
 	// The timestamp at which the Dataview was created in FinSpace. The value is
-	// determined as Epoch time in milliseconds. For example, the value for Monday,
+	// determined as epoch time in milliseconds. For example, the value for Monday,
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
 	CreateTime int64
 
@@ -309,7 +309,7 @@ type DataViewSummary struct {
 	// The structure with error messages.
 	ErrorInfo *DataViewErrorInfo
 
-	// The last time that a Dataview was modified. The value is determined as Epoch
+	// The last time that a Dataview was modified. The value is determined as epoch
 	// time in milliseconds. For example, the value for Monday, November 1, 2021
 	// 12:00:00 PM UTC is specified as 1635768000000.
 	LastModifiedTime int64
@@ -322,27 +322,74 @@ type DataViewSummary struct {
 
 	// The status of a Dataview creation.
 	//
-	// * RUNNING - Dataview creation is running.
+	// * RUNNING – Dataview creation is running.
 	//
 	// *
-	// STARTING - Dataview creation is starting.
+	// STARTING – Dataview creation is starting.
 	//
-	// * FAILED - Dataview creation has
+	// * FAILED – Dataview creation has
 	// failed.
 	//
-	// * CANCELLED - Dataview creation has been cancelled.
+	// * CANCELLED – Dataview creation has been cancelled.
 	//
-	// * TIMEOUT -
+	// * TIMEOUT –
 	// Dataview creation has timed out.
 	//
-	// * SUCCESS - Dataview creation has
+	// * SUCCESS – Dataview creation has
 	// succeeded.
 	//
-	// * PENDING - Dataview creation is pending.
+	// * PENDING – Dataview creation is pending.
 	//
-	// * FAILED_CLEANUP_FAILED -
+	// * FAILED_CLEANUP_FAILED –
 	// Dataview creation failed and resource cleanup failed.
 	Status DataViewStatus
+
+	noSmithyDocumentSerde
+}
+
+// The structure for a permission group.
+type PermissionGroup struct {
+
+	// Indicates the permissions that are granted to a specific group for accessing the
+	// FinSpace application.
+	//
+	// * CreateDataset – Group members can create new
+	// datasets.
+	//
+	// * ManageClusters – Group members can manage Apache Spark clusters
+	// from FinSpace notebooks.
+	//
+	// * ManageUsersAndGroups – Group members can manage
+	// users and permission groups.
+	//
+	// * ManageAttributeSets – Group members can manage
+	// attribute sets.
+	//
+	// * ViewAuditData – Group members can view audit data.
+	//
+	// *
+	// AccessNotebooks – Group members will have access to FinSpace notebooks.
+	//
+	// *
+	// GetTemporaryCredentials – Group members can get temporary API credentials.
+	ApplicationPermissions []ApplicationPermission
+
+	// The timestamp at which the group was created in FinSpace. The value is
+	// determined as epoch time in milliseconds.
+	CreateTime int64
+
+	// A brief description for the permission group.
+	Description *string
+
+	// Describes the last time the permission group was updated. The value is
+	// determined as epoch time in milliseconds.
+	LastModifiedTime int64
+
+	// The name of the permission group.
+	Name *string
+
+	// The unique identifier for the permission group.
+	PermissionGroupId *string
 
 	noSmithyDocumentSerde
 }
@@ -357,7 +404,7 @@ type PermissionGroupParams struct {
 	// List of resource permissions.
 	DatasetPermissions []ResourcePermission
 
-	// The unique identifier of the PermissionGroup.
+	// The unique identifier for the PermissionGroup.
 	PermissionGroupId *string
 
 	noSmithyDocumentSerde
@@ -383,7 +430,7 @@ type PermissionGroupParams struct {
 // * DeleteDataset
 //
 // For more information on
-// the ataset permissions, see Supported Dataset Permissions
+// the dataset permissions, see Supported Dataset Permissions
 // (https://docs.aws.amazon.com/finspace/latest/userguide/managing-user-permissions.html#supported-dataset-permissions)
 // in the FinSpace User Guide.
 type ResourcePermission struct {
@@ -411,6 +458,81 @@ type SchemaUnion struct {
 
 	// The configuration for a schema on a tabular Dataset.
 	TabularSchemaConfig *SchemaDefinition
+
+	noSmithyDocumentSerde
+}
+
+// The details of the user account.
+type User struct {
+
+	// Indicates whether the user can use the GetProgrammaticAccessCredentials API to
+	// obtain credentials that can then be used to access other FinSpace Data API
+	// operations.
+	//
+	// * ENABLED – The user has permissions to use the APIs.
+	//
+	// * DISABLED –
+	// The user does not have permissions to use any APIs.
+	ApiAccess ApiAccess
+
+	// The ARN identifier of an AWS user or role that is allowed to call the
+	// GetProgrammaticAccessCredentials API to obtain a credentials token for a
+	// specific FinSpace user. This must be an IAM role within your FinSpace account.
+	ApiAccessPrincipalArn *string
+
+	// The timestamp at which the user account was created in FinSpace. The value is
+	// determined as epoch time in milliseconds.
+	CreateTime int64
+
+	// The email address of the user. The email address serves as a uniquer identifier
+	// for each user and cannot be changed after it's created.
+	EmailAddress *string
+
+	// The first name of the user.
+	FirstName *string
+
+	// Describes the last time the user account was disabled. The value is determined
+	// as epoch time in milliseconds.
+	LastDisabledTime int64
+
+	// Describes the last time the user account was enabled. The value is determined as
+	// epoch time in milliseconds.
+	LastEnabledTime int64
+
+	// Describes the last time that the user logged into their account. The value is
+	// determined as epoch time in milliseconds.
+	LastLoginTime int64
+
+	// Describes the last time the user account was updated. The value is determined as
+	// epoch time in milliseconds.
+	LastModifiedTime int64
+
+	// The last name of the user.
+	LastName *string
+
+	// The current status of the user account.
+	//
+	// * CREATING – The user account creation
+	// is in progress.
+	//
+	// * ENABLED – The user account is created and is currently
+	// active.
+	//
+	// * DISABLED – The user account is currently inactive.
+	Status UserStatus
+
+	// Indicates the type of user.
+	//
+	// * SUPER_USER – A user with permission to all the
+	// functionality and data in FinSpace.
+	//
+	// * APP_USER – A user with specific
+	// permissions in FinSpace. The users are assigned permissions by adding them to a
+	// permissions group.
+	Type UserType
+
+	// The unique identifier for the user.
+	UserId *string
 
 	noSmithyDocumentSerde
 }

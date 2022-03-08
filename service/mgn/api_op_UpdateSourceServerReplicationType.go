@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates source server Replication Type by ID.
+// Allows you to change between the AGENT_BASED replication type and the
+// SNAPSHOT_SHIPPING replication type.
 func (c *Client) UpdateSourceServerReplicationType(ctx context.Context, params *UpdateSourceServerReplicationTypeInput, optFns ...func(*Options)) (*UpdateSourceServerReplicationTypeOutput, error) {
 	if params == nil {
 		params = &UpdateSourceServerReplicationTypeInput{}
