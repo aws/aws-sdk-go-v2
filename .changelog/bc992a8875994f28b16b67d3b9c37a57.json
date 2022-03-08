@@ -1,8 +1,0 @@
-{
-    "id": "bc992a88-7599-4f28-b16b-67d3b9c37a57",
-    "type": "documentation",
-    "description": "Adding link to CloudTrail section in Amazon Keyspaces Developer Guide",
-    "modules": [
-        "service/keyspaces"
-    ]
-}
