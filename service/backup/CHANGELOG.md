@@ -1,3 +1,7 @@
+# v1.15.1 (2022-03-08.2)
+
+* No change notes available for this release.
+
 # v1.15.0 (2022-03-08)
 
 * **Feature**: Updated `github.com/aws/smithy-go` to latest version
