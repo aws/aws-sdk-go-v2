@@ -1580,8 +1580,11 @@ type CmfcSettings struct {
 	// SCTE-35 markers in this output.
 	Scte35Source CmfcScte35Source
 
-	// Applies to CMAF outputs. Use this setting to specify whether the service inserts
-	// the ID3 timed metadata from the input in this output.
+	// To include ID3 metadata in this output: Set ID3 metadata (timedMetadata) to
+	// Passthrough (PASSTHROUGH). Specify this ID3 metadata in Custom ID3 metadata
+	// inserter (timedMetadataInsertion). MediaConvert writes each instance of ID3
+	// metadata in a separate Event Message (eMSG) box. To exclude this ID3 metadata:
+	// Set ID3 metadata to None (NONE) or leave blank.
 	TimedMetadata CmfcTimedMetadata
 
 	noSmithyDocumentSerde
@@ -3726,6 +3729,14 @@ type HlsGroupSettings struct {
 	// from the manifest.
 	CaptionLanguageSetting HlsCaptionLanguageSetting
 
+	// Set Caption segment length control (CaptionSegmentLengthControl) to Match video
+	// (MATCH_VIDEO) to create caption segments that align with the video segments from
+	// the first video output in this output group. For example, if the video segments
+	// are 2 seconds long, your WebVTT segments will also be 2 seconds long. Keep the
+	// default setting, Large segments (LARGE_SEGMENTS) to create caption segments that
+	// are 300 seconds long.
+	CaptionSegmentLengthControl HlsCaptionSegmentLengthControl
+
 	// Disable this setting only when your workflow requires the #EXT-X-ALLOW-CACHE:no
 	// tag. Otherwise, keep the default value Enabled (ENABLED) and control caching in
 	// your video distribution set up. For example, use the Cache-Control http header.
@@ -3842,10 +3853,19 @@ type HlsGroupSettings struct {
 	// duration.
 	TargetDurationCompatibilityMode HlsTargetDurationCompatibilityMode
 
-	// Indicates ID3 frame that has the timecode.
+	// Specify the type of the ID3 frame (timedMetadataId3Frame) to use for ID3
+	// timestamps (timedMetadataId3Period) in your output. To include ID3 timestamps:
+	// Specify PRIV (PRIV) or TDRL (TDRL) and set ID3 metadata (timedMetadata) to
+	// Passthrough (PASSTHROUGH). To exclude ID3 timestamps: Set ID3 timestamp frame
+	// type to None (NONE).
 	TimedMetadataId3Frame HlsTimedMetadataId3Frame
 
-	// Timed Metadata interval in seconds.
+	// Specify the interval in seconds to write ID3 timestamps in your output. The
+	// first timestamp starts at the output timecode and date, and increases
+	// incrementally with each ID3 timestamp. To use the default interval of 10
+	// seconds: Leave blank. To include this metadata in your output: Set ID3 timestamp
+	// frame type (timedMetadataId3Frame) to PRIV (PRIV) or TDRL (TDRL), and set ID3
+	// metadata (timedMetadata) to Passthrough (PASSTHROUGH).
 	TimedMetadataId3Period int32
 
 	// Provides an extra millisecond delta offset to fine tune the timestamps.
@@ -3999,7 +4019,7 @@ type HopDestination struct {
 // output, create multiple instances of ID3 insertion (Id3Insertion).
 type Id3Insertion struct {
 
-	// Use ID3 tag (Id3) to provide a tag value in base64-encode format.
+	// Use ID3 tag (Id3) to provide a fully formed ID3 tag in base64-encode format.
 	Id3 *string
 
 	// Provide a Timecode (TimeCode) in HH:MM:SS:FF or HH:MM:SS;FF format.
@@ -4031,11 +4051,15 @@ type ImageInserter struct {
 // any required children when you set destinationType to IMSC.
 type ImscDestinationSettings struct {
 
-	// Specify whether to flag this caption track as accessibility in your HLS/CMAF
-	// parent manifest. When you choose ENABLED, MediaConvert includes the parameters
+	// Set Accessibility subtitles (Accessibility) to Enabled (ENABLED) if the ISMC or
+	// WebVTT captions track is intended to provide accessibility for people who are
+	// deaf or hard of hearing. When you enable this feature, MediaConvert adds the
+	// following attributes under EXT-X-MEDIA in the HLS or CMAF manifest for this
+	// track:
 	// CHARACTERISTICS="public.accessibility.describes-spoken-dialog,public.accessibility.describes-music-and-sound"
-	// and AUTOSELECT="YES" in the EXT-X-MEDIA entry for this track. When you keep the
-	// default choice, DISABLED, MediaConvert leaves this parameter out.
+	// and AUTOSELECT="YES". Keep the default value, Disabled (DISABLED), if the
+	// captions track is not intended to provide such accessibility. MediaConvert will
+	// not add the above attributes.
 	Accessibility ImscAccessibilitySubs
 
 	// Keep this setting enabled to have MediaConvert use the font style and position
@@ -4661,10 +4685,9 @@ type JobSettings struct {
 	// These settings don't affect input clipping.
 	TimecodeConfig *TimecodeConfig
 
-	// Enable Timed metadata insertion (TimedMetadataInsertion) to include ID3 tags in
-	// any HLS outputs. To include timed metadata, you must enable it here, enable it
-	// in each output container, and specify tags and timecodes in ID3 insertion
-	// (Id3Insertion) objects.
+	// Insert user-defined custom ID3 metadata (id3) at timecodes (timecode) that you
+	// specify. In each output that you want to include this metadata, you must set ID3
+	// metadata (timedMetadata) to Passthrough (PASSTHROUGH).
 	TimedMetadataInsertion *TimedMetadataInsertion
 
 	noSmithyDocumentSerde
@@ -4804,10 +4827,9 @@ type JobTemplateSettings struct {
 	// These settings don't affect input clipping.
 	TimecodeConfig *TimecodeConfig
 
-	// Enable Timed metadata insertion (TimedMetadataInsertion) to include ID3 tags in
-	// any HLS outputs. To include timed metadata, you must enable it here, enable it
-	// in each output container, and specify tags and timecodes in ID3 insertion
-	// (Id3Insertion) objects.
+	// Insert user-defined custom ID3 metadata (id3) at timecodes (timecode) that you
+	// specify. In each output that you want to include this metadata, you must set ID3
+	// metadata (timedMetadata) to Passthrough (PASSTHROUGH).
 	TimedMetadataInsertion *TimedMetadataInsertion
 
 	noSmithyDocumentSerde
@@ -5202,11 +5224,14 @@ type M3u8Settings struct {
 	// (sccXml).
 	Scte35Source M3u8Scte35Source
 
-	// Applies to HLS outputs. Use this setting to specify whether the service inserts
-	// the ID3 timed metadata from the input in this output.
+	// Set ID3 metadata (timedMetadata) to Passthrough (PASSTHROUGH) to include ID3
+	// metadata in this output. This includes ID3 metadata from the following features:
+	// ID3 timestamp period (timedMetadataId3Period), and Custom ID3 metadata inserter
+	// (timedMetadataInsertion). To exclude this ID3 metadata in this output: set ID3
+	// metadata to None (NONE) or leave blank.
 	TimedMetadata TimedMetadata
 
-	// Packet Identifier (PID) of the timed metadata stream in the transport stream.
+	// Packet Identifier (PID) of the ID3 metadata stream in the transport stream.
 	TimedMetadataPid int32
 
 	// The value of the transport stream ID field in the Program Map Table.
@@ -5478,8 +5503,11 @@ type MpdSettings struct {
 	// SCTE-35 markers in this output.
 	Scte35Source MpdScte35Source
 
-	// Applies to DASH outputs. Use this setting to specify whether the service inserts
-	// the ID3 timed metadata from the input in this output.
+	// To include ID3 metadata in this output: Set ID3 metadata (timedMetadata) to
+	// Passthrough (PASSTHROUGH). Specify this ID3 metadata in Custom ID3 metadata
+	// inserter (timedMetadataInsertion). MediaConvert writes each instance of ID3
+	// metadata in a separate Event Message (eMSG) box. To exclude this ID3 metadata:
+	// Set ID3 metadata to None (NONE) or leave blank.
 	TimedMetadata MpdTimedMetadata
 
 	noSmithyDocumentSerde
@@ -6083,22 +6111,22 @@ type NoiseReducerTemporalFilterSettings struct {
 	// aggressively and creates better VQ for low bitrate outputs.
 	AggressiveMode int32
 
-	// When you set Noise reducer (noiseReducer) to Temporal (TEMPORAL), the sharpness
-	// of your output is reduced. You can optionally use Post temporal sharpening
-	// (PostTemporalSharpening) to apply sharpening to the edges of your output. The
-	// default behavior, Auto (AUTO), allows the transcoder to determine whether to
-	// apply sharpening, depending on your input type and quality. When you set Post
-	// temporal sharpening to Enabled (ENABLED), specify how much sharpening is applied
-	// using Post temporal sharpening strength (PostTemporalSharpeningStrength). Set
-	// Post temporal sharpening to Disabled (DISABLED) to not apply sharpening.
+	// When you set Noise reducer (noiseReducer) to Temporal (TEMPORAL), the bandwidth
+	// and sharpness of your output is reduced. You can optionally use Post temporal
+	// sharpening (postTemporalSharpening) to apply sharpening to the edges of your
+	// output. Note that Post temporal sharpening will also make the bandwidth
+	// reduction from the Noise reducer smaller. The default behavior, Auto (AUTO),
+	// allows the transcoder to determine whether to apply sharpening, depending on
+	// your input type and quality. When you set Post temporal sharpening to Enabled
+	// (ENABLED), specify how much sharpening is applied using Post temporal sharpening
+	// strength (postTemporalSharpeningStrength). Set Post temporal sharpening to
+	// Disabled (DISABLED) to not apply sharpening.
 	PostTemporalSharpening NoiseFilterPostTemporalSharpening
 
-	// Use Post temporal sharpening strength (PostTemporalSharpeningStrength) to define
+	// Use Post temporal sharpening strength (postTemporalSharpeningStrength) to define
 	// the amount of sharpening the transcoder applies to your output. Set Post
-	// temporal sharpening strength to Low (LOW), or leave blank, to apply a low amount
-	// of sharpening. Set Post temporal sharpening strength to Medium (MEDIUM) to apply
-	// medium amount of sharpening. Set Post temporal sharpening strength to High
-	// (HIGH) to apply a high amount of sharpening.
+	// temporal sharpening strength to Low (LOW), Medium (MEDIUM), or High (HIGH) to
+	// indicate the amount of sharpening.
 	PostTemporalSharpeningStrength NoiseFilterPostTemporalSharpeningStrength
 
 	// The speed of the filter (higher number is faster). Low setting reduces bit rate
@@ -7022,10 +7050,9 @@ type TimecodeConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Enable Timed metadata insertion (TimedMetadataInsertion) to include ID3 tags in
-// any HLS outputs. To include timed metadata, you must enable it here, enable it
-// in each output container, and specify tags and timecodes in ID3 insertion
-// (Id3Insertion) objects.
+// Insert user-defined custom ID3 metadata (id3) at timecodes (timecode) that you
+// specify. In each output that you want to include this metadata, you must set ID3
+// metadata (timedMetadata) to Passthrough (PASSTHROUGH).
 type TimedMetadataInsertion struct {
 
 	// Id3Insertions contains the array of Id3Insertion instances.
@@ -7436,6 +7463,13 @@ type VideoSelector struct {
 	// input settings.
 	ColorSpaceUsage ColorSpaceUsage
 
+	// Set Embedded timecode override (embeddedTimecodeOverride) to Use MDPM (USE_MDPM)
+	// when your AVCHD input contains timecode tag data in the Modified Digital Video
+	// Pack Metadata (MDPM). When you do, we recommend you also set Timecode source
+	// (inputTimecodeSource) to Embedded (EMBEDDED). Leave Embedded timecode override
+	// blank, or set to None (NONE), when your input does not contain MDPM timecode.
+	EmbeddedTimecodeOverride EmbeddedTimecodeOverride
+
 	// Use these settings to provide HDR 10 metadata that is missing or inaccurate in
 	// your input video. Appropriate values vary depending on the input video and must
 	// be provided by a color grader. The color grader generates these values during
@@ -7732,11 +7766,15 @@ type WavSettings struct {
 // any required children when you set destinationType to WebVTT.
 type WebvttDestinationSettings struct {
 
-	// Specify whether to flag this caption track as accessibility in your HLS/CMAF
-	// parent manifest. When you choose ENABLED, MediaConvert includes the parameters
+	// Set Accessibility subtitles (Accessibility) to Enabled (ENABLED) if the ISMC or
+	// WebVTT captions track is intended to provide accessibility for people who are
+	// deaf or hard of hearing. When you enable this feature, MediaConvert adds the
+	// following attributes under EXT-X-MEDIA in the HLS or CMAF manifest for this
+	// track:
 	// CHARACTERISTICS="public.accessibility.describes-spoken-dialog,public.accessibility.describes-music-and-sound"
-	// and AUTOSELECT="YES" in the EXT-X-MEDIA entry for this track. When you keep the
-	// default choice, DISABLED, MediaConvert leaves this parameter out.
+	// and AUTOSELECT="YES". Keep the default value, Disabled (DISABLED), if the
+	// captions track is not intended to provide such accessibility. MediaConvert will
+	// not add the above attributes.
 	Accessibility WebvttAccessibilitySubs
 
 	// Set Style passthrough (StylePassthrough) to ENABLED to use the available style,

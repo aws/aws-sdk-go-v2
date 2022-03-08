@@ -5721,6 +5721,11 @@ func awsRestjson1_serializeDocumentHlsGroupSettings(v *types.HlsGroupSettings, v
 		ok.String(string(v.CaptionLanguageSetting))
 	}
 
+	if len(v.CaptionSegmentLengthControl) > 0 {
+		ok := object.Key("captionSegmentLengthControl")
+		ok.String(string(v.CaptionSegmentLengthControl))
+	}
+
 	if len(v.ClientCache) > 0 {
 		ok := object.Key("clientCache")
 		ok.String(string(v.ClientCache))
@@ -8787,6 +8792,11 @@ func awsRestjson1_serializeDocumentVideoSelector(v *types.VideoSelector, value s
 	if len(v.ColorSpaceUsage) > 0 {
 		ok := object.Key("colorSpaceUsage")
 		ok.String(string(v.ColorSpaceUsage))
+	}
+
+	if len(v.EmbeddedTimecodeOverride) > 0 {
+		ok := object.Key("embeddedTimecodeOverride")
+		ok.String(string(v.EmbeddedTimecodeOverride))
 	}
 
 	if v.Hdr10Metadata != nil {
