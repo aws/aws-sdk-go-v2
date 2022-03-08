@@ -1,3 +1,9 @@
+# v1.16.0 (2022-03-08)
+
+* **Feature**: Updated `github.com/aws/smithy-go` to latest version
+* **Documentation**: Updated service client model to latest release.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.15.0 (2022-02-24)
 
 * **Feature**: API client updated

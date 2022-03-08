@@ -1,3 +1,8 @@
+# v1.8.0 (2022-03-08)
+
+* **Feature**: Updated `github.com/aws/smithy-go` to latest version
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.7.0 (2022-02-24)
 
 * **Feature**: Fixes [#645](https://github.com/aws/aws-sdk-go-v2/issues/645), [#411](https://github.com/aws/aws-sdk-go-v2/issues/411) by adding support for (un)marshaling AttributeValue maps to Go maps key types of string, number, bool, and types implementing encoding.Text(un)Marshaler interface
