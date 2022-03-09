@@ -1,3 +1,9 @@
+# Release (2022-03-09)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/comprehend`: [v1.17.0](service/comprehend/CHANGELOG.md#v1170-2022-03-09)
+  * **Feature**: Amazon Comprehend now supports extracting the sentiment associated with entities such as brands, products and services from text documents.
+
 # Release (2022-03-08.3)
 
 * No change notes available for this release.
