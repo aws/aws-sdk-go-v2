@@ -1,8 +1,0 @@
-{
-    "id": "605aa90f-98a1-4b55-ab50-5a3cd1412a0d",
-    "type": "feature",
-    "description": "Amazon Comprehend now supports extracting the sentiment associated with entities such as brands, products and services from text documents.",
-    "modules": [
-        "service/comprehend"
-    ]
-}
