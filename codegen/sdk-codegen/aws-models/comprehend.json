@@ -909,6 +909,9 @@
                     "target": "com.amazonaws.comprehend#DescribeSentimentDetectionJob"
                 },
                 {
+                    "target": "com.amazonaws.comprehend#DescribeTargetedSentimentDetectionJob"
+                },
+                {
                     "target": "com.amazonaws.comprehend#DescribeTopicsDetectionJob"
                 },
                 {
@@ -972,6 +975,9 @@
                     "target": "com.amazonaws.comprehend#ListTagsForResource"
                 },
                 {
+                    "target": "com.amazonaws.comprehend#ListTargetedSentimentDetectionJobs"
+                },
+                {
                     "target": "com.amazonaws.comprehend#ListTopicsDetectionJobs"
                 },
                 {
@@ -999,6 +1005,9 @@
                     "target": "com.amazonaws.comprehend#StartSentimentDetectionJob"
                 },
                 {
+                    "target": "com.amazonaws.comprehend#StartTargetedSentimentDetectionJob"
+                },
+                {
                     "target": "com.amazonaws.comprehend#StartTopicsDetectionJob"
                 },
                 {
@@ -1018,6 +1027,9 @@
                 },
                 {
                     "target": "com.amazonaws.comprehend#StopSentimentDetectionJob"
+                },
+                {
+                    "target": "com.amazonaws.comprehend#StopTargetedSentimentDetectionJob"
                 },
                 {
                     "target": "com.amazonaws.comprehend#StopTrainingDocumentClassifier"
@@ -2212,6 +2224,55 @@
                     "target": "com.amazonaws.comprehend#SentimentDetectionJobProperties",
                     "traits": {
                         "smithy.api#documentation": "<p>An object that contains the properties associated with a sentiment detection job.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.comprehend#DescribeTargetedSentimentDetectionJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.comprehend#DescribeTargetedSentimentDetectionJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.comprehend#DescribeTargetedSentimentDetectionJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.comprehend#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.comprehend#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.comprehend#JobNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.comprehend#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the properties associated with a targeted sentiment detection job. Use this operation \n      to get the status of the job.</p>"
+            }
+        },
+        "com.amazonaws.comprehend#DescribeTargetedSentimentDetectionJobRequest": {
+            "type": "structure",
+            "members": {
+                "JobId": {
+                    "target": "com.amazonaws.comprehend#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier that Amazon Comprehend generated for the job. The  operation returns this identifier in its\n      response.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.comprehend#DescribeTargetedSentimentDetectionJobResponse": {
+            "type": "structure",
+            "members": {
+                "TargetedSentimentDetectionJobProperties": {
+                    "target": "com.amazonaws.comprehend#TargetedSentimentDetectionJobProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains the properties associated with a targeted sentiment detection job.</p>"
                     }
                 }
             }
@@ -3762,7 +3823,7 @@
                 "F1Score": {
                     "target": "com.amazonaws.comprehend#Double",
                     "traits": {
-                        "smithy.api#documentation": "<p>A measure of how accurate the recognizer results are for the test data. It is derived from\n      the <code>Precision</code> and <code>Recall</code> values. The <code>F1Score</code> is the\n      harmonic average of the two scores. The highest score is 1, and the worst score is 0. </p>"
+                        "smithy.api#documentation": "<p>A measure of how accurate the recognizer results are for the test data. It is derived from\n      the <code>Precision</code> and <code>Recall</code> values. The <code>F1Score</code> is the\n      harmonic average of the two scores. For plain text entity recognizer models, the range is 0 to 100, \n      where 100 is the best score. For PDF/Word entity recognizer models, the range is 0 to 1, \n      where 1 is the best score.   \n    </p>"
                     }
                 }
             },
@@ -4727,7 +4788,7 @@
                     "min": 0,
                     "max": 2048
                 },
-                "smithy.api#pattern": ".*"
+                "smithy.api#pattern": "^\\p{ASCII}+$"
             }
         },
         "com.amazonaws.comprehend#KmsKeyValidationException": {
@@ -5777,6 +5838,77 @@
                 }
             }
         },
+        "com.amazonaws.comprehend#ListTargetedSentimentDetectionJobs": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.comprehend#ListTargetedSentimentDetectionJobsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.comprehend#ListTargetedSentimentDetectionJobsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.comprehend#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.comprehend#InvalidFilterException"
+                },
+                {
+                    "target": "com.amazonaws.comprehend#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.comprehend#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets a list of targeted sentiment detection jobs that you have submitted.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.comprehend#ListTargetedSentimentDetectionJobsRequest": {
+            "type": "structure",
+            "members": {
+                "Filter": {
+                    "target": "com.amazonaws.comprehend#TargetedSentimentDetectionJobFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the jobs that are returned. You can filter jobs on their name, status, or the date\n      and time that they were submitted. You can only set one filter at a time.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.comprehend#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the next page of results to return.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.comprehend#MaxResultsInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in each page. The default is 100.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.comprehend#ListTargetedSentimentDetectionJobsResponse": {
+            "type": "structure",
+            "members": {
+                "TargetedSentimentDetectionJobPropertiesList": {
+                    "target": "com.amazonaws.comprehend#TargetedSentimentDetectionJobPropertiesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list containing the properties of each job that is returned.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.comprehend#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the next page of results to return.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.comprehend#ListTopicsDetectionJobs": {
             "type": "operation",
             "input": {
@@ -5919,7 +6051,7 @@
                 "S3Uri": {
                     "target": "com.amazonaws.comprehend#S3Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>When you use the <code>OutputDataConfig</code> object with asynchronous operations, you\n      specify the Amazon S3 location where you want to write the output data. The URI must be in the\n      same region as the API endpoint that you are calling. The location is used as the prefix for\n      the actual location of the output file.</p>\n         <p>When the topic detection job is finished, the service creates an output file in a\n      directory specific to the job. The <code>S3Uri</code> field contains the location of the\n      output file, called <code>output.tar.gz</code>. It is a compressed archive that contains the\n      ouput of the operation.</p>",
+                        "smithy.api#documentation": "<p>When you use the <code>OutputDataConfig</code> object with asynchronous operations, you\n      specify the Amazon S3 location where you want to write the output data. The URI must be in the\n      same region as the API endpoint that you are calling. The location is used as the prefix for\n      the actual location of the output file.</p>\n         <p>When the topic detection job is finished, the service creates an output file in a\n      directory specific to the job. The <code>S3Uri</code> field contains the location of the\n      output file, called <code>output.tar.gz</code>. It is a compressed archive that contains the\n      ouput of the operation.</p>\n         <p>\n      For a PII entity detection job, the output file is plain text, not a compressed archive. \n      The output file name is the same as the input file, with <code>.out</code> appended at the end.\n    </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5931,7 +6063,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides configuration parameters for the output of topic detection jobs.</p>\n         <p></p>"
+                "smithy.api#documentation": "<p>Provides configuration parameters for the output of inference jobs.</p>\n         <p></p>"
             }
         },
         "com.amazonaws.comprehend#PartOfSpeechTag": {
@@ -6324,7 +6456,7 @@
                 "S3Uri": {
                     "target": "com.amazonaws.comprehend#S3Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>When you use the <code>PiiOutputDataConfig</code> object with asynchronous operations,\n      you specify the Amazon S3 location where you want to write the output data. </p>",
+                        "smithy.api#documentation": "<p>When you use the <code>PiiOutputDataConfig</code> object with asynchronous operations,\n      you specify the Amazon S3 location where you want to write the output data. </p>\n         <p>\n      For a PII entity detection job, the output file is plain text, not a compressed archive. \n      The output file name is the same as the input file, with <code>.out</code> appended at the end.\n    </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7451,7 +7583,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts an asynchronous sentiment detection job for a collection of documents. use the\n         operation to track the status of a\n      job.</p>"
+                "smithy.api#documentation": "<p>Starts an asynchronous sentiment detection job for a collection of documents. Use the\n         operation to track the status of a\n      job.</p>"
             }
         },
         "com.amazonaws.comprehend#StartSentimentDetectionJobRequest": {
@@ -7531,6 +7663,118 @@
                     "target": "com.amazonaws.comprehend#ComprehendArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the sentiment detection job. It is a unique, fully\n      qualified identifier for the job. It includes the AWS account, Region, and the job ID. The\n      format of the ARN is as follows:</p>\n         <p>\n            <code>arn:<partition>:comprehend:<region>:<account-id>:sentiment-detection-job/<job-id></code>\n         </p>\n         <p>The following is an example job ARN:</p>\n         <p>\n            <code>arn:aws:comprehend:us-west-2:111122223333:sentiment-detection-job/1234abcd12ab34cd56ef1234567890ab</code>\n         </p>"
+                    }
+                },
+                "JobStatus": {
+                    "target": "com.amazonaws.comprehend#JobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the job. </p>\n         <ul>\n            <li>\n               <p>SUBMITTED - The job has been received and is queued for processing.</p>\n            </li>\n            <li>\n               <p>IN_PROGRESS - Amazon Comprehend is processing the job.</p>\n            </li>\n            <li>\n               <p>COMPLETED - The job was successfully completed and the output is available.</p>\n            </li>\n            <li>\n               <p>FAILED - The job did not complete. To get details, use the  operation.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.comprehend#StartTargetedSentimentDetectionJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.comprehend#StartTargetedSentimentDetectionJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.comprehend#StartTargetedSentimentDetectionJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.comprehend#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.comprehend#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.comprehend#KmsKeyValidationException"
+                },
+                {
+                    "target": "com.amazonaws.comprehend#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.comprehend#TooManyTagsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts an asynchronous targeted sentiment detection job for a collection of documents. Use the\n       operation to track the status of a\n      job.</p>"
+            }
+        },
+        "com.amazonaws.comprehend#StartTargetedSentimentDetectionJobRequest": {
+            "type": "structure",
+            "members": {
+                "InputDataConfig": {
+                    "target": "com.amazonaws.comprehend#InputDataConfig",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "OutputDataConfig": {
+                    "target": "com.amazonaws.comprehend#OutputDataConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies where to send the output files. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DataAccessRoleArn": {
+                    "target": "com.amazonaws.comprehend#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that\n      grants Amazon Comprehend read access to your input data. For more information, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions\">Role-based permissions</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "JobName": {
+                    "target": "com.amazonaws.comprehend#JobName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the job.</p>"
+                    }
+                },
+                "LanguageCode": {
+                    "target": "com.amazonaws.comprehend#LanguageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language of the input documents. You can specify any of the primary languages\n      supported by Amazon Comprehend. All documents must be in the same language.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientRequestToken": {
+                    "target": "com.amazonaws.comprehend#ClientRequestTokenString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the request. If you don't set the client request token, Amazon\n      Comprehend generates one.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "VolumeKmsKeyId": {
+                    "target": "com.amazonaws.comprehend#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ID for the KMS key that Amazon Comprehend uses to encrypt\n      data on the storage volume attached to the ML compute instance(s) that process the analysis\n      job. The VolumeKmsKeyId can be either of the following formats:</p>\n         <ul>\n            <li>\n               <p>KMS Key ID: <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n               </p>\n            </li>\n            <li>\n               <p>Amazon Resource Name (ARN) of a KMS Key:\n          <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n               </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "VpcConfig": {
+                    "target": "com.amazonaws.comprehend#VpcConfig"
+                },
+                "Tags": {
+                    "target": "com.amazonaws.comprehend#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags to be associated with the targeted sentiment detection job. A tag is a key-value pair that\n      adds metadata to a resource used by Amazon Comprehend. For example, a tag with \"Sales\" as the\n      key might be added to a resource to indicate its use by the sales department.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.comprehend#StartTargetedSentimentDetectionJobResponse": {
+            "type": "structure",
+            "members": {
+                "JobId": {
+                    "target": "com.amazonaws.comprehend#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier generated for the job. To get the status of a job, use this identifier with\n      the  operation.</p>"
+                    }
+                },
+                "JobArn": {
+                    "target": "com.amazonaws.comprehend#ComprehendArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the targeted sentiment detection job. It is a unique, fully\n      qualified identifier for the job. It includes the AWS account, Region, and the job ID. The\n      format of the ARN is as follows:</p>\n         <p>\n            <code>arn:<partition>:comprehend:<region>:<account-id>:targeted-sentiment-detection-job/<job-id></code>\n         </p>\n         <p>The following is an example job ARN:</p>\n         <p>\n            <code>arn:aws:comprehend:us-west-2:111122223333:targeted-sentiment-detection-job/1234abcd12ab34cd56ef1234567890ab</code>\n         </p>"
                     }
                 },
                 "JobStatus": {
@@ -7968,6 +8212,58 @@
                 }
             }
         },
+        "com.amazonaws.comprehend#StopTargetedSentimentDetectionJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.comprehend#StopTargetedSentimentDetectionJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.comprehend#StopTargetedSentimentDetectionJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.comprehend#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.comprehend#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.comprehend#JobNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Stops a targeted sentiment detection job in progress.</p>\n         <p>If the job state is <code>IN_PROGRESS</code> the job is marked for termination and put\n      into the <code>STOP_REQUESTED</code> state. If the job completes before it can be stopped, it\n      is put into the <code>COMPLETED</code> state; otherwise the job is be stopped and put into the\n      <code>STOPPED</code> state.</p>\n         <p>If the job is in the <code>COMPLETED</code> or <code>FAILED</code> state when you call the\n      <code>StopDominantLanguageDetectionJob</code> operation, the operation returns a 400\n      Internal Request Exception. </p>\n         <p>When a job is stopped, any documents already processed are written to the output\n      location.</p>"
+            }
+        },
+        "com.amazonaws.comprehend#StopTargetedSentimentDetectionJobRequest": {
+            "type": "structure",
+            "members": {
+                "JobId": {
+                    "target": "com.amazonaws.comprehend#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the targeted sentiment detection job to stop.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.comprehend#StopTargetedSentimentDetectionJobResponse": {
+            "type": "structure",
+            "members": {
+                "JobId": {
+                    "target": "com.amazonaws.comprehend#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the targeted sentiment detection job to stop.</p>"
+                    }
+                },
+                "JobStatus": {
+                    "target": "com.amazonaws.comprehend#JobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Either <code>STOP_REQUESTED</code> if the job is currently running, or\n      <code>STOPPED</code> if the job was previously stopped with the\n      <code>StopSentimentDetectionJob</code> operation.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.comprehend#StopTrainingDocumentClassifier": {
             "type": "operation",
             "input": {
@@ -8263,6 +8559,121 @@
                 "smithy.api#length": {
                     "min": 1
                 }
+            }
+        },
+        "com.amazonaws.comprehend#TargetedSentimentDetectionJobFilter": {
+            "type": "structure",
+            "members": {
+                "JobName": {
+                    "target": "com.amazonaws.comprehend#JobName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters on the name of the job.</p>"
+                    }
+                },
+                "JobStatus": {
+                    "target": "com.amazonaws.comprehend#JobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the list of jobs based on job status. Returns only jobs with the specified\n      status.</p>"
+                    }
+                },
+                "SubmitTimeBefore": {
+                    "target": "com.amazonaws.comprehend#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the list of jobs based on the time that the job was submitted for processing.\n      Returns only jobs submitted before the specified time. Jobs are returned in ascending order,\n      oldest to newest.</p>"
+                    }
+                },
+                "SubmitTimeAfter": {
+                    "target": "com.amazonaws.comprehend#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the list of jobs based on the time that the job was submitted for processing.\n      Returns only jobs submitted after the specified time. Jobs are returned in descending order,\n      newest to oldest.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information for filtering a list of dominant language detection jobs. For more\n      information, see the  operation.</p>"
+            }
+        },
+        "com.amazonaws.comprehend#TargetedSentimentDetectionJobProperties": {
+            "type": "structure",
+            "members": {
+                "JobId": {
+                    "target": "com.amazonaws.comprehend#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier assigned to the targeted sentiment detection job.</p>"
+                    }
+                },
+                "JobArn": {
+                    "target": "com.amazonaws.comprehend#ComprehendArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the targeted sentiment detection job. It is a unique, fully\n      qualified identifier for the job. It includes the AWS account, Region, and the job ID. The\n      format of the ARN is as follows:</p>\n         <p>\n            <code>arn:<partition>:comprehend:<region>:<account-id>:targeted-sentiment-detection-job/<job-id></code>\n         </p>\n         <p>The following is an example job ARN:</p>\n         <p>\n            <code>arn:aws:comprehend:us-west-2:111122223333:targeted-sentiment-detection-job/1234abcd12ab34cd56ef1234567890ab</code>\n         </p>"
+                    }
+                },
+                "JobName": {
+                    "target": "com.amazonaws.comprehend#JobName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name that you assigned to the targeted sentiment detection job.</p>"
+                    }
+                },
+                "JobStatus": {
+                    "target": "com.amazonaws.comprehend#JobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the targeted sentiment detection job. If the status is <code>FAILED</code>,\n      the <code>Messages</code> field shows the reason for the failure.</p>"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.comprehend#AnyLengthString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the status of a job.</p>"
+                    }
+                },
+                "SubmitTime": {
+                    "target": "com.amazonaws.comprehend#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the targeted sentiment detection job was submitted for processing.</p>"
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.comprehend#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the targeted sentiment detection job ended.</p>"
+                    }
+                },
+                "InputDataConfig": {
+                    "target": "com.amazonaws.comprehend#InputDataConfig"
+                },
+                "OutputDataConfig": {
+                    "target": "com.amazonaws.comprehend#OutputDataConfig"
+                },
+                "LanguageCode": {
+                    "target": "com.amazonaws.comprehend#LanguageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language code of the input documents.</p>"
+                    }
+                },
+                "DataAccessRoleArn": {
+                    "target": "com.amazonaws.comprehend#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your input\n      data.</p>"
+                    }
+                },
+                "VolumeKmsKeyId": {
+                    "target": "com.amazonaws.comprehend#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt\n      data on the storage volume attached to the ML compute instance(s) that process the  \n      targeted sentiment detection job. The VolumeKmsKeyId can be either of the following formats:</p>\n         <ul>\n            <li>\n               <p>KMS Key ID: <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n               </p>\n            </li>\n            <li>\n               <p>Amazon Resource Name (ARN) of a KMS Key:\n          <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n               </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "VpcConfig": {
+                    "target": "com.amazonaws.comprehend#VpcConfig"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information about a targeted sentiment detection job.</p>"
+            }
+        },
+        "com.amazonaws.comprehend#TargetedSentimentDetectionJobPropertiesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.comprehend#TargetedSentimentDetectionJobProperties"
             }
         },
         "com.amazonaws.comprehend#TextSizeLimitExceededException": {
