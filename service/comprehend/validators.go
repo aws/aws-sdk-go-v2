@@ -510,6 +510,26 @@ func (m *validateOpDescribeSentimentDetectionJob) HandleInitialize(ctx context.C
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeTargetedSentimentDetectionJob struct {
+}
+
+func (*validateOpDescribeTargetedSentimentDetectionJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeTargetedSentimentDetectionJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeTargetedSentimentDetectionJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeTargetedSentimentDetectionJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeTopicsDetectionJob struct {
 }
 
@@ -850,6 +870,26 @@ func (m *validateOpStartSentimentDetectionJob) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartTargetedSentimentDetectionJob struct {
+}
+
+func (*validateOpStartTargetedSentimentDetectionJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartTargetedSentimentDetectionJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartTargetedSentimentDetectionJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartTargetedSentimentDetectionJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartTopicsDetectionJob struct {
 }
 
@@ -985,6 +1025,26 @@ func (m *validateOpStopSentimentDetectionJob) HandleInitialize(ctx context.Conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStopSentimentDetectionJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStopTargetedSentimentDetectionJob struct {
+}
+
+func (*validateOpStopTargetedSentimentDetectionJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopTargetedSentimentDetectionJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopTargetedSentimentDetectionJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopTargetedSentimentDetectionJobInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1190,6 +1250,10 @@ func addOpDescribeSentimentDetectionJobValidationMiddleware(stack *middleware.St
 	return stack.Initialize.Add(&validateOpDescribeSentimentDetectionJob{}, middleware.After)
 }
 
+func addOpDescribeTargetedSentimentDetectionJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeTargetedSentimentDetectionJob{}, middleware.After)
+}
+
 func addOpDescribeTopicsDetectionJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeTopicsDetectionJob{}, middleware.After)
 }
@@ -1258,6 +1322,10 @@ func addOpStartSentimentDetectionJobValidationMiddleware(stack *middleware.Stack
 	return stack.Initialize.Add(&validateOpStartSentimentDetectionJob{}, middleware.After)
 }
 
+func addOpStartTargetedSentimentDetectionJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartTargetedSentimentDetectionJob{}, middleware.After)
+}
+
 func addOpStartTopicsDetectionJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartTopicsDetectionJob{}, middleware.After)
 }
@@ -1284,6 +1352,10 @@ func addOpStopPiiEntitiesDetectionJobValidationMiddleware(stack *middleware.Stac
 
 func addOpStopSentimentDetectionJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStopSentimentDetectionJob{}, middleware.After)
+}
+
+func addOpStopTargetedSentimentDetectionJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopTargetedSentimentDetectionJob{}, middleware.After)
 }
 
 func addOpStopTrainingDocumentClassifierValidationMiddleware(stack *middleware.Stack) error {
@@ -2041,6 +2113,21 @@ func validateOpDescribeSentimentDetectionJobInput(v *DescribeSentimentDetectionJ
 	}
 }
 
+func validateOpDescribeTargetedSentimentDetectionJobInput(v *DescribeTargetedSentimentDetectionJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeTargetedSentimentDetectionJobInput"}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeTopicsDetectionJobInput(v *DescribeTopicsDetectionJobInput) error {
 	if v == nil {
 		return nil
@@ -2498,6 +2585,48 @@ func validateOpStartSentimentDetectionJobInput(v *StartSentimentDetectionJobInpu
 	}
 }
 
+func validateOpStartTargetedSentimentDetectionJobInput(v *StartTargetedSentimentDetectionJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartTargetedSentimentDetectionJobInput"}
+	if v.InputDataConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputDataConfig"))
+	} else if v.InputDataConfig != nil {
+		if err := validateInputDataConfig(v.InputDataConfig); err != nil {
+			invalidParams.AddNested("InputDataConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OutputDataConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputDataConfig"))
+	} else if v.OutputDataConfig != nil {
+		if err := validateOutputDataConfig(v.OutputDataConfig); err != nil {
+			invalidParams.AddNested("OutputDataConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DataAccessRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataAccessRoleArn"))
+	}
+	if len(v.LanguageCode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("LanguageCode"))
+	}
+	if v.VpcConfig != nil {
+		if err := validateVpcConfig(v.VpcConfig); err != nil {
+			invalidParams.AddNested("VpcConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStartTopicsDetectionJobInput(v *StartTopicsDetectionJobInput) error {
 	if v == nil {
 		return nil
@@ -2617,6 +2746,21 @@ func validateOpStopSentimentDetectionJobInput(v *StopSentimentDetectionJobInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StopSentimentDetectionJobInput"}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopTargetedSentimentDetectionJobInput(v *StopTargetedSentimentDetectionJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopTargetedSentimentDetectionJobInput"}
 	if v.JobId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
 	}

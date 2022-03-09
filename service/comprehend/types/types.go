@@ -963,7 +963,9 @@ type EntityRecognizerEvaluationMetrics struct {
 
 	// A measure of how accurate the recognizer results are for the test data. It is
 	// derived from the Precision and Recall values. The F1Score is the harmonic
-	// average of the two scores. The highest score is 1, and the worst score is 0.
+	// average of the two scores. For plain text entity recognizer models, the range is
+	// 0 to 100, where 100 is the best score. For PDF/Word entity recognizer models,
+	// the range is 0 to 1, where 1 is the best score.
 	F1Score *float64
 
 	// A measure of the usefulness of the recognizer results in the test data. High
@@ -1454,7 +1456,7 @@ type KeyPhrasesDetectionJobProperties struct {
 	noSmithyDocumentSerde
 }
 
-// Provides configuration parameters for the output of topic detection jobs.
+// Provides configuration parameters for the output of inference jobs.
 type OutputDataConfig struct {
 
 	// When you use the OutputDataConfig object with asynchronous operations, you
@@ -1464,7 +1466,9 @@ type OutputDataConfig struct {
 	// the topic detection job is finished, the service creates an output file in a
 	// directory specific to the job. The S3Uri field contains the location of the
 	// output file, called output.tar.gz. It is a compressed archive that contains the
-	// ouput of the operation.
+	// ouput of the operation. For a PII entity detection job, the output file is plain
+	// text, not a compressed archive. The output file name is the same as the input
+	// file, with .out appended at the end.
 	//
 	// This member is required.
 	S3Uri *string
@@ -1614,7 +1618,10 @@ type PiiEntity struct {
 type PiiOutputDataConfig struct {
 
 	// When you use the PiiOutputDataConfig object with asynchronous operations, you
-	// specify the Amazon S3 location where you want to write the output data.
+	// specify the Amazon S3 location where you want to write the output data. For a
+	// PII entity detection job, the output file is plain text, not a compressed
+	// archive. The output file name is the same as the input file, with .out appended
+	// at the end.
 	//
 	// This member is required.
 	S3Uri *string
@@ -1799,6 +1806,95 @@ type Tag struct {
 	// departments, you might use “Department” as the initial (key) portion of the
 	// pair, with a value of “sales” to indicate the sales department.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides information for filtering a list of dominant language detection jobs.
+// For more information, see the operation.
+type TargetedSentimentDetectionJobFilter struct {
+
+	// Filters on the name of the job.
+	JobName *string
+
+	// Filters the list of jobs based on job status. Returns only jobs with the
+	// specified status.
+	JobStatus JobStatus
+
+	// Filters the list of jobs based on the time that the job was submitted for
+	// processing. Returns only jobs submitted after the specified time. Jobs are
+	// returned in descending order, newest to oldest.
+	SubmitTimeAfter *time.Time
+
+	// Filters the list of jobs based on the time that the job was submitted for
+	// processing. Returns only jobs submitted before the specified time. Jobs are
+	// returned in ascending order, oldest to newest.
+	SubmitTimeBefore *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Provides information about a targeted sentiment detection job.
+type TargetedSentimentDetectionJobProperties struct {
+
+	// The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your
+	// input data.
+	DataAccessRoleArn *string
+
+	// The time that the targeted sentiment detection job ended.
+	EndTime *time.Time
+
+	// The input properties for an inference job.
+	InputDataConfig *InputDataConfig
+
+	// The Amazon Resource Name (ARN) of the targeted sentiment detection job. It is a
+	// unique, fully qualified identifier for the job. It includes the AWS account,
+	// Region, and the job ID. The format of the ARN is as follows:
+	// arn::comprehend:::targeted-sentiment-detection-job/ The following is an example
+	// job ARN:
+	// arn:aws:comprehend:us-west-2:111122223333:targeted-sentiment-detection-job/1234abcd12ab34cd56ef1234567890ab
+	JobArn *string
+
+	// The identifier assigned to the targeted sentiment detection job.
+	JobId *string
+
+	// The name that you assigned to the targeted sentiment detection job.
+	JobName *string
+
+	// The current status of the targeted sentiment detection job. If the status is
+	// FAILED, the Messages field shows the reason for the failure.
+	JobStatus JobStatus
+
+	// The language code of the input documents.
+	LanguageCode LanguageCode
+
+	// A description of the status of a job.
+	Message *string
+
+	// Provides configuration parameters for the output of inference jobs.
+	OutputDataConfig *OutputDataConfig
+
+	// The time that the targeted sentiment detection job was submitted for processing.
+	SubmitTime *time.Time
+
+	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to
+	// encrypt data on the storage volume attached to the ML compute instance(s) that
+	// process the targeted sentiment detection job. The VolumeKmsKeyId can be either
+	// of the following formats:
+	//
+	// * KMS Key ID:
+	// "1234abcd-12ab-34cd-56ef-1234567890ab"
+	//
+	// * Amazon Resource Name (ARN) of a KMS
+	// Key:
+	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
+	VolumeKmsKeyId *string
+
+	// Configuration parameters for an optional private Virtual Private Cloud (VPC)
+	// containing the resources you are using for the job. For more information, see
+	// Amazon VPC
+	// (https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html).
+	VpcConfig *VpcConfig
 
 	noSmithyDocumentSerde
 }
