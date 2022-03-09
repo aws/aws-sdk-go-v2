@@ -12,35 +12,34 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts an asynchronous sentiment detection job for a collection of documents.
-// Use the operation to track the status of a job.
-func (c *Client) StartSentimentDetectionJob(ctx context.Context, params *StartSentimentDetectionJobInput, optFns ...func(*Options)) (*StartSentimentDetectionJobOutput, error) {
+// Starts an asynchronous targeted sentiment detection job for a collection of
+// documents. Use the operation to track the status of a job.
+func (c *Client) StartTargetedSentimentDetectionJob(ctx context.Context, params *StartTargetedSentimentDetectionJobInput, optFns ...func(*Options)) (*StartTargetedSentimentDetectionJobOutput, error) {
 	if params == nil {
-		params = &StartSentimentDetectionJobInput{}
+		params = &StartTargetedSentimentDetectionJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartSentimentDetectionJob", params, optFns, c.addOperationStartSentimentDetectionJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartTargetedSentimentDetectionJob", params, optFns, c.addOperationStartTargetedSentimentDetectionJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*StartSentimentDetectionJobOutput)
+	out := result.(*StartTargetedSentimentDetectionJobOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type StartSentimentDetectionJobInput struct {
+type StartTargetedSentimentDetectionJobInput struct {
 
 	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
 	// role that grants Amazon Comprehend read access to your input data. For more
-	// information, see
-	// https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions
+	// information, see Role-based permissions
 	// (https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions).
 	//
 	// This member is required.
 	DataAccessRoleArn *string
 
-	// Specifies the format and location of the input data for the job.
+	// The input properties for an inference job.
 	//
 	// This member is required.
 	InputDataConfig *types.InputDataConfig
@@ -64,40 +63,41 @@ type StartSentimentDetectionJobInput struct {
 	// The identifier of the job.
 	JobName *string
 
-	// Tags to be associated with the sentiment detection job. A tag is a key-value
-	// pair that adds metadata to a resource used by Amazon Comprehend. For example, a
-	// tag with "Sales" as the key might be added to a resource to indicate its use by
-	// the sales department.
+	// Tags to be associated with the targeted sentiment detection job. A tag is a
+	// key-value pair that adds metadata to a resource used by Amazon Comprehend. For
+	// example, a tag with "Sales" as the key might be added to a resource to indicate
+	// its use by the sales department.
 	Tags []types.Tag
 
-	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to
-	// encrypt data on the storage volume attached to the ML compute instance(s) that
-	// process the analysis job. The VolumeKmsKeyId can be either of the following
-	// formats:
+	// ID for the KMS key that Amazon Comprehend uses to encrypt data on the storage
+	// volume attached to the ML compute instance(s) that process the analysis job. The
+	// VolumeKmsKeyId can be either of the following formats:
 	//
-	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	// * KMS Key ID:
+	// "1234abcd-12ab-34cd-56ef-1234567890ab"
 	//
-	// * Amazon
-	// Resource Name (ARN) of a KMS Key:
+	// * Amazon Resource Name (ARN) of a KMS
+	// Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
 
 	// Configuration parameters for an optional private Virtual Private Cloud (VPC)
-	// containing the resources you are using for your sentiment detection job. For
-	// more information, see Amazon VPC
+	// containing the resources you are using for the job. For more information, see
+	// Amazon VPC
 	// (https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html).
 	VpcConfig *types.VpcConfig
 
 	noSmithyDocumentSerde
 }
 
-type StartSentimentDetectionJobOutput struct {
+type StartTargetedSentimentDetectionJobOutput struct {
 
-	// The Amazon Resource Name (ARN) of the sentiment detection job. It is a unique,
-	// fully qualified identifier for the job. It includes the AWS account, Region, and
-	// the job ID. The format of the ARN is as follows:
-	// arn::comprehend:::sentiment-detection-job/ The following is an example job ARN:
-	// arn:aws:comprehend:us-west-2:111122223333:sentiment-detection-job/1234abcd12ab34cd56ef1234567890ab
+	// The Amazon Resource Name (ARN) of the targeted sentiment detection job. It is a
+	// unique, fully qualified identifier for the job. It includes the AWS account,
+	// Region, and the job ID. The format of the ARN is as follows:
+	// arn::comprehend:::targeted-sentiment-detection-job/ The following is an example
+	// job ARN:
+	// arn:aws:comprehend:us-west-2:111122223333:targeted-sentiment-detection-job/1234abcd12ab34cd56ef1234567890ab
 	JobArn *string
 
 	// The identifier generated for the job. To get the status of a job, use this
@@ -124,12 +124,12 @@ type StartSentimentDetectionJobOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationStartSentimentDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartSentimentDetectionJob{}, middleware.After)
+func (c *Client) addOperationStartTargetedSentimentDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartTargetedSentimentDetectionJob{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartSentimentDetectionJob{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartTargetedSentimentDetectionJob{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -169,13 +169,13 @@ func (c *Client) addOperationStartSentimentDetectionJobMiddlewares(stack *middle
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addIdempotencyToken_opStartSentimentDetectionJobMiddleware(stack, options); err != nil {
+	if err = addIdempotencyToken_opStartTargetedSentimentDetectionJobMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addOpStartSentimentDetectionJobValidationMiddleware(stack); err != nil {
+	if err = addOpStartTargetedSentimentDetectionJobValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartSentimentDetectionJob(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartTargetedSentimentDetectionJob(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -190,24 +190,24 @@ func (c *Client) addOperationStartSentimentDetectionJobMiddlewares(stack *middle
 	return nil
 }
 
-type idempotencyToken_initializeOpStartSentimentDetectionJob struct {
+type idempotencyToken_initializeOpStartTargetedSentimentDetectionJob struct {
 	tokenProvider IdempotencyTokenProvider
 }
 
-func (*idempotencyToken_initializeOpStartSentimentDetectionJob) ID() string {
+func (*idempotencyToken_initializeOpStartTargetedSentimentDetectionJob) ID() string {
 	return "OperationIdempotencyTokenAutoFill"
 }
 
-func (m *idempotencyToken_initializeOpStartSentimentDetectionJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+func (m *idempotencyToken_initializeOpStartTargetedSentimentDetectionJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
 	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
 ) {
 	if m.tokenProvider == nil {
 		return next.HandleInitialize(ctx, in)
 	}
 
-	input, ok := in.Parameters.(*StartSentimentDetectionJobInput)
+	input, ok := in.Parameters.(*StartTargetedSentimentDetectionJobInput)
 	if !ok {
-		return out, metadata, fmt.Errorf("expected middleware input to be of type *StartSentimentDetectionJobInput ")
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *StartTargetedSentimentDetectionJobInput ")
 	}
 
 	if input.ClientRequestToken == nil {
@@ -219,15 +219,15 @@ func (m *idempotencyToken_initializeOpStartSentimentDetectionJob) HandleInitiali
 	}
 	return next.HandleInitialize(ctx, in)
 }
-func addIdempotencyToken_opStartSentimentDetectionJobMiddleware(stack *middleware.Stack, cfg Options) error {
-	return stack.Initialize.Add(&idempotencyToken_initializeOpStartSentimentDetectionJob{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
+func addIdempotencyToken_opStartTargetedSentimentDetectionJobMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpStartTargetedSentimentDetectionJob{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
-func newServiceMetadataMiddleware_opStartSentimentDetectionJob(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opStartTargetedSentimentDetectionJob(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "comprehend",
-		OperationName: "StartSentimentDetectionJob",
+		OperationName: "StartTargetedSentimentDetectionJob",
 	}
 }
