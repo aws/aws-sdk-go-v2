@@ -12,8 +12,9 @@ import (
 	"time"
 )
 
-// Creates a new vocabulary filter that you can use to filter words, such as
-// profane words, from the output of a transcription job.
+// Creates a new vocabulary filter that you can use to filter words from your
+// transcription output. For example, you can use this operation to remove
+// profanity from your transcript.
 func (c *Client) CreateVocabularyFilter(ctx context.Context, params *CreateVocabularyFilterInput, optFns ...func(*Options)) (*CreateVocabularyFilterOutput, error) {
 	if params == nil {
 		params = &CreateVocabularyFilterInput{}
@@ -38,32 +39,32 @@ type CreateVocabularyFilterInput struct {
 	// This member is required.
 	LanguageCode types.LanguageCode
 
-	// The vocabulary filter name. The name must be unique within the account that
-	// contains it. If you try to create a vocabulary filter with the same name as
-	// another vocabulary filter, you get a ConflictException error.
+	// The name of your new vocabulary filter. This name is case sensitive, cannot
+	// contain spaces, and must be unique within an Amazon Web Services account. If you
+	// try to create a vocabulary filter with the same name as a previous vocabulary
+	// filter, you get a ConflictException error.
 	//
 	// This member is required.
 	VocabularyFilterName *string
 
-	// Adds one or more tags, each in the form of a key:value pair, to a new Amazon
-	// Transcribe vocabulary filter at the time you create this new vocabulary filter.
+	// Adds one or more tags, each in the form of a key:value pair, to a new vocabulary
+	// filter at the time you create this new vocabulary filter.
 	Tags []types.Tag
 
 	// The Amazon S3 location of a text file used as input to create the vocabulary
 	// filter. Only use characters from the character set defined for custom
 	// vocabularies. For a list of character sets, see Character Sets for Custom
 	// Vocabularies (https://docs.aws.amazon.com/transcribe/latest/dg/charsets.html).
-	// The specified file must be less than 50 KB of UTF-8 characters. If you provide
-	// the location of a list of words in the VocabularyFilterFileUri parameter, you
-	// can't use the Words parameter.
+	// Your vocabulary filter file must be less than 50 KB in size. Note that if you
+	// include VocabularyFilterFileUri in your request, you cannot use Words; you must
+	// choose one or the other.
 	VocabularyFilterFileUri *string
 
-	// The words to use in the vocabulary filter. Only use characters from the
-	// character set defined for custom vocabularies. For a list of character sets, see
-	// Character Sets for Custom Vocabularies
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/charsets.html). If you provide
-	// a list of words in the Words parameter, you can't use the
-	// VocabularyFilterFileUri parameter.
+	// The words you want in your vocabulary filter. Only use characters specified in
+	// the Character sets
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/charsets.html) for the
+	// language you're transcribing. Note that if you include Words in your request,
+	// you cannot use VocabularyFilterFileUri; you must choose one or the other.
 	Words []string
 
 	noSmithyDocumentSerde
@@ -71,10 +72,10 @@ type CreateVocabularyFilterInput struct {
 
 type CreateVocabularyFilterOutput struct {
 
-	// The language code of the words in the collection.
+	// The language code associated with your vocabulary filter.
 	LanguageCode types.LanguageCode
 
-	// The date and time that the vocabulary filter was modified.
+	// The date and time the vocabulary filter was modified.
 	LastModifiedTime *time.Time
 
 	// The name of the vocabulary filter.

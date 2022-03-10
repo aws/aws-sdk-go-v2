@@ -62,7 +62,14 @@ type ExecutionErrorType string
 
 // Enum values for ExecutionErrorType
 const (
-	ExecutionErrorTypePermissionDenied ExecutionErrorType = "PERMISSION_DENIED"
+	ExecutionErrorTypePermissionDenied    ExecutionErrorType = "PERMISSION_DENIED"
+	ExecutionErrorTypeCustomStepFailed    ExecutionErrorType = "CUSTOM_STEP_FAILED"
+	ExecutionErrorTypeThrottled           ExecutionErrorType = "THROTTLED"
+	ExecutionErrorTypeAlreadyExists       ExecutionErrorType = "ALREADY_EXISTS"
+	ExecutionErrorTypeNotFound            ExecutionErrorType = "NOT_FOUND"
+	ExecutionErrorTypeBadRequest          ExecutionErrorType = "BAD_REQUEST"
+	ExecutionErrorTypeTimeout             ExecutionErrorType = "TIMEOUT"
+	ExecutionErrorTypeInternalServerError ExecutionErrorType = "INTERNAL_SERVER_ERROR"
 )
 
 // Values returns all known values for ExecutionErrorType. Note that this can be
@@ -71,6 +78,13 @@ const (
 func (ExecutionErrorType) Values() []ExecutionErrorType {
 	return []ExecutionErrorType{
 		"PERMISSION_DENIED",
+		"CUSTOM_STEP_FAILED",
+		"THROTTLED",
+		"ALREADY_EXISTS",
+		"NOT_FOUND",
+		"BAD_REQUEST",
+		"TIMEOUT",
+		"INTERNAL_SERVER_ERROR",
 	}
 }
 

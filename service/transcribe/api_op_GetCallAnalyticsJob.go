@@ -11,12 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about a call analytics job. To see the status of the job,
-// check the CallAnalyticsJobStatus field. If the status is COMPLETED, the job is
-// finished and you can find the results at the location specified in the
-// TranscriptFileUri field. If you enable personally identifiable information (PII)
-// redaction, the redacted transcript appears in the RedactedTranscriptFileUri
-// field.
+// Retrieves information about a call analytics job. To view the job's status,
+// refer to the CallAnalyticsJobStatus field. If the status is COMPLETED, the job
+// is finished. You can then find your transcript at the URI specified in the
+// TranscriptFileUri field. If you enabled personally identifiable information
+// (PII) redaction, the redacted transcript appears in the
+// RedactedTranscriptFileUri field.
 func (c *Client) GetCallAnalyticsJob(ctx context.Context, params *GetCallAnalyticsJobInput, optFns ...func(*Options)) (*GetCallAnalyticsJobOutput, error) {
 	if params == nil {
 		params = &GetCallAnalyticsJobInput{}
@@ -45,7 +45,11 @@ type GetCallAnalyticsJobInput struct {
 
 type GetCallAnalyticsJobOutput struct {
 
-	// An object that contains the results of your call analytics job.
+	// An object that contains detailed information about your call analytics job.
+	// Returned fields include: CallAnalyticsJobName, CallAnalyticsJobStatus,
+	// ChannelDefinitions, CompletionTime, CreationTime, DataAccessRoleArn,
+	// FailureReason, IdentifiedLanguageScore, LanguageCode, Media, MediaFormat,
+	// MediaSampleRateHertz, Settings, StartTime, and Transcript.
 	CallAnalyticsJob *types.CallAnalyticsJob
 
 	// Metadata pertaining to the operation's result.

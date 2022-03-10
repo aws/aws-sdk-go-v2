@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about a transcription job from Amazon Transcribe Medical. To
-// see the status of the job, check the TranscriptionJobStatus field. If the status
-// is COMPLETED, the job is finished. You find the results of the completed job in
+// Retrieves information about a medical transcription job. To view the job's
+// status, refer to the TranscriptionJobStatus field. If the status is COMPLETED,
+// the job is finished. You can then find your transcript at the URI specified in
 // the TranscriptFileUri field.
 func (c *Client) GetMedicalTranscriptionJob(ctx context.Context, params *GetMedicalTranscriptionJobInput, optFns ...func(*Options)) (*GetMedicalTranscriptionJobOutput, error) {
 	if params == nil {
@@ -32,7 +32,8 @@ func (c *Client) GetMedicalTranscriptionJob(ctx context.Context, params *GetMedi
 
 type GetMedicalTranscriptionJobInput struct {
 
-	// The name of the medical transcription job.
+	// The name of the medical transcription job you want information about. This value
+	// is case sensitive.
 	//
 	// This member is required.
 	MedicalTranscriptionJobName *string
@@ -42,7 +43,11 @@ type GetMedicalTranscriptionJobInput struct {
 
 type GetMedicalTranscriptionJobOutput struct {
 
-	// An object that contains the results of the medical transcription job.
+	// An object that contains detailed information about your medical transcription
+	// job. Returned fields include: CompletionTime, ContentIdentificationType,
+	// CreationTime, FailureReason, LanguageCode, Media, MediaFormat,
+	// MediaSampleRateHertz, MedicalTranscriptionJobName, Settings, Specialty,
+	// StartTime, Tags, Transcript, TranscriptionJobStatus, and Type.
 	MedicalTranscriptionJob *types.MedicalTranscriptionJob
 
 	// Metadata pertaining to the operation's result.

@@ -12,8 +12,13 @@ import (
 	"time"
 )
 
-// Creates a new custom vocabulary that you can use to modify how Amazon Transcribe
-// Medical transcribes your audio file.
+// Creates a new custom medical vocabulary. When creating a new medical vocabulary,
+// you must upload a text file that contains your new entries, phrases, and terms
+// into an S3 bucket. Note that this differs from , where you can include a list of
+// terms within your request using the Phrases flag, as CreateMedicalVocabulary
+// does not support the Phrases flag. For more information on creating a custom
+// vocabulary text file, see Creating a custom vocabulary
+// (https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary-create.html).
 func (c *Client) CreateMedicalVocabulary(ctx context.Context, params *CreateMedicalVocabularyInput, optFns ...func(*Options)) (*CreateMedicalVocabularyOutput, error) {
 	if params == nil {
 		params = &CreateMedicalVocabularyInput{}
@@ -31,38 +36,33 @@ func (c *Client) CreateMedicalVocabulary(ctx context.Context, params *CreateMedi
 
 type CreateMedicalVocabularyInput struct {
 
-	// The language code for the language used for the entries in your custom
-	// vocabulary. The language code of your custom vocabulary must match the language
-	// code of your transcription job. US English (en-US) is the only language code
-	// available for Amazon Transcribe Medical.
+	// The language code that represents the language of the entries in your custom
+	// vocabulary. Note that U.S. English (en-US) is the only language supported with
+	// Amazon Transcribe Medical.
 	//
 	// This member is required.
 	LanguageCode types.LanguageCode
 
-	// The location in Amazon S3 of the text file you use to define your custom
+	// The Amazon S3 location (URI) of the text file that contains your custom
 	// vocabulary. The URI must be in the same Amazon Web Services Region as the
-	// resource that you're calling. Enter information about your VocabularyFileUri in
-	// the following format: https://s3..amazonaws.com/// The following is an example
-	// URI for a vocabulary file that is stored in Amazon S3:
-	// https://s3.us-east-1.amazonaws.com/AWSDOC-EXAMPLE-BUCKET/vocab.txt For more
-	// information about Amazon S3 object names, see Object Keys
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys)
-	// in the Amazon S3 Developer Guide. For more information about custom
-	// vocabularies, see Medical Custom Vocabularies
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-med.html).
+	// resource that you're calling. Here's an example URI path:
+	// https://s3.us-east-1.amazonaws.com/my-s3-bucket/my-vocab-file.txt
 	//
 	// This member is required.
 	VocabularyFileUri *string
 
-	// The name of the custom vocabulary. This case-sensitive name must be unique
-	// within an Amazon Web Services account. If you try to create a vocabulary with
-	// the same name as a previous vocabulary, you get a ConflictException error.
+	// The name of your new vocabulary. This name is case sensitive, cannot contain
+	// spaces, and must be unique within an Amazon Web Services account. If you try to
+	// create a vocabulary with the same name as a previous vocabulary, you get a
+	// ConflictException error.
 	//
 	// This member is required.
 	VocabularyName *string
 
 	// Adds one or more tags, each in the form of a key:value pair, to a new medical
-	// vocabulary at the time you create this new vocabulary.
+	// vocabulary at the time you create the new vocabulary. To learn more about using
+	// tags with Amazon Transcribe, refer to Tagging resources
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/tagging.html).
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -70,24 +70,22 @@ type CreateMedicalVocabularyInput struct {
 
 type CreateMedicalVocabularyOutput struct {
 
-	// If the VocabularyState field is FAILED, this field contains information about
+	// If the VocabularyState field is FAILED, FailureReason contains information about
 	// why the job failed.
 	FailureReason *string
 
-	// The language code for the entries in your custom vocabulary. US English (en-US)
-	// is the only valid language code for Amazon Transcribe Medical.
+	// The language code you selected for your medical vocabulary. Note that U.S.
+	// English (en-US) is the only language supported with Amazon Transcribe Medical.
 	LanguageCode types.LanguageCode
 
-	// The date and time that you created the vocabulary.
+	// The date and time you created your custom medical vocabulary.
 	LastModifiedTime *time.Time
 
-	// The name of the vocabulary. The name must be unique within an Amazon Web
-	// Services account and is case sensitive.
+	// The name you chose for your vocabulary.
 	VocabularyName *string
 
-	// The processing state of your custom vocabulary in Amazon Transcribe Medical. If
-	// the state is READY, you can use the vocabulary in a StartMedicalTranscriptionJob
-	// request.
+	// The processing state of your custom medical vocabulary. If the state is READY,
+	// you can use the vocabulary in a StartMedicalTranscriptionJob request.
 	VocabularyState types.VocabularyState
 
 	// Metadata pertaining to the operation's result.

@@ -146,7 +146,7 @@ type StartMedicalTranscriptionJobInput struct {
 	// Optional settings for the medical transcription job.
 	Settings *types.MedicalTranscriptionSetting
 
-	// Add tags to an Amazon Transcribe medical transcription job.
+	// Add tags to an Amazon Transcribe Medical transcription job.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

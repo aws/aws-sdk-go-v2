@@ -30,8 +30,8 @@ func (c *Client) GetMedicalVocabulary(ctx context.Context, params *GetMedicalVoc
 
 type GetMedicalVocabularyInput struct {
 
-	// The name of the vocabulary that you want information about. The value is case
-	// sensitive.
+	// The name of the medical vocabulary you want information about. This value is
+	// case sensitive.
 	//
 	// This member is required.
 	VocabularyName *string
@@ -41,13 +41,15 @@ type GetMedicalVocabularyInput struct {
 
 type GetMedicalVocabularyOutput struct {
 
-	// The location in Amazon S3 where the vocabulary is stored. Use this URI to get
-	// the contents of the vocabulary. You can download your vocabulary from the URI
-	// for a limited time.
+	// The S3 location where the vocabulary is stored; use this URI to view or download
+	// the vocabulary.
 	DownloadUri *string
 
-	// If the VocabularyState is FAILED, this field contains information about why the
-	// job failed.
+	// If your request returns a VocabularyState that is FAILED, the FailureReason
+	// field contains information about why the request failed. For more information,
+	// refer to the Common Errors
+	// (https://docs.aws.amazon.com/transcribe/latest/APIReference/CommonErrors.html)
+	// section.
 	FailureReason *string
 
 	// The valid language code for your vocabulary entries.

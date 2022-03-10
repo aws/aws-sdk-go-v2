@@ -6267,7 +6267,7 @@ func awsAwsjson11_deserializeDocumentMedicalTranscriptionJob(v **types.MedicalTr
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected MediaSampleRateHertz to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected MedicalMediaSampleRateHertz to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {

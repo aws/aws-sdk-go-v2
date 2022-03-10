@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new custom language model. Use Amazon S3 prefixes to provide the
-// location of your input files. The time it takes to create your model depends on
-// the size of your training data.
+// Creates a new custom language model. When creating a new language model, you
+// must specify if you want a Wideband (audio sample rates over 16,000 Hz) or
+// Narrowband (audio sample rates under 16,000 Hz) base model. You then include the
+// S3 URI location of your training and tuning files, the language for the model, a
+// unique name, and any tags you want associated with your model.
 func (c *Client) CreateLanguageModel(ctx context.Context, params *CreateLanguageModelInput, optFns ...func(*Options)) (*CreateLanguageModelOutput, error) {
 	if params == nil {
 		params = &CreateLanguageModelInput{}
@@ -31,33 +33,37 @@ func (c *Client) CreateLanguageModel(ctx context.Context, params *CreateLanguage
 
 type CreateLanguageModelInput struct {
 
-	// The Amazon Transcribe standard language model, or base model used to create your
-	// custom language model. If you want to use your custom language model to
-	// transcribe audio with a sample rate of 16,000 Hz or greater, choose Wideband. If
-	// you want to use your custom language model to transcribe audio with a sample
-	// rate that is less than 16,000 Hz, choose Narrowband.
+	// The Amazon Transcribe standard language model, or base model, used to create
+	// your custom language model. Amazon Transcribe offers two options for base
+	// models: Wideband and Narrowband. If the audio you want to transcribe has a
+	// sample rate of 16,000 Hz or greater, choose WideBand. To transcribe audio with a
+	// sample rate less than 16,000 Hz, choose NarrowBand.
 	//
 	// This member is required.
 	BaseModelName types.BaseModelName
 
-	// Contains the data access role and the Amazon S3 prefixes to read the required
-	// input files to create a custom language model.
+	// Contains your data access role ARN (Amazon Resource Name) and the Amazon S3
+	// locations of your training (S3Uri) and tuning (TuningDataS3Uri) data.
 	//
 	// This member is required.
 	InputDataConfig *types.InputDataConfig
 
-	// The language of the input text you're using to train your custom language model.
+	// The language of your custom language model; note that the language code you
+	// select must match the language of your training and tuning data.
 	//
 	// This member is required.
 	LanguageCode types.CLMLanguageCode
 
-	// The name you choose for your custom language model when you create it.
+	// The name of your new custom language model. This name is case sensitive, cannot
+	// contain spaces, and must be unique within an Amazon Web Services account. If you
+	// try to create a language model with the same name as a previous language model,
+	// you get a ConflictException error.
 	//
 	// This member is required.
 	ModelName *string
 
-	// Adds one or more tags, each in the form of a key:value pair, to a new language
-	// model at the time you create this new model.
+	// Optionally add tags, each in the form of a key:value pair, to your new language
+	// model. See also: .
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -65,22 +71,25 @@ type CreateLanguageModelInput struct {
 
 type CreateLanguageModelOutput struct {
 
-	// The Amazon Transcribe standard language model, or base model you've used to
-	// create a custom language model.
+	// The Amazon Transcribe standard language model, or base model, you used when
+	// creating your custom language model. If your audio has a sample rate of 16,000
+	// Hz or greater, this value should be WideBand. If your audio has a sample rate of
+	// less than 16,000 Hz, this value should be NarrowBand.
 	BaseModelName types.BaseModelName
 
-	// The data access role and Amazon S3 prefixes you've chosen to create your custom
-	// language model.
+	// Lists your data access role ARN (Amazon Resource Name) and the Amazon S3
+	// locations your provided for your training (S3Uri) and tuning (TuningDataS3Uri)
+	// data.
 	InputDataConfig *types.InputDataConfig
 
-	// The language code of the text you've used to create a custom language model.
+	// The language code you selected for your custom language model.
 	LanguageCode types.CLMLanguageCode
 
-	// The name you've chosen for your custom language model.
+	// The unique name you chose for your custom language model.
 	ModelName *string
 
-	// The status of the custom language model. When the status is COMPLETED the model
-	// is ready to use.
+	// The status of your custom language model. When the status shows as COMPLETED,
+	// your model is ready to use.
 	ModelStatus types.ModelStatus
 
 	// Metadata pertaining to the operation's result.

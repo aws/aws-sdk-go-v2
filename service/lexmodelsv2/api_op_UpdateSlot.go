@@ -62,11 +62,6 @@ type UpdateSlotInput struct {
 	// This member is required.
 	SlotName *string
 
-	// The unique identifier of the new slot type to associate with this slot.
-	//
-	// This member is required.
-	SlotTypeId *string
-
 	// A new set of prompts that Amazon Lex sends to the user to elicit a response the
 	// provides a value for the slot.
 	//
@@ -85,6 +80,9 @@ type UpdateSlotInput struct {
 	// New settings that determine how slot values are formatted in Amazon CloudWatch
 	// logs.
 	ObfuscationSetting *types.ObfuscationSetting
+
+	// The unique identifier of the new slot type to associate with this slot.
+	SlotTypeId *string
 
 	noSmithyDocumentSerde
 }

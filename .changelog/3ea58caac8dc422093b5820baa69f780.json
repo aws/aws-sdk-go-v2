@@ -1,0 +1,8 @@
+{
+    "id": "3ea58caa-c8dc-4220-93b5-820baa69f780",
+    "type": "feature",
+    "description": "This release makes slotTypeId an optional parameter in CreateSlot and UpdateSlot APIs in Amazon Lex V2 for model building. Customers can create and update slots without specifying a slot type id.",
+    "modules": [
+        "service/lexmodelsv2"
+    ]
+}

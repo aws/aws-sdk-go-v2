@@ -1,0 +1,8 @@
+{
+    "id": "dd79dfa6-d9f8-4a74-8250-73657cac4296",
+    "type": "feature",
+    "description": "Adding more descriptive error types for managed workflows",
+    "modules": [
+        "service/transfer"
+    ]
+}
