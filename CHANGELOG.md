@@ -1,3 +1,13 @@
+# Release (2022-03-10)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/lexmodelsv2`: [v1.20.0](service/lexmodelsv2/CHANGELOG.md#v1200-2022-03-10)
+  * **Feature**: This release makes slotTypeId an optional parameter in CreateSlot and UpdateSlot APIs in Amazon Lex V2 for model building. Customers can create and update slots without specifying a slot type id.
+* `github.com/aws/aws-sdk-go-v2/service/transcribe`: [v1.18.0](service/transcribe/CHANGELOG.md#v1180-2022-03-10)
+  * **Feature**: Documentation fix for API `StartMedicalTranscriptionJobRequest`, now showing min sample rate as 16khz
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.18.0](service/transfer/CHANGELOG.md#v1180-2022-03-10)
+  * **Feature**: Adding more descriptive error types for managed workflows
+
 # Release (2022-03-09)
 
 ## Module Highlights

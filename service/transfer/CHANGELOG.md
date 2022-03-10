@@ -1,3 +1,7 @@
+# v1.18.0 (2022-03-10)
+
+* **Feature**: Adding more descriptive error types for managed workflows
+
 # v1.17.0 (2022-03-08)
 
 * **Feature**: Updated `github.com/aws/smithy-go` to latest version

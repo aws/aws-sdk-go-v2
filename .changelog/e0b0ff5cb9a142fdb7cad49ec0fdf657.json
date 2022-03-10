@@ -1,8 +1,0 @@
-{
-    "id": "e0b0ff5c-b9a1-42fd-b7ca-d49ec0fdf657",
-    "type": "feature",
-    "description": "Documentation fix for API `StartMedicalTranscriptionJobRequest`, now showing min sample rate as 16khz",
-    "modules": [
-        "service/transcribe"
-    ]
-}

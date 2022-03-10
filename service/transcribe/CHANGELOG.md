@@ -1,3 +1,7 @@
+# v1.18.0 (2022-03-10)
+
+* **Feature**: Documentation fix for API `StartMedicalTranscriptionJobRequest`, now showing min sample rate as 16khz
+
 # v1.17.0 (2022-03-08)
 
 * **Feature**: Updated `github.com/aws/smithy-go` to latest version
