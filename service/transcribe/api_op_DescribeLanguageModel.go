@@ -11,13 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about a single custom language model. Use this information to
-// see details about the language model in your Amazon Web Services account. You
-// can also see whether the base language model used to create your custom language
-// model has been updated. If Amazon Transcribe has updated the base model, you can
-// create a new custom language model using the updated base model. If the language
-// model wasn't created, you can use this operation to understand why Amazon
-// Transcribe couldn't create it.
+// Provides information about a specific custom language model in your Amazon Web
+// Services account. This operation also shows if the base language model you used
+// to create your custom language model has been updated. If Amazon Transcribe has
+// updated the base model, you can create a new custom language model using the
+// updated base model. If you tried to create a new custom language model and the
+// request wasn't successful, you can use this operation to help identify the
+// reason.
 func (c *Client) DescribeLanguageModel(ctx context.Context, params *DescribeLanguageModelInput, optFns ...func(*Options)) (*DescribeLanguageModelOutput, error) {
 	if params == nil {
 		params = &DescribeLanguageModelInput{}
@@ -35,7 +35,8 @@ func (c *Client) DescribeLanguageModel(ctx context.Context, params *DescribeLang
 
 type DescribeLanguageModelInput struct {
 
-	// The name of the custom language model you submit to get more information.
+	// The name of the custom language model you want described. Model names are
+	// case-sensitive.
 	//
 	// This member is required.
 	ModelName *string

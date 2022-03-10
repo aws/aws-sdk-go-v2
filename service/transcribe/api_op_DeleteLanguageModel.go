@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a custom language model using its name.
+// Deletes a custom language model. To use this operation, specify the name of the
+// language model you want to delete using ModelName.
 func (c *Client) DeleteLanguageModel(ctx context.Context, params *DeleteLanguageModelInput, optFns ...func(*Options)) (*DeleteLanguageModelOutput, error) {
 	if params == nil {
 		params = &DeleteLanguageModelInput{}
@@ -28,7 +29,7 @@ func (c *Client) DeleteLanguageModel(ctx context.Context, params *DeleteLanguage
 
 type DeleteLanguageModelInput struct {
 
-	// The name of the model you're choosing to delete.
+	// The name of the model you want to delete. Model names are case-sensitive.
 	//
 	// This member is required.
 	ModelName *string

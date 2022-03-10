@@ -280,8 +280,17 @@ type DescribedServer struct {
 	// viewed in your CloudWatch logs.
 	LoggingRole *string
 
+	// Specify a string to display when users connect to a server. This string is
+	// displayed after the user authenticates. The SFTP protocol does not support
+	// post-authentication display banners.
 	PostAuthenticationLoginBanner *string
 
+	// Specify a string to display when users connect to a server. This string is
+	// displayed before the user authenticates. For example, the following banner
+	// displays details about using the system. This system is for the use of
+	// authorized users only. Individuals using this computer system without authority,
+	// or in excess of their authority, are subject to having all of their activities
+	// on this system monitored and recorded by system personnel.
 	PreAuthenticationLoginBanner *string
 
 	// The protocol settings that are configured for your server. Use the PassiveIp
@@ -497,9 +506,35 @@ type ExecutionError struct {
 	// This member is required.
 	Message *string
 
-	// Specifies the error type: currently, the only valid value is PERMISSION_DENIED,
-	// which occurs if your policy does not contain the correct permissions to complete
-	// one or more of the steps in the workflow.
+	// Specifies the error type.
+	//
+	// * ALREADY_EXISTS: occurs for a copy step, if the
+	// overwrite option is not selected and a file with the same name already exists in
+	// the target location.
+	//
+	// * BAD_REQUEST: a general bad request: for example, a step
+	// that attempts to tag an EFS file returns BAD_REQUEST, as only S3 files can be
+	// tagged.
+	//
+	// * CUSTOM_STEP_FAILED: occurs when the custom step provided a callback
+	// that indicates failure.
+	//
+	// * INTERNAL_SERVER_ERROR: a catch-all error that can
+	// occur for a variety of reasons.
+	//
+	// * NOT_FOUND: occurs when a requested entity,
+	// for example a source file for a copy step, does not exist.
+	//
+	// * PERMISSION_DENIED:
+	// occurs if your policy does not contain the correct permissions to complete one
+	// or more of the steps in the workflow.
+	//
+	// * TIMEOUT: occurs when the execution
+	// times out. You can set the TimeoutSeconds for a custom step, anywhere from 1
+	// second to 1800 seconds (30 minutes).
+	//
+	// * THROTTLED: occurs if you exceed the new
+	// execution refill rate of one workflow per second.
 	//
 	// This member is required.
 	Type ExecutionErrorType

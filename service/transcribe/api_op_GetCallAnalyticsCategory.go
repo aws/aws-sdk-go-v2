@@ -29,7 +29,7 @@ func (c *Client) GetCallAnalyticsCategory(ctx context.Context, params *GetCallAn
 
 type GetCallAnalyticsCategoryInput struct {
 
-	// The name of the category you want information about. This value is case
+	// The name of the category you want information about. Category names are case
 	// sensitive.
 	//
 	// This member is required.
@@ -40,7 +40,8 @@ type GetCallAnalyticsCategoryInput struct {
 
 type GetCallAnalyticsCategoryOutput struct {
 
-	// The rules you've defined for a category.
+	// Provides you with the rules associated with the category you specified in your
+	// GetCallAnalyticsCategory request.
 	CategoryProperties *types.CategoryProperties
 
 	// Metadata pertaining to the operation's result.

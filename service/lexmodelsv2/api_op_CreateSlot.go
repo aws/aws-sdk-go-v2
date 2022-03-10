@@ -63,12 +63,6 @@ type CreateSlotInput struct {
 	// This member is required.
 	SlotName *string
 
-	// The unique identifier for the slot type associated with this slot. The slot type
-	// determines the values that can be entered into the slot.
-	//
-	// This member is required.
-	SlotTypeId *string
-
 	// Specifies prompts that Amazon Lex sends to the user to elicit a response that
 	// provides the value for the slot.
 	//
@@ -89,6 +83,10 @@ type CreateSlotInput struct {
 	// obfuscated in the log output. If the value is None, the actual value is present
 	// in the log output. The default is to obfuscate values in the CloudWatch logs.
 	ObfuscationSetting *types.ObfuscationSetting
+
+	// The unique identifier for the slot type associated with this slot. The slot type
+	// determines the values that can be entered into the slot.
+	SlotTypeId *string
 
 	noSmithyDocumentSerde
 }

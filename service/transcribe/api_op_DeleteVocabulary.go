@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a vocabulary from Amazon Transcribe.
+// Deletes a custom vocabulary. To use this operation, specify the name of the
+// vocabulary you want to delete using VocabularyName.
 func (c *Client) DeleteVocabulary(ctx context.Context, params *DeleteVocabularyInput, optFns ...func(*Options)) (*DeleteVocabularyOutput, error) {
 	if params == nil {
 		params = &DeleteVocabularyInput{}
@@ -28,7 +29,8 @@ func (c *Client) DeleteVocabulary(ctx context.Context, params *DeleteVocabularyI
 
 type DeleteVocabularyInput struct {
 
-	// The name of the vocabulary to delete.
+	// The name of the vocabulary you want to delete. Vocabulary names are
+	// case-sensitive.
 	//
 	// This member is required.
 	VocabularyName *string

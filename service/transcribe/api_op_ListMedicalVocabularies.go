@@ -61,7 +61,7 @@ type ListMedicalVocabulariesOutput struct {
 	// MaxResults parameter. If there are more jobs in the list will fit on a page,
 	// Amazon Transcribe Medical returns the NextPage token. To return the next page of
 	// vocabularies, include the token in the next request to the
-	// ListMedicalVocabularies operation .
+	// ListMedicalVocabularies operation.
 	NextToken *string
 
 	// The requested vocabulary state.

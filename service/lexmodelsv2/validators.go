@@ -3876,9 +3876,6 @@ func validateOpCreateSlotInput(v *CreateSlotInput) error {
 	if v.SlotName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SlotName"))
 	}
-	if v.SlotTypeId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SlotTypeId"))
-	}
 	if v.ValueElicitationSetting == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ValueElicitationSetting"))
 	} else if v.ValueElicitationSetting != nil {
@@ -5150,9 +5147,6 @@ func validateOpUpdateSlotInput(v *UpdateSlotInput) error {
 	}
 	if v.SlotName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SlotName"))
-	}
-	if v.SlotTypeId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SlotTypeId"))
 	}
 	if v.ValueElicitationSetting == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ValueElicitationSetting"))

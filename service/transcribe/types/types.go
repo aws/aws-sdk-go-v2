@@ -407,8 +407,8 @@ type LanguageModel struct {
 	ModelStatus ModelStatus
 
 	// Whether the base model used for the custom language model is up to date. If this
-	// field is true then you are running the most up-to-date version of the base model
-	// in your custom language model.
+	// field is false then you are running the most up-to-date version of the base
+	// model in your custom language model.
 	UpgradeAvailability *bool
 
 	noSmithyDocumentSerde
@@ -418,9 +418,9 @@ type LanguageModel struct {
 type Media struct {
 
 	// The S3 object location of the input media file. The URI must be in the same
-	// region as the API endpoint that you are calling. The general form is:  s3:////
-	// For example:
-	// s3://AWSDOC-EXAMPLE-BUCKET/example.mp4s3://AWSDOC-EXAMPLE-BUCKET/mediadocs/example.mp4
+	// region as the API endpoint that you are calling. The general form is:
+	// s3://DOC-EXAMPLE-BUCKET/keyprefix/objectkey For example:
+	// s3://DOC-EXAMPLE-BUCKET/example.flacs3://DOC-EXAMPLE-BUCKET/mediafiles/example.flac
 	// For more information about S3 object names, see Object Keys
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys)
 	// in the Amazon S3 Developer Guide.
@@ -869,14 +869,15 @@ type Subtitles struct {
 	noSmithyDocumentSerde
 }
 
-// Specify the output format for your subtitle file.
+// Choose the output format for your subtitle file and the S3 location where you
+// want your file saved.
 type SubtitlesOutput struct {
 
 	// Specify the output format for your subtitle file; if you select both SRT and VTT
 	// formats, two output files are generated.
 	Formats []SubtitleFormat
 
-	// Choose the output location for your subtitle file. This location must be an S3
+	// Contains the output location for your subtitle file. This location must be an S3
 	// bucket.
 	SubtitleFileUris []string
 
