@@ -320,10 +320,16 @@
                     }
                 },
                 "PostAuthenticationLoginBanner": {
-                    "target": "com.amazonaws.transfer#PostAuthenticationLoginBanner"
+                    "target": "com.amazonaws.transfer#PostAuthenticationLoginBanner",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify a string to display when users connect to a server. This string is displayed after the user authenticates.</p>\n         <note>\n            <p>The SFTP protocol does not support post-authentication display banners.</p>\n         </note>"
+                    }
                 },
                 "PreAuthenticationLoginBanner": {
-                    "target": "com.amazonaws.transfer#PreAuthenticationLoginBanner"
+                    "target": "com.amazonaws.transfer#PreAuthenticationLoginBanner",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify a string to display when users connect to a server. This string is displayed before the user authenticates.\n    For example, the following banner displays details about using the system.</p>\n         <p>\n            <code>This system is for the use of authorized users only. Individuals using this computer system without authority,\n    or in excess of their authority, are subject to having all of their activities on this system monitored and recorded by\n    system personnel.</code>\n         </p>"
+                    }
                 },
                 "Protocols": {
                     "target": "com.amazonaws.transfer#Protocols",
@@ -1465,10 +1471,16 @@
                     }
                 },
                 "PostAuthenticationLoginBanner": {
-                    "target": "com.amazonaws.transfer#PostAuthenticationLoginBanner"
+                    "target": "com.amazonaws.transfer#PostAuthenticationLoginBanner",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify a string to display when users connect to a server. This string is displayed after the user authenticates.</p>\n         <note>\n            <p>The SFTP protocol does not support post-authentication display banners.</p>\n         </note>"
+                    }
                 },
                 "PreAuthenticationLoginBanner": {
-                    "target": "com.amazonaws.transfer#PreAuthenticationLoginBanner"
+                    "target": "com.amazonaws.transfer#PreAuthenticationLoginBanner",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify a string to display when users connect to a server. This string is displayed before the user authenticates.\n    For example, the following banner displays details about using the system.</p>\n         <p>\n            <code>This system is for the use of authorized users only. Individuals using this computer system without authority,\n    or in excess of their authority, are subject to having all of their activities on this system monitored and recorded by\n    system personnel.</code>\n         </p>"
+                    }
                 },
                 "Protocols": {
                     "target": "com.amazonaws.transfer#Protocols",
@@ -1759,7 +1771,7 @@
                 "Type": {
                     "target": "com.amazonaws.transfer#ExecutionErrorType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the error type: currently, the only valid value is <code>PERMISSION_DENIED</code>, which occurs\n    if your policy does not contain the correct permissions to complete one or more of the steps in the workflow.</p>",
+                        "smithy.api#documentation": "<p>Specifies the error type.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ALREADY_EXISTS</code>: occurs for a copy step, if the overwrite option is not selected and a file with the same name already exists in the target location.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BAD_REQUEST</code>: a general bad request: for example, a step that attempts to\n          tag an EFS file returns <code>BAD_REQUEST</code>, as only S3 files can be tagged.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CUSTOM_STEP_FAILED</code>: occurs when the custom step provided a callback that indicates failure.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INTERNAL_SERVER_ERROR</code>: a catch-all error that can occur for a variety of\n          reasons.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NOT_FOUND</code>: occurs when a requested entity, for example a source file for\n          a copy step, does not exist.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PERMISSION_DENIED</code>: occurs if your policy does not contain the correct\n          permissions to complete one or more of the steps in the workflow.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TIMEOUT</code>: occurs when the execution times out.</p>\n               <note>\n                  <p> You can set the <code>TimeoutSeconds</code> for a custom step, anywhere from 1 second to 1800 seconds (30 minutes). </p>\n               </note>\n            </li>\n            <li>\n               <p>\n                  <code>THROTTLED</code>: occurs if you exceed the new execution refill rate of one\n          workflow per second.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1785,6 +1797,34 @@
                     {
                         "value": "PERMISSION_DENIED",
                         "name": "PERMISSION_DENIED"
+                    },
+                    {
+                        "value": "CUSTOM_STEP_FAILED",
+                        "name": "CUSTOM_STEP_FAILED"
+                    },
+                    {
+                        "value": "THROTTLED",
+                        "name": "THROTTLED"
+                    },
+                    {
+                        "value": "ALREADY_EXISTS",
+                        "name": "ALREADY_EXISTS"
+                    },
+                    {
+                        "value": "NOT_FOUND",
+                        "name": "NOT_FOUND"
+                    },
+                    {
+                        "value": "BAD_REQUEST",
+                        "name": "BAD_REQUEST"
+                    },
+                    {
+                        "value": "TIMEOUT",
+                        "name": "TIMEOUT"
+                    },
+                    {
+                        "value": "INTERNAL_SERVER_ERROR",
+                        "name": "INTERNAL_SERVER_ERROR"
                     }
                 ]
             }
@@ -4426,10 +4466,16 @@
                     }
                 },
                 "PostAuthenticationLoginBanner": {
-                    "target": "com.amazonaws.transfer#PostAuthenticationLoginBanner"
+                    "target": "com.amazonaws.transfer#PostAuthenticationLoginBanner",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify a string to display when users connect to a server. This string is displayed after the user authenticates.</p>\n         <note>\n            <p>The SFTP protocol does not support post-authentication display banners.</p>\n         </note>"
+                    }
                 },
                 "PreAuthenticationLoginBanner": {
-                    "target": "com.amazonaws.transfer#PreAuthenticationLoginBanner"
+                    "target": "com.amazonaws.transfer#PreAuthenticationLoginBanner",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify a string to display when users connect to a server. This string is displayed before the user authenticates.\n    For example, the following banner displays details about using the system.</p>\n         <p>\n            <code>This system is for the use of authorized users only. Individuals using this computer system without authority,\n    or in excess of their authority, are subject to having all of their activities on this system monitored and recorded by\n    system personnel.</code>\n         </p>"
+                    }
                 },
                 "Protocols": {
                     "target": "com.amazonaws.transfer#Protocols",

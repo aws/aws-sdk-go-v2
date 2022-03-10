@@ -2902,8 +2902,7 @@
                 "slotTypeId": {
                     "target": "com.amazonaws.lexmodelsv2#BuiltInOrCustomSlotTypeId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for the slot type associated with this slot.\n         The slot type determines the values that can be entered into the\n         slot.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The unique identifier for the slot type associated with this slot.\n         The slot type determines the values that can be entered into the\n         slot.</p>"
                     }
                 },
                 "valueElicitationSetting": {
@@ -12609,8 +12608,7 @@
                 "slotTypeId": {
                     "target": "com.amazonaws.lexmodelsv2#BuiltInOrCustomSlotTypeId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the new slot type to associate with this\n         slot. </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The unique identifier of the new slot type to associate with this\n         slot. </p>"
                     }
                 },
                 "valueElicitationSetting": {
