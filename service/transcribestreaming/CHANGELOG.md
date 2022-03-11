@@ -1,3 +1,7 @@
+# v1.6.0 (2022-03-11)
+
+* **Feature**: Amazon Transcribe StartTranscription API now supports additional parameters for Language Identification feature: customVocabularies and customFilterVocabularies
+
 # v1.5.0 (2022-03-08)
 
 * **Feature**: Updated `github.com/aws/smithy-go` to latest version

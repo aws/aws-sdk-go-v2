@@ -1,3 +1,7 @@
+# v1.20.0 (2022-03-11)
+
+* **Feature**: Adds PrincipalOrgID support to AddPermission API. Customers can use it to manage permissions to lambda functions at AWS Organizations level.
+
 # v1.19.0 (2022-03-08)
 
 * **Feature**: Updated `github.com/aws/smithy-go` to latest version

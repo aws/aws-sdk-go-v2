@@ -1,3 +1,7 @@
+# v1.20.0 (2022-03-11)
+
+* **Feature**: This release adds support for enabling Rich Messaging when starting a new chat session via the StartChatContact API. Rich Messaging enables the following formatting options: bold, italics, hyperlinks, bulleted lists, and numbered lists.
+
 # v1.19.0 (2022-03-08)
 
 * **Feature**: Updated `github.com/aws/smithy-go` to latest version

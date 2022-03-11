@@ -1,3 +1,19 @@
+# Release (2022-03-11)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/chime`: [v1.20.0](service/chime/CHANGELOG.md#v1200-2022-03-11)
+  * **Feature**: Chime VoiceConnector Logging APIs will now support MediaMetricLogs. Also CreateMeetingDialOut now returns AccessDeniedException.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.20.0](service/connect/CHANGELOG.md#v1200-2022-03-11)
+  * **Feature**: This release adds support for enabling Rich Messaging when starting a new chat session via the StartChatContact API. Rich Messaging enables the following formatting options: bold, italics, hyperlinks, bulleted lists, and numbered lists.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.20.0](service/lambda/CHANGELOG.md#v1200-2022-03-11)
+  * **Feature**: Adds PrincipalOrgID support to AddPermission API. Customers can use it to manage permissions to lambda functions at AWS Organizations level.
+* `github.com/aws/aws-sdk-go-v2/service/outposts`: [v1.18.0](service/outposts/CHANGELOG.md#v1180-2022-03-11)
+  * **Feature**: This release adds address filters for listSites
+* `github.com/aws/aws-sdk-go-v2/service/secretsmanager`: [v1.15.1](service/secretsmanager/CHANGELOG.md#v1151-2022-03-11)
+  * **Documentation**: Documentation updates for Secrets Manager.
+* `github.com/aws/aws-sdk-go-v2/service/transcribestreaming`: [v1.6.0](service/transcribestreaming/CHANGELOG.md#v160-2022-03-11)
+  * **Feature**: Amazon Transcribe StartTranscription API now supports additional parameters for Language Identification feature: customVocabularies and customFilterVocabularies
+
 # Release (2022-03-10)
 
 ## Module Highlights
