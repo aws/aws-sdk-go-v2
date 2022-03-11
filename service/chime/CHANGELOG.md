@@ -1,3 +1,7 @@
+# v1.20.0 (2022-03-11)
+
+* **Feature**: Chime VoiceConnector Logging APIs will now support MediaMetricLogs. Also CreateMeetingDialOut now returns AccessDeniedException.
+
 # v1.19.0 (2022-03-08)
 
 * **Feature**: Updated `github.com/aws/smithy-go` to latest version

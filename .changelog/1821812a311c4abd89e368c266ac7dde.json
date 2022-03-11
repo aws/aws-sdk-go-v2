@@ -1,8 +1,0 @@
-{
-    "id": "1821812a-311c-4abd-89e3-68c266ac7dde",
-    "type": "feature",
-    "description": "Adds PrincipalOrgID support to AddPermission API. Customers can use it to manage permissions to lambda functions at AWS Organizations level.",
-    "modules": [
-        "service/lambda"
-    ]
-}

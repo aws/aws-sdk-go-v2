@@ -53,7 +53,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/iot v1.23.0
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.15.0
 	github.com/aws/aws-sdk-go-v2/service/kms v1.16.0
-	github.com/aws/aws-sdk-go-v2/service/lambda v1.19.0
+	github.com/aws/aws-sdk-go-v2/service/lambda v1.20.0
 	github.com/aws/aws-sdk-go-v2/service/lightsail v1.18.0
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.11.0
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.16.0
@@ -68,7 +68,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.15.0
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.26.0
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.21.0
-	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.15.0
+	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.15.1
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.13.0
 	github.com/aws/aws-sdk-go-v2/service/ses v1.14.0
 	github.com/aws/aws-sdk-go-v2/service/sfn v1.13.0
@@ -81,7 +81,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sts v1.16.0
 	github.com/aws/aws-sdk-go-v2/service/support v1.13.0
 	github.com/aws/aws-sdk-go-v2/service/timestreamwrite v1.13.0
-	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.5.0
+	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.6.0
 	github.com/aws/aws-sdk-go-v2/service/waf v1.11.0
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.12.0
 	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.18.0

@@ -1,3 +1,7 @@
+# v1.18.0 (2022-03-11)
+
+* **Feature**: This release adds address filters for listSites
+
 # v1.17.0 (2022-03-08)
 
 * **Feature**: Updated `github.com/aws/smithy-go` to latest version
