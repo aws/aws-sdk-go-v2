@@ -7241,6 +7241,13 @@ func awsRestjson1_serializeOpDocumentStartChatContactInput(v *StartChatContactIn
 		}
 	}
 
+	if v.SupportedMessagingContentTypes != nil {
+		ok := object.Key("SupportedMessagingContentTypes")
+		if err := awsRestjson1_serializeDocumentSupportedMessagingContentTypes(v.SupportedMessagingContentTypes, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -11677,6 +11684,17 @@ func awsRestjson1_serializeDocumentS3Config(v *types.S3Config, value smithyjson.
 }
 
 func awsRestjson1_serializeDocumentSecurityProfileIds(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSupportedMessagingContentTypes(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 

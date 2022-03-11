@@ -4044,6 +4044,9 @@ func awsRestjson1_deserializeOpErrorCreateMeetingDialOut(response *smithyhttp.Re
 	}
 
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("BadRequestException", errorCode):
 		return awsRestjson1_deserializeErrorBadRequestException(response, errorBody)
 
@@ -33094,6 +33097,15 @@ func awsRestjson1_deserializeDocumentLoggingConfiguration(v **types.LoggingConfi
 
 	for key, value := range shape {
 		switch key {
+		case "EnableMediaMetricLogs":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.EnableMediaMetricLogs = ptr.Bool(jtv)
+			}
+
 		case "EnableSIPLogs":
 			if value != nil {
 				jtv, ok := value.(bool)

@@ -54,8 +54,10 @@ type StartStreamTranscriptionInput struct {
 	// This member is required.
 	MediaEncoding types.MediaEncoding
 
-	// The sample rate, in Hertz (Hz), of the input audio. We suggest that you use
-	// 8,000 Hz for low quality audio and 16,000 Hz or higher for high quality audio.
+	// The sample rate of the input audio (in Hertz). Low-quality audio, such as
+	// telephone audio, is typically around 8,000 Hz. High-quality audio typically
+	// ranges from 16,000 Hz to 48,000 Hz. Note that the sample rate you specify must
+	// match that of your audio.
 	//
 	// This member is required.
 	MediaSampleRateHertz *int32
@@ -77,9 +79,7 @@ type StartStreamTranscriptionInput struct {
 	// When true, instructs Amazon Transcribe to process each audio channel separately,
 	// then merges the transcription output of each channel into a single
 	// transcription. Amazon Transcribe also produces a transcription of each item. An
-	// item includes the start time, end time, and any alternative transcriptions. You
-	// can't set both ShowSpeakerLabel and EnableChannelIdentification in the same
-	// request. If you set both, your request returns a BadRequestException.
+	// item includes the start time, end time, and any alternative transcriptions.
 	EnableChannelIdentification bool
 
 	// When true, instructs Amazon Transcribe to present transcription results that
@@ -144,12 +144,35 @@ type StartStreamTranscriptionInput struct {
 	// VocabularyFilterMatch equal to True.
 	VocabularyFilterMethod types.VocabularyFilterMethod
 
-	// The name of the vocabulary filter you've created that is unique to your account.
-	// Provide the name in this field to successfully use it in a stream.
+	// The name of the vocabulary filter you want to use with your transcription. This
+	// operation is not intended for use in conjunction with the IdentifyLanguage
+	// operation. If you're using IdentifyLanguage in your request and want to use one
+	// or more vocabulary filters with your transcription, use the
+	// VocabularyFilterNames operation instead.
 	VocabularyFilterName *string
 
-	// The name of the vocabulary to use when processing the transcription job.
+	// The names of the vocabulary filters you want to use with your transcription.
+	// Note that if the vocabulary filters you specify are in languages that don't
+	// match the language identified in your media, your job fails. This operation is
+	// only intended for use in conjunction with the IdentifyLanguage operation. If
+	// you're not using IdentifyLanguage in your request and want to use a vocabulary
+	// filter with your transcription, use the VocabularyFilterName operation instead.
+	VocabularyFilterNames *string
+
+	// The name of the custom vocabulary you want to use with your transcription. This
+	// operation is not intended for use in conjunction with the IdentifyLanguage
+	// operation. If you're using IdentifyLanguage in your request and want to use one
+	// or more custom vocabularies with your transcription, use the VocabularyNames
+	// operation instead.
 	VocabularyName *string
+
+	// The names of the custom vocabularies you want to use with your transcription.
+	// Note that if the custom vocabularies you specify are in languages that don't
+	// match the language identified in your media, your job fails. This operation is
+	// only intended for use in conjunction with the IdentifyLanguage operation. If
+	// you're not using IdentifyLanguage in your request and want to use a custom
+	// vocabulary with your transcription, use the VocabularyName operation instead.
+	VocabularyNames *string
 
 	noSmithyDocumentSerde
 }
@@ -162,10 +185,10 @@ type StartStreamTranscriptionOutput struct {
 	// Shows whether content redaction was enabled in this stream.
 	ContentRedactionType types.ContentRedactionType
 
-	// Shows whether channel identification has been enabled in the stream.
+	// Shows whether channel identification was enabled in the stream.
 	EnableChannelIdentification bool
 
-	// Shows whether partial results stabilization has been enabled in the stream.
+	// Shows whether partial results stabilization was enabled in the transcription.
 	EnablePartialResultsStabilization bool
 
 	// The language code of the language identified in your media stream.
@@ -174,7 +197,7 @@ type StartStreamTranscriptionOutput struct {
 	// The language code of the input audio stream.
 	LanguageCode types.LanguageCode
 
-	// The name of the language model used in your media stream.
+	// The name of the custom language model used in the transcription.
 	LanguageModelName *string
 
 	// The language codes used in the identification of your media stream's predominant
@@ -184,8 +207,7 @@ type StartStreamTranscriptionOutput struct {
 	// The encoding used for the input audio stream.
 	MediaEncoding types.MediaEncoding
 
-	// The sample rate, in Hertz (Hz), for the input audio stream. Use 8,000 Hz for low
-	// quality audio and 16,000 Hz or higher for high quality audio.
+	// The sample rate, in Hertz (Hz), for the input audio stream.
 	MediaSampleRateHertz *int32
 
 	// The number of channels identified in the stream.
@@ -201,23 +223,29 @@ type StartStreamTranscriptionOutput struct {
 	// The preferred language you specified in your request.
 	PreferredLanguage types.LanguageCode
 
-	// An identifier for the streaming transcription.
+	// An identifier for the transcription.
 	RequestId *string
 
 	// An identifier for a specific transcription session.
 	SessionId *string
 
-	// Shows whether speaker identification was enabled in the stream.
+	// Shows whether speaker identification was enabled in the transcription.
 	ShowSpeakerLabel bool
 
-	// The vocabulary filtering method used in the media stream.
+	// The vocabulary filtering method used when processing the stream.
 	VocabularyFilterMethod types.VocabularyFilterMethod
 
-	// The name of the vocabulary filter used in your media stream.
+	// The name of the vocabulary filter used when processing the stream.
 	VocabularyFilterName *string
 
-	// The name of the vocabulary used when processing the stream.
+	// The name of the vocabulary filter used when processing the stream.
+	VocabularyFilterNames *string
+
+	// The name of the custom vocabulary used when processing the stream.
 	VocabularyName *string
+
+	// The name of the custom vocabulary used when processing the stream.
+	VocabularyNames *string
 
 	eventStream *StartStreamTranscriptionEventStream
 

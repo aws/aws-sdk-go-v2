@@ -1104,6 +1104,24 @@ func awsRestjson1_serializeOpHttpBindingsListSitesInput(v *ListSitesInput, encod
 		encoder.SetQuery("NextToken").String(*v.NextToken)
 	}
 
+	if v.OperatingAddressCityFilter != nil {
+		for i := range v.OperatingAddressCityFilter {
+			encoder.AddQuery("OperatingAddressCityFilter").String(v.OperatingAddressCityFilter[i])
+		}
+	}
+
+	if v.OperatingAddressCountryCodeFilter != nil {
+		for i := range v.OperatingAddressCountryCodeFilter {
+			encoder.AddQuery("OperatingAddressCountryCodeFilter").String(v.OperatingAddressCountryCodeFilter[i])
+		}
+	}
+
+	if v.OperatingAddressStateOrRegionFilter != nil {
+		for i := range v.OperatingAddressStateOrRegionFilter {
+			encoder.AddQuery("OperatingAddressStateOrRegionFilter").String(v.OperatingAddressStateOrRegionFilter[i])
+		}
+	}
+
 	return nil
 }
 

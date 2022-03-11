@@ -214,6 +214,11 @@ func awsRestjson1_serializeOpDocumentAddPermissionInput(v *AddPermissionInput, v
 		ok.String(*v.Principal)
 	}
 
+	if v.PrincipalOrgID != nil {
+		ok := object.Key("PrincipalOrgID")
+		ok.String(*v.PrincipalOrgID)
+	}
+
 	if v.RevisionId != nil {
 		ok := object.Key("RevisionId")
 		ok.String(*v.RevisionId)

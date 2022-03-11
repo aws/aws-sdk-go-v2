@@ -1,0 +1,8 @@
+{
+    "id": "24b57d58-6b7f-4d6e-beee-9e74a5eee7d4",
+    "type": "feature",
+    "description": "Chime VoiceConnector Logging APIs will now support MediaMetricLogs. Also CreateMeetingDialOut now returns AccessDeniedException.",
+    "modules": [
+        "service/chime"
+    ]
+}

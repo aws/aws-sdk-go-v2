@@ -116,7 +116,7 @@ type ChatMessage struct {
 	// This member is required.
 	Content *string
 
-	// The type of the content. Supported types are text and plain.
+	// The type of the content. Supported types are text/plain.
 	//
 	// This member is required.
 	ContentType *string

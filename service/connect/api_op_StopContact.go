@@ -10,7 +10,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Ends the specified contact.
+// Ends the specified contact. This call does not work for the following initiation
+// methods:
+//
+// * CALLBACK
+//
+// * DISCONNECT
+//
+// * TRANSFER
+//
+// * QUEUE_TRANSFER
 func (c *Client) StopContact(ctx context.Context, params *StopContactInput, optFns ...func(*Options)) (*StopContactOutput, error) {
 	if params == nil {
 		params = &StopContactInput{}

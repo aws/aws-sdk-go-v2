@@ -430,9 +430,19 @@ func awsRestjson1_deserializeOpHttpBindingsStartStreamTranscriptionOutput(v *Sta
 		v.VocabularyFilterName = ptr.String(headerValues[0])
 	}
 
+	if headerValues := response.Header.Values("x-amzn-transcribe-vocabulary-filter-names"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.VocabularyFilterNames = ptr.String(headerValues[0])
+	}
+
 	if headerValues := response.Header.Values("x-amzn-transcribe-vocabulary-name"); len(headerValues) != 0 {
 		headerValues[0] = strings.TrimSpace(headerValues[0])
 		v.VocabularyName = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("x-amzn-transcribe-vocabulary-names"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.VocabularyNames = ptr.String(headerValues[0])
 	}
 
 	return nil
