@@ -398,6 +398,12 @@
                 "smithy.api#pattern": "^\\S[\\S ]*$"
             }
         },
+        "com.amazonaws.outposts#CityList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.outposts#City"
+            }
+        },
         "com.amazonaws.outposts#ConflictException": {
             "type": "structure",
             "members": {
@@ -451,6 +457,12 @@
                     "max": 2
                 },
                 "smithy.api#pattern": "^[A-Z]{2}$"
+            }
+        },
+        "com.amazonaws.outposts#CountryCodeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.outposts#CountryCode"
             }
         },
         "com.amazonaws.outposts#CreateOrder": {
@@ -1700,7 +1712,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the sites for your Amazon Web Services account.</p>",
+                "smithy.api#documentation": "<p>Create a list of the Outpost sites for your Amazon Web Services account. Add operating address filters to your request to\n      return a more specific list of results. Use filters to match site city, country code, or state/region of the \n      operating address. </p>\n    \n         <p>If you specify multiple filters, the filters are joined with an <code>AND</code>, and the request returns only \n      results that match all of the specified filters.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/sites",
@@ -1726,6 +1738,27 @@
                     "target": "com.amazonaws.outposts#MaxResults1000",
                     "traits": {
                         "smithy.api#httpQuery": "MaxResults"
+                    }
+                },
+                "OperatingAddressCountryCodeFilter": {
+                    "target": "com.amazonaws.outposts#CountryCodeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A filter for the country code of the Outpost site. </p>\n         <p>Filter values are case sensitive. If you specify multiple \n         values for a filter, the values are joined with an <code>OR</code>, and the request returns \n         all results that match any of the specified values.</p>",
+                        "smithy.api#httpQuery": "OperatingAddressCountryCodeFilter"
+                    }
+                },
+                "OperatingAddressStateOrRegionFilter": {
+                    "target": "com.amazonaws.outposts#StateOrRegionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A filter for the state/region of the Outpost site. </p>\n         <p>Filter values are case sensitive. If you specify multiple \n         values for a filter, the values are joined with an <code>OR</code>, and the request returns \n         all results that match any of the specified values.</p>",
+                        "smithy.api#httpQuery": "OperatingAddressStateOrRegionFilter"
+                    }
+                },
+                "OperatingAddressCityFilter": {
+                    "target": "com.amazonaws.outposts#CityList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      A filter for the city of the Outpost site. \n    </p>\n         <p>Filter values are case sensitive. If you specify multiple \n         values for a filter, the values are joined with an <code>OR</code>, and the request returns \n         all results that match any of the specified values.</p>",
+                        "smithy.api#httpQuery": "OperatingAddressCityFilter"
                     }
                 }
             }
@@ -2647,6 +2680,12 @@
                     "max": 50
                 },
                 "smithy.api#pattern": "^\\S[\\S ]*$"
+            }
+        },
+        "com.amazonaws.outposts#StateOrRegionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.outposts#StateOrRegion"
             }
         },
         "com.amazonaws.outposts#String": {

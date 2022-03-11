@@ -1484,7 +1484,7 @@
                 "ContentType": {
                     "target": "com.amazonaws.connect#ChatContentType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the content. Supported types are text and plain.</p>",
+                        "smithy.api#documentation": "<p>The type of the content. Supported types are <code>text/plain</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -12934,6 +12934,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The total duration of the newly started chat session. If not specified, the chat session duration defaults to 25 hour. \n   The minumum configurable time is 60 minutes. The maximum configurable time is 10,080 minutes (7 days).</p>"
                     }
+                },
+                "SupportedMessagingContentTypes": {
+                    "target": "com.amazonaws.connect#SupportedMessagingContentTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The supported chat message content types. Content types can be text/plain or both text/plain and text/markdown.</p>"
+                    }
                 }
             }
         },
@@ -12983,7 +12989,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts recording the contact when the agent joins the call. StartContactRecording is a\n   one-time action. For example, if you use StopContactRecording to stop recording an ongoing call,\n   you can't use StartContactRecording to restart it. For scenarios where the recording has started\n   and you want to suspend and resume it, such as when collecting sensitive information (for\n   example, a credit card number), use SuspendContactRecording and ResumeContactRecording.</p>\n         <p>You can use this API to override the recording behavior configured in the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/set-recording-behavior.html\">Set recording\n    behavior</a> block.</p>\n         <p>Only voice recordings are supported at this time.</p>",
+                "smithy.api#documentation": "<p>Starts recording the contact: </p>\n         <ul>\n            <li>\n               <p>If the API is called <i>before</i> the agent joins the call, recording starts when the agent joins the call.</p>\n            </li>\n            <li>\n               <p>If the API is called <i>after</i> the agent joins the call, recording starts at the time of the API call.</p>\n            </li>\n         </ul>\n  \n         <p>StartContactRecording is a\n   one-time action. For example, if you use StopContactRecording to stop recording an ongoing call,\n   you can't use StartContactRecording to restart it. For scenarios where the recording has started\n   and you want to suspend and resume it, such as when collecting sensitive information (for\n   example, a credit card number), use SuspendContactRecording and ResumeContactRecording.</p>\n         <p>You can use this API to override the recording behavior configured in the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/set-recording-behavior.html\">Set recording\n    behavior</a> block.</p>\n         <p>Only voice recordings are supported at this time.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/contact/start-recording",
@@ -13384,7 +13390,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Ends the specified contact.</p>",
+                "smithy.api#documentation": "<p>Ends the specified contact. This call does not work for the following initiation methods:</p>\n         <ul>\n            <li>\n               <p>CALLBACK</p>\n            </li>\n            <li>\n               <p>DISCONNECT</p>\n            </li>\n            <li>\n               <p>TRANSFER</p>\n            </li>\n            <li>\n               <p>QUEUE_TRANSFER</p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/contact/stop",
@@ -13568,6 +13574,21 @@
         },
         "com.amazonaws.connect#String": {
             "type": "string"
+        },
+        "com.amazonaws.connect#SupportedMessagingContentType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.connect#SupportedMessagingContentTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#SupportedMessagingContentType"
+            }
         },
         "com.amazonaws.connect#SuspendContactRecording": {
             "type": "operation",
