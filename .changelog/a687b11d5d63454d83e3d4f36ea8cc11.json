@@ -1,0 +1,8 @@
+{
+    "id": "a687b11d-5d63-454d-83e3-d4f36ea8cc11",
+    "type": "feature",
+    "description": "Amazon Transcribe StartTranscription API now supports additional parameters for Language Identification feature: customVocabularies and customFilterVocabularies",
+    "modules": [
+        "service/transcribestreaming"
+    ]
+}

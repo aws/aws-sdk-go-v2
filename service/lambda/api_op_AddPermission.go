@@ -10,20 +10,22 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Grants an Amazon Web Services service or another account permission to use a
-// function. You can apply the policy at the function level, or specify a qualifier
-// to restrict access to a single version or alias. If you use a qualifier, the
-// invoker must use the full Amazon Resource Name (ARN) of that version or alias to
-// invoke the function. Note: Lambda does not support adding policies to version
-// $LATEST. To grant permission to another account, specify the account ID as the
-// Principal. For Amazon Web Services services, the principal is a domain-style
-// identifier defined by the service, like s3.amazonaws.com or sns.amazonaws.com.
-// For Amazon Web Services services, you can also specify the ARN of the associated
-// resource as the SourceArn. If you grant permission to a service principal
-// without specifying the source, other accounts could potentially configure
-// resources in their account to invoke your Lambda function. This action adds a
-// statement to a resource-based permissions policy for the function. For more
-// information about function policies, see Lambda Function Policies
+// Grants an Amazon Web Services service, account, or organization permission to
+// use a function. You can apply the policy at the function level, or specify a
+// qualifier to restrict access to a single version or alias. If you use a
+// qualifier, the invoker must use the full Amazon Resource Name (ARN) of that
+// version or alias to invoke the function. Note: Lambda does not support adding
+// policies to version $LATEST. To grant permission to another account, specify the
+// account ID as the Principal. To grant permission to an organization defined in
+// Organizations, specify the organization ID as the PrincipalOrgID. For Amazon Web
+// Services services, the principal is a domain-style identifier defined by the
+// service, like s3.amazonaws.com or sns.amazonaws.com. For Amazon Web Services
+// services, you can also specify the ARN of the associated resource as the
+// SourceArn. If you grant permission to a service principal without specifying the
+// source, other accounts could potentially configure resources in their account to
+// invoke your Lambda function. This action adds a statement to a resource-based
+// permissions policy for the function. For more information about function
+// policies, see Lambda Function Policies
 // (https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html).
 func (c *Client) AddPermission(ctx context.Context, params *AddPermissionInput, optFns ...func(*Options)) (*AddPermissionOutput, error) {
 	if params == nil {
@@ -81,6 +83,10 @@ type AddPermissionInput struct {
 
 	// For Alexa Smart Home functions, a token that must be supplied by the invoker.
 	EventSourceToken *string
+
+	// The identifier for your organization in Organizations. Use this to grant
+	// permissions to all the Amazon Web Services accounts under this organization.
+	PrincipalOrgID *string
 
 	// Specify a version or alias to add permissions to a published version of the
 	// function.

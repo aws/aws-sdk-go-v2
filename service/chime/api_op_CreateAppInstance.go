@@ -45,7 +45,7 @@ type CreateAppInstanceInput struct {
 	// The metadata of the AppInstance. Limited to a 1KB string in UTF-8.
 	Metadata *string
 
-	// Tags assigned to the AppInstanceUser.
+	// Tags assigned to the AppInstance.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

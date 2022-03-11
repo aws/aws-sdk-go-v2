@@ -1,0 +1,8 @@
+{
+    "id": "b4534f6c-13ea-4e24-90a9-64ab7248e5ec",
+    "type": "feature",
+    "description": "This release adds support for enabling Rich Messaging when starting a new chat session via the StartChatContact API. Rich Messaging enables the following formatting options: bold, italics, hyperlinks, bulleted lists, and numbered lists.",
+    "modules": [
+        "service/connect"
+    ]
+}

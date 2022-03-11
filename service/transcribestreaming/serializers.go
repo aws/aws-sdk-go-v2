@@ -258,9 +258,19 @@ func awsRestjson1_serializeOpHttpBindingsStartStreamTranscriptionInput(v *StartS
 		encoder.SetHeader(locationName).String(*v.VocabularyFilterName)
 	}
 
+	if v.VocabularyFilterNames != nil && len(*v.VocabularyFilterNames) > 0 {
+		locationName := "X-Amzn-Transcribe-Vocabulary-Filter-Names"
+		encoder.SetHeader(locationName).String(*v.VocabularyFilterNames)
+	}
+
 	if v.VocabularyName != nil && len(*v.VocabularyName) > 0 {
 		locationName := "X-Amzn-Transcribe-Vocabulary-Name"
 		encoder.SetHeader(locationName).String(*v.VocabularyName)
+	}
+
+	if v.VocabularyNames != nil && len(*v.VocabularyNames) > 0 {
+		locationName := "X-Amzn-Transcribe-Vocabulary-Names"
+		encoder.SetHeader(locationName).String(*v.VocabularyNames)
 	}
 
 	return nil

@@ -12,7 +12,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the sites for your Amazon Web Services account.
+// Create a list of the Outpost sites for your Amazon Web Services account. Add
+// operating address filters to your request to return a more specific list of
+// results. Use filters to match site city, country code, or state/region of the
+// operating address. If you specify multiple filters, the filters are joined with
+// an AND, and the request returns only results that match all of the specified
+// filters.
 func (c *Client) ListSites(ctx context.Context, params *ListSitesInput, optFns ...func(*Options)) (*ListSitesOutput, error) {
 	if params == nil {
 		params = &ListSitesInput{}
@@ -35,6 +40,23 @@ type ListSitesInput struct {
 
 	// The pagination token.
 	NextToken *string
+
+	// A filter for the city of the Outpost site. Filter values are case sensitive. If
+	// you specify multiple values for a filter, the values are joined with an OR, and
+	// the request returns all results that match any of the specified values.
+	OperatingAddressCityFilter []string
+
+	// A filter for the country code of the Outpost site. Filter values are case
+	// sensitive. If you specify multiple values for a filter, the values are joined
+	// with an OR, and the request returns all results that match any of the specified
+	// values.
+	OperatingAddressCountryCodeFilter []string
+
+	// A filter for the state/region of the Outpost site. Filter values are case
+	// sensitive. If you specify multiple values for a filter, the values are joined
+	// with an OR, and the request returns all results that match any of the specified
+	// values.
+	OperatingAddressStateOrRegionFilter []string
 
 	noSmithyDocumentSerde
 }

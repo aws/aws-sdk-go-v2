@@ -754,7 +754,7 @@ type EngineTranscribeSettings struct {
 	// This member is required.
 	LanguageCode TranscribeLanguageCode
 
-	// Set this field to PII to identify personal health information in the
+	// Set this field to PII to identify personally identifiable information in the
 	// transcription output.
 	ContentIdentificationType TranscribeContentIdentificationType
 
@@ -868,7 +868,11 @@ type Invite struct {
 // Logs.
 type LoggingConfiguration struct {
 
-	// When true, enables SIP message logs for sending to Amazon CloudWatch Logs.
+	// Boolean that enables logging of detailed media metrics for Voice Connectors to
+	// CloudWatch logs.
+	EnableMediaMetricLogs *bool
+
+	// Boolean that enables SIP message logs to CloudWatch logs.
 	EnableSIPLogs *bool
 
 	noSmithyDocumentSerde
@@ -920,7 +924,7 @@ type MediaPlacement struct {
 	// The audio host URL.
 	AudioHostUrl *string
 
-	// The event ingestion URL.
+	// The event ingestion URL to which you send client meeting events.
 	EventIngestionUrl *string
 
 	// The screen data URL.

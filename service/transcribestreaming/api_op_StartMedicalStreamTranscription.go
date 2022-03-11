@@ -46,7 +46,9 @@ type StartMedicalStreamTranscriptionInput struct {
 	// This member is required.
 	MediaEncoding types.MediaEncoding
 
-	// The sample rate of the input audio in Hertz.
+	// The sample rate of the input audio (in Hertz). Amazon Transcribe medical
+	// supports a range from 16,000 Hz to 48,000 Hz. Note that the sample rate you
+	// specify must match that of your audio.
 	//
 	// This member is required.
 	MediaSampleRateHertz *int32
@@ -110,7 +112,7 @@ type StartMedicalStreamTranscriptionOutput struct {
 	// The encoding used for the input audio stream.
 	MediaEncoding types.MediaEncoding
 
-	// The sample rate of the input audio in Hertz.
+	// The sample rate of the input audio, in Hertz (Hz).
 	MediaSampleRateHertz *int32
 
 	// The number of channels identified in the stream.
