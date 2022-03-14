@@ -1,0 +1,8 @@
+{
+    "id": "cc74cfc1-8401-4bf5-a914-0d81b9b85afe",
+    "type": "feature",
+    "description": "Add resourceType enums for AWS::ECR::PublicRepository and AWS::EC2::LaunchTemplate",
+    "modules": [
+        "service/configservice"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "7a4e481f-4b55-4225-8354-b94045b51742",
+    "type": "documentation",
+    "description": "Doc only update for ElastiCache",
+    "modules": [
+        "service/elasticache"
+    ]
+}

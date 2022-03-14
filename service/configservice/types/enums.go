@@ -677,6 +677,8 @@ const (
 	ResourceTypeCodeDeployApplication            ResourceType = "AWS::CodeDeploy::Application"
 	ResourceTypeCodeDeployDeploymentConfig       ResourceType = "AWS::CodeDeploy::DeploymentConfig"
 	ResourceTypeCodeDeployDeploymentGroup        ResourceType = "AWS::CodeDeploy::DeploymentGroup"
+	ResourceTypeLaunchTemplate                   ResourceType = "AWS::EC2::LaunchTemplate"
+	ResourceTypeECRPublicRepository              ResourceType = "AWS::ECR::PublicRepository"
 )
 
 // Values returns all known values for ResourceType. Note that this can be expanded
@@ -799,6 +801,8 @@ func (ResourceType) Values() []ResourceType {
 		"AWS::CodeDeploy::Application",
 		"AWS::CodeDeploy::DeploymentConfig",
 		"AWS::CodeDeploy::DeploymentGroup",
+		"AWS::EC2::LaunchTemplate",
+		"AWS::ECR::PublicRepository",
 	}
 }
 

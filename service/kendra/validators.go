@@ -1730,6 +1730,11 @@ func validateDataSourceConfiguration(v *types.DataSourceConfiguration) error {
 			invalidParams.AddNested("FsxConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.SlackConfiguration != nil {
+		if err := validateSlackConfiguration(v.SlackConfiguration); err != nil {
+			invalidParams.AddNested("SlackConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2889,6 +2894,40 @@ func validateSiteMapsConfiguration(v *types.SiteMapsConfiguration) error {
 	invalidParams := smithy.InvalidParamsError{Context: "SiteMapsConfiguration"}
 	if v.SiteMaps == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SiteMaps"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSlackConfiguration(v *types.SlackConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SlackConfiguration"}
+	if v.TeamId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TeamId"))
+	}
+	if v.SecretArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecretArn"))
+	}
+	if v.VpcConfiguration != nil {
+		if err := validateDataSourceVpcConfiguration(v.VpcConfiguration); err != nil {
+			invalidParams.AddNested("VpcConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SlackEntityList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SlackEntityList"))
+	}
+	if v.SinceCrawlDate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SinceCrawlDate"))
+	}
+	if v.FieldMappings != nil {
+		if err := validateDataSourceToIndexFieldMappingList(v.FieldMappings); err != nil {
+			invalidParams.AddNested("FieldMappings", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

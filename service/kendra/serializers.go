@@ -3823,6 +3823,13 @@ func awsAwsjson11_serializeDocumentDataSourceConfiguration(v *types.DataSourceCo
 		}
 	}
 
+	if v.SlackConfiguration != nil {
+		ok := object.Key("SlackConfiguration")
+		if err := awsAwsjson11_serializeDocumentSlackConfiguration(v.SlackConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.WebCrawlerConfiguration != nil {
 		ok := object.Key("WebCrawlerConfiguration")
 		if err := awsAwsjson11_serializeDocumentWebCrawlerConfiguration(v.WebCrawlerConfiguration, ok); err != nil {
@@ -4925,6 +4932,17 @@ func awsAwsjson11_serializeDocumentPrincipalList(v []types.Principal, value smit
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentPrivateChannelFilter(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentProxyConfiguration(v *types.ProxyConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4944,6 +4962,17 @@ func awsAwsjson11_serializeDocumentProxyConfiguration(v *types.ProxyConfiguratio
 		ok.Integer(*v.Port)
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPublicChannelFilter(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 
@@ -5670,6 +5699,108 @@ func awsAwsjson11_serializeDocumentSiteMapsList(v []string, value smithyjson.Val
 	for i := range v {
 		av := array.Value()
 		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSlackConfiguration(v *types.SlackConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CrawlBotMessage {
+		ok := object.Key("CrawlBotMessage")
+		ok.Boolean(v.CrawlBotMessage)
+	}
+
+	if v.ExcludeArchived {
+		ok := object.Key("ExcludeArchived")
+		ok.Boolean(v.ExcludeArchived)
+	}
+
+	if v.ExclusionPatterns != nil {
+		ok := object.Key("ExclusionPatterns")
+		if err := awsAwsjson11_serializeDocumentDataSourceInclusionsExclusionsStrings(v.ExclusionPatterns, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FieldMappings != nil {
+		ok := object.Key("FieldMappings")
+		if err := awsAwsjson11_serializeDocumentDataSourceToIndexFieldMappingList(v.FieldMappings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.InclusionPatterns != nil {
+		ok := object.Key("InclusionPatterns")
+		if err := awsAwsjson11_serializeDocumentDataSourceInclusionsExclusionsStrings(v.InclusionPatterns, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LookBackPeriod != nil {
+		ok := object.Key("LookBackPeriod")
+		ok.Integer(*v.LookBackPeriod)
+	}
+
+	if v.PrivateChannelFilter != nil {
+		ok := object.Key("PrivateChannelFilter")
+		if err := awsAwsjson11_serializeDocumentPrivateChannelFilter(v.PrivateChannelFilter, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PublicChannelFilter != nil {
+		ok := object.Key("PublicChannelFilter")
+		if err := awsAwsjson11_serializeDocumentPublicChannelFilter(v.PublicChannelFilter, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SecretArn != nil {
+		ok := object.Key("SecretArn")
+		ok.String(*v.SecretArn)
+	}
+
+	if v.SinceCrawlDate != nil {
+		ok := object.Key("SinceCrawlDate")
+		ok.String(*v.SinceCrawlDate)
+	}
+
+	if v.SlackEntityList != nil {
+		ok := object.Key("SlackEntityList")
+		if err := awsAwsjson11_serializeDocumentSlackEntityList(v.SlackEntityList, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TeamId != nil {
+		ok := object.Key("TeamId")
+		ok.String(*v.TeamId)
+	}
+
+	if v.UseChangeLog {
+		ok := object.Key("UseChangeLog")
+		ok.Boolean(v.UseChangeLog)
+	}
+
+	if v.VpcConfiguration != nil {
+		ok := object.Key("VpcConfiguration")
+		if err := awsAwsjson11_serializeDocumentDataSourceVpcConfiguration(v.VpcConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSlackEntityList(v []types.SlackEntity, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
 	}
 	return nil
 }
