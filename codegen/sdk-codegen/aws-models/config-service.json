@@ -8299,7 +8299,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates and updates the configuration aggregator with the\n\t\t\tselected source accounts and regions. The source account can be\n\t\t\tindividual account(s) or an organization.</p>\n\t\t\n\t\t       <p>\n            <code>accountIds</code> that are passed will be replaced with existing accounts.\n\t\t\tIf you want to add additional accounts into the aggregator, call <code>DescribeAggregator</code> to get the previous accounts and then append new ones.</p>\n\t\t       <note>\n\t\t\t         <p>Config should be enabled in source accounts and regions\n\t\t\t\tyou want to aggregate.</p>\n\t\t\t\n\t\t\t         <p>If your source type is an organization, you must be signed in to the management account or a registered delegated administrator and all the features must be enabled in your organization. \n\t\t\t\tIf the caller is a management account, Config calls <code>EnableAwsServiceAccess</code> API to enable integration between Config and Organizations.\n\t\t\t\tIf the caller is a registered delegated administrator, Config calls <code>ListDelegatedAdministrators</code> API to verify whether the caller is a valid delegated administrator.</p>\n\t\t\t         <p>To register a delegated administrator, see <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/set-up-aggregator-cli.html#register-a-delegated-administrator-cli\">Register a Delegated Administrator</a> in the Config developer guide. </p>\n\t\t       </note>"
+                "smithy.api#documentation": "<p>Creates and updates the configuration aggregator with the\n\t\t\tselected source accounts and regions. The source account can be\n\t\t\tindividual account(s) or an organization.</p>\n\t\t\n\t\t       <p>\n            <code>accountIds</code> that are passed will be replaced with existing accounts.\n\t\t\tIf you want to add additional accounts into the aggregator, call <code>DescribeConfigurationAggregators</code> to get the previous accounts and then append new ones.</p>\n\t\t       <note>\n\t\t\t         <p>Config should be enabled in source accounts and regions\n\t\t\t\tyou want to aggregate.</p>\n\t\t\t\n\t\t\t         <p>If your source type is an organization, you must be signed in to the management account or a registered delegated administrator and all the features must be enabled in your organization. \n\t\t\t\tIf the caller is a management account, Config calls <code>EnableAwsServiceAccess</code> API to enable integration between Config and Organizations.\n\t\t\t\tIf the caller is a registered delegated administrator, Config calls <code>ListDelegatedAdministrators</code> API to verify whether the caller is a valid delegated administrator.</p>\n\t\t\t         <p>To register a delegated administrator, see <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/set-up-aggregator-cli.html#register-a-delegated-administrator-cli\">Register a Delegated Administrator</a> in the Config developer guide. </p>\n\t\t       </note>"
             }
         },
         "com.amazonaws.configservice#PutConfigurationAggregatorRequest": {
@@ -8429,7 +8429,7 @@
                 "TemplateBody": {
                     "target": "com.amazonaws.configservice#TemplateBody",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string containing full conformance pack template body. Structure containing the template body with a minimum length of 1 byte and a maximum length of 51,200 bytes.</p>\n\t\t       <note>\n            <p>You can only use a YAML template with one resource type, that is, config rule and a remediation action. </p>\n         </note>"
+                        "smithy.api#documentation": "<p>A string containing full conformance pack template body. Structure containing the template body with a minimum length of 1 byte and a maximum length of 51,200 bytes.</p>\n\t\t       <note>\n            <p>You can only use a YAML template with two resource types: config rule (<code>AWS::Config::ConfigRule</code>) and a remediation action (<code>AWS::Config::RemediationConfiguration</code>).</p>\n         </note>"
                     }
                 },
                 "DeliveryS3Bucket": {
@@ -10343,6 +10343,14 @@
                     {
                         "value": "AWS::CodeDeploy::DeploymentGroup",
                         "name": "CodeDeployDeploymentGroup"
+                    },
+                    {
+                        "value": "AWS::EC2::LaunchTemplate",
+                        "name": "LaunchTemplate"
+                    },
+                    {
+                        "value": "AWS::ECR::PublicRepository",
+                        "name": "ECRPublicRepository"
                     }
                 ]
             }
