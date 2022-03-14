@@ -1,3 +1,7 @@
+# v1.19.0 (2022-03-14)
+
+* **Feature**: Add resourceType enums for AWS::ECR::PublicRepository and AWS::EC2::LaunchTemplate
+
 # v1.18.0 (2022-03-08)
 
 * **Feature**: Updated `github.com/aws/smithy-go` to latest version

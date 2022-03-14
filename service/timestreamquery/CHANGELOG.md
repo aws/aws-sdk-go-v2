@@ -1,3 +1,7 @@
+# v1.14.0 (2022-03-14)
+
+* **Feature**: Amazon Timestream Scheduled Queries now support Timestamp datatype in a multi-measure record.
+
 # v1.13.0 (2022-03-08)
 
 * **Feature**: Updated `github.com/aws/smithy-go` to latest version

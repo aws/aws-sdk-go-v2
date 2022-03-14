@@ -1,3 +1,15 @@
+# Release (2022-03-14)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/configservice`: [v1.19.0](service/configservice/CHANGELOG.md#v1190-2022-03-14)
+  * **Feature**: Add resourceType enums for AWS::ECR::PublicRepository and AWS::EC2::LaunchTemplate
+* `github.com/aws/aws-sdk-go-v2/service/elasticache`: [v1.20.1](service/elasticache/CHANGELOG.md#v1201-2022-03-14)
+  * **Documentation**: Doc only update for ElastiCache
+* `github.com/aws/aws-sdk-go-v2/service/kendra`: [v1.23.0](service/kendra/CHANGELOG.md#v1230-2022-03-14)
+  * **Feature**: Amazon Kendra now provides a data source connector for Slack. For more information, see https://docs.aws.amazon.com/kendra/latest/dg/data-source-slack.html
+* `github.com/aws/aws-sdk-go-v2/service/timestreamquery`: [v1.14.0](service/timestreamquery/CHANGELOG.md#v1140-2022-03-14)
+  * **Feature**: Amazon Timestream Scheduled Queries now support Timestamp datatype in a multi-measure record.
+
 # Release (2022-03-11)
 
 ## Module Highlights
