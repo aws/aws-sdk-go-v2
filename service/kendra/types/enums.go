@@ -316,6 +316,7 @@ const (
 	DataSourceTypeWebcrawler  DataSourceType = "WEBCRAWLER"
 	DataSourceTypeWorkdocs    DataSourceType = "WORKDOCS"
 	DataSourceTypeFsx         DataSourceType = "FSX"
+	DataSourceTypeSlack       DataSourceType = "SLACK"
 )
 
 // Values returns all known values for DataSourceType. Note that this can be
@@ -335,6 +336,7 @@ func (DataSourceType) Values() []DataSourceType {
 		"WEBCRAWLER",
 		"WORKDOCS",
 		"FSX",
+		"SLACK",
 	}
 }
 
@@ -1033,6 +1035,28 @@ func (SharePointVersion) Values() []SharePointVersion {
 		"SHAREPOINT_2013",
 		"SHAREPOINT_2016",
 		"SHAREPOINT_ONLINE",
+	}
+}
+
+type SlackEntity string
+
+// Enum values for SlackEntity
+const (
+	SlackEntityPublicChannel  SlackEntity = "PUBLIC_CHANNEL"
+	SlackEntityPrivateChannel SlackEntity = "PRIVATE_CHANNEL"
+	SlackEntityGroupMessage   SlackEntity = "GROUP_MESSAGE"
+	SlackEntityDirectMessage  SlackEntity = "DIRECT_MESSAGE"
+)
+
+// Values returns all known values for SlackEntity. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (SlackEntity) Values() []SlackEntity {
+	return []SlackEntity{
+		"PUBLIC_CHANNEL",
+		"PRIVATE_CHANNEL",
+		"GROUP_MESSAGE",
+		"DIRECT_MESSAGE",
 	}
 }
 

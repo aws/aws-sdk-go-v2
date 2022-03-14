@@ -64,10 +64,11 @@ type ScalarMeasureValueType string
 
 // Enum values for ScalarMeasureValueType
 const (
-	ScalarMeasureValueTypeBigint  ScalarMeasureValueType = "BIGINT"
-	ScalarMeasureValueTypeBoolean ScalarMeasureValueType = "BOOLEAN"
-	ScalarMeasureValueTypeDouble  ScalarMeasureValueType = "DOUBLE"
-	ScalarMeasureValueTypeVarchar ScalarMeasureValueType = "VARCHAR"
+	ScalarMeasureValueTypeBigint    ScalarMeasureValueType = "BIGINT"
+	ScalarMeasureValueTypeBoolean   ScalarMeasureValueType = "BOOLEAN"
+	ScalarMeasureValueTypeDouble    ScalarMeasureValueType = "DOUBLE"
+	ScalarMeasureValueTypeVarchar   ScalarMeasureValueType = "VARCHAR"
+	ScalarMeasureValueTypeTimestamp ScalarMeasureValueType = "TIMESTAMP"
 )
 
 // Values returns all known values for ScalarMeasureValueType. Note that this can
@@ -79,6 +80,7 @@ func (ScalarMeasureValueType) Values() []ScalarMeasureValueType {
 		"BOOLEAN",
 		"DOUBLE",
 		"VARCHAR",
+		"TIMESTAMP",
 	}
 }
 

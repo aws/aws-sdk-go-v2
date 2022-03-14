@@ -1,0 +1,8 @@
+{
+    "id": "884a90da-7a78-4fb7-a154-1cb333c2ac0c",
+    "type": "feature",
+    "description": "Amazon Timestream Scheduled Queries now support Timestamp datatype in a multi-measure record.",
+    "modules": [
+        "service/timestreamquery"
+    ]
+}

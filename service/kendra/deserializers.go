@@ -8939,6 +8939,11 @@ func awsAwsjson11_deserializeDocumentDataSourceConfiguration(v **types.DataSourc
 				return err
 			}
 
+		case "SlackConfiguration":
+			if err := awsAwsjson11_deserializeDocumentSlackConfiguration(&sv.SlackConfiguration, value); err != nil {
+				return err
+			}
+
 		case "WebCrawlerConfiguration":
 			if err := awsAwsjson11_deserializeDocumentWebCrawlerConfiguration(&sv.WebCrawlerConfiguration, value); err != nil {
 				return err
@@ -12254,6 +12259,42 @@ func awsAwsjson11_deserializeDocumentPersonasSummaryList(v *[]types.PersonasSumm
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentPrivateChannelFilter(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected String to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentProxyConfiguration(v **types.ProxyConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -12313,6 +12354,42 @@ func awsAwsjson11_deserializeDocumentProxyConfiguration(v **types.ProxyConfigura
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentPublicChannelFilter(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected String to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -14247,6 +14324,175 @@ func awsAwsjson11_deserializeDocumentSiteMapsList(v *[]string, value interface{}
 				return fmt.Errorf("expected SiteMap to be of type string, got %T instead", value)
 			}
 			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentSlackConfiguration(v **types.SlackConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SlackConfiguration
+	if *v == nil {
+		sv = &types.SlackConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CrawlBotMessage":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.CrawlBotMessage = jtv
+			}
+
+		case "ExcludeArchived":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.ExcludeArchived = jtv
+			}
+
+		case "ExclusionPatterns":
+			if err := awsAwsjson11_deserializeDocumentDataSourceInclusionsExclusionsStrings(&sv.ExclusionPatterns, value); err != nil {
+				return err
+			}
+
+		case "FieldMappings":
+			if err := awsAwsjson11_deserializeDocumentDataSourceToIndexFieldMappingList(&sv.FieldMappings, value); err != nil {
+				return err
+			}
+
+		case "InclusionPatterns":
+			if err := awsAwsjson11_deserializeDocumentDataSourceInclusionsExclusionsStrings(&sv.InclusionPatterns, value); err != nil {
+				return err
+			}
+
+		case "LookBackPeriod":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected LookBackPeriod to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.LookBackPeriod = ptr.Int32(int32(i64))
+			}
+
+		case "PrivateChannelFilter":
+			if err := awsAwsjson11_deserializeDocumentPrivateChannelFilter(&sv.PrivateChannelFilter, value); err != nil {
+				return err
+			}
+
+		case "PublicChannelFilter":
+			if err := awsAwsjson11_deserializeDocumentPublicChannelFilter(&sv.PublicChannelFilter, value); err != nil {
+				return err
+			}
+
+		case "SecretArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SecretArn to be of type string, got %T instead", value)
+				}
+				sv.SecretArn = ptr.String(jtv)
+			}
+
+		case "SinceCrawlDate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SinceCrawlDate to be of type string, got %T instead", value)
+				}
+				sv.SinceCrawlDate = ptr.String(jtv)
+			}
+
+		case "SlackEntityList":
+			if err := awsAwsjson11_deserializeDocumentSlackEntityList(&sv.SlackEntityList, value); err != nil {
+				return err
+			}
+
+		case "TeamId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TeamId to be of type string, got %T instead", value)
+				}
+				sv.TeamId = ptr.String(jtv)
+			}
+
+		case "UseChangeLog":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.UseChangeLog = jtv
+			}
+
+		case "VpcConfiguration":
+			if err := awsAwsjson11_deserializeDocumentDataSourceVpcConfiguration(&sv.VpcConfiguration, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentSlackEntityList(v *[]types.SlackEntity, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.SlackEntity
+	if *v == nil {
+		cv = []types.SlackEntity{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.SlackEntity
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected SlackEntity to be of type string, got %T instead", value)
+			}
+			col = types.SlackEntity(jtv)
 		}
 		cv = append(cv, col)
 
