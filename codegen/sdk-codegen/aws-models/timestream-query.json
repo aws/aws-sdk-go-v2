@@ -1484,6 +1484,10 @@
                     {
                         "value": "VARCHAR",
                         "name": "VARCHAR"
+                    },
+                    {
+                        "value": "TIMESTAMP",
+                        "name": "TIMESTAMP"
                     }
                 ]
             }

@@ -981,7 +981,7 @@
                 "CacheParameterGroupFamily": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the cache parameter group family associated with this cache engine.</p>\n        <p>Valid values are: \n    <code>memcached1.4</code> | \n     <code>memcached1.5</code> | \n      <code>memcached1.6</code> | \n    <code>redis2.6</code> | \n    <code>redis2.8</code> |\n    <code>redis3.2</code> |\n    <code>redis4.0</code> |\n     <code>redis5.0</code> | \n      <code>redis6.0</code> | \n            <code>redis6.2</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The name of the cache parameter group family associated with this cache engine.</p>\n        <p>Valid values are: \n    <code>memcached1.4</code> | \n     <code>memcached1.5</code> | \n      <code>memcached1.6</code> | \n    <code>redis2.6</code> | \n    <code>redis2.8</code> |\n    <code>redis3.2</code> |\n    <code>redis4.0</code> |\n     <code>redis5.0</code> | \n      <code>redis6.x</code> \n         </p>"
                     }
                 },
                 "CacheEngineDescription": {
@@ -5256,7 +5256,7 @@
                 "CacheParameterGroupFamily": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the name of the cache parameter group family to which the engine default parameters apply.</p>\n        <p>Valid values are: \n    <code>memcached1.4</code> | \n     <code>memcached1.5</code> | \n      <code>memcached1.6</code> | \n    <code>redis2.6</code> | \n    <code>redis2.8</code> |\n    <code>redis3.2</code> |\n    <code>redis4.0</code> |\n     <code>redis5.0</code> | \n      <code>redis6.0</code> | \n            <code>redis6.2</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Specifies the name of the cache parameter group family to which the engine default parameters apply.</p>\n        <p>Valid values are: \n    <code>memcached1.4</code> | \n     <code>memcached1.5</code> | \n      <code>memcached1.6</code> | \n    <code>redis2.6</code> | \n    <code>redis2.8</code> |\n    <code>redis3.2</code> |\n    <code>redis4.0</code> |\n     <code>redis5.0</code> | \n      <code>redis6.0</code> | \n            <code>redis6.x</code>\n         </p>"
                     }
                 },
                 "Marker": {
