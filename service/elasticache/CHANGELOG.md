@@ -1,3 +1,7 @@
+# v1.20.1 (2022-03-14)
+
+* **Documentation**: Doc only update for ElastiCache
+
 # v1.20.0 (2022-03-08)
 
 * **Feature**: Updated `github.com/aws/smithy-go` to latest version

@@ -15,7 +15,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.16.0
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.13.0
 	github.com/aws/aws-sdk-go-v2/service/cloudsearch v1.13.0
-	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.15.1
+	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.15.2
 	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.17.0
 	github.com/aws/aws-sdk-go-v2/service/codebuild v1.19.0
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.13.0
@@ -23,7 +23,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.13.0
 	github.com/aws/aws-sdk-go-v2/service/codestar v1.11.0
 	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.14.0
-	github.com/aws/aws-sdk-go-v2/service/configservice v1.18.0
+	github.com/aws/aws-sdk-go-v2/service/configservice v1.19.0
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.13.0
 	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.18.0
 	github.com/aws/aws-sdk-go-v2/service/devicefarm v1.13.0
@@ -35,7 +35,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.16.0
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.18.0
 	github.com/aws/aws-sdk-go-v2/service/efs v1.16.0
-	github.com/aws/aws-sdk-go-v2/service/elasticache v1.20.0
+	github.com/aws/aws-sdk-go-v2/service/elasticache v1.20.1
 	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.14.0
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing v1.14.0
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2 v1.18.0
