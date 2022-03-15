@@ -71,9 +71,8 @@
                     "hostPrefix": "tracking."
                 },
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/tracking/v0/trackers/{TrackerName}/consumers",
-                    "code": 200
+                    "method": "POST"
                 }
             }
         },
@@ -132,9 +131,8 @@
                     "hostPrefix": "tracking."
                 },
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/tracking/v0/trackers/{TrackerName}/delete-positions",
-                    "code": 200
+                    "method": "POST"
                 }
             }
         },
@@ -232,9 +230,8 @@
                     "hostPrefix": "geofencing."
                 },
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/geofencing/v0/collections/{CollectionName}/delete-geofences",
-                    "code": 200
+                    "method": "POST"
                 }
             }
         },
@@ -333,9 +330,8 @@
                     "hostPrefix": "geofencing."
                 },
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/geofencing/v0/collections/{CollectionName}/positions",
-                    "code": 200
+                    "method": "POST"
                 }
             }
         },
@@ -441,9 +437,8 @@
                     "hostPrefix": "tracking."
                 },
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/tracking/v0/trackers/{TrackerName}/get-positions",
-                    "code": 200
+                    "method": "POST"
                 },
                 "smithy.api#readonly": {}
             }
@@ -604,9 +599,8 @@
                     "hostPrefix": "geofencing."
                 },
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/geofencing/v0/collections/{CollectionName}/put-geofences",
-                    "code": 200
+                    "method": "POST"
                 }
             }
         },
@@ -775,9 +769,8 @@
                     "hostPrefix": "tracking."
                 },
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/tracking/v0/trackers/{TrackerName}/positions",
-                    "code": 200
+                    "method": "POST"
                 }
             }
         },
@@ -899,9 +892,8 @@
                     "hostPrefix": "routes."
                 },
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/routes/v0/calculators/{CalculatorName}/calculate/route",
-                    "code": 200
+                    "method": "POST"
                 },
                 "smithy.api#readonly": {}
             }
@@ -957,9 +949,8 @@
                     "hostPrefix": "routes."
                 },
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/routes/v0/calculators/{CalculatorName}/calculate/route-matrix",
-                    "code": 200
+                    "method": "POST"
                 },
                 "smithy.api#readonly": {}
             }
@@ -1282,7 +1273,7 @@
                 "AvoidTolls": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Avoids ferries when calculating routes.</p>\n        <p>Default Value: <code>false</code>\n         </p>\n        <p>Valid Values: <code>false</code> | <code>true</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Avoids tolls when calculating routes.</p>\n        <p>Default Value: <code>false</code>\n         </p>\n        <p>Valid Values: <code>false</code> | <code>true</code>\n         </p>"
                     }
                 },
                 "Dimensions": {
@@ -1368,9 +1359,8 @@
                     "hostPrefix": "geofencing."
                 },
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/geofencing/v0/collections",
-                    "code": 200
+                    "method": "POST"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -1389,8 +1379,8 @@
                     "target": "com.amazonaws.location#PricingPlan",
                     "traits": {
                         "smithy.api#deprecated": {
-                            "since": "2022-02-01",
-                            "message": "Deprecated. If included, the only allowed value is RequestBasedUsage."
+                            "message": "Deprecated. If included, the only allowed value is RequestBasedUsage.",
+                            "since": "2022-02-01"
                         },
                         "smithy.api#documentation": "<p>No longer used. If included, the only allowed value is \n            <code>RequestBasedUsage</code>.</p>"
                     }
@@ -1399,8 +1389,8 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#deprecated": {
-                            "since": "2022-02-01",
-                            "message": "Deprecated. No longer allowed."
+                            "message": "Deprecated. No longer allowed.",
+                            "since": "2022-02-01"
                         },
                         "smithy.api#documentation": "<p>This parameter is no longer used.</p>"
                     }
@@ -1482,9 +1472,8 @@
                     "hostPrefix": "maps."
                 },
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/maps/v0/maps",
-                    "code": 200
+                    "method": "POST"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -1510,8 +1499,8 @@
                     "target": "com.amazonaws.location#PricingPlan",
                     "traits": {
                         "smithy.api#deprecated": {
-                            "since": "2022-02-01",
-                            "message": "Deprecated. If included, the only allowed value is RequestBasedUsage."
+                            "message": "Deprecated. If included, the only allowed value is RequestBasedUsage.",
+                            "since": "2022-02-01"
                         },
                         "smithy.api#documentation": "<p>No longer used. If included, the only allowed value is \n            <code>RequestBasedUsage</code>.</p>"
                     }
@@ -1587,9 +1576,8 @@
                     "hostPrefix": "places."
                 },
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/places/v0/indexes",
-                    "code": 200
+                    "method": "POST"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -1615,8 +1603,8 @@
                     "target": "com.amazonaws.location#PricingPlan",
                     "traits": {
                         "smithy.api#deprecated": {
-                            "since": "2022-02-01",
-                            "message": "Deprecated. If included, the only allowed value is RequestBasedUsage."
+                            "message": "Deprecated. If included, the only allowed value is RequestBasedUsage.",
+                            "since": "2022-02-01"
                         },
                         "smithy.api#documentation": "<p>No longer used. If included, the only allowed value is \n         <code>RequestBasedUsage</code>.</p>"
                     }
@@ -1698,9 +1686,8 @@
                     "hostPrefix": "routes."
                 },
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/routes/v0/calculators",
-                    "code": 200
+                    "method": "POST"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -1726,8 +1713,8 @@
                     "target": "com.amazonaws.location#PricingPlan",
                     "traits": {
                         "smithy.api#deprecated": {
-                            "since": "2022-02-01",
-                            "message": "Deprecated. If included, the only allowed value is RequestBasedUsage."
+                            "message": "Deprecated. If included, the only allowed value is RequestBasedUsage.",
+                            "since": "2022-02-01"
                         },
                         "smithy.api#documentation": "<p>No longer used. If included, the only allowed value is \n            <code>RequestBasedUsage</code>.</p>"
                     }
@@ -1803,9 +1790,8 @@
                     "hostPrefix": "tracking."
                 },
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/tracking/v0/trackers",
-                    "code": 200
+                    "method": "POST"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -1824,8 +1810,8 @@
                     "target": "com.amazonaws.location#PricingPlan",
                     "traits": {
                         "smithy.api#deprecated": {
-                            "since": "2022-02-01",
-                            "message": "Deprecated. If included, the only allowed value is RequestBasedUsage."
+                            "message": "Deprecated. If included, the only allowed value is RequestBasedUsage.",
+                            "since": "2022-02-01"
                         },
                         "smithy.api#documentation": "<p>No longer used. If included, the only allowed value is \n           <code>RequestBasedUsage</code>.</p>"
                     }
@@ -1840,8 +1826,8 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#deprecated": {
-                            "since": "2022-02-01",
-                            "message": "Deprecated. No longer allowed."
+                            "message": "Deprecated. No longer allowed.",
+                            "since": "2022-02-01"
                         },
                         "smithy.api#documentation": "<p>This parameter is no longer used.</p>"
                     }
@@ -1937,9 +1923,8 @@
                     "hostPrefix": "geofencing."
                 },
                 "smithy.api#http": {
-                    "method": "DELETE",
                     "uri": "/geofencing/v0/collections/{CollectionName}",
-                    "code": 200
+                    "method": "DELETE"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -1992,8 +1977,8 @@
                     "hostPrefix": "maps."
                 },
                 "smithy.api#http": {
-                    "method": "DELETE",
                     "uri": "/maps/v0/maps/{MapName}",
+                    "method": "DELETE",
                     "code": 200
                 },
                 "smithy.api#idempotent": {}
@@ -2047,8 +2032,8 @@
                     "hostPrefix": "places."
                 },
                 "smithy.api#http": {
-                    "method": "DELETE",
                     "uri": "/places/v0/indexes/{IndexName}",
+                    "method": "DELETE",
                     "code": 200
                 },
                 "smithy.api#idempotent": {}
@@ -2102,8 +2087,8 @@
                     "hostPrefix": "routes."
                 },
                 "smithy.api#http": {
-                    "method": "DELETE",
                     "uri": "/routes/v0/calculators/{CalculatorName}",
+                    "method": "DELETE",
                     "code": 200
                 },
                 "smithy.api#idempotent": {}
@@ -2157,9 +2142,8 @@
                     "hostPrefix": "tracking."
                 },
                 "smithy.api#http": {
-                    "method": "DELETE",
                     "uri": "/tracking/v0/trackers/{TrackerName}",
-                    "code": 200
+                    "method": "DELETE"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -2212,9 +2196,8 @@
                     "hostPrefix": "geofencing."
                 },
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/geofencing/v0/collections/{CollectionName}",
-                    "code": 200
+                    "method": "GET"
                 },
                 "smithy.api#readonly": {}
             }
@@ -2260,8 +2243,8 @@
                     "target": "com.amazonaws.location#PricingPlan",
                     "traits": {
                         "smithy.api#deprecated": {
-                            "since": "2022-02-01",
-                            "message": "Deprecated. Always returns RequestBasedUsage."
+                            "message": "Deprecated. Always returns RequestBasedUsage.",
+                            "since": "2022-02-01"
                         },
                         "smithy.api#documentation": "<p>No longer used. Always returns <code>RequestBasedUsage</code>.</p>"
                     }
@@ -2270,8 +2253,8 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#deprecated": {
-                            "since": "2022-02-01",
-                            "message": "Deprecated. Unused."
+                            "message": "Deprecated. Unused.",
+                            "since": "2022-02-01"
                         },
                         "smithy.api#documentation": "<p>No longer used. Always returns an empty string.</p>"
                     }
@@ -2335,9 +2318,8 @@
                     "hostPrefix": "maps."
                 },
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/maps/v0/maps/{MapName}",
-                    "code": 200
+                    "method": "GET"
                 },
                 "smithy.api#readonly": {}
             }
@@ -2376,8 +2358,8 @@
                     "target": "com.amazonaws.location#PricingPlan",
                     "traits": {
                         "smithy.api#deprecated": {
-                            "since": "2022-02-01",
-                            "message": "Deprecated. Always returns RequestBasedUsage."
+                            "message": "Deprecated. Always returns RequestBasedUsage.",
+                            "since": "2022-02-01"
                         },
                         "smithy.api#documentation": "<p>No longer used. Always returns <code>RequestBasedUsage</code>.</p>"
                     }
@@ -2456,9 +2438,8 @@
                     "hostPrefix": "places."
                 },
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/places/v0/indexes/{IndexName}",
-                    "code": 200
+                    "method": "GET"
                 },
                 "smithy.api#readonly": {}
             }
@@ -2497,8 +2478,8 @@
                     "target": "com.amazonaws.location#PricingPlan",
                     "traits": {
                         "smithy.api#deprecated": {
-                            "since": "2022-02-01",
-                            "message": "Deprecated. Always returns RequestBasedUsage."
+                            "message": "Deprecated. Always returns RequestBasedUsage.",
+                            "since": "2022-02-01"
                         },
                         "smithy.api#documentation": "<p>No longer used. Always returns <code>RequestBasedUsage</code>.</p>"
                     }
@@ -2577,9 +2558,8 @@
                     "hostPrefix": "routes."
                 },
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/routes/v0/calculators/{CalculatorName}",
-                    "code": 200
+                    "method": "GET"
                 },
                 "smithy.api#readonly": {}
             }
@@ -2618,8 +2598,8 @@
                     "target": "com.amazonaws.location#PricingPlan",
                     "traits": {
                         "smithy.api#deprecated": {
-                            "since": "2022-02-01",
-                            "message": "Deprecated. Always returns RequestBasedUsage."
+                            "message": "Deprecated. Always returns RequestBasedUsage.",
+                            "since": "2022-02-01"
                         },
                         "smithy.api#documentation": "<p>Always returns <code>RequestBasedUsage</code>.</p>"
                     }
@@ -2691,9 +2671,8 @@
                     "hostPrefix": "tracking."
                 },
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/tracking/v0/trackers/{TrackerName}",
-                    "code": 200
+                    "method": "GET"
                 },
                 "smithy.api#readonly": {}
             }
@@ -2739,8 +2718,8 @@
                     "target": "com.amazonaws.location#PricingPlan",
                     "traits": {
                         "smithy.api#deprecated": {
-                            "since": "2022-02-01",
-                            "message": "Deprecated. Always returns RequestBasedUsage."
+                            "message": "Deprecated. Always returns RequestBasedUsage.",
+                            "since": "2022-02-01"
                         },
                         "smithy.api#documentation": "<p>Always returns <code>RequestBasedUsage</code>.</p>"
                     }
@@ -2749,8 +2728,8 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#deprecated": {
-                            "since": "2022-02-01",
-                            "message": "Deprecated. Unused."
+                            "message": "Deprecated. Unused.",
+                            "since": "2022-02-01"
                         },
                         "smithy.api#documentation": "<p>No longer used. Always returns an empty string.</p>"
                     }
@@ -2868,7 +2847,7 @@
                 "Position": {
                     "target": "com.amazonaws.location#Position",
                     "traits": {
-                        "smithy.api#documentation": "<p>The latest device position defined in <a href=\"https://earth-info.nga.mil/GandG/wgs84/index.html\">WGS 84</a> format:\n                <code>[X or longitude, Y or latitude]</code>.</p>",
+                        "smithy.api#documentation": "<p>The latest device position defined in <a href=\"https://earth-info.nga.mil/index.php?dir=wgs84&amp;action=wgs84\">WGS 84</a> format:\n            <code>[X or longitude, Y or latitude]</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2939,9 +2918,8 @@
                     "hostPrefix": "tracking."
                 },
                 "smithy.api#http": {
-                    "method": "DELETE",
                     "uri": "/tracking/v0/trackers/{TrackerName}/consumers/{ConsumerArn}",
-                    "code": 200
+                    "method": "DELETE"
                 }
             }
         },
@@ -3049,10 +3027,7 @@
             ],
             "traits": {
                 "aws.api#arn": {
-                    "template": "geofence-collection/{CollectionName}",
-                    "absolute": false,
-                    "noAccount": false,
-                    "noRegion": false
+                    "template": "geofence-collection/{CollectionName}"
                 },
                 "aws.iam#disableConditionKeyInference": {}
             }
@@ -3102,9 +3077,8 @@
                     "hostPrefix": "tracking."
                 },
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/tracking/v0/trackers/{TrackerName}/devices/{DeviceId}/positions/latest",
-                    "code": 200
+                    "method": "GET"
                 },
                 "smithy.api#readonly": {}
             }
@@ -3140,9 +3114,8 @@
                     "hostPrefix": "tracking."
                 },
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/tracking/v0/trackers/{TrackerName}/devices/{DeviceId}/list-positions",
-                    "code": 200
+                    "method": "POST"
                 },
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
@@ -3305,9 +3278,8 @@
                     "hostPrefix": "geofencing."
                 },
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/geofencing/v0/collections/{CollectionName}/geofences/{GeofenceId}",
-                    "code": 200
+                    "method": "GET"
                 },
                 "smithy.api#readonly": {}
             }
@@ -3404,9 +3376,8 @@
                     "hostPrefix": "maps."
                 },
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/maps/v0/maps/{MapName}/glyphs/{FontStack}/{FontUnicodeRange}",
-                    "code": 200
+                    "method": "GET"
                 },
                 "smithy.api#readonly": {}
             }
@@ -3425,7 +3396,7 @@
                 "FontStack": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A comma-separated list of fonts to load glyphs from in order of preference. For\n            example, <code>Noto Sans Regular, Arial Unicode</code>.</p>\n        <p>Valid fonts stacks for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/esri.html\">Esri</a> styles: </p>\n        <ul>\n            <li>\n                <p>VectorEsriDarkGrayCanvas – <code>Ubuntu Medium Italic</code> | <code>Ubuntu\n                        Medium</code> | <code>Ubuntu Italic</code> | <code>Ubuntu Regular</code> |\n                        <code>Ubuntu Bold</code>\n               </p>\n            </li>\n            <li>\n                <p>VectorEsriLightGrayCanvas – <code>Ubuntu Italic</code> | <code>Ubuntu\n                        Regular</code> | <code>Ubuntu Light</code> | <code>Ubuntu Bold</code>\n               </p>\n            </li>\n            <li>\n                <p>VectorEsriTopographic – <code>Noto Sans Italic</code> | <code>Noto Sans\n                        Regular</code> | <code>Noto Sans Bold</code> | <code>Noto Serif\n                        Regular</code> | <code>Roboto Condensed Light Italic</code>\n               </p>\n            </li>\n            <li>\n                <p>VectorEsriStreets – <code>Arial Regular</code> | <code>Arial Italic</code> |\n                        <code>Arial Bold</code>\n               </p>\n            </li>\n            <li>\n                <p>VectorEsriNavigation – <code>Arial Regular</code> | <code>Arial Italic</code>\n                    | <code>Arial Bold</code>\n               </p>\n            </li>\n         </ul>\n        <p>Valid font stacks for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/HERE.html\">HERE Technologies</a> styles: </p>\n        <ul>\n            <li>\n                <p>VectorHereBerlin – <code>Fira GO Regular</code> | <code>Fira GO\n                        Bold</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>A comma-separated list of fonts to load glyphs from in order of preference. For\n            example, <code>Noto Sans Regular, Arial Unicode</code>.</p>\n        <p>Valid fonts stacks for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/esri.html\">Esri</a> styles: </p>\n        <ul>\n            <li>\n                <p>VectorEsriDarkGrayCanvas – <code>Ubuntu Medium Italic</code> | <code>Ubuntu\n                        Medium</code> | <code>Ubuntu Italic</code> | <code>Ubuntu Regular</code> |\n                        <code>Ubuntu Bold</code>\n               </p>\n            </li>\n            <li>\n                <p>VectorEsriLightGrayCanvas – <code>Ubuntu Italic</code> | <code>Ubuntu\n                        Regular</code> | <code>Ubuntu Light</code> | <code>Ubuntu Bold</code>\n               </p>\n            </li>\n            <li>\n                <p>VectorEsriTopographic – <code>Noto Sans Italic</code> | <code>Noto Sans\n                        Regular</code> | <code>Noto Sans Bold</code> | <code>Noto Serif\n                        Regular</code> | <code>Roboto Condensed Light Italic</code>\n               </p>\n            </li>\n            <li>\n                <p>VectorEsriStreets – <code>Arial Regular</code> | <code>Arial Italic</code> |\n                        <code>Arial Bold</code>\n               </p>\n            </li>\n            <li>\n                <p>VectorEsriNavigation – <code>Arial Regular</code> | <code>Arial Italic</code>\n                    | <code>Arial Bold</code>\n               </p>\n            </li>\n         </ul>\n        <p>Valid font stacks for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/HERE.html\">HERE Technologies</a> styles: </p>\n        <ul>\n            <li>\n                <p>VectorHereBerlin – <code>Fira \n                    GO Regular</code> | <code>Fira GO Bold</code>\n               </p>\n            </li>\n            <li>\n                <p>VectorHereExplore, VectorHereExploreTruck – <code>Firo GO Italic</code> | \n                    <code>Fira GO Map</code> | <code>Fira GO Map Bold</code> | <code>Noto Sans CJK \n                    JP Bold</code> | <code>Noto Sans CJK JP Light</code> | <code>Noto Sans CJK \n                    JP Regular</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3496,9 +3467,8 @@
                     "hostPrefix": "maps."
                 },
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/maps/v0/maps/{MapName}/sprites/{FileName}",
-                    "code": 200
+                    "method": "GET"
                 },
                 "smithy.api#readonly": {}
             }
@@ -3575,9 +3545,8 @@
                     "hostPrefix": "maps."
                 },
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/maps/v0/maps/{MapName}/style-descriptor",
-                    "code": 200
+                    "method": "GET"
                 },
                 "smithy.api#readonly": {}
             }
@@ -3648,9 +3617,8 @@
                     "hostPrefix": "maps."
                 },
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/maps/v0/maps/{MapName}/tiles/{Z}/{X}/{Y}",
-                    "code": 200
+                    "method": "GET"
                 },
                 "smithy.api#readonly": {}
             }
@@ -3923,15 +3891,14 @@
                     "hostPrefix": "tracking."
                 },
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/tracking/v0/trackers/{TrackerName}/list-positions",
-                    "code": 200
+                    "method": "POST"
                 },
                 "smithy.api#paginated": {
+                    "pageSize": "MaxResults",
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
-                    "items": "Entries",
-                    "pageSize": "MaxResults"
+                    "items": "Entries"
                 },
                 "smithy.api#readonly": {}
             }
@@ -4058,15 +4025,14 @@
                     "hostPrefix": "geofencing."
                 },
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/geofencing/v0/list-collections",
-                    "code": 200
+                    "method": "POST"
                 },
                 "smithy.api#paginated": {
+                    "pageSize": "MaxResults",
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
-                    "items": "Entries",
-                    "pageSize": "MaxResults"
+                    "items": "Entries"
                 },
                 "smithy.api#readonly": {}
             }
@@ -4131,8 +4097,8 @@
                     "target": "com.amazonaws.location#PricingPlan",
                     "traits": {
                         "smithy.api#deprecated": {
-                            "since": "2022-02-01",
-                            "message": "Deprecated. Always returns RequestBasedUsage."
+                            "message": "Deprecated. Always returns RequestBasedUsage.",
+                            "since": "2022-02-01"
                         },
                         "smithy.api#documentation": "<p>No longer used. Always returns <code>RequestBasedUsage</code>.</p>"
                     }
@@ -4141,8 +4107,8 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#deprecated": {
-                            "since": "2022-02-01",
-                            "message": "Deprecated. Unused."
+                            "message": "Deprecated. Unused.",
+                            "since": "2022-02-01"
                         },
                         "smithy.api#documentation": "<p>No longer used. Always returns an empty string.</p>"
                     }
@@ -4252,9 +4218,8 @@
                     "hostPrefix": "geofencing."
                 },
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/geofencing/v0/collections/{CollectionName}/list-geofences",
-                    "code": 200
+                    "method": "POST"
                 },
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
@@ -4329,15 +4294,14 @@
                     "hostPrefix": "maps."
                 },
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/maps/v0/list-maps",
-                    "code": 200
+                    "method": "POST"
                 },
                 "smithy.api#paginated": {
+                    "pageSize": "MaxResults",
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
-                    "items": "Entries",
-                    "pageSize": "MaxResults"
+                    "items": "Entries"
                 },
                 "smithy.api#readonly": {}
             }
@@ -4409,8 +4373,8 @@
                     "target": "com.amazonaws.location#PricingPlan",
                     "traits": {
                         "smithy.api#deprecated": {
-                            "since": "2022-02-01",
-                            "message": "Deprecated. Always returns RequestBasedUsage."
+                            "message": "Deprecated. Always returns RequestBasedUsage.",
+                            "since": "2022-02-01"
                         },
                         "smithy.api#documentation": "<p>No longer used. Always returns <code>RequestBasedUsage</code>.</p>"
                     }
@@ -4468,15 +4432,14 @@
                     "hostPrefix": "places."
                 },
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/places/v0/list-indexes",
-                    "code": 200
+                    "method": "POST"
                 },
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
-                    "items": "Entries",
-                    "pageSize": "MaxResults"
+                    "pageSize": "MaxResults",
+                    "items": "Entries"
                 },
                 "smithy.api#readonly": {}
             }
@@ -4548,8 +4511,8 @@
                     "target": "com.amazonaws.location#PricingPlan",
                     "traits": {
                         "smithy.api#deprecated": {
-                            "since": "2022-02-01",
-                            "message": "Deprecated. Always returns RequestBasedUsage."
+                            "message": "Deprecated. Always returns RequestBasedUsage.",
+                            "since": "2022-02-01"
                         },
                         "smithy.api#documentation": "<p>No longer used. Always returns <code>RequestBasedUsage</code>.</p>"
                     }
@@ -4607,15 +4570,14 @@
                     "hostPrefix": "routes."
                 },
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/routes/v0/list-calculators",
-                    "code": 200
+                    "method": "POST"
                 },
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
-                    "items": "Entries",
-                    "pageSize": "MaxResults"
+                    "pageSize": "MaxResults",
+                    "items": "Entries"
                 },
                 "smithy.api#readonly": {}
             }
@@ -4687,8 +4649,8 @@
                     "target": "com.amazonaws.location#PricingPlan",
                     "traits": {
                         "smithy.api#deprecated": {
-                            "since": "2022-02-01",
-                            "message": "Deprecated. Always returns RequestBasedUsage."
+                            "message": "Deprecated. Always returns RequestBasedUsage.",
+                            "since": "2022-02-01"
                         },
                         "smithy.api#documentation": "<p>Always returns <code>RequestBasedUsage</code>.</p>"
                     }
@@ -4750,8 +4712,7 @@
                 },
                 "smithy.api#http": {
                     "method": "GET",
-                    "uri": "/tags/{ResourceArn}",
-                    "code": 200
+                    "uri": "/tags/{ResourceArn}"
                 },
                 "smithy.api#readonly": {}
             }
@@ -4811,15 +4772,14 @@
                     "hostPrefix": "tracking."
                 },
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/tracking/v0/trackers/{TrackerName}/list-consumers",
-                    "code": 200
+                    "method": "POST"
                 },
                 "smithy.api#paginated": {
+                    "pageSize": "MaxResults",
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
-                    "items": "ConsumerArns",
-                    "pageSize": "MaxResults"
+                    "items": "ConsumerArns"
                 },
                 "smithy.api#readonly": {}
             }
@@ -4899,15 +4859,14 @@
                     "hostPrefix": "tracking."
                 },
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/tracking/v0/list-trackers",
-                    "code": 200
+                    "method": "POST"
                 },
                 "smithy.api#paginated": {
+                    "pageSize": "MaxResults",
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
-                    "items": "Entries",
-                    "pageSize": "MaxResults"
+                    "items": "Entries"
                 },
                 "smithy.api#readonly": {}
             }
@@ -4972,8 +4931,8 @@
                     "target": "com.amazonaws.location#PricingPlan",
                     "traits": {
                         "smithy.api#deprecated": {
-                            "since": "2022-02-01",
-                            "message": "Deprecated. Always returns RequestBasedUsage."
+                            "message": "Deprecated. Always returns RequestBasedUsage.",
+                            "since": "2022-02-01"
                         },
                         "smithy.api#documentation": "<p>Always returns <code>RequestBasedUsage</code>.</p>"
                     }
@@ -4982,8 +4941,8 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#deprecated": {
-                            "since": "2022-02-01",
-                            "message": "Deprecated. Unused."
+                            "message": "Deprecated. Unused.",
+                            "since": "2022-02-01"
                         },
                         "smithy.api#documentation": "<p>No longer used. Always returns an empty string.</p>"
                     }
@@ -5018,10 +4977,7 @@
             "traits": {
                 "aws.api#service": {
                     "sdkId": "Location",
-                    "arnNamespace": "geo",
-                    "cloudFormationName": "LocationService",
-                    "cloudTrailEventSource": "geo.amazonaws.com",
-                    "endpointPrefix": "geo"
+                    "arnNamespace": "geo"
                 },
                 "aws.auth#sigv4": {
                     "name": "geo"
@@ -5058,7 +5014,7 @@
                 "Style": {
                     "target": "com.amazonaws.location#MapStyle",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the map style selected from an available data provider.</p>\n        <p>Valid <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/esri.html\">Esri map styles</a>:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>VectorEsriDarkGrayCanvas</code> – The Esri Dark Gray Canvas map style. A\n                    vector basemap with a dark gray, neutral background with minimal colors, labels,\n                    and features that's designed to draw attention to your thematic content. </p>\n            </li>\n            <li>\n                <p>\n                  <code>RasterEsriImagery</code> – The Esri Imagery map style. A raster basemap\n                    that provides one meter or better satellite and aerial imagery in many parts of\n                    the world and lower resolution satellite imagery worldwide. </p>\n            </li>\n            <li>\n                <p>\n                  <code>VectorEsriLightGrayCanvas</code> – The Esri Light Gray Canvas map style,\n                    which provides a detailed vector basemap with a light gray, neutral background\n                    style with minimal colors, labels, and features that's designed to draw\n                    attention to your thematic content. </p>\n            </li>\n            <li>\n                <p>\n                  <code>VectorEsriTopographic</code> – The Esri Light map style, which provides\n                    a detailed vector basemap with a classic Esri map style.</p>\n            </li>\n            <li>\n                <p>\n                  <code>VectorEsriStreets</code> – The Esri World Streets map style, which\n                    provides a detailed vector basemap for the world symbolized with a classic Esri\n                    street map style. The vector tile layer is similar in content and style to the\n                    World Street Map raster map.</p>\n            </li>\n            <li>\n                <p>\n                  <code>VectorEsriNavigation</code> – The Esri World Navigation map style, which\n                    provides a detailed basemap for the world symbolized with a custom navigation\n                    map style that's designed for use during the day in mobile devices.</p>\n            </li>\n         </ul>\n        <p>Valid <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/HERE.html\">HERE\n                Technologies map styles</a>:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>VectorHereBerlin</code> – The HERE Berlin map style is a high contrast\n                    detailed base map of the world that blends 3D and 2D rendering.</p>\n                <note>\n                    <p>When using HERE as your data provider, and selecting the Style\n                            <code>VectorHereBerlin</code>, you may not use HERE Technologies maps\n                        for Asset Management. See the <a href=\"https://aws.amazon.com/service-terms/\">AWS Service Terms</a>\n                        for Amazon Location Service.</p>\n                </note>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies the map style selected from an available data provider.</p>\n        <p>Valid <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/esri.html\">Esri map styles</a>:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>VectorEsriDarkGrayCanvas</code> – The Esri Dark Gray Canvas map style. A\n                    vector basemap with a dark gray, neutral background with minimal colors, labels,\n                    and features that's designed to draw attention to your thematic content. </p>\n            </li>\n            <li>\n                <p>\n                  <code>RasterEsriImagery</code> – The Esri Imagery map style. A raster basemap\n                    that provides one meter or better satellite and aerial imagery in many parts of\n                    the world and lower resolution satellite imagery worldwide. </p>\n            </li>\n            <li>\n                <p>\n                  <code>VectorEsriLightGrayCanvas</code> – The Esri Light Gray Canvas map style,\n                    which provides a detailed vector basemap with a light gray, neutral background\n                    style with minimal colors, labels, and features that's designed to draw\n                    attention to your thematic content. </p>\n            </li>\n            <li>\n                <p>\n                  <code>VectorEsriTopographic</code> – The Esri Light map style, which provides\n                    a detailed vector basemap with a classic Esri map style.</p>\n            </li>\n            <li>\n                <p>\n                  <code>VectorEsriStreets</code> – The Esri World Streets map style, which\n                    provides a detailed vector basemap for the world symbolized with a classic Esri\n                    street map style. The vector tile layer is similar in content and style to the\n                    World Street Map raster map.</p>\n            </li>\n            <li>\n                <p>\n                  <code>VectorEsriNavigation</code> – The Esri World Navigation map style, which\n                    provides a detailed basemap for the world symbolized with a custom navigation\n                    map style that's designed for use during the day in mobile devices.</p>\n            </li>\n         </ul>\n        <p>Valid <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/HERE.html\">HERE\n                Technologies map styles</a>:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>VectorHereBerlin</code> – The HERE Berlin map style is a high contrast\n                    detailed base map of the world that blends 3D and 2D rendering.</p>\n            </li>\n            <li>\n                <p>\n                  <code>VectorHereExplore</code> – A default HERE map style containing a \n                    neutral, global map and its features including roads, buildings, landmarks, \n                    and water features. It also now includes a fully designed map of Japan.</p>\n            </li>\n            <li>\n                <p>\n                  <code>VectorHereExploreTruck</code> – A global map containing truck \n                    restrictions and attributes (e.g. width / height / HAZMAT) symbolized with \n                    highlighted segments and icons on top of HERE Explore to support use cases \n                    within transport and logistics.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5105,10 +5061,7 @@
             ],
             "traits": {
                 "aws.api#arn": {
-                    "template": "map/{MapName}",
-                    "absolute": false,
-                    "noAccount": false,
-                    "noRegion": false
+                    "template": "map/{MapName}"
                 },
                 "aws.iam#disableConditionKeyInference": {}
             }
@@ -5252,10 +5205,7 @@
             ],
             "traits": {
                 "aws.api#arn": {
-                    "template": "place-index/{IndexName}",
-                    "absolute": false,
-                    "noAccount": false,
-                    "noRegion": false
+                    "template": "place-index/{IndexName}"
                 },
                 "aws.iam#disableConditionKeyInference": {}
             }
@@ -5410,9 +5360,8 @@
                     "hostPrefix": "geofencing."
                 },
                 "smithy.api#http": {
-                    "method": "PUT",
                     "uri": "/geofencing/v0/collections/{CollectionName}/geofences/{GeofenceId}",
-                    "code": 200
+                    "method": "PUT"
                 }
             }
         },
@@ -5538,10 +5487,7 @@
             ],
             "traits": {
                 "aws.api#arn": {
-                    "template": "route-calculator/{CalculatorName}",
-                    "absolute": false,
-                    "noAccount": false,
-                    "noRegion": false
+                    "template": "route-calculator/{CalculatorName}"
                 },
                 "aws.iam#disableConditionKeyInference": {}
             }
@@ -5581,7 +5527,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The result for one <code>SnappedDeparturePosition</code> \n            <code>SnappedDestinationPosition</code> pair.</p>"
+                "smithy.api#documentation": "<p>The result for the calculated route of one <code>DeparturePosition</code> \n            <code>DestinationPosition</code> pair.</p>"
             }
         },
         "com.amazonaws.location#RouteMatrixEntryError": {
@@ -5759,9 +5705,8 @@
                     "hostPrefix": "places."
                 },
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/places/v0/indexes/{IndexName}/search/position",
-                    "code": 200
+                    "method": "POST"
                 },
                 "smithy.api#readonly": {}
             }
@@ -5882,9 +5827,8 @@
                     "hostPrefix": "places."
                 },
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/places/v0/indexes/{IndexName}/search/suggestions",
-                    "code": 200
+                    "method": "POST"
                 },
                 "smithy.api#readonly": {}
             }
@@ -6051,9 +5995,8 @@
                     "hostPrefix": "places."
                 },
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/places/v0/indexes/{IndexName}/search/text",
-                    "code": 200
+                    "method": "POST"
                 },
                 "smithy.api#readonly": {}
             }
@@ -6334,8 +6277,7 @@
                 },
                 "smithy.api#http": {
                     "method": "POST",
-                    "uri": "/tags/{ResourceArn}",
-                    "code": 200
+                    "uri": "/tags/{ResourceArn}"
                 }
             }
         },
@@ -6480,10 +6422,7 @@
             ],
             "traits": {
                 "aws.api#arn": {
-                    "template": "tracker/{TrackerName}",
-                    "absolute": false,
-                    "noAccount": false,
-                    "noRegion": false
+                    "template": "tracker/{TrackerName}"
                 },
                 "aws.cloudformation#cfnResource": {
                     "name": "Tracker"
@@ -6603,8 +6542,7 @@
                 },
                 "smithy.api#http": {
                     "method": "DELETE",
-                    "uri": "/tags/{ResourceArn}",
-                    "code": 200
+                    "uri": "/tags/{ResourceArn}"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -6665,9 +6603,8 @@
                     "hostPrefix": "geofencing."
                 },
                 "smithy.api#http": {
-                    "method": "PATCH",
                     "uri": "/geofencing/v0/collections/{CollectionName}",
-                    "code": 200
+                    "method": "PATCH"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -6687,8 +6624,8 @@
                     "target": "com.amazonaws.location#PricingPlan",
                     "traits": {
                         "smithy.api#deprecated": {
-                            "since": "2022-02-01",
-                            "message": "Deprecated. If included, the only allowed value is RequestBasedUsage."
+                            "message": "Deprecated. If included, the only allowed value is RequestBasedUsage.",
+                            "since": "2022-02-01"
                         },
                         "smithy.api#documentation": "<p>No longer used. If included, the only allowed value is \n            <code>RequestBasedUsage</code>.</p>"
                     }
@@ -6697,8 +6634,8 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#deprecated": {
-                            "since": "2022-02-01",
-                            "message": "Deprecated. No longer allowed."
+                            "message": "Deprecated. No longer allowed.",
+                            "since": "2022-02-01"
                         },
                         "smithy.api#documentation": "<p>This parameter is no longer used.</p>"
                     }
@@ -6768,9 +6705,8 @@
                     "hostPrefix": "maps."
                 },
                 "smithy.api#http": {
-                    "method": "PATCH",
                     "uri": "/maps/v0/maps/{MapName}",
-                    "code": 200
+                    "method": "PATCH"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -6790,8 +6726,8 @@
                     "target": "com.amazonaws.location#PricingPlan",
                     "traits": {
                         "smithy.api#deprecated": {
-                            "since": "2022-02-01",
-                            "message": "Deprecated. If included, the only allowed value is RequestBasedUsage."
+                            "message": "Deprecated. If included, the only allowed value is RequestBasedUsage.",
+                            "since": "2022-02-01"
                         },
                         "smithy.api#documentation": "<p>No longer used. If included, the only allowed value is \n            <code>RequestBasedUsage</code>.</p>"
                     }
@@ -6861,9 +6797,8 @@
                     "hostPrefix": "places."
                 },
                 "smithy.api#http": {
-                    "method": "PATCH",
                     "uri": "/places/v0/indexes/{IndexName}",
-                    "code": 200
+                    "method": "PATCH"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -6883,8 +6818,8 @@
                     "target": "com.amazonaws.location#PricingPlan",
                     "traits": {
                         "smithy.api#deprecated": {
-                            "since": "2022-02-01",
-                            "message": "Deprecated. If included, the only allowed value is RequestBasedUsage."
+                            "message": "Deprecated. If included, the only allowed value is RequestBasedUsage.",
+                            "since": "2022-02-01"
                         },
                         "smithy.api#documentation": "<p>No longer used. If included, the only allowed value is \n         <code>RequestBasedUsage</code>.</p>"
                     }
@@ -6960,9 +6895,8 @@
                     "hostPrefix": "routes."
                 },
                 "smithy.api#http": {
-                    "method": "PATCH",
                     "uri": "/routes/v0/calculators/{CalculatorName}",
-                    "code": 200
+                    "method": "PATCH"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -6982,8 +6916,8 @@
                     "target": "com.amazonaws.location#PricingPlan",
                     "traits": {
                         "smithy.api#deprecated": {
-                            "since": "2022-02-01",
-                            "message": "Deprecated. If included, the only allowed value is RequestBasedUsage."
+                            "message": "Deprecated. If included, the only allowed value is RequestBasedUsage.",
+                            "since": "2022-02-01"
                         },
                         "smithy.api#documentation": "<p>No longer used. If included, the only allowed value is \n            <code>RequestBasedUsage</code>.</p>"
                     }
@@ -7053,9 +6987,8 @@
                     "hostPrefix": "tracking."
                 },
                 "smithy.api#http": {
-                    "method": "PATCH",
                     "uri": "/tracking/v0/trackers/{TrackerName}",
-                    "code": 200
+                    "method": "PATCH"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -7075,8 +7008,8 @@
                     "target": "com.amazonaws.location#PricingPlan",
                     "traits": {
                         "smithy.api#deprecated": {
-                            "since": "2022-02-01",
-                            "message": "Deprecated. If included, the only allowed value is RequestBasedUsage."
+                            "message": "Deprecated. If included, the only allowed value is RequestBasedUsage.",
+                            "since": "2022-02-01"
                         },
                         "smithy.api#documentation": "<p>No longer used. If included, the only allowed value is \n            <code>RequestBasedUsage</code>.</p>"
                     }
@@ -7085,8 +7018,8 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#deprecated": {
-                            "since": "2022-02-01",
-                            "message": "Deprecated. No longer allowed."
+                            "message": "Deprecated. No longer allowed.",
+                            "since": "2022-02-01"
                         },
                         "smithy.api#documentation": "<p>This parameter is no longer used.</p>"
                     }

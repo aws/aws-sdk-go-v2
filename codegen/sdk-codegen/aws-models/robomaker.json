@@ -2173,7 +2173,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 5
+                    "max": 6
                 }
             }
         },
@@ -4190,7 +4190,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 16
+                    "max": 20
                 }
             }
         },
@@ -5584,8 +5584,10 @@
                 "recordAllRosTopics": {
                     "target": "com.amazonaws.robomaker#BoxedBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A boolean indicating whether to record all ROS topics.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#deprecated": {
+                            "message": "AWS RoboMaker is ending support for ROS software suite. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/software-support-policy.html."
+                        },
+                        "smithy.api#documentation": "<p>A boolean indicating whether to record all ROS topics.</p>\n         <important>\n            <p>This API is no longer supported and will throw an error if used.</p>\n         </important>"
                     }
                 }
             },
@@ -6129,7 +6131,10 @@
                 "useDefaultUploadConfigurations": {
                     "target": "com.amazonaws.robomaker#BoxedBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A Boolean indicating whether to use default upload configurations. By default,\n            <code>.ros</code> and <code>.gazebo</code> files are uploaded when the application\n         terminates and all ROS topics will be recorded.</p>\n         <p>If you set this value, you must specify an <code>outputLocation</code>. </p>"
+                        "smithy.api#deprecated": {
+                            "message": "AWS RoboMaker is ending support for ROS software suite. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/software-support-policy.html."
+                        },
+                        "smithy.api#documentation": "<p>A Boolean indicating whether to use default upload configurations. By default,\n            <code>.ros</code> and <code>.gazebo</code> files are uploaded when the application\n         terminates and all ROS topics will be recorded.</p>\n         <p>If you set this value, you must specify an <code>outputLocation</code>.</p>\n         <important>\n            <p>This API is no longer supported and will throw an error if used.</p>\n         </important>"
                     }
                 },
                 "tools": {
@@ -6141,7 +6146,10 @@
                 "useDefaultTools": {
                     "target": "com.amazonaws.robomaker#BoxedBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A Boolean indicating whether to use default robot application tools. The default tools\n         are rviz, rqt, terminal and rosbag record. The default is <code>False</code>. </p>"
+                        "smithy.api#deprecated": {
+                            "message": "AWS RoboMaker is ending support for ROS software suite. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/software-support-policy.html."
+                        },
+                        "smithy.api#documentation": "<p>A Boolean indicating whether to use default robot application tools. The default tools\n         are rviz, rqt, terminal and rosbag record. The default is <code>False</code>.</p>\n         <important>\n            <p>This API is no longer supported and will throw an error if used.</p>\n         </important>"
                     }
                 }
             },
@@ -6585,7 +6593,10 @@
                 "useDefaultUploadConfigurations": {
                     "target": "com.amazonaws.robomaker#BoxedBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A Boolean indicating whether to use default upload configurations. By default,\n            <code>.ros</code> and <code>.gazebo</code> files are uploaded when the application\n         terminates and all ROS topics will be recorded.</p>\n         <p>If you set this value, you must specify an <code>outputLocation</code>. </p>"
+                        "smithy.api#deprecated": {
+                            "message": "AWS RoboMaker is ending support for ROS software suite. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/software-support-policy.html."
+                        },
+                        "smithy.api#documentation": "<p>A Boolean indicating whether to use default upload configurations. By default,\n            <code>.ros</code> and <code>.gazebo</code> files are uploaded when the application\n         terminates and all ROS topics will be recorded.</p>\n         <p>If you set this value, you must specify an <code>outputLocation</code>.</p>\n         <important>\n            <p>This API is no longer supported and will throw an error if used.</p>\n         </important>"
                     }
                 },
                 "tools": {
@@ -6597,7 +6608,10 @@
                 "useDefaultTools": {
                     "target": "com.amazonaws.robomaker#BoxedBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A Boolean indicating whether to use default simulation application tools. The default\n         tools are rviz, rqt, terminal and rosbag record. The default is <code>False</code>. </p>"
+                        "smithy.api#deprecated": {
+                            "message": "AWS RoboMaker is ending support for ROS software suite. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/software-support-policy.html."
+                        },
+                        "smithy.api#documentation": "<p>A Boolean indicating whether to use default simulation application tools. The default\n         tools are rviz, rqt, terminal and rosbag record. The default is <code>False</code>.</p>\n         <important>\n            <p>This API is no longer supported and will throw an error if used.</p>\n         </important>"
                     }
                 }
             },
@@ -8600,6 +8614,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of worlds.</p>"
                     }
+                },
+                "outputLocation": {
+                    "target": "com.amazonaws.robomaker#OutputLocation"
                 }
             },
             "traits": {
