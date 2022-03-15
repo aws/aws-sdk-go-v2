@@ -1,3 +1,7 @@
+# v1.17.0 (2022-03-15)
+
+* **Feature**: This release deprecates ROS, Ubuntu and Gazbeo from RoboMaker Simulation Service Software Suites in favor of user-supplied containers and Relaxed Software Suites.
+
 # v1.16.0 (2022-03-08)
 
 * **Feature**: Updated `github.com/aws/smithy-go` to latest version

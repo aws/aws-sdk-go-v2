@@ -1,3 +1,7 @@
+# v1.15.0 (2022-03-15)
+
+* **Feature**: Updated EmailConfigurationType and SmsConfigurationType to reflect that you can now choose Amazon SES and Amazon SNS resources in the same Region.
+
 # v1.14.0 (2022-03-08)
 
 * **Feature**: Updated `github.com/aws/smithy-go` to latest version
