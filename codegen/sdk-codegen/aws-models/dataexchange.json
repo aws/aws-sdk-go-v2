@@ -262,7 +262,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An asset in AWS Data Exchange is a piece of data (S3 object) or a means of fulfilling data (Amazon Redshift datashare or Amazon API Gateway API). The asset can be a structured data file, an image file, or some other data file that can be stored as an S3 object, an Amazon API Gateway API, or an Amazon Redshift datashare (Preview). When you create an import job for your files, API Gateway APIs, or Amazon Redshift datashares, you create an asset in AWS Data Exchange.</p>"
+                "smithy.api#documentation": "<p>An asset in AWS Data Exchange is a piece of data (S3 object) or a means of fulfilling data (Amazon Redshift datashare or Amazon API Gateway API). The asset can be a structured data file, an image file, or some other data file that can be stored as an S3 object, an Amazon API Gateway API, or an Amazon Redshift datashare. When you create an import job for your files, API Gateway APIs, or Amazon Redshift datashares, you create an asset in AWS Data Exchange.</p>"
             }
         },
         "com.amazonaws.dataexchange#AssetName": {
@@ -713,6 +713,9 @@
                     "target": "com.amazonaws.dataexchange#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.dataexchange#ConflictException"
+                },
+                {
                     "target": "com.amazonaws.dataexchange#InternalServerException"
                 },
                 {
@@ -927,6 +930,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time that the revision was last updated, in ISO 8601 format.</p>"
                     }
+                },
+                "RevocationComment": {
+                    "target": "com.amazonaws.dataexchange#__stringMin10Max512",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A required comment to inform subscribers of the reason their access to the revision was revoked.</p>"
+                    }
+                },
+                "Revoked": {
+                    "target": "com.amazonaws.dataexchange#__boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A status indicating that subscribers' access to the revision was revoked.</p>"
+                    }
+                },
+                "RevokedAt": {
+                    "target": "com.amazonaws.dataexchange#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the revision was revoked, in ISO 8601 format.</p>"
+                    }
                 }
             }
         },
@@ -1008,6 +1029,9 @@
                 },
                 {
                     "target": "com.amazonaws.dataexchange#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.dataexchange#RevokeRevision"
                 },
                 {
                     "target": "com.amazonaws.dataexchange#SendApiAsset"
@@ -2174,6 +2198,24 @@
                     "target": "com.amazonaws.dataexchange#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time that the revision was last updated, in ISO 8601 format.</p>"
+                    }
+                },
+                "RevocationComment": {
+                    "target": "com.amazonaws.dataexchange#__stringMin10Max512",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A required comment to inform subscribers of the reason their access to the revision was revoked.</p>"
+                    }
+                },
+                "Revoked": {
+                    "target": "com.amazonaws.dataexchange#__boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A status indicating that subscribers' access to the revision was revoked.</p>"
+                    }
+                },
+                "RevokedAt": {
+                    "target": "com.amazonaws.dataexchange#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the revision was revoked, in ISO 8601 format.</p>"
                     }
                 }
             }
@@ -3695,6 +3737,24 @@
                         "smithy.api#documentation": "<p>The date and time that the revision was last updated, in ISO 8601 format.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "RevocationComment": {
+                    "target": "com.amazonaws.dataexchange#__stringMin10Max512",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A required comment to inform subscribers of the reason their access to the revision was revoked.</p>"
+                    }
+                },
+                "Revoked": {
+                    "target": "com.amazonaws.dataexchange#__boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A status indicating that subscribers' access to the revision was revoked.</p>"
+                    }
+                },
+                "RevokedAt": {
+                    "target": "com.amazonaws.dataexchange#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the revision was revoked, in ISO 8601 format.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3714,6 +3774,145 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information about the published revision.</p>"
+            }
+        },
+        "com.amazonaws.dataexchange#RevokeRevision": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.dataexchange#RevokeRevisionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.dataexchange#RevokeRevisionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.dataexchange#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.dataexchange#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.dataexchange#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.dataexchange#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.dataexchange#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.dataexchange#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This operation revokes subscribers' access to a revision.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/data-sets/{DataSetId}/revisions/{RevisionId}/revoke",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.dataexchange#RevokeRevisionRequest": {
+            "type": "structure",
+            "members": {
+                "DataSetId": {
+                    "target": "com.amazonaws.dataexchange#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for a data set.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "RevisionId": {
+                    "target": "com.amazonaws.dataexchange#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for a revision.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "RevocationComment": {
+                    "target": "com.amazonaws.dataexchange#__stringMin10Max512",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A required comment to inform subscribers of the reason their access to the revision was revoked.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request body for RevokeRevision.</p>"
+            }
+        },
+        "com.amazonaws.dataexchange#RevokeRevisionResponse": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.dataexchange#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for the revision.</p>"
+                    }
+                },
+                "Comment": {
+                    "target": "com.amazonaws.dataexchange#__stringMin0Max16384",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional comment about the revision.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.dataexchange#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the revision was created, in ISO 8601 format.</p>"
+                    }
+                },
+                "DataSetId": {
+                    "target": "com.amazonaws.dataexchange#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the data set associated with this revision.</p>"
+                    }
+                },
+                "Finalized": {
+                    "target": "com.amazonaws.dataexchange#__boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>To publish a revision to a data set in a product, the revision must first be finalized. Finalizing a revision tells AWS Data Exchange that changes to the assets in the revision are complete. After it's in this read-only state, you can publish the revision to your products.</p> <p>Finalized revisions can be published through the AWS Data Exchange console or the AWS Marketplace Catalog API, using the StartChangeSet AWS Marketplace Catalog API action. When using the API, revisions are uniquely identified by their ARN.</p>"
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.dataexchange#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the revision.</p>"
+                    }
+                },
+                "SourceId": {
+                    "target": "com.amazonaws.dataexchange#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The revision ID of the owned revision corresponding to the entitled revision being viewed. This parameter is returned when a revision owner is viewing the entitled copy of its owned revision.</p>"
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.dataexchange#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the revision was last updated, in ISO 8601 format.</p>"
+                    }
+                },
+                "RevocationComment": {
+                    "target": "com.amazonaws.dataexchange#__stringMin10Max512",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A required comment to inform subscribers of the reason their access to the revision was revoked.</p>"
+                    }
+                },
+                "Revoked": {
+                    "target": "com.amazonaws.dataexchange#__boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A status indicating that subscribers' access to the revision was revoked.</p>"
+                    }
+                },
+                "RevokedAt": {
+                    "target": "com.amazonaws.dataexchange#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the revision was revoked, in ISO 8601 format.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.dataexchange#S3SnapshotAsset": {
@@ -4604,6 +4803,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time that the revision was last updated, in ISO 8601 format.</p>"
                     }
+                },
+                "RevocationComment": {
+                    "target": "com.amazonaws.dataexchange#__stringMin10Max512",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A required comment to inform subscribers of the reason their access to the revision was revoked.</p>"
+                    }
+                },
+                "Revoked": {
+                    "target": "com.amazonaws.dataexchange#__boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A status indicating that subscribers' access to the revision was revoked.</p>"
+                    }
+                },
+                "RevokedAt": {
+                    "target": "com.amazonaws.dataexchange#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the revision was revoked, in ISO 8601 format.</p>"
+                    }
                 }
             }
         },
@@ -4648,6 +4865,15 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 16384
+                }
+            }
+        },
+        "com.amazonaws.dataexchange#__stringMin10Max512": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 10,
+                    "max": 512
                 }
             }
         },
