@@ -1,3 +1,7 @@
+# v1.15.0 (2022-03-15)
+
+* **Feature**: This feature enables data providers to use the RevokeRevision operation to revoke subscriber access to a given revision. Subscribers are unable to interact with assets within a revoked revision.
+
 # v1.14.0 (2022-03-08)
 
 * **Feature**: Updated `github.com/aws/smithy-go` to latest version

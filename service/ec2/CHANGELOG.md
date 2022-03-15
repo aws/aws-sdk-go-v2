@@ -1,3 +1,7 @@
+# v1.32.0 (2022-03-15)
+
+* **Feature**: Adds the Cascade parameter to the DeleteIpam API. Customers can use this parameter to automatically delete their IPAM, including non-default scopes, pools, cidrs, and allocations. There mustn't be any pools provisioned in the default public scope to use this parameter.
+
 # v1.31.0 (2022-03-08)
 
 * **Feature**: Updated `github.com/aws/smithy-go` to latest version

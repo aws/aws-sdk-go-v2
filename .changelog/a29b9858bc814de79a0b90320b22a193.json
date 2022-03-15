@@ -1,8 +1,0 @@
-{
-    "id": "a29b9858-bc81-4de7-9a0b-90320b22a193",
-    "type": "feature",
-    "description": "Updated EmailConfigurationType and SmsConfigurationType to reflect that you can now choose Amazon SES and Amazon SNS resources in the same Region.",
-    "modules": [
-        "service/cognitoidentityprovider"
-    ]
-}

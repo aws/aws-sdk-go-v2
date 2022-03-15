@@ -1,3 +1,23 @@
+# Release (2022-03-15)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.15.0](service/cognitoidentityprovider/CHANGELOG.md#v1150-2022-03-15)
+  * **Feature**: Updated EmailConfigurationType and SmsConfigurationType to reflect that you can now choose Amazon SES and Amazon SNS resources in the same Region.
+* `github.com/aws/aws-sdk-go-v2/service/dataexchange`: [v1.15.0](service/dataexchange/CHANGELOG.md#v1150-2022-03-15)
+  * **Feature**: This feature enables data providers to use the RevokeRevision operation to revoke subscriber access to a given revision. Subscribers are unable to interact with assets within a revoked revision.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.32.0](service/ec2/CHANGELOG.md#v1320-2022-03-15)
+  * **Feature**: Adds the Cascade parameter to the DeleteIpam API. Customers can use this parameter to automatically delete their IPAM, including non-default scopes, pools, cidrs, and allocations. There mustn't be any pools provisioned in the default public scope to use this parameter.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.18.1](service/ecs/CHANGELOG.md#v1181-2022-03-15)
+  * **Documentation**: Documentation only update to address tickets
+* `github.com/aws/aws-sdk-go-v2/service/keyspaces`: [v1.0.2](service/keyspaces/CHANGELOG.md#v102-2022-03-15)
+  * **Documentation**: Fixing formatting issues in CLI and SDK documentation
+* `github.com/aws/aws-sdk-go-v2/service/location`: [v1.15.1](service/location/CHANGELOG.md#v1151-2022-03-15)
+  * **Documentation**: New HERE style "VectorHereExplore" and "VectorHereExploreTruck".
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.18.1](service/rds/CHANGELOG.md#v1181-2022-03-15)
+  * **Documentation**: Various documentation improvements
+* `github.com/aws/aws-sdk-go-v2/service/robomaker`: [v1.17.0](service/robomaker/CHANGELOG.md#v1170-2022-03-15)
+  * **Feature**: This release deprecates ROS, Ubuntu and Gazbeo from RoboMaker Simulation Service Software Suites in favor of user-supplied containers and Relaxed Software Suites.
+
 # Release (2022-03-14)
 
 ## Module Highlights
