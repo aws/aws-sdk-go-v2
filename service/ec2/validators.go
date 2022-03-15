@@ -14428,6 +14428,9 @@ func validateOpReleaseIpamPoolAllocationInput(v *ReleaseIpamPoolAllocationInput)
 	if v.Cidr == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Cidr"))
 	}
+	if v.IpamPoolAllocationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IpamPoolAllocationId"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

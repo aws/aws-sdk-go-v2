@@ -1,0 +1,8 @@
+{
+    "id": "a8762a1d-8233-4d32-8e30-9f42590645d5",
+    "type": "documentation",
+    "description": "New HERE style \"VectorHereExplore\" and \"VectorHereExploreTruck\".",
+    "modules": [
+        "service/location"
+    ]
+}

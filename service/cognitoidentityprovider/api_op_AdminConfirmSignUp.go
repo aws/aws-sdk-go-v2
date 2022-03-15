@@ -48,8 +48,8 @@ type AdminConfirmSignUpInput struct {
 	// this payload, the clientMetadata attribute provides the data that you assigned
 	// to the ClientMetadata parameter in your AdminConfirmSignUp request. In your
 	// function code in Lambda, you can process the ClientMetadata value to enhance
-	// your workflow for your specific needs. For more information, see Customizing
-	// User Pool Workflows with Lambda Triggers
+	// your workflow for your specific needs. For more information, see  Customizing
+	// user pool Workflows with Lambda Triggers
 	// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html)
 	// in the Amazon Cognito Developer Guide. When you use the ClientMetadata
 	// parameter, remember that Amazon Cognito won't do the following:

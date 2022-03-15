@@ -269,8 +269,7 @@ type CreateDBInstanceInput struct {
 	// For the list of permissions required for the IAM role, see
 	// Configure IAM and your VPC
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-setup-orcl.html#custom-setup-orcl.iam-vpc)
-	// in the Amazon Relational Database Service User Guide. This setting is required
-	// for RDS Custom.
+	// in the Amazon RDS User Guide. This setting is required for RDS Custom.
 	CustomIamInstanceProfile *string
 
 	// The identifier of the DB cluster that the instance will belong to. This setting
@@ -413,13 +412,12 @@ type CreateDBInstanceInput struct {
 	// The values in the list depend on the DB engine. For more information, see
 	// Publishing Database Logs to Amazon CloudWatch Logs
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch)
-	// in the Amazon Relational Database Service User Guide. Amazon Aurora Not
-	// applicable. CloudWatch Logs exports are managed by the DB cluster. RDS Custom
-	// Not applicable. MariaDB Possible values are audit, error, general, and
-	// slowquery. Microsoft SQL Server Possible values are agent and error. MySQL
-	// Possible values are audit, error, general, and slowquery. Oracle Possible values
-	// are alert, audit, listener, trace, and oemagent. PostgreSQL Possible values are
-	// postgresql and upgrade.
+	// in the Amazon RDS User Guide. Amazon Aurora Not applicable. CloudWatch Logs
+	// exports are managed by the DB cluster. RDS Custom Not applicable. MariaDB
+	// Possible values are audit, error, general, and slowquery. Microsoft SQL Server
+	// Possible values are agent and error. MySQL Possible values are audit, error,
+	// general, and slowquery. Oracle Possible values are alert, audit, listener,
+	// trace, and oemagent. PostgreSQL Possible values are postgresql and upgrade.
 	EnableCloudwatchLogsExports []string
 
 	// A value that indicates whether to enable a customer-owned IP address (CoIP) for
@@ -449,8 +447,7 @@ type CreateDBInstanceInput struct {
 	// A value that indicates whether to enable Performance Insights for the DB
 	// instance. For more information, see Using Amazon Performance Insights
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html)
-	// in the Amazon Relational Database Service User Guide. This setting doesn't apply
-	// to RDS Custom.
+	// in the Amazon RDS User Guide. This setting doesn't apply to RDS Custom.
 	EnablePerformanceInsights *bool
 
 	// The version number of the database engine to use. For a list of valid engine
@@ -465,7 +462,7 @@ type CreateDBInstanceInput struct {
 	// is 19.my_cev1. For more information, see  Creating an RDS Custom for Oracle DB
 	// instance
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-creating.html#custom-creating.create)
-	// in the Amazon RDS User Guide.. Amazon RDS Custom for SQL Server See RDS Custom
+	// in the Amazon RDS User Guide. Amazon RDS Custom for SQL Server See RDS Custom
 	// for SQL Server general requirements
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-reqs-limits.html#custom-reqs-limits.reqsMS)
 	// in the Amazon RDS User Guide. MariaDB For information, see MariaDB on Amazon RDS

@@ -1,0 +1,8 @@
+{
+    "id": "301926d3-c072-4b40-a025-1f356977a1ff",
+    "type": "feature",
+    "description": "Adds the Cascade parameter to the DeleteIpam API. Customers can use this parameter to automatically delete their IPAM, including non-default scopes, pools, cidrs, and allocations. There mustn't be any pools provisioned in the default public scope to use this parameter.",
+    "modules": [
+        "service/ec2"
+    ]
+}

@@ -163,7 +163,7 @@ type RestoreDBInstanceFromS3Input struct {
 	// A value that indicates whether to enable Performance Insights for the DB
 	// instance. For more information, see Using Amazon Performance Insights
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html)
-	// in the Amazon Relational Database Service User Guide.
+	// in the Amazon RDS User Guide..
 	EnablePerformanceInsights *bool
 
 	// The version number of the database engine to use. Choose the latest minor

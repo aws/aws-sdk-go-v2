@@ -87,8 +87,8 @@ type AssetDetails struct {
 // fulfilling data (Amazon Redshift datashare or Amazon API Gateway API). The asset
 // can be a structured data file, an image file, or some other data file that can
 // be stored as an S3 object, an Amazon API Gateway API, or an Amazon Redshift
-// datashare (Preview). When you create an import job for your files, API Gateway
-// APIs, or Amazon Redshift datashares, you create an asset in AWS Data Exchange.
+// datashare. When you create an import job for your files, API Gateway APIs, or
+// Amazon Redshift datashares, you create an asset in AWS Data Exchange.
 type AssetEntry struct {
 
 	// The ARN for the asset.
@@ -954,6 +954,16 @@ type RevisionEntry struct {
 	// the StartChangeSet AWS Marketplace Catalog API action. When using the API,
 	// revisions are uniquely identified by their ARN.
 	Finalized bool
+
+	// A required comment to inform subscribers of the reason their access to the
+	// revision was revoked.
+	RevocationComment *string
+
+	// A status indicating that subscribers' access to the revision was revoked.
+	Revoked bool
+
+	// The date and time that the revision was revoked, in ISO 8601 format.
+	RevokedAt *time.Time
 
 	// The revision ID of the owned revision corresponding to the entitled revision
 	// being viewed. This parameter is returned when a revision owner is viewing the

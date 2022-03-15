@@ -6601,6 +6601,11 @@ func awsAwsjson11_serializeDocumentSmsConfigurationType(v *types.SmsConfiguratio
 		ok.String(*v.SnsCallerArn)
 	}
 
+	if v.SnsRegion != nil {
+		ok := object.Key("SnsRegion")
+		ok.String(*v.SnsRegion)
+	}
+
 	return nil
 }
 

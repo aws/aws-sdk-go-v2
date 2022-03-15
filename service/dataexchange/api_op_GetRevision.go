@@ -68,6 +68,16 @@ type GetRevisionOutput struct {
 	// The unique identifier for the revision.
 	Id *string
 
+	// A required comment to inform subscribers of the reason their access to the
+	// revision was revoked.
+	RevocationComment *string
+
+	// A status indicating that subscribers' access to the revision was revoked.
+	Revoked bool
+
+	// The date and time that the revision was revoked, in ISO 8601 format.
+	RevokedAt *time.Time
+
 	// The revision ID of the owned revision corresponding to the entitled revision
 	// being viewed. This parameter is returned when a revision owner is viewing the
 	// entitled copy of its owned revision.

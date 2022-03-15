@@ -1,0 +1,8 @@
+{
+    "id": "ba6fb12e-128f-4b29-af72-47644e3a2f8e",
+    "type": "documentation",
+    "description": "Fixing formatting issues in CLI and SDK documentation",
+    "modules": [
+        "service/keyspaces"
+    ]
+}

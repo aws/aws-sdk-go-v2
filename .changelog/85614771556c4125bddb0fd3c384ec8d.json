@@ -1,0 +1,8 @@
+{
+    "id": "85614771-556c-4125-bddb-0fd3c384ec8d",
+    "type": "documentation",
+    "description": "Various documentation improvements",
+    "modules": [
+        "service/rds"
+    ]
+}

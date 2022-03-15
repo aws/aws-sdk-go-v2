@@ -146,9 +146,8 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// For more information about exporting CloudWatch Logs for Amazon RDS, see
 	// Publishing Database Logs to Amazon CloudWatch Logs
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch)
-	// in the Amazon Relational Database Service User Guide. For more information about
-	// exporting CloudWatch Logs for Amazon Aurora, see Publishing Database Logs to
-	// Amazon CloudWatch Logs
+	// in the Amazon RDS User Guide.. For more information about exporting CloudWatch
+	// Logs for Amazon Aurora, see Publishing Database Logs to Amazon CloudWatch Logs
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch)
 	// in the Amazon Aurora User Guide. Valid for: Aurora DB clusters and Multi-AZ DB
 	// clusters
@@ -163,10 +162,10 @@ type RestoreDBClusterToPointInTimeInput struct {
 
 	// The engine mode of the new cluster. Specify provisioned or serverless, depending
 	// on the type of the cluster you are creating. You can create an Aurora Serverless
-	// clone from a provisioned cluster, or a provisioned clone from an Aurora
-	// Serverless cluster. To create a clone that is an Aurora Serverless cluster, the
-	// original cluster must be an Aurora Serverless cluster or an encrypted
-	// provisioned cluster. Valid for: Aurora DB clusters only
+	// v1 clone from a provisioned cluster, or a provisioned clone from an Aurora
+	// Serverless v1 cluster. To create a clone that is an Aurora Serverless v1
+	// cluster, the original cluster must be an Aurora Serverless v1 cluster or an
+	// encrypted provisioned cluster. Valid for: Aurora DB clusters only
 	EngineMode *string
 
 	// The amount of Provisioned IOPS (input/output operations per second) to be

@@ -42,18 +42,18 @@ func (c *Client) AdminLinkProviderForUser(ctx context.Context, params *AdminLink
 
 type AdminLinkProviderForUserInput struct {
 
-	// The existing user in the user pool to be linked to the external identity
-	// provider user account. Can be a native (Username + Password) Amazon Cognito User
-	// Pools user or a federated user (for example, a SAML or Facebook user). If the
-	// user doesn't exist, an exception is thrown. This is the user that is returned
-	// when the new user (with the linked identity provider attribute) signs in. For a
-	// native username + password user, the ProviderAttributeValue for the
-	// DestinationUser should be the username in the user pool. For a federated user,
-	// it should be the provider-specific user_id. The ProviderAttributeName of the
-	// DestinationUser is ignored. The ProviderName should be set to Cognito for users
-	// in Cognito user pools. All attributes in the DestinationUser profile must be
-	// mutable. If you have assigned the user any immutable custom attributes, the
-	// operation won't succeed.
+	// The existing user in the user pool that you want to assign to the external
+	// identity provider user account. This user can be a native (Username + Password)
+	// Amazon Cognito user pools user or a federated user (for example, a SAML or
+	// Facebook user). If the user doesn't exist, Amazon Cognito generates an
+	// exception. Amazon Cognito returns this user when the new user (with the linked
+	// identity provider attribute) signs in. For a native username + password user,
+	// the ProviderAttributeValue for the DestinationUser should be the username in the
+	// user pool. For a federated user, it should be the provider-specific user_id. The
+	// ProviderAttributeName of the DestinationUser is ignored. The ProviderName should
+	// be set to Cognito for users in Cognito user pools. All attributes in the
+	// DestinationUser profile must be mutable. If you have assigned the user any
+	// immutable custom attributes, the operation won't succeed.
 	//
 	// This member is required.
 	DestinationUser *types.ProviderUserIdentifierType

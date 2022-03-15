@@ -8,13 +8,7 @@ import (
 )
 
 // Amazon Keyspaces has two read/write capacity modes for processing reads and
-// writes on your tables:
-//
-// * On-demand (default)
-//
-// * Provisioned
-//
-// The read/write
+// writes on your tables: • On-demand (default) • Provisioned The read/write
 // capacity mode that you choose controls how you are charged for read and write
 // throughput and how table throughput capacity is managed. For more information,
 // see Read/write capacity modes
@@ -22,17 +16,11 @@ import (
 // in the Amazon Keyspaces Developer Guide.
 type CapacitySpecification struct {
 
-	// The read/write throughput capacity mode for a table. The options are:
-	//
-	// *
-	// throughputMode:PAY_PER_REQUEST and
-	//
-	// * throughputMode:PROVISIONED. The
-	// provisioned capacity mode requires readCapacityUnits and writeCapacityUnits as
-	// inputs.
-	//
-	// The default is throughput_mode:PAY_PER_REQUEST. For more information,
-	// see Read/write capacity modes
+	// The read/write throughput capacity mode for a table. The options are: •
+	// throughputMode:PAY_PER_REQUEST and • throughputMode:PROVISIONED - Provisioned
+	// capacity mode requires readCapacityUnits and writeCapacityUnits as input. The
+	// default is throughput_mode:PAY_PER_REQUEST. For more information, see Read/write
+	// capacity modes
 	// (https://docs.aws.amazon.com/keyspaces/latest/devguide/ReadWriteCapacityMode.html)
 	// in the Amazon Keyspaces Developer Guide.
 	//
@@ -50,30 +38,18 @@ type CapacitySpecification struct {
 	noSmithyDocumentSerde
 }
 
-// The read/write throughput capacity mode for a table. The options are:
-//
-// *
-// throughputMode:PAY_PER_REQUEST and
-//
-// * throughputMode:PROVISIONED.
-//
-// For more
+// The read/write throughput capacity mode for a table. The options are: •
+// throughputMode:PAY_PER_REQUEST and • throughputMode:PROVISIONED. For more
 // information, see Read/write capacity modes
 // (https://docs.aws.amazon.com/keyspaces/latest/devguide/ReadWriteCapacityMode.html)
 // in the Amazon Keyspaces Developer Guide.
 type CapacitySpecificationSummary struct {
 
-	// The read/write throughput capacity mode for a table. The options are:
-	//
-	// *
-	// throughputMode:PAY_PER_REQUEST and
-	//
-	// * throughputMode:PROVISIONED. The
-	// provisioned capacity mode requires readCapacityUnits and writeCapacityUnits as
-	// inputs.
-	//
-	// The default is throughput_mode:PAY_PER_REQUEST. For more information,
-	// see Read/write capacity modes
+	// The read/write throughput capacity mode for a table. The options are: •
+	// throughputMode:PAY_PER_REQUEST and • throughputMode:PROVISIONED - Provisioned
+	// capacity mode requires readCapacityUnits and writeCapacityUnits as input. The
+	// default is throughput_mode:PAY_PER_REQUEST. For more information, see Read/write
+	// capacity modes
 	// (https://docs.aws.amazon.com/keyspaces/latest/devguide/ReadWriteCapacityMode.html)
 	// in the Amazon Keyspaces Developer Guide.
 	//
@@ -143,17 +119,11 @@ type Comment struct {
 
 // Amazon Keyspaces encrypts and decrypts the table data at rest transparently and
 // integrates with Key Management Service for storing and managing the encryption
-// key. You can choose one of the following KMS keys (KMS keys):
-//
-// * Amazon Web
+// key. You can choose one of the following KMS keys (KMS keys): • Amazon Web
 // Services owned key - This is the default encryption type. The key is owned by
-// Amazon Keyspaces (no additional charge).
-//
-// * Customer managed key - This key is
+// Amazon Keyspaces (no additional charge). • Customer managed key - This key is
 // stored in your account and is created, owned, and managed by you. You have full
-// control over the customer managed key (KMS charges apply).
-//
-// For more information
+// control over the customer managed key (KMS charges apply). For more information
 // about encryption at rest in Amazon Keyspaces, see Encryption at rest
 // (https://docs.aws.amazon.com/keyspaces/latest/devguide/EncryptionAtRest.html) in
 // the Amazon Keyspaces Developer Guide. For more information about KMS, see KMS
@@ -163,18 +133,12 @@ type Comment struct {
 type EncryptionSpecification struct {
 
 	// The encryption option specified for the table. You can choose one of the
-	// following KMS keys (KMS keys):
-	//
-	// * type:AWS_OWNED_KMS_KEY - This key is owned by
-	// Amazon Keyspaces.
-	//
-	// * type:CUSTOMER_MANAGED_KMS_KEY - This key is stored in your
+	// following KMS keys (KMS keys): • type:AWS_OWNED_KMS_KEY - This key is owned by
+	// Amazon Keyspaces. • type:CUSTOMER_MANAGED_KMS_KEY - This key is stored in your
 	// account and is created, owned, and managed by you. This option requires the
-	// kms_key_identifier of the KMS key in Amazon Resource Name (ARN) format as
-	// input.
-	//
-	// The default is type:AWS_OWNED_KMS_KEY. For more information, see
-	// Encryption at rest
+	// kms_key_identifier of the KMS key in Amazon Resource Name (ARN) format as input.
+	// The default is type:AWS_OWNED_KMS_KEY. For more information, see Encryption at
+	// rest
 	// (https://docs.aws.amazon.com/keyspaces/latest/devguide/EncryptionAtRest.html) in
 	// the Amazon Keyspaces Developer Guide.
 	//
@@ -225,11 +189,7 @@ type PartitionKey struct {
 // in the Amazon Keyspaces Developer Guide.
 type PointInTimeRecovery struct {
 
-	// The options are:
-	//
-	// * ENABLED
-	//
-	// * DISABLED
+	// The options are: • ENABLED • DISABLED
 	//
 	// This member is required.
 	Status PointInTimeRecoveryStatus

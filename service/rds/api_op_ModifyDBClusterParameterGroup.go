@@ -24,11 +24,12 @@ import (
 // can use the Parameter Groups option of the Amazon RDS console
 // (https://console.aws.amazon.com/rds/) or the DescribeDBClusterParameters action
 // to verify that your DB cluster parameter group has been created or modified. If
-// the modified DB cluster parameter group is used by an Aurora Serverless cluster,
-// Aurora applies the update immediately. The cluster restart might interrupt your
-// workload. In that case, your application must reopen any connections and retry
-// any transactions that were active when the parameter changes took effect. For
-// more information on Amazon Aurora DB clusters, see  What is Amazon Aurora?
+// the modified DB cluster parameter group is used by an Aurora Serverless v1
+// cluster, Aurora applies the update immediately. The cluster restart might
+// interrupt your workload. In that case, your application must reopen any
+// connections and retry any transactions that were active when the parameter
+// changes took effect. For more information on Amazon Aurora DB clusters, see
+// What is Amazon Aurora?
 // (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
 // in the Amazon Aurora User Guide. For more information on Multi-AZ DB clusters,
 // see  Multi-AZ deployments with two readable standby DB instances

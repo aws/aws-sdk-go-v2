@@ -1,0 +1,8 @@
+{
+    "id": "c01f3967-6d25-4359-9954-727de69aabfa",
+    "type": "feature",
+    "description": "This feature enables data providers to use the RevokeRevision operation to revoke subscriber access to a given revision. Subscribers are unable to interact with assets within a revoked revision.",
+    "modules": [
+        "service/dataexchange"
+    ]
+}

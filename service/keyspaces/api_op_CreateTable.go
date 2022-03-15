@@ -42,43 +42,20 @@ type CreateTableInput struct {
 	KeyspaceName *string
 
 	// The schemaDefinition consists of the following parameters. For each column to be
-	// created:
-	//
-	// * name - The name of the column.
-	//
-	// * type  - An Amazon Keyspaces data
+	// created: • name - The name of the column. • type - An Amazon Keyspaces data
 	// type. For more information, see Data types
 	// (https://docs.aws.amazon.com/keyspaces/latest/devguide/cql.elements.html#cql.data-types)
-	// in the Amazon Keyspaces Developer Guide.
-	//
-	// The primary key of the table consists
-	// of the following columns:
-	//
-	// * partitionKeys - The partition key can be a single
+	// in the Amazon Keyspaces Developer Guide. The primary key of the table consists
+	// of the following columns: • partitionKeys - The partition key can be a single
 	// column, or it can be a compound value composed of two or more columns. The
 	// partition key portion of the primary key is required and determines how Amazon
-	// Keyspaces stores your data.
-	//
-	// * name - The name of each partition key column.
-	//
-	// *
+	// Keyspaces stores your data. • name - The name of each partition key column. •
 	// clusteringKeys - The optional clustering column portion of your primary key
-	// determines how the data is clustered and sorted within each partition.
-	//
-	// * name -
-	// The name of the clustering column.
-	//
-	// * orderBy - Sets the ascendant (ASC) or
-	// descendant (DESC) order modifier.
-	//
-	// To define a column as static use
-	// staticColumns  - Static columns store values that are shared by all rows in the
-	// same partition:
-	//
-	// * name - The name of the column.
-	//
-	// * type  - An Amazon Keyspaces
-	// data type.
+	// determines how the data is clustered and sorted within each partition. • name -
+	// The name of the clustering column. • orderBy - Sets the ascendant (ASC) or
+	// descendant (DESC) order modifier. To define a column as static use staticColumns
+	// - Static columns store values that are shared by all rows in the same partition:
+	// • name - The name of the column. • type - An Amazon Keyspaces data type.
 	//
 	// This member is required.
 	SchemaDefinition *types.SchemaDefinition
@@ -89,16 +66,10 @@ type CreateTableInput struct {
 	TableName *string
 
 	// Specifies the read/write throughput capacity mode for the table. The options
-	// are:
-	//
-	// * throughputMode:PAY_PER_REQUEST and
-	//
-	// * throughputMode:PROVISIONED. The
-	// provisioned capacity mode requires readCapacityUnits and writeCapacityUnits as
-	// inputs.
-	//
-	// The default is throughput_mode:PAY_PER_REQUEST. For more information,
-	// see Read/write capacity modes
+	// are: • throughputMode:PAY_PER_REQUEST and • throughputMode:PROVISIONED -
+	// Provisioned capacity mode requires readCapacityUnits and writeCapacityUnits as
+	// input. The default is throughput_mode:PAY_PER_REQUEST. For more information, see
+	// Read/write capacity modes
 	// (https://docs.aws.amazon.com/keyspaces/latest/devguide/ReadWriteCapacityMode.html)
 	// in the Amazon Keyspaces Developer Guide.
 	CapacitySpecification *types.CapacitySpecification
@@ -113,30 +84,18 @@ type CreateTableInput struct {
 	DefaultTimeToLive *int32
 
 	// Specifies how the encryption key for encryption at rest is managed for the
-	// table. You can choose one of the following KMS key (KMS key):
-	//
-	// *
-	// type:AWS_OWNED_KMS_KEY - This key is owned by Amazon Keyspaces.
-	//
-	// *
+	// table. You can choose one of the following KMS key (KMS key): •
+	// type:AWS_OWNED_KMS_KEY - This key is owned by Amazon Keyspaces. •
 	// type:CUSTOMER_MANAGED_KMS_KEY - This key is stored in your account and is
 	// created, owned, and managed by you. This option requires the kms_key_identifier
-	// of the KMS key in Amazon Resource Name (ARN) format as input.
-	//
-	// The default is
+	// of the KMS key in Amazon Resource Name (ARN) format as input. The default is
 	// type:AWS_OWNED_KMS_KEY. For more information, see Encryption at rest
 	// (https://docs.aws.amazon.com/keyspaces/latest/devguide/EncryptionAtRest.html) in
 	// the Amazon Keyspaces Developer Guide.
 	EncryptionSpecification *types.EncryptionSpecification
 
 	// Specifies if pointInTimeRecovery is enabled or disabled for the table. The
-	// options are:
-	//
-	// * ENABLED
-	//
-	// * DISABLED
-	//
-	// If it's not specified, the default is
+	// options are: • ENABLED • DISABLED If it's not specified, the default is
 	// DISABLED. For more information, see Point-in-time recovery
 	// (https://docs.aws.amazon.com/keyspaces/latest/devguide/PointInTimeRecovery.html)
 	// in the Amazon Keyspaces Developer Guide.
@@ -148,14 +107,8 @@ type CreateTableInput struct {
 	// in the Amazon Keyspaces Developer Guide.
 	Tags []types.Tag
 
-	// Enables Time to Live custom settings for the table. The options are:
-	//
-	// *
-	// status:enabled
-	//
-	// * status:disabled
-	//
-	// The default is status:disabled. After ttl is
+	// Enables Time to Live custom settings for the table. The options are: •
+	// status:enabled • status:disabled The default is status:disabled. After ttl is
 	// enabled, you can't disable it for the table. For more information, see Expiring
 	// data by using Amazon Keyspaces Time to Live (TTL)
 	// (https://docs.aws.amazon.com/keyspaces/latest/devguide/TTL.html) in the Amazon

@@ -10,23 +10,23 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Set the capacity of an Aurora Serverless DB cluster to a specific value. Aurora
-// Serverless scales seamlessly based on the workload on the DB cluster. In some
-// cases, the capacity might not scale fast enough to meet a sudden change in
-// workload, such as a large number of new transactions. Call
+// Set the capacity of an Aurora Serverless v1 DB cluster to a specific value.
+// Aurora Serverless v1 scales seamlessly based on the workload on the DB cluster.
+// In some cases, the capacity might not scale fast enough to meet a sudden change
+// in workload, such as a large number of new transactions. Call
 // ModifyCurrentDBClusterCapacity to set the capacity explicitly. After this call
-// sets the DB cluster capacity, Aurora Serverless can automatically scale the DB
-// cluster based on the cooldown period for scaling up and the cooldown period for
-// scaling down. For more information about Aurora Serverless, see Using Amazon
-// Aurora Serverless
+// sets the DB cluster capacity, Aurora Serverless v1 can automatically scale the
+// DB cluster based on the cooldown period for scaling up and the cooldown period
+// for scaling down. For more information about Aurora Serverless v1, see Using
+// Amazon Aurora Serverless v1
 // (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html)
 // in the Amazon Aurora User Guide. If you call ModifyCurrentDBClusterCapacity with
-// the default TimeoutAction, connections that prevent Aurora Serverless from
+// the default TimeoutAction, connections that prevent Aurora Serverless v1 from
 // finding a scaling point might be dropped. For more information about scaling
-// points, see  Autoscaling for Aurora Serverless
+// points, see  Autoscaling for Aurora Serverless v1
 // (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.how-it-works.html#aurora-serverless.how-it-works.auto-scaling)
 // in the Amazon Aurora User Guide. This action only applies to Aurora Serverless
-// DB clusters.
+// v1 DB clusters.
 func (c *Client) ModifyCurrentDBClusterCapacity(ctx context.Context, params *ModifyCurrentDBClusterCapacityInput, optFns ...func(*Options)) (*ModifyCurrentDBClusterCapacityOutput, error) {
 	if params == nil {
 		params = &ModifyCurrentDBClusterCapacityInput{}
@@ -54,7 +54,7 @@ type ModifyCurrentDBClusterCapacityInput struct {
 	DBClusterIdentifier *string
 
 	// The DB cluster capacity. When you change the capacity of a paused Aurora
-	// Serverless DB cluster, it automatically resumes. Constraints:
+	// Serverless v1 DB cluster, it automatically resumes. Constraints:
 	//
 	// * For Aurora
 	// MySQL, valid capacity values are 1, 2, 4, 8, 16, 32, 64, 128, and 256.
@@ -63,9 +63,9 @@ type ModifyCurrentDBClusterCapacityInput struct {
 	// Aurora PostgreSQL, valid capacity values are 2, 4, 8, 16, 32, 64, 192, and 384.
 	Capacity *int32
 
-	// The amount of time, in seconds, that Aurora Serverless tries to find a scaling
-	// point to perform seamless scaling before enforcing the timeout action. The
-	// default is 300. Specify a value between 10 and 600 seconds.
+	// The amount of time, in seconds, that Aurora Serverless v1 tries to find a
+	// scaling point to perform seamless scaling before enforcing the timeout action.
+	// The default is 300. Specify a value between 10 and 600 seconds.
 	SecondsBeforeTimeout *int32
 
 	// The action to take when the timeout is reached, either ForceApplyCapacityChange

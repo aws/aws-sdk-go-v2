@@ -11,24 +11,24 @@ import (
 	"time"
 )
 
-// This operation updates a revision.
-func (c *Client) UpdateRevision(ctx context.Context, params *UpdateRevisionInput, optFns ...func(*Options)) (*UpdateRevisionOutput, error) {
+// This operation revokes subscribers' access to a revision.
+func (c *Client) RevokeRevision(ctx context.Context, params *RevokeRevisionInput, optFns ...func(*Options)) (*RevokeRevisionOutput, error) {
 	if params == nil {
-		params = &UpdateRevisionInput{}
+		params = &RevokeRevisionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateRevision", params, optFns, c.addOperationUpdateRevisionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RevokeRevision", params, optFns, c.addOperationRevokeRevisionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*UpdateRevisionOutput)
+	out := result.(*RevokeRevisionOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-// The request body for UpdateRevision.
-type UpdateRevisionInput struct {
+// The request body for RevokeRevision.
+type RevokeRevisionInput struct {
 
 	// The unique identifier for a data set.
 	//
@@ -40,18 +40,16 @@ type UpdateRevisionInput struct {
 	// This member is required.
 	RevisionId *string
 
-	// An optional comment about the revision.
-	Comment *string
-
-	// Finalizing a revision tells AWS Data Exchange that your changes to the assets in
-	// the revision are complete. After it's in this read-only state, you can publish
-	// the revision to your products.
-	Finalized bool
+	// A required comment to inform subscribers of the reason their access to the
+	// revision was revoked.
+	//
+	// This member is required.
+	RevocationComment *string
 
 	noSmithyDocumentSerde
 }
 
-type UpdateRevisionOutput struct {
+type RevokeRevisionOutput struct {
 
 	// The ARN for the revision.
 	Arn *string
@@ -101,12 +99,12 @@ type UpdateRevisionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationUpdateRevisionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRevision{}, middleware.After)
+func (c *Client) addOperationRevokeRevisionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpRevokeRevision{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateRevision{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRevokeRevision{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -146,10 +144,10 @@ func (c *Client) addOperationUpdateRevisionMiddlewares(stack *middleware.Stack, 
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpUpdateRevisionValidationMiddleware(stack); err != nil {
+	if err = addOpRevokeRevisionValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateRevision(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRevokeRevision(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -164,11 +162,11 @@ func (c *Client) addOperationUpdateRevisionMiddlewares(stack *middleware.Stack, 
 	return nil
 }
 
-func newServiceMetadataMiddleware_opUpdateRevision(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opRevokeRevision(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "dataexchange",
-		OperationName: "UpdateRevision",
+		OperationName: "RevokeRevision",
 	}
 }

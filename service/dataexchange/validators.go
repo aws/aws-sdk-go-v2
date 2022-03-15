@@ -350,6 +350,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRevokeRevision struct {
+}
+
+func (*validateOpRevokeRevision) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRevokeRevision) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RevokeRevisionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRevokeRevisionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpSendApiAsset struct {
 }
 
@@ -576,6 +596,10 @@ func addOpListRevisionAssetsValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpRevokeRevisionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRevokeRevision{}, middleware.After)
 }
 
 func addOpSendApiAssetValidationMiddleware(stack *middleware.Stack) error {
@@ -1374,6 +1398,27 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRevokeRevisionInput(v *RevokeRevisionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RevokeRevisionInput"}
+	if v.DataSetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSetId"))
+	}
+	if v.RevisionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RevisionId"))
+	}
+	if v.RevocationComment == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RevocationComment"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -6929,7 +6929,7 @@ type IpamResourceTag struct {
 // intended for all public IP address space. Scopes enable you to reuse IP
 // addresses across multiple unconnected networks without causing IP address
 // overlap or conflict. For more information, see How IPAM works in the Amazon VPC
-// IPAM User Guide
+// IPAM User Guide.
 type IpamScope struct {
 
 	// The description of the scope.

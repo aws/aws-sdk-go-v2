@@ -65,8 +65,8 @@ type ConfirmForgotPasswordInput struct {
 	// clientMetadata attribute, which provides the data that you assigned to the
 	// ClientMetadata parameter in your ConfirmForgotPassword request. In your function
 	// code in Lambda, you can process the clientMetadata value to enhance your
-	// workflow for your specific needs. For more information, see Customizing User
-	// Pool Workflows with Lambda Triggers
+	// workflow for your specific needs. For more information, see  Customizing user
+	// pool Workflows with Lambda Triggers
 	// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html)
 	// in the Amazon Cognito Developer Guide. When you use the ClientMetadata
 	// parameter, remember that Amazon Cognito won't do the following:

@@ -180,9 +180,8 @@ type CreateDBClusterInput struct {
 	// For more information about exporting CloudWatch Logs for Amazon RDS, see
 	// Publishing Database Logs to Amazon CloudWatch Logs
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch)
-	// in the Amazon Relational Database Service User Guide. For more information about
-	// exporting CloudWatch Logs for Amazon Aurora, see Publishing Database Logs to
-	// Amazon CloudWatch Logs
+	// in the Amazon RDS User Guide. For more information about exporting CloudWatch
+	// Logs for Amazon Aurora, see Publishing Database Logs to Amazon CloudWatch Logs
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch)
 	// in the Amazon Aurora User Guide. Valid for: Aurora DB clusters and Multi-AZ DB
 	// clusters
@@ -201,11 +200,11 @@ type CreateDBClusterInput struct {
 	EnableGlobalWriteForwarding *bool
 
 	// A value that indicates whether to enable the HTTP endpoint for an Aurora
-	// Serverless DB cluster. By default, the HTTP endpoint is disabled. When enabled,
-	// the HTTP endpoint provides a connectionless web service API for running SQL
-	// queries on the Aurora Serverless DB cluster. You can also query your database
-	// from inside the RDS console with the query editor. For more information, see
-	// Using the Data API for Aurora Serverless
+	// Serverless v1 DB cluster. By default, the HTTP endpoint is disabled. When
+	// enabled, the HTTP endpoint provides a connectionless web service API for running
+	// SQL queries on the Aurora Serverless v1 DB cluster. You can also query your
+	// database from inside the RDS console with the query editor. For more
+	// information, see Using the Data API for Aurora Serverless v1
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html) in
 	// the Amazon Aurora User Guide. Valid for: Aurora DB clusters only
 	EnableHttpEndpoint *bool
@@ -214,7 +213,7 @@ type CreateDBClusterInput struct {
 	// and Access Management (IAM) accounts to database accounts. By default, mapping
 	// isn't enabled. For more information, see  IAM Database Authentication
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html)
-	// in the Amazon Aurora User Guide. Valid for: Aurora DB clusters only
+	// in the Amazon Aurora User Guide.. Valid for: Aurora DB clusters only
 	EnableIAMDatabaseAuthentication *bool
 
 	// A value that indicates whether to turn on Performance Insights for the DB
@@ -235,7 +234,7 @@ type CreateDBClusterInput struct {
 	// some DB engine modes. For more information, see the following sections in the
 	// Amazon Aurora User Guide:
 	//
-	// * Limitations of Aurora Serverless
+	// * Limitations of Aurora Serverless v1
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html#aurora-serverless.limitations)
 	//
 	// *
