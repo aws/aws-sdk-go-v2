@@ -91,18 +91,16 @@ type AdminGetUserOutput struct {
 	// * ARCHIVED -
 	// User is no longer active.
 	//
-	// * COMPROMISED - User is disabled due to a potential
-	// security threat.
-	//
 	// * UNKNOWN - User status isn't known.
 	//
-	// * RESET_REQUIRED - User
-	// is confirmed, but the user must request a code and reset their password before
-	// they can sign in.
+	// *
+	// RESET_REQUIRED - User is confirmed, but the user must request a code and reset
+	// their password before they can sign in.
 	//
-	// * FORCE_CHANGE_PASSWORD - The user is confirmed and the user
-	// can sign in using a temporary password, but on first sign-in, the user must
-	// change their password to a new value before doing anything else.
+	// * FORCE_CHANGE_PASSWORD - The user is
+	// confirmed and the user can sign in using a temporary password, but on first
+	// sign-in, the user must change their password to a new value before doing
+	// anything else.
 	UserStatus types.UserStatusType
 
 	// Metadata pertaining to the operation's result.

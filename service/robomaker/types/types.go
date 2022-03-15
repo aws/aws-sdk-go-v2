@@ -353,9 +353,12 @@ type LaunchConfig struct {
 // The logging configuration.
 type LoggingConfig struct {
 
-	// A boolean indicating whether to record all ROS topics.
+	// A boolean indicating whether to record all ROS topics. This API is no longer
+	// supported and will throw an error if used.
 	//
-	// This member is required.
+	// Deprecated: AWS RoboMaker is ending support for ROS software suite. For
+	// additional information, see
+	// https://docs.aws.amazon.com/robomaker/latest/dg/software-support-policy.html.
 	RecordAllRosTopics *bool
 
 	noSmithyDocumentSerde
@@ -510,13 +513,22 @@ type RobotApplicationConfig struct {
 	UploadConfigurations []UploadConfiguration
 
 	// A Boolean indicating whether to use default robot application tools. The default
-	// tools are rviz, rqt, terminal and rosbag record. The default is False.
+	// tools are rviz, rqt, terminal and rosbag record. The default is False. This API
+	// is no longer supported and will throw an error if used.
+	//
+	// Deprecated: AWS RoboMaker is ending support for ROS software suite. For
+	// additional information, see
+	// https://docs.aws.amazon.com/robomaker/latest/dg/software-support-policy.html.
 	UseDefaultTools *bool
 
 	// A Boolean indicating whether to use default upload configurations. By default,
 	// .ros and .gazebo files are uploaded when the application terminates and all ROS
 	// topics will be recorded. If you set this value, you must specify an
-	// outputLocation.
+	// outputLocation. This API is no longer supported and will throw an error if used.
+	//
+	// Deprecated: AWS RoboMaker is ending support for ROS software suite. For
+	// additional information, see
+	// https://docs.aws.amazon.com/robomaker/latest/dg/software-support-policy.html.
 	UseDefaultUploadConfigurations *bool
 
 	noSmithyDocumentSerde
@@ -638,12 +650,21 @@ type SimulationApplicationConfig struct {
 
 	// A Boolean indicating whether to use default simulation application tools. The
 	// default tools are rviz, rqt, terminal and rosbag record. The default is False.
+	// This API is no longer supported and will throw an error if used.
+	//
+	// Deprecated: AWS RoboMaker is ending support for ROS software suite. For
+	// additional information, see
+	// https://docs.aws.amazon.com/robomaker/latest/dg/software-support-policy.html.
 	UseDefaultTools *bool
 
 	// A Boolean indicating whether to use default upload configurations. By default,
 	// .ros and .gazebo files are uploaded when the application terminates and all ROS
 	// topics will be recorded. If you set this value, you must specify an
-	// outputLocation.
+	// outputLocation. This API is no longer supported and will throw an error if used.
+	//
+	// Deprecated: AWS RoboMaker is ending support for ROS software suite. For
+	// additional information, see
+	// https://docs.aws.amazon.com/robomaker/latest/dg/software-support-policy.html.
 	UseDefaultUploadConfigurations *bool
 
 	// A list of world configurations.
@@ -1108,6 +1129,9 @@ type WorldExportJobSummary struct {
 	// The time, in milliseconds since the epoch, when the world export job was
 	// created.
 	CreatedAt *time.Time
+
+	// The output location.
+	OutputLocation *OutputLocation
 
 	// The status of the world export job. Pending The world export job request is
 	// pending. Running The world export job is running. Completed The world export job

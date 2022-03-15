@@ -34,16 +34,17 @@ type AccountTakeoverActionsType struct {
 // Account takeover action type.
 type AccountTakeoverActionType struct {
 
-	// The event action.
+	// The action to take in response to the account takeover action. Valid values
+	// are:
 	//
 	// * BLOCK Choosing this action will block the request.
 	//
-	// *
-	// MFA_IF_CONFIGURED Present an MFA challenge if user has configured it, else allow
-	// the request.
+	// * MFA_IF_CONFIGURED
+	// Present an MFA challenge if user has configured it, else allow the request.
 	//
-	// * MFA_REQUIRED Present an MFA challenge if user has configured it,
-	// else block the request.
+	// *
+	// MFA_REQUIRED Present an MFA challenge if user has configured it, else block the
+	// request.
 	//
 	// * NO_ACTION Allow the user to sign in.
 	//
@@ -98,14 +99,14 @@ type AdminCreateUserConfigType struct {
 }
 
 // The Amazon Pinpoint analytics configuration for collecting metrics for a user
-// pool. In Regions where Pinpoint isn't available, User Pools only supports
-// sending events to Amazon Pinpoint projects in us-east-1. In Regions where
-// Pinpoint is available, User Pools will support sending events to Amazon Pinpoint
+// pool. In Regions where Amazon Pinpointisn't available, user pools only support
+// sending events to Amazon Pinpoint projects in us-east-1. In Regions where Amazon
+// Pinpoint is available, user pools support sending events to Amazon Pinpoint
 // projects within that same Region.
 type AnalyticsConfigurationType struct {
 
 	// The Amazon Resource Name (ARN) of an Amazon Pinpoint project. You can use the
-	// Amazon Pinpoint project for integration with the chosen User Pool Client. Amazon
+	// Amazon Pinpoint project to integrate with the chosen user pool Client. Amazon
 	// Cognito publishes events to the Amazon Pinpointproject declared by the app ARN.
 	ApplicationArn *string
 
@@ -128,9 +129,9 @@ type AnalyticsConfigurationType struct {
 
 // An Amazon Pinpoint analytics endpoint. An endpoint uniquely identifies a mobile
 // device, email address, or phone number that can receive messages from Amazon
-// Pinpoint analytics. Amazon Cognito User Pools only supports sending events to
+// Pinpoint analytics. Amazon Cognito user pools only support sending events to
 // Amazon Pinpoint projects in the US East (N. Virginia) us-east-1 Region,
-// regardless of the Region in which the user pool resides.
+// regardless of the Region where the user pool resides.
 type AnalyticsMetadataType struct {
 
 	// The endpoint ID.
@@ -429,9 +430,13 @@ type DomainDescriptionType struct {
 	noSmithyDocumentSerde
 }
 
-// The email configuration type. Amazon Cognito has specific Regions for use with
-// Amazon Simple Email Service. For more information on the supported Regions, see
-// Email settings for Amazon Cognito user pools
+// The email configuration of your user pool. The email configuration type sets
+// your preferred sending method, Amazon Web Services Region, and sender for
+// messages from your user pool. Amazon Cognito can send email messages with Amazon
+// Simple Email Service resources in the Amazon Web Services Region where you
+// created your user pool, and in alternate Regions in some cases. For more
+// information on the supported Regions, see Email settings for Amazon Cognito user
+// pools
 // (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-email.html).
 type EmailConfigurationType struct {
 
@@ -439,29 +444,25 @@ type EmailConfigurationType struct {
 	// Simple Email Service. A configuration set is applied to an email by including a
 	// reference to the configuration set in the headers of the email. Once applied,
 	// all of the rules in that configuration set are applied to the email.
-	// Configuration sets can be used to apply the following types of rules to
-	// emails:
-	//
-	// * Event publishing – Amazon Simple Email Service can track the number
-	// of send, delivery, open, click, bounce, and complaint events for each email
-	// sent. Use event publishing to send information about these events to other
-	// Amazon Web Services services such as and Amazon CloudWatch.
-	//
-	// * IP pool
-	// management – When leasing dedicated IP addresses with Amazon Simple Email
-	// Service, you can create groups of IP addresses, called dedicated IP pools. You
-	// can then associate the dedicated IP pools with configuration sets.
+	// Configuration sets can be used to apply the following types of rules to emails:
+	// Event publishing Amazon Simple Email Service can track the number of send,
+	// delivery, open, click, bounce, and complaint events for each email sent. Use
+	// event publishing to send information about these events to other Amazon Web
+	// Services services such as and Amazon CloudWatch IP pool management When leasing
+	// dedicated IP addresses with Amazon Simple Email Service, you can create groups
+	// of IP addresses, called dedicated IP pools. You can then associate the dedicated
+	// IP pools with configuration sets.
 	ConfigurationSet *string
 
-	// Specifies whether Amazon Cognito emails your users by using its built-in email
-	// functionality or your Amazon Simple Email Service email configuration. Specify
-	// one of the following values: COGNITO_DEFAULT When Amazon Cognito emails your
-	// users, it uses its built-in email functionality. When you use the default
-	// option, Amazon Cognito allows only a limited number of emails each day for your
-	// user pool. For typical production environments, the default email limit is less
-	// than the required delivery volume. To achieve a higher delivery volume, specify
-	// DEVELOPER to use your Amazon SES email configuration. To look up the email
-	// delivery limit for the default option, see Limits in
+	// Specifies whether Amazon Cognito uses its built-in functionality to send your
+	// users email messages, or uses your Amazon Simple Email Service email
+	// configuration. Specify one of the following values: COGNITO_DEFAULT When Amazon
+	// Cognito emails your users, it uses its built-in email functionality. When you
+	// use the default option, Amazon Cognito allows only a limited number of emails
+	// each day for your user pool. For typical production environments, the default
+	// email limit is less than the required delivery volume. To achieve a higher
+	// delivery volume, specify DEVELOPER to use your Amazon SES email configuration.
+	// To look up the email delivery limit for the default option, see Limits in
 	// (https://docs.aws.amazon.com/cognito/latest/developerguide/limits.html) in the
 	// Developer Guide. The default FROM address is no-reply@verificationemail.com. To
 	// customize the FROM address, provide the Amazon Resource Name (ARN) of an Amazon
@@ -527,6 +528,14 @@ type EmailConfigurationType struct {
 	// * If you specify
 	// DEVELOPER, Amazon Cognito emails your users with this address by calling Amazon
 	// SES on your behalf.
+	//
+	// The Region value of the SourceArn parameter must indicate a
+	// supported Amazon Web Services Region of your user pool. Typically, the Region in
+	// the SourceArn and the user pool Region are the same. For more information, see
+	// Amazon SES email configuration regions
+	// (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-email.html#user-pool-email-developer-region-mapping)
+	// in the Amazon Cognito Developer Guide
+	// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html).
 	SourceArn *string
 
 	noSmithyDocumentSerde
@@ -807,8 +816,8 @@ type MessageTemplateType struct {
 	noSmithyDocumentSerde
 }
 
-// This data type is no longer supported. You can use it only for SMS multi-factor
-// authentication (MFA) configurations. You can't use it for time-based one-time
+// This data type is no longer supported. Applies only to SMS multi-factor
+// authentication (MFA) configurations. Does not apply to time-based one-time
 // password (TOTP) software token MFA configurations.
 type MFAOptionType struct {
 
@@ -1094,11 +1103,11 @@ type SchemaAttributeType struct {
 	noSmithyDocumentSerde
 }
 
-// The SMS configuration type that includes the settings the Amazon Cognito User
-// Pool must call for the Amazon Simple Notification Service service to send an SMS
-// message from your Amazon Web Services account. The Amazon Cognito User Pool
-// makes the request to the Amazon SNS Service by using an Identity and Access
-// Management role that you provide for your Amazon Web Services account.
+// The SMS configuration type is the settings that your Amazon Cognito user pool
+// must use to send an SMS message from your Amazon Web Services account through
+// Amazon Simple Notification Service. To send SMS messages with Amazon SNS in the
+// Amazon Web Services Region that you want, the Amazon Cognito user pool uses an
+// Identity and Access Management (IAM) role in your Amazon Web Services account.
 type SmsConfigurationType struct {
 
 	// The Amazon Resource Name (ARN) of the Amazon SNS caller. This is the ARN of the
@@ -1109,18 +1118,28 @@ type SmsConfigurationType struct {
 	// This member is required.
 	SnsCallerArn *string
 
-	// The external ID is a value that you should use to add security to your IAM role
-	// that is used to call Amazon SNS to send SMS messages for your user pool. If you
-	// provide an ExternalId, the Amazon Cognito User Pool will include it when
-	// attempting to assume your IAM role so that you can set your roles trust policy
-	// to require the ExternalID. If you use the Amazon Cognito Management Console to
-	// create a role for SMS multi-factor authentication (MFA), Amazon Cognito will
-	// create a role with the required permissions and a trust policy that demonstrates
-	// use of the ExternalId. For more information about the ExternalId of a role, see
-	// How to use an external ID when granting access to your Amazon Web Services
-	// resources to a third party
+	// The external ID provides additional security for your IAM role. You can use an
+	// ExternalId with the IAM role that you use with Amazon SNS to send SMS messages
+	// for your user pool. If you provide an ExternalId, your Amazon Cognito user pool
+	// includes it in the request to assume your IAM role. You can configure the role
+	// trust policy to require that Amazon Cognito, and any principal, provide the
+	// ExternalID. If you use the Amazon Cognito Management Console to create a role
+	// for SMS multi-factor authentication (MFA), Amazon Cognito creates a role with
+	// the required permissions and a trust policy that demonstrates use of the
+	// ExternalId. For more information about the ExternalId of a role, see How to use
+	// an external ID when granting access to your Amazon Web Services resources to a
+	// third party
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html)
 	ExternalId *string
+
+	// The Amazon Web Services Region to use with Amazon SNS integration. You can
+	// choose the same Region as your user pool, or a supported Legacy Amazon SNS
+	// alternate Region. Amazon Cognito resources in the Asia Pacific (Seoul) Amazon
+	// Web Services Region must use your Amazon SNS configuration in the Asia Pacific
+	// (Tokyo) Region. For more information, see SMS message settings for Amazon
+	// Cognito user pools
+	// (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-sms-settings.html).
+	SnsRegion *string
 
 	noSmithyDocumentSerde
 }
@@ -1134,7 +1153,11 @@ type SmsMfaConfigType struct {
 	// be used.
 	SmsAuthenticationMessage *string
 
-	// The SMS configuration.
+	// The SMS configuration with the settings that your Amazon Cognito user pool must
+	// use to send an SMS message from your Amazon Web Services account through Amazon
+	// Simple Notification Service. To request Amazon SNS in the Amazon Web Services
+	// Region that you want, the Amazon Cognito user pool uses an Identity and Access
+	// Management (IAM) role that you provide for your Amazon Web Services account.
 	SmsConfiguration *SmsConfigurationType
 
 	noSmithyDocumentSerde
@@ -1335,16 +1358,12 @@ type UserImportJobType struct {
 type UsernameConfigurationType struct {
 
 	// Specifies whether username case sensitivity will be applied for all users in the
-	// user pool through Amazon Cognito APIs. Valid values include:
-	//
-	// * True : Enables
-	// case sensitivity for all username input. When this option is set to True, users
-	// must sign in using the exact capitalization of their given username, such as
-	// “UserName”. This is the default value.
-	//
-	// * False : Enables case insensitivity for
-	// all username input. For example, when this option is set to False, users can
-	// sign in using either "username" or "Username". This option also enables both
+	// user pool through Amazon Cognito APIs. Valid values include: True Enables case
+	// sensitivity for all username input. When this option is set to True, users must
+	// sign in using the exact capitalization of their given username, such as
+	// “UserName”. This is the default value. False Enables case insensitivity for all
+	// username input. For example, when this option is set to False, users can sign in
+	// using either "username" or "Username". This option also enables both
 	// preferred_username and email alias to be case insensitive, in addition to the
 	// username attribute.
 	//
@@ -1408,9 +1427,9 @@ type UserPoolClientType struct {
 	AllowedOAuthScopes []string
 
 	// The Amazon Pinpoint analytics configuration for the user pool client. Amazon
-	// Cognito User Pools only supports sending events to Amazon Pinpoint projects in
-	// the US East (N. Virginia) us-east-1 Region, regardless of the Region in which
-	// the user pool resides.
+	// Cognito user pools only support sending events to Amazon Pinpoint projects in
+	// the US East (N. Virginia) us-east-1 Region, regardless of the Region where the
+	// user pool resides.
 	AnalyticsConfiguration *AnalyticsConfigurationType
 
 	// A list of allowed redirect (callback) URLs for the identity providers. A
@@ -1612,10 +1631,14 @@ type UserPoolType struct {
 	// The domain prefix, if the user pool has a domain associated with it.
 	Domain *string
 
-	// The email configuration.
+	// The email configuration of your user pool. The email configuration type sets
+	// your preferred sending method, Amazon Web Services Region, and sender for
+	// messages tfrom your user pool.
 	EmailConfiguration *EmailConfigurationType
 
-	// The reason why the email configuration can't send the messages to your users.
+	// Deprecated. Review error codes from API requests with
+	// EventSource:cognito-idp.amazonaws.com in CloudTrail for information about
+	// problems with user pool email configuration.
 	EmailConfigurationFailure *string
 
 	// The contents of the email verification message.
@@ -1661,25 +1684,25 @@ type UserPoolType struct {
 	// The contents of the SMS authentication message.
 	SmsAuthenticationMessage *string
 
-	// The SMS configuration.
+	// The SMS configuration with the settings that your Amazon Cognito user pool must
+	// use to send an SMS message from your Amazon Web Services account through Amazon
+	// Simple Notification Service. To send SMS messages with Amazon SNS in the Amazon
+	// Web Services Region that you want, the Amazon Cognito user pool uses an Identity
+	// and Access Management (IAM) role in your Amazon Web Services account.
 	SmsConfiguration *SmsConfigurationType
 
 	// The reason why the SMS configuration can't send the messages to your users. This
 	// message might include comma-separated values to describe why your SMS
 	// configuration can't send messages to user pool end users.
-	//
-	// *
-	// InvalidSmsRoleAccessPolicyException - The Identity and Access Management role
-	// that Amazon Cognito uses to send SMS messages isn't properly configured. For
-	// more information, see SmsConfigurationType
+	// InvalidSmsRoleAccessPolicyException The Identity and Access Management role that
+	// Amazon Cognito uses to send SMS messages isn't properly configured. For more
+	// information, see SmsConfigurationType
 	// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_SmsConfigurationType.html).
-	//
-	// *
-	// SNSSandbox - The Amazon Web Services account is in SNS Sandbox and messages will
-	// only reach verified end users. This parameter won’t get populated with
-	// SNSSandbox if the IAM user creating the user pool doesn’t have SNS permissions.
-	// To learn how to move your Amazon Web Services account out of the sandbox, see
-	// Moving out of the SMS sandbox
+	// SNSSandbox The Amazon Web Services account is in the SNS SMS Sandbox and
+	// messages will only reach verified end users. This parameter won’t get populated
+	// with SNSSandbox if the IAM user creating the user pool doesn’t have SNS
+	// permissions. To learn how to move your Amazon Web Services account out of the
+	// sandbox, see Moving out of the SMS sandbox
 	// (https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox-moving-to-production.html).
 	SmsConfigurationFailure *string
 
@@ -1741,9 +1764,6 @@ type UserType struct {
 	//
 	// *
 	// ARCHIVED - User is no longer active.
-	//
-	// * COMPROMISED - User is disabled due to a
-	// potential security threat.
 	//
 	// * UNKNOWN - User status isn't known.
 	//

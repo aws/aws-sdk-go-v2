@@ -55,12 +55,23 @@ func (c *Client) RunTask(ctx context.Context, params *RunTaskInput, optFns ...fu
 type RunTaskInput struct {
 
 	// The family and revision (family:revision) or full ARN of the task definition to
-	// run. If a revision isn't specified, the latest ACTIVE revision is used. The full
-	// ARN value must match the value that you specified as the Resource of the IAM
-	// principal's permissions policy. For example, if the Resource is
-	// arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:*, the
-	// taskDefinition ARN value must be
-	// arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName.
+	// run. If a revision isn't specified, the latest ACTIVE revision is used. When you
+	// create an IAM policy for run-task, you can set the resource to be the latest
+	// task definition revision, or a specific revision. The full ARN value must match
+	// the value that you specified as the Resource of the IAM principal's permissions
+	// policy. When you specify the policy resource as the latest task definition
+	// version (by setting the Resource in the policy to
+	// arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName), then set
+	// this value to arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName.
+	// When you specify the policy resource as a specific task definition version (by
+	// setting the Resource in the policy to
+	// arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:1 or
+	// arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:*), then set
+	// this value to
+	// arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:1. For more
+	// information, see Policy Resources for Amazon ECS
+	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-resources)
+	// in the Amazon Elastic Container Service developer Guide.
 	//
 	// This member is required.
 	TaskDefinition *string
@@ -89,7 +100,8 @@ type RunTaskInput struct {
 
 	// Determines whether to use the execute command functionality for the containers
 	// in this task. If true, this enables execute command functionality on all
-	// containers in the task.
+	// containers in the task. If true, then the task definition must have a task role,
+	// or you must provide one as an override.
 	EnableExecuteCommand bool
 
 	// The name of the task group to associate with the task. The default value is the

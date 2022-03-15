@@ -93,8 +93,7 @@ type RestoreDBInstanceToPointInTimeInput struct {
 	// For the list of permissions required for the IAM role, see
 	// Configure IAM and your VPC
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-setup-orcl.html#custom-setup-orcl.iam-vpc)
-	// in the Amazon Relational Database Service User Guide. This setting is required
-	// for RDS Custom.
+	// in the Amazon RDS User Guide. This setting is required for RDS Custom.
 	CustomIamInstanceProfile *string
 
 	// The compute and memory capacity of the Amazon RDS DB instance, for example

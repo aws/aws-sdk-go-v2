@@ -63,12 +63,8 @@ type GetTableOutput struct {
 	// This member is required.
 	TableName *string
 
-	// The read/write throughput capacity mode for a table. The options are:
-	//
-	// *
-	// throughputMode:PAY_PER_REQUEST and
-	//
-	// * throughputMode:PROVISIONED.
+	// The read/write throughput capacity mode for a table. The options are: •
+	// throughputMode:PAY_PER_REQUEST • throughputMode:PROVISIONED
 	CapacitySpecification *types.CapacitySpecificationSummary
 
 	// The the description of the specified table.

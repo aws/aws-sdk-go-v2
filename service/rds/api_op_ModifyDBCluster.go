@@ -98,12 +98,11 @@ type ModifyDBClusterInput struct {
 	// slowquery. RDS for PostgreSQL Possible values are postgresql and upgrade. Aurora
 	// MySQL Possible values are audit, error, general, and slowquery. Aurora
 	// PostgreSQL Possible value is postgresql. For more information about exporting
-	// CloudWatch Logs for Amazon RDS, see Publishing Database Logs to Amazon
+	// CloudWatch Logs for Amazon RDS, see  Publishing Database Logs to Amazon
 	// CloudWatch Logs
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch)
-	// in the Amazon Relational Database Service User Guide. For more information about
-	// exporting CloudWatch Logs for Amazon Aurora, see Publishing Database Logs to
-	// Amazon CloudWatch Logs
+	// in the Amazon RDS User Guide. For more information about exporting CloudWatch
+	// Logs for Amazon Aurora, see Publishing Database Logs to Amazon CloudWatch Logs
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch)
 	// in the Amazon Aurora User Guide. Valid for: Aurora DB clusters and Multi-AZ DB
 	// clusters
@@ -117,7 +116,7 @@ type ModifyDBClusterInput struct {
 	// The compute and memory capacity of each DB instance in the Multi-AZ DB cluster,
 	// for example db.m6g.xlarge. Not all DB instance classes are available in all
 	// Amazon Web Services Regions, or for all database engines. For the full list of
-	// DB instance classes and availability for your engine, see DB Instance Class
+	// DB instance classes and availability for your engine, see  DB Instance Class
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html)
 	// in the Amazon RDS User Guide. Valid for: Multi-AZ DB clusters only
 	DBClusterInstanceClass *string
@@ -173,11 +172,11 @@ type ModifyDBClusterInput struct {
 	EnableGlobalWriteForwarding *bool
 
 	// A value that indicates whether to enable the HTTP endpoint for an Aurora
-	// Serverless DB cluster. By default, the HTTP endpoint is disabled. When enabled,
-	// the HTTP endpoint provides a connectionless web service API for running SQL
-	// queries on the Aurora Serverless DB cluster. You can also query your database
-	// from inside the RDS console with the query editor. For more information, see
-	// Using the Data API for Aurora Serverless
+	// Serverless v1 DB cluster. By default, the HTTP endpoint is disabled. When
+	// enabled, the HTTP endpoint provides a connectionless web service API for running
+	// SQL queries on the Aurora Serverless v1 DB cluster. You can also query your
+	// database from inside the RDS console with the query editor. For more
+	// information, see Using the Data API for Aurora Serverless v1
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html) in
 	// the Amazon Aurora User Guide. Valid for: Aurora DB clusters only
 	EnableHttpEndpoint *bool

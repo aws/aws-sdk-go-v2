@@ -1239,21 +1239,6 @@ func validateLaunchConfig(v *types.LaunchConfig) error {
 	}
 }
 
-func validateLoggingConfig(v *types.LoggingConfig) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "LoggingConfig"}
-	if v.RecordAllRosTopics == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RecordAllRosTopics"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validatePortForwardingConfig(v *types.PortForwardingConfig) error {
 	if v == nil {
 		return nil
@@ -1421,11 +1406,6 @@ func validateSimulationJobRequest(v *types.SimulationJobRequest) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SimulationJobRequest"}
-	if v.LoggingConfig != nil {
-		if err := validateLoggingConfig(v.LoggingConfig); err != nil {
-			invalidParams.AddNested("LoggingConfig", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.RobotApplications != nil {
 		if err := validateRobotApplicationConfigs(v.RobotApplications); err != nil {
 			invalidParams.AddNested("RobotApplications", err.(smithy.InvalidParamsError))
@@ -1804,11 +1784,6 @@ func validateOpCreateSimulationJobInput(v *CreateSimulationJobInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateSimulationJobInput"}
-	if v.LoggingConfig != nil {
-		if err := validateLoggingConfig(v.LoggingConfig); err != nil {
-			invalidParams.AddNested("LoggingConfig", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.IamRole == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IamRole"))
 	}

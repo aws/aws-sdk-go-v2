@@ -95,7 +95,7 @@ type DescribeOrderableDBInstanceOptionsInput struct {
 	// An optional pagination token provided by a previous
 	// DescribeOrderableDBInstanceOptions request. If this parameter is specified, the
 	// response includes only records beyond the marker, up to the value specified by
-	// MaxRecords .
+	// MaxRecords.
 	Marker *string
 
 	// The maximum number of records to include in the response. If more records exist
@@ -118,7 +118,7 @@ type DescribeOrderableDBInstanceOptionsOutput struct {
 
 	// An optional pagination token provided by a previous OrderableDBInstanceOptions
 	// request. If this parameter is specified, the response includes only records
-	// beyond the marker, up to the value specified by MaxRecords .
+	// beyond the marker, up to the value specified by MaxRecords.
 	Marker *string
 
 	// An OrderableDBInstanceOption structure containing information about orderable

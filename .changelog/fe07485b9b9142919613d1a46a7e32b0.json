@@ -1,0 +1,8 @@
+{
+    "id": "fe07485b-9b91-4291-9613-d1a46a7e32b0",
+    "type": "feature",
+    "description": "This release deprecates ROS, Ubuntu and Gazbeo from RoboMaker Simulation Service Software Suites in favor of user-supplied containers and Relaxed Software Suites.",
+    "modules": [
+        "service/robomaker"
+    ]
+}

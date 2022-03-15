@@ -7115,9 +7115,6 @@ func awsAwsjson11_deserializeOpErrorForgotPassword(response *smithyhttp.Response
 	case strings.EqualFold("UserLambdaValidationException", errorCode):
 		return awsAwsjson11_deserializeErrorUserLambdaValidationException(response, errorBody)
 
-	case strings.EqualFold("UserNotConfirmedException", errorCode):
-		return awsAwsjson11_deserializeErrorUserNotConfirmedException(response, errorBody)
-
 	case strings.EqualFold("UserNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorUserNotFoundException(response, errorBody)
 
@@ -18978,6 +18975,15 @@ func awsAwsjson11_deserializeDocumentSmsConfigurationType(v **types.SmsConfigura
 					return fmt.Errorf("expected ArnType to be of type string, got %T instead", value)
 				}
 				sv.SnsCallerArn = ptr.String(jtv)
+			}
+
+		case "SnsRegion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RegionCodeType to be of type string, got %T instead", value)
+				}
+				sv.SnsRegion = ptr.String(jtv)
 			}
 
 		default:

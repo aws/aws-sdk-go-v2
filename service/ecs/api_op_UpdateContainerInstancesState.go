@@ -35,7 +35,7 @@ import (
 // replacement tasks are considered healthy. Tasks for services that do not use a
 // load balancer are considered healthy if they're in the RUNNING state. Tasks for
 // services that use a load balancer are considered healthy if they're in the
-// RUNNING state and are reported as healthy by the load balancer..
+// RUNNING state and are reported as healthy by the load balancer.
 //
 // * The
 // maximumPercent parameter represents an upper limit on the number of running

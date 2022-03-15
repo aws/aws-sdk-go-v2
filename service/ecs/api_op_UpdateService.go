@@ -17,17 +17,17 @@ import (
 // https://aws.amazon.com/service-terms (https://aws.amazon.com/service-terms)
 // ("Beta Terms"). These Beta Terms apply to your participation in this preview.
 // Modifies the parameters of a service. For services using the rolling update
-// (ECS) you can update the desired count, the deployment configuration, the
-// network configuration, load balancers, service registries, enable ECS managed
-// tags option, propagate tags option, task placement constraints and strategies,
-// and the task definition. When you update any of these parameters, Amazon ECS
-// starts new tasks with the new configuration. For services using the blue/green
+// (ECS) you can update the desired count, deployment configuration, network
+// configuration, load balancers, service registries, enable ECS managed tags
+// option, propagate tags option, task placement constraints and strategies, and
+// task definition. When you update any of these parameters, Amazon ECS starts new
+// tasks with the new configuration. For services using the blue/green
 // (CODE_DEPLOY) deployment controller, only the desired count, deployment
-// configuration, task placement constraints and strategies, enable ECS managed
-// tags option, and propagate tags can be updated using this API. If the network
-// configuration, platform version, task definition, or load balancer need to be
-// updated, create a new CodeDeploy deployment. For more information, see
-// CreateDeployment
+// configuration, health check grace period, task placement constraints and
+// strategies, enable ECS managed tags option, and propagate tags can be updated
+// using this API. If the network configuration, platform version, task definition,
+// or load balancer need to be updated, create a new CodeDeploy deployment. For
+// more information, see CreateDeployment
 // (https://docs.aws.amazon.com/codedeploy/latest/APIReference/API_CreateDeployment.html)
 // in the CodeDeploy API Reference. For services using an external deployment
 // controller, you can update only the desired count, task placement constraints

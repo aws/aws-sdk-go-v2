@@ -67,11 +67,12 @@ type CreateUserPoolClientInput struct {
 	// also supported.
 	AllowedOAuthScopes []string
 
-	// The Amazon Pinpoint analytics configuration for collecting metrics for this user
-	// pool. In Amazon Web Services Regions where isn't available, User Pools only
-	// supports sending events to Amazon Pinpoint projects in Amazon Web Services
-	// Region us-east-1. In Regions where is available, User Pools will support sending
-	// events to Amazon Pinpoint projects within that same Region.
+	// The user pool analytics configuration for collecting metrics and sending them to
+	// your Amazon Pinpoint campaign. In Amazon Web Services Regions where Amazon
+	// Pinpoint isn't available, user pools only support sending events to Amazon
+	// Pinpoint projects in Amazon Web Services Region us-east-1. In Regions where
+	// Amazon Pinpoint is available, user pools support sending events to Amazon
+	// Pinpoint projects within that same Region.
 	AnalyticsConfiguration *types.AnalyticsConfigurationType
 
 	// A list of allowed redirect (callback) URLs for the identity providers. A
@@ -115,20 +116,20 @@ type CreateUserPoolClientInput struct {
 
 	// The authentication flows that are supported by the user pool clients. Flow names
 	// without the ALLOW_ prefix are no longer supported, in favor of new names with
-	// the ALLOW_ prefix. Note that values with ALLOW_ prefix must be used only along
-	// with the ALLOW_ prefix. Valid values include:
+	// the ALLOW_ prefix. Values with ALLOW_ prefix must be used only along with the
+	// ALLOW_ prefix. Valid values include:
 	//
-	// * ALLOW_ADMIN_USER_PASSWORD_AUTH:
-	// Enable admin based user password authentication flow ADMIN_USER_PASSWORD_AUTH.
-	// This setting replaces the ADMIN_NO_SRP_AUTH setting. With this authentication
-	// flow, Amazon Cognito receives the password in the request instead of using the
-	// Secure Remote Password (SRP) protocol to verify passwords.
+	// * ALLOW_ADMIN_USER_PASSWORD_AUTH: Enable
+	// admin based user password authentication flow ADMIN_USER_PASSWORD_AUTH. This
+	// setting replaces the ADMIN_NO_SRP_AUTH setting. With this authentication flow,
+	// Amazon Cognito receives the password in the request instead of using the Secure
+	// Remote Password (SRP) protocol to verify passwords.
 	//
-	// * ALLOW_CUSTOM_AUTH:
-	// Enable Lambda trigger based authentication.
+	// * ALLOW_CUSTOM_AUTH: Enable
+	// Lambda trigger based authentication.
 	//
-	// * ALLOW_USER_PASSWORD_AUTH: Enable
-	// user password-based authentication. In this flow, Amazon Cognito receives the
+	// * ALLOW_USER_PASSWORD_AUTH: Enable user
+	// password-based authentication. In this flow, Amazon Cognito receives the
 	// password in the request instead of using the SRP protocol to verify
 	// passwords.
 	//
@@ -184,12 +185,12 @@ type CreateUserPoolClientInput struct {
 
 	// The user pool attributes that the app client can write to. If your app client
 	// allows users to sign in through an identity provider, this array must include
-	// all attributes that are mapped to identity provider attributes. Amazon Cognito
-	// updates mapped attributes when users sign in to your application through an
-	// identity provider. If your app client lacks write access to a mapped attribute,
-	// Amazon Cognito throws an error when it tries to update the attribute. For more
-	// information, see Specifying Identity Provider Attribute Mappings for Your User
-	// Pool
+	// all attributes that you have mapped to identity provider attributes. Amazon
+	// Cognito updates mapped attributes when users sign in to your application through
+	// an identity provider. If your app client does not have write access to a mapped
+	// attribute, Amazon Cognito throws an error when it tries to update the attribute.
+	// For more information, see Specifying Identity Provider Attribute Mappings for
+	// Your user pool
 	// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-specifying-attribute-mapping.html).
 	WriteAttributes []string
 

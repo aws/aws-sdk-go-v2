@@ -27,30 +27,15 @@ import (
 // the table's schema data and TTL settings, which are restored based on the
 // selected timestamp, these settings are always restored based on the table's
 // settings as of the current time or when the table was deleted. You can also
-// overwrite these settings during restore:
-//
-// * Read/write capacity mode
-//
-// *
-// Provisioned throughput capacity settings
-//
-// * Point-in-time (PITR) settings
-//
-// *
-// Tags
-//
+// overwrite these settings during restore: • Read/write capacity mode •
+// Provisioned throughput capacity settings • Point-in-time (PITR) settings • Tags
 // For more information, see PITR restore settings
 // (https://docs.aws.amazon.com/keyspaces/latest/devguide/PointInTimeRecovery_HowItWorks.html#howitworks_backup_settings)
-// in the Amazon Keyspaces Developer Guide. The following settings are not
-// restored, and you must configure them manually for the new table.
-//
-// * Automatic
-// scaling policies (for tables that use provisioned capacity mode)
-//
-// * Identity and
-// Access Management (IAM) policies
-//
-// * Amazon CloudWatch metrics and alarms
+// in the Amazon Keyspaces Developer Guide. Note that the following settings are
+// not restored, and you must configure them manually for the new table: •
+// Automatic scaling policies (for tables that use provisioned capacity mode) •
+// Identity and Access Management (IAM) policies • Amazon CloudWatch metrics and
+// alarms
 func (c *Client) RestoreTable(ctx context.Context, params *RestoreTableInput, optFns ...func(*Options)) (*RestoreTableOutput, error) {
 	if params == nil {
 		params = &RestoreTableInput{}
@@ -89,46 +74,27 @@ type RestoreTableInput struct {
 	TargetTableName *string
 
 	// Specifies the read/write throughput capacity mode for the target table. The
-	// options are:
-	//
-	// * throughputMode:PAY_PER_REQUEST and
-	//
-	// *
-	// throughputMode:PROVISIONED. The provisioned capacity mode requires
-	// readCapacityUnits and writeCapacityUnits as inputs.
-	//
-	// The default is
-	// throughput_mode:PAY_PER_REQUEST. For more information, see Read/write capacity
-	// modes
+	// options are: • throughputMode:PAY_PER_REQUEST • throughputMode:PROVISIONED -
+	// Provisioned capacity mode requires readCapacityUnits and writeCapacityUnits as
+	// input. The default is throughput_mode:PAY_PER_REQUEST. For more information, see
+	// Read/write capacity modes
 	// (https://docs.aws.amazon.com/keyspaces/latest/devguide/ReadWriteCapacityMode.html)
 	// in the Amazon Keyspaces Developer Guide.
 	CapacitySpecificationOverride *types.CapacitySpecification
 
 	// Specifies the encryption settings for the target table. You can choose one of
-	// the following KMS key (KMS key):
-	//
-	// * type:AWS_OWNED_KMS_KEY - This key is owned
-	// by Amazon Keyspaces.
-	//
-	// * type:CUSTOMER_MANAGED_KMS_KEY - This key is stored in
-	// your account and is created, owned, and managed by you. This option requires the
-	// kms_key_identifier of the KMS key in Amazon Resource Name (ARN) format as
-	// input.
-	//
-	// The default is type:AWS_OWNED_KMS_KEY. For more information, see
-	// Encryption at rest
+	// the following KMS key (KMS key): • type:AWS_OWNED_KMS_KEY - This key is owned by
+	// Amazon Keyspaces. • type:CUSTOMER_MANAGED_KMS_KEY - This key is stored in your
+	// account and is created, owned, and managed by you. This option requires the
+	// kms_key_identifier of the KMS key in Amazon Resource Name (ARN) format as input.
+	// The default is type:AWS_OWNED_KMS_KEY. For more information, see Encryption at
+	// rest
 	// (https://docs.aws.amazon.com/keyspaces/latest/devguide/EncryptionAtRest.html) in
 	// the Amazon Keyspaces Developer Guide.
 	EncryptionSpecificationOverride *types.EncryptionSpecification
 
 	// Specifies the pointInTimeRecovery settings for the target table. The options
-	// are:
-	//
-	// * ENABLED
-	//
-	// * DISABLED
-	//
-	// If it's not specified, the default is DISABLED. For
+	// are: • ENABLED • DISABLED If it's not specified, the default is DISABLED. For
 	// more information, see Point-in-time recovery
 	// (https://docs.aws.amazon.com/keyspaces/latest/devguide/PointInTimeRecovery.html)
 	// in the Amazon Keyspaces Developer Guide.

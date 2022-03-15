@@ -15420,6 +15420,11 @@ func awsRestjson1_deserializeDocumentWorldExportJobSummary(v **types.WorldExport
 				}
 			}
 
+		case "outputLocation":
+			if err := awsRestjson1_deserializeDocumentOutputLocation(&sv.OutputLocation, value); err != nil {
+				return err
+			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)

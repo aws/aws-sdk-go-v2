@@ -83,9 +83,7 @@ import (
 // Copying a Snapshot
 // (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_CopySnapshot.html)
 // in the Amazon Aurora User Guide. For more information on Amazon Aurora DB
-// clusters, see
-//
-// What is Amazon Aurora?
+// clusters, see  What is Amazon Aurora?
 // (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
 // in the Amazon Aurora User Guide. For more information on Multi-AZ DB clusters,
 // see  Multi-AZ deployments with two readable standby DB instances

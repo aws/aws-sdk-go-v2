@@ -404,9 +404,9 @@ type DBCluster struct {
 	// Specifies the number of days for which automatic DB snapshots are retained.
 	BackupRetentionPeriod *int32
 
-	// The current capacity of an Aurora Serverless DB cluster. The capacity is 0
-	// (zero) when the cluster is paused. For more information about Aurora Serverless,
-	// see Using Amazon Aurora Serverless
+	// The current capacity of an Aurora Serverless v1 DB cluster. The capacity is 0
+	// (zero) when the cluster is paused. For more information about Aurora Serverless
+	// v1, see Using Amazon Aurora Serverless v1
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html)
 	// in the Amazon Aurora User Guide.
 	Capacity *int32
@@ -517,11 +517,11 @@ type DBCluster struct {
 	// Specifies the ID that Amazon Route 53 assigns when you create a hosted zone.
 	HostedZoneId *string
 
-	// A value that indicates whether the HTTP endpoint for an Aurora Serverless DB
+	// A value that indicates whether the HTTP endpoint for an Aurora Serverless v1 DB
 	// cluster is enabled. When enabled, the HTTP endpoint provides a connectionless
-	// web service API for running SQL queries on the Aurora Serverless DB cluster. You
-	// can also query your database from inside the RDS console with the query editor.
-	// For more information, see Using the Data API for Aurora Serverless
+	// web service API for running SQL queries on the Aurora Serverless v1 DB cluster.
+	// You can also query your database from inside the RDS console with the query
+	// editor. For more information, see Using the Data API for Aurora Serverless v1
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html) in
 	// the Amazon Aurora User Guide.
 	HttpEndpointEnabled *bool
@@ -625,7 +625,7 @@ type DBCluster struct {
 	ReplicationSourceIdentifier *string
 
 	// Shows the scaling configuration for an Aurora DB cluster in serverless DB engine
-	// mode. For more information, see Using Amazon Aurora Serverless
+	// mode. For more information, see Using Amazon Aurora Serverless v1
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html)
 	// in the Amazon Aurora User Guide.
 	ScalingConfigurationInfo *ScalingConfigurationInfo
@@ -1162,7 +1162,7 @@ type DBInstance struct {
 	// For the list of permissions required for the IAM role, see
 	// Configure IAM and your VPC
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-setup-orcl.html#custom-setup-orcl.iam-vpc)
-	// in the Amazon Relational Database Service User Guide.
+	// in the Amazon RDS User Guide.
 	CustomIamInstanceProfile *string
 
 	// Specifies whether a customer-owned IP address (CoIP) is enabled for an RDS on
@@ -3323,8 +3323,8 @@ type RestoreWindow struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the scaling configuration of an Aurora Serverless DB cluster. For more
-// information, see Using Amazon Aurora Serverless
+// Contains the scaling configuration of an Aurora Serverless v1 DB cluster. For
+// more information, see Using Amazon Aurora Serverless v1
 // (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html)
 // in the Amazon Aurora User Guide.
 type ScalingConfiguration struct {
@@ -3348,9 +3348,9 @@ type ScalingConfiguration struct {
 	// 384. The minimum capacity must be less than or equal to the maximum capacity.
 	MinCapacity *int32
 
-	// The amount of time, in seconds, that Aurora Serverless tries to find a scaling
-	// point to perform seamless scaling before enforcing the timeout action. The
-	// default is 300. Specify a value between 60 and 600 seconds.
+	// The amount of time, in seconds, that Aurora Serverless v1 tries to find a
+	// scaling point to perform seamless scaling before enforcing the timeout action.
+	// The default is 300. Specify a value between 60 and 600 seconds.
 	SecondsBeforeTimeout *int32
 
 	// The time, in seconds, before an Aurora DB cluster in serverless mode is paused.
@@ -3362,8 +3362,8 @@ type ScalingConfiguration struct {
 	// specified value as soon as possible. RollbackCapacityChange, the default,
 	// ignores the capacity change if a scaling point isn't found in the timeout
 	// period. If you specify ForceApplyCapacityChange, connections that prevent Aurora
-	// Serverless from finding a scaling point might be dropped. For more information,
-	// see  Autoscaling for Aurora Serverless
+	// Serverless v1 from finding a scaling point might be dropped. For more
+	// information, see  Autoscaling for Aurora Serverless v1
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.how-it-works.html#aurora-serverless.how-it-works.auto-scaling)
 	// in the Amazon Aurora User Guide.
 	TimeoutAction *string
@@ -3372,14 +3372,14 @@ type ScalingConfiguration struct {
 }
 
 // Shows the scaling configuration for an Aurora DB cluster in serverless DB engine
-// mode. For more information, see Using Amazon Aurora Serverless
+// mode. For more information, see Using Amazon Aurora Serverless v1
 // (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html)
 // in the Amazon Aurora User Guide.
 type ScalingConfigurationInfo struct {
 
 	// A value that indicates whether automatic pause is allowed for the Aurora DB
 	// cluster in serverless DB engine mode. When the value is set to false for an
-	// Aurora Serverless DB cluster, the DB cluster automatically resumes.
+	// Aurora Serverless v1 DB cluster, the DB cluster automatically resumes.
 	AutoPause *bool
 
 	// The maximum capacity for an Aurora DB cluster in serverless DB engine mode.
@@ -3398,7 +3398,7 @@ type ScalingConfigurationInfo struct {
 	SecondsUntilAutoPause *int32
 
 	// The action that occurs when Aurora times out while attempting to change the
-	// capacity of an Aurora Serverless cluster. The value is either
+	// capacity of an Aurora Serverless v1 cluster. The value is either
 	// ForceApplyCapacityChange or RollbackCapacityChange. ForceApplyCapacityChange,
 	// the default, sets the capacity to the specified value as soon as possible.
 	// RollbackCapacityChange ignores the capacity change if a scaling point isn't

@@ -12,19 +12,18 @@ import (
 
 // Initiates the authentication flow. This action might generate an SMS text
 // message. Starting June 1, 2021, US telecom carriers require you to register an
-// origination phone number before you can send SMS messages to U.S. phone numbers.
+// origination phone number before you can send SMS messages to US phone numbers.
 // If you use SMS text messages in Amazon Cognito, you must register a phone number
 // with Amazon Pinpoint (https://console.aws.amazon.com/pinpoint/home/). Amazon
-// Cognito will use the registered number automatically. Otherwise, Amazon Cognito
-// users that must receive SMS messages might be unable to sign up, activate their
+// Cognito uses the registered number automatically. Otherwise, Amazon Cognito
+// users who must receive SMS messages might not be able to sign up, activate their
 // accounts, or sign in. If you have never used SMS text messages with Amazon
 // Cognito or any other Amazon Web Service, Amazon Simple Notification Service
-// might place your account in SMS sandbox. In sandbox mode
-// (https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html) , you will have
-// limitations, such as sending messages only to verified phone numbers. After
-// testing in the sandbox environment, you can move out of the SMS sandbox and into
-// production. For more information, see  SMS message settings for Amazon Cognito
-// User Pools
+// might place your account in the SMS sandbox. In sandbox mode
+// (https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html) , you can send
+// messages only to verified phone numbers. After you test your app while in the
+// sandbox environment, you can move out of the sandbox and into production. For
+// more information, see  SMS message settings for Amazon Cognito user pools
 // (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html)
 // in the Amazon Cognito Developer Guide.
 func (c *Client) InitiateAuth(ctx context.Context, params *InitiateAuthInput, optFns ...func(*Options)) (*InitiateAuthOutput, error) {
@@ -143,8 +142,8 @@ type InitiateAuthInput struct {
 	//
 	// * Verify auth challenge
 	//
-	// For more information, see Customizing User
-	// Pool Workflows with Lambda Triggers
+	// For more information, see  Customizing user
+	// pool Workflows with Lambda Triggers
 	// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html)
 	// in the Amazon Cognito Developer Guide. When you use the ClientMetadata
 	// parameter, remember that Amazon Cognito won't do the following:
@@ -180,7 +179,7 @@ type InitiateAuthOutput struct {
 
 	// The name of the challenge that you're responding to with this call. This name is
 	// returned in the AdminInitiateAuth response if you must pass another challenge.
-	// Valid values include the following. Note that all of these challenges require
+	// Valid values include the following: All of the following challenges require
 	// USERNAME and SECRET_HASH (if applicable) in the parameters.
 	//
 	// * SMS_MFA: Next

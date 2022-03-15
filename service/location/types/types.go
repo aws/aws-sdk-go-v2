@@ -300,8 +300,8 @@ type CalculateRouteTruckModeOptions struct {
 	// | true
 	AvoidFerries *bool
 
-	// Avoids ferries when calculating routes. Default Value: false Valid Values: false
-	// | true
+	// Avoids tolls when calculating routes. Default Value: false Valid Values: false |
+	// true
 	AvoidTolls *bool
 
 	// Specifies the truck's dimension specifications including length, height, width,
@@ -390,8 +390,8 @@ type DevicePositionUpdate struct {
 	DeviceId *string
 
 	// The latest device position defined in WGS 84
-	// (https://earth-info.nga.mil/GandG/wgs84/index.html) format: [X or longitude, Y
-	// or latitude].
+	// (https://earth-info.nga.mil/index.php?dir=wgs84&action=wgs84) format: [X or
+	// longitude, Y or latitude].
 	//
 	// This member is required.
 	Position []float64
@@ -857,10 +857,17 @@ type MapConfiguration struct {
 	//
 	// *
 	// VectorHereBerlin – The HERE Berlin map style is a high contrast detailed base
-	// map of the world that blends 3D and 2D rendering. When using HERE as your data
-	// provider, and selecting the Style VectorHereBerlin, you may not use HERE
-	// Technologies maps for Asset Management. See the AWS Service Terms
-	// (https://aws.amazon.com/service-terms/) for Amazon Location Service.
+	// map of the world that blends 3D and 2D rendering.
+	//
+	// * VectorHereExplore – A
+	// default HERE map style containing a neutral, global map and its features
+	// including roads, buildings, landmarks, and water features. It also now includes
+	// a fully designed map of Japan.
+	//
+	// * VectorHereExploreTruck – A global map
+	// containing truck restrictions and attributes (e.g. width / height / HAZMAT)
+	// symbolized with highlighted segments and icons on top of HERE Explore to support
+	// use cases within transport and logistics.
 	//
 	// This member is required.
 	Style *string
@@ -954,7 +961,8 @@ type PositionalAccuracy struct {
 	noSmithyDocumentSerde
 }
 
-// The result for one SnappedDeparturePositionSnappedDestinationPosition pair.
+// The result for the calculated route of one DeparturePositionDestinationPosition
+// pair.
 type RouteMatrixEntry struct {
 
 	// The total distance of travel for the route.
