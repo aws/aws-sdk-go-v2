@@ -84,7 +84,7 @@ type Config struct {
 	//
 	// If not nil, RetryMaxAttempts, and RetryMode will be ignored by API
 	// clients.
-	Retryer func() Retryer
+	Retryer func() Retryer `json:"-"`
 
 	// ConfigSources are the sources that were used to construct the Config.
 	// Allows for additional configuration to be loaded by clients.
