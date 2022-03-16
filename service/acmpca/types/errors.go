@@ -187,8 +187,8 @@ func (e *InvalidTagException) ErrorMessage() string {
 func (e *InvalidTagException) ErrorCode() string             { return "InvalidTagException" }
 func (e *InvalidTagException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An ACM Private CA quota has been exceeded. See the exception message returned to
-// determine the quota that was exceeded.
+// An Amazon Web Services Private CA quota has been exceeded. See the exception
+// message returned to determine the quota that was exceeded.
 type LimitExceededException struct {
 	Message *string
 

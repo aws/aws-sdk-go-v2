@@ -13,35 +13,36 @@ import (
 // Deletes the resource-based policy attached to a private CA. Deletion will remove
 // any access that the policy has granted. If there is no policy attached to the
 // private CA, this action will return successful. If you delete a policy that was
-// applied through AWS Resource Access Manager (RAM), the CA will be removed from
-// all shares in which it was included. The AWS Certificate Manager Service Linked
-// Role that the policy supports is not affected when you delete the policy. The
-// current policy can be shown with GetPolicy
+// applied through Amazon Web Services Resource Access Manager (RAM), the CA will
+// be removed from all shares in which it was included. The Certificate Manager
+// Service Linked Role that the policy supports is not affected when you delete the
+// policy. The current policy can be shown with GetPolicy
 // (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_GetPolicy.html) and
 // updated with PutPolicy
 // (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_PutPolicy.html).
 // About Policies
 //
-// * A policy grants access on a private CA to an AWS customer
-// account, to AWS Organizations, or to an AWS Organizations unit. Policies are
-// under the control of a CA administrator. For more information, see Using a
-// Resource Based Policy with ACM Private CA
+// * A policy grants access on a private CA to an Amazon Web
+// Services customer account, to Amazon Web Services Organizations, or to an Amazon
+// Web Services Organizations unit. Policies are under the control of a CA
+// administrator. For more information, see Using a Resource Based Policy with
+// Amazon Web Services Private CA
 // (https://docs.aws.amazon.com/acm-pca/latest/userguide/pca-rbp.html).
 //
 // * A policy
-// permits a user of AWS Certificate Manager (ACM) to issue ACM certificates signed
-// by a CA in another account.
+// permits a user of Certificate Manager (ACM) to issue ACM certificates signed by
+// a CA in another account.
 //
 // * For ACM to manage automatic renewal of these
 // certificates, the ACM user must configure a Service Linked Role (SLR). The SLR
 // allows the ACM service to assume the identity of the user, subject to
-// confirmation against the ACM Private CA policy. For more information, see Using
-// a Service Linked Role with ACM
+// confirmation against the Amazon Web Services Private CA policy. For more
+// information, see Using a Service Linked Role with ACM
 // (https://docs.aws.amazon.com/acm/latest/userguide/acm-slr.html).
 //
 // * Updates made
-// in AWS Resource Manager (RAM) are reflected in policies. For more information,
-// see Attach a Policy for Cross-Account Access
+// in Amazon Web Services Resource Manager (RAM) are reflected in policies. For
+// more information, see Attach a Policy for Cross-Account Access
 // (https://docs.aws.amazon.com/acm-pca/latest/userguide/pca-ram.html).
 func (c *Client) DeletePolicy(ctx context.Context, params *DeletePolicyInput, optFns ...func(*Options)) (*DeletePolicyOutput, error) {
 	if params == nil {

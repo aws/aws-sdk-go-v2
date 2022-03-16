@@ -17,8 +17,9 @@ import (
 // is in the DISABLED state active again. Both PCA and the IAM principal must have
 // permission to write to the S3 bucket that you specify. If the IAM principal
 // making the call does not have permission to write to the bucket, then an
-// exception is thrown. For more information, see Configure Access to ACM Private
-// CA (https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaAuthAccess.html).
+// exception is thrown. For more information, see Access policies for CRLs in
+// Amazon S3
+// (https://docs.aws.amazon.com/acm-pca/latest/userguide/crl-planning.html#s3-policies).
 func (c *Client) UpdateCertificateAuthority(ctx context.Context, params *UpdateCertificateAuthorityInput, optFns ...func(*Options)) (*UpdateCertificateAuthorityOutput, error) {
 	if params == nil {
 		params = &UpdateCertificateAuthorityInput{}

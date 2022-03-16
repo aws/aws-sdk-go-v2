@@ -178,20 +178,22 @@ type BackendStoragePermissions struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the forgot password policy for authenticating into the Amplify app.
+// (DEPRECATED) Describes the forgot password policy for authenticating into the
+// Amplify app.
 type CreateBackendAuthForgotPasswordConfig struct {
 
-	// Describes which mode to use (either SMS or email) to deliver messages to app
-	// users who want to recover their password.
+	// (DEPRECATED) Describes which mode to use (either SMS or email) to deliver
+	// messages to app users who want to recover their password.
 	//
 	// This member is required.
 	DeliveryMethod DeliveryMethod
 
-	// The configuration for the email sent when an app user forgets their password.
+	// (DEPRECATED) The configuration for the email sent when an app user forgets their
+	// password.
 	EmailSettings *EmailSettings
 
-	// The configuration for the SMS message sent when an app user forgets their
-	// password.
+	// (DEPRECATED) The configuration for the SMS message sent when an app user forgets
+	// their password.
 	SmsSettings *SmsSettings
 
 	noSmithyDocumentSerde
@@ -331,8 +333,8 @@ type CreateBackendAuthUserPoolConfig struct {
 	// This member is required.
 	UserPoolName *string
 
-	// Describes the forgotten password policy for your Amazon Cognito user pool,
-	// configured as a part of your Amplify project.
+	// (DEPRECATED) Describes the forgotten password policy for your Amazon Cognito
+	// user pool, configured as a part of your Amplify project.
 	ForgotPassword *CreateBackendAuthForgotPasswordConfig
 
 	// Describes whether to apply multi-factor authentication policies for your Amazon
@@ -346,6 +348,28 @@ type CreateBackendAuthUserPoolConfig struct {
 	// Describes the password policy for your Amazon Cognito user pool, configured as a
 	// part of your Amplify project.
 	PasswordPolicy *CreateBackendAuthPasswordPolicyConfig
+
+	// Describes the email or SMS verification message for your Amazon Cognito user
+	// pool, configured as a part of your Amplify project.
+	VerificationMessage *CreateBackendAuthVerificationMessageConfig
+
+	noSmithyDocumentSerde
+}
+
+// Creates an email or SMS verification message for the auth resource configured
+// for your Amplify project.
+type CreateBackendAuthVerificationMessageConfig struct {
+
+	// The type of verification message to send.
+	//
+	// This member is required.
+	DeliveryMethod DeliveryMethod
+
+	// The settings for the email message.
+	EmailSettings *EmailSettings
+
+	// The settings for the SMS message.
+	SmsSettings *SmsSettings
 
 	noSmithyDocumentSerde
 }
@@ -372,10 +396,10 @@ type CreateBackendStorageResourceConfig struct {
 // The configuration for the email sent when an app user forgets their password.
 type EmailSettings struct {
 
-	// The body of the email.
+	// The contents of the email message.
 	EmailMessage *string
 
-	// The subject of the email.
+	// The contents of the subject line of the email message.
 	EmailSubject *string
 
 	noSmithyDocumentSerde
@@ -454,7 +478,7 @@ type Settings struct {
 // SMS settings for authentication.
 type SmsSettings struct {
 
-	// The body of the SMS message.
+	// The contents of the SMS message.
 	SmsMessage *string
 
 	noSmithyDocumentSerde
@@ -483,18 +507,20 @@ type SocialProviderSettings struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the forgot password policy for authenticating into the Amplify app.
+// (DEPRECATED) Describes the forgot password policy for authenticating into the
+// Amplify app.
 type UpdateBackendAuthForgotPasswordConfig struct {
 
-	// Describes which mode to use (either SMS or email) to deliver messages to app
-	// users that want to recover their password.
+	// (DEPRECATED) Describes which mode to use (either SMS or email) to deliver
+	// messages to app users that want to recover their password.
 	DeliveryMethod DeliveryMethod
 
-	// The configuration for the email sent when an app user forgets their password.
+	// (DEPRECATED) The configuration for the email sent when an app user forgets their
+	// password.
 	EmailSettings *EmailSettings
 
-	// The configuration for the SMS message sent when an Amplify app user forgets
-	// their password.
+	// (DEPRECATED) The configuration for the SMS message sent when an Amplify app user
+	// forgets their password.
 	SmsSettings *SmsSettings
 
 	noSmithyDocumentSerde
@@ -598,8 +624,8 @@ type UpdateBackendAuthResourceConfig struct {
 // resource to be configured for your Amplify project on an update.
 type UpdateBackendAuthUserPoolConfig struct {
 
-	// Describes the forgot password policy for your Amazon Cognito user pool,
-	// configured as a part of your Amplify project.
+	// (DEPRECATED) Describes the forgot password policy for your Amazon Cognito user
+	// pool, configured as a part of your Amplify project.
 	ForgotPassword *UpdateBackendAuthForgotPasswordConfig
 
 	// Describes whether to apply multi-factor authentication policies for your Amazon
@@ -613,6 +639,28 @@ type UpdateBackendAuthUserPoolConfig struct {
 	// Describes the password policy for your Amazon Cognito user pool, configured as a
 	// part of your Amplify project.
 	PasswordPolicy *UpdateBackendAuthPasswordPolicyConfig
+
+	// Describes the email or SMS verification message for your Amazon Cognito user
+	// pool, configured as a part of your Amplify project.
+	VerificationMessage *UpdateBackendAuthVerificationMessageConfig
+
+	noSmithyDocumentSerde
+}
+
+// Updates the configuration of the email or SMS message for the auth resource
+// configured for your Amplify project.
+type UpdateBackendAuthVerificationMessageConfig struct {
+
+	// The type of verification message to send.
+	//
+	// This member is required.
+	DeliveryMethod DeliveryMethod
+
+	// The settings for the email message.
+	EmailSettings *EmailSettings
+
+	// The settings for the SMS message.
+	SmsSettings *SmsSettings
 
 	noSmithyDocumentSerde
 }

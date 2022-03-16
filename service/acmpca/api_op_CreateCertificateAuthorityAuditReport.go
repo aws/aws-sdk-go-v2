@@ -20,11 +20,13 @@ import (
 // actions use the private key. Both PCA and the IAM principal must have permission
 // to write to the S3 bucket that you specify. If the IAM principal making the call
 // does not have permission to write to the bucket, then an exception is thrown.
-// For more information, see Configure Access to ACM Private CA
-// (https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaAuthAccess.html). ACM
-// Private CA assets that are stored in Amazon S3 can be protected with encryption.
-// For more information, see Encrypting Your Audit Reports
+// For more information, see Access policies for CRLs in Amazon S3
+// (https://docs.aws.amazon.com/acm-pca/latest/userguide/crl-planning.html#s3-policies).
+// Amazon Web Services Private CA assets that are stored in Amazon S3 can be
+// protected with encryption. For more information, see Encrypting Your Audit
+// Reports
 // (https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaAuditReport.html#audit-report-encryption).
+// You can generate a maximum of one report every 30 minutes.
 func (c *Client) CreateCertificateAuthorityAuditReport(ctx context.Context, params *CreateCertificateAuthorityAuditReportInput, optFns ...func(*Options)) (*CreateCertificateAuthorityAuditReportOutput, error) {
 	if params == nil {
 		params = &CreateCertificateAuthorityAuditReportInput{}

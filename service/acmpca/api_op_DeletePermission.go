@@ -10,11 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Revokes permissions on a private CA granted to the AWS Certificate Manager (ACM)
+// Revokes permissions on a private CA granted to the Certificate Manager (ACM)
 // service principal (acm.amazonaws.com). These permissions allow ACM to issue and
-// renew ACM certificates that reside in the same AWS account as the CA. If you
-// revoke these permissions, ACM will no longer renew the affected certificates
-// automatically. Permissions can be granted with the CreatePermission
+// renew ACM certificates that reside in the same Amazon Web Services account as
+// the CA. If you revoke these permissions, ACM will no longer renew the affected
+// certificates automatically. Permissions can be granted with the CreatePermission
 // (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreatePermission.html)
 // action and listed with the ListPermissions
 // (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListPermissions.html)
@@ -32,8 +32,8 @@ import (
 // certificates reside in different accounts, then permissions cannot be used to
 // enable automatic renewals. Instead, the ACM certificate owner must set up a
 // resource-based policy to enable cross-account issuance and renewals. For more
-// information, see Using a Resource Based Policy with ACM Private CA
-// (https://docs.aws.amazon.com/acm-pca/latest/userguide/pca-rbp.html).
+// information, see Using a Resource Based Policy with Amazon Web Services Private
+// CA (https://docs.aws.amazon.com/acm-pca/latest/userguide/pca-rbp.html).
 func (c *Client) DeletePermission(ctx context.Context, params *DeletePermissionInput, optFns ...func(*Options)) (*DeletePermissionOutput, error) {
 	if params == nil {
 		params = &DeletePermissionInput{}
@@ -61,13 +61,13 @@ type DeletePermissionInput struct {
 	// This member is required.
 	CertificateAuthorityArn *string
 
-	// The AWS service or identity that will have its CA permissions revoked. At this
-	// time, the only valid service principal is acm.amazonaws.com
+	// The Amazon Web Services service or identity that will have its CA permissions
+	// revoked. At this time, the only valid service principal is acm.amazonaws.com
 	//
 	// This member is required.
 	Principal *string
 
-	// The AWS account that calls this action.
+	// The Amazon Web Services account that calls this action.
 	SourceAccount *string
 
 	noSmithyDocumentSerde

@@ -3123,6 +3123,39 @@ func awsRestjson1_serializeDocumentCreateBackendAuthUserPoolConfig(v *types.Crea
 		ok.String(*v.UserPoolName)
 	}
 
+	if v.VerificationMessage != nil {
+		ok := object.Key("verificationMessage")
+		if err := awsRestjson1_serializeDocumentCreateBackendAuthVerificationMessageConfig(v.VerificationMessage, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCreateBackendAuthVerificationMessageConfig(v *types.CreateBackendAuthVerificationMessageConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.DeliveryMethod) > 0 {
+		ok := object.Key("deliveryMethod")
+		ok.String(string(v.DeliveryMethod))
+	}
+
+	if v.EmailSettings != nil {
+		ok := object.Key("emailSettings")
+		if err := awsRestjson1_serializeDocumentEmailSettings(v.EmailSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SmsSettings != nil {
+		ok := object.Key("smsSettings")
+		if err := awsRestjson1_serializeDocumentSmsSettings(v.SmsSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -3550,6 +3583,39 @@ func awsRestjson1_serializeDocumentUpdateBackendAuthUserPoolConfig(v *types.Upda
 	if v.PasswordPolicy != nil {
 		ok := object.Key("passwordPolicy")
 		if err := awsRestjson1_serializeDocumentUpdateBackendAuthPasswordPolicyConfig(v.PasswordPolicy, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VerificationMessage != nil {
+		ok := object.Key("verificationMessage")
+		if err := awsRestjson1_serializeDocumentUpdateBackendAuthVerificationMessageConfig(v.VerificationMessage, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentUpdateBackendAuthVerificationMessageConfig(v *types.UpdateBackendAuthVerificationMessageConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.DeliveryMethod) > 0 {
+		ok := object.Key("deliveryMethod")
+		ok.String(string(v.DeliveryMethod))
+	}
+
+	if v.EmailSettings != nil {
+		ok := object.Key("emailSettings")
+		if err := awsRestjson1_serializeDocumentEmailSettings(v.EmailSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SmsSettings != nil {
+		ok := object.Key("smsSettings")
+		if err := awsRestjson1_serializeDocumentSmsSettings(v.SmsSettings, ok); err != nil {
 			return err
 		}
 	}

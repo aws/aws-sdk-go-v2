@@ -11,17 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Amazon S3 on Outposts Access Points simplify managing data access at scale for
-// shared datasets in S3 on Outposts. S3 on Outposts uses endpoints to connect to
-// Outposts buckets so that you can perform actions within your virtual private
-// cloud (VPC). For more information, see  Accessing S3 on Outposts using VPC only
-// access points
-// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/AccessingS3Outposts.html).
-// This action creates an endpoint and associates it with the specified Outposts.
-// It can take up to 5 minutes for this action to complete. Related actions
-// include:
+// Creates an endpoint and associates it with the specified Outpost. It can take up
+// to 5 minutes for this action to finish. Related actions include:
 //
-// * DeleteEndpoint
+// *
+// DeleteEndpoint
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_DeleteEndpoint.html)
 //
 // *
@@ -44,7 +38,7 @@ func (c *Client) CreateEndpoint(ctx context.Context, params *CreateEndpointInput
 
 type CreateEndpointInput struct {
 
-	// The ID of the AWS Outposts.
+	// The ID of the Outposts.
 	//
 	// This member is required.
 	OutpostId *string
@@ -55,18 +49,20 @@ type CreateEndpointInput struct {
 	SecurityGroupId *string
 
 	// The ID of the subnet in the selected VPC. The endpoint subnet must belong to the
-	// Outpost that has the Amazon S3 on Outposts provisioned.
+	// Outpost that has Amazon S3 on Outposts provisioned.
 	//
 	// This member is required.
 	SubnetId *string
 
-	// The type of access for the on-premise network connectivity for the Outpost
-	// endpoint. To access the endpoint from an on-premises network, you must specify
-	// the access type and provide the customer owned IPv4 pool.
+	// The type of access for the network connectivity for the Amazon S3 on Outposts
+	// endpoint. To use the Amazon Web Services VPC, choose Private. To use the
+	// endpoint with an on-premises network, choose CustomerOwnedIp. If you choose
+	// CustomerOwnedIp, you must also provide the customer-owned IP address pool (CoIP
+	// pool). Private is the default access type value.
 	AccessType types.EndpointAccessType
 
-	// The ID of the customer-owned IPv4 pool for the endpoint. IP addresses will be
-	// allocated from this pool for the endpoint.
+	// The ID of the customer-owned IPv4 address pool (CoIP pool) for the endpoint. IP
+	// addresses are allocated from this pool for the endpoint.
 	CustomerOwnedIpv4Pool *string
 
 	noSmithyDocumentSerde

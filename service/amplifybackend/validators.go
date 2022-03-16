@@ -890,6 +890,26 @@ func validateCreateBackendAuthUserPoolConfig(v *types.CreateBackendAuthUserPoolC
 	if v.UserPoolName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserPoolName"))
 	}
+	if v.VerificationMessage != nil {
+		if err := validateCreateBackendAuthVerificationMessageConfig(v.VerificationMessage); err != nil {
+			invalidParams.AddNested("VerificationMessage", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCreateBackendAuthVerificationMessageConfig(v *types.CreateBackendAuthVerificationMessageConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateBackendAuthVerificationMessageConfig"}
+	if len(v.DeliveryMethod) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DeliveryMethod"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -932,6 +952,42 @@ func validateUpdateBackendAuthResourceConfig(v *types.UpdateBackendAuthResourceC
 	}
 	if v.UserPoolConfigs == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserPoolConfigs"))
+	} else if v.UserPoolConfigs != nil {
+		if err := validateUpdateBackendAuthUserPoolConfig(v.UserPoolConfigs); err != nil {
+			invalidParams.AddNested("UserPoolConfigs", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateBackendAuthUserPoolConfig(v *types.UpdateBackendAuthUserPoolConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateBackendAuthUserPoolConfig"}
+	if v.VerificationMessage != nil {
+		if err := validateUpdateBackendAuthVerificationMessageConfig(v.VerificationMessage); err != nil {
+			invalidParams.AddNested("VerificationMessage", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateBackendAuthVerificationMessageConfig(v *types.UpdateBackendAuthVerificationMessageConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateBackendAuthVerificationMessageConfig"}
+	if len(v.DeliveryMethod) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DeliveryMethod"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

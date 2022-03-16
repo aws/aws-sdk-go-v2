@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Grants one or more permissions on a private CA to the AWS Certificate Manager
-// (ACM) service principal (acm.amazonaws.com). These permissions allow ACM to
-// issue and renew ACM certificates that reside in the same AWS account as the CA.
-// You can list current permissions with the ListPermissions
+// Grants one or more permissions on a private CA to the Certificate Manager (ACM)
+// service principal (acm.amazonaws.com). These permissions allow ACM to issue and
+// renew ACM certificates that reside in the same Amazon Web Services account as
+// the CA. You can list current permissions with the ListPermissions
 // (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListPermissions.html)
 // action and revoke them with the DeletePermission
 // (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DeletePermission.html)
@@ -32,8 +32,8 @@ import (
 // certificates reside in different accounts, then permissions cannot be used to
 // enable automatic renewals. Instead, the ACM certificate owner must set up a
 // resource-based policy to enable cross-account issuance and renewals. For more
-// information, see Using a Resource Based Policy with ACM Private CA
-// (https://docs.aws.amazon.com/acm-pca/latest/userguide/pca-rbp.html).
+// information, see Using a Resource Based Policy with Amazon Web Services Private
+// CA (https://docs.aws.amazon.com/acm-pca/latest/userguide/pca-rbp.html).
 func (c *Client) CreatePermission(ctx context.Context, params *CreatePermissionInput, optFns ...func(*Options)) (*CreatePermissionOutput, error) {
 	if params == nil {
 		params = &CreatePermissionInput{}
@@ -51,8 +51,8 @@ func (c *Client) CreatePermission(ctx context.Context, params *CreatePermissionI
 
 type CreatePermissionInput struct {
 
-	// The actions that the specified AWS service principal can use. These include
-	// IssueCertificate, GetCertificate, and ListPermissions.
+	// The actions that the specified Amazon Web Services service principal can use.
+	// These include IssueCertificate, GetCertificate, and ListPermissions.
 	//
 	// This member is required.
 	Actions []types.ActionType
@@ -67,8 +67,8 @@ type CreatePermissionInput struct {
 	// This member is required.
 	CertificateAuthorityArn *string
 
-	// The AWS service or identity that receives the permission. At this time, the only
-	// valid principal is acm.amazonaws.com.
+	// The Amazon Web Services service or identity that receives the permission. At
+	// this time, the only valid principal is acm.amazonaws.com.
 	//
 	// This member is required.
 	Principal *string

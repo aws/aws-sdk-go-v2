@@ -10,14 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Amazon S3 on Outposts Access Points simplify managing data access at scale for
-// shared datasets in S3 on Outposts. S3 on Outposts uses endpoints to connect to
-// Outposts buckets so that you can perform actions within your virtual private
-// cloud (VPC). For more information, see  Accessing S3 on Outposts using VPC only
-// access points
-// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/AccessingS3Outposts.html).
-// This action deletes an endpoint. It can take up to 5 minutes for this action to
-// complete. Related actions include:
+// Deletes an endpoint. It can take up to 5 minutes for this action to finish.
+// Related actions include:
 //
 // * CreateEndpoint
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_CreateEndpoint.html)
@@ -47,7 +41,7 @@ type DeleteEndpointInput struct {
 	// This member is required.
 	EndpointId *string
 
-	// The ID of the AWS Outposts.
+	// The ID of the Outposts.
 	//
 	// This member is required.
 	OutpostId *string

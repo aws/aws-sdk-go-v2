@@ -11,23 +11,23 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Revokes a certificate that was issued inside ACM Private CA. If you enable a
-// certificate revocation list (CRL) when you create or update your private CA,
-// information about the revoked certificates will be included in the CRL. ACM
-// Private CA writes the CRL to an S3 bucket that you specify. A CRL is typically
-// updated approximately 30 minutes after a certificate is revoked. If for any
-// reason the CRL update fails, ACM Private CA attempts makes further attempts
-// every 15 minutes. With Amazon CloudWatch, you can create alarms for the metrics
-// CRLGenerated and MisconfiguredCRLBucket. For more information, see Supported
-// CloudWatch Metrics
+// Revokes a certificate that was issued inside Amazon Web Services Private CA. If
+// you enable a certificate revocation list (CRL) when you create or update your
+// private CA, information about the revoked certificates will be included in the
+// CRL. Amazon Web Services Private CA writes the CRL to an S3 bucket that you
+// specify. A CRL is typically updated approximately 30 minutes after a certificate
+// is revoked. If for any reason the CRL update fails, Amazon Web Services Private
+// CA attempts makes further attempts every 15 minutes. With Amazon CloudWatch, you
+// can create alarms for the metrics CRLGenerated and MisconfiguredCRLBucket. For
+// more information, see Supported CloudWatch Metrics
 // (https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaCloudWatch.html). Both
 // PCA and the IAM principal must have permission to write to the S3 bucket that
 // you specify. If the IAM principal making the call does not have permission to
 // write to the bucket, then an exception is thrown. For more information, see
-// Configure Access to ACM Private CA
-// (https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaAuthAccess.html). ACM
-// Private CA also writes revocation information to the audit report. For more
-// information, see CreateCertificateAuthorityAuditReport
+// Access policies for CRLs in Amazon S3
+// (https://docs.aws.amazon.com/acm-pca/latest/userguide/crl-planning.html#s3-policies).
+// Amazon Web Services Private CA also writes revocation information to the audit
+// report. For more information, see CreateCertificateAuthorityAuditReport
 // (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html).
 // You cannot revoke a root CA self-signed certificate.
 func (c *Client) RevokeCertificate(ctx context.Context, params *RevokeCertificateInput, optFns ...func(*Options)) (*RevokeCertificateOutput, error) {
@@ -64,7 +64,7 @@ type RevokeCertificateInput struct {
 	// -text -noout You can also copy the serial number from the console or use the
 	// DescribeCertificate
 	// (https://docs.aws.amazon.com/acm/latest/APIReference/API_DescribeCertificate.html)
-	// action in the AWS Certificate Manager API Reference.
+	// action in the Certificate Manager API Reference.
 	//
 	// This member is required.
 	CertificateSerial *string

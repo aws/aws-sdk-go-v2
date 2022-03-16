@@ -12,10 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List all permissions on a private CA, if any, granted to the AWS Certificate
-// Manager (ACM) service principal (acm.amazonaws.com). These permissions allow ACM
-// to issue and renew ACM certificates that reside in the same AWS account as the
-// CA. Permissions can be granted with the CreatePermission
+// List all permissions on a private CA, if any, granted to the Certificate Manager
+// (ACM) service principal (acm.amazonaws.com). These permissions allow ACM to
+// issue and renew ACM certificates that reside in the same Amazon Web Services
+// account as the CA. Permissions can be granted with the CreatePermission
 // (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreatePermission.html)
 // action and revoked with the DeletePermission
 // (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DeletePermission.html)
@@ -33,8 +33,8 @@ import (
 // certificates reside in different accounts, then permissions cannot be used to
 // enable automatic renewals. Instead, the ACM certificate owner must set up a
 // resource-based policy to enable cross-account issuance and renewals. For more
-// information, see Using a Resource Based Policy with ACM Private CA
-// (https://docs.aws.amazon.com/acm-pca/latest/userguide/pca-rbp.html).
+// information, see Using a Resource Based Policy with Amazon Web Services Private
+// CA (https://docs.aws.amazon.com/acm-pca/latest/userguide/pca-rbp.html).
 func (c *Client) ListPermissions(ctx context.Context, params *ListPermissionsInput, optFns ...func(*Options)) (*ListPermissionsOutput, error) {
 	if params == nil {
 		params = &ListPermissionsInput{}
