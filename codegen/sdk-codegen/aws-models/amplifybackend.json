@@ -811,7 +811,7 @@
                 "DeliveryMethod": {
                     "target": "com.amazonaws.amplifybackend#DeliveryMethod",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes which mode to use (either SMS or email) to deliver messages to app users who want to recover their password.</p>",
+                        "smithy.api#documentation": "<p><b>(DEPRECATED)</b> Describes which mode to use (either SMS or email) to deliver messages to app users who want to recover their password.</p>",
                         "smithy.api#jsonName": "deliveryMethod",
                         "smithy.api#required": {}
                     }
@@ -819,20 +819,20 @@
                 "EmailSettings": {
                     "target": "com.amazonaws.amplifybackend#EmailSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration for the email sent when an app user forgets their password.</p>",
+                        "smithy.api#documentation": "<p><b>(DEPRECATED)</b> The configuration for the email sent when an app user forgets their password.</p>",
                         "smithy.api#jsonName": "emailSettings"
                     }
                 },
                 "SmsSettings": {
                     "target": "com.amazonaws.amplifybackend#SmsSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration for the SMS message sent when an app user forgets their password.</p>",
+                        "smithy.api#documentation": "<p><b>(DEPRECATED)</b> The configuration for the SMS message sent when an app user forgets their password.</p>",
                         "smithy.api#jsonName": "smsSettings"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the forgot password policy for authenticating into the Amplify app.</p>"
+                "smithy.api#documentation": "<p><b>(DEPRECATED)</b> Describes the forgot password policy for authenticating into the Amplify app.</p>"
             }
         },
         "com.amazonaws.amplifybackend#CreateBackendAuthIdentityPoolConfig": {
@@ -1090,7 +1090,7 @@
                 "ForgotPassword": {
                     "target": "com.amazonaws.amplifybackend#CreateBackendAuthForgotPasswordConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes the forgotten password policy for your Amazon Cognito user pool, configured as a part of your Amplify project.</p>",
+                        "smithy.api#documentation": "<p><b>(DEPRECATED)</b> Describes the forgotten password policy for your Amazon Cognito user pool, configured as a part of your Amplify project.</p>",
                         "smithy.api#jsonName": "forgotPassword"
                     }
                 },
@@ -1138,10 +1138,47 @@
                         "smithy.api#jsonName": "userPoolName",
                         "smithy.api#required": {}
                     }
+                },
+                "VerificationMessage": {
+                    "target": "com.amazonaws.amplifybackend#CreateBackendAuthVerificationMessageConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the email or SMS verification message for your Amazon Cognito user pool, configured as a part of your Amplify project.</p>",
+                        "smithy.api#jsonName": "verificationMessage"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes the Amazon Cognito user pool configuration for the auth resource to be configured for your Amplify project.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#CreateBackendAuthVerificationMessageConfig": {
+            "type": "structure",
+            "members": {
+                "DeliveryMethod": {
+                    "target": "com.amazonaws.amplifybackend#DeliveryMethod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of verification message to send.</p>",
+                        "smithy.api#jsonName": "deliveryMethod",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EmailSettings": {
+                    "target": "com.amazonaws.amplifybackend#EmailSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The settings for the email message.</p>",
+                        "smithy.api#jsonName": "emailSettings"
+                    }
+                },
+                "SmsSettings": {
+                    "target": "com.amazonaws.amplifybackend#SmsSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The settings for the SMS message.</p>",
+                        "smithy.api#jsonName": "smsSettings"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an email or SMS verification message for the auth resource configured for your Amplify project.</p>"
             }
         },
         "com.amazonaws.amplifybackend#CreateBackendConfig": {
@@ -1261,7 +1298,7 @@
                 "ResourceConfig": {
                     "target": "com.amazonaws.amplifybackend#ResourceConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource configuration for creating backend storage.</p>",
+                        "smithy.api#documentation": "<p>The resource configuration for creating a backend.</p>",
                         "smithy.api#jsonName": "resourceConfig"
                     }
                 },
@@ -2033,6 +2070,7 @@
         "com.amazonaws.amplifybackend#DeliveryMethod": {
             "type": "string",
             "traits": {
+                "smithy.api#documentation": "<p>The type of verification message to send.</p>",
                 "smithy.api#enum": [
                     {
                         "value": "EMAIL",
@@ -2051,14 +2089,14 @@
                 "EmailMessage": {
                     "target": "com.amazonaws.amplifybackend#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The body of the email.</p>",
+                        "smithy.api#documentation": "<p>The contents of the email message.</p>",
                         "smithy.api#jsonName": "emailMessage"
                     }
                 },
                 "EmailSubject": {
                     "target": "com.amazonaws.amplifybackend#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The subject of the email.</p>",
+                        "smithy.api#documentation": "<p>The contents of the subject line of the email message.</p>",
                         "smithy.api#jsonName": "emailSubject"
                     }
                 }
@@ -3916,7 +3954,7 @@
                 "SmsMessage": {
                     "target": "com.amazonaws.amplifybackend#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The body of the SMS message.</p>",
+                        "smithy.api#documentation": "<p>The contents of the SMS message.</p>",
                         "smithy.api#jsonName": "smsMessage"
                     }
                 }
@@ -4157,27 +4195,27 @@
                 "DeliveryMethod": {
                     "target": "com.amazonaws.amplifybackend#DeliveryMethod",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes which mode to use (either SMS or email) to deliver messages to app users that want to recover their password.</p>",
+                        "smithy.api#documentation": "<p><b>(DEPRECATED)</b> Describes which mode to use (either SMS or email) to deliver messages to app users that want to recover their password.</p>",
                         "smithy.api#jsonName": "deliveryMethod"
                     }
                 },
                 "EmailSettings": {
                     "target": "com.amazonaws.amplifybackend#EmailSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration for the email sent when an app user forgets their password.</p>",
+                        "smithy.api#documentation": "<p><b>(DEPRECATED)</b> The configuration for the email sent when an app user forgets their password.</p>",
                         "smithy.api#jsonName": "emailSettings"
                     }
                 },
                 "SmsSettings": {
                     "target": "com.amazonaws.amplifybackend#SmsSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration for the SMS message sent when an Amplify app user forgets their password.</p>",
+                        "smithy.api#documentation": "<p><b>(DEPRECATED)</b> The configuration for the SMS message sent when an Amplify app user forgets their password.</p>",
                         "smithy.api#jsonName": "smsSettings"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the forgot password policy for authenticating into the Amplify app.</p>"
+                "smithy.api#documentation": "<p><b>(DEPRECATED)</b> Describes the forgot password policy for authenticating into the Amplify app.</p>"
             }
         },
         "com.amazonaws.amplifybackend#UpdateBackendAuthIdentityPoolConfig": {
@@ -4420,7 +4458,7 @@
                 "ForgotPassword": {
                     "target": "com.amazonaws.amplifybackend#UpdateBackendAuthForgotPasswordConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes the forgot password policy for your Amazon Cognito user pool, configured as a part of your Amplify project.</p>",
+                        "smithy.api#documentation": "<p><b>(DEPRECATED)</b> Describes the forgot password policy for your Amazon Cognito user pool, configured as a part of your Amplify project.</p>",
                         "smithy.api#jsonName": "forgotPassword"
                     }
                 },
@@ -4444,10 +4482,47 @@
                         "smithy.api#documentation": "<p>Describes the password policy for your Amazon Cognito user pool, configured as a part of your Amplify project.</p>",
                         "smithy.api#jsonName": "passwordPolicy"
                     }
+                },
+                "VerificationMessage": {
+                    "target": "com.amazonaws.amplifybackend#UpdateBackendAuthVerificationMessageConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the email or SMS verification message for your Amazon Cognito user pool, configured as a part of your Amplify project.</p>",
+                        "smithy.api#jsonName": "verificationMessage"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes the Amazon Cognito user pool configuration for the authorization resource to be configured for your Amplify project on an update.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#UpdateBackendAuthVerificationMessageConfig": {
+            "type": "structure",
+            "members": {
+                "DeliveryMethod": {
+                    "target": "com.amazonaws.amplifybackend#DeliveryMethod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of verification message to send.</p>",
+                        "smithy.api#jsonName": "deliveryMethod",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EmailSettings": {
+                    "target": "com.amazonaws.amplifybackend#EmailSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The settings for the email message.</p>",
+                        "smithy.api#jsonName": "emailSettings"
+                    }
+                },
+                "SmsSettings": {
+                    "target": "com.amazonaws.amplifybackend#SmsSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The settings for the SMS message.</p>",
+                        "smithy.api#jsonName": "smsSettings"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the configuration of the email or SMS message for the auth resource configured for your Amplify project.</p>"
             }
         },
         "com.amazonaws.amplifybackend#UpdateBackendConfig": {

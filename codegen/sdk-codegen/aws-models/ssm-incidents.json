@@ -113,7 +113,7 @@
             }
         },
         "com.amazonaws.ssmincidents#AutomationExecutionSet": {
-            "type": "set",
+            "type": "list",
             "member": {
                 "target": "com.amazonaws.ssmincidents#AutomationExecution"
             },
@@ -265,9 +265,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>A replication set replicates and encrypts your data to the provided Regions with the\n            provided KMS key. </p>",
                 "smithy.api#http": {
+                    "code": 201,
                     "method": "POST",
-                    "uri": "/createReplicationSet",
-                    "code": 201
+                    "uri": "/createReplicationSet"
                 }
             }
         },
@@ -336,9 +336,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>Creates a response plan that automates the initial response to incidents. A response\n            plan engages contacts, starts chat channel collaboration, and initiates runbooks at the\n            beginning of an incident.</p>",
                 "smithy.api#http": {
+                    "code": 201,
                     "method": "POST",
-                    "uri": "/createResponsePlan",
-                    "code": 201
+                    "uri": "/createResponsePlan"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -448,9 +448,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>Creates a custom timeline event on the incident details page of an incident record.\n            Timeline events are automatically created by Incident Manager, marking key moment during an\n            incident. You can create custom timeline events to mark important events that are\n            automatically detected by Incident Manager.</p>",
                 "smithy.api#http": {
+                    "code": 201,
                     "method": "POST",
-                    "uri": "/createTimelineEvent",
-                    "code": 201
+                    "uri": "/createTimelineEvent"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -559,9 +559,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>Delete an incident record from Incident Manager. </p>",
                 "smithy.api#http": {
+                    "code": 204,
                     "method": "POST",
-                    "uri": "/deleteIncidentRecord",
-                    "code": 204
+                    "uri": "/deleteIncidentRecord"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -631,9 +631,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>Deletes all Regions in your replication set. Deleting the replication set deletes all\n            Incident Manager data.</p>",
                 "smithy.api#http": {
+                    "code": 204,
                     "method": "POST",
-                    "uri": "/deleteReplicationSet",
-                    "code": 204
+                    "uri": "/deleteReplicationSet"
                 }
             }
         },
@@ -685,9 +685,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>Deletes the resource policy that Resource Access Manager uses to share your Incident Manager\n            resource.</p>",
                 "smithy.api#http": {
+                    "code": 200,
                     "method": "POST",
-                    "uri": "/deleteResourcePolicy",
-                    "code": 200
+                    "uri": "/deleteResourcePolicy"
                 }
             }
         },
@@ -745,9 +745,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>Deletes the specified response plan. Deleting a response plan stops all linked CloudWatch alarms and EventBridge events from creating an incident with this\n            response plan.</p>",
                 "smithy.api#http": {
+                    "code": 204,
                     "method": "POST",
-                    "uri": "/deleteResponsePlan",
-                    "code": 204
+                    "uri": "/deleteResponsePlan"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -796,9 +796,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>Deletes a timeline event from an incident.</p>",
                 "smithy.api#http": {
+                    "code": 204,
                     "method": "POST",
-                    "uri": "/deleteTimelineEvent",
-                    "code": 204
+                    "uri": "/deleteTimelineEvent"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -987,9 +987,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>Returns the details for the specified incident record.</p>",
                 "smithy.api#http": {
+                    "code": 200,
                     "method": "GET",
-                    "uri": "/getIncidentRecord",
-                    "code": 200
+                    "uri": "/getIncidentRecord"
                 },
                 "smithy.api#readonly": {}
             }
@@ -1050,14 +1050,16 @@
             "traits": {
                 "smithy.api#documentation": "<p>Retrieve your Incident Manager replication set.</p>",
                 "smithy.api#http": {
+                    "code": 200,
                     "method": "GET",
-                    "uri": "/getReplicationSet",
-                    "code": 200
+                    "uri": "/getReplicationSet"
                 },
                 "smithy.api#readonly": {},
                 "smithy.waiters#waitable": {
                     "WaitForReplicationSetActive": {
                         "documentation": "Wait for a replication set to become ACTIVE",
+                        "minDelay": 30,
+                        "maxDelay": 30,
                         "acceptors": [
                             {
                                 "state": "success",
@@ -1099,12 +1101,12 @@
                                     }
                                 }
                             }
-                        ],
-                        "minDelay": 30,
-                        "maxDelay": 30
+                        ]
                     },
                     "WaitForReplicationSetDeleted": {
                         "documentation": "Wait for a replication set to be deleted",
+                        "minDelay": 30,
+                        "maxDelay": 30,
                         "acceptors": [
                             {
                                 "state": "success",
@@ -1132,9 +1134,7 @@
                                     }
                                 }
                             }
-                        ],
-                        "minDelay": 30,
-                        "maxDelay": 30
+                        ]
                     }
                 }
             }
@@ -1195,15 +1195,15 @@
             "traits": {
                 "smithy.api#documentation": "<p>Retrieves the resource policies attached to the specified response plan.</p>",
                 "smithy.api#http": {
+                    "code": 200,
                     "method": "POST",
-                    "uri": "/getResourcePolicies",
-                    "code": 200
+                    "uri": "/getResourcePolicies"
                 },
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
-                    "items": "resourcePolicies",
-                    "pageSize": "maxResults"
+                    "pageSize": "maxResults",
+                    "items": "resourcePolicies"
                 },
                 "smithy.api#readonly": {}
             }
@@ -1288,9 +1288,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>Retrieves the details of the specified response plan.</p>",
                 "smithy.api#http": {
+                    "code": 200,
                     "method": "GET",
-                    "uri": "/getResponsePlan",
-                    "code": 200
+                    "uri": "/getResponsePlan"
                 },
                 "smithy.api#readonly": {}
             }
@@ -1389,9 +1389,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>Retrieves a timeline event based on its ID and incident record.</p>",
                 "smithy.api#http": {
+                    "code": 200,
                     "method": "GET",
-                    "uri": "/getTimelineEvent",
-                    "code": 200
+                    "uri": "/getTimelineEvent"
                 },
                 "smithy.api#readonly": {}
             }
@@ -1560,7 +1560,7 @@
                     }
                 },
                 "invokedBy": {
-                    "target": "com.amazonaws.ssmincidents#Arn",
+                    "target": "com.amazonaws.ssmincidents#ServicePrincipal",
                     "traits": {
                         "smithy.api#documentation": "<p>The principal the assumed the role specified of the <code>createdBy</code>.</p>",
                         "smithy.api#tags": [
@@ -1887,15 +1887,15 @@
             "traits": {
                 "smithy.api#documentation": "<p>Lists all incident records in your account. Use this command to retrieve the Amazon\n            Resource Name (ARN) of the incident record you want to update. </p>",
                 "smithy.api#http": {
+                    "code": 200,
                     "method": "POST",
-                    "uri": "/listIncidentRecords",
-                    "code": 200
+                    "uri": "/listIncidentRecords"
                 },
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
-                    "items": "incidentRecordSummaries",
-                    "pageSize": "maxResults"
+                    "pageSize": "maxResults",
+                    "items": "incidentRecordSummaries"
                 },
                 "smithy.api#readonly": {}
             }
@@ -1972,15 +1972,15 @@
             "traits": {
                 "smithy.api#documentation": "<p>List all related items for an incident record.</p>",
                 "smithy.api#http": {
+                    "code": 200,
                     "method": "POST",
-                    "uri": "/listRelatedItems",
-                    "code": 200
+                    "uri": "/listRelatedItems"
                 },
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
-                    "items": "relatedItems",
-                    "pageSize": "maxResults"
+                    "pageSize": "maxResults",
+                    "items": "relatedItems"
                 },
                 "smithy.api#readonly": {}
             }
@@ -2061,15 +2061,15 @@
             "traits": {
                 "smithy.api#documentation": "<p>Lists details about the replication set configured in your account. </p>",
                 "smithy.api#http": {
+                    "code": 200,
                     "method": "POST",
-                    "uri": "/listReplicationSets",
-                    "code": 200
+                    "uri": "/listReplicationSets"
                 },
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
-                    "items": "replicationSetArns",
-                    "pageSize": "maxResults"
+                    "pageSize": "maxResults",
+                    "items": "replicationSetArns"
                 },
                 "smithy.api#readonly": {}
             }
@@ -2140,15 +2140,15 @@
             "traits": {
                 "smithy.api#documentation": "<p>Lists all response plans in your account.</p>",
                 "smithy.api#http": {
+                    "code": 200,
                     "method": "POST",
-                    "uri": "/listResponsePlans",
-                    "code": 200
+                    "uri": "/listResponsePlans"
                 },
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
-                    "items": "responsePlanSummaries",
-                    "pageSize": "maxResults"
+                    "pageSize": "maxResults",
+                    "items": "responsePlanSummaries"
                 },
                 "smithy.api#readonly": {}
             }
@@ -2222,9 +2222,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>Lists the tags that are attached to the specified response plan.</p>",
                 "smithy.api#http": {
+                    "code": 200,
                     "method": "GET",
-                    "uri": "/tags/{resourceArn}",
-                    "code": 200
+                    "uri": "/tags/{resourceArn}"
                 },
                 "smithy.api#readonly": {}
             }
@@ -2282,15 +2282,15 @@
             "traits": {
                 "smithy.api#documentation": "<p>Lists timeline events for the specified incident record.</p>",
                 "smithy.api#http": {
+                    "code": 200,
                     "method": "POST",
-                    "uri": "/listTimelineEvents",
-                    "code": 200
+                    "uri": "/listTimelineEvents"
                 },
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
-                    "items": "eventSummaries",
-                    "pageSize": "maxResults"
+                    "pageSize": "maxResults",
+                    "items": "eventSummaries"
                 },
                 "smithy.api#readonly": {}
             }
@@ -2414,7 +2414,7 @@
             }
         },
         "com.amazonaws.ssmincidents#NotificationTargetSet": {
-            "type": "set",
+            "type": "list",
             "member": {
                 "target": "com.amazonaws.ssmincidents#NotificationTargetItem"
             },
@@ -2469,9 +2469,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>Adds a resource policy to the specified response plan.</p>",
                 "smithy.api#http": {
+                    "code": 200,
                     "method": "POST",
-                    "uri": "/putResourcePolicy",
-                    "code": 200
+                    "uri": "/putResourcePolicy"
                 }
             }
         },
@@ -2958,9 +2958,8 @@
                 "aws.api#service": {
                     "sdkId": "SSM Incidents",
                     "arnNamespace": "ssm-incidents",
-                    "cloudFormationName": "SSMIncidents",
-                    "cloudTrailEventSource": "ssm-incidents.amazonaws.com",
-                    "endpointPrefix": "ssm-incidents"
+                    "awsProductName": "AWSSystemsManager",
+                    "cloudFormationName": "SSMIncidents"
                 },
                 "aws.auth#sigv4": {
                     "name": "ssm-incidents"
@@ -2968,9 +2967,9 @@
                 "aws.protocols#restJson1": {},
                 "smithy.api#cors": {
                     "additionalAllowedHeaders": [
+                        "content-type",
                         "x-amz-content-sha256",
                         "x-amz-user-agent",
-                        "content-type",
                         "x-amzn-platform-id"
                     ]
                 },
@@ -3077,6 +3076,14 @@
                         "name": "SSM_INCIDENTS"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.ssmincidents#ServicePrincipal": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 1000
+                }
             }
         },
         "com.amazonaws.ssmincidents#ServiceQuotaExceededException": {
@@ -3305,9 +3312,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>Used to start an incident from CloudWatch alarms, EventBridge events, or\n            manually. </p>",
                 "smithy.api#http": {
+                    "code": 200,
                     "method": "POST",
-                    "uri": "/startIncident",
-                    "code": 200
+                    "uri": "/startIncident"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -3473,9 +3480,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>Adds a tag to a response plan.</p>",
                 "smithy.api#http": {
+                    "code": 204,
                     "method": "POST",
-                    "uri": "/tags/{resourceArn}",
-                    "code": 204
+                    "uri": "/tags/{resourceArn}"
                 }
             }
         },
@@ -3696,9 +3703,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>Removes a tag from a resource.</p>",
                 "smithy.api#http": {
+                    "code": 204,
                     "method": "DELETE",
-                    "uri": "/tags/{resourceArn}",
-                    "code": 204
+                    "uri": "/tags/{resourceArn}"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -3765,9 +3772,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>Update deletion protection to either allow or deny deletion of the final Region in a\n            replication set.</p>",
                 "smithy.api#http": {
+                    "code": 204,
                     "method": "POST",
-                    "uri": "/updateDeletionProtection",
-                    "code": 204
+                    "uri": "/updateDeletionProtection"
                 }
             }
         },
@@ -3841,9 +3848,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>Update the details of an incident record. You can use this operation to update an\n            incident record from the defined chat channel. For more information about using actions\n            in chat channels, see <a href=\"https://docs.aws.amazon.com/incident-manager/latest/userguide/chat.html#chat-interact\">Interacting through chat</a>.</p>",
                 "smithy.api#http": {
+                    "code": 204,
                     "method": "POST",
-                    "uri": "/updateIncidentRecord",
-                    "code": 204
+                    "uri": "/updateIncidentRecord"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -3947,9 +3954,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>Add or remove related items from the related items tab of an incident record.</p>",
                 "smithy.api#http": {
+                    "code": 204,
                     "method": "POST",
-                    "uri": "/updateRelatedItems",
-                    "code": 204
+                    "uri": "/updateRelatedItems"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -4018,9 +4025,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>Add or delete Regions from your replication set.</p>",
                 "smithy.api#http": {
+                    "code": 204,
                     "method": "POST",
-                    "uri": "/updateReplicationSet",
-                    "code": 204
+                    "uri": "/updateReplicationSet"
                 }
             }
         },
@@ -4115,9 +4122,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>Updates the specified response plan.</p>",
                 "smithy.api#http": {
+                    "code": 204,
                     "method": "POST",
-                    "uri": "/updateResponsePlan",
-                    "code": 204
+                    "uri": "/updateResponsePlan"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -4239,9 +4246,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>Updates a timeline event. You can update events of type <code>Custom\n            Event</code>.</p>",
                 "smithy.api#http": {
+                    "code": 204,
                     "method": "POST",
-                    "uri": "/updateTimelineEvent",
-                    "code": 204
+                    "uri": "/updateTimelineEvent"
                 },
                 "smithy.api#idempotent": {}
             }
