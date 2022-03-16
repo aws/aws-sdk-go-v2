@@ -1,8 +1,0 @@
-{
-    "id": "11f3dde1-2159-4f56-b0a6-4be526ef878f",
-    "type": "feature",
-    "description": "Removed incorrect validation pattern for IncidentRecordSource.invokedBy",
-    "modules": [
-        "service/ssmincidents"
-    ]
-}

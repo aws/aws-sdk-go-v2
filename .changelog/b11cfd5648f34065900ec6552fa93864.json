@@ -1,8 +1,0 @@
-{
-    "id": "b11cfd56-48f3-4065-900e-c6552fa93864",
-    "type": "feature",
-    "description": "This is the initial SDK release for AWS Billing Conductor. The AWS Billing Conductor is a customizable billing service, allowing you to customize your billing data to match your desired business structure.",
-    "modules": [
-        "service/billingconductor"
-    ]
-}

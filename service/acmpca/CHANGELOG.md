@@ -1,3 +1,7 @@
+# v1.17.0 (2022-03-16)
+
+* **Feature**: AWS Certificate Manager (ACM) Private Certificate Authority (CA) now supports customizable certificate subject names and extensions.
+
 # v1.16.0 (2022-03-08)
 
 * **Feature**: Updated `github.com/aws/smithy-go` to latest version
