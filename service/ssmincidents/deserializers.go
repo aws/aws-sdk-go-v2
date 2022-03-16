@@ -4920,7 +4920,7 @@ func awsRestjson1_deserializeDocumentIncidentRecordSource(v **types.IncidentReco
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+					return fmt.Errorf("expected ServicePrincipal to be of type string, got %T instead", value)
 				}
 				sv.InvokedBy = ptr.String(jtv)
 			}

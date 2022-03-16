@@ -12,13 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Amazon S3 on Outposts Access Points simplify managing data access at scale for
-// shared datasets in S3 on Outposts. S3 on Outposts uses endpoints to connect to
-// Outposts buckets so that you can perform actions within your virtual private
-// cloud (VPC). For more information, see  Accessing S3 on Outposts using VPC only
-// access points
-// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/AccessingS3Outposts.html).
-// This action lists endpoints associated with the Outposts. Related actions
+// Lists endpoints associated with the specified Outpost. Related actions
 // include:
 //
 // * CreateEndpoint
@@ -44,10 +38,11 @@ func (c *Client) ListEndpoints(ctx context.Context, params *ListEndpointsInput, 
 
 type ListEndpointsInput struct {
 
-	// The max number of endpoints that can be returned on the request.
+	// The maximum number of endpoints that will be returned in the response.
 	MaxResults int32
 
-	// The next endpoint requested in the list.
+	// If a previous response from this operation included a NextToken value, provide
+	// that value here to retrieve the next page of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -55,10 +50,12 @@ type ListEndpointsInput struct {
 
 type ListEndpointsOutput struct {
 
-	// Returns an array of endpoints associated with AWS Outposts.
+	// The list of endpoints associated with the specified Outpost.
 	Endpoints []types.Endpoint
 
-	// The next endpoint returned in the list.
+	// If the number of endpoints associated with the specified Outpost exceeds
+	// MaxResults, you can include this value in subsequent calls to this operation to
+	// retrieve more results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -136,7 +133,7 @@ var _ ListEndpointsAPIClient = (*Client)(nil)
 
 // ListEndpointsPaginatorOptions is the paginator options for ListEndpoints
 type ListEndpointsPaginatorOptions struct {
-	// The max number of endpoints that can be returned on the request.
+	// The maximum number of endpoints that will be returned in the response.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

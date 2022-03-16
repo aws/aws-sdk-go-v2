@@ -587,6 +587,28 @@ func validateApiPassthrough(v *types.ApiPassthrough) error {
 			invalidParams.AddNested("Extensions", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Subject != nil {
+		if err := validateASN1Subject(v.Subject); err != nil {
+			invalidParams.AddNested("Subject", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateASN1Subject(v *types.ASN1Subject) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ASN1Subject"}
+	if v.CustomAttributes != nil {
+		if err := validateCustomAttributeList(v.CustomAttributes); err != nil {
+			invalidParams.AddNested("CustomAttributes", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -607,6 +629,10 @@ func validateCertificateAuthorityConfiguration(v *types.CertificateAuthorityConf
 	}
 	if v.Subject == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Subject"))
+	} else if v.Subject != nil {
+		if err := validateASN1Subject(v.Subject); err != nil {
+			invalidParams.AddNested("Subject", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.CsrExtensions != nil {
 		if err := validateCsrExtensions(v.CsrExtensions); err != nil {
@@ -666,6 +692,76 @@ func validateCsrExtensions(v *types.CsrExtensions) error {
 	}
 }
 
+func validateCustomAttribute(v *types.CustomAttribute) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomAttribute"}
+	if v.ObjectIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ObjectIdentifier"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomAttributeList(v []types.CustomAttribute) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomAttributeList"}
+	for i := range v {
+		if err := validateCustomAttribute(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomExtension(v *types.CustomExtension) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomExtension"}
+	if v.ObjectIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ObjectIdentifier"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomExtensionList(v []types.CustomExtension) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomExtensionList"}
+	for i := range v {
+		if err := validateCustomExtension(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateEdiPartyName(v *types.EdiPartyName) error {
 	if v == nil {
 		return nil
@@ -696,6 +792,11 @@ func validateExtensions(v *types.Extensions) error {
 			invalidParams.AddNested("SubjectAlternativeNames", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.CustomExtensions != nil {
+		if err := validateCustomExtensionList(v.CustomExtensions); err != nil {
+			invalidParams.AddNested("CustomExtensions", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -711,6 +812,11 @@ func validateGeneralName(v *types.GeneralName) error {
 	if v.OtherName != nil {
 		if err := validateOtherName(v.OtherName); err != nil {
 			invalidParams.AddNested("OtherName", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DirectoryName != nil {
+		if err := validateASN1Subject(v.DirectoryName); err != nil {
+			invalidParams.AddNested("DirectoryName", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.EdiPartyName != nil {

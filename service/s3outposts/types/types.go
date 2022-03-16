@@ -10,12 +10,13 @@ import (
 // Amazon S3 on Outposts Access Points simplify managing data access at scale for
 // shared datasets in S3 on Outposts. S3 on Outposts uses endpoints to connect to
 // Outposts buckets so that you can perform actions within your virtual private
-// cloud (VPC). For more information, see  Accessing S3 on Outposts using VPC only
+// cloud (VPC). For more information, see  Accessing S3 on Outposts using VPC-only
 // access points
-// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/AccessingS3Outposts.html).
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/WorkingWithS3Outposts.html)
+// in the Amazon Simple Storage Service User Guide.
 type Endpoint struct {
 
-	//
+	// The type of connectivity used to access the Amazon S3 on Outposts endpoint.
 	AccessType EndpointAccessType
 
 	// The VPC CIDR committed by this endpoint.
@@ -24,7 +25,7 @@ type Endpoint struct {
 	// The time the endpoint was created.
 	CreationTime *time.Time
 
-	// The ID of the customer-owned IPv4 pool used for the endpoint.
+	// The ID of the customer-owned IPv4 address pool used for the endpoint.
 	CustomerOwnedIpv4Pool *string
 
 	// The Amazon Resource Name (ARN) of the endpoint.
@@ -33,7 +34,7 @@ type Endpoint struct {
 	// The network interface of the endpoint.
 	NetworkInterfaces []NetworkInterface
 
-	// The ID of the AWS Outposts.
+	// The ID of the Outposts.
 	OutpostsId *string
 
 	// The ID of the security group used for the endpoint.

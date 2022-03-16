@@ -1,0 +1,8 @@
+{
+    "id": "53b9072b-1eba-487e-a5ac-2b7dfc8d36b5",
+    "type": "feature",
+    "description": "S3 on Outposts is releasing a new API, ListSharedEndpoints, that lists all endpoints associated with S3 on Outpost, that has been shared by Resource Access Manager (RAM).",
+    "modules": [
+        "service/s3outposts"
+    ]
+}

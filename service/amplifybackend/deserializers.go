@@ -7141,6 +7141,61 @@ func awsRestjson1_deserializeDocumentCreateBackendAuthUserPoolConfig(v **types.C
 				sv.UserPoolName = ptr.String(jtv)
 			}
 
+		case "verificationMessage":
+			if err := awsRestjson1_deserializeDocumentCreateBackendAuthVerificationMessageConfig(&sv.VerificationMessage, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCreateBackendAuthVerificationMessageConfig(v **types.CreateBackendAuthVerificationMessageConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CreateBackendAuthVerificationMessageConfig
+	if *v == nil {
+		sv = &types.CreateBackendAuthVerificationMessageConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "deliveryMethod":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeliveryMethod to be of type string, got %T instead", value)
+				}
+				sv.DeliveryMethod = types.DeliveryMethod(jtv)
+			}
+
+		case "emailSettings":
+			if err := awsRestjson1_deserializeDocumentEmailSettings(&sv.EmailSettings, value); err != nil {
+				return err
+			}
+
+		case "smsSettings":
+			if err := awsRestjson1_deserializeDocumentSmsSettings(&sv.SmsSettings, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
