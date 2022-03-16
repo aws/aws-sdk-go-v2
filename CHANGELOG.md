@@ -1,3 +1,18 @@
+# Release (2022-03-16)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/acmpca`: [v1.17.0](service/acmpca/CHANGELOG.md#v1170-2022-03-16)
+  * **Feature**: AWS Certificate Manager (ACM) Private Certificate Authority (CA) now supports customizable certificate subject names and extensions.
+* `github.com/aws/aws-sdk-go-v2/service/amplifybackend`: [v1.13.0](service/amplifybackend/CHANGELOG.md#v1130-2022-03-16)
+  * **Feature**: Adding the ability to customize Cognito verification messages for email and SMS in CreateBackendAuth and UpdateBackendAuth. Adding deprecation documentation for ForgotPassword in CreateBackendAuth and UpdateBackendAuth
+* `github.com/aws/aws-sdk-go-v2/service/billingconductor`: [v1.0.0](service/billingconductor/CHANGELOG.md#v100-2022-03-16)
+  * **Release**: New AWS service client module
+  * **Feature**: This is the initial SDK release for AWS Billing Conductor. The AWS Billing Conductor is a customizable billing service, allowing you to customize your billing data to match your desired business structure.
+* `github.com/aws/aws-sdk-go-v2/service/s3outposts`: [v1.13.0](service/s3outposts/CHANGELOG.md#v1130-2022-03-16)
+  * **Feature**: S3 on Outposts is releasing a new API, ListSharedEndpoints, that lists all endpoints associated with S3 on Outpost, that has been shared by Resource Access Manager (RAM).
+* `github.com/aws/aws-sdk-go-v2/service/ssmincidents`: [v1.13.0](service/ssmincidents/CHANGELOG.md#v1130-2022-03-16)
+  * **Feature**: Removed incorrect validation pattern for IncidentRecordSource.invokedBy
+
 # Release (2022-03-15)
 
 ## Module Highlights

@@ -1,3 +1,7 @@
+# v1.13.0 (2022-03-16)
+
+* **Feature**: Removed incorrect validation pattern for IncidentRecordSource.invokedBy
+
 # v1.12.0 (2022-03-08)
 
 * **Feature**: Updated `github.com/aws/smithy-go` to latest version

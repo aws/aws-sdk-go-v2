@@ -1,3 +1,7 @@
+# v1.13.0 (2022-03-16)
+
+* **Feature**: Adding the ability to customize Cognito verification messages for email and SMS in CreateBackendAuth and UpdateBackendAuth. Adding deprecation documentation for ForgotPassword in CreateBackendAuth and UpdateBackendAuth
+
 # v1.12.0 (2022-03-08)
 
 * **Feature**: Updated `github.com/aws/smithy-go` to latest version

@@ -1,8 +1,0 @@
-{
-    "id": "727c4f8f-8afe-4083-a6e1-f8f9435d7cb3",
-    "type": "feature",
-    "description": "Adding the ability to customize Cognito verification messages for email and SMS in CreateBackendAuth and UpdateBackendAuth. Adding deprecation documentation for ForgotPassword in CreateBackendAuth and UpdateBackendAuth",
-    "modules": [
-        "service/amplifybackend"
-    ]
-}
