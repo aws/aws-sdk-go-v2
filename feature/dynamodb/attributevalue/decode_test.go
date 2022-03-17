@@ -797,6 +797,56 @@ func (t *testUnmarshalMapKeyComplex) UnmarshalDynamoDBAttributeValue(av types.At
 	return nil
 }
 
+func TestUnmarshalWithCustomTimeFormats(t *testing.T) {
+	type A struct {
+		TimeField time.Time
+	}
+	cases := map[string]struct {
+		input      *types.AttributeValueMemberS
+		timeFormat string
+		expect     time.Time
+	}{
+		"UnixDate": {
+			input:      &types.AttributeValueMemberS{Value: "Thu Jan  1 00:02:03 UTC 1970"},
+			expect:     time.Unix(123, 0).UTC(),
+			timeFormat: time.UnixDate,
+		},
+		"RFC3339 millis keeping zeroes": {
+			input:  &types.AttributeValueMemberS{Value: "1970-01-01T00:02:03.010Z"},
+			expect: time.Unix(123, 10000000).UTC(),
+		},
+		"RFC822": {
+			input:      &types.AttributeValueMemberS{Value: "01 Jan 70 00:02 UTC"},
+			expect:     time.Unix(120, 0).UTC(),
+			timeFormat: time.RFC822,
+		},
+	}
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			inputMap := &types.AttributeValueMemberM{
+				Value: map[string]types.AttributeValue{
+					"TimeField": c.input,
+				},
+			}
+			expectedValue := A{
+				TimeField: c.expect,
+			}
+
+			actualValue := A{}
+			if err := UnmarshalWithOptions(inputMap, &actualValue, func(options *DecoderOptions) {
+				if c.timeFormat != "" {
+					options.TimeFormat = c.timeFormat
+				}
+			}); err != nil {
+				t.Errorf("expect no error, got %v", err)
+			}
+			if expectedValue != actualValue {
+				t.Errorf("expect %+v, got %+v", expectedValue, actualValue)
+			}
+		})
+	}
+}
+
 func TestUnmarshalMap_keyTypes(t *testing.T) {
 	type StrAlias string
 	type IntAlias int

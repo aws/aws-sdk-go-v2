@@ -212,6 +212,11 @@ type DecoderOptions struct {
 	// Number type instead of float64 when the destination type
 	// is interface{}. Similar to encoding/json.Number
 	UseNumber bool
+
+	// Format to decode time.Time fields
+	//
+	// Defaults to time.RFC3339
+	TimeFormat string
 }
 
 // A Decoder provides unmarshaling AttributeValues to Go value types.
@@ -222,7 +227,10 @@ type Decoder struct {
 // NewDecoder creates a new Decoder with default configuration. Use
 // the `opts` functional options to override the default configuration.
 func NewDecoder(optFns ...func(*DecoderOptions)) *Decoder {
-	options := DecoderOptions{TagKey: defaultTagKey}
+	options := DecoderOptions{
+		TagKey:     defaultTagKey,
+		TimeFormat: time.RFC3339,
+	}
 	for _, fn := range optFns {
 		fn(&options)
 	}
@@ -686,7 +694,7 @@ func (d *Decoder) decodeString(s string, v reflect.Value, fieldTag tag) error {
 	// To maintain backwards compatibility with ConvertFrom family of methods which
 	// converted strings to time.Time structs
 	if v.Type().ConvertibleTo(timeType) {
-		t, err := time.Parse(time.RFC3339, s)
+		t, err := time.Parse(d.options.TimeFormat, s)
 		if err != nil {
 			return err
 		}

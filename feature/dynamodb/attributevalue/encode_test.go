@@ -338,6 +338,56 @@ func TestEncodeAliasedUnixTime(t *testing.T) {
 	}
 }
 
+func TestMarshalWithCustomTimeFormats(t *testing.T) {
+	type A struct {
+		TimeField time.Time
+	}
+	cases := map[string]struct {
+		input      time.Time
+		expect     *types.AttributeValueMemberS
+		timeFormat string
+	}{
+		"UnixDate": {
+			input:      time.Unix(123, 0).UTC(),
+			expect:     &types.AttributeValueMemberS{Value: "Thu Jan  1 00:02:03 UTC 1970"},
+			timeFormat: time.UnixDate,
+		},
+		"RFC3339 millis keeping zeroes": {
+			input:      time.Unix(123, 10000000).UTC(),
+			expect:     &types.AttributeValueMemberS{Value: "1970-01-01T00:02:03.010Z"},
+			timeFormat: "2006-01-02T15:04:05.000Z07:00", // Would be RFC3339 millis with zeroes
+		},
+		"RFC822": {
+			input:      time.Unix(120, 0).UTC(),
+			expect:     &types.AttributeValueMemberS{Value: "01 Jan 70 00:02 UTC"},
+			timeFormat: time.RFC822,
+		},
+	}
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			inputValue := A{
+				TimeField: c.input,
+			}
+			actual, err := MarshalWithOptions(inputValue, func(eo *EncoderOptions) {
+				if c.timeFormat != "" {
+					eo.TimeFormat = c.timeFormat
+				}
+			})
+			if err != nil {
+				t.Errorf("expect no err, got %v", err)
+			}
+			expectedValue := &types.AttributeValueMemberM{
+				Value: map[string]types.AttributeValue{
+					"TimeField": c.expect,
+				},
+			}
+			if !reflect.DeepEqual(expectedValue, actual) {
+				t.Errorf("expect %+v, got %+v", expectedValue, actual)
+			}
+		})
+	}
+}
+
 func TestEncoderFieldByIndex(t *testing.T) {
 	type (
 		Middle struct{ Inner int }
