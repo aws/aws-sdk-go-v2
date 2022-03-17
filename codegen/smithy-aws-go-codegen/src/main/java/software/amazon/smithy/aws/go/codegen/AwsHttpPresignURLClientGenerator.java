@@ -21,6 +21,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
+import javax.swing.plaf.synth.SynthMenuItemUI;
 import software.amazon.smithy.aws.go.codegen.customization.AwsCustomGoDependency;
 import software.amazon.smithy.aws.go.codegen.customization.PresignURLAutoFill;
 import software.amazon.smithy.aws.traits.ServiceTrait;
@@ -229,11 +230,11 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
         writer.writeDocs(
                 String.format(
                         "Presign%s is used to generate a presigned HTTP Request which contains presigned URL, signed headers "
-                        + "and HTTP method used.", operationSymbol.getName())
+                                + "and HTTP method used.", operationSymbol.getName())
         );
         writer.openBlock(
                 "func (c *$T) Presign$T(ctx context.Context, params $P, optFns ...func($P)) "
-                + "($P, error) {", "}", presignClientSymbol, operationSymbol,
+                        + "($P, error) {", "}", presignClientSymbol, operationSymbol,
                 operationInputSymbol, presignOptionsSymbol, v4PresignedHTTPRequestSymbol,
                 () -> {
                     writer.write("if params == nil { params = &$T{} }", operationInputSymbol).insertTrailingNewline();
@@ -367,6 +368,14 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
                     writer.write("err = stack.Finalize.Add(pmw, $T)", smithyAfter);
                     writer.write("if err != nil { return err }");
 
+                    // Add the default content-type remover middleware
+                    writer.openBlock("if err = $T(stack); err != nil {", "}",
+                            SymbolUtils.createValueSymbolBuilder("AddNoPayloadDefaultContentTypeRemover",
+                                    SmithyGoDependency.SMITHY_HTTP_TRANSPORT).build(),
+                            () -> {
+                                writer.write("return err");
+                            });
+
                     // if protocol used is ec2query or query
                     if (serviceShape.hasTrait(AwsQueryTrait.ID) || serviceShape.hasTrait(Ec2QueryTrait.ID)) {
                         // presigned url should convert to Get request
@@ -420,13 +429,14 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
                                 "AddExpiresOnPresignedURL",
                                 AwsCustomGoDependency.S3_CUSTOMIZATION).build();
                         writer.writeDocs("add middleware to set expiration for s3 presigned url, "
-                                         + " if expiration is set to 0, this middleware sets a default expiration of 900 seconds");
+                                + " if expiration is set to 0, this middleware sets a default expiration of 900 seconds");
                         writer.write("err = stack.Build.Add(&$T{ Expires: c.Expires, }, middleware.After)",
                                 expiresAsHeaderMiddleware);
                         writer.write("if err != nil { return err }");
                     }
 
-                    Symbol addAsPresignMiddlewareSymbol = SymbolUtils.createValueSymbolBuilder("AddAsIsPresigingMiddleware",
+                    Symbol addAsPresignMiddlewareSymbol = SymbolUtils.createValueSymbolBuilder(
+                            "AddAsIsPresigingMiddleware",
                             AwsCustomGoDependency.PRESIGNEDURL_CUSTOMIZATION).build();
                     writer.write("err = $T(stack)", addAsPresignMiddlewareSymbol);
                     writer.write("if err != nil { return err }");
@@ -479,7 +489,8 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
 
                     if (isS3ServiceShape(model, serviceShape)) {
                         writer.openBlock("if options.presignerV4a == nil {", "}", () -> {
-                            writer.write("options.presignerV4a = $L(c.options)", AwsSignatureVersion4.NEW_SIGNER_V4A_FUNC_NAME);
+                            writer.write("options.presignerV4a = $L(c.options)",
+                                    AwsSignatureVersion4.NEW_SIGNER_V4A_FUNC_NAME);
                         });
                         writer.write("");
                     }
@@ -604,8 +615,8 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
                 writer.write("");
                 writer.writeDocs(
                         String.format("Expires sets the expiration duration for the generated presign url. This should "
-                                      + "be the duration in seconds the presigned URL should be considered valid for. If "
-                                      + "not set or set to zero, presign url would default to expire after 900 seconds."
+                                + "be the duration in seconds the presigned URL should be considered valid for. If "
+                                + "not set or set to zero, presign url would default to expire after 900 seconds."
                         )
                 );
                 writer.write("Expires time.Duration");
