@@ -1,3 +1,9 @@
+# Release (2022-03-18)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.22.0](service/glue/CHANGELOG.md#v1220-2022-03-18)
+  * **Feature**: Added 9 new APIs for AWS Glue Interactive Sessions: ListSessions, StopSession, CreateSession, GetSession, DeleteSession, RunStatement, GetStatement, ListStatements, CancelStatement
+
 # Release (2022-03-16)
 
 ## Module Highlights

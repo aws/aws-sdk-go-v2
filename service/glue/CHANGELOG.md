@@ -1,3 +1,7 @@
+# v1.22.0 (2022-03-18)
+
+* **Feature**: Added 9 new APIs for AWS Glue Interactive Sessions: ListSessions, StopSession, CreateSession, GetSession, DeleteSession, RunStatement, GetStatement, ListStatements, CancelStatement
+
 # v1.21.0 (2022-03-08)
 
 * **Feature**: Updated `github.com/aws/smithy-go` to latest version
