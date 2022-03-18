@@ -43,8 +43,17 @@ type Action struct {
 	noSmithyDocumentSerde
 }
 
+// A structure containing information for audit.
 type AuditContext struct {
+
+	// The context for the audit..
 	AdditionalAuditContext *string
+
+	// All columns request for audit.
+	AllColumnsRequested *bool
+
+	// The requested columns for audit.
+	RequestedColumns []string
 
 	noSmithyDocumentSerde
 }
@@ -3294,6 +3303,68 @@ type SerDeInfo struct {
 	noSmithyDocumentSerde
 }
 
+// The period in which a remote Spark runtime environment is running.
+type Session struct {
+
+	// The command object.See SessionCommand.
+	Command *SessionCommand
+
+	// The number of connections used for the session.
+	Connections *ConnectionsList
+
+	// The time and date when the session was created.
+	CreatedOn *time.Time
+
+	// A map array of key-value pairs. Max is 75 pairs.
+	DefaultArguments map[string]string
+
+	// The description of the session.
+	Description *string
+
+	// The error message displayed during the session.
+	ErrorMessage *string
+
+	// The Glue version determines the versions of Apache Spark and Python that AWS
+	// Glue supports. The GlueVersion must be greater than 2.0.
+	GlueVersion *string
+
+	// The ID of the session.
+	Id *string
+
+	// The number of AWS Glue data processing units (DPUs) that can be allocated when
+	// the job runs. A DPU is a relative measure of processing power that consists of 4
+	// vCPUs of compute capacity and 16 GB memory.
+	MaxCapacity *float64
+
+	// The code execution progress of the session.
+	Progress float64
+
+	// The name or Amazon Resource Name (ARN) of the IAM role associated with the
+	// Session.
+	Role *string
+
+	// The name of the SecurityConfiguration structure to be used with the session.
+	SecurityConfiguration *string
+
+	// The session status.
+	Status SessionStatus
+
+	noSmithyDocumentSerde
+}
+
+// The SessionCommand that runs the job.
+type SessionCommand struct {
+
+	// Specifies the name of the SessionCommand.Can be 'glueetl' or 'gluestreaming'.
+	Name *string
+
+	// Specifies the Python version. The Python version indicates the version supported
+	// for jobs of type Spark.
+	PythonVersion *string
+
+	noSmithyDocumentSerde
+}
+
 // Specifies skewed values in a table. Skewed values are those that occur with very
 // high frequency.
 type SkewedInfo struct {
@@ -3332,6 +3403,66 @@ type StartingEventBatchCondition struct {
 
 	// Duration of the batch window in seconds.
 	BatchWindow *int32
+
+	noSmithyDocumentSerde
+}
+
+// The statement or request for a particular action to occur in a session.
+type Statement struct {
+
+	// The execution code of the statement.
+	Code *string
+
+	// The unix time and date that the job definition was completed.
+	CompletedOn int64
+
+	// The ID of the statement.
+	Id int32
+
+	// The output in JSON.
+	Output *StatementOutput
+
+	// The code execution progress.
+	Progress float64
+
+	// The unix time and date that the job definition was started.
+	StartedOn int64
+
+	// The state while request is actioned.
+	State StatementState
+
+	noSmithyDocumentSerde
+}
+
+// The code execution output in JSON format.
+type StatementOutput struct {
+
+	// The code execution output.
+	Data *StatementOutputData
+
+	// The name of the error in the output.
+	ErrorName *string
+
+	// The error value of the output.
+	ErrorValue *string
+
+	// The execution count of the output.
+	ExecutionCount int32
+
+	// The status of the code execution output.
+	Status StatementState
+
+	// The traceback of the output.
+	Traceback []string
+
+	noSmithyDocumentSerde
+}
+
+// The code execution output in JSON format.
+type StatementOutputData struct {
+
+	// The code execution output in text format.
+	TextPlain *string
 
 	noSmithyDocumentSerde
 }

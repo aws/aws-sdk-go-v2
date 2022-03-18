@@ -41,6 +41,7 @@ type GetUnfilteredPartitionsMetadataInput struct {
 	// This member is required.
 	TableName *string
 
+	// A structure containing information for audit.
 	AuditContext *types.AuditContext
 
 	Expression *string

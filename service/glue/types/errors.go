@@ -261,6 +261,25 @@ func (e *IllegalBlueprintStateException) ErrorMessage() string {
 func (e *IllegalBlueprintStateException) ErrorCode() string             { return "IllegalBlueprintStateException" }
 func (e *IllegalBlueprintStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The session is in an invalid state to perform a requested operation.
+type IllegalSessionStateException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *IllegalSessionStateException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *IllegalSessionStateException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *IllegalSessionStateException) ErrorCode() string             { return "IllegalSessionStateException" }
+func (e *IllegalSessionStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The workflow is in an invalid state to perform a requested operation.
 type IllegalWorkflowStateException struct {
 	Message *string
