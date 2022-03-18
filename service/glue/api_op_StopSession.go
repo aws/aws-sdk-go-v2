@@ -6,55 +6,43 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-func (c *Client) GetUnfilteredTableMetadata(ctx context.Context, params *GetUnfilteredTableMetadataInput, optFns ...func(*Options)) (*GetUnfilteredTableMetadataOutput, error) {
+// Stops the session.
+func (c *Client) StopSession(ctx context.Context, params *StopSessionInput, optFns ...func(*Options)) (*StopSessionOutput, error) {
 	if params == nil {
-		params = &GetUnfilteredTableMetadataInput{}
+		params = &StopSessionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetUnfilteredTableMetadata", params, optFns, c.addOperationGetUnfilteredTableMetadataMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopSession", params, optFns, c.addOperationStopSessionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*GetUnfilteredTableMetadataOutput)
+	out := result.(*StopSessionOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type GetUnfilteredTableMetadataInput struct {
+type StopSessionInput struct {
 
+	// The ID of the session to be stopped.
+	//
 	// This member is required.
-	CatalogId *string
+	Id *string
 
-	// This member is required.
-	DatabaseName *string
-
-	// This member is required.
-	Name *string
-
-	// This member is required.
-	SupportedPermissionTypes []types.PermissionType
-
-	// A structure containing information for audit.
-	AuditContext *types.AuditContext
+	// The origin of the request.
+	RequestOrigin *string
 
 	noSmithyDocumentSerde
 }
 
-type GetUnfilteredTableMetadataOutput struct {
-	AuthorizedColumns []string
+type StopSessionOutput struct {
 
-	CellFilters []types.ColumnRowFilter
-
-	IsRegisteredWithLakeFormation bool
-
-	// Represents a collection of related data organized in columns and rows.
-	Table *types.Table
+	// Returns the Id of the stopped session.
+	Id *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -62,12 +50,12 @@ type GetUnfilteredTableMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationGetUnfilteredTableMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetUnfilteredTableMetadata{}, middleware.After)
+func (c *Client) addOperationStopSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopSession{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetUnfilteredTableMetadata{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopSession{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -107,10 +95,10 @@ func (c *Client) addOperationGetUnfilteredTableMetadataMiddlewares(stack *middle
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpGetUnfilteredTableMetadataValidationMiddleware(stack); err != nil {
+	if err = addOpStopSessionValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetUnfilteredTableMetadata(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStopSession(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -125,11 +113,11 @@ func (c *Client) addOperationGetUnfilteredTableMetadataMiddlewares(stack *middle
 	return nil
 }
 
-func newServiceMetadataMiddleware_opGetUnfilteredTableMetadata(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opStopSession(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "glue",
-		OperationName: "GetUnfilteredTableMetadata",
+		OperationName: "StopSession",
 	}
 }

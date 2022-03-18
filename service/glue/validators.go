@@ -310,6 +310,26 @@ func (m *validateOpCancelMLTaskRun) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCancelStatement struct {
+}
+
+func (*validateOpCancelStatement) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCancelStatement) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CancelStatementInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCancelStatementInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCheckSchemaVersionValidity struct {
 }
 
@@ -605,6 +625,26 @@ func (m *validateOpCreateSecurityConfiguration) HandleInitialize(ctx context.Con
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateSecurityConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateSession struct {
+}
+
+func (*validateOpCreateSession) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateSession) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateSessionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateSessionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1005,6 +1045,26 @@ func (m *validateOpDeleteSecurityConfiguration) HandleInitialize(ctx context.Con
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteSecurityConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteSession struct {
+}
+
+func (*validateOpDeleteSession) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteSession) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteSessionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteSessionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1670,6 +1730,46 @@ func (m *validateOpGetSecurityConfiguration) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetSession struct {
+}
+
+func (*validateOpGetSession) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetSession) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetSessionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetSessionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetStatement struct {
+}
+
+func (*validateOpGetStatement) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetStatement) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetStatementInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetStatementInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetTable struct {
 }
 
@@ -2010,6 +2110,26 @@ func (m *validateOpListSchemaVersions) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListStatements struct {
+}
+
+func (*validateOpListStatements) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListStatements) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListStatementsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListStatementsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutDataCatalogEncryptionSettings struct {
 }
 
@@ -2165,6 +2285,26 @@ func (m *validateOpResumeWorkflowRun) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpResumeWorkflowRunInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpRunStatement struct {
+}
+
+func (*validateOpRunStatement) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRunStatement) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RunStatementInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRunStatementInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2405,6 +2545,26 @@ func (m *validateOpStopCrawlerSchedule) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStopCrawlerScheduleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStopSession struct {
+}
+
+func (*validateOpStopSession) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopSession) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopSessionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopSessionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2910,6 +3070,10 @@ func addOpCancelMLTaskRunValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelMLTaskRun{}, middleware.After)
 }
 
+func addOpCancelStatementValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCancelStatement{}, middleware.After)
+}
+
 func addOpCheckSchemaVersionValidityValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCheckSchemaVersionValidity{}, middleware.After)
 }
@@ -2968,6 +3132,10 @@ func addOpCreateScriptValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCreateSecurityConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateSecurityConfiguration{}, middleware.After)
+}
+
+func addOpCreateSessionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateSession{}, middleware.After)
 }
 
 func addOpCreateTableValidationMiddleware(stack *middleware.Stack) error {
@@ -3048,6 +3216,10 @@ func addOpDeleteSchemaVersionsValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpDeleteSecurityConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteSecurityConfiguration{}, middleware.After)
+}
+
+func addOpDeleteSessionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteSession{}, middleware.After)
 }
 
 func addOpDeleteTableValidationMiddleware(stack *middleware.Stack) error {
@@ -3182,6 +3354,14 @@ func addOpGetSecurityConfigurationValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpGetSecurityConfiguration{}, middleware.After)
 }
 
+func addOpGetSessionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetSession{}, middleware.After)
+}
+
+func addOpGetStatementValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetStatement{}, middleware.After)
+}
+
 func addOpGetTableValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetTable{}, middleware.After)
 }
@@ -3250,6 +3430,10 @@ func addOpListSchemaVersionsValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpListSchemaVersions{}, middleware.After)
 }
 
+func addOpListStatementsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListStatements{}, middleware.After)
+}
+
 func addOpPutDataCatalogEncryptionSettingsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutDataCatalogEncryptionSettings{}, middleware.After)
 }
@@ -3280,6 +3464,10 @@ func addOpResetJobBookmarkValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpResumeWorkflowRunValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpResumeWorkflowRun{}, middleware.After)
+}
+
+func addOpRunStatementValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRunStatement{}, middleware.After)
 }
 
 func addOpStartBlueprintRunValidationMiddleware(stack *middleware.Stack) error {
@@ -3328,6 +3516,10 @@ func addOpStopCrawlerValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpStopCrawlerScheduleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStopCrawlerSchedule{}, middleware.After)
+}
+
+func addOpStopSessionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopSession{}, middleware.After)
 }
 
 func addOpStopTriggerValidationMiddleware(stack *middleware.Stack) error {
@@ -4772,6 +4964,21 @@ func validateOpCancelMLTaskRunInput(v *CancelMLTaskRunInput) error {
 	}
 }
 
+func validateOpCancelStatementInput(v *CancelStatementInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CancelStatementInput"}
+	if v.SessionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCheckSchemaVersionValidityInput(v *CheckSchemaVersionValidityInput) error {
 	if v == nil {
 		return nil
@@ -5094,6 +5301,27 @@ func validateOpCreateSecurityConfigurationInput(v *CreateSecurityConfigurationIn
 	}
 	if v.EncryptionConfiguration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EncryptionConfiguration"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateSessionInput(v *CreateSessionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateSessionInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.Role == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Role"))
+	}
+	if v.Command == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Command"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5450,6 +5678,21 @@ func validateOpDeleteSecurityConfigurationInput(v *DeleteSecurityConfigurationIn
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteSecurityConfigurationInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteSessionInput(v *DeleteSessionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteSessionInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6056,6 +6299,36 @@ func validateOpGetSecurityConfigurationInput(v *GetSecurityConfigurationInput) e
 	}
 }
 
+func validateOpGetSessionInput(v *GetSessionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetSessionInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetStatementInput(v *GetStatementInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetStatementInput"}
+	if v.SessionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetTableInput(v *GetTableInput) error {
 	if v == nil {
 		return nil
@@ -6366,6 +6639,21 @@ func validateOpListSchemaVersionsInput(v *ListSchemaVersionsInput) error {
 	}
 }
 
+func validateOpListStatementsInput(v *ListStatementsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListStatementsInput"}
+	if v.SessionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpPutDataCatalogEncryptionSettingsInput(v *PutDataCatalogEncryptionSettingsInput) error {
 	if v == nil {
 		return nil
@@ -6497,6 +6785,24 @@ func validateOpResumeWorkflowRunInput(v *ResumeWorkflowRunInput) error {
 	}
 	if v.NodeIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NodeIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRunStatementInput(v *RunStatementInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RunStatementInput"}
+	if v.SessionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
+	}
+	if v.Code == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Code"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6689,6 +6995,21 @@ func validateOpStopCrawlerScheduleInput(v *StopCrawlerScheduleInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "StopCrawlerScheduleInput"}
 	if v.CrawlerName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CrawlerName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopSessionInput(v *StopSessionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopSessionInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

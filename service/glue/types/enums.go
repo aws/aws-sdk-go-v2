@@ -873,6 +873,32 @@ func (SchemaVersionStatus) Values() []SchemaVersionStatus {
 	}
 }
 
+type SessionStatus string
+
+// Enum values for SessionStatus
+const (
+	SessionStatusProvisioning SessionStatus = "PROVISIONING"
+	SessionStatusReady        SessionStatus = "READY"
+	SessionStatusFailed       SessionStatus = "FAILED"
+	SessionStatusTimeout      SessionStatus = "TIMEOUT"
+	SessionStatusStopping     SessionStatus = "STOPPING"
+	SessionStatusStopped      SessionStatus = "STOPPED"
+)
+
+// Values returns all known values for SessionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SessionStatus) Values() []SessionStatus {
+	return []SessionStatus{
+		"PROVISIONING",
+		"READY",
+		"FAILED",
+		"TIMEOUT",
+		"STOPPING",
+		"STOPPED",
+	}
+}
+
 type Sort string
 
 // Enum values for Sort
@@ -906,6 +932,32 @@ func (SortDirectionType) Values() []SortDirectionType {
 	return []SortDirectionType{
 		"DESCENDING",
 		"ASCENDING",
+	}
+}
+
+type StatementState string
+
+// Enum values for StatementState
+const (
+	StatementStateWaiting    StatementState = "WAITING"
+	StatementStateRunning    StatementState = "RUNNING"
+	StatementStateAvailable  StatementState = "AVAILABLE"
+	StatementStateCancelling StatementState = "CANCELLING"
+	StatementStateCancelled  StatementState = "CANCELLED"
+	StatementStateError      StatementState = "ERROR"
+)
+
+// Values returns all known values for StatementState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (StatementState) Values() []StatementState {
+	return []StatementState{
+		"WAITING",
+		"RUNNING",
+		"AVAILABLE",
+		"CANCELLING",
+		"CANCELLED",
+		"ERROR",
 	}
 }
 

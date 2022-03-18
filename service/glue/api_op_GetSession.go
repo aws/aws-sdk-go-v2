@@ -11,50 +11,39 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-func (c *Client) GetUnfilteredTableMetadata(ctx context.Context, params *GetUnfilteredTableMetadataInput, optFns ...func(*Options)) (*GetUnfilteredTableMetadataOutput, error) {
+// Retrieves the session.
+func (c *Client) GetSession(ctx context.Context, params *GetSessionInput, optFns ...func(*Options)) (*GetSessionOutput, error) {
 	if params == nil {
-		params = &GetUnfilteredTableMetadataInput{}
+		params = &GetSessionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetUnfilteredTableMetadata", params, optFns, c.addOperationGetUnfilteredTableMetadataMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSession", params, optFns, c.addOperationGetSessionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*GetUnfilteredTableMetadataOutput)
+	out := result.(*GetSessionOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type GetUnfilteredTableMetadataInput struct {
+type GetSessionInput struct {
 
+	// The ID of the session.
+	//
 	// This member is required.
-	CatalogId *string
+	Id *string
 
-	// This member is required.
-	DatabaseName *string
-
-	// This member is required.
-	Name *string
-
-	// This member is required.
-	SupportedPermissionTypes []types.PermissionType
-
-	// A structure containing information for audit.
-	AuditContext *types.AuditContext
+	// The origin of the request.
+	RequestOrigin *string
 
 	noSmithyDocumentSerde
 }
 
-type GetUnfilteredTableMetadataOutput struct {
-	AuthorizedColumns []string
+type GetSessionOutput struct {
 
-	CellFilters []types.ColumnRowFilter
-
-	IsRegisteredWithLakeFormation bool
-
-	// Represents a collection of related data organized in columns and rows.
-	Table *types.Table
+	// The session object is returned in the response.
+	Session *types.Session
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -62,12 +51,12 @@ type GetUnfilteredTableMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationGetUnfilteredTableMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetUnfilteredTableMetadata{}, middleware.After)
+func (c *Client) addOperationGetSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSession{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetUnfilteredTableMetadata{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetSession{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -107,10 +96,10 @@ func (c *Client) addOperationGetUnfilteredTableMetadataMiddlewares(stack *middle
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpGetUnfilteredTableMetadataValidationMiddleware(stack); err != nil {
+	if err = addOpGetSessionValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetUnfilteredTableMetadata(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetSession(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -125,11 +114,11 @@ func (c *Client) addOperationGetUnfilteredTableMetadataMiddlewares(stack *middle
 	return nil
 }
 
-func newServiceMetadataMiddleware_opGetUnfilteredTableMetadata(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opGetSession(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "glue",
-		OperationName: "GetUnfilteredTableMetadata",
+		OperationName: "GetSession",
 	}
 }
