@@ -1,8 +1,0 @@
-{
-    "id": "e7cb3d04-e555-4713-82c3-71429a484dd8",
-    "type": "feature",
-    "description": "Added 9 new APIs for AWS Glue Interactive Sessions: ListSessions, StopSession, CreateSession, GetSession, DeleteSession, RunStatement, GetStatement, ListStatements, CancelStatement",
-    "modules": [
-        "service/glue"
-    ]
-}
