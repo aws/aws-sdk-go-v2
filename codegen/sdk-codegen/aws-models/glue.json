@@ -94,6 +94,9 @@
                     "target": "com.amazonaws.glue#CancelMLTaskRun"
                 },
                 {
+                    "target": "com.amazonaws.glue#CancelStatement"
+                },
+                {
                     "target": "com.amazonaws.glue#CheckSchemaVersionValidity"
                 },
                 {
@@ -137,6 +140,9 @@
                 },
                 {
                     "target": "com.amazonaws.glue#CreateSecurityConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.glue#CreateSession"
                 },
                 {
                     "target": "com.amazonaws.glue#CreateTable"
@@ -200,6 +206,9 @@
                 },
                 {
                     "target": "com.amazonaws.glue#DeleteSecurityConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.glue#DeleteSession"
                 },
                 {
                     "target": "com.amazonaws.glue#DeleteTable"
@@ -343,6 +352,12 @@
                     "target": "com.amazonaws.glue#GetSecurityConfigurations"
                 },
                 {
+                    "target": "com.amazonaws.glue#GetSession"
+                },
+                {
+                    "target": "com.amazonaws.glue#GetStatement"
+                },
+                {
                     "target": "com.amazonaws.glue#GetTable"
                 },
                 {
@@ -418,6 +433,12 @@
                     "target": "com.amazonaws.glue#ListSchemaVersions"
                 },
                 {
+                    "target": "com.amazonaws.glue#ListSessions"
+                },
+                {
+                    "target": "com.amazonaws.glue#ListStatements"
+                },
+                {
                     "target": "com.amazonaws.glue#ListTriggers"
                 },
                 {
@@ -449,6 +470,9 @@
                 },
                 {
                     "target": "com.amazonaws.glue#ResumeWorkflowRun"
+                },
+                {
+                    "target": "com.amazonaws.glue#RunStatement"
                 },
                 {
                     "target": "com.amazonaws.glue#SearchTables"
@@ -488,6 +512,9 @@
                 },
                 {
                     "target": "com.amazonaws.glue#StopCrawlerSchedule"
+                },
+                {
+                    "target": "com.amazonaws.glue#StopSession"
                 },
                 {
                     "target": "com.amazonaws.glue#StopTrigger"
@@ -658,12 +685,36 @@
         "com.amazonaws.glue#AttemptCount": {
             "type": "integer"
         },
+        "com.amazonaws.glue#AuditColumnNamesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#ColumnNameString"
+            }
+        },
         "com.amazonaws.glue#AuditContext": {
             "type": "structure",
             "members": {
                 "AdditionalAuditContext": {
-                    "target": "com.amazonaws.glue#AuditContextString"
+                    "target": "com.amazonaws.glue#AuditContextString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The context for the audit..</p>"
+                    }
+                },
+                "RequestedColumns": {
+                    "target": "com.amazonaws.glue#AuditColumnNamesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The requested columns for audit.</p>"
+                    }
+                },
+                "AllColumnsRequested": {
+                    "target": "com.amazonaws.glue#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>All columns request for audit.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure containing information for audit.</p>"
             }
         },
         "com.amazonaws.glue#AuditContextString": {
@@ -2220,6 +2271,67 @@
                     }
                 }
             }
+        },
+        "com.amazonaws.glue#CancelStatement": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#CancelStatementRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#CancelStatementResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#IllegalSessionStateException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationTimeoutException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Cancels the statement..</p>"
+            }
+        },
+        "com.amazonaws.glue#CancelStatementRequest": {
+            "type": "structure",
+            "members": {
+                "SessionId": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Session ID of the statement to be cancelled.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.glue#IntegerValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the statement to be cancelled.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RequestOrigin": {
+                    "target": "com.amazonaws.glue#OrchestrationNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The origin of the request to cancel the statement.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.glue#CancelStatementResponse": {
+            "type": "structure",
+            "members": {}
         },
         "com.amazonaws.glue#CatalogEncryptionMode": {
             "type": "string",
@@ -5454,6 +5566,156 @@
                 }
             }
         },
+        "com.amazonaws.glue#CreateSession": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#CreateSessionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#CreateSessionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#AlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.glue#IdempotentParameterMismatchException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ResourceNumberLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new session.</p>"
+            }
+        },
+        "com.amazonaws.glue#CreateSessionRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the session request. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.glue#DescriptionString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the session. </p>"
+                    }
+                },
+                "Role": {
+                    "target": "com.amazonaws.glue#OrchestrationRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM Role ARN </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Command": {
+                    "target": "com.amazonaws.glue#SessionCommand",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>SessionCommand</code> that runs the job. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Timeout": {
+                    "target": "com.amazonaws.glue#Timeout",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of seconds before request times out. </p>"
+                    }
+                },
+                "IdleTimeout": {
+                    "target": "com.amazonaws.glue#Timeout",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of seconds when idle before request times out. </p>"
+                    }
+                },
+                "DefaultArguments": {
+                    "target": "com.amazonaws.glue#OrchestrationArgumentsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map array of key-value pairs. Max is 75 pairs. </p>"
+                    }
+                },
+                "Connections": {
+                    "target": "com.amazonaws.glue#ConnectionsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of connections to use for the session. </p>"
+                    }
+                },
+                "MaxCapacity": {
+                    "target": "com.amazonaws.glue#NullableDouble",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of AWS Glue data processing units (DPUs) that can be allocated when the job runs. \n      A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB memory. </p>"
+                    }
+                },
+                "NumberOfWorkers": {
+                    "target": "com.amazonaws.glue#NullableInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of workers to use for the session. </p>"
+                    }
+                },
+                "WorkerType": {
+                    "target": "com.amazonaws.glue#WorkerType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Worker Type. Can be one of G.1X, G.2X, Standard </p>"
+                    }
+                },
+                "SecurityConfiguration": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the SecurityConfiguration structure to be used with the session </p>"
+                    }
+                },
+                "GlueVersion": {
+                    "target": "com.amazonaws.glue#GlueVersionString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Glue version determines the versions of Apache Spark and Python that AWS Glue supports. \n      The GlueVersion must be greater than 2.0. </p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.glue#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The map of key value pairs (tags) belonging to the session.</p>"
+                    }
+                },
+                "RequestOrigin": {
+                    "target": "com.amazonaws.glue#OrchestrationNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The origin of the request. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Request to create a new session.</p>"
+            }
+        },
+        "com.amazonaws.glue#CreateSessionResponse": {
+            "type": "structure",
+            "members": {
+                "Session": {
+                    "target": "com.amazonaws.glue#Session",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the session object in the response.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.glue#CreateTable": {
             "type": "operation",
             "input": {
@@ -7171,6 +7433,67 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.glue#DeleteSession": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#DeleteSessionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#DeleteSessionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.glue#IllegalSessionStateException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationTimeoutException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the session.</p>"
+            }
+        },
+        "com.amazonaws.glue#DeleteSessionRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the session to be deleted.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RequestOrigin": {
+                    "target": "com.amazonaws.glue#OrchestrationNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the origin of the delete session request.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.glue#DeleteSessionResponse": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the ID of the deleted session.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.glue#DeleteTable": {
             "type": "operation",
             "input": {
@@ -7743,6 +8066,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>Defines column statistics supported for floating-point number data columns.</p>"
             }
+        },
+        "com.amazonaws.glue#DoubleValue": {
+            "type": "double"
         },
         "com.amazonaws.glue#DynamoDBTarget": {
             "type": "structure",
@@ -11218,6 +11544,132 @@
                 }
             }
         },
+        "com.amazonaws.glue#GetSession": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#GetSessionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#GetSessionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationTimeoutException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the session.</p>"
+            }
+        },
+        "com.amazonaws.glue#GetSessionRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the session. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RequestOrigin": {
+                    "target": "com.amazonaws.glue#OrchestrationNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The origin of the request. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.glue#GetSessionResponse": {
+            "type": "structure",
+            "members": {
+                "Session": {
+                    "target": "com.amazonaws.glue#Session",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The session object is returned in the response.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.glue#GetStatement": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#GetStatementRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#GetStatementResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#IllegalSessionStateException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationTimeoutException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the statement.</p>"
+            }
+        },
+        "com.amazonaws.glue#GetStatementRequest": {
+            "type": "structure",
+            "members": {
+                "SessionId": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Session ID of the statement.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.glue#IntegerValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Id of the statement.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RequestOrigin": {
+                    "target": "com.amazonaws.glue#OrchestrationNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The origin of the request.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.glue#GetStatementResponse": {
+            "type": "structure",
+            "members": {
+                "Statement": {
+                    "target": "com.amazonaws.glue#Statement",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the statement.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.glue#GetTable": {
             "type": "operation",
             "input": {
@@ -12390,7 +12842,7 @@
                 "Message": {
                     "target": "com.amazonaws.glue#MessageString",
                     "traits": {
-                        "smithy.api#documentation": "<p>A message describing the problem.</p>"
+                        "smithy.api#documentation": "<p>The message describing the problem.</p>"
                     }
                 }
             },
@@ -12438,7 +12890,7 @@
                     "min": 1,
                     "max": 10240
                 },
-                "smithy.api#pattern": "^arn:aws:glue:"
+                "smithy.api#pattern": "^arn:(aws|aws-us-gov|aws-cn):glue:"
             }
         },
         "com.amazonaws.glue#GlueTable": {
@@ -12603,6 +13055,21 @@
                 }
             },
             "traits": {
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.glue#IllegalSessionStateException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.glue#MessageString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message describing the problem.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The session is in an invalid state to perform a requested operation.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -14170,6 +14637,156 @@
                 }
             }
         },
+        "com.amazonaws.glue#ListSessions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#ListSessionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#ListSessionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationTimeoutException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieve a session..</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.glue#ListSessionsRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.glue#OrchestrationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no more result. </p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.glue#PageSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results. </p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.glue#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags belonging to the session. </p>"
+                    }
+                },
+                "RequestOrigin": {
+                    "target": "com.amazonaws.glue#OrchestrationNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The origin of the request. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.glue#ListSessionsResponse": {
+            "type": "structure",
+            "members": {
+                "Ids": {
+                    "target": "com.amazonaws.glue#SessionIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the Id of the session. </p>"
+                    }
+                },
+                "Sessions": {
+                    "target": "com.amazonaws.glue#SessionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the session object. </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.glue#OrchestrationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no more result. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.glue#ListStatements": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#ListStatementsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#ListStatementsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#IllegalSessionStateException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationTimeoutException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists statements for the session.</p>"
+            }
+        },
+        "com.amazonaws.glue#ListStatementsRequest": {
+            "type": "structure",
+            "members": {
+                "SessionId": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Session ID of the statements.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RequestOrigin": {
+                    "target": "com.amazonaws.glue#OrchestrationNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The origin of the request to list statements.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.glue#OrchestrationToken"
+                }
+            }
+        },
+        "com.amazonaws.glue#ListStatementsResponse": {
+            "type": "structure",
+            "members": {
+                "Statements": {
+                    "target": "com.amazonaws.glue#StatementList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the list of statements.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.glue#OrchestrationToken"
+                }
+            }
+        },
         "com.amazonaws.glue#ListTriggers": {
             "type": "operation",
             "input": {
@@ -14442,6 +15059,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>Defines column statistics supported for integer data columns.</p>"
             }
+        },
+        "com.amazonaws.glue#LongValue": {
+            "type": "long"
         },
         "com.amazonaws.glue#MLTransform": {
             "type": "structure",
@@ -15024,6 +15644,31 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.glue#OrchestrationArgumentsMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.glue#OrchestrationNameString"
+            },
+            "value": {
+                "target": "com.amazonaws.glue#OrchestrationArgumentsValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 75
+                }
+            }
+        },
+        "com.amazonaws.glue#OrchestrationArgumentsValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 4096
+                },
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
+            }
+        },
         "com.amazonaws.glue#OrchestrationIAMRoleArn": {
             "type": "string",
             "traits": {
@@ -15044,6 +15689,16 @@
                 "smithy.api#pattern": "^[\\.\\-_A-Za-z0-9]+$"
             }
         },
+        "com.amazonaws.glue#OrchestrationRoleArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws[^:]*:iam::[0-9]*:role/.+$"
+            }
+        },
         "com.amazonaws.glue#OrchestrationS3Location": {
             "type": "string",
             "traits": {
@@ -15054,10 +15709,28 @@
                 "smithy.api#pattern": "^s3://([^/]+)/([^/]+/)*([^/]+)$"
             }
         },
+        "com.amazonaws.glue#OrchestrationStatementCodeString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 68000
+                }
+            }
+        },
         "com.amazonaws.glue#OrchestrationStringList": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.glue#GenericString"
+            }
+        },
+        "com.amazonaws.glue#OrchestrationToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 400000
+                }
             }
         },
         "com.amazonaws.glue#Order": {
@@ -15528,8 +16201,7 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 2,
-                    "max": 10240
+                    "min": 2
                 }
             }
         },
@@ -16626,6 +17298,80 @@
         "com.amazonaws.glue#RunId": {
             "type": "string"
         },
+        "com.amazonaws.glue#RunStatement": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#RunStatementRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#RunStatementResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#IllegalSessionStateException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ResourceNumberLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Executes the statement.</p>"
+            }
+        },
+        "com.amazonaws.glue#RunStatementRequest": {
+            "type": "structure",
+            "members": {
+                "SessionId": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Session Id of the statement to be run.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Code": {
+                    "target": "com.amazonaws.glue#OrchestrationStatementCodeString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The statement code to be run.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RequestOrigin": {
+                    "target": "com.amazonaws.glue#OrchestrationNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The origin of the request.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.glue#RunStatementResponse": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.glue#IntegerValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the Id of the statement that was run.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.glue#S3Encryption": {
             "type": "structure",
             "members": {
@@ -17165,7 +17911,13 @@
             }
         },
         "com.amazonaws.glue#ScriptLocationString": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 400000
+                }
+            }
         },
         "com.amazonaws.glue#SearchPropertyPredicates": {
             "type": "list",
@@ -17355,6 +18107,155 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information about a serialization/deserialization program (SerDe) that serves as an\n      extractor and loader.</p>"
+            }
+        },
+        "com.amazonaws.glue#Session": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the session.</p>"
+                    }
+                },
+                "CreatedOn": {
+                    "target": "com.amazonaws.glue#TimestampValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time and date when the session was created.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.glue#SessionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The session status. </p>"
+                    }
+                },
+                "ErrorMessage": {
+                    "target": "com.amazonaws.glue#DescriptionString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message displayed during the session.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.glue#DescriptionString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the session.</p>"
+                    }
+                },
+                "Role": {
+                    "target": "com.amazonaws.glue#OrchestrationRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the IAM role associated with the Session.</p>"
+                    }
+                },
+                "Command": {
+                    "target": "com.amazonaws.glue#SessionCommand",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The command object.See SessionCommand.</p>"
+                    }
+                },
+                "DefaultArguments": {
+                    "target": "com.amazonaws.glue#OrchestrationArgumentsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map array of key-value pairs. Max is 75 pairs. </p>"
+                    }
+                },
+                "Connections": {
+                    "target": "com.amazonaws.glue#ConnectionsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of connections used for the session.</p>"
+                    }
+                },
+                "Progress": {
+                    "target": "com.amazonaws.glue#DoubleValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The code execution progress of the session.</p>"
+                    }
+                },
+                "MaxCapacity": {
+                    "target": "com.amazonaws.glue#NullableDouble",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of AWS Glue data processing units (DPUs) that can be allocated when the job runs. \n      A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB memory. </p>"
+                    }
+                },
+                "SecurityConfiguration": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the SecurityConfiguration structure to be used with the session.</p>"
+                    }
+                },
+                "GlueVersion": {
+                    "target": "com.amazonaws.glue#GlueVersionString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Glue version determines the versions of Apache Spark and Python that AWS Glue supports. \n      The GlueVersion must be greater than 2.0.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The period in which a remote Spark runtime environment is running.</p>"
+            }
+        },
+        "com.amazonaws.glue#SessionCommand": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the name of the SessionCommand.Can be 'glueetl' or 'gluestreaming'.</p>"
+                    }
+                },
+                "PythonVersion": {
+                    "target": "com.amazonaws.glue#PythonVersionString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the Python version. The Python version indicates the version supported for jobs of type Spark.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The <code>SessionCommand</code> that runs the job.</p>"
+            }
+        },
+        "com.amazonaws.glue#SessionIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#NameString"
+            }
+        },
+        "com.amazonaws.glue#SessionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#Session"
+            }
+        },
+        "com.amazonaws.glue#SessionStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PROVISIONING",
+                        "name": "PROVISIONING"
+                    },
+                    {
+                        "value": "READY",
+                        "name": "READY"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    },
+                    {
+                        "value": "TIMEOUT",
+                        "name": "TIMEOUT"
+                    },
+                    {
+                        "value": "STOPPING",
+                        "name": "STOPPING"
+                    },
+                    {
+                        "value": "STOPPED",
+                        "name": "STOPPED"
+                    }
+                ]
             }
         },
         "com.amazonaws.glue#SkewedInfo": {
@@ -18080,6 +18981,151 @@
                 "smithy.api#documentation": "<p>The batch condition that started the workflow run. Either the number of events in the batch size arrived,\n      in which case the BatchSize member is non-zero, or the batch window expired, in which case the BatchWindow\n      member is non-zero.</p>"
             }
         },
+        "com.amazonaws.glue#Statement": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.glue#IntegerValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the statement.</p>"
+                    }
+                },
+                "Code": {
+                    "target": "com.amazonaws.glue#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The execution code of the statement.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.glue#StatementState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state while request is actioned.</p>"
+                    }
+                },
+                "Output": {
+                    "target": "com.amazonaws.glue#StatementOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The output in JSON.</p>"
+                    }
+                },
+                "Progress": {
+                    "target": "com.amazonaws.glue#DoubleValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The code execution progress.</p>"
+                    }
+                },
+                "StartedOn": {
+                    "target": "com.amazonaws.glue#LongValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unix time and date that the job definition was started.</p>"
+                    }
+                },
+                "CompletedOn": {
+                    "target": "com.amazonaws.glue#LongValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unix time and date that the job definition was completed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The statement or request for a particular action to occur in a session.</p>"
+            }
+        },
+        "com.amazonaws.glue#StatementList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#Statement"
+            }
+        },
+        "com.amazonaws.glue#StatementOutput": {
+            "type": "structure",
+            "members": {
+                "Data": {
+                    "target": "com.amazonaws.glue#StatementOutputData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The code execution output.</p>"
+                    }
+                },
+                "ExecutionCount": {
+                    "target": "com.amazonaws.glue#IntegerValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The execution count of the output.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.glue#StatementState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the code execution output.</p>"
+                    }
+                },
+                "ErrorName": {
+                    "target": "com.amazonaws.glue#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the error in the output.</p>"
+                    }
+                },
+                "ErrorValue": {
+                    "target": "com.amazonaws.glue#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error value of the output.</p>"
+                    }
+                },
+                "Traceback": {
+                    "target": "com.amazonaws.glue#OrchestrationStringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The traceback of the output.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The code execution output in JSON format.</p>"
+            }
+        },
+        "com.amazonaws.glue#StatementOutputData": {
+            "type": "structure",
+            "members": {
+                "TextPlain": {
+                    "target": "com.amazonaws.glue#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The code execution output in text format.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The code execution output in JSON format.</p>"
+            }
+        },
+        "com.amazonaws.glue#StatementState": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "WAITING",
+                        "name": "WAITING"
+                    },
+                    {
+                        "value": "RUNNING",
+                        "name": "RUNNING"
+                    },
+                    {
+                        "value": "AVAILABLE",
+                        "name": "AVAILABLE"
+                    },
+                    {
+                        "value": "CANCELLING",
+                        "name": "CANCELLING"
+                    },
+                    {
+                        "value": "CANCELLED",
+                        "name": "CANCELLED"
+                    },
+                    {
+                        "value": "ERROR",
+                        "name": "ERROR"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.glue#StopCrawler": {
             "type": "operation",
             "input": {
@@ -18163,6 +19209,67 @@
         "com.amazonaws.glue#StopCrawlerScheduleResponse": {
             "type": "structure",
             "members": {}
+        },
+        "com.amazonaws.glue#StopSession": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#StopSessionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#StopSessionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.glue#IllegalSessionStateException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationTimeoutException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Stops the session.</p>"
+            }
+        },
+        "com.amazonaws.glue#StopSessionRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the session to be stopped.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RequestOrigin": {
+                    "target": "com.amazonaws.glue#OrchestrationNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The origin of the request.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.glue#StopSessionResponse": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the Id of the stopped session.</p>"
+                    }
+                }
+            }
         },
         "com.amazonaws.glue#StopTrigger": {
             "type": "operation",
