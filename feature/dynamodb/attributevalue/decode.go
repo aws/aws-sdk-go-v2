@@ -213,10 +213,15 @@ type DecoderOptions struct {
 	// is interface{}. Similar to encoding/json.Number
 	UseNumber bool
 
-	// Format to decode time.Time fields
+	// Will decode S attribute values and SS attribute value elements into time.Time
 	//
-	// Defaults to time.RFC3339
-	TimeFormat string
+	// Default string parsing format is time.RFC3339
+	DecodeTimeS func(string) (time.Time, error)
+
+	// Will decode N attribute values and NS attribute value elements into time.Time
+	//
+	// Default number parsing format is seconds since January 1, 1970 UTC
+	DecodeTimeN func(string) (time.Time, error)
 }
 
 // A Decoder provides unmarshaling AttributeValues to Go value types.
@@ -228,8 +233,17 @@ type Decoder struct {
 // the `opts` functional options to override the default configuration.
 func NewDecoder(optFns ...func(*DecoderOptions)) *Decoder {
 	options := DecoderOptions{
-		TagKey:     defaultTagKey,
-		TimeFormat: time.RFC3339,
+		TagKey: defaultTagKey,
+		DecodeTimeS: func(v string) (time.Time, error) {
+			t, err := time.Parse(time.RFC3339, v)
+			if err != nil {
+				return time.Time{}, &UnmarshalError{Err: err, Value: v, Type: timeType}
+			}
+			return t, nil
+		},
+		DecodeTimeN: func(v string) (time.Time, error) {
+			return decodeUnixTime(v)
+		},
 	}
 	for _, fn := range optFns {
 		fn(&options)
@@ -467,6 +481,14 @@ func (d *Decoder) decodeNumber(n string, v reflect.Value, fieldTag tag) error {
 			v.Set(reflect.ValueOf(t).Convert(v.Type()))
 			return nil
 		}
+		if v.Type().ConvertibleTo(timeType) {
+			t, err := d.options.DecodeTimeN(n)
+			if err != nil {
+				return err
+			}
+			v.Set(reflect.ValueOf(t).Convert(v.Type()))
+			return nil
+		}
 		return &UnmarshalTypeError{Value: "number", Type: v.Type()}
 	}
 
@@ -694,7 +716,7 @@ func (d *Decoder) decodeString(s string, v reflect.Value, fieldTag tag) error {
 	// To maintain backwards compatibility with ConvertFrom family of methods which
 	// converted strings to time.Time structs
 	if v.Type().ConvertibleTo(timeType) {
-		t, err := time.Parse(d.options.TimeFormat, s)
+		t, err := d.options.DecodeTimeS(s)
 		if err != nil {
 			return err
 		}

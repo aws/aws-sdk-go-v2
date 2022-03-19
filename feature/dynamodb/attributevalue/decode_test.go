@@ -797,50 +797,142 @@ func (t *testUnmarshalMapKeyComplex) UnmarshalDynamoDBAttributeValue(av types.At
 	return nil
 }
 
-func TestUnmarshalWithCustomTimeFormats(t *testing.T) {
+func TestUnmarshalTime_S_SS(t *testing.T) {
 	type A struct {
-		TimeField time.Time
+		TimeField   time.Time
+		TimeFields  []time.Time
+		TimeFieldsL []time.Time
 	}
 	cases := map[string]struct {
-		input      *types.AttributeValueMemberS
-		timeFormat string
-		expect     time.Time
+		input       string
+		expect      time.Time
+		decodeTimeS func(string) (time.Time, error)
 	}{
-		"UnixDate": {
-			input:      &types.AttributeValueMemberS{Value: "Thu Jan  1 00:02:03 UTC 1970"},
-			expect:     time.Unix(123, 0).UTC(),
-			timeFormat: time.UnixDate,
-		},
-		"RFC3339 millis keeping zeroes": {
-			input:  &types.AttributeValueMemberS{Value: "1970-01-01T00:02:03.010Z"},
+		"String RFC3339Nano (Default)": {
+			input:  "1970-01-01T00:02:03.01Z",
 			expect: time.Unix(123, 10000000).UTC(),
 		},
-		"RFC822": {
-			input:      &types.AttributeValueMemberS{Value: "01 Jan 70 00:02 UTC"},
-			expect:     time.Unix(120, 0).UTC(),
-			timeFormat: time.RFC822,
+		"String UnixDate": {
+			input:  "Thu Jan  1 00:02:03 UTC 1970",
+			expect: time.Unix(123, 0).UTC(),
+			decodeTimeS: func(v string) (time.Time, error) {
+				t, err := time.Parse(time.UnixDate, v)
+				if err != nil {
+					return time.Time{}, &UnmarshalError{Err: err, Value: v, Type: timeType}
+				}
+				return t, nil
+			},
+		},
+		"String RFC3339 millis keeping zeroes": {
+			input:  "1970-01-01T00:02:03.010Z",
+			expect: time.Unix(123, 10000000).UTC(),
+			decodeTimeS: func(v string) (time.Time, error) {
+				t, err := time.Parse("2006-01-02T15:04:05.000Z07:00", v)
+				if err != nil {
+					return time.Time{}, &UnmarshalError{Err: err, Value: v, Type: timeType}
+				}
+				return t, nil
+			},
+		},
+		"String RFC822": {
+			input:  "01 Jan 70 00:02 UTC",
+			expect: time.Unix(120, 0).UTC(),
+			decodeTimeS: func(v string) (time.Time, error) {
+				t, err := time.Parse(time.RFC822, v)
+				if err != nil {
+					return time.Time{}, &UnmarshalError{Err: err, Value: v, Type: timeType}
+				}
+				return t, nil
+			},
 		},
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
 			inputMap := &types.AttributeValueMemberM{
 				Value: map[string]types.AttributeValue{
-					"TimeField": c.input,
+					"TimeField":  &types.AttributeValueMemberS{Value: c.input},
+					"TimeFields": &types.AttributeValueMemberSS{Value: []string{c.input}},
+					"TimeFieldsL": &types.AttributeValueMemberL{Value: []types.AttributeValue{
+						&types.AttributeValueMemberS{Value: c.input},
+					}},
 				},
 			}
 			expectedValue := A{
-				TimeField: c.expect,
+				TimeField:   c.expect,
+				TimeFields:  []time.Time{c.expect},
+				TimeFieldsL: []time.Time{c.expect},
 			}
 
 			actualValue := A{}
 			if err := UnmarshalWithOptions(inputMap, &actualValue, func(options *DecoderOptions) {
-				if c.timeFormat != "" {
-					options.TimeFormat = c.timeFormat
+				if c.decodeTimeS != nil {
+					options.DecodeTimeS = c.decodeTimeS
 				}
 			}); err != nil {
 				t.Errorf("expect no error, got %v", err)
 			}
-			if expectedValue != actualValue {
+			if !reflect.DeepEqual(expectedValue, actualValue) {
+				t.Errorf("expect %+v, got %+v", expectedValue, actualValue)
+			}
+		})
+	}
+}
+
+func TestUnmarshalTime_N_NS(t *testing.T) {
+	type A struct {
+		TimeField   time.Time
+		TimeFields  []time.Time
+		TimeFieldsL []time.Time
+	}
+	cases := map[string]struct {
+		input       string
+		expect      time.Time
+		decodeTimeN func(string) (time.Time, error)
+	}{
+		"Number Unix seconds (Default)": {
+			input:  "123",
+			expect: time.Unix(123, 0),
+		},
+		"Number Unix milli": {
+			input:  "123010",
+			expect: time.Unix(123, 10000000),
+			decodeTimeN: func(v string) (time.Time, error) {
+				n, err := strconv.ParseInt(v, 10, 64)
+				if err != nil {
+					return time.Time{}, &UnmarshalError{
+						Err: err, Value: v, Type: timeType,
+					}
+				}
+				return time.UnixMilli(n), nil
+			},
+		},
+	}
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			inputMap := &types.AttributeValueMemberM{
+				Value: map[string]types.AttributeValue{
+					"TimeField":  &types.AttributeValueMemberN{Value: c.input},
+					"TimeFields": &types.AttributeValueMemberNS{Value: []string{c.input}},
+					"TimeFieldsL": &types.AttributeValueMemberL{Value: []types.AttributeValue{
+						&types.AttributeValueMemberN{Value: c.input},
+					}},
+				},
+			}
+			expectedValue := A{
+				TimeField:   c.expect,
+				TimeFields:  []time.Time{c.expect},
+				TimeFieldsL: []time.Time{c.expect},
+			}
+
+			actualValue := A{}
+			if err := UnmarshalWithOptions(inputMap, &actualValue, func(options *DecoderOptions) {
+				if c.decodeTimeN != nil {
+					options.DecodeTimeN = c.decodeTimeN
+				}
+			}); err != nil {
+				t.Errorf("expect no error, got %v", err)
+			}
+			if !reflect.DeepEqual(expectedValue, actualValue) {
 				t.Errorf("expect %+v, got %+v", expectedValue, actualValue)
 			}
 		})
