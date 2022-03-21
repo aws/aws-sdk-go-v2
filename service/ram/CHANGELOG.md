@@ -1,3 +1,7 @@
+# v1.16.1 (2022-03-21)
+
+* **Documentation**: Document improvements to the RAM API operations and parameter descriptions.
+
 # v1.16.0 (2022-03-08)
 
 * **Feature**: Updated `github.com/aws/smithy-go` to latest version

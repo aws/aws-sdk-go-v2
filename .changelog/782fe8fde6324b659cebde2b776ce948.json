@@ -1,8 +1,0 @@
-{
-    "id": "782fe8fd-e632-4b65-9ceb-de2b776ce948",
-    "type": "documentation",
-    "description": "Document improvements to the RAM API operations and parameter descriptions.",
-    "modules": [
-        "service/ram"
-    ]
-}

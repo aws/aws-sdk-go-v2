@@ -1,3 +1,7 @@
+# v1.21.0 (2022-03-21)
+
+* **Feature**: AWS QuickSight Service Features - Expand public API support for group management.
+
 # v1.20.0 (2022-03-08)
 
 * **Feature**: Updated `github.com/aws/smithy-go` to latest version
