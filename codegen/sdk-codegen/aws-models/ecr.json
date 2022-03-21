@@ -1427,7 +1427,6 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
-                    "items": "imageScanFindings.findings",
                     "pageSize": "maxResults"
                 },
                 "smithy.waiters#waitable": {
@@ -5207,7 +5206,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The details of a scanning repository filter.</p>"
+                "smithy.api#documentation": "<p>The details of a scanning repository filter. For more information on how to use\n            filters, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning.html#image-scanning-filters\">Using\n                filters</a> in the <i>Amazon Elastic Container Registry User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ecr#ScanningRepositoryFilterList": {

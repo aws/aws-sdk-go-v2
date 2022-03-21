@@ -374,6 +374,30 @@
                 }
             }
         },
+        "com.amazonaws.mediaconnect#AddMaintenance": {
+            "type": "structure",
+            "members": {
+                "MaintenanceDay": {
+                    "target": "com.amazonaws.mediaconnect#MaintenanceDay",
+                    "traits": {
+                        "smithy.api#documentation": "A day of a week when the maintenance will happen. Use Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday.",
+                        "smithy.api#jsonName": "maintenanceDay",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaintenanceStartHour": {
+                    "target": "com.amazonaws.mediaconnect#__string",
+                    "traits": {
+                        "smithy.api#documentation": "UTC time when the maintenance will happen. Use 24-hour HH:MM format. Minutes must be 00. Example: 13:00. The default value is 02:00.",
+                        "smithy.api#jsonName": "maintenanceStartHour",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Create maintenance setting for a flow"
+            }
+        },
         "com.amazonaws.mediaconnect#AddMediaStreamRequest": {
             "type": "structure",
             "members": {
@@ -737,6 +761,12 @@
                     "traits": {
                         "smithy.api#documentation": "The VPC interfaces you want on the flow.",
                         "smithy.api#jsonName": "vpcInterfaces"
+                    }
+                },
+                "Maintenance": {
+                    "target": "com.amazonaws.mediaconnect#AddMaintenance",
+                    "traits": {
+                        "smithy.api#jsonName": "maintenance"
                     }
                 }
             },
@@ -1622,6 +1652,12 @@
                         "smithy.api#documentation": "The VPC Interfaces for this flow.",
                         "smithy.api#jsonName": "vpcInterfaces"
                     }
+                },
+                "Maintenance": {
+                    "target": "com.amazonaws.mediaconnect#Maintenance",
+                    "traits": {
+                        "smithy.api#jsonName": "maintenance"
+                    }
                 }
             },
             "traits": {
@@ -2472,10 +2508,87 @@
                         "smithy.api#jsonName": "status",
                         "smithy.api#required": {}
                     }
+                },
+                "Maintenance": {
+                    "target": "com.amazonaws.mediaconnect#Maintenance",
+                    "traits": {
+                        "smithy.api#jsonName": "maintenance"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "Provides a summary of a flow, including its ARN, Availability Zone, and source type."
+            }
+        },
+        "com.amazonaws.mediaconnect#Maintenance": {
+            "type": "structure",
+            "members": {
+                "MaintenanceDay": {
+                    "target": "com.amazonaws.mediaconnect#MaintenanceDay",
+                    "traits": {
+                        "smithy.api#documentation": "A day of a week when the maintenance will happen. Use Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday.",
+                        "smithy.api#jsonName": "maintenanceDay"
+                    }
+                },
+                "MaintenanceDeadline": {
+                    "target": "com.amazonaws.mediaconnect#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The Maintenance has to be performed before this deadline in ISO UTC format. Example: 2021-01-30T08:30:00Z.",
+                        "smithy.api#jsonName": "maintenanceDeadline"
+                    }
+                },
+                "MaintenanceScheduledDate": {
+                    "target": "com.amazonaws.mediaconnect#__string",
+                    "traits": {
+                        "smithy.api#documentation": "A scheduled date in ISO UTC format when the maintenance will happen. Use YYYY-MM-DD format. Example: 2021-01-30.",
+                        "smithy.api#jsonName": "maintenanceScheduledDate"
+                    }
+                },
+                "MaintenanceStartHour": {
+                    "target": "com.amazonaws.mediaconnect#__string",
+                    "traits": {
+                        "smithy.api#documentation": "UTC time when the maintenance will happen. Use 24-hour HH:MM format. Minutes must be 00. Example: 13:00. The default value is 02:00.",
+                        "smithy.api#jsonName": "maintenanceStartHour"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The maintenance setting of a flow"
+            }
+        },
+        "com.amazonaws.mediaconnect#MaintenanceDay": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Monday",
+                        "name": "Monday"
+                    },
+                    {
+                        "value": "Tuesday",
+                        "name": "Tuesday"
+                    },
+                    {
+                        "value": "Wednesday",
+                        "name": "Wednesday"
+                    },
+                    {
+                        "value": "Thursday",
+                        "name": "Thursday"
+                    },
+                    {
+                        "value": "Friday",
+                        "name": "Friday"
+                    },
+                    {
+                        "value": "Saturday",
+                        "name": "Saturday"
+                    },
+                    {
+                        "value": "Sunday",
+                        "name": "Sunday"
+                    }
+                ]
             }
         },
         "com.amazonaws.mediaconnect#MaxResults": {
@@ -5100,6 +5213,12 @@
                     "traits": {
                         "smithy.api#jsonName": "sourceFailoverConfig"
                     }
+                },
+                "Maintenance": {
+                    "target": "com.amazonaws.mediaconnect#UpdateMaintenance",
+                    "traits": {
+                        "smithy.api#jsonName": "maintenance"
+                    }
                 }
             },
             "traits": {
@@ -5300,6 +5419,35 @@
                         "smithy.api#jsonName": "source"
                     }
                 }
+            }
+        },
+        "com.amazonaws.mediaconnect#UpdateMaintenance": {
+            "type": "structure",
+            "members": {
+                "MaintenanceDay": {
+                    "target": "com.amazonaws.mediaconnect#MaintenanceDay",
+                    "traits": {
+                        "smithy.api#documentation": "A day of a week when the maintenance will happen. use Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday.",
+                        "smithy.api#jsonName": "maintenanceDay"
+                    }
+                },
+                "MaintenanceScheduledDate": {
+                    "target": "com.amazonaws.mediaconnect#__string",
+                    "traits": {
+                        "smithy.api#documentation": "A scheduled date in ISO UTC format when the maintenance will happen. Use YYYY-MM-DD format. Example: 2021-01-30.",
+                        "smithy.api#jsonName": "maintenanceScheduledDate"
+                    }
+                },
+                "MaintenanceStartHour": {
+                    "target": "com.amazonaws.mediaconnect#__string",
+                    "traits": {
+                        "smithy.api#documentation": "UTC time when the maintenance will happen. Use 24-hour HH:MM format. Minutes must be 00. Example: 13:00. The default value is 02:00.",
+                        "smithy.api#jsonName": "maintenanceStartHour"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Update maintenance setting for a flow"
             }
         },
         "com.amazonaws.mediaconnect#VpcInterface": {

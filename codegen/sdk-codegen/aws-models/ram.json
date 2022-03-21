@@ -1256,7 +1256,7 @@
                 "resourceOwner": {
                     "target": "com.amazonaws.ram#ResourceOwner",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies that you want to retrieve details of only those resource shares that match the\n            following:</p>\n        <ul>\n            <li>\n                <p>\n                  <b>\n                     <code>SELF</code>\n                  </b> – resources that you\n                    are sharing</p>\n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>OTHER-ACCOUNTS</code>\n                  </b> –\n                    resources that other accounts share with you</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies that you want to retrieve details of only those resource shares that match the\n            following:</p>\n        <ul>\n            <li>\n                <p>\n                  <b>\n                     <code>SELF</code>\n                  </b> – resource shares that your\n                    account shares with other accounts</p>\n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>OTHER-ACCOUNTS</code>\n                  </b> – resource shares\n                    that other accounts share with your account</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1766,7 +1766,7 @@
                 "resourceOwner": {
                     "target": "com.amazonaws.ram#ResourceOwner",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies that you want to list information for only resource shares that match the\n            following:</p>\n        <ul>\n            <li>\n                <p>\n                  <b>\n                     <code>SELF</code>\n                  </b> – resources that you\n                    are sharing</p>\n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>OTHER-ACCOUNTS</code>\n                  </b> –\n                    resources that other accounts share with you</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies that you want to list information for only resource shares that match the\n            following:</p>\n        <ul>\n            <li>\n                <p>\n                  <b>\n                     <code>SELF</code>\n                  </b> – principals that\n                    your account is sharing resources with</p>\n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>OTHER-ACCOUNTS</code>\n                  </b> –\n                    principals that are sharing resources with your account</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1785,7 +1785,7 @@
                 "resourceType": {
                     "target": "com.amazonaws.ram#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies that you want to list information for only principals associated with resource shares\n            that include the specified resource type.</p>\n        <p>For a list of valid values, query the <a>ListResourceTypes</a> operation.</p>"
+                        "smithy.api#documentation": "<p>Specifies that you want to list information for only principals associated with resource shares\n            that include the specified resource type.</p>\n        <p>For a list of valid values, query the <a>ListResourceTypes</a>\n            operation.</p>"
                     }
                 },
                 "resourceShareArns": {
@@ -2019,7 +2019,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the resources that you added to a resource shares or the resources that are shared with\n            you.</p>",
+                "smithy.api#documentation": "<p>Lists the resources that you added to a resource share or the resources that are shared with\n            you.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/listresources",
@@ -2038,7 +2038,7 @@
                 "resourceOwner": {
                     "target": "com.amazonaws.ram#ResourceOwner",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies that you want to list only the resource shares that match the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <b>\n                     <code>SELF</code>\n                  </b> – resources that you\n                    are sharing</p>\n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>OTHER-ACCOUNTS</code>\n                  </b> –\n                    resources that other accounts share with you</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies that you want to list only the resource shares that match the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <b>\n                     <code>SELF</code>\n                  </b> – resources that\n                    your account shares with other accounts</p>\n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>OTHER-ACCOUNTS</code>\n                  </b> –\n                    resources that other accounts share with your account</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2285,7 +2285,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>When you attach a resource-based permission policy to a resource, it automatically\n            creates a resource share. However, resource shares created this way are visible only to the resource share\n            owner, and the resource share can't be modified in RAM.</p>\n        <p>You can use this operation to promote the resource share to a full RAM resource share. When you promote\n            a resource share, you can then manage the resource share in RAM and it becomes visible to all of the\n            principals you shared it with.</p>",
+                "smithy.api#documentation": "<p>When you attach a resource-based permission policy to a resource, it automatically\n            creates a resource share. However, resource shares created this way are visible only to the resource share owner, and\n            the resource share can't be modified in RAM.</p>\n        <p>You can use this operation to promote the resource share to a full RAM resource share. When you promote\n            a resource share, you can then manage the resource share in RAM and it becomes visible to all of the\n            principals you shared it with.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/promoteresourcesharecreatedfrompolicy",
