@@ -1,8 +1,0 @@
-{
-    "id": "452dc7be-71b4-4c22-bbc9-0d5d255b7918",
-    "type": "feature",
-    "description": "AWS QuickSight Service Features - Expand public API support for group management.",
-    "modules": [
-        "service/quicksight"
-    ]
-}

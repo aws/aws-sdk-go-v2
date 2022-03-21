@@ -1,3 +1,7 @@
+# v1.16.0 (2022-03-21)
+
+* **Feature**: This release adds support for selecting a maintenance window.
+
 # v1.15.0 (2022-03-08)
 
 * **Feature**: Updated `github.com/aws/smithy-go` to latest version

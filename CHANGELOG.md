@@ -1,3 +1,17 @@
+# Release (2022-03-21)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmeetings`: [v1.8.0](service/chimesdkmeetings/CHANGELOG.md#v180-2022-03-21)
+  * **Feature**: Add support for media replication to link multiple WebRTC media sessions together to reach larger and global audiences. Participants connected to a replica session can be granted access to join the primary session and can switch sessions with their existing WebRTC connection
+* `github.com/aws/aws-sdk-go-v2/service/ecr`: [v1.17.0](service/ecr/CHANGELOG.md#v1170-2022-03-21)
+  * **Feature**: This release includes a fix in the DescribeImageScanFindings paginated output.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconnect`: [v1.16.0](service/mediaconnect/CHANGELOG.md#v1160-2022-03-21)
+  * **Feature**: This release adds support for selecting a maintenance window.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.21.0](service/quicksight/CHANGELOG.md#v1210-2022-03-21)
+  * **Feature**: AWS QuickSight Service Features - Expand public API support for group management.
+* `github.com/aws/aws-sdk-go-v2/service/ram`: [v1.16.1](service/ram/CHANGELOG.md#v1161-2022-03-21)
+  * **Documentation**: Document improvements to the RAM API operations and parameter descriptions.
+
 # Release (2022-03-18)
 
 ## Module Highlights

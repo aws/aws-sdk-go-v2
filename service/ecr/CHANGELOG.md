@@ -1,3 +1,7 @@
+# v1.17.0 (2022-03-21)
+
+* **Feature**: This release includes a fix in the DescribeImageScanFindings paginated output.
+
 # v1.16.0 (2022-03-08)
 
 * **Feature**: Updated `github.com/aws/smithy-go` to latest version
