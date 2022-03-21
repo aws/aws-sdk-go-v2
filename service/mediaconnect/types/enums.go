@@ -162,6 +162,34 @@ func (KeyType) Values() []KeyType {
 	}
 }
 
+type MaintenanceDay string
+
+// Enum values for MaintenanceDay
+const (
+	MaintenanceDayMonday    MaintenanceDay = "Monday"
+	MaintenanceDayTuesday   MaintenanceDay = "Tuesday"
+	MaintenanceDayWednesday MaintenanceDay = "Wednesday"
+	MaintenanceDayThursday  MaintenanceDay = "Thursday"
+	MaintenanceDayFriday    MaintenanceDay = "Friday"
+	MaintenanceDaySaturday  MaintenanceDay = "Saturday"
+	MaintenanceDaySunday    MaintenanceDay = "Sunday"
+)
+
+// Values returns all known values for MaintenanceDay. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MaintenanceDay) Values() []MaintenanceDay {
+	return []MaintenanceDay{
+		"Monday",
+		"Tuesday",
+		"Wednesday",
+		"Thursday",
+		"Friday",
+		"Saturday",
+		"Sunday",
+	}
+}
+
 type MediaStreamType string
 
 // Enum values for MediaStreamType

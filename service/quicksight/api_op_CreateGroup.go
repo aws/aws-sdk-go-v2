@@ -12,7 +12,7 @@ import (
 )
 
 // Creates an Amazon QuickSight group. The permissions resource is
-// arn:aws:quicksight:us-east-1::group/default/ . The response is a group object.
+// arn:aws:quicksight:::group/default/ . The response is a group object.
 func (c *Client) CreateGroup(ctx context.Context, params *CreateGroupInput, optFns ...func(*Options)) (*CreateGroupOutput, error) {
 	if params == nil {
 		params = &CreateGroupInput{}
@@ -43,7 +43,7 @@ type CreateGroupInput struct {
 	// This member is required.
 	GroupName *string
 
-	// The namespace. Currently, you should set this to default.
+	// The namespace that you want the group to be a part of.
 	//
 	// This member is required.
 	Namespace *string

@@ -45,7 +45,7 @@ type DeleteGroupMembershipInput struct {
 	// This member is required.
 	MemberName *string
 
-	// The namespace. Currently, you should set this to default.
+	// The namespace of the group that you want to remove a user from.
 	//
 	// This member is required.
 	Namespace *string

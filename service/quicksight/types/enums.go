@@ -498,6 +498,38 @@ func (GeoSpatialDataRole) Values() []GeoSpatialDataRole {
 	}
 }
 
+type GroupFilterAttribute string
+
+// Enum values for GroupFilterAttribute
+const (
+	GroupFilterAttributeGroupName GroupFilterAttribute = "GROUP_NAME"
+)
+
+// Values returns all known values for GroupFilterAttribute. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (GroupFilterAttribute) Values() []GroupFilterAttribute {
+	return []GroupFilterAttribute{
+		"GROUP_NAME",
+	}
+}
+
+type GroupFilterOperator string
+
+// Enum values for GroupFilterOperator
+const (
+	GroupFilterOperatorStartsWith GroupFilterOperator = "StartsWith"
+)
+
+// Values returns all known values for GroupFilterOperator. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (GroupFilterOperator) Values() []GroupFilterOperator {
+	return []GroupFilterOperator{
+		"StartsWith",
+	}
+}
+
 type IdentityStore string
 
 // Enum values for IdentityStore

@@ -77,6 +77,10 @@ type CreateMeetingWithAttendeesInput struct {
 	// attendee events occur.
 	NotificationsConfiguration *types.NotificationsConfiguration
 
+	// When specified, replicates the media from the primary meeting to the new
+	// meeting.
+	PrimaryMeetingId *string
+
 	noSmithyDocumentSerde
 }
 

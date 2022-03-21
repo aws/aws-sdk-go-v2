@@ -6,27 +6,30 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes a user group from Amazon QuickSight.
-func (c *Client) DeleteGroup(ctx context.Context, params *DeleteGroupInput, optFns ...func(*Options)) (*DeleteGroupOutput, error) {
+// Use the DescribeGroupMembership operation to determine if a user is a member of
+// the specified group. If the user exists and is a member of the specified group,
+// an associated GroupMember object is returned.
+func (c *Client) DescribeGroupMembership(ctx context.Context, params *DescribeGroupMembershipInput, optFns ...func(*Options)) (*DescribeGroupMembershipOutput, error) {
 	if params == nil {
-		params = &DeleteGroupInput{}
+		params = &DescribeGroupMembershipInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteGroup", params, optFns, c.addOperationDeleteGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeGroupMembership", params, optFns, c.addOperationDescribeGroupMembershipMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DeleteGroupOutput)
+	out := result.(*DescribeGroupMembershipOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type DeleteGroupInput struct {
+type DescribeGroupMembershipInput struct {
 
 	// The ID for the Amazon Web Services account that the group is in. Currently, you
 	// use the ID for the Amazon Web Services account that contains your Amazon
@@ -35,12 +38,17 @@ type DeleteGroupInput struct {
 	// This member is required.
 	AwsAccountId *string
 
-	// The name of the group that you want to delete.
+	// The name of the group that you want to search.
 	//
 	// This member is required.
 	GroupName *string
 
-	// The namespace of the group that you want to delete.
+	// The user name of the user that you want to search for.
+	//
+	// This member is required.
+	MemberName *string
+
+	// The namespace that includes the group you are searching within.
 	//
 	// This member is required.
 	Namespace *string
@@ -48,7 +56,11 @@ type DeleteGroupInput struct {
 	noSmithyDocumentSerde
 }
 
-type DeleteGroupOutput struct {
+type DescribeGroupMembershipOutput struct {
+
+	// A member of an Amazon QuickSight group. Currently, group members must be users.
+	// Groups can't be members of another group. .
+	GroupMember *types.GroupMember
 
 	// The Amazon Web Services request ID for this operation.
 	RequestId *string
@@ -62,12 +74,12 @@ type DeleteGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDeleteGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteGroup{}, middleware.After)
+func (c *Client) addOperationDescribeGroupMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeGroupMembership{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteGroup{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeGroupMembership{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -107,10 +119,10 @@ func (c *Client) addOperationDeleteGroupMiddlewares(stack *middleware.Stack, opt
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpDeleteGroupValidationMiddleware(stack); err != nil {
+	if err = addOpDescribeGroupMembershipValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteGroup(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeGroupMembership(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -125,11 +137,11 @@ func (c *Client) addOperationDeleteGroupMiddlewares(stack *middleware.Stack, opt
 	return nil
 }
 
-func newServiceMetadataMiddleware_opDeleteGroup(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opDescribeGroupMembership(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "quicksight",
-		OperationName: "DeleteGroup",
+		OperationName: "DescribeGroupMembership",
 	}
 }

@@ -272,6 +272,11 @@ func awsRestjson1_serializeOpDocumentCreateMeetingInput(v *CreateMeetingInput, v
 		}
 	}
 
+	if v.PrimaryMeetingId != nil {
+		ok := object.Key("PrimaryMeetingId")
+		ok.String(*v.PrimaryMeetingId)
+	}
+
 	return nil
 }
 
@@ -374,6 +379,11 @@ func awsRestjson1_serializeOpDocumentCreateMeetingWithAttendeesInput(v *CreateMe
 		if err := awsRestjson1_serializeDocumentNotificationsConfiguration(v.NotificationsConfiguration, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.PrimaryMeetingId != nil {
+		ok := object.Key("PrimaryMeetingId")
+		ok.String(*v.PrimaryMeetingId)
 	}
 
 	return nil

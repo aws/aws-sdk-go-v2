@@ -6,27 +6,29 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes a user group from Amazon QuickSight.
-func (c *Client) DeleteGroup(ctx context.Context, params *DeleteGroupInput, optFns ...func(*Options)) (*DeleteGroupOutput, error) {
+// Use the SearchGroups operation to search groups in a specified Amazon QuickSight
+// namespace using the supplied filters.
+func (c *Client) SearchGroups(ctx context.Context, params *SearchGroupsInput, optFns ...func(*Options)) (*SearchGroupsOutput, error) {
 	if params == nil {
-		params = &DeleteGroupInput{}
+		params = &SearchGroupsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteGroup", params, optFns, c.addOperationDeleteGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SearchGroups", params, optFns, c.addOperationSearchGroupsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DeleteGroupOutput)
+	out := result.(*SearchGroupsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type DeleteGroupInput struct {
+type SearchGroupsInput struct {
 
 	// The ID for the Amazon Web Services account that the group is in. Currently, you
 	// use the ID for the Amazon Web Services account that contains your Amazon
@@ -35,20 +37,33 @@ type DeleteGroupInput struct {
 	// This member is required.
 	AwsAccountId *string
 
-	// The name of the group that you want to delete.
+	// The structure for the search filters that you want to apply to your search.
 	//
 	// This member is required.
-	GroupName *string
+	Filters []types.GroupSearchFilter
 
-	// The namespace of the group that you want to delete.
+	// The namespace that you want to search.
 	//
 	// This member is required.
 	Namespace *string
 
+	// The maximum number of results to return from this request.
+	MaxResults int32
+
+	// A pagination token that can be used in a subsequent request.
+	NextToken *string
+
 	noSmithyDocumentSerde
 }
 
-type DeleteGroupOutput struct {
+type SearchGroupsOutput struct {
+
+	// A list of groups in a specified namespace that match the filters you set in your
+	// SearchGroups request.
+	GroupList []types.Group
+
+	// A pagination token that can be used in a subsequent request.
+	NextToken *string
 
 	// The Amazon Web Services request ID for this operation.
 	RequestId *string
@@ -62,12 +77,12 @@ type DeleteGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDeleteGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteGroup{}, middleware.After)
+func (c *Client) addOperationSearchGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchGroups{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteGroup{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchGroups{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -107,10 +122,10 @@ func (c *Client) addOperationDeleteGroupMiddlewares(stack *middleware.Stack, opt
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpDeleteGroupValidationMiddleware(stack); err != nil {
+	if err = addOpSearchGroupsValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteGroup(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSearchGroups(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -125,11 +140,11 @@ func (c *Client) addOperationDeleteGroupMiddlewares(stack *middleware.Stack, opt
 	return nil
 }
 
-func newServiceMetadataMiddleware_opDeleteGroup(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opSearchGroups(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "quicksight",
-		OperationName: "DeleteGroup",
+		OperationName: "SearchGroups",
 	}
 }

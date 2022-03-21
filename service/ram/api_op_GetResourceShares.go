@@ -34,10 +34,11 @@ type GetResourceSharesInput struct {
 	// Specifies that you want to retrieve details of only those resource shares that
 	// match the following:
 	//
-	// * SELF – resources that you are sharing
+	// * SELF – resource shares that your account shares with
+	// other accounts
 	//
-	// * OTHER-ACCOUNTS
-	// – resources that other accounts share with you
+	// * OTHER-ACCOUNTS – resource shares that other accounts share
+	// with your account
 	//
 	// This member is required.
 	ResourceOwner types.ResourceOwner
