@@ -6375,6 +6375,11 @@ func awsRestjson1_deserializeDocumentFlow(v **types.Flow, value interface{}) err
 				sv.FlowArn = ptr.String(jtv)
 			}
 
+		case "maintenance":
+			if err := awsRestjson1_deserializeDocumentMaintenance(&sv.Maintenance, value); err != nil {
+				return err
+			}
+
 		case "mediaStreams":
 			if err := awsRestjson1_deserializeDocument__listOfMediaStream(&sv.MediaStreams, value); err != nil {
 				return err
@@ -6855,6 +6860,11 @@ func awsRestjson1_deserializeDocumentListedFlow(v **types.ListedFlow, value inte
 				sv.FlowArn = ptr.String(jtv)
 			}
 
+		case "maintenance":
+			if err := awsRestjson1_deserializeDocumentMaintenance(&sv.Maintenance, value); err != nil {
+				return err
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6880,6 +6890,73 @@ func awsRestjson1_deserializeDocumentListedFlow(v **types.ListedFlow, value inte
 					return fmt.Errorf("expected Status to be of type string, got %T instead", value)
 				}
 				sv.Status = types.Status(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMaintenance(v **types.Maintenance, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Maintenance
+	if *v == nil {
+		sv = &types.Maintenance{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "maintenanceDay":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MaintenanceDay to be of type string, got %T instead", value)
+				}
+				sv.MaintenanceDay = types.MaintenanceDay(jtv)
+			}
+
+		case "maintenanceDeadline":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.MaintenanceDeadline = ptr.String(jtv)
+			}
+
+		case "maintenanceScheduledDate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.MaintenanceScheduledDate = ptr.String(jtv)
+			}
+
+		case "maintenanceStartHour":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.MaintenanceStartHour = ptr.String(jtv)
 			}
 
 		default:

@@ -41,7 +41,7 @@ type UpdateGroupInput struct {
 	// This member is required.
 	GroupName *string
 
-	// The namespace. Currently, you should set this to default.
+	// The namespace of the group that you want to update.
 	//
 	// This member is required.
 	Namespace *string

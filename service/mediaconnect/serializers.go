@@ -419,6 +419,13 @@ func awsRestjson1_serializeOpDocumentCreateFlowInput(v *CreateFlowInput, value s
 		}
 	}
 
+	if v.Maintenance != nil {
+		ok := object.Key("maintenance")
+		if err := awsRestjson1_serializeDocumentAddMaintenance(v.Maintenance, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.MediaStreams != nil {
 		ok := object.Key("mediaStreams")
 		if err := awsRestjson1_serializeDocument__listOfAddMediaStreamRequest(v.MediaStreams, ok); err != nil {
@@ -1827,6 +1834,13 @@ func awsRestjson1_serializeOpDocumentUpdateFlowInput(v *UpdateFlowInput, value s
 	object := value.Object()
 	defer object.Close()
 
+	if v.Maintenance != nil {
+		ok := object.Key("maintenance")
+		if err := awsRestjson1_serializeDocumentUpdateMaintenance(v.Maintenance, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SourceFailoverConfig != nil {
 		ok := object.Key("sourceFailoverConfig")
 		if err := awsRestjson1_serializeDocumentUpdateFailoverConfig(v.SourceFailoverConfig, ok); err != nil {
@@ -2529,6 +2543,23 @@ func awsRestjson1_serializeDocument__mapOf__string(v map[string]string, value sm
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAddMaintenance(v *types.AddMaintenance, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.MaintenanceDay) > 0 {
+		ok := object.Key("maintenanceDay")
+		ok.String(string(v.MaintenanceDay))
+	}
+
+	if v.MaintenanceStartHour != nil {
+		ok := object.Key("maintenanceStartHour")
+		ok.String(*v.MaintenanceStartHour)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAddMediaStreamRequest(v *types.AddMediaStreamRequest, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3165,6 +3196,28 @@ func awsRestjson1_serializeDocumentUpdateFailoverConfig(v *types.UpdateFailoverC
 	if len(v.State) > 0 {
 		ok := object.Key("state")
 		ok.String(string(v.State))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentUpdateMaintenance(v *types.UpdateMaintenance, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.MaintenanceDay) > 0 {
+		ok := object.Key("maintenanceDay")
+		ok.String(string(v.MaintenanceDay))
+	}
+
+	if v.MaintenanceScheduledDate != nil {
+		ok := object.Key("maintenanceScheduledDate")
+		ok.String(*v.MaintenanceScheduledDate)
+	}
+
+	if v.MaintenanceStartHour != nil {
+		ok := object.Key("maintenanceStartHour")
+		ok.String(*v.MaintenanceStartHour)
 	}
 
 	return nil

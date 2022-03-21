@@ -1,0 +1,8 @@
+{
+    "id": "e6ef45cd-3be0-429c-b4a0-fd18b8435fc7",
+    "type": "feature",
+    "description": "This release adds support for selecting a maintenance window.",
+    "modules": [
+        "service/mediaconnect"
+    ]
+}

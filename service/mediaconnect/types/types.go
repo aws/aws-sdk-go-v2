@@ -6,6 +6,24 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
+// Create maintenance setting for a flow
+type AddMaintenance struct {
+
+	// A day of a week when the maintenance will happen. Use
+	// Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday.
+	//
+	// This member is required.
+	MaintenanceDay MaintenanceDay
+
+	// UTC time when the maintenance will happen. Use 24-hour HH:MM format. Minutes
+	// must be 00. Example: 13:00. The default value is 02:00.
+	//
+	// This member is required.
+	MaintenanceStartHour *string
+
+	noSmithyDocumentSerde
+}
+
 // The media stream that you want to add to the flow.
 type AddMediaStreamRequest struct {
 
@@ -361,6 +379,9 @@ type Flow struct {
 	// The IP address from which video will be sent to output destinations.
 	EgressIp *string
 
+	// The maintenance setting of a flow
+	Maintenance *Maintenance
+
 	// The media streams that are associated with the flow. After you associate a media
 	// stream with a source, you can also associate it with outputs on the flow.
 	MediaStreams []MediaStream
@@ -583,6 +604,31 @@ type ListedFlow struct {
 	//
 	// This member is required.
 	Status Status
+
+	// The maintenance setting of a flow
+	Maintenance *Maintenance
+
+	noSmithyDocumentSerde
+}
+
+// The maintenance setting of a flow
+type Maintenance struct {
+
+	// A day of a week when the maintenance will happen. Use
+	// Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday.
+	MaintenanceDay MaintenanceDay
+
+	// The Maintenance has to be performed before this deadline in ISO UTC format.
+	// Example: 2021-01-30T08:30:00Z.
+	MaintenanceDeadline *string
+
+	// A scheduled date in ISO UTC format when the maintenance will happen. Use
+	// YYYY-MM-DD format. Example: 2021-01-30.
+	MaintenanceScheduledDate *string
+
+	// UTC time when the maintenance will happen. Use 24-hour HH:MM format. Minutes
+	// must be 00. Example: 13:00. The default value is 02:00.
+	MaintenanceStartHour *string
 
 	noSmithyDocumentSerde
 }
@@ -1228,6 +1274,24 @@ type UpdateFailoverConfig struct {
 	SourcePriority *SourcePriority
 
 	State State
+
+	noSmithyDocumentSerde
+}
+
+// Update maintenance setting for a flow
+type UpdateMaintenance struct {
+
+	// A day of a week when the maintenance will happen. use
+	// Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday.
+	MaintenanceDay MaintenanceDay
+
+	// A scheduled date in ISO UTC format when the maintenance will happen. Use
+	// YYYY-MM-DD format. Example: 2021-01-30.
+	MaintenanceScheduledDate *string
+
+	// UTC time when the maintenance will happen. Use 24-hour HH:MM format. Minutes
+	// must be 00. Example: 13:00. The default value is 02:00.
+	MaintenanceStartHour *string
 
 	noSmithyDocumentSerde
 }

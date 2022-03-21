@@ -35,6 +35,9 @@ type UpdateFlowInput struct {
 	// This member is required.
 	FlowArn *string
 
+	// Update maintenance setting for a flow
+	Maintenance *types.UpdateMaintenance
+
 	// The settings for source failover.
 	SourceFailoverConfig *types.UpdateFailoverConfig
 

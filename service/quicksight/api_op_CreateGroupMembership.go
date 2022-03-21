@@ -46,7 +46,7 @@ type CreateGroupMembershipInput struct {
 	// This member is required.
 	MemberName *string
 
-	// The namespace. Currently, you should set this to default.
+	// The namespace that you want the user to be a part of.
 	//
 	// This member is required.
 	Namespace *string

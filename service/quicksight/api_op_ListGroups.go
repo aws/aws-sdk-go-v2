@@ -36,7 +36,7 @@ type ListGroupsInput struct {
 	// This member is required.
 	AwsAccountId *string
 
-	// The namespace. Currently, you should set this to default.
+	// The namespace that you want a list of groups from.
 	//
 	// This member is required.
 	Namespace *string

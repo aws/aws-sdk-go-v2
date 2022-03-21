@@ -787,6 +787,24 @@ func validate__listOfVpcInterfaceRequest(v []types.VpcInterfaceRequest) error {
 	}
 }
 
+func validateAddMaintenance(v *types.AddMaintenance) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AddMaintenance"}
+	if len(v.MaintenanceDay) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MaintenanceDay"))
+	}
+	if v.MaintenanceStartHour == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaintenanceStartHour"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAddMediaStreamRequest(v *types.AddMediaStreamRequest) error {
 	if v == nil {
 		return nil
@@ -1157,6 +1175,11 @@ func validateOpCreateFlowInput(v *CreateFlowInput) error {
 	if v.VpcInterfaces != nil {
 		if err := validate__listOfVpcInterfaceRequest(v.VpcInterfaces); err != nil {
 			invalidParams.AddNested("VpcInterfaces", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Maintenance != nil {
+		if err := validateAddMaintenance(v.Maintenance); err != nil {
+			invalidParams.AddNested("Maintenance", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

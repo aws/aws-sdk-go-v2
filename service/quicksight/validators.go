@@ -970,6 +970,26 @@ func (m *validateOpDescribeGroup) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeGroupMembership struct {
+}
+
+func (*validateOpDescribeGroupMembership) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeGroupMembership) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeGroupMembershipInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeGroupMembershipInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeIAMPolicyAssignment struct {
 }
 
@@ -1810,6 +1830,26 @@ func (m *validateOpSearchFolders) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSearchGroups struct {
+}
+
+func (*validateOpSearchGroups) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSearchGroups) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SearchGroupsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSearchGroupsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -2502,6 +2542,10 @@ func addOpDescribeGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeGroup{}, middleware.After)
 }
 
+func addOpDescribeGroupMembershipValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeGroupMembership{}, middleware.After)
+}
+
 func addOpDescribeIAMPolicyAssignmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeIAMPolicyAssignment{}, middleware.After)
 }
@@ -2668,6 +2712,10 @@ func addOpSearchDashboardsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpSearchFoldersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSearchFolders{}, middleware.After)
+}
+
+func addOpSearchGroupsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSearchGroups{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -3452,6 +3500,44 @@ func validateGeoSpatialColumnGroup(v *types.GeoSpatialColumnGroup) error {
 	}
 	if v.Columns == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Columns"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGroupSearchFilter(v *types.GroupSearchFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GroupSearchFilter"}
+	if len(v.Operator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Operator"))
+	}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGroupSearchFilterList(v []types.GroupSearchFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GroupSearchFilterList"}
+	for i := range v {
+		if err := validateGroupSearchFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5615,6 +5701,30 @@ func validateOpDescribeGroupInput(v *DescribeGroupInput) error {
 	}
 }
 
+func validateOpDescribeGroupMembershipInput(v *DescribeGroupMembershipInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeGroupMembershipInput"}
+	if v.MemberName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MemberName"))
+	}
+	if v.GroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GroupName"))
+	}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.Namespace == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeIAMPolicyAssignmentInput(v *DescribeIAMPolicyAssignmentInput) error {
 	if v == nil {
 		return nil
@@ -6392,6 +6502,31 @@ func validateOpSearchFoldersInput(v *SearchFoldersInput) error {
 	}
 	if v.Filters == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Filters"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSearchGroupsInput(v *SearchGroupsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchGroupsInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.Namespace == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
+	}
+	if v.Filters == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Filters"))
+	} else if v.Filters != nil {
+		if err := validateGroupSearchFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

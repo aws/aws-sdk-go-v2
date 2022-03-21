@@ -34,10 +34,10 @@ type ListPrincipalsInput struct {
 	// Specifies that you want to list information for only resource shares that match
 	// the following:
 	//
-	// * SELF – resources that you are sharing
+	// * SELF – principals that your account is sharing resources
+	// with
 	//
-	// * OTHER-ACCOUNTS –
-	// resources that other accounts share with you
+	// * OTHER-ACCOUNTS – principals that are sharing resources with your account
 	//
 	// This member is required.
 	ResourceOwner types.ResourceOwner

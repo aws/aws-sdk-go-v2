@@ -2373,6 +2373,15 @@ func awsRestjson1_deserializeDocumentMeeting(v **types.Meeting, value interface{
 				sv.MeetingId = ptr.String(jtv)
 			}
 
+		case "PrimaryMeetingId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PrimaryMeetingId to be of type string, got %T instead", value)
+				}
+				sv.PrimaryMeetingId = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

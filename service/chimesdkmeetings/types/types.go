@@ -221,6 +221,9 @@ type Meeting struct {
 	// The Amazon Chime SDK meeting ID.
 	MeetingId *string
 
+	// When specified, replicates the media from the primary meeting to this meeting.
+	PrimaryMeetingId *string
+
 	noSmithyDocumentSerde
 }
 

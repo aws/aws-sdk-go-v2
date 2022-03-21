@@ -1391,6 +1391,30 @@ type GroupMember struct {
 	noSmithyDocumentSerde
 }
 
+// A GroupSearchFilter object that you want to apply to your search.
+type GroupSearchFilter struct {
+
+	// The name of the value that you want to use as a filter, for example "Name":
+	// "GROUP_NAME". Currently, the only supported name is GROUP_NAME.
+	//
+	// This member is required.
+	Name GroupFilterAttribute
+
+	// The comparison operator that you want to use as a filter, for example
+	// "Operator": "StartsWith". Currently, the only supported operator is StartsWith.
+	//
+	// This member is required.
+	Operator GroupFilterOperator
+
+	// The value of the named item, in this case GROUP_NAME, that you want to use as a
+	// filter.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // The display options for gutter spacing between tiles on a sheet.
 type GutterStyle struct {
 

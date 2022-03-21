@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the resources that you added to a resource shares or the resources that
-// are shared with you.
+// Lists the resources that you added to a resource share or the resources that are
+// shared with you.
 func (c *Client) ListResources(ctx context.Context, params *ListResourcesInput, optFns ...func(*Options)) (*ListResourcesOutput, error) {
 	if params == nil {
 		params = &ListResourcesInput{}
@@ -34,10 +34,10 @@ type ListResourcesInput struct {
 	// Specifies that you want to list only the resource shares that match the
 	// following:
 	//
-	// * SELF – resources that you are sharing
+	// * SELF – resources that your account shares with other accounts
 	//
-	// * OTHER-ACCOUNTS –
-	// resources that other accounts share with you
+	// *
+	// OTHER-ACCOUNTS – resources that other accounts share with your account
 	//
 	// This member is required.
 	ResourceOwner types.ResourceOwner

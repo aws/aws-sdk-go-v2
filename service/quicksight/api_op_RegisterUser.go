@@ -105,7 +105,7 @@ type RegisterUserInput struct {
 	// instead. A set of custom permissions includes any combination of these
 	// restrictions. Currently, you need to create the profile names for custom
 	// permission sets by using the Amazon QuickSight console. Then, you use the
-	// RegisterUser API operation to assign the named set of permissions to a
+	// RegisterUser API operation to assign the named set of permissions to a Amazon
 	// QuickSight user. Amazon QuickSight custom permissions are applied through IAM
 	// policies. Therefore, they override the permissions typically granted by
 	// assigning Amazon QuickSight users to one of the default security cohorts in

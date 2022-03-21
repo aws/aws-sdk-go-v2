@@ -1,0 +1,8 @@
+{
+    "id": "387d9506-1699-4458-9c42-2e2153d7810f",
+    "type": "feature",
+    "description": "This release includes a fix in the DescribeImageScanFindings paginated output.",
+    "modules": [
+        "service/ecr"
+    ]
+}
