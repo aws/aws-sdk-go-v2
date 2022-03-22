@@ -3118,6 +3118,7 @@
                     "method": "POST"
                 },
                 "smithy.api#paginated": {
+                    "pageSize": "MaxResults",
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
                     "items": "DevicePositions"
@@ -3160,6 +3161,16 @@
                     "target": "com.amazonaws.location#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>Specify the end time for the position history in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\"> ISO 8601</a>\n            format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>. By default, the value will be the time\n            that the request is made.</p>\n        <p>Requirement:</p>\n         <ul>\n            <li>\n               <p>The time specified for <code>EndTimeExclusive</code> must be after the time for\n                        <code>StartTimeInclusive</code>.</p>\n           </li>\n         </ul>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional limit for the number of device positions returned in a single call.</p>\n        <p>Default value: <code>100</code>\n         </p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
                     }
                 }
             }
