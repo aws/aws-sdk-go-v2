@@ -554,6 +554,10 @@
                     {
                         "value": "en-ZA",
                         "name": "en_ZA"
+                    },
+                    {
+                        "value": "ca-ES",
+                        "name": "ca_ES"
                     }
                 ]
             }
@@ -954,6 +958,24 @@
         },
         "com.amazonaws.polly#Parrot_v1": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Polly",
+                    "arnNamespace": "polly",
+                    "cloudFormationName": "Polly",
+                    "cloudTrailEventSource": "polly.amazonaws.com",
+                    "endpointPrefix": "polly"
+                },
+                "aws.auth#sigv4": {
+                    "name": "polly"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>Amazon Polly is a web service that makes it easy to synthesize speech from\n      text.</p>\n         <p>The Amazon Polly service provides API operations for synthesizing\n      high-quality speech from plain text and Speech Synthesis Markup Language\n      (SSML), along with managing pronunciations lexicons that enable you to get\n      the best results for your application domain.</p>",
+                "smithy.api#title": "Amazon Polly",
+                "smithy.api#xmlNamespace": {
+                    "uri": "http://polly.amazonaws.com/doc/v1"
+                }
+            },
             "version": "2016-06-10",
             "operations": [
                 {
@@ -983,25 +1005,7 @@
                 {
                     "target": "com.amazonaws.polly#SynthesizeSpeech"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Polly",
-                    "arnNamespace": "polly",
-                    "cloudFormationName": "Polly",
-                    "cloudTrailEventSource": "polly.amazonaws.com",
-                    "endpointPrefix": "polly"
-                },
-                "aws.auth#sigv4": {
-                    "name": "polly"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Amazon Polly is a web service that makes it easy to synthesize speech from\n      text.</p>\n         <p>The Amazon Polly service provides API operations for synthesizing\n      high-quality speech from plain text and Speech Synthesis Markup Language\n      (SSML), along with managing pronunciations lexicons that enable you to get\n      the best results for your application domain.</p>",
-                "smithy.api#title": "Amazon Polly",
-                "smithy.api#xmlNamespace": {
-                    "uri": "http://polly.amazonaws.com/doc/v1"
-                }
-            }
+            ]
         },
         "com.amazonaws.polly#PutLexicon": {
             "type": "operation",
@@ -1528,7 +1532,7 @@
                 "ContentType": {
                     "target": "com.amazonaws.polly#ContentType",
                     "traits": {
-                        "smithy.api#documentation": "<p> Specifies the type audio stream. This should reflect the\n        <code>OutputFormat</code> parameter in your request. </p>\n         <ul>\n            <li>\n               <p> If you request <code>mp3</code> as the\n            <code>OutputFormat</code>, the <code>ContentType</code> returned is\n          audio/mpeg. </p>\n            </li>\n            <li>\n               <p> If you request <code>ogg_vorbis</code> as the\n            <code>OutputFormat</code>, the <code>ContentType</code> returned is\n          audio/ogg. </p>\n            </li>\n            <li>\n               <p> If you request <code>pcm</code> as the\n            <code>OutputFormat</code>, the <code>ContentType</code> returned is\n          audio/pcm in a signed 16-bit, 1 channel (mono), little-endian format.\n        </p>\n            </li>\n            <li>\n               <p>If you request <code>json</code> as the\n            <code>OutputFormat</code>, the <code>ContentType</code> returned is\n          audio/json.</p>\n            </li>\n         </ul>\n         <p> </p>",
+                        "smithy.api#documentation": "<p> Specifies the type audio stream. This should reflect the\n        <code>OutputFormat</code> parameter in your request. </p>\n         <ul>\n            <li>\n               <p> If you request <code>mp3</code> as the\n            <code>OutputFormat</code>, the <code>ContentType</code> returned is\n          audio/mpeg. </p>\n            </li>\n            <li>\n               <p> If you request <code>ogg_vorbis</code> as the\n            <code>OutputFormat</code>, the <code>ContentType</code> returned is\n          audio/ogg. </p>\n            </li>\n            <li>\n               <p> If you request <code>pcm</code> as the\n            <code>OutputFormat</code>, the <code>ContentType</code> returned is\n          audio/pcm in a signed 16-bit, 1 channel (mono), little-endian format.\n        </p>\n            </li>\n            <li>\n               <p>If you request <code>json</code> as the\n            <code>OutputFormat</code>, the <code>ContentType</code> returned is\n          application/x-json-stream.</p>\n            </li>\n         </ul>\n         <p> </p>",
                         "smithy.api#httpHeader": "Content-Type"
                     }
                 },
@@ -1943,6 +1947,10 @@
                     {
                         "value": "Ayanda",
                         "name": "Ayanda"
+                    },
+                    {
+                        "value": "Arlet",
+                        "name": "Arlet"
                     }
                 ]
             }

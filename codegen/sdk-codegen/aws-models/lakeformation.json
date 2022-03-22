@@ -3795,20 +3795,8 @@
                         "name": "CREATE_TAG"
                     },
                     {
-                        "value": "ALTER_TAG",
-                        "name": "ALTER_TAG"
-                    },
-                    {
-                        "value": "DELETE_TAG",
-                        "name": "DELETE_TAG"
-                    },
-                    {
-                        "value": "DESCRIBE_TAG",
-                        "name": "DESCRIBE_TAG"
-                    },
-                    {
-                        "value": "ASSOCIATE_TAG",
-                        "name": "ASSOCIATE_TAG"
+                        "value": "ASSOCIATE",
+                        "name": "ASSOCIATE"
                     }
                 ]
             }
