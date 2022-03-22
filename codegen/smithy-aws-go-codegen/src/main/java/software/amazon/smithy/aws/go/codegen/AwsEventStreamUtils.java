@@ -1442,7 +1442,7 @@ public final class AwsEventStreamUtils {
                             var dest = String.format("v.%s",
                                     symbolProvider.toMemberName(headerBinding));
                             new HeaderShapeDeserVisitor(writer, model, headerBinding, dest,
-                                    headerBinding.getMemberName(), "msg").writeDeserializer();
+                                    headerBinding.getMemberName(), "msg.Headers").writeDeserializer();
                         }
                         if (payloadBinding.isPresent()) {
                             var memberShape = payloadBinding.get();
@@ -1902,7 +1902,7 @@ public final class AwsEventStreamUtils {
         private void writeTypeDeserializer(Symbol apiHeaderType, Symbol concreteType, Runnable setter) {
             writer.openBlock("{", "}", () -> {
                 var errorf = SymbolUtils.createValueSymbolBuilder("Errorf", SmithyGoDependency.FMT).build();
-                writer.write("headerValue := $L.Get($S)", dest, headerName)
+                writer.write("headerValue := $L.Get($S)", dataSource, headerName)
                         .openBlock("if headerValue != nil {", "}", () -> {
                             writer.write("hv, ok := headerValue.($P)", apiHeaderType)
                                     .write("""
@@ -1910,7 +1910,7 @@ public final class AwsEventStreamUtils {
                                             return $T("unexpected event header %s with type %T:", $S, headerValue)
                                            }
                                            """, errorf, headerName).write("")
-                                    .write("ihv := headerValue.Get().($P)", concreteType);
+                                    .write("ihv := hv.Get().($P)", concreteType);
                             setter.run();
                         });
             }).write("");
