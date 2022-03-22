@@ -1,8 +1,0 @@
-{
-    "id": "942623e8-787d-48d6-be55-b1705865fb65",
-    "type": "feature",
-    "description": "Amazon Location Service now includes a MaxResults parameter for GetDevicePositionHistory requests.",
-    "modules": [
-        "service/location"
-    ]
-}

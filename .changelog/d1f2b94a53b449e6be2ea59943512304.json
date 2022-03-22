@@ -1,8 +1,0 @@
-{
-    "id": "d1f2b94a-53b4-49e6-be2e-a59943512304",
-    "type": "documentation",
-    "description": "Documentation only update to address tickets",
-    "modules": [
-        "service/ecs"
-    ]
-}

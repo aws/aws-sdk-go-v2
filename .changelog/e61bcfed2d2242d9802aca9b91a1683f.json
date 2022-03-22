@@ -1,8 +1,0 @@
-{
-    "id": "e61bcfed-2d22-42d9-802a-ca9b91a1683f",
-    "type": "feature",
-    "description": "Amazon Polly adds new Catalan voice - Arlet. Arlet is available as Neural voice only.",
-    "modules": [
-        "service/polly"
-    ]
-}

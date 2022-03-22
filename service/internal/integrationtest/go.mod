@@ -33,7 +33,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.15.0
 	github.com/aws/aws-sdk-go-v2/service/ec2 v1.32.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.17.0
-	github.com/aws/aws-sdk-go-v2/service/ecs v1.18.1
+	github.com/aws/aws-sdk-go-v2/service/ecs v1.18.2
 	github.com/aws/aws-sdk-go-v2/service/efs v1.16.0
 	github.com/aws/aws-sdk-go-v2/service/elasticache v1.20.1
 	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.14.0
@@ -59,7 +59,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.16.0
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.13.0
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.11.0
-	github.com/aws/aws-sdk-go-v2/service/polly v1.13.0
+	github.com/aws/aws-sdk-go-v2/service/polly v1.14.0
 	github.com/aws/aws-sdk-go-v2/service/rds v1.18.1
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.21.0
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.17.0

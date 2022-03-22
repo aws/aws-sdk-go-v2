@@ -1,8 +1,0 @@
-{
-    "id": "972a9d67-8c2d-4d19-8d05-689e0d2b49ae",
-    "type": "feature",
-    "description": "The release fixes the incorrect permissions called out in the documentation - DESCRIBE_TAG, ASSOCIATE_TAG, DELETE_TAG, ALTER_TAG. This trebuchet release fixes the corresponding SDK and documentation.",
-    "modules": [
-        "service/lakeformation"
-    ]
-}
