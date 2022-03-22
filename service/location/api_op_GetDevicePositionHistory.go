@@ -51,6 +51,10 @@ type GetDevicePositionHistoryInput struct {
 	// after the time for StartTimeInclusive.
 	EndTimeExclusive *time.Time
 
+	// An optional limit for the number of device positions returned in a single call.
+	// Default value: 100
+	MaxResults *int32
+
 	// The pagination token specifying which page of results to return in the response.
 	// If no token is provided, the default page is the first page. Default value: null
 	NextToken *string
@@ -188,6 +192,10 @@ var _ GetDevicePositionHistoryAPIClient = (*Client)(nil)
 // GetDevicePositionHistoryPaginatorOptions is the paginator options for
 // GetDevicePositionHistory
 type GetDevicePositionHistoryPaginatorOptions struct {
+	// An optional limit for the number of device positions returned in a single call.
+	// Default value: 100
+	Limit int32
+
 	// Set to true if pagination should stop if the service returns a pagination token
 	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
@@ -210,6 +218,9 @@ func NewGetDevicePositionHistoryPaginator(client GetDevicePositionHistoryAPIClie
 	}
 
 	options := GetDevicePositionHistoryPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
 
 	for _, fn := range optFns {
 		fn(&options)
@@ -237,6 +248,12 @@ func (p *GetDevicePositionHistoryPaginator) NextPage(ctx context.Context, optFns
 
 	params := *p.params
 	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.GetDevicePositionHistory(ctx, &params, optFns...)
 	if err != nil {

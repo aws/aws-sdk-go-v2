@@ -2130,6 +2130,11 @@ func awsRestjson1_serializeOpDocumentGetDevicePositionHistoryInput(v *GetDeviceP
 		ok.String(smithytime.FormatDateTime(*v.EndTimeExclusive))
 	}
 
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
 	if v.NextToken != nil {
 		ok := object.Key("NextToken")
 		ok.String(*v.NextToken)

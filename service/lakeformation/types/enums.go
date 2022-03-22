@@ -123,10 +123,7 @@ const (
 	PermissionCreateTable        Permission = "CREATE_TABLE"
 	PermissionDataLocationAccess Permission = "DATA_LOCATION_ACCESS"
 	PermissionCreateTag          Permission = "CREATE_TAG"
-	PermissionAlterTag           Permission = "ALTER_TAG"
-	PermissionDeleteTag          Permission = "DELETE_TAG"
-	PermissionDescribeTag        Permission = "DESCRIBE_TAG"
-	PermissionAssociateTag       Permission = "ASSOCIATE_TAG"
+	PermissionAssociate          Permission = "ASSOCIATE"
 )
 
 // Values returns all known values for Permission. Note that this can be expanded
@@ -145,10 +142,7 @@ func (Permission) Values() []Permission {
 		"CREATE_TABLE",
 		"DATA_LOCATION_ACCESS",
 		"CREATE_TAG",
-		"ALTER_TAG",
-		"DELETE_TAG",
-		"DESCRIBE_TAG",
-		"ASSOCIATE_TAG",
+		"ASSOCIATE",
 	}
 }
 

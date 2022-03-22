@@ -73,6 +73,7 @@ const (
 	LanguageCodeTrTr    LanguageCode = "tr-TR"
 	LanguageCodeEnNz    LanguageCode = "en-NZ"
 	LanguageCodeEnZa    LanguageCode = "en-ZA"
+	LanguageCodeCaEs    LanguageCode = "ca-ES"
 )
 
 // Values returns all known values for LanguageCode. Note that this can be expanded
@@ -111,6 +112,7 @@ func (LanguageCode) Values() []LanguageCode {
 		"tr-TR",
 		"en-NZ",
 		"en-ZA",
+		"ca-ES",
 	}
 }
 
@@ -267,6 +269,7 @@ const (
 	VoiceIdZhiyu     VoiceId = "Zhiyu"
 	VoiceIdAria      VoiceId = "Aria"
 	VoiceIdAyanda    VoiceId = "Ayanda"
+	VoiceIdArlet     VoiceId = "Arlet"
 )
 
 // Values returns all known values for VoiceId. Note that this can be expanded in
@@ -339,5 +342,6 @@ func (VoiceId) Values() []VoiceId {
 		"Zhiyu",
 		"Aria",
 		"Ayanda",
+		"Arlet",
 	}
 }

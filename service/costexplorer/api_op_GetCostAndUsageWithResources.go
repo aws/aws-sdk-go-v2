@@ -50,9 +50,9 @@ type GetCostAndUsageWithResourcesInput struct {
 	// filter by a ResourceId. It requires the Expression
 	// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)"SERVICE
 	// = Amazon Elastic Compute Cloud - Compute" in the filter. Valid values for
+	// MatchOptions for Dimensions are EQUALS and CASE_SENSITIVE. Valid values for
 	// MatchOptions for CostCategories and Tags are EQUALS, ABSENT, and CASE_SENSITIVE.
-	// The default values are EQUALS and CASE_SENSITIVE. Valid values for MatchOptions
-	// for Dimensions are EQUALS and CASE_SENSITIVE.
+	// Default values are EQUALS and CASE_SENSITIVE.
 	//
 	// This member is required.
 	Filter *types.Expression
