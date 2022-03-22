@@ -75,9 +75,9 @@ type GetCostAndUsageInput struct {
 	// that account's usage of that service. You can nest Expression objects to define
 	// any combination of dimension filters. For more information, see Expression
 	// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html).
+	// Valid values for MatchOptions for Dimensions are EQUALS and CASE_SENSITIVE.
 	// Valid values for MatchOptions for CostCategories and Tags are EQUALS, ABSENT,
-	// and CASE_SENSITIVE. The default values are EQUALS and CASE_SENSITIVE. Valid
-	// values for MatchOptions for Dimensions are EQUALS and CASE_SENSITIVE.
+	// and CASE_SENSITIVE. Default values are EQUALS and CASE_SENSITIVE.
 	Filter *types.Expression
 
 	// You can group Amazon Web Services costs using up to two different groups, either

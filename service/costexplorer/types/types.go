@@ -1275,6 +1275,28 @@ type ResourceDetails struct {
 	noSmithyDocumentSerde
 }
 
+// The tag structure that contains a tag key and value. Tagging is supported only
+// for the following Cost Explorer resource types: AnomalyMonitor
+// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AnomalyMonitor.html),
+// AnomalySubscription
+// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AnomalySubscription.html),
+// CostCategory
+// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategory.html).
+type ResourceTag struct {
+
+	// The key that is associated with the tag.
+	//
+	// This member is required.
+	Key *string
+
+	// The value that is associated with the tag.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // Resource utilization of current resource.
 type ResourceUtilization struct {
 

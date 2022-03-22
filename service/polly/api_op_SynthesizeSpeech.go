@@ -123,7 +123,7 @@ type SynthesizeSpeechOutput struct {
 	// little-endian format.
 	//
 	// * If you request json as the OutputFormat, the
-	// ContentType returned is audio/json.
+	// ContentType returned is application/x-json-stream.
 	ContentType *string
 
 	// Number of characters synthesized.

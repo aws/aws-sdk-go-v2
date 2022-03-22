@@ -2209,7 +2209,7 @@ type LinuxParameters struct {
 // The load balancer configuration to use with a service or task set. For specific
 // notes and restrictions regarding the use of load balancers with services and
 // task sets, see the CreateService and CreateTaskSet actions. When you add,
-// update, or remove a load blaancer configuration, Amazon ECS starts a new
+// update, or remove a load balancer configuration, Amazon ECS starts a new
 // deployment with the updated Elastic Load Balancing configuration. This causes
 // tasks to register to and deregister from load balancers. We recommend that you
 // verify this on a test environment before you update the Elastic Load Balancing

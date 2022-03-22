@@ -6,46 +6,44 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an existing cost anomaly monitor. The changes made are applied going
-// forward, and doesn't change anomalies detected in the past.
-func (c *Client) UpdateAnomalyMonitor(ctx context.Context, params *UpdateAnomalyMonitorInput, optFns ...func(*Options)) (*UpdateAnomalyMonitorOutput, error) {
+// Returns a list of resource tags associated with the resource specified by the
+// Amazon Resource Name (ARN).
+func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
-		params = &UpdateAnomalyMonitorInput{}
+		params = &ListTagsForResourceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateAnomalyMonitor", params, optFns, c.addOperationUpdateAnomalyMonitorMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListTagsForResource", params, optFns, c.addOperationListTagsForResourceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*UpdateAnomalyMonitorOutput)
+	out := result.(*ListTagsForResourceOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type UpdateAnomalyMonitorInput struct {
+type ListTagsForResourceInput struct {
 
-	// Cost anomaly monitor Amazon Resource Names (ARNs).
+	// The Amazon Resource Name (ARN) of the resource. For a list of supported
+	// resources, see ResourceTag
+	// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ResourceTag.html).
 	//
 	// This member is required.
-	MonitorArn *string
-
-	// The new name for the cost anomaly monitor.
-	MonitorName *string
+	ResourceArn *string
 
 	noSmithyDocumentSerde
 }
 
-type UpdateAnomalyMonitorOutput struct {
+type ListTagsForResourceOutput struct {
 
-	// A cost anomaly monitor ARN.
-	//
-	// This member is required.
-	MonitorArn *string
+	// A list of tag key value pairs that are associated with the response.
+	ResourceTags []types.ResourceTag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -53,12 +51,12 @@ type UpdateAnomalyMonitorOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationUpdateAnomalyMonitorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateAnomalyMonitor{}, middleware.After)
+func (c *Client) addOperationListTagsForResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTagsForResource{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateAnomalyMonitor{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListTagsForResource{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -98,10 +96,10 @@ func (c *Client) addOperationUpdateAnomalyMonitorMiddlewares(stack *middleware.S
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpUpdateAnomalyMonitorValidationMiddleware(stack); err != nil {
+	if err = addOpListTagsForResourceValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAnomalyMonitor(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTagsForResource(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -116,11 +114,11 @@ func (c *Client) addOperationUpdateAnomalyMonitorMiddlewares(stack *middleware.S
 	return nil
 }
 
-func newServiceMetadataMiddleware_opUpdateAnomalyMonitor(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opListTagsForResource(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "ce",
-		OperationName: "UpdateAnomalyMonitor",
+		OperationName: "ListTagsForResource",
 	}
 }

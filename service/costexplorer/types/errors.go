@@ -107,6 +107,8 @@ func (e *RequestChangedException) ErrorFault() smithy.ErrorFault { return smithy
 type ResourceNotFoundException struct {
 	Message *string
 
+	ResourceName *string
+
 	noSmithyDocumentSerde
 }
 
@@ -141,6 +143,28 @@ func (e *ServiceQuotaExceededException) ErrorMessage() string {
 }
 func (e *ServiceQuotaExceededException) ErrorCode() string             { return "ServiceQuotaExceededException" }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// Can occur if you specify a number of tags for a resource greater than the
+// maximum 50 user tags per resource.
+type TooManyTagsException struct {
+	Message *string
+
+	ResourceName *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *TooManyTagsException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *TooManyTagsException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *TooManyTagsException) ErrorCode() string             { return "TooManyTagsException" }
+func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The cost anomaly monitor does not exist for the account.
 type UnknownMonitorException struct {

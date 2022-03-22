@@ -10,55 +10,56 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an existing cost anomaly monitor. The changes made are applied going
-// forward, and doesn't change anomalies detected in the past.
-func (c *Client) UpdateAnomalyMonitor(ctx context.Context, params *UpdateAnomalyMonitorInput, optFns ...func(*Options)) (*UpdateAnomalyMonitorOutput, error) {
+// Removes one or more tags from a resource. Specify only tag key(s) in your
+// request. Do not specify the value.
+func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
-		params = &UpdateAnomalyMonitorInput{}
+		params = &UntagResourceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateAnomalyMonitor", params, optFns, c.addOperationUpdateAnomalyMonitorMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UntagResource", params, optFns, c.addOperationUntagResourceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*UpdateAnomalyMonitorOutput)
+	out := result.(*UntagResourceOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type UpdateAnomalyMonitorInput struct {
+type UntagResourceInput struct {
 
-	// Cost anomaly monitor Amazon Resource Names (ARNs).
+	// The Amazon Resource Name (ARN) of the resource. For a list of supported
+	// resources, see ResourceTag
+	// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ResourceTag.html).
 	//
 	// This member is required.
-	MonitorArn *string
+	ResourceArn *string
 
-	// The new name for the cost anomaly monitor.
-	MonitorName *string
+	// A list of tag keys associated with tags that need to be removed from the
+	// resource. If you specify a tag key that does not exist, it is ignored. Although
+	// the maximum number of array members is 200, user-tag maximum is 50. The
+	// remaining are reserved for Amazon Web Services use.
+	//
+	// This member is required.
+	ResourceTagKeys []string
 
 	noSmithyDocumentSerde
 }
 
-type UpdateAnomalyMonitorOutput struct {
-
-	// A cost anomaly monitor ARN.
-	//
-	// This member is required.
-	MonitorArn *string
-
+type UntagResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationUpdateAnomalyMonitorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateAnomalyMonitor{}, middleware.After)
+func (c *Client) addOperationUntagResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUntagResource{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateAnomalyMonitor{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUntagResource{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -98,10 +99,10 @@ func (c *Client) addOperationUpdateAnomalyMonitorMiddlewares(stack *middleware.S
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpUpdateAnomalyMonitorValidationMiddleware(stack); err != nil {
+	if err = addOpUntagResourceValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAnomalyMonitor(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUntagResource(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -116,11 +117,11 @@ func (c *Client) addOperationUpdateAnomalyMonitorMiddlewares(stack *middleware.S
 	return nil
 }
 
-func newServiceMetadataMiddleware_opUpdateAnomalyMonitor(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opUntagResource(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "ce",
-		OperationName: "UpdateAnomalyMonitor",
+		OperationName: "UntagResource",
 	}
 }
