@@ -1,3 +1,7 @@
+# v1.16.0 (2022-03-22)
+
+* **Feature**: Amazon Location Service now includes a MaxResults parameter for GetDevicePositionHistory requests.
+
 # v1.15.1 (2022-03-15)
 
 * **Documentation**: New HERE style "VectorHereExplore" and "VectorHereExploreTruck".

@@ -1,3 +1,7 @@
+# v1.14.0 (2022-03-22)
+
+* **Feature**: Amazon Polly adds new Catalan voice - Arlet. Arlet is available as Neural voice only.
+
 # v1.13.0 (2022-03-08)
 
 * **Feature**: Updated `github.com/aws/smithy-go` to latest version

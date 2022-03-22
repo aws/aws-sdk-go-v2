@@ -1,3 +1,7 @@
+# v1.18.2 (2022-03-22)
+
+* **Documentation**: Documentation only update to address tickets
+
 # v1.18.1 (2022-03-15)
 
 * **Documentation**: Documentation only update to address tickets

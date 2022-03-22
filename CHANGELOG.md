@@ -1,3 +1,17 @@
+# Release (2022-03-22)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/costexplorer`: [v1.18.0](service/costexplorer/CHANGELOG.md#v1180-2022-03-22)
+  * **Feature**: Added three new APIs to support tagging and resource-level authorization on Cost Explorer resources: TagResource, UntagResource, ListTagsForResource.  Added optional parameters to CreateCostCategoryDefinition, CreateAnomalySubscription and CreateAnomalyMonitor APIs to support Tag On Create.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.18.2](service/ecs/CHANGELOG.md#v1182-2022-03-22)
+  * **Documentation**: Documentation only update to address tickets
+* `github.com/aws/aws-sdk-go-v2/service/lakeformation`: [v1.16.0](service/lakeformation/CHANGELOG.md#v1160-2022-03-22)
+  * **Feature**: The release fixes the incorrect permissions called out in the documentation - DESCRIBE_TAG, ASSOCIATE_TAG, DELETE_TAG, ALTER_TAG. This trebuchet release fixes the corresponding SDK and documentation.
+* `github.com/aws/aws-sdk-go-v2/service/location`: [v1.16.0](service/location/CHANGELOG.md#v1160-2022-03-22)
+  * **Feature**: Amazon Location Service now includes a MaxResults parameter for GetDevicePositionHistory requests.
+* `github.com/aws/aws-sdk-go-v2/service/polly`: [v1.14.0](service/polly/CHANGELOG.md#v1140-2022-03-22)
+  * **Feature**: Amazon Polly adds new Catalan voice - Arlet. Arlet is available as Neural voice only.
+
 # Release (2022-03-21)
 
 ## Module Highlights

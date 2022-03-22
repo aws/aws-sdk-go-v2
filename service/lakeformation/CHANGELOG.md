@@ -1,3 +1,7 @@
+# v1.16.0 (2022-03-22)
+
+* **Feature**: The release fixes the incorrect permissions called out in the documentation - DESCRIBE_TAG, ASSOCIATE_TAG, DELETE_TAG, ALTER_TAG. This trebuchet release fixes the corresponding SDK and documentation.
+
 # v1.15.0 (2022-03-08)
 
 * **Feature**: Updated `github.com/aws/smithy-go` to latest version
