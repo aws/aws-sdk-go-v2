@@ -71,7 +71,7 @@ func (e asyncAudioStream) ReportResult(cancel <-chan struct{}, err error) bool {
 	}
 }
 
-type audioStream struct {
+type audioStreamWriter struct {
 	encoder             *eventstream.Encoder
 	signer              eventStreamSigner
 	stream              chan asyncAudioStream
@@ -83,8 +83,8 @@ type audioStream struct {
 	err                 *smithysync.OnceErr
 }
 
-func newAudioStream(stream io.WriteCloser, encoder *eventstream.Encoder, signer eventStreamSigner) *audioStream {
-	w := &audioStream{
+func newAudioStreamReader(stream io.WriteCloser, encoder *eventstream.Encoder, signer eventStreamSigner) *audioStreamWriter {
+	w := &audioStreamWriter{
 		encoder:             encoder,
 		signer:              signer,
 		stream:              make(chan asyncAudioStream),
@@ -101,11 +101,11 @@ func newAudioStream(stream io.WriteCloser, encoder *eventstream.Encoder, signer 
 
 }
 
-func (w *audioStream) Send(ctx context.Context, event types.AudioStream) error {
+func (w *audioStreamWriter) Send(ctx context.Context, event types.AudioStream) error {
 	return w.send(ctx, event)
 }
 
-func (w *audioStream) send(ctx context.Context, event types.AudioStream) error {
+func (w *audioStreamWriter) send(ctx context.Context, event types.AudioStream) error {
 	if err := w.err.Err(); err != nil {
 		return err
 	}
@@ -138,7 +138,7 @@ func (w *audioStream) send(ctx context.Context, event types.AudioStream) error {
 
 }
 
-func (w *audioStream) writeStream() {
+func (w *audioStreamWriter) writeStream() {
 	defer w.Close()
 
 	for {
@@ -161,7 +161,7 @@ func (w *audioStream) writeStream() {
 	}
 }
 
-func (w *audioStream) writeEvent(event types.AudioStream) error {
+func (w *audioStreamWriter) writeEvent(event types.AudioStream) error {
 	// serializedEvent returned bytes refers to an underlying byte buffer and must not
 	// escape this writeEvent scope without first copying. Any previous bytes stored in
 	// the buffer are cleared by this call.
@@ -183,7 +183,7 @@ func (w *audioStream) writeEvent(event types.AudioStream) error {
 	return err
 }
 
-func (w *audioStream) serializeEvent(event types.AudioStream) ([]byte, error) {
+func (w *audioStreamWriter) serializeEvent(event types.AudioStream) ([]byte, error) {
 	w.serializationBuffer.Reset()
 
 	eventMessage := eventstream.Message{}
@@ -199,7 +199,7 @@ func (w *audioStream) serializeEvent(event types.AudioStream) ([]byte, error) {
 	return w.serializationBuffer.Bytes(), nil
 }
 
-func (w *audioStream) signEvent(payload []byte) ([]byte, error) {
+func (w *audioStreamWriter) signEvent(payload []byte) ([]byte, error) {
 	w.signingBuffer.Reset()
 
 	date := time.Now().UTC()
@@ -227,7 +227,7 @@ func (w *audioStream) signEvent(payload []byte) ([]byte, error) {
 	return w.signingBuffer.Bytes(), nil
 }
 
-func (w *audioStream) closeStream() (err error) {
+func (w *audioStreamWriter) closeStream() (err error) {
 	defer func() {
 		if cErr := w.eventStream.Close(); cErr != nil && err == nil {
 			err = cErr
@@ -245,24 +245,24 @@ func (w *audioStream) closeStream() (err error) {
 	return err
 }
 
-func (w *audioStream) ErrorSet() <-chan struct{} {
+func (w *audioStreamWriter) ErrorSet() <-chan struct{} {
 	return w.err.ErrorSet()
 }
 
-func (w *audioStream) Close() error {
+func (w *audioStreamWriter) Close() error {
 	w.closeOnce.Do(w.safeClose)
 	return w.Err()
 }
 
-func (w *audioStream) safeClose() {
+func (w *audioStreamWriter) safeClose() {
 	close(w.done)
 }
 
-func (w *audioStream) Err() error {
+func (w *audioStreamWriter) Err() error {
 	return w.err.Err()
 }
 
-type medicalTranscriptResultStream struct {
+type medicalTranscriptResultStreamReader struct {
 	stream      chan types.MedicalTranscriptResultStream
 	decoder     *eventstream.Decoder
 	eventStream io.ReadCloser
@@ -272,8 +272,8 @@ type medicalTranscriptResultStream struct {
 	closeOnce   sync.Once
 }
 
-func newMedicalTranscriptResultStream(readCloser io.ReadCloser, decoder *eventstream.Decoder) *medicalTranscriptResultStream {
-	w := &medicalTranscriptResultStream{
+func newMedicalTranscriptResultStreamWriter(readCloser io.ReadCloser, decoder *eventstream.Decoder) *medicalTranscriptResultStreamReader {
+	w := &medicalTranscriptResultStreamReader{
 		stream:      make(chan types.MedicalTranscriptResultStream),
 		decoder:     decoder,
 		eventStream: readCloser,
@@ -287,11 +287,11 @@ func newMedicalTranscriptResultStream(readCloser io.ReadCloser, decoder *eventst
 	return w
 }
 
-func (r *medicalTranscriptResultStream) Events() <-chan types.MedicalTranscriptResultStream {
+func (r *medicalTranscriptResultStreamReader) Events() <-chan types.MedicalTranscriptResultStream {
 	return r.stream
 }
 
-func (r *medicalTranscriptResultStream) readEventStream() {
+func (r *medicalTranscriptResultStreamReader) readEventStream() {
 	defer r.Close()
 	defer close(r.stream)
 
@@ -326,7 +326,7 @@ func (r *medicalTranscriptResultStream) readEventStream() {
 	}
 }
 
-func (r *medicalTranscriptResultStream) deserializeEventMessage(msg *eventstream.Message) (types.MedicalTranscriptResultStream, error) {
+func (r *medicalTranscriptResultStreamReader) deserializeEventMessage(msg *eventstream.Message) (types.MedicalTranscriptResultStream, error) {
 	messageType := msg.Headers.Get(eventstreamapi.MessageTypeHeader)
 	if messageType == nil {
 		return nil, fmt.Errorf("%s event header not present", eventstreamapi.MessageTypeHeader)
@@ -367,30 +367,30 @@ func (r *medicalTranscriptResultStream) deserializeEventMessage(msg *eventstream
 	}
 }
 
-func (r *medicalTranscriptResultStream) ErrorSet() <-chan struct{} {
+func (r *medicalTranscriptResultStreamReader) ErrorSet() <-chan struct{} {
 	return r.err.ErrorSet()
 }
 
-func (r *medicalTranscriptResultStream) Close() error {
+func (r *medicalTranscriptResultStreamReader) Close() error {
 	r.closeOnce.Do(r.safeClose)
 	return r.Err()
 }
 
-func (r *medicalTranscriptResultStream) safeClose() {
+func (r *medicalTranscriptResultStreamReader) safeClose() {
 	close(r.done)
 	r.eventStream.Close()
 
 }
 
-func (r *medicalTranscriptResultStream) Err() error {
+func (r *medicalTranscriptResultStreamReader) Err() error {
 	return r.err.Err()
 }
 
-func (r *medicalTranscriptResultStream) Closed() <-chan struct{} {
+func (r *medicalTranscriptResultStreamReader) Closed() <-chan struct{} {
 	return r.done
 }
 
-type transcriptResultStream struct {
+type transcriptResultStreamReader struct {
 	stream      chan types.TranscriptResultStream
 	decoder     *eventstream.Decoder
 	eventStream io.ReadCloser
@@ -400,8 +400,8 @@ type transcriptResultStream struct {
 	closeOnce   sync.Once
 }
 
-func newTranscriptResultStream(readCloser io.ReadCloser, decoder *eventstream.Decoder) *transcriptResultStream {
-	w := &transcriptResultStream{
+func newTranscriptResultStreamWriter(readCloser io.ReadCloser, decoder *eventstream.Decoder) *transcriptResultStreamReader {
+	w := &transcriptResultStreamReader{
 		stream:      make(chan types.TranscriptResultStream),
 		decoder:     decoder,
 		eventStream: readCloser,
@@ -415,11 +415,11 @@ func newTranscriptResultStream(readCloser io.ReadCloser, decoder *eventstream.De
 	return w
 }
 
-func (r *transcriptResultStream) Events() <-chan types.TranscriptResultStream {
+func (r *transcriptResultStreamReader) Events() <-chan types.TranscriptResultStream {
 	return r.stream
 }
 
-func (r *transcriptResultStream) readEventStream() {
+func (r *transcriptResultStreamReader) readEventStream() {
 	defer r.Close()
 	defer close(r.stream)
 
@@ -454,7 +454,7 @@ func (r *transcriptResultStream) readEventStream() {
 	}
 }
 
-func (r *transcriptResultStream) deserializeEventMessage(msg *eventstream.Message) (types.TranscriptResultStream, error) {
+func (r *transcriptResultStreamReader) deserializeEventMessage(msg *eventstream.Message) (types.TranscriptResultStream, error) {
 	messageType := msg.Headers.Get(eventstreamapi.MessageTypeHeader)
 	if messageType == nil {
 		return nil, fmt.Errorf("%s event header not present", eventstreamapi.MessageTypeHeader)
@@ -495,26 +495,26 @@ func (r *transcriptResultStream) deserializeEventMessage(msg *eventstream.Messag
 	}
 }
 
-func (r *transcriptResultStream) ErrorSet() <-chan struct{} {
+func (r *transcriptResultStreamReader) ErrorSet() <-chan struct{} {
 	return r.err.ErrorSet()
 }
 
-func (r *transcriptResultStream) Close() error {
+func (r *transcriptResultStreamReader) Close() error {
 	r.closeOnce.Do(r.safeClose)
 	return r.Err()
 }
 
-func (r *transcriptResultStream) safeClose() {
+func (r *transcriptResultStreamReader) safeClose() {
 	close(r.done)
 	r.eventStream.Close()
 
 }
 
-func (r *transcriptResultStream) Err() error {
+func (r *transcriptResultStreamReader) Err() error {
 	return r.err.Err()
 }
 
-func (r *transcriptResultStream) Closed() <-chan struct{} {
+func (r *transcriptResultStreamReader) Closed() <-chan struct{} {
 	return r.done
 }
 
@@ -561,7 +561,7 @@ func (m *awsRestjson1_deserializeOpEventStreamStartMedicalStreamTranscription) H
 		requestSignature,
 	)
 
-	eventWriter := newAudioStream(
+	eventWriter := newAudioStreamReader(
 		eventstreamapi.GetInputStreamWriter(ctx),
 		eventstream.NewEncoder(func(options *eventstream.EncoderOptions) {
 			options.Logger = logger
@@ -596,7 +596,7 @@ func (m *awsRestjson1_deserializeOpEventStreamStartMedicalStreamTranscription) H
 		out.Result = output
 	}
 
-	eventReader := newMedicalTranscriptResultStream(
+	eventReader := newMedicalTranscriptResultStreamWriter(
 		deserializeOutput.Body,
 		eventstream.NewDecoder(func(options *eventstream.DecoderOptions) {
 			options.Logger = logger
@@ -678,7 +678,7 @@ func (m *awsRestjson1_deserializeOpEventStreamStartStreamTranscription) HandleDe
 		requestSignature,
 	)
 
-	eventWriter := newAudioStream(
+	eventWriter := newAudioStreamReader(
 		eventstreamapi.GetInputStreamWriter(ctx),
 		eventstream.NewEncoder(func(options *eventstream.EncoderOptions) {
 			options.Logger = logger
@@ -713,7 +713,7 @@ func (m *awsRestjson1_deserializeOpEventStreamStartStreamTranscription) HandleDe
 		out.Result = output
 	}
 
-	eventReader := newTranscriptResultStream(
+	eventReader := newTranscriptResultStreamWriter(
 		deserializeOutput.Body,
 		eventstream.NewDecoder(func(options *eventstream.DecoderOptions) {
 			options.Logger = logger
