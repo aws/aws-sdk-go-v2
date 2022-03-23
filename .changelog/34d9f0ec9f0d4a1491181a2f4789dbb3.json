@@ -1,8 +1,0 @@
-{
-    "id": "34d9f0ec-9f0d-4a14-9118-1a2f4789dbb3",
-    "type": "feature",
-    "description": "Released the preview of Amazon GameSparks, a fully managed AWS service that provides a multi-service backend for game developers.",
-    "modules": [
-        "service/gamesparks"
-    ]
-}

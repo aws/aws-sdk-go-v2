@@ -3,10 +3,10 @@ module github.com/aws/aws-sdk-go-v2/service/kinesis/internal/testing
 go 1.15
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.15.0
+	github.com/aws/aws-sdk-go-v2 v1.16.0
 	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.4.0
-	github.com/aws/aws-sdk-go-v2/service/internal/eventstreamtesting v1.0.9
-	github.com/aws/aws-sdk-go-v2/service/kinesis v1.15.0
+	github.com/aws/aws-sdk-go-v2/service/internal/eventstreamtesting v1.0.10
+	github.com/aws/aws-sdk-go-v2/service/kinesis v1.15.1
 	github.com/aws/smithy-go v1.11.1
 	github.com/google/go-cmp v0.5.7
 )

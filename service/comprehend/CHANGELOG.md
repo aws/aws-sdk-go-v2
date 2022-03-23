@@ -1,3 +1,7 @@
+# v1.17.1 (2022-03-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.17.0 (2022-03-09)
 
 * **Feature**: Amazon Comprehend now supports extracting the sentiment associated with entities such as brands, products and services from text documents.

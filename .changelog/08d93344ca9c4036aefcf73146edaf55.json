@@ -1,8 +1,0 @@
-{
-    "id": "08d93344-ca9c-4036-aefc-f73146edaf55",
-    "type": "feature",
-    "description": "Update CredentialsCache to make use of two new optional CredentialsProvider interfaces to give the cache, per provider, behavior how the cache handles credentials that fail to refresh, and adjusting expires time. See [aws.CredentialsCache](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#CredentialsCache) for more details.",
-    "modules": [
-        "."
-    ]
-}

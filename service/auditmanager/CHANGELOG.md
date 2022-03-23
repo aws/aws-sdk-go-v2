@@ -1,3 +1,8 @@
+# v1.18.0 (2022-03-23)
+
+* **Feature**: This release updates 1 API parameter, the SnsArn attribute. The character length and regex pattern for the SnsArn attribute have been updated, which enables you to deselect an SNS topic when using the UpdateSettings operation.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.17.0 (2022-03-08)
 
 * **Feature**: Updated `github.com/aws/smithy-go` to latest version

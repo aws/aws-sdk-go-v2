@@ -1,3 +1,7 @@
+# v1.17.1 (2022-03-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.17.0 (2022-03-15)
 
 * **Feature**: This release deprecates ROS, Ubuntu and Gazbeo from RoboMaker Simulation Service Software Suites in favor of user-supplied containers and Relaxed Software Suites.

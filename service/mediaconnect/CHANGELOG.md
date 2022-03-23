@@ -1,3 +1,7 @@
+# v1.16.1 (2022-03-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.16.0 (2022-03-21)
 
 * **Feature**: This release adds support for selecting a maintenance window.

@@ -1,3 +1,7 @@
+# v1.16.2 (2022-03-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.16.1 (2022-03-21)
 
 * **Documentation**: Document improvements to the RAM API operations and parameter descriptions.

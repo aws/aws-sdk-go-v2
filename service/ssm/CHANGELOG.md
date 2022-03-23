@@ -1,3 +1,8 @@
+# v1.23.0 (2022-03-23)
+
+* **Feature**: Update AddTagsToResource, ListTagsForResource, and RemoveTagsFromResource APIs to reflect the support for tagging Automation resources. Includes other minor documentation updates.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.22.0 (2022-03-08)
 
 * **Feature**: Updated `github.com/aws/smithy-go` to latest version

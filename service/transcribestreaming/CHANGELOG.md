@@ -1,3 +1,7 @@
+# v1.6.1 (2022-03-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.6.0 (2022-03-11)
 
 * **Feature**: Amazon Transcribe StartTranscription API now supports additional parameters for Language Identification feature: customVocabularies and customFilterVocabularies

@@ -1,8 +1,0 @@
-{
-    "id": "653a15ff-9fdb-4ba3-b844-511b649b2d3c",
-    "type": "feature",
-    "description": "Increased the maximum supported value for the Timeout parameter of the StartSnapshot API from 60 minutes to 4320 minutes.  Changed the HTTP error code for ConflictException from 503 to 409.",
-    "modules": [
-        "service/ebs"
-    ]
-}

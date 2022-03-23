@@ -1,3 +1,7 @@
+# v1.18.3 (2022-03-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.2 (2022-03-22)
 
 * **Documentation**: Documentation only update to address tickets

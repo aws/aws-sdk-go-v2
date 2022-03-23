@@ -1,3 +1,7 @@
+# v1.17.1 (2022-03-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.17.0 (2022-03-16)
 
 * **Feature**: AWS Certificate Manager (ACM) Private Certificate Authority (CA) now supports customizable certificate subject names and extensions.

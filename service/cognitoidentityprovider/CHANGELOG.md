@@ -1,3 +1,7 @@
+# v1.15.1 (2022-03-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.15.0 (2022-03-15)
 
 * **Feature**: Updated EmailConfigurationType and SmsConfigurationType to reflect that you can now choose Amazon SES and Amazon SNS resources in the same Region.

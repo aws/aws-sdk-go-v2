@@ -1,3 +1,8 @@
+# v1.22.0 (2022-03-23)
+
+* **Feature**: This release adds a new [--encrypted | --no-encrypted] field in restore-from-cluster-snapshot API. Customers can now restore an unencrypted snapshot to a cluster encrypted with AWS Managed Key or their own KMS key.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.0 (2022-03-08)
 
 * **Feature**: Updated `github.com/aws/smithy-go` to latest version
