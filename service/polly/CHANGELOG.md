@@ -1,3 +1,7 @@
+# v1.14.1 (2022-03-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.14.0 (2022-03-22)
 
 * **Feature**: Amazon Polly adds new Catalan voice - Arlet. Arlet is available as Neural voice only.

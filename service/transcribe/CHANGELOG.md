@@ -1,3 +1,7 @@
+# v1.18.1 (2022-03-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.0 (2022-03-10)
 
 * **Feature**: Documentation fix for API `StartMedicalTranscriptionJobRequest`, now showing min sample rate as 16khz

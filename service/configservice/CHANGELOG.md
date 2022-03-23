@@ -1,3 +1,7 @@
+# v1.19.1 (2022-03-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.19.0 (2022-03-14)
 
 * **Feature**: Add resourceType enums for AWS::ECR::PublicRepository and AWS::EC2::LaunchTemplate

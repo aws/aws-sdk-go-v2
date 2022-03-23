@@ -1,3 +1,7 @@
+# v1.13.1 (2022-03-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.13.0 (2022-03-16)
 
 * **Feature**: Removed incorrect validation pattern for IncidentRecordSource.invokedBy

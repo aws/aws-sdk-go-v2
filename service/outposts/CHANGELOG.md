@@ -1,3 +1,7 @@
+# v1.18.1 (2022-03-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.0 (2022-03-11)
 
 * **Feature**: This release adds address filters for listSites

@@ -1,3 +1,8 @@
+# v1.11.0 (2022-03-23)
+
+* **Feature**: Update `ec2rolecreds` package's `Provider` to implememnt support for CredentialsCache new optional caching strategy interfaces, HandleFailRefreshCredentialsCacheStrategy and AdjustExpiresByCredentialsCacheStrategy.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.10.0 (2022-03-08)
 
 * **Feature**: Updated `github.com/aws/smithy-go` to latest version

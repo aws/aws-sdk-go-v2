@@ -1,3 +1,8 @@
+# v1.15.0 (2022-03-23)
+
+* **Feature**: Increased the maximum supported value for the Timeout parameter of the StartSnapshot API from 60 minutes to 4320 minutes.  Changed the HTTP error code for ConflictException from 503 to 409.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.14.0 (2022-03-08)
 
 * **Feature**: Updated `github.com/aws/smithy-go` to latest version

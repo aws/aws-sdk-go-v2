@@ -1,3 +1,30 @@
+# Release (2022-03-23)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.16.0
+  * **Feature**: Update CredentialsCache to make use of two new optional CredentialsProvider interfaces to give the cache, per provider, behavior how the cache handles credentials that fail to refresh, and adjusting expires time. See [aws.CredentialsCache](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#CredentialsCache) for more details.
+  * **Feature**: Update `ec2rolecreds` package's `Provider` to implememnt support for CredentialsCache new optional caching strategy interfaces, HandleFailRefreshCredentialsCacheStrategy and AdjustExpiresByCredentialsCacheStrategy.
+* `github.com/aws/aws-sdk-go-v2/credentials`: [v1.11.0](credentials/CHANGELOG.md#v1110-2022-03-23)
+  * **Feature**: Update `ec2rolecreds` package's `Provider` to implememnt support for CredentialsCache new optional caching strategy interfaces, HandleFailRefreshCredentialsCacheStrategy and AdjustExpiresByCredentialsCacheStrategy.
+* `github.com/aws/aws-sdk-go-v2/service/auditmanager`: [v1.18.0](service/auditmanager/CHANGELOG.md#v1180-2022-03-23)
+  * **Feature**: This release updates 1 API parameter, the SnsArn attribute. The character length and regex pattern for the SnsArn attribute have been updated, which enables you to deselect an SNS topic when using the UpdateSettings operation.
+* `github.com/aws/aws-sdk-go-v2/service/ebs`: [v1.15.0](service/ebs/CHANGELOG.md#v1150-2022-03-23)
+  * **Feature**: Increased the maximum supported value for the Timeout parameter of the StartSnapshot API from 60 minutes to 4320 minutes.  Changed the HTTP error code for ConflictException from 503 to 409.
+* `github.com/aws/aws-sdk-go-v2/service/elasticache`: [v1.20.2](service/elasticache/CHANGELOG.md#v1202-2022-03-23)
+  * **Documentation**: Doc only update for ElastiCache
+* `github.com/aws/aws-sdk-go-v2/service/gamesparks`: [v1.0.0](service/gamesparks/CHANGELOG.md#v100-2022-03-23)
+  * **Release**: New AWS service client module
+  * **Feature**: Released the preview of Amazon GameSparks, a fully managed AWS service that provides a multi-service backend for game developers.
+* `github.com/aws/aws-sdk-go-v2/service/redshift`: [v1.22.0](service/redshift/CHANGELOG.md#v1220-2022-03-23)
+  * **Feature**: This release adds a new [--encrypted | --no-encrypted] field in restore-from-cluster-snapshot API. Customers can now restore an unencrypted snapshot to a cluster encrypted with AWS Managed Key or their own KMS key.
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.23.0](service/ssm/CHANGELOG.md#v1230-2022-03-23)
+  * **Feature**: Update AddTagsToResource, ListTagsForResource, and RemoveTagsFromResource APIs to reflect the support for tagging Automation resources. Includes other minor documentation updates.
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.18.1](service/transfer/CHANGELOG.md#v1181-2022-03-23)
+  * **Documentation**: Documentation updates for AWS Transfer Family to describe how to remove an associated workflow from a server.
+
 # Release (2022-03-22)
 
 ## Module Highlights
