@@ -327,8 +327,8 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The request uses the same client token as a previous, but non-identical\n            request.</p>",
-                "smithy.api#error": "server",
-                "smithy.api#httpError": 503
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
             }
         },
         "com.amazonaws.ebs#DataLength": {
@@ -438,7 +438,7 @@
                 "SnapshotId": {
                     "target": "com.amazonaws.ebs#SnapshotId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the snapshot containing the block from which to get data.</p>",
+                        "smithy.api#documentation": "<p>The ID of the snapshot containing the block from which to get data.</p>\n        <important>\n            <p>If the specified snapshot is encrypted, you must have permission to use the \n                KMS key that was used to encrypt the snapshot. For more information, see \n                <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebsapis-using-encryption.html\">\n                    Using encryption</a> in the <i>Amazon Elastic Compute Cloud User \n                        Guide</i>.</p>\n        </important>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -446,7 +446,7 @@
                 "BlockIndex": {
                     "target": "com.amazonaws.ebs#BlockIndex",
                     "traits": {
-                        "smithy.api#documentation": "<p>The block index of the block from which to get data.</p>\n\n\n        <p>Obtain the <code>BlockIndex</code> by running the <code>ListChangedBlocks</code> or\n                <code>ListSnapshotBlocks</code> operations.</p>",
+                        "smithy.api#documentation": "<p>The block index of the block in which to read the data. A block index is a logical \n            index in units of <code>512</code> KiB blocks. To identify the block index, divide \n            the logical offset of the data in the logical volume by the block size (logical offset \n            of data/<code>524288</code>). The logical offset of the data must be <code>512</code> \n            KiB aligned.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -454,7 +454,7 @@
                 "BlockToken": {
                     "target": "com.amazonaws.ebs#BlockToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The block token of the block from which to get data.</p>\n\n\n        <p>Obtain the <code>BlockToken</code> by running the <code>ListChangedBlocks</code> or\n                <code>ListSnapshotBlocks</code> operations.</p>",
+                        "smithy.api#documentation": "<p>The block token of the block from which to get data. You can obtain the <code>BlockToken</code> \n            by running the <code>ListChangedBlocks</code> or <code>ListSnapshotBlocks</code> operations.</p>",
                         "smithy.api#httpQuery": "blockToken",
                         "smithy.api#required": {}
                     }
@@ -844,7 +844,7 @@
                 "SnapshotId": {
                     "target": "com.amazonaws.ebs#SnapshotId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the snapshot.</p>",
+                        "smithy.api#documentation": "<p>The ID of the snapshot.</p>\n        <important>\n            <p>If the specified snapshot is encrypted, you must have permission to use \n                the KMS key that was used to encrypt the snapshot. For more information, \n                see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebsapis-using-encryption.html\">\n                    Using encryption</a> in the <i>Amazon Elastic Compute Cloud User \n                        Guide</i>..</p>\n        </important>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -947,6 +947,10 @@
                     {
                         "value": "DEPENDENCY_REQUEST_THROTTLED",
                         "name": "DEPENDENCY_REQUEST_THROTTLED"
+                    },
+                    {
+                        "value": "RESOURCE_LEVEL_THROTTLE",
+                        "name": "RESOURCE_LEVEL_THROTTLE"
                     }
                 ]
             }
@@ -1081,7 +1085,7 @@
                 "ParentSnapshotId": {
                     "target": "com.amazonaws.ebs#SnapshotId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the parent snapshot. If there is no parent snapshot, or if you are creating\n            the first snapshot for an on-premises volume, omit this parameter.</p>\n        <p>If your account is enabled for encryption by default, you cannot use an unencrypted\n            snapshot as a parent snapshot. You must first create an encrypted copy of the parent\n            snapshot using <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CopySnapshot.html\">CopySnapshot</a>.</p>"
+                        "smithy.api#documentation": "<p>The ID of the parent snapshot. If there is no parent snapshot, or if you are creating\n            the first snapshot for an on-premises volume, omit this parameter.</p>\n        <p>You can't specify <b>ParentSnapshotId</b> and \n            <b>Encrypted</b> in the same request. If you specify both \n            parameters, the request fails with <code>ValidationException</code>.</p>\n        \n        \n        \n        <p>The encryption status of the snapshot depends on the values that you specify for \n            <b>Encrypted</b>, <b>KmsKeyArn</b>, \n            and <b>ParentSnapshotId</b>, and whether your Amazon Web Services account \n            is enabled for <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-by-default\">\n                encryption by default</a>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebsapis-using-encryption.html\">\n                    Using encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n        \n        <important>\n            <p>If you specify an encrypted parent snapshot, you must have permission to use the \n                KMS key that was used to encrypt the parent snapshot. For more information, see \n                <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebsapi-permissions.html#ebsapi-kms-permissions\">\n                    Permissions to use Key Management Service keys</a> in the <i>Amazon Elastic Compute Cloud User \n                        Guide</i>.</p>\n        </important>"
                     }
                 },
                 "Tags": {
@@ -1106,13 +1110,13 @@
                 "Encrypted": {
                     "target": "com.amazonaws.ebs#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether to encrypt the snapshot. To create an encrypted snapshot, specify\n                <code>true</code>. To create an unencrypted snapshot, omit this parameter.</p>\n        <p>If you specify a value for <b>ParentSnapshotId</b>, omit\n            this parameter.</p>\n        <p>If you specify <code>true</code>, the snapshot is encrypted using the KMS key specified\n            using the <b>KmsKeyArn</b> parameter. If no value is specified\n            for <b>KmsKeyArn</b>, the default KMS key for your account is \n            used. If no default KMS key has been specified for your account, the Amazon Web Services managed KMS key is used. \n            To set a default KMS key for your account, use <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyEbsDefaultKmsKeyId.html\">\n        \t\tModifyEbsDefaultKmsKeyId</a>.</p>\n        <p>If your account is enabled for encryption by default, you cannot set this parameter to\n                <code>false</code>. In this case, you can omit this parameter.</p>\n\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-accessing-snapshot.html#ebsapis-using-encryption\">\n                Using encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether to encrypt the snapshot.</p> \n        \n        <p>You can't specify <b>Encrypted</b> and <b>\n            ParentSnapshotId</b> in the same request. If you specify both parameters, the \n            request fails with <code>ValidationException</code>.</p>\n        \n        <p>The encryption status of the snapshot depends on the values that you specify for \n            <b>Encrypted</b>, <b>KmsKeyArn</b>, \n            and <b>ParentSnapshotId</b>, and whether your Amazon Web Services account \n            is enabled for <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-by-default\">\n                encryption by default</a>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebsapis-using-encryption.html\">\n            Using encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n        \n        \n            \n        <important>\n            <p>To create an encrypted snapshot, you must have permission to use the KMS key. For \n                more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebsapi-permissions.html#ebsapi-kms-permissions\">\n                    Permissions to use Key Management Service keys</a> in the <i>Amazon Elastic Compute Cloud User \n                        Guide</i>.</p>\n        </important>"
                     }
                 },
                 "KmsKeyArn": {
                     "target": "com.amazonaws.ebs#KmsKeyArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Key Management Service (KMS) \n        \tkey to be used to encrypt the snapshot. If you do not specify a \n            KMS key, the default Amazon Web Services managed KMS key is used.</p>\n        <p>If you specify a <b>ParentSnapshotId</b>, omit this\n            parameter; the snapshot will be encrypted using the same KMS key that was used to encrypt\n            the parent snapshot.</p>\n        <p>If <b>Encrypted</b> is set to <code>true</code>, \n            you must specify a KMS key ARN. </p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Key Management Service (KMS) key to be used to encrypt the snapshot.</p> \n        \n        <p>The encryption status of the snapshot depends on the values that you specify for \n            <b>Encrypted</b>, <b>KmsKeyArn</b>, \n            and <b>ParentSnapshotId</b>, and whether your Amazon Web Services account \n            is enabled for <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-by-default\">\n                encryption by default</a>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebsapis-using-encryption.html\">\n                    Using encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n        \n        \n        <important>\n            <p>To create an encrypted snapshot, you must have permission to use the KMS key. For \n                more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebsapi-permissions.html#ebsapi-kms-permissions\">\n                    Permissions to use Key Management Service keys</a> in the <i>Amazon Elastic Compute Cloud User \n                        Guide</i>.</p>\n        </important>"
                     }
                 },
                 "Timeout": {
@@ -1248,7 +1252,7 @@
                     "min": 0,
                     "max": 255
                 },
-                "smithy.api#pattern": "^[\\S\\s]+$"
+                "smithy.api#pattern": "^[\\S\\s]*$"
             }
         },
         "com.amazonaws.ebs#Tags": {
@@ -1266,7 +1270,7 @@
                 "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 10,
-                    "max": 60
+                    "max": 4320
                 }
             }
         },
@@ -1336,6 +1340,10 @@
                     {
                         "value": "INVALID_VOLUME_SIZE",
                         "name": "INVALID_VOLUME_SIZE"
+                    },
+                    {
+                        "value": "CONFLICTING_BLOCK_UPDATE",
+                        "name": "CONFLICTING_BLOCK_UPDATE"
                     }
                 ]
             }

@@ -12554,7 +12554,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Key Management Service (KMS) key ID of the encryption key that you want to\n            use to encrypt data in the cluster that you restore from a shared snapshot.</p>"
+                        "smithy.api#documentation": "<p>The Key Management Service (KMS) key ID of the encryption key to encrypt data in the cluster \n            restored from a shared snapshot. You can also provide \n            the key ID when you restore from an unencrypted snapshot to an encrypted cluster in \n            the same account. Additionally, you can specify a new KMS key ID when you restore from an encrypted \n            snapshot in the same account in order to change it. In that case, the restored cluster is encrypted \n            with the new KMS key ID.</p>"
                     }
                 },
                 "NodeType": {
@@ -12627,6 +12627,12 @@
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the target reserved node offering.</p>"
+                    }
+                },
+                "Encrypted": {
+                    "target": "com.amazonaws.redshift#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enables support for restoring an unencrypted snapshot to a cluster encrypted \n            with Key Management Service (KMS) and a CMK.</p>"
                     }
                 }
             },
