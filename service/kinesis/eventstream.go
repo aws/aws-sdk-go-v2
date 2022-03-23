@@ -45,7 +45,7 @@ type subscribeToShardEventStreamReadEventInitialResponse struct {
 func (*subscribeToShardEventStreamReadEventInitialResponse) isSubscribeToShardEventStreamReadEvent() {
 }
 
-type subscribeToShardEventStream struct {
+type subscribeToShardEventStreamReader struct {
 	stream                      chan types.SubscribeToShardEventStream
 	decoder                     *eventstream.Decoder
 	eventStream                 io.ReadCloser
@@ -57,8 +57,8 @@ type subscribeToShardEventStream struct {
 	initialResponse             chan interface{}
 }
 
-func newSubscribeToShardEventStream(readCloser io.ReadCloser, decoder *eventstream.Decoder, ird func(*eventstream.Message) (interface{}, error)) *subscribeToShardEventStream {
-	w := &subscribeToShardEventStream{
+func newSubscribeToShardEventStreamWriter(readCloser io.ReadCloser, decoder *eventstream.Decoder, ird func(*eventstream.Message) (interface{}, error)) *subscribeToShardEventStreamReader {
+	w := &subscribeToShardEventStreamReader{
 		stream:                      make(chan types.SubscribeToShardEventStream),
 		decoder:                     decoder,
 		eventStream:                 readCloser,
@@ -74,11 +74,11 @@ func newSubscribeToShardEventStream(readCloser io.ReadCloser, decoder *eventstre
 	return w
 }
 
-func (r *subscribeToShardEventStream) Events() <-chan types.SubscribeToShardEventStream {
+func (r *subscribeToShardEventStreamReader) Events() <-chan types.SubscribeToShardEventStream {
 	return r.stream
 }
 
-func (r *subscribeToShardEventStream) readEventStream() {
+func (r *subscribeToShardEventStreamReader) readEventStream() {
 	defer r.Close()
 	defer close(r.stream)
 
@@ -128,7 +128,7 @@ func (r *subscribeToShardEventStream) readEventStream() {
 	}
 }
 
-func (r *subscribeToShardEventStream) deserializeEventMessage(msg *eventstream.Message) (subscribeToShardEventStreamReadEvent, error) {
+func (r *subscribeToShardEventStreamReader) deserializeEventMessage(msg *eventstream.Message) (subscribeToShardEventStreamReadEvent, error) {
 	messageType := msg.Headers.Get(eventstreamapi.MessageTypeHeader)
 	if messageType == nil {
 		return nil, fmt.Errorf("%s event header not present", eventstreamapi.MessageTypeHeader)
@@ -182,26 +182,26 @@ func (r *subscribeToShardEventStream) deserializeEventMessage(msg *eventstream.M
 	}
 }
 
-func (r *subscribeToShardEventStream) ErrorSet() <-chan struct{} {
+func (r *subscribeToShardEventStreamReader) ErrorSet() <-chan struct{} {
 	return r.err.ErrorSet()
 }
 
-func (r *subscribeToShardEventStream) Close() error {
+func (r *subscribeToShardEventStreamReader) Close() error {
 	r.closeOnce.Do(r.safeClose)
 	return r.Err()
 }
 
-func (r *subscribeToShardEventStream) safeClose() {
+func (r *subscribeToShardEventStreamReader) safeClose() {
 	close(r.done)
 	r.eventStream.Close()
 
 }
 
-func (r *subscribeToShardEventStream) Err() error {
+func (r *subscribeToShardEventStreamReader) Err() error {
 	return r.err.Err()
 }
 
-func (r *subscribeToShardEventStream) Closed() <-chan struct{} {
+func (r *subscribeToShardEventStreamReader) Closed() <-chan struct{} {
 	return r.done
 }
 
@@ -251,7 +251,7 @@ func (m *awsAwsjson11_deserializeOpEventStreamSubscribeToShard) HandleDeserializ
 		out.Result = output
 	}
 
-	eventReader := newSubscribeToShardEventStream(
+	eventReader := newSubscribeToShardEventStreamWriter(
 		deserializeOutput.Body,
 		eventstream.NewDecoder(func(options *eventstream.DecoderOptions) {
 			options.Logger = logger

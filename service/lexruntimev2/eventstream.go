@@ -62,7 +62,7 @@ func (e asyncStartConversationRequestEventStream) ReportResult(cancel <-chan str
 	}
 }
 
-type startConversationRequestEventStream struct {
+type startConversationRequestEventStreamWriter struct {
 	encoder             *eventstream.Encoder
 	signer              eventStreamSigner
 	stream              chan asyncStartConversationRequestEventStream
@@ -74,8 +74,8 @@ type startConversationRequestEventStream struct {
 	err                 *smithysync.OnceErr
 }
 
-func newStartConversationRequestEventStream(stream io.WriteCloser, encoder *eventstream.Encoder, signer eventStreamSigner) *startConversationRequestEventStream {
-	w := &startConversationRequestEventStream{
+func newStartConversationRequestEventStreamReader(stream io.WriteCloser, encoder *eventstream.Encoder, signer eventStreamSigner) *startConversationRequestEventStreamWriter {
+	w := &startConversationRequestEventStreamWriter{
 		encoder:             encoder,
 		signer:              signer,
 		stream:              make(chan asyncStartConversationRequestEventStream),
@@ -92,11 +92,11 @@ func newStartConversationRequestEventStream(stream io.WriteCloser, encoder *even
 
 }
 
-func (w *startConversationRequestEventStream) Send(ctx context.Context, event types.StartConversationRequestEventStream) error {
+func (w *startConversationRequestEventStreamWriter) Send(ctx context.Context, event types.StartConversationRequestEventStream) error {
 	return w.send(ctx, event)
 }
 
-func (w *startConversationRequestEventStream) send(ctx context.Context, event types.StartConversationRequestEventStream) error {
+func (w *startConversationRequestEventStreamWriter) send(ctx context.Context, event types.StartConversationRequestEventStream) error {
 	if err := w.err.Err(); err != nil {
 		return err
 	}
@@ -129,7 +129,7 @@ func (w *startConversationRequestEventStream) send(ctx context.Context, event ty
 
 }
 
-func (w *startConversationRequestEventStream) writeStream() {
+func (w *startConversationRequestEventStreamWriter) writeStream() {
 	defer w.Close()
 
 	for {
@@ -152,7 +152,7 @@ func (w *startConversationRequestEventStream) writeStream() {
 	}
 }
 
-func (w *startConversationRequestEventStream) writeEvent(event types.StartConversationRequestEventStream) error {
+func (w *startConversationRequestEventStreamWriter) writeEvent(event types.StartConversationRequestEventStream) error {
 	// serializedEvent returned bytes refers to an underlying byte buffer and must not
 	// escape this writeEvent scope without first copying. Any previous bytes stored in
 	// the buffer are cleared by this call.
@@ -174,7 +174,7 @@ func (w *startConversationRequestEventStream) writeEvent(event types.StartConver
 	return err
 }
 
-func (w *startConversationRequestEventStream) serializeEvent(event types.StartConversationRequestEventStream) ([]byte, error) {
+func (w *startConversationRequestEventStreamWriter) serializeEvent(event types.StartConversationRequestEventStream) ([]byte, error) {
 	w.serializationBuffer.Reset()
 
 	eventMessage := eventstream.Message{}
@@ -190,7 +190,7 @@ func (w *startConversationRequestEventStream) serializeEvent(event types.StartCo
 	return w.serializationBuffer.Bytes(), nil
 }
 
-func (w *startConversationRequestEventStream) signEvent(payload []byte) ([]byte, error) {
+func (w *startConversationRequestEventStreamWriter) signEvent(payload []byte) ([]byte, error) {
 	w.signingBuffer.Reset()
 
 	date := time.Now().UTC()
@@ -218,7 +218,7 @@ func (w *startConversationRequestEventStream) signEvent(payload []byte) ([]byte,
 	return w.signingBuffer.Bytes(), nil
 }
 
-func (w *startConversationRequestEventStream) closeStream() (err error) {
+func (w *startConversationRequestEventStreamWriter) closeStream() (err error) {
 	defer func() {
 		if cErr := w.eventStream.Close(); cErr != nil && err == nil {
 			err = cErr
@@ -236,24 +236,24 @@ func (w *startConversationRequestEventStream) closeStream() (err error) {
 	return err
 }
 
-func (w *startConversationRequestEventStream) ErrorSet() <-chan struct{} {
+func (w *startConversationRequestEventStreamWriter) ErrorSet() <-chan struct{} {
 	return w.err.ErrorSet()
 }
 
-func (w *startConversationRequestEventStream) Close() error {
+func (w *startConversationRequestEventStreamWriter) Close() error {
 	w.closeOnce.Do(w.safeClose)
 	return w.Err()
 }
 
-func (w *startConversationRequestEventStream) safeClose() {
+func (w *startConversationRequestEventStreamWriter) safeClose() {
 	close(w.done)
 }
 
-func (w *startConversationRequestEventStream) Err() error {
+func (w *startConversationRequestEventStreamWriter) Err() error {
 	return w.err.Err()
 }
 
-type startConversationResponseEventStream struct {
+type startConversationResponseEventStreamReader struct {
 	stream      chan types.StartConversationResponseEventStream
 	decoder     *eventstream.Decoder
 	eventStream io.ReadCloser
@@ -263,8 +263,8 @@ type startConversationResponseEventStream struct {
 	closeOnce   sync.Once
 }
 
-func newStartConversationResponseEventStream(readCloser io.ReadCloser, decoder *eventstream.Decoder) *startConversationResponseEventStream {
-	w := &startConversationResponseEventStream{
+func newStartConversationResponseEventStreamWriter(readCloser io.ReadCloser, decoder *eventstream.Decoder) *startConversationResponseEventStreamReader {
+	w := &startConversationResponseEventStreamReader{
 		stream:      make(chan types.StartConversationResponseEventStream),
 		decoder:     decoder,
 		eventStream: readCloser,
@@ -278,11 +278,11 @@ func newStartConversationResponseEventStream(readCloser io.ReadCloser, decoder *
 	return w
 }
 
-func (r *startConversationResponseEventStream) Events() <-chan types.StartConversationResponseEventStream {
+func (r *startConversationResponseEventStreamReader) Events() <-chan types.StartConversationResponseEventStream {
 	return r.stream
 }
 
-func (r *startConversationResponseEventStream) readEventStream() {
+func (r *startConversationResponseEventStreamReader) readEventStream() {
 	defer r.Close()
 	defer close(r.stream)
 
@@ -317,7 +317,7 @@ func (r *startConversationResponseEventStream) readEventStream() {
 	}
 }
 
-func (r *startConversationResponseEventStream) deserializeEventMessage(msg *eventstream.Message) (types.StartConversationResponseEventStream, error) {
+func (r *startConversationResponseEventStreamReader) deserializeEventMessage(msg *eventstream.Message) (types.StartConversationResponseEventStream, error) {
 	messageType := msg.Headers.Get(eventstreamapi.MessageTypeHeader)
 	if messageType == nil {
 		return nil, fmt.Errorf("%s event header not present", eventstreamapi.MessageTypeHeader)
@@ -358,26 +358,26 @@ func (r *startConversationResponseEventStream) deserializeEventMessage(msg *even
 	}
 }
 
-func (r *startConversationResponseEventStream) ErrorSet() <-chan struct{} {
+func (r *startConversationResponseEventStreamReader) ErrorSet() <-chan struct{} {
 	return r.err.ErrorSet()
 }
 
-func (r *startConversationResponseEventStream) Close() error {
+func (r *startConversationResponseEventStreamReader) Close() error {
 	r.closeOnce.Do(r.safeClose)
 	return r.Err()
 }
 
-func (r *startConversationResponseEventStream) safeClose() {
+func (r *startConversationResponseEventStreamReader) safeClose() {
 	close(r.done)
 	r.eventStream.Close()
 
 }
 
-func (r *startConversationResponseEventStream) Err() error {
+func (r *startConversationResponseEventStreamReader) Err() error {
 	return r.err.Err()
 }
 
-func (r *startConversationResponseEventStream) Closed() <-chan struct{} {
+func (r *startConversationResponseEventStreamReader) Closed() <-chan struct{} {
 	return r.done
 }
 
@@ -424,7 +424,7 @@ func (m *awsRestjson1_deserializeOpEventStreamStartConversation) HandleDeseriali
 		requestSignature,
 	)
 
-	eventWriter := newStartConversationRequestEventStream(
+	eventWriter := newStartConversationRequestEventStreamReader(
 		eventstreamapi.GetInputStreamWriter(ctx),
 		eventstream.NewEncoder(func(options *eventstream.EncoderOptions) {
 			options.Logger = logger
@@ -459,7 +459,7 @@ func (m *awsRestjson1_deserializeOpEventStreamStartConversation) HandleDeseriali
 		out.Result = output
 	}
 
-	eventReader := newStartConversationResponseEventStream(
+	eventReader := newStartConversationResponseEventStreamWriter(
 		deserializeOutput.Body,
 		eventstream.NewDecoder(func(options *eventstream.DecoderOptions) {
 			options.Logger = logger

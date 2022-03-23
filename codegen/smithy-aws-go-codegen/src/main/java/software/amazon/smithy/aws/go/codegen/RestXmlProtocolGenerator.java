@@ -475,7 +475,7 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
 
     @Override
     protected void writeOperationSerializerMiddlewareEventStreamSetup(GenerationContext context, EventStreamInfo info) {
-        AwsEventStreamUtils.writeOperationSerializerMiddlewareEventStreamSetup(context, info);
+        AwsEventStreamUtils.writeOperationSerializerMiddlewareEventStreamSetup(context, info, "restEncoder");
     }
 
     @Override
