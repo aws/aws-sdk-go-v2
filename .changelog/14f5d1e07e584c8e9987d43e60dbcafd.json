@@ -1,0 +1,8 @@
+{
+    "id": "14f5d1e0-7e58-4c8e-9987-d43e60dbcafd",
+    "type": "documentation",
+    "description": "Documentation updates for AWS Transfer Family to describe how to remove an associated workflow from a server.",
+    "modules": [
+        "service/transfer"
+    ]
+}

@@ -59,11 +59,11 @@ type PutParameterInput struct {
 	// Creating Systems Manager parameters
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-su-create.html)
 	// in the Amazon Web Services Systems Manager User Guide. The maximum length
-	// constraint listed below includes capacity for additional system attributes that
-	// aren't part of the name. The maximum length for a parameter name, including the
-	// full length of the parameter ARN, is 1011 characters. For example, the length of
-	// the following parameter name is 65 characters, not 20 characters:
-	// arn:aws:ssm:us-east-2:111122223333:parameter/ExampleParameterName
+	// constraint of 2048 characters listed below includes 1037 characters reserved for
+	// internal use by Systems Manager. The maximum length for a parameter name that
+	// you create is 1011 characters. This includes the characters in the ARN that
+	// precede the name you specify, such as
+	// arn:aws:ssm:us-east-2:111122223333:parameter/.
 	//
 	// This member is required.
 	Name *string

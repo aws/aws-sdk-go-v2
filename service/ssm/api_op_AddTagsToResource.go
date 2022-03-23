@@ -12,29 +12,30 @@ import (
 )
 
 // Adds or overwrites one or more tags for the specified resource. Tags are
-// metadata that you can assign to your documents, managed nodes, maintenance
-// windows, Parameter Store parameters, and patch baselines. Tags enable you to
-// categorize your resources in different ways, for example, by purpose, owner, or
-// environment. Each tag consists of a key and an optional value, both of which you
-// define. For example, you could define a set of tags for your account's managed
-// nodes that helps you track each node's owner and stack level. For example:
+// metadata that you can assign to your automations, documents, managed nodes,
+// maintenance windows, Parameter Store parameters, and patch baselines. Tags
+// enable you to categorize your resources in different ways, for example, by
+// purpose, owner, or environment. Each tag consists of a key and an optional
+// value, both of which you define. For example, you could define a set of tags for
+// your account's managed nodes that helps you track each node's owner and stack
+// level. For example:
 //
-// *
-// Key=Owner,Value=DbAdmin
+// * Key=Owner,Value=DbAdmin
 //
 // * Key=Owner,Value=SysAdmin
 //
-// * Key=Owner,Value=Dev
+// *
+// Key=Owner,Value=Dev
+//
+// * Key=Stack,Value=Production
 //
 // *
-// Key=Stack,Value=Production
+// Key=Stack,Value=Pre-Production
 //
-// * Key=Stack,Value=Pre-Production
+// * Key=Stack,Value=Test
 //
-// *
-// Key=Stack,Value=Test
-//
-// Each resource can have a maximum of 50 tags. We recommend
+// Most resources can have
+// a maximum of 50 tags. Automations can have a maximum of 5 tags. We recommend
 // that you devise a set of tag keys that meets your needs for each resource type.
 // Using a consistent set of tag keys makes it easier for you to manage your
 // resources. You can search and filter the resources based on the tags you add.
@@ -62,10 +63,10 @@ type AddTagsToResourceInput struct {
 
 	// The resource ID you want to tag. Use the ID of the resource. Here are some
 	// examples: MaintenanceWindow: mw-012345abcdePatchBaseline:
-	// pb-012345abcdeOpsMetadata object: ResourceID for tagging is created from the
-	// Amazon Resource Name (ARN) for the object. Specifically, ResourceID is created
-	// from the strings that come after the word opsmetadata in the ARN. For example,
-	// an OpsMetadata object with an ARN of
+	// pb-012345abcdeAutomation: example-c160-4567-8519-012345abcdeOpsMetadata object:
+	// ResourceID for tagging is created from the Amazon Resource Name (ARN) for the
+	// object. Specifically, ResourceID is created from the strings that come after the
+	// word opsmetadata in the ARN. For example, an OpsMetadata object with an ARN of
 	// arn:aws:ssm:us-east-2:1234567890:opsmetadata/aws/ssm/MyGroup/appmanager has a
 	// ResourceID of either aws/ssm/MyGroup/appmanager or /aws/ssm/MyGroup/appmanager.
 	// For the Document and Parameter values, use the name of the resource.

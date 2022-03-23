@@ -58,6 +58,7 @@ type RequestThrottledExceptionReason string
 const (
 	RequestThrottledExceptionReasonAccountThrottled           RequestThrottledExceptionReason = "ACCOUNT_THROTTLED"
 	RequestThrottledExceptionReasonDependencyRequestThrottled RequestThrottledExceptionReason = "DEPENDENCY_REQUEST_THROTTLED"
+	RequestThrottledExceptionReasonResourceLevelThrottle      RequestThrottledExceptionReason = "RESOURCE_LEVEL_THROTTLE"
 )
 
 // Values returns all known values for RequestThrottledExceptionReason. Note that
@@ -68,6 +69,7 @@ func (RequestThrottledExceptionReason) Values() []RequestThrottledExceptionReaso
 	return []RequestThrottledExceptionReason{
 		"ACCOUNT_THROTTLED",
 		"DEPENDENCY_REQUEST_THROTTLED",
+		"RESOURCE_LEVEL_THROTTLE",
 	}
 }
 
@@ -142,6 +144,7 @@ const (
 	ValidationExceptionReasonInvalidDependencyRequest ValidationExceptionReason = "INVALID_DEPENDENCY_REQUEST"
 	ValidationExceptionReasonInvalidParameterValue    ValidationExceptionReason = "INVALID_PARAMETER_VALUE"
 	ValidationExceptionReasonInvalidVolumeSize        ValidationExceptionReason = "INVALID_VOLUME_SIZE"
+	ValidationExceptionReasonConflictingBlockUpdate   ValidationExceptionReason = "CONFLICTING_BLOCK_UPDATE"
 )
 
 // Values returns all known values for ValidationExceptionReason. Note that this
@@ -160,5 +163,6 @@ func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 		"INVALID_DEPENDENCY_REQUEST",
 		"INVALID_PARAMETER_VALUE",
 		"INVALID_VOLUME_SIZE",
+		"CONFLICTING_BLOCK_UPDATE",
 	}
 }

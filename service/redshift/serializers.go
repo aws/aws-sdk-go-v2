@@ -11206,6 +11206,11 @@ func awsAwsquery_serializeOpDocumentRestoreFromClusterSnapshotInput(v *RestoreFr
 		objectKey.String(*v.ElasticIp)
 	}
 
+	if v.Encrypted != nil {
+		objectKey := object.Key("Encrypted")
+		objectKey.Boolean(*v.Encrypted)
+	}
+
 	if v.EnhancedVpcRouting != nil {
 		objectKey := object.Key("EnhancedVpcRouting")
 		objectKey.Boolean(*v.EnhancedVpcRouting)

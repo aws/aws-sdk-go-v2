@@ -49,7 +49,8 @@ type StartSessionInput struct {
 	// launched by default.
 	DocumentName *string
 
-	// Reserved for future use.
+	// The values you want to specify for the parameters defined in the Session
+	// document.
 	Parameters map[string][]string
 
 	// The reason for connecting to the instance. This value is included in the details
