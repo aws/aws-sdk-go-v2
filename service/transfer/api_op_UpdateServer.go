@@ -161,7 +161,10 @@ type UpdateServerInput struct {
 	SecurityPolicyName *string
 
 	// Specifies the workflow ID for the workflow to assign and the execution role used
-	// for executing the workflow.
+	// for executing the workflow. To remove an associated workflow from a server, you
+	// can provide an empty OnUpload object, as in the following example. aws transfer
+	// update-server --server-id s-01234567890abcdef --workflow-details
+	// '{"OnUpload":[]}'
 	WorkflowDetails *types.WorkflowDetails
 
 	noSmithyDocumentSerde

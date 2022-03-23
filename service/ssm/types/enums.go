@@ -1767,6 +1767,7 @@ const (
 	ResourceTypeForTaggingPatchBaseline     ResourceTypeForTagging = "PatchBaseline"
 	ResourceTypeForTaggingOpsItem           ResourceTypeForTagging = "OpsItem"
 	ResourceTypeForTaggingOpsmetadata       ResourceTypeForTagging = "OpsMetadata"
+	ResourceTypeForTaggingAutomation        ResourceTypeForTagging = "Automation"
 )
 
 // Values returns all known values for ResourceTypeForTagging. Note that this can
@@ -1781,6 +1782,7 @@ func (ResourceTypeForTagging) Values() []ResourceTypeForTagging {
 		"PatchBaseline",
 		"OpsItem",
 		"OpsMetadata",
+		"Automation",
 	}
 }
 

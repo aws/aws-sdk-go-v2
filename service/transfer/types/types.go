@@ -1098,7 +1098,9 @@ type WorkflowDetail struct {
 type WorkflowDetails struct {
 
 	// A trigger that starts a workflow: the workflow begins to execute after a file is
-	// uploaded.
+	// uploaded. To remove an associated workflow from a server, you can provide an
+	// empty OnUpload object, as in the following example. aws transfer update-server
+	// --server-id s-01234567890abcdef --workflow-details '{"OnUpload":[]}'
 	//
 	// This member is required.
 	OnUpload []WorkflowDetail

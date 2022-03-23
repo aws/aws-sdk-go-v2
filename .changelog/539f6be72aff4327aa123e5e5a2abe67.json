@@ -1,0 +1,8 @@
+{
+    "id": "539f6be7-2aff-4327-aa12-3e5e5a2abe67",
+    "type": "feature",
+    "description": "Update AddTagsToResource, ListTagsForResource, and RemoveTagsFromResource APIs to reflect the support for tagging Automation resources. Includes other minor documentation updates.",
+    "modules": [
+        "service/ssm"
+    ]
+}

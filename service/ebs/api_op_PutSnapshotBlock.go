@@ -73,7 +73,11 @@ type PutSnapshotBlockInput struct {
 	// This member is required.
 	DataLength *int32
 
-	// The ID of the snapshot.
+	// The ID of the snapshot. If the specified snapshot is encrypted, you must have
+	// permission to use the KMS key that was used to encrypt the snapshot. For more
+	// information, see  Using encryption
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebsapis-using-encryption.html)
+	// in the Amazon Elastic Compute Cloud User Guide..
 	//
 	// This member is required.
 	SnapshotId *string

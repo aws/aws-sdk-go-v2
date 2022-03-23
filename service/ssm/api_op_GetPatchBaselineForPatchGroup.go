@@ -34,7 +34,7 @@ type GetPatchBaselineForPatchGroupInput struct {
 	// This member is required.
 	PatchGroup *string
 
-	// Returns he operating system rule specified for patch groups using the patch
+	// Returns the operating system rule specified for patch groups using the patch
 	// baseline.
 	OperatingSystem types.OperatingSystem
 

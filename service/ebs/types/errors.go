@@ -69,7 +69,7 @@ func (e *ConflictException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
-func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An internal error has occurred.
 type InternalServerException struct {
