@@ -4,12 +4,15 @@ import (
 	"context"
 	"fmt"
 	"math/rand"
+	"strings"
 	"sync"
 	"sync/atomic"
 	"testing"
 	"time"
 
+	sdkrand "github.com/aws/aws-sdk-go-v2/internal/rand"
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
+	"github.com/google/go-cmp/cmp"
 )
 
 type stubCredentialsProvider struct {
@@ -217,7 +220,7 @@ func TestCredentialsCache_Error(t *testing.T) {
 	if err == nil {
 		t.Fatalf("expect error, not none")
 	}
-	if e, a := "failed", err.Error(); e != a {
+	if e, a := "failed", err.Error(); !strings.Contains(a, e) {
 		t.Errorf("expect %q, got %q", e, a)
 	}
 	if e, a := (Credentials{}), creds; e != a {
@@ -298,4 +301,319 @@ func TestCredentialsCache_RetrieveConcurrent(t *testing.T) {
 	if e, a := uint32(1), atomic.LoadUint32(&stub.called); e != a {
 		t.Errorf("expected %v, got %v", e, a)
 	}
+}
+
+func TestCredentialsCache_cacheStrategies(t *testing.T) {
+	origSdkTime := sdk.NowTime
+	defer func() { sdk.NowTime = origSdkTime }()
+	sdk.NowTime = func() time.Time {
+		return time.Date(2015, 4, 8, 0, 0, 0, 0, time.UTC)
+	}
+
+	origSdkRandReader := sdkrand.Reader
+	defer func() { sdkrand.Reader = origSdkRandReader }()
+	sdkrand.Reader = byteReader(0xFF)
+
+	cases := map[string]struct {
+		options      func(*CredentialsCacheOptions)
+		provider     CredentialsProvider
+		initialCreds Credentials
+		expectErr    string
+		expectCreds  Credentials
+	}{
+		"default": {
+			provider: struct {
+				mockProvider
+			}{
+				mockProvider: mockProvider{
+					creds: Credentials{
+						AccessKeyID:     "AKIAIOSFODNN7EXAMPLE",
+						SecretAccessKey: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+						CanExpire:       true,
+						Expires:         sdk.NowTime().Add(time.Hour),
+					},
+				},
+			},
+			expectCreds: Credentials{
+				AccessKeyID:     "AKIAIOSFODNN7EXAMPLE",
+				SecretAccessKey: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+				CanExpire:       true,
+				Expires:         sdk.NowTime().Add(time.Hour),
+			},
+		},
+		"default with window": {
+			options: func(o *CredentialsCacheOptions) {
+				o.ExpiryWindow = 5 * time.Minute
+			},
+			provider: struct {
+				mockProvider
+			}{
+				mockProvider: mockProvider{
+					creds: Credentials{
+						AccessKeyID:     "AKIAIOSFODNN7EXAMPLE",
+						SecretAccessKey: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+						CanExpire:       true,
+						Expires:         sdk.NowTime().Add(time.Hour),
+					},
+				},
+			},
+			expectCreds: Credentials{
+				AccessKeyID:     "AKIAIOSFODNN7EXAMPLE",
+				SecretAccessKey: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+				CanExpire:       true,
+				Expires:         sdk.NowTime().Add(55 * time.Minute),
+			},
+		},
+		"default with window jitterFrac": {
+			options: func(o *CredentialsCacheOptions) {
+				o.ExpiryWindow = 5 * time.Minute
+				o.ExpiryWindowJitterFrac = 0.5
+			},
+			provider: struct {
+				mockProvider
+			}{
+				mockProvider: mockProvider{
+					creds: Credentials{
+						AccessKeyID:     "AKIAIOSFODNN7EXAMPLE",
+						SecretAccessKey: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+						CanExpire:       true,
+						Expires:         sdk.NowTime().Add(time.Hour),
+					},
+				},
+			},
+			expectCreds: Credentials{
+				AccessKeyID:     "AKIAIOSFODNN7EXAMPLE",
+				SecretAccessKey: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+				CanExpire:       true,
+				Expires:         sdk.NowTime().Add(57*time.Minute + 29*time.Second),
+			},
+		},
+		"handle refresh": {
+			initialCreds: Credentials{
+				AccessKeyID:     "AKIAIOSFODNN7EXAMPLE",
+				SecretAccessKey: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+				CanExpire:       true,
+				Expires:         sdk.NowTime().Add(-time.Hour),
+			},
+			provider: struct {
+				mockProvider
+				mockHandleFailToRefresh
+			}{
+				mockProvider: mockProvider{
+					err: fmt.Errorf("some error"),
+				},
+				mockHandleFailToRefresh: mockHandleFailToRefresh{
+					expectInputCreds: Credentials{
+						AccessKeyID:     "AKIAIOSFODNN7EXAMPLE",
+						SecretAccessKey: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+						CanExpire:       true,
+						Expires:         sdk.NowTime().Add(-time.Hour),
+					},
+					creds: Credentials{
+						AccessKeyID:     "AKIAIOSFODNN7EXAMPLE",
+						SecretAccessKey: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+						CanExpire:       true,
+						Expires:         sdk.NowTime().Add(time.Hour),
+					},
+				},
+			},
+			expectCreds: Credentials{
+				AccessKeyID:     "AKIAIOSFODNN7EXAMPLE",
+				SecretAccessKey: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+				CanExpire:       true,
+				Expires:         sdk.NowTime().Add(time.Hour),
+			},
+		},
+		"handle refresh error": {
+			initialCreds: Credentials{
+				AccessKeyID:     "AKIAIOSFODNN7EXAMPLE",
+				SecretAccessKey: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+				CanExpire:       true,
+				Expires:         sdk.NowTime().Add(-time.Hour),
+			},
+			provider: struct {
+				mockProvider
+				mockHandleFailToRefresh
+			}{
+				mockProvider: mockProvider{
+					err: fmt.Errorf("some error"),
+				},
+				mockHandleFailToRefresh: mockHandleFailToRefresh{
+					expectInputCreds: Credentials{
+						AccessKeyID:     "AKIAIOSFODNN7EXAMPLE",
+						SecretAccessKey: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+						CanExpire:       true,
+						Expires:         sdk.NowTime().Add(-time.Hour),
+					},
+					expectErr: "some error",
+					err:       fmt.Errorf("some other error"),
+				},
+			},
+			expectErr: "some other error",
+		},
+		"adjust expires": {
+			options: func(o *CredentialsCacheOptions) {
+				o.ExpiryWindow = 5 * time.Minute
+			},
+			provider: struct {
+				mockProvider
+				mockAdjustExpiryBy
+			}{
+				mockProvider: mockProvider{
+					creds: Credentials{
+						AccessKeyID:     "AKIAIOSFODNN7EXAMPLE",
+						SecretAccessKey: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+						CanExpire:       true,
+						Expires:         sdk.NowTime().Add(time.Hour),
+					},
+				},
+				mockAdjustExpiryBy: mockAdjustExpiryBy{
+					expectInputCreds: Credentials{
+						AccessKeyID:     "AKIAIOSFODNN7EXAMPLE",
+						SecretAccessKey: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+						CanExpire:       true,
+						Expires:         sdk.NowTime().Add(time.Hour),
+					},
+					expectDur: -5 * time.Minute,
+					creds: Credentials{
+						AccessKeyID:     "AKIAIOSFODNN7EXAMPLE",
+						SecretAccessKey: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+						CanExpire:       true,
+						Expires:         sdk.NowTime().Add(25 * time.Minute),
+					},
+				},
+			},
+			expectCreds: Credentials{
+				AccessKeyID:     "AKIAIOSFODNN7EXAMPLE",
+				SecretAccessKey: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+				CanExpire:       true,
+				Expires:         sdk.NowTime().Add(25 * time.Minute),
+			},
+		},
+		"adjust expires error": {
+			options: func(o *CredentialsCacheOptions) {
+				o.ExpiryWindow = 5 * time.Minute
+			},
+			provider: struct {
+				mockProvider
+				mockAdjustExpiryBy
+			}{
+				mockProvider: mockProvider{
+					creds: Credentials{
+						AccessKeyID:     "AKIAIOSFODNN7EXAMPLE",
+						SecretAccessKey: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+						CanExpire:       true,
+						Expires:         sdk.NowTime().Add(time.Hour),
+					},
+				},
+				mockAdjustExpiryBy: mockAdjustExpiryBy{
+					err: fmt.Errorf("some error"),
+				},
+			},
+			expectErr: "some error",
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			var optFns []func(*CredentialsCacheOptions)
+			if c.options != nil {
+				optFns = append(optFns, c.options)
+			}
+			provider := NewCredentialsCache(c.provider, optFns...)
+
+			if c.initialCreds.HasKeys() {
+				creds := c.initialCreds
+				provider.creds.Store(&creds)
+			}
+
+			creds, err := provider.Retrieve(context.Background())
+			if err == nil && len(c.expectErr) != 0 {
+				t.Fatalf("expect error %v, got none", c.expectErr)
+			}
+			if err != nil && len(c.expectErr) == 0 {
+				t.Fatalf("expect no error, got %v", err)
+			}
+			if err != nil && !strings.Contains(err.Error(), c.expectErr) {
+				t.Fatalf("expect error to contain %v, got %v", c.expectErr, err)
+			}
+			if c.expectErr != "" {
+				return
+			}
+			// Truncate expires time so its easy to compare
+			creds.Expires = creds.Expires.Truncate(time.Second)
+
+			if diff := cmp.Diff(c.expectCreds, creds); diff != "" {
+				t.Errorf("expect creds match\n%s", diff)
+			}
+		})
+	}
+}
+
+type byteReader byte
+
+func (b byteReader) Read(p []byte) (int, error) {
+	for i := 0; i < len(p); i++ {
+		p[i] = byte(b)
+	}
+	return len(p), nil
+}
+
+type mockProvider struct {
+	creds Credentials
+	err   error
+}
+
+var _ CredentialsProvider = mockProvider{}
+
+func (m mockProvider) Retrieve(context.Context) (Credentials, error) {
+	return m.creds, m.err
+}
+
+type mockHandleFailToRefresh struct {
+	expectInputCreds Credentials
+	expectErr        string
+	creds            Credentials
+	err              error
+}
+
+var _ HandleFailRefreshCredentialsCacheStrategy = mockHandleFailToRefresh{}
+
+func (m mockHandleFailToRefresh) HandleFailToRefresh(ctx context.Context, prevCreds Credentials, err error) (
+	Credentials, error,
+) {
+	if m.expectInputCreds.HasKeys() {
+		if e, a := m.expectInputCreds, prevCreds; e != a {
+			return Credentials{}, fmt.Errorf("expect %v creds, got %v", e, a)
+		}
+	}
+	if m.expectErr != "" {
+		if err == nil {
+			return Credentials{}, fmt.Errorf("expect input error, got none")
+		}
+		if e, a := m.expectErr, err.Error(); !strings.Contains(a, e) {
+			return Credentials{}, fmt.Errorf("expect %v in error, got %v", e, a)
+		}
+	}
+	return m.creds, m.err
+}
+
+type mockAdjustExpiryBy struct {
+	expectInputCreds Credentials
+	expectDur        time.Duration
+	creds            Credentials
+	err              error
+}
+
+var _ AdjustExpiresByCredentialsCacheStrategy = mockAdjustExpiryBy{}
+
+func (m mockAdjustExpiryBy) AdjustExpiresBy(creds Credentials, dur time.Duration) (
+	Credentials, error,
+) {
+	if m.expectInputCreds.HasKeys() {
+		if diff := cmp.Diff(m.expectInputCreds, creds); diff != "" {
+			return Credentials{}, fmt.Errorf("expect creds match\n%s", diff)
+		}
+	}
+	return m.creds, m.err
 }
