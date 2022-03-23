@@ -4499,7 +4499,7 @@
                 "WorkflowDetails": {
                     "target": "com.amazonaws.transfer#WorkflowDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the workflow ID for the workflow to assign and the execution role used for executing the workflow.</p>"
+                        "smithy.api#documentation": "<p>Specifies the workflow ID for the workflow to assign and the execution role used for executing the workflow.</p>\n         <p>To remove an associated workflow from a server, you can provide an empty <code>OnUpload</code> object, as in the following example.</p>\n         <p>\n            <code>aws transfer update-server --server-id s-01234567890abcdef --workflow-details '{\"OnUpload\":[]}'</code>\n         </p>"
                     }
                 }
             }
@@ -4736,7 +4736,7 @@
                 "OnUpload": {
                     "target": "com.amazonaws.transfer#OnUploadWorkflowDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>A trigger that starts a workflow: the workflow begins to execute after a file is uploaded.</p>",
+                        "smithy.api#documentation": "<p>A trigger that starts a workflow: the workflow begins to execute after a file is uploaded.</p>\n         <p>To remove an associated workflow from a server, you can provide an empty <code>OnUpload</code> object, as in the following example.</p>\n         <p>\n            <code>aws transfer update-server --server-id s-01234567890abcdef --workflow-details '{\"OnUpload\":[]}'</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 }
