@@ -1,0 +1,9 @@
+{
+    "id": "99131623-61ed-41fe-867f-56fb4ee75e8e",
+    "type": "feature",
+    "description": "Update `ec2rolecreds` package's `Provider` to implememnt support for CredentialsCache new optional caching strategy interfaces, HandleFailRefreshCredentialsCacheStrategy and AdjustExpiresByCredentialsCacheStrategy.",
+    "modules": [
+        ".",
+        "credentials"
+    ]
+}
