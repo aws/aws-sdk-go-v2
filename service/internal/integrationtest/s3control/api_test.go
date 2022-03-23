@@ -19,26 +19,10 @@ func TestInteg_PublicAccessBlock(t *testing.T) {
 		AccountId: aws.String(accountID),
 	})
 	if err != nil {
+		// Ignore NoSuchPublicAccessBlockConfiguration, but fail on any other error.
 		var e *types.NoSuchPublicAccessBlockConfiguration
 		if !errors.As(err, &e) {
 			t.Fatalf("expect no error for GetPublicAccessBlock, got %v", err)
 		}
-	}
-
-	_, err = svc.PutPublicAccessBlock(ctx, &s3control.PutPublicAccessBlockInput{
-		AccountId: aws.String(accountID),
-		PublicAccessBlockConfiguration: &types.PublicAccessBlockConfiguration{
-			IgnorePublicAcls: true,
-		},
-	})
-	if err != nil {
-		t.Fatalf("expect no error, got %v", err)
-	}
-
-	_, err = svc.DeletePublicAccessBlock(ctx, &s3control.DeletePublicAccessBlockInput{
-		AccountId: aws.String(accountID),
-	})
-	if err != nil {
-		t.Fatalf("expect no error, got %v", err)
 	}
 }
