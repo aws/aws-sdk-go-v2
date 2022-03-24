@@ -1,3 +1,7 @@
+# v1.23.1 (2022-03-24)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.23.0 (2022-03-23)
 
 * **Feature**: Update AddTagsToResource, ListTagsForResource, and RemoveTagsFromResource APIs to reflect the support for tagging Automation resources. Includes other minor documentation updates.

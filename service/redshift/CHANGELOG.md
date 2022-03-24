@@ -1,3 +1,7 @@
+# v1.22.1 (2022-03-24)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.22.0 (2022-03-23)
 
 * **Feature**: This release adds a new [--encrypted | --no-encrypted] field in restore-from-cluster-snapshot API. Customers can now restore an unencrypted snapshot to a cluster encrypted with AWS Managed Key or their own KMS key.

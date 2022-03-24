@@ -1,8 +1,0 @@
-{
-    "id": "77be004d-0f87-41f6-ae37-7e6e511dd752",
-    "type": "feature",
-    "description": "Adds support for increased ephemeral storage (/tmp) up to 10GB for Lambda functions. Customers can now provision up to 10 GB of ephemeral storage per function instance, a 20x increase over the previous limit of 512 MB.",
-    "modules": [
-        "service/lambda"
-    ]
-}
