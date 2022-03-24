@@ -2982,6 +2982,61 @@ func (m *awsAwsjson11_serializeOpGetConformancePackComplianceSummary) HandleSeri
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpGetCustomRulePolicy struct {
+}
+
+func (*awsAwsjson11_serializeOpGetCustomRulePolicy) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpGetCustomRulePolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetCustomRulePolicyInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("StarlingDoveService.GetCustomRulePolicy")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentGetCustomRulePolicyInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpGetDiscoveredResourceCounts struct {
 }
 
@@ -3132,6 +3187,61 @@ func (m *awsAwsjson11_serializeOpGetOrganizationConformancePackDetailedStatus) H
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentGetOrganizationConformancePackDetailedStatusInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpGetOrganizationCustomRulePolicy struct {
+}
+
+func (*awsAwsjson11_serializeOpGetOrganizationCustomRulePolicy) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpGetOrganizationCustomRulePolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetOrganizationCustomRulePolicyInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("StarlingDoveService.GetOrganizationCustomRulePolicy")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentGetOrganizationCustomRulePolicyInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -5209,6 +5319,39 @@ func awsAwsjson11_serializeDocumentConformancePackNamesToSummarizeList(v []strin
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentCustomPolicyDetails(v *types.CustomPolicyDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EnableDebugLogDelivery {
+		ok := object.Key("EnableDebugLogDelivery")
+		ok.Boolean(v.EnableDebugLogDelivery)
+	}
+
+	if v.PolicyRuntime != nil {
+		ok := object.Key("PolicyRuntime")
+		ok.String(*v.PolicyRuntime)
+	}
+
+	if v.PolicyText != nil {
+		ok := object.Key("PolicyText")
+		ok.String(*v.PolicyText)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentDebugLogDeliveryAccounts(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentDeliveryChannel(v *types.DeliveryChannel, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5396,6 +5539,17 @@ func awsAwsjson11_serializeDocumentOrganizationConfigRuleNames(v []string, value
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentOrganizationConfigRuleTriggerTypeNoSNs(v []types.OrganizationConfigRuleTriggerTypeNoSN, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentOrganizationConfigRuleTriggerTypes(v []types.OrganizationConfigRuleTriggerType, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -5415,6 +5569,74 @@ func awsAwsjson11_serializeDocumentOrganizationConformancePackNames(v []string, 
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentOrganizationCustomPolicyRuleMetadata(v *types.OrganizationCustomPolicyRuleMetadata, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DebugLogDeliveryAccounts != nil {
+		ok := object.Key("DebugLogDeliveryAccounts")
+		if err := awsAwsjson11_serializeDocumentDebugLogDeliveryAccounts(v.DebugLogDeliveryAccounts, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Description != nil {
+		ok := object.Key("Description")
+		ok.String(*v.Description)
+	}
+
+	if v.InputParameters != nil {
+		ok := object.Key("InputParameters")
+		ok.String(*v.InputParameters)
+	}
+
+	if len(v.MaximumExecutionFrequency) > 0 {
+		ok := object.Key("MaximumExecutionFrequency")
+		ok.String(string(v.MaximumExecutionFrequency))
+	}
+
+	if v.OrganizationConfigRuleTriggerTypes != nil {
+		ok := object.Key("OrganizationConfigRuleTriggerTypes")
+		if err := awsAwsjson11_serializeDocumentOrganizationConfigRuleTriggerTypeNoSNs(v.OrganizationConfigRuleTriggerTypes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PolicyRuntime != nil {
+		ok := object.Key("PolicyRuntime")
+		ok.String(*v.PolicyRuntime)
+	}
+
+	if v.PolicyText != nil {
+		ok := object.Key("PolicyText")
+		ok.String(*v.PolicyText)
+	}
+
+	if v.ResourceIdScope != nil {
+		ok := object.Key("ResourceIdScope")
+		ok.String(*v.ResourceIdScope)
+	}
+
+	if v.ResourceTypesScope != nil {
+		ok := object.Key("ResourceTypesScope")
+		if err := awsAwsjson11_serializeDocumentResourceTypesScope(v.ResourceTypesScope, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TagKeyScope != nil {
+		ok := object.Key("TagKeyScope")
+		ok.String(*v.TagKeyScope)
+	}
+
+	if v.TagValueScope != nil {
+		ok := object.Key("TagValueScope")
+		ok.String(*v.TagValueScope)
+	}
+
 	return nil
 }
 
@@ -5915,6 +6137,13 @@ func awsAwsjson11_serializeDocumentScope(v *types.Scope, value smithyjson.Value)
 func awsAwsjson11_serializeDocumentSource(v *types.Source, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.CustomPolicyDetails != nil {
+		ok := object.Key("CustomPolicyDetails")
+		if err := awsAwsjson11_serializeDocumentCustomPolicyDetails(v.CustomPolicyDetails, ok); err != nil {
+			return err
+		}
+	}
 
 	if len(v.Owner) > 0 {
 		ok := object.Key("Owner")
@@ -7235,6 +7464,18 @@ func awsAwsjson11_serializeOpDocumentGetConformancePackComplianceSummaryInput(v 
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentGetCustomRulePolicyInput(v *GetCustomRulePolicyInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ConfigRuleName != nil {
+		ok := object.Key("ConfigRuleName")
+		ok.String(*v.ConfigRuleName)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentGetDiscoveredResourceCountsInput(v *GetDiscoveredResourceCountsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -7312,6 +7553,18 @@ func awsAwsjson11_serializeOpDocumentGetOrganizationConformancePackDetailedStatu
 	if v.OrganizationConformancePackName != nil {
 		ok := object.Key("OrganizationConformancePackName")
 		ok.String(*v.OrganizationConformancePackName)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentGetOrganizationCustomRulePolicyInput(v *GetOrganizationCustomRulePolicyInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.OrganizationConfigRuleName != nil {
+		ok := object.Key("OrganizationConfigRuleName")
+		ok.String(*v.OrganizationConfigRuleName)
 	}
 
 	return nil
@@ -7685,6 +7938,13 @@ func awsAwsjson11_serializeOpDocumentPutOrganizationConfigRuleInput(v *PutOrgani
 	if v.OrganizationConfigRuleName != nil {
 		ok := object.Key("OrganizationConfigRuleName")
 		ok.String(*v.OrganizationConfigRuleName)
+	}
+
+	if v.OrganizationCustomPolicyRuleMetadata != nil {
+		ok := object.Key("OrganizationCustomPolicyRuleMetadata")
+		if err := awsAwsjson11_serializeDocumentOrganizationCustomPolicyRuleMetadata(v.OrganizationCustomPolicyRuleMetadata, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.OrganizationCustomRuleMetadata != nil {

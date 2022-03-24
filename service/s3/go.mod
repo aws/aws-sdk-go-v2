@@ -11,7 +11,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/internal/checksum v1.1.1
 	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.9.1
 	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v1.13.1
-	github.com/aws/smithy-go v1.11.1
+	github.com/aws/smithy-go v1.11.2
 	github.com/google/go-cmp v0.5.7
 )
 

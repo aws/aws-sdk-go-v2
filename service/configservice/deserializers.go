@@ -6033,6 +6033,117 @@ func awsAwsjson11_deserializeOpErrorGetConformancePackComplianceSummary(response
 	}
 }
 
+type awsAwsjson11_deserializeOpGetCustomRulePolicy struct {
+}
+
+func (*awsAwsjson11_deserializeOpGetCustomRulePolicy) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpGetCustomRulePolicy) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorGetCustomRulePolicy(response, &metadata)
+	}
+	output := &GetCustomRulePolicyOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentGetCustomRulePolicyOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorGetCustomRulePolicy(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("NoSuchConfigRuleException", errorCode):
+		return awsAwsjson11_deserializeErrorNoSuchConfigRuleException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsjson11_deserializeOpGetDiscoveredResourceCounts struct {
 }
 
@@ -6376,6 +6487,120 @@ func awsAwsjson11_deserializeOpErrorGetOrganizationConformancePackDetailedStatus
 
 	case strings.EqualFold("NoSuchOrganizationConformancePackException", errorCode):
 		return awsAwsjson11_deserializeErrorNoSuchOrganizationConformancePackException(response, errorBody)
+
+	case strings.EqualFold("OrganizationAccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorOrganizationAccessDeniedException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsjson11_deserializeOpGetOrganizationCustomRulePolicy struct {
+}
+
+func (*awsAwsjson11_deserializeOpGetOrganizationCustomRulePolicy) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpGetOrganizationCustomRulePolicy) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorGetOrganizationCustomRulePolicy(response, &metadata)
+	}
+	output := &GetOrganizationCustomRulePolicyOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentGetOrganizationCustomRulePolicyOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorGetOrganizationCustomRulePolicy(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("NoSuchOrganizationConfigRuleException", errorCode):
+		return awsAwsjson11_deserializeErrorNoSuchOrganizationConfigRuleException(response, errorBody)
 
 	case strings.EqualFold("OrganizationAccessDeniedException", errorCode):
 		return awsAwsjson11_deserializeErrorOrganizationAccessDeniedException(response, errorBody)
@@ -13570,6 +13795,40 @@ func awsAwsjson11_deserializeDocumentConfigRuleEvaluationStatus(v **types.Config
 				}
 			}
 
+		case "LastDebugLogDeliveryStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.LastDebugLogDeliveryStatus = ptr.String(jtv)
+			}
+
+		case "LastDebugLogDeliveryStatusReason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.LastDebugLogDeliveryStatusReason = ptr.String(jtv)
+			}
+
+		case "LastDebugLogDeliveryTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastDebugLogDeliveryTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Date to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "LastErrorCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15179,6 +15438,100 @@ func awsAwsjson11_deserializeDocumentControlsList(v *[]string, value interface{}
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected StringWithCharLimit128 to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentCustomPolicyDetails(v **types.CustomPolicyDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CustomPolicyDetails
+	if *v == nil {
+		sv = &types.CustomPolicyDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "EnableDebugLogDelivery":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.EnableDebugLogDelivery = jtv
+			}
+
+		case "PolicyRuntime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PolicyRuntime to be of type string, got %T instead", value)
+				}
+				sv.PolicyRuntime = ptr.String(jtv)
+			}
+
+		case "PolicyText":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PolicyText to be of type string, got %T instead", value)
+				}
+				sv.PolicyText = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentDebugLogDeliveryAccounts(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
 			}
 			col = jtv
 		}
@@ -18180,6 +18533,11 @@ func awsAwsjson11_deserializeDocumentOrganizationConfigRule(v **types.Organizati
 				sv.OrganizationConfigRuleName = ptr.String(jtv)
 			}
 
+		case "OrganizationCustomPolicyRuleMetadata":
+			if err := awsAwsjson11_deserializeDocumentOrganizationCustomPolicyRuleMetadataNoPolicy(&sv.OrganizationCustomPolicyRuleMetadata, value); err != nil {
+				return err
+			}
+
 		case "OrganizationCustomRuleMetadata":
 			if err := awsAwsjson11_deserializeDocumentOrganizationCustomRuleMetadata(&sv.OrganizationCustomRuleMetadata, value); err != nil {
 				return err
@@ -18377,6 +18735,42 @@ func awsAwsjson11_deserializeDocumentOrganizationConfigRuleStatuses(v *[]types.O
 			return err
 		}
 		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentOrganizationConfigRuleTriggerTypeNoSNs(v *[]types.OrganizationConfigRuleTriggerTypeNoSN, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.OrganizationConfigRuleTriggerTypeNoSN
+	if *v == nil {
+		cv = []types.OrganizationConfigRuleTriggerTypeNoSN{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.OrganizationConfigRuleTriggerTypeNoSN
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected OrganizationConfigRuleTriggerTypeNoSN to be of type string, got %T instead", value)
+			}
+			col = types.OrganizationConfigRuleTriggerTypeNoSN(jtv)
+		}
 		cv = append(cv, col)
 
 	}
@@ -18819,6 +19213,115 @@ func awsAwsjson11_deserializeDocumentOrganizationConformancePackTemplateValidati
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentOrganizationCustomPolicyRuleMetadataNoPolicy(v **types.OrganizationCustomPolicyRuleMetadataNoPolicy, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OrganizationCustomPolicyRuleMetadataNoPolicy
+	if *v == nil {
+		sv = &types.OrganizationCustomPolicyRuleMetadataNoPolicy{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DebugLogDeliveryAccounts":
+			if err := awsAwsjson11_deserializeDocumentDebugLogDeliveryAccounts(&sv.DebugLogDeliveryAccounts, value); err != nil {
+				return err
+			}
+
+		case "Description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StringWithCharLimit256Min0 to be of type string, got %T instead", value)
+				}
+				sv.Description = ptr.String(jtv)
+			}
+
+		case "InputParameters":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StringWithCharLimit2048 to be of type string, got %T instead", value)
+				}
+				sv.InputParameters = ptr.String(jtv)
+			}
+
+		case "MaximumExecutionFrequency":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MaximumExecutionFrequency to be of type string, got %T instead", value)
+				}
+				sv.MaximumExecutionFrequency = types.MaximumExecutionFrequency(jtv)
+			}
+
+		case "OrganizationConfigRuleTriggerTypes":
+			if err := awsAwsjson11_deserializeDocumentOrganizationConfigRuleTriggerTypeNoSNs(&sv.OrganizationConfigRuleTriggerTypes, value); err != nil {
+				return err
+			}
+
+		case "PolicyRuntime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PolicyRuntime to be of type string, got %T instead", value)
+				}
+				sv.PolicyRuntime = ptr.String(jtv)
+			}
+
+		case "ResourceIdScope":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StringWithCharLimit768 to be of type string, got %T instead", value)
+				}
+				sv.ResourceIdScope = ptr.String(jtv)
+			}
+
+		case "ResourceTypesScope":
+			if err := awsAwsjson11_deserializeDocumentResourceTypesScope(&sv.ResourceTypesScope, value); err != nil {
+				return err
+			}
+
+		case "TagKeyScope":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StringWithCharLimit128 to be of type string, got %T instead", value)
+				}
+				sv.TagKeyScope = ptr.String(jtv)
+			}
+
+		case "TagValueScope":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StringWithCharLimit256 to be of type string, got %T instead", value)
+				}
+				sv.TagValueScope = ptr.String(jtv)
 			}
 
 		default:
@@ -20870,6 +21373,11 @@ func awsAwsjson11_deserializeDocumentSource(v **types.Source, value interface{})
 
 	for key, value := range shape {
 		switch key {
+		case "CustomPolicyDetails":
+			if err := awsAwsjson11_deserializeDocumentCustomPolicyDetails(&sv.CustomPolicyDetails, value); err != nil {
+				return err
+			}
+
 		case "Owner":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -23426,6 +23934,46 @@ func awsAwsjson11_deserializeOpDocumentGetConformancePackComplianceSummaryOutput
 	return nil
 }
 
+func awsAwsjson11_deserializeOpDocumentGetCustomRulePolicyOutput(v **GetCustomRulePolicyOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *GetCustomRulePolicyOutput
+	if *v == nil {
+		sv = &GetCustomRulePolicyOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "PolicyText":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PolicyText to be of type string, got %T instead", value)
+				}
+				sv.PolicyText = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeOpDocumentGetDiscoveredResourceCountsOutput(v **GetDiscoveredResourceCountsOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -23563,6 +24111,46 @@ func awsAwsjson11_deserializeOpDocumentGetOrganizationConformancePackDetailedSta
 		case "OrganizationConformancePackDetailedStatuses":
 			if err := awsAwsjson11_deserializeDocumentOrganizationConformancePackDetailedStatuses(&sv.OrganizationConformancePackDetailedStatuses, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeOpDocumentGetOrganizationCustomRulePolicyOutput(v **GetOrganizationCustomRulePolicyOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *GetOrganizationCustomRulePolicyOutput
+	if *v == nil {
+		sv = &GetOrganizationCustomRulePolicyOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "PolicyText":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PolicyText to be of type string, got %T instead", value)
+				}
+				sv.PolicyText = ptr.String(jtv)
 			}
 
 		default:

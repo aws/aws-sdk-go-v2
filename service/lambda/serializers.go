@@ -692,6 +692,13 @@ func awsRestjson1_serializeOpDocumentCreateFunctionInput(v *CreateFunctionInput,
 		}
 	}
 
+	if v.EphemeralStorage != nil {
+		ok := object.Key("EphemeralStorage")
+		if err := awsRestjson1_serializeDocumentEphemeralStorage(v.EphemeralStorage, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.FileSystemConfigs != nil {
 		ok := object.Key("FileSystemConfigs")
 		if err := awsRestjson1_serializeDocumentFileSystemConfigList(v.FileSystemConfigs, ok); err != nil {
@@ -4448,6 +4455,13 @@ func awsRestjson1_serializeOpDocumentUpdateFunctionConfigurationInput(v *UpdateF
 		}
 	}
 
+	if v.EphemeralStorage != nil {
+		ok := object.Key("EphemeralStorage")
+		if err := awsRestjson1_serializeDocumentEphemeralStorage(v.EphemeralStorage, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.FileSystemConfigs != nil {
 		ok := object.Key("FileSystemConfigs")
 		if err := awsRestjson1_serializeDocumentFileSystemConfigList(v.FileSystemConfigs, ok); err != nil {
@@ -4797,6 +4811,18 @@ func awsRestjson1_serializeDocumentEnvironmentVariables(v map[string]string, val
 		om := object.Key(key)
 		om.String(v[key])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEphemeralStorage(v *types.EphemeralStorage, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Size != nil {
+		ok := object.Key("Size")
+		ok.Integer(*v.Size)
+	}
+
 	return nil
 }
 

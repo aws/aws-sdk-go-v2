@@ -132,7 +132,7 @@ type CallAnalyticsJob struct {
 	// following media formats are supported: MP3, MP4, WAV, FLAC, OGG, and WebM.
 	MediaFormat MediaFormat
 
-	// The sample rate, in Hertz, of the audio.
+	// The sample rate, in Hertz, of the input audio.
 	MediaSampleRateHertz *int32
 
 	// Provides information about the settings used to run a transcription job.
@@ -860,22 +860,35 @@ type Settings struct {
 	noSmithyDocumentSerde
 }
 
-// Generate subtitles for your batch transcription job.
+// Generate subtitles for your batch transcription job. Note that your subtitle
+// files are placed in the same location as your transcription output.
 type Subtitles struct {
 
-	// Specify the output format for your subtitle file.
+	// Specify the output format for your subtitle file; if you select both srt and vtt
+	// formats, two output files are generated.
 	Formats []SubtitleFormat
+
+	// Defines the starting value that is assigned to the first subtitle segment. The
+	// default start index for Amazon Transcribe is 0, which differs from the more
+	// widely used standard of 1. If you're uncertain which value to use, we recommend
+	// choosing 1, as this may improve compatibility with other services.
+	OutputStartIndex *int32
 
 	noSmithyDocumentSerde
 }
 
-// Choose the output format for your subtitle file and the S3 location where you
-// want your file saved.
+// The S3 location where your subtitle files are located. Note that your subtitle
+// files are placed in the same location as your transcription output. Refer to
+// TranscriptFileUri to download your files.
 type SubtitlesOutput struct {
 
-	// Specify the output format for your subtitle file; if you select both SRT and VTT
-	// formats, two output files are generated.
+	// The format of your subtitle files. If your request specified both srt and vtt
+	// formats, both formats are shown.
 	Formats []SubtitleFormat
+
+	// Shows the output start index value for your subtitle files. If you did not
+	// specify a value in your request, the default value of 0 is used.
+	OutputStartIndex *int32
 
 	// Contains the output location for your subtitle file. This location must be an S3
 	// bucket.

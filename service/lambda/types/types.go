@@ -221,6 +221,18 @@ type EnvironmentResponse struct {
 	noSmithyDocumentSerde
 }
 
+// The size of the function’s /tmp directory in MB. The default value is 512, but
+// can be any whole number between 512 and 10240 MB.
+type EphemeralStorage struct {
+
+	// The size of the function’s /tmp directory.
+	//
+	// This member is required.
+	Size *int32
+
+	noSmithyDocumentSerde
+}
+
 // A mapping between an Amazon Web Services resource and a Lambda function. For
 // details, see CreateEventSourceMapping.
 type EventSourceMappingConfiguration struct {
@@ -433,6 +445,10 @@ type FunctionConfiguration struct {
 	// The function's environment variables
 	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html).
 	Environment *EnvironmentResponse
+
+	// The size of the function’s /tmp directory in MB. The default value is 512, but
+	// can be any whole number between 512 and 10240 MB.
+	EphemeralStorage *EphemeralStorage
 
 	// Connection settings for an Amazon EFS file system
 	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html).

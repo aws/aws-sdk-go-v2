@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified organization conformance pack and all of the config rules
+// Deletes the specified organization conformance pack and all of the Config rules
 // and remediation actions from all member accounts in that organization. Only a
 // master account or a delegated administrator account can delete an organization
 // conformance pack. When calling this API with a delegated administrator, you must

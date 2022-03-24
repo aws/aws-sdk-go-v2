@@ -730,6 +730,26 @@ func (m *validateOpGetOrganizationConformancePackDetailedStatus) HandleInitializ
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetOrganizationCustomRulePolicy struct {
+}
+
+func (*validateOpGetOrganizationCustomRulePolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetOrganizationCustomRulePolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetOrganizationCustomRulePolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetOrganizationCustomRulePolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetResourceConfigHistory struct {
 }
 
@@ -1414,6 +1434,10 @@ func addOpGetOrganizationConformancePackDetailedStatusValidationMiddleware(stack
 	return stack.Initialize.Add(&validateOpGetOrganizationConformancePackDetailedStatus{}, middleware.After)
 }
 
+func addOpGetOrganizationCustomRulePolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetOrganizationCustomRulePolicy{}, middleware.After)
+}
+
 func addOpGetResourceConfigHistoryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetResourceConfigHistory{}, middleware.After)
 }
@@ -1632,6 +1656,24 @@ func validateConformancePackInputParameters(v []types.ConformancePackInputParame
 	}
 }
 
+func validateCustomPolicyDetails(v *types.CustomPolicyDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomPolicyDetails"}
+	if v.PolicyRuntime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyRuntime"))
+	}
+	if v.PolicyText == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyText"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateEvaluation(v *types.Evaluation) error {
 	if v == nil {
 		return nil
@@ -1704,6 +1746,24 @@ func validateOrganizationAggregationSource(v *types.OrganizationAggregationSourc
 	invalidParams := smithy.InvalidParamsError{Context: "OrganizationAggregationSource"}
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOrganizationCustomPolicyRuleMetadata(v *types.OrganizationCustomPolicyRuleMetadata) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OrganizationCustomPolicyRuleMetadata"}
+	if v.PolicyRuntime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyRuntime"))
+	}
+	if v.PolicyText == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyText"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1903,8 +1963,10 @@ func validateSource(v *types.Source) error {
 	if len(v.Owner) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Owner"))
 	}
-	if v.SourceIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SourceIdentifier"))
+	if v.CustomPolicyDetails != nil {
+		if err := validateCustomPolicyDetails(v.CustomPolicyDetails); err != nil {
+			invalidParams.AddNested("CustomPolicyDetails", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2530,6 +2592,21 @@ func validateOpGetOrganizationConformancePackDetailedStatusInput(v *GetOrganizat
 	}
 }
 
+func validateOpGetOrganizationCustomRulePolicyInput(v *GetOrganizationCustomRulePolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetOrganizationCustomRulePolicyInput"}
+	if v.OrganizationConfigRuleName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationConfigRuleName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetResourceConfigHistoryInput(v *GetResourceConfigHistoryInput) error {
 	if v == nil {
 		return nil
@@ -2781,6 +2858,11 @@ func validateOpPutOrganizationConfigRuleInput(v *PutOrganizationConfigRuleInput)
 	if v.OrganizationCustomRuleMetadata != nil {
 		if err := validateOrganizationCustomRuleMetadata(v.OrganizationCustomRuleMetadata); err != nil {
 			invalidParams.AddNested("OrganizationCustomRuleMetadata", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OrganizationCustomPolicyRuleMetadata != nil {
+		if err := validateOrganizationCustomPolicyRuleMetadata(v.OrganizationCustomPolicyRuleMetadata); err != nil {
+			invalidParams.AddNested("OrganizationCustomPolicyRuleMetadata", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

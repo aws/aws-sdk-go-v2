@@ -63,7 +63,7 @@ func (e *InsufficientDeliveryPolicyException) ErrorFault() smithy.ErrorFault {
 // Check the function ARN, and check the function's permissions.
 //
 // * For
-// PutOrganizationConfigRule, organization config rule cannot be created because
+// PutOrganizationConfigRule, organization Config rule cannot be created because
 // you do not have permissions to call IAM GetRole action or create a service
 // linked role.
 //
@@ -519,7 +519,7 @@ func (e *MaxNumberOfDeliveryChannelsExceededException) ErrorFault() smithy.Error
 	return smithy.FaultClient
 }
 
-// You have reached the limit of the number of organization config rules you can
+// You have reached the limit of the number of organization Config rules you can
 // create.
 type MaxNumberOfOrganizationConfigRulesExceededException struct {
 	Message *string
@@ -701,8 +701,9 @@ func (e *NoSuchBucketException) ErrorMessage() string {
 func (e *NoSuchBucketException) ErrorCode() string             { return "NoSuchBucketException" }
 func (e *NoSuchBucketException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// One or more Config rules in the request are invalid. Verify that the rule names
-// are correct and try again.
+// The Config rule in the request is not valid. Verify that the rule is an Config
+// Custom Policy rule, that the rule name is correct, and that valid Amazon Resouce
+// Names (ARNs) are used before trying again.
 type NoSuchConfigRuleException struct {
 	Message *string
 
@@ -828,7 +829,9 @@ func (e *NoSuchDeliveryChannelException) ErrorMessage() string {
 func (e *NoSuchDeliveryChannelException) ErrorCode() string             { return "NoSuchDeliveryChannelException" }
 func (e *NoSuchDeliveryChannelException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You specified one or more organization config rules that do not exist.
+// The Config rule in the request is not valid. Verify that the rule is an
+// organization Config Custom Policy rule, that the rule name is correct, and that
+// valid Amazon Resouce Names (ARNs) are used before trying again.
 type NoSuchOrganizationConfigRuleException struct {
 	Message *string
 
@@ -1118,11 +1121,11 @@ func (e *ResourceConcurrentModificationException) ErrorFault() smithy.ErrorFault
 // the rule before deleting the rule and try your request again later.
 //
 // * For
-// PutConfigOrganizationRule, organization config rule deletion is in progress. Try
+// PutConfigOrganizationRule, organization Config rule deletion is in progress. Try
 // your request again later.
 //
 // * For DeleteOrganizationConfigRule, organization
-// config rule creation is in progress. Try your request again later.
+// Config rule creation is in progress. Try your request again later.
 //
 // * For
 // PutConformancePack and PutOrganizationConformancePack, a conformance pack

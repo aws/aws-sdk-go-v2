@@ -2748,6 +2748,11 @@ func awsAwsjson11_serializeDocumentSubtitles(v *types.Subtitles, value smithyjso
 		}
 	}
 
+	if v.OutputStartIndex != nil {
+		ok := object.Key("OutputStartIndex")
+		ok.Integer(*v.OutputStartIndex)
+	}
+
 	return nil
 }
 

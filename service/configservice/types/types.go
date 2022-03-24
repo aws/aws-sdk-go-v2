@@ -599,10 +599,10 @@ type ConfigRuleComplianceSummaryFilters struct {
 	noSmithyDocumentSerde
 }
 
-// Status information for your Config managed rules. The status includes
-// information such as the last time the rule ran, the last time it failed, and the
-// related error for the last failure. This action does not return status
-// information about custom Config rules.
+// Status information for your Config Managed rules and Config Custom Policy rules.
+// The status includes information such as the last time the rule ran, the last
+// time it failed, and the related error for the last failure. This action does not
+// return status information about Config Custom Lambda rules.
 type ConfigRuleEvaluationStatus struct {
 
 	// The Amazon Resource Name (ARN) of the Config rule.
@@ -623,12 +623,24 @@ type ConfigRuleEvaluationStatus struct {
 	// * true - Config has evaluated your Amazon Web Services resources against
 	// the rule at least once.
 	//
-	// * false - Config has not once finished evaluating your
-	// Amazon Web Services resources against the rule.
+	// * false - Config has not finished evaluating your
+	// Amazon Web Services resources against the rule at least once.
 	FirstEvaluationStarted bool
 
 	// The time that you last turned off the Config rule.
 	LastDeactivatedTime *time.Time
+
+	// The status of the last attempted delivery of a debug log for your Config Custom
+	// Policy rules. Either Successful or Failed.
+	LastDebugLogDeliveryStatus *string
+
+	// The reason Config was not able to deliver a debug log. This is for the last
+	// failed attempt to retrieve a debug log for your Config Custom Policy rules.
+	LastDebugLogDeliveryStatusReason *string
+
+	// The time Config last attempted to deliver a debug log for your Config Custom
+	// Policy rules.
+	LastDebugLogDeliveryTime *time.Time
 
 	// The error code that Config returned when the rule last failed.
 	LastErrorCode *string
@@ -1040,7 +1052,7 @@ type ConformancePackRuleCompliance struct {
 	// and INSUFFICIENT_DATA.
 	ComplianceType ConformancePackComplianceType
 
-	// Name of the config rule.
+	// Name of the Config rule.
 	ConfigRuleName *string
 
 	// Controls for the conformance pack. A control is a process to prevent or detect
@@ -1105,6 +1117,31 @@ type ConformancePackStatusDetail struct {
 
 	// Last time when conformation pack creation and update was successful.
 	LastUpdateCompletedTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Provides the runtime system, policy definition, and whether debug logging
+// enabled. You can specify the following CustomPolicyDetails parameter values only
+// for Config Custom Policy rules.
+type CustomPolicyDetails struct {
+
+	// The runtime system for your Config Custom Policy rule. Guard is a policy-as-code
+	// language that allows you to write policies that are enforced by Config Custom
+	// Policy rules. For more information about Guard, see the Guard GitHub Repository
+	// (https://github.com/aws-cloudformation/cloudformation-guard).
+	//
+	// This member is required.
+	PolicyRuntime *string
+
+	// The policy definition containing the logic for your Config Custom Policy rule.
+	//
+	// This member is required.
+	PolicyText *string
+
+	// The boolean expression for enabling debug logging for your Config Custom Policy
+	// rule. The default value is false.
+	EnableDebugLogDelivery bool
 
 	noSmithyDocumentSerde
 }
@@ -1382,7 +1419,7 @@ type GroupedResourceCount struct {
 	noSmithyDocumentSerde
 }
 
-// Organization config rule creation or deletion status in each member account.
+// Organization Config rule creation or deletion status in each member account.
 // This includes the name of the rule, the status, error code and error message
 // when the rule creation or deletion failed.
 type MemberAccountStatus struct {
@@ -1392,54 +1429,54 @@ type MemberAccountStatus struct {
 	// This member is required.
 	AccountId *string
 
-	// The name of config rule deployed in the member account.
+	// The name of Config rule deployed in the member account.
 	//
 	// This member is required.
 	ConfigRuleName *string
 
-	// Indicates deployment status for config rule in the member account. When master
-	// account calls PutOrganizationConfigRule action for the first time, config rule
+	// Indicates deployment status for Config rule in the member account. When master
+	// account calls PutOrganizationConfigRule action for the first time, Config rule
 	// status is created in the member account. When master account calls
-	// PutOrganizationConfigRule action for the second time, config rule status is
+	// PutOrganizationConfigRule action for the second time, Config rule status is
 	// updated in the member account. Config rule status is deleted when the master
 	// account deletes OrganizationConfigRule and disables service access for
 	// config-multiaccountsetup.amazonaws.com. Config sets the state of the rule to:
 	//
 	// *
-	// CREATE_SUCCESSFUL when config rule has been created in the member account.
+	// CREATE_SUCCESSFUL when Config rule has been created in the member account.
 	//
 	// *
-	// CREATE_IN_PROGRESS when config rule is being created in the member account.
+	// CREATE_IN_PROGRESS when Config rule is being created in the member account.
 	//
 	// *
-	// CREATE_FAILED when config rule creation has failed in the member account.
+	// CREATE_FAILED when Config rule creation has failed in the member account.
 	//
 	// *
-	// DELETE_FAILED when config rule deletion has failed in the member account.
+	// DELETE_FAILED when Config rule deletion has failed in the member account.
 	//
 	// *
-	// DELETE_IN_PROGRESS when config rule is being deleted in the member account.
+	// DELETE_IN_PROGRESS when Config rule is being deleted in the member account.
 	//
 	// *
-	// DELETE_SUCCESSFUL when config rule has been deleted in the member account.
+	// DELETE_SUCCESSFUL when Config rule has been deleted in the member account.
 	//
 	// *
-	// UPDATE_SUCCESSFUL when config rule has been updated in the member account.
+	// UPDATE_SUCCESSFUL when Config rule has been updated in the member account.
 	//
 	// *
-	// UPDATE_IN_PROGRESS when config rule is being updated in the member account.
+	// UPDATE_IN_PROGRESS when Config rule is being updated in the member account.
 	//
 	// *
-	// UPDATE_FAILED when config rule deletion has failed in the member account.
+	// UPDATE_FAILED when Config rule deletion has failed in the member account.
 	//
 	// This member is required.
 	MemberAccountRuleStatus MemberAccountRuleStatus
 
-	// An error code that is returned when config rule creation or deletion failed in
+	// An error code that is returned when Config rule creation or deletion failed in
 	// the member account.
 	ErrorCode *string
 
-	// An error message indicating that config rule account creation or deletion has
+	// An error message indicating that Config rule account creation or deletion has
 	// failed due to an error in the member account.
 	ErrorMessage *string
 
@@ -1468,25 +1505,32 @@ type OrganizationAggregationSource struct {
 	noSmithyDocumentSerde
 }
 
-// An organization config rule that has information about config rules that Config
+// An organization Config rule that has information about Config rules that Config
 // creates in member accounts.
 type OrganizationConfigRule struct {
 
-	// Amazon Resource Name (ARN) of organization config rule.
+	// Amazon Resource Name (ARN) of organization Config rule.
 	//
 	// This member is required.
 	OrganizationConfigRuleArn *string
 
-	// The name that you assign to organization config rule.
+	// The name that you assign to organization Config rule.
 	//
 	// This member is required.
 	OrganizationConfigRuleName *string
 
-	// A comma-separated list of accounts excluded from organization config rule.
+	// A comma-separated list of accounts excluded from organization Config rule.
 	ExcludedAccounts []string
 
 	// The timestamp of the last update.
 	LastUpdateTime *time.Time
+
+	// An object that specifies metadata for your organization's Config Custom Policy
+	// rule. The metadata includes the runtime system in use, which accounts have debug
+	// logging enabled, and other custom rule metadata, such as resource type, resource
+	// ID of Amazon Web Services resource, and organization trigger types that initiate
+	// Config to evaluate Amazon Web Services resources against a rule.
+	OrganizationCustomPolicyRuleMetadata *OrganizationCustomPolicyRuleMetadataNoPolicy
 
 	// An OrganizationCustomRuleMetadata object.
 	OrganizationCustomRuleMetadata *OrganizationCustomRuleMetadata
@@ -1497,63 +1541,63 @@ type OrganizationConfigRule struct {
 	noSmithyDocumentSerde
 }
 
-// Returns the status for an organization config rule in an organization.
+// Returns the status for an organization Config rule in an organization.
 type OrganizationConfigRuleStatus struct {
 
-	// The name that you assign to organization config rule.
+	// The name that you assign to organization Config rule.
 	//
 	// This member is required.
 	OrganizationConfigRuleName *string
 
-	// Indicates deployment status of an organization config rule. When master account
-	// calls PutOrganizationConfigRule action for the first time, config rule status is
+	// Indicates deployment status of an organization Config rule. When master account
+	// calls PutOrganizationConfigRule action for the first time, Config rule status is
 	// created in all the member accounts. When master account calls
-	// PutOrganizationConfigRule action for the second time, config rule status is
-	// updated in all the member accounts. Additionally, config rule status is updated
+	// PutOrganizationConfigRule action for the second time, Config rule status is
+	// updated in all the member accounts. Additionally, Config rule status is updated
 	// when one or more member accounts join or leave an organization. Config rule
 	// status is deleted when the master account deletes OrganizationConfigRule in all
 	// the member accounts and disables service access for
 	// config-multiaccountsetup.amazonaws.com. Config sets the state of the rule to:
 	//
 	// *
-	// CREATE_SUCCESSFUL when an organization config rule has been successfully created
+	// CREATE_SUCCESSFUL when an organization Config rule has been successfully created
 	// in all the member accounts.
 	//
-	// * CREATE_IN_PROGRESS when an organization config
+	// * CREATE_IN_PROGRESS when an organization Config
 	// rule creation is in progress.
 	//
-	// * CREATE_FAILED when an organization config rule
+	// * CREATE_FAILED when an organization Config rule
 	// creation failed in one or more member accounts within that organization.
 	//
 	// *
-	// DELETE_FAILED when an organization config rule deletion failed in one or more
+	// DELETE_FAILED when an organization Config rule deletion failed in one or more
 	// member accounts within that organization.
 	//
 	// * DELETE_IN_PROGRESS when an
-	// organization config rule deletion is in progress.
+	// organization Config rule deletion is in progress.
 	//
 	// * DELETE_SUCCESSFUL when an
-	// organization config rule has been successfully deleted from all the member
+	// organization Config rule has been successfully deleted from all the member
 	// accounts.
 	//
-	// * UPDATE_SUCCESSFUL when an organization config rule has been
+	// * UPDATE_SUCCESSFUL when an organization Config rule has been
 	// successfully updated in all the member accounts.
 	//
 	// * UPDATE_IN_PROGRESS when an
-	// organization config rule update is in progress.
+	// organization Config rule update is in progress.
 	//
 	// * UPDATE_FAILED when an
-	// organization config rule update failed in one or more member accounts within
+	// organization Config rule update failed in one or more member accounts within
 	// that organization.
 	//
 	// This member is required.
 	OrganizationRuleStatus OrganizationRuleStatus
 
-	// An error code that is returned when organization config rule creation or
+	// An error code that is returned when organization Config rule creation or
 	// deletion has failed.
 	ErrorCode *string
 
-	// An error message indicating that organization config rule creation or deletion
+	// An error message indicating that organization Config rule creation or deletion
 	// failed due to an error.
 	ErrorMessage *string
 
@@ -1735,6 +1779,138 @@ type OrganizationConformancePackStatus struct {
 	noSmithyDocumentSerde
 }
 
+// An object that specifies metadata for your organization's Config Custom Policy
+// rule. The metadata includes the runtime system in use, which accounts have debug
+// logging enabled, and other custom rule metadata, such as resource type, resource
+// ID of Amazon Web Services resource, and organization trigger types that initiate
+// Config to evaluate Amazon Web Services resources against a rule.
+type OrganizationCustomPolicyRuleMetadata struct {
+
+	// The runtime system for your organization Config Custom Policy rules. Guard is a
+	// policy-as-code language that allows you to write policies that are enforced by
+	// Config Custom Policy rules. For more information about Guard, see the Guard
+	// GitHub Repository (https://github.com/aws-cloudformation/cloudformation-guard).
+	//
+	// This member is required.
+	PolicyRuntime *string
+
+	// The policy definition containing the logic for your organization Config Custom
+	// Policy rule.
+	//
+	// This member is required.
+	PolicyText *string
+
+	// A list of accounts that you can enable debug logging for your organization
+	// Config Custom Policy rule. List is null when debug logging is enabled for all
+	// accounts.
+	DebugLogDeliveryAccounts []string
+
+	// The description that you provide for your organization Config Custom Policy
+	// rule.
+	Description *string
+
+	// A string, in JSON format, that is passed to your organization Config Custom
+	// Policy rule.
+	InputParameters *string
+
+	// The maximum frequency with which Config runs evaluations for a rule. Your Config
+	// Custom Policy rule is triggered when Config delivers the configuration snapshot.
+	// For more information, see ConfigSnapshotDeliveryProperties.
+	MaximumExecutionFrequency MaximumExecutionFrequency
+
+	// The type of notification that initiates Config to run an evaluation for a rule.
+	// For Config Custom Policy rules, Config supports change-initiated notification
+	// types:
+	//
+	// * ConfigurationItemChangeNotification - Initiates an evaluation when
+	// Config delivers a configuration item as a result of a resource change.
+	//
+	// *
+	// OversizedConfigurationItemChangeNotification - Initiates an evaluation when
+	// Config delivers an oversized configuration item. Config may generate this
+	// notification type when a resource changes and the notification exceeds the
+	// maximum size allowed by Amazon SNS.
+	OrganizationConfigRuleTriggerTypes []OrganizationConfigRuleTriggerTypeNoSN
+
+	// The ID of the Amazon Web Services resource that was evaluated.
+	ResourceIdScope *string
+
+	// The type of the Amazon Web Services resource that was evaluated.
+	ResourceTypesScope []string
+
+	// One part of a key-value pair that make up a tag. A key is a general label that
+	// acts like a category for more specific tag values.
+	TagKeyScope *string
+
+	// The optional part of a key-value pair that make up a tag. A value acts as a
+	// descriptor within a tag category (key).
+	TagValueScope *string
+
+	noSmithyDocumentSerde
+}
+
+// An object that specifies metadata for your organization Config Custom Policy
+// rule including the runtime system in use, which accounts have debug logging
+// enabled, and other custom rule metadata such as resource type, resource ID of
+// Amazon Web Services resource, and organization trigger types that trigger Config
+// to evaluate Amazon Web Services resources against a rule.
+type OrganizationCustomPolicyRuleMetadataNoPolicy struct {
+
+	// A list of accounts that you can enable debug logging for your organization
+	// Config Custom Policy rule. List is null when debug logging is enabled for all
+	// accounts.
+	DebugLogDeliveryAccounts []string
+
+	// The description that you provide for your organization Config Custom Policy
+	// rule.
+	Description *string
+
+	// A string, in JSON format, that is passed to your organization Config Custom
+	// Policy rule.
+	InputParameters *string
+
+	// The maximum frequency with which Config runs evaluations for a rule. Your Config
+	// Custom Policy rule is triggered when Config delivers the configuration snapshot.
+	// For more information, see ConfigSnapshotDeliveryProperties.
+	MaximumExecutionFrequency MaximumExecutionFrequency
+
+	// The type of notification that triggers Config to run an evaluation for a rule.
+	// For Config Custom Policy rules, Config supports change triggered notification
+	// types:
+	//
+	// * ConfigurationItemChangeNotification - Triggers an evaluation when
+	// Config delivers a configuration item as a result of a resource change.
+	//
+	// *
+	// OversizedConfigurationItemChangeNotification - Triggers an evaluation when
+	// Config delivers an oversized configuration item. Config may generate this
+	// notification type when a resource changes and the notification exceeds the
+	// maximum size allowed by Amazon SNS.
+	OrganizationConfigRuleTriggerTypes []OrganizationConfigRuleTriggerTypeNoSN
+
+	// The runtime system for your organization Config Custom Policy rules. Guard is a
+	// policy-as-code language that allows you to write policies that are enforced by
+	// Config Custom Policy rules. For more information about Guard, see the Guard
+	// GitHub Repository (https://github.com/aws-cloudformation/cloudformation-guard).
+	PolicyRuntime *string
+
+	// The ID of the Amazon Web Services resource that was evaluated.
+	ResourceIdScope *string
+
+	// The type of the Amazon Web Services resource that was evaluated.
+	ResourceTypesScope []string
+
+	// One part of a key-value pair that make up a tag. A key is a general label that
+	// acts like a category for more specific tag values.
+	TagKeyScope *string
+
+	// The optional part of a key-value pair that make up a tag. A value acts as a
+	// descriptor within a tag category (key).
+	TagValueScope *string
+
+	noSmithyDocumentSerde
+}
+
 // An object that specifies organization custom rule metadata such as resource
 // type, resource ID of Amazon Web Services resource, Lambda function ARN, and
 // organization trigger types that trigger Config to evaluate your Amazon Web
@@ -1766,10 +1942,10 @@ type OrganizationCustomRuleMetadata struct {
 	// This member is required.
 	OrganizationConfigRuleTriggerTypes []OrganizationConfigRuleTriggerType
 
-	// The description that you provide for organization config rule.
+	// The description that you provide for your organization Config rule.
 	Description *string
 
-	// A string, in JSON format, that is passed to organization config rule Lambda
+	// A string, in JSON format, that is passed to your organization Config rule Lambda
 	// function.
 	InputParameters *string
 
@@ -1811,10 +1987,10 @@ type OrganizationManagedRuleMetadata struct {
 	// This member is required.
 	RuleIdentifier *string
 
-	// The description that you provide for organization config rule.
+	// The description that you provide for your organization Config rule.
 	Description *string
 
-	// A string, in JSON format, that is passed to organization config rule Lambda
+	// A string, in JSON format, that is passed to your organization Config rule Lambda
 	// function.
 	InputParameters *string
 
@@ -2283,31 +2459,45 @@ type Scope struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the Config rule owner (Amazon Web Services or customer), the rule
-// identifier, and the events that trigger the evaluation of your Amazon Web
-// Services resources.
+// Provides the CustomPolicyDetails, the rule owner (Amazon Web Services or
+// customer), the rule identifier, and the events that cause the evaluation of your
+// Amazon Web Services resources.
 type Source struct {
 
 	// Indicates whether Amazon Web Services or the customer owns and manages the
-	// Config rule.
+	// Config rule. Config Managed Rules are predefined rules owned by Amazon Web
+	// Services. For more information, see Config Managed Rules
+	// (https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_use-managed-rules.html)
+	// in the Config developer guide. Config Custom Rules are rules that you can
+	// develop either with Guard (CUSTOM_POLICY) or Lambda (CUSTOM_LAMBDA). For more
+	// information, see Config Custom Rules
+	// (https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_develop-rules.html)
+	// in the Config developer guide.
 	//
 	// This member is required.
 	Owner Owner
 
-	// For Config managed rules, a predefined identifier from a list. For example,
-	// IAM_PASSWORD_POLICY is a managed rule. To reference a managed rule, see Using
-	// Config managed rules
-	// (https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_use-managed-rules.html).
-	// For custom rules, the identifier is the Amazon Resource Name (ARN) of the rule's
-	// Lambda function, such as
-	// arn:aws:lambda:us-east-2:123456789012:function:custom_rule_name.
-	//
-	// This member is required.
-	SourceIdentifier *string
+	// Provides the runtime system, policy definition, and whether debug logging is
+	// enabled. Required when owner is set to CUSTOM_POLICY.
+	CustomPolicyDetails *CustomPolicyDetails
 
-	// Provides the source and type of the event that causes Config to evaluate your
-	// Amazon Web Services resources.
+	// Provides the source and the message types that cause Config to evaluate your
+	// Amazon Web Services resources against a rule. It also provides the frequency
+	// with which you want Config to run evaluations for the rule if the trigger type
+	// is periodic. If the owner is set to CUSTOM_POLICY, the only acceptable values
+	// for the Config rule trigger message type are ConfigurationItemChangeNotification
+	// and OversizedConfigurationItemChangeNotification.
 	SourceDetails []SourceDetail
+
+	// For Config Managed rules, a predefined identifier from a list. For example,
+	// IAM_PASSWORD_POLICY is a managed rule. To reference a managed rule, see List of
+	// Config Managed Rules
+	// (https://docs.aws.amazon.com/config/latest/developerguide/managed-rules-by-aws-config.html).
+	// For Config Custom Lambda rules, the identifier is the Amazon Resource Name (ARN)
+	// of the rule's Lambda function, such as
+	// arn:aws:lambda:us-east-2:123456789012:function:custom_rule_name. For Config
+	// Custom Policy rules, this field will be ignored.
+	SourceIdentifier *string
 
 	noSmithyDocumentSerde
 }
@@ -2393,46 +2583,46 @@ type StaticValue struct {
 }
 
 // Status filter object to filter results based on specific member account ID or
-// status type for an organization config rule.
+// status type for an organization Config rule.
 type StatusDetailFilters struct {
 
 	// The 12-digit account ID of the member account within an organization.
 	AccountId *string
 
-	// Indicates deployment status for config rule in the member account. When master
-	// account calls PutOrganizationConfigRule action for the first time, config rule
+	// Indicates deployment status for Config rule in the member account. When master
+	// account calls PutOrganizationConfigRule action for the first time, Config rule
 	// status is created in the member account. When master account calls
-	// PutOrganizationConfigRule action for the second time, config rule status is
+	// PutOrganizationConfigRule action for the second time, Config rule status is
 	// updated in the member account. Config rule status is deleted when the master
 	// account deletes OrganizationConfigRule and disables service access for
 	// config-multiaccountsetup.amazonaws.com. Config sets the state of the rule to:
 	//
 	// *
-	// CREATE_SUCCESSFUL when config rule has been created in the member account.
+	// CREATE_SUCCESSFUL when Config rule has been created in the member account.
 	//
 	// *
-	// CREATE_IN_PROGRESS when config rule is being created in the member account.
+	// CREATE_IN_PROGRESS when Config rule is being created in the member account.
 	//
 	// *
-	// CREATE_FAILED when config rule creation has failed in the member account.
+	// CREATE_FAILED when Config rule creation has failed in the member account.
 	//
 	// *
-	// DELETE_FAILED when config rule deletion has failed in the member account.
+	// DELETE_FAILED when Config rule deletion has failed in the member account.
 	//
 	// *
-	// DELETE_IN_PROGRESS when config rule is being deleted in the member account.
+	// DELETE_IN_PROGRESS when Config rule is being deleted in the member account.
 	//
 	// *
-	// DELETE_SUCCESSFUL when config rule has been deleted in the member account.
+	// DELETE_SUCCESSFUL when Config rule has been deleted in the member account.
 	//
 	// *
-	// UPDATE_SUCCESSFUL when config rule has been updated in the member account.
+	// UPDATE_SUCCESSFUL when Config rule has been updated in the member account.
 	//
 	// *
-	// UPDATE_IN_PROGRESS when config rule is being updated in the member account.
+	// UPDATE_IN_PROGRESS when Config rule is being updated in the member account.
 	//
 	// *
-	// UPDATE_FAILED when config rule deletion has failed in the member account.
+	// UPDATE_FAILED when Config rule deletion has failed in the member account.
 	MemberAccountRuleStatus MemberAccountRuleStatus
 
 	noSmithyDocumentSerde

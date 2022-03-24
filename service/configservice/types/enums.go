@@ -344,6 +344,25 @@ func (OrganizationConfigRuleTriggerType) Values() []OrganizationConfigRuleTrigge
 	}
 }
 
+type OrganizationConfigRuleTriggerTypeNoSN string
+
+// Enum values for OrganizationConfigRuleTriggerTypeNoSN
+const (
+	OrganizationConfigRuleTriggerTypeNoSNConfigurationItemChangeNotification         OrganizationConfigRuleTriggerTypeNoSN = "ConfigurationItemChangeNotification"
+	OrganizationConfigRuleTriggerTypeNoSNOversizedConfigurationItemChangeNotifcation OrganizationConfigRuleTriggerTypeNoSN = "OversizedConfigurationItemChangeNotification"
+)
+
+// Values returns all known values for OrganizationConfigRuleTriggerTypeNoSN. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (OrganizationConfigRuleTriggerTypeNoSN) Values() []OrganizationConfigRuleTriggerTypeNoSN {
+	return []OrganizationConfigRuleTriggerTypeNoSN{
+		"ConfigurationItemChangeNotification",
+		"OversizedConfigurationItemChangeNotification",
+	}
+}
+
 type OrganizationResourceDetailedStatus string
 
 // Enum values for OrganizationResourceDetailedStatus
@@ -447,6 +466,7 @@ type Owner string
 const (
 	OwnerCustomLambda Owner = "CUSTOM_LAMBDA"
 	OwnerAws          Owner = "AWS"
+	OwnerCustomPolicy Owner = "CUSTOM_POLICY"
 )
 
 // Values returns all known values for Owner. Note that this can be expanded in the
@@ -456,6 +476,7 @@ func (Owner) Values() []Owner {
 	return []Owner{
 		"CUSTOM_LAMBDA",
 		"AWS",
+		"CUSTOM_POLICY",
 	}
 }
 
@@ -679,6 +700,7 @@ const (
 	ResourceTypeCodeDeployDeploymentGroup        ResourceType = "AWS::CodeDeploy::DeploymentGroup"
 	ResourceTypeLaunchTemplate                   ResourceType = "AWS::EC2::LaunchTemplate"
 	ResourceTypeECRPublicRepository              ResourceType = "AWS::ECR::PublicRepository"
+	ResourceTypeGuardDutyDetector                ResourceType = "AWS::GuardDuty::Detector"
 )
 
 // Values returns all known values for ResourceType. Note that this can be expanded
@@ -803,6 +825,7 @@ func (ResourceType) Values() []ResourceType {
 		"AWS::CodeDeploy::DeploymentGroup",
 		"AWS::EC2::LaunchTemplate",
 		"AWS::ECR::PublicRepository",
+		"AWS::GuardDuty::Detector",
 	}
 }
 
