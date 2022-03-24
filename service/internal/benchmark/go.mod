@@ -9,7 +9,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/lexruntimeservice v1.12.1
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.26.1
 	github.com/aws/aws-sdk-go-v2/service/schemas v1.14.1
-	github.com/aws/smithy-go v1.11.1
+	github.com/aws/smithy-go v1.11.2
 )
 
 replace github.com/aws/aws-sdk-go-v2 => ../../../

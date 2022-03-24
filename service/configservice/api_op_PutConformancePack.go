@@ -53,7 +53,7 @@ type PutConformancePackInput struct {
 
 	// A string containing full conformance pack template body. Structure containing
 	// the template body with a minimum length of 1 byte and a maximum length of 51,200
-	// bytes. You can only use a YAML template with two resource types: config rule
+	// bytes. You can only use a YAML template with two resource types: Config rule
 	// (AWS::Config::ConfigRule) and a remediation action
 	// (AWS::Config::RemediationConfiguration).
 	TemplateBody *string

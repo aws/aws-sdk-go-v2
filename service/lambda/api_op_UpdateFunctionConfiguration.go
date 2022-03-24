@@ -71,6 +71,10 @@ type UpdateFunctionConfigurationInput struct {
 	// Environment variables that are accessible from function code during execution.
 	Environment *types.Environment
 
+	// The size of the function’s /tmp directory in MB. The default value is 512, but
+	// can be any whole number between 512 and 10240 MB.
+	EphemeralStorage *types.EphemeralStorage
+
 	// Connection settings for an Amazon EFS file system.
 	FileSystemConfigs []types.FileSystemConfig
 
@@ -159,6 +163,10 @@ type UpdateFunctionConfigurationOutput struct {
 	// The function's environment variables
 	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html).
 	Environment *types.EnvironmentResponse
+
+	// The size of the function’s /tmp directory in MB. The default value is 512, but
+	// can be any whole number between 512 and 10240 MB.
+	EphemeralStorage *types.EphemeralStorage
 
 	// Connection settings for an Amazon EFS file system
 	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html).

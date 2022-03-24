@@ -1,0 +1,8 @@
+{
+    "id": "3eb12fad-9b5d-4f70-8040-31518e893cd7",
+    "type": "feature",
+    "description": "Added new APIs GetCustomRulePolicy and GetOrganizationCustomRulePolicy, and updated existing APIs PutConfigRule, DescribeConfigRule, DescribeConfigRuleEvaluationStatus, PutOrganizationConfigRule, DescribeConfigRule to support a new feature for building AWS Config rules with AWS CloudFormation Guard",
+    "modules": [
+        "service/configservice"
+    ]
+}

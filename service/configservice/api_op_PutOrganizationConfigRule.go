@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds or updates organization config rule for your entire organization evaluating
+// Adds or updates organization Config rule for your entire organization evaluating
 // whether your Amazon Web Services resources comply with your desired
 // configurations. Only a master account and a delegated administrator can create
-// or update an organization config rule. When calling this API with a delegated
+// or update an organization Config rule. When calling this API with a delegated
 // administrator, you must ensure Organizations ListDelegatedAdministrator
 // permissions are added. This API enables organization service access through the
 // EnableAWSServiceAccess action and creates a service linked role
@@ -33,7 +33,7 @@ import (
 // the rule to Config, you must specify the Amazon Resource Name (ARN) that Lambda
 // assigns to the function. If you are adding an Config managed rule, specify the
 // rule's identifier for the RuleIdentifier key. The maximum number of organization
-// config rules that Config supports is 150 and 3 delegated administrator per
+// Config rules that Config supports is 150 and 3 delegated administrator per
 // organization. Prerequisite: Ensure you call EnableAllFeatures API to enable all
 // features in an organization. Specify either OrganizationCustomRuleMetadata or
 // OrganizationManagedRuleMetadata.
@@ -54,14 +54,21 @@ func (c *Client) PutOrganizationConfigRule(ctx context.Context, params *PutOrgan
 
 type PutOrganizationConfigRuleInput struct {
 
-	// The name that you assign to an organization config rule.
+	// The name that you assign to an organization Config rule.
 	//
 	// This member is required.
 	OrganizationConfigRuleName *string
 
 	// A comma-separated list of accounts that you want to exclude from an organization
-	// config rule.
+	// Config rule.
 	ExcludedAccounts []string
+
+	// An object that specifies metadata for your organization's Config Custom Policy
+	// rule. The metadata includes the runtime system in use, which accounts have debug
+	// logging enabled, and other custom rule metadata, such as resource type, resource
+	// ID of Amazon Web Services resource, and organization trigger types that initiate
+	// Config to evaluate Amazon Web Services resources against a rule.
+	OrganizationCustomPolicyRuleMetadata *types.OrganizationCustomPolicyRuleMetadata
 
 	// An OrganizationCustomRuleMetadata object.
 	OrganizationCustomRuleMetadata *types.OrganizationCustomRuleMetadata
@@ -74,7 +81,7 @@ type PutOrganizationConfigRuleInput struct {
 
 type PutOrganizationConfigRuleOutput struct {
 
-	// The Amazon Resource Name (ARN) of an organization config rule.
+	// The Amazon Resource Name (ARN) of an organization Config rule.
 	OrganizationConfigRuleArn *string
 
 	// Metadata pertaining to the operation's result.

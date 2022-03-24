@@ -12,10 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of organization config rules. When you specify the limit and the
+// Returns a list of organization Config rules. When you specify the limit and the
 // next token, you receive a paginated response. Limit and next token are not
-// applicable if you specify organization config rule names. It is only applicable,
-// when you request all the organization config rules.
+// applicable if you specify organization Config rule names. It is only applicable,
+// when you request all the organization Config rules.
 func (c *Client) DescribeOrganizationConfigRules(ctx context.Context, params *DescribeOrganizationConfigRulesInput, optFns ...func(*Options)) (*DescribeOrganizationConfigRulesOutput, error) {
 	if params == nil {
 		params = &DescribeOrganizationConfigRulesInput{}
@@ -33,7 +33,7 @@ func (c *Client) DescribeOrganizationConfigRules(ctx context.Context, params *De
 
 type DescribeOrganizationConfigRulesInput struct {
 
-	// The maximum number of organization config rules returned on each page. If you do
+	// The maximum number of organization Config rules returned on each page. If you do
 	// no specify a number, Config uses the default. The default is 100.
 	Limit int32
 
@@ -41,8 +41,8 @@ type DescribeOrganizationConfigRulesInput struct {
 	// page of results in a paginated response.
 	NextToken *string
 
-	// The names of organization config rules for which you want details. If you do not
-	// specify any names, Config returns details for all your organization config
+	// The names of organization Config rules for which you want details. If you do not
+	// specify any names, Config returns details for all your organization Config
 	// rules.
 	OrganizationConfigRuleNames []string
 
@@ -135,7 +135,7 @@ var _ DescribeOrganizationConfigRulesAPIClient = (*Client)(nil)
 // DescribeOrganizationConfigRulesPaginatorOptions is the paginator options for
 // DescribeOrganizationConfigRules
 type DescribeOrganizationConfigRulesPaginatorOptions struct {
-	// The maximum number of organization config rules returned on each page. If you do
+	// The maximum number of organization Config rules returned on each page. If you do
 	// no specify a number, Config uses the default. The default is 100.
 	Limit int32
 

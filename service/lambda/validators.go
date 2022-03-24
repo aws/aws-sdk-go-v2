@@ -1297,6 +1297,21 @@ func validateAllowedPublishers(v *types.AllowedPublishers) error {
 	}
 }
 
+func validateEphemeralStorage(v *types.EphemeralStorage) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EphemeralStorage"}
+	if v.Size == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Size"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateFileSystemConfig(v *types.FileSystemConfig) error {
 	if v == nil {
 		return nil
@@ -1452,6 +1467,11 @@ func validateOpCreateFunctionInput(v *CreateFunctionInput) error {
 	if v.FileSystemConfigs != nil {
 		if err := validateFileSystemConfigList(v.FileSystemConfigs); err != nil {
 			invalidParams.AddNested("FileSystemConfigs", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EphemeralStorage != nil {
+		if err := validateEphemeralStorage(v.EphemeralStorage); err != nil {
+			invalidParams.AddNested("EphemeralStorage", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2197,6 +2217,11 @@ func validateOpUpdateFunctionConfigurationInput(v *UpdateFunctionConfigurationIn
 	if v.FileSystemConfigs != nil {
 		if err := validateFileSystemConfigList(v.FileSystemConfigs); err != nil {
 			invalidParams.AddNested("FileSystemConfigs", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EphemeralStorage != nil {
+		if err := validateEphemeralStorage(v.EphemeralStorage); err != nil {
+			invalidParams.AddNested("EphemeralStorage", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

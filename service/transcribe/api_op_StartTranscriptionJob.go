@@ -47,7 +47,8 @@ type StartTranscriptionJobInput struct {
 
 	// Set this field to true to enable automatic language identification. Automatic
 	// language identification is disabled by default. You receive a
-	// BadRequestException error if you enter a value for a LanguageCode.
+	// BadRequestException error if you enter a value for a LanguageCode. You must
+	// include either LanguageCode or IdentifyLanguage in your request.
 	IdentifyLanguage *bool
 
 	// Provides information about how a transcription job is executed. Use this field
@@ -59,7 +60,8 @@ type StartTranscriptionJobInput struct {
 	// pairs, that provide an added layer of security for your data.
 	KMSEncryptionContext map[string]string
 
-	// The language code for the language used in the input media file. To transcribe
+	// The language code for the language used in the input media file. You must
+	// include either LanguageCode or IdentifyLanguage in your request. To transcribe
 	// speech in Modern Standard Arabic (ar-SA), your audio or video file must be
 	// encoded at a sample rate of 16,000 Hz or higher.
 	LanguageCode types.LanguageCode
@@ -166,7 +168,7 @@ type StartTranscriptionJobInput struct {
 
 type StartTranscriptionJobOutput struct {
 
-	// An object containing details of the asynchronous transcription job.
+	// Provides information about your asynchronous transcription job.
 	TranscriptionJob *types.TranscriptionJob
 
 	// Metadata pertaining to the operation's result.

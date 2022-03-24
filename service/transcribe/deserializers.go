@@ -7374,6 +7374,19 @@ func awsAwsjson11_deserializeDocumentSubtitlesOutput(v **types.SubtitlesOutput, 
 				return err
 			}
 
+		case "OutputStartIndex":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected SubtitleOutputStartIndex to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.OutputStartIndex = ptr.Int32(int32(i64))
+			}
+
 		case "SubtitleFileUris":
 			if err := awsAwsjson11_deserializeDocumentSubtitleFileUris(&sv.SubtitleFileUris, value); err != nil {
 				return err

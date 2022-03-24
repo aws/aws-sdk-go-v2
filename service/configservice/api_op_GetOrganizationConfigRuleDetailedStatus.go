@@ -13,7 +13,7 @@ import (
 )
 
 // Returns detailed status for each member account within an organization for a
-// given organization config rule.
+// given organization Config rule.
 func (c *Client) GetOrganizationConfigRuleDetailedStatus(ctx context.Context, params *GetOrganizationConfigRuleDetailedStatusInput, optFns ...func(*Options)) (*GetOrganizationConfigRuleDetailedStatusOutput, error) {
 	if params == nil {
 		params = &GetOrganizationConfigRuleDetailedStatusInput{}
@@ -31,7 +31,7 @@ func (c *Client) GetOrganizationConfigRuleDetailedStatus(ctx context.Context, pa
 
 type GetOrganizationConfigRuleDetailedStatusInput struct {
 
-	// The name of organization config rule for which you want status details for
+	// The name of your organization Config rule for which you want status details for
 	// member accounts.
 	//
 	// This member is required.

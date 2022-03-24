@@ -12,13 +12,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides organization config rule deployment status for an organization. The
-// status is not considered successful until organization config rule is
+// Provides organization Config rule deployment status for an organization. The
+// status is not considered successful until organization Config rule is
 // successfully deployed in all the member accounts with an exception of excluded
 // accounts. When you specify the limit and the next token, you receive a paginated
 // response. Limit and next token are not applicable if you specify organization
-// config rule names. It is only applicable, when you request all the organization
-// config rules.
+// Config rule names. It is only applicable, when you request all the organization
+// Config rules.
 func (c *Client) DescribeOrganizationConfigRuleStatuses(ctx context.Context, params *DescribeOrganizationConfigRuleStatusesInput, optFns ...func(*Options)) (*DescribeOrganizationConfigRuleStatusesOutput, error) {
 	if params == nil {
 		params = &DescribeOrganizationConfigRuleStatusesInput{}
@@ -44,7 +44,7 @@ type DescribeOrganizationConfigRuleStatusesInput struct {
 	// page of results in a paginated response.
 	NextToken *string
 
-	// The names of organization config rules for which you want status details. If you
+	// The names of organization Config rules for which you want status details. If you
 	// do not specify any names, Config returns details for all your organization
 	// Config rules.
 	OrganizationConfigRuleNames []string
