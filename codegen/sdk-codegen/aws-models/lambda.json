@@ -1345,6 +1345,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The instruction set architecture that the function supports. Enter a string array with one of the valid values (arm64 or x86_64).\n     The default value is <code>x86_64</code>.</p>"
                     }
+                },
+                "EphemeralStorage": {
+                    "target": "com.amazonaws.lambda#EphemeralStorage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The size of the function’s /tmp directory in MB. The default value is 512, but can be any whole number between 512 and 10240 MB.</p>"
+                    }
                 }
             }
         },
@@ -2100,6 +2106,31 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.lambda#EphemeralStorage": {
+            "type": "structure",
+            "members": {
+                "Size": {
+                    "target": "com.amazonaws.lambda#EphemeralStorageSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The size of the function’s /tmp directory.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The size of the function’s /tmp directory in MB. The default value is 512, but can be any whole number between 512 and 10240 MB.</p>"
+            }
+        },
+        "com.amazonaws.lambda#EphemeralStorageSize": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 512,
+                    "max": 10240
+                }
+            }
+        },
         "com.amazonaws.lambda#EventSourceMappingConfiguration": {
             "type": "structure",
             "members": {
@@ -2634,6 +2665,12 @@
                     "target": "com.amazonaws.lambda#ArchitecturesList",
                     "traits": {
                         "smithy.api#documentation": "<p>The instruction set architecture that the function supports. Architecture is a string array with one of the \n      valid values. The default architecture value is <code>x86_64</code>.</p>"
+                    }
+                },
+                "EphemeralStorage": {
+                    "target": "com.amazonaws.lambda#EphemeralStorage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The size of the function’s /tmp directory in MB. The default value is 512, but can be any whole number between 512 and 10240 MB.</p>"
                     }
                 }
             },
@@ -8000,6 +8037,12 @@
                     "target": "com.amazonaws.lambda#ImageConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>\n            <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/images-parms.html\">Container image configuration\n        values</a> that override the values in the container image Docker file.</p>"
+                    }
+                },
+                "EphemeralStorage": {
+                    "target": "com.amazonaws.lambda#EphemeralStorage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The size of the function’s /tmp directory in MB. The default value is 512, but can be any whole number between 512 and 10240 MB.</p>"
                     }
                 }
             }

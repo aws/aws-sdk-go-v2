@@ -1324,12 +1324,30 @@
                 "FirstEvaluationStarted": {
                     "target": "com.amazonaws.configservice#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether Config has evaluated your resources\n\t\t\tagainst the rule at least once.</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>\n\t\t\t\t\t             <code>true</code> - Config has evaluated your Amazon Web Services\n\t\t\t\t\tresources against the rule at least once.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n\t\t\t\t\t             <code>false</code> - Config has not once finished\n\t\t\t\t\tevaluating your Amazon Web Services resources against the rule.</p>\n\t\t\t         </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Indicates whether Config has evaluated your resources\n\t\t\tagainst the rule at least once.</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>\n\t\t\t\t\t             <code>true</code> - Config has evaluated your Amazon Web Services\n\t\t\t\t\tresources against the rule at least once.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n\t\t\t\t\t             <code>false</code> - Config has not finished evaluating your Amazon Web Services resources against the\n\t\t\t\t\trule\n\t\t\t\t\tat least once.</p>\n\t\t\t         </li>\n         </ul>"
+                    }
+                },
+                "LastDebugLogDeliveryStatus": {
+                    "target": "com.amazonaws.configservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the last attempted delivery of a debug log for your Config Custom Policy rules. Either <code>Successful</code> or <code>Failed</code>.</p>"
+                    }
+                },
+                "LastDebugLogDeliveryStatusReason": {
+                    "target": "com.amazonaws.configservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason Config was not able to deliver a debug log. This is for the last\n\t\t\tfailed attempt to retrieve a debug log for your Config Custom Policy rules.</p>"
+                    }
+                },
+                "LastDebugLogDeliveryTime": {
+                    "target": "com.amazonaws.configservice#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time Config last attempted to deliver a debug log for your Config Custom Policy rules.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Status information for your Config managed rules. The\n\t\t\tstatus includes information such as the last time the rule ran, the\n\t\t\tlast time it failed, and the related error for the last\n\t\t\tfailure.</p>\n\t\t       <p>This action does not return status information about custom Config rules.</p>"
+                "smithy.api#documentation": "<p>Status information for your Config Managed rules and Config Custom Policy rules. The\n\t\t\tstatus includes information such as the last time the rule ran, the\n\t\t\tlast time it failed, and the related error for the last\n\t\t\tfailure.</p>\n\t\t       <p>This action does not return status information about Config Custom Lambda rules.</p>"
             }
         },
         "com.amazonaws.configservice#ConfigRuleEvaluationStatusList": {
@@ -2113,7 +2131,7 @@
                 "ConfigRuleName": {
                     "target": "com.amazonaws.configservice#ConfigRuleName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Name of the config rule.</p>"
+                        "smithy.api#documentation": "<p>Name of the Config rule.</p>"
                     }
                 },
                 "ComplianceType": {
@@ -2303,8 +2321,48 @@
                 }
             }
         },
+        "com.amazonaws.configservice#CustomPolicyDetails": {
+            "type": "structure",
+            "members": {
+                "PolicyRuntime": {
+                    "target": "com.amazonaws.configservice#PolicyRuntime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The runtime system for your Config Custom Policy rule. Guard is a policy-as-code language that allows you to write policies that are enforced by Config Custom Policy rules. For more information about Guard, see the <a href=\"https://github.com/aws-cloudformation/cloudformation-guard\">Guard GitHub\n\t\t\t\t\tRepository</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PolicyText": {
+                    "target": "com.amazonaws.configservice#PolicyText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The policy definition containing the logic for your Config Custom Policy rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EnableDebugLogDelivery": {
+                    "target": "com.amazonaws.configservice#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The boolean expression for enabling debug logging for your Config Custom Policy rule. The default value is <code>false</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides the runtime system, policy definition, and whether debug logging enabled. You can\n\t\t\tspecify the following CustomPolicyDetails parameter values \n\t\t\tonly\n\t\t\tfor Config Custom Policy rules.</p>"
+            }
+        },
         "com.amazonaws.configservice#Date": {
             "type": "timestamp"
+        },
+        "com.amazonaws.configservice#DebugLogDeliveryAccounts": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.configservice#AccountId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1000
+                }
+            }
         },
         "com.amazonaws.configservice#DeleteAggregationAuthorization": {
             "type": "operation",
@@ -2546,7 +2604,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified organization config rule and all of its evaluation results from all member accounts in that organization. </p>\n\t        <p>Only a master account and a delegated administrator account can delete an organization config rule.\n\t\tWhen calling this API with a delegated administrator, you must ensure Organizations \n\t\t\t<code>ListDelegatedAdministrator</code> permissions are added.</p>\n\t\t       <p>Config sets the state of a rule to DELETE_IN_PROGRESS until the deletion is complete. \n\t\t\tYou cannot update a rule while it is in this state.</p>"
+                "smithy.api#documentation": "<p>Deletes the specified organization Config rule and all of its evaluation results from all member accounts in that organization. </p>\n\t        <p>Only a master account and a delegated administrator account can delete an organization Config rule.\n\t\tWhen calling this API with a delegated administrator, you must ensure Organizations \n\t\t\t<code>ListDelegatedAdministrator</code> permissions are added.</p>\n\t\t       <p>Config sets the state of a rule to DELETE_IN_PROGRESS until the deletion is complete. \n\t\t\tYou cannot update a rule while it is in this state.</p>"
             }
         },
         "com.amazonaws.configservice#DeleteOrganizationConfigRuleRequest": {
@@ -2555,7 +2613,7 @@
                 "OrganizationConfigRuleName": {
                     "target": "com.amazonaws.configservice#OrganizationConfigRuleName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of organization config rule that you want to delete.</p>",
+                        "smithy.api#documentation": "<p>The name of organization Config rule that you want to delete.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2578,7 +2636,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified organization conformance pack and all of the config rules and remediation actions from\n\t\t\tall member accounts in that organization. </p>\n         <p> Only a master account or a delegated administrator account can delete an organization conformance pack.\n\tWhen calling this API with a delegated administrator, you must ensure Organizations \n\t\t<code>ListDelegatedAdministrator</code> permissions are added.</p>\n\t\t\t      <p>Config sets the state of a conformance pack to DELETE_IN_PROGRESS until the deletion is complete. \n\t\t\t\tYou cannot update a conformance pack while it is in this state. </p>"
+                "smithy.api#documentation": "<p>Deletes the specified organization conformance pack and all of the Config rules and remediation actions from\n\t\t\tall member accounts in that organization. </p>\n         <p> Only a master account or a delegated administrator account can delete an organization conformance pack.\n\tWhen calling this API with a delegated administrator, you must ensure Organizations \n\t\t<code>ListDelegatedAdministrator</code> permissions are added.</p>\n\t\t\t      <p>Config sets the state of a conformance pack to DELETE_IN_PROGRESS until the deletion is complete. \n\t\t\t\tYou cannot update a conformance pack while it is in this state. </p>"
             }
         },
         "com.amazonaws.configservice#DeleteOrganizationConformancePackRequest": {
@@ -4116,7 +4174,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides organization config rule deployment status for an organization.</p>\n\t\t\n\t\t       <note>\n            <p>The status is not considered successful until organization config rule is successfully deployed in all the member \n\t\t\taccounts with an exception of excluded accounts.</p>\n\t\t\t         <p>When you specify the limit and the next token, you receive a paginated response.\n\t\t\tLimit and next token are not applicable if you specify organization config rule names. \n\t\t\tIt is only applicable, when you request all the organization config rules.</p>\n\t\t\t      </note>",
+                "smithy.api#documentation": "<p>Provides organization Config rule deployment status for an organization.</p>\n\t\t\n\t\t       <note>\n            <p>The status is not considered successful until organization Config rule is successfully deployed in all the member \n\t\t\taccounts with an exception of excluded accounts.</p>\n\t\t\t         <p>When you specify the limit and the next token, you receive a paginated response.\n\t\t\tLimit and next token are not applicable if you specify organization Config rule names. \n\t\t\tIt is only applicable, when you request all the organization Config rules.</p>\n\t\t\t      </note>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -4131,7 +4189,7 @@
                 "OrganizationConfigRuleNames": {
                     "target": "com.amazonaws.configservice#OrganizationConfigRuleNames",
                     "traits": {
-                        "smithy.api#documentation": "<p>The names of organization config rules for which you want status details. If you do not specify any names, Config returns details for all your organization Config rules.</p>"
+                        "smithy.api#documentation": "<p>The names of organization Config rules for which you want status details. If you do not specify any names, Config returns details for all your organization Config rules.</p>"
                     }
                 },
                 "Limit": {
@@ -4188,7 +4246,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of organization config rules. </p>\n\t\t\t\n\t\t       <note>\n            <p>When you specify the limit and the next token, you receive a paginated response.\n\t\t\tLimit and next token are not applicable if you specify organization config rule names. \n\t\t\tIt is only applicable, when you request all the organization config rules.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Returns a list of organization Config rules. </p>\n\t\t\t\n\t\t       <note>\n            <p>When you specify the limit and the next token, you receive a paginated response.\n\t\t\tLimit and next token are not applicable if you specify organization Config rule names. \n\t\t\tIt is only applicable, when you request all the organization Config rules.</p>\n         </note>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -4203,13 +4261,13 @@
                 "OrganizationConfigRuleNames": {
                     "target": "com.amazonaws.configservice#OrganizationConfigRuleNames",
                     "traits": {
-                        "smithy.api#documentation": "<p>The names of organization config rules for which you want details. If you do not specify any names, Config returns details for all your organization config rules.</p>"
+                        "smithy.api#documentation": "<p>The names of organization Config rules for which you want details. If you do not specify any names, Config returns details for all your organization Config rules.</p>"
                     }
                 },
                 "Limit": {
                     "target": "com.amazonaws.configservice#CosmosPageLimit",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of organization config rules returned on each page. If you do no specify a number, Config uses the default. The default is 100.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of organization Config rules returned on each page. If you do no specify a number, Config uses the default. The default is 100.</p>"
                     }
                 },
                 "NextToken": {
@@ -5884,6 +5942,45 @@
                 }
             }
         },
+        "com.amazonaws.configservice#GetCustomRulePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.configservice#GetCustomRulePolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.configservice#GetCustomRulePolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.configservice#NoSuchConfigRuleException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the policy definition containing the logic for your Config Custom Policy rule.</p>"
+            }
+        },
+        "com.amazonaws.configservice#GetCustomRulePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "ConfigRuleName": {
+                    "target": "com.amazonaws.configservice#ConfigRuleName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of your Config Custom Policy rule.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.configservice#GetCustomRulePolicyResponse": {
+            "type": "structure",
+            "members": {
+                "PolicyText": {
+                    "target": "com.amazonaws.configservice#PolicyText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The policy definition containing the logic for your Config Custom Policy rule.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.configservice#GetDiscoveredResourceCounts": {
             "type": "operation",
             "input": {
@@ -5981,7 +6078,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns detailed status for each member account within an organization for a given organization config rule.</p>",
+                "smithy.api#documentation": "<p>Returns detailed status for each member account within an organization for a given organization Config rule.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -5996,7 +6093,7 @@
                 "OrganizationConfigRuleName": {
                     "target": "com.amazonaws.configservice#OrganizationConfigRuleName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of organization config rule for which you want status details for member accounts.</p>",
+                        "smithy.api#documentation": "<p>The name of your organization Config rule for which you want status details for member accounts.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6112,6 +6209,49 @@
                     "target": "com.amazonaws.configservice#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The nextToken string returned on a previous page that you use to get the next page of results in a paginated response. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.configservice#GetOrganizationCustomRulePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.configservice#GetOrganizationCustomRulePolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.configservice#GetOrganizationCustomRulePolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.configservice#NoSuchOrganizationConfigRuleException"
+                },
+                {
+                    "target": "com.amazonaws.configservice#OrganizationAccessDeniedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the policy definition containing the logic for your organization Config Custom Policy rule.</p>"
+            }
+        },
+        "com.amazonaws.configservice#GetOrganizationCustomRulePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "OrganizationConfigRuleName": {
+                    "target": "com.amazonaws.configservice#OrganizationConfigRuleName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of your organization Config Custom Policy rule. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.configservice#GetOrganizationCustomRulePolicyResponse": {
+            "type": "structure",
+            "members": {
+                "PolicyText": {
+                    "target": "com.amazonaws.configservice#PolicyText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The policy definition containing the logic for your organization Config Custom Policy rule.</p>"
                     }
                 }
             }
@@ -6335,7 +6475,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Indicates one of the following errors:</p>\n\t\t       <ul>\n            <li>\n               <p>For PutConfigRule, the rule cannot be created because the IAM role assigned to Config lacks permissions to perform the config:Put* action.</p>\n            </li>\n            <li>\n               <p>For PutConfigRule, the Lambda function cannot be invoked. Check the function ARN, and check the function's permissions.</p>\n            </li>\n            <li>\n               <p>For PutOrganizationConfigRule, organization config rule cannot be created because you do not have permissions to call IAM <code>GetRole</code> action or create a service linked role.</p>\n            </li>\n            <li>\n               <p>For PutConformancePack and PutOrganizationConformancePack, a conformance pack cannot be created because you do not have permissions: </p>\n\t\t\t\t           <ul>\n                  <li>\n                     <p>To call IAM <code>GetRole</code> action or create a service linked role.</p>\n                  </li>\n                  <li>\n                     <p>To read Amazon S3 bucket.</p>\n                  </li>\n               </ul>\n\t\t\t         </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Indicates one of the following errors:</p>\n\t\t       <ul>\n            <li>\n               <p>For PutConfigRule, the rule cannot be created because the IAM role assigned to Config lacks permissions to perform the config:Put* action.</p>\n            </li>\n            <li>\n               <p>For PutConfigRule, the Lambda function cannot be invoked. Check the function ARN, and check the function's permissions.</p>\n            </li>\n            <li>\n               <p>For PutOrganizationConfigRule, organization Config rule cannot be created because you do not have permissions to call IAM <code>GetRole</code> action or create a service linked role.</p>\n            </li>\n            <li>\n               <p>For PutConformancePack and PutOrganizationConformancePack, a conformance pack cannot be created because you do not have permissions: </p>\n\t\t\t\t           <ul>\n                  <li>\n                     <p>To call IAM <code>GetRole</code> action or create a service linked role.</p>\n                  </li>\n                  <li>\n                     <p>To read Amazon S3 bucket.</p>\n                  </li>\n               </ul>\n\t\t\t         </li>\n         </ul>",
                 "smithy.api#error": "client"
             }
         },
@@ -6984,7 +7124,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>You have reached the limit of the number of organization config rules you can create.</p>",
+                "smithy.api#documentation": "<p>You have reached the limit of the number of organization Config rules you can create.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -7101,27 +7241,27 @@
                 "ConfigRuleName": {
                     "target": "com.amazonaws.configservice#StringWithCharLimit64",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of config rule deployed in the member account.</p>",
+                        "smithy.api#documentation": "<p>The name of Config rule deployed in the member account.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "MemberAccountRuleStatus": {
                     "target": "com.amazonaws.configservice#MemberAccountRuleStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates deployment status for config rule in the member account.\n\t\t\tWhen master account calls <code>PutOrganizationConfigRule</code> action for the first time, config rule status is created in the member account. \n\t\t\tWhen master account calls <code>PutOrganizationConfigRule</code> action for the second time, config rule status is updated in the member account.   \n\t\t\tConfig rule status is deleted when the master account deletes <code>OrganizationConfigRule</code> and disables service access for <code>config-multiaccountsetup.amazonaws.com</code>. \n\t\t</p>\n\t\t       <p> Config sets the state of the rule to:</p>\n\t\t       <ul>\n            <li>\n               <p>\n                  <code>CREATE_SUCCESSFUL</code> when config rule has been created in the member account. </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_IN_PROGRESS</code> when config rule is being created in the member account.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_FAILED</code> when config rule creation has failed in the member account.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_FAILED</code> when config rule deletion has failed in the member account.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_IN_PROGRESS</code> when config rule is being deleted in the member account.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_SUCCESSFUL</code> when config rule has been deleted in the member account. </p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATE_SUCCESSFUL</code> when config rule has been updated in the member account.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATE_IN_PROGRESS</code> when config rule is being updated in the member account.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATE_FAILED</code> when config rule deletion has failed in the member account.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Indicates deployment status for Config rule in the member account.\n\t\t\tWhen master account calls <code>PutOrganizationConfigRule</code> action for the first time, Config rule status is created in the member account. \n\t\t\tWhen master account calls <code>PutOrganizationConfigRule</code> action for the second time, Config rule status is updated in the member account.   \n\t\t\tConfig rule status is deleted when the master account deletes <code>OrganizationConfigRule</code> and disables service access for <code>config-multiaccountsetup.amazonaws.com</code>. \n\t\t</p>\n\t\t       <p> Config sets the state of the rule to:</p>\n\t\t       <ul>\n            <li>\n               <p>\n                  <code>CREATE_SUCCESSFUL</code> when Config rule has been created in the member account. </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_IN_PROGRESS</code> when Config rule is being created in the member account.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_FAILED</code> when Config rule creation has failed in the member account.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_FAILED</code> when Config rule deletion has failed in the member account.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_IN_PROGRESS</code> when Config rule is being deleted in the member account.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_SUCCESSFUL</code> when Config rule has been deleted in the member account. </p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATE_SUCCESSFUL</code> when Config rule has been updated in the member account.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATE_IN_PROGRESS</code> when Config rule is being updated in the member account.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATE_FAILED</code> when Config rule deletion has failed in the member account.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "ErrorCode": {
                     "target": "com.amazonaws.configservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>An error code that is returned when config rule creation or deletion failed in the member account.</p>"
+                        "smithy.api#documentation": "<p>An error code that is returned when Config rule creation or deletion failed in the member account.</p>"
                     }
                 },
                 "ErrorMessage": {
                     "target": "com.amazonaws.configservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>An error message indicating that config rule account creation or deletion has failed due to an error in the member account.</p>"
+                        "smithy.api#documentation": "<p>An error message indicating that Config rule account creation or deletion has failed due to an error in the member account.</p>"
                     }
                 },
                 "LastUpdateTime": {
@@ -7132,7 +7272,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Organization config rule creation or deletion status in each member account. This includes the name of the rule, the status, error code and error message when the rule creation or deletion failed.</p>"
+                "smithy.api#documentation": "<p>Organization Config rule creation or deletion status in each member account. This includes the name of the rule, the status, error code and error message when the rule creation or deletion failed.</p>"
             }
         },
         "com.amazonaws.configservice#MessageType": {
@@ -7250,7 +7390,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>One or more Config rules in the request are invalid. Verify\n\t\t\tthat the rule names are correct and try again.</p>",
+                "smithy.api#documentation": "<p>The Config rule in the request is not valid. Verify that the rule is an Config Custom Policy rule, that the rule name is correct, and that valid Amazon Resouce Names (ARNs) are used before trying again.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -7340,7 +7480,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>You specified one or more organization config rules that do not exist.</p>",
+                "smithy.api#documentation": "<p>The Config rule in the request is not valid. Verify that the rule is an organization Config Custom Policy rule, that the rule name is correct, and that valid Amazon Resouce Names (ARNs) are used before trying again.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -7470,14 +7610,14 @@
                 "OrganizationConfigRuleName": {
                     "target": "com.amazonaws.configservice#OrganizationConfigRuleName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name that you assign to organization config rule.</p>",
+                        "smithy.api#documentation": "<p>The name that you assign to organization Config rule.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "OrganizationConfigRuleArn": {
                     "target": "com.amazonaws.configservice#StringWithCharLimit256",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon Resource Name (ARN) of organization config rule.</p>",
+                        "smithy.api#documentation": "<p>Amazon Resource Name (ARN) of organization Config rule.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7496,7 +7636,7 @@
                 "ExcludedAccounts": {
                     "target": "com.amazonaws.configservice#ExcludedAccounts",
                     "traits": {
-                        "smithy.api#documentation": "<p>A comma-separated list of accounts excluded from organization config rule.</p>"
+                        "smithy.api#documentation": "<p>A comma-separated list of accounts excluded from organization Config rule.</p>"
                     }
                 },
                 "LastUpdateTime": {
@@ -7504,10 +7644,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp of the last update.</p>"
                     }
+                },
+                "OrganizationCustomPolicyRuleMetadata": {
+                    "target": "com.amazonaws.configservice#OrganizationCustomPolicyRuleMetadataNoPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An\n\t\t\tobject that specifies metadata for your organization's Config Custom Policy rule. The metadata includes the runtime system in use, which accounts have\n\t\t\tdebug logging enabled, and other custom rule metadata, such as resource type, resource\n\t\t\tID of Amazon Web Services resource, and organization trigger types that initiate Config to evaluate Amazon Web Services resources against a rule.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An organization config rule that has information about config rules that Config creates in member accounts.</p>"
+                "smithy.api#documentation": "<p>An organization Config rule that has information about Config rules that Config creates in member accounts.</p>"
             }
         },
         "com.amazonaws.configservice#OrganizationConfigRuleDetailedStatus": {
@@ -7544,27 +7690,27 @@
                 "OrganizationConfigRuleName": {
                     "target": "com.amazonaws.configservice#OrganizationConfigRuleName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name that you assign to organization config rule.</p>",
+                        "smithy.api#documentation": "<p>The name that you assign to organization Config rule.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "OrganizationRuleStatus": {
                     "target": "com.amazonaws.configservice#OrganizationRuleStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates deployment status of an organization config rule. \n\t\t\tWhen master account calls PutOrganizationConfigRule action for the first time, config rule status is created in all the member accounts. \n\t\t\tWhen master account calls PutOrganizationConfigRule action for the second time, config rule status is updated in all the member accounts. Additionally, config rule status is updated when one or more member accounts join or leave an organization.   \n\t\t\tConfig rule status is deleted when the master account deletes OrganizationConfigRule in all the member accounts and disables service access for <code>config-multiaccountsetup.amazonaws.com</code>.</p>\n\t\t\t      <p>Config sets the state of the rule to:</p>\n\t\t       <ul>\n            <li>\n               <p>\n                  <code>CREATE_SUCCESSFUL</code> when an organization config rule has been successfully created in all the member accounts. </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_IN_PROGRESS</code> when an organization config rule creation is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_FAILED</code> when an organization config rule creation failed in one or more member accounts within that organization.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_FAILED</code> when an organization config rule deletion failed in one or more member accounts within that organization.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_IN_PROGRESS</code> when an organization config rule deletion is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_SUCCESSFUL</code> when an organization config rule has been successfully deleted from all the member accounts.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATE_SUCCESSFUL</code> when an organization config rule has been successfully updated in all the member accounts.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATE_IN_PROGRESS</code> when an organization config rule update is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATE_FAILED</code> when an organization config rule update failed in one or more member accounts within that organization.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Indicates deployment status of an organization Config rule. \n\t\t\tWhen master account calls PutOrganizationConfigRule action for the first time, Config rule status is created in all the member accounts. \n\t\t\tWhen master account calls PutOrganizationConfigRule action for the second time, Config rule status is updated in all the member accounts. Additionally, Config rule status is updated when one or more member accounts join or leave an organization.   \n\t\t\tConfig rule status is deleted when the master account deletes OrganizationConfigRule in all the member accounts and disables service access for <code>config-multiaccountsetup.amazonaws.com</code>.</p>\n\t\t\t      <p>Config sets the state of the rule to:</p>\n\t\t       <ul>\n            <li>\n               <p>\n                  <code>CREATE_SUCCESSFUL</code> when an organization Config rule has been successfully created in all the member accounts. </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_IN_PROGRESS</code> when an organization Config rule creation is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_FAILED</code> when an organization Config rule creation failed in one or more member accounts within that organization.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_FAILED</code> when an organization Config rule deletion failed in one or more member accounts within that organization.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_IN_PROGRESS</code> when an organization Config rule deletion is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_SUCCESSFUL</code> when an organization Config rule has been successfully deleted from all the member accounts.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATE_SUCCESSFUL</code> when an organization Config rule has been successfully updated in all the member accounts.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATE_IN_PROGRESS</code> when an organization Config rule update is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATE_FAILED</code> when an organization Config rule update failed in one or more member accounts within that organization.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "ErrorCode": {
                     "target": "com.amazonaws.configservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>An error code that is returned when organization config rule creation or deletion has failed.</p>"
+                        "smithy.api#documentation": "<p>An error code that is returned when organization Config rule creation or deletion has failed.</p>"
                     }
                 },
                 "ErrorMessage": {
                     "target": "com.amazonaws.configservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>An error message indicating that organization config rule creation or deletion failed due to an error.</p>"
+                        "smithy.api#documentation": "<p>An error message indicating that organization Config rule creation or deletion failed due to an error.</p>"
                     }
                 },
                 "LastUpdateTime": {
@@ -7575,7 +7721,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns the status for an organization config rule in an organization.</p>"
+                "smithy.api#documentation": "<p>Returns the status for an organization Config rule in an organization.</p>"
             }
         },
         "com.amazonaws.configservice#OrganizationConfigRuleStatuses": {
@@ -7601,6 +7747,27 @@
                         "name": "SCHEDULED_NOTIFICATION"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.configservice#OrganizationConfigRuleTriggerTypeNoSN": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ConfigurationItemChangeNotification",
+                        "name": "CONFIGURATION_ITEM_CHANGE_NOTIFICATION"
+                    },
+                    {
+                        "value": "OversizedConfigurationItemChangeNotification",
+                        "name": "OVERSIZED_CONFIGURATION_ITEM_CHANGE_NOTIFCATION"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.configservice#OrganizationConfigRuleTriggerTypeNoSNs": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.configservice#OrganizationConfigRuleTriggerTypeNoSN"
             }
         },
         "com.amazonaws.configservice#OrganizationConfigRuleTriggerTypes": {
@@ -7810,13 +7977,157 @@
                 "target": "com.amazonaws.configservice#OrganizationConformancePack"
             }
         },
+        "com.amazonaws.configservice#OrganizationCustomPolicyRuleMetadata": {
+            "type": "structure",
+            "members": {
+                "Description": {
+                    "target": "com.amazonaws.configservice#StringWithCharLimit256Min0",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description that you provide for your organization Config Custom Policy rule.</p>"
+                    }
+                },
+                "OrganizationConfigRuleTriggerTypes": {
+                    "target": "com.amazonaws.configservice#OrganizationConfigRuleTriggerTypeNoSNs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of notification that initiates Config to run an evaluation for a rule.\n\t\t\tFor Config Custom Policy rules, Config supports change-initiated notification types:</p>\n\t\t\n\t\t       <ul>\n            <li>\n               <p>\n                  <code>ConfigurationItemChangeNotification</code> - Initiates an evaluation when Config delivers a configuration item as a result of a resource\n\t\t\t\t\tchange.</p>\n            </li>\n            <li>\n               <p>\n                  <code>OversizedConfigurationItemChangeNotification</code> - Initiates an evaluation when\n\t\t\t\t\t\tConfig delivers an oversized configuration item. Config may generate this notification type when a resource changes and the\n\t\t\t\t\tnotification exceeds the maximum size allowed by Amazon SNS.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "InputParameters": {
+                    "target": "com.amazonaws.configservice#StringWithCharLimit2048",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string, in JSON format, that is passed to your organization Config Custom Policy rule.</p>"
+                    }
+                },
+                "MaximumExecutionFrequency": {
+                    "target": "com.amazonaws.configservice#MaximumExecutionFrequency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum frequency with which Config runs evaluations for a rule. Your\n\t\t\tConfig Custom Policy rule is triggered when Config delivers\n\t\t\tthe configuration snapshot. For more information, see <a>ConfigSnapshotDeliveryProperties</a>.</p>"
+                    }
+                },
+                "ResourceTypesScope": {
+                    "target": "com.amazonaws.configservice#ResourceTypesScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the Amazon Web Services resource that was evaluated.</p>"
+                    }
+                },
+                "ResourceIdScope": {
+                    "target": "com.amazonaws.configservice#StringWithCharLimit768",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services resource that was evaluated.</p>"
+                    }
+                },
+                "TagKeyScope": {
+                    "target": "com.amazonaws.configservice#StringWithCharLimit128",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One part of a key-value pair that make up a tag. A key is a general label that acts like a category for more specific tag values.</p>"
+                    }
+                },
+                "TagValueScope": {
+                    "target": "com.amazonaws.configservice#StringWithCharLimit256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The optional part of a key-value pair that make up a tag. A value acts as a descriptor within a tag category (key).</p>"
+                    }
+                },
+                "PolicyRuntime": {
+                    "target": "com.amazonaws.configservice#PolicyRuntime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The runtime system for your organization Config Custom Policy rules. Guard is a policy-as-code language that allows you to write policies that are enforced by Config Custom Policy rules. For more information about Guard, see the <a href=\"https://github.com/aws-cloudformation/cloudformation-guard\">Guard GitHub\n\t\t\tRepository</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PolicyText": {
+                    "target": "com.amazonaws.configservice#PolicyText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The policy definition containing the logic for your organization Config Custom Policy rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DebugLogDeliveryAccounts": {
+                    "target": "com.amazonaws.configservice#DebugLogDeliveryAccounts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of accounts that you can enable debug logging for your organization Config Custom Policy rule. List is null when debug logging is enabled for all accounts.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An\n\t\t\tobject that specifies metadata for your organization's Config Custom Policy rule. The metadata includes the runtime system in use, which accounts have\n\t\t\tdebug logging enabled, and other custom rule metadata, such as resource type, resource\n\t\t\tID of Amazon Web Services resource, and organization trigger types that initiate Config to evaluate Amazon Web Services resources against a rule.</p>"
+            }
+        },
+        "com.amazonaws.configservice#OrganizationCustomPolicyRuleMetadataNoPolicy": {
+            "type": "structure",
+            "members": {
+                "Description": {
+                    "target": "com.amazonaws.configservice#StringWithCharLimit256Min0",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description that you provide for your organization Config Custom Policy rule.</p>"
+                    }
+                },
+                "OrganizationConfigRuleTriggerTypes": {
+                    "target": "com.amazonaws.configservice#OrganizationConfigRuleTriggerTypeNoSNs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of notification that triggers Config to run an evaluation for a rule.\n\t\t\tFor Config Custom Policy rules, Config supports change\n\t\t\ttriggered notification types:</p>\n\t\t\n\t\t       <ul>\n            <li>\n               <p>\n                  <code>ConfigurationItemChangeNotification</code> - Triggers an evaluation when Config delivers a configuration item as a result of a resource change.</p>\n            </li>\n            <li>\n               <p>\n                  <code>OversizedConfigurationItemChangeNotification</code> - Triggers an evaluation when Config delivers an oversized configuration item. \n\t\t\t\tConfig may generate this notification type when a resource changes and the notification exceeds the maximum size allowed by Amazon SNS.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "InputParameters": {
+                    "target": "com.amazonaws.configservice#StringWithCharLimit2048",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string, in JSON format, that is passed to your organization Config Custom Policy rule.</p>"
+                    }
+                },
+                "MaximumExecutionFrequency": {
+                    "target": "com.amazonaws.configservice#MaximumExecutionFrequency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum frequency with which Config runs evaluations for a rule. Your\n\t\t\tConfig Custom Policy rule is triggered when Config delivers\n\t\t\tthe configuration snapshot. For more information, see <a>ConfigSnapshotDeliveryProperties</a>.</p>"
+                    }
+                },
+                "ResourceTypesScope": {
+                    "target": "com.amazonaws.configservice#ResourceTypesScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the Amazon Web Services resource that was evaluated.</p>"
+                    }
+                },
+                "ResourceIdScope": {
+                    "target": "com.amazonaws.configservice#StringWithCharLimit768",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services resource that was evaluated.</p>"
+                    }
+                },
+                "TagKeyScope": {
+                    "target": "com.amazonaws.configservice#StringWithCharLimit128",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One part of a key-value pair that make up a tag. A key is a general label that acts like a category for more specific tag values.</p>"
+                    }
+                },
+                "TagValueScope": {
+                    "target": "com.amazonaws.configservice#StringWithCharLimit256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The optional part of a key-value pair that make up a tag. A value acts as a descriptor within a tag category (key).</p>"
+                    }
+                },
+                "PolicyRuntime": {
+                    "target": "com.amazonaws.configservice#PolicyRuntime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The runtime system for your organization Config Custom Policy rules. Guard is a policy-as-code language that allows you to write policies that are enforced by Config Custom Policy rules. For more information about Guard, see the <a href=\"https://github.com/aws-cloudformation/cloudformation-guard\">Guard GitHub\n\t\t\tRepository</a>.</p>"
+                    }
+                },
+                "DebugLogDeliveryAccounts": {
+                    "target": "com.amazonaws.configservice#DebugLogDeliveryAccounts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of accounts that you can enable debug logging for your organization Config Custom Policy rule. List is null when debug logging is enabled for all accounts.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that specifies metadata for your organization Config Custom Policy rule including the runtime system in use, which accounts have debug logging enabled, and\n\t\t\tother custom rule metadata such as resource type, resource ID of Amazon Web Services\n\t\t\tresource, and organization trigger types that trigger Config to evaluate\n\t\t\t\tAmazon Web Services resources against a rule.</p>"
+            }
+        },
         "com.amazonaws.configservice#OrganizationCustomRuleMetadata": {
             "type": "structure",
             "members": {
                 "Description": {
                     "target": "com.amazonaws.configservice#StringWithCharLimit256Min0",
                     "traits": {
-                        "smithy.api#documentation": "<p>The description that you provide for organization config rule.</p>"
+                        "smithy.api#documentation": "<p>The description that you provide for your organization Config rule.</p>"
                     }
                 },
                 "LambdaFunctionArn": {
@@ -7836,7 +8147,7 @@
                 "InputParameters": {
                     "target": "com.amazonaws.configservice#StringWithCharLimit2048",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string, in JSON format, that is passed to organization config rule Lambda function.</p>"
+                        "smithy.api#documentation": "<p>A string, in JSON format, that is passed to your organization Config rule Lambda function.</p>"
                     }
                 },
                 "MaximumExecutionFrequency": {
@@ -7880,7 +8191,7 @@
                 "Description": {
                     "target": "com.amazonaws.configservice#StringWithCharLimit256Min0",
                     "traits": {
-                        "smithy.api#documentation": "<p>The description that you provide for organization config rule.</p>"
+                        "smithy.api#documentation": "<p>The description that you provide for your organization Config rule.</p>"
                     }
                 },
                 "RuleIdentifier": {
@@ -7893,7 +8204,7 @@
                 "InputParameters": {
                     "target": "com.amazonaws.configservice#StringWithCharLimit2048",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string, in JSON format, that is passed to organization config rule Lambda function.</p>"
+                        "smithy.api#documentation": "<p>A string, in JSON format, that is passed to your organization Config rule Lambda function.</p>"
                     }
                 },
                 "MaximumExecutionFrequency": {
@@ -8106,6 +8417,10 @@
                     {
                         "value": "AWS",
                         "name": "Aws"
+                    },
+                    {
+                        "value": "CUSTOM_POLICY",
+                        "name": "Custom_Policy"
                     }
                 ]
             }
@@ -8170,6 +8485,25 @@
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
+                }
+            }
+        },
+        "com.amazonaws.configservice#PolicyRuntime": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^guard\\-2\\.x\\.x$"
+            }
+        },
+        "com.amazonaws.configservice#PolicyText": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10000
                 }
             }
         },
@@ -8429,7 +8763,7 @@
                 "TemplateBody": {
                     "target": "com.amazonaws.configservice#TemplateBody",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string containing full conformance pack template body. Structure containing the template body with a minimum length of 1 byte and a maximum length of 51,200 bytes.</p>\n\t\t       <note>\n            <p>You can only use a YAML template with two resource types: config rule (<code>AWS::Config::ConfigRule</code>) and a remediation action (<code>AWS::Config::RemediationConfiguration</code>).</p>\n         </note>"
+                        "smithy.api#documentation": "<p>A string containing full conformance pack template body. Structure containing the template body with a minimum length of 1 byte and a maximum length of 51,200 bytes.</p>\n\t\t       <note>\n            <p>You can only use a YAML template with two resource types: Config rule (<code>AWS::Config::ConfigRule</code>) and a remediation action (<code>AWS::Config::RemediationConfiguration</code>).</p>\n         </note>"
                     }
                 },
                 "DeliveryS3Bucket": {
@@ -8655,7 +8989,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds or updates organization config rule for your entire organization evaluating whether your Amazon Web Services resources comply with your \n\t\t\tdesired configurations.</p>\n\t        <p> Only a master account and a delegated administrator can create or update an organization config rule.\n\t\tWhen calling this API with a delegated administrator, you must ensure Organizations \n\t\t<code>ListDelegatedAdministrator</code> permissions are added. </p>\n\t\t       <p>This API enables organization service access through the <code>EnableAWSServiceAccess</code> action and creates a service linked \n\t\t\trole <code>AWSServiceRoleForConfigMultiAccountSetup</code> in the master or delegated administrator account of your organization. \n\t\t\tThe service linked role is created only when the role does not exist in the caller account. \n\t\t\tConfig verifies the existence of role with <code>GetRole</code> action.</p>\n\t\t       <p>To use this API with delegated administrator, register a delegated administrator by calling Amazon Web Services Organization\n\t\t\t<code>register-delegated-administrator</code> for <code>config-multiaccountsetup.amazonaws.com</code>. </p>\n\t\t       <p>You can use this action to create both custom Config rules and Config managed rules. \n\t\t\tIf you are adding a new custom Config rule, you must first create Lambda function in the master account or a delegated \n\t\t\tadministrator that the rule invokes to evaluate your resources. You also need to create an IAM role in the managed-account that can be assumed by the Lambda function.\n\t\t\tWhen you use the <code>PutOrganizationConfigRule</code> action to add the rule to Config, you must \n\t\t\tspecify the Amazon Resource Name (ARN) that Lambda assigns to the function. \n\t\t\tIf you are adding an Config managed rule, specify the rule's identifier for the <code>RuleIdentifier</code> key.</p>\n\t\t       <p>The maximum number of organization config rules that Config supports is 150 and 3 delegated administrator per organization. </p>\n\t\t       <note>\n            <p>Prerequisite: Ensure you call <code>EnableAllFeatures</code> API to enable all features in an organization.</p>\n\t\t\t         <p>Specify either <code>OrganizationCustomRuleMetadata</code> or <code>OrganizationManagedRuleMetadata</code>.</p>\n\t\t\t      </note>"
+                "smithy.api#documentation": "<p>Adds or updates organization Config rule for your entire organization evaluating whether your Amazon Web Services resources comply with your \n\t\t\tdesired configurations.</p>\n\t        <p> Only a master account and a delegated administrator can create or update an organization Config rule.\n\t\tWhen calling this API with a delegated administrator, you must ensure Organizations \n\t\t<code>ListDelegatedAdministrator</code> permissions are added. </p>\n\t\t       <p>This API enables organization service access through the <code>EnableAWSServiceAccess</code> action and creates a service linked \n\t\t\trole <code>AWSServiceRoleForConfigMultiAccountSetup</code> in the master or delegated administrator account of your organization. \n\t\t\tThe service linked role is created only when the role does not exist in the caller account. \n\t\t\tConfig verifies the existence of role with <code>GetRole</code> action.</p>\n\t\t       <p>To use this API with delegated administrator, register a delegated administrator by calling Amazon Web Services Organization\n\t\t\t<code>register-delegated-administrator</code> for <code>config-multiaccountsetup.amazonaws.com</code>. </p>\n\t\t       <p>You can use this action to create both custom Config rules and Config managed rules. \n\t\t\tIf you are adding a new custom Config rule, you must first create Lambda function in the master account or a delegated \n\t\t\tadministrator that the rule invokes to evaluate your resources. You also need to create an IAM role in the managed-account that can be assumed by the Lambda function.\n\t\t\tWhen you use the <code>PutOrganizationConfigRule</code> action to add the rule to Config, you must \n\t\t\tspecify the Amazon Resource Name (ARN) that Lambda assigns to the function. \n\t\t\tIf you are adding an Config managed rule, specify the rule's identifier for the <code>RuleIdentifier</code> key.</p>\n\t\t       <p>The maximum number of organization Config rules that Config supports is 150 and 3 delegated administrator per organization. </p>\n\t\t       <note>\n            <p>Prerequisite: Ensure you call <code>EnableAllFeatures</code> API to enable all features in an organization.</p>\n\t\t\t         <p>Specify either <code>OrganizationCustomRuleMetadata</code> or <code>OrganizationManagedRuleMetadata</code>.</p>\n\t\t\t      </note>"
             }
         },
         "com.amazonaws.configservice#PutOrganizationConfigRuleRequest": {
@@ -8664,7 +8998,7 @@
                 "OrganizationConfigRuleName": {
                     "target": "com.amazonaws.configservice#OrganizationConfigRuleName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name that you assign to an organization config rule.</p>",
+                        "smithy.api#documentation": "<p>The name that you assign to an organization Config rule.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8683,7 +9017,13 @@
                 "ExcludedAccounts": {
                     "target": "com.amazonaws.configservice#ExcludedAccounts",
                     "traits": {
-                        "smithy.api#documentation": "<p>A comma-separated list of accounts that you want to exclude from an organization config rule.</p>"
+                        "smithy.api#documentation": "<p>A comma-separated list of accounts that you want to exclude from an organization Config rule.</p>"
+                    }
+                },
+                "OrganizationCustomPolicyRuleMetadata": {
+                    "target": "com.amazonaws.configservice#OrganizationCustomPolicyRuleMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that specifies metadata for your organization's Config Custom Policy rule. The metadata includes the runtime system in use, which accounts have debug\n\t\t\tlogging enabled, and other custom rule metadata, such as resource type, resource ID of\n\t\t\t\tAmazon Web Services resource, and organization trigger types that initiate Config to evaluate Amazon Web Services resources against a rule.</p>"
                     }
                 }
             }
@@ -8694,7 +9034,7 @@
                 "OrganizationConfigRuleArn": {
                     "target": "com.amazonaws.configservice#StringWithCharLimit256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an organization config rule.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an organization Config rule.</p>"
                     }
                 }
             }
@@ -9809,7 +10149,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>You see this exception in the following cases: </p>\n\t\t       <ul>\n            <li>\n               <p>For DeleteConfigRule, Config is deleting this rule. Try your request again later.</p>\n            </li>\n            <li>\n               <p>For DeleteConfigRule, the rule is deleting your evaluation results. Try your request again later.</p>\n            </li>\n            <li>\n               <p>For DeleteConfigRule, a remediation action is associated with the rule and Config cannot delete this rule. Delete the remediation action associated with the rule before deleting the rule and try your request again later.</p>\n            </li>\n            <li>\n               <p>For PutConfigOrganizationRule, organization config rule deletion is in progress. Try your request again later.</p>\n            </li>\n            <li>\n               <p>For DeleteOrganizationConfigRule, organization config rule creation is in progress. Try your request again later.</p>\n            </li>\n            <li>\n               <p>For PutConformancePack and PutOrganizationConformancePack, a conformance pack creation, update, and deletion is in progress. Try your request again later.</p>\n            </li>\n            <li>\n               <p>For DeleteConformancePack, a conformance pack creation, update, and deletion is in progress. Try your request again later.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>You see this exception in the following cases: </p>\n\t\t       <ul>\n            <li>\n               <p>For DeleteConfigRule, Config is deleting this rule. Try your request again later.</p>\n            </li>\n            <li>\n               <p>For DeleteConfigRule, the rule is deleting your evaluation results. Try your request again later.</p>\n            </li>\n            <li>\n               <p>For DeleteConfigRule, a remediation action is associated with the rule and Config cannot delete this rule. Delete the remediation action associated with the rule before deleting the rule and try your request again later.</p>\n            </li>\n            <li>\n               <p>For PutConfigOrganizationRule, organization Config rule deletion is in progress. Try your request again later.</p>\n            </li>\n            <li>\n               <p>For DeleteOrganizationConfigRule, organization Config rule creation is in progress. Try your request again later.</p>\n            </li>\n            <li>\n               <p>For PutConformancePack and PutOrganizationConformancePack, a conformance pack creation, update, and deletion is in progress. Try your request again later.</p>\n            </li>\n            <li>\n               <p>For DeleteConformancePack, a conformance pack creation, update, and deletion is in progress. Try your request again later.</p>\n            </li>\n         </ul>",
                 "smithy.api#error": "client"
             }
         },
@@ -10351,6 +10691,10 @@
                     {
                         "value": "AWS::ECR::PublicRepository",
                         "name": "ECRPublicRepository"
+                    },
+                    {
+                        "value": "AWS::GuardDuty::Detector",
+                        "name": "GuardDutyDetector"
                     }
                 ]
             }
@@ -10707,26 +11051,31 @@
                 "Owner": {
                     "target": "com.amazonaws.configservice#Owner",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether Amazon Web Services or the customer owns and manages the Config rule.</p>",
+                        "smithy.api#documentation": "<p>Indicates whether Amazon Web Services or the customer owns and manages the Config rule.</p>\n\t\t\n\t\t       <p>Config Managed Rules are predefined rules owned by Amazon Web Services. For more information, see <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_use-managed-rules.html\">Config Managed Rules</a> in the Config developer guide.</p>\n\t\t\n\t\t       <p>Config Custom Rules are rules that you can develop either with Guard (<code>CUSTOM_POLICY</code>) or Lambda (<code>CUSTOM_LAMBDA</code>). For more information, see <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_develop-rules.html\">Config Custom Rules </a> in the Config developer guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "SourceIdentifier": {
                     "target": "com.amazonaws.configservice#StringWithCharLimit256",
                     "traits": {
-                        "smithy.api#documentation": "<p>For Config managed rules, a predefined identifier from a\n\t\t\tlist. For example, <code>IAM_PASSWORD_POLICY</code> is a managed\n\t\t\trule. To reference a managed rule, see <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_use-managed-rules.html\">Using Config managed rules</a>.</p>\n\t\t       <p>For custom rules, the identifier is the Amazon Resource Name\n\t\t\t(ARN) of the rule's Lambda function, such as\n\t\t\t\t<code>arn:aws:lambda:us-east-2:123456789012:function:custom_rule_name</code>.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>For Config Managed rules, a predefined identifier from a\n\t\t\tlist. For example, <code>IAM_PASSWORD_POLICY</code> is a managed\n\t\t\trule. To reference a managed rule, see <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/managed-rules-by-aws-config.html\">List of Config Managed Rules</a>.</p>\n\t\t       <p>For Config Custom Lambda rules, the identifier is the Amazon Resource Name\n\t\t\t(ARN) of the rule's Lambda function, such as\n\t\t\t<code>arn:aws:lambda:us-east-2:123456789012:function:custom_rule_name</code>.</p>\n\t\t\n\t\t       <p>For Config Custom Policy rules, this field will be ignored.</p>"
                     }
                 },
                 "SourceDetails": {
                     "target": "com.amazonaws.configservice#SourceDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides the source and type of the event that causes Config to evaluate your Amazon Web Services resources.</p>"
+                        "smithy.api#documentation": "<p>Provides the source and the message types that cause Config to evaluate your Amazon Web Services resources against a rule. It also provides the frequency with which you want Config to run evaluations for the rule if the trigger type is periodic.</p>\n\t\t\n\t\t       <p>If the owner is set to <code>CUSTOM_POLICY</code>, the only acceptable values for the Config rule trigger message type are <code>ConfigurationItemChangeNotification</code> and <code>OversizedConfigurationItemChangeNotification</code>.</p>"
+                    }
+                },
+                "CustomPolicyDetails": {
+                    "target": "com.amazonaws.configservice#CustomPolicyDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides the runtime system, policy definition, and whether debug logging is enabled. Required when owner is set to <code>CUSTOM_POLICY</code>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides the Config rule owner (Amazon Web Services or customer), the rule\n\t\t\tidentifier, and the events that trigger the evaluation of your Amazon Web Services\n\t\t\tresources.</p>"
+                "smithy.api#documentation": "<p>Provides the CustomPolicyDetails, the rule owner (Amazon Web Services or customer), the rule\n\t\t\tidentifier, and the events that cause the evaluation of your Amazon Web Services\n\t\t\tresources.</p>"
             }
         },
         "com.amazonaws.configservice#SourceDetail": {
@@ -10747,7 +11096,7 @@
                 "MaximumExecutionFrequency": {
                     "target": "com.amazonaws.configservice#MaximumExecutionFrequency",
                     "traits": {
-                        "smithy.api#documentation": "<p>The frequency at which you want Config to run evaluations\n\t\t\tfor a custom rule with a periodic trigger. If you specify a value\n\t\t\tfor <code>MaximumExecutionFrequency</code>, then\n\t\t\t\t<code>MessageType</code> must use the\n\t\t\t\t<code>ScheduledNotification</code> value.</p>\n\n\n\t\t\n\n\n\t\t       <note>\n\t\t\t         <p>By default, rules with a periodic trigger are evaluated\n\t\t\t\tevery 24 hours. To change the frequency, specify a valid value\n\t\t\t\tfor the <code>MaximumExecutionFrequency</code>\n\t\t\t\tparameter.</p>\n\t\t\t         <p>Based on the valid value you choose, Config runs\n\t\t\t\tevaluations once for each valid value. For example, if you\n\t\t\t\tchoose <code>Three_Hours</code>, Config runs evaluations\n\t\t\t\tonce every three hours. In this case, <code>Three_Hours</code>\n\t\t\t\tis the frequency of this rule. </p>\n\t\t       </note>"
+                        "smithy.api#documentation": "<p>The frequency at which you want Config to run evaluations\n\t\t\tfor a custom rule with a periodic trigger. If you specify a value\n\t\t\tfor <code>MaximumExecutionFrequency</code>, then\n\t\t\t\t<code>MessageType</code> must use the\n\t\t\t\t<code>ScheduledNotification</code> value.</p>\n\n\n\t\t\n\n\t\t       <note>\n\t\t\t         <p>By default, rules with a periodic trigger are evaluated\n\t\t\t\tevery 24 hours. To change the frequency, specify a valid value\n\t\t\t\tfor the <code>MaximumExecutionFrequency</code>\n\t\t\t\tparameter.</p>\n\t\t\t         <p>Based on the valid value you choose, Config runs\n\t\t\t\tevaluations once for each valid value. For example, if you\n\t\t\t\tchoose <code>Three_Hours</code>, Config runs evaluations\n\t\t\t\tonce every three hours. In this case, <code>Three_Hours</code>\n\t\t\t\tis the frequency of this rule. </p>\n\t\t       </note>"
                     }
                 }
             },
@@ -10981,6 +11330,9 @@
                     "target": "com.amazonaws.configservice#GetConformancePackComplianceSummary"
                 },
                 {
+                    "target": "com.amazonaws.configservice#GetCustomRulePolicy"
+                },
+                {
                     "target": "com.amazonaws.configservice#GetDiscoveredResourceCounts"
                 },
                 {
@@ -10988,6 +11340,9 @@
                 },
                 {
                     "target": "com.amazonaws.configservice#GetOrganizationConformancePackDetailedStatus"
+                },
+                {
+                    "target": "com.amazonaws.configservice#GetOrganizationCustomRulePolicy"
                 },
                 {
                     "target": "com.amazonaws.configservice#GetResourceConfigHistory"
@@ -11255,12 +11610,12 @@
                 "MemberAccountRuleStatus": {
                     "target": "com.amazonaws.configservice#MemberAccountRuleStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates deployment status for config rule in the member account.\n\t\t\tWhen master account calls <code>PutOrganizationConfigRule</code> action for the first time, config rule status is created in the member account. \n\t\t\tWhen master account calls <code>PutOrganizationConfigRule</code> action for the second time, config rule status is updated in the member account.   \n\t\t\tConfig rule status is deleted when the master account deletes <code>OrganizationConfigRule</code> and disables service access for <code>config-multiaccountsetup.amazonaws.com</code>. \n\t\t\t</p>\n\t\t       <p>Config sets the state of the rule to:</p>\n\t\t       <ul>\n            <li>\n               <p>\n                  <code>CREATE_SUCCESSFUL</code> when config rule has been created in the member account.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_IN_PROGRESS</code> when config rule is being created in the member account.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_FAILED</code> when config rule creation has failed in the member account.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_FAILED</code> when config rule deletion has failed in the member account.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_IN_PROGRESS</code> when config rule is being deleted in the member account.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_SUCCESSFUL</code> when config rule has been deleted in the member account.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATE_SUCCESSFUL</code> when config rule has been updated in the member account.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATE_IN_PROGRESS</code> when config rule is being updated in the member account.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATE_FAILED</code> when config rule deletion has failed in the member account.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Indicates deployment status for Config rule in the member account.\n\t\t\tWhen master account calls <code>PutOrganizationConfigRule</code> action for the first time, Config rule status is created in the member account. \n\t\t\tWhen master account calls <code>PutOrganizationConfigRule</code> action for the second time, Config rule status is updated in the member account.   \n\t\t\tConfig rule status is deleted when the master account deletes <code>OrganizationConfigRule</code> and disables service access for <code>config-multiaccountsetup.amazonaws.com</code>. \n\t\t\t</p>\n\t\t       <p>Config sets the state of the rule to:</p>\n\t\t       <ul>\n            <li>\n               <p>\n                  <code>CREATE_SUCCESSFUL</code> when Config rule has been created in the member account.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_IN_PROGRESS</code> when Config rule is being created in the member account.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_FAILED</code> when Config rule creation has failed in the member account.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_FAILED</code> when Config rule deletion has failed in the member account.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_IN_PROGRESS</code> when Config rule is being deleted in the member account.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_SUCCESSFUL</code> when Config rule has been deleted in the member account.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATE_SUCCESSFUL</code> when Config rule has been updated in the member account.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATE_IN_PROGRESS</code> when Config rule is being updated in the member account.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATE_FAILED</code> when Config rule deletion has failed in the member account.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Status filter object to filter results based on specific member account ID or status type for an organization config rule. </p>"
+                "smithy.api#documentation": "<p>Status filter object to filter results based on specific member account ID or status type for an organization Config rule. </p>"
             }
         },
         "com.amazonaws.configservice#StopConfigurationRecorder": {

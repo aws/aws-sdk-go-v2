@@ -146,7 +146,7 @@
                 "MediaSampleRateHertz": {
                     "target": "com.amazonaws.transcribe#MediaSampleRateHertz",
                     "traits": {
-                        "smithy.api#documentation": "<p>The sample rate, in Hertz, of the audio.</p>"
+                        "smithy.api#documentation": "<p>The sample rate, in Hertz, of the input audio.</p>"
                     }
                 },
                 "MediaFormat": {
@@ -4093,7 +4093,7 @@
                 "LanguageCode": {
                     "target": "com.amazonaws.transcribe#LanguageCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code for the language used in the input media file.</p>\n        <p>To transcribe speech in Modern Standard Arabic (ar-SA), your audio or video file must \n            be encoded at a sample rate of 16,000 Hz or higher.</p>"
+                        "smithy.api#documentation": "<p>The language code for the language used in the input media file. You must include \n            either <code>LanguageCode</code> or <code>IdentifyLanguage</code> in your \n            request.</p>\n        <p>To transcribe speech in Modern Standard Arabic (ar-SA), your audio or video file must \n            be encoded at a sample rate of 16,000 Hz or higher.</p>"
                     }
                 },
                 "MediaSampleRateHertz": {
@@ -4166,7 +4166,7 @@
                 "IdentifyLanguage": {
                     "target": "com.amazonaws.transcribe#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Set this field to <code>true</code> to enable automatic language identification. \n            Automatic language identification is disabled by default. You receive a\n            <code>BadRequestException</code> error if you enter a value for a\n            <code>LanguageCode</code>.</p>"
+                        "smithy.api#documentation": "<p>Set this field to <code>true</code> to enable automatic language identification. \n            Automatic language identification is disabled by default. You receive a\n            <code>BadRequestException</code> error if you enter a value for a\n            <code>LanguageCode</code>.</p>\n        <p>You must include either <code>LanguageCode</code> or \n            <code>IdentifyLanguage</code> in your request.</p>"
                     }
                 },
                 "LanguageOptions": {
@@ -4201,7 +4201,7 @@
                 "TranscriptionJob": {
                     "target": "com.amazonaws.transcribe#TranscriptionJob",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object containing details of the asynchronous transcription job.</p>"
+                        "smithy.api#documentation": "<p>Provides information about your asynchronous transcription job.</p>"
                     }
                 }
             }
@@ -4247,18 +4247,34 @@
                 "target": "com.amazonaws.transcribe#SubtitleFormat"
             }
         },
+        "com.amazonaws.transcribe#SubtitleOutputStartIndex": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 1
+                }
+            }
+        },
         "com.amazonaws.transcribe#Subtitles": {
             "type": "structure",
             "members": {
                 "Formats": {
                     "target": "com.amazonaws.transcribe#SubtitleFormats",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify the output format for your subtitle file.</p>"
+                        "smithy.api#documentation": "<p>Specify the output format for your subtitle file; if you select both <code>srt</code> and\n            <code>vtt</code> formats, two output files are generated.</p>"
+                    }
+                },
+                "OutputStartIndex": {
+                    "target": "com.amazonaws.transcribe#SubtitleOutputStartIndex",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the starting value that is assigned to the first subtitle segment.</p>\n        <p>The default start index for Amazon Transcribe is <code>0</code>, which differs from\n            the more widely used standard of <code>1</code>. If you're uncertain which value to use,\n            we recommend choosing <code>1</code>, as this may improve compatibility with other\n            services.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Generate subtitles for your batch transcription job.</p>"
+                "smithy.api#documentation": "<p>Generate subtitles for your batch transcription job. Note that your subtitle files are\n            placed in the same location as your transcription output.</p>"
             }
         },
         "com.amazonaws.transcribe#SubtitlesOutput": {
@@ -4267,7 +4283,7 @@
                 "Formats": {
                     "target": "com.amazonaws.transcribe#SubtitleFormats",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify the output format for your subtitle file; if you select both SRT and VTT formats,\n            two output files are generated.</p>"
+                        "smithy.api#documentation": "<p>The format of your subtitle files. If your request specified both <code>srt</code> and\n            <code>vtt</code> formats, both formats are shown.</p>"
                     }
                 },
                 "SubtitleFileUris": {
@@ -4275,10 +4291,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Contains the output location for your subtitle file. This location must be an S3 \n            bucket.</p>"
                     }
+                },
+                "OutputStartIndex": {
+                    "target": "com.amazonaws.transcribe#SubtitleOutputStartIndex",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows the output start index value for your subtitle files. If you did not specify a value\n            in your request, the default value of <code>0</code> is used.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Choose the output format for your subtitle file and the S3 location where you want\n            your file saved.</p>"
+                "smithy.api#documentation": "<p>The S3 location where your subtitle files are located. Note that your subtitle files are\n            placed in the same location as your transcription output. Refer to\n            <code>TranscriptFileUri</code> to download your files.</p>"
             }
         },
         "com.amazonaws.transcribe#Tag": {
