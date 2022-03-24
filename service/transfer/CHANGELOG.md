@@ -1,3 +1,7 @@
+# v1.18.2 (2022-03-24)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.1 (2022-03-23)
 
 * **Documentation**: Documentation updates for AWS Transfer Family to describe how to remove an associated workflow from a server.

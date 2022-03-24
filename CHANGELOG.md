@@ -1,3 +1,16 @@
+# Release (2022-03-24)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/configservice`: [v1.20.0](service/configservice/CHANGELOG.md#v1200-2022-03-24)
+  * **Feature**: Added new APIs GetCustomRulePolicy and GetOrganizationCustomRulePolicy, and updated existing APIs PutConfigRule, DescribeConfigRule, DescribeConfigRuleEvaluationStatus, PutOrganizationConfigRule, DescribeConfigRule to support a new feature for building AWS Config rules with AWS CloudFormation Guard
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.21.0](service/lambda/CHANGELOG.md#v1210-2022-03-24)
+  * **Feature**: Adds support for increased ephemeral storage (/tmp) up to 10GB for Lambda functions. Customers can now provision up to 10 GB of ephemeral storage per function instance, a 20x increase over the previous limit of 512 MB.
+* `github.com/aws/aws-sdk-go-v2/service/transcribe`: [v1.19.0](service/transcribe/CHANGELOG.md#v1190-2022-03-24)
+  * **Feature**: This release adds an additional parameter for subtitling with Amazon Transcribe batch jobs: outputStartIndex.
+
 # Release (2022-03-23)
 
 ## General Highlights

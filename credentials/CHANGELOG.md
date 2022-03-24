@@ -1,3 +1,7 @@
+# v1.11.1 (2022-03-24)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.11.0 (2022-03-23)
 
 * **Feature**: Update `ec2rolecreds` package's `Provider` to implememnt support for CredentialsCache new optional caching strategy interfaces, HandleFailRefreshCredentialsCacheStrategy and AdjustExpiresByCredentialsCacheStrategy.
