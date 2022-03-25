@@ -1,3 +1,7 @@
+# v1.24.0 (2022-03-25)
+
+* **Feature**: This Patch Manager release supports creating, updating, and deleting Patch Baselines for Rocky Linux OS.
+
 # v1.23.1 (2022-03-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions
