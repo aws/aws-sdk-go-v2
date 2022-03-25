@@ -10,7 +10,7 @@ import (
 type ArrayProperties struct {
 
 	// The size of the array job.
-	Size int32
+	Size *int32
 
 	noSmithyDocumentSerde
 }
@@ -20,10 +20,10 @@ type ArrayPropertiesDetail struct {
 
 	// The job index within the array that's associated with this job. This parameter
 	// is returned for array job children.
-	Index int32
+	Index *int32
 
 	// The size of the array job. This parameter is returned for parent array jobs.
-	Size int32
+	Size *int32
 
 	// A summary of the number of array job children in each available job status. This
 	// parameter is returned for parent array jobs.
@@ -37,10 +37,10 @@ type ArrayPropertiesSummary struct {
 
 	// The job index within the array that's associated with this job. This parameter
 	// is returned for children of array jobs.
-	Index int32
+	Index *int32
 
 	// The size of the array job. This parameter is returned for parent array jobs.
-	Size int32
+	Size *int32
 
 	noSmithyDocumentSerde
 }
@@ -53,7 +53,7 @@ type AttemptContainerDetail struct {
 	ContainerInstanceArn *string
 
 	// The exit code for the job attempt. A non-zero exit code is considered a failure.
-	ExitCode int32
+	ExitCode *int32
 
 	// The name of the CloudWatch Logs log stream associated with the container. The
 	// log group for Batch jobs is /aws/batch/job. Each container attempt receives a
@@ -83,7 +83,7 @@ type AttemptDetail struct {
 
 	// The Unix timestamp (in milliseconds) for when the attempt was started (when the
 	// attempt transitioned from the STARTING state to the RUNNING state).
-	StartedAt int64
+	StartedAt *int64
 
 	// A short, human-readable string to provide additional details about the current
 	// status of the job attempt.
@@ -92,7 +92,7 @@ type AttemptDetail struct {
 	// The Unix timestamp (in milliseconds) for when the attempt was stopped (when the
 	// attempt transitioned from the RUNNING state to a terminal state, such as
 	// SUCCEEDED or FAILED).
-	StoppedAt int64
+	StoppedAt *int64
 
 	noSmithyDocumentSerde
 }
@@ -160,7 +160,7 @@ type ComputeEnvironmentDetail struct {
 
 	// The maximum number of VCPUs expected to be used for an unmanaged compute
 	// environment.
-	UnmanagedvCpus int32
+	UnmanagedvCpus *int32
 
 	noSmithyDocumentSerde
 }
@@ -188,7 +188,7 @@ type ComputeEnvironmentOrder struct {
 	// job placement first.
 	//
 	// This member is required.
-	Order int32
+	Order *int32
 
 	noSmithyDocumentSerde
 }
@@ -207,7 +207,7 @@ type ComputeResource struct {
 	// in your compute environment is allocated.
 	//
 	// This member is required.
-	MaxvCpus int32
+	MaxvCpus *int32
 
 	// The VPC subnets where the compute resources are launched. These subnets must be
 	// within the same VPC. Fargate compute resources can contain up to 16 subnets. For
@@ -268,13 +268,13 @@ type ComputeResource struct {
 	// you leave this field empty, the default value is 100% of the On-Demand price.
 	// This parameter isn't applicable to jobs that are running on Fargate resources,
 	// and shouldn't be specified.
-	BidPercentage int32
+	BidPercentage *int32
 
 	// The desired number of Amazon EC2 vCPUS in the compute environment. Batch
 	// modifies this value between the minimum and maximum values, based on job queue
 	// demand. This parameter isn't applicable to jobs that are running on Fargate
 	// resources, and shouldn't be specified.
-	DesiredvCpus int32
+	DesiredvCpus *int32
 
 	// Provides information used to select Amazon Machine Images (AMIs) for EC2
 	// instances in the compute environment. If Ec2Configuration isn't specified, the
@@ -343,7 +343,7 @@ type ComputeResource struct {
 	// The minimum number of Amazon EC2 vCPUs that an environment should maintain (even
 	// if the compute environment is DISABLED). This parameter isn't applicable to jobs
 	// that are running on Fargate resources, and shouldn't be specified.
-	MinvCpus int32
+	MinvCpus *int32
 
 	// The Amazon EC2 placement group to associate with your compute resources. If you
 	// intend to submit multi-node parallel jobs to your compute environment, you
@@ -405,19 +405,19 @@ type ComputeResourceUpdate struct {
 	// The desired number of Amazon EC2 vCPUS in the compute environment. This
 	// parameter isn't applicable to jobs that are running on Fargate resources, and
 	// shouldn't be specified.
-	DesiredvCpus int32
+	DesiredvCpus *int32
 
 	// The maximum number of Amazon EC2 vCPUs that an environment can reach. With both
 	// BEST_FIT_PROGRESSIVE and SPOT_CAPACITY_OPTIMIZED allocation strategies, Batch
 	// might need to exceed maxvCpus to meet your capacity requirements. In this event,
 	// Batch never exceeds maxvCpus by more than a single instance. That is, no more
 	// than a single instance from among those specified in your compute environment.
-	MaxvCpus int32
+	MaxvCpus *int32
 
 	// The minimum number of Amazon EC2 vCPUs that an environment should maintain. This
 	// parameter isn't applicable to jobs that are running on Fargate resources, and
 	// shouldn't be specified.
-	MinvCpus int32
+	MinvCpus *int32
 
 	// The Amazon EC2 security groups associated with instances launched in the compute
 	// environment. This parameter is required for Fargate compute resources, where it
@@ -459,7 +459,7 @@ type ContainerDetail struct {
 	ExecutionRoleArn *string
 
 	// The exit code to return upon completion.
-	ExitCode int32
+	ExitCode *int32
 
 	// The platform configuration for jobs that are running on Fargate resources. Jobs
 	// that are running on EC2 resources must not specify this parameter.
@@ -515,10 +515,10 @@ type ContainerDetail struct {
 	// log stream name when they reach the RUNNING status.
 	LogStreamName *string
 
-	// For jobs run on EC2 resources that didn't specify memory requirements using
+	// For jobs running on EC2 resources that didn't specify memory requirements using
 	// resourceRequirements, the number of MiB of memory reserved for the job. For
 	// other jobs, including all run on Fargate resources, see resourceRequirements.
-	Memory int32
+	Memory *int32
 
 	// The mount points for data volumes in your container.
 	MountPoints []MountPoint
@@ -534,7 +534,7 @@ type ContainerDetail struct {
 	// host container instance (similar to the root user). The default value is false.
 	// This parameter isn't applicable to jobs that are running on Fargate resources
 	// and shouldn't be provided, or specified as false.
-	Privileged bool
+	Privileged *bool
 
 	// When this parameter is true, the container is given read-only access to its root
 	// file system. This parameter maps to ReadonlyRootfs in the Create a container
@@ -542,7 +542,7 @@ type ContainerDetail struct {
 	// Docker Remote API (https://docs.docker.com/engine/api/v1.23/) and the
 	// --read-only option to docker run
 	// (https://docs.docker.com/engine/reference/commandline/run/).
-	ReadonlyRootFilesystem bool
+	ReadonlyRootFilesystem *bool
 
 	// A short (255 max characters) human-readable string to provide additional details
 	// about a running or stopped container.
@@ -592,7 +592,7 @@ type ContainerDetail struct {
 	// once. This parameter isn't applicable to jobs that run on Fargate resources. For
 	// jobs that run on Fargate resources, you must specify the vCPU requirement for
 	// the job using resourceRequirements.
-	Vcpus int32
+	Vcpus *int32
 
 	// A list of volumes associated with the job.
 	Volumes []Volume
@@ -620,19 +620,20 @@ type ContainerOverrides struct {
 	InstanceType *string
 
 	// This parameter is deprecated, use resourceRequirements to override the memory
-	// requirements specified in the job definition. It's not supported for jobs that
-	// run on Fargate resources. For jobs run on EC2 resources, it overrides the memory
-	// parameter set in the job definition, but doesn't override any memory requirement
-	// specified in the resourceRequirements structure in the job definition. To
-	// override memory requirements that are specified in the resourceRequirements
-	// structure in the job definition, resourceRequirements must be specified in the
-	// SubmitJob request, with type set to MEMORY and value set to the new value. For
-	// more information, see Can't override job definition resource requirements
+	// requirements specified in the job definition. It's not supported for jobs
+	// running on Fargate resources. For jobs running on EC2 resources, it overrides
+	// the memory parameter set in the job definition, but doesn't override any memory
+	// requirement specified in the resourceRequirements structure in the job
+	// definition. To override memory requirements that are specified in the
+	// resourceRequirements structure in the job definition, resourceRequirements must
+	// be specified in the SubmitJob request, with type set to MEMORY and value set to
+	// the new value. For more information, see Can't override job definition resource
+	// requirements
 	// (https://docs.aws.amazon.com/batch/latest/userguide/troubleshooting.html#override-resource-requirements)
 	// in the Batch User Guide.
 	//
 	// Deprecated: This field is deprecated, use resourceRequirements instead.
-	Memory int32
+	Memory *int32
 
 	// The type and amount of resources to assign to a container. This overrides the
 	// settings in the job definition. The supported resources include GPU, MEMORY, and
@@ -640,8 +641,8 @@ type ContainerOverrides struct {
 	ResourceRequirements []ResourceRequirement
 
 	// This parameter is deprecated, use resourceRequirements to override the vcpus
-	// parameter that's set in the job definition. It's not supported for jobs that run
-	// on Fargate resources. For jobs run on EC2 resources, it overrides the vcpus
+	// parameter that's set in the job definition. It's not supported for jobs running
+	// on Fargate resources. For jobs running on EC2 resources, it overrides the vcpus
 	// parameter set in the job definition, but doesn't override any vCPU requirement
 	// specified in the resourceRequirements structure in the job definition. To
 	// override vCPU requirements that are specified in the resourceRequirements
@@ -652,7 +653,7 @@ type ContainerOverrides struct {
 	// in the Batch User Guide.
 	//
 	// Deprecated: This field is deprecated, use resourceRequirements instead.
-	Vcpus int32
+	Vcpus *int32
 
 	noSmithyDocumentSerde
 }
@@ -704,8 +705,13 @@ type ContainerProperties struct {
 	// resources that they're scheduled on. For example, ARM-based Docker images can
 	// only run on ARM-based compute resources.
 	//
-	// * Images in Amazon ECR repositories
-	// use the full registry and repository URI (for example,
+	// * Images in Amazon ECR Public
+	// repositories use the full registry/repository[:tag] or
+	// registry/repository[@digest] naming conventions. For example,
+	// public.ecr.aws/registry_alias/my-web-app:latest .
+	//
+	// * Images in Amazon ECR
+	// repositories use the full registry and repository URI (for example,
 	// 012345678910.dkr.ecr..amazonaws.com/).
 	//
 	// * Images in official repositories on
@@ -764,15 +770,15 @@ type ContainerProperties struct {
 	LogConfiguration *LogConfiguration
 
 	// This parameter is deprecated, use resourceRequirements to specify the memory
-	// requirements for the job definition. It's not supported for jobs that run on
-	// Fargate resources. For jobs run on EC2 resources, it specifies the memory hard
-	// limit (in MiB) for a container. If your container attempts to exceed the
+	// requirements for the job definition. It's not supported for jobs running on
+	// Fargate resources. For jobs running on EC2 resources, it specifies the memory
+	// hard limit (in MiB) for a container. If your container attempts to exceed the
 	// specified number, it's terminated. You must specify at least 4 MiB of memory for
 	// a job using this parameter. The memory hard limit can be specified in several
 	// places. It must be specified for each node at least once.
 	//
 	// Deprecated: This field is deprecated, use resourceRequirements instead.
-	Memory int32
+	Memory *int32
 
 	// The mount points for data volumes in your container. This parameter maps to
 	// Volumes in the Create a container
@@ -794,14 +800,14 @@ type ContainerProperties struct {
 	// (https://docs.docker.com/engine/reference/run/). The default value is false.
 	// This parameter isn't applicable to jobs that are running on Fargate resources
 	// and shouldn't be provided, or specified as false.
-	Privileged bool
+	Privileged *bool
 
 	// When this parameter is true, the container is given read-only access to its root
 	// file system. This parameter maps to ReadonlyRootfs in the Create a container
 	// (https://docs.docker.com/engine/api/v1.23/#create-a-container) section of the
 	// Docker Remote API (https://docs.docker.com/engine/api/v1.23/) and the
 	// --read-only option to docker run.
-	ReadonlyRootFilesystem bool
+	ReadonlyRootFilesystem *bool
 
 	// The type and amount of resources to assign to a container. The supported
 	// resources include GPU, MEMORY, and VCPU.
@@ -830,8 +836,8 @@ type ContainerProperties struct {
 	User *string
 
 	// This parameter is deprecated, use resourceRequirements to specify the vCPU
-	// requirements for the job definition. It's not supported for jobs that run on
-	// Fargate resources. For jobs run on EC2 resources, it specifies the number of
+	// requirements for the job definition. It's not supported for jobs running on
+	// Fargate resources. For jobs running on EC2 resources, it specifies the number of
 	// vCPUs reserved for the job. Each vCPU is equivalent to 1,024 CPU shares. This
 	// parameter maps to CpuShares in the Create a container
 	// (https://docs.docker.com/engine/api/v1.23/#create-a-container) section of the
@@ -842,7 +848,7 @@ type ContainerProperties struct {
 	// once for each node.
 	//
 	// Deprecated: This field is deprecated, use resourceRequirements instead.
-	Vcpus int32
+	Vcpus *int32
 
 	// A list of data volumes used in a job.
 	Volumes []Volume
@@ -854,7 +860,7 @@ type ContainerProperties struct {
 type ContainerSummary struct {
 
 	// The exit code to return upon completion.
-	ExitCode int32
+	ExitCode *int32
 
 	// A short (255 max characters) human-readable string to provide additional details
 	// about a running or stopped container.
@@ -978,7 +984,7 @@ type EFSVolumeConfiguration struct {
 	// between 0 and 65,535. For more information, see EFS Mount Helper
 	// (https://docs.aws.amazon.com/efs/latest/ug/efs-mount-helper.html) in the Amazon
 	// Elastic File System User Guide.
-	TransitEncryptionPort int32
+	TransitEncryptionPort *int32
 
 	noSmithyDocumentSerde
 }
@@ -1032,14 +1038,14 @@ type FairsharePolicy struct {
 	// maximum available vCPU if there is only one fair share identifier, 6.25% if
 	// there are two fair share identifiers, and 1.56% if there are three fair share
 	// identifiers. The minimum value is 0 and the maximum value is 99.
-	ComputeReservation int32
+	ComputeReservation *int32
 
 	// The time period to use to calculate a fair share percentage for each fair share
 	// identifier in use, in seconds. A value of zero (0) indicates that only current
 	// usage should be measured. The decay allows for more recently run jobs to have
 	// more weight than jobs that ran earlier. The maximum supported value is 604800 (1
 	// week).
-	ShareDecaySeconds int32
+	ShareDecaySeconds *int32
 
 	// An array of SharedIdentifier objects that contain the weights for the fair share
 	// identifiers for the fair share policy. Fair share identifiers that aren't
@@ -1100,7 +1106,7 @@ type JobDefinition struct {
 	// The revision of the job definition.
 	//
 	// This member is required.
-	Revision int32
+	Revision *int32
 
 	// The type of job definition, either container or multinode. If the job is run on
 	// Fargate resources, then multinode isn't supported. For more information about
@@ -1138,7 +1144,7 @@ type JobDefinition struct {
 	// tags with the same name, job tags are given priority over job definitions tags.
 	// If the total number of combined tags from the job and job definition is over 50,
 	// the job is moved to the FAILED state.
-	PropagateTags bool
+	PropagateTags *bool
 
 	// The retry strategy to use for failed jobs that are submitted with this job
 	// definition.
@@ -1147,7 +1153,7 @@ type JobDefinition struct {
 	// The scheduling priority of the job definition. This only affects jobs in job
 	// queues with a fair share policy. Jobs with a higher scheduling priority are
 	// scheduled before jobs with a lower scheduling priority.
-	SchedulingPriority int32
+	SchedulingPriority *int32
 
 	// The status of the job definition.
 	Status *string
@@ -1203,7 +1209,7 @@ type JobDetail struct {
 	// provided for child jobs of array jobs or multi-node parallel jobs.
 	//
 	// This member is required.
-	StartedAt int64
+	StartedAt *int64
 
 	// The current status for the job. If your jobs don't progress to STARTING, see
 	// Jobs Stuck in RUNNABLE Status
@@ -1227,7 +1233,7 @@ type JobDetail struct {
 	// jobs and parent array jobs, this is when the job entered the SUBMITTED state (at
 	// the time SubmitJob was called). For array child jobs, this is when the child job
 	// was spawned by its parent and entered the PENDING state.
-	CreatedAt int64
+	CreatedAt *int64
 
 	// A list of job IDs that this job depends on.
 	DependsOn []JobDependency
@@ -1258,7 +1264,7 @@ type JobDetail struct {
 	// tags with the same name, job tags are given priority over job definitions tags.
 	// If the total number of combined tags from the job and job definition is over 50,
 	// the job is moved to the FAILED state.
-	PropagateTags bool
+	PropagateTags *bool
 
 	// The retry strategy to use for this job if an attempt fails.
 	RetryStrategy *RetryStrategy
@@ -1266,7 +1272,7 @@ type JobDetail struct {
 	// The scheduling policy of the job definition. This only affects jobs in job
 	// queues with a fair share policy. Jobs with a higher scheduling priority are
 	// scheduled before jobs with a lower scheduling priority.
-	SchedulingPriority int32
+	SchedulingPriority *int32
 
 	// The share identifier for the job.
 	ShareIdentifier *string
@@ -1278,7 +1284,7 @@ type JobDetail struct {
 	// The Unix timestamp (in milliseconds) for when the job was stopped (when the job
 	// transitioned from the RUNNING state to a terminal state, such as SUCCEEDED or
 	// FAILED).
-	StoppedAt int64
+	StoppedAt *int64
 
 	// The tags applied to the job.
 	Tags map[string]string
@@ -1318,7 +1324,7 @@ type JobQueueDetail struct {
 	// FARGATE_SPOT); EC2 and Fargate compute environments can't be mixed.
 	//
 	// This member is required.
-	Priority int32
+	Priority *int32
 
 	// Describes the ability of the queue to accept new jobs. If the job queue state is
 	// ENABLED, it's able to accept jobs. If the job queue state is DISABLED, new jobs
@@ -1371,7 +1377,7 @@ type JobSummary struct {
 	// jobs and parent array jobs, this is when the job entered the SUBMITTED state (at
 	// the time SubmitJob was called). For array child jobs, this is when the child job
 	// was spawned by its parent and entered the PENDING state.
-	CreatedAt int64
+	CreatedAt *int64
 
 	// The Amazon Resource Name (ARN) of the job.
 	JobArn *string
@@ -1385,7 +1391,7 @@ type JobSummary struct {
 
 	// The Unix timestamp for when the job was started (when the job transitioned from
 	// the STARTING state to the RUNNING state).
-	StartedAt int64
+	StartedAt *int64
 
 	// The current status for the job.
 	Status JobStatus
@@ -1396,7 +1402,7 @@ type JobSummary struct {
 
 	// The Unix timestamp for when the job was stopped (when the job transitioned from
 	// the RUNNING state to a terminal state, such as SUCCEEDED or FAILED).
-	StoppedAt int64
+	StoppedAt *int64
 
 	noSmithyDocumentSerde
 }
@@ -1407,7 +1413,7 @@ type JobTimeout struct {
 	// The time duration in seconds (measured from the job attempt's startedAt
 	// timestamp) after which Batch terminates your jobs if they have not finished. The
 	// minimum value for the timeout is 60 seconds.
-	AttemptDurationSeconds int32
+	AttemptDurationSeconds *int32
 
 	noSmithyDocumentSerde
 }
@@ -1488,7 +1494,7 @@ type LinuxParameters struct {
 	// the Docker Remote API version on your container instance, log into your
 	// container instance and run the following command: sudo docker version | grep
 	// "Server API version"
-	InitProcessEnabled bool
+	InitProcessEnabled *bool
 
 	// The total amount of swap memory (in MiB) a container can use. This parameter is
 	// translated to the --memory-swap option to docker run
@@ -1502,13 +1508,13 @@ type LinuxParameters struct {
 	// container instance it is running on. A maxSwap value must be set for the
 	// swappiness parameter to be used. This parameter isn't applicable to jobs that
 	// are running on Fargate resources and shouldn't be provided.
-	MaxSwap int32
+	MaxSwap *int32
 
 	// The value for the size (in MiB) of the /dev/shm volume. This parameter maps to
 	// the --shm-size option to docker run
 	// (https://docs.docker.com/engine/reference/run/). This parameter isn't applicable
 	// to jobs that are running on Fargate resources and shouldn't be provided.
-	SharedMemorySize int32
+	SharedMemorySize *int32
 
 	// This allows you to tune a container's memory swappiness behavior. A swappiness
 	// value of 0 causes swapping not to happen unless absolutely necessary. A
@@ -1541,7 +1547,7 @@ type LinuxParameters struct {
 	//
 	// This parameter isn't applicable to jobs that are running on Fargate
 	// resources and shouldn't be provided.
-	Swappiness int32
+	Swappiness *int32
 
 	// The container path, mount options, and size (in MiB) of the tmpfs mount. This
 	// parameter maps to the --tmpfs option to docker run
@@ -1624,7 +1630,7 @@ type MountPoint struct {
 
 	// If this value is true, the container has read-only access to the volume.
 	// Otherwise, the container can write to the volume. The default value is false.
-	ReadOnly bool
+	ReadOnly *bool
 
 	// The name of the volume to mount.
 	SourceVolume *string
@@ -1669,12 +1675,12 @@ type NodeDetails struct {
 
 	// Specifies whether the current node is the main node for a multi-node parallel
 	// job.
-	IsMainNode bool
+	IsMainNode *bool
 
 	// The node index for the node. Node index numbering begins at zero. This index is
 	// also available on the node with the AWS_BATCH_JOB_NODE_INDEX environment
 	// variable.
-	NodeIndex int32
+	NodeIndex *int32
 
 	noSmithyDocumentSerde
 }
@@ -1700,7 +1706,7 @@ type NodeOverrides struct {
 	//
 	// * The main node index specified in the job
 	// definition must be fewer than the number of nodes specified in the override.
-	NumNodes int32
+	NumNodes *int32
 
 	noSmithyDocumentSerde
 }
@@ -1712,7 +1718,7 @@ type NodeProperties struct {
 	// node index value must be fewer than the number of nodes.
 	//
 	// This member is required.
-	MainNode int32
+	MainNode *int32
 
 	// A list of node ranges and their properties associated with a multi-node parallel
 	// job.
@@ -1723,7 +1729,7 @@ type NodeProperties struct {
 	// The number of nodes associated with a multi-node parallel job.
 	//
 	// This member is required.
-	NumNodes int32
+	NumNodes *int32
 
 	noSmithyDocumentSerde
 }
@@ -1734,15 +1740,15 @@ type NodePropertiesSummary struct {
 
 	// Specifies whether the current node is the main node for a multi-node parallel
 	// job.
-	IsMainNode bool
+	IsMainNode *bool
 
 	// The node index for the node. Node index numbering begins at zero. This index is
 	// also available on the node with the AWS_BATCH_JOB_NODE_INDEX environment
 	// variable.
-	NodeIndex int32
+	NodeIndex *int32
 
 	// The number of nodes associated with a multi-node parallel job.
-	NumNodes int32
+	NumNodes *int32
 
 	noSmithyDocumentSerde
 }
@@ -1860,7 +1866,7 @@ type RetryStrategy struct {
 	// The number of times to move a job to the RUNNABLE status. You can specify
 	// between 1 and 10 attempts. If the value of attempts is greater than one, the job
 	// is retried on failure the same number of attempts as the value.
-	Attempts int32
+	Attempts *int32
 
 	// Array of up to 5 objects that specify conditions under which the job should be
 	// retried or failed. If this parameter is specified, then the attempts parameter
@@ -1965,7 +1971,7 @@ type ShareAttributes struct {
 	// compute resources of jobs that use a share identifier with a weight factor of 1.
 	// The smallest supported value is 0.0001, and the largest supported value is
 	// 999.9999.
-	WeightFactor float32
+	WeightFactor *float32
 
 	noSmithyDocumentSerde
 }
@@ -1982,7 +1988,7 @@ type Tmpfs struct {
 	// The size (in MiB) of the tmpfs volume.
 	//
 	// This member is required.
-	Size int32
+	Size *int32
 
 	// The list of tmpfs volume mount options. Valid values: "defaults" | "ro" | "rw" |
 	// "suid" | "nosuid" | "dev" | "nodev" | "exec" | "noexec" | "sync" | "async" |
@@ -2003,7 +2009,7 @@ type Ulimit struct {
 	// The hard limit for the ulimit type.
 	//
 	// This member is required.
-	HardLimit int32
+	HardLimit *int32
 
 	// The type of the ulimit.
 	//
@@ -2013,7 +2019,7 @@ type Ulimit struct {
 	// The soft limit for the ulimit type.
 	//
 	// This member is required.
-	SoftLimit int32
+	SoftLimit *int32
 
 	noSmithyDocumentSerde
 }

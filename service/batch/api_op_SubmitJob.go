@@ -16,7 +16,7 @@ import (
 // requirements that are specified in the resourceRequirements objects in the job
 // definition are the exception. They can't be overridden this way using the memory
 // and vcpus parameters. Rather, you must specify updates to job definition
-// parameters in a ResourceRequirements object that's included in the
+// parameters in a resourceRequirements object that's included in the
 // containerOverrides parameter. Job queues with a scheduling policy are limited to
 // 500 active fair share identifiers at a time. Jobs that run on Fargate resources
 // can't be guaranteed to run for more than 14 days. This is because, after 14
@@ -100,7 +100,7 @@ type SubmitJobInput struct {
 	// If the total number of combined tags from the job and job definition is over 50,
 	// the job is moved to the FAILED state. When specified, this overrides the tag
 	// propagation setting in the job definition.
-	PropagateTags bool
+	PropagateTags *bool
 
 	// The retry strategy to use for failed jobs from this SubmitJob operation. When a
 	// retry strategy is specified here, it overrides the retry strategy defined in the
@@ -112,7 +112,7 @@ type SubmitJobInput struct {
 	// scheduled before jobs with a lower scheduling priority. This will override any
 	// scheduling priority in the job definition. The minimum supported value is 0 and
 	// the maximum supported value is 9999.
-	SchedulingPriorityOverride int32
+	SchedulingPriorityOverride *int32
 
 	// The share identifier for the job.
 	ShareIdentifier *string

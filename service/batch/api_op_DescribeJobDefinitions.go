@@ -48,7 +48,7 @@ type DescribeJobDefinitionsInput struct {
 	// DescribeJobDefinitions request with the returned nextToken value. This value can
 	// be between 1 and 100. If this parameter isn't used, then DescribeJobDefinitions
 	// returns up to 100 results and a nextToken value if applicable.
-	MaxResults int32
+	MaxResults *int32
 
 	// The nextToken value returned from a previous paginated DescribeJobDefinitions
 	// request where maxResults was used and the results exceeded the value of that
@@ -182,8 +182,8 @@ func NewDescribeJobDefinitionsPaginator(client DescribeJobDefinitionsAPIClient, 
 	}
 
 	options := DescribeJobDefinitionsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -213,7 +213,11 @@ func (p *DescribeJobDefinitionsPaginator) NextPage(ctx context.Context, optFns .
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.DescribeJobDefinitions(ctx, &params, optFns...)
 	if err != nil {

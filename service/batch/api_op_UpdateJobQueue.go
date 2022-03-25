@@ -53,7 +53,7 @@ type UpdateJobQueueInput struct {
 	// preference over a job queue with a priority value of 1. All of the compute
 	// environments must be either EC2 (EC2 or SPOT) or Fargate (FARGATE or
 	// FARGATE_SPOT). EC2 and Fargate compute environments can't be mixed.
-	Priority int32
+	Priority *int32
 
 	// Amazon Resource Name (ARN) of the fair share scheduling policy. Once a job queue
 	// is created, the fair share scheduling policy can be replaced but not removed.

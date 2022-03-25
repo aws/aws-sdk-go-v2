@@ -79,7 +79,7 @@ type RegisterJobDefinitionInput struct {
 	// tags with the same name, job tags are given priority over job definitions tags.
 	// If the total number of combined tags from the job and job definition is over 50,
 	// the job is moved to the FAILED state.
-	PropagateTags bool
+	PropagateTags *bool
 
 	// The retry strategy to use for failed jobs that are submitted with this job
 	// definition. Any retry strategy that's specified during a SubmitJob operation
@@ -92,7 +92,7 @@ type RegisterJobDefinitionInput struct {
 	// higher scheduling priority will be scheduled before jobs with a lower scheduling
 	// priority. The minimum supported value is 0 and the maximum supported value is
 	// 9999.
-	SchedulingPriority int32
+	SchedulingPriority *int32
 
 	// The tags that you apply to the job definition to help you categorize and
 	// organize your resources. Each tag consists of a key and an optional value. For
@@ -129,7 +129,7 @@ type RegisterJobDefinitionOutput struct {
 	// The revision of the job definition.
 	//
 	// This member is required.
-	Revision int32
+	Revision *int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

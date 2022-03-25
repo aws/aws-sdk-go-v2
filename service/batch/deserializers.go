@@ -2347,7 +2347,7 @@ func awsRestjson1_deserializeOpDocumentRegisterJobDefinitionOutput(v **RegisterJ
 				if err != nil {
 					return err
 				}
-				sv.Revision = int32(i64)
+				sv.Revision = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -3345,7 +3345,7 @@ func awsRestjson1_deserializeDocumentArrayPropertiesDetail(v **types.ArrayProper
 				if err != nil {
 					return err
 				}
-				sv.Index = int32(i64)
+				sv.Index = ptr.Int32(int32(i64))
 			}
 
 		case "size":
@@ -3358,7 +3358,7 @@ func awsRestjson1_deserializeDocumentArrayPropertiesDetail(v **types.ArrayProper
 				if err != nil {
 					return err
 				}
-				sv.Size = int32(i64)
+				sv.Size = ptr.Int32(int32(i64))
 			}
 
 		case "statusSummary":
@@ -3407,7 +3407,7 @@ func awsRestjson1_deserializeDocumentArrayPropertiesSummary(v **types.ArrayPrope
 				if err != nil {
 					return err
 				}
-				sv.Index = int32(i64)
+				sv.Index = ptr.Int32(int32(i64))
 			}
 
 		case "size":
@@ -3420,7 +3420,7 @@ func awsRestjson1_deserializeDocumentArrayPropertiesSummary(v **types.ArrayPrope
 				if err != nil {
 					return err
 				}
-				sv.Size = int32(i64)
+				sv.Size = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -3473,7 +3473,7 @@ func awsRestjson1_deserializeDocumentAttemptContainerDetail(v **types.AttemptCon
 				if err != nil {
 					return err
 				}
-				sv.ExitCode = int32(i64)
+				sv.ExitCode = ptr.Int32(int32(i64))
 			}
 
 		case "logStreamName":
@@ -3554,7 +3554,7 @@ func awsRestjson1_deserializeDocumentAttemptDetail(v **types.AttemptDetail, valu
 				if err != nil {
 					return err
 				}
-				sv.StartedAt = i64
+				sv.StartedAt = ptr.Int64(i64)
 			}
 
 		case "statusReason":
@@ -3576,7 +3576,7 @@ func awsRestjson1_deserializeDocumentAttemptDetail(v **types.AttemptDetail, valu
 				if err != nil {
 					return err
 				}
-				sv.StoppedAt = i64
+				sv.StoppedAt = ptr.Int64(i64)
 			}
 
 		default:
@@ -3776,7 +3776,7 @@ func awsRestjson1_deserializeDocumentComputeEnvironmentDetail(v **types.ComputeE
 				if err != nil {
 					return err
 				}
-				sv.UnmanagedvCpus = int32(i64)
+				sv.UnmanagedvCpus = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -3863,7 +3863,7 @@ func awsRestjson1_deserializeDocumentComputeEnvironmentOrder(v **types.ComputeEn
 				if err != nil {
 					return err
 				}
-				sv.Order = int32(i64)
+				sv.Order = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -3950,7 +3950,7 @@ func awsRestjson1_deserializeDocumentComputeResource(v **types.ComputeResource, 
 				if err != nil {
 					return err
 				}
-				sv.BidPercentage = int32(i64)
+				sv.BidPercentage = ptr.Int32(int32(i64))
 			}
 
 		case "desiredvCpus":
@@ -3963,7 +3963,7 @@ func awsRestjson1_deserializeDocumentComputeResource(v **types.ComputeResource, 
 				if err != nil {
 					return err
 				}
-				sv.DesiredvCpus = int32(i64)
+				sv.DesiredvCpus = ptr.Int32(int32(i64))
 			}
 
 		case "ec2Configuration":
@@ -4018,7 +4018,7 @@ func awsRestjson1_deserializeDocumentComputeResource(v **types.ComputeResource, 
 				if err != nil {
 					return err
 				}
-				sv.MaxvCpus = int32(i64)
+				sv.MaxvCpus = ptr.Int32(int32(i64))
 			}
 
 		case "minvCpus":
@@ -4031,7 +4031,7 @@ func awsRestjson1_deserializeDocumentComputeResource(v **types.ComputeResource, 
 				if err != nil {
 					return err
 				}
-				sv.MinvCpus = int32(i64)
+				sv.MinvCpus = ptr.Int32(int32(i64))
 			}
 
 		case "placementGroup":
@@ -4145,7 +4145,7 @@ func awsRestjson1_deserializeDocumentContainerDetail(v **types.ContainerDetail, 
 				if err != nil {
 					return err
 				}
-				sv.ExitCode = int32(i64)
+				sv.ExitCode = ptr.Int32(int32(i64))
 			}
 
 		case "fargatePlatformConfiguration":
@@ -4209,7 +4209,7 @@ func awsRestjson1_deserializeDocumentContainerDetail(v **types.ContainerDetail, 
 				if err != nil {
 					return err
 				}
-				sv.Memory = int32(i64)
+				sv.Memory = ptr.Int32(int32(i64))
 			}
 
 		case "mountPoints":
@@ -4233,7 +4233,7 @@ func awsRestjson1_deserializeDocumentContainerDetail(v **types.ContainerDetail, 
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Privileged = jtv
+				sv.Privileged = ptr.Bool(jtv)
 			}
 
 		case "readonlyRootFilesystem":
@@ -4242,7 +4242,7 @@ func awsRestjson1_deserializeDocumentContainerDetail(v **types.ContainerDetail, 
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.ReadonlyRootFilesystem = jtv
+				sv.ReadonlyRootFilesystem = ptr.Bool(jtv)
 			}
 
 		case "reason":
@@ -4297,7 +4297,7 @@ func awsRestjson1_deserializeDocumentContainerDetail(v **types.ContainerDetail, 
 				if err != nil {
 					return err
 				}
-				sv.Vcpus = int32(i64)
+				sv.Vcpus = ptr.Int32(int32(i64))
 			}
 
 		case "volumes":
@@ -4407,7 +4407,7 @@ func awsRestjson1_deserializeDocumentContainerProperties(v **types.ContainerProp
 				if err != nil {
 					return err
 				}
-				sv.Memory = int32(i64)
+				sv.Memory = ptr.Int32(int32(i64))
 			}
 
 		case "mountPoints":
@@ -4426,7 +4426,7 @@ func awsRestjson1_deserializeDocumentContainerProperties(v **types.ContainerProp
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Privileged = jtv
+				sv.Privileged = ptr.Bool(jtv)
 			}
 
 		case "readonlyRootFilesystem":
@@ -4435,7 +4435,7 @@ func awsRestjson1_deserializeDocumentContainerProperties(v **types.ContainerProp
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.ReadonlyRootFilesystem = jtv
+				sv.ReadonlyRootFilesystem = ptr.Bool(jtv)
 			}
 
 		case "resourceRequirements":
@@ -4472,7 +4472,7 @@ func awsRestjson1_deserializeDocumentContainerProperties(v **types.ContainerProp
 				if err != nil {
 					return err
 				}
-				sv.Vcpus = int32(i64)
+				sv.Vcpus = ptr.Int32(int32(i64))
 			}
 
 		case "volumes":
@@ -4521,7 +4521,7 @@ func awsRestjson1_deserializeDocumentContainerSummary(v **types.ContainerSummary
 				if err != nil {
 					return err
 				}
-				sv.ExitCode = int32(i64)
+				sv.ExitCode = ptr.Int32(int32(i64))
 			}
 
 		case "reason":
@@ -4862,7 +4862,7 @@ func awsRestjson1_deserializeDocumentEFSVolumeConfiguration(v **types.EFSVolumeC
 				if err != nil {
 					return err
 				}
-				sv.TransitEncryptionPort = int32(i64)
+				sv.TransitEncryptionPort = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -5041,7 +5041,7 @@ func awsRestjson1_deserializeDocumentFairsharePolicy(v **types.FairsharePolicy, 
 				if err != nil {
 					return err
 				}
-				sv.ComputeReservation = int32(i64)
+				sv.ComputeReservation = ptr.Int32(int32(i64))
 			}
 
 		case "shareDecaySeconds":
@@ -5054,7 +5054,7 @@ func awsRestjson1_deserializeDocumentFairsharePolicy(v **types.FairsharePolicy, 
 				if err != nil {
 					return err
 				}
-				sv.ShareDecaySeconds = int32(i64)
+				sv.ShareDecaySeconds = ptr.Int32(int32(i64))
 			}
 
 		case "shareDistribution":
@@ -5217,7 +5217,7 @@ func awsRestjson1_deserializeDocumentJobDefinition(v **types.JobDefinition, valu
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.PropagateTags = jtv
+				sv.PropagateTags = ptr.Bool(jtv)
 			}
 
 		case "retryStrategy":
@@ -5235,7 +5235,7 @@ func awsRestjson1_deserializeDocumentJobDefinition(v **types.JobDefinition, valu
 				if err != nil {
 					return err
 				}
-				sv.Revision = int32(i64)
+				sv.Revision = ptr.Int32(int32(i64))
 			}
 
 		case "schedulingPriority":
@@ -5248,7 +5248,7 @@ func awsRestjson1_deserializeDocumentJobDefinition(v **types.JobDefinition, valu
 				if err != nil {
 					return err
 				}
-				sv.SchedulingPriority = int32(i64)
+				sv.SchedulingPriority = ptr.Int32(int32(i64))
 			}
 
 		case "status":
@@ -5452,7 +5452,7 @@ func awsRestjson1_deserializeDocumentJobDetail(v **types.JobDetail, value interf
 				if err != nil {
 					return err
 				}
-				sv.CreatedAt = i64
+				sv.CreatedAt = ptr.Int64(i64)
 			}
 
 		case "dependsOn":
@@ -5531,7 +5531,7 @@ func awsRestjson1_deserializeDocumentJobDetail(v **types.JobDetail, value interf
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.PropagateTags = jtv
+				sv.PropagateTags = ptr.Bool(jtv)
 			}
 
 		case "retryStrategy":
@@ -5549,7 +5549,7 @@ func awsRestjson1_deserializeDocumentJobDetail(v **types.JobDetail, value interf
 				if err != nil {
 					return err
 				}
-				sv.SchedulingPriority = int32(i64)
+				sv.SchedulingPriority = ptr.Int32(int32(i64))
 			}
 
 		case "shareIdentifier":
@@ -5571,7 +5571,7 @@ func awsRestjson1_deserializeDocumentJobDetail(v **types.JobDetail, value interf
 				if err != nil {
 					return err
 				}
-				sv.StartedAt = i64
+				sv.StartedAt = ptr.Int64(i64)
 			}
 
 		case "status":
@@ -5602,7 +5602,7 @@ func awsRestjson1_deserializeDocumentJobDetail(v **types.JobDetail, value interf
 				if err != nil {
 					return err
 				}
-				sv.StoppedAt = i64
+				sv.StoppedAt = ptr.Int64(i64)
 			}
 
 		case "tags":
@@ -5713,7 +5713,7 @@ func awsRestjson1_deserializeDocumentJobQueueDetail(v **types.JobQueueDetail, va
 				if err != nil {
 					return err
 				}
-				sv.Priority = int32(i64)
+				sv.Priority = ptr.Int32(int32(i64))
 			}
 
 		case "schedulingPolicyArn":
@@ -5842,7 +5842,7 @@ func awsRestjson1_deserializeDocumentJobSummary(v **types.JobSummary, value inte
 				if err != nil {
 					return err
 				}
-				sv.CreatedAt = i64
+				sv.CreatedAt = ptr.Int64(i64)
 			}
 
 		case "jobArn":
@@ -5896,7 +5896,7 @@ func awsRestjson1_deserializeDocumentJobSummary(v **types.JobSummary, value inte
 				if err != nil {
 					return err
 				}
-				sv.StartedAt = i64
+				sv.StartedAt = ptr.Int64(i64)
 			}
 
 		case "status":
@@ -5927,7 +5927,7 @@ func awsRestjson1_deserializeDocumentJobSummary(v **types.JobSummary, value inte
 				if err != nil {
 					return err
 				}
-				sv.StoppedAt = i64
+				sv.StoppedAt = ptr.Int64(i64)
 			}
 
 		default:
@@ -6005,7 +6005,7 @@ func awsRestjson1_deserializeDocumentJobTimeout(v **types.JobTimeout, value inte
 				if err != nil {
 					return err
 				}
-				sv.AttemptDurationSeconds = int32(i64)
+				sv.AttemptDurationSeconds = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -6157,7 +6157,7 @@ func awsRestjson1_deserializeDocumentLinuxParameters(v **types.LinuxParameters, 
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.InitProcessEnabled = jtv
+				sv.InitProcessEnabled = ptr.Bool(jtv)
 			}
 
 		case "maxSwap":
@@ -6170,7 +6170,7 @@ func awsRestjson1_deserializeDocumentLinuxParameters(v **types.LinuxParameters, 
 				if err != nil {
 					return err
 				}
-				sv.MaxSwap = int32(i64)
+				sv.MaxSwap = ptr.Int32(int32(i64))
 			}
 
 		case "sharedMemorySize":
@@ -6183,7 +6183,7 @@ func awsRestjson1_deserializeDocumentLinuxParameters(v **types.LinuxParameters, 
 				if err != nil {
 					return err
 				}
-				sv.SharedMemorySize = int32(i64)
+				sv.SharedMemorySize = ptr.Int32(int32(i64))
 			}
 
 		case "swappiness":
@@ -6196,7 +6196,7 @@ func awsRestjson1_deserializeDocumentLinuxParameters(v **types.LinuxParameters, 
 				if err != nil {
 					return err
 				}
-				sv.Swappiness = int32(i64)
+				sv.Swappiness = ptr.Int32(int32(i64))
 			}
 
 		case "tmpfs":
@@ -6336,7 +6336,7 @@ func awsRestjson1_deserializeDocumentMountPoint(v **types.MountPoint, value inte
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.ReadOnly = jtv
+				sv.ReadOnly = ptr.Bool(jtv)
 			}
 
 		case "sourceVolume":
@@ -6551,7 +6551,7 @@ func awsRestjson1_deserializeDocumentNodeDetails(v **types.NodeDetails, value in
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.IsMainNode = jtv
+				sv.IsMainNode = ptr.Bool(jtv)
 			}
 
 		case "nodeIndex":
@@ -6564,7 +6564,7 @@ func awsRestjson1_deserializeDocumentNodeDetails(v **types.NodeDetails, value in
 				if err != nil {
 					return err
 				}
-				sv.NodeIndex = int32(i64)
+				sv.NodeIndex = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -6608,7 +6608,7 @@ func awsRestjson1_deserializeDocumentNodeProperties(v **types.NodeProperties, va
 				if err != nil {
 					return err
 				}
-				sv.MainNode = int32(i64)
+				sv.MainNode = ptr.Int32(int32(i64))
 			}
 
 		case "nodeRangeProperties":
@@ -6626,7 +6626,7 @@ func awsRestjson1_deserializeDocumentNodeProperties(v **types.NodeProperties, va
 				if err != nil {
 					return err
 				}
-				sv.NumNodes = int32(i64)
+				sv.NumNodes = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -6666,7 +6666,7 @@ func awsRestjson1_deserializeDocumentNodePropertiesSummary(v **types.NodePropert
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.IsMainNode = jtv
+				sv.IsMainNode = ptr.Bool(jtv)
 			}
 
 		case "nodeIndex":
@@ -6679,7 +6679,7 @@ func awsRestjson1_deserializeDocumentNodePropertiesSummary(v **types.NodePropert
 				if err != nil {
 					return err
 				}
-				sv.NodeIndex = int32(i64)
+				sv.NodeIndex = ptr.Int32(int32(i64))
 			}
 
 		case "numNodes":
@@ -6692,7 +6692,7 @@ func awsRestjson1_deserializeDocumentNodePropertiesSummary(v **types.NodePropert
 				if err != nil {
 					return err
 				}
-				sv.NumNodes = int32(i64)
+				sv.NumNodes = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -6970,7 +6970,7 @@ func awsRestjson1_deserializeDocumentRetryStrategy(v **types.RetryStrategy, valu
 				if err != nil {
 					return err
 				}
-				sv.Attempts = int32(i64)
+				sv.Attempts = ptr.Int32(int32(i64))
 			}
 
 		case "evaluateOnExit":
@@ -7316,7 +7316,7 @@ func awsRestjson1_deserializeDocumentShareAttributes(v **types.ShareAttributes, 
 					if err != nil {
 						return err
 					}
-					sv.WeightFactor = float32(f64)
+					sv.WeightFactor = ptr.Float32(float32(f64))
 
 				case string:
 					var f64 float64
@@ -7334,7 +7334,7 @@ func awsRestjson1_deserializeDocumentShareAttributes(v **types.ShareAttributes, 
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.WeightFactor = float32(f64)
+					sv.WeightFactor = ptr.Float32(float32(f64))
 
 				default:
 					return fmt.Errorf("expected Float to be a JSON Number, got %T instead", value)
@@ -7539,7 +7539,7 @@ func awsRestjson1_deserializeDocumentTmpfs(v **types.Tmpfs, value interface{}) e
 				if err != nil {
 					return err
 				}
-				sv.Size = int32(i64)
+				sv.Size = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -7617,7 +7617,7 @@ func awsRestjson1_deserializeDocumentUlimit(v **types.Ulimit, value interface{})
 				if err != nil {
 					return err
 				}
-				sv.HardLimit = int32(i64)
+				sv.HardLimit = ptr.Int32(int32(i64))
 			}
 
 		case "name":
@@ -7639,7 +7639,7 @@ func awsRestjson1_deserializeDocumentUlimit(v **types.Ulimit, value interface{})
 				if err != nil {
 					return err
 				}
-				sv.SoftLimit = int32(i64)
+				sv.SoftLimit = ptr.Int32(int32(i64))
 			}
 
 		default:

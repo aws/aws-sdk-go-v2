@@ -182,9 +182,9 @@ func awsRestjson1_serializeOpDocumentCreateComputeEnvironmentInput(v *CreateComp
 		ok.String(string(v.Type))
 	}
 
-	if v.UnmanagedvCpus != 0 {
+	if v.UnmanagedvCpus != nil {
 		ok := object.Key("unmanagedvCpus")
-		ok.Integer(v.UnmanagedvCpus)
+		ok.Integer(*v.UnmanagedvCpus)
 	}
 
 	return nil
@@ -262,9 +262,9 @@ func awsRestjson1_serializeOpDocumentCreateJobQueueInput(v *CreateJobQueueInput,
 		ok.String(*v.JobQueueName)
 	}
 
-	{
+	if v.Priority != nil {
 		ok := object.Key("priority")
-		ok.Integer(v.Priority)
+		ok.Integer(*v.Priority)
 	}
 
 	if v.SchedulingPolicyArn != nil {
@@ -708,9 +708,9 @@ func awsRestjson1_serializeOpDocumentDescribeComputeEnvironmentsInput(v *Describ
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -793,9 +793,9 @@ func awsRestjson1_serializeOpDocumentDescribeJobDefinitionsInput(v *DescribeJobD
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -878,9 +878,9 @@ func awsRestjson1_serializeOpDocumentDescribeJobQueuesInput(v *DescribeJobQueues
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1113,9 +1113,9 @@ func awsRestjson1_serializeOpDocumentListJobsInput(v *ListJobsInput, value smith
 		ok.String(string(v.JobStatus))
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.MultiNodeJobId != nil {
@@ -1191,9 +1191,9 @@ func awsRestjson1_serializeOpDocumentListSchedulingPoliciesInput(v *ListScheduli
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1355,9 +1355,9 @@ func awsRestjson1_serializeOpDocumentRegisterJobDefinitionInput(v *RegisterJobDe
 		}
 	}
 
-	if v.PropagateTags {
+	if v.PropagateTags != nil {
 		ok := object.Key("propagateTags")
-		ok.Boolean(v.PropagateTags)
+		ok.Boolean(*v.PropagateTags)
 	}
 
 	if v.RetryStrategy != nil {
@@ -1367,9 +1367,9 @@ func awsRestjson1_serializeOpDocumentRegisterJobDefinitionInput(v *RegisterJobDe
 		}
 	}
 
-	if v.SchedulingPriority != 0 {
+	if v.SchedulingPriority != nil {
 		ok := object.Key("schedulingPriority")
-		ok.Integer(v.SchedulingPriority)
+		ok.Integer(*v.SchedulingPriority)
 	}
 
 	if v.Tags != nil {
@@ -1504,9 +1504,9 @@ func awsRestjson1_serializeOpDocumentSubmitJobInput(v *SubmitJobInput, value smi
 		}
 	}
 
-	if v.PropagateTags {
+	if v.PropagateTags != nil {
 		ok := object.Key("propagateTags")
-		ok.Boolean(v.PropagateTags)
+		ok.Boolean(*v.PropagateTags)
 	}
 
 	if v.RetryStrategy != nil {
@@ -1516,9 +1516,9 @@ func awsRestjson1_serializeOpDocumentSubmitJobInput(v *SubmitJobInput, value smi
 		}
 	}
 
-	if v.SchedulingPriorityOverride != 0 {
+	if v.SchedulingPriorityOverride != nil {
 		ok := object.Key("schedulingPriorityOverride")
-		ok.Integer(v.SchedulingPriorityOverride)
+		ok.Integer(*v.SchedulingPriorityOverride)
 	}
 
 	if v.ShareIdentifier != nil {
@@ -1845,9 +1845,9 @@ func awsRestjson1_serializeOpDocumentUpdateComputeEnvironmentInput(v *UpdateComp
 		ok.String(string(v.State))
 	}
 
-	if v.UnmanagedvCpus != 0 {
+	if v.UnmanagedvCpus != nil {
 		ok := object.Key("unmanagedvCpus")
-		ok.Integer(v.UnmanagedvCpus)
+		ok.Integer(*v.UnmanagedvCpus)
 	}
 
 	return nil
@@ -1925,9 +1925,9 @@ func awsRestjson1_serializeOpDocumentUpdateJobQueueInput(v *UpdateJobQueueInput,
 		ok.String(*v.JobQueue)
 	}
 
-	if v.Priority != 0 {
+	if v.Priority != nil {
 		ok := object.Key("priority")
-		ok.Integer(v.Priority)
+		ok.Integer(*v.Priority)
 	}
 
 	if v.SchedulingPolicyArn != nil {
@@ -2022,9 +2022,9 @@ func awsRestjson1_serializeDocumentArrayProperties(v *types.ArrayProperties, val
 	object := value.Object()
 	defer object.Close()
 
-	if v.Size != 0 {
+	if v.Size != nil {
 		ok := object.Key("size")
-		ok.Integer(v.Size)
+		ok.Integer(*v.Size)
 	}
 
 	return nil
@@ -2039,9 +2039,9 @@ func awsRestjson1_serializeDocumentComputeEnvironmentOrder(v *types.ComputeEnvir
 		ok.String(*v.ComputeEnvironment)
 	}
 
-	{
+	if v.Order != nil {
 		ok := object.Key("order")
-		ok.Integer(v.Order)
+		ok.Integer(*v.Order)
 	}
 
 	return nil
@@ -2069,14 +2069,14 @@ func awsRestjson1_serializeDocumentComputeResource(v *types.ComputeResource, val
 		ok.String(string(v.AllocationStrategy))
 	}
 
-	if v.BidPercentage != 0 {
+	if v.BidPercentage != nil {
 		ok := object.Key("bidPercentage")
-		ok.Integer(v.BidPercentage)
+		ok.Integer(*v.BidPercentage)
 	}
 
-	if v.DesiredvCpus != 0 {
+	if v.DesiredvCpus != nil {
 		ok := object.Key("desiredvCpus")
-		ok.Integer(v.DesiredvCpus)
+		ok.Integer(*v.DesiredvCpus)
 	}
 
 	if v.Ec2Configuration != nil {
@@ -2115,14 +2115,14 @@ func awsRestjson1_serializeDocumentComputeResource(v *types.ComputeResource, val
 		}
 	}
 
-	{
+	if v.MaxvCpus != nil {
 		ok := object.Key("maxvCpus")
-		ok.Integer(v.MaxvCpus)
+		ok.Integer(*v.MaxvCpus)
 	}
 
-	if v.MinvCpus != 0 {
+	if v.MinvCpus != nil {
 		ok := object.Key("minvCpus")
-		ok.Integer(v.MinvCpus)
+		ok.Integer(*v.MinvCpus)
 	}
 
 	if v.PlacementGroup != nil {
@@ -2168,19 +2168,19 @@ func awsRestjson1_serializeDocumentComputeResourceUpdate(v *types.ComputeResourc
 	object := value.Object()
 	defer object.Close()
 
-	if v.DesiredvCpus != 0 {
+	if v.DesiredvCpus != nil {
 		ok := object.Key("desiredvCpus")
-		ok.Integer(v.DesiredvCpus)
+		ok.Integer(*v.DesiredvCpus)
 	}
 
-	if v.MaxvCpus != 0 {
+	if v.MaxvCpus != nil {
 		ok := object.Key("maxvCpus")
-		ok.Integer(v.MaxvCpus)
+		ok.Integer(*v.MaxvCpus)
 	}
 
-	if v.MinvCpus != 0 {
+	if v.MinvCpus != nil {
 		ok := object.Key("minvCpus")
-		ok.Integer(v.MinvCpus)
+		ok.Integer(*v.MinvCpus)
 	}
 
 	if v.SecurityGroupIds != nil {
@@ -2223,9 +2223,9 @@ func awsRestjson1_serializeDocumentContainerOverrides(v *types.ContainerOverride
 		ok.String(*v.InstanceType)
 	}
 
-	if v.Memory != 0 {
+	if v.Memory != nil {
 		ok := object.Key("memory")
-		ok.Integer(v.Memory)
+		ok.Integer(*v.Memory)
 	}
 
 	if v.ResourceRequirements != nil {
@@ -2235,9 +2235,9 @@ func awsRestjson1_serializeDocumentContainerOverrides(v *types.ContainerOverride
 		}
 	}
 
-	if v.Vcpus != 0 {
+	if v.Vcpus != nil {
 		ok := object.Key("vcpus")
-		ok.Integer(v.Vcpus)
+		ok.Integer(*v.Vcpus)
 	}
 
 	return nil
@@ -2302,9 +2302,9 @@ func awsRestjson1_serializeDocumentContainerProperties(v *types.ContainerPropert
 		}
 	}
 
-	if v.Memory != 0 {
+	if v.Memory != nil {
 		ok := object.Key("memory")
-		ok.Integer(v.Memory)
+		ok.Integer(*v.Memory)
 	}
 
 	if v.MountPoints != nil {
@@ -2321,14 +2321,14 @@ func awsRestjson1_serializeDocumentContainerProperties(v *types.ContainerPropert
 		}
 	}
 
-	if v.Privileged {
+	if v.Privileged != nil {
 		ok := object.Key("privileged")
-		ok.Boolean(v.Privileged)
+		ok.Boolean(*v.Privileged)
 	}
 
-	if v.ReadonlyRootFilesystem {
+	if v.ReadonlyRootFilesystem != nil {
 		ok := object.Key("readonlyRootFilesystem")
-		ok.Boolean(v.ReadonlyRootFilesystem)
+		ok.Boolean(*v.ReadonlyRootFilesystem)
 	}
 
 	if v.ResourceRequirements != nil {
@@ -2357,9 +2357,9 @@ func awsRestjson1_serializeDocumentContainerProperties(v *types.ContainerPropert
 		ok.String(*v.User)
 	}
 
-	if v.Vcpus != 0 {
+	if v.Vcpus != nil {
 		ok := object.Key("vcpus")
-		ok.Integer(v.Vcpus)
+		ok.Integer(*v.Vcpus)
 	}
 
 	if v.Volumes != nil {
@@ -2493,9 +2493,9 @@ func awsRestjson1_serializeDocumentEFSVolumeConfiguration(v *types.EFSVolumeConf
 		ok.String(string(v.TransitEncryption))
 	}
 
-	if v.TransitEncryptionPort != 0 {
+	if v.TransitEncryptionPort != nil {
 		ok := object.Key("transitEncryptionPort")
-		ok.Integer(v.TransitEncryptionPort)
+		ok.Integer(*v.TransitEncryptionPort)
 	}
 
 	return nil
@@ -2558,14 +2558,14 @@ func awsRestjson1_serializeDocumentFairsharePolicy(v *types.FairsharePolicy, val
 	object := value.Object()
 	defer object.Close()
 
-	if v.ComputeReservation != 0 {
+	if v.ComputeReservation != nil {
 		ok := object.Key("computeReservation")
-		ok.Integer(v.ComputeReservation)
+		ok.Integer(*v.ComputeReservation)
 	}
 
-	if v.ShareDecaySeconds != 0 {
+	if v.ShareDecaySeconds != nil {
 		ok := object.Key("shareDecaySeconds")
-		ok.Integer(v.ShareDecaySeconds)
+		ok.Integer(*v.ShareDecaySeconds)
 	}
 
 	if v.ShareDistribution != nil {
@@ -2636,9 +2636,9 @@ func awsRestjson1_serializeDocumentJobTimeout(v *types.JobTimeout, value smithyj
 	object := value.Object()
 	defer object.Close()
 
-	if v.AttemptDurationSeconds != 0 {
+	if v.AttemptDurationSeconds != nil {
 		ok := object.Key("attemptDurationSeconds")
-		ok.Integer(v.AttemptDurationSeconds)
+		ok.Integer(*v.AttemptDurationSeconds)
 	}
 
 	return nil
@@ -2713,24 +2713,24 @@ func awsRestjson1_serializeDocumentLinuxParameters(v *types.LinuxParameters, val
 		}
 	}
 
-	if v.InitProcessEnabled {
+	if v.InitProcessEnabled != nil {
 		ok := object.Key("initProcessEnabled")
-		ok.Boolean(v.InitProcessEnabled)
+		ok.Boolean(*v.InitProcessEnabled)
 	}
 
-	if v.MaxSwap != 0 {
+	if v.MaxSwap != nil {
 		ok := object.Key("maxSwap")
-		ok.Integer(v.MaxSwap)
+		ok.Integer(*v.MaxSwap)
 	}
 
-	if v.SharedMemorySize != 0 {
+	if v.SharedMemorySize != nil {
 		ok := object.Key("sharedMemorySize")
-		ok.Integer(v.SharedMemorySize)
+		ok.Integer(*v.SharedMemorySize)
 	}
 
-	if v.Swappiness != 0 {
+	if v.Swappiness != nil {
 		ok := object.Key("swappiness")
-		ok.Integer(v.Swappiness)
+		ok.Integer(*v.Swappiness)
 	}
 
 	if v.Tmpfs != nil {
@@ -2802,9 +2802,9 @@ func awsRestjson1_serializeDocumentMountPoint(v *types.MountPoint, value smithyj
 		ok.String(*v.ContainerPath)
 	}
 
-	if v.ReadOnly {
+	if v.ReadOnly != nil {
 		ok := object.Key("readOnly")
-		ok.Boolean(v.ReadOnly)
+		ok.Boolean(*v.ReadOnly)
 	}
 
 	if v.SourceVolume != nil {
@@ -2851,9 +2851,9 @@ func awsRestjson1_serializeDocumentNodeOverrides(v *types.NodeOverrides, value s
 		}
 	}
 
-	if v.NumNodes != 0 {
+	if v.NumNodes != nil {
 		ok := object.Key("numNodes")
-		ok.Integer(v.NumNodes)
+		ok.Integer(*v.NumNodes)
 	}
 
 	return nil
@@ -2863,9 +2863,9 @@ func awsRestjson1_serializeDocumentNodeProperties(v *types.NodeProperties, value
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.MainNode != nil {
 		ok := object.Key("mainNode")
-		ok.Integer(v.MainNode)
+		ok.Integer(*v.MainNode)
 	}
 
 	if v.NodeRangeProperties != nil {
@@ -2875,9 +2875,9 @@ func awsRestjson1_serializeDocumentNodeProperties(v *types.NodeProperties, value
 		}
 	}
 
-	{
+	if v.NumNodes != nil {
 		ok := object.Key("numNodes")
-		ok.Integer(v.NumNodes)
+		ok.Integer(*v.NumNodes)
 	}
 
 	return nil
@@ -3003,9 +3003,9 @@ func awsRestjson1_serializeDocumentRetryStrategy(v *types.RetryStrategy, value s
 	object := value.Object()
 	defer object.Close()
 
-	if v.Attempts != 0 {
+	if v.Attempts != nil {
 		ok := object.Key("attempts")
-		ok.Integer(v.Attempts)
+		ok.Integer(*v.Attempts)
 	}
 
 	if v.EvaluateOnExit != nil {
@@ -3057,20 +3057,20 @@ func awsRestjson1_serializeDocumentShareAttributes(v *types.ShareAttributes, val
 		ok.String(*v.ShareIdentifier)
 	}
 
-	if v.WeightFactor != 0 {
+	if v.WeightFactor != nil {
 		ok := object.Key("weightFactor")
 		switch {
-		case math.IsNaN(float64(v.WeightFactor)):
+		case math.IsNaN(float64(*v.WeightFactor)):
 			ok.String("NaN")
 
-		case math.IsInf(float64(v.WeightFactor), 1):
+		case math.IsInf(float64(*v.WeightFactor), 1):
 			ok.String("Infinity")
 
-		case math.IsInf(float64(v.WeightFactor), -1):
+		case math.IsInf(float64(*v.WeightFactor), -1):
 			ok.String("-Infinity")
 
 		default:
-			ok.Float(v.WeightFactor)
+			ok.Float(*v.WeightFactor)
 
 		}
 	}
@@ -3140,9 +3140,9 @@ func awsRestjson1_serializeDocumentTmpfs(v *types.Tmpfs, value smithyjson.Value)
 		}
 	}
 
-	{
+	if v.Size != nil {
 		ok := object.Key("size")
-		ok.Integer(v.Size)
+		ok.Integer(*v.Size)
 	}
 
 	return nil
@@ -3165,9 +3165,9 @@ func awsRestjson1_serializeDocumentUlimit(v *types.Ulimit, value smithyjson.Valu
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.HardLimit != nil {
 		ok := object.Key("hardLimit")
-		ok.Integer(v.HardLimit)
+		ok.Integer(*v.HardLimit)
 	}
 
 	if v.Name != nil {
@@ -3175,9 +3175,9 @@ func awsRestjson1_serializeDocumentUlimit(v *types.Ulimit, value smithyjson.Valu
 		ok.String(*v.Name)
 	}
 
-	{
+	if v.SoftLimit != nil {
 		ok := object.Key("softLimit")
-		ok.Integer(v.SoftLimit)
+		ok.Integer(*v.SoftLimit)
 	}
 
 	return nil

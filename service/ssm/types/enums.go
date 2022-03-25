@@ -1118,6 +1118,7 @@ const (
 	OperatingSystemDebian                OperatingSystem = "DEBIAN"
 	OperatingSystemMacOS                 OperatingSystem = "MACOS"
 	OperatingSystemRaspbian              OperatingSystem = "RASPBIAN"
+	OperatingSystemRockyLinux            OperatingSystem = "ROCKY_LINUX"
 )
 
 // Values returns all known values for OperatingSystem. Note that this can be
@@ -1136,6 +1137,7 @@ func (OperatingSystem) Values() []OperatingSystem {
 		"DEBIAN",
 		"MACOS",
 		"RASPBIAN",
+		"ROCKY_LINUX",
 	}
 }
 

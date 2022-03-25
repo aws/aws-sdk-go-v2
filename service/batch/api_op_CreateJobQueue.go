@@ -64,7 +64,7 @@ type CreateJobQueueInput struct {
 	// FARGATE_SPOT); EC2 and Fargate compute environments can't be mixed.
 	//
 	// This member is required.
-	Priority int32
+	Priority *int32
 
 	// The Amazon Resource Name (ARN) of the fair share scheduling policy. If this
 	// parameter is specified, the job queue uses a fair share scheduling policy. If

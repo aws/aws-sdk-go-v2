@@ -168,6 +168,18 @@ type AddIpamOperatingRegion struct {
 	noSmithyDocumentSerde
 }
 
+// Describes an additional detail for a path analysis.
+type AdditionalDetail struct {
+
+	// The information type.
+	AdditionalDetailType *string
+
+	// The path component.
+	Component *AnalysisComponent
+
+	noSmithyDocumentSerde
+}
+
 // An entry for a prefix list.
 type AddPrefixListEntry struct {
 
@@ -392,7 +404,7 @@ type AnalysisRouteTableRoute struct {
 	// The ID of a network interface.
 	NetworkInterfaceId *string
 
-	// Describes how the route was created. The following are possible values:
+	// Describes how the route was created. The following are the possible values:
 	//
 	// *
 	// CreateRouteTable - The route was automatically created when the route table was
@@ -419,7 +431,7 @@ type AnalysisSecurityGroupRule struct {
 	// The IPv4 address range, in CIDR notation.
 	Cidr *string
 
-	// The direction. The following are possible values:
+	// The direction. The following are the possible values:
 	//
 	// * egress
 	//
@@ -3149,7 +3161,7 @@ type Explanation struct {
 	// The destination VPC.
 	DestinationVpc *AnalysisComponent
 
-	// The direction. The following are possible values:
+	// The direction. The following are the possible values:
 	//
 	// * egress
 	//
@@ -3236,6 +3248,18 @@ type Explanation struct {
 
 	// The route table for the subnet.
 	SubnetRouteTable *AnalysisComponent
+
+	// The transit gateway.
+	TransitGateway *AnalysisComponent
+
+	// The transit gateway attachment.
+	TransitGatewayAttachment *AnalysisComponent
+
+	// The transit gateway route table.
+	TransitGatewayRouteTable *AnalysisComponent
+
+	// The transit gateway route table route.
+	TransitGatewayRouteTableRoute *TransitGatewayRouteTableRoute
 
 	// The component VPC.
 	Vpc *AnalysisComponent
@@ -9571,6 +9595,9 @@ type PathComponent struct {
 	// The network ACL rule.
 	AclRule *AnalysisAclRule
 
+	// The additional details.
+	AdditionalDetails []AdditionalDetail
+
 	// The resource to which the path component is attached.
 	AttachedTo *AnalysisComponent
 
@@ -9600,6 +9627,12 @@ type PathComponent struct {
 
 	// The subnet.
 	Subnet *AnalysisComponent
+
+	// Describes a path component.
+	TransitGateway *AnalysisComponent
+
+	// The route in a transit gateway route table.
+	TransitGatewayRouteTableRoute *TransitGatewayRouteTableRoute
 
 	// The component VPC.
 	Vpc *AnalysisComponent
@@ -14546,6 +14579,37 @@ type TransitGatewayRouteTablePropagation struct {
 
 	// The ID of the attachment.
 	TransitGatewayAttachmentId *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes a route in a transit gateway route table.
+type TransitGatewayRouteTableRoute struct {
+
+	// The ID of the route attachment.
+	AttachmentId *string
+
+	// The CIDR block used for destination matches.
+	DestinationCidr *string
+
+	// The ID of the prefix list.
+	PrefixListId *string
+
+	// The ID of the resource for the route attachment.
+	ResourceId *string
+
+	// The resource type for the route attachment.
+	ResourceType *string
+
+	// The route origin. The following are the possible values:
+	//
+	// * static
+	//
+	// * propagated
+	RouteOrigin *string
+
+	// The state of the route.
+	State *string
 
 	noSmithyDocumentSerde
 }

@@ -471,6 +471,9 @@ func validateComputeEnvironmentOrder(v *types.ComputeEnvironmentOrder) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ComputeEnvironmentOrder"}
+	if v.Order == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Order"))
+	}
 	if v.ComputeEnvironment == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ComputeEnvironment"))
 	}
@@ -505,6 +508,9 @@ func validateComputeResource(v *types.ComputeResource) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ComputeResource"}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.MaxvCpus == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxvCpus"))
 	}
 	if v.Subnets == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Subnets"))
@@ -772,6 +778,12 @@ func validateNodeProperties(v *types.NodeProperties) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "NodeProperties"}
+	if v.NumNodes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NumNodes"))
+	}
+	if v.MainNode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MainNode"))
+	}
 	if v.NodeRangeProperties == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NodeRangeProperties"))
 	} else if v.NodeRangeProperties != nil {
@@ -987,6 +999,9 @@ func validateTmpfs(v *types.Tmpfs) error {
 	if v.ContainerPath == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ContainerPath"))
 	}
+	if v.Size == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Size"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1016,8 +1031,14 @@ func validateUlimit(v *types.Ulimit) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Ulimit"}
+	if v.HardLimit == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HardLimit"))
+	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.SoftLimit == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SoftLimit"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1125,6 +1146,9 @@ func validateOpCreateJobQueueInput(v *CreateJobQueueInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CreateJobQueueInput"}
 	if v.JobQueueName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobQueueName"))
+	}
+	if v.Priority == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Priority"))
 	}
 	if v.ComputeEnvironmentOrder == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ComputeEnvironmentOrder"))

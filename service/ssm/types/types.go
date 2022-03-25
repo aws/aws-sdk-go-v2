@@ -74,13 +74,15 @@ type Association struct {
 	// The association version.
 	AssociationVersion *string
 
-	// The version of the document used in the association. State Manager doesn't
-	// support running associations that use a new version of a document if that
-	// document is shared from another account. State Manager always runs the default
-	// version of a document if shared from another account, even though the Systems
-	// Manager console shows that a new version was processed. If you want to run an
-	// association using a new version of a document shared form another account, you
-	// must set the document version to default.
+	// The version of the document used in the association. If you change a document
+	// version for a State Manager association, Systems Manager immediately runs the
+	// association unless you previously specifed the apply-only-at-cron-interval
+	// parameter. State Manager doesn't support running associations that use a new
+	// version of a document if that document is shared from another account. State
+	// Manager always runs the default version of a document if shared from another
+	// account, even though the Systems Manager console shows that a new version was
+	// processed. If you want to run an association using a new version of a document
+	// shared form another account, you must set the document version to default.
 	DocumentVersion *string
 
 	// The managed node ID.
