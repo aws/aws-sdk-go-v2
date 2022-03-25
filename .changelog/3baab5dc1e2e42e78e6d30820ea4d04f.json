@@ -1,0 +1,8 @@
+{
+    "id": "3baab5dc-1e2e-42e7-8e6d-30820ea4d04f",
+    "type": "feature",
+    "description": "This is release adds support for Amazon VPC Reachability Analyzer to analyze path through a Transit Gateway.",
+    "modules": [
+        "service/ec2"
+    ]
+}

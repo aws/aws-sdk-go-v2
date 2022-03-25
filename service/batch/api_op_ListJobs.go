@@ -93,7 +93,7 @@ type ListJobsInput struct {
 	// nextToken value. This value can be between 1 and 100. If this parameter isn't
 	// used, then ListJobs returns up to 100 results and a nextToken value if
 	// applicable.
-	MaxResults int32
+	MaxResults *int32
 
 	// The job ID for a multi-node parallel job. Specifying a multi-node parallel job
 	// ID with this parameter lists all nodes that are associated with the specified
@@ -229,8 +229,8 @@ func NewListJobsPaginator(client ListJobsAPIClient, params *ListJobsInput, optFn
 	}
 
 	options := ListJobsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -260,7 +260,11 @@ func (p *ListJobsPaginator) NextPage(ctx context.Context, optFns ...func(*Option
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListJobs(ctx, &params, optFns...)
 	if err != nil {

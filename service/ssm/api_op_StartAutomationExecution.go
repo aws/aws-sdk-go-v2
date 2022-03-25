@@ -85,7 +85,7 @@ type StartAutomationExecutionInput struct {
 	// * Key=OS,Value=Windows
 	//
 	// To add tags to an existing
-	// automation, use the AddTagsToResource operation.
+	// patch baseline, use the AddTagsToResource operation.
 	Tags []types.Tag
 
 	// A location is a combination of Amazon Web Services Regions and/or Amazon Web

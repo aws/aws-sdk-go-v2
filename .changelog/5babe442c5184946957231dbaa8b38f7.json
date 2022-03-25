@@ -1,0 +1,8 @@
+{
+    "id": "5babe442-c518-4946-9572-31dbaa8b38f7",
+    "type": "feature",
+    "description": "This Patch Manager release supports creating, updating, and deleting Patch Baselines for Rocky Linux OS.",
+    "modules": [
+        "service/ssm"
+    ]
+}

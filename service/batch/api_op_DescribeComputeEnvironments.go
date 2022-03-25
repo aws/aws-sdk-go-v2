@@ -46,7 +46,7 @@ type DescribeComputeEnvironmentsInput struct {
 	// This value can be between 1 and 100. If this parameter isn't used, then
 	// DescribeComputeEnvironments returns up to 100 results and a nextToken value if
 	// applicable.
-	MaxResults int32
+	MaxResults *int32
 
 	// The nextToken value returned from a previous paginated
 	// DescribeComputeEnvironments request where maxResults was used and the results
@@ -181,8 +181,8 @@ func NewDescribeComputeEnvironmentsPaginator(client DescribeComputeEnvironmentsA
 	}
 
 	options := DescribeComputeEnvironmentsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -212,7 +212,11 @@ func (p *DescribeComputeEnvironmentsPaginator) NextPage(ctx context.Context, opt
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.DescribeComputeEnvironments(ctx, &params, optFns...)
 	if err != nil {

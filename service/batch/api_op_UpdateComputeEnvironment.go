@@ -76,7 +76,7 @@ type UpdateComputeEnvironmentInput struct {
 	// environment. This parameter is only used for fair share scheduling to reserve
 	// vCPU capacity for new share identifiers. If this parameter is not provided for a
 	// fair share job queue, no vCPU capacity will be reserved.
-	UnmanagedvCpus int32
+	UnmanagedvCpus *int32
 
 	noSmithyDocumentSerde
 }

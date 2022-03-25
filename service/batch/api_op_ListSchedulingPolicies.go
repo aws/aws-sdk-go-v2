@@ -37,7 +37,7 @@ type ListSchedulingPoliciesInput struct {
 	// ListSchedulingPolicies request with the returned nextToken value. This value can
 	// be between 1 and 100. If this parameter isn't used, ListSchedulingPolicies
 	// returns up to 100 results and a nextToken value if applicable.
-	MaxResults int32
+	MaxResults *int32
 
 	// The nextToken value that's returned from a previous paginated
 	// ListSchedulingPolicies request where maxResults was used and the results
@@ -169,8 +169,8 @@ func NewListSchedulingPoliciesPaginator(client ListSchedulingPoliciesAPIClient, 
 	}
 
 	options := ListSchedulingPoliciesPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -200,7 +200,11 @@ func (p *ListSchedulingPoliciesPaginator) NextPage(ctx context.Context, optFns .
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListSchedulingPolicies(ctx, &params, optFns...)
 	if err != nil {

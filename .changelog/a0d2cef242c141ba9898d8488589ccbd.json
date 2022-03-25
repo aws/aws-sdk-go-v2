@@ -1,0 +1,8 @@
+{
+    "id": "a0d2cef2-42c1-41ba-9898-d8488589ccbd",
+    "type": "feature",
+    "description": "Bug Fix: Fixed a bug where shapes were marked as unboxed and were not serialized and sent over the wire, causing an API error from the service.",
+    "modules": [
+        "service/batch"
+    ]
+}
