@@ -1,3 +1,13 @@
+# Release (2022-03-25)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.17.0](service/batch/CHANGELOG.md#v1170-2022-03-25)
+  * **Feature**: Bug Fix: Fixed a bug where shapes were marked as unboxed and were not serialized and sent over the wire, causing an API error from the service.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.33.0](service/ec2/CHANGELOG.md#v1330-2022-03-25)
+  * **Feature**: This is release adds support for Amazon VPC Reachability Analyzer to analyze path through a Transit Gateway.
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.24.0](service/ssm/CHANGELOG.md#v1240-2022-03-25)
+  * **Feature**: This Patch Manager release supports creating, updating, and deleting Patch Baselines for Rocky Linux OS.
+
 # Release (2022-03-24)
 
 ## General Highlights

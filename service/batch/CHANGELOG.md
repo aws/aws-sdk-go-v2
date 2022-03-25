@@ -1,3 +1,7 @@
+# v1.17.0 (2022-03-25)
+
+* **Feature**: Bug Fix: Fixed a bug where shapes were marked as unboxed and were not serialized and sent over the wire, causing an API error from the service.
+
 # v1.16.2 (2022-03-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

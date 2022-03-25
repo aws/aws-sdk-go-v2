@@ -1,3 +1,7 @@
+# v1.33.0 (2022-03-25)
+
+* **Feature**: This is release adds support for Amazon VPC Reachability Analyzer to analyze path through a Transit Gateway.
+
 # v1.32.2 (2022-03-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions
