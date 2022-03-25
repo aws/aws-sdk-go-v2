@@ -7,7 +7,6 @@ import (
 	"hash"
 	"io"
 	"strconv"
-	"strings"
 
 	v4 "github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
@@ -176,7 +175,7 @@ func (m *computeInputPayloadChecksum) HandleBuild(
 	//
 	// Nil and empty streams will always be handled as a request header,
 	// regardless if the operation supports trailing checksums or not.
-	if strings.EqualFold(req.URL.Scheme, "https") {
+	if req.IsHTTPS() {
 		if stream != nil && streamLength != 0 && m.EnableTrailingChecksum {
 			if m.EnableComputePayloadHash {
 				// payload hash is set as header in Build middleware handler,
@@ -273,7 +272,7 @@ func (m *computeInputPayloadChecksum) HandleFinalize(
 	}
 
 	// Trailing checksums are only supported when TLS is enabled.
-	if !strings.EqualFold(req.URL.Scheme, "https") {
+	if !req.IsHTTPS() {
 		return out, metadata, computeInputTrailingChecksumError{
 			Msg: "HTTPS required",
 		}
