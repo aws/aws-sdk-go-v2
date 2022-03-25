@@ -307,7 +307,10 @@
             }
         },
         "com.amazonaws.batch#Boolean": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#box": {}
+            }
         },
         "com.amazonaws.batch#CEState": {
             "type": "string",
@@ -759,7 +762,7 @@
                 "memory": {
                     "target": "com.amazonaws.batch#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>For jobs run on EC2 resources that didn't specify memory requirements using <code>resourceRequirements</code>,\n   the number of MiB of memory reserved for the job. For other jobs, including all run on Fargate resources, see\n    <code>resourceRequirements</code>.</p>"
+                        "smithy.api#documentation": "<p>For jobs running on EC2 resources that didn't specify memory requirements using\n    <code>resourceRequirements</code>, the number of MiB of memory reserved for the job. For other jobs, including all\n   run on Fargate resources, see <code>resourceRequirements</code>.</p>"
                     }
                 },
                 "command": {
@@ -914,7 +917,7 @@
                         "smithy.api#deprecated": {
                             "message": "This field is deprecated, use resourceRequirements instead."
                         },
-                        "smithy.api#documentation": "<p>This parameter is deprecated, use <code>resourceRequirements</code> to override the <code>vcpus</code> parameter\n   that's set in the job definition. It's not supported for jobs that run on Fargate resources. For jobs run on EC2\n   resources, it overrides the <code>vcpus</code> parameter set in the job definition, but doesn't override any vCPU\n   requirement specified in the <code>resourceRequirements</code> structure in the job definition. To override vCPU\n   requirements that are specified in the <code>resourceRequirements</code> structure in the job definition,\n    <code>resourceRequirements</code> must be specified in the <code>SubmitJob</code> request, with <code>type</code>\n   set to <code>VCPU</code> and <code>value</code> set to the new value. For more information, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/troubleshooting.html#override-resource-requirements\">Can't override\n    job definition resource requirements</a> in the <i>Batch User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>This parameter is deprecated, use <code>resourceRequirements</code> to override the <code>vcpus</code> parameter\n   that's set in the job definition. It's not supported for jobs running on Fargate resources. For jobs running on EC2\n   resources, it overrides the <code>vcpus</code> parameter set in the job definition, but doesn't override any vCPU\n   requirement specified in the <code>resourceRequirements</code> structure in the job definition. To override vCPU\n   requirements that are specified in the <code>resourceRequirements</code> structure in the job definition,\n    <code>resourceRequirements</code> must be specified in the <code>SubmitJob</code> request, with <code>type</code>\n   set to <code>VCPU</code> and <code>value</code> set to the new value. For more information, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/troubleshooting.html#override-resource-requirements\">Can't override\n    job definition resource requirements</a> in the <i>Batch User Guide</i>.</p>"
                     }
                 },
                 "memory": {
@@ -923,7 +926,7 @@
                         "smithy.api#deprecated": {
                             "message": "This field is deprecated, use resourceRequirements instead."
                         },
-                        "smithy.api#documentation": "<p>This parameter is deprecated, use <code>resourceRequirements</code> to override the memory requirements\n   specified in the job definition. It's not supported for jobs that run on Fargate resources. For jobs run on EC2\n   resources, it overrides the <code>memory</code> parameter set in the job definition, but doesn't override any memory\n   requirement specified in the <code>resourceRequirements</code> structure in the job definition. To override memory\n   requirements that are specified in the <code>resourceRequirements</code> structure in the job definition,\n    <code>resourceRequirements</code> must be specified in the <code>SubmitJob</code> request, with <code>type</code>\n   set to <code>MEMORY</code> and <code>value</code> set to the new value. For more information, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/troubleshooting.html#override-resource-requirements\">Can't override\n    job definition resource requirements</a> in the <i>Batch User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>This parameter is deprecated, use <code>resourceRequirements</code> to override the memory requirements\n   specified in the job definition. It's not supported for jobs running on Fargate resources. For jobs running on EC2\n   resources, it overrides the <code>memory</code> parameter set in the job definition, but doesn't override any memory\n   requirement specified in the <code>resourceRequirements</code> structure in the job definition. To override memory\n   requirements that are specified in the <code>resourceRequirements</code> structure in the job definition,\n    <code>resourceRequirements</code> must be specified in the <code>SubmitJob</code> request, with <code>type</code>\n   set to <code>MEMORY</code> and <code>value</code> set to the new value. For more information, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/troubleshooting.html#override-resource-requirements\">Can't override\n    job definition resource requirements</a> in the <i>Batch User Guide</i>.</p>"
                     }
                 },
                 "command": {
@@ -961,7 +964,7 @@
                 "image": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The image used to start a container. This string is passed directly to the Docker daemon. Images in the Docker\n   Hub registry are available by default. Other repositories are specified with\n     <code>\n               <i>repository-url</i>/<i>image</i>:<i>tag</i>\n            </code>.\n   Up to 255 letters (uppercase and lowercase), numbers, hyphens, underscores, colons,\n periods, forward slashes, and number signs are allowed. This parameter maps to <code>Image</code> in the <a href=\"https://docs.docker.com/engine/api/v1.23/#create-a-container\">Create a container</a> section of\n   the <a href=\"https://docs.docker.com/engine/api/v1.23/\">Docker Remote API</a> and the <code>IMAGE</code> parameter of <a href=\"https://docs.docker.com/engine/reference/run/\">docker\n   run</a>.</p>\n         <note>\n            <p>Docker image architecture must match the processor architecture of the compute resources that they're scheduled\n    on. For example, ARM-based Docker images can only run on ARM-based compute resources.</p>\n         </note>\n         <ul>\n            <li>\n               <p>Images in Amazon ECR repositories use the full registry and repository URI (for example,\n      <code>012345678910.dkr.ecr.<region-name>.amazonaws.com/<repository-name></code>).</p>\n            </li>\n            <li>\n               <p>Images in official repositories on Docker Hub use a single name (for example, <code>ubuntu</code> or\n      <code>mongo</code>).</p>\n            </li>\n            <li>\n               <p>Images in other repositories on Docker Hub are qualified with an organization name (for example,\n      <code>amazon/amazon-ecs-agent</code>).</p>\n            </li>\n            <li>\n               <p>Images in other online repositories are qualified further by a domain name (for example,\n      <code>quay.io/assemblyline/ubuntu</code>).</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The image used to start a container. This string is passed directly to the Docker daemon. Images in the Docker\n   Hub registry are available by default. Other repositories are specified with\n     <code>\n               <i>repository-url</i>/<i>image</i>:<i>tag</i>\n            </code>.\n   Up to 255 letters (uppercase and lowercase), numbers, hyphens, underscores, colons,\n periods, forward slashes, and number signs are allowed. This parameter maps to <code>Image</code> in the <a href=\"https://docs.docker.com/engine/api/v1.23/#create-a-container\">Create a container</a> section of\n   the <a href=\"https://docs.docker.com/engine/api/v1.23/\">Docker Remote API</a> and the <code>IMAGE</code> parameter of <a href=\"https://docs.docker.com/engine/reference/run/\">docker\n   run</a>.</p>\n         <note>\n            <p>Docker image architecture must match the processor architecture of the compute resources that they're scheduled\n    on. For example, ARM-based Docker images can only run on ARM-based compute resources.</p>\n         </note>\n         <ul>\n            <li>\n               <p>Images in Amazon ECR Public repositories use the full <code>registry/repository[:tag]</code> or\n      <code>registry/repository[@digest]</code> naming conventions. For example,\n       <code>public.ecr.aws/<i>registry_alias</i>/<i>my-web-app</i>:<i>latest</i>\n                  </code>.</p>\n            </li>\n            <li>\n               <p>Images in Amazon ECR repositories use the full registry and repository URI (for example,\n      <code>012345678910.dkr.ecr.<region-name>.amazonaws.com/<repository-name></code>).</p>\n            </li>\n            <li>\n               <p>Images in official repositories on Docker Hub use a single name (for example, <code>ubuntu</code> or\n      <code>mongo</code>).</p>\n            </li>\n            <li>\n               <p>Images in other repositories on Docker Hub are qualified with an organization name (for example,\n      <code>amazon/amazon-ecs-agent</code>).</p>\n            </li>\n            <li>\n               <p>Images in other online repositories are qualified further by a domain name (for example,\n      <code>quay.io/assemblyline/ubuntu</code>).</p>\n            </li>\n         </ul>"
                     }
                 },
                 "vcpus": {
@@ -970,7 +973,7 @@
                         "smithy.api#deprecated": {
                             "message": "This field is deprecated, use resourceRequirements instead."
                         },
-                        "smithy.api#documentation": "<p>This parameter is deprecated, use <code>resourceRequirements</code> to specify the vCPU requirements for the job\n   definition. It's not supported for jobs that run on Fargate resources. For jobs run on EC2 resources, it specifies\n   the number of vCPUs reserved for the job.</p>\n         <p>Each vCPU is equivalent to 1,024 CPU shares. This parameter maps to <code>CpuShares</code> in the\n   <a href=\"https://docs.docker.com/engine/api/v1.23/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.23/\">Docker Remote API</a> and the <code>--cpu-shares</code> option to\n    <a href=\"https://docs.docker.com/engine/reference/run/\">docker run</a>. The number of vCPUs must be specified but can be specified\n   in several places. You must specify it at least once for each node.</p>"
+                        "smithy.api#documentation": "<p>This parameter is deprecated, use <code>resourceRequirements</code> to specify the vCPU requirements for the job\n   definition. It's not supported for jobs running on Fargate resources. For jobs running on EC2 resources, it specifies\n   the number of vCPUs reserved for the job.</p>\n         <p>Each vCPU is equivalent to 1,024 CPU shares. This parameter maps to <code>CpuShares</code> in the\n   <a href=\"https://docs.docker.com/engine/api/v1.23/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.23/\">Docker Remote API</a> and the <code>--cpu-shares</code> option to\n    <a href=\"https://docs.docker.com/engine/reference/run/\">docker run</a>. The number of vCPUs must be specified but can be specified\n   in several places. You must specify it at least once for each node.</p>"
                     }
                 },
                 "memory": {
@@ -979,7 +982,7 @@
                         "smithy.api#deprecated": {
                             "message": "This field is deprecated, use resourceRequirements instead."
                         },
-                        "smithy.api#documentation": "<p>This parameter is deprecated, use <code>resourceRequirements</code> to specify the memory requirements for the\n   job definition. It's not supported for jobs that run on Fargate resources. For jobs run on EC2 resources, it\n   specifies the memory hard limit (in MiB) for a container. If your container attempts to exceed the specified number,\n   it's terminated. You must specify at least 4 MiB of memory for a job using this parameter. The memory hard limit can\n   be specified in several places. It must be specified for each node at least once.</p>"
+                        "smithy.api#documentation": "<p>This parameter is deprecated, use <code>resourceRequirements</code> to specify the memory requirements for the\n   job definition. It's not supported for jobs running on Fargate resources. For jobs running on EC2 resources, it\n   specifies the memory hard limit (in MiB) for a container. If your container attempts to exceed the specified number,\n   it's terminated. You must specify at least 4 MiB of memory for a job using this parameter. The memory hard limit can\n   be specified in several places. It must be specified for each node at least once.</p>"
                     }
                 },
                 "command": {
@@ -1160,7 +1163,7 @@
                 "unmanagedvCpus": {
                     "target": "com.amazonaws.batch#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of vCPUs for an unmanaged compute environment. This parameter is only used for fair share\n   scheduling to reserve vCPU capacity for new share identifiers. If this parameter isn't provided for a fair share job\n   queue, no vCPU capacity is reserved.</p>\n         <note>\n            <p>This parameter is only supported when the <code>type</code> parameter is set to <code>UNMANAGED</code>/</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The maximum number of vCPUs for an unmanaged compute environment. This parameter is only used for fair share\n   scheduling to reserve vCPU capacity for new share identifiers. If this parameter isn't provided for a fair share job\n   queue, no vCPU capacity is reserved.</p>\n         <note>\n            <p>This parameter is only supported when the <code>type</code> parameter is set to <code>UNMANAGED</code>.</p>\n         </note>"
                     }
                 },
                 "computeResources": {
@@ -2122,7 +2125,10 @@
             }
         },
         "com.amazonaws.batch#Float": {
-            "type": "float"
+            "type": "float",
+            "traits": {
+                "smithy.api#box": {}
+            }
         },
         "com.amazonaws.batch#Host": {
             "type": "structure",
@@ -2157,7 +2163,10 @@
             }
         },
         "com.amazonaws.batch#Integer": {
-            "type": "integer"
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {}
+            }
         },
         "com.amazonaws.batch#JQState": {
             "type": "string",
@@ -3121,7 +3130,10 @@
             }
         },
         "com.amazonaws.batch#Long": {
-            "type": "long"
+            "type": "long",
+            "traits": {
+                "smithy.api#box": {}
+            }
         },
         "com.amazonaws.batch#MountPoint": {
             "type": "structure",
@@ -3744,7 +3756,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Submits an Batch job from a job definition. Parameters that are specified during <a>SubmitJob</a>\n   override parameters defined in the job definition. vCPU and memory requirements that are specified in the\n    <code>resourceRequirements</code> objects in the job definition are the exception. They can't be overridden this way\n   using the <code>memory</code> and <code>vcpus</code> parameters. Rather, you must specify updates to job definition\n   parameters in a <code>ResourceRequirements</code> object that's included in the <code>containerOverrides</code>\n   parameter.</p>\n         <note>\n            <p>Job queues with a scheduling policy are limited to 500 active fair share identifiers at a time. </p>\n         </note>\n         <important>\n            <p>Jobs that run on Fargate resources can't be guaranteed to run for more than 14 days. This is because, after 14\n    days, Fargate resources might become unavailable and job might be terminated.</p>\n         </important>",
+                "smithy.api#documentation": "<p>Submits an Batch job from a job definition. Parameters that are specified during <a>SubmitJob</a>\n   override parameters defined in the job definition. vCPU and memory requirements that are specified in the\n    <code>resourceRequirements</code> objects in the job definition are the exception. They can't be overridden this way\n   using the <code>memory</code> and <code>vcpus</code> parameters. Rather, you must specify updates to job definition\n   parameters in a <code>resourceRequirements</code> object that's included in the <code>containerOverrides</code>\n   parameter.</p>\n         <note>\n            <p>Job queues with a scheduling policy are limited to 500 active fair share identifiers at a time. </p>\n         </note>\n         <important>\n            <p>Jobs that run on Fargate resources can't be guaranteed to run for more than 14 days. This is because, after 14\n    days, Fargate resources might become unavailable and job might be terminated.</p>\n         </important>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v1/submitjob",
