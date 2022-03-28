@@ -32,8 +32,8 @@ import (
 // certificates reside in different accounts, then permissions cannot be used to
 // enable automatic renewals. Instead, the ACM certificate owner must set up a
 // resource-based policy to enable cross-account issuance and renewals. For more
-// information, see Using a Resource Based Policy with Amazon Web Services Private
-// CA (https://docs.aws.amazon.com/acm-pca/latest/userguide/pca-rbp.html).
+// information, see Using a Resource Based Policy with ACM Private CA
+// (https://docs.aws.amazon.com/acm-pca/latest/userguide/pca-rbp.html).
 func (c *Client) DeletePermission(ctx context.Context, params *DeletePermissionInput, optFns ...func(*Options)) (*DeletePermissionOutput, error) {
 	if params == nil {
 		params = &DeletePermissionInput{}

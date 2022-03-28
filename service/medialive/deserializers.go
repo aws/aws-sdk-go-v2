@@ -2340,6 +2340,11 @@ func awsRestjson1_deserializeOpDocumentDeleteChannelOutput(v **DeleteChannelOutp
 				sv.LogLevel = types.LogLevel(jtv)
 			}
 
+		case "maintenance":
+			if err := awsRestjson1_deserializeDocumentMaintenanceStatus(&sv.Maintenance, value); err != nil {
+				return err
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3839,6 +3844,11 @@ func awsRestjson1_deserializeOpDocumentDescribeChannelOutput(v **DescribeChannel
 					return fmt.Errorf("expected LogLevel to be of type string, got %T instead", value)
 				}
 				sv.LogLevel = types.LogLevel(jtv)
+			}
+
+		case "maintenance":
+			if err := awsRestjson1_deserializeDocumentMaintenanceStatus(&sv.Maintenance, value); err != nil {
+				return err
 			}
 
 		case "name":
@@ -8276,6 +8286,11 @@ func awsRestjson1_deserializeOpDocumentStartChannelOutput(v **StartChannelOutput
 				sv.LogLevel = types.LogLevel(jtv)
 			}
 
+		case "maintenance":
+			if err := awsRestjson1_deserializeDocumentMaintenanceStatus(&sv.Maintenance, value); err != nil {
+				return err
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8803,6 +8818,11 @@ func awsRestjson1_deserializeOpDocumentStopChannelOutput(v **StopChannelOutput, 
 					return fmt.Errorf("expected LogLevel to be of type string, got %T instead", value)
 				}
 				sv.LogLevel = types.LogLevel(jtv)
+			}
+
+		case "maintenance":
+			if err := awsRestjson1_deserializeDocumentMaintenanceStatus(&sv.Maintenance, value); err != nil {
+				return err
 			}
 
 		case "name":
@@ -15270,6 +15290,11 @@ func awsRestjson1_deserializeDocumentChannel(v **types.Channel, value interface{
 				sv.LogLevel = types.LogLevel(jtv)
 			}
 
+		case "maintenance":
+			if err := awsRestjson1_deserializeDocumentMaintenanceStatus(&sv.Maintenance, value); err != nil {
+				return err
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15455,6 +15480,11 @@ func awsRestjson1_deserializeDocumentChannelSummary(v **types.ChannelSummary, va
 					return fmt.Errorf("expected LogLevel to be of type string, got %T instead", value)
 				}
 				sv.LogLevel = types.LogLevel(jtv)
+			}
+
+		case "maintenance":
+			if err := awsRestjson1_deserializeDocumentMaintenanceStatus(&sv.Maintenance, value); err != nil {
+				return err
 			}
 
 		case "name":
@@ -22115,6 +22145,73 @@ func awsRestjson1_deserializeDocumentM3u8Settings(v **types.M3u8Settings, value 
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.VideoPid = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMaintenanceStatus(v **types.MaintenanceStatus, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MaintenanceStatus
+	if *v == nil {
+		sv = &types.MaintenanceStatus{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "maintenanceDay":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MaintenanceDay to be of type string, got %T instead", value)
+				}
+				sv.MaintenanceDay = types.MaintenanceDay(jtv)
+			}
+
+		case "maintenanceDeadline":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.MaintenanceDeadline = ptr.String(jtv)
+			}
+
+		case "maintenanceScheduledDate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.MaintenanceScheduledDate = ptr.String(jtv)
+			}
+
+		case "maintenanceStartTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.MaintenanceStartTime = ptr.String(jtv)
 			}
 
 		default:

@@ -3729,6 +3729,34 @@ func (M3u8TimedMetadataBehavior) Values() []M3u8TimedMetadataBehavior {
 	}
 }
 
+type MaintenanceDay string
+
+// Enum values for MaintenanceDay
+const (
+	MaintenanceDayMonday    MaintenanceDay = "MONDAY"
+	MaintenanceDayTuesday   MaintenanceDay = "TUESDAY"
+	MaintenanceDayWednesday MaintenanceDay = "WEDNESDAY"
+	MaintenanceDayThursday  MaintenanceDay = "THURSDAY"
+	MaintenanceDayFriday    MaintenanceDay = "FRIDAY"
+	MaintenanceDaySaturday  MaintenanceDay = "SATURDAY"
+	MaintenanceDaySunday    MaintenanceDay = "SUNDAY"
+)
+
+// Values returns all known values for MaintenanceDay. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MaintenanceDay) Values() []MaintenanceDay {
+	return []MaintenanceDay{
+		"MONDAY",
+		"TUESDAY",
+		"WEDNESDAY",
+		"THURSDAY",
+		"FRIDAY",
+		"SATURDAY",
+		"SUNDAY",
+	}
+}
+
 type MotionGraphicsInsertion string
 
 // Enum values for MotionGraphicsInsertion
