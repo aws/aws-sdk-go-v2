@@ -402,8 +402,8 @@ func TestMarshalTime_S(t *testing.T) {
 					}},
 				},
 			}
-			if !reflect.DeepEqual(expectedValue, actual) {
-				t.Errorf("expect %+v, got %+v", expectedValue, actual)
+			if diff := cmp.Diff(expectedValue, actual, getIgnoreAVUnexportedOptions()...); diff != "" {
+				t.Errorf("expect attribute value match\n%s", diff)
 			}
 		})
 	}
@@ -433,7 +433,7 @@ func TestMarshalTime_N(t *testing.T) {
 			expect: "123010",
 			encodeTime: func(t time.Time) (types.AttributeValue, error) {
 				return &types.AttributeValueMemberN{
-					Value: strconv.Itoa(int(t.UnixMilli())),
+					Value: strconv.Itoa(int(t.UnixNano() / int64(time.Millisecond))),
 				}, nil
 			},
 		},
@@ -460,8 +460,8 @@ func TestMarshalTime_N(t *testing.T) {
 					}},
 				},
 			}
-			if !reflect.DeepEqual(expectedValue, actual) {
-				t.Errorf("expect %+v, got %+v", expectedValue, actual)
+			if diff := cmp.Diff(expectedValue, actual, getIgnoreAVUnexportedOptions()...); diff != "" {
+				t.Errorf("expect attribute value match\n%s", diff)
 			}
 		})
 	}
@@ -604,20 +604,7 @@ func TestMarshalMap_keyTypes(t *testing.T) {
 			if err != nil {
 				t.Fatalf("expect no error, got %v", err)
 			}
-
-			cmpOptions := cmp.Options{
-				cmpopts.IgnoreUnexported(types.AttributeValueMemberM{}),
-				cmpopts.IgnoreUnexported(types.AttributeValueMemberN{}),
-				cmpopts.IgnoreUnexported(types.AttributeValueMemberNS{}),
-				cmpopts.IgnoreUnexported(types.AttributeValueMemberBOOL{}),
-				cmpopts.IgnoreUnexported(types.AttributeValueMemberB{}),
-				cmpopts.IgnoreUnexported(types.AttributeValueMemberBS{}),
-				cmpopts.IgnoreUnexported(types.AttributeValueMemberL{}),
-				cmpopts.IgnoreUnexported(types.AttributeValueMemberS{}),
-				cmpopts.IgnoreUnexported(types.AttributeValueMemberSS{}),
-				cmpopts.IgnoreUnexported(types.AttributeValueMemberNULL{}),
-			}
-			if diff := cmp.Diff(c.expectAV, av, cmpOptions...); diff != "" {
+			if diff := cmp.Diff(c.expectAV, av, getIgnoreAVUnexportedOptions()...); diff != "" {
 				t.Errorf("expect attribute value match\n%s", diff)
 			}
 		})

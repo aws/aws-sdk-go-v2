@@ -871,8 +871,8 @@ func TestUnmarshalTime_S_SS(t *testing.T) {
 			}); err != nil {
 				t.Errorf("expect no error, got %v", err)
 			}
-			if !reflect.DeepEqual(expectedValue, actualValue) {
-				t.Errorf("expect %+v, got %+v", expectedValue, actualValue)
+			if diff := cmp.Diff(expectedValue, actualValue, getIgnoreAVUnexportedOptions()...); diff != "" {
+				t.Errorf("expect attribute value match\n%s", diff)
 			}
 		})
 	}
@@ -903,7 +903,7 @@ func TestUnmarshalTime_N_NS(t *testing.T) {
 						Err: err, Value: v, Type: timeType,
 					}
 				}
-				return time.UnixMilli(n), nil
+				return time.Unix(0, n*int64(time.Millisecond)), nil
 			},
 		},
 	}
@@ -932,8 +932,8 @@ func TestUnmarshalTime_N_NS(t *testing.T) {
 			}); err != nil {
 				t.Errorf("expect no error, got %v", err)
 			}
-			if !reflect.DeepEqual(expectedValue, actualValue) {
-				t.Errorf("expect %+v, got %+v", expectedValue, actualValue)
+			if diff := cmp.Diff(expectedValue, actualValue, getIgnoreAVUnexportedOptions()...); diff != "" {
+				t.Errorf("expect attribute value match\n%s", diff)
 			}
 		})
 	}
