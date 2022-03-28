@@ -53,6 +53,9 @@ type UpdateChannelInput struct {
 	// The log level to write to CloudWatch Logs.
 	LogLevel types.LogLevel
 
+	// Maintenance settings for this channel.
+	Maintenance *types.MaintenanceUpdateSettings
+
 	// The name of the channel.
 	Name *string
 

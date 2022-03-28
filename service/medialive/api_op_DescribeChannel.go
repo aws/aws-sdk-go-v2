@@ -80,6 +80,9 @@ type DescribeChannelOutput struct {
 	// The log level being written to CloudWatch Logs.
 	LogLevel types.LogLevel
 
+	// Maintenance settings for this channel.
+	Maintenance *types.MaintenanceStatus
+
 	// The name of the channel. (user-mutable)
 	Name *string
 

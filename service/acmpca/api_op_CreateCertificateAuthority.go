@@ -22,9 +22,9 @@ import (
 // expiration period in days (the validity period of the CRL), the Amazon S3 bucket
 // that will contain the CRL, and a CNAME alias for the S3 bucket that is included
 // in certificates issued by the CA. If successful, this action returns the Amazon
-// Resource Name (ARN) of the CA. Amazon Web Services Private CA assets that are
-// stored in Amazon S3 can be protected with encryption. For more information, see
-// Encrypting Your CRLs
+// Resource Name (ARN) of the CA. ACM Private CA assets that are stored in Amazon
+// S3 can be protected with encryption. For more information, see Encrypting Your
+// CRLs
 // (https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaCreateCa.html#crl-encryption).
 // Both PCA and the IAM principal must have permission to write to the S3 bucket
 // that you specify. If the IAM principal making the call does not have permission
@@ -63,10 +63,9 @@ type CreateCertificateAuthorityInput struct {
 	// CreateCertificateAuthority action. Idempotency tokens for
 	// CreateCertificateAuthority time out after five minutes. Therefore, if you call
 	// CreateCertificateAuthority multiple times with the same idempotency token within
-	// five minutes, Amazon Web Services Private CA recognizes that you are requesting
-	// only certificate authority and will issue only one. If you change the
-	// idempotency token for each call, PCA recognizes that you are requesting multiple
-	// certificate authorities.
+	// five minutes, ACM Private CA recognizes that you are requesting only certificate
+	// authority and will issue only one. If you change the idempotency token for each
+	// call, PCA recognizes that you are requesting multiple certificate authorities.
 	IdempotencyToken *string
 
 	// Specifies a cryptographic key management compliance standard used for handling

@@ -21,9 +21,9 @@ import (
 // action and set the CertificateAuthorityStatus parameter to DISABLED.
 // Additionally, you can delete a CA if you are waiting for it to be created (that
 // is, the status of the CA is CREATING). You can also delete it if the CA has been
-// created but you haven't yet imported the signed certificate into Amazon Web
-// Services Private CA (that is, the status of the CA is PENDING_CERTIFICATE). When
-// you successfully call DeleteCertificateAuthority
+// created but you haven't yet imported the signed certificate into ACM Private CA
+// (that is, the status of the CA is PENDING_CERTIFICATE). When you successfully
+// call DeleteCertificateAuthority
 // (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DeleteCertificateAuthority.html),
 // the CA's status changes to DELETED. However, the CA won't be permanently deleted
 // until the restoration period has passed. By default, if you do not set the

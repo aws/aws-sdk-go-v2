@@ -22,9 +22,8 @@ import (
 // does not have permission to write to the bucket, then an exception is thrown.
 // For more information, see Access policies for CRLs in Amazon S3
 // (https://docs.aws.amazon.com/acm-pca/latest/userguide/crl-planning.html#s3-policies).
-// Amazon Web Services Private CA assets that are stored in Amazon S3 can be
-// protected with encryption. For more information, see Encrypting Your Audit
-// Reports
+// ACM Private CA assets that are stored in Amazon S3 can be protected with
+// encryption. For more information, see Encrypting Your Audit Reports
 // (https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaAuditReport.html#audit-report-encryption).
 // You can generate a maximum of one report every 30 minutes.
 func (c *Client) CreateCertificateAuthorityAuditReport(ctx context.Context, params *CreateCertificateAuthorityAuditReportInput, optFns ...func(*Options)) (*CreateCertificateAuthorityAuditReportOutput, error) {

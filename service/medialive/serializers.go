@@ -639,6 +639,13 @@ func awsRestjson1_serializeOpDocumentCreateChannelInput(v *CreateChannelInput, v
 		ok.String(string(v.LogLevel))
 	}
 
+	if v.Maintenance != nil {
+		ok := object.Key("maintenance")
+		if err := awsRestjson1_serializeDocumentMaintenanceCreateSettings(v.Maintenance, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
@@ -3575,6 +3582,13 @@ func awsRestjson1_serializeOpDocumentUpdateChannelInput(v *UpdateChannelInput, v
 	if len(v.LogLevel) > 0 {
 		ok := object.Key("logLevel")
 		ok.String(string(v.LogLevel))
+	}
+
+	if v.Maintenance != nil {
+		ok := object.Key("maintenance")
+		if err := awsRestjson1_serializeDocumentMaintenanceUpdateSettings(v.Maintenance, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Name != nil {
@@ -8384,6 +8398,45 @@ func awsRestjson1_serializeDocumentM3u8Settings(v *types.M3u8Settings, value smi
 	if v.VideoPid != nil {
 		ok := object.Key("videoPid")
 		ok.String(*v.VideoPid)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMaintenanceCreateSettings(v *types.MaintenanceCreateSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.MaintenanceDay) > 0 {
+		ok := object.Key("maintenanceDay")
+		ok.String(string(v.MaintenanceDay))
+	}
+
+	if v.MaintenanceStartTime != nil {
+		ok := object.Key("maintenanceStartTime")
+		ok.String(*v.MaintenanceStartTime)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMaintenanceUpdateSettings(v *types.MaintenanceUpdateSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.MaintenanceDay) > 0 {
+		ok := object.Key("maintenanceDay")
+		ok.String(string(v.MaintenanceDay))
+	}
+
+	if v.MaintenanceScheduledDate != nil {
+		ok := object.Key("maintenanceScheduledDate")
+		ok.String(*v.MaintenanceScheduledDate)
+	}
+
+	if v.MaintenanceStartTime != nil {
+		ok := object.Key("maintenanceStartTime")
+		ok.String(*v.MaintenanceStartTime)
 	}
 
 	return nil
