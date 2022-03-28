@@ -1,8 +1,0 @@
-{
-    "id": "893ae955-268f-4cbe-a353-ecd22b7340f6",
-    "type": "documentation",
-    "description": "Updating service name entities",
-    "modules": [
-        "service/acmpca"
-    ]
-}
