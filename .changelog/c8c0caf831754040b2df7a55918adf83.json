@@ -1,8 +1,0 @@
-{
-    "id": "c8c0caf8-3175-4040-b2df-7a55918adf83",
-    "type": "feature",
-    "description": "This release adds support for selecting a maintenance window.",
-    "modules": [
-        "service/medialive"
-    ]
-}

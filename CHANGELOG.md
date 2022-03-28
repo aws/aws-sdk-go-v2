@@ -1,3 +1,11 @@
+# Release (2022-03-28)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/acmpca`: [v1.17.3](service/acmpca/CHANGELOG.md#v1173-2022-03-28)
+  * **Documentation**: Updating service name entities
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.20.0](service/medialive/CHANGELOG.md#v1200-2022-03-28)
+  * **Feature**: This release adds support for selecting a maintenance window.
+
 # Release (2022-03-25)
 
 ## Module Highlights

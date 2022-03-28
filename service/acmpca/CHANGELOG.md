@@ -1,3 +1,7 @@
+# v1.17.3 (2022-03-28)
+
+* **Documentation**: Updating service name entities
+
 # v1.17.2 (2022-03-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions
