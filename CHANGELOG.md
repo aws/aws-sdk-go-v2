@@ -3,6 +3,7 @@
 ## Module Highlights
 * `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.17.0](service/batch/CHANGELOG.md#v1170-2022-03-25)
   * **Feature**: Bug Fix: Fixed a bug where shapes were marked as unboxed and were not serialized and sent over the wire, causing an API error from the service.
+  * This is a breaking change, and has been accepted due to the API operation not being usable due to the members modeled as unboxed (aka value) types. The update changes the members to boxed (aka pointer) types so that the zero value of the members can be handled correctly by the SDK and service. Your application will fail to compile with the updated module. To workaround this you'll need to update your application to use pointer types for the members impacted.
 * `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.33.0](service/ec2/CHANGELOG.md#v1330-2022-03-25)
   * **Feature**: This is release adds support for Amazon VPC Reachability Analyzer to analyze path through a Transit Gateway.
 * `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.24.0](service/ssm/CHANGELOG.md#v1240-2022-03-25)
