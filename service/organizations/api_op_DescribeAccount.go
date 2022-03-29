@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves AWS Organizations-related information about the specified account.
-// This operation can be called only from the organization's management account or
-// by a member account that is a delegated administrator for an AWS service.
+// Retrieves Organizations-related information about the specified account. This
+// operation can be called only from the organization's management account or by a
+// member account that is a delegated administrator for an Amazon Web Services
+// service.
 func (c *Client) DescribeAccount(ctx context.Context, params *DescribeAccountInput, optFns ...func(*Options)) (*DescribeAccountOutput, error) {
 	if params == nil {
 		params = &DescribeAccountInput{}
@@ -31,10 +32,11 @@ func (c *Client) DescribeAccount(ctx context.Context, params *DescribeAccountInp
 
 type DescribeAccountInput struct {
 
-	// The unique identifier (ID) of the AWS account that you want information about.
-	// You can get the ID from the ListAccounts or ListAccountsForParent operations.
-	// The regex pattern (http://wikipedia.org/wiki/regex) for an account ID string
-	// requires exactly 12 digits.
+	// The unique identifier (ID) of the Amazon Web Services account that you want
+	// information about. You can get the ID from the ListAccounts or
+	// ListAccountsForParent operations. The regex pattern
+	// (http://wikipedia.org/wiki/regex) for an account ID string requires exactly 12
+	// digits.
 	//
 	// This member is required.
 	AccountId *string

@@ -13,7 +13,7 @@ import (
 
 // Retrieves information about a policy. This operation can be called only from the
 // organization's management account or by a member account that is a delegated
-// administrator for an AWS service.
+// administrator for an Amazon Web Services service.
 func (c *Client) DescribePolicy(ctx context.Context, params *DescribePolicyInput, optFns ...func(*Options)) (*DescribePolicyOutput, error) {
 	if params == nil {
 		params = &DescribePolicyInput{}

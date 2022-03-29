@@ -11,6 +11,7 @@
         "api_op_AcceptHandshake.go",
         "api_op_AttachPolicy.go",
         "api_op_CancelHandshake.go",
+        "api_op_CloseAccount.go",
         "api_op_CreateAccount.go",
         "api_op_CreateGovCloudAccount.go",
         "api_op_CreateOrganization.go",

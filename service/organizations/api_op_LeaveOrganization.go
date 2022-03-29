@@ -24,7 +24,7 @@ import (
 // * You can
 // leave an organization as a member account only if the account is configured with
 // the information required to operate as a standalone account. When you create an
-// account in an organization using the AWS Organizations console, API, or CLI
+// account in an organization using the Organizations console, API, or CLI
 // commands, the information required of standalone accounts is not automatically
 // collected. For each account that you want to make standalone, you must perform
 // the following steps. If any of the steps are already completed for this account,
@@ -37,34 +37,34 @@ import (
 //
 // * Provide a current payment method
 //
-// AWS uses the
-// payment method to charge for any billable (not free tier) AWS activity that
-// occurs while the account isn't attached to an organization. Follow the steps at
-// To leave an organization when all required account information has not yet been
-// provided
-// (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info)
-// in the AWS Organizations User Guide.
+// Amazon Web
+// Services uses the payment method to charge for any billable (not free tier)
+// Amazon Web Services activity that occurs while the account isn't attached to an
+// organization. Follow the steps at  To leave an organization when all required
+// account information has not yet been provided
+// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info)
+// in the Organizations User Guide.
 //
-// * The account that you want to leave must
-// not be a delegated administrator account for any AWS service enabled for your
-// organization. If the account is a delegated administrator, you must first change
-// the delegated administrator account to another account that is remaining in the
-// organization.
+// * The account that you want to leave must not
+// be a delegated administrator account for any Amazon Web Services service enabled
+// for your organization. If the account is a delegated administrator, you must
+// first change the delegated administrator account to another account that is
+// remaining in the organization.
 //
-// * You can leave an organization only after you enable IAM user
-// access to billing in your account. For more information, see Activating Access
-// to the Billing and Cost Management Console
-// (http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html#ControllingAccessWebsite-Activate)
-// in the AWS Billing and Cost Management User Guide.
+// * You can leave an organization only after you
+// enable IAM user access to billing in your account. For more information, see
+// Activating Access to the Billing and Cost Management Console
+// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html#ControllingAccessWebsite-Activate)
+// in the Amazon Web Services Billing and Cost Management User Guide.
 //
-// * After the account leaves
-// the organization, all tags that were attached to the account object in the
-// organization are deleted. AWS accounts outside of an organization do not support
-// tags.
+// * After the
+// account leaves the organization, all tags that were attached to the account
+// object in the organization are deleted. Amazon Web Services accounts outside of
+// an organization do not support tags.
 //
-// * A newly created account has a waiting period before it can be removed
-// from its organization. If you get an error that indicates that a wait period is
-// required, then try again in a few days.
+// * A newly created account has a waiting
+// period before it can be removed from its organization. If you get an error that
+// indicates that a wait period is required, then try again in a few days.
 func (c *Client) LeaveOrganization(ctx context.Context, params *LeaveOrganizationInput, optFns ...func(*Options)) (*LeaveOrganizationOutput, error) {
 	if params == nil {
 		params = &LeaveOrganizationInput{}

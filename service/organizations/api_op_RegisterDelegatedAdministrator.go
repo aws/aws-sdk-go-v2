@@ -11,14 +11,14 @@ import (
 )
 
 // Enables the specified member account to administer the Organizations features of
-// the specified AWS service. It grants read-only access to AWS Organizations
-// service data. The account still requires IAM permissions to access and
-// administer the AWS service. You can run this action only for AWS services that
-// support this feature. For a current list of services that support it, see the
-// column Supports Delegated Administrator in the table at AWS Services that you
-// can use with AWS Organizations
+// the specified Amazon Web Services service. It grants read-only access to
+// Organizations service data. The account still requires IAM permissions to access
+// and administer the Amazon Web Services service. You can run this action only for
+// Amazon Web Services services that support this feature. For a current list of
+// services that support it, see the column Supports Delegated Administrator in the
+// table at Amazon Web Services Services that you can use with Organizations
 // (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services_list.html)
-// in the AWS Organizations User Guide. This operation can be called only from the
+// in the Organizations User Guide. This operation can be called only from the
 // organization's management account.
 func (c *Client) RegisterDelegatedAdministrator(ctx context.Context, params *RegisterDelegatedAdministratorInput, optFns ...func(*Options)) (*RegisterDelegatedAdministratorOutput, error) {
 	if params == nil {
@@ -43,8 +43,8 @@ type RegisterDelegatedAdministratorInput struct {
 	// This member is required.
 	AccountId *string
 
-	// The service principal of the AWS service for which you want to make the member
-	// account a delegated administrator.
+	// The service principal of the Amazon Web Services service for which you want to
+	// make the member account a delegated administrator.
 	//
 	// This member is required.
 	ServicePrincipal *string

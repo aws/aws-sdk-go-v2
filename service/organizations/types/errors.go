@@ -32,8 +32,8 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 
 // The operation that you attempted requires you to have the
 // iam:CreateServiceLinkedRole for organizations.amazonaws.com permission so that
-// AWS Organizations can create the required service-linked role. You don't have
-// that permission.
+// Organizations can create the required service-linked role. You don't have that
+// permission.
 type AccessDeniedForDependencyException struct {
 	Message *string
 
@@ -58,7 +58,27 @@ func (e *AccessDeniedForDependencyException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// The specified account is already a delegated administrator for this AWS service.
+// You attempted to close an account that is already closed.
+type AccountAlreadyClosedException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *AccountAlreadyClosedException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *AccountAlreadyClosedException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *AccountAlreadyClosedException) ErrorCode() string             { return "AccountAlreadyClosedException" }
+func (e *AccountAlreadyClosedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The specified account is already a delegated administrator for this Amazon Web
+// Services service.
 type AccountAlreadyRegisteredException struct {
 	Message *string
 
@@ -79,9 +99,9 @@ func (e *AccountAlreadyRegisteredException) ErrorCode() string {
 }
 func (e *AccountAlreadyRegisteredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// We can't find an AWS account with the AccountId that you specified, or the
-// account whose credentials you used to make this request isn't a member of an
-// organization.
+// We can't find an Amazon Web Services account with the AccountId that you
+// specified, or the account whose credentials you used to make this request isn't
+// a member of an organization.
 type AccountNotFoundException struct {
 	Message *string
 
@@ -100,7 +120,8 @@ func (e *AccountNotFoundException) ErrorMessage() string {
 func (e *AccountNotFoundException) ErrorCode() string             { return "AccountNotFoundException" }
 func (e *AccountNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified account is not a delegated administrator for this AWS service.
+// The specified account is not a delegated administrator for this Amazon Web
+// Services service.
 type AccountNotRegisteredException struct {
 	Message *string
 
@@ -122,8 +143,8 @@ func (e *AccountNotRegisteredException) ErrorFault() smithy.ErrorFault { return 
 // You can't invite an existing account to your organization until you verify that
 // you own the email address associated with the management account. For more
 // information, see Email Address Verification
-// (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_create.html#about-email-verification)
-// in the AWS Organizations User Guide.
+// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_create.html#about-email-verification)
+// in the Organizations User Guide.
 type AccountOwnerNotVerifiedException struct {
 	Message *string
 
@@ -186,8 +207,8 @@ func (e *AWSOrganizationsNotInUseException) ErrorCode() string {
 }
 func (e *AWSOrganizationsNotInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// We can't find an organizational unit (OU) or AWS account with the ChildId that
-// you specified.
+// We can't find an organizational unit (OU) or Amazon Web Services account with
+// the ChildId that you specified.
 type ChildNotFoundException struct {
 	Message *string
 
@@ -228,6 +249,26 @@ func (e *ConcurrentModificationException) ErrorCode() string {
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The request failed because it conflicts with the current state of the specified
+// resource.
+type ConflictException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ConflictException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ConflictException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
+func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // Performing this operation violates a minimum or maximum value limit. For
 // example, attempting to remove the last service control policy (SCP) from an OU
 // or root, inviting or creating too many accounts to the organization, or
@@ -241,65 +282,59 @@ func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { retur
 // account. Instead, after you remove all member accounts, delete the organization
 // itself.
 //
-// * ACCOUNT_CANNOT_LEAVE_WITHOUT_EULA: You attempted to remove an account
-// from the organization that doesn't yet have enough information to exist as a
-// standalone account. This account requires you to first agree to the AWS Customer
-// Agreement. Follow the steps at Removing a member account from your organization
-// (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#orgs_manage_accounts_remove-from-master)in
-// the AWS Organizations User Guide.
+// * ACCOUNT_CANNOT_LEAVE_WITHOUT_PHONE_VERIFICATION: You attempted to
+// remove an account from the organization that doesn't yet have enough information
+// to exist as a standalone account. This account requires you to first complete
+// phone verification. Follow the steps at Removing a member account from your
+// organization
+// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#orgs_manage_accounts_remove-from-master)
+// in the Organizations User Guide.
+//
+// * ACCOUNT_CREATION_RATE_LIMIT_EXCEEDED: You
+// attempted to exceed the number of accounts that you can create in one day.
 //
 // *
-// ACCOUNT_CANNOT_LEAVE_WITHOUT_PHONE_VERIFICATION: You attempted to remove an
-// account from the organization that doesn't yet have enough information to exist
-// as a standalone account. This account requires you to first complete phone
-// verification. Follow the steps at Removing a member account from your
-// organization
-// (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#orgs_manage_accounts_remove-from-master)
-// in the AWS Organizations User Guide.
-//
-// * ACCOUNT_CREATION_RATE_LIMIT_EXCEEDED:
-// You attempted to exceed the number of accounts that you can create in one
-// day.
-//
-// * ACCOUNT_NUMBER_LIMIT_EXCEEDED: You attempted to exceed the limit on the
-// number of accounts in an organization. If you need more accounts, contact AWS
-// Support (https://console.aws.amazon.com/support/home#/) to request an increase
-// in your limit. Or the number of invitations that you tried to send would cause
-// you to exceed the limit of accounts in your organization. Send fewer invitations
-// or contact AWS Support to request an increase in the number of accounts. Deleted
-// and closed accounts still count toward your limit. If you get this exception
-// when running a command immediately after creating the organization, wait one
-// hour and try again. After an hour, if the command continues to fail with this
-// error, contact AWS Support (https://console.aws.amazon.com/support/home#/).
+// ACCOUNT_NUMBER_LIMIT_EXCEEDED: You attempted to exceed the limit on the number
+// of accounts in an organization. If you need more accounts, contact Amazon Web
+// Services Support (https://docs.aws.amazon.com/support/home#/) to request an
+// increase in your limit. Or the number of invitations that you tried to send
+// would cause you to exceed the limit of accounts in your organization. Send fewer
+// invitations or contact Amazon Web Services Support to request an increase in the
+// number of accounts. Deleted and closed accounts still count toward your limit.
+// If you get this exception when running a command immediately after creating the
+// organization, wait one hour and try again. After an hour, if the command
+// continues to fail with this error, contact Amazon Web Services Support
+// (https://docs.aws.amazon.com/support/home#/).
 //
 // *
 // CANNOT_REGISTER_MASTER_AS_DELEGATED_ADMINISTRATOR: You attempted to register the
-// management account of the organization as a delegated administrator for an AWS
-// service integrated with Organizations. You can designate only a member account
-// as a delegated administrator.
-//
-// * CANNOT_REMOVE_DELEGATED_ADMINISTRATOR_FROM_ORG:
-// You attempted to remove an account that is registered as a delegated
-// administrator for a service integrated with your organization. To complete this
-// operation, you must first deregister this account as a delegated
-// administrator.
-//
-// * CREATE_ORGANIZATION_IN_BILLING_MODE_UNSUPPORTED_REGION: To
-// create an organization in the specified region, you must enable all features
-// mode.
-//
-// * DELEGATED_ADMINISTRATOR_EXISTS_FOR_THIS_SERVICE: You attempted to
-// register an AWS account as a delegated administrator for an AWS service that
-// already has a delegated administrator. To complete this operation, you must
-// first deregister any existing delegated administrators for this service.
+// management account of the organization as a delegated administrator for an
+// Amazon Web Services service integrated with Organizations. You can designate
+// only a member account as a delegated administrator.
 //
 // *
-// EMAIL_VERIFICATION_CODE_EXPIRED: The email verification code is only valid for a
-// limited period of time. You must resubmit the request and generate a new
-// verfication code.
+// CANNOT_REMOVE_DELEGATED_ADMINISTRATOR_FROM_ORG: You attempted to remove an
+// account that is registered as a delegated administrator for a service integrated
+// with your organization. To complete this operation, you must first deregister
+// this account as a delegated administrator.
 //
-// * HANDSHAKE_RATE_LIMIT_EXCEEDED: You attempted to exceed the
-// number of handshakes that you can send in one day.
+// *
+// CREATE_ORGANIZATION_IN_BILLING_MODE_UNSUPPORTED_REGION: To create an
+// organization in the specified region, you must enable all features mode.
+//
+// *
+// DELEGATED_ADMINISTRATOR_EXISTS_FOR_THIS_SERVICE: You attempted to register an
+// Amazon Web Services account as a delegated administrator for an Amazon Web
+// Services service that already has a delegated administrator. To complete this
+// operation, you must first deregister any existing delegated administrators for
+// this service.
+//
+// * EMAIL_VERIFICATION_CODE_EXPIRED: The email verification code is
+// only valid for a limited period of time. You must resubmit the request and
+// generate a new verfication code.
+//
+// * HANDSHAKE_RATE_LIMIT_EXCEEDED: You attempted
+// to exceed the number of handshakes that you can send in one day.
 //
 // *
 // MASTER_ACCOUNT_ADDRESS_DOES_NOT_MATCH_MARKETPLACE: To create an account in this
@@ -309,29 +344,29 @@ func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { retur
 // marketplace. All accounts in an organization must be associated with the same
 // marketplace.
 //
-// * MASTER_ACCOUNT_MISSING_BUSINESS_LICENSE: Applies only to the AWS
-// Regions in China. To create an organization, the master must have a valid
-// business license. For more information, contact customer support.
+// * MASTER_ACCOUNT_MISSING_BUSINESS_LICENSE: Applies only to the
+// Amazon Web Services /> Regions in China. To create an organization, the master
+// must have a valid business license. For more information, contact customer
+// support.
+//
+// * MASTER_ACCOUNT_MISSING_CONTACT_INFO: To complete this operation, you
+// must first provide a valid contact address and phone number for the management
+// account. Then try the operation again.
+//
+// * MASTER_ACCOUNT_NOT_GOVCLOUD_ENABLED:
+// To complete this operation, the management account must have an associated
+// account in the Amazon Web Services GovCloud (US-West) Region. For more
+// information, see Organizations
+// (https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/govcloud-organizations.html)
+// in the Amazon Web Services GovCloud User Guide.
 //
 // *
-// MASTER_ACCOUNT_MISSING_CONTACT_INFO: To complete this operation, you must first
-// provide a valid contact address and phone number for the management account.
-// Then try the operation again.
-//
-// * MASTER_ACCOUNT_NOT_GOVCLOUD_ENABLED: To
-// complete this operation, the management account must have an associated account
-// in the AWS GovCloud (US-West) Region. For more information, see AWS
-// Organizations
-// (http://docs.aws.amazon.com/govcloud-us/latest/UserGuide/govcloud-organizations.html)
-// in the AWS GovCloud User Guide.
-//
-// * MASTER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED:
-// To create an organization with this management account, you first must associate
-// a valid payment instrument, such as a credit card, with the account. Follow the
-// steps at To leave an organization when all required account information has not
-// yet been provided
-// (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info)
-// in the AWS Organizations User Guide.
+// MASTER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED: To create an organization with this
+// management account, you first must associate a valid payment instrument, such as
+// a credit card, with the account. Follow the steps at To leave an organization
+// when all required account information has not yet been provided
+// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info)
+// in the Organizations User Guide.
 //
 // *
 // MAX_DELEGATED_ADMINISTRATORS_FOR_SERVICE_LIMIT_EXCEEDED: You attempted to
@@ -350,36 +385,44 @@ func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { retur
 // valid payment instrument, such as a credit card, with the account. Follow the
 // steps at To leave an organization when all required account information has not
 // yet been provided
-// (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info)
-// in the AWS Organizations User Guide.
+// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info)
+// in the Organizations User Guide.
+//
+// * MIN_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED:
+// You attempted to detach a policy from an entity that would cause the entity to
+// have fewer than the minimum number of policies of a certain type required.
 //
 // *
-// MIN_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED: You attempted to detach a policy from
-// an entity that would cause the entity to have fewer than the minimum number of
-// policies of a certain type required.
+// ORGANIZATION_NOT_IN_ALL_FEATURES_MODE: You attempted to perform an operation
+// that requires the organization to be configured to support all features. An
+// organization that supports only consolidated billing features can't perform this
+// operation.
 //
-// * ORGANIZATION_NOT_IN_ALL_FEATURES_MODE:
-// You attempted to perform an operation that requires the organization to be
-// configured to support all features. An organization that supports only
-// consolidated billing features can't perform this operation.
+// * OU_DEPTH_LIMIT_EXCEEDED: You attempted to create an OU tree that
+// is too many levels deep.
 //
-// *
-// OU_DEPTH_LIMIT_EXCEEDED: You attempted to create an OU tree that is too many
-// levels deep.
-//
-// * OU_NUMBER_LIMIT_EXCEEDED: You attempted to exceed the number of
-// OUs that you can have in an organization.
-//
-// * POLICY_CONTENT_LIMIT_EXCEEDED: You
-// attempted to create a policy that is larger than the maximum size.
+// * OU_NUMBER_LIMIT_EXCEEDED: You attempted to exceed
+// the number of OUs that you can have in an organization.
 //
 // *
-// POLICY_NUMBER_LIMIT_EXCEEDED: You attempted to exceed the number of policies
-// that you can have in an organization.
+// POLICY_CONTENT_LIMIT_EXCEEDED: You attempted to create a policy that is larger
+// than the maximum size.
 //
-// * TAG_POLICY_VIOLATION: You attempted to
-// create or update a resource with tags that are not compliant with the tag policy
-// requirements for this account.
+// * POLICY_NUMBER_LIMIT_EXCEEDED: You attempted to exceed
+// the number of policies that you can have in an organization.
+//
+// *
+// SERVICE_ACCESS_NOT_ENABLED: You attempted to register a delegated administrator
+// before you enabled service access. Call the EnableAWSServiceAccess API first.
+//
+// *
+// TAG_POLICY_VIOLATION: You attempted to create or update a resource with tags
+// that are not compliant with the tag policy requirements for this account.
+//
+// *
+// WAIT_PERIOD_ACTIVE: After you create an Amazon Web Services account, there is a
+// waiting period before you can remove it from the organization. If you get an
+// error that indicates that a wait period is required, try again in a few days.
 type ConstraintViolationException struct {
 	Message *string
 
@@ -579,9 +622,9 @@ func (e *EffectivePolicyNotFoundException) ErrorCode() string {
 }
 func (e *EffectivePolicyNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// AWS Organizations couldn't perform the operation because your organization
-// hasn't finished initializing. This can take up to an hour. Try again later. If
-// after one hour you continue to receive this error, contact AWS Support
+// Organizations couldn't perform the operation because your organization hasn't
+// finished initializing. This can take up to an hour. Try again later. If after
+// one hour you continue to receive this error, contact Amazon Web Services Support
 // (https://console.aws.amazon.com/support/home#/).
 type FinalizingOrganizationException struct {
 	Message *string
@@ -633,24 +676,25 @@ func (e *HandshakeAlreadyInStateException) ErrorFault() smithy.ErrorFault { retu
 // exceed the limit on the number of accounts in an organization. Note that deleted
 // and closed accounts still count toward your limit. If you get this exception
 // immediately after creating the organization, wait one hour and try again. If
-// after an hour it continues to fail with this error, contact AWS Support
-// (https://console.aws.amazon.com/support/home#/).
-//
-// * ALREADY_IN_AN_ORGANIZATION:
-// The handshake request is invalid because the invited account is already a member
-// of an organization.
-//
-// * HANDSHAKE_RATE_LIMIT_EXCEEDED: You attempted to exceed
-// the number of handshakes that you can send in one day.
+// after an hour it continues to fail with this error, contact Amazon Web Services
+// Support (https://docs.aws.amazon.com/support/home#/).
 //
 // *
-// INVITE_DISABLED_DURING_ENABLE_ALL_FEATURES: You can't issue new invitations to
-// join an organization while it's in the process of enabling all features. You can
-// resume inviting accounts after you finalize the process when all accounts have
-// agreed to the change.
+// ALREADY_IN_AN_ORGANIZATION: The handshake request is invalid because the invited
+// account is already a member of an organization.
 //
-// * ORGANIZATION_ALREADY_HAS_ALL_FEATURES: The handshake
-// request is invalid because the organization has already enabled all features.
+// *
+// HANDSHAKE_RATE_LIMIT_EXCEEDED: You attempted to exceed the number of handshakes
+// that you can send in one day.
+//
+// * INVITE_DISABLED_DURING_ENABLE_ALL_FEATURES: You
+// can't issue new invitations to join an organization while it's in the process of
+// enabling all features. You can resume inviting accounts after you finalize the
+// process when all accounts have agreed to the change.
+//
+// *
+// ORGANIZATION_ALREADY_HAS_ALL_FEATURES: The handshake request is invalid because
+// the organization has already enabled all features.
 //
 // *
 // ORGANIZATION_IS_ALREADY_PENDING_ALL_FEATURES_MIGRATION: The handshake request is
@@ -747,81 +791,81 @@ func (e *InvalidHandshakeTransitionException) ErrorFault() smithy.ErrorFault {
 // DUPLICATE_TAG_KEY: Tag keys must be unique among the tags attached to the same
 // entity.
 //
-// * IMMUTABLE_POLICY: You specified a policy that is managed by AWS and
-// can't be modified.
+// * IMMUTABLE_POLICY: You specified a policy that is managed by Amazon
+// Web Services and can't be modified.
 //
-// * INPUT_REQUIRED: You must include a value for all required
-// parameters.
+// * INPUT_REQUIRED: You must include a value
+// for all required parameters.
 //
-// * INVALID_EMAIL_ADDRESS_TARGET: You specified an invalid email
-// address for the invited account owner.
+// * INVALID_EMAIL_ADDRESS_TARGET: You specified an
+// invalid email address for the invited account owner.
 //
-// * INVALID_ENUM: You specified an invalid
-// value.
+// * INVALID_ENUM: You
+// specified an invalid value.
 //
-// * INVALID_ENUM_POLICY_TYPE: You specified an invalid policy type
-// string.
+// * INVALID_ENUM_POLICY_TYPE: You specified an
+// invalid policy type string.
 //
-// * INVALID_FULL_NAME_TARGET: You specified a full name that contains
-// invalid characters.
+// * INVALID_FULL_NAME_TARGET: You specified a full
+// name that contains invalid characters.
 //
-// * INVALID_LIST_MEMBER: You provided a list to a parameter
-// that contains at least one invalid value.
-//
-// * INVALID_PAGINATION_TOKEN: Get the
-// value for the NextToken parameter from the response to a previous call of the
-// operation.
-//
-// * INVALID_PARTY_TYPE_TARGET: You specified the wrong type of entity
-// (account, organization, or email) as a party.
-//
-// * INVALID_PATTERN: You provided a
-// value that doesn't match the required pattern.
-//
-// * INVALID_PATTERN_TARGET_ID: You
-// specified a policy target ID that doesn't match the required pattern.
+// * INVALID_LIST_MEMBER: You provided a
+// list to a parameter that contains at least one invalid value.
 //
 // *
-// INVALID_ROLE_NAME: You provided a role name that isn't valid. A role name can't
-// begin with the reserved prefix AWSServiceRoleFor.
+// INVALID_PAGINATION_TOKEN: Get the value for the NextToken parameter from the
+// response to a previous call of the operation.
+//
+// * INVALID_PARTY_TYPE_TARGET: You
+// specified the wrong type of entity (account, organization, or email) as a
+// party.
+//
+// * INVALID_PATTERN: You provided a value that doesn't match the required
+// pattern.
+//
+// * INVALID_PATTERN_TARGET_ID: You specified a policy target ID that
+// doesn't match the required pattern.
+//
+// * INVALID_ROLE_NAME: You provided a role
+// name that isn't valid. A role name can't begin with the reserved prefix
+// AWSServiceRoleFor.
+//
+// * INVALID_SYNTAX_ORGANIZATION_ARN: You specified an invalid
+// Amazon Resource Name (ARN) for the organization.
+//
+// * INVALID_SYNTAX_POLICY_ID:
+// You specified an invalid policy ID.
+//
+// * INVALID_SYSTEM_TAGS_PARAMETER: You
+// specified a tag key that is a system tag. You can’t add, edit, or delete system
+// tag keys because they're reserved for Amazon Web Services use. System tags don’t
+// count against your tags per resource limit.
+//
+// * MAX_FILTER_LIMIT_EXCEEDED: You
+// can specify only one filter parameter for the operation.
+//
+// * MAX_LENGTH_EXCEEDED:
+// You provided a string parameter that is longer than allowed.
 //
 // *
-// INVALID_SYNTAX_ORGANIZATION_ARN: You specified an invalid Amazon Resource Name
-// (ARN) for the organization.
-//
-// * INVALID_SYNTAX_POLICY_ID: You specified an
-// invalid policy ID.
-//
-// * INVALID_SYSTEM_TAGS_PARAMETER: You specified a tag key
-// that is a system tag. You can’t add, edit, or delete system tag keys because
-// they're reserved for AWS use. System tags don’t count against your tags per
-// resource limit.
-//
-// * MAX_FILTER_LIMIT_EXCEEDED: You can specify only one filter
-// parameter for the operation.
-//
-// * MAX_LENGTH_EXCEEDED: You provided a string
-// parameter that is longer than allowed.
-//
-// * MAX_VALUE_EXCEEDED: You provided a
-// numeric parameter that has a larger value than allowed.
-//
-// * MIN_LENGTH_EXCEEDED:
-// You provided a string parameter that is shorter than allowed.
-//
-// *
-// MIN_VALUE_EXCEEDED: You provided a numeric parameter that has a smaller value
+// MAX_VALUE_EXCEEDED: You provided a numeric parameter that has a larger value
 // than allowed.
 //
-// * MOVING_ACCOUNT_BETWEEN_DIFFERENT_ROOTS: You can move an account
-// only between entities in the same root.
+// * MIN_LENGTH_EXCEEDED: You provided a string parameter that is
+// shorter than allowed.
 //
-// * TARGET_NOT_SUPPORTED: You can't
-// perform the specified operation on that target entity.
+// * MIN_VALUE_EXCEEDED: You provided a numeric parameter
+// that has a smaller value than allowed.
 //
 // *
-// UNRECOGNIZED_SERVICE_PRINCIPAL: You specified a service principal that isn't
-// recognized.
+// MOVING_ACCOUNT_BETWEEN_DIFFERENT_ROOTS: You can move an account only between
+// entities in the same root.
+//
+// * TARGET_NOT_SUPPORTED: You can't perform the
+// specified operation on that target entity.
+//
+// * UNRECOGNIZED_SERVICE_PRINCIPAL:
+// You specified a service principal that isn't recognized.
 type InvalidInputException struct {
 	Message *string
 
@@ -846,7 +890,7 @@ func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.F
 // policy type. For example, the syntax might be incorrect. For details about
 // service control policy syntax, see Service Control Policy Syntax
 // (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_scp-syntax.html)
-// in the AWS Organizations User Guide.
+// in the Organizations User Guide.
 type MalformedPolicyDocumentException struct {
 	Message *string
 
@@ -1082,10 +1126,10 @@ func (e *PolicyTypeAlreadyEnabledException) ErrorFault() smithy.ErrorFault { ret
 
 // You can't use the specified policy type with the feature set currently enabled
 // for this organization. For example, you can enable SCPs only after you enable
-// all features in the organization. For more information, see Managing AWS
+// all features in the organization. For more information, see Managing
 // Organizations Policies
 // (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies.html#enable_policies_on_root)in
-// the AWS Organizations User Guide.
+// the Organizations User Guide.
 type PolicyTypeNotAvailableForOrganizationException struct {
 	Message *string
 
@@ -1113,7 +1157,7 @@ func (e *PolicyTypeNotAvailableForOrganizationException) ErrorFault() smithy.Err
 // in the root. For more information, see Enabling All Features in Your
 // Organization
 // (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html)
-// in the AWS Organizations User Guide.
+// in the Organizations User Guide.
 type PolicyTypeNotEnabledException struct {
 	Message *string
 
@@ -1151,8 +1195,8 @@ func (e *RootNotFoundException) ErrorMessage() string {
 func (e *RootNotFoundException) ErrorCode() string             { return "RootNotFoundException" }
 func (e *RootNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// AWS Organizations can't complete your request because of an internal service
-// error. Try again later.
+// Organizations can't complete your request because of an internal service error.
+// Try again later.
 type ServiceException struct {
 	Message *string
 
@@ -1212,9 +1256,9 @@ func (e *TargetNotFoundException) ErrorFault() smithy.ErrorFault { return smithy
 
 // You have sent too many requests in too short a period of time. The quota helps
 // protect against denial-of-service attacks. Try again later. For information
-// about quotas that affect AWS Organizations, see Quotas for AWS Organizations
+// about quotas that affect Organizations, see Quotas for Organizations
 // (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_limits.html)in
-// the AWS Organizations User Guide.
+// the Organizations User Guide.
 type TooManyRequestsException struct {
 	Message *string
 
@@ -1235,7 +1279,7 @@ func (e *TooManyRequestsException) ErrorMessage() string {
 func (e *TooManyRequestsException) ErrorCode() string             { return "TooManyRequestsException" }
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This action isn't available in the current AWS Region.
+// This action isn't available in the current Amazon Web Services Region.
 type UnsupportedAPIEndpointException struct {
 	Message *string
 

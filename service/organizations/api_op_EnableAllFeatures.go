@@ -15,10 +15,10 @@ import (
 // policies that can restrict the services and actions that can be called in each
 // account. Until you enable all features, you have access only to consolidated
 // billing, and you can't use any of the advanced account administration features
-// that AWS Organizations supports. For more information, see Enabling All Features
-// in Your Organization
+// that Organizations supports. For more information, see Enabling All Features in
+// Your Organization
 // (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html)
-// in the AWS Organizations User Guide. This operation is required only for
+// in the Organizations User Guide. This operation is required only for
 // organizations that were created explicitly with only the consolidated billing
 // features enabled. Calling this operation sends a handshake to every invited
 // account in the organization. The feature set change can be finalized and the

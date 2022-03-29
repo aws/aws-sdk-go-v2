@@ -10,77 +10,47 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes any tags with the specified keys from the specified resource. You can
-// attach tags to the following resources in Organizations.
-//
-// * Amazon Web Services
-// account
-//
-// * Organization root
-//
-// * Organizational unit (OU)
-//
-// * Policy (any
-// type)
-//
-// This operation can be called only from the organization's management
-// account.
-func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
+// Closes an Amazon Web Services account that is now a part of an Organizations,
+// either created within the organization, or invited to join the organization.
+func (c *Client) CloseAccount(ctx context.Context, params *CloseAccountInput, optFns ...func(*Options)) (*CloseAccountOutput, error) {
 	if params == nil {
-		params = &UntagResourceInput{}
+		params = &CloseAccountInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UntagResource", params, optFns, c.addOperationUntagResourceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CloseAccount", params, optFns, c.addOperationCloseAccountMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*UntagResourceOutput)
+	out := result.(*CloseAccountOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type UntagResourceInput struct {
+type CloseAccountInput struct {
 
-	// The ID of the resource to remove a tag from. You can specify any of the
-	// following taggable resources.
-	//
-	// * Amazon Web Services account – specify the
-	// account ID number.
-	//
-	// * Organizational unit – specify the OU ID that begins with
-	// ou- and looks similar to: ou-1a2b-34uvwxyz
-	//
-	// * Root – specify the root ID that
-	// begins with r- and looks similar to: r-1a2b
-	//
-	// * Policy – specify the policy ID
-	// that begins with p- andlooks similar to: p-12abcdefg3
+	// Retrieves the Amazon Web Services account Id for the current CloseAccount API
+	// request.
 	//
 	// This member is required.
-	ResourceId *string
-
-	// The list of keys for tags to remove from the specified resource.
-	//
-	// This member is required.
-	TagKeys []string
+	AccountId *string
 
 	noSmithyDocumentSerde
 }
 
-type UntagResourceOutput struct {
+type CloseAccountOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationUntagResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUntagResource{}, middleware.After)
+func (c *Client) addOperationCloseAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCloseAccount{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUntagResource{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCloseAccount{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -120,10 +90,10 @@ func (c *Client) addOperationUntagResourceMiddlewares(stack *middleware.Stack, o
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpUntagResourceValidationMiddleware(stack); err != nil {
+	if err = addOpCloseAccountValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUntagResource(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCloseAccount(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -138,11 +108,11 @@ func (c *Client) addOperationUntagResourceMiddlewares(stack *middleware.Stack, o
 	return nil
 }
 
-func newServiceMetadataMiddleware_opUntagResource(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opCloseAccount(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "organizations",
-		OperationName: "UntagResource",
+		OperationName: "CloseAccount",
 	}
 }

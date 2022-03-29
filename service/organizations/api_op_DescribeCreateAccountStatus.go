@@ -13,7 +13,8 @@ import (
 
 // Retrieves the current status of an asynchronous request to create an account.
 // This operation can be called only from the organization's management account or
-// by a member account that is a delegated administrator for an AWS service.
+// by a member account that is a delegated administrator for an Amazon Web Services
+// service.
 func (c *Client) DescribeCreateAccountStatus(ctx context.Context, params *DescribeCreateAccountStatusInput, optFns ...func(*Options)) (*DescribeCreateAccountStatusOutput, error) {
 	if params == nil {
 		params = &DescribeCreateAccountStatusInput{}

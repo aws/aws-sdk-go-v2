@@ -1,0 +1,8 @@
+{
+    "id": "53d06437-50ae-4c72-802c-52bda5ddeae0",
+    "type": "feature",
+    "description": "This release provides the new CloseAccount API that enables principals in the management account to close any member account within an organization.",
+    "modules": [
+        "service/organizations"
+    ]
+}

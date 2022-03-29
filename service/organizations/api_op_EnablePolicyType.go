@@ -14,12 +14,13 @@ import (
 // Enables a policy type in a root. After you enable a policy type in a root, you
 // can attach policies of that type to the root, any organizational unit (OU), or
 // account in that root. You can undo this by using the DisablePolicyType
-// operation. This is an asynchronous request that AWS performs in the background.
-// AWS recommends that you first use ListRoots to see the status of policy types
-// for a specified root, and then use this operation. This operation can be called
-// only from the organization's management account. You can enable a policy type in
-// a root only if that policy type is available in the organization. To view the
-// status of available policy types in the organization, use DescribeOrganization.
+// operation. This is an asynchronous request that Amazon Web Services performs in
+// the background. Amazon Web Services recommends that you first use ListRoots to
+// see the status of policy types for a specified root, and then use this
+// operation. This operation can be called only from the organization's management
+// account. You can enable a policy type in a root only if that policy type is
+// available in the organization. To view the status of available policy types in
+// the organization, use DescribeOrganization.
 func (c *Client) EnablePolicyType(ctx context.Context, params *EnablePolicyTypeInput, optFns ...func(*Options)) (*EnablePolicyTypeOutput, error) {
 	if params == nil {
 		params = &EnablePolicyTypeInput{}

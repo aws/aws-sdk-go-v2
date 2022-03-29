@@ -11,69 +11,70 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an AWS account that is automatically a member of the organization whose
-// credentials made the request. This is an asynchronous request that AWS performs
-// in the background. Because CreateAccount operates asynchronously, it can return
-// a successful completion message even though account initialization might still
-// be in progress. You might need to wait a few minutes before you can successfully
-// access the account. To check the status of the request, do one of the
-// following:
+// Creates an Amazon Web Services account that is automatically a member of the
+// organization whose credentials made the request. This is an asynchronous request
+// that Amazon Web Services performs in the background. Because CreateAccount
+// operates asynchronously, it can return a successful completion message even
+// though account initialization might still be in progress. You might need to wait
+// a few minutes before you can successfully access the account. To check the
+// status of the request, do one of the following:
 //
-// * Use the Id member of the CreateAccountStatus response element from
-// this operation to provide as a parameter to the DescribeCreateAccountStatus
-// operation.
+// * Use the Id member of the
+// CreateAccountStatus response element from this operation to provide as a
+// parameter to the DescribeCreateAccountStatus operation.
 //
-// * Check the AWS CloudTrail log for the CreateAccountResult event.
-// For information on using AWS CloudTrail with AWS Organizations, see Logging and
-// monitoring in AWS Organizations
-// (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_security_incident-response.html#orgs_cloudtrail-integration)
-// in the AWS Organizations User Guide.
+// * Check the CloudTrail
+// log for the CreateAccountResult event. For information on using CloudTrail with
+// Organizations, see Logging and monitoring in Organizations
+// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_security_incident-response.html#orgs_cloudtrail-integration)
+// in the Organizations User Guide.
 //
 // The user who calls the API to create an
 // account must have the organizations:CreateAccount permission. If you enabled all
-// features in the organization, AWS Organizations creates the required
-// service-linked role named AWSServiceRoleForOrganizations. For more information,
-// see AWS Organizations and Service-Linked Roles
-// (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html#orgs_integrate_services-using_slrs)
-// in the AWS Organizations User Guide. If the request includes tags, then the
-// requester must have the organizations:TagResource permission. AWS Organizations
+// features in the organization, Organizations creates the required service-linked
+// role named AWSServiceRoleForOrganizations. For more information, see
+// Organizations and Service-Linked Roles
+// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html#orgs_integrate_services-using_slrs)
+// in the Organizations User Guide. If the request includes tags, then the
+// requester must have the organizations:TagResource permission. Organizations
 // preconfigures the new member account with a role (named
 // OrganizationAccountAccessRole by default) that grants users in the management
 // account administrator permissions in the new member account. Principals in the
-// management account can assume the role. AWS Organizations clones the company
-// name and address information for the new account from the organization's
-// management account. This operation can be called only from the organization's
-// management account. For more information about creating accounts, see Creating
-// an AWS Account in Your Organization
+// management account can assume the role. Organizations clones the company name
+// and address information for the new account from the organization's management
+// account. This operation can be called only from the organization's management
+// account. For more information about creating accounts, see Creating an Amazon
+// Web Services account in Your Organization
 // (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_create.html)
-// in the AWS Organizations User Guide.
+// in the Organizations User Guide.
 //
 // * When you create an account in an
-// organization using the AWS Organizations console, API, or CLI commands, the
+// organization using the Organizations console, API, or CLI commands, the
 // information required for the account to operate as a standalone account, such as
 // a payment method and signing the end user license agreement (EULA) is not
 // automatically collected. If you must remove an account from your organization
 // later, you can do so only after you provide the missing information. Follow the
 // steps at  To leave an organization as a member account
-// (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info)
-// in the AWS Organizations User Guide.
+// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info)
+// in the Organizations User Guide.
 //
-// * If you get an exception that indicates
-// that you exceeded your account limits for the organization, contact AWS Support
+// * If you get an exception that indicates that
+// you exceeded your account limits for the organization, contact Amazon Web
+// Services Support (https://console.aws.amazon.com/support/home#/).
+//
+// * If you get
+// an exception that indicates that the operation failed because your organization
+// is still initializing, wait one hour and then try again. If the error persists,
+// contact Amazon Web Services Support
 // (https://console.aws.amazon.com/support/home#/).
 //
-// * If you get an exception that
-// indicates that the operation failed because your organization is still
-// initializing, wait one hour and then try again. If the error persists, contact
-// AWS Support (https://console.aws.amazon.com/support/home#/).
-//
-// * Using
-// CreateAccount to create multiple temporary accounts isn't recommended. You can
-// only close an account from the Billing and Cost Management Console, and you must
-// be signed in as the root user. For information on the requirements and process
-// for closing an account, see Closing an AWS Account
-// (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_close.html)
-// in the AWS Organizations User Guide.
+// * Using CreateAccount to
+// create multiple temporary accounts isn't recommended. You can only close an
+// account from the Billing and Cost Management console, and you must be signed in
+// as the root user. For information on the requirements and process for closing an
+// account, see Closing an Amazon Web Services account
+// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_close.html)
+// in the Organizations User Guide.
 //
 // When you create a member account with this
 // operation, you can choose whether to create the account with the IAM User and
@@ -106,10 +107,36 @@ type CreateAccountInput struct {
 	AccountName *string
 
 	// The email address of the owner to assign to the new member account. This email
-	// address must not already be associated with another AWS account. You must use a
-	// valid email address to complete account creation. You can't access the root user
-	// of the account or remove an account that was created with an invalid email
-	// address.
+	// address must not already be associated with another Amazon Web Services account.
+	// You must use a valid email address to complete account creation. The rules for a
+	// valid email address:
+	//
+	// * The address must be a minimum of 6 and a maximum of 64
+	// characters long.
+	//
+	// * All characters must be 7-bit ASCII characters.
+	//
+	// * There must
+	// be one and only one @ symbol, which separates the local name from the domain
+	// name.
+	//
+	// * The local name can't contain any of the following characters:
+	// whitespace, " ' ( ) < > [ ] : ; , \ | % &
+	//
+	// * The local name can't begin with a
+	// dot (.)
+	//
+	// * The domain name can consist of only the characters [a-z],[A-Z],[0-9],
+	// hyphen (-), or dot (.)
+	//
+	// * The domain name can't begin or end with a hyphen (-)
+	// or dot (.)
+	//
+	// * The domain name must contain at least one dot
+	//
+	// You can't access
+	// the root user of the account or remove an account that was created with an
+	// invalid email address.
 	//
 	// This member is required.
 	Email *string
@@ -119,12 +146,13 @@ type CreateAccountInput struct {
 	// user of the new account can access account billing information. For more
 	// information, see Activating Access to the Billing and Cost Management Console
 	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html#ControllingAccessWebsite-Activate)
-	// in the AWS Billing and Cost Management User Guide. If you don't specify this
-	// parameter, the value defaults to ALLOW, and IAM users and roles with the
-	// required permissions can access billing information for the new account.
+	// in the Amazon Web Services Billing and Cost Management User Guide. If you don't
+	// specify this parameter, the value defaults to ALLOW, and IAM users and roles
+	// with the required permissions can access billing information for the new
+	// account.
 	IamUserAccessToBilling types.IAMUserAccessToBilling
 
-	// (Optional) The name of an IAM role that AWS Organizations automatically
+	// (Optional) The name of an IAM role that Organizations automatically
 	// preconfigures in the new member account. This role trusts the management
 	// account, allowing users in the management account to assume the role, as
 	// permitted by the management account administrator. The role has administrator
@@ -135,10 +163,10 @@ type CreateAccountInput struct {
 	// *
 	// Accessing and Administering the Member Accounts in Your Organization
 	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html#orgs_manage_accounts_create-cross-account-role)
-	// in the AWS Organizations User Guide
+	// in the Organizations User Guide
 	//
-	// * Steps 2 and 3 in Tutorial: Delegate
-	// Access Across AWS Accounts Using IAM Roles
+	// * Steps 2 and 3 in Tutorial: Delegate Access
+	// Across Amazon Web Services accounts Using IAM Roles
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_cross-account-with-roles.html)
 	// in the IAM User Guide
 	//
@@ -151,11 +179,11 @@ type CreateAccountInput struct {
 	// A list of tags that you want to attach to the newly created account. For each
 	// tag in the list, you must specify both a tag key and a value. You can set the
 	// value to an empty string, but you can't set it to null. For more information
-	// about tagging, see Tagging AWS Organizations resources
+	// about tagging, see Tagging Organizations resources
 	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_tagging.html)
-	// in the AWS Organizations User Guide. If any one of the tags is invalid or if you
-	// exceed the allowed number of tags for an account, then the entire request fails
-	// and the account is not created.
+	// in the Organizations User Guide. If any one of the tags is invalid or if you
+	// exceed the maximum allowed number of tags for an account, then the entire
+	// request fails and the account is not created.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -168,10 +196,10 @@ type CreateAccountOutput struct {
 	// because account creation is an asynchronous process. You can pass the returned
 	// CreateAccountStatus ID as a parameter to DescribeCreateAccountStatus to get
 	// status about the progress of the request at later times. You can also check the
-	// AWS CloudTrail log for the CreateAccountResult event. For more information, see
+	// CloudTrail log for the CreateAccountResult event. For more information, see
 	// Monitoring the Activity in Your Organization
-	// (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_monitoring.html)
-	// in the AWS Organizations User Guide.
+	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_monitoring.html)
+	// in the Organizations User Guide.
 	CreateAccountStatus *types.CreateAccountStatus
 
 	// Metadata pertaining to the operation's result.

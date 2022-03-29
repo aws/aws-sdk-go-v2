@@ -18,12 +18,12 @@ import (
 // are more results available. The NextToken response parameter value is null only
 // when there are no more results to display. This operation can be called only
 // from the organization's management account or by a member account that is a
-// delegated administrator for an AWS service. Policy types can be enabled and
-// disabled in roots. This is distinct from whether they're available in the
-// organization. When you enable all features, you make policy types available for
-// use in that organization. Individual policy types can then be enabled and
-// disabled in a root. To see the availability of a policy type in an organization,
-// use DescribeOrganization.
+// delegated administrator for an Amazon Web Services service. Policy types can be
+// enabled and disabled in roots. This is distinct from whether they're available
+// in the organization. When you enable all features, you make policy types
+// available for use in that organization. Individual policy types can then be
+// enabled and disabled in a root. To see the availability of a policy type in an
+// organization, use DescribeOrganization.
 func (c *Client) ListRoots(ctx context.Context, params *ListRootsInput, optFns ...func(*Options)) (*ListRootsOutput, error) {
 	if params == nil {
 		params = &ListRootsInput{}

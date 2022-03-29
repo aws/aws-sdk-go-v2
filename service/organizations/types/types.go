@@ -7,18 +7,19 @@ import (
 	"time"
 )
 
-// Contains information about an AWS account that is a member of an organization.
+// Contains information about an Amazon Web Services account that is a member of an
+// organization.
 type Account struct {
 
 	// The Amazon Resource Name (ARN) of the account. For more information about ARNs
 	// in Organizations, see ARN Formats Supported by Organizations
 	// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies)
-	// in the AWS Service Authorization Reference.
+	// in the Amazon Web Services Service Authorization Reference.
 	Arn *string
 
-	// The email address associated with the AWS account. The regex pattern
-	// (http://wikipedia.org/wiki/regex) for this parameter is a string of characters
-	// that represents a standard internet email address.
+	// The email address associated with the Amazon Web Services account. The regex
+	// pattern (http://wikipedia.org/wiki/regex) for this parameter is a string of
+	// characters that represents a standard internet email address.
 	Email *string
 
 	// The unique identifier (ID) of the account. The regex pattern
@@ -66,7 +67,8 @@ type Child struct {
 }
 
 // Contains the status about a CreateAccount or CreateGovCloudAccount request to
-// create an AWS account or an AWS GovCloud (US) account in an organization.
+// create an Amazon Web Services account or an Amazon Web Services GovCloud (US)
+// account in an organization.
 type CreateAccountStatus struct {
 
 	// If the account was created successfully, the unique identifier (ID) of the new
@@ -91,50 +93,50 @@ type CreateAccountStatus struct {
 	// information.
 	//
 	// * EMAIL_ALREADY_EXISTS: The account could not be created because
-	// another AWS account with that email address already exists.
+	// another Amazon Web Services account with that email address already exists.
 	//
 	// *
-	// FAILED_BUSINESS_VALIDATION: The AWS account that owns your organization failed
-	// to receive business license validation.
-	//
-	// * GOVCLOUD_ACCOUNT_ALREADY_EXISTS: The
-	// account in the AWS GovCloud (US) Region could not be created because this Region
-	// already includes an account with that email address.
+	// FAILED_BUSINESS_VALIDATION: The Amazon Web Services account that owns your
+	// organization failed to receive business license validation.
 	//
 	// *
-	// IDENTITY_INVALID_BUSINESS_VALIDATION: The AWS account that owns your
-	// organization can't complete business license validation because it doesn't have
-	// valid identity data.
+	// GOVCLOUD_ACCOUNT_ALREADY_EXISTS: The account in the Amazon Web Services GovCloud
+	// (US) Region could not be created because this Region already includes an account
+	// with that email address.
 	//
-	// * INVALID_ADDRESS: The account could not be created
-	// because the address you provided is not valid.
+	// * IDENTITY_INVALID_BUSINESS_VALIDATION: The Amazon Web
+	// Services account that owns your organization can't complete business license
+	// validation because it doesn't have valid identity data.
 	//
-	// * INVALID_EMAIL: The account
-	// could not be created because the email address you provided is not valid.
-	//
-	// *
-	// INTERNAL_FAILURE: The account could not be created because of an internal
-	// failure. Try again later. If the problem persists, contact AWS Customer
-	// Support.
-	//
-	// * MISSING_BUSINESS_VALIDATION: The AWS account that owns your
-	// organization has not received Business Validation.
+	// * INVALID_ADDRESS: The
+	// account could not be created because the address you provided is not valid.
 	//
 	// *
-	// MISSING_PAYMENT_INSTRUMENT: You must configure the management account with a
-	// valid payment method, such as a credit card.
+	// INVALID_EMAIL: The account could not be created because the email address you
+	// provided is not valid.
 	//
-	// * PENDING_BUSINESS_VALIDATION: The
-	// AWS account that owns your organization is still in the process of completing
-	// business license validation.
+	// * INTERNAL_FAILURE: The account could not be created
+	// because of an internal failure. Try again later. If the problem persists,
+	// contact Amazon Web Services Customer Support.
 	//
-	// * UNKNOWN_BUSINESS_VALIDATION: The AWS account
-	// that owns your organization has an unknown issue with business license
+	// * MISSING_BUSINESS_VALIDATION:
+	// The Amazon Web Services account that owns your organization has not received
+	// Business Validation.
+	//
+	// * MISSING_PAYMENT_INSTRUMENT: You must configure the
+	// management account with a valid payment method, such as a credit card.
+	//
+	// *
+	// PENDING_BUSINESS_VALIDATION: The Amazon Web Services account that owns your
+	// organization is still in the process of completing business license
 	// validation.
+	//
+	// * UNKNOWN_BUSINESS_VALIDATION: The Amazon Web Services account that
+	// owns your organization has an unknown issue with business license validation.
 	FailureReason CreateAccountFailureReason
 
 	// If the account was created successfully, the unique identifier (ID) of the new
-	// account in the AWS GovCloud (US) Region.
+	// account in the Amazon Web Services GovCloud (US) Region.
 	GovCloudAccountId *string
 
 	// The unique identifier (ID) that references this request. You get this value from
@@ -146,7 +148,7 @@ type CreateAccountStatus struct {
 	// The date and time that the request was made for the account creation.
 	RequestedTimestamp *time.Time
 
-	// The status of the asynchronous request to create an AWS account.
+	// The status of the asynchronous request to create an Amazon Web Services account.
 	State CreateAccountState
 
 	noSmithyDocumentSerde
@@ -161,8 +163,8 @@ type DelegatedAdministrator struct {
 	// The date when the account was made a delegated administrator.
 	DelegationEnabledDate *time.Time
 
-	// The email address that is associated with the delegated administrator's AWS
-	// account.
+	// The email address that is associated with the delegated administrator's Amazon
+	// Web Services account.
 	Email *string
 
 	// The unique identifier (ID) of the delegated administrator's account.
@@ -185,15 +187,15 @@ type DelegatedAdministrator struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about the AWS service for which the account is a delegated
-// administrator.
+// Contains information about the Amazon Web Services service for which the account
+// is a delegated administrator.
 type DelegatedService struct {
 
 	// The date that the account became a delegated administrator for this service.
 	DelegationEnabledDate *time.Time
 
-	// The name of an AWS service that can request an operation for the specified
-	// service. This is typically in the form of a URL, such as:
+	// The name of an Amazon Web Services service that can request an operation for the
+	// specified service. This is typically in the form of a URL, such as:
 	// servicename.amazonaws.com.
 	ServicePrincipal *string
 
@@ -220,11 +222,11 @@ type EffectivePolicy struct {
 	noSmithyDocumentSerde
 }
 
-// A structure that contains details of a service principal that represents an AWS
-// service that is enabled to integrate with AWS Organizations.
+// A structure that contains details of a service principal that represents an
+// Amazon Web Services service that is enabled to integrate with Organizations.
 type EnabledServicePrincipal struct {
 
-	// The date that the service principal was enabled for integration with AWS
+	// The date that the service principal was enabled for integration with
 	// Organizations.
 	DateEnabled *time.Time
 
@@ -240,8 +242,8 @@ type EnabledServicePrincipal struct {
 // management account (the originator) invites another account (the recipient) to
 // join its organization, the two accounts exchange information as a series of
 // handshake requests and responses. Note: Handshakes that are CANCELED, ACCEPTED,
-// or DECLINED show up in lists for only 30 days after entering that state After
-// that they are deleted.
+// DECLINED, or EXPIRED show up in lists for only 30 days after entering that state
+// After that they are deleted.
 type Handshake struct {
 
 	// The type of handshake, indicating what action occurs when the recipient accepts
@@ -267,7 +269,7 @@ type Handshake struct {
 	// The Amazon Resource Name (ARN) of a handshake. For more information about ARNs
 	// in Organizations, see ARN Formats Supported by Organizations
 	// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies)
-	// in the AWS Service Authorization Reference.
+	// in the Amazon Web Services Service Authorization Reference.
 	Arn *string
 
 	// The date and time that the handshake expires. If the recipient of the handshake
@@ -364,21 +366,21 @@ type HandshakeResource struct {
 	// The type of information being passed, specifying how the value is to be
 	// interpreted by the other party:
 	//
-	// * ACCOUNT - Specifies an AWS account ID
-	// number.
+	// * ACCOUNT - Specifies an Amazon Web Services
+	// account ID number.
 	//
 	// * ORGANIZATION - Specifies an organization ID number.
 	//
-	// * EMAIL -
-	// Specifies the email address that is associated with the account that receives
-	// the handshake.
+	// *
+	// EMAIL - Specifies the email address that is associated with the account that
+	// receives the handshake.
 	//
-	// * OWNER_EMAIL - Specifies the email address associated with the
-	// management account. Included as information about an organization.
+	// * OWNER_EMAIL - Specifies the email address associated
+	// with the management account. Included as information about an organization.
 	//
-	// * OWNER_NAME
-	// - Specifies the name associated with the management account. Included as
-	// information about an organization.
+	// *
+	// OWNER_NAME - Specifies the name associated with the management account. Included
+	// as information about an organization.
 	//
 	// * NOTES - Additional text provided by the
 	// handshake initiator and intended for the recipient to read.
@@ -400,7 +402,7 @@ type Organization struct {
 	// The Amazon Resource Name (ARN) of an organization. For more information about
 	// ARNs in Organizations, see ARN Formats Supported by Organizations
 	// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies)
-	// in the AWS Service Authorization Reference.
+	// in the Amazon Web Services Service Authorization Reference.
 	Arn *string
 
 	// Do not use. This field is deprecated and doesn't provide complete information
@@ -415,7 +417,7 @@ type Organization struct {
 	// consolidated billing functionality is available. For more information, see
 	// Enabling All Features in Your Organization
 	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html)
-	// in the AWS Organizations User Guide.
+	// in the Organizations User Guide.
 	FeatureSet OrganizationFeatureSet
 
 	// The unique identifier (ID) of an organization. The regex pattern
@@ -427,11 +429,11 @@ type Organization struct {
 	// management account for the organization. For more information about ARNs in
 	// Organizations, see ARN Formats Supported by Organizations
 	// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies)
-	// in the AWS Service Authorization Reference.
+	// in the Amazon Web Services Service Authorization Reference.
 	MasterAccountArn *string
 
-	// The email address that is associated with the AWS account that is designated as
-	// the management account for the organization.
+	// The email address that is associated with the Amazon Web Services account that
+	// is designated as the management account for the organization.
 	MasterAccountEmail *string
 
 	// The unique identifier (ID) of the management account of an organization. The
@@ -442,15 +444,16 @@ type Organization struct {
 	noSmithyDocumentSerde
 }
 
-// Contains details about an organizational unit (OU). An OU is a container of AWS
-// accounts within a root of an organization. Policies that are attached to an OU
-// apply to all accounts contained in that OU and in any child OUs.
+// Contains details about an organizational unit (OU). An OU is a container of
+// Amazon Web Services accounts within a root of an organization. Policies that are
+// attached to an OU apply to all accounts contained in that OU and in any child
+// OUs.
 type OrganizationalUnit struct {
 
 	// The Amazon Resource Name (ARN) of this OU. For more information about ARNs in
 	// Organizations, see ARN Formats Supported by Organizations
 	// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies)
-	// in the AWS Service Authorization Reference.
+	// in the Amazon Web Services Service Authorization Reference.
 	Arn *string
 
 	// The unique identifier (ID) associated with this OU. The regex pattern
@@ -512,12 +515,12 @@ type PolicySummary struct {
 	// The Amazon Resource Name (ARN) of the policy. For more information about ARNs in
 	// Organizations, see ARN Formats Supported by Organizations
 	// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies)
-	// in the AWS Service Authorization Reference.
+	// in the Amazon Web Services Service Authorization Reference.
 	Arn *string
 
-	// A boolean value that indicates whether the specified policy is an AWS managed
-	// policy. If true, then you can attach the policy to roots, OUs, or accounts, but
-	// you cannot edit it.
+	// A boolean value that indicates whether the specified policy is an Amazon Web
+	// Services managed policy. If true, then you can attach the policy to roots, OUs,
+	// or accounts, but you cannot edit it.
 	AwsManaged bool
 
 	// The description of the policy.
@@ -546,7 +549,7 @@ type PolicyTargetSummary struct {
 	// The Amazon Resource Name (ARN) of the policy target. For more information about
 	// ARNs in Organizations, see ARN Formats Supported by Organizations
 	// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies)
-	// in the AWS Service Authorization Reference.
+	// in the Amazon Web Services Service Authorization Reference.
 	Arn *string
 
 	// The friendly name of the policy target. The regex pattern
@@ -592,13 +595,14 @@ type PolicyTypeSummary struct {
 
 // Contains details about a root. A root is a top-level parent node in the
 // hierarchy of an organization that can contain organizational units (OUs) and
-// accounts. The root contains every AWS account in the organization.
+// accounts. The root contains every Amazon Web Services account in the
+// organization.
 type Root struct {
 
 	// The Amazon Resource Name (ARN) of the root. For more information about ARNs in
 	// Organizations, see ARN Formats Supported by Organizations
 	// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies)
-	// in the AWS Service Authorization Reference.
+	// in the Amazon Web Services Service Authorization Reference.
 	Arn *string
 
 	// The unique identifier (ID) for the root. The regex pattern
@@ -625,8 +629,8 @@ type Root struct {
 // A custom key-value pair associated with a resource within your organization. You
 // can attach tags to any of the following organization resources.
 //
-// * AWS
-// account
+// * Amazon Web
+// Services account
 //
 // * Organizational unit (OU)
 //

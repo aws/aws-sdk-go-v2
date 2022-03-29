@@ -70,6 +70,26 @@ func (m *validateOpCancelHandshake) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCloseAccount struct {
+}
+
+func (*validateOpCloseAccount) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCloseAccount) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CloseAccountInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCloseAccountInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateAccount struct {
 }
 
@@ -802,6 +822,10 @@ func addOpCancelHandshakeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelHandshake{}, middleware.After)
 }
 
+func addOpCloseAccountValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCloseAccount{}, middleware.After)
+}
+
 func addOpCreateAccountValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAccount{}, middleware.After)
 }
@@ -1039,6 +1063,21 @@ func validateOpCancelHandshakeInput(v *CancelHandshakeInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CancelHandshakeInput"}
 	if v.HandshakeId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("HandshakeId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCloseAccountInput(v *CloseAccountInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CloseAccountInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

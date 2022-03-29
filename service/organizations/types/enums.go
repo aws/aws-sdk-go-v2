@@ -41,8 +41,9 @@ type AccountStatus string
 
 // Enum values for AccountStatus
 const (
-	AccountStatusActive    AccountStatus = "ACTIVE"
-	AccountStatusSuspended AccountStatus = "SUSPENDED"
+	AccountStatusActive         AccountStatus = "ACTIVE"
+	AccountStatusSuspended      AccountStatus = "SUSPENDED"
+	AccountStatusPendingClosure AccountStatus = "PENDING_CLOSURE"
 )
 
 // Values returns all known values for AccountStatus. Note that this can be
@@ -52,6 +53,7 @@ func (AccountStatus) Values() []AccountStatus {
 	return []AccountStatus{
 		"ACTIVE",
 		"SUSPENDED",
+		"PENDING_CLOSURE",
 	}
 }
 
@@ -127,6 +129,10 @@ const (
 	ConstraintViolationExceptionReasonCannotRemoveDelegatedAdministratorFromOrg         ConstraintViolationExceptionReason = "CANNOT_REMOVE_DELEGATED_ADMINISTRATOR_FROM_ORG"
 	ConstraintViolationExceptionReasonDelegatedAdministratorExistsForThisService        ConstraintViolationExceptionReason = "DELEGATED_ADMINISTRATOR_EXISTS_FOR_THIS_SERVICE"
 	ConstraintViolationExceptionReasonMasterAccountMissingBusinessLicense               ConstraintViolationExceptionReason = "MASTER_ACCOUNT_MISSING_BUSINESS_LICENSE"
+	ConstraintViolationExceptionReasonCannotCloseManagementAccount                      ConstraintViolationExceptionReason = "CANNOT_CLOSE_MANAGEMENT_ACCOUNT"
+	ConstraintViolationExceptionReasonCloseAccountQuotaExceeded                         ConstraintViolationExceptionReason = "CLOSE_ACCOUNT_QUOTA_EXCEEDED"
+	ConstraintViolationExceptionReasonCloseAccountRequestsLimitExceeded                 ConstraintViolationExceptionReason = "CLOSE_ACCOUNT_REQUESTS_LIMIT_EXCEEDED"
+	ConstraintViolationExceptionReasonServiceAccessNotEnabled                           ConstraintViolationExceptionReason = "SERVICE_ACCESS_NOT_ENABLED"
 )
 
 // Values returns all known values for ConstraintViolationExceptionReason. Note
@@ -163,6 +169,10 @@ func (ConstraintViolationExceptionReason) Values() []ConstraintViolationExceptio
 		"CANNOT_REMOVE_DELEGATED_ADMINISTRATOR_FROM_ORG",
 		"DELEGATED_ADMINISTRATOR_EXISTS_FOR_THIS_SERVICE",
 		"MASTER_ACCOUNT_MISSING_BUSINESS_LICENSE",
+		"CANNOT_CLOSE_MANAGEMENT_ACCOUNT",
+		"CLOSE_ACCOUNT_QUOTA_EXCEEDED",
+		"CLOSE_ACCOUNT_REQUESTS_LIMIT_EXCEEDED",
+		"SERVICE_ACCESS_NOT_ENABLED",
 	}
 }
 
@@ -259,6 +269,7 @@ const (
 	HandshakeConstraintViolationExceptionReasonPaymentInstrumentRequired                        HandshakeConstraintViolationExceptionReason = "PAYMENT_INSTRUMENT_REQUIRED"
 	HandshakeConstraintViolationExceptionReasonOrganizationFromDifferentSellerOfRecord          HandshakeConstraintViolationExceptionReason = "ORGANIZATION_FROM_DIFFERENT_SELLER_OF_RECORD"
 	HandshakeConstraintViolationExceptionReasonOrganizationMembershipChangeRateLimitExceeded    HandshakeConstraintViolationExceptionReason = "ORGANIZATION_MEMBERSHIP_CHANGE_RATE_LIMIT_EXCEEDED"
+	HandshakeConstraintViolationExceptionReasonManagementAccountEmailNotVerified                HandshakeConstraintViolationExceptionReason = "MANAGEMENT_ACCOUNT_EMAIL_NOT_VERIFIED"
 )
 
 // Values returns all known values for HandshakeConstraintViolationExceptionReason.
@@ -276,6 +287,7 @@ func (HandshakeConstraintViolationExceptionReason) Values() []HandshakeConstrain
 		"PAYMENT_INSTRUMENT_REQUIRED",
 		"ORGANIZATION_FROM_DIFFERENT_SELLER_OF_RECORD",
 		"ORGANIZATION_MEMBERSHIP_CHANGE_RATE_LIMIT_EXCEEDED",
+		"MANAGEMENT_ACCOUNT_EMAIL_NOT_VERIFIED",
 	}
 }
 

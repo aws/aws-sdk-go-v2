@@ -20,7 +20,7 @@ import (
 // available. The NextToken response parameter value is null only when there are no
 // more results to display. This operation can be called only from the
 // organization's management account or by a member account that is a delegated
-// administrator for an AWS service.
+// administrator for an Amazon Web Services service.
 func (c *Client) ListPoliciesForTarget(ctx context.Context, params *ListPoliciesForTargetInput, optFns ...func(*Options)) (*ListPoliciesForTargetOutput, error) {
 	if params == nil {
 		params = &ListPoliciesForTargetInput{}

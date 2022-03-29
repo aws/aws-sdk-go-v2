@@ -12,16 +12,17 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of the AWS services that you enabled to integrate with your
-// organization. After a service on this list creates the resources that it
-// requires for the integration, it can perform operations on your organization and
-// its accounts. For more information about integrating other services with AWS
+// Returns a list of the Amazon Web Services services that you enabled to integrate
+// with your organization. After a service on this list creates the resources that
+// it requires for the integration, it can perform operations on your organization
+// and its accounts. For more information about integrating other services with
 // Organizations, including the list of services that currently work with
-// Organizations, see Integrating AWS Organizations with Other AWS Services
-// (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html)
-// in the AWS Organizations User Guide. This operation can be called only from the
+// Organizations, see Integrating Organizations with Other Amazon Web Services
+// Services
+// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html)
+// in the Organizations User Guide. This operation can be called only from the
 // organization's management account or by a member account that is a delegated
-// administrator for an AWS service.
+// administrator for an Amazon Web Services service.
 func (c *Client) ListAWSServiceAccessForOrganization(ctx context.Context, params *ListAWSServiceAccessForOrganizationInput, optFns ...func(*Options)) (*ListAWSServiceAccessForOrganizationOutput, error) {
 	if params == nil {
 		params = &ListAWSServiceAccessForOrganizationInput{}
@@ -63,7 +64,7 @@ type ListAWSServiceAccessForOrganizationOutput struct {
 
 	// A list of the service principals for the services that are enabled to integrate
 	// with your organization. Each principal is a structure that includes the name and
-	// the date that it was enabled for integration with AWS Organizations.
+	// the date that it was enabled for integration with Organizations.
 	EnabledServicePrincipals []types.EnabledServicePrincipal
 
 	// If present, indicates that more output is available than is included in the

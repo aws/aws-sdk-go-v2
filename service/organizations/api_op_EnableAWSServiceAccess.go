@@ -10,25 +10,25 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Enables the integration of an AWS service (the service that is specified by
-// ServicePrincipal) with AWS Organizations. When you enable integration, you allow
-// the specified service to create a service-linked role
-// (http://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html)
+// Enables the integration of an Amazon Web Services service (the service that is
+// specified by ServicePrincipal) with Organizations. When you enable integration,
+// you allow the specified service to create a service-linked role
+// (https://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html)
 // in all the accounts in your organization. This allows the service to perform
 // operations on your behalf in your organization and its accounts. We recommend
-// that you enable integration between AWS Organizations and the specified AWS
-// service by using the console or commands that are provided by the specified
-// service. Doing so ensures that the service is aware that it can create the
-// resources that are required for the integration. How the service creates those
-// resources in the organization's accounts depends on that service. For more
-// information, see the documentation for the other AWS service. For more
-// information about enabling services to integrate with AWS Organizations, see
-// Integrating AWS Organizations with Other AWS Services
-// (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html)
-// in the AWS Organizations User Guide. This operation can be called only from the
+// that you enable integration between Organizations and the specified Amazon Web
+// Services service by using the console or commands that are provided by the
+// specified service. Doing so ensures that the service is aware that it can create
+// the resources that are required for the integration. How the service creates
+// those resources in the organization's accounts depends on that service. For more
+// information, see the documentation for the other Amazon Web Services service.
+// For more information about enabling services to integrate with Organizations,
+// see Integrating Organizations with Other Amazon Web Services Services
+// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html)
+// in the Organizations User Guide. This operation can be called only from the
 // organization's management account and only if the organization has enabled all
 // features
-// (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html).
+// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html).
 func (c *Client) EnableAWSServiceAccess(ctx context.Context, params *EnableAWSServiceAccessInput, optFns ...func(*Options)) (*EnableAWSServiceAccessOutput, error) {
 	if params == nil {
 		params = &EnableAWSServiceAccessInput{}
@@ -46,9 +46,9 @@ func (c *Client) EnableAWSServiceAccess(ctx context.Context, params *EnableAWSSe
 
 type EnableAWSServiceAccessInput struct {
 
-	// The service principal name of the AWS service for which you want to enable
-	// integration with your organization. This is typically in the form of a URL, such
-	// as  service-abbreviation.amazonaws.com.
+	// The service principal name of the Amazon Web Services service for which you want
+	// to enable integration with your organization. This is typically in the form of a
+	// URL, such as  service-abbreviation.amazonaws.com.
 	//
 	// This member is required.
 	ServicePrincipal *string

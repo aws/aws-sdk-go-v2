@@ -20,24 +20,24 @@ import (
 // from the member account. The user who calls the API for an invitation to join
 // must have the organizations:AcceptHandshake permission. If you enabled all
 // features in the organization, the user must also have the
-// iam:CreateServiceLinkedRole permission so that AWS Organizations can create the
+// iam:CreateServiceLinkedRole permission so that Organizations can create the
 // required service-linked role named AWSServiceRoleForOrganizations. For more
-// information, see AWS Organizations and Service-Linked Roles
-// (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integration_services.html#orgs_integration_service-linked-roles)
-// in the AWS Organizations User Guide.
+// information, see Organizations and Service-Linked Roles
+// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integration_services.html#orgs_integration_service-linked-roles)
+// in the Organizations User Guide.
 //
 // * Enable all features final confirmation
 // handshake: only a principal from the management account. For more information
-// about invitations, see Inviting an AWS Account to Join Your Organization
+// about invitations, see Inviting an Amazon Web Services account to join your
+// organization
 // (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_invites.html)
-// in the AWS Organizations User Guide. For more information about requests to
-// enable all features in the organization, see Enabling All Features in Your
-// Organization
+// in the Organizations User Guide. For more information about requests to enable
+// all features in the organization, see Enabling all features in your organization
 // (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html)
-// in the AWS Organizations User Guide.
+// in the Organizations User Guide.
 //
-// After you accept a handshake, it continues
-// to appear in the results of relevant APIs for only 30 days. After that, it's
+// After you accept a handshake, it continues to
+// appear in the results of relevant APIs for only 30 days. After that, it's
 // deleted.
 func (c *Client) AcceptHandshake(ctx context.Context, params *AcceptHandshakeInput, optFns ...func(*Options)) (*AcceptHandshakeOutput, error) {
 	if params == nil {

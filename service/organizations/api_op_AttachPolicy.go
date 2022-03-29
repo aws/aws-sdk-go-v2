@@ -12,7 +12,7 @@ import (
 
 // Attaches a policy to a root, an organizational unit (OU), or an individual
 // account. How the policy affects accounts depends on the type of policy. Refer to
-// the AWS Organizations User Guide for information about each policy type:
+// the Organizations User Guide for information about each policy type:
 //
 // *
 // AISERVICES_OPT_OUT_POLICY

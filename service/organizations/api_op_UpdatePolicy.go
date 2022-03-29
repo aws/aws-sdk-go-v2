@@ -44,7 +44,7 @@ type UpdatePolicyInput struct {
 	// formatted JSON that complies with the syntax for the policy's type. For more
 	// information, see Service Control Policy Syntax
 	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_scp-syntax.html)
-	// in the AWS Organizations User Guide.
+	// in the Organizations User Guide.
 	Content *string
 
 	// If provided, the new description for the policy.
