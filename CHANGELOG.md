@@ -1,3 +1,9 @@
+# Release (2022-03-29)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/organizations`: [v1.15.0](service/organizations/CHANGELOG.md#v1150-2022-03-29)
+  * **Feature**: This release provides the new CloseAccount API that enables principals in the management account to close any member account within an organization.
+
 # Release (2022-03-28)
 
 ## Module Highlights
