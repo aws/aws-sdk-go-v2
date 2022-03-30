@@ -1,3 +1,8 @@
+# v1.21.0 (2022-03-30)
+
+* **Feature**: This release adds support for modifying throughput capacity for FSx for ONTAP file systems.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.20.2 (2022-03-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "bf767bf5-ec3d-49d6-922d-01d80911832c",
-    "type": "documentation",
-    "description": "Doc only update for IoT that fixes customer-reported issues.",
-    "modules": [
-        "service/iot"
-    ]
-}

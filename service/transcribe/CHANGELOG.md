@@ -1,3 +1,7 @@
+# v1.19.1 (2022-03-30)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.19.0 (2022-03-24)
 
 * **Feature**: This release adds an additional parameter for subtitling with Amazon Transcribe batch jobs: outputStartIndex.

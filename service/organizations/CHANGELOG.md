@@ -1,3 +1,7 @@
+# v1.15.1 (2022-03-30)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.15.0 (2022-03-29)
 
 * **Feature**: This release provides the new CloseAccount API that enables principals in the management account to close any member account within an organization.

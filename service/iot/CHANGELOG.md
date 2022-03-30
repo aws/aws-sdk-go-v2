@@ -1,3 +1,8 @@
+# v1.23.3 (2022-03-30)
+
+* **Documentation**: Doc only update for IoT that fixes customer-reported issues.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.23.2 (2022-03-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

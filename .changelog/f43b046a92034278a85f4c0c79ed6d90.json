@@ -1,8 +1,0 @@
-{
-    "id": "f43b046a-9203-4278-a85f-4c0c79ed6d90",
-    "type": "feature",
-    "description": "This release simplifies the auto-recovery configuration process enabling customers to set the recovery behavior to disabled or default",
-    "modules": [
-        "service/ec2"
-    ]
-}

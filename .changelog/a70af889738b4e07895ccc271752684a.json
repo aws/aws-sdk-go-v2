@@ -1,8 +1,0 @@
-{
-    "id": "a70af889-738b-4e07-895c-cc271752684a",
-    "type": "feature",
-    "description": "This release adds support for modifying throughput capacity for FSx for ONTAP file systems.",
-    "modules": [
-        "service/fsx"
-    ]
-}

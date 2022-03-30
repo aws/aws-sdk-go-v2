@@ -1,3 +1,20 @@
+# Release (2022-03-30)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.34.0](service/ec2/CHANGELOG.md#v1340-2022-03-30)
+  * **Feature**: This release simplifies the auto-recovery configuration process enabling customers to set the recovery behavior to disabled or default
+* `github.com/aws/aws-sdk-go-v2/service/fms`: [v1.17.0](service/fms/CHANGELOG.md#v1170-2022-03-30)
+  * **Feature**: AWS Firewall Manager now supports the configuration of third-party policies that can use either the centralized or distributed deployment models.
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.21.0](service/fsx/CHANGELOG.md#v1210-2022-03-30)
+  * **Feature**: This release adds support for modifying throughput capacity for FSx for ONTAP file systems.
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.23.3](service/iot/CHANGELOG.md#v1233-2022-03-30)
+  * **Documentation**: Doc only update for IoT that fixes customer-reported issues.
+* `github.com/aws/aws-sdk-go-v2/service/iotdataplane`: [v1.12.0](service/iotdataplane/CHANGELOG.md#v1120-2022-03-30)
+  * **Feature**: Update the default AWS IoT Core Data Plane endpoint from VeriSign signed to ATS signed. If you have firewalls with strict egress rules, configure the rules to grant you access to data-ats.iot.[region].amazonaws.com or data-ats.iot.[region].amazonaws.com.cn.
+
 # Release (2022-03-29)
 
 ## Module Highlights

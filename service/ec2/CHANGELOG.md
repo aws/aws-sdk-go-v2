@@ -1,3 +1,8 @@
+# v1.34.0 (2022-03-30)
+
+* **Feature**: This release simplifies the auto-recovery configuration process enabling customers to set the recovery behavior to disabled or default
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.33.0 (2022-03-25)
 
 * **Feature**: This is release adds support for Amazon VPC Reachability Analyzer to analyze path through a Transit Gateway.

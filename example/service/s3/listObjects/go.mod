@@ -3,8 +3,8 @@ module github.com/aws/aws-sdk-go-v2/example/service/s3/listObjects
 go 1.15
 
 require (
-	github.com/aws/aws-sdk-go-v2/config v1.15.2
-	github.com/aws/aws-sdk-go-v2/service/s3 v1.26.2
+	github.com/aws/aws-sdk-go-v2/config v1.15.3
+	github.com/aws/aws-sdk-go-v2/service/s3 v1.26.3
 )
 
 replace github.com/aws/aws-sdk-go-v2 => ../../../../

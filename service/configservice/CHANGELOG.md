@@ -1,3 +1,7 @@
+# v1.20.1 (2022-03-30)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.20.0 (2022-03-24)
 
 * **Feature**: Added new APIs GetCustomRulePolicy and GetOrganizationCustomRulePolicy, and updated existing APIs PutConfigRule, DescribeConfigRule, DescribeConfigRuleEvaluationStatus, PutOrganizationConfigRule, DescribeConfigRule to support a new feature for building AWS Config rules with AWS CloudFormation Guard
