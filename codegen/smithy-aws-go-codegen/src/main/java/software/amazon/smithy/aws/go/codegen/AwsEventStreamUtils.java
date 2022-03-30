@@ -780,7 +780,7 @@ public final class AwsEventStreamUtils {
         var writeCloser = getSymbol("WriteCloser", SmithyGoDependency.IO);
         var signerInterface = getModuleSymbol(settings, EVENT_STREAM_SIGNER_INTERFACE);
 
-        var messageSymbol = getEventStreamSymbol("Message", false);
+        var messageSymbol = getEventStreamSymbol("Message", true);
 
         if (withInitialMessages) {
             generateEventStreamWriterMessageWrapper(eventStream, service, symbolProvider, writer, eventUnionSymbol);
@@ -937,6 +937,9 @@ public final class AwsEventStreamUtils {
                     writer.write("w.serializationBuffer.Reset()").write("")
                             .write("eventMessage := $T{}", messageSymbol).write("");
 
+                    var eventStreamSerializerName = getEventStreamSerializerName(eventStream, service,
+                            context.getProtocolName());
+
                     if (withInitialMessages) {
                         var initialRequestType = getWriterEventWrapperInitialRequestType(symbolProvider, eventStream,
                                 service);
@@ -956,14 +959,14 @@ public final class AwsEventStreamUtils {
                                 default:
                                     return nil, $T("unknown event wrapper type: %v", event)
                                 }
-                                """, initialRequestType, messageEventType, errorf);
+                                """, initialRequestType, messageEventType, eventStreamSerializerName, errorf);
                     } else {
                         writer.write("""
                                         if err := $L(event, &eventMessage); err != nil {
                                             return nil, err
                                         }
                                         """,
-                                getEventStreamSerializerName(eventStream, service, context.getProtocolName()));
+                                eventStreamSerializerName);
                     }
 
                     writer.write("""
