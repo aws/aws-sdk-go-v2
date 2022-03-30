@@ -159,7 +159,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets the details of a single retained message for the specified topic.</p>\n         <p>This action returns the message payload of the retained message, which can \n      incur messaging costs. To list only the topic names of the retained messages, call\n      <a href=\"/iot/latest/developerguide/API_iotdata_ListRetainedMessages.html\">ListRetainedMessages</a>.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiotfleethubfordevicemanagement.html#awsiotfleethubfordevicemanagement-actions-as-permissions\">GetRetainedMessage</a> action.</p>\n         <p>For more information about messaging costs, see <a href=\"http://aws.amazon.com/iot-core/pricing/#Messaging\">IoT Core\n      pricing - Messaging</a>.</p>",
+                "smithy.api#documentation": "<p>Gets the details of a single retained message for the specified topic.</p>\n         <p>This action returns the message payload of the retained message, which can \n      incur messaging costs. To list only the topic names of the retained messages, call\n      <a href=\"/iot/latest/developerguide/API_iotdata_ListRetainedMessages.html\">ListRetainedMessages</a>.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiotfleethubfordevicemanagement.html#awsiotfleethubfordevicemanagement-actions-as-permissions\">GetRetainedMessage</a> action.</p>\n         <p>For more information about messaging costs, see <a href=\"http://aws.amazon.com/iot-core/pricing/#Messaging\">Amazon Web Services IoT Core\n      pricing - Messaging</a>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/retainedMessage/{topic}",
@@ -330,6 +330,21 @@
         },
         "com.amazonaws.iotdataplane#IotMoonrakerService": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "IoT Data Plane",
+                    "arnNamespace": "iotdata",
+                    "cloudFormationName": "IoTDataPlane",
+                    "cloudTrailEventSource": "iotdataplane.amazonaws.com",
+                    "endpointPrefix": "data-ats.iot"
+                },
+                "aws.auth#sigv4": {
+                    "name": "iotdata"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<fullname>IoT data</fullname>\n         <p>IoT data enables secure, bi-directional communication between Internet-connected things (such as sensors,\n      actuators, embedded devices, or smart appliances) and the Amazon Web Services cloud. It implements a broker for applications and\n      things to publish messages over HTTP (Publish) and retrieve, update, and delete shadows. A shadow is a\n      persistent representation of your things and their state in the Amazon Web Services cloud.</p>\n         <p>Find the endpoint address for actions in IoT data by running this CLI command:</p>\n         <p>\n            <code>aws iot describe-endpoint --endpoint-type iot:Data-ATS</code>\n         </p>\n         <p>The service name used by <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Amazon Web ServicesSignature Version 4</a>\n      to sign requests is: <i>iotdevicegateway</i>.</p>",
+                "smithy.api#title": "AWS IoT Data Plane"
+            },
             "version": "2015-05-28",
             "operations": [
                 {
@@ -353,22 +368,7 @@
                 {
                     "target": "com.amazonaws.iotdataplane#UpdateThingShadow"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "IoT Data Plane",
-                    "arnNamespace": "iotdata",
-                    "cloudFormationName": "IoTDataPlane",
-                    "cloudTrailEventSource": "iotdataplane.amazonaws.com",
-                    "endpointPrefix": "data.iot"
-                },
-                "aws.auth#sigv4": {
-                    "name": "iotdata"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<fullname>IoT data</fullname>\n         <p>IoT data enables secure, bi-directional communication between Internet-connected things (such as sensors,\n      actuators, embedded devices, or smart appliances) and the Amazon Web Services cloud. It implements a broker for applications and\n      things to publish messages over HTTP (Publish) and retrieve, update, and delete shadows. A shadow is a\n      persistent representation of your things and their state in the Amazon Web Services cloud.</p>\n         <p>Find the endpoint address for actions in IoT data by running this CLI command:</p>\n         <p>\n            <code>aws iot describe-endpoint --endpoint-type iot:Data-ATS</code>\n         </p>\n         <p>The service name used by <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Amazon Web ServicesSignature Version 4</a>\n      to sign requests is: <i>iotdevicegateway</i>.</p>",
-                "smithy.api#title": "AWS IoT Data Plane"
-            }
+            ]
         },
         "com.amazonaws.iotdataplane#JsonDocument": {
             "type": "blob"
@@ -492,7 +492,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists summary information about the retained messages stored for the account.</p>\n         <p>This action returns only the topic names of the retained messages. It doesn't \n      return any message payloads. Although this action doesn't return a message payload,\n      it can still incur messaging costs.</p>\n         <p>To get the message payload of a retained message, call\n      <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/API_iotdata_GetRetainedMessage.html\">GetRetainedMessage</a>\n      with the topic name of the retained message.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiotfleethubfordevicemanagement.html#awsiotfleethubfordevicemanagement-actions-as-permissions\">ListRetainedMessages</a> action.</p>\n         <p>For more information about messaging costs, see <a href=\"http://aws.amazon.com/iot-core/pricing/#Messaging\">IoT Core\n      pricing - Messaging</a>.</p>",
+                "smithy.api#documentation": "<p>Lists summary information about the retained messages stored for the account.</p>\n         <p>This action returns only the topic names of the retained messages. It doesn't \n      return any message payloads. Although this action doesn't return a message payload,\n      it can still incur messaging costs.</p>\n         <p>To get the message payload of a retained message, call\n      <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/API_iotdata_GetRetainedMessage.html\">GetRetainedMessage</a>\n      with the topic name of the retained message.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiotfleethubfordevicemanagement.html#awsiotfleethubfordevicemanagement-actions-as-permissions\">ListRetainedMessages</a> action.</p>\n         <p>For more information about messaging costs, see <a href=\"http://aws.amazon.com/iot-core/pricing/#Messaging\">Amazon Web Services IoT Core\n      pricing - Messaging</a>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/retainedMessage",
@@ -612,7 +612,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Publishes an MQTT message.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">Publish</a> action.</p>\n         <p>For more information about MQTT messages, see \n      <a href=\"http://docs.aws.amazon.com/iot/latest/developerguide/mqtt.html\">MQTT Protocol</a> in the\n       IoT Developer Guide.</p>\n         <p>For more information about messaging costs, see <a href=\"http://aws.amazon.com/iot-core/pricing/#Messaging\">IoT Core\n      pricing - Messaging</a>.</p>",
+                "smithy.api#documentation": "<p>Publishes an MQTT message.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">Publish</a> action.</p>\n         <p>For more information about MQTT messages, see \n      <a href=\"http://docs.aws.amazon.com/iot/latest/developerguide/mqtt.html\">MQTT Protocol</a> in the\n       IoT Developer Guide.</p>\n         <p>For more information about messaging costs, see <a href=\"http://aws.amazon.com/iot-core/pricing/#Messaging\">Amazon Web Services IoT Core\n      pricing - Messaging</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/topics/{topic}",
@@ -648,7 +648,7 @@
                 "payload": {
                     "target": "com.amazonaws.iotdataplane#Payload",
                     "traits": {
-                        "smithy.api#documentation": "<p>The message body. MQTT accepts text, binary, and empty (null) message payloads.</p>\n         <p>Publishing an empty (null) payload with <b>retain</b> =\n        <code>true</code> deletes the retained message identified by <b>topic</b> from IoT Core.</p>",
+                        "smithy.api#documentation": "<p>The message body. MQTT accepts text, binary, and empty (null) message payloads.</p>\n         <p>Publishing an empty (null) payload with <b>retain</b> =\n        <code>true</code> deletes the retained message identified by <b>topic</b> from Amazon Web Services IoT Core.</p>",
                         "smithy.api#httpPayload": {}
                     }
                 }

@@ -5206,7 +5206,7 @@
                 "metricName": {
                     "target": "com.amazonaws.iot#MetricName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The name of the custom metric. This will be used in the metric report submitted from the device/thing. Shouldn't begin with <code>aws:</code>.\n      Cannot be updated\n      once defined.</p>",
+                        "smithy.api#documentation": "<p> The name of the custom metric. This will be used in the metric report submitted from the\n      device/thing. The name can't begin with <code>aws:</code>. You can't change the name after you\n      define it.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -5214,13 +5214,13 @@
                 "displayName": {
                     "target": "com.amazonaws.iot#CustomMetricDisplayName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Field\n      represents a friendly name in the console for the custom metric;\n      it\n      doesn't have to be unique. Don't use this name as the metric identifier in\n      the device metric report. Can be updated once defined.</p>"
+                        "smithy.api#documentation": "<p> The friendly name in the console for the custom metric. This name doesn't have to be\n      unique. Don't use this name as the metric identifier in the device metric report. You can\n      update the friendly name after you define it.</p>"
                     }
                 },
                 "metricType": {
                     "target": "com.amazonaws.iot#CustomMetricType",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The type of the custom metric. Types include <code>string-list</code>, <code>ip-address-list</code>, <code>number-list</code>, and <code>number</code>.\n    </p>",
+                        "smithy.api#documentation": "<p> The type of the custom metric. </p>\n         <important>\n            <p>The type <code>number</code> only takes a single metric value as an input, but when you\n        submit the metrics value in the DeviceMetrics report, you must pass it as an array with a\n        single value.</p>\n         </important>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5252,7 +5252,7 @@
                 "metricArn": {
                     "target": "com.amazonaws.iot#CustomMetricArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The Amazon Resource Number (ARN) of the custom metric, e.g. <code>arn:<i>aws-partition</i>:iot:<i>region</i>:<i>accountId</i>:custommetric/<i>metricName</i>\n            </code>\n         </p>"
+                        "smithy.api#documentation": "<p> The Amazon Resource Number (ARN) of the custom metric. For example,\n          <code>arn:<i>aws-partition</i>:iot:<i>region</i>:<i>accountId</i>:custommetric/<i>metricName</i>\n            </code>\n         </p>"
                     }
                 }
             }
@@ -6880,7 +6880,7 @@
                 "credentialDurationSeconds": {
                     "target": "com.amazonaws.iot#CredentialDurationSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>How long (in seconds) the credentials will be valid. The default value is 3,600 seconds.</p>"
+                        "smithy.api#documentation": "<p>How long (in seconds) the credentials will be valid. The default value is 3,600 seconds.</p>\n         <p>This value must be less than or equal to the maximum session duration of the IAM role\n      that the role alias references.</p>"
                     }
                 },
                 "tags": {
@@ -7641,13 +7641,13 @@
                 "hashAlgorithm": {
                     "target": "com.amazonaws.iot#HashAlgorithm",
                     "traits": {
-                        "smithy.api#documentation": "<p>The hash algorithm used to code sign the file.</p>"
+                        "smithy.api#documentation": "<p>The hash algorithm used to code sign the file. You can use a string as the algorithm name if the target over-the-air (OTA) update devices are able to verify the signature that was generated using the same signature algorithm. For example, FreeRTOS uses <code>SHA256</code> or <code>SHA1</code>, so you can pass either of them based on which was used for generating the signature.</p>"
                     }
                 },
                 "signatureAlgorithm": {
                     "target": "com.amazonaws.iot#SignatureAlgorithm",
                     "traits": {
-                        "smithy.api#documentation": "<p>The signature algorithm used to code sign the file.</p>"
+                        "smithy.api#documentation": "<p>The signature algorithm used to code sign the file. You can use a string as the algorithm name if the target over-the-air (OTA) update devices are able to verify the signature that was generated using the same signature algorithm. For example, FreeRTOS uses <code>ECDSA</code> or <code>RSA</code>, so you can pass either of them based on which was used for generating the signature.</p>"
                     }
                 }
             },
@@ -10291,7 +10291,7 @@
                 "metricType": {
                     "target": "com.amazonaws.iot#CustomMetricType",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The type of the custom metric. Types include <code>string-list</code>, <code>ip-address-list</code>, <code>number-list</code>, and <code>number</code>.\n    </p>"
+                        "smithy.api#documentation": "<p> The type of the custom metric. </p>\n         <important>\n            <p>The type <code>number</code> only takes a single metric value as an input, but while submitting the metrics value in the DeviceMetrics report, it must be passed as an array with a single value.</p>\n         </important>"
                     }
                 },
                 "displayName": {
@@ -23414,7 +23414,7 @@
                 "setAsActive": {
                     "target": "com.amazonaws.iot#SetAsActive",
                     "traits": {
-                        "smithy.api#documentation": "<p>A boolean value that specifies if the CA certificate is set to active.</p>",
+                        "smithy.api#documentation": "<p>A boolean value that specifies if the CA certificate is set to active.</p>\n         <p>Valid values: <code>ACTIVE | INACTIVE</code>\n         </p>",
                         "smithy.api#httpQuery": "setAsActive"
                     }
                 },
@@ -23528,14 +23528,14 @@
                     "target": "com.amazonaws.iot#SetAsActiveFlag",
                     "traits": {
                         "smithy.api#deprecated": {},
-                        "smithy.api#documentation": "<p>A boolean value that specifies if the certificate is set to active.</p>",
+                        "smithy.api#documentation": "<p>A boolean value that specifies if the certificate is set to active.</p>\n         <p>Valid values: <code>ACTIVE | INACTIVE</code>\n         </p>",
                         "smithy.api#httpQuery": "setAsActive"
                     }
                 },
                 "status": {
                     "target": "com.amazonaws.iot#CertificateStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the register certificate request.</p>"
+                        "smithy.api#documentation": "<p>The status of the register certificate request. Valid values that you can use include \n         <code>ACTIVE</code>, <code>INACTIVE</code>, and <code>REVOKED</code>.</p>"
                     }
                 }
             },
@@ -28678,7 +28678,7 @@
                 "metricType": {
                     "target": "com.amazonaws.iot#CustomMetricType",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The type of the custom metric. Types include <code>string-list</code>, <code>ip-address-list</code>, <code>number-list</code>, and <code>number</code>.\n    </p>"
+                        "smithy.api#documentation": "<p> The type of the custom metric. </p>\n         <important>\n            <p>The type <code>number</code> only takes a single metric value as an input, but while submitting the metrics value in the DeviceMetrics report, it must be passed as an array with a single value.</p>\n         </important>"
                     }
                 },
                 "displayName": {
@@ -29501,7 +29501,7 @@
                 "credentialDurationSeconds": {
                     "target": "com.amazonaws.iot#CredentialDurationSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of seconds the credential will be valid.</p>"
+                        "smithy.api#documentation": "<p>The number of seconds the credential will be valid.</p>\n         <p>This value must be less than or equal to the maximum session duration of the IAM role\n         that the role alias references.</p>"
                     }
                 }
             }
