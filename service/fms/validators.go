@@ -30,6 +30,26 @@ func (m *validateOpAssociateAdminAccount) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAssociateThirdPartyFirewall struct {
+}
+
+func (*validateOpAssociateThirdPartyFirewall) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateThirdPartyFirewall) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateThirdPartyFirewallInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateThirdPartyFirewallInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteAppsList struct {
 }
 
@@ -85,6 +105,26 @@ func (m *validateOpDeleteProtocolsList) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteProtocolsListInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDisassociateThirdPartyFirewall struct {
+}
+
+func (*validateOpDisassociateThirdPartyFirewall) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateThirdPartyFirewall) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateThirdPartyFirewallInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateThirdPartyFirewallInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -190,6 +230,26 @@ func (m *validateOpGetProtocolsList) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetThirdPartyFirewallAssociationStatus struct {
+}
+
+func (*validateOpGetThirdPartyFirewallAssociationStatus) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetThirdPartyFirewallAssociationStatus) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetThirdPartyFirewallAssociationStatusInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetThirdPartyFirewallAssociationStatusInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetViolationDetails struct {
 }
 
@@ -285,6 +345,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListThirdPartyFirewallFirewallPolicies struct {
+}
+
+func (*validateOpListThirdPartyFirewallFirewallPolicies) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListThirdPartyFirewallFirewallPolicies) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListThirdPartyFirewallFirewallPoliciesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListThirdPartyFirewallFirewallPoliciesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -414,6 +494,10 @@ func addOpAssociateAdminAccountValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpAssociateAdminAccount{}, middleware.After)
 }
 
+func addOpAssociateThirdPartyFirewallValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateThirdPartyFirewall{}, middleware.After)
+}
+
 func addOpDeleteAppsListValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAppsList{}, middleware.After)
 }
@@ -424,6 +508,10 @@ func addOpDeletePolicyValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteProtocolsListValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteProtocolsList{}, middleware.After)
+}
+
+func addOpDisassociateThirdPartyFirewallValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateThirdPartyFirewall{}, middleware.After)
 }
 
 func addOpGetAppsListValidationMiddleware(stack *middleware.Stack) error {
@@ -446,6 +534,10 @@ func addOpGetProtocolsListValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetProtocolsList{}, middleware.After)
 }
 
+func addOpGetThirdPartyFirewallAssociationStatusValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetThirdPartyFirewallAssociationStatus{}, middleware.After)
+}
+
 func addOpGetViolationDetailsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetViolationDetails{}, middleware.After)
 }
@@ -464,6 +556,10 @@ func addOpListProtocolsListsValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpListThirdPartyFirewallFirewallPoliciesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListThirdPartyFirewallFirewallPolicies{}, middleware.After)
 }
 
 func addOpPutAppsListValidationMiddleware(stack *middleware.Stack) error {
@@ -717,6 +813,21 @@ func validateOpAssociateAdminAccountInput(v *AssociateAdminAccountInput) error {
 	}
 }
 
+func validateOpAssociateThirdPartyFirewallInput(v *AssociateThirdPartyFirewallInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateThirdPartyFirewallInput"}
+	if len(v.ThirdPartyFirewall) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ThirdPartyFirewall"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteAppsListInput(v *DeleteAppsListInput) error {
 	if v == nil {
 		return nil
@@ -754,6 +865,21 @@ func validateOpDeleteProtocolsListInput(v *DeleteProtocolsListInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteProtocolsListInput"}
 	if v.ListId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ListId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDisassociateThirdPartyFirewallInput(v *DisassociateThirdPartyFirewallInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateThirdPartyFirewallInput"}
+	if len(v.ThirdPartyFirewall) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ThirdPartyFirewall"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -840,6 +966,21 @@ func validateOpGetProtocolsListInput(v *GetProtocolsListInput) error {
 	}
 }
 
+func validateOpGetThirdPartyFirewallAssociationStatusInput(v *GetThirdPartyFirewallAssociationStatusInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetThirdPartyFirewallAssociationStatusInput"}
+	if len(v.ThirdPartyFirewall) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ThirdPartyFirewall"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetViolationDetailsInput(v *GetViolationDetailsInput) error {
 	if v == nil {
 		return nil
@@ -916,6 +1057,24 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListThirdPartyFirewallFirewallPoliciesInput(v *ListThirdPartyFirewallFirewallPoliciesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListThirdPartyFirewallFirewallPoliciesInput"}
+	if len(v.ThirdPartyFirewall) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ThirdPartyFirewall"))
+	}
+	if v.MaxResults == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxResults"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

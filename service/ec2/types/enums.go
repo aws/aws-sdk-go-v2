@@ -2297,6 +2297,24 @@ func (InstanceAttributeName) Values() []InstanceAttributeName {
 	}
 }
 
+type InstanceAutoRecoveryState string
+
+// Enum values for InstanceAutoRecoveryState
+const (
+	InstanceAutoRecoveryStateDisabled InstanceAutoRecoveryState = "disabled"
+	InstanceAutoRecoveryStateDefault  InstanceAutoRecoveryState = "default"
+)
+
+// Values returns all known values for InstanceAutoRecoveryState. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InstanceAutoRecoveryState) Values() []InstanceAutoRecoveryState {
+	return []InstanceAutoRecoveryState{
+		"disabled",
+		"default",
+	}
+}
+
 type InstanceEventWindowState string
 
 // Enum values for InstanceEventWindowState
@@ -3929,6 +3947,25 @@ func (KeyType) Values() []KeyType {
 	return []KeyType{
 		"rsa",
 		"ed25519",
+	}
+}
+
+type LaunchTemplateAutoRecoveryState string
+
+// Enum values for LaunchTemplateAutoRecoveryState
+const (
+	LaunchTemplateAutoRecoveryStateDefault  LaunchTemplateAutoRecoveryState = "default"
+	LaunchTemplateAutoRecoveryStateDisabled LaunchTemplateAutoRecoveryState = "disabled"
+)
+
+// Values returns all known values for LaunchTemplateAutoRecoveryState. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (LaunchTemplateAutoRecoveryState) Values() []LaunchTemplateAutoRecoveryState {
+	return []LaunchTemplateAutoRecoveryState{
+		"default",
+		"disabled",
 	}
 }
 

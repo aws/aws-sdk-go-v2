@@ -43,12 +43,14 @@ type RegisterCertificateInput struct {
 	// The CA certificate used to sign the device certificate being registered.
 	CaCertificatePem *string
 
-	// A boolean value that specifies if the certificate is set to active.
+	// A boolean value that specifies if the certificate is set to active. Valid
+	// values: ACTIVE | INACTIVE
 	//
 	// Deprecated: This member has been deprecated.
 	SetAsActive *bool
 
-	// The status of the register certificate request.
+	// The status of the register certificate request. Valid values that you can use
+	// include ACTIVE, INACTIVE, and REVOKED.
 	Status types.CertificateStatus
 
 	noSmithyDocumentSerde

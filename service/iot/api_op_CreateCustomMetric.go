@@ -42,21 +42,22 @@ type CreateCustomMetricInput struct {
 	ClientRequestToken *string
 
 	// The name of the custom metric. This will be used in the metric report submitted
-	// from the device/thing. Shouldn't begin with aws:. Cannot be updated once
-	// defined.
+	// from the device/thing. The name can't begin with aws:. You can't change the name
+	// after you define it.
 	//
 	// This member is required.
 	MetricName *string
 
-	// The type of the custom metric. Types include string-list, ip-address-list,
-	// number-list, and number.
+	// The type of the custom metric. The type number only takes a single metric value
+	// as an input, but when you submit the metrics value in the DeviceMetrics report,
+	// you must pass it as an array with a single value.
 	//
 	// This member is required.
 	MetricType types.CustomMetricType
 
-	// Field represents a friendly name in the console for the custom metric; it
-	// doesn't have to be unique. Don't use this name as the metric identifier in the
-	// device metric report. Can be updated once defined.
+	// The friendly name in the console for the custom metric. This name doesn't have
+	// to be unique. Don't use this name as the metric identifier in the device metric
+	// report. You can update the friendly name after you define it.
 	DisplayName *string
 
 	// Metadata that can be used to manage the custom metric.
@@ -67,7 +68,7 @@ type CreateCustomMetricInput struct {
 
 type CreateCustomMetricOutput struct {
 
-	// The Amazon Resource Number (ARN) of the custom metric, e.g.
+	// The Amazon Resource Number (ARN) of the custom metric. For example,
 	// arn:aws-partition:iot:region:accountId:custommetric/metricName
 	MetricArn *string
 

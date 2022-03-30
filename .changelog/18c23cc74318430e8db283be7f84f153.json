@@ -1,0 +1,8 @@
+{
+    "id": "18c23cc7-4318-430e-8db2-83be7f84f153",
+    "type": "feature",
+    "description": "AWS Firewall Manager now supports the configuration of third-party policies that can use either the centralized or distributed deployment models.",
+    "modules": [
+        "service/fms"
+    ]
+}

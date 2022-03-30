@@ -450,6 +450,25 @@ type FirewallSubnetIsOutOfScopeViolation struct {
 	noSmithyDocumentSerde
 }
 
+// The violation details for a firewall subnet's VPC endpoint that's deleted or
+// missing.
+type FirewallSubnetMissingVPCEndpointViolation struct {
+
+	// The ID of the firewall that this VPC endpoint is associated with.
+	FirewallSubnetId *string
+
+	// The name of the Availability Zone of the deleted VPC subnet.
+	SubnetAvailabilityZone *string
+
+	// The ID of the Availability Zone of the deleted VPC subnet.
+	SubnetAvailabilityZoneId *string
+
+	// The resource ID of the VPC associated with the deleted VPC subnet.
+	VpcId *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about the actions that you can take to remediate scope
 // violations caused by your policy's FirewallCreationConfig.
 // FirewallCreationConfig is an optional configuration that you can use to choose
@@ -789,8 +808,6 @@ type Policy struct {
 	// If set to True, resources with the tags that are specified in the ResourceTag
 	// array are not in scope of the policy. If set to False, and the ResourceTag array
 	// is not null, only resources with the specified tags are in scope of the policy.
-	// This option isn't available for the centralized deployment model when creating
-	// policies to configure Network Firewall.
 	//
 	// This member is required.
 	ExcludeResourceTags bool
@@ -860,9 +877,6 @@ type Policy struct {
 	// together in a single map, separated with a comma. For example, the following is
 	// a valid map: {“ACCOUNT” : [“accountID1”, “accountID2”], “ORG_UNIT” : [“ouid111”,
 	// “ouid112”]}.
-	//
-	// This option isn't available for the centralized deployment model
-	// when creating policies to configure Network Firewall.
 	ExcludeMap map[string][]string
 
 	// Specifies the Amazon Web Services account IDs and Organizations organizational
@@ -887,9 +901,6 @@ type Policy struct {
 	// together in a single map, separated with a comma. For example, the following is
 	// a valid map: {“ACCOUNT” : [“accountID1”, “accountID2”], “ORG_UNIT” : [“ouid111”,
 	// “ouid112”]}.
-	//
-	// This option isn't available for the centralized deployment model
-	// when creating policies to configure Network Firewall.
 	IncludeMap map[string][]string
 
 	// The ID of the Firewall Manager policy.
@@ -981,6 +992,9 @@ type PolicyOption struct {
 
 	// Defines the deployment model to use for the firewall policy.
 	NetworkFirewallPolicy *NetworkFirewallPolicy
+
+	// Defines the policy options for a third-party firewall policy.
+	ThirdPartyFirewallPolicy *ThirdPartyFirewallPolicy
 
 	noSmithyDocumentSerde
 }
@@ -1208,6 +1222,10 @@ type ResourceViolation struct {
 	// Contains details about the firewall subnet that violates the policy scope.
 	FirewallSubnetIsOutOfScopeViolation *FirewallSubnetIsOutOfScopeViolation
 
+	// The violation details for a third-party firewall's VPC endpoint subnet that was
+	// deleted.
+	FirewallSubnetMissingVPCEndpointViolation *FirewallSubnetMissingVPCEndpointViolation
+
 	// Violation detail for an internet gateway route with an inactive state in the
 	// customer subnet route table or Network Firewall subnet route table.
 	NetworkFirewallBlackHoleRouteDetectedViolation *NetworkFirewallBlackHoleRouteDetectedViolation
@@ -1253,6 +1271,17 @@ type ResourceViolation struct {
 
 	// Contains details about the route endpoint that violates the policy scope.
 	RouteHasOutOfScopeEndpointViolation *RouteHasOutOfScopeEndpointViolation
+
+	// The violation details for a third-party firewall that has the Firewall Manager
+	// managed route table that was associated with the third-party firewall has been
+	// deleted.
+	ThirdPartyFirewallMissingExpectedRouteTableViolation *ThirdPartyFirewallMissingExpectedRouteTableViolation
+
+	// The violation details for a third-party firewall that's been deleted.
+	ThirdPartyFirewallMissingFirewallViolation *ThirdPartyFirewallMissingFirewallViolation
+
+	// The violation details for a third-party firewall's subnet that's been deleted.
+	ThirdPartyFirewallMissingSubnetViolation *ThirdPartyFirewallMissingSubnetViolation
 
 	noSmithyDocumentSerde
 }
@@ -1383,18 +1412,17 @@ type SecurityServicePolicyData struct {
 	// Valid values for preProcessRuleGroups are between 1 and 99. Valid values for
 	// postProcessRuleGroups are between 9901 and 10000.
 	//
-	// * Example: NETWORK_FIREWALL -
-	// Centralized deployment model.
-	// "{\"type\":\"NETWORK_FIREWALL\",\"awsNetworkFirewallConfig\":{\"networkFirewallStatelessRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-east-1:123456789011:stateless-rulegroup/test\",\"priority\":1}],\"networkFirewallStatelessDefaultActions\":[\"aws:forward_to_sfe\",\"customActionName\"],\"networkFirewallStatelessFragmentDefaultActions\":[\"aws:forward_to_sfe\",\"customActionName\"],\"networkFirewallStatelessCustomActions\":[{\"actionName\":\"customActionName\",\"actionDefinition\":{\"publishMetricAction\":{\"dimensions\":[{\"value\":\"metricdimensionvalue\"}]}}}],\"networkFirewallStatefulRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-east-1:123456789011:stateful-rulegroup/test\"}],\"networkFirewallLoggingConfiguration\":{\"logDestinationConfigs\":[{\"logDestinationType\":\"S3\",\"logType\":\"ALERT\",\"logDestination\":{\"bucketName\":\"s3-bucket-name\"}},{\"logDestinationType\":\"S3\",\"logType\":\"FLOW\",\"logDestination\":{\"bucketName\":\"s3-bucket-name\"}}],\"overrideExistingConfig\":true}},\"firewallDeploymentModel\":{\"centralizedFirewallDeploymentModel\":{\"centralizedFirewallOrchestrationConfig\":{\"inspectionVpcIds\":[{\"resourceId\":\"vpc-1234\",\"accountId\":\"123456789011\"}],\"firewallCreationConfig\":{\"endpointLocation\":{\"availabilityZoneConfigList\":[{\"availabilityZoneId\":null,\"availabilityZoneName\":\"us-east-1a\",\"allowedIPV4CidrList\":[\"10.0.0.0/28\"]}]}},\"allowedIPV4CidrList\":[]}}}}"
-	// To use the centralized deployment model, you must set PolicyOption
-	// (https://docs.aws.amazon.com/fms/2018-01-01/APIReference/API_PolicyOption.html)
-	// to CENTRALIZED.
+	// * Example:
+	// DNS_FIREWALL"{\"type\":\"DNS_FIREWALL\",\"preProcessRuleGroups\":[{\"ruleGroupId\":\"rslvr-frg-1\",\"priority\":10}],\"postProcessRuleGroups\":[{\"ruleGroupId\":\"rslvr-frg-2\",\"priority\":9911}]}"
+	// Valid values for preProcessRuleGroups are between 1 and 99. Valid values for
+	// postProcessRuleGroups are between 9901 and 10000.
 	//
-	// * Example: NETWORK_FIREWALL - Distributed deployment model with
-	// automatic Availability Zone configuration. With automatic Availbility Zone
-	// configuration, Firewall Manager chooses which Availability Zones to create the
-	// endpoints in. "{ \"type\": \"NETWORK_FIREWALL\",
-	// \"networkFirewallStatelessRuleGroupReferences\": [ { \"resourceARN\":
+	// * Example: NETWORK_FIREWALL -
+	// Distributed deployment model with automatic Availability Zone configuration.
+	// With automatic Availbility Zone configuration, Firewall Manager chooses which
+	// Availability Zones to create the endpoints in. "{ \"type\":
+	// \"NETWORK_FIREWALL\", \"networkFirewallStatelessRuleGroupReferences\": [ {
+	// \"resourceARN\":
 	// \"arn:aws:network-firewall:us-east-1:123456789011:stateless-rulegroup/test\",
 	// \"priority\": 1 } ], \"networkFirewallStatelessDefaultActions\": [
 	// \"aws:forward_to_sfe\", \"customActionName\" ],
@@ -1499,8 +1527,12 @@ type SecurityServicePolicyData struct {
 	// \"logType\":\"FLOW\", \"logDestination\":{ \"bucketName\":\"s3-bucket-name\" } }
 	// ], \"overrideExistingConfig\":boolean } }"
 	//
-	// * Specification for SHIELD_ADVANCED
-	// for Amazon CloudFront distributions
+	// * Example: PARTNER_FIREWALL for
+	// Firewall Manager
+	// "{\"type\":\"THIRD_PARTY_FIREWALL\",\"thirdPartyrFirewall\":\"PALO_ALTO_NETWORKS_CLOUD_NGFW\",\"thirdPartyFirewallConfig\":{\"thirdPartyFirewallPolicyList\":[\"global-123456789012-1\"],\"networkFirewallLoggingConfiguration\":null},\"firewallDeploymentModel\":{\"distributedFirewallDeploymentModel\":{\"distributedFirewallOrchestrationConfig\":{\"firewallCreationConfig\":{\"endpointLocation\":{\"availabilityZoneConfigList\":[{\"availabilityZoneId\":null,\"availabilityZoneName\":\"us-east-1a\",\"allowedIPV4CidrList\":[\"10.0.1.0/28\"]}]}},\"allowedIPV4CidrList\":null},\"distributedRouteManagementConfig\":null},\"centralizedFirewallDeploymentModel\":null}}""
+	//
+	// *
+	// Specification for SHIELD_ADVANCED for Amazon CloudFront distributions
 	// "{\"type\":\"SHIELD_ADVANCED\",\"automaticResponseConfiguration\":
 	// {\"automaticResponseStatus\":\"ENABLED|IGNORED|DISABLED\",
 	// \"automaticResponseAction\":\"BLOCK|COUNT\"},
@@ -1524,6 +1556,15 @@ type SecurityServicePolicyData struct {
 	// \"WAF\", \"ruleGroups\": [{\"id\":\"12345678-1bcd-9012-efga-0987654321ab\",
 	// \"overrideAction\" : {\"type\": \"COUNT\"}}], \"defaultAction\": {\"type\":
 	// \"BLOCK\"}}"
+	//
+	// * Example: WAFV2 - Firewall Manager support for WAF managed rule
+	// group versioning
+	// "{\"type\":\"WAFV2\",\"preProcessRuleGroups\":[{\"ruleGroupArn\":null,\"overrideAction\":{\"type\":\"NONE\"},\"managedRuleGroupIdentifier\":{\"versionEnabled\":true,\"version\":\"Version_2.0\",\"vendorName\":\"AWS\",\"managedRuleGroupName\":\"AWSManagedRulesCommonRuleSet\"},\"ruleGroupType\":\"ManagedRuleGroup\",\"excludeRules\":[{\"name\":\"NoUserAgent_HEADER\"}]}],\"postProcessRuleGroups\":[],\"defaultAction\":{\"type\":\"ALLOW\"},\"overrideCustomerWebACLAssociation\":false,\"loggingConfiguration\":{\"logDestinationConfigs\":[\"arn:aws:firehose:us-west-2:12345678912:deliverystream/aws-waf-logs-fms-admin-destination\"],\"redactedFields\":[{\"redactedFieldType\":\"SingleHeader\",\"redactedFieldValue\":\"Cookies\"},{\"redactedFieldType\":\"Method\"}]}}"
+	// To use a specific version of a WAF managed rule group in your Firewall Manager
+	// policy, you must set versionEnabled to true, and set version to the version
+	// you'd like to use. If you don't set versionEnabled to true, or if you omit
+	// versionEnabled, then Firewall Manager uses the default version of the WAF
+	// managed rule group.
 	//
 	// * Example:
 	// SECURITY_GROUPS_COMMON"{\"type\":\"SECURITY_GROUPS_COMMON\",\"revertManualSecurityGroupChanges\":false,\"exclusiveResourceSecurityGroupManagement\":false,
@@ -1608,6 +1649,91 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+// Configures the firewall policy deployment model for a third-party firewall. The
+// deployment model can either be distributed or centralized.
+type ThirdPartyFirewallFirewallPolicy struct {
+
+	// The ID of the specified firewall policy.
+	FirewallPolicyId *string
+
+	// The name of the specified firewall policy.
+	FirewallPolicyName *string
+
+	noSmithyDocumentSerde
+}
+
+// The violation details for a third-party firewall that's not associated with an
+// Firewall Manager managed route table.
+type ThirdPartyFirewallMissingExpectedRouteTableViolation struct {
+
+	// The Availability Zone of the firewall subnet that's causing the violation.
+	AvailabilityZone *string
+
+	// The resource ID of the current route table that's associated with the subnet, if
+	// one is available.
+	CurrentRouteTable *string
+
+	// The resource ID of the route table that should be associated with the subnet.
+	ExpectedRouteTable *string
+
+	// The resource ID of the VPC associated with a fireawll subnet that's causing the
+	// violation.
+	VPC *string
+
+	// The ID of the third-party firewall or VPC resource that's causing the violation.
+	ViolationTarget *string
+
+	noSmithyDocumentSerde
+}
+
+// The violation details about a third-party firewall's subnet that doesn't have a
+// Firewall Manager managed firewall in its VPC.
+type ThirdPartyFirewallMissingFirewallViolation struct {
+
+	// The Availability Zone of the third-party firewall that's causing the violation.
+	AvailabilityZone *string
+
+	// The reason the resource is causing this violation, if a reason is available.
+	TargetViolationReason *string
+
+	// The resource ID of the VPC associated with a third-party firewall.
+	VPC *string
+
+	// The ID of the third-party firewall that's causing the violation.
+	ViolationTarget *string
+
+	noSmithyDocumentSerde
+}
+
+// The violation details for a third-party firewall for an Availability Zone that's
+// missing the Firewall Manager managed subnet.
+type ThirdPartyFirewallMissingSubnetViolation struct {
+
+	// The Availability Zone of a subnet that's causing the violation.
+	AvailabilityZone *string
+
+	// The reason the resource is causing the violation, if a reason is available.
+	TargetViolationReason *string
+
+	// The resource ID of the VPC associated with a subnet that's causing the
+	// violation.
+	VPC *string
+
+	// The ID of the third-party firewall or VPC resource that's causing the violation.
+	ViolationTarget *string
+
+	noSmithyDocumentSerde
+}
+
+// Configures the policy for the third-party firewall.
+type ThirdPartyFirewallPolicy struct {
+
+	// Defines the deployment model to use for the third-party firewall.
+	FirewallDeploymentModel FirewallDeploymentModel
+
+	noSmithyDocumentSerde
+}
+
 // Violations for a resource based on the specified Firewall Manager policy and
 // Amazon Web Services account.
 type ViolationDetail struct {
@@ -1641,9 +1767,7 @@ type ViolationDetail struct {
 	// Brief description for the requested resource.
 	ResourceDescription *string
 
-	// The ResourceTag objects associated with the resource. This option isn't
-	// available for the centralized deployment model when creating policies to
-	// configure Network Firewall.
+	// The ResourceTag objects associated with the resource.
 	ResourceTags []Tag
 
 	noSmithyDocumentSerde

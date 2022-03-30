@@ -3333,6 +3333,11 @@ func awsAwsjson11_serializeDocumentUpdateFileSystemOntapConfiguration(v *types.U
 		ok.String(*v.FsxAdminPassword)
 	}
 
+	if v.ThroughputCapacity != nil {
+		ok := object.Key("ThroughputCapacity")
+		ok.Integer(*v.ThroughputCapacity)
+	}
+
 	if v.WeeklyMaintenanceStartTime != nil {
 		ok := object.Key("WeeklyMaintenanceStartTime")
 		ok.String(*v.WeeklyMaintenanceStartTime)

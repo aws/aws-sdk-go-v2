@@ -43,7 +43,8 @@ type CreateRoleAliasInput struct {
 	RoleArn *string
 
 	// How long (in seconds) the credentials will be valid. The default value is 3,600
-	// seconds.
+	// seconds. This value must be less than or equal to the maximum session duration
+	// of the IAM role that the role alias references.
 	CredentialDurationSeconds *int32
 
 	// Metadata which can be used to manage the role alias. For URI Request parameters

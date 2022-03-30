@@ -1,0 +1,8 @@
+{
+    "id": "4c502fad-b4f6-4c8f-9f71-c2a895ab3e95",
+    "type": "feature",
+    "description": "Update the default AWS IoT Core Data Plane endpoint from VeriSign signed to ATS signed. If you have firewalls with strict egress rules, configure the rules to grant you access to data-ats.iot.[region].amazonaws.com or data-ats.iot.[region].amazonaws.com.cn.",
+    "modules": [
+        "service/iotdataplane"
+    ]
+}

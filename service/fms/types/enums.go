@@ -91,6 +91,7 @@ type FirewallDeploymentModel string
 // Enum values for FirewallDeploymentModel
 const (
 	FirewallDeploymentModelCentralized FirewallDeploymentModel = "CENTRALIZED"
+	FirewallDeploymentModelDistributed FirewallDeploymentModel = "DISTRIBUTED"
 )
 
 // Values returns all known values for FirewallDeploymentModel. Note that this can
@@ -99,6 +100,28 @@ const (
 func (FirewallDeploymentModel) Values() []FirewallDeploymentModel {
 	return []FirewallDeploymentModel{
 		"CENTRALIZED",
+		"DISTRIBUTED",
+	}
+}
+
+type MarketplaceSubscriptionOnboardingStatus string
+
+// Enum values for MarketplaceSubscriptionOnboardingStatus
+const (
+	MarketplaceSubscriptionOnboardingStatusNoSubscription MarketplaceSubscriptionOnboardingStatus = "NO_SUBSCRIPTION"
+	MarketplaceSubscriptionOnboardingStatusNotComplete    MarketplaceSubscriptionOnboardingStatus = "NOT_COMPLETE"
+	MarketplaceSubscriptionOnboardingStatusComplete       MarketplaceSubscriptionOnboardingStatus = "COMPLETE"
+)
+
+// Values returns all known values for MarketplaceSubscriptionOnboardingStatus.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (MarketplaceSubscriptionOnboardingStatus) Values() []MarketplaceSubscriptionOnboardingStatus {
+	return []MarketplaceSubscriptionOnboardingStatus{
+		"NO_SUBSCRIPTION",
+		"NOT_COMPLETE",
+		"COMPLETE",
 	}
 }
 
@@ -150,6 +173,7 @@ const (
 	SecurityServiceTypeSecurityGroupsUsageAudit   SecurityServiceType = "SECURITY_GROUPS_USAGE_AUDIT"
 	SecurityServiceTypeNetworkFirewall            SecurityServiceType = "NETWORK_FIREWALL"
 	SecurityServiceTypeDnsFirewall                SecurityServiceType = "DNS_FIREWALL"
+	SecurityServiceTypeThirdPartyFirewall         SecurityServiceType = "THIRD_PARTY_FIREWALL"
 )
 
 // Values returns all known values for SecurityServiceType. Note that this can be
@@ -165,6 +189,7 @@ func (SecurityServiceType) Values() []SecurityServiceType {
 		"SECURITY_GROUPS_USAGE_AUDIT",
 		"NETWORK_FIREWALL",
 		"DNS_FIREWALL",
+		"THIRD_PARTY_FIREWALL",
 	}
 }
 
@@ -202,6 +227,47 @@ func (TargetType) Values() []TargetType {
 	}
 }
 
+type ThirdPartyFirewall string
+
+// Enum values for ThirdPartyFirewall
+const (
+	ThirdPartyFirewallPaloAltoNetworksCloudNgfw ThirdPartyFirewall = "PALO_ALTO_NETWORKS_CLOUD_NGFW"
+)
+
+// Values returns all known values for ThirdPartyFirewall. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ThirdPartyFirewall) Values() []ThirdPartyFirewall {
+	return []ThirdPartyFirewall{
+		"PALO_ALTO_NETWORKS_CLOUD_NGFW",
+	}
+}
+
+type ThirdPartyFirewallAssociationStatus string
+
+// Enum values for ThirdPartyFirewallAssociationStatus
+const (
+	ThirdPartyFirewallAssociationStatusOnboarding       ThirdPartyFirewallAssociationStatus = "ONBOARDING"
+	ThirdPartyFirewallAssociationStatusOnboardComplete  ThirdPartyFirewallAssociationStatus = "ONBOARD_COMPLETE"
+	ThirdPartyFirewallAssociationStatusOffboarding      ThirdPartyFirewallAssociationStatus = "OFFBOARDING"
+	ThirdPartyFirewallAssociationStatusOffboardComplete ThirdPartyFirewallAssociationStatus = "OFFBOARD_COMPLETE"
+	ThirdPartyFirewallAssociationStatusNotExist         ThirdPartyFirewallAssociationStatus = "NOT_EXIST"
+)
+
+// Values returns all known values for ThirdPartyFirewallAssociationStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ThirdPartyFirewallAssociationStatus) Values() []ThirdPartyFirewallAssociationStatus {
+	return []ThirdPartyFirewallAssociationStatus{
+		"ONBOARDING",
+		"ONBOARD_COMPLETE",
+		"OFFBOARDING",
+		"OFFBOARD_COMPLETE",
+		"NOT_EXIST",
+	}
+}
+
 type ViolationReason string
 
 // Enum values for ViolationReason
@@ -220,6 +286,7 @@ const (
 	ViolationReasonMissingFirewallSubnetInAZ               ViolationReason = "MISSING_FIREWALL_SUBNET_IN_AZ"
 	ViolationReasonMissingExpectedRouteTable               ViolationReason = "MISSING_EXPECTED_ROUTE_TABLE"
 	ViolationReasonNetworkFirewallPolicyModified           ViolationReason = "NETWORK_FIREWALL_POLICY_MODIFIED"
+	ViolationReasonFirewallSubnetIsOutOfScope              ViolationReason = "FIREWALL_SUBNET_IS_OUT_OF_SCOPE"
 	ViolationReasonInternetGatewayMissingExpectedRoute     ViolationReason = "INTERNET_GATEWAY_MISSING_EXPECTED_ROUTE"
 	ViolationReasonFirewallSubnetMissingExpectedRoute      ViolationReason = "FIREWALL_SUBNET_MISSING_EXPECTED_ROUTE"
 	ViolationReasonUnexpectedFirewallRoutes                ViolationReason = "UNEXPECTED_FIREWALL_ROUTES"
@@ -231,8 +298,8 @@ const (
 	ViolationReasonBlackHoleRouteDetected                  ViolationReason = "BLACK_HOLE_ROUTE_DETECTED"
 	ViolationReasonBlackHoleRouteDetectedInFirewallSubnet  ViolationReason = "BLACK_HOLE_ROUTE_DETECTED_IN_FIREWALL_SUBNET"
 	ViolationReasonResourceMissingDnsFirewall              ViolationReason = "RESOURCE_MISSING_DNS_FIREWALL"
-	ViolationReasonFirewallSubnetIsOutOfScope              ViolationReason = "FIREWALL_SUBNET_IS_OUT_OF_SCOPE"
 	ViolationReasonRouteHasOutOfScopeEndpoint              ViolationReason = "ROUTE_HAS_OUT_OF_SCOPE_ENDPOINT"
+	ViolationReasonFirewallSubnetMissingVPCEndpoint        ViolationReason = "FIREWALL_SUBNET_MISSING_VPCE_ENDPOINT"
 )
 
 // Values returns all known values for ViolationReason. Note that this can be
@@ -254,6 +321,7 @@ func (ViolationReason) Values() []ViolationReason {
 		"MISSING_FIREWALL_SUBNET_IN_AZ",
 		"MISSING_EXPECTED_ROUTE_TABLE",
 		"NETWORK_FIREWALL_POLICY_MODIFIED",
+		"FIREWALL_SUBNET_IS_OUT_OF_SCOPE",
 		"INTERNET_GATEWAY_MISSING_EXPECTED_ROUTE",
 		"FIREWALL_SUBNET_MISSING_EXPECTED_ROUTE",
 		"UNEXPECTED_FIREWALL_ROUTES",
@@ -265,7 +333,7 @@ func (ViolationReason) Values() []ViolationReason {
 		"BLACK_HOLE_ROUTE_DETECTED",
 		"BLACK_HOLE_ROUTE_DETECTED_IN_FIREWALL_SUBNET",
 		"RESOURCE_MISSING_DNS_FIREWALL",
-		"FIREWALL_SUBNET_IS_OUT_OF_SCOPE",
 		"ROUTE_HAS_OUT_OF_SCOPE_ENDPOINT",
+		"FIREWALL_SUBNET_MISSING_VPCE_ENDPOINT",
 	}
 }

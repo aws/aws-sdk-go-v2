@@ -56,7 +56,8 @@ type RegisterCACertificateInput struct {
 	// Information about the registration configuration.
 	RegistrationConfig *types.RegistrationConfig
 
-	// A boolean value that specifies if the CA certificate is set to active.
+	// A boolean value that specifies if the CA certificate is set to active. Valid
+	// values: ACTIVE | INACTIVE
 	SetAsActive bool
 
 	// Metadata which can be used to manage the CA certificate. For URI Request

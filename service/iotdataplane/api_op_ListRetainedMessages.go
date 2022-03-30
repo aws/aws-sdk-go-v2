@@ -21,8 +21,8 @@ import (
 // with the topic name of the retained message. Requires permission to access the
 // ListRetainedMessages
 // (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiotfleethubfordevicemanagement.html#awsiotfleethubfordevicemanagement-actions-as-permissions)
-// action. For more information about messaging costs, see IoT Core pricing -
-// Messaging (http://aws.amazon.com/iot-core/pricing/#Messaging).
+// action. For more information about messaging costs, see Amazon Web Services IoT
+// Core pricing - Messaging (http://aws.amazon.com/iot-core/pricing/#Messaging).
 func (c *Client) ListRetainedMessages(ctx context.Context, params *ListRetainedMessagesInput, optFns ...func(*Options)) (*ListRetainedMessagesOutput, error) {
 	if params == nil {
 		params = &ListRetainedMessagesInput{}

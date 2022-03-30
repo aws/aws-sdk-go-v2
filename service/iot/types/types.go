@@ -1178,13 +1178,21 @@ type CustomCodeSigning struct {
 	// The certificate chain.
 	CertificateChain *CodeSigningCertificateChain
 
-	// The hash algorithm used to code sign the file.
+	// The hash algorithm used to code sign the file. You can use a string as the
+	// algorithm name if the target over-the-air (OTA) update devices are able to
+	// verify the signature that was generated using the same signature algorithm. For
+	// example, FreeRTOS uses SHA256 or SHA1, so you can pass either of them based on
+	// which was used for generating the signature.
 	HashAlgorithm *string
 
 	// The signature for the file.
 	Signature *CodeSigningSignature
 
-	// The signature algorithm used to code sign the file.
+	// The signature algorithm used to code sign the file. You can use a string as the
+	// algorithm name if the target over-the-air (OTA) update devices are able to
+	// verify the signature that was generated using the same signature algorithm. For
+	// example, FreeRTOS uses ECDSA or RSA, so you can pass either of them based on
+	// which was used for generating the signature.
 	SignatureAlgorithm *string
 
 	noSmithyDocumentSerde

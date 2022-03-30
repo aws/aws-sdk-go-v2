@@ -73,14 +73,25 @@ type CopyBackupInput struct {
 	// with the Tags parameter take precedence.
 	CopyTags *bool
 
-	// The ID of the Key Management Service (KMS) key used to encrypt the file system's
-	// data for Amazon FSx for Windows File Server file systems, Amazon FSx for NetApp
-	// ONTAP file systems, and Amazon FSx for Lustre PERSISTENT_1 and PERSISTENT_2 file
-	// systems at rest. If this ID isn't specified, the key managed by Amazon FSx is
-	// used. The Amazon FSx for Lustre SCRATCH_1 and SCRATCH_2 file systems are always
-	// encrypted at rest using Amazon FSx-managed keys. For more information, see
-	// Encrypt (https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html)
-	// in the Key Management Service API Reference.
+	// Specifies the ID of the Key Management Service (KMS) key to use for encrypting
+	// data on Amazon FSx file systems, as follows:
+	//
+	// * Amazon FSx for Lustre
+	// PERSISTENT_1 and PERSISTENT_2 deployment types only. SCRATCH_1 and SCRATCH_2
+	// types are encrypted using the Amazon FSx service KMS key for your account.
+	//
+	// *
+	// Amazon FSx for NetApp ONTAP
+	//
+	// * Amazon FSx for OpenZFS
+	//
+	// * Amazon FSx for Windows
+	// File Server
+	//
+	// If a KmsKeyId isn't specified, the Amazon FSx-managed KMS key for
+	// your account is used. For more information, see Encrypt
+	// (https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html) in the
+	// Key Management Service API Reference.
 	KmsKeyId *string
 
 	// The source Amazon Web Services Region of the backup. Specifies the Amazon Web

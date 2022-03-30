@@ -53,7 +53,7 @@ type UpdateStorageVirtualMachineInput struct {
 type UpdateStorageVirtualMachineOutput struct {
 
 	// Describes the Amazon FSx for NetApp ONTAP storage virtual machine (SVM)
-	// configuraton.
+	// configuration.
 	StorageVirtualMachine *types.StorageVirtualMachine
 
 	// Metadata pertaining to the operation's result.

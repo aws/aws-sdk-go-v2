@@ -66,10 +66,12 @@ import (
 // *
 // StorageCapacity
 //
+// * ThroughputCapacity
+//
 // * WeeklyMaintenanceStartTime
 //
-// For the Amazon FSx for OpenZFS
-// file systems, you can update the following properties:
+// For the
+// Amazon FSx for OpenZFS file systems, you can update the following properties:
 //
 // *
 // AutomaticBackupRetentionDays

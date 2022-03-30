@@ -1571,14 +1571,20 @@ type FileSystem struct {
 	// 2.12.
 	FileSystemTypeVersion *string
 
-	// The ID of the Key Management Service (KMS) key used to encrypt the file system's
-	// data for Amazon FSx for Windows File Server file systems, Amazon FSx for NetApp
-	// ONTAP file systems, and PERSISTENT Amazon FSx for Lustre file systems at rest.
-	// If this ID isn't specified, the Amazon FSx-managed key for your account is used.
-	// The scratch Amazon FSx for Lustre file systems are always encrypted at rest
-	// using the Amazon FSx-managed key for your account. For more information, see
-	// Encrypt (https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html)
-	// in the Key Management Service API Reference.
+	// The ID of the Key Management Service (KMS) key used to encrypt Amazon FSx file
+	// system data. Used as follows with Amazon FSx file system types:
+	//
+	// * Amazon FSx
+	// for Lustre PERSISTENT_1 and PERSISTENT_2 deployment types only. SCRATCH_1 and
+	// SCRATCH_2 types are encrypted using the Amazon FSx service KMS key for your
+	// account.
+	//
+	// * Amazon FSx for NetApp ONTAP
+	//
+	// * Amazon FSx for OpenZFS
+	//
+	// * Amazon FSx
+	// for Windows File Server
 	KmsKeyId *string
 
 	// The lifecycle status of the file system. The following are the possible values
@@ -1616,7 +1622,7 @@ type FileSystem struct {
 	// you can have more than one.
 	NetworkInterfaceIds []string
 
-	// The configuration for this FSx for ONTAP file system.
+	// The configuration for this Amazon FSx for NetApp ONTAP file system.
 	OntapConfiguration *OntapFileSystemConfiguration
 
 	// The configuration for this Amazon FSx for OpenZFS file system.
@@ -1627,7 +1633,7 @@ type FileSystem struct {
 	// Services account to which the IAM user belongs is the owner.
 	OwnerId *string
 
-	// The Amazon Resource Name (ARN) for the file system resource.
+	// The Amazon Resource Name (ARN) of the file system resource.
 	ResourceARN *string
 
 	// The storage capacity of the file system in gibibytes (GiB).
@@ -1658,7 +1664,7 @@ type FileSystem struct {
 	// The ID of the primary virtual private cloud (VPC) for the file system.
 	VpcId *string
 
-	// The configuration for this FSx for Windows File Server file system.
+	// The configuration for this Amazon FSx for Windows File Server file system.
 	WindowsConfiguration *WindowsFileSystemConfiguration
 
 	noSmithyDocumentSerde
@@ -1954,7 +1960,8 @@ type OntapFileSystemConfiguration struct {
 	// The VPC route tables in which your file system's endpoints are created.
 	RouteTableIds []string
 
-	// The sustained throughput of an Amazon FSx file system in MBps.
+	// The sustained throughput of an Amazon FSx file system in Megabytes per second
+	// (MBps).
 	ThroughputCapacity *int32
 
 	// A recurring weekly time, in the format D:HH:MM. D is the day of the week, for
@@ -2036,7 +2043,7 @@ type OntapVolumeConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies who can mount the file system and the options that can be used while
+// Specifies who can mount an OpenZFS file system and the options available while
 // mounting the file system.
 type OpenZFSClientConfiguration struct {
 
@@ -2496,7 +2503,7 @@ type SnapshotFilter struct {
 }
 
 // Describes the Amazon FSx for NetApp ONTAP storage virtual machine (SVM)
-// configuraton.
+// configuration.
 type StorageVirtualMachine struct {
 
 	// Describes the Microsoft Active Directory configuration to which the SVM is
@@ -2796,6 +2803,11 @@ type UpdateFileSystemOntapConfiguration struct {
 
 	// The ONTAP administrative password for the fsxadmin user.
 	FsxAdminPassword *string
+
+	// Specifies the throughput of an FSx for NetApp ONTAP file system, measured in
+	// megabytes per second (MBps). Valid values are 64, 128, 256, 512, 1024, 2048,
+	// 3072, or 4096 MB/s.
+	ThroughputCapacity *int32
 
 	// A recurring weekly time, in the format D:HH:MM. D is the day of the week, for
 	// which 1 represents Monday and 7 represents Sunday. For further details, see the
