@@ -858,19 +858,19 @@ func indirect(v reflect.Value, opts indirectOptions) (Unmarshaler, reflect.Value
 // A Number represents a Attributevalue number literal.
 type Number string
 
-// Float64 attempts to cast the number ot a float64, returning
+// Float64 attempts to cast the number to a float64, returning
 // the result of the case or error if the case failed.
 func (n Number) Float64() (float64, error) {
 	return strconv.ParseFloat(string(n), 64)
 }
 
-// Int64 attempts to cast the number ot a int64, returning
+// Int64 attempts to cast the number to a int64, returning
 // the result of the case or error if the case failed.
 func (n Number) Int64() (int64, error) {
 	return strconv.ParseInt(string(n), 10, 64)
 }
 
-// Uint64 attempts to cast the number ot a uint64, returning
+// Uint64 attempts to cast the number to a uint64, returning
 // the result of the case or error if the case failed.
 func (n Number) Uint64() (uint64, error) {
 	return strconv.ParseUint(string(n), 10, 64)
