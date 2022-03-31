@@ -63,7 +63,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Cancels the specified resource operation request. For more information, see <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-manage-requests.html#resource-operations-manage-requests-cancel\">Canceling resource operation requests</a> in the\n        <i>Amazon Web Services Cloud Control API User Guide</i>.</p>\n         <p>Only resource operations requests with a status of <code>PENDING</code> or\n        <code>IN_PROGRESS</code> can be cancelled.</p>",
+                "smithy.api#documentation": "<p>Cancels the specified resource operation request. For more information, see <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-manage-requests.html#resource-operations-manage-requests-cancel\">Canceling resource operation requests</a> in the\n        <i>Amazon Web Services Cloud Control API User Guide</i>.</p>\n         <p>Only resource operations requests with a status of <code>PENDING</code> or\n        <code>IN_PROGRESS</code> can be canceled.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -109,13 +109,28 @@
                     "code": "ClientTokenConflictException",
                     "httpResponseCode": 409
                 },
-                "smithy.api#documentation": "<p>The specified client token has already been used in another resource request.</p>\n         <p>It is best practice for client tokens to be unique for each resource operation request.\n      However, client token expire after 36 hours.</p>",
+                "smithy.api#documentation": "<p>The specified client token has already been used in another resource request.</p>\n         <p>It's best practice for client tokens to be unique for each resource operation request.\n      However, client token expire after 36 hours.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
             }
         },
         "com.amazonaws.cloudcontrol#CloudApiService": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "CloudControl",
+                    "arnNamespace": "cloudcontrolapi",
+                    "cloudFormationName": "CloudControl",
+                    "cloudTrailEventSource": "cloudcontrol.amazonaws.com",
+                    "endpointPrefix": "cloudcontrolapi"
+                },
+                "aws.auth#sigv4": {
+                    "name": "cloudcontrolapi"
+                },
+                "aws.protocols#awsJson1_0": {},
+                "smithy.api#documentation": "<p>For more information about Amazon Web Services Cloud Control API, see the <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/what-is-cloudcontrolapi.html\">Amazon Web Services Cloud Control API User\n        Guide</a>.</p>",
+                "smithy.api#title": "AWS Cloud Control API"
+            },
             "version": "2021-09-30",
             "operations": [
                 {
@@ -142,22 +157,7 @@
                 {
                     "target": "com.amazonaws.cloudcontrol#UpdateResource"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "CloudControl",
-                    "arnNamespace": "cloudcontrolapi",
-                    "cloudFormationName": "CloudControl",
-                    "cloudTrailEventSource": "cloudcontrol.amazonaws.com",
-                    "endpointPrefix": "cloudcontrolapi"
-                },
-                "aws.auth#sigv4": {
-                    "name": "cloudcontrolapi"
-                },
-                "aws.protocols#awsJson1_0": {},
-                "smithy.api#documentation": "<p>Use Amazon Web Services Cloud Control API to create, read, update, delete, and list (CRUD-L) your cloud resources that\n      belong to a wide range of services--both Amazon Web Services and third-party.  With the Cloud Control API\n      standardized set of application programming interfaces (APIs), you can perform CRUD-L operations\n      on any supported resources in your Amazon Web Services account. Using Cloud Control API, you won't have to generate code\n      or scripts specific to each individual service responsible for those resources.</p>\n         <p>For more information about Amazon Web Services Cloud Control API, see the <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/what-is-cloudcontrolapi.html\">Amazon Web Services Cloud Control API User\n        Guide</a>.</p>",
-                "smithy.api#title": "AWS Cloud Control API"
-            }
+            ]
         },
         "com.amazonaws.cloudcontrol#ConcurrentModificationException": {
             "type": "structure",
@@ -283,7 +283,7 @@
                 "RoleArn": {
                     "target": "com.amazonaws.cloudcontrol#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) for Cloud Control API to use when performing this resource operation. The role specified must have the permissions required for this operation. The necessary permissions for each event handler are defined in the <code>\n               <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-handlers\">handlers</a>\n            </code> section of the <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html\">resource type definition schema</a>.</p>\n         <p>If you do not specify a role, Cloud Control API uses a temporary session created using your Amazon Web Services user credentials.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations.html#resource-operations-permissions\">Specifying credentials</a> in the <i>Amazon Web Services Cloud Control API User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role for Cloud Control API to use when performing this resource operation. The role specified must have the permissions required for this operation. The necessary permissions for each event handler are defined in the <code>\n               <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-handlers\">handlers</a>\n            </code> section of the <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html\">resource type definition schema</a>.</p>\n         <p>If you do not specify a role, Cloud Control API uses a temporary session created using your Amazon Web Services user credentials.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations.html#resource-operations-permissions\">Specifying credentials</a> in the <i>Amazon Web Services Cloud Control API User Guide</i>.</p>"
                     }
                 },
                 "ClientToken": {
@@ -296,7 +296,7 @@
                 "DesiredState": {
                     "target": "com.amazonaws.cloudcontrol#Properties",
                     "traits": {
-                        "smithy.api#documentation": "<p>Structured data format representing the desired state of the resource, consisting of that\n      resource's properties and their desired values. </p>\n         <note>\n            <p>Cloud Control API currently supports JSON as a structured data format.</p>\n         </note>\n    \n         <p>Specify the desired state as one of the following:</p>\n         <ul>\n            <li>\n               <p>A JSON blob</p>\n            </li>\n            <li>\n               <p>A local path containing the desired state in JSON data format</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-create.html#resource-operations-create-desiredstate\">Composing the desired state of the resource</a> in the <i>Amazon Web Services Cloud Control API User\n        Guide</i>.</p>\n         <p>For more information about the properties of a specific resource, refer to the related\n      topic for the resource in the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">Resource and property types reference</a> in the <i>Amazon Web Services\n        CloudFormation Users Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>Structured data format representing the desired state of the resource, consisting of that\n      resource's properties and their desired values.</p>\n         <note>\n            <p>Cloud Control API currently supports JSON as a structured data format.</p>\n         </note>\n    \n         <p>Specify the desired state as one of the following:</p>\n         <ul>\n            <li>\n               <p>A JSON blob</p>\n            </li>\n            <li>\n               <p>A local path containing the desired state in JSON data format</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-create.html#resource-operations-create-desiredstate\">Composing the desired state of the resource</a> in the <i>Amazon Web Services Cloud Control API User\n        Guide</i>.</p>\n         <p>For more information about the properties of a specific resource, refer to the related\n      topic for the resource in the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">Resource and property types reference</a> in the <i>CloudFormation Users Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -403,7 +403,7 @@
                 "RoleArn": {
                     "target": "com.amazonaws.cloudcontrol#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) for Cloud Control API to use when performing this resource operation. The role specified must have the permissions required for this operation. The necessary permissions for each event handler are defined in the <code>\n               <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-handlers\">handlers</a>\n            </code> section of the <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html\">resource type definition schema</a>.</p>\n         <p>If you do not specify a role, Cloud Control API uses a temporary session created using your Amazon Web Services user credentials.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations.html#resource-operations-permissions\">Specifying credentials</a> in the <i>Amazon Web Services Cloud Control API User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role for Cloud Control API to use when performing this resource operation. The role specified must have the permissions required for this operation. The necessary permissions for each event handler are defined in the <code>\n               <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-handlers\">handlers</a>\n            </code> section of the <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html\">resource type definition schema</a>.</p>\n         <p>If you do not specify a role, Cloud Control API uses a temporary session created using your Amazon Web Services user credentials.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations.html#resource-operations-permissions\">Specifying credentials</a> in the <i>Amazon Web Services Cloud Control API User Guide</i>.</p>"
                     }
                 },
                 "ClientToken": {
@@ -416,7 +416,7 @@
                 "Identifier": {
                     "target": "com.amazonaws.cloudcontrol#Identifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the resource.</p>\n         <p>You can specify the primary identifier, or any secondary identifier defined for the resource type in its resource schema. You can only specify one identifier. Primary identifiers can be specified as a string or JSON; secondary identifiers must be specified as JSON.</p>\n         <p>For compound primary identifiers (that is, one that consists of multiple resource properties strung together), to specify the primary identifier as a string, list the property values <i>in the order they are specified</i> in the primary identifier definition, separated by <code>|</code>. </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-identifier.html\">Identifying resources</a> in the <i>Amazon Web Services Cloud Control API User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The identifier for the resource.</p>\n         <p>You can specify the primary identifier, or any secondary identifier defined for the resource type in its resource schema. You can only specify one identifier. Primary identifiers can be specified as a string or JSON; secondary identifiers must be specified as JSON.</p>\n         <p>For compound primary identifiers (that is, one that consists of multiple resource properties strung together), to specify the primary identifier as a string, list the property values <i>in the order they are specified</i> in the primary identifier definition, separated by <code>|</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-identifier.html\">Identifying resources</a> in the <i>Amazon Web Services Cloud Control API User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -454,7 +454,7 @@
                     "code": "GeneralServiceException",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p>The resource handler has returned that the downstream service generated an error that does\n      not map to any other handler error code.</p>",
+                "smithy.api#documentation": "<p>The resource handler has returned that the downstream service generated an error that\n      doesn't map to any other handler error code.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -521,7 +521,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns information about the current state of the specified resource. For details, see\n        <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-read.html\">Reading a resource's current state</a>.</p>\n         <p>You can use this action to return information about an existing resource in your account\n      and Amazon Web Services Region, whether or not those resources were provisioned using Cloud Control API.</p>"
+                "smithy.api#documentation": "<p>Returns information about the current state of the specified resource. For details, see\n        <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-read.html\">Reading a resource's current state</a>.</p>\n         <p>You can use this action to return information about an existing resource in your account\n      and Amazon Web Services Region, whether those resources were provisioned using Cloud Control API.</p>"
             }
         },
         "com.amazonaws.cloudcontrol#GetResourceInput": {
@@ -543,13 +543,13 @@
                 "RoleArn": {
                     "target": "com.amazonaws.cloudcontrol#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) for Cloud Control API to use when performing this resource operation. The role specified must have the permissions required for this operation. The necessary permissions for each event handler are defined in the <code>\n               <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-handlers\">handlers</a>\n            </code> section of the <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html\">resource type definition schema</a>.</p>\n         <p>If you do not specify a role, Cloud Control API uses a temporary session created using your Amazon Web Services user credentials.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations.html#resource-operations-permissions\">Specifying credentials</a> in the <i>Amazon Web Services Cloud Control API User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role for Cloud Control API to use when performing this resource operation. The role specified must have the permissions required for this operation. The necessary permissions for each event handler are defined in the <code>\n               <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-handlers\">handlers</a>\n            </code> section of the <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html\">resource type definition schema</a>.</p>\n         <p>If you do not specify a role, Cloud Control API uses a temporary session created using your Amazon Web Services user credentials.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations.html#resource-operations-permissions\">Specifying credentials</a> in the <i>Amazon Web Services Cloud Control API User Guide</i>.</p>"
                     }
                 },
                 "Identifier": {
                     "target": "com.amazonaws.cloudcontrol#Identifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the resource.</p>\n         <p>You can specify the primary identifier, or any secondary identifier defined for the resource type in its resource schema. You can only specify one identifier. Primary identifiers can be specified as a string or JSON; secondary identifiers must be specified as JSON.</p>\n         <p>For compound primary identifiers (that is, one that consists of multiple resource properties strung together), to specify the primary identifier as a string, list the property values <i>in the order they are specified</i> in the primary identifier definition, separated by <code>|</code>. </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-identifier.html\">Identifying resources</a> in the <i>Amazon Web Services Cloud Control API User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The identifier for the resource.</p>\n         <p>You can specify the primary identifier, or any secondary identifier defined for the resource type in its resource schema. You can only specify one identifier. Primary identifiers can be specified as a string or JSON; secondary identifiers must be specified as JSON.</p>\n         <p>For compound primary identifiers (that is, one that consists of multiple resource properties strung together), to specify the primary identifier as a string, list the property values <i>in the order they are specified</i> in the primary identifier definition, separated by <code>|</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-identifier.html\">Identifying resources</a> in the <i>Amazon Web Services Cloud Control API User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -811,7 +811,7 @@
                 "target": "com.amazonaws.cloudcontrol#ListResourceRequestsOutput"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns existing resource operation requests. This includes requests of all status types.\n      For more information, see <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-manage-requests.html#resource-operations-manage-requests-list\">Listing active resource operation requests</a> in the\n        <i>Amazon Web Services Cloud Control API User Guide</i>.</p>\n         <note>\n            <p>Resource operation requests expire after seven days.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Returns existing resource operation requests. This includes requests of all status types.\n      For more information, see <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-manage-requests.html#resource-operations-manage-requests-list\">Listing active resource operation requests</a> in the\n        <i>Amazon Web Services Cloud Control API User Guide</i>.</p>\n         <note>\n            <p>Resource operation requests expire after 7 days.</p>\n         </note>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -921,7 +921,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns information about the specified resources. For more information, see <a href=\"cloudcontrolapi/latest/userguide/resource-operations-list.html\">Discovering\n        resources</a> in the <i>Amazon Web Services Cloud Control API User Guide</i>.</p>\n         <p>You can use this action to return information about existing resources in your account and\n      Amazon Web Services Region, whether or not those resources were provisioned using Cloud Control API.</p>",
+                "smithy.api#documentation": "<p>Returns information about the specified resources. For more information, see <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-list.html\">Discovering resources</a> in the <i>Amazon Web Services Cloud Control API User Guide</i>.</p>\n         <p>You can use this action to return information about existing resources in your account and\n      Amazon Web Services Region, whether those resources were provisioned using Cloud Control API.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -948,7 +948,7 @@
                 "RoleArn": {
                     "target": "com.amazonaws.cloudcontrol#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) for Cloud Control API to use when performing this resource operation. The role specified must have the permissions required for this operation. The necessary permissions for each event handler are defined in the <code>\n               <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-handlers\">handlers</a>\n            </code> section of the <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html\">resource type definition schema</a>.</p>\n         <p>If you do not specify a role, Cloud Control API uses a temporary session created using your Amazon Web Services user credentials.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations.html#resource-operations-permissions\">Specifying credentials</a> in the <i>Amazon Web Services Cloud Control API User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role for Cloud Control API to use when performing this resource operation. The role specified must have the permissions required for this operation. The necessary permissions for each event handler are defined in the <code>\n               <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-handlers\">handlers</a>\n            </code> section of the <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html\">resource type definition schema</a>.</p>\n         <p>If you do not specify a role, Cloud Control API uses a temporary session created using your Amazon Web Services user credentials.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations.html#resource-operations-permissions\">Specifying credentials</a> in the <i>Amazon Web Services Cloud Control API User Guide</i>.</p>"
                     }
                 },
                 "NextToken": {
@@ -960,7 +960,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.cloudcontrol#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results to be returned with a single call. If the number of\n      available results exceeds this maximum, the response includes a <code>NextToken</code> value\n      that you can assign to the <code>NextToken</code> request parameter to get the next set of\n      results.</p>\n         <p>The default is <code>20</code>.</p>"
+                        "smithy.api#documentation": "<p>Reserved.</p>"
                     }
                 },
                 "ResourceModel": {
@@ -1016,7 +1016,7 @@
                     "code": "NetworkFailureException",
                     "httpResponseCode": 502
                 },
-                "smithy.api#documentation": "<p>The resource handler has returned that the request could not be completed due to\n      networking issues, such as a failure to receive a response from the server.</p>",
+                "smithy.api#documentation": "<p>The resource handler has returned that the request couldn't be completed due to networking\n      issues, such as a failure to receive a response from the server.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 502
             }
@@ -1060,7 +1060,7 @@
                     "code": "NotUpdatableException",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p>One or more properties included in this resource operation are defined as create-only, and\n      therefore cannot be updated.</p>",
+                "smithy.api#documentation": "<p>One or more properties included in this resource operation are defined as create-only, and\n      therefore can't be updated.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -1134,7 +1134,6 @@
                     "min": 1,
                     "max": 65536
                 },
-                "smithy.api#pattern": "^(.|\\s)*$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -1150,7 +1149,7 @@
                     "code": "PrivateTypeException",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p>Cloud Control API has not received a valid response from the resource handler, due to a\n      configuration error. This includes issues such as the resource handler returning an invalid\n      response, or timing out.</p>",
+                "smithy.api#documentation": "<p>Cloud Control API hasn't received a valid response from the resource handler, due to a configuration\n      error. This includes issues such as the resource handler returning an invalid response, or\n      timing out.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -1185,7 +1184,7 @@
                 "OperationStatus": {
                     "target": "com.amazonaws.cloudcontrol#OperationStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current status of the resource operation request.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PENDING</code>: The resource operation has not yet started.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IN_PROGRESS</code>: The resource operation is currently in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUCCESS</code>: The resource operation has successfully completed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code>: The resource operation has failed. Refer to the error code and\n          status message for more information.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CANCEL_IN_PROGRESS</code>: The resource operation is in the process of being\n          canceled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CANCEL_COMPLETE</code>: The resource operation has been canceled.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The current status of the resource operation request.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PENDING</code>: The resource operation hasn't yet started.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IN_PROGRESS</code>: The resource operation is currently in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUCCESS</code>: The resource operation has successfully completed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code>: The resource operation has failed. Refer to the error code and\n          status message for more information.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CANCEL_IN_PROGRESS</code>: The resource operation is in the process of being\n          canceled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CANCEL_COMPLETE</code>: The resource operation has been canceled.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "EventTime": {
@@ -1230,7 +1229,6 @@
                     "min": 1,
                     "max": 16384
                 },
-                "smithy.api#pattern": "^(.|\\s)*$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -1256,7 +1254,7 @@
                     "code": "RequestTokenNotFoundException",
                     "httpResponseCode": 404
                 },
-                "smithy.api#documentation": "<p>A resource operation with the specified request token cannot be found.</p>",
+                "smithy.api#documentation": "<p>A resource operation with the specified request token can't be found.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
             }
@@ -1273,7 +1271,7 @@
                     "code": "ResourceConflictException",
                     "httpResponseCode": 409
                 },
-                "smithy.api#documentation": "<p>The resource is temporarily unavailable to be acted upon. For example, if the resource is\n      currently undergoing an operation and cannot be acted upon until that operation is\n      finished.</p>",
+                "smithy.api#documentation": "<p>The resource is temporarily unavailable to be acted upon. For example, if the resource is\n      currently undergoing an operation and can't be acted upon until that operation is\n      finished.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
             }
@@ -1316,7 +1314,7 @@
                     "code": "ResourceNotFoundException",
                     "httpResponseCode": 404
                 },
-                "smithy.api#documentation": "<p>A resource with the specified identifier cannot be found.</p>",
+                "smithy.api#documentation": "<p>A resource with the specified identifier can't be found.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
             }
@@ -1333,7 +1331,7 @@
                 "OperationStatuses": {
                     "target": "com.amazonaws.cloudcontrol#OperationStatuses",
                     "traits": {
-                        "smithy.api#documentation": "<p>The operation statuses to include in the filter.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PENDING</code>: The operation has been requested, but not yet initiated.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IN_PROGRESS</code>: The operation is currently in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUCCESS</code>: The operation has successfully completed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code>: The operation has failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CANCEL_IN_PROGRESS</code>: The operation is currently in the process of being\n          canceled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CANCEL_COMPLETE</code>: The operation has been canceled.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The operation statuses to include in the filter.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PENDING</code>: The operation has been requested, but not yet initiated.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IN_PROGRESS</code>: The operation is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUCCESS</code>: The operation completed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code>: The operation failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CANCEL_IN_PROGRESS</code>: The operation is in the process of being\n          canceled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CANCEL_COMPLETE</code>: The operation has been canceled.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -1397,8 +1395,7 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 1024
-                },
-                "smithy.api#pattern": "^(.|\\s)*$"
+                }
             }
         },
         "com.amazonaws.cloudcontrol#ThrottlingException": {
@@ -1443,7 +1440,7 @@
                     "code": "TypeNotFoundException",
                     "httpResponseCode": 404
                 },
-                "smithy.api#documentation": "<p>The specified extension does not exist in the CloudFormation registry.</p>",
+                "smithy.api#documentation": "<p>The specified extension doesn't exist in the CloudFormation registry.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
             }
@@ -1470,7 +1467,7 @@
                     "code": "UnsupportedActionException",
                     "httpResponseCode": 405
                 },
-                "smithy.api#documentation": "<p>The specified resource does not support this resource operation.</p>",
+                "smithy.api#documentation": "<p>The specified resource doesn't support this resource operation.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 405
             }
@@ -1543,7 +1540,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the specified property values in the resource.</p>\n         <p>You specify your resource property updates as a list of patch operations contained in a\n      JSON patch document that adheres to the <a href=\"https://datatracker.ietf.org/doc/html/rfc6902\">\n               <i>RFC 6902 - JavaScript Object\n          Notation (JSON) Patch</i>\n            </a> standard.</p>\n         <p>For details on how Cloud Control API performs resource update operations, see <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-update.html\">Updating a resource</a> in the <i>Amazon Web Services Cloud Control API User Guide</i>.</p>\n         <p>After you have initiated a resource update request, you can monitor the progress of your\n      request by calling <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_GetResourceRequestStatus.html\">GetResourceRequestStatus</a> using the <code>RequestToken</code> of the\n        <code>ProgressEvent</code> returned by <code>UpdateResource</code>.</p>\n         <p>For more information about the properties of a specific resource, refer to the related\n      topic for the resource in the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">Resource and property types reference</a> in the <i>Amazon Web Services\n        CloudFormation Users Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Updates the specified property values in the resource.</p>\n         <p>You specify your resource property updates as a list of patch operations contained in a\n      JSON patch document that adheres to the <a href=\"https://datatracker.ietf.org/doc/html/rfc6902\">\n               <i>RFC 6902 - JavaScript Object\n          Notation (JSON) Patch</i>\n            </a> standard.</p>\n         <p>For details on how Cloud Control API performs resource update operations, see <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-update.html\">Updating a resource</a> in the <i>Amazon Web Services Cloud Control API User Guide</i>.</p>\n         <p>After you have initiated a resource update request, you can monitor the progress of your\n      request by calling <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_GetResourceRequestStatus.html\">GetResourceRequestStatus</a> using the <code>RequestToken</code> of the\n        <code>ProgressEvent</code> returned by <code>UpdateResource</code>.</p>\n         <p>For more information about the properties of a specific resource, refer to the related\n      topic for the resource in the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">Resource and property types reference</a> in the <i>CloudFormation Users Guide</i>.</p>"
             }
         },
         "com.amazonaws.cloudcontrol#UpdateResourceInput": {
@@ -1565,7 +1562,7 @@
                 "RoleArn": {
                     "target": "com.amazonaws.cloudcontrol#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) for Cloud Control API to use when performing this resource operation. The role specified must have the permissions required for this operation. The necessary permissions for each event handler are defined in the <code>\n               <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-handlers\">handlers</a>\n            </code> section of the <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html\">resource type definition schema</a>.</p>\n         <p>If you do not specify a role, Cloud Control API uses a temporary session created using your Amazon Web Services user credentials.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations.html#resource-operations-permissions\">Specifying credentials</a> in the <i>Amazon Web Services Cloud Control API User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role for Cloud Control API to use when performing this resource operation. The role specified must have the permissions required for this operation. The necessary permissions for each event handler are defined in the <code>\n               <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-handlers\">handlers</a>\n            </code> section of the <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html\">resource type definition schema</a>.</p>\n         <p>If you do not specify a role, Cloud Control API uses a temporary session created using your Amazon Web Services user credentials.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations.html#resource-operations-permissions\">Specifying credentials</a> in the <i>Amazon Web Services Cloud Control API User Guide</i>.</p>"
                     }
                 },
                 "ClientToken": {
@@ -1578,7 +1575,7 @@
                 "Identifier": {
                     "target": "com.amazonaws.cloudcontrol#Identifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the resource.</p>\n         <p>You can specify the primary identifier, or any secondary identifier defined for the resource type in its resource schema. You can only specify one identifier. Primary identifiers can be specified as a string or JSON; secondary identifiers must be specified as JSON.</p>\n         <p>For compound primary identifiers (that is, one that consists of multiple resource properties strung together), to specify the primary identifier as a string, list the property values <i>in the order they are specified</i> in the primary identifier definition, separated by <code>|</code>. </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-identifier.html\">Identifying resources</a> in the <i>Amazon Web Services Cloud Control API User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The identifier for the resource.</p>\n         <p>You can specify the primary identifier, or any secondary identifier defined for the resource type in its resource schema. You can only specify one identifier. Primary identifiers can be specified as a string or JSON; secondary identifiers must be specified as JSON.</p>\n         <p>For compound primary identifiers (that is, one that consists of multiple resource properties strung together), to specify the primary identifier as a string, list the property values <i>in the order they are specified</i> in the primary identifier definition, separated by <code>|</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-identifier.html\">Identifying resources</a> in the <i>Amazon Web Services Cloud Control API User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },

@@ -3,21 +3,6 @@
     "shapes": {
         "com.amazonaws.grafana#AWSGrafanaControlPlane": {
             "type": "service",
-            "version": "2020-08-18",
-            "resources": [
-                {
-                    "target": "com.amazonaws.grafana#Authentication"
-                },
-                {
-                    "target": "com.amazonaws.grafana#License"
-                },
-                {
-                    "target": "com.amazonaws.grafana#Permission"
-                },
-                {
-                    "target": "com.amazonaws.grafana#Workspace"
-                }
-            ],
             "traits": {
                 "aws.api#controlPlane": {},
                 "aws.api#service": {
@@ -51,7 +36,33 @@
                 },
                 "smithy.api#documentation": "<p>Amazon Managed Grafana is a fully managed and secure data visualization service that you can use to \n       instantly query, correlate, and visualize operational metrics, logs, and traces from multiple sources. \n       Amazon Managed Grafana makes it easy to deploy, operate, and scale Grafana, a widely deployed data visualization tool \n       that is popular for its extensible data support.</p>\n         <p>With Amazon Managed Grafana, you create logically isolated Grafana servers called <i>workspaces</i>. In\n        a workspace,  you can create  Grafana dashboards and visualizations to analyze your metrics, logs, and traces without having to\n       build, package, or deploy any hardware to run Grafana servers.  </p>",
                 "smithy.api#title": "Amazon Managed Grafana"
-            }
+            },
+            "version": "2020-08-18",
+            "operations": [
+                {
+                    "target": "com.amazonaws.grafana#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.grafana#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.grafana#UntagResource"
+                }
+            ],
+            "resources": [
+                {
+                    "target": "com.amazonaws.grafana#Authentication"
+                },
+                {
+                    "target": "com.amazonaws.grafana#License"
+                },
+                {
+                    "target": "com.amazonaws.grafana#Permission"
+                },
+                {
+                    "target": "com.amazonaws.grafana#Workspace"
+                }
+            ]
         },
         "com.amazonaws.grafana#AccessDeniedException": {
             "type": "structure",
@@ -431,7 +442,7 @@
                 "permissionType": {
                     "target": "com.amazonaws.grafana#PermissionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>If you specify <code>Service Managed</code>, Amazon Managed Grafana automatically creates\n         the IAM roles and provisions the permissions that the workspace needs to use\n            Amazon Web Services data sources and notification channels.</p>\n         <p>If you specify <code>CUSTOMER_MANAGED</code>, you will manage those roles and\n         permissions yourself. If you are creating this workspace in a member account of an\n         organization that is not a delegated administrator account, and you want the workspace to access data sources in other Amazon Web Services\n         accounts in the organization, you must choose <code>CUSTOMER_MANAGED</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html\">Amazon Managed Grafana permissions and policies for\n         Amazon Web Services data sources and notification channels</a>\n         </p>",
+                        "smithy.api#documentation": "<p>If you specify <code>SERVICE_MANAGED</code> on AWS Grafana console, Amazon Managed Grafana automatically creates\n         the IAM roles and provisions the permissions that the workspace needs to use\n         Amazon Web Services data sources and notification channels. In CLI mode, the permissionType <code>SERVICE_MANAGED</code> will not create the IAM role \n         for you.</p> \n         <p>If you specify <code>CUSTOMER_MANAGED</code>, you will manage those roles and\n         permissions yourself. If you are creating this workspace in a member account of an\n         organization that is not a delegated administrator account, and you want the workspace to access data sources in other Amazon Web Services\n         accounts in the organization, you must choose <code>CUSTOMER_MANAGED</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html\">Amazon Managed Grafana permissions and policies for\n         Amazon Web Services data sources and notification channels</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -450,7 +461,7 @@
                 "workspaceDescription": {
                     "target": "com.amazonaws.grafana#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p>A description for the workspace. This is used only to help you identify this workspace.</p>"
+                        "smithy.api#documentation": "<p>A description for the workspace. This is used only to help you identify this workspace.</p>\n         <p>Pattern: <code>^[\\\\p{L}\\\\p{Z}\\\\p{N}\\\\p{P}]{0,2048}$</code>\n         </p>"
                     }
                 },
                 "workspaceName": {
@@ -474,7 +485,7 @@
                 "workspaceRoleArn": {
                     "target": "com.amazonaws.grafana#IamRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The workspace needs an IAM role that grants permissions to the Amazon Web Services resources that the \n      workspace will view data from. If you already have a role that you want to use, specify it here. If you omit\n      this field and you specify some Amazon Web Services resources in <code>workspaceDataSources</code> or\n         <code>workspaceNotificationDestinations</code>, a new IAM role with the necessary permissions is \n      automatically created.</p>"
+                        "smithy.api#documentation": "<p>The workspace needs an IAM role that grants permissions to the Amazon Web Services resources that the \n      workspace will view data from. If you already have a role that you want to use, specify it here.  The permission type should be set to  <code>CUSTOMER_MANAGED</code>.</p>"
                     }
                 },
                 "authenticationProviders": {
@@ -482,6 +493,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether this workspace uses SAML 2.0, Amazon Web Services Single Sign On, or both to authenticate \n         users for using the Grafana console within a workspace. For more information, \n         see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/authentication-in-AMG.html\">User authentication in \n            Amazon Managed Grafana</a>.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.grafana#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of tags associated with the workspace.</p>"
                     }
                 }
             }
@@ -531,6 +548,16 @@
                         "value": "SITEWISE",
                         "name": "SITEWISE",
                         "documentation": "IoT SiteWise"
+                    },
+                    {
+                        "value": "ATHENA",
+                        "name": "ATHENA",
+                        "documentation": "Amazon Athena"
+                    },
+                    {
+                        "value": "REDSHIFT",
+                        "name": "REDSHIFT",
+                        "documentation": "Redshift"
                     }
                 ]
             }
@@ -1041,6 +1068,65 @@
                 }
             }
         },
+        "com.amazonaws.grafana#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.grafana#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.grafana#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.grafana#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>The <code>ListTagsForResource</code> operation returns the tags that \n         are associated with the Amazon Managed Service for Grafana resource specified by the <code>resourceArn</code>. \n         Currently, the only resource that can be tagged is a workspace. </p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/tags/{resourceArn}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.grafana#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the resource the list of tags are associated with.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.grafana#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "tags": {
+                    "target": "com.amazonaws.grafana#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of tags that are associated with the resource.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.grafana#ListWorkspaces": {
             "type": "operation",
             "input": {
@@ -1455,6 +1541,102 @@
         "com.amazonaws.grafana#StackSetName": {
             "type": "string"
         },
+        "com.amazonaws.grafana#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.grafana#TagKeys": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.grafana#TagKey"
+            }
+        },
+        "com.amazonaws.grafana#TagMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.grafana#TagKey"
+            },
+            "value": {
+                "target": "com.amazonaws.grafana#TagValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.grafana#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.grafana#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.grafana#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.grafana#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>The <code>TagResource</code> operation associates tags with an Amazon Managed Grafana resource. \n         Currently, the only resource that can be tagged is workspaces. </p>\n         <p>If you specify a new tag key for the resource, this tag is appended to the list of tags associated\n         with the resource.  If you specify a tag key that is already associated with the resource, the new tag \n         value that you specify replaces the previous value for that tag.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/tags/{resourceArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.grafana#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the resource the tag is associated with.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.grafana#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of tag keys and values to associate with the resource.  You can associate tag keys only, tags (key and values) only\n      or a combination of tag keys and tags.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.grafana#TagResourceResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.grafana#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
         "com.amazonaws.grafana#ThrottlingException": {
             "type": "structure",
             "members": {
@@ -1491,6 +1673,66 @@
                 "smithy.api#httpError": 429,
                 "smithy.api#retryable": {}
             }
+        },
+        "com.amazonaws.grafana#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.grafana#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.grafana#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.grafana#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>The <code>UntagResource</code> operation removes the association of the tag with the Amazon Managed Grafana resource. \n         </p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/tags/{resourceArn}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.grafana#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the resource the tag association is removed from.  </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tagKeys": {
+                    "target": "com.amazonaws.grafana#TagKeys",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key values of the tag to be removed from the resource.</p>",
+                        "smithy.api#httpQuery": "tagKeys",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.grafana#UntagResourceResponse": {
+            "type": "structure",
+            "members": {}
         },
         "com.amazonaws.grafana#UpdateAction": {
             "type": "string",
@@ -1858,7 +2100,7 @@
                 "id": {
                     "target": "com.amazonaws.grafana#SsoId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the user or group.</p>",
+                        "smithy.api#documentation": "<p>The ID of the user or group.</p>\n         <p>Pattern: <code>^([0-9a-fA-F]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2145,6 +2387,12 @@
                         "smithy.api#documentation": "<p>A structure that describes whether the workspace uses SAML, Amazon Web Services SSO, or both methods\n      for user authentication.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "tags": {
+                    "target": "com.amazonaws.grafana#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of tags associated with the workspace.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2300,6 +2548,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A structure containing information about the authentication methods used in \n         the workspace.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.grafana#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of tags associated with the workspace.</p>"
                     }
                 }
             },
