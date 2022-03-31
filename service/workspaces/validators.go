@@ -230,6 +230,26 @@ func (m *validateOpCreateWorkspaces) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteClientBranding struct {
+}
+
+func (*validateOpDeleteClientBranding) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteClientBranding) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteClientBrandingInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteClientBrandingInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteConnectClientAddIn struct {
 }
 
@@ -345,6 +365,26 @@ func (m *validateOpDeregisterWorkspaceDirectory) HandleInitialize(ctx context.Co
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeregisterWorkspaceDirectoryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeClientBranding struct {
+}
+
+func (*validateOpDescribeClientBranding) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeClientBranding) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeClientBrandingInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeClientBrandingInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -505,6 +545,26 @@ func (m *validateOpDisassociateIpGroups) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDisassociateIpGroupsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpImportClientBranding struct {
+}
+
+func (*validateOpImportClientBranding) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpImportClientBranding) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ImportClientBrandingInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpImportClientBrandingInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -974,6 +1034,10 @@ func addOpCreateWorkspacesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateWorkspaces{}, middleware.After)
 }
 
+func addOpDeleteClientBrandingValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteClientBranding{}, middleware.After)
+}
+
 func addOpDeleteConnectClientAddInValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteConnectClientAddIn{}, middleware.After)
 }
@@ -996,6 +1060,10 @@ func addOpDeleteWorkspaceImageValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpDeregisterWorkspaceDirectoryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeregisterWorkspaceDirectory{}, middleware.After)
+}
+
+func addOpDescribeClientBrandingValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeClientBranding{}, middleware.After)
 }
 
 func addOpDescribeClientPropertiesValidationMiddleware(stack *middleware.Stack) error {
@@ -1028,6 +1096,10 @@ func addOpDisassociateConnectionAliasValidationMiddleware(stack *middleware.Stac
 
 func addOpDisassociateIpGroupsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateIpGroups{}, middleware.After)
+}
+
+func addOpImportClientBrandingValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpImportClientBranding{}, middleware.After)
 }
 
 func addOpImportWorkspaceImageValidationMiddleware(stack *middleware.Stack) error {
@@ -1543,6 +1615,24 @@ func validateOpCreateWorkspacesInput(v *CreateWorkspacesInput) error {
 	}
 }
 
+func validateOpDeleteClientBrandingInput(v *DeleteClientBrandingInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteClientBrandingInput"}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
+	}
+	if v.Platforms == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Platforms"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteConnectClientAddInInput(v *DeleteConnectClientAddInInput) error {
 	if v == nil {
 		return nil
@@ -1631,6 +1721,21 @@ func validateOpDeregisterWorkspaceDirectoryInput(v *DeregisterWorkspaceDirectory
 	invalidParams := smithy.InvalidParamsError{Context: "DeregisterWorkspaceDirectoryInput"}
 	if v.DirectoryId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeClientBrandingInput(v *DescribeClientBrandingInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeClientBrandingInput"}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1754,6 +1859,21 @@ func validateOpDisassociateIpGroupsInput(v *DisassociateIpGroupsInput) error {
 	}
 	if v.GroupIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GroupIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpImportClientBrandingInput(v *ImportClientBrandingInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ImportClientBrandingInput"}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

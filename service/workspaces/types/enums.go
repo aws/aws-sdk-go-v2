@@ -62,6 +62,32 @@ func (AssociationStatus) Values() []AssociationStatus {
 	}
 }
 
+type ClientDeviceType string
+
+// Enum values for ClientDeviceType
+const (
+	ClientDeviceTypeDeviceTypeWindows ClientDeviceType = "DeviceTypeWindows"
+	ClientDeviceTypeDeviceTypeOsx     ClientDeviceType = "DeviceTypeOsx"
+	ClientDeviceTypeDeviceTypeAndroid ClientDeviceType = "DeviceTypeAndroid"
+	ClientDeviceTypeDeviceTypeIos     ClientDeviceType = "DeviceTypeIos"
+	ClientDeviceTypeDeviceTypeLinux   ClientDeviceType = "DeviceTypeLinux"
+	ClientDeviceTypeDeviceTypeWeb     ClientDeviceType = "DeviceTypeWeb"
+)
+
+// Values returns all known values for ClientDeviceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ClientDeviceType) Values() []ClientDeviceType {
+	return []ClientDeviceType{
+		"DeviceTypeWindows",
+		"DeviceTypeOsx",
+		"DeviceTypeAndroid",
+		"DeviceTypeIos",
+		"DeviceTypeLinux",
+		"DeviceTypeWeb",
+	}
+}
+
 type Compute string
 
 // Enum values for Compute

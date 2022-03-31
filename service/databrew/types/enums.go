@@ -94,6 +94,7 @@ const (
 	InputFormatJson    InputFormat = "JSON"
 	InputFormatParquet InputFormat = "PARQUET"
 	InputFormatExcel   InputFormat = "EXCEL"
+	InputFormatOrc     InputFormat = "ORC"
 )
 
 // Values returns all known values for InputFormat. Note that this can be expanded
@@ -105,6 +106,7 @@ func (InputFormat) Values() []InputFormat {
 		"JSON",
 		"PARQUET",
 		"EXCEL",
+		"ORC",
 	}
 }
 

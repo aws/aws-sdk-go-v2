@@ -53,7 +53,7 @@ type CreateResourceInput struct {
 	// about the properties of a specific resource, refer to the related topic for the
 	// resource in the Resource and property types reference
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
-	// in the Amazon Web Services CloudFormation Users Guide.
+	// in the CloudFormation Users Guide.
 	//
 	// This member is required.
 	DesiredState *string
@@ -76,8 +76,8 @@ type CreateResourceInput struct {
 	// in the Amazon Web Services Cloud Control API User Guide.
 	ClientToken *string
 
-	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) for
-	// Cloud Control API to use when performing this resource operation. The role
+	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
+	// for Cloud Control API to use when performing this resource operation. The role
 	// specified must have the permissions required for this operation. The necessary
 	// permissions for each event handler are defined in the handlers
 	// (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-handlers)

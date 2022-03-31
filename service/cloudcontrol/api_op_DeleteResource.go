@@ -68,8 +68,8 @@ type DeleteResourceInput struct {
 	// in the Amazon Web Services Cloud Control API User Guide.
 	ClientToken *string
 
-	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) for
-	// Cloud Control API to use when performing this resource operation. The role
+	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
+	// for Cloud Control API to use when performing this resource operation. The role
 	// specified must have the permissions required for this operation. The necessary
 	// permissions for each event handler are defined in the handlers
 	// (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-handlers)

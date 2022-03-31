@@ -1,0 +1,8 @@
+{
+    "id": "e2a0d255-9451-42d3-8879-13b49d70d764",
+    "type": "feature",
+    "description": "Added APIs that allow you to customize the logo, login message, and help links in the WorkSpaces client login page. To learn more, visit https://docs.aws.amazon.com/workspaces/latest/adminguide/customize-branding.html",
+    "modules": [
+        "service/workspaces"
+    ]
+}

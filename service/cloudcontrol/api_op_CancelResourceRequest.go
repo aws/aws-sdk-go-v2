@@ -15,7 +15,7 @@ import (
 // Canceling resource operation requests
 // (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-manage-requests.html#resource-operations-manage-requests-cancel)
 // in the Amazon Web Services Cloud Control API User Guide. Only resource
-// operations requests with a status of PENDING or IN_PROGRESS can be cancelled.
+// operations requests with a status of PENDING or IN_PROGRESS can be canceled.
 func (c *Client) CancelResourceRequest(ctx context.Context, params *CancelResourceRequestInput, optFns ...func(*Options)) (*CancelResourceRequestOutput, error) {
 	if params == nil {
 		params = &CancelResourceRequestInput{}

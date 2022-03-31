@@ -1381,6 +1381,123 @@ func awsAwsjson11_deserializeOpErrorCreateWorkspaces(response *smithyhttp.Respon
 	}
 }
 
+type awsAwsjson11_deserializeOpDeleteClientBranding struct {
+}
+
+func (*awsAwsjson11_deserializeOpDeleteClientBranding) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpDeleteClientBranding) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorDeleteClientBranding(response, &metadata)
+	}
+	output := &DeleteClientBrandingOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentDeleteClientBrandingOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorDeleteClientBranding(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterValuesException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidParameterValuesException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsjson11_deserializeOpDeleteConnectClientAddIn struct {
 }
 
@@ -2429,6 +2546,123 @@ func awsAwsjson11_deserializeOpErrorDescribeAccountModifications(response *smith
 	switch {
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsjson11_deserializeOpDescribeClientBranding struct {
+}
+
+func (*awsAwsjson11_deserializeOpDescribeClientBranding) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpDescribeClientBranding) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorDescribeClientBranding(response, &metadata)
+	}
+	output := &DescribeClientBrandingOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentDescribeClientBrandingOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorDescribeClientBranding(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterValuesException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidParameterValuesException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -4160,6 +4394,123 @@ func awsAwsjson11_deserializeOpErrorDisassociateIpGroups(response *smithyhttp.Re
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsjson11_deserializeOpImportClientBranding struct {
+}
+
+func (*awsAwsjson11_deserializeOpImportClientBranding) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpImportClientBranding) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorImportClientBranding(response, &metadata)
+	}
+	output := &ImportClientBrandingOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentImportClientBrandingOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorImportClientBranding(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterValuesException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidParameterValuesException(response, errorBody)
+
+	case strings.EqualFold("ResourceLimitExceededException", errorCode):
+		return awsAwsjson11_deserializeErrorResourceLimitExceededException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -8171,6 +8522,78 @@ func awsAwsjson11_deserializeDocumentDedicatedTenancyCidrRangeList(v *[]string, 
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentDefaultClientBrandingAttributes(v **types.DefaultClientBrandingAttributes, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DefaultClientBrandingAttributes
+	if *v == nil {
+		sv = &types.DefaultClientBrandingAttributes{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ForgotPasswordLink":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClientUrl to be of type string, got %T instead", value)
+				}
+				sv.ForgotPasswordLink = ptr.String(jtv)
+			}
+
+		case "LoginMessage":
+			if err := awsAwsjson11_deserializeDocumentLoginMessage(&sv.LoginMessage, value); err != nil {
+				return err
+			}
+
+		case "LogoUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClientUrl to be of type string, got %T instead", value)
+				}
+				sv.LogoUrl = ptr.String(jtv)
+			}
+
+		case "SupportEmail":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClientEmail to be of type string, got %T instead", value)
+				}
+				sv.SupportEmail = ptr.String(jtv)
+			}
+
+		case "SupportLink":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClientUrl to be of type string, got %T instead", value)
+				}
+				sv.SupportLink = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentDefaultWorkspaceCreationProperties(v **types.DefaultWorkspaceCreationProperties, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8796,6 +9219,96 @@ func awsAwsjson11_deserializeDocumentInvalidResourceStateException(v **types.Inv
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentIosClientBrandingAttributes(v **types.IosClientBrandingAttributes, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.IosClientBrandingAttributes
+	if *v == nil {
+		sv = &types.IosClientBrandingAttributes{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ForgotPasswordLink":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClientUrl to be of type string, got %T instead", value)
+				}
+				sv.ForgotPasswordLink = ptr.String(jtv)
+			}
+
+		case "LoginMessage":
+			if err := awsAwsjson11_deserializeDocumentLoginMessage(&sv.LoginMessage, value); err != nil {
+				return err
+			}
+
+		case "Logo2xUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClientUrl to be of type string, got %T instead", value)
+				}
+				sv.Logo2xUrl = ptr.String(jtv)
+			}
+
+		case "Logo3xUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClientUrl to be of type string, got %T instead", value)
+				}
+				sv.Logo3xUrl = ptr.String(jtv)
+			}
+
+		case "LogoUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClientUrl to be of type string, got %T instead", value)
+				}
+				sv.LogoUrl = ptr.String(jtv)
+			}
+
+		case "SupportEmail":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClientEmail to be of type string, got %T instead", value)
+				}
+				sv.SupportEmail = ptr.String(jtv)
+			}
+
+		case "SupportLink":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClientUrl to be of type string, got %T instead", value)
+				}
+				sv.SupportLink = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentIpGroupIdList(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8912,6 +9425,42 @@ func awsAwsjson11_deserializeDocumentIpRuleList(v *[]types.IpRuleItem, value int
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentLoginMessage(v *map[string]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]string
+	if *v == nil {
+		mv = map[string]string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ClientLoginMessage to be of type string, got %T instead", value)
+			}
+			parsedVal = jtv
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
 	return nil
 }
 
@@ -11438,6 +11987,37 @@ func awsAwsjson11_deserializeOpDocumentCreateWorkspacesOutput(v **CreateWorkspac
 	return nil
 }
 
+func awsAwsjson11_deserializeOpDocumentDeleteClientBrandingOutput(v **DeleteClientBrandingOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *DeleteClientBrandingOutput
+	if *v == nil {
+		sv = &DeleteClientBrandingOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeOpDocumentDeleteConnectClientAddInOutput(v **DeleteConnectClientAddInOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -11738,6 +12318,67 @@ func awsAwsjson11_deserializeOpDocumentDescribeAccountOutput(v **DescribeAccount
 					return fmt.Errorf("expected DedicatedTenancySupportResultEnum to be of type string, got %T instead", value)
 				}
 				sv.DedicatedTenancySupport = types.DedicatedTenancySupportResultEnum(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeOpDocumentDescribeClientBrandingOutput(v **DescribeClientBrandingOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *DescribeClientBrandingOutput
+	if *v == nil {
+		sv = &DescribeClientBrandingOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DeviceTypeAndroid":
+			if err := awsAwsjson11_deserializeDocumentDefaultClientBrandingAttributes(&sv.DeviceTypeAndroid, value); err != nil {
+				return err
+			}
+
+		case "DeviceTypeIos":
+			if err := awsAwsjson11_deserializeDocumentIosClientBrandingAttributes(&sv.DeviceTypeIos, value); err != nil {
+				return err
+			}
+
+		case "DeviceTypeLinux":
+			if err := awsAwsjson11_deserializeDocumentDefaultClientBrandingAttributes(&sv.DeviceTypeLinux, value); err != nil {
+				return err
+			}
+
+		case "DeviceTypeOsx":
+			if err := awsAwsjson11_deserializeDocumentDefaultClientBrandingAttributes(&sv.DeviceTypeOsx, value); err != nil {
+				return err
+			}
+
+		case "DeviceTypeWeb":
+			if err := awsAwsjson11_deserializeDocumentDefaultClientBrandingAttributes(&sv.DeviceTypeWeb, value); err != nil {
+				return err
+			}
+
+		case "DeviceTypeWindows":
+			if err := awsAwsjson11_deserializeDocumentDefaultClientBrandingAttributes(&sv.DeviceTypeWindows, value); err != nil {
+				return err
 			}
 
 		default:
@@ -12383,6 +13024,67 @@ func awsAwsjson11_deserializeOpDocumentDisassociateIpGroupsOutput(v **Disassocia
 
 	for key, value := range shape {
 		switch key {
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeOpDocumentImportClientBrandingOutput(v **ImportClientBrandingOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *ImportClientBrandingOutput
+	if *v == nil {
+		sv = &ImportClientBrandingOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DeviceTypeAndroid":
+			if err := awsAwsjson11_deserializeDocumentDefaultClientBrandingAttributes(&sv.DeviceTypeAndroid, value); err != nil {
+				return err
+			}
+
+		case "DeviceTypeIos":
+			if err := awsAwsjson11_deserializeDocumentIosClientBrandingAttributes(&sv.DeviceTypeIos, value); err != nil {
+				return err
+			}
+
+		case "DeviceTypeLinux":
+			if err := awsAwsjson11_deserializeDocumentDefaultClientBrandingAttributes(&sv.DeviceTypeLinux, value); err != nil {
+				return err
+			}
+
+		case "DeviceTypeOsx":
+			if err := awsAwsjson11_deserializeDocumentDefaultClientBrandingAttributes(&sv.DeviceTypeOsx, value); err != nil {
+				return err
+			}
+
+		case "DeviceTypeWeb":
+			if err := awsAwsjson11_deserializeDocumentDefaultClientBrandingAttributes(&sv.DeviceTypeWeb, value); err != nil {
+				return err
+			}
+
+		case "DeviceTypeWindows":
+			if err := awsAwsjson11_deserializeDocumentDefaultClientBrandingAttributes(&sv.DeviceTypeWindows, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 

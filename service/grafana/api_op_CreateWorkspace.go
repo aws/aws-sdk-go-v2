@@ -52,17 +52,18 @@ type CreateWorkspaceInput struct {
 	// This member is required.
 	AuthenticationProviders []types.AuthenticationProviderTypes
 
-	// If you specify Service Managed, Amazon Managed Grafana automatically creates the
-	// IAM roles and provisions the permissions that the workspace needs to use Amazon
-	// Web Services data sources and notification channels. If you specify
-	// CUSTOMER_MANAGED, you will manage those roles and permissions yourself. If you
-	// are creating this workspace in a member account of an organization that is not a
-	// delegated administrator account, and you want the workspace to access data
-	// sources in other Amazon Web Services accounts in the organization, you must
-	// choose CUSTOMER_MANAGED. For more information, see Amazon Managed Grafana
-	// permissions and policies for Amazon Web Services data sources and notification
-	// channels
-	// (https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html)
+	// If you specify SERVICE_MANAGED on AWS Grafana console, Amazon Managed Grafana
+	// automatically creates the IAM roles and provisions the permissions that the
+	// workspace needs to use Amazon Web Services data sources and notification
+	// channels. In CLI mode, the permissionType SERVICE_MANAGED will not create the
+	// IAM role for you. If you specify CUSTOMER_MANAGED, you will manage those roles
+	// and permissions yourself. If you are creating this workspace in a member account
+	// of an organization that is not a delegated administrator account, and you want
+	// the workspace to access data sources in other Amazon Web Services accounts in
+	// the organization, you must choose CUSTOMER_MANAGED. For more information, see
+	// Amazon Managed Grafana permissions and policies for Amazon Web Services data
+	// sources and notification channels
+	// (https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html).
 	//
 	// This member is required.
 	PermissionType types.PermissionType
@@ -80,6 +81,9 @@ type CreateWorkspaceInput struct {
 	// for this workspace.
 	StackSetName *string
 
+	// The list of tags associated with the workspace.
+	Tags map[string]string
+
 	// Specify the Amazon Web Services data sources that you want to be queried in this
 	// workspace. Specifying these data sources here enables Amazon Managed Grafana to
 	// create IAM roles and permissions that allow Amazon Managed Grafana to read data
@@ -90,7 +94,7 @@ type CreateWorkspaceInput struct {
 	WorkspaceDataSources []types.DataSourceType
 
 	// A description for the workspace. This is used only to help you identify this
-	// workspace.
+	// workspace. Pattern: ^[\\p{L}\\p{Z}\\p{N}\\p{P}]{0,2048}$
 	WorkspaceDescription *string
 
 	// The name for the workspace. It does not have to be unique.
@@ -109,10 +113,8 @@ type CreateWorkspaceInput struct {
 
 	// The workspace needs an IAM role that grants permissions to the Amazon Web
 	// Services resources that the workspace will view data from. If you already have a
-	// role that you want to use, specify it here. If you omit this field and you
-	// specify some Amazon Web Services resources in workspaceDataSources or
-	// workspaceNotificationDestinations, a new IAM role with the necessary permissions
-	// is automatically created.
+	// role that you want to use, specify it here. The permission type should be set to
+	// CUSTOMER_MANAGED.
 	WorkspaceRoleArn *string
 
 	noSmithyDocumentSerde

@@ -156,6 +156,88 @@ type ConnectionAliasPermission struct {
 	noSmithyDocumentSerde
 }
 
+// Returns default client branding attributes that were imported. These attributes
+// display on the client login screen. Client branding attributes are public
+// facing. Ensure that you don't include sensitive information.
+type DefaultClientBrandingAttributes struct {
+
+	// The forgotten password link. This is the web address that users can go to if
+	// they forget the password for their WorkSpace.
+	ForgotPasswordLink *string
+
+	// The login message. Specified as a key value pair, in which the key is a locale
+	// and the value is the localized message for that locale. The only key supported
+	// is en_US.
+	LoginMessage map[string]string
+
+	// The logo URL. This is the link where users can download the logo image. The only
+	// supported image format is .png.
+	LogoUrl *string
+
+	// The support email. The company's customer support email address.
+	//
+	// * In each
+	// platform type, the SupportEmail and SupportLink parameters are mutually
+	// exclusive. You can specify one parameter for each platform type, but not
+	// both.
+	//
+	// * The default email is workspaces-feedback@amazon.com.
+	SupportEmail *string
+
+	// The support link. The link for the company's customer support page for their
+	// WorkSpace.
+	//
+	// * In each platform type, the SupportEmail and SupportLink parameters
+	// are mutually exclusive.You can specify one parameter for each platform type, but
+	// not both.
+	//
+	// * The default support link is workspaces-feedback@amazon.com.
+	SupportLink *string
+
+	noSmithyDocumentSerde
+}
+
+// The default client branding attributes to be imported. These attributes display
+// on the client login screen. Client branding attributes are public facing. Ensure
+// that you do not include sensitive information.
+type DefaultImportClientBrandingAttributes struct {
+
+	// The forgotten password link. This is the web address that users can go to if
+	// they forget the password for their WorkSpace.
+	ForgotPasswordLink *string
+
+	// The login message. Specified as a key value pair, in which the key is a locale
+	// and the value is the localized message for that locale. The only key supported
+	// is en_US.
+	LoginMessage map[string]string
+
+	// The logo. This is the link where users can download the logo image. The only
+	// image format accepted is .png.
+	Logo []byte
+
+	// The support email. The company's customer support email address.
+	//
+	// * In each
+	// platform type, the SupportEmail and SupportLink parameters are mutually
+	// exclusive. You can specify one parameter for each platform type, but not
+	// both.
+	//
+	// * The default email is workspaces-feedback@amazon.com.
+	SupportEmail *string
+
+	// The support link. The link for the company's customer support page for their
+	// WorkSpace.
+	//
+	// * In each platform type, the SupportEmail and SupportLink parameters
+	// are mutually exclusive. You can specify one parameter for each platform type,
+	// but not both.
+	//
+	// * The default support link is workspaces-feedback@amazon.com.
+	SupportLink *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes the default values that are used to create WorkSpaces. For more
 // information, see Update Directory Details for Your WorkSpaces
 // (https://docs.aws.amazon.com/workspaces/latest/adminguide/update-directory-details.html).
@@ -239,6 +321,118 @@ type ImagePermission struct {
 	// The identifier of the Amazon Web Services account that an image has been shared
 	// with.
 	SharedAccountId *string
+
+	noSmithyDocumentSerde
+}
+
+// The client branding attributes for iOS device types. These attributes are
+// displayed on the iOS client login screen only. Client branding attributes are
+// public facing. Ensure you do not include sensitive information.
+type IosClientBrandingAttributes struct {
+
+	// The forgotten password link. This is the web address that users can go to if
+	// they forget the password for their WorkSpace.
+	ForgotPasswordLink *string
+
+	// The login message. Specified as a key value pair, in which the key is a locale
+	// and the value is the localized message for that locale. The only key supported
+	// is en_US.
+	LoginMessage map[string]string
+
+	// The @2x version of the logo. This is the higher resolution display that offers a
+	// scale factor of 2.0 (or @2x). For more information about iOS image size and
+	// resolution, see Image Size and Resolution
+	// (https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/image-size-and-resolution/)
+	// in the Apple Human Interface Guidelines.
+	Logo2xUrl *string
+
+	// The @3x version of the logo. This is the higher resolution display that offers a
+	// scale factor of 3.0 (or @3x). For more information about iOS image size and
+	// resolution, see Image Size and Resolution
+	// (https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/image-size-and-resolution/)
+	// in the Apple Human Interface Guidelines.
+	Logo3xUrl *string
+
+	// The logo. This is the link where users can download the logo image. This is the
+	// standard-resolution display that has a 1:1 pixel density (or @1x), where one
+	// pixel is equal to one point.
+	LogoUrl *string
+
+	// The support email. The company's customer support email address.
+	//
+	// * In each
+	// platform type, the SupportEmail and SupportLink parameters are mutually
+	// exclusive. You can specify one parameter for each platform type, but not
+	// both.
+	//
+	// * The default email is workspaces-feedback@amazon.com.
+	SupportEmail *string
+
+	// The support link. The link for the company's customer support page for their
+	// WorkSpace.
+	//
+	// * In each platform type, the SupportEmail and SupportLink parameters
+	// are mutually exclusive. You can specify one parameter for each platform type,
+	// but not both.
+	//
+	// * The default support link is workspaces-feedback@amazon.com.
+	SupportLink *string
+
+	noSmithyDocumentSerde
+}
+
+// The client branding attributes to import for iOS device types. These attributes
+// are displayed on the iOS client login screen. Client branding attributes are
+// public facing. Ensure you do not include sensitive information.
+type IosImportClientBrandingAttributes struct {
+
+	// The forgotten password link. This is the web address that users can go to if
+	// they forget the password for their WorkSpace.
+	ForgotPasswordLink *string
+
+	// The login message. Specified as a key value pair, in which the key is a locale
+	// and the value is the localized message for that locale. The only key supported
+	// is en_US.
+	LoginMessage map[string]string
+
+	// The logo. This is the link where users can download the logo image. This is the
+	// standard-resolution display that has a 1:1 pixel density (or @1x), where one
+	// pixel is equal to one point.
+	Logo []byte
+
+	// The @2x version of the logo. This is the higher resolution display that offers a
+	// scale factor of 2.0 (or @2x). For more information about iOS image size and
+	// resolution, see Image Size and Resolution
+	// (https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/image-size-and-resolution/)
+	// in the Apple Human Interface Guidelines.
+	Logo2x []byte
+
+	// The @3x version of the logo. This is the higher resolution display that offers a
+	// scale factor of 3.0 (or @3x). For more information about iOS image size and
+	// resolution, see Image Size and Resolution
+	// (https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/image-size-and-resolution/)
+	// in the Apple Human Interface Guidelines.
+	Logo3x []byte
+
+	// The support email. The company's customer support email address.
+	//
+	// * In each
+	// platform type, the SupportEmail and SupportLink parameters are mutually
+	// exclusive. You can specify one parameter for each platform type, but not
+	// both.
+	//
+	// * The default email is workspaces-feedback@amazon.com.
+	SupportEmail *string
+
+	// The support link. The link for the company's customer support page for their
+	// WorkSpace.
+	//
+	// * In each platform type, the SupportEmail and SupportLink parameters
+	// are mutually exclusive. You can specify one parameter for each platform type,
+	// but not both.
+	//
+	// * The default support link is workspaces-feedback@amazon.com.
+	SupportLink *string
 
 	noSmithyDocumentSerde
 }
@@ -594,10 +788,8 @@ type WorkspaceCreationProperties struct {
 	// (https://docs.aws.amazon.com/workspaces/latest/adminguide/workspace-maintenance.html).
 	EnableMaintenanceMode *bool
 
-	// Indicates whether Amazon WorkDocs is enabled for your WorkSpaces.
-	//
-	// If WorkDocs
-	// is already enabled for a WorkSpaces directory and you disable it, new WorkSpaces
+	// Indicates whether Amazon WorkDocs is enabled for your WorkSpaces. If WorkDocs is
+	// already enabled for a WorkSpaces directory and you disable it, new WorkSpaces
 	// launched in the directory will not have WorkDocs enabled. However, WorkDocs
 	// remains enabled for any existing WorkSpaces, unless you either disable users'
 	// access to WorkDocs or you delete the WorkDocs site. To disable users' access to

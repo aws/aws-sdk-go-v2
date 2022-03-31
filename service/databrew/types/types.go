@@ -276,7 +276,7 @@ type Dataset struct {
 	noSmithyDocumentSerde
 }
 
-// Represents a dataset paramater that defines type and conditions for a parameter
+// Represents a dataset parameter that defines type and conditions for a parameter
 // in the Amazon S3 path of the dataset.
 type DatasetParameter struct {
 
@@ -422,8 +422,8 @@ type FilesLimit struct {
 	MaxFiles int32
 
 	// A criteria to use for Amazon S3 files sorting before their selection. By default
-	// uses DESCENDING order, i.e. most recent files are selected first.
-	// Anotherpossible value is ASCENDING.
+	// uses DESCENDING order, i.e. most recent files are selected first. Another
+	// possible value is ASCENDING.
 	Order Order
 
 	// A criteria to use for Amazon S3 files sorting before their selection. By default
@@ -982,7 +982,7 @@ type Rule struct {
 	// column name. These values are defined in the SubstitutionMap. If a
 	// CheckExpression starts with a column reference, then ColumnSelectors in the rule
 	// should be null. If ColumnSelectors has been defined, then there should be no
-	// columnn reference in the left side of a condition, for example, is_between :val1
+	// column reference in the left side of a condition, for example, is_between :val1
 	// and :val2. For more information, see Available checks
 	// (https://docs.aws.amazon.com/databrew/latest/dg/profile.data-quality-available-checks.html)
 	//

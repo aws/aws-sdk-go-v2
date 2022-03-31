@@ -17,7 +17,7 @@ import (
 // requests
 // (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-manage-requests.html#resource-operations-manage-requests-list)
 // in the Amazon Web Services Cloud Control API User Guide. Resource operation
-// requests expire after seven days.
+// requests expire after 7 days.
 func (c *Client) ListResourceRequests(ctx context.Context, params *ListResourceRequestsInput, optFns ...func(*Options)) (*ListResourceRequestsOutput, error) {
 	if params == nil {
 		params = &ListResourceRequestsInput{}

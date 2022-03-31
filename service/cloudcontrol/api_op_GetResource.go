@@ -15,8 +15,8 @@ import (
 // details, see Reading a resource's current state
 // (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-read.html).
 // You can use this action to return information about an existing resource in your
-// account and Amazon Web Services Region, whether or not those resources were
-// provisioned using Cloud Control API.
+// account and Amazon Web Services Region, whether those resources were provisioned
+// using Cloud Control API.
 func (c *Client) GetResource(ctx context.Context, params *GetResourceInput, optFns ...func(*Options)) (*GetResourceOutput, error) {
 	if params == nil {
 		params = &GetResourceInput{}
@@ -53,8 +53,8 @@ type GetResourceInput struct {
 	// This member is required.
 	TypeName *string
 
-	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) for
-	// Cloud Control API to use when performing this resource operation. The role
+	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
+	// for Cloud Control API to use when performing this resource operation. The role
 	// specified must have the permissions required for this operation. The necessary
 	// permissions for each event handler are defined in the handlers
 	// (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-handlers)

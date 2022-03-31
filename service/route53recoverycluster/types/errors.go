@@ -7,7 +7,7 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// You don't have sufficient permissions to query the routing control state.
+// You don't have sufficient permissions to perform this action.
 type AccessDeniedException struct {
 	Message *string
 
@@ -92,7 +92,7 @@ func (e *InternalServerException) ErrorMessage() string {
 func (e *InternalServerException) ErrorCode() string             { return "InternalServerException" }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The request references a routing control that was not found.
+// The request references a routing control or control panel that was not found.
 type ResourceNotFoundException struct {
 	Message *string
 
@@ -113,6 +113,31 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The request can't update that many routing control states at the same time. Try
+// again with fewer routing control states.
+type ServiceLimitExceededException struct {
+	Message *string
+
+	ResourceId   *string
+	ResourceType *string
+	LimitCode    *string
+	ServiceCode  *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ServiceLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ServiceLimitExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ServiceLimitExceededException) ErrorCode() string             { return "ServiceLimitExceededException" }
+func (e *ServiceLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was denied because of request throttling.
 type ThrottlingException struct {

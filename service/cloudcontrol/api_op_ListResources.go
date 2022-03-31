@@ -13,10 +13,12 @@ import (
 )
 
 // Returns information about the specified resources. For more information, see
-// Discovering resources in the Amazon Web Services Cloud Control API User Guide.
-// You can use this action to return information about existing resources in your
-// account and Amazon Web Services Region, whether or not those resources were
-// provisioned using Cloud Control API.
+// Discovering resources
+// (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-list.html)
+// in the Amazon Web Services Cloud Control API User Guide. You can use this action
+// to return information about existing resources in your account and Amazon Web
+// Services Region, whether those resources were provisioned using Cloud Control
+// API.
 func (c *Client) ListResources(ctx context.Context, params *ListResourcesInput, optFns ...func(*Options)) (*ListResourcesOutput, error) {
 	if params == nil {
 		params = &ListResourcesInput{}
@@ -39,10 +41,7 @@ type ListResourcesInput struct {
 	// This member is required.
 	TypeName *string
 
-	// The maximum number of results to be returned with a single call. If the number
-	// of available results exceeds this maximum, the response includes a NextToken
-	// value that you can assign to the NextToken request parameter to get the next set
-	// of results. The default is 20.
+	// Reserved.
 	MaxResults *int32
 
 	// If the previous paginated request didn't return all of the remaining results,
@@ -55,8 +54,8 @@ type ListResourcesInput struct {
 	// The resource model to use to select the resources to return.
 	ResourceModel *string
 
-	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) for
-	// Cloud Control API to use when performing this resource operation. The role
+	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
+	// for Cloud Control API to use when performing this resource operation. The role
 	// specified must have the permissions required for this operation. The necessary
 	// permissions for each event handler are defined in the handlers
 	// (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-handlers)
@@ -170,10 +169,7 @@ var _ ListResourcesAPIClient = (*Client)(nil)
 
 // ListResourcesPaginatorOptions is the paginator options for ListResources
 type ListResourcesPaginatorOptions struct {
-	// The maximum number of results to be returned with a single call. If the number
-	// of available results exceeds this maximum, the response includes a NextToken
-	// value that you can assign to the NextToken request parameter to get the next set
-	// of results. The default is 20.
+	// Reserved.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

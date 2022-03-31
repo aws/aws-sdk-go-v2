@@ -247,7 +247,8 @@ type UpdateInstruction struct {
 // A structure that specifies one user or group in the workspace.
 type User struct {
 
-	// The ID of the user or group.
+	// The ID of the user or group. Pattern:
+	// ^([0-9a-fA-F]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$
 	//
 	// This member is required.
 	Id *string
@@ -383,6 +384,9 @@ type WorkspaceDescription struct {
 	// be used for this workspace.
 	StackSetName *string
 
+	// The list of tags associated with the workspace.
+	Tags map[string]string
+
 	// The IAM role that grants permissions to the Amazon Web Services resources that
 	// the workspace will view data from. This role must already exist.
 	WorkspaceRoleArn *string
@@ -439,6 +443,9 @@ type WorkspaceSummary struct {
 	// automatically create IAM roles and permissions for, which allows Amazon Managed
 	// Grafana to use these channels.
 	NotificationDestinations []NotificationDestinationType
+
+	// The list of tags associated with the workspace.
+	Tags map[string]string
 
 	noSmithyDocumentSerde
 }

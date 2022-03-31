@@ -6,10 +6,35 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
+// A routing control, which is a simple on/off switch that you can use to route
+// traffic to cells. When a routing control state is On, traffic flows to a cell.
+// When the state is Off, traffic does not flow.
+type RoutingControl struct {
+
+	// The Amazon Resource Name (ARN) of the control panel where the routing control is
+	// located.
+	ControlPanelArn *string
+
+	// The name of the control panel where the routing control is located.
+	ControlPanelName *string
+
+	// The Amazon Resource Name (ARN) of the routing control.
+	RoutingControlArn *string
+
+	// The name of the routing control.
+	RoutingControlName *string
+
+	// The current state of the routing control. When a routing control state is On,
+	// traffic flows to a cell. When the state is Off, traffic does not flow.
+	RoutingControlState RoutingControlState
+
+	noSmithyDocumentSerde
+}
+
 // A routing control state entry.
 type UpdateRoutingControlStateEntry struct {
 
-	// The Amazon Resource Number (ARN) for a routing control state entry.
+	// The Amazon Resource Name (ARN) for a routing control state entry.
 	//
 	// This member is required.
 	RoutingControlArn *string

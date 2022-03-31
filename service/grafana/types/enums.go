@@ -61,6 +61,10 @@ const (
 	DataSourceTypeTimestream DataSourceType = "TIMESTREAM"
 	// IoT SiteWise
 	DataSourceTypeSitewise DataSourceType = "SITEWISE"
+	// Amazon Athena
+	DataSourceTypeAthena DataSourceType = "ATHENA"
+	// Redshift
+	DataSourceTypeRedshift DataSourceType = "REDSHIFT"
 )
 
 // Values returns all known values for DataSourceType. Note that this can be
@@ -74,6 +78,8 @@ func (DataSourceType) Values() []DataSourceType {
 		"XRAY",
 		"TIMESTREAM",
 		"SITEWISE",
+		"ATHENA",
+		"REDSHIFT",
 	}
 }
 

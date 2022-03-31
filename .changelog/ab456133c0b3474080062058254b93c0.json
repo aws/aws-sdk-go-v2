@@ -1,0 +1,8 @@
+{
+    "id": "ab456133-c0b3-4740-8006-2058254b93c0",
+    "type": "feature",
+    "description": "This release adds tagging support to the Managed Grafana service. New APIs: TagResource, UntagResource and ListTagsForResource. Updates: add optional field tags to support tagging while calling CreateWorkspace.",
+    "modules": [
+        "service/grafana"
+    ]
+}

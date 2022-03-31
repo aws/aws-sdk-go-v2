@@ -26,8 +26,8 @@ func (e *AlreadyExistsException) ErrorMessage() string {
 func (e *AlreadyExistsException) ErrorCode() string             { return "AlreadyExistsException" }
 func (e *AlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified client token has already been used in another resource request. It
-// is best practice for client tokens to be unique for each resource operation
+// The specified client token has already been used in another resource request.
+// It's best practice for client tokens to be unique for each resource operation
 // request. However, client token expire after 36 hours.
 type ClientTokenConflictException struct {
 	Message *string
@@ -88,7 +88,7 @@ func (e *ConcurrentOperationException) ErrorCode() string             { return "
 func (e *ConcurrentOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The resource handler has returned that the downstream service generated an error
-// that does not map to any other handler error code.
+// that doesn't map to any other handler error code.
 type GeneralServiceException struct {
 	Message *string
 
@@ -189,7 +189,7 @@ func (e *InvalidRequestException) ErrorMessage() string {
 func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The resource handler has returned that the request could not be completed due to
+// The resource handler has returned that the request couldn't be completed due to
 // networking issues, such as a failure to receive a response from the server.
 type NetworkFailureException struct {
 	Message *string
@@ -230,7 +230,7 @@ func (e *NotStabilizedException) ErrorCode() string             { return "NotSta
 func (e *NotStabilizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // One or more properties included in this resource operation are defined as
-// create-only, and therefore cannot be updated.
+// create-only, and therefore can't be updated.
 type NotUpdatableException struct {
 	Message *string
 
@@ -249,7 +249,7 @@ func (e *NotUpdatableException) ErrorMessage() string {
 func (e *NotUpdatableException) ErrorCode() string             { return "NotUpdatableException" }
 func (e *NotUpdatableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Cloud Control API has not received a valid response from the resource handler,
+// Cloud Control API hasn't received a valid response from the resource handler,
 // due to a configuration error. This includes issues such as the resource handler
 // returning an invalid response, or timing out.
 type PrivateTypeException struct {
@@ -270,7 +270,7 @@ func (e *PrivateTypeException) ErrorMessage() string {
 func (e *PrivateTypeException) ErrorCode() string             { return "PrivateTypeException" }
 func (e *PrivateTypeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// A resource operation with the specified request token cannot be found.
+// A resource operation with the specified request token can't be found.
 type RequestTokenNotFoundException struct {
 	Message *string
 
@@ -290,8 +290,8 @@ func (e *RequestTokenNotFoundException) ErrorCode() string             { return 
 func (e *RequestTokenNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The resource is temporarily unavailable to be acted upon. For example, if the
-// resource is currently undergoing an operation and cannot be acted upon until
-// that operation is finished.
+// resource is currently undergoing an operation and can't be acted upon until that
+// operation is finished.
 type ResourceConflictException struct {
 	Message *string
 
@@ -310,7 +310,7 @@ func (e *ResourceConflictException) ErrorMessage() string {
 func (e *ResourceConflictException) ErrorCode() string             { return "ResourceConflictException" }
 func (e *ResourceConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// A resource with the specified identifier cannot be found.
+// A resource with the specified identifier can't be found.
 type ResourceNotFoundException struct {
 	Message *string
 
@@ -388,7 +388,7 @@ func (e *ThrottlingException) ErrorMessage() string {
 func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified extension does not exist in the CloudFormation registry.
+// The specified extension doesn't exist in the CloudFormation registry.
 type TypeNotFoundException struct {
 	Message *string
 
@@ -407,7 +407,7 @@ func (e *TypeNotFoundException) ErrorMessage() string {
 func (e *TypeNotFoundException) ErrorCode() string             { return "TypeNotFoundException" }
 func (e *TypeNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified resource does not support this resource operation.
+// The specified resource doesn't support this resource operation.
 type UnsupportedActionException struct {
 	Message *string
 
