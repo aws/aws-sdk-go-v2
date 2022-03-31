@@ -1,7 +1,9 @@
-name: "\U0001F680 Feature Request"
+---
+name: 🚀 Feature Request
 description: Suggest an idea for this project
 title: "(short issue description)"
 labels: [feature-request, needs-triage]
+assignees: []
 body:
   - type: textarea
     id: description
@@ -10,40 +12,38 @@ body:
       description: A clear and concise description of the feature you are proposing.
     validations:
       required: true
-
   - type: textarea
-    id: problem
+    id: use-case
     attributes:
-      label: Is your Feature Request related to a problem?
+      label: Use Case
       description: |
-        A description of the issue, e.g. "I'm always frustrated when..."
+        Why do you need this feature? For example: "I'm always frustrated when..."
     validations:
-      required: true
-
+        required: true
   - type: textarea
     id: solution
     attributes:
       label: Proposed Solution
       description: |
-        Suggest how to implement the addition or change.
+        Suggest how to implement the addition or change. Please include prototype/workaround/sketch/reference implementation.
     validations:
       required: false
-
   - type: textarea
-    id: alternatives
+    id: other
     attributes:
-      label: Describe alternatives you've considered
+      label: Other Information
       description: |
-        Any alternative solutions or features you've considered.
+        Any alternative solutions or features you considered, a more detailed explanation, stack traces, related issues, links for context, etc.
     validations:
       required: false
-
   - type: checkboxes
-    id: acknowledgment
+    id: ack
     attributes:
-      label: Acknowledge
+      label: Acknowledgements
       options:
         - label: I may be able to implement this feature request
+          required: false
+        - label: This feature might incur a breaking change
           required: false
 
   - type: input
