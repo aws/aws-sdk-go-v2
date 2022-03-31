@@ -1,3 +1,7 @@
+# v1.9.0 (2022-03-31)
+
+* **Feature**: SDK release for Cloud Control API in Amazon Web Services China (Beijing) Region, operated by Sinnet, and Amazon Web Services China (Ningxia) Region, operated by NWCD
+
 # v1.8.3 (2022-03-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions

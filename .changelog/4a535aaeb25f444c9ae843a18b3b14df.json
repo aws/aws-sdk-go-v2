@@ -1,8 +1,0 @@
-{
-    "id": "4a535aae-b25f-444c-9ae8-43a18b3b14df",
-    "type": "feature",
-    "description": "Amazon Pinpoint now offers a version 2.0 suite of SMS and voice APIs, providing increased control over sending and configuration. This release is a new SDK for sending SMS and voice messages called PinpointSMSVoiceV2.",
-    "modules": [
-        "service/pinpointsmsvoicev2"
-    ]
-}

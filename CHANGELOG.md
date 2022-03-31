@@ -1,3 +1,29 @@
+# Release (2022-03-31)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue`: [v1.8.4](feature/dynamodb/attributevalue/CHANGELOG.md#v184-2022-03-31)
+  * **Documentation**: Fixes documentation typos in Number type's helper methods
+* `github.com/aws/aws-sdk-go-v2/feature/dynamodbstreams/attributevalue`: [v1.8.4](feature/dynamodbstreams/attributevalue/CHANGELOG.md#v184-2022-03-31)
+  * **Documentation**: Fixes documentation typos in Number type's helper methods
+* `github.com/aws/aws-sdk-go-v2/service/auditmanager`: [v1.18.3](service/auditmanager/CHANGELOG.md#v1183-2022-03-31)
+  * **Documentation**: This release adds documentation updates for Audit Manager. The updates provide data deletion guidance when a customer deregisters Audit Manager or deregisters a delegated administrator.
+* `github.com/aws/aws-sdk-go-v2/service/cloudcontrol`: [v1.9.0](service/cloudcontrol/CHANGELOG.md#v190-2022-03-31)
+  * **Feature**: SDK release for Cloud Control API in Amazon Web Services China (Beijing) Region, operated by Sinnet, and Amazon Web Services China (Ningxia) Region, operated by NWCD
+* `github.com/aws/aws-sdk-go-v2/service/databrew`: [v1.20.0](service/databrew/CHANGELOG.md#v1200-2022-03-31)
+  * **Feature**: This AWS Glue Databrew release adds feature to support ORC as an input format.
+* `github.com/aws/aws-sdk-go-v2/service/grafana`: [v1.8.0](service/grafana/CHANGELOG.md#v180-2022-03-31)
+  * **Feature**: This release adds tagging support to the Managed Grafana service. New APIs: TagResource, UntagResource and ListTagsForResource. Updates: add optional field tags to support tagging while calling CreateWorkspace.
+* `github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2`: [v1.0.0](service/pinpointsmsvoicev2/CHANGELOG.md#v100-2022-03-31)
+  * **Release**: New AWS service client module
+  * **Feature**: Amazon Pinpoint now offers a version 2.0 suite of SMS and voice APIs, providing increased control over sending and configuration. This release is a new SDK for sending SMS and voice messages called PinpointSMSVoiceV2.
+* `github.com/aws/aws-sdk-go-v2/service/route53recoverycluster`: [v1.9.0](service/route53recoverycluster/CHANGELOG.md#v190-2022-03-31)
+  * **Feature**: This release adds a new API "ListRoutingControls" to list routing control states using the highly reliable Route 53 ARC data plane endpoints.
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.17.0](service/workspaces/CHANGELOG.md#v1170-2022-03-31)
+  * **Feature**: Added APIs that allow you to customize the logo, login message, and help links in the WorkSpaces client login page. To learn more, visit https://docs.aws.amazon.com/workspaces/latest/adminguide/customize-branding.html
+
 # Release (2022-03-30)
 
 ## General Highlights

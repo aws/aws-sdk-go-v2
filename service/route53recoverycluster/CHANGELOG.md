@@ -1,3 +1,7 @@
+# v1.9.0 (2022-03-31)
+
+* **Feature**: This release adds a new API "ListRoutingControls" to list routing control states using the highly reliable Route 53 ARC data plane endpoints.
+
 # v1.8.3 (2022-03-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions

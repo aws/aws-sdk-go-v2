@@ -1,3 +1,7 @@
+# v1.8.0 (2022-03-31)
+
+* **Feature**: This release adds tagging support to the Managed Grafana service. New APIs: TagResource, UntagResource and ListTagsForResource. Updates: add optional field tags to support tagging while calling CreateWorkspace.
+
 # v1.7.3 (2022-03-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions

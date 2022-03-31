@@ -1,8 +1,0 @@
-{
-    "id": "ff26eb3c-af9d-4902-bdd3-8564d6d4a317",
-    "type": "feature",
-    "description": "SDK release for Cloud Control API in Amazon Web Services China (Beijing) Region, operated by Sinnet, and Amazon Web Services China (Ningxia) Region, operated by NWCD",
-    "modules": [
-        "service/cloudcontrol"
-    ]
-}

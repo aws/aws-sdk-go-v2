@@ -1,8 +1,0 @@
-{
-    "id": "93a0923b-08a7-48ae-bd42-af46729742f3",
-    "type": "feature",
-    "description": "This release adds a new API \"ListRoutingControls\" to list routing control states using the highly reliable Route 53 ARC data plane endpoints.",
-    "modules": [
-        "service/route53recoverycluster"
-    ]
-}

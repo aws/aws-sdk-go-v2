@@ -1,3 +1,7 @@
+# v1.8.4 (2022-03-31)
+
+* **Documentation**: Fixes documentation typos in Number type's helper methods
+
 # v1.8.3 (2022-03-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions

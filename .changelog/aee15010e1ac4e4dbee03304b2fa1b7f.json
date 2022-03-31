@@ -1,8 +1,0 @@
-{
-    "id": "aee15010-e1ac-4e4d-bee0-3304b2fa1b7f",
-    "type": "documentation",
-    "description": "This release adds documentation updates for Audit Manager. The updates provide data deletion guidance when a customer deregisters Audit Manager or deregisters a delegated administrator.",
-    "modules": [
-        "service/auditmanager"
-    ]
-}

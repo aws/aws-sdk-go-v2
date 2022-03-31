@@ -1,9 +1,0 @@
-{
-    "id": "c582cb29-eab9-4116-aee5-841b9e7a5fe9",
-    "type": "documentation",
-    "description": "Fixes documentation typos in Number type's helper methods",
-    "modules": [
-        "feature/dynamodb/attributevalue",
-        "feature/dynamodbstreams/attributevalue"
-    ]
-}

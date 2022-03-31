@@ -1,3 +1,7 @@
+# v1.17.0 (2022-03-31)
+
+* **Feature**: Added APIs that allow you to customize the logo, login message, and help links in the WorkSpaces client login page. To learn more, visit https://docs.aws.amazon.com/workspaces/latest/adminguide/customize-branding.html
+
 # v1.16.3 (2022-03-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions

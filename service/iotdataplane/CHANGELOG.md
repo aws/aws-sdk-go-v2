@@ -1,3 +1,7 @@
+# v1.12.1 (2022-03-31)
+
+* No change notes available for this release.
+
 # v1.12.0 (2022-03-30)
 
 * **Feature**: Update the default AWS IoT Core Data Plane endpoint from VeriSign signed to ATS signed. If you have firewalls with strict egress rules, configure the rules to grant you access to data-ats.iot.[region].amazonaws.com or data-ats.iot.[region].amazonaws.com.cn.
