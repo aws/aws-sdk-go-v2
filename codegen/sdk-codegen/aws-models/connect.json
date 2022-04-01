@@ -7204,6 +7204,10 @@
                     {
                         "value": "EARLY_MEDIA",
                         "name": "EARLY_MEDIA"
+                    },
+                    {
+                        "value": "MULTI_PARTY_CONFERENCE",
+                        "name": "MULTI_PARTY_CONFERENCE"
                     }
                 ]
             }
@@ -13390,7 +13394,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Ends the specified contact. This call does not work for the following initiation methods:</p>\n         <ul>\n            <li>\n               <p>CALLBACK</p>\n            </li>\n            <li>\n               <p>DISCONNECT</p>\n            </li>\n            <li>\n               <p>TRANSFER</p>\n            </li>\n            <li>\n               <p>QUEUE_TRANSFER</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Ends the specified contact. This call does not work for the following initiation methods:</p>\n         <ul>\n            <li>\n               <p>DISCONNECT</p>\n            </li>\n            <li>\n               <p>TRANSFER</p>\n            </li>\n            <li>\n               <p>QUEUE_TRANSFER</p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/contact/stop",
