@@ -42,3 +42,9 @@ region = us-east-1
 [ignored-profile]
 region = ap-east-1
 
+[profile sso-session-test]
+sso_session = dev-session
+
+[sso-session dev-session]
+sso_region = us-west-2
+sso_start_url =  https://example.aws/start

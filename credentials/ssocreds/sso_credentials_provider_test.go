@@ -3,6 +3,8 @@ package ssocreds
 import (
 	"context"
 	"fmt"
+	"path/filepath"
+	"strings"
 	"testing"
 	"time"
 
@@ -53,19 +55,15 @@ func (m mockClient) GetRoleCredentials(ctx context.Context, params *sso.GetRoleC
 	return m.Response(m)
 }
 
-func swapCacheLocation(dir string) func() {
-	original := defaultCacheLocation
-	defaultCacheLocation = func() string {
-		return dir
-	}
-	return func() {
-		defaultCacheLocation = original
-	}
-}
-
 func TestProvider(t *testing.T) {
-	restoreCache := swapCacheLocation("testdata")
-	defer restoreCache()
+	origHomeDir := osUserHomeDur
+	defer func() {
+		osUserHomeDur = origHomeDir
+	}()
+
+	osUserHomeDur = func() (string, error) {
+		return "testdata", nil
+	}
 
 	restoreTime := sdk.TestingUseReferenceTime(time.Date(2021, 01, 19, 19, 50, 0, 0, time.UTC))
 	defer restoreTime()
@@ -78,12 +76,12 @@ func TestProvider(t *testing.T) {
 		StartURL  string
 		Options   []func(*Options)
 
-		ExpectedErr         bool
+		ExpectedErr         string
 		ExpectedCredentials aws.Credentials
 	}{
 		"missing required parameter values": {
 			StartURL:    "https://invalid-required",
-			ExpectedErr: true,
+			ExpectedErr: "cached SSO token must contain accessToken and expiresAt fields",
 		},
 		"valid required parameter values": {
 			Client: mockClient{
@@ -114,9 +112,43 @@ func TestProvider(t *testing.T) {
 				Source:          ProviderName,
 			},
 		},
+		"custom cached token file": {
+			Client: mockClient{
+				ExpectedAccountID:   "012345678901",
+				ExpectedRoleName:    "TestRole",
+				ExpectedAccessToken: "dGhpcyBpcyBub3QgYSByZWFsIHZhbHVl",
+				Response: func(mock mockClient) (*sso.GetRoleCredentialsOutput, error) {
+					return &sso.GetRoleCredentialsOutput{
+						RoleCredentials: &types.RoleCredentials{
+							AccessKeyId:     aws.String("AccessKey"),
+							SecretAccessKey: aws.String("SecretKey"),
+							SessionToken:    aws.String("SessionToken"),
+							Expiration:      1611177743123,
+						},
+					}, nil
+				},
+			},
+			Options: []func(*Options){
+				func(o *Options) {
+					o.CachedTokenFilepath = filepath.Join("testdata", "valid_token.json")
+				},
+			},
+			AccountID: "012345678901",
+			Region:    "us-west-2",
+			RoleName:  "TestRole",
+			StartURL:  "ignored value",
+			ExpectedCredentials: aws.Credentials{
+				AccessKeyID:     "AccessKey",
+				SecretAccessKey: "SecretKey",
+				SessionToken:    "SessionToken",
+				CanExpire:       true,
+				Expires:         time.Date(2021, 01, 20, 21, 22, 23, 0.123e9, time.UTC),
+				Source:          ProviderName,
+			},
+		},
 		"expired access token": {
 			StartURL:    "https://expired",
-			ExpectedErr: true,
+			ExpectedErr: "SSO session has expired or is invalid",
 		},
 		"api error": {
 			Client: mockClient{
@@ -131,7 +163,7 @@ func TestProvider(t *testing.T) {
 			Region:      "us-west-2",
 			RoleName:    "TestRole",
 			StartURL:    "https://valid-required-only",
-			ExpectedErr: true,
+			ExpectedErr: "api error",
 		},
 	}
 
@@ -142,8 +174,17 @@ func TestProvider(t *testing.T) {
 			provider := New(tt.Client, tt.AccountID, tt.RoleName, tt.StartURL, tt.Options...)
 
 			credentials, err := provider.Retrieve(context.Background())
-			if (err != nil) != tt.ExpectedErr {
-				t.Errorf("expect error: %v", tt.ExpectedErr)
+			if tt.ExpectedErr != "" {
+				if err == nil {
+					t.Fatalf("expect %v error, got none", tt.ExpectedErr)
+				}
+				if e, a := tt.ExpectedErr, err.Error(); !strings.Contains(a, e) {
+					t.Fatalf("expect %v error, got %v", e, a)
+				}
+				return
+			}
+			if err != nil {
+				t.Fatalf("expect no error, got %v", err)
 			}
 
 			if diff := cmp.Diff(tt.ExpectedCredentials, credentials); len(diff) > 0 {

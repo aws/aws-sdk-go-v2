@@ -125,21 +125,28 @@ func setupCredentialsEndpoints(t *testing.T) (aws.EndpointResolverWithOptions, f
 }
 
 func ssoTestSetup() (fn func(), err error) {
-	dir, err := ioutil.TempDir("", "sso-test")
+	dir, err := ioutil.TempDir(os.TempDir(), "sso-test")
 	if err != nil {
 		return nil, err
 	}
 
+	cleanupTestDir := func() {
+		os.RemoveAll(dir)
+	}
+	defer func() {
+		if err != nil {
+			cleanupTestDir()
+		}
+	}()
+
 	cacheDir := filepath.Join(dir, ".aws", "sso", "cache")
 	err = os.MkdirAll(cacheDir, 0750)
 	if err != nil {
-		os.RemoveAll(dir)
 		return nil, err
 	}
 
 	tokenFile, err := os.Create(filepath.Join(cacheDir, "eb5e43e71ce87dd92ec58903d76debd8ee42aefd.json"))
 	if err != nil {
-		os.RemoveAll(dir)
 		return nil, err
 	}
 
@@ -156,7 +163,6 @@ func ssoTestSetup() (fn func(), err error) {
 		Add(15*time.Minute).
 		Format(time.RFC3339)))
 	if err != nil {
-		os.RemoveAll(dir)
 		return nil, err
 	}
 
@@ -166,8 +172,7 @@ func ssoTestSetup() (fn func(), err error) {
 		os.Setenv("HOME", dir)
 	}
 
-	return func() {
-	}, nil
+	return cleanupTestDir, nil
 }
 
 func TestSharedConfigCredentialSource(t *testing.T) {
@@ -400,17 +405,18 @@ func TestSharedConfigCredentialSource(t *testing.T) {
 				WithEndpointResolverWithOptions(endpointResolver),
 				WithAPIOptions([]func(*middleware.Stack) error{
 					func(stack *middleware.Stack) error {
-						return stack.Initialize.Add(middleware.InitializeMiddlewareFunc("GetRoleArns", func(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler,
-						) (
-							out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-						) {
-							switch v := in.Parameters.(type) {
-							case *sts.AssumeRoleInput:
-								credChain = append(credChain, *v.RoleArn)
-							}
+						return stack.Initialize.Add(middleware.InitializeMiddlewareFunc("GetRoleArns",
+							func(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler,
+							) (
+								out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+							) {
+								switch v := in.Parameters.(type) {
+								case *sts.AssumeRoleInput:
+									credChain = append(credChain, *v.RoleArn)
+								}
 
-							return next.HandleInitialize(ctx, in)
-						}), middleware.After)
+								return next.HandleInitialize(ctx, in)
+							}), middleware.After)
 					},
 				}),
 			}
