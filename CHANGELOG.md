@@ -1,3 +1,9 @@
+# Release (2022-04-01)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.21.0](service/connect/CHANGELOG.md#v1210-2022-04-01)
+  * **Feature**: This release updates these APIs: UpdateInstanceAttribute, DescribeInstanceAttribute and ListInstanceAttributes. You can use it to programmatically enable/disable multi-party conferencing using attribute type MULTI_PARTY_CONFERENCING on the specified Amazon Connect instance.
+
 # Release (2022-03-31)
 
 ## General Highlights

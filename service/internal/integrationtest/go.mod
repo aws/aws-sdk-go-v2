@@ -7,7 +7,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.15.3
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.15.3
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.12.3
-	github.com/aws/aws-sdk-go-v2/service/appstream v1.15.3
+	github.com/aws/aws-sdk-go-v2/service/appstream v1.15.4
 	github.com/aws/aws-sdk-go-v2/service/athena v1.14.3
 	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.22.4
 	github.com/aws/aws-sdk-go-v2/service/batch v1.17.1

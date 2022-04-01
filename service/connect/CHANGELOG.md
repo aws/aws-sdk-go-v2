@@ -1,3 +1,7 @@
+# v1.21.0 (2022-04-01)
+
+* **Feature**: This release updates these APIs: UpdateInstanceAttribute, DescribeInstanceAttribute and ListInstanceAttributes. You can use it to programmatically enable/disable multi-party conferencing using attribute type MULTI_PARTY_CONFERENCING on the specified Amazon Connect instance.
+
 # v1.20.3 (2022-03-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions
