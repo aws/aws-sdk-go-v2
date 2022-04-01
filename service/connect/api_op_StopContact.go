@@ -13,8 +13,6 @@ import (
 // Ends the specified contact. This call does not work for the following initiation
 // methods:
 //
-// * CALLBACK
-//
 // * DISCONNECT
 //
 // * TRANSFER

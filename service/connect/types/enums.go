@@ -385,6 +385,7 @@ const (
 	InstanceAttributeTypeAutoResolveBestVoices InstanceAttributeType = "AUTO_RESOLVE_BEST_VOICES"
 	InstanceAttributeTypeUseCustomTtsVoices    InstanceAttributeType = "USE_CUSTOM_TTS_VOICES"
 	InstanceAttributeTypeEarlyMedia            InstanceAttributeType = "EARLY_MEDIA"
+	InstanceAttributeTypeMultiPartyConference  InstanceAttributeType = "MULTI_PARTY_CONFERENCE"
 )
 
 // Values returns all known values for InstanceAttributeType. Note that this can be
@@ -399,6 +400,7 @@ func (InstanceAttributeType) Values() []InstanceAttributeType {
 		"AUTO_RESOLVE_BEST_VOICES",
 		"USE_CUSTOM_TTS_VOICES",
 		"EARLY_MEDIA",
+		"MULTI_PARTY_CONFERENCE",
 	}
 }
 
