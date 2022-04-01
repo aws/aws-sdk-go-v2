@@ -35,6 +35,8 @@ func TestInteg_00_ListRules(t *testing.T) {
 }
 
 func TestInteg_01_CreateSqlInjectionMatchSet(t *testing.T) {
+	t.Skip("disable waf CreateSqlInjectionMatchSet")
+
 	ctx, cancelFn := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancelFn()
 
