@@ -1,3 +1,7 @@
+# v1.13.0 (2022-04-04)
+
+* **Feature**: SDK release to support tagging for AWS Proton Repository resource
+
 # v1.12.3 (2022-03-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions

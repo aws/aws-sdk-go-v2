@@ -1,3 +1,7 @@
+# v1.14.0 (2022-04-04)
+
+* **Feature**: This release adds ProvisioningArtifictOutputKeys to DescribeProvisioningParameters to reference the outputs of a Provisioned Product and deprecates ProvisioningArtifactOutputs.
+
 # v1.13.3 (2022-03-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions

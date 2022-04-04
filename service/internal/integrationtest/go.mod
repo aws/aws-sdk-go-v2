@@ -50,7 +50,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/health v1.15.3
 	github.com/aws/aws-sdk-go-v2/service/iam v1.18.3
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.12.3
-	github.com/aws/aws-sdk-go-v2/service/iot v1.23.3
+	github.com/aws/aws-sdk-go-v2/service/iot v1.24.0
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.15.3
 	github.com/aws/aws-sdk-go-v2/service/kms v1.16.3
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.21.1
@@ -69,11 +69,11 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.26.3
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.21.3
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.15.4
-	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.13.3
+	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.14.0
 	github.com/aws/aws-sdk-go-v2/service/ses v1.14.3
 	github.com/aws/aws-sdk-go-v2/service/sfn v1.13.3
 	github.com/aws/aws-sdk-go-v2/service/shield v1.16.3
-	github.com/aws/aws-sdk-go-v2/service/sms v1.12.3
+	github.com/aws/aws-sdk-go-v2/service/sms v1.12.4
 	github.com/aws/aws-sdk-go-v2/service/snowball v1.15.3
 	github.com/aws/aws-sdk-go-v2/service/sns v1.17.4
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.18.3

@@ -1,8 +1,0 @@
-{
-    "id": "8d977240-d0ab-46d3-a643-825e6a346571",
-    "type": "feature",
-    "description": "AWS IoT - AWS IoT Device Defender adds support to list metric datapoints collected for IoT devices through the ListMetricValues API",
-    "modules": [
-        "service/iot"
-    ]
-}
