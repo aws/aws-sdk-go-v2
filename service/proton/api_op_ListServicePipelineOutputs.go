@@ -35,7 +35,7 @@ type ListServicePipelineOutputsInput struct {
 	// This member is required.
 	ServiceName *string
 
-	// A token to indicate the location of the next output in the array of outputs,
+	// A token that indicates the location of the next output in the array of outputs,
 	// after the list of outputs that was previously requested.
 	NextToken *string
 
@@ -49,7 +49,7 @@ type ListServicePipelineOutputsOutput struct {
 	// This member is required.
 	Outputs []types.Output
 
-	// A token to indicate the location of the next output in the array of outputs,
+	// A token that indicates the location of the next output in the array of outputs,
 	// after the current requested list of outputs.
 	NextToken *string
 

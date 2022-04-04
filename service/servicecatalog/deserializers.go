@@ -17272,6 +17272,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeProvisioningParametersOutput(v **
 				return err
 			}
 
+		case "ProvisioningArtifactOutputKeys":
+			if err := awsAwsjson11_deserializeDocumentProvisioningArtifactOutputs(&sv.ProvisioningArtifactOutputKeys, value); err != nil {
+				return err
+			}
+
 		case "ProvisioningArtifactOutputs":
 			if err := awsAwsjson11_deserializeDocumentProvisioningArtifactOutputs(&sv.ProvisioningArtifactOutputs, value); err != nil {
 				return err

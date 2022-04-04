@@ -11,13 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Notify Proton of status changes to a provisioned resource when you use pull
-// request provisioning. For more information, see Template bundles
-// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-template-bundles.html).
-// Provisioning by pull request is currently in feature preview and is only usable
-// with Terraform based Proton Templates. To learn more about Amazon Web Services
-// Feature Preview terms (https://aws.amazon.com/service-terms), see section 2 on
-// Beta and Previews.
+// Notify Proton of status changes to a provisioned resource when you use
+// self-managed provisioning. For more information, see Self-managed provisioning
+// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-works-prov-methods.html#ag-works-prov-methods-self)
+// in the Proton Administrator Guide.
 func (c *Client) NotifyResourceDeploymentStatusChange(ctx context.Context, params *NotifyResourceDeploymentStatusChangeInput, optFns ...func(*Options)) (*NotifyResourceDeploymentStatusChangeOutput, error) {
 	if params == nil {
 		params = &NotifyResourceDeploymentStatusChangeInput{}

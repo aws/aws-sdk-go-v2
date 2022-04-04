@@ -1821,6 +1821,11 @@ func validateOpCreateRepositoryInput(v *CreateRepositoryInput) error {
 	if v.ConnectionArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConnectionArn"))
 	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

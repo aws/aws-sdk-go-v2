@@ -1,0 +1,8 @@
+{
+    "id": "29aff763-9c8b-4ef5-b136-bc4f278c9bf0",
+    "type": "documentation",
+    "description": "Revised product update notice for SMS console deprecation.",
+    "modules": [
+        "service/sms"
+    ]
+}

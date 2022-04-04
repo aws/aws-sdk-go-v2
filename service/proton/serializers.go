@@ -4150,6 +4150,13 @@ func awsAwsjson10_serializeOpDocumentCreateRepositoryInput(v *CreateRepositoryIn
 		ok.String(string(v.Provider))
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsAwsjson10_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 

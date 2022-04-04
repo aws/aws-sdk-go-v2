@@ -2470,6 +2470,26 @@ func (m *validateOpListJobExecutionsForThing) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListMetricValues struct {
+}
+
+func (*validateOpListMetricValues) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListMetricValues) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListMetricValuesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListMetricValuesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListPolicyPrincipals struct {
 }
 
@@ -4140,6 +4160,10 @@ func addOpListJobExecutionsForJobValidationMiddleware(stack *middleware.Stack) e
 
 func addOpListJobExecutionsForThingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListJobExecutionsForThing{}, middleware.After)
+}
+
+func addOpListMetricValuesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListMetricValues{}, middleware.After)
 }
 
 func addOpListPolicyPrincipalsValidationMiddleware(stack *middleware.Stack) error {
@@ -8170,6 +8194,30 @@ func validateOpListJobExecutionsForThingInput(v *ListJobExecutionsForThingInput)
 	invalidParams := smithy.InvalidParamsError{Context: "ListJobExecutionsForThingInput"}
 	if v.ThingName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ThingName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListMetricValuesInput(v *ListMetricValuesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListMetricValuesInput"}
+	if v.ThingName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ThingName"))
+	}
+	if v.MetricName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
+	}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	}
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

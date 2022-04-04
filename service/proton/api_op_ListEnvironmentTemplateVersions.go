@@ -44,9 +44,9 @@ type ListEnvironmentTemplateVersionsInput struct {
 	// list.
 	MaxResults *int32
 
-	// A token to indicate the location of the next major or minor version in the array
-	// of major or minor versions of an environment template, after the list of major
-	// or minor versions that was previously requested.
+	// A token that indicates the location of the next major or minor version in the
+	// array of major or minor versions of an environment template, after the list of
+	// major or minor versions that was previously requested.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -59,9 +59,9 @@ type ListEnvironmentTemplateVersionsOutput struct {
 	// This member is required.
 	TemplateVersions []types.EnvironmentTemplateVersionSummary
 
-	// A token to indicate the location of the next major or minor version in the array
-	// of major or minor versions of an environment template, after the list of major
-	// or minor versions that was previously requested.
+	// A token that indicates the location of the next major or minor version in the
+	// array of major or minor versions of an environment template, after the list of
+	// major or minor versions that was previously requested.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

@@ -17,7 +17,7 @@ import (
 )
 
 // Get detail data for a service instance. A service instance is an instantiation
-// of service template, which is running in a specific environment.
+// of service template and it runs in a specific environment.
 func (c *Client) GetServiceInstance(ctx context.Context, params *GetServiceInstanceInput, optFns ...func(*Options)) (*GetServiceInstanceOutput, error) {
 	if params == nil {
 		params = &GetServiceInstanceInput{}

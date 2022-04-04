@@ -33,8 +33,8 @@ type ListEnvironmentTemplatesInput struct {
 	// The maximum number of environment templates to list.
 	MaxResults *int32
 
-	// A token to indicate the location of the next environment template in the array
-	// of environment templates, after the list of environment templates that was
+	// A token that indicates the location of the next environment template in the
+	// array of environment templates, after the list of environment templates that was
 	// previously requested.
 	NextToken *string
 
@@ -48,8 +48,8 @@ type ListEnvironmentTemplatesOutput struct {
 	// This member is required.
 	Templates []types.EnvironmentTemplateSummary
 
-	// A token to indicate the location of the next environment template in the array
-	// of environment templates, after the current requested list of environment
+	// A token that indicates the location of the next environment template in the
+	// array of environment templates, after the current requested list of environment
 	// templates.
 	NextToken *string
 

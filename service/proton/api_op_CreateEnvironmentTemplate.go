@@ -64,8 +64,9 @@ type CreateEnvironmentTemplateInput struct {
 	// provisioned and managed infrastructure.
 	Provisioning types.Provisioning
 
-	// Create tags for your environment template. For more information, see Proton
-	// resources and tagging in the Proton Administrator Guide
+	// An optional list of metadata items that you can associate with the Proton
+	// environment template. A tag is a key-value pair. For more information, see
+	// Proton resources and tagging in the Proton Administrator Guide
 	// (https://docs.aws.amazon.com/proton/latest/adminguide/resources.html) or Proton
 	// User Guide (https://docs.aws.amazon.com/proton/latest/userguide/resources.html).
 	Tags []types.Tag

@@ -40,8 +40,8 @@ type ListServiceInstanceProvisionedResourcesInput struct {
 	// This member is required.
 	ServiceName *string
 
-	// A token to indicate the location of the next provisioned resource in the array
-	// of provisioned resources, after the list of provisioned resources that was
+	// A token that indicates the location of the next provisioned resource in the
+	// array of provisioned resources, after the list of provisioned resources that was
 	// previously requested.
 	NextToken *string
 
@@ -55,8 +55,8 @@ type ListServiceInstanceProvisionedResourcesOutput struct {
 	// This member is required.
 	ProvisionedResources []types.ProvisionedResource
 
-	// A token to indicate the location of the next provisioned resource in the array
-	// of provisioned resources, after the current requested list of provisioned
+	// A token that indicates the location of the next provisioned resource in the
+	// array of provisioned resources, after the current requested list of provisioned
 	// resources.
 	NextToken *string
 

@@ -76,7 +76,15 @@ type DescribeProvisioningParametersOutput struct {
 	// Information about the constraints used to provision the product.
 	ConstraintSummaries []types.ConstraintSummary
 
+	// A list of the keys and descriptions of the outputs. These outputs can be
+	// referenced from a provisioned product launched from this provisioning artifact.
+	ProvisioningArtifactOutputKeys []types.ProvisioningArtifactOutput
+
 	// The output of the provisioning artifact.
+	//
+	// Deprecated: This property is deprecated and returns the Id and Description of
+	// the Provisioning Artifact. Use ProvisioningArtifactOutputKeys instead to get the
+	// Keys and Descriptions of the outputs.
 	ProvisioningArtifactOutputs []types.ProvisioningArtifactOutput
 
 	// Information about the parameters used to provision the product.

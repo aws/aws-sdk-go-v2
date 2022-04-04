@@ -1,0 +1,8 @@
+{
+    "id": "a0faee63-b9c2-423a-ab89-2937bebab037",
+    "type": "feature",
+    "description": "SDK release to support tagging for AWS Proton Repository resource",
+    "modules": [
+        "service/proton"
+    ]
+}

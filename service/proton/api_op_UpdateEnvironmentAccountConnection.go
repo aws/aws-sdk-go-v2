@@ -37,7 +37,7 @@ type UpdateEnvironmentAccountConnectionInput struct {
 	// This member is required.
 	Id *string
 
-	// The Amazon Resource Name (ARN) of the IAM service role that is associated with
+	// The Amazon Resource Name (ARN) of the IAM service role that's associated with
 	// the environment account connection to update.
 	//
 	// This member is required.

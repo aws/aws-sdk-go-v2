@@ -85,8 +85,9 @@ type CreateServiceInput struct {
 	// template doesn't include a service pipeline.
 	RepositoryId *string
 
-	// Create tags for your service. For more information, see Proton resources and
-	// tagging in the Proton Administrator Guide
+	// An optional list of metadata items that you can associate with the Proton
+	// service. A tag is a key-value pair. For more information, see Proton resources
+	// and tagging in the Proton Administrator Guide
 	// (https://docs.aws.amazon.com/proton/latest/adminguide/resources.html) or Proton
 	// User Guide (https://docs.aws.amazon.com/proton/latest/userguide/resources.html).
 	Tags []types.Tag

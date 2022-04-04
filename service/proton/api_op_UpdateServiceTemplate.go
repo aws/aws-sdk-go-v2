@@ -37,7 +37,7 @@ type UpdateServiceTemplateInput struct {
 	// A description of the service template update.
 	Description *string
 
-	// The name of the service template to update as displayed in the developer
+	// The name of the service template to update that's displayed in the developer
 	// interface.
 	DisplayName *string
 

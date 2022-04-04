@@ -179,7 +179,7 @@ type AddThingsToThingGroupParams struct {
 
 	// Specifies if this mitigation action can move the things that triggered the
 	// mitigation action even if they are part of one or more dynamic thing groups.
-	OverrideDynamicGroups bool
+	OverrideDynamicGroups *bool
 
 	noSmithyDocumentSerde
 }
@@ -1178,21 +1178,13 @@ type CustomCodeSigning struct {
 	// The certificate chain.
 	CertificateChain *CodeSigningCertificateChain
 
-	// The hash algorithm used to code sign the file. You can use a string as the
-	// algorithm name if the target over-the-air (OTA) update devices are able to
-	// verify the signature that was generated using the same signature algorithm. For
-	// example, FreeRTOS uses SHA256 or SHA1, so you can pass either of them based on
-	// which was used for generating the signature.
+	// The hash algorithm used to code sign the file.
 	HashAlgorithm *string
 
 	// The signature for the file.
 	Signature *CodeSigningSignature
 
-	// The signature algorithm used to code sign the file. You can use a string as the
-	// algorithm name if the target over-the-air (OTA) update devices are able to
-	// verify the signature that was generated using the same signature algorithm. For
-	// example, FreeRTOS uses ECDSA or RSA, so you can pass either of them based on
-	// which was used for generating the signature.
+	// The signature algorithm used to code sign the file.
 	SignatureAlgorithm *string
 
 	noSmithyDocumentSerde
@@ -2271,6 +2263,18 @@ type ManagedJobTemplateSummary struct {
 
 	// The version for a managed template.
 	TemplateVersion *string
+
+	noSmithyDocumentSerde
+}
+
+// A metric.
+type MetricDatum struct {
+
+	// The time the metric value was reported.
+	Timestamp *time.Time
+
+	// The value reported for the metric.
+	Value *MetricValue
 
 	noSmithyDocumentSerde
 }

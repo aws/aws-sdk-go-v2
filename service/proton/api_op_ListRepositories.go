@@ -33,7 +33,7 @@ type ListRepositoriesInput struct {
 	// The maximum number of repositories to list.
 	MaxResults *int32
 
-	// A token to indicate the location of the next repository in the array of
+	// A token that indicates the location of the next repository in the array of
 	// repositories, after the list of repositories previously requested.
 	NextToken *string
 
@@ -47,7 +47,7 @@ type ListRepositoriesOutput struct {
 	// This member is required.
 	Repositories []types.RepositorySummary
 
-	// A token to indicate the location of the next repository in the array of
+	// A token that indicates the location of the next repository in the array of
 	// repositories, after the current requested list of repositories.
 	NextToken *string
 

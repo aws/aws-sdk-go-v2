@@ -43,9 +43,9 @@ type ListServiceTemplateVersionsInput struct {
 	// The maximum number of major or minor versions of a service template to list.
 	MaxResults *int32
 
-	// A token to indicate the location of the next major or minor version in the array
-	// of major or minor versions of a service template, after the list of major or
-	// minor versions that was previously requested.
+	// A token that indicates the location of the next major or minor version in the
+	// array of major or minor versions of a service template, after the list of major
+	// or minor versions that was previously requested.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -58,9 +58,9 @@ type ListServiceTemplateVersionsOutput struct {
 	// This member is required.
 	TemplateVersions []types.ServiceTemplateVersionSummary
 
-	// A token to indicate the location of the next major or minor version in the array
-	// of major or minor versions of a service template, after the current requested
-	// list of service major or minor versions.
+	// A token that indicates the location of the next major or minor version in the
+	// array of major or minor versions of a service template, after the current
+	// requested list of service major or minor versions.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

@@ -7,17 +7,18 @@ import (
 	"time"
 )
 
-// The Proton pipeline service role and repository data.
+// The Proton pipeline service role and repository data shared across the Amazon
+// Web Services account.
 type AccountSettings struct {
 
-	// The repository that you provide with pull request provisioning. Provisioning by
-	// pull request is currently in feature preview and is only usable with Terraform
-	// based Proton Templates. To learn more about Amazon Web Services Feature Preview
-	// terms (https://aws.amazon.com/service-terms), see section 2 on Beta and
-	// Previews.
+	// The repository configured in the Amazon Web Services account for pipeline
+	// provisioning. Required it if you have environments configured for self-managed
+	// provisioning with services that include pipelines.
 	PipelineProvisioningRepository *RepositoryBranch
 
-	// The Amazon Resource Name (ARN) of the Proton pipeline service role.
+	// The Amazon Resource Name (ARN) of the service role you want to use for
+	// provisioning pipelines. Assumed by Proton for Amazon Web Services-managed
+	// provisioning, and by customer-owned automation for self-managed provisioning.
 	PipelineServiceRoleArn *string
 
 	noSmithyDocumentSerde
@@ -89,12 +90,12 @@ type Environment struct {
 	// This member is required.
 	Name *string
 
-	// The ID of the major version of the environment template.
+	// The major version of the environment template.
 	//
 	// This member is required.
 	TemplateMajorVersion *string
 
-	// The ID of the minor version of the environment template.
+	// The minor version of the environment template.
 	//
 	// This member is required.
 	TemplateMinorVersion *string
@@ -126,11 +127,8 @@ type Environment struct {
 	// provisioned and managed infrastructure.
 	Provisioning Provisioning
 
-	// The repository that you provide with pull request provisioning. Provisioning by
-	// pull request is currently in feature preview and is only usable with Terraform
-	// based Proton Templates. To learn more about Amazon Web Services Feature Preview
-	// terms (https://aws.amazon.com/service-terms), see section 2 on Beta and
-	// Previews.
+	// The infrastructure repository that you use to host your rendered infrastructure
+	// templates for self-managed provisioning.
 	ProvisioningRepository *RepositoryBranch
 
 	// The environment spec.
@@ -508,7 +506,7 @@ type EnvironmentTemplateVersionSummary struct {
 	// This member is required.
 	Status TemplateVersionStatus
 
-	// The name of the version of an environment template.
+	// The name of the environment template.
 	//
 	// This member is required.
 	TemplateName *string
@@ -546,10 +544,11 @@ type ProvisionedResource struct {
 	// The provisioned resource name.
 	Name *string
 
-	// The resource provisioning engine. Provisioning by pull request is currently in
-	// feature preview and is only usable with Terraform based Proton Templates. To
-	// learn more about Amazon Web Services Feature Preview terms
-	// (https://aws.amazon.com/service-terms), see section 2 on Beta and Previews.
+	// The resource provisioning engine. At this time, CLOUDFORMATION can be used for
+	// Amazon Web Services-managed provisioning, and TERRAFORM can be used for
+	// self-managed provisioning. For more information, see Self-managed provisioning
+	// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-works-prov-methods.html#ag-works-prov-methods-self)
+	// in the Proton Administrator Guide.
 	ProvisioningEngine ProvisionedResourceEngine
 
 	noSmithyDocumentSerde
@@ -585,10 +584,7 @@ type Repository struct {
 	noSmithyDocumentSerde
 }
 
-// Detail data for a repository branch. Provisioning by pull request is currently
-// in feature preview and is only usable with Terraform based Proton Templates. To
-// learn more about Amazon Web Services Feature Preview terms
-// (https://aws.amazon.com/service-terms), see section 2 on Beta and Previews.
+// Detail data for a repository branch.
 type RepositoryBranch struct {
 
 	// The Amazon Resource Name (ARN) of the repository branch.
@@ -614,10 +610,7 @@ type RepositoryBranch struct {
 	noSmithyDocumentSerde
 }
 
-// Detail input data for a repository branch. Provisioning by pull request is
-// currently in feature preview and is only usable with Terraform based Proton
-// Templates. To learn more about Amazon Web Services Feature Preview terms
-// (https://aws.amazon.com/service-terms), see section 2 on Beta and Previews.
+// Detail input data for a repository branch.
 type RepositoryBranchInput struct {
 
 	// The repository branch.

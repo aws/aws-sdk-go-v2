@@ -10,8 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Remove a tag from a resource. For more information, see Proton resources and
-// tagging in the Proton Administrator Guide
+// Remove a customer tag from a resource. A tag is a key-value pair of metadata
+// associated with an Proton resource. For more information, see Proton resources
+// and tagging in the Proton Administrator Guide
 // (https://docs.aws.amazon.com/proton/latest/adminguide/resources.html) or Proton
 // User Guide (https://docs.aws.amazon.com/proton/latest/userguide/resources.html).
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
@@ -31,14 +32,13 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the resource that the tag is to be removed
-	// from.
+	// The Amazon Resource Name (ARN) of the resource to remove customer tags from.
 	//
 	// This member is required.
 	ResourceArn *string
 
-	// An array of tag keys indicating the resource tags to be removed from the
-	// resource.
+	// A list of customer tag keys that indicate the customer tags to be removed from
+	// the resource.
 	//
 	// This member is required.
 	TagKeys []string

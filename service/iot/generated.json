@@ -163,6 +163,7 @@
         "api_op_ListJobTemplates.go",
         "api_op_ListJobs.go",
         "api_op_ListManagedJobTemplates.go",
+        "api_op_ListMetricValues.go",
         "api_op_ListMitigationActions.go",
         "api_op_ListOTAUpdates.go",
         "api_op_ListOutgoingCertificates.go",

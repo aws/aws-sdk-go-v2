@@ -1,0 +1,8 @@
+{
+    "id": "580689e3-43e0-4142-bc69-faf9a39e64a6",
+    "type": "feature",
+    "description": "This release adds ProvisioningArtifictOutputKeys to DescribeProvisioningParameters to reference the outputs of a Provisioned Product and deprecates ProvisioningArtifactOutputs.",
+    "modules": [
+        "service/servicecatalog"
+    ]
+}

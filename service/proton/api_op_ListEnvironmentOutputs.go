@@ -35,9 +35,9 @@ type ListEnvironmentOutputsInput struct {
 	// This member is required.
 	EnvironmentName *string
 
-	// A token to indicate the location of the next environment output in the array of
-	// environment outputs, after the list of environment outputs that was previously
-	// requested.
+	// A token that indicates the location of the next environment output in the array
+	// of environment outputs, after the list of environment outputs that was
+	// previously requested.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -50,8 +50,8 @@ type ListEnvironmentOutputsOutput struct {
 	// This member is required.
 	Outputs []types.Output
 
-	// A token to indicate the location of the next environment output in the array of
-	// environment outputs, after the current requested list of environment outputs.
+	// A token that indicates the location of the next environment output in the array
+	// of environment outputs, after the current requested list of environment outputs.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

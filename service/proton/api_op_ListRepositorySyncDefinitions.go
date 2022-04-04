@@ -45,8 +45,8 @@ type ListRepositorySyncDefinitionsInput struct {
 	// This member is required.
 	SyncType types.SyncType
 
-	// A token to indicate the location of the next repository sync definition in the
-	// array of repository sync definitions, after the list of repository sync
+	// A token that indicates the location of the next repository sync definition in
+	// the array of repository sync definitions, after the list of repository sync
 	// definitions previously requested.
 	NextToken *string
 
@@ -60,8 +60,8 @@ type ListRepositorySyncDefinitionsOutput struct {
 	// This member is required.
 	SyncDefinitions []types.RepositorySyncDefinition
 
-	// A token to indicate the location of the next repository sync definition in the
-	// array of repository sync definitions, after the current requested list of
+	// A token that indicates the location of the next repository sync definition in
+	// the array of repository sync definitions, after the current requested list of
 	// repository sync definitions.
 	NextToken *string
 

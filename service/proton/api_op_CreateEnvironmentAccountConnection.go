@@ -44,7 +44,7 @@ type CreateEnvironmentAccountConnectionInput struct {
 	EnvironmentName *string
 
 	// The ID of the management account that accepts or rejects the environment account
-	// connection. You create an manage the Proton environment in this account. If the
+	// connection. You create and manage the Proton environment in this account. If the
 	// management account accepts the environment account connection, Proton can use
 	// the associated IAM role to provision environment infrastructure resources in the
 	// associated environment account.
@@ -64,8 +64,9 @@ type CreateEnvironmentAccountConnectionInput struct {
 	// created.
 	ClientToken *string
 
-	// Tags for your environment account connection. For more information, see Proton
-	// resources and tagging
+	// An optional list of metadata items that you can associate with the Proton
+	// environment account connection. A tag is a key-value pair. For more information,
+	// see Proton resources and tagging
 	// (https://docs.aws.amazon.com/proton/latest/adminguide/resources.html) in the
 	// Proton Administrator Guide.
 	Tags []types.Tag

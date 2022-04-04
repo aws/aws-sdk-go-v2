@@ -39,7 +39,7 @@ type GetTemplateSyncStatusInput struct {
 	// This member is required.
 	TemplateType types.TemplateType
 
-	// The template version.
+	// The template major version.
 	//
 	// This member is required.
 	TemplateVersion *string

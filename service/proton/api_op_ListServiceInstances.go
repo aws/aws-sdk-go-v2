@@ -33,7 +33,7 @@ type ListServiceInstancesInput struct {
 	// The maximum number of service instances to list.
 	MaxResults *int32
 
-	// A token to indicate the location of the next service in the array of service
+	// A token that indicates the location of the next service in the array of service
 	// instances, after the list of service instances that was previously requested.
 	NextToken *string
 
@@ -50,7 +50,7 @@ type ListServiceInstancesOutput struct {
 	// This member is required.
 	ServiceInstances []types.ServiceInstanceSummary
 
-	// A token to indicate the location of the next service instance in the array of
+	// A token that indicates the location of the next service instance in the array of
 	// service instances, after the current requested list of service instances.
 	NextToken *string
 

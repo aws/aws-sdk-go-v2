@@ -36,7 +36,7 @@ type ListEnvironmentsInput struct {
 	// The maximum number of environments to list.
 	MaxResults *int32
 
-	// A token to indicate the location of the next environment in the array of
+	// A token that indicates the location of the next environment in the array of
 	// environments, after the list of environments that was previously requested.
 	NextToken *string
 
@@ -50,7 +50,7 @@ type ListEnvironmentsOutput struct {
 	// This member is required.
 	Environments []types.EnvironmentSummary
 
-	// A token to indicate the location of the next environment in the array of
+	// A token that indicates the location of the next environment in the array of
 	// environments, after the current requested list of environments.
 	NextToken *string
 

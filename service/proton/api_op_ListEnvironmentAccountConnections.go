@@ -45,8 +45,8 @@ type ListEnvironmentAccountConnectionsInput struct {
 	// The maximum number of environment account connections to list.
 	MaxResults *int32
 
-	// A token to indicate the location of the next environment account connection in
-	// the array of environment account connections, after the list of environment
+	// A token that indicates the location of the next environment account connection
+	// in the array of environment account connections, after the list of environment
 	// account connections that was previously requested.
 	NextToken *string
 
@@ -64,9 +64,9 @@ type ListEnvironmentAccountConnectionsOutput struct {
 	// This member is required.
 	EnvironmentAccountConnections []types.EnvironmentAccountConnectionSummary
 
-	// A token to indicate the location of the next environment account connection in
-	// the array of environment account connections, after the current requested list
-	// of environment account connections.
+	// A token that indicates the location of the next environment account connection
+	// in the array of environment account connections, after the current requested
+	// list of environment account connections.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

@@ -29,18 +29,13 @@ func (c *Client) UpdateAccountSettings(ctx context.Context, params *UpdateAccoun
 
 type UpdateAccountSettingsInput struct {
 
-	// The repository that you provide with pull request provisioning. Provisioning by
-	// pull request is currently in feature preview and is only usable with Terraform
-	// based Proton Templates. To learn more about Amazon Web Services Feature Preview
-	// terms (https://aws.amazon.com/service-terms), see section 2 on Beta and
-	// Previews.
+	// A repository for pipeline provisioning. Specify it if you have environments
+	// configured for self-managed provisioning with services that include pipelines.
 	PipelineProvisioningRepository *types.RepositoryBranchInput
 
-	// The Amazon Resource Name (ARN) of the Proton pipeline service role. Provisioning
-	// by pull request is currently in feature preview and is only usable with
-	// Terraform based Proton Templates. To learn more about Amazon Web Services
-	// Feature Preview terms (https://aws.amazon.com/service-terms), see section 2 on
-	// Beta and Previews.
+	// The Amazon Resource Name (ARN) of the service role you want to use for
+	// provisioning pipelines. Assumed by Proton for Amazon Web Services-managed
+	// provisioning, and by customer-owned automation for self-managed provisioning.
 	PipelineServiceRoleArn *string
 
 	noSmithyDocumentSerde
@@ -48,8 +43,8 @@ type UpdateAccountSettingsInput struct {
 
 type UpdateAccountSettingsOutput struct {
 
-	// The Proton pipeline service role repository detail data that's returned by
-	// Proton.
+	// The Proton pipeline service role and repository data shared across the Amazon
+	// Web Services account.
 	//
 	// This member is required.
 	AccountSettings *types.AccountSettings

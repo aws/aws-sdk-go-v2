@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Set up a template for automated template version creation. When a commit is
-// pushed to your registered repository
+// Set up a template to create new template versions automatically. When a commit
+// is pushed to your registered repository
 // (https://docs.aws.amazon.com/proton/latest/APIReference/API_Repository.html),
 // Proton checks for changes to your repository template bundles. If it detects a
-// template bundle change, a new minor or major version of its template is created,
+// template bundle change, a new major or minor version of its template is created,
 // if the version doesn’t already exist. For more information, see Template sync
 // configurations
 // (https://docs.aws.amazon.com/proton/latest/adminguide/ag-template-sync-configs.html)
@@ -42,7 +42,7 @@ type CreateTemplateSyncConfigInput struct {
 	// This member is required.
 	Branch *string
 
-	// The name of your repository, for example myrepos/myrepo.
+	// The name of your repository (for example, myrepos/myrepo).
 	//
 	// This member is required.
 	RepositoryName *string

@@ -51,12 +51,16 @@ type CreateEnvironmentTemplateVersionInput struct {
 	// A description of the new version of an environment template.
 	Description *string
 
-	// To create a new minor version of the environment template, include a major
+	// To create a new minor version of the environment template, include major
 	// Version. To create a new major and minor version of the environment template,
 	// exclude major Version.
 	MajorVersion *string
 
-	// Create tags for a new version of an environment template.
+	// An optional list of metadata items that you can associate with the Proton
+	// environment template version. A tag is a key-value pair. For more information,
+	// see Proton resources and tagging in the Proton Administrator Guide
+	// (https://docs.aws.amazon.com/proton/latest/adminguide/resources.html) or Proton
+	// User Guide (https://docs.aws.amazon.com/proton/latest/userguide/resources.html).
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

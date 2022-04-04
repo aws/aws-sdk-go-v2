@@ -12,7 +12,7 @@ import (
 )
 
 // Create a service template. The administrator creates a service template to
-// define standardized infrastructure and an optional CICD service pipeline.
+// define standardized infrastructure and an optional CI/CD service pipeline.
 // Developers, in turn, select the service template from Proton. If the selected
 // service template includes a service pipeline definition, they provide a link to
 // their source code repository. Proton then deploys and manages the infrastructure
@@ -51,15 +51,16 @@ type CreateServiceTemplateInput struct {
 	// A customer provided encryption key that's used to encrypt data.
 	EncryptionKey *string
 
-	// Proton includes a service pipeline for your service by default. When included,
-	// this parameter indicates that an Proton service pipeline won't be included for
-	// your service. Once specified, this parameter can't be changed. For more
+	// By default, Proton provides a service pipeline for your service. When this
+	// parameter is included, it indicates that an Proton service pipeline isn't
+	// provided for your service. After it's included, it can't be changed. For more
 	// information, see Service template bundles
 	// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-template-bundles.html)
 	// in the Proton Administrator Guide.
 	PipelineProvisioning types.Provisioning
 
-	// Create tags for your service template. For more information, see Proton
+	// An optional list of metadata items that you can associate with the Proton
+	// service template. A tag is a key-value pair. For more information, see Proton
 	// resources and tagging in the Proton Administrator Guide
 	// (https://docs.aws.amazon.com/proton/latest/adminguide/resources.html) or Proton
 	// User Guide (https://docs.aws.amazon.com/proton/latest/userguide/resources.html).

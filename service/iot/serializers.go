@@ -10861,6 +10861,87 @@ func awsRestjson1_serializeOpHttpBindingsListManagedJobTemplatesInput(v *ListMan
 	return nil
 }
 
+type awsRestjson1_serializeOpListMetricValues struct {
+}
+
+func (*awsRestjson1_serializeOpListMetricValues) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListMetricValues) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListMetricValuesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/metric-values")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListMetricValuesInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListMetricValuesInput(v *ListMetricValuesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.DimensionName != nil {
+		encoder.SetQuery("dimensionName").String(*v.DimensionName)
+	}
+
+	if len(v.DimensionValueOperator) > 0 {
+		encoder.SetQuery("dimensionValueOperator").String(string(v.DimensionValueOperator))
+	}
+
+	if v.EndTime != nil {
+		encoder.SetQuery("endTime").String(smithytime.FormatDateTime(*v.EndTime))
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	}
+
+	if v.MetricName != nil {
+		encoder.SetQuery("metricName").String(*v.MetricName)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	if v.StartTime != nil {
+		encoder.SetQuery("startTime").String(smithytime.FormatDateTime(*v.StartTime))
+	}
+
+	if v.ThingName != nil {
+		encoder.SetQuery("thingName").String(*v.ThingName)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpListMitigationActions struct {
 }
 
@@ -17469,9 +17550,9 @@ func awsRestjson1_serializeDocumentAddThingsToThingGroupParams(v *types.AddThing
 	object := value.Object()
 	defer object.Close()
 
-	if v.OverrideDynamicGroups {
+	if v.OverrideDynamicGroups != nil {
 		ok := object.Key("overrideDynamicGroups")
-		ok.Boolean(v.OverrideDynamicGroups)
+		ok.Boolean(*v.OverrideDynamicGroups)
 	}
 
 	if v.ThingGroupNames != nil {

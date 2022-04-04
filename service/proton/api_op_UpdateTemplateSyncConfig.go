@@ -35,7 +35,7 @@ type UpdateTemplateSyncConfigInput struct {
 	// This member is required.
 	Branch *string
 
-	// The name of the repository, for example myrepos/myrepo.
+	// The name of the repository (for example, myrepos/myrepo).
 	//
 	// This member is required.
 	RepositoryName *string

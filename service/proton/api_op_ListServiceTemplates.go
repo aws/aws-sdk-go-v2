@@ -33,7 +33,7 @@ type ListServiceTemplatesInput struct {
 	// The maximum number of service templates to list.
 	MaxResults *int32
 
-	// A token to indicate the location of the next service template in the array of
+	// A token that indicates the location of the next service template in the array of
 	// service templates, after the list of service templates previously requested.
 	NextToken *string
 
@@ -47,7 +47,7 @@ type ListServiceTemplatesOutput struct {
 	// This member is required.
 	Templates []types.ServiceTemplateSummary
 
-	// A token to indicate the location of the next service template in the array of
+	// A token that indicates the location of the next service template in the array of
 	// service templates, after the current requested list of service templates.
 	NextToken *string
 

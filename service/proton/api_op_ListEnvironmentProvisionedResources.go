@@ -35,8 +35,8 @@ type ListEnvironmentProvisionedResourcesInput struct {
 	// This member is required.
 	EnvironmentName *string
 
-	// A token to indicate the location of the next environment provisioned resource in
-	// the array of environment provisioned resources, after the list of environment
+	// A token that indicates the location of the next environment provisioned resource
+	// in the array of environment provisioned resources, after the list of environment
 	// provisioned resources that was previously requested.
 	NextToken *string
 
@@ -50,8 +50,8 @@ type ListEnvironmentProvisionedResourcesOutput struct {
 	// This member is required.
 	ProvisionedResources []types.ProvisionedResource
 
-	// A token to indicate the location of the next environment provisioned resource in
-	// the array of provisioned resources, after the current requested list of
+	// A token that indicates the location of the next environment provisioned resource
+	// in the array of provisioned resources, after the current requested list of
 	// environment provisioned resources.
 	NextToken *string
 

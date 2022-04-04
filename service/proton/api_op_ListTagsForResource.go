@@ -41,7 +41,7 @@ type ListTagsForResourceInput struct {
 	// The maximum number of tags to list.
 	MaxResults *int32
 
-	// A token to indicate the location of the next resource tag in the array of
+	// A token that indicates the location of the next resource tag in the array of
 	// resource tags, after the list of resource tags that was previously requested.
 	NextToken *string
 
@@ -50,12 +50,12 @@ type ListTagsForResourceInput struct {
 
 type ListTagsForResourceOutput struct {
 
-	// An array of resource tags with detail data.
+	// A list of resource tags with detail data.
 	//
 	// This member is required.
 	Tags []types.Tag
 
-	// A token to indicate the location of the next resource tag in the array of
+	// A token that indicates the location of the next resource tag in the array of
 	// resource tags, after the current requested list of resource tags.
 	NextToken *string
 

@@ -62,7 +62,11 @@ type CreateServiceTemplateVersionInput struct {
 	// Version.
 	MajorVersion *string
 
-	// Create tags for a new version of a service template.
+	// An optional list of metadata items that you can associate with the Proton
+	// service template version. A tag is a key-value pair. For more information, see
+	// Proton resources and tagging in the Proton Administrator Guide
+	// (https://docs.aws.amazon.com/proton/latest/adminguide/resources.html) or Proton
+	// User Guide (https://docs.aws.amazon.com/proton/latest/userguide/resources.html).
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

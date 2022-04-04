@@ -33,8 +33,8 @@ type ListServicesInput struct {
 	// The maximum number of services to list.
 	MaxResults *int32
 
-	// A token to indicate the location of the next service in the array of services,
-	// after the list of services that was previously requested.
+	// A token that indicates the location of the next service in the array of
+	// services, after the list of services that was previously requested.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -47,8 +47,8 @@ type ListServicesOutput struct {
 	// This member is required.
 	Services []types.ServiceSummary
 
-	// A token to indicate the location of the next service in the array of services,
-	// after the current requested list of services.
+	// A token that indicates the location of the next service in the array of
+	// services, after the current requested list of services.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
