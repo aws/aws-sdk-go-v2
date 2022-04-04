@@ -514,6 +514,9 @@
                     "target": "com.amazonaws.iot#ListManagedJobTemplates"
                 },
                 {
+                    "target": "com.amazonaws.iot#ListMetricValues"
+                },
+                {
                     "target": "com.amazonaws.iot#ListMitigationActions"
                 },
                 {
@@ -1304,7 +1307,7 @@
                     }
                 },
                 "overrideDynamicGroups": {
-                    "target": "com.amazonaws.iot#OverrideDynamicGroups",
+                    "target": "com.amazonaws.iot#NullableBoolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies if this mitigation action can move the things that triggered the mitigation action even if they are part of one or more dynamic thing groups.</p>"
                     }
@@ -7641,13 +7644,13 @@
                 "hashAlgorithm": {
                     "target": "com.amazonaws.iot#HashAlgorithm",
                     "traits": {
-                        "smithy.api#documentation": "<p>The hash algorithm used to code sign the file. You can use a string as the algorithm name if the target over-the-air (OTA) update devices are able to verify the signature that was generated using the same signature algorithm. For example, FreeRTOS uses <code>SHA256</code> or <code>SHA1</code>, so you can pass either of them based on which was used for generating the signature.</p>"
+                        "smithy.api#documentation": "<p>The hash algorithm used to code sign the file.</p>"
                     }
                 },
                 "signatureAlgorithm": {
                     "target": "com.amazonaws.iot#SignatureAlgorithm",
                     "traits": {
-                        "smithy.api#documentation": "<p>The signature algorithm used to code sign the file. You can use a string as the algorithm name if the target over-the-air (OTA) update devices are able to verify the signature that was generated using the same signature algorithm. For example, FreeRTOS uses <code>ECDSA</code> or <code>RSA</code>, so you can pass either of them based on which was used for generating the signature.</p>"
+                        "smithy.api#documentation": "<p>The signature algorithm used to code sign the file.</p>"
                     }
                 }
             },
@@ -18759,6 +18762,125 @@
                 }
             }
         },
+        "com.amazonaws.iot#ListMetricValues": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot#ListMetricValuesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot#ListMetricValuesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iot#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the values reported for an IoT Device Defender metric (device-side metric, cloud-side metric, or custom metric) \n      by the given thing during the specified time period.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/metric-values",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "metricDatumList",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.iot#ListMetricValuesRequest": {
+            "type": "structure",
+            "members": {
+                "thingName": {
+                    "target": "com.amazonaws.iot#DeviceDefenderThingName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the thing for which security profile metric values are returned.</p>",
+                        "smithy.api#httpQuery": "thingName",
+                        "smithy.api#required": {}
+                    }
+                },
+                "metricName": {
+                    "target": "com.amazonaws.iot#BehaviorMetric",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the security profile metric for which values are returned.</p>",
+                        "smithy.api#httpQuery": "metricName",
+                        "smithy.api#required": {}
+                    }
+                },
+                "dimensionName": {
+                    "target": "com.amazonaws.iot#DimensionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The dimension name.</p>",
+                        "smithy.api#httpQuery": "dimensionName"
+                    }
+                },
+                "dimensionValueOperator": {
+                    "target": "com.amazonaws.iot#DimensionValueOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The dimension value operator.</p>",
+                        "smithy.api#httpQuery": "dimensionValueOperator"
+                    }
+                },
+                "startTime": {
+                    "target": "com.amazonaws.iot#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start of the time period for which metric values are returned.</p>",
+                        "smithy.api#httpQuery": "startTime",
+                        "smithy.api#required": {}
+                    }
+                },
+                "endTime": {
+                    "target": "com.amazonaws.iot#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end of the time period for which metric values are returned.</p>",
+                        "smithy.api#httpQuery": "endTime",
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.iot#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return at one time.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.iot#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iot#ListMetricValuesResponse": {
+            "type": "structure",
+            "members": {
+                "metricDatumList": {
+                    "target": "com.amazonaws.iot#MetricDatumList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data the thing reports for the metric during the specified time period.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.iot#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that can be used to retrieve the next set of results, or <code>null</code> \n        if there are no additional results.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.iot#ListMitigationActions": {
             "type": "operation",
             "input": {
@@ -21756,6 +21878,32 @@
                     "min": 0,
                     "max": 128
                 }
+            }
+        },
+        "com.amazonaws.iot#MetricDatum": {
+            "type": "structure",
+            "members": {
+                "timestamp": {
+                    "target": "com.amazonaws.iot#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the metric value was reported.</p>"
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.iot#MetricValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value reported for the metric.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A metric.</p>"
+            }
+        },
+        "com.amazonaws.iot#MetricDatumList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iot#MetricDatum"
             }
         },
         "com.amazonaws.iot#MetricDimension": {
@@ -30289,7 +30437,7 @@
                     "min": 0,
                     "max": 1000
                 },
-                "smithy.api#pattern": "^[\\p{Graph}\\x20]*$"
+                "smithy.api#pattern": "^[^\\p{Cntrl}]*$"
             }
         },
         "com.amazonaws.iot#Version": {

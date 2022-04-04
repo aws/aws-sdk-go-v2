@@ -31,6 +31,21 @@
     "shapes": {
         "com.amazonaws.servicecatalog#AWS242ServiceCatalogService": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Service Catalog",
+                    "arnNamespace": "servicecatalog",
+                    "cloudFormationName": "ServiceCatalog",
+                    "cloudTrailEventSource": "servicecatalog.amazonaws.com",
+                    "endpointPrefix": "servicecatalog"
+                },
+                "aws.auth#sigv4": {
+                    "name": "servicecatalog"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<fullname>AWS Service Catalog</fullname>\n         <p>\n            <a href=\"https://aws.amazon.com/servicecatalog/\">AWS Service Catalog</a> enables\n         organizations to create and manage catalogs of IT services that are approved for AWS. To\n         get the most out of this documentation, you should be familiar with the terminology\n         discussed in <a href=\"http://docs.aws.amazon.com/servicecatalog/latest/adminguide/what-is_concepts.html\">AWS Service Catalog\n         Concepts</a>.</p>",
+                "smithy.api#title": "AWS Service Catalog"
+            },
             "version": "2015-12-10",
             "operations": [
                 {
@@ -294,22 +309,7 @@
                 {
                     "target": "com.amazonaws.servicecatalog#UpdateTagOption"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Service Catalog",
-                    "arnNamespace": "servicecatalog",
-                    "cloudFormationName": "ServiceCatalog",
-                    "cloudTrailEventSource": "servicecatalog.amazonaws.com",
-                    "endpointPrefix": "servicecatalog"
-                },
-                "aws.auth#sigv4": {
-                    "name": "servicecatalog"
-                },
-                "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<fullname>AWS Service Catalog</fullname>\n         <p>\n            <a href=\"https://aws.amazon.com/servicecatalog/\">AWS Service Catalog</a> enables\n         organizations to create and manage catalogs of IT services that are approved for AWS. To\n         get the most out of this documentation, you should be familiar with the terminology\n         discussed in <a href=\"http://docs.aws.amazon.com/servicecatalog/latest/adminguide/what-is_concepts.html\">AWS Service Catalog\n         Concepts</a>.</p>",
-                "smithy.api#title": "AWS Service Catalog"
-            }
+            ]
         },
         "com.amazonaws.servicecatalog#AcceptLanguage": {
             "type": "string",
@@ -3144,7 +3144,16 @@
                 "ProvisioningArtifactOutputs": {
                     "target": "com.amazonaws.servicecatalog#ProvisioningArtifactOutputs",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "This property is deprecated and returns the Id and Description of the Provisioning Artifact. Use ProvisioningArtifactOutputKeys instead to get the Keys and Descriptions of the outputs."
+                        },
                         "smithy.api#documentation": "<p>The output of the provisioning artifact.</p>"
+                    }
+                },
+                "ProvisioningArtifactOutputKeys": {
+                    "target": "com.amazonaws.servicecatalog#ProvisioningArtifactOutputs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the keys and descriptions of the outputs. These outputs can be referenced from a provisioned product launched from this provisioning artifact.</p>"
                     }
                 }
             }
