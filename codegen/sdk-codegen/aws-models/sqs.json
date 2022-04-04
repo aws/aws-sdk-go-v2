@@ -1246,6 +1246,12 @@
                 ]
             }
         },
+        "com.amazonaws.sqs#MessageSystemAttributeNameList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sqs#MessageSystemAttributeName"
+            }
+        },
         "com.amazonaws.sqs#MessageSystemAttributeNameForSends": {
             "type": "string",
             "traits": {
@@ -1549,7 +1555,7 @@
                     }
                 },
                 "AttributeNames": {
-                    "target": "com.amazonaws.sqs#AttributeNameList",
+                    "target": "com.amazonaws.sqs#MessageSystemAttributeNameList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of attributes that need to be returned along with each message. These attributes\n            include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>All</code> – Returns all values.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ApproximateFirstReceiveTimestamp</code> – Returns the time the message was first received from the queue (<a href=\"http://en.wikipedia.org/wiki/Unix_time\">epoch time</a> in milliseconds).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ApproximateReceiveCount</code> – Returns the number of times a message has been received across all queues but not deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AWSTraceHeader</code> – Returns the X-Ray trace header string.\n            </p>\n            </li>\n            <li>\n               <p>\n                  <code>SenderId</code>\n               </p>\n               <ul>\n                  <li>\n                       <p>For an IAM user, returns the IAM user ID, for example <code>ABCDEFGHI1JKLMNOPQ23R</code>.</p>\n                   </li>\n                  <li>\n                       <p>For an IAM role, returns the IAM role ID, for example <code>ABCDE1F2GH3I4JK5LMNOP:i-a123b456</code>.</p>\n                   </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>SentTimestamp</code> – Returns the time the message was sent to the queue (<a href=\"http://en.wikipedia.org/wiki/Unix_time\">epoch time</a> in milliseconds).</p>\n            </li>\n            <li>\n              <p>\n                  <code>SqsManagedSseEnabled</code> – Enables server-side queue encryption using SQS owned encryption keys. Only one server-side encryption option is supported per queue (e.g. <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-configure-sse-existing-queue.html\">SSE-KMS</a> or <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-configure-sqs-sse-queue.html\">SSE-SQS</a>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>MessageDeduplicationId</code> – Returns the value provided by the\n                    producer that calls the <code>\n                     <a>SendMessage</a>\n                  </code>\n                    action.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MessageGroupId</code> – Returns the value provided by the producer that\n                    calls the <code>\n                     <a>SendMessage</a>\n                  </code> action. Messages with the\n                    same <code>MessageGroupId</code> are returned in sequence.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SequenceNumber</code> – Returns the value provided by Amazon SQS.</p>\n            </li>\n         </ul>",
                         "smithy.api#xmlFlattened": {},
