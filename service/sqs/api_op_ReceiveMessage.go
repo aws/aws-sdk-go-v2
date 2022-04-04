@@ -126,7 +126,7 @@ type ReceiveMessageInput struct {
 	//
 	// * SequenceNumber – Returns the value
 	// provided by Amazon SQS.
-	AttributeNames []types.QueueAttributeName
+	AttributeNames []types.MessageSystemAttributeName
 
 	// The maximum number of messages to return. Amazon SQS never returns more messages
 	// than this value (however, fewer messages might be returned). Valid values: 1 to

@@ -1512,6 +1512,19 @@ func awsAwsquery_serializeDocumentMessageBodySystemAttributeMap(v map[string]typ
 	return nil
 }
 
+func awsAwsquery_serializeDocumentMessageSystemAttributeNameList(v []types.MessageSystemAttributeName, value query.Value) error {
+	if len(v) == 0 {
+		return nil
+	}
+	array := value.Array("member")
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsAwsquery_serializeDocumentMessageSystemAttributeValue(v *types.MessageSystemAttributeValue, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -1929,7 +1942,7 @@ func awsAwsquery_serializeOpDocumentReceiveMessageInput(v *ReceiveMessageInput, 
 
 	if v.AttributeNames != nil {
 		objectKey := object.FlatKey("AttributeName")
-		if err := awsAwsquery_serializeDocumentAttributeNameList(v.AttributeNames, objectKey); err != nil {
+		if err := awsAwsquery_serializeDocumentMessageSystemAttributeNameList(v.AttributeNames, objectKey); err != nil {
 			return err
 		}
 	}
