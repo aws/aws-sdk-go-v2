@@ -235,6 +235,61 @@ func (m *awsAwsjson11_serializeOpCreateLocationFsxLustre) HandleSerialize(ctx co
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpCreateLocationFsxOpenZfs struct {
+}
+
+func (*awsAwsjson11_serializeOpCreateLocationFsxOpenZfs) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpCreateLocationFsxOpenZfs) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateLocationFsxOpenZfsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("FmrsService.CreateLocationFsxOpenZfs")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentCreateLocationFsxOpenZfsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpCreateLocationFsxWindows struct {
 }
 
@@ -935,6 +990,61 @@ func (m *awsAwsjson11_serializeOpDescribeLocationFsxLustre) HandleSerialize(ctx 
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentDescribeLocationFsxLustreInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpDescribeLocationFsxOpenZfs struct {
+}
+
+func (*awsAwsjson11_serializeOpDescribeLocationFsxOpenZfs) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDescribeLocationFsxOpenZfs) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeLocationFsxOpenZfsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("FmrsService.DescribeLocationFsxOpenZfs")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDescribeLocationFsxOpenZfsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2296,6 +2406,34 @@ func awsAwsjson11_serializeDocumentFilterValues(v []string, value smithyjson.Val
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentFsxProtocol(v *types.FsxProtocol, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.NFS != nil {
+		ok := object.Key("NFS")
+		if err := awsAwsjson11_serializeDocumentFsxProtocolNfs(v.NFS, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentFsxProtocolNfs(v *types.FsxProtocolNfs, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MountOptions != nil {
+		ok := object.Key("MountOptions")
+		if err := awsAwsjson11_serializeDocumentNfsMountOptions(v.MountOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentHdfsNameNode(v *types.HdfsNameNode, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2712,6 +2850,44 @@ func awsAwsjson11_serializeOpDocumentCreateLocationFsxLustreInput(v *CreateLocat
 	if v.FsxFilesystemArn != nil {
 		ok := object.Key("FsxFilesystemArn")
 		ok.String(*v.FsxFilesystemArn)
+	}
+
+	if v.SecurityGroupArns != nil {
+		ok := object.Key("SecurityGroupArns")
+		if err := awsAwsjson11_serializeDocumentEc2SecurityGroupArnList(v.SecurityGroupArns, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Subdirectory != nil {
+		ok := object.Key("Subdirectory")
+		ok.String(*v.Subdirectory)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsAwsjson11_serializeDocumentInputTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentCreateLocationFsxOpenZfsInput(v *CreateLocationFsxOpenZfsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FsxFilesystemArn != nil {
+		ok := object.Key("FsxFilesystemArn")
+		ok.String(*v.FsxFilesystemArn)
+	}
+
+	if v.Protocol != nil {
+		ok := object.Key("Protocol")
+		if err := awsAwsjson11_serializeDocumentFsxProtocol(v.Protocol, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.SecurityGroupArns != nil {
@@ -3175,6 +3351,18 @@ func awsAwsjson11_serializeOpDocumentDescribeLocationEfsInput(v *DescribeLocatio
 }
 
 func awsAwsjson11_serializeOpDocumentDescribeLocationFsxLustreInput(v *DescribeLocationFsxLustreInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LocationArn != nil {
+		ok := object.Key("LocationArn")
+		ok.String(*v.LocationArn)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentDescribeLocationFsxOpenZfsInput(v *DescribeLocationFsxOpenZfsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

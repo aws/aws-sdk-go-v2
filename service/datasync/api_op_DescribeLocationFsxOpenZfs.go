@@ -12,26 +12,26 @@ import (
 	"time"
 )
 
-// Returns metadata, such as the path information about an Amazon EFS location.
-func (c *Client) DescribeLocationEfs(ctx context.Context, params *DescribeLocationEfsInput, optFns ...func(*Options)) (*DescribeLocationEfsOutput, error) {
+// Returns metadata about an Amazon FSx for OpenZFS location, such as information
+// about its path.
+func (c *Client) DescribeLocationFsxOpenZfs(ctx context.Context, params *DescribeLocationFsxOpenZfsInput, optFns ...func(*Options)) (*DescribeLocationFsxOpenZfsOutput, error) {
 	if params == nil {
-		params = &DescribeLocationEfsInput{}
+		params = &DescribeLocationFsxOpenZfsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeLocationEfs", params, optFns, c.addOperationDescribeLocationEfsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeLocationFsxOpenZfs", params, optFns, c.addOperationDescribeLocationFsxOpenZfsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DescribeLocationEfsOutput)
+	out := result.(*DescribeLocationFsxOpenZfsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-// DescribeLocationEfsRequest
-type DescribeLocationEfsInput struct {
+type DescribeLocationFsxOpenZfsInput struct {
 
-	// The Amazon Resource Name (ARN) of the EFS location to describe.
+	// The Amazon Resource Name (ARN) of the FSx for OpenZFS location to describe.
 	//
 	// This member is required.
 	LocationArn *string
@@ -39,23 +39,24 @@ type DescribeLocationEfsInput struct {
 	noSmithyDocumentSerde
 }
 
-// DescribeLocationEfsResponse
-type DescribeLocationEfsOutput struct {
+type DescribeLocationFsxOpenZfsOutput struct {
 
-	// The time that the EFS location was created.
+	// The time that the FSx for OpenZFS location was created.
 	CreationTime *time.Time
 
-	// The subnet that DataSync uses to access target EFS file system. The subnet must
-	// have at least one mount target for that file system. The security group that you
-	// provide needs to be able to communicate with the security group on the mount
-	// target in the subnet specified.
-	Ec2Config *types.Ec2Config
-
-	// The Amazon Resource Name (ARN) of the EFS location that was described.
+	// The ARN of the FSx for OpenZFS location that was described.
 	LocationArn *string
 
-	// The URL of the EFS location that was described.
+	// The uniform resource identifier (URI) of the FSx for OpenZFS location that was
+	// described. Example: fsxz://us-west-2.fs-1234567890abcdef02/fsx/folderA/folder
 	LocationUri *string
+
+	// The type of protocol that DataSync uses to access your file system.
+	Protocol *types.FsxProtocol
+
+	// The ARNs of the security groups that are configured for the FSx for OpenZFS file
+	// system.
+	SecurityGroupArns []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -63,12 +64,12 @@ type DescribeLocationEfsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDescribeLocationEfsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeLocationEfs{}, middleware.After)
+func (c *Client) addOperationDescribeLocationFsxOpenZfsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeLocationFsxOpenZfs{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeLocationEfs{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeLocationFsxOpenZfs{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -108,10 +109,10 @@ func (c *Client) addOperationDescribeLocationEfsMiddlewares(stack *middleware.St
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpDescribeLocationEfsValidationMiddleware(stack); err != nil {
+	if err = addOpDescribeLocationFsxOpenZfsValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeLocationEfs(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeLocationFsxOpenZfs(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -126,11 +127,11 @@ func (c *Client) addOperationDescribeLocationEfsMiddlewares(stack *middleware.St
 	return nil
 }
 
-func newServiceMetadataMiddleware_opDescribeLocationEfs(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opDescribeLocationFsxOpenZfs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "datasync",
-		OperationName: "DescribeLocationEfs",
+		OperationName: "DescribeLocationFsxOpenZfs",
 	}
 }

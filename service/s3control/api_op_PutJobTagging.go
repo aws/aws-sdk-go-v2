@@ -63,7 +63,7 @@ import (
 // have permission to perform the s3:PutJobTagging action. Related actions
 // include:
 //
-// * CreatJob
+// * CreateJob
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateJob.html)
 //
 // *

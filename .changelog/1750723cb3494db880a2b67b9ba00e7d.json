@@ -1,0 +1,8 @@
+{
+    "id": "1750723c-b349-4db8-80a2-b67b9ba00e7d",
+    "type": "feature",
+    "description": "Added additional ASFF details for RdsSecurityGroup AutoScalingGroup, ElbLoadBalancer, CodeBuildProject and RedshiftCluster.",
+    "modules": [
+        "service/securityhub"
+    ]
+}

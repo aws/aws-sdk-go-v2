@@ -1,0 +1,8 @@
+{
+    "id": "ef7b711b-e03f-46d3-9256-5b59de5d4ffe",
+    "type": "documentation",
+    "description": "Documentation-only update for doc bug fixes for the S3 Control API docs.",
+    "modules": [
+        "service/s3control"
+    ]
+}

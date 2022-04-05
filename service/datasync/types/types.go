@@ -24,10 +24,10 @@ type AgentListEntry struct {
 	noSmithyDocumentSerde
 }
 
-// The subnet and the security group that DataSync uses to access target EFS file
-// system. The subnet must have at least one mount target for that file system. The
-// security group that you provide needs to be able to communicate with the
-// security group on the mount target in the subnet specified.
+// The subnet that DataSync uses to access target EFS file system. The subnet must
+// have at least one mount target for that file system. The security group that you
+// provide needs to be able to communicate with the security group on the mount
+// target in the subnet specified.
 type Ec2Config struct {
 
 	// The Amazon Resource Names (ARNs) of the security groups that are configured for
@@ -36,8 +36,7 @@ type Ec2Config struct {
 	// This member is required.
 	SecurityGroupArns []string
 
-	// The ARN of the subnet and the security group that DataSync uses to access the
-	// target EFS file system.
+	// The ARN of the subnet that DataSync uses to access the target EFS file system.
 	//
 	// This member is required.
 	SubnetArn *string
@@ -56,6 +55,28 @@ type FilterRule struct {
 	// A single filter string that consists of the patterns to include or exclude. The
 	// patterns are delimited by "|" (that is, a pipe), for example: /folder1|/folder2
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents the protocol that DataSync uses to access your Amazon FSx for OpenZFS
+// file system.
+type FsxProtocol struct {
+
+	// Represents the Network File System (NFS) protocol that DataSync uses to access
+	// your FSx for OpenZFS file system.
+	NFS *FsxProtocolNfs
+
+	noSmithyDocumentSerde
+}
+
+// Represents the Network File System (NFS) protocol that DataSync uses to access
+// your Amazon FSx for OpenZFS file system.
+type FsxProtocolNfs struct {
+
+	// Represents the mount options that are available for DataSync to access an NFS
+	// location.
+	MountOptions *NfsMountOptions
 
 	noSmithyDocumentSerde
 }
@@ -124,14 +145,14 @@ type LocationListEntry struct {
 	// contains a list of locations when the ListLocations
 	// (https://docs.aws.amazon.com/datasync/latest/userguide/API_ListLocations.html)
 	// operation is called. Format: TYPE://GLOBAL_ID/SUBDIR. TYPE designates the type
-	// of location. Valid values: NFS | EFS | S3. GLOBAL_ID is the globally unique
+	// of location (for example, nfs or s3). GLOBAL_ID is the globally unique
 	// identifier of the resource that backs the location. An example for EFS is
 	// us-east-2.fs-abcd1234. An example for Amazon S3 is the bucket name, such as
-	// myBucket. An example for NFS is a valid IPv4 address or a host name compliant
-	// with Domain Name Service (DNS). SUBDIR is a valid file system path, delimited by
-	// forward slashes as is the *nix convention. For NFS and Amazon EFS, it's the
-	// export path to mount the location. For Amazon S3, it's the prefix path that you
-	// mount to and treat as the root of the location.
+	// myBucket. An example for NFS is a valid IPv4 address or a hostname that is
+	// compliant with Domain Name Service (DNS). SUBDIR is a valid file system path,
+	// delimited by forward slashes as is the *nix convention. For NFS and Amazon EFS,
+	// it's the export path to mount the location. For Amazon S3, it's the prefix path
+	// that you mount to and treat as the root of the location.
 	LocationUri *string
 
 	noSmithyDocumentSerde
@@ -398,14 +419,11 @@ type QopConfiguration struct {
 }
 
 // The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
-// that is used to access an Amazon S3 bucket. For detailed information about using
-// such a role, see Creating a Location for Amazon S3 in the DataSync User Guide.
+// used to access an Amazon S3 bucket. For detailed information about using such a
+// role, see Creating a Location for Amazon S3 in the DataSync User Guide.
 type S3Config struct {
 
-	// The Amazon S3 bucket to access. This bucket is used as a parameter in the
-	// CreateLocationS3
-	// (https://docs.aws.amazon.com/datasync/latest/userguide/API_CreateLocationS3.html)
-	// operation.
+	// The ARN of the IAM role for accessing the S3 bucket.
 	//
 	// This member is required.
 	BucketAccessRoleArn *string

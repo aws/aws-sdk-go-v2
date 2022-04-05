@@ -1606,7 +1606,12 @@ type FileSystem struct {
 	// MISCONFIGURED - The file system is in a failed but recoverable state.
 	//
 	// *
-	// UPDATING - The file system is undergoing a customer-initiated update.
+	// MISCONFIGURED_UNAVAILABLE - (Amazon FSx for Windows File Server only) The file
+	// system is currently unavailable due to a change in your Active Directory
+	// configuration.
+	//
+	// * UPDATING - The file system is undergoing a customer-initiated
+	// update.
 	Lifecycle FileSystemLifecycle
 
 	// The configuration for the Amazon FSx for Lustre file system.
@@ -2805,8 +2810,7 @@ type UpdateFileSystemOntapConfiguration struct {
 	FsxAdminPassword *string
 
 	// Specifies the throughput of an FSx for NetApp ONTAP file system, measured in
-	// megabytes per second (MBps). Valid values are 64, 128, 256, 512, 1024, 2048,
-	// 3072, or 4096 MB/s.
+	// megabytes per second (MBps). Valid values are 128, 256, 512, 1024, or 2048 MB/s.
 	ThroughputCapacity *int32
 
 	// A recurring weekly time, in the format D:HH:MM. D is the day of the week, for

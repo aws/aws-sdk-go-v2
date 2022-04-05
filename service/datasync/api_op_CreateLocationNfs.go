@@ -42,7 +42,7 @@ type CreateLocationNfsInput struct {
 
 	// The name of the NFS server. This value is the IP address or Domain Name Service
 	// (DNS) name of the NFS server. An agent that is installed on-premises uses this
-	// host name to mount the NFS server in a network. If you are copying data to or
+	// hostname to mount the NFS server in a network. If you are copying data to or
 	// from your Snowcone device, see NFS Server on Snowcone
 	// (https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone)
 	// for more information. This name must either be DNS-compliant or must be an IP

@@ -11,55 +11,43 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an endpoint for an Amazon FSx for Windows File Server file system.
-func (c *Client) CreateLocationFsxWindows(ctx context.Context, params *CreateLocationFsxWindowsInput, optFns ...func(*Options)) (*CreateLocationFsxWindowsOutput, error) {
+// Creates an endpoint for an Amazon FSx for OpenZFS file system.
+func (c *Client) CreateLocationFsxOpenZfs(ctx context.Context, params *CreateLocationFsxOpenZfsInput, optFns ...func(*Options)) (*CreateLocationFsxOpenZfsOutput, error) {
 	if params == nil {
-		params = &CreateLocationFsxWindowsInput{}
+		params = &CreateLocationFsxOpenZfsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateLocationFsxWindows", params, optFns, c.addOperationCreateLocationFsxWindowsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateLocationFsxOpenZfs", params, optFns, c.addOperationCreateLocationFsxOpenZfsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*CreateLocationFsxWindowsOutput)
+	out := result.(*CreateLocationFsxOpenZfsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type CreateLocationFsxWindowsInput struct {
+type CreateLocationFsxOpenZfsInput struct {
 
-	// The Amazon Resource Name (ARN) for the FSx for Windows File Server file system.
+	// The Amazon Resource Name (ARN) of the FSx for OpenZFS file system.
 	//
 	// This member is required.
 	FsxFilesystemArn *string
 
-	// The password of the user who has the permissions to access files and folders in
-	// the FSx for Windows File Server file system.
+	// The type of protocol that DataSync uses to access your file system.
 	//
 	// This member is required.
-	Password *string
+	Protocol *types.FsxProtocol
 
-	// The ARNs of the security groups that are used to configure the FSx for Windows
-	// File Server file system.
+	// The ARNs of the security groups that are used to configure the FSx for OpenZFS
+	// file system.
 	//
 	// This member is required.
 	SecurityGroupArns []string
 
-	// The user who has the permissions to access files and folders in the FSx for
-	// Windows File Server file system. For information about choosing a user name that
-	// ensures sufficient permissions to files, folders, and metadata, see user.
-	//
-	// This member is required.
-	User *string
-
-	// The name of the Windows domain that the FSx for Windows File Server belongs to.
-	Domain *string
-
-	// A subdirectory in the location's path. This subdirectory in the Amazon FSx for
-	// Windows File Server file system is used to read data from the Amazon FSx for
-	// Windows File Server source location or write data to the FSx for Windows File
-	// Server destination.
+	// A subdirectory in the location's path that must begin with /fsx. DataSync uses
+	// this subdirectory to read or write data (depending on whether the file system is
+	// a source or destination location).
 	Subdirectory *string
 
 	// The key-value pair that represents a tag that you want to add to the resource.
@@ -71,10 +59,9 @@ type CreateLocationFsxWindowsInput struct {
 	noSmithyDocumentSerde
 }
 
-type CreateLocationFsxWindowsOutput struct {
+type CreateLocationFsxOpenZfsOutput struct {
 
-	// The Amazon Resource Name (ARN) of the FSx for Windows File Server file system
-	// location you created.
+	// The ARN of the FSx for OpenZFS file system location that you created.
 	LocationArn *string
 
 	// Metadata pertaining to the operation's result.
@@ -83,12 +70,12 @@ type CreateLocationFsxWindowsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationCreateLocationFsxWindowsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateLocationFsxWindows{}, middleware.After)
+func (c *Client) addOperationCreateLocationFsxOpenZfsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateLocationFsxOpenZfs{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateLocationFsxWindows{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateLocationFsxOpenZfs{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -128,10 +115,10 @@ func (c *Client) addOperationCreateLocationFsxWindowsMiddlewares(stack *middlewa
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpCreateLocationFsxWindowsValidationMiddleware(stack); err != nil {
+	if err = addOpCreateLocationFsxOpenZfsValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateLocationFsxWindows(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateLocationFsxOpenZfs(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -146,11 +133,11 @@ func (c *Client) addOperationCreateLocationFsxWindowsMiddlewares(stack *middlewa
 	return nil
 }
 
-func newServiceMetadataMiddleware_opCreateLocationFsxWindows(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opCreateLocationFsxOpenZfs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "datasync",
-		OperationName: "CreateLocationFsxWindows",
+		OperationName: "CreateLocationFsxOpenZfs",
 	}
 }

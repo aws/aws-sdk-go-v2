@@ -90,6 +90,26 @@ func (m *validateOpCreateLocationFsxLustre) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateLocationFsxOpenZfs struct {
+}
+
+func (*validateOpCreateLocationFsxOpenZfs) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateLocationFsxOpenZfs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateLocationFsxOpenZfsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateLocationFsxOpenZfsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateLocationFsxWindows struct {
 }
 
@@ -345,6 +365,26 @@ func (m *validateOpDescribeLocationFsxLustre) HandleInitialize(ctx context.Conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeLocationFsxLustreInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeLocationFsxOpenZfs struct {
+}
+
+func (*validateOpDescribeLocationFsxOpenZfs) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeLocationFsxOpenZfs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeLocationFsxOpenZfsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeLocationFsxOpenZfsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -786,6 +826,10 @@ func addOpCreateLocationFsxLustreValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpCreateLocationFsxLustre{}, middleware.After)
 }
 
+func addOpCreateLocationFsxOpenZfsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateLocationFsxOpenZfs{}, middleware.After)
+}
+
 func addOpCreateLocationFsxWindowsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateLocationFsxWindows{}, middleware.After)
 }
@@ -836,6 +880,10 @@ func addOpDescribeLocationEfsValidationMiddleware(stack *middleware.Stack) error
 
 func addOpDescribeLocationFsxLustreValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeLocationFsxLustre{}, middleware.After)
+}
+
+func addOpDescribeLocationFsxOpenZfsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeLocationFsxOpenZfs{}, middleware.After)
 }
 
 func addOpDescribeLocationFsxWindowsValidationMiddleware(stack *middleware.Stack) error {
@@ -1213,6 +1261,32 @@ func validateOpCreateLocationFsxLustreInput(v *CreateLocationFsxLustreInput) err
 	}
 }
 
+func validateOpCreateLocationFsxOpenZfsInput(v *CreateLocationFsxOpenZfsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateLocationFsxOpenZfsInput"}
+	if v.FsxFilesystemArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FsxFilesystemArn"))
+	}
+	if v.Protocol == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Protocol"))
+	}
+	if v.SecurityGroupArns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecurityGroupArns"))
+	}
+	if v.Tags != nil {
+		if err := validateInputTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateLocationFsxWindowsInput(v *CreateLocationFsxWindowsInput) error {
 	if v == nil {
 		return nil
@@ -1495,6 +1569,21 @@ func validateOpDescribeLocationFsxLustreInput(v *DescribeLocationFsxLustreInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeLocationFsxLustreInput"}
+	if v.LocationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LocationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeLocationFsxOpenZfsInput(v *DescribeLocationFsxOpenZfsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeLocationFsxOpenZfsInput"}
 	if v.LocationArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LocationArn"))
 	}

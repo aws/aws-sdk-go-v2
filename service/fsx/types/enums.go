@@ -347,12 +347,13 @@ type FileSystemLifecycle string
 
 // Enum values for FileSystemLifecycle
 const (
-	FileSystemLifecycleAvailable     FileSystemLifecycle = "AVAILABLE"
-	FileSystemLifecycleCreating      FileSystemLifecycle = "CREATING"
-	FileSystemLifecycleFailed        FileSystemLifecycle = "FAILED"
-	FileSystemLifecycleDeleting      FileSystemLifecycle = "DELETING"
-	FileSystemLifecycleMisconfigured FileSystemLifecycle = "MISCONFIGURED"
-	FileSystemLifecycleUpdating      FileSystemLifecycle = "UPDATING"
+	FileSystemLifecycleAvailable                FileSystemLifecycle = "AVAILABLE"
+	FileSystemLifecycleCreating                 FileSystemLifecycle = "CREATING"
+	FileSystemLifecycleFailed                   FileSystemLifecycle = "FAILED"
+	FileSystemLifecycleDeleting                 FileSystemLifecycle = "DELETING"
+	FileSystemLifecycleMisconfigured            FileSystemLifecycle = "MISCONFIGURED"
+	FileSystemLifecycleUpdating                 FileSystemLifecycle = "UPDATING"
+	FileSystemLifecycleMisconfiguredUnavailable FileSystemLifecycle = "MISCONFIGURED_UNAVAILABLE"
 )
 
 // Values returns all known values for FileSystemLifecycle. Note that this can be
@@ -366,6 +367,7 @@ func (FileSystemLifecycle) Values() []FileSystemLifecycle {
 		"DELETING",
 		"MISCONFIGURED",
 		"UPDATING",
+		"MISCONFIGURED_UNAVAILABLE",
 	}
 }
 

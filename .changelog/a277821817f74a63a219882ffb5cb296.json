@@ -1,0 +1,8 @@
+{
+    "id": "a2778218-17f7-4a63-a219-882ffb5cb296",
+    "type": "feature",
+    "description": "Provide customers more visibility into file system status by adding new \"Misconfigured Unavailable\" status for Amazon FSx for Windows File Server.",
+    "modules": [
+        "service/fsx"
+    ]
+}

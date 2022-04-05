@@ -40,13 +40,13 @@ type CreateLocationS3Input struct {
 	S3BucketArn *string
 
 	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
-	// that is used to access an Amazon S3 bucket. For detailed information about using
-	// such a role, see Creating a Location for Amazon S3 in the DataSync User Guide.
+	// used to access an Amazon S3 bucket. For detailed information about using such a
+	// role, see Creating a Location for Amazon S3 in the DataSync User Guide.
 	//
 	// This member is required.
 	S3Config *types.S3Config
 
-	// If you are using DataSync on an Amazon Web Services Outpost, specify the Amazon
+	// If you're using DataSync on an Amazon Web Services Outpost, specify the Amazon
 	// Resource Names (ARNs) of the DataSync agents deployed on your Outpost. For more
 	// information about launching a DataSync agent on an Amazon Web Services Outpost,
 	// see Deploy your DataSync agent on Outposts

@@ -590,6 +590,9 @@ type AwsAutoScalingAutoScalingGroupDetails struct {
 	// The list of Availability Zones for the automatic scaling group.
 	AvailabilityZones []AwsAutoScalingAutoScalingGroupAvailabilityZonesListDetails
 
+	// Indicates whether capacity rebalancing is enabled.
+	CapacityRebalance bool
+
 	// Indicates when the auto scaling group was created. Uses the date-time format
 	// specified in RFC 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
@@ -606,11 +609,32 @@ type AwsAutoScalingAutoScalingGroupDetails struct {
 	// The name of the launch configuration.
 	LaunchConfigurationName *string
 
+	// The launch template to use.
+	LaunchTemplate *AwsAutoScalingAutoScalingGroupLaunchTemplateLaunchTemplateSpecification
+
 	// The list of load balancers associated with the group.
 	LoadBalancerNames []string
 
 	// The mixed instances policy for the automatic scaling group.
 	MixedInstancesPolicy *AwsAutoScalingAutoScalingGroupMixedInstancesPolicyDetails
+
+	noSmithyDocumentSerde
+}
+
+// Details about the launch template to use.
+type AwsAutoScalingAutoScalingGroupLaunchTemplateLaunchTemplateSpecification struct {
+
+	// The identifier of the launch template. You must specify either LaunchTemplateId
+	// or LaunchTemplateName.
+	LaunchTemplateId *string
+
+	// The name of the launch template. You must specify either LaunchTemplateId or
+	// LaunchTemplateName.
+	LaunchTemplateName *string
+
+	// Identifies the version of the launch template. You can specify a version
+	// identifier, or use the values $Latest or $Default.
+	Version *string
 
 	noSmithyDocumentSerde
 }
@@ -660,7 +684,7 @@ type AwsAutoScalingAutoScalingGroupMixedInstancesPolicyInstancesDistributionDeta
 // Describes a launch template and overrides for a mixed instances policy.
 type AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateDetails struct {
 
-	// The launch template to use.
+	// The launch template to use for a mixed instances policy.
 	LaunchTemplateSpecification *AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateLaunchTemplateSpecification
 
 	// Property values to use to override the values in the launch template.
@@ -669,7 +693,7 @@ type AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateDetails str
 	noSmithyDocumentSerde
 }
 
-// Details about the launch template to use.
+// Details about the launch template to use for a mixed instances policy.
 type AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateLaunchTemplateSpecification struct {
 
 	// The identifier of the launch template. You must specify either LaunchTemplateId
@@ -1447,6 +1471,9 @@ type AwsCodeBuildProjectDetails struct {
 
 	// The name of the build project.
 	Name *string
+
+	// Information about the secondary artifacts for the CodeBuild project.
+	SecondaryArtifacts []AwsCodeBuildProjectArtifactsDetails
 
 	// The ARN of the IAM role that enables CodeBuild to interact with dependent Amazon
 	// Web Services services on behalf of the Amazon Web Services account.
@@ -4261,6 +4288,18 @@ type AwsElbLoadBalancerAccessLog struct {
 	noSmithyDocumentSerde
 }
 
+// Provides information about additional attributes for the load balancer.
+type AwsElbLoadBalancerAdditionalAttribute struct {
+
+	// The name of the attribute.
+	Key *string
+
+	// The value of the attribute.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains attributes for the load balancer.
 type AwsElbLoadBalancerAttributes struct {
 
@@ -4268,6 +4307,9 @@ type AwsElbLoadBalancerAttributes struct {
 	// access log is enabled, the load balancer captures detailed information about all
 	// requests. It delivers the information to a specified S3 bucket.
 	AccessLog *AwsElbLoadBalancerAccessLog
+
+	// Any additional attributes for a load balancer.
+	AdditionalAttributes []AwsElbLoadBalancerAdditionalAttribute
 
 	// Information about the connection draining configuration for the load balancer.
 	// If connection draining is enabled, the load balancer allows existing requests to
@@ -6081,6 +6123,64 @@ type AwsRdsDbProcessorFeature struct {
 	noSmithyDocumentSerde
 }
 
+// Provides information about an Amazon RDS DB security group.
+type AwsRdsDbSecurityGroupDetails struct {
+
+	// The ARN for the DB security group.
+	DbSecurityGroupArn *string
+
+	// Provides the description of the DB security group.
+	DbSecurityGroupDescription *string
+
+	// Specifies the name of the DB security group.
+	DbSecurityGroupName *string
+
+	// Contains a list of EC2 security groups.
+	Ec2SecurityGroups []AwsRdsDbSecurityGroupEc2SecurityGroup
+
+	// Contains a list of IP ranges.
+	IpRanges []AwsRdsDbSecurityGroupIpRange
+
+	// Provides the Amazon Web Services ID of the owner of a specific DB security
+	// group.
+	OwnerId *string
+
+	// Provides VPC ID associated with the DB security group.
+	VpcId *string
+
+	noSmithyDocumentSerde
+}
+
+// EC2 security group information for an RDS DB security group.
+type AwsRdsDbSecurityGroupEc2SecurityGroup struct {
+
+	// Specifies the ID for the EC2 security group.
+	Ec2SecurityGroupId *string
+
+	// Specifies the name of the EC2 security group.
+	Ec2SecurityGroupName *string
+
+	// Provides the Amazon Web Services ID of the owner of the EC2 security group.
+	Ec2SecurityGroupOwnerId *string
+
+	// Provides the status of the EC2 security group.
+	Status *string
+
+	noSmithyDocumentSerde
+}
+
+// IP range information for an RDS DB security group.
+type AwsRdsDbSecurityGroupIpRange struct {
+
+	// Specifies the IP range.
+	CidrIp *string
+
+	// Specifies the status of the IP range.
+	Status *string
+
+	noSmithyDocumentSerde
+}
+
 // Provides details about an Amazon RDS DB cluster snapshot.
 type AwsRdsDbSnapshotDetails struct {
 
@@ -6522,6 +6622,9 @@ type AwsRedshiftClusterDetails struct {
 	// cluster.
 	KmsKeyId *string
 
+	// Information about the logging status of the cluster.
+	LoggingStatus *AwsRedshiftClusterLoggingStatus
+
 	// The name of the maintenance track for the cluster.
 	MaintenanceTrackName *string
 
@@ -6640,6 +6743,36 @@ type AwsRedshiftClusterIamRole struct {
 
 	// The ARN of the IAM role.
 	IamRoleArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides information about the logging status of the cluster.
+type AwsRedshiftClusterLoggingStatus struct {
+
+	// The name of the S3 bucket where the log files are stored.
+	BucketName *string
+
+	// The message indicating that the logs failed to be delivered.
+	LastFailureMessage *string
+
+	// The last time when logs failed to be delivered. Uses the date-time format
+	// specified in RFC 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	LastFailureTime *string
+
+	// The last time that logs were delivered successfully. Uses the date-time format
+	// specified in RFC 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	LastSuccessfulDeliveryTime *string
+
+	// Indicates whether logging is enabled.
+	LoggingEnabled bool
+
+	// Provides the prefix applied to the log file names.
+	S3KeyPrefix *string
 
 	noSmithyDocumentSerde
 }
@@ -9577,6 +9710,9 @@ type ResourceDetails struct {
 
 	// Details about an Amazon RDS database instance.
 	AwsRdsDbInstance *AwsRdsDbInstanceDetails
+
+	// Details about an Amazon RDS DB security group.
+	AwsRdsDbSecurityGroup *AwsRdsDbSecurityGroupDetails
 
 	// Details about an Amazon RDS database snapshot.
 	AwsRdsDbSnapshot *AwsRdsDbSnapshotDetails
