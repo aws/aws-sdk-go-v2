@@ -1115,10 +1115,48 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The list of Availability Zones for the automatic scaling group.</p>"
                     }
+                },
+                "LaunchTemplate": {
+                    "target": "com.amazonaws.securityhub#AwsAutoScalingAutoScalingGroupLaunchTemplateLaunchTemplateSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The launch template to use.</p>"
+                    }
+                },
+                "CapacityRebalance": {
+                    "target": "com.amazonaws.securityhub#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether capacity rebalancing is enabled.\n      </p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Provides details about an auto scaling group.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsAutoScalingAutoScalingGroupLaunchTemplateLaunchTemplateSpecification": {
+            "type": "structure",
+            "members": {
+                "LaunchTemplateId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the launch template. You must specify either <code>LaunchTemplateId</code> or <code>LaunchTemplateName</code>.</p>"
+                    }
+                },
+                "LaunchTemplateName": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the launch template. You must specify either <code>LaunchTemplateId</code> or <code>LaunchTemplateName</code>.</p>"
+                    }
+                },
+                "Version": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the version of the launch template. You can specify a version identifier, or use the values <code>$Latest</code> or <code>$Default</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about the launch template to use.</p>"
             }
         },
         "com.amazonaws.securityhub#AwsAutoScalingAutoScalingGroupMixedInstancesPolicyDetails": {
@@ -1191,7 +1229,7 @@
                 "LaunchTemplateSpecification": {
                     "target": "com.amazonaws.securityhub#AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateLaunchTemplateSpecification",
                     "traits": {
-                        "smithy.api#documentation": "<p>The launch template to use.</p>"
+                        "smithy.api#documentation": "<p>The launch template to use for a mixed instances policy.</p>"
                     }
                 },
                 "Overrides": {
@@ -1228,7 +1266,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Details about the launch template to use.</p>"
+                "smithy.api#documentation": "<p>Details about the launch template to use for a mixed instances policy.</p>"
             }
         },
         "com.amazonaws.securityhub#AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateOverridesList": {
@@ -2380,6 +2418,12 @@
                     "target": "com.amazonaws.securityhub#AwsCodeBuildProjectVpcConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the VPC configuration that CodeBuild accesses.</p>"
+                    }
+                },
+                "SecondaryArtifacts": {
+                    "target": "com.amazonaws.securityhub#AwsCodeBuildProjectArtifactsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the secondary artifacts for the CodeBuild project.</p>"
                     }
                 }
             },
@@ -7024,6 +7068,32 @@
                 "smithy.api#documentation": "<p>Contains information about the access log configuration for the load balancer.</p>"
             }
         },
+        "com.amazonaws.securityhub#AwsElbLoadBalancerAdditionalAttribute": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the attribute.</p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the attribute.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information about additional attributes for the load balancer.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsElbLoadBalancerAdditionalAttributeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#AwsElbLoadBalancerAdditionalAttribute"
+            }
+        },
         "com.amazonaws.securityhub#AwsElbLoadBalancerAttributes": {
             "type": "structure",
             "members": {
@@ -7049,6 +7119,12 @@
                     "target": "com.amazonaws.securityhub#AwsElbLoadBalancerCrossZoneLoadBalancing",
                     "traits": {
                         "smithy.api#documentation": "<p>Cross-zone load balancing settings for the load balancer.</p>\n         <p>If cross-zone load balancing is enabled, the load balancer routes the request traffic\n         evenly across all instances regardless of the Availability Zones.</p>"
+                    }
+                },
+                "AdditionalAttributes": {
+                    "target": "com.amazonaws.securityhub#AwsElbLoadBalancerAdditionalAttributeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Any additional attributes for a load balancer.</p>"
                     }
                 }
             },
@@ -10131,6 +10207,120 @@
                 "target": "com.amazonaws.securityhub#AwsRdsDbProcessorFeature"
             }
         },
+        "com.amazonaws.securityhub#AwsRdsDbSecurityGroupDetails": {
+            "type": "structure",
+            "members": {
+                "DbSecurityGroupArn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for the DB security group.</p>"
+                    }
+                },
+                "DbSecurityGroupDescription": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides the description of the DB security group.</p>"
+                    }
+                },
+                "DbSecurityGroupName": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the name of the DB security group.</p>"
+                    }
+                },
+                "Ec2SecurityGroups": {
+                    "target": "com.amazonaws.securityhub#AwsRdsDbSecurityGroupEc2SecurityGroups",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains a list of EC2 security groups.</p>"
+                    }
+                },
+                "IpRanges": {
+                    "target": "com.amazonaws.securityhub#AwsRdsDbSecurityGroupIpRanges",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains a list of IP ranges.</p>"
+                    }
+                },
+                "OwnerId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides the Amazon Web Services ID of the owner of a specific DB security group.</p>"
+                    }
+                },
+                "VpcId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides VPC ID associated with the DB security group.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information about an Amazon RDS DB security group.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsRdsDbSecurityGroupEc2SecurityGroup": {
+            "type": "structure",
+            "members": {
+                "Ec2SecurityGroupId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the ID for the EC2 security group.</p>"
+                    }
+                },
+                "Ec2SecurityGroupName": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the name of the EC2 security group.</p>"
+                    }
+                },
+                "Ec2SecurityGroupOwnerId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides the Amazon Web Services ID of the owner of the EC2 security group.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides the status of the EC2 security group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>EC2 security group information for an RDS DB security group.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsRdsDbSecurityGroupEc2SecurityGroups": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#AwsRdsDbSecurityGroupEc2SecurityGroup"
+            }
+        },
+        "com.amazonaws.securityhub#AwsRdsDbSecurityGroupIpRange": {
+            "type": "structure",
+            "members": {
+                "CidrIp": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the IP range.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the status of the IP range.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>IP range information for an RDS DB security group.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsRdsDbSecurityGroupIpRanges": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#AwsRdsDbSecurityGroupIpRange"
+            }
+        },
         "com.amazonaws.securityhub#AwsRdsDbSnapshotDetails": {
             "type": "structure",
             "members": {
@@ -10963,6 +11153,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The list of VPC security groups that the cluster belongs to, if the cluster is in a\n         VPC.</p>"
                     }
+                },
+                "LoggingStatus": {
+                    "target": "com.amazonaws.securityhub#AwsRedshiftClusterLoggingStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the logging status of the cluster.</p>"
+                    }
                 }
             },
             "traits": {
@@ -11059,6 +11255,50 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.securityhub#AwsRedshiftClusterIamRole"
+            }
+        },
+        "com.amazonaws.securityhub#AwsRedshiftClusterLoggingStatus": {
+            "type": "structure",
+            "members": {
+                "BucketName": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the S3 bucket where the log files are stored.</p>"
+                    }
+                },
+                "LastFailureMessage": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message indicating that the logs failed to be delivered.</p>"
+                    }
+                },
+                "LastFailureTime": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last time when logs failed to be delivered.</p>\n         <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet\n         Date/Time Format</a>. The value cannot contain spaces. For example,\n         <code>2020-03-22T13:22:13.933Z</code>.</p>"
+                    }
+                },
+                "LastSuccessfulDeliveryTime": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last time that logs were delivered successfully.</p>\n         <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet\n         Date/Time Format</a>. The value cannot contain spaces. For example,\n         <code>2020-03-22T13:22:13.933Z</code>.</p>"
+                    }
+                },
+                "LoggingEnabled": {
+                    "target": "com.amazonaws.securityhub#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether logging is enabled.</p>"
+                    }
+                },
+                "S3KeyPrefix": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides the prefix applied to the log file names.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information about the logging status of the cluster.</p>"
             }
         },
         "com.amazonaws.securityhub#AwsRedshiftClusterPendingModifiedValues": {
@@ -19038,6 +19278,12 @@
                     "target": "com.amazonaws.securityhub#AwsNetworkFirewallRuleGroupDetails",
                     "traits": {
                         "smithy.api#documentation": "<p>Details about an Network Firewall rule group.</p>"
+                    }
+                },
+                "AwsRdsDbSecurityGroup": {
+                    "target": "com.amazonaws.securityhub#AwsRdsDbSecurityGroupDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about an Amazon RDS DB security group.</p>"
                     }
                 }
             },

@@ -380,6 +380,75 @@
                 }
             }
         },
+        "com.amazonaws.datasync#CreateLocationFsxOpenZfs": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datasync#CreateLocationFsxOpenZfsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.datasync#CreateLocationFsxOpenZfsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datasync#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.datasync#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an endpoint for an Amazon FSx for OpenZFS file system.</p>"
+            }
+        },
+        "com.amazonaws.datasync#CreateLocationFsxOpenZfsRequest": {
+            "type": "structure",
+            "members": {
+                "FsxFilesystemArn": {
+                    "target": "com.amazonaws.datasync#FsxFilesystemArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the FSx for OpenZFS file system.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Protocol": {
+                    "target": "com.amazonaws.datasync#FsxProtocol",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of protocol that DataSync uses to\n      access your file system.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SecurityGroupArns": {
+                    "target": "com.amazonaws.datasync#Ec2SecurityGroupArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARNs of the security groups that are used to configure the\n      FSx for OpenZFS file system.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Subdirectory": {
+                    "target": "com.amazonaws.datasync#FsxOpenZfsSubdirectory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A subdirectory in the location's path that must begin with <code>/fsx</code>. DataSync uses this subdirectory to read\n      or write data (depending on whether the file system is a source or destination\n      location).</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.datasync#InputTagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key-value pair that represents a tag that you want to add to the resource. The value can be an empty string. This value helps you manage, filter, and search for your resources. We recommend that you create a name tag for your location.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.datasync#CreateLocationFsxOpenZfsResponse": {
+            "type": "structure",
+            "members": {
+                "LocationArn": {
+                    "target": "com.amazonaws.datasync#LocationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the FSx for OpenZFS file system location that you created.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.datasync#CreateLocationFsxWindows": {
             "type": "operation",
             "input": {
@@ -419,7 +488,7 @@
                 "SecurityGroupArns": {
                     "target": "com.amazonaws.datasync#Ec2SecurityGroupArnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the security groups that are used to configure the\n      FSx for Windows File Server file system.</p>",
+                        "smithy.api#documentation": "<p>The ARNs of the security groups that are used to configure the\n      FSx for Windows File Server file system.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -457,7 +526,7 @@
                 "LocationArn": {
                     "target": "com.amazonaws.datasync#LocationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the FSx for Windows File Server file system location\n      that is created.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the FSx for Windows File Server file system location\n      you created.</p>"
                     }
                 }
             }
@@ -612,7 +681,7 @@
                 "ServerHostname": {
                     "target": "com.amazonaws.datasync#ServerHostname",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the NFS server. This value is the IP address or Domain Name Service (DNS)\n      name of the NFS server. An agent that is installed on-premises uses this host name to mount\n      the NFS server in a network. </p>\n         <p>If you are copying data to or from your Snowcone device, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone\">NFS Server on Snowcone</a> for more information.</p>\n         <note>\n            <p>This name must either be DNS-compliant or must be an IP version 4 (IPv4)\n        address.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The name of the NFS server. This value is the IP address or Domain Name Service (DNS)\n      name of the NFS server. An agent that is installed on-premises uses this hostname to mount the\n      NFS server in a network. </p>\n         <p>If you are copying data to or from your Snowcone device, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone\">NFS Server on Snowcone</a> for more information.</p>\n         <note>\n            <p>This name must either be DNS-compliant or must be an IP version 4 (IPv4)\n        address.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -680,7 +749,7 @@
                 "ServerHostname": {
                     "target": "com.amazonaws.datasync#ServerHostname",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the self-managed object storage server. This value is the \n      IP address or Domain Name Service (DNS) name of the object storage server. \n      An agent uses this host name to mount the object storage server in a network. </p>",
+                        "smithy.api#documentation": "<p>The name of the self-managed object storage server. This value is the IP address or Domain\n      Name Service (DNS) name of the object storage server. An agent uses this hostname to mount the\n      object storage server in a network. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -804,7 +873,7 @@
                 "AgentArns": {
                     "target": "com.amazonaws.datasync#AgentArnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>If you are using DataSync on an Amazon Web Services Outpost, specify the Amazon Resource Names (ARNs) of\n      the DataSync agents deployed on your Outpost. For more information about launching a DataSync\n      agent on an Amazon Web Services Outpost, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/deploy-agents.html#outposts-agent\">Deploy your DataSync agent on Outposts</a>.</p>"
+                        "smithy.api#documentation": "<p>If you're using DataSync on an Amazon Web Services Outpost, specify the Amazon Resource\n      Names (ARNs) of the DataSync agents deployed on your Outpost. For more information about\n      launching a DataSync agent on an Amazon Web Services Outpost, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/deploy-agents.html#outposts-agent\">Deploy your DataSync agent\n        on Outposts</a>.</p>"
                     }
                 },
                 "Tags": {
@@ -1308,7 +1377,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns metadata, such as the path information about an Amazon FSx for Lustre\n      location.</p>"
+                "smithy.api#documentation": "<p>Returns metadata about an Amazon FSx for Lustre\n      location, such as information about its path.</p>"
             }
         },
         "com.amazonaws.datasync#DescribeLocationFsxLustreRequest": {
@@ -1352,6 +1421,73 @@
                 }
             }
         },
+        "com.amazonaws.datasync#DescribeLocationFsxOpenZfs": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datasync#DescribeLocationFsxOpenZfsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.datasync#DescribeLocationFsxOpenZfsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datasync#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.datasync#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns metadata about an Amazon FSx for OpenZFS\n      location, such as information about its path.</p>"
+            }
+        },
+        "com.amazonaws.datasync#DescribeLocationFsxOpenZfsRequest": {
+            "type": "structure",
+            "members": {
+                "LocationArn": {
+                    "target": "com.amazonaws.datasync#LocationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the FSx for OpenZFS location to describe.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.datasync#DescribeLocationFsxOpenZfsResponse": {
+            "type": "structure",
+            "members": {
+                "LocationArn": {
+                    "target": "com.amazonaws.datasync#LocationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the FSx for OpenZFS location that was described.</p>"
+                    }
+                },
+                "LocationUri": {
+                    "target": "com.amazonaws.datasync#LocationUri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The uniform resource identifier (URI) of the FSx for OpenZFS location that was\n      described.</p>\n         <p>Example: <code>fsxz://us-west-2.fs-1234567890abcdef02/fsx/folderA/folder</code>\n         </p>"
+                    }
+                },
+                "SecurityGroupArns": {
+                    "target": "com.amazonaws.datasync#Ec2SecurityGroupArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARNs of the security groups that are configured for the FSx for OpenZFS file\n      system.</p>"
+                    }
+                },
+                "Protocol": {
+                    "target": "com.amazonaws.datasync#FsxProtocol",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of protocol that DataSync uses to\n      access your file system.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.datasync#Time",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the FSx for OpenZFS location was created.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.datasync#DescribeLocationFsxWindows": {
             "type": "operation",
             "input": {
@@ -1369,7 +1505,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns metadata, such as the path information about an Amazon FSx for Windows File Server\n      location.</p>"
+                "smithy.api#documentation": "<p>Returns metadata about an Amazon FSx for Windows File Server\n      location, such as information about its path.</p>"
             }
         },
         "com.amazonaws.datasync#DescribeLocationFsxWindowsRequest": {
@@ -2122,7 +2258,7 @@
                 "SubnetArn": {
                     "target": "com.amazonaws.datasync#Ec2SubnetArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the subnet and the security group that DataSync uses to access the target\n      EFS file system.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the subnet that DataSync uses to access the target EFS file\n      system.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2135,7 +2271,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The subnet and the security group that DataSync uses to access target EFS file system.\n      The subnet must have at least one mount target for that file system. The security group that\n      you provide needs to be able to communicate with the security group on the mount target in the\n      subnet specified. </p>"
+                "smithy.api#documentation": "<p>The subnet that DataSync uses to access target EFS file system. The\n      subnet must have at least one mount target for that file system. The security group that you\n      provide needs to be able to communicate with the security group on the mount target in the\n      subnet specified. </p>"
             }
         },
         "com.amazonaws.datasync#Ec2SecurityGroupArn": {
@@ -2282,7 +2418,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 409600
+                    "max": 102400
                 },
                 "smithy.api#pattern": "^[^\\x00]+$"
             }
@@ -2325,6 +2461,9 @@
                     "target": "com.amazonaws.datasync#CreateLocationFsxLustre"
                 },
                 {
+                    "target": "com.amazonaws.datasync#CreateLocationFsxOpenZfs"
+                },
+                {
                     "target": "com.amazonaws.datasync#CreateLocationFsxWindows"
                 },
                 {
@@ -2362,6 +2501,9 @@
                 },
                 {
                     "target": "com.amazonaws.datasync#DescribeLocationFsxLustre"
+                },
+                {
+                    "target": "com.amazonaws.datasync#DescribeLocationFsxOpenZfs"
                 },
                 {
                     "target": "com.amazonaws.datasync#DescribeLocationFsxWindows"
@@ -2452,6 +2594,41 @@
                     "max": 4096
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\$\\p{Zs}]+$"
+            }
+        },
+        "com.amazonaws.datasync#FsxOpenZfsSubdirectory": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 4096
+                },
+                "smithy.api#pattern": "^[^\\u0000\\u0085\\u2028\\u2029\\r\\n]{1,4096}$"
+            }
+        },
+        "com.amazonaws.datasync#FsxProtocol": {
+            "type": "structure",
+            "members": {
+                "NFS": {
+                    "target": "com.amazonaws.datasync#FsxProtocolNfs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the Network File System (NFS) protocol that DataSync uses to access your FSx for OpenZFS file system.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the protocol that DataSync uses to access your Amazon FSx for OpenZFS file system.</p>"
+            }
+        },
+        "com.amazonaws.datasync#FsxProtocolNfs": {
+            "type": "structure",
+            "members": {
+                "MountOptions": {
+                    "target": "com.amazonaws.datasync#NfsMountOptions"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the Network File System (NFS) protocol that DataSync uses to access your Amazon FSx for OpenZFS file system.</p>"
             }
         },
         "com.amazonaws.datasync#FsxWindowsSubdirectory": {
@@ -3163,7 +3340,7 @@
                 "LocationUri": {
                     "target": "com.amazonaws.datasync#LocationUri",
                     "traits": {
-                        "smithy.api#documentation": "<p>Represents a list of URIs of a location. <code>LocationUri</code> returns an array that\n      contains a list of locations when the <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_ListLocations.html\">ListLocations</a> operation is\n      called.</p>\n         <p>Format: <code>TYPE://GLOBAL_ID/SUBDIR</code>.</p>\n         <p>TYPE designates the type of location. Valid values: NFS | EFS | S3.</p>\n         <p>GLOBAL_ID is the globally unique identifier of the resource that backs the location. An\n      example for EFS is <code>us-east-2.fs-abcd1234</code>. An example for Amazon S3 is the bucket\n      name, such as <code>myBucket</code>. An example for NFS is a valid IPv4 address or a host name\n      compliant with Domain Name Service (DNS).</p>\n         <p>SUBDIR is a valid file system path, delimited by forward slashes as is the *nix\n      convention. For NFS and Amazon EFS, it's the export path to mount the location. For\n      Amazon S3, it's the prefix path that you mount to and treat as the root of the\n      location.</p>\n         <p></p>"
+                        "smithy.api#documentation": "<p>Represents a list of URIs of a location. <code>LocationUri</code> returns an array that\n      contains a list of locations when the <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_ListLocations.html\">ListLocations</a> operation is\n      called.</p>\n         <p>Format: <code>TYPE://GLOBAL_ID/SUBDIR</code>.</p>\n         <p>TYPE designates the type of location (for example, <code>nfs</code> or\n      <code>s3</code>).</p>\n         <p>GLOBAL_ID is the globally unique identifier of the resource that backs the location. An\n      example for EFS is <code>us-east-2.fs-abcd1234</code>. An example for Amazon S3 is the bucket\n      name, such as <code>myBucket</code>. An example for NFS is a valid IPv4 address or a hostname\n      that is compliant with Domain Name Service (DNS).</p>\n         <p>SUBDIR is a valid file system path, delimited by forward slashes as is the *nix\n      convention. For NFS and Amazon EFS, it's the export path to mount the location. For\n      Amazon S3, it's the prefix path that you mount to and treat as the root of the\n      location.</p>\n         <p></p>"
                     }
                 }
             },
@@ -3178,7 +3355,7 @@
                     "min": 0,
                     "max": 4356
                 },
-                "smithy.api#pattern": "^(efs|nfs|s3|smb|fsxw|fsxl)://[a-zA-Z0-9.\\-]+$"
+                "smithy.api#pattern": "^(efs|nfs|s3|smb|hdfs|fsx[a-z0-9]+)://[a-zA-Z0-9.:/\\-]+$"
             }
         },
         "com.amazonaws.datasync#LogGroupArn": {
@@ -3426,7 +3603,7 @@
                 "VerifyMode": {
                     "target": "com.amazonaws.datasync#VerifyMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that determines whether a data integrity verification should be performed at\n      the end of a task execution after all data and metadata have been transferred. \n      For more information, see \n      <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-task.html\">Configure task settings</a>.\n    </p>\n         <p>Default value: POINT_IN_TIME_CONSISTENT.</p>\n         <p>ONLY_FILES_TRANSFERRED (recommended): Perform verification only on files that were transferred.\n    </p>\n    \n         <p>POINT_IN_TIME_CONSISTENT: Scan the entire source and entire destination \n      at the end of the transfer \n      to verify that source and destination are fully \n      synchronized. This option isn't supported when transferring to S3 Glacier or S3 Glacier \n      Deep Archive storage classes.</p>\n         <p>NONE: No additional verification is done at the end of the \n      transfer, but all data transmissions are integrity-checked with \n      checksum verification during the transfer.</p>"
+                        "smithy.api#documentation": "<p>A value that determines whether a data integrity verification should be performed at\n      the end of a task execution after all data and metadata have been transferred. \n      For more information, see \n      <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-task.html\">Configure task settings</a>.\n    </p>\n         <p>Default value: POINT_IN_TIME_CONSISTENT.</p>\n         <p>ONLY_FILES_TRANSFERRED (recommended): Perform verification only on files that were transferred.\n    </p>\n    \n         <p>POINT_IN_TIME_CONSISTENT: Scan the entire source and entire destination \n      at the end of the transfer \n      to verify that source and destination are fully \n      synchronized. This option isn't supported when transferring to S3 Glacier or S3 Glacier Deep Archive storage classes.</p>\n         <p>NONE: No additional verification is done at the end of the \n      transfer, but all data transmissions are integrity-checked with \n      checksum verification during the transfer.</p>"
                     }
                 },
                 "OverwriteMode": {
@@ -3695,13 +3872,13 @@
                 "BucketAccessRoleArn": {
                     "target": "com.amazonaws.datasync#IamRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 bucket to access. This bucket is used as a parameter in the \n      <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_CreateLocationS3.html\">CreateLocationS3</a>\n      operation. </p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM role for accessing the S3 bucket. </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role\n      that is used to access an Amazon S3 bucket.</p>\n    \n         <p>For detailed information about using such a role, see Creating a Location for\n      Amazon S3 in the <i>DataSync User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role used to access\n      an Amazon S3 bucket.</p>\n    \n         <p>For detailed information about using such a role, see Creating a Location for\n      Amazon S3 in the <i>DataSync User Guide</i>.</p>"
             }
         },
         "com.amazonaws.datasync#S3StorageClass": {
@@ -4542,13 +4719,13 @@
                 "KerberosKeytab": {
                     "target": "com.amazonaws.datasync#KerberosKeytabFile",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Kerberos key table (keytab) that contains mappings between the defined Kerberos\n      principal and the encrypted keys. You can load the keytab from a file by providing the file's\n      address. If you use the AWS CLI, it performs base64 encoding for you. Otherwise, provide the\n      base64-encoded text.</p>"
+                        "smithy.api#documentation": "<p>The Kerberos key table (keytab) that contains mappings between the defined Kerberos\n      principal and the encrypted keys. You can load the keytab from a file by providing the file's\n      address. If you use the CLI, it performs base64 encoding for you. Otherwise,\n      provide the base64-encoded text.</p>"
                     }
                 },
                 "KerberosKrb5Conf": {
                     "target": "com.amazonaws.datasync#KerberosKrb5ConfFile",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>krb5.conf</code> file that contains the Kerberos configuration information. You\n      can load the <code>krb5.conf</code> file by providing the file's address. If you're using the\n      AWS CLI, it performs the base64 encoding for you. Otherwise, provide the base64-encoded\n      text.</p>"
+                        "smithy.api#documentation": "<p>The <code>krb5.conf</code> file that contains the Kerberos configuration information. You\n      can load the <code>krb5.conf</code> file by providing the file's address. If you're using the\n        CLI, it performs the base64 encoding for you. Otherwise, provide the\n      base64-encoded text.</p>"
                     }
                 },
                 "AgentArns": {

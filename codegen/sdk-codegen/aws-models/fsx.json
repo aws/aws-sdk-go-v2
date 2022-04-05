@@ -4387,7 +4387,7 @@
                 "Lifecycle": {
                     "target": "com.amazonaws.fsx#FileSystemLifecycle",
                     "traits": {
-                        "smithy.api#documentation": "<p>The lifecycle status of the file system. The following are the possible values and\n            what they mean:</p> \n            <ul>\n            <li>\n               <p>\n                  <code>AVAILABLE</code> - The file system is in a healthy state, and is reachable and available for use.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATING</code> - Amazon FSx is creating the new file system.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETING</code> - Amazon FSx is deleting an existing file system.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> - An existing file system has experienced an unrecoverable failure. \n                    When creating a new file system, Amazon FSx was unable to create the file system.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MISCONFIGURED</code> - The file system is in a failed but recoverable state.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATING</code> - The file system is undergoing a customer-initiated update.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The lifecycle status of the file system. The following are the possible values and\n            what they mean:</p> \n            <ul>\n            <li>\n               <p>\n                  <code>AVAILABLE</code> - The file system is in a healthy state, and is reachable and available for use.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATING</code> - Amazon FSx is creating the new file system.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETING</code> - Amazon FSx is deleting an existing file system.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> - An existing file system has experienced an unrecoverable failure. \n                    When creating a new file system, Amazon FSx was unable to create the file system.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MISCONFIGURED</code> - The file system is in a failed but recoverable state.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MISCONFIGURED_UNAVAILABLE</code> - (Amazon FSx for Windows File Server only) The file system is\n                    currently unavailable due to a change in your Active Directory configuration.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATING</code> - The file system is undergoing a customer-initiated update.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "FailureDetails": {
@@ -4598,6 +4598,10 @@
                     {
                         "value": "UPDATING",
                         "name": "UPDATING"
+                    },
+                    {
+                        "value": "MISCONFIGURED_UNAVAILABLE",
+                        "name": "MISCONFIGURED_UNAVAILABLE"
                     }
                 ]
             }
@@ -6268,7 +6272,7 @@
                 "Options": {
                     "target": "com.amazonaws.fsx#RestoreOpenZFSVolumeOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The settings used when restoring the specified volume from snapshot. </p>\n        <ul>\n            <li>\n                <p>\n                  <code>DELETE_INTERMEDIATE_SNAPSHOTS</code> - Deletes snapshots between the\n                    current state and the specified snapshot. If there are intermediate snapshots\n                    and this option isn't used, <code>RestoreVolumeFromSnapshot</code> fails.</p>\n            </li>\n            <li>\n                <p>\n                  <code>DELETE_CLONED_VOLUMES</code> - Deletes any volumes cloned from this\n                    volume. If there are any cloned volumes and this option isn't used,\n                        <code>RestoreVolumeFromSnapshot</code> fails.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The settings used when restoring the specified volume from snapshot. </p>\n        <ul>\n            <li>\n                <p>\n                  <code>DELETE_INTERMEDIATE_SNAPSHOTS</code> - Deletes snapshots between the\n                    current state and the specified snapshot. If there are intermediate snapshots\n                    and this option isn't used, <code>RestoreVolumeFromSnapshot</code> fails.</p>\n            </li>\n            <li>\n                <p>\n                  <code>DELETE_CLONED_VOLUMES</code> - Deletes any dependent clone volumes \n                    created from intermediate snapshots. If there are any dependent clone volumes and this \n                    option isn't used, <code>RestoreVolumeFromSnapshot</code> fails.</p>\n            </li>\n         </ul>"
                     }
                 }
             }
@@ -7646,7 +7650,7 @@
                 "ThroughputCapacity": {
                     "target": "com.amazonaws.fsx#MegabytesPerSecond",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the throughput of an FSx for NetApp ONTAP file system, measured in megabytes per second\n            (MBps). Valid values are 64, 128, 256, 512, 1024, 2048, 3072, or 4096 MB/s.</p>"
+                        "smithy.api#documentation": "<p>Specifies the throughput of an FSx for NetApp ONTAP file system, measured in megabytes per second\n            (MBps). Valid values are 128, 256, 512, 1024, or 2048 MB/s.</p>"
                     }
                 }
             },
