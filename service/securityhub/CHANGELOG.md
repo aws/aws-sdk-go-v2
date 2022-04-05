@@ -1,3 +1,7 @@
+# v1.20.0 (2022-04-05)
+
+* **Feature**: Added additional ASFF details for RdsSecurityGroup AutoScalingGroup, ElbLoadBalancer, CodeBuildProject and RedshiftCluster.
+
 # v1.19.3 (2022-03-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions

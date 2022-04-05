@@ -1,3 +1,15 @@
+# Release (2022-04-05)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/datasync`: [v1.15.0](service/datasync/CHANGELOG.md#v1150-2022-04-05)
+  * **Feature**: AWS DataSync now supports Amazon FSx for OpenZFS locations.
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.22.0](service/fsx/CHANGELOG.md#v1220-2022-04-05)
+  * **Feature**: Provide customers more visibility into file system status by adding new "Misconfigured Unavailable" status for Amazon FSx for Windows File Server.
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.21.4](service/s3control/CHANGELOG.md#v1214-2022-04-05)
+  * **Documentation**: Documentation-only update for doc bug fixes for the S3 Control API docs.
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.20.0](service/securityhub/CHANGELOG.md#v1200-2022-04-05)
+  * **Feature**: Added additional ASFF details for RdsSecurityGroup AutoScalingGroup, ElbLoadBalancer, CodeBuildProject and RedshiftCluster.
+
 # Release (2022-04-04)
 
 ## Module Highlights

@@ -1,8 +1,0 @@
-{
-    "id": "8b1a8ed0-8ca5-45f8-abad-40b7d05ee8da",
-    "type": "feature",
-    "description": "AWS DataSync now supports Amazon FSx for OpenZFS locations.",
-    "modules": [
-        "service/datasync"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.21.4 (2022-04-05)
+
+* **Documentation**: Documentation-only update for doc bug fixes for the S3 Control API docs.
+
 # v1.21.3 (2022-03-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions
