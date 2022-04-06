@@ -197,6 +197,17 @@ func UnmarshalListOfMapsWithOptions(l []map[string]types.AttributeValue, out int
 	return UnmarshalListWithOptions(items, out, optFns...)
 }
 
+type DecodeTimeAttributes struct {
+	// Will decode S attribute values and SS attribute value elements into time.Time
+	//
+	// Default string parsing format is time.RFC3339
+	S func(string) (time.Time, error)
+	// Will decode N attribute values and NS attribute value elements into time.Time
+	//
+	// Default number parsing format is seconds since January 1, 1970 UTC
+	N func(string) (time.Time, error)
+}
+
 // DecoderOptions is a collection of options to configure how the decoder
 // unmarshals the value.
 type DecoderOptions struct {
@@ -213,15 +224,11 @@ type DecoderOptions struct {
 	// is interface{}. Similar to encoding/json.Number
 	UseNumber bool
 
-	// Will decode S attribute values and SS attribute value elements into time.Time
+	// Contains the time decoding functions for different AttributeValues
 	//
 	// Default string parsing format is time.RFC3339
-	DecodeTimeS func(string) (time.Time, error)
-
-	// Will decode N attribute values and NS attribute value elements into time.Time
-	//
 	// Default number parsing format is seconds since January 1, 1970 UTC
-	DecodeTimeN func(string) (time.Time, error)
+	DecodeTime DecodeTimeAttributes
 }
 
 // A Decoder provides unmarshaling AttributeValues to Go value types.
@@ -234,15 +241,17 @@ type Decoder struct {
 func NewDecoder(optFns ...func(*DecoderOptions)) *Decoder {
 	options := DecoderOptions{
 		TagKey: defaultTagKey,
-		DecodeTimeS: func(v string) (time.Time, error) {
-			t, err := time.Parse(time.RFC3339, v)
-			if err != nil {
-				return time.Time{}, &UnmarshalError{Err: err, Value: v, Type: timeType}
-			}
-			return t, nil
-		},
-		DecodeTimeN: func(v string) (time.Time, error) {
-			return decodeUnixTime(v)
+		DecodeTime: DecodeTimeAttributes{
+			S: func(v string) (time.Time, error) {
+				t, err := time.Parse(time.RFC3339, v)
+				if err != nil {
+					return time.Time{}, &UnmarshalError{Err: err, Value: v, Type: timeType}
+				}
+				return t, nil
+			},
+			N: func(v string) (time.Time, error) {
+				return decodeUnixTime(v)
+			},
 		},
 	}
 	for _, fn := range optFns {
@@ -482,7 +491,7 @@ func (d *Decoder) decodeNumber(n string, v reflect.Value, fieldTag tag) error {
 			return nil
 		}
 		if v.Type().ConvertibleTo(timeType) {
-			t, err := d.options.DecodeTimeN(n)
+			t, err := d.options.DecodeTime.N(n)
 			if err != nil {
 				return err
 			}
@@ -716,7 +725,7 @@ func (d *Decoder) decodeString(s string, v reflect.Value, fieldTag tag) error {
 	// To maintain backwards compatibility with ConvertFrom family of methods which
 	// converted strings to time.Time structs
 	if v.Type().ConvertibleTo(timeType) {
-		t, err := d.options.DecodeTimeS(s)
+		t, err := d.options.DecodeTime.S(s)
 		if err != nil {
 			return err
 		}
