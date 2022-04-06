@@ -1472,6 +1472,49 @@ func validateBasicAuthenticationConfigurationList(v []types.BasicAuthenticationC
 	}
 }
 
+func validateBoxConfiguration(v *types.BoxConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BoxConfiguration"}
+	if v.EnterpriseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnterpriseId"))
+	}
+	if v.SecretArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecretArn"))
+	}
+	if v.FileFieldMappings != nil {
+		if err := validateDataSourceToIndexFieldMappingList(v.FileFieldMappings); err != nil {
+			invalidParams.AddNested("FileFieldMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TaskFieldMappings != nil {
+		if err := validateDataSourceToIndexFieldMappingList(v.TaskFieldMappings); err != nil {
+			invalidParams.AddNested("TaskFieldMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CommentFieldMappings != nil {
+		if err := validateDataSourceToIndexFieldMappingList(v.CommentFieldMappings); err != nil {
+			invalidParams.AddNested("CommentFieldMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.WebLinkFieldMappings != nil {
+		if err := validateDataSourceToIndexFieldMappingList(v.WebLinkFieldMappings); err != nil {
+			invalidParams.AddNested("WebLinkFieldMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.VpcConfiguration != nil {
+		if err := validateDataSourceVpcConfiguration(v.VpcConfiguration); err != nil {
+			invalidParams.AddNested("VpcConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCapacityUnitsConfiguration(v *types.CapacityUnitsConfiguration) error {
 	if v == nil {
 		return nil
@@ -1733,6 +1776,11 @@ func validateDataSourceConfiguration(v *types.DataSourceConfiguration) error {
 	if v.SlackConfiguration != nil {
 		if err := validateSlackConfiguration(v.SlackConfiguration); err != nil {
 			invalidParams.AddNested("SlackConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.BoxConfiguration != nil {
+		if err := validateBoxConfiguration(v.BoxConfiguration); err != nil {
+			invalidParams.AddNested("BoxConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

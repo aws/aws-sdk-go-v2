@@ -701,6 +701,8 @@ const (
 	ResourceTypeLaunchTemplate                   ResourceType = "AWS::EC2::LaunchTemplate"
 	ResourceTypeECRPublicRepository              ResourceType = "AWS::ECR::PublicRepository"
 	ResourceTypeGuardDutyDetector                ResourceType = "AWS::GuardDuty::Detector"
+	ResourceTypeEMRSecurityConfiguration         ResourceType = "AWS::EMR::SecurityConfiguration"
+	ResourceTypeSageMakerCodeRepository          ResourceType = "AWS::SageMaker::CodeRepository"
 )
 
 // Values returns all known values for ResourceType. Note that this can be expanded
@@ -826,6 +828,8 @@ func (ResourceType) Values() []ResourceType {
 		"AWS::EC2::LaunchTemplate",
 		"AWS::ECR::PublicRepository",
 		"AWS::GuardDuty::Detector",
+		"AWS::EMR::SecurityConfiguration",
+		"AWS::SageMaker::CodeRepository",
 	}
 }
 

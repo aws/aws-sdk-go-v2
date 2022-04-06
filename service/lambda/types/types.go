@@ -157,6 +157,43 @@ type Concurrency struct {
 	noSmithyDocumentSerde
 }
 
+// The cross-origin resource sharing (CORS)
+// (https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) settings for your
+// Lambda function URL. Use CORS to grant access to your function URL from any
+// origin. You can also use CORS to control access for specific HTTP headers and
+// methods in requests to your function URL.
+type Cors struct {
+
+	// Whether to allow cookies or other credentials in requests to your function URL.
+	// The default is false.
+	AllowCredentials *bool
+
+	// The HTTP headers that origins can include in requests to your function URL. For
+	// example: Date, Keep-Alive, X-Custom-Header.
+	AllowHeaders []string
+
+	// The HTTP methods that are allowed when calling your function URL. For example:
+	// GET, POST, DELETE, or the wildcard character (*).
+	AllowMethods []string
+
+	// The origins that can access your function URL. You can list any number of
+	// specific origins, separated by a comma. For example: https://www.example.com,
+	// http://localhost:60905. Alternatively, you can grant access to all origins using
+	// the wildcard character (*).
+	AllowOrigins []string
+
+	// The HTTP headers in your function response that you want to expose to origins
+	// that call your function URL. For example: Date, Keep-Alive, X-Custom-Header.
+	ExposeHeaders []string
+
+	// The maximum amount of time, in seconds, that web browsers can cache results of a
+	// preflight request. By default, this is set to 0, which means that the browser
+	// doesn't cache results.
+	MaxAge *int32
+
+	noSmithyDocumentSerde
+}
+
 // The dead-letter queue
 // (https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq) for
 // failed asynchronous invocations.
@@ -567,6 +604,48 @@ type FunctionEventInvokeConfig struct {
 
 	// The maximum number of times to retry when the function returns an error.
 	MaximumRetryAttempts *int32
+
+	noSmithyDocumentSerde
+}
+
+// Details about a Lambda function URL.
+type FunctionUrlConfig struct {
+
+	// The type of authentication that your function URL uses. Set to AWS_IAM if you
+	// want to restrict access to authenticated IAM users only. Set to NONE if you want
+	// to bypass IAM authentication to create a public endpoint. For more information,
+	// see  Security and auth model for Lambda function URLs
+	// (https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html).
+	//
+	// This member is required.
+	AuthType FunctionUrlAuthType
+
+	// When the function URL was created, in ISO-8601 format
+	// (https://www.w3.org/TR/NOTE-datetime) (YYYY-MM-DDThh:mm:ss.sTZD).
+	//
+	// This member is required.
+	CreationTime *string
+
+	// The Amazon Resource Name (ARN) of your function.
+	//
+	// This member is required.
+	FunctionArn *string
+
+	// The HTTP URL endpoint for your function.
+	//
+	// This member is required.
+	FunctionUrl *string
+
+	// When the function URL configuration was last updated, in ISO-8601 format
+	// (https://www.w3.org/TR/NOTE-datetime) (YYYY-MM-DDThh:mm:ss.sTZD).
+	//
+	// This member is required.
+	LastModifiedTime *string
+
+	// The cross-origin resource sharing (CORS)
+	// (https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) settings for your
+	// function URL.
+	Cors *Cors
 
 	noSmithyDocumentSerde
 }

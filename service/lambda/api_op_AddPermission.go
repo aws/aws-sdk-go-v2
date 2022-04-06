@@ -6,6 +6,7 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -83,6 +84,13 @@ type AddPermissionInput struct {
 
 	// For Alexa Smart Home functions, a token that must be supplied by the invoker.
 	EventSourceToken *string
+
+	// The type of authentication that your function URL uses. Set to AWS_IAM if you
+	// want to restrict access to authenticated IAM users only. Set to NONE if you want
+	// to bypass IAM authentication to create a public endpoint. For more information,
+	// see  Security and auth model for Lambda function URLs
+	// (https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html).
+	FunctionUrlAuthType types.FunctionUrlAuthType
 
 	// The identifier for your organization in Organizations. Use this to grant
 	// permissions to all the Amazon Web Services accounts under this organization.

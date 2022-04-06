@@ -1,0 +1,8 @@
+{
+    "id": "130d6e04-d39f-49d5-ba25-53875c1e947d",
+    "type": "feature",
+    "description": "Add resourceType enums for AWS::EMR::SecurityConfiguration and AWS::SageMaker::CodeRepository",
+    "modules": [
+        "service/configservice"
+    ]
+}

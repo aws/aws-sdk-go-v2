@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the Amazon Kendra indexes that you have created.
+// Lists the Amazon Kendra indexes that you created.
 func (c *Client) ListIndices(ctx context.Context, params *ListIndicesInput, optFns ...func(*Options)) (*ListIndicesOutput, error) {
 	if params == nil {
 		params = &ListIndicesInput{}

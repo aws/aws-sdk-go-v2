@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Describes an existing Amazon Kendra index
+// Describes an existing Amazon Kendra index.
 func (c *Client) DescribeIndex(ctx context.Context, params *DescribeIndexInput, optFns ...func(*Options)) (*DescribeIndexOutput, error) {
 	if params == nil {
 		params = &DescribeIndexInput{}
@@ -30,7 +30,7 @@ func (c *Client) DescribeIndex(ctx context.Context, params *DescribeIndexInput, 
 
 type DescribeIndexInput struct {
 
-	// The name of the index to describe.
+	// The identifier of the index to describe.
 	//
 	// This member is required.
 	Id *string
@@ -40,16 +40,18 @@ type DescribeIndexInput struct {
 
 type DescribeIndexOutput struct {
 
-	// For Enterprise edition indexes, you can choose to use additional capacity to
+	// For Enterprise Edition indexes, you can choose to use additional capacity to
 	// meet the needs of your application. This contains the capacity units used for
-	// the index. A 0 for the query capacity or the storage capacity indicates that the
-	// index is using the default capacity for the index.
+	// the index. A query or document storage capacity of zero indicates that the index
+	// is using the default capacity. For more information on the default capacity for
+	// an index and adjusting this, see Adjusting capacity
+	// (https://docs.aws.amazon.com/kendra/latest/dg/adjusting-capacity.html).
 	CapacityUnits *types.CapacityUnitsConfiguration
 
 	// The Unix datetime that the index was created.
 	CreatedAt *time.Time
 
-	// The description of the index.
+	// The description for the index.
 	Description *string
 
 	// Configuration settings for any metadata applied to the documents in the index.
@@ -59,11 +61,11 @@ type DescribeIndexOutput struct {
 	// create the index.
 	Edition types.IndexEdition
 
-	// When th eStatus field value is FAILED, the ErrorMessage field contains a message
+	// When the Status field value is FAILED, the ErrorMessage field contains a message
 	// that explains why.
 	ErrorMessage *string
 
-	// The name of the index.
+	// The identifier of the index.
 	Id *string
 
 	// Provides information about the number of FAQ questions and answers and the
@@ -77,8 +79,8 @@ type DescribeIndexOutput struct {
 	// permission to write to your Amazon Cloudwatch logs.
 	RoleArn *string
 
-	// The identifier of the KMScustomer master key (CMK) used to encrypt your data.
-	// Amazon Kendra doesn't support asymmetric CMKs.
+	// The identifier of the KMScustomer master key (CMK) that is used to encrypt your
+	// data. Amazon Kendra doesn't support asymmetric CMKs.
 	ServerSideEncryptionConfiguration *types.ServerSideEncryptionConfiguration
 
 	// The current status of the index. When the value is ACTIVE, the index is ready

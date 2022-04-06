@@ -46,6 +46,9 @@ type DescribeDeviceOutput struct {
 	// The device's ARN.
 	Arn *string
 
+	// The device's maker.
+	Brand types.DeviceBrand
+
 	// When the device was created.
 	CreatedTime *time.Time
 

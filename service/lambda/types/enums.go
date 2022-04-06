@@ -90,6 +90,24 @@ func (FunctionResponseType) Values() []FunctionResponseType {
 	}
 }
 
+type FunctionUrlAuthType string
+
+// Enum values for FunctionUrlAuthType
+const (
+	FunctionUrlAuthTypeNone   FunctionUrlAuthType = "NONE"
+	FunctionUrlAuthTypeAwsIam FunctionUrlAuthType = "AWS_IAM"
+)
+
+// Values returns all known values for FunctionUrlAuthType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FunctionUrlAuthType) Values() []FunctionUrlAuthType {
+	return []FunctionUrlAuthType{
+		"NONE",
+		"AWS_IAM",
+	}
+}
+
 type FunctionVersion string
 
 // Enum values for FunctionVersion

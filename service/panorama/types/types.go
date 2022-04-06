@@ -74,6 +74,9 @@ type ConflictExceptionErrorArgument struct {
 // A device.
 type Device struct {
 
+	// The device's maker.
+	Brand DeviceBrand
+
 	// When the device was created.
 	CreatedTime *time.Time
 

@@ -37,6 +37,7 @@ const (
 	ApplicationInstanceStatusRemovalInProgress    ApplicationInstanceStatus = "REMOVAL_IN_PROGRESS"
 	ApplicationInstanceStatusRemovalFailed        ApplicationInstanceStatus = "REMOVAL_FAILED"
 	ApplicationInstanceStatusRemovalSucceeded     ApplicationInstanceStatus = "REMOVAL_SUCCEEDED"
+	ApplicationInstanceStatusDeploymentFailed     ApplicationInstanceStatus = "DEPLOYMENT_FAILED"
 )
 
 // Values returns all known values for ApplicationInstanceStatus. Note that this
@@ -54,6 +55,7 @@ func (ApplicationInstanceStatus) Values() []ApplicationInstanceStatus {
 		"REMOVAL_IN_PROGRESS",
 		"REMOVAL_FAILED",
 		"REMOVAL_SUCCEEDED",
+		"DEPLOYMENT_FAILED",
 	}
 }
 
@@ -72,6 +74,24 @@ func (ConnectionType) Values() []ConnectionType {
 	return []ConnectionType{
 		"STATIC_IP",
 		"DHCP",
+	}
+}
+
+type DeviceBrand string
+
+// Enum values for DeviceBrand
+const (
+	DeviceBrandAwsPanorama DeviceBrand = "AWS_PANORAMA"
+	DeviceBrandLenovo      DeviceBrand = "LENOVO"
+)
+
+// Values returns all known values for DeviceBrand. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (DeviceBrand) Values() []DeviceBrand {
+	return []DeviceBrand{
+		"AWS_PANORAMA",
+		"LENOVO",
 	}
 }
 
@@ -351,6 +371,7 @@ const (
 	StatusFilterRemovalFailed        StatusFilter = "REMOVAL_FAILED"
 	StatusFilterProcessingDeployment StatusFilter = "PROCESSING_DEPLOYMENT"
 	StatusFilterProcessingRemoval    StatusFilter = "PROCESSING_REMOVAL"
+	StatusFilterDeploymentFailed     StatusFilter = "DEPLOYMENT_FAILED"
 )
 
 // Values returns all known values for StatusFilter. Note that this can be expanded
@@ -364,6 +385,7 @@ func (StatusFilter) Values() []StatusFilter {
 		"REMOVAL_FAILED",
 		"PROCESSING_DEPLOYMENT",
 		"PROCESSING_REMOVAL",
+		"DEPLOYMENT_FAILED",
 	}
 }
 

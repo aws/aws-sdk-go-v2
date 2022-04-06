@@ -1858,6 +1858,15 @@ func awsRestjson1_deserializeOpDocumentDescribeDeviceOutput(v **DescribeDeviceOu
 				sv.Arn = ptr.String(jtv)
 			}
 
+		case "Brand":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeviceBrand to be of type string, got %T instead", value)
+				}
+				sv.Brand = types.DeviceBrand(jtv)
+			}
+
 		case "CreatedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6556,6 +6565,15 @@ func awsRestjson1_deserializeDocumentDevice(v **types.Device, value interface{})
 
 	for key, value := range shape {
 		switch key {
+		case "Brand":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeviceBrand to be of type string, got %T instead", value)
+				}
+				sv.Brand = types.DeviceBrand(jtv)
+			}
+
 		case "CreatedTime":
 			if value != nil {
 				switch jtv := value.(type) {

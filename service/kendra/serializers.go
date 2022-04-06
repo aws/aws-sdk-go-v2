@@ -3217,6 +3217,92 @@ func awsAwsjson11_serializeDocumentBasicAuthenticationConfigurationList(v []type
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentBoxConfiguration(v *types.BoxConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CommentFieldMappings != nil {
+		ok := object.Key("CommentFieldMappings")
+		if err := awsAwsjson11_serializeDocumentDataSourceToIndexFieldMappingList(v.CommentFieldMappings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CrawlComments {
+		ok := object.Key("CrawlComments")
+		ok.Boolean(v.CrawlComments)
+	}
+
+	if v.CrawlTasks {
+		ok := object.Key("CrawlTasks")
+		ok.Boolean(v.CrawlTasks)
+	}
+
+	if v.CrawlWebLinks {
+		ok := object.Key("CrawlWebLinks")
+		ok.Boolean(v.CrawlWebLinks)
+	}
+
+	if v.EnterpriseId != nil {
+		ok := object.Key("EnterpriseId")
+		ok.String(*v.EnterpriseId)
+	}
+
+	if v.ExclusionPatterns != nil {
+		ok := object.Key("ExclusionPatterns")
+		if err := awsAwsjson11_serializeDocumentDataSourceInclusionsExclusionsStrings(v.ExclusionPatterns, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FileFieldMappings != nil {
+		ok := object.Key("FileFieldMappings")
+		if err := awsAwsjson11_serializeDocumentDataSourceToIndexFieldMappingList(v.FileFieldMappings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.InclusionPatterns != nil {
+		ok := object.Key("InclusionPatterns")
+		if err := awsAwsjson11_serializeDocumentDataSourceInclusionsExclusionsStrings(v.InclusionPatterns, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SecretArn != nil {
+		ok := object.Key("SecretArn")
+		ok.String(*v.SecretArn)
+	}
+
+	if v.TaskFieldMappings != nil {
+		ok := object.Key("TaskFieldMappings")
+		if err := awsAwsjson11_serializeDocumentDataSourceToIndexFieldMappingList(v.TaskFieldMappings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.UseChangeLog {
+		ok := object.Key("UseChangeLog")
+		ok.Boolean(v.UseChangeLog)
+	}
+
+	if v.VpcConfiguration != nil {
+		ok := object.Key("VpcConfiguration")
+		if err := awsAwsjson11_serializeDocumentDataSourceVpcConfiguration(v.VpcConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.WebLinkFieldMappings != nil {
+		ok := object.Key("WebLinkFieldMappings")
+		if err := awsAwsjson11_serializeDocumentDataSourceToIndexFieldMappingList(v.WebLinkFieldMappings, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentCapacityUnitsConfiguration(v *types.CapacityUnitsConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3759,6 +3845,13 @@ func awsAwsjson11_serializeDocumentDatabaseConfiguration(v *types.DatabaseConfig
 func awsAwsjson11_serializeDocumentDataSourceConfiguration(v *types.DataSourceConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.BoxConfiguration != nil {
+		ok := object.Key("BoxConfiguration")
+		if err := awsAwsjson11_serializeDocumentBoxConfiguration(v.BoxConfiguration, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.ConfluenceConfiguration != nil {
 		ok := object.Key("ConfluenceConfiguration")

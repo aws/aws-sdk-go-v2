@@ -317,6 +317,7 @@ const (
 	DataSourceTypeWorkdocs    DataSourceType = "WORKDOCS"
 	DataSourceTypeFsx         DataSourceType = "FSX"
 	DataSourceTypeSlack       DataSourceType = "SLACK"
+	DataSourceTypeBox         DataSourceType = "BOX"
 )
 
 // Values returns all known values for DataSourceType. Note that this can be
@@ -337,6 +338,7 @@ func (DataSourceType) Values() []DataSourceType {
 		"WORKDOCS",
 		"FSX",
 		"SLACK",
+		"BOX",
 	}
 }
 

@@ -1,0 +1,8 @@
+{
+    "id": "7a886d0d-a9f0-4265-8c53-220493472bc8",
+    "type": "feature",
+    "description": "This release adds new APIs for creating and managing Lambda Function URLs and adds a new FunctionUrlAuthType parameter to the AddPermission API. Customers can use Function URLs to create built-in HTTPS endpoints on their functions.",
+    "modules": [
+        "service/lambda"
+    ]
+}

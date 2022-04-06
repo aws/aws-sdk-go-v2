@@ -34,10 +34,11 @@ type UpdateIndexInput struct {
 	// This member is required.
 	Id *string
 
-	// Sets the number of additional storage and query capacity units that should be
-	// used by the index. You can change the capacity of the index up to 5 times per
-	// day. If you are using extra storage units, you can't reduce the storage capacity
-	// below that required to meet the storage needs for your index.
+	// Sets the number of additional document storage and query capacity units that
+	// should be used by the index. You can change the capacity of the index up to 5
+	// times per day, or make 5 API calls. If you are using extra storage units, you
+	// can't reduce the storage capacity below what is required to meet the storage
+	// needs for your index.
 	CapacityUnits *types.CapacityUnitsConfiguration
 
 	// A new description for the index.

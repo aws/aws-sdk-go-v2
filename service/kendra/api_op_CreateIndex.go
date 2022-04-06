@@ -39,10 +39,10 @@ type CreateIndexInput struct {
 	// This member is required.
 	Name *string
 
-	// An Identity and Access Management(IAM) role that gives Amazon Kendra permissions
-	// to access your Amazon CloudWatch logs and metrics. This is also the role used
-	// when you use the BatchPutDocument API to index documents from an Amazon S3
-	// bucket.
+	// An Identity and Access Management (IAM) role that gives Amazon Kendra
+	// permissions to access your Amazon CloudWatch logs and metrics. This is also the
+	// role you use when you call the BatchPutDocument API to index documents from an
+	// Amazon S3 bucket.
 	//
 	// This member is required.
 	RoleArn *string
@@ -64,7 +64,7 @@ type CreateIndexInput struct {
 	// (https://docs.aws.amazon.com/kendra/latest/dg/quotas.html).
 	Edition types.IndexEdition
 
-	// The identifier of the KMScustomer managed key (CMK) to use to encrypt data
+	// The identifier of the KMS customer managed key (CMK) that's used to encrypt data
 	// indexed by Amazon Kendra. Amazon Kendra doesn't support asymmetric CMKs.
 	ServerSideEncryptionConfiguration *types.ServerSideEncryptionConfiguration
 
