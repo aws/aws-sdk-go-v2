@@ -202,6 +202,10 @@
                     {
                         "value": "REMOVAL_SUCCEEDED",
                         "name": "REMOVAL_SUCCEEDED"
+                    },
+                    {
+                        "value": "DEPLOYMENT_FAILED",
+                        "name": "DEPLOYMENT_FAILED"
                     }
                 ]
             }
@@ -871,7 +875,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a package.</p>\n        <note>\n            <p>To delete a package, you need permission to call <code>s3:DeleteObject</code>\n                in addition to permissions for the AWS Panorama API.</p>\n        </note>",
+                "smithy.api#documentation": "<p>Deletes a package.</p>\n         <note>\n            <p>To delete a package, you need permission to call <code>s3:DeleteObject</code> in addition to permissions for\n        the AWS Panorama API.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/packages/{PackageId}",
@@ -893,7 +897,7 @@
                 "ForceDelete": {
                     "target": "com.amazonaws.panorama#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Delete the package even if it has artifacts stored in its access point.\n           Deletes the package's artifacts from Amazon S3.</p>",
+                        "smithy.api#documentation": "<p>Delete the package even if it has artifacts stored in its access point. Deletes the package's artifacts from\n      Amazon S3.</p>",
                         "smithy.api#httpQuery": "ForceDelete"
                     }
                 }
@@ -1467,6 +1471,12 @@
                     "target": "com.amazonaws.panorama#LatestAlternateSoftware",
                     "traits": {
                         "smithy.api#documentation": "<p>The most recent beta software release.</p>"
+                    }
+                },
+                "Brand": {
+                    "target": "com.amazonaws.panorama#DeviceBrand",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The device's maker.</p>"
                     }
                 }
             }
@@ -2175,6 +2185,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The device's lease expiration time.</p>"
                     }
+                },
+                "Brand": {
+                    "target": "com.amazonaws.panorama#DeviceBrand",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The device's maker.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2188,6 +2204,21 @@
                     "min": 1,
                     "max": 255
                 }
+            }
+        },
+        "com.amazonaws.panorama#DeviceBrand": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "AWS_PANORAMA",
+                        "name": "AWS_PANORAMA"
+                    },
+                    {
+                        "value": "LENOVO",
+                        "name": "LENOVO"
+                    }
+                ]
             }
         },
         "com.amazonaws.panorama#DeviceConnectionStatus": {
@@ -3380,7 +3411,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Parameter overrides for an application instance. This is a JSON document that has a \n        single key (<code>PayloadData</code>) where the value is an escaped string\n        representation of the overrides document.</p>"
+                "smithy.api#documentation": "<p>Parameter overrides for an application instance. This is a JSON document that has a single key\n        (<code>PayloadData</code>) where the value is an escaped string representation of the overrides document.</p>"
             }
         },
         "com.amazonaws.panorama#ManifestOverridesPayloadData": {
@@ -3404,7 +3435,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A application verion's manifest file. This is a JSON document that has a \n        single key (<code>PayloadData</code>) where the value is an escaped string\n        representation of the application manifest (<code>graph.json</code>). This\n        file is located in the <code>graphs</code> folder in your application source.</p>"
+                "smithy.api#documentation": "<p>A application verion's manifest file. This is a JSON document that has a single key (<code>PayloadData</code>)\n      where the value is an escaped string representation of the application manifest (<code>graph.json</code>). This\n      file is located in the <code>graphs</code> folder in your application source.</p>"
             }
         },
         "com.amazonaws.panorama#ManifestPayloadData": {
@@ -3976,7 +4007,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Network time protocol (NTP) server settings. Use this option to connect to local NTP\n            servers instead of <code>pool.ntp.org</code>.</p>"
+                "smithy.api#documentation": "<p>Network time protocol (NTP) server settings. Use this option to connect to local NTP servers instead of\n        <code>pool.ntp.org</code>.</p>"
             }
         },
         "com.amazonaws.panorama#NtpServerList": {
@@ -4059,16 +4090,14 @@
                 "aws.api#service": {
                     "sdkId": "Panorama",
                     "arnNamespace": "panorama",
-                    "cloudFormationName": "OmniCloudServiceLambda",
-                    "cloudTrailEventSource": "panorama.amazonaws.com",
-                    "endpointPrefix": "panorama"
+                    "awsProductName": "AWSPanorama"
                 },
                 "aws.auth#sigv4": {
                     "name": "panorama"
                 },
                 "aws.protocols#restJson1": {},
                 "smithy.api#cors": {},
-                "smithy.api#documentation": "<fullname>AWS Panorama</fullname>\n         <p>\n            <b>Overview</b>\n         </p>\n         <p>This is the <i>AWS Panorama API Reference</i>. For an introduction to the service, see \n           <a href=\"https://docs.aws.amazon.com/panorama/latest/dev/panorama-welcome.html\">What is AWS Panorama?</a> \n           in the <i>AWS Panorama Developer Guide</i>.</p>",
+                "smithy.api#documentation": "<fullname>AWS Panorama</fullname>\n         <p>\n            <b>Overview</b>\n         </p>\n         <p>This is the <i>AWS Panorama API Reference</i>. For an introduction to the service, see <a href=\"https://docs.aws.amazon.com/panorama/latest/dev/panorama-welcome.html\">What is AWS Panorama?</a> in the\n        <i>AWS Panorama Developer Guide</i>.</p>",
                 "smithy.api#title": "AWS Panorama"
             },
             "version": "2019-07-24",
@@ -4605,7 +4634,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a device and returns a configuration archive. The configuration\n        archive is a ZIP file that contains a provisioning certificate that is valid for 5 minutes.\n        Transfer the configuration archive to the device with the included USB storage device within 5 minutes.</p>",
+                "smithy.api#documentation": "<p>Creates a device and returns a configuration archive. The configuration archive is a ZIP file that contains a\n      provisioning certificate that is valid for 5 minutes. Name the configuration archive\n          <code>certificates-omni_<i>device-name</i>.zip</code> and transfer it to the device within 5\n      minutes. Use the included USB storage device and connect it to the USB 3.0 port next to the HDMI output.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/devices",
@@ -5003,6 +5032,10 @@
                     {
                         "value": "PROCESSING_REMOVAL",
                         "name": "PROCESSING_REMOVAL"
+                    },
+                    {
+                        "value": "DEPLOYMENT_FAILED",
+                        "name": "DEPLOYMENT_FAILED"
                     }
                 ]
             }

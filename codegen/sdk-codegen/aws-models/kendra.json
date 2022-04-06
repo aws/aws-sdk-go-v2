@@ -929,6 +929,94 @@
         "com.amazonaws.kendra#Boolean": {
             "type": "boolean"
         },
+        "com.amazonaws.kendra#BoxConfiguration": {
+            "type": "structure",
+            "members": {
+                "EnterpriseId": {
+                    "target": "com.amazonaws.kendra#EnterpriseId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Box Enterprise platform. You can find the enterprise \n            ID in the Box Developer Console settings or when you create an app in Box and \n            download your authentication credentials. For example, <i>801234567</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SecretArn": {
+                    "target": "com.amazonaws.kendra#SecretArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an Secrets Manager secret that contains \n            the key-value pairs required to connect to your Box platform. The secret must \n            contain a JSON structure with the following keys:</p>\n        <ul>\n            <li>\n                <p>clientID—The identifier of the client OAuth 2.0 authentication\n                    application created in Box.</p>\n            </li>\n            <li>\n                <p>clientSecret—A set of characters known only to the OAuth 2.0\n                    authentication application created in Box.</p>\n            </li>\n            <li>\n                <p>publicKeyId—The identifier of the public key contained within an\n                    identity certificate.</p>\n            </li>\n            <li>\n                <p>privateKey—A set of characters that make up an encryption key.</p>\n            </li>\n            <li>\n                <p>passphrase—A set of characters that act like a password.</p>\n            </li>\n         </ul>\n        <p>You create an application in Box to generate the keys or credentials required \n            for the secret. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/data-source-box.html#box-authentication\">Authentication \n                for a Box data source</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UseChangeLog": {
+                    "target": "com.amazonaws.kendra#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <code>TRUE</code> to use the Slack change log to determine which documents require\n            updating in the index. Depending on the data source change log's size, it may take\n            longer for Amazon Kendra to use the change log than to scan all of your\n            documents.</p>"
+                    }
+                },
+                "CrawlComments": {
+                    "target": "com.amazonaws.kendra#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <code>TRUE</code> to index comments.</p>"
+                    }
+                },
+                "CrawlTasks": {
+                    "target": "com.amazonaws.kendra#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <code>TRUE</code> to index the contents of tasks.</p>"
+                    }
+                },
+                "CrawlWebLinks": {
+                    "target": "com.amazonaws.kendra#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <code>TRUE</code> to index web links.</p>"
+                    }
+                },
+                "FileFieldMappings": {
+                    "target": "com.amazonaws.kendra#DataSourceToIndexFieldMappingList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A\n            list of <code>DataSourceToIndexFieldMapping</code> objects that map attributes or \n            field names of Box files to Amazon Kendra index field names. To create custom \n            fields, use the <code>UpdateIndex</code> API before you map to Box fields. For more \n            information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html\">Mapping data source fields</a>. \n            The Box field names must exist in your Box custom metadata.</p>"
+                    }
+                },
+                "TaskFieldMappings": {
+                    "target": "com.amazonaws.kendra#DataSourceToIndexFieldMappingList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>DataSourceToIndexFieldMapping</code> objects that map attributes \n            or field names of Box tasks to Amazon Kendra index field names. To create \n            custom fields, use the <code>UpdateIndex</code> API before you map to Box fields. \n            For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html\">Mapping data source fields</a>. \n            The Box field names must exist in your Box custom metadata.</p>"
+                    }
+                },
+                "CommentFieldMappings": {
+                    "target": "com.amazonaws.kendra#DataSourceToIndexFieldMappingList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>DataSourceToIndexFieldMapping</code> objects that map attributes \n            or field names of Box comments to Amazon Kendra index field names. To create \n            custom fields, use the <code>UpdateIndex</code> API before you map to Box fields. \n            For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html\">Mapping data source fields</a>. \n            The Box field names must exist in your Box custom metadata.</p>"
+                    }
+                },
+                "WebLinkFieldMappings": {
+                    "target": "com.amazonaws.kendra#DataSourceToIndexFieldMappingList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>DataSourceToIndexFieldMapping</code> objects that map attributes \n            or field names of Box web links to Amazon Kendra index field names. To create \n            custom fields, use the <code>UpdateIndex</code> API before you map to Box fields. \n            For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html\">Mapping data source fields</a>. \n            The Box field names must exist in your Box custom metadata.</p>"
+                    }
+                },
+                "InclusionPatterns": {
+                    "target": "com.amazonaws.kendra#DataSourceInclusionsExclusionsStrings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of regular expression patterns to include certain files and folders in your \n            Box platform. Files and folders that match the patterns are included in the index. \n            Files and folders that don't match the patterns are excluded from the index. If a \n            file or folder matches both an inclusion and exclusion pattern, the exclusion pattern \n            takes precedence and the file or folder isn't included in the index.</p>"
+                    }
+                },
+                "ExclusionPatterns": {
+                    "target": "com.amazonaws.kendra#DataSourceInclusionsExclusionsStrings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of regular expression patterns to exclude certain files and folders from \n            your Box platform. Files and folders that match the patterns are excluded from the \n            index.Files and folders that don't match the patterns are included in the index. \n            If a file or folder matches both an inclusion and exclusion pattern, the exclusion \n            pattern takes precedence and the file or folder isn't included in the index.</p>"
+                    }
+                },
+                "VpcConfiguration": {
+                    "target": "com.amazonaws.kendra#DataSourceVpcConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration information for an Amazon VPC to connect to your Box. For \n            more information, see <a href=\"https://docs.aws.amazon.com/endra/latest/dg/vpc-configuration.html\">Configuring a VPC</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides the configuration information to connect to Box as \n            your data source.</p>"
+            }
+        },
         "com.amazonaws.kendra#CapacityUnitsConfiguration": {
             "type": "structure",
             "members": {
@@ -948,7 +1036,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies capacity units configured for your enterprise edition index. \n            You can add and remove capacity units to tune an index to your\n            requirements.</p>"
+                "smithy.api#documentation": "<p>Specifies additional capacity units configured for your \n            Enterprise Edition index. You can add and remove capacity units \n            to fit your usage requirements.</p>"
             }
         },
         "com.amazonaws.kendra#ChangeDetectingColumns": {
@@ -2207,14 +2295,14 @@
                 "RoleArn": {
                     "target": "com.amazonaws.kendra#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>An Identity and Access Management(IAM) role that gives\n      Amazon Kendra permissions to access your Amazon CloudWatch logs and\n      metrics. This is also the role used when you use the\n        <code>BatchPutDocument</code> API to index documents from an\n      Amazon S3 bucket.</p>",
+                        "smithy.api#documentation": "<p>An Identity and Access Management (IAM) role that gives\n      Amazon Kendra permissions to access your Amazon CloudWatch logs and\n      metrics. This is also the role you use when you call the\n        <code>BatchPutDocument</code> API to index documents from an\n      Amazon S3 bucket.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ServerSideEncryptionConfiguration": {
                     "target": "com.amazonaws.kendra#ServerSideEncryptionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the KMScustomer managed key (CMK) to use to\n      encrypt data indexed by Amazon Kendra. Amazon Kendra doesn't support\n      asymmetric CMKs.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the KMS customer managed key (CMK) that's \n      used to encrypt data indexed by Amazon Kendra. Amazon Kendra doesn't support\n      asymmetric CMKs.</p>"
                     }
                 },
                 "Description": {
@@ -2565,6 +2653,12 @@
                     "target": "com.amazonaws.kendra#SlackConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Provides the configuration information to connect to Slack as your \n            data source.</p>"
+                    }
+                },
+                "BoxConfiguration": {
+                    "target": "com.amazonaws.kendra#BoxConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides the configuration information to connect to Box as your data source.</p>"
                     }
                 }
             },
@@ -3023,6 +3117,10 @@
                     {
                         "value": "SLACK",
                         "name": "SLACK"
+                    },
+                    {
+                        "value": "BOX",
+                        "name": "BOX"
                     }
                 ]
             }
@@ -3897,7 +3995,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes an existing Amazon Kendra index</p>"
+                "smithy.api#documentation": "<p>Describes an existing Amazon Kendra index.</p>"
             }
         },
         "com.amazonaws.kendra#DescribeIndexRequest": {
@@ -3906,7 +4004,7 @@
                 "Id": {
                     "target": "com.amazonaws.kendra#IndexId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the index to describe.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the index to describe.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3924,7 +4022,7 @@
                 "Id": {
                     "target": "com.amazonaws.kendra#IndexId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the index.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the index.</p>"
                     }
                 },
                 "Edition": {
@@ -3942,7 +4040,7 @@
                 "ServerSideEncryptionConfiguration": {
                     "target": "com.amazonaws.kendra#ServerSideEncryptionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the KMScustomer master key (CMK) used to\n      encrypt your data. Amazon Kendra doesn't support asymmetric CMKs.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the KMScustomer master key (CMK) \n      that is used to encrypt your data. Amazon Kendra doesn't support \n      asymmetric CMKs.</p>"
                     }
                 },
                 "Status": {
@@ -3954,7 +4052,7 @@
                 "Description": {
                     "target": "com.amazonaws.kendra#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p>The description of the index.</p>"
+                        "smithy.api#documentation": "<p>The description for the index.</p>"
                     }
                 },
                 "CreatedAt": {
@@ -3984,13 +4082,13 @@
                 "ErrorMessage": {
                     "target": "com.amazonaws.kendra#ErrorMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>When th e<code>Status</code> field value is <code>FAILED</code>, the\n        <code>ErrorMessage</code> field contains a message that explains\n      why.</p>"
+                        "smithy.api#documentation": "<p>When the <code>Status</code> field value is <code>FAILED</code>, the\n        <code>ErrorMessage</code> field contains a message that explains\n      why.</p>"
                     }
                 },
                 "CapacityUnits": {
                     "target": "com.amazonaws.kendra#CapacityUnitsConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>For Enterprise edition indexes, you can choose to use additional\n      capacity to meet the needs of your application. This contains the capacity\n      units used for the index. A 0 for the query capacity or the storage\n      capacity indicates that the index is using the default capacity for the\n      index.</p>"
+                        "smithy.api#documentation": "<p>For Enterprise Edition indexes, you can choose to use additional\n      capacity to meet the needs of your application. This contains the capacity\n      units used for the index. A query or document storage capacity of zero\n      indicates that the index is using the default capacity. For more information \n      on the default capacity for an index and adjusting this, see \n      <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/adjusting-capacity.html\">Adjusting \n        capacity</a>.</p>"
                     }
                 },
                 "UserTokenConfigurations": {
@@ -5097,6 +5195,16 @@
                         "name": "HOME"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.kendra#EnterpriseId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[A-Z0-9]*$"
             }
         },
         "com.amazonaws.kendra#EntityConfiguration": {
@@ -6290,7 +6398,7 @@
                 "Name": {
                     "target": "com.amazonaws.kendra#IndexName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the index.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the index.</p>"
                     }
                 },
                 "Id": {
@@ -7272,7 +7380,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the Amazon Kendra indexes that you have created.</p>",
+                "smithy.api#documentation": "<p>Lists the Amazon Kendra indexes that you created.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -11021,7 +11129,7 @@
                 "CapacityUnits": {
                     "target": "com.amazonaws.kendra#CapacityUnitsConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Sets the number of additional storage and query capacity units that\n      should be used by the index. You can change the capacity of the index up\n      to 5 times per day.</p>\n         <p>If you are using extra storage units, you can't reduce the storage\n      capacity below that required to meet the storage needs for your\n      index.</p>"
+                        "smithy.api#documentation": "<p>Sets the number of additional document storage and query capacity \n      units that should be used by the index. You can change the capacity of \n      the index up to 5 times per day, or make 5 API calls.</p>\n         <p>If you are using extra storage units, you can't reduce the storage\n      capacity below what is required to meet the storage needs for your \n      index.</p>"
                     }
                 },
                 "UserTokenConfigurations": {
