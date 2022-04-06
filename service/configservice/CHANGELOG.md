@@ -1,3 +1,7 @@
+# v1.21.0 (2022-04-06)
+
+* **Feature**: Add resourceType enums for AWS::EMR::SecurityConfiguration and AWS::SageMaker::CodeRepository
+
 # v1.20.1 (2022-03-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions

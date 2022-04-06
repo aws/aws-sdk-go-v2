@@ -1,3 +1,7 @@
+# v1.22.0 (2022-04-06)
+
+* **Feature**: This release adds new APIs for creating and managing Lambda Function URLs and adds a new FunctionUrlAuthType parameter to the AddPermission API. Customers can use Function URLs to create built-in HTTPS endpoints on their functions.
+
 # v1.21.1 (2022-03-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "4411aa09-ba27-4826-bd16-1649cef2ed7c",
-    "type": "feature",
-    "description": "Added Brand field to device listings.",
-    "modules": [
-        "service/panorama"
-    ]
-}

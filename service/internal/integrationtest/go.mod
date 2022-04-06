@@ -23,7 +23,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.13.3
 	github.com/aws/aws-sdk-go-v2/service/codestar v1.11.3
 	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.15.3
-	github.com/aws/aws-sdk-go-v2/service/configservice v1.20.1
+	github.com/aws/aws-sdk-go-v2/service/configservice v1.21.0
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.13.3
 	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.18.3
 	github.com/aws/aws-sdk-go-v2/service/devicefarm v1.13.3
@@ -53,7 +53,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/iot v1.24.0
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.15.3
 	github.com/aws/aws-sdk-go-v2/service/kms v1.16.3
-	github.com/aws/aws-sdk-go-v2/service/lambda v1.21.1
+	github.com/aws/aws-sdk-go-v2/service/lambda v1.22.0
 	github.com/aws/aws-sdk-go-v2/service/lightsail v1.18.3
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.11.3
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.16.3

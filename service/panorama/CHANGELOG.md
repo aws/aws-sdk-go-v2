@@ -1,3 +1,7 @@
+# v1.7.0 (2022-04-06)
+
+* **Feature**: Added Brand field to device listings.
+
 # v1.6.3 (2022-03-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions

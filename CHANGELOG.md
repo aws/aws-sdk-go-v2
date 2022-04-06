@@ -1,3 +1,15 @@
+# Release (2022-04-06)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/configservice`: [v1.21.0](service/configservice/CHANGELOG.md#v1210-2022-04-06)
+  * **Feature**: Add resourceType enums for AWS::EMR::SecurityConfiguration and AWS::SageMaker::CodeRepository
+* `github.com/aws/aws-sdk-go-v2/service/kendra`: [v1.24.0](service/kendra/CHANGELOG.md#v1240-2022-04-06)
+  * **Feature**: Amazon Kendra now provides a data source connector for Box. For more information, see https://docs.aws.amazon.com/kendra/latest/dg/data-source-box.html
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.22.0](service/lambda/CHANGELOG.md#v1220-2022-04-06)
+  * **Feature**: This release adds new APIs for creating and managing Lambda Function URLs and adds a new FunctionUrlAuthType parameter to the AddPermission API. Customers can use Function URLs to create built-in HTTPS endpoints on their functions.
+* `github.com/aws/aws-sdk-go-v2/service/panorama`: [v1.7.0](service/panorama/CHANGELOG.md#v170-2022-04-06)
+  * **Feature**: Added Brand field to device listings.
+
 # Release (2022-04-05)
 
 ## Module Highlights

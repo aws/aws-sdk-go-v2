@@ -1,3 +1,7 @@
+# v1.24.0 (2022-04-06)
+
+* **Feature**: Amazon Kendra now provides a data source connector for Box. For more information, see https://docs.aws.amazon.com/kendra/latest/dg/data-source-box.html
+
 # v1.23.3 (2022-03-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions
