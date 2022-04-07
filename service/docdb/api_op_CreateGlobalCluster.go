@@ -12,14 +12,14 @@ import (
 )
 
 // Creates an Amazon DocumentDB global cluster that can span multiple multiple
-// Regions. The global cluster contains one primary cluster with read-write
-// capability, and up-to give read-only secondary clusters. Global clusters uses
-// storage-based fast replication across regions with latencies less than one
-// second, using dedicated infrastructure with no impact to your workload’s
-// performance. You can create a global cluster that is initially empty, and then
-// add a primary and a secondary to it. Or you can specify an existing cluster
-// during the create operation, and this cluster becomes the primary of the global
-// cluster. This action only applies to Amazon DocumentDB clusters.
+// Amazon Web Services Regions. The global cluster contains one primary cluster
+// with read-write capability, and up-to give read-only secondary clusters. Global
+// clusters uses storage-based fast replication across regions with latencies less
+// than one second, using dedicated infrastructure with no impact to your
+// workload’s performance. You can create a global cluster that is initially empty,
+// and then add a primary and a secondary to it. Or you can specify an existing
+// cluster during the create operation, and this cluster becomes the primary of the
+// global cluster. This action only applies to Amazon DocumentDB clusters.
 func (c *Client) CreateGlobalCluster(ctx context.Context, params *CreateGlobalClusterInput, optFns ...func(*Options)) (*CreateGlobalClusterOutput, error) {
 	if params == nil {
 		params = &CreateGlobalClusterInput{}

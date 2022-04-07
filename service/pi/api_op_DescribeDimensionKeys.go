@@ -61,10 +61,10 @@ type DescribeDimensionKeysInput struct {
 	// The name of a Performance Insights metric to be measured. Valid values for
 	// Metric are:
 	//
-	// * db.load.avg - a scaled representation of the number of active
+	// * db.load.avg - A scaled representation of the number of active
 	// sessions for the database engine.
 	//
-	// * db.sampledload.avg - the raw number of
+	// * db.sampledload.avg - The raw number of
 	// active sessions for the database engine.
 	//
 	// If the number of active sessions is
@@ -79,7 +79,11 @@ type DescribeDimensionKeysInput struct {
 	Metric *string
 
 	// The Amazon Web Services service for which Performance Insights will return
-	// metrics. The only valid value for ServiceType is RDS.
+	// metrics. Valid values are as follows:
+	//
+	// * RDS
+	//
+	// * DOCDB
 	//
 	// This member is required.
 	ServiceType types.ServiceType
@@ -94,8 +98,8 @@ type DescribeDimensionKeysInput struct {
 
 	// Additional metrics for the top N dimension keys. If the specified dimension
 	// group in the GroupBy parameter is db.sql_tokenized, you can specify per-SQL
-	// metrics to get the values for the top N SQL digests. The response syntax is
-	// "AdditionalMetrics" : { "string" : "string" }.
+	// metrics to get the values for the top N SQL digests. The response syntax is as
+	// follows: "AdditionalMetrics" : { "string" : "string" }.
 	AdditionalMetrics []string
 
 	// One or more filters to apply in the request. Restrictions:

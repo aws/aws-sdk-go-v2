@@ -25,17 +25,21 @@ import (
 // * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
 //
 // To
-// get the status of the import job, call DescribeDatasetImportJob, providing the
-// Amazon Resource Name (ARN) of the dataset import job. The dataset import is
-// complete when the status shows as ACTIVE. If the status shows as CREATE FAILED,
-// the response includes a failureReason key, which describes why the job failed.
-// Importing takes time. You must wait until the status shows as ACTIVE before
-// training a model using the dataset. Related APIs
+// get the status of the import job, call DescribeDatasetImportJob
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetImportJob.html),
+// providing the Amazon Resource Name (ARN) of the dataset import job. The dataset
+// import is complete when the status shows as ACTIVE. If the status shows as
+// CREATE FAILED, the response includes a failureReason key, which describes why
+// the job failed. Importing takes time. You must wait until the status shows as
+// ACTIVE before training a model using the dataset. Related APIs
 //
-// * ListDatasetImportJobs
+// *
+// ListDatasetImportJobs
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_ListDatasetImportJobs.html)
 //
 // *
 // DescribeDatasetImportJob
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetImportJob.html)
 func (c *Client) CreateDatasetImportJob(ctx context.Context, params *CreateDatasetImportJobInput, optFns ...func(*Options)) (*CreateDatasetImportJobOutput, error) {
 	if params == nil {
 		params = &CreateDatasetImportJobInput{}
@@ -73,6 +77,11 @@ type CreateDatasetImportJobInput struct {
 	//
 	// This member is required.
 	RoleArn *string
+
+	// A list of tags
+	// (https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html) to
+	// apply to the dataset import job.
+	Tags []types.Tag
 
 	noSmithyDocumentSerde
 }

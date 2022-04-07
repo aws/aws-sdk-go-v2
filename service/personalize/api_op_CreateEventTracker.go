@@ -6,6 +6,7 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -28,15 +29,21 @@ import (
 // * DELETE PENDING > DELETE
 // IN_PROGRESS
 //
-// To get the status of the event tracker, call DescribeEventTracker.
+// To get the status of the event tracker, call DescribeEventTracker
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeEventTracker.html).
 // The event tracker must be in the ACTIVE state before using the tracking ID.
 // Related APIs
 //
 // * ListEventTrackers
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_ListEventTrackers.html)
 //
-// * DescribeEventTracker
+// *
+// DescribeEventTracker
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeEventTracker.html)
 //
-// * DeleteEventTracker
+// *
+// DeleteEventTracker
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteEventTracker.html)
 func (c *Client) CreateEventTracker(ctx context.Context, params *CreateEventTrackerInput, optFns ...func(*Options)) (*CreateEventTrackerOutput, error) {
 	if params == nil {
 		params = &CreateEventTrackerInput{}
@@ -64,6 +71,11 @@ type CreateEventTrackerInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	// A list of tags
+	// (https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html) to
+	// apply to the event tracker.
+	Tags []types.Tag
 
 	noSmithyDocumentSerde
 }

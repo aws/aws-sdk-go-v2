@@ -37,18 +37,25 @@ import (
 // * DELETE PENDING > DELETE
 // IN_PROGRESS
 //
-// To get the campaign status, call DescribeCampaign. Wait until the
-// status of the campaign is ACTIVE before asking the campaign for recommendations.
-// Related APIs
+// To get the campaign status, call DescribeCampaign
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html).
+// Wait until the status of the campaign is ACTIVE before asking the campaign for
+// recommendations. Related APIs
 //
 // * ListCampaigns
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_ListCampaigns.html)
 //
-// * DescribeCampaign
+// *
+// DescribeCampaign
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html)
 //
-// * UpdateCampaign
+// *
+// UpdateCampaign
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_UpdateCampaign.html)
 //
 // *
 // DeleteCampaign
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteCampaign.html)
 func (c *Client) CreateCampaign(ctx context.Context, params *CreateCampaignInput, optFns ...func(*Options)) (*CreateCampaignOutput, error) {
 	if params == nil {
 		params = &CreateCampaignInput{}
@@ -83,6 +90,11 @@ type CreateCampaignInput struct {
 	// Specifies the requested minimum provisioned transactions (recommendations) per
 	// second that Amazon Personalize will support.
 	MinProvisionedTPS *int32
+
+	// A list of tags
+	// (https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html) to
+	// apply to the campaign.
+	Tags []types.Tag
 
 	noSmithyDocumentSerde
 }

@@ -101,25 +101,25 @@ type ModifyDBClusterInput struct {
 
 	// The daily time range during which automated backups are created if automated
 	// backups are enabled, using the BackupRetentionPeriod parameter. The default is a
-	// 30-minute window selected at random from an 8-hour block of time for each
-	// Region. Constraints:
+	// 30-minute window selected at random from an 8-hour block of time for each Amazon
+	// Web Services Region. Constraints:
 	//
 	// * Must be in the format hh24:mi-hh24:mi.
 	//
-	// * Must be in
-	// Universal Coordinated Time (UTC).
+	// *
+	// Must be in Universal Coordinated Time (UTC).
 	//
-	// * Must not conflict with the preferred
-	// maintenance window.
+	// * Must not conflict with the
+	// preferred maintenance window.
 	//
 	// * Must be at least 30 minutes.
 	PreferredBackupWindow *string
 
 	// The weekly time range during which system maintenance can occur, in Universal
 	// Coordinated Time (UTC). Format: ddd:hh24:mi-ddd:hh24:mi The default is a
-	// 30-minute window selected at random from an 8-hour block of time for each
-	// Region, occurring on a random day of the week. Valid days: Mon, Tue, Wed, Thu,
-	// Fri, Sat, Sun Constraints: Minimum 30-minute window.
+	// 30-minute window selected at random from an 8-hour block of time for each Amazon
+	// Web Services Region, occurring on a random day of the week. Valid days: Mon,
+	// Tue, Wed, Thu, Fri, Sat, Sun Constraints: Minimum 30-minute window.
 	PreferredMaintenanceWindow *string
 
 	// A list of virtual private cloud (VPC) security groups that the cluster will

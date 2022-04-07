@@ -12,7 +12,7 @@ import (
 )
 
 // Modifies an existing subnet group. subnet groups must contain at least one
-// subnet in at least two Availability Zones in the Region.
+// subnet in at least two Availability Zones in the Amazon Web Services Region.
 func (c *Client) ModifyDBSubnetGroup(ctx context.Context, params *ModifyDBSubnetGroupInput, optFns ...func(*Options)) (*ModifyDBSubnetGroupOutput, error) {
 	if params == nil {
 		params = &ModifyDBSubnetGroupInput{}

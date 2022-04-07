@@ -94,16 +94,17 @@ type CreateDBClusterInput struct {
 
 	// The KMS key identifier for an encrypted cluster. The KMS key identifier is the
 	// Amazon Resource Name (ARN) for the KMS encryption key. If you are creating a
-	// cluster using the same account that owns the KMS encryption key that is used to
-	// encrypt the new cluster, you can use the KMS key alias instead of the ARN for
-	// the KMS encryption key. If an encryption key is not specified in KmsKeyId:
+	// cluster using the same Amazon Web Services account that owns the KMS encryption
+	// key that is used to encrypt the new cluster, you can use the KMS key alias
+	// instead of the ARN for the KMS encryption key. If an encryption key is not
+	// specified in KmsKeyId:
 	//
-	// * If
-	// the StorageEncrypted parameter is true, Amazon DocumentDB uses your default
-	// encryption key.
+	// * If the StorageEncrypted parameter is true, Amazon
+	// DocumentDB uses your default encryption key.
 	//
-	// KMS creates the default encryption key for your account. Your
-	// account has a different default encryption key for each Regions.
+	// KMS creates the default encryption
+	// key for your Amazon Web Services account. Your Amazon Web Services account has a
+	// different default encryption key for each Amazon Web Services Regions.
 	KmsKeyId *string
 
 	// The password for the master database user. This password can contain any
@@ -130,25 +131,25 @@ type CreateDBClusterInput struct {
 
 	// The daily time range during which automated backups are created if automated
 	// backups are enabled using the BackupRetentionPeriod parameter. The default is a
-	// 30-minute window selected at random from an 8-hour block of time for each
-	// Region. Constraints:
+	// 30-minute window selected at random from an 8-hour block of time for each Amazon
+	// Web Services Region. Constraints:
 	//
 	// * Must be in the format hh24:mi-hh24:mi.
 	//
-	// * Must be in
-	// Universal Coordinated Time (UTC).
+	// *
+	// Must be in Universal Coordinated Time (UTC).
 	//
-	// * Must not conflict with the preferred
-	// maintenance window.
+	// * Must not conflict with the
+	// preferred maintenance window.
 	//
 	// * Must be at least 30 minutes.
 	PreferredBackupWindow *string
 
 	// The weekly time range during which system maintenance can occur, in Universal
 	// Coordinated Time (UTC). Format: ddd:hh24:mi-ddd:hh24:mi The default is a
-	// 30-minute window selected at random from an 8-hour block of time for each
-	// Region, occurring on a random day of the week. Valid days: Mon, Tue, Wed, Thu,
-	// Fri, Sat, Sun Constraints: Minimum 30-minute window.
+	// 30-minute window selected at random from an 8-hour block of time for each Amazon
+	// Web Services Region, occurring on a random day of the week. Valid days: Mon,
+	// Tue, Wed, Thu, Fri, Sat, Sun Constraints: Minimum 30-minute window.
 	PreferredMaintenanceWindow *string
 
 	// The AWS region the resource is in. The presigned URL will be created with this

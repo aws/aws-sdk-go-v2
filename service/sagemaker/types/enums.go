@@ -1735,6 +1735,14 @@ const (
 	InstanceTypeMlR512xlarge   InstanceType = "ml.r5.12xlarge"
 	InstanceTypeMlR516xlarge   InstanceType = "ml.r5.16xlarge"
 	InstanceTypeMlR524xlarge   InstanceType = "ml.r5.24xlarge"
+	InstanceTypeMlG5Xlarge     InstanceType = "ml.g5.xlarge"
+	InstanceTypeMlG52xlarge    InstanceType = "ml.g5.2xlarge"
+	InstanceTypeMlG54xlarge    InstanceType = "ml.g5.4xlarge"
+	InstanceTypeMlG58xlarge    InstanceType = "ml.g5.8xlarge"
+	InstanceTypeMlG516xlarge   InstanceType = "ml.g5.16xlarge"
+	InstanceTypeMlG512xlarge   InstanceType = "ml.g5.12xlarge"
+	InstanceTypeMlG524xlarge   InstanceType = "ml.g5.24xlarge"
+	InstanceTypeMlG548xlarge   InstanceType = "ml.g5.48xlarge"
 )
 
 // Values returns all known values for InstanceType. Note that this can be expanded
@@ -1803,6 +1811,14 @@ func (InstanceType) Values() []InstanceType {
 		"ml.r5.12xlarge",
 		"ml.r5.16xlarge",
 		"ml.r5.24xlarge",
+		"ml.g5.xlarge",
+		"ml.g5.2xlarge",
+		"ml.g5.4xlarge",
+		"ml.g5.8xlarge",
+		"ml.g5.16xlarge",
+		"ml.g5.12xlarge",
+		"ml.g5.24xlarge",
+		"ml.g5.48xlarge",
 	}
 }
 

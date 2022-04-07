@@ -13,10 +13,14 @@ import (
 
 // Creates the configuration for training a model. A trained model is known as a
 // solution. After the configuration is created, you train the model (create a
-// solution) by calling the CreateSolutionVersion operation. Every time you call
-// CreateSolutionVersion, a new version of the solution is created. After creating
-// a solution version, you check its accuracy by calling GetSolutionMetrics. When
-// you are satisfied with the version, you deploy it using CreateCampaign. The
+// solution) by calling the CreateSolutionVersion
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolutionVersion.html)
+// operation. Every time you call CreateSolutionVersion, a new version of the
+// solution is created. After creating a solution version, you check its accuracy
+// by calling GetSolutionMetrics
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_GetSolutionMetrics.html).
+// When you are satisfied with the version, you deploy it using CreateCampaign
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateCampaign.html). The
 // campaign provides recommendations to a client through the GetRecommendations
 // (https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html)
 // API. To train a model, Amazon Personalize requires training data and a recipe.
@@ -35,22 +39,33 @@ import (
 // * DELETE PENDING > DELETE IN_PROGRESS
 //
 // To get the status of the
-// solution, call DescribeSolution. Wait until the status shows as ACTIVE before
-// calling CreateSolutionVersion. Related APIs
+// solution, call DescribeSolution
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolution.html).
+// Wait until the status shows as ACTIVE before calling CreateSolutionVersion.
+// Related APIs
 //
 // * ListSolutions
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutions.html)
 //
 // *
 // CreateSolutionVersion
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolutionVersion.html)
 //
-// * DescribeSolution
+// *
+// DescribeSolution
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolution.html)
 //
-// * DeleteSolution
+// *
+// DeleteSolution
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteSolution.html)
 //
 // *
 // ListSolutionVersions
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutionVersions.html)
 //
-// * DescribeSolutionVersion
+// *
+// DescribeSolutionVersion
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolutionVersion.html)
 func (c *Client) CreateSolution(ctx context.Context, params *CreateSolutionInput, optFns ...func(*Options)) (*CreateSolutionOutput, error) {
 	if params == nil {
 		params = &CreateSolutionInput{}
@@ -108,6 +123,11 @@ type CreateSolutionInput struct {
 	// configuration. Amazon Personalize doesn't support configuring the hpoObjective
 	// at this time.
 	SolutionConfig *types.SolutionConfig
+
+	// A list of tags
+	// (https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html) to
+	// apply to the solution.
+	Tags []types.Tag
 
 	noSmithyDocumentSerde
 }

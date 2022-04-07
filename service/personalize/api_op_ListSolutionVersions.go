@@ -15,8 +15,7 @@ import (
 // Returns a list of solution versions for the given solution. When a solution is
 // not specified, all the solution versions associated with the account are listed.
 // The response provides the properties for each solution version, including the
-// Amazon Resource Name (ARN). For more information on solutions, see
-// CreateSolution.
+// Amazon Resource Name (ARN).
 func (c *Client) ListSolutionVersions(ctx context.Context, params *ListSolutionVersionsInput, optFns ...func(*Options)) (*ListSolutionVersionsOutput, error) {
 	if params == nil {
 		params = &ListSolutionVersionsInput{}

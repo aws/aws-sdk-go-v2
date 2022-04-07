@@ -6,11 +6,14 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a recommendation filter. For more information, see filter.
+// Creates a recommendation filter. For more information, see Filtering
+// recommendations and user segments
+// (https://docs.aws.amazon.com/personalize/latest/dg/filter.html).
 func (c *Client) CreateFilter(ctx context.Context, params *CreateFilterInput, optFns ...func(*Options)) (*CreateFilterOutput, error) {
 	if params == nil {
 		params = &CreateFilterInput{}
@@ -35,8 +38,8 @@ type CreateFilterInput struct {
 
 	// The filter expression defines which items are included or excluded from
 	// recommendations. Filter expression must follow specific format rules. For
-	// information about filter expression structure and syntax, see
-	// filter-expressions.
+	// information about filter expression structure and syntax, see Filter expressions
+	// (https://docs.aws.amazon.com/personalize/latest/dg/filter-expressions.html).
 	//
 	// This member is required.
 	FilterExpression *string
@@ -45,6 +48,11 @@ type CreateFilterInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	// A list of tags
+	// (https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html) to
+	// apply to the filter.
+	Tags []types.Tag
 
 	noSmithyDocumentSerde
 }

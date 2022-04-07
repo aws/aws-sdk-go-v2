@@ -1,0 +1,8 @@
+{
+    "id": "647ba97f-dc57-431d-be03-bd19fa7e6013",
+    "type": "feature",
+    "description": "Adds new EventBridge Endpoint resources for disaster recovery, multi-region failover, and cross-region replication capabilities to help you build resilient event-driven applications.",
+    "modules": [
+        "service/eventbridge"
+    ]
+}

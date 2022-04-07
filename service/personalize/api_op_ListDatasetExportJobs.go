@@ -16,8 +16,10 @@ import (
 // is not specified, all the dataset export jobs associated with the account are
 // listed. The response provides the properties for each dataset export job,
 // including the Amazon Resource Name (ARN). For more information on dataset export
-// jobs, see CreateDatasetExportJob. For more information on datasets, see
-// CreateDataset.
+// jobs, see CreateDatasetExportJob
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetExportJob.html).
+// For more information on datasets, see CreateDataset
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataset.html).
 func (c *Client) ListDatasetExportJobs(ctx context.Context, params *ListDatasetExportJobsInput, optFns ...func(*Options)) (*ListDatasetExportJobsOutput, error) {
 	if params == nil {
 		params = &ListDatasetExportJobsInput{}

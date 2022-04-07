@@ -6,56 +6,56 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes all versions of a solution and the Solution object itself. Before
-// deleting a solution, you must delete all campaigns based on the solution. To
-// determine what campaigns are using the solution, call ListCampaigns
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_ListCampaigns.html) and
-// supply the Amazon Resource Name (ARN) of the solution. You can't delete a
-// solution if an associated SolutionVersion is in the CREATE PENDING or IN
-// PROGRESS state. For more information on solutions, see CreateSolution
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolution.html).
-func (c *Client) DeleteSolution(ctx context.Context, params *DeleteSolutionInput, optFns ...func(*Options)) (*DeleteSolutionOutput, error) {
+// Get a list of tags
+// (https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html)
+// attached to a resource.
+func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
-		params = &DeleteSolutionInput{}
+		params = &ListTagsForResourceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteSolution", params, optFns, c.addOperationDeleteSolutionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListTagsForResource", params, optFns, c.addOperationListTagsForResourceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DeleteSolutionOutput)
+	out := result.(*ListTagsForResourceOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type DeleteSolutionInput struct {
+type ListTagsForResourceInput struct {
 
-	// The ARN of the solution to delete.
+	// The resource's Amazon Resource Name.
 	//
 	// This member is required.
-	SolutionArn *string
+	ResourceArn *string
 
 	noSmithyDocumentSerde
 }
 
-type DeleteSolutionOutput struct {
+type ListTagsForResourceOutput struct {
+
+	// The resource's tags.
+	Tags []types.Tag
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDeleteSolutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteSolution{}, middleware.After)
+func (c *Client) addOperationListTagsForResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTagsForResource{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteSolution{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListTagsForResource{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -95,10 +95,10 @@ func (c *Client) addOperationDeleteSolutionMiddlewares(stack *middleware.Stack, 
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpDeleteSolutionValidationMiddleware(stack); err != nil {
+	if err = addOpListTagsForResourceValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteSolution(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTagsForResource(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -113,11 +113,11 @@ func (c *Client) addOperationDeleteSolutionMiddlewares(stack *middleware.Stack, 
 	return nil
 }
 
-func newServiceMetadataMiddleware_opDeleteSolution(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opListTagsForResource(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "personalize",
-		OperationName: "DeleteSolution",
+		OperationName: "ListTagsForResource",
 	}
 }

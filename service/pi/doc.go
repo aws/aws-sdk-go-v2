@@ -20,10 +20,16 @@
 // * To
 // learn more about Performance Insights and Amazon Aurora DB instances, go to the
 // Amazon Aurora User Guide
-// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights.html).
+// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights.html)
+// .
 //
-// *
-// To learn more about Performance Insights and Amazon RDS DB instances, go to the
-// Amazon RDS User Guide
-// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html).
+// * To learn more about Performance Insights and Amazon RDS DB instances, go to
+// the  Amazon RDS User Guide
+// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html)
+// .
+//
+// * To learn more about Performance Insights and Amazon DocumentDB clusters, go
+// to the  Amazon DocumentDB Developer Guide
+// (https://docs.aws.amazon.com/documentdb/latest/developerguide/performance-insights.html)
+// .
 package pi

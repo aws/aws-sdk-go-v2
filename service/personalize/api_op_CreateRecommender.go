@@ -42,18 +42,25 @@ import (
 // * DELETE PENDING > DELETE
 // IN_PROGRESS
 //
-// To get the recommender status, call DescribeRecommender. Wait until
-// the status of the recommender is ACTIVE before asking the recommender for
-// recommendations. Related APIs
+// To get the recommender status, call DescribeRecommender
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeRecommender.html).
+// Wait until the status of the recommender is ACTIVE before asking the recommender
+// for recommendations. Related APIs
 //
 // * ListRecommenders
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_ListRecommenders.html)
 //
-// * DescribeRecommender
+// *
+// DescribeRecommender
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeRecommender.html)
 //
 // *
 // UpdateRecommender
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_UpdateRecommender.html)
 //
-// * DeleteRecommender
+// *
+// DeleteRecommender
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteRecommender.html)
 func (c *Client) CreateRecommender(ctx context.Context, params *CreateRecommenderInput, optFns ...func(*Options)) (*CreateRecommenderOutput, error) {
 	if params == nil {
 		params = &CreateRecommenderInput{}
@@ -93,6 +100,11 @@ type CreateRecommenderInput struct {
 
 	// The configuration details of the recommender.
 	RecommenderConfig *types.RecommenderConfig
+
+	// A list of tags
+	// (https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html) to
+	// apply to the recommender.
+	Tags []types.Tag
 
 	noSmithyDocumentSerde
 }

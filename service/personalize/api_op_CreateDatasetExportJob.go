@@ -23,10 +23,12 @@ import (
 // CREATE FAILED
 //
 // To get the status of the export job, call
-// DescribeDatasetExportJob, and specify the Amazon Resource Name (ARN) of the
-// dataset export job. The dataset export is complete when the status shows as
-// ACTIVE. If the status shows as CREATE FAILED, the response includes a
-// failureReason key, which describes why the job failed.
+// DescribeDatasetExportJob
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetExportJob.html),
+// and specify the Amazon Resource Name (ARN) of the dataset export job. The
+// dataset export is complete when the status shows as ACTIVE. If the status shows
+// as CREATE FAILED, the response includes a failureReason key, which describes why
+// the job failed.
 func (c *Client) CreateDatasetExportJob(ctx context.Context, params *CreateDatasetExportJobInput, optFns ...func(*Options)) (*CreateDatasetExportJobOutput, error) {
 	if params == nil {
 		params = &CreateDatasetExportJobInput{}
@@ -70,6 +72,11 @@ type CreateDatasetExportJobInput struct {
 	// you imported incrementally (using the console, PutEvents, PutUsers and PutItems
 	// operations), or ALL for both types. The default value is PUT.
 	IngestionMode types.IngestionMode
+
+	// A list of tags
+	// (https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html) to
+	// apply to the dataset export job.
+	Tags []types.Tag
 
 	noSmithyDocumentSerde
 }

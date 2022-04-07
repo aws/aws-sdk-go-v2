@@ -16,7 +16,7 @@ type AvailabilityZone struct {
 	noSmithyDocumentSerde
 }
 
-// A certificate authority (CA) certificate for an account.
+// A certificate authority (CA) certificate for an Amazon Web Services account.
 type Certificate struct {
 
 	// The Amazon Resource Name (ARN) for the certificate. Example:
@@ -96,9 +96,9 @@ type DBCluster struct {
 	// including the name, description, and subnets in the subnet group.
 	DBSubnetGroup *string
 
-	// The Region-unique, immutable identifier for the cluster. This identifier is
-	// found in CloudTrail log entries whenever the KMS key for the cluster is
-	// accessed.
+	// The Amazon Web Services Region-unique, immutable identifier for the cluster.
+	// This identifier is found in CloudTrail log entries whenever the KMS key for the
+	// cluster is accessed.
 	DbClusterResourceId *string
 
 	// Specifies whether this cluster can be deleted. If DeletionProtection is enabled,
@@ -318,20 +318,20 @@ type DBClusterSnapshot struct {
 }
 
 // Contains the name and values of a manual cluster snapshot attribute. Manual
-// cluster snapshot attributes are used to authorize other accounts to restore a
-// manual cluster snapshot.
+// cluster snapshot attributes are used to authorize other Amazon Web Services
+// accounts to restore a manual cluster snapshot.
 type DBClusterSnapshotAttribute struct {
 
 	// The name of the manual cluster snapshot attribute. The attribute named restore
-	// refers to the list of accounts that have permission to copy or restore the
-	// manual cluster snapshot.
+	// refers to the list of Amazon Web Services accounts that have permission to copy
+	// or restore the manual cluster snapshot.
 	AttributeName *string
 
 	// The values for the manual cluster snapshot attribute. If the AttributeName field
-	// is set to restore, then this element returns a list of IDs of the accounts that
-	// are authorized to copy or restore the manual cluster snapshot. If a value of all
-	// is in the list, then the manual cluster snapshot is public and available for any
-	// account to copy or restore.
+	// is set to restore, then this element returns a list of IDs of the Amazon Web
+	// Services accounts that are authorized to copy or restore the manual cluster
+	// snapshot. If a value of all is in the list, then the manual cluster snapshot is
+	// public and available for any Amazon Web Services account to copy or restore.
 	AttributeValues []string
 
 	noSmithyDocumentSerde
@@ -419,9 +419,9 @@ type DBInstance struct {
 	// including the name, description, and subnets in the subnet group.
 	DBSubnetGroup *DBSubnetGroup
 
-	// The Region-unique, immutable identifier for the instance. This identifier is
-	// found in CloudTrail log entries whenever the KMS key for the instance is
-	// accessed.
+	// The Amazon Web Services Region-unique, immutable identifier for the instance.
+	// This identifier is found in CloudTrail log entries whenever the KMS key for the
+	// instance is accessed.
 	DbiResourceId *string
 
 	// A list of log types that this instance is configured to export to CloudWatch
@@ -686,9 +686,9 @@ type GlobalCluster struct {
 	// Currently limited to one item.
 	GlobalClusterMembers []GlobalClusterMember
 
-	// The Region-unique, immutable identifier for the global database cluster. This
-	// identifier is found in AWS CloudTrail log entries whenever the AWS KMS customer
-	// master key (CMK) for the cluster is accessed.
+	// The Amazon Web Services Region-unique, immutable identifier for the global
+	// database cluster. This identifier is found in AWS CloudTrail log entries
+	// whenever the AWS KMS customer master key (CMK) for the cluster is accessed.
 	GlobalClusterResourceId *string
 
 	// Specifies the current state of this global cluster.

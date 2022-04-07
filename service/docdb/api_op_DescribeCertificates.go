@@ -13,7 +13,7 @@ import (
 )
 
 // Returns a list of certificate authority (CA) certificates provided by Amazon
-// DocumentDB for this account.
+// DocumentDB for this Amazon Web Services account.
 func (c *Client) DescribeCertificates(ctx context.Context, params *DescribeCertificatesInput, optFns ...func(*Options)) (*DescribeCertificatesOutput, error) {
 	if params == nil {
 		params = &DescribeCertificatesInput{}
@@ -62,7 +62,7 @@ type DescribeCertificatesInput struct {
 
 type DescribeCertificatesOutput struct {
 
-	// A list of certificates for this account.
+	// A list of certificates for this Amazon Web Services account.
 	Certificates []types.Certificate
 
 	// An optional pagination token provided if the number of records retrieved is

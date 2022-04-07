@@ -6,56 +6,57 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes all versions of a solution and the Solution object itself. Before
-// deleting a solution, you must delete all campaigns based on the solution. To
-// determine what campaigns are using the solution, call ListCampaigns
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_ListCampaigns.html) and
-// supply the Amazon Resource Name (ARN) of the solution. You can't delete a
-// solution if an associated SolutionVersion is in the CREATE PENDING or IN
-// PROGRESS state. For more information on solutions, see CreateSolution
-// (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolution.html).
-func (c *Client) DeleteSolution(ctx context.Context, params *DeleteSolutionInput, optFns ...func(*Options)) (*DeleteSolutionOutput, error) {
+// Add a list of tags to a resource.
+func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
-		params = &DeleteSolutionInput{}
+		params = &TagResourceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteSolution", params, optFns, c.addOperationDeleteSolutionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "TagResource", params, optFns, c.addOperationTagResourceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DeleteSolutionOutput)
+	out := result.(*TagResourceOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type DeleteSolutionInput struct {
+type TagResourceInput struct {
 
-	// The ARN of the solution to delete.
+	// The resource's Amazon Resource Name (ARN).
 	//
 	// This member is required.
-	SolutionArn *string
+	ResourceArn *string
+
+	// Tags to apply to the resource. For more information see Tagging Personalize
+	// resources
+	// (https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html).
+	//
+	// This member is required.
+	Tags []types.Tag
 
 	noSmithyDocumentSerde
 }
 
-type DeleteSolutionOutput struct {
+type TagResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDeleteSolutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteSolution{}, middleware.After)
+func (c *Client) addOperationTagResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpTagResource{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteSolution{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpTagResource{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -95,10 +96,10 @@ func (c *Client) addOperationDeleteSolutionMiddlewares(stack *middleware.Stack, 
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpDeleteSolutionValidationMiddleware(stack); err != nil {
+	if err = addOpTagResourceValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteSolution(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opTagResource(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -113,11 +114,11 @@ func (c *Client) addOperationDeleteSolutionMiddlewares(stack *middleware.Stack, 
 	return nil
 }
 
-func newServiceMetadataMiddleware_opDeleteSolution(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opTagResource(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "personalize",
-		OperationName: "DeleteSolution",
+		OperationName: "TagResource",
 	}
 }

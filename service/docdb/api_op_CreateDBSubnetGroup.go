@@ -12,7 +12,7 @@ import (
 )
 
 // Creates a new subnet group. subnet groups must contain at least one subnet in at
-// least two Availability Zones in the Region.
+// least two Availability Zones in the Amazon Web Services Region.
 func (c *Client) CreateDBSubnetGroup(ctx context.Context, params *CreateDBSubnetGroupInput, optFns ...func(*Options)) (*CreateDBSubnetGroupOutput, error) {
 	if params == nil {
 		params = &CreateDBSubnetGroupInput{}

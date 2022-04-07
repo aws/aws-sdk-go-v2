@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the dataset import job created by CreateDatasetImportJob, including
-// the import job status.
+// Describes the dataset import job created by CreateDatasetImportJob
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetImportJob.html),
+// including the import job status.
 func (c *Client) DescribeDatasetImportJob(ctx context.Context, params *DescribeDatasetImportJobInput, optFns ...func(*Options)) (*DescribeDatasetImportJobOutput, error) {
 	if params == nil {
 		params = &DescribeDatasetImportJobInput{}

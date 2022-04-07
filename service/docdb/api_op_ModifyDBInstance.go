@@ -56,11 +56,16 @@ type ModifyDBInstanceInput struct {
 	CACertificateIdentifier *string
 
 	// The new compute and memory capacity of the instance; for example, db.r5.large.
-	// Not all instance classes are available in all Regions. If you modify the
-	// instance class, an outage occurs during the change. The change is applied during
-	// the next maintenance window, unless ApplyImmediately is specified as true for
-	// this request. Default: Uses existing setting.
+	// Not all instance classes are available in all Amazon Web Services Regions. If
+	// you modify the instance class, an outage occurs during the change. The change is
+	// applied during the next maintenance window, unless ApplyImmediately is specified
+	// as true for this request. Default: Uses existing setting.
 	DBInstanceClass *string
+
+	// A value that indicates whether to enable Performance Insights for the DB
+	// Instance. For more information, see Using Amazon Performance Insights
+	// (https://docs.aws.amazon.com/documentdb/latest/developerguide/performance-insights.html).
+	EnablePerformanceInsights *bool
 
 	// The new instance identifier for the instance when renaming an instance. When you
 	// change the instance identifier, an instance reboot occurs immediately if you set
@@ -78,6 +83,14 @@ type ModifyDBInstanceInput struct {
 	//
 	// Example: mydbinstance
 	NewDBInstanceIdentifier *string
+
+	// The KMS key identifier for encryption of Performance Insights data. The KMS key
+	// identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key. If
+	// you do not specify a value for PerformanceInsightsKMSKeyId, then Amazon
+	// DocumentDB uses your default KMS key. There is a default KMS key for your Amazon
+	// Web Services account. Your Amazon Web Services account has a different default
+	// KMS key for each Amazon Web Services region.
+	PerformanceInsightsKMSKeyId *string
 
 	// The weekly time range (in UTC) during which system maintenance can occur, which
 	// might result in an outage. Changing this parameter doesn't result in an outage

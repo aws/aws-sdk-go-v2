@@ -13,7 +13,7 @@ import (
 	"time"
 )
 
-// Retrieve Performance Insights metrics for a set of data sources, over a time
+// Retrieve Performance Insights metrics for a set of data sources over a time
 // period. You can provide specific dimension groups and dimensions, and provide
 // aggregation and filtering criteria for each group. Each response element returns
 // a maximum of 500 bytes. For larger elements, such as SQL statements, only the
@@ -35,18 +35,20 @@ func (c *Client) GetResourceMetrics(ctx context.Context, params *GetResourceMetr
 
 type GetResourceMetricsInput struct {
 
-	// The date and time specifying the end of the requested time series data. The
-	// value specified is exclusive - data points less than (but not equal to) EndTime
-	// will be returned. The value for EndTime must be later than the value for
-	// StartTime.
+	// The date and time specifying the end of the requested time series query range.
+	// The value specified is exclusive. Thus, the command returns data points less
+	// than (but not equal to) EndTime. The value for EndTime must be later than the
+	// value for StartTime.
 	//
 	// This member is required.
 	EndTime *time.Time
 
-	// An immutable, Amazon Web Services Region-unique identifier for a data source.
-	// Performance Insights gathers metrics from this data source. To use a DB instance
-	// as a data source, specify its DbiResourceId value. For example, specify
-	// db-FAIHNTYBKTGAUSUZQYPDS2GW4A.
+	// An immutable identifier for a data source that is unique for an Amazon Web
+	// Services Region. Performance Insights gathers metrics from this data source. In
+	// the console, the identifier is shown as ResourceID. When you call
+	// DescribeDBInstances, the identifier is returned as DbiResourceId. To use a DB
+	// instance as a data source, specify its DbiResourceId value. For example, specify
+	// db-ABCDEFGHIJKLMNOPQRSTU1VW2X.
 	//
 	// This member is required.
 	Identifier *string
@@ -59,15 +61,21 @@ type GetResourceMetricsInput struct {
 	MetricQueries []types.MetricQuery
 
 	// The Amazon Web Services service for which Performance Insights returns metrics.
-	// The only valid value for ServiceType is RDS.
+	// Valid values are as follows:
+	//
+	// * RDS
+	//
+	// * DOCDB
 	//
 	// This member is required.
 	ServiceType types.ServiceType
 
-	// The date and time specifying the beginning of the requested time series data.
-	// You can't specify a StartTime that's earlier than 7 days ago. The value
-	// specified is inclusive - data points equal to or greater than StartTime will be
-	// returned. The value for StartTime must be earlier than the value for EndTime.
+	// The date and time specifying the beginning of the requested time series query
+	// range. You can't specify a StartTime that is earlier than 7 days ago. By
+	// default, Performance Insights has 7 days of retention, but you can extend this
+	// range up to 2 years. The value specified is inclusive. Thus, the command returns
+	// data points equal to or greater than StartTime. The value for StartTime must be
+	// earlier than the value for EndTime.
 	//
 	// This member is required.
 	StartTime *time.Time
@@ -117,13 +125,13 @@ type GetResourceMetricsOutput struct {
 	// to the value of the user-specified StartTime.
 	AlignedStartTime *time.Time
 
-	// An immutable, Amazon Web Services Region-unique identifier for a data source.
-	// Performance Insights gathers metrics from this data source. To use a DB instance
-	// as a data source, you specify its DbiResourceId value - for example:
-	// db-FAIHNTYBKTGAUSUZQYPDS2GW4A
+	// An immutable identifier for a data source that is unique for an Amazon Web
+	// Services Region. Performance Insights gathers metrics from this data source. In
+	// the console, the identifier is shown as ResourceID. When you call
+	// DescribeDBInstances, the identifier is returned as DbiResourceId.
 	Identifier *string
 
-	// An array of metric results,, where each array element contains all of the data
+	// An array of metric results, where each array element contains all of the data
 	// points for a particular dimension.
 	MetricList []types.MetricKeyDataPoints
 

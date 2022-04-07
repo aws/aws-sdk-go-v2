@@ -66,15 +66,28 @@ type CreateDBInstanceInput struct {
 	AutoMinorVersionUpgrade *bool
 
 	// The Amazon EC2 Availability Zone that the instance is created in. Default: A
-	// random, system-chosen Availability Zone in the endpoint's Region. Example:
-	// us-east-1d
+	// random, system-chosen Availability Zone in the endpoint's Amazon Web Services
+	// Region. Example: us-east-1d
 	AvailabilityZone *string
+
+	// A value that indicates whether to enable Performance Insights for the DB
+	// Instance. For more information, see Using Amazon Performance Insights
+	// (https://docs.aws.amazon.com/documentdb/latest/developerguide/performance-insights.html).
+	EnablePerformanceInsights *bool
+
+	// The KMS key identifier for encryption of Performance Insights data. The KMS key
+	// identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key. If
+	// you do not specify a value for PerformanceInsightsKMSKeyId, then Amazon
+	// DocumentDB uses your default KMS key. There is a default KMS key for your Amazon
+	// Web Services account. Your Amazon Web Services account has a different default
+	// KMS key for each Amazon Web Services region.
+	PerformanceInsightsKMSKeyId *string
 
 	// The time range each week during which system maintenance can occur, in Universal
 	// Coordinated Time (UTC). Format: ddd:hh24:mi-ddd:hh24:mi The default is a
-	// 30-minute window selected at random from an 8-hour block of time for each
-	// Region, occurring on a random day of the week. Valid days: Mon, Tue, Wed, Thu,
-	// Fri, Sat, Sun Constraints: Minimum 30-minute window.
+	// 30-minute window selected at random from an 8-hour block of time for each Amazon
+	// Web Services Region, occurring on a random day of the week. Valid days: Mon,
+	// Tue, Wed, Thu, Fri, Sat, Sun Constraints: Minimum 30-minute window.
 	PreferredMaintenanceWindow *string
 
 	// A value that specifies the order in which an Amazon DocumentDB replica is

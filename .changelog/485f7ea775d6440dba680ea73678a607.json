@@ -1,0 +1,8 @@
+{
+    "id": "485f7ea7-75d6-440d-ba68-0ea73678a607",
+    "type": "feature",
+    "description": "This release provides tagging support in AWS Personalize.",
+    "modules": [
+        "service/personalize"
+    ]
+}

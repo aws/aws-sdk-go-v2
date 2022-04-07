@@ -60,7 +60,8 @@ type AlgorithmImage struct {
 	noSmithyDocumentSerde
 }
 
-// When the solution performs AutoML (performAutoML is true in CreateSolution),
+// When the solution performs AutoML (performAutoML is true in CreateSolution
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolution.html)),
 // Amazon Personalize determines which recipe, from the specified list, optimizes
 // the given metric. Amazon Personalize then uses that recipe for the solution.
 type AutoMLConfig struct {
@@ -74,7 +75,8 @@ type AutoMLConfig struct {
 	noSmithyDocumentSerde
 }
 
-// When the solution performs AutoML (performAutoML is true in CreateSolution),
+// When the solution performs AutoML (performAutoML is true in CreateSolution
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolution.html)),
 // specifies the recipe that best optimized the specified metric.
 type AutoMLResult struct {
 
@@ -180,9 +182,11 @@ type BatchInferenceJobOutput struct {
 	noSmithyDocumentSerde
 }
 
-// A truncated version of the BatchInferenceJob datatype. The
-// ListBatchInferenceJobs operation returns a list of batch inference job
-// summaries.
+// A truncated version of the BatchInferenceJob
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_BatchInferenceJob.html).
+// The ListBatchInferenceJobs
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_ListBatchInferenceJobs.html)
+// operation returns a list of batch inference job summaries.
 type BatchInferenceJobSummary struct {
 
 	// The Amazon Resource Name (ARN) of the batch inference job.
@@ -296,7 +300,10 @@ type BatchSegmentJobOutput struct {
 	noSmithyDocumentSerde
 }
 
-// A truncated version of the BatchSegmentJob datatype. The ListBatchSegmentJobs
+// A truncated version of the BatchSegmentJob
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_BatchSegmentJob.html)
+// datatype. ListBatchSegmentJobs
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_ListBatchSegmentJobs.html)
 // operation returns a list of batch segment job summaries.
 type BatchSegmentJobSummary struct {
 
@@ -335,7 +342,8 @@ type BatchSegmentJobSummary struct {
 }
 
 // An object that describes the deployment of a solution version. For more
-// information on campaigns, see CreateCampaign.
+// information on campaigns, see CreateCampaign
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateCampaign.html).
 type Campaign struct {
 
 	// The Amazon Resource Name (ARN) of the campaign.
@@ -354,7 +362,9 @@ type Campaign struct {
 	LastUpdatedDateTime *time.Time
 
 	// Provides a summary of the properties of a campaign update. For a complete
-	// listing, call the DescribeCampaign API.
+	// listing, call the DescribeCampaign
+	// (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html)
+	// API.
 	LatestCampaignUpdate *CampaignUpdateSummary
 
 	// Specifies the requested minimum provisioned transactions (recommendations) per
@@ -395,7 +405,9 @@ type CampaignConfig struct {
 }
 
 // Provides a summary of the properties of a campaign. For a complete listing, call
-// the DescribeCampaign API.
+// the DescribeCampaign
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html)
+// API.
 type CampaignSummary struct {
 
 	// The Amazon Resource Name (ARN) of the campaign.
@@ -426,7 +438,9 @@ type CampaignSummary struct {
 }
 
 // Provides a summary of the properties of a campaign update. For a complete
-// listing, call the DescribeCampaign API.
+// listing, call the DescribeCampaign
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html)
+// API.
 type CampaignUpdateSummary struct {
 
 	// The configuration details of a campaign.
@@ -530,11 +544,12 @@ type Dataset struct {
 }
 
 // Describes a job that exports a dataset to an Amazon S3 bucket. For more
-// information, see CreateDatasetExportJob. A dataset export job can be in one of
-// the following states:
+// information, see CreateDatasetExportJob
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetExportJob.html).
+// A dataset export job can be in one of the following states:
 //
-// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or-
-// CREATE FAILED
+// * CREATE PENDING >
+// CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
 type DatasetExportJob struct {
 
 	// The creation date and time (in Unix time) of the dataset export job.
@@ -592,7 +607,9 @@ type DatasetExportJobOutput struct {
 }
 
 // Provides a summary of the properties of a dataset export job. For a complete
-// listing, call the DescribeDatasetExportJob API.
+// listing, call the DescribeDatasetExportJob
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetExportJob.html)
+// API.
 type DatasetExportJobSummary struct {
 
 	// The date and time (in Unix time) that the dataset export job was created.
@@ -622,9 +639,12 @@ type DatasetExportJobSummary struct {
 }
 
 // A dataset group is a collection of related datasets (Interactions, User, and
-// Item). You create a dataset group by calling CreateDatasetGroup. You then create
-// a dataset and add it to a dataset group by calling CreateDataset. The dataset
-// group is used to create and train a solution by calling CreateSolution. A
+// Item). You create a dataset group by calling CreateDatasetGroup
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetGroup.html).
+// You then create a dataset and add it to a dataset group by calling CreateDataset
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataset.html). The
+// dataset group is used to create and train a solution by calling CreateSolution
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolution.html). A
 // dataset group can contain only one of each type of dataset. You can specify an
 // Key Management Service (KMS) key to encrypt the datasets in the group.
 type DatasetGroup struct {
@@ -667,7 +687,9 @@ type DatasetGroup struct {
 }
 
 // Provides a summary of the properties of a dataset group. For a complete listing,
-// call the DescribeDatasetGroup API.
+// call the DescribeDatasetGroup
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetGroup.html)
+// API.
 type DatasetGroupSummary struct {
 
 	// The date and time (in Unix time) that the dataset group was created.
@@ -702,10 +724,12 @@ type DatasetGroupSummary struct {
 
 // Describes a job that imports training data from a data source (Amazon S3 bucket)
 // to an Amazon Personalize dataset. For more information, see
-// CreateDatasetImportJob. A dataset import job can be in one of the following
-// states:
+// CreateDatasetImportJob
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetImportJob.html).
+// A dataset import job can be in one of the following states:
 //
-// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
+// * CREATE PENDING >
+// CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
 type DatasetImportJob struct {
 
 	// The creation date and time (in Unix time) of the dataset import job.
@@ -744,7 +768,9 @@ type DatasetImportJob struct {
 }
 
 // Provides a summary of the properties of a dataset import job. For a complete
-// listing, call the DescribeDatasetImportJob API.
+// listing, call the DescribeDatasetImportJob
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetImportJob.html)
+// API.
 type DatasetImportJobSummary struct {
 
 	// The date and time (in Unix time) that the dataset import job was created.
@@ -774,7 +800,8 @@ type DatasetImportJobSummary struct {
 }
 
 // Describes the schema for a dataset. For more information on schemas, see
-// CreateSchema.
+// CreateSchema
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSchema.html).
 type DatasetSchema struct {
 
 	// The date and time (in Unix time) that the schema was created.
@@ -799,7 +826,8 @@ type DatasetSchema struct {
 }
 
 // Provides a summary of the properties of a dataset schema. For a complete
-// listing, call the DescribeSchema API.
+// listing, call the DescribeSchema
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSchema.html) API.
 type DatasetSchemaSummary struct {
 
 	// The date and time (in Unix time) that the schema was created.
@@ -821,7 +849,9 @@ type DatasetSchemaSummary struct {
 }
 
 // Provides a summary of the properties of a dataset. For a complete listing, call
-// the DescribeDataset API.
+// the DescribeDataset
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDataset.html)
+// API.
 type DatasetSummary struct {
 
 	// The date and time (in Unix time) that the dataset was created.
@@ -982,7 +1012,9 @@ type EventTracker struct {
 }
 
 // Provides a summary of the properties of an event tracker. For a complete
-// listing, call the DescribeEventTracker API.
+// listing, call the DescribeEventTracker
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeEventTracker.html)
+// API.
 type EventTrackerSummary struct {
 
 	// The date and time (in Unix time) that the event tracker was created.
@@ -1057,7 +1089,8 @@ type Filter struct {
 
 	// Specifies the type of item interactions to filter out of recommendation results.
 	// The filter expression must follow specific format rules. For information about
-	// filter expression structure and syntax, see filter-expressions.
+	// filter expression structure and syntax, see Filter expressions
+	// (https://docs.aws.amazon.com/personalize/latest/dg/filter-expressions.html).
 	FilterExpression *string
 
 	// The time at which the filter was last updated.
@@ -1196,6 +1229,7 @@ type OptimizationObjective struct {
 
 // Provides information about a recipe. Each recipe provides an algorithm that
 // Amazon Personalize uses in model training when you use the CreateSolution
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolution.html)
 // operation.
 type Recipe struct {
 
@@ -1238,7 +1272,8 @@ type Recipe struct {
 }
 
 // Provides a summary of the properties of a recipe. For a complete listing, call
-// the DescribeRecipe API.
+// the DescribeRecipe
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeRecipe.html) API.
 type RecipeSummary struct {
 
 	// The date and time (in Unix time) that the recipe was created.
@@ -1366,7 +1401,9 @@ type RecommenderSummary struct {
 }
 
 // Provides a summary of the properties of a recommender update. For a complete
-// listing, call the DescribeRecommender API operation.
+// listing, call the DescribeRecommender
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeRecommender.html)
+// API.
 type RecommenderUpdateSummary struct {
 
 	// The date and time (in Unix format) that the recommender update was created.
@@ -1473,8 +1510,9 @@ type SolutionConfig struct {
 	// Lists the hyperparameter names and ranges.
 	AlgorithmHyperParameters map[string]string
 
-	// The AutoMLConfig object containing a list of recipes to search when AutoML is
-	// performed.
+	// The AutoMLConfig
+	// (https://docs.aws.amazon.com/personalize/latest/dg/API_AutoMLConfig.html) object
+	// containing a list of recipes to search when AutoML is performed.
 	AutoMLConfig *AutoMLConfig
 
 	// Only events with a value greater than or equal to this threshold are used for
@@ -1497,7 +1535,9 @@ type SolutionConfig struct {
 }
 
 // Provides a summary of the properties of a solution. For a complete listing, call
-// the DescribeSolution API.
+// the DescribeSolution
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolution.html)
+// API.
 type SolutionSummary struct {
 
 	// The date and time (in Unix time) that the solution was created.
@@ -1524,7 +1564,8 @@ type SolutionSummary struct {
 	noSmithyDocumentSerde
 }
 
-// An object that provides information about a specific version of a Solution in a
+// An object that provides information about a specific version of a Solution
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_Solution.html) in a
 // Custom dataset group.
 type SolutionVersion struct {
 
@@ -1609,7 +1650,9 @@ type SolutionVersion struct {
 }
 
 // Provides a summary of the properties of a solution version. For a complete
-// listing, call the DescribeSolutionVersion API.
+// listing, call the DescribeSolutionVersion
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolutionVersion.html)
+// API.
 type SolutionVersionSummary struct {
 
 	// The date and time (in Unix time) that this version of a solution was created.
@@ -1630,6 +1673,27 @@ type SolutionVersionSummary struct {
 	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE
 	// FAILED
 	Status *string
+
+	noSmithyDocumentSerde
+}
+
+// The optional metadata that you apply to resources to help you categorize and
+// organize them. Each tag consists of a key and an optional value, both of which
+// you define. For more information see Tagging Personalize resources
+// (https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html).
+type Tag struct {
+
+	// One part of a key-value pair that makes up a tag. A key is a general label that
+	// acts like a category for more specific tag values.
+	//
+	// This member is required.
+	TagKey *string
+
+	// The optional part of a key-value pair that makes up a tag. A value acts as a
+	// descriptor within a tag category (key).
+	//
+	// This member is required.
+	TagValue *string
 
 	noSmithyDocumentSerde
 }

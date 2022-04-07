@@ -4016,9 +4016,19 @@ func awsAwsquery_serializeOpDocumentCreateDBInstanceInput(v *CreateDBInstanceInp
 		objectKey.String(*v.DBInstanceIdentifier)
 	}
 
+	if v.EnablePerformanceInsights != nil {
+		objectKey := object.Key("EnablePerformanceInsights")
+		objectKey.Boolean(*v.EnablePerformanceInsights)
+	}
+
 	if v.Engine != nil {
 		objectKey := object.Key("Engine")
 		objectKey.String(*v.Engine)
+	}
+
+	if v.PerformanceInsightsKMSKeyId != nil {
+		objectKey := object.Key("PerformanceInsightsKMSKeyId")
+		objectKey.String(*v.PerformanceInsightsKMSKeyId)
 	}
 
 	if v.PreferredMaintenanceWindow != nil {
@@ -4981,9 +4991,19 @@ func awsAwsquery_serializeOpDocumentModifyDBInstanceInput(v *ModifyDBInstanceInp
 		objectKey.String(*v.DBInstanceIdentifier)
 	}
 
+	if v.EnablePerformanceInsights != nil {
+		objectKey := object.Key("EnablePerformanceInsights")
+		objectKey.Boolean(*v.EnablePerformanceInsights)
+	}
+
 	if v.NewDBInstanceIdentifier != nil {
 		objectKey := object.Key("NewDBInstanceIdentifier")
 		objectKey.String(*v.NewDBInstanceIdentifier)
+	}
+
+	if v.PerformanceInsightsKMSKeyId != nil {
+		objectKey := object.Key("PerformanceInsightsKMSKeyId")
+		objectKey.String(*v.PerformanceInsightsKMSKeyId)
 	}
 
 	if v.PreferredMaintenanceWindow != nil {

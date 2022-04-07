@@ -36,29 +36,40 @@ import (
 // * DELETE PENDING
 //
 // To get the status of the dataset group, call
-// DescribeDatasetGroup. If the status shows as CREATE FAILED, the response
-// includes a failureReason key, which describes why the creation failed. You must
-// wait until the status of the dataset group is ACTIVE before adding a dataset to
-// the group. You can specify an Key Management Service (KMS) key to encrypt the
-// datasets in the group. If you specify a KMS key, you must also include an
-// Identity and Access Management (IAM) role that has permission to access the key.
-// APIs that require a dataset group ARN in the request
+// DescribeDatasetGroup
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetGroup.html).
+// If the status shows as CREATE FAILED, the response includes a failureReason key,
+// which describes why the creation failed. You must wait until the status of the
+// dataset group is ACTIVE before adding a dataset to the group. You can specify an
+// Key Management Service (KMS) key to encrypt the datasets in the group. If you
+// specify a KMS key, you must also include an Identity and Access Management (IAM)
+// role that has permission to access the key. APIs that require a dataset group
+// ARN in the request
 //
 // * CreateDataset
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataset.html)
 //
 // *
 // CreateEventTracker
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateEventTracker.html)
 //
-// * CreateSolution
+// *
+// CreateSolution
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolution.html)
 //
-// Related APIs
+// Related
+// APIs
 //
 // * ListDatasetGroups
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_ListDatasetGroups.html)
 //
 // *
 // DescribeDatasetGroup
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetGroup.html)
 //
-// * DeleteDatasetGroup
+// *
+// DeleteDatasetGroup
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteDatasetGroup.html)
 func (c *Client) CreateDatasetGroup(ctx context.Context, params *CreateDatasetGroupInput, optFns ...func(*Options)) (*CreateDatasetGroupOutput, error) {
 	if params == nil {
 		params = &CreateDatasetGroupInput{}
@@ -96,6 +107,11 @@ type CreateDatasetGroupInput struct {
 	// access the Key Management Service (KMS) key. Supplying an IAM role is only valid
 	// when also specifying a KMS key.
 	RoleArn *string
+
+	// A list of tags
+	// (https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html) to
+	// apply to the dataset group.
+	Tags []types.Tag
 
 	noSmithyDocumentSerde
 }
