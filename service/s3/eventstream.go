@@ -38,7 +38,7 @@ type selectObjectContentEventStreamReader struct {
 	closeOnce   sync.Once
 }
 
-func newSelectObjectContentEventStreamWriter(readCloser io.ReadCloser, decoder *eventstream.Decoder) *selectObjectContentEventStreamReader {
+func newSelectObjectContentEventStreamReader(readCloser io.ReadCloser, decoder *eventstream.Decoder) *selectObjectContentEventStreamReader {
 	w := &selectObjectContentEventStreamReader{
 		stream:      make(chan types.SelectObjectContentEventStream),
 		decoder:     decoder,
@@ -202,7 +202,7 @@ func (m *awsRestxml_deserializeOpEventStreamSelectObjectContent) HandleDeseriali
 		out.Result = output
 	}
 
-	eventReader := newSelectObjectContentEventStreamWriter(
+	eventReader := newSelectObjectContentEventStreamReader(
 		deserializeOutput.Body,
 		eventstream.NewDecoder(func(options *eventstream.DecoderOptions) {
 			options.Logger = logger
@@ -234,10 +234,14 @@ func (*awsRestxml_deserializeOpEventStreamSelectObjectContent) closeResponseBody
 }
 
 func addEventStreamSelectObjectContentMiddleware(stack *middleware.Stack, options Options) error {
-	return stack.Deserialize.Insert(&awsRestxml_deserializeOpEventStreamSelectObjectContent{
+	if err := stack.Deserialize.Insert(&awsRestxml_deserializeOpEventStreamSelectObjectContent{
 		LogEventStreamWrites: options.ClientLogMode.IsRequestEventMessage(),
 		LogEventStreamReads:  options.ClientLogMode.IsResponseEventMessage(),
-	}, "OperationDeserializer", middleware.Before)
+	}, "OperationDeserializer", middleware.Before); err != nil {
+		return err
+	}
+	return nil
+
 }
 
 // UnknownEventMessageError provides an error when a message is received from the stream,

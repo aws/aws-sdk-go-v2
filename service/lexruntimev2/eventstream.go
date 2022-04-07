@@ -74,7 +74,7 @@ type startConversationRequestEventStreamWriter struct {
 	err                 *smithysync.OnceErr
 }
 
-func newStartConversationRequestEventStreamReader(stream io.WriteCloser, encoder *eventstream.Encoder, signer eventStreamSigner) *startConversationRequestEventStreamWriter {
+func newStartConversationRequestEventStreamWriter(stream io.WriteCloser, encoder *eventstream.Encoder, signer eventStreamSigner) *startConversationRequestEventStreamWriter {
 	w := &startConversationRequestEventStreamWriter{
 		encoder:             encoder,
 		signer:              signer,
@@ -263,7 +263,7 @@ type startConversationResponseEventStreamReader struct {
 	closeOnce   sync.Once
 }
 
-func newStartConversationResponseEventStreamWriter(readCloser io.ReadCloser, decoder *eventstream.Decoder) *startConversationResponseEventStreamReader {
+func newStartConversationResponseEventStreamReader(readCloser io.ReadCloser, decoder *eventstream.Decoder) *startConversationResponseEventStreamReader {
 	w := &startConversationResponseEventStreamReader{
 		stream:      make(chan types.StartConversationResponseEventStream),
 		decoder:     decoder,
@@ -424,7 +424,7 @@ func (m *awsRestjson1_deserializeOpEventStreamStartConversation) HandleDeseriali
 		requestSignature,
 	)
 
-	eventWriter := newStartConversationRequestEventStreamReader(
+	eventWriter := newStartConversationRequestEventStreamWriter(
 		eventstreamapi.GetInputStreamWriter(ctx),
 		eventstream.NewEncoder(func(options *eventstream.EncoderOptions) {
 			options.Logger = logger
@@ -459,7 +459,7 @@ func (m *awsRestjson1_deserializeOpEventStreamStartConversation) HandleDeseriali
 		out.Result = output
 	}
 
-	eventReader := newStartConversationResponseEventStreamWriter(
+	eventReader := newStartConversationResponseEventStreamReader(
 		deserializeOutput.Body,
 		eventstream.NewDecoder(func(options *eventstream.DecoderOptions) {
 			options.Logger = logger
@@ -492,10 +492,14 @@ func (*awsRestjson1_deserializeOpEventStreamStartConversation) closeResponseBody
 }
 
 func addEventStreamStartConversationMiddleware(stack *middleware.Stack, options Options) error {
-	return stack.Deserialize.Insert(&awsRestjson1_deserializeOpEventStreamStartConversation{
+	if err := stack.Deserialize.Insert(&awsRestjson1_deserializeOpEventStreamStartConversation{
 		LogEventStreamWrites: options.ClientLogMode.IsRequestEventMessage(),
 		LogEventStreamReads:  options.ClientLogMode.IsResponseEventMessage(),
-	}, "OperationDeserializer", middleware.Before)
+	}, "OperationDeserializer", middleware.Before); err != nil {
+		return err
+	}
+	return nil
+
 }
 
 // UnknownEventMessageError provides an error when a message is received from the stream,
