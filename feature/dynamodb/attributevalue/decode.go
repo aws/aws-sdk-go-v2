@@ -197,6 +197,7 @@ func UnmarshalListOfMapsWithOptions(l []map[string]types.AttributeValue, out int
 	return UnmarshalListWithOptions(items, out, optFns...)
 }
 
+// Time decoding functions for different AttributeValues
 type DecodeTimeAttributes struct {
 	// Will decode S attribute values and SS attribute value elements into time.Time
 	//
