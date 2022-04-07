@@ -1,3 +1,8 @@
+# v1.16.0 (2022-04-07)
+
+* **Feature**: Adds new EventBridge Endpoint resources for disaster recovery, multi-region failover, and cross-region replication capabilities to help you build resilient event-driven applications.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.15.4 (2022-03-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions

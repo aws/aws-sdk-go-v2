@@ -1,8 +1,0 @@
-{
-    "id": "b8c55b74-d838-4522-b63c-d365d5907655",
-    "type": "documentation",
-    "description": "Adds support for DocumentDB to the Performance Insights API.",
-    "modules": [
-        "service/pi"
-    ]
-}

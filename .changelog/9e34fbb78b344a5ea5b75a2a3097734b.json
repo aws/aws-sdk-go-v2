@@ -1,8 +1,0 @@
-{
-    "id": "9e34fbb7-8b34-4a5e-a5b7-5a2a3097734b",
-    "type": "feature",
-    "description": "Added support to enable/disable performance insights when creating or modifying db instances",
-    "modules": [
-        "service/docdb"
-    ]
-}

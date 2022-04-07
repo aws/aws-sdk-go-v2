@@ -1,3 +1,22 @@
+# Release (2022-04-07)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/internal/v4a`: [v1.0.0](internal/v4a/CHANGELOG.md#v100-2022-04-07)
+  * **Release**: New internal v4a signing module location.
+* `github.com/aws/aws-sdk-go-v2/service/docdb`: [v1.18.0](service/docdb/CHANGELOG.md#v1180-2022-04-07)
+  * **Feature**: Added support to enable/disable performance insights when creating or modifying db instances
+* `github.com/aws/aws-sdk-go-v2/service/eventbridge`: [v1.16.0](service/eventbridge/CHANGELOG.md#v1160-2022-04-07)
+  * **Feature**: Adds new EventBridge Endpoint resources for disaster recovery, multi-region failover, and cross-region replication capabilities to help you build resilient event-driven applications.
+* `github.com/aws/aws-sdk-go-v2/service/personalize`: [v1.18.0](service/personalize/CHANGELOG.md#v1180-2022-04-07)
+  * **Feature**: This release provides tagging support in AWS Personalize.
+* `github.com/aws/aws-sdk-go-v2/service/pi`: [v1.14.4](service/pi/CHANGELOG.md#v1144-2022-04-07)
+  * **Documentation**: Adds support for DocumentDB to the Performance Insights API.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.27.0](service/sagemaker/CHANGELOG.md#v1270-2022-04-07)
+  * **Feature**: Amazon Sagemaker Notebook Instances now supports G5 instance types
+
 # Release (2022-04-06)
 
 ## Module Highlights

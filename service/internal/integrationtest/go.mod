@@ -29,7 +29,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/devicefarm v1.13.3
 	github.com/aws/aws-sdk-go-v2/service/directconnect v1.17.3
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.13.3
-	github.com/aws/aws-sdk-go-v2/service/docdb v1.17.3
+	github.com/aws/aws-sdk-go-v2/service/docdb v1.18.0
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.15.3
 	github.com/aws/aws-sdk-go-v2/service/ec2 v1.34.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.17.3
@@ -42,7 +42,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/elasticsearchservice v1.15.3
 	github.com/aws/aws-sdk-go-v2/service/elastictranscoder v1.13.3
 	github.com/aws/aws-sdk-go-v2/service/emr v1.17.3
-	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.15.4
+	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.16.0
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.14.3
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.14.3
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.13.3
@@ -66,7 +66,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.20.3
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.12.3
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.15.3
-	github.com/aws/aws-sdk-go-v2/service/s3 v1.26.3
+	github.com/aws/aws-sdk-go-v2/service/s3 v1.26.4
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.21.4
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.15.4
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.14.0

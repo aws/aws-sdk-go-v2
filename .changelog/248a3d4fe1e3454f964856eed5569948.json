@@ -1,8 +1,0 @@
-{
-    "id": "248a3d4f-e1e3-454f-9648-56eed5569948",
-    "type": "feature",
-    "description": "ApiGateway CLI command get-usage now includes usagePlanId, startDate, and endDate fields in the output to match documentation.",
-    "modules": [
-        "service/apigateway"
-    ]
-}

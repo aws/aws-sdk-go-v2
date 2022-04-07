@@ -1,3 +1,7 @@
+# v1.14.4 (2022-04-07)
+
+* **Documentation**: Adds support for DocumentDB to the Performance Insights API.
+
 # v1.14.3 (2022-03-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions
