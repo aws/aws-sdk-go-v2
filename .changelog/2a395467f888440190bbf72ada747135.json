@@ -1,0 +1,8 @@
+{
+    "id": "2a395467-f888-4401-90bb-f72ada747135",
+    "type": "release",
+    "description": "New internal v4a signing module location.",
+    "modules": [
+        "internal/v4a"
+    ]
+}

@@ -37,6 +37,7 @@ import software.amazon.smithy.utils.SetUtils;
  */
 public final class AwsEndpointGenerator implements GoIntegration {
     public static final String ENDPOINT_RESOLVER_CONFIG_NAME = "EndpointResolver";
+    public static final String ENDPOINT_OPTIONS_CONFIG_NAME = "EndpointOptions";
 
     @Override
     public void writeAdditionalFiles(
@@ -46,7 +47,8 @@ public final class AwsEndpointGenerator implements GoIntegration {
             TriConsumer<String, String, Consumer<GoWriter>> writerFactory
     ) {
         String serviceId = settings.getService(model).expectTrait(ServiceTrait.class).getSdkId();
-        boolean generateQueryHelpers = serviceId.equalsIgnoreCase("S3");
+        boolean generateQueryHelpers = serviceId.equalsIgnoreCase("S3")
+                                       || serviceId.equalsIgnoreCase("EventBridge");
 
         EndpointGenerator.builder()
                 .settings(settings)
@@ -70,7 +72,7 @@ public final class AwsEndpointGenerator implements GoIntegration {
                                         .withHelper(true)
                                         .build(),
                                 ConfigField.builder()
-                                        .name("EndpointOptions")
+                                        .name(ENDPOINT_OPTIONS_CONFIG_NAME)
                                         .type(SymbolUtils.createValueSymbolBuilder(EndpointGenerator.RESOLVER_OPTIONS)
                                                 .build())
                                         .documentation("The endpoint options to be used when attempting "

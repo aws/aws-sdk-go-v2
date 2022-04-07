@@ -11,6 +11,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
 	internalConfig "github.com/aws/aws-sdk-go-v2/internal/configsources"
+	"github.com/aws/aws-sdk-go-v2/internal/v4a"
+	ebcust "github.com/aws/aws-sdk-go-v2/service/eventbridge/internal/customizations"
 	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/logging"
@@ -47,9 +49,13 @@ func New(options Options, optFns ...func(*Options)) *Client {
 
 	resolveDefaultEndpointConfiguration(&options)
 
+	resolveHTTPSignerV4a(&options)
+
 	for _, fn := range optFns {
 		fn(&options)
 	}
+
+	resolveCredentialProvider(&options)
 
 	client := &Client{
 		options: options,
@@ -119,6 +125,9 @@ type Options struct {
 	// within your applications.
 	RuntimeEnvironment aws.RuntimeEnvironment
 
+	// Signature Version 4a (SigV4a) Signer
+	httpSignerV4a httpSignerV4a
+
 	// The initial DefaultsMode used when the client options were constructed. If the
 	// DefaultsMode was set to aws.DefaultsModeAuto this will store what the resolved
 	// value was at that point in time. Currently does not support per operation call
@@ -169,6 +178,8 @@ func (c *Client) invokeOperation(ctx context.Context, opID string, params interf
 	finalizeRetryMaxAttemptOptions(&options, *c)
 
 	finalizeClientEndpointResolverOptions(&options)
+
+	resolveCredentialProvider(&options)
 
 	for _, fn := range stackFns {
 		if err := fn(stack, options); err != nil {
@@ -383,6 +394,55 @@ func addRetryMiddlewares(stack *middleware.Stack, o Options) error {
 		LogRetryAttempts: o.ClientLogMode.IsRetries(),
 	}
 	return retry.AddRetryMiddlewares(stack, mo)
+}
+
+func resolveCredentialProvider(o *Options) {
+	if o.Credentials == nil {
+		return
+	}
+
+	if _, ok := o.Credentials.(v4a.CredentialsProvider); ok {
+		return
+	}
+
+	switch o.Credentials.(type) {
+	case aws.AnonymousCredentials, *aws.AnonymousCredentials:
+		return
+	}
+
+	o.Credentials = &v4a.SymmetricCredentialAdaptor{SymmetricProvider: o.Credentials}
+}
+
+func swapWithCustomHTTPSignerMiddleware(stack *middleware.Stack, o Options) error {
+	mw := ebcust.NewSignHTTPRequestMiddleware(ebcust.SignHTTPRequestMiddlewareOptions{
+		CredentialsProvider: o.Credentials,
+		V4Signer:            o.HTTPSignerV4,
+		V4aSigner:           o.httpSignerV4a,
+		LogSigning:          o.ClientLogMode.IsSigning(),
+	})
+
+	return ebcust.RegisterSigningMiddleware(stack, mw)
+}
+
+type httpSignerV4a interface {
+	SignHTTP(ctx context.Context, credentials v4a.Credentials, r *http.Request, payloadHash,
+		service string, regionSet []string, signingTime time.Time,
+		optFns ...func(*v4a.SignerOptions)) error
+}
+
+func resolveHTTPSignerV4a(o *Options) {
+	if o.httpSignerV4a != nil {
+		return
+	}
+	o.httpSignerV4a = newDefaultV4aSigner(*o)
+}
+
+func newDefaultV4aSigner(o Options) *v4a.Signer {
+	return v4a.NewSigner(func(so *v4a.SignerOptions) {
+		so.Logger = o.Logger
+		so.LogSigning = o.ClientLogMode.IsSigning()
+		so.DisableURIPathEscaping = false
+	})
 }
 
 // resolves dual-stack endpoint configuration

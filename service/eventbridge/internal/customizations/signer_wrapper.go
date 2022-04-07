@@ -31,7 +31,6 @@ func SetSignerVersion(ctx context.Context, version string) context.Context {
 
 // SignHTTPRequestMiddlewareOptions is the configuration options for the SignHTTPRequestMiddleware middleware.
 type SignHTTPRequestMiddlewareOptions struct {
-
 	// credential provider
 	CredentialsProvider aws.CredentialsProvider
 
@@ -112,97 +111,6 @@ func (s *SignHTTPRequestMiddleware) HandleFinalize(ctx context.Context, in middl
 // finalize step.
 func RegisterSigningMiddleware(stack *middleware.Stack, signingMiddleware *SignHTTPRequestMiddleware) (err error) {
 	const signedID = "Signing"
-	_, present := stack.Finalize.Get(signedID)
-	if present {
-		_, err = stack.Finalize.Swap(signedID, signingMiddleware)
-	} else {
-		err = stack.Finalize.Add(signingMiddleware, middleware.After)
-	}
-	return err
-}
-
-// PresignHTTPRequestMiddlewareOptions is the options for the PresignHTTPRequestMiddleware middleware.
-type PresignHTTPRequestMiddlewareOptions struct {
-	CredentialsProvider aws.CredentialsProvider
-	V4Presigner         v4.HTTPPresigner
-	V4aPresigner        v4a.HTTPPresigner
-	LogSigning          bool
-}
-
-// PresignHTTPRequestMiddleware provides the Finalize middleware for creating a
-// presigned URL for an HTTP request.
-//
-// Will short circuit the middleware stack and not forward onto the next
-// Finalize handler.
-type PresignHTTPRequestMiddleware struct {
-
-	// cred provider and signer for sigv4
-	credentialsProvider aws.CredentialsProvider
-
-	// sigV4 signer
-	v4Signer v4.HTTPPresigner
-
-	// sigV4a signer
-	v4aSigner v4a.HTTPPresigner
-
-	// log signing
-	logSigning bool
-}
-
-// NewPresignHTTPRequestMiddleware constructs a PresignHTTPRequestMiddleware using the given Signer for signing requests
-func NewPresignHTTPRequestMiddleware(options PresignHTTPRequestMiddlewareOptions) *PresignHTTPRequestMiddleware {
-	return &PresignHTTPRequestMiddleware{
-		credentialsProvider: options.CredentialsProvider,
-		v4Signer:            options.V4Presigner,
-		v4aSigner:           options.V4aPresigner,
-		logSigning:          options.LogSigning,
-	}
-}
-
-// ID provides the middleware ID.
-func (*PresignHTTPRequestMiddleware) ID() string { return "PresignHTTPRequest" }
-
-// HandleFinalize will take the provided input and create a presigned url for
-// the http request using the SigV4 or SigV4a presign authentication scheme.
-//
-// Since the signed request is not a valid HTTP request
-func (p *PresignHTTPRequestMiddleware) HandleFinalize(
-	ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler,
-) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	// fetch signer type from context
-	signerVersion := GetSignerVersion(ctx)
-
-	switch signerVersion {
-	case v4a.Version:
-		v4aCredentialProvider, ok := p.credentialsProvider.(v4a.CredentialsProvider)
-		if !ok {
-			return out, metadata, fmt.Errorf("invalid credential-provider provided for sigV4a Signer")
-		}
-
-		mw := v4a.NewPresignHTTPRequestMiddleware(v4a.PresignHTTPRequestMiddlewareOptions{
-			CredentialsProvider: v4aCredentialProvider,
-			Presigner:           p.v4aSigner,
-			LogSigning:          p.logSigning,
-		})
-		return mw.HandleFinalize(ctx, in, next)
-
-	default:
-		mw := v4.NewPresignHTTPRequestMiddleware(v4.PresignHTTPRequestMiddlewareOptions{
-			CredentialsProvider: p.credentialsProvider,
-			Presigner:           p.v4Signer,
-			LogSigning:          p.logSigning,
-		})
-		return mw.HandleFinalize(ctx, in, next)
-	}
-}
-
-// RegisterPreSigningMiddleware registers the wrapper pre-signing middleware to the stack. If a pre-signing middleware is already
-// present, this provided middleware will be swapped. Otherwise the middleware will be added at the tail of the
-// finalize step.
-func RegisterPreSigningMiddleware(stack *middleware.Stack, signingMiddleware *PresignHTTPRequestMiddleware) (err error) {
-	const signedID = "PresignHTTPRequest"
 	_, present := stack.Finalize.Get(signedID)
 	if present {
 		_, err = stack.Finalize.Swap(signedID, signingMiddleware)

@@ -110,6 +110,26 @@ func (m *validateOpCreateConnection) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateEndpoint struct {
+}
+
+func (*validateOpCreateEndpoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateEndpoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateEndpointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateEndpointInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateEventBus struct {
 }
 
@@ -250,6 +270,26 @@ func (m *validateOpDeleteConnection) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteEndpoint struct {
+}
+
+func (*validateOpDeleteEndpoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteEndpoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteEndpointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteEndpointInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteEventBus struct {
 }
 
@@ -365,6 +405,26 @@ func (m *validateOpDescribeConnection) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeConnectionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeEndpoint struct {
+}
+
+func (*validateOpDescribeEndpoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeEndpoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeEndpointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeEndpointInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -850,6 +910,26 @@ func (m *validateOpUpdateConnection) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateEndpoint struct {
+}
+
+func (*validateOpUpdateEndpoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateEndpoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateEndpointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateEndpointInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpActivateEventSourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpActivateEventSource{}, middleware.After)
 }
@@ -868,6 +948,10 @@ func addOpCreateArchiveValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCreateConnectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateConnection{}, middleware.After)
+}
+
+func addOpCreateEndpointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateEndpoint{}, middleware.After)
 }
 
 func addOpCreateEventBusValidationMiddleware(stack *middleware.Stack) error {
@@ -898,6 +982,10 @@ func addOpDeleteConnectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteConnection{}, middleware.After)
 }
 
+func addOpDeleteEndpointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteEndpoint{}, middleware.After)
+}
+
 func addOpDeleteEventBusValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteEventBus{}, middleware.After)
 }
@@ -920,6 +1008,10 @@ func addOpDescribeArchiveValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDescribeConnectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeConnection{}, middleware.After)
+}
+
+func addOpDescribeEndpointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeEndpoint{}, middleware.After)
 }
 
 func addOpDescribeEventSourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1016,6 +1108,10 @@ func addOpUpdateArchiveValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateConnectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateConnection{}, middleware.After)
+}
+
+func addOpUpdateEndpointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateEndpoint{}, middleware.After)
 }
 
 func validateAwsVpcConfiguration(v *types.AwsVpcConfiguration) error {
@@ -1240,6 +1336,64 @@ func validateEcsParameters(v *types.EcsParameters) error {
 	}
 }
 
+func validateEndpointEventBus(v *types.EndpointEventBus) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EndpointEventBus"}
+	if v.EventBusArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventBusArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEndpointEventBusList(v []types.EndpointEventBus) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EndpointEventBusList"}
+	for i := range v {
+		if err := validateEndpointEventBus(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFailoverConfig(v *types.FailoverConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FailoverConfig"}
+	if v.Primary == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Primary"))
+	} else if v.Primary != nil {
+		if err := validatePrimary(v.Primary); err != nil {
+			invalidParams.AddNested("Primary", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Secondary == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Secondary"))
+	} else if v.Secondary != nil {
+		if err := validateSecondary(v.Secondary); err != nil {
+			invalidParams.AddNested("Secondary", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateInputTransformer(v *types.InputTransformer) error {
 	if v == nil {
 		return nil
@@ -1287,6 +1441,21 @@ func validateNetworkConfiguration(v *types.NetworkConfiguration) error {
 	}
 }
 
+func validatePrimary(v *types.Primary) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Primary"}
+	if v.HealthCheck == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HealthCheck"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRedshiftDataParameters(v *types.RedshiftDataParameters) error {
 	if v == nil {
 		return nil
@@ -1312,6 +1481,25 @@ func validateReplayDestination(v *types.ReplayDestination) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ReplayDestination"}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRoutingConfig(v *types.RoutingConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RoutingConfig"}
+	if v.FailoverConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FailoverConfig"))
+	} else if v.FailoverConfig != nil {
+		if err := validateFailoverConfig(v.FailoverConfig); err != nil {
+			invalidParams.AddNested("FailoverConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1418,6 +1606,21 @@ func validateSageMakerPipelineParameters(v *types.SageMakerPipelineParameters) e
 		if err := validateSageMakerPipelineParameterList(v.PipelineParameterList); err != nil {
 			invalidParams.AddNested("PipelineParameterList", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSecondary(v *types.Secondary) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Secondary"}
+	if v.Route == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Route"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1628,6 +1831,35 @@ func validateOpCreateConnectionInput(v *CreateConnectionInput) error {
 	}
 }
 
+func validateOpCreateEndpointInput(v *CreateEndpointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateEndpointInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.RoutingConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoutingConfig"))
+	} else if v.RoutingConfig != nil {
+		if err := validateRoutingConfig(v.RoutingConfig); err != nil {
+			invalidParams.AddNested("RoutingConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EventBuses == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventBuses"))
+	} else if v.EventBuses != nil {
+		if err := validateEndpointEventBusList(v.EventBuses); err != nil {
+			invalidParams.AddNested("EventBuses", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateEventBusInput(v *CreateEventBusInput) error {
 	if v == nil {
 		return nil
@@ -1741,6 +1973,21 @@ func validateOpDeleteConnectionInput(v *DeleteConnectionInput) error {
 	}
 }
 
+func validateOpDeleteEndpointInput(v *DeleteEndpointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteEndpointInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteEventBusInput(v *DeleteEventBusInput) error {
 	if v == nil {
 		return nil
@@ -1824,6 +2071,21 @@ func validateOpDescribeConnectionInput(v *DescribeConnectionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeConnectionInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeEndpointInput(v *DescribeEndpointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeEndpointInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
@@ -2232,6 +2494,31 @@ func validateOpUpdateConnectionInput(v *UpdateConnectionInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateConnectionInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateEndpointInput(v *UpdateEndpointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateEndpointInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.RoutingConfig != nil {
+		if err := validateRoutingConfig(v.RoutingConfig); err != nil {
+			invalidParams.AddNested("RoutingConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EventBuses != nil {
+		if err := validateEndpointEventBusList(v.EventBuses); err != nil {
+			invalidParams.AddNested("EventBuses", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

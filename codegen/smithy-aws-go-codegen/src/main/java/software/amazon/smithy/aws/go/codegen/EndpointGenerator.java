@@ -359,8 +359,25 @@ public final class EndpointGenerator implements Runnable {
                 });
                 writer.openBlock("default:", "", () -> writer.write("return \"\", fmt.Errorf(\"unknown partition\")"));
             });
-        });
-        writer.write("");
+        }).write("");
+
+        writer.writeDocs("GetDNSSuffixFromRegion returns the DNS suffix for the provided region and options.");
+        writer.openBlock("func GetDNSSuffixFromRegion(region string, options $T) (string, error) {", "}", optionsSymbol,
+                () -> {
+                    List<Partition> sortedPartitions = getSortedPartitions();
+                    writer.openBlock("switch {", "}", () -> {
+                        sortedPartitions.forEach(partition -> {
+                            writer.write("""
+                                         case partitionRegexp.$L.MatchString(region):
+                                             return GetDNSSuffix($S, options)
+                                         """, getPartitionIDFieldName(partition.getId()), partition.getId());
+                        });
+                        writer.write("""
+                                     default:
+                                         return GetDNSSuffix("aws", options)
+                                     """);
+                    });
+                }).write("");
     }
 
     private void generateAwsEndpointResolverWrapper(GoWriter writer) {

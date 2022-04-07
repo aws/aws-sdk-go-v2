@@ -86,8 +86,8 @@ type PutRuleInput struct {
 	// the default event bus is used.
 	EventBusName *string
 
-	// The event pattern. For more information, see Events and Event Patterns
-	// (https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html)
+	// The event pattern. For more information, see EventBridge event patterns
+	// (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html.html)
 	// in the Amazon EventBridge User Guide.
 	EventPattern *string
 

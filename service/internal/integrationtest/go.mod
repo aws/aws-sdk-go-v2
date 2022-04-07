@@ -108,6 +108,8 @@ replace github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 => ../../../internal/
 
 replace github.com/aws/aws-sdk-go-v2/internal/ini => ../../../internal/ini/
 
+replace github.com/aws/aws-sdk-go-v2/internal/v4a => ../../../internal/v4a/
+
 replace github.com/aws/aws-sdk-go-v2/service/acm => ../../../service/acm/
 
 replace github.com/aws/aws-sdk-go-v2/service/apigateway => ../../../service/apigateway/
