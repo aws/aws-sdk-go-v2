@@ -123,6 +123,24 @@
         },
         "com.amazonaws.docdb#AmazonRDSv19": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "DocDB",
+                    "arnNamespace": "rds",
+                    "cloudFormationName": "DocDB",
+                    "cloudTrailEventSource": "docdb.amazonaws.com",
+                    "endpointPrefix": "rds"
+                },
+                "aws.auth#sigv4": {
+                    "name": "rds"
+                },
+                "aws.protocols#awsQuery": {},
+                "smithy.api#documentation": "<p>Amazon DocumentDB API documentation</p>",
+                "smithy.api#title": "Amazon DocumentDB with MongoDB compatibility",
+                "smithy.api#xmlNamespace": {
+                    "uri": "http://rds.amazonaws.com/doc/2014-10-31/"
+                }
+            },
             "version": "2014-10-31",
             "operations": [
                 {
@@ -284,25 +302,7 @@
                 {
                     "target": "com.amazonaws.docdb#StopDBCluster"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "DocDB",
-                    "arnNamespace": "rds",
-                    "cloudFormationName": "DocDB",
-                    "cloudTrailEventSource": "docdb.amazonaws.com",
-                    "endpointPrefix": "rds"
-                },
-                "aws.auth#sigv4": {
-                    "name": "rds"
-                },
-                "aws.protocols#awsQuery": {},
-                "smithy.api#documentation": "<p>Amazon DocumentDB API documentation</p>",
-                "smithy.api#title": "Amazon DocumentDB with MongoDB compatibility",
-                "smithy.api#xmlNamespace": {
-                    "uri": "http://rds.amazonaws.com/doc/2014-10-31/"
-                }
-            }
+            ]
         },
         "com.amazonaws.docdb#ApplyMethod": {
             "type": "string",
@@ -487,7 +487,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A certificate authority (CA) certificate for an account.</p>"
+                "smithy.api#documentation": "<p>A certificate authority (CA) certificate for an Amazon Web Services account.</p>"
             }
         },
         "com.amazonaws.docdb#CertificateList": {
@@ -505,7 +505,7 @@
                 "Certificates": {
                     "target": "com.amazonaws.docdb#CertificateList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of certificates for this account.</p>"
+                        "smithy.api#documentation": "<p>A list of certificates for this Amazon Web Services account.</p>"
                     }
                 },
                 "Marker": {
@@ -582,7 +582,7 @@
                 "SourceDBClusterParameterGroupIdentifier": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier or Amazon Resource Name (ARN) for the source cluster parameter group.</p>\n        <p>Constraints:</p>\n        <ul>\n            <li>\n                <p>Must specify a valid cluster parameter group.</p>\n            </li>\n            <li>\n                <p>If the source cluster parameter group is in the same Region as the copy, specify a valid parameter group identifier; for example, <code>my-db-cluster-param-group</code>, or a valid ARN.</p>\n            </li>\n            <li>\n                <p>If the source parameter group is in a different Region than the copy, specify a valid cluster parameter group ARN; for example, <code>arn:aws:rds:us-east-1:123456789012:sample-cluster:sample-parameter-group</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The identifier or Amazon Resource Name (ARN) for the source cluster parameter group.</p>\n        <p>Constraints:</p>\n        <ul>\n            <li>\n                <p>Must specify a valid cluster parameter group.</p>\n            </li>\n            <li>\n                <p>If the source cluster parameter group is in the same Amazon Web Services Region as the copy, specify a valid parameter group identifier; for example, <code>my-db-cluster-param-group</code>, or a valid ARN.</p>\n            </li>\n            <li>\n                <p>If the source parameter group is in a different Amazon Web Services Region than the copy, specify a valid cluster parameter group ARN; for example, <code>arn:aws:rds:us-east-1:123456789012:sample-cluster:sample-parameter-group</code>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -648,7 +648,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Copies a snapshot of a cluster.</p>\n        \n        <p>To copy a cluster snapshot from a shared manual cluster snapshot,\n            <code>SourceDBClusterSnapshotIdentifier</code> must be the Amazon \n            Resource Name (ARN) of the shared cluster snapshot. You can only \n            copy a shared DB cluster snapshot, whether encrypted or not, in the \n            same Region.</p>\n            \n        <p>To cancel the copy operation after it is in progress, delete the \n            target cluster snapshot identified by \n            <code>TargetDBClusterSnapshotIdentifier</code> while that cluster \n            snapshot is in the <i>copying</i> status.</p>"
+                "smithy.api#documentation": "<p>Copies a snapshot of a cluster.</p>\n        \n        <p>To copy a cluster snapshot from a shared manual cluster snapshot,\n            <code>SourceDBClusterSnapshotIdentifier</code> must be the Amazon \n            Resource Name (ARN) of the shared cluster snapshot. You can only \n            copy a shared DB cluster snapshot, whether encrypted or not, in the \n            same Amazon Web Services Region.</p>\n            \n        <p>To cancel the copy operation after it is in progress, delete the \n            target cluster snapshot identified by \n            <code>TargetDBClusterSnapshotIdentifier</code> while that cluster \n            snapshot is in the <i>copying</i> status.</p>"
             }
         },
         "com.amazonaws.docdb#CopyDBClusterSnapshotMessage": {
@@ -657,7 +657,7 @@
                 "SourceDBClusterSnapshotIdentifier": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the cluster snapshot to copy. This parameter is\n            not case sensitive.</p>\n            \n        <p>Constraints:</p>\n        <ul>\n            <li>\n                <p>Must specify a valid system snapshot in the \n                    <i>available</i> state.</p>\n            </li>\n            <li>\n                <p>If the source snapshot is in the same Region as the copy, specify a valid snapshot identifier.</p>\n            </li>\n            <li>\n                \n                <p>If the source snapshot is in a different Region than the copy, specify a valid cluster snapshot ARN.</p>\n            </li>\n         </ul>\n        <p>Example: <code>my-cluster-snapshot1</code>\n        </p>",
+                        "smithy.api#documentation": "<p>The identifier of the cluster snapshot to copy. This parameter is\n            not case sensitive.</p>\n            \n        <p>Constraints:</p>\n        <ul>\n            <li>\n                <p>Must specify a valid system snapshot in the \n                    <i>available</i> state.</p>\n            </li>\n            <li>\n                <p>If the source snapshot is in the same Amazon Web Services Region as the copy, specify a valid snapshot identifier.</p>\n            </li>\n            <li>\n                \n                <p>If the source snapshot is in a different Amazon Web Services Region than the copy, specify a valid cluster snapshot ARN.</p>\n            </li>\n         </ul>\n        <p>Example: <code>my-cluster-snapshot1</code>\n        </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -671,13 +671,13 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The KMS key ID for an encrypted cluster snapshot. The KMS\n            key ID is the Amazon Resource Name (ARN), KMS key identifier, or\n            the KMS key alias for the KMS encryption key. </p>\n            \n        <p>If you copy an encrypted cluster snapshot from your account, you can specify a value for <code>KmsKeyId</code> to encrypt the copy with a new KMS encryption key. If you don't specify a value for <code>KmsKeyId</code>, then the copy of the cluster snapshot is encrypted with the same KMS key as the source cluster snapshot.</p>\n            \n        <p>If you copy an encrypted cluster snapshot that is shared from another account, then you must specify a value for <code>KmsKeyId</code>.</p>\n        \n        <p>To copy an encrypted cluster snapshot to another Region, set <code>KmsKeyId</code> to the KMS key ID that you want to use to encrypt the copy of the cluster snapshot in the destination Region. KMS encryption keys are specific to the Region that they are created in, and you can't use encryption keys from one Region in another Region.</p>\n            \n        <p>If you copy an unencrypted cluster snapshot and specify a value for the <code>KmsKeyId</code> parameter, an error is returned.</p>"
+                        "smithy.api#documentation": "<p>The KMS key ID for an encrypted cluster snapshot. The KMS\n            key ID is the Amazon Resource Name (ARN), KMS key identifier, or\n            the KMS key alias for the KMS encryption key. </p>\n            \n        <p>If you copy an encrypted cluster snapshot from your Amazon Web Services account, you can specify a value for <code>KmsKeyId</code> to encrypt the copy with a new KMS encryption key. If you don't specify a value for <code>KmsKeyId</code>, then the copy of the cluster snapshot is encrypted with the same KMS key as the source cluster snapshot.</p>\n            \n        <p>If you copy an encrypted cluster snapshot that is shared from another Amazon Web Services account, then you must specify a value for <code>KmsKeyId</code>.</p>\n        \n        <p>To copy an encrypted cluster snapshot to another Amazon Web Services Region, set <code>KmsKeyId</code> to the KMS key ID that you want to use to encrypt the copy of the cluster snapshot in the destination Region. KMS encryption keys are specific to the Amazon Web Services Region that they are created in, and you can't use encryption keys from one Amazon Web Services Region in another Amazon Web Services Region.</p>\n            \n        <p>If you copy an unencrypted cluster snapshot and specify a value for the <code>KmsKeyId</code> parameter, an error is returned.</p>"
                     }
                 },
                 "PreSignedUrl": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URL that contains a Signature Version 4 signed request for the<code>CopyDBClusterSnapshot</code> API action in the Region that contains the source cluster snapshot to copy. You must use the <code>PreSignedUrl</code> parameter when copying a cluster snapshot from another Region.</p>\n            \n        <p>If you are using an Amazon Web Services SDK tool or the CLI, you can specify \n            <code>SourceRegion</code> (or <code>--source-region</code> for the\n            CLI) instead of specifying <code>PreSignedUrl</code> manually. \n            Specifying <code>SourceRegion</code> autogenerates a pre-signed URL \n            that is a valid request for the operation that can be executed in\n            the source Region.</p>\n            \n        <p>The presigned URL must be a valid request for the \n            <code>CopyDBClusterSnapshot</code> API action that can be executed \n            in the source Region that contains the cluster snapshot to be \n            copied. The presigned URL request must contain the following\n            parameter values:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>SourceRegion</code> - The ID of the region that \n                    contains the snapshot to be copied.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SourceDBClusterSnapshotIdentifier</code> - The \n                    identifier for the the encrypted cluster snapshot to be \n                    copied. This identifier must be in the Amazon Resource Name\n                    (ARN) format for the source Region. For example, if you \n                    are copying an encrypted cluster snapshot from the us-east-1\n                    Region, then your \n                    <code>SourceDBClusterSnapshotIdentifier</code> looks \n                    something like the following: \n                    <code>arn:aws:rds:us-east-1:12345678012:sample-cluster:sample-cluster-snapshot</code>.</p>\n            </li>\n            <li>\n                <p>\n                  <code>TargetDBClusterSnapshotIdentifier</code> - The \n                    identifier for the new cluster snapshot to be created. This\n                    parameter isn't case sensitive.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The URL that contains a Signature Version 4 signed request for the<code>CopyDBClusterSnapshot</code> API action in the Amazon Web Services Region that contains the source cluster snapshot to copy. You must use the <code>PreSignedUrl</code> parameter when copying a cluster snapshot from another Amazon Web Services Region.</p>\n            \n        <p>If you are using an Amazon Web Services SDK tool or the CLI, you can specify \n            <code>SourceRegion</code> (or <code>--source-region</code> for the\n            CLI) instead of specifying <code>PreSignedUrl</code> manually. \n            Specifying <code>SourceRegion</code> autogenerates a pre-signed URL \n            that is a valid request for the operation that can be executed in\n            the source Amazon Web Services Region.</p>\n            \n        <p>The presigned URL must be a valid request for the \n            <code>CopyDBClusterSnapshot</code> API action that can be executed \n            in the source Amazon Web Services Region that contains the cluster snapshot to be \n            copied. The presigned URL request must contain the following\n            parameter values:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>SourceRegion</code> - The ID of the region that \n                    contains the snapshot to be copied.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SourceDBClusterSnapshotIdentifier</code> - The \n                    identifier for the the encrypted cluster snapshot to be \n                    copied. This identifier must be in the Amazon Resource Name\n                    (ARN) format for the source Amazon Web Services Region. For example, if you \n                    are copying an encrypted cluster snapshot from the us-east-1\n                    Amazon Web Services Region, then your \n                    <code>SourceDBClusterSnapshotIdentifier</code> looks \n                    something like the following: \n                    <code>arn:aws:rds:us-east-1:12345678012:sample-cluster:sample-cluster-snapshot</code>.</p>\n            </li>\n            <li>\n                <p>\n                  <code>TargetDBClusterSnapshotIdentifier</code> - The \n                    identifier for the new cluster snapshot to be created. This\n                    parameter isn't case sensitive.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "CopyTags": {
@@ -844,13 +844,13 @@
                 "PreferredBackupWindow": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The daily time range during which automated backups are created if\n            automated backups are enabled using the <code>BackupRetentionPeriod</code> parameter. </p>\n        <p>The default is a 30-minute window selected at random from an 8-hour block of time for each Region. </p>\n        <p>Constraints:</p>\n        <ul>\n            <li>\n                <p>Must be in the format <code>hh24:mi-hh24:mi</code>.</p>\n            </li>\n            <li>\n                <p>Must be in Universal Coordinated Time (UTC).</p>\n            </li>\n            <li>\n                <p>Must not conflict with the preferred maintenance window.\n                    </p>\n            </li>\n            <li>\n                <p>Must be at least 30 minutes.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The daily time range during which automated backups are created if\n            automated backups are enabled using the <code>BackupRetentionPeriod</code> parameter. </p>\n        <p>The default is a 30-minute window selected at random from an 8-hour block of time for each Amazon Web Services Region. </p>\n        <p>Constraints:</p>\n        <ul>\n            <li>\n                <p>Must be in the format <code>hh24:mi-hh24:mi</code>.</p>\n            </li>\n            <li>\n                <p>Must be in Universal Coordinated Time (UTC).</p>\n            </li>\n            <li>\n                <p>Must not conflict with the preferred maintenance window.\n                    </p>\n            </li>\n            <li>\n                <p>Must be at least 30 minutes.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "PreferredMaintenanceWindow": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The weekly time range during which system maintenance can occur, \n            in Universal Coordinated Time (UTC).</p>\n        <p>Format: <code>ddd:hh24:mi-ddd:hh24:mi</code>\n        </p>\n        <p>The default is a 30-minute window selected at random from an 8-hour block of time for each Region, occurring on a random day of the week.</p>\n        <p>Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun</p>\n        <p>Constraints: Minimum 30-minute window.</p>"
+                        "smithy.api#documentation": "<p>The weekly time range during which system maintenance can occur, \n            in Universal Coordinated Time (UTC).</p>\n        <p>Format: <code>ddd:hh24:mi-ddd:hh24:mi</code>\n        </p>\n        <p>The default is a 30-minute window selected at random from an 8-hour block of time for each Amazon Web Services Region, occurring on a random day of the week.</p>\n        <p>Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun</p>\n        <p>Constraints: Minimum 30-minute window.</p>"
                     }
                 },
                 "Tags": {
@@ -868,7 +868,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The KMS key identifier for an encrypted cluster.</p>\n        <p>The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you are creating a cluster using the same account that owns the KMS encryption key that is used to encrypt the new cluster, you can use the KMS key alias instead of the ARN for the KMS encryption key.</p>\n        <p>If an encryption key is not specified in <code>KmsKeyId</code>:\n            </p>\n        <ul>\n            <li>\n                <p>If the <code>StorageEncrypted</code> parameter is \n                    <code>true</code>, Amazon DocumentDB uses your default encryption key.\n                    </p>\n            </li>\n         </ul>\n        <p>KMS creates the default encryption key for your account. Your account has a different default encryption key for each Regions.</p>"
+                        "smithy.api#documentation": "<p>The KMS key identifier for an encrypted cluster.</p>\n        <p>The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you are creating a cluster using the same Amazon Web Services account that owns the KMS encryption key that is used to encrypt the new cluster, you can use the KMS key alias instead of the ARN for the KMS encryption key.</p>\n        <p>If an encryption key is not specified in <code>KmsKeyId</code>:\n            </p>\n        <ul>\n            <li>\n                <p>If the <code>StorageEncrypted</code> parameter is \n                    <code>true</code>, Amazon DocumentDB uses your default encryption key.\n                    </p>\n            </li>\n         </ul>\n        <p>KMS creates the default encryption key for your Amazon Web Services account. Your Amazon Web Services account has a different default encryption key for each Amazon Web Services Regions.</p>"
                     }
                 },
                 "PreSignedUrl": {
@@ -1122,13 +1122,13 @@
                 "AvailabilityZone": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon EC2 Availability Zone that the instance is created in. </p>\n        <p>Default: A random, system-chosen Availability Zone in the endpoint's Region.</p>\n        <p>Example: <code>us-east-1d</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The Amazon EC2 Availability Zone that the instance is created in. </p>\n        <p>Default: A random, system-chosen Availability Zone in the endpoint's Amazon Web Services Region.</p>\n        <p>Example: <code>us-east-1d</code>\n         </p>"
                     }
                 },
                 "PreferredMaintenanceWindow": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time range each week during which system maintenance can occur, in Universal\n            Coordinated Time (UTC).</p>\n        <p> Format: <code>ddd:hh24:mi-ddd:hh24:mi</code>\n        </p>\n        <p>The default is a 30-minute window selected at random from an 8-hour block of time for\n            each Region, occurring on a random day of the week. </p>\n        <p>Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun</p>\n        <p>Constraints: Minimum 30-minute window.</p>"
+                        "smithy.api#documentation": "<p>The time range each week during which system maintenance can occur, in Universal\n            Coordinated Time (UTC).</p>\n        <p> Format: <code>ddd:hh24:mi-ddd:hh24:mi</code>\n        </p>\n        <p>The default is a 30-minute window selected at random from an 8-hour block of time for\n            each Amazon Web Services Region, occurring on a random day of the week. </p>\n        <p>Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun</p>\n        <p>Constraints: Minimum 30-minute window.</p>"
                     }
                 },
                 "AutoMinorVersionUpgrade": {
@@ -1154,6 +1154,18 @@
                     "target": "com.amazonaws.docdb#IntegerOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>A value that specifies the order in which an Amazon DocumentDB replica is promoted to the\n            primary instance after a failure of the existing primary instance.</p>\n        <p>Default: 1</p>\n        <p>Valid values: 0-15</p>"
+                    }
+                },
+                "EnablePerformanceInsights": {
+                    "target": "com.amazonaws.docdb#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that indicates whether to enable Performance Insights for the DB Instance. For\n            more information, see <a href=\"https://docs.aws.amazon.com/documentdb/latest/developerguide/performance-insights.html\">Using Amazon\n                Performance Insights</a>.</p>"
+                    }
+                },
+                "PerformanceInsightsKMSKeyId": {
+                    "target": "com.amazonaws.docdb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The KMS key identifier for encryption of Performance Insights\n            data.</p>\n        <p>The KMS key identifier is the key ARN, key ID, alias ARN, or alias name\n            for the KMS key.</p>\n        <p>If you do not specify a value for PerformanceInsightsKMSKeyId, then Amazon DocumentDB uses your\n            default KMS key. There is a default KMS key for your\n            Amazon Web Services account. Your Amazon Web Services account has a different\n            default KMS key for each Amazon Web Services region.</p>"
                     }
                 }
             },
@@ -1195,7 +1207,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new subnet group. subnet groups must contain at least one subnet in at\n            least two Availability Zones in the Region.</p>"
+                "smithy.api#documentation": "<p>Creates a new subnet group. subnet groups must contain at least one subnet in at\n            least two Availability Zones in the Amazon Web Services Region.</p>"
             }
         },
         "com.amazonaws.docdb#CreateDBSubnetGroupMessage": {
@@ -1359,7 +1371,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Amazon DocumentDB global cluster that can span multiple multiple Regions. The global cluster contains one primary cluster with read-write capability, and up-to give read-only secondary clusters. Global clusters uses storage-based fast replication across regions with latencies less than one second, using dedicated infrastructure with no impact to your workload’s performance.</p>\n        <p></p>\n        <p>You can create a global cluster that is initially empty, and then add a primary and a secondary to it. Or you can specify an existing cluster during the create operation, and this cluster becomes the primary of the global cluster. </p>\n        <note>\n            <p>This action only applies to Amazon DocumentDB clusters.</p>\n        </note>"
+                "smithy.api#documentation": "<p>Creates an Amazon DocumentDB global cluster that can span multiple multiple Amazon Web Services Regions. The global cluster contains one primary cluster with read-write capability, and up-to give read-only secondary clusters. Global clusters uses storage-based fast replication across regions with latencies less than one second, using dedicated infrastructure with no impact to your workload’s performance.</p>\n        <p></p>\n        <p>You can create a global cluster that is initially empty, and then add a primary and a secondary to it. Or you can specify an existing cluster during the create operation, and this cluster becomes the primary of the global cluster. </p>\n        <note>\n            <p>This action only applies to Amazon DocumentDB clusters.</p>\n        </note>"
             }
         },
         "com.amazonaws.docdb#CreateGlobalClusterMessage": {
@@ -1577,7 +1589,7 @@
                 "DbClusterResourceId": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Region-unique, immutable identifier for the cluster. This identifier is\n            found in CloudTrail log entries whenever the KMS key for the cluster is accessed.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region-unique, immutable identifier for the cluster. This identifier is\n            found in CloudTrail log entries whenever the KMS key for the cluster is accessed.</p>"
                     }
                 },
                 "DBClusterArn": {
@@ -2010,18 +2022,18 @@
                 "AttributeName": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the manual cluster snapshot attribute.</p>\n        <p>The attribute named <code>restore</code> refers to the list of accounts that have permission to copy or restore the manual cluster snapshot.</p>"
+                        "smithy.api#documentation": "<p>The name of the manual cluster snapshot attribute.</p>\n        <p>The attribute named <code>restore</code> refers to the list of Amazon Web Services accounts that have permission to copy or restore the manual cluster snapshot.</p>"
                     }
                 },
                 "AttributeValues": {
                     "target": "com.amazonaws.docdb#AttributeValueList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The values for the manual cluster snapshot attribute.</p>\n        <p>If the <code>AttributeName</code> field is set to <code>restore</code>, then this element returns a list of IDs of the accounts that are authorized to copy or restore the manual cluster snapshot. If a value of <code>all</code> is in the list, then the manual cluster snapshot is public and available for any account to copy or restore.</p>"
+                        "smithy.api#documentation": "<p>The values for the manual cluster snapshot attribute.</p>\n        <p>If the <code>AttributeName</code> field is set to <code>restore</code>, then this element returns a list of IDs of the Amazon Web Services accounts that are authorized to copy or restore the manual cluster snapshot. If a value of <code>all</code> is in the list, then the manual cluster snapshot is public and available for any Amazon Web Services account to copy or restore.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the name and values of a manual cluster snapshot attribute.</p>\n        <p>Manual cluster snapshot attributes are used to authorize other accounts to restore a manual cluster snapshot.</p>"
+                "smithy.api#documentation": "<p>Contains the name and values of a manual cluster snapshot attribute.</p>\n        <p>Manual cluster snapshot attributes are used to authorize other Amazon Web Services accounts to restore a manual cluster snapshot.</p>"
             }
         },
         "com.amazonaws.docdb#DBClusterSnapshotAttributeList": {
@@ -2316,7 +2328,7 @@
                 "DbiResourceId": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Region-unique, immutable identifier for the instance. This identifier is found in CloudTrail log entries whenever the KMS key for the instance is\n            accessed.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region-unique, immutable identifier for the instance. This identifier is found in CloudTrail log entries whenever the KMS key for the instance is\n            accessed.</p>"
                     }
                 },
                 "CACertificateIdentifier": {
@@ -3055,7 +3067,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of certificate authority (CA) certificates provided by Amazon DocumentDB for this account.</p>",
+                "smithy.api#documentation": "<p>Returns a list of certificate authority (CA) certificates provided by Amazon DocumentDB for this Amazon Web Services account.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "Marker",
                     "outputToken": "Marker",
@@ -3224,7 +3236,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of cluster snapshot attribute names and values for a manual DB\n            cluster snapshot.</p>\n        <p>When you share snapshots with other accounts,\n                <code>DescribeDBClusterSnapshotAttributes</code> returns the <code>restore</code> attribute and a list of IDs for the accounts that are authorized to copy or restore the manual cluster snapshot. If <code>all</code> is included in the list of values for the <code>restore</code> attribute, then the manual cluster snapshot is public and can be copied or restored by all accounts.</p>"
+                "smithy.api#documentation": "<p>Returns a list of cluster snapshot attribute names and values for a manual DB\n            cluster snapshot.</p>\n        <p>When you share snapshots with other Amazon Web Services accounts,\n                <code>DescribeDBClusterSnapshotAttributes</code> returns the <code>restore</code> attribute and a list of IDs for the Amazon Web Services accounts that are authorized to copy or restore the manual cluster snapshot. If <code>all</code> is included in the list of values for the <code>restore</code> attribute, then the manual cluster snapshot is public and can be copied or restored by all Amazon Web Services accounts.</p>"
             }
         },
         "com.amazonaws.docdb#DescribeDBClusterSnapshotAttributesMessage": {
@@ -3291,7 +3303,7 @@
                 "SnapshotType": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of cluster snapshots to be returned. You can specify one of the following values:</p>\n        <ul>\n            <li>\n                <p>\n                    <code>automated</code> - Return all cluster snapshots that Amazon DocumentDB has automatically created for your account.</p>\n            </li>\n            <li>\n                <p>\n                    <code>manual</code> - Return all cluster snapshots that you have manually created for your account.</p>\n            </li>\n            <li>\n                <p>\n                    <code>shared</code> - Return all manual cluster snapshots that have been shared to your account.</p>\n            </li>\n            <li>\n                <p>\n                    <code>public</code> - Return all cluster snapshots that have been marked as public.</p>\n            </li>\n         </ul>\n        <p>If you don't specify a <code>SnapshotType</code> value, then both automated and manual cluster snapshots are returned. You can include shared cluster snapshots with these results by setting the <code>IncludeShared</code> parameter to <code>true</code>. You can include public cluster snapshots with these results by setting the<code>IncludePublic</code> parameter to <code>true</code>.</p>\n        <p>The <code>IncludeShared</code> and <code>IncludePublic</code> parameters don't apply for <code>SnapshotType</code> values of <code>manual</code> or <code>automated</code>. The <code>IncludePublic</code> parameter doesn't apply when <code>SnapshotType</code> is set to <code>shared</code>. The <code>IncludeShared</code> parameter doesn't apply when <code>SnapshotType</code> is set to <code>public</code>.</p>"
+                        "smithy.api#documentation": "<p>The type of cluster snapshots to be returned. You can specify one of the following values:</p>\n        <ul>\n            <li>\n                <p>\n                    <code>automated</code> - Return all cluster snapshots that Amazon DocumentDB has automatically created for your Amazon Web Services account.</p>\n            </li>\n            <li>\n                <p>\n                    <code>manual</code> - Return all cluster snapshots that you have manually created for your Amazon Web Services account.</p>\n            </li>\n            <li>\n                <p>\n                    <code>shared</code> - Return all manual cluster snapshots that have been shared to your Amazon Web Services account.</p>\n            </li>\n            <li>\n                <p>\n                    <code>public</code> - Return all cluster snapshots that have been marked as public.</p>\n            </li>\n         </ul>\n        <p>If you don't specify a <code>SnapshotType</code> value, then both automated and manual cluster snapshots are returned. You can include shared cluster snapshots with these results by setting the <code>IncludeShared</code> parameter to <code>true</code>. You can include public cluster snapshots with these results by setting the<code>IncludePublic</code> parameter to <code>true</code>.</p>\n        <p>The <code>IncludeShared</code> and <code>IncludePublic</code> parameters don't apply for <code>SnapshotType</code> values of <code>manual</code> or <code>automated</code>. The <code>IncludePublic</code> parameter doesn't apply when <code>SnapshotType</code> is set to <code>shared</code>. The <code>IncludeShared</code> parameter doesn't apply when <code>SnapshotType</code> is set to <code>public</code>.</p>"
                     }
                 },
                 "Filters": {
@@ -3315,13 +3327,13 @@
                 "IncludeShared": {
                     "target": "com.amazonaws.docdb#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Set to <code>true</code> to include shared manual cluster snapshots from other accounts that this account has been given permission to copy or restore, and otherwise <code>false</code>. The default is <code>false</code>.</p>"
+                        "smithy.api#documentation": "<p>Set to <code>true</code> to include shared manual cluster snapshots from other Amazon Web Services accounts that this Amazon Web Services account has been given permission to copy or restore, and otherwise <code>false</code>. The default is <code>false</code>.</p>"
                     }
                 },
                 "IncludePublic": {
                     "target": "com.amazonaws.docdb#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Set to <code>true</code> to include manual cluster snapshots that are public and can be copied or restored by any account, and otherwise <code>false</code>. The default is <code>false</code>.</p>"
+                        "smithy.api#documentation": "<p>Set to <code>true</code> to include manual cluster snapshots that are public and can be copied or restored by any Amazon Web Services account, and otherwise <code>false</code>. The default is <code>false</code>.</p>"
                     }
                 }
             },
@@ -3485,6 +3497,9 @@
                     "items": "DBInstances",
                     "pageSize": "MaxRecords"
                 },
+                "smithy.api#suppress": [
+                    "WaitableTraitInvalidErrorType"
+                ],
                 "smithy.waiters#waitable": {
                     "DBInstanceAvailable": {
                         "acceptors": [
@@ -3544,6 +3559,67 @@
                                     "output": {
                                         "path": "DBInstances[].DBInstanceStatus",
                                         "expected": "incompatible-parameters",
+                                        "comparator": "anyStringEquals"
+                                    }
+                                }
+                            }
+                        ],
+                        "minDelay": 30
+                    },
+                    "DBInstanceDeleted": {
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "DBInstances[].DBInstanceStatus",
+                                        "expected": "deleted",
+                                        "comparator": "allStringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "errorType": "DBInstanceNotFound"
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "DBInstances[].DBInstanceStatus",
+                                        "expected": "creating",
+                                        "comparator": "anyStringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "DBInstances[].DBInstanceStatus",
+                                        "expected": "modifying",
+                                        "comparator": "anyStringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "DBInstances[].DBInstanceStatus",
+                                        "expected": "rebooting",
+                                        "comparator": "anyStringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "DBInstances[].DBInstanceStatus",
+                                        "expected": "resetting-master-credentials",
                                         "comparator": "anyStringEquals"
                                     }
                                 }
@@ -4440,7 +4516,7 @@
                 "GlobalClusterResourceId": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Region-unique, immutable identifier for the global database cluster. This identifier is found in AWS CloudTrail log entries whenever the AWS KMS customer master key (CMK) for the cluster is accessed. </p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region-unique, immutable identifier for the global database cluster. This identifier is found in AWS CloudTrail log entries whenever the AWS KMS customer master key (CMK) for the cluster is accessed. </p>"
                     }
                 },
                 "GlobalClusterArn": {
@@ -5091,13 +5167,13 @@
                 "PreferredBackupWindow": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The daily time range during which automated backups are created if automated backups\n            are enabled, using the <code>BackupRetentionPeriod</code> parameter. </p>\n        <p>The default is a 30-minute window selected at random from an 8-hour block of time for\n            each Region. </p>\n        <p>Constraints:</p>\n        <ul>\n            <li>\n                <p>Must be in the format <code>hh24:mi-hh24:mi</code>.</p>\n            </li>\n            <li>\n                <p>Must be in Universal Coordinated Time (UTC).</p>\n            </li>\n            <li>\n                <p>Must not conflict with the preferred maintenance window.</p>\n            </li>\n            <li>\n                <p>Must be at least 30 minutes.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The daily time range during which automated backups are created if automated backups\n            are enabled, using the <code>BackupRetentionPeriod</code> parameter. </p>\n        <p>The default is a 30-minute window selected at random from an 8-hour block of time for\n            each Amazon Web Services Region. </p>\n        <p>Constraints:</p>\n        <ul>\n            <li>\n                <p>Must be in the format <code>hh24:mi-hh24:mi</code>.</p>\n            </li>\n            <li>\n                <p>Must be in Universal Coordinated Time (UTC).</p>\n            </li>\n            <li>\n                <p>Must not conflict with the preferred maintenance window.</p>\n            </li>\n            <li>\n                <p>Must be at least 30 minutes.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "PreferredMaintenanceWindow": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The weekly time range during which system maintenance can occur, in Universal\n            Coordinated Time (UTC).</p>\n        <p>Format: <code>ddd:hh24:mi-ddd:hh24:mi</code>\n        </p>\n        <p>The default is a 30-minute window selected at random from an 8-hour block of time for\n            each Region, occurring on a random day of the week. </p>\n        <p>Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun</p>\n        <p>Constraints: Minimum 30-minute window.</p>"
+                        "smithy.api#documentation": "<p>The weekly time range during which system maintenance can occur, in Universal\n            Coordinated Time (UTC).</p>\n        <p>Format: <code>ddd:hh24:mi-ddd:hh24:mi</code>\n        </p>\n        <p>The default is a 30-minute window selected at random from an 8-hour block of time for\n            each Amazon Web Services Region, occurring on a random day of the week. </p>\n        <p>Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun</p>\n        <p>Constraints: Minimum 30-minute window.</p>"
                     }
                 },
                 "CloudwatchLogsExportConfiguration": {
@@ -5193,7 +5269,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds an attribute and values to, or removes an attribute and values from, a manual cluster snapshot.</p>\n        <p>To share a manual cluster snapshot with other accounts, specify <code>restore</code> as the <code>AttributeName</code>, and use the <code>ValuesToAdd</code> parameter to add a list of IDs of the accounts that are authorized to restore the manual cluster snapshot. Use the value <code>all</code> to make the manual cluster snapshot public, which means that it can be copied or restored by all accounts. Do not add the <code>all</code> value for any manual cluster snapshots that contain private information that you don't want available to all accounts. If a manual cluster snapshot is encrypted, it can be shared, but only by specifying a list of authorized account IDs for the <code>ValuesToAdd</code> parameter. You can't use <code>all</code> as a value for that parameter in this case.</p>"
+                "smithy.api#documentation": "<p>Adds an attribute and values to, or removes an attribute and values from, a manual cluster snapshot.</p>\n        <p>To share a manual cluster snapshot with other Amazon Web Services accounts, specify <code>restore</code> as the <code>AttributeName</code>, and use the <code>ValuesToAdd</code> parameter to add a list of IDs of the Amazon Web Services accounts that are authorized to restore the manual cluster snapshot. Use the value <code>all</code> to make the manual cluster snapshot public, which means that it can be copied or restored by all Amazon Web Services accounts. Do not add the <code>all</code> value for any manual cluster snapshots that contain private information that you don't want available to all Amazon Web Services accounts. If a manual cluster snapshot is encrypted, it can be shared, but only by specifying a list of authorized Amazon Web Services account IDs for the <code>ValuesToAdd</code> parameter. You can't use <code>all</code> as a value for that parameter in this case.</p>"
             }
         },
         "com.amazonaws.docdb#ModifyDBClusterSnapshotAttributeMessage": {
@@ -5209,20 +5285,20 @@
                 "AttributeName": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the cluster snapshot attribute to modify.</p>\n        <p>To manage authorization for other accounts to copy or restore a manual cluster\n            snapshot, set this value to <code>restore</code>.</p>",
+                        "smithy.api#documentation": "<p>The name of the cluster snapshot attribute to modify.</p>\n        <p>To manage authorization for other Amazon Web Services accounts to copy or restore a manual cluster\n            snapshot, set this value to <code>restore</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ValuesToAdd": {
                     "target": "com.amazonaws.docdb#AttributeValueList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of cluster snapshot attributes to add to the attribute specified by <code>AttributeName</code>.</p>\n        <p>To authorize other accounts to copy or restore a manual cluster snapshot, set this list to include one or more account IDs. To make the manual cluster snapshot restorable by any account, set it to <code>all</code>. Do not add the <code>all</code> value for any manual cluster snapshots that contain private information that you don't want to be available to all accounts.</p>"
+                        "smithy.api#documentation": "<p>A list of cluster snapshot attributes to add to the attribute specified by <code>AttributeName</code>.</p>\n        <p>To authorize other Amazon Web Services accounts to copy or restore a manual cluster snapshot, set this list to include one or more Amazon Web Services account IDs. To make the manual cluster snapshot restorable by any Amazon Web Services account, set it to <code>all</code>. Do not add the <code>all</code> value for any manual cluster snapshots that contain private information that you don't want to be available to all Amazon Web Services accounts.</p>"
                     }
                 },
                 "ValuesToRemove": {
                     "target": "com.amazonaws.docdb#AttributeValueList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of cluster snapshot attributes to remove from the attribute specified by <code>AttributeName</code>.</p>\n        <p>To remove authorization for other accounts to copy or restore a manual cluster snapshot, set this list to include one or more account identifiers. To remove authorization for any account to copy or restore the cluster snapshot, set it to <code>all</code> . If you specify <code>all</code>, an account whose account ID is explicitly added to the <code>restore</code> attribute can still copy or restore a manual cluster snapshot.</p>"
+                        "smithy.api#documentation": "<p>A list of cluster snapshot attributes to remove from the attribute specified by <code>AttributeName</code>.</p>\n        <p>To remove authorization for other Amazon Web Services accounts to copy or restore a manual cluster snapshot, set this list to include one or more Amazon Web Services account identifiers. To remove authorization for any Amazon Web Services account to copy or restore the cluster snapshot, set it to <code>all</code> . If you specify <code>all</code>, an Amazon Web Services account whose account ID is explicitly added to the <code>restore</code> attribute can still copy or restore a manual cluster snapshot.</p>"
                     }
                 }
             },
@@ -5304,7 +5380,7 @@
                 "DBInstanceClass": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new compute and memory capacity of the instance; for example, <code>db.r5.large</code>. Not all instance classes are available in all Regions. </p>\n        <p>If you modify the instance class, an outage occurs during the change. The change is\n            applied during the next maintenance window, unless <code>ApplyImmediately</code> is\n            specified as <code>true</code> for this request. </p>\n        <p>Default: Uses existing setting.</p>"
+                        "smithy.api#documentation": "<p>The new compute and memory capacity of the instance; for example, <code>db.r5.large</code>. Not all instance classes are available in all Amazon Web Services Regions. </p>\n        <p>If you modify the instance class, an outage occurs during the change. The change is\n            applied during the next maintenance window, unless <code>ApplyImmediately</code> is\n            specified as <code>true</code> for this request. </p>\n        <p>Default: Uses existing setting.</p>"
                     }
                 },
                 "ApplyImmediately": {
@@ -5341,6 +5417,18 @@
                     "target": "com.amazonaws.docdb#IntegerOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>A value that specifies the order in which an Amazon DocumentDB replica is promoted to the primary instance after a failure of the existing primary instance.</p>\n        <p>Default: 1</p>\n        <p>Valid values: 0-15</p>"
+                    }
+                },
+                "EnablePerformanceInsights": {
+                    "target": "com.amazonaws.docdb#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that indicates whether to enable Performance Insights for the DB Instance. For\n            more information, see <a href=\"https://docs.aws.amazon.com/documentdb/latest/developerguide/performance-insights.html\">Using Amazon\n                Performance Insights</a>.</p>"
+                    }
+                },
+                "PerformanceInsightsKMSKeyId": {
+                    "target": "com.amazonaws.docdb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The KMS key identifier for encryption of Performance Insights\n            data.</p>\n        <p>The KMS key identifier is the key ARN, key ID, alias ARN, or alias name\n            for the KMS key.</p>\n        <p>If you do not specify a value for PerformanceInsightsKMSKeyId, then Amazon DocumentDB uses your\n            default KMS key. There is a default KMS key for your\n            Amazon Web Services account. Your Amazon Web Services account has a different\n            default KMS key for each Amazon Web Services region.</p>"
                     }
                 }
             },
@@ -5382,7 +5470,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Modifies an existing subnet group. subnet groups must contain at least one subnet in at least two Availability Zones in the Region.</p>"
+                "smithy.api#documentation": "<p>Modifies an existing subnet group. subnet groups must contain at least one subnet in at least two Availability Zones in the Amazon Web Services Region.</p>"
             }
         },
         "com.amazonaws.docdb#ModifyDBSubnetGroupMessage": {
@@ -6311,7 +6399,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The KMS key identifier to use when restoring an encrypted cluster from a DB snapshot or cluster snapshot.</p>\n        <p>The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you are restoring a cluster with the same account that owns the KMS encryption key used to encrypt the new cluster, then you can use the KMS key alias instead of the ARN for the KMS encryption key.</p>\n        <p>If you do not specify a value for the <code>KmsKeyId</code> parameter, then the\n            following occurs:</p>\n        <ul>\n            <li>\n                <p>If the snapshot or cluster snapshot in <code>SnapshotIdentifier</code> is encrypted, then the restored cluster is encrypted using the KMS key that was used to encrypt the snapshot or the cluster snapshot.</p>\n            </li>\n            <li>\n                <p>If the snapshot or the cluster snapshot in\n                        <code>SnapshotIdentifier</code> is not encrypted, then the restored DB\n                    cluster is not encrypted.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The KMS key identifier to use when restoring an encrypted cluster from a DB snapshot or cluster snapshot.</p>\n        <p>The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you are restoring a cluster with the same Amazon Web Services account that owns the KMS encryption key used to encrypt the new cluster, then you can use the KMS key alias instead of the ARN for the KMS encryption key.</p>\n        <p>If you do not specify a value for the <code>KmsKeyId</code> parameter, then the\n            following occurs:</p>\n        <ul>\n            <li>\n                <p>If the snapshot or cluster snapshot in <code>SnapshotIdentifier</code> is encrypted, then the restored cluster is encrypted using the KMS key that was used to encrypt the snapshot or the cluster snapshot.</p>\n            </li>\n            <li>\n                <p>If the snapshot or the cluster snapshot in\n                        <code>SnapshotIdentifier</code> is not encrypted, then the restored DB\n                    cluster is not encrypted.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "EnableCloudwatchLogsExports": {
@@ -6454,7 +6542,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The KMS key identifier to use when restoring an encrypted cluster from an encrypted cluster.</p>\n        <p>The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you are restoring a cluster with the same account that owns the KMS encryption key used to encrypt the new cluster, then you can use the KMS key alias instead of the ARN for the KMS encryption key.</p>\n        <p>You can restore to a new cluster and encrypt the new cluster with an KMS key that is different from the KMS key used to encrypt the source cluster. The new DB cluster is encrypted with the KMS key identified by the <code>KmsKeyId</code> parameter.</p>\n        <p>If you do not specify a value for the <code>KmsKeyId</code> parameter, then the following occurs:</p>\n        <ul>\n            <li>\n                <p>If the cluster is encrypted, then the restored cluster is encrypted using the KMS key that was used to encrypt the source cluster.</p>\n            </li>\n            <li>\n                <p>If the cluster is not encrypted, then the restored cluster is not encrypted.</p>\n            </li>\n         </ul>\n        <p>If <code>DBClusterIdentifier</code> refers to a cluster that is not encrypted, then\n            the restore request is rejected.</p>"
+                        "smithy.api#documentation": "<p>The KMS key identifier to use when restoring an encrypted cluster from an encrypted cluster.</p>\n        <p>The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you are restoring a cluster with the same Amazon Web Services account that owns the KMS encryption key used to encrypt the new cluster, then you can use the KMS key alias instead of the ARN for the KMS encryption key.</p>\n        <p>You can restore to a new cluster and encrypt the new cluster with an KMS key that is different from the KMS key used to encrypt the source cluster. The new DB cluster is encrypted with the KMS key identified by the <code>KmsKeyId</code> parameter.</p>\n        <p>If you do not specify a value for the <code>KmsKeyId</code> parameter, then the following occurs:</p>\n        <ul>\n            <li>\n                <p>If the cluster is encrypted, then the restored cluster is encrypted using the KMS key that was used to encrypt the source cluster.</p>\n            </li>\n            <li>\n                <p>If the cluster is not encrypted, then the restored cluster is not encrypted.</p>\n            </li>\n         </ul>\n        <p>If <code>DBClusterIdentifier</code> refers to a cluster that is not encrypted, then\n            the restore request is rejected.</p>"
                     }
                 },
                 "EnableCloudwatchLogsExports": {

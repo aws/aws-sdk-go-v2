@@ -20453,6 +20453,38 @@
                     {
                         "value": "ml.r5.24xlarge",
                         "name": "ML_R5_24XLARGE"
+                    },
+                    {
+                        "value": "ml.g5.xlarge",
+                        "name": "ML_G5_XLARGE"
+                    },
+                    {
+                        "value": "ml.g5.2xlarge",
+                        "name": "ML_G5_2XLARGE"
+                    },
+                    {
+                        "value": "ml.g5.4xlarge",
+                        "name": "ML_G5_4XLARGE"
+                    },
+                    {
+                        "value": "ml.g5.8xlarge",
+                        "name": "ML_G5_8XLARGE"
+                    },
+                    {
+                        "value": "ml.g5.16xlarge",
+                        "name": "ML_G5_16XLARGE"
+                    },
+                    {
+                        "value": "ml.g5.12xlarge",
+                        "name": "ML_G5_12XLARGE"
+                    },
+                    {
+                        "value": "ml.g5.24xlarge",
+                        "name": "ML_G5_24XLARGE"
+                    },
+                    {
+                        "value": "ml.g5.48xlarge",
+                        "name": "ML_G5_48XLARGE"
                     }
                 ]
             }
