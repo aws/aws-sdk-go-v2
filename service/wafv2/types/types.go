@@ -1091,7 +1091,12 @@ type LoggingFilter struct {
 // Additional information that's used by a managed rule group. Most managed rule
 // groups don't require this. Use this for the account takeover prevention managed
 // rule group AWSManagedRulesATPRuleSet, to provide information about the sign-in
-// page of your application.
+// page of your application. You can provide multiple individual
+// ManagedRuleGroupConfig objects for any rule group configuration, for example
+// UsernameField and PasswordField. The configuration that you provide depends on
+// the needs of the managed rule group. For the ATP managed rule group, you provide
+// the following individual configuration objects: LoginPath, PasswordField,
+// PayloadType and UsernameField.
 type ManagedRuleGroupConfig struct {
 
 	// The path of the login endpoint for your application. For example, for the URL
@@ -1139,7 +1144,12 @@ type ManagedRuleGroupStatement struct {
 	// Additional information that's used by a managed rule group. Most managed rule
 	// groups don't require this. Use this for the account takeover prevention managed
 	// rule group AWSManagedRulesATPRuleSet, to provide information about the sign-in
-	// page of your application.
+	// page of your application. You can provide multiple individual
+	// ManagedRuleGroupConfig objects for any rule group configuration, for example
+	// UsernameField and PasswordField. The configuration that you provide depends on
+	// the needs of the managed rule group. For the ATP managed rule group, you provide
+	// the following individual configuration objects: LoginPath, PasswordField,
+	// PayloadType and UsernameField.
 	ManagedRuleGroupConfigs []ManagedRuleGroupConfig
 
 	// An optional nested statement that narrows the scope of the web requests that are
@@ -1178,6 +1188,10 @@ type ManagedRuleGroupSummary struct {
 	// The name of the managed rule group vendor. You use this, along with the rule
 	// group name, to identify the rule group.
 	VendorName *string
+
+	// Indicates whether the managed rule group is versioned. If it is, you can
+	// retrieve the versions list by calling ListAvailableManagedRuleGroupVersions.
+	VersioningSupported bool
 
 	noSmithyDocumentSerde
 }

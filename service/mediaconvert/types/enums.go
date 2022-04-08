@@ -1661,6 +1661,24 @@ func (CmfcIFrameOnlyManifest) Values() []CmfcIFrameOnlyManifest {
 	}
 }
 
+type CmfcKlvMetadata string
+
+// Enum values for CmfcKlvMetadata
+const (
+	CmfcKlvMetadataPassthrough CmfcKlvMetadata = "PASSTHROUGH"
+	CmfcKlvMetadataNone        CmfcKlvMetadata = "NONE"
+)
+
+// Values returns all known values for CmfcKlvMetadata. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CmfcKlvMetadata) Values() []CmfcKlvMetadata {
+	return []CmfcKlvMetadata{
+		"PASSTHROUGH",
+		"NONE",
+	}
+}
+
 type CmfcScte35Esam string
 
 // Enum values for CmfcScte35Esam
@@ -5402,6 +5420,24 @@ func (M2tsForceTsVideoEbpOrder) Values() []M2tsForceTsVideoEbpOrder {
 	}
 }
 
+type M2tsKlvMetadata string
+
+// Enum values for M2tsKlvMetadata
+const (
+	M2tsKlvMetadataPassthrough M2tsKlvMetadata = "PASSTHROUGH"
+	M2tsKlvMetadataNone        M2tsKlvMetadata = "NONE"
+)
+
+// Values returns all known values for M2tsKlvMetadata. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (M2tsKlvMetadata) Values() []M2tsKlvMetadata {
+	return []M2tsKlvMetadata{
+		"PASSTHROUGH",
+		"NONE",
+	}
+}
+
 type M2tsNielsenId3 string
 
 // Enum values for M2tsNielsenId3
@@ -5857,6 +5893,24 @@ func (MpdCaptionContainerType) Values() []MpdCaptionContainerType {
 	return []MpdCaptionContainerType{
 		"RAW",
 		"FRAGMENTED_MP4",
+	}
+}
+
+type MpdKlvMetadata string
+
+// Enum values for MpdKlvMetadata
+const (
+	MpdKlvMetadataNone        MpdKlvMetadata = "NONE"
+	MpdKlvMetadataPassthrough MpdKlvMetadata = "PASSTHROUGH"
+)
+
+// Values returns all known values for MpdKlvMetadata. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MpdKlvMetadata) Values() []MpdKlvMetadata {
+	return []MpdKlvMetadata{
+		"NONE",
+		"PASSTHROUGH",
 	}
 }
 
@@ -7663,6 +7717,7 @@ type WebvttStylePassthrough string
 const (
 	WebvttStylePassthroughEnabled  WebvttStylePassthrough = "ENABLED"
 	WebvttStylePassthroughDisabled WebvttStylePassthrough = "DISABLED"
+	WebvttStylePassthroughStrict   WebvttStylePassthrough = "STRICT"
 )
 
 // Values returns all known values for WebvttStylePassthrough. Note that this can
@@ -7672,6 +7727,7 @@ func (WebvttStylePassthrough) Values() []WebvttStylePassthrough {
 	return []WebvttStylePassthrough{
 		"ENABLED",
 		"DISABLED",
+		"STRICT",
 	}
 }
 

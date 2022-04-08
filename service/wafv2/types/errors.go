@@ -161,13 +161,14 @@ func (e *WAFInvalidParameterException) ErrorFault() smithy.ErrorFault { return s
 // must specify Allow.
 //
 // * Action must specify wafv2:CreateWebACL,
-// wafv2:UpdateWebACL, and wafv2:PutFirewallManagerRuleGroups. WAF rejects any
-// extra actions or wildcard actions in the policy.
+// wafv2:UpdateWebACL, and wafv2:PutFirewallManagerRuleGroups and may optionally
+// specify wafv2:GetRuleGroup. WAF rejects any extra actions or wildcard actions in
+// the policy.
 //
-// * The policy must not include
-// a Resource parameter.
+// * The policy must not include a Resource parameter.
 //
-// For more information, see IAM Policies
+// For more
+// information, see IAM Policies
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html).
 type WAFInvalidPermissionPolicyException struct {
 	Message *string

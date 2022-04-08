@@ -3732,6 +3732,15 @@ func awsRestjson1_deserializeDocumentDashManifest(v **types.DashManifest, value 
 				sv.Profile = types.Profile(jtv)
 			}
 
+		case "scteMarkersSource":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ScteMarkersSource to be of type string, got %T instead", value)
+				}
+				sv.ScteMarkersSource = types.ScteMarkersSource(jtv)
+			}
+
 		case "streamSelection":
 			if err := awsRestjson1_deserializeDocumentStreamSelection(&sv.StreamSelection, value); err != nil {
 				return err

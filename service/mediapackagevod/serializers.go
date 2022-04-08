@@ -1381,6 +1381,11 @@ func awsRestjson1_serializeDocumentDashManifest(v *types.DashManifest, value smi
 		ok.String(string(v.Profile))
 	}
 
+	if len(v.ScteMarkersSource) > 0 {
+		ok := object.Key("scteMarkersSource")
+		ok.String(string(v.ScteMarkersSource))
+	}
+
 	if v.StreamSelection != nil {
 		ok := object.Key("streamSelection")
 		if err := awsRestjson1_serializeDocumentStreamSelection(v.StreamSelection, ok); err != nil {

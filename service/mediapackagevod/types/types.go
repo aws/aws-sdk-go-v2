@@ -128,6 +128,11 @@ type DashManifest struct {
 	// "HBBTV_1_5", HbbTV 1.5 compliant output is enabled.
 	Profile Profile
 
+	// The source of scte markers used. When set to SEGMENTS, the scte markers are
+	// sourced from the segments of the ingested content. When set to MANIFEST, the
+	// scte markers are sourced from the manifest of the ingested content.
+	ScteMarkersSource ScteMarkersSource
+
 	// A StreamSelection configuration.
 	StreamSelection *StreamSelection
 

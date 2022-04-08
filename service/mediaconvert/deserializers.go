@@ -8522,6 +8522,15 @@ func awsRestjson1_deserializeDocumentCmfcSettings(v **types.CmfcSettings, value 
 				sv.IFrameOnlyManifest = types.CmfcIFrameOnlyManifest(jtv)
 			}
 
+		case "klvMetadata":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CmfcKlvMetadata to be of type string, got %T instead", value)
+				}
+				sv.KlvMetadata = types.CmfcKlvMetadata(jtv)
+			}
+
 		case "scte35Esam":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15346,6 +15355,15 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				}
 			}
 
+		case "klvMetadata":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected M2tsKlvMetadata to be of type string, got %T instead", value)
+				}
+				sv.KlvMetadata = types.M2tsKlvMetadata(jtv)
+			}
+
 		case "maxPcrInterval":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -16449,6 +16467,15 @@ func awsRestjson1_deserializeDocumentMpdSettings(v **types.MpdSettings, value in
 					return fmt.Errorf("expected MpdCaptionContainerType to be of type string, got %T instead", value)
 				}
 				sv.CaptionContainerType = types.MpdCaptionContainerType(jtv)
+			}
+
+		case "klvMetadata":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MpdKlvMetadata to be of type string, got %T instead", value)
+				}
+				sv.KlvMetadata = types.MpdKlvMetadata(jtv)
 			}
 
 		case "scte35Esam":

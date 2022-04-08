@@ -3852,6 +3852,11 @@ func awsRestjson1_serializeDocumentCmfcSettings(v *types.CmfcSettings, value smi
 		ok.String(string(v.IFrameOnlyManifest))
 	}
 
+	if len(v.KlvMetadata) > 0 {
+		ok := object.Key("klvMetadata")
+		ok.String(string(v.KlvMetadata))
+	}
+
 	if len(v.Scte35Esam) > 0 {
 		ok := object.Key("scte35Esam")
 		ok.String(string(v.Scte35Esam))
@@ -6790,6 +6795,11 @@ func awsRestjson1_serializeDocumentM2tsSettings(v *types.M2tsSettings, value smi
 		}
 	}
 
+	if len(v.KlvMetadata) > 0 {
+		ok := object.Key("klvMetadata")
+		ok.String(string(v.KlvMetadata))
+	}
+
 	if v.MaxPcrInterval != 0 {
 		ok := object.Key("maxPcrInterval")
 		ok.Integer(v.MaxPcrInterval)
@@ -7245,6 +7255,11 @@ func awsRestjson1_serializeDocumentMpdSettings(v *types.MpdSettings, value smith
 	if len(v.CaptionContainerType) > 0 {
 		ok := object.Key("captionContainerType")
 		ok.String(string(v.CaptionContainerType))
+	}
+
+	if len(v.KlvMetadata) > 0 {
+		ok := object.Key("klvMetadata")
+		ok.String(string(v.KlvMetadata))
 	}
 
 	if len(v.Scte35Esam) > 0 {

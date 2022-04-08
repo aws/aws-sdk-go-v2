@@ -92,6 +92,24 @@ func (Profile) Values() []Profile {
 	}
 }
 
+type ScteMarkersSource string
+
+// Enum values for ScteMarkersSource
+const (
+	ScteMarkersSourceSegments ScteMarkersSource = "SEGMENTS"
+	ScteMarkersSourceManifest ScteMarkersSource = "MANIFEST"
+)
+
+// Values returns all known values for ScteMarkersSource. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ScteMarkersSource) Values() []ScteMarkersSource {
+	return []ScteMarkersSource{
+		"SEGMENTS",
+		"MANIFEST",
+	}
+}
+
 type SegmentTemplateFormat string
 
 // Enum values for SegmentTemplateFormat

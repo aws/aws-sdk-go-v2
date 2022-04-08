@@ -1569,6 +1569,10 @@ type CmfcSettings struct {
 	// value Exclude (EXCLUDE).
 	IFrameOnlyManifest CmfcIFrameOnlyManifest
 
+	// Applies to CMAF outputs. Use this setting to specify whether the service inserts
+	// the KLV metadata from the input in this output.
+	KlvMetadata CmfcKlvMetadata
+
 	// Use this setting only when you specify SCTE-35 markers from ESAM. Choose INSERT
 	// to put SCTE-35 markers in this output at the insertion points that you specify
 	// in an ESAM XML document. Provide the document in the setting SCC XML (sccXml).
@@ -5026,6 +5030,10 @@ type M2tsSettings struct {
 	// The length, in seconds, of each fragment. Only used with EBP markers.
 	FragmentTime float64
 
+	// Applies to MPEG-TS outputs. Use this setting to specify whether the service
+	// inserts the KLV metadata from the input in this output.
+	KlvMetadata M2tsKlvMetadata
+
 	// Specify the maximum time, in milliseconds, between Program Clock References
 	// (PCRs) inserted into the transport stream.
 	MaxPcrInterval int32
@@ -5491,6 +5499,10 @@ type MpdSettings struct {
 	// within fragmented MP4 files. This set of fragmented MP4 files is separate from
 	// your video and audio fragmented MP4 files.
 	CaptionContainerType MpdCaptionContainerType
+
+	// Applies to DASH ISO outputs. Use this setting to specify whether the service
+	// inserts the KLV metadata from the input in this output.
+	KlvMetadata MpdKlvMetadata
 
 	// Use this setting only when you specify SCTE-35 markers from ESAM. Choose INSERT
 	// to put SCTE-35 markers in this output at the insertion points that you specify
@@ -7777,12 +7789,15 @@ type WebvttDestinationSettings struct {
 	// not add the above attributes.
 	Accessibility WebvttAccessibilitySubs
 
-	// Set Style passthrough (StylePassthrough) to ENABLED to use the available style,
-	// color, and position information from your input captions. MediaConvert uses
-	// default settings for any missing style and position information in your input
-	// captions. Set Style passthrough to DISABLED, or leave blank, to ignore the style
+	// To use the available style, color, and position information from your input
+	// captions: Set Style passthrough (stylePassthrough) to Enabled (ENABLED).
+	// MediaConvert uses default settings when style and position information is
+	// missing from your input captions. To recreate the input captions exactly: Set
+	// Style passthrough to Strict (STRICT). MediaConvert automatically applies timing
+	// adjustments, including adjustments for frame rate conversion, ad avails, and
+	// input clipping. Your input captions format must be WebVTT. To ignore the style
 	// and position information from your input captions and use simplified output
-	// captions.
+	// captions: Set Style passthrough to Disabled (DISABLED), or leave blank.
 	StylePassthrough WebvttStylePassthrough
 
 	noSmithyDocumentSerde

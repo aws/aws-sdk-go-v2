@@ -3622,6 +3622,9 @@ func awsAwsjson11_deserializeOpErrorListAvailableManagedRuleGroupVersions(respon
 	case strings.EqualFold("WAFInvalidParameterException", errorCode):
 		return awsAwsjson11_deserializeErrorWAFInvalidParameterException(response, errorBody)
 
+	case strings.EqualFold("WAFNonexistentItemException", errorCode):
+		return awsAwsjson11_deserializeErrorWAFNonexistentItemException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -9270,6 +9273,15 @@ func awsAwsjson11_deserializeDocumentManagedRuleGroupSummary(v **types.ManagedRu
 				sv.VendorName = ptr.String(jtv)
 			}
 
+		case "VersioningSupported":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.VersioningSupported = jtv
+			}
+
 		default:
 			_, _ = key, value
 
@@ -14196,6 +14208,15 @@ func awsAwsjson11_deserializeOpDocumentListAvailableManagedRuleGroupVersionsOutp
 
 	for key, value := range shape {
 		switch key {
+		case "CurrentDefaultVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VersionKeyString to be of type string, got %T instead", value)
+				}
+				sv.CurrentDefaultVersion = ptr.String(jtv)
+			}
+
 		case "NextMarker":
 			if value != nil {
 				jtv, ok := value.(string)
