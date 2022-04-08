@@ -1,3 +1,7 @@
+# v1.19.0 (2022-04-08)
+
+* **Feature**: Add a new CurrentDefaultVersion field to ListAvailableManagedRuleGroupVersions API response; add a new VersioningSupported boolean to each ManagedRuleGroup returned from ListAvailableManagedRuleGroups API response.
+
 # v1.18.3 (2022-03-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions

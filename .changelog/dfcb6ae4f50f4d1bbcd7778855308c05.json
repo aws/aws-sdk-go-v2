@@ -1,8 +1,0 @@
-{
-    "id": "dfcb6ae4-f50f-4d1b-bcd7-778855308c05",
-    "type": "feature",
-    "description": "Add a new CurrentDefaultVersion field to ListAvailableManagedRuleGroupVersions API response; add a new VersioningSupported boolean to each ManagedRuleGroup returned from ListAvailableManagedRuleGroups API response.",
-    "modules": [
-        "service/wafv2"
-    ]
-}

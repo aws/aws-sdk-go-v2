@@ -1,3 +1,7 @@
+# v1.17.0 (2022-04-08)
+
+* **Feature**: This release adds ScteMarkersSource as an available field for Dash Packaging Configurations. When set to MANIFEST, MediaPackage will source the SCTE-35 markers from the manifest. When set to SEGMENTS, MediaPackage will source the SCTE-35 markers from the segments.
+
 # v1.16.3 (2022-03-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions

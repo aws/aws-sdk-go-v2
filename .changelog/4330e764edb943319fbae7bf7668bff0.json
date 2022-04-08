@@ -1,8 +1,0 @@
-{
-    "id": "4330e764-edb9-4331-9fba-e7bf7668bff0",
-    "type": "feature",
-    "description": "AWS Elemental MediaConvert SDK has added support for the pass-through of WebVTT styling to WebVTT outputs, pass-through of KLV metadata to supported formats, and improved filter support for processing 444/RGB content.",
-    "modules": [
-        "service/mediaconvert"
-    ]
-}
