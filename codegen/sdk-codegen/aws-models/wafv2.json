@@ -2872,6 +2872,12 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.wafv2#ExcludedRule"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
             }
         },
         "com.amazonaws.wafv2#FailureReason": {
@@ -4463,6 +4469,9 @@
                 },
                 {
                     "target": "com.amazonaws.wafv2#WAFInvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.wafv2#WAFNonexistentItemException"
                 }
             ],
             "traits": {
@@ -4520,6 +4529,12 @@
                     "target": "com.amazonaws.wafv2#ManagedRuleGroupVersions",
                     "traits": {
                         "smithy.api#documentation": "<p>The versions that are currently available for the specified managed rule group. </p>"
+                    }
+                },
+                "CurrentDefaultVersion": {
+                    "target": "com.amazonaws.wafv2#VersionKeyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the version that's currently set as the default. </p>"
                     }
                 }
             }
@@ -5302,7 +5317,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Additional information that's used by a managed rule group. Most managed rule groups don't require this.</p>\n         <p>Use this for the account takeover prevention managed rule group \n      <code>AWSManagedRulesATPRuleSet</code>, to provide information about the sign-in page of your application. </p>"
+                "smithy.api#documentation": "<p>Additional information that's used by a managed rule group. Most managed rule groups don't require this.</p>\n         <p>Use this for the account takeover prevention managed rule group \n      <code>AWSManagedRulesATPRuleSet</code>, to provide information about the sign-in page of your application. </p> \n         <p>You can provide multiple individual <code>ManagedRuleGroupConfig</code> objects for any rule group configuration, for example <code>UsernameField</code> and <code>PasswordField</code>. The configuration that you provide depends on the needs of the managed rule group. For the ATP managed rule group, you provide the following individual configuration objects: <code>LoginPath</code>, <code>PasswordField</code>, <code>PayloadType</code> and <code>UsernameField</code>.</p>"
             }
         },
         "com.amazonaws.wafv2#ManagedRuleGroupConfigs": {
@@ -5354,7 +5369,7 @@
                 "ManagedRuleGroupConfigs": {
                     "target": "com.amazonaws.wafv2#ManagedRuleGroupConfigs",
                     "traits": {
-                        "smithy.api#documentation": "<p>Additional information that's used by a managed rule group. Most managed rule groups don't require this.</p>\n         <p>Use this for the account takeover prevention managed rule group \n      <code>AWSManagedRulesATPRuleSet</code>, to provide information about the sign-in page of your application. </p>"
+                        "smithy.api#documentation": "<p>Additional information that's used by a managed rule group. Most managed rule groups don't require this.</p>\n         <p>Use this for the account takeover prevention managed rule group \n      <code>AWSManagedRulesATPRuleSet</code>, to provide information about the sign-in page of your application. </p> \n         <p>You can provide multiple individual <code>ManagedRuleGroupConfig</code> objects for any rule group configuration, for example <code>UsernameField</code> and <code>PasswordField</code>. The configuration that you provide depends on the needs of the managed rule group. For the ATP managed rule group, you provide the following individual configuration objects: <code>LoginPath</code>, <code>PasswordField</code>, <code>PayloadType</code> and <code>UsernameField</code>.</p>"
                     }
                 }
             },
@@ -5381,6 +5396,12 @@
                     "target": "com.amazonaws.wafv2#EntityName",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the managed rule group. You use this, along with the vendor name, to identify the rule group.</p>"
+                    }
+                },
+                "VersioningSupported": {
+                    "target": "com.amazonaws.wafv2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the managed rule group is versioned. If it is, you can retrieve the versions list by calling <a>ListAvailableManagedRuleGroupVersions</a>. </p>"
                     }
                 },
                 "Description": {
@@ -6226,7 +6247,7 @@
                 "Policy": {
                     "target": "com.amazonaws.wafv2#PolicyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The policy to attach to the specified rule group. </p>\n      \n         <p>The policy specifications must conform to the following:</p>\n         <ul>\n            <li> \n               <p>The policy must be composed using IAM Policy version 2012-10-17 or version 2015-01-01.</p>\n            </li>\n            <li>\n               <p>The policy must include specifications for <code>Effect</code>, <code>Action</code>, and <code>Principal</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Effect</code> must specify <code>Allow</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Action</code> must specify <code>wafv2:CreateWebACL</code>, <code>wafv2:UpdateWebACL</code>, and <code>wafv2:PutFirewallManagerRuleGroups</code>. WAF rejects any extra actions or wildcard actions in the policy.</p>\n            </li>\n            <li>\n               <p>The policy must not include a <code>Resource</code> parameter.</p>\n            </li>\n         </ul>     \n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html\">IAM Policies</a>.  </p>",
+                        "smithy.api#documentation": "<p>The policy to attach to the specified rule group. </p>\n      \n         <p>The policy specifications must conform to the following:</p>\n         <ul>\n            <li> \n               <p>The policy must be composed using IAM Policy version 2012-10-17 or version 2015-01-01.</p>\n            </li>\n            <li>\n               <p>The policy must include specifications for <code>Effect</code>, <code>Action</code>, and <code>Principal</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Effect</code> must specify <code>Allow</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Action</code> must specify <code>wafv2:CreateWebACL</code>, <code>wafv2:UpdateWebACL</code>, and \n             <code>wafv2:PutFirewallManagerRuleGroups</code> and may optionally specify <code>wafv2:GetRuleGroup</code>. \n                 WAF rejects any extra actions or wildcard actions in the policy.</p>\n            </li>\n            <li>\n               <p>The policy must not include a <code>Resource</code> parameter.</p>\n            </li>\n         </ul>     \n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html\">IAM Policies</a>.  </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -8287,7 +8308,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The operation failed because the specified policy isn't in the proper format. </p>\n      \n         <p>The policy specifications must conform to the following:</p>\n         <ul>\n            <li> \n               <p>The policy must be composed using IAM Policy version 2012-10-17 or version 2015-01-01.</p>\n            </li>\n            <li>\n               <p>The policy must include specifications for <code>Effect</code>, <code>Action</code>, and <code>Principal</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Effect</code> must specify <code>Allow</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Action</code> must specify <code>wafv2:CreateWebACL</code>, <code>wafv2:UpdateWebACL</code>, and <code>wafv2:PutFirewallManagerRuleGroups</code>. WAF rejects any extra actions or wildcard actions in the policy.</p>\n            </li>\n            <li>\n               <p>The policy must not include a <code>Resource</code> parameter.</p>\n            </li>\n         </ul>     \n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html\">IAM Policies</a>.  </p>",
+                "smithy.api#documentation": "<p>The operation failed because the specified policy isn't in the proper format. </p>\n      \n         <p>The policy specifications must conform to the following:</p>\n         <ul>\n            <li> \n               <p>The policy must be composed using IAM Policy version 2012-10-17 or version 2015-01-01.</p>\n            </li>\n            <li>\n               <p>The policy must include specifications for <code>Effect</code>, <code>Action</code>, and <code>Principal</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Effect</code> must specify <code>Allow</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Action</code> must specify <code>wafv2:CreateWebACL</code>, <code>wafv2:UpdateWebACL</code>, and \n             <code>wafv2:PutFirewallManagerRuleGroups</code> and may optionally specify <code>wafv2:GetRuleGroup</code>. \n                 WAF rejects any extra actions or wildcard actions in the policy.</p>\n            </li>\n            <li>\n               <p>The policy must not include a <code>Resource</code> parameter.</p>\n            </li>\n         </ul>     \n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html\">IAM Policies</a>.  </p>",
                 "smithy.api#error": "client"
             }
         },

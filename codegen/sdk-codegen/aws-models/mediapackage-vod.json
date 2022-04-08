@@ -761,6 +761,13 @@
                         "smithy.api#jsonName": "profile"
                     }
                 },
+                "ScteMarkersSource": {
+                    "target": "com.amazonaws.mediapackagevod#ScteMarkersSource",
+                    "traits": {
+                        "smithy.api#documentation": "The source of scte markers used. When set to SEGMENTS, the scte markers are sourced from the segments of the ingested content. When set to MANIFEST, the scte markers are sourced from the manifest of the ingested content.",
+                        "smithy.api#jsonName": "scteMarkersSource"
+                    }
+                },
                 "StreamSelection": {
                     "target": "com.amazonaws.mediapackagevod#StreamSelection",
                     "traits": {
@@ -1838,6 +1845,21 @@
         },
         "com.amazonaws.mediapackagevod#MediaPackageVod": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "MediaPackage Vod",
+                    "arnNamespace": "mediapackage-vod",
+                    "cloudFormationName": "MediaPackageVod",
+                    "cloudTrailEventSource": "mediapackagevod.amazonaws.com",
+                    "endpointPrefix": "mediapackage-vod"
+                },
+                "aws.auth#sigv4": {
+                    "name": "mediapackage-vod"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "AWS Elemental MediaPackage VOD",
+                "smithy.api#title": "AWS Elemental MediaPackage VOD"
+            },
             "version": "2018-11-07",
             "operations": [
                 {
@@ -1891,22 +1913,7 @@
                 {
                     "target": "com.amazonaws.mediapackagevod#UpdatePackagingGroup"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "MediaPackage Vod",
-                    "arnNamespace": "mediapackage-vod",
-                    "cloudFormationName": "MediaPackageVod",
-                    "cloudTrailEventSource": "mediapackagevod.amazonaws.com",
-                    "endpointPrefix": "mediapackage-vod"
-                },
-                "aws.auth#sigv4": {
-                    "name": "mediapackage-vod"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "AWS Elemental MediaPackage VOD",
-                "smithy.api#title": "AWS Elemental MediaPackage VOD"
-            }
+            ]
         },
         "com.amazonaws.mediapackagevod#MssEncryption": {
             "type": "structure",
@@ -2106,6 +2113,21 @@
                     {
                         "value": "HBBTV_1_5",
                         "name": "HBBTV_1_5"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.mediapackagevod#ScteMarkersSource": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SEGMENTS",
+                        "name": "SEGMENTS"
+                    },
+                    {
+                        "value": "MANIFEST",
+                        "name": "MANIFEST"
                     }
                 ]
             }

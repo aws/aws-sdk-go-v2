@@ -3424,6 +3424,22 @@
                 ]
             }
         },
+        "com.amazonaws.mediaconvert#CmfcKlvMetadata": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Applies to CMAF outputs. Use this setting to specify whether the service inserts the KLV metadata from the input in this output.",
+                "smithy.api#enum": [
+                    {
+                        "value": "PASSTHROUGH",
+                        "name": "PASSTHROUGH"
+                    },
+                    {
+                        "value": "NONE",
+                        "name": "NONE"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.mediaconvert#CmfcScte35Esam": {
             "type": "string",
             "traits": {
@@ -3499,6 +3515,13 @@
                     "traits": {
                         "smithy.api#documentation": "Choose Include (INCLUDE) to have MediaConvert generate an HLS child manifest that lists only the I-frames for this rendition, in addition to your regular manifest for this rendition. You might use this manifest as part of a workflow that creates preview functions for your video. MediaConvert adds both the I-frame only child manifest and the regular child manifest to the parent manifest. When you don't need the I-frame only child manifest, keep the default value Exclude (EXCLUDE).",
                         "smithy.api#jsonName": "iFrameOnlyManifest"
+                    }
+                },
+                "KlvMetadata": {
+                    "target": "com.amazonaws.mediaconvert#CmfcKlvMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "Applies to CMAF outputs. Use this setting to specify whether the service inserts the KLV metadata from the input in this output.",
+                        "smithy.api#jsonName": "klvMetadata"
                     }
                 },
                 "Scte35Esam": {
@@ -12826,6 +12849,22 @@
                 ]
             }
         },
+        "com.amazonaws.mediaconvert#M2tsKlvMetadata": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Applies to MPEG-TS outputs. Use this setting to specify whether the service inserts the KLV metadata from the input in this output.",
+                "smithy.api#enum": [
+                    {
+                        "value": "PASSTHROUGH",
+                        "name": "PASSTHROUGH"
+                    },
+                    {
+                        "value": "NONE",
+                        "name": "NONE"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.mediaconvert#M2tsNielsenId3": {
             "type": "string",
             "traits": {
@@ -13073,6 +13112,13 @@
                     "traits": {
                         "smithy.api#documentation": "The length, in seconds, of each fragment. Only used with EBP markers.",
                         "smithy.api#jsonName": "fragmentTime"
+                    }
+                },
+                "KlvMetadata": {
+                    "target": "com.amazonaws.mediaconvert#M2tsKlvMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "Applies to MPEG-TS outputs. Use this setting to specify whether the service inserts the KLV metadata from the input in this output.",
+                        "smithy.api#jsonName": "klvMetadata"
                     }
                 },
                 "MaxPcrInterval": {
@@ -14036,6 +14082,22 @@
                 ]
             }
         },
+        "com.amazonaws.mediaconvert#MpdKlvMetadata": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Applies to DASH ISO outputs. Use this setting to specify whether the service inserts the KLV metadata from the input in this output.",
+                "smithy.api#enum": [
+                    {
+                        "value": "NONE",
+                        "name": "NONE"
+                    },
+                    {
+                        "value": "PASSTHROUGH",
+                        "name": "PASSTHROUGH"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.mediaconvert#MpdScte35Esam": {
             "type": "string",
             "traits": {
@@ -14090,6 +14152,13 @@
                     "traits": {
                         "smithy.api#documentation": "Use this setting only in DASH output groups that include sidecar TTML or IMSC captions.  You specify sidecar captions in a separate output from your audio and video. Choose Raw (RAW) for captions in a single XML file in a raw container. Choose Fragmented MPEG-4 (FRAGMENTED_MP4) for captions in XML format contained within fragmented MP4 files. This set of fragmented MP4 files is separate from your video and audio fragmented MP4 files.",
                         "smithy.api#jsonName": "captionContainerType"
+                    }
+                },
+                "KlvMetadata": {
+                    "target": "com.amazonaws.mediaconvert#MpdKlvMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "Applies to DASH ISO outputs. Use this setting to specify whether the service inserts the KLV metadata from the input in this output.",
+                        "smithy.api#jsonName": "klvMetadata"
                     }
                 },
                 "Scte35Esam": {
@@ -18889,7 +18958,7 @@
                 "StylePassthrough": {
                     "target": "com.amazonaws.mediaconvert#WebvttStylePassthrough",
                     "traits": {
-                        "smithy.api#documentation": "Set Style passthrough (StylePassthrough) to ENABLED to use the available style, color, and position information from your input captions. MediaConvert uses default settings for any missing style and position information in your input captions. Set Style passthrough to DISABLED, or leave blank, to ignore the style and position information from your input captions and use simplified output captions.",
+                        "smithy.api#documentation": "To use the available style, color, and position information from your input captions: Set Style passthrough (stylePassthrough) to Enabled (ENABLED). MediaConvert uses default settings when style and position information is missing from your input captions. To recreate the input captions exactly: Set Style passthrough to Strict (STRICT). MediaConvert automatically applies timing adjustments, including adjustments for frame rate conversion, ad avails, and input clipping. Your input captions format must be WebVTT. To ignore the style and position information from your input captions and use simplified output captions: Set Style passthrough to Disabled (DISABLED), or leave blank.",
                         "smithy.api#jsonName": "stylePassthrough"
                     }
                 }
@@ -18930,7 +18999,7 @@
         "com.amazonaws.mediaconvert#WebvttStylePassthrough": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Set Style passthrough (StylePassthrough) to ENABLED to use the available style, color, and position information from your input captions. MediaConvert uses default settings for any missing style and position information in your input captions. Set Style passthrough to DISABLED, or leave blank, to ignore the style and position information from your input captions and use simplified output captions.",
+                "smithy.api#documentation": "To use the available style, color, and position information from your input captions: Set Style passthrough (stylePassthrough) to Enabled (ENABLED). MediaConvert uses default settings when style and position information is missing from your input captions. To recreate the input captions exactly: Set Style passthrough to Strict (STRICT). MediaConvert automatically applies timing adjustments, including adjustments for frame rate conversion, ad avails, and input clipping. Your input captions format must be WebVTT. To ignore the style and position information from your input captions and use simplified output captions: Set Style passthrough to Disabled (DISABLED), or leave blank.",
                 "smithy.api#enum": [
                     {
                         "value": "ENABLED",
@@ -18939,6 +19008,10 @@
                     {
                         "value": "DISABLED",
                         "name": "DISABLED"
+                    },
+                    {
+                        "value": "STRICT",
+                        "name": "STRICT"
                     }
                 ]
             }
