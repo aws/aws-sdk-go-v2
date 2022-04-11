@@ -70,6 +70,26 @@ func (m *validateOpCreateConnection) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateObservabilityConfiguration struct {
+}
+
+func (*validateOpCreateObservabilityConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateObservabilityConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateObservabilityConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateObservabilityConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateService struct {
 }
 
@@ -150,6 +170,26 @@ func (m *validateOpDeleteConnection) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteObservabilityConfiguration struct {
+}
+
+func (*validateOpDeleteObservabilityConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteObservabilityConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteObservabilityConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteObservabilityConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteService struct {
 }
 
@@ -225,6 +265,26 @@ func (m *validateOpDescribeCustomDomains) HandleInitialize(ctx context.Context, 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeCustomDomainsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeObservabilityConfiguration struct {
+}
+
+func (*validateOpDescribeObservabilityConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeObservabilityConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeObservabilityConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeObservabilityConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -462,6 +522,10 @@ func addOpCreateConnectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateConnection{}, middleware.After)
 }
 
+func addOpCreateObservabilityConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateObservabilityConfiguration{}, middleware.After)
+}
+
 func addOpCreateServiceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateService{}, middleware.After)
 }
@@ -478,6 +542,10 @@ func addOpDeleteConnectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteConnection{}, middleware.After)
 }
 
+func addOpDeleteObservabilityConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteObservabilityConfiguration{}, middleware.After)
+}
+
 func addOpDeleteServiceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteService{}, middleware.After)
 }
@@ -492,6 +560,10 @@ func addOpDescribeAutoScalingConfigurationValidationMiddleware(stack *middleware
 
 func addOpDescribeCustomDomainsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeCustomDomains{}, middleware.After)
+}
+
+func addOpDescribeObservabilityConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeObservabilityConfiguration{}, middleware.After)
 }
 
 func addOpDescribeServiceValidationMiddleware(stack *middleware.Stack) error {
@@ -633,6 +705,18 @@ func validateImageRepository(v *types.ImageRepository) error {
 	}
 }
 
+func validateServiceObservabilityConfiguration(v *types.ServiceObservabilityConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ServiceObservabilityConfiguration"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSourceCodeVersion(v *types.SourceCodeVersion) error {
 	if v == nil {
 		return nil
@@ -665,6 +749,21 @@ func validateSourceConfiguration(v *types.SourceConfiguration) error {
 		if err := validateImageRepository(v.ImageRepository); err != nil {
 			invalidParams.AddNested("ImageRepository", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTraceConfiguration(v *types.TraceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TraceConfiguration"}
+	if len(v.Vendor) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Vendor"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -724,6 +823,26 @@ func validateOpCreateConnectionInput(v *CreateConnectionInput) error {
 	}
 }
 
+func validateOpCreateObservabilityConfigurationInput(v *CreateObservabilityConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateObservabilityConfigurationInput"}
+	if v.ObservabilityConfigurationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ObservabilityConfigurationName"))
+	}
+	if v.TraceConfiguration != nil {
+		if err := validateTraceConfiguration(v.TraceConfiguration); err != nil {
+			invalidParams.AddNested("TraceConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateServiceInput(v *CreateServiceInput) error {
 	if v == nil {
 		return nil
@@ -742,6 +861,11 @@ func validateOpCreateServiceInput(v *CreateServiceInput) error {
 	if v.EncryptionConfiguration != nil {
 		if err := validateEncryptionConfiguration(v.EncryptionConfiguration); err != nil {
 			invalidParams.AddNested("EncryptionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ObservabilityConfiguration != nil {
+		if err := validateServiceObservabilityConfiguration(v.ObservabilityConfiguration); err != nil {
+			invalidParams.AddNested("ObservabilityConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -791,6 +915,21 @@ func validateOpDeleteConnectionInput(v *DeleteConnectionInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteConnectionInput"}
 	if v.ConnectionArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConnectionArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteObservabilityConfigurationInput(v *DeleteObservabilityConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteObservabilityConfigurationInput"}
+	if v.ObservabilityConfigurationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ObservabilityConfigurationArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -851,6 +990,21 @@ func validateOpDescribeCustomDomainsInput(v *DescribeCustomDomainsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeCustomDomainsInput"}
 	if v.ServiceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServiceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeObservabilityConfigurationInput(v *DescribeObservabilityConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeObservabilityConfigurationInput"}
+	if v.ObservabilityConfigurationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ObservabilityConfigurationArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1029,6 +1183,11 @@ func validateOpUpdateServiceInput(v *UpdateServiceInput) error {
 	if v.SourceConfiguration != nil {
 		if err := validateSourceConfiguration(v.SourceConfiguration); err != nil {
 			invalidParams.AddNested("SourceConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ObservabilityConfiguration != nil {
+		if err := validateServiceObservabilityConfiguration(v.ObservabilityConfiguration); err != nil {
+			invalidParams.AddNested("ObservabilityConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

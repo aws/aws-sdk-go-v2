@@ -92,13 +92,15 @@ type Compute string
 
 // Enum values for Compute
 const (
-	ComputeValue       Compute = "VALUE"
-	ComputeStandard    Compute = "STANDARD"
-	ComputePerformance Compute = "PERFORMANCE"
-	ComputePower       Compute = "POWER"
-	ComputeGraphics    Compute = "GRAPHICS"
-	ComputePowerpro    Compute = "POWERPRO"
-	ComputeGraphicspro Compute = "GRAPHICSPRO"
+	ComputeValue           Compute = "VALUE"
+	ComputeStandard        Compute = "STANDARD"
+	ComputePerformance     Compute = "PERFORMANCE"
+	ComputePower           Compute = "POWER"
+	ComputeGraphics        Compute = "GRAPHICS"
+	ComputePowerpro        Compute = "POWERPRO"
+	ComputeGraphicspro     Compute = "GRAPHICSPRO"
+	ComputeGraphicsG4dn    Compute = "GRAPHICS_G4DN"
+	ComputeGraphicsproG4dn Compute = "GRAPHICSPRO_G4DN"
 )
 
 // Values returns all known values for Compute. Note that this can be expanded in
@@ -113,6 +115,8 @@ func (Compute) Values() []Compute {
 		"GRAPHICS",
 		"POWERPRO",
 		"GRAPHICSPRO",
+		"GRAPHICS_G4DN",
+		"GRAPHICSPRO_G4DN",
 	}
 }
 
@@ -404,10 +408,11 @@ type WorkspaceImageIngestionProcess string
 
 // Enum values for WorkspaceImageIngestionProcess
 const (
-	WorkspaceImageIngestionProcessByolRegular     WorkspaceImageIngestionProcess = "BYOL_REGULAR"
-	WorkspaceImageIngestionProcessByolGraphics    WorkspaceImageIngestionProcess = "BYOL_GRAPHICS"
-	WorkspaceImageIngestionProcessByolGraphicspro WorkspaceImageIngestionProcess = "BYOL_GRAPHICSPRO"
-	WorkspaceImageIngestionProcessByolRegularWsp  WorkspaceImageIngestionProcess = "BYOL_REGULAR_WSP"
+	WorkspaceImageIngestionProcessByolRegular      WorkspaceImageIngestionProcess = "BYOL_REGULAR"
+	WorkspaceImageIngestionProcessByolGraphics     WorkspaceImageIngestionProcess = "BYOL_GRAPHICS"
+	WorkspaceImageIngestionProcessByolGraphicspro  WorkspaceImageIngestionProcess = "BYOL_GRAPHICSPRO"
+	WorkspaceImageIngestionProcessByolGraphicsG4dn WorkspaceImageIngestionProcess = "BYOL_GRAPHICS_G4DN"
+	WorkspaceImageIngestionProcessByolRegularWsp   WorkspaceImageIngestionProcess = "BYOL_REGULAR_WSP"
 )
 
 // Values returns all known values for WorkspaceImageIngestionProcess. Note that
@@ -419,6 +424,7 @@ func (WorkspaceImageIngestionProcess) Values() []WorkspaceImageIngestionProcess 
 		"BYOL_REGULAR",
 		"BYOL_GRAPHICS",
 		"BYOL_GRAPHICSPRO",
+		"BYOL_GRAPHICS_G4DN",
 		"BYOL_REGULAR_WSP",
 	}
 }

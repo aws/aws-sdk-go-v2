@@ -47,9 +47,13 @@ type CreateServiceInput struct {
 	SourceConfiguration *types.SourceConfiguration
 
 	// The Amazon Resource Name (ARN) of an App Runner automatic scaling configuration
-	// resource that you want to associate with the App Runner service. If not
-	// provided, App Runner associates the latest revision of a default auto scaling
-	// configuration.
+	// resource that you want to associate with your service. If not provided, App
+	// Runner associates the latest revision of a default auto scaling configuration.
+	// Specify an ARN with a name and a revision number to associate that revision. For
+	// example:
+	// arn:aws:apprunner:us-east-1:123456789012:autoscalingconfiguration/high-availability/3
+	// Specify just the name to associate the latest revision. For example:
+	// arn:aws:apprunner:us-east-1:123456789012:autoscalingconfiguration/high-availability
 	AutoScalingConfigurationArn *string
 
 	// An optional custom encryption key that App Runner uses to encrypt the copy of
@@ -61,13 +65,15 @@ type CreateServiceInput struct {
 	// of the App Runner service.
 	HealthCheckConfiguration *types.HealthCheckConfiguration
 
-	// The runtime configuration of instances (scaling units) of the App Runner
-	// service.
+	// The runtime configuration of instances (scaling units) of your service.
 	InstanceConfiguration *types.InstanceConfiguration
 
 	// Configuration settings related to network traffic of the web application that
 	// the App Runner service runs.
 	NetworkConfiguration *types.NetworkConfiguration
+
+	// The observability configuration of your service.
+	ObservabilityConfiguration *types.ServiceObservabilityConfiguration
 
 	// An optional list of metadata items that you can associate with the App Runner
 	// service resource. A tag is a key-value pair.

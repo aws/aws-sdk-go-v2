@@ -54,7 +54,8 @@ type AutoScalingConfiguration struct {
 	DeletedAt *time.Time
 
 	// It's set to true for the configuration with the highest Revision among all
-	// configurations that share the same Name. It's set to false otherwise.
+	// configurations that share the same AutoScalingConfigurationName. It's set to
+	// false otherwise.
 	Latest bool
 
 	// The maximum number of concurrent requests that an instance processes. If the
@@ -409,6 +410,78 @@ type NetworkConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Describes an App Runner observability configuration resource. Multiple revisions
+// of a configuration have the same ObservabilityConfigurationName and different
+// ObservabilityConfigurationRevision values. The resource is designed to configure
+// multiple features (currently one feature, tracing). This type contains optional
+// members that describe the configuration of these features (currently one member,
+// TraceConfiguration). If a feature member isn't specified, the feature isn't
+// enabled.
+type ObservabilityConfiguration struct {
+
+	// The time when the observability configuration was created. It's in Unix time
+	// stamp format.
+	CreatedAt *time.Time
+
+	// The time when the observability configuration was deleted. It's in Unix time
+	// stamp format.
+	DeletedAt *time.Time
+
+	// It's set to true for the configuration with the highest Revision among all
+	// configurations that share the same ObservabilityConfigurationName. It's set to
+	// false otherwise.
+	Latest bool
+
+	// The Amazon Resource Name (ARN) of this observability configuration.
+	ObservabilityConfigurationArn *string
+
+	// The customer-provided observability configuration name. It can be used in
+	// multiple revisions of a configuration.
+	ObservabilityConfigurationName *string
+
+	// The revision of this observability configuration. It's unique among all the
+	// active configurations ("Status": "ACTIVE") that share the same
+	// ObservabilityConfigurationName.
+	ObservabilityConfigurationRevision int32
+
+	// The current state of the observability configuration. If the status of a
+	// configuration revision is INACTIVE, it was deleted and can't be used. Inactive
+	// configuration revisions are permanently removed some time after they are
+	// deleted.
+	Status ObservabilityConfigurationStatus
+
+	// The configuration of the tracing feature within this observability
+	// configuration. If not specified, tracing isn't enabled.
+	TraceConfiguration *TraceConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Provides summary information about an App Runner observability configuration
+// resource. This type contains limited information about an observability
+// configuration. It includes only identification information, without
+// configuration details. It's returned by the ListObservabilityConfigurations
+// action. Complete configuration information is returned by the
+// CreateObservabilityConfiguration, DescribeObservabilityConfiguration, and
+// DeleteObservabilityConfiguration actions using the ObservabilityConfiguration
+// type.
+type ObservabilityConfigurationSummary struct {
+
+	// The Amazon Resource Name (ARN) of this observability configuration.
+	ObservabilityConfigurationArn *string
+
+	// The customer-provided observability configuration name. It can be used in
+	// multiple revisions of a configuration.
+	ObservabilityConfigurationName *string
+
+	// The revision of this observability configuration. It's unique among all the
+	// active configurations ("Status": "ACTIVE") that share the same
+	// ObservabilityConfigurationName.
+	ObservabilityConfigurationRevision int32
+
+	noSmithyDocumentSerde
+}
+
 // Provides summary information for an operation that occurred on an App Runner
 // service.
 type OperationSummary struct {
@@ -540,6 +613,32 @@ type Service struct {
 	// of this service.
 	HealthCheckConfiguration *HealthCheckConfiguration
 
+	// The observability configuration of this service.
+	ObservabilityConfiguration *ServiceObservabilityConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Describes the observability configuration of an App Runner service. These are
+// additional observability features, like tracing, that you choose to enable.
+// They're configured in a separate resource that you associate with your service.
+type ServiceObservabilityConfiguration struct {
+
+	// When true, an observability configuration resource is associated with the
+	// service, and an ObservabilityConfigurationArn is specified.
+	//
+	// This member is required.
+	ObservabilityEnabled bool
+
+	// The Amazon Resource Name (ARN) of the observability configuration that is
+	// associated with the service. Specified only when ObservabilityEnabled is true.
+	// Specify an ARN with a name and a revision number to associate that revision. For
+	// example:
+	// arn:aws:apprunner:us-east-1:123456789012:observabilityconfiguration/xray-tracing/3
+	// Specify just the name to associate the latest revision. For example:
+	// arn:aws:apprunner:us-east-1:123456789012:observabilityconfiguration/xray-tracing
+	ObservabilityConfigurationArn *string
+
 	noSmithyDocumentSerde
 }
 
@@ -652,6 +751,18 @@ type Tag struct {
 
 	// The value of the tag.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the configuration of the tracing feature within an App Runner
+// observability configuration.
+type TraceConfiguration struct {
+
+	// The implementation provider chosen for tracing App Runner services.
+	//
+	// This member is required.
+	Vendor TracingVendor
 
 	noSmithyDocumentSerde
 }

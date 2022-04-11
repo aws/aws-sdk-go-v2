@@ -50,13 +50,15 @@ type UpdateServiceInput struct {
 	// of the App Runner service.
 	HealthCheckConfiguration *types.HealthCheckConfiguration
 
-	// The runtime configuration to apply to instances (scaling units) of the App
-	// Runner service.
+	// The runtime configuration to apply to instances (scaling units) of your service.
 	InstanceConfiguration *types.InstanceConfiguration
 
 	// Configuration settings related to network traffic of the web application that
 	// the App Runner service runs.
 	NetworkConfiguration *types.NetworkConfiguration
+
+	// The observability configuration of your service.
+	ObservabilityConfiguration *types.ServiceObservabilityConfiguration
 
 	// The source configuration to apply to the App Runner service. You can change the
 	// configuration of the code or image repository that the service uses. However,

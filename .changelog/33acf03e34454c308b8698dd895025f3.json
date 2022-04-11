@@ -1,0 +1,8 @@
+{
+    "id": "33acf03e-3445-4c30-8b86-98dd895025f3",
+    "type": "feature",
+    "description": "This release adds tracing for App Runner services with X-Ray using AWS Distro for OpenTelemetry. New APIs: CreateObservabilityConfiguration, DescribeObservabilityConfiguration, ListObservabilityConfigurations, and DeleteObservabilityConfiguration. Updated APIs: CreateService and UpdateService.",
+    "modules": [
+        "service/apprunner"
+    ]
+}

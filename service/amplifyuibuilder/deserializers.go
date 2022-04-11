@@ -659,7 +659,7 @@ func awsRestjson1_deserializeOpDocumentExchangeCodeForTokenOutput(v **ExchangeCo
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.AccessToken = ptr.String(jtv)
 			}
@@ -681,7 +681,7 @@ func awsRestjson1_deserializeOpDocumentExchangeCodeForTokenOutput(v **ExchangeCo
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.RefreshToken = ptr.String(jtv)
 			}
@@ -1774,7 +1774,7 @@ func awsRestjson1_deserializeOpDocumentRefreshTokenOutput(v **RefreshTokenOutput
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.AccessToken = ptr.String(jtv)
 			}
@@ -2761,6 +2761,15 @@ func awsRestjson1_deserializeDocumentComponentChild(v **types.ComponentChild, va
 				return err
 			}
 
+		case "sourceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SourceId = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -3009,6 +3018,15 @@ func awsRestjson1_deserializeDocumentComponentEvent(v **types.ComponentEvent, va
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Action = ptr.String(jtv)
+			}
+
+		case "bindingEvent":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.BindingEvent = ptr.String(jtv)
 			}
 
 		case "parameters":

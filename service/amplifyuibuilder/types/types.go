@@ -214,6 +214,10 @@ type ComponentChild struct {
 	// components.
 	Events map[string]ComponentEvent
 
+	// The unique ID of the child component in its original source system, such as
+	// Figma.
+	SourceId *string
+
 	noSmithyDocumentSerde
 }
 
@@ -275,6 +279,10 @@ type ComponentEvent struct {
 
 	// The action to perform when a specific event is raised.
 	Action *string
+
+	// Binds an event to an action on a component. When you specify a bindingEvent, the
+	// event is called when the action is performed.
+	BindingEvent *string
 
 	// Describes information about the action.
 	Parameters *ActionParameters

@@ -12,33 +12,28 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of active App Runner automatic scaling configurations in your
-// Amazon Web Services account. You can query the revisions for a specific
-// configuration name or the revisions for all active configurations in your
-// account. You can optionally query only the latest revision of each requested
-// name. To retrieve a full description of a particular configuration revision,
-// call and provide one of the ARNs returned by ListAutoScalingConfigurations.
-func (c *Client) ListAutoScalingConfigurations(ctx context.Context, params *ListAutoScalingConfigurationsInput, optFns ...func(*Options)) (*ListAutoScalingConfigurationsOutput, error) {
+// Returns a list of active App Runner observability configurations in your Amazon
+// Web Services account. You can query the revisions for a specific configuration
+// name or the revisions for all active configurations in your account. You can
+// optionally query only the latest revision of each requested name. To retrieve a
+// full description of a particular configuration revision, call and provide one of
+// the ARNs returned by ListObservabilityConfigurations.
+func (c *Client) ListObservabilityConfigurations(ctx context.Context, params *ListObservabilityConfigurationsInput, optFns ...func(*Options)) (*ListObservabilityConfigurationsOutput, error) {
 	if params == nil {
-		params = &ListAutoScalingConfigurationsInput{}
+		params = &ListObservabilityConfigurationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListAutoScalingConfigurations", params, optFns, c.addOperationListAutoScalingConfigurationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListObservabilityConfigurations", params, optFns, c.addOperationListObservabilityConfigurationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*ListAutoScalingConfigurationsOutput)
+	out := result.(*ListObservabilityConfigurationsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type ListAutoScalingConfigurationsInput struct {
-
-	// The name of the App Runner auto scaling configuration that you want to list. If
-	// specified, App Runner lists revisions that share this name. If not specified,
-	// App Runner returns revisions of all active configurations.
-	AutoScalingConfigurationName *string
+type ListObservabilityConfigurationsInput struct {
 
 	// Set to true to list only the latest revision for each requested configuration
 	// name. Set to false to list all revisions for each requested configuration name.
@@ -56,16 +51,21 @@ type ListAutoScalingConfigurationsInput struct {
 	// specify NextToken, the request retrieves the first result page.
 	NextToken *string
 
+	// The name of the App Runner observability configuration that you want to list. If
+	// specified, App Runner lists revisions that share this name. If not specified,
+	// App Runner returns revisions of all active configurations.
+	ObservabilityConfigurationName *string
+
 	noSmithyDocumentSerde
 }
 
-type ListAutoScalingConfigurationsOutput struct {
+type ListObservabilityConfigurationsOutput struct {
 
-	// A list of summary information records for auto scaling configurations. In a
+	// A list of summary information records for observability configurations. In a
 	// paginated request, the request returns up to MaxResults records for each call.
 	//
 	// This member is required.
-	AutoScalingConfigurationSummaryList []types.AutoScalingConfigurationSummary
+	ObservabilityConfigurationSummaryList []types.ObservabilityConfigurationSummary
 
 	// The token that you can pass in a subsequent request to get the next result page.
 	// It's returned in a paginated request.
@@ -77,12 +77,12 @@ type ListAutoScalingConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationListAutoScalingConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListAutoScalingConfigurations{}, middleware.After)
+func (c *Client) addOperationListObservabilityConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListObservabilityConfigurations{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListAutoScalingConfigurations{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListObservabilityConfigurations{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -122,7 +122,7 @@ func (c *Client) addOperationListAutoScalingConfigurationsMiddlewares(stack *mid
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAutoScalingConfigurations(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListObservabilityConfigurations(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -137,17 +137,17 @@ func (c *Client) addOperationListAutoScalingConfigurationsMiddlewares(stack *mid
 	return nil
 }
 
-// ListAutoScalingConfigurationsAPIClient is a client that implements the
-// ListAutoScalingConfigurations operation.
-type ListAutoScalingConfigurationsAPIClient interface {
-	ListAutoScalingConfigurations(context.Context, *ListAutoScalingConfigurationsInput, ...func(*Options)) (*ListAutoScalingConfigurationsOutput, error)
+// ListObservabilityConfigurationsAPIClient is a client that implements the
+// ListObservabilityConfigurations operation.
+type ListObservabilityConfigurationsAPIClient interface {
+	ListObservabilityConfigurations(context.Context, *ListObservabilityConfigurationsInput, ...func(*Options)) (*ListObservabilityConfigurationsOutput, error)
 }
 
-var _ ListAutoScalingConfigurationsAPIClient = (*Client)(nil)
+var _ ListObservabilityConfigurationsAPIClient = (*Client)(nil)
 
-// ListAutoScalingConfigurationsPaginatorOptions is the paginator options for
-// ListAutoScalingConfigurations
-type ListAutoScalingConfigurationsPaginatorOptions struct {
+// ListObservabilityConfigurationsPaginatorOptions is the paginator options for
+// ListObservabilityConfigurations
+type ListObservabilityConfigurationsPaginatorOptions struct {
 	// The maximum number of results to include in each response (result page). It's
 	// used for a paginated request. If you don't specify MaxResults, the request
 	// retrieves all available results in a single response.
@@ -158,24 +158,24 @@ type ListAutoScalingConfigurationsPaginatorOptions struct {
 	StopOnDuplicateToken bool
 }
 
-// ListAutoScalingConfigurationsPaginator is a paginator for
-// ListAutoScalingConfigurations
-type ListAutoScalingConfigurationsPaginator struct {
-	options   ListAutoScalingConfigurationsPaginatorOptions
-	client    ListAutoScalingConfigurationsAPIClient
-	params    *ListAutoScalingConfigurationsInput
+// ListObservabilityConfigurationsPaginator is a paginator for
+// ListObservabilityConfigurations
+type ListObservabilityConfigurationsPaginator struct {
+	options   ListObservabilityConfigurationsPaginatorOptions
+	client    ListObservabilityConfigurationsAPIClient
+	params    *ListObservabilityConfigurationsInput
 	nextToken *string
 	firstPage bool
 }
 
-// NewListAutoScalingConfigurationsPaginator returns a new
-// ListAutoScalingConfigurationsPaginator
-func NewListAutoScalingConfigurationsPaginator(client ListAutoScalingConfigurationsAPIClient, params *ListAutoScalingConfigurationsInput, optFns ...func(*ListAutoScalingConfigurationsPaginatorOptions)) *ListAutoScalingConfigurationsPaginator {
+// NewListObservabilityConfigurationsPaginator returns a new
+// ListObservabilityConfigurationsPaginator
+func NewListObservabilityConfigurationsPaginator(client ListObservabilityConfigurationsAPIClient, params *ListObservabilityConfigurationsInput, optFns ...func(*ListObservabilityConfigurationsPaginatorOptions)) *ListObservabilityConfigurationsPaginator {
 	if params == nil {
-		params = &ListAutoScalingConfigurationsInput{}
+		params = &ListObservabilityConfigurationsInput{}
 	}
 
-	options := ListAutoScalingConfigurationsPaginatorOptions{}
+	options := ListObservabilityConfigurationsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
 	}
@@ -184,7 +184,7 @@ func NewListAutoScalingConfigurationsPaginator(client ListAutoScalingConfigurati
 		fn(&options)
 	}
 
-	return &ListAutoScalingConfigurationsPaginator{
+	return &ListObservabilityConfigurationsPaginator{
 		options:   options,
 		client:    client,
 		params:    params,
@@ -194,12 +194,12 @@ func NewListAutoScalingConfigurationsPaginator(client ListAutoScalingConfigurati
 }
 
 // HasMorePages returns a boolean indicating whether more pages are available
-func (p *ListAutoScalingConfigurationsPaginator) HasMorePages() bool {
+func (p *ListObservabilityConfigurationsPaginator) HasMorePages() bool {
 	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
 }
 
-// NextPage retrieves the next ListAutoScalingConfigurations page.
-func (p *ListAutoScalingConfigurationsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListAutoScalingConfigurationsOutput, error) {
+// NextPage retrieves the next ListObservabilityConfigurations page.
+func (p *ListObservabilityConfigurationsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListObservabilityConfigurationsOutput, error) {
 	if !p.HasMorePages() {
 		return nil, fmt.Errorf("no more pages available")
 	}
@@ -213,7 +213,7 @@ func (p *ListAutoScalingConfigurationsPaginator) NextPage(ctx context.Context, o
 	}
 	params.MaxResults = limit
 
-	result, err := p.client.ListAutoScalingConfigurations(ctx, &params, optFns...)
+	result, err := p.client.ListObservabilityConfigurations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
 	}
@@ -232,11 +232,11 @@ func (p *ListAutoScalingConfigurationsPaginator) NextPage(ctx context.Context, o
 	return result, nil
 }
 
-func newServiceMetadataMiddleware_opListAutoScalingConfigurations(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opListObservabilityConfigurations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "apprunner",
-		OperationName: "ListAutoScalingConfigurations",
+		OperationName: "ListObservabilityConfigurations",
 	}
 }

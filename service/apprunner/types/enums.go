@@ -165,6 +165,25 @@ func (ImageRepositoryType) Values() []ImageRepositoryType {
 	}
 }
 
+type ObservabilityConfigurationStatus string
+
+// Enum values for ObservabilityConfigurationStatus
+const (
+	ObservabilityConfigurationStatusActive   ObservabilityConfigurationStatus = "ACTIVE"
+	ObservabilityConfigurationStatusInactive ObservabilityConfigurationStatus = "INACTIVE"
+)
+
+// Values returns all known values for ObservabilityConfigurationStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ObservabilityConfigurationStatus) Values() []ObservabilityConfigurationStatus {
+	return []ObservabilityConfigurationStatus{
+		"ACTIVE",
+		"INACTIVE",
+	}
+}
+
 type OperationStatus string
 
 // Enum values for OperationStatus
@@ -296,6 +315,22 @@ const (
 func (SourceCodeVersionType) Values() []SourceCodeVersionType {
 	return []SourceCodeVersionType{
 		"BRANCH",
+	}
+}
+
+type TracingVendor string
+
+// Enum values for TracingVendor
+const (
+	TracingVendorAwsxray TracingVendor = "AWSXRAY"
+)
+
+// Values returns all known values for TracingVendor. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TracingVendor) Values() []TracingVendor {
+	return []TracingVendor{
+		"AWSXRAY",
 	}
 }
 

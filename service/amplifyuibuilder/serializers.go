@@ -1351,6 +1351,11 @@ func awsRestjson1_serializeDocumentComponentChild(v *types.ComponentChild, value
 		}
 	}
 
+	if v.SourceId != nil {
+		ok := object.Key("sourceId")
+		ok.String(*v.SourceId)
+	}
+
 	return nil
 }
 
@@ -1467,6 +1472,11 @@ func awsRestjson1_serializeDocumentComponentEvent(v *types.ComponentEvent, value
 	if v.Action != nil {
 		ok := object.Key("action")
 		ok.String(*v.Action)
+	}
+
+	if v.BindingEvent != nil {
+		ok := object.Key("bindingEvent")
+		ok.String(*v.BindingEvent)
 	}
 
 	if v.Parameters != nil {
