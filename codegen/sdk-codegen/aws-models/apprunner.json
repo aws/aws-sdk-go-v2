@@ -91,6 +91,9 @@
                     "target": "com.amazonaws.apprunner#CreateConnection"
                 },
                 {
+                    "target": "com.amazonaws.apprunner#CreateObservabilityConfiguration"
+                },
+                {
                     "target": "com.amazonaws.apprunner#CreateService"
                 },
                 {
@@ -103,6 +106,9 @@
                     "target": "com.amazonaws.apprunner#DeleteConnection"
                 },
                 {
+                    "target": "com.amazonaws.apprunner#DeleteObservabilityConfiguration"
+                },
+                {
                     "target": "com.amazonaws.apprunner#DeleteService"
                 },
                 {
@@ -113,6 +119,9 @@
                 },
                 {
                     "target": "com.amazonaws.apprunner#DescribeCustomDomains"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#DescribeObservabilityConfiguration"
                 },
                 {
                     "target": "com.amazonaws.apprunner#DescribeService"
@@ -128,6 +137,9 @@
                 },
                 {
                     "target": "com.amazonaws.apprunner#ListConnections"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#ListObservabilityConfigurations"
                 },
                 {
                     "target": "com.amazonaws.apprunner#ListOperations"
@@ -289,7 +301,7 @@
                 "Latest": {
                     "target": "com.amazonaws.apprunner#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>It's set to <code>true</code> for the configuration with the highest <code>Revision</code> among all configurations that share the same\n        <code>Name</code>. It's set to <code>false</code> otherwise.</p>"
+                        "smithy.api#documentation": "<p>It's set to <code>true</code> for the configuration with the highest <code>Revision</code> among all configurations that share the same\n        <code>AutoScalingConfigurationName</code>. It's set to <code>false</code> otherwise.</p>"
                     }
                 },
                 "Status": {
@@ -705,7 +717,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Create an App Runner automatic scaling configuration resource. App Runner requires this resource\n      when you create App Runner services that require non-default auto scaling settings. You can share an\n      auto scaling configuration across multiple services.</p>\n         <p>Create multiple revisions of a configuration by calling this action multiple times using the same <code>AutoScalingConfigurationName</code>. The call\n      returns incremental <code>AutoScalingConfigurationRevision</code> values. When you create a service, you can set it to use the latest active revision of\n      an auto scaling configuration or a specific revision.</p>\n         <p>Configure a higher <code>MinSize</code> to increase the spread of your App Runner service over more Availability Zones in the Amazon Web Services Region. The tradeoff is\n      a higher minimal cost.</p>\n         <p>Configure a lower <code>MaxSize</code> to control your cost. The tradeoff is lower responsiveness during peak demand.</p>"
+                "smithy.api#documentation": "<p>Create an App Runner automatic scaling configuration resource. App Runner requires this resource when you create or update App Runner services and you require\n      non-default auto scaling settings. You can share an auto scaling configuration across multiple services.</p>\n         <p>Create multiple revisions of a configuration by calling this action multiple times using the same <code>AutoScalingConfigurationName</code>. The call\n      returns incremental <code>AutoScalingConfigurationRevision</code> values. When you create a service and configure an auto scaling configuration resource,\n      the service uses the latest active revision of the auto scaling configuration by default. You can optionally configure the service to use a specific\n      revision.</p>\n         <p>Configure a higher <code>MinSize</code> to increase the spread of your App Runner service over more Availability Zones in the Amazon Web Services Region. The tradeoff is\n      a higher minimal cost.</p>\n         <p>Configure a lower <code>MaxSize</code> to control your cost. The tradeoff is lower responsiveness during peak demand.</p>"
             }
         },
         "com.amazonaws.apprunner#CreateAutoScalingConfigurationRequest": {
@@ -816,6 +828,65 @@
                 }
             }
         },
+        "com.amazonaws.apprunner#CreateObservabilityConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apprunner#CreateObservabilityConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apprunner#CreateObservabilityConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apprunner#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#ServiceQuotaExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Create an App Runner observability configuration resource. App Runner requires this resource when you create or update App Runner services and you want to enable\n      non-default observability features. You can share an observability configuration across multiple services.</p>\n         <p>Create multiple revisions of a configuration by calling this action multiple times using the same <code>ObservabilityConfigurationName</code>. The\n      call returns incremental <code>ObservabilityConfigurationRevision</code> values. When you create a service and configure an observability configuration\n      resource, the service uses the latest active revision of the observability configuration by default. You can optionally configure the service to use a\n      specific revision.</p>\n         <p>The observability configuration resource is designed to configure multiple features (currently one feature, tracing). This action takes optional\n      parameters that describe the configuration of these features (currently one parameter, <code>TraceConfiguration</code>). If you don't specify a feature\n      parameter, App Runner doesn't enable the feature.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#CreateObservabilityConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "ObservabilityConfigurationName": {
+                    "target": "com.amazonaws.apprunner#ObservabilityConfigurationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name for the observability configuration. When you use it for the first time in an Amazon Web Services Region, App Runner creates revision number\n        <code>1</code> of this name. When you use the same name in subsequent calls, App Runner creates incremental revisions of the configuration.</p>\n         <note>\n            <p>The name <code>DefaultConfiguration</code> is reserved. You can't use it to create a new observability configuration, and you can't create a\n        revision of it.</p>\n            <p>When you want to use your own observability configuration for your App Runner service, <i>create a configuration with a different name</i>,\n        and then provide it when you create or update your service.</p>\n         </note>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TraceConfiguration": {
+                    "target": "com.amazonaws.apprunner#TraceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of the tracing feature within this observability configuration. If you don't specify it, App Runner doesn't enable tracing.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.apprunner#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of metadata items that you can associate with your observability configuration resource. A tag is a key-value pair.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#CreateObservabilityConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "ObservabilityConfiguration": {
+                    "target": "com.amazonaws.apprunner#ObservabilityConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the App Runner observability configuration that's created by this request.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.apprunner#CreateService": {
             "type": "operation",
             "input": {
@@ -859,7 +930,7 @@
                 "InstanceConfiguration": {
                     "target": "com.amazonaws.apprunner#InstanceConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The runtime configuration of instances (scaling units) of the App Runner service.</p>"
+                        "smithy.api#documentation": "<p>The runtime configuration of instances (scaling units) of your service.</p>"
                     }
                 },
                 "Tags": {
@@ -883,13 +954,19 @@
                 "AutoScalingConfigurationArn": {
                     "target": "com.amazonaws.apprunner#AppRunnerResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an App Runner automatic scaling configuration resource that you want to associate with the App Runner service. If not provided,\n      App Runner associates the latest revision of a default auto scaling configuration.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an App Runner automatic scaling configuration resource that you want to associate with your service. If not provided, App Runner\n      associates the latest revision of a default auto scaling configuration.</p>\n         <p>Specify an ARN with a name and a revision number to associate that revision. For example:\n          <code>arn:aws:apprunner:us-east-1:123456789012:autoscalingconfiguration/high-availability/3</code>\n         </p>\n         <p>Specify just the name to associate the latest revision. For example:\n        <code>arn:aws:apprunner:us-east-1:123456789012:autoscalingconfiguration/high-availability</code>\n         </p>"
                     }
                 },
                 "NetworkConfiguration": {
                     "target": "com.amazonaws.apprunner#NetworkConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Configuration settings related to network traffic of the web application that the App Runner service runs.</p>"
+                    }
+                },
+                "ObservabilityConfiguration": {
+                    "target": "com.amazonaws.apprunner#ServiceObservabilityConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The observability configuration of your service.</p>"
                     }
                 }
             }
@@ -1148,6 +1225,53 @@
                 }
             }
         },
+        "com.amazonaws.apprunner#DeleteObservabilityConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apprunner#DeleteObservabilityConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apprunner#DeleteObservabilityConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apprunner#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Delete an App Runner observability configuration resource. You can delete a specific revision or the latest active revision. You can't delete a\n      configuration that's used by one or more App Runner services.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#DeleteObservabilityConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "ObservabilityConfigurationArn": {
+                    "target": "com.amazonaws.apprunner#AppRunnerResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the App Runner observability configuration that you want to delete.</p>\n         <p>The ARN can be a full observability configuration ARN, or a partial ARN ending with either <code>.../<i>name</i>\n            </code> or\n          <code>.../<i>name</i>/<i>revision</i>\n            </code>. If a revision isn't specified, the latest active revision is deleted.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#DeleteObservabilityConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "ObservabilityConfiguration": {
+                    "target": "com.amazonaws.apprunner#ObservabilityConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the App Runner observability configuration that this request just deleted.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.apprunner#DeleteService": {
             "type": "operation",
             "input": {
@@ -1389,6 +1513,53 @@
                     "target": "com.amazonaws.apprunner#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The token that you can pass in a subsequent request to get the next result page. It's returned in a paginated request.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#DescribeObservabilityConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apprunner#DescribeObservabilityConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apprunner#DescribeObservabilityConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apprunner#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Return a full description of an App Runner observability configuration resource.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#DescribeObservabilityConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "ObservabilityConfigurationArn": {
+                    "target": "com.amazonaws.apprunner#AppRunnerResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the App Runner observability configuration that you want a description for.</p>\n         <p>The ARN can be a full observability configuration ARN, or a partial ARN ending with either <code>.../<i>name</i>\n            </code> or\n          <code>.../<i>name</i>/<i>revision</i>\n            </code>. If a revision isn't specified, the latest active revision is\n      described.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#DescribeObservabilityConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "ObservabilityConfiguration": {
+                    "target": "com.amazonaws.apprunner#ObservabilityConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A full description of the App Runner observability configuration that you specified in this request.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             }
@@ -1920,7 +2091,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of App Runner automatic scaling configurations in your Amazon Web Services account. You can query the revisions for a specific configuration name or\n      the revisions for all configurations in your account. You can optionally query only the latest revision of each requested name.</p>",
+                "smithy.api#documentation": "<p>Returns a list of active App Runner automatic scaling configurations in your Amazon Web Services account. You can query the revisions for a specific\n      configuration name or the revisions for all active configurations in your account. You can optionally query only the latest revision of each requested\n      name.</p>\n         <p>To retrieve a full description of a particular configuration revision, call  and provide one of\n      the ARNs returned by <code>ListAutoScalingConfigurations</code>.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -1934,13 +2105,13 @@
                 "AutoScalingConfigurationName": {
                     "target": "com.amazonaws.apprunner#AutoScalingConfigurationName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the App Runner auto scaling configuration that you want to list. If specified, App Runner lists revisions that share this name. If not specified, App Runner\n      returns revisions of all configurations.</p>"
+                        "smithy.api#documentation": "<p>The name of the App Runner auto scaling configuration that you want to list. If specified, App Runner lists revisions that share this name. If not specified, App Runner\n      returns revisions of all active configurations.</p>"
                     }
                 },
                 "LatestOnly": {
                     "target": "com.amazonaws.apprunner#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Set to <code>true</code> to list only the latest revision for each requested configuration name.</p>\n         <p>Keep as <code>false</code> to list all revisions for each requested configuration name.</p>\n         <p>Default: <code>false</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Set to <code>true</code> to list only the latest revision for each requested configuration name.</p>\n         <p>Set to <code>false</code> to list all revisions for each requested configuration name.</p>\n         <p>Default: <code>true</code>\n         </p>"
                     }
                 },
                 "MaxResults": {
@@ -2037,6 +2208,78 @@
                     "target": "com.amazonaws.apprunner#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The token that you can pass in a subsequent request to get the next result page. Returned in a paginated request.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#ListObservabilityConfigurations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apprunner#ListObservabilityConfigurationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apprunner#ListObservabilityConfigurationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apprunner#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of active App Runner observability configurations in your Amazon Web Services account. You can query the revisions for a specific\n      configuration name or the revisions for all active configurations in your account. You can optionally query only the latest revision of each requested\n      name.</p>\n         <p>To retrieve a full description of a particular configuration revision, call  and provide one\n      of the ARNs returned by <code>ListObservabilityConfigurations</code>.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.apprunner#ListObservabilityConfigurationsRequest": {
+            "type": "structure",
+            "members": {
+                "ObservabilityConfigurationName": {
+                    "target": "com.amazonaws.apprunner#ObservabilityConfigurationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the App Runner observability configuration that you want to list. If specified, App Runner lists revisions that share this name. If not specified,\n      App Runner returns revisions of all active configurations.</p>"
+                    }
+                },
+                "LatestOnly": {
+                    "target": "com.amazonaws.apprunner#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Set to <code>true</code> to list only the latest revision for each requested configuration name.</p>\n         <p>Set to <code>false</code> to list all revisions for each requested configuration name.</p>\n         <p>Default: <code>true</code>\n         </p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.apprunner#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to include in each response (result page). It's used for a paginated request.</p>\n         <p>If you don't specify <code>MaxResults</code>, the request retrieves all available results in a single response.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.apprunner#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token from a previous result page. It's used for a paginated request. The request retrieves the next result page. All other parameter values must be\n      identical to the ones that are specified in the initial request.</p>\n         <p>If you don't specify <code>NextToken</code>, the request retrieves the first result page.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#ListObservabilityConfigurationsResponse": {
+            "type": "structure",
+            "members": {
+                "ObservabilityConfigurationSummaryList": {
+                    "target": "com.amazonaws.apprunner#ObservabilityConfigurationSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of summary information records for observability configurations. In a paginated request, the request returns up to <code>MaxResults</code>\n      records for each call.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.apprunner#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token that you can pass in a subsequent request to get the next result page. It's returned in a paginated request.</p>"
                     }
                 }
             }
@@ -2337,6 +2580,119 @@
             "type": "boolean",
             "traits": {
                 "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.apprunner#ObservabilityConfiguration": {
+            "type": "structure",
+            "members": {
+                "ObservabilityConfigurationArn": {
+                    "target": "com.amazonaws.apprunner#AppRunnerResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of this observability configuration.</p>"
+                    }
+                },
+                "ObservabilityConfigurationName": {
+                    "target": "com.amazonaws.apprunner#ObservabilityConfigurationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer-provided observability configuration name. It can be used in multiple revisions of a configuration.</p>"
+                    }
+                },
+                "TraceConfiguration": {
+                    "target": "com.amazonaws.apprunner#TraceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of the tracing feature within this observability configuration. If not specified, tracing isn't enabled.</p>"
+                    }
+                },
+                "ObservabilityConfigurationRevision": {
+                    "target": "com.amazonaws.apprunner#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The revision of this observability configuration. It's unique among all the active configurations (<code>\"Status\": \"ACTIVE\"</code>) that share the\n      same <code>ObservabilityConfigurationName</code>.</p>"
+                    }
+                },
+                "Latest": {
+                    "target": "com.amazonaws.apprunner#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>It's set to <code>true</code> for the configuration with the highest <code>Revision</code> among all configurations that share the same\n        <code>ObservabilityConfigurationName</code>. It's set to <code>false</code> otherwise.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.apprunner#ObservabilityConfigurationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current state of the observability configuration. If the status of a configuration revision is <code>INACTIVE</code>, it was deleted and can't be\n      used. Inactive configuration revisions are permanently removed some time after they are deleted.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.apprunner#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the observability configuration was created. It's in Unix time stamp format.</p>"
+                    }
+                },
+                "DeletedAt": {
+                    "target": "com.amazonaws.apprunner#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the observability configuration was deleted. It's in Unix time stamp format.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an App Runner observability configuration resource. Multiple revisions of a configuration have the same\n        <code>ObservabilityConfigurationName</code> and different <code>ObservabilityConfigurationRevision</code> values.</p>\n         <p>The resource is designed to configure multiple features (currently one feature, tracing). This type contains optional members that describe the\n      configuration of these features (currently one member, <code>TraceConfiguration</code>). If a feature member isn't specified, the feature isn't\n      enabled.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#ObservabilityConfigurationName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 4,
+                    "max": 32
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9][A-Za-z0-9\\-_]{3,31}$"
+            }
+        },
+        "com.amazonaws.apprunner#ObservabilityConfigurationStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
+                    },
+                    {
+                        "value": "INACTIVE",
+                        "name": "INACTIVE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.apprunner#ObservabilityConfigurationSummary": {
+            "type": "structure",
+            "members": {
+                "ObservabilityConfigurationArn": {
+                    "target": "com.amazonaws.apprunner#AppRunnerResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of this observability configuration.</p>"
+                    }
+                },
+                "ObservabilityConfigurationName": {
+                    "target": "com.amazonaws.apprunner#ObservabilityConfigurationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer-provided observability configuration name. It can be used in multiple revisions of a configuration.</p>"
+                    }
+                },
+                "ObservabilityConfigurationRevision": {
+                    "target": "com.amazonaws.apprunner#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The revision of this observability configuration. It's unique among all the active configurations (<code>\"Status\": \"ACTIVE\"</code>) that share the\n      same <code>ObservabilityConfigurationName</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides summary information about an App Runner observability configuration resource.</p>\n         <p>This type contains limited information about an observability configuration. It includes only identification information, without configuration\n      details. It's returned by the <a>ListObservabilityConfigurations</a> action. Complete configuration information is returned by the <a>CreateObservabilityConfiguration</a>, <a>DescribeObservabilityConfiguration</a>, and <a>DeleteObservabilityConfiguration</a>\n      actions using the <a>ObservabilityConfiguration</a> type.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#ObservabilityConfigurationSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.apprunner#ObservabilityConfigurationSummary"
             }
         },
         "com.amazonaws.apprunner#OperationStatus": {
@@ -2762,6 +3118,12 @@
                         "smithy.api#documentation": "<p>Configuration settings related to network traffic of the web application that this service runs.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "ObservabilityConfiguration": {
+                    "target": "com.amazonaws.apprunner#ServiceObservabilityConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The observability configuration of this service.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2796,6 +3158,27 @@
                     "max": 40
                 },
                 "smithy.api#pattern": "^[A-Za-z0-9][A-Za-z0-9-_]{3,39}$"
+            }
+        },
+        "com.amazonaws.apprunner#ServiceObservabilityConfiguration": {
+            "type": "structure",
+            "members": {
+                "ObservabilityEnabled": {
+                    "target": "com.amazonaws.apprunner#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When <code>true</code>, an observability configuration resource is associated with the service, and an <code>ObservabilityConfigurationArn</code> is\n      specified.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ObservabilityConfigurationArn": {
+                    "target": "com.amazonaws.apprunner#AppRunnerResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the observability configuration that is associated with the service. Specified only when\n        <code>ObservabilityEnabled</code> is <code>true</code>.</p>\n         <p>Specify an ARN with a name and a revision number to associate that revision. For example:\n          <code>arn:aws:apprunner:us-east-1:123456789012:observabilityconfiguration/xray-tracing/3</code>\n         </p>\n         <p>Specify just the name to associate the latest revision. For example:\n        <code>arn:aws:apprunner:us-east-1:123456789012:observabilityconfiguration/xray-tracing</code>\n         </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the observability configuration of an App Runner service. These are additional observability features, like tracing, that you choose to\n      enable. They're configured in a separate resource that you associate with your service.</p>"
             }
         },
         "com.amazonaws.apprunner#ServiceQuotaExceededException": {
@@ -3141,6 +3524,32 @@
         "com.amazonaws.apprunner#Timestamp": {
             "type": "timestamp"
         },
+        "com.amazonaws.apprunner#TraceConfiguration": {
+            "type": "structure",
+            "members": {
+                "Vendor": {
+                    "target": "com.amazonaws.apprunner#TracingVendor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The implementation provider chosen for tracing App Runner services.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the configuration of the tracing feature within an App Runner observability configuration.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#TracingVendor": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "AWSXRAY",
+                        "name": "AWSXRAY"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.apprunner#UUID": {
             "type": "string",
             "traits": {
@@ -3245,7 +3654,7 @@
                 "InstanceConfiguration": {
                     "target": "com.amazonaws.apprunner#InstanceConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The runtime configuration to apply to instances (scaling units) of the App Runner service.</p>"
+                        "smithy.api#documentation": "<p>The runtime configuration to apply to instances (scaling units) of your service.</p>"
                     }
                 },
                 "AutoScalingConfigurationArn": {
@@ -3264,6 +3673,12 @@
                     "target": "com.amazonaws.apprunner#NetworkConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Configuration settings related to network traffic of the web application that the App Runner service runs.</p>"
+                    }
+                },
+                "ObservabilityConfiguration": {
+                    "target": "com.amazonaws.apprunner#ServiceObservabilityConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The observability configuration of your service.</p>"
                     }
                 }
             }

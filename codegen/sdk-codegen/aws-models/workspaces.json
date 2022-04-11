@@ -561,6 +561,14 @@
                     {
                         "value": "GRAPHICSPRO",
                         "name": "GRAPHICSPRO"
+                    },
+                    {
+                        "value": "GRAPHICS_G4DN",
+                        "name": "GRAPHICS_G4DN"
+                    },
+                    {
+                        "value": "GRAPHICSPRO_G4DN",
+                        "name": "GRAPHICSPRO_G4DN"
                     }
                 ]
             }
@@ -3289,7 +3297,7 @@
                 "IngestionProcess": {
                     "target": "com.amazonaws.workspaces#WorkspaceImageIngestionProcess",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ingestion process to be used when importing the image, depending on which protocol\n         you want to use for your BYOL Workspace image, either PCoIP or WorkSpaces Streaming\n         Protocol (WSP). To use WSP, specify a value that ends in <code>_WSP</code>. To use PCoIP,\n         specify a value that does not end in <code>_WSP</code>. </p>\n         <p>For non-GPU-enabled bundles (bundles other than Graphics or GraphicsPro), specify\n            <code>BYOL_REGULAR</code> or <code>BYOL_REGULAR_WSP</code>, depending on the\n         protocol.</p>",
+                        "smithy.api#documentation": "<p>The ingestion process to be used when importing the image, depending on which protocol \n         you want to use for your BYOL Workspace image, either PCoIP or WorkSpaces Streaming Protocol \n         (WSP). To use WSP, specify a value that ends in <code>_WSP</code>. To use PCoIP, specify a value \n         that does not end in <code>_WSP</code>. </p>\n      \n         <p>For non-GPU-enabled images (bundles other than Graphics.g4dn, GraphicsPro.g4dn, Graphics, \n         or GraphicsPro), specify <code>BYOL_REGULAR</code> or <code>BYOL_REGULAR_WSP</code>, depending\n         on the protocol.</p>\n         <note>\n            <p>Use <code>BYOL_GRAPHICS_G4DN</code> ingestion for both Graphics.g4dn and\n            GraphicsPro.g4dn.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3316,7 +3324,7 @@
                 "Applications": {
                     "target": "com.amazonaws.workspaces#ApplicationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>If specified, the version of Microsoft Office to subscribe to. Valid only for Windows 10\n         BYOL images. For more information about subscribing to Office for BYOL images, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html\"> Bring\n            Your Own Windows Desktop Licenses</a>.</p>\n         <note>\n            <p>Although this parameter is an array, only one item is allowed at this time.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>If specified, the version of Microsoft Office to subscribe to. Valid only for Windows 10\n         BYOL images. For more information about subscribing to Office for BYOL images, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html\"> Bring\n            Your Own Windows Desktop Licenses</a>.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>Although this parameter is an array, only one item is allowed at this time</p>\n               </li>\n               <li>\n                  <p>Microsoft Office 2016 application subscription through AWS is currently not supported \n                  for Graphics.g4dn Bring Your Own License (BYOL) images</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 }
             }
@@ -5983,6 +5991,10 @@
                     {
                         "value": "BYOL_GRAPHICSPRO",
                         "name": "BYOL_GRAPHICSPRO"
+                    },
+                    {
+                        "value": "BYOL_GRAPHICS_G4DN",
+                        "name": "BYOL_GRAPHICS_G4DN"
                     },
                     {
                         "value": "BYOL_REGULAR_WSP",

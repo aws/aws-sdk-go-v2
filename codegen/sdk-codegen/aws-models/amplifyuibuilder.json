@@ -7,7 +7,7 @@
                 "type": {
                     "target": "com.amazonaws.amplifyuibuilder#ComponentProperty",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of navigation action. Valid values are <code>url</code> and <code>anchor</code>. This value is required for a navigation action.</p>"
+                        "smithy.api#documentation": "<p>The type of navigation action. Valid values are <code>url</code> and <code>anchor</code>.\n      This value is required for a navigation action.</p>"
                     }
                 },
                 "url": {
@@ -19,7 +19,7 @@
                 "anchor": {
                     "target": "com.amazonaws.amplifyuibuilder#ComponentProperty",
                     "traits": {
-                        "smithy.api#documentation": "<p>The HTML anchor link to the location to open. Specify this value for a navigation action.</p>"
+                        "smithy.api#documentation": "<p>The HTML anchor link to the location to open. Specify this value for a navigation\n      action.</p>"
                     }
                 },
                 "target": {
@@ -31,13 +31,13 @@
                 "global": {
                     "target": "com.amazonaws.amplifyuibuilder#ComponentProperty",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the user should be signed out globally. Specify this value for an auth sign out action.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the user should be signed out globally. Specify this value for an auth\n      sign out action.</p>"
                     }
                 },
                 "model": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the data model. Use when the action performs an operation on an Amplify DataStore\n      model.</p>"
+                        "smithy.api#documentation": "<p>The name of the data model. Use when the action performs an operation on an Amplify DataStore model.</p>"
                     }
                 },
                 "id": {
@@ -49,7 +49,7 @@
                 "fields": {
                     "target": "com.amazonaws.amplifyuibuilder#ComponentProperties",
                     "traits": {
-                        "smithy.api#documentation": "<p>A dictionary of key-value pairs mapping Amplify Studio properties to fields in a data model. Use when the action\n      performs an operation on an Amplify DataStore model.</p>"
+                        "smithy.api#documentation": "<p>A dictionary of key-value pairs mapping Amplify Studio properties to fields\n      in a data model. Use when the action performs an operation on an Amplify\n      DataStore model.</p>"
                     }
                 },
                 "state": {
@@ -60,7 +60,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the event action configuration for an element of a <code>Component</code>\n      or <code>ComponentChild</code>. Use for the workflow feature in Amplify Studio\n      that allows you to bind events and actions to components. <code>ActionParameters</code>\n      defines the action that is performed when an event occurs on the component.</p>"
+                "smithy.api#documentation": "<p>Represents the event action configuration for an element of a <code>Component</code> or\n        <code>ComponentChild</code>. Use for the workflow feature in Amplify Studio\n      that allows you to bind events and actions to components. <code>ActionParameters</code>\n      defines the action that is performed when an event occurs on the component.</p>"
             }
         },
         "com.amazonaws.amplifyuibuilder#AmplifyUIBuilder": {
@@ -75,6 +75,29 @@
                 "aws.auth#sigv4": {
                     "name": "amplifyuibuilder"
                 },
+                "aws.iam#defineConditionKeys": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "type": "String",
+                        "documentation": "Filters access based on the tags associated with the resource",
+                        "externalDocumentation": "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-resourcetag"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "type": "String",
+                        "documentation": "Filters access based on the tags that are passed in the request",
+                        "externalDocumentation": "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-requesttag"
+                    },
+                    "aws:TagKeys": {
+                        "type": "ArrayOfString",
+                        "documentation": "Filters access based on the tag keys that are passed in the request",
+                        "externalDocumentation": "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-tagkeys"
+                    }
+                },
+                "aws.iam#supportedPrincipalTypes": [
+                    "Root",
+                    "IAMUser",
+                    "IAMRole",
+                    "FederatedUser"
+                ],
                 "aws.protocols#restJson1": {},
                 "smithy.api#cors": {},
                 "smithy.api#documentation": "<p>The Amplify UI Builder API provides a programmatic interface for creating\n      and configuring user interface (UI) component libraries and themes for use in your Amplify applications. You can then connect these UI components to an application's\n      backend Amazon Web Services resources.</p>\n         <p>You can also use the Amplify Studio visual designer to create UI components\n      and model data for an app. For more information, see <a href=\"https://docs.amplify.aws/console/adminui/intro\">Introduction</a> in the\n        <i>Amplify Docs</i>.</p>\n         <p>The Amplify Framework is a comprehensive set of SDKs, libraries, tools, and\n      documentation for client app development. For more information, see the <a href=\"https://docs.amplify.aws/\">Amplify Framework</a>. For more information about\n      deploying an Amplify application to Amazon Web Services, see the <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/welcome.html\">Amplify User Guide</a>.</p>",
@@ -209,7 +232,7 @@
                 "events": {
                     "target": "com.amazonaws.amplifyuibuilder#ComponentEvents",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes the events that can be raised on the component. Use for the workflow feature in Amplify Studio that allows you to\n      bind events and actions to components.</p>"
+                        "smithy.api#documentation": "<p>Describes the events that can be raised on the component. Use for the workflow feature in\n        Amplify Studio that allows you to bind events and actions to\n      components.</p>"
                     }
                 },
                 "schemaVersion": {
@@ -346,7 +369,13 @@
                 "events": {
                     "target": "com.amazonaws.amplifyuibuilder#ComponentEvents",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes the events that can be raised on the child component. Use for the workflow feature in Amplify Studio that allows you to\n      bind events and actions to components.</p>"
+                        "smithy.api#documentation": "<p>Describes the events that can be raised on the child component. Use for the workflow\n      feature in Amplify Studio that allows you to bind events and actions to\n      components.</p>"
+                    }
+                },
+                "sourceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the child component in its original source system, such as Figma.</p>"
                     }
                 }
             },
@@ -466,10 +495,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Describes information about the action.</p>"
                     }
+                },
+                "bindingEvent": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Binds an event to an action on a component. When you specify a <code>bindingEvent</code>, the event is called when the action is performed.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the configuration of an event. You can bind an event and a corresponding\n      action to a <code>Component</code> or a <code>ComponentChild</code>. A button click\n      is an example of an event. </p>"
+                "smithy.api#documentation": "<p>Describes the configuration of an event. You can bind an event and a corresponding action\n      to a <code>Component</code> or a <code>ComponentChild</code>. A button click is an example of\n      an event. </p>"
             }
         },
         "com.amazonaws.amplifyuibuilder#ComponentEvents": {
@@ -690,7 +725,10 @@
                     "additionalSchemas": [
                         "com.amazonaws.amplifyuibuilder#Component"
                     ]
-                }
+                },
+                "aws.iam#conditionKeys": [
+                    "aws:ResourceTag/${TagKey}"
+                ]
             }
         },
         "com.amazonaws.amplifyuibuilder#ComponentSummary": {
@@ -809,6 +847,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:TagKeys",
+                    "aws:RequestTag/${TagKey}"
+                ],
                 "aws.iam#requiredActions": [
                     "amplify:GetApp"
                 ],
@@ -980,6 +1022,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:TagKeys",
+                    "aws:RequestTag/${TagKey}"
+                ],
                 "aws.iam#requiredActions": [
                     "amplify:GetApp"
                 ],
@@ -1242,11 +1288,10 @@
             "type": "structure",
             "members": {
                 "code": {
-                    "target": "smithy.api#String",
+                    "target": "com.amazonaws.amplifyuibuilder#SensitiveString",
                     "traits": {
                         "smithy.api#documentation": "<p>The access code to send in the request.</p>",
-                        "smithy.api#required": {},
-                        "smithy.api#sensitive": {}
+                        "smithy.api#required": {}
                     }
                 },
                 "redirectUri": {
@@ -1265,11 +1310,10 @@
             "type": "structure",
             "members": {
                 "accessToken": {
-                    "target": "smithy.api#String",
+                    "target": "com.amazonaws.amplifyuibuilder#SensitiveString",
                     "traits": {
                         "smithy.api#documentation": "<p>The access token.</p>",
-                        "smithy.api#required": {},
-                        "smithy.api#sensitive": {}
+                        "smithy.api#required": {}
                     }
                 },
                 "expiresIn": {
@@ -1280,11 +1324,10 @@
                     }
                 },
                 "refreshToken": {
-                    "target": "smithy.api#String",
+                    "target": "com.amazonaws.amplifyuibuilder#SensitiveString",
                     "traits": {
                         "smithy.api#documentation": "<p>The token to use to refresh a previously issued access token that might have\n      expired.</p>",
-                        "smithy.api#required": {},
-                        "smithy.api#sensitive": {}
+                        "smithy.api#required": {}
                     }
                 }
             }
@@ -1868,7 +1911,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the state configuration when an action modifies a property of another\n      element within the same component.</p>"
+                "smithy.api#documentation": "<p>Represents the state configuration when an action modifies a property of another element\n      within the same component.</p>"
             }
         },
         "com.amazonaws.amplifyuibuilder#Predicate": {
@@ -1961,11 +2004,10 @@
             "type": "structure",
             "members": {
                 "token": {
-                    "target": "smithy.api#String",
+                    "target": "com.amazonaws.amplifyuibuilder#SensitiveString",
                     "traits": {
                         "smithy.api#documentation": "<p>The token to use to refresh a previously issued access token that might have\n      expired.</p>",
-                        "smithy.api#required": {},
-                        "smithy.api#sensitive": {}
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -1977,11 +2019,10 @@
             "type": "structure",
             "members": {
                 "accessToken": {
-                    "target": "smithy.api#String",
+                    "target": "com.amazonaws.amplifyuibuilder#SensitiveString",
                     "traits": {
                         "smithy.api#documentation": "<p>The access token.</p>",
-                        "smithy.api#required": {},
-                        "smithy.api#sensitive": {}
+                        "smithy.api#required": {}
                     }
                 },
                 "expiresIn": {
@@ -2017,6 +2058,12 @@
                 "smithy.api#documentation": "<p>The requested resource does not exist, or access was denied.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#SensitiveString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.amplifyuibuilder#ServiceQuotaExceededException": {
@@ -2236,7 +2283,10 @@
                     "additionalSchemas": [
                         "com.amazonaws.amplifyuibuilder#Theme"
                     ]
-                }
+                },
+                "aws.iam#conditionKeys": [
+                    "aws:ResourceTag/${TagKey}"
+                ]
             }
         },
         "com.amazonaws.amplifyuibuilder#ThemeSummary": {
