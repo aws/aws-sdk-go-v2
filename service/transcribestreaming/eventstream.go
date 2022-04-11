@@ -83,7 +83,7 @@ type audioStreamWriter struct {
 	err                 *smithysync.OnceErr
 }
 
-func newAudioStreamReader(stream io.WriteCloser, encoder *eventstream.Encoder, signer eventStreamSigner) *audioStreamWriter {
+func newAudioStreamWriter(stream io.WriteCloser, encoder *eventstream.Encoder, signer eventStreamSigner) *audioStreamWriter {
 	w := &audioStreamWriter{
 		encoder:             encoder,
 		signer:              signer,
@@ -272,7 +272,7 @@ type medicalTranscriptResultStreamReader struct {
 	closeOnce   sync.Once
 }
 
-func newMedicalTranscriptResultStreamWriter(readCloser io.ReadCloser, decoder *eventstream.Decoder) *medicalTranscriptResultStreamReader {
+func newMedicalTranscriptResultStreamReader(readCloser io.ReadCloser, decoder *eventstream.Decoder) *medicalTranscriptResultStreamReader {
 	w := &medicalTranscriptResultStreamReader{
 		stream:      make(chan types.MedicalTranscriptResultStream),
 		decoder:     decoder,
@@ -400,7 +400,7 @@ type transcriptResultStreamReader struct {
 	closeOnce   sync.Once
 }
 
-func newTranscriptResultStreamWriter(readCloser io.ReadCloser, decoder *eventstream.Decoder) *transcriptResultStreamReader {
+func newTranscriptResultStreamReader(readCloser io.ReadCloser, decoder *eventstream.Decoder) *transcriptResultStreamReader {
 	w := &transcriptResultStreamReader{
 		stream:      make(chan types.TranscriptResultStream),
 		decoder:     decoder,
@@ -561,7 +561,7 @@ func (m *awsRestjson1_deserializeOpEventStreamStartMedicalStreamTranscription) H
 		requestSignature,
 	)
 
-	eventWriter := newAudioStreamReader(
+	eventWriter := newAudioStreamWriter(
 		eventstreamapi.GetInputStreamWriter(ctx),
 		eventstream.NewEncoder(func(options *eventstream.EncoderOptions) {
 			options.Logger = logger
@@ -596,7 +596,7 @@ func (m *awsRestjson1_deserializeOpEventStreamStartMedicalStreamTranscription) H
 		out.Result = output
 	}
 
-	eventReader := newMedicalTranscriptResultStreamWriter(
+	eventReader := newMedicalTranscriptResultStreamReader(
 		deserializeOutput.Body,
 		eventstream.NewDecoder(func(options *eventstream.DecoderOptions) {
 			options.Logger = logger
@@ -629,10 +629,14 @@ func (*awsRestjson1_deserializeOpEventStreamStartMedicalStreamTranscription) clo
 }
 
 func addEventStreamStartMedicalStreamTranscriptionMiddleware(stack *middleware.Stack, options Options) error {
-	return stack.Deserialize.Insert(&awsRestjson1_deserializeOpEventStreamStartMedicalStreamTranscription{
+	if err := stack.Deserialize.Insert(&awsRestjson1_deserializeOpEventStreamStartMedicalStreamTranscription{
 		LogEventStreamWrites: options.ClientLogMode.IsRequestEventMessage(),
 		LogEventStreamReads:  options.ClientLogMode.IsResponseEventMessage(),
-	}, "OperationDeserializer", middleware.Before)
+	}, "OperationDeserializer", middleware.Before); err != nil {
+		return err
+	}
+	return nil
+
 }
 
 type awsRestjson1_deserializeOpEventStreamStartStreamTranscription struct {
@@ -678,7 +682,7 @@ func (m *awsRestjson1_deserializeOpEventStreamStartStreamTranscription) HandleDe
 		requestSignature,
 	)
 
-	eventWriter := newAudioStreamReader(
+	eventWriter := newAudioStreamWriter(
 		eventstreamapi.GetInputStreamWriter(ctx),
 		eventstream.NewEncoder(func(options *eventstream.EncoderOptions) {
 			options.Logger = logger
@@ -713,7 +717,7 @@ func (m *awsRestjson1_deserializeOpEventStreamStartStreamTranscription) HandleDe
 		out.Result = output
 	}
 
-	eventReader := newTranscriptResultStreamWriter(
+	eventReader := newTranscriptResultStreamReader(
 		deserializeOutput.Body,
 		eventstream.NewDecoder(func(options *eventstream.DecoderOptions) {
 			options.Logger = logger
@@ -746,10 +750,14 @@ func (*awsRestjson1_deserializeOpEventStreamStartStreamTranscription) closeRespo
 }
 
 func addEventStreamStartStreamTranscriptionMiddleware(stack *middleware.Stack, options Options) error {
-	return stack.Deserialize.Insert(&awsRestjson1_deserializeOpEventStreamStartStreamTranscription{
+	if err := stack.Deserialize.Insert(&awsRestjson1_deserializeOpEventStreamStartStreamTranscription{
 		LogEventStreamWrites: options.ClientLogMode.IsRequestEventMessage(),
 		LogEventStreamReads:  options.ClientLogMode.IsResponseEventMessage(),
-	}, "OperationDeserializer", middleware.Before)
+	}, "OperationDeserializer", middleware.Before); err != nil {
+		return err
+	}
+	return nil
+
 }
 
 // UnknownEventMessageError provides an error when a message is received from the stream,

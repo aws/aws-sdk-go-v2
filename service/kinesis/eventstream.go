@@ -57,7 +57,7 @@ type subscribeToShardEventStreamReader struct {
 	initialResponse             chan interface{}
 }
 
-func newSubscribeToShardEventStreamWriter(readCloser io.ReadCloser, decoder *eventstream.Decoder, ird func(*eventstream.Message) (interface{}, error)) *subscribeToShardEventStreamReader {
+func newSubscribeToShardEventStreamReader(readCloser io.ReadCloser, decoder *eventstream.Decoder, ird func(*eventstream.Message) (interface{}, error)) *subscribeToShardEventStreamReader {
 	w := &subscribeToShardEventStreamReader{
 		stream:                      make(chan types.SubscribeToShardEventStream),
 		decoder:                     decoder,
@@ -251,7 +251,7 @@ func (m *awsAwsjson11_deserializeOpEventStreamSubscribeToShard) HandleDeserializ
 		out.Result = output
 	}
 
-	eventReader := newSubscribeToShardEventStreamWriter(
+	eventReader := newSubscribeToShardEventStreamReader(
 		deserializeOutput.Body,
 		eventstream.NewDecoder(func(options *eventstream.DecoderOptions) {
 			options.Logger = logger
@@ -291,10 +291,14 @@ func (*awsAwsjson11_deserializeOpEventStreamSubscribeToShard) closeResponseBody(
 }
 
 func addEventStreamSubscribeToShardMiddleware(stack *middleware.Stack, options Options) error {
-	return stack.Deserialize.Insert(&awsAwsjson11_deserializeOpEventStreamSubscribeToShard{
+	if err := stack.Deserialize.Insert(&awsAwsjson11_deserializeOpEventStreamSubscribeToShard{
 		LogEventStreamWrites: options.ClientLogMode.IsRequestEventMessage(),
 		LogEventStreamReads:  options.ClientLogMode.IsResponseEventMessage(),
-	}, "OperationDeserializer", middleware.Before)
+	}, "OperationDeserializer", middleware.Before); err != nil {
+		return err
+	}
+	return nil
+
 }
 
 // UnknownEventMessageError provides an error when a message is received from the stream,
