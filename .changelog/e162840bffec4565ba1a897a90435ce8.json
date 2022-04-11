@@ -1,8 +1,0 @@
-{
-    "id": "e162840b-ffec-4565-ba1a-897a90435ce8",
-    "type": "feature",
-    "description": "Added API support that allows customers to create GPU-enabled WorkSpaces using EC2 G4dn instances.",
-    "modules": [
-        "service/workspaces"
-    ]
-}

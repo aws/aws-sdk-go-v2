@@ -1,3 +1,13 @@
+# Release (2022-04-11)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder`: [v1.6.0](service/amplifyuibuilder/CHANGELOG.md#v160-2022-04-11)
+  * **Feature**: In this release, we have added the ability to bind events to component level actions.
+* `github.com/aws/aws-sdk-go-v2/service/apprunner`: [v1.12.0](service/apprunner/CHANGELOG.md#v1120-2022-04-11)
+  * **Feature**: This release adds tracing for App Runner services with X-Ray using AWS Distro for OpenTelemetry. New APIs: CreateObservabilityConfiguration, DescribeObservabilityConfiguration, ListObservabilityConfigurations, and DeleteObservabilityConfiguration. Updated APIs: CreateService and UpdateService.
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.18.0](service/workspaces/CHANGELOG.md#v1180-2022-04-11)
+  * **Feature**: Added API support that allows customers to create GPU-enabled WorkSpaces using EC2 G4dn instances.
+
 # Release (2022-04-08)
 
 ## Module Highlights

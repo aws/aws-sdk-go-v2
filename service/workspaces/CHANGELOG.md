@@ -1,3 +1,7 @@
+# v1.18.0 (2022-04-11)
+
+* **Feature**: Added API support that allows customers to create GPU-enabled WorkSpaces using EC2 G4dn instances.
+
 # v1.17.0 (2022-03-31)
 
 * **Feature**: Added APIs that allow you to customize the logo, login message, and help links in the WorkSpaces client login page. To learn more, visit https://docs.aws.amazon.com/workspaces/latest/adminguide/customize-branding.html

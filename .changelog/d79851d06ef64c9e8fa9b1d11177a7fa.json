@@ -1,8 +1,0 @@
-{
-    "id": "d79851d0-6ef6-4c9e-8fa9-b1d11177a7fa",
-    "type": "feature",
-    "description": "In this release, we have added the ability to bind events to component level actions.",
-    "modules": [
-        "service/amplifyuibuilder"
-    ]
-}
