@@ -135,7 +135,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Adds a notification channel to DevOps Guru. A notification channel is used to notify you\n\t\t\tabout important DevOps Guru events, such as when an insight is generated. </p>\n\t\t       <p>If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission \n\t\t\t\tto it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. \n\t\t\t\tFor more information, see <a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-required-permissions.html\">Permissions \n\t\t\t\tfor cross account Amazon SNS topics</a>.</p>\n\t\t\t\t     <p>If you use an Amazon SNS topic that is encrypted by an Amazon Web Services Key Management Service customer-managed key (CMK), then you must add permissions \n\t\t\t\tto the CMK. For more information, see <a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html\">Permissions for \n\t\t\t\tAmazon Web Services KMS–encrypted Amazon SNS topics</a>.</p>",
+                "smithy.api#documentation": "<p> Adds a notification channel to DevOps Guru. A notification channel is used to notify you\n\t\t\tabout important DevOps Guru events, such as when an insight is generated. </p>\n\t\t       <p>If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission \n\t\t\t\tto it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. DevOps Guru only supports standard SNS topics. \n\t\t\t\tFor more information, see <a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-required-permissions.html\">Permissions \n\t\t\t\tfor cross account Amazon SNS topics</a>.</p>\n\t\t\t\t     <p>If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission to it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. For more information, see Permissions for cross account Amazon SNS topics.</p>\n\t\t\t\t     <p>If you use an Amazon SNS topic that is encrypted by an Amazon Web Services Key Management Service customer-managed key (CMK), then you must add permissions \n\t\t\t\tto the CMK. For more information, see <a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html\">Permissions for \n\t\t\t\tAmazon Web Services KMS–encrypted Amazon SNS topics</a>.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/channels",
@@ -173,12 +173,12 @@
                 "Status": {
                     "target": "com.amazonaws.devopsguru#EventSourceOptInStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the CodeGuru Profiler integration.</p>"
+                        "smithy.api#documentation": "<p>The status of the CodeGuru Profiler integration. Specifies if DevOps Guru is enabled to\n\t\t\tconsume recommendations that are generated from Amazon CodeGuru Profiler.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about your account's integration with Amazon CodeGuru Profiler.</p>"
+                "smithy.api#documentation": "<p>Information about your account's integration with Amazon CodeGuru Profiler. This\n\t\t\treturns whether DevOps Guru is configured to consume recommendations generated from Amazon\n\t\t\tCodeGuru Profiler.</p>"
             }
         },
         "com.amazonaws.devopsguru#AnomalyDescription": {
@@ -315,7 +315,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Metadata about an anomaly. The anomaly is detected using analysis of the metric data\u2028 over a period of time</p>"
+                "smithy.api#documentation": "<p>Metadata about the detection source that generates proactive anomalies. The anomaly is\n\t\t\tdetected using analysis of the metric data\u2028 over a period of time</p>"
             }
         },
         "com.amazonaws.devopsguru#AnomalyStatus": {
@@ -416,6 +416,9 @@
             "operations": [
                 {
                     "target": "com.amazonaws.devopsguru#AddNotificationChannel"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#DeleteInsight"
                 },
                 {
                     "target": "com.amazonaws.devopsguru#DescribeAccountHealth"
@@ -892,6 +895,60 @@
                 "smithy.api#documentation": "<p>The time range of a cost estimation.</p>"
             }
         },
+        "com.amazonaws.devopsguru#DeleteInsight": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.devopsguru#DeleteInsightRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.devopsguru#DeleteInsightResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.devopsguru#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the insight along with the associated anomalies, events and recommendations.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/insights/{Id}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#DeleteInsightRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.devopsguru#InsightId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the insight.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#DeleteInsightResponse": {
+            "type": "structure",
+            "members": {}
+        },
         "com.amazonaws.devopsguru#DescribeAccountHealth": {
             "type": "operation",
             "input": {
@@ -1129,7 +1186,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This operation lists details about a DevOps Guru event source that is shared with your\u2028 account.</p>",
+                "smithy.api#documentation": "<p>Returns the integration status of services that are integrated with DevOps Guru as Consumer\n\t\t\tvia EventBridge. The one service that can be integrated with DevOps Guru is Amazon CodeGuru\n\t\t\tProfiler, which can produce proactive recommendations which can be stored and viewed in\n\t\t\tDevOps Guru.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/event-sources",
@@ -1147,7 +1204,7 @@
                 "EventSources": {
                     "target": "com.amazonaws.devopsguru#EventSourcesConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the event source.</p>"
+                        "smithy.api#documentation": "<p>Lists the event sources in the configuration.</p>"
                     }
                 }
             }
@@ -1902,12 +1959,12 @@
                 "AmazonCodeGuruProfiler": {
                     "target": "com.amazonaws.devopsguru#AmazonCodeGuruProfilerIntegration",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>Information about whether DevOps Guru is configured to consume recommendations which\n\t\t\tare generated from AWS CodeGuru Profiler.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the event sources.</p>"
+                "smithy.api#documentation": "<p>Information about the integration of DevOps Guru as consumer with another AWS service, such\n\t\t\tas AWS CodeGuru Profiler via EventBridge.</p>"
             }
         },
         "com.amazonaws.devopsguru#EventTimeRange": {
@@ -3091,7 +3148,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> Information about a notification channel. A notification channel is used to notify\n\t\t\tyou when DevOps Guru creates an insight. The one \n      \tsupported notification channel is Amazon Simple Notification Service (Amazon SNS). </p>\n\t\t       <p>If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission \n\t\t\t\tto it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. \n\t\t\t\tFor more information, see <a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-required-permissions.html\">Permissions \n\t\t\t\tfor cross account Amazon SNS topics</a>.</p>\n\t\t\t\t     <p>If you use an Amazon SNS topic that is encrypted by an Amazon Web Services Key Management Service customer-managed key (CMK), then you must add permissions \n\t\t\t\tto the CMK. For more information, see <a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html\">Permissions for \n\t\t\t\tAmazon Web Services KMS–encrypted Amazon SNS topics</a>.</p>"
+                "smithy.api#documentation": "<p> Information about a notification channel. A notification channel is used to notify\n\t\t\tyou when DevOps Guru creates an insight. The one \n      \tsupported notification channel is Amazon Simple Notification Service (Amazon SNS). </p>\n\t\t       <p>If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission \n\t\t\t\tto it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. DevOps Guru only supports standard SNS topics. \n\t\t\t\tFor more information, see <a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-required-permissions.html\">Permissions \n\t\t\t\tfor cross account Amazon SNS topics</a>.</p>\n\t\t\t\t     <p>If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission to it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. For more information, see Permissions for cross account Amazon SNS topics.</p>\n\t\t\t\t     <p>If you use an Amazon SNS topic that is encrypted by an Amazon Web Services Key Management Service customer-managed key (CMK), then you must add permissions \n\t\t\t\tto the CMK. For more information, see <a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html\">Permissions for \n\t\t\t\tAmazon Web Services KMS–encrypted Amazon SNS topics</a>.</p>"
             }
         },
         "com.amazonaws.devopsguru#NotificationChannelConfig": {
@@ -3100,7 +3157,7 @@
                 "Sns": {
                     "target": "com.amazonaws.devopsguru#SnsChannelConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p> Information about a notification channel configured in DevOps Guru to send notifications\n\t\t\twhen insights are created. </p> \n         <p>If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission \n\t\t\t\tto it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. \n\t\t\t\tFor more information, see <a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-required-permissions.html\">Permissions \n\t\t\t\tfor cross account Amazon SNS topics</a>.</p>\n\t\t\t\t     <p>If you use an Amazon SNS topic that is encrypted by an Amazon Web Services Key Management Service customer-managed key (CMK), then you must add permissions \n\t\t\t\tto the CMK. For more information, see <a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html\">Permissions for \n\t\t\t\tAmazon Web Services KMS–encrypted Amazon SNS topics</a>.</p>",
+                        "smithy.api#documentation": "<p> Information about a notification channel configured in DevOps Guru to send notifications\n\t\t\twhen insights are created. </p> \n         <p>If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission \n\t\t\t\tto it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. DevOps Guru only supports standard SNS topics. \n\t\t\t\tFor more information, see <a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-required-permissions.html\">Permissions \n\t\t\t\tfor cross account Amazon SNS topics</a>.</p>\n\t\t\t\t     <p>If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission to it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. For more information, see Permissions for cross account Amazon SNS topics.</p>\n\t\t\t\t     <p>If you use an Amazon SNS topic that is encrypted by an Amazon Web Services Key Management Service customer-managed key (CMK), then you must add permissions \n\t\t\t\tto the CMK. For more information, see <a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html\">Permissions for \n\t\t\t\tAmazon Web Services KMS–encrypted Amazon SNS topics</a>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3660,7 +3717,7 @@
                 "SourceMetadata": {
                     "target": "com.amazonaws.devopsguru#AnomalySourceMetadata",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns the metadata of the source.</p>"
+                        "smithy.api#documentation": "<p>The metadata of the source which detects proactive anomalies.</p>"
                     }
                 },
                 "AnomalyResources": {
@@ -5205,7 +5262,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> Contains the Amazon Resource Name (ARN) of an Amazon Simple Notification Service topic. </p> \n         <p>If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission \n\t\t\t\tto it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. \n\t\t\t\tFor more information, see <a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-required-permissions.html\">Permissions \n\t\t\t\tfor cross account Amazon SNS topics</a>.</p>\n\t\t\t\t     <p>If you use an Amazon SNS topic that is encrypted by an Amazon Web Services Key Management Service customer-managed key (CMK), then you must add permissions \n\t\t\t\tto the CMK. For more information, see <a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html\">Permissions for \n\t\t\t\tAmazon Web Services KMS–encrypted Amazon SNS topics</a>.</p>"
+                "smithy.api#documentation": "<p> Contains the Amazon Resource Name (ARN) of an Amazon Simple Notification Service topic. </p> \n         <p>If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission \n\t\t\t\tto it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. DevOps Guru only supports standard SNS topics. \n\t\t\t\tFor more information, see <a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-required-permissions.html\">Permissions \n\t\t\t\tfor cross account Amazon SNS topics</a>.</p>\n\t\t\t\t     <p>If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission to it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. For more information, see Permissions for cross account Amazon SNS topics.</p>\n\t\t\t\t     <p>If you use an Amazon SNS topic that is encrypted by an Amazon Web Services Key Management Service customer-managed key (CMK), then you must add permissions \n\t\t\t\tto the CMK. For more information, see <a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html\">Permissions for \n\t\t\t\tAmazon Web Services KMS–encrypted Amazon SNS topics</a>.</p>"
             }
         },
         "com.amazonaws.devopsguru#SsmOpsItemId": {
@@ -5557,7 +5614,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the event source configuration.</p>",
+                "smithy.api#documentation": "<p>Enables or disables integration with a service that can be integrated with DevOps Guru. The\n\t\t\tone service that can be integrated with DevOps Guru is Amazon CodeGuru Profiler, which\n\t\t\tcan produce proactive recommendations which can be stored and viewed in DevOps Guru.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/event-sources",
@@ -5571,7 +5628,7 @@
                 "EventSources": {
                     "target": "com.amazonaws.devopsguru#EventSourcesConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the event source.</p>"
+                        "smithy.api#documentation": "<p>Configuration information about the integration of DevOps Guru as the Consumer via\n\t\t\tEventBridge with another AWS Service.</p>"
                     }
                 }
             }

@@ -15,7 +15,7 @@
                     "name": "iottwinmaker"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<important>\n            <p>\n        TwinMaker is in public preview and is subject to change.\n      </p>\n         </important>\n         <p>IoT TwinMaker is a service that enables you to build operational digital twins of\n         physical systems. IoT TwinMaker overlays measurements and analysis from real-world sensors,\n         cameras, and enterprise applications so you can create data visualizations to monitor your\n         physical factory, building, or industrial plant. You can use this real-world data to\n         monitor operations and diagnose and repair errors.</p>",
+                "smithy.api#documentation": "<p>IoT TwinMaker is a service that enables you to build operational digital twins of\n         physical systems. IoT TwinMaker overlays measurements and analysis from real-world sensors,\n         cameras, and enterprise applications so you can create data visualizations to monitor your\n         physical factory, building, or industrial plant. You can use this real-world data to\n         monitor operations and diagnose and repair errors.</p>",
                 "smithy.api#title": "AWS IoT TwinMaker"
             },
             "version": "2021-11-29",
@@ -518,7 +518,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a component type.</p>\n         <important>\n            <p>\n        TwinMaker is in public preview and is subject to change.\n      </p>\n         </important>",
+                "smithy.api#documentation": "<p>Creates a component type.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "api."
                 },
@@ -949,7 +949,7 @@
                 "isNative": {
                     "target": "com.amazonaws.iottwinmaker#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A Boolean value that specifies whether the data connector is native to TwinMaker.</p>"
+                        "smithy.api#documentation": "<p>A Boolean value that specifies whether the data connector is native to IoT TwinMaker.</p>"
                     }
                 }
             },
@@ -2092,15 +2092,19 @@
                 "startDateTime": {
                     "target": "com.amazonaws.iottwinmaker#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time of the earliest property value to return.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#deprecated": {
+                            "message": "This field is deprecated and will throw an error in the future. Use startTime instead."
+                        },
+                        "smithy.api#documentation": "<p>The date and time of the earliest property value to return.</p>"
                     }
                 },
                 "endDateTime": {
                     "target": "com.amazonaws.iottwinmaker#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time of the latest property value to return.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#deprecated": {
+                            "message": "This field is deprecated and will throw an error in the future. Use endTime instead."
+                        },
+                        "smithy.api#documentation": "<p>The date and time of the latest property value to return.</p>"
                     }
                 },
                 "interpolation": {
@@ -2126,6 +2130,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The time direction to use in the result order.</p>"
                     }
+                },
+                "startTime": {
+                    "target": "com.amazonaws.iottwinmaker#Time"
+                },
+                "endTime": {
+                    "target": "com.amazonaws.iottwinmaker#Time"
                 }
             }
         },
@@ -2703,6 +2713,12 @@
                     "target": "com.amazonaws.iottwinmaker#ComponentTypeId",
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the component type in the entities in the list.</p>"
+                    }
+                },
+                "externalId": {
+                    "target": "com.amazonaws.iottwinmaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The external-Id property of a component. The external-Id property is the primary key of an external storage system.</p>"
                     }
                 }
             },
@@ -3371,6 +3387,10 @@
                     {
                         "value": "DELETE",
                         "name": "DELETE"
+                    },
+                    {
+                        "value": "CREATE",
+                        "name": "CREATE"
                     }
                 ]
             }
@@ -3381,8 +3401,10 @@
                 "timestamp": {
                     "target": "com.amazonaws.iottwinmaker#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp of a value for a time series property.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#deprecated": {
+                            "message": "This field is deprecated and will throw an error in the future. Use time instead."
+                        },
+                        "smithy.api#documentation": "<p>The timestamp of a value for a time series property.</p>"
                     }
                 },
                 "value": {
@@ -3391,6 +3413,9 @@
                         "smithy.api#documentation": "<p>An object that specifies a value for a time series property.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "time": {
+                    "target": "com.amazonaws.iottwinmaker#Time"
                 }
             },
             "traits": {
@@ -3527,7 +3552,14 @@
             }
         },
         "com.amazonaws.iottwinmaker#S3Location": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "(^arn:((aws)|(aws-cn)|(aws-us-gov)):s3:::)([a-zA-Z0-9_-]+$)"
+            }
         },
         "com.amazonaws.iottwinmaker#S3Url": {
             "type": "string",
@@ -3827,8 +3859,21 @@
                 "smithy.api#httpError": 429
             }
         },
+        "com.amazonaws.iottwinmaker#Time": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Timestamp represented in ISO 8601 format",
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 35
+                }
+            }
+        },
         "com.amazonaws.iottwinmaker#Timestamp": {
-            "type": "timestamp"
+            "type": "timestamp",
+            "traits": {
+                "smithy.api#documentation": "supports epoch seconds value"
+            }
         },
         "com.amazonaws.iottwinmaker#TooManyTagsException": {
             "type": "structure",
@@ -4357,11 +4402,7 @@
         "com.amazonaws.iottwinmaker#Value": {
             "type": "string",
             "traits": {
-                "smithy.api#length": {
-                    "min": 1,
-                    "max": 256
-                },
-                "smithy.api#pattern": "^[a-zA-Z_\\-0-9]+$"
+                "smithy.api#pattern": ".*"
             }
         },
         "com.amazonaws.iottwinmaker#Values": {

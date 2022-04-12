@@ -49,7 +49,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returned if the access point you are trying to create already exists, with the\n            creation token you provided in the request.</p>",
+                "smithy.api#documentation": "<p>Returned if the access point that you are trying to create already exists, with the\n            creation token you provided in the request.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
             }
@@ -162,7 +162,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returned if the Amazon Web Services account has already created the maximum number of access points\n            allowed per file system.</p>",
+                "smithy.api#documentation": "<p>Returned if the Amazon Web Services account has already created the maximum number of access points\n            allowed per file system. For more informaton, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/limits.html#limits-efs-resources-per-account-per-region\">https://docs.aws.amazon.com/efs/latest/ug/limits.html#limits-efs-resources-per-account-per-region</a>.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
             }
@@ -210,7 +210,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returned if the Availability Zone that was specified for a mount target is different from the Availability Zone that was specified for One Zone storage classes.\n            For more information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/availability-durability.html\">Regional and One Zone storage redundancy</a>.</p>",
+                "smithy.api#documentation": "<p>Returned if the Availability Zone that was specified for a mount target is \n            different from the Availability Zone that was specified for One Zone storage.\n            For more information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/availability-durability.html\">Regional and One Zone storage redundancy</a>.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -237,7 +237,7 @@
                 "Status": {
                     "target": "com.amazonaws.efs#Status",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes the status of the file system's backup policy.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>ENABLED</code>\n                  </b> - EFS is automatically backing up the file system.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>ENABLING</code>\n                  </b> - EFS is turning on automatic backups for the file system.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>DISABLED</code>\n                  </b> - automatic back ups are turned off for the file system.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>DISABLING</code>\n                  </b> - EFS is turning off automatic backups for the file system.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Describes the status of the file system's backup policy.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>ENABLED</code>\n                  </b> - EFS is automatically backing up the file system.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>ENABLING</code>\n                  </b> - EFS is turning on automatic backups for the file system.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>DISABLED</code>\n                  </b> - Automatic back ups are turned off for\n          the file system.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>DISABLING</code>\n                  </b> - EFS is turning off automatic backups for the file system.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -252,7 +252,7 @@
                 "BackupPolicy": {
                     "target": "com.amazonaws.efs#BackupPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes the file system's backup policy, indicating whether automatic backups are turned on or off..</p>"
+                        "smithy.api#documentation": "<p>Describes the file system's backup policy, indicating whether automatic backups are\n      turned on or off.</p>"
                     }
                 }
             }
@@ -315,10 +315,13 @@
                 },
                 {
                     "target": "com.amazonaws.efs#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.efs#ThrottlingException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an EFS access point. An access point is an application-specific view into an EFS\n      file system that applies an operating system user and group, and a file system path, to any\n      file system request made through the access point. The operating system user and group\n      override any identity information provided by the NFS client. The file system path is exposed\n      as the access point's root directory. Applications using the access point can only access data\n      in its own directory and below. To learn more, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/efs-access-points.html\">Mounting a file system using EFS access\n        points</a>.</p>\n         <p>This operation requires permissions for the <code>elasticfilesystem:CreateAccessPoint</code> action.</p>",
+                "smithy.api#documentation": "<p>Creates an EFS access point. An access point is an application-specific view into an EFS\n      file system that applies an operating system user and group, and a file system path, to any\n      file system request made through the access point. The operating system user and group\n      override any identity information provided by the NFS client. The file system path is exposed\n      as the access point's root directory. Applications using the access point can only access data in\n      the application's own directory and any subdirectories. To learn more, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/efs-access-points.html\">Mounting a file system using EFS access\n        points</a>.</p>\n         <p>This operation requires permissions for the <code>elasticfilesystem:CreateAccessPoint</code> action.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2015-02-01/access-points",
@@ -359,7 +362,7 @@
                 "RootDirectory": {
                     "target": "com.amazonaws.efs#RootDirectory",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the directory on the Amazon EFS file system that the access point exposes as\n      the root directory of your file system to NFS clients using the access point. \n      The clients using the access point can only access the root directory and below. \n      If the <code>RootDirectory</code> > <code>Path</code> specified does not exist, \n      EFS creates it and applies the <code>CreationInfo</code> settings when a client connects to an access point. \n      When specifying a <code>RootDirectory</code>, you need to provide the <code>Path</code>, and the <code>CreationInfo</code>.</p>\n         <p>Amazon EFS creates a root directory only if you have provided the  CreationInfo: OwnUid, OwnGID, and permissions for the directory. \n      If  you do not provide this information, Amazon EFS does not create the root directory. If the root directory does not exist, attempts to mount \n      using the access point will fail.</p>"
+                        "smithy.api#documentation": "<p>Specifies the directory on the Amazon EFS file system that the access point\n      exposes as the root directory of your file system to NFS clients using the access point. The\n      clients using the access point can only access the root directory and below. If the\n        <code>RootDirectory</code> > <code>Path</code> specified does not exist, EFS creates it\n      and applies the <code>CreationInfo</code> settings when a client connects to an access point.\n      When specifying a <code>RootDirectory</code>, you must provide the <code>Path</code>, and the\n        <code>CreationInfo</code>.</p>\n         <p>Amazon EFS creates a root directory only if you have provided the  CreationInfo: OwnUid, OwnGID, and permissions for the directory. \n      If  you do not provide this information, Amazon EFS does not create the root directory. If the root directory does not exist, attempts to mount \n      using the access point will fail.</p>"
                     }
                 }
             }
@@ -430,7 +433,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.efs#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the KMS key that you want to use to protect the encrypted file system. This\n      parameter is only required if you want to use a non-default KMS key. If this parameter is not\n      specified, the default KMS key for Amazon EFS is used. You can specify a KMS key \n      ID using the following formats:</p>\n         <ul>\n            <li>\n               <p>Key ID - A unique identifier of the key, for example\n            <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>\n            </li>\n            <li>\n               <p>ARN - An Amazon Resource Name (ARN) for the key, for example\n            <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>\n            </li>\n            <li>\n               <p>Key alias - A previously created display name for a key, for example\n            <code>alias/projectKey1</code>.</p>\n            </li>\n            <li>\n               <p>Key alias ARN - An ARN for a key alias, for example\n            <code>arn:aws:kms:us-west-2:444455556666:alias/projectKey1</code>.</p>\n            </li>\n         </ul>\n         <p>If you use <code>KmsKeyId</code>, you must set the <a>CreateFileSystemRequest$Encrypted</a> \n      parameter to true.</p>\n         <important>\n            <p>EFS accepts only symmetric KMS keys. You cannot use asymmetric \n      KMS keys with Amazon EFS file systems.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>The ID of the KMS key that you want to use to protect the encrypted file\n      system. This parameter is required only if you want to use a non-default KMS key. If this parameter is not specified, the default KMS key for Amazon EFS is used. You can specify a KMS key ID using the following\n      formats:</p>\n         <ul>\n            <li>\n               <p>Key ID - A unique identifier of the key, for example\n            <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>\n            </li>\n            <li>\n               <p>ARN - An Amazon Resource Name (ARN) for the key, for example\n            <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>\n            </li>\n            <li>\n               <p>Key alias - A previously created display name for a key, for example\n            <code>alias/projectKey1</code>.</p>\n            </li>\n            <li>\n               <p>Key alias ARN - An ARN for a key alias, for example\n            <code>arn:aws:kms:us-west-2:444455556666:alias/projectKey1</code>.</p>\n            </li>\n         </ul>\n         <p>If you use <code>KmsKeyId</code>, you must set the <a>CreateFileSystemRequest$Encrypted</a> \n      parameter to true.</p>\n         <important>\n            <p>EFS accepts only symmetric KMS keys. You cannot use asymmetric \n      KMS keys with Amazon EFS file systems.</p>\n         </important>"
                     }
                 },
                 "ThroughputMode": {
@@ -598,7 +601,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a replication configuration that replicates an existing EFS file \n      system to a new, read-only file system. For more information, see \n      <a href=\"https://docs.aws.amazon.com/efs/latest/ug/efs-replication.html\">Amazon EFS replication</a>. \n    The replication configuration specifies the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Source file system</b> - an existing\n        EFS file system that you want replicated. The source file system cannot be a destination file system \n      in an existing replication configuration.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Destination file system configuration</b>\n        - the configuration of the destination file system to which the source file system \n        will be replicated. There can only be one destination file system in a replication\n        configuration.</p>\n               <ul>\n                  <li>\n                     <p>\n                        <b>Amazon Web Services Region</b> - The Amazon Web Services Region in which the destination \n          file system is created. EFS Replication is available in all Amazon Web Services Region that Amazon EFS is available in, except the following regions: \n          Asia Pacific (Hong Kong) Europe (Milan), Middle East (Bahrain), Africa (Cape Town), and Asia Pacific (Jakarta).</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>Availability zone</b> - If you want the destination file system to use \n          One Zone availability and durability, you must specify the Availability Zone to create the file system in. \n          For more information about EFS storage classes, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html\">\n            Amazon EFS storage classes</a> in the <i>Amazon EFS User Guide</i>.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>Encryption</b> - All destination file systems are\n          created with encryption at rest enabled. You can specify the \n          KMS key that is used to encrypt the destination file system. \n          Your service-managed KMS key for Amazon EFS is used if you don't specify a KMS key. \n          You cannot change this after the file system is created.</p>\n                  </li>\n               </ul>       \n            </li>\n         </ul>\n    \n         <p>The following properties are set by default:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Performance mode</b> - The destination file system's \n        performance mode will match that of the source file system, unless the destination file \n        system uses One Zone storage. In that case, the <i>General Purpose</i> \n        performance mode is used. The Performance mode cannot be changed.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Throughput mode</b> - The destination file system \n        use the Bursting throughput mode by default. You can modify the throughput mode once the file system \n        is created.</p>\n            </li>\n         </ul>\n    \n         <p>The following properties are turned off by default:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Lifecycle management</b> - EFS lifecycle \n        management and intelligent tiering are not enabled on the destination file system. You can enable \n        EFS lifecycle management and intelligent tiering after the destination file system is created.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Automatic backups</b> - Automatic daily backups \n        not enabled on the destination file system. You can change this setting after the file system is created.</p>\n            </li>\n         </ul>\n    \n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/efs-replication.html\">Amazon EFS replication</a>.</p>",
+                "smithy.api#documentation": "<p>Creates a replication configuration that replicates an existing EFS file system to a new,\n      read-only file system. For more information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/efs-replication.html\">Amazon EFS replication</a> in the\n          <i>Amazon EFS User Guide</i>. The replication configuration\n      specifies the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Source file system</b> - An existing EFS file system that you\n          want replicated. The source file system cannot be a destination file system in an existing\n          replication configuration.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Destination file system configuration</b> - The configuration of\n          the destination file system to which the source file system will be replicated. There can\n          only be one destination file system in a replication configuration. The destination file\n          system configuration consists of the following properties:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <b>Amazon Web Services Region</b> - The Amazon Web Services Region in\n              which the destination file system is created. Amazon EFS replication is\n              available in all Amazon Web Services Regions that Amazon EFS is available in,\n              except Africa (Cape Town), Asia Pacific (Hong Kong), Asia Pacific (Jakarta), Europe\n              (Milan), and Middle East (Bahrain).</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>Availability Zone</b> - If you want the destination file system\n              to use EFS One Zone availability and durability, you must specify the Availability\n              Zone to create the file system in. For more information about EFS storage classes, see\n                <a href=\"https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html\">\n                Amazon EFS storage classes</a> in the <i>Amazon EFS User\n                Guide</i>.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>Encryption</b> - All destination file systems are created with\n              encryption at rest enabled. You can specify the Key Management Service (KMS) key that is used to encrypt the destination file system. If you don't\n              specify a KMS key, your service-managed KMS key for\n                Amazon EFS is used.  </p>\n                     <note>\n                        <p>After the file system is created, you cannot change the KMS key.</p>\n                     </note>\n                  </li>\n               </ul>       \n            </li>\n         </ul>\n    \n         <p>The following properties are set by default:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Performance mode</b> - The destination file system's performance\n          mode matches that of the source file system, unless the destination file system uses EFS\n          One Zone storage. In that case, the General Purpose performance mode is used. The\n          performance mode cannot be changed.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Throughput mode</b> - The destination file system uses the\n          Bursting Throughput mode by default. After the file system is created, you can modify the\n          throughput mode.</p>\n            </li>\n         </ul>\n    \n         <p>The following properties are turned off by default:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Lifecycle management</b> - EFS lifecycle management and EFS\n          Intelligent-Tiering are not enabled on the destination file system. After the destination\n          file system is created, you can enable EFS lifecycle management and EFS\n          Intelligent-Tiering.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Automatic backups</b> - Automatic daily backups not enabled on\n          the destination file system. After the file system is created, you can change this\n          setting.</p>\n            </li>\n         </ul>\n    \n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/efs-replication.html\">Amazon EFS replication</a> in the\n          <i>Amazon EFS User Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2015-02-01/file-systems/{SourceFileSystemId}/replication-configuration",
@@ -646,7 +649,7 @@
                 "smithy.api#deprecated": {
                     "message": "Use TagResource."
                 },
-                "smithy.api#documentation": "<note>\n            <p>DEPRECATED - CreateTags is deprecated and not maintained. Please use the \n       API action to create tags for EFS resources.</p>\n         </note>\n         <p>Creates or overwrites tags associated with a file system. Each tag is a key-value pair. If\n      a tag key specified in the request already exists on the file system, this operation\n      overwrites its value with the value provided in the request. If you add the <code>Name</code>\n      tag to your file system, Amazon EFS returns it in the response to the <a>DescribeFileSystems</a> operation. </p>\n         <p>This operation requires permission for the <code>elasticfilesystem:CreateTags</code>\n      action.</p>",
+                "smithy.api#documentation": "<note>\n            <p>DEPRECATED - <code>CreateTags</code> is deprecated and not maintained. To create tags for EFS\n        resources, use the  API action.</p>\n         </note>\n         <p>Creates or overwrites tags associated with a file system. Each tag is a key-value pair. If\n      a tag key specified in the request already exists on the file system, this operation\n      overwrites its value with the value provided in the request. If you add the <code>Name</code>\n      tag to your file system, Amazon EFS returns it in the response to the <a>DescribeFileSystems</a> operation. </p>\n         <p>This operation requires permission for the <code>elasticfilesystem:CreateTags</code>\n      action.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2015-02-01/create-tags/{FileSystemId}",
@@ -774,7 +777,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a file system, permanently severing access to its contents. Upon return, the\n      file system no longer exists and you can't access any contents of the deleted file\n      system.</p>\n         <p> You can't delete a file system that is in use. That is, if the file system has\n      any mount targets, you must first delete them. For more information, see <a>DescribeMountTargets</a> and <a>DeleteMountTarget</a>. </p>\n\n         <note>\n            <p>The <code>DeleteFileSystem</code> call returns while the file system state is still\n          <code>deleting</code>. You can check the file system deletion status by calling the <a>DescribeFileSystems</a> operation, which returns a list of file systems in your\n        account. If you pass file system ID or creation token for the deleted file system, the <a>DescribeFileSystems</a> returns a <code>404 FileSystemNotFound</code>\n        error.</p>\n         </note>\n\n         <p>This operation requires permissions for the\n        <code>elasticfilesystem:DeleteFileSystem</code> action.</p>",
+                "smithy.api#documentation": "<p>Deletes a file system, permanently severing access to its contents. Upon return, the\n      file system no longer exists and you can't access any contents of the deleted file\n      system.</p>\n         <p>You need to manually delete mount targets attached to a file system before you can delete\n    an EFS file system. This step is performed for you when you use the Amazon Web Services console \n    to delete a file system.</p>\n         <note>\n            <p>You cannot delete a file system that is part of an EFS Replication configuration. \n      You need to delete the replication configuration first.</p>\n         </note>\n         <p> You can't delete a file system that is in use. That is, if the file system has\n      any mount targets, you must first delete them. For more information, see <a>DescribeMountTargets</a> and <a>DeleteMountTarget</a>. </p>\n\n         <note>\n            <p>The <code>DeleteFileSystem</code> call returns while the file system state is still\n          <code>deleting</code>. You can check the file system deletion status by calling the <a>DescribeFileSystems</a> operation, which returns a list of file systems in your\n        account. If you pass file system ID or creation token for the deleted file system, the <a>DescribeFileSystems</a> returns a <code>404 FileSystemNotFound</code>\n        error.</p>\n         </note>\n\n         <p>This operation requires permissions for the\n        <code>elasticfilesystem:DeleteFileSystem</code> action.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/2015-02-01/file-systems/{FileSystemId}",
@@ -903,7 +906,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an existing replication configuration.  To delete a replication \n      configuration, you must make the request from the Amazon Web Services Region \n      in which the destination file system is located. Deleting a replication \n      configuration ends the replication process. You can write to the destination file \n      system once it's status becomes <code>Writeable</code>.</p>",
+                "smithy.api#documentation": "<p>Deletes an existing replication configuration. To delete a replication configuration, you\n      must make the request from the Amazon Web Services Region in which the destination file system\n      is located. Deleting a replication configuration ends the replication process. After a\n      replication configuration is deleted, the destination file system is no longer read-only. You\n      can write to the destination file system after its status becomes\n      <code>Writeable</code>.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/2015-02-01/file-systems/{SourceFileSystemId}/replication-configuration",
@@ -944,7 +947,7 @@
                 "smithy.api#deprecated": {
                     "message": "Use UntagResource."
                 },
-                "smithy.api#documentation": "<note>\n            <p>DEPRECATED - DeleteTags is deprecated and not maintained. Please use the \n       API action to remove tags from EFS resources.</p>\n         </note>\n         <p>Deletes the specified tags from a file system. If the <code>DeleteTags</code> request\n      includes a tag key that doesn't exist, Amazon EFS ignores it and doesn't cause an\n      error. For more information about tags and related restrictions, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Tag restrictions</a> in the\n        <i>Billing and Cost Management User Guide</i>.</p>\n\n         <p>This operation requires permissions for the <code>elasticfilesystem:DeleteTags</code>\n      action.</p>",
+                "smithy.api#documentation": "<note>\n            <p>DEPRECATED - <code>DeleteTags</code> is deprecated and not maintained. To remove tags from EFS\n        resources, use the  API action.</p>\n         </note>\n         <p>Deletes the specified tags from a file system. If the <code>DeleteTags</code> request\n      includes a tag key that doesn't exist, Amazon EFS ignores it and doesn't cause an\n      error. For more information about tags and related restrictions, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Tag restrictions</a> in the\n        <i>Billing and Cost Management User Guide</i>.</p>\n\n         <p>This operation requires permissions for the <code>elasticfilesystem:DeleteTags</code>\n      action.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2015-02-01/delete-tags/{FileSystemId}",
@@ -1339,7 +1342,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the current <code>LifecycleConfiguration</code> object for the specified Amazon\n      EFS file system. EFS lifecycle management uses the <code>LifecycleConfiguration</code> object\n      to identify which files to move to the EFS Infrequent Access (IA) storage class. For a file system\n      without a <code>LifecycleConfiguration</code> object, the call returns an empty array in the\n      response.</p>\n         <p>When EFS Intelligent Tiering is enabled, <code>TransitionToPrimaryStorageClass</code> has a value of <code>AFTER_1_ACCESS</code>.</p>\n         <p>This operation requires permissions for the\n        <code>elasticfilesystem:DescribeLifecycleConfiguration</code> operation.</p>",
+                "smithy.api#documentation": "<p>Returns the current <code>LifecycleConfiguration</code> object for the specified Amazon\n      EFS file system. EFS lifecycle management uses the <code>LifecycleConfiguration</code> object\n      to identify which files to move to the EFS Infrequent Access (IA) storage class. For a file system\n      without a <code>LifecycleConfiguration</code> object, the call returns an empty array in the\n      response.</p>\n         <p>When EFS Intelligent-Tiering is enabled, <code>TransitionToPrimaryStorageClass</code> has\n      a value of <code>AFTER_1_ACCESS</code>.</p>\n         <p>This operation requires permissions for the\n        <code>elasticfilesystem:DescribeLifecycleConfiguration</code> operation.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2015-02-01/file-systems/{FileSystemId}/lifecycle-configuration",
@@ -1548,7 +1551,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the replication configurations for either a specific file system, or all configurations for the \n      Amazon Web Services account in an Amazon Web Services Region if a file system is not specified.</p>",
+                "smithy.api#documentation": "<p>Retrieves the replication configuration for a specific file system. If a file system is\n      not specified, all of the replication configurations for the Amazon Web Services account in an\n        Amazon Web Services Region are retrieved.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2015-02-01/file-systems/replication-configurations",
@@ -1562,21 +1565,21 @@
                 "FileSystemId": {
                     "target": "com.amazonaws.efs#FileSystemId",
                     "traits": {
-                        "smithy.api#documentation": "<p>You can retrieve replication configurations for a specific file system by providing a file system ID.</p>",
+                        "smithy.api#documentation": "<p>You can retrieve the replication configuration for a specific file system by providing its\n      file system ID.</p>",
                         "smithy.api#httpQuery": "FileSystemId"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.efs#Token",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            <code>NextToken</code> is present if the response is paginated. You can use \n      <code>NextMarker</code> in a subsequent request to fetch the next page of output.</p>",
+                        "smithy.api#documentation": "<p>\n            <code>NextToken</code> is present if the response is paginated. You can use\n        <code>NextToken</code> in a subsequent request to fetch the next page of\n      output.</p>",
                         "smithy.api#httpQuery": "NextToken"
                     }
                 },
                 "MaxResults": {
                     "target": "com.amazonaws.efs#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Optional) You can optionally specify the <code>MaxItems</code> parameter \n      to limit the number of objects returned in a response. The default value is 100. </p>",
+                        "smithy.api#documentation": "<p>(Optional) To limit the number of objects returned in a response, you can specify the\n        <code>MaxItems</code> parameter. The default value is 100. </p>",
                         "smithy.api#httpQuery": "MaxResults"
                     }
                 }
@@ -1588,7 +1591,7 @@
                 "Replications": {
                     "target": "com.amazonaws.efs#ReplicationConfigurationDescriptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The collection of replication configurations returned.</p>"
+                        "smithy.api#documentation": "<p>The collection of replication configurations that is returned.</p>"
                     }
                 },
                 "NextToken": {
@@ -1622,7 +1625,7 @@
                 "smithy.api#deprecated": {
                     "message": "Use ListTagsForResource."
                 },
-                "smithy.api#documentation": "<note>\n            <p>DEPRECATED - The DeleteTags action is deprecated and not maintained. Please use the \n         API action to remove tags from EFS resources.</p>\n         </note>\n         <p>Returns the tags associated with a file system. The order of tags returned in the\n      response of one <code>DescribeTags</code> call and the order of tags returned across the\n      responses of a multiple-call iteration (when using pagination) is unspecified. </p>\n         <p> This operation requires permissions for the\n        <code>elasticfilesystem:DescribeTags</code> action. </p>",
+                "smithy.api#documentation": "<note>\n            <p>DEPRECATED - The <code>DescribeTags</code> action is deprecated and not maintained. To view\n        tags associated with EFS resources, use the <code>ListTagsForResource</code> API\n        action.</p>\n         </note>\n         <p>Returns the tags associated with a file system. The order of tags returned in the\n      response of one <code>DescribeTags</code> call and the order of tags returned across the\n      responses of a multiple-call iteration (when using pagination) is unspecified. </p>\n         <p> This operation requires permissions for the\n        <code>elasticfilesystem:DescribeTags</code> action. </p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2015-02-01/tags/{FileSystemId}",
@@ -1698,7 +1701,7 @@
                 "Status": {
                     "target": "com.amazonaws.efs#ReplicationStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes the status of the destination Amazon EFS file system.</p>",
+                        "smithy.api#documentation": "<p>Describes the status of the destination Amazon EFS file system. If the status is\n        <code>ERROR</code>, the destination file system in the replication configuration is in a\n      failed state and is unrecoverable. To access the file system data, restore a backup of the\n      failed file system to a new file system.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1719,7 +1722,7 @@
                 "LastReplicatedTimestamp": {
                     "target": "com.amazonaws.efs#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time when the most recent sync successfully completed on the destination file system. \n      Any changes to data on the source file system that occurred prior to this time were successfully \n      replicated to the destination file system. Any changes that occurred after this time might not be \n      fully replicated.</p>"
+                        "smithy.api#documentation": "<p>The time when the most recent sync was successfully completed on the destination file\n      system. Any changes to data on the source file system that occurred before this time have been\n      successfully replicated to the destination file system. Any changes that occurred after this\n      time might not be fully replicated.</p>"
                     }
                 }
             },
@@ -1733,19 +1736,19 @@
                 "Region": {
                     "target": "com.amazonaws.efs#RegionName",
                     "traits": {
-                        "smithy.api#documentation": "<p>To create a file system that uses regional storage, specify the Amazon Web Services Region\n      in which to create the destination file system.</p>"
+                        "smithy.api#documentation": "<p>To create a file system that uses Regional storage, specify the Amazon Web Services Region\n      in which to create the destination file system.</p>"
                     }
                 },
                 "AvailabilityZoneName": {
                     "target": "com.amazonaws.efs#AvailabilityZoneName",
                     "traits": {
-                        "smithy.api#documentation": "<p>To create a file system that uses One Zone storage, specify the name of the \n      Availability Zone in which to create the destination file system.</p>"
+                        "smithy.api#documentation": "<p>To create a file system that uses EFS One Zone storage, specify the name of the\n      Availability Zone in which to create the destination file system.</p>"
                     }
                 },
                 "KmsKeyId": {
                     "target": "com.amazonaws.efs#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the KMS key you want to use to encrypt the destination file system. If you do not \n      specify a KMS key, EFS uses your default KMS key for Amazon EFS, \n      <code>/aws/elasticfilesystem</code>. This ID can be in one of the following\n      formats:</p>\n         <ul>\n            <li>\n               <p>Key ID - A unique identifier of the key, for example\n          <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>\n            </li>\n            <li>\n               <p>ARN - An Amazon Resource Name (ARN) for the key, for example\n          <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>\n            </li>\n            <li>\n               <p>Key alias - A previously created display name for a key, for example\n          <code>alias/projectKey1</code>.</p>\n            </li>\n            <li>\n               <p>Key alias ARN - An ARN for a key alias, for example\n          <code>arn:aws:kms:us-west-2:444455556666:alias/projectKey1</code>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specifies the Key Management Service (KMS) key that you want to use to\n      encrypt the destination file system. If you do not specify a KMS key, Amazon EFS uses your default KMS key for Amazon EFS,\n        <code>/aws/elasticfilesystem</code>. This ID can be in one of the following formats:</p>\n         <ul>\n            <li>\n               <p>Key ID - The unique identifier of the key, for example\n            <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>\n            </li>\n            <li>\n               <p>ARN - The Amazon Resource Name (ARN) for the key, for example\n            <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>\n            </li>\n            <li>\n               <p>Key alias - A previously created display name for a key, for example\n          <code>alias/projectKey1</code>.</p>\n            </li>\n            <li>\n               <p>Key alias ARN - The ARN for a key alias, for example\n            <code>arn:aws:kms:us-west-2:444455556666:alias/projectKey1</code>.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -2135,7 +2138,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returned if there's not enough capacity to provision additional throughput. This value\n            might be returned when you try to create a file system in provisioned throughput mode,\n            when you attempt to increase the provisioned throughput of an existing file system, or\n            when you attempt to change an existing file system from bursting to provisioned\n            throughput mode. Try again later.</p>",
+                "smithy.api#documentation": "<p>Returned if there's not enough capacity to provision additional throughput. This value\n            might be returned when you try to create a file system in provisioned throughput mode,\n            when you attempt to increase the provisioned throughput of an existing file system, or\n            when you attempt to change an existing file system from Bursting Throughput to\n            Provisioned Throughput mode. Try again later.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 503
             }
@@ -2170,7 +2173,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returned if the <code>FileSystemPolicy</code> is is malformed or contains an error such as an invalid\n            parameter value or a missing required parameter. Returned in the case of a policy lockout safety check error.</p>",
+                "smithy.api#documentation": "<p>Returned if the <code>FileSystemPolicy</code> is malformed or contains an error such\n            as a parameter value that is not valid or a missing required parameter. Returned in the\n            case of a policy lockout safety check error.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -2285,7 +2288,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes a policy used by EFS lifecycle management and EFS intelligent tiering that specifies when to transition \n      files into and out of the file system's Infrequent Access (IA) storage class. For more information, see \n      <a href=\"https://docs.aws.amazon.com/efs/latest/ug/lifecycle-management-efs.html\">EFS Intelligent‐Tiering and EFS Lifecycle Management</a>.</p>\n         <note>\n            <p>When using the <code>put-lifecycle-configuration</code> CLI command or the <code>PutLifecycleConfiguration</code> API action, \n      Amazon EFS requires that each <code>LifecyclePolicy</code> \n      object have only a single transition. This means that in a request body, <code>LifecyclePolicies</code> needs to be structured as\n      an array of <code>LifecyclePolicy</code> objects, one object for each transition, <code>TransitionToIA</code>, \n      <code>TransitionToPrimaryStorageClass</code>. For more information, see the request examples in <a>PutLifecycleConfiguration</a>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Describes a policy used by EFS lifecycle management and EFS Intelligent-Tiering that\n      specifies when to transition files into and out of the file system's Infrequent Access (IA)\n      storage class. For more information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/lifecycle-management-efs.html\">EFS Intelligent‐Tiering and EFS Lifecycle\n        Management</a>.</p>\n         <note>\n            <p>When using the <code>put-lifecycle-configuration</code> CLI command or the\n          <code>PutLifecycleConfiguration</code> API action, Amazon EFS requires that each\n          <code>LifecyclePolicy</code> object have only a single transition. This means that in a\n        request body, <code>LifecyclePolicies</code> must be structured as an array of\n          <code>LifecyclePolicy</code> objects, one object for each transition,\n          <code>TransitionToIA</code>, <code>TransitionToPrimaryStorageClass</code>. For more\n        information, see the request examples in <a>PutLifecycleConfiguration</a>.</p>\n         </note>"
             }
         },
         "com.amazonaws.efs#ListTagsForResource": {
@@ -2382,7 +2385,7 @@
                     "name": "elasticfilesystem"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<fullname>Amazon Elastic File System</fullname>\n         <p>Amazon Elastic File System (Amazon EFS) provides simple, scalable file storage for use\n      with Amazon EC2 Linux and Mac instances in the Amazon Web Services Cloud. With Amazon EFS, storage capacity is elastic,\n      growing and shrinking automatically as you add and remove files, so your applications have the\n      storage they need, when they need it. For more information, see the <a href=\"https://docs.aws.amazon.com/efs/latest/ug/api-reference.html\">Amazon Elastic File System API Reference</a> and the <a href=\"https://docs.aws.amazon.com/efs/latest/ug/whatisefs.html\">Amazon Elastic File System User Guide</a>.</p>",
+                "smithy.api#documentation": "<fullname>Amazon Elastic File System</fullname>\n         <p>Amazon Elastic File System (Amazon EFS) provides simple, scalable file storage for\n      use with Amazon EC2 Linux and Mac instances in the Amazon Web Services Cloud. With Amazon EFS, storage capacity is elastic, growing and shrinking automatically as you add and\n      remove files, so that your applications have the storage they need, when they need it. For\n      more information, see the <a href=\"https://docs.aws.amazon.com/efs/latest/ug/api-reference.html\">Amazon Elastic File System API Reference</a> and the <a href=\"https://docs.aws.amazon.com/efs/latest/ug/whatisefs.html\">Amazon Elastic File System User Guide</a>.</p>",
                 "smithy.api#title": "Amazon Elastic File System"
             },
             "version": "2015-02-01",
@@ -2718,7 +2721,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The calling account has reached the limit for elastic network interfaces for the\n            specific Amazon Web Services Region. The client should try to delete some elastic network interfaces or\n            get the account limit raised. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Appendix_Limits.html\">Amazon VPC Limits</a>\n            in the <i>Amazon VPC User Guide </i> (see the Network interfaces per VPC\n            entry in the table). </p>",
+                "smithy.api#documentation": "<p>The calling account has reached the limit for elastic network interfaces for the\n            specific Amazon Web Services Region. Either delete some network interfaces or request\n            that the account quota be raised. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Appendix_Limits.html\">Amazon VPC Quotas</a>\n            in the <i>Amazon VPC User Guide</i> (see the <b>Network\n                interfaces per Region</b> entry in the <b>Network\n                interfaces</b> table). </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
             }
@@ -2877,7 +2880,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Use this operation to set the account preference in the current Amazon Web Services Region \n      to use long 17 character (63 bit) or short 8 character (32 bit) resource IDs for \n      new EFS file system and mount target resources. All existing resource IDs are not affected \n      by any changes you make. You can set the ID preference during the\n      opt-in period as EFS transitions to long resource IDs. For more information, \n      see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/manage-efs-resource-ids.html\">Managing Amazon EFS resource IDs</a>.</p>\n         <note>\n            <p>Starting in October, 2021, you will receive an error if you try to set the account preference to use the short 8 character format resource ID. \n      Contact Amazon Web Services support if you receive an error and need to use short IDs for file system and mount target resources.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Use this operation to set the account preference in the current Amazon Web Services Region \n      to use long 17 character (63 bit) or short 8 character (32 bit) resource IDs for \n      new EFS file system and mount target resources. All existing resource IDs are not affected \n      by any changes you make. You can set the ID preference during the\n      opt-in period as EFS transitions to long resource IDs. For more information, \n      see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/manage-efs-resource-ids.html\">Managing Amazon EFS resource IDs</a>.</p>\n         <note>\n            <p>Starting in October, 2021, you will receive an error if you try to set the account preference\n        to use the short 8 character format resource ID. Contact Amazon Web Services support if you\n        receive an error and must use short IDs for file system and mount target resources.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/2015-02-01/account-preferences",
@@ -2891,7 +2894,7 @@
                 "ResourceIdType": {
                     "target": "com.amazonaws.efs#ResourceIdType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the EFS resource ID preference to set for the user's Amazon Web Services account, \n      in the current Amazon Web Services Region, either <code>LONG_ID</code> (17 characters), or \n      <code>SHORT_ID</code> (8 characters).</p>\n         <note>\n            <p>Starting in October, 2021, you will receive an error when setting the account \n      preference to <code>SHORT_ID</code>. Contact Amazon Web Services support if you receive an \n      error and need to use short IDs for file system and mount target resources.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>Specifies the EFS resource ID preference to set for the user's Amazon Web Services account, \n      in the current Amazon Web Services Region, either <code>LONG_ID</code> (17 characters), or \n      <code>SHORT_ID</code> (8 characters).</p>\n         <note>\n            <p>Starting in October, 2021, you will receive an error when setting the account preference to\n          <code>SHORT_ID</code>. Contact Amazon Web Services support if you receive an error and must\n        use short IDs for file system and mount target resources.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3014,7 +3017,7 @@
                 "BypassPolicyLockoutSafetyCheck": {
                     "target": "com.amazonaws.efs#BypassPolicyLockoutSafetyCheck",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Optional) A flag to indicate whether to bypass the <code>FileSystemPolicy</code> lockout safety check. The policy lockout safety check \n      determines whether the policy in the request will prevent the principal making the request will be locked out from making future <code>PutFileSystemPolicy</code> requests on the file system.\n      Set <code>BypassPolicyLockoutSafetyCheck</code> to <code>True</code> only when you intend to prevent \n      the principal that is making the request from making a subsequent <code>PutFileSystemPolicy</code> request on the file system. \n      The default value is False.\n    </p>"
+                        "smithy.api#documentation": "<p>(Optional) A boolean that specifies whether or not to bypass the <code>FileSystemPolicy</code> lockout safety check. The lockout safety check \n      determines whether the policy in the request will lock out, or prevent, the IAM principal that is making the request from making future <code>PutFileSystemPolicy</code> requests on this file system.\n      Set <code>BypassPolicyLockoutSafetyCheck</code> to <code>True</code> only when you intend to prevent \n      the IAM principal that is making the request from making subsequent <code>PutFileSystemPolicy</code> requests on this file system. \n      The default value is <code>False</code>.\n    </p>"
                     }
                 }
             }
@@ -3042,7 +3045,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Enables lifecycle management by creating a new <code>LifecycleConfiguration</code>\n      object. A <code>LifecycleConfiguration</code> object defines when files in an Amazon EFS file\n      system are automatically transitioned to the lower-cost EFS Infrequent Access (IA) storage class.\n      To enable EFS Intelligent Tiering, set the value of <code>TransitionToPrimaryStorageClass</code> to <code>AFTER_1_ACCESS</code>.\n      For more information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/lifecycle-management-efs.html\">EFS Lifecycle Management</a>.</p>\n      \n         <p>Each Amazon EFS file system supports one lifecycle configuration, which applies to all files in the file system. If a\n        <code>LifecycleConfiguration</code> object already exists for the specified file system, a\n        <code>PutLifecycleConfiguration</code> call modifies the existing configuration. A\n        <code>PutLifecycleConfiguration</code> call with an empty <code>LifecyclePolicies</code>\n      array in the request body deletes any existing <code>LifecycleConfiguration</code> and\n      turns off lifecycle management for the file system.</p>\n\n    \n         <p>In the request, specify the following: </p>\n         <ul>\n            <li>\n               <p>The ID for the file system for which you are enabling, disabling, or modifying lifecycle management.</p>\n            </li>\n            <li>\n               <p>A <code>LifecyclePolicies</code> array of <code>LifecyclePolicy</code> objects that\n          define when files are moved to the IA storage class. Amazon EFS requires that each <code>LifecyclePolicy</code> \n          object have only have a single transition, so the <code>LifecyclePolicies</code> array needs to be structured with separate \n          <code>LifecyclePolicy</code> objects. See the example requests in the following section for more information.</p>\n            </li>\n         </ul>\n\n         <p>This operation requires permissions for the\n        <code>elasticfilesystem:PutLifecycleConfiguration</code> operation.</p>\n         <p>To apply a <code>LifecycleConfiguration</code> object to an encrypted file system, you\n      need the same Key Management Service permissions as when you created the encrypted\n      file system. </p>",
+                "smithy.api#documentation": "<p>Use this action to manage EFS lifecycle management and intelligent tiering. A \n      <code>LifecycleConfiguration</code> consists of one or more <code>LifecyclePolicy</code> objects that \n      define the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>EFS Lifecycle management</b> - When Amazon EFS \n        automatically transitions files in a file system into the lower-cost Infrequent Access (IA) storage class.</p>\n               <p>To enable EFS Lifecycle management, set the value of <code>TransitionToIA</code> to one of the available options.</p>\n            </li>\n            <li>\n               <p>\n                  <b>EFS Intelligent tiering</b> - When Amazon EFS \n        automatically transitions files from IA back into the file system's primary storage class (Standard or One Zone Standard.</p>\n               <p>To enable EFS Intelligent Tiering, set the value of <code>TransitionToPrimaryStorageClass</code> to <code>AFTER_1_ACCESS</code>.</p>\n            </li>\n         </ul>\n    \n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/lifecycle-management-efs.html\">EFS Lifecycle Management</a>.</p>      \n         <p>Each Amazon EFS file system supports one lifecycle configuration, which applies to all files in the file system. If a\n        <code>LifecycleConfiguration</code> object already exists for the specified file system, a\n        <code>PutLifecycleConfiguration</code> call modifies the existing configuration. A\n        <code>PutLifecycleConfiguration</code> call with an empty <code>LifecyclePolicies</code>\n      array in the request body deletes any existing <code>LifecycleConfiguration</code> and\n      turns off lifecycle management and intelligent tiering for the file system.</p>    \n         <p>In the request, specify the following: </p>\n         <ul>\n            <li>\n               <p>The ID for the file system for which you are enabling, disabling, or modifying lifecycle management \n          and intelligent tiering.</p>\n            </li>\n            <li>\n               <p>A <code>LifecyclePolicies</code> array of <code>LifecyclePolicy</code> objects that\n          define when files are moved into IA storage, and when they are moved back to Standard storage.</p> \n               <note>\n                  <p>Amazon EFS requires that each <code>LifecyclePolicy</code> \n          object have only have a single transition, so the <code>LifecyclePolicies</code> array needs to be structured with separate \n          <code>LifecyclePolicy</code> objects. See the example requests in the following section for more information.</p>\n               </note>\n            </li>\n         </ul>\n\n         <p>This operation requires permissions for the <code>elasticfilesystem:PutLifecycleConfiguration</code> operation.</p>\n         <p>To apply a <code>LifecycleConfiguration</code> object to an encrypted file system, you\n      need the same Key Management Service permissions as when you created the encrypted file system.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/2015-02-01/file-systems/{FileSystemId}/lifecycle-configuration",
@@ -3064,7 +3067,7 @@
                 "LifecyclePolicies": {
                     "target": "com.amazonaws.efs#LifecyclePolicies",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of <code>LifecyclePolicy</code> objects that define the file system's\n        <code>LifecycleConfiguration</code> object. A <code>LifecycleConfiguration</code> object\n      informs EFS lifecycle management and intelligent tiering of the following:</p>\n         <ul>\n            <li>\n               <p>When to move files in the file system from primary storage to the IA storage class.</p>\n            </li>\n            <li>\n               <p>When to move files that are in IA storage to primary storage.</p>\n            </li>\n         </ul>\n         <note>\n            <p>When using the <code>put-lifecycle-configuration</code> CLI command or the <code>PutLifecycleConfiguration</code> API action, \n      Amazon EFS requires that each <code>LifecyclePolicy</code> \n      object have only a single transition. This means that in a request body, <code>LifecyclePolicies</code> needs to be structured as\n      an array of <code>LifecyclePolicy</code> objects, one object for each transition, <code>TransitionToIA</code>, <code>TransitionToPrimaryStorageClass</code>. \n      See the example requests in the following section for more information.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>An array of <code>LifecyclePolicy</code> objects that define the file system's\n        <code>LifecycleConfiguration</code> object. A <code>LifecycleConfiguration</code> object\n      informs EFS lifecycle management and EFS Intelligent-Tiering of the following:</p>\n         <ul>\n            <li>\n               <p>When to move files in the file system from primary storage to the IA storage class.</p>\n            </li>\n            <li>\n               <p>When to move files that are in IA storage to primary storage.</p>\n            </li>\n         </ul>\n         <note>\n            <p>When using the <code>put-lifecycle-configuration</code> CLI command or the\n          <code>PutLifecycleConfiguration</code> API action, Amazon EFS requires that each\n          <code>LifecyclePolicy</code> object have only a single transition. This means that in a\n        request body, <code>LifecyclePolicies</code> must be structured as an array of\n          <code>LifecyclePolicy</code> objects, one object for each transition,\n          <code>TransitionToIA</code>, <code>TransitionToPrimaryStorageClass</code>. See the example\n        requests in the following section for more information.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3100,7 +3103,7 @@
                 "SourceFileSystemArn": {
                     "target": "com.amazonaws.efs#FileSystemArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the current source file system in the replication configuration.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the current source file system in the replication\n      configuration.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3121,7 +3124,7 @@
                 "Destinations": {
                     "target": "com.amazonaws.efs#Destinations",
                     "traits": {
-                        "smithy.api#documentation": "<p>Array of destination objects. Only one destination object is supported.</p>",
+                        "smithy.api#documentation": "<p>An array of destination objects. Only one destination object is supported.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3147,7 +3150,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returned if the specified file system did not have a replication configuration.</p>",
+                "smithy.api#documentation": "<p>Returned if the specified file system does not have a replication\n            configuration.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
             }
@@ -3321,7 +3324,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returned if one of the specified security groups doesn't exist in the subnet's\n            VPC.</p>",
+                "smithy.api#documentation": "<p>Returned if one of the specified security groups doesn't exist in the subnet's\n            virtual private cloud (VPC).</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -3498,6 +3501,22 @@
                 "target": "com.amazonaws.efs#Tag"
             }
         },
+        "com.amazonaws.efs#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "ErrorCode": {
+                    "target": "com.amazonaws.efs#ErrorCode"
+                },
+                "Message": {
+                    "target": "com.amazonaws.efs#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returned when the <code>CreateAccessPoint</code> API action is called too quickly and \n            the number of Access Points in the account is nearing the limit of 120.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
         "com.amazonaws.efs#ThroughputLimitExceeded": {
             "type": "structure",
             "members": {
@@ -3560,7 +3579,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returned if you don’t wait at least 24 hours before changing the throughput mode, or\n            decreasing the Provisioned Throughput value.</p>",
+                "smithy.api#documentation": "<p>Returned if you don’t wait at least 24 hours before either changing the throughput mode, or\n            decreasing the Provisioned Throughput value.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429
             }
