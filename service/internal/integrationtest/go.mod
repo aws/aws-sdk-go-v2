@@ -31,10 +31,10 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.13.3
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.18.0
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.15.3
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.34.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.35.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.17.3
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.18.5
-	github.com/aws/aws-sdk-go-v2/service/efs v1.16.3
+	github.com/aws/aws-sdk-go-v2/service/efs v1.17.0
 	github.com/aws/aws-sdk-go-v2/service/elasticache v1.20.4
 	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.14.3
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing v1.14.3
@@ -51,7 +51,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/iam v1.18.3
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.12.3
 	github.com/aws/aws-sdk-go-v2/service/iot v1.24.0
-	github.com/aws/aws-sdk-go-v2/service/kinesis v1.15.3
+	github.com/aws/aws-sdk-go-v2/service/kinesis v1.15.4
 	github.com/aws/aws-sdk-go-v2/service/kms v1.16.3
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.22.0
 	github.com/aws/aws-sdk-go-v2/service/lightsail v1.18.3
@@ -66,7 +66,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.20.3
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.12.3
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.15.3
-	github.com/aws/aws-sdk-go-v2/service/s3 v1.26.4
+	github.com/aws/aws-sdk-go-v2/service/s3 v1.26.5
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.21.4
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.15.4
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.14.0
@@ -81,7 +81,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sts v1.16.3
 	github.com/aws/aws-sdk-go-v2/service/support v1.13.3
 	github.com/aws/aws-sdk-go-v2/service/timestreamwrite v1.13.3
-	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.6.3
+	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.6.4
 	github.com/aws/aws-sdk-go-v2/service/waf v1.11.3
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.12.3
 	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.19.0

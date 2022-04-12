@@ -1,8 +1,0 @@
-{
-    "id": "98677bd0-46aa-4f3a-bc26-e639c96b0668",
-    "type": "feature",
-    "description": "This release adds new APIs DeleteInsight to deletes the insight along with the associated anomalies, events and recommendations.",
-    "modules": [
-        "service/devopsguru"
-    ]
-}

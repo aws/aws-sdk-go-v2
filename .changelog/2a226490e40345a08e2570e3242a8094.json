@@ -1,8 +1,0 @@
-{
-    "id": "2a226490-e403-45a0-8e25-70e3242a8094",
-    "type": "feature",
-    "description": "Amazon EFS adds support for a ThrottlingException when using the CreateAccessPoint API if the account is nearing the AccessPoint limit(120).",
-    "modules": [
-        "service/efs"
-    ]
-}

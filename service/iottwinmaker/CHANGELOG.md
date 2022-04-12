@@ -1,3 +1,7 @@
+# v1.6.0 (2022-04-12)
+
+* **Feature**: This release adds the following new features: 1) ListEntities API now supports search using ExternalId. 2) BatchPutPropertyValue and GetPropertyValueHistory API now allows users to represent time in sub-second level precisions.
+
 # v1.5.3 (2022-03-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions
