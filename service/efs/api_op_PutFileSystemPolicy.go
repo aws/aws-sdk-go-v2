@@ -52,13 +52,14 @@ type PutFileSystemPolicyInput struct {
 	// This member is required.
 	Policy *string
 
-	// (Optional) A flag to indicate whether to bypass the FileSystemPolicy lockout
-	// safety check. The policy lockout safety check determines whether the policy in
-	// the request will prevent the principal making the request will be locked out
-	// from making future PutFileSystemPolicy requests on the file system. Set
-	// BypassPolicyLockoutSafetyCheck to True only when you intend to prevent the
-	// principal that is making the request from making a subsequent
-	// PutFileSystemPolicy request on the file system. The default value is False.
+	// (Optional) A boolean that specifies whether or not to bypass the
+	// FileSystemPolicy lockout safety check. The lockout safety check determines
+	// whether the policy in the request will lock out, or prevent, the IAM principal
+	// that is making the request from making future PutFileSystemPolicy requests on
+	// this file system. Set BypassPolicyLockoutSafetyCheck to True only when you
+	// intend to prevent the IAM principal that is making the request from making
+	// subsequent PutFileSystemPolicy requests on this file system. The default value
+	// is False.
 	BypassPolicyLockoutSafetyCheck bool
 
 	noSmithyDocumentSerde

@@ -34,20 +34,10 @@ func (c *Client) GetPropertyValueHistory(ctx context.Context, params *GetPropert
 
 type GetPropertyValueHistoryInput struct {
 
-	// The date and time of the latest property value to return.
-	//
-	// This member is required.
-	EndDateTime *time.Time
-
 	// A list of properties whose value histories the request retrieves.
 	//
 	// This member is required.
 	SelectedProperties []string
-
-	// The date and time of the earliest property value to return.
-	//
-	// This member is required.
-	StartDateTime *time.Time
 
 	// The ID of the workspace.
 	//
@@ -59,6 +49,15 @@ type GetPropertyValueHistoryInput struct {
 
 	// The ID of the component type.
 	ComponentTypeId *string
+
+	// The date and time of the latest property value to return.
+	//
+	// Deprecated: This field is deprecated and will throw an error in the future. Use
+	// endTime instead.
+	EndDateTime *time.Time
+
+	// Timestamp represented in ISO 8601 format
+	EndTime *string
 
 	// The ID of the entity.
 	EntityId *string
@@ -78,6 +77,15 @@ type GetPropertyValueHistoryInput struct {
 
 	// A list of objects that filter the property value history request.
 	PropertyFilters []types.PropertyFilter
+
+	// The date and time of the earliest property value to return.
+	//
+	// Deprecated: This field is deprecated and will throw an error in the future. Use
+	// startTime instead.
+	StartDateTime *time.Time
+
+	// Timestamp represented in ISO 8601 format
+	StartTime *string
 
 	noSmithyDocumentSerde
 }

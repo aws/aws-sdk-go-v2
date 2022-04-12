@@ -889,9 +889,6 @@ func validatePropertyValue(v *types.PropertyValue) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PropertyValue"}
-	if v.Timestamp == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Timestamp"))
-	}
 	if v.Value == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
@@ -1173,12 +1170,6 @@ func validateOpGetPropertyValueHistoryInput(v *GetPropertyValueHistoryInput) err
 	}
 	if v.SelectedProperties == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SelectedProperties"))
-	}
-	if v.StartDateTime == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StartDateTime"))
-	}
-	if v.EndDateTime == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EndDateTime"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

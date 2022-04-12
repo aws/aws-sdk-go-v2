@@ -17,9 +17,10 @@ import (
 // file system path, to any file system request made through the access point. The
 // operating system user and group override any identity information provided by
 // the NFS client. The file system path is exposed as the access point's root
-// directory. Applications using the access point can only access data in its own
-// directory and below. To learn more, see Mounting a file system using EFS access
-// points (https://docs.aws.amazon.com/efs/latest/ug/efs-access-points.html). This
+// directory. Applications using the access point can only access data in the
+// application's own directory and any subdirectories. To learn more, see Mounting
+// a file system using EFS access points
+// (https://docs.aws.amazon.com/efs/latest/ug/efs-access-points.html). This
 // operation requires permissions for the elasticfilesystem:CreateAccessPoint
 // action.
 func (c *Client) CreateAccessPoint(ctx context.Context, params *CreateAccessPointInput, optFns ...func(*Options)) (*CreateAccessPointOutput, error) {
@@ -59,7 +60,7 @@ type CreateAccessPointInput struct {
 	// access point. The clients using the access point can only access the root
 	// directory and below. If the RootDirectory > Path specified does not exist, EFS
 	// creates it and applies the CreationInfo settings when a client connects to an
-	// access point. When specifying a RootDirectory, you need to provide the Path, and
+	// access point. When specifying a RootDirectory, you must provide the Path, and
 	// the CreationInfo. Amazon EFS creates a root directory only if you have provided
 	// the CreationInfo: OwnUid, OwnGID, and permissions for the directory. If you do
 	// not provide this information, Amazon EFS does not create the root directory. If

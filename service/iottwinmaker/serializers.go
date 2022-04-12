@@ -1118,6 +1118,11 @@ func awsRestjson1_serializeOpDocumentGetPropertyValueHistoryInput(v *GetProperty
 		ok.Double(smithytime.FormatEpochSeconds(*v.EndDateTime))
 	}
 
+	if v.EndTime != nil {
+		ok := object.Key("endTime")
+		ok.String(*v.EndTime)
+	}
+
 	if v.EntityId != nil {
 		ok := object.Key("entityId")
 		ok.String(*v.EntityId)
@@ -1162,6 +1167,11 @@ func awsRestjson1_serializeOpDocumentGetPropertyValueHistoryInput(v *GetProperty
 	if v.StartDateTime != nil {
 		ok := object.Key("startDateTime")
 		ok.Double(smithytime.FormatEpochSeconds(*v.StartDateTime))
+	}
+
+	if v.StartTime != nil {
+		ok := object.Key("startTime")
+		ok.String(*v.StartTime)
 	}
 
 	return nil
@@ -2691,6 +2701,10 @@ func awsRestjson1_serializeDocumentListEntitiesFilter(v types.ListEntitiesFilter
 		av := object.Key("componentTypeId")
 		av.String(uv.Value)
 
+	case *types.ListEntitiesFilterMemberExternalId:
+		av := object.Key("externalId")
+		av.String(uv.Value)
+
 	case *types.ListEntitiesFilterMemberParentEntityId:
 		av := object.Key("parentEntityId")
 		av.String(uv.Value)
@@ -2877,6 +2891,11 @@ func awsRestjson1_serializeDocumentPropertyRequests(v map[string]types.PropertyR
 func awsRestjson1_serializeDocumentPropertyValue(v *types.PropertyValue, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Time != nil {
+		ok := object.Key("time")
+		ok.String(*v.Time)
+	}
 
 	if v.Timestamp != nil {
 		ok := object.Key("timestamp")

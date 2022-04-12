@@ -40,6 +40,9 @@ func ExampleListEntitiesFilter_outputUsage() {
 	case *types.ListEntitiesFilterMemberComponentTypeId:
 		_ = v.Value // Value is string
 
+	case *types.ListEntitiesFilterMemberExternalId:
+		_ = v.Value // Value is string
+
 	case *types.ListEntitiesFilterMemberParentEntityId:
 		_ = v.Value // Value is string
 
@@ -52,5 +55,6 @@ func ExampleListEntitiesFilter_outputUsage() {
 	}
 }
 
+var _ *string
 var _ *string
 var _ *string

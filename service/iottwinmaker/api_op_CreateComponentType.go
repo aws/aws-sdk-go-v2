@@ -13,8 +13,7 @@ import (
 	"time"
 )
 
-// Creates a component type. TwinMaker is in public preview and is subject to
-// change.
+// Creates a component type.
 func (c *Client) CreateComponentType(ctx context.Context, params *CreateComponentTypeInput, optFns ...func(*Options)) (*CreateComponentTypeOutput, error) {
 	if params == nil {
 		params = &CreateComponentTypeInput{}

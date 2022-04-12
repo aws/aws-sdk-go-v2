@@ -138,7 +138,7 @@ type ComponentUpdateRequest struct {
 // The data connector.
 type DataConnector struct {
 
-	// A Boolean value that specifies whether the data connector is native to
+	// A Boolean value that specifies whether the data connector is native to IoT
 	// TwinMaker.
 	IsNative *bool
 
@@ -380,6 +380,7 @@ func (*ListComponentTypesFilterMemberNamespace) isListComponentTypesFilter() {}
 //
 // The following types satisfy this interface:
 //  ListEntitiesFilterMemberComponentTypeId
+//  ListEntitiesFilterMemberExternalId
 //  ListEntitiesFilterMemberParentEntityId
 type ListEntitiesFilter interface {
 	isListEntitiesFilter()
@@ -393,6 +394,16 @@ type ListEntitiesFilterMemberComponentTypeId struct {
 }
 
 func (*ListEntitiesFilterMemberComponentTypeId) isListEntitiesFilter() {}
+
+// The external-Id property of a component. The external-Id property is the primary
+// key of an external storage system.
+type ListEntitiesFilterMemberExternalId struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*ListEntitiesFilterMemberExternalId) isListEntitiesFilter() {}
 
 // The parent of the entities in the list.
 type ListEntitiesFilterMemberParentEntityId struct {
@@ -562,15 +573,19 @@ type PropertyResponse struct {
 // An object that contains information about a value for a time series property.
 type PropertyValue struct {
 
-	// The timestamp of a value for a time series property.
-	//
-	// This member is required.
-	Timestamp *time.Time
-
 	// An object that specifies a value for a time series property.
 	//
 	// This member is required.
 	Value *DataValue
+
+	// Timestamp represented in ISO 8601 format
+	Time *string
+
+	// The timestamp of a value for a time series property.
+	//
+	// Deprecated: This field is deprecated and will throw an error in the future. Use
+	// time instead.
+	Timestamp *time.Time
 
 	noSmithyDocumentSerde
 }

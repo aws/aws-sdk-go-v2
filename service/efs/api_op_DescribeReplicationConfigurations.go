@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the replication configurations for either a specific file system, or
-// all configurations for the Amazon Web Services account in an Amazon Web Services
-// Region if a file system is not specified.
+// Retrieves the replication configuration for a specific file system. If a file
+// system is not specified, all of the replication configurations for the Amazon
+// Web Services account in an Amazon Web Services Region are retrieved.
 func (c *Client) DescribeReplicationConfigurations(ctx context.Context, params *DescribeReplicationConfigurationsInput, optFns ...func(*Options)) (*DescribeReplicationConfigurationsOutput, error) {
 	if params == nil {
 		params = &DescribeReplicationConfigurationsInput{}
@@ -31,15 +31,15 @@ func (c *Client) DescribeReplicationConfigurations(ctx context.Context, params *
 
 type DescribeReplicationConfigurationsInput struct {
 
-	// You can retrieve replication configurations for a specific file system by
-	// providing a file system ID.
+	// You can retrieve the replication configuration for a specific file system by
+	// providing its file system ID.
 	FileSystemId *string
 
-	// (Optional) You can optionally specify the MaxItems parameter to limit the number
-	// of objects returned in a response. The default value is 100.
+	// (Optional) To limit the number of objects returned in a response, you can
+	// specify the MaxItems parameter. The default value is 100.
 	MaxResults *int32
 
-	// NextToken is present if the response is paginated. You can use NextMarker in a
+	// NextToken is present if the response is paginated. You can use NextToken in a
 	// subsequent request to fetch the next page of output.
 	NextToken *string
 
@@ -52,7 +52,7 @@ type DescribeReplicationConfigurationsOutput struct {
 	// fetch the additional descriptions.
 	NextToken *string
 
-	// The collection of replication configurations returned.
+	// The collection of replication configurations that is returned.
 	Replications []types.ReplicationConfigurationDescription
 
 	// Metadata pertaining to the operation's result.

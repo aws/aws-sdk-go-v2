@@ -11,7 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the event source configuration.
+// Enables or disables integration with a service that can be integrated with
+// DevOps Guru. The one service that can be integrated with DevOps Guru is Amazon
+// CodeGuru Profiler, which can produce proactive recommendations which can be
+// stored and viewed in DevOps Guru.
 func (c *Client) UpdateEventSourcesConfig(ctx context.Context, params *UpdateEventSourcesConfigInput, optFns ...func(*Options)) (*UpdateEventSourcesConfigOutput, error) {
 	if params == nil {
 		params = &UpdateEventSourcesConfigInput{}
@@ -29,7 +32,8 @@ func (c *Client) UpdateEventSourcesConfig(ctx context.Context, params *UpdateEve
 
 type UpdateEventSourcesConfigInput struct {
 
-	// The name of the event source.
+	// Configuration information about the integration of DevOps Guru as the Consumer
+	// via EventBridge with another AWS Service.
 	EventSources *types.EventSourcesConfig
 
 	noSmithyDocumentSerde

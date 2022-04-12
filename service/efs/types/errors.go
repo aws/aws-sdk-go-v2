@@ -7,8 +7,8 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// Returned if the access point you are trying to create already exists, with the
-// creation token you provided in the request.
+// Returned if the access point that you are trying to create already exists, with
+// the creation token you provided in the request.
 type AccessPointAlreadyExists struct {
 	Message *string
 
@@ -31,7 +31,9 @@ func (e *AccessPointAlreadyExists) ErrorCode() string             { return "Acce
 func (e *AccessPointAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Returned if the Amazon Web Services account has already created the maximum
-// number of access points allowed per file system.
+// number of access points allowed per file system. For more informaton, see
+// https://docs.aws.amazon.com/efs/latest/ug/limits.html#limits-efs-resources-per-account-per-region
+// (https://docs.aws.amazon.com/efs/latest/ug/limits.html#limits-efs-resources-per-account-per-region).
 type AccessPointLimitExceeded struct {
 	Message *string
 
@@ -75,8 +77,8 @@ func (e *AccessPointNotFound) ErrorCode() string             { return "AccessPoi
 func (e *AccessPointNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Returned if the Availability Zone that was specified for a mount target is
-// different from the Availability Zone that was specified for One Zone storage
-// classes. For more information, see Regional and One Zone storage redundancy
+// different from the Availability Zone that was specified for One Zone storage.
+// For more information, see Regional and One Zone storage redundancy
 // (https://docs.aws.amazon.com/efs/latest/ug/availability-durability.html).
 type AvailabilityZonesMismatch struct {
 	Message *string
@@ -278,7 +280,7 @@ func (e *IncorrectMountTargetState) ErrorFault() smithy.ErrorFault { return smit
 // value might be returned when you try to create a file system in provisioned
 // throughput mode, when you attempt to increase the provisioned throughput of an
 // existing file system, or when you attempt to change an existing file system from
-// bursting to provisioned throughput mode. Try again later.
+// Bursting Throughput to Provisioned Throughput mode. Try again later.
 type InsufficientThroughputCapacity struct {
 	Message *string
 
@@ -320,9 +322,9 @@ func (e *InternalServerError) ErrorMessage() string {
 func (e *InternalServerError) ErrorCode() string             { return "InternalServerError" }
 func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// Returned if the FileSystemPolicy is is malformed or contains an error such as an
-// invalid parameter value or a missing required parameter. Returned in the case of
-// a policy lockout safety check error.
+// Returned if the FileSystemPolicy is malformed or contains an error such as a
+// parameter value that is not valid or a missing required parameter. Returned in
+// the case of a policy lockout safety check error.
 type InvalidPolicyException struct {
 	Message *string
 
@@ -410,12 +412,12 @@ func (e *MountTargetNotFound) ErrorCode() string             { return "MountTarg
 func (e *MountTargetNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The calling account has reached the limit for elastic network interfaces for the
-// specific Amazon Web Services Region. The client should try to delete some
-// elastic network interfaces or get the account limit raised. For more
-// information, see Amazon VPC Limits
+// specific Amazon Web Services Region. Either delete some network interfaces or
+// request that the account quota be raised. For more information, see Amazon VPC
+// Quotas
 // (https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Appendix_Limits.html)
-// in the Amazon VPC User Guide (see the Network interfaces per VPC entry in the
-// table).
+// in the Amazon VPC User Guide (see the Network interfaces per Region entry in the
+// Network interfaces table).
 type NetworkInterfaceLimitExceeded struct {
 	Message *string
 
@@ -480,7 +482,7 @@ func (e *PolicyNotFound) ErrorMessage() string {
 func (e *PolicyNotFound) ErrorCode() string             { return "PolicyNotFound" }
 func (e *PolicyNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Returned if the specified file system did not have a replication configuration.
+// Returned if the specified file system does not have a replication configuration.
 type ReplicationNotFound struct {
 	Message *string
 
@@ -524,7 +526,7 @@ func (e *SecurityGroupLimitExceeded) ErrorCode() string             { return "Se
 func (e *SecurityGroupLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Returned if one of the specified security groups doesn't exist in the subnet's
-// VPC.
+// virtual private cloud (VPC).
 type SecurityGroupNotFound struct {
 	Message *string
 
@@ -566,6 +568,28 @@ func (e *SubnetNotFound) ErrorMessage() string {
 func (e *SubnetNotFound) ErrorCode() string             { return "SubnetNotFound" }
 func (e *SubnetNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// Returned when the CreateAccessPoint API action is called too quickly and the
+// number of Access Points in the account is nearing the limit of 120.
+type ThrottlingException struct {
+	Message *string
+
+	ErrorCode_ *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ThrottlingException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ThrottlingException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
+func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // Returned if the throughput mode or amount of provisioned throughput can't be
 // changed because the throughput limit of 1024 MiB/s has been reached.
 type ThroughputLimitExceeded struct {
@@ -588,8 +612,8 @@ func (e *ThroughputLimitExceeded) ErrorMessage() string {
 func (e *ThroughputLimitExceeded) ErrorCode() string             { return "ThroughputLimitExceeded" }
 func (e *ThroughputLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Returned if you don’t wait at least 24 hours before changing the throughput
-// mode, or decreasing the Provisioned Throughput value.
+// Returned if you don’t wait at least 24 hours before either changing the
+// throughput mode, or decreasing the Provisioned Throughput value.
 type TooManyRequests struct {
 	Message *string
 

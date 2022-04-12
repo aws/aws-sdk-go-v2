@@ -39,10 +39,14 @@ type AccountInsightHealth struct {
 	noSmithyDocumentSerde
 }
 
-// Information about your account's integration with Amazon CodeGuru Profiler.
+// Information about your account's integration with Amazon CodeGuru Profiler. This
+// returns whether DevOps Guru is configured to consume recommendations generated
+// from Amazon CodeGuru Profiler.
 type AmazonCodeGuruProfilerIntegration struct {
 
-	// The status of the CodeGuru Profiler integration.
+	// The status of the CodeGuru Profiler integration. Specifies if DevOps Guru is
+	// enabled to consume recommendations that are generated from Amazon CodeGuru
+	// Profiler.
 	Status EventSourceOptInStatus
 
 	noSmithyDocumentSerde
@@ -94,8 +98,8 @@ type AnomalySourceDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Metadata about an anomaly. The anomaly is detected using analysis of the metric
-// data  over a period of time
+// Metadata about the detection source that generates proactive anomalies. The
+// anomaly is detected using analysis of the metric data  over a period of time
 type AnomalySourceMetadata struct {
 
 	// The source of the anomaly.
@@ -373,10 +377,12 @@ type EventResource struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the event sources.
+// Information about the integration of DevOps Guru as consumer with another AWS
+// service, such as AWS CodeGuru Profiler via EventBridge.
 type EventSourcesConfig struct {
 
-	//
+	// Information about whether DevOps Guru is configured to consume recommendations
+	// which are generated from AWS CodeGuru Profiler.
 	AmazonCodeGuruProfiler *AmazonCodeGuruProfilerIntegration
 
 	noSmithyDocumentSerde
@@ -542,13 +548,18 @@ type ListInsightsStatusFilter struct {
 // channel is Amazon Simple Notification Service (Amazon SNS). If you use an Amazon
 // SNS topic in another account, you must attach a policy to it that grants DevOps
 // Guru permission to it notifications. DevOps Guru adds the required policy on
-// your behalf to send notifications using Amazon SNS in your account. For more
-// information, see Permissions for cross account Amazon SNS topics
+// your behalf to send notifications using Amazon SNS in your account. DevOps Guru
+// only supports standard SNS topics. For more information, see Permissions for
+// cross account Amazon SNS topics
 // (https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-required-permissions.html).
-// If you use an Amazon SNS topic that is encrypted by an Amazon Web Services Key
-// Management Service customer-managed key (CMK), then you must add permissions to
-// the CMK. For more information, see Permissions for Amazon Web Services
-// KMS–encrypted Amazon SNS topics
+// If you use an Amazon SNS topic in another account, you must attach a policy to
+// it that grants DevOps Guru permission to it notifications. DevOps Guru adds the
+// required policy on your behalf to send notifications using Amazon SNS in your
+// account. For more information, see Permissions for cross account Amazon SNS
+// topics. If you use an Amazon SNS topic that is encrypted by an Amazon Web
+// Services Key Management Service customer-managed key (CMK), then you must add
+// permissions to the CMK. For more information, see Permissions for Amazon Web
+// Services KMS–encrypted Amazon SNS topics
 // (https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html).
 type NotificationChannel struct {
 
@@ -571,13 +582,18 @@ type NotificationChannelConfig struct {
 	// notifications when insights are created. If you use an Amazon SNS topic in
 	// another account, you must attach a policy to it that grants DevOps Guru
 	// permission to it notifications. DevOps Guru adds the required policy on your
-	// behalf to send notifications using Amazon SNS in your account. For more
-	// information, see Permissions for cross account Amazon SNS topics
+	// behalf to send notifications using Amazon SNS in your account. DevOps Guru only
+	// supports standard SNS topics. For more information, see Permissions for cross
+	// account Amazon SNS topics
 	// (https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-required-permissions.html).
-	// If you use an Amazon SNS topic that is encrypted by an Amazon Web Services Key
-	// Management Service customer-managed key (CMK), then you must add permissions to
-	// the CMK. For more information, see Permissions for Amazon Web Services
-	// KMS–encrypted Amazon SNS topics
+	// If you use an Amazon SNS topic in another account, you must attach a policy to
+	// it that grants DevOps Guru permission to it notifications. DevOps Guru adds the
+	// required policy on your behalf to send notifications using Amazon SNS in your
+	// account. For more information, see Permissions for cross account Amazon SNS
+	// topics. If you use an Amazon SNS topic that is encrypted by an Amazon Web
+	// Services Key Management Service customer-managed key (CMK), then you must add
+	// permissions to the CMK. For more information, see Permissions for Amazon Web
+	// Services KMS–encrypted Amazon SNS topics
 	// (https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html).
 	//
 	// This member is required.
@@ -1028,7 +1044,7 @@ type ProactiveAnomalySummary struct {
 	// anomaly. The one supported source is Amazon CloudWatch metrics.
 	SourceDetails *AnomalySourceDetails
 
-	// Returns the metadata of the source.
+	// The metadata of the source which detects proactive anomalies.
 	SourceMetadata *AnomalySourceMetadata
 
 	// The status of the anomaly.
@@ -1785,13 +1801,17 @@ type ServiceResourceCost struct {
 // topic. If you use an Amazon SNS topic in another account, you must attach a
 // policy to it that grants DevOps Guru permission to it notifications. DevOps Guru
 // adds the required policy on your behalf to send notifications using Amazon SNS
-// in your account. For more information, see Permissions for cross account Amazon
-// SNS topics
+// in your account. DevOps Guru only supports standard SNS topics. For more
+// information, see Permissions for cross account Amazon SNS topics
 // (https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-required-permissions.html).
-// If you use an Amazon SNS topic that is encrypted by an Amazon Web Services Key
-// Management Service customer-managed key (CMK), then you must add permissions to
-// the CMK. For more information, see Permissions for Amazon Web Services
-// KMS–encrypted Amazon SNS topics
+// If you use an Amazon SNS topic in another account, you must attach a policy to
+// it that grants DevOps Guru permission to it notifications. DevOps Guru adds the
+// required policy on your behalf to send notifications using Amazon SNS in your
+// account. For more information, see Permissions for cross account Amazon SNS
+// topics. If you use an Amazon SNS topic that is encrypted by an Amazon Web
+// Services Key Management Service customer-managed key (CMK), then you must add
+// permissions to the CMK. For more information, see Permissions for Amazon Web
+// Services KMS–encrypted Amazon SNS topics
 // (https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html).
 type SnsChannelConfig struct {
 

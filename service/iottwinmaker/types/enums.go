@@ -98,6 +98,7 @@ type PropertyUpdateType string
 const (
 	PropertyUpdateTypeUpdate PropertyUpdateType = "UPDATE"
 	PropertyUpdateTypeDelete PropertyUpdateType = "DELETE"
+	PropertyUpdateTypeCreate PropertyUpdateType = "CREATE"
 )
 
 // Values returns all known values for PropertyUpdateType. Note that this can be
@@ -107,6 +108,7 @@ func (PropertyUpdateType) Values() []PropertyUpdateType {
 	return []PropertyUpdateType{
 		"UPDATE",
 		"DELETE",
+		"CREATE",
 	}
 }
 

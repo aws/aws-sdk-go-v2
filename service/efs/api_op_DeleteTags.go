@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// DEPRECATED - DeleteTags is deprecated and not maintained. Please use the API
-// action to remove tags from EFS resources. Deletes the specified tags from a file
+// DEPRECATED - DeleteTags is deprecated and not maintained. To remove tags from
+// EFS resources, use the API action. Deletes the specified tags from a file
 // system. If the DeleteTags request includes a tag key that doesn't exist, Amazon
 // EFS ignores it and doesn't cause an error. For more information about tags and
 // related restrictions, see Tag restrictions

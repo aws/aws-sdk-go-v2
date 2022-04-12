@@ -1,0 +1,8 @@
+{
+    "id": "1312fa3e-0ba9-4e8e-b54a-61db8efe7f23",
+    "type": "feature",
+    "description": "This release adds the following new features: 1) ListEntities API now supports search using ExternalId. 2) BatchPutPropertyValue and GetPropertyValueHistory API now allows users to represent time in sub-second level precisions.",
+    "modules": [
+        "service/iottwinmaker"
+    ]
+}

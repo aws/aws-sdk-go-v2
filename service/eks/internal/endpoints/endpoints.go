@@ -310,19 +310,24 @@ var defaultPartitions = endpoints.Partitions{
 				Variant: endpoints.FIPSVariant,
 			}: {
 				Hostname:          "eks-fips.{region}.c2s.ic.gov",
-				Protocols:         []string{"https"},
+				Protocols:         []string{"http", "https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: 0,
 			}: {
 				Hostname:          "eks.{region}.c2s.ic.gov",
-				Protocols:         []string{"https"},
+				Protocols:         []string{"http", "https"},
 				SignatureVersions: []string{"v4"},
 			},
 		},
 		RegionRegex:    partitionRegexp.AwsIso,
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			endpoints.EndpointKey{
+				Region: "us-iso-east-1",
+			}: endpoints.Endpoint{},
+		},
 	},
 	{
 		ID: "aws-iso-b",
@@ -331,19 +336,24 @@ var defaultPartitions = endpoints.Partitions{
 				Variant: endpoints.FIPSVariant,
 			}: {
 				Hostname:          "eks-fips.{region}.sc2s.sgov.gov",
-				Protocols:         []string{"https"},
+				Protocols:         []string{"http", "https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: 0,
 			}: {
 				Hostname:          "eks.{region}.sc2s.sgov.gov",
-				Protocols:         []string{"https"},
+				Protocols:         []string{"http", "https"},
 				SignatureVersions: []string{"v4"},
 			},
 		},
 		RegionRegex:    partitionRegexp.AwsIsoB,
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			endpoints.EndpointKey{
+				Region: "us-isob-east-1",
+			}: endpoints.Endpoint{},
+		},
 	},
 	{
 		ID: "aws-us-gov",

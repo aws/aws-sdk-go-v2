@@ -40,7 +40,7 @@ type DescribeBackupPolicyInput struct {
 type DescribeBackupPolicyOutput struct {
 
 	// Describes the file system's backup policy, indicating whether automatic backups
-	// are turned on or off..
+	// are turned on or off.
 	BackupPolicy *types.BackupPolicy
 
 	// Metadata pertaining to the operation's result.

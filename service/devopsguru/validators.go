@@ -30,6 +30,26 @@ func (m *validateOpAddNotificationChannel) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteInsight struct {
+}
+
+func (*validateOpDeleteInsight) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteInsight) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteInsightInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteInsightInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeAccountOverview struct {
 }
 
@@ -392,6 +412,10 @@ func (m *validateOpUpdateServiceIntegration) HandleInitialize(ctx context.Contex
 
 func addOpAddNotificationChannelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAddNotificationChannel{}, middleware.After)
+}
+
+func addOpDeleteInsightValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteInsight{}, middleware.After)
 }
 
 func addOpDescribeAccountOverviewValidationMiddleware(stack *middleware.Stack) error {
@@ -800,6 +824,21 @@ func validateOpAddNotificationChannelInput(v *AddNotificationChannelInput) error
 		if err := validateNotificationChannelConfig(v.Config); err != nil {
 			invalidParams.AddNested("Config", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteInsightInput(v *DeleteInsightInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteInsightInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
