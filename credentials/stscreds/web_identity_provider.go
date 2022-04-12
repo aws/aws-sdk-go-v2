@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"strconv"
+	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
@@ -44,6 +45,9 @@ type WebIdentityRoleOptions struct {
 
 	// Session name, if you wish to uniquely identify this session.
 	RoleSessionName string
+
+	// Expiry duration of the STS credentials. Defaults to 15 minutes if not set.
+	Duration time.Duration
 
 	// An IAM policy in JSON format that you want to use as an inline session policy.
 	Policy *string
@@ -104,6 +108,7 @@ func (p *WebIdentityRoleProvider) Retrieve(ctx context.Context) (aws.Credentials
 		sessionName = strconv.FormatInt(sdk.NowTime().UnixNano(), 10)
 	}
 	input := &sts.AssumeRoleWithWebIdentityInput{
+		DurationSeconds:  aws.Int32(int32(p.options.Duration / time.Second)),
 		PolicyArns:       p.options.PolicyARNs,
 		RoleArn:          &p.options.RoleARN,
 		RoleSessionName:  &sessionName,
