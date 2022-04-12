@@ -45,6 +45,9 @@ type WebIdentityRoleOptions struct {
 	// Session name, if you wish to uniquely identify this session.
 	RoleSessionName string
 
+	// An IAM policy in JSON format that you want to use as an inline session policy.
+	Policy *string
+
 	// The Amazon Resource Names (ARNs) of the IAM managed policies that you
 	// want to use as managed session policies.  The policies must exist in the
 	// same account as the role.
@@ -100,12 +103,17 @@ func (p *WebIdentityRoleProvider) Retrieve(ctx context.Context) (aws.Credentials
 		// uses unix time in nanoseconds to uniquely identify sessions.
 		sessionName = strconv.FormatInt(sdk.NowTime().UnixNano(), 10)
 	}
-	resp, err := p.options.Client.AssumeRoleWithWebIdentity(ctx, &sts.AssumeRoleWithWebIdentityInput{
+	input := &sts.AssumeRoleWithWebIdentityInput{
 		PolicyArns:       p.options.PolicyARNs,
 		RoleArn:          &p.options.RoleARN,
 		RoleSessionName:  &sessionName,
 		WebIdentityToken: aws.String(string(b)),
-	}, func(options *sts.Options) {
+	}
+	if p.options.Policy != nil {
+		input.Policy = p.options.Policy
+	}
+
+	resp, err := p.options.Client.AssumeRoleWithWebIdentity(ctx, input, func(options *sts.Options) {
 		options.Retryer = retry.AddWithErrorCodes(options.Retryer, invalidIdentityTokenExceptionCode)
 	})
 	if err != nil {
