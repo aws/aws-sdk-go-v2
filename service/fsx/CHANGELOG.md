@@ -1,3 +1,7 @@
+# v1.23.0 (2022-04-13)
+
+* **Feature**: This release adds support for deploying FSx for ONTAP file systems in a single Availability Zone.
+
 # v1.22.0 (2022-04-05)
 
 * **Feature**: Provide customers more visibility into file system status by adding new "Misconfigured Unavailable" status for Amazon FSx for Windows File Server.

@@ -1,3 +1,7 @@
+# v1.18.0 (2022-04-13)
+
+* **Feature**: Adds support for additional statistics in CloudWatch Metric Streams.
+
 # v1.17.3 (2022-03-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions

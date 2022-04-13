@@ -1,3 +1,11 @@
+# Release (2022-04-13)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.18.0](service/cloudwatch/CHANGELOG.md#v1180-2022-04-13)
+  * **Feature**: Adds support for additional statistics in CloudWatch Metric Streams.
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.23.0](service/fsx/CHANGELOG.md#v1230-2022-04-13)
+  * **Feature**: This release adds support for deploying FSx for ONTAP file systems in a single Availability Zone.
+
 # Release (2022-04-12)
 
 ## General Highlights
