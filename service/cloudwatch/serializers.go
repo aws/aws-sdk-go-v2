@@ -2801,6 +2801,87 @@ func awsAwsquery_serializeDocumentMetricStreamNames(v []string, value query.Valu
 	return nil
 }
 
+func awsAwsquery_serializeDocumentMetricStreamStatisticsAdditionalStatistics(v []string, value query.Value) error {
+	if len(v) == 0 {
+		return nil
+	}
+	array := value.Array("member")
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsquery_serializeDocumentMetricStreamStatisticsConfiguration(v *types.MetricStreamStatisticsConfiguration, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.AdditionalStatistics != nil {
+		objectKey := object.Key("AdditionalStatistics")
+		if err := awsAwsquery_serializeDocumentMetricStreamStatisticsAdditionalStatistics(v.AdditionalStatistics, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.IncludeMetrics != nil {
+		objectKey := object.Key("IncludeMetrics")
+		if err := awsAwsquery_serializeDocumentMetricStreamStatisticsIncludeMetrics(v.IncludeMetrics, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeDocumentMetricStreamStatisticsConfigurations(v []types.MetricStreamStatisticsConfiguration, value query.Value) error {
+	if len(v) == 0 {
+		return nil
+	}
+	array := value.Array("member")
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsquery_serializeDocumentMetricStreamStatisticsConfiguration(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsquery_serializeDocumentMetricStreamStatisticsIncludeMetrics(v []types.MetricStreamStatisticsMetric, value query.Value) error {
+	if len(v) == 0 {
+		return nil
+	}
+	array := value.Array("member")
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsquery_serializeDocumentMetricStreamStatisticsMetric(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsquery_serializeDocumentMetricStreamStatisticsMetric(v *types.MetricStreamStatisticsMetric, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.MetricName != nil {
+		objectKey := object.Key("MetricName")
+		objectKey.String(*v.MetricName)
+	}
+
+	if v.Namespace != nil {
+		objectKey := object.Key("Namespace")
+		objectKey.String(*v.Namespace)
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeDocumentRange(v *types.Range, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -4000,6 +4081,13 @@ func awsAwsquery_serializeOpDocumentPutMetricStreamInput(v *PutMetricStreamInput
 	if v.RoleArn != nil {
 		objectKey := object.Key("RoleArn")
 		objectKey.String(*v.RoleArn)
+	}
+
+	if v.StatisticsConfigurations != nil {
+		objectKey := object.Key("StatisticsConfigurations")
+		if err := awsAwsquery_serializeDocumentMetricStreamStatisticsConfigurations(v.StatisticsConfigurations, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.Tags != nil {

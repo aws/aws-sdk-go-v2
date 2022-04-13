@@ -993,6 +993,80 @@ func validateMetricStat(v *types.MetricStat) error {
 	}
 }
 
+func validateMetricStreamStatisticsConfiguration(v *types.MetricStreamStatisticsConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetricStreamStatisticsConfiguration"}
+	if v.IncludeMetrics == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IncludeMetrics"))
+	} else if v.IncludeMetrics != nil {
+		if err := validateMetricStreamStatisticsIncludeMetrics(v.IncludeMetrics); err != nil {
+			invalidParams.AddNested("IncludeMetrics", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AdditionalStatistics == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AdditionalStatistics"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMetricStreamStatisticsConfigurations(v []types.MetricStreamStatisticsConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetricStreamStatisticsConfigurations"}
+	for i := range v {
+		if err := validateMetricStreamStatisticsConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMetricStreamStatisticsIncludeMetrics(v []types.MetricStreamStatisticsMetric) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetricStreamStatisticsIncludeMetrics"}
+	for i := range v {
+		if err := validateMetricStreamStatisticsMetric(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMetricStreamStatisticsMetric(v *types.MetricStreamStatisticsMetric) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetricStreamStatisticsMetric"}
+	if v.Namespace == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
+	}
+	if v.MetricName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRange(v *types.Range) error {
 	if v == nil {
 		return nil
@@ -1606,6 +1680,11 @@ func validateOpPutMetricStreamInput(v *PutMetricStreamInput) error {
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.StatisticsConfigurations != nil {
+		if err := validateMetricStreamStatisticsConfigurations(v.StatisticsConfigurations); err != nil {
+			invalidParams.AddNested("StatisticsConfigurations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

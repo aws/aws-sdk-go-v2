@@ -504,7 +504,8 @@ type OntapDeploymentType string
 
 // Enum values for OntapDeploymentType
 const (
-	OntapDeploymentTypeMultiAz1 OntapDeploymentType = "MULTI_AZ_1"
+	OntapDeploymentTypeMultiAz1  OntapDeploymentType = "MULTI_AZ_1"
+	OntapDeploymentTypeSingleAz1 OntapDeploymentType = "SINGLE_AZ_1"
 )
 
 // Values returns all known values for OntapDeploymentType. Note that this can be
@@ -513,6 +514,7 @@ const (
 func (OntapDeploymentType) Values() []OntapDeploymentType {
 	return []OntapDeploymentType{
 		"MULTI_AZ_1",
+		"SINGLE_AZ_1",
 	}
 }
 

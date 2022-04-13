@@ -584,7 +584,18 @@ type CreateFileSystemLustreConfiguration struct {
 type CreateFileSystemOntapConfiguration struct {
 
 	// Specifies the FSx for ONTAP file system deployment type to use in creating the
-	// file system. MULTI_AZ_1 is the supported ONTAP deployment type.
+	// file system.
+	//
+	// * MULTI_AZ_1 - (Default) A high availability file system
+	// configured for Multi-AZ redundancy to tolerate temporary Availability Zone (AZ)
+	// unavailability.
+	//
+	// * SINGLE_AZ_1 - A file system configured for Single-AZ
+	// redundancy.
+	//
+	// For information about the use cases for Multi-AZ and Single-AZ
+	// deployments, refer to Choosing Multi-AZ or Single-AZ file system deployment
+	// (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/high-availability-multiAZ.html).
 	//
 	// This member is required.
 	DeploymentType OntapDeploymentType
@@ -608,11 +619,11 @@ type CreateFileSystemOntapConfiguration struct {
 	// The SSD IOPS configuration for the FSx for ONTAP file system.
 	DiskIopsConfiguration *DiskIopsConfiguration
 
-	// Specifies the IP address range in which the endpoints to access your file system
-	// will be created. By default, Amazon FSx selects an unused IP address range for
-	// you from the 198.19.* range. The Endpoint IP address range you select for your
-	// file system must exist outside the VPC's CIDR range and must be at least /30 or
-	// larger.
+	// (Multi-AZ only) Specifies the IP address range in which the endpoints to access
+	// your file system will be created. By default, Amazon FSx selects an unused IP
+	// address range for you from the 198.19.* range. The Endpoint IP address range you
+	// select for your file system must exist outside the VPC's CIDR range and must be
+	// at least /30 or larger.
 	EndpointIpAddressRange *string
 
 	// The ONTAP administrative password for the fsxadmin user with which you
@@ -623,10 +634,10 @@ type CreateFileSystemOntapConfiguration struct {
 	// which you want the preferred file server to be located.
 	PreferredSubnetId *string
 
-	// Specifies the virtual private cloud (VPC) route tables in which your file
-	// system's endpoints will be created. You should specify all VPC route tables
-	// associated with the subnets in which your clients are located. By default,
-	// Amazon FSx selects your VPC's default route table.
+	// (Multi-AZ only) Specifies the virtual private cloud (VPC) route tables in which
+	// your file system's endpoints will be created. You should specify all VPC route
+	// tables associated with the subnets in which your clients are located. By
+	// default, Amazon FSx selects your VPC's default route table.
 	RouteTableIds []string
 
 	// A recurring weekly time, in the format D:HH:MM. D is the day of the week, for
@@ -1937,18 +1948,30 @@ type OntapFileSystemConfiguration struct {
 	// specifies 5 AM daily.
 	DailyAutomaticBackupStartTime *string
 
-	// The ONTAP file system deployment type.
+	// Specifies the FSx for ONTAP file system deployment type in use in the file
+	// system.
+	//
+	// * MULTI_AZ_1 - (Default) A high availability file system configured for
+	// Multi-AZ redundancy to tolerate temporary Availability Zone (AZ)
+	// unavailability.
+	//
+	// * SINGLE_AZ_1 - A file system configured for Single-AZ
+	// redundancy.
+	//
+	// For information about the use cases for Multi-AZ and Single-AZ
+	// deployments, refer to Choosing Multi-AZ or Single-AZ file system deployment
+	// (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/high-availability-multiAZ.html).
 	DeploymentType OntapDeploymentType
 
 	// The SSD IOPS configuration for the ONTAP file system, specifying the number of
 	// provisioned IOPS and the provision mode.
 	DiskIopsConfiguration *DiskIopsConfiguration
 
-	// The IP address range in which the endpoints to access your file system are
-	// created. The Endpoint IP address range you select for your file system must
-	// exist outside the VPC's CIDR range and must be at least /30 or larger. If you do
-	// not specify this optional parameter, Amazon FSx will automatically select a CIDR
-	// block for you.
+	// (Multi-AZ only) The IP address range in which the endpoints to access your file
+	// system are created. The Endpoint IP address range you select for your file
+	// system must exist outside the VPC's CIDR range and must be at least /30 or
+	// larger. If you do not specify this optional parameter, Amazon FSx will
+	// automatically select a CIDR block for you.
 	EndpointIpAddressRange *string
 
 	// The Management and Intercluster endpoints that are used to access data or to
@@ -1962,7 +1985,8 @@ type OntapFileSystemConfiguration struct {
 	// Amazon VPC User Guide.
 	PreferredSubnetId *string
 
-	// The VPC route tables in which your file system's endpoints are created.
+	// (Multi-AZ only) The VPC route tables in which your file system's endpoints are
+	// created.
 	RouteTableIds []string
 
 	// The sustained throughput of an Amazon FSx file system in Megabytes per second

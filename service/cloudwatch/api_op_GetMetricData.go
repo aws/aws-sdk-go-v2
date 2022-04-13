@@ -13,19 +13,28 @@ import (
 	"time"
 )
 
-// You can use the GetMetricData API to retrieve as many as 500 different metrics
-// in a single request, with a total of as many as 100,800 data points. You can
-// also optionally perform math expressions on the values of the returned
-// statistics, to create new time series that represent new insights into your
-// data. For example, using Lambda metrics, you could divide the Errors metric by
-// the Invocations metric to get an error rate time series. For more information
-// about metric math expressions, see Metric Math Syntax and Functions
+// You can use the GetMetricData API to retrieve CloudWatch metric values. The
+// operation can also include a CloudWatch Metrics Insights query, and one or more
+// metric math functions. A GetMetricData operation that does not include a query
+// can retrieve as many as 500 different metrics in a single request, with a total
+// of as many as 100,800 data points. You can also optionally perform metric math
+// expressions on the values of the returned statistics, to create new time series
+// that represent new insights into your data. For example, using Lambda metrics,
+// you could divide the Errors metric by the Invocations metric to get an error
+// rate time series. For more information about metric math expressions, see Metric
+// Math Syntax and Functions
 // (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax)
-// in the Amazon CloudWatch User Guide. Calls to the GetMetricData API have a
-// different pricing structure than calls to GetMetricStatistics. For more
-// information about pricing, see Amazon CloudWatch Pricing
-// (https://aws.amazon.com/cloudwatch/pricing/). Amazon CloudWatch retains metric
-// data as follows:
+// in the Amazon CloudWatch User Guide. If you include a Metrics Insights query,
+// each GetMetricData operation can include only one query. But the same
+// GetMetricData operation can also retrieve other metrics. Metrics Insights
+// queries can query only the most recent three hours of metric data. For more
+// information about Metrics Insights, see Query your metrics with CloudWatch
+// Metrics Insights
+// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/query_with_cloudwatch-metrics-insights.html).
+// Calls to the GetMetricData API have a different pricing structure than calls to
+// GetMetricStatistics. For more information about pricing, see Amazon CloudWatch
+// Pricing (https://aws.amazon.com/cloudwatch/pricing/). Amazon CloudWatch retains
+// metric data as follows:
 //
 // * Data points with a period of less than 60 seconds are
 // available for 3 hours. These data points are high-resolution metrics and are
@@ -52,7 +61,15 @@ import (
 // were specified when the data was reported to CloudWatch. If you specify a unit,
 // the operation returns only data that was collected with that unit specified. If
 // you specify a unit that does not match the data collected, the results of the
-// operation are null. CloudWatch does not perform unit conversions.
+// operation are null. CloudWatch does not perform unit conversions. Using Metrics
+// Insights queries with metric math You can't mix a Metric Insights query and
+// metric math syntax in the same expression, but you can reference results from a
+// Metrics Insights query within other Metric math expressions. A Metrics Insights
+// query without a GROUP BY clause returns a single time-series (TS), and can be
+// used as input for a metric math expression that expects a single time series. A
+// Metrics Insights query with a GROUP BY clause returns an array of time-series
+// (TS[]), and can be used as input for a metric math expression that expects an
+// array of time series.
 func (c *Client) GetMetricData(ctx context.Context, params *GetMetricDataInput, optFns ...func(*Options)) (*GetMetricDataOutput, error) {
 	if params == nil {
 		params = &GetMetricDataInput{}
@@ -83,7 +100,8 @@ type GetMetricDataInput struct {
 
 	// The metric queries to be returned. A single GetMetricData call can include as
 	// many as 500 MetricDataQuery structures. Each of these structures can specify
-	// either a metric to retrieve, or a math expression to perform on retrieved data.
+	// either a metric to retrieve, a Metrics Insights query, or a math expression to
+	// perform on retrieved data.
 	//
 	// This member is required.
 	MetricDataQueries []types.MetricDataQuery

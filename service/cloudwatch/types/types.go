@@ -207,14 +207,17 @@ type Datapoint struct {
 	noSmithyDocumentSerde
 }
 
-// A dimension is a name/value pair that is part of the identity of a metric. You
-// can assign up to 10 dimensions to a metric. Because dimensions are part of the
-// unique identifier for a metric, whenever you add a unique name/value pair to one
-// of your metrics, you are creating a new variation of that metric.
+// A dimension is a name/value pair that is part of the identity of a metric.
+// Because dimensions are part of the unique identifier for a metric, whenever you
+// add a unique name/value pair to one of your metrics, you are creating a new
+// variation of that metric. For example, many Amazon EC2 metrics publish
+// InstanceId as a dimension name, and the actual instance ID as the value for that
+// dimension. You can assign up to 10 dimensions to a metric.
 type Dimension struct {
 
-	// The name of the dimension. Dimension names must contain only ASCII characters
-	// and must include at least one non-whitespace character.
+	// The name of the dimension. Dimension names must contain only ASCII characters,
+	// must include at least one non-whitespace character, and cannot start with a
+	// colon (:).
 	//
 	// This member is required.
 	Name *string
@@ -518,8 +521,11 @@ type MetricAlarm struct {
 	// ANOMALY_DETECTION_BAND function used as the threshold for the alarm.
 	ThresholdMetricId *string
 
-	// Sets how this alarm is to handle missing data points. If this parameter is
-	// omitted, the default behavior of missing is used.
+	// Sets how this alarm is to handle missing data points. The valid values are
+	// breaching, notBreaching, ignore, and missing. For more information, see
+	// Configuring how CloudWatch alarms treat missing data
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data).
+	// If this parameter is omitted, the default behavior of missing is used.
 	TreatMissingData *string
 
 	// The unit of the metric associated with the alarm.
@@ -531,11 +537,11 @@ type MetricAlarm struct {
 // This structure is used in both GetMetricData and PutMetricAlarm. The supported
 // use of this structure is different for those two operations. When used in
 // GetMetricData, it indicates the metric data to return, and whether this call is
-// just retrieving a batch set of data for one metric, or is performing a math
-// expression on metric data. A single GetMetricData call can include up to 500
-// MetricDataQuery structures. When used in PutMetricAlarm, it enables you to
-// create an alarm based on a metric math expression. Each MetricDataQuery in the
-// array specifies either a metric to retrieve, or a math expression to be
+// just retrieving a batch set of data for one metric, or is performing a Metrics
+// Insights query or a math expression. A single GetMetricData call can include up
+// to 500 MetricDataQuery structures. When used in PutMetricAlarm, it enables you
+// to create an alarm based on a metric math expression. Each MetricDataQuery in
+// the array specifies either a metric to retrieve, or a math expression to be
 // performed on retrieved metrics. A single PutMetricAlarm call can include up to
 // 20 MetricDataQuery structures in the array. The 20 structures can include as
 // many as 10 structures that contain a MetricStat parameter to retrieve a metric,
@@ -565,11 +571,14 @@ type MetricDataQuery struct {
 	// GetMetricData operations.
 	AccountId *string
 
-	// The math expression to be performed on the returned data, if this object is
-	// performing a math expression. This expression can use the Id of the other
-	// metrics to refer to those metrics, and can also use the Id of other expressions
-	// to use the result of those expressions. For more information about metric math
-	// expressions, see Metric Math Syntax and Functions
+	// This field can contain either a Metrics Insights query, or a metric math
+	// expression to be performed on the returned data. For more information about
+	// Metrics Insights queries, see Metrics Insights query components and syntax
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch-metrics-insights-querylanguage)
+	// in the Amazon CloudWatch User Guide. A math expression can use the Id of the
+	// other metrics or queries to refer to those metrics, and can also use the Id of
+	// other expressions to use the result of those expressions. For more information
+	// about metric math expressions, see Metric Math Syntax and Functions
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax)
 	// in the Amazon CloudWatch User Guide. Within each MetricDataQuery object, you
 	// must specify either Expression or MetricStat but not both.
@@ -806,6 +815,56 @@ type MetricStreamEntry struct {
 type MetricStreamFilter struct {
 
 	// The name of the metric namespace in the filter.
+	Namespace *string
+
+	noSmithyDocumentSerde
+}
+
+// By default, a metric stream always sends the MAX, MIN, SUM, and SAMPLECOUNT
+// statistics for each metric that is streamed. This structure contains information
+// for one metric that includes extended statistics in the stream. For more
+// information about extended statistics, see CloudWatch, listed in  CloudWatch
+// statistics definitions
+// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html).
+type MetricStreamStatisticsConfiguration struct {
+
+	// The list of extended statistics that are to be streamed for the metrics listed
+	// in the IncludeMetrics array in this structure. This list can include as many as
+	// 20 statistics. If the OutputFormat for the stream is opentelemetry0.7, the only
+	// valid values are p??  percentile statistics such as p90, p99 and so on. If the
+	// OutputFormat for the stream is json, the valid values are include the
+	// abbreviations for all of the extended statistics listed in  CloudWatch
+	// statistics definitions
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html).
+	// For example, this includes tm98, wm90, PR(:300), and so on.
+	//
+	// This member is required.
+	AdditionalStatistics []string
+
+	// An array of metric name and namespace pairs that stream the extended statistics
+	// listed in the value of the AdditionalStatistics parameter. There can be as many
+	// as 100 pairs in the array. All metrics that match the combination of metric name
+	// and namespace will be streamed with the extended statistics, no matter their
+	// dimensions.
+	//
+	// This member is required.
+	IncludeMetrics []MetricStreamStatisticsMetric
+
+	noSmithyDocumentSerde
+}
+
+// This object contains the information for one metric that is to streamed with
+// extended statistics.
+type MetricStreamStatisticsMetric struct {
+
+	// The name of the metric.
+	//
+	// This member is required.
+	MetricName *string
+
+	// The metric namespace for the metric.
+	//
+	// This member is required.
 	Namespace *string
 
 	noSmithyDocumentSerde

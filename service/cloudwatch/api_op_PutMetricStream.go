@@ -29,10 +29,15 @@ import (
 // * Stream
 // metrics from only the metric namespaces that you list in IncludeFilters.
 //
-// When
-// you use PutMetricStream to create a new metric stream, the stream is created in
-// the running state. If you use it to update an existing stream, the state of the
-// stream is not changed.
+// By
+// default, a metric stream always sends the MAX, MIN, SUM, and SAMPLECOUNT
+// statistics for each metric that is streamed. You can use the
+// StatisticsConfigurations parameter to have the metric stream also send extended
+// statistics in the stream. Streaming extended statistics incurs additional costs.
+// For more information, see Amazon CloudWatch Pricing
+// (https://aws.amazon.com/cloudwatch/pricing/). When you use PutMetricStream to
+// create a new metric stream, the stream is created in the running state. If you
+// use it to update an existing stream, the state of the stream is not changed.
 func (c *Client) PutMetricStream(ctx context.Context, params *PutMetricStreamInput, optFns ...func(*Options)) (*PutMetricStreamOutput, error) {
 	if params == nil {
 		params = &PutMetricStreamInput{}
@@ -94,6 +99,19 @@ type PutMetricStreamInput struct {
 	// namespaces that you specify here. You cannot include IncludeFilters and
 	// ExcludeFilters in the same operation.
 	IncludeFilters []types.MetricStreamFilter
+
+	// By default, a metric stream always sends the MAX, MIN, SUM, and SAMPLECOUNT
+	// statistics for each metric that is streamed. You can use this parameter to have
+	// the metric stream also send extended statistics in the stream. This array can
+	// have up to 100 members. For each entry in this array, you specify one or more
+	// metrics and the list of extended statistics to stream for those metrics. The
+	// extended statistics that you can stream depend on the stream's OutputFormat. If
+	// the OutputFormat is json, you can stream any extended statistic that is
+	// supported by CloudWatch, listed in  CloudWatch statistics definitions
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html).
+	// If the OutputFormat is opentelemetry0.7, you can stream percentile statistics
+	// (p??).
+	StatisticsConfigurations []types.MetricStreamStatisticsConfiguration
 
 	// A list of key-value pairs to associate with the metric stream. You can associate
 	// as many as 50 tags with a metric stream. Tags can help you organize and

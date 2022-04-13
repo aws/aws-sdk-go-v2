@@ -1,0 +1,8 @@
+{
+    "id": "f7879f91-7541-4955-b97c-bfcb3a2e9120",
+    "type": "feature",
+    "description": "Adds support for additional statistics in CloudWatch Metric Streams.",
+    "modules": [
+        "service/cloudwatch"
+    ]
+}
