@@ -1607,14 +1607,14 @@
                 "DeploymentType": {
                     "target": "com.amazonaws.fsx#OntapDeploymentType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the FSx for ONTAP file system deployment type to use in creating the file system. \n            <code>MULTI_AZ_1</code> is the supported ONTAP deployment type.</p>",
+                        "smithy.api#documentation": "<p>Specifies the FSx for ONTAP file system deployment type to use in creating\n            the file system.  </p>\n        <ul>\n            <li>\n                <p>\n                  <code>MULTI_AZ_1</code> - (Default) A high availability file system configured\n                    for Multi-AZ redundancy to tolerate temporary Availability Zone (AZ)\n                    unavailability.  </p>\n            </li>\n            <li>\n                <p>\n                  <code>SINGLE_AZ_1</code> - A file system configured for Single-AZ\n                    redundancy.</p>\n            </li>\n         </ul>\n        <p>For information about the use cases for Multi-AZ and Single-AZ deployments, refer to\n                <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/high-availability-multiAZ.html\">Choosing Multi-AZ or\n                Single-AZ file system deployment</a>. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "EndpointIpAddressRange": {
                     "target": "com.amazonaws.fsx#IpAddressRange",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the IP address range in which the endpoints to access your file system\n            will be created. By default, Amazon FSx selects an unused IP address range for you\n            from the 198.19.* range.</p>\n        <important>\n            <p>The Endpoint IP address range you select for your file system\n            must exist outside the VPC's CIDR range and must be at least /30 or larger.</p>\n        </important>"
+                        "smithy.api#documentation": "<p>(Multi-AZ only) Specifies the IP address range in which the endpoints to access your\n            file system will be created. By default, Amazon FSx selects an unused IP address\n            range for you from the 198.19.* range.</p>\n        <important>\n            <p>The Endpoint IP address range you select for your file system must exist outside\n                the VPC's CIDR range and must be at least /30 or larger.</p>\n        </important>"
                     }
                 },
                 "FsxAdminPassword": {
@@ -1632,19 +1632,19 @@
                 "PreferredSubnetId": {
                     "target": "com.amazonaws.fsx#SubnetId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Required when <code>DeploymentType</code> is set to <code>MULTI_AZ_1</code>. This specifies the subnet \n            in which you want the preferred file server to be located.</p>"
+                        "smithy.api#documentation": "<p>Required when <code>DeploymentType</code> is set to <code>MULTI_AZ_1</code>. This\n            specifies the subnet in which you want the preferred file server to be located.</p>"
                     }
                 },
                 "RouteTableIds": {
                     "target": "com.amazonaws.fsx#RouteTableIds",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the virtual private cloud (VPC) route tables in which your file system's\n            endpoints will be created. You should specify all VPC route tables associated with the\n            subnets in which your clients are located. By default, Amazon FSx selects your VPC's\n            default route table.</p>"
+                        "smithy.api#documentation": "<p>(Multi-AZ only) Specifies the virtual private cloud (VPC) route tables in which your\n            file system's endpoints will be created. You should specify all VPC route tables\n            associated with the subnets in which your clients are located. By default, Amazon FSx\n            selects your VPC's default route table.</p>"
                     }
                 },
                 "ThroughputCapacity": {
                     "target": "com.amazonaws.fsx#MegabytesPerSecond",
                     "traits": {
-                        "smithy.api#documentation": "<p>Sets the throughput capacity for the file system that you're creating. \n            Valid values are 128, 256, 512, 1024, and 2048 MBps.</p>",
+                        "smithy.api#documentation": "<p>Sets the throughput capacity for the file system that you're creating. Valid values\n            are 128, 256, 512, 1024, and 2048 MBps.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1653,7 +1653,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The ONTAP configuration properties of the FSx for ONTAP file system that you are creating.</p>"
+                "smithy.api#documentation": "<p>The ONTAP configuration properties of the FSx for ONTAP file system that you\n            are creating.</p>"
             }
         },
         "com.amazonaws.fsx#CreateFileSystemOpenZFSConfiguration": {
@@ -5460,6 +5460,10 @@
                     {
                         "value": "MULTI_AZ_1",
                         "name": "MULTI_AZ_1"
+                    },
+                    {
+                        "value": "SINGLE_AZ_1",
+                        "name": "SINGLE_AZ_1"
                     }
                 ]
             }
@@ -5488,13 +5492,13 @@
                 "DeploymentType": {
                     "target": "com.amazonaws.fsx#OntapDeploymentType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ONTAP file system deployment type.</p>"
+                        "smithy.api#documentation": "<p>Specifies the FSx for ONTAP file system deployment type in use in the file\n            system. </p>\n        <ul>\n            <li>\n                <p>\n                  <code>MULTI_AZ_1</code> - (Default) A high availability file system configured\n                    for Multi-AZ redundancy to tolerate temporary Availability Zone (AZ)\n                    unavailability. </p>\n            </li>\n            <li>\n                <p>\n                  <code>SINGLE_AZ_1</code> - A file system configured for Single-AZ\n                    redundancy.</p>\n            </li>\n         </ul>\n        <p>For information about the use cases for Multi-AZ and Single-AZ deployments, refer to\n                <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/high-availability-multiAZ.html\">Choosing Multi-AZ or\n                Single-AZ file system deployment</a>. </p>"
                     }
                 },
                 "EndpointIpAddressRange": {
                     "target": "com.amazonaws.fsx#IpAddressRange",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IP address range in which the endpoints to access your file system\n            are created.</p>\n        <important>\n            <p>The Endpoint IP address range you select for your file system\n            must exist outside the VPC's CIDR range and must be at least /30 or larger.\n            If you do not specify this optional parameter, Amazon FSx will automatically\n            select a CIDR block for you.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>(Multi-AZ only) The IP address range in which the endpoints to access your file system\n            are created.</p>\n        <important>\n            <p>The Endpoint IP address range you select for your file system\n            must exist outside the VPC's CIDR range and must be at least /30 or larger.\n            If you do not specify this optional parameter, Amazon FSx will automatically\n            select a CIDR block for you.</p>\n         </important>"
                     }
                 },
                 "Endpoints": {
@@ -5515,7 +5519,7 @@
                 "RouteTableIds": {
                     "target": "com.amazonaws.fsx#RouteTableIds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The VPC route tables in which your file system's endpoints are\n            created.</p>"
+                        "smithy.api#documentation": "<p>(Multi-AZ only) The VPC route tables in which your file system's endpoints are\n            created.</p>"
                     }
                 },
                 "ThroughputCapacity": {
