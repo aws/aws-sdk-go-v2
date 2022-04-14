@@ -373,7 +373,7 @@ type EncoderOptions struct {
 
 	// Will encode time.Time fields
 	//
-	// Default encoding is time.RFC3339Nano
+	// Default encoding is time.RFC3339Nano in a DynamoDB String (S) data type.
 	EncodeTime func(time.Time) (types.AttributeValue, error)
 }
 
@@ -388,14 +388,14 @@ func NewEncoder(optFns ...func(*EncoderOptions)) *Encoder {
 	options := EncoderOptions{
 		TagKey:        defaultTagKey,
 		NullEmptySets: true,
-		EncodeTime: func(t time.Time) (types.AttributeValue, error) {
-			return &types.AttributeValueMemberS{
-				Value: t.Format(time.RFC3339Nano),
-			}, nil
-		},
+		EncodeTime:    defaultEncodeTime,
 	}
 	for _, fn := range optFns {
 		fn(&options)
+	}
+
+	if options.EncodeTime == nil {
+		options.EncodeTime = defaultEncodeTime
 	}
 
 	return &Encoder{
@@ -853,4 +853,10 @@ type InvalidMarshalError struct {
 // satisfying the error interface
 func (e *InvalidMarshalError) Error() string {
 	return fmt.Sprintf("marshal failed, %s", e.msg)
+}
+
+func defaultEncodeTime(t time.Time) (types.AttributeValue, error) {
+	return &types.AttributeValueMemberS{
+		Value: t.Format(time.RFC3339Nano),
+	}, nil
 }

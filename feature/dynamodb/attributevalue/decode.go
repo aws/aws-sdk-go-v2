@@ -197,7 +197,7 @@ func UnmarshalListOfMapsWithOptions(l []map[string]types.AttributeValue, out int
 	return UnmarshalListWithOptions(items, out, optFns...)
 }
 
-// Time decoding functions for different AttributeValues
+// DecodeTimeAttributes is the set of time decoding functions for different AttributeValues.
 type DecodeTimeAttributes struct {
 	// Will decode S attribute values and SS attribute value elements into time.Time
 	//
@@ -243,20 +243,20 @@ func NewDecoder(optFns ...func(*DecoderOptions)) *Decoder {
 	options := DecoderOptions{
 		TagKey: defaultTagKey,
 		DecodeTime: DecodeTimeAttributes{
-			S: func(v string) (time.Time, error) {
-				t, err := time.Parse(time.RFC3339, v)
-				if err != nil {
-					return time.Time{}, &UnmarshalError{Err: err, Value: v, Type: timeType}
-				}
-				return t, nil
-			},
-			N: func(v string) (time.Time, error) {
-				return decodeUnixTime(v)
-			},
+			S: defaultDecodeTimeS,
+			N: defaultDecodeTimeN,
 		},
 	}
 	for _, fn := range optFns {
 		fn(&options)
+	}
+
+	if options.DecodeTime.S == nil {
+		options.DecodeTime.S = defaultDecodeTimeS
+	}
+
+	if options.DecodeTime.N == nil {
+		options.DecodeTime.N = defaultDecodeTimeN
 	}
 
 	return &Decoder{
@@ -979,4 +979,16 @@ func (e *UnmarshalError) Unwrap() error {
 func (e *UnmarshalError) Error() string {
 	return fmt.Sprintf("unmarshal failed, cannot unmarshal %q into %s, %v",
 		e.Value, e.Type.String(), e.Err)
+}
+
+func defaultDecodeTimeS(v string) (time.Time, error) {
+	t, err := time.Parse(time.RFC3339, v)
+	if err != nil {
+		return time.Time{}, &UnmarshalError{Err: err, Value: v, Type: timeType}
+	}
+	return t, nil
+}
+
+func defaultDecodeTimeN(v string) (time.Time, error) {
+	return decodeUnixTime(v)
 }
