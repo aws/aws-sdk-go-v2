@@ -1,8 +1,0 @@
-{
-    "id": "b8609b84-f3f2-48a1-a1dd-f53813fb3f76",
-    "type": "feature",
-    "description": "Enables configuration updates for compute environments with BEST_FIT_PROGRESSIVE and SPOT_CAPACITY_OPTIMIZED allocation strategies.",
-    "modules": [
-        "service/batch"
-    ]
-}

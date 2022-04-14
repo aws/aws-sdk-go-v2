@@ -1,8 +1,0 @@
-{
-    "id": "f7a57ed3-40e3-46b5-ab43-2977ffdcc670",
-    "type": "feature",
-    "description": "Auto Scaling for Glue version 3.0 and later jobs to dynamically scale compute resources. This SDK change provides customers with the auto-scaled DPU usage",
-    "modules": [
-        "service/glue"
-    ]
-}

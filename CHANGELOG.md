@@ -1,3 +1,19 @@
+# Release (2022-04-14)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appflow`: [v1.15.0](service/appflow/CHANGELOG.md#v1150-2022-04-14)
+  * **Feature**: Enables users to pass custom token URL parameters for Oauth2 authentication during create connector profile
+* `github.com/aws/aws-sdk-go-v2/service/appstream`: [v1.16.0](service/appstream/CHANGELOG.md#v1160-2022-04-14)
+  * **Feature**: Includes updates for create and update fleet APIs to manage the session scripts locations for Elastic fleets.
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.18.0](service/batch/CHANGELOG.md#v1180-2022-04-14)
+  * **Feature**: Enables configuration updates for compute environments with BEST_FIT_PROGRESSIVE and SPOT_CAPACITY_OPTIMIZED allocation strategies.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.18.1](service/cloudwatch/CHANGELOG.md#v1181-2022-04-14)
+  * **Documentation**: Updates documentation for additional statistics in CloudWatch Metric Streams.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.35.1](service/ec2/CHANGELOG.md#v1351-2022-04-14)
+  * **Documentation**: Documentation updates for Amazon EC2.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.23.0](service/glue/CHANGELOG.md#v1230-2022-04-14)
+  * **Feature**: Auto Scaling for Glue version 3.0 and later jobs to dynamically scale compute resources. This SDK change provides customers with the auto-scaled DPU usage
+
 # Release (2022-04-13)
 
 ## Module Highlights

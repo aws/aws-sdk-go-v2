@@ -1,3 +1,7 @@
+# v1.16.0 (2022-04-14)
+
+* **Feature**: Includes updates for create and update fleet APIs to manage the session scripts locations for Elastic fleets.
+
 # v1.15.4 (2022-04-01)
 
 * No change notes available for this release.

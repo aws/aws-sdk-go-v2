@@ -1,3 +1,7 @@
+# v1.23.0 (2022-04-14)
+
+* **Feature**: Auto Scaling for Glue version 3.0 and later jobs to dynamically scale compute resources. This SDK change provides customers with the auto-scaled DPU usage
+
 # v1.22.3 (2022-03-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions

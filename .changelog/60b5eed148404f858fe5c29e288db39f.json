@@ -1,8 +1,0 @@
-{
-    "id": "60b5eed1-4840-4f85-8fe5-c29e288db39f",
-    "type": "documentation",
-    "description": "Updates documentation for additional statistics in CloudWatch Metric Streams.",
-    "modules": [
-        "service/cloudwatch"
-    ]
-}

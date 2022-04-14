@@ -1,8 +1,0 @@
-{
-    "id": "bf53329e-c73e-4c18-a188-492d5d430113",
-    "type": "feature",
-    "description": "Includes updates for create and update fleet APIs to manage the session scripts locations for Elastic fleets.",
-    "modules": [
-        "service/appstream"
-    ]
-}
