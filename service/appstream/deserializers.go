@@ -9666,6 +9666,11 @@ func awsAwsjson11_deserializeDocumentFleet(v **types.Fleet, value interface{}) e
 				sv.Platform = types.PlatformType(jtv)
 			}
 
+		case "SessionScriptS3Location":
+			if err := awsAwsjson11_deserializeDocumentS3Location(&sv.SessionScriptS3Location, value); err != nil {
+				return err
+			}
+
 		case "State":
 			if value != nil {
 				jtv, ok := value.(string)

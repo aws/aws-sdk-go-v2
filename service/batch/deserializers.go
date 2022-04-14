@@ -3779,6 +3779,11 @@ func awsRestjson1_deserializeDocumentComputeEnvironmentDetail(v **types.ComputeE
 				sv.UnmanagedvCpus = ptr.Int32(int32(i64))
 			}
 
+		case "updatePolicy":
+			if err := awsRestjson1_deserializeDocumentUpdatePolicy(&sv.UpdatePolicy, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -7682,6 +7687,59 @@ func awsRestjson1_deserializeDocumentUlimits(v *[]types.Ulimit, value interface{
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentUpdatePolicy(v **types.UpdatePolicy, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.UpdatePolicy
+	if *v == nil {
+		sv = &types.UpdatePolicy{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "jobExecutionTimeoutMinutes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected JobExecutionTimeoutMinutes to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.JobExecutionTimeoutMinutes = i64
+			}
+
+		case "terminateJobsOnUpdate":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.TerminateJobsOnUpdate = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

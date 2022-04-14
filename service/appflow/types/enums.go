@@ -433,6 +433,24 @@ func (MarketoConnectorOperator) Values() []MarketoConnectorOperator {
 	}
 }
 
+type OAuth2CustomPropType string
+
+// Enum values for OAuth2CustomPropType
+const (
+	OAuth2CustomPropTypeTokenUrl OAuth2CustomPropType = "TOKEN_URL"
+	OAuth2CustomPropTypeAuthUrl  OAuth2CustomPropType = "AUTH_URL"
+)
+
+// Values returns all known values for OAuth2CustomPropType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OAuth2CustomPropType) Values() []OAuth2CustomPropType {
+	return []OAuth2CustomPropType{
+		"TOKEN_URL",
+		"AUTH_URL",
+	}
+}
+
 type OAuth2GrantType string
 
 // Enum values for OAuth2GrantType

@@ -79,8 +79,8 @@ type GetMetricStreamOutput struct {
 	State *string
 
 	// Each entry in this array displays information about one or more metrics that
-	// include extended statistics in the metric stream. For more information about
-	// extended statistics, see  CloudWatch statistics definitions
+	// include additional statistics in the metric stream. For more information about
+	// the additional statistics, see  CloudWatch statistics definitions
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html).
 	StatisticsConfigurations []types.MetricStreamStatisticsConfiguration
 

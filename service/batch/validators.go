@@ -527,6 +527,23 @@ func validateComputeResource(v *types.ComputeResource) error {
 	}
 }
 
+func validateComputeResourceUpdate(v *types.ComputeResourceUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ComputeResourceUpdate"}
+	if v.Ec2Configuration != nil {
+		if err := validateEc2ConfigurationList(v.Ec2Configuration); err != nil {
+			invalidParams.AddNested("Ec2Configuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateContainerOverrides(v *types.ContainerOverrides) error {
 	if v == nil {
 		return nil
@@ -1419,6 +1436,11 @@ func validateOpUpdateComputeEnvironmentInput(v *UpdateComputeEnvironmentInput) e
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateComputeEnvironmentInput"}
 	if v.ComputeEnvironment == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ComputeEnvironment"))
+	}
+	if v.ComputeResources != nil {
+		if err := validateComputeResourceUpdate(v.ComputeResources); err != nil {
+			invalidParams.AddNested("ComputeResources", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

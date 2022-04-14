@@ -37,19 +37,19 @@ type UpdateJobQueueInput struct {
 
 	// Details the set of compute environments mapped to a job queue and their order
 	// relative to each other. This is one of the parameters used by the job scheduler
-	// to determine which compute environment should run a given job. Compute
-	// environments must be in the VALID state before you can associate them with a job
-	// queue. All of the compute environments must be either EC2 (EC2 or SPOT) or
-	// Fargate (FARGATE or FARGATE_SPOT). EC2 and Fargate compute environments can't be
-	// mixed. All compute environments that are associated with a job queue must share
-	// the same architecture. Batch doesn't support mixing compute environment
-	// architecture types in a single job queue.
+	// to determine which compute environment runs a given job. Compute environments
+	// must be in the VALID state before you can associate them with a job queue. All
+	// of the compute environments must be either EC2 (EC2 or SPOT) or Fargate (FARGATE
+	// or FARGATE_SPOT). EC2 and Fargate compute environments can't be mixed. All
+	// compute environments that are associated with a job queue must share the same
+	// architecture. Batch doesn't support mixing compute environment architecture
+	// types in a single job queue.
 	ComputeEnvironmentOrder []types.ComputeEnvironmentOrder
 
 	// The priority of the job queue. Job queues with a higher priority (or a higher
 	// integer value for the priority parameter) are evaluated first when associated
-	// with the same compute environment. Priority is determined in descending order,
-	// for example, a job queue with a priority value of 10 is given scheduling
+	// with the same compute environment. Priority is determined in descending order.
+	// For example, a job queue with a priority value of 10 is given scheduling
 	// preference over a job queue with a priority value of 1. All of the compute
 	// environments must be either EC2 (EC2 or SPOT) or Fargate (FARGATE or
 	// FARGATE_SPOT). EC2 and Fargate compute environments can't be mixed.

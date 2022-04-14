@@ -243,7 +243,10 @@ type PutMetricAlarmInput struct {
 	// omitted, the default behavior of missing is used. For more information, see
 	// Configuring How CloudWatch Alarms Treats Missing Data
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data).
-	// Valid Values: breaching | notBreaching | ignore | missing
+	// Valid Values: breaching | notBreaching | ignore | missing Alarms that evaluate
+	// metrics in the AWS/DynamoDB namespace always ignore missing data even if you
+	// choose a different option for TreatMissingData. When an AWS/DynamoDB metric has
+	// missing data, alarms that evaluate that metric remain in their current state.
 	TreatMissingData *string
 
 	// The unit of measure for the statistic. For example, the units for the Amazon EC2

@@ -8170,6 +8170,130 @@ func awsRestjson1_deserializeDocumentMarketoSourceProperties(v **types.MarketoSo
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentOAuth2CustomParameter(v **types.OAuth2CustomParameter, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OAuth2CustomParameter
+	if *v == nil {
+		sv = &types.OAuth2CustomParameter{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "connectorSuppliedValues":
+			if err := awsRestjson1_deserializeDocumentConnectorSuppliedValueList(&sv.ConnectorSuppliedValues, value); err != nil {
+				return err
+			}
+
+		case "description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Description to be of type string, got %T instead", value)
+				}
+				sv.Description = ptr.String(jtv)
+			}
+
+		case "isRequired":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsRequired = jtv
+			}
+
+		case "isSensitiveField":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsSensitiveField = jtv
+			}
+
+		case "key":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Key to be of type string, got %T instead", value)
+				}
+				sv.Key = ptr.String(jtv)
+			}
+
+		case "label":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Label to be of type string, got %T instead", value)
+				}
+				sv.Label = ptr.String(jtv)
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OAuth2CustomPropType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.OAuth2CustomPropType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentOAuth2CustomPropertiesList(v *[]types.OAuth2CustomParameter, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.OAuth2CustomParameter
+	if *v == nil {
+		cv = []types.OAuth2CustomParameter{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.OAuth2CustomParameter
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentOAuth2CustomParameter(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentOAuth2Defaults(v **types.OAuth2Defaults, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8194,6 +8318,11 @@ func awsRestjson1_deserializeDocumentOAuth2Defaults(v **types.OAuth2Defaults, va
 		switch key {
 		case "authCodeUrls":
 			if err := awsRestjson1_deserializeDocumentAuthCodeUrlList(&sv.AuthCodeUrls, value); err != nil {
+				return err
+			}
+
+		case "oauth2CustomProperties":
+			if err := awsRestjson1_deserializeDocumentOAuth2CustomPropertiesList(&sv.Oauth2CustomProperties, value); err != nil {
 				return err
 			}
 
@@ -8295,6 +8424,11 @@ func awsRestjson1_deserializeDocumentOAuth2Properties(v **types.OAuth2Properties
 					return fmt.Errorf("expected TokenUrl to be of type string, got %T instead", value)
 				}
 				sv.TokenUrl = ptr.String(jtv)
+			}
+
+		case "tokenUrlCustomProperties":
+			if err := awsRestjson1_deserializeDocumentTokenUrlCustomProperties(&sv.TokenUrlCustomProperties, value); err != nil {
+				return err
 			}
 
 		default:
@@ -10961,6 +11095,42 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTokenUrlCustomProperties(v *map[string]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]string
+	if *v == nil {
+		mv = map[string]string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected CustomPropertyValue to be of type string, got %T instead", value)
+			}
+			parsedVal = jtv
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
 	return nil
 }
 

@@ -111,6 +111,7 @@ const (
 	FleetAttributeDomainJoinInfo                   FleetAttribute = "DOMAIN_JOIN_INFO"
 	FleetAttributeIamRoleArn                       FleetAttribute = "IAM_ROLE_ARN"
 	FleetAttributeUsbDeviceFilterStrings           FleetAttribute = "USB_DEVICE_FILTER_STRINGS"
+	FleetAttributeSessionScriptS3Location          FleetAttribute = "SESSION_SCRIPT_S3_LOCATION"
 )
 
 // Values returns all known values for FleetAttribute. Note that this can be
@@ -123,6 +124,7 @@ func (FleetAttribute) Values() []FleetAttribute {
 		"DOMAIN_JOIN_INFO",
 		"IAM_ROLE_ARN",
 		"USB_DEVICE_FILTER_STRINGS",
+		"SESSION_SCRIPT_S3_LOCATION",
 	}
 }
 

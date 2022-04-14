@@ -51,7 +51,7 @@ type CreateKeyPairInput struct {
 	DryRun *bool
 
 	// The type of key pair. Note that ED25519 keys are not supported for Windows
-	// instances, EC2 Instance Connect, and EC2 Serial Console. Default: rsa
+	// instances. Default: rsa
 	KeyType types.KeyType
 
 	// The tags to apply to the new key pair.

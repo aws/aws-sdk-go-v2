@@ -27,6 +27,7 @@ func (c *Client) CreateSchedulingPolicy(ctx context.Context, params *CreateSched
 	return out, nil
 }
 
+// Contains the parameters for CreateSchedulingPolicy.
 type CreateSchedulingPolicyInput struct {
 
 	// The name of the scheduling policy. It can be up to 128 letters long. It can

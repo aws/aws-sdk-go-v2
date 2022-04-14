@@ -14,8 +14,8 @@ import (
 
 // Describes one or more of your compute environments. If you're using an unmanaged
 // compute environment, you can use the DescribeComputeEnvironment operation to
-// determine the ecsClusterArn that you should launch your Amazon ECS container
-// instances into.
+// determine the ecsClusterArn that you launch your Amazon ECS container instances
+// into.
 func (c *Client) DescribeComputeEnvironments(ctx context.Context, params *DescribeComputeEnvironmentsInput, optFns ...func(*Options)) (*DescribeComputeEnvironmentsOutput, error) {
 	if params == nil {
 		params = &DescribeComputeEnvironmentsInput{}

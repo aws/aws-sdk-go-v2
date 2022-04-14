@@ -1481,11 +1481,42 @@ type OAuth2Credentials struct {
 	noSmithyDocumentSerde
 }
 
+// Custom parameter required for OAuth 2.0 authentication.
+type OAuth2CustomParameter struct {
+
+	// Contains default values for this authentication parameter that are supplied by
+	// the connector.
+	ConnectorSuppliedValues []string
+
+	// A description about the custom parameter used for OAuth 2.0 authentication.
+	Description *string
+
+	// Indicates whether the custom parameter for OAuth 2.0 authentication is required.
+	IsRequired bool
+
+	// Indicates whether this authentication custom parameter is a sensitive field.
+	IsSensitiveField bool
+
+	// The key of the custom parameter required for OAuth 2.0 authentication.
+	Key *string
+
+	// The label of the custom parameter used for OAuth 2.0 authentication.
+	Label *string
+
+	// Indicates whether custom parameter is used with TokenUrl or AuthUrl.
+	Type OAuth2CustomPropType
+
+	noSmithyDocumentSerde
+}
+
 // Contains the default values required for OAuth 2.0 authentication.
 type OAuth2Defaults struct {
 
 	// Auth code URLs that can be used for OAuth 2.0 authentication.
 	AuthCodeUrls []string
+
+	// List of custom parameters required for OAuth 2.0 authentication.
+	Oauth2CustomProperties []OAuth2CustomParameter
 
 	// OAuth 2.0 grant types supported by the connector.
 	Oauth2GrantTypesSupported []OAuth2GrantType
@@ -1511,6 +1542,11 @@ type OAuth2Properties struct {
 	//
 	// This member is required.
 	TokenUrl *string
+
+	// Associates your token URL with a map of properties that you define. Use this
+	// parameter to provide any additional details that the connector requires to
+	// authenticate your request.
+	TokenUrlCustomProperties map[string]string
 
 	noSmithyDocumentSerde
 }

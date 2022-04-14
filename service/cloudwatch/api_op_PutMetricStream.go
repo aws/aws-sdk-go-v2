@@ -32,9 +32,9 @@ import (
 // By
 // default, a metric stream always sends the MAX, MIN, SUM, and SAMPLECOUNT
 // statistics for each metric that is streamed. You can use the
-// StatisticsConfigurations parameter to have the metric stream also send extended
-// statistics in the stream. Streaming extended statistics incurs additional costs.
-// For more information, see Amazon CloudWatch Pricing
+// StatisticsConfigurations parameter to have the metric stream also send
+// additional statistics in the stream. Streaming additional statistics incurs
+// additional costs. For more information, see Amazon CloudWatch Pricing
 // (https://aws.amazon.com/cloudwatch/pricing/). When you use PutMetricStream to
 // create a new metric stream, the stream is created in the running state. If you
 // use it to update an existing stream, the state of the stream is not changed.
@@ -102,15 +102,15 @@ type PutMetricStreamInput struct {
 
 	// By default, a metric stream always sends the MAX, MIN, SUM, and SAMPLECOUNT
 	// statistics for each metric that is streamed. You can use this parameter to have
-	// the metric stream also send extended statistics in the stream. This array can
+	// the metric stream also send additional statistics in the stream. This array can
 	// have up to 100 members. For each entry in this array, you specify one or more
-	// metrics and the list of extended statistics to stream for those metrics. The
-	// extended statistics that you can stream depend on the stream's OutputFormat. If
-	// the OutputFormat is json, you can stream any extended statistic that is
+	// metrics and the list of additional statistics to stream for those metrics. The
+	// additional statistics that you can stream depend on the stream's OutputFormat.
+	// If the OutputFormat is json, you can stream any additional statistic that is
 	// supported by CloudWatch, listed in  CloudWatch statistics definitions
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html).
 	// If the OutputFormat is opentelemetry0.7, you can stream percentile statistics
-	// (p??).
+	// such as p95, p99.9 and so on.
 	StatisticsConfigurations []types.MetricStreamStatisticsConfiguration
 
 	// A list of key-value pairs to associate with the metric stream. You can associate

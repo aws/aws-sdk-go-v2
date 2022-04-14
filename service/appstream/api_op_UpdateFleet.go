@@ -220,6 +220,10 @@ type UpdateFleetInput struct {
 	// for Elastic fleets.
 	Platform types.PlatformType
 
+	// The S3 location of the session scripts configuration zip file. This only applies
+	// to Elastic fleets.
+	SessionScriptS3Location *types.S3Location
+
 	// The AppStream 2.0 view that is displayed to your users when they stream from the
 	// fleet. When APP is specified, only the windows of applications opened by users
 	// display. When DESKTOP is specified, the standard desktop that is provided by the

@@ -142,6 +142,24 @@ func (CRType) Values() []CRType {
 	}
 }
 
+type CRUpdateAllocationStrategy string
+
+// Enum values for CRUpdateAllocationStrategy
+const (
+	CRUpdateAllocationStrategyBestFitProgressive    CRUpdateAllocationStrategy = "BEST_FIT_PROGRESSIVE"
+	CRUpdateAllocationStrategySpotCapacityOptimized CRUpdateAllocationStrategy = "SPOT_CAPACITY_OPTIMIZED"
+)
+
+// Values returns all known values for CRUpdateAllocationStrategy. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CRUpdateAllocationStrategy) Values() []CRUpdateAllocationStrategy {
+	return []CRUpdateAllocationStrategy{
+		"BEST_FIT_PROGRESSIVE",
+		"SPOT_CAPACITY_OPTIMIZED",
+	}
+}
+
 type DeviceCgroupPermission string
 
 // Enum values for DeviceCgroupPermission

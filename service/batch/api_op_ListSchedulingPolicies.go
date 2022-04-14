@@ -28,6 +28,7 @@ func (c *Client) ListSchedulingPolicies(ctx context.Context, params *ListSchedul
 	return out, nil
 }
 
+// Contains the parameters for ListSchedulingPolicies.
 type ListSchedulingPoliciesInput struct {
 
 	// The maximum number of results that's returned by ListSchedulingPolicies in

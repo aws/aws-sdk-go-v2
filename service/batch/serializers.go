@@ -1850,6 +1850,13 @@ func awsRestjson1_serializeOpDocumentUpdateComputeEnvironmentInput(v *UpdateComp
 		ok.Integer(*v.UnmanagedvCpus)
 	}
 
+	if v.UpdatePolicy != nil {
+		ok := object.Key("updatePolicy")
+		if err := awsRestjson1_serializeDocumentUpdatePolicy(v.UpdatePolicy, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -2168,9 +2175,55 @@ func awsRestjson1_serializeDocumentComputeResourceUpdate(v *types.ComputeResourc
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.AllocationStrategy) > 0 {
+		ok := object.Key("allocationStrategy")
+		ok.String(string(v.AllocationStrategy))
+	}
+
+	if v.BidPercentage != nil {
+		ok := object.Key("bidPercentage")
+		ok.Integer(*v.BidPercentage)
+	}
+
 	if v.DesiredvCpus != nil {
 		ok := object.Key("desiredvCpus")
 		ok.Integer(*v.DesiredvCpus)
+	}
+
+	if v.Ec2Configuration != nil {
+		ok := object.Key("ec2Configuration")
+		if err := awsRestjson1_serializeDocumentEc2ConfigurationList(v.Ec2Configuration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Ec2KeyPair != nil {
+		ok := object.Key("ec2KeyPair")
+		ok.String(*v.Ec2KeyPair)
+	}
+
+	if v.ImageId != nil {
+		ok := object.Key("imageId")
+		ok.String(*v.ImageId)
+	}
+
+	if v.InstanceRole != nil {
+		ok := object.Key("instanceRole")
+		ok.String(*v.InstanceRole)
+	}
+
+	if v.InstanceTypes != nil {
+		ok := object.Key("instanceTypes")
+		if err := awsRestjson1_serializeDocumentStringList(v.InstanceTypes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LaunchTemplate != nil {
+		ok := object.Key("launchTemplate")
+		if err := awsRestjson1_serializeDocumentLaunchTemplateSpecification(v.LaunchTemplate, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.MaxvCpus != nil {
@@ -2181,6 +2234,11 @@ func awsRestjson1_serializeDocumentComputeResourceUpdate(v *types.ComputeResourc
 	if v.MinvCpus != nil {
 		ok := object.Key("minvCpus")
 		ok.Integer(*v.MinvCpus)
+	}
+
+	if v.PlacementGroup != nil {
+		ok := object.Key("placementGroup")
+		ok.String(*v.PlacementGroup)
 	}
 
 	if v.SecurityGroupIds != nil {
@@ -2195,6 +2253,23 @@ func awsRestjson1_serializeDocumentComputeResourceUpdate(v *types.ComputeResourc
 		if err := awsRestjson1_serializeDocumentStringList(v.Subnets, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentTagsMap(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
+	if v.UpdateToLatestImageVersion != nil {
+		ok := object.Key("updateToLatestImageVersion")
+		ok.Boolean(*v.UpdateToLatestImageVersion)
 	}
 
 	return nil
@@ -3193,6 +3268,23 @@ func awsRestjson1_serializeDocumentUlimits(v []types.Ulimit, value smithyjson.Va
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentUpdatePolicy(v *types.UpdatePolicy, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.JobExecutionTimeoutMinutes != 0 {
+		ok := object.Key("jobExecutionTimeoutMinutes")
+		ok.Long(v.JobExecutionTimeoutMinutes)
+	}
+
+	if v.TerminateJobsOnUpdate != nil {
+		ok := object.Key("terminateJobsOnUpdate")
+		ok.Boolean(*v.TerminateJobsOnUpdate)
+	}
+
 	return nil
 }
 

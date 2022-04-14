@@ -822,30 +822,29 @@ type MetricStreamFilter struct {
 
 // By default, a metric stream always sends the MAX, MIN, SUM, and SAMPLECOUNT
 // statistics for each metric that is streamed. This structure contains information
-// for one metric that includes extended statistics in the stream. For more
-// information about extended statistics, see CloudWatch, listed in  CloudWatch
-// statistics definitions
+// for one metric that includes additional statistics in the stream. For more
+// information about statistics, see CloudWatch, listed in  CloudWatch statistics
+// definitions
 // (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html).
 type MetricStreamStatisticsConfiguration struct {
 
-	// The list of extended statistics that are to be streamed for the metrics listed
+	// The list of additional statistics that are to be streamed for the metrics listed
 	// in the IncludeMetrics array in this structure. This list can include as many as
 	// 20 statistics. If the OutputFormat for the stream is opentelemetry0.7, the only
 	// valid values are p??  percentile statistics such as p90, p99 and so on. If the
-	// OutputFormat for the stream is json, the valid values are include the
-	// abbreviations for all of the extended statistics listed in  CloudWatch
-	// statistics definitions
+	// OutputFormat for the stream is json, the valid values include the abbreviations
+	// for all of the statistics listed in  CloudWatch statistics definitions
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html).
 	// For example, this includes tm98, wm90, PR(:300), and so on.
 	//
 	// This member is required.
 	AdditionalStatistics []string
 
-	// An array of metric name and namespace pairs that stream the extended statistics
-	// listed in the value of the AdditionalStatistics parameter. There can be as many
-	// as 100 pairs in the array. All metrics that match the combination of metric name
-	// and namespace will be streamed with the extended statistics, no matter their
-	// dimensions.
+	// An array of metric name and namespace pairs that stream the additional
+	// statistics listed in the value of the AdditionalStatistics parameter. There can
+	// be as many as 100 pairs in the array. All metrics that match the combination of
+	// metric name and namespace will be streamed with the additional statistics, no
+	// matter their dimensions.
 	//
 	// This member is required.
 	IncludeMetrics []MetricStreamStatisticsMetric
@@ -853,8 +852,8 @@ type MetricStreamStatisticsConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// This object contains the information for one metric that is to streamed with
-// extended statistics.
+// This object contains the information for one metric that is to be streamed with
+// additional statistics.
 type MetricStreamStatisticsMetric struct {
 
 	// The name of the metric.
@@ -862,7 +861,7 @@ type MetricStreamStatisticsMetric struct {
 	// This member is required.
 	MetricName *string
 
-	// The metric namespace for the metric.
+	// The namespace of the metric.
 	//
 	// This member is required.
 	Namespace *string

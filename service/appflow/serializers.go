@@ -3009,6 +3009,13 @@ func awsRestjson1_serializeDocumentOAuth2Properties(v *types.OAuth2Properties, v
 		ok.String(*v.TokenUrl)
 	}
 
+	if v.TokenUrlCustomProperties != nil {
+		ok := object.Key("tokenUrlCustomProperties")
+		if err := awsRestjson1_serializeDocumentTokenUrlCustomProperties(v.TokenUrlCustomProperties, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -3989,6 +3996,17 @@ func awsRestjson1_serializeDocumentTasks(v []types.Task, value smithyjson.Value)
 		if err := awsRestjson1_serializeDocumentTask(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTokenUrlCustomProperties(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
 	}
 	return nil
 }

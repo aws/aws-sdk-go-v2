@@ -1788,6 +1788,11 @@ func validateOpCreateFleetInput(v *CreateFleetInput) error {
 			invalidParams.AddNested("ComputeCapacity", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.SessionScriptS3Location != nil {
+		if err := validateS3Location(v.SessionScriptS3Location); err != nil {
+			invalidParams.AddNested("SessionScriptS3Location", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2485,6 +2490,11 @@ func validateOpUpdateFleetInput(v *UpdateFleetInput) error {
 	if v.ComputeCapacity != nil {
 		if err := validateComputeCapacity(v.ComputeCapacity); err != nil {
 			invalidParams.AddNested("ComputeCapacity", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SessionScriptS3Location != nil {
+		if err := validateS3Location(v.SessionScriptS3Location); err != nil {
+			invalidParams.AddNested("SessionScriptS3Location", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

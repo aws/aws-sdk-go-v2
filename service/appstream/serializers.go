@@ -4451,6 +4451,13 @@ func awsAwsjson11_serializeOpDocumentCreateFleetInput(v *CreateFleetInput, value
 		ok.String(string(v.Platform))
 	}
 
+	if v.SessionScriptS3Location != nil {
+		ok := object.Key("SessionScriptS3Location")
+		if err := awsAwsjson11_serializeDocumentS3Location(v.SessionScriptS3Location, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.StreamView) > 0 {
 		ok := object.Key("StreamView")
 		ok.String(string(v.StreamView))
@@ -5744,6 +5751,13 @@ func awsAwsjson11_serializeOpDocumentUpdateFleetInput(v *UpdateFleetInput, value
 	if len(v.Platform) > 0 {
 		ok := object.Key("Platform")
 		ok.String(string(v.Platform))
+	}
+
+	if v.SessionScriptS3Location != nil {
+		ok := object.Key("SessionScriptS3Location")
+		if err := awsAwsjson11_serializeDocumentS3Location(v.SessionScriptS3Location, ok); err != nil {
+			return err
+		}
 	}
 
 	if len(v.StreamView) > 0 {

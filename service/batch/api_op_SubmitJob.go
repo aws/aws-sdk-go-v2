@@ -67,11 +67,11 @@ type SubmitJobInput struct {
 	ArrayProperties *types.ArrayProperties
 
 	// A list of container overrides in the JSON format that specify the name of a
-	// container in the specified job definition and the overrides it should receive.
-	// You can override the default command for a container, which is specified in the
-	// job definition or the Docker image, with a command override. You can also
-	// override existing environment variables on a container or add new environment
-	// variables to it with an environment override.
+	// container in the specified job definition and the overrides it receives. You can
+	// override the default command for a container, which is specified in the job
+	// definition or the Docker image, with a command override. You can also override
+	// existing environment variables on a container or add new environment variables
+	// to it with an environment override.
 	ContainerOverrides *types.ContainerOverrides
 
 	// A list of dependencies for the job. A job can depend upon a maximum of 20 jobs.
