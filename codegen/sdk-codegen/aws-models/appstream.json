@@ -1382,6 +1382,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The USB device filter strings that specify which USB devices a user can redirect to the fleet streaming session, when using the Windows native client. This is allowed but not required for Elastic fleets.</p>"
                     }
+                },
+                "SessionScriptS3Location": {
+                    "target": "com.amazonaws.appstream#S3Location",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 location of the session scripts configuration zip file. This only applies to Elastic fleets.</p>"
+                    }
                 }
             }
         },
@@ -4121,6 +4127,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The USB device filter strings associated with the fleet.</p>"
                     }
+                },
+                "SessionScriptS3Location": {
+                    "target": "com.amazonaws.appstream#S3Location",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 location of the session scripts configuration zip file. This only applies to Elastic fleets.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4151,6 +4163,10 @@
                     {
                         "value": "USB_DEVICE_FILTER_STRINGS",
                         "name": "USB_DEVICE_FILTER_STRINGS"
+                    },
+                    {
+                        "value": "SESSION_SCRIPT_S3_LOCATION",
+                        "name": "SESSION_SCRIPT_S3_LOCATION"
                     }
                 ]
             }
@@ -6866,6 +6882,12 @@
                     "target": "com.amazonaws.appstream#UsbDeviceFilterStrings",
                     "traits": {
                         "smithy.api#documentation": "<p>The USB device filter strings that specify which USB devices a user can redirect to the fleet streaming session, when using the Windows native client. This is allowed but not required for Elastic fleets.</p>"
+                    }
+                },
+                "SessionScriptS3Location": {
+                    "target": "com.amazonaws.appstream#S3Location",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 location of the session scripts configuration zip file. This only applies to Elastic fleets. </p>"
                     }
                 }
             }

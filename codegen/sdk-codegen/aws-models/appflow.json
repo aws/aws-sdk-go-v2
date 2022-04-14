@@ -283,7 +283,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 512
+                    "max": 2048
                 },
                 "smithy.api#pattern": "^\\S+$"
             }
@@ -4871,6 +4871,77 @@
                 "smithy.api#documentation": "<p>The OAuth 2.0 credentials required for OAuth 2.0 authentication.</p>"
             }
         },
+        "com.amazonaws.appflow#OAuth2CustomParameter": {
+            "type": "structure",
+            "members": {
+                "key": {
+                    "target": "com.amazonaws.appflow#Key",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key of the custom parameter required for OAuth 2.0 authentication.</p>"
+                    }
+                },
+                "isRequired": {
+                    "target": "com.amazonaws.appflow#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the custom parameter for OAuth 2.0 authentication is required.</p>"
+                    }
+                },
+                "label": {
+                    "target": "com.amazonaws.appflow#Label",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The label of the custom parameter used for OAuth 2.0 authentication.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.appflow#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description about the custom parameter used for OAuth 2.0 authentication.</p>"
+                    }
+                },
+                "isSensitiveField": {
+                    "target": "com.amazonaws.appflow#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether this authentication custom parameter is a sensitive field.</p>"
+                    }
+                },
+                "connectorSuppliedValues": {
+                    "target": "com.amazonaws.appflow#ConnectorSuppliedValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains default values for this authentication parameter that are supplied by the\n      connector.</p>"
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.appflow#OAuth2CustomPropType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether custom parameter is used with TokenUrl or AuthUrl.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Custom parameter required for OAuth 2.0 authentication.</p>"
+            }
+        },
+        "com.amazonaws.appflow#OAuth2CustomPropType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "TOKEN_URL",
+                        "name": "TOKEN_URL"
+                    },
+                    {
+                        "value": "AUTH_URL",
+                        "name": "AUTH_URL"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.appflow#OAuth2CustomPropertiesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.appflow#OAuth2CustomParameter"
+            }
+        },
         "com.amazonaws.appflow#OAuth2Defaults": {
             "type": "structure",
             "members": {
@@ -4896,6 +4967,12 @@
                     "target": "com.amazonaws.appflow#OAuth2GrantTypeSupportedList",
                     "traits": {
                         "smithy.api#documentation": "<p>OAuth 2.0 grant types supported by the connector.</p>"
+                    }
+                },
+                "oauth2CustomProperties": {
+                    "target": "com.amazonaws.appflow#OAuth2CustomPropertiesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of custom parameters required for OAuth 2.0 authentication.</p>"
                     }
                 }
             },
@@ -4939,6 +5016,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The OAuth 2.0 grant type used by connector for OAuth 2.0 authentication.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "tokenUrlCustomProperties": {
+                    "target": "com.amazonaws.appflow#TokenUrlCustomProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Associates your token URL with a map of properties that you define. Use this parameter\n      to provide any additional details that the connector requires to authenticate your\n      request.</p>"
                     }
                 }
             },
@@ -7797,6 +7880,21 @@
                     "max": 256
                 },
                 "smithy.api#pattern": "^(https?)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]$"
+            }
+        },
+        "com.amazonaws.appflow#TokenUrlCustomProperties": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.appflow#CustomPropertyKey"
+            },
+            "value": {
+                "target": "com.amazonaws.appflow#CustomPropertyValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
             }
         },
         "com.amazonaws.appflow#TokenUrlList": {
