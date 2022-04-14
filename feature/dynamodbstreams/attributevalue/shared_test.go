@@ -429,3 +429,18 @@ func ptrToValue(in interface{}) interface{} {
 	}
 	return v.Interface()
 }
+
+func getIgnoreAVUnexportedOptions() cmp.Options {
+	return cmp.Options{
+		cmpopts.IgnoreUnexported(types.AttributeValueMemberM{}),
+		cmpopts.IgnoreUnexported(types.AttributeValueMemberN{}),
+		cmpopts.IgnoreUnexported(types.AttributeValueMemberNS{}),
+		cmpopts.IgnoreUnexported(types.AttributeValueMemberBOOL{}),
+		cmpopts.IgnoreUnexported(types.AttributeValueMemberB{}),
+		cmpopts.IgnoreUnexported(types.AttributeValueMemberBS{}),
+		cmpopts.IgnoreUnexported(types.AttributeValueMemberL{}),
+		cmpopts.IgnoreUnexported(types.AttributeValueMemberS{}),
+		cmpopts.IgnoreUnexported(types.AttributeValueMemberSS{}),
+		cmpopts.IgnoreUnexported(types.AttributeValueMemberNULL{}),
+	}
+}

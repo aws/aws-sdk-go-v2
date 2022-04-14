@@ -797,6 +797,218 @@ func (t *testUnmarshalMapKeyComplex) UnmarshalDynamoDBAttributeValue(av types.At
 	return nil
 }
 
+func TestUnmarshalTime_S_SS(t *testing.T) {
+	type A struct {
+		TimeField   time.Time
+		TimeFields  []time.Time
+		TimeFieldsL []time.Time
+	}
+	cases := map[string]struct {
+		input       string
+		expect      time.Time
+		decodeTimeS func(string) (time.Time, error)
+	}{
+		"String RFC3339Nano (Default)": {
+			input:  "1970-01-01T00:02:03.01Z",
+			expect: time.Unix(123, 10000000).UTC(),
+		},
+		"String UnixDate": {
+			input:  "Thu Jan  1 00:02:03 UTC 1970",
+			expect: time.Unix(123, 0).UTC(),
+			decodeTimeS: func(v string) (time.Time, error) {
+				t, err := time.Parse(time.UnixDate, v)
+				if err != nil {
+					return time.Time{}, &UnmarshalError{Err: err, Value: v, Type: timeType}
+				}
+				return t, nil
+			},
+		},
+		"String RFC3339 millis keeping zeroes": {
+			input:  "1970-01-01T00:02:03.010Z",
+			expect: time.Unix(123, 10000000).UTC(),
+			decodeTimeS: func(v string) (time.Time, error) {
+				t, err := time.Parse("2006-01-02T15:04:05.000Z07:00", v)
+				if err != nil {
+					return time.Time{}, &UnmarshalError{Err: err, Value: v, Type: timeType}
+				}
+				return t, nil
+			},
+		},
+		"String RFC822": {
+			input:  "01 Jan 70 00:02 UTC",
+			expect: time.Unix(120, 0).UTC(),
+			decodeTimeS: func(v string) (time.Time, error) {
+				t, err := time.Parse(time.RFC822, v)
+				if err != nil {
+					return time.Time{}, &UnmarshalError{Err: err, Value: v, Type: timeType}
+				}
+				return t, nil
+			},
+		},
+	}
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			inputMap := &types.AttributeValueMemberM{
+				Value: map[string]types.AttributeValue{
+					"TimeField":  &types.AttributeValueMemberS{Value: c.input},
+					"TimeFields": &types.AttributeValueMemberSS{Value: []string{c.input}},
+					"TimeFieldsL": &types.AttributeValueMemberL{Value: []types.AttributeValue{
+						&types.AttributeValueMemberS{Value: c.input},
+					}},
+				},
+			}
+			expectedValue := A{
+				TimeField:   c.expect,
+				TimeFields:  []time.Time{c.expect},
+				TimeFieldsL: []time.Time{c.expect},
+			}
+
+			var actualValue A
+			if err := UnmarshalWithOptions(inputMap, &actualValue, func(options *DecoderOptions) {
+				if c.decodeTimeS != nil {
+					options.DecodeTime.S = c.decodeTimeS
+				}
+			}); err != nil {
+				t.Errorf("expect no error, got %v", err)
+			}
+			if diff := cmp.Diff(expectedValue, actualValue, getIgnoreAVUnexportedOptions()...); diff != "" {
+				t.Errorf("expect attribute value match\n%s", diff)
+			}
+		})
+	}
+}
+
+func TestUnmarshalTime_N_NS(t *testing.T) {
+	type A struct {
+		TimeField   time.Time
+		TimeFields  []time.Time
+		TimeFieldsL []time.Time
+	}
+	cases := map[string]struct {
+		input       string
+		expect      time.Time
+		decodeTimeN func(string) (time.Time, error)
+	}{
+		"Number Unix seconds (Default)": {
+			input:  "123",
+			expect: time.Unix(123, 0),
+		},
+		"Number Unix milli": {
+			input:  "123010",
+			expect: time.Unix(123, 10000000),
+			decodeTimeN: func(v string) (time.Time, error) {
+				n, err := strconv.ParseInt(v, 10, 64)
+				if err != nil {
+					return time.Time{}, &UnmarshalError{
+						Err: err, Value: v, Type: timeType,
+					}
+				}
+				return time.Unix(0, n*int64(time.Millisecond)), nil
+			},
+		},
+	}
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			inputMap := &types.AttributeValueMemberM{
+				Value: map[string]types.AttributeValue{
+					"TimeField":  &types.AttributeValueMemberN{Value: c.input},
+					"TimeFields": &types.AttributeValueMemberNS{Value: []string{c.input}},
+					"TimeFieldsL": &types.AttributeValueMemberL{Value: []types.AttributeValue{
+						&types.AttributeValueMemberN{Value: c.input},
+					}},
+				},
+			}
+			expectedValue := A{
+				TimeField:   c.expect,
+				TimeFields:  []time.Time{c.expect},
+				TimeFieldsL: []time.Time{c.expect},
+			}
+
+			var actualValue A
+			if err := UnmarshalWithOptions(inputMap, &actualValue, func(options *DecoderOptions) {
+				if c.decodeTimeN != nil {
+					options.DecodeTime.N = c.decodeTimeN
+				}
+			}); err != nil {
+				t.Errorf("expect no error, got %v", err)
+			}
+			if diff := cmp.Diff(expectedValue, actualValue, getIgnoreAVUnexportedOptions()...); diff != "" {
+				t.Errorf("expect attribute value match\n%s", diff)
+			}
+		})
+	}
+}
+
+func TestCustomDecodeSAndDefaultDecodeN(t *testing.T) {
+	type A struct {
+		TimeFieldS time.Time
+		TimeFieldN time.Time
+	}
+	inputMap := &types.AttributeValueMemberM{
+		Value: map[string]types.AttributeValue{
+			"TimeFieldS": &types.AttributeValueMemberS{Value: "01 Jan 70 00:02 UTC"},
+			"TimeFieldN": &types.AttributeValueMemberN{Value: "123"},
+		},
+	}
+	expectedValue := A{
+		TimeFieldS: time.Unix(120, 0).UTC(),
+		TimeFieldN: time.Unix(123, 0).UTC(),
+	}
+
+	var actualValue A
+	if err := UnmarshalWithOptions(inputMap, &actualValue, func(options *DecoderOptions) {
+		// overriding only the S time decoder will keep the default N time decoder
+		options.DecodeTime.S = func(v string) (time.Time, error) {
+			t, err := time.Parse(time.RFC822, v)
+			if err != nil {
+				return time.Time{}, &UnmarshalError{Err: err, Value: v, Type: timeType}
+			}
+			return t, nil
+		}
+	}); err != nil {
+		t.Errorf("expect no error, got %v", err)
+	}
+	if diff := cmp.Diff(expectedValue, actualValue, getIgnoreAVUnexportedOptions()...); diff != "" {
+		t.Errorf("expect attribute value match\n%s", diff)
+	}
+}
+
+func TestCustomDecodeNAndDefaultDecodeS(t *testing.T) {
+	type A struct {
+		TimeFieldS time.Time
+		TimeFieldN time.Time
+	}
+	inputMap := &types.AttributeValueMemberM{
+		Value: map[string]types.AttributeValue{
+			"TimeFieldS": &types.AttributeValueMemberS{Value: "1970-01-01T00:02:03.01Z"},
+			"TimeFieldN": &types.AttributeValueMemberN{Value: "123010"},
+		},
+	}
+	expectedValue := A{
+		TimeFieldS: time.Unix(123, 10000000).UTC(),
+		TimeFieldN: time.Unix(123, 10000000).UTC(),
+	}
+
+	var actualValue A
+	if err := UnmarshalWithOptions(inputMap, &actualValue, func(options *DecoderOptions) {
+		// overriding only the N time decoder will keep the default S time decoder
+		options.DecodeTime.N = func(v string) (time.Time, error) {
+			n, err := strconv.ParseInt(v, 10, 64)
+			if err != nil {
+				return time.Time{}, &UnmarshalError{
+					Err: err, Value: v, Type: timeType,
+				}
+			}
+			return time.Unix(0, n*int64(time.Millisecond)), nil
+		}
+	}); err != nil {
+		t.Errorf("expect no error, got %v", err)
+	}
+	if diff := cmp.Diff(expectedValue, actualValue, getIgnoreAVUnexportedOptions()...); diff != "" {
+		t.Errorf("expect attribute value match\n%s", diff)
+	}
+}
+
 func TestUnmarshalMap_keyTypes(t *testing.T) {
 	type StrAlias string
 	type IntAlias int

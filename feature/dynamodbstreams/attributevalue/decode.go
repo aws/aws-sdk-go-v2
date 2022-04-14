@@ -197,6 +197,18 @@ func UnmarshalListOfMapsWithOptions(l []map[string]types.AttributeValue, out int
 	return UnmarshalListWithOptions(items, out, optFns...)
 }
 
+// DecodeTimeAttributes is the set of time decoding functions for different AttributeValues.
+type DecodeTimeAttributes struct {
+	// Will decode S attribute values and SS attribute value elements into time.Time
+	//
+	// Default string parsing format is time.RFC3339
+	S func(string) (time.Time, error)
+	// Will decode N attribute values and NS attribute value elements into time.Time
+	//
+	// Default number parsing format is seconds since January 1, 1970 UTC
+	N func(string) (time.Time, error)
+}
+
 // DecoderOptions is a collection of options to configure how the decoder
 // unmarshals the value.
 type DecoderOptions struct {
@@ -212,6 +224,12 @@ type DecoderOptions struct {
 	// Number type instead of float64 when the destination type
 	// is interface{}. Similar to encoding/json.Number
 	UseNumber bool
+
+	// Contains the time decoding functions for different AttributeValues
+	//
+	// Default string parsing format is time.RFC3339
+	// Default number parsing format is seconds since January 1, 1970 UTC
+	DecodeTime DecodeTimeAttributes
 }
 
 // A Decoder provides unmarshaling AttributeValues to Go value types.
@@ -222,9 +240,23 @@ type Decoder struct {
 // NewDecoder creates a new Decoder with default configuration. Use
 // the `opts` functional options to override the default configuration.
 func NewDecoder(optFns ...func(*DecoderOptions)) *Decoder {
-	options := DecoderOptions{TagKey: defaultTagKey}
+	options := DecoderOptions{
+		TagKey: defaultTagKey,
+		DecodeTime: DecodeTimeAttributes{
+			S: defaultDecodeTimeS,
+			N: defaultDecodeTimeN,
+		},
+	}
 	for _, fn := range optFns {
 		fn(&options)
+	}
+
+	if options.DecodeTime.S == nil {
+		options.DecodeTime.S = defaultDecodeTimeS
+	}
+
+	if options.DecodeTime.N == nil {
+		options.DecodeTime.N = defaultDecodeTimeN
 	}
 
 	return &Decoder{
@@ -459,6 +491,14 @@ func (d *Decoder) decodeNumber(n string, v reflect.Value, fieldTag tag) error {
 			v.Set(reflect.ValueOf(t).Convert(v.Type()))
 			return nil
 		}
+		if v.Type().ConvertibleTo(timeType) {
+			t, err := d.options.DecodeTime.N(n)
+			if err != nil {
+				return err
+			}
+			v.Set(reflect.ValueOf(t).Convert(v.Type()))
+			return nil
+		}
 		return &UnmarshalTypeError{Value: "number", Type: v.Type()}
 	}
 
@@ -686,7 +726,7 @@ func (d *Decoder) decodeString(s string, v reflect.Value, fieldTag tag) error {
 	// To maintain backwards compatibility with ConvertFrom family of methods which
 	// converted strings to time.Time structs
 	if v.Type().ConvertibleTo(timeType) {
-		t, err := time.Parse(time.RFC3339, s)
+		t, err := d.options.DecodeTime.S(s)
 		if err != nil {
 			return err
 		}
@@ -939,4 +979,16 @@ func (e *UnmarshalError) Unwrap() error {
 func (e *UnmarshalError) Error() string {
 	return fmt.Sprintf("unmarshal failed, cannot unmarshal %q into %s, %v",
 		e.Value, e.Type.String(), e.Err)
+}
+
+func defaultDecodeTimeS(v string) (time.Time, error) {
+	t, err := time.Parse(time.RFC3339, v)
+	if err != nil {
+		return time.Time{}, &UnmarshalError{Err: err, Value: v, Type: timeType}
+	}
+	return t, nil
+}
+
+func defaultDecodeTimeN(v string) (time.Time, error) {
+	return decodeUnixTime(v)
 }

@@ -370,6 +370,11 @@ type EncoderOptions struct {
 	// Defaults to enabled, because AttributeValue sets cannot currently be
 	// empty lists.
 	NullEmptySets bool
+
+	// Will encode time.Time fields
+	//
+	// Default encoding is time.RFC3339Nano in a DynamoDB String (S) data type.
+	EncodeTime func(time.Time) (types.AttributeValue, error)
 }
 
 // An Encoder provides marshaling Go value types to AttributeValues.
@@ -383,9 +388,14 @@ func NewEncoder(optFns ...func(*EncoderOptions)) *Encoder {
 	options := EncoderOptions{
 		TagKey:        defaultTagKey,
 		NullEmptySets: true,
+		EncodeTime:    defaultEncodeTime,
 	}
 	for _, fn := range optFns {
 		fn(&options)
+	}
+
+	if options.EncodeTime == nil {
+		options.EncodeTime = defaultEncodeTime
 	}
 
 	return &Encoder{
@@ -466,7 +476,7 @@ func (e *Encoder) encodeStruct(v reflect.Value, fieldTag tag) (types.AttributeVa
 		if fieldTag.AsUnixTime {
 			return UnixTime(t).MarshalDynamoDBAttributeValue()
 		}
-		return &types.AttributeValueMemberS{Value: t.Format(time.RFC3339Nano)}, nil
+		return e.options.EncodeTime(t)
 	}
 
 	m := &types.AttributeValueMemberM{Value: map[string]types.AttributeValue{}}
@@ -843,4 +853,10 @@ type InvalidMarshalError struct {
 // satisfying the error interface
 func (e *InvalidMarshalError) Error() string {
 	return fmt.Sprintf("marshal failed, %s", e.msg)
+}
+
+func defaultEncodeTime(t time.Time) (types.AttributeValue, error) {
+	return &types.AttributeValueMemberS{
+		Value: t.Format(time.RFC3339Nano),
+	}, nil
 }
