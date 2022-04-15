@@ -848,70 +848,6 @@ func (m *awsAwsquery_serializeOpCopyOptionGroup) HandleSerialize(ctx context.Con
 	return next.HandleSerialize(ctx, in)
 }
 
-type awsAwsquery_serializeOpCreateCustomAvailabilityZone struct {
-}
-
-func (*awsAwsquery_serializeOpCreateCustomAvailabilityZone) ID() string {
-	return "OperationSerializer"
-}
-
-func (m *awsAwsquery_serializeOpCreateCustomAvailabilityZone) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
-	input, ok := in.Parameters.(*CreateCustomAvailabilityZoneInput)
-	_ = input
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
-	}
-
-	operationPath := "/"
-	if len(request.Request.URL.Path) == 0 {
-		request.Request.URL.Path = operationPath
-	} else {
-		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
-			request.Request.URL.Path += "/"
-		}
-	}
-	request.Request.Method = "POST"
-	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
-
-	bodyWriter := bytes.NewBuffer(nil)
-	bodyEncoder := query.NewEncoder(bodyWriter)
-	body := bodyEncoder.Object()
-	body.Key("Action").String("CreateCustomAvailabilityZone")
-	body.Key("Version").String("2014-10-31")
-
-	if err := awsAwsquery_serializeOpDocumentCreateCustomAvailabilityZoneInput(input, bodyEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	err = bodyEncoder.Encode()
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
-
-	return next.HandleSerialize(ctx, in)
-}
-
 type awsAwsquery_serializeOpCreateCustomDBEngineVersion struct {
 }
 
@@ -1936,70 +1872,6 @@ func (m *awsAwsquery_serializeOpCreateOptionGroup) HandleSerialize(ctx context.C
 	return next.HandleSerialize(ctx, in)
 }
 
-type awsAwsquery_serializeOpDeleteCustomAvailabilityZone struct {
-}
-
-func (*awsAwsquery_serializeOpDeleteCustomAvailabilityZone) ID() string {
-	return "OperationSerializer"
-}
-
-func (m *awsAwsquery_serializeOpDeleteCustomAvailabilityZone) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
-	input, ok := in.Parameters.(*DeleteCustomAvailabilityZoneInput)
-	_ = input
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
-	}
-
-	operationPath := "/"
-	if len(request.Request.URL.Path) == 0 {
-		request.Request.URL.Path = operationPath
-	} else {
-		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
-			request.Request.URL.Path += "/"
-		}
-	}
-	request.Request.Method = "POST"
-	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
-
-	bodyWriter := bytes.NewBuffer(nil)
-	bodyEncoder := query.NewEncoder(bodyWriter)
-	body := bodyEncoder.Object()
-	body.Key("Action").String("DeleteCustomAvailabilityZone")
-	body.Key("Version").String("2014-10-31")
-
-	if err := awsAwsquery_serializeOpDocumentDeleteCustomAvailabilityZoneInput(input, bodyEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	err = bodyEncoder.Encode()
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
-
-	return next.HandleSerialize(ctx, in)
-}
-
 type awsAwsquery_serializeOpDeleteCustomDBEngineVersion struct {
 }
 
@@ -2960,70 +2832,6 @@ func (m *awsAwsquery_serializeOpDeleteGlobalCluster) HandleSerialize(ctx context
 	return next.HandleSerialize(ctx, in)
 }
 
-type awsAwsquery_serializeOpDeleteInstallationMedia struct {
-}
-
-func (*awsAwsquery_serializeOpDeleteInstallationMedia) ID() string {
-	return "OperationSerializer"
-}
-
-func (m *awsAwsquery_serializeOpDeleteInstallationMedia) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
-	input, ok := in.Parameters.(*DeleteInstallationMediaInput)
-	_ = input
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
-	}
-
-	operationPath := "/"
-	if len(request.Request.URL.Path) == 0 {
-		request.Request.URL.Path = operationPath
-	} else {
-		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
-			request.Request.URL.Path += "/"
-		}
-	}
-	request.Request.Method = "POST"
-	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
-
-	bodyWriter := bytes.NewBuffer(nil)
-	bodyEncoder := query.NewEncoder(bodyWriter)
-	body := bodyEncoder.Object()
-	body.Key("Action").String("DeleteInstallationMedia")
-	body.Key("Version").String("2014-10-31")
-
-	if err := awsAwsquery_serializeOpDocumentDeleteInstallationMediaInput(input, bodyEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	err = bodyEncoder.Encode()
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
-
-	return next.HandleSerialize(ctx, in)
-}
-
 type awsAwsquery_serializeOpDeleteOptionGroup struct {
 }
 
@@ -3256,70 +3064,6 @@ func (m *awsAwsquery_serializeOpDescribeCertificates) HandleSerialize(ctx contex
 	body.Key("Version").String("2014-10-31")
 
 	if err := awsAwsquery_serializeOpDocumentDescribeCertificatesInput(input, bodyEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	err = bodyEncoder.Encode()
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
-
-	return next.HandleSerialize(ctx, in)
-}
-
-type awsAwsquery_serializeOpDescribeCustomAvailabilityZones struct {
-}
-
-func (*awsAwsquery_serializeOpDescribeCustomAvailabilityZones) ID() string {
-	return "OperationSerializer"
-}
-
-func (m *awsAwsquery_serializeOpDescribeCustomAvailabilityZones) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
-	input, ok := in.Parameters.(*DescribeCustomAvailabilityZonesInput)
-	_ = input
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
-	}
-
-	operationPath := "/"
-	if len(request.Request.URL.Path) == 0 {
-		request.Request.URL.Path = operationPath
-	} else {
-		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
-			request.Request.URL.Path += "/"
-		}
-	}
-	request.Request.Method = "POST"
-	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
-
-	bodyWriter := bytes.NewBuffer(nil)
-	bodyEncoder := query.NewEncoder(bodyWriter)
-	body := bodyEncoder.Object()
-	body.Key("Action").String("DescribeCustomAvailabilityZones")
-	body.Key("Version").String("2014-10-31")
-
-	if err := awsAwsquery_serializeOpDocumentDescribeCustomAvailabilityZonesInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -5132,70 +4876,6 @@ func (m *awsAwsquery_serializeOpDescribeGlobalClusters) HandleSerialize(ctx cont
 	return next.HandleSerialize(ctx, in)
 }
 
-type awsAwsquery_serializeOpDescribeInstallationMedia struct {
-}
-
-func (*awsAwsquery_serializeOpDescribeInstallationMedia) ID() string {
-	return "OperationSerializer"
-}
-
-func (m *awsAwsquery_serializeOpDescribeInstallationMedia) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
-	input, ok := in.Parameters.(*DescribeInstallationMediaInput)
-	_ = input
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
-	}
-
-	operationPath := "/"
-	if len(request.Request.URL.Path) == 0 {
-		request.Request.URL.Path = operationPath
-	} else {
-		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
-			request.Request.URL.Path += "/"
-		}
-	}
-	request.Request.Method = "POST"
-	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
-
-	bodyWriter := bytes.NewBuffer(nil)
-	bodyEncoder := query.NewEncoder(bodyWriter)
-	body := bodyEncoder.Object()
-	body.Key("Action").String("DescribeInstallationMedia")
-	body.Key("Version").String("2014-10-31")
-
-	if err := awsAwsquery_serializeOpDocumentDescribeInstallationMediaInput(input, bodyEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	err = bodyEncoder.Encode()
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
-
-	return next.HandleSerialize(ctx, in)
-}
-
 type awsAwsquery_serializeOpDescribeOptionGroupOptions struct {
 }
 
@@ -5880,70 +5560,6 @@ func (m *awsAwsquery_serializeOpFailoverGlobalCluster) HandleSerialize(ctx conte
 	body.Key("Version").String("2014-10-31")
 
 	if err := awsAwsquery_serializeOpDocumentFailoverGlobalClusterInput(input, bodyEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	err = bodyEncoder.Encode()
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
-
-	return next.HandleSerialize(ctx, in)
-}
-
-type awsAwsquery_serializeOpImportInstallationMedia struct {
-}
-
-func (*awsAwsquery_serializeOpImportInstallationMedia) ID() string {
-	return "OperationSerializer"
-}
-
-func (m *awsAwsquery_serializeOpImportInstallationMedia) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
-	input, ok := in.Parameters.(*ImportInstallationMediaInput)
-	_ = input
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
-	}
-
-	operationPath := "/"
-	if len(request.Request.URL.Path) == 0 {
-		request.Request.URL.Path = operationPath
-	} else {
-		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
-			request.Request.URL.Path += "/"
-		}
-	}
-	request.Request.Method = "POST"
-	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
-
-	bodyWriter := bytes.NewBuffer(nil)
-	bodyEncoder := query.NewEncoder(bodyWriter)
-	body := bodyEncoder.Object()
-	body.Key("Action").String("ImportInstallationMedia")
-	body.Key("Version").String("2014-10-31")
-
-	if err := awsAwsquery_serializeOpDocumentImportInstallationMediaInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -10003,33 +9619,6 @@ func awsAwsquery_serializeOpDocumentCopyOptionGroupInput(v *CopyOptionGroupInput
 	return nil
 }
 
-func awsAwsquery_serializeOpDocumentCreateCustomAvailabilityZoneInput(v *CreateCustomAvailabilityZoneInput, value query.Value) error {
-	object := value.Object()
-	_ = object
-
-	if v.CustomAvailabilityZoneName != nil {
-		objectKey := object.Key("CustomAvailabilityZoneName")
-		objectKey.String(*v.CustomAvailabilityZoneName)
-	}
-
-	if v.ExistingVpnId != nil {
-		objectKey := object.Key("ExistingVpnId")
-		objectKey.String(*v.ExistingVpnId)
-	}
-
-	if v.NewVpnTunnelName != nil {
-		objectKey := object.Key("NewVpnTunnelName")
-		objectKey.String(*v.NewVpnTunnelName)
-	}
-
-	if v.VpnTunnelOriginatorIP != nil {
-		objectKey := object.Key("VpnTunnelOriginatorIP")
-		objectKey.String(*v.VpnTunnelOriginatorIP)
-	}
-
-	return nil
-}
-
 func awsAwsquery_serializeOpDocumentCreateCustomDBEngineVersionInput(v *CreateCustomDBEngineVersionInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -11209,18 +10798,6 @@ func awsAwsquery_serializeOpDocumentCreateOptionGroupInput(v *CreateOptionGroupI
 	return nil
 }
 
-func awsAwsquery_serializeOpDocumentDeleteCustomAvailabilityZoneInput(v *DeleteCustomAvailabilityZoneInput, value query.Value) error {
-	object := value.Object()
-	_ = object
-
-	if v.CustomAvailabilityZoneId != nil {
-		objectKey := object.Key("CustomAvailabilityZoneId")
-		objectKey.String(*v.CustomAvailabilityZoneId)
-	}
-
-	return nil
-}
-
 func awsAwsquery_serializeOpDocumentDeleteCustomDBEngineVersionInput(v *DeleteCustomDBEngineVersionInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -11436,18 +11013,6 @@ func awsAwsquery_serializeOpDocumentDeleteGlobalClusterInput(v *DeleteGlobalClus
 	return nil
 }
 
-func awsAwsquery_serializeOpDocumentDeleteInstallationMediaInput(v *DeleteInstallationMediaInput, value query.Value) error {
-	object := value.Object()
-	_ = object
-
-	if v.InstallationMediaId != nil {
-		objectKey := object.Key("InstallationMediaId")
-		objectKey.String(*v.InstallationMediaId)
-	}
-
-	return nil
-}
-
 func awsAwsquery_serializeOpDocumentDeleteOptionGroupInput(v *DeleteOptionGroupInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -11505,35 +11070,6 @@ func awsAwsquery_serializeOpDocumentDescribeCertificatesInput(v *DescribeCertifi
 	if v.CertificateIdentifier != nil {
 		objectKey := object.Key("CertificateIdentifier")
 		objectKey.String(*v.CertificateIdentifier)
-	}
-
-	if v.Filters != nil {
-		objectKey := object.Key("Filters")
-		if err := awsAwsquery_serializeDocumentFilterList(v.Filters, objectKey); err != nil {
-			return err
-		}
-	}
-
-	if v.Marker != nil {
-		objectKey := object.Key("Marker")
-		objectKey.String(*v.Marker)
-	}
-
-	if v.MaxRecords != nil {
-		objectKey := object.Key("MaxRecords")
-		objectKey.Integer(*v.MaxRecords)
-	}
-
-	return nil
-}
-
-func awsAwsquery_serializeOpDocumentDescribeCustomAvailabilityZonesInput(v *DescribeCustomAvailabilityZonesInput, value query.Value) error {
-	object := value.Object()
-	_ = object
-
-	if v.CustomAvailabilityZoneId != nil {
-		objectKey := object.Key("CustomAvailabilityZoneId")
-		objectKey.String(*v.CustomAvailabilityZoneId)
 	}
 
 	if v.Filters != nil {
@@ -12496,35 +12032,6 @@ func awsAwsquery_serializeOpDocumentDescribeGlobalClustersInput(v *DescribeGloba
 	return nil
 }
 
-func awsAwsquery_serializeOpDocumentDescribeInstallationMediaInput(v *DescribeInstallationMediaInput, value query.Value) error {
-	object := value.Object()
-	_ = object
-
-	if v.Filters != nil {
-		objectKey := object.Key("Filters")
-		if err := awsAwsquery_serializeDocumentFilterList(v.Filters, objectKey); err != nil {
-			return err
-		}
-	}
-
-	if v.InstallationMediaId != nil {
-		objectKey := object.Key("InstallationMediaId")
-		objectKey.String(*v.InstallationMediaId)
-	}
-
-	if v.Marker != nil {
-		objectKey := object.Key("Marker")
-		objectKey.String(*v.Marker)
-	}
-
-	if v.MaxRecords != nil {
-		objectKey := object.Key("MaxRecords")
-		objectKey.Integer(*v.MaxRecords)
-	}
-
-	return nil
-}
-
 func awsAwsquery_serializeOpDocumentDescribeOptionGroupOptionsInput(v *DescribeOptionGroupOptionsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -12896,38 +12403,6 @@ func awsAwsquery_serializeOpDocumentFailoverGlobalClusterInput(v *FailoverGlobal
 	if v.TargetDbClusterIdentifier != nil {
 		objectKey := object.Key("TargetDbClusterIdentifier")
 		objectKey.String(*v.TargetDbClusterIdentifier)
-	}
-
-	return nil
-}
-
-func awsAwsquery_serializeOpDocumentImportInstallationMediaInput(v *ImportInstallationMediaInput, value query.Value) error {
-	object := value.Object()
-	_ = object
-
-	if v.CustomAvailabilityZoneId != nil {
-		objectKey := object.Key("CustomAvailabilityZoneId")
-		objectKey.String(*v.CustomAvailabilityZoneId)
-	}
-
-	if v.Engine != nil {
-		objectKey := object.Key("Engine")
-		objectKey.String(*v.Engine)
-	}
-
-	if v.EngineInstallationMediaPath != nil {
-		objectKey := object.Key("EngineInstallationMediaPath")
-		objectKey.String(*v.EngineInstallationMediaPath)
-	}
-
-	if v.EngineVersion != nil {
-		objectKey := object.Key("EngineVersion")
-		objectKey.String(*v.EngineVersion)
-	}
-
-	if v.OSInstallationMediaPath != nil {
-		objectKey := object.Key("OSInstallationMediaPath")
-		objectKey.String(*v.OSInstallationMediaPath)
 	}
 
 	return nil

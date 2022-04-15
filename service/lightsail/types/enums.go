@@ -38,6 +38,28 @@ func (AccessType) Values() []AccessType {
 	}
 }
 
+type AccountLevelBpaSyncStatus string
+
+// Enum values for AccountLevelBpaSyncStatus
+const (
+	AccountLevelBpaSyncStatusInSync      AccountLevelBpaSyncStatus = "InSync"
+	AccountLevelBpaSyncStatusFailed      AccountLevelBpaSyncStatus = "Failed"
+	AccountLevelBpaSyncStatusNeverSynced AccountLevelBpaSyncStatus = "NeverSynced"
+	AccountLevelBpaSyncStatusDefaulted   AccountLevelBpaSyncStatus = "Defaulted"
+)
+
+// Values returns all known values for AccountLevelBpaSyncStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AccountLevelBpaSyncStatus) Values() []AccountLevelBpaSyncStatus {
+	return []AccountLevelBpaSyncStatus{
+		"InSync",
+		"Failed",
+		"NeverSynced",
+		"Defaulted",
+	}
+}
+
 type AddOnType string
 
 // Enum values for AddOnType
@@ -129,6 +151,28 @@ func (BlueprintType) Values() []BlueprintType {
 	return []BlueprintType{
 		"os",
 		"app",
+	}
+}
+
+type BPAStatusMessage string
+
+// Enum values for BPAStatusMessage
+const (
+	BPAStatusMessageDefaultedForSlrMissing       BPAStatusMessage = "DEFAULTED_FOR_SLR_MISSING"
+	BPAStatusMessageSyncOnHold                   BPAStatusMessage = "SYNC_ON_HOLD"
+	BPAStatusMessageDefaultedForSlrMissingOnHold BPAStatusMessage = "DEFAULTED_FOR_SLR_MISSING_ON_HOLD"
+	BPAStatusMessageUnknown                      BPAStatusMessage = "Unknown"
+)
+
+// Values returns all known values for BPAStatusMessage. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (BPAStatusMessage) Values() []BPAStatusMessage {
+	return []BPAStatusMessage{
+		"DEFAULTED_FOR_SLR_MISSING",
+		"SYNC_ON_HOLD",
+		"DEFAULTED_FOR_SLR_MISSING_ON_HOLD",
+		"Unknown",
 	}
 }
 

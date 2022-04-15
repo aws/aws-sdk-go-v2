@@ -270,26 +270,6 @@ func (m *validateOpCopyOptionGroup) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpCreateCustomAvailabilityZone struct {
-}
-
-func (*validateOpCreateCustomAvailabilityZone) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpCreateCustomAvailabilityZone) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*CreateCustomAvailabilityZoneInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpCreateCustomAvailabilityZoneInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpCreateCustomDBEngineVersion struct {
 }
 
@@ -590,26 +570,6 @@ func (m *validateOpCreateOptionGroup) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpDeleteCustomAvailabilityZone struct {
-}
-
-func (*validateOpDeleteCustomAvailabilityZone) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpDeleteCustomAvailabilityZone) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*DeleteCustomAvailabilityZoneInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpDeleteCustomAvailabilityZoneInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpDeleteCustomDBEngineVersion struct {
 }
 
@@ -890,26 +850,6 @@ func (m *validateOpDeleteGlobalCluster) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpDeleteInstallationMedia struct {
-}
-
-func (*validateOpDeleteInstallationMedia) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpDeleteInstallationMedia) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*DeleteInstallationMediaInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpDeleteInstallationMediaInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpDeleteOptionGroup struct {
 }
 
@@ -965,26 +905,6 @@ func (m *validateOpDescribeCertificates) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeCertificatesInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
-type validateOpDescribeCustomAvailabilityZones struct {
-}
-
-func (*validateOpDescribeCustomAvailabilityZones) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpDescribeCustomAvailabilityZones) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*DescribeCustomAvailabilityZonesInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpDescribeCustomAvailabilityZonesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1550,26 +1470,6 @@ func (m *validateOpDescribeGlobalClusters) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpDescribeInstallationMedia struct {
-}
-
-func (*validateOpDescribeInstallationMedia) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpDescribeInstallationMedia) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*DescribeInstallationMediaInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpDescribeInstallationMediaInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpDescribeOptionGroupOptions struct {
 }
 
@@ -1785,26 +1685,6 @@ func (m *validateOpFailoverGlobalCluster) HandleInitialize(ctx context.Context, 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpFailoverGlobalClusterInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
-type validateOpImportInstallationMedia struct {
-}
-
-func (*validateOpImportInstallationMedia) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpImportInstallationMedia) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*ImportInstallationMediaInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpImportInstallationMediaInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2762,10 +2642,6 @@ func addOpCopyOptionGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCopyOptionGroup{}, middleware.After)
 }
 
-func addOpCreateCustomAvailabilityZoneValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpCreateCustomAvailabilityZone{}, middleware.After)
-}
-
 func addOpCreateCustomDBEngineVersionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateCustomDBEngineVersion{}, middleware.After)
 }
@@ -2826,10 +2702,6 @@ func addOpCreateOptionGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateOptionGroup{}, middleware.After)
 }
 
-func addOpDeleteCustomAvailabilityZoneValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpDeleteCustomAvailabilityZone{}, middleware.After)
-}
-
 func addOpDeleteCustomDBEngineVersionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteCustomDBEngineVersion{}, middleware.After)
 }
@@ -2886,10 +2758,6 @@ func addOpDeleteGlobalClusterValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpDeleteGlobalCluster{}, middleware.After)
 }
 
-func addOpDeleteInstallationMediaValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpDeleteInstallationMedia{}, middleware.After)
-}
-
 func addOpDeleteOptionGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteOptionGroup{}, middleware.After)
 }
@@ -2900,10 +2768,6 @@ func addOpDeregisterDBProxyTargetsValidationMiddleware(stack *middleware.Stack) 
 
 func addOpDescribeCertificatesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeCertificates{}, middleware.After)
-}
-
-func addOpDescribeCustomAvailabilityZonesValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpDescribeCustomAvailabilityZones{}, middleware.After)
 }
 
 func addOpDescribeDBClusterBacktracksValidationMiddleware(stack *middleware.Stack) error {
@@ -3018,10 +2882,6 @@ func addOpDescribeGlobalClustersValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpDescribeGlobalClusters{}, middleware.After)
 }
 
-func addOpDescribeInstallationMediaValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpDescribeInstallationMedia{}, middleware.After)
-}
-
 func addOpDescribeOptionGroupOptionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeOptionGroupOptions{}, middleware.After)
 }
@@ -3064,10 +2924,6 @@ func addOpFailoverDBClusterValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpFailoverGlobalClusterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpFailoverGlobalCluster{}, middleware.After)
-}
-
-func addOpImportInstallationMediaValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpImportInstallationMedia{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -3560,21 +3416,6 @@ func validateOpCopyOptionGroupInput(v *CopyOptionGroupInput) error {
 	}
 }
 
-func validateOpCreateCustomAvailabilityZoneInput(v *CreateCustomAvailabilityZoneInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "CreateCustomAvailabilityZoneInput"}
-	if v.CustomAvailabilityZoneName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CustomAvailabilityZoneName"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateOpCreateCustomDBEngineVersionInput(v *CreateCustomDBEngineVersionInput) error {
 	if v == nil {
 		return nil
@@ -3887,21 +3728,6 @@ func validateOpCreateOptionGroupInput(v *CreateOptionGroupInput) error {
 	}
 }
 
-func validateOpDeleteCustomAvailabilityZoneInput(v *DeleteCustomAvailabilityZoneInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "DeleteCustomAvailabilityZoneInput"}
-	if v.CustomAvailabilityZoneId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CustomAvailabilityZoneId"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateOpDeleteCustomDBEngineVersionInput(v *DeleteCustomDBEngineVersionInput) error {
 	if v == nil {
 		return nil
@@ -4115,21 +3941,6 @@ func validateOpDeleteGlobalClusterInput(v *DeleteGlobalClusterInput) error {
 	}
 }
 
-func validateOpDeleteInstallationMediaInput(v *DeleteInstallationMediaInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "DeleteInstallationMediaInput"}
-	if v.InstallationMediaId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstallationMediaId"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateOpDeleteOptionGroupInput(v *DeleteOptionGroupInput) error {
 	if v == nil {
 		return nil
@@ -4165,23 +3976,6 @@ func validateOpDescribeCertificatesInput(v *DescribeCertificatesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeCertificatesInput"}
-	if v.Filters != nil {
-		if err := validateFilterList(v.Filters); err != nil {
-			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
-		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpDescribeCustomAvailabilityZonesInput(v *DescribeCustomAvailabilityZonesInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "DescribeCustomAvailabilityZonesInput"}
 	if v.Filters != nil {
 		if err := validateFilterList(v.Filters); err != nil {
 			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
@@ -4690,23 +4484,6 @@ func validateOpDescribeGlobalClustersInput(v *DescribeGlobalClustersInput) error
 	}
 }
 
-func validateOpDescribeInstallationMediaInput(v *DescribeInstallationMediaInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "DescribeInstallationMediaInput"}
-	if v.Filters != nil {
-		if err := validateFilterList(v.Filters); err != nil {
-			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
-		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateOpDescribeOptionGroupOptionsInput(v *DescribeOptionGroupOptionsInput) error {
 	if v == nil {
 		return nil
@@ -4890,33 +4667,6 @@ func validateOpFailoverGlobalClusterInput(v *FailoverGlobalClusterInput) error {
 	}
 	if v.TargetDbClusterIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetDbClusterIdentifier"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpImportInstallationMediaInput(v *ImportInstallationMediaInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "ImportInstallationMediaInput"}
-	if v.CustomAvailabilityZoneId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CustomAvailabilityZoneId"))
-	}
-	if v.Engine == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Engine"))
-	}
-	if v.EngineVersion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EngineVersion"))
-	}
-	if v.EngineInstallationMediaPath == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EngineInstallationMediaPath"))
-	}
-	if v.OSInstallationMediaPath == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OSInstallationMediaPath"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

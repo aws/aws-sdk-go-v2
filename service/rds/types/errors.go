@@ -104,30 +104,6 @@ func (e *CertificateNotFoundFault) ErrorMessage() string {
 func (e *CertificateNotFoundFault) ErrorCode() string             { return "CertificateNotFound" }
 func (e *CertificateNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// CustomAvailabilityZoneName is already used by an existing custom Availability
-// Zone.
-type CustomAvailabilityZoneAlreadyExistsFault struct {
-	Message *string
-
-	noSmithyDocumentSerde
-}
-
-func (e *CustomAvailabilityZoneAlreadyExistsFault) Error() string {
-	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
-}
-func (e *CustomAvailabilityZoneAlreadyExistsFault) ErrorMessage() string {
-	if e.Message == nil {
-		return ""
-	}
-	return *e.Message
-}
-func (e *CustomAvailabilityZoneAlreadyExistsFault) ErrorCode() string {
-	return "CustomAvailabilityZoneAlreadyExists"
-}
-func (e *CustomAvailabilityZoneAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
-	return smithy.FaultClient
-}
-
 // CustomAvailabilityZoneId doesn't refer to an existing custom Availability Zone
 // identifier.
 type CustomAvailabilityZoneNotFoundFault struct {
@@ -149,29 +125,6 @@ func (e *CustomAvailabilityZoneNotFoundFault) ErrorCode() string {
 	return "CustomAvailabilityZoneNotFound"
 }
 func (e *CustomAvailabilityZoneNotFoundFault) ErrorFault() smithy.ErrorFault {
-	return smithy.FaultClient
-}
-
-// You have exceeded the maximum number of custom Availability Zones.
-type CustomAvailabilityZoneQuotaExceededFault struct {
-	Message *string
-
-	noSmithyDocumentSerde
-}
-
-func (e *CustomAvailabilityZoneQuotaExceededFault) Error() string {
-	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
-}
-func (e *CustomAvailabilityZoneQuotaExceededFault) ErrorMessage() string {
-	if e.Message == nil {
-		return ""
-	}
-	return *e.Message
-}
-func (e *CustomAvailabilityZoneQuotaExceededFault) ErrorCode() string {
-	return "CustomAvailabilityZoneQuotaExceeded"
-}
-func (e *CustomAvailabilityZoneQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
@@ -1375,48 +1328,6 @@ func (e *IamRoleNotFoundFault) ErrorMessage() string {
 }
 func (e *IamRoleNotFoundFault) ErrorCode() string             { return "IamRoleNotFound" }
 func (e *IamRoleNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-
-// The specified installation medium has already been imported.
-type InstallationMediaAlreadyExistsFault struct {
-	Message *string
-
-	noSmithyDocumentSerde
-}
-
-func (e *InstallationMediaAlreadyExistsFault) Error() string {
-	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
-}
-func (e *InstallationMediaAlreadyExistsFault) ErrorMessage() string {
-	if e.Message == nil {
-		return ""
-	}
-	return *e.Message
-}
-func (e *InstallationMediaAlreadyExistsFault) ErrorCode() string {
-	return "InstallationMediaAlreadyExists"
-}
-func (e *InstallationMediaAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
-	return smithy.FaultClient
-}
-
-// InstallationMediaID doesn't refer to an existing installation medium.
-type InstallationMediaNotFoundFault struct {
-	Message *string
-
-	noSmithyDocumentSerde
-}
-
-func (e *InstallationMediaNotFoundFault) Error() string {
-	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
-}
-func (e *InstallationMediaNotFoundFault) ErrorMessage() string {
-	if e.Message == nil {
-		return ""
-	}
-	return *e.Message
-}
-func (e *InstallationMediaNotFoundFault) ErrorCode() string             { return "InstallationMediaNotFound" }
-func (e *InstallationMediaNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request would result in the user exceeding the allowed number of DB
 // instances.

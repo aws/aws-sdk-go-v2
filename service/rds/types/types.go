@@ -313,29 +313,6 @@ type ConnectionPoolConfigurationInfo struct {
 	noSmithyDocumentSerde
 }
 
-// A custom Availability Zone (AZ) is an on-premises AZ that is integrated with a
-// VMware vSphere cluster. For more information about RDS on VMware, see the  RDS
-// on VMware User Guide.
-// (https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html)
-type CustomAvailabilityZone struct {
-
-	// The identifier of the custom AZ. Amazon RDS generates a unique identifier when a
-	// custom AZ is created.
-	CustomAvailabilityZoneId *string
-
-	// The name of the custom AZ.
-	CustomAvailabilityZoneName *string
-
-	// The status of the custom AZ.
-	CustomAvailabilityZoneStatus *string
-
-	// Information about the virtual private network (VPN) between the VMware vSphere
-	// cluster and the Amazon Web Services website.
-	VpnDetails *VpnDetails
-
-	noSmithyDocumentSerde
-}
-
 // Contains the details of an Amazon Aurora DB cluster or Multi-AZ DB cluster. For
 // an Amazon Aurora DB cluster, this data type is used as a response element in the
 // operations CreateDBCluster, DeleteDBCluster, DescribeDBClusters,
@@ -2502,49 +2479,6 @@ type GlobalClusterMember struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the installation media for a DB engine that requires an on-premises
-// customer provided license, such as Microsoft SQL Server.
-type InstallationMedia struct {
-
-	// The custom Availability Zone (AZ) that contains the installation media.
-	CustomAvailabilityZoneId *string
-
-	// The DB engine.
-	Engine *string
-
-	// The path to the installation medium for the DB engine.
-	EngineInstallationMediaPath *string
-
-	// The engine version of the DB engine.
-	EngineVersion *string
-
-	// If an installation media failure occurred, the cause of the failure.
-	FailureCause *InstallationMediaFailureCause
-
-	// The installation medium ID.
-	InstallationMediaId *string
-
-	// The path to the installation medium for the operating system associated with the
-	// DB engine.
-	OSInstallationMediaPath *string
-
-	// The status of the installation medium.
-	Status *string
-
-	noSmithyDocumentSerde
-}
-
-// Contains the cause of an installation media failure. Installation media is used
-// for a DB engine that requires an on-premises customer provided license, such as
-// Microsoft SQL Server.
-type InstallationMediaFailureCause struct {
-
-	// The reason that an installation media import failed.
-	Message *string
-
-	noSmithyDocumentSerde
-}
-
 // This data type is used as a response element in the DescribeDBSecurityGroups
 // action.
 type IPRange struct {
@@ -3643,35 +3577,6 @@ type VpcSecurityGroupMembership struct {
 
 	// The name of the VPC security group.
 	VpcSecurityGroupId *string
-
-	noSmithyDocumentSerde
-}
-
-// Information about the virtual private network (VPN) between the VMware vSphere
-// cluster and the Amazon Web Services website. For more information about RDS on
-// VMware, see the  RDS on VMware User Guide.
-// (https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html)
-type VpnDetails struct {
-
-	// The IP address of network traffic from Amazon Web Services to your on-premises
-	// data center.
-	VpnGatewayIp *string
-
-	// The ID of the VPN.
-	VpnId *string
-
-	// The name of the VPN.
-	VpnName *string
-
-	// The preshared key (PSK) for the VPN.
-	VpnPSK *string
-
-	// The state of the VPN.
-	VpnState *string
-
-	// The IP address of network traffic from your on-premises data center. A custom AZ
-	// receives the network traffic.
-	VpnTunnelOriginatorIP *string
 
 	noSmithyDocumentSerde
 }

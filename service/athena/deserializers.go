@@ -4292,6 +4292,15 @@ func awsAwsjson11_deserializeDocumentAthenaError(v **types.AthenaError, value in
 				sv.ErrorCategory = ptr.Int32(int32(i64))
 			}
 
+		case "ErrorMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ErrorMessage = ptr.String(jtv)
+			}
+
 		case "ErrorType":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4303,6 +4312,15 @@ func awsAwsjson11_deserializeDocumentAthenaError(v **types.AthenaError, value in
 					return err
 				}
 				sv.ErrorType = ptr.Int32(int32(i64))
+			}
+
+		case "Retryable":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Retryable = jtv
 			}
 
 		default:
