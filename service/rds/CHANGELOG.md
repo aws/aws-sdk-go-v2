@@ -1,3 +1,7 @@
+# v1.19.0 (2022-04-15)
+
+* **Feature**: Removes Amazon RDS on VMware with the deletion of APIs related to Custom Availability Zones and Media installation
+
 # v1.18.4 (2022-03-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions

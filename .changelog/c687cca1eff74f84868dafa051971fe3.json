@@ -1,8 +1,0 @@
-{
-    "id": "c687cca1-eff7-4f84-868d-afa051971fe3",
-    "type": "feature",
-    "description": "Removes Amazon RDS on VMware with the deletion of APIs related to Custom Availability Zones and Media installation",
-    "modules": [
-        "service/rds"
-    ]
-}

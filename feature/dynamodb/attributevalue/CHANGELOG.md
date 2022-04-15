@@ -1,3 +1,7 @@
+# v1.9.0 (2022-04-15)
+
+* **Feature**: Support has been added for specifying a custom time format when encoding and decoding DynamoDB AttributeValues. Use `EncoderOptions.EncodeTime` to specify a custom time encoding function, and use `DecoderOptions.DecodeTime` for specifying how to handle the corresponding AttributeValues using the format. Thank you [Pablo Lopez](https://github.com/plopezlpz) for this contribution.
+
 # v1.8.4 (2022-03-31)
 
 * **Documentation**: Fixes documentation typos in Number type's helper methods

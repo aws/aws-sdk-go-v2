@@ -1,3 +1,20 @@
+# Release (2022-04-15)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue`: [v1.9.0](feature/dynamodb/attributevalue/CHANGELOG.md#v190-2022-04-15)
+  * **Feature**: Support has been added for specifying a custom time format when encoding and decoding DynamoDB AttributeValues. Use `EncoderOptions.EncodeTime` to specify a custom time encoding function, and use `DecoderOptions.DecodeTime` for specifying how to handle the corresponding AttributeValues using the format. Thank you [Pablo Lopez](https://github.com/plopezlpz) for this contribution.
+* `github.com/aws/aws-sdk-go-v2/feature/dynamodbstreams/attributevalue`: [v1.9.0](feature/dynamodbstreams/attributevalue/CHANGELOG.md#v190-2022-04-15)
+  * **Feature**: Support has been added for specifying a custom time format when encoding and decoding DynamoDB AttributeValues. Use `EncoderOptions.EncodeTime` to specify a custom time encoding function, and use `DecoderOptions.DecodeTime` for specifying how to handle the corresponding AttributeValues using the format. Thank you [Pablo Lopez](https://github.com/plopezlpz) for this contribution.
+* `github.com/aws/aws-sdk-go-v2/service/athena`: [v1.15.0](service/athena/CHANGELOG.md#v1150-2022-04-15)
+  * **Feature**: This release adds subfields, ErrorMessage, Retryable, to the AthenaError response object in the GetQueryExecution API when a query fails.
+* `github.com/aws/aws-sdk-go-v2/service/lightsail`: [v1.19.0](service/lightsail/CHANGELOG.md#v1190-2022-04-15)
+  * **Feature**: This release adds support to describe the synchronization status of the account-level block public access feature for your Amazon Lightsail buckets.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.19.0](service/rds/CHANGELOG.md#v1190-2022-04-15)
+  * **Feature**: Removes Amazon RDS on VMware with the deletion of APIs related to Custom Availability Zones and Media installation
+
 # Release (2022-04-14)
 
 ## Module Highlights

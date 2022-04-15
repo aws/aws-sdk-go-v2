@@ -1,3 +1,7 @@
+# v1.19.0 (2022-04-15)
+
+* **Feature**: This release adds support to describe the synchronization status of the account-level block public access feature for your Amazon Lightsail buckets.
+
 # v1.18.3 (2022-03-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions
