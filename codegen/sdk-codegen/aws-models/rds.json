@@ -127,6 +127,9 @@
             "input": {
                 "target": "com.amazonaws.rds#AddRoleToDBClusterMessage"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.rds#DBClusterNotFoundFault"
@@ -174,6 +177,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.rds#AddRoleToDBInstanceMessage"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -273,6 +279,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.rds#AddTagsToResourceMessage"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -379,9 +388,6 @@
                     "target": "com.amazonaws.rds#CopyOptionGroup"
                 },
                 {
-                    "target": "com.amazonaws.rds#CreateCustomAvailabilityZone"
-                },
-                {
                     "target": "com.amazonaws.rds#CreateCustomDBEngineVersion"
                 },
                 {
@@ -430,9 +436,6 @@
                     "target": "com.amazonaws.rds#CreateOptionGroup"
                 },
                 {
-                    "target": "com.amazonaws.rds#DeleteCustomAvailabilityZone"
-                },
-                {
                     "target": "com.amazonaws.rds#DeleteCustomDBEngineVersion"
                 },
                 {
@@ -478,9 +481,6 @@
                     "target": "com.amazonaws.rds#DeleteGlobalCluster"
                 },
                 {
-                    "target": "com.amazonaws.rds#DeleteInstallationMedia"
-                },
-                {
                     "target": "com.amazonaws.rds#DeleteOptionGroup"
                 },
                 {
@@ -491,9 +491,6 @@
                 },
                 {
                     "target": "com.amazonaws.rds#DescribeCertificates"
-                },
-                {
-                    "target": "com.amazonaws.rds#DescribeCustomAvailabilityZones"
                 },
                 {
                     "target": "com.amazonaws.rds#DescribeDBClusterBacktracks"
@@ -580,9 +577,6 @@
                     "target": "com.amazonaws.rds#DescribeGlobalClusters"
                 },
                 {
-                    "target": "com.amazonaws.rds#DescribeInstallationMedia"
-                },
-                {
                     "target": "com.amazonaws.rds#DescribeOptionGroupOptions"
                 },
                 {
@@ -614,9 +608,6 @@
                 },
                 {
                     "target": "com.amazonaws.rds#FailoverGlobalCluster"
-                },
-                {
-                    "target": "com.amazonaws.rds#ImportInstallationMedia"
                 },
                 {
                     "target": "com.amazonaws.rds#ListTagsForResource"
@@ -1816,70 +1807,6 @@
                 }
             }
         },
-        "com.amazonaws.rds#CreateCustomAvailabilityZone": {
-            "type": "operation",
-            "input": {
-                "target": "com.amazonaws.rds#CreateCustomAvailabilityZoneMessage"
-            },
-            "output": {
-                "target": "com.amazonaws.rds#CreateCustomAvailabilityZoneResult"
-            },
-            "errors": [
-                {
-                    "target": "com.amazonaws.rds#CustomAvailabilityZoneAlreadyExistsFault"
-                },
-                {
-                    "target": "com.amazonaws.rds#CustomAvailabilityZoneQuotaExceededFault"
-                },
-                {
-                    "target": "com.amazonaws.rds#KMSKeyNotAccessibleFault"
-                }
-            ],
-            "traits": {
-                "smithy.api#documentation": "<p>Creates a custom Availability Zone (AZ).</p>\n        <p>A custom AZ is an on-premises AZ that is integrated with a VMware vSphere cluster.</p>\n        <p>For more information about RDS on VMware, see the \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html\">\n                RDS on VMware User Guide.</a>\n         </p>"
-            }
-        },
-        "com.amazonaws.rds#CreateCustomAvailabilityZoneMessage": {
-            "type": "structure",
-            "members": {
-                "CustomAvailabilityZoneName": {
-                    "target": "com.amazonaws.rds#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The name of the custom Availability Zone (AZ).</p>",
-                        "smithy.api#required": {}
-                    }
-                },
-                "ExistingVpnId": {
-                    "target": "com.amazonaws.rds#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The ID of an existing virtual private network (VPN) between the Amazon RDS website and\n            the VMware vSphere cluster.</p>"
-                    }
-                },
-                "NewVpnTunnelName": {
-                    "target": "com.amazonaws.rds#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The name of a new VPN tunnel between the Amazon RDS website and the VMware vSphere cluster.</p>\n        <p>Specify this parameter only if <code>ExistingVpnId</code> isn't specified.</p>"
-                    }
-                },
-                "VpnTunnelOriginatorIP": {
-                    "target": "com.amazonaws.rds#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The IP address of network traffic from your on-premises data center. A custom AZ receives the network traffic.</p>\n        <p>Specify this parameter only if <code>ExistingVpnId</code> isn't specified.</p>"
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "<p></p>"
-            }
-        },
-        "com.amazonaws.rds#CreateCustomAvailabilityZoneResult": {
-            "type": "structure",
-            "members": {
-                "CustomAvailabilityZone": {
-                    "target": "com.amazonaws.rds#CustomAvailabilityZone"
-                }
-            }
-        },
         "com.amazonaws.rds#CreateCustomDBEngineVersion": {
             "type": "operation",
             "input": {
@@ -2646,7 +2573,7 @@
                 "AvailabilityZone": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Availability Zone (AZ) where the database will be created. For information on\n        Amazon Web Services Regions and Availability Zones, see \n        <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html\">Regions\n        and Availability Zones</a>.</p>\n        <p>\n            <b>Amazon Aurora</b>\n         </p>\n        <p>Not applicable. Availability Zones are managed by the DB cluster.</p>\n        <p>Default: A random, system-chosen Availability Zone in the endpoint's Amazon Web Services Region.</p>\n        <p>Example: <code>us-east-1d</code>\n         </p>\n        <p>Constraint: The <code>AvailabilityZone</code> parameter can't be specified if the DB instance is a Multi-AZ deployment. \n            The specified Availability Zone must be in the same Amazon Web Services Region as the current endpoint.</p>\n        <note>\n            <p>If you're creating a DB instance in an RDS on VMware environment,\n                specify the identifier of the custom Availability Zone to create the DB instance\n                in.</p>\n            <p>For more information about RDS on VMware, see the \n              <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html\">\n                  RDS on VMware User Guide.</a>\n            </p>\n        </note>"
+                        "smithy.api#documentation": "<p>The Availability Zone (AZ) where the database will be created. For information on\n        Amazon Web Services Regions and Availability Zones, see \n        <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html\">Regions\n        and Availability Zones</a>.</p>\n        <p>\n            <b>Amazon Aurora</b>\n         </p>\n        <p>Each Aurora DB cluster hosts copies of its storage in three separate Availability Zones. Specify one of these \n            Availability Zones. Aurora automatically chooses an appropriate Availability Zone if you don't specify one.</p>\n        <p>Default: A random, system-chosen Availability Zone in the endpoint's Amazon Web Services Region.</p>\n        <p>Example: <code>us-east-1d</code>\n         </p>\n        <p>Constraint: The <code>AvailabilityZone</code> parameter can't be specified if the DB instance is a Multi-AZ deployment. \n            The specified Availability Zone must be in the same Amazon Web Services Region as the current endpoint.</p>\n        <note>\n            <p>If you're creating a DB instance in an RDS on VMware environment,\n                specify the identifier of the custom Availability Zone to create the DB instance\n                in.</p>\n            <p>For more information about RDS on VMware, see the \n              <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html\">\n                  RDS on VMware User Guide.</a>\n            </p>\n        </note>"
                     }
                 },
                 "DBSubnetGroupName": {
@@ -3864,81 +3791,6 @@
                 }
             }
         },
-        "com.amazonaws.rds#CustomAvailabilityZone": {
-            "type": "structure",
-            "members": {
-                "CustomAvailabilityZoneId": {
-                    "target": "com.amazonaws.rds#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the custom AZ.</p>\n        <p>Amazon RDS generates a unique identifier when a custom AZ is created.</p>"
-                    }
-                },
-                "CustomAvailabilityZoneName": {
-                    "target": "com.amazonaws.rds#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The name of the custom AZ.</p>"
-                    }
-                },
-                "CustomAvailabilityZoneStatus": {
-                    "target": "com.amazonaws.rds#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The status of the custom AZ.</p>"
-                    }
-                },
-                "VpnDetails": {
-                    "target": "com.amazonaws.rds#VpnDetails",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Information about the virtual private network (VPN) between the VMware vSphere cluster\n            and the Amazon Web Services website.</p>"
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "<p>A custom Availability Zone (AZ) is an on-premises AZ that is integrated with a VMware vSphere cluster.</p>\n        <p>For more information about RDS on VMware, see the \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html\">\n                RDS on VMware User Guide.</a>\n         </p>"
-            }
-        },
-        "com.amazonaws.rds#CustomAvailabilityZoneAlreadyExistsFault": {
-            "type": "structure",
-            "members": {
-                "message": {
-                    "target": "com.amazonaws.rds#ExceptionMessage"
-                }
-            },
-            "traits": {
-                "aws.protocols#awsQueryError": {
-                    "code": "CustomAvailabilityZoneAlreadyExists",
-                    "httpResponseCode": 400
-                },
-                "smithy.api#documentation": "<p>\n            <code>CustomAvailabilityZoneName</code> is already used by an existing custom\n            Availability Zone.</p>",
-                "smithy.api#error": "client",
-                "smithy.api#httpError": 400
-            }
-        },
-        "com.amazonaws.rds#CustomAvailabilityZoneList": {
-            "type": "list",
-            "member": {
-                "target": "com.amazonaws.rds#CustomAvailabilityZone",
-                "traits": {
-                    "smithy.api#xmlName": "CustomAvailabilityZone"
-                }
-            }
-        },
-        "com.amazonaws.rds#CustomAvailabilityZoneMessage": {
-            "type": "structure",
-            "members": {
-                "Marker": {
-                    "target": "com.amazonaws.rds#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>An optional pagination token provided by a previous\n            <code>DescribeCustomAvailabilityZones</code> request.\n            If this parameter is specified, the response includes\n            only records beyond the marker,\n            up to the value specified by <code>MaxRecords</code>.</p>"
-                    }
-                },
-                "CustomAvailabilityZones": {
-                    "target": "com.amazonaws.rds#CustomAvailabilityZoneList",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The list of <a>CustomAvailabilityZone</a> objects for the Amazon Web Services account.</p>"
-                    }
-                }
-            }
-        },
         "com.amazonaws.rds#CustomAvailabilityZoneNotFoundFault": {
             "type": "structure",
             "members": {
@@ -3954,23 +3806,6 @@
                 "smithy.api#documentation": "<p>\n            <code>CustomAvailabilityZoneId</code> doesn't refer to an existing custom\n            Availability Zone identifier.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
-            }
-        },
-        "com.amazonaws.rds#CustomAvailabilityZoneQuotaExceededFault": {
-            "type": "structure",
-            "members": {
-                "message": {
-                    "target": "com.amazonaws.rds#ExceptionMessage"
-                }
-            },
-            "traits": {
-                "aws.protocols#awsQueryError": {
-                    "code": "CustomAvailabilityZoneQuotaExceeded",
-                    "httpResponseCode": 400
-                },
-                "smithy.api#documentation": "<p>You have exceeded the maximum number of custom Availability Zones.</p>",
-                "smithy.api#error": "client",
-                "smithy.api#httpError": 400
             }
         },
         "com.amazonaws.rds#CustomDBEngineVersionAlreadyExistsFault": {
@@ -7869,46 +7704,6 @@
                 "smithy.api#httpError": 400
             }
         },
-        "com.amazonaws.rds#DeleteCustomAvailabilityZone": {
-            "type": "operation",
-            "input": {
-                "target": "com.amazonaws.rds#DeleteCustomAvailabilityZoneMessage"
-            },
-            "output": {
-                "target": "com.amazonaws.rds#DeleteCustomAvailabilityZoneResult"
-            },
-            "errors": [
-                {
-                    "target": "com.amazonaws.rds#CustomAvailabilityZoneNotFoundFault"
-                },
-                {
-                    "target": "com.amazonaws.rds#KMSKeyNotAccessibleFault"
-                }
-            ],
-            "traits": {
-                "smithy.api#documentation": "<p>Deletes a custom Availability Zone (AZ).</p>\n        <p>A custom AZ is an on-premises AZ that is integrated with a VMware vSphere cluster.</p>\n        <p>For more information about RDS on VMware, see the \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html\">\n                RDS on VMware User Guide.</a>\n         </p>"
-            }
-        },
-        "com.amazonaws.rds#DeleteCustomAvailabilityZoneMessage": {
-            "type": "structure",
-            "members": {
-                "CustomAvailabilityZoneId": {
-                    "target": "com.amazonaws.rds#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The custom AZ identifier.</p>",
-                        "smithy.api#required": {}
-                    }
-                }
-            }
-        },
-        "com.amazonaws.rds#DeleteCustomAvailabilityZoneResult": {
-            "type": "structure",
-            "members": {
-                "CustomAvailabilityZone": {
-                    "target": "com.amazonaws.rds#CustomAvailabilityZone"
-                }
-            }
-        },
         "com.amazonaws.rds#DeleteCustomDBEngineVersion": {
             "type": "operation",
             "input": {
@@ -8043,6 +7838,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.rds#DeleteDBClusterParameterGroupMessage"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -8248,6 +8046,9 @@
             "input": {
                 "target": "com.amazonaws.rds#DeleteDBParameterGroupMessage"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.rds#DBParameterGroupNotFoundFault"
@@ -8366,6 +8167,9 @@
             "input": {
                 "target": "com.amazonaws.rds#DeleteDBSecurityGroupMessage"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.rds#DBSecurityGroupNotFoundFault"
@@ -8440,6 +8244,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.rds#DeleteDBSubnetGroupMessage"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -8554,39 +8361,13 @@
                 }
             }
         },
-        "com.amazonaws.rds#DeleteInstallationMedia": {
-            "type": "operation",
-            "input": {
-                "target": "com.amazonaws.rds#DeleteInstallationMediaMessage"
-            },
-            "output": {
-                "target": "com.amazonaws.rds#InstallationMedia"
-            },
-            "errors": [
-                {
-                    "target": "com.amazonaws.rds#InstallationMediaNotFoundFault"
-                }
-            ],
-            "traits": {
-                "smithy.api#documentation": "<p>Deletes the installation medium for a DB engine that requires an on-premises customer provided license,\n            such as Microsoft SQL Server.</p>"
-            }
-        },
-        "com.amazonaws.rds#DeleteInstallationMediaMessage": {
-            "type": "structure",
-            "members": {
-                "InstallationMediaId": {
-                    "target": "com.amazonaws.rds#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The installation medium ID.</p>",
-                        "smithy.api#required": {}
-                    }
-                }
-            }
-        },
         "com.amazonaws.rds#DeleteOptionGroup": {
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.rds#DeleteOptionGroupMessage"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -8747,58 +8528,6 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p></p>"
-            }
-        },
-        "com.amazonaws.rds#DescribeCustomAvailabilityZones": {
-            "type": "operation",
-            "input": {
-                "target": "com.amazonaws.rds#DescribeCustomAvailabilityZonesMessage"
-            },
-            "output": {
-                "target": "com.amazonaws.rds#CustomAvailabilityZoneMessage"
-            },
-            "errors": [
-                {
-                    "target": "com.amazonaws.rds#CustomAvailabilityZoneNotFoundFault"
-                }
-            ],
-            "traits": {
-                "smithy.api#documentation": "<p>Returns information about custom Availability Zones (AZs).</p>\n        <p>A custom AZ is an on-premises AZ that is integrated with a VMware vSphere cluster.</p>\n        <p>For more information about RDS on VMware, see the \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html\">\n                RDS on VMware User Guide.</a>\n         </p>",
-                "smithy.api#paginated": {
-                    "inputToken": "Marker",
-                    "outputToken": "Marker",
-                    "items": "CustomAvailabilityZones",
-                    "pageSize": "MaxRecords"
-                }
-            }
-        },
-        "com.amazonaws.rds#DescribeCustomAvailabilityZonesMessage": {
-            "type": "structure",
-            "members": {
-                "CustomAvailabilityZoneId": {
-                    "target": "com.amazonaws.rds#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The custom AZ identifier. If this parameter is specified, information from only the specific custom AZ is returned.</p>"
-                    }
-                },
-                "Filters": {
-                    "target": "com.amazonaws.rds#FilterList",
-                    "traits": {
-                        "smithy.api#documentation": "<p>A filter that specifies one or more custom AZs to describe.</p>"
-                    }
-                },
-                "MaxRecords": {
-                    "target": "com.amazonaws.rds#IntegerOptional",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of records to include in the response.\n            If more records exist than the specified <code>MaxRecords</code> value,\n            a pagination token called a marker is included in the response so you can retrieve the remaining results.</p>\n        <p>Default: 100</p>\n        <p>Constraints: Minimum 20, maximum 100.</p>"
-                    }
-                },
-                "Marker": {
-                    "target": "com.amazonaws.rds#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>An optional pagination token provided by a previous\n            <code>DescribeCustomAvailabilityZones</code> request.\n            If this parameter is specified, the response includes\n            only records beyond the marker,\n            up to the value specified by <code>MaxRecords</code>.</p>"
-                    }
-                }
             }
         },
         "com.amazonaws.rds#DescribeDBClusterBacktracks": {
@@ -10685,7 +10414,7 @@
                 "DBParameterGroupFamily": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the DB parameter group family.</p>",
+                        "smithy.api#documentation": "<p>The name of the DB parameter group family.</p>\n        <p>Valid Values:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>aurora5.6</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>aurora-mysql5.7</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>aurora-mysql8.0</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>aurora-postgresql10</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>aurora-postgresql11</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>aurora-postgresql12</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>aurora-postgresql13</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>mariadb10.2</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>mariadb10.3</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>mariadb10.4</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>mariadb10.5</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>mariadb10.6</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>mysql5.7</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>mysql8.0</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>postgres10</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>postgres11</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>postgres12</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>postgres13</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>postgres14</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>sqlserver-ee-11.0</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>sqlserver-ee-12.0</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>sqlserver-ee-13.0</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>sqlserver-ee-14.0</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>sqlserver-ee-15.0</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>sqlserver-ex-11.0</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>sqlserver-ex-12.0</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>sqlserver-ex-13.0</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>sqlserver-ex-14.0</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>sqlserver-ex-15.0</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>sqlserver-se-11.0</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>sqlserver-se-12.0</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>sqlserver-se-13.0</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>sqlserver-se-14.0</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>sqlserver-se-15.0</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>sqlserver-web-11.0</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>sqlserver-web-12.0</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>sqlserver-web-13.0</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>sqlserver-web-14.0</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>sqlserver-web-15.0</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -10993,58 +10722,6 @@
                     "target": "com.amazonaws.rds#String",
                     "traits": {
                         "smithy.api#documentation": "<p>An optional pagination token provided by a previous <code>DescribeGlobalClusters</code> request. If\n        this parameter is specified, the response includes only records beyond the marker, up to the value\n        specified by <code>MaxRecords</code>.</p>"
-                    }
-                }
-            }
-        },
-        "com.amazonaws.rds#DescribeInstallationMedia": {
-            "type": "operation",
-            "input": {
-                "target": "com.amazonaws.rds#DescribeInstallationMediaMessage"
-            },
-            "output": {
-                "target": "com.amazonaws.rds#InstallationMediaMessage"
-            },
-            "errors": [
-                {
-                    "target": "com.amazonaws.rds#InstallationMediaNotFoundFault"
-                }
-            ],
-            "traits": {
-                "smithy.api#documentation": "<p>Describes the available installation media for a DB engine that requires an \n          on-premises customer provided license, such as Microsoft SQL Server.</p>",
-                "smithy.api#paginated": {
-                    "inputToken": "Marker",
-                    "outputToken": "Marker",
-                    "items": "InstallationMedia",
-                    "pageSize": "MaxRecords"
-                }
-            }
-        },
-        "com.amazonaws.rds#DescribeInstallationMediaMessage": {
-            "type": "structure",
-            "members": {
-                "InstallationMediaId": {
-                    "target": "com.amazonaws.rds#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The installation medium ID.</p>"
-                    }
-                },
-                "Filters": {
-                    "target": "com.amazonaws.rds#FilterList",
-                    "traits": {
-                        "smithy.api#documentation": "<p>A filter that specifies one or more installation media to describe. Supported filters\n          include the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>custom-availability-zone-id</code> - Accepts custom Availability Zone (AZ)\n                    identifiers. The results list includes information about only the custom AZs\n                    identified by these identifiers.</p>\n            </li>\n            <li>\n                <p>\n                  <code>engine</code> - Accepts database engines. The results list includes information about \n              only the database engines identified by these identifiers.</p>\n                <p>For more information about the valid engines for installation media, see <a>ImportInstallationMedia</a>.</p>\n            </li>\n         </ul>"
-                    }
-                },
-                "MaxRecords": {
-                    "target": "com.amazonaws.rds#IntegerOptional",
-                    "traits": {
-                        "smithy.api#documentation": "<p>An optional pagination token provided by a previous DescribeInstallationMedia request.\n          If this parameter is specified, the response includes\n          only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p>"
-                    }
-                },
-                "Marker": {
-                    "target": "com.amazonaws.rds#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>An optional pagination token provided by a previous request.\n          If this parameter is specified, the response includes\n          only records beyond the marker,\n          up to the value specified by <code>MaxRecords</code>.</p>"
                     }
                 }
             }
@@ -12765,196 +12442,6 @@
                 "smithy.api#httpError": 404
             }
         },
-        "com.amazonaws.rds#ImportInstallationMedia": {
-            "type": "operation",
-            "input": {
-                "target": "com.amazonaws.rds#ImportInstallationMediaMessage"
-            },
-            "output": {
-                "target": "com.amazonaws.rds#InstallationMedia"
-            },
-            "errors": [
-                {
-                    "target": "com.amazonaws.rds#CustomAvailabilityZoneNotFoundFault"
-                },
-                {
-                    "target": "com.amazonaws.rds#InstallationMediaAlreadyExistsFault"
-                }
-            ],
-            "traits": {
-                "smithy.api#documentation": "<p>Imports the installation media for a DB engine that requires an on-premises \n          customer provided license, such as SQL Server.</p>"
-            }
-        },
-        "com.amazonaws.rds#ImportInstallationMediaMessage": {
-            "type": "structure",
-            "members": {
-                "CustomAvailabilityZoneId": {
-                    "target": "com.amazonaws.rds#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the custom Availability Zone (AZ) to import the installation media to.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
-                "Engine": {
-                    "target": "com.amazonaws.rds#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The name of the database engine to be used for this instance.</p>\n        <p>The list only includes supported DB engines that require an on-premises \n          customer provided license.</p>\n        <p>Valid Values:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>sqlserver-ee</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>sqlserver-se</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>sqlserver-ex</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>sqlserver-web</code>\n               </p>\n            </li>\n         </ul>",
-                        "smithy.api#required": {}
-                    }
-                },
-                "EngineVersion": {
-                    "target": "com.amazonaws.rds#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The version number of the database engine to use.</p>\n        <p>For a list of valid engine versions, call <a>DescribeDBEngineVersions</a>.</p>\n        <p>The following are the database engines and links to information about the major and minor \n          versions. The list only includes DB engines that require an on-premises \n          customer provided license.</p>\n        <p>\n            <b>Microsoft SQL Server</b>\n         </p>\n        <p>See <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.VersionSupport\">\n          Microsoft SQL Server Versions on Amazon RDS</a> in the <i>Amazon RDS User Guide</i>.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
-                "EngineInstallationMediaPath": {
-                    "target": "com.amazonaws.rds#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The path to the installation medium for the specified DB engine.</p>\n        <p>Example: <code>SQLServerISO/en_sql_server_2016_enterprise_x64_dvd_8701793.iso</code>\n         </p>",
-                        "smithy.api#required": {}
-                    }
-                },
-                "OSInstallationMediaPath": {
-                    "target": "com.amazonaws.rds#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The path to the installation medium for the operating system associated with the specified DB engine.</p>\n        <p>Example: <code>WindowsISO/en_windows_server_2016_x64_dvd_9327751.iso</code>\n         </p>",
-                        "smithy.api#required": {}
-                    }
-                }
-            }
-        },
-        "com.amazonaws.rds#InstallationMedia": {
-            "type": "structure",
-            "members": {
-                "InstallationMediaId": {
-                    "target": "com.amazonaws.rds#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The installation medium ID.</p>"
-                    }
-                },
-                "CustomAvailabilityZoneId": {
-                    "target": "com.amazonaws.rds#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The custom Availability Zone (AZ) that contains the installation media.</p>"
-                    }
-                },
-                "Engine": {
-                    "target": "com.amazonaws.rds#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The DB engine.</p>"
-                    }
-                },
-                "EngineVersion": {
-                    "target": "com.amazonaws.rds#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The engine version of the DB engine.</p>"
-                    }
-                },
-                "EngineInstallationMediaPath": {
-                    "target": "com.amazonaws.rds#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The path to the installation medium for the DB engine.</p>"
-                    }
-                },
-                "OSInstallationMediaPath": {
-                    "target": "com.amazonaws.rds#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The path to the installation medium for the operating system associated with the DB engine.</p>"
-                    }
-                },
-                "Status": {
-                    "target": "com.amazonaws.rds#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The status of the installation medium.</p>"
-                    }
-                },
-                "FailureCause": {
-                    "target": "com.amazonaws.rds#InstallationMediaFailureCause",
-                    "traits": {
-                        "smithy.api#documentation": "<p>If an installation media failure occurred, the cause of the failure.</p>"
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "<p>Contains the installation media for a DB engine that requires an on-premises \n          customer provided license, such as Microsoft SQL Server.</p>"
-            }
-        },
-        "com.amazonaws.rds#InstallationMediaAlreadyExistsFault": {
-            "type": "structure",
-            "members": {
-                "message": {
-                    "target": "com.amazonaws.rds#ExceptionMessage"
-                }
-            },
-            "traits": {
-                "aws.protocols#awsQueryError": {
-                    "code": "InstallationMediaAlreadyExists",
-                    "httpResponseCode": 400
-                },
-                "smithy.api#documentation": "<p>The specified installation medium has already been imported.</p>",
-                "smithy.api#error": "client",
-                "smithy.api#httpError": 400
-            }
-        },
-        "com.amazonaws.rds#InstallationMediaFailureCause": {
-            "type": "structure",
-            "members": {
-                "Message": {
-                    "target": "com.amazonaws.rds#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The reason that an installation media import failed.</p>"
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "<p>Contains the cause of an installation media failure. Installation media is used \n          for a DB engine that requires an on-premises \n          customer provided license, such as Microsoft SQL Server.</p>"
-            }
-        },
-        "com.amazonaws.rds#InstallationMediaList": {
-            "type": "list",
-            "member": {
-                "target": "com.amazonaws.rds#InstallationMedia",
-                "traits": {
-                    "smithy.api#xmlName": "InstallationMedia"
-                }
-            }
-        },
-        "com.amazonaws.rds#InstallationMediaMessage": {
-            "type": "structure",
-            "members": {
-                "Marker": {
-                    "target": "com.amazonaws.rds#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>An optional pagination token provided by a previous\n          <a>DescribeInstallationMedia</a> request.\n          If this parameter is specified, the response includes\n          only records beyond the marker,\n          up to the value specified by <code>MaxRecords</code>.</p>"
-                    }
-                },
-                "InstallationMedia": {
-                    "target": "com.amazonaws.rds#InstallationMediaList",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The list of <a>InstallationMedia</a> objects for the Amazon Web Services account.</p>"
-                    }
-                }
-            }
-        },
-        "com.amazonaws.rds#InstallationMediaNotFoundFault": {
-            "type": "structure",
-            "members": {
-                "message": {
-                    "target": "com.amazonaws.rds#ExceptionMessage"
-                }
-            },
-            "traits": {
-                "aws.protocols#awsQueryError": {
-                    "code": "InstallationMediaNotFound",
-                    "httpResponseCode": 404
-                },
-                "smithy.api#documentation": "<p>\n            <code>InstallationMediaID</code> doesn't refer to an existing installation medium.</p>",
-                "smithy.api#error": "client",
-                "smithy.api#httpError": 404
-            }
-        },
         "com.amazonaws.rds#InstanceQuotaExceededFault": {
             "type": "structure",
             "members": {
@@ -13625,7 +13112,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Override the system-default Secure Sockets Layer/Transport Layer Security (SSL/TLS)\n          certificate for Amazon RDS for new DB instances temporarily, or remove the override.</p>\n        <p>By using this operation, you can specify an RDS-approved SSL/TLS certificate for new DB\n            instances that is different from the default certificate provided by RDS. You can also\n            use this operation to remove the override, so that new DB instances use the default\n            certificate provided by RDS.</p>\n        <p>You might need to override the default certificate in the following situations:</p>\n        <ul>\n            <li>\n                <p>You already migrated your applications to support the latest certificate authority (CA) certificate, but the new CA certificate is not yet \n                  the RDS default CA certificate for the specified Amazon Web Services Region.</p>\n            </li>\n            <li>\n                <p>RDS has already moved to a new default CA certificate for the specified Amazon Web Services\n                    Region, but you are still in the process of supporting the new CA certificate.\n                    In this case, you temporarily need additional time to finish your application\n                    changes.</p>\n            </li>\n         </ul>\n        <p>For more information about rotating your SSL/TLS certificate for RDS DB engines, see \n          <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL-certificate-rotation.html\">\n              Rotating Your SSL/TLS Certificate</a> in the <i>Amazon RDS User Guide</i>.</p>\n        <p>For more information about rotating your SSL/TLS certificate for Aurora DB engines, see \n          <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL-certificate-rotation.html\">\n              Rotating Your SSL/TLS Certificate</a> in the <i>Amazon Aurora User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Override the system-default Secure Sockets Layer/Transport Layer Security (SSL/TLS)\n          certificate for Amazon RDS for new DB instances, or remove the override.</p>\n        <p>By using this operation, you can specify an RDS-approved SSL/TLS certificate for new DB\n            instances that is different from the default certificate provided by RDS. You can also\n            use this operation to remove the override, so that new DB instances use the default\n            certificate provided by RDS.</p>\n        <p>You might need to override the default certificate in the following situations:</p>\n        <ul>\n            <li>\n                <p>You already migrated your applications to support the latest certificate authority (CA) certificate, but the new CA certificate is not yet \n                  the RDS default CA certificate for the specified Amazon Web Services Region.</p>\n            </li>\n            <li>\n                <p>RDS has already moved to a new default CA certificate for the specified Amazon Web Services\n                    Region, but you are still in the process of supporting the new CA certificate.\n                    In this case, you temporarily need additional time to finish your application\n                    changes.</p>\n            </li>\n         </ul>\n        <p>For more information about rotating your SSL/TLS certificate for RDS DB engines, see \n          <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL-certificate-rotation.html\">\n              Rotating Your SSL/TLS Certificate</a> in the <i>Amazon RDS User Guide</i>.</p>\n        <p>For more information about rotating your SSL/TLS certificate for Aurora DB engines, see \n          <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL-certificate-rotation.html\">\n              Rotating Your SSL/TLS Certificate</a> in the <i>Amazon Aurora User Guide</i>.</p>"
             }
         },
         "com.amazonaws.rds#ModifyCertificatesMessage": {
@@ -16898,6 +16385,9 @@
             "input": {
                 "target": "com.amazonaws.rds#RemoveRoleFromDBClusterMessage"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.rds#DBClusterNotFoundFault"
@@ -16942,6 +16432,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.rds#RemoveRoleFromDBInstanceMessage"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -17038,6 +16531,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.rds#RemoveTagsFromResourceMessage"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -20224,12 +19720,6 @@
                 "target": "com.amazonaws.rds#String"
             }
         },
-        "com.amazonaws.rds#StringSensitive": {
-            "type": "string",
-            "traits": {
-                "smithy.api#sensitive": {}
-            }
-        },
         "com.amazonaws.rds#Subnet": {
             "type": "structure",
             "members": {
@@ -20810,50 +20300,6 @@
                 "traits": {
                     "smithy.api#xmlName": "VpcSecurityGroupMembership"
                 }
-            }
-        },
-        "com.amazonaws.rds#VpnDetails": {
-            "type": "structure",
-            "members": {
-                "VpnId": {
-                    "target": "com.amazonaws.rds#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The ID of the VPN.</p>"
-                    }
-                },
-                "VpnTunnelOriginatorIP": {
-                    "target": "com.amazonaws.rds#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The IP address of network traffic from your on-premises data center. A custom AZ receives the network traffic.</p>"
-                    }
-                },
-                "VpnGatewayIp": {
-                    "target": "com.amazonaws.rds#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The IP address of network traffic from Amazon Web Services to your on-premises data center.</p>"
-                    }
-                },
-                "VpnPSK": {
-                    "target": "com.amazonaws.rds#StringSensitive",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The preshared key (PSK) for the VPN.</p>"
-                    }
-                },
-                "VpnName": {
-                    "target": "com.amazonaws.rds#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The name of the VPN.</p>"
-                    }
-                },
-                "VpnState": {
-                    "target": "com.amazonaws.rds#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The state of the VPN.</p>"
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "<p>Information about the virtual private network (VPN) between the VMware vSphere cluster and the Amazon Web Services website.</p>\n        <p>For more information about RDS on VMware, see the \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html\">\n                RDS on VMware User Guide.</a>\n         </p>"
             }
         },
         "com.amazonaws.rds#WriteForwardingStatus": {

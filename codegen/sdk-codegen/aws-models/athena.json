@@ -35,7 +35,7 @@
                 "S3AclOption": {
                     "target": "com.amazonaws.athena#S3AclOption",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 canned ACL that Athena should specify when storing\n            query results. Currently the only supported canned ACL is\n                <code>BUCKET_OWNER_FULL_CONTROL</code>. If a query runs in a workgroup and the\n            workgroup overrides client-side settings, then the Amazon S3 canned ACL\n            specified in the workgroup's settings is used for all queries that run in the workgroup.\n            For more information about Amazon S3 canned ACLs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#canned-acl\">Canned ACL</a> in the <i>Amazon S3 User\n                Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon S3 canned ACL that Athena should specify when storing\n            query results. Currently the only supported canned ACL is\n                <code>BUCKET_OWNER_FULL_CONTROL</code>. If a query runs in a workgroup and the\n            workgroup overrides client-side settings, then the Amazon S3 canned ACL\n            specified in the workgroup's settings is used for all queries that run in the workgroup.\n            For more information about Amazon S3 canned ACLs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#canned-acl\">Canned ACL</a> in the <i>Amazon S3 User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -192,6 +192,18 @@
                     "target": "com.amazonaws.athena#ErrorType",
                     "traits": {
                         "smithy.api#documentation": "<p>An integer value that provides specific information about an Athena query\n            error. For the meaning of specific values, see the <a href=\"https://docs.aws.amazon.com/athena/latest/ug/error-reference.html#error-reference-error-type-reference\">Error Type Reference</a> in the <i>Amazon Athena User\n                Guide</i>.</p>"
+                    }
+                },
+                "Retryable": {
+                    "target": "com.amazonaws.athena#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>True if the query might succeed if resubmitted.</p>"
+                    }
+                },
+                "ErrorMessage": {
+                    "target": "com.amazonaws.athena#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains a short description of the error that occurred.</p>"
                     }
                 }
             },
@@ -1027,19 +1039,19 @@
                 "EncryptionOption": {
                     "target": "com.amazonaws.athena#EncryptionOption",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether Amazon S3 server-side encryption with Amazon S3-managed keys (<code>SSE-S3</code>), server-side encryption with KMS-managed keys\n                (<code>SSE-KMS</code>), or client-side encryption with KMS-managed keys (CSE-KMS) is\n            used.</p>\n        <p>If a query runs in a workgroup and the workgroup overrides client-side settings, then\n            the workgroup's setting for encryption is used. It specifies whether query results must\n            be encrypted, for all queries that run in this workgroup. </p>",
+                        "smithy.api#documentation": "<p>Indicates whether Amazon S3 server-side encryption with Amazon S3-managed keys (<code>SSE_S3</code>), server-side encryption with KMS-managed keys\n                (<code>SSE_KMS</code>), or client-side encryption with KMS-managed keys\n                (<code>CSE_KMS</code>) is used.</p>\n        <p>If a query runs in a workgroup and the workgroup overrides client-side settings, then\n            the workgroup's setting for encryption is used. It specifies whether query results must\n            be encrypted, for all queries that run in this workgroup. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "KmsKey": {
                     "target": "com.amazonaws.athena#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>For <code>SSE-KMS</code> and <code>CSE-KMS</code>, this is the KMS key ARN or\n            ID.</p>"
+                        "smithy.api#documentation": "<p>For <code>SSE_KMS</code> and <code>CSE_KMS</code>, this is the KMS key ARN or\n            ID.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>If query results are encrypted in Amazon S3, indicates the encryption option\n            used (for example, <code>SSE-KMS</code> or <code>CSE-KMS</code>) and key\n            information.</p>"
+                "smithy.api#documentation": "<p>If query results are encrypted in Amazon S3, indicates the encryption option\n            used (for example, <code>SSE_KMS</code> or <code>CSE_KMS</code>) and key\n            information.</p>"
             }
         },
         "com.amazonaws.athena#EncryptionOption": {
@@ -2356,7 +2368,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A query, where <code>QueryString</code> contains the SQL statements that\n            make up the query.</p>"
+                "smithy.api#documentation": "<p>A query, where <code>QueryString</code> contains the SQL statements that make up the\n            query.</p>"
             }
         },
         "com.amazonaws.athena#NamedQueryDescriptionString": {
@@ -2731,13 +2743,13 @@
                 "EncryptionConfiguration": {
                     "target": "com.amazonaws.athena#EncryptionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>If query results are encrypted in Amazon S3, indicates the encryption option\n            used (for example, <code>SSE-KMS</code> or <code>CSE-KMS</code>) and key information.\n            This is a client-side setting. If workgroup settings override client-side settings, then\n            the query uses the encryption configuration that is specified for the workgroup, and\n            also uses the location for storing query results specified in the workgroup. See <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a> and <a href=\"https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html\">Workgroup Settings Override Client-Side Settings</a>.</p>"
+                        "smithy.api#documentation": "<p>If query results are encrypted in Amazon S3, indicates the encryption option\n            used (for example, <code>SSE_KMS</code> or <code>CSE_KMS</code>) and key information.\n            This is a client-side setting. If workgroup settings override client-side settings, then\n            the query uses the encryption configuration that is specified for the workgroup, and\n            also uses the location for storing query results specified in the workgroup. See <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a> and <a href=\"https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html\">Workgroup Settings Override Client-Side Settings</a>.</p>"
                     }
                 },
                 "ExpectedBucketOwner": {
                     "target": "com.amazonaws.athena#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that you expect to be the owner of the Amazon S3 bucket specified by <a>ResultConfiguration$OutputLocation</a>.\n            If set, Athena uses the value for <code>ExpectedBucketOwner</code> when it\n            makes Amazon S3 calls to your specified output location. If the\n            <code>ExpectedBucketOwner</code>\n            Amazon Web Services account ID does not match the actual owner of the Amazon S3\n            bucket, the call fails with a permissions error.</p>\n        <p>This is a client-side setting. If workgroup settings override client-side settings,\n            then the query uses the <code>ExpectedBucketOwner</code> setting that is specified for\n            the workgroup, and also uses the location for storing query results specified in the\n            workgroup. See <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a>\n            and <a href=\"https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html\">Workgroup Settings Override Client-Side Settings</a>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that you expect to be the owner of the Amazon S3 bucket specified by <a>ResultConfiguration$OutputLocation</a>.\n            If set, Athena uses the value for <code>ExpectedBucketOwner</code> when it\n            makes Amazon S3 calls to your specified output location. If the\n                <code>ExpectedBucketOwner</code>\n            Amazon Web Services account ID does not match the actual owner of the Amazon S3\n            bucket, the call fails with a permissions error.</p>\n        <p>This is a client-side setting. If workgroup settings override client-side settings,\n            then the query uses the <code>ExpectedBucketOwner</code> setting that is specified for\n            the workgroup, and also uses the location for storing query results specified in the\n            workgroup. See <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a>\n            and <a href=\"https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html\">Workgroup Settings Override Client-Side Settings</a>.</p>"
                     }
                 },
                 "AclConfiguration": {
@@ -2763,7 +2775,7 @@
                 "RemoveOutputLocation": {
                     "target": "com.amazonaws.athena#BoxedBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>If set to \"true\", indicates that the previously-specified query results location (also\n            known as a client-side setting) for queries in this workgroup should be ignored and set\n            to null. If set to \"false\" or not set, and a value is present in the\n            <code>OutputLocation</code> in <code>ResultConfigurationUpdates</code> (the\n            client-side setting), the <code>OutputLocation</code> in the workgroup's\n            <code>ResultConfiguration</code> will be updated with the new value. For more\n            information, see <a href=\"https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html\">Workgroup Settings Override\n                Client-Side Settings</a>.</p>"
+                        "smithy.api#documentation": "<p>If set to \"true\", indicates that the previously-specified query results location (also\n            known as a client-side setting) for queries in this workgroup should be ignored and set\n            to null. If set to \"false\" or not set, and a value is present in the\n                <code>OutputLocation</code> in <code>ResultConfigurationUpdates</code> (the\n            client-side setting), the <code>OutputLocation</code> in the workgroup's\n                <code>ResultConfiguration</code> will be updated with the new value. For more\n            information, see <a href=\"https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html\">Workgroup Settings Override\n                Client-Side Settings</a>.</p>"
                     }
                 },
                 "EncryptionConfiguration": {
@@ -2781,13 +2793,13 @@
                 "ExpectedBucketOwner": {
                     "target": "com.amazonaws.athena#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that you expect to be the owner of the Amazon S3 bucket specified by <a>ResultConfiguration$OutputLocation</a>.\n            If set, Athena uses the value for <code>ExpectedBucketOwner</code> when it\n            makes Amazon S3 calls to your specified output location. If the\n            <code>ExpectedBucketOwner</code>\n            Amazon Web Services account ID does not match the actual owner of the Amazon S3\n            bucket, the call fails with a permissions error.</p>\n        \n        <p>If workgroup settings override client-side settings, then the query uses the\n            <code>ExpectedBucketOwner</code> setting that is specified for the workgroup, and\n            also uses the location for storing query results specified in the workgroup. See <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a> and <a href=\"https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html\">Workgroup Settings Override Client-Side Settings</a>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that you expect to be the owner of the Amazon S3 bucket specified by <a>ResultConfiguration$OutputLocation</a>.\n            If set, Athena uses the value for <code>ExpectedBucketOwner</code> when it\n            makes Amazon S3 calls to your specified output location. If the\n                <code>ExpectedBucketOwner</code>\n            Amazon Web Services account ID does not match the actual owner of the Amazon S3\n            bucket, the call fails with a permissions error.</p>\n\n        <p>If workgroup settings override client-side settings, then the query uses the\n                <code>ExpectedBucketOwner</code> setting that is specified for the workgroup, and\n            also uses the location for storing query results specified in the workgroup. See <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a> and <a href=\"https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html\">Workgroup Settings Override Client-Side Settings</a>.</p>"
                     }
                 },
                 "RemoveExpectedBucketOwner": {
                     "target": "com.amazonaws.athena#BoxedBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>If set to \"true\", removes the Amazon Web Services account ID previously specified for\n            <a>ResultConfiguration$ExpectedBucketOwner</a>. If set to \"false\" or not\n            set, and a value is present in the <code>ExpectedBucketOwner</code> in\n            <code>ResultConfigurationUpdates</code> (the client-side setting), the\n            <code>ExpectedBucketOwner</code> in the workgroup's <code>ResultConfiguration</code>\n            is updated with the new value. For more information, see <a href=\"https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html\">Workgroup Settings Override\n                Client-Side Settings</a>.</p>"
+                        "smithy.api#documentation": "<p>If set to \"true\", removes the Amazon Web Services account ID previously specified for\n                <a>ResultConfiguration$ExpectedBucketOwner</a>. If set to \"false\" or not\n            set, and a value is present in the <code>ExpectedBucketOwner</code> in\n                <code>ResultConfigurationUpdates</code> (the client-side setting), the\n                <code>ExpectedBucketOwner</code> in the workgroup's <code>ResultConfiguration</code>\n            is updated with the new value. For more information, see <a href=\"https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html\">Workgroup Settings Override\n                Client-Side Settings</a>.</p>"
                     }
                 },
                 "AclConfiguration": {
@@ -3407,7 +3419,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a <a>NamedQuery</a> object. The database or workgroup cannot be updated.</p>",
+                "smithy.api#documentation": "<p>Updates a <a>NamedQuery</a> object. The database or workgroup cannot be\n            updated.</p>",
                 "smithy.api#idempotent": {}
             }
         },

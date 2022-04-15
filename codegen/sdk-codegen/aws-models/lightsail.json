@@ -177,6 +177,61 @@
                 ]
             }
         },
+        "com.amazonaws.lightsail#AccountLevelBpaSync": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.lightsail#AccountLevelBpaSyncStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the account-level BPA synchronization.</p>\n\n         <p>The following statuses are possible:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>InSync</code> - Account-level BPA is synchronized. The Amazon S3\n          account-level BPA configuration applies to your Lightsail buckets.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NeverSynced</code> - Synchronization has not yet happened. The Amazon S3\n          account-level BPA configuration does not apply to your Lightsail buckets.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Failed</code> - Synchronization failed. The Amazon S3 account-level BPA\n          configuration does not apply to your Lightsail buckets.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Defaulted</code> - Synchronization failed and account-level BPA for your\n          Lightsail buckets is defaulted to <i>active</i>.</p>\n            </li>\n         </ul>\n         <note>\n            <p>You might need to complete further actions if the status is <code>Failed</code> or\n          <code>Defaulted</code>. The <code>message</code> parameter provides more information for\n        those statuses.</p>\n         </note>"
+                    }
+                },
+                "lastSyncedAt": {
+                    "target": "com.amazonaws.lightsail#IsoDate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the account-level BPA configuration was last synchronized. This\n      value is null when the account-level BPA configuration has not been synchronized.</p>"
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.lightsail#BPAStatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message that provides a reason for a <code>Failed</code> or <code>Defaulted</code>\n      synchronization status.</p>\n\n         <p>The following messages are possible:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SYNC_ON_HOLD</code> - The synchronization has not yet happened. This status\n          message occurs immediately after you create your first Lightsail bucket. This status\n          message should change after the first synchronization happens, approximately 1 hour after\n          the first bucket is created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DEFAULTED_FOR_SLR_MISSING</code> - The synchronization failed because the\n          required service-linked role is missing from your Amazon Web Services account. The\n          account-level BPA configuration for your Lightsail buckets is defaulted to\n            <i>active</i> until the synchronization can occur. This means that all\n          your buckets are private and not publicly accessible. For more information about how to\n          create the required service-linked role to allow synchronization, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-using-service-linked-roles\">Using Service-Linked Roles for Amazon Lightsail</a> in the\n              <i>Amazon Lightsail Developer Guide</i>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DEFAULTED_FOR_SLR_MISSING_ON_HOLD</code> - The synchronization failed because\n          the required service-linked role is missing from your Amazon Web Services account.\n          Account-level BPA is not yet configured for your Lightsail buckets. Therefore, only the\n          bucket access permissions and individual object access permissions apply to your\n          Lightsail buckets. For more information about how to create the required service-linked\n          role to allow synchronization, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-using-service-linked-roles\">Using Service-Linked Roles for Amazon Lightsail</a> in the\n              <i>Amazon Lightsail Developer Guide</i>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Unknown</code> - The reason that synchronization failed is unknown. Contact\n            Amazon Web Services Support for more information.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "bpaImpactsLightsail": {
+                    "target": "com.amazonaws.lightsail#boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Boolean value that indicates whether account-level block public access is affecting your\n        Lightsail buckets.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the synchronization status of the Amazon Simple Storage Service (Amazon S3)\n      account-level block public access (BPA) feature for your Lightsail buckets.</p>\n\n         <p>The account-level BPA feature of Amazon S3 provides centralized controls to limit\n      public access to all Amazon S3 buckets in an account. BPA can make all Amazon S3 buckets in an Amazon Web Services account private regardless of the individual bucket and\n      object permissions that are configured. Lightsail buckets take into account the\n        Amazon S3 account-level BPA configuration when allowing or denying public access. To\n      do this, Lightsail periodically fetches the account-level BPA configuration\n      from Amazon S3. When the account-level BPA status is <code>InSync</code>, the Amazon S3 account-level BPA configuration is synchronized and it applies to your Lightsail\n      buckets. For more information about Amazon Simple Storage Service account-level BPA and how it affects\n        Lightsail buckets, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-block-public-access-for-buckets\">Block public access for buckets in Amazon Lightsail</a> in the\n          <i>Amazon Lightsail Developer Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.lightsail#AccountLevelBpaSyncStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "InSync",
+                        "name": "InSync"
+                    },
+                    {
+                        "value": "Failed",
+                        "name": "Failed"
+                    },
+                    {
+                        "value": "NeverSynced",
+                        "name": "NeverSynced"
+                    },
+                    {
+                        "value": "Defaulted",
+                        "name": "Defaulted"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.lightsail#AccountSetupInProgressException": {
             "type": "structure",
             "members": {
@@ -987,6 +1042,29 @@
                 "target": "com.amazonaws.lightsail#AvailabilityZone"
             }
         },
+        "com.amazonaws.lightsail#BPAStatusMessage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "DEFAULTED_FOR_SLR_MISSING",
+                        "name": "DEFAULTED_FOR_SLR_MISSING"
+                    },
+                    {
+                        "value": "SYNC_ON_HOLD",
+                        "name": "SYNC_ON_HOLD"
+                    },
+                    {
+                        "value": "DEFAULTED_FOR_SLR_MISSING_ON_HOLD",
+                        "name": "DEFAULTED_FOR_SLR_MISSING_ON_HOLD"
+                    },
+                    {
+                        "value": "Unknown",
+                        "name": "Unknown"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.lightsail#Base64": {
             "type": "string"
         },
@@ -1220,7 +1298,7 @@
                 "destination": {
                     "target": "com.amazonaws.lightsail#BucketName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the bucket where the access is saved. The destination can be a Lightsail\n      bucket in the same account, and in the same AWS Region as the source bucket.</p>\n         <note>\n            <p>This parameter is required when enabling the access log for a bucket, and should be\n        omitted when disabling the access log.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The name of the bucket where the access logs are saved. The destination can be a\n      Lightsail bucket in the same account, and in the same AWS Region as the source\n      bucket.</p>\n         <note>\n            <p>This parameter is required when enabling the access log for a bucket, and should be\n        omitted when disabling the access log.</p>\n         </note>"
                     }
                 },
                 "prefix": {
@@ -3293,7 +3371,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a deployment for your Amazon Lightsail container service.</p>\n\n         <p>A deployment specifies the containers that will be launched on the container service and\n      their settings, such as the ports to open, the environment variables to apply, and the launch\n      command to run. It also specifies the container that will serve as the public endpoint of the\n      deployment and its settings, such as the HTTP or HTTPS port to use, and the health check\n      configuration.</p>\n\n         <p>You can deploy containers to your container service using container images from a public\n      registry like Docker Hub, or from your local machine. For more information, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-creating-container-images\">Creating container images for your Amazon Lightsail container services</a> in the\n        <i>Amazon Lightsail Developer Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Creates a deployment for your Amazon Lightsail container service.</p>\n\n         <p>A deployment specifies the containers that will be launched on the container service and\n      their settings, such as the ports to open, the environment variables to apply, and the launch\n      command to run. It also specifies the container that will serve as the public endpoint of the\n      deployment and its settings, such as the HTTP or HTTPS port to use, and the health check\n      configuration.</p>\n\n         <p>You can deploy containers to your container service using container images from a public\n      registry such as Amazon ECR Public, or from your local machine. For more information, see\n        <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-creating-container-images\">Creating container images for your Amazon Lightsail container services</a> in the\n        <i>Amazon Lightsail Developer Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ls/api/2016-11-28/container-services/{serviceName}/deployments",
@@ -8108,7 +8186,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns information about one or more Amazon Lightsail buckets.</p>\n\n         <p>For more information about buckets, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/buckets-in-amazon-lightsail\">Buckets in Amazon Lightsail</a> in the <i>Amazon Lightsail Developer\n        Guide</i>..</p>",
+                "smithy.api#documentation": "<p>Returns information about one or more Amazon Lightsail buckets. The information returned\n      includes the synchronization status of the Amazon Simple Storage Service (Amazon S3)\n      account-level block public access feature for your Lightsail buckets.</p>\n\n         <p>For more information about buckets, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/buckets-in-amazon-lightsail\">Buckets in Amazon Lightsail</a> in the <i>Amazon Lightsail Developer\n        Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ls/api/2016-11-28/GetBuckets",
@@ -8152,6 +8230,12 @@
                     "target": "com.amazonaws.lightsail#string",
                     "traits": {
                         "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n\n         <p>A next page token is not returned if there are no more results to display.</p>\n\n         <p>To get the next page of results, perform another <code>GetBuckets</code> request and\n      specify the next page token using the <code>pageToken</code> parameter.</p>"
+                    }
+                },
+                "accountLevelBpaSync": {
+                    "target": "com.amazonaws.lightsail#AccountLevelBpaSync",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that describes the synchronization status of the Amazon S3 account-level\n      block public access feature for your Lightsail buckets.</p>\n\n         <p>For more information about this feature and how it affects Lightsail buckets, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-block-public-access-for-buckets\">Block public access for buckets in Amazon Lightsail</a>.</p>"
                     }
                 }
             }
@@ -9174,7 +9258,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the bundles that can be applied to your Amazon Lightsail content delivery network\n      (CDN) distributions.</p>\n         <p>A distribution bundle specifies the monthly network transfer quota and monthly cost of\n      your dsitribution.</p>",
+                "smithy.api#documentation": "<p>Returns the bundles that can be applied to your Amazon Lightsail content delivery network\n      (CDN) distributions.</p>\n         <p>A distribution bundle specifies the monthly network transfer quota and monthly cost of\n      your distribution.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ls/api/2016-11-28/GetDistributionBundles",
@@ -18582,7 +18666,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the bundle of your Amazon Lightsail content delivery network (CDN)\n      distribution.</p>\n         <p>A distribution bundle specifies the monthly network transfer quota and monthly cost of\n      your dsitribution.</p>\n         <p>Update your distribution's bundle if your distribution is going over its monthly network\n      transfer quota and is incurring an overage fee.</p>\n         <p>You can update your distribution's bundle only one time within your monthly AWS billing\n      cycle. To determine if you can update your distribution's bundle, use the\n        <code>GetDistributions</code> action. The <code>ableToUpdateBundle</code> parameter in the\n      result will indicate whether you can currently update your distribution's bundle.</p>",
+                "smithy.api#documentation": "<p>Updates the bundle of your Amazon Lightsail content delivery network (CDN)\n      distribution.</p>\n         <p>A distribution bundle specifies the monthly network transfer quota and monthly cost of\n      your distribution.</p>\n         <p>Update your distribution's bundle if your distribution is going over its monthly network\n      transfer quota and is incurring an overage fee.</p>\n         <p>You can update your distribution's bundle only one time within your monthly AWS billing\n      cycle. To determine if you can update your distribution's bundle, use the\n        <code>GetDistributions</code> action. The <code>ableToUpdateBundle</code> parameter in the\n      result will indicate whether you can currently update your distribution's bundle.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ls/api/2016-11-28/UpdateDistributionBundle",
