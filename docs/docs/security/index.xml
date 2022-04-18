@@ -204,6 +204,15 @@ configure your client to set the minimum TLS version to 1.2.&lt;/p&gt;
 builder. The following example demonstrates how to specify a minimum TLS
 version of &lt;a href=&#34;https://pkg.go.dev/crypto/tls#VersionTLS13&#34;&gt;1.3&lt;/a&gt; using the
 &lt;a href=&#34;https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws/transport/http#BuildableClient&#34;&gt;http.BuildableClient&lt;/a&gt;.&lt;/p&gt;
+
+
+&lt;div class=&#34;pageinfo pageinfo-warning&#34;&gt;
+&lt;p&gt;Some AWS Services do not yet support TLS 1.3; configuring this as your minimum
+version may affect SDK interoperability. We recommend testing this change with
+each service prior to production deployment.&lt;/p&gt;
+
+&lt;/div&gt;
+
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;package&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;main&lt;/span&gt;
 
 &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;
