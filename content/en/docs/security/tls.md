@@ -21,6 +21,12 @@ builder. The following example demonstrates how to specify a minimum TLS
 version of [1.3](https://pkg.go.dev/crypto/tls#VersionTLS13) using the 
 [http.BuildableClient]({{< apiref "aws/transport/http#BuildableClient" >}}).
 
+{{% pageinfo color="warning" %}}
+Some AWS Services do not yet support TLS 1.3; configuring this as your minimum
+version may affect SDK interoperability. We recommend testing this change with
+each service prior to production deployment.
+{{% /pageinfo %}}
+
 ```go
 package main
 
