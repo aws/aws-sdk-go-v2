@@ -86,6 +86,9 @@ type StartDocumentAnalysisInput struct {
 	// GetDocumentAnalysis operation.
 	OutputConfig *types.OutputConfig
 
+	//
+	QueriesConfig *types.QueriesConfig
+
 	noSmithyDocumentSerde
 }
 

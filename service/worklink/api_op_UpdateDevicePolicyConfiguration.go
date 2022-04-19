@@ -11,6 +11,9 @@ import (
 )
 
 // Updates the device policy configuration for the fleet.
+//
+// Deprecated: Amazon WorkLink is no longer supported. This will be removed in a
+// future version of the SDK.
 func (c *Client) UpdateDevicePolicyConfiguration(ctx context.Context, params *UpdateDevicePolicyConfigurationInput, optFns ...func(*Options)) (*UpdateDevicePolicyConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateDevicePolicyConfigurationInput{}

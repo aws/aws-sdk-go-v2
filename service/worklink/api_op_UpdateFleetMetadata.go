@@ -11,6 +11,9 @@ import (
 )
 
 // Updates fleet metadata, such as DisplayName.
+//
+// Deprecated: Amazon WorkLink is no longer supported. This will be removed in a
+// future version of the SDK.
 func (c *Client) UpdateFleetMetadata(ctx context.Context, params *UpdateFleetMetadataInput, optFns ...func(*Options)) (*UpdateFleetMetadataOutput, error) {
 	if params == nil {
 		params = &UpdateFleetMetadataInput{}

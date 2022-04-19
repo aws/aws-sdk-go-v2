@@ -5773,6 +5773,11 @@ func awsAwsquery_serializeOpDocumentCreateAutoScalingGroupInput(v *CreateAutoSca
 		objectKey.Integer(*v.DefaultCooldown)
 	}
 
+	if v.DefaultInstanceWarmup != nil {
+		objectKey := object.Key("DefaultInstanceWarmup")
+		objectKey.Integer(*v.DefaultInstanceWarmup)
+	}
+
 	if v.DesiredCapacity != nil {
 		objectKey := object.Key("DesiredCapacity")
 		objectKey.Integer(*v.DesiredCapacity)
@@ -7182,6 +7187,11 @@ func awsAwsquery_serializeOpDocumentUpdateAutoScalingGroupInput(v *UpdateAutoSca
 	if v.DefaultCooldown != nil {
 		objectKey := object.Key("DefaultCooldown")
 		objectKey.Integer(*v.DefaultCooldown)
+	}
+
+	if v.DefaultInstanceWarmup != nil {
+		objectKey := object.Key("DefaultInstanceWarmup")
+		objectKey.Integer(*v.DefaultInstanceWarmup)
 	}
 
 	if v.DesiredCapacity != nil {

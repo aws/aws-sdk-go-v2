@@ -80,6 +80,14 @@ type Block struct {
 	// SELECTION_ELEMENT - A selection element such as an option button (radio button)
 	// or a check box that's detected on a document page. Use the value of
 	// SelectionStatus to determine the status of the selection element.
+	//
+	// * QUERY - A
+	// question asked during the call of AnalyzeDocument. Contains an alias and an ID
+	// that attachs it to its answer.
+	//
+	// * QUERY_RESULT - A response to a question asked
+	// during the call of analyze document. Comes with an alias and ID for ease of
+	// locating in a response. Also contains location and confidence score.
 	BlockType BlockType
 
 	// The column in which a table cell appears. The first column position is 1.
@@ -122,6 +130,9 @@ type Block struct {
 	// of Page is always 1. Synchronous operations don't return Page because every
 	// input document is considered to be a single-page document.
 	Page *int32
+
+	//
+	Query *Query
 
 	// A list of child blocks of the current block. For example, a LINE object has
 	// child blocks for each WORD block that's part of the line of text. There aren't
@@ -499,6 +510,53 @@ type Point struct {
 
 	// The value of the Y coordinate for a point on a Polygon.
 	Y float32
+
+	noSmithyDocumentSerde
+}
+
+//
+type QueriesConfig struct {
+
+	//
+	//
+	// This member is required.
+	Queries []Query
+
+	noSmithyDocumentSerde
+}
+
+// Each query contains the question you want to ask in the Text and the alias you
+// want to associate.
+type Query struct {
+
+	// Question that Amazon Textract will apply to the document. An example would be
+	// "What is the customer's SSN?"
+	//
+	// This member is required.
+	Text *string
+
+	// Alias attached to the query, for ease of location.
+	Alias *string
+
+	// List of pages associated with the query. The following is a list of rules for
+	// using this parameter.
+	//
+	// * If a page is not specified, it is set to ["1"] by
+	// default.
+	//
+	// * The following characters are allowed in the parameter's string: 0 1
+	// 2 3 4 5 6 7 8 9 - *. No whitespace is allowed.
+	//
+	// * When using * to indicate all
+	// pages, it must be the only element in the string.
+	//
+	// * You can use page intervals,
+	// such as [“1-3”, “1-1”, “4-*”]. Where * indicates last page of document.
+	//
+	// *
+	// Specified pages must be greater than 0 and less than or equal to the number of
+	// pages in the document.
+	Pages []string
 
 	noSmithyDocumentSerde
 }

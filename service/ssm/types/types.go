@@ -101,6 +101,9 @@ type Association struct {
 	// schedule runs in Coordinated Universal Time (UTC).
 	ScheduleExpression *string
 
+	// Number of days to wait after the scheduled day to run an association.
+	ScheduleOffset int32
+
 	// The managed nodes targeted by the request to create an association. You can
 	// target all managed nodes in an Amazon Web Services account by specifying the
 	// InstanceIds key with a value of *.
@@ -199,6 +202,9 @@ type AssociationDescription struct {
 
 	// A cron expression that specifies a schedule when the association runs.
 	ScheduleExpression *string
+
+	// Number of days to wait after the scheduled day to run an association.
+	ScheduleOffset int32
 
 	// The association status.
 	Status *AssociationStatus
@@ -454,6 +460,9 @@ type AssociationVersionInfo struct {
 	// The cron or rate schedule specified for the association when the association
 	// version was created.
 	ScheduleExpression *string
+
+	// Number of days to wait after the scheduled day to run an association.
+	ScheduleOffset int32
 
 	// The mode for generating association compliance. You can specify AUTO or MANUAL.
 	// In AUTO mode, the system uses the status of the association execution to
@@ -1541,6 +1550,9 @@ type CreateAssociationBatchRequestEntry struct {
 
 	// A cron expression that specifies a schedule when the association runs.
 	ScheduleExpression *string
+
+	// Number of days to wait after the scheduled day to run an association.
+	ScheduleOffset int32
 
 	// The mode for generating association compliance. You can specify AUTO or MANUAL.
 	// In AUTO mode, the system uses the status of the association execution to

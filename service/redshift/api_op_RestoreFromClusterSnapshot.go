@@ -136,7 +136,7 @@ type RestoreFromClusterSnapshotInput struct {
 	ElasticIp *string
 
 	// Enables support for restoring an unencrypted snapshot to a cluster encrypted
-	// with Key Management Service (KMS) and a CMK.
+	// with Key Management Service (KMS) and a customer managed key.
 	Encrypted *bool
 
 	// An option that specifies whether to create the cluster with enhanced VPC routing
@@ -164,8 +164,8 @@ type RestoreFromClusterSnapshotInput struct {
 	// in the Amazon Redshift Cluster Management Guide.
 	IamRoles []string
 
-	// The Key Management Service (KMS) key ID of the encryption key to encrypt data in
-	// the cluster restored from a shared snapshot. You can also provide the key ID
+	// The Key Management Service (KMS) key ID of the encryption key that encrypts data
+	// in the cluster restored from a shared snapshot. You can also provide the key ID
 	// when you restore from an unencrypted snapshot to an encrypted cluster in the
 	// same account. Additionally, you can specify a new KMS key ID when you restore
 	// from an encrypted snapshot in the same account in order to change it. In that

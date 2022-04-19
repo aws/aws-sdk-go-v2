@@ -11,6 +11,9 @@ import (
 )
 
 // Moves a domain to ACTIVE status if it was in the INACTIVE status.
+//
+// Deprecated: Amazon WorkLink is no longer supported. This will be removed in a
+// future version of the SDK.
 func (c *Client) RestoreDomainAccess(ctx context.Context, params *RestoreDomainAccessInput, optFns ...func(*Options)) (*RestoreDomainAccessOutput, error) {
 	if params == nil {
 		params = &RestoreDomainAccessInput{}

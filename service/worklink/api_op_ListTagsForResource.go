@@ -11,6 +11,9 @@ import (
 )
 
 // Retrieves a list of tags for the specified resource.
+//
+// Deprecated: Amazon WorkLink is no longer supported. This will be removed in a
+// future version of the SDK.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}

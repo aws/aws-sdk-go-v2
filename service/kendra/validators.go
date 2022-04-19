@@ -1783,6 +1783,11 @@ func validateDataSourceConfiguration(v *types.DataSourceConfiguration) error {
 			invalidParams.AddNested("BoxConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.QuipConfiguration != nil {
+		if err := validateQuipConfiguration(v.QuipConfiguration); err != nil {
+			invalidParams.AddNested("QuipConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2537,6 +2542,44 @@ func validateProxyConfiguration(v *types.ProxyConfiguration) error {
 	}
 	if v.Port == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Port"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateQuipConfiguration(v *types.QuipConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "QuipConfiguration"}
+	if v.Domain == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
+	}
+	if v.SecretArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecretArn"))
+	}
+	if v.ThreadFieldMappings != nil {
+		if err := validateDataSourceToIndexFieldMappingList(v.ThreadFieldMappings); err != nil {
+			invalidParams.AddNested("ThreadFieldMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MessageFieldMappings != nil {
+		if err := validateDataSourceToIndexFieldMappingList(v.MessageFieldMappings); err != nil {
+			invalidParams.AddNested("MessageFieldMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AttachmentFieldMappings != nil {
+		if err := validateDataSourceToIndexFieldMappingList(v.AttachmentFieldMappings); err != nil {
+			invalidParams.AddNested("AttachmentFieldMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.VpcConfiguration != nil {
+		if err := validateDataSourceVpcConfiguration(v.VpcConfiguration); err != nil {
+			invalidParams.AddNested("VpcConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

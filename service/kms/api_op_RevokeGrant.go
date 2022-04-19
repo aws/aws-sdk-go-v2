@@ -19,7 +19,7 @@ import (
 // consistency. For details, see Eventual consistency
 // (https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#terms-eventual-consistency)
 // in the Key Management Service Developer Guide . For detailed information about
-// grants, including grant terminology, see Using grants
+// grants, including grant terminology, see Grants in KMS
 // (https://docs.aws.amazon.com/kms/latest/developerguide/grants.html) in the Key
 // Management Service Developer Guide . For examples of working with grants in
 // several programming languages, see Programming grants

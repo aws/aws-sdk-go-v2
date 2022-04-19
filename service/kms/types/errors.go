@@ -553,10 +553,11 @@ func (e *InvalidImportTokenException) ErrorFault() smithy.ErrorFault { return sm
 //
 // For encrypting, decrypting,
 // re-encrypting, and generating data keys, the KeyUsage must be ENCRYPT_DECRYPT.
-// For signing and verifying, the KeyUsage must be SIGN_VERIFY. To find the
-// KeyUsage of a KMS key, use the DescribeKey operation. To find the encryption or
-// signing algorithms supported for a particular KMS key, use the DescribeKey
-// operation.
+// For signing and verifying messages, the KeyUsage must be SIGN_VERIFY. For
+// generating and verifying message authentication codes (MACs), the KeyUsage must
+// be GENERATE_VERIFY_MAC. To find the KeyUsage of a KMS key, use the DescribeKey
+// operation. To find the encryption or signing algorithms supported for a
+// particular KMS key, use the DescribeKey operation.
 type InvalidKeyUsageException struct {
 	Message *string
 
@@ -635,6 +636,27 @@ func (e *KMSInternalException) ErrorMessage() string {
 func (e *KMSInternalException) ErrorCode() string             { return "KMSInternalException" }
 func (e *KMSInternalException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
+// The request was rejected because the HMAC verification failed. HMAC verification
+// fails when the HMAC computed by using the specified message, HMAC KMS key, and
+// MAC algorithm does not match the HMAC specified in the request.
+type KMSInvalidMacException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *KMSInvalidMacException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *KMSInvalidMacException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *KMSInvalidMacException) ErrorCode() string             { return "KMSInvalidMacException" }
+func (e *KMSInvalidMacException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The request was rejected because the signature verification failed. Signature
 // verification fails when it cannot confirm that signature was produced by signing
 // the specified message with the specified KMS key and signing algorithm.
@@ -658,7 +680,7 @@ func (e *KMSInvalidSignatureException) ErrorFault() smithy.ErrorFault { return s
 
 // The request was rejected because the state of the specified resource is not
 // valid for this request. For more information about how key state affects the use
-// of a KMS key, see Key state: Effect on your KMS key
+// of a KMS key, see Key states of KMS keys
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
 // Key Management Service Developer Guide .
 type KMSInvalidStateException struct {

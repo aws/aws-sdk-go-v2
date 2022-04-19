@@ -12,6 +12,9 @@ import (
 
 // Describes the configuration for delivering audit streams to the customer
 // account.
+//
+// Deprecated: Amazon WorkLink is no longer supported. This will be removed in a
+// future version of the SDK.
 func (c *Client) DescribeAuditStreamConfiguration(ctx context.Context, params *DescribeAuditStreamConfigurationInput, optFns ...func(*Options)) (*DescribeAuditStreamConfigurationOutput, error) {
 	if params == nil {
 		params = &DescribeAuditStreamConfigurationInput{}

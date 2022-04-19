@@ -16,13 +16,12 @@ import (
 // or both the grant ID and a key identifier (key ID or key ARN) of the KMS key.
 // The CreateGrant operation returns both values. This operation can be called by
 // the retiring principal for a grant, by the grantee principal if the grant allows
-// the RetireGrant operation, and by the Amazon Web Services account (root user) in
-// which the grant is created. It can also be called by principals to whom
-// permission for retiring a grant is delegated. For details, see Retiring and
-// revoking grants
+// the RetireGrant operation, and by the Amazon Web Services account in which the
+// grant is created. It can also be called by principals to whom permission for
+// retiring a grant is delegated. For details, see Retiring and revoking grants
 // (https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#grant-delete)
 // in the Key Management Service Developer Guide. For detailed information about
-// grants, including grant terminology, see Using grants
+// grants, including grant terminology, see Grants in KMS
 // (https://docs.aws.amazon.com/kms/latest/developerguide/grants.html) in the Key
 // Management Service Developer Guide . For examples of working with grants in
 // several programming languages, see Programming grants

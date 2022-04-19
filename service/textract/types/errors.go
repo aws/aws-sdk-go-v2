@@ -315,9 +315,8 @@ func (e *ThrottlingException) ErrorMessage() string {
 func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The format of the input document isn't supported. Documents for synchronous
-// operations can be in PNG or JPEG format only. Documents for asynchronous
-// operations can be in PDF format.
+// The format of the input document isn't supported. Documents for operations can
+// be in PNG, JPEG, PDF, or TIFF format.
 type UnsupportedDocumentException struct {
 	Message *string
 

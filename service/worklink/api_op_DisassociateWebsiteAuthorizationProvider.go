@@ -13,6 +13,9 @@ import (
 // Disassociates a website authorization provider from a specified fleet. After the
 // disassociation, users can't load any associated websites that require this
 // authorization provider.
+//
+// Deprecated: Amazon WorkLink is no longer supported. This will be removed in a
+// future version of the SDK.
 func (c *Client) DisassociateWebsiteAuthorizationProvider(ctx context.Context, params *DisassociateWebsiteAuthorizationProviderInput, optFns ...func(*Options)) (*DisassociateWebsiteAuthorizationProviderOutput, error) {
 	if params == nil {
 		params = &DisassociateWebsiteAuthorizationProviderInput{}

@@ -60,12 +60,12 @@ type PutScalingPolicyInput struct {
 	// in the Amazon EC2 Auto Scaling User Guide.
 	AdjustmentType *string
 
-	// The duration of the policy's cooldown period, in seconds. When a cooldown period
-	// is specified here, it overrides the default cooldown period defined for the Auto
-	// Scaling group. Valid only if the policy type is SimpleScaling. For more
-	// information, see Scaling cooldowns for Amazon EC2 Auto Scaling
+	// A cooldown period, in seconds, that applies to a specific simple scaling policy.
+	// When a cooldown period is specified here, it overrides the default cooldown.
+	// Valid only if the policy type is SimpleScaling. For more information, see
+	// Scaling cooldowns for Amazon EC2 Auto Scaling
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html) in the
-	// Amazon EC2 Auto Scaling User Guide.
+	// Amazon EC2 Auto Scaling User Guide. Default: None
 	Cooldown *int32
 
 	// Indicates whether the scaling policy is enabled or disabled. The default is
@@ -75,10 +75,15 @@ type PutScalingPolicyInput struct {
 	// in the Amazon EC2 Auto Scaling User Guide.
 	Enabled *bool
 
-	// The estimated time, in seconds, until a newly launched instance can contribute
-	// to the CloudWatch metrics. If not provided, the default is to use the value from
-	// the default cooldown period for the Auto Scaling group. Valid only if the policy
-	// type is TargetTrackingScaling or StepScaling.
+	// Not needed if the default instance warmup is defined for the group. The
+	// estimated time, in seconds, until a newly launched instance can contribute to
+	// the CloudWatch metrics. This warm-up period applies to instances launched due to
+	// a specific target tracking or step scaling policy. When a warm-up period is
+	// specified here, it overrides the default instance warmup. Valid only if the
+	// policy type is TargetTrackingScaling or StepScaling. The default is to use the
+	// value for the default instance warmup defined for the group. If default instance
+	// warmup is null, then EstimatedInstanceWarmup falls back to the value of default
+	// cooldown.
 	EstimatedInstanceWarmup *int32
 
 	// The aggregation type for the CloudWatch metrics. The valid values are Minimum,

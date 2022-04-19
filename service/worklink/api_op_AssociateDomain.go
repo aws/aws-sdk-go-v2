@@ -11,6 +11,9 @@ import (
 )
 
 // Specifies a domain to be associated to Amazon WorkLink.
+//
+// Deprecated: Amazon WorkLink is no longer supported. This will be removed in a
+// future version of the SDK.
 func (c *Client) AssociateDomain(ctx context.Context, params *AssociateDomainInput, optFns ...func(*Options)) (*AssociateDomainOutput, error) {
 	if params == nil {
 		params = &AssociateDomainInput{}

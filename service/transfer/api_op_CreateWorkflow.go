@@ -35,15 +35,15 @@ type CreateWorkflowInput struct {
 	// Specifies the details for the steps that are in the specified workflow. The TYPE
 	// specifies which of the following actions is being taken for this step.
 	//
-	// * Copy:
+	// * COPY:
 	// copy the file to another location
 	//
-	// * Custom: custom step with a lambda target
+	// * CUSTOM: custom step with a lambda target
 	//
 	// *
-	// Delete: delete the file
+	// DELETE: delete the file
 	//
-	// * Tag: add a tag to the file
+	// * TAG: add a tag to the file
 	//
 	// Currently, copying and
 	// tagging are supported only on S3. For file location, you specify either the S3

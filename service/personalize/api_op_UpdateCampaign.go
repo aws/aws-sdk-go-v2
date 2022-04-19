@@ -16,9 +16,10 @@ import (
 // status must be ACTIVE or CREATE FAILED. Check the campaign status using the
 // DescribeCampaign
 // (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html)
-// operation. You must wait until the status of the updated campaign is ACTIVE
-// before asking the campaign for recommendations. For more information on
-// campaigns, see CreateCampaign
+// operation. You can still get recommendations from a campaign while an update is
+// in progress. The campaign will use the previous solution version and campaign
+// configuration to generate recommendations until the latest campaign update
+// status is Active. For more information on campaigns, see CreateCampaign
 // (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateCampaign.html).
 func (c *Client) UpdateCampaign(ctx context.Context, params *UpdateCampaignInput, optFns ...func(*Options)) (*UpdateCampaignOutput, error) {
 	if params == nil {

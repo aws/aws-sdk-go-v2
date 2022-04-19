@@ -15,8 +15,8 @@ import (
 // asymmetric KMS key, which never leaves KMS unencrypted, callers with
 // kms:GetPublicKey permission can download the public key of an asymmetric KMS
 // key. You can share the public key to allow others to encrypt messages and verify
-// signatures outside of KMS. For information about symmetric and asymmetric KMS
-// keys, see Using Symmetric and Asymmetric KMS keys
+// signatures outside of KMS. For information about asymmetric KMS keys, see
+// Asymmetric KMS keys
 // (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
 // in the Key Management Service Developer Guide. You do not need to download the
 // public key. Instead, you can use the public key within KMS by calling the
@@ -54,7 +54,7 @@ import (
 // algorithm that is not supported by KMS. You can also avoid errors, such as using
 // the wrong signing algorithm in a verification operation. The KMS key that you
 // use for this operation must be in a compatible key state. For details, see Key
-// state: Effect on your KMS key
+// states of KMS keys
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
 // Key Management Service Developer Guide. Cross-account use: Yes. To perform this
 // operation with a KMS key in a different Amazon Web Services account, specify the

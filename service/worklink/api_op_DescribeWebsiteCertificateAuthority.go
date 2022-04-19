@@ -12,6 +12,9 @@ import (
 )
 
 // Provides information about the certificate authority.
+//
+// Deprecated: Amazon WorkLink is no longer supported. This will be removed in a
+// future version of the SDK.
 func (c *Client) DescribeWebsiteCertificateAuthority(ctx context.Context, params *DescribeWebsiteCertificateAuthorityInput, optFns ...func(*Options)) (*DescribeWebsiteCertificateAuthorityOutput, error) {
 	if params == nil {
 		params = &DescribeWebsiteCertificateAuthorityInput{}

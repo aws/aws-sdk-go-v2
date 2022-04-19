@@ -64,24 +64,19 @@ type CreateLaunchConfigurationInput struct {
 	// in the Amazon EC2 User Guide for Linux Instances.
 	BlockDeviceMappings []types.BlockDeviceMapping
 
-	// The ID of a ClassicLink-enabled VPC to link your EC2-Classic instances to. For
-	// more information, see ClassicLink
+	// EC2-Classic retires on August 15, 2022. This parameter is not supported after
+	// that date. The ID of a ClassicLink-enabled VPC to link your EC2-Classic
+	// instances to. For more information, see ClassicLink
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html) in
-	// the Amazon EC2 User Guide for Linux Instances and Linking EC2-Classic instances
-	// to a VPC
-	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html#as-ClassicLink)
-	// in the Amazon EC2 Auto Scaling User Guide. This parameter can only be used if
-	// you are launching EC2-Classic instances.
+	// the Amazon EC2 User Guide for Linux Instances.
 	ClassicLinkVPCId *string
 
-	// The IDs of one or more security groups for the specified ClassicLink-enabled
-	// VPC. For more information, see ClassicLink
+	// EC2-Classic retires on August 15, 2022. This parameter is not supported after
+	// that date. The IDs of one or more security groups for the specified
+	// ClassicLink-enabled VPC. For more information, see ClassicLink
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html) in
-	// the Amazon EC2 User Guide for Linux Instances and Linking EC2-Classic instances
-	// to a VPC
-	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html#as-ClassicLink)
-	// in the Amazon EC2 Auto Scaling User Guide. If you specify the ClassicLinkVPCId
-	// parameter, you must specify this parameter.
+	// the Amazon EC2 User Guide for Linux Instances. If you specify the
+	// ClassicLinkVPCId parameter, you must specify this parameter.
 	ClassicLinkVPCSecurityGroups []string
 
 	// Specifies whether the launch configuration is optimized for EBS I/O (true) or

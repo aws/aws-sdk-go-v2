@@ -13,81 +13,95 @@ import (
 
 // Creates a unique customer managed KMS key
 // (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#kms-keys)
-// in your Amazon Web Services account and Region. KMS is replacing the term
-// customer master key (CMK) with KMS key and KMS key. The concept has not changed.
-// To prevent breaking changes, KMS is keeping some variations of this term. You
-// can use the CreateKey operation to create symmetric or asymmetric KMS keys.
+// in your Amazon Web Services account and Region. In addition to the required
+// parameters, you can use the optional parameters to specify a key policy,
+// description, tags, and other useful elements for any key type. KMS is replacing
+// the term customer master key (CMK) with KMS key and KMS key. The concept has not
+// changed. To prevent breaking changes, KMS is keeping some variations of this
+// term. To create different types of KMS keys, use the following guidance:
+// Symmetric encryption KMS key To create a symmetric encryption KMS key, you
+// aren't required to specify any parameters. The default value for KeySpec,
+// SYMMETRIC_DEFAULT, and the default value for KeyUsage, ENCRYPT_DECRYPT, create a
+// symmetric encryption KMS key. If you need a key for basic encryption and
+// decryption or you
 //
-// *
-// Symmetric KMS keys contain a 256-bit symmetric key that never leaves KMS
-// unencrypted. To use the KMS key, you must call KMS. You can use a symmetric KMS
-// key to encrypt and decrypt small amounts of data, but they are typically used to
-// generate data keys
-// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#data-keys)
-// and data keys pairs
-// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#data-key-pairs).
-// For details, see GenerateDataKey and GenerateDataKeyPair.
-//
-// * Asymmetric KMS keys
-// can contain an RSA key pair or an Elliptic Curve (ECC) key pair. The private key
-// in an asymmetric KMS key never leaves KMS unencrypted. However, you can use the
+// are creating a KMS key to protect your resources in an Amazon
+// Web Services service, create a symmetric encryption KMS key. The key material in
+// a symmetric encryption key never leaves KMS unencrypted. You can use a symmetric
+// encryption KMS key to encrypt and decrypt data up to 4,096 bytes, but they are
+// typically used to generate data keys and data keys pairs. For details, see
+// GenerateDataKey and GenerateDataKeyPair. Asymmetric KMS keys To create an
+// asymmetric KMS key, use the KeySpec parameter to specify the type of key
+// material in the KMS key. Then, use the KeyUsage parameter to determine whether
+// the KMS key will be used to encrypt and decrypt or sign and verify. You can't
+// change these properties after the KMS key is created. Asymmetric KMS keys
+// contain an RSA key pair or an Elliptic Curve (ECC) key pair. The private key in
+// an asymmetric KMS key never leaves AWS KMS unencrypted. However, you can use the
 // GetPublicKey operation to download the public key so it can be used outside of
-// KMS. KMS keys with RSA key pairs can be used to encrypt or decrypt data or sign
-// and verify messages (but not both). KMS keys with ECC key pairs can be used only
-// to sign and verify messages.
-//
-// For information about symmetric and asymmetric KMS
-// keys, see Using Symmetric and Asymmetric KMS keys
+// AWS KMS. KMS keys with RSA key pairs can be used to encrypt or decrypt data or
+// sign and verify messages (but not both). KMS keys with ECC key pairs can be used
+// only to sign and verify messages. For information about asymmetric KMS keys, see
+// Asymmetric KMS keys
 // (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
-// in the Key Management Service Developer Guide. To create different types of KMS
-// keys, use the following guidance: Asymmetric KMS keys To create an asymmetric
-// KMS key, use the KeySpec parameter to specify the type of key material in the
-// KMS key. Then, use the KeyUsage parameter to determine whether the KMS key will
-// be used to encrypt and decrypt or sign and verify. You can't change these
-// properties after the KMS key is created. Symmetric KMS keys When creating a
-// symmetric KMS key, you don't need to specify the KeySpec or KeyUsage parameters.
-// The default value for KeySpec, SYMMETRIC_DEFAULT, and the default value for
-// KeyUsage, ENCRYPT_DECRYPT, are the only valid values for symmetric KMS keys.
-// Multi-Region primary keys Imported key material To create a multi-Region primary
-// key in the local Amazon Web Services Region, use the MultiRegion parameter with
-// a value of True. To create a multi-Region replica key, that is, a KMS key with
-// the same key ID and key material as a primary key, but in a different Amazon Web
-// Services Region, use the ReplicateKey operation. To change a replica key to a
-// primary key, and its primary key to a replica key, use the UpdatePrimaryRegion
-// operation. This operation supports multi-Region keys, an KMS feature that lets
-// you create multiple interoperable KMS keys in different Amazon Web Services
-// Regions. Because these KMS keys have the same key ID, key material, and other
-// metadata, you can use them interchangeably to encrypt data in one Amazon Web
-// Services Region and decrypt it in a different Amazon Web Services Region without
+// in the Key Management Service Developer Guide. HMAC KMS key To create an HMAC
+// KMS key, set the KeySpec parameter to a key spec value for HMAC KMS keys. Then
+// set the KeyUsage parameter to GENERATE_VERIFY_MAC. You must set the key usage
+// even though GENERATE_VERIFY_MAC is the only valid key usage value for HMAC KMS
+// keys. You can't change these properties after the KMS key is created. HMAC KMS
+// keys are symmetric keys that never leave KMS unencrypted. You can use HMAC keys
+// to generate (GenerateMac) and verify (VerifyMac) HMAC codes for messages up to
+// 4096 bytes. HMAC KMS keys are not supported in all Amazon Web Services Regions.
+// If you try to create an HMAC KMS key in an Amazon Web Services Region in which
+// HMAC keys are not supported, the CreateKey operation returns an
+// UnsupportedOperationException. For a list of Regions in which HMAC KMS keys are
+// supported, see HMAC keys in KMS
+// (https://docs.aws.amazon.com/kms/latest/developerguide/hmac.html) in the Key
+// Management Service Developer Guide. Multi-Region primary keys Imported key
+// material To create a multi-Region primary key in the local Amazon Web Services
+// Region, use the MultiRegion parameter with a value of True. To create a
+// multi-Region replica key, that is, a KMS key with the same key ID and key
+// material as a primary key, but in a different Amazon Web Services Region, use
+// the ReplicateKey operation. To change a replica key to a primary key, and its
+// primary key to a replica key, use the UpdatePrimaryRegion operation. You can
+// create multi-Region KMS keys for all supported KMS key types: symmetric
+// encryption KMS keys, HMAC KMS keys, asymmetric encryption KMS keys, and
+// asymmetric signing KMS keys. You can also create multi-Region keys with imported
+// key material. However, you can't create multi-Region keys in a custom key store.
+// This operation supports multi-Region keys, an KMS feature that lets you create
+// multiple interoperable KMS keys in different Amazon Web Services Regions.
+// Because these KMS keys have the same key ID, key material, and other metadata,
+// you can use them interchangeably to encrypt data in one Amazon Web Services
+// Region and decrypt it in a different Amazon Web Services Region without
 // re-encrypting the data or making a cross-Region call. For more information about
-// multi-Region keys, see Using multi-Region keys
+// multi-Region keys, see Multi-Region keys in KMS
 // (https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html)
-// in the Key Management Service Developer Guide. You can create symmetric and
-// asymmetric multi-Region keys and multi-Region keys with imported key material.
-// You cannot create multi-Region keys in a custom key store. To import your own
-// key material, begin by creating a symmetric KMS key with no key material. To do
+// in the Key Management Service Developer Guide. To import your own key material,
+// begin by creating a symmetric encryption KMS key with no key material. To do
 // this, use the Origin parameter of CreateKey with a value of EXTERNAL. Next, use
 // GetParametersForImport operation to get a public key and import token, and use
 // the public key to encrypt your key material. Then, use ImportKeyMaterial with
 // your import token to import the key material. For step-by-step instructions, see
 // Importing Key Material
 // (https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html) in
-// the Key Management Service Developer Guide . You cannot import the key material
-// into an asymmetric KMS key. To create a multi-Region primary key with imported
-// key material, use the Origin parameter of CreateKey with a value of EXTERNAL and
-// the MultiRegion parameter with a value of True. To create replicas of the
-// multi-Region primary key, use the ReplicateKey operation. For more information
-// about multi-Region keys, see Using multi-Region keys
+// the Key Management Service Developer Guide . This feature supports only
+// symmetric encryption KMS keys, including multi-Region symmetric encryption KMS
+// keys. You cannot import key material into any other type of KMS key. To create a
+// multi-Region primary key with imported key material, use the Origin parameter of
+// CreateKey with a value of EXTERNAL and the MultiRegion parameter with a value of
+// True. To create replicas of the multi-Region primary key, use the ReplicateKey
+// operation. For more information about multi-Region keys, see Multi-Region keys
+// in KMS
 // (https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html)
 // in the Key Management Service Developer Guide. Custom key store To create a
-// symmetric KMS key in a custom key store
+// symmetric encryption KMS key in a custom key store
 // (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html),
 // use the CustomKeyStoreId parameter to specify the custom key store. You must
 // also use the Origin parameter with a value of AWS_CLOUDHSM. The CloudHSM cluster
 // that is associated with the custom key store must have at least two active HSMs
-// in different Availability Zones in the Amazon Web Services Region. You cannot
-// create an asymmetric KMS key in a custom key store. For information about custom
-// key stores in KMS see Using Custom Key Stores
+// in different Availability Zones in the Amazon Web Services Region. Custom key
+// stores support only symmetric encryption KMS keys. You cannot create an HMAC KMS
+// key or an asymmetric KMS key in a custom key store. For information about custom
+// key stores in KMS see Custom key stores in KMS
 // (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html)
 // in the Key Management Service Developer Guide . Cross-account use: No. You
 // cannot use this operation to create a KMS key in a different Amazon Web Services
@@ -140,9 +154,9 @@ type CreateKeyInput struct {
 	// a custom key store, you must also specify the Origin parameter with a value of
 	// AWS_CLOUDHSM. The CloudHSM cluster that is associated with the custom key store
 	// must have at least two active HSMs, each in a different Availability Zone in the
-	// Region. This parameter is valid only for symmetric KMS keys and regional KMS
-	// keys. You cannot create an asymmetric KMS key or a multi-Region key in a custom
-	// key store. To find the ID of a custom key store, use the DescribeCustomKeyStores
+	// Region. This parameter is valid only for symmetric encryption KMS keys in a
+	// single Region. You cannot create any other type of KMS key in a custom key
+	// store. To find the ID of a custom key store, use the DescribeCustomKeyStores
 	// operation. The response includes the custom key store ID and the ID of the
 	// CloudHSM cluster. This operation is part of the Custom Key Store feature
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html)
@@ -167,35 +181,43 @@ type CreateKeyInput struct {
 
 	// Specifies the type of KMS key to create. The default value, SYMMETRIC_DEFAULT,
 	// creates a KMS key with a 256-bit symmetric key for encryption and decryption.
-	// For help choosing a key spec for your KMS key, see How to Choose Your KMS key
-	// Configuration
-	// (https://docs.aws.amazon.com/kms/latest/developerguide/symm-asymm-choose.html)
+	// For help choosing a key spec for your KMS key, see Choosing a KMS key type
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/key-types.html#symm-asymm-choose)
 	// in the Key Management Service Developer Guide . The KeySpec determines whether
 	// the KMS key contains a symmetric key or an asymmetric key pair. It also
-	// determines the encryption algorithms or signing algorithms that the KMS key
-	// supports. You can't change the KeySpec after the KMS key is created. To further
-	// restrict the algorithms that can be used with the KMS key, use a condition key
-	// in its key policy or IAM policy. For more information, see
-	// kms:EncryptionAlgorithm
-	// (https://docs.aws.amazon.com/kms/latest/developerguide/policy-conditions.html#conditions-kms-encryption-algorithm)
+	// determines the algorithms that the KMS key supports. You can't change the
+	// KeySpec after the KMS key is created. To further restrict the algorithms that
+	// can be used with the KMS key, use a condition key in its key policy or IAM
+	// policy. For more information, see kms:EncryptionAlgorithm
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/policy-conditions.html#conditions-kms-encryption-algorithm),
+	// kms:MacAlgorithm
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/policy-conditions.html#conditions-kms-mac-algorithm)
 	// or kms:Signing Algorithm
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/policy-conditions.html#conditions-kms-signing-algorithm)
 	// in the Key Management Service Developer Guide . Amazon Web Services services
 	// that are integrated with KMS
-	// (http://aws.amazon.com/kms/features/#AWS_Service_Integration) use symmetric KMS
-	// keys to protect your data. These services do not support asymmetric KMS keys.
-	// For help determining whether a KMS key is symmetric or asymmetric, see
-	// Identifying Symmetric and Asymmetric KMS keys
-	// (https://docs.aws.amazon.com/kms/latest/developerguide/find-symm-asymm.html) in
-	// the Key Management Service Developer Guide. KMS supports the following key specs
-	// for KMS keys:
+	// (http://aws.amazon.com/kms/features/#AWS_Service_Integration) use symmetric
+	// encryption KMS keys to protect your data. These services do not support
+	// asymmetric KMS keys or HMAC KMS keys. KMS supports the following key specs for
+	// KMS keys:
 	//
-	// * Symmetric key (default)
+	// * Symmetric encryption key (default)
 	//
-	// * SYMMETRIC_DEFAULT (AES-256-GCM)
+	// * SYMMETRIC_DEFAULT
+	// (AES-256-GCM)
+	//
+	// * HMAC keys (symmetric)
+	//
+	// * HMAC_224
+	//
+	// * HMAC_256
+	//
+	// * HMAC_384
 	//
 	// *
-	// Asymmetric RSA key pairs
+	// HMAC_512
+	//
+	// * Asymmetric RSA key pairs
 	//
 	// * RSA_2048
 	//
@@ -203,38 +225,41 @@ type CreateKeyInput struct {
 	//
 	// * RSA_4096
 	//
-	// * Asymmetric
-	// NIST-recommended elliptic curve key pairs
-	//
-	// * ECC_NIST_P256 (secp256r1)
-	//
 	// *
-	// ECC_NIST_P384 (secp384r1)
+	// Asymmetric NIST-recommended elliptic curve key pairs
+	//
+	// * ECC_NIST_P256
+	// (secp256r1)
+	//
+	// * ECC_NIST_P384 (secp384r1)
 	//
 	// * ECC_NIST_P521 (secp521r1)
 	//
-	// * Other asymmetric
-	// elliptic curve key pairs
+	// * Other
+	// asymmetric elliptic curve key pairs
 	//
-	// * ECC_SECG_P256K1 (secp256k1), commonly used for
-	// cryptocurrencies.
+	// * ECC_SECG_P256K1 (secp256k1), commonly
+	// used for cryptocurrencies.
 	KeySpec types.KeySpec
 
 	// Determines the cryptographic operations
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations)
 	// for which you can use the KMS key. The default value is ENCRYPT_DECRYPT. This
-	// parameter is required only for asymmetric KMS keys. You can't change the
-	// KeyUsage value after the KMS key is created. Select only one valid value.
+	// parameter is optional when you are creating a symmetric encryption KMS key;
+	// otherwise, it is required. You can't change the KeyUsage value after the KMS key
+	// is created. Select only one valid value.
 	//
-	// * For
-	// symmetric KMS keys, omit the parameter or specify ENCRYPT_DECRYPT.
+	// * For symmetric encryption KMS keys,
+	// omit the parameter or specify ENCRYPT_DECRYPT.
 	//
-	// * For
-	// asymmetric KMS keys with RSA key material, specify ENCRYPT_DECRYPT or
-	// SIGN_VERIFY.
+	// * For HMAC KMS keys (symmetric),
+	// specify GENERATE_VERIFY_MAC.
 	//
-	// * For asymmetric KMS keys with ECC key material, specify
-	// SIGN_VERIFY.
+	// * For asymmetric KMS keys with RSA key material,
+	// specify ENCRYPT_DECRYPT or SIGN_VERIFY.
+	//
+	// * For asymmetric KMS keys with ECC key
+	// material, specify SIGN_VERIFY.
 	KeyUsage types.KeyUsageType
 
 	// Creates a multi-Region primary key that you can replicate into other Amazon Web
@@ -247,7 +272,7 @@ type CreateKeyInput struct {
 	// you can use them interchangeably to encrypt data in one Amazon Web Services
 	// Region and decrypt it in a different Amazon Web Services Region without
 	// re-encrypting the data or making a cross-Region call. For more information about
-	// multi-Region keys, see Using multi-Region keys
+	// multi-Region keys, see Multi-Region keys in KMS
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html)
 	// in the Key Management Service Developer Guide. This value creates a primary key,
 	// not a replica. To create a replica key, use the ReplicateKey operation. You can
@@ -263,11 +288,12 @@ type CreateKeyInput struct {
 	// key material into KMS, see Importing Key Material
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html) in
 	// the Key Management Service Developer Guide. This value is valid only for
-	// symmetric KMS keys. To create a KMS key in an KMS custom key store
+	// symmetric encryption KMS keys. To create a KMS key in an KMS custom key store
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html)
 	// and create its key material in the associated CloudHSM cluster, set this value
 	// to AWS_CLOUDHSM. You must also use the CustomKeyStoreId parameter to identify
-	// the custom key store. This value is valid only for symmetric KMS keys.
+	// the custom key store. This value is valid only for symmetric encryption KMS
+	// keys.
 	Origin types.OriginType
 
 	// The key policy to attach to the KMS key. If you provide a key policy, it must
@@ -305,7 +331,7 @@ type CreateKeyInput struct {
 	// Assigns one or more tags to the KMS key. Use this parameter to tag the KMS key
 	// when it is created. To tag an existing KMS key, use the TagResource operation.
 	// Tagging or untagging a KMS key can allow or deny permission to the KMS key. For
-	// details, see Using ABAC in KMS
+	// details, see ABAC in KMS
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/abac.html) in the Key
 	// Management Service Developer Guide. To use this parameter, you must have
 	// kms:TagResource

@@ -11,6 +11,9 @@ import (
 )
 
 // Updates the company network configuration for the fleet.
+//
+// Deprecated: Amazon WorkLink is no longer supported. This will be removed in a
+// future version of the SDK.
 func (c *Client) UpdateCompanyNetworkConfiguration(ctx context.Context, params *UpdateCompanyNetworkConfigurationInput, optFns ...func(*Options)) (*UpdateCompanyNetworkConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateCompanyNetworkConfigurationInput{}

@@ -38,15 +38,20 @@ import (
 // (including text that doesn't have a relationship with the value of the
 // StartDocumentAnalysisFeatureTypes input parameter).
 //
-// Selection elements such as
-// check boxes and option buttons (radio buttons) can be detected in form data and
-// in tables. A SELECTION_ELEMENT Block object contains information about a
-// selection element, including the selection status. Use the MaxResults parameter
-// to limit the number of blocks that are returned. If there are more results than
-// specified in MaxResults, the value of NextToken in the operation response
-// contains a pagination token for getting the next set of results. To get the next
-// page of results, call GetDocumentAnalysis, and populate the NextToken request
-// parameter with the token value that's returned from the previous call to
+// * Queries. A QUERIES_RESULT
+// Block object contains the answer to the query, the alias associated and an ID
+// that connect it to the query asked. This Block also contains a location and
+// attached confidence score
+//
+// Selection elements such as check boxes and option
+// buttons (radio buttons) can be detected in form data and in tables. A
+// SELECTION_ELEMENT Block object contains information about a selection element,
+// including the selection status. Use the MaxResults parameter to limit the number
+// of blocks that are returned. If there are more results than specified in
+// MaxResults, the value of NextToken in the operation response contains a
+// pagination token for getting the next set of results. To get the next page of
+// results, call GetDocumentAnalysis, and populate the NextToken request parameter
+// with the token value that's returned from the previous call to
 // GetDocumentAnalysis. For more information, see Document Text Analysis
 // (https://docs.aws.amazon.com/textract/latest/dg/how-it-works-analyzing.html).
 func (c *Client) GetDocumentAnalysis(ctx context.Context, params *GetDocumentAnalysisInput, optFns ...func(*Options)) (*GetDocumentAnalysisOutput, error) {

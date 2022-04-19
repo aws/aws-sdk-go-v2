@@ -12,26 +12,26 @@ import (
 	"time"
 )
 
-// Returns the items you need to import key material into a symmetric, customer
-// managed KMS key. For more information about importing key material into KMS, see
-// Importing Key Material
+// Returns the items you need to import key material into a symmetric encryption
+// KMS key. For more information about importing key material into KMS, see
+// Importing key material
 // (https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html) in
 // the Key Management Service Developer Guide. This operation returns a public key
 // and an import token. Use the public key to encrypt the symmetric key material.
 // Store the import token to send with a subsequent ImportKeyMaterial request. You
-// must specify the key ID of the symmetric KMS key into which you will import key
-// material. This KMS key's Origin must be EXTERNAL. You must also specify the
-// wrapping algorithm and type of wrapping key (public key) that you will use to
-// encrypt the key material. You cannot perform this operation on an asymmetric KMS
-// key or on any KMS key in a different Amazon Web Services account. To import key
-// material, you must use the public key and import token from the same response.
-// These items are valid for 24 hours. The expiration date and time appear in the
-// GetParametersForImport response. You cannot use an expired token in an
-// ImportKeyMaterial request. If your key and token expire, send another
-// GetParametersForImport request. The KMS key that you use for this operation must
-// be in a compatible key state. For details, see Key state: Effect on your KMS key
-// (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
-// Key Management Service Developer Guide. Cross-account use: No. You cannot
+// must specify the key ID of the symmetric encryption KMS key into which you will
+// import key material. This KMS key's Origin must be EXTERNAL. You must also
+// specify the wrapping algorithm and type of wrapping key (public key) that you
+// will use to encrypt the key material. You cannot perform this operation on an
+// asymmetric KMS key, an HMAC KMS key, or on any KMS key in a different Amazon Web
+// Services account. To import key material, you must use the public key and import
+// token from the same response. These items are valid for 24 hours. The expiration
+// date and time appear in the GetParametersForImport response. You cannot use an
+// expired token in an ImportKeyMaterial request. If your key and token expire,
+// send another GetParametersForImport request. The KMS key that you use for this
+// operation must be in a compatible key state. For details, see Key states of KMS
+// keys (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in
+// the Key Management Service Developer Guide. Cross-account use: No. You cannot
 // perform this operation on a KMS key in a different Amazon Web Services account.
 // Required permissions: kms:GetParametersForImport
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
@@ -58,14 +58,14 @@ func (c *Client) GetParametersForImport(ctx context.Context, params *GetParamete
 
 type GetParametersForImportInput struct {
 
-	// The identifier of the symmetric KMS key into which you will import key material.
-	// The Origin of the KMS key must be EXTERNAL. Specify the key ID or key ARN of the
-	// KMS key. For example:
+	// The identifier of the symmetric encryption KMS key into which you will import
+	// key material. The Origin of the KMS key must be EXTERNAL. Specify the key ID or
+	// key ARN of the KMS key. For example:
 	//
-	// * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	// * Key ID:
+	// 1234abcd-12ab-34cd-56ef-1234567890ab
 	//
-	// * Key
-	// ARN:
+	// * Key ARN:
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	// To

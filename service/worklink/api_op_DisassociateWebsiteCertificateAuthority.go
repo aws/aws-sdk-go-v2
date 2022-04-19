@@ -11,6 +11,9 @@ import (
 )
 
 // Removes a certificate authority (CA).
+//
+// Deprecated: Amazon WorkLink is no longer supported. This will be removed in a
+// future version of the SDK.
 func (c *Client) DisassociateWebsiteCertificateAuthority(ctx context.Context, params *DisassociateWebsiteCertificateAuthorityInput, optFns ...func(*Options)) (*DisassociateWebsiteCertificateAuthorityOutput, error) {
 	if params == nil {
 		params = &DisassociateWebsiteCertificateAuthorityInput{}

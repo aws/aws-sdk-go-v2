@@ -790,6 +790,46 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartRecommender struct {
+}
+
+func (*validateOpStartRecommender) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartRecommender) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartRecommenderInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartRecommenderInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStopRecommender struct {
+}
+
+func (*validateOpStopRecommender) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopRecommender) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopRecommenderInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopRecommenderInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStopSolutionVersionCreation struct {
 }
 
@@ -1044,6 +1084,14 @@ func addOpGetSolutionMetricsValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpStartRecommenderValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartRecommender{}, middleware.After)
+}
+
+func addOpStopRecommenderValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopRecommender{}, middleware.After)
 }
 
 func addOpStopSolutionVersionCreationValidationMiddleware(stack *middleware.Stack) error {
@@ -1943,6 +1991,36 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartRecommenderInput(v *StartRecommenderInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartRecommenderInput"}
+	if v.RecommenderArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecommenderArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopRecommenderInput(v *StopRecommenderInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopRecommenderInput"}
+	if v.RecommenderArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecommenderArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

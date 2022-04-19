@@ -13,8 +13,8 @@ import (
 // Deletes tags from a customer managed key
 // (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk).
 // To delete a tag, specify the tag key and the KMS key. Tagging or untagging a KMS
-// key can allow or deny permission to the KMS key. For details, see Using ABAC in
-// KMS (https://docs.aws.amazon.com/kms/latest/developerguide/abac.html) in the Key
+// key can allow or deny permission to the KMS key. For details, see ABAC in KMS
+// (https://docs.aws.amazon.com/kms/latest/developerguide/abac.html) in the Key
 // Management Service Developer Guide. When it succeeds, the UntagResource
 // operation doesn't return any output. Also, if the specified tag key isn't found
 // on the KMS key, it doesn't throw an exception or return a response. To confirm
@@ -25,7 +25,7 @@ import (
 // Amazon Web Services resources
 // (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the Amazon
 // Web Services General Reference. The KMS key that you use for this operation must
-// be in a compatible key state. For details, see Key state: Effect on your KMS key
+// be in a compatible key state. For details, see Key states of KMS keys
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
 // Key Management Service Developer Guide. Cross-account use: No. You cannot
 // perform this operation on a KMS key in a different Amazon Web Services account.

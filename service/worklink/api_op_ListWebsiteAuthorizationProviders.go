@@ -14,6 +14,9 @@ import (
 
 // Retrieves a list of website authorization providers associated with a specified
 // fleet.
+//
+// Deprecated: Amazon WorkLink is no longer supported. This will be removed in a
+// future version of the SDK.
 func (c *Client) ListWebsiteAuthorizationProviders(ctx context.Context, params *ListWebsiteAuthorizationProvidersInput, optFns ...func(*Options)) (*ListWebsiteAuthorizationProvidersOutput, error) {
 	if params == nil {
 		params = &ListWebsiteAuthorizationProvidersInput{}

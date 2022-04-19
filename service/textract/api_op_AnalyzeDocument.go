@@ -29,14 +29,18 @@ import (
 // document are returned (including text that doesn't have a relationship with the
 // value of FeatureTypes).
 //
-// Selection elements such as check boxes and option
-// buttons (radio buttons) can be detected in form data and in tables. A
-// SELECTION_ELEMENT Block object contains information about a selection element,
-// including the selection status. You can choose which type of analysis to perform
-// by specifying the FeatureTypes list. The output is returned in a list of Block
-// objects. AnalyzeDocument is a synchronous operation. To analyze documents
-// asynchronously, use StartDocumentAnalysis. For more information, see Document
-// Text Analysis
+// * Queries.A QUERIES_RESULT Block object contains the
+// answer to the query, the alias associated and an ID that connect it to the query
+// asked. This Block also contains a location and attached confidence
+// score.
+//
+// Selection elements such as check boxes and option buttons (radio
+// buttons) can be detected in form data and in tables. A SELECTION_ELEMENT Block
+// object contains information about a selection element, including the selection
+// status. You can choose which type of analysis to perform by specifying the
+// FeatureTypes list. The output is returned in a list of Block objects.
+// AnalyzeDocument is a synchronous operation. To analyze documents asynchronously,
+// use StartDocumentAnalysis. For more information, see Document Text Analysis
 // (https://docs.aws.amazon.com/textract/latest/dg/how-it-works-analyzing.html).
 func (c *Client) AnalyzeDocument(ctx context.Context, params *AnalyzeDocumentInput, optFns ...func(*Options)) (*AnalyzeDocumentOutput, error) {
 	if params == nil {
@@ -57,9 +61,9 @@ type AnalyzeDocumentInput struct {
 
 	// The input document as base64-encoded bytes or an Amazon S3 object. If you use
 	// the AWS CLI to call Amazon Textract operations, you can't pass image bytes. The
-	// document must be an image in JPEG or PNG format. If you're using an AWS SDK to
-	// call Amazon Textract, you might not need to base64-encode image bytes that are
-	// passed using the Bytes field.
+	// document must be an image in JPEG, PNG, PDF, or TIFF format. If you're using an
+	// AWS SDK to call Amazon Textract, you might not need to base64-encode image bytes
+	// that are passed using the Bytes field.
 	//
 	// This member is required.
 	Document *types.Document
@@ -77,6 +81,9 @@ type AnalyzeDocumentInput struct {
 	// Sets the configuration for the human in the loop workflow for analyzing
 	// documents.
 	HumanLoopConfig *types.HumanLoopConfig
+
+	// Contains Queries and the alias for those Queries, as determined by the input.
+	QueriesConfig *types.QueriesConfig
 
 	noSmithyDocumentSerde
 }

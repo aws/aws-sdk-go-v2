@@ -22,7 +22,7 @@ import (
 // interchangeably to encrypt data in one Amazon Web Services Region and decrypt it
 // in a different Amazon Web Services Region without re-encrypting the data or
 // making a cross-Region call. For more information about multi-Region keys, see
-// Using multi-Region keys
+// Multi-Region keys in KMS
 // (https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html)
 // in the Key Management Service Developer Guide. A replica key is a
 // fully-functional KMS key that can be used independently of its primary and peer
@@ -42,7 +42,7 @@ import (
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html), tags
 // (https://docs.aws.amazon.com/kms/latest/developerguide/tagging-keys.html),
 // aliases (https://docs.aws.amazon.com/kms/latest/developerguide/kms-alias.html),
-// and key state
+// and Key states of KMS keys
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html). KMS
 // pricing and quotas for KMS keys apply to each primary key and replica key. When
 // this operation completes, the new replica key has a transient key state of
@@ -52,18 +52,26 @@ import (
 // cryptographic operations. If you are creating and using the replica key
 // programmatically, retry on KMSInvalidStateException or call DescribeKey to check
 // its KeyState value before using it. For details about the Creating key state,
-// see Key state: Effect on your KMS key in the Key Management Service Developer
-// Guide. The CloudTrail log of a ReplicateKey operation records a ReplicateKey
-// operation in the primary key's Region and a CreateKey operation in the replica
-// key's Region. If you replicate a multi-Region primary key with imported key
-// material, the replica key is created with no key material. You must import the
-// same key material that you imported into the primary key. For details, see
-// Importing key material into multi-Region keys in the Key Management Service
-// Developer Guide. To convert a replica key to a primary key, use the
-// UpdatePrimaryRegion operation. ReplicateKey uses different default values for
-// the KeyPolicy and Tags parameters than those used in the KMS console. For
-// details, see the parameter descriptions. Cross-account use: No. You cannot use
-// this operation to create a replica key in a different Amazon Web Services
+// see Key states of KMS keys
+// (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
+// Key Management Service Developer Guide. You cannot create more than one replica
+// of a primary key in any Region. If the Region already includes a replica of the
+// key you're trying to replicate, ReplicateKey returns an AlreadyExistsException
+// error. If the key state of the existing replica is PendingDeletion, you can
+// cancel the scheduled key deletion (CancelKeyDeletion) or wait for the key to be
+// deleted. The new replica key you create will have the same shared properties
+// (https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html#mrk-sync-properties)
+// as the original replica key. The CloudTrail log of a ReplicateKey operation
+// records a ReplicateKey operation in the primary key's Region and a CreateKey
+// operation in the replica key's Region. If you replicate a multi-Region primary
+// key with imported key material, the replica key is created with no key material.
+// You must import the same key material that you imported into the primary key.
+// For details, see Importing key material into multi-Region keys in the Key
+// Management Service Developer Guide. To convert a replica key to a primary key,
+// use the UpdatePrimaryRegion operation. ReplicateKey uses different default
+// values for the KeyPolicy and Tags parameters than those used in the KMS console.
+// For details, see the parameter descriptions. Cross-account use: No. You cannot
+// use this operation to create a replica key in a different Amazon Web Services
 // account. Required permissions:
 //
 // * kms:ReplicateKey on the primary key (in the
@@ -119,15 +127,21 @@ type ReplicateKeyInput struct {
 	// Region ID, such as us-east-1 or ap-southeast-2. For a list of Amazon Web
 	// Services Regions in which KMS is supported, see KMS service endpoints
 	// (https://docs.aws.amazon.com/general/latest/gr/kms.html#kms_region) in the
-	// Amazon Web Services General Reference. The replica must be in a different Amazon
+	// Amazon Web Services General Reference. HMAC KMS keys are not supported in all
+	// Amazon Web Services Regions. If you try to replicate an HMAC KMS key in an
+	// Amazon Web Services Region in which HMAC keys are not supported, the
+	// ReplicateKey operation returns an UnsupportedOperationException. For a list of
+	// Regions in which HMAC KMS keys are supported, see HMAC keys in KMS
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/hmac.html) in the Key
+	// Management Service Developer Guide. The replica must be in a different Amazon
 	// Web Services Region than its primary key and other replicas of that primary key,
 	// but in the same Amazon Web Services partition. KMS must be available in the
 	// replica Region. If the Region is not enabled by default, the Amazon Web Services
 	// account must be enabled in the Region. For information about Amazon Web Services
-	// partitions, see Amazon Resource Names (ARNs) in the Amazon Web Services General
-	// Reference.
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) For
-	// information about enabling and disabling Regions, see Enabling a Region
+	// partitions, see Amazon Resource Names (ARNs)
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
+	// the Amazon Web Services General Reference. For information about enabling and
+	// disabling Regions, see Enabling a Region
 	// (https://docs.aws.amazon.com/general/latest/gr/rande-manage.html#rande-manage-enable)
 	// and Disabling a Region
 	// (https://docs.aws.amazon.com/general/latest/gr/rande-manage.html#rande-manage-disable)
@@ -185,7 +199,7 @@ type ReplicateKeyInput struct {
 	// Assigns one or more tags to the replica key. Use this parameter to tag the KMS
 	// key when it is created. To tag an existing KMS key, use the TagResource
 	// operation. Tagging or untagging a KMS key can allow or deny permission to the
-	// KMS key. For details, see Using ABAC in KMS
+	// KMS key. For details, see ABAC in KMS
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/abac.html) in the Key
 	// Management Service Developer Guide. To use this parameter, you must have
 	// kms:TagResource
@@ -212,7 +226,7 @@ type ReplicateKeyOutput struct {
 	// Displays details about the new replica key, including its Amazon Resource Name
 	// (key ARN
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN))
-	// and key state
+	// and Key states of KMS keys
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html). It also
 	// includes the ARN and Amazon Web Services Region of its primary key and other
 	// replica keys.

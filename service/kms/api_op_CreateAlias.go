@@ -11,7 +11,7 @@ import (
 )
 
 // Creates a friendly name for a KMS key. Adding, deleting, or updating an alias
-// can allow or deny permission to the KMS key. For details, see Using ABAC in KMS
+// can allow or deny permission to the KMS key. For details, see ABAC in KMS
 // (https://docs.aws.amazon.com/kms/latest/developerguide/abac.html) in the Key
 // Management Service Developer Guide. You can use an alias to identify a KMS key
 // in the KMS console, in the DescribeKey operation and in cryptographic operations
@@ -29,7 +29,7 @@ import (
 // Key Management Service Developer Guide. This operation does not return a
 // response. To get the alias that you created, use the ListAliases operation. The
 // KMS key that you use for this operation must be in a compatible key state. For
-// details, see Key state: Effect on your KMS key
+// details, see Key states of KMS keys
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
 // Key Management Service Developer Guide. Cross-account use: No. You cannot
 // perform this operation on an alias in a different Amazon Web Services account.

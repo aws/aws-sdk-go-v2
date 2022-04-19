@@ -164,22 +164,18 @@ type AutoScalingGroup struct {
 	// Reserved.
 	Context *string
 
+	// The duration of the default instance warmup, in seconds.
+	DefaultInstanceWarmup *int32
+
 	// The unit of measurement for the value specified for desired capacity. Amazon EC2
 	// Auto Scaling supports DesiredCapacityType for attribute-based instance type
-	// selection only. For more information, see Creating an Auto Scaling group using
-	// attribute-based instance type selection
-	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-instance-type-requirements.html)
-	// in the Amazon EC2 Auto Scaling User Guide. By default, Amazon EC2 Auto Scaling
-	// specifies units, which translates into number of instances. Valid values: units
-	// | vcpu | memory-mib
+	// selection only.
 	DesiredCapacityType *string
 
 	// The metrics enabled for the group.
 	EnabledMetrics []EnabledMetric
 
-	// The amount of time, in seconds, that Amazon EC2 Auto Scaling waits before
-	// checking the health status of an EC2 instance that has come into service and
-	// marking it unhealthy due to a failed health check.
+	// The duration of the health check grace period, in seconds.
 	HealthCheckGracePeriod *int32
 
 	// The EC2 instances associated with the group.
@@ -1175,22 +1171,14 @@ type LaunchConfiguration struct {
 	// in the Amazon EC2 User Guide for Linux Instances.
 	BlockDeviceMappings []BlockDeviceMapping
 
-	// The ID of a ClassicLink-enabled VPC to link your EC2-Classic instances to. For
-	// more information, see ClassicLink
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html) in
-	// the Amazon EC2 User Guide for Linux Instances and Linking EC2-Classic instances
-	// to a VPC
-	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html#as-ClassicLink)
-	// in the Amazon EC2 Auto Scaling User Guide.
+	// EC2-Classic retires on August 15, 2022. This parameter is not supported after
+	// that date. The ID of a ClassicLink-enabled VPC to link your EC2-Classic
+	// instances to.
 	ClassicLinkVPCId *string
 
-	// The IDs of one or more security groups for the VPC specified in
-	// ClassicLinkVPCId. For more information, see ClassicLink
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html) in
-	// the Amazon EC2 User Guide for Linux Instances and Linking EC2-Classic instances
-	// to a VPC
-	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html#as-ClassicLink)
-	// in the Amazon EC2 Auto Scaling User Guide.
+	// EC2-Classic retires on August 15, 2022. This parameter is not supported after
+	// that date. The IDs of one or more security groups for the VPC specified in
+	// ClassicLinkVPCId.
 	ClassicLinkVPCSecurityGroups []string
 
 	// Specifies whether the launch configuration is optimized for EBS I/O (true) or
@@ -1386,9 +1374,9 @@ type LifecycleHook struct {
 	// CONTINUE and ABANDON.
 	DefaultResult *string
 
-	// The maximum time, in seconds, that an instance can remain in a Pending:Wait or
-	// Terminating:Wait state. The maximum is 172800 seconds (48 hours) or 100 times
-	// HeartbeatTimeout, whichever is smaller.
+	// The maximum time, in seconds, that an instance can remain in a wait state. The
+	// maximum is 172800 seconds (48 hours) or 100 times HeartbeatTimeout, whichever is
+	// smaller.
 	GlobalTimeout *int32
 
 	// The maximum time, in seconds, that can elapse before the lifecycle hook times
@@ -1846,15 +1834,15 @@ type PredefinedMetricSpecification struct {
 	// ASGAverageCPUUtilization - Average CPU utilization of the Auto Scaling group.
 	//
 	// *
-	// ASGAverageNetworkIn - Average number of bytes received (per instance per minute)
-	// for the Auto Scaling group.
+	// ASGAverageNetworkIn - Average number of bytes received on all network interfaces
+	// by the Auto Scaling group.
 	//
 	// * ASGAverageNetworkOut - Average number of bytes
-	// sent out (per instance per minute) for the Auto Scaling group.
+	// sent out on all network interfaces by the Auto Scaling group.
 	//
 	// *
-	// ALBRequestCountPerTarget - Average Application Load Balancer request count (per
-	// target per minute) for your Auto Scaling group.
+	// ALBRequestCountPerTarget - Average Application Load Balancer request count per
+	// target for your Auto Scaling group.
 	//
 	// This member is required.
 	PredefinedMetricType MetricType
@@ -2216,17 +2204,18 @@ type RefreshPreferences struct {
 	// in the Amazon EC2 Auto Scaling User Guide.
 	CheckpointPercentages []int32
 
-	// The number of seconds until a newly launched instance is configured and ready to
-	// use. During this time, Amazon EC2 Auto Scaling does not immediately move on to
-	// the next replacement. The default is to use the value for the health check grace
-	// period defined for the group.
+	// Not needed if the default instance warmup is defined for the group. The duration
+	// of the instance warmup, in seconds. The default is to use the value for the
+	// default instance warmup defined for the group. If default instance warmup is
+	// null, then InstanceWarmup falls back to the value of the health check grace
+	// period.
 	InstanceWarmup *int32
 
-	// The amount of capacity in the Auto Scaling group that must remain healthy during
-	// an instance refresh to allow the operation to continue. The value is expressed
-	// as a percentage of the desired capacity of the Auto Scaling group (rounded up to
-	// the nearest integer). The default is 90. Setting the minimum healthy percentage
-	// to 100 percent limits the rate of replacement to one instance at a time. In
+	// The amount of capacity in the Auto Scaling group that must pass your group's
+	// health checks to allow the operation to continue. The value is expressed as a
+	// percentage of the desired capacity of the Auto Scaling group (rounded up to the
+	// nearest integer). The default is 90. Setting the minimum healthy percentage to
+	// 100 percent limits the rate of replacement to one instance at a time. In
 	// contrast, setting it to 0 percent has the effect of replacing all instances at
 	// the same time.
 	MinHealthyPercentage *int32

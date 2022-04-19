@@ -11,33 +11,18 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Encrypts plaintext into ciphertext by using a KMS key. The Encrypt operation has
-// two primary use cases:
-//
-// * You can encrypt small amounts of arbitrary data, such
-// as a personal identifier or database password, or other sensitive
-// information.
-//
-// * You can use the Encrypt operation to move encrypted data from
-// one Amazon Web Services Region to another. For example, in Region A, generate a
-// data key and use the plaintext key to encrypt your data. Then, in Region A, use
-// the Encrypt operation to encrypt the plaintext data key under a KMS key in
-// Region B. Now, you can move the encrypted data and the encrypted data key to
-// Region B. When necessary, you can decrypt the encrypted data key and the
-// encrypted data entirely within in Region B.
-//
-// You don't need to use the Encrypt
-// operation to encrypt a data key. The GenerateDataKey and GenerateDataKeyPair
-// operations return a plaintext data key and an encrypted copy of that data key.
-// When you encrypt data, you must specify a symmetric or asymmetric KMS key to use
-// in the encryption operation. The KMS key must have a KeyUsage value of
-// ENCRYPT_DECRYPT. To find the KeyUsage of a KMS key, use the DescribeKey
-// operation. If you use a symmetric KMS key, you can use an encryption context to
-// add additional security to your encryption operation. If you specify an
-// EncryptionContext when encrypting data, you must specify the same encryption
-// context (a case-sensitive exact match) when decrypting the data. Otherwise, the
-// request to decrypt fails with an InvalidCiphertextException. For more
-// information, see Encryption Context
+// Encrypts plaintext of up to 4,096 bytes using a KMS key. You can use a symmetric
+// or asymmetric KMS key with a KeyUsage of ENCRYPT_DECRYPT. You can use this
+// operation to encrypt small amounts of arbitrary data, such as a personal
+// identifier or database password, or other sensitive information. You don't need
+// to use the Encrypt operation to encrypt a data key. The GenerateDataKey and
+// GenerateDataKeyPair operations return a plaintext data key and an encrypted copy
+// of that data key. If you use a symmetric encryption KMS key, you can use an
+// encryption context to add additional security to your encryption operation. If
+// you specify an EncryptionContext when encrypting data, you must specify the same
+// encryption context (a case-sensitive exact match) when decrypting the data.
+// Otherwise, the request to decrypt fails with an InvalidCiphertextException. For
+// more information, see Encryption Context
 // (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context)
 // in the Key Management Service Developer Guide. If you specify an asymmetric KMS
 // key, you must also specify the encryption algorithm. The algorithm must be
@@ -47,41 +32,41 @@ import (
 // algorithm when you decrypt the data. If the KMS key and algorithm do not match
 // the values used to encrypt the data, the decrypt operation fails. You are not
 // required to supply the key ID and encryption algorithm when you decrypt with
-// symmetric KMS keys because KMS stores this information in the ciphertext blob.
-// KMS cannot store metadata in ciphertext generated with asymmetric keys. The
-// standard format for asymmetric key ciphertext does not include configurable
-// fields. The maximum size of the data that you can encrypt varies with the type
-// of KMS key and the encryption algorithm that you choose.
+// symmetric encryption KMS keys because KMS stores this information in the
+// ciphertext blob. KMS cannot store metadata in ciphertext generated with
+// asymmetric keys. The standard format for asymmetric key ciphertext does not
+// include configurable fields. The maximum size of the data that you can encrypt
+// varies with the type of KMS key and the encryption algorithm that you choose.
 //
-// * Symmetric KMS
-// keys
+// *
+// Symmetric encryption KMS keys
 //
 // * SYMMETRIC_DEFAULT: 4096 bytes
 //
 // * RSA_2048
 //
-// * RSAES_OAEP_SHA_1: 214
-// bytes
+// *
+// RSAES_OAEP_SHA_1: 214 bytes
 //
 // * RSAES_OAEP_SHA_256: 190 bytes
 //
 // * RSA_3072
 //
-// * RSAES_OAEP_SHA_1: 342
-// bytes
+// *
+// RSAES_OAEP_SHA_1: 342 bytes
 //
 // * RSAES_OAEP_SHA_256: 318 bytes
 //
 // * RSA_4096
 //
-// * RSAES_OAEP_SHA_1: 470
-// bytes
+// *
+// RSAES_OAEP_SHA_1: 470 bytes
 //
 // * RSAES_OAEP_SHA_256: 446 bytes
 //
-// The KMS key that you use for this
-// operation must be in a compatible key state. For details, see Key state: Effect
-// on your KMS key
+// The KMS key that
+// you use for this operation must be in a compatible key state. For details, see
+// Key states of KMS keys
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
 // Key Management Service Developer Guide. Cross-account use: Yes. To perform this
 // operation with a KMS key in a different Amazon Web Services account, specify the
@@ -113,10 +98,12 @@ func (c *Client) Encrypt(ctx context.Context, params *EncryptInput, optFns ...fu
 
 type EncryptInput struct {
 
-	// Identifies the KMS key to use in the encryption operation. To specify a KMS key,
-	// use its key ID, key ARN, alias name, or alias ARN. When using an alias name,
-	// prefix it with "alias/". To specify a KMS key in a different Amazon Web Services
-	// account, you must use the key ARN or alias ARN. For example:
+	// Identifies the KMS key to use in the encryption operation. The KMS key must have
+	// a KeyUsage of ENCRYPT_DECRYPT. To find the KeyUsage of a KMS key, use the
+	// DescribeKey operation. To specify a KMS key, use its key ID, key ARN, alias
+	// name, or alias ARN. When using an alias name, prefix it with "alias/". To
+	// specify a KMS key in a different Amazon Web Services account, you must use the
+	// key ARN or alias ARN. For example:
 	//
 	// * Key ID:
 	// 1234abcd-12ab-34cd-56ef-1234567890ab
@@ -145,20 +132,22 @@ type EncryptInput struct {
 	// Specifies the encryption algorithm that KMS will use to encrypt the plaintext
 	// message. The algorithm must be compatible with the KMS key that you specify.
 	// This parameter is required only for asymmetric KMS keys. The default value,
-	// SYMMETRIC_DEFAULT, is the algorithm used for symmetric KMS keys. If you are
-	// using an asymmetric KMS key, we recommend RSAES_OAEP_SHA_256.
+	// SYMMETRIC_DEFAULT, is the algorithm used for symmetric encryption KMS keys. If
+	// you are using an asymmetric KMS key, we recommend RSAES_OAEP_SHA_256.
 	EncryptionAlgorithm types.EncryptionAlgorithmSpec
 
 	// Specifies the encryption context that will be used to encrypt the data. An
 	// encryption context is valid only for cryptographic operations
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations)
-	// with a symmetric KMS key. The standard asymmetric encryption algorithms that KMS
-	// uses do not support an encryption context. An encryption context is a collection
-	// of non-secret key-value pairs that represents additional authenticated data.
-	// When you use an encryption context to encrypt data, you must specify the same
-	// (an exact case-sensitive match) encryption context to decrypt the data. An
-	// encryption context is optional when encrypting with a symmetric KMS key, but it
-	// is highly recommended. For more information, see Encryption Context
+	// with a symmetric encryption KMS key. The standard asymmetric encryption
+	// algorithms and HMAC algorithms that KMS uses do not support an encryption
+	// context. An encryption context is a collection of non-secret key-value pairs
+	// that represent additional authenticated data. When you use an encryption context
+	// to encrypt data, you must specify the same (an exact case-sensitive match)
+	// encryption context to decrypt the data. An encryption context is supported only
+	// on operations with symmetric encryption KMS keys. On operations with symmetric
+	// encryption KMS keys, an encryption context is optional, but it is strongly
+	// recommended. For more information, see Encryption context
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context)
 	// in the Key Management Service Developer Guide.
 	EncryptionContext map[string]string

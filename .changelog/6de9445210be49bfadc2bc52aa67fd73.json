@@ -1,0 +1,8 @@
+{
+    "id": "6de94452-10be-49bf-adc2-bc52aa67fd73",
+    "type": "documentation",
+    "description": "This release contains corrected HomeDirectoryMappings examples for several API functions: CreateAccess, UpdateAccess, CreateUser, and UpdateUser,.",
+    "modules": [
+        "service/transfer"
+    ]
+}

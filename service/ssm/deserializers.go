@@ -20866,6 +20866,19 @@ func awsAwsjson11_deserializeDocumentAssociation(v **types.Association, value in
 				sv.ScheduleExpression = ptr.String(jtv)
 			}
 
+		case "ScheduleOffset":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ScheduleOffset to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ScheduleOffset = int32(i64)
+			}
+
 		case "Targets":
 			if err := awsAwsjson11_deserializeDocumentTargets(&sv.Targets, value); err != nil {
 				return err
@@ -21123,6 +21136,19 @@ func awsAwsjson11_deserializeDocumentAssociationDescription(v **types.Associatio
 					return fmt.Errorf("expected ScheduleExpression to be of type string, got %T instead", value)
 				}
 				sv.ScheduleExpression = ptr.String(jtv)
+			}
+
+		case "ScheduleOffset":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ScheduleOffset to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ScheduleOffset = int32(i64)
 			}
 
 		case "Status":
@@ -21946,6 +21972,19 @@ func awsAwsjson11_deserializeDocumentAssociationVersionInfo(v **types.Associatio
 					return fmt.Errorf("expected ScheduleExpression to be of type string, got %T instead", value)
 				}
 				sv.ScheduleExpression = ptr.String(jtv)
+			}
+
+		case "ScheduleOffset":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ScheduleOffset to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ScheduleOffset = int32(i64)
 			}
 
 		case "SyncCompliance":
@@ -24545,6 +24584,19 @@ func awsAwsjson11_deserializeDocumentCreateAssociationBatchRequestEntry(v **type
 					return fmt.Errorf("expected ScheduleExpression to be of type string, got %T instead", value)
 				}
 				sv.ScheduleExpression = ptr.String(jtv)
+			}
+
+		case "ScheduleOffset":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ScheduleOffset to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ScheduleOffset = int32(i64)
 			}
 
 		case "SyncCompliance":

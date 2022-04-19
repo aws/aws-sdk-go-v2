@@ -6,6 +6,7 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -54,6 +55,13 @@ type DescribeLoggingStatusOutput struct {
 
 	// The last time that logs were delivered.
 	LastSuccessfulDeliveryTime *time.Time
+
+	// The log destination type. An enum with possible values of s3 and cloudwatch.
+	LogDestinationType types.LogDestinationType
+
+	// The collection of exported log types. Log types include the connection log, user
+	// log and user activity log.
+	LogExports []string
 
 	// true if logging is on, false if logging is off.
 	LoggingEnabled bool

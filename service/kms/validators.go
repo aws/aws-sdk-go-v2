@@ -430,6 +430,26 @@ func (m *validateOpGenerateDataKeyWithoutPlaintext) HandleInitialize(ctx context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGenerateMac struct {
+}
+
+func (*validateOpGenerateMac) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGenerateMac) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GenerateMacInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGenerateMacInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetKeyPolicy struct {
 }
 
@@ -870,6 +890,26 @@ func (m *validateOpVerify) HandleInitialize(ctx context.Context, in middleware.I
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpVerifyMac struct {
+}
+
+func (*validateOpVerifyMac) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpVerifyMac) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*VerifyMacInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpVerifyMacInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpCancelKeyDeletionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelKeyDeletion{}, middleware.After)
 }
@@ -952,6 +992,10 @@ func addOpGenerateDataKeyPairWithoutPlaintextValidationMiddleware(stack *middlew
 
 func addOpGenerateDataKeyWithoutPlaintextValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGenerateDataKeyWithoutPlaintext{}, middleware.After)
+}
+
+func addOpGenerateMacValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGenerateMac{}, middleware.After)
 }
 
 func addOpGetKeyPolicyValidationMiddleware(stack *middleware.Stack) error {
@@ -1040,6 +1084,10 @@ func addOpUpdatePrimaryRegionValidationMiddleware(stack *middleware.Stack) error
 
 func addOpVerifyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpVerify{}, middleware.After)
+}
+
+func addOpVerifyMacValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpVerifyMac{}, middleware.After)
 }
 
 func validateTag(v *types.Tag) error {
@@ -1413,6 +1461,27 @@ func validateOpGenerateDataKeyWithoutPlaintextInput(v *GenerateDataKeyWithoutPla
 	invalidParams := smithy.InvalidParamsError{Context: "GenerateDataKeyWithoutPlaintextInput"}
 	if v.KeyId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("KeyId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGenerateMacInput(v *GenerateMacInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GenerateMacInput"}
+	if v.Message == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Message"))
+	}
+	if v.KeyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyId"))
+	}
+	if len(v.MacAlgorithm) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MacAlgorithm"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1812,6 +1881,30 @@ func validateOpVerifyInput(v *VerifyInput) error {
 	}
 	if len(v.SigningAlgorithm) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("SigningAlgorithm"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpVerifyMacInput(v *VerifyMacInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VerifyMacInput"}
+	if v.Message == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Message"))
+	}
+	if v.KeyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyId"))
+	}
+	if len(v.MacAlgorithm) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MacAlgorithm"))
+	}
+	if v.Mac == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Mac"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

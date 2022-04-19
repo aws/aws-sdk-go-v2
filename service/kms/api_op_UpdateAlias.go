@@ -14,7 +14,7 @@ import (
 // associated with only one KMS key at a time, although a KMS key can have multiple
 // aliases. The alias and the KMS key must be in the same Amazon Web Services
 // account and Region. Adding, deleting, or updating an alias can allow or deny
-// permission to the KMS key. For details, see Using ABAC in KMS
+// permission to the KMS key. For details, see ABAC in KMS
 // (https://docs.aws.amazon.com/kms/latest/developerguide/abac.html) in the Key
 // Management Service Developer Guide. The current and new KMS key must be the same
 // type (both symmetric or both asymmetric), and they must have the same key usage
@@ -28,7 +28,7 @@ import (
 // not appear in the response from the DescribeKey operation. To get the aliases of
 // all KMS keys in the account, use the ListAliases operation. The KMS key that you
 // use for this operation must be in a compatible key state. For details, see Key
-// state: Effect on your KMS key
+// states of KMS keys
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
 // Key Management Service Developer Guide. Cross-account use: No. You cannot
 // perform this operation on a KMS key in a different Amazon Web Services account.

@@ -13,6 +13,9 @@ import (
 )
 
 // Provides information about a user's device.
+//
+// Deprecated: Amazon WorkLink is no longer supported. This will be removed in a
+// future version of the SDK.
 func (c *Client) DescribeDevice(ctx context.Context, params *DescribeDeviceInput, optFns ...func(*Options)) (*DescribeDeviceOutput, error) {
 	if params == nil {
 		params = &DescribeDeviceInput{}

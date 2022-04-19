@@ -15,6 +15,8 @@ const (
 	BlockTypeSelectionElement BlockType = "SELECTION_ELEMENT"
 	BlockTypeMergedCell       BlockType = "MERGED_CELL"
 	BlockTypeTitle            BlockType = "TITLE"
+	BlockTypeQuery            BlockType = "QUERY"
+	BlockTypeQueryResult      BlockType = "QUERY_RESULT"
 )
 
 // Values returns all known values for BlockType. Note that this can be expanded in
@@ -31,6 +33,8 @@ func (BlockType) Values() []BlockType {
 		"SELECTION_ELEMENT",
 		"MERGED_CELL",
 		"TITLE",
+		"QUERY",
+		"QUERY_RESULT",
 	}
 }
 
@@ -76,8 +80,9 @@ type FeatureType string
 
 // Enum values for FeatureType
 const (
-	FeatureTypeTables FeatureType = "TABLES"
-	FeatureTypeForms  FeatureType = "FORMS"
+	FeatureTypeTables  FeatureType = "TABLES"
+	FeatureTypeForms   FeatureType = "FORMS"
+	FeatureTypeQueries FeatureType = "QUERIES"
 )
 
 // Values returns all known values for FeatureType. Note that this can be expanded
@@ -87,6 +92,7 @@ func (FeatureType) Values() []FeatureType {
 	return []FeatureType{
 		"TABLES",
 		"FORMS",
+		"QUERIES",
 	}
 }
 
@@ -121,6 +127,7 @@ const (
 	RelationshipTypeComplexFeatures RelationshipType = "COMPLEX_FEATURES"
 	RelationshipTypeMergedCell      RelationshipType = "MERGED_CELL"
 	RelationshipTypeTitle           RelationshipType = "TITLE"
+	RelationshipTypeAnswer          RelationshipType = "ANSWER"
 )
 
 // Values returns all known values for RelationshipType. Note that this can be
@@ -133,6 +140,7 @@ func (RelationshipType) Values() []RelationshipType {
 		"COMPLEX_FEATURES",
 		"MERGED_CELL",
 		"TITLE",
+		"ANSWER",
 	}
 }
 

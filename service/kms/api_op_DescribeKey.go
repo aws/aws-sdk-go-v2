@@ -19,9 +19,8 @@ import (
 // This detailed information includes the key ARN, creation date (and deletion
 // date, if applicable), the key state, and the origin and expiration date (if any)
 // of the key material. It includes fields, like KeySpec, that help you distinguish
-// symmetric from asymmetric KMS keys. It also provides information that is
-// particularly important to asymmetric keys, such as the key usage (encryption or
-// signing) and the encryption algorithms or signing algorithms that the KMS key
+// different types of KMS keys. It also displays the key usage (encryption,
+// signing, or generating and verifying MACs) and the algorithms that the KMS key
 // supports. For KMS keys in custom key stores, it includes information about the
 // custom key store, such as the key store ID and the CloudHSM cluster ID. For
 // multi-Region keys, it displays the primary key and all related replica keys.
@@ -43,16 +42,15 @@ import (
 // * Key policies and grants on the KMS key. To
 // get this information, use GetKeyPolicy and ListGrants.
 //
-// If you call the
-// DescribeKey operation on a predefined Amazon Web Services alias, that is, an
-// Amazon Web Services alias with no key ID, KMS creates an Amazon Web Services
-// managed key
-// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk).
-// Then, it associates the alias with the new KMS key, and returns the KeyId and
-// Arn of the new KMS key in the response. Cross-account use: Yes. To perform this
-// operation with a KMS key in a different Amazon Web Services account, specify the
-// key ARN or alias ARN in the value of the KeyId parameter. Required permissions:
-// kms:DescribeKey
+// In general, DescribeKey
+// is a non-mutating operation. It returns data about KMS keys, but doesn't change
+// them. However, Amazon Web Services services use DescribeKey to create Amazon Web
+// Services managed keys
+// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk)
+// from a predefined Amazon Web Services alias with no key ID. Cross-account use:
+// Yes. To perform this operation with a KMS key in a different Amazon Web Services
+// account, specify the key ARN or alias ARN in the value of the KeyId parameter.
+// Required permissions: kms:DescribeKey
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // (key policy) Related operations:
 //

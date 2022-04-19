@@ -18,17 +18,23 @@
 // requests automatically. For more information about the Amazon Web Services SDKs,
 // including how to download and install them, see Tools for Amazon Web Services
 // (http://aws.amazon.com/tools/). We recommend that you use the Amazon Web
-// Services SDKs to make programmatic API calls to KMS. Clients must support TLS
-// (Transport Layer Security) 1.0. We recommend TLS 1.2. Clients must also support
-// cipher suites with Perfect Forward Secrecy (PFS) such as Ephemeral
-// Diffie-Hellman (DHE) or Elliptic Curve Ephemeral Diffie-Hellman (ECDHE). Most
-// modern systems such as Java 7 and later support these modes. Signing Requests
-// Requests must be signed by using an access key ID and a secret access key. We
-// strongly recommend that you do not use your Amazon Web Services account (root)
-// access key ID and secret key for everyday work with KMS. Instead, use the access
-// key ID and secret access key for an IAM user. You can also use the Amazon Web
-// Services Security Token Service to generate temporary security credentials that
-// you can use to sign requests. All KMS operations require Signature Version 4
+// Services SDKs to make programmatic API calls to KMS. If you need to use FIPS
+// 140-2 validated cryptographic modules when communicating with Amazon Web
+// Services, use the FIPS endpoint in your preferred Amazon Web Services Region.
+// For more information about the available FIPS endpoints, see Service endpoints
+// (https://docs.aws.amazon.com/general/latest/gr/kms.html#kms_region) in the Key
+// Management Service topic of the Amazon Web Services General Reference. Clients
+// must support TLS (Transport Layer Security) 1.0. We recommend TLS 1.2. Clients
+// must also support cipher suites with Perfect Forward Secrecy (PFS) such as
+// Ephemeral Diffie-Hellman (DHE) or Elliptic Curve Ephemeral Diffie-Hellman
+// (ECDHE). Most modern systems such as Java 7 and later support these modes.
+// Signing Requests Requests must be signed by using an access key ID and a secret
+// access key. We strongly recommend that you do not use your Amazon Web Services
+// account (root) access key ID and secret key for everyday work with KMS. Instead,
+// use the access key ID and secret access key for an IAM user. You can also use
+// the Amazon Web Services Security Token Service to generate temporary security
+// credentials that you can use to sign requests. All KMS operations require
+// Signature Version 4
 // (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
 // Logging API Requests KMS supports CloudTrail, a service that logs Amazon Web
 // Services API calls and related events for your Amazon Web Services account and

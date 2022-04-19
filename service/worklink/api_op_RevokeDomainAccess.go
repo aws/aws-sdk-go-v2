@@ -11,6 +11,9 @@ import (
 )
 
 // Moves a domain to INACTIVE status if it was in the ACTIVE status.
+//
+// Deprecated: Amazon WorkLink is no longer supported. This will be removed in a
+// future version of the SDK.
 func (c *Client) RevokeDomainAccess(ctx context.Context, params *RevokeDomainAccessInput, optFns ...func(*Options)) (*RevokeDomainAccessOutput, error) {
 	if params == nil {
 		params = &RevokeDomainAccessInput{}

@@ -11,6 +11,9 @@ import (
 )
 
 // Updates the audit stream configuration for the fleet.
+//
+// Deprecated: Amazon WorkLink is no longer supported. This will be removed in a
+// future version of the SDK.
 func (c *Client) UpdateAuditStreamConfiguration(ctx context.Context, params *UpdateAuditStreamConfigurationInput, optFns ...func(*Options)) (*UpdateAuditStreamConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateAuditStreamConfigurationInput{}

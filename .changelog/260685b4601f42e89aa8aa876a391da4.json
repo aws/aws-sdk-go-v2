@@ -1,0 +1,8 @@
+{
+    "id": "260685b4-601f-42e8-9aa8-aa876a391da4",
+    "type": "feature",
+    "description": "Amazon Polly adds new Austrian German voice - Hannah. Hannah is available as Neural voice only.",
+    "modules": [
+        "service/polly"
+    ]
+}

@@ -15,7 +15,7 @@ import (
 // Gets a list of all grants for the specified KMS key. You must specify the KMS
 // key in all requests. You can filter the grant list by grant ID or grantee
 // principal. For detailed information about grants, including grant terminology,
-// see Using grants
+// see Grants in KMS
 // (https://docs.aws.amazon.com/kms/latest/developerguide/grants.html) in the Key
 // Management Service Developer Guide . For examples of working with grants in
 // several programming languages, see Programming grants

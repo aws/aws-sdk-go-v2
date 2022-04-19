@@ -1,0 +1,8 @@
+{
+    "id": "757c389a-0048-4831-aabf-9c67c572c365",
+    "type": "feature",
+    "description": "This release adds support for specifying and extracting information from documents using the Queries feature within Analyze Document API",
+    "modules": [
+        "service/textract"
+    ]
+}

@@ -12,6 +12,9 @@ import (
 
 // Signs the user out from all of their devices. The user can sign in again if they
 // have valid credentials.
+//
+// Deprecated: Amazon WorkLink is no longer supported. This will be removed in a
+// future version of the SDK.
 func (c *Client) SignOutUser(ctx context.Context, params *SignOutUserInput, optFns ...func(*Options)) (*SignOutUserOutput, error) {
 	if params == nil {
 		params = &SignOutUserInput{}

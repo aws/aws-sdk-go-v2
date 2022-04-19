@@ -7587,6 +7587,23 @@ func awsAwsquery_deserializeDocumentAutoScalingGroup(v **types.AutoScalingGroup,
 				sv.DefaultCooldown = ptr.Int32(int32(i64))
 			}
 
+		case strings.EqualFold("DefaultInstanceWarmup", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.DefaultInstanceWarmup = ptr.Int32(int32(i64))
+			}
+
 		case strings.EqualFold("DesiredCapacity", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

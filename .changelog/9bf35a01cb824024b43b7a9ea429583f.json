@@ -1,0 +1,8 @@
+{
+    "id": "9bf35a01-cb82-4024-b43b-7a9ea429583f",
+    "type": "feature",
+    "description": "EC2 Auto Scaling now adds default instance warm-up times for all scaling activities, health check replacements, and other replacement events in the Auto Scaling instance lifecycle.",
+    "modules": [
+        "service/autoscaling"
+    ]
+}

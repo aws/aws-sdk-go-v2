@@ -18,7 +18,7 @@ import (
 // and IAM policies. Grants are often used for temporary permissions because you
 // can create one, use its permissions, and delete it without changing your key
 // policies or IAM policies. For detailed information about grants, including grant
-// terminology, see Using grants
+// terminology, see Grants in KMS
 // (https://docs.aws.amazon.com/kms/latest/developerguide/grants.html) in the Key
 // Management Service Developer Guide . For examples of working with grants in
 // several programming languages, see Programming grants
@@ -42,7 +42,7 @@ import (
 //
 // The KMS key that you use
 // for this operation must be in a compatible key state. For details, see Key
-// state: Effect on your KMS key
+// states of KMS keys
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
 // Key Management Service Developer Guide. Cross-account use: Yes. To perform this
 // operation on a KMS key in a different Amazon Web Services account, specify the
@@ -105,11 +105,12 @@ type CreateGrantInput struct {
 	// This member is required.
 	KeyId *string
 
-	// A list of operations that the grant permits. The operation must be supported on
-	// the KMS key. For example, you cannot create a grant for a symmetric KMS key that
-	// allows the Sign operation, or a grant for an asymmetric KMS key that allows the
-	// GenerateDataKey operation. If you try, KMS returns a ValidationError exception.
-	// For details, see Grant operations
+	// A list of operations that the grant permits. This list must include only
+	// operations that are permitted in a grant. Also, the operation must be supported
+	// on the KMS key. For example, you cannot create a grant for a symmetric
+	// encryption KMS key that allows the Sign operation, or a grant for an asymmetric
+	// KMS key that allows the GenerateDataKey operation. If you try, KMS returns a
+	// ValidationError exception. For details, see Grant operations
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#terms-grant-operations)
 	// in the Key Management Service Developer Guide.
 	//
@@ -119,20 +120,27 @@ type CreateGrantInput struct {
 	// Specifies a grant constraint. KMS supports the EncryptionContextEquals and
 	// EncryptionContextSubset grant constraints. Each constraint value can include up
 	// to 8 encryption context pairs. The encryption context value in each constraint
-	// cannot exceed 384 characters. These grant constraints allow the permissions in
-	// the grant only when the encryption context in the request matches
-	// (EncryptionContextEquals) or includes (EncryptionContextSubset) the encryption
-	// context specified in this structure. For information about grant constraints,
-	// see Using grant constraints
+	// cannot exceed 384 characters. For information about grant constraints, see Using
+	// grant constraints
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/create-grant-overview.html#grant-constraints)
 	// in the Key Management Service Developer Guide. For more information about
-	// encryption context, see Encryption Context
+	// encryption context, see Encryption context
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context)
 	// in the Key Management Service Developer Guide . The encryption context grant
-	// constraints are supported only on operations that include an encryption context.
-	// You cannot use an encryption context grant constraint for cryptographic
-	// operations with asymmetric KMS keys or for management operations, such as
-	// DescribeKey or RetireGrant.
+	// constraints allow the permissions in the grant only when the encryption context
+	// in the request matches (EncryptionContextEquals) or includes
+	// (EncryptionContextSubset) the encryption context specified in this structure.
+	// The encryption context grant constraints are supported only on grant operations
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#terms-grant-operations)
+	// that include an EncryptionContext parameter, such as cryptographic operations on
+	// symmetric encryption KMS keys. Grants with grant constraints can include the
+	// DescribeKey and RetireGrant operations, but the constraint doesn't apply to
+	// these operations. If a grant with a grant constraint includes the CreateGrant
+	// operation, the constraint requires that any grants created with the CreateGrant
+	// permission have an equally strict or stricter encryption context constraint. You
+	// cannot use an encryption context grant constraint for cryptographic operations
+	// with asymmetric KMS keys or HMAC KMS keys. These keys don't support an
+	// encryption context.
 	Constraints *types.GrantConstraints
 
 	// A list of grant tokens. Use a grant token when your permission to call this

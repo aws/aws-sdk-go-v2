@@ -3192,9 +3192,6 @@ func validateOpEnableLoggingInput(v *EnableLoggingInput) error {
 	if v.ClusterIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
 	}
-	if v.BucketName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BucketName"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

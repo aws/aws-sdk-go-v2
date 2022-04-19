@@ -6,6 +6,7 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -31,6 +32,12 @@ func (c *Client) EnableLogging(ctx context.Context, params *EnableLoggingInput, 
 //
 type EnableLoggingInput struct {
 
+	// The identifier of the cluster on which logging is to be started. Example:
+	// examplecluster
+	//
+	// This member is required.
+	ClusterIdentifier *string
+
 	// The name of an existing S3 bucket where the log files are to be stored.
 	// Constraints:
 	//
@@ -38,15 +45,14 @@ type EnableLoggingInput struct {
 	//
 	// * The cluster must
 	// have read bucket and put object permissions
-	//
-	// This member is required.
 	BucketName *string
 
-	// The identifier of the cluster on which logging is to be started. Example:
-	// examplecluster
-	//
-	// This member is required.
-	ClusterIdentifier *string
+	// The log destination type. An enum with possible values of s3 and cloudwatch.
+	LogDestinationType types.LogDestinationType
+
+	// The collection of exported log types. Log types include the connection log, user
+	// log and user activity log.
+	LogExports []string
 
 	// The prefix applied to the log file names. Constraints:
 	//
@@ -85,6 +91,13 @@ type EnableLoggingOutput struct {
 
 	// The last time that logs were delivered.
 	LastSuccessfulDeliveryTime *time.Time
+
+	// The log destination type. An enum with possible values of s3 and cloudwatch.
+	LogDestinationType types.LogDestinationType
+
+	// The collection of exported log types. Log types include the connection log, user
+	// log and user activity log.
+	LogExports []string
 
 	// true if logging is on, false if logging is off.
 	LoggingEnabled bool

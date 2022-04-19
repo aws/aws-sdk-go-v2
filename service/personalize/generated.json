@@ -61,6 +61,8 @@
         "api_op_ListSolutionVersions.go",
         "api_op_ListSolutions.go",
         "api_op_ListTagsForResource.go",
+        "api_op_StartRecommender.go",
+        "api_op_StopRecommender.go",
         "api_op_StopSolutionVersionCreation.go",
         "api_op_TagResource.go",
         "api_op_UntagResource.go",

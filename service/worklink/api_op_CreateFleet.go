@@ -13,6 +13,9 @@ import (
 // Creates a fleet. A fleet consists of resources and the configuration that
 // delivers associated websites to authorized users who download and set up the
 // Amazon WorkLink app.
+//
+// Deprecated: Amazon WorkLink is no longer supported. This will be removed in a
+// future version of the SDK.
 func (c *Client) CreateFleet(ctx context.Context, params *CreateFleetInput, optFns ...func(*Options)) (*CreateFleetOutput, error) {
 	if params == nil {
 		params = &CreateFleetInput{}

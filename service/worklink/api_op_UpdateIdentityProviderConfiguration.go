@@ -12,6 +12,9 @@ import (
 )
 
 // Updates the identity provider configuration for the fleet.
+//
+// Deprecated: Amazon WorkLink is no longer supported. This will be removed in a
+// future version of the SDK.
 func (c *Client) UpdateIdentityProviderConfiguration(ctx context.Context, params *UpdateIdentityProviderConfigurationInput, optFns ...func(*Options)) (*UpdateIdentityProviderConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateIdentityProviderConfigurationInput{}

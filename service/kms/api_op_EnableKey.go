@@ -14,7 +14,7 @@ import (
 // for cryptographic operations
 // (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations).
 // The KMS key that you use for this operation must be in a compatible key state.
-// For details, see Key state: Effect on your KMS key
+// For details, see Key states of KMS keys
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
 // Key Management Service Developer Guide. Cross-account use: No. You cannot
 // perform this operation on a KMS key in a different Amazon Web Services account.

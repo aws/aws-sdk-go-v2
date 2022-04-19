@@ -7660,6 +7660,19 @@ func awsAwsquery_serializeDocumentIamRoleArnList(v []string, value query.Value) 
 	return nil
 }
 
+func awsAwsquery_serializeDocumentLogTypeList(v []string, value query.Value) error {
+	if len(v) == 0 {
+		return nil
+	}
+	array := value.Array("member")
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsquery_serializeDocumentNodeConfigurationOptionsFilter(v *types.NodeConfigurationOptionsFilter, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -10367,6 +10380,18 @@ func awsAwsquery_serializeOpDocumentEnableLoggingInput(v *EnableLoggingInput, va
 	if v.ClusterIdentifier != nil {
 		objectKey := object.Key("ClusterIdentifier")
 		objectKey.String(*v.ClusterIdentifier)
+	}
+
+	if len(v.LogDestinationType) > 0 {
+		objectKey := object.Key("LogDestinationType")
+		objectKey.String(string(v.LogDestinationType))
+	}
+
+	if v.LogExports != nil {
+		objectKey := object.Key("LogExports")
+		if err := awsAwsquery_serializeDocumentLogTypeList(v.LogExports, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.S3KeyPrefix != nil {

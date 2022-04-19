@@ -14,13 +14,12 @@ import (
 // the KMS key for cryptographic operations
 // (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations).
 // For more information about how key state affects the use of a KMS key, see Key
-// state: Effect on your KMS key
+// states of KMS keys
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
 // Key Management Service Developer Guide . The KMS key that you use for this
-// operation must be in a compatible key state. For details, see Key state: Effect
-// on your KMS key
-// (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
-// Key Management Service Developer Guide. Cross-account use: No. You cannot
+// operation must be in a compatible key state. For details, see Key states of KMS
+// keys (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in
+// the Key Management Service Developer Guide. Cross-account use: No. You cannot
 // perform this operation on a KMS key in a different Amazon Web Services account.
 // Required permissions: kms:DisableKey
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)

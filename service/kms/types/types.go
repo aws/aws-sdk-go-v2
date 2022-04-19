@@ -139,20 +139,20 @@ type CustomKeyStoresListEntry struct {
 // (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context).
 // KMS applies the grant constraints only to cryptographic operations that support
 // an encryption context, that is, all cryptographic operations with a symmetric
-// KMS key
+// encryption KMS key
 // (https://docs.aws.amazon.com/kms/latest/developerguide/symm-asymm-concepts.html#symmetric-cmks).
 // Grant constraints are not applied to operations that do not support an
-// encryption context, such as cryptographic operations with asymmetric KMS keys
-// and management operations, such as DescribeKey or RetireGrant. In a
-// cryptographic operation, the encryption context in the decryption operation must
-// be an exact, case-sensitive match for the keys and values in the encryption
-// context of the encryption operation. Only the order of the pairs can vary.
-// However, in a grant constraint, the key in each key-value pair is not case
-// sensitive, but the value is case sensitive. To avoid confusion, do not use
-// multiple encryption context pairs that differ only by case. To require a fully
-// case-sensitive encryption context, use the kms:EncryptionContext: and
-// kms:EncryptionContextKeys conditions in an IAM or key policy. For details, see
-// kms:EncryptionContext:
+// encryption context, such as cryptographic operations with HMAC KMS keys or
+// asymmetric KMS keys, and management operations, such as DescribeKey or
+// RetireGrant. In a cryptographic operation, the encryption context in the
+// decryption operation must be an exact, case-sensitive match for the keys and
+// values in the encryption context of the encryption operation. Only the order of
+// the pairs can vary. However, in a grant constraint, the key in each key-value
+// pair is not case sensitive, but the value is case sensitive. To avoid confusion,
+// do not use multiple encryption context pairs that differ only by case. To
+// require a fully case-sensitive encryption context, use the
+// kms:EncryptionContext: and kms:EncryptionContextKeys conditions in an IAM or key
+// policy. For details, see kms:EncryptionContext:
 // (https://docs.aws.amazon.com/kms/latest/developerguide/policy-conditions.html#conditions-kms-encryption-context)
 // in the Key Management Service Developer Guide .
 type GrantConstraints struct {
@@ -305,7 +305,7 @@ type KeyMetadata struct {
 	KeySpec KeySpec
 
 	// The current status of the KMS key. For more information about how key state
-	// affects the use of a KMS key, see Key state: Effect on your KMS key
+	// affects the use of a KMS key, see Key states of KMS keys
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
 	// Key Management Service Developer Guide.
 	KeyState KeyState
@@ -315,10 +315,15 @@ type KeyMetadata struct {
 	// for which you can use the KMS key.
 	KeyUsage KeyUsageType
 
+	// The message authentication code (MAC) algorithm that the HMAC KMS key supports.
+	// This value is present only when the KeyUsage of the KMS key is
+	// GENERATE_VERIFY_MAC.
+	MacAlgorithms []MacAlgorithmSpec
+
 	// Indicates whether the KMS key is a multi-Region (True) or regional (False) key.
 	// This value is True for multi-Region primary and replica keys and False for
-	// regional KMS keys. For more information about multi-Region keys, see Using
-	// multi-Region keys
+	// regional KMS keys. For more information about multi-Region keys, see
+	// Multi-Region keys in KMS
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html)
 	// in the Key Management Service Developer Guide.
 	MultiRegion *bool

@@ -12,14 +12,15 @@ import (
 	"time"
 )
 
-// Imports key material into an existing symmetric KMS KMS key that was created
-// without key material. After you successfully import key material into a KMS key,
-// you can reimport the same key material
+// Imports key material into an existing symmetric encryption KMS key that was
+// created without key material. After you successfully import key material into a
+// KMS key, you can reimport the same key material
 // (https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html#reimport-key-material)
 // into that KMS key, but you cannot import different key material. You cannot
-// perform this operation on an asymmetric KMS key or on any KMS key in a different
-// Amazon Web Services account. For more information about creating KMS keys with
-// no key material and then importing key material, see Importing Key Material
+// perform this operation on an asymmetric KMS key, an HMAC KMS key, or on any KMS
+// key in a different Amazon Web Services account. For more information about
+// creating KMS keys with no key material and then importing key material, see
+// Importing Key Material
 // (https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html) in
 // the Key Management Service Developer Guide. Before using this operation, call
 // GetParametersForImport. Its response includes a public key and an import token.
@@ -55,10 +56,9 @@ import (
 // and repeat the import procedure. For help, see How To Import Key Material
 // (https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html#importing-keys-overview)
 // in the Key Management Service Developer Guide. The KMS key that you use for this
-// operation must be in a compatible key state. For details, see Key state: Effect
-// on your KMS key
-// (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
-// Key Management Service Developer Guide. Cross-account use: No. You cannot
+// operation must be in a compatible key state. For details, see Key states of KMS
+// keys (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in
+// the Key Management Service Developer Guide. Cross-account use: No. You cannot
 // perform this operation on a KMS key in a different Amazon Web Services account.
 // Required permissions: kms:ImportKeyMaterial
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
@@ -99,13 +99,15 @@ type ImportKeyMaterialInput struct {
 	// This member is required.
 	ImportToken []byte
 
-	// The identifier of the symmetric KMS key that receives the imported key material.
-	// The KMS key's Origin must be EXTERNAL. This must be the same KMS key specified
-	// in the KeyID parameter of the corresponding GetParametersForImport request.
-	// Specify the key ID or key ARN of the KMS key. For example:
+	// The identifier of the symmetric encryption KMS key that receives the imported
+	// key material. This must be the same KMS key specified in the KeyID parameter of
+	// the corresponding GetParametersForImport request. The Origin of the KMS key must
+	// be EXTERNAL. You cannot perform this operation on an asymmetric KMS key, an HMAC
+	// KMS key, a KMS key in a custom key store, or on a KMS key in a different Amazon
+	// Web Services account Specify the key ID or key ARN of the KMS key. For
+	// example:
 	//
-	// * Key ID:
-	// 1234abcd-12ab-34cd-56ef-1234567890ab
+	// * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	// * Key ARN:
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab

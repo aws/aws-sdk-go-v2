@@ -13,6 +13,9 @@ import (
 )
 
 // Retrieves a list of devices registered with the specified fleet.
+//
+// Deprecated: Amazon WorkLink is no longer supported. This will be removed in a
+// future version of the SDK.
 func (c *Client) ListDevices(ctx context.Context, params *ListDevicesInput, optFns ...func(*Options)) (*ListDevicesOutput, error) {
 	if params == nil {
 		params = &ListDevicesInput{}

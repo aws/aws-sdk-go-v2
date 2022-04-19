@@ -11,6 +11,9 @@ import (
 )
 
 // Updates domain metadata, such as DisplayName.
+//
+// Deprecated: Amazon WorkLink is no longer supported. This will be removed in a
+// future version of the SDK.
 func (c *Client) UpdateDomainMetadata(ctx context.Context, params *UpdateDomainMetadataInput, optFns ...func(*Options)) (*UpdateDomainMetadataOutput, error) {
 	if params == nil {
 		params = &UpdateDomainMetadataInput{}

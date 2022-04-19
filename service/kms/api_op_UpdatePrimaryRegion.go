@@ -25,7 +25,7 @@ import (
 // interchangeably to encrypt data in one Amazon Web Services Region and decrypt it
 // in a different Amazon Web Services Region without re-encrypting the data or
 // making a cross-Region call. For more information about multi-Region keys, see
-// Using multi-Region keys
+// Multi-Region keys in KMS
 // (https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html)
 // in the Key Management Service Developer Guide. The primary key of a multi-Region
 // key is the source for properties that are always shared by primary and replica
@@ -56,14 +56,15 @@ import (
 // update is complete. While the key state is Updating, you can use the keys in
 // cryptographic operations, but you cannot replicate the new primary key or
 // perform certain management operations, such as enabling or disabling these keys.
-// For details about the Updating key state, see Key state: Effect on your KMS key
-// in the Key Management Service Developer Guide. This operation does not return
-// any output. To verify that primary key is changed, use the DescribeKey
-// operation. Cross-account use: No. You cannot use this operation in a different
-// Amazon Web Services account. Required permissions:
+// For details about the Updating key state, see Key states of KMS keys
+// (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
+// Key Management Service Developer Guide. This operation does not return any
+// output. To verify that primary key is changed, use the DescribeKey operation.
+// Cross-account use: No. You cannot use this operation in a different Amazon Web
+// Services account. Required permissions:
 //
-// * kms:UpdatePrimaryRegion on
-// the current primary key (in the primary key's Region). Include this permission
+// * kms:UpdatePrimaryRegion on the
+// current primary key (in the primary key's Region). Include this permission
 // primary key's key policy.
 //
 // * kms:UpdatePrimaryRegion on the current replica key

@@ -90,6 +90,10 @@ const (
 	CustomerMasterKeySpecEccNistP521      CustomerMasterKeySpec = "ECC_NIST_P521"
 	CustomerMasterKeySpecEccSecgP256k1    CustomerMasterKeySpec = "ECC_SECG_P256K1"
 	CustomerMasterKeySpecSymmetricDefault CustomerMasterKeySpec = "SYMMETRIC_DEFAULT"
+	CustomerMasterKeySpecHmac224          CustomerMasterKeySpec = "HMAC_224"
+	CustomerMasterKeySpecHmac256          CustomerMasterKeySpec = "HMAC_256"
+	CustomerMasterKeySpecHmac384          CustomerMasterKeySpec = "HMAC_384"
+	CustomerMasterKeySpecHmac512          CustomerMasterKeySpec = "HMAC_512"
 )
 
 // Values returns all known values for CustomerMasterKeySpec. Note that this can be
@@ -105,6 +109,10 @@ func (CustomerMasterKeySpec) Values() []CustomerMasterKeySpec {
 		"ECC_NIST_P521",
 		"ECC_SECG_P256K1",
 		"SYMMETRIC_DEFAULT",
+		"HMAC_224",
+		"HMAC_256",
+		"HMAC_384",
+		"HMAC_512",
 	}
 }
 
@@ -210,6 +218,8 @@ const (
 	GrantOperationDescribeKey                         GrantOperation = "DescribeKey"
 	GrantOperationGenerateDataKeyPair                 GrantOperation = "GenerateDataKeyPair"
 	GrantOperationGenerateDataKeyPairWithoutPlaintext GrantOperation = "GenerateDataKeyPairWithoutPlaintext"
+	GrantOperationGenerateMac                         GrantOperation = "GenerateMac"
+	GrantOperationVerifyMac                           GrantOperation = "VerifyMac"
 )
 
 // Values returns all known values for GrantOperation. Note that this can be
@@ -231,6 +241,8 @@ func (GrantOperation) Values() []GrantOperation {
 		"DescribeKey",
 		"GenerateDataKeyPair",
 		"GenerateDataKeyPairWithoutPlaintext",
+		"GenerateMac",
+		"VerifyMac",
 	}
 }
 
@@ -264,6 +276,10 @@ const (
 	KeySpecEccNistP521      KeySpec = "ECC_NIST_P521"
 	KeySpecEccSecgP256k1    KeySpec = "ECC_SECG_P256K1"
 	KeySpecSymmetricDefault KeySpec = "SYMMETRIC_DEFAULT"
+	KeySpecHmac224          KeySpec = "HMAC_224"
+	KeySpecHmac256          KeySpec = "HMAC_256"
+	KeySpecHmac384          KeySpec = "HMAC_384"
+	KeySpecHmac512          KeySpec = "HMAC_512"
 )
 
 // Values returns all known values for KeySpec. Note that this can be expanded in
@@ -279,6 +295,10 @@ func (KeySpec) Values() []KeySpec {
 		"ECC_NIST_P521",
 		"ECC_SECG_P256K1",
 		"SYMMETRIC_DEFAULT",
+		"HMAC_224",
+		"HMAC_256",
+		"HMAC_384",
+		"HMAC_512",
 	}
 }
 
@@ -316,8 +336,9 @@ type KeyUsageType string
 
 // Enum values for KeyUsageType
 const (
-	KeyUsageTypeSignVerify     KeyUsageType = "SIGN_VERIFY"
-	KeyUsageTypeEncryptDecrypt KeyUsageType = "ENCRYPT_DECRYPT"
+	KeyUsageTypeSignVerify        KeyUsageType = "SIGN_VERIFY"
+	KeyUsageTypeEncryptDecrypt    KeyUsageType = "ENCRYPT_DECRYPT"
+	KeyUsageTypeGenerateVerifyMac KeyUsageType = "GENERATE_VERIFY_MAC"
 )
 
 // Values returns all known values for KeyUsageType. Note that this can be expanded
@@ -327,6 +348,29 @@ func (KeyUsageType) Values() []KeyUsageType {
 	return []KeyUsageType{
 		"SIGN_VERIFY",
 		"ENCRYPT_DECRYPT",
+		"GENERATE_VERIFY_MAC",
+	}
+}
+
+type MacAlgorithmSpec string
+
+// Enum values for MacAlgorithmSpec
+const (
+	MacAlgorithmSpecHmacSha224 MacAlgorithmSpec = "HMAC_SHA_224"
+	MacAlgorithmSpecHmacSha256 MacAlgorithmSpec = "HMAC_SHA_256"
+	MacAlgorithmSpecHmacSha384 MacAlgorithmSpec = "HMAC_SHA_384"
+	MacAlgorithmSpecHmacSha512 MacAlgorithmSpec = "HMAC_SHA_512"
+)
+
+// Values returns all known values for MacAlgorithmSpec. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MacAlgorithmSpec) Values() []MacAlgorithmSpec {
+	return []MacAlgorithmSpec{
+		"HMAC_SHA_224",
+		"HMAC_SHA_256",
+		"HMAC_SHA_384",
+		"HMAC_SHA_512",
 	}
 }
 

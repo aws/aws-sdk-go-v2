@@ -28920,6 +28920,86 @@ func awsAwsquery_deserializeDocumentLimitExceededFault(v **types.LimitExceededFa
 	return nil
 }
 
+func awsAwsquery_deserializeDocumentLogTypeList(v *[]string, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []string
+	if *v == nil {
+		sv = make([]string, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		memberDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		decoder = memberDecoder
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col string
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				col = xtv
+			}
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentLogTypeListUnwrapped(v *[]string, decoder smithyxml.NodeDecoder) error {
+	var sv []string
+	if *v == nil {
+		sv = make([]string, 0)
+	} else {
+		sv = *v
+	}
+
+	switch {
+	default:
+		var mv string
+		t := decoder.StartEl
+		_ = t
+		val, err := decoder.Value()
+		if err != nil {
+			return err
+		}
+		if val == nil {
+			break
+		}
+		{
+			xtv := string(val)
+			mv = xtv
+		}
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
 func awsAwsquery_deserializeDocumentMaintenanceTrack(v **types.MaintenanceTrack, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -41030,6 +41110,25 @@ func awsAwsquery_deserializeOpDocumentDescribeLoggingStatusOutput(v **DescribeLo
 				sv.LastSuccessfulDeliveryTime = ptr.Time(t)
 			}
 
+		case strings.EqualFold("LogDestinationType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.LogDestinationType = types.LogDestinationType(xtv)
+			}
+
+		case strings.EqualFold("LogExports", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentLogTypeList(&sv.LogExports, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("LoggingEnabled", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -42123,6 +42222,25 @@ func awsAwsquery_deserializeOpDocumentDisableLoggingOutput(v **DisableLoggingOut
 				sv.LastSuccessfulDeliveryTime = ptr.Time(t)
 			}
 
+		case strings.EqualFold("LogDestinationType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.LogDestinationType = types.LogDestinationType(xtv)
+			}
+
+		case strings.EqualFold("LogExports", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentLogTypeList(&sv.LogExports, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("LoggingEnabled", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -42385,6 +42503,25 @@ func awsAwsquery_deserializeOpDocumentEnableLoggingOutput(v **EnableLoggingOutpu
 					return err
 				}
 				sv.LastSuccessfulDeliveryTime = ptr.Time(t)
+			}
+
+		case strings.EqualFold("LogDestinationType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.LogDestinationType = types.LogDestinationType(xtv)
+			}
+
+		case strings.EqualFold("LogExports", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentLogTypeList(&sv.LogExports, nodeDecoder); err != nil {
+				return err
 			}
 
 		case strings.EqualFold("LoggingEnabled", t.Name.Local):

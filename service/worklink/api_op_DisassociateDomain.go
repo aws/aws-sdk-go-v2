@@ -12,6 +12,9 @@ import (
 
 // Disassociates a domain from Amazon WorkLink. End users lose the ability to
 // access the domain with Amazon WorkLink.
+//
+// Deprecated: Amazon WorkLink is no longer supported. This will be removed in a
+// future version of the SDK.
 func (c *Client) DisassociateDomain(ctx context.Context, params *DisassociateDomainInput, optFns ...func(*Options)) (*DisassociateDomainOutput, error) {
 	if params == nil {
 		params = &DisassociateDomainInput{}

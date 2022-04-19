@@ -14,7 +14,7 @@ import (
 // Adds or edits tags on a customer managed key
 // (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk).
 // Tagging or untagging a KMS key can allow or deny permission to the KMS key. For
-// details, see Using ABAC in KMS
+// details, see ABAC in KMS
 // (https://docs.aws.amazon.com/kms/latest/developerguide/abac.html) in the Key
 // Management Service Developer Guide. Each tag consists of a tag key and a tag
 // value, both of which are case-sensitive strings. The tag value can be an empty
@@ -37,7 +37,7 @@ import (
 // Amazon Web Services resources
 // (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the Amazon
 // Web Services General Reference. The KMS key that you use for this operation must
-// be in a compatible key state. For details, see Key state: Effect on your KMS key
+// be in a compatible key state. For details, see Key states of KMS keys
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
 // Key Management Service Developer Guide. Cross-account use: No. You cannot
 // perform this operation on a KMS key in a different Amazon Web Services account.

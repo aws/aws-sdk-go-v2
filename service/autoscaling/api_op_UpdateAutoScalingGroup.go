@@ -83,14 +83,30 @@ type UpdateAutoScalingGroupInput struct {
 	// Reserved.
 	Context *string
 
-	// The amount of time, in seconds, after a scaling activity completes before
-	// another scaling activity can start. The default value is 300. This setting
-	// applies when using simple scaling policies, but not when using other scaling
-	// policies or scheduled scaling. For more information, see Scaling cooldowns for
-	// Amazon EC2 Auto Scaling
+	// Only needed if you use simple scaling policies. The amount of time, in seconds,
+	// between one scaling activity ending and another one starting due to simple
+	// scaling policies. For more information, see Scaling cooldowns for Amazon EC2
+	// Auto Scaling
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html) in the
 	// Amazon EC2 Auto Scaling User Guide.
 	DefaultCooldown *int32
+
+	// The amount of time, in seconds, until a newly launched instance can contribute
+	// to the Amazon CloudWatch metrics. This delay lets an instance finish
+	// initializing before Amazon EC2 Auto Scaling aggregates instance metrics,
+	// resulting in more reliable usage data. Set this value equal to the amount of
+	// time that it takes for resource consumption to become stable after an instance
+	// reaches the InService state. For more information, see Set the default instance
+	// warmup for an Auto Scaling group
+	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-default-instance-warmup.html)
+	// in the Amazon EC2 Auto Scaling User Guide. To manage your warm-up settings at
+	// the group level, we recommend that you set the default instance warmup, even if
+	// its value is set to 0 seconds. This also optimizes the performance of scaling
+	// policies that scale continuously, such as target tracking and step scaling
+	// policies. If you need to remove a value that you previously set, include the
+	// property but specify -1 for the value. However, we strongly recommend keeping
+	// the default instance warmup enabled by specifying a minimum value of 0.
+	DefaultInstanceWarmup *int32
 
 	// The desired capacity is the initial capacity of the Auto Scaling group after
 	// this operation completes and the capacity it attempts to maintain. This number
@@ -110,11 +126,12 @@ type UpdateAutoScalingGroupInput struct {
 
 	// The amount of time, in seconds, that Amazon EC2 Auto Scaling waits before
 	// checking the health status of an EC2 instance that has come into service and
-	// marking it unhealthy due to a failed health check. The default value is 0. For
-	// more information, see Health check grace period
+	// marking it unhealthy due to a failed Elastic Load Balancing or custom health
+	// check. This is useful if your instances do not immediately pass these health
+	// checks after they enter the InService state. For more information, see Health
+	// check grace period
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html#health-check-grace-period)
-	// in the Amazon EC2 Auto Scaling User Guide. Required if you are adding an ELB
-	// health check.
+	// in the Amazon EC2 Auto Scaling User Guide.
 	HealthCheckGracePeriod *int32
 
 	// The service to use for the health checks. The valid values are EC2 and ELB. If
@@ -166,12 +183,12 @@ type UpdateAutoScalingGroupInput struct {
 	// in the Amazon EC2 Auto Scaling User Guide.
 	NewInstancesProtectedFromScaleIn *bool
 
-	// The name of an existing placement group into which to launch your instances, if
-	// any. A placement group is a logical grouping of instances within a single
-	// Availability Zone. You cannot specify multiple Availability Zones and a
-	// placement group. For more information, see Placement Groups
+	// The name of an existing placement group into which to launch your instances. For
+	// more information, see Placement groups
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html) in
-	// the Amazon EC2 User Guide for Linux Instances.
+	// the Amazon EC2 User Guide for Linux Instances. A cluster placement group is a
+	// logical grouping of instances within a single Availability Zone. You cannot
+	// specify multiple Availability Zones and a cluster placement group.
 	PlacementGroup *string
 
 	// The Amazon Resource Name (ARN) of the service-linked role that the Auto Scaling

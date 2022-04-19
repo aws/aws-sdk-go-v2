@@ -1,0 +1,8 @@
+{
+    "id": "f01ba5f6-a6b7-450f-98ab-03dca120e1ef",
+    "type": "feature",
+    "description": "Amazon Kendra now provides a data source connector for Quip. For more information, see https://docs.aws.amazon.com/kendra/latest/dg/data-source-quip.html",
+    "modules": [
+        "service/kendra"
+    ]
+}

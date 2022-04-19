@@ -67,7 +67,7 @@ type UpdateAccessInput struct {
 	// value instead of the session policy to lock down your user to the designated
 	// home directory ("chroot"). To do this, you can set Entry to / and set Target to
 	// the HomeDirectory parameter value. The following is an Entry and Target pair
-	// example for chroot. [ { "Entry:": "/", "Target": "/bucket_name/home/mydirectory"
+	// example for chroot. [ { "Entry": "/", "Target": "/bucket_name/home/mydirectory"
 	// } ]
 	HomeDirectoryMappings []types.HomeDirectoryMapEntry
 

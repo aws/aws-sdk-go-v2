@@ -12,6 +12,9 @@ import (
 
 // Describes the networking configuration to access the internal websites
 // associated with the specified fleet.
+//
+// Deprecated: Amazon WorkLink is no longer supported. This will be removed in a
+// future version of the SDK.
 func (c *Client) DescribeCompanyNetworkConfiguration(ctx context.Context, params *DescribeCompanyNetworkConfigurationInput, optFns ...func(*Options)) (*DescribeCompanyNetworkConfigurationOutput, error) {
 	if params == nil {
 		params = &DescribeCompanyNetworkConfigurationInput{}

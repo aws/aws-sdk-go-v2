@@ -295,7 +295,7 @@ type BoxConfiguration struct {
 
 	// Configuration information for an Amazon VPC to connect to your Box. For more
 	// information, see Configuring a VPC
-	// (https://docs.aws.amazon.com/endra/latest/dg/vpc-configuration.html).
+	// (https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html).
 	VpcConfiguration *DataSourceVpcConfiguration
 
 	// A list of DataSourceToIndexFieldMapping objects that map attributes or field
@@ -802,6 +802,9 @@ type DataSourceConfiguration struct {
 	// Provides the configuration information to connect to Microsoft OneDrive as your
 	// data source.
 	OneDriveConfiguration *OneDriveConfiguration
+
+	// Provides the configuration information to connect to Quip as your data source.
+	QuipConfiguration *QuipConfiguration
 
 	// Provides the configuration information to connect to an Amazon S3 bucket as your
 	// data source.
@@ -2121,6 +2124,75 @@ type QuerySuggestionsBlockListSummary struct {
 
 	// The date-time the block list was last updated.
 	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Provides the configuration information to connect to Quip as your data source.
+type QuipConfiguration struct {
+
+	// The configuration information to connect to your Quip data source domain.
+	//
+	// This member is required.
+	Domain *string
+
+	// The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the
+	// key-value pairs that are required to connect to your Quip file system. Windows
+	// is currently the only supported type. The secret must contain a JSON structure
+	// with the following keys:
+	//
+	// * username—The Active Directory user name, along with
+	// the Domain Name System (DNS) domain name. For example, user@corp.example.com.
+	// The Active Directory user account must have read and mounting access to the Quip
+	// file system for Windows.
+	//
+	// * password—The password of the Active Directory user
+	// account with read and mounting access to the Quip Windows file system.
+	//
+	// This member is required.
+	SecretArn *string
+
+	// A list of field mappings to apply when indexing Quip attachments.
+	AttachmentFieldMappings []DataSourceToIndexFieldMapping
+
+	// Specify whether to crawl attachments in your Quip data source. You can specify
+	// one or more of these options.
+	CrawlAttachments bool
+
+	// Specify whether to crawl chat rooms in your Quip data source. You can specify
+	// one or more of these options.
+	CrawlChatRooms bool
+
+	// Specify whether to crawl file comments in your Quip data source. You can specify
+	// one or more of these options.
+	CrawlFileComments bool
+
+	// A list of regular expression patterns to exclude certain files in your Quip file
+	// system. Files that match the patterns are excluded from the index. Files that
+	// don’t match the patterns are included in the index. If a file matches both an
+	// inclusion pattern and an exclusion pattern, the exclusion pattern takes
+	// precedence, and the file isn't included in the index.
+	ExclusionPatterns []string
+
+	// The identifier of the Quip folder IDs to index.
+	FolderIds []string
+
+	// A list of regular expression patterns to include certain files in your Quip file
+	// system. Files that match the patterns are included in the index. Files that
+	// don't match the patterns are excluded from the index. If a file matches both an
+	// inclusion pattern and an exclusion pattern, the exclusion pattern takes
+	// precedence, and the file isn't included in the index.
+	InclusionPatterns []string
+
+	// A list of field mappings to apply when indexing Quip messages.
+	MessageFieldMappings []DataSourceToIndexFieldMapping
+
+	// A list of field mappings to apply when indexing Quip threads.
+	ThreadFieldMappings []DataSourceToIndexFieldMapping
+
+	// Configuration information for connecting to an Amazon Virtual Private Cloud
+	// (VPC) for your Quip. Your Quip instance must reside inside your VPC.
+	VpcConfiguration *DataSourceVpcConfiguration
 
 	noSmithyDocumentSerde
 }

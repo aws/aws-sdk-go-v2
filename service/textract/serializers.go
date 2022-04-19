@@ -704,6 +704,68 @@ func awsAwsjson11_serializeDocumentOutputConfig(v *types.OutputConfig, value smi
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentQueries(v []types.Query, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentQuery(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentQueriesConfig(v *types.QueriesConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Queries != nil {
+		ok := object.Key("Queries")
+		if err := awsAwsjson11_serializeDocumentQueries(v.Queries, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentQuery(v *types.Query, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Alias != nil {
+		ok := object.Key("Alias")
+		ok.String(*v.Alias)
+	}
+
+	if v.Pages != nil {
+		ok := object.Key("Pages")
+		if err := awsAwsjson11_serializeDocumentQueryPages(v.Pages, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Text != nil {
+		ok := object.Key("Text")
+		ok.String(*v.Text)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentQueryPages(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentS3Object(v *types.S3Object, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -747,6 +809,13 @@ func awsAwsjson11_serializeOpDocumentAnalyzeDocumentInput(v *AnalyzeDocumentInpu
 	if v.HumanLoopConfig != nil {
 		ok := object.Key("HumanLoopConfig")
 		if err := awsAwsjson11_serializeDocumentHumanLoopConfig(v.HumanLoopConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.QueriesConfig != nil {
+		ok := object.Key("QueriesConfig")
+		if err := awsAwsjson11_serializeDocumentQueriesConfig(v.QueriesConfig, ok); err != nil {
 			return err
 		}
 	}
@@ -905,6 +974,13 @@ func awsAwsjson11_serializeOpDocumentStartDocumentAnalysisInput(v *StartDocument
 	if v.OutputConfig != nil {
 		ok := object.Key("OutputConfig")
 		if err := awsAwsjson11_serializeDocumentOutputConfig(v.OutputConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.QueriesConfig != nil {
+		ok := object.Key("QueriesConfig")
+		if err := awsAwsjson11_serializeDocumentQueriesConfig(v.QueriesConfig, ok); err != nil {
 			return err
 		}
 	}

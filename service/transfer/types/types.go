@@ -570,14 +570,14 @@ type ExecutionStepResult struct {
 
 	// One of the available step types.
 	//
-	// * Copy: copy the file to another location
+	// * COPY: copy the file to another location
 	//
 	// *
-	// Custom: custom step with a lambda target
+	// CUSTOM: custom step with a lambda target
 	//
-	// * Delete: delete the file
+	// * DELETE: delete the file
 	//
-	// * Tag: add
+	// * TAG: add
 	// a tag to the file
 	StepType WorkflowStepType
 
@@ -599,7 +599,7 @@ type FileLocation struct {
 
 // Represents an object that contains entries and targets for
 // HomeDirectoryMappings. The following is an Entry and Target pair example for
-// chroot. [ { "Entry:": "/", "Target": "/bucket_name/home/mydirectory" } ]
+// chroot. [ { "Entry": "/", "Target": "/bucket_name/home/mydirectory" } ]
 type HomeDirectoryMapEntry struct {
 
 	// Represents an entry for HomeDirectoryMappings.
@@ -1136,15 +1136,15 @@ type WorkflowStep struct {
 
 	// Currently, the following step types are supported.
 	//
-	// * Copy: copy the file to
+	// * COPY: copy the file to
 	// another location
 	//
-	// * Custom: custom step with a lambda target
+	// * CUSTOM: custom step with a lambda target
 	//
-	// * Delete: delete
+	// * DELETE: delete
 	// the file
 	//
-	// * Tag: add a tag to the file
+	// * TAG: add a tag to the file
 	Type WorkflowStepType
 
 	noSmithyDocumentSerde

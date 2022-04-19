@@ -14,6 +14,9 @@ import (
 
 // Retrieves a list of certificate authorities added for the current account and
 // Region.
+//
+// Deprecated: Amazon WorkLink is no longer supported. This will be removed in a
+// future version of the SDK.
 func (c *Client) ListWebsiteCertificateAuthorities(ctx context.Context, params *ListWebsiteCertificateAuthoritiesInput, optFns ...func(*Options)) (*ListWebsiteCertificateAuthoritiesOutput, error) {
 	if params == nil {
 		params = &ListWebsiteCertificateAuthoritiesInput{}

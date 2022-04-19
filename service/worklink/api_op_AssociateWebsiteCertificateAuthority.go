@@ -12,6 +12,9 @@ import (
 
 // Imports the root certificate of a certificate authority (CA) used to obtain TLS
 // certificates used by associated websites within the company network.
+//
+// Deprecated: Amazon WorkLink is no longer supported. This will be removed in a
+// future version of the SDK.
 func (c *Client) AssociateWebsiteCertificateAuthority(ctx context.Context, params *AssociateWebsiteCertificateAuthorityInput, optFns ...func(*Options)) (*AssociateWebsiteCertificateAuthorityOutput, error) {
 	if params == nil {
 		params = &AssociateWebsiteCertificateAuthorityInput{}

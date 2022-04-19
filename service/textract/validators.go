@@ -301,6 +301,57 @@ func validateOutputConfig(v *types.OutputConfig) error {
 	}
 }
 
+func validateQueries(v []types.Query) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Queries"}
+	for i := range v {
+		if err := validateQuery(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateQueriesConfig(v *types.QueriesConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "QueriesConfig"}
+	if v.Queries == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Queries"))
+	} else if v.Queries != nil {
+		if err := validateQueries(v.Queries); err != nil {
+			invalidParams.AddNested("Queries", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateQuery(v *types.Query) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Query"}
+	if v.Text == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Text"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAnalyzeDocumentInput(v *AnalyzeDocumentInput) error {
 	if v == nil {
 		return nil
@@ -315,6 +366,11 @@ func validateOpAnalyzeDocumentInput(v *AnalyzeDocumentInput) error {
 	if v.HumanLoopConfig != nil {
 		if err := validateHumanLoopConfig(v.HumanLoopConfig); err != nil {
 			invalidParams.AddNested("HumanLoopConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.QueriesConfig != nil {
+		if err := validateQueriesConfig(v.QueriesConfig); err != nil {
+			invalidParams.AddNested("QueriesConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -433,6 +489,11 @@ func validateOpStartDocumentAnalysisInput(v *StartDocumentAnalysisInput) error {
 	if v.OutputConfig != nil {
 		if err := validateOutputConfig(v.OutputConfig); err != nil {
 			invalidParams.AddNested("OutputConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.QueriesConfig != nil {
+		if err := validateQueriesConfig(v.QueriesConfig); err != nil {
+			invalidParams.AddNested("QueriesConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

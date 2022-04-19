@@ -3888,6 +3888,13 @@ func awsAwsjson11_serializeDocumentDataSourceConfiguration(v *types.DataSourceCo
 		}
 	}
 
+	if v.QuipConfiguration != nil {
+		ok := object.Key("QuipConfiguration")
+		if err := awsAwsjson11_serializeDocumentQuipConfiguration(v.QuipConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.S3Configuration != nil {
 		ok := object.Key("S3Configuration")
 		if err := awsAwsjson11_serializeDocumentS3DataSourceConfiguration(v.S3Configuration, ok); err != nil {
@@ -4556,6 +4563,17 @@ func awsAwsjson11_serializeDocumentFaqIdsList(v []string, value smithyjson.Value
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentFolderIdList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentFsxConfiguration(v *types.FsxConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5066,6 +5084,87 @@ func awsAwsjson11_serializeDocumentPublicChannelFilter(v []string, value smithyj
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentQuipConfiguration(v *types.QuipConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AttachmentFieldMappings != nil {
+		ok := object.Key("AttachmentFieldMappings")
+		if err := awsAwsjson11_serializeDocumentDataSourceToIndexFieldMappingList(v.AttachmentFieldMappings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CrawlAttachments {
+		ok := object.Key("CrawlAttachments")
+		ok.Boolean(v.CrawlAttachments)
+	}
+
+	if v.CrawlChatRooms {
+		ok := object.Key("CrawlChatRooms")
+		ok.Boolean(v.CrawlChatRooms)
+	}
+
+	if v.CrawlFileComments {
+		ok := object.Key("CrawlFileComments")
+		ok.Boolean(v.CrawlFileComments)
+	}
+
+	if v.Domain != nil {
+		ok := object.Key("Domain")
+		ok.String(*v.Domain)
+	}
+
+	if v.ExclusionPatterns != nil {
+		ok := object.Key("ExclusionPatterns")
+		if err := awsAwsjson11_serializeDocumentDataSourceInclusionsExclusionsStrings(v.ExclusionPatterns, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FolderIds != nil {
+		ok := object.Key("FolderIds")
+		if err := awsAwsjson11_serializeDocumentFolderIdList(v.FolderIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.InclusionPatterns != nil {
+		ok := object.Key("InclusionPatterns")
+		if err := awsAwsjson11_serializeDocumentDataSourceInclusionsExclusionsStrings(v.InclusionPatterns, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MessageFieldMappings != nil {
+		ok := object.Key("MessageFieldMappings")
+		if err := awsAwsjson11_serializeDocumentDataSourceToIndexFieldMappingList(v.MessageFieldMappings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SecretArn != nil {
+		ok := object.Key("SecretArn")
+		ok.String(*v.SecretArn)
+	}
+
+	if v.ThreadFieldMappings != nil {
+		ok := object.Key("ThreadFieldMappings")
+		if err := awsAwsjson11_serializeDocumentDataSourceToIndexFieldMappingList(v.ThreadFieldMappings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VpcConfiguration != nil {
+		ok := object.Key("VpcConfiguration")
+		if err := awsAwsjson11_serializeDocumentDataSourceVpcConfiguration(v.VpcConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
