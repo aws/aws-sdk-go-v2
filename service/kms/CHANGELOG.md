@@ -1,3 +1,7 @@
+# v1.17.0 (2022-04-19)
+
+* **Feature**: Adds support for KMS keys and APIs that generate and verify HMAC codes
+
 # v1.16.3 (2022-03-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions

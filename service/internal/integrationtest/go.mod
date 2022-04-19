@@ -9,7 +9,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.12.3
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.16.0
 	github.com/aws/aws-sdk-go-v2/service/athena v1.15.0
-	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.22.4
+	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.23.0
 	github.com/aws/aws-sdk-go-v2/service/batch v1.18.0
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.20.3
 	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.16.3
@@ -52,16 +52,16 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.12.3
 	github.com/aws/aws-sdk-go-v2/service/iot v1.24.0
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.15.4
-	github.com/aws/aws-sdk-go-v2/service/kms v1.16.3
+	github.com/aws/aws-sdk-go-v2/service/kms v1.17.0
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.22.0
 	github.com/aws/aws-sdk-go-v2/service/lightsail v1.19.0
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.11.3
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.16.3
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.13.3
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.11.3
-	github.com/aws/aws-sdk-go-v2/service/polly v1.14.3
+	github.com/aws/aws-sdk-go-v2/service/polly v1.15.0
 	github.com/aws/aws-sdk-go-v2/service/rds v1.19.0
-	github.com/aws/aws-sdk-go-v2/service/redshift v1.22.2
+	github.com/aws/aws-sdk-go-v2/service/redshift v1.23.0
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.17.3
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.20.3
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.12.3
@@ -77,7 +77,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/snowball v1.15.3
 	github.com/aws/aws-sdk-go-v2/service/sns v1.17.4
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.18.3
-	github.com/aws/aws-sdk-go-v2/service/ssm v1.24.1
+	github.com/aws/aws-sdk-go-v2/service/ssm v1.25.0
 	github.com/aws/aws-sdk-go-v2/service/sts v1.16.3
 	github.com/aws/aws-sdk-go-v2/service/support v1.13.3
 	github.com/aws/aws-sdk-go-v2/service/timestreamwrite v1.13.3

@@ -1,3 +1,7 @@
+# v1.23.0 (2022-04-19)
+
+* **Feature**: Introduces new fields for LogDestinationType and LogExports on EnableLogging requests and Enable/Disable/DescribeLogging responses. Customers can now select CloudWatch Logs as a destination for their Audit Logs.
+
 # v1.22.2 (2022-03-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions

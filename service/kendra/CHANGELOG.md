@@ -1,3 +1,7 @@
+# v1.25.0 (2022-04-19)
+
+* **Feature**: Amazon Kendra now provides a data source connector for Quip. For more information, see https://docs.aws.amazon.com/kendra/latest/dg/data-source-quip.html
+
 # v1.24.0 (2022-04-06)
 
 * **Feature**: Amazon Kendra now provides a data source connector for Box. For more information, see https://docs.aws.amazon.com/kendra/latest/dg/data-source-box.html

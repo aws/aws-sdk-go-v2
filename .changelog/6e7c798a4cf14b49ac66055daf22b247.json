@@ -1,8 +1,0 @@
-{
-    "id": "6e7c798a-4cf1-4b49-ac66-055daf22b247",
-    "type": "feature",
-    "description": "Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK.",
-    "modules": [
-        "service/worklink"
-    ]
-}

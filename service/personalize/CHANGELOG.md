@@ -1,3 +1,7 @@
+# v1.19.0 (2022-04-19)
+
+* **Feature**: Adding StartRecommender and StopRecommender APIs for Personalize.
+
 # v1.18.0 (2022-04-07)
 
 * **Feature**: This release provides tagging support in AWS Personalize.

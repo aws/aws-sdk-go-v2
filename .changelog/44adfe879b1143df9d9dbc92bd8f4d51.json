@@ -1,8 +1,0 @@
-{
-    "id": "44adfe87-9b11-43df-9d9d-bc92bd8f4d51",
-    "type": "feature",
-    "description": "Adding StartRecommender and StopRecommender APIs for Personalize.",
-    "modules": [
-        "service/personalize"
-    ]
-}

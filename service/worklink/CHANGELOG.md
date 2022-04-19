@@ -1,3 +1,7 @@
+# v1.12.0 (2022-04-19)
+
+* **Feature**: Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK.
+
 # v1.11.3 (2022-03-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions

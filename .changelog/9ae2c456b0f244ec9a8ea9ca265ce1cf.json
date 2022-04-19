@@ -1,8 +1,0 @@
-{
-    "id": "9ae2c456-b0f2-44ec-9a8e-a9ca265ce1cf",
-    "type": "feature",
-    "description": "Adds support for KMS keys and APIs that generate and verify HMAC codes",
-    "modules": [
-        "service/kms"
-    ]
-}

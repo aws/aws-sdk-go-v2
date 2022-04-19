@@ -1,3 +1,27 @@
+# Release (2022-04-19)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.23.0](service/autoscaling/CHANGELOG.md#v1230-2022-04-19)
+  * **Feature**: EC2 Auto Scaling now adds default instance warm-up times for all scaling activities, health check replacements, and other replacement events in the Auto Scaling instance lifecycle.
+* `github.com/aws/aws-sdk-go-v2/service/kendra`: [v1.25.0](service/kendra/CHANGELOG.md#v1250-2022-04-19)
+  * **Feature**: Amazon Kendra now provides a data source connector for Quip. For more information, see https://docs.aws.amazon.com/kendra/latest/dg/data-source-quip.html
+* `github.com/aws/aws-sdk-go-v2/service/kms`: [v1.17.0](service/kms/CHANGELOG.md#v1170-2022-04-19)
+  * **Feature**: Adds support for KMS keys and APIs that generate and verify HMAC codes
+* `github.com/aws/aws-sdk-go-v2/service/personalize`: [v1.19.0](service/personalize/CHANGELOG.md#v1190-2022-04-19)
+  * **Feature**: Adding StartRecommender and StopRecommender APIs for Personalize.
+* `github.com/aws/aws-sdk-go-v2/service/polly`: [v1.15.0](service/polly/CHANGELOG.md#v1150-2022-04-19)
+  * **Feature**: Amazon Polly adds new Austrian German voice - Hannah. Hannah is available as Neural voice only.
+* `github.com/aws/aws-sdk-go-v2/service/redshift`: [v1.23.0](service/redshift/CHANGELOG.md#v1230-2022-04-19)
+  * **Feature**: Introduces new fields for LogDestinationType and LogExports on EnableLogging requests and Enable/Disable/DescribeLogging responses. Customers can now select CloudWatch Logs as a destination for their Audit Logs.
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.25.0](service/ssm/CHANGELOG.md#v1250-2022-04-19)
+  * **Feature**: Added offset support for specifying the number of days to wait after the date and time specified by a CRON expression when creating SSM association.
+* `github.com/aws/aws-sdk-go-v2/service/textract`: [v1.15.0](service/textract/CHANGELOG.md#v1150-2022-04-19)
+  * **Feature**: This release adds support for specifying and extracting information from documents using the Queries feature within Analyze Document API
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.18.4](service/transfer/CHANGELOG.md#v1184-2022-04-19)
+  * **Documentation**: This release contains corrected HomeDirectoryMappings examples for several API functions: CreateAccess, UpdateAccess, CreateUser, and UpdateUser,.
+* `github.com/aws/aws-sdk-go-v2/service/worklink`: [v1.12.0](service/worklink/CHANGELOG.md#v1120-2022-04-19)
+  * **Feature**: Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK.
+
 # Release (2022-04-15)
 
 ## General Highlights

@@ -1,8 +1,0 @@
-{
-    "id": "13eb1905-0bf7-4c48-8399-ed6c7aabe4ce",
-    "type": "feature",
-    "description": "Introduces new fields for LogDestinationType and LogExports on EnableLogging requests and Enable/Disable/DescribeLogging responses. Customers can now select CloudWatch Logs as a destination for their Audit Logs.",
-    "modules": [
-        "service/redshift"
-    ]
-}
