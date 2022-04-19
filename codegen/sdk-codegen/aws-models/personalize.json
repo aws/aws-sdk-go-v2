@@ -306,6 +306,12 @@
                     "target": "com.amazonaws.personalize#ListTagsForResource"
                 },
                 {
+                    "target": "com.amazonaws.personalize#StartRecommender"
+                },
+                {
+                    "target": "com.amazonaws.personalize#StopRecommender"
+                },
+                {
                     "target": "com.amazonaws.personalize#StopSolutionVersionCreation"
                 },
                 {
@@ -2871,6 +2877,9 @@
             "input": {
                 "target": "com.amazonaws.personalize#DeleteCampaignRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.personalize#InvalidInputException"
@@ -2904,6 +2913,9 @@
             "input": {
                 "target": "com.amazonaws.personalize#DeleteDatasetRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.personalize#InvalidInputException"
@@ -2924,6 +2936,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.personalize#DeleteDatasetGroupRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -2970,6 +2985,9 @@
             "input": {
                 "target": "com.amazonaws.personalize#DeleteEventTrackerRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.personalize#InvalidInputException"
@@ -3003,6 +3021,9 @@
             "input": {
                 "target": "com.amazonaws.personalize#DeleteFilterRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.personalize#InvalidInputException"
@@ -3034,6 +3055,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.personalize#DeleteRecommenderRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -3068,6 +3092,9 @@
             "input": {
                 "target": "com.amazonaws.personalize#DeleteSchemaRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.personalize#InvalidInputException"
@@ -3100,6 +3127,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.personalize#DeleteSolutionRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -6386,6 +6416,53 @@
                 }
             }
         },
+        "com.amazonaws.personalize#StartRecommender": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.personalize#StartRecommenderRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.personalize#StartRecommenderResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.personalize#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.personalize#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.personalize#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts a recommender that is INACTIVE. Starting a recommender does not\n      create any new models, but resumes billing and automatic retraining for the recommender.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.personalize#StartRecommenderRequest": {
+            "type": "structure",
+            "members": {
+                "recommenderArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the recommender to start.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.personalize#StartRecommenderResponse": {
+            "type": "structure",
+            "members": {
+                "recommenderArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the recommender you started.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.personalize#Status": {
             "type": "string",
             "traits": {
@@ -6395,10 +6472,60 @@
                 }
             }
         },
+        "com.amazonaws.personalize#StopRecommender": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.personalize#StopRecommenderRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.personalize#StopRecommenderResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.personalize#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.personalize#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.personalize#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Stops a recommender that is ACTIVE. Stopping a recommender halts billing and automatic retraining for the recommender.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.personalize#StopRecommenderRequest": {
+            "type": "structure",
+            "members": {
+                "recommenderArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the recommender to stop.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.personalize#StopRecommenderResponse": {
+            "type": "structure",
+            "members": {
+                "recommenderArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the recommender you stopped.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.personalize#StopSolutionVersionCreation": {
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.personalize#StopSolutionVersionCreationRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -6709,7 +6836,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a campaign by either deploying a new solution or changing the value of the\n      campaign's <code>minProvisionedTPS</code> parameter.</p>\n         <p>To update a campaign, the campaign status must be ACTIVE or CREATE FAILED.\n      Check the campaign status using the <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html\">DescribeCampaign</a> operation.</p>\n         <note>\n            <p>You must wait until the <code>status</code> of the\n        updated campaign is <code>ACTIVE</code> before asking the campaign for recommendations.</p>\n         </note>\n         <p>For more information on campaigns, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateCampaign.html\">CreateCampaign</a>.</p>",
+                "smithy.api#documentation": "<p>Updates a campaign by either deploying a new solution or changing the value of the\n      campaign's <code>minProvisionedTPS</code> parameter.</p>\n         <p>To update a campaign, the campaign status must be ACTIVE or CREATE FAILED.\n      Check the campaign status using the <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html\">DescribeCampaign</a> operation.</p>\n\n         <note>\n            <p>You can still get recommendations from a campaign while an update is in progress.\n      The campaign will use the previous solution version and campaign configuration to generate recommendations until the latest campaign update status is <code>Active</code>.\n    </p>\n         </note>\n    \n         <p>For more information on campaigns, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateCampaign.html\">CreateCampaign</a>.</p>",
                 "smithy.api#idempotent": {}
             }
         },

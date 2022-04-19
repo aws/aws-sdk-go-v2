@@ -32,7 +32,7 @@
         "com.amazonaws.worklink#AcmCertificateArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:[\\w+=/,.@-]*:[0-9]+:[\\w+=,.@-]+(/[\\w+=/,.@-]+)*"
+                "smithy.api#pattern": "^arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:[\\w+=/,.@-]*:[0-9]+:[\\w+=,.@-]+(/[\\w+=/,.@-]+)*$"
             }
         },
         "com.amazonaws.worklink#AssociateDomain": {
@@ -64,6 +64,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
+                },
                 "smithy.api#documentation": "<p>Specifies a domain to be associated to Amazon WorkLink.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -137,6 +140,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
+                },
                 "smithy.api#documentation": "<p>Associates a website authorization provider with a specified fleet. This is used to authorize users against associated websites in the company network.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -210,6 +216,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
+                },
                 "smithy.api#documentation": "<p>Imports the root certificate of a certificate authority (CA) used to obtain TLS\n            certificates used by associated websites within the company network.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -284,7 +293,7 @@
                     "min": 1,
                     "max": 8192
                 },
-                "smithy.api#pattern": "-{5}BEGIN CERTIFICATE-{5}\\u000D?\\u000A([A-Za-z0-9/+]{64}\\u000D?\\u000A)*[A-Za-z0-9/+]{1,64}={0,2}\\u000D?\\u000A-{5}END CERTIFICATE-{5}(\\u000D?\\u000A)?"
+                "smithy.api#pattern": "^-{5}BEGIN CERTIFICATE-{5}\\u000D?\\u000A([A-Za-z0-9/+]{64}\\u000D?\\u000A)*[A-Za-z0-9/+]{1,64}={0,2}\\u000D?\\u000A-{5}END CERTIFICATE-{5}(\\u000D?\\u000A)?$"
             }
         },
         "com.amazonaws.worklink#CertificateChain": {
@@ -294,7 +303,7 @@
                     "min": 1,
                     "max": 32768
                 },
-                "smithy.api#pattern": "(-{5}BEGIN CERTIFICATE-{5}\\u000D?\\u000A([A-Za-z0-9/+]{64}\\u000D?\\u000A)*[A-Za-z0-9/+]{1,64}={0,2}\\u000D?\\u000A-{5}END CERTIFICATE-{5}\\u000D?\\u000A)*-{5}BEGIN CERTIFICATE-{5}\\u000D?\\u000A([A-Za-z0-9/+]{64}\\u000D?\\u000A)*[A-Za-z0-9/+]{1,64}={0,2}\\u000D?\\u000A-{5}END CERTIFICATE-{5}(\\u000D?\\u000A)?"
+                "smithy.api#pattern": "^(-{5}BEGIN CERTIFICATE-{5}\\u000D?\\u000A([A-Za-z0-9/+]{64}\\u000D?\\u000A)*[A-Za-z0-9/+]{1,64}={0,2}\\u000D?\\u000A-{5}END CERTIFICATE-{5}\\u000D?\\u000A)*-{5}BEGIN CERTIFICATE-{5}\\u000D?\\u000A([A-Za-z0-9/+]{64}\\u000D?\\u000A)*[A-Za-z0-9/+]{1,64}={0,2}\\u000D?\\u000A-{5}END CERTIFICATE-{5}(\\u000D?\\u000A)?$"
             }
         },
         "com.amazonaws.worklink#CompanyCode": {
@@ -335,6 +344,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
+                },
                 "smithy.api#documentation": "<p>Creates a fleet. A fleet consists of resources and the configuration that delivers\n            associated websites to authorized users who download and set up the Amazon WorkLink app.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -413,6 +425,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
+                },
                 "smithy.api#documentation": "<p>Deletes a fleet. Prevents users from accessing previously associated websites. </p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -463,6 +478,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
+                },
                 "smithy.api#documentation": "<p>Describes the configuration for delivering audit streams to the customer account.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -520,6 +538,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
+                },
                 "smithy.api#documentation": "<p>Describes the networking configuration to access the internal websites associated with\n            the specified fleet.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -589,6 +610,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
+                },
                 "smithy.api#documentation": "<p>Provides information about a user's device.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -623,6 +647,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
+                },
                 "smithy.api#documentation": "<p>Describes the device policy configuration for the specified fleet.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -758,6 +785,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
+                },
                 "smithy.api#documentation": "<p>Provides information about the domain.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -846,6 +876,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
+                },
                 "smithy.api#documentation": "<p>Provides basic information for the specified fleet, excluding identity provider,\n            networking, and device configuration details.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -945,6 +978,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
+                },
                 "smithy.api#documentation": "<p>Describes the identity provider configuration of the specified fleet.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -1014,6 +1050,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
+                },
                 "smithy.api#documentation": "<p>Provides information about the certificate authority.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -1176,6 +1215,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
+                },
                 "smithy.api#documentation": "<p>Disassociates a domain from Amazon WorkLink. End users lose the ability to access the domain with Amazon WorkLink. </p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -1236,6 +1278,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
+                },
                 "smithy.api#documentation": "<p>Disassociates a website authorization provider from a specified fleet. After the\n            disassociation, users can't load any associated websites that require this authorization\n            provider.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -1293,6 +1338,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
+                },
                 "smithy.api#documentation": "<p>Removes a certificate authority (CA).</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -1610,6 +1658,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
+                },
                 "smithy.api#documentation": "<p>Retrieves a list of devices registered with the specified fleet.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -1690,6 +1741,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
+                },
                 "smithy.api#documentation": "<p>Retrieves a list of domains associated to a specified fleet.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -1767,6 +1821,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
+                },
                 "smithy.api#documentation": "<p>Retrieves a list of fleets for the current account and Region.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -1828,6 +1885,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
+                },
                 "smithy.api#documentation": "<p>Retrieves a list of tags for the specified resource.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -1886,6 +1946,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
+                },
                 "smithy.api#documentation": "<p>Retrieves a list of website authorization providers associated with a specified fleet.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -1963,6 +2026,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
+                },
                 "smithy.api#documentation": "<p>Retrieves a list of certificate authorities added for the current account and\n            Region.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -2033,7 +2099,7 @@
                     "min": 1,
                     "max": 4096
                 },
-                "smithy.api#pattern": "[\\w\\-]+"
+                "smithy.api#pattern": "^[\\w\\-]+$"
             }
         },
         "com.amazonaws.worklink#ResourceAlreadyExistsException": {
@@ -2088,6 +2154,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
+                },
                 "smithy.api#documentation": "<p>Moves a domain to ACTIVE status if it was in the INACTIVE status.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -2145,6 +2214,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
+                },
                 "smithy.api#documentation": "<p>Moves a domain to INACTIVE status if it was in the ACTIVE status.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -2229,6 +2301,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
+                },
                 "smithy.api#documentation": "<p>Signs the user out from all of their devices. The user can sign in again if they have\n            valid credentials.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -2323,6 +2398,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
+                },
                 "smithy.api#documentation": "<p>Adds or overwrites one or more tags for the specified resource, such as a fleet. Each tag consists of a key and an optional value. If a resource already has a tag with the same key, this operation updates its value.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -2404,6 +2482,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
+                },
                 "smithy.api#documentation": "<p>Removes one or more tags from the specified resource.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
@@ -2463,6 +2544,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
+                },
                 "smithy.api#documentation": "<p>Updates the audit stream configuration for the fleet.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -2519,6 +2603,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
+                },
                 "smithy.api#documentation": "<p>Updates the company network configuration for the fleet.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -2590,6 +2677,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
+                },
                 "smithy.api#documentation": "<p>Updates the device policy configuration for the fleet.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -2646,6 +2736,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
+                },
                 "smithy.api#documentation": "<p>Updates domain metadata, such as DisplayName.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -2709,6 +2802,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
+                },
                 "smithy.api#documentation": "<p>Updates fleet metadata, such as DisplayName.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -2771,6 +2867,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK."
+                },
                 "smithy.api#documentation": "<p>Updates the identity provider configuration for the fleet.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -2896,6 +2995,21 @@
         },
         "com.amazonaws.worklink#WorkLink": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "WorkLink",
+                    "arnNamespace": "worklink",
+                    "cloudFormationName": "WorkLink",
+                    "cloudTrailEventSource": "worklink.amazonaws.com",
+                    "endpointPrefix": "worklink"
+                },
+                "aws.auth#sigv4": {
+                    "name": "worklink"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>Amazon WorkLink is a cloud-based service that provides secure access\n            to internal websites and web apps from iOS and Android phones. In a single step, your users, such as\n            employees, can access internal websites as efficiently as they access any other public website.\n            They enter a URL in their web browser, or choose a link to an internal website in an email. Amazon WorkLink\n            authenticates the user's access and securely renders authorized internal web content in a secure\n            rendering service in the AWS cloud. Amazon WorkLink doesn't download or store any internal web content on\n            mobile devices.</p>",
+                "smithy.api#title": "Amazon WorkLink"
+            },
             "version": "2018-09-25",
             "operations": [
                 {
@@ -2997,22 +3111,7 @@
                 {
                     "target": "com.amazonaws.worklink#UpdateIdentityProviderConfiguration"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "WorkLink",
-                    "arnNamespace": "worklink",
-                    "cloudFormationName": "WorkLink",
-                    "cloudTrailEventSource": "worklink.amazonaws.com",
-                    "endpointPrefix": "worklink"
-                },
-                "aws.auth#sigv4": {
-                    "name": "worklink"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Amazon WorkLink is a cloud-based service that provides secure access\n            to internal websites and web apps from iOS and Android phones. In a single step, your users, such as\n            employees, can access internal websites as efficiently as they access any other public website.\n            They enter a URL in their web browser, or choose a link to an internal website in an email. Amazon WorkLink\n            authenticates the user's access and securely renders authorized internal web content in a secure\n            rendering service in the AWS cloud. Amazon WorkLink doesn't download or store any internal web content on\n            mobile devices.</p>",
-                "smithy.api#title": "Amazon WorkLink"
-            }
+            ]
         }
     }
 }

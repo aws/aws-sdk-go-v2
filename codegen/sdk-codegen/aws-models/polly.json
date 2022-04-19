@@ -558,6 +558,10 @@
                     {
                         "value": "ca-ES",
                         "name": "ca_ES"
+                    },
+                    {
+                        "value": "de-AT",
+                        "name": "de_AT"
                     }
                 ]
             }
@@ -1951,6 +1955,10 @@
                     {
                         "value": "Arlet",
                         "name": "Arlet"
+                    },
+                    {
+                        "value": "Hannah",
+                        "name": "Hannah"
                     }
                 ]
             }

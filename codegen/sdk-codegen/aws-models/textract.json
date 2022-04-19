@@ -85,7 +85,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Analyzes an input document for relationships between detected items.  </p>\n         <p>The types of information returned are as follows: </p>\n         <ul>\n            <li>\n               <p>Form data (key-value pairs). The related information is returned in two <a>Block</a> objects, each of type <code>KEY_VALUE_SET</code>: a KEY\n                  <code>Block</code> object and a VALUE <code>Block</code> object. For example,\n                  <i>Name: Ana Silva Carolina</i> contains a key and value.\n                  <i>Name:</i> is the key. <i>Ana Silva Carolina</i> is\n               the value.</p>\n            </li>\n            <li>\n               <p>Table and table cell data. A TABLE <code>Block</code> object contains information about a detected table. A CELL\n               <code>Block</code> object is returned for each cell in a table.</p>\n            </li>\n            <li>\n               <p>Lines and words of text. A LINE <code>Block</code> object contains one or more WORD <code>Block</code> objects.\n        All lines and words that are detected in the document are returned (including text that doesn't have a\n               relationship with the value of <code>FeatureTypes</code>). </p>\n            </li>\n         </ul>\n      \n         <p>Selection elements such as check boxes and option buttons (radio buttons) can be detected in form data and in tables.\n         A SELECTION_ELEMENT <code>Block</code> object contains information about a selection element,\n         including the selection status.</p>\n         <p>You can choose which type of analysis to perform by specifying the <code>FeatureTypes</code> list. \n      </p>\n         <p>The output is returned in a list of <code>Block</code> objects.</p>\n         <p>\n            <code>AnalyzeDocument</code> is a synchronous operation. To analyze documents \n      asynchronously, use <a>StartDocumentAnalysis</a>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/textract/latest/dg/how-it-works-analyzing.html\">Document Text Analysis</a>.</p>"
+                "smithy.api#documentation": "<p>Analyzes an input document for relationships between detected items.  </p>\n         <p>The types of information returned are as follows: </p>\n         <ul>\n            <li>\n               <p>Form data (key-value pairs). The related information is returned in two <a>Block</a> objects, each of type <code>KEY_VALUE_SET</code>: a KEY\n                  <code>Block</code> object and a VALUE <code>Block</code> object. For example,\n                  <i>Name: Ana Silva Carolina</i> contains a key and value.\n                  <i>Name:</i> is the key. <i>Ana Silva Carolina</i> is\n               the value.</p>\n            </li>\n            <li>\n               <p>Table and table cell data. A TABLE <code>Block</code> object contains information about a detected table. A CELL\n               <code>Block</code> object is returned for each cell in a table.</p>\n            </li>\n            <li>\n               <p>Lines and words of text. A LINE <code>Block</code> object contains one or more WORD <code>Block</code> objects.\n        All lines and words that are detected in the document are returned (including text that doesn't have a\n               relationship with the value of <code>FeatureTypes</code>). </p>\n            </li>\n            <li>\n               <p>Queries.A QUERIES_RESULT Block object contains the answer to the query, the alias associated and an ID that \n            connect it to the query asked. This Block also contains a location and attached confidence score.</p>\n            </li>\n         </ul>\n      \n         <p>Selection elements such as check boxes and option buttons (radio buttons) can be detected in form data and in tables.\n         A SELECTION_ELEMENT <code>Block</code> object contains information about a selection element,\n         including the selection status.</p>\n      \n         <p>You can choose which type of analysis to perform by specifying the <code>FeatureTypes</code> list. \n      </p>\n         <p>The output is returned in a list of <code>Block</code> objects.</p>\n         <p>\n            <code>AnalyzeDocument</code> is a synchronous operation. To analyze documents \n      asynchronously, use <a>StartDocumentAnalysis</a>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/textract/latest/dg/how-it-works-analyzing.html\">Document Text Analysis</a>.</p>"
             }
         },
         "com.amazonaws.textract#AnalyzeDocumentRequest": {
@@ -94,7 +94,7 @@
                 "Document": {
                     "target": "com.amazonaws.textract#Document",
                     "traits": {
-                        "smithy.api#documentation": "<p>The input document as base64-encoded bytes or an Amazon S3 object. If you use the AWS CLI\n         to call Amazon Textract operations, you can't pass image bytes. The document must be an image \n         in JPEG or PNG format.</p>\n         <p>If you're using an AWS SDK to call Amazon Textract, you might not need to base64-encode\n         image bytes that are passed using the <code>Bytes</code> field. </p>",
+                        "smithy.api#documentation": "<p>The input document as base64-encoded bytes or an Amazon S3 object. If you use the AWS CLI\n         to call Amazon Textract operations, you can't pass image bytes. The document must be an image \n         in JPEG, PNG, PDF, or TIFF format.</p>\n         <p>If you're using an AWS SDK to call Amazon Textract, you might not need to base64-encode\n         image bytes that are passed using the <code>Bytes</code> field. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -109,6 +109,12 @@
                     "target": "com.amazonaws.textract#HumanLoopConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>Sets the configuration for the human in the loop workflow for analyzing documents.</p>"
+                    }
+                },
+                "QueriesConfig": {
+                    "target": "com.amazonaws.textract#QueriesConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains Queries and the alias for those Queries, as determined by the input. </p>"
                     }
                 }
             }
@@ -246,7 +252,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Analyzes identity documents for relevant information. This information is extracted\n         and returned as <code>IdentityDocumentFields</code>, which records both the normalized\n         field and value of the extracted text.</p>"
+                "smithy.api#documentation": "<p>Analyzes identity documents for relevant information. This information is extracted\n         and returned as <code>IdentityDocumentFields</code>, which records both the normalized\n         field and value of the extracted text.Unlike other Amazon Textract operations, <code>AnalyzeID</code> \n      doesn't return any Geometry data.</p>"
             }
         },
         "com.amazonaws.textract#AnalyzeIDDetections": {
@@ -329,7 +335,7 @@
                 "BlockType": {
                     "target": "com.amazonaws.textract#BlockType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of text item that's recognized. In operations for text detection, the following\n         types are returned:</p>\n         <ul>\n            <li>\n               <p>\n                  <i>PAGE</i> - Contains a list of the LINE <code>Block</code> objects\n               that are detected on a document page.</p>\n            </li>\n            <li>\n               <p>\n                  <i>WORD</i> - A word detected on a document page. A word is one or\n               more ISO basic Latin script characters that aren't separated by spaces.</p>\n            </li>\n            <li>\n               <p>\n                  <i>LINE</i> - A string of tab-delimited, contiguous words that are\n               detected on a document page.</p>\n            </li>\n         </ul>\n         <p>In text analysis operations, the following types are returned:</p>\n         <ul>\n            <li>\n               <p>\n                  <i>PAGE</i> - Contains a list of child <code>Block</code> objects\n               that are detected on a document page.</p>\n            </li>\n            <li>\n               <p>\n                  <i>KEY_VALUE_SET</i> - Stores the KEY and VALUE <code>Block</code>\n               objects for linked text that's detected on a document page. Use the\n                  <code>EntityType</code> field to determine if a KEY_VALUE_SET object is a KEY\n                  <code>Block</code> object or a VALUE <code>Block</code> object. </p>\n            </li>\n            <li>\n               <p>\n                  <i>WORD</i> - A word that's detected on a document page. A word is\n               one or more ISO basic Latin script characters that aren't separated by spaces.</p>\n            </li>\n            <li>\n               <p>\n                  <i>LINE</i> - A string of tab-delimited, contiguous words that are\n               detected on a document page.</p>\n            </li>\n            <li>\n               <p>\n                  <i>TABLE</i> - A table that's detected on a document page. A table\n               is grid-based information with two or more rows or columns, with a cell span of one\n               row and one column each. </p>\n            </li>\n            <li>\n               <p>\n                  <i>CELL</i> - A cell within a detected table. The cell is the parent\n               of the block that contains the text in the cell.</p>\n            </li>\n            <li>\n               <p>\n                  <i>SELECTION_ELEMENT</i> - A selection element such as an option\n               button (radio button) or a check box that's detected on a document page. Use the\n               value of <code>SelectionStatus</code> to determine the status of the selection\n               element.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The type of text item that's recognized. In operations for text detection, the following\n         types are returned:</p>\n         <ul>\n            <li>\n               <p>\n                  <i>PAGE</i> - Contains a list of the LINE <code>Block</code> objects\n               that are detected on a document page.</p>\n            </li>\n            <li>\n               <p>\n                  <i>WORD</i> - A word detected on a document page. A word is one or\n               more ISO basic Latin script characters that aren't separated by spaces.</p>\n            </li>\n            <li>\n               <p>\n                  <i>LINE</i> - A string of tab-delimited, contiguous words that are\n               detected on a document page.</p>\n            </li>\n         </ul>\n         <p>In text analysis operations, the following types are returned:</p>\n         <ul>\n            <li>\n               <p>\n                  <i>PAGE</i> - Contains a list of child <code>Block</code> objects\n               that are detected on a document page.</p>\n            </li>\n            <li>\n               <p>\n                  <i>KEY_VALUE_SET</i> - Stores the KEY and VALUE <code>Block</code>\n               objects for linked text that's detected on a document page. Use the\n                  <code>EntityType</code> field to determine if a KEY_VALUE_SET object is a KEY\n                  <code>Block</code> object or a VALUE <code>Block</code> object. </p>\n            </li>\n            <li>\n               <p>\n                  <i>WORD</i> - A word that's detected on a document page. A word is\n               one or more ISO basic Latin script characters that aren't separated by spaces.</p>\n            </li>\n            <li>\n               <p>\n                  <i>LINE</i> - A string of tab-delimited, contiguous words that are\n               detected on a document page.</p>\n            </li>\n            <li>\n               <p>\n                  <i>TABLE</i> - A table that's detected on a document page. A table\n               is grid-based information with two or more rows or columns, with a cell span of one\n               row and one column each. </p>\n            </li>\n            <li>\n               <p>\n                  <i>CELL</i> - A cell within a detected table. The cell is the parent\n               of the block that contains the text in the cell.</p>\n            </li>\n            <li>\n               <p>\n                  <i>SELECTION_ELEMENT</i> - A selection element such as an option\n               button (radio button) or a check box that's detected on a document page. Use the\n               value of <code>SelectionStatus</code> to determine the status of the selection\n               element.</p>\n            </li>\n            <li>\n               <p>\n                  <i>QUERY</i> - A question asked during the call of AnalyzeDocument. Contains an\n               alias and an ID that attachs it to its answer.</p>\n            </li>\n            <li>\n               <p>\n                  <i>QUERY_RESULT</i> - A response to a question asked during the call\n               of analyze document. Comes with an alias and ID for ease of locating in a \n               response. Also contains location and confidence score.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Confidence": {
@@ -409,6 +415,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The page on which a block was detected. <code>Page</code> is returned by asynchronous\n         operations. Page values greater than 1 are only returned for multipage documents that are\n         in PDF or TIFF format. A scanned image (JPEG/PNG), even if it contains multiple document pages, is\n         considered to be a single-page document. The value of <code>Page</code> is always 1.\n         Synchronous operations don't return <code>Page</code> because every input document is\n         considered to be a single-page document.</p>"
                     }
+                },
+                "Query": {
+                    "target": "com.amazonaws.textract#Query",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
                 }
             },
             "traits": {
@@ -460,6 +472,14 @@
                     {
                         "value": "TITLE",
                         "name": "TITLE"
+                    },
+                    {
+                        "value": "QUERY",
+                        "name": "QUERY"
+                    },
+                    {
+                        "value": "QUERY_RESULT",
+                        "name": "QUERY_RESULT"
                     }
                 ]
             }
@@ -571,7 +591,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Detects text in the input document. Amazon Textract can detect lines of text and the\n         words that make up a line of text. The input document must be an image in JPEG or PNG\n         format. <code>DetectDocumentText</code> returns the detected text in an array of <a>Block</a> objects. </p>\n         <p>Each document page has as an associated <code>Block</code> of type PAGE. Each PAGE <code>Block</code> object\n         is the parent of LINE <code>Block</code> objects that represent the lines of detected text on a page. A LINE <code>Block</code> object is\n         a parent for each word that makes up the line. Words are represented by <code>Block</code> objects of type WORD.</p>\n      \n         <p>\n            <code>DetectDocumentText</code> is a synchronous operation. To analyze documents \n         asynchronously, use <a>StartDocumentTextDetection</a>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/textract/latest/dg/how-it-works-detecting.html\">Document Text Detection</a>.</p>"
+                "smithy.api#documentation": "<p>Detects text in the input document. Amazon Textract can detect lines of text and the\n         words that make up a line of text. The input document must be an image in JPEG, PNG, PDF, or TIFF\n         format. <code>DetectDocumentText</code> returns the detected text in an array of <a>Block</a> objects. </p>\n         <p>Each document page has as an associated <code>Block</code> of type PAGE. Each PAGE <code>Block</code> object\n         is the parent of LINE <code>Block</code> objects that represent the lines of detected text on a page. A LINE <code>Block</code> object is\n         a parent for each word that makes up the line. Words are represented by <code>Block</code> objects of type WORD.</p>\n      \n         <p>\n            <code>DetectDocumentText</code> is a synchronous operation. To analyze documents \n         asynchronously, use <a>StartDocumentTextDetection</a>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/textract/latest/dg/how-it-works-detecting.html\">Document Text Detection</a>.</p>"
             }
         },
         "com.amazonaws.textract#DetectDocumentTextRequest": {
@@ -836,6 +856,10 @@
                     {
                         "value": "FORMS",
                         "name": "FORMS"
+                    },
+                    {
+                        "value": "QUERIES",
+                        "name": "QUERIES"
                     }
                 ]
             }
@@ -913,7 +937,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets the results for an Amazon Textract asynchronous operation that analyzes text in a document.</p>\n         <p>You start asynchronous text analysis by calling <a>StartDocumentAnalysis</a>, which returns a job identifier\n            (<code>JobId</code>). When the text analysis operation finishes, Amazon Textract publishes a\n         completion status to the Amazon Simple Notification Service (Amazon SNS) topic that's registered in the initial call to\n            <code>StartDocumentAnalysis</code>. To get the results of the text-detection operation,\n         first check that the status value published to the Amazon SNS topic is <code>SUCCEEDED</code>.\n         If so, call <code>GetDocumentAnalysis</code>, and pass the job identifier\n            (<code>JobId</code>) from the initial call to <code>StartDocumentAnalysis</code>.</p>\n         <p>\n            <code>GetDocumentAnalysis</code> returns an array of <a>Block</a> objects. The following\n         types of information are returned: </p>\n         <ul>\n            <li>\n               <p>Form data (key-value pairs). The related information is returned in two <a>Block</a> objects, each of type <code>KEY_VALUE_SET</code>: a KEY\n            <code>Block</code> object and a VALUE <code>Block</code> object. For example,\n            <i>Name: Ana Silva Carolina</i> contains a key and value.\n            <i>Name:</i> is the key. <i>Ana Silva Carolina</i> is\n            the value.</p>\n            </li>\n            <li>\n               <p>Table and table cell data. A TABLE <code>Block</code> object contains information about a detected table. A CELL\n            <code>Block</code> object is returned for each cell in a table.</p>\n            </li>\n            <li>\n               <p>Lines and words of text. A LINE <code>Block</code> object contains one or more WORD <code>Block</code> objects.\n            All lines and words that are detected in the document are returned (including text that doesn't have a\n            relationship with the value of the <code>StartDocumentAnalysis</code> \n                  <code>FeatureTypes</code> input parameter). </p>\n            </li>\n         </ul>\n      \n         <p>Selection elements such as check boxes and option buttons (radio buttons) can be detected in form data and in tables.\n         A SELECTION_ELEMENT <code>Block</code> object contains information about a selection element,\n         including the selection status.</p>\n      \n      \n      \n         <p>Use the <code>MaxResults</code> parameter to limit the number of blocks that are\n         returned. If there are more results than specified in <code>MaxResults</code>, the value of\n            <code>NextToken</code> in the operation response contains a pagination token for getting\n         the next set of results. To get the next page of results, call\n            <code>GetDocumentAnalysis</code>, and populate the <code>NextToken</code> request\n         parameter with the token value that's returned from the previous call to\n            <code>GetDocumentAnalysis</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/textract/latest/dg/how-it-works-analyzing.html\">Document Text Analysis</a>.</p>"
+                "smithy.api#documentation": "<p>Gets the results for an Amazon Textract asynchronous operation that analyzes text in a document.</p>\n         <p>You start asynchronous text analysis by calling <a>StartDocumentAnalysis</a>, which returns a job identifier\n            (<code>JobId</code>). When the text analysis operation finishes, Amazon Textract publishes a\n         completion status to the Amazon Simple Notification Service (Amazon SNS) topic that's registered in the initial call to\n            <code>StartDocumentAnalysis</code>. To get the results of the text-detection operation,\n         first check that the status value published to the Amazon SNS topic is <code>SUCCEEDED</code>.\n         If so, call <code>GetDocumentAnalysis</code>, and pass the job identifier\n            (<code>JobId</code>) from the initial call to <code>StartDocumentAnalysis</code>.</p>\n         <p>\n            <code>GetDocumentAnalysis</code> returns an array of <a>Block</a> objects. The following\n         types of information are returned: </p>\n         <ul>\n            <li>\n               <p>Form data (key-value pairs). The related information is returned in two <a>Block</a> objects, each of type <code>KEY_VALUE_SET</code>: a KEY\n            <code>Block</code> object and a VALUE <code>Block</code> object. For example,\n            <i>Name: Ana Silva Carolina</i> contains a key and value.\n            <i>Name:</i> is the key. <i>Ana Silva Carolina</i> is\n            the value.</p>\n            </li>\n            <li>\n               <p>Table and table cell data. A TABLE <code>Block</code> object contains information about a detected table. A CELL\n            <code>Block</code> object is returned for each cell in a table.</p>\n            </li>\n            <li>\n               <p>Lines and words of text. A LINE <code>Block</code> object contains one or more WORD <code>Block</code> objects.\n            All lines and words that are detected in the document are returned (including text that doesn't have a\n            relationship with the value of the <code>StartDocumentAnalysis</code> \n                  <code>FeatureTypes</code> input parameter). </p>\n            </li>\n            <li>\n               <p>Queries. A QUERIES_RESULT Block object contains the answer to the query, the alias associated and an ID that \n            connect it to the query asked. This Block also contains a location and attached confidence score</p>\n            </li>\n         </ul>\n      \n         <p>Selection elements such as check boxes and option buttons (radio buttons) can be detected in form data and in tables.\n         A SELECTION_ELEMENT <code>Block</code> object contains information about a selection element,\n         including the selection status.</p>\n      \n      \n         <p>Use the <code>MaxResults</code> parameter to limit the number of blocks that are\n         returned. If there are more results than specified in <code>MaxResults</code>, the value of\n            <code>NextToken</code> in the operation response contains a pagination token for getting\n         the next set of results. To get the next page of results, call\n            <code>GetDocumentAnalysis</code>, and populate the <code>NextToken</code> request\n         parameter with the token value that's returned from the previous call to\n            <code>GetDocumentAnalysis</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/textract/latest/dg/how-it-works-analyzing.html\">Document Text Analysis</a>.</p>"
             }
         },
         "com.amazonaws.textract#GetDocumentAnalysisRequest": {
@@ -1750,6 +1774,90 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.textract#Queries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.textract#Query"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.textract#QueriesConfig": {
+            "type": "structure",
+            "members": {
+                "Queries": {
+                    "target": "com.amazonaws.textract#Queries",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>"
+            }
+        },
+        "com.amazonaws.textract#Query": {
+            "type": "structure",
+            "members": {
+                "Text": {
+                    "target": "com.amazonaws.textract#QueryInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Question that Amazon Textract will apply to the document. An example would be \"What is the customer's SSN?\"</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Alias": {
+                    "target": "com.amazonaws.textract#QueryInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Alias attached to the query, for ease of location.</p>"
+                    }
+                },
+                "Pages": {
+                    "target": "com.amazonaws.textract#QueryPages",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of pages associated with the query. The following is a list of rules for using this parameter.</p>\n         <ul>\n            <li>\n               <p>If a page is not specified, it is set to <code>[\"1\"]</code> by default.</p>\n            </li>\n            <li>\n               <p>The following characters are allowed in the parameter's string: \n               <code>0 1 2 3 4 5 6 7 8 9 - *</code>. No whitespace is allowed.</p>\n            </li>\n            <li>\n               <p>When using <code>*</code> to indicate all pages, it must be the only element\n               in the string.</p>\n            </li>\n            <li>\n               <p>You can use page intervals, such as <code>[“1-3”, “1-1”, “4-*”]</code>. Where <code>*</code> indicates last page of \n               document.</p>\n            </li>\n            <li>\n               <p>Specified pages must be greater than 0 and less than or equal to the number of pages in the document.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Each query contains the question you want to ask in the Text and the alias you want to associate.</p>"
+            }
+        },
+        "com.amazonaws.textract#QueryInput": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9\\s!\"\\#\\$%'&\\(\\)\\*\\+\\,\\-\\./:;=\\?@\\[\\\\\\]\\^_`\\{\\|\\}~><]+$"
+            }
+        },
+        "com.amazonaws.textract#QueryPage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 9
+                },
+                "smithy.api#pattern": "^[0-9\\*\\-]+$"
+            }
+        },
+        "com.amazonaws.textract#QueryPages": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.textract#QueryPage"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
         "com.amazonaws.textract#Relationship": {
             "type": "structure",
             "members": {
@@ -1799,6 +1907,10 @@
                     {
                         "value": "TITLE",
                         "name": "TITLE"
+                    },
+                    {
+                        "value": "ANSWER",
+                        "name": "ANSWER"
                     }
                 ]
             }
@@ -1990,6 +2102,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The KMS key used to encrypt the inference results. This can be \n         in either Key ID or Key Alias format. When a KMS key is provided, the \n         KMS key will be used for server-side encryption of the objects in the \n         customer bucket. When this parameter is not enabled, the result will \n         be encrypted server side,using SSE-S3.</p>"
                     }
+                },
+                "QueriesConfig": {
+                    "target": "com.amazonaws.textract#QueriesConfig"
                 }
             }
         },
@@ -2327,7 +2442,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The format of the input document isn't supported. Documents for synchronous operations can be in\n         PNG or JPEG format only. Documents for asynchronous operations can be in PDF format.</p>",
+                "smithy.api#documentation": "<p>The format of the input document isn't supported. Documents for operations can be in\n         PNG, JPEG, PDF, or TIFF format.</p>",
                 "smithy.api#error": "client"
             }
         },

@@ -394,6 +394,9 @@
             "input": {
                 "target": "com.amazonaws.autoscaling#AttachInstancesQuery"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.autoscaling#ResourceContentionFault"
@@ -607,7 +610,7 @@
                 "HealthCheckGracePeriod": {
                     "target": "com.amazonaws.autoscaling#HealthCheckGracePeriod",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of time, in seconds, that Amazon EC2 Auto Scaling waits before checking the health status\n            of an EC2 instance that has come into service and marking it unhealthy due to a failed\n            health check.</p>"
+                        "smithy.api#documentation": "<p>The duration of the health check grace period, in seconds.</p>"
                     }
                 },
                 "Instances": {
@@ -710,7 +713,13 @@
                 "DesiredCapacityType": {
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unit of measurement for the value specified for desired capacity. Amazon EC2 Auto Scaling\n            supports <code>DesiredCapacityType</code> for attribute-based instance type selection\n            only. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-instance-type-requirements.html\">Creating\n                an Auto Scaling group using attribute-based instance type selection</a> in the\n                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>\n        <p>By default, Amazon EC2 Auto Scaling specifies <code>units</code>, which translates into number of\n            instances.</p>\n        <p>Valid values: <code>units</code> | <code>vcpu</code> | <code>memory-mib</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The unit of measurement for the value specified for desired capacity. Amazon EC2 Auto Scaling\n            supports <code>DesiredCapacityType</code> for attribute-based instance type selection\n            only.</p>"
+                    }
+                },
+                "DefaultInstanceWarmup": {
+                    "target": "com.amazonaws.autoscaling#DefaultInstanceWarmup",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The duration of the default instance warmup, in seconds.</p>"
                     }
                 }
             },
@@ -1568,6 +1577,9 @@
             "input": {
                 "target": "com.amazonaws.autoscaling#CreateAutoScalingGroupType"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.autoscaling#AlreadyExistsFault"
@@ -1643,7 +1655,7 @@
                 "DefaultCooldown": {
                     "target": "com.amazonaws.autoscaling#Cooldown",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of time, in seconds, after a scaling activity completes before another\n            scaling activity can start. The default value is <code>300</code>. This setting applies\n            when using simple scaling policies, but not when using other scaling policies or\n            scheduled scaling. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html\">Scaling cooldowns for Amazon EC2 Auto Scaling</a>\n            in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>\n            <i>Only needed if you use simple scaling policies.</i>\n         </p>\n        <p>The amount of time, in seconds, between one scaling activity ending and another one\n            starting due to simple scaling policies. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html\">Scaling cooldowns\n                for Amazon EC2 Auto Scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>\n        <p>Default: <code>300</code> seconds</p>"
                     }
                 },
                 "AvailabilityZones": {
@@ -1673,13 +1685,13 @@
                 "HealthCheckGracePeriod": {
                     "target": "com.amazonaws.autoscaling#HealthCheckGracePeriod",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of time, in seconds, that Amazon EC2 Auto Scaling waits before checking the health status\n            of an EC2 instance that has come into service and marking it unhealthy due to a failed\n            health check. The default value is <code>0</code>. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html#health-check-grace-period\">Health\n                check grace period</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>\n        <p>Required if you are adding an <code>ELB</code> health check.</p>"
+                        "smithy.api#documentation": "<p>\n            <i></i>\n         </p>\n        <p>The amount of time, in seconds, that Amazon EC2 Auto Scaling waits before checking the health status\n            of an EC2 instance that has come into service and marking it unhealthy due to a failed\n            Elastic Load Balancing or custom health check. This is useful if your instances do not immediately pass\n            these health checks after they enter the <code>InService</code> state. For more\n            information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html#health-check-grace-period\">Health\n                check grace period</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>\n        <p>Default: <code>0</code> seconds</p>"
                     }
                 },
                 "PlacementGroup": {
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of an existing placement group into which to launch your instances, if any. A\n            placement group is a logical grouping of instances within a single Availability Zone.\n            You cannot specify multiple Availability Zones and a placement group. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html\">Placement Groups</a> in the\n                <i>Amazon EC2 User Guide for Linux Instances</i>.</p>"
+                        "smithy.api#documentation": "<p>The name of an existing placement group into which to launch your instances. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html\">Placement groups</a> in the\n                <i>Amazon EC2 User Guide for Linux Instances</i>.</p>\n        <note>\n            <p>A <i>cluster</i> placement group is a logical grouping of instances\n                within a single Availability Zone. You cannot specify multiple Availability Zones\n                and a cluster placement group. </p>\n        </note>"
                     }
                 },
                 "VPCZoneIdentifier": {
@@ -1741,6 +1753,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The unit of measurement for the value specified for desired capacity. Amazon EC2 Auto Scaling\n            supports <code>DesiredCapacityType</code> for attribute-based instance type selection\n            only. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-instance-type-requirements.html\">Creating\n                an Auto Scaling group using attribute-based instance type selection</a> in the\n                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>\n        <p>By default, Amazon EC2 Auto Scaling specifies <code>units</code>, which translates into number of\n            instances.</p>\n        \n        <p>Valid values: <code>units</code> | <code>vcpu</code> | <code>memory-mib</code>\n         </p>"
                     }
+                },
+                "DefaultInstanceWarmup": {
+                    "target": "com.amazonaws.autoscaling#DefaultInstanceWarmup",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of time, in seconds, until a newly launched instance can contribute to the\n            Amazon CloudWatch metrics. This delay lets an instance finish initializing before Amazon EC2 Auto Scaling\n            aggregates instance metrics, resulting in more reliable usage data. Set this value equal\n            to the amount of time that it takes for resource consumption to become stable after an\n            instance reaches the <code>InService</code> state. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-default-instance-warmup.html\">Set\n                the default instance warmup for an Auto Scaling group</a> in the\n                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>\n        <important>\n            <p>To manage your warm-up settings at the group level, we recommend that you set the\n                default instance warmup, <i>even if its value is set to 0 seconds</i>.\n                This also optimizes the performance of scaling policies that scale continuously,\n                such as target tracking and step scaling policies. </p>\n            <p>If you need to remove a value that you previously set, include the property but\n                specify <code>-1</code> for the value. However, we strongly recommend keeping the\n                default instance warmup enabled by specifying a minimum value of\n                <code>0</code>.</p>\n        </important>\n        <p>Default: None </p>"
+                    }
                 }
             }
         },
@@ -1748,6 +1766,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.autoscaling#CreateLaunchConfigurationType"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -1795,13 +1816,13 @@
                 "ClassicLinkVPCId": {
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of a ClassicLink-enabled VPC to link your EC2-Classic instances to. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html\">ClassicLink</a> in the\n                <i>Amazon EC2 User Guide for Linux Instances</i> and <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html#as-ClassicLink\">Linking EC2-Classic\n                instances to a VPC</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>\n        <p>This parameter can only be used if you are launching EC2-Classic instances.</p>"
+                        "smithy.api#documentation": "<p>\n            <i>EC2-Classic retires on August 15, 2022. This parameter is not supported after\n                that date.</i>\n        </p>\n        <p>The ID of a ClassicLink-enabled VPC to link your EC2-Classic instances to. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html\">ClassicLink</a> in the\n                <i>Amazon EC2 User Guide for Linux Instances</i>.</p>"
                     }
                 },
                 "ClassicLinkVPCSecurityGroups": {
                     "target": "com.amazonaws.autoscaling#ClassicLinkVPCSecurityGroups",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IDs of one or more security groups for the specified ClassicLink-enabled VPC. For\n            more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html\">ClassicLink</a> in the\n                <i>Amazon EC2 User Guide for Linux Instances</i> and <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html#as-ClassicLink\">Linking EC2-Classic\n                instances to a VPC</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>\n        <p>If you specify the <code>ClassicLinkVPCId</code> parameter, you must specify this\n            parameter.</p>"
+                        "smithy.api#documentation": "<p>\n            <i>EC2-Classic retires on August 15, 2022. This parameter is not supported after\n                that date.</i>\n        </p>\n        <p>The IDs of one or more security groups for the specified ClassicLink-enabled VPC. For\n            more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html\">ClassicLink</a> in the\n                <i>Amazon EC2 User Guide for Linux Instances</i>.</p>\n        <p>If you specify the <code>ClassicLinkVPCId</code> parameter, you must specify this\n            parameter.</p>"
                     }
                 },
                 "UserData": {
@@ -1889,6 +1910,9 @@
             "input": {
                 "target": "com.amazonaws.autoscaling#CreateOrUpdateTagsType"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.autoscaling#AlreadyExistsFault"
@@ -1960,10 +1984,19 @@
                 "smithy.api#documentation": "<p>Represents a CloudWatch metric of your choosing for a target tracking scaling policy to use\n            with Amazon EC2 Auto Scaling.</p>\n        <p>To create your customized metric specification:</p>\n        <ul>\n            <li>\n                <p>Add values for each required parameter from CloudWatch. You can use an existing\n                    metric, or a new metric that you create. To use your own metric, you must first\n                    publish the metric to CloudWatch. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html\">Publish\n                        custom metrics</a> in the <i>Amazon CloudWatch User\n                    Guide</i>.</p>\n            </li>\n            <li>\n                <p>Choose a metric that changes proportionally with capacity. The value of the\n                    metric should increase or decrease in inverse proportion to the number of\n                    capacity units. That is, the value of the metric should decrease when capacity\n                    increases.</p>\n            </li>\n         </ul>\n        <p>For more information about the CloudWatch terminology below, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html\">Amazon CloudWatch\n                concepts</a>.</p>\n        <note>\n            <p>Each individual service provides information about the metrics, namespace, and\n                dimensions they use. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/aws-services-cloudwatch-metrics.html\">Amazon Web Services services that publish CloudWatch metrics</a> in the <i>Amazon CloudWatch User\n                    Guide</i>.</p>\n        </note>"
             }
         },
+        "com.amazonaws.autoscaling#DefaultInstanceWarmup": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
         "com.amazonaws.autoscaling#DeleteAutoScalingGroup": {
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.autoscaling#DeleteAutoScalingGroupType"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -2002,6 +2035,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.autoscaling#LaunchConfigurationNameType"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -2060,6 +2096,9 @@
             "input": {
                 "target": "com.amazonaws.autoscaling#DeleteNotificationConfigurationType"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.autoscaling#ResourceContentionFault"
@@ -2092,6 +2131,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.autoscaling#DeletePolicyType"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -2128,6 +2170,9 @@
             "input": {
                 "target": "com.amazonaws.autoscaling#DeleteScheduledActionType"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.autoscaling#ResourceContentionFault"
@@ -2160,6 +2205,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.autoscaling#DeleteTagsType"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -2235,6 +2283,9 @@
         },
         "com.amazonaws.autoscaling#DescribeAccountLimits": {
             "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
             "output": {
                 "target": "com.amazonaws.autoscaling#DescribeAccountLimitsAnswer"
             },
@@ -2278,6 +2329,9 @@
         },
         "com.amazonaws.autoscaling#DescribeAdjustmentTypes": {
             "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
             "output": {
                 "target": "com.amazonaws.autoscaling#DescribeAdjustmentTypesAnswer"
             },
@@ -2455,6 +2509,9 @@
         },
         "com.amazonaws.autoscaling#DescribeAutoScalingNotificationTypes": {
             "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
             "output": {
                 "target": "com.amazonaws.autoscaling#DescribeAutoScalingNotificationTypesAnswer"
             },
@@ -2573,6 +2630,9 @@
         },
         "com.amazonaws.autoscaling#DescribeLifecycleHookTypes": {
             "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
             "output": {
                 "target": "com.amazonaws.autoscaling#DescribeLifecycleHookTypesAnswer"
             },
@@ -2766,6 +2826,9 @@
         },
         "com.amazonaws.autoscaling#DescribeMetricCollectionTypes": {
             "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
             "output": {
                 "target": "com.amazonaws.autoscaling#DescribeMetricCollectionTypesAnswer"
             },
@@ -2989,6 +3052,9 @@
         },
         "com.amazonaws.autoscaling#DescribeScalingProcessTypes": {
             "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
             "output": {
                 "target": "com.amazonaws.autoscaling#ProcessesType"
             },
@@ -3119,6 +3185,9 @@
         },
         "com.amazonaws.autoscaling#DescribeTerminationPolicyTypes": {
             "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
             "output": {
                 "target": "com.amazonaws.autoscaling#DescribeTerminationPolicyTypesAnswer"
             },
@@ -3364,6 +3433,9 @@
             "input": {
                 "target": "com.amazonaws.autoscaling#DisableMetricsCollectionQuery"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.autoscaling#ResourceContentionFault"
@@ -3457,6 +3529,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.autoscaling#EnableMetricsCollectionQuery"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -3604,6 +3679,9 @@
             "input": {
                 "target": "com.amazonaws.autoscaling#ExecutePolicyType"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.autoscaling#ResourceContentionFault"
@@ -3737,7 +3815,7 @@
                 "Name": {
                     "target": "com.amazonaws.autoscaling#XmlString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the filter.</p>\n        <p>The valid values for <code>Name</code> depend on which API operation you're using with\n            the filter (<a>DescribeAutoScalingGroups</a> or <a>DescribeTags</a>).</p>\n        <p>\n            <b>DescribeAutoScalingGroups</b>\n         </p>\n        <p>Valid values for <code>Name</code> include the following: </p>\n        <ul>\n            <li>\n                <p>\n                  <code>tag-key</code> - Accepts tag keys. The results only include information\n                    about the Auto Scaling groups associated with these tag keys. </p>\n            </li>\n            <li>\n                <p>\n                  <code>tag-value</code> - Accepts tag values. The results only include\n                    information about the Auto Scaling groups associated with these tag values. </p>\n            </li>\n            <li>\n                <p>\n                  <code>tag:<key></code> - Accepts the key/value combination of the tag.\n                    Use the tag key in the filter name and the tag value as the filter value. The\n                    results only include information about the Auto Scaling groups associated with the\n                    specified key/value combination. </p>\n            </li>\n         </ul>\n        <p>\n            <b>DescribeTags</b>\n        </p>\n        <p>Valid values for <code>Name</code> include the following: </p>\n        <ul>\n            <li>\n                <p>\n                  <code>auto-scaling-group</code> - Accepts the names of Auto Scaling groups. The\n                    results only include information about the tags associated with these Auto Scaling\n                    groups. </p>\n            </li>\n            <li>\n                <p>\n                  <code>key</code> - Accepts tag keys. The results only include information\n                    about the tags associated with these tag keys. </p>\n            </li>\n            <li>\n                <p>\n                    <code>value</code> - Accepts tag values. The results only include information\n                    about the tags associated with these tag values. </p>\n            </li>\n            <li>\n                <p>\n                  <code>propagate-at-launch</code> - Accepts a Boolean value, which specifies\n                    whether tags propagate to instances at launch. The results only include\n                    information about the tags associated with the specified Boolean value. </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The name of the filter.</p>\n        <p>The valid values for <code>Name</code> depend on which API operation you're using with\n            the filter (<a>DescribeAutoScalingGroups</a> or <a>DescribeTags</a>).</p>\n        <p>\n            <b>DescribeAutoScalingGroups</b>\n        </p>\n        <p>Valid values for <code>Name</code> include the following: </p>\n        <ul>\n            <li>\n                <p>\n                  <code>tag-key</code> - Accepts tag keys. The results only include information\n                    about the Auto Scaling groups associated with these tag keys. </p>\n            </li>\n            <li>\n                <p>\n                  <code>tag-value</code> - Accepts tag values. The results only include\n                    information about the Auto Scaling groups associated with these tag values. </p>\n            </li>\n            <li>\n                <p>\n                  <code>tag:<key></code> - Accepts the key/value combination of the tag.\n                    Use the tag key in the filter name and the tag value as the filter value. The\n                    results only include information about the Auto Scaling groups associated with the\n                    specified key/value combination. </p>\n            </li>\n         </ul>\n        <p>\n            <b>DescribeTags</b>\n        </p>\n        <p>Valid values for <code>Name</code> include the following: </p>\n        <ul>\n            <li>\n                <p>\n                  <code>auto-scaling-group</code> - Accepts the names of Auto Scaling groups. The\n                    results only include information about the tags associated with these Auto Scaling\n                    groups. </p>\n            </li>\n            <li>\n                <p>\n                  <code>key</code> - Accepts tag keys. The results only include information\n                    about the tags associated with these tag keys. </p>\n            </li>\n            <li>\n                <p>\n                    <code>value</code> - Accepts tag values. The results only include information\n                    about the tags associated with these tag values. </p>\n            </li>\n            <li>\n                <p>\n                  <code>propagate-at-launch</code> - Accepts a Boolean value, which specifies\n                    whether tags propagate to instances at launch. The results only include\n                    information about the tags associated with the specified Boolean value. </p>\n            </li>\n         </ul>"
                     }
                 },
                 "Values": {
@@ -4517,13 +4595,13 @@
                 "ClassicLinkVPCId": {
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of a ClassicLink-enabled VPC to link your EC2-Classic instances to. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html\">ClassicLink</a> in the\n                <i>Amazon EC2 User Guide for Linux Instances</i> and <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html#as-ClassicLink\">Linking EC2-Classic\n                instances to a VPC</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>\n            <i>EC2-Classic retires on August 15, 2022. This parameter is not supported after\n                that date.</i>\n        </p>\n        <p>The ID of a ClassicLink-enabled VPC to link your EC2-Classic instances to.</p>"
                     }
                 },
                 "ClassicLinkVPCSecurityGroups": {
                     "target": "com.amazonaws.autoscaling#ClassicLinkVPCSecurityGroups",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IDs of one or more security groups for the VPC specified in\n                <code>ClassicLinkVPCId</code>.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html\">ClassicLink</a> in the\n                <i>Amazon EC2 User Guide for Linux Instances</i> and <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html#as-ClassicLink\">Linking EC2-Classic\n                instances to a VPC</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>\n            <i>EC2-Classic retires on August 15, 2022. This parameter is not supported after\n                that date.</i>\n        </p>\n        <p>The IDs of one or more security groups for the VPC specified in\n                <code>ClassicLinkVPCId</code>.</p>"
                     }
                 },
                 "UserData": {
@@ -4824,7 +4902,7 @@
                 "GlobalTimeout": {
                     "target": "com.amazonaws.autoscaling#GlobalTimeout",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum time, in seconds, that an instance can remain in a\n                <code>Pending:Wait</code> or <code>Terminating:Wait</code> state. The maximum is\n            172800 seconds (48 hours) or 100 times <code>HeartbeatTimeout</code>, whichever is\n            smaller.</p>"
+                        "smithy.api#documentation": "<p>The maximum time, in seconds, that an instance can remain in a wait state. The maximum\n            is 172800 seconds (48 hours) or 100 times <code>HeartbeatTimeout</code>, whichever is\n            smaller.</p>"
                     }
                 },
                 "DefaultResult": {
@@ -5776,7 +5854,7 @@
                 "PredefinedMetricType": {
                     "target": "com.amazonaws.autoscaling#MetricType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The metric type. The following predefined metrics are available:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>ASGAverageCPUUtilization</code> - Average CPU utilization of the Auto Scaling\n                    group.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ASGAverageNetworkIn</code> - Average number of bytes received (per\n                    instance per minute) for the Auto Scaling group.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ASGAverageNetworkOut</code> - Average number of bytes sent out (per\n                    instance per minute) for the Auto Scaling group.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ALBRequestCountPerTarget</code> - Average Application Load Balancer request count (per\n                    target per minute) for your Auto Scaling group.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The metric type. The following predefined metrics are available:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>ASGAverageCPUUtilization</code> - Average CPU utilization of the Auto Scaling\n                    group.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ASGAverageNetworkIn</code> - Average number of bytes received on all\n                    network interfaces by the Auto Scaling group.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ASGAverageNetworkOut</code> - Average number of bytes sent out on all\n                    network interfaces by the Auto Scaling group.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ALBRequestCountPerTarget</code> - Average Application Load Balancer request count per target\n                    for your Auto Scaling group.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6216,6 +6294,9 @@
             "input": {
                 "target": "com.amazonaws.autoscaling#PutNotificationConfigurationType"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.autoscaling#LimitExceededFault"
@@ -6330,7 +6411,7 @@
                 "Cooldown": {
                     "target": "com.amazonaws.autoscaling#Cooldown",
                     "traits": {
-                        "smithy.api#documentation": "<p>The duration of the policy's cooldown period, in seconds. When a cooldown period is\n            specified here, it overrides the default cooldown period defined for the Auto Scaling\n            group.</p>\n        <p>Valid only if the policy type is <code>SimpleScaling</code>. For more information, see\n                <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html\">Scaling\n                cooldowns for Amazon EC2 Auto Scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A cooldown period, in seconds, that applies to a specific simple scaling policy. When\n            a cooldown period is specified here, it overrides the default cooldown.</p>\n        <p>Valid only if the policy type is <code>SimpleScaling</code>. For more information, see\n                <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html\">Scaling\n                cooldowns for Amazon EC2 Auto Scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>\n        <p>Default: None</p>"
                     }
                 },
                 "MetricAggregationType": {
@@ -6348,7 +6429,7 @@
                 "EstimatedInstanceWarmup": {
                     "target": "com.amazonaws.autoscaling#EstimatedInstanceWarmup",
                     "traits": {
-                        "smithy.api#documentation": "<p>The estimated time, in seconds, until a newly launched instance can contribute to the\n            CloudWatch metrics. If not provided, the default is to use the value from the default cooldown\n            period for the Auto Scaling group.</p>\n        <p>Valid only if the policy type is <code>TargetTrackingScaling</code> or\n                <code>StepScaling</code>.</p>"
+                        "smithy.api#documentation": "<p>\n            <i>Not needed if the default instance warmup is defined for the\n                group.</i>\n         </p>\n        <p>The estimated time, in seconds, until a newly launched instance can contribute to the\n            CloudWatch metrics. This warm-up period applies to instances launched due to a specific target\n            tracking or step scaling policy. When a warm-up period is specified here, it overrides\n            the default instance warmup.</p>\n        <p>Valid only if the policy type is <code>TargetTrackingScaling</code> or\n                <code>StepScaling</code>.</p>\n        <note>\n            <p>The default is to use the value for the default instance warmup defined for the\n                group. If default instance warmup is null, then <code>EstimatedInstanceWarmup</code>\n                falls back to the value of default cooldown.</p>\n        </note>"
                     }
                 },
                 "TargetTrackingConfiguration": {
@@ -6375,6 +6456,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.autoscaling#PutScheduledUpdateGroupActionType"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -6585,13 +6669,13 @@
                 "MinHealthyPercentage": {
                     "target": "com.amazonaws.autoscaling#IntPercent",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of capacity in the Auto Scaling group that must remain healthy during an instance\n            refresh to allow the operation to continue. The value is expressed as a percentage of\n            the desired capacity of the Auto Scaling group (rounded up to the nearest integer). The default\n            is <code>90</code>.</p>\n        <p>Setting the minimum healthy percentage to 100 percent limits the rate of replacement\n            to one instance at a time. In contrast, setting it to 0 percent has the effect of\n            replacing all instances at the same time. </p>"
+                        "smithy.api#documentation": "<p>The amount of capacity in the Auto Scaling group that must pass your group's health checks to\n            allow the operation to continue. The value is expressed as a percentage of the desired\n            capacity of the Auto Scaling group (rounded up to the nearest integer). The default is\n                <code>90</code>.</p>\n        <p>Setting the minimum healthy percentage to 100 percent limits the rate of replacement\n            to one instance at a time. In contrast, setting it to 0 percent has the effect of\n            replacing all instances at the same time. </p>"
                     }
                 },
                 "InstanceWarmup": {
                     "target": "com.amazonaws.autoscaling#RefreshInstanceWarmup",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of seconds until a newly launched instance is configured and ready to use.\n            During this time, Amazon EC2 Auto Scaling does not immediately move on to the next replacement. The\n            default is to use the value for the health check grace period defined for the\n            group.</p>"
+                        "smithy.api#documentation": "<p>\n            <i>Not needed if the default instance warmup is defined for the\n                group.</i>\n         </p>\n        <p>The duration of the instance warmup, in seconds.</p>\n        <note>\n            <p>The default is to use the value for the default instance warmup defined for the\n                group. If default instance warmup is null, then <code>InstanceWarmup</code> falls\n                back to the value of the health check grace period.</p>\n        </note>"
                     }
                 },
                 "CheckpointPercentages": {
@@ -6682,6 +6766,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.autoscaling#ScalingProcessQuery"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -7110,6 +7197,9 @@
             "input": {
                 "target": "com.amazonaws.autoscaling#SetDesiredCapacityType"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.autoscaling#ResourceContentionFault"
@@ -7151,6 +7241,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.autoscaling#SetInstanceHealthQuery"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -7370,6 +7463,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.autoscaling#ScalingProcessQuery"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -7647,6 +7743,9 @@
             "input": {
                 "target": "com.amazonaws.autoscaling#UpdateAutoScalingGroupType"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.autoscaling#ResourceContentionFault"
@@ -7711,7 +7810,7 @@
                 "DefaultCooldown": {
                     "target": "com.amazonaws.autoscaling#Cooldown",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of time, in seconds, after a scaling activity completes before another\n            scaling activity can start. The default value is <code>300</code>. This setting applies\n            when using simple scaling policies, but not when using other scaling policies or\n            scheduled scaling. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html\">Scaling cooldowns for Amazon EC2 Auto Scaling</a>\n            in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>\n            <i>Only needed if you use simple scaling policies.</i>\n         </p>\n        <p>The amount of time, in seconds, between one scaling activity ending and another one\n            starting due to simple scaling policies. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html\">Scaling cooldowns\n                for Amazon EC2 Auto Scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
                     }
                 },
                 "AvailabilityZones": {
@@ -7729,13 +7828,13 @@
                 "HealthCheckGracePeriod": {
                     "target": "com.amazonaws.autoscaling#HealthCheckGracePeriod",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of time, in seconds, that Amazon EC2 Auto Scaling waits before checking the health status\n            of an EC2 instance that has come into service and marking it unhealthy due to a failed\n            health check. The default value is <code>0</code>. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html#health-check-grace-period\">Health\n                check grace period</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>\n        <p>Required if you are adding an <code>ELB</code> health check.</p>"
+                        "smithy.api#documentation": "<p>The amount of time, in seconds, that Amazon EC2 Auto Scaling waits before checking the health status\n            of an EC2 instance that has come into service and marking it unhealthy due to a failed\n            Elastic Load Balancing or custom health check. This is useful if your instances do not immediately pass\n            these health checks after they enter the <code>InService</code> state. For more\n            information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html#health-check-grace-period\">Health\n                check grace period</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
                     }
                 },
                 "PlacementGroup": {
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of an existing placement group into which to launch your instances, if any. A\n            placement group is a logical grouping of instances within a single Availability Zone.\n            You cannot specify multiple Availability Zones and a placement group. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html\">Placement Groups</a> in the\n                <i>Amazon EC2 User Guide for Linux Instances</i>.</p>"
+                        "smithy.api#documentation": "<p>The name of an existing placement group into which to launch your instances. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html\">Placement groups</a> in the\n                <i>Amazon EC2 User Guide for Linux Instances</i>.</p>\n        <note>\n            <p>A <i>cluster</i> placement group is a logical grouping of instances\n                within a single Availability Zone. You cannot specify multiple Availability Zones\n                and a cluster placement group. </p>\n        </note>"
                     }
                 },
                 "VPCZoneIdentifier": {
@@ -7784,6 +7883,12 @@
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
                     "traits": {
                         "smithy.api#documentation": "<p>The unit of measurement for the value specified for desired capacity. Amazon EC2 Auto Scaling\n            supports <code>DesiredCapacityType</code> for attribute-based instance type selection\n            only. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-instance-type-requirements.html\">Creating\n                an Auto Scaling group using attribute-based instance type selection</a> in the\n                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>\n        <p>By default, Amazon EC2 Auto Scaling specifies <code>units</code>, which translates into number of\n            instances.</p>\n        <p>Valid values: <code>units</code> | <code>vcpu</code> | <code>memory-mib</code>\n         </p>"
+                    }
+                },
+                "DefaultInstanceWarmup": {
+                    "target": "com.amazonaws.autoscaling#DefaultInstanceWarmup",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of time, in seconds, until a newly launched instance can contribute to the\n            Amazon CloudWatch metrics. This delay lets an instance finish initializing before Amazon EC2 Auto Scaling\n            aggregates instance metrics, resulting in more reliable usage data. Set this value equal\n            to the amount of time that it takes for resource consumption to become stable after an\n            instance reaches the <code>InService</code> state. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-default-instance-warmup.html\">Set\n                the default instance warmup for an Auto Scaling group</a> in the\n                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>\n        <important>\n            <p>To manage your warm-up settings at the group level, we recommend that you set the\n                default instance warmup, <i>even if its value is set to 0 seconds</i>.\n                This also optimizes the performance of scaling policies that scale continuously,\n                such as target tracking and step scaling policies. </p>\n            <p>If you need to remove a value that you previously set, include the property but\n                specify <code>-1</code> for the value. However, we strongly recommend keeping the\n                default instance warmup enabled by specifying a minimum value of\n                <code>0</code>.</p>\n        </important>"
                     }
                 }
             }

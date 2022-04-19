@@ -3554,6 +3554,9 @@
             "input": {
                 "target": "com.amazonaws.redshift#CreateTagsMessage"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.redshift#InvalidClusterStateFault"
@@ -4115,6 +4118,9 @@
             "input": {
                 "target": "com.amazonaws.redshift#DeleteClusterParameterGroupMessage"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.redshift#ClusterParameterGroupNotFoundFault"
@@ -4154,6 +4160,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.redshift#DeleteClusterSecurityGroupMessage"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -4245,6 +4254,9 @@
             "input": {
                 "target": "com.amazonaws.redshift#DeleteClusterSubnetGroupMessage"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.redshift#ClusterSubnetGroupNotFoundFault"
@@ -4321,6 +4333,9 @@
             "input": {
                 "target": "com.amazonaws.redshift#DeleteEventSubscriptionMessage"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.redshift#InvalidSubscriptionStateFault"
@@ -4353,6 +4368,9 @@
             "input": {
                 "target": "com.amazonaws.redshift#DeleteHsmClientCertificateMessage"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.redshift#HsmClientCertificateNotFoundFault"
@@ -4384,6 +4402,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.redshift#DeleteHsmConfigurationMessage"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -4440,6 +4461,9 @@
             "input": {
                 "target": "com.amazonaws.redshift#DeleteScheduledActionMessage"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.redshift#ScheduledActionNotFoundFault"
@@ -4468,6 +4492,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.redshift#DeleteSnapshotCopyGrantMessage"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -4501,6 +4528,9 @@
             "input": {
                 "target": "com.amazonaws.redshift#DeleteSnapshotScheduleMessage"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.redshift#InvalidClusterSnapshotScheduleStateFault"
@@ -4529,6 +4559,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.redshift#DeleteTagsMessage"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -4568,6 +4601,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.redshift#DeleteUsageLimitMessage"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -6724,6 +6760,9 @@
         },
         "com.amazonaws.redshift#DescribeStorage": {
             "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
             "output": {
                 "target": "com.amazonaws.redshift#CustomerStorageMessage"
             },
@@ -7190,14 +7229,25 @@
                 "BucketName": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of an existing S3 bucket where the log files are to be stored.</p>\n        <p>Constraints:</p>\n        <ul>\n            <li>\n                <p>Must be in the same region as the cluster</p>\n            </li>\n            <li>\n                <p>The cluster must have read bucket and put object permissions</p>\n            </li>\n         </ul>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The name of an existing S3 bucket where the log files are to be stored.</p>\n        <p>Constraints:</p>\n        <ul>\n            <li>\n                <p>Must be in the same region as the cluster</p>\n            </li>\n            <li>\n                <p>The cluster must have read bucket and put object permissions</p>\n            </li>\n         </ul>"
                     }
                 },
                 "S3KeyPrefix": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The prefix applied to the log file names.</p>\n        <p>Constraints:</p>\n        <ul>\n            <li>\n                <p>Cannot exceed 512 characters</p>\n            </li>\n            <li>\n                <p>Cannot contain spaces( ), double quotes (\"), single quotes ('), a backslash\n                    (\\), or control characters. The hexadecimal codes for invalid characters are: </p>\n                <ul>\n                  <li>\n                        <p>x00 to x20</p>\n                    </li>\n                  <li>\n                        <p>x22</p>\n                    </li>\n                  <li>\n                        <p>x27</p>\n                    </li>\n                  <li>\n                        <p>x5c</p>\n                    </li>\n                  <li>\n                        <p>x7f or larger</p>\n                    </li>\n               </ul>\n            </li>\n         </ul>"
+                    }
+                },
+                "LogDestinationType": {
+                    "target": "com.amazonaws.redshift#LogDestinationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The log destination type. An enum with possible values of <code>s3</code> and <code>cloudwatch</code>.</p>"
+                    }
+                },
+                "LogExports": {
+                    "target": "com.amazonaws.redshift#LogTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The collection of exported log types. Log types include the connection log, user log and user activity log.</p>"
                     }
                 }
             },
@@ -9074,6 +9124,27 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.redshift#LogDestinationType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "s3",
+                        "name": "S3"
+                    },
+                    {
+                        "value": "cloudwatch",
+                        "name": "CLOUDWATCH"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.redshift#LogTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.redshift#String"
+            }
+        },
         "com.amazonaws.redshift#LoggingStatus": {
             "type": "structure",
             "members": {
@@ -9111,6 +9182,18 @@
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The message indicating that logs failed to be delivered.</p>"
+                    }
+                },
+                "LogDestinationType": {
+                    "target": "com.amazonaws.redshift#LogDestinationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The log destination type. An enum with possible values of <code>s3</code> and <code>cloudwatch</code>.</p>"
+                    }
+                },
+                "LogExports": {
+                    "target": "com.amazonaws.redshift#LogTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The collection of exported log types. Log types include the connection log, user log and user activity log.</p>"
                     }
                 }
             },
@@ -9799,6 +9882,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.redshift#ModifyClusterSnapshotScheduleMessage"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -12554,7 +12640,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Key Management Service (KMS) key ID of the encryption key to encrypt data in the cluster \n            restored from a shared snapshot. You can also provide \n            the key ID when you restore from an unencrypted snapshot to an encrypted cluster in \n            the same account. Additionally, you can specify a new KMS key ID when you restore from an encrypted \n            snapshot in the same account in order to change it. In that case, the restored cluster is encrypted \n            with the new KMS key ID.</p>"
+                        "smithy.api#documentation": "<p>The Key Management Service (KMS) key ID of the encryption key that encrypts data in the cluster \n            restored from a shared snapshot. You can also provide \n            the key ID when you restore from an unencrypted snapshot to an encrypted cluster in \n            the same account. Additionally, you can specify a new KMS key ID when you restore from an encrypted \n            snapshot in the same account in order to change it. In that case, the restored cluster is encrypted \n            with the new KMS key ID.</p>"
                     }
                 },
                 "NodeType": {
@@ -12632,7 +12718,7 @@
                 "Encrypted": {
                     "target": "com.amazonaws.redshift#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enables support for restoring an unencrypted snapshot to a cluster encrypted \n            with Key Management Service (KMS) and a CMK.</p>"
+                        "smithy.api#documentation": "<p>Enables support for restoring an unencrypted snapshot to a cluster encrypted \n            with Key Management Service (KMS) and a customer managed key.</p>"
                     }
                 }
             },

@@ -1009,7 +1009,7 @@
                 "VpcConfiguration": {
                     "target": "com.amazonaws.kendra#DataSourceVpcConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configuration information for an Amazon VPC to connect to your Box. For \n            more information, see <a href=\"https://docs.aws.amazon.com/endra/latest/dg/vpc-configuration.html\">Configuring a VPC</a>.</p>"
+                        "smithy.api#documentation": "<p>Configuration information for an Amazon VPC to connect to your Box. For \n            more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html\">Configuring a VPC</a>.</p>"
                     }
                 }
             },
@@ -1065,6 +1065,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.kendra#ClearQuerySuggestionsRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -2660,6 +2663,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Provides the configuration information to connect to Box as your data source.</p>"
                     }
+                },
+                "QuipConfiguration": {
+                    "target": "com.amazonaws.kendra#QuipConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides the configuration information to connect to Quip as your \n            data source.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3121,6 +3130,10 @@
                     {
                         "value": "BOX",
                         "name": "BOX"
+                    },
+                    {
+                        "value": "QUIP",
+                        "name": "QUIP"
                     }
                 ]
             }
@@ -3248,6 +3261,9 @@
             "input": {
                 "target": "com.amazonaws.kendra#DeleteDataSourceRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.kendra#AccessDeniedException"
@@ -3351,6 +3367,9 @@
             "input": {
                 "target": "com.amazonaws.kendra#DeleteFaqRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.kendra#AccessDeniedException"
@@ -3399,6 +3418,9 @@
             "input": {
                 "target": "com.amazonaws.kendra#DeleteIndexRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.kendra#AccessDeniedException"
@@ -3439,6 +3461,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.kendra#DeletePrincipalMappingRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -3500,6 +3525,9 @@
             "input": {
                 "target": "com.amazonaws.kendra#DeleteQuerySuggestionsBlockListRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.kendra#AccessDeniedException"
@@ -3547,6 +3575,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.kendra#DeleteThesaurusRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -5166,6 +5197,16 @@
                 "smithy.api#documentation": "<p>Document metadata files that contain information such as the\n            document access control information, source URI, document author,\n            and custom attributes. Each metadata file contains metadata about a\n            single document.</p>"
             }
         },
+        "com.amazonaws.kendra#Domain": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 63
+                },
+                "smithy.api#pattern": "^(?!-)[A-Za-z0-9-].*(?<!-)$"
+            }
+        },
         "com.amazonaws.kendra#Duration": {
             "type": "string",
             "traits": {
@@ -5831,6 +5872,21 @@
                     "max": 21
                 },
                 "smithy.api#pattern": "^(fs-[0-9a-f]{8,})$"
+            }
+        },
+        "com.amazonaws.kendra#FolderId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.kendra#FolderIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendra#FolderId"
             }
         },
         "com.amazonaws.kendra#FsxConfiguration": {
@@ -8255,6 +8311,9 @@
             "input": {
                 "target": "com.amazonaws.kendra#PutPrincipalMappingRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.kendra#AccessDeniedException"
@@ -8745,6 +8804,88 @@
                     "min": 1,
                     "max": 1000
                 }
+            }
+        },
+        "com.amazonaws.kendra#QuipConfiguration": {
+            "type": "structure",
+            "members": {
+                "Domain": {
+                    "target": "com.amazonaws.kendra#Domain",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration information to connect to your Quip data source domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SecretArn": {
+                    "target": "com.amazonaws.kendra#SecretArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the\n            key-value pairs\n            that are\n            required to connect to your Quip file system. Windows is currently the\n            only supported type. The secret must contain a JSON structure with the following\n            keys:</p>\n        <ul>\n            <li>\n                <p>username—The Active Directory user name, along with the Domain Name\n                    System (DNS) domain\n                    name. For example,\n                    <i>user@corp.example.com</i>.\n                    The Active Directory user account must have read and mounting access to the Quip\n                    file system for Windows.</p>\n            </li>\n            <li>\n                <p>password—The password of the Active Directory user account with \n                    read and mounting access to the Quip Windows file system.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CrawlFileComments": {
+                    "target": "com.amazonaws.kendra#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify whether to crawl file comments in your Quip data source. \n            You can specify one or more of these options.</p>"
+                    }
+                },
+                "CrawlChatRooms": {
+                    "target": "com.amazonaws.kendra#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify whether to crawl chat rooms in your Quip data source. \n            You can specify one or more of these options.</p>"
+                    }
+                },
+                "CrawlAttachments": {
+                    "target": "com.amazonaws.kendra#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify whether to crawl attachments in your Quip data source. \n            You can specify one or more of these options.</p>"
+                    }
+                },
+                "FolderIds": {
+                    "target": "com.amazonaws.kendra#FolderIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Quip folder IDs to index.</p>"
+                    }
+                },
+                "ThreadFieldMappings": {
+                    "target": "com.amazonaws.kendra#DataSourceToIndexFieldMappingList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of field mappings to apply when indexing Quip threads.</p>"
+                    }
+                },
+                "MessageFieldMappings": {
+                    "target": "com.amazonaws.kendra#DataSourceToIndexFieldMappingList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of field mappings to apply when indexing Quip messages.</p>"
+                    }
+                },
+                "AttachmentFieldMappings": {
+                    "target": "com.amazonaws.kendra#DataSourceToIndexFieldMappingList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of field mappings to apply when indexing Quip attachments.</p>"
+                    }
+                },
+                "InclusionPatterns": {
+                    "target": "com.amazonaws.kendra#DataSourceInclusionsExclusionsStrings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of regular expression patterns to include certain files in your Quip file\n            system. Files that match the patterns are included in the index. Files that don't match\n            the patterns are excluded from the index. If a file matches both an inclusion pattern\n            and an exclusion pattern, the exclusion pattern takes\n            precedence,\n            and the file isn't included in the index.</p>"
+                    }
+                },
+                "ExclusionPatterns": {
+                    "target": "com.amazonaws.kendra#DataSourceInclusionsExclusionsStrings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of regular expression patterns to exclude certain files in your Quip file\n            system. Files that match the patterns are excluded from the index. Files that don’t\n            match the patterns are included in the index. If a file matches both an inclusion\n            pattern and an exclusion pattern, the exclusion pattern takes\n            precedence,\n            and the file isn't included in the index.</p>"
+                    }
+                },
+                "VpcConfiguration": {
+                    "target": "com.amazonaws.kendra#DataSourceVpcConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration information for connecting to an Amazon Virtual Private Cloud\n            (VPC)\n            for your Quip. Your Quip instance must reside inside your VPC.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides the configuration information to connect to Quip as your data source.</p>"
             }
         },
         "com.amazonaws.kendra#ReadAccessType": {
@@ -10273,6 +10414,9 @@
             "input": {
                 "target": "com.amazonaws.kendra#StopDataSourceSyncJobRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.kendra#AccessDeniedException"
@@ -10335,6 +10479,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.kendra#SubmitFeedbackRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -10903,6 +11050,9 @@
             "input": {
                 "target": "com.amazonaws.kendra#UpdateDataSourceRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.kendra#AccessDeniedException"
@@ -10993,6 +11143,9 @@
             "input": {
                 "target": "com.amazonaws.kendra#UpdateExperienceRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.kendra#AccessDeniedException"
@@ -11064,6 +11217,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.kendra#UpdateIndexRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -11157,6 +11313,9 @@
             "input": {
                 "target": "com.amazonaws.kendra#UpdateQuerySuggestionsBlockListRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.kendra#AccessDeniedException"
@@ -11229,6 +11388,9 @@
             "input": {
                 "target": "com.amazonaws.kendra#UpdateQuerySuggestionsConfigRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.kendra#AccessDeniedException"
@@ -11299,6 +11461,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.kendra#UpdateThesaurusRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
