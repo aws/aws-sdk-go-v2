@@ -331,6 +331,9 @@
                     "target": "com.amazonaws.connect#AssociateLexBot"
                 },
                 {
+                    "target": "com.amazonaws.connect#AssociatePhoneNumberContactFlow"
+                },
+                {
                     "target": "com.amazonaws.connect#AssociateQueueQuickConnects"
                 },
                 {
@@ -338,6 +341,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#AssociateSecurityKey"
+                },
+                {
+                    "target": "com.amazonaws.connect#ClaimPhoneNumber"
                 },
                 {
                     "target": "com.amazonaws.connect#CreateAgentStatus"
@@ -439,6 +445,9 @@
                     "target": "com.amazonaws.connect#DescribeInstanceStorageConfig"
                 },
                 {
+                    "target": "com.amazonaws.connect#DescribePhoneNumber"
+                },
+                {
                     "target": "com.amazonaws.connect#DescribeQueue"
                 },
                 {
@@ -476,6 +485,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#DisassociateLexBot"
+                },
+                {
+                    "target": "com.amazonaws.connect#DisassociatePhoneNumberContactFlow"
                 },
                 {
                     "target": "com.amazonaws.connect#DisassociateQueueQuickConnects"
@@ -544,6 +556,9 @@
                     "target": "com.amazonaws.connect#ListPhoneNumbers"
                 },
                 {
+                    "target": "com.amazonaws.connect#ListPhoneNumbersV2"
+                },
+                {
                     "target": "com.amazonaws.connect#ListPrompts"
                 },
                 {
@@ -583,7 +598,13 @@
                     "target": "com.amazonaws.connect#ListUsers"
                 },
                 {
+                    "target": "com.amazonaws.connect#ReleasePhoneNumber"
+                },
+                {
                     "target": "com.amazonaws.connect#ResumeContactRecording"
+                },
+                {
+                    "target": "com.amazonaws.connect#SearchAvailablePhoneNumbers"
                 },
                 {
                     "target": "com.amazonaws.connect#SearchVocabularies"
@@ -656,6 +677,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#UpdateInstanceStorageConfig"
+                },
+                {
+                    "target": "com.amazonaws.connect#UpdatePhoneNumber"
                 },
                 {
                     "target": "com.amazonaws.connect#UpdateQueueHoursOfOperation"
@@ -741,6 +765,9 @@
             "input": {
                 "target": "com.amazonaws.connect#AssociateApprovedOriginRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.connect#InternalServiceException"
@@ -797,6 +824,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.connect#AssociateBotRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -997,6 +1027,9 @@
             "input": {
                 "target": "com.amazonaws.connect#AssociateLambdaFunctionRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.connect#InternalServiceException"
@@ -1054,6 +1087,9 @@
             "input": {
                 "target": "com.amazonaws.connect#AssociateLexBotRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.connect#InternalServiceException"
@@ -1106,10 +1142,74 @@
                 }
             }
         },
+        "com.amazonaws.connect#AssociatePhoneNumberContactFlow": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#AssociatePhoneNumberContactFlowRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Associates a contact flow with a phone number claimed to your Amazon Connect instance.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/phone-number/{PhoneNumberId}/contact-flow",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#AssociatePhoneNumberContactFlowRequest": {
+            "type": "structure",
+            "members": {
+                "PhoneNumberId": {
+                    "target": "com.amazonaws.connect#PhoneNumberId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the phone number.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContactFlowId": {
+                    "target": "com.amazonaws.connect#ContactFlowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the contact flow.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.connect#AssociateQueueQuickConnects": {
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.connect#AssociateQueueQuickConnectsRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -1172,6 +1272,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.connect#AssociateRoutingProfileQueuesRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -1389,6 +1492,38 @@
         "com.amazonaws.connect#AutoAccept": {
             "type": "boolean"
         },
+        "com.amazonaws.connect#AvailableNumberSummary": {
+            "type": "structure",
+            "members": {
+                "PhoneNumber": {
+                    "target": "com.amazonaws.connect#PhoneNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The phone number. Phone numbers are formatted <code>[+] [country code] [subscriber number including area code]</code>.</p>"
+                    }
+                },
+                "PhoneNumberCountryCode": {
+                    "target": "com.amazonaws.connect#PhoneNumberCountryCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ISO country code.</p>"
+                    }
+                },
+                "PhoneNumberType": {
+                    "target": "com.amazonaws.connect#PhoneNumberType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of phone number.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about available phone numbers.</p>"
+            }
+        },
+        "com.amazonaws.connect#AvailableNumbersList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#AvailableNumberSummary"
+            }
+        },
         "com.amazonaws.connect#Boolean": {
             "type": "boolean"
         },
@@ -1522,6 +1657,160 @@
                     "min": 1,
                     "max": 350
                 }
+            }
+        },
+        "com.amazonaws.connect#ClaimPhoneNumber": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#ClaimPhoneNumberRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#ClaimPhoneNumberResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#IdempotencyException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Claims an available phone number to your Amazon Connect instance.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/phone-number/claim",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#ClaimPhoneNumberRequest": {
+            "type": "structure",
+            "members": {
+                "TargetArn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for Amazon Connect instances that phone numbers are claimed to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PhoneNumber": {
+                    "target": "com.amazonaws.connect#PhoneNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The phone number you want to claim. Phone numbers are formatted <code>[+] [country code] [subscriber number including area code]</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PhoneNumberDescription": {
+                    "target": "com.amazonaws.connect#PhoneNumberDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the phone number.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.connect#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.connect#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#ClaimPhoneNumberResponse": {
+            "type": "structure",
+            "members": {
+                "PhoneNumberId": {
+                    "target": "com.amazonaws.connect#PhoneNumberId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the phone number.</p>"
+                    }
+                },
+                "PhoneNumberArn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the phone number.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#ClaimedPhoneNumberSummary": {
+            "type": "structure",
+            "members": {
+                "PhoneNumberId": {
+                    "target": "com.amazonaws.connect#PhoneNumberId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the phone number.</p>"
+                    }
+                },
+                "PhoneNumberArn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the phone number.</p>"
+                    }
+                },
+                "PhoneNumber": {
+                    "target": "com.amazonaws.connect#PhoneNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The phone number. Phone numbers are formatted <code>[+] [country code] [subscriber number including area code]</code>.</p>"
+                    }
+                },
+                "PhoneNumberCountryCode": {
+                    "target": "com.amazonaws.connect#PhoneNumberCountryCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ISO country code.</p>"
+                    }
+                },
+                "PhoneNumberType": {
+                    "target": "com.amazonaws.connect#PhoneNumberType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of phone number.</p>"
+                    }
+                },
+                "PhoneNumberDescription": {
+                    "target": "com.amazonaws.connect#PhoneNumberDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the phone number.</p>"
+                    }
+                },
+                "TargetArn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for Amazon Connect instances that phone numbers are claimed to.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.connect#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                },
+                "PhoneNumberStatus": {
+                    "target": "com.amazonaws.connect#PhoneNumberStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the phone number.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a phone number that has been claimed to your Amazon Connect instance.</p>"
             }
         },
         "com.amazonaws.connect#ClientToken": {
@@ -3770,6 +4059,9 @@
             "input": {
                 "target": "com.amazonaws.connect#DeleteContactFlowRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.connect#AccessDeniedException"
@@ -3887,6 +4179,9 @@
             "input": {
                 "target": "com.amazonaws.connect#DeleteHoursOfOperationRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.connect#InternalServiceException"
@@ -3939,6 +4234,9 @@
             "input": {
                 "target": "com.amazonaws.connect#DeleteInstanceRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.connect#InternalServiceException"
@@ -3976,6 +4274,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.connect#DeleteIntegrationAssociationRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -4025,6 +4326,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.connect#DeleteQuickConnectRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -4077,6 +4381,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.connect#DeleteSecurityProfileRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -4136,6 +4443,9 @@
             "input": {
                 "target": "com.amazonaws.connect#DeleteUseCaseRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.connect#InternalServiceException"
@@ -4193,6 +4503,9 @@
             "input": {
                 "target": "com.amazonaws.connect#DeleteUserRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.connect#InternalServiceException"
@@ -4223,6 +4536,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.connect#DeleteUserHierarchyGroupRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -4907,6 +5223,64 @@
                 }
             }
         },
+        "com.amazonaws.connect#DescribePhoneNumber": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#DescribePhoneNumberRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#DescribePhoneNumberResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets details and status of a phone number that’s claimed to your Amazon Connect instance</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/phone-number/{PhoneNumberId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#DescribePhoneNumberRequest": {
+            "type": "structure",
+            "members": {
+                "PhoneNumberId": {
+                    "target": "com.amazonaws.connect#PhoneNumberId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the phone number.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#DescribePhoneNumberResponse": {
+            "type": "structure",
+            "members": {
+                "ClaimedPhoneNumberSummary": {
+                    "target": "com.amazonaws.connect#ClaimedPhoneNumberSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about a phone number that's been claimed to your Amazon Connect instance.\n </p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.connect#DescribeQueue": {
             "type": "operation",
             "input": {
@@ -5525,6 +5899,9 @@
             "input": {
                 "target": "com.amazonaws.connect#DisassociateApprovedOriginRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.connect#InternalServiceException"
@@ -5577,6 +5954,9 @@
             "input": {
                 "target": "com.amazonaws.connect#DisassociateBotRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.connect#InternalServiceException"
@@ -5626,6 +6006,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.connect#DisassociateInstanceStorageConfigRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -5687,6 +6070,9 @@
             "input": {
                 "target": "com.amazonaws.connect#DisassociateLambdaFunctionRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.connect#InternalServiceException"
@@ -5738,6 +6124,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.connect#DisassociateLexBotRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -5794,10 +6183,68 @@
                 }
             }
         },
+        "com.amazonaws.connect#DisassociatePhoneNumberContactFlow": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#DisassociatePhoneNumberContactFlowRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes the contact flow association from a phone number claimed to your Amazon Connect instance, if a contact flow association exists.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/phone-number/{PhoneNumberId}/contact-flow",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#DisassociatePhoneNumberContactFlowRequest": {
+            "type": "structure",
+            "members": {
+                "PhoneNumberId": {
+                    "target": "com.amazonaws.connect#PhoneNumberId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the phone number.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#httpQuery": "instanceId",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.connect#DisassociateQueueQuickConnects": {
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.connect#DisassociateQueueQuickConnectsRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -5858,6 +6305,9 @@
             "input": {
                 "target": "com.amazonaws.connect#DisassociateRoutingProfileQueuesRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.connect#InternalServiceException"
@@ -5916,6 +6366,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.connect#DisassociateSecurityKeyRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -7660,6 +8113,15 @@
                 "smithy.api#documentation": "<p>Configuration information of a Kinesis video stream.</p>"
             }
         },
+        "com.amazonaws.connect#LargeNextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100000
+                }
+            }
+        },
         "com.amazonaws.connect#LexBot": {
             "type": "structure",
             "members": {
@@ -9085,6 +9547,155 @@
                 }
             }
         },
+        "com.amazonaws.connect#ListPhoneNumbersSummary": {
+            "type": "structure",
+            "members": {
+                "PhoneNumberId": {
+                    "target": "com.amazonaws.connect#PhoneNumberId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the phone number.</p>"
+                    }
+                },
+                "PhoneNumberArn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the phone number.</p>"
+                    }
+                },
+                "PhoneNumber": {
+                    "target": "com.amazonaws.connect#PhoneNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The phone number. Phone numbers are formatted <code>[+] [country code] [subscriber number including area code]</code>.</p>"
+                    }
+                },
+                "PhoneNumberCountryCode": {
+                    "target": "com.amazonaws.connect#PhoneNumberCountryCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ISO country code.</p>"
+                    }
+                },
+                "PhoneNumberType": {
+                    "target": "com.amazonaws.connect#PhoneNumberType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of phone number.</p>"
+                    }
+                },
+                "TargetArn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for Amazon Connect instances that phone numbers are claimed to.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about phone numbers that have been claimed to your Amazon Connect instance.</p>"
+            }
+        },
+        "com.amazonaws.connect#ListPhoneNumbersSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#ListPhoneNumbersSummary"
+            }
+        },
+        "com.amazonaws.connect#ListPhoneNumbersV2": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#ListPhoneNumbersV2Request"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#ListPhoneNumbersV2Response"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists phone numbers claimed to your Amazon Connect instance. </p>\n         <p>For more information about phone numbers, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/contact-center-phone-number.html\">Set Up Phone Numbers for Your\n   Contact Center</a> in the <i>Amazon Connect Administrator Guide</i>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/phone-number/list",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "ListPhoneNumbersSummaryList",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.connect#ListPhoneNumbersV2Request": {
+            "type": "structure",
+            "members": {
+                "TargetArn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for Amazon Connect instances that phone numbers are claimed to. If <code>TargetArn</code> input is not provided, this API lists numbers claimed to all the Amazon Connect instances belonging to your account.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.connect#MaxResult1000",
+                    "traits": {
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#LargeNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous \nresponse in the next request to retrieve the next set of results.</p>"
+                    }
+                },
+                "PhoneNumberCountryCodes": {
+                    "target": "com.amazonaws.connect#PhoneNumberCountryCodes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ISO country code.</p>"
+                    }
+                },
+                "PhoneNumberTypes": {
+                    "target": "com.amazonaws.connect#PhoneNumberTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of phone number.</p>"
+                    }
+                },
+                "PhoneNumberPrefix": {
+                    "target": "com.amazonaws.connect#PhoneNumberPrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The prefix of the phone number. If provided, it must contain <code>+</code> as part of the country code.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#ListPhoneNumbersV2Response": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.connect#LargeNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
+                    }
+                },
+                "ListPhoneNumbersSummaryList": {
+                    "target": "com.amazonaws.connect#ListPhoneNumbersSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about phone numbers that have been claimed to your Amazon Connect instances.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.connect#ListPrompts": {
             "type": "operation",
             "input": {
@@ -10451,7 +11062,10 @@
             }
         },
         "com.amazonaws.connect#PhoneNumber": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^\\\\+[1-9]\\\\d{1,14}$"
+            }
         },
         "com.amazonaws.connect#PhoneNumberCountryCode": {
             "type": "string",
@@ -11420,8 +12034,24 @@
                 }
             }
         },
+        "com.amazonaws.connect#PhoneNumberDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 500
+                },
+                "smithy.api#pattern": "^[\\W\\S_]*$"
+            }
+        },
         "com.amazonaws.connect#PhoneNumberId": {
             "type": "string"
+        },
+        "com.amazonaws.connect#PhoneNumberPrefix": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^\\\\+?[0-9]{1,11}$"
+            }
         },
         "com.amazonaws.connect#PhoneNumberQuickConnectConfig": {
             "type": "structure",
@@ -11436,6 +12066,26 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains information about a phone number for a quick connect.</p>"
+            }
+        },
+        "com.amazonaws.connect#PhoneNumberStatus": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.connect#PhoneNumberWorkflowStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status.</p>"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.connect#PhoneNumberWorkflowMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status message.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of the phone number.</p>"
             }
         },
         "com.amazonaws.connect#PhoneNumberSummary": {
@@ -11507,6 +12157,35 @@
                     "min": 0,
                     "max": 2
                 }
+            }
+        },
+        "com.amazonaws.connect#PhoneNumberWorkflowMessage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[\\W\\S_]*$"
+            }
+        },
+        "com.amazonaws.connect#PhoneNumberWorkflowStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CLAIMED",
+                        "name": "Claimed"
+                    },
+                    {
+                        "value": "IN_PROGRESS",
+                        "name": "InProgress"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "Failed"
+                    }
+                ]
             }
         },
         "com.amazonaws.connect#PhoneType": {
@@ -12160,6 +12839,67 @@
                 }
             }
         },
+        "com.amazonaws.connect#ReleasePhoneNumber": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#ReleasePhoneNumberRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#IdempotencyException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Releases a phone number previously claimed to an Amazon Connect instance.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/phone-number/{PhoneNumberId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#ReleasePhoneNumberRequest": {
+            "type": "structure",
+            "members": {
+                "PhoneNumberId": {
+                    "target": "com.amazonaws.connect#PhoneNumberId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the phone number.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.connect#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request.</p>",
+                        "smithy.api#httpQuery": "clientToken",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.connect#ResourceConflictException": {
             "type": "structure",
             "members": {
@@ -12569,6 +13309,105 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information about the Amazon Simple Storage Service (Amazon S3) storage type.</p>"
+            }
+        },
+        "com.amazonaws.connect#SearchAvailablePhoneNumbers": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#SearchAvailablePhoneNumbersRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#SearchAvailablePhoneNumbersResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Searches for available phone numbers that you can claim to your Amazon Connect instance.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/phone-number/search-available",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "AvailableNumbersList",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.connect#SearchAvailablePhoneNumbersRequest": {
+            "type": "structure",
+            "members": {
+                "TargetArn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for Amazon Connect instances that phone numbers are claimed to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PhoneNumberCountryCode": {
+                    "target": "com.amazonaws.connect#PhoneNumberCountryCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ISO country code.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PhoneNumberType": {
+                    "target": "com.amazonaws.connect#PhoneNumberType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of phone number.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PhoneNumberPrefix": {
+                    "target": "com.amazonaws.connect#PhoneNumberPrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The prefix of the phone number. If provided, it must contain <code>+</code> as part of the country code.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.connect#MaxResult10",
+                    "traits": {
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#LargeNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous \nresponse in the next request to retrieve the next set of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#SearchAvailablePhoneNumbersResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.connect#LargeNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
+                    }
+                },
+                "AvailableNumbersList": {
+                    "target": "com.amazonaws.connect#AvailableNumbersList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of available phone numbers that you can claim for your Amazon Connect instance.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.connect#SearchVocabularies": {
@@ -13694,6 +14533,9 @@
             "input": {
                 "target": "com.amazonaws.connect#TagResourceRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.connect#InternalServiceException"
@@ -13712,7 +14554,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds the specified tags to the specified resource.</p>\n         <p>The supported resource types are users, routing profiles, queues, quick connects, contact\n   flows, agent status, and hours of operation.</p>\n         <p>For sample policies that use tags, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security_iam_id-based-policy-examples.html\">Amazon Connect Identity-Based\n    Policy Examples</a> in the <i>Amazon Connect Administrator Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Adds the specified tags to the specified resource.</p>\n         <p>The supported resource types are users, routing profiles, queues, quick connects, contact\n   flows, agent status, hours of operation, and phone number.</p>\n         <p>For sample policies that use tags, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security_iam_id-based-policy-examples.html\">Amazon Connect Identity-Based\n    Policy Examples</a> in the <i>Amazon Connect Administrator Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/tags/{resourceArn}",
@@ -13847,6 +14689,9 @@
             "input": {
                 "target": "com.amazonaws.connect#UntagResourceRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.connect#InternalServiceException"
@@ -13898,6 +14743,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.connect#UpdateAgentStatusRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -14092,6 +14940,9 @@
             "input": {
                 "target": "com.amazonaws.connect#UpdateContactFlowContentRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.connect#InternalServiceException"
@@ -14153,6 +15004,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.connect#UpdateContactFlowMetadataRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -14379,6 +15233,9 @@
             "input": {
                 "target": "com.amazonaws.connect#UpdateContactFlowNameRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.connect#DuplicateResourceException"
@@ -14556,6 +15413,9 @@
             "input": {
                 "target": "com.amazonaws.connect#UpdateHoursOfOperationRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.connect#DuplicateResourceException"
@@ -14644,6 +15504,9 @@
             "input": {
                 "target": "com.amazonaws.connect#UpdateInstanceAttributeRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.connect#InternalServiceException"
@@ -14702,6 +15565,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.connect#UpdateInstanceStorageConfigRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -14764,10 +15630,97 @@
                 }
             }
         },
+        "com.amazonaws.connect#UpdatePhoneNumber": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#UpdatePhoneNumberRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#UpdatePhoneNumberResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#IdempotencyException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates your claimed phone number from its current Amazon Connect instance to another Amazon Connect instance in the same Region.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/phone-number/{PhoneNumberId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#UpdatePhoneNumberRequest": {
+            "type": "structure",
+            "members": {
+                "PhoneNumberId": {
+                    "target": "com.amazonaws.connect#PhoneNumberId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the phone number.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "TargetArn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for Amazon Connect instances that phone numbers are claimed to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.connect#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#UpdatePhoneNumberResponse": {
+            "type": "structure",
+            "members": {
+                "PhoneNumberId": {
+                    "target": "com.amazonaws.connect#PhoneNumberId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the phone number.</p>"
+                    }
+                },
+                "PhoneNumberArn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the phone number.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.connect#UpdateQueueHoursOfOperation": {
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.connect#UpdateQueueHoursOfOperationRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -14828,6 +15781,9 @@
             "input": {
                 "target": "com.amazonaws.connect#UpdateQueueMaxContactsRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.connect#InternalServiceException"
@@ -14886,6 +15842,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.connect#UpdateQueueNameRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -14954,6 +15913,9 @@
             "input": {
                 "target": "com.amazonaws.connect#UpdateQueueOutboundCallerConfigRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.connect#InternalServiceException"
@@ -15013,6 +15975,9 @@
             "input": {
                 "target": "com.amazonaws.connect#UpdateQueueStatusRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.connect#InternalServiceException"
@@ -15071,6 +16036,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.connect#UpdateQuickConnectConfigRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -15140,6 +16108,9 @@
             "input": {
                 "target": "com.amazonaws.connect#UpdateQuickConnectNameRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.connect#InternalServiceException"
@@ -15204,6 +16175,9 @@
             "input": {
                 "target": "com.amazonaws.connect#UpdateRoutingProfileConcurrencyRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.connect#InternalServiceException"
@@ -15263,6 +16237,9 @@
             "input": {
                 "target": "com.amazonaws.connect#UpdateRoutingProfileDefaultOutboundQueueRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.connect#InternalServiceException"
@@ -15321,6 +16298,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.connect#UpdateRoutingProfileNameRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -15389,6 +16369,9 @@
             "input": {
                 "target": "com.amazonaws.connect#UpdateRoutingProfileQueuesRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.connect#InternalServiceException"
@@ -15447,6 +16430,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.connect#UpdateSecurityProfileRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -15512,6 +16498,9 @@
             "input": {
                 "target": "com.amazonaws.connect#UpdateUserHierarchyRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.connect#InternalServiceException"
@@ -15542,6 +16531,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.connect#UpdateUserHierarchyGroupNameRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -15632,6 +16624,9 @@
             "input": {
                 "target": "com.amazonaws.connect#UpdateUserHierarchyStructureRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.connect#InternalServiceException"
@@ -15685,6 +16680,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.connect#UpdateUserIdentityInfoRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -15745,6 +16743,9 @@
             "input": {
                 "target": "com.amazonaws.connect#UpdateUserPhoneConfigRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.connect#InternalServiceException"
@@ -15804,6 +16805,9 @@
             "input": {
                 "target": "com.amazonaws.connect#UpdateUserRoutingProfileRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.connect#InternalServiceException"
@@ -15862,6 +16866,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.connect#UpdateUserSecurityProfilesRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {

@@ -1110,6 +1110,13 @@
                         "smithy.api#jsonName": "jobId"
                     }
                 },
+                "originType": {
+                    "target": "com.amazonaws.macie2#OriginType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies how Amazon Macie found the sensitive data that produced the finding: SENSITIVE_DATA_DISCOVERY_JOB, for a classification job.</p>",
+                        "smithy.api#jsonName": "originType"
+                    }
+                },
                 "result": {
                     "target": "com.amazonaws.macie2#ClassificationResult",
                     "traits": {
@@ -1119,7 +1126,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides information about a sensitive data finding, including the classification job that produced the finding.</p>"
+                "smithy.api#documentation": "<p>Provides information about a sensitive data finding and the details of the finding.</p>"
             }
         },
         "com.amazonaws.macie2#ClassificationExportConfiguration": {
@@ -4423,7 +4430,7 @@
                 "findingIds": {
                     "target": "com.amazonaws.macie2#__listOf__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of strings that lists the unique identifiers for the findings to retrieve.</p>",
+                        "smithy.api#documentation": "<p>An array of strings that lists the unique identifiers for the findings to retrieve. You can specify as many as 50 unique identifiers in this array.</p>",
                         "smithy.api#jsonName": "findingIds",
                         "smithy.api#required": {}
                     }
@@ -5262,7 +5269,7 @@
         "com.amazonaws.macie2#JobComparator": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The operator to use in a condition. Valid values are:</p>",
+                "smithy.api#documentation": "<p>The operator to use in a condition. Depending on the type of condition, possible values are:</p>",
                 "smithy.api#enum": [
                     {
                         "value": "EQ",
@@ -7009,6 +7016,18 @@
                 ]
             }
         },
+        "com.amazonaws.macie2#OriginType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies how Amazon Macie found the sensitive data that produced a finding. The only possible value is:</p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "SENSITIVE_DATA_DISCOVERY_JOB",
+                        "name": "SENSITIVE_DATA_DISCOVERY_JOB"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.macie2#Page": {
             "type": "structure",
             "members": {
@@ -7231,6 +7250,9 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.macie2#Range"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the locations of occurrences of sensitive data in a non-binary text file.</p>"
             }
         },
         "com.amazonaws.macie2#Record": {
@@ -7259,6 +7281,9 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.macie2#Record"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the locations of occurrences of sensitive data in an Apache Avro object container or a structured data file.</p>"
             }
         },
         "com.amazonaws.macie2#RelationshipStatus": {
@@ -8909,7 +8934,7 @@
                 "tagKeys": {
                     "target": "com.amazonaws.macie2#__listOf__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key of the tag to remove from the resource. To remove multiple tags, append the tagKeys parameter and argument for each additional tag to remove, separated by an ampersand (&amp;).</p>",
+                        "smithy.api#documentation": "<p>One or more tags (keys) to remove from the resource. In an HTTP request to remove multiple tags, append the tagKeys parameter and argument for each tag to remove, and separate them with an ampersand (&amp;).</p>",
                         "smithy.api#httpQuery": "tagKeys",
                         "smithy.api#required": {}
                     }

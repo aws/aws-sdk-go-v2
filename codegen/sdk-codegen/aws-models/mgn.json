@@ -50,9 +50,8 @@
                 "aws.api#service": {
                     "sdkId": "mgn",
                     "arnNamespace": "mgn",
-                    "cloudFormationName": "ApplicationMigrationService",
-                    "cloudTrailEventSource": "mgn.amazonaws.com",
-                    "endpointPrefix": "mgn"
+                    "awsProductName": "mgn",
+                    "cloudTrailEventSource": "mgn.amazonaws.com"
                 },
                 "aws.auth#sigv4": {
                     "name": "mgn"
@@ -60,16 +59,16 @@
                 "aws.protocols#restJson1": {},
                 "smithy.api#cors": {
                     "additionalAllowedHeaders": [
+                        "content-type",
                         "x-amz-content-sha256",
-                        "x-amzn-trace-id",
                         "x-amz-user-agent",
-                        "content-type"
+                        "x-amzn-trace-id"
                     ],
                     "additionalExposedHeaders": [
-                        "x-amz-apigw-id",
-                        "x-amzn-trace-id",
                         "x-amzn-errortype",
-                        "x-amzn-requestid"
+                        "x-amzn-requestid",
+                        "x-amzn-trace-id",
+                        "x-amz-apigw-id"
                     ]
                 },
                 "smithy.api#documentation": "<p>The Application Migration Service service.</p>",
@@ -113,12 +112,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "LEGACY_BIOS",
-                        "name": "LEGACY_BIOS"
+                        "name": "LEGACY_BIOS",
+                        "value": "LEGACY_BIOS"
                     },
                     {
-                        "value": "UEFI",
-                        "name": "UEFI"
+                        "name": "UEFI",
+                        "value": "UEFI"
                     }
                 ]
             }
@@ -177,8 +176,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Allows the user to set the SourceServer.LifeCycle.state property for specific Source Server IDs to one of the following: READY_FOR_TEST or READY_FOR_CUTOVER. This command only works if the Source Server is already launchable (dataReplicationInfo.lagDuration is not null.)</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/ChangeServerLifeCycleState",
+                    "method": "POST",
                     "code": 200
                 }
             }
@@ -222,16 +221,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "READY_FOR_TEST",
-                        "name": "READY_FOR_TEST"
+                        "name": "READY_FOR_TEST",
+                        "value": "READY_FOR_TEST"
                     },
                     {
-                        "value": "READY_FOR_CUTOVER",
-                        "name": "READY_FOR_CUTOVER"
+                        "name": "READY_FOR_CUTOVER",
+                        "value": "READY_FOR_CUTOVER"
                     },
                     {
-                        "value": "CUTOVER",
-                        "name": "CUTOVER"
+                        "name": "CUTOVER",
+                        "value": "CUTOVER"
                     }
                 ]
             }
@@ -298,8 +297,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Creates a new ReplicationConfigurationTemplate.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/CreateReplicationConfigurationTemplate",
+                    "method": "POST",
                     "code": 201
                 }
             }
@@ -423,68 +422,68 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "AGENT_NOT_SEEN",
-                        "name": "AGENT_NOT_SEEN"
+                        "name": "AGENT_NOT_SEEN",
+                        "value": "AGENT_NOT_SEEN"
                     },
                     {
-                        "value": "SNAPSHOTS_FAILURE",
-                        "name": "SNAPSHOTS_FAILURE"
+                        "name": "SNAPSHOTS_FAILURE",
+                        "value": "SNAPSHOTS_FAILURE"
                     },
                     {
-                        "value": "NOT_CONVERGING",
-                        "name": "NOT_CONVERGING"
+                        "name": "NOT_CONVERGING",
+                        "value": "NOT_CONVERGING"
                     },
                     {
-                        "value": "UNSTABLE_NETWORK",
-                        "name": "UNSTABLE_NETWORK"
+                        "name": "UNSTABLE_NETWORK",
+                        "value": "UNSTABLE_NETWORK"
                     },
                     {
-                        "value": "FAILED_TO_CREATE_SECURITY_GROUP",
-                        "name": "FAILED_TO_CREATE_SECURITY_GROUP"
+                        "name": "FAILED_TO_CREATE_SECURITY_GROUP",
+                        "value": "FAILED_TO_CREATE_SECURITY_GROUP"
                     },
                     {
-                        "value": "FAILED_TO_LAUNCH_REPLICATION_SERVER",
-                        "name": "FAILED_TO_LAUNCH_REPLICATION_SERVER"
+                        "name": "FAILED_TO_LAUNCH_REPLICATION_SERVER",
+                        "value": "FAILED_TO_LAUNCH_REPLICATION_SERVER"
                     },
                     {
-                        "value": "FAILED_TO_BOOT_REPLICATION_SERVER",
-                        "name": "FAILED_TO_BOOT_REPLICATION_SERVER"
+                        "name": "FAILED_TO_BOOT_REPLICATION_SERVER",
+                        "value": "FAILED_TO_BOOT_REPLICATION_SERVER"
                     },
                     {
-                        "value": "FAILED_TO_AUTHENTICATE_WITH_SERVICE",
-                        "name": "FAILED_TO_AUTHENTICATE_WITH_SERVICE"
+                        "name": "FAILED_TO_AUTHENTICATE_WITH_SERVICE",
+                        "value": "FAILED_TO_AUTHENTICATE_WITH_SERVICE"
                     },
                     {
-                        "value": "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE",
-                        "name": "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE"
+                        "name": "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE",
+                        "value": "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE"
                     },
                     {
-                        "value": "FAILED_TO_CREATE_STAGING_DISKS",
-                        "name": "FAILED_TO_CREATE_STAGING_DISKS"
+                        "name": "FAILED_TO_CREATE_STAGING_DISKS",
+                        "value": "FAILED_TO_CREATE_STAGING_DISKS"
                     },
                     {
-                        "value": "FAILED_TO_ATTACH_STAGING_DISKS",
-                        "name": "FAILED_TO_ATTACH_STAGING_DISKS"
+                        "name": "FAILED_TO_ATTACH_STAGING_DISKS",
+                        "value": "FAILED_TO_ATTACH_STAGING_DISKS"
                     },
                     {
-                        "value": "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT",
-                        "name": "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT"
+                        "name": "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT",
+                        "value": "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT"
                     },
                     {
-                        "value": "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER",
-                        "name": "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER"
+                        "name": "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER",
+                        "value": "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER"
                     },
                     {
-                        "value": "FAILED_TO_START_DATA_TRANSFER",
-                        "name": "FAILED_TO_START_DATA_TRANSFER"
+                        "name": "FAILED_TO_START_DATA_TRANSFER",
+                        "value": "FAILED_TO_START_DATA_TRANSFER"
                     },
                     {
-                        "value": "UNSUPPORTED_VM_CONFIGURATION",
-                        "name": "UNSUPPORTED_VM_CONFIGURATION"
+                        "name": "UNSUPPORTED_VM_CONFIGURATION",
+                        "value": "UNSUPPORTED_VM_CONFIGURATION"
                     },
                     {
-                        "value": "LAST_SNAPSHOT_JOB_FAILED",
-                        "name": "LAST_SNAPSHOT_JOB_FAILED"
+                        "name": "LAST_SNAPSHOT_JOB_FAILED",
+                        "value": "LAST_SNAPSHOT_JOB_FAILED"
                     }
                 ]
             }
@@ -691,24 +690,24 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "NOT_STARTED",
-                        "name": "NOT_STARTED"
+                        "name": "NOT_STARTED",
+                        "value": "NOT_STARTED"
                     },
                     {
-                        "value": "IN_PROGRESS",
-                        "name": "IN_PROGRESS"
+                        "name": "IN_PROGRESS",
+                        "value": "IN_PROGRESS"
                     },
                     {
-                        "value": "SUCCEEDED",
-                        "name": "SUCCEEDED"
+                        "name": "SUCCEEDED",
+                        "value": "SUCCEEDED"
                     },
                     {
-                        "value": "FAILED",
-                        "name": "FAILED"
+                        "name": "FAILED",
+                        "value": "FAILED"
                     },
                     {
-                        "value": "SKIPPED",
-                        "name": "SKIPPED"
+                        "name": "SKIPPED",
+                        "value": "SKIPPED"
                     }
                 ]
             }
@@ -724,52 +723,52 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "STOPPED",
-                        "name": "STOPPED"
+                        "name": "STOPPED",
+                        "value": "STOPPED"
                     },
                     {
-                        "value": "INITIATING",
-                        "name": "INITIATING"
+                        "name": "INITIATING",
+                        "value": "INITIATING"
                     },
                     {
-                        "value": "INITIAL_SYNC",
-                        "name": "INITIAL_SYNC"
+                        "name": "INITIAL_SYNC",
+                        "value": "INITIAL_SYNC"
                     },
                     {
-                        "value": "BACKLOG",
-                        "name": "BACKLOG"
+                        "name": "BACKLOG",
+                        "value": "BACKLOG"
                     },
                     {
-                        "value": "CREATING_SNAPSHOT",
-                        "name": "CREATING_SNAPSHOT"
+                        "name": "CREATING_SNAPSHOT",
+                        "value": "CREATING_SNAPSHOT"
                     },
                     {
-                        "value": "CONTINUOUS",
-                        "name": "CONTINUOUS"
+                        "name": "CONTINUOUS",
+                        "value": "CONTINUOUS"
                     },
                     {
-                        "value": "PAUSED",
-                        "name": "PAUSED"
+                        "name": "PAUSED",
+                        "value": "PAUSED"
                     },
                     {
-                        "value": "RESCAN",
-                        "name": "RESCAN"
+                        "name": "RESCAN",
+                        "value": "RESCAN"
                     },
                     {
-                        "value": "STALLED",
-                        "name": "STALLED"
+                        "name": "STALLED",
+                        "value": "STALLED"
                     },
                     {
-                        "value": "DISCONNECTED",
-                        "name": "DISCONNECTED"
+                        "name": "DISCONNECTED",
+                        "value": "DISCONNECTED"
                     },
                     {
-                        "value": "PENDING_SNAPSHOT_SHIPPING",
-                        "name": "PENDING_SNAPSHOT_SHIPPING"
+                        "name": "PENDING_SNAPSHOT_SHIPPING",
+                        "value": "PENDING_SNAPSHOT_SHIPPING"
                     },
                     {
-                        "value": "SHIPPING_SNAPSHOT",
-                        "name": "SHIPPING_SNAPSHOT"
+                        "name": "SHIPPING_SNAPSHOT",
+                        "value": "SHIPPING_SNAPSHOT"
                     }
                 ]
             }
@@ -796,8 +795,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Deletes a single Job by ID.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/DeleteJob",
+                    "method": "POST",
                     "code": 204
                 },
                 "smithy.api#idempotent": {}
@@ -841,8 +840,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Deletes a single Replication Configuration Template by ID</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/DeleteReplicationConfigurationTemplate",
+                    "method": "POST",
                     "code": 204
                 },
                 "smithy.api#idempotent": {}
@@ -886,8 +885,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Deletes a single source server by ID.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/DeleteSourceServer",
+                    "method": "POST",
                     "code": 204
                 },
                 "smithy.api#idempotent": {}
@@ -931,8 +930,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Deletes a given vCenter client by ID.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/DeleteVcenterClient",
+                    "method": "POST",
                     "code": 204
                 },
                 "smithy.api#idempotent": {}
@@ -969,15 +968,15 @@
             "traits": {
                 "smithy.api#documentation": "<p>Retrieves detailed job log items with paging.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/DescribeJobLogItems",
+                    "method": "POST",
                     "code": 200
                 },
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
-                    "items": "items",
-                    "pageSize": "maxResults"
+                    "pageSize": "maxResults",
+                    "items": "items"
                 },
                 "smithy.api#readonly": {}
             }
@@ -1042,15 +1041,15 @@
             "traits": {
                 "smithy.api#documentation": "<p>Returns a list of Jobs. Use the JobsID and fromDate and toData filters to limit which jobs are returned. The response is sorted by creationDataTime - latest date first. Jobs are normally created by the StartTest, StartCutover, and TerminateTargetInstances APIs. Jobs are also created by DiagnosticLaunch and TerminateDiagnosticInstances, which are APIs available only to *Support* and only used in response to relevant support tickets.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/DescribeJobs",
+                    "method": "POST",
                     "code": 200
                 },
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
-                    "items": "items",
-                    "pageSize": "maxResults"
+                    "pageSize": "maxResults",
+                    "items": "items"
                 },
                 "smithy.api#readonly": {}
             }
@@ -1061,8 +1060,7 @@
                 "filters": {
                     "target": "com.amazonaws.mgn#DescribeJobsRequestFilters",
                     "traits": {
-                        "smithy.api#documentation": "<p>Request to describe Job log filters.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Request to describe Job log filters.</p>"
                     }
                 },
                 "maxResults": {
@@ -1156,15 +1154,15 @@
             "traits": {
                 "smithy.api#documentation": "<p>Lists all ReplicationConfigurationTemplates, filtered by Source Server IDs.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/DescribeReplicationConfigurationTemplates",
+                    "method": "POST",
                     "code": 200
                 },
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
-                    "items": "items",
-                    "pageSize": "maxResults"
+                    "pageSize": "maxResults",
+                    "items": "items"
                 },
                 "smithy.api#readonly": {}
             }
@@ -1175,8 +1173,7 @@
                 "replicationConfigurationTemplateIDs": {
                     "target": "com.amazonaws.mgn#ReplicationConfigurationTemplateIDs",
                     "traits": {
-                        "smithy.api#documentation": "<p>Request to describe Replication Configuration template by template IDs.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Request to describe Replication Configuration template by template IDs.</p>"
                     }
                 },
                 "maxResults": {
@@ -1229,15 +1226,15 @@
             "traits": {
                 "smithy.api#documentation": "<p>Retrieves all SourceServers or multiple SourceServers by ID.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/DescribeSourceServers",
+                    "method": "POST",
                     "code": 200
                 },
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
-                    "items": "items",
-                    "pageSize": "maxResults"
+                    "pageSize": "maxResults",
+                    "items": "items"
                 },
                 "smithy.api#readonly": {}
             }
@@ -1248,8 +1245,7 @@
                 "filters": {
                     "target": "com.amazonaws.mgn#DescribeSourceServersRequestFilters",
                     "traits": {
-                        "smithy.api#documentation": "<p>Request to filter Source Servers list.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Request to filter Source Servers list.</p>"
                     }
                 },
                 "maxResults": {
@@ -1349,15 +1345,15 @@
             "traits": {
                 "smithy.api#documentation": "<p>Returns a list of the installed vCenter clients.</p>",
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/DescribeVcenterClients",
+                    "method": "GET",
                     "code": 200
                 },
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
-                    "items": "items",
-                    "pageSize": "maxResults"
+                    "pageSize": "maxResults",
+                    "items": "items"
                 },
                 "smithy.api#readonly": {}
             }
@@ -1420,8 +1416,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Disconnects specific Source Servers from Application Migration Service. Data replication is stopped immediately. All AWS resources created by Application Migration Service for enabling the replication of these source servers will be terminated / deleted within 90 minutes. Launched Test or Cutover instances will NOT be terminated. If the agent on the source server has not been prevented from communicating with the Application Migration Service service, then it will receive a command to uninstall itself (within approximately 10 minutes). The following properties of the SourceServer will be changed immediately: dataReplicationInfo.dataReplicationState will be set to DISCONNECTED; The totalStorageBytes property for each of dataReplicationInfo.replicatedDisks will be set to zero; dataReplicationInfo.lagDuration and dataReplicationInfo.lagDuration will be nullified.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/DisconnectFromService",
+                    "method": "POST",
                     "code": 200
                 }
             }
@@ -1514,8 +1510,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Finalizes the cutover immediately for specific Source Servers. All AWS resources created by Application Migration Service for enabling the replication of these source servers will be terminated / deleted within 90 minutes. Launched Test or Cutover instances will NOT be terminated. The AWS Replication Agent will receive a command to uninstall itself (within 10 minutes). The following properties of the SourceServer will be changed immediately: dataReplicationInfo.dataReplicationState will be changed to DISCONNECTED; The SourceServer.lifeCycle.state will be changed to CUTOVER; The totalStorageBytes property fo each of dataReplicationInfo.replicatedDisks will be set to zero; dataReplicationInfo.lagDuration and dataReplicationInfo.lagDuration will be nullified.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/FinalizeCutover",
+                    "method": "POST",
                     "code": 200
                 }
             }
@@ -1574,8 +1570,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Lists all LaunchConfigurations available, filtered by Source Server IDs.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/GetLaunchConfiguration",
+                    "method": "POST",
                     "code": 200
                 },
                 "smithy.api#readonly": {}
@@ -1612,8 +1608,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Lists all ReplicationConfigurations, filtered by Source Server ID.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/GetReplicationConfiguration",
+                    "method": "POST",
                     "code": 200
                 },
                 "smithy.api#readonly": {}
@@ -1704,8 +1700,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Initialize Application Migration Service.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/InitializeService",
+                    "method": "POST",
                     "code": 204
                 }
             }
@@ -1868,68 +1864,68 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "JOB_START",
-                        "name": "JOB_START"
+                        "name": "JOB_START",
+                        "value": "JOB_START"
                     },
                     {
-                        "value": "SERVER_SKIPPED",
-                        "name": "SERVER_SKIPPED"
+                        "name": "SERVER_SKIPPED",
+                        "value": "SERVER_SKIPPED"
                     },
                     {
-                        "value": "CLEANUP_START",
-                        "name": "CLEANUP_START"
+                        "name": "CLEANUP_START",
+                        "value": "CLEANUP_START"
                     },
                     {
-                        "value": "CLEANUP_END",
-                        "name": "CLEANUP_END"
+                        "name": "CLEANUP_END",
+                        "value": "CLEANUP_END"
                     },
                     {
-                        "value": "CLEANUP_FAIL",
-                        "name": "CLEANUP_FAIL"
+                        "name": "CLEANUP_FAIL",
+                        "value": "CLEANUP_FAIL"
                     },
                     {
-                        "value": "SNAPSHOT_START",
-                        "name": "SNAPSHOT_START"
+                        "name": "SNAPSHOT_START",
+                        "value": "SNAPSHOT_START"
                     },
                     {
-                        "value": "SNAPSHOT_END",
-                        "name": "SNAPSHOT_END"
+                        "name": "SNAPSHOT_END",
+                        "value": "SNAPSHOT_END"
                     },
                     {
-                        "value": "SNAPSHOT_FAIL",
-                        "name": "SNAPSHOT_FAIL"
+                        "name": "SNAPSHOT_FAIL",
+                        "value": "SNAPSHOT_FAIL"
                     },
                     {
-                        "value": "USING_PREVIOUS_SNAPSHOT",
-                        "name": "USING_PREVIOUS_SNAPSHOT"
+                        "name": "USING_PREVIOUS_SNAPSHOT",
+                        "value": "USING_PREVIOUS_SNAPSHOT"
                     },
                     {
-                        "value": "CONVERSION_START",
-                        "name": "CONVERSION_START"
+                        "name": "CONVERSION_START",
+                        "value": "CONVERSION_START"
                     },
                     {
-                        "value": "CONVERSION_END",
-                        "name": "CONVERSION_END"
+                        "name": "CONVERSION_END",
+                        "value": "CONVERSION_END"
                     },
                     {
-                        "value": "CONVERSION_FAIL",
-                        "name": "CONVERSION_FAIL"
+                        "name": "CONVERSION_FAIL",
+                        "value": "CONVERSION_FAIL"
                     },
                     {
-                        "value": "LAUNCH_START",
-                        "name": "LAUNCH_START"
+                        "name": "LAUNCH_START",
+                        "value": "LAUNCH_START"
                     },
                     {
-                        "value": "LAUNCH_FAILED",
-                        "name": "LAUNCH_FAILED"
+                        "name": "LAUNCH_FAILED",
+                        "value": "LAUNCH_FAILED"
                     },
                     {
-                        "value": "JOB_CANCEL",
-                        "name": "JOB_CANCEL"
+                        "name": "JOB_CANCEL",
+                        "value": "JOB_CANCEL"
                     },
                     {
-                        "value": "JOB_END",
-                        "name": "JOB_END"
+                        "name": "JOB_END",
+                        "value": "JOB_END"
                     }
                 ]
             }
@@ -1992,10 +1988,7 @@
             ],
             "traits": {
                 "aws.api#arn": {
-                    "template": "job/{jobID}",
-                    "absolute": false,
-                    "noAccount": false,
-                    "noRegion": false
+                    "template": "job/{jobID}"
                 }
             }
         },
@@ -2112,12 +2105,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "STOPPED",
-                        "name": "STOPPED"
+                        "name": "STOPPED",
+                        "value": "STOPPED"
                     },
                     {
-                        "value": "STARTED",
-                        "name": "STARTED"
+                        "name": "STARTED",
+                        "value": "STARTED"
                     }
                 ]
             }
@@ -2392,40 +2385,40 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "STOPPED",
-                        "name": "STOPPED"
+                        "name": "STOPPED",
+                        "value": "STOPPED"
                     },
                     {
-                        "value": "NOT_READY",
-                        "name": "NOT_READY"
+                        "name": "NOT_READY",
+                        "value": "NOT_READY"
                     },
                     {
-                        "value": "READY_FOR_TEST",
-                        "name": "READY_FOR_TEST"
+                        "name": "READY_FOR_TEST",
+                        "value": "READY_FOR_TEST"
                     },
                     {
-                        "value": "TESTING",
-                        "name": "TESTING"
+                        "name": "TESTING",
+                        "value": "TESTING"
                     },
                     {
-                        "value": "READY_FOR_CUTOVER",
-                        "name": "READY_FOR_CUTOVER"
+                        "name": "READY_FOR_CUTOVER",
+                        "value": "READY_FOR_CUTOVER"
                     },
                     {
-                        "value": "CUTTING_OVER",
-                        "name": "CUTTING_OVER"
+                        "name": "CUTTING_OVER",
+                        "value": "CUTTING_OVER"
                     },
                     {
-                        "value": "CUTOVER",
-                        "name": "CUTOVER"
+                        "name": "CUTOVER",
+                        "value": "CUTOVER"
                     },
                     {
-                        "value": "DISCONNECTED",
-                        "name": "DISCONNECTED"
+                        "name": "DISCONNECTED",
+                        "value": "DISCONNECTED"
                     },
                     {
-                        "value": "DISCOVERED",
-                        "name": "DISCOVERED"
+                        "name": "DISCOVERED",
+                        "value": "DISCOVERED"
                     }
                 ]
             }
@@ -2471,8 +2464,7 @@
                 "smithy.api#documentation": "<p>List all tags for your Application Migration Service resources.</p>",
                 "smithy.api#http": {
                     "method": "GET",
-                    "uri": "/tags/{resourceArn}",
-                    "code": 200
+                    "uri": "/tags/{resourceArn}"
                 },
                 "smithy.api#readonly": {}
             }
@@ -2523,8 +2515,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Archives specific Source Servers by setting the SourceServer.isArchived property to true for specified SourceServers by ID. This command only works for SourceServers with a lifecycle. state which equals DISCONNECTED or CUTOVER.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/MarkAsArchived",
+                    "method": "POST",
                     "code": 200
                 }
             }
@@ -3008,10 +3000,7 @@
             },
             "traits": {
                 "aws.api#arn": {
-                    "template": "replication-configuration-template/{replicationConfigurationTemplateID}",
-                    "absolute": false,
-                    "noAccount": false,
-                    "noRegion": false
+                    "template": "replication-configuration-template/{replicationConfigurationTemplateID}"
                 }
             }
         },
@@ -3038,12 +3027,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "AGENT_BASED",
-                        "name": "AGENT_BASED"
+                        "name": "AGENT_BASED",
+                        "value": "AGENT_BASED"
                     },
                     {
-                        "value": "SNAPSHOT_SHIPPING",
-                        "name": "SNAPSHOT_SHIPPING"
+                        "name": "SNAPSHOT_SHIPPING",
+                        "value": "SNAPSHOT_SHIPPING"
                     }
                 ]
             }
@@ -3110,8 +3099,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Causes the data replication initiation sequence to begin immediately upon next Handshake for specified SourceServer IDs, regardless of when the previous initiation started. This command will not work if the SourceServer is not stalled or is in a DISCONNECTED or STOPPED state.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/RetryDataReplication",
+                    "method": "POST",
                     "code": 200
                 }
             }
@@ -3169,6 +3158,12 @@
                     "target": "com.amazonaws.mgn#LargeBoundedString",
                     "traits": {
                         "smithy.api#documentation": "<p>Exceeded the service quota code.</p>"
+                    }
+                },
+                "quotaValue": {
+                    "target": "com.amazonaws.mgn#StrictlyPositiveInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Exceeded the service quota value.</p>"
                     }
                 }
             },
@@ -3386,10 +3381,7 @@
             ],
             "traits": {
                 "aws.api#arn": {
-                    "template": "source-server/{sourceServerID}",
-                    "absolute": false,
-                    "noAccount": false,
-                    "noRegion": false
+                    "template": "source-server/{sourceServerID}"
                 }
             }
         },
@@ -3421,8 +3413,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Launches a Cutover Instance for specific Source Servers. This command starts a LAUNCH job whose initiatedBy property is StartCutover and changes the SourceServer.lifeCycle.state property to CUTTING_OVER.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/StartCutover",
+                    "method": "POST",
                     "code": 202
                 }
             }
@@ -3496,8 +3488,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Starts replication for SNAPSHOT_SHIPPING agents.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/StartReplication",
+                    "method": "POST",
                     "code": 200
                 }
             }
@@ -3536,8 +3528,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Launches a Test Instance for specific Source Servers. This command starts a LAUNCH job whose initiatedBy property is StartTest and changes the SourceServer.lifeCycle.state property to TESTING.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/StartTest",
+                    "method": "POST",
                     "code": 202
                 }
             }
@@ -3648,8 +3640,7 @@
                 "smithy.api#documentation": "<p>Adds or overwrites only the specified tags for the specified Application Migration Service resource or resources. When you specify an existing tag key, the value is overwritten with the new value. Each resource can have a maximum of 50 tags. Each tag consists of a key and optional value.</p>",
                 "smithy.api#http": {
                     "method": "POST",
-                    "uri": "/tags/{resourceArn}",
-                    "code": 200
+                    "uri": "/tags/{resourceArn}"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -3700,12 +3691,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "NONE",
-                        "name": "NONE"
+                        "name": "NONE",
+                        "value": "NONE"
                     },
                     {
-                        "value": "BASIC",
-                        "name": "BASIC"
+                        "name": "BASIC",
+                        "value": "BASIC"
                     }
                 ]
             }
@@ -3732,8 +3723,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Starts a job that terminates specific launched EC2 Test and Cutover instances. This command will not work for any Source Server with a lifecycle.state of TESTING, CUTTING_OVER, or CUTOVER.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/TerminateTargetInstances",
+                    "method": "POST",
                     "code": 202
                 }
             }
@@ -3859,8 +3850,7 @@
                 "smithy.api#documentation": "<p>Deletes the specified set of tags from the specified set of Application Migration Service resources.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
-                    "uri": "/tags/{resourceArn}",
-                    "code": 200
+                    "uri": "/tags/{resourceArn}"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -3911,8 +3901,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Updates multiple LaunchConfigurations by Source Server ID.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/UpdateLaunchConfiguration",
+                    "method": "POST",
                     "code": 200
                 },
                 "smithy.api#idempotent": {}
@@ -4000,8 +3990,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Allows you to update multiple ReplicationConfigurations by Source Server ID.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/UpdateReplicationConfiguration",
+                    "method": "POST",
                     "code": 200
                 },
                 "smithy.api#idempotent": {}
@@ -4128,8 +4118,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Updates multiple ReplicationConfigurationTemplates by ID.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/UpdateReplicationConfigurationTemplate",
+                    "method": "POST",
                     "code": 200
                 }
             }
@@ -4249,8 +4239,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Allows you to change between the AGENT_BASED replication type and the SNAPSHOT_SHIPPING replication type.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/UpdateSourceServerReplicationType",
+                    "method": "POST",
                     "code": 200
                 }
             }
@@ -4438,10 +4428,7 @@
             },
             "traits": {
                 "aws.api#arn": {
-                    "template": "vcenter-client/{vcenterClientID}",
-                    "absolute": false,
-                    "noAccount": false,
-                    "noRegion": false
+                    "template": "vcenter-client/{vcenterClientID}"
                 }
             }
         }
