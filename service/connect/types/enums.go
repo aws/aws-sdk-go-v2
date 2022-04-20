@@ -1000,6 +1000,26 @@ func (PhoneNumberType) Values() []PhoneNumberType {
 	}
 }
 
+type PhoneNumberWorkflowStatus string
+
+// Enum values for PhoneNumberWorkflowStatus
+const (
+	PhoneNumberWorkflowStatusClaimed    PhoneNumberWorkflowStatus = "CLAIMED"
+	PhoneNumberWorkflowStatusInProgress PhoneNumberWorkflowStatus = "IN_PROGRESS"
+	PhoneNumberWorkflowStatusFailed     PhoneNumberWorkflowStatus = "FAILED"
+)
+
+// Values returns all known values for PhoneNumberWorkflowStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PhoneNumberWorkflowStatus) Values() []PhoneNumberWorkflowStatus {
+	return []PhoneNumberWorkflowStatus{
+		"CLAIMED",
+		"IN_PROGRESS",
+		"FAILED",
+	}
+}
+
 type PhoneType string
 
 // Enum values for PhoneType

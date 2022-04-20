@@ -1,0 +1,8 @@
+{
+    "id": "f7d2bd46-3b3e-485b-af1b-f4ced6193d77",
+    "type": "feature",
+    "description": "This release adds APIs to search, claim, release, list, update, and describe phone numbers. You can also use them to associate and disassociate contact flows to phone numbers.",
+    "modules": [
+        "service/connect"
+    ]
+}

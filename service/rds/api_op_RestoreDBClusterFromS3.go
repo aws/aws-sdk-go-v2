@@ -255,6 +255,12 @@ type RestoreDBClusterFromS3Input struct {
 	// bucket.
 	S3Prefix *string
 
+	// Contains the scaling configuration of an Aurora Serverless v2 DB cluster. For
+	// more information, see Using Amazon Aurora Serverless v2
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html)
+	// in the Amazon Aurora User Guide.
+	ServerlessV2ScalingConfiguration *types.ServerlessV2ScalingConfiguration
+
 	// A value that indicates whether the restored DB cluster is encrypted.
 	StorageEncrypted *bool
 

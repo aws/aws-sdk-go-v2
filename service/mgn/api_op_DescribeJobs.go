@@ -36,8 +36,6 @@ func (c *Client) DescribeJobs(ctx context.Context, params *DescribeJobsInput, op
 type DescribeJobsInput struct {
 
 	// Request to describe Job log filters.
-	//
-	// This member is required.
 	Filters *types.DescribeJobsRequestFilters
 
 	// Request to describe job log items by max results.
@@ -106,9 +104,6 @@ func (c *Client) addOperationDescribeJobsMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addOpDescribeJobsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeJobs(options.Region), middleware.Before); err != nil {

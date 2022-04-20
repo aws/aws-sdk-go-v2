@@ -492,6 +492,12 @@ type CreateDBClusterInput struct {
 	// cluster. Valid for: Aurora DB clusters only
 	ScalingConfiguration *types.ScalingConfiguration
 
+	// Contains the scaling configuration of an Aurora Serverless v2 DB cluster. For
+	// more information, see Using Amazon Aurora Serverless v2
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html)
+	// in the Amazon Aurora User Guide.
+	ServerlessV2ScalingConfiguration *types.ServerlessV2ScalingConfiguration
+
 	// The AWS region the resource is in. The presigned URL will be created with this
 	// region, if the PresignURL member is empty set.
 	SourceRegion *string

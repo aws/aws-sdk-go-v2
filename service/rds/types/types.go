@@ -607,6 +607,12 @@ type DBCluster struct {
 	// in the Amazon Aurora User Guide.
 	ScalingConfigurationInfo *ScalingConfigurationInfo
 
+	// Shows the scaling configuration for an Aurora Serverless v2 DB cluster. For more
+	// information, see Using Amazon Aurora Serverless v2
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html)
+	// in the Amazon Aurora User Guide.
+	ServerlessV2ScalingConfiguration *ServerlessV2ScalingConfigurationInfo
+
 	// Specifies the current state of this DB cluster.
 	Status *string
 
@@ -3338,6 +3344,48 @@ type ScalingConfigurationInfo struct {
 	// RollbackCapacityChange ignores the capacity change if a scaling point isn't
 	// found in the timeout period.
 	TimeoutAction *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the scaling configuration of an Aurora Serverless v2 DB cluster. For
+// more information, see Using Amazon Aurora Serverless v2
+// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html)
+// in the Amazon Aurora User Guide.
+type ServerlessV2ScalingConfiguration struct {
+
+	// The maximum number of Aurora capacity units (ACUs) for a DB instance in an
+	// Aurora Serverless v2 cluster. You can specify ACU values in half-step
+	// increments, such as 40, 40.5, 41, and so on. The largest value that you can use
+	// is 128.
+	MaxCapacity *float64
+
+	// The minimum number of Aurora capacity units (ACUs) for a DB instance in an
+	// Aurora Serverless v2 cluster. You can specify ACU values in half-step
+	// increments, such as 8, 8.5, 9, and so on. The smallest value that you can use is
+	// 0.5.
+	MinCapacity *float64
+
+	noSmithyDocumentSerde
+}
+
+// Shows the scaling configuration for an Aurora Serverless v2 DB cluster. For more
+// information, see Using Amazon Aurora Serverless v2
+// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html)
+// in the Amazon Aurora User Guide.
+type ServerlessV2ScalingConfigurationInfo struct {
+
+	// The maximum number of Aurora capacity units (ACUs) for a DB instance in an
+	// Aurora Serverless v2 cluster. You can specify ACU values in half-step
+	// increments, such as 40, 40.5, 41, and so on. The largest value that you can use
+	// is 128.
+	MaxCapacity *float64
+
+	// The minimum number of Aurora capacity units (ACUs) for a DB instance in an
+	// Aurora Serverless v2 cluster. You can specify ACU values in half-step
+	// increments, such as 8, 8.5, 9, and so on. The smallest value that you can use is
+	// 0.5.
+	MinCapacity *float64
 
 	noSmithyDocumentSerde
 }

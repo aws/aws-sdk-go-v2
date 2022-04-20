@@ -615,8 +615,8 @@ type Cell struct {
 	noSmithyDocumentSerde
 }
 
-// Provides information about a sensitive data finding, including the
-// classification job that produced the finding.
+// Provides information about a sensitive data finding and the details of the
+// finding.
 type ClassificationDetails struct {
 
 	// The path to the folder or file (in Amazon S3) that contains the corresponding
@@ -631,6 +631,10 @@ type ClassificationDetails struct {
 
 	// The unique identifier for the classification job that produced the finding.
 	JobId *string
+
+	// Specifies how Amazon Macie found the sensitive data that produced the finding:
+	// SENSITIVE_DATA_DISCOVERY_JOB, for a classification job.
+	OriginType OriginType
 
 	// The status and other details of the finding.
 	Result *ClassificationResult

@@ -1,0 +1,8 @@
+{
+    "id": "e12e14e0-5097-47f5-b669-0aec28328928",
+    "type": "feature",
+    "description": "Sensitive data findings in Amazon Macie now indicate how Macie found the sensitive data that produced a finding (originType).",
+    "modules": [
+        "service/macie2"
+    ]
+}

@@ -13,6 +13,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 	"path"
 )
 
@@ -9130,6 +9131,49 @@ func awsAwsquery_serializeDocumentScalingConfiguration(v *types.ScalingConfigura
 	return nil
 }
 
+func awsAwsquery_serializeDocumentServerlessV2ScalingConfiguration(v *types.ServerlessV2ScalingConfiguration, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.MaxCapacity != nil {
+		objectKey := object.Key("MaxCapacity")
+		switch {
+		case math.IsNaN(*v.MaxCapacity):
+			objectKey.String("NaN")
+
+		case math.IsInf(*v.MaxCapacity, 1):
+			objectKey.String("Infinity")
+
+		case math.IsInf(*v.MaxCapacity, -1):
+			objectKey.String("-Infinity")
+
+		default:
+			objectKey.Double(*v.MaxCapacity)
+
+		}
+	}
+
+	if v.MinCapacity != nil {
+		objectKey := object.Key("MinCapacity")
+		switch {
+		case math.IsNaN(*v.MinCapacity):
+			objectKey.String("NaN")
+
+		case math.IsInf(*v.MinCapacity, 1):
+			objectKey.String("Infinity")
+
+		case math.IsInf(*v.MinCapacity, -1):
+			objectKey.String("-Infinity")
+
+		default:
+			objectKey.Double(*v.MinCapacity)
+
+		}
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeDocumentSourceIdsList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
@@ -9922,6 +9966,13 @@ func awsAwsquery_serializeOpDocumentCreateDBClusterInput(v *CreateDBClusterInput
 	if v.ScalingConfiguration != nil {
 		objectKey := object.Key("ScalingConfiguration")
 		if err := awsAwsquery_serializeDocumentScalingConfiguration(v.ScalingConfiguration, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.ServerlessV2ScalingConfiguration != nil {
+		objectKey := object.Key("ServerlessV2ScalingConfiguration")
+		if err := awsAwsquery_serializeDocumentServerlessV2ScalingConfiguration(v.ServerlessV2ScalingConfiguration, objectKey); err != nil {
 			return err
 		}
 	}
@@ -12697,6 +12748,13 @@ func awsAwsquery_serializeOpDocumentModifyDBClusterInput(v *ModifyDBClusterInput
 		}
 	}
 
+	if v.ServerlessV2ScalingConfiguration != nil {
+		objectKey := object.Key("ServerlessV2ScalingConfiguration")
+		if err := awsAwsquery_serializeDocumentServerlessV2ScalingConfiguration(v.ServerlessV2ScalingConfiguration, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.StorageType != nil {
 		objectKey := object.Key("StorageType")
 		objectKey.String(*v.StorageType)
@@ -13715,6 +13773,13 @@ func awsAwsquery_serializeOpDocumentRestoreDBClusterFromS3Input(v *RestoreDBClus
 		objectKey.String(*v.S3Prefix)
 	}
 
+	if v.ServerlessV2ScalingConfiguration != nil {
+		objectKey := object.Key("ServerlessV2ScalingConfiguration")
+		if err := awsAwsquery_serializeDocumentServerlessV2ScalingConfiguration(v.ServerlessV2ScalingConfiguration, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.SourceEngine != nil {
 		objectKey := object.Key("SourceEngine")
 		objectKey.String(*v.SourceEngine)
@@ -13867,6 +13932,13 @@ func awsAwsquery_serializeOpDocumentRestoreDBClusterFromSnapshotInput(v *Restore
 		}
 	}
 
+	if v.ServerlessV2ScalingConfiguration != nil {
+		objectKey := object.Key("ServerlessV2ScalingConfiguration")
+		if err := awsAwsquery_serializeDocumentServerlessV2ScalingConfiguration(v.ServerlessV2ScalingConfiguration, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.SnapshotIdentifier != nil {
 		objectKey := object.Key("SnapshotIdentifier")
 		objectKey.String(*v.SnapshotIdentifier)
@@ -13998,6 +14070,13 @@ func awsAwsquery_serializeOpDocumentRestoreDBClusterToPointInTimeInput(v *Restor
 	if v.ScalingConfiguration != nil {
 		objectKey := object.Key("ScalingConfiguration")
 		if err := awsAwsquery_serializeDocumentScalingConfiguration(v.ScalingConfiguration, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.ServerlessV2ScalingConfiguration != nil {
+		objectKey := object.Key("ServerlessV2ScalingConfiguration")
+		if err := awsAwsquery_serializeDocumentServerlessV2ScalingConfiguration(v.ServerlessV2ScalingConfiguration, objectKey); err != nil {
 			return err
 		}
 	}

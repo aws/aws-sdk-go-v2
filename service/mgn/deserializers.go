@@ -7859,6 +7859,19 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				sv.QuotaCode = ptr.String(jtv)
 			}
 
+		case "quotaValue":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected StrictlyPositiveInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.QuotaValue = int32(i64)
+			}
+
 		case "resourceId":
 			if value != nil {
 				jtv, ok := value.(string)

@@ -150,66 +150,6 @@ func (m *validateOpDescribeJobLogItems) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpDescribeJobs struct {
-}
-
-func (*validateOpDescribeJobs) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpDescribeJobs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*DescribeJobsInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpDescribeJobsInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
-type validateOpDescribeReplicationConfigurationTemplates struct {
-}
-
-func (*validateOpDescribeReplicationConfigurationTemplates) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpDescribeReplicationConfigurationTemplates) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*DescribeReplicationConfigurationTemplatesInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpDescribeReplicationConfigurationTemplatesInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
-type validateOpDescribeSourceServers struct {
-}
-
-func (*validateOpDescribeSourceServers) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpDescribeSourceServers) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*DescribeSourceServersInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpDescribeSourceServersInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpDisconnectFromService struct {
 }
 
@@ -578,18 +518,6 @@ func addOpDescribeJobLogItemsValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpDescribeJobLogItems{}, middleware.After)
 }
 
-func addOpDescribeJobsValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpDescribeJobs{}, middleware.After)
-}
-
-func addOpDescribeReplicationConfigurationTemplatesValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpDescribeReplicationConfigurationTemplates{}, middleware.After)
-}
-
-func addOpDescribeSourceServersValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpDescribeSourceServers{}, middleware.After)
-}
-
 func addOpDisconnectFromServiceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisconnectFromService{}, middleware.After)
 }
@@ -804,51 +732,6 @@ func validateOpDescribeJobLogItemsInput(v *DescribeJobLogItemsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeJobLogItemsInput"}
 	if v.JobID == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobID"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpDescribeJobsInput(v *DescribeJobsInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "DescribeJobsInput"}
-	if v.Filters == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Filters"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpDescribeReplicationConfigurationTemplatesInput(v *DescribeReplicationConfigurationTemplatesInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "DescribeReplicationConfigurationTemplatesInput"}
-	if v.ReplicationConfigurationTemplateIDs == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ReplicationConfigurationTemplateIDs"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpDescribeSourceServersInput(v *DescribeSourceServersInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "DescribeSourceServersInput"}
-	if v.Filters == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Filters"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

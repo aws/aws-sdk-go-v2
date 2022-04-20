@@ -130,6 +130,26 @@ func (m *validateOpAssociateLexBot) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAssociatePhoneNumberContactFlow struct {
+}
+
+func (*validateOpAssociatePhoneNumberContactFlow) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociatePhoneNumberContactFlow) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociatePhoneNumberContactFlowInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociatePhoneNumberContactFlowInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAssociateQueueQuickConnects struct {
 }
 
@@ -185,6 +205,26 @@ func (m *validateOpAssociateSecurityKey) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpAssociateSecurityKeyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpClaimPhoneNumber struct {
+}
+
+func (*validateOpClaimPhoneNumber) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpClaimPhoneNumber) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ClaimPhoneNumberInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpClaimPhoneNumberInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -850,6 +890,26 @@ func (m *validateOpDescribeInstanceStorageConfig) HandleInitialize(ctx context.C
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribePhoneNumber struct {
+}
+
+func (*validateOpDescribePhoneNumber) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribePhoneNumber) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribePhoneNumberInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribePhoneNumberInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeQueue struct {
 }
 
@@ -1105,6 +1165,26 @@ func (m *validateOpDisassociateLexBot) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDisassociateLexBotInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDisassociatePhoneNumberContactFlow struct {
+}
+
+func (*validateOpDisassociatePhoneNumberContactFlow) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociatePhoneNumberContactFlow) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociatePhoneNumberContactFlowInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociatePhoneNumberContactFlowInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1790,6 +1870,26 @@ func (m *validateOpListUsers) HandleInitialize(ctx context.Context, in middlewar
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpReleasePhoneNumber struct {
+}
+
+func (*validateOpReleasePhoneNumber) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpReleasePhoneNumber) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ReleasePhoneNumberInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpReleasePhoneNumberInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpResumeContactRecording struct {
 }
 
@@ -1805,6 +1905,26 @@ func (m *validateOpResumeContactRecording) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpResumeContactRecordingInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpSearchAvailablePhoneNumbers struct {
+}
+
+func (*validateOpSearchAvailablePhoneNumbers) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSearchAvailablePhoneNumbers) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SearchAvailablePhoneNumbersInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSearchAvailablePhoneNumbersInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2290,6 +2410,26 @@ func (m *validateOpUpdateInstanceStorageConfig) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdatePhoneNumber struct {
+}
+
+func (*validateOpUpdatePhoneNumber) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdatePhoneNumber) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdatePhoneNumberInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdatePhoneNumberInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateQueueHoursOfOperation struct {
 }
 
@@ -2694,6 +2834,10 @@ func addOpAssociateLexBotValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateLexBot{}, middleware.After)
 }
 
+func addOpAssociatePhoneNumberContactFlowValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociatePhoneNumberContactFlow{}, middleware.After)
+}
+
 func addOpAssociateQueueQuickConnectsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateQueueQuickConnects{}, middleware.After)
 }
@@ -2704,6 +2848,10 @@ func addOpAssociateRoutingProfileQueuesValidationMiddleware(stack *middleware.St
 
 func addOpAssociateSecurityKeyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateSecurityKey{}, middleware.After)
+}
+
+func addOpClaimPhoneNumberValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpClaimPhoneNumber{}, middleware.After)
 }
 
 func addOpCreateAgentStatusValidationMiddleware(stack *middleware.Stack) error {
@@ -2838,6 +2986,10 @@ func addOpDescribeInstanceStorageConfigValidationMiddleware(stack *middleware.St
 	return stack.Initialize.Add(&validateOpDescribeInstanceStorageConfig{}, middleware.After)
 }
 
+func addOpDescribePhoneNumberValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribePhoneNumber{}, middleware.After)
+}
+
 func addOpDescribeQueueValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeQueue{}, middleware.After)
 }
@@ -2888,6 +3040,10 @@ func addOpDisassociateLambdaFunctionValidationMiddleware(stack *middleware.Stack
 
 func addOpDisassociateLexBotValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateLexBot{}, middleware.After)
+}
+
+func addOpDisassociatePhoneNumberContactFlowValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociatePhoneNumberContactFlow{}, middleware.After)
 }
 
 func addOpDisassociateQueueQuickConnectsValidationMiddleware(stack *middleware.Stack) error {
@@ -3026,8 +3182,16 @@ func addOpListUsersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListUsers{}, middleware.After)
 }
 
+func addOpReleasePhoneNumberValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpReleasePhoneNumber{}, middleware.After)
+}
+
 func addOpResumeContactRecordingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpResumeContactRecording{}, middleware.After)
+}
+
+func addOpSearchAvailablePhoneNumbersValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSearchAvailablePhoneNumbers{}, middleware.After)
 }
 
 func addOpSearchVocabulariesValidationMiddleware(stack *middleware.Stack) error {
@@ -3124,6 +3288,10 @@ func addOpUpdateInstanceAttributeValidationMiddleware(stack *middleware.Stack) e
 
 func addOpUpdateInstanceStorageConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateInstanceStorageConfig{}, middleware.After)
+}
+
+func addOpUpdatePhoneNumberValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdatePhoneNumber{}, middleware.After)
 }
 
 func addOpUpdateQueueHoursOfOperationValidationMiddleware(stack *middleware.Stack) error {
@@ -3835,6 +4003,27 @@ func validateOpAssociateLexBotInput(v *AssociateLexBotInput) error {
 	}
 }
 
+func validateOpAssociatePhoneNumberContactFlowInput(v *AssociatePhoneNumberContactFlowInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociatePhoneNumberContactFlowInput"}
+	if v.PhoneNumberId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PhoneNumberId"))
+	}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.ContactFlowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactFlowId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAssociateQueueQuickConnectsInput(v *AssociateQueueQuickConnectsInput) error {
 	if v == nil {
 		return nil
@@ -3891,6 +4080,24 @@ func validateOpAssociateSecurityKeyInput(v *AssociateSecurityKeyInput) error {
 	}
 	if v.Key == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpClaimPhoneNumberInput(v *ClaimPhoneNumberInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ClaimPhoneNumberInput"}
+	if v.TargetArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetArn"))
+	}
+	if v.PhoneNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PhoneNumber"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4571,6 +4778,21 @@ func validateOpDescribeInstanceStorageConfigInput(v *DescribeInstanceStorageConf
 	}
 }
 
+func validateOpDescribePhoneNumberInput(v *DescribePhoneNumberInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribePhoneNumberInput"}
+	if v.PhoneNumberId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PhoneNumberId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeQueueInput(v *DescribeQueueInput) error {
 	if v == nil {
 		return nil
@@ -4797,6 +5019,24 @@ func validateOpDisassociateLexBotInput(v *DisassociateLexBotInput) error {
 	}
 	if v.LexRegion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LexRegion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDisassociatePhoneNumberContactFlowInput(v *DisassociatePhoneNumberContactFlowInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociatePhoneNumberContactFlowInput"}
+	if v.PhoneNumberId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PhoneNumberId"))
+	}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5379,6 +5619,21 @@ func validateOpListUsersInput(v *ListUsersInput) error {
 	}
 }
 
+func validateOpReleasePhoneNumberInput(v *ReleasePhoneNumberInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ReleasePhoneNumberInput"}
+	if v.PhoneNumberId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PhoneNumberId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpResumeContactRecordingInput(v *ResumeContactRecordingInput) error {
 	if v == nil {
 		return nil
@@ -5392,6 +5647,27 @@ func validateOpResumeContactRecordingInput(v *ResumeContactRecordingInput) error
 	}
 	if v.InitialContactId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InitialContactId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSearchAvailablePhoneNumbersInput(v *SearchAvailablePhoneNumbersInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchAvailablePhoneNumbersInput"}
+	if v.TargetArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetArn"))
+	}
+	if len(v.PhoneNumberCountryCode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PhoneNumberCountryCode"))
+	}
+	if len(v.PhoneNumberType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PhoneNumberType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5904,6 +6180,24 @@ func validateOpUpdateInstanceStorageConfigInput(v *UpdateInstanceStorageConfigIn
 		if err := validateInstanceStorageConfig(v.StorageConfig); err != nil {
 			invalidParams.AddNested("StorageConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdatePhoneNumberInput(v *UpdatePhoneNumberInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdatePhoneNumberInput"}
+	if v.PhoneNumberId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PhoneNumberId"))
+	}
+	if v.TargetArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

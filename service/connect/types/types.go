@@ -108,6 +108,22 @@ type Attribute struct {
 	noSmithyDocumentSerde
 }
 
+// Information about available phone numbers.
+type AvailableNumberSummary struct {
+
+	// The phone number. Phone numbers are formatted [+] [country code] [subscriber
+	// number including area code].
+	PhoneNumber *string
+
+	// The ISO country code.
+	PhoneNumberCountryCode PhoneNumberCountryCode
+
+	// The type of phone number.
+	PhoneNumberType PhoneNumberType
+
+	noSmithyDocumentSerde
+}
+
 // A chat message.
 type ChatMessage struct {
 
@@ -133,6 +149,42 @@ type ChatStreamingConfiguration struct {
 	//
 	// This member is required.
 	StreamingEndpointArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about a phone number that has been claimed to your Amazon Connect
+// instance.
+type ClaimedPhoneNumberSummary struct {
+
+	// The phone number. Phone numbers are formatted [+] [country code] [subscriber
+	// number including area code].
+	PhoneNumber *string
+
+	// The Amazon Resource Name (ARN) of the phone number.
+	PhoneNumberArn *string
+
+	// The ISO country code.
+	PhoneNumberCountryCode PhoneNumberCountryCode
+
+	// The description of the phone number.
+	PhoneNumberDescription *string
+
+	// The identifier of the phone number.
+	PhoneNumberId *string
+
+	// The status of the phone number.
+	PhoneNumberStatus *PhoneNumberStatus
+
+	// The type of phone number.
+	PhoneNumberType PhoneNumberType
+
+	// The tags used to organize, track, or control access for this resource.
+	Tags map[string]string
+
+	// The Amazon Resource Name (ARN) for Amazon Connect instances that phone numbers
+	// are claimed to.
+	TargetArn *string
 
 	noSmithyDocumentSerde
 }
@@ -893,6 +945,33 @@ type LexV2Bot struct {
 	noSmithyDocumentSerde
 }
 
+// Information about phone numbers that have been claimed to your Amazon Connect
+// instance.
+type ListPhoneNumbersSummary struct {
+
+	// The phone number. Phone numbers are formatted [+] [country code] [subscriber
+	// number including area code].
+	PhoneNumber *string
+
+	// The Amazon Resource Name (ARN) of the phone number.
+	PhoneNumberArn *string
+
+	// The ISO country code.
+	PhoneNumberCountryCode PhoneNumberCountryCode
+
+	// The identifier of the phone number.
+	PhoneNumberId *string
+
+	// The type of phone number.
+	PhoneNumberType PhoneNumberType
+
+	// The Amazon Resource Name (ARN) for Amazon Connect instances that phone numbers
+	// are claimed to.
+	TargetArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about which channels are supported, and how many contacts
 // an agent can have on a channel simultaneously.
 type MediaConcurrency struct {
@@ -946,6 +1025,18 @@ type PhoneNumberQuickConnectConfig struct {
 	//
 	// This member is required.
 	PhoneNumber *string
+
+	noSmithyDocumentSerde
+}
+
+// The status of the phone number.
+type PhoneNumberStatus struct {
+
+	// The status message.
+	Message *string
+
+	// The status.
+	Status PhoneNumberWorkflowStatus
 
 	noSmithyDocumentSerde
 }

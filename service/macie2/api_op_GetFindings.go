@@ -30,7 +30,7 @@ func (c *Client) GetFindings(ctx context.Context, params *GetFindingsInput, optF
 type GetFindingsInput struct {
 
 	// An array of strings that lists the unique identifiers for the findings to
-	// retrieve.
+	// retrieve. You can specify as many as 50 unique identifiers in this array.
 	//
 	// This member is required.
 	FindingIds []string

@@ -11432,6 +11432,15 @@ func awsRestjson1_deserializeDocumentClassificationDetails(v **types.Classificat
 				sv.JobId = ptr.String(jtv)
 			}
 
+		case "originType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OriginType to be of type string, got %T instead", value)
+				}
+				sv.OriginType = types.OriginType(jtv)
+			}
+
 		case "result":
 			if err := awsRestjson1_deserializeDocumentClassificationResult(&sv.Result, value); err != nil {
 				return err

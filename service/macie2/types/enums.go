@@ -563,6 +563,22 @@ func (OrderBy) Values() []OrderBy {
 	}
 }
 
+type OriginType string
+
+// Enum values for OriginType
+const (
+	OriginTypeSensitiveDataDiscoveryJob OriginType = "SENSITIVE_DATA_DISCOVERY_JOB"
+)
+
+// Values returns all known values for OriginType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (OriginType) Values() []OriginType {
+	return []OriginType{
+		"SENSITIVE_DATA_DISCOVERY_JOB",
+	}
+}
+
 type RelationshipStatus string
 
 // Enum values for RelationshipStatus

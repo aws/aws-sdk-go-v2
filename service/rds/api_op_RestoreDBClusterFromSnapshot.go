@@ -287,6 +287,12 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// cluster. Valid for: Aurora DB clusters only
 	ScalingConfiguration *types.ScalingConfiguration
 
+	// Contains the scaling configuration of an Aurora Serverless v2 DB cluster. For
+	// more information, see Using Amazon Aurora Serverless v2
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html)
+	// in the Amazon Aurora User Guide.
+	ServerlessV2ScalingConfiguration *types.ServerlessV2ScalingConfiguration
+
 	// Specifies the storage type to be associated with the each DB instance in the
 	// Multi-AZ DB cluster. Valid values: io1 When specified, a value for the Iops
 	// parameter is required. Default: io1 Valid for: Aurora DB clusters and Multi-AZ

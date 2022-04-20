@@ -529,6 +529,92 @@ func awsRestjson1_serializeOpDocumentAssociateLexBotInput(v *AssociateLexBotInpu
 	return nil
 }
 
+type awsRestjson1_serializeOpAssociatePhoneNumberContactFlow struct {
+}
+
+func (*awsRestjson1_serializeOpAssociatePhoneNumberContactFlow) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpAssociatePhoneNumberContactFlow) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*AssociatePhoneNumberContactFlowInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/phone-number/{PhoneNumberId}/contact-flow")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsAssociatePhoneNumberContactFlowInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentAssociatePhoneNumberContactFlowInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsAssociatePhoneNumberContactFlowInput(v *AssociatePhoneNumberContactFlowInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.PhoneNumberId == nil || len(*v.PhoneNumberId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member PhoneNumberId must not be empty")}
+	}
+	if v.PhoneNumberId != nil {
+		if err := encoder.SetURI("PhoneNumberId").String(*v.PhoneNumberId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentAssociatePhoneNumberContactFlowInput(v *AssociatePhoneNumberContactFlowInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ContactFlowId != nil {
+		ok := object.Key("ContactFlowId")
+		ok.String(*v.ContactFlowId)
+	}
+
+	if v.InstanceId != nil {
+		ok := object.Key("InstanceId")
+		ok.String(*v.InstanceId)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpAssociateQueueQuickConnects struct {
 }
 
@@ -789,6 +875,96 @@ func awsRestjson1_serializeOpDocumentAssociateSecurityKeyInput(v *AssociateSecur
 	if v.Key != nil {
 		ok := object.Key("Key")
 		ok.String(*v.Key)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpClaimPhoneNumber struct {
+}
+
+func (*awsRestjson1_serializeOpClaimPhoneNumber) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpClaimPhoneNumber) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ClaimPhoneNumberInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/phone-number/claim")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentClaimPhoneNumberInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsClaimPhoneNumberInput(v *ClaimPhoneNumberInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentClaimPhoneNumberInput(v *ClaimPhoneNumberInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("ClientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.PhoneNumber != nil {
+		ok := object.Key("PhoneNumber")
+		ok.String(*v.PhoneNumber)
+	}
+
+	if v.PhoneNumberDescription != nil {
+		ok := object.Key("PhoneNumberDescription")
+		ok.String(*v.PhoneNumberDescription)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TargetArn != nil {
+		ok := object.Key("TargetArn")
+		ok.String(*v.TargetArn)
 	}
 
 	return nil
@@ -3528,6 +3704,64 @@ func awsRestjson1_serializeOpHttpBindingsDescribeInstanceStorageConfigInput(v *D
 	return nil
 }
 
+type awsRestjson1_serializeOpDescribePhoneNumber struct {
+}
+
+func (*awsRestjson1_serializeOpDescribePhoneNumber) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDescribePhoneNumber) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribePhoneNumberInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/phone-number/{PhoneNumberId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDescribePhoneNumberInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDescribePhoneNumberInput(v *DescribePhoneNumberInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.PhoneNumberId == nil || len(*v.PhoneNumberId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member PhoneNumberId must not be empty")}
+	}
+	if v.PhoneNumberId != nil {
+		if err := encoder.SetURI("PhoneNumberId").String(*v.PhoneNumberId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpDescribeQueue struct {
 }
 
@@ -4401,6 +4635,68 @@ func awsRestjson1_serializeOpHttpBindingsDisassociateLexBotInput(v *Disassociate
 
 	if v.LexRegion != nil {
 		encoder.SetQuery("lexRegion").String(*v.LexRegion)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDisassociatePhoneNumberContactFlow struct {
+}
+
+func (*awsRestjson1_serializeOpDisassociatePhoneNumberContactFlow) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDisassociatePhoneNumberContactFlow) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DisassociatePhoneNumberContactFlowInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/phone-number/{PhoneNumberId}/contact-flow")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDisassociatePhoneNumberContactFlowInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDisassociatePhoneNumberContactFlowInput(v *DisassociatePhoneNumberContactFlowInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.InstanceId != nil {
+		encoder.SetQuery("instanceId").String(*v.InstanceId)
+	}
+
+	if v.PhoneNumberId == nil || len(*v.PhoneNumberId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member PhoneNumberId must not be empty")}
+	}
+	if v.PhoneNumberId != nil {
+		if err := encoder.SetURI("PhoneNumberId").String(*v.PhoneNumberId); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -6063,6 +6359,103 @@ func awsRestjson1_serializeOpHttpBindingsListPhoneNumbersInput(v *ListPhoneNumbe
 	return nil
 }
 
+type awsRestjson1_serializeOpListPhoneNumbersV2 struct {
+}
+
+func (*awsRestjson1_serializeOpListPhoneNumbersV2) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListPhoneNumbersV2) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListPhoneNumbersV2Input)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/phone-number/list")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentListPhoneNumbersV2Input(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListPhoneNumbersV2Input(v *ListPhoneNumbersV2Input, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentListPhoneNumbersV2Input(v *ListPhoneNumbersV2Input, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxResults != 0 {
+		ok := object.Key("MaxResults")
+		ok.Integer(v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.PhoneNumberCountryCodes != nil {
+		ok := object.Key("PhoneNumberCountryCodes")
+		if err := awsRestjson1_serializeDocumentPhoneNumberCountryCodes(v.PhoneNumberCountryCodes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PhoneNumberPrefix != nil {
+		ok := object.Key("PhoneNumberPrefix")
+		ok.String(*v.PhoneNumberPrefix)
+	}
+
+	if v.PhoneNumberTypes != nil {
+		ok := object.Key("PhoneNumberTypes")
+		if err := awsRestjson1_serializeDocumentPhoneNumberTypes(v.PhoneNumberTypes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TargetArn != nil {
+		ok := object.Key("TargetArn")
+		ok.String(*v.TargetArn)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpListPrompts struct {
 }
 
@@ -6961,6 +7354,68 @@ func awsRestjson1_serializeOpHttpBindingsListUsersInput(v *ListUsersInput, encod
 	return nil
 }
 
+type awsRestjson1_serializeOpReleasePhoneNumber struct {
+}
+
+func (*awsRestjson1_serializeOpReleasePhoneNumber) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpReleasePhoneNumber) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ReleasePhoneNumberInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/phone-number/{PhoneNumberId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsReleasePhoneNumberInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsReleasePhoneNumberInput(v *ReleasePhoneNumberInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ClientToken != nil {
+		encoder.SetQuery("clientToken").String(*v.ClientToken)
+	}
+
+	if v.PhoneNumberId == nil || len(*v.PhoneNumberId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member PhoneNumberId must not be empty")}
+	}
+	if v.PhoneNumberId != nil {
+		if err := encoder.SetURI("PhoneNumberId").String(*v.PhoneNumberId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpResumeContactRecording struct {
 }
 
@@ -7034,6 +7489,99 @@ func awsRestjson1_serializeOpDocumentResumeContactRecordingInput(v *ResumeContac
 	if v.InstanceId != nil {
 		ok := object.Key("InstanceId")
 		ok.String(*v.InstanceId)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpSearchAvailablePhoneNumbers struct {
+}
+
+func (*awsRestjson1_serializeOpSearchAvailablePhoneNumbers) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpSearchAvailablePhoneNumbers) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*SearchAvailablePhoneNumbersInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/phone-number/search-available")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentSearchAvailablePhoneNumbersInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsSearchAvailablePhoneNumbersInput(v *SearchAvailablePhoneNumbersInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentSearchAvailablePhoneNumbersInput(v *SearchAvailablePhoneNumbersInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxResults != 0 {
+		ok := object.Key("MaxResults")
+		ok.Integer(v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if len(v.PhoneNumberCountryCode) > 0 {
+		ok := object.Key("PhoneNumberCountryCode")
+		ok.String(string(v.PhoneNumberCountryCode))
+	}
+
+	if v.PhoneNumberPrefix != nil {
+		ok := object.Key("PhoneNumberPrefix")
+		ok.String(*v.PhoneNumberPrefix)
+	}
+
+	if len(v.PhoneNumberType) > 0 {
+		ok := object.Key("PhoneNumberType")
+		ok.String(string(v.PhoneNumberType))
+	}
+
+	if v.TargetArn != nil {
+		ok := object.Key("TargetArn")
+		ok.String(*v.TargetArn)
 	}
 
 	return nil
@@ -9237,6 +9785,92 @@ func awsRestjson1_serializeOpDocumentUpdateInstanceStorageConfigInput(v *UpdateI
 		if err := awsRestjson1_serializeDocumentInstanceStorageConfig(v.StorageConfig, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpUpdatePhoneNumber struct {
+}
+
+func (*awsRestjson1_serializeOpUpdatePhoneNumber) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdatePhoneNumber) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdatePhoneNumberInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/phone-number/{PhoneNumberId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdatePhoneNumberInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdatePhoneNumberInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdatePhoneNumberInput(v *UpdatePhoneNumberInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.PhoneNumberId == nil || len(*v.PhoneNumberId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member PhoneNumberId must not be empty")}
+	}
+	if v.PhoneNumberId != nil {
+		if err := encoder.SetURI("PhoneNumberId").String(*v.PhoneNumberId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdatePhoneNumberInput(v *UpdatePhoneNumberInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("ClientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.TargetArn != nil {
+		ok := object.Key("TargetArn")
+		ok.String(*v.TargetArn)
 	}
 
 	return nil
@@ -11491,6 +12125,17 @@ func awsRestjson1_serializeDocumentPermissionsList(v []string, value smithyjson.
 	return nil
 }
 
+func awsRestjson1_serializeDocumentPhoneNumberCountryCodes(v []types.PhoneNumberCountryCode, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentPhoneNumberQuickConnectConfig(v *types.PhoneNumberQuickConnectConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -11500,6 +12145,17 @@ func awsRestjson1_serializeDocumentPhoneNumberQuickConnectConfig(v *types.PhoneN
 		ok.String(*v.PhoneNumber)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPhoneNumberTypes(v []types.PhoneNumberType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
 	return nil
 }
 
