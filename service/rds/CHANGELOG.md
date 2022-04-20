@@ -1,3 +1,7 @@
+# v1.20.0 (2022-04-20)
+
+* **Feature**: Added a new cluster-level attribute to set the capacity range for Aurora Serverless v2 instances.
+
 # v1.19.0 (2022-04-15)
 
 * **Feature**: Removes Amazon RDS on VMware with the deletion of APIs related to Custom Availability Zones and Media installation

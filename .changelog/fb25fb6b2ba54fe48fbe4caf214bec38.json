@@ -1,8 +1,0 @@
-{
-    "id": "fb25fb6b-2ba5-4fe4-8fbe-4caf214bec38",
-    "type": "feature",
-    "description": "Added a new cluster-level attribute to set the capacity range for Aurora Serverless v2 instances.",
-    "modules": [
-        "service/rds"
-    ]
-}

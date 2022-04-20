@@ -1,8 +1,0 @@
-{
-    "id": "f809a62b-edde-4d49-9054-60d2a60b1dc4",
-    "type": "feature",
-    "description": "Removed required annotation from input fields in Describe operations requests. Added quotaValue to ServiceQuotaExceededException",
-    "modules": [
-        "service/mgn"
-    ]
-}

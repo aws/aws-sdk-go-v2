@@ -1,3 +1,7 @@
+# v1.14.0 (2022-04-20)
+
+* **Feature**: Removed required annotation from input fields in Describe operations requests. Added quotaValue to ServiceQuotaExceededException
+
 # v1.13.3 (2022-03-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions
