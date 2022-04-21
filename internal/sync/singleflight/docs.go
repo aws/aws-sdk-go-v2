@@ -4,5 +4,4 @@
 // and unversioned golang.org/x/sync module.
 //
 // https://github.com/golang/sync/tree/67f06af15bc961c363a7260195bcd53487529a21/singleflight
-
 package singleflight
