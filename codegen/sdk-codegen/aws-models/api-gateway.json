@@ -8318,6 +8318,7 @@
                     "traits": {
                         "smithy.api#documentation": "<p>[Required] Specifies a put integration request's HTTP method.</p>",
                         "smithy.api#httpLabel": {},
+                        "smithy.api#jsonName": "requestHttpMethod",
                         "smithy.api#required": {}
                     }
                 },
