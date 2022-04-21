@@ -367,6 +367,241 @@ func awsRestjson1_serializeOpDocumentBatchDisassociateProjectAssetsInput(v *Batc
 	return nil
 }
 
+type awsRestjson1_serializeOpBatchGetAssetPropertyAggregates struct {
+}
+
+func (*awsRestjson1_serializeOpBatchGetAssetPropertyAggregates) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpBatchGetAssetPropertyAggregates) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*BatchGetAssetPropertyAggregatesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/properties/batch/aggregates")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentBatchGetAssetPropertyAggregatesInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsBatchGetAssetPropertyAggregatesInput(v *BatchGetAssetPropertyAggregatesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentBatchGetAssetPropertyAggregatesInput(v *BatchGetAssetPropertyAggregatesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Entries != nil {
+		ok := object.Key("entries")
+		if err := awsRestjson1_serializeDocumentBatchGetAssetPropertyAggregatesEntries(v.Entries, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("maxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpBatchGetAssetPropertyValue struct {
+}
+
+func (*awsRestjson1_serializeOpBatchGetAssetPropertyValue) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpBatchGetAssetPropertyValue) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*BatchGetAssetPropertyValueInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/properties/batch/latest")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentBatchGetAssetPropertyValueInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsBatchGetAssetPropertyValueInput(v *BatchGetAssetPropertyValueInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentBatchGetAssetPropertyValueInput(v *BatchGetAssetPropertyValueInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Entries != nil {
+		ok := object.Key("entries")
+		if err := awsRestjson1_serializeDocumentBatchGetAssetPropertyValueEntries(v.Entries, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpBatchGetAssetPropertyValueHistory struct {
+}
+
+func (*awsRestjson1_serializeOpBatchGetAssetPropertyValueHistory) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpBatchGetAssetPropertyValueHistory) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*BatchGetAssetPropertyValueHistoryInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/properties/batch/history")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentBatchGetAssetPropertyValueHistoryInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsBatchGetAssetPropertyValueHistoryInput(v *BatchGetAssetPropertyValueHistoryInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentBatchGetAssetPropertyValueHistoryInput(v *BatchGetAssetPropertyValueHistoryInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Entries != nil {
+		ok := object.Key("entries")
+		if err := awsRestjson1_serializeDocumentBatchGetAssetPropertyValueHistoryEntries(v.Entries, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("maxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpBatchPutAssetPropertyValue struct {
 }
 
@@ -4885,6 +5120,17 @@ func awsRestjson1_serializeOpDocumentUpdateProjectInput(v *UpdateProjectInput, v
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAggregateTypes(v []types.AggregateType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAlarms(v *types.Alarms, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5196,6 +5442,182 @@ func awsRestjson1_serializeDocumentAttribute(v *types.Attribute, value smithyjso
 	if v.DefaultValue != nil {
 		ok := object.Key("defaultValue")
 		ok.String(*v.DefaultValue)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentBatchGetAssetPropertyAggregatesEntries(v []types.BatchGetAssetPropertyAggregatesEntry, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentBatchGetAssetPropertyAggregatesEntry(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentBatchGetAssetPropertyAggregatesEntry(v *types.BatchGetAssetPropertyAggregatesEntry, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AggregateTypes != nil {
+		ok := object.Key("aggregateTypes")
+		if err := awsRestjson1_serializeDocumentAggregateTypes(v.AggregateTypes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AssetId != nil {
+		ok := object.Key("assetId")
+		ok.String(*v.AssetId)
+	}
+
+	if v.EndDate != nil {
+		ok := object.Key("endDate")
+		ok.Double(smithytime.FormatEpochSeconds(*v.EndDate))
+	}
+
+	if v.EntryId != nil {
+		ok := object.Key("entryId")
+		ok.String(*v.EntryId)
+	}
+
+	if v.PropertyAlias != nil {
+		ok := object.Key("propertyAlias")
+		ok.String(*v.PropertyAlias)
+	}
+
+	if v.PropertyId != nil {
+		ok := object.Key("propertyId")
+		ok.String(*v.PropertyId)
+	}
+
+	if v.Qualities != nil {
+		ok := object.Key("qualities")
+		if err := awsRestjson1_serializeDocumentQualities(v.Qualities, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Resolution != nil {
+		ok := object.Key("resolution")
+		ok.String(*v.Resolution)
+	}
+
+	if v.StartDate != nil {
+		ok := object.Key("startDate")
+		ok.Double(smithytime.FormatEpochSeconds(*v.StartDate))
+	}
+
+	if len(v.TimeOrdering) > 0 {
+		ok := object.Key("timeOrdering")
+		ok.String(string(v.TimeOrdering))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentBatchGetAssetPropertyValueEntries(v []types.BatchGetAssetPropertyValueEntry, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentBatchGetAssetPropertyValueEntry(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentBatchGetAssetPropertyValueEntry(v *types.BatchGetAssetPropertyValueEntry, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AssetId != nil {
+		ok := object.Key("assetId")
+		ok.String(*v.AssetId)
+	}
+
+	if v.EntryId != nil {
+		ok := object.Key("entryId")
+		ok.String(*v.EntryId)
+	}
+
+	if v.PropertyAlias != nil {
+		ok := object.Key("propertyAlias")
+		ok.String(*v.PropertyAlias)
+	}
+
+	if v.PropertyId != nil {
+		ok := object.Key("propertyId")
+		ok.String(*v.PropertyId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentBatchGetAssetPropertyValueHistoryEntries(v []types.BatchGetAssetPropertyValueHistoryEntry, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentBatchGetAssetPropertyValueHistoryEntry(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentBatchGetAssetPropertyValueHistoryEntry(v *types.BatchGetAssetPropertyValueHistoryEntry, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AssetId != nil {
+		ok := object.Key("assetId")
+		ok.String(*v.AssetId)
+	}
+
+	if v.EndDate != nil {
+		ok := object.Key("endDate")
+		ok.Double(smithytime.FormatEpochSeconds(*v.EndDate))
+	}
+
+	if v.EntryId != nil {
+		ok := object.Key("entryId")
+		ok.String(*v.EntryId)
+	}
+
+	if v.PropertyAlias != nil {
+		ok := object.Key("propertyAlias")
+		ok.String(*v.PropertyAlias)
+	}
+
+	if v.PropertyId != nil {
+		ok := object.Key("propertyId")
+		ok.String(*v.PropertyId)
+	}
+
+	if v.Qualities != nil {
+		ok := object.Key("qualities")
+		if err := awsRestjson1_serializeDocumentQualities(v.Qualities, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.StartDate != nil {
+		ok := object.Key("startDate")
+		ok.Double(smithytime.FormatEpochSeconds(*v.StartDate))
+	}
+
+	if len(v.TimeOrdering) > 0 {
+		ok := object.Key("timeOrdering")
+		ok.String(string(v.TimeOrdering))
 	}
 
 	return nil
@@ -5641,6 +6063,17 @@ func awsRestjson1_serializeDocumentPutAssetPropertyValueEntry(v *types.PutAssetP
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentQualities(v []types.Quality, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
 	return nil
 }
 

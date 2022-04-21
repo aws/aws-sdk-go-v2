@@ -68,8 +68,8 @@ type UpdateSMBFileShareInput struct {
 	CaseSensitivity types.CaseSensitivity
 
 	// The default storage class for objects put into an Amazon S3 bucket by the S3
-	// File Gateway. The default value is S3_INTELLIGENT_TIERING. Optional. Valid
-	// Values: S3_STANDARD | S3_INTELLIGENT_TIERING | S3_STANDARD_IA | S3_ONEZONE_IA
+	// File Gateway. The default value is S3_STANDARD. Optional. Valid Values:
+	// S3_STANDARD | S3_INTELLIGENT_TIERING | S3_STANDARD_IA | S3_ONEZONE_IA
 	DefaultStorageClass *string
 
 	// The name of the file share. Optional. FileShareName must be set if an S3 prefix

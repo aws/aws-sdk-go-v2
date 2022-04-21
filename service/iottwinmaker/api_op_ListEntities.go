@@ -35,7 +35,8 @@ type ListEntitiesInput struct {
 	// This member is required.
 	WorkspaceId *string
 
-	// A list of objects that filter the request.
+	// A list of objects that filter the request. Only one object is accepted as a
+	// valid input.
 	Filters []types.ListEntitiesFilter
 
 	// The maximum number of results to display.

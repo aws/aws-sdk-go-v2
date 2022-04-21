@@ -1,0 +1,8 @@
+{
+    "id": "bb8a9d27-2b68-47b4-a8c5-1e43a6e44f59",
+    "type": "feature",
+    "description": "This release adds APIs to create, read, delete, list, and batch read of Glue custom entity types",
+    "modules": [
+        "service/glue"
+    ]
+}

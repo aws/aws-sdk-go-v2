@@ -338,7 +338,8 @@ type LambdaFunction struct {
 	noSmithyDocumentSerde
 }
 
-// An object that filters items in a list of component types.
+// An object that filters items in a list of component types. Only one object is
+// accepted as a valid input.
 //
 // The following types satisfy this interface:
 //  ListComponentTypesFilterMemberExtendsFrom
@@ -578,7 +579,34 @@ type PropertyValue struct {
 	// This member is required.
 	Value *DataValue
 
-	// Timestamp represented in ISO 8601 format
+	// ISO8601 DateTime of a value for a time series property. The time for when the
+	// property value was recorded in ISO 8601 format:
+	// YYYY-MM-DDThh:mm:ss[.SSSSSSSSS][Z/±HH:mm].
+	//
+	// * [YYYY]: year
+	//
+	// * [MM]: month
+	//
+	// *
+	// [DD]: day
+	//
+	// * [hh]: hour
+	//
+	// * [mm]: minute
+	//
+	// * [ss]: seconds
+	//
+	// * [.SSSSSSSSS]:
+	// additional precision, where precedence is maintained. For example: [.573123] is
+	// equal to 573123000 nanoseconds.
+	//
+	// * Z: default timezone UTC
+	//
+	// * ± HH:mm: time zone
+	// offset in Hours and Minutes.
+	//
+	// Required sub-fields: YYYY-MM-DDThh:mm:ss and
+	// [Z/±HH:mm]
 	Time *string
 
 	// The timestamp of a value for a time series property.
@@ -590,7 +618,10 @@ type PropertyValue struct {
 	noSmithyDocumentSerde
 }
 
-// An object that specifies information about time series property values.
+// An object that specifies information about time series property values. This
+// object is used and consumed by the BatchPutPropertyValues
+// (https://docs.aws.amazon.com/iot-twinmaker/latest/apireference/API_BatchPutPropertyValues.html)
+// action.
 type PropertyValueEntry struct {
 
 	// An object that contains information about the entity that has the property.

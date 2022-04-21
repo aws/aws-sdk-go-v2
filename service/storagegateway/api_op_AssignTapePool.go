@@ -14,7 +14,7 @@ import (
 // archived in the S3 storage class that is associated with the pool. When you use
 // your backup application to eject the tape, the tape is archived directly into
 // the S3 storage class (S3 Glacier or S3 Glacier Deep Archive) that corresponds to
-// the pool. Valid Values: GLACIER | DEEP_ARCHIVE
+// the pool.
 func (c *Client) AssignTapePool(ctx context.Context, params *AssignTapePoolInput, optFns ...func(*Options)) (*AssignTapePoolOutput, error) {
 	if params == nil {
 		params = &AssignTapePoolInput{}
@@ -36,7 +36,7 @@ type AssignTapePoolInput struct {
 	// this pool is archived in the S3 storage class that is associated with the pool.
 	// When you use your backup application to eject the tape, the tape is archived
 	// directly into the storage class (S3 Glacier or S3 Glacier Deep Archive) that
-	// corresponds to the pool. Valid Values: GLACIER | DEEP_ARCHIVE
+	// corresponds to the pool.
 	//
 	// This member is required.
 	PoolId *string

@@ -30,7 +30,7 @@ func (c *Client) UpdateVodSource(ctx context.Context, params *UpdateVodSourceInp
 
 type UpdateVodSourceInput struct {
 
-	// An array of HTTP package configurations for the VOD source on this account.
+	// A list of HTTP package configurations for the VOD source on this account.
 	//
 	// This member is required.
 	HttpPackageConfigurations []types.HttpPackageConfiguration
@@ -59,7 +59,7 @@ type UpdateVodSourceOutput struct {
 	// The HTTP package configurations.
 	HttpPackageConfigurations []types.HttpPackageConfiguration
 
-	// The ARN for the VOD source.
+	// The last modified time of the VOD source.
 	LastModifiedTime *time.Time
 
 	// The name of the source location associated with the VOD source.

@@ -54,7 +54,7 @@ type DescribeVodSourceOutput struct {
 	// The HTTP package configurations.
 	HttpPackageConfigurations []types.HttpPackageConfiguration
 
-	// The ARN for the VOD source.
+	// The last modified time of the VOD source.
 	LastModifiedTime *time.Time
 
 	// The name of the source location associated with the VOD source.

@@ -46,7 +46,9 @@ type DescribeGatewayInformationInput struct {
 type DescribeGatewayInformationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that is used
-	// to monitor events in the gateway.
+	// to monitor events in the gateway. This field only only exist and returns once it
+	// have been chosen and set by the SGW service, based on the OS version of the
+	// gateway VM
 	CloudWatchLogGroupARN *string
 
 	// Date after which this gateway will not receive software updates for new features
@@ -100,7 +102,8 @@ type DescribeGatewayInformationOutput struct {
 
 	// The date on which the last software update was applied to the gateway. If the
 	// gateway has never been updated, this field does not return a value in the
-	// response.
+	// response. This only only exist and returns once it have been chosen and set by
+	// the SGW service, based on the OS version of the gateway VM
 	LastSoftwareUpdate *string
 
 	// The date on which an update to the gateway is available. This date is in the

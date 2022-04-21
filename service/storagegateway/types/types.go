@@ -43,7 +43,7 @@ type AutomaticTapeCreationRule struct {
 	// this pool is archived in the Amazon S3 storage class that is associated with the
 	// pool. When you use your backup application to eject the tape, the tape is
 	// archived directly into the storage class (S3 Glacier or S3 Glacier Deep Archive)
-	// that corresponds to the pool. Valid Values: GLACIER | DEEP_ARCHIVE
+	// that corresponds to the pool.
 	//
 	// This member is required.
 	PoolId *string
@@ -187,7 +187,11 @@ type CachediSCSIVolume struct {
 	// accurate for random write patterns. VolumeUsedInBytes is different from the
 	// compressed size of the volume, which is the value that is used to calculate your
 	// bill. This value is not available for volumes created prior to May 13, 2015,
-	// until you store data on the volume.
+	// until you store data on the volume. If you use a delete tool that overwrites the
+	// data on your volume with random data, your usage will not be reduced. This is
+	// because the random data is not compressible. If you want to reduce the amount of
+	// billed storage on your volume, we recommend overwriting your files with zeros to
+	// compress the data to a negligible amount of actual storage.
 	VolumeUsedInBytes *int64
 
 	// An VolumeiSCSIAttributes object that represents a collection of iSCSI attributes
@@ -483,8 +487,8 @@ type NFSFileShareInfo struct {
 	ClientList []string
 
 	// The default storage class for objects put into an Amazon S3 bucket by the S3
-	// File Gateway. The default value is S3_INTELLIGENT_TIERING. Optional. Valid
-	// Values: S3_STANDARD | S3_INTELLIGENT_TIERING | S3_STANDARD_IA | S3_ONEZONE_IA
+	// File Gateway. The default value is S3_STANDARD. Optional. Valid Values:
+	// S3_STANDARD | S3_INTELLIGENT_TIERING | S3_STANDARD_IA | S3_ONEZONE_IA
 	DefaultStorageClass *string
 
 	// The Amazon Resource Name (ARN) of the file share.
@@ -673,8 +677,8 @@ type SMBFileShareInfo struct {
 	CaseSensitivity CaseSensitivity
 
 	// The default storage class for objects put into an Amazon S3 bucket by the S3
-	// File Gateway. The default value is S3_INTELLIGENT_TIERING. Optional. Valid
-	// Values: S3_STANDARD | S3_INTELLIGENT_TIERING | S3_STANDARD_IA | S3_ONEZONE_IA
+	// File Gateway. The default value is S3_STANDARD. Optional. Valid Values:
+	// S3_STANDARD | S3_INTELLIGENT_TIERING | S3_STANDARD_IA | S3_ONEZONE_IA
 	DefaultStorageClass *string
 
 	// The Amazon Resource Name (ARN) of the file share.
@@ -934,7 +938,7 @@ type Tape struct {
 	// pool are archived in the S3 storage class that is associated with the pool. When
 	// you use your backup application to eject the tape, the tape is archived directly
 	// into the storage class (S3 Glacier or S3 Glacier Deep Archive) that corresponds
-	// to the pool. Valid Values: GLACIER | DEEP_ARCHIVE
+	// to the pool.
 	PoolId *string
 
 	// For archiving virtual tapes, indicates how much data remains to be uploaded
@@ -989,8 +993,7 @@ type TapeArchive struct {
 	PoolEntryDate *time.Time
 
 	// The ID of the pool that was used to archive the tape. The tapes in this pool are
-	// archived in the S3 storage class that is associated with the pool. Valid Values:
-	// GLACIER | DEEP_ARCHIVE
+	// archived in the S3 storage class that is associated with the pool.
 	PoolId *string
 
 	// If the archived tape is subject to tape retention lock, the date that the
@@ -1042,7 +1045,7 @@ type TapeInfo struct {
 	// this pool is archived in the S3 storage class that is associated with the pool.
 	// When you use your backup application to eject the tape, the tape is archived
 	// directly into the storage class (S3 Glacier or S3 Glacier Deep Archive) that
-	// corresponds to the pool. Valid Values: GLACIER | DEEP_ARCHIVE
+	// corresponds to the pool.
 	PoolId *string
 
 	// The date that the tape became subject to tape retention lock.

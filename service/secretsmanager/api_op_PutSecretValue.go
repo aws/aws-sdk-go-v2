@@ -33,7 +33,7 @@ import (
 // because you can't modify an existing version; you can only create new ones.
 // Required permissions: secretsmanager:PutSecretValue. For more information, see
 // IAM policy actions for Secrets Manager
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions)
+// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions)
 // and Authentication and access control in Secrets Manager
 // (https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 func (c *Client) PutSecretValue(ctx context.Context, params *PutSecretValueInput, optFns ...func(*Options)) (*PutSecretValueOutput, error) {
@@ -54,8 +54,10 @@ func (c *Client) PutSecretValue(ctx context.Context, params *PutSecretValueInput
 type PutSecretValueInput struct {
 
 	// The ARN or name of the secret to add a new version to. For an ARN, we recommend
-	// that you specify a complete ARN rather than a partial ARN. If the secret doesn't
-	// already exist, use CreateSecret instead.
+	// that you specify a complete ARN rather than a partial ARN. See Finding a secret
+	// from a partial ARN
+	// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen).
+	// If the secret doesn't already exist, use CreateSecret instead.
 	//
 	// This member is required.
 	SecretId *string

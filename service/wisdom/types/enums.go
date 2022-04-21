@@ -164,6 +164,58 @@ func (KnowledgeBaseType) Values() []KnowledgeBaseType {
 	}
 }
 
+type RecommendationSourceType string
+
+// Enum values for RecommendationSourceType
+const (
+	RecommendationSourceTypeIssueDetection RecommendationSourceType = "ISSUE_DETECTION"
+	RecommendationSourceTypeRuleEvaluation RecommendationSourceType = "RULE_EVALUATION"
+	RecommendationSourceTypeOther          RecommendationSourceType = "OTHER"
+)
+
+// Values returns all known values for RecommendationSourceType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RecommendationSourceType) Values() []RecommendationSourceType {
+	return []RecommendationSourceType{
+		"ISSUE_DETECTION",
+		"RULE_EVALUATION",
+		"OTHER",
+	}
+}
+
+type RecommendationTriggerType string
+
+// Enum values for RecommendationTriggerType
+const (
+	RecommendationTriggerTypeQuery RecommendationTriggerType = "QUERY"
+)
+
+// Values returns all known values for RecommendationTriggerType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RecommendationTriggerType) Values() []RecommendationTriggerType {
+	return []RecommendationTriggerType{
+		"QUERY",
+	}
+}
+
+type RecommendationType string
+
+// Enum values for RecommendationType
+const (
+	RecommendationTypeKnowledgeContent RecommendationType = "KNOWLEDGE_CONTENT"
+)
+
+// Values returns all known values for RecommendationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RecommendationType) Values() []RecommendationType {
+	return []RecommendationType{
+		"KNOWLEDGE_CONTENT",
+	}
+}
+
 type RelevanceLevel string
 
 // Enum values for RelevanceLevel

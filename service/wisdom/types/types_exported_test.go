@@ -43,6 +43,24 @@ func ExampleAssistantAssociationOutputData_outputUsage() {
 
 var _ *types.KnowledgeBaseAssociationData
 
+func ExampleRecommendationTriggerData_outputUsage() {
+	var union types.RecommendationTriggerData
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.RecommendationTriggerDataMemberQuery:
+		_ = v.Value // Value is types.QueryRecommendationTriggerData
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.QueryRecommendationTriggerData
+
 func ExampleSourceConfiguration_outputUsage() {
 	var union types.SourceConfiguration
 	// type switches can be used to check the union value

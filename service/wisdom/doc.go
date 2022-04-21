@@ -3,8 +3,9 @@
 // Package wisdom provides the API client, operations, and parameter types for
 // Amazon Connect Wisdom Service.
 //
-// All Amazon Connect Wisdom functionality is accessible using the API. For
-// example, you can create an assistant and a knowledge base. Some more advanced
-// features are only accessible using the Wisdom API. For example, you can manually
-// manage content by uploading custom files and control their lifecycle.
+// Amazon Connect Wisdom delivers agents the information they need to solve
+// customer issues as they're actively speaking with customers. Agents can search
+// across connected repositories from within their agent desktop to find answers
+// quickly. Use the Amazon Connect Wisdom APIs to create an assistant and a
+// knowledge base, for example, or manage content by uploading custom files.
 package wisdom

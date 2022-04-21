@@ -66,6 +66,9 @@ type GetRecommendationsOutput struct {
 	// This member is required.
 	Recommendations []types.RecommendationData
 
+	// The triggers corresponding to recommendations.
+	Triggers []types.RecommendationTrigger
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

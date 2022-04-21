@@ -78,7 +78,7 @@ type CreateTapesInput struct {
 	// this pool is archived in the S3 storage class that is associated with the pool.
 	// When you use your backup application to eject the tape, the tape is archived
 	// directly into the storage class (S3 Glacier or S3 Glacier Deep Archive) that
-	// corresponds to the pool. Valid Values: GLACIER | DEEP_ARCHIVE
+	// corresponds to the pool.
 	PoolId *string
 
 	// A list of up to 50 tags that can be assigned to a virtual tape. Each tag is a

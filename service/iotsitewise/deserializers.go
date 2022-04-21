@@ -541,6 +541,531 @@ func awsRestjson1_deserializeOpDocumentBatchDisassociateProjectAssetsOutput(v **
 	return nil
 }
 
+type awsRestjson1_deserializeOpBatchGetAssetPropertyAggregates struct {
+}
+
+func (*awsRestjson1_deserializeOpBatchGetAssetPropertyAggregates) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpBatchGetAssetPropertyAggregates) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorBatchGetAssetPropertyAggregates(response, &metadata)
+	}
+	output := &BatchGetAssetPropertyAggregatesOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentBatchGetAssetPropertyAggregatesOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorBatchGetAssetPropertyAggregates(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("InternalFailureException", errorCode):
+		return awsRestjson1_deserializeErrorInternalFailureException(response, errorBody)
+
+	case strings.EqualFold("InvalidRequestException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidRequestException(response, errorBody)
+
+	case strings.EqualFold("ServiceUnavailableException", errorCode):
+		return awsRestjson1_deserializeErrorServiceUnavailableException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentBatchGetAssetPropertyAggregatesOutput(v **BatchGetAssetPropertyAggregatesOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *BatchGetAssetPropertyAggregatesOutput
+	if *v == nil {
+		sv = &BatchGetAssetPropertyAggregatesOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "errorEntries":
+			if err := awsRestjson1_deserializeDocumentBatchGetAssetPropertyAggregatesErrorEntries(&sv.ErrorEntries, value); err != nil {
+				return err
+			}
+
+		case "nextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
+			}
+
+		case "skippedEntries":
+			if err := awsRestjson1_deserializeDocumentBatchGetAssetPropertyAggregatesSkippedEntries(&sv.SkippedEntries, value); err != nil {
+				return err
+			}
+
+		case "successEntries":
+			if err := awsRestjson1_deserializeDocumentBatchGetAssetPropertyAggregatesSuccessEntries(&sv.SuccessEntries, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+type awsRestjson1_deserializeOpBatchGetAssetPropertyValue struct {
+}
+
+func (*awsRestjson1_deserializeOpBatchGetAssetPropertyValue) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpBatchGetAssetPropertyValue) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorBatchGetAssetPropertyValue(response, &metadata)
+	}
+	output := &BatchGetAssetPropertyValueOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentBatchGetAssetPropertyValueOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorBatchGetAssetPropertyValue(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("InternalFailureException", errorCode):
+		return awsRestjson1_deserializeErrorInternalFailureException(response, errorBody)
+
+	case strings.EqualFold("InvalidRequestException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidRequestException(response, errorBody)
+
+	case strings.EqualFold("ServiceUnavailableException", errorCode):
+		return awsRestjson1_deserializeErrorServiceUnavailableException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentBatchGetAssetPropertyValueOutput(v **BatchGetAssetPropertyValueOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *BatchGetAssetPropertyValueOutput
+	if *v == nil {
+		sv = &BatchGetAssetPropertyValueOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "errorEntries":
+			if err := awsRestjson1_deserializeDocumentBatchGetAssetPropertyValueErrorEntries(&sv.ErrorEntries, value); err != nil {
+				return err
+			}
+
+		case "nextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
+			}
+
+		case "skippedEntries":
+			if err := awsRestjson1_deserializeDocumentBatchGetAssetPropertyValueSkippedEntries(&sv.SkippedEntries, value); err != nil {
+				return err
+			}
+
+		case "successEntries":
+			if err := awsRestjson1_deserializeDocumentBatchGetAssetPropertyValueSuccessEntries(&sv.SuccessEntries, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+type awsRestjson1_deserializeOpBatchGetAssetPropertyValueHistory struct {
+}
+
+func (*awsRestjson1_deserializeOpBatchGetAssetPropertyValueHistory) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpBatchGetAssetPropertyValueHistory) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorBatchGetAssetPropertyValueHistory(response, &metadata)
+	}
+	output := &BatchGetAssetPropertyValueHistoryOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentBatchGetAssetPropertyValueHistoryOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorBatchGetAssetPropertyValueHistory(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("InternalFailureException", errorCode):
+		return awsRestjson1_deserializeErrorInternalFailureException(response, errorBody)
+
+	case strings.EqualFold("InvalidRequestException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidRequestException(response, errorBody)
+
+	case strings.EqualFold("ServiceUnavailableException", errorCode):
+		return awsRestjson1_deserializeErrorServiceUnavailableException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentBatchGetAssetPropertyValueHistoryOutput(v **BatchGetAssetPropertyValueHistoryOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *BatchGetAssetPropertyValueHistoryOutput
+	if *v == nil {
+		sv = &BatchGetAssetPropertyValueHistoryOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "errorEntries":
+			if err := awsRestjson1_deserializeDocumentBatchGetAssetPropertyValueHistoryErrorEntries(&sv.ErrorEntries, value); err != nil {
+				return err
+			}
+
+		case "nextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
+			}
+
+		case "skippedEntries":
+			if err := awsRestjson1_deserializeDocumentBatchGetAssetPropertyValueHistorySkippedEntries(&sv.SkippedEntries, value); err != nil {
+				return err
+			}
+
+		case "successEntries":
+			if err := awsRestjson1_deserializeDocumentBatchGetAssetPropertyValueHistorySuccessEntries(&sv.SuccessEntries, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 type awsRestjson1_deserializeOpBatchPutAssetPropertyValue struct {
 }
 
@@ -12753,6 +13278,951 @@ func awsRestjson1_deserializeDocumentBatchDisassociateProjectAssetsErrors(v *[]t
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentBatchGetAssetPropertyAggregatesErrorEntries(v *[]types.BatchGetAssetPropertyAggregatesErrorEntry, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.BatchGetAssetPropertyAggregatesErrorEntry
+	if *v == nil {
+		cv = []types.BatchGetAssetPropertyAggregatesErrorEntry{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.BatchGetAssetPropertyAggregatesErrorEntry
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentBatchGetAssetPropertyAggregatesErrorEntry(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentBatchGetAssetPropertyAggregatesErrorEntry(v **types.BatchGetAssetPropertyAggregatesErrorEntry, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BatchGetAssetPropertyAggregatesErrorEntry
+	if *v == nil {
+		sv = &types.BatchGetAssetPropertyAggregatesErrorEntry{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "entryId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EntryId to be of type string, got %T instead", value)
+				}
+				sv.EntryId = ptr.String(jtv)
+			}
+
+		case "errorCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BatchGetAssetPropertyAggregatesErrorCode to be of type string, got %T instead", value)
+				}
+				sv.ErrorCode = types.BatchGetAssetPropertyAggregatesErrorCode(jtv)
+			}
+
+		case "errorMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
+				}
+				sv.ErrorMessage = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentBatchGetAssetPropertyAggregatesErrorInfo(v **types.BatchGetAssetPropertyAggregatesErrorInfo, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BatchGetAssetPropertyAggregatesErrorInfo
+	if *v == nil {
+		sv = &types.BatchGetAssetPropertyAggregatesErrorInfo{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "errorCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BatchGetAssetPropertyAggregatesErrorCode to be of type string, got %T instead", value)
+				}
+				sv.ErrorCode = types.BatchGetAssetPropertyAggregatesErrorCode(jtv)
+			}
+
+		case "errorTimestamp":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.ErrorTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentBatchGetAssetPropertyAggregatesSkippedEntries(v *[]types.BatchGetAssetPropertyAggregatesSkippedEntry, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.BatchGetAssetPropertyAggregatesSkippedEntry
+	if *v == nil {
+		cv = []types.BatchGetAssetPropertyAggregatesSkippedEntry{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.BatchGetAssetPropertyAggregatesSkippedEntry
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentBatchGetAssetPropertyAggregatesSkippedEntry(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentBatchGetAssetPropertyAggregatesSkippedEntry(v **types.BatchGetAssetPropertyAggregatesSkippedEntry, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BatchGetAssetPropertyAggregatesSkippedEntry
+	if *v == nil {
+		sv = &types.BatchGetAssetPropertyAggregatesSkippedEntry{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "completionStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BatchEntryCompletionStatus to be of type string, got %T instead", value)
+				}
+				sv.CompletionStatus = types.BatchEntryCompletionStatus(jtv)
+			}
+
+		case "entryId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EntryId to be of type string, got %T instead", value)
+				}
+				sv.EntryId = ptr.String(jtv)
+			}
+
+		case "errorInfo":
+			if err := awsRestjson1_deserializeDocumentBatchGetAssetPropertyAggregatesErrorInfo(&sv.ErrorInfo, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentBatchGetAssetPropertyAggregatesSuccessEntries(v *[]types.BatchGetAssetPropertyAggregatesSuccessEntry, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.BatchGetAssetPropertyAggregatesSuccessEntry
+	if *v == nil {
+		cv = []types.BatchGetAssetPropertyAggregatesSuccessEntry{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.BatchGetAssetPropertyAggregatesSuccessEntry
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentBatchGetAssetPropertyAggregatesSuccessEntry(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentBatchGetAssetPropertyAggregatesSuccessEntry(v **types.BatchGetAssetPropertyAggregatesSuccessEntry, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BatchGetAssetPropertyAggregatesSuccessEntry
+	if *v == nil {
+		sv = &types.BatchGetAssetPropertyAggregatesSuccessEntry{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "aggregatedValues":
+			if err := awsRestjson1_deserializeDocumentAggregatedValues(&sv.AggregatedValues, value); err != nil {
+				return err
+			}
+
+		case "entryId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EntryId to be of type string, got %T instead", value)
+				}
+				sv.EntryId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentBatchGetAssetPropertyValueErrorEntries(v *[]types.BatchGetAssetPropertyValueErrorEntry, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.BatchGetAssetPropertyValueErrorEntry
+	if *v == nil {
+		cv = []types.BatchGetAssetPropertyValueErrorEntry{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.BatchGetAssetPropertyValueErrorEntry
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentBatchGetAssetPropertyValueErrorEntry(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentBatchGetAssetPropertyValueErrorEntry(v **types.BatchGetAssetPropertyValueErrorEntry, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BatchGetAssetPropertyValueErrorEntry
+	if *v == nil {
+		sv = &types.BatchGetAssetPropertyValueErrorEntry{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "entryId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EntryId to be of type string, got %T instead", value)
+				}
+				sv.EntryId = ptr.String(jtv)
+			}
+
+		case "errorCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BatchGetAssetPropertyValueErrorCode to be of type string, got %T instead", value)
+				}
+				sv.ErrorCode = types.BatchGetAssetPropertyValueErrorCode(jtv)
+			}
+
+		case "errorMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
+				}
+				sv.ErrorMessage = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentBatchGetAssetPropertyValueErrorInfo(v **types.BatchGetAssetPropertyValueErrorInfo, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BatchGetAssetPropertyValueErrorInfo
+	if *v == nil {
+		sv = &types.BatchGetAssetPropertyValueErrorInfo{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "errorCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BatchGetAssetPropertyValueErrorCode to be of type string, got %T instead", value)
+				}
+				sv.ErrorCode = types.BatchGetAssetPropertyValueErrorCode(jtv)
+			}
+
+		case "errorTimestamp":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.ErrorTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentBatchGetAssetPropertyValueHistoryErrorEntries(v *[]types.BatchGetAssetPropertyValueHistoryErrorEntry, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.BatchGetAssetPropertyValueHistoryErrorEntry
+	if *v == nil {
+		cv = []types.BatchGetAssetPropertyValueHistoryErrorEntry{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.BatchGetAssetPropertyValueHistoryErrorEntry
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentBatchGetAssetPropertyValueHistoryErrorEntry(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentBatchGetAssetPropertyValueHistoryErrorEntry(v **types.BatchGetAssetPropertyValueHistoryErrorEntry, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BatchGetAssetPropertyValueHistoryErrorEntry
+	if *v == nil {
+		sv = &types.BatchGetAssetPropertyValueHistoryErrorEntry{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "entryId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EntryId to be of type string, got %T instead", value)
+				}
+				sv.EntryId = ptr.String(jtv)
+			}
+
+		case "errorCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BatchGetAssetPropertyValueHistoryErrorCode to be of type string, got %T instead", value)
+				}
+				sv.ErrorCode = types.BatchGetAssetPropertyValueHistoryErrorCode(jtv)
+			}
+
+		case "errorMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
+				}
+				sv.ErrorMessage = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentBatchGetAssetPropertyValueHistoryErrorInfo(v **types.BatchGetAssetPropertyValueHistoryErrorInfo, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BatchGetAssetPropertyValueHistoryErrorInfo
+	if *v == nil {
+		sv = &types.BatchGetAssetPropertyValueHistoryErrorInfo{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "errorCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BatchGetAssetPropertyValueHistoryErrorCode to be of type string, got %T instead", value)
+				}
+				sv.ErrorCode = types.BatchGetAssetPropertyValueHistoryErrorCode(jtv)
+			}
+
+		case "errorTimestamp":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.ErrorTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentBatchGetAssetPropertyValueHistorySkippedEntries(v *[]types.BatchGetAssetPropertyValueHistorySkippedEntry, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.BatchGetAssetPropertyValueHistorySkippedEntry
+	if *v == nil {
+		cv = []types.BatchGetAssetPropertyValueHistorySkippedEntry{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.BatchGetAssetPropertyValueHistorySkippedEntry
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentBatchGetAssetPropertyValueHistorySkippedEntry(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentBatchGetAssetPropertyValueHistorySkippedEntry(v **types.BatchGetAssetPropertyValueHistorySkippedEntry, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BatchGetAssetPropertyValueHistorySkippedEntry
+	if *v == nil {
+		sv = &types.BatchGetAssetPropertyValueHistorySkippedEntry{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "completionStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BatchEntryCompletionStatus to be of type string, got %T instead", value)
+				}
+				sv.CompletionStatus = types.BatchEntryCompletionStatus(jtv)
+			}
+
+		case "entryId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EntryId to be of type string, got %T instead", value)
+				}
+				sv.EntryId = ptr.String(jtv)
+			}
+
+		case "errorInfo":
+			if err := awsRestjson1_deserializeDocumentBatchGetAssetPropertyValueHistoryErrorInfo(&sv.ErrorInfo, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentBatchGetAssetPropertyValueHistorySuccessEntries(v *[]types.BatchGetAssetPropertyValueHistorySuccessEntry, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.BatchGetAssetPropertyValueHistorySuccessEntry
+	if *v == nil {
+		cv = []types.BatchGetAssetPropertyValueHistorySuccessEntry{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.BatchGetAssetPropertyValueHistorySuccessEntry
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentBatchGetAssetPropertyValueHistorySuccessEntry(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentBatchGetAssetPropertyValueHistorySuccessEntry(v **types.BatchGetAssetPropertyValueHistorySuccessEntry, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BatchGetAssetPropertyValueHistorySuccessEntry
+	if *v == nil {
+		sv = &types.BatchGetAssetPropertyValueHistorySuccessEntry{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "assetPropertyValueHistory":
+			if err := awsRestjson1_deserializeDocumentAssetPropertyValueHistory(&sv.AssetPropertyValueHistory, value); err != nil {
+				return err
+			}
+
+		case "entryId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EntryId to be of type string, got %T instead", value)
+				}
+				sv.EntryId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentBatchGetAssetPropertyValueSkippedEntries(v *[]types.BatchGetAssetPropertyValueSkippedEntry, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.BatchGetAssetPropertyValueSkippedEntry
+	if *v == nil {
+		cv = []types.BatchGetAssetPropertyValueSkippedEntry{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.BatchGetAssetPropertyValueSkippedEntry
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentBatchGetAssetPropertyValueSkippedEntry(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentBatchGetAssetPropertyValueSkippedEntry(v **types.BatchGetAssetPropertyValueSkippedEntry, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BatchGetAssetPropertyValueSkippedEntry
+	if *v == nil {
+		sv = &types.BatchGetAssetPropertyValueSkippedEntry{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "completionStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BatchEntryCompletionStatus to be of type string, got %T instead", value)
+				}
+				sv.CompletionStatus = types.BatchEntryCompletionStatus(jtv)
+			}
+
+		case "entryId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EntryId to be of type string, got %T instead", value)
+				}
+				sv.EntryId = ptr.String(jtv)
+			}
+
+		case "errorInfo":
+			if err := awsRestjson1_deserializeDocumentBatchGetAssetPropertyValueErrorInfo(&sv.ErrorInfo, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentBatchGetAssetPropertyValueSuccessEntries(v *[]types.BatchGetAssetPropertyValueSuccessEntry, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.BatchGetAssetPropertyValueSuccessEntry
+	if *v == nil {
+		cv = []types.BatchGetAssetPropertyValueSuccessEntry{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.BatchGetAssetPropertyValueSuccessEntry
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentBatchGetAssetPropertyValueSuccessEntry(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentBatchGetAssetPropertyValueSuccessEntry(v **types.BatchGetAssetPropertyValueSuccessEntry, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BatchGetAssetPropertyValueSuccessEntry
+	if *v == nil {
+		sv = &types.BatchGetAssetPropertyValueSuccessEntry{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "assetPropertyValue":
+			if err := awsRestjson1_deserializeDocumentAssetPropertyValue(&sv.AssetPropertyValue, value); err != nil {
+				return err
+			}
+
+		case "entryId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EntryId to be of type string, got %T instead", value)
+				}
+				sv.EntryId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

@@ -37,7 +37,7 @@ import (
 // and you must create and use a customer managed key. Required permissions:
 // secretsmanager:UpdateSecret. For more information, see  IAM policy actions for
 // Secrets Manager
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions)
+// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions)
 // and Authentication and access control in Secrets Manager
 // (https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 // If you use a customer managed key, you must also have kms:GenerateDataKey and
@@ -62,7 +62,8 @@ func (c *Client) UpdateSecret(ctx context.Context, params *UpdateSecretInput, op
 type UpdateSecretInput struct {
 
 	// The ARN or name of the secret. For an ARN, we recommend that you specify a
-	// complete ARN rather than a partial ARN.
+	// complete ARN rather than a partial ARN. See Finding a secret from a partial ARN
+	// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen).
 	//
 	// This member is required.
 	SecretId *string

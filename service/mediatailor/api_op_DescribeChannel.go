@@ -68,6 +68,9 @@ type DescribeChannelOutput struct {
 	// The tags assigned to the channel.
 	Tags map[string]string
 
+	// The channel's tier.
+	Tier *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

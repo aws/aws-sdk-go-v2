@@ -1149,6 +1149,9 @@ func awsRestjson1_deserializeOpErrorDeleteKnowledgeBase(response *smithyhttp.Res
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
 
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -2065,6 +2068,11 @@ func awsRestjson1_deserializeOpDocumentGetRecommendationsOutput(v **GetRecommend
 		switch key {
 		case "recommendations":
 			if err := awsRestjson1_deserializeDocumentRecommendationList(&sv.Recommendations, value); err != nil {
+				return err
+			}
+
+		case "triggers":
+			if err := awsRestjson1_deserializeDocumentRecommendationTriggerList(&sv.Triggers, value); err != nil {
 				return err
 			}
 
@@ -5756,7 +5764,7 @@ func awsRestjson1_deserializeDocumentDocumentText(v **types.DocumentText, value 
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Text = ptr.String(jtv)
 			}
@@ -6365,6 +6373,46 @@ func awsRestjson1_deserializeDocumentPreconditionFailedException(v **types.Preco
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentQueryRecommendationTriggerData(v **types.QueryRecommendationTriggerData, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.QueryRecommendationTriggerData
+	if *v == nil {
+		sv = &types.QueryRecommendationTriggerData{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "text":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected QueryText to be of type string, got %T instead", value)
+				}
+				sv.Text = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentQueryResultsList(v *[]types.ResultData, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6478,6 +6526,15 @@ func awsRestjson1_deserializeDocumentRecommendationData(v **types.Recommendation
 				}
 			}
 
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RecommendationType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.RecommendationType(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -6547,6 +6604,148 @@ func awsRestjson1_deserializeDocumentRecommendationList(v *[]types.Recommendatio
 		var col types.RecommendationData
 		destAddr := &col
 		if err := awsRestjson1_deserializeDocumentRecommendationData(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRecommendationTrigger(v **types.RecommendationTrigger, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RecommendationTrigger
+	if *v == nil {
+		sv = &types.RecommendationTrigger{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "data":
+			if err := awsRestjson1_deserializeDocumentRecommendationTriggerData(&sv.Data, value); err != nil {
+				return err
+			}
+
+		case "id":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Uuid to be of type string, got %T instead", value)
+				}
+				sv.Id = ptr.String(jtv)
+			}
+
+		case "recommendationIds":
+			if err := awsRestjson1_deserializeDocumentRecommendationIdList(&sv.RecommendationIds, value); err != nil {
+				return err
+			}
+
+		case "source":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RecommendationSourceType to be of type string, got %T instead", value)
+				}
+				sv.Source = types.RecommendationSourceType(jtv)
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RecommendationTriggerType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.RecommendationTriggerType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRecommendationTriggerData(v *types.RecommendationTriggerData, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.RecommendationTriggerData
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "query":
+			var mv types.QueryRecommendationTriggerData
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentQueryRecommendationTriggerData(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.RecommendationTriggerDataMemberQuery{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRecommendationTriggerList(v *[]types.RecommendationTrigger, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RecommendationTrigger
+	if *v == nil {
+		cv = []types.RecommendationTrigger{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RecommendationTrigger
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentRecommendationTrigger(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr

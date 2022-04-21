@@ -150,6 +150,26 @@ func (m *validateOpBatchGetCrawlers) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchGetCustomEntityTypes struct {
+}
+
+func (*validateOpBatchGetCustomEntityTypes) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetCustomEntityTypes) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetCustomEntityTypesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetCustomEntityTypesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchGetDevEndpoints struct {
 }
 
@@ -425,6 +445,26 @@ func (m *validateOpCreateCrawler) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateCrawlerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateCustomEntityType struct {
+}
+
+func (*validateOpCreateCustomEntityType) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateCustomEntityType) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateCustomEntityTypeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateCustomEntityTypeInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -845,6 +885,26 @@ func (m *validateOpDeleteCrawler) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteCrawlerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteCustomEntityType struct {
+}
+
+func (*validateOpDeleteCustomEntityType) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteCustomEntityType) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteCustomEntityTypeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteCustomEntityTypeInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1325,6 +1385,26 @@ func (m *validateOpGetCrawler) HandleInitialize(ctx context.Context, in middlewa
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetCrawlerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetCustomEntityType struct {
+}
+
+func (*validateOpGetCustomEntityType) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCustomEntityType) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCustomEntityTypeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCustomEntityTypeInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -3038,6 +3118,10 @@ func addOpBatchGetCrawlersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchGetCrawlers{}, middleware.After)
 }
 
+func addOpBatchGetCustomEntityTypesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetCustomEntityTypes{}, middleware.After)
+}
+
 func addOpBatchGetDevEndpointsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchGetDevEndpoints{}, middleware.After)
 }
@@ -3092,6 +3176,10 @@ func addOpCreateConnectionValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCreateCrawlerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateCrawler{}, middleware.After)
+}
+
+func addOpCreateCustomEntityTypeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateCustomEntityType{}, middleware.After)
 }
 
 func addOpCreateDatabaseValidationMiddleware(stack *middleware.Stack) error {
@@ -3176,6 +3264,10 @@ func addOpDeleteConnectionValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteCrawlerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteCrawler{}, middleware.After)
+}
+
+func addOpDeleteCustomEntityTypeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteCustomEntityType{}, middleware.After)
 }
 
 func addOpDeleteDatabaseValidationMiddleware(stack *middleware.Stack) error {
@@ -3272,6 +3364,10 @@ func addOpGetConnectionValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetCrawlerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetCrawler{}, middleware.After)
+}
+
+func addOpGetCustomEntityTypeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCustomEntityType{}, middleware.After)
 }
 
 func addOpGetDatabaseValidationMiddleware(stack *middleware.Stack) error {
@@ -4818,6 +4914,21 @@ func validateOpBatchGetCrawlersInput(v *BatchGetCrawlersInput) error {
 	}
 }
 
+func validateOpBatchGetCustomEntityTypesInput(v *BatchGetCustomEntityTypesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetCustomEntityTypesInput"}
+	if v.Names == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Names"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpBatchGetDevEndpointsInput(v *BatchGetDevEndpointsInput) error {
 	if v == nil {
 		return nil
@@ -5083,6 +5194,24 @@ func validateOpCreateCrawlerInput(v *CreateCrawlerInput) error {
 		if err := validateCrawlerTargets(v.Targets); err != nil {
 			invalidParams.AddNested("Targets", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateCustomEntityTypeInput(v *CreateCustomEntityTypeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateCustomEntityTypeInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.RegexString == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegexString"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5521,6 +5650,21 @@ func validateOpDeleteCrawlerInput(v *DeleteCrawlerInput) error {
 	}
 }
 
+func validateOpDeleteCustomEntityTypeInput(v *DeleteCustomEntityTypeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteCustomEntityTypeInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteDatabaseInput(v *DeleteDatabaseInput) error {
 	if v == nil {
 		return nil
@@ -5916,6 +6060,21 @@ func validateOpGetCrawlerInput(v *GetCrawlerInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetCrawlerInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetCustomEntityTypeInput(v *GetCustomEntityTypeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCustomEntityTypeInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}

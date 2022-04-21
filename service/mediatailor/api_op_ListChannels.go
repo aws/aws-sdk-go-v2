@@ -43,7 +43,7 @@ type ListChannelsInput struct {
 
 type ListChannelsOutput struct {
 
-	// An array of channels that are associated with this account.
+	// A list of channels that are associated with this account.
 	Items []types.Channel
 
 	// Pagination token returned by the list request when results exceed the maximum

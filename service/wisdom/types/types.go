@@ -30,8 +30,8 @@ type AppIntegrationsConfiguration struct {
 	// you must include at least number, short_description, sys_mod_count,
 	// workflow_state, and active.
 	//
-	// Make sure to include additional field(s); these are
-	// indexed and used to source recommendations.
+	// Make sure to include additional fields. These
+	// fields are indexed and used to source recommendations.
 	//
 	// This member is required.
 	ObjectFields []string
@@ -42,7 +42,7 @@ type AppIntegrationsConfiguration struct {
 // Information about the assistant association.
 type AssistantAssociationData struct {
 
-	// The Amazon Resource Name (ARN) of the Wisdom assistant
+	// The Amazon Resource Name (ARN) of the Wisdom assistant.
 	//
 	// This member is required.
 	AssistantArn *string
@@ -86,7 +86,7 @@ type AssistantAssociationInputData interface {
 	isAssistantAssociationInputData()
 }
 
-// The the identifier of the knowledge base.
+// The identifier of the knowledge base.
 type AssistantAssociationInputDataMemberKnowledgeBaseId struct {
 	Value string
 
@@ -116,7 +116,7 @@ func (*AssistantAssociationOutputDataMemberKnowledgeBaseAssociation) isAssistant
 // Summary information about the assistant association.
 type AssistantAssociationSummary struct {
 
-	// The Amazon Resource Name (ARN) of the Wisdom assistant
+	// The Amazon Resource Name (ARN) of the Wisdom assistant.
 	//
 	// This member is required.
 	AssistantArn *string
@@ -155,7 +155,7 @@ type AssistantAssociationSummary struct {
 // The assistant data.
 type AssistantData struct {
 
-	// The Amazon Resource Name (ARN) of the Wisdom assistant
+	// The Amazon Resource Name (ARN) of the Wisdom assistant.
 	//
 	// This member is required.
 	AssistantArn *string
@@ -195,7 +195,7 @@ type AssistantData struct {
 // Summary information about the assistant.
 type AssistantSummary struct {
 
-	// The Amazon Resource Name (ARN) of the Wisdom assistant
+	// The Amazon Resource Name (ARN) of the Wisdom assistant.
 	//
 	// This member is required.
 	AssistantArn *string
@@ -255,7 +255,7 @@ type ContentData struct {
 	// This member is required.
 	KnowledgeBaseArn *string
 
-	// The the identifier of the knowledge base.
+	// The identifier of the knowledge base.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
@@ -319,7 +319,7 @@ type ContentReference struct {
 	// The Amazon Resource Name (ARN) of the knowledge base.
 	KnowledgeBaseArn *string
 
-	// The the identifier of the knowledge base.
+	// The identifier of the knowledge base.
 	KnowledgeBaseId *string
 
 	noSmithyDocumentSerde
@@ -348,7 +348,7 @@ type ContentSummary struct {
 	// This member is required.
 	KnowledgeBaseArn *string
 
-	// The the identifier of the knowledge base.
+	// The identifier of the knowledge base.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
@@ -456,7 +456,7 @@ type KnowledgeBaseAssociationData struct {
 	// The Amazon Resource Name (ARN) of the knowledge base.
 	KnowledgeBaseArn *string
 
-	// The the identifier of the knowledge base.
+	// The identifier of the knowledge base.
 	KnowledgeBaseId *string
 
 	noSmithyDocumentSerde
@@ -470,7 +470,7 @@ type KnowledgeBaseData struct {
 	// This member is required.
 	KnowledgeBaseArn *string
 
-	// The the identifier of the knowledge base.
+	// The identifier of the knowledge base.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
@@ -520,7 +520,7 @@ type KnowledgeBaseSummary struct {
 	// This member is required.
 	KnowledgeBaseArn *string
 
-	// The the identifier of the knowledge base.
+	// The identifier of the knowledge base.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
@@ -549,7 +549,7 @@ type KnowledgeBaseSummary struct {
 	// The KMS key used for encryption.
 	ServerSideEncryptionConfiguration *ServerSideEncryptionConfiguration
 
-	// [KEVIN]
+	// Configuration information about the external data source.
 	SourceConfiguration SourceConfiguration
 
 	// The tags used to organize, track, or control access for this resource.
@@ -566,6 +566,15 @@ type NotifyRecommendationsReceivedError struct {
 
 	// The identifier of the recommendation that is in error.
 	RecommendationId *string
+
+	noSmithyDocumentSerde
+}
+
+// Data associated with the QUERY RecommendationTriggerType.
+type QueryRecommendationTriggerData struct {
+
+	// The text associated with the recommendation trigger.
+	Text *string
 
 	noSmithyDocumentSerde
 }
@@ -589,8 +598,67 @@ type RecommendationData struct {
 	// The relevance score of the recommendation.
 	RelevanceScore float64
 
+	// The type of recommendation.
+	Type RecommendationType
+
 	noSmithyDocumentSerde
 }
+
+// A recommendation trigger provides context on the event that produced the
+// referenced recommendations. Recommendations are only referenced in
+// recommendationIds by a single RecommendationTrigger.
+type RecommendationTrigger struct {
+
+	// A union type containing information related to the trigger.
+	//
+	// This member is required.
+	Data RecommendationTriggerData
+
+	// The identifier of the recommendation trigger.
+	//
+	// This member is required.
+	Id *string
+
+	// The identifiers of the recommendations.
+	//
+	// This member is required.
+	RecommendationIds []string
+
+	// The source of the recommendation trigger.
+	//
+	// * ISSUE_DETECTION: The corresponding
+	// recommendations were triggered by a Contact Lens issue.
+	//
+	// * RULE_EVALUATION: The
+	// corresponding recommendations were triggered by a Contact Lens rule.
+	//
+	// This member is required.
+	Source RecommendationSourceType
+
+	// The type of recommendation trigger.
+	//
+	// This member is required.
+	Type RecommendationTriggerType
+
+	noSmithyDocumentSerde
+}
+
+// A union type containing information related to the trigger.
+//
+// The following types satisfy this interface:
+//  RecommendationTriggerDataMemberQuery
+type RecommendationTriggerData interface {
+	isRecommendationTriggerData()
+}
+
+// Data associated with the QUERY RecommendationTriggerType.
+type RecommendationTriggerDataMemberQuery struct {
+	Value QueryRecommendationTriggerData
+
+	noSmithyDocumentSerde
+}
+
+func (*RecommendationTriggerDataMemberQuery) isRecommendationTriggerData() {}
 
 // Information about how to render the content.
 type RenderingConfiguration struct {
@@ -647,8 +715,7 @@ type SearchExpression struct {
 type ServerSideEncryptionConfiguration struct {
 
 	// The KMS key. For information about valid ID values, see Key identifiers (KeyId)
-	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id) in
-	// the AWS Key Management Service Developer Guide.
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id).
 	KmsKeyId *string
 
 	noSmithyDocumentSerde
@@ -684,7 +751,7 @@ type SessionData struct {
 // Summary information about the session.
 type SessionSummary struct {
 
-	// The Amazon Resource Name (ARN) of the Wisdom assistant
+	// The Amazon Resource Name (ARN) of the Wisdom assistant.
 	//
 	// This member is required.
 	AssistantArn *string
@@ -738,4 +805,5 @@ type UnknownUnionMember struct {
 
 func (*UnknownUnionMember) isAssistantAssociationInputData()  {}
 func (*UnknownUnionMember) isAssistantAssociationOutputData() {}
+func (*UnknownUnionMember) isRecommendationTriggerData()      {}
 func (*UnknownUnionMember) isSourceConfiguration()            {}

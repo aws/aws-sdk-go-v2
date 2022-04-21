@@ -20,6 +20,7 @@
         "api_op_DescribeAnomalyDetectionExecutions.go",
         "api_op_DescribeAnomalyDetector.go",
         "api_op_DescribeMetricSet.go",
+        "api_op_DetectMetricSetConfig.go",
         "api_op_GetAnomalyGroup.go",
         "api_op_GetFeedback.go",
         "api_op_GetSampleData.go",

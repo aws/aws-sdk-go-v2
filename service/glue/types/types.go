@@ -1170,6 +1170,19 @@ type CsvClassifier struct {
 	noSmithyDocumentSerde
 }
 
+type CustomEntityType struct {
+
+	// This member is required.
+	Name *string
+
+	// This member is required.
+	RegexString *string
+
+	ContextWords []string
+
+	noSmithyDocumentSerde
+}
+
 // The Database object represents a logical grouping of tables that might reside in
 // a Hive metastore or an RDBMS.
 type Database struct {

@@ -138,6 +138,26 @@ func (AnomalyDetectorStatus) Values() []AnomalyDetectorStatus {
 	}
 }
 
+type Confidence string
+
+// Enum values for Confidence
+const (
+	ConfidenceHigh Confidence = "HIGH"
+	ConfidenceLow  Confidence = "LOW"
+	ConfidenceNone Confidence = "NONE"
+)
+
+// Values returns all known values for Confidence. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (Confidence) Values() []Confidence {
+	return []Confidence{
+		"HIGH",
+		"LOW",
+		"NONE",
+	}
+}
+
 type CSVFileCompression string
 
 // Enum values for CSVFileCompression

@@ -90,6 +90,66 @@ func (m *validateOpBatchDisassociateProjectAssets) HandleInitialize(ctx context.
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchGetAssetPropertyAggregates struct {
+}
+
+func (*validateOpBatchGetAssetPropertyAggregates) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetAssetPropertyAggregates) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetAssetPropertyAggregatesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetAssetPropertyAggregatesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpBatchGetAssetPropertyValueHistory struct {
+}
+
+func (*validateOpBatchGetAssetPropertyValueHistory) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetAssetPropertyValueHistory) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetAssetPropertyValueHistoryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetAssetPropertyValueHistoryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpBatchGetAssetPropertyValue struct {
+}
+
+func (*validateOpBatchGetAssetPropertyValue) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetAssetPropertyValue) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetAssetPropertyValueInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetAssetPropertyValueInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchPutAssetPropertyValue struct {
 }
 
@@ -1066,6 +1126,18 @@ func addOpBatchDisassociateProjectAssetsValidationMiddleware(stack *middleware.S
 	return stack.Initialize.Add(&validateOpBatchDisassociateProjectAssets{}, middleware.After)
 }
 
+func addOpBatchGetAssetPropertyAggregatesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetAssetPropertyAggregates{}, middleware.After)
+}
+
+func addOpBatchGetAssetPropertyValueHistoryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetAssetPropertyValueHistory{}, middleware.After)
+}
+
+func addOpBatchGetAssetPropertyValueValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetAssetPropertyValue{}, middleware.After)
+}
+
 func addOpBatchPutAssetPropertyValueValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchPutAssetPropertyValue{}, middleware.After)
 }
@@ -1538,6 +1610,114 @@ func validateAssetPropertyValues(v []types.AssetPropertyValue) error {
 		if err := validateAssetPropertyValue(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBatchGetAssetPropertyAggregatesEntries(v []types.BatchGetAssetPropertyAggregatesEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetAssetPropertyAggregatesEntries"}
+	for i := range v {
+		if err := validateBatchGetAssetPropertyAggregatesEntry(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBatchGetAssetPropertyAggregatesEntry(v *types.BatchGetAssetPropertyAggregatesEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetAssetPropertyAggregatesEntry"}
+	if v.EntryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EntryId"))
+	}
+	if v.AggregateTypes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AggregateTypes"))
+	}
+	if v.Resolution == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Resolution"))
+	}
+	if v.StartDate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartDate"))
+	}
+	if v.EndDate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndDate"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBatchGetAssetPropertyValueEntries(v []types.BatchGetAssetPropertyValueEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetAssetPropertyValueEntries"}
+	for i := range v {
+		if err := validateBatchGetAssetPropertyValueEntry(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBatchGetAssetPropertyValueEntry(v *types.BatchGetAssetPropertyValueEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetAssetPropertyValueEntry"}
+	if v.EntryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EntryId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBatchGetAssetPropertyValueHistoryEntries(v []types.BatchGetAssetPropertyValueHistoryEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetAssetPropertyValueHistoryEntries"}
+	for i := range v {
+		if err := validateBatchGetAssetPropertyValueHistoryEntry(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBatchGetAssetPropertyValueHistoryEntry(v *types.BatchGetAssetPropertyValueHistoryEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetAssetPropertyValueHistoryEntry"}
+	if v.EntryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EntryId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2213,6 +2393,63 @@ func validateOpBatchDisassociateProjectAssetsInput(v *BatchDisassociateProjectAs
 	}
 	if v.AssetIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AssetIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchGetAssetPropertyAggregatesInput(v *BatchGetAssetPropertyAggregatesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetAssetPropertyAggregatesInput"}
+	if v.Entries == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Entries"))
+	} else if v.Entries != nil {
+		if err := validateBatchGetAssetPropertyAggregatesEntries(v.Entries); err != nil {
+			invalidParams.AddNested("Entries", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchGetAssetPropertyValueHistoryInput(v *BatchGetAssetPropertyValueHistoryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetAssetPropertyValueHistoryInput"}
+	if v.Entries == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Entries"))
+	} else if v.Entries != nil {
+		if err := validateBatchGetAssetPropertyValueHistoryEntries(v.Entries); err != nil {
+			invalidParams.AddNested("Entries", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchGetAssetPropertyValueInput(v *BatchGetAssetPropertyValueInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetAssetPropertyValueInput"}
+	if v.Entries == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Entries"))
+	} else if v.Entries != nil {
+		if err := validateBatchGetAssetPropertyValueEntries(v.Entries); err != nil {
+			invalidParams.AddNested("Entries", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

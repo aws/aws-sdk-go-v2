@@ -57,6 +57,9 @@ type CreateChannelInput struct {
 	// The tags to assign to the channel.
 	Tags map[string]string
 
+	// The tier of the channel.
+	Tier types.Tier
+
 	noSmithyDocumentSerde
 }
 
@@ -89,6 +92,9 @@ type CreateChannelOutput struct {
 
 	// The tags assigned to the channel.
 	Tags map[string]string
+
+	// The channel's tier.
+	Tier *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -250,6 +250,26 @@ func (m *validateOpDescribeMetricSet) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDetectMetricSetConfig struct {
+}
+
+func (*validateOpDetectMetricSetConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDetectMetricSetConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DetectMetricSetConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDetectMetricSetConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetAnomalyGroup struct {
 }
 
@@ -536,6 +556,10 @@ func addOpDescribeAnomalyDetectorValidationMiddleware(stack *middleware.Stack) e
 
 func addOpDescribeMetricSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeMetricSet{}, middleware.After)
+}
+
+func addOpDetectMetricSetConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDetectMetricSetConfig{}, middleware.After)
 }
 
 func addOpGetAnomalyGroupValidationMiddleware(stack *middleware.Stack) error {
@@ -1009,6 +1033,24 @@ func validateOpDescribeMetricSetInput(v *DescribeMetricSetInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeMetricSetInput"}
 	if v.MetricSetArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MetricSetArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDetectMetricSetConfigInput(v *DetectMetricSetConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DetectMetricSetConfigInput"}
+	if v.AnomalyDetectorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AnomalyDetectorArn"))
+	}
+	if v.AutoDetectionMetricSource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AutoDetectionMetricSource"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

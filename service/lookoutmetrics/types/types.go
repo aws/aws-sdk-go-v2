@@ -243,6 +243,51 @@ type AppFlowConfig struct {
 	noSmithyDocumentSerde
 }
 
+// An attribute value.
+type AttributeValue struct {
+
+	// A binary value.
+	B *string
+
+	// A list of binary values.
+	BS []string
+
+	// A number.
+	N *string
+
+	// A list of numbers.
+	NS []string
+
+	// A string.
+	S *string
+
+	// A list of strings.
+	SS []string
+
+	noSmithyDocumentSerde
+}
+
+// An auto detection metric source.
+type AutoDetectionMetricSource struct {
+
+	// The source's source config.
+	S3SourceConfig *AutoDetectionS3SourceConfig
+
+	noSmithyDocumentSerde
+}
+
+// An auto detection source config.
+type AutoDetectionS3SourceConfig struct {
+
+	// The config's historical data path list.
+	HistoricalDataPathList []string
+
+	// The config's templated path list.
+	TemplatedPathList []string
+
+	noSmithyDocumentSerde
+}
+
 // Details about an Amazon CloudWatch datasource.
 type CloudWatchConfig struct {
 
@@ -282,6 +327,102 @@ type CsvFormatDescriptor struct {
 
 	// The character used as a quote character.
 	QuoteSymbol *string
+
+	noSmithyDocumentSerde
+}
+
+// Properties of an inferred CSV format.
+type DetectedCsvFormatDescriptor struct {
+
+	// The format's charset.
+	Charset *DetectedField
+
+	// Whether the format includes a header.
+	ContainsHeader *DetectedField
+
+	// The format's delimiter.
+	Delimiter *DetectedField
+
+	// The format's file compression.
+	FileCompression *DetectedField
+
+	// The format's header list.
+	HeaderList *DetectedField
+
+	// The format's quote symbol.
+	QuoteSymbol *DetectedField
+
+	noSmithyDocumentSerde
+}
+
+// An inferred field.
+type DetectedField struct {
+
+	// The field's confidence.
+	Confidence Confidence
+
+	// The field's message.
+	Message *string
+
+	// The field's value.
+	Value *AttributeValue
+
+	noSmithyDocumentSerde
+}
+
+// Properties of an inferred data format.
+type DetectedFileFormatDescriptor struct {
+
+	// Details about a CSV format.
+	CsvFormatDescriptor *DetectedCsvFormatDescriptor
+
+	// Details about a JSON format.
+	JsonFormatDescriptor *DetectedJsonFormatDescriptor
+
+	noSmithyDocumentSerde
+}
+
+// A detected JSON format descriptor.
+type DetectedJsonFormatDescriptor struct {
+
+	// The format's character set.
+	Charset *DetectedField
+
+	// The format's file compression.
+	FileCompression *DetectedField
+
+	noSmithyDocumentSerde
+}
+
+// An inferred dataset configuration.
+type DetectedMetricSetConfig struct {
+
+	// The dataset's interval.
+	MetricSetFrequency *DetectedField
+
+	// The dataset's data source.
+	MetricSource *DetectedMetricSource
+
+	// The dataset's offset.
+	Offset *DetectedField
+
+	noSmithyDocumentSerde
+}
+
+// An inferred data source.
+type DetectedMetricSource struct {
+
+	// The data source's source configuration.
+	S3SourceConfig *DetectedS3SourceConfig
+
+	noSmithyDocumentSerde
+}
+
+// An inferred source configuration.
+type DetectedS3SourceConfig struct {
+
+	// The source's file format descriptor.
+	FileFormatDescriptor *DetectedFileFormatDescriptor
 
 	noSmithyDocumentSerde
 }

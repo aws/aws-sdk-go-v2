@@ -1,0 +1,8 @@
+{
+    "id": "0aef7d6a-bed7-4dcf-8644-ae0d64c0d2cd",
+    "type": "feature",
+    "description": "Added DetectMetricSetConfig API for detecting configuration required for creating metric set from provided S3 data source.",
+    "modules": [
+        "service/lookoutmetrics"
+    ]
+}

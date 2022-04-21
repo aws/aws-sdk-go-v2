@@ -31,7 +31,7 @@ func (c *Client) SearchContent(ctx context.Context, params *SearchContentInput, 
 
 type SearchContentInput struct {
 
-	// The the identifier of the knowledge base. Can be either the ID or the ARN. URLs
+	// The identifier of the knowledge base. Can be either the ID or the ARN. URLs
 	// cannot contain the ARN.
 	//
 	// This member is required.

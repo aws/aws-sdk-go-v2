@@ -43,7 +43,7 @@ type ListSourceLocationsInput struct {
 
 type ListSourceLocationsOutput struct {
 
-	// An array of source locations.
+	// A list of source locations.
 	Items []types.SourceLocation
 
 	// Pagination token from the list request. Use the token to fetch the next page of

@@ -15,7 +15,7 @@ import (
 // operation from the Region in which you want to promote the replica to a primary
 // secret. Required permissions: secretsmanager:StopReplicationToReplica. For more
 // information, see  IAM policy actions for Secrets Manager
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions)
+// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions)
 // and Authentication and access control in Secrets Manager
 // (https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 func (c *Client) StopReplicationToReplica(ctx context.Context, params *StopReplicationToReplicaInput, optFns ...func(*Options)) (*StopReplicationToReplicaOutput, error) {

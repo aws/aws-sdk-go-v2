@@ -48,7 +48,7 @@ type ListAlertsInput struct {
 
 type ListAlertsOutput struct {
 
-	// An array of alerts that are associated with this resource.
+	// A list of alerts that are associated with this resource.
 	Items []types.Alert
 
 	// Pagination token from the list request. Use the token to fetch the next page of

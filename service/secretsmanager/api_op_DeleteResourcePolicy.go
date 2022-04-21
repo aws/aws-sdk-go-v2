@@ -14,7 +14,7 @@ import (
 // policy to a secret, use PutResourcePolicy. Required permissions:
 // secretsmanager:DeleteResourcePolicy. For more information, see  IAM policy
 // actions for Secrets Manager
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions)
+// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions)
 // and Authentication and access control in Secrets Manager
 // (https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 func (c *Client) DeleteResourcePolicy(ctx context.Context, params *DeleteResourcePolicyInput, optFns ...func(*Options)) (*DeleteResourcePolicyOutput, error) {
@@ -36,7 +36,8 @@ type DeleteResourcePolicyInput struct {
 
 	// The ARN or name of the secret to delete the attached resource-based policy for.
 	// For an ARN, we recommend that you specify a complete ARN rather than a partial
-	// ARN.
+	// ARN. See Finding a secret from a partial ARN
+	// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen).
 	//
 	// This member is required.
 	SecretId *string

@@ -58,6 +58,7 @@ type DescribeSourceLocationOutput struct {
 	// The timestamp that indicates when the source location was last modified.
 	LastModifiedTime *time.Time
 
+	// A list of the segment delivery configurations associated with this resource.
 	SegmentDeliveryConfigurations []types.SegmentDeliveryConfiguration
 
 	// The name of the source location.

@@ -52,7 +52,7 @@ type GetChannelScheduleInput struct {
 
 type GetChannelScheduleOutput struct {
 
-	// An array of schedule entries for the channel.
+	// A list of schedule entries for the channel.
 	Items []types.ScheduleEntry
 
 	// Pagination token from the GET list request. Use the token to fetch the next page

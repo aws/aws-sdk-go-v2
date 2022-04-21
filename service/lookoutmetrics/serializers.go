@@ -958,6 +958,81 @@ func awsRestjson1_serializeOpDocumentDescribeMetricSetInput(v *DescribeMetricSet
 	return nil
 }
 
+type awsRestjson1_serializeOpDetectMetricSetConfig struct {
+}
+
+func (*awsRestjson1_serializeOpDetectMetricSetConfig) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDetectMetricSetConfig) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DetectMetricSetConfigInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/DetectMetricSetConfig")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentDetectMetricSetConfigInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDetectMetricSetConfigInput(v *DetectMetricSetConfigInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentDetectMetricSetConfigInput(v *DetectMetricSetConfigInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AnomalyDetectorArn != nil {
+		ok := object.Key("AnomalyDetectorArn")
+		ok.String(*v.AnomalyDetectorArn)
+	}
+
+	if v.AutoDetectionMetricSource != nil {
+		ok := object.Key("AutoDetectionMetricSource")
+		if err := awsRestjson1_serializeDocumentAutoDetectionMetricSource(v.AutoDetectionMetricSource, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpGetAnomalyGroup struct {
 }
 
@@ -2234,6 +2309,41 @@ func awsRestjson1_serializeDocumentAppFlowConfig(v *types.AppFlowConfig, value s
 	if v.RoleArn != nil {
 		ok := object.Key("RoleArn")
 		ok.String(*v.RoleArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAutoDetectionMetricSource(v *types.AutoDetectionMetricSource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.S3SourceConfig != nil {
+		ok := object.Key("S3SourceConfig")
+		if err := awsRestjson1_serializeDocumentAutoDetectionS3SourceConfig(v.S3SourceConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAutoDetectionS3SourceConfig(v *types.AutoDetectionS3SourceConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.HistoricalDataPathList != nil {
+		ok := object.Key("HistoricalDataPathList")
+		if err := awsRestjson1_serializeDocumentHistoricalDataPathList(v.HistoricalDataPathList, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TemplatedPathList != nil {
+		ok := object.Key("TemplatedPathList")
+		if err := awsRestjson1_serializeDocumentTemplatedPathList(v.TemplatedPathList, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

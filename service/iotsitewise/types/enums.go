@@ -128,6 +128,87 @@ func (AuthMode) Values() []AuthMode {
 	}
 }
 
+type BatchEntryCompletionStatus string
+
+// Enum values for BatchEntryCompletionStatus
+const (
+	BatchEntryCompletionStatusSuccess BatchEntryCompletionStatus = "SUCCESS"
+	BatchEntryCompletionStatusError   BatchEntryCompletionStatus = "ERROR"
+)
+
+// Values returns all known values for BatchEntryCompletionStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BatchEntryCompletionStatus) Values() []BatchEntryCompletionStatus {
+	return []BatchEntryCompletionStatus{
+		"SUCCESS",
+		"ERROR",
+	}
+}
+
+type BatchGetAssetPropertyAggregatesErrorCode string
+
+// Enum values for BatchGetAssetPropertyAggregatesErrorCode
+const (
+	BatchGetAssetPropertyAggregatesErrorCodeResourceNotFoundException BatchGetAssetPropertyAggregatesErrorCode = "ResourceNotFoundException"
+	BatchGetAssetPropertyAggregatesErrorCodeInvalidRequestException   BatchGetAssetPropertyAggregatesErrorCode = "InvalidRequestException"
+	BatchGetAssetPropertyAggregatesErrorCodeAccessDeniedException     BatchGetAssetPropertyAggregatesErrorCode = "AccessDeniedException"
+)
+
+// Values returns all known values for BatchGetAssetPropertyAggregatesErrorCode.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (BatchGetAssetPropertyAggregatesErrorCode) Values() []BatchGetAssetPropertyAggregatesErrorCode {
+	return []BatchGetAssetPropertyAggregatesErrorCode{
+		"ResourceNotFoundException",
+		"InvalidRequestException",
+		"AccessDeniedException",
+	}
+}
+
+type BatchGetAssetPropertyValueErrorCode string
+
+// Enum values for BatchGetAssetPropertyValueErrorCode
+const (
+	BatchGetAssetPropertyValueErrorCodeResourceNotFoundException BatchGetAssetPropertyValueErrorCode = "ResourceNotFoundException"
+	BatchGetAssetPropertyValueErrorCodeInvalidRequestException   BatchGetAssetPropertyValueErrorCode = "InvalidRequestException"
+	BatchGetAssetPropertyValueErrorCodeAccessDeniedException     BatchGetAssetPropertyValueErrorCode = "AccessDeniedException"
+)
+
+// Values returns all known values for BatchGetAssetPropertyValueErrorCode. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (BatchGetAssetPropertyValueErrorCode) Values() []BatchGetAssetPropertyValueErrorCode {
+	return []BatchGetAssetPropertyValueErrorCode{
+		"ResourceNotFoundException",
+		"InvalidRequestException",
+		"AccessDeniedException",
+	}
+}
+
+type BatchGetAssetPropertyValueHistoryErrorCode string
+
+// Enum values for BatchGetAssetPropertyValueHistoryErrorCode
+const (
+	BatchGetAssetPropertyValueHistoryErrorCodeResourceNotFoundException BatchGetAssetPropertyValueHistoryErrorCode = "ResourceNotFoundException"
+	BatchGetAssetPropertyValueHistoryErrorCodeInvalidRequestException   BatchGetAssetPropertyValueHistoryErrorCode = "InvalidRequestException"
+	BatchGetAssetPropertyValueHistoryErrorCodeAccessDeniedException     BatchGetAssetPropertyValueHistoryErrorCode = "AccessDeniedException"
+)
+
+// Values returns all known values for BatchGetAssetPropertyValueHistoryErrorCode.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (BatchGetAssetPropertyValueHistoryErrorCode) Values() []BatchGetAssetPropertyValueHistoryErrorCode {
+	return []BatchGetAssetPropertyValueHistoryErrorCode{
+		"ResourceNotFoundException",
+		"InvalidRequestException",
+		"AccessDeniedException",
+	}
+}
+
 type BatchPutAssetPropertyValueErrorCode string
 
 // Enum values for BatchPutAssetPropertyValueErrorCode

@@ -56,7 +56,9 @@ type GetPropertyValueHistoryInput struct {
 	// endTime instead.
 	EndDateTime *time.Time
 
-	// Timestamp represented in ISO 8601 format
+	// The ISO8601 DateTime of the latest property value to return. For more
+	// information about the ISO8601 DateTime format, see the data type PropertyValue
+	// (https://docs.aws.amazon.com/roci/latest/roci-api/API_PropertyValue.html).
 	EndTime *string
 
 	// The ID of the entity.
@@ -84,7 +86,9 @@ type GetPropertyValueHistoryInput struct {
 	// startTime instead.
 	StartDateTime *time.Time
 
-	// Timestamp represented in ISO 8601 format
+	// The ISO8601 DateTime of the earliest property value to return. For more
+	// information about the ISO8601 DateTime format, see the data type PropertyValue
+	// (https://docs.aws.amazon.com/roci/latest/roci-api/API_PropertyValue.html).
 	StartTime *string
 
 	noSmithyDocumentSerde

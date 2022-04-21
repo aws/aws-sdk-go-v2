@@ -160,6 +160,24 @@ func (ScheduleEntryType) Values() []ScheduleEntryType {
 	}
 }
 
+type Tier string
+
+// Enum values for Tier
+const (
+	TierBasic    Tier = "BASIC"
+	TierStandard Tier = "STANDARD"
+)
+
+// Values returns all known values for Tier. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Tier) Values() []Tier {
+	return []Tier{
+		"BASIC",
+		"STANDARD",
+	}
+}
+
 type Type string
 
 // Enum values for Type

@@ -35,7 +35,7 @@ type UpdateContentInput struct {
 	// This member is required.
 	ContentId *string
 
-	// The the identifier of the knowledge base. Can be either the ID or the ARN
+	// The identifier of the knowledge base. Can be either the ID or the ARN
 	//
 	// This member is required.
 	KnowledgeBaseId *string

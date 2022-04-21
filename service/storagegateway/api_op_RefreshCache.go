@@ -32,10 +32,22 @@ import (
 // notification before issuing additional requests. For more information, see
 // Getting notified about file operations
 // (https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification)
-// in the Storage Gateway User Guide. If you invoke the RefreshCache API when two
-// requests are already being processed, any new request will cause an
-// InvalidGatewayRequestException error because too many requests were sent to the
-// server. For more information, see Getting notified about file operations
+// in the Storage Gateway User Guide.
+//
+// * Wait at least 60 seconds between
+// consecutive RefreshCache API requests.
+//
+// * RefreshCache does not evict cache
+// entries if invoked consecutively within 60 seconds of a previous RefreshCache
+// request.
+//
+// * If you invoke the RefreshCache API when two requests are already
+// being processed, any new request will cause an InvalidGatewayRequestException
+// error because too many requests were sent to the server.
+//
+// The S3 bucket name
+// does not need to be included when entering the list of folders in the FolderList
+// parameter. For more information, see Getting notified about file operations
 // (https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification)
 // in the Storage Gateway User Guide.
 func (c *Client) RefreshCache(ctx context.Context, params *RefreshCacheInput, optFns ...func(*Options)) (*RefreshCacheOutput, error) {

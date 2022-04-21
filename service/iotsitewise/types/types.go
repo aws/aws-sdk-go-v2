@@ -624,6 +624,405 @@ type Attribute struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information for an asset property aggregate entry that is associated
+// with the BatchGetAssetPropertyAggregates
+// (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyAggregates.html)
+// API. To identify an asset property, you must specify one of the following:
+//
+// *
+// The assetId and propertyId of an asset property.
+//
+// * A propertyAlias, which is a
+// data stream alias (for example, /company/windfarm/3/turbine/7/temperature). To
+// define an asset property's alias, see UpdateAssetProperty
+// (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html).
+type BatchGetAssetPropertyAggregatesEntry struct {
+
+	// The data aggregating function.
+	//
+	// This member is required.
+	AggregateTypes []AggregateType
+
+	// The inclusive end of the range from which to query historical data, expressed in
+	// seconds in Unix epoch time.
+	//
+	// This member is required.
+	EndDate *time.Time
+
+	// The ID of the entry.
+	//
+	// This member is required.
+	EntryId *string
+
+	// The time interval over which to aggregate data.
+	//
+	// This member is required.
+	Resolution *string
+
+	// The exclusive start of the range from which to query historical data, expressed
+	// in seconds in Unix epoch time.
+	//
+	// This member is required.
+	StartDate *time.Time
+
+	// The ID of the asset in which the asset property was created.
+	AssetId *string
+
+	// The alias that identifies the property, such as an OPC-UA server data stream
+	// path (for example, /company/windfarm/3/turbine/7/temperature). For more
+	// information, see Mapping industrial data streams to asset properties
+	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html)
+	// in the IoT SiteWise User Guide.
+	PropertyAlias *string
+
+	// The ID of the asset property.
+	PropertyId *string
+
+	// The quality by which to filter asset data.
+	Qualities []Quality
+
+	// The chronological sorting order of the requested information. Default: ASCENDING
+	TimeOrdering TimeOrdering
+
+	noSmithyDocumentSerde
+}
+
+// Contains error information for an asset property aggregate entry that is
+// associated with the BatchGetAssetPropertyAggregates
+// (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyAggregates.html)
+// API.
+type BatchGetAssetPropertyAggregatesErrorEntry struct {
+
+	// The ID of the entry.
+	//
+	// This member is required.
+	EntryId *string
+
+	// The error code.
+	//
+	// This member is required.
+	ErrorCode BatchGetAssetPropertyAggregatesErrorCode
+
+	// The associated error message.
+	//
+	// This member is required.
+	ErrorMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the error code and the timestamp for an asset property aggregate entry
+// that is associated with the BatchGetAssetPropertyAggregates
+// (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyAggregates.html)
+// API.
+type BatchGetAssetPropertyAggregatesErrorInfo struct {
+
+	// The error code.
+	//
+	// This member is required.
+	ErrorCode BatchGetAssetPropertyAggregatesErrorCode
+
+	// The date the error occurred, in Unix epoch time.
+	//
+	// This member is required.
+	ErrorTimestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains information for an entry that has been processed by the previous
+// BatchGetAssetPropertyAggregates
+// (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyAggregates.html)
+// request.
+type BatchGetAssetPropertyAggregatesSkippedEntry struct {
+
+	// The completion status of each entry that is associated with the
+	// BatchGetAssetPropertyAggregates
+	// (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyAggregates.html)
+	// API.
+	//
+	// This member is required.
+	CompletionStatus BatchEntryCompletionStatus
+
+	// The ID of the entry.
+	//
+	// This member is required.
+	EntryId *string
+
+	// The error information, such as the error code and the timestamp.
+	ErrorInfo *BatchGetAssetPropertyAggregatesErrorInfo
+
+	noSmithyDocumentSerde
+}
+
+// Contains success information for an entry that is associated with the
+// BatchGetAssetPropertyAggregates
+// (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyAggregates.html)
+// API.
+type BatchGetAssetPropertyAggregatesSuccessEntry struct {
+
+	// The requested aggregated asset property values (for example, average, minimum,
+	// and maximum).
+	//
+	// This member is required.
+	AggregatedValues []AggregatedValue
+
+	// The ID of the entry.
+	//
+	// This member is required.
+	EntryId *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information for an asset property value entry that is associated with
+// the BatchGetAssetPropertyValue
+// (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html)
+// API. To identify an asset property, you must specify one of the following:
+//
+// *
+// The assetId and propertyId of an asset property.
+//
+// * A propertyAlias, which is a
+// data stream alias (for example, /company/windfarm/3/turbine/7/temperature). To
+// define an asset property's alias, see UpdateAssetProperty
+// (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html).
+type BatchGetAssetPropertyValueEntry struct {
+
+	// The ID of the entry.
+	//
+	// This member is required.
+	EntryId *string
+
+	// The ID of the asset in which the asset property was created.
+	AssetId *string
+
+	// The alias that identifies the property, such as an OPC-UA server data stream
+	// path (for example, /company/windfarm/3/turbine/7/temperature). For more
+	// information, see Mapping industrial data streams to asset properties
+	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html)
+	// in the IoT SiteWise User Guide.
+	PropertyAlias *string
+
+	// The ID of the asset property.
+	PropertyId *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains error information for an asset property value entry that is associated
+// with the BatchGetAssetPropertyValue
+// (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html)
+// API.
+type BatchGetAssetPropertyValueErrorEntry struct {
+
+	// The ID of the entry.
+	//
+	// This member is required.
+	EntryId *string
+
+	// The error code.
+	//
+	// This member is required.
+	ErrorCode BatchGetAssetPropertyValueErrorCode
+
+	// The associated error message.
+	//
+	// This member is required.
+	ErrorMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// The error information, such as the error code and the timestamp.
+type BatchGetAssetPropertyValueErrorInfo struct {
+
+	// The error code.
+	//
+	// This member is required.
+	ErrorCode BatchGetAssetPropertyValueErrorCode
+
+	// The date the error occurred, in Unix epoch time.
+	//
+	// This member is required.
+	ErrorTimestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains information for an asset property historical value entry that is
+// associated with the BatchGetAssetPropertyValueHistory
+// (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html)
+// API. To identify an asset property, you must specify one of the following:
+//
+// *
+// The assetId and propertyId of an asset property.
+//
+// * A propertyAlias, which is a
+// data stream alias (for example, /company/windfarm/3/turbine/7/temperature). To
+// define an asset property's alias, see UpdateAssetProperty
+// (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html).
+type BatchGetAssetPropertyValueHistoryEntry struct {
+
+	// The ID of the entry.
+	//
+	// This member is required.
+	EntryId *string
+
+	// The ID of the asset in which the asset property was created.
+	AssetId *string
+
+	// The inclusive end of the range from which to query historical data, expressed in
+	// seconds in Unix epoch time.
+	EndDate *time.Time
+
+	// The alias that identifies the property, such as an OPC-UA server data stream
+	// path (for example, /company/windfarm/3/turbine/7/temperature). For more
+	// information, see Mapping industrial data streams to asset properties
+	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html)
+	// in the IoT SiteWise User Guide.
+	PropertyAlias *string
+
+	// The ID of the asset property.
+	PropertyId *string
+
+	// The quality by which to filter asset data.
+	Qualities []Quality
+
+	// The exclusive start of the range from which to query historical data, expressed
+	// in seconds in Unix epoch time.
+	StartDate *time.Time
+
+	// The chronological sorting order of the requested information. Default: ASCENDING
+	TimeOrdering TimeOrdering
+
+	noSmithyDocumentSerde
+}
+
+// A list of the errors (if any) associated with the batch request. Each error
+// entry contains the entryId of the entry that failed.
+type BatchGetAssetPropertyValueHistoryErrorEntry struct {
+
+	// The ID of the entry.
+	//
+	// This member is required.
+	EntryId *string
+
+	// The error code.
+	//
+	// This member is required.
+	ErrorCode BatchGetAssetPropertyValueHistoryErrorCode
+
+	// The associated error message.
+	//
+	// This member is required.
+	ErrorMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// The error information, such as the error code and the timestamp.
+type BatchGetAssetPropertyValueHistoryErrorInfo struct {
+
+	// The error code.
+	//
+	// This member is required.
+	ErrorCode BatchGetAssetPropertyValueHistoryErrorCode
+
+	// The date the error occurred, in Unix epoch time.
+	//
+	// This member is required.
+	ErrorTimestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains information for an entry that has been processed by the previous
+// BatchGetAssetPropertyValueHistory
+// (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html)
+// request.
+type BatchGetAssetPropertyValueHistorySkippedEntry struct {
+
+	// The completion status of each entry that is associated with the
+	// BatchGetAssetPropertyValueHistory
+	// (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValueHistory.html)
+	// API.
+	//
+	// This member is required.
+	CompletionStatus BatchEntryCompletionStatus
+
+	// The ID of the entry.
+	//
+	// This member is required.
+	EntryId *string
+
+	// The error information, such as the error code and the timestamp.
+	ErrorInfo *BatchGetAssetPropertyValueHistoryErrorInfo
+
+	noSmithyDocumentSerde
+}
+
+// Contains success information for an entry that is associated with the
+// BatchGetAssetPropertyValueHistory
+// (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html)
+// API.
+type BatchGetAssetPropertyValueHistorySuccessEntry struct {
+
+	// The requested historical values for the specified asset property.
+	//
+	// This member is required.
+	AssetPropertyValueHistory []AssetPropertyValue
+
+	// The ID of the entry.
+	//
+	// This member is required.
+	EntryId *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information for an entry that has been processed by the previous
+// BatchGetAssetPropertyValue
+// (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html)
+// request.
+type BatchGetAssetPropertyValueSkippedEntry struct {
+
+	// The completion status of each entry that is associated with the
+	// BatchGetAssetPropertyValue
+	// (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html)
+	// request.
+	//
+	// This member is required.
+	CompletionStatus BatchEntryCompletionStatus
+
+	// The ID of the entry.
+	//
+	// This member is required.
+	EntryId *string
+
+	// The error information, such as the error code and the timestamp.
+	ErrorInfo *BatchGetAssetPropertyValueErrorInfo
+
+	noSmithyDocumentSerde
+}
+
+// Contains success information for an entry that is associated with the
+// BatchGetAssetPropertyValue
+// (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html)
+// API.
+type BatchGetAssetPropertyValueSuccessEntry struct {
+
+	// The ID of the entry.
+	//
+	// This member is required.
+	EntryId *string
+
+	// Contains asset property value information.
+	AssetPropertyValue *AssetPropertyValue
+
+	noSmithyDocumentSerde
+}
+
 // Contains error information from updating a batch of asset property values.
 type BatchPutAssetPropertyError struct {
 

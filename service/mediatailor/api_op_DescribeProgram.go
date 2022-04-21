@@ -57,6 +57,9 @@ type DescribeProgramOutput struct {
 	// The timestamp of when the program was created.
 	CreationTime *time.Time
 
+	// The name of the LiveSource for this Program.
+	LiveSourceName *string
+
 	// The name of the program.
 	ProgramName *string
 

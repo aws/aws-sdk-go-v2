@@ -16,7 +16,7 @@ import (
 // ListSecrets. To get the secret value from SecretString or SecretBinary, call
 // GetSecretValue. Required permissions: secretsmanager:ListSecretVersionIds. For
 // more information, see  IAM policy actions for Secrets Manager
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions)
+// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions)
 // and Authentication and access control in Secrets Manager
 // (https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 func (c *Client) ListSecretVersionIds(ctx context.Context, params *ListSecretVersionIdsInput, optFns ...func(*Options)) (*ListSecretVersionIdsOutput, error) {
@@ -37,7 +37,9 @@ func (c *Client) ListSecretVersionIds(ctx context.Context, params *ListSecretVer
 type ListSecretVersionIdsInput struct {
 
 	// The ARN or name of the secret whose versions you want to list. For an ARN, we
-	// recommend that you specify a complete ARN rather than a partial ARN.
+	// recommend that you specify a complete ARN rather than a partial ARN. See Finding
+	// a secret from a partial ARN
+	// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen).
 	//
 	// This member is required.
 	SecretId *string

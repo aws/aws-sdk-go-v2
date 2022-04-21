@@ -132,7 +132,7 @@ func (e *TooManyTagsException) ErrorMessage() string {
 func (e *TooManyTagsException) ErrorCode() string             { return "TooManyTagsException" }
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The input fails to satisfy the constraints specified by an AWS service.
+// The input fails to satisfy the constraints specified by a service.
 type ValidationException struct {
 	Message *string
 

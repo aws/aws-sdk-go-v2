@@ -50,13 +50,14 @@ type CreateProgramInput struct {
 	// This member is required.
 	SourceLocationName *string
 
-	// The name that's used to refer to a VOD source.
-	//
-	// This member is required.
-	VodSourceName *string
-
 	// The ad break configuration settings.
 	AdBreaks []types.AdBreak
+
+	// The name of the LiveSource for this Program.
+	LiveSourceName *string
+
+	// The name that's used to refer to a VOD source.
+	VodSourceName *string
 
 	noSmithyDocumentSerde
 }
@@ -74,6 +75,9 @@ type CreateProgramOutput struct {
 
 	// The timestamp of when the program was created.
 	CreationTime *time.Time
+
+	// The name of the LiveSource for this Program.
+	LiveSourceName *string
 
 	// The name of the program.
 	ProgramName *string

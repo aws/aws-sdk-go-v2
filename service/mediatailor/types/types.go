@@ -227,6 +227,11 @@ type Channel struct {
 	// This member is required.
 	PlaybackMode *string
 
+	// The tier for this channel. STANDARD tier channels can contain live programs.
+	//
+	// This member is required.
+	Tier *string
+
 	// The timestamp of when the channel was created.
 	CreationTime *time.Time
 
@@ -400,6 +405,41 @@ type LivePreRollConfiguration struct {
 	// MediaTailor won't play pre-roll ads to exceed this duration, regardless of the
 	// total duration of ads that the ADS returns.
 	MaxDurationSeconds int32
+
+	noSmithyDocumentSerde
+}
+
+// Live source configuration parameters.
+type LiveSource struct {
+
+	// The ARN for the live source.
+	//
+	// This member is required.
+	Arn *string
+
+	// The HTTP package configurations for the live source.
+	//
+	// This member is required.
+	HttpPackageConfigurations []HttpPackageConfiguration
+
+	// The name that's used to refer to a live source.
+	//
+	// This member is required.
+	LiveSourceName *string
+
+	// The name of the source location.
+	//
+	// This member is required.
+	SourceLocationName *string
+
+	// The timestamp that indicates when the live source was created.
+	CreationTime *time.Time
+
+	// The timestamp that indicates when the live source was last modified.
+	LastModifiedTime *time.Time
+
+	// The tags assigned to the live source.
+	Tags map[string]string
 
 	noSmithyDocumentSerde
 }
@@ -729,22 +769,23 @@ type ScheduleEntry struct {
 	// This member is required.
 	SourceLocationName *string
 
-	// The name of the VOD source.
-	//
-	// This member is required.
-	VodSourceName *string
-
 	// The approximate duration of this program, in seconds.
 	ApproximateDurationSeconds int64
 
 	// The approximate time that the program will start playing.
 	ApproximateStartTime *time.Time
 
+	// The name of the live source used for the program.
+	LiveSourceName *string
+
 	// The schedule's ad break properties.
 	ScheduleAdBreaks []ScheduleAdBreak
 
 	// The type of schedule entry. Valid values: PROGRAM or FILLER_SLATE.
 	ScheduleEntryType ScheduleEntryType
+
+	// The name of the VOD source.
+	VodSourceName *string
 
 	noSmithyDocumentSerde
 }
@@ -772,9 +813,22 @@ type SecretsManagerAccessTokenConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The base URL of the host or path of the segment delivery server that you're
+// using to serve segments. This is typically a content delivery network (CDN). The
+// URL can be absolute or relative. To use an absolute URL include the protocol,
+// such as https://example.com/some/path. To use a relative URL specify the
+// relative path, such as /some/path*.
 type SegmentDeliveryConfiguration struct {
+
+	// The base URL of the host or path of the segment delivery server that you're
+	// using to serve segments. This is typically a content delivery network (CDN). The
+	// URL can be absolute or relative. To use an absolute URL include the protocol,
+	// such as https://example.com/some/path. To use a relative URL specify the
+	// relative path, such as /some/path*.
 	BaseUrl *string
 
+	// A unique identifier used to distinguish between multiple segment delivery
+	// configurations in a source location.
 	Name *string
 
 	noSmithyDocumentSerde
@@ -823,6 +877,7 @@ type SourceLocation struct {
 	// The timestamp that indicates when the source location was last modified.
 	LastModifiedTime *time.Time
 
+	// The segment delivery configurations for the source location.
 	SegmentDeliveryConfigurations []SegmentDeliveryConfiguration
 
 	// The tags assigned to the source location.
@@ -877,6 +932,9 @@ type Transition struct {
 	//
 	// This member is required.
 	Type *string
+
+	// The duration of the live program in seconds.
+	DurationMillis int64
 
 	// The name of the program that this program will be inserted next to, as defined
 	// by RelativePosition.

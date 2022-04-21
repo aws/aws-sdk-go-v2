@@ -1,0 +1,8 @@
+{
+    "id": "52a4d2bf-0e93-4af1-a4a1-30c18872d08e",
+    "type": "feature",
+    "description": "General availability (GA) for AWS IoT TwinMaker. For more information, see https://docs.aws.amazon.com/iot-twinmaker/latest/apireference/Welcome.html",
+    "modules": [
+        "service/iottwinmaker"
+    ]
+}

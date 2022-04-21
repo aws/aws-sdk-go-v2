@@ -15,7 +15,7 @@ import (
 // from the Regions you specify. Required permissions:
 // secretsmanager:RemoveRegionsFromReplication. For more information, see  IAM
 // policy actions for Secrets Manager
-// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions)
+// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions)
 // and Authentication and access control in Secrets Manager
 // (https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
 func (c *Client) RemoveRegionsFromReplication(ctx context.Context, params *RemoveRegionsFromReplicationInput, optFns ...func(*Options)) (*RemoveRegionsFromReplicationOutput, error) {

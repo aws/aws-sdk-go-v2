@@ -187,6 +187,110 @@ func awsRestjson1_serializeOpDocumentCreateChannelInput(v *CreateChannelInput, v
 		}
 	}
 
+	if len(v.Tier) > 0 {
+		ok := object.Key("Tier")
+		ok.String(string(v.Tier))
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpCreateLiveSource struct {
+}
+
+func (*awsRestjson1_serializeOpCreateLiveSource) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateLiveSource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateLiveSourceInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/sourceLocation/{SourceLocationName}/liveSource/{LiveSourceName}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsCreateLiveSourceInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateLiveSourceInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateLiveSourceInput(v *CreateLiveSourceInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.LiveSourceName == nil || len(*v.LiveSourceName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member LiveSourceName must not be empty")}
+	}
+	if v.LiveSourceName != nil {
+		if err := encoder.SetURI("LiveSourceName").String(*v.LiveSourceName); err != nil {
+			return err
+		}
+	}
+
+	if v.SourceLocationName == nil || len(*v.SourceLocationName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member SourceLocationName must not be empty")}
+	}
+	if v.SourceLocationName != nil {
+		if err := encoder.SetURI("SourceLocationName").String(*v.SourceLocationName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateLiveSourceInput(v *CreateLiveSourceInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.HttpPackageConfigurations != nil {
+		ok := object.Key("HttpPackageConfigurations")
+		if err := awsRestjson1_serializeDocumentHttpPackageConfigurations(v.HttpPackageConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocument__mapOf__string(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -381,6 +485,11 @@ func awsRestjson1_serializeOpDocumentCreateProgramInput(v *CreateProgramInput, v
 		if err := awsRestjson1_serializeDocument__listOfAdBreak(v.AdBreaks, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.LiveSourceName != nil {
+		ok := object.Key("LiveSourceName")
+		ok.String(*v.LiveSourceName)
 	}
 
 	if v.ScheduleConfiguration != nil {
@@ -722,6 +831,73 @@ func awsRestjson1_serializeOpHttpBindingsDeleteChannelPolicyInput(v *DeleteChann
 	}
 	if v.ChannelName != nil {
 		if err := encoder.SetURI("ChannelName").String(*v.ChannelName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDeleteLiveSource struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteLiveSource) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteLiveSource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteLiveSourceInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/sourceLocation/{SourceLocationName}/liveSource/{LiveSourceName}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteLiveSourceInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteLiveSourceInput(v *DeleteLiveSourceInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.LiveSourceName == nil || len(*v.LiveSourceName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member LiveSourceName must not be empty")}
+	}
+	if v.LiveSourceName != nil {
+		if err := encoder.SetURI("LiveSourceName").String(*v.LiveSourceName); err != nil {
+			return err
+		}
+	}
+
+	if v.SourceLocationName == nil || len(*v.SourceLocationName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member SourceLocationName must not be empty")}
+	}
+	if v.SourceLocationName != nil {
+		if err := encoder.SetURI("SourceLocationName").String(*v.SourceLocationName); err != nil {
 			return err
 		}
 	}
@@ -1097,6 +1273,73 @@ func awsRestjson1_serializeOpHttpBindingsDescribeChannelInput(v *DescribeChannel
 	}
 	if v.ChannelName != nil {
 		if err := encoder.SetURI("ChannelName").String(*v.ChannelName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDescribeLiveSource struct {
+}
+
+func (*awsRestjson1_serializeOpDescribeLiveSource) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDescribeLiveSource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeLiveSourceInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/sourceLocation/{SourceLocationName}/liveSource/{LiveSourceName}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDescribeLiveSourceInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDescribeLiveSourceInput(v *DescribeLiveSourceInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.LiveSourceName == nil || len(*v.LiveSourceName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member LiveSourceName must not be empty")}
+	}
+	if v.LiveSourceName != nil {
+		if err := encoder.SetURI("LiveSourceName").String(*v.LiveSourceName); err != nil {
+			return err
+		}
+	}
+
+	if v.SourceLocationName == nil || len(*v.SourceLocationName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member SourceLocationName must not be empty")}
+	}
+	if v.SourceLocationName != nil {
+		if err := encoder.SetURI("SourceLocationName").String(*v.SourceLocationName); err != nil {
 			return err
 		}
 	}
@@ -1662,6 +1905,72 @@ func awsRestjson1_serializeOpHttpBindingsListChannelsInput(v *ListChannelsInput,
 
 	if v.NextToken != nil {
 		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListLiveSources struct {
+}
+
+func (*awsRestjson1_serializeOpListLiveSources) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListLiveSources) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListLiveSourcesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/sourceLocation/{SourceLocationName}/liveSources")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListLiveSourcesInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListLiveSourcesInput(v *ListLiveSourcesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.MaxResults != 0 {
+		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	if v.SourceLocationName == nil || len(*v.SourceLocationName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member SourceLocationName must not be empty")}
+	}
+	if v.SourceLocationName != nil {
+		if err := encoder.SetURI("SourceLocationName").String(*v.SourceLocationName); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -2579,6 +2888,98 @@ func awsRestjson1_serializeOpDocumentUpdateChannelInput(v *UpdateChannelInput, v
 	return nil
 }
 
+type awsRestjson1_serializeOpUpdateLiveSource struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateLiveSource) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateLiveSource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateLiveSourceInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/sourceLocation/{SourceLocationName}/liveSource/{LiveSourceName}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateLiveSourceInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateLiveSourceInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateLiveSourceInput(v *UpdateLiveSourceInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.LiveSourceName == nil || len(*v.LiveSourceName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member LiveSourceName must not be empty")}
+	}
+	if v.LiveSourceName != nil {
+		if err := encoder.SetURI("LiveSourceName").String(*v.LiveSourceName); err != nil {
+			return err
+		}
+	}
+
+	if v.SourceLocationName == nil || len(*v.SourceLocationName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member SourceLocationName must not be empty")}
+	}
+	if v.SourceLocationName != nil {
+		if err := encoder.SetURI("SourceLocationName").String(*v.SourceLocationName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateLiveSourceInput(v *UpdateLiveSourceInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.HttpPackageConfigurations != nil {
+		ok := object.Key("HttpPackageConfigurations")
+		if err := awsRestjson1_serializeDocumentHttpPackageConfigurations(v.HttpPackageConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpUpdateSourceLocation struct {
 }
 
@@ -3309,6 +3710,11 @@ func awsRestjson1_serializeDocumentSpliceInsertMessage(v *types.SpliceInsertMess
 func awsRestjson1_serializeDocumentTransition(v *types.Transition, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.DurationMillis != 0 {
+		ok := object.Key("DurationMillis")
+		ok.Long(v.DurationMillis)
+	}
 
 	if len(v.RelativePosition) > 0 {
 		ok := object.Key("RelativePosition")

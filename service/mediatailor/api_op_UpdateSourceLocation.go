@@ -47,6 +47,7 @@ type UpdateSourceLocationInput struct {
 	// The optional configuration for the host server that serves segments.
 	DefaultSegmentDeliveryConfiguration *types.DefaultSegmentDeliveryConfiguration
 
+	// A list of the segment delivery configurations associated with this resource.
 	SegmentDeliveryConfigurations []types.SegmentDeliveryConfiguration
 
 	noSmithyDocumentSerde
@@ -72,6 +73,7 @@ type UpdateSourceLocationOutput struct {
 	// The timestamp that indicates when the source location was last modified.
 	LastModifiedTime *time.Time
 
+	// A list of the segment delivery configurations associated with this resource.
 	SegmentDeliveryConfigurations []types.SegmentDeliveryConfiguration
 
 	// The name of the source location.
