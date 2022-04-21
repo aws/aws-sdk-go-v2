@@ -1,8 +1,0 @@
-{
-    "id": "38175c3c-ea6e-4c9d-8f94-b6f9829a8307",
-    "type": "feature",
-    "description": "This release adds 3 new batch data query APIs : BatchGetAssetPropertyValue, BatchGetAssetPropertyValueHistory and BatchGetAssetPropertyAggregates",
-    "modules": [
-        "service/iotsitewise"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "94eab4df-0997-41fe-8c79-ad252dab7d55",
-    "type": "feature",
-    "description": "This release introduces tiered channels and adds support for live sources. Customers using a STANDARD channel can now create programs using live sources.",
-    "modules": [
-        "service/mediatailor"
-    ]
-}

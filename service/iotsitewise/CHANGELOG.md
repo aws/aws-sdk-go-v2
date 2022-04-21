@@ -1,3 +1,7 @@
+# v1.21.0 (2022-04-21)
+
+* **Feature**: This release adds 3 new batch data query APIs : BatchGetAssetPropertyValue, BatchGetAssetPropertyValueHistory and BatchGetAssetPropertyAggregates
+
 # v1.20.4 (2022-04-06)
 
 * No change notes available for this release.

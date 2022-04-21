@@ -1,3 +1,7 @@
+# v1.8.0 (2022-04-21)
+
+* **Feature**: This release updates the GetRecommendations API to include a trigger event list for classifying and grouping recommendations.
+
 # v1.7.3 (2022-03-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions

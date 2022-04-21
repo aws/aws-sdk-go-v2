@@ -1,3 +1,7 @@
+# v1.24.0 (2022-04-21)
+
+* **Feature**: This release adds APIs to create, read, delete, list, and batch read of Glue custom entity types
+
 # v1.23.0 (2022-04-14)
 
 * **Feature**: Auto Scaling for Glue version 3.0 and later jobs to dynamically scale compute resources. This SDK change provides customers with the auto-scaled DPU usage

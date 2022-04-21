@@ -1,3 +1,7 @@
+# v1.20.5 (2022-04-21)
+
+* **Documentation**: Doc only update for ElastiCache
+
 # v1.20.4 (2022-03-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.7.0 (2022-04-21)
+
+* **Feature**: General availability (GA) for AWS IoT TwinMaker. For more information, see https://docs.aws.amazon.com/iot-twinmaker/latest/apireference/Welcome.html
+
 # v1.6.1 (2022-04-19)
 
 * No change notes available for this release.

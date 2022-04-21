@@ -1,8 +1,0 @@
-{
-    "id": "ba0c9464-1f2d-4c03-94e3-2158a986e933",
-    "type": "feature",
-    "description": "This release adds support for minimum of 5 character length virtual tape barcodes.",
-    "modules": [
-        "service/storagegateway"
-    ]
-}
