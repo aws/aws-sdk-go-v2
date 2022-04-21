@@ -25,6 +25,8 @@ func (c *Client) MalformedSet(ctx context.Context, params *MalformedSetInput, op
 }
 
 type MalformedSetInput struct {
+	BlobSet [][]byte
+
 	Set []string
 
 	noSmithyDocumentSerde

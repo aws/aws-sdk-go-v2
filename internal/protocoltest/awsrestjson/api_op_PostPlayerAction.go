@@ -27,8 +27,6 @@ func (c *Client) PostPlayerAction(ctx context.Context, params *PostPlayerActionI
 }
 
 type PostPlayerActionInput struct {
-
-	// This member is required.
 	Action types.PlayerAction
 
 	noSmithyDocumentSerde
@@ -82,9 +80,6 @@ func (c *Client) addOperationPostPlayerActionMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addOpPostPlayerActionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPostPlayerAction(options.Region), middleware.Before); err != nil {
