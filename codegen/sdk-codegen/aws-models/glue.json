@@ -70,6 +70,9 @@
                     "target": "com.amazonaws.glue#BatchGetCrawlers"
                 },
                 {
+                    "target": "com.amazonaws.glue#BatchGetCustomEntityTypes"
+                },
+                {
                     "target": "com.amazonaws.glue#BatchGetDevEndpoints"
                 },
                 {
@@ -110,6 +113,9 @@
                 },
                 {
                     "target": "com.amazonaws.glue#CreateCrawler"
+                },
+                {
+                    "target": "com.amazonaws.glue#CreateCustomEntityType"
                 },
                 {
                     "target": "com.amazonaws.glue#CreateDatabase"
@@ -173,6 +179,9 @@
                 },
                 {
                     "target": "com.amazonaws.glue#DeleteCrawler"
+                },
+                {
+                    "target": "com.amazonaws.glue#DeleteCustomEntityType"
                 },
                 {
                     "target": "com.amazonaws.glue#DeleteDatabase"
@@ -263,6 +272,9 @@
                 },
                 {
                     "target": "com.amazonaws.glue#GetCrawlers"
+                },
+                {
+                    "target": "com.amazonaws.glue#GetCustomEntityType"
                 },
                 {
                     "target": "com.amazonaws.glue#GetDatabase"
@@ -413,6 +425,9 @@
                 },
                 {
                     "target": "com.amazonaws.glue#ListCrawlers"
+                },
+                {
+                    "target": "com.amazonaws.glue#ListCustomEntityTypes"
                 },
                 {
                     "target": "com.amazonaws.glue#ListDevEndpoints"
@@ -1288,6 +1303,48 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of names of crawlers that were not found.</p>"
                     }
+                }
+            }
+        },
+        "com.amazonaws.glue#BatchGetCustomEntityTypes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#BatchGetCustomEntityTypesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#BatchGetCustomEntityTypesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationTimeoutException"
+                }
+            ]
+        },
+        "com.amazonaws.glue#BatchGetCustomEntityTypesRequest": {
+            "type": "structure",
+            "members": {
+                "Names": {
+                    "target": "com.amazonaws.glue#CustomEntityTypeNames",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.glue#BatchGetCustomEntityTypesResponse": {
+            "type": "structure",
+            "members": {
+                "CustomEntityTypes": {
+                    "target": "com.amazonaws.glue#CustomEntityTypes"
+                },
+                "CustomEntityTypesNotFound": {
+                    "target": "com.amazonaws.glue#CustomEntityTypeNames"
                 }
             }
         },
@@ -3575,6 +3632,18 @@
                 "smithy.api#documentation": "<p>Specifies the connections used by a job.</p>"
             }
         },
+        "com.amazonaws.glue#ContextWords": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#NameString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                }
+            }
+        },
         "com.amazonaws.glue#Crawl": {
             "type": "structure",
             "members": {
@@ -4364,6 +4433,66 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Specifies a custom CSV classifier for <code>CreateClassifier</code> to create.</p>"
+            }
+        },
+        "com.amazonaws.glue#CreateCustomEntityType": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#CreateCustomEntityTypeRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#CreateCustomEntityTypeResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#AlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.glue#IdempotentParameterMismatchException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ResourceNumberLimitExceededException"
+                }
+            ]
+        },
+        "com.amazonaws.glue#CreateCustomEntityTypeRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "RegexString": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContextWords": {
+                    "target": "com.amazonaws.glue#ContextWords"
+                }
+            }
+        },
+        "com.amazonaws.glue#CreateCustomEntityTypeResponse": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.glue#NameString"
+                }
             }
         },
         "com.amazonaws.glue#CreateDatabase": {
@@ -6206,6 +6335,44 @@
                 "smithy.api#pattern": "^[^\\r\\n]$"
             }
         },
+        "com.amazonaws.glue#CustomEntityType": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "RegexString": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContextWords": {
+                    "target": "com.amazonaws.glue#ContextWords"
+                }
+            }
+        },
+        "com.amazonaws.glue#CustomEntityTypeNames": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#NameString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.glue#CustomEntityTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#CustomEntityType"
+            }
+        },
         "com.amazonaws.glue#CustomPatterns": {
             "type": "string",
             "traits": {
@@ -6844,6 +7011,51 @@
         "com.amazonaws.glue#DeleteCrawlerResponse": {
             "type": "structure",
             "members": {}
+        },
+        "com.amazonaws.glue#DeleteCustomEntityType": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#DeleteCustomEntityTypeRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#DeleteCustomEntityTypeResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationTimeoutException"
+                }
+            ]
+        },
+        "com.amazonaws.glue#DeleteCustomEntityTypeRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.glue#DeleteCustomEntityTypeResponse": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.glue#NameString"
+                }
+            }
         },
         "com.amazonaws.glue#DeleteDatabase": {
             "type": "operation",
@@ -9338,6 +9550,57 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A continuation token, if the returned list has not reached the end\n      of those defined in this customer account.</p>"
                     }
+                }
+            }
+        },
+        "com.amazonaws.glue#GetCustomEntityType": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#GetCustomEntityTypeRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#GetCustomEntityTypeResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationTimeoutException"
+                }
+            ]
+        },
+        "com.amazonaws.glue#GetCustomEntityTypeRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.glue#GetCustomEntityTypeResponse": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.glue#NameString"
+                },
+                "RegexString": {
+                    "target": "com.amazonaws.glue#NameString"
+                },
+                "ContextWords": {
+                    "target": "com.amazonaws.glue#ContextWords"
                 }
             }
         },
@@ -14206,6 +14469,55 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A continuation token, if the returned list does not contain the\n      last metric available.</p>"
                     }
+                }
+            }
+        },
+        "com.amazonaws.glue#ListCustomEntityTypes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#ListCustomEntityTypesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#ListCustomEntityTypesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationTimeoutException"
+                }
+            ],
+            "traits": {
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.glue#ListCustomEntityTypesRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.glue#PaginationToken"
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.glue#PageSize"
+                }
+            }
+        },
+        "com.amazonaws.glue#ListCustomEntityTypesResponse": {
+            "type": "structure",
+            "members": {
+                "CustomEntityTypes": {
+                    "target": "com.amazonaws.glue#CustomEntityTypes"
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.glue#PaginationToken"
                 }
             }
         },

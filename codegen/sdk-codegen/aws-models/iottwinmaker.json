@@ -2132,10 +2132,16 @@
                     }
                 },
                 "startTime": {
-                    "target": "com.amazonaws.iottwinmaker#Time"
+                    "target": "com.amazonaws.iottwinmaker#Time",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ISO8601 DateTime of the earliest property value to return.</p>\n         <p>For more information about the ISO8601 DateTime format, see the data type <a href=\"https://docs.aws.amazon.com/roci/latest/roci-api/API_PropertyValue.html\">PropertyValue</a>.</p>"
+                    }
                 },
                 "endTime": {
-                    "target": "com.amazonaws.iottwinmaker#Time"
+                    "target": "com.amazonaws.iottwinmaker#Time",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ISO8601 DateTime of the latest property value to return.</p>\n         <p>For more information about the ISO8601 DateTime format, see the data type <a href=\"https://docs.aws.amazon.com/roci/latest/roci-api/API_PropertyValue.html\">PropertyValue</a>.</p>"
+                    }
                 }
             }
         },
@@ -2444,7 +2450,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^[a-zA-Z][a-zA-Z_\\-0-9]*[a-zA-Z0-9]+$|^arn:((aws)|(aws-cn)|(aws-us-gov)):iottwinmaker:[a-z0-9-]+:[0-9]{12}:[\\/a-zA-Z0-9_-]+$"
+                "smithy.api#pattern": "^[a-zA-Z_0-9][a-zA-Z_\\-0-9]*[a-zA-Z0-9]+$|^arn:((aws)|(aws-cn)|(aws-us-gov)):iottwinmaker:[a-z0-9-]+:[0-9]{12}:[\\/a-zA-Z0-9_-]+$"
             }
         },
         "com.amazonaws.iottwinmaker#Integer": {
@@ -2590,7 +2596,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that filters items in a list of component types.</p>"
+                "smithy.api#documentation": "<p>An object that filters items in a list of component types.</p>\n         <note>\n            <p>Only one object is accepted as a valid input.</p>\n         </note>"
             }
         },
         "com.amazonaws.iottwinmaker#ListComponentTypesFilters": {
@@ -2746,7 +2752,7 @@
                 "filters": {
                     "target": "com.amazonaws.iottwinmaker#ListEntitiesFilters",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of objects that filter the request.</p>"
+                        "smithy.api#documentation": "<p>A list of objects that filter the request.</p>\n         <note>\n            <p>Only one object is accepted as a valid input.</p>\n         </note>"
                     }
                 },
                 "maxResults": {
@@ -3415,7 +3421,10 @@
                     }
                 },
                 "time": {
-                    "target": "com.amazonaws.iottwinmaker#Time"
+                    "target": "com.amazonaws.iottwinmaker#Time",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ISO8601 DateTime of a value for a time series property.</p>\n         <p>The time for when the property value was recorded in ISO 8601 format: <i>YYYY-MM-DDThh:mm:ss[.SSSSSSSSS][Z/±HH:mm]</i>.</p> \n         <ul>\n            <li>\n               <p>\n                  <i>[YYYY]</i>: year</p>\n            </li>\n            <li>\n               <p>\n                  <i>[MM]</i>: month</p>\n            </li>\n            <li>\n               <p>\n                  <i>[DD]</i>: day</p>\n            </li>\n            <li>\n               <p>\n                  <i>[hh]</i>: hour</p>\n            </li>\n            <li>\n               <p>\n                  <i>[mm]</i>: minute</p>\n            </li>\n            <li>\n               <p>\n                  <i>[ss]</i>: seconds</p>\n            </li>\n            <li>\n               <p>\n                  <i>[.SSSSSSSSS]</i>: additional precision, where precedence is maintained. For\n               example: [.573123] is equal to 573123000 nanoseconds.</p>\n            </li>\n            <li>\n               <p>\n                  <i>Z</i>: default timezone UTC</p>\n            </li>\n            <li>\n               <p>\n                  <i>± HH:mm</i>: time zone offset in Hours and Minutes.</p>\n            </li>\n         </ul>\n         <p>\n            <i>Required sub-fields</i>: YYYY-MM-DDThh:mm:ss and [Z/±HH:mm]</p>"
+                    }
                 }
             },
             "traits": {
@@ -3440,7 +3449,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that specifies information about time series property values.</p>"
+                "smithy.api#documentation": "<p>An object that specifies information about time series property values. This object is used  and consumed by the <a href=\"https://docs.aws.amazon.com/iot-twinmaker/latest/apireference/API_BatchPutPropertyValues.html\">BatchPutPropertyValues</a> action.</p>"
             }
         },
         "com.amazonaws.iottwinmaker#PropertyValueHistory": {

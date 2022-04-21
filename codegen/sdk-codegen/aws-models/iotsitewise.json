@@ -71,6 +71,15 @@
                     "target": "com.amazonaws.iotsitewise#BatchDisassociateProjectAssets"
                 },
                 {
+                    "target": "com.amazonaws.iotsitewise#BatchGetAssetPropertyAggregates"
+                },
+                {
+                    "target": "com.amazonaws.iotsitewise#BatchGetAssetPropertyValue"
+                },
+                {
+                    "target": "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueHistory"
+                },
+                {
                     "target": "com.amazonaws.iotsitewise#BatchPutAssetPropertyValue"
                 },
                 {
@@ -1229,6 +1238,9 @@
             "input": {
                 "target": "com.amazonaws.iotsitewise#AssociateAssetsRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.iotsitewise#ConflictingOperationException"
@@ -1299,6 +1311,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.iotsitewise#AssociateTimeSeriesToAssetPropertyRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -1621,6 +1636,908 @@
                         "smithy.api#documentation": "<p>A list of associated error information, if any.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.iotsitewise#BatchEntryCompletionStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SUCCESS",
+                        "name": "SUCCESS"
+                    },
+                    {
+                        "value": "ERROR",
+                        "name": "ERROR"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.iotsitewise#BatchGetAssetPropertyAggregates": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotsitewise#BatchGetAssetPropertyAggregatesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotsitewise#BatchGetAssetPropertyAggregatesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotsitewise#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iotsitewise#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iotsitewise#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.iotsitewise#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets aggregated values (for example, average, minimum, and maximum) for one or more asset properties. \n    For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/query-industrial-data.html#aggregates\">Querying\n    aggregates</a> in the <i>IoT SiteWise User Guide</i>.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "data."
+                },
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/properties/batch/aggregates",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.iotsitewise#BatchGetAssetPropertyAggregatesEntries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotsitewise#BatchGetAssetPropertyAggregatesEntry"
+            }
+        },
+        "com.amazonaws.iotsitewise#BatchGetAssetPropertyAggregatesEntry": {
+            "type": "structure",
+            "members": {
+                "entryId": {
+                    "target": "com.amazonaws.iotsitewise#EntryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the entry.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "assetId": {
+                    "target": "com.amazonaws.iotsitewise#ID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the asset in which the asset property was created.</p>"
+                    }
+                },
+                "propertyId": {
+                    "target": "com.amazonaws.iotsitewise#ID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the asset property.</p>"
+                    }
+                },
+                "propertyAlias": {
+                    "target": "com.amazonaws.iotsitewise#AssetPropertyAlias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alias that identifies the property, such as an OPC-UA server data stream path\n        (for example, <code>/company/windfarm/3/turbine/7/temperature</code>). For more information, see\n        <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html\">Mapping industrial data streams to asset properties</a> in the\n        <i>IoT SiteWise User Guide</i>.</p>"
+                    }
+                },
+                "aggregateTypes": {
+                    "target": "com.amazonaws.iotsitewise#AggregateTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data aggregating function.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resolution": {
+                    "target": "com.amazonaws.iotsitewise#Resolution",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time interval over which to aggregate data.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "startDate": {
+                    "target": "com.amazonaws.iotsitewise#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exclusive start of the range from which to query historical data, expressed in seconds in Unix epoch time.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "endDate": {
+                    "target": "com.amazonaws.iotsitewise#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The inclusive end of the range from which to query historical data, expressed in seconds in Unix epoch time.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "qualities": {
+                    "target": "com.amazonaws.iotsitewise#Qualities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The quality by which to filter asset data.</p>"
+                    }
+                },
+                "timeOrdering": {
+                    "target": "com.amazonaws.iotsitewise#TimeOrdering",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The chronological sorting order of the requested information.</p>\n         <p>Default: <code>ASCENDING</code>\n         </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information for an asset property aggregate entry that is associated with the \n  <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyAggregates.html\">BatchGetAssetPropertyAggregates</a> API.</p>\n         <p>To identify an asset property, you must specify one of the following:</p>\n         <ul>\n            <li>\n               <p>The <code>assetId</code> and <code>propertyId</code> of an asset property.</p>\n            </li>\n            <li>\n               <p>A <code>propertyAlias</code>, which is a data stream alias (for example,\n          <code>/company/windfarm/3/turbine/7/temperature</code>). To define an asset property's alias, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html\">UpdateAssetProperty</a>.</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.iotsitewise#BatchGetAssetPropertyAggregatesErrorCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ResourceNotFoundException",
+                        "name": "ResourceNotFoundException"
+                    },
+                    {
+                        "value": "InvalidRequestException",
+                        "name": "InvalidRequestException"
+                    },
+                    {
+                        "value": "AccessDeniedException",
+                        "name": "AccessDeniedException"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.iotsitewise#BatchGetAssetPropertyAggregatesErrorEntries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotsitewise#BatchGetAssetPropertyAggregatesErrorEntry"
+            }
+        },
+        "com.amazonaws.iotsitewise#BatchGetAssetPropertyAggregatesErrorEntry": {
+            "type": "structure",
+            "members": {
+                "errorCode": {
+                    "target": "com.amazonaws.iotsitewise#BatchGetAssetPropertyAggregatesErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "errorMessage": {
+                    "target": "com.amazonaws.iotsitewise#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The associated error message.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "entryId": {
+                    "target": "com.amazonaws.iotsitewise#EntryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the entry.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains error information for an asset property aggregate entry that is associated with the \n    <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyAggregates.html\">BatchGetAssetPropertyAggregates</a> API.</p>"
+            }
+        },
+        "com.amazonaws.iotsitewise#BatchGetAssetPropertyAggregatesErrorInfo": {
+            "type": "structure",
+            "members": {
+                "errorCode": {
+                    "target": "com.amazonaws.iotsitewise#BatchGetAssetPropertyAggregatesErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "errorTimestamp": {
+                    "target": "com.amazonaws.iotsitewise#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date the error occurred, in Unix epoch time.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the error code and the timestamp for an asset property aggregate entry that is associated with the \n    <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyAggregates.html\">BatchGetAssetPropertyAggregates</a> API.</p>"
+            }
+        },
+        "com.amazonaws.iotsitewise#BatchGetAssetPropertyAggregatesMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.iotsitewise#BatchGetAssetPropertyAggregatesRequest": {
+            "type": "structure",
+            "members": {
+                "entries": {
+                    "target": "com.amazonaws.iotsitewise#BatchGetAssetPropertyAggregatesEntries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of asset property aggregate entries for the batch get request. \n  You can specify up to 16 entries per request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.iotsitewise#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to be used for the next set of paginated results.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.iotsitewise#BatchGetAssetPropertyAggregatesMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return for each paginated request. A result set is returned in the two cases, whichever occurs first.</p>\n         <ul>\n            <li>\n               <p>The size of the result set is less than 1 MB.</p>\n            </li>\n            <li>\n               <p>The number of data points in the result set is less than the value of <code>maxResults</code>. \n        The maximum value of <code>maxResults</code> is 4000.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotsitewise#BatchGetAssetPropertyAggregatesResponse": {
+            "type": "structure",
+            "members": {
+                "errorEntries": {
+                    "target": "com.amazonaws.iotsitewise#BatchGetAssetPropertyAggregatesErrorEntries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the errors (if any) associated with the batch request. Each error entry\n      contains the <code>entryId</code> of the entry that failed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "successEntries": {
+                    "target": "com.amazonaws.iotsitewise#BatchGetAssetPropertyAggregatesSuccessEntries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of entries that were processed successfully by this batch request. Each success entry\n      contains the <code>entryId</code> of the entry that succeeded and the latest query result.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "skippedEntries": {
+                    "target": "com.amazonaws.iotsitewise#BatchGetAssetPropertyAggregatesSkippedEntries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of entries that were not processed by this batch request. \n      because these entries had been completely processed by previous paginated requests. \n      Each skipped entry contains the <code>entryId</code> of the entry that skipped.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.iotsitewise#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no additional results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotsitewise#BatchGetAssetPropertyAggregatesSkippedEntries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotsitewise#BatchGetAssetPropertyAggregatesSkippedEntry"
+            }
+        },
+        "com.amazonaws.iotsitewise#BatchGetAssetPropertyAggregatesSkippedEntry": {
+            "type": "structure",
+            "members": {
+                "entryId": {
+                    "target": "com.amazonaws.iotsitewise#EntryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the entry.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "completionStatus": {
+                    "target": "com.amazonaws.iotsitewise#BatchEntryCompletionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The completion status of each entry that is associated with the \n    <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyAggregates.html\">BatchGetAssetPropertyAggregates</a> API.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "errorInfo": {
+                    "target": "com.amazonaws.iotsitewise#BatchGetAssetPropertyAggregatesErrorInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error information, such as the error code and the timestamp.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information for an entry that has been processed by the previous \n    <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyAggregates.html\">BatchGetAssetPropertyAggregates</a> request.</p>"
+            }
+        },
+        "com.amazonaws.iotsitewise#BatchGetAssetPropertyAggregatesSuccessEntries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotsitewise#BatchGetAssetPropertyAggregatesSuccessEntry"
+            }
+        },
+        "com.amazonaws.iotsitewise#BatchGetAssetPropertyAggregatesSuccessEntry": {
+            "type": "structure",
+            "members": {
+                "entryId": {
+                    "target": "com.amazonaws.iotsitewise#EntryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the entry.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "aggregatedValues": {
+                    "target": "com.amazonaws.iotsitewise#AggregatedValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The requested aggregated asset property values (for example, average, minimum, and maximum).</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains success information for an entry that is associated with the \n    <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyAggregates.html\">BatchGetAssetPropertyAggregates</a> API.</p>"
+            }
+        },
+        "com.amazonaws.iotsitewise#BatchGetAssetPropertyValue": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotsitewise#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iotsitewise#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iotsitewise#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.iotsitewise#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the current value for one or more asset properties. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/query-industrial-data.html#current-values\">Querying\n    current values</a> in the <i>IoT SiteWise User Guide</i>.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "data."
+                },
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/properties/batch/latest",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken"
+                }
+            }
+        },
+        "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueEntries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueEntry"
+            }
+        },
+        "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueEntry": {
+            "type": "structure",
+            "members": {
+                "entryId": {
+                    "target": "com.amazonaws.iotsitewise#EntryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the entry.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "assetId": {
+                    "target": "com.amazonaws.iotsitewise#ID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the asset in which the asset property was created.</p>"
+                    }
+                },
+                "propertyId": {
+                    "target": "com.amazonaws.iotsitewise#ID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the asset property.</p>"
+                    }
+                },
+                "propertyAlias": {
+                    "target": "com.amazonaws.iotsitewise#AssetPropertyAlias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alias that identifies the property, such as an OPC-UA server data stream path\n        (for example, <code>/company/windfarm/3/turbine/7/temperature</code>). For more information, see\n        <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html\">Mapping industrial data streams to asset properties</a> in the\n        <i>IoT SiteWise User Guide</i>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information for an asset property value entry that is associated with the \n    <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html\">BatchGetAssetPropertyValue</a> API.</p>\n         <p>To identify an asset property, you must specify one of the following:</p>\n         <ul>\n            <li>\n               <p>The <code>assetId</code> and <code>propertyId</code> of an asset property.</p>\n            </li>\n            <li>\n               <p>A <code>propertyAlias</code>, which is a data stream alias (for example,\n          <code>/company/windfarm/3/turbine/7/temperature</code>). To define an asset property's alias, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html\">UpdateAssetProperty</a>.</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueErrorCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ResourceNotFoundException",
+                        "name": "ResourceNotFoundException"
+                    },
+                    {
+                        "value": "InvalidRequestException",
+                        "name": "InvalidRequestException"
+                    },
+                    {
+                        "value": "AccessDeniedException",
+                        "name": "AccessDeniedException"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueErrorEntries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueErrorEntry"
+            }
+        },
+        "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueErrorEntry": {
+            "type": "structure",
+            "members": {
+                "errorCode": {
+                    "target": "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "errorMessage": {
+                    "target": "com.amazonaws.iotsitewise#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The associated error message.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "entryId": {
+                    "target": "com.amazonaws.iotsitewise#EntryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the entry.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains error information for an asset property value entry that is associated with the \n    <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html\">BatchGetAssetPropertyValue</a> API.</p>"
+            }
+        },
+        "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueErrorInfo": {
+            "type": "structure",
+            "members": {
+                "errorCode": {
+                    "target": "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "errorTimestamp": {
+                    "target": "com.amazonaws.iotsitewise#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date the error occurred, in Unix epoch time.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The error information, such as the error code and the timestamp.</p>"
+            }
+        },
+        "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueHistory": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueHistoryRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueHistoryResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotsitewise#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iotsitewise#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iotsitewise#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.iotsitewise#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the historical values for one or more asset properties. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/query-industrial-data.html#historical-values\">Querying\n    historical values</a> in the <i>IoT SiteWise User Guide</i>.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "data."
+                },
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/properties/batch/history",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueHistoryEntries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueHistoryEntry"
+            }
+        },
+        "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueHistoryEntry": {
+            "type": "structure",
+            "members": {
+                "entryId": {
+                    "target": "com.amazonaws.iotsitewise#EntryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the entry.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "assetId": {
+                    "target": "com.amazonaws.iotsitewise#ID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the asset in which the asset property was created.</p>"
+                    }
+                },
+                "propertyId": {
+                    "target": "com.amazonaws.iotsitewise#ID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the asset property.</p>"
+                    }
+                },
+                "propertyAlias": {
+                    "target": "com.amazonaws.iotsitewise#AssetPropertyAlias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alias that identifies the property, such as an OPC-UA server data stream path\n        (for example, <code>/company/windfarm/3/turbine/7/temperature</code>). For more information, see\n        <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html\">Mapping industrial data streams to asset properties</a> in the\n        <i>IoT SiteWise User Guide</i>.</p>"
+                    }
+                },
+                "startDate": {
+                    "target": "com.amazonaws.iotsitewise#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exclusive start of the range from which to query historical data, expressed in seconds in Unix epoch time.</p>"
+                    }
+                },
+                "endDate": {
+                    "target": "com.amazonaws.iotsitewise#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The inclusive end of the range from which to query historical data, expressed in seconds in Unix epoch time.</p>"
+                    }
+                },
+                "qualities": {
+                    "target": "com.amazonaws.iotsitewise#Qualities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The quality by which to filter asset data.</p>"
+                    }
+                },
+                "timeOrdering": {
+                    "target": "com.amazonaws.iotsitewise#TimeOrdering",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The chronological sorting order of the requested information.</p>\n         <p>Default: <code>ASCENDING</code>\n         </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information for an asset property historical value entry that is associated with the \n    <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html\">BatchGetAssetPropertyValueHistory</a> API.</p>\n         <p>To identify an asset property, you must specify one of the following:</p>\n         <ul>\n            <li>\n               <p>The <code>assetId</code> and <code>propertyId</code> of an asset property.</p>\n            </li>\n            <li>\n               <p>A <code>propertyAlias</code>, which is a data stream alias (for example,\n          <code>/company/windfarm/3/turbine/7/temperature</code>). To define an asset property's alias, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html\">UpdateAssetProperty</a>.</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueHistoryErrorCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ResourceNotFoundException",
+                        "name": "ResourceNotFoundException"
+                    },
+                    {
+                        "value": "InvalidRequestException",
+                        "name": "InvalidRequestException"
+                    },
+                    {
+                        "value": "AccessDeniedException",
+                        "name": "AccessDeniedException"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueHistoryErrorEntries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueHistoryErrorEntry"
+            }
+        },
+        "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueHistoryErrorEntry": {
+            "type": "structure",
+            "members": {
+                "errorCode": {
+                    "target": "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueHistoryErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "errorMessage": {
+                    "target": "com.amazonaws.iotsitewise#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The associated error message.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "entryId": {
+                    "target": "com.amazonaws.iotsitewise#EntryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the entry.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of the errors (if any) associated with the batch request. Each error entry\n      contains the <code>entryId</code> of the entry that failed.</p>"
+            }
+        },
+        "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueHistoryErrorInfo": {
+            "type": "structure",
+            "members": {
+                "errorCode": {
+                    "target": "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueHistoryErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "errorTimestamp": {
+                    "target": "com.amazonaws.iotsitewise#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date the error occurred, in Unix epoch time.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The error information, such as the error code and the timestamp.</p>"
+            }
+        },
+        "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueHistoryMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueHistoryRequest": {
+            "type": "structure",
+            "members": {
+                "entries": {
+                    "target": "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueHistoryEntries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of asset property historical value entries for the batch get request. \n    You can specify up to 16 entries per request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.iotsitewise#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to be used for the next set of paginated results.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueHistoryMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return for each paginated request. A result set is returned in the two cases, whichever occurs first.</p>\n         <ul>\n            <li>\n               <p>The size of the result set is less than 1 MB.</p>\n            </li>\n            <li>\n               <p>The number of data points in the result set is less than the value of <code>maxResults</code>. \n        The maximum value of <code>maxResults</code> is 4000.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueHistoryResponse": {
+            "type": "structure",
+            "members": {
+                "errorEntries": {
+                    "target": "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueHistoryErrorEntries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the errors (if any) associated with the batch request. Each error entry\n      contains the <code>entryId</code> of the entry that failed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "successEntries": {
+                    "target": "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueHistorySuccessEntries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of entries that were processed successfully by this batch request. Each success entry\n      contains the <code>entryId</code> of the entry that succeeded and the latest query result.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "skippedEntries": {
+                    "target": "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueHistorySkippedEntries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of entries that were not processed by this batch request. \n      because these entries had been completely processed by previous paginated requests. \n      Each skipped entry contains the <code>entryId</code> of the entry that skipped.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.iotsitewise#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no additional results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueHistorySkippedEntries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueHistorySkippedEntry"
+            }
+        },
+        "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueHistorySkippedEntry": {
+            "type": "structure",
+            "members": {
+                "entryId": {
+                    "target": "com.amazonaws.iotsitewise#EntryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the entry.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "completionStatus": {
+                    "target": "com.amazonaws.iotsitewise#BatchEntryCompletionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The completion status of each entry that is associated with the \n    <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValueHistory.html\">BatchGetAssetPropertyValueHistory</a> API.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "errorInfo": {
+                    "target": "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueHistoryErrorInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error information, such as the error code and the timestamp.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information for an entry that has been processed by the previous \n    <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html\">BatchGetAssetPropertyValueHistory</a> request.</p>"
+            }
+        },
+        "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueHistorySuccessEntries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueHistorySuccessEntry"
+            }
+        },
+        "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueHistorySuccessEntry": {
+            "type": "structure",
+            "members": {
+                "entryId": {
+                    "target": "com.amazonaws.iotsitewise#EntryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the entry.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "assetPropertyValueHistory": {
+                    "target": "com.amazonaws.iotsitewise#AssetPropertyValueHistory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The requested historical values for the specified asset property.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains success information for an entry that is associated with the \n    <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html\">BatchGetAssetPropertyValueHistory</a> API.</p>"
+            }
+        },
+        "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueRequest": {
+            "type": "structure",
+            "members": {
+                "entries": {
+                    "target": "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueEntries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of asset property value entries for the batch get request. \n    You can specify up to 16 entries per request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.iotsitewise#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to be used for the next set of paginated results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueResponse": {
+            "type": "structure",
+            "members": {
+                "errorEntries": {
+                    "target": "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueErrorEntries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the errors (if any) associated with the batch request. Each error entry\n      contains the <code>entryId</code> of the entry that failed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "successEntries": {
+                    "target": "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueSuccessEntries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of entries that were processed successfully by this batch request. Each success entry\n      contains the <code>entryId</code> of the entry that succeeded and the latest query result.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "skippedEntries": {
+                    "target": "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueSkippedEntries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of entries that were not processed by this batch request. \n      because these entries had been completely processed by previous paginated requests. \n      Each skipped entry contains the <code>entryId</code> of the entry that skipped.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.iotsitewise#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no additional results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueSkippedEntries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueSkippedEntry"
+            }
+        },
+        "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueSkippedEntry": {
+            "type": "structure",
+            "members": {
+                "entryId": {
+                    "target": "com.amazonaws.iotsitewise#EntryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the entry.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "completionStatus": {
+                    "target": "com.amazonaws.iotsitewise#BatchEntryCompletionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The completion status of each entry that is associated with the \n      <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html\">BatchGetAssetPropertyValue</a> request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "errorInfo": {
+                    "target": "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueErrorInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error information, such as the error code and the timestamp.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information for an entry that has been processed by the previous \n      <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html\">BatchGetAssetPropertyValue</a> request.</p>"
+            }
+        },
+        "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueSuccessEntries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueSuccessEntry"
+            }
+        },
+        "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueSuccessEntry": {
+            "type": "structure",
+            "members": {
+                "entryId": {
+                    "target": "com.amazonaws.iotsitewise#EntryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the entry.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "assetPropertyValue": {
+                    "target": "com.amazonaws.iotsitewise#AssetPropertyValue"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains success information for an entry that is associated with the \n    <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html\">BatchGetAssetPropertyValue</a> API.</p>"
             }
         },
         "com.amazonaws.iotsitewise#BatchPutAssetPropertyError": {
@@ -3079,6 +3996,9 @@
             "input": {
                 "target": "com.amazonaws.iotsitewise#DeleteGatewayRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.iotsitewise#InternalFailureException"
@@ -3251,6 +4171,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.iotsitewise#DeleteTimeSeriesRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -4774,6 +5697,9 @@
             "input": {
                 "target": "com.amazonaws.iotsitewise#DisassociateAssetsRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.iotsitewise#ConflictingOperationException"
@@ -4841,6 +5767,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.iotsitewise#DisassociateTimeSeriesFromAssetPropertyRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -5210,6 +6139,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
+                    "items": "aggregatedValues",
                     "pageSize": "maxResults"
                 }
             }
@@ -5393,6 +6323,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
+                    "items": "assetPropertyValueHistory",
                     "pageSize": "maxResults"
                 }
             }
@@ -5558,6 +6489,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
+                    "items": "interpolatedAssetPropertyValues",
                     "pageSize": "maxResults"
                 }
             }
@@ -6073,6 +7005,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
+                    "items": "accessPolicySummaries",
                     "pageSize": "maxResults"
                 }
             }
@@ -6181,6 +7114,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
+                    "items": "assetModelSummaries",
                     "pageSize": "maxResults"
                 }
             }
@@ -6257,6 +7191,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
+                    "items": "assetRelationshipSummaries",
                     "pageSize": "maxResults"
                 }
             }
@@ -6349,6 +7284,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
+                    "items": "assetSummaries",
                     "pageSize": "maxResults"
                 }
             }
@@ -6454,6 +7390,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
+                    "items": "assetSummaries",
                     "pageSize": "maxResults"
                 }
             }
@@ -6549,6 +7486,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
+                    "items": "dashboardSummaries",
                     "pageSize": "maxResults"
                 }
             }
@@ -6630,6 +7568,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
+                    "items": "gatewaySummaries",
                     "pageSize": "maxResults"
                 }
             }
@@ -6703,6 +7642,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
+                    "items": "portalSummaries",
                     "pageSize": "maxResults"
                 }
             }
@@ -6775,6 +7715,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
+                    "items": "assetIds",
                     "pageSize": "maxResults"
                 }
             }
@@ -6856,6 +7797,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
+                    "items": "projectSummaries",
                     "pageSize": "maxResults"
                 }
             }
@@ -7007,6 +7949,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
+                    "items": "TimeSeriesSummaries",
                     "pageSize": "maxResults"
                 }
             }
@@ -7749,10 +8692,7 @@
             }
         },
         "com.amazonaws.iotsitewise#PropertyValueStringValue": {
-            "type": "string",
-            "traits": {
-                "smithy.api#pattern": "^[^\\u0000-\\u001F\\u007F]+$"
-            }
+            "type": "string"
         },
         "com.amazonaws.iotsitewise#PutAssetPropertyValueEntries": {
             "type": "list",
@@ -8383,7 +9323,7 @@
                 "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
-                    "max": 31556889864403199
+                    "max": 9223372036854774
                 }
             }
         },
@@ -8918,6 +9858,9 @@
             "input": {
                 "target": "com.amazonaws.iotsitewise#UpdateAssetPropertyRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.iotsitewise#ConflictingOperationException"
@@ -9108,6 +10051,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.iotsitewise#UpdateGatewayRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {

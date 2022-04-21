@@ -728,6 +728,84 @@
                 "smithy.api#pattern": "^arn:([a-z\\d-]+):.*:.*:.*:.+$"
             }
         },
+        "com.amazonaws.lookoutmetrics#AttributeValue": {
+            "type": "structure",
+            "members": {
+                "S": {
+                    "target": "com.amazonaws.lookoutmetrics#StringAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string.</p>"
+                    }
+                },
+                "N": {
+                    "target": "com.amazonaws.lookoutmetrics#NumberAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A number.</p>"
+                    }
+                },
+                "B": {
+                    "target": "com.amazonaws.lookoutmetrics#BinaryAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A binary value.</p>"
+                    }
+                },
+                "SS": {
+                    "target": "com.amazonaws.lookoutmetrics#StringListAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of strings.</p>"
+                    }
+                },
+                "NS": {
+                    "target": "com.amazonaws.lookoutmetrics#NumberListAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of numbers.</p>"
+                    }
+                },
+                "BS": {
+                    "target": "com.amazonaws.lookoutmetrics#BinaryListAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of binary values.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An attribute value.</p>"
+            }
+        },
+        "com.amazonaws.lookoutmetrics#AutoDetectionMetricSource": {
+            "type": "structure",
+            "members": {
+                "S3SourceConfig": {
+                    "target": "com.amazonaws.lookoutmetrics#AutoDetectionS3SourceConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source's source config.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An auto detection metric source.</p>"
+            }
+        },
+        "com.amazonaws.lookoutmetrics#AutoDetectionS3SourceConfig": {
+            "type": "structure",
+            "members": {
+                "TemplatedPathList": {
+                    "target": "com.amazonaws.lookoutmetrics#TemplatedPathList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The config's templated path list.</p>"
+                    }
+                },
+                "HistoricalDataPathList": {
+                    "target": "com.amazonaws.lookoutmetrics#HistoricalDataPathList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The config's historical data path list.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An auto detection source config.</p>"
+            }
+        },
         "com.amazonaws.lookoutmetrics#BackTestAnomalyDetector": {
             "type": "operation",
             "input": {
@@ -777,6 +855,15 @@
         "com.amazonaws.lookoutmetrics#BackTestAnomalyDetectorResponse": {
             "type": "structure",
             "members": {}
+        },
+        "com.amazonaws.lookoutmetrics#BinaryAttributeValue": {
+            "type": "string"
+        },
+        "com.amazonaws.lookoutmetrics#BinaryListAttributeValue": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lookoutmetrics#BinaryAttributeValue"
+            }
         },
         "com.amazonaws.lookoutmetrics#Boolean": {
             "type": "boolean",
@@ -831,6 +918,25 @@
                     "max": 63
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*$"
+            }
+        },
+        "com.amazonaws.lookoutmetrics#Confidence": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "HIGH",
+                        "name": "HIGH"
+                    },
+                    {
+                        "value": "LOW",
+                        "name": "LOW"
+                    },
+                    {
+                        "value": "NONE",
+                        "name": "NONE"
+                    }
+                ]
             }
         },
         "com.amazonaws.lookoutmetrics#ConflictException": {
@@ -1808,6 +1914,234 @@
                         "smithy.api#documentation": "<p>Contains information about the dataset's source data.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.lookoutmetrics#DetectMetricSetConfig": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutmetrics#DetectMetricSetConfigRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutmetrics#DetectMetricSetConfigResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutmetrics#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutmetrics#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutmetrics#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutmetrics#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutmetrics#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Detects an Amazon S3 dataset's file format, interval, and offset.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/DetectMetricSetConfig",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lookoutmetrics#DetectMetricSetConfigRequest": {
+            "type": "structure",
+            "members": {
+                "AnomalyDetectorArn": {
+                    "target": "com.amazonaws.lookoutmetrics#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An anomaly detector ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AutoDetectionMetricSource": {
+                    "target": "com.amazonaws.lookoutmetrics#AutoDetectionMetricSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A data source.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutmetrics#DetectMetricSetConfigResponse": {
+            "type": "structure",
+            "members": {
+                "DetectedMetricSetConfig": {
+                    "target": "com.amazonaws.lookoutmetrics#DetectedMetricSetConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The inferred dataset configuration for the datasource.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutmetrics#DetectedCsvFormatDescriptor": {
+            "type": "structure",
+            "members": {
+                "FileCompression": {
+                    "target": "com.amazonaws.lookoutmetrics#DetectedField",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format's file compression.</p>"
+                    }
+                },
+                "Charset": {
+                    "target": "com.amazonaws.lookoutmetrics#DetectedField",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format's charset.</p>"
+                    }
+                },
+                "ContainsHeader": {
+                    "target": "com.amazonaws.lookoutmetrics#DetectedField",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the format includes a header.</p>"
+                    }
+                },
+                "Delimiter": {
+                    "target": "com.amazonaws.lookoutmetrics#DetectedField",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format's delimiter.</p>"
+                    }
+                },
+                "HeaderList": {
+                    "target": "com.amazonaws.lookoutmetrics#DetectedField",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format's header list.</p>"
+                    }
+                },
+                "QuoteSymbol": {
+                    "target": "com.amazonaws.lookoutmetrics#DetectedField",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format's quote symbol.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Properties of an inferred CSV format.</p>"
+            }
+        },
+        "com.amazonaws.lookoutmetrics#DetectedField": {
+            "type": "structure",
+            "members": {
+                "Value": {
+                    "target": "com.amazonaws.lookoutmetrics#AttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The field's value.</p>"
+                    }
+                },
+                "Confidence": {
+                    "target": "com.amazonaws.lookoutmetrics#Confidence",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The field's confidence.</p>"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.lookoutmetrics#Message",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The field's message.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An inferred field.</p>"
+            }
+        },
+        "com.amazonaws.lookoutmetrics#DetectedFileFormatDescriptor": {
+            "type": "structure",
+            "members": {
+                "CsvFormatDescriptor": {
+                    "target": "com.amazonaws.lookoutmetrics#DetectedCsvFormatDescriptor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about a CSV format.</p>"
+                    }
+                },
+                "JsonFormatDescriptor": {
+                    "target": "com.amazonaws.lookoutmetrics#DetectedJsonFormatDescriptor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about a JSON format.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Properties of an inferred data format.</p>"
+            }
+        },
+        "com.amazonaws.lookoutmetrics#DetectedJsonFormatDescriptor": {
+            "type": "structure",
+            "members": {
+                "FileCompression": {
+                    "target": "com.amazonaws.lookoutmetrics#DetectedField",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format's file compression.</p>"
+                    }
+                },
+                "Charset": {
+                    "target": "com.amazonaws.lookoutmetrics#DetectedField",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format's character set.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A detected JSON format descriptor.</p>"
+            }
+        },
+        "com.amazonaws.lookoutmetrics#DetectedMetricSetConfig": {
+            "type": "structure",
+            "members": {
+                "Offset": {
+                    "target": "com.amazonaws.lookoutmetrics#DetectedField",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The dataset's offset.</p>"
+                    }
+                },
+                "MetricSetFrequency": {
+                    "target": "com.amazonaws.lookoutmetrics#DetectedField",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The dataset's interval.</p>"
+                    }
+                },
+                "MetricSource": {
+                    "target": "com.amazonaws.lookoutmetrics#DetectedMetricSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The dataset's data source.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An inferred dataset configuration.</p>"
+            }
+        },
+        "com.amazonaws.lookoutmetrics#DetectedMetricSource": {
+            "type": "structure",
+            "members": {
+                "S3SourceConfig": {
+                    "target": "com.amazonaws.lookoutmetrics#DetectedS3SourceConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data source's source configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An inferred data source.</p>"
+            }
+        },
+        "com.amazonaws.lookoutmetrics#DetectedS3SourceConfig": {
+            "type": "structure",
+            "members": {
+                "FileFormatDescriptor": {
+                    "target": "com.amazonaws.lookoutmetrics#DetectedFileFormatDescriptor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source's file format descriptor.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An inferred source configuration.</p>"
             }
         },
         "com.amazonaws.lookoutmetrics#DimensionContribution": {
@@ -3047,6 +3381,9 @@
                     "target": "com.amazonaws.lookoutmetrics#DescribeMetricSet"
                 },
                 {
+                    "target": "com.amazonaws.lookoutmetrics#DetectMetricSetConfig"
+                },
+                {
                     "target": "com.amazonaws.lookoutmetrics#GetAnomalyGroup"
                 },
                 {
@@ -3337,6 +3674,15 @@
                     "max": 3000
                 },
                 "smithy.api#pattern": "\\S"
+            }
+        },
+        "com.amazonaws.lookoutmetrics#NumberAttributeValue": {
+            "type": "string"
+        },
+        "com.amazonaws.lookoutmetrics#NumberListAttributeValue": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lookoutmetrics#NumberAttributeValue"
             }
         },
         "com.amazonaws.lookoutmetrics#Offset": {
@@ -3806,6 +4152,15 @@
                 "smithy.api#documentation": "<p>The request exceeded the service's quotas. Check the service quotas and try again.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.lookoutmetrics#StringAttributeValue": {
+            "type": "string"
+        },
+        "com.amazonaws.lookoutmetrics#StringListAttributeValue": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lookoutmetrics#StringAttributeValue"
             }
         },
         "com.amazonaws.lookoutmetrics#SubnetId": {

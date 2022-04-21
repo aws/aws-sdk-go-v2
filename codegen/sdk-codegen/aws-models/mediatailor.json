@@ -234,7 +234,7 @@
                 "AdSegmentUrlPrefix": {
                     "target": "com.amazonaws.mediatailor#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>A non-default content delivery network (CDN) to serve ad segments. By default, AWS Elemental MediaTailor uses Amazon CloudFront with default cache settings as its CDN for ad segments. To set up an alternate CDN, create a rule in your CDN for the origin ads.mediatailor.&amp;lt;region&gt;.amazonaws.com. Then specify the rule's name in this AdSegmentUrlPrefix. When AWS Elemental MediaTailor serves a manifest, it reports your CDN as the source for ad segments.</p>"
+                        "smithy.api#documentation": "<p>A non-default content delivery network (CDN) to serve ad segments. By default, AWS Elemental MediaTailor uses Amazon CloudFront with default cache settings as its CDN for ad segments. To set up an alternate CDN, create a rule in your CDN for the origin ads.mediatailor.&amp;lt;region>.amazonaws.com. Then specify the rule's name in this AdSegmentUrlPrefix. When AWS Elemental MediaTailor serves a manifest, it reports your CDN as the source for ad segments.</p>"
                     }
                 },
                 "ContentSegmentUrlPrefix": {
@@ -309,6 +309,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The tags to assign to the channel.</p>",
                         "smithy.api#jsonName": "tags"
+                    }
+                },
+                "Tier": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tier for this channel. STANDARD tier channels can contain live programs.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -477,6 +484,12 @@
                         "smithy.api#documentation": "<p>The tags to assign to the channel.</p>",
                         "smithy.api#jsonName": "tags"
                     }
+                },
+                "Tier": {
+                    "target": "com.amazonaws.mediatailor#Tier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tier of the channel.</p>"
+                    }
                 }
             }
         },
@@ -535,6 +548,112 @@
                     "target": "com.amazonaws.mediatailor#__mapOf__string",
                     "traits": {
                         "smithy.api#documentation": "<p>The tags assigned to the channel.</p>",
+                        "smithy.api#jsonName": "tags"
+                    }
+                },
+                "Tier": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The channel's tier.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.mediatailor#CreateLiveSource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mediatailor#CreateLiveSourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.mediatailor#CreateLiveSourceResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Creates name for a specific live source in a source location.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/sourceLocation/{SourceLocationName}/liveSource/{LiveSourceName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.mediatailor#CreateLiveSourceRequest": {
+            "type": "structure",
+            "members": {
+                "HttpPackageConfigurations": {
+                    "target": "com.amazonaws.mediatailor#HttpPackageConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of HTTP package configuration parameters for this live source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LiveSourceName": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the live source you are working on.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "SourceLocationName": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the source location you are working on.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.mediatailor#__mapOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to assign to the live source.</p>",
+                        "smithy.api#jsonName": "tags"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.mediatailor#CreateLiveSourceResponse": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the live source.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.mediatailor#__timestampUnix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp that indicates when the live source was created.</p>"
+                    }
+                },
+                "HttpPackageConfigurations": {
+                    "target": "com.amazonaws.mediatailor#HttpPackageConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTP package configurations.</p>"
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.mediatailor#__timestampUnix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp that indicates when the live source was modified.</p>"
+                    }
+                },
+                "LiveSourceName": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the live source.</p>"
+                    }
+                },
+                "SourceLocationName": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the source location associated with the VOD source.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.mediatailor#__mapOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags assigned to the live source.</p>",
                         "smithy.api#jsonName": "tags"
                     }
                 }
@@ -673,6 +792,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "LiveSourceName": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the LiveSource for this Program.</p>"
+                    }
+                },
                 "ProgramName": {
                     "target": "com.amazonaws.mediatailor#__string",
                     "traits": {
@@ -698,8 +823,7 @@
                 "VodSourceName": {
                     "target": "com.amazonaws.mediatailor#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name that's used to refer to a VOD source.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The name that's used to refer to a VOD source.</p>"
                     }
                 }
             }
@@ -729,6 +853,12 @@
                     "target": "com.amazonaws.mediatailor#__timestampUnix",
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp of when the program was created.</p>"
+                    }
+                },
+                "LiveSourceName": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the LiveSource for this Program.</p>"
                     }
                 },
                 "ProgramName": {
@@ -797,7 +927,10 @@
                     }
                 },
                 "SegmentDeliveryConfigurations": {
-                    "target": "com.amazonaws.mediatailor#__listOfSegmentDeliveryConfiguration"
+                    "target": "com.amazonaws.mediatailor#__listOfSegmentDeliveryConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the segment delivery configurations associated with this resource.</p>"
+                    }
                 },
                 "SourceLocationName": {
                     "target": "com.amazonaws.mediatailor#__string",
@@ -856,7 +989,10 @@
                     }
                 },
                 "SegmentDeliveryConfigurations": {
-                    "target": "com.amazonaws.mediatailor#__listOfSegmentDeliveryConfiguration"
+                    "target": "com.amazonaws.mediatailor#__listOfSegmentDeliveryConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the segment delivery configurations associated with this resource.</p>"
+                    }
                 },
                 "SourceLocationName": {
                     "target": "com.amazonaws.mediatailor#__string",
@@ -896,7 +1032,7 @@
                 "HttpPackageConfigurations": {
                     "target": "com.amazonaws.mediatailor#HttpPackageConfigurations",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of HTTP package configuration parameters for this VOD source.</p>",
+                        "smithy.api#documentation": "<p>A list of HTTP package configuration parameters for this VOD source.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -949,7 +1085,7 @@
                 "LastModifiedTime": {
                     "target": "com.amazonaws.mediatailor#__timestampUnix",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN for the VOD source.</p>"
+                        "smithy.api#documentation": "<p>The last modified time of the VOD source.</p>"
                     }
                 },
                 "SourceLocationName": {
@@ -1130,6 +1266,48 @@
             }
         },
         "com.amazonaws.mediatailor#DeleteChannelResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.mediatailor#DeleteLiveSource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mediatailor#DeleteLiveSourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.mediatailor#DeleteLiveSourceResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a specific live source in a specific source location.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/sourceLocation/{SourceLocationName}/liveSource/{LiveSourceName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.mediatailor#DeleteLiveSourceRequest": {
+            "type": "structure",
+            "members": {
+                "LiveSourceName": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the live source you are working on.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "SourceLocationName": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the source location you are working on.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.mediatailor#DeleteLiveSourceResponse": {
             "type": "structure",
             "members": {}
         },
@@ -1414,6 +1592,98 @@
                         "smithy.api#documentation": "<p>The tags assigned to the channel.</p>",
                         "smithy.api#jsonName": "tags"
                     }
+                },
+                "Tier": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The channel's tier.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.mediatailor#DescribeLiveSource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mediatailor#DescribeLiveSourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.mediatailor#DescribeLiveSourceResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides details about a specific live source in a specific source location.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/sourceLocation/{SourceLocationName}/liveSource/{LiveSourceName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.mediatailor#DescribeLiveSourceRequest": {
+            "type": "structure",
+            "members": {
+                "LiveSourceName": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the live source you are working on.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "SourceLocationName": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the source location you are working on.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.mediatailor#DescribeLiveSourceResponse": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the live source.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.mediatailor#__timestampUnix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp that indicates when the live source was created.</p>"
+                    }
+                },
+                "HttpPackageConfigurations": {
+                    "target": "com.amazonaws.mediatailor#HttpPackageConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTP package configurations.</p>"
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.mediatailor#__timestampUnix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp that indicates when the live source was modified.</p>"
+                    }
+                },
+                "LiveSourceName": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the live source.</p>"
+                    }
+                },
+                "SourceLocationName": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the source location associated with the VOD source.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.mediatailor#__mapOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags assigned to the live source.</p>",
+                        "smithy.api#jsonName": "tags"
+                    }
                 }
             }
         },
@@ -1480,6 +1750,12 @@
                     "target": "com.amazonaws.mediatailor#__timestampUnix",
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp of when the program was created.</p>"
+                    }
+                },
+                "LiveSourceName": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the LiveSource for this Program.</p>"
                     }
                 },
                 "ProgramName": {
@@ -1578,7 +1854,10 @@
                     }
                 },
                 "SegmentDeliveryConfigurations": {
-                    "target": "com.amazonaws.mediatailor#__listOfSegmentDeliveryConfiguration"
+                    "target": "com.amazonaws.mediatailor#__listOfSegmentDeliveryConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the segment delivery configurations associated with this resource.</p>"
+                    }
                 },
                 "SourceLocationName": {
                     "target": "com.amazonaws.mediatailor#__string",
@@ -1657,7 +1936,7 @@
                 "LastModifiedTime": {
                     "target": "com.amazonaws.mediatailor#__timestampUnix",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN for the VOD source.</p>"
+                        "smithy.api#documentation": "<p>The last modified time of the VOD source.</p>"
                     }
                 },
                 "SourceLocationName": {
@@ -1785,7 +2064,7 @@
                 "Items": {
                     "target": "com.amazonaws.mediatailor#__listOfScheduleEntry",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of schedule entries for the channel.</p>"
+                        "smithy.api#documentation": "<p>A list of schedule entries for the channel.</p>"
                     }
                 },
                 "NextToken": {
@@ -2162,7 +2441,7 @@
                 "Items": {
                     "target": "com.amazonaws.mediatailor#__listOfAlert",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of alerts that are associated with this resource.</p>"
+                        "smithy.api#documentation": "<p>A list of alerts that are associated with this resource.</p>"
                     }
                 },
                 "NextToken": {
@@ -2221,13 +2500,80 @@
                 "Items": {
                     "target": "com.amazonaws.mediatailor#__listOfChannel",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of channels that are associated with this account.</p>"
+                        "smithy.api#documentation": "<p>A list of channels that are associated with this account.</p>"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.mediatailor#__string",
                     "traits": {
                         "smithy.api#documentation": "<p>Pagination token returned by the list request when results exceed the maximum allowed. Use the token to fetch the next page of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.mediatailor#ListLiveSources": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mediatailor#ListLiveSourcesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.mediatailor#ListLiveSourcesResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>lists all the live sources in a source location.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/sourceLocation/{SourceLocationName}/liveSources",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Items",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.mediatailor#ListLiveSourcesRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.mediatailor#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Upper bound on number of records to return. The maximum number of results is 100.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Pagination token from the GET list request. Use the token to fetch the next page of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "SourceLocationName": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the source location you are working on.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.mediatailor#ListLiveSourcesResponse": {
+            "type": "structure",
+            "members": {
+                "Items": {
+                    "target": "com.amazonaws.mediatailor#__listOfLiveSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lists the live sources.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Pagination token from the list request. Use the token to fetch the next page of results.</p>"
                     }
                 }
             }
@@ -2410,7 +2756,7 @@
                 "Items": {
                     "target": "com.amazonaws.mediatailor#__listOfSourceLocation",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of source locations.</p>"
+                        "smithy.api#documentation": "<p>A list of source locations.</p>"
                     }
                 },
                 "NextToken": {
@@ -2555,6 +2901,61 @@
                 "smithy.api#documentation": "<p>The configuration for pre-roll ad insertion.</p>"
             }
         },
+        "com.amazonaws.mediatailor#LiveSource": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for the live source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.mediatailor#__timestampUnix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp that indicates when the live source was created.</p>"
+                    }
+                },
+                "HttpPackageConfigurations": {
+                    "target": "com.amazonaws.mediatailor#HttpPackageConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTP package configurations for the live source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.mediatailor#__timestampUnix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp that indicates when the live source was last modified.</p>"
+                    }
+                },
+                "LiveSourceName": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name that's used to refer to a live source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SourceLocationName": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the source location.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.mediatailor#__mapOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags assigned to the live source.</p>",
+                        "smithy.api#jsonName": "tags"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Live source configuration parameters.</p>"
+            }
+        },
         "com.amazonaws.mediatailor#LogConfiguration": {
             "type": "structure",
             "members": {
@@ -2619,6 +3020,9 @@
                     "target": "com.amazonaws.mediatailor#CreateChannel"
                 },
                 {
+                    "target": "com.amazonaws.mediatailor#CreateLiveSource"
+                },
+                {
                     "target": "com.amazonaws.mediatailor#CreatePrefetchSchedule"
                 },
                 {
@@ -2637,6 +3041,9 @@
                     "target": "com.amazonaws.mediatailor#DeleteChannelPolicy"
                 },
                 {
+                    "target": "com.amazonaws.mediatailor#DeleteLiveSource"
+                },
+                {
                     "target": "com.amazonaws.mediatailor#DeletePlaybackConfiguration"
                 },
                 {
@@ -2653,6 +3060,9 @@
                 },
                 {
                     "target": "com.amazonaws.mediatailor#DescribeChannel"
+                },
+                {
+                    "target": "com.amazonaws.mediatailor#DescribeLiveSource"
                 },
                 {
                     "target": "com.amazonaws.mediatailor#DescribeProgram"
@@ -2680,6 +3090,9 @@
                 },
                 {
                     "target": "com.amazonaws.mediatailor#ListChannels"
+                },
+                {
+                    "target": "com.amazonaws.mediatailor#ListLiveSources"
                 },
                 {
                     "target": "com.amazonaws.mediatailor#ListPlaybackConfigurations"
@@ -2716,6 +3129,9 @@
                 },
                 {
                     "target": "com.amazonaws.mediatailor#UpdateChannel"
+                },
+                {
+                    "target": "com.amazonaws.mediatailor#UpdateLiveSource"
                 },
                 {
                     "target": "com.amazonaws.mediatailor#UpdateSourceLocation"
@@ -3467,6 +3883,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "LiveSourceName": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the live source used for the program.</p>"
+                    }
+                },
                 "ProgramName": {
                     "target": "com.amazonaws.mediatailor#__string",
                     "traits": {
@@ -3496,8 +3918,7 @@
                 "VodSourceName": {
                     "target": "com.amazonaws.mediatailor#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the VOD source.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The name of the VOD source.</p>"
                     }
                 }
             },
@@ -3550,11 +3971,20 @@
             "type": "structure",
             "members": {
                 "BaseUrl": {
-                    "target": "com.amazonaws.mediatailor#__string"
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The base URL of the host or path of the segment delivery server that you're using to serve segments. This is typically a content delivery network (CDN). The URL can be absolute or relative. To use an absolute URL include the protocol, such as https://example.com/some/path. To use a relative URL specify the relative path, such as /some/path*.</p>"
+                    }
                 },
                 "Name": {
-                    "target": "com.amazonaws.mediatailor#__string"
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier used to distinguish between multiple segment delivery configurations in a source location.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The base URL of the host or path of the segment delivery server that you're using to serve segments. This is typically a content delivery network (CDN). The URL can be absolute or relative. To use an absolute URL include the protocol, such as https://example.com/some/path. To use a relative URL specify the relative path, such as /some/path*.</p>"
             }
         },
         "com.amazonaws.mediatailor#SlateSource": {
@@ -3619,7 +4049,10 @@
                     }
                 },
                 "SegmentDeliveryConfigurations": {
-                    "target": "com.amazonaws.mediatailor#__listOfSegmentDeliveryConfiguration"
+                    "target": "com.amazonaws.mediatailor#__listOfSegmentDeliveryConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The segment delivery configurations for the source location.</p>"
+                    }
                 },
                 "SourceLocationName": {
                     "target": "com.amazonaws.mediatailor#__string",
@@ -3780,9 +4213,30 @@
                 }
             }
         },
+        "com.amazonaws.mediatailor#Tier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "BASIC",
+                        "name": "BASIC"
+                    },
+                    {
+                        "value": "STANDARD",
+                        "name": "STANDARD"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.mediatailor#Transition": {
             "type": "structure",
             "members": {
+                "DurationMillis": {
+                    "target": "com.amazonaws.mediatailor#__long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The duration of the live program in seconds.</p>"
+                    }
+                },
                 "RelativePosition": {
                     "target": "com.amazonaws.mediatailor#RelativePosition",
                     "traits": {
@@ -3969,6 +4423,105 @@
                         "smithy.api#documentation": "<p>The tags assigned to the channel.</p>",
                         "smithy.api#jsonName": "tags"
                     }
+                },
+                "Tier": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The channel's tier.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.mediatailor#UpdateLiveSource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mediatailor#UpdateLiveSourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.mediatailor#UpdateLiveSourceResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a specific live source in a specific source location.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/sourceLocation/{SourceLocationName}/liveSource/{LiveSourceName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.mediatailor#UpdateLiveSourceRequest": {
+            "type": "structure",
+            "members": {
+                "HttpPackageConfigurations": {
+                    "target": "com.amazonaws.mediatailor#HttpPackageConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of HTTP package configurations for the live source on this account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LiveSourceName": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the live source you are working on.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "SourceLocationName": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the source location you are working on.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.mediatailor#UpdateLiveSourceResponse": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the live source.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.mediatailor#__timestampUnix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp that indicates when the live source was created.</p>"
+                    }
+                },
+                "HttpPackageConfigurations": {
+                    "target": "com.amazonaws.mediatailor#HttpPackageConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTP package configurations.</p>"
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.mediatailor#__timestampUnix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp that indicates when the live source was modified.</p>"
+                    }
+                },
+                "LiveSourceName": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the live source.</p>"
+                    }
+                },
+                "SourceLocationName": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the source location associated with the VOD source.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.mediatailor#__mapOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags assigned to the live source.</p>",
+                        "smithy.api#jsonName": "tags"
+                    }
                 }
             }
         },
@@ -4012,7 +4565,10 @@
                     }
                 },
                 "SegmentDeliveryConfigurations": {
-                    "target": "com.amazonaws.mediatailor#__listOfSegmentDeliveryConfiguration"
+                    "target": "com.amazonaws.mediatailor#__listOfSegmentDeliveryConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the segment delivery configurations associated with this resource.</p>"
+                    }
                 },
                 "SourceLocationName": {
                     "target": "com.amazonaws.mediatailor#__string",
@@ -4064,7 +4620,10 @@
                     }
                 },
                 "SegmentDeliveryConfigurations": {
-                    "target": "com.amazonaws.mediatailor#__listOfSegmentDeliveryConfiguration"
+                    "target": "com.amazonaws.mediatailor#__listOfSegmentDeliveryConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the segment delivery configurations associated with this resource.</p>"
+                    }
                 },
                 "SourceLocationName": {
                     "target": "com.amazonaws.mediatailor#__string",
@@ -4104,7 +4663,7 @@
                 "HttpPackageConfigurations": {
                     "target": "com.amazonaws.mediatailor#HttpPackageConfigurations",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of HTTP package configurations for the VOD source on this account.</p>",
+                        "smithy.api#documentation": "<p>A list of HTTP package configurations for the VOD source on this account.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4150,7 +4709,7 @@
                 "LastModifiedTime": {
                     "target": "com.amazonaws.mediatailor#__timestampUnix",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN for the VOD source.</p>"
+                        "smithy.api#documentation": "<p>The last modified time of the VOD source.</p>"
                     }
                 },
                 "SourceLocationName": {
@@ -4274,6 +4833,12 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.mediatailor#Channel"
+            }
+        },
+        "com.amazonaws.mediatailor#__listOfLiveSource": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mediatailor#LiveSource"
             }
         },
         "com.amazonaws.mediatailor#__listOfPlaybackConfiguration": {

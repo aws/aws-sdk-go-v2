@@ -27,7 +27,7 @@
                 "objectFields": {
                     "target": "com.amazonaws.wisdom#ObjectFieldsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The fields from the source that are made available to your agents in Wisdom. </p>\n         <ul>\n            <li>\n               <p> For <a href=\"https://developer.salesforce.com/docs/atlas.en-us.knowledge_dev.meta/knowledge_dev/sforce_api_objects_knowledge__kav.htm\"> Salesforce</a>, you must include at least <code>Id</code>,\n            <code>ArticleNumber</code>, <code>VersionNumber</code>, <code>Title</code>,\n            <code>PublishStatus</code>, and <code>IsDeleted</code>. </p>\n            </li>\n            <li>\n               <p>For <a href=\"https://developer.servicenow.com/dev.do#!/reference/api/rome/rest/knowledge-management-api\"> ServiceNow</a>, you must include at least <code>number</code>,\n            <code>short_description</code>, <code>sys_mod_count</code>, <code>workflow_state</code>,\n          and <code>active</code>. </p>\n            </li>\n         </ul>\n         <p>Make sure to include additional field(s); these are indexed and used to source\n      recommendations. </p>",
+                        "smithy.api#documentation": "<p>The fields from the source that are made available to your agents in Wisdom. </p>\n         <ul>\n            <li>\n               <p> For <a href=\"https://developer.salesforce.com/docs/atlas.en-us.knowledge_dev.meta/knowledge_dev/sforce_api_objects_knowledge__kav.htm\"> Salesforce</a>, you must include at least <code>Id</code>,\n            <code>ArticleNumber</code>, <code>VersionNumber</code>, <code>Title</code>,\n            <code>PublishStatus</code>, and <code>IsDeleted</code>. </p>\n            </li>\n            <li>\n               <p>For <a href=\"https://developer.servicenow.com/dev.do#!/reference/api/rome/rest/knowledge-management-api\"> ServiceNow</a>, you must include at least <code>number</code>,\n            <code>short_description</code>, <code>sys_mod_count</code>, <code>workflow_state</code>,\n          and <code>active</code>. </p>\n            </li>\n         </ul>\n         <p>Make sure to include additional fields. These fields are indexed and used to source\n      recommendations. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -85,10 +85,7 @@
             ],
             "traits": {
                 "aws.api#arn": {
-                    "template": "assistant/{assistantId}",
-                    "absolute": false,
-                    "noAccount": false,
-                    "noRegion": false
+                    "template": "assistant/{assistantId}"
                 },
                 "aws.cloudformation#cfnResource": {},
                 "aws.iam#disableConditionKeyInference": {}
@@ -118,10 +115,7 @@
             },
             "traits": {
                 "aws.api#arn": {
-                    "template": "association/{assistantId}/{assistantAssociationId}",
-                    "absolute": false,
-                    "noAccount": false,
-                    "noRegion": false
+                    "template": "association/{assistantId}/{assistantAssociationId}"
                 },
                 "aws.cloudformation#cfnResource": {},
                 "aws.iam#disableConditionKeyInference": {}
@@ -154,7 +148,7 @@
                 "assistantArn": {
                     "target": "com.amazonaws.wisdom#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Wisdom assistant</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Wisdom assistant.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -194,7 +188,7 @@
                 "knowledgeBaseId": {
                     "target": "com.amazonaws.wisdom#Uuid",
                     "traits": {
-                        "smithy.api#documentation": "<p>The the identifier of the knowledge base.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base.</p>"
                     }
                 }
             },
@@ -243,7 +237,7 @@
                 "assistantArn": {
                     "target": "com.amazonaws.wisdom#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Wisdom assistant</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Wisdom assistant.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -296,7 +290,7 @@
                 "assistantArn": {
                     "target": "com.amazonaws.wisdom#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Wisdom assistant</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Wisdom assistant.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -394,7 +388,7 @@
                 "assistantArn": {
                     "target": "com.amazonaws.wisdom#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Wisdom assistant</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Wisdom assistant.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -518,10 +512,7 @@
             ],
             "traits": {
                 "aws.api#arn": {
-                    "template": "content/{knowledgeBaseId}/{contentId}",
-                    "absolute": false,
-                    "noAccount": false,
-                    "noRegion": false
+                    "template": "content/{knowledgeBaseId}/{contentId}"
                 },
                 "aws.iam#disableConditionKeyInference": {}
             }
@@ -553,7 +544,7 @@
                 "knowledgeBaseId": {
                     "target": "com.amazonaws.wisdom#Uuid",
                     "traits": {
-                        "smithy.api#documentation": "<p>The the identifier of the knowledge base.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -615,8 +606,7 @@
                     "target": "com.amazonaws.wisdom#Url",
                     "traits": {
                         "smithy.api#documentation": "<p>The URL of the content.</p>",
-                        "smithy.api#required": {},
-                        "smithy.api#sensitive": {}
+                        "smithy.api#required": {}
                     }
                 },
                 "urlExpiry": {
@@ -647,6 +637,12 @@
             },
             "value": {
                 "target": "com.amazonaws.wisdom#NonEmptyString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
             }
         },
         "com.amazonaws.wisdom#ContentReference": {
@@ -661,7 +657,7 @@
                 "knowledgeBaseId": {
                     "target": "com.amazonaws.wisdom#Uuid",
                     "traits": {
-                        "smithy.api#documentation": "<p>The the identifier of the knowledge base.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base.</p>"
                     }
                 },
                 "contentArn": {
@@ -743,7 +739,7 @@
                 "knowledgeBaseId": {
                     "target": "com.amazonaws.wisdom#Uuid",
                     "traits": {
-                        "smithy.api#documentation": "<p>The the identifier of the knowledge base.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -826,7 +822,7 @@
         "com.amazonaws.wisdom#ContentType": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^(text/(plain|html))|(application/x\\.wisdom-json;source=(salesforce|servicenow))$"
+                "smithy.api#pattern": "^(text/(plain|html))|(application/x\\.wisdom-json;source=(salesforce|servicenow|zendesk))$"
             }
         },
         "com.amazonaws.wisdom#CreateAssistant": {
@@ -854,9 +850,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Creates an Amazon Connect Wisdom assistant.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/assistants",
-                    "code": 200
+                    "method": "POST"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -889,9 +884,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Creates an association between an Amazon Connect Wisdom assistant and another resource. Currently, the\n      only supported association is with a knowledge base. An assistant can have only a single\n      association.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/assistants/{assistantId}/associations",
-                    "code": 200
+                    "method": "POST"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -1030,9 +1024,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Creates Wisdom content. Before to calling this API, use <a href=\"https://docs.aws.amazon.com/wisdom/latest/APIReference/API_StartContentUpload.html\">StartContentUpload</a> to\n      upload an asset.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/knowledgeBases/{knowledgeBaseId}/contents",
-                    "code": 200
+                    "method": "POST"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -1043,7 +1036,7 @@
                 "knowledgeBaseId": {
                     "target": "com.amazonaws.wisdom#UuidOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The the identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1131,9 +1124,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Creates a knowledge base.</p>\n         <note>\n            <p>When using this API, you cannot reuse <a href=\"https://docs.aws.amazon.com/appintegrations/latest/APIReference/Welcome.html\">Amazon AppIntegrations</a>\n        DataIntegrations with external knowledge bases such as Salesforce and ServiceNow. If you do,\n        you'll get an <code>InvalidRequestException</code> error. </p>\n\n            <p>For example, you're programmatically managing your external knowledge base, and you want\n        to add or remove one of the fields that is being ingested from Salesforce. Do the\n        following:</p>\n            <ol>\n               <li>\n                  <p>Call <a href=\"https://docs.aws.amazon.com/wisdom/latest/APIReference/API_DeleteKnowledgeBase.html\">DeleteKnowledgeBase</a>.</p>\n               </li>\n               <li>\n                  <p>Call <a href=\"https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_DeleteDataIntegration.html\">DeleteDataIntegration</a>.</p>\n               </li>\n               <li>\n                  <p>Call <a href=\"https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html\">CreateDataIntegration</a> to recreate the DataIntegration or a create different\n            one.</p>\n               </li>\n               <li>\n                  <p>Call CreateKnowledgeBase.</p>\n               </li>\n            </ol>\n         </note>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/knowledgeBases",
-                    "code": 200
+                    "method": "POST"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -1227,9 +1219,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Creates a session. A session is a contextual container used for generating\n      recommendations. Amazon Connect creates a new Wisdom session for each contact on which Wisdom is\n      enabled.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/assistants/{assistantId}/sessions",
-                    "code": 200
+                    "method": "POST"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -1306,8 +1297,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Deletes an assistant.</p>",
                 "smithy.api#http": {
-                    "method": "DELETE",
                     "uri": "/assistants/{assistantId}",
+                    "method": "DELETE",
                     "code": 204
                 },
                 "smithy.api#idempotent": {}
@@ -1335,8 +1326,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Deletes an assistant association.</p>",
                 "smithy.api#http": {
-                    "method": "DELETE",
                     "uri": "/assistants/{assistantId}/associations/{assistantAssociationId}",
+                    "method": "DELETE",
                     "code": 204
                 },
                 "smithy.api#idempotent": {}
@@ -1406,8 +1397,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Deletes the content.</p>",
                 "smithy.api#http": {
-                    "method": "DELETE",
                     "uri": "/knowledgeBases/{knowledgeBaseId}/contents/{contentId}",
+                    "method": "DELETE",
                     "code": 204
                 },
                 "smithy.api#idempotent": {}
@@ -1419,7 +1410,7 @@
                 "knowledgeBaseId": {
                     "target": "com.amazonaws.wisdom#UuidOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The the identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1455,13 +1446,16 @@
                 },
                 {
                     "target": "com.amazonaws.wisdom#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.wisdom#ValidationException"
                 }
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Deletes the knowledge base.</p>\n         <note>\n            <p>When you use this API to delete an external knowledge base such as Salesforce or\n        ServiceNow, you must also delete the <a href=\"https://docs.aws.amazon.com/appintegrations/latest/APIReference/Welcome.html\">Amazon AppIntegrations</a> DataIntegration.\n        This is because you can't reuse the DataIntegration after it's been associated with an\n        external knowledge base. However, you can delete and recreate it. See <a href=\"https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_DeleteDataIntegration.html\">DeleteDataIntegration</a> and <a href=\"https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html\">CreateDataIntegration</a> in the <i>Amazon AppIntegrations API\n        Reference</i>.</p>\n         </note>",
                 "smithy.api#http": {
-                    "method": "DELETE",
                     "uri": "/knowledgeBases/{knowledgeBaseId}",
+                    "method": "DELETE",
                     "code": 204
                 },
                 "smithy.api#idempotent": {}
@@ -1525,10 +1519,9 @@
             "type": "structure",
             "members": {
                 "text": {
-                    "target": "smithy.api#String",
+                    "target": "com.amazonaws.wisdom#SensitiveString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Text in the document.</p>",
-                        "smithy.api#sensitive": {}
+                        "smithy.api#documentation": "<p>Text in the document.</p>"
                     }
                 },
                 "highlights": {
@@ -1631,9 +1624,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Retrieves information about an assistant.</p>",
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/assistants/{assistantId}",
-                    "code": 200
+                    "method": "GET"
                 },
                 "smithy.api#readonly": {}
             }
@@ -1660,9 +1652,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Retrieves information about an assistant association.</p>",
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/assistants/{assistantId}/associations/{assistantAssociationId}",
-                    "code": 200
+                    "method": "GET"
                 },
                 "smithy.api#readonly": {}
             }
@@ -1745,9 +1736,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Retrieves content, including a pre-signed URL to download the content.</p>",
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/knowledgeBases/{knowledgeBaseId}/contents/{contentId}",
-                    "code": 200
+                    "method": "GET"
                 },
                 "smithy.api#readonly": {}
             }
@@ -1766,7 +1756,7 @@
                 "knowledgeBaseId": {
                     "target": "com.amazonaws.wisdom#UuidOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The the identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1806,9 +1796,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Retrieves summary information about the content.</p>",
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/knowledgeBases/{knowledgeBaseId}/contents/{contentId}/summary",
-                    "code": 200
+                    "method": "GET"
                 },
                 "smithy.api#readonly": {}
             }
@@ -1827,7 +1816,7 @@
                 "knowledgeBaseId": {
                     "target": "com.amazonaws.wisdom#UuidOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The the identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1867,9 +1856,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Retrieves information about the knowledge base.</p>",
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/knowledgeBases/{knowledgeBaseId}",
-                    "code": 200
+                    "method": "GET"
                 },
                 "smithy.api#readonly": {}
             }
@@ -1880,7 +1868,7 @@
                 "knowledgeBaseId": {
                     "target": "com.amazonaws.wisdom#UuidOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The the identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1920,9 +1908,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Retrieves recommendations for the specified session. To avoid retrieving the same\n      recommendations in subsequent calls, use <a href=\"https://docs.aws.amazon.com/wisdom/latest/APIReference/API_NotifyRecommendationsReceived.html\">NotifyRecommendationsReceived</a>. This API supports long-polling behavior with the\n        <code>waitTimeSeconds</code> parameter. Short poll is the default behavior and only returns\n      recommendations already available. To perform a manual query against an assistant, use <a href=\"https://docs.aws.amazon.com/wisdom/latest/APIReference/API_QueryAssistant.html\">QueryAssistant</a>.</p>",
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/assistants/{assistantId}/sessions/{sessionId}/recommendations",
-                    "code": 200
+                    "method": "GET"
                 },
                 "smithy.api#readonly": {}
             }
@@ -1971,6 +1958,12 @@
                         "smithy.api#documentation": "<p>The recommendations.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "triggers": {
+                    "target": "com.amazonaws.wisdom#RecommendationTriggerList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The triggers corresponding to recommendations.</p>"
+                    }
                 }
             }
         },
@@ -1996,9 +1989,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Retrieves information for a specified session.</p>",
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/assistants/{assistantId}/sessions/{sessionId}",
-                    "code": 200
+                    "method": "GET"
                 },
                 "smithy.api#readonly": {}
             }
@@ -2113,10 +2105,7 @@
             ],
             "traits": {
                 "aws.api#arn": {
-                    "template": "knowledge-base/{knowledgeBaseId}",
-                    "absolute": false,
-                    "noAccount": false,
-                    "noRegion": false
+                    "template": "knowledge-base/{knowledgeBaseId}"
                 },
                 "aws.cloudformation#cfnResource": {},
                 "aws.iam#disableConditionKeyInference": {}
@@ -2128,7 +2117,7 @@
                 "knowledgeBaseId": {
                     "target": "com.amazonaws.wisdom#Uuid",
                     "traits": {
-                        "smithy.api#documentation": "<p>The the identifier of the knowledge base.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base.</p>"
                     }
                 },
                 "knowledgeBaseArn": {
@@ -2148,7 +2137,7 @@
                 "knowledgeBaseId": {
                     "target": "com.amazonaws.wisdom#Uuid",
                     "traits": {
-                        "smithy.api#documentation": "<p>The the identifier of the knowledge base.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2270,7 +2259,7 @@
                 "knowledgeBaseId": {
                     "target": "com.amazonaws.wisdom#Uuid",
                     "traits": {
-                        "smithy.api#documentation": "<p>The the identifier of the knowledge base.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2305,7 +2294,7 @@
                 "sourceConfiguration": {
                     "target": "com.amazonaws.wisdom#SourceConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>[KEVIN]</p>"
+                        "smithy.api#documentation": "<p>Configuration information about the external data source.</p>"
                     }
                 },
                 "renderingConfiguration": {
@@ -2379,15 +2368,14 @@
             "traits": {
                 "smithy.api#documentation": "<p>Lists information about assistant associations.</p>",
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/assistants/{assistantId}/associations",
-                    "code": 200
+                    "method": "GET"
                 },
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
-                    "items": "assistantAssociationSummaries",
-                    "pageSize": "maxResults"
+                    "pageSize": "maxResults",
+                    "items": "assistantAssociationSummaries"
                 },
                 "smithy.api#readonly": {}
             }
@@ -2456,15 +2444,14 @@
             "traits": {
                 "smithy.api#documentation": "<p>Lists information about assistants.</p>",
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/assistants",
-                    "code": 200
+                    "method": "GET"
                 },
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
-                    "items": "assistantSummaries",
-                    "pageSize": "maxResults"
+                    "pageSize": "maxResults",
+                    "items": "assistantSummaries"
                 },
                 "smithy.api#readonly": {}
             }
@@ -2528,15 +2515,14 @@
             "traits": {
                 "smithy.api#documentation": "<p>Lists the content.</p>",
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/knowledgeBases/{knowledgeBaseId}/contents",
-                    "code": 200
+                    "method": "GET"
                 },
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
-                    "items": "contentSummaries",
-                    "pageSize": "maxResults"
+                    "pageSize": "maxResults",
+                    "items": "contentSummaries"
                 },
                 "smithy.api#readonly": {}
             }
@@ -2561,7 +2547,7 @@
                 "knowledgeBaseId": {
                     "target": "com.amazonaws.wisdom#UuidOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The the identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2605,15 +2591,14 @@
             "traits": {
                 "smithy.api#documentation": "<p>Lists the knowledge bases.</p>",
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/knowledgeBases",
-                    "code": 200
+                    "method": "GET"
                 },
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
-                    "items": "knowledgeBaseSummaries",
-                    "pageSize": "maxResults"
+                    "pageSize": "maxResults",
+                    "items": "knowledgeBaseSummaries"
                 },
                 "smithy.api#readonly": {}
             }
@@ -2671,9 +2656,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Lists the tags for the specified resource.</p>",
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/tags/{resourceArn}",
-                    "code": 200
+                    "method": "GET"
                 },
                 "smithy.api#readonly": {}
             }
@@ -2762,9 +2746,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Removes the specified recommendations from the specified assistant's queue of newly\n      available recommendations. You can use this API in conjunction with <a href=\"https://docs.aws.amazon.com/wisdom/latest/APIReference/API_GetRecommendations.html\">GetRecommendations</a> and a <code>waitTimeSeconds</code> input for long-polling\n      behavior and avoiding duplicate recommendations.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/assistants/{assistantId}/sessions/{sessionId}/recommendations/notify",
-                    "code": 200
+                    "method": "POST"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -2890,17 +2873,19 @@
             "traits": {
                 "smithy.api#documentation": "<p>Performs a manual search against the specified assistant. To retrieve recommendations for\n      an assistant, use <a href=\"https://docs.aws.amazon.com/wisdom/latest/APIReference/API_GetRecommendations.html\">GetRecommendations</a>.\n    </p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/assistants/{assistantId}/query",
-                    "code": 200
+                    "method": "POST"
                 },
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
-                    "items": "results",
-                    "pageSize": "maxResults"
+                    "pageSize": "maxResults",
+                    "items": "results"
                 },
-                "smithy.api#readonly": {}
+                "smithy.api#readonly": {},
+                "smithy.api#suppress": [
+                    "HttpMethodSemantics"
+                ]
             }
         },
         "com.amazonaws.wisdom#QueryAssistantRequest": {
@@ -2953,6 +2938,20 @@
                 }
             }
         },
+        "com.amazonaws.wisdom#QueryRecommendationTriggerData": {
+            "type": "structure",
+            "members": {
+                "text": {
+                    "target": "com.amazonaws.wisdom#QueryText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text associated with the recommendation trigger.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Data associated with the QUERY RecommendationTriggerType.</p>"
+            }
+        },
         "com.amazonaws.wisdom#QueryResultsList": {
             "type": "list",
             "member": {
@@ -2993,6 +2992,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The relevance level of the recommendation.</p>"
                     }
+                },
+                "type": {
+                    "target": "com.amazonaws.wisdom#RecommendationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of recommendation.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3009,6 +3014,110 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.wisdom#RecommendationData"
+            }
+        },
+        "com.amazonaws.wisdom#RecommendationSourceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ISSUE_DETECTION",
+                        "name": "ISSUE_DETECTION"
+                    },
+                    {
+                        "value": "RULE_EVALUATION",
+                        "name": "RULE_EVALUATION"
+                    },
+                    {
+                        "value": "OTHER",
+                        "name": "OTHER"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.wisdom#RecommendationTrigger": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.wisdom#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the recommendation trigger.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.wisdom#RecommendationTriggerType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of recommendation trigger.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "source": {
+                    "target": "com.amazonaws.wisdom#RecommendationSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source of the recommendation trigger.</p>\n         <ul>\n            <li>\n               <p>ISSUE_DETECTION: The corresponding recommendations were triggered\n          by a Contact Lens issue.</p>\n            </li>\n            <li>\n               <p>RULE_EVALUATION: The corresponding recommendations were triggered\n          by a Contact Lens rule.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "data": {
+                    "target": "com.amazonaws.wisdom#RecommendationTriggerData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A union type containing information related to the trigger.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "recommendationIds": {
+                    "target": "com.amazonaws.wisdom#RecommendationIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifiers of the recommendations.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A recommendation trigger provides context on the event that produced the referenced recommendations.\n      Recommendations are only referenced in <code>recommendationIds</code> by a single RecommendationTrigger.</p>"
+            }
+        },
+        "com.amazonaws.wisdom#RecommendationTriggerData": {
+            "type": "union",
+            "members": {
+                "query": {
+                    "target": "com.amazonaws.wisdom#QueryRecommendationTriggerData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Data associated with the QUERY RecommendationTriggerType.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A union type containing information related to the trigger.</p>"
+            }
+        },
+        "com.amazonaws.wisdom#RecommendationTriggerList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wisdom#RecommendationTrigger"
+            }
+        },
+        "com.amazonaws.wisdom#RecommendationTriggerType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "QUERY",
+                        "name": "QUERY"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.wisdom#RecommendationType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "KNOWLEDGE_CONTENT",
+                        "name": "KNOWLEDGE_CONTENT"
+                    }
+                ]
             }
         },
         "com.amazonaws.wisdom#RelevanceLevel": {
@@ -3060,8 +3169,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Removes a URI template from a knowledge base.</p>",
                 "smithy.api#http": {
-                    "method": "DELETE",
                     "uri": "/knowledgeBases/{knowledgeBaseId}/templateUri",
+                    "method": "DELETE",
                     "code": 204
                 }
             }
@@ -3072,7 +3181,7 @@
                 "knowledgeBaseId": {
                     "target": "com.amazonaws.wisdom#UuidOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The the identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3166,15 +3275,14 @@
             "traits": {
                 "smithy.api#documentation": "<p>Searches for content in a specified knowledge base. Can be used to get a specific content\n      resource by its name.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/knowledgeBases/{knowledgeBaseId}/search",
-                    "code": 200
+                    "method": "POST"
                 },
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
-                    "items": "contentSummaries",
-                    "pageSize": "maxResults"
+                    "pageSize": "maxResults",
+                    "items": "contentSummaries"
                 },
                 "smithy.api#readonly": {}
             }
@@ -3199,7 +3307,7 @@
                 "knowledgeBaseId": {
                     "target": "com.amazonaws.wisdom#UuidOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The the identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3268,15 +3376,14 @@
             "traits": {
                 "smithy.api#documentation": "<p>Searches for sessions.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/assistants/{assistantId}/searchSessions",
-                    "code": 200
+                    "method": "POST"
                 },
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
-                    "items": "sessionSummaries",
-                    "pageSize": "maxResults"
+                    "pageSize": "maxResults",
+                    "items": "sessionSummaries"
                 },
                 "smithy.api#readonly": {}
             }
@@ -3333,13 +3440,19 @@
                 }
             }
         },
+        "com.amazonaws.wisdom#SensitiveString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.wisdom#ServerSideEncryptionConfiguration": {
             "type": "structure",
             "members": {
                 "kmsKeyId": {
                     "target": "com.amazonaws.wisdom#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The KMS key. For information about valid ID values, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id\">Key identifiers (KeyId)</a> in the\n        <i>AWS Key Management Service Developer Guide</i>. </p>"
+                        "smithy.api#documentation": "<p>The KMS key. For information about valid ID values, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id\">Key identifiers (KeyId)</a>.</p>"
                     }
                 }
             },
@@ -3378,10 +3491,7 @@
             },
             "traits": {
                 "aws.api#arn": {
-                    "template": "session/{assistantId}/{sessionId}",
-                    "absolute": false,
-                    "noAccount": false,
-                    "noRegion": false
+                    "template": "session/{assistantId}/{sessionId}"
                 },
                 "aws.iam#disableConditionKeyInference": {}
             }
@@ -3460,7 +3570,7 @@
                 "assistantArn": {
                     "target": "com.amazonaws.wisdom#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Wisdom assistant</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Wisdom assistant.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3505,9 +3615,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Get a URL to upload content to a knowledge base. To upload content, first make a PUT\n      request to the returned URL with your file, making sure to include the required headers. Then\n      use <a href=\"https://docs.aws.amazon.com/wisdom/latest/APIReference/API_CreateContent.html\">CreateContent</a> to finalize the content creation process or <a href=\"https://docs.aws.amazon.com/wisdom/latest/APIReference/API_UpdateContent.html\">UpdateContent</a> to modify an existing resource. You can only upload content to a\n      knowledge base of type CUSTOM.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/knowledgeBases/{knowledgeBaseId}/upload",
-                    "code": 200
+                    "method": "POST"
                 }
             }
         },
@@ -3517,7 +3626,7 @@
                 "knowledgeBaseId": {
                     "target": "com.amazonaws.wisdom#UuidOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The the identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3545,8 +3654,7 @@
                     "target": "com.amazonaws.wisdom#Url",
                     "traits": {
                         "smithy.api#documentation": "<p>The URL of the upload.</p>",
-                        "smithy.api#required": {},
-                        "smithy.api#sensitive": {}
+                        "smithy.api#required": {}
                     }
                 },
                 "urlExpiry": {
@@ -3607,9 +3715,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Adds the specified tags to the specified resource.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/tags/{resourceArn}",
-                    "code": 200
+                    "method": "POST"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -3691,9 +3798,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Removes the specified tags from the specified resource.</p>",
                 "smithy.api#http": {
-                    "method": "DELETE",
                     "uri": "/tags/{resourceArn}",
-                    "code": 200
+                    "method": "DELETE"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -3748,9 +3854,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Updates information about the content.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/knowledgeBases/{knowledgeBaseId}/contents/{contentId}",
-                    "code": 200
+                    "method": "POST"
                 }
             }
         },
@@ -3760,7 +3865,7 @@
                 "knowledgeBaseId": {
                     "target": "com.amazonaws.wisdom#UuidOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The the identifier of the knowledge base. Can be either the ID or the ARN</p>",
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base. Can be either the ID or the ARN</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3844,9 +3949,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Updates the template URI of a knowledge base. This is only supported for knowledge bases\n      of type EXTERNAL. Include a single variable in <code>${variable}</code> format; this\n      interpolated by Wisdom using ingested content. For example, if you ingest a Salesforce\n      article, it has an <code>Id</code> value, and you can set the template URI to\n        <code>https://myInstanceName.lightning.force.com/lightning/r/Knowledge__kav/*${Id}*/view</code>.\n    </p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/knowledgeBases/{knowledgeBaseId}/templateUri",
-                    "code": 200
+                    "method": "POST"
                 }
             }
         },
@@ -3856,7 +3960,7 @@
                 "knowledgeBaseId": {
                     "target": "com.amazonaws.wisdom#UuidOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The the identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3896,7 +4000,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 4096
-                }
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.wisdom#Uuid": {
@@ -3919,7 +4024,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by an AWS service.</p>",
+                "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by a service.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -3935,6 +4040,20 @@
         },
         "com.amazonaws.wisdom#WisdomService": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Wisdom",
+                    "arnNamespace": "wisdom",
+                    "cloudFormationName": "Wisdom"
+                },
+                "aws.auth#sigv4": {
+                    "name": "wisdom"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#cors": {},
+                "smithy.api#documentation": "<p>Amazon Connect Wisdom delivers agents the information they need to solve customer issues as they're actively\n        speaking with customers. Agents can search across connected repositories from within their agent desktop\n        to find answers quickly. Use the Amazon Connect Wisdom APIs to create an assistant and a knowledge base, for example, or manage content by uploading custom files.</p>",
+                "smithy.api#title": "Amazon Connect Wisdom Service"
+            },
             "version": "2020-10-19",
             "operations": [
                 {
@@ -3954,23 +4073,7 @@
                 {
                     "target": "com.amazonaws.wisdom#KnowledgeBase"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Wisdom",
-                    "arnNamespace": "wisdom",
-                    "cloudFormationName": "Wisdom",
-                    "cloudTrailEventSource": "wisdom.amazonaws.com",
-                    "endpointPrefix": "wisdom"
-                },
-                "aws.auth#sigv4": {
-                    "name": "wisdom"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#cors": {},
-                "smithy.api#documentation": "<p>All Amazon Connect Wisdom functionality is accessible using the API. For example, you can create an\n      assistant and a knowledge base.</p>\n\n         <p>Some more advanced features are only accessible using the Wisdom API. For example, you\n      can manually manage content by uploading custom files and control their lifecycle. </p>",
-                "smithy.api#title": "Amazon Connect Wisdom Service"
-            }
+            ]
         }
     }
 }

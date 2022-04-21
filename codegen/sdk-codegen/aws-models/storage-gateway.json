@@ -381,7 +381,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Assigns a tape to a tape pool for archiving. The tape assigned to a pool is archived in\n         the S3 storage class that is associated with the pool. When you use your backup application\n         to eject the tape, the tape is archived directly into the S3 storage class (S3 Glacier or\n         S3 Glacier Deep Archive) that corresponds to the pool.</p>\n\n         <p>Valid Values: <code>GLACIER</code> | <code>DEEP_ARCHIVE</code>\n         </p>"
+                "smithy.api#documentation": "<p>Assigns a tape to a tape pool for archiving. The tape assigned to a pool is archived in\n         the S3 storage class that is associated with the pool. When you use your backup application\n         to eject the tape, the tape is archived directly into the S3 storage class (S3 Glacier or\n         S3 Glacier Deep Archive) that corresponds to the pool.</p>"
             }
         },
         "com.amazonaws.storagegateway#AssignTapePoolInput": {
@@ -397,7 +397,7 @@
                 "PoolId": {
                     "target": "com.amazonaws.storagegateway#PoolId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the pool that you want to add your tape to for archiving. The tape in this\n         pool is archived in the S3 storage class that is associated with the pool. When you use\n         your backup application to eject the tape, the tape is archived directly into the storage\n         class (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the pool.</p>\n\n         <p>Valid Values: <code>GLACIER</code> | <code>DEEP_ARCHIVE</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The ID of the pool that you want to add your tape to for archiving. The tape in this\n         pool is archived in the S3 storage class that is associated with the pool. When you use\n         your backup application to eject the tape, the tape is archived directly into the storage\n         class (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the pool.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -647,7 +647,7 @@
                 "PoolId": {
                     "target": "com.amazonaws.storagegateway#PoolId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the pool that you want to add your tape to for archiving. The tape in this\n         pool is archived in the Amazon S3 storage class that is associated with the pool.\n         When you use your backup application to eject the tape, the tape is archived directly into\n         the storage class (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the\n         pool.</p>\n\n         <p>Valid Values: <code>GLACIER</code> | <code>DEEP_ARCHIVE</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The ID of the pool that you want to add your tape to for archiving. The tape in this\n         pool is archived in the Amazon S3 storage class that is associated with the pool.\n         When you use your backup application to eject the tape, the tape is archived directly into\n         the storage class (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the\n         pool.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -896,7 +896,7 @@
                 "VolumeUsedInBytes": {
                     "target": "com.amazonaws.storagegateway#VolumeUsedInBytes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size of the data stored on the volume in bytes. This value is calculated based on\n         the number of blocks that are touched, instead of the actual amount of data written. This\n         value can be useful for sequential write patterns but less accurate for random write\n         patterns. <code>VolumeUsedInBytes</code> is different from the compressed size of the\n         volume, which is the value that is used to calculate your bill.</p>\n\n         <note>\n            <p>This value is not available for volumes created prior to May 13, 2015, until you\n            store data on the volume.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The size of the data stored on the volume in bytes. This value is calculated based on\n         the number of blocks that are touched, instead of the actual amount of data written. This\n         value can be useful for sequential write patterns but less accurate for random write\n         patterns. <code>VolumeUsedInBytes</code> is different from the compressed size of the\n         volume, which is the value that is used to calculate your bill.</p>\n\n         <note>\n            <p>This value is not available for volumes created prior to May 13, 2015, until you\n            store data on the volume.</p>\n\n            <p>If you use a delete tool that overwrites the data on your volume with random data,\n            your usage will not be reduced. This is because the random data is not compressible. If\n            you want to reduce the amount of billed storage on your volume, we recommend overwriting\n            your files with zeros to compress the data to a negligible amount of actual\n            storage.</p>\n         </note>"
                     }
                 },
                 "KMSKey": {
@@ -1288,7 +1288,7 @@
                 "DefaultStorageClass": {
                     "target": "com.amazonaws.storagegateway#StorageClass",
                     "traits": {
-                        "smithy.api#documentation": "<p>The default storage class for objects put into an Amazon S3 bucket by the S3\n         File Gateway. The default value is <code>S3_INTELLIGENT_TIERING</code>. Optional.</p>\n\n         <p>Valid Values: <code>S3_STANDARD</code> | <code>S3_INTELLIGENT_TIERING</code> |\n            <code>S3_STANDARD_IA</code> | <code>S3_ONEZONE_IA</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The default storage class for objects put into an Amazon S3 bucket by the S3\n         File Gateway. The default value is <code>S3_STANDARD</code>. Optional.</p>\n\n         <p>Valid Values: <code>S3_STANDARD</code> | <code>S3_INTELLIGENT_TIERING</code> |\n            <code>S3_STANDARD_IA</code> | <code>S3_ONEZONE_IA</code>\n         </p>"
                     }
                 },
                 "ObjectACL": {
@@ -1454,7 +1454,7 @@
                 "DefaultStorageClass": {
                     "target": "com.amazonaws.storagegateway#StorageClass",
                     "traits": {
-                        "smithy.api#documentation": "<p>The default storage class for objects put into an Amazon S3 bucket by the S3\n         File Gateway. The default value is <code>S3_INTELLIGENT_TIERING</code>. Optional.</p>\n\n         <p>Valid Values: <code>S3_STANDARD</code> | <code>S3_INTELLIGENT_TIERING</code> |\n            <code>S3_STANDARD_IA</code> | <code>S3_ONEZONE_IA</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The default storage class for objects put into an Amazon S3 bucket by the S3\n         File Gateway. The default value is <code>S3_STANDARD</code>. Optional.</p>\n\n         <p>Valid Values: <code>S3_STANDARD</code> | <code>S3_INTELLIGENT_TIERING</code> |\n            <code>S3_STANDARD_IA</code> | <code>S3_ONEZONE_IA</code>\n         </p>"
                     }
                 },
                 "ObjectACL": {
@@ -1971,7 +1971,7 @@
                 "PoolId": {
                     "target": "com.amazonaws.storagegateway#PoolId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the pool that you want to add your tape to for archiving. The tape in this\n         pool is archived in the S3 storage class that is associated with the pool. When you use\n         your backup application to eject the tape, the tape is archived directly into the storage\n         class (S3 Glacier or S3 Deep Archive) that corresponds to the pool.</p>\n\n         <p>Valid Values: <code>GLACIER</code> | <code>DEEP_ARCHIVE</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The ID of the pool that you want to add your tape to for archiving. The tape in this\n         pool is archived in the S3 storage class that is associated with the pool. When you use\n         your backup application to eject the tape, the tape is archived directly into the storage\n         class (S3 Glacier or S3 Deep Archive) that corresponds to the pool.</p>"
                     }
                 },
                 "Worm": {
@@ -2078,7 +2078,7 @@
                 "PoolId": {
                     "target": "com.amazonaws.storagegateway#PoolId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the pool that you want to add your tape to for archiving. The tape in this\n         pool is archived in the S3 storage class that is associated with the pool. When you use\n         your backup application to eject the tape, the tape is archived directly into the storage\n         class (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the pool.</p>\n\n         <p>Valid Values: <code>GLACIER</code> | <code>DEEP_ARCHIVE</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The ID of the pool that you want to add your tape to for archiving. The tape in this\n         pool is archived in the S3 storage class that is associated with the pool. When you use\n         your backup application to eject the tape, the tape is archived directly into the storage\n         class (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the pool.</p>"
                     }
                 },
                 "Worm": {
@@ -2427,7 +2427,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a snapshot of a volume.</p>\n\n         <p>You can take snapshots of your gateway volumes on a scheduled or ad hoc basis. This API\n         action enables you to delete a snapshot schedule for a volume. For more information, see\n            <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/backing-up-volumes.html\">Backing up your\n            volumes</a>. In the <code>DeleteSnapshotSchedule</code> request, you identify the\n         volume by providing its Amazon Resource Name (ARN). This operation is only supported in\n         stored and cached volume gateway types.</p>\n\n         <note>\n\n            <p>To list or delete a snapshot, you must use the Amazon EC2 API. For more information,\n            go to <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSnapshots.html\">DescribeSnapshots</a>\n            in the <i>Amazon Elastic Compute Cloud API Reference</i>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Deletes a snapshot of a volume.</p>\n\n         <p>You can take snapshots of your gateway volumes on a scheduled or ad hoc basis. This API\n         action enables you to delete a snapshot schedule for a volume. For more information, see\n            <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/backing-up-volumes.html\">Backing up your\n            volumes</a>. In the <code>DeleteSnapshotSchedule</code> request, you identify the\n         volume by providing its Amazon Resource Name (ARN). This operation is only supported for\n         cached volume gateway types.</p>\n\n         <note>\n\n            <p>To list or delete a snapshot, you must use the Amazon EC2 API. For more information,\n            go to <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSnapshots.html\">DescribeSnapshots</a>\n            in the <i>Amazon Elastic Compute Cloud API Reference</i>.</p>\n         </note>"
             }
         },
         "com.amazonaws.storagegateway#DeleteSnapshotScheduleInput": {
@@ -3122,7 +3122,7 @@
                 "LastSoftwareUpdate": {
                     "target": "com.amazonaws.storagegateway#LastSoftwareUpdate",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date on which the last software update was applied to the gateway. If the gateway\n         has never been updated, this field does not return a value in the response.</p>"
+                        "smithy.api#documentation": "<p>The date on which the last software update was applied to the gateway. If the gateway\n         has never been updated, this field does not return a value in the response. This only only\n         exist and returns once it have been chosen and set by the SGW service, based on the OS\n         version of the gateway VM</p>"
                     }
                 },
                 "Ec2InstanceId": {
@@ -3152,7 +3152,7 @@
                 "CloudWatchLogGroupARN": {
                     "target": "com.amazonaws.storagegateway#CloudWatchLogGroupARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that is used to\n         monitor events in the gateway.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that is used to\n         monitor events in the gateway. This field only only exist and returns once it have been\n         chosen and set by the SGW service, based on the OS version of the gateway VM</p>"
                     }
                 },
                 "HostEnvironment": {
@@ -6162,7 +6162,7 @@
                 "DefaultStorageClass": {
                     "target": "com.amazonaws.storagegateway#StorageClass",
                     "traits": {
-                        "smithy.api#documentation": "<p>The default storage class for objects put into an Amazon S3 bucket by the S3\n         File Gateway. The default value is <code>S3_INTELLIGENT_TIERING</code>. Optional.</p>\n\n         <p>Valid Values: <code>S3_STANDARD</code> | <code>S3_INTELLIGENT_TIERING</code> |\n            <code>S3_STANDARD_IA</code> | <code>S3_ONEZONE_IA</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The default storage class for objects put into an Amazon S3 bucket by the S3\n         File Gateway. The default value is <code>S3_STANDARD</code>. Optional.</p>\n\n         <p>Valid Values: <code>S3_STANDARD</code> | <code>S3_INTELLIGENT_TIERING</code> |\n            <code>S3_STANDARD_IA</code> | <code>S3_ONEZONE_IA</code>\n         </p>"
                     }
                 },
                 "ObjectACL": {
@@ -6323,7 +6323,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Sends you notification through CloudWatch Events when all files written to your file\n         share have been uploaded to Amazon S3.</p>\n\n         <p>Storage Gateway can send a notification through Amazon CloudWatch Events when all\n         files written to your file share up to that point in time have been uploaded to Amazon S3. These files include files written to the file share up to the time that you\n         make a request for notification. When the upload is done, Storage Gateway sends you\n         notification through an Amazon CloudWatch Event. You can configure CloudWatch Events to\n         send the notification through event targets such as Amazon SNS or Lambda function. This operation is only supported for S3 File Gateways.</p>\n\n      \n\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-upload-notification\">Getting file upload notification</a> in the <i>Storage Gateway User\n            Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Sends you notification through CloudWatch Events when all files written to your file\n         share have been uploaded to S3. Amazon S3.</p>\n\n         <p>Storage Gateway can send a notification through Amazon CloudWatch Events when all\n         files written to your file share up to that point in time have been uploaded to Amazon S3. These files include files written to the file share up to the time that you\n         make a request for notification. When the upload is done, Storage Gateway sends you\n         notification through an Amazon CloudWatch Event. You can configure CloudWatch Events to\n         send the notification through event targets such as Amazon SNS or Lambda function. This operation is only supported for S3 File Gateways.</p>\n\n      \n\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-upload-notification\">Getting file upload notification</a> in the <i>Storage Gateway User\n            Guide</i>.</p>"
             }
         },
         "com.amazonaws.storagegateway#NotifyWhenUploadedInput": {
@@ -6564,7 +6564,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Refreshes the cached inventory of objects for the specified file share. This operation\n         finds objects in the Amazon S3 bucket that were added, removed, or replaced since\n         the gateway last listed the bucket's contents and cached the results. This operation\n         does not import files into the S3 File Gateway cache storage. It only updates the cached\n         inventory to reflect changes in the inventory of the objects in the S3 bucket. This\n         operation is only supported in the S3 File Gateway types.</p>\n         <p>You can subscribe to be notified through an Amazon CloudWatch event when your\n            <code>RefreshCache</code> operation completes. For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification\">Getting notified about file operations</a> in the <i>Storage Gateway\n            User Guide</i>. This operation is Only supported for S3 File Gateways.</p>\n\n         <p>When this API is called, it only initiates the refresh operation. When the API call\n         completes and returns a success code, it doesn't necessarily mean that the file\n         refresh has completed. You should use the refresh-complete notification to determine that\n         the operation has completed before you check for new files on the gateway file share. You\n         can subscribe to be notified through a CloudWatch event when your <code>RefreshCache</code>\n         operation completes.</p>\n\n         <p>Throttle limit: This API is asynchronous, so the gateway will accept no more than two\n         refreshes at any time. We recommend using the refresh-complete CloudWatch event\n         notification before issuing additional requests. For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification\">Getting notified about file operations</a> in the <i>Storage Gateway\n            User Guide</i>.</p>\n\n         <p>If you invoke the RefreshCache API when two requests are already being processed, any\n         new request will cause an <code>InvalidGatewayRequestException</code> error because too\n         many requests were sent to the server.</p>\n\n      \n\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification\">Getting notified about file operations</a> in the <i>Storage Gateway\n            User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Refreshes the cached inventory of objects for the specified file share. This operation\n         finds objects in the Amazon S3 bucket that were added, removed, or replaced since\n         the gateway last listed the bucket's contents and cached the results. This operation\n         does not import files into the S3 File Gateway cache storage. It only updates the cached\n         inventory to reflect changes in the inventory of the objects in the S3 bucket. This\n         operation is only supported in the S3 File Gateway types.</p>\n\n         <p>You can subscribe to be notified through an Amazon CloudWatch event when your\n            <code>RefreshCache</code> operation completes. For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification\">Getting notified about file operations</a> in the <i>Storage Gateway\n            User Guide</i>. This operation is Only supported for S3 File Gateways.</p>\n\n         <p>When this API is called, it only initiates the refresh operation. When the API call\n         completes and returns a success code, it doesn't necessarily mean that the file\n         refresh has completed. You should use the refresh-complete notification to determine that\n         the operation has completed before you check for new files on the gateway file share. You\n         can subscribe to be notified through a CloudWatch event when your <code>RefreshCache</code>\n         operation completes.</p>\n\n         <p>Throttle limit: This API is asynchronous, so the gateway will accept no more than two\n         refreshes at any time. We recommend using the refresh-complete CloudWatch event\n         notification before issuing additional requests. For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification\">Getting notified about file operations</a> in the <i>Storage Gateway\n            User Guide</i>.</p>\n\n         <important>\n            <ul>\n               <li>\n                  <p>Wait at least 60 seconds between consecutive RefreshCache API requests.</p>\n               </li>\n               <li>\n                  <p>RefreshCache does not evict cache entries if invoked consecutively within 60\n                  seconds of a previous RefreshCache request.</p>\n               </li>\n               <li>\n                  <p>If you invoke the RefreshCache API when two requests are already being\n                  processed, any new request will cause an\n                     <code>InvalidGatewayRequestException</code> error because too many requests\n                  were sent to the server.</p>\n               </li>\n            </ul>\n         </important>\n\n         <note>\n            <p>The S3 bucket name does not need to be included when entering the list of folders in\n            the FolderList parameter.</p>\n         </note>\n\n      \n\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification\">Getting notified about file operations</a> in the <i>Storage Gateway\n            User Guide</i>.</p>"
             }
         },
         "com.amazonaws.storagegateway#RefreshCacheInput": {
@@ -6911,7 +6911,7 @@
                 "DefaultStorageClass": {
                     "target": "com.amazonaws.storagegateway#StorageClass",
                     "traits": {
-                        "smithy.api#documentation": "<p>The default storage class for objects put into an Amazon S3 bucket by the S3\n         File Gateway. The default value is <code>S3_INTELLIGENT_TIERING</code>. Optional.</p>\n\n         <p>Valid Values: <code>S3_STANDARD</code> | <code>S3_INTELLIGENT_TIERING</code> |\n            <code>S3_STANDARD_IA</code> | <code>S3_ONEZONE_IA</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The default storage class for objects put into an Amazon S3 bucket by the S3\n         File Gateway. The default value is <code>S3_STANDARD</code>. Optional.</p>\n\n         <p>Valid Values: <code>S3_STANDARD</code> | <code>S3_INTELLIGENT_TIERING</code> |\n            <code>S3_STANDARD_IA</code> | <code>S3_ONEZONE_IA</code>\n         </p>"
                     }
                 },
                 "ObjectACL": {
@@ -7902,7 +7902,7 @@
                 "PoolId": {
                     "target": "com.amazonaws.storagegateway#PoolId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the pool that contains tapes that will be archived. The tapes in this pool are\n         archived in the S3 storage class that is associated with the pool. When you use your backup\n         application to eject the tape, the tape is archived directly into the storage class (S3\n         Glacier or S3 Glacier Deep Archive) that corresponds to the pool.</p>\n\n         <p>Valid Values: <code>GLACIER</code> | <code>DEEP_ARCHIVE</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The ID of the pool that contains tapes that will be archived. The tapes in this pool are\n         archived in the S3 storage class that is associated with the pool. When you use your backup\n         application to eject the tape, the tape is archived directly into the storage class (S3\n         Glacier or S3 Glacier Deep Archive) that corresponds to the pool.</p>"
                     }
                 },
                 "Worm": {
@@ -7935,7 +7935,7 @@
                     "min": 50,
                     "max": 500
                 },
-                "smithy.api#pattern": "^arn:(aws|aws-cn|aws-us-gov):storagegateway:[a-z\\-0-9]+:[0-9]+:tape\\/[0-9A-Z]{7,16}$"
+                "smithy.api#pattern": "^arn:(aws|aws-cn|aws-us-gov):storagegateway:[a-z\\-0-9]+:[0-9]+:tape\\/[0-9A-Z]{5,16}$"
             }
         },
         "com.amazonaws.storagegateway#TapeARNs": {
@@ -8004,7 +8004,7 @@
                 "PoolId": {
                     "target": "com.amazonaws.storagegateway#PoolId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the pool that was used to archive the tape. The tapes in this pool are\n         archived in the S3 storage class that is associated with the pool.</p>\n\n         <p>Valid Values: <code>GLACIER</code> | <code>DEEP_ARCHIVE</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The ID of the pool that was used to archive the tape. The tapes in this pool are\n         archived in the S3 storage class that is associated with the pool.</p>"
                     }
                 },
                 "Worm": {
@@ -8043,7 +8043,7 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 7,
+                    "min": 5,
                     "max": 16
                 },
                 "smithy.api#pattern": "^[A-Z0-9]*$"
@@ -8104,7 +8104,7 @@
                 "PoolId": {
                     "target": "com.amazonaws.storagegateway#PoolId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the pool that you want to add your tape to for archiving. The tape in this\n         pool is archived in the S3 storage class that is associated with the pool. When you use\n         your backup application to eject the tape, the tape is archived directly into the storage\n         class (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the pool.</p>\n\n         <p>Valid Values: <code>GLACIER</code> | <code>DEEP_ARCHIVE</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The ID of the pool that you want to add your tape to for archiving. The tape in this\n         pool is archived in the S3 storage class that is associated with the pool. When you use\n         your backup application to eject the tape, the tape is archived directly into the storage\n         class (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the pool.</p>"
                     }
                 },
                 "RetentionStartDate": {
@@ -8766,7 +8766,7 @@
                 "DefaultStorageClass": {
                     "target": "com.amazonaws.storagegateway#StorageClass",
                     "traits": {
-                        "smithy.api#documentation": "<p>The default storage class for objects put into an Amazon S3 bucket by the S3\n         File Gateway. The default value is <code>S3_INTELLIGENT_TIERING</code>. Optional.</p>\n\n         <p>Valid Values: <code>S3_STANDARD</code> | <code>S3_INTELLIGENT_TIERING</code> |\n            <code>S3_STANDARD_IA</code> | <code>S3_ONEZONE_IA</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The default storage class for objects put into an Amazon S3 bucket by the S3\n         File Gateway. The default value is <code>S3_STANDARD</code>. Optional.</p>\n\n         <p>Valid Values: <code>S3_STANDARD</code> | <code>S3_INTELLIGENT_TIERING</code> |\n            <code>S3_STANDARD_IA</code> | <code>S3_ONEZONE_IA</code>\n         </p>"
                     }
                 },
                 "ObjectACL": {
@@ -8893,7 +8893,7 @@
                 "DefaultStorageClass": {
                     "target": "com.amazonaws.storagegateway#StorageClass",
                     "traits": {
-                        "smithy.api#documentation": "<p>The default storage class for objects put into an Amazon S3 bucket by the S3\n         File Gateway. The default value is <code>S3_INTELLIGENT_TIERING</code>. Optional.</p>\n\n         <p>Valid Values: <code>S3_STANDARD</code> | <code>S3_INTELLIGENT_TIERING</code> |\n            <code>S3_STANDARD_IA</code> | <code>S3_ONEZONE_IA</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The default storage class for objects put into an Amazon S3 bucket by the S3\n         File Gateway. The default value is <code>S3_STANDARD</code>. Optional.</p>\n\n         <p>Valid Values: <code>S3_STANDARD</code> | <code>S3_INTELLIGENT_TIERING</code> |\n            <code>S3_STANDARD_IA</code> | <code>S3_ONEZONE_IA</code>\n         </p>"
                     }
                 },
                 "ObjectACL": {
