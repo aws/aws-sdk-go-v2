@@ -129,11 +129,20 @@ func awsRestjson1_deserializeOpErrorBatchCreateAttendee(response *smithyhttp.Res
 	case strings.EqualFold("NotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorNotFoundException(response, errorBody)
 
+	case strings.EqualFold("ServiceFailureException", errorCode):
+		return awsRestjson1_deserializeErrorServiceFailureException(response, errorBody)
+
 	case strings.EqualFold("ServiceUnavailableException", errorCode):
 		return awsRestjson1_deserializeErrorServiceUnavailableException(response, errorBody)
 
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
 	case strings.EqualFold("UnauthorizedException", errorCode):
 		return awsRestjson1_deserializeErrorUnauthorizedException(response, errorBody)
+
+	case strings.EqualFold("UnprocessableEntityException", errorCode):
+		return awsRestjson1_deserializeErrorUnprocessableEntityException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -296,8 +305,14 @@ func awsRestjson1_deserializeOpErrorCreateAttendee(response *smithyhttp.Response
 	case strings.EqualFold("NotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorNotFoundException(response, errorBody)
 
+	case strings.EqualFold("ServiceFailureException", errorCode):
+		return awsRestjson1_deserializeErrorServiceFailureException(response, errorBody)
+
 	case strings.EqualFold("ServiceUnavailableException", errorCode):
 		return awsRestjson1_deserializeErrorServiceUnavailableException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
 
 	case strings.EqualFold("UnauthorizedException", errorCode):
 		return awsRestjson1_deserializeErrorUnauthorizedException(response, errorBody)
@@ -452,11 +467,20 @@ func awsRestjson1_deserializeOpErrorCreateMeeting(response *smithyhttp.Response,
 	case strings.EqualFold("BadRequestException", errorCode):
 		return awsRestjson1_deserializeErrorBadRequestException(response, errorBody)
 
+	case strings.EqualFold("ForbiddenException", errorCode):
+		return awsRestjson1_deserializeErrorForbiddenException(response, errorBody)
+
 	case strings.EqualFold("LimitExceededException", errorCode):
 		return awsRestjson1_deserializeErrorLimitExceededException(response, errorBody)
 
+	case strings.EqualFold("ServiceFailureException", errorCode):
+		return awsRestjson1_deserializeErrorServiceFailureException(response, errorBody)
+
 	case strings.EqualFold("ServiceUnavailableException", errorCode):
 		return awsRestjson1_deserializeErrorServiceUnavailableException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
 
 	case strings.EqualFold("UnauthorizedException", errorCode):
 		return awsRestjson1_deserializeErrorUnauthorizedException(response, errorBody)
@@ -608,11 +632,20 @@ func awsRestjson1_deserializeOpErrorCreateMeetingWithAttendees(response *smithyh
 	case strings.EqualFold("BadRequestException", errorCode):
 		return awsRestjson1_deserializeErrorBadRequestException(response, errorBody)
 
+	case strings.EqualFold("ForbiddenException", errorCode):
+		return awsRestjson1_deserializeErrorForbiddenException(response, errorBody)
+
 	case strings.EqualFold("LimitExceededException", errorCode):
 		return awsRestjson1_deserializeErrorLimitExceededException(response, errorBody)
 
+	case strings.EqualFold("ServiceFailureException", errorCode):
+		return awsRestjson1_deserializeErrorServiceFailureException(response, errorBody)
+
 	case strings.EqualFold("ServiceUnavailableException", errorCode):
 		return awsRestjson1_deserializeErrorServiceUnavailableException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
 
 	case strings.EqualFold("UnauthorizedException", errorCode):
 		return awsRestjson1_deserializeErrorUnauthorizedException(response, errorBody)
@@ -749,11 +782,26 @@ func awsRestjson1_deserializeOpErrorDeleteAttendee(response *smithyhttp.Response
 	}
 
 	switch {
+	case strings.EqualFold("BadRequestException", errorCode):
+		return awsRestjson1_deserializeErrorBadRequestException(response, errorBody)
+
 	case strings.EqualFold("ForbiddenException", errorCode):
 		return awsRestjson1_deserializeErrorForbiddenException(response, errorBody)
 
 	case strings.EqualFold("NotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ServiceFailureException", errorCode):
+		return awsRestjson1_deserializeErrorServiceFailureException(response, errorBody)
+
+	case strings.EqualFold("ServiceUnavailableException", errorCode):
+		return awsRestjson1_deserializeErrorServiceUnavailableException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("UnauthorizedException", errorCode):
+		return awsRestjson1_deserializeErrorUnauthorizedException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -846,6 +894,21 @@ func awsRestjson1_deserializeOpErrorDeleteMeeting(response *smithyhttp.Response,
 
 	case strings.EqualFold("ForbiddenException", errorCode):
 		return awsRestjson1_deserializeErrorForbiddenException(response, errorBody)
+
+	case strings.EqualFold("NotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ServiceFailureException", errorCode):
+		return awsRestjson1_deserializeErrorServiceFailureException(response, errorBody)
+
+	case strings.EqualFold("ServiceUnavailableException", errorCode):
+		return awsRestjson1_deserializeErrorServiceUnavailableException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("UnauthorizedException", errorCode):
+		return awsRestjson1_deserializeErrorUnauthorizedException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -963,6 +1026,18 @@ func awsRestjson1_deserializeOpErrorGetAttendee(response *smithyhttp.Response, m
 
 	case strings.EqualFold("NotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ServiceFailureException", errorCode):
+		return awsRestjson1_deserializeErrorServiceFailureException(response, errorBody)
+
+	case strings.EqualFold("ServiceUnavailableException", errorCode):
+		return awsRestjson1_deserializeErrorServiceUnavailableException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("UnauthorizedException", errorCode):
+		return awsRestjson1_deserializeErrorUnauthorizedException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -1117,6 +1192,18 @@ func awsRestjson1_deserializeOpErrorGetMeeting(response *smithyhttp.Response, me
 	case strings.EqualFold("NotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorNotFoundException(response, errorBody)
 
+	case strings.EqualFold("ServiceFailureException", errorCode):
+		return awsRestjson1_deserializeErrorServiceFailureException(response, errorBody)
+
+	case strings.EqualFold("ServiceUnavailableException", errorCode):
+		return awsRestjson1_deserializeErrorServiceUnavailableException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("UnauthorizedException", errorCode):
+		return awsRestjson1_deserializeErrorUnauthorizedException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -1270,6 +1357,18 @@ func awsRestjson1_deserializeOpErrorListAttendees(response *smithyhttp.Response,
 	case strings.EqualFold("NotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorNotFoundException(response, errorBody)
 
+	case strings.EqualFold("ServiceFailureException", errorCode):
+		return awsRestjson1_deserializeErrorServiceFailureException(response, errorBody)
+
+	case strings.EqualFold("ServiceUnavailableException", errorCode):
+		return awsRestjson1_deserializeErrorServiceUnavailableException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("UnauthorizedException", errorCode):
+		return awsRestjson1_deserializeErrorUnauthorizedException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -1413,8 +1512,14 @@ func awsRestjson1_deserializeOpErrorStartMeetingTranscription(response *smithyht
 	case strings.EqualFold("NotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorNotFoundException(response, errorBody)
 
+	case strings.EqualFold("ServiceFailureException", errorCode):
+		return awsRestjson1_deserializeErrorServiceFailureException(response, errorBody)
+
 	case strings.EqualFold("ServiceUnavailableException", errorCode):
 		return awsRestjson1_deserializeErrorServiceUnavailableException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
 
 	case strings.EqualFold("UnauthorizedException", errorCode):
 		return awsRestjson1_deserializeErrorUnauthorizedException(response, errorBody)
@@ -1517,8 +1622,14 @@ func awsRestjson1_deserializeOpErrorStopMeetingTranscription(response *smithyhtt
 	case strings.EqualFold("NotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorNotFoundException(response, errorBody)
 
+	case strings.EqualFold("ServiceFailureException", errorCode):
+		return awsRestjson1_deserializeErrorServiceFailureException(response, errorBody)
+
 	case strings.EqualFold("ServiceUnavailableException", errorCode):
 		return awsRestjson1_deserializeErrorServiceUnavailableException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
 
 	case strings.EqualFold("UnauthorizedException", errorCode):
 		return awsRestjson1_deserializeErrorUnauthorizedException(response, errorBody)
@@ -1692,6 +1803,42 @@ func awsRestjson1_deserializeErrorNotFoundException(response *smithyhttp.Respons
 	return output
 }
 
+func awsRestjson1_deserializeErrorServiceFailureException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.ServiceFailureException{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	err := awsRestjson1_deserializeDocumentServiceFailureException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+
+	return output
+}
+
 func awsRestjson1_deserializeErrorServiceUnavailableException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.ServiceUnavailableException{}
 	var buff [1024]byte
@@ -1728,6 +1875,42 @@ func awsRestjson1_deserializeErrorServiceUnavailableException(response *smithyht
 	if err := awsRestjson1_deserializeOpHttpBindingsServiceUnavailableException(output, response); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response error with invalid HTTP bindings, %w", err)}
 	}
+
+	return output
+}
+
+func awsRestjson1_deserializeErrorThrottlingException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.ThrottlingException{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	err := awsRestjson1_deserializeDocumentThrottlingException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
 
 	return output
 }
@@ -2485,6 +2668,64 @@ func awsRestjson1_deserializeDocumentNotFoundException(v **types.NotFoundExcepti
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentServiceFailureException(v **types.ServiceFailureException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ServiceFailureException
+	if *v == nil {
+		sv = &types.ServiceFailureException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Code":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Code = ptr.String(jtv)
+			}
+
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		case "RequestId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.RequestId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentServiceUnavailableException(v **types.ServiceUnavailableException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -2541,6 +2782,64 @@ func awsRestjson1_deserializeDocumentServiceUnavailableException(v **types.Servi
 					return fmt.Errorf("expected RetryAfterSeconds to be of type string, got %T instead", value)
 				}
 				sv.RetryAfterSeconds = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ThrottlingException
+	if *v == nil {
+		sv = &types.ThrottlingException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Code":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Code = ptr.String(jtv)
+			}
+
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		case "RequestId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.RequestId = ptr.String(jtv)
 			}
 
 		default:

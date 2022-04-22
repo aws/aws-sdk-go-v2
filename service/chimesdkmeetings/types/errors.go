@@ -95,6 +95,28 @@ func (e *NotFoundException) ErrorMessage() string {
 func (e *NotFoundException) ErrorCode() string             { return "NotFoundException" }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The service encountered an unexpected error.
+type ServiceFailureException struct {
+	Message *string
+
+	Code      *string
+	RequestId *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ServiceFailureException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ServiceFailureException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ServiceFailureException) ErrorCode() string             { return "ServiceFailureException" }
+func (e *ServiceFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+
 // The service is currently unavailable.
 type ServiceUnavailableException struct {
 	Message *string
@@ -117,6 +139,28 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 }
 func (e *ServiceUnavailableException) ErrorCode() string             { return "ServiceUnavailableException" }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+
+// The number of customer requests exceeds the request rate limit.
+type ThrottlingException struct {
+	Message *string
+
+	Code      *string
+	RequestId *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ThrottlingException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ThrottlingException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
+func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The user isn't authorized to request a resource.
 type UnauthorizedException struct {

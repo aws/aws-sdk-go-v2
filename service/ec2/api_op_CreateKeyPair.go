@@ -63,7 +63,11 @@ type CreateKeyPairInput struct {
 // Describes a key pair.
 type CreateKeyPairOutput struct {
 
-	// The SHA-1 digest of the DER encoded private key.
+	// * For RSA key pairs, the key fingerprint is the SHA-1 digest of the DER encoded
+	// private key.
+	//
+	// * For ED25519 key pairs, the key fingerprint is the base64-encoded
+	// SHA-256 digest, which is the default for OpenSSH, starting with OpenSSH 6.8.
 	KeyFingerprint *string
 
 	// An unencrypted PEM encoded RSA or ED25519 private key.

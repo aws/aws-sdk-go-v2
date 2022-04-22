@@ -1,0 +1,8 @@
+{
+    "id": "61629058-4a76-4d3e-b406-d7d0f3040db1",
+    "type": "feature",
+    "description": "Include additional exceptions types.",
+    "modules": [
+        "service/chimesdkmeetings"
+    ]
+}
