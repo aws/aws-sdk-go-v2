@@ -1,0 +1,8 @@
+{
+    "id": "1be705cb-9be9-4061-bd94-a4dbded36da5",
+    "type": "feature",
+    "description": "Adds Duration and Policy options that can be used when creating stscreds.WebIdentityRoleProvider credentials provider.",
+    "modules": [
+        "credentials"
+    ]
+}
