@@ -130,10 +130,19 @@
                     "target": "com.amazonaws.chimesdkmeetings#NotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.chimesdkmeetings#ServiceFailureException"
+                },
+                {
                     "target": "com.amazonaws.chimesdkmeetings#ServiceUnavailableException"
                 },
                 {
+                    "target": "com.amazonaws.chimesdkmeetings#ThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.chimesdkmeetings#UnauthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmeetings#UnprocessableEntityException"
                 }
             ],
             "traits": {
@@ -278,7 +287,13 @@
                     "target": "com.amazonaws.chimesdkmeetings#NotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.chimesdkmeetings#ServiceFailureException"
+                },
+                {
                     "target": "com.amazonaws.chimesdkmeetings#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmeetings#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.chimesdkmeetings#UnauthorizedException"
@@ -393,10 +408,19 @@
                     "target": "com.amazonaws.chimesdkmeetings#BadRequestException"
                 },
                 {
+                    "target": "com.amazonaws.chimesdkmeetings#ForbiddenException"
+                },
+                {
                     "target": "com.amazonaws.chimesdkmeetings#LimitExceededException"
                 },
                 {
+                    "target": "com.amazonaws.chimesdkmeetings#ServiceFailureException"
+                },
+                {
                     "target": "com.amazonaws.chimesdkmeetings#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmeetings#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.chimesdkmeetings#UnauthorizedException"
@@ -486,10 +510,19 @@
                     "target": "com.amazonaws.chimesdkmeetings#BadRequestException"
                 },
                 {
+                    "target": "com.amazonaws.chimesdkmeetings#ForbiddenException"
+                },
+                {
                     "target": "com.amazonaws.chimesdkmeetings#LimitExceededException"
                 },
                 {
+                    "target": "com.amazonaws.chimesdkmeetings#ServiceFailureException"
+                },
+                {
                     "target": "com.amazonaws.chimesdkmeetings#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmeetings#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.chimesdkmeetings#UnauthorizedException"
@@ -602,12 +635,30 @@
             "input": {
                 "target": "com.amazonaws.chimesdkmeetings#DeleteAttendeeRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
+                {
+                    "target": "com.amazonaws.chimesdkmeetings#BadRequestException"
+                },
                 {
                     "target": "com.amazonaws.chimesdkmeetings#ForbiddenException"
                 },
                 {
                     "target": "com.amazonaws.chimesdkmeetings#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmeetings#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmeetings#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmeetings#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmeetings#UnauthorizedException"
                 }
             ],
             "traits": {
@@ -645,12 +696,30 @@
             "input": {
                 "target": "com.amazonaws.chimesdkmeetings#DeleteMeetingRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.chimesdkmeetings#BadRequestException"
                 },
                 {
                     "target": "com.amazonaws.chimesdkmeetings#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmeetings#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmeetings#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmeetings#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmeetings#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmeetings#UnauthorizedException"
                 }
             ],
             "traits": {
@@ -873,6 +942,18 @@
                 },
                 {
                     "target": "com.amazonaws.chimesdkmeetings#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmeetings#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmeetings#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmeetings#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmeetings#UnauthorizedException"
                 }
             ],
             "traits": {
@@ -933,6 +1014,18 @@
                 },
                 {
                     "target": "com.amazonaws.chimesdkmeetings#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmeetings#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmeetings#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmeetings#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmeetings#UnauthorizedException"
                 }
             ],
             "traits": {
@@ -1023,6 +1116,18 @@
                 },
                 {
                     "target": "com.amazonaws.chimesdkmeetings#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmeetings#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmeetings#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmeetings#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmeetings#UnauthorizedException"
                 }
             ],
             "traits": {
@@ -1297,6 +1402,25 @@
         "com.amazonaws.chimesdkmeetings#RetryAfterSeconds": {
             "type": "string"
         },
+        "com.amazonaws.chimesdkmeetings#ServiceFailureException": {
+            "type": "structure",
+            "members": {
+                "Code": {
+                    "target": "com.amazonaws.chimesdkmeetings#String"
+                },
+                "Message": {
+                    "target": "com.amazonaws.chimesdkmeetings#String"
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.chimesdkmeetings#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The service encountered an unexpected error.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
         "com.amazonaws.chimesdkmeetings#ServiceUnavailableException": {
             "type": "structure",
             "members": {
@@ -1331,6 +1455,9 @@
             "input": {
                 "target": "com.amazonaws.chimesdkmeetings#StartMeetingTranscriptionRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.chimesdkmeetings#BadRequestException"
@@ -1345,7 +1472,13 @@
                     "target": "com.amazonaws.chimesdkmeetings#NotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.chimesdkmeetings#ServiceFailureException"
+                },
+                {
                     "target": "com.amazonaws.chimesdkmeetings#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmeetings#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.chimesdkmeetings#UnauthorizedException"
@@ -1388,6 +1521,9 @@
             "input": {
                 "target": "com.amazonaws.chimesdkmeetings#StopMeetingTranscriptionRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.chimesdkmeetings#BadRequestException"
@@ -1399,7 +1535,13 @@
                     "target": "com.amazonaws.chimesdkmeetings#NotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.chimesdkmeetings#ServiceFailureException"
+                },
+                {
                     "target": "com.amazonaws.chimesdkmeetings#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmeetings#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.chimesdkmeetings#UnauthorizedException"
@@ -1437,6 +1579,25 @@
                     "min": 0,
                     "max": 4096
                 }
+            }
+        },
+        "com.amazonaws.chimesdkmeetings#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "Code": {
+                    "target": "com.amazonaws.chimesdkmeetings#String"
+                },
+                "Message": {
+                    "target": "com.amazonaws.chimesdkmeetings#String"
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.chimesdkmeetings#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The number of customer requests exceeds the request rate limit.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
             }
         },
         "com.amazonaws.chimesdkmeetings#TranscribeContentIdentificationType": {
