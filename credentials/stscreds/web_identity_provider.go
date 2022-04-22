@@ -46,7 +46,14 @@ type WebIdentityRoleOptions struct {
 	// Session name, if you wish to uniquely identify this session.
 	RoleSessionName string
 
-	// Expiry duration of the STS credentials. Defaults to 15 minutes if not set.
+	// Expiry duration of the STS credentials. STS will assign a default expiry
+	// duration if this value is unset. This is different from the Duration
+	// option of AssumeRoleProvider, which automatically assigns 15 minutes if
+	// Duration is unset.
+	//
+	// See the STS AssumeRoleWithWebIdentity API reference guide for more
+	// information on defaults.
+	// https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRoleWithWebIdentity.html
 	Duration time.Duration
 
 	// An IAM policy in JSON format that you want to use as an inline session policy.
@@ -108,11 +115,14 @@ func (p *WebIdentityRoleProvider) Retrieve(ctx context.Context) (aws.Credentials
 		sessionName = strconv.FormatInt(sdk.NowTime().UnixNano(), 10)
 	}
 	input := &sts.AssumeRoleWithWebIdentityInput{
-		DurationSeconds:  aws.Int32(int32(p.options.Duration / time.Second)),
 		PolicyArns:       p.options.PolicyARNs,
 		RoleArn:          &p.options.RoleARN,
 		RoleSessionName:  &sessionName,
 		WebIdentityToken: aws.String(string(b)),
+	}
+	if p.options.Duration != 0 {
+		// If set use the value, otherwise STS will assign a default expiration duration.
+		input.DurationSeconds = aws.Int32(int32(p.options.Duration / time.Second))
 	}
 	if p.options.Policy != nil {
 		input.Policy = p.options.Policy
