@@ -1,0 +1,8 @@
+{
+    "id": "6523434c-f128-4529-b69f-0bc324ed7ab6",
+    "type": "dependency",
+    "description": "Update SDK's internal copy of golang.org/x/sync/singleflight to address issue with test failing due to timeing issues",
+    "modules": [
+        "."
+    ]
+}
