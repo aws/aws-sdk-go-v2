@@ -176,6 +176,14 @@ func TestClient_AllQueryStringTypes_awsRestjson1Serialize(t *testing.T) {
 			Params: &AllQueryStringTypesInput{
 				QueryFloat:  ptr.Float32(float32(math.NaN())),
 				QueryDouble: ptr.Float64(math.NaN()),
+				QueryParamsMapOfStringList: map[string][]string{
+					"Float": {
+						"NaN",
+					},
+					"Double": {
+						"NaN",
+					},
+				},
 			},
 			ExpectMethod:  "GET",
 			ExpectURIPath: "/AllQueryStringTypesInput",
@@ -192,6 +200,14 @@ func TestClient_AllQueryStringTypes_awsRestjson1Serialize(t *testing.T) {
 			Params: &AllQueryStringTypesInput{
 				QueryFloat:  ptr.Float32(float32(math.Inf(1))),
 				QueryDouble: ptr.Float64(math.Inf(1)),
+				QueryParamsMapOfStringList: map[string][]string{
+					"Float": {
+						"Infinity",
+					},
+					"Double": {
+						"Infinity",
+					},
+				},
 			},
 			ExpectMethod:  "GET",
 			ExpectURIPath: "/AllQueryStringTypesInput",
@@ -208,6 +224,14 @@ func TestClient_AllQueryStringTypes_awsRestjson1Serialize(t *testing.T) {
 			Params: &AllQueryStringTypesInput{
 				QueryFloat:  ptr.Float32(float32(math.Inf(-1))),
 				QueryDouble: ptr.Float64(math.Inf(-1)),
+				QueryParamsMapOfStringList: map[string][]string{
+					"Float": {
+						"-Infinity",
+					},
+					"Double": {
+						"-Infinity",
+					},
+				},
 			},
 			ExpectMethod:  "GET",
 			ExpectURIPath: "/AllQueryStringTypesInput",

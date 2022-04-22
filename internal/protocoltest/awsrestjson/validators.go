@@ -529,26 +529,6 @@ func (m *validateOpMalformedTimestampQueryHttpDate) HandleInitialize(ctx context
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpPostPlayerAction struct {
-}
-
-func (*validateOpPostPlayerAction) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpPostPlayerAction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*PostPlayerActionInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpPostPlayerActionInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 func addOpConstantQueryStringValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpConstantQueryString{}, middleware.After)
 }
@@ -651,10 +631,6 @@ func addOpMalformedTimestampQueryEpochValidationMiddleware(stack *middleware.Sta
 
 func addOpMalformedTimestampQueryHttpDateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpMalformedTimestampQueryHttpDate{}, middleware.After)
-}
-
-func addOpPostPlayerActionValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpPostPlayerAction{}, middleware.After)
 }
 
 func validateOpConstantQueryStringInput(v *ConstantQueryStringInput) error {
@@ -1084,21 +1060,6 @@ func validateOpMalformedTimestampQueryHttpDateInput(v *MalformedTimestampQueryHt
 	invalidParams := smithy.InvalidParamsError{Context: "MalformedTimestampQueryHttpDateInput"}
 	if v.Timestamp == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Timestamp"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpPostPlayerActionInput(v *PostPlayerActionInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "PostPlayerActionInput"}
-	if v.Action == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Action"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

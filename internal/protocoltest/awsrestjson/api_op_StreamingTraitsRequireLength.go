@@ -37,10 +37,6 @@ type StreamingTraitsRequireLengthInput struct {
 }
 
 type StreamingTraitsRequireLengthOutput struct {
-	Blob io.ReadCloser
-
-	Foo *string
-
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
@@ -81,6 +77,9 @@ func (c *Client) addOperationStreamingTraitsRequireLengthMiddlewares(stack *midd
 		return err
 	}
 	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStreamingTraitsRequireLength(options.Region), middleware.Before); err != nil {

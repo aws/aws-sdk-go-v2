@@ -3709,6 +3709,13 @@ func awsRestjson1_serializeOpDocumentMalformedSetInput(v *MalformedSetInput, val
 	object := value.Object()
 	defer object.Close()
 
+	if v.BlobSet != nil {
+		ok := object.Key("blobSet")
+		if err := awsRestjson1_serializeDocumentBlobSet(v.BlobSet, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Set != nil {
 		ok := object.Key("set")
 		if err := awsRestjson1_serializeDocumentSimpleSet(v.Set, ok); err != nil {
@@ -6041,6 +6048,20 @@ func awsRestjson1_serializeOpHttpBindingsUnitInputAndOutputInput(v *UnitInputAnd
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentBlobSet(v [][]byte, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			continue
+		}
+		av.Base64EncodeBytes(v[i])
+	}
 	return nil
 }
 

@@ -8493,14 +8493,10 @@ func (m *awsRestjson1_deserializeOpStreamingTraitsRequireLength) HandleDeseriali
 	output := &StreamingTraitsRequireLengthOutput{}
 	out.Result = output
 
-	err = awsRestjson1_deserializeOpHttpBindingsStreamingTraitsRequireLengthOutput(output, response)
-	if err != nil {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
-	}
-
-	err = awsRestjson1_deserializeOpDocumentStreamingTraitsRequireLengthOutput(output, response.Body)
-	if err != nil {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
 	}
 
 	return out, metadata, err
@@ -8555,27 +8551,6 @@ func awsRestjson1_deserializeOpErrorStreamingTraitsRequireLength(response *smith
 		return genericError
 
 	}
-}
-
-func awsRestjson1_deserializeOpHttpBindingsStreamingTraitsRequireLengthOutput(v *StreamingTraitsRequireLengthOutput, response *smithyhttp.Response) error {
-	if v == nil {
-		return fmt.Errorf("unsupported deserialization for nil %T", v)
-	}
-
-	if headerValues := response.Header.Values("X-Foo"); len(headerValues) != 0 {
-		headerValues[0] = strings.TrimSpace(headerValues[0])
-		v.Foo = ptr.String(headerValues[0])
-	}
-
-	return nil
-}
-func awsRestjson1_deserializeOpDocumentStreamingTraitsRequireLengthOutput(v *StreamingTraitsRequireLengthOutput, body io.ReadCloser) error {
-	if v == nil {
-		return fmt.Errorf("unsupported deserialization of nil %T", v)
-	}
-
-	v.Blob = body
-	return nil
 }
 
 type awsRestjson1_deserializeOpStreamingTraitsWithMediaType struct {
