@@ -1,3 +1,7 @@
+# v1.9.0 (2022-04-22)
+
+* **Feature**: Include additional exceptions types.
+
 # v1.8.3 (2022-03-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions

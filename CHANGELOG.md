@@ -1,3 +1,11 @@
+# Release (2022-04-22)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmeetings`: [v1.9.0](service/chimesdkmeetings/CHANGELOG.md#v190-2022-04-22)
+  * **Feature**: Include additional exceptions types.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.36.0](service/ec2/CHANGELOG.md#v1360-2022-04-22)
+  * **Feature**: Adds support for waiters that automatically poll for a deleted NAT Gateway until it reaches the deleted state.
+
 # Release (2022-04-21)
 
 ## Module Highlights

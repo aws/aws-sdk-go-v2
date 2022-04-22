@@ -1,8 +1,0 @@
-{
-    "id": "05680798-3151-4cce-9c82-41fdc7489634",
-    "type": "feature",
-    "description": "Adds support for waiters that automatically poll for a deleted NAT Gateway until it reaches the deleted state.",
-    "modules": [
-        "service/ec2"
-    ]
-}
