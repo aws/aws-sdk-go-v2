@@ -16887,7 +16887,7 @@ func awsRestxml_deserializeDocumentLifecycleExpiration(v **types.LifecycleExpira
 			if err != nil {
 				return err
 			}
-			if val == nil {
+			if val == nil  || len(val) == 0 {
 				break
 			}
 			{
