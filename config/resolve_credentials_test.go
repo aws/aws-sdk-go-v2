@@ -2,6 +2,7 @@ package config
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -15,9 +16,12 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws/retry"
+	"github.com/aws/aws-sdk-go-v2/feature/ec2/imds"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/service/sso"
 	"github.com/aws/aws-sdk-go-v2/service/sts"
+	"github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 )
@@ -469,5 +473,106 @@ func TestResolveCredentialsCacheOptions(t *testing.T) {
 
 	if !optionsFnCalled {
 		t.Errorf("expect options to be called")
+	}
+}
+
+func TestResolveCredentialsIMDSClient(t *testing.T) {
+	restoreEnv := awstesting.StashEnv()
+	defer awstesting.PopEnv(restoreEnv)
+
+	expectEnabled := func(t *testing.T, err error) {
+		var re *retry.MaxAttemptsError
+		if !(err == nil || // If running in EC2, there will be no error
+			errors.As(err, &re) || // When not running in EC2, the IMDS call can either reach max attempts
+			errors.Is(err, context.DeadlineExceeded)) { // or reach the context deadline
+			t.Fatalf("unexpected error: %v", err)
+		}
+	}
+
+	expectDisabled := func(t *testing.T, err error) {
+		var oe *smithy.OperationError
+		if !errors.As(err, &oe) {
+			t.Fatalf("unexpected error: %v", err)
+		} else {
+			e := errors.Unwrap(oe)
+			if e == nil {
+				t.Fatalf("unexpected empty operation error: %v", oe)
+			} else {
+				if !strings.HasPrefix(e.Error(), "access disabled to EC2 IMDS") {
+					t.Fatalf("unexpected operation error: %v", oe)
+				}
+			}
+		}
+	}
+
+	testcases := map[string]struct {
+		enabledState  imds.ClientEnableState
+		envvar        string
+		expectedState imds.ClientEnableState
+		expectedError func(*testing.T, error)
+	}{
+		"nothing": {
+			expectedState: imds.ClientDefaultEnableState,
+			expectedError: expectEnabled,
+		},
+
+		"state enabled": {
+			enabledState:  imds.ClientEnabled,
+			expectedState: imds.ClientEnabled,
+			expectedError: expectEnabled,
+		},
+		"state disabled": {
+			enabledState:  imds.ClientDisabled,
+			expectedState: imds.ClientDisabled,
+			expectedError: expectDisabled,
+		},
+
+		"DISABLED true": {
+			envvar:        "true",
+			expectedState: imds.ClientDisabled,
+			expectedError: expectDisabled,
+		},
+		"DISABLED false": {
+			envvar:        "false",
+			expectedState: imds.ClientEnabled,
+			expectedError: expectEnabled,
+		},
+
+		"state enabled overrides DISABLED true": {
+			enabledState:  imds.ClientEnabled,
+			envvar:        "true",
+			expectedState: imds.ClientEnabled,
+			expectedError: expectEnabled,
+		},
+		"state disabled overrides DISABLED false": {
+			enabledState:  imds.ClientDisabled,
+			envvar:        "false",
+			expectedState: imds.ClientDisabled,
+			expectedError: expectDisabled,
+		},
+	}
+
+	for name, tc := range testcases {
+		t.Run(name, func(t *testing.T) {
+			os.Clearenv()
+
+			opts := []func(*LoadOptions) error{}
+			if tc.enabledState != imds.ClientDefaultEnableState {
+				opts = append(opts, WithEC2IMDSClientEnableState(tc.enabledState))
+			}
+			if tc.envvar != "" {
+				os.Setenv("AWS_EC2_METADATA_DISABLED", tc.envvar)
+			}
+
+			c, err := LoadDefaultConfig(context.TODO(), opts...)
+			if err != nil {
+				t.Fatalf("could not load config: %s", err)
+			}
+
+			creds := c.Credentials
+
+			_, err = creds.Retrieve(context.TODO())
+			tc.expectedError(t, err)
+		})
 	}
 }
