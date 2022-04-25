@@ -31,31 +31,78 @@ func (m mockErrorCode) Error() string {
 }
 
 func TestWebIdentityProviderRetrieve(t *testing.T) {
-	defer func() func() {
-		o := sdk.NowTime
-		sdk.NowTime = func() time.Time {
-			return time.Time{}
-		}
-		return func() {
-			sdk.NowTime = o
-		}
-	}()()
+	restorTime := sdk.TestingUseReferenceTime(time.Time{})
+	defer restorTime()
 
 	cases := map[string]struct {
 		mockClient        mockAssumeRoleWithWebIdentity
 		roleARN           string
 		tokenFilepath     string
 		sessionName       string
-		expectedError     error
+		options           func(*stscreds.WebIdentityRoleOptions)
 		expectedCredValue aws.Credentials
 	}{
-		"session name case": {
+		"success": {
 			roleARN:       "arn01234567890123456789",
 			tokenFilepath: "testdata/token.jwt",
-			sessionName:   "foo",
-			mockClient: func(ctx context.Context, params *sts.AssumeRoleWithWebIdentityInput, optFns ...func(*sts.Options)) (*sts.AssumeRoleWithWebIdentityOutput, error) {
+			options: func(o *stscreds.WebIdentityRoleOptions) {
+				o.RoleSessionName = "foo"
+			},
+			mockClient: func(
+				ctx context.Context, params *sts.AssumeRoleWithWebIdentityInput, optFns ...func(*sts.Options),
+			) (
+				*sts.AssumeRoleWithWebIdentityOutput, error,
+			) {
 				if e, a := "foo", *params.RoleSessionName; e != a {
 					return nil, fmt.Errorf("expected %v, but received %v", e, a)
+				}
+				if params.DurationSeconds != nil {
+					return nil, fmt.Errorf("expect no duration seconds, got %v",
+						*params.DurationSeconds)
+				}
+				if params.Policy != nil {
+					return nil, fmt.Errorf("expect no policy, got %v",
+						*params.Policy)
+				}
+				return &sts.AssumeRoleWithWebIdentityOutput{
+					Credentials: &types.Credentials{
+						Expiration:      aws.Time(sdk.NowTime()),
+						AccessKeyId:     aws.String("access-key-id"),
+						SecretAccessKey: aws.String("secret-access-key"),
+						SessionToken:    aws.String("session-token"),
+					},
+				}, nil
+			},
+			expectedCredValue: aws.Credentials{
+				AccessKeyID:     "access-key-id",
+				SecretAccessKey: "secret-access-key",
+				SessionToken:    "session-token",
+				Source:          stscreds.WebIdentityProviderName,
+				CanExpire:       true,
+				Expires:         sdk.NowTime(),
+			},
+		},
+		"success with duration and policy": {
+			roleARN:       "arn01234567890123456789",
+			tokenFilepath: "testdata/token.jwt",
+			options: func(o *stscreds.WebIdentityRoleOptions) {
+				o.Duration = 42 * time.Second
+				o.Policy = aws.String("super secret policy")
+				o.RoleSessionName = "foo"
+			},
+			mockClient: func(
+				ctx context.Context, params *sts.AssumeRoleWithWebIdentityInput, optFns ...func(*sts.Options),
+			) (
+				*sts.AssumeRoleWithWebIdentityOutput, error,
+			) {
+				if e, a := "foo", *params.RoleSessionName; e != a {
+					return nil, fmt.Errorf("expected %v, but received %v", e, a)
+				}
+				if e, a := int32(42), aws.ToInt32(params.DurationSeconds); e != a {
+					return nil, fmt.Errorf("expect %v duration seconds, got %v", e, a)
+				}
+				if e, a := "super secret policy", aws.ToString(params.Policy); e != a {
+					return nil, fmt.Errorf("expect %v policy, got %v", e, a)
 				}
 				return &sts.AssumeRoleWithWebIdentityOutput{
 					Credentials: &types.Credentials{
@@ -78,8 +125,14 @@ func TestWebIdentityProviderRetrieve(t *testing.T) {
 		"configures token retry": {
 			roleARN:       "arn01234567890123456789",
 			tokenFilepath: "testdata/token.jwt",
-			sessionName:   "foo",
-			mockClient: func(ctx context.Context, params *sts.AssumeRoleWithWebIdentityInput, optFns ...func(*sts.Options)) (*sts.AssumeRoleWithWebIdentityOutput, error) {
+			options: func(o *stscreds.WebIdentityRoleOptions) {
+				o.RoleSessionName = "foo"
+			},
+			mockClient: func(
+				ctx context.Context, params *sts.AssumeRoleWithWebIdentityInput, optFns ...func(*sts.Options),
+			) (
+				*sts.AssumeRoleWithWebIdentityOutput, error,
+			) {
 				o := sts.Options{}
 				for _, fn := range optFns {
 					fn(&o)
@@ -112,13 +165,19 @@ func TestWebIdentityProviderRetrieve(t *testing.T) {
 
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			p := stscreds.NewWebIdentityRoleProvider(c.mockClient, c.roleARN, stscreds.IdentityTokenFile(c.tokenFilepath),
-				func(o *stscreds.WebIdentityRoleOptions) {
-					o.RoleSessionName = c.sessionName
-				})
+			var optFns []func(*stscreds.WebIdentityRoleOptions)
+			if c.options != nil {
+				optFns = append(optFns, c.options)
+			}
+			p := stscreds.NewWebIdentityRoleProvider(
+				c.mockClient,
+				c.roleARN,
+				stscreds.IdentityTokenFile(c.tokenFilepath),
+				optFns...,
+			)
 			credValue, err := p.Retrieve(context.Background())
-			if e, a := c.expectedError, err; !reflect.DeepEqual(e, a) {
-				t.Errorf("expected %v, but received %v", e, a)
+			if err != nil {
+				t.Fatalf("expect no error, got %v", err)
 			}
 
 			if e, a := c.expectedCredValue, credValue; !reflect.DeepEqual(e, a) {
