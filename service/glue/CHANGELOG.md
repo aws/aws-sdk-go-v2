@@ -1,3 +1,7 @@
+# v1.24.1 (2022-04-25)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.24.0 (2022-04-21)
 
 * **Feature**: This release adds APIs to create, read, delete, list, and batch read of Glue custom entity types

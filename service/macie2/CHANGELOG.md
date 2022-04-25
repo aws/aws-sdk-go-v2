@@ -1,3 +1,7 @@
+# v1.21.1 (2022-04-25)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.0 (2022-04-20)
 
 * **Feature**: Sensitive data findings in Amazon Macie now indicate how Macie found the sensitive data that produced a finding (originType).

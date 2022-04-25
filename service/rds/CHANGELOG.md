@@ -1,3 +1,7 @@
+# v1.20.1 (2022-04-25)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.20.0 (2022-04-20)
 
 * **Feature**: Added a new cluster-level attribute to set the capacity range for Aurora Serverless v2 instances.

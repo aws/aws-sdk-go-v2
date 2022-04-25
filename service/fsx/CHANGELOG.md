@@ -1,3 +1,7 @@
+# v1.23.1 (2022-04-25)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.23.0 (2022-04-13)
 
 * **Feature**: This release adds support for deploying FSx for ONTAP file systems in a single Availability Zone.

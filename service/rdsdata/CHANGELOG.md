@@ -1,3 +1,8 @@
+# v1.12.0 (2022-04-25)
+
+* **Feature**: Support to receive SQL query results in the form of a simplified JSON string. This enables developers using the new JSON string format to more easily convert it to an object using popular JSON string parsing libraries.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.11.3 (2022-03-30)
 
 * **Dependency Update**: Updated to the latest SDK module versions

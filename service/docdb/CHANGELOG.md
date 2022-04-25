@@ -1,3 +1,7 @@
+# v1.18.1 (2022-04-25)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.0 (2022-04-07)
 
 * **Feature**: Added support to enable/disable performance insights when creating or modifying db instances

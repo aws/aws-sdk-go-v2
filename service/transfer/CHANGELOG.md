@@ -1,3 +1,7 @@
+# v1.18.5 (2022-04-25)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.4 (2022-04-19)
 
 * **Documentation**: This release contains corrected HomeDirectoryMappings examples for several API functions: CreateAccess, UpdateAccess, CreateUser, and UpdateUser,.

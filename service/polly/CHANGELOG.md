@@ -1,3 +1,7 @@
+# v1.15.1 (2022-04-25)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.15.0 (2022-04-19)
 
 * **Feature**: Amazon Polly adds new Austrian German voice - Hannah. Hannah is available as Neural voice only.

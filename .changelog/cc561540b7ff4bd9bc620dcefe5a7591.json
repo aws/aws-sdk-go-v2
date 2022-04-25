@@ -1,8 +1,0 @@
-{
-    "id": "cc561540-b7ff-4bd9-bc62-0dcefe5a7591",
-    "type": "documentation",
-    "description": "Documentation updates for Amazon GameLift.",
-    "modules": [
-        "service/gamelift"
-    ]
-}

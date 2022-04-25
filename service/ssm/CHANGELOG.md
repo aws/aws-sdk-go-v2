@@ -1,3 +1,7 @@
+# v1.25.1 (2022-04-25)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.25.0 (2022-04-19)
 
 * **Feature**: Added offset support for specifying the number of days to wait after the date and time specified by a CRON expression when creating SSM association.

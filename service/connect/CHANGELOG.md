@@ -1,3 +1,8 @@
+# v1.23.0 (2022-04-25)
+
+* **Feature**: This release adds SearchUsers API which can be used to search for users with a Connect Instance
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.22.0 (2022-04-20)
 
 * **Feature**: This release adds APIs to search, claim, release, list, update, and describe phone numbers. You can also use them to associate and disassociate contact flows to phone numbers.

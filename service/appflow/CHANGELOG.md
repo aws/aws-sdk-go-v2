@@ -1,3 +1,7 @@
+# v1.15.1 (2022-04-25)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.15.0 (2022-04-14)
 
 * **Feature**: Enables users to pass custom token URL parameters for Oauth2 authentication during create connector profile

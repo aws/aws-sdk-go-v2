@@ -1,3 +1,8 @@
+# v1.21.0 (2022-04-25)
+
+* **Feature**: Security Hub now lets you opt-out of auto-enabling the defaults standards (CIS and FSBP) in accounts that are auto-enabled with Security Hub via Security Hub's integration with AWS Organizations.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.20.0 (2022-04-05)
 
 * **Feature**: Added additional ASFF details for RdsSecurityGroup AutoScalingGroup, ElbLoadBalancer, CodeBuildProject and RedshiftCluster.

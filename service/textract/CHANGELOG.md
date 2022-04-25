@@ -1,3 +1,7 @@
+# v1.15.1 (2022-04-25)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.15.0 (2022-04-19)
 
 * **Feature**: This release adds support for specifying and extracting information from documents using the Queries feature within Analyze Document API

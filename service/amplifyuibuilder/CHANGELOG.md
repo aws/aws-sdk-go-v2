@@ -1,3 +1,7 @@
+# v1.6.1 (2022-04-25)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.6.0 (2022-04-11)
 
 * **Feature**: In this release, we have added the ability to bind events to component level actions.

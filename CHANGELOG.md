@@ -1,3 +1,24 @@
+# Release (2022-04-25)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.16.3
+  * **Dependency Update**: Update SDK's internal copy of golang.org/x/sync/singleflight to address issue with test failing due to timeing issues
+* `github.com/aws/aws-sdk-go-v2/credentials`: [v1.12.0](credentials/CHANGELOG.md#v1120-2022-04-25)
+  * **Feature**: Adds Duration and Policy options that can be used when creating stscreds.WebIdentityRoleProvider credentials provider.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.23.0](service/connect/CHANGELOG.md#v1230-2022-04-25)
+  * **Feature**: This release adds SearchUsers API which can be used to search for users with a Connect Instance
+* `github.com/aws/aws-sdk-go-v2/service/gamelift`: [v1.14.4](service/gamelift/CHANGELOG.md#v1144-2022-04-25)
+  * **Documentation**: Documentation updates for Amazon GameLift.
+* `github.com/aws/aws-sdk-go-v2/service/mq`: [v1.13.0](service/mq/CHANGELOG.md#v1130-2022-04-25)
+  * **Feature**: This release adds the CRITICAL_ACTION_REQUIRED broker state and the ActionRequired API property. CRITICAL_ACTION_REQUIRED informs you when your broker is degraded. ActionRequired provides you with a code which you can use to find instructions in the Developer Guide on how to resolve the issue.
+* `github.com/aws/aws-sdk-go-v2/service/rdsdata`: [v1.12.0](service/rdsdata/CHANGELOG.md#v1120-2022-04-25)
+  * **Feature**: Support to receive SQL query results in the form of a simplified JSON string. This enables developers using the new JSON string format to more easily convert it to an object using popular JSON string parsing libraries.
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.21.0](service/securityhub/CHANGELOG.md#v1210-2022-04-25)
+  * **Feature**: Security Hub now lets you opt-out of auto-enabling the defaults standards (CIS and FSBP) in accounts that are auto-enabled with Security Hub via Security Hub's integration with AWS Organizations.
+
 # Release (2022-04-22)
 
 ## Module Highlights

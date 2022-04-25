@@ -1,3 +1,7 @@
+# v1.12.1 (2022-04-25)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.12.0 (2022-04-21)
 
 * **Feature**: Added DetectMetricSetConfig API for detecting configuration required for creating metric set from provided S3 data source.

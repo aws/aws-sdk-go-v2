@@ -1,3 +1,7 @@
+# v1.17.1 (2022-04-25)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.17.0 (2022-04-21)
 
 * **Feature**: This release adds support for minimum of 5 character length virtual tape barcodes.

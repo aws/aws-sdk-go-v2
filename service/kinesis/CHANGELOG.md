@@ -1,3 +1,7 @@
+# v1.15.5 (2022-04-25)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.15.4 (2022-04-12)
 
 * **Bug Fix**: Fixes an issue that caused the unexported constructor function names for EventStream types to be swapped for the event reader and writer respectivly.

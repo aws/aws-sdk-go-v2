@@ -1,3 +1,7 @@
+# v1.17.1 (2022-04-25)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.17.0 (2022-04-21)
 
 * **Feature**: This release introduces tiered channels and adds support for live sources. Customers using a STANDARD channel can now create programs using live sources.

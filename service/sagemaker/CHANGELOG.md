@@ -1,3 +1,7 @@
+# v1.27.1 (2022-04-25)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.27.0 (2022-04-07)
 
 * **Feature**: Amazon Sagemaker Notebook Instances now supports G5 instance types

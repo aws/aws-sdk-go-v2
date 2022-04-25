@@ -1,3 +1,7 @@
+# v1.36.1 (2022-04-25)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.36.0 (2022-04-22)
 
 * **Feature**: Adds support for waiters that automatically poll for a deleted NAT Gateway until it reaches the deleted state.

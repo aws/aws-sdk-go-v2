@@ -1,3 +1,7 @@
+# v1.17.1 (2022-04-25)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.17.0 (2022-04-12)
 
 * **Feature**: This release adds new APIs DeleteInsight to deletes the insight along with the associated anomalies, events and recommendations.

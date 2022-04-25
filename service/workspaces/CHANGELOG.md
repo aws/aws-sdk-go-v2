@@ -1,3 +1,7 @@
+# v1.18.1 (2022-04-25)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.0 (2022-04-11)
 
 * **Feature**: Added API support that allows customers to create GPU-enabled WorkSpaces using EC2 G4dn instances.

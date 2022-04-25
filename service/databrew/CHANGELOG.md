@@ -1,3 +1,7 @@
+# v1.20.1 (2022-04-25)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.20.0 (2022-03-31)
 
 * **Feature**: This AWS Glue Databrew release adds feature to support ORC as an input format.

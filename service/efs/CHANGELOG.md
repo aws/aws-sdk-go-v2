@@ -1,3 +1,7 @@
+# v1.17.1 (2022-04-25)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.17.0 (2022-04-12)
 
 * **Feature**: Amazon EFS adds support for a ThrottlingException when using the CreateAccessPoint API if the account is nearing the AccessPoint limit(120).
