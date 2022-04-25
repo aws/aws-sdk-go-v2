@@ -29,6 +29,28 @@
         ]
     },
     "shapes": {
+        "com.amazonaws.mq#ActionRequired": {
+            "type": "structure",
+            "members": {
+                "ActionRequiredCode": {
+                    "target": "com.amazonaws.mq#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The code you can use to resolve your broker issue when the broker is in a CRITICAL_ACTION_REQUIRED state. You can find instructions by choosing the link for your code from the list of action required codes in <a href=\"https://docs.aws.amazon.com//latest/developer-guide/troubleshooting-action-required-codes.html\">Amazon MQ action required codes</a>. Each code references a topic with detailed information, instructions, and recommendations for how to resolve the issue and prevent future occurrences.</p>",
+                        "smithy.api#jsonName": "actionRequiredCode"
+                    }
+                },
+                "ActionRequiredInfo": {
+                    "target": "com.amazonaws.mq#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the action required to resolve your broker issue when the broker is in a CRITICAL_ACTION_REQUIRED state.</p>",
+                        "smithy.api#jsonName": "actionRequiredInfo"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The action required to resolve a broker issue when the broker is in a CRITICAL_ACTION_REQUIRED state.</p>"
+            }
+        },
         "com.amazonaws.mq#AuthenticationStrategy": {
             "type": "string",
             "traits": {
@@ -209,6 +231,10 @@
                     {
                         "value": "REBOOT_IN_PROGRESS",
                         "name": "REBOOT_IN_PROGRESS"
+                    },
+                    {
+                        "value": "CRITICAL_ACTION_REQUIRED",
+                        "name": "CRITICAL_ACTION_REQUIRED"
                     }
                 ]
             }
@@ -841,6 +867,9 @@
             "input": {
                 "target": "com.amazonaws.mq#CreateTagsRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.mq#BadRequestException"
@@ -1066,6 +1095,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.mq#DeleteTagsRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -1408,6 +1440,13 @@
         "com.amazonaws.mq#DescribeBrokerResponse": {
             "type": "structure",
             "members": {
+                "ActionsRequired": {
+                    "target": "com.amazonaws.mq#__listOfActionRequired",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of actions required for a broker.</p>",
+                        "smithy.api#jsonName": "actionsRequired"
+                    }
+                },
                 "AuthenticationStrategy": {
                     "target": "com.amazonaws.mq#AuthenticationStrategy",
                     "traits": {
@@ -3327,6 +3366,12 @@
                 }
             }
         },
+        "com.amazonaws.mq#__listOfActionRequired": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mq#ActionRequired"
+            }
+        },
         "com.amazonaws.mq#__listOfAvailabilityZone": {
             "type": "list",
             "member": {
@@ -3431,6 +3476,21 @@
         },
         "com.amazonaws.mq#mq": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "mq",
+                    "arnNamespace": "mq",
+                    "cloudFormationName": "AmazonMQ",
+                    "cloudTrailEventSource": "mq.amazonaws.com",
+                    "endpointPrefix": "mq"
+                },
+                "aws.auth#sigv4": {
+                    "name": "mq"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>Amazon MQ is a managed message broker service for Apache ActiveMQ and RabbitMQ that makes it easy to set up and operate message brokers in the cloud. A message broker allows software applications and components to communicate using various programming languages, operating systems, and formal messaging protocols.</p>",
+                "smithy.api#title": "AmazonMQ"
+            },
             "version": "2017-11-27",
             "operations": [
                 {
@@ -3499,22 +3559,7 @@
                 {
                     "target": "com.amazonaws.mq#UpdateUser"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "mq",
-                    "arnNamespace": "mq",
-                    "cloudFormationName": "AmazonMQ",
-                    "cloudTrailEventSource": "mq.amazonaws.com",
-                    "endpointPrefix": "mq"
-                },
-                "aws.auth#sigv4": {
-                    "name": "mq"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Amazon MQ is a managed message broker service for Apache ActiveMQ and RabbitMQ that makes it easy to set up and operate message brokers in the cloud. A message broker allows software applications and components to communicate using various programming languages, operating systems, and formal messaging protocols.</p>",
-                "smithy.api#title": "AmazonMQ"
-            }
+            ]
         }
     }
 }

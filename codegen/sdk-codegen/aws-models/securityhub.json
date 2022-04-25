@@ -445,6 +445,21 @@
                 "target": "com.amazonaws.securityhub#NonEmptyString"
             }
         },
+        "com.amazonaws.securityhub#AutoEnableStandards": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "NONE",
+                        "name": "NONE"
+                    },
+                    {
+                        "value": "DEFAULT",
+                        "name": "DEFAULT"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.securityhub#AvailabilityZone": {
             "type": "structure",
             "members": {
@@ -12359,13 +12374,13 @@
                 "ProductName": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the product that generated the finding.</p>\n         <p>Security Hub populates this attribute automatically for each finding. You cannot update it using <code>BatchImportFindings</code> or <code>BatchUpdateFindings</code>. The exception to this is when you use a custom integration.</p>\n         <p>When you use the Security Hub console to filter findings by product name, you use this attribute.</p>\n         <p>When you use the Security Hub API to filter findings by product name, you use the <code>aws/securityhub/ProductName</code> attribute under <code>ProductFields</code>.</p>\n         <p>Security Hub does not synchronize those two attributes.</p>"
+                        "smithy.api#documentation": "<p>The name of the product that generated the finding.</p>\n         <p>Security Hub populates this attribute automatically for each finding. You cannot update this attribute with <code>BatchImportFindings</code> or <code>BatchUpdateFindings</code>. The exception to this is a custom integration.</p>\n         <p>When you use the Security Hub console or API to filter findings by product name, you use this attribute.</p>"
                     }
                 },
                 "CompanyName": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the company for the product that generated the finding.</p>\n         <p>Security Hub populates this attribute automatically for each finding. You cannot be updated using <code>BatchImportFindings</code> or <code>BatchUpdateFindings</code>. The exception to this is when you use a custom integration.</p>\n         <p>When you use the Security Hub console to filter findings by company name, you use this attribute.</p>\n         <p>When you use the Security Hub API to filter findings by company name, you use the <code>aws/securityhub/CompanyName</code> attribute under <code>ProductFields</code>.</p>\n         <p>Security Hub does not synchronize those two attributes.</p>"
+                        "smithy.api#documentation": "<p>The name of the company for the product that generated the finding.</p>\n         <p>Security Hub populates this attribute automatically for each finding. You cannot update this attribute with <code>BatchImportFindings</code> or <code>BatchUpdateFindings</code>. The exception to this is a custom integration.</p>\n         <p>When you use the Security Hub console or API to filter findings by company name, you use this attribute.</p>"
                     }
                 },
                 "Region": {
@@ -12722,13 +12737,13 @@
                 "ProductName": {
                     "target": "com.amazonaws.securityhub#StringFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the solution (product) that generates findings.</p>\n         <p>Note that this is a filter against the <code>aws/securityhub/ProductName</code> field in <code>ProductFields</code>. It is not a filter for the top-level <code>ProductName</code> field.</p>"
+                        "smithy.api#documentation": "<p>The name of the solution (product) that generates findings.</p>"
                     }
                 },
                 "CompanyName": {
                     "target": "com.amazonaws.securityhub#StringFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the findings provider (company) that owns the solution (product) that\n         generates findings.</p>\n         <p>Note that this is a filter against the <code>aws/securityhub/CompanyName</code> field in <code>ProductFields</code>. It is not a filter for the top-level <code>CompanyName</code> field.</p>"
+                        "smithy.api#documentation": "<p>The name of the findings provider (company) that owns the solution (product) that\n         generates findings.</p>"
                     }
                 },
                 "UserDefinedFields": {
@@ -14435,7 +14450,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Used to enable finding aggregation. Must be called from the aggregation Region.</p>\n         <p>For more details about cross-Region replication, see <a href=\"securityhub/latest/userguide/finding-aggregation.html\">Configuring finding aggregation</a> in the <i>Security Hub User Guide</i>.\n      </p>",
+                "smithy.api#documentation": "<p>Used to enable finding aggregation. Must be called from the aggregation Region.</p>\n         <p>For more details about cross-Region replication, see <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/finding-aggregation.html\">Configuring finding aggregation</a> in the <i>Security Hub User Guide</i>.\n      </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/findingAggregator/create",
@@ -15182,6 +15197,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "ActionTargets",
                     "pageSize": "MaxResults"
                 }
             }
@@ -15345,6 +15361,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Whether the maximum number of allowed member accounts are already associated with the\n         Security Hub administrator account.</p>"
                     }
+                },
+                "AutoEnableStandards": {
+                    "target": "com.amazonaws.securityhub#AutoEnableStandards",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether to automatically enable Security Hub <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-enable-disable.html\">default standards</a> \n         for new member accounts in the organization.</p>\n         <p>The default value of this parameter is equal to <code>DEFAULT</code>.</p> \n         <p>If equal to <code>DEFAULT</code>, then Security Hub default standards are automatically enabled for new member \n         accounts. If equal to <code>NONE</code>, then default standards are not automatically enabled for new member \n         accounts.</p>"
+                    }
                 }
             }
         },
@@ -15380,6 +15402,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Products",
                     "pageSize": "MaxResults"
                 }
             }
@@ -15457,6 +15480,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Standards",
                     "pageSize": "MaxResults"
                 }
             }
@@ -15493,6 +15517,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Controls",
                     "pageSize": "MaxResults"
                 }
             }
@@ -16334,6 +16359,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "StandardsSubscriptions",
                     "pageSize": "MaxResults"
                 }
             }
@@ -16489,6 +16515,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Findings",
                     "pageSize": "MaxResults"
                 }
             }
@@ -16634,6 +16661,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Insights",
                     "pageSize": "MaxResults"
                 }
             }
@@ -17320,6 +17348,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "ProductSubscriptions",
                     "pageSize": "MaxResults"
                 }
             }
@@ -17395,6 +17424,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "FindingAggregators",
                     "pageSize": "MaxResults"
                 }
             }
@@ -17467,6 +17497,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Invitations",
                     "pageSize": "MaxResults"
                 }
             }
@@ -17539,6 +17570,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Members",
                     "pageSize": "MaxResults"
                 }
             }
@@ -17618,6 +17650,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "AdminAccounts",
                     "pageSize": "MaxResults"
                 }
             }
@@ -19853,7 +19886,7 @@
                     "name": "securityhub"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Security Hub provides you with a comprehensive view of the security state of your Amazon Web Services environment and resources. It also provides you with the readiness status\n         of your environment based on controls from supported security standards. Security Hub collects\n         security data from Amazon Web Services accounts, services, and integrated third-party products and helps\n         you analyze security trends in your environment to identify the highest priority security\n         issues. For more information about Security Hub, see the <i>Security Hub<a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/what-is-securityhub.html\">User\n               Guide</a>\n            </i>.</p>\n         <p>When you use operations in the Security Hub API, the requests are executed only in the Amazon Web Services\n         Region that is currently active or in the specific Amazon Web Services Region that you specify in your\n         request. Any configuration or settings change that results from the operation is applied\n         only to that Region. To make the same change in other Regions, execute the same command for\n         each Region to apply the change to.</p>\n         <p>For example, if your Region is set to <code>us-west-2</code>, when you use <code>CreateMembers</code> to add a member account to Security Hub, the association of\n         the member account with the administrator account is created only in the <code>us-west-2</code>\n         Region. Security Hub must be enabled for the member account in the same Region that the invitation\n         was sent from.</p>\n         <p>The following throttling limits apply to using Security Hub API operations.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BatchEnableStandards</code> - <code>RateLimit</code> of 1\n               request per second, <code>BurstLimit</code> of 1 request per second.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GetFindings</code> - <code>RateLimit</code> of 3 requests per second.\n                  <code>BurstLimit</code> of 6 requests per second.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UpdateFindings</code> - <code>RateLimit</code> of 1 request per\n               second. <code>BurstLimit</code> of 5 requests per second.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UpdateStandardsControl</code> - <code>RateLimit</code> of\n               1 request per second, <code>BurstLimit</code> of 5 requests per second.</p>\n            </li>\n            <li>\n               <p>All other operations - <code>RateLimit</code> of 10 requests per second.\n                  <code>BurstLimit</code> of 30 requests per second.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Security Hub provides you with a comprehensive view of the security state of your Amazon Web Services environment and resources. It also provides you with the readiness status\n         of your environment based on controls from supported security standards. Security Hub collects\n         security data from Amazon Web Services accounts, services, and integrated third-party products and helps\n         you analyze security trends in your environment to identify the highest priority security\n         issues. For more information about Security Hub, see the <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/what-is-securityhub.html\">\n               <i>Security HubUser\n            Guide</i>\n            </a>.</p> \n         <p>When you use operations in the Security Hub API, the requests are executed only in the Amazon Web Services\n         Region that is currently active or in the specific Amazon Web Services Region that you specify in your\n         request. Any configuration or settings change that results from the operation is applied\n         only to that Region. To make the same change in other Regions, execute the same command for\n         each Region to apply the change to.</p>\n         <p>For example, if your Region is set to <code>us-west-2</code>, when you use <code>CreateMembers</code> to add a member account to Security Hub, the association of\n         the member account with the administrator account is created only in the <code>us-west-2</code>\n         Region. Security Hub must be enabled for the member account in the same Region that the invitation\n         was sent from.</p>\n         <p>The following throttling limits apply to using Security Hub API operations.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BatchEnableStandards</code> - <code>RateLimit</code> of 1\n               request per second, <code>BurstLimit</code> of 1 request per second.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GetFindings</code> - <code>RateLimit</code> of 3 requests per second.\n                  <code>BurstLimit</code> of 6 requests per second.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UpdateFindings</code> - <code>RateLimit</code> of 1 request per\n               second. <code>BurstLimit</code> of 5 requests per second.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UpdateStandardsControl</code> - <code>RateLimit</code> of\n               1 request per second, <code>BurstLimit</code> of 5 requests per second.</p>\n            </li>\n            <li>\n               <p>All other operations - <code>RateLimit</code> of 10 requests per second.\n                  <code>BurstLimit</code> of 30 requests per second.</p>\n            </li>\n         </ul>",
                 "smithy.api#title": "AWS SecurityHub"
             },
             "version": "2018-10-26",
@@ -21317,6 +21350,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Whether to automatically enable Security Hub for new accounts in the organization.</p>\n         <p>By default, this is <code>false</code>, and new accounts are not added\n         automatically.</p>\n         <p>To automatically enable Security Hub for new accounts, set this to <code>true</code>.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "AutoEnableStandards": {
+                    "target": "com.amazonaws.securityhub#AutoEnableStandards",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether to automatically enable Security Hub <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-enable-disable.html\">default standards</a> \n         for new member accounts in the organization.</p>\n         <p>By default, this parameter is equal to <code>DEFAULT</code>, and new member accounts are automatically enabled with default Security Hub standards.</p>\n         <p>To opt out of enabling default standards for new member accounts, set this parameter equal to <code>NONE</code>.</p>"
                     }
                 }
             }

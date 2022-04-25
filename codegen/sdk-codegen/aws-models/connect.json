@@ -607,6 +607,9 @@
                     "target": "com.amazonaws.connect#SearchAvailablePhoneNumbers"
                 },
                 {
+                    "target": "com.amazonaws.connect#SearchUsers"
+                },
+                {
                     "target": "com.amazonaws.connect#SearchVocabularies"
                 },
                 {
@@ -758,6 +761,12 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Configuration of the answering machine detection.</p>"
+            }
+        },
+        "com.amazonaws.connect#ApproximateTotalCount": {
+            "type": "long",
+            "traits": {
+                "smithy.api#box": {}
             }
         },
         "com.amazonaws.connect#AssociateApprovedOrigin": {
@@ -1740,7 +1749,7 @@
                 "PhoneNumberId": {
                     "target": "com.amazonaws.connect#PhoneNumberId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the phone number.</p>"
+                        "smithy.api#documentation": "<p>A unique identifier for the phone number.</p>"
                     }
                 },
                 "PhoneNumberArn": {
@@ -1757,7 +1766,7 @@
                 "PhoneNumberId": {
                     "target": "com.amazonaws.connect#PhoneNumberId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the phone number.</p>"
+                        "smithy.api#documentation": "<p>A unique identifier for the phone number.</p>"
                     }
                 },
                 "PhoneNumberArn": {
@@ -2378,6 +2387,32 @@
             },
             "value": {
                 "target": "com.amazonaws.connect#Reference"
+            }
+        },
+        "com.amazonaws.connect#ControlPlaneTagFilter": {
+            "type": "structure",
+            "members": {
+                "OrConditions": {
+                    "target": "com.amazonaws.connect#TagOrConditionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of conditions which would be applied together with an <code>OR</code> condition. </p>"
+                    }
+                },
+                "AndConditions": {
+                    "target": "com.amazonaws.connect#TagAndConditionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of conditions which would be applied together with an <code>AND</code> condition.</p>"
+                    }
+                },
+                "TagCondition": {
+                    "target": "com.amazonaws.connect#TagCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A leaf node condition which can be used to specify a tag condition. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that can be used to specify Tag conditions inside the <code>SearchFilter</code>. This accepts an\n   <code>OR</code> of <code>AND</code> (List of List) input where:  </p>\n         <ul>\n            <li>\n               <p>Top level list specifies conditions that need to be applied\n    with <code>OR</code> operator</p>\n            </li>\n            <li>\n               <p>Inner list specifies conditions that need to be applied with <code>AND</code>\n    operator.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.connect#CreateAgentStatus": {
@@ -5263,7 +5298,7 @@
                 "PhoneNumberId": {
                     "target": "com.amazonaws.connect#PhoneNumberId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the phone number.</p>",
+                        "smithy.api#documentation": "<p>A unique identifier for the phone number.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -5276,7 +5311,7 @@
                 "ClaimedPhoneNumberSummary": {
                     "target": "com.amazonaws.connect#ClaimedPhoneNumberSummary",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about a phone number that's been claimed to your Amazon Connect instance.\n </p>"
+                        "smithy.api#documentation": "<p>Information about a phone number that's been claimed to your Amazon Connect instance.</p>"
                     }
                 }
             }
@@ -6223,7 +6258,7 @@
                 "PhoneNumberId": {
                     "target": "com.amazonaws.connect#PhoneNumberId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the phone number.</p>",
+                        "smithy.api#documentation": "<p>A unique identifier for the phone number.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -6926,8 +6961,43 @@
                 "smithy.api#documentation": "<p>Contains information about a hierarchy group.</p>"
             }
         },
+        "com.amazonaws.connect#HierarchyGroupCondition": {
+            "type": "structure",
+            "members": {
+                "Value": {
+                    "target": "com.amazonaws.connect#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value in the hierarchy group condition.</p>"
+                    }
+                },
+                "HierarchyGroupMatchType": {
+                    "target": "com.amazonaws.connect#HierarchyGroupMatchType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of hierarchy group match.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A leaf node condition which can be used to specify a hierarchy group condition.</p>"
+            }
+        },
         "com.amazonaws.connect#HierarchyGroupId": {
             "type": "string"
+        },
+        "com.amazonaws.connect#HierarchyGroupMatchType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "EXACT",
+                        "name": "EXACT"
+                    },
+                    {
+                        "value": "WITH_CHILD_GROUPS",
+                        "name": "WITH_CHILD_GROUPS"
+                    }
+                ]
+            }
         },
         "com.amazonaws.connect#HierarchyGroupName": {
             "type": "string"
@@ -9553,7 +9623,7 @@
                 "PhoneNumberId": {
                     "target": "com.amazonaws.connect#PhoneNumberId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the phone number.</p>"
+                        "smithy.api#documentation": "<p>A unique identifier for the phone number.</p>"
                     }
                 },
                 "PhoneNumberArn": {
@@ -10924,6 +10994,15 @@
         },
         "com.amazonaws.connect#NextToken": {
             "type": "string"
+        },
+        "com.amazonaws.connect#NextToken2500": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2500
+                }
+            }
         },
         "com.amazonaws.connect#Origin": {
             "type": "string",
@@ -12885,7 +12964,7 @@
                 "PhoneNumberId": {
                     "target": "com.amazonaws.connect#PhoneNumberId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the phone number.</p>",
+                        "smithy.api#documentation": "<p>A unique identifier for the phone number.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -13406,6 +13485,102 @@
                     "target": "com.amazonaws.connect#AvailableNumbersList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of available phone numbers that you can claim for your Amazon Connect instance.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#SearchUsers": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#SearchUsersRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#SearchUsersResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Searches users in an Amazon Connect instance, with optional filtering.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/search-users",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Users",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.connect#SearchUsersRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken2500",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous \nresponse in the next request to retrieve the next set of results.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.connect#MaxResult100",
+                    "traits": {
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>"
+                    }
+                },
+                "SearchFilter": {
+                    "target": "com.amazonaws.connect#UserSearchFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters to be applied to search results.</p>"
+                    }
+                },
+                "SearchCriteria": {
+                    "target": "com.amazonaws.connect#UserSearchCriteria"
+                }
+            }
+        },
+        "com.amazonaws.connect#SearchUsersResponse": {
+            "type": "structure",
+            "members": {
+                "Users": {
+                    "target": "com.amazonaws.connect#UserSearchSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the users.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken2500",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
+                    }
+                },
+                "ApproximateTotalCount": {
+                    "target": "com.amazonaws.connect#ApproximateTotalCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of users who matched your search query.</p>"
                     }
                 }
             }
@@ -14418,6 +14593,51 @@
         "com.amazonaws.connect#String": {
             "type": "string"
         },
+        "com.amazonaws.connect#StringComparisonType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "STARTS_WITH",
+                        "name": "STARTS_WITH"
+                    },
+                    {
+                        "value": "CONTAINS",
+                        "name": "CONTAINS"
+                    },
+                    {
+                        "value": "EXACT",
+                        "name": "EXACT"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.connect#StringCondition": {
+            "type": "structure",
+            "members": {
+                "FieldName": {
+                    "target": "com.amazonaws.connect#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the field in the string condition.</p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.connect#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the string.</p>"
+                    }
+                },
+                "ComparisonType": {
+                    "target": "com.amazonaws.connect#StringComparisonType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of comparison to be made when evaluating the string condition.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A leaf node condition which can be used to specify a string condition, for example,\n   <code>username = 'abc'</code>. </p>"
+            }
+        },
         "com.amazonaws.connect#SupportedMessagingContentType": {
             "type": "string",
             "traits": {
@@ -14491,6 +14711,32 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.connect#TagAndConditionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#TagCondition"
+            }
+        },
+        "com.amazonaws.connect#TagCondition": {
+            "type": "structure",
+            "members": {
+                "TagKey": {
+                    "target": "com.amazonaws.connect#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag key in the tag condition.</p>"
+                    }
+                },
+                "TagValue": {
+                    "target": "com.amazonaws.connect#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag value in the tag condition.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A leaf node condition which can be used to specify a tag condition, for example, <code>HAVE\n   BPO = 123</code>. </p>"
+            }
+        },
         "com.amazonaws.connect#TagKey": {
             "type": "string",
             "traits": {
@@ -14526,6 +14772,12 @@
                     "min": 1,
                     "max": 50
                 }
+            }
+        },
+        "com.amazonaws.connect#TagOrConditionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#TagAndConditionList"
             }
         },
         "com.amazonaws.connect#TagResource": {
@@ -15676,7 +15928,7 @@
                 "PhoneNumberId": {
                     "target": "com.amazonaws.connect#PhoneNumberId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the phone number.</p>",
+                        "smithy.api#documentation": "<p>A unique identifier for the phone number.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -15703,7 +15955,7 @@
                 "PhoneNumberId": {
                     "target": "com.amazonaws.connect#PhoneNumberId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the phone number.</p>"
+                        "smithy.api#documentation": "<p>A unique identifier for the phone number.</p>"
                     }
                 },
                 "PhoneNumberArn": {
@@ -17097,6 +17349,26 @@
                 "smithy.api#documentation": "<p>Contains information about the identity of a user.</p>"
             }
         },
+        "com.amazonaws.connect#UserIdentityInfoLite": {
+            "type": "structure",
+            "members": {
+                "FirstName": {
+                    "target": "com.amazonaws.connect#AgentFirstName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user's first name.</p>"
+                    }
+                },
+                "LastName": {
+                    "target": "com.amazonaws.connect#AgentLastName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user's last name.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The user's first name and last name.</p>"
+            }
+        },
         "com.amazonaws.connect#UserNotFoundException": {
             "type": "structure",
             "members": {
@@ -17163,6 +17435,126 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains information about the quick connect configuration settings for a user. The contact\n   flow must be of type Transfer to Agent.</p>"
+            }
+        },
+        "com.amazonaws.connect#UserSearchConditionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#UserSearchCriteria"
+            }
+        },
+        "com.amazonaws.connect#UserSearchCriteria": {
+            "type": "structure",
+            "members": {
+                "OrConditions": {
+                    "target": "com.amazonaws.connect#UserSearchConditionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of conditions which would be applied together with an <code>OR</code> condition.</p>"
+                    }
+                },
+                "AndConditions": {
+                    "target": "com.amazonaws.connect#UserSearchConditionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of conditions which would be applied together with an <code>AND</code> condition. </p>"
+                    }
+                },
+                "StringCondition": {
+                    "target": "com.amazonaws.connect#StringCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A leaf node condition which can be used to specify a string condition.</p>"
+                    }
+                },
+                "HierarchyGroupCondition": {
+                    "target": "com.amazonaws.connect#HierarchyGroupCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A leaf node condition which can be used to specify a hierarchy group condition.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The search criteria to be used to return users.</p>"
+            }
+        },
+        "com.amazonaws.connect#UserSearchFilter": {
+            "type": "structure",
+            "members": {
+                "TagFilter": {
+                    "target": "com.amazonaws.connect#ControlPlaneTagFilter"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Filters to be applied to search results.</p>"
+            }
+        },
+        "com.amazonaws.connect#UserSearchSummary": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the user.</p>"
+                    }
+                },
+                "DirectoryUserId": {
+                    "target": "com.amazonaws.connect#DirectoryUserId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The directory identifier of the user.</p>"
+                    }
+                },
+                "HierarchyGroupId": {
+                    "target": "com.amazonaws.connect#HierarchyGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the user's hierarchy group.</p>"
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.connect#UserId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the user's summary.</p>"
+                    }
+                },
+                "IdentityInfo": {
+                    "target": "com.amazonaws.connect#UserIdentityInfoLite",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user's first name and last name.</p>"
+                    }
+                },
+                "PhoneConfig": {
+                    "target": "com.amazonaws.connect#UserPhoneConfig"
+                },
+                "RoutingProfileId": {
+                    "target": "com.amazonaws.connect#RoutingProfileId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the user's routing profile.</p>"
+                    }
+                },
+                "SecurityProfileIds": {
+                    "target": "com.amazonaws.connect#SecurityProfileIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifiers of the user's security profiles.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.connect#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                },
+                "Username": {
+                    "target": "com.amazonaws.connect#AgentUsername",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the user.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the returned users.</p>"
+            }
+        },
+        "com.amazonaws.connect#UserSearchSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#UserSearchSummary"
             }
         },
         "com.amazonaws.connect#UserSummary": {
