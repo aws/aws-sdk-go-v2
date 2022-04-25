@@ -5,8 +5,14 @@
 package singleflight
 
 import (
+	"bytes"
 	"errors"
 	"fmt"
+	"os"
+	"os/exec"
+	"runtime"
+	"runtime/debug"
+	"strings"
 	"sync"
 	"sync/atomic"
 	"testing"
@@ -91,69 +97,224 @@ func TestDoDupSuppress(t *testing.T) {
 func TestForget(t *testing.T) {
 	var g Group
 
-	var firstStarted, firstFinished sync.WaitGroup
+	var (
+		firstStarted  = make(chan struct{})
+		unblockFirst  = make(chan struct{})
+		firstFinished = make(chan struct{})
+	)
 
-	firstStarted.Add(1)
-	firstFinished.Add(1)
-
-	firstCh := make(chan struct{})
 	go func() {
 		g.Do("key", func() (i interface{}, e error) {
-			firstStarted.Done()
-			<-firstCh
-			firstFinished.Done()
+			close(firstStarted)
+			<-unblockFirst
+			close(firstFinished)
 			return
 		})
 	}()
+	<-firstStarted
+	g.Forget("key")
 
-	firstStarted.Wait()
-	g.Forget("key") // from this point no two function using same key should be executed concurrently
+	unblockSecond := make(chan struct{})
+	secondResult := g.DoChan("key", func() (i interface{}, e error) {
+		<-unblockSecond
+		return 2, nil
+	})
 
-	var secondStarted int32
-	var secondFinished int32
-	var thirdStarted int32
+	close(unblockFirst)
+	<-firstFinished
 
-	secondCh := make(chan struct{})
-	secondRunning := make(chan struct{})
-	go func() {
-		g.Do("key", func() (i interface{}, e error) {
-			defer func() {
-			}()
-			atomic.AddInt32(&secondStarted, 1)
-			// Notify that we started
-			secondCh <- struct{}{}
-			// Wait other get above signal
-			<-secondRunning
-			<-secondCh
-			atomic.AddInt32(&secondFinished, 1)
-			return 2, nil
-		})
-	}()
-
-	close(firstCh)
-	firstFinished.Wait() // wait for first execution (which should not affect execution after Forget)
-
-	<-secondCh
-	// Notify second that we got the signal that it started
-	secondRunning <- struct{}{}
-	if atomic.LoadInt32(&secondStarted) != 1 {
-		t.Fatal("Second execution should be executed due to usage of forget")
-	}
-
-	if atomic.LoadInt32(&secondFinished) == 1 {
-		t.Fatal("Second execution should be still active")
-	}
-
-	close(secondCh)
-	result, _, _ := g.Do("key", func() (i interface{}, e error) {
-		atomic.AddInt32(&thirdStarted, 1)
+	thirdResult := g.DoChan("key", func() (i interface{}, e error) {
 		return 3, nil
 	})
 
-	if atomic.LoadInt32(&thirdStarted) != 0 {
-		t.Error("Third call should not be started because was started during second execution")
+	close(unblockSecond)
+	<-secondResult
+	r := <-thirdResult
+	if r.Val != 2 {
+		t.Errorf("We should receive result produced by second call, expected: 2, got %d", r.Val)
 	}
-	if result != 2 {
-		t.Errorf("We should receive result produced by second call, expected: 2, got %d", result)
+}
+
+func TestDoChan(t *testing.T) {
+	var g Group
+	ch := g.DoChan("key", func() (interface{}, error) {
+		return "bar", nil
+	})
+
+	res := <-ch
+	v := res.Val
+	err := res.Err
+	if got, want := fmt.Sprintf("%v (%T)", v, v), "bar (string)"; got != want {
+		t.Errorf("Do = %v; want %v", got, want)
+	}
+	if err != nil {
+		t.Errorf("Do error = %v", err)
+	}
+}
+
+// Test singleflight behaves correctly after Do panic.
+// See https://github.com/golang/go/issues/41133
+func TestPanicDo(t *testing.T) {
+	var g Group
+	fn := func() (interface{}, error) {
+		panic("invalid memory address or nil pointer dereference")
+	}
+
+	const n = 5
+	waited := int32(n)
+	panicCount := int32(0)
+	done := make(chan struct{})
+	for i := 0; i < n; i++ {
+		go func() {
+			defer func() {
+				if err := recover(); err != nil {
+					t.Logf("Got panic: %v\n%s", err, debug.Stack())
+					atomic.AddInt32(&panicCount, 1)
+				}
+
+				if atomic.AddInt32(&waited, -1) == 0 {
+					close(done)
+				}
+			}()
+
+			g.Do("key", fn)
+		}()
+	}
+
+	select {
+	case <-done:
+		if panicCount != n {
+			t.Errorf("Expect %d panic, but got %d", n, panicCount)
+		}
+	case <-time.After(time.Second):
+		t.Fatalf("Do hangs")
+	}
+}
+
+func TestGoexitDo(t *testing.T) {
+	var g Group
+	fn := func() (interface{}, error) {
+		runtime.Goexit()
+		return nil, nil
+	}
+
+	const n = 5
+	waited := int32(n)
+	done := make(chan struct{})
+	for i := 0; i < n; i++ {
+		go func() {
+			var err error
+			defer func() {
+				if err != nil {
+					t.Errorf("Error should be nil, but got: %v", err)
+				}
+				if atomic.AddInt32(&waited, -1) == 0 {
+					close(done)
+				}
+			}()
+			_, err, _ = g.Do("key", fn)
+		}()
+	}
+
+	select {
+	case <-done:
+	case <-time.After(time.Second):
+		t.Fatalf("Do hangs")
+	}
+}
+
+func TestPanicDoChan(t *testing.T) {
+	if runtime.GOOS == "js" {
+		t.Skipf("js does not support exec")
+	}
+
+	if os.Getenv("TEST_PANIC_DOCHAN") != "" {
+		defer func() {
+			recover()
+		}()
+
+		g := new(Group)
+		ch := g.DoChan("", func() (interface{}, error) {
+			panic("Panicking in DoChan")
+		})
+		<-ch
+		t.Fatalf("DoChan unexpectedly returned")
+	}
+
+	t.Parallel()
+
+	cmd := exec.Command(os.Args[0], "-test.run="+t.Name(), "-test.v")
+	cmd.Env = append(os.Environ(), "TEST_PANIC_DOCHAN=1")
+	out := new(bytes.Buffer)
+	cmd.Stdout = out
+	cmd.Stderr = out
+	if err := cmd.Start(); err != nil {
+		t.Fatal(err)
+	}
+
+	err := cmd.Wait()
+	t.Logf("%s:\n%s", strings.Join(cmd.Args, " "), out)
+	if err == nil {
+		t.Errorf("Test subprocess passed; want a crash due to panic in DoChan")
+	}
+	if bytes.Contains(out.Bytes(), []byte("DoChan unexpectedly")) {
+		t.Errorf("Test subprocess failed with an unexpected failure mode.")
+	}
+	if !bytes.Contains(out.Bytes(), []byte("Panicking in DoChan")) {
+		t.Errorf("Test subprocess failed, but the crash isn't caused by panicking in DoChan")
+	}
+}
+
+func TestPanicDoSharedByDoChan(t *testing.T) {
+	if runtime.GOOS == "js" {
+		t.Skipf("js does not support exec")
+	}
+
+	if os.Getenv("TEST_PANIC_DOCHAN") != "" {
+		blocked := make(chan struct{})
+		unblock := make(chan struct{})
+
+		g := new(Group)
+		go func() {
+			defer func() {
+				recover()
+			}()
+			g.Do("", func() (interface{}, error) {
+				close(blocked)
+				<-unblock
+				panic("Panicking in Do")
+			})
+		}()
+
+		<-blocked
+		ch := g.DoChan("", func() (interface{}, error) {
+			panic("DoChan unexpectedly executed callback")
+		})
+		close(unblock)
+		<-ch
+		t.Fatalf("DoChan unexpectedly returned")
+	}
+
+	t.Parallel()
+
+	cmd := exec.Command(os.Args[0], "-test.run="+t.Name(), "-test.v")
+	cmd.Env = append(os.Environ(), "TEST_PANIC_DOCHAN=1")
+	out := new(bytes.Buffer)
+	cmd.Stdout = out
+	cmd.Stderr = out
+	if err := cmd.Start(); err != nil {
+		t.Fatal(err)
+	}
+
+	err := cmd.Wait()
+	t.Logf("%s:\n%s", strings.Join(cmd.Args, " "), out)
+	if err == nil {
+		t.Errorf("Test subprocess passed; want a crash due to panic in Do shared by DoChan")
+	}
+	if bytes.Contains(out.Bytes(), []byte("DoChan unexpectedly")) {
+		t.Errorf("Test subprocess failed with an unexpected failure mode.")
+	}
+	if !bytes.Contains(out.Bytes(), []byte("Panicking in Do")) {
+		t.Errorf("Test subprocess failed, but the crash isn't caused by panicking in Do")
 	}
 }
