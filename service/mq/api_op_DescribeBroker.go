@@ -40,6 +40,9 @@ type DescribeBrokerInput struct {
 
 type DescribeBrokerOutput struct {
 
+	// A list of actions required for a broker.
+	ActionsRequired []types.ActionRequired
+
 	// The authentication strategy used to secure the broker. The default is SIMPLE.
 	AuthenticationStrategy types.AuthenticationStrategy
 

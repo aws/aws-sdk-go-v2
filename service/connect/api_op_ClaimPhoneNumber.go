@@ -59,7 +59,7 @@ type ClaimPhoneNumberOutput struct {
 	// The Amazon Resource Name (ARN) of the phone number.
 	PhoneNumberArn *string
 
-	// The identifier of the phone number.
+	// A unique identifier for the phone number.
 	PhoneNumberId *string
 
 	// Metadata pertaining to the operation's result.

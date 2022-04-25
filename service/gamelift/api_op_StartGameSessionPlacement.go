@@ -12,47 +12,46 @@ import (
 )
 
 // Places a request for a new game session in a queue (see CreateGameSessionQueue).
-// When processing a placement request, Amazon Web Services searches for available
+// When processing a placement request, Amazon GameLift searches for available
 // resources on the queue's destinations, scanning each until it finds resources or
 // the placement request times out. A game session placement request can also
 // request player sessions. When a new game session is successfully created, Amazon
-// Web Services creates a player session for each player included in the request.
-// When placing a game session, by default Amazon Web Services tries each fleet in
-// the order they are listed in the queue configuration. Ideally, a queue's
-// destinations are listed in preference order. Alternatively, when requesting a
-// game session with players, you can also provide latency data for each player in
-// relevant Regions. Latency data indicates the performance lag a player
-// experiences when connected to a fleet in the Region. Amazon Web Services uses
-// latency data to reorder the list of destinations to place the game session in a
-// Region with minimal lag. If latency data is provided for multiple players,
-// Amazon Web Services calculates each Region's average lag for all players and
-// reorders to get the best game play across all players. To place a new game
-// session request, specify the following:
+// GameLift creates a player session for each player included in the request. When
+// placing a game session, by default Amazon GameLift tries each fleet in the order
+// they are listed in the queue configuration. Ideally, a queue's destinations are
+// listed in preference order. Alternatively, when requesting a game session with
+// players, you can also provide latency data for each player in relevant Regions.
+// Latency data indicates the performance lag a player experiences when connected
+// to a fleet in the Region. Amazon GameLift uses latency data to reorder the list
+// of destinations to place the game session in a Region with minimal lag. If
+// latency data is provided for multiple players, Amazon GameLift calculates each
+// Region's average lag for all players and reorders to get the best game play
+// across all players. To place a new game session request, specify the
+// following:
 //
-// * The queue name and a set of game
-// session properties and settings
+// * The queue name and a set of game session properties and
+// settings
 //
-// * A unique ID (such as a UUID) for the
-// placement. You use this ID to track the status of the placement request
+// * A unique ID (such as a UUID) for the placement. You use this ID to
+// track the status of the placement request
 //
-// *
-// (Optional) A set of player data and a unique player ID for each player that you
-// are joining to the new game session (player data is optional, but if you include
-// it, you must also provide a unique ID for each player)
+// * (Optional) A set of player data and
+// a unique player ID for each player that you are joining to the new game session
+// (player data is optional, but if you include it, you must also provide a unique
+// ID for each player)
 //
-// * Latency data for all
-// players (if you want to optimize game play for the players)
+// * Latency data for all players (if you want to optimize
+// game play for the players)
 //
-// If successful, a
-// new game session placement is created. To track the status of a placement
-// request, call DescribeGameSessionPlacement and check the request's status. If
-// the status is FULFILLED, a new game session has been created and a game session
-// ARN and Region are referenced. If the placement request times out, you can
-// resubmit the request or retry it with a different queue. Related actions
-// CreateGameSession | DescribeGameSessions | DescribeGameSessionDetails |
-// SearchGameSessions | UpdateGameSession | GetGameSessionLogUrl |
-// StartGameSessionPlacement | DescribeGameSessionPlacement |
-// StopGameSessionPlacement | All APIs by task
+// If successful, a new game session placement is
+// created. To track the status of a placement request, call
+// DescribeGameSessionPlacement and check the request's status. If the status is
+// FULFILLED, a new game session has been created and a game session ARN and Region
+// are referenced. If the placement request times out, you can resubmit the request
+// or retry it with a different queue. Related actions CreateGameSession |
+// DescribeGameSessions | DescribeGameSessionDetails | SearchGameSessions |
+// UpdateGameSession | GetGameSessionLogUrl | StartGameSessionPlacement |
+// DescribeGameSessionPlacement | StopGameSessionPlacement | All APIs by task
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) StartGameSessionPlacement(ctx context.Context, params *StartGameSessionPlacementInput, optFns ...func(*Options)) (*StartGameSessionPlacementOutput, error) {
 	if params == nil {

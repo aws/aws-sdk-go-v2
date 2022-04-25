@@ -30,7 +30,7 @@ func (c *Client) UpdatePhoneNumber(ctx context.Context, params *UpdatePhoneNumbe
 
 type UpdatePhoneNumberInput struct {
 
-	// The identifier of the phone number.
+	// A unique identifier for the phone number.
 	//
 	// This member is required.
 	PhoneNumberId *string
@@ -53,7 +53,7 @@ type UpdatePhoneNumberOutput struct {
 	// The Amazon Resource Name (ARN) of the phone number.
 	PhoneNumberArn *string
 
-	// The identifier of the phone number.
+	// A unique identifier for the phone number.
 	PhoneNumberId *string
 
 	// Metadata pertaining to the operation's result.

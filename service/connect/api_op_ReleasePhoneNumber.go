@@ -29,7 +29,7 @@ func (c *Client) ReleasePhoneNumber(ctx context.Context, params *ReleasePhoneNum
 
 type ReleasePhoneNumberInput struct {
 
-	// The identifier of the phone number.
+	// A unique identifier for the phone number.
 	//
 	// This member is required.
 	PhoneNumberId *string

@@ -95,8 +95,8 @@ type StartMatchBackfillInput struct {
 	GameSessionArn *string
 
 	// A unique identifier for a matchmaking ticket. If no ticket ID is specified here,
-	// Amazon Web Services will generate one in the form of a UUID. Use this identifier
-	// to track the match backfill ticket status and retrieve match results.
+	// Amazon GameLift will generate one in the form of a UUID. Use this identifier to
+	// track the match backfill ticket status and retrieve match results.
 	TicketId *string
 
 	noSmithyDocumentSerde

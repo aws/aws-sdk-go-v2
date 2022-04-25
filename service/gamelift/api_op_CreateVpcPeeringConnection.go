@@ -11,13 +11,13 @@ import (
 )
 
 // Establishes a VPC peering connection between a virtual private cloud (VPC) in an
-// Amazon Web Services account with the VPC for your Amazon Web Services fleet. VPC
+// Amazon Web Services account with the VPC for your Amazon GameLift fleet. VPC
 // peering enables the game servers on your fleet to communicate directly with
 // other Amazon Web Services resources. You can peer with VPCs in any Amazon Web
 // Services account that you have access to, including the account that you use to
-// manage your Amazon Web Services fleets. You cannot peer with VPCs that are in
-// different Regions. For more information, see VPC Peering with Amazon Web
-// Services Fleets
+// manage your Amazon GameLift fleets. You cannot peer with VPCs that are in
+// different Regions. For more information, see VPC Peering with Amazon GameLift
+// Fleets
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html).
 // Before calling this operation to establish the peering connection, you first
 // need to call CreateVpcPeeringAuthorization and identify the VPC you want to peer
@@ -25,7 +25,7 @@ import (
 // to establish the connection. These two operations handle all tasks necessary to
 // peer the two VPCs, including acceptance, updating routing tables, etc. To
 // establish the connection, call this operation from the Amazon Web Services
-// account that is used to manage the Amazon Web Services fleets. Identify the
+// account that is used to manage the Amazon GameLift fleets. Identify the
 // following values: (1) The ID of the fleet you want to be enable a VPC peering
 // connection for; (2) The Amazon Web Services account with the VPC that you want
 // to peer with; and (3) The ID of the VPC you want to peer with. This operation is
@@ -56,14 +56,14 @@ func (c *Client) CreateVpcPeeringConnection(ctx context.Context, params *CreateV
 type CreateVpcPeeringConnectionInput struct {
 
 	// A unique identifier for the fleet. You can use either the fleet ID or ARN value.
-	// This tells Amazon Web Services which GameLift VPC to peer with.
+	// This tells Amazon GameLift which GameLift VPC to peer with.
 	//
 	// This member is required.
 	FleetId *string
 
 	// A unique identifier for the Amazon Web Services account with the VPC that you
-	// want to peer your Amazon Web Services fleet with. You can find your Account ID
-	// in the Amazon Web Services Management Console under account settings.
+	// want to peer your Amazon GameLift fleet with. You can find your Account ID in
+	// the Amazon Web Services Management Console under account settings.
 	//
 	// This member is required.
 	PeerVpcAwsAccountId *string

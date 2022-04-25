@@ -434,6 +434,11 @@ func awsRestjson1_serializeOpDocumentExecuteStatementInput(v *ExecuteStatementIn
 		ok.String(*v.Database)
 	}
 
+	if len(v.FormatRecordsAs) > 0 {
+		ok := object.Key("formatRecordsAs")
+		ok.String(string(v.FormatRecordsAs))
+	}
+
 	if v.IncludeResultMetadata {
 		ok := object.Key("includeResultMetadata")
 		ok.Boolean(v.IncludeResultMetadata)
@@ -725,6 +730,11 @@ func awsRestjson1_serializeDocumentResultSetOptions(v *types.ResultSetOptions, v
 	if len(v.DecimalReturnType) > 0 {
 		ok := object.Key("decimalReturnType")
 		ok.String(string(v.DecimalReturnType))
+	}
+
+	if len(v.LongReturnType) > 0 {
+		ok := object.Key("longReturnType")
+		ok.String(string(v.LongReturnType))
 	}
 
 	return nil

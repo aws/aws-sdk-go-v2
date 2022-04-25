@@ -3627,6 +3627,11 @@ func awsRestjson1_serializeOpDocumentUpdateOrganizationConfigurationInput(v *Upd
 		ok.Boolean(v.AutoEnable)
 	}
 
+	if len(v.AutoEnableStandards) > 0 {
+		ok := object.Key("AutoEnableStandards")
+		ok.String(string(v.AutoEnableStandards))
+	}
+
 	return nil
 }
 

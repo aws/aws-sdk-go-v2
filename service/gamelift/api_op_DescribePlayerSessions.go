@@ -28,7 +28,7 @@ import (
 // player session ID, game session ID, or player ID. You can filter this request by
 // player session status. Use the pagination parameters to retrieve results as a
 // set of sequential pages. If successful, a PlayerSession object is returned for
-// each session that matches the request. Available in Amazon Web Services Local.
+// each session that matches the request. Available in Amazon GameLift Local.
 // Related actions CreatePlayerSession | CreatePlayerSessions |
 // DescribePlayerSessions | StartGameSessionPlacement |
 // DescribeGameSessionPlacement | All APIs by task

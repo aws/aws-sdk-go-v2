@@ -1,0 +1,8 @@
+{
+    "id": "2882cb5d-4598-4d01-b1a5-656a1074722f",
+    "type": "feature",
+    "description": "Security Hub now lets you opt-out of auto-enabling the defaults standards (CIS and FSBP) in accounts that are auto-enabled with Security Hub via Security Hub's integration with AWS Organizations.",
+    "modules": [
+        "service/securityhub"
+    ]
+}

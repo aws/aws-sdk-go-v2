@@ -20,6 +20,42 @@ func (DecimalReturnType) Values() []DecimalReturnType {
 	}
 }
 
+type LongReturnType string
+
+// Enum values for LongReturnType
+const (
+	LongReturnTypeString LongReturnType = "STRING"
+	LongReturnTypeLong   LongReturnType = "LONG"
+)
+
+// Values returns all known values for LongReturnType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LongReturnType) Values() []LongReturnType {
+	return []LongReturnType{
+		"STRING",
+		"LONG",
+	}
+}
+
+type RecordsFormatType string
+
+// Enum values for RecordsFormatType
+const (
+	RecordsFormatTypeNone RecordsFormatType = "NONE"
+	RecordsFormatTypeJson RecordsFormatType = "JSON"
+)
+
+// Values returns all known values for RecordsFormatType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RecordsFormatType) Values() []RecordsFormatType {
+	return []RecordsFormatType{
+		"NONE",
+		"JSON",
+	}
+}
+
 type TypeHint string
 
 // Enum values for TypeHint

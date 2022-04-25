@@ -282,6 +282,24 @@ func (Grouping) Values() []Grouping {
 	}
 }
 
+type HierarchyGroupMatchType string
+
+// Enum values for HierarchyGroupMatchType
+const (
+	HierarchyGroupMatchTypeExact           HierarchyGroupMatchType = "EXACT"
+	HierarchyGroupMatchTypeWithChildGroups HierarchyGroupMatchType = "WITH_CHILD_GROUPS"
+)
+
+// Values returns all known values for HierarchyGroupMatchType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HierarchyGroupMatchType) Values() []HierarchyGroupMatchType {
+	return []HierarchyGroupMatchType{
+		"EXACT",
+		"WITH_CHILD_GROUPS",
+	}
+}
+
 type HistoricalMetricName string
 
 // Enum values for HistoricalMetricName
@@ -1215,6 +1233,26 @@ func (StorageType) Values() []StorageType {
 		"KINESIS_VIDEO_STREAM",
 		"KINESIS_STREAM",
 		"KINESIS_FIREHOSE",
+	}
+}
+
+type StringComparisonType string
+
+// Enum values for StringComparisonType
+const (
+	StringComparisonTypeStartsWith StringComparisonType = "STARTS_WITH"
+	StringComparisonTypeContains   StringComparisonType = "CONTAINS"
+	StringComparisonTypeExact      StringComparisonType = "EXACT"
+)
+
+// Values returns all known values for StringComparisonType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (StringComparisonType) Values() []StringComparisonType {
+	return []StringComparisonType{
+		"STARTS_WITH",
+		"CONTAINS",
+		"EXACT",
 	}
 }
 

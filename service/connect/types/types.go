@@ -170,7 +170,7 @@ type ClaimedPhoneNumberSummary struct {
 	// The description of the phone number.
 	PhoneNumberDescription *string
 
-	// The identifier of the phone number.
+	// A unique identifier for the phone number.
 	PhoneNumberId *string
 
 	// The status of the phone number.
@@ -348,6 +348,28 @@ type ContactFlowSummary struct {
 	noSmithyDocumentSerde
 }
 
+// An object that can be used to specify Tag conditions inside the SearchFilter.
+// This accepts an OR of AND (List of List) input where:
+//
+// * Top level list
+// specifies conditions that need to be applied with OR operator
+//
+// * Inner list
+// specifies conditions that need to be applied with AND operator.
+type ControlPlaneTagFilter struct {
+
+	// A list of conditions which would be applied together with an AND condition.
+	AndConditions []TagCondition
+
+	// A list of conditions which would be applied together with an OR condition.
+	OrConditions [][]TagCondition
+
+	// A leaf node condition which can be used to specify a tag condition.
+	TagCondition *TagCondition
+
+	noSmithyDocumentSerde
+}
+
 // Contains credentials to use for federation.
 type Credentials struct {
 
@@ -498,6 +520,18 @@ type HierarchyGroup struct {
 
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// A leaf node condition which can be used to specify a hierarchy group condition.
+type HierarchyGroupCondition struct {
+
+	// The type of hierarchy group match.
+	HierarchyGroupMatchType HierarchyGroupMatchType
+
+	// The value in the hierarchy group condition.
+	Value *string
 
 	noSmithyDocumentSerde
 }
@@ -959,7 +993,7 @@ type ListPhoneNumbersSummary struct {
 	// The ISO country code.
 	PhoneNumberCountryCode PhoneNumberCountryCode
 
-	// The identifier of the phone number.
+	// A unique identifier for the phone number.
 	PhoneNumberId *string
 
 	// The type of phone number.
@@ -1501,6 +1535,35 @@ type SecurityProfileSummary struct {
 	noSmithyDocumentSerde
 }
 
+// A leaf node condition which can be used to specify a string condition, for
+// example, username = 'abc'.
+type StringCondition struct {
+
+	// The type of comparison to be made when evaluating the string condition.
+	ComparisonType StringComparisonType
+
+	// The name of the field in the string condition.
+	FieldName *string
+
+	// The value of the string.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// A leaf node condition which can be used to specify a tag condition, for example,
+// HAVE BPO = 123.
+type TagCondition struct {
+
+	// The tag key in the tag condition.
+	TagKey *string
+
+	// The tag value in the tag condition.
+	TagValue *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about the threshold for service level metrics.
 type Threshold struct {
 
@@ -1596,6 +1659,18 @@ type UserIdentityInfo struct {
 	noSmithyDocumentSerde
 }
 
+// The user's first name and last name.
+type UserIdentityInfoLite struct {
+
+	// The user's first name.
+	FirstName *string
+
+	// The user's last name.
+	LastName *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about the phone configuration settings for a user.
 type UserPhoneConfig struct {
 
@@ -1629,6 +1704,76 @@ type UserQuickConnectConfig struct {
 	//
 	// This member is required.
 	UserId *string
+
+	noSmithyDocumentSerde
+}
+
+// The search criteria to be used to return users.
+type UserSearchCriteria struct {
+
+	// A list of conditions which would be applied together with an AND condition.
+	AndConditions []UserSearchCriteria
+
+	// A leaf node condition which can be used to specify a hierarchy group condition.
+	HierarchyGroupCondition *HierarchyGroupCondition
+
+	// A list of conditions which would be applied together with an OR condition.
+	OrConditions []UserSearchCriteria
+
+	// A leaf node condition which can be used to specify a string condition.
+	StringCondition *StringCondition
+
+	noSmithyDocumentSerde
+}
+
+// Filters to be applied to search results.
+type UserSearchFilter struct {
+
+	// An object that can be used to specify Tag conditions inside the SearchFilter.
+	// This accepts an OR of AND (List of List) input where:
+	//
+	// * Top level list
+	// specifies conditions that need to be applied with OR operator
+	//
+	// * Inner list
+	// specifies conditions that need to be applied with AND operator.
+	TagFilter *ControlPlaneTagFilter
+
+	noSmithyDocumentSerde
+}
+
+// Information about the returned users.
+type UserSearchSummary struct {
+
+	// The Amazon Resource Name (ARN) of the user.
+	Arn *string
+
+	// The directory identifier of the user.
+	DirectoryUserId *string
+
+	// The identifier of the user's hierarchy group.
+	HierarchyGroupId *string
+
+	// The identifier of the user's summary.
+	Id *string
+
+	// The user's first name and last name.
+	IdentityInfo *UserIdentityInfoLite
+
+	// Contains information about the phone configuration settings for a user.
+	PhoneConfig *UserPhoneConfig
+
+	// The identifier of the user's routing profile.
+	RoutingProfileId *string
+
+	// The identifiers of the user's security profiles.
+	SecurityProfileIds []string
+
+	// The tags used to organize, track, or control access for this resource.
+	Tags map[string]string
+
+	// The name of the user.
+	Username *string
 
 	noSmithyDocumentSerde
 }

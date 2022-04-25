@@ -1082,6 +1082,11 @@ func awsRestjson1_deserializeOpDocumentDescribeBrokerOutput(v **DescribeBrokerOu
 
 	for key, value := range shape {
 		switch key {
+		case "actionsRequired":
+			if err := awsRestjson1_deserializeDocument__listOfActionRequired(&sv.ActionsRequired, value); err != nil {
+				return err
+			}
+
 		case "authenticationStrategy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3999,6 +4004,40 @@ func awsRestjson1_deserializeDocument__listOf__string(v *[]string, value interfa
 	return nil
 }
 
+func awsRestjson1_deserializeDocument__listOfActionRequired(v *[]types.ActionRequired, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ActionRequired
+	if *v == nil {
+		cv = []types.ActionRequired{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ActionRequired
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentActionRequired(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocument__listOfAvailabilityZone(v *[]types.AvailabilityZone, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4442,6 +4481,55 @@ func awsRestjson1_deserializeDocument__mapOf__string(v *map[string]string, value
 
 	}
 	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentActionRequired(v **types.ActionRequired, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ActionRequired
+	if *v == nil {
+		sv = &types.ActionRequired{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "actionRequiredCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.ActionRequiredCode = ptr.String(jtv)
+			}
+
+		case "actionRequiredInfo":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.ActionRequiredInfo = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

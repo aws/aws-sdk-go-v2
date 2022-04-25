@@ -12,7 +12,9 @@ import (
 
 // Used to enable finding aggregation. Must be called from the aggregation Region.
 // For more details about cross-Region replication, see Configuring finding
-// aggregation in the Security Hub User Guide.
+// aggregation
+// (https://docs.aws.amazon.com/securityhub/latest/userguide/finding-aggregation.html)
+// in the Security Hub User Guide.
 func (c *Client) CreateFindingAggregator(ctx context.Context, params *CreateFindingAggregatorInput, optFns ...func(*Options)) (*CreateFindingAggregatorOutput, error) {
 	if params == nil {
 		params = &CreateFindingAggregatorInput{}

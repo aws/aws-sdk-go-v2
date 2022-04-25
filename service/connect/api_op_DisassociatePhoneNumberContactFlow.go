@@ -35,7 +35,7 @@ type DisassociatePhoneNumberContactFlowInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// The identifier of the phone number.
+	// A unique identifier for the phone number.
 	//
 	// This member is required.
 	PhoneNumberId *string

@@ -2928,6 +2928,15 @@ func awsRestjson1_deserializeOpDocumentDescribeOrganizationConfigurationOutput(v
 				sv.AutoEnable = jtv
 			}
 
+		case "AutoEnableStandards":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AutoEnableStandards to be of type string, got %T instead", value)
+				}
+				sv.AutoEnableStandards = types.AutoEnableStandards(jtv)
+			}
+
 		case "MemberAccountLimitReached":
 			if value != nil {
 				jtv, ok := value.(bool)

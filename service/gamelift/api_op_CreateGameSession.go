@@ -37,8 +37,8 @@ import (
 // You can restrict new player access by using UpdateGameSession to change the game
 // session's player session creation policy. Game session logs are retained for all
 // active game sessions for 14 days. To access the logs, call GetGameSessionLogUrl
-// to download the log files. Available in Amazon Web Services Local. Learn more
-// Start a game session
+// to download the log files. Available in Amazon GameLift Local. Learn more Start
+// a game session
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)
 // Related actions CreateGameSession | DescribeGameSessions |
 // DescribeGameSessionDetails | SearchGameSessions | UpdateGameSession |

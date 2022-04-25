@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new Amazon Web Services build resource for your game server binary
-// files. Game server binaries must be combined into a zip file for use with Amazon
-// Web Services. When setting up a new game build for GameLift, we recommend using
-// the Amazon Web Services CLI command upload-build
+// Creates a new Amazon GameLift build resource for your game server binary files.
+// Game server binaries must be combined into a zip file for use with Amazon
+// GameLift. When setting up a new game build for GameLift, we recommend using the
+// Amazon Web Services CLI command upload-build
 // (https://docs.aws.amazon.com/cli/latest/reference/gamelift/upload-build.html) .
 // This helper command combines two tasks: (1) it uploads your build files from a
 // file directory to a GameLift Amazon S3 location, and (2) it creates a new build
@@ -23,8 +23,8 @@ import (
 // * To
 // create a new game build with build files that are in an Amazon S3 location under
 // an Amazon Web Services account that you control. To use this option, you must
-// first give Amazon Web Services access to the Amazon S3 bucket. With permissions
-// in place, call CreateBuild and specify a build name, operating system, and the
+// first give Amazon GameLift access to the Amazon S3 bucket. With permissions in
+// place, call CreateBuild and specify a build name, operating system, and the
 // Amazon S3 storage location of your game build.
 //
 // * To directly upload your build
@@ -81,10 +81,10 @@ type CreateBuildInput struct {
 	// parameter only when creating a build with files stored in an Amazon S3 bucket
 	// that you own. The storage location must specify an Amazon S3 bucket name and
 	// key. The location must also specify a role ARN that you set up to allow Amazon
-	// Web Services to access your Amazon S3 bucket. The S3 bucket and your new build
-	// must be in the same Region. If a StorageLocation is specified, the size of your
-	// file can be found in your Amazon S3 bucket. Amazon Web Services will report a
-	// SizeOnDisk of 0.
+	// GameLift to access your Amazon S3 bucket. The S3 bucket and your new build must
+	// be in the same Region. If a StorageLocation is specified, the size of your file
+	// can be found in your Amazon S3 bucket. Amazon GameLift will report a SizeOnDisk
+	// of 0.
 	StorageLocation *types.S3Location
 
 	// A list of labels to assign to the new build resource. Tags are developer-defined
@@ -116,8 +116,8 @@ type CreateBuildOutput struct {
 
 	// This element is returned only when the operation is called without a storage
 	// location. It contains credentials to use when you are uploading a build file to
-	// an Amazon S3 bucket that is owned by Amazon Web Services. Credentials have a
-	// limited life span. To refresh these credentials, call RequestUploadCredentials.
+	// an Amazon S3 bucket that is owned by Amazon GameLift. Credentials have a limited
+	// life span. To refresh these credentials, call RequestUploadCredentials.
 	UploadCredentials *types.AwsCredentials
 
 	// Metadata pertaining to the operation's result.

@@ -97,8 +97,7 @@ type UpdateGameServerGroupInput struct {
 
 	// The Amazon Resource Name (ARN
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) for an IAM
-	// role that allows Amazon Web Services to access your Amazon EC2 Auto Scaling
-	// groups.
+	// role that allows Amazon GameLift to access your Amazon EC2 Auto Scaling groups.
 	RoleArn *string
 
 	noSmithyDocumentSerde

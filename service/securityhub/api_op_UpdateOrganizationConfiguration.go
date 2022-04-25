@@ -6,6 +6,7 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -36,6 +37,14 @@ type UpdateOrganizationConfigurationInput struct {
 	//
 	// This member is required.
 	AutoEnable bool
+
+	// Whether to automatically enable Security Hub default standards
+	// (https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-enable-disable.html)
+	// for new member accounts in the organization. By default, this parameter is equal
+	// to DEFAULT, and new member accounts are automatically enabled with default
+	// Security Hub standards. To opt out of enabling default standards for new member
+	// accounts, set this parameter equal to NONE.
+	AutoEnableStandards types.AutoEnableStandards
 
 	noSmithyDocumentSerde
 }

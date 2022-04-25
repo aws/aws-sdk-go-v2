@@ -24,11 +24,12 @@ type BrokerState string
 
 // Enum values for BrokerState
 const (
-	BrokerStateCreationInProgress BrokerState = "CREATION_IN_PROGRESS"
-	BrokerStateCreationFailed     BrokerState = "CREATION_FAILED"
-	BrokerStateDeletionInProgress BrokerState = "DELETION_IN_PROGRESS"
-	BrokerStateRunning            BrokerState = "RUNNING"
-	BrokerStateRebootInProgress   BrokerState = "REBOOT_IN_PROGRESS"
+	BrokerStateCreationInProgress     BrokerState = "CREATION_IN_PROGRESS"
+	BrokerStateCreationFailed         BrokerState = "CREATION_FAILED"
+	BrokerStateDeletionInProgress     BrokerState = "DELETION_IN_PROGRESS"
+	BrokerStateRunning                BrokerState = "RUNNING"
+	BrokerStateRebootInProgress       BrokerState = "REBOOT_IN_PROGRESS"
+	BrokerStateCriticalActionRequired BrokerState = "CRITICAL_ACTION_REQUIRED"
 )
 
 // Values returns all known values for BrokerState. Note that this can be expanded
@@ -41,6 +42,7 @@ func (BrokerState) Values() []BrokerState {
 		"DELETION_IN_PROGRESS",
 		"RUNNING",
 		"REBOOT_IN_PROGRESS",
+		"CRITICAL_ACTION_REQUIRED",
 	}
 }
 

@@ -30,7 +30,7 @@ func (c *Client) DescribePhoneNumber(ctx context.Context, params *DescribePhoneN
 
 type DescribePhoneNumberInput struct {
 
-	// The identifier of the phone number.
+	// A unique identifier for the phone number.
 	//
 	// This member is required.
 	PhoneNumberId *string

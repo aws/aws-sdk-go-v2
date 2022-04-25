@@ -20,6 +20,24 @@ func (AdminStatus) Values() []AdminStatus {
 	}
 }
 
+type AutoEnableStandards string
+
+// Enum values for AutoEnableStandards
+const (
+	AutoEnableStandardsNone    AutoEnableStandards = "NONE"
+	AutoEnableStandardsDefault AutoEnableStandards = "DEFAULT"
+)
+
+// Values returns all known values for AutoEnableStandards. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AutoEnableStandards) Values() []AutoEnableStandards {
+	return []AutoEnableStandards{
+		"NONE",
+		"DEFAULT",
+	}
+}
+
 type AwsIamAccessKeyStatus string
 
 // Enum values for AwsIamAccessKeyStatus

@@ -21,8 +21,8 @@ import (
 // the player session ID when sending a connection request to the game session, and
 // the game server can use it to validate the player reservation with the GameLift
 // service. Player sessions cannot be updated. The maximum number of players per
-// game session is 200. It is not adjustable. Available in Amazon Web Services
-// Local. Related actions CreatePlayerSession | CreatePlayerSessions |
+// game session is 200. It is not adjustable. Available in Amazon GameLift Local.
+// Related actions CreatePlayerSession | CreatePlayerSessions |
 // DescribePlayerSessions | StartGameSessionPlacement |
 // DescribeGameSessionPlacement | All APIs by task
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)

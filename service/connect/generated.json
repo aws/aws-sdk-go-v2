@@ -106,6 +106,7 @@
         "api_op_ReleasePhoneNumber.go",
         "api_op_ResumeContactRecording.go",
         "api_op_SearchAvailablePhoneNumbers.go",
+        "api_op_SearchUsers.go",
         "api_op_SearchVocabularies.go",
         "api_op_StartChatContact.go",
         "api_op_StartContactRecording.go",

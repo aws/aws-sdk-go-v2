@@ -36,7 +36,7 @@ type ArrayValueMemberBooleanValues struct {
 
 func (*ArrayValueMemberBooleanValues) isArrayValue() {}
 
-// An array of integers.
+// An array of floating-point numbers.
 type ArrayValueMemberDoubleValues struct {
 	Value []float64
 
@@ -45,7 +45,7 @@ type ArrayValueMemberDoubleValues struct {
 
 func (*ArrayValueMemberDoubleValues) isArrayValue() {}
 
-// An array of floating point numbers.
+// An array of integers.
 type ArrayValueMemberLongValues struct {
 	Value []int64
 
@@ -188,7 +188,9 @@ type FieldMemberStringValue struct {
 
 func (*FieldMemberStringValue) isField() {}
 
-// A record returned by a call.
+// A record returned by a call. This data structure is only used with the
+// deprecated ExecuteSql operation. Use the BatchExecuteStatement or
+// ExecuteStatement operation instead.
 type Record struct {
 
 	// The values returned in the record.
@@ -197,7 +199,9 @@ type Record struct {
 	noSmithyDocumentSerde
 }
 
-// The result set returned by a SQL statement.
+// The result set returned by a SQL statement. This data structure is only used
+// with the deprecated ExecuteSql operation. Use the BatchExecuteStatement or
+// ExecuteStatement operation instead.
 type ResultFrame struct {
 
 	// The records in the result set.
@@ -231,6 +235,11 @@ type ResultSetOptions struct {
 	// Double or Long can result in roundoff errors due to precision loss. We recommend
 	// converting to String, especially when working with currency values.
 	DecimalReturnType DecimalReturnType
+
+	// A value that indicates how a field of LONG type is represented. Allowed values
+	// are LONG and STRING. The default is LONG. Specify STRING if the length or
+	// precision of numeric values might cause truncation or rounding errors.
+	LongReturnType LongReturnType
 
 	noSmithyDocumentSerde
 }
@@ -273,7 +282,9 @@ type SqlParameter struct {
 	noSmithyDocumentSerde
 }
 
-// The result of a SQL statement. This data type is deprecated.
+// The result of a SQL statement. This data structure is only used with the
+// deprecated ExecuteSql operation. Use the BatchExecuteStatement or
+// ExecuteStatement operation instead.
 type SqlStatementResult struct {
 
 	// The number of records updated by a SQL statement.
@@ -285,7 +296,9 @@ type SqlStatementResult struct {
 	noSmithyDocumentSerde
 }
 
-// A structure value returned by a call.
+// A structure value returned by a call. This data structure is only used with the
+// deprecated ExecuteSql operation. Use the BatchExecuteStatement or
+// ExecuteStatement operation instead.
 type StructValue struct {
 
 	// The attributes returned in the record.
@@ -303,7 +316,9 @@ type UpdateResult struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the value of a column. This data type is deprecated.
+// Contains the value of a column. This data structure is only used with the
+// deprecated ExecuteSql operation. Use the BatchExecuteStatement or
+// ExecuteStatement operation instead.
 //
 // The following types satisfy this interface:
 //  ValueMemberArrayValues

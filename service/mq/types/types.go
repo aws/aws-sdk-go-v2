@@ -7,6 +7,26 @@ import (
 	"time"
 )
 
+// The action required to resolve a broker issue when the broker is in a
+// CRITICAL_ACTION_REQUIRED state.
+type ActionRequired struct {
+
+	// The code you can use to resolve your broker issue when the broker is in a
+	// CRITICAL_ACTION_REQUIRED state. You can find instructions by choosing the link
+	// for your code from the list of action required codes in Amazon MQ action
+	// required codes
+	// (https://docs.aws.amazon.com//latest/developer-guide/troubleshooting-action-required-codes.html).
+	// Each code references a topic with detailed information, instructions, and
+	// recommendations for how to resolve the issue and prevent future occurrences.
+	ActionRequiredCode *string
+
+	// Information about the action required to resolve your broker issue when the
+	// broker is in a CRITICAL_ACTION_REQUIRED state.
+	ActionRequiredInfo *string
+
+	noSmithyDocumentSerde
+}
+
 // Name of the availability zone.
 type AvailabilityZone struct {
 

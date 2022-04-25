@@ -7459,13 +7459,10 @@ type AwsSecurityFinding struct {
 	Action *Action
 
 	// The name of the company for the product that generated the finding. Security Hub
-	// populates this attribute automatically for each finding. You cannot be updated
-	// using BatchImportFindings or BatchUpdateFindings. The exception to this is when
-	// you use a custom integration. When you use the Security Hub console to filter
-	// findings by company name, you use this attribute. When you use the Security Hub
-	// API to filter findings by company name, you use the aws/securityhub/CompanyName
-	// attribute under ProductFields. Security Hub does not synchronize those two
-	// attributes.
+	// populates this attribute automatically for each finding. You cannot update this
+	// attribute with BatchImportFindings or BatchUpdateFindings. The exception to this
+	// is a custom integration. When you use the Security Hub console or API to filter
+	// findings by company name, you use this attribute.
 	CompanyName *string
 
 	// This data type is exclusive to findings that are generated as the result of a
@@ -7532,13 +7529,10 @@ type AwsSecurityFinding struct {
 	ProductFields map[string]string
 
 	// The name of the product that generated the finding. Security Hub populates this
-	// attribute automatically for each finding. You cannot update it using
-	// BatchImportFindings or BatchUpdateFindings. The exception to this is when you
-	// use a custom integration. When you use the Security Hub console to filter
-	// findings by product name, you use this attribute. When you use the Security Hub
-	// API to filter findings by product name, you use the aws/securityhub/ProductName
-	// attribute under ProductFields. Security Hub does not synchronize those two
-	// attributes.
+	// attribute automatically for each finding. You cannot update this attribute with
+	// BatchImportFindings or BatchUpdateFindings. The exception to this is a custom
+	// integration. When you use the Security Hub console or API to filter findings by
+	// product name, you use this attribute.
 	ProductName *string
 
 	// The record state of a finding.
@@ -7605,9 +7599,7 @@ type AwsSecurityFindingFilters struct {
 	AwsAccountId []StringFilter
 
 	// The name of the findings provider (company) that owns the solution (product)
-	// that generates findings. Note that this is a filter against the
-	// aws/securityhub/CompanyName field in ProductFields. It is not a filter for the
-	// top-level CompanyName field.
+	// that generates findings.
 	CompanyName []StringFilter
 
 	// Exclusive to findings that are generated as the result of a check run against a
@@ -7771,9 +7763,7 @@ type AwsSecurityFindingFilters struct {
 	// format.
 	ProductFields []MapFilter
 
-	// The name of the solution (product) that generates findings. Note that this is a
-	// filter against the aws/securityhub/ProductName field in ProductFields. It is not
-	// a filter for the top-level ProductName field.
+	// The name of the solution (product) that generates findings.
 	ProductName []StringFilter
 
 	// The recommendation of what to do about the issue described in a finding.

@@ -7,6 +7,25 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+// You do not have sufficient access to perform this action.
+type AccessDeniedException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *AccessDeniedException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *AccessDeniedException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
+func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // There is an error in the call or in a SQL statement.
 type BadRequestException struct {
 	Message *string

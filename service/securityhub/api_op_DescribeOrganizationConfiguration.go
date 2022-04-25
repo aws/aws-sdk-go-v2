@@ -6,6 +6,7 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -37,6 +38,14 @@ type DescribeOrganizationConfigurationOutput struct {
 	// organization. If set to true, then Security Hub is enabled for new accounts. If
 	// set to false, then new accounts are not added automatically.
 	AutoEnable bool
+
+	// Whether to automatically enable Security Hub default standards
+	// (https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-enable-disable.html)
+	// for new member accounts in the organization. The default value of this parameter
+	// is equal to DEFAULT. If equal to DEFAULT, then Security Hub default standards
+	// are automatically enabled for new member accounts. If equal to NONE, then
+	// default standards are not automatically enabled for new member accounts.
+	AutoEnableStandards types.AutoEnableStandards
 
 	// Whether the maximum number of allowed member accounts are already associated
 	// with the Security Hub administrator account.

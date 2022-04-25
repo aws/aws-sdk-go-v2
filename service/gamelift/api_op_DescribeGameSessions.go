@@ -48,8 +48,8 @@ import (
 // Notification Service to receive notifications, and provide the topic ARN in the
 // matchmaking configuration. Continuously poling ticket status with
 // DescribeGameSessions should only be used for games in development with low
-// matchmaking usage. Available in Amazon Web Services Local. Learn more Find a
-// game session
+// matchmaking usage. Available in Amazon GameLift Local. Learn more Find a game
+// session
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-client-api.html#gamelift-sdk-client-api-find)
 // Related actions CreateGameSession | DescribeGameSessions |
 // DescribeGameSessionDetails | SearchGameSessions | UpdateGameSession |

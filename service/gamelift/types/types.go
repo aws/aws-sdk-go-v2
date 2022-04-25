@@ -70,15 +70,15 @@ type AttributeValue struct {
 	noSmithyDocumentSerde
 }
 
-// Temporary access credentials used for uploading game build files to Amazon Web
-// Services. They are valid for a limited time. If they expire before you upload
+// Temporary access credentials used for uploading game build files to Amazon
+// GameLift. They are valid for a limited time. If they expire before you upload
 // your game build, get a new set by calling RequestUploadCredentials.
 type AwsCredentials struct {
 
-	// Temporary key allowing access to the Amazon Web Services S3 account.
+	// Temporary key allowing access to the Amazon GameLift S3 account.
 	AccessKeyId *string
 
-	// Temporary secret key allowing access to the Amazon Web Services S3 account.
+	// Temporary secret key allowing access to the Amazon GameLift S3 account.
 	SecretAccessKey *string
 
 	// Token used to associate a specific build ID with the files uploaded using these
@@ -837,8 +837,7 @@ type GameServerGroup struct {
 
 	// The Amazon Resource Name (ARN
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) for an IAM
-	// role that allows Amazon Web Services to access your Amazon EC2 Auto Scaling
-	// groups.
+	// role that allows Amazon GameLift to access your Amazon EC2 Auto Scaling groups.
 	RoleArn *string
 
 	// The current status of the game server group. Possible statuses include:
@@ -1480,9 +1479,8 @@ type InstanceDefinition struct {
 // TCP messaging and one for UDP. Related actions DescribeFleetPortSettings
 type IpPermission struct {
 
-	// A starting value for a range of allowed port numbers. For fleets using Linux
-	// builds, only port 22, 443, 1026-60000 are valid. For fleets using Windows
-	// builds, only port 443, 1026-60000 are valid.
+	// A starting value for a range of allowed port numbers. For fleets using Windows
+	// and Linux builds, only ports 1026-60000 are valid.
 	//
 	// This member is required.
 	FromPort *int32
@@ -1500,9 +1498,8 @@ type IpPermission struct {
 	Protocol IpProtocol
 
 	// An ending value for a range of allowed port numbers. Port numbers are
-	// end-inclusive. This value must be higher than FromPort. For fleets using Linux
-	// builds, only port 22, 443, 1026-60000 are valid. For fleets using Windows
-	// builds, only port 443, 1026-60000 are valid.
+	// end-inclusive. This value must be higher than FromPort. For fleets using Windows
+	// and Linux builds, only ports 1026-60000 are valid.
 	//
 	// This member is required.
 	ToPort *int32
@@ -1511,9 +1508,10 @@ type IpPermission struct {
 }
 
 // This data type is used with the GameLift FleetIQ and game server groups. An
-// Amazon EC2 launch template that contains configuration settings and game server
-// code to be deployed to all instances in a game server group. The launch template
-// is specified when creating a new game server group with CreateGameServerGroup.
+// Amazon Elastic Compute Cloud launch template that contains configuration
+// settings and game server code to be deployed to all instances in a game server
+// group. The launch template is specified when creating a new game server group
+// with CreateGameServerGroup.
 type LaunchTemplateSpecification struct {
 
 	// A unique identifier for an existing Amazon EC2 launch template.
@@ -1523,9 +1521,9 @@ type LaunchTemplateSpecification struct {
 	LaunchTemplateName *string
 
 	// The version of the Amazon EC2 launch template to use. If no version is
-	// specified, the default version will be used. With Amazon Elastic Compute Cloud,
-	// you can specify a default version for a launch template. If none is set, the
-	// default is the first version created.
+	// specified, the default version will be used. With Amazon EC2, you can specify a
+	// default version for a launch template. If none is set, the default is the first
+	// version created.
 	Version *string
 
 	noSmithyDocumentSerde
@@ -2011,7 +2009,7 @@ type PlayerSession struct {
 	// A unique identifier for a player session.
 	PlayerSessionId *string
 
-	// Port number for the game session. To connect to a Amazon Web Services server
+	// Port number for the game session. To connect to a Amazon GameLift server
 	// process, an app needs both the IP address and port number.
 	Port *int32
 
@@ -2169,8 +2167,8 @@ type RuntimeConfiguration struct {
 }
 
 // The location in Amazon S3 where build or script files are stored for access by
-// Amazon Web Services. This location is specified in CreateBuild, CreateScript,
-// and UpdateScript requests.
+// Amazon GameLift. This location is specified in CreateBuild, CreateScript, and
+// UpdateScript requests.
 type S3Location struct {
 
 	// An Amazon S3 bucket identifier. This is the name of the S3 bucket. GameLift
@@ -2182,14 +2180,14 @@ type S3Location struct {
 	Key *string
 
 	// The version of the file, if object versioning is turned on for the bucket.
-	// Amazon Web Services uses this information when retrieving files from an S3
-	// bucket that you own. Use this parameter to specify a specific version of the
-	// file. If not set, the latest version of the file is retrieved.
+	// Amazon GameLift uses this information when retrieving files from an S3 bucket
+	// that you own. Use this parameter to specify a specific version of the file. If
+	// not set, the latest version of the file is retrieved.
 	ObjectVersion *string
 
 	// The Amazon Resource Name (ARN
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) for an IAM
-	// role that allows Amazon Web Services to access the S3 bucket.
+	// role that allows Amazon GameLift to access the S3 bucket.
 	RoleArn *string
 
 	noSmithyDocumentSerde
@@ -2223,9 +2221,9 @@ type ScalingPolicy struct {
 	// The fleet location.
 	Location *string
 
-	// Name of the Amazon Web Services-defined metric that is used to trigger a scaling
-	// adjustment. For detailed descriptions of fleet metrics, see Monitor Amazon Web
-	// Services with Amazon CloudWatch
+	// Name of the Amazon GameLift-defined metric that is used to trigger a scaling
+	// adjustment. For detailed descriptions of fleet metrics, see Monitor Amazon
+	// GameLift with Amazon CloudWatch
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html).
 	//
 	// *
@@ -2367,8 +2365,8 @@ type Script struct {
 	SizeOnDisk *int64
 
 	// The location in Amazon S3 where build or script files are stored for access by
-	// Amazon Web Services. This location is specified in CreateBuild, CreateScript,
-	// and UpdateScript requests.
+	// Amazon GameLift. This location is specified in CreateBuild, CreateScript, and
+	// UpdateScript requests.
 	StorageLocation *S3Location
 
 	// Version information that is associated with a build or script. Version strings
@@ -2437,13 +2435,12 @@ type Tag struct {
 
 // Settings for a target-based scaling policy (see ScalingPolicy. A target-based
 // policy tracks a particular fleet metric specifies a target value for the metric.
-// As player usage changes, the policy triggers Amazon Web Services to adjust
-// capacity so that the metric returns to the target value. The target
-// configuration specifies settings as needed for the target based policy,
-// including the target value. Related actions DescribeFleetCapacity |
-// UpdateFleetCapacity | DescribeEC2InstanceLimits | PutScalingPolicy |
-// DescribeScalingPolicies | DeleteScalingPolicy | StopFleetActions |
-// StartFleetActions | All APIs by task
+// As player usage changes, the policy triggers Amazon GameLift to adjust capacity
+// so that the metric returns to the target value. The target configuration
+// specifies settings as needed for the target based policy, including the target
+// value. Related actions DescribeFleetCapacity | UpdateFleetCapacity |
+// DescribeEC2InstanceLimits | PutScalingPolicy | DescribeScalingPolicies |
+// DeleteScalingPolicy | StopFleetActions | StartFleetActions | All APIs by task
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 type TargetConfiguration struct {
 
@@ -2477,7 +2474,7 @@ type TargetTrackingConfiguration struct {
 }
 
 // Represents an authorization for a VPC peering connection between the VPC for an
-// Amazon Web Services fleet and another VPC on an account you have access to. This
+// Amazon GameLift fleet and another VPC on an account you have access to. This
 // authorization must exist and be valid for the peering connection to be
 // established. Authorizations are valid for 24 hours after they are issued.
 // Related actions CreateVpcPeeringAuthorization | DescribeVpcPeeringAuthorizations
@@ -2515,8 +2512,8 @@ type VpcPeeringAuthorization struct {
 }
 
 // Represents a peering connection between a VPC on one of your Amazon Web Services
-// accounts and the VPC for your Amazon Web Services fleets. This record may be for
-// an active peering connection or a pending connection that has not yet been
+// accounts and the VPC for your Amazon GameLift fleets. This record may be for an
+// active peering connection or a pending connection that has not yet been
 // established. Related actions CreateVpcPeeringAuthorization |
 // DescribeVpcPeeringAuthorizations | DeleteVpcPeeringAuthorization |
 // CreateVpcPeeringConnection | DescribeVpcPeeringConnections |
@@ -2529,13 +2526,13 @@ type VpcPeeringConnection struct {
 	// with the GameLift fleet resource for this connection.
 	FleetArn *string
 
-	// A unique identifier for the fleet. This ID determines the ID of the Amazon Web
-	// Services VPC for your fleet.
+	// A unique identifier for the fleet. This ID determines the ID of the Amazon
+	// GameLift VPC for your fleet.
 	FleetId *string
 
-	// A unique identifier for the VPC that contains the Amazon Web Services fleet for
-	// this connection. This VPC is managed by Amazon Web Services and does not appear
-	// in your Amazon Web Services account.
+	// A unique identifier for the VPC that contains the Amazon GameLift fleet for this
+	// connection. This VPC is managed by Amazon GameLift and does not appear in your
+	// Amazon Web Services account.
 	GameLiftVpcId *string
 
 	// CIDR block of IPv4 addresses assigned to the VPC peering connection for the
