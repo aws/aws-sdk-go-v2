@@ -46,10 +46,12 @@ body:
         - label: This feature might incur a breaking change
           required: false
 
-  - type: input
+  - type: textarea
     id: go-sdk-version
     attributes:
-      label: AWS Go SDK version used
+      label: AWS Go SDK V2 Module Versions Used
+      description: |
+        Output of `go mod graph` or `go.mod` file listing the `github.com/aws/*` entries.
     validations:
       required: true
 
