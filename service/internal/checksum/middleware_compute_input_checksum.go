@@ -422,7 +422,7 @@ func computeStreamChecksum(algorithm Algorithm, stream io.Reader, computePayload
 		if algorithm != AlgorithmSHA256 {
 			sha256Checksum = string(hexEncodeHashSum(sha256Hasher))
 		} else {
-			sha256Checksum = checksum
+			sha256Checksum = string(hexEncodeHashSum(hasher))
 		}
 	}
 
