@@ -10468,6 +10468,16 @@ type QueryFilters struct {
 	noSmithyDocumentSerde
 }
 
+// Provides information about the output configuration for the compiled model.
+type RecommendationJobCompiledOutputConfig struct {
+
+	// Identifies the Amazon S3 bucket where you want SageMaker to store the compiled
+	// model artifacts.
+	S3OutputUri *string
+
+	noSmithyDocumentSerde
+}
+
 // The input configuration of the recommendation job.
 type RecommendationJobInputConfig struct {
 
@@ -10487,6 +10497,67 @@ type RecommendationJobInputConfig struct {
 
 	// Specifies the traffic pattern of the job.
 	TrafficPattern *TrafficPattern
+
+	// The Amazon Resource Name (ARN) of a Amazon Web Services Key Management Service
+	// (Amazon Web Services KMS) key that Amazon SageMaker uses to encrypt data on the
+	// storage volume attached to the ML compute instance that hosts the endpoint. This
+	// key will be passed to SageMaker Hosting for endpoint creation. The SageMaker
+	// execution role must have kms:CreateGrant permission in order to encrypt data on
+	// the storage volume of the endpoints created for inference recommendation. The
+	// inference recommendation job will fail asynchronously during endpoint
+	// configuration creation if the role passed does not have kms:CreateGrant
+	// permission. The KmsKeyId can be any of the following formats:
+	//
+	// * // KMS Key ID
+	// "1234abcd-12ab-34cd-56ef-1234567890ab"
+	//
+	// * // Amazon Resource Name (ARN) of a KMS
+	// Key "arn:aws:kms:::key/"
+	//
+	// * // KMS Key Alias "alias/ExampleAlias"
+	//
+	// * // Amazon
+	// Resource Name (ARN) of a KMS Key Alias "arn:aws:kms:::alias/"
+	//
+	// For more
+	// information about key identifiers, see Key identifiers (KeyID)
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-id)
+	// in the Amazon Web Services Key Management Service (Amazon Web Services KMS)
+	// documentation.
+	VolumeKmsKeyId *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides information about the output configuration for the compiled model.
+type RecommendationJobOutputConfig struct {
+
+	// Provides information about the output configuration for the compiled model.
+	CompiledOutputConfig *RecommendationJobCompiledOutputConfig
+
+	// The Amazon Resource Name (ARN) of a Amazon Web Services Key Management Service
+	// (Amazon Web Services KMS) key that Amazon SageMaker uses to encrypt your output
+	// artifacts with Amazon S3 server-side encryption. The SageMaker execution role
+	// must have kms:GenerateDataKey permission. The KmsKeyId can be any of the
+	// following formats:
+	//
+	// * // KMS Key ID "1234abcd-12ab-34cd-56ef-1234567890ab"
+	//
+	// * //
+	// Amazon Resource Name (ARN) of a KMS Key "arn:aws:kms:::key/"
+	//
+	// * // KMS Key Alias
+	// "alias/ExampleAlias"
+	//
+	// * // Amazon Resource Name (ARN) of a KMS Key Alias
+	// "arn:aws:kms:::alias/"
+	//
+	// For more information about key identifiers, see Key
+	// identifiers (KeyID)
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-id)
+	// in the Amazon Web Services Key Management Service (Amazon Web Services KMS)
+	// documentation.
+	KmsKeyId *string
 
 	noSmithyDocumentSerde
 }

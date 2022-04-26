@@ -11,18 +11,18 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an AWS Network Firewall Firewall and accompanying FirewallStatus for a
-// VPC. The firewall defines the configuration settings for an AWS Network Firewall
+// Creates an Network Firewall Firewall and accompanying FirewallStatus for a VPC.
+// The firewall defines the configuration settings for an Network Firewall
 // firewall. The settings that you can define at creation include the firewall
 // policy, the subnets in your VPC to use for the firewall endpoints, and any tags
-// that are attached to the firewall AWS resource. After you create a firewall, you
-// can provide additional settings, like the logging configuration. To update the
-// settings for a firewall, you use the operations that apply to the settings
-// themselves, for example UpdateLoggingConfiguration, AssociateSubnets, and
-// UpdateFirewallDeleteProtection. To manage a firewall's tags, use the standard
-// AWS resource tagging operations, ListTagsForResource, TagResource, and
-// UntagResource. To retrieve information about firewalls, use ListFirewalls and
-// DescribeFirewall.
+// that are attached to the firewall Amazon Web Services resource. After you create
+// a firewall, you can provide additional settings, like the logging configuration.
+// To update the settings for a firewall, you use the operations that apply to the
+// settings themselves, for example UpdateLoggingConfiguration, AssociateSubnets,
+// and UpdateFirewallDeleteProtection. To manage a firewall's tags, use the
+// standard Amazon Web Services resource tagging operations, ListTagsForResource,
+// TagResource, and UntagResource. To retrieve information about firewalls, use
+// ListFirewalls and DescribeFirewall.
 func (c *Client) CreateFirewall(ctx context.Context, params *CreateFirewallInput, optFns ...func(*Options)) (*CreateFirewallOutput, error) {
 	if params == nil {
 		params = &CreateFirewallInput{}
@@ -73,6 +73,9 @@ type CreateFirewallInput struct {
 
 	// A description of the firewall.
 	Description *string
+
+	// A complex type that contains settings for encryption of your firewall resources.
+	EncryptionConfiguration *types.EncryptionConfiguration
 
 	// A setting indicating whether the firewall is protected against a change to the
 	// firewall policy association. Use this setting to protect against accidentally

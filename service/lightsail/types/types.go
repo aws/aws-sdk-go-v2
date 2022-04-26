@@ -493,7 +493,7 @@ type Bucket struct {
 
 	// Indicates whether the bundle that is currently applied to a bucket can be
 	// changed to another bundle. You can update a bucket's bundle only one time within
-	// a monthly AWS billing cycle. Use the UpdateBucketBundle
+	// a monthly Amazon Web Services billing cycle. Use the UpdateBucketBundle
 	// (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_UpdateBucketBundle.html)
 	// action to change a bucket's bundle.
 	AbleToUpdateBundle *bool
@@ -517,7 +517,8 @@ type Bucket struct {
 	// The timestamp when the distribution was created.
 	CreatedAt *time.Time
 
-	// Describes the resource location.
+	// An object that describes the location of the bucket, such as the Amazon Web
+	// Services Region and Availability Zone.
 	Location *ResourceLocation
 
 	// The name of the bucket.
@@ -536,8 +537,8 @@ type Bucket struct {
 	// never been enabled.
 	ObjectVersioning *string
 
-	// An array of strings that specify the AWS account IDs that have read-only access
-	// to the bucket.
+	// An array of strings that specify the Amazon Web Services account IDs that have
+	// read-only access to the bucket.
 	ReadonlyAccessAccounts []string
 
 	// The Lightsail resource type of the bucket (for example, Bucket).
@@ -583,9 +584,9 @@ type BucketAccessLogConfig struct {
 	Enabled *bool
 
 	// The name of the bucket where the access logs are saved. The destination can be a
-	// Lightsail bucket in the same account, and in the same AWS Region as the source
-	// bucket. This parameter is required when enabling the access log for a bucket,
-	// and should be omitted when disabling the access log.
+	// Lightsail bucket in the same account, and in the same Amazon Web Services Region
+	// as the source bucket. This parameter is required when enabling the access log
+	// for a bucket, and should be omitted when disabling the access log.
 	Destination *string
 
 	// The optional object prefix for the bucket access log. The prefix is an optional
@@ -994,8 +995,8 @@ type CloudFormationStackRecord struct {
 	// stack.
 	DestinationInfo *DestinationInfo
 
-	// A list of objects describing the Availability Zone and AWS Region of the
-	// CloudFormation stack record.
+	// A list of objects describing the Availability Zone and Amazon Web Services
+	// Region of the CloudFormation stack record.
 	Location *ResourceLocation
 
 	// The name of the CloudFormation stack record. It starts with
@@ -1045,7 +1046,8 @@ type ContactMethod struct {
 	// The timestamp when the contact method was created.
 	CreatedAt *time.Time
 
-	// Describes the resource location.
+	// An object that describes the location of the contact method, such as the Amazon
+	// Web Services Region and Availability Zone.
 	Location *ResourceLocation
 
 	// The name of the contact method.
@@ -1142,8 +1144,8 @@ type ContainerService struct {
 	// A Boolean value indicating whether the container service is disabled.
 	IsDisabled *bool
 
-	// An object that describes the location of the container service, such as the AWS
-	// Region and Availability Zone.
+	// An object that describes the location of the container service, such as the
+	// Amazon Web Services Region and Availability Zone.
 	Location *ResourceLocation
 
 	// An object that describes the next deployment of the container service. This
@@ -1158,9 +1160,9 @@ type ContainerService struct {
 	PowerId *string
 
 	// The principal ARN of the container service. The principal ARN can be used to
-	// create a trust relationship between your standard AWS account and your Lightsail
-	// container service. This allows you to give your service permission to access
-	// resources in your standard AWS account.
+	// create a trust relationship between your standard Amazon Web Services account
+	// and your Lightsail container service. This allows you to give your service
+	// permission to access resources in your standard Amazon Web Services account.
 	PrincipalArn *string
 
 	// The private domain name of the container service. The private domain name is
@@ -2612,10 +2614,11 @@ type LightsailDistribution struct {
 	// Indicates whether the distribution is enabled.
 	IsEnabled *bool
 
-	// An object that describes the location of the distribution, such as the AWS
-	// Region and Availability Zone. Lightsail distributions are global resources that
-	// can reference an origin in any AWS Region, and distribute its content globally.
-	// However, all distributions are located in the us-east-1 Region.
+	// An object that describes the location of the distribution, such as the Amazon
+	// Web Services Region and Availability Zone. Lightsail distributions are global
+	// resources that can reference an origin in any Amazon Web Services Region, and
+	// distribute its content globally. However, all distributions are located in the
+	// us-east-1 Region.
 	Location *ResourceLocation
 
 	// The name of the distribution.
@@ -2668,6 +2671,10 @@ type LoadBalancer struct {
 	// the load balancer tries to make a request to the default (root) page.
 	HealthCheckPath *string
 
+	// A Boolean value that indicates whether HTTPS redirection is enabled for the load
+	// balancer.
+	HttpsRedirectionEnabled *bool
+
 	// An array of InstanceHealthSummary objects describing the health of the load
 	// balancer.
 	InstanceHealthSummary []InstanceHealthSummary
@@ -2715,6 +2722,14 @@ type LoadBalancer struct {
 	// information about the SSL/TLS certificates. For example, if true, the
 	// certificate is attached to the load balancer.
 	TlsCertificateSummaries []LoadBalancerTlsCertificateSummary
+
+	// The name of the TLS security policy for the load balancer. The following TLS
+	// security policy names are possible:
+	//
+	// * TLS-2016-08
+	//
+	// * TLS-FS-Res-1-2-2019-08
+	TlsPolicyName *string
 
 	noSmithyDocumentSerde
 }
@@ -2979,6 +2994,53 @@ type LoadBalancerTlsCertificateSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the TLS security policies that are available for Lightsail load
+// balancers. For more information about load balancer TLS security policies, see
+// Load balancer TLS security policies
+// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configure-load-balancer-tls-security-policy)
+// in the Amazon Lightsail Developer Guide.
+type LoadBalancerTlsPolicy struct {
+
+	// The ciphers used by the TLS security policy. The ciphers are listed in order of
+	// preference.
+	Ciphers []string
+
+	// The description of the TLS security policy.
+	Description *string
+
+	// A Boolean value that indicates whether the TLS security policy is the default.
+	IsDefault *bool
+
+	// The name of the TLS security policy. The following TLS security policy names are
+	// possible:
+	//
+	// * TLS-2016-08
+	//
+	// * TLS-FS-Res-1-2-2019-08
+	//
+	// You can specify either of
+	// these values for the tlsSecurityPolicyName request parameter in the
+	// CreateLoadBalancer
+	// (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_CreateLoadBalancer.html)
+	// action, and the attributeValue request parameter in the
+	// UpdateLoadBalancerAttribute
+	// (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_UpdateLoadBalancerAttribute.html)
+	// action.
+	Name *string
+
+	// The protocols used in a given TLS security policy. The following protocols are
+	// possible:
+	//
+	// * Protocol-TLSv1
+	//
+	// * Protocol-TLSv1.1
+	//
+	// * Protocol-TLSv1.2
+	Protocols []string
+
+	noSmithyDocumentSerde
+}
+
 // Describes a database log event.
 type LogEvent struct {
 
@@ -3066,7 +3128,7 @@ type Operation struct {
 	// A Boolean value indicating whether the operation is terminal.
 	IsTerminal *bool
 
-	// The AWS Region and Availability Zone.
+	// The Amazon Web Services Region and Availability Zone.
 	Location *ResourceLocation
 
 	// Details about the operation (e.g., Debian-1GB-Ohio-1).

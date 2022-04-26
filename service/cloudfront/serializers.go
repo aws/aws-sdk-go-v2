@@ -12,6 +12,7 @@ import (
 	smithyxml "github.com/aws/smithy-go/encoding/xml"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsRestxml_serializeOpAssociateAlias struct {
@@ -9929,6 +9930,19 @@ func awsRestxml_serializeDocumentResponseHeadersPolicyConfig(v *types.ResponseHe
 			return err
 		}
 	}
+	if v.ServerTimingHeadersConfig != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "ServerTimingHeadersConfig",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentResponseHeadersPolicyServerTimingHeadersConfig(v.ServerTimingHeadersConfig, el); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -10286,6 +10300,46 @@ func awsRestxml_serializeDocumentResponseHeadersPolicySecurityHeadersConfig(v *t
 		el := value.MemberElement(root)
 		if err := awsRestxml_serializeDocumentResponseHeadersPolicyXSSProtection(v.XSSProtection, el); err != nil {
 			return err
+		}
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentResponseHeadersPolicyServerTimingHeadersConfig(v *types.ResponseHeadersPolicyServerTimingHeadersConfig, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Enabled != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Enabled",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Boolean(*v.Enabled)
+	}
+	if v.SamplingRate != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "SamplingRate",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		switch {
+		case math.IsNaN(*v.SamplingRate):
+			el.String("NaN")
+
+		case math.IsInf(*v.SamplingRate, 1):
+			el.String("Infinity")
+
+		case math.IsInf(*v.SamplingRate, -1):
+			el.String("-Infinity")
+
+		default:
+			el.Double(*v.SamplingRate)
+
 		}
 	}
 	return nil

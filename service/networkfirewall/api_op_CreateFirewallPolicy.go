@@ -12,7 +12,7 @@ import (
 )
 
 // Creates the firewall policy for the firewall according to the specifications. An
-// AWS Network Firewall firewall policy defines the behavior of a firewall, in a
+// Network Firewall firewall policy defines the behavior of a firewall, in a
 // collection of stateless and stateful rule groups and other settings. You can use
 // one firewall policy for multiple firewalls.
 func (c *Client) CreateFirewallPolicy(ctx context.Context, params *CreateFirewallPolicyInput, optFns ...func(*Options)) (*CreateFirewallPolicyOutput, error) {
@@ -55,6 +55,10 @@ type CreateFirewallPolicyInput struct {
 	// permissions to run the request and that your request parameters are valid. If
 	// set to FALSE, Network Firewall makes the requested changes to your resources.
 	DryRun bool
+
+	// A complex type that contains settings for encryption of your firewall policy
+	// resources.
+	EncryptionConfiguration *types.EncryptionConfiguration
 
 	// The key:value pairs to associate with the resource.
 	Tags []types.Tag

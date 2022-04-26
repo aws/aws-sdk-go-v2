@@ -59,6 +59,10 @@ type UpdateRuleGroupInput struct {
 	// set to FALSE, Network Firewall makes the requested changes to your resources.
 	DryRun bool
 
+	// A complex type that contains settings for encryption of your rule group
+	// resources.
+	EncryptionConfiguration *types.EncryptionConfiguration
+
 	// An object that defines the rule group rules. You must provide either this rule
 	// group setting or a Rules setting, but not both.
 	RuleGroup *types.RuleGroup

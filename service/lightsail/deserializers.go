@@ -13235,6 +13235,129 @@ func awsAwsjson11_deserializeOpErrorGetLoadBalancerTlsCertificates(response *smi
 	}
 }
 
+type awsAwsjson11_deserializeOpGetLoadBalancerTlsPolicies struct {
+}
+
+func (*awsAwsjson11_deserializeOpGetLoadBalancerTlsPolicies) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpGetLoadBalancerTlsPolicies) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorGetLoadBalancerTlsPolicies(response, &metadata)
+	}
+	output := &GetLoadBalancerTlsPoliciesOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentGetLoadBalancerTlsPoliciesOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorGetLoadBalancerTlsPolicies(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("AccountSetupInProgressException", errorCode):
+		return awsAwsjson11_deserializeErrorAccountSetupInProgressException(response, errorBody)
+
+	case strings.EqualFold("InvalidInputException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidInputException(response, errorBody)
+
+	case strings.EqualFold("ServiceException", errorCode):
+		return awsAwsjson11_deserializeErrorServiceException(response, errorBody)
+
+	case strings.EqualFold("UnauthenticatedException", errorCode):
+		return awsAwsjson11_deserializeErrorUnauthenticatedException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsjson11_deserializeOpGetOperation struct {
 }
 
@@ -27320,6 +27443,15 @@ func awsAwsjson11_deserializeDocumentLoadBalancer(v **types.LoadBalancer, value 
 				sv.HealthCheckPath = ptr.String(jtv)
 			}
 
+		case "httpsRedirectionEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected boolean to be of type *bool, got %T instead", value)
+				}
+				sv.HttpsRedirectionEnabled = ptr.Bool(jtv)
+			}
+
 		case "instanceHealthSummary":
 			if err := awsAwsjson11_deserializeDocumentInstanceHealthSummaryList(&sv.InstanceHealthSummary, value); err != nil {
 				return err
@@ -27410,6 +27542,15 @@ func awsAwsjson11_deserializeDocumentLoadBalancer(v **types.LoadBalancer, value 
 		case "tlsCertificateSummaries":
 			if err := awsAwsjson11_deserializeDocumentLoadBalancerTlsCertificateSummaryList(&sv.TlsCertificateSummaries, value); err != nil {
 				return err
+			}
+
+		case "tlsPolicyName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceName to be of type string, got %T instead", value)
+				}
+				sv.TlsPolicyName = ptr.String(jtv)
 			}
 
 		default:
@@ -28107,6 +28248,108 @@ func awsAwsjson11_deserializeDocumentLoadBalancerTlsCertificateSummaryList(v *[]
 		var col types.LoadBalancerTlsCertificateSummary
 		destAddr := &col
 		if err := awsAwsjson11_deserializeDocumentLoadBalancerTlsCertificateSummary(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentLoadBalancerTlsPolicy(v **types.LoadBalancerTlsPolicy, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LoadBalancerTlsPolicy
+	if *v == nil {
+		sv = &types.LoadBalancerTlsPolicy{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ciphers":
+			if err := awsAwsjson11_deserializeDocumentStringList(&sv.Ciphers, value); err != nil {
+				return err
+			}
+
+		case "description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected string to be of type string, got %T instead", value)
+				}
+				sv.Description = ptr.String(jtv)
+			}
+
+		case "isDefault":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsDefault = ptr.Bool(jtv)
+			}
+
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "protocols":
+			if err := awsAwsjson11_deserializeDocumentStringList(&sv.Protocols, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentLoadBalancerTlsPolicyList(v *[]types.LoadBalancerTlsPolicy, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.LoadBalancerTlsPolicy
+	if *v == nil {
+		cv = []types.LoadBalancerTlsPolicy{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.LoadBalancerTlsPolicy
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentLoadBalancerTlsPolicy(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr
@@ -35357,6 +35600,51 @@ func awsAwsjson11_deserializeOpDocumentGetLoadBalancerTlsCertificatesOutput(v **
 		switch key {
 		case "tlsCertificates":
 			if err := awsAwsjson11_deserializeDocumentLoadBalancerTlsCertificateList(&sv.TlsCertificates, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeOpDocumentGetLoadBalancerTlsPoliciesOutput(v **GetLoadBalancerTlsPoliciesOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *GetLoadBalancerTlsPoliciesOutput
+	if *v == nil {
+		sv = &GetLoadBalancerTlsPoliciesOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "nextPageToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected string to be of type string, got %T instead", value)
+				}
+				sv.NextPageToken = ptr.String(jtv)
+			}
+
+		case "tlsPolicies":
+			if err := awsAwsjson11_deserializeDocumentLoadBalancerTlsPolicyList(&sv.TlsPolicies, value); err != nil {
 				return err
 			}
 

@@ -58,7 +58,7 @@ type DescribeServicesOutput struct {
 	// The format version of the response. For example, aws_v1.
 	FormatVersion *string
 
-	// The pagination token for the next set of retreivable results.
+	// The pagination token for the next set of retrievable results.
 	NextToken *string
 
 	// The service metadata for the service or services in the response.

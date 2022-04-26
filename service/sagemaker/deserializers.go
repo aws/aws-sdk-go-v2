@@ -51234,6 +51234,15 @@ func awsAwsjson11_deserializeDocumentRecommendationJobInputConfig(v **types.Reco
 				return err
 			}
 
+		case "VolumeKmsKeyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KmsKeyId to be of type string, got %T instead", value)
+				}
+				sv.VolumeKmsKeyId = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

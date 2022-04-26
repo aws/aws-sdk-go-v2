@@ -12,6 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Lists all the custom patterns that have been created.
 func (c *Client) ListCustomEntityTypes(ctx context.Context, params *ListCustomEntityTypesInput, optFns ...func(*Options)) (*ListCustomEntityTypesOutput, error) {
 	if params == nil {
 		params = &ListCustomEntityTypesInput{}
@@ -28,16 +29,22 @@ func (c *Client) ListCustomEntityTypes(ctx context.Context, params *ListCustomEn
 }
 
 type ListCustomEntityTypesInput struct {
+
+	// The maximum number of results to return.
 	MaxResults *int32
 
+	// A paginated token to offset the results.
 	NextToken *string
 
 	noSmithyDocumentSerde
 }
 
 type ListCustomEntityTypesOutput struct {
+
+	// A list of CustomEntityType objects representing custom patterns.
 	CustomEntityTypes []types.CustomEntityType
 
+	// A pagination token, if more results are available.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -117,6 +124,7 @@ var _ ListCustomEntityTypesAPIClient = (*Client)(nil)
 // ListCustomEntityTypesPaginatorOptions is the paginator options for
 // ListCustomEntityTypes
 type ListCustomEntityTypesPaginatorOptions struct {
+	// The maximum number of results to return.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -35,8 +35,8 @@ func (c *Client) GetBuckets(ctx context.Context, params *GetBucketsInput, optFns
 type GetBucketsInput struct {
 
 	// The name of the bucket for which to return information. When omitted, the
-	// response includes all of your buckets in the AWS Region where the request is
-	// made.
+	// response includes all of your buckets in the Amazon Web Services Region where
+	// the request is made.
 	BucketName *string
 
 	// A Boolean value that indicates whether to include Lightsail instances that were

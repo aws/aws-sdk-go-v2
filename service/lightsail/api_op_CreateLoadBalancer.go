@@ -77,6 +77,16 @@ type CreateLoadBalancerInput struct {
 	// TagResource action to tag a resource after it's created.
 	Tags []types.Tag
 
+	// The name of the TLS policy to apply to the load balancer. Use the
+	// GetLoadBalancerTlsPolicies
+	// (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetLoadBalancerTlsPolicies.html)
+	// action to get a list of TLS policy names that you can specify. For more
+	// information about load balancer TLS policies, see Load balancer TLS security
+	// policies
+	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configure-load-balancer-tls-security-policy)
+	// in the Amazon Lightsail Developer Guide.
+	TlsPolicyName *string
+
 	noSmithyDocumentSerde
 }
 

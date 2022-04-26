@@ -63,15 +63,16 @@ type CreateContainerServiceInput struct {
 	// following are the requirements for container service names:
 	//
 	// * Must be unique
-	// within each AWS Region in your Lightsail account.
+	// within each Amazon Web Services Region in your Lightsail account.
 	//
-	// * Must contain 1 to 63
-	// characters.
+	// * Must
+	// contain 1 to 63 characters.
 	//
-	// * Must contain only alphanumeric characters and hyphens.
+	// * Must contain only alphanumeric characters and
+	// hyphens.
 	//
-	// * A
-	// hyphen (-) can separate words but cannot be at the start or end of the name.
+	// * A hyphen (-) can separate words but cannot be at the start or end of
+	// the name.
 	//
 	// This member is required.
 	ServiceName *string

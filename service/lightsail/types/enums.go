@@ -794,6 +794,8 @@ const (
 	LoadBalancerAttributeNameHealthCheckPath                          LoadBalancerAttributeName = "HealthCheckPath"
 	LoadBalancerAttributeNameSessionStickinessEnabled                 LoadBalancerAttributeName = "SessionStickinessEnabled"
 	LoadBalancerAttributeNameSessionStickinessLbCookieDurationSeconds LoadBalancerAttributeName = "SessionStickiness_LB_CookieDurationSeconds"
+	LoadBalancerAttributeNameHttpsRedirectionEnabled                  LoadBalancerAttributeName = "HttpsRedirectionEnabled"
+	LoadBalancerAttributeNameTlsPolicyName                            LoadBalancerAttributeName = "TlsPolicyName"
 )
 
 // Values returns all known values for LoadBalancerAttributeName. Note that this
@@ -804,6 +806,8 @@ func (LoadBalancerAttributeName) Values() []LoadBalancerAttributeName {
 		"HealthCheckPath",
 		"SessionStickinessEnabled",
 		"SessionStickiness_LB_CookieDurationSeconds",
+		"HttpsRedirectionEnabled",
+		"TlsPolicyName",
 	}
 }
 

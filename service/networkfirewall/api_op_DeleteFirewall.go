@@ -53,12 +53,12 @@ type DeleteFirewallInput struct {
 
 type DeleteFirewallOutput struct {
 
-	// The firewall defines the configuration settings for an AWS Network Firewall
+	// The firewall defines the configuration settings for an Network Firewall
 	// firewall. These settings include the firewall policy, the subnets in your VPC to
 	// use for the firewall endpoints, and any tags that are attached to the firewall
-	// AWS resource. The status of the firewall, for example whether it's ready to
-	// filter network traffic, is provided in the corresponding FirewallStatus. You can
-	// retrieve both objects by calling DescribeFirewall.
+	// Amazon Web Services resource. The status of the firewall, for example whether
+	// it's ready to filter network traffic, is provided in the corresponding
+	// FirewallStatus. You can retrieve both objects by calling DescribeFirewall.
 	Firewall *types.Firewall
 
 	// Detailed information about the current status of a Firewall. You can retrieve

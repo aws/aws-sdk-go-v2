@@ -3570,6 +3570,11 @@ func validateResponseHeadersPolicyConfig(v *types.ResponseHeadersPolicyConfig) e
 			invalidParams.AddNested("CustomHeadersConfig", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ServerTimingHeadersConfig != nil {
+		if err := validateResponseHeadersPolicyServerTimingHeadersConfig(v.ServerTimingHeadersConfig); err != nil {
+			invalidParams.AddNested("ServerTimingHeadersConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3782,6 +3787,21 @@ func validateResponseHeadersPolicySecurityHeadersConfig(v *types.ResponseHeaders
 		if err := validateResponseHeadersPolicyStrictTransportSecurity(v.StrictTransportSecurity); err != nil {
 			invalidParams.AddNested("StrictTransportSecurity", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateResponseHeadersPolicyServerTimingHeadersConfig(v *types.ResponseHeadersPolicyServerTimingHeadersConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResponseHeadersPolicyServerTimingHeadersConfig"}
+	if v.Enabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

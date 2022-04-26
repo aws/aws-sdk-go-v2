@@ -13,10 +13,10 @@ import (
 
 // Creates an email or SMS text message contact method. A contact method is used to
 // send you notifications about your Amazon Lightsail resources. You can add one
-// email address and one mobile phone number contact method in each AWS Region.
-// However, SMS text messaging is not supported in some AWS Regions, and SMS text
-// messages cannot be sent to some countries/regions. For more information, see
-// Notifications in Amazon Lightsail
+// email address and one mobile phone number contact method in each Amazon Web
+// Services Region. However, SMS text messaging is not supported in some Amazon Web
+// Services Regions, and SMS text messages cannot be sent to some
+// countries/regions. For more information, see Notifications in Amazon Lightsail
 // (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-notifications).
 func (c *Client) CreateContactMethod(ctx context.Context, params *CreateContactMethodInput, optFns ...func(*Options)) (*CreateContactMethodOutput, error) {
 	if params == nil {
@@ -48,27 +48,27 @@ type CreateContactMethodInput struct {
 	ContactEndpoint *string
 
 	// The protocol of the contact method, such as Email or SMS (text messaging). The
-	// SMS protocol is supported only in the following AWS Regions.
+	// SMS protocol is supported only in the following Amazon Web Services Regions.
 	//
-	// * US East (N.
-	// Virginia) (us-east-1)
+	// *
+	// US East (N. Virginia) (us-east-1)
 	//
 	// * US West (Oregon) (us-west-2)
 	//
-	// * Europe (Ireland)
-	// (eu-west-1)
+	// * Europe
+	// (Ireland) (eu-west-1)
 	//
 	// * Asia Pacific (Tokyo) (ap-northeast-1)
 	//
-	// * Asia Pacific (Singapore)
-	// (ap-southeast-1)
+	// * Asia Pacific
+	// (Singapore) (ap-southeast-1)
 	//
 	// * Asia Pacific (Sydney) (ap-southeast-2)
 	//
-	// For a list of
-	// countries/regions where SMS text messages can be sent, and the latest AWS
-	// Regions where SMS text messaging is supported, see Supported Regions and
-	// Countries
+	// For a
+	// list of countries/regions where SMS text messages can be sent, and the latest
+	// Amazon Web Services Regions where SMS text messaging is supported, see Supported
+	// Regions and Countries
 	// (https://docs.aws.amazon.com/sns/latest/dg/sns-supported-regions-countries.html)
 	// in the Amazon SNS Developer Guide. For more information about notifications in
 	// Amazon Lightsail, see Notifications in Amazon Lightsail

@@ -52,7 +52,9 @@ type UpdateDistributionBundleInput struct {
 
 type UpdateDistributionBundleOutput struct {
 
-	// Describes the API operation.
+	// An object that describes the result of the action, such as the status of the
+	// request, the timestamp of the request, and the resources affected by the
+	// request.
 	Operation *types.Operation
 
 	// Metadata pertaining to the operation's result.

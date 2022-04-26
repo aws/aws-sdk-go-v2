@@ -111,6 +111,7 @@
         "api_op_GetLoadBalancer.go",
         "api_op_GetLoadBalancerMetricData.go",
         "api_op_GetLoadBalancerTlsCertificates.go",
+        "api_op_GetLoadBalancerTlsPolicies.go",
         "api_op_GetLoadBalancers.go",
         "api_op_GetOperation.go",
         "api_op_GetOperations.go",

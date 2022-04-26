@@ -34,12 +34,35 @@ func (c *Client) UpdateLoadBalancerAttribute(ctx context.Context, params *Update
 
 type UpdateLoadBalancerAttributeInput struct {
 
-	// The name of the attribute you want to update. Valid values are below.
+	// The name of the attribute you want to update.
 	//
 	// This member is required.
 	AttributeName types.LoadBalancerAttributeName
 
-	// The value that you want to specify for the attribute name.
+	// The value that you want to specify for the attribute name. The following values
+	// are supported depending on what you specify for the attributeName request
+	// parameter:
+	//
+	// * If you specify HealthCheckPath for the attributeName request
+	// parameter, then the attributeValue request parameter must be the path to ping on
+	// the target (for example, /weather/us/wa/seattle).
+	//
+	// * If you specify
+	// SessionStickinessEnabled for the attributeName request parameter, then the
+	// attributeValue request parameter must be true or false.
+	//
+	// * If you specify
+	// SessionStickiness_LB_CookieDurationSeconds for the attributeName request
+	// parameter, then the attributeValue request parameter must be an interger that
+	// represents the cookie duration in seconds.
+	//
+	// * If you specify
+	// HttpsRedirectionEnabled for the attributeName request parameter, then the
+	// attributeValue request parameter must be true or false.
+	//
+	// * If you specify
+	// TlsPolicyName for the attributeName request parameter, then the attributeValue
+	// request parameter must be TLS version 1.0, 1.1, and 1.2 or TLS version 1.2.
 	//
 	// This member is required.
 	AttributeValue *string

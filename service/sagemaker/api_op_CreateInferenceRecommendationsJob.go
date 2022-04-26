@@ -59,6 +59,10 @@ type CreateInferenceRecommendationsJobInput struct {
 	// Description of the recommendation job.
 	JobDescription *string
 
+	// Provides information about the output artifacts and the KMS key to use for
+	// Amazon S3 server-side encryption.
+	OutputConfig *types.RecommendationJobOutputConfig
+
 	// A set of conditions for stopping a recommendation job. If any of the conditions
 	// are met, the job is automatically stopped.
 	StoppingConditions *types.RecommendationJobStoppingConditions

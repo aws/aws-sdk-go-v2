@@ -59,6 +59,10 @@ type UpdateFirewallPolicyInput struct {
 	// set to FALSE, Network Firewall makes the requested changes to your resources.
 	DryRun bool
 
+	// A complex type that contains settings for encryption of your firewall policy
+	// resources.
+	EncryptionConfiguration *types.EncryptionConfiguration
+
 	// The Amazon Resource Name (ARN) of the firewall policy. You must specify the ARN
 	// or the name, and you can specify both.
 	FirewallPolicyArn *string

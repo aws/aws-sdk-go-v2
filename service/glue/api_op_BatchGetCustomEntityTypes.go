@@ -11,6 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Retrieves the details for the custom patterns specified by a list of names.
 func (c *Client) BatchGetCustomEntityTypes(ctx context.Context, params *BatchGetCustomEntityTypesInput, optFns ...func(*Options)) (*BatchGetCustomEntityTypesOutput, error) {
 	if params == nil {
 		params = &BatchGetCustomEntityTypesInput{}
@@ -28,6 +29,8 @@ func (c *Client) BatchGetCustomEntityTypes(ctx context.Context, params *BatchGet
 
 type BatchGetCustomEntityTypesInput struct {
 
+	// A list of names of the custom patterns that you want to retrieve.
+	//
 	// This member is required.
 	Names []string
 
@@ -35,8 +38,12 @@ type BatchGetCustomEntityTypesInput struct {
 }
 
 type BatchGetCustomEntityTypesOutput struct {
+
+	// A list of CustomEntityType objects representing the custom patterns that have
+	// been created.
 	CustomEntityTypes []types.CustomEntityType
 
+	// A list of the names of custom patterns that were not found.
 	CustomEntityTypesNotFound []string
 
 	// Metadata pertaining to the operation's result.

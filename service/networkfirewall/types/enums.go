@@ -42,6 +42,24 @@ func (ConfigurationSyncState) Values() []ConfigurationSyncState {
 	}
 }
 
+type EncryptionType string
+
+// Enum values for EncryptionType
+const (
+	EncryptionTypeCustomerKms    EncryptionType = "CUSTOMER_KMS"
+	EncryptionTypeAwsOwnedKmsKey EncryptionType = "AWS_OWNED_KMS_KEY"
+)
+
+// Values returns all known values for EncryptionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EncryptionType) Values() []EncryptionType {
+	return []EncryptionType{
+		"CUSTOMER_KMS",
+		"AWS_OWNED_KMS_KEY",
+	}
+}
+
 type FirewallStatusValue string
 
 // Enum values for FirewallStatusValue

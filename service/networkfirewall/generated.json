@@ -33,6 +33,7 @@
         "api_op_UntagResource.go",
         "api_op_UpdateFirewallDeleteProtection.go",
         "api_op_UpdateFirewallDescription.go",
+        "api_op_UpdateFirewallEncryptionConfiguration.go",
         "api_op_UpdateFirewallPolicy.go",
         "api_op_UpdateFirewallPolicyChangeProtection.go",
         "api_op_UpdateLoggingConfiguration.go",

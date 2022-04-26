@@ -15,9 +15,9 @@ import (
 // your request to return information about a specific contact method. A contact
 // method is used to send you notifications about your Amazon Lightsail resources.
 // You can add one email address and one mobile phone number contact method in each
-// AWS Region. However, SMS text messaging is not supported in some AWS Regions,
-// and SMS text messages cannot be sent to some countries/regions. For more
-// information, see Notifications in Amazon Lightsail
+// Amazon Web Services Region. However, SMS text messaging is not supported in some
+// Amazon Web Services Regions, and SMS text messages cannot be sent to some
+// countries/regions. For more information, see Notifications in Amazon Lightsail
 // (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-notifications).
 func (c *Client) GetContactMethods(ctx context.Context, params *GetContactMethodsInput, optFns ...func(*Options)) (*GetContactMethodsOutput, error) {
 	if params == nil {

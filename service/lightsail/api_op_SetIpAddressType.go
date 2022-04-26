@@ -45,8 +45,8 @@ type SetIpAddressTypeInput struct {
 
 	// The resource type. The possible values are Distribution, Instance, and
 	// LoadBalancer. Distribution-related APIs are available only in the N. Virginia
-	// (us-east-1) AWS Region. Set your AWS Region configuration to us-east-1 to
-	// create, view, or edit distributions.
+	// (us-east-1) Amazon Web Services Region. Set your Amazon Web Services Region
+	// configuration to us-east-1 to create, view, or edit distributions.
 	//
 	// This member is required.
 	ResourceType types.ResourceType

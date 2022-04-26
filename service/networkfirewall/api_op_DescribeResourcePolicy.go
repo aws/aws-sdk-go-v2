@@ -39,7 +39,7 @@ type DescribeResourcePolicyInput struct {
 
 type DescribeResourcePolicyOutput struct {
 
-	// The AWS Identity and Access Management policy for the resource.
+	// The IAM policy for the resource.
 	Policy *string
 
 	// Metadata pertaining to the operation's result.

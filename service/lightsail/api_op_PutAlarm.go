@@ -106,10 +106,10 @@ type PutAlarmInput struct {
 	// or both. A notification is sent via the specified contact protocol if
 	// notifications are enabled for the alarm, and when the alarm is triggered. A
 	// notification is not sent if a contact protocol is not specified, if the
-	// specified contact protocol is not configured in the AWS Region, or if
-	// notifications are not enabled for the alarm using the notificationEnabled
+	// specified contact protocol is not configured in the Amazon Web Services Region,
+	// or if notifications are not enabled for the alarm using the notificationEnabled
 	// paramater. Use the CreateContactMethod action to configure a contact protocol in
-	// an AWS Region.
+	// an Amazon Web Services Region.
 	ContactProtocols []types.ContactProtocol
 
 	// The number of data points that must be not within the specified threshold to

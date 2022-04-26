@@ -10,16 +10,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates or updates an AWS Identity and Access Management policy for your rule
-// group or firewall policy. Use this to share rule groups and firewall policies
-// between accounts. This operation works in conjunction with the AWS Resource
-// Access Manager (RAM) service to manage resource sharing for Network Firewall.
-// Use this operation to create or update a resource policy for your rule group or
-// firewall policy. In the policy, you specify the accounts that you want to share
-// the resource with and the operations that you want the accounts to be able to
-// perform. When you add an account in the resource policy, you then run the
-// following Resource Access Manager (RAM) operations to access and accept the
-// shared rule group or firewall policy.
+// Creates or updates an IAM policy for your rule group or firewall policy. Use
+// this to share rule groups and firewall policies between accounts. This operation
+// works in conjunction with the Amazon Web Services Resource Access Manager (RAM)
+// service to manage resource sharing for Network Firewall. Use this operation to
+// create or update a resource policy for your rule group or firewall policy. In
+// the policy, you specify the accounts that you want to share the resource with
+// and the operations that you want the accounts to be able to perform. When you
+// add an account in the resource policy, you then run the following Resource
+// Access Manager (RAM) operations to access and accept the shared rule group or
+// firewall policy.
 //
 // * GetResourceShareInvitations
 // (https://docs.aws.amazon.com/ram/latest/APIReference/API_GetResourceShareInvitations.html)
@@ -31,8 +31,8 @@ import (
 // - Accepts the share invitation for a specified resource share.
 //
 // For additional
-// information about resource sharing using RAM, see AWS Resource Access Manager
-// User Guide (https://docs.aws.amazon.com/ram/latest/userguide/what-is.html).
+// information about resource sharing using RAM, see Resource Access Manager User
+// Guide (https://docs.aws.amazon.com/ram/latest/userguide/what-is.html).
 func (c *Client) PutResourcePolicy(ctx context.Context, params *PutResourcePolicyInput, optFns ...func(*Options)) (*PutResourcePolicyOutput, error) {
 	if params == nil {
 		params = &PutResourcePolicyInput{}
@@ -50,13 +50,13 @@ func (c *Client) PutResourcePolicy(ctx context.Context, params *PutResourcePolic
 
 type PutResourcePolicyInput struct {
 
-	// The AWS Identity and Access Management policy statement that lists the accounts
-	// that you want to share your rule group or firewall policy with and the
-	// operations that you want the accounts to be able to perform. For a rule group
-	// resource, you can specify the following operations in the Actions section of the
-	// statement:
+	// The IAM policy statement that lists the accounts that you want to share your
+	// rule group or firewall policy with and the operations that you want the accounts
+	// to be able to perform. For a rule group resource, you can specify the following
+	// operations in the Actions section of the statement:
 	//
-	// * network-firewall:CreateFirewallPolicy
+	// *
+	// network-firewall:CreateFirewallPolicy
 	//
 	// *
 	// network-firewall:UpdateFirewallPolicy

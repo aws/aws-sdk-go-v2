@@ -34793,6 +34793,12 @@ func awsRestxml_deserializeDocumentResponseHeadersPolicyConfig(v **types.Respons
 				return err
 			}
 
+		case strings.EqualFold("ServerTimingHeadersConfig", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentResponseHeadersPolicyServerTimingHeadersConfig(&sv.ServerTimingHeadersConfig, nodeDecoder); err != nil {
+				return err
+			}
+
 		default:
 			// Do nothing and ignore the unexpected tag element
 			err = decoder.Decoder.Skip()
@@ -35562,6 +35568,75 @@ func awsRestxml_deserializeDocumentResponseHeadersPolicySecurityHeadersConfig(v 
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsRestxml_deserializeDocumentResponseHeadersPolicyXSSProtection(&sv.XSSProtection, nodeDecoder); err != nil {
 				return err
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestxml_deserializeDocumentResponseHeadersPolicyServerTimingHeadersConfig(v **types.ResponseHeadersPolicyServerTimingHeadersConfig, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.ResponseHeadersPolicyServerTimingHeadersConfig
+	if *v == nil {
+		sv = &types.ResponseHeadersPolicyServerTimingHeadersConfig{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("Enabled", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected boolean to be of type *bool, got %T instead", val)
+				}
+				sv.Enabled = ptr.Bool(xtv)
+			}
+
+		case strings.EqualFold("SamplingRate", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				f64, err := strconv.ParseFloat(xtv, 64)
+				if err != nil {
+					return err
+				}
+				sv.SamplingRate = ptr.Float64(f64)
 			}
 
 		default:

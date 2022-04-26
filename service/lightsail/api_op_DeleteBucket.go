@@ -12,8 +12,8 @@ import (
 )
 
 // Deletes a Amazon Lightsail bucket. When you delete your bucket, the bucket name
-// is released and can be reused for a new bucket in your account or another AWS
-// account.
+// is released and can be reused for a new bucket in your account or another Amazon
+// Web Services account.
 func (c *Client) DeleteBucket(ctx context.Context, params *DeleteBucketInput, optFns ...func(*Options)) (*DeleteBucketOutput, error) {
 	if params == nil {
 		params = &DeleteBucketInput{}

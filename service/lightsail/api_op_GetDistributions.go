@@ -31,8 +31,8 @@ func (c *Client) GetDistributions(ctx context.Context, params *GetDistributionsI
 type GetDistributionsInput struct {
 
 	// The name of the distribution for which to return information. When omitted, the
-	// response includes all of your distributions in the AWS Region where the request
-	// is made.
+	// response includes all of your distributions in the Amazon Web Services Region
+	// where the request is made.
 	DistributionName *string
 
 	// The token to advance to the next page of results from your request. To get a

@@ -10,6 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Deletes a custom pattern by specifying its name.
 func (c *Client) DeleteCustomEntityType(ctx context.Context, params *DeleteCustomEntityTypeInput, optFns ...func(*Options)) (*DeleteCustomEntityTypeOutput, error) {
 	if params == nil {
 		params = &DeleteCustomEntityTypeInput{}
@@ -27,6 +28,8 @@ func (c *Client) DeleteCustomEntityType(ctx context.Context, params *DeleteCusto
 
 type DeleteCustomEntityTypeInput struct {
 
+	// The name of the custom pattern that you want to delete.
+	//
 	// This member is required.
 	Name *string
 
@@ -34,6 +37,8 @@ type DeleteCustomEntityTypeInput struct {
 }
 
 type DeleteCustomEntityTypeOutput struct {
+
+	// The name of the custom pattern you deleted.
 	Name *string
 
 	// Metadata pertaining to the operation's result.

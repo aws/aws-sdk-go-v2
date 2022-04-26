@@ -10,6 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Retrieves the details of a custom pattern by specifying its name.
 func (c *Client) GetCustomEntityType(ctx context.Context, params *GetCustomEntityTypeInput, optFns ...func(*Options)) (*GetCustomEntityTypeOutput, error) {
 	if params == nil {
 		params = &GetCustomEntityTypeInput{}
@@ -27,6 +28,8 @@ func (c *Client) GetCustomEntityType(ctx context.Context, params *GetCustomEntit
 
 type GetCustomEntityTypeInput struct {
 
+	// The name of the custom pattern that you want to retrieve.
+	//
 	// This member is required.
 	Name *string
 
@@ -34,10 +37,17 @@ type GetCustomEntityTypeInput struct {
 }
 
 type GetCustomEntityTypeOutput struct {
+
+	// A list of context words if specified when you created the custom pattern. If
+	// none of these context words are found within the vicinity of the regular
+	// expression the data will not be detected as sensitive data.
 	ContextWords []string
 
+	// The name of the custom pattern that you retrieved.
 	Name *string
 
+	// A regular expression string that is used for detecting sensitive data in a
+	// custom pattern.
 	RegexString *string
 
 	// Metadata pertaining to the operation's result.

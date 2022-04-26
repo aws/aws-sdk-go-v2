@@ -75,7 +75,7 @@ type UpdateLoggingConfigurationOutput struct {
 	// after you create it.
 	FirewallName *string
 
-	// Defines how AWS Network Firewall performs logging for a Firewall.
+	// Defines how Network Firewall performs logging for a Firewall.
 	LoggingConfiguration *types.LoggingConfiguration
 
 	// Metadata pertaining to the operation's result.

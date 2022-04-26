@@ -1390,6 +1390,61 @@ func (m *awsAwsjson10_serializeOpUpdateFirewallDescription) HandleSerialize(ctx 
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpUpdateFirewallEncryptionConfiguration struct {
+}
+
+func (*awsAwsjson10_serializeOpUpdateFirewallEncryptionConfiguration) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpUpdateFirewallEncryptionConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateFirewallEncryptionConfigurationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("NetworkFirewall_20201112.UpdateFirewallEncryptionConfiguration")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentUpdateFirewallEncryptionConfigurationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpUpdateFirewallPolicy struct {
 }
 
@@ -1768,6 +1823,23 @@ func awsAwsjson10_serializeDocumentDimensions(v []types.Dimension, value smithyj
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentEncryptionConfiguration(v *types.EncryptionConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.KeyId != nil {
+		ok := object.Key("KeyId")
+		ok.String(*v.KeyId)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
 	return nil
 }
 
@@ -2700,6 +2772,13 @@ func awsAwsjson10_serializeOpDocumentCreateFirewallInput(v *CreateFirewallInput,
 		ok.String(*v.Description)
 	}
 
+	if v.EncryptionConfiguration != nil {
+		ok := object.Key("EncryptionConfiguration")
+		if err := awsAwsjson10_serializeDocumentEncryptionConfiguration(v.EncryptionConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.FirewallName != nil {
 		ok := object.Key("FirewallName")
 		ok.String(*v.FirewallName)
@@ -2756,6 +2835,13 @@ func awsAwsjson10_serializeOpDocumentCreateFirewallPolicyInput(v *CreateFirewall
 		ok.Boolean(v.DryRun)
 	}
 
+	if v.EncryptionConfiguration != nil {
+		ok := object.Key("EncryptionConfiguration")
+		if err := awsAwsjson10_serializeDocumentEncryptionConfiguration(v.EncryptionConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.FirewallPolicy != nil {
 		ok := object.Key("FirewallPolicy")
 		if err := awsAwsjson10_serializeDocumentFirewallPolicy(v.FirewallPolicy, ok); err != nil {
@@ -2795,6 +2881,13 @@ func awsAwsjson10_serializeOpDocumentCreateRuleGroupInput(v *CreateRuleGroupInpu
 	if v.DryRun {
 		ok := object.Key("DryRun")
 		ok.Boolean(v.DryRun)
+	}
+
+	if v.EncryptionConfiguration != nil {
+		ok := object.Key("EncryptionConfiguration")
+		if err := awsAwsjson10_serializeDocumentEncryptionConfiguration(v.EncryptionConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.RuleGroup != nil {
@@ -3227,6 +3320,35 @@ func awsAwsjson10_serializeOpDocumentUpdateFirewallDescriptionInput(v *UpdateFir
 	return nil
 }
 
+func awsAwsjson10_serializeOpDocumentUpdateFirewallEncryptionConfigurationInput(v *UpdateFirewallEncryptionConfigurationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EncryptionConfiguration != nil {
+		ok := object.Key("EncryptionConfiguration")
+		if err := awsAwsjson10_serializeDocumentEncryptionConfiguration(v.EncryptionConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FirewallArn != nil {
+		ok := object.Key("FirewallArn")
+		ok.String(*v.FirewallArn)
+	}
+
+	if v.FirewallName != nil {
+		ok := object.Key("FirewallName")
+		ok.String(*v.FirewallName)
+	}
+
+	if v.UpdateToken != nil {
+		ok := object.Key("UpdateToken")
+		ok.String(*v.UpdateToken)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeOpDocumentUpdateFirewallPolicyChangeProtectionInput(v *UpdateFirewallPolicyChangeProtectionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3266,6 +3388,13 @@ func awsAwsjson10_serializeOpDocumentUpdateFirewallPolicyInput(v *UpdateFirewall
 	if v.DryRun {
 		ok := object.Key("DryRun")
 		ok.Boolean(v.DryRun)
+	}
+
+	if v.EncryptionConfiguration != nil {
+		ok := object.Key("EncryptionConfiguration")
+		if err := awsAwsjson10_serializeDocumentEncryptionConfiguration(v.EncryptionConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.FirewallPolicy != nil {
@@ -3329,6 +3458,13 @@ func awsAwsjson10_serializeOpDocumentUpdateRuleGroupInput(v *UpdateRuleGroupInpu
 	if v.DryRun {
 		ok := object.Key("DryRun")
 		ok.Boolean(v.DryRun)
+	}
+
+	if v.EncryptionConfiguration != nil {
+		ok := object.Key("EncryptionConfiguration")
+		if err := awsAwsjson10_serializeDocumentEncryptionConfiguration(v.EncryptionConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.RuleGroup != nil {

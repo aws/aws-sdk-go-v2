@@ -19354,6 +19354,18 @@ func awsAwsjson11_serializeDocumentRealtimeInferenceInstanceTypes(v []types.Prod
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentRecommendationJobCompiledOutputConfig(v *types.RecommendationJobCompiledOutputConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.S3OutputUri != nil {
+		ok := object.Key("S3OutputUri")
+		ok.String(*v.S3OutputUri)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentRecommendationJobInputConfig(v *types.RecommendationJobInputConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -19387,6 +19399,30 @@ func awsAwsjson11_serializeDocumentRecommendationJobInputConfig(v *types.Recomme
 		if err := awsAwsjson11_serializeDocumentTrafficPattern(v.TrafficPattern, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.VolumeKmsKeyId != nil {
+		ok := object.Key("VolumeKmsKeyId")
+		ok.String(*v.VolumeKmsKeyId)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRecommendationJobOutputConfig(v *types.RecommendationJobOutputConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CompiledOutputConfig != nil {
+		ok := object.Key("CompiledOutputConfig")
+		if err := awsAwsjson11_serializeDocumentRecommendationJobCompiledOutputConfig(v.CompiledOutputConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.KmsKeyId != nil {
+		ok := object.Key("KmsKeyId")
+		ok.String(*v.KmsKeyId)
 	}
 
 	return nil
@@ -21837,6 +21873,13 @@ func awsAwsjson11_serializeOpDocumentCreateInferenceRecommendationsJobInput(v *C
 	if len(v.JobType) > 0 {
 		ok := object.Key("JobType")
 		ok.String(string(v.JobType))
+	}
+
+	if v.OutputConfig != nil {
+		ok := object.Key("OutputConfig")
+		if err := awsAwsjson11_serializeDocumentRecommendationJobOutputConfig(v.OutputConfig, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.RoleArn != nil {

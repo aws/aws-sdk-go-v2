@@ -47,7 +47,7 @@ type Address struct {
 }
 
 // The configuration and status for a single subnet that you've specified for use
-// by the AWS Network Firewall firewall. This is part of the FirewallStatus.
+// by the Network Firewall firewall. This is part of the FirewallStatus.
 type Attachment struct {
 
 	// The identifier of the firewall endpoint that Network Firewall has instantiated
@@ -105,10 +105,10 @@ type CustomAction struct {
 
 // The value to use in an Amazon CloudWatch custom metric dimension. This is used
 // in the PublishMetricsCustomAction. A CloudWatch custom metric dimension is a
-// name/value pair that's part of the identity of a metric. AWS Network Firewall
-// sets the dimension name to CustomAction and you provide the dimension value. For
-// more information about CloudWatch custom metric dimensions, see Publishing
-// Custom Metrics
+// name/value pair that's part of the identity of a metric. Network Firewall sets
+// the dimension name to CustomAction and you provide the dimension value. For more
+// information about CloudWatch custom metric dimensions, see Publishing Custom
+// Metrics
 // (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html#usingDimensions)
 // in the Amazon CloudWatch User Guide
 // (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html).
@@ -122,12 +122,38 @@ type Dimension struct {
 	noSmithyDocumentSerde
 }
 
-// The firewall defines the configuration settings for an AWS Network Firewall
+// A complex type that contains optional Amazon Web Services Key Management Service
+// (KMS) encryption settings for your Network Firewall resources. Your data is
+// encrypted by default with an Amazon Web Services owned key that Amazon Web
+// Services owns and manages for you. You can use either the Amazon Web Services
+// owned key, or provide your own customer managed key. To learn more about KMS
+// encryption of your Network Firewall resources, see Encryption at rest with
+// Amazon Web Services Key Managment Service
+// (https://docs.aws.amazon.com/kms/latest/developerguide/kms-encryption-at-rest.html)
+// in the Network Firewall Developer Guide.
+type EncryptionConfiguration struct {
+
+	// The ID of the Amazon Web Services Key Management Service (KMS) customer managed
+	// key. You can use any of the key identifiers that KMS supports, unless you're
+	// using a key that's managed by another account. If you're using a key managed by
+	// another account, then specify the key ARN. For more information, see Key ID
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id) in
+	// the Amazon Web Services KMS Developer Guide.
+	KeyId *string
+
+	// The type of Amazon Web Services KMS key to use for encryption of your Network
+	// Firewall resources.
+	Type EncryptionType
+
+	noSmithyDocumentSerde
+}
+
+// The firewall defines the configuration settings for an Network Firewall
 // firewall. These settings include the firewall policy, the subnets in your VPC to
 // use for the firewall endpoints, and any tags that are attached to the firewall
-// AWS resource. The status of the firewall, for example whether it's ready to
-// filter network traffic, is provided in the corresponding FirewallStatus. You can
-// retrieve both objects by calling DescribeFirewall.
+// Amazon Web Services resource. The status of the firewall, for example whether
+// it's ready to filter network traffic, is provided in the corresponding
+// FirewallStatus. You can retrieve both objects by calling DescribeFirewall.
 type Firewall struct {
 
 	// The unique identifier for the firewall.
@@ -162,6 +188,10 @@ type Firewall struct {
 
 	// A description of the firewall.
 	Description *string
+
+	// A complex type that contains the Amazon Web Services KMS encryption
+	// configuration settings for your firewall.
+	EncryptionConfiguration *EncryptionConfiguration
 
 	// The Amazon Resource Name (ARN) of the firewall.
 	FirewallArn *string
@@ -251,8 +281,8 @@ type FirewallPolicy struct {
 	//
 	// For more
 	// information, see Strict evaluation order
-	// (https://docs.aws.amazon.com/network-firewall/latest/developerguide/suricata-strict-rule-evaluation-order.html)
-	// in the AWS Network Firewall Developer Guide.
+	// (https://docs.aws.amazon.com/network-firewall/latest/developerguide/suricata-rule-evaluation-order.html#suricata-strict-rule-evaluation-order.html)
+	// in the Network Firewall Developer Guide.
 	StatefulDefaultActions []string
 
 	// Additional options governing how Network Firewall handles stateful rules. The
@@ -324,6 +354,10 @@ type FirewallPolicyResponse struct {
 	// A description of the firewall policy.
 	Description *string
 
+	// A complex type that contains the Amazon Web Services KMS encryption
+	// configuration settings for your firewall policy.
+	EncryptionConfiguration *EncryptionConfiguration
+
 	// The current status of the firewall policy. You can retrieve this for a firewall
 	// policy by calling DescribeFirewallPolicy and providing the firewall policy's
 	// name or ARN.
@@ -374,9 +408,9 @@ type FirewallStatus struct {
 	noSmithyDocumentSerde
 }
 
-// The basic rule criteria for AWS Network Firewall to use to inspect packet
-// headers in stateful traffic flow inspection. Traffic flows that match the
-// criteria are a match for the corresponding StatefulRule.
+// The basic rule criteria for Network Firewall to use to inspect packet headers in
+// stateful traffic flow inspection. Traffic flows that match the criteria are a
+// match for the corresponding StatefulRule.
 type Header struct {
 
 	// The destination IP address or address range to inspect for, in CIDR notation. To
@@ -414,7 +448,7 @@ type Header struct {
 	Direction StatefulRuleDirection
 
 	// The protocol to inspect for. To specify all, you can use IP, because all traffic
-	// on AWS and on the internet is IP.
+	// on Amazon Web Services and on the internet is IP.
 	//
 	// This member is required.
 	Protocol StatefulRuleProtocol
@@ -460,7 +494,7 @@ type IPSet struct {
 	noSmithyDocumentSerde
 }
 
-// Defines where AWS Network Firewall sends logs for the firewall for one log type.
+// Defines where Network Firewall sends logs for the firewall for one log type.
 // This is used in LoggingConfiguration. You can send each type of log to an Amazon
 // S3 bucket, a CloudWatch log group, or a Kinesis Data Firehose delivery stream.
 // Network Firewall generates logs for stateful rule groups. You can save alert and
@@ -508,7 +542,7 @@ type LogDestinationConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Defines how AWS Network Firewall performs logging for a Firewall.
+// Defines how Network Firewall performs logging for a Firewall.
 type LoggingConfiguration struct {
 
 	// Defines the logging destinations for the logs for a firewall. Network Firewall
@@ -617,10 +651,9 @@ type PublishMetricAction struct {
 	noSmithyDocumentSerde
 }
 
-// The inspection criteria and action for a single stateless rule. AWS Network
-// Firewall inspects each packet for the specified matching criteria. When a packet
-// matches the criteria, Network Firewall performs the rule's actions on the
-// packet.
+// The inspection criteria and action for a single stateless rule. Network Firewall
+// inspects each packet for the specified matching criteria. When a packet matches
+// the criteria, Network Firewall performs the rule's actions on the packet.
 type RuleDefinition struct {
 
 	// The actions to take on a packet that matches one of the stateless rule
@@ -666,13 +699,13 @@ type RuleDefinition struct {
 
 // The object that defines the rules in a rule group. This, along with
 // RuleGroupResponse, define the rule group. You can retrieve all objects for a
-// rule group by calling DescribeRuleGroup. AWS Network Firewall uses a rule group
-// to inspect and control network traffic. You define stateless rule groups to
-// inspect individual packets and you define stateful rule groups to inspect
-// packets in the context of their traffic flow. To use a rule group, you include
-// it by reference in an Network Firewall firewall policy, then you use the policy
-// in a firewall. You can reference a rule group from more than one firewall
-// policy, and you can use a firewall policy in more than one firewall.
+// rule group by calling DescribeRuleGroup. Network Firewall uses a rule group to
+// inspect and control network traffic. You define stateless rule groups to inspect
+// individual packets and you define stateful rule groups to inspect packets in the
+// context of their traffic flow. To use a rule group, you include it by reference
+// in an Network Firewall firewall policy, then you use the policy in a firewall.
+// You can reference a rule group from more than one firewall policy, and you can
+// use a firewall policy in more than one firewall.
 type RuleGroup struct {
 
 	// The stateful rules or stateless rules for the rule group.
@@ -744,6 +777,10 @@ type RuleGroupResponse struct {
 	// A description of the rule group.
 	Description *string
 
+	// A complex type that contains the Amazon Web Services KMS encryption
+	// configuration settings for your rule group.
+	EncryptionConfiguration *EncryptionConfiguration
+
 	// The number of firewall policies that use this rule group.
 	NumberOfAssociations *int32
 
@@ -812,7 +849,7 @@ type RulesSource struct {
 // traffic from IP addresses outside of the deployment VPC, you set the HOME_NET
 // rule variable to include the CIDR range of the deployment VPC plus the other
 // CIDR ranges. For more information, see RuleVariables in this guide and Stateful
-// domain list rule groups in AWS Network Firewall
+// domain list rule groups in Network Firewall
 // (https://docs.aws.amazon.com/network-firewall/latest/developerguide/stateful-rule-groups-domain-names.html)
 // in the Network Firewall Developer Guide.
 type RulesSourceList struct {
@@ -867,7 +904,7 @@ type StatefulEngineOptions struct {
 	// rule engine as Suricata compatible strings, and Suricata evaluates them based on
 	// certain settings. For more information, see Evaluation order for stateful rules
 	// (https://docs.aws.amazon.com/network-firewall/latest/developerguide/suricata-rule-evaluation-order.html)
-	// in the AWS Network Firewall Developer Guide.
+	// in the Network Firewall Developer Guide.
 	RuleOrder RuleOrder
 
 	noSmithyDocumentSerde
@@ -962,7 +999,7 @@ type StatefulRuleOptions struct {
 	// rule engine as Suricata compatible strings, and Suricata evaluates them based on
 	// certain settings. For more information, see Evaluation order for stateful rules
 	// (https://docs.aws.amazon.com/network-firewall/latest/developerguide/suricata-rule-evaluation-order.html)
-	// in the AWS Network Firewall Developer Guide.
+	// in the Network Firewall Developer Guide.
 	RuleOrder RuleOrder
 
 	noSmithyDocumentSerde
@@ -1034,9 +1071,9 @@ type StatelessRulesAndCustomActions struct {
 }
 
 // The ID for a subnet that you want to associate with the firewall. This is used
-// with CreateFirewall and AssociateSubnets. AWS Network Firewall creates an
-// instance of the associated firewall in each subnet that you specify, to filter
-// traffic in the subnet's Availability Zone.
+// with CreateFirewall and AssociateSubnets. Network Firewall creates an instance
+// of the associated firewall in each subnet that you specify, to filter traffic in
+// the subnet's Availability Zone.
 type SubnetMapping struct {
 
 	// The unique identifier for the subnet.
@@ -1048,7 +1085,7 @@ type SubnetMapping struct {
 }
 
 // The status of the firewall endpoint and firewall policy configuration for a
-// single VPC subnet. For each VPC subnet that you associate with a firewall, AWS
+// single VPC subnet. For each VPC subnet that you associate with a firewall,
 // Network Firewall does the following:
 //
 // * Instantiates a firewall endpoint in the
@@ -1079,11 +1116,11 @@ type SyncState struct {
 	noSmithyDocumentSerde
 }
 
-// A key:value pair associated with an AWS resource. The key:value pair can be
-// anything you define. Typically, the tag key represents a category (such as
-// "environment") and the tag value represents a specific value within that
-// category (such as "test," "development," or "production"). You can add up to 50
-// tags to each AWS resource.
+// A key:value pair associated with an Amazon Web Services resource. The key:value
+// pair can be anything you define. Typically, the tag key represents a category
+// (such as "environment") and the tag value represents a specific value within
+// that category (such as "test," "development," or "production"). You can add up
+// to 50 tags to each Amazon Web Services resource.
 type Tag struct {
 
 	// The part of the key:value pair that defines a tag. You can use a tag key to

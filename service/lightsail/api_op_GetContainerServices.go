@@ -31,8 +31,8 @@ func (c *Client) GetContainerServices(ctx context.Context, params *GetContainerS
 type GetContainerServicesInput struct {
 
 	// The name of the container service for which to return information. When omitted,
-	// the response includes all of your container services in the AWS Region where the
-	// request is made.
+	// the response includes all of your container services in the Amazon Web Services
+	// Region where the request is made.
 	ServiceName *string
 
 	noSmithyDocumentSerde

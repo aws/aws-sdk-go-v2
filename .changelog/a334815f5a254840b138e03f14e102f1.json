@@ -1,0 +1,8 @@
+{
+    "id": "a334815f-5a25-4840-b138-e03f14e102f1",
+    "type": "feature",
+    "description": "SageMaker Inference Recommender now accepts customer KMS key ID for encryption of endpoints and compilation outputs created during inference recommendation.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

@@ -13,7 +13,7 @@ import (
 
 // Sets the Amazon Lightsail resources that can access the specified Lightsail
 // bucket. Lightsail buckets currently support setting access for Lightsail
-// instances in the same AWS Region.
+// instances in the same Amazon Web Services Region.
 func (c *Client) SetResourceAccessForBucket(ctx context.Context, params *SetResourceAccessForBucketInput, optFns ...func(*Options)) (*SetResourceAccessForBucketOutput, error) {
 	if params == nil {
 		params = &SetResourceAccessForBucketInput{}

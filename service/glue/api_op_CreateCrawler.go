@@ -67,6 +67,7 @@ type CreateCrawlerInput struct {
 	// A description of the new crawler.
 	Description *string
 
+	// Specifies AWS Lake Formation configuration settings for the crawler.
 	LakeFormationConfiguration *types.LakeFormationConfiguration
 
 	// Specifies data lineage configuration settings for the crawler.

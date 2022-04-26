@@ -16,10 +16,10 @@ import (
 // the AttachCertificateToDistribution action to use the certificate and its
 // domains with your distribution. Or use the UpdateContainerService action to use
 // the certificate and its domains with your container service. Only certificates
-// created in the us-east-1 AWS Region can be attached to Lightsail distributions.
-// Lightsail distributions are global resources that can reference an origin in any
-// AWS Region, and distribute its content globally. However, all distributions are
-// located in the us-east-1 Region.
+// created in the us-east-1 Amazon Web Services Region can be attached to Lightsail
+// distributions. Lightsail distributions are global resources that can reference
+// an origin in any Amazon Web Services Region, and distribute its content
+// globally. However, all distributions are located in the us-east-1 Region.
 func (c *Client) CreateCertificate(ctx context.Context, params *CreateCertificateInput, optFns ...func(*Options)) (*CreateCertificateOutput, error) {
 	if params == nil {
 		params = &CreateCertificateInput{}

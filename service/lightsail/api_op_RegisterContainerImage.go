@@ -71,8 +71,8 @@ type RegisterContainerImageInput struct {
 
 type RegisterContainerImageOutput struct {
 
-	// Describes a container image that is registered to an Amazon Lightsail container
-	// service.
+	// An object that describes a container image that is registered to a Lightsail
+	// container service
 	ContainerImage *types.ContainerImage
 
 	// Metadata pertaining to the operation's result.
