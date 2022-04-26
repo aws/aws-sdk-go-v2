@@ -5024,6 +5024,9 @@
             "input": {
                 "target": "com.amazonaws.sagemaker#CreateDeviceFleetRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.sagemaker#ResourceInUse"
@@ -5199,6 +5202,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.sagemaker#CreateEdgePackagingJobRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -5951,6 +5957,12 @@
                     "target": "com.amazonaws.sagemaker#RecommendationJobStoppingConditions",
                     "traits": {
                         "smithy.api#documentation": "<p>A set of conditions for stopping a recommendation job.  If any of \n          the conditions are met, the job is automatically stopped.</p>"
+                    }
+                },
+                "OutputConfig": {
+                    "target": "com.amazonaws.sagemaker#RecommendationJobOutputConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides information about the output artifacts and the KMS key \n         to use for Amazon S3 server-side encryption.</p>"
                     }
                 },
                 "Tags": {
@@ -8597,6 +8609,9 @@
             "input": {
                 "target": "com.amazonaws.sagemaker#DeleteAlgorithmInput"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "traits": {
                 "smithy.api#documentation": "<p>Removes the specified algorithm from your account.</p>"
             }
@@ -8618,6 +8633,9 @@
             "input": {
                 "target": "com.amazonaws.sagemaker#DeleteAppRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.sagemaker#ResourceInUse"
@@ -8634,6 +8652,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.sagemaker#DeleteAppImageConfigRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -8792,6 +8813,9 @@
             "input": {
                 "target": "com.amazonaws.sagemaker#DeleteCodeRepositoryInput"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "traits": {
                 "smithy.api#documentation": "<p>Deletes the specified Git repository from your account.</p>"
             }
@@ -8853,6 +8877,9 @@
             "input": {
                 "target": "com.amazonaws.sagemaker#DeleteDataQualityJobDefinitionRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.sagemaker#ResourceNotFound"
@@ -8879,6 +8906,9 @@
             "input": {
                 "target": "com.amazonaws.sagemaker#DeleteDeviceFleetRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.sagemaker#ResourceInUse"
@@ -8904,6 +8934,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.sagemaker#DeleteDomainRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -8940,6 +8973,9 @@
             "input": {
                 "target": "com.amazonaws.sagemaker#DeleteEndpointInput"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "traits": {
                 "smithy.api#documentation": "<p>Deletes an endpoint. Amazon SageMaker frees up all of the resources that were deployed when the\n            endpoint was created. </p>\n        <p>Amazon SageMaker retires any custom KMS key grants associated with the endpoint, meaning you don't\n            need to use the <a href=\"http://docs.aws.amazon.com/kms/latest/APIReference/API_RevokeGrant.html\">RevokeGrant</a> API call.</p>"
             }
@@ -8948,6 +8984,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.sagemaker#DeleteEndpointConfigInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "traits": {
                 "smithy.api#documentation": "<p>Deletes an endpoint configuration. The <code>DeleteEndpointConfig</code> API\n            deletes only the specified configuration. It does not delete endpoints created using the\n            configuration. </p>\n        <p>You must not delete an <code>EndpointConfig</code> in use by an endpoint that is\n            live or while the <code>UpdateEndpoint</code> or <code>CreateEndpoint</code> operations\n            are being performed on the endpoint. If you delete the <code>EndpointConfig</code> of an\n            endpoint that is active or being created or updated you may lose visibility into the\n            instance type the endpoint is using. The endpoint must be deleted in order to stop\n            incurring charges.</p>"
@@ -9021,6 +9060,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.sagemaker#DeleteFeatureGroupRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -9196,6 +9238,9 @@
             "input": {
                 "target": "com.amazonaws.sagemaker#DeleteModelInput"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "traits": {
                 "smithy.api#documentation": "<p>Deletes a model. The <code>DeleteModel</code> API deletes only the model entry that\n            was created in Amazon SageMaker when you called the <code>CreateModel</code> API. It does not\n            delete model artifacts, inference code, or the IAM role that you specified when\n            creating the model. </p>"
             }
@@ -9204,6 +9249,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.sagemaker#DeleteModelBiasJobDefinitionRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -9230,6 +9278,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.sagemaker#DeleteModelExplainabilityJobDefinitionRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -9269,6 +9320,9 @@
             "input": {
                 "target": "com.amazonaws.sagemaker#DeleteModelPackageInput"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.sagemaker#ConflictException"
@@ -9282,6 +9336,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.sagemaker#DeleteModelPackageGroupInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -9308,6 +9365,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.sagemaker#DeleteModelPackageGroupPolicyInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "traits": {
                 "smithy.api#documentation": "<p>Deletes a model group resource policy.</p>"
@@ -9342,6 +9402,9 @@
             "input": {
                 "target": "com.amazonaws.sagemaker#DeleteModelQualityJobDefinitionRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.sagemaker#ResourceNotFound"
@@ -9367,6 +9430,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.sagemaker#DeleteMonitoringScheduleRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -9394,6 +9460,9 @@
             "input": {
                 "target": "com.amazonaws.sagemaker#DeleteNotebookInstanceInput"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "traits": {
                 "smithy.api#documentation": "<p> Deletes an Amazon SageMaker notebook instance. Before you can delete a notebook instance, you\n            must call the <code>StopNotebookInstance</code> API. </p>\n        <important>\n            <p>When you delete a notebook instance, you lose all of your data. Amazon SageMaker removes\n                the ML compute instance, and deletes the ML storage volume and the network interface\n                associated with the notebook instance. </p>\n        </important>"
             }
@@ -9414,6 +9483,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.sagemaker#DeleteNotebookInstanceLifecycleConfigInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "traits": {
                 "smithy.api#documentation": "<p>Deletes a notebook instance lifecycle configuration.</p>"
@@ -9484,6 +9556,9 @@
             "input": {
                 "target": "com.amazonaws.sagemaker#DeleteProjectInput"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.sagemaker#ConflictException"
@@ -9509,6 +9584,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.sagemaker#DeleteStudioLifecycleConfigRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -9653,6 +9731,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.sagemaker#DeleteUserProfileRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -9811,6 +9892,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.sagemaker#DeregisterDevicesRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "traits": {
                 "smithy.api#documentation": "<p>Deregisters the specified devices. After you deregister a device, you will need to re-register the devices.</p>"
@@ -21445,6 +21529,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "ActionSummaries",
                     "pageSize": "MaxResults"
                 }
             }
@@ -21532,6 +21617,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "AlgorithmSummaryList",
                     "pageSize": "MaxResults"
                 }
             }
@@ -21614,6 +21700,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "AppImageConfigs",
                     "pageSize": "MaxResults"
                 }
             }
@@ -21707,6 +21794,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Apps",
                     "pageSize": "MaxResults"
                 }
             }
@@ -21787,6 +21875,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "ArtifactSummaries",
                     "pageSize": "MaxResults"
                 }
             }
@@ -21879,6 +21968,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "AssociationSummaries",
                     "pageSize": "MaxResults"
                 }
             }
@@ -21984,6 +22074,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "AutoMLJobSummaries",
                     "pageSize": "MaxResults"
                 }
             }
@@ -22090,6 +22181,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Candidates",
                     "pageSize": "MaxResults"
                 }
             }
@@ -22174,6 +22266,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "CodeRepositorySummaryList",
                     "pageSize": "MaxResults"
                 }
             }
@@ -22268,6 +22361,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "CompilationJobSummaries",
                     "pageSize": "MaxResults"
                 }
             }
@@ -22393,6 +22487,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "ContextSummaries",
                     "pageSize": "MaxResults"
                 }
             }
@@ -22480,6 +22575,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "JobDefinitionSummaries",
                     "pageSize": "MaxResults"
                 }
             }
@@ -22568,6 +22664,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "DeviceFleetSummaries",
                     "pageSize": "MaxResults"
                 }
             }
@@ -22682,6 +22779,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "DeviceSummaries",
                     "pageSize": "MaxResults"
                 }
             }
@@ -22753,6 +22851,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Domains",
                     "pageSize": "MaxResults"
                 }
             }
@@ -22804,6 +22903,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "EdgePackagingJobSummaries",
                     "pageSize": "MaxResults"
                 }
             }
@@ -22938,6 +23038,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "EndpointConfigs",
                     "pageSize": "MaxResults"
                 }
             }
@@ -23020,6 +23121,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Endpoints",
                     "pageSize": "MaxResults"
                 }
             }
@@ -23120,6 +23222,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "ExperimentSummaries",
                     "pageSize": "MaxResults"
                 }
             }
@@ -23285,6 +23388,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "FlowDefinitionSummaries",
                     "pageSize": "MaxResults"
                 }
             }
@@ -23356,6 +23460,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "HumanTaskUiSummaries",
                     "pageSize": "MaxResults"
                 }
             }
@@ -23427,6 +23532,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "HyperParameterTuningJobSummaries",
                     "pageSize": "MaxResults"
                 }
             }
@@ -23533,6 +23639,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "ImageVersions",
                     "pageSize": "MaxResults"
                 }
             }
@@ -23627,6 +23734,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Images",
                     "pageSize": "MaxResults"
                 }
             }
@@ -23720,6 +23828,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "InferenceRecommendationsJobs",
                     "pageSize": "MaxResults"
                 }
             }
@@ -23839,6 +23948,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "LabelingJobSummaryList",
                     "pageSize": "MaxResults"
                 }
             }
@@ -23861,6 +23971,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "LabelingJobSummaryList",
                     "pageSize": "MaxResults"
                 }
             }
@@ -24049,6 +24160,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "LineageGroupSummaries",
                     "pageSize": "MaxResults"
                 }
             }
@@ -24132,6 +24244,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "JobDefinitionSummaries",
                     "pageSize": "MaxResults"
                 }
             }
@@ -24220,6 +24333,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "JobDefinitionSummaries",
                     "pageSize": "MaxResults"
                 }
             }
@@ -24308,6 +24422,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "ModelMetadataSummaries",
                     "pageSize": "MaxResults"
                 }
             }
@@ -24366,6 +24481,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "ModelPackageGroupSummaryList",
                     "pageSize": "MaxResults"
                 }
             }
@@ -24448,6 +24564,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "ModelPackageSummaryList",
                     "pageSize": "MaxResults"
                 }
             }
@@ -24548,6 +24665,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "JobDefinitionSummaries",
                     "pageSize": "MaxResults"
                 }
             }
@@ -24636,6 +24754,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Models",
                     "pageSize": "MaxResults"
                 }
             }
@@ -24718,6 +24837,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "MonitoringExecutionSummaries",
                     "pageSize": "MaxResults"
                 }
             }
@@ -24848,6 +24968,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "MonitoringScheduleSummaries",
                     "pageSize": "MaxResults"
                 }
             }
@@ -24966,6 +25087,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "NotebookInstanceLifecycleConfigs",
                     "pageSize": "MaxResults"
                 }
             }
@@ -25059,6 +25181,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "NotebookInstances",
                     "pageSize": "MaxResults"
                 }
             }
@@ -25181,6 +25304,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "PipelineExecutionSteps",
                     "pageSize": "MaxResults"
                 }
             }
@@ -25249,6 +25373,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "PipelineExecutionSummaries",
                     "pageSize": "MaxResults"
                 }
             }
@@ -25336,6 +25461,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "PipelineParameters",
                     "pageSize": "MaxResults"
                 }
             }
@@ -25394,6 +25520,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "PipelineSummaries",
                     "pageSize": "MaxResults"
                 }
             }
@@ -25475,6 +25602,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "ProcessingJobSummaries",
                     "pageSize": "MaxResults"
                 }
             }
@@ -25663,6 +25791,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "StudioLifecycleConfigs",
                     "pageSize": "MaxResults"
                 }
             }
@@ -25762,6 +25891,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "SubscribedWorkteams",
                     "pageSize": "MaxResults"
                 }
             }
@@ -25821,6 +25951,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Tags",
                     "pageSize": "MaxResults"
                 }
             }
@@ -25888,6 +26019,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "TrainingJobSummaries",
                     "pageSize": "MaxResults"
                 }
             }
@@ -25910,6 +26042,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "TrainingJobSummaries",
                     "pageSize": "MaxResults"
                 }
             }
@@ -26071,6 +26204,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "TransformJobSummaries",
                     "pageSize": "MaxResults"
                 }
             }
@@ -26183,6 +26317,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "TrialComponentSummaries",
                     "pageSize": "MaxResults"
                 }
             }
@@ -26281,6 +26416,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "TrialSummaries",
                     "pageSize": "MaxResults"
                 }
             }
@@ -26368,6 +26504,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "UserProfiles",
                     "pageSize": "MaxResults"
                 }
             }
@@ -26443,6 +26580,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Workforces",
                     "pageSize": "MaxResults"
                 }
             }
@@ -26529,6 +26667,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Workteams",
                     "pageSize": "MaxResults"
                 }
             }
@@ -33708,6 +33847,20 @@
                 "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:inference-recommendations-job/"
             }
         },
+        "com.amazonaws.sagemaker#RecommendationJobCompiledOutputConfig": {
+            "type": "structure",
+            "members": {
+                "S3OutputUri": {
+                    "target": "com.amazonaws.sagemaker#S3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the Amazon S3 bucket where you want SageMaker to store the \n         compiled model artifacts.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information about the output configuration for the compiled \n         model.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#RecommendationJobDescription": {
             "type": "string",
             "traits": {
@@ -33750,6 +33903,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the endpoint configuration to use for a job.</p>"
                     }
+                },
+                "VolumeKmsKeyId": {
+                    "target": "com.amazonaws.sagemaker#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a Amazon Web Services Key Management Service (Amazon Web Services KMS) key \n         that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance that hosts the endpoint. \n         This key will be passed to SageMaker Hosting for endpoint creation. </p>\n      \n         <p>The SageMaker execution role must have <code>kms:CreateGrant</code> permission in order to encrypt data on the storage \n         volume of the endpoints created for inference recommendation. The inference recommendation job will fail \n         asynchronously during endpoint configuration creation if the role passed does not have \n         <code>kms:CreateGrant</code> permission.</p>\n      \n         <p>The <code>KmsKeyId</code> can be any of the following formats:</p>\n         <ul>\n            <li>\n               <p>// KMS Key ID</p>\n               <p>\n                  <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n               </p>\n            </li>\n            <li>\n               <p>// Amazon Resource Name (ARN) of a KMS Key</p>\n               <p>\n                  <code>\"arn:aws:kms:<region>:<account>:key/<key-id-12ab-34cd-56ef-1234567890ab>\"</code>\n               </p>\n            </li>\n            <li>\n               <p>// KMS Key Alias</p>\n               <p>\n                  <code>\"alias/ExampleAlias\"</code>\n               </p>\n            </li>\n            <li>\n               <p>// Amazon Resource Name (ARN) of a KMS Key Alias</p>\n               <p>\n                  <code>\"arn:aws:kms:<region>:<account>:alias/<ExampleAlias>\"</code>\n               </p>\n            </li>\n         </ul>\n         <p>For more information about key identifiers, see \n         <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-id\">Key identifiers (KeyID)</a> in the \n         Amazon Web Services Key Management Service (Amazon Web Services KMS) documentation.</p>"
+                    }
                 }
             },
             "traits": {
@@ -33764,6 +33923,26 @@
                     "max": 64
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}$"
+            }
+        },
+        "com.amazonaws.sagemaker#RecommendationJobOutputConfig": {
+            "type": "structure",
+            "members": {
+                "KmsKeyId": {
+                    "target": "com.amazonaws.sagemaker#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a Amazon Web Services Key Management Service (Amazon Web Services KMS) key \n         that Amazon SageMaker uses to encrypt your output artifacts with Amazon S3 server-side encryption. \n         The SageMaker execution role must have <code>kms:GenerateDataKey</code> permission.</p>\n      \n         <p>The <code>KmsKeyId</code> can be any of the following formats:</p>\n         <ul>\n            <li>\n               <p>// KMS Key ID</p>\n               <p>\n                  <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n               </p>\n            </li>\n            <li>\n               <p>// Amazon Resource Name (ARN) of a KMS Key</p>\n               <p>\n                  <code>\"arn:aws:kms:<region>:<account>:key/<key-id-12ab-34cd-56ef-1234567890ab>\"</code>\n               </p>\n            </li>\n            <li>\n               <p>// KMS Key Alias</p>\n               <p>\n                  <code>\"alias/ExampleAlias\"</code>\n               </p>\n            </li>\n            <li>\n               <p>// Amazon Resource Name (ARN) of a KMS Key Alias</p>\n               <p>\n                  <code>\"arn:aws:kms:<region>:<account>:alias/<ExampleAlias>\"</code>\n               </p>\n            </li>\n         </ul>\n         <p>For more information about key identifiers, see \n         <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-id\">Key identifiers (KeyID)</a> in the \n         Amazon Web Services Key Management Service (Amazon Web Services KMS) documentation.</p>"
+                    }
+                },
+                "CompiledOutputConfig": {
+                    "target": "com.amazonaws.sagemaker#RecommendationJobCompiledOutputConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides information about the output configuration for the compiled \n         model.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information about the output configuration for the compiled model.</p>"
             }
         },
         "com.amazonaws.sagemaker#RecommendationJobResourceLimit": {
@@ -34056,6 +34235,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.sagemaker#RegisterDevicesRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -35658,6 +35840,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Results",
                     "pageSize": "MaxResults"
                 }
             }
@@ -36107,7 +36290,7 @@
                 "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
-                    "max": 50
+                    "max": 200
                 }
             }
         },
@@ -36582,6 +36765,9 @@
             "input": {
                 "target": "com.amazonaws.sagemaker#StartMonitoringScheduleRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.sagemaker#ResourceNotFound"
@@ -36607,6 +36793,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.sagemaker#StartNotebookInstanceInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -36783,6 +36972,9 @@
             "input": {
                 "target": "com.amazonaws.sagemaker#StopAutoMLJobRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.sagemaker#ResourceNotFound"
@@ -36808,6 +37000,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.sagemaker#StopCompilationJobRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -36835,6 +37030,9 @@
             "input": {
                 "target": "com.amazonaws.sagemaker#StopEdgePackagingJobRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "traits": {
                 "smithy.api#documentation": "<p>Request to stop an edge packaging job.</p>"
             }
@@ -36855,6 +37053,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.sagemaker#StopHyperParameterTuningJobRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -36882,6 +37083,9 @@
             "input": {
                 "target": "com.amazonaws.sagemaker#StopInferenceRecommendationsJobRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.sagemaker#ResourceNotFound"
@@ -36907,6 +37111,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.sagemaker#StopLabelingJobRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -36934,6 +37141,9 @@
             "input": {
                 "target": "com.amazonaws.sagemaker#StopMonitoringScheduleRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.sagemaker#ResourceNotFound"
@@ -36959,6 +37169,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.sagemaker#StopNotebookInstanceInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "traits": {
                 "smithy.api#documentation": "<p>Terminates the ML compute instance. Before terminating the instance, Amazon SageMaker\n            disconnects the ML storage volume from it. Amazon SageMaker preserves the ML storage volume. Amazon SageMaker\n            stops charging you for the ML compute instance when you call\n                <code>StopNotebookInstance</code>.</p>\n        <p>To access data on the ML storage volume for a notebook instance that has been\n            terminated, call the <code>StartNotebookInstance</code> API.\n                <code>StartNotebookInstance</code> launches another ML compute instance, configures\n            it, and attaches the preserved ML storage volume so you can continue your work.\n        </p>"
@@ -37029,6 +37242,9 @@
             "input": {
                 "target": "com.amazonaws.sagemaker#StopProcessingJobRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.sagemaker#ResourceNotFound"
@@ -37055,6 +37271,9 @@
             "input": {
                 "target": "com.amazonaws.sagemaker#StopTrainingJobRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.sagemaker#ResourceNotFound"
@@ -37080,6 +37299,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.sagemaker#StopTransformJobRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -40496,6 +40718,9 @@
             "input": {
                 "target": "com.amazonaws.sagemaker#UpdateDeviceFleetRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.sagemaker#ResourceInUse"
@@ -40546,6 +40771,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.sagemaker#UpdateDevicesRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "traits": {
                 "smithy.api#documentation": "<p>Updates one or more devices in a fleet.</p>"

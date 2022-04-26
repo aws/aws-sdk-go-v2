@@ -223,6 +223,9 @@
             "input": {
                 "target": "com.amazonaws.cloudfront#AssociateAliasRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.cloudfront#AccessDenied"
@@ -3364,6 +3367,9 @@
             "input": {
                 "target": "com.amazonaws.cloudfront#DeleteCachePolicyRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.cloudfront#AccessDenied"
@@ -3417,6 +3423,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.cloudfront#DeleteCloudFrontOriginAccessIdentityRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -3472,6 +3481,9 @@
             "input": {
                 "target": "com.amazonaws.cloudfront#DeleteDistributionRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.cloudfront#AccessDenied"
@@ -3526,6 +3538,9 @@
             "input": {
                 "target": "com.amazonaws.cloudfront#DeleteFieldLevelEncryptionConfigRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.cloudfront#AccessDenied"
@@ -3576,6 +3591,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.cloudfront#DeleteFieldLevelEncryptionProfileRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -3628,6 +3646,9 @@
             "input": {
                 "target": "com.amazonaws.cloudfront#DeleteFunctionRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.cloudfront#FunctionInUse"
@@ -3679,6 +3700,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.cloudfront#DeleteKeyGroupRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -3773,6 +3797,9 @@
             "input": {
                 "target": "com.amazonaws.cloudfront#DeleteOriginRequestPolicyRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.cloudfront#AccessDenied"
@@ -3827,6 +3854,9 @@
             "input": {
                 "target": "com.amazonaws.cloudfront#DeletePublicKeyRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.cloudfront#AccessDenied"
@@ -3878,6 +3908,9 @@
             "input": {
                 "target": "com.amazonaws.cloudfront#DeleteRealtimeLogConfigRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.cloudfront#AccessDenied"
@@ -3922,6 +3955,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.cloudfront#DeleteResponseHeadersPolicyRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -3976,6 +4012,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.cloudfront#DeleteStreamingDistributionRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -11047,6 +11086,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A configuration for a set of custom HTTP response headers.</p>"
                     }
+                },
+                "ServerTimingHeadersConfig": {
+                    "target": "com.amazonaws.cloudfront#ResponseHeadersPolicyServerTimingHeadersConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A configuration for enabling the <code>Server-Timing</code> header in HTTP responses\n\t\t\tsent from CloudFront.</p>"
+                    }
                 }
             },
             "traits": {
@@ -11339,6 +11384,27 @@
                 "smithy.api#documentation": "<p>A configuration for a set of security-related HTTP response headers. CloudFront adds these headers\n\t\t\tto HTTP responses that it sends for requests that match a cache behavior associated with\n\t\t\tthis response headers policy.</p>"
             }
         },
+        "com.amazonaws.cloudfront#ResponseHeadersPolicyServerTimingHeadersConfig": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.cloudfront#boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Boolean that determines whether CloudFront adds the <code>Server-Timing</code> header to HTTP\n\t\t\tresponses that it sends in response to requests that match a cache behavior that's\n\t\t\tassociated with this response headers policy.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SamplingRate": {
+                    "target": "com.amazonaws.cloudfront#SamplingRate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A number 0–100 (inclusive) that specifies the percentage of responses that you want CloudFront to\n\t\t\tadd the <code>Server-Timing</code> header to. When you set the sampling rate to 100,\n\t\t\tCloudFront adds the <code>Server-Timing</code> header to the HTTP response for every request\n\t\t\tthat matches the cache behavior that this response headers policy is attached to. When\n\t\t\tyou set it to 50, CloudFront adds the header to 50% of the responses for requests that match\n\t\t\tthe cache behavior. You can set the sampling rate to any number 0–100 with up to four\n\t\t\tdecimal places.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A configuration for enabling the <code>Server-Timing</code> header in HTTP responses sent\n\t\t\tfrom CloudFront. CloudFront adds this header to HTTP responses that it sends in response to requests\n\t\t\tthat match a cache behavior that's associated with this response headers policy.</p>\n\t\t       <p>You can use the <code>Server-Timing</code> header to view metrics that can help you gain\n\t\t\tinsights about the behavior and performance of CloudFront. For example, you can see which\n\t\t\tcache layer served a cache hit, or the first byte latency from the origin when there was\n\t\t\ta cache miss. You can use the metrics in the <code>Server-Timing</code> header to\n\t\t\ttroubleshoot issues or test the efficiency of your CloudFront configuration. For more\n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/understanding-response-headers-policies.html#server-timing-header\">Server-Timing header</a> in the\n\t\t\t<i>Amazon CloudFront Developer Guide</i>.</p>"
+            }
+        },
         "com.amazonaws.cloudfront#ResponseHeadersPolicyStrictTransportSecurity": {
             "type": "structure",
             "members": {
@@ -11522,6 +11588,16 @@
                         "name": "static_ip"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.cloudfront#SamplingRate": {
+            "type": "double",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 0.0,
+                    "max": 100.0
+                }
             }
         },
         "com.amazonaws.cloudfront#Signer": {
@@ -12026,6 +12102,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.cloudfront#TagResourceRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -12949,6 +13028,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.cloudfront#UntagResourceRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {

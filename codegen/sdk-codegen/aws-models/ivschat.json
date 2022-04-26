@@ -1,0 +1,1626 @@
+{
+    "smithy": "1.0",
+    "shapes": {
+        "com.amazonaws.ivschat#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.ivschat#ErrorMessage",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.ivschat#AmazonInteractiveVideoServiceChat": {
+            "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "ivschat",
+                    "arnNamespace": "ivschat",
+                    "cloudFormationName": "IVSChat",
+                    "cloudTrailEventSource": "REPLACE_WITH_EVENT_SOURCE",
+                    "endpointPrefix": "ivschat"
+                },
+                "aws.auth#sigv4": {
+                    "name": "ivschat"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#cors": {
+                    "additionalAllowedHeaders": [
+                        "amz-sdk-invocation-id",
+                        "amz-sdk-request",
+                        "X-Api-Key",
+                        "X-Amz-Content-Sha256",
+                        "Content-Type",
+                        "X-Amz-User-Agent"
+                    ],
+                    "additionalExposedHeaders": [
+                        "date",
+                        "x-amz-apigw-id",
+                        "x-amzn-trace-id",
+                        "x-amzn-errortype",
+                        "x-amzn-requestid",
+                        "x-amzn-errormessage"
+                    ]
+                },
+                "smithy.api#documentation": "<p>\n            <b>Introduction</b>\n         </p>\n         <p>The Amazon IVS Chat control-plane API enables you to create and manage Amazon IVS Chat\n      resources. You also need to integrate with the <a href=\"https://docs.aws.amazon.com/ivs/latest/chatmsgapireference/chat-messaging-api.html\"> Amazon IVS Chat Messaging\n        API</a>, to enable users to interact with chat rooms in real time.</p>\n         <p>The API is an AWS regional service. For a list of supported regions and Amazon IVS Chat\n      HTTPS service endpoints, see the Amazon IVS Chat information on the <a href=\"https://docs.aws.amazon.com/general/latest/gr/ivs.html\">Amazon IVS page</a> in the\n        <i>AWS General Reference</i>. </p>\n         <p>\n            <b>Notes on terminology:</b>\n         </p>\n         <ul>\n            <li>\n               <p>You create service applications using the Amazon IVS Chat API. We refer to these as\n            <i>applications</i>.</p>\n            </li>\n            <li>\n               <p>You create front-end client applications (browser and Android/iOS apps) using the\n          Amazon IVS Chat Messaging API. We refer to these as <i>clients</i>. </p>\n            </li>\n         </ul>\n\n         <p>\n            <b>Resources</b>\n         </p>\n         <p>The following resource is part of Amazon IVS Chat:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Room</b> — The central Amazon IVS Chat resource through\n          which clients connect to and exchange chat messages. See the Room endpoints for more\n          information.</p>\n            </li>\n         </ul>\n\n         <p>\n            <b>API Access Security</b>\n         </p>\n         <p>Your Amazon IVS Chat applications (service applications and clients) must be authenticated\n      and authorized to access Amazon IVS Chat resources. Note the differences between these\n      concepts:</p>\n         <ul>\n            <li>\n               <p>\n                  <i>Authentication</i> is about verifying identity. Requests to the\n          Amazon IVS Chat API must be signed to verify your identity.</p>\n            </li>\n            <li>\n               <p>\n                  <i>Authorization</i> is about granting permissions. Your IAM roles need\n          to have permissions for Amazon IVS Chat API requests.</p>\n            </li>\n         </ul>\n         <p>Users (viewers) connect to a room using secure access tokens that you create using the\n        <a>CreateChatToken</a> endpoint through the AWS SDK. You call CreateChatToken for\n      every user’s chat session, passing identity and authorization information about the\n      user.</p>\n         <p>\n            <b>Signing API Requests</b>\n         </p>\n         <p>HTTP API requests must be signed with an AWS SigV4 signature using your AWS security\n      credentials. The AWS Command Line Interface (CLI) and the AWS SDKs take care of signing the\n      underlying API calls for you. However, if your application calls the Amazon IVS Chat HTTP API\n      directly, it’s your responsibility to sign the requests.</p>\n\n\n\n\n         <p>You generate a signature using valid AWS credentials for an IAM role that has permission\n      to perform the requested action. For example, DeleteMessage requests must be made using an IAM\n      role that has the <code>ivschat:DeleteMessage</code> permission.</p>\n         <p>For more information:</p>\n         <ul>\n            <li>\n               <p>Authentication and generating signatures — See <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html\">Authenticating Requests\n              (Amazon Web Services Signature Version 4)</a> in the <i>Amazon Web Services\n            General Reference</i>.</p>\n            </li>\n            <li>\n               <p>Managing Amazon IVS permissions — See <a href=\"https://docs.aws.amazon.com/ivs/latest/userguide/security-iam.html\">Identity and Access Management</a> on\n          the Security page of the <i>Amazon IVS User Guide</i>.</p>\n            </li>\n         </ul>\n\n         <p>\n            <b>Messaging Endpoints</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>DeleteMessage</a> — Sends an event to a specific room which\n          directs clients to delete a specific message; that is, unrender it from view and delete it\n          from the client’s chat history. This event’s <code>EventName</code> is\n          <code>aws:DELETE_MESSAGE</code>. This replicates the <a href=\"https://docs.aws.amazon.com/ivs/latest/chatmsgapireference/actions-deletemessage-publish.html\"> DeleteMessage</a> WebSocket operation\n          in the Amazon IVS Chat Messaging API.</p>\n            </li>\n            <li>\n               <p>\n                  <a>DisconnectUser</a> — Disconnects all connections using a specified\n          user ID from a room. This replicates the <a href=\"https://docs.aws.amazon.com/ivs/latest/chatmsgapireference/actions-disconnectuser-publish.html\"> DisconnectUser</a> WebSocket operation\n          in the Amazon IVS Chat Messaging API.</p>\n            </li>\n            <li>\n               <p>\n                  <a>SendEvent</a> — Sends an event to a room. Use this within your\n          application’s business logic to send events to clients of a room; e.g., to notify clients\n          to change the way the chat UI is rendered.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Chat Token Endpoint</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateChatToken</a> — Creates an encrypted token that is used to\n          establish an individual WebSocket connection to a room. The token is valid for one minute,\n          and a connection (session) established with the token is valid for the specified\n          duration.</p>\n            </li>\n         </ul>\n\n\n         <p>\n            <b>Room Endpoints</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateRoom</a> — Creates a room that allows clients to connect and\n          pass messages.</p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteRoom</a> — Deletes the specified room.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetRoom</a> — Gets the specified room.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListRooms</a> — Gets summary information about all your rooms in\n          the AWS region where the API request is processed. </p>\n            </li>\n            <li>\n               <p>\n                  <a>UpdateRoom</a> — Updates a room’s configuration.</p>\n            </li>\n         </ul>\n\n         <p>\n            <b>Tags Endpoints</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>ListTagsForResource</a> — Gets information about AWS tags for the\n          specified ARN.</p>\n            </li>\n            <li>\n               <p>\n                  <a>TagResource</a> — Adds or updates tags for the AWS resource with\n          the specified ARN.</p>\n            </li>\n            <li>\n               <p>\n                  <a>UntagResource</a> — Removes tags from the resource with the\n          specified ARN.</p>\n            </li>\n         </ul>\n\n\n         <p>All the above are HTTP operations. There is a separate <i>messaging</i> API\n      for managing Chat resources; see the <a href=\"https://docs.aws.amazon.com/ivs/latest/chatmsgapireference/chat-messaging-api.html\"> Amazon IVS Chat Messaging API\n        Reference</a>.</p>",
+                "smithy.api#title": "Amazon Interactive Video Service Chat"
+            },
+            "version": "2020-07-14",
+            "operations": [
+                {
+                    "target": "com.amazonaws.ivschat#CreateChatToken"
+                },
+                {
+                    "target": "com.amazonaws.ivschat#CreateRoom"
+                },
+                {
+                    "target": "com.amazonaws.ivschat#DeleteMessage"
+                },
+                {
+                    "target": "com.amazonaws.ivschat#DeleteRoom"
+                },
+                {
+                    "target": "com.amazonaws.ivschat#DisconnectUser"
+                },
+                {
+                    "target": "com.amazonaws.ivschat#GetRoom"
+                },
+                {
+                    "target": "com.amazonaws.ivschat#ListRooms"
+                },
+                {
+                    "target": "com.amazonaws.ivschat#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.ivschat#SendEvent"
+                },
+                {
+                    "target": "com.amazonaws.ivschat#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.ivschat#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.ivschat#UpdateRoom"
+                }
+            ]
+        },
+        "com.amazonaws.ivschat#ChatToken": {
+            "type": "string"
+        },
+        "com.amazonaws.ivschat#ChatTokenAttributes": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.ivschat#String"
+            },
+            "value": {
+                "target": "com.amazonaws.ivschat#String"
+            }
+        },
+        "com.amazonaws.ivschat#ChatTokenCapabilities": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ivschat#ChatTokenCapability"
+            }
+        },
+        "com.amazonaws.ivschat#ChatTokenCapability": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SEND_MESSAGE",
+                        "name": "SEND_MESSAGE"
+                    },
+                    {
+                        "value": "DISCONNECT_USER",
+                        "name": "DISCONNECT_USER"
+                    },
+                    {
+                        "value": "DELETE_MESSAGE",
+                        "name": "DELETE_MESSAGE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ivschat#ConflictException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.ivschat#ErrorMessage",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceId": {
+                    "target": "com.amazonaws.ivschat#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceType": {
+                    "target": "com.amazonaws.ivschat#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.ivschat#CreateChatToken": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ivschat#CreateChatTokenRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ivschat#CreateChatTokenResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ivschat#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ivschat#PendingVerification"
+                },
+                {
+                    "target": "com.amazonaws.ivschat#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ivschat#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an encrypted token that is used to establish an individual WebSocket connection\n         to a room. The token is valid for one minute, and a connection (session) established with\n         the token is valid for the specified duration.</p>\n         <p>Encryption keys are owned by Amazon IVS Chat and never used directly by your\n         application.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/CreateChatToken",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.ivschat#CreateChatTokenRequest": {
+            "type": "structure",
+            "members": {
+                "roomIdentifier": {
+                    "target": "com.amazonaws.ivschat#RoomIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifier of the room that the client is trying to access. Currently this must be an\n         ARN. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "userId": {
+                    "target": "com.amazonaws.ivschat#UserID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Application-provided ID that uniquely identifies the user associated with this token.\n         This can be any UTF-8 encoded text.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "capabilities": {
+                    "target": "com.amazonaws.ivschat#ChatTokenCapabilities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Set of capabilities that the user is allowed to perform in the room. Default: None (the\n         capability to view messages is implicitly included in all requests).</p>"
+                    }
+                },
+                "sessionDurationInMinutes": {
+                    "target": "com.amazonaws.ivschat#SessionDurationInMinutes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Session duration (in minutes), after which the session expires. Default: 60 (1\n         hour).</p>"
+                    }
+                },
+                "attributes": {
+                    "target": "com.amazonaws.ivschat#ChatTokenAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Application-provided attributes to encode into the token and attach to a chat session.\n         Map keys and values can contain UTF-8 encoded text. The maximum length of this field is 1\n         KB total.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ivschat#CreateChatTokenResponse": {
+            "type": "structure",
+            "members": {
+                "token": {
+                    "target": "com.amazonaws.ivschat#ChatToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The issued client token, encrypted.</p>"
+                    }
+                },
+                "tokenExpirationTime": {
+                    "target": "com.amazonaws.ivschat#Time",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Time after which the token is no longer valid and cannot be used to connect to a room.\n         This is an ISO 8601 timestamp; <i>note that this is returned as a\n         string</i>.</p>"
+                    }
+                },
+                "sessionExpirationTime": {
+                    "target": "com.amazonaws.ivschat#Time",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Time after which an end user's session is no longer valid. This is an ISO 8601\n         timestamp; <i>note that this is returned as a string</i>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ivschat#CreateRoom": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ivschat#CreateRoomRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ivschat#CreateRoomResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ivschat#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ivschat#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.ivschat#PendingVerification"
+                },
+                {
+                    "target": "com.amazonaws.ivschat#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ivschat#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.ivschat#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a room that allows clients to connect and pass messages.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/CreateRoom",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.ivschat#CreateRoomRequest": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.ivschat#RoomName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Room name. The value does not need to be unique.</p>"
+                    }
+                },
+                "maximumMessageRatePerSecond": {
+                    "target": "com.amazonaws.ivschat#RoomMaxMessageRatePerSecond",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum number of messages per second that a client can send to the room. Default:\n         10.</p>"
+                    }
+                },
+                "maximumMessageLength": {
+                    "target": "com.amazonaws.ivschat#RoomMaxMessageLength",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum number of characters in a single message. Messages are expected to be UTF-8\n         encoded and this limit applies specifically to rune/code-point count, not number of bytes.\n         Default: 500.</p>"
+                    }
+                },
+                "messageReviewHandler": {
+                    "target": "com.amazonaws.ivschat#MessageReviewHandler",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration information for optional review of messages.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.ivschat#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags to attach to the resource. Array of maps, each of the form <code>string:string\n            (key:value)</code>. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ivschat#CreateRoomResponse": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.ivschat#RoomArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Room ARN, assigned by the system.</p>"
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.ivschat#RoomID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Room ID, generated by the system. This is a relative identifier, the part of the ARN\n         that uniquely identifies the room.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.ivschat#RoomName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Room name, from the request (if specified).</p>"
+                    }
+                },
+                "createTime": {
+                    "target": "com.amazonaws.ivschat#Time",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Time when the room was created. This is an ISO 8601 timestamp; <i>note that this\n            is returned as a string</i>.</p>"
+                    }
+                },
+                "updateTime": {
+                    "target": "com.amazonaws.ivschat#Time",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Time of the room’s last update. This is an ISO 8601 timestamp; <i>note that this\n            is returned as a string</i>.</p>"
+                    }
+                },
+                "maximumMessageRatePerSecond": {
+                    "target": "com.amazonaws.ivschat#RoomMaxMessageRatePerSecond",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum number of messages per second that a client can send to the room, from the\n         request.</p>"
+                    }
+                },
+                "maximumMessageLength": {
+                    "target": "com.amazonaws.ivschat#RoomMaxMessageLength",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum number of characters in a single message, from the request.</p>"
+                    }
+                },
+                "messageReviewHandler": {
+                    "target": "com.amazonaws.ivschat#MessageReviewHandler",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration information for optional review of messages.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.ivschat#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags attached to the resource, from the request.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ivschat#DeleteMessage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ivschat#DeleteMessageRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ivschat#DeleteMessageResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ivschat#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ivschat#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ivschat#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ivschat#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Sends an event to a specific room which directs clients to delete a specific message;\n         that is, unrender it from view and delete it from the client’s chat history. This event’s\n         <code>EventName</code> is <code>aws:DELETE_MESSAGE</code>. This replicates the <a href=\"https://docs.aws.amazon.com/ivs/latest/chatmsgapireference/actions-deletemessage-publish.html\"> DeleteMessage</a> WebSocket operation\n         in the Amazon IVS Chat Messaging API.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/DeleteMessage",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.ivschat#DeleteMessageRequest": {
+            "type": "structure",
+            "members": {
+                "roomIdentifier": {
+                    "target": "com.amazonaws.ivschat#RoomIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifier of the room where the message should be deleted. Currently this must be an\n         ARN. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.ivschat#MessageID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ID of the message to be deleted. This is the <code>Id</code> field in the received\n         message (see <a href=\"https://docs.aws.amazon.com/ivs/latest/chatmsgapireference/actions-message-subscribe.html\"> Message\n            (Subscribe)</a> in the Chat Messaging API).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "reason": {
+                    "target": "com.amazonaws.ivschat#Reason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reason for deleting the message.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ivschat#DeleteMessageResponse": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.ivschat#ID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Operation identifier, generated by Amazon IVS Chat.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ivschat#DeleteRoom": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ivschat#DeleteRoomRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ivschat#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ivschat#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ivschat#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the specified room.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/DeleteRoom",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.ivschat#DeleteRoomRequest": {
+            "type": "structure",
+            "members": {
+                "identifier": {
+                    "target": "com.amazonaws.ivschat#RoomIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifier of the room to be deleted. Currently this must be an ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ivschat#DisconnectUser": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ivschat#DisconnectUserRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ivschat#DisconnectUserResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ivschat#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ivschat#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ivschat#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ivschat#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Disconnects all connections using a specified user ID from a room. This replicates the <a href=\"https://docs.aws.amazon.com/ivs/latest/chatmsgapireference/actions-disconnectuser-publish.html\"> DisconnectUser</a> WebSocket operation\n         in the Amazon IVS Chat Messaging API.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/DisconnectUser",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.ivschat#DisconnectUserRequest": {
+            "type": "structure",
+            "members": {
+                "roomIdentifier": {
+                    "target": "com.amazonaws.ivschat#RoomIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifier of the room from which the user's clients should be disconnected. Currently\n         this must be an ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "userId": {
+                    "target": "com.amazonaws.ivschat#UserID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ID of the user (connection) to disconnect from the room.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "reason": {
+                    "target": "com.amazonaws.ivschat#Reason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reason for disconnecting the user.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ivschat#DisconnectUserResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.ivschat#ErrorMessage": {
+            "type": "string"
+        },
+        "com.amazonaws.ivschat#EventAttributes": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.ivschat#String"
+            },
+            "value": {
+                "target": "com.amazonaws.ivschat#String"
+            }
+        },
+        "com.amazonaws.ivschat#EventName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.ivschat#FallbackResult": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ALLOW",
+                        "name": "ALLOW"
+                    },
+                    {
+                        "value": "DENY",
+                        "name": "DENY"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ivschat#FieldName": {
+            "type": "string"
+        },
+        "com.amazonaws.ivschat#GetRoom": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ivschat#GetRoomRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ivschat#GetRoomResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ivschat#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ivschat#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ivschat#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the specified room.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/GetRoom",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.ivschat#GetRoomRequest": {
+            "type": "structure",
+            "members": {
+                "identifier": {
+                    "target": "com.amazonaws.ivschat#RoomIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifier of the room for which the configuration is to be retrieved. Currently this\n         must be an ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ivschat#GetRoomResponse": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.ivschat#RoomArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Room ARN, from the request (if <code>identifier</code> was an ARN).</p>"
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.ivschat#RoomID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Room ID, generated by the system. This is a relative identifier, the part of the ARN\n         that uniquely identifies the room.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.ivschat#RoomName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Room name. The value does not need to be unique.</p>"
+                    }
+                },
+                "createTime": {
+                    "target": "com.amazonaws.ivschat#Time",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Time when the room was created. This is an ISO 8601 timestamp; <i>note that this\n            is returned as a string</i>.</p>"
+                    }
+                },
+                "updateTime": {
+                    "target": "com.amazonaws.ivschat#Time",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Time of the room’s last update. This is an ISO 8601 timestamp; <i>note that this\n            is returned as a string</i>.</p>"
+                    }
+                },
+                "maximumMessageRatePerSecond": {
+                    "target": "com.amazonaws.ivschat#RoomMaxMessageRatePerSecond",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum number of messages per second that a client can send to the room. Default:\n         10.</p>"
+                    }
+                },
+                "maximumMessageLength": {
+                    "target": "com.amazonaws.ivschat#RoomMaxMessageLength",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum number of characters in a single message. Messages are expected to be UTF-8\n         encoded and this limit applies specifically to rune/code-point count, not number of bytes.\n         Default: 500.</p>"
+                    }
+                },
+                "messageReviewHandler": {
+                    "target": "com.amazonaws.ivschat#MessageReviewHandler",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration information for optional review of messages.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.ivschat#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n            (key:value)</code>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ivschat#ID": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 12,
+                    "max": 12
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9]+$"
+            }
+        },
+        "com.amazonaws.ivschat#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.ivschat#ErrorMessage",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.ivschat#LambdaArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 170
+                },
+                "smithy.api#pattern": "^$|^arn:aws:lambda:[a-z0-9-]+:[0-9]{12}:function:.+"
+            }
+        },
+        "com.amazonaws.ivschat#Limit": {
+            "type": "integer"
+        },
+        "com.amazonaws.ivschat#ListRooms": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ivschat#ListRoomsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ivschat#ListRoomsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ivschat#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ivschat#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ivschat#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets summary information about all your rooms in the AWS region where the API request is\n         processed. Results are sorted in descending order of <code>updateTime</code>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ListRooms",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.ivschat#ListRoomsRequest": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.ivschat#RoomName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the list to match the specified room name.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.ivschat#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The first room to retrieve. This is used for pagination; see the <code>nextToken</code>\n         response field.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.ivschat#MaxRoomResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum number of rooms to return. Default: 50.</p>"
+                    }
+                },
+                "messageReviewHandlerUri": {
+                    "target": "com.amazonaws.ivschat#LambdaArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the list to match the specified message review handler URI.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ivschat#ListRoomsResponse": {
+            "type": "structure",
+            "members": {
+                "rooms": {
+                    "target": "com.amazonaws.ivschat#RoomList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of the matching rooms (summary information only).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.ivschat#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are more rooms than <code>maxResults</code>, use <code>nextToken</code> in the\n         request to get the next set.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ivschat#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ivschat#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ivschat#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ivschat#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ivschat#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ivschat#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets information about AWS tags for the specified ARN.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/tags/{resourceArn}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.ivschat#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.ivschat#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the resource to be retrieved. The ARN must be URL-encoded.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ivschat#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "tags": {
+                    "target": "com.amazonaws.ivschat#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags to attach to the resource. Array of maps, each of the form <code>string:string\n            (key:value)</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ivschat#MaxRoomResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.ivschat#MessageID": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 12,
+                    "max": 12
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9]+$"
+            }
+        },
+        "com.amazonaws.ivschat#MessageReviewHandler": {
+            "type": "structure",
+            "members": {
+                "uri": {
+                    "target": "com.amazonaws.ivschat#LambdaArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifier of the message review handler. Currently this must be an ARN of a lambda function.</p>"
+                    }
+                },
+                "fallbackResult": {
+                    "target": "com.amazonaws.ivschat#FallbackResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the fallback behavior (whether the message is allowed or denied) if the handler\n      does not return a valid response, encounters an error or times out. If allowed, the message is\n      delivered with returned content to all users connected to the room. If denied, the message is\n      not delivered to any user. Default: <code>ALLOW</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration information for optional message review.</p>"
+            }
+        },
+        "com.amazonaws.ivschat#PaginationToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.ivschat#PendingVerification": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.ivschat#ErrorMessage",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.ivschat#Reason": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.ivschat#ResourceArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^arn:aws:ivschat:[a-z0-9-]+:[0-9]+:[a-z-]/[a-zA-Z0-9-]+$"
+            }
+        },
+        "com.amazonaws.ivschat#ResourceId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-zA-Z0-9]+$"
+            }
+        },
+        "com.amazonaws.ivschat#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.ivschat#ErrorMessage",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceId": {
+                    "target": "com.amazonaws.ivschat#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceType": {
+                    "target": "com.amazonaws.ivschat#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.ivschat#ResourceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ROOM",
+                        "name": "ROOM"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ivschat#RoomArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^arn:aws:ivschat:[a-z0-9-]+:[0-9]+:room/[a-zA-Z0-9-]+$"
+            }
+        },
+        "com.amazonaws.ivschat#RoomID": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 12,
+                    "max": 12
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9]+$"
+            }
+        },
+        "com.amazonaws.ivschat#RoomIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^arn:aws:ivschat:[a-z0-9-]+:[0-9]+:room/[a-zA-Z0-9-]+$"
+            }
+        },
+        "com.amazonaws.ivschat#RoomList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ivschat#RoomSummary"
+            }
+        },
+        "com.amazonaws.ivschat#RoomMaxMessageLength": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.ivschat#RoomMaxMessageRatePerSecond": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.ivschat#RoomName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-_]*$"
+            }
+        },
+        "com.amazonaws.ivschat#RoomSummary": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.ivschat#RoomArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Room ARN.</p>"
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.ivschat#RoomID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Room ID, generated by the system. This is a relative identifier, the part of the ARN that\n      uniquely identifies the room.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.ivschat#RoomName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Room name. The value does not need to be unique.</p>"
+                    }
+                },
+                "messageReviewHandler": {
+                    "target": "com.amazonaws.ivschat#MessageReviewHandler",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration information for optional review of messages.</p>"
+                    }
+                },
+                "createTime": {
+                    "target": "com.amazonaws.ivschat#Time",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Time when the room was created. This is an ISO 8601 timestamp; <i>note that this is\n        returned as a string</i>. </p>"
+                    }
+                },
+                "updateTime": {
+                    "target": "com.amazonaws.ivschat#Time",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Time of the room’s last update. This is an ISO 8601 timestamp; <i>note that this is\n        returned as a string</i>. </p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.ivschat#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags attached to the resource. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information about a room.</p>"
+            }
+        },
+        "com.amazonaws.ivschat#SendEvent": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ivschat#SendEventRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ivschat#SendEventResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ivschat#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ivschat#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ivschat#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ivschat#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Sends an event to a room. Use this within your application’s business logic to send\n         events to clients of a room; e.g., to notify clients to change the way the chat UI is\n         rendered.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/SendEvent",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.ivschat#SendEventRequest": {
+            "type": "structure",
+            "members": {
+                "roomIdentifier": {
+                    "target": "com.amazonaws.ivschat#RoomIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifier of the room to which the event will be sent. Currently this must be an\n         ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "eventName": {
+                    "target": "com.amazonaws.ivschat#EventName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Application-defined name of the event to send to clients.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "attributes": {
+                    "target": "com.amazonaws.ivschat#EventAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Application-defined metadata to attach to the event sent to clients. The maximum length\n         of the metadata is 1 KB total.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ivschat#SendEventResponse": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.ivschat#ID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An identifier generated by Amazon IVS Chat. This identifier must be used in subsequent\n         operations for this message, such as DeleteMessage.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ivschat#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.ivschat#ErrorMessage",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceId": {
+                    "target": "com.amazonaws.ivschat#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceType": {
+                    "target": "com.amazonaws.ivschat#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "limit": {
+                    "target": "com.amazonaws.ivschat#Limit",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.ivschat#SessionDurationInMinutes": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 180
+                }
+            }
+        },
+        "com.amazonaws.ivschat#String": {
+            "type": "string"
+        },
+        "com.amazonaws.ivschat#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.ivschat#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ivschat#TagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.ivschat#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ivschat#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ivschat#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ivschat#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ivschat#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ivschat#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds or updates tags for the AWS resource with the specified ARN.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/tags/{resourceArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.ivschat#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.ivschat#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the resource to be tagged. The ARN must be URL-encoded.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.ivschat#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Array of tags to be added or updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ivschat#TagResourceResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.ivschat#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.ivschat#Tags": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.ivschat#TagKey"
+            },
+            "value": {
+                "target": "com.amazonaws.ivschat#TagValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.ivschat#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.ivschat#ErrorMessage",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceId": {
+                    "target": "com.amazonaws.ivschat#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceType": {
+                    "target": "com.amazonaws.ivschat#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "limit": {
+                    "target": "com.amazonaws.ivschat#Limit",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.ivschat#Time": {
+            "type": "timestamp",
+            "traits": {
+                "smithy.api#timestampFormat": "date-time"
+            }
+        },
+        "com.amazonaws.ivschat#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ivschat#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ivschat#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ivschat#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ivschat#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ivschat#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes tags from the resource with the specified ARN.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/tags/{resourceArn}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.ivschat#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.ivschat#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the resource to be untagged. The ARN must be URL-encoded.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tagKeys": {
+                    "target": "com.amazonaws.ivschat#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Array of tags to be removed.</p>",
+                        "smithy.api#httpQuery": "tagKeys",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ivschat#UntagResourceResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.ivschat#UpdateRoom": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ivschat#UpdateRoomRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ivschat#UpdateRoomResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ivschat#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ivschat#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ivschat#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a room’s configuration.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/UpdateRoom",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.ivschat#UpdateRoomRequest": {
+            "type": "structure",
+            "members": {
+                "identifier": {
+                    "target": "com.amazonaws.ivschat#RoomIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifier of the room to be updated. Currently this must be an ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.ivschat#RoomName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Room name. The value does not need to be unique.</p>"
+                    }
+                },
+                "maximumMessageRatePerSecond": {
+                    "target": "com.amazonaws.ivschat#RoomMaxMessageRatePerSecond",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of messages per second that a client can send to the room. Default:\n         10.</p>"
+                    }
+                },
+                "maximumMessageLength": {
+                    "target": "com.amazonaws.ivschat#RoomMaxMessageLength",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of characters in a single message. Messages are expected to be UTF-8\n         encoded and this limit applies specifically to rune/code-point count, not number of bytes.\n         Default: 500.</p>"
+                    }
+                },
+                "messageReviewHandler": {
+                    "target": "com.amazonaws.ivschat#MessageReviewHandler",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration information for optional review of messages. Specify an empty <code>uri</code> string to disassociate a message review handler from the specified room.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ivschat#UpdateRoomResponse": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.ivschat#RoomArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Room ARN, from the request (if <code>identifier</code> was an ARN).</p>"
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.ivschat#RoomID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Room ID, generated by the system. This is a relative identifier, the part of the ARN\n         that uniquely identifies the room.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.ivschat#RoomName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Room name, from the request.</p>"
+                    }
+                },
+                "createTime": {
+                    "target": "com.amazonaws.ivschat#Time",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Time when the room was created. This is an ISO 8601 timestamp; <i>note that this\n            is returned as a string</i>.</p>"
+                    }
+                },
+                "updateTime": {
+                    "target": "com.amazonaws.ivschat#Time",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Time of the room’s last update. This is an ISO 8601 timestamp; <i>note\n               that this is returned as a string</i>.</p>"
+                    }
+                },
+                "maximumMessageRatePerSecond": {
+                    "target": "com.amazonaws.ivschat#RoomMaxMessageRatePerSecond",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum number of messages per second that a client can send to the room, from the\n         request.</p>"
+                    }
+                },
+                "maximumMessageLength": {
+                    "target": "com.amazonaws.ivschat#RoomMaxMessageLength",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum number of characters in a single message, from the request.</p>"
+                    }
+                },
+                "messageReviewHandler": {
+                    "target": "com.amazonaws.ivschat#MessageReviewHandler",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration information for optional review of messages.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.ivschat#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags attached to the resource.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ivschat#UserID": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.ivschat#ValidationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.ivschat#ErrorMessage",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "reason": {
+                    "target": "com.amazonaws.ivschat#ValidationExceptionReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "fieldList": {
+                    "target": "com.amazonaws.ivschat#ValidationExceptionFieldList",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.ivschat#ValidationExceptionField": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.ivschat#FieldName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the field which failed validation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.ivschat#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Explanation of the reason for the validation error.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This object is used in the ValidationException error.</p>"
+            }
+        },
+        "com.amazonaws.ivschat#ValidationExceptionFieldList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ivschat#ValidationExceptionField"
+            }
+        },
+        "com.amazonaws.ivschat#ValidationExceptionReason": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "UNKNOWN_OPERATION",
+                        "name": "UNKNOWN_OPERATION"
+                    },
+                    {
+                        "value": "FIELD_VALIDATION_FAILED",
+                        "name": "FIELD_VALIDATION_FAILED"
+                    },
+                    {
+                        "value": "OTHER",
+                        "name": "OTHER"
+                    }
+                ]
+            }
+        }
+    }
+}

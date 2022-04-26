@@ -31,18 +31,6 @@
     "shapes": {
         "com.amazonaws.pricing#AWSPriceListService": {
             "type": "service",
-            "version": "2017-10-15",
-            "operations": [
-                {
-                    "target": "com.amazonaws.pricing#DescribeServices"
-                },
-                {
-                    "target": "com.amazonaws.pricing#GetAttributeValues"
-                },
-                {
-                    "target": "com.amazonaws.pricing#GetProducts"
-                }
-            ],
             "traits": {
                 "aws.api#service": {
                     "sdkId": "Pricing",
@@ -55,9 +43,21 @@
                     "name": "pricing"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>Amazon Web Services Price List Service API (Amazon Web Services Price List Service) is a centralized and convenient way to\n         programmatically query Amazon Web Services for services, products, and pricing information. The Amazon Web Services Price List Service\n         uses standardized product attributes such as <code>Location</code>, <code>Storage\n            Class</code>, and <code>Operating System</code>, and provides prices at the SKU\n         level. You can use the Amazon Web Services Price List Service to build cost control and scenario planning tools, reconcile\n         billing data, forecast future spend for budgeting purposes, and provide cost benefit\n         analysis that compare your internal workloads with Amazon Web Services.</p>\n         <p>Use <code>GetServices</code> without a service code to retrieve the service codes for all AWS services, then \n         <code>GetServices</code> with a service code to retreive the attribute names for \n         that service. After you have the service code and attribute names, you can use <code>GetAttributeValues</code>\n         to see what values are available for an attribute. With the service code and an attribute name and value, \n         you can use <code>GetProducts</code> to find specific products that you're interested in, such as \n         an <code>AmazonEC2</code> instance, with a <code>Provisioned IOPS</code> \n            <code>volumeType</code>.</p>\n         <p>Service Endpoint</p>\n         <p>Amazon Web Services Price List Service API provides the following two endpoints:</p>\n         <ul>\n            <li>\n               <p>https://api.pricing.us-east-1.amazonaws.com</p>\n            </li>\n            <li>\n               <p>https://api.pricing.ap-south-1.amazonaws.com</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Amazon Web Services Price List Service API (Amazon Web Services Price List Service) is a centralized and convenient way to\n         programmatically query Amazon Web Services for services, products, and pricing information. The Amazon Web Services Price List Service\n         uses standardized product attributes such as <code>Location</code>, <code>Storage\n            Class</code>, and <code>Operating System</code>, and provides prices at the SKU\n         level. You can use the Amazon Web Services Price List Service to build cost control and scenario planning tools, reconcile\n         billing data, forecast future spend for budgeting purposes, and provide cost benefit\n         analysis that compare your internal workloads with Amazon Web Services.</p>\n         <p>Use <code>GetServices</code> without a service code to retrieve the service codes for all AWS services, then \n         <code>GetServices</code> with a service code to retrieve the attribute names for \n         that service. After you have the service code and attribute names, you can use <code>GetAttributeValues</code>\n         to see what values are available for an attribute. With the service code and an attribute name and value, \n         you can use <code>GetProducts</code> to find specific products that you're interested in, such as \n         an <code>AmazonEC2</code> instance, with a <code>Provisioned IOPS</code> \n            <code>volumeType</code>.</p>\n         <p>Service Endpoint</p>\n         <p>Amazon Web Services Price List Service API provides the following two endpoints:</p>\n         <ul>\n            <li>\n               <p>https://api.pricing.us-east-1.amazonaws.com</p>\n            </li>\n            <li>\n               <p>https://api.pricing.ap-south-1.amazonaws.com</p>\n            </li>\n         </ul>",
                 "smithy.api#title": "AWS Price List Service"
-            }
+            },
+            "version": "2017-10-15",
+            "operations": [
+                {
+                    "target": "com.amazonaws.pricing#DescribeServices"
+                },
+                {
+                    "target": "com.amazonaws.pricing#GetAttributeValues"
+                },
+                {
+                    "target": "com.amazonaws.pricing#GetProducts"
+                }
+            ]
         },
         "com.amazonaws.pricing#AttributeNameList": {
             "type": "list",
@@ -176,7 +176,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.pricing#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The pagination token for the next set of retreivable results.</p>"
+                        "smithy.api#documentation": "<p>The pagination token for the next set of retrievable results.</p>"
                     }
                 }
             }
@@ -266,7 +266,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of attribute values. Attibutes are similar to the details \n          in a Price List API offer file. For a list of available attributes, see \n         <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/reading-an-offer.html#pps-defs\">Offer File Definitions</a>\n         in the <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/billing-what-is.html\">Amazon Web Services Billing and Cost Management User Guide</a>.</p>",
+                "smithy.api#documentation": "<p>Returns a list of attribute values. Attributes are similar to the details \n          in a Price List API offer file. For a list of available attributes, see \n         <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/reading-an-offer.html#pps-defs\">Offer File Definitions</a>\n         in the <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/billing-what-is.html\">Amazon Web Services Billing and Cost Management User Guide</a>.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",

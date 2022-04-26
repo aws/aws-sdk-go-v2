@@ -207,7 +207,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Associates the specified subnets in the Amazon VPC to the firewall. You can specify one\n         subnet for each of the Availability Zones that the VPC spans. </p>\n         <p>This request creates an AWS Network Firewall firewall endpoint in each of the subnets. To\n         enable the firewall's protections, you must also modify the VPC's route tables for each\n         subnet's Availability Zone, to redirect the traffic that's coming into and going out of the\n         zone through the firewall endpoint. </p>"
+                "smithy.api#documentation": "<p>Associates the specified subnets in the Amazon VPC to the firewall. You can specify one\n         subnet for each of the Availability Zones that the VPC spans. </p>\n         <p>This request creates an Network Firewall firewall endpoint in each of the subnets. To\n         enable the firewall's protections, you must also modify the VPC's route tables for each\n         subnet's Availability Zone, to redirect the traffic that's coming into and going out of the\n         zone through the firewall endpoint. </p>"
             }
         },
         "com.amazonaws.networkfirewall#AssociateSubnetsRequest": {
@@ -292,7 +292,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration and status for a single subnet that you've specified for use by the\n         AWS Network Firewall firewall. This is part of the <a>FirewallStatus</a>.</p>"
+                "smithy.api#documentation": "<p>The configuration and status for a single subnet that you've specified for use by the\n         Network Firewall firewall. This is part of the <a>FirewallStatus</a>.</p>"
             }
         },
         "com.amazonaws.networkfirewall#AttachmentStatus": {
@@ -387,7 +387,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an AWS Network Firewall <a>Firewall</a> and accompanying <a>FirewallStatus</a> for a VPC. </p>\n         <p>The firewall defines the configuration settings for an AWS Network Firewall firewall. The settings that you can define at creation include the firewall policy, the subnets in your VPC to use for the firewall endpoints, and any tags that are attached to the firewall AWS resource. </p> \n         <p>After you create a firewall, you can provide additional settings, like the logging configuration. </p>\n         <p>To update the settings for a firewall, you use the operations that apply to the settings\n         themselves, for example <a>UpdateLoggingConfiguration</a>, <a>AssociateSubnets</a>, and <a>UpdateFirewallDeleteProtection</a>. </p>\n         <p>To manage a firewall's tags, use the standard AWS resource tagging operations, <a>ListTagsForResource</a>, <a>TagResource</a>, and <a>UntagResource</a>.</p>\n         <p>To retrieve information about firewalls, use <a>ListFirewalls</a> and <a>DescribeFirewall</a>.</p>"
+                "smithy.api#documentation": "<p>Creates an Network Firewall <a>Firewall</a> and accompanying <a>FirewallStatus</a> for a VPC. </p>\n         <p>The firewall defines the configuration settings for an Network Firewall firewall. The settings that you can define at creation include the firewall policy, the subnets in your VPC to use for the firewall endpoints, and any tags that are attached to the firewall Amazon Web Services resource. </p> \n         <p>After you create a firewall, you can provide additional settings, like the logging configuration. </p>\n         <p>To update the settings for a firewall, you use the operations that apply to the settings\n         themselves, for example <a>UpdateLoggingConfiguration</a>, <a>AssociateSubnets</a>, and <a>UpdateFirewallDeleteProtection</a>. </p>\n         <p>To manage a firewall's tags, use the standard Amazon Web Services resource tagging operations, <a>ListTagsForResource</a>, <a>TagResource</a>, and <a>UntagResource</a>.</p>\n         <p>To retrieve information about firewalls, use <a>ListFirewalls</a> and <a>DescribeFirewall</a>.</p>"
             }
         },
         "com.amazonaws.networkfirewall#CreateFirewallPolicy": {
@@ -416,7 +416,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates the firewall policy for the firewall according to the specifications. </p>\n         <p>An AWS Network Firewall firewall policy defines the behavior of a firewall, in a collection of\n         stateless and stateful rule groups and other settings. You can use one firewall policy for\n         multiple firewalls. </p>"
+                "smithy.api#documentation": "<p>Creates the firewall policy for the firewall according to the specifications. </p>\n         <p>An Network Firewall firewall policy defines the behavior of a firewall, in a collection of\n         stateless and stateful rule groups and other settings. You can use one firewall policy for\n         multiple firewalls. </p>"
             }
         },
         "com.amazonaws.networkfirewall#CreateFirewallPolicyRequest": {
@@ -451,7 +451,13 @@
                 "DryRun": {
                     "target": "com.amazonaws.networkfirewall#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether you want Network Firewall to just check the validity of the request, rather than run the request. </p>\n         <p>If set to <code>TRUE</code>, Network Firewall checks whether the request can run successfully, \n         but doesn't actually make the requested changes. The call returns the value that the request would return if you ran it with \n         dry run set to <code>FALSE</code>, but doesn't make additions or changes to your resources. This option allows you to make sure that you have \n         the required permissions to run the request and that your request parameters are valid. </p>\n         <p>If set to <code>FALSE</code>, Network Firewall makes the requested changes to your resources. </p>"
+                        "smithy.api#documentation": "<p>Indicates whether you want Network Firewall to just check the validity of the request, rather than run the request. </p>\n         <p>If set to <code>TRUE</code>, Network Firewall checks whether the request can run successfully,\n         but doesn't actually make the requested changes. The call returns the value that the request would return if you ran it with\n         dry run set to <code>FALSE</code>, but doesn't make additions or changes to your resources. This option allows you to make sure that you have\n         the required permissions to run the request and that your request parameters are valid. </p>\n         <p>If set to <code>FALSE</code>, Network Firewall makes the requested changes to your resources. </p>"
+                    }
+                },
+                "EncryptionConfiguration": {
+                    "target": "com.amazonaws.networkfirewall#EncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A complex type that contains settings for encryption of your firewall policy resources.</p>"
                     }
                 }
             }
@@ -515,13 +521,13 @@
                 "SubnetChangeProtection": {
                     "target": "com.amazonaws.networkfirewall#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A setting indicating whether the firewall is protected against changes to the subnet associations. \n         Use this setting to protect against\n         accidentally modifying the subnet associations for a firewall that is in use. When you create a firewall, the operation initializes this setting to <code>TRUE</code>.</p>"
+                        "smithy.api#documentation": "<p>A setting indicating whether the firewall is protected against changes to the subnet associations.\n         Use this setting to protect against\n         accidentally modifying the subnet associations for a firewall that is in use. When you create a firewall, the operation initializes this setting to <code>TRUE</code>.</p>"
                     }
                 },
                 "FirewallPolicyChangeProtection": {
                     "target": "com.amazonaws.networkfirewall#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A setting indicating whether the firewall is protected against a change to the firewall policy association. \n         Use this setting to protect against\n         accidentally modifying the firewall policy for a firewall that is in use. When you create a firewall, the operation initializes this setting to <code>TRUE</code>.</p>"
+                        "smithy.api#documentation": "<p>A setting indicating whether the firewall is protected against a change to the firewall policy association.\n         Use this setting to protect against\n         accidentally modifying the firewall policy for a firewall that is in use. When you create a firewall, the operation initializes this setting to <code>TRUE</code>.</p>"
                     }
                 },
                 "Description": {
@@ -534,6 +540,12 @@
                     "target": "com.amazonaws.networkfirewall#TagList",
                     "traits": {
                         "smithy.api#documentation": "<p>The key:value pairs to associate with the resource.</p>"
+                    }
+                },
+                "EncryptionConfiguration": {
+                    "target": "com.amazonaws.networkfirewall#EncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A complex type that contains settings for encryption of your firewall resources.</p>"
                     }
                 }
             }
@@ -603,13 +615,13 @@
                 "Rules": {
                     "target": "com.amazonaws.networkfirewall#RulesString",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string containing stateful rule group rules specifications in Suricata flat format, with one rule\nper line. Use this to import your existing Suricata compatible rule groups. </p>\n         <note>\n            <p>You must provide either this rules setting or a populated <code>RuleGroup</code> setting, but not both. </p>\n         </note>  \n         <p>You can provide your rule group specification in Suricata flat format through this setting when you create or update your rule group. The call \nresponse returns a <a>RuleGroup</a> object that Network Firewall has populated from your string. </p>"
+                        "smithy.api#documentation": "<p>A string containing stateful rule group rules specifications in Suricata flat format, with one rule\nper line. Use this to import your existing Suricata compatible rule groups. </p>\n         <note>\n            <p>You must provide either this rules setting or a populated <code>RuleGroup</code> setting, but not both. </p>\n         </note>  \n         <p>You can provide your rule group specification in Suricata flat format through this setting when you create or update your rule group. The call\nresponse returns a <a>RuleGroup</a> object that Network Firewall has populated from your string. </p>"
                     }
                 },
                 "Type": {
                     "target": "com.amazonaws.networkfirewall#RuleGroupType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the rule group is stateless or stateful. If the rule group is stateless, it contains \nstateless rules. If it is stateful, it contains stateful rules. </p>",
+                        "smithy.api#documentation": "<p>Indicates whether the rule group is stateless or stateful. If the rule group is stateless, it contains\nstateless rules. If it is stateful, it contains stateful rules. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -622,7 +634,7 @@
                 "Capacity": {
                     "target": "com.amazonaws.networkfirewall#RuleCapacity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum operating resources that this rule group can use. Rule group capacity is fixed at creation. \n      When you update a rule group, you are limited to this capacity. When you reference a rule group \n      from a firewall policy, Network Firewall reserves this capacity for the rule group. </p> \n         <p>You can retrieve the capacity that would be required for a rule group before you create the rule group by calling \n      <a>CreateRuleGroup</a> with <code>DryRun</code> set to <code>TRUE</code>. </p> \n         <note>\n            <p>You can't change or exceed this capacity when you update the rule group, so leave\n            room for your rule group to grow. </p>\n         </note>\n         <p>\n            <b>Capacity for a stateless rule group</b>\n         </p>\n         <p>For a stateless rule group, the capacity required is the sum of the capacity\n         requirements of the individual rules that you expect to have in the rule group. </p>\n         <p>To calculate the capacity requirement of a single rule, multiply the capacity\n         requirement values of each of the rule's match settings:</p>\n         <ul>\n            <li>\n               <p>A match setting with no criteria specified has a value of 1. </p>\n            </li>\n            <li>\n               <p>A match setting with <code>Any</code> specified has a value of 1. </p>\n            </li>\n            <li>\n               <p>All other match settings have a value equal to the number of elements provided in\n               the setting. For example, a protocol setting [\"UDP\"] and a source setting\n               [\"10.0.0.0/24\"] each have a value of 1. A protocol setting [\"UDP\",\"TCP\"] has a value\n               of 2. A source setting [\"10.0.0.0/24\",\"10.0.0.1/24\",\"10.0.0.2/24\"] has a value of 3.\n            </p>\n            </li>\n         </ul>\n         <p>A rule with no criteria specified in any of its match settings has a capacity\n         requirement of 1. A rule with protocol setting [\"UDP\",\"TCP\"], source setting\n         [\"10.0.0.0/24\",\"10.0.0.1/24\",\"10.0.0.2/24\"], and a single specification or no specification\n         for each of the other match settings has a capacity requirement of 6. </p>\n         <p>\n            <b>Capacity for a stateful rule group</b>\n         </p>\n         <p>For\n         a stateful rule group, the minimum capacity required is the number of individual rules that\n         you expect to have in the rule group. </p>",
+                        "smithy.api#documentation": "<p>The maximum operating resources that this rule group can use. Rule group capacity is fixed at creation.\n      When you update a rule group, you are limited to this capacity. When you reference a rule group\n      from a firewall policy, Network Firewall reserves this capacity for the rule group. </p>\n         <p>You can retrieve the capacity that would be required for a rule group before you create the rule group by calling\n      <a>CreateRuleGroup</a> with <code>DryRun</code> set to <code>TRUE</code>. </p> \n         <note>\n            <p>You can't change or exceed this capacity when you update the rule group, so leave\n            room for your rule group to grow. </p>\n         </note>\n         <p>\n            <b>Capacity for a stateless rule group</b>\n         </p>\n         <p>For a stateless rule group, the capacity required is the sum of the capacity\n         requirements of the individual rules that you expect to have in the rule group. </p>\n         <p>To calculate the capacity requirement of a single rule, multiply the capacity\n         requirement values of each of the rule's match settings:</p>\n         <ul>\n            <li>\n               <p>A match setting with no criteria specified has a value of 1. </p>\n            </li>\n            <li>\n               <p>A match setting with <code>Any</code> specified has a value of 1. </p>\n            </li>\n            <li>\n               <p>All other match settings have a value equal to the number of elements provided in\n               the setting. For example, a protocol setting [\"UDP\"] and a source setting\n               [\"10.0.0.0/24\"] each have a value of 1. A protocol setting [\"UDP\",\"TCP\"] has a value\n               of 2. A source setting [\"10.0.0.0/24\",\"10.0.0.1/24\",\"10.0.0.2/24\"] has a value of 3.\n            </p>\n            </li>\n         </ul>\n         <p>A rule with no criteria specified in any of its match settings has a capacity\n         requirement of 1. A rule with protocol setting [\"UDP\",\"TCP\"], source setting\n         [\"10.0.0.0/24\",\"10.0.0.1/24\",\"10.0.0.2/24\"], and a single specification or no specification\n         for each of the other match settings has a capacity requirement of 6. </p>\n         <p>\n            <b>Capacity for a stateful rule group</b>\n         </p>\n         <p>For\n         a stateful rule group, the minimum capacity required is the number of individual rules that\n         you expect to have in the rule group. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -635,7 +647,13 @@
                 "DryRun": {
                     "target": "com.amazonaws.networkfirewall#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether you want Network Firewall to just check the validity of the request, rather than run the request. </p>\n         <p>If set to <code>TRUE</code>, Network Firewall checks whether the request can run successfully, \n         but doesn't actually make the requested changes. The call returns the value that the request would return if you ran it with \n         dry run set to <code>FALSE</code>, but doesn't make additions or changes to your resources. This option allows you to make sure that you have \n         the required permissions to run the request and that your request parameters are valid. </p>\n         <p>If set to <code>FALSE</code>, Network Firewall makes the requested changes to your resources. </p>"
+                        "smithy.api#documentation": "<p>Indicates whether you want Network Firewall to just check the validity of the request, rather than run the request. </p>\n         <p>If set to <code>TRUE</code>, Network Firewall checks whether the request can run successfully,\n         but doesn't actually make the requested changes. The call returns the value that the request would return if you ran it with\n         dry run set to <code>FALSE</code>, but doesn't make additions or changes to your resources. This option allows you to make sure that you have\n         the required permissions to run the request and that your request parameters are valid. </p>\n         <p>If set to <code>FALSE</code>, Network Firewall makes the requested changes to your resources. </p>"
+                    }
+                },
+                "EncryptionConfiguration": {
+                    "target": "com.amazonaws.networkfirewall#EncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A complex type that contains settings for encryption of your rule group resources.</p>"
                     }
                 }
             }
@@ -716,7 +734,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified <a>Firewall</a> and its <a>FirewallStatus</a>. \n       This operation requires the firewall's <code>DeleteProtection</code> flag to be\n            <code>FALSE</code>. You can't revert this operation. </p>\n         <p>You can check whether a firewall is\n         in use by reviewing the route tables for the Availability Zones where you have \n         firewall subnet mappings. Retrieve the subnet mappings by calling <a>DescribeFirewall</a>.\n         You define and update the route tables through Amazon VPC. As needed, update the route tables for the \n         zones to remove the firewall endpoints. When the route tables no longer use the firewall endpoints, \n         you can remove the firewall safely.</p>\n         <p>To delete a firewall, remove the delete protection if you need to using <a>UpdateFirewallDeleteProtection</a>,\n         then delete the firewall by calling <a>DeleteFirewall</a>. </p>"
+                "smithy.api#documentation": "<p>Deletes the specified <a>Firewall</a> and its <a>FirewallStatus</a>.\n       This operation requires the firewall's <code>DeleteProtection</code> flag to be\n            <code>FALSE</code>. You can't revert this operation. </p>\n         <p>You can check whether a firewall is\n         in use by reviewing the route tables for the Availability Zones where you have\n         firewall subnet mappings. Retrieve the subnet mappings by calling <a>DescribeFirewall</a>.\n         You define and update the route tables through Amazon VPC. As needed, update the route tables for the\n         zones to remove the firewall endpoints. When the route tables no longer use the firewall endpoints,\n         you can remove the firewall safely.</p>\n         <p>To delete a firewall, remove the delete protection if you need to using <a>UpdateFirewallDeleteProtection</a>,\n         then delete the firewall by calling <a>DeleteFirewall</a>. </p>"
             }
         },
         "com.amazonaws.networkfirewall#DeleteFirewallPolicy": {
@@ -903,7 +921,7 @@
                 "Type": {
                     "target": "com.amazonaws.networkfirewall#RuleGroupType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the rule group is stateless or stateful. If the rule group is stateless, it contains \nstateless rules. If it is stateful, it contains stateful rules. </p> \n         <note>\n            <p>This setting is required for requests that do not include the <code>RuleGroupARN</code>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Indicates whether the rule group is stateless or stateful. If the rule group is stateless, it contains\nstateless rules. If it is stateful, it contains stateful rules. </p> \n         <note>\n            <p>This setting is required for requests that do not include the <code>RuleGroupARN</code>.</p>\n         </note>"
                     }
                 }
             }
@@ -1155,7 +1173,7 @@
                 "Policy": {
                     "target": "com.amazonaws.networkfirewall#PolicyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Identity and Access Management policy for the resource. </p>"
+                        "smithy.api#documentation": "<p>The IAM policy for the resource. </p>"
                     }
                 }
             }
@@ -1209,7 +1227,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>High-level information about a rule group, returned by operations like create and describe. \n         You can use the information provided in the metadata to retrieve and manage a rule group. \n         You can retrieve all objects for a rule group by calling <a>DescribeRuleGroup</a>.\n      </p>"
+                "smithy.api#documentation": "<p>High-level information about a rule group, returned by operations like create and describe.\n         You can use the information provided in the metadata to retrieve and manage a rule group.\n         You can retrieve all objects for a rule group by calling <a>DescribeRuleGroup</a>.\n      </p>"
             }
         },
         "com.amazonaws.networkfirewall#DescribeRuleGroupMetadataRequest": {
@@ -1230,7 +1248,7 @@
                 "Type": {
                     "target": "com.amazonaws.networkfirewall#RuleGroupType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the rule group is stateless or stateful. If the rule group is stateless, it contains \nstateless rules. If it is stateful, it contains stateful rules. </p> \n         <note>\n            <p>This setting is required for requests that do not include the <code>RuleGroupARN</code>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Indicates whether the rule group is stateless or stateful. If the rule group is stateless, it contains\nstateless rules. If it is stateful, it contains stateful rules. </p> \n         <note>\n            <p>This setting is required for requests that do not include the <code>RuleGroupARN</code>.</p>\n         </note>"
                     }
                 }
             }
@@ -1261,13 +1279,13 @@
                 "Type": {
                     "target": "com.amazonaws.networkfirewall#RuleGroupType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the rule group is stateless or stateful. If the rule group is stateless, it contains \nstateless rules. If it is stateful, it contains stateful rules. </p> \n         <note>\n            <p>This setting is required for requests that do not include the <code>RuleGroupARN</code>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Indicates whether the rule group is stateless or stateful. If the rule group is stateless, it contains\nstateless rules. If it is stateful, it contains stateful rules. </p> \n         <note>\n            <p>This setting is required for requests that do not include the <code>RuleGroupARN</code>.</p>\n         </note>"
                     }
                 },
                 "Capacity": {
                     "target": "com.amazonaws.networkfirewall#RuleCapacity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum operating resources that this rule group can use. Rule group capacity is fixed at creation. \n      When you update a rule group, you are limited to this capacity. When you reference a rule group \n      from a firewall policy, Network Firewall reserves this capacity for the rule group. </p> \n         <p>You can retrieve the capacity that would be required for a rule group before you create the rule group by calling \n      <a>CreateRuleGroup</a> with <code>DryRun</code> set to <code>TRUE</code>. </p>"
+                        "smithy.api#documentation": "<p>The maximum operating resources that this rule group can use. Rule group capacity is fixed at creation.\n      When you update a rule group, you are limited to this capacity. When you reference a rule group\n      from a firewall policy, Network Firewall reserves this capacity for the rule group. </p>\n         <p>You can retrieve the capacity that would be required for a rule group before you create the rule group by calling\n      <a>CreateRuleGroup</a> with <code>DryRun</code> set to <code>TRUE</code>. </p>"
                     }
                 },
                 "StatefulRuleOptions": {
@@ -1293,7 +1311,7 @@
                 "Type": {
                     "target": "com.amazonaws.networkfirewall#RuleGroupType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the rule group is stateless or stateful. If the rule group is stateless, it contains \nstateless rules. If it is stateful, it contains stateful rules. </p> \n           <note>\n            <p>This setting is required for requests that do not include the <code>RuleGroupARN</code>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Indicates whether the rule group is stateless or stateful. If the rule group is stateless, it contains\nstateless rules. If it is stateful, it contains stateful rules. </p> \n           <note>\n            <p>This setting is required for requests that do not include the <code>RuleGroupARN</code>.</p>\n         </note>"
                     }
                 }
             }
@@ -1311,7 +1329,7 @@
                 "RuleGroup": {
                     "target": "com.amazonaws.networkfirewall#RuleGroup",
                     "traits": {
-                        "smithy.api#documentation": "<p>The object that defines the rules in a rule group. This, along with <a>RuleGroupResponse</a>, define the rule group. You can retrieve all objects for a rule group by calling <a>DescribeRuleGroup</a>. </p> \n         <p>AWS Network Firewall uses a rule group to inspect and control network traffic. \n    You define stateless rule groups to inspect individual packets and you define stateful rule groups to inspect packets in the context of their\n    traffic flow. </p>\n         <p>To use a rule group, you include it by reference in an Network Firewall firewall policy, then you use the policy in a firewall. You can reference a rule group from \n    more than one firewall policy, and you can use a firewall policy in more than one firewall. </p>"
+                        "smithy.api#documentation": "<p>The object that defines the rules in a rule group. This, along with <a>RuleGroupResponse</a>, define the rule group. You can retrieve all objects for a rule group by calling <a>DescribeRuleGroup</a>. </p>\n         <p>Network Firewall uses a rule group to inspect and control network traffic.\n    You define stateless rule groups to inspect individual packets and you define stateful rule groups to inspect packets in the context of their\n    traffic flow. </p>\n         <p>To use a rule group, you include it by reference in an Network Firewall firewall policy, then you use the policy in a firewall. You can reference a rule group from\n    more than one firewall policy, and you can use a firewall policy in more than one firewall. </p>"
                     }
                 },
                 "RuleGroupResponse": {
@@ -1355,7 +1373,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The value to use in an Amazon CloudWatch custom metric dimension. This is used in the\n            <code>PublishMetrics</code>\n            <a>CustomAction</a>. A CloudWatch custom metric dimension is a name/value pair that's\n         part of the identity of a metric. </p>\n         <p>AWS Network Firewall sets the dimension name to <code>CustomAction</code> and you provide the\n         dimension value. </p>\n         <p>For more information about CloudWatch custom metric dimensions, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html#usingDimensions\">Publishing Custom Metrics</a> in the <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html\">Amazon CloudWatch User\n            Guide</a>.</p>"
+                "smithy.api#documentation": "<p>The value to use in an Amazon CloudWatch custom metric dimension. This is used in the\n            <code>PublishMetrics</code>\n            <a>CustomAction</a>. A CloudWatch custom metric dimension is a name/value pair that's\n         part of the identity of a metric. </p>\n         <p>Network Firewall sets the dimension name to <code>CustomAction</code> and you provide the\n         dimension value. </p>\n         <p>For more information about CloudWatch custom metric dimensions, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html#usingDimensions\">Publishing Custom Metrics</a> in the <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html\">Amazon CloudWatch User\n            Guide</a>.</p>"
             }
         },
         "com.amazonaws.networkfirewall#DimensionValue": {
@@ -1471,6 +1489,41 @@
                 }
             }
         },
+        "com.amazonaws.networkfirewall#EncryptionConfiguration": {
+            "type": "structure",
+            "members": {
+                "KeyId": {
+                    "target": "com.amazonaws.networkfirewall#KeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services Key Management Service (KMS) customer managed key. You can use any of the key identifiers that KMS supports, unless you're using a key that's managed by another account. If you're using a key managed by another account, then specify the key ARN. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id\">Key ID</a> in the <i>Amazon Web Services KMS Developer Guide</i>.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.networkfirewall#EncryptionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of Amazon Web Services KMS key to use for encryption of your Network Firewall resources.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A complex type that contains optional Amazon Web Services Key Management Service (KMS) encryption settings for your Network Firewall resources. Your data is encrypted by default with an Amazon Web Services owned key that Amazon Web Services owns and manages for you. You can use either the Amazon Web Services owned key, or provide your own customer managed key. To learn more about KMS encryption of your Network Firewall resources, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-encryption-at-rest.html\">Encryption at rest with Amazon Web Services Key Managment Service</a> in the <i>Network Firewall Developer Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.networkfirewall#EncryptionType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CUSTOMER_KMS",
+                        "name": "CUSTOMER_KMS"
+                    },
+                    {
+                        "value": "AWS_OWNED_KMS_KEY",
+                        "name": "AWS_OWNED_KMS_KEY"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.networkfirewall#EndpointId": {
             "type": "string"
         },
@@ -1522,13 +1575,13 @@
                 "SubnetChangeProtection": {
                     "target": "com.amazonaws.networkfirewall#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A setting indicating whether the firewall is protected against changes to the subnet associations. \n         Use this setting to protect against\n         accidentally modifying the subnet associations for a firewall that is in use. When you create a firewall, the operation initializes this setting to <code>TRUE</code>.</p>"
+                        "smithy.api#documentation": "<p>A setting indicating whether the firewall is protected against changes to the subnet associations.\n         Use this setting to protect against\n         accidentally modifying the subnet associations for a firewall that is in use. When you create a firewall, the operation initializes this setting to <code>TRUE</code>.</p>"
                     }
                 },
                 "FirewallPolicyChangeProtection": {
                     "target": "com.amazonaws.networkfirewall#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A setting indicating whether the firewall is protected against a change to the firewall policy association. \n         Use this setting to protect against\n         accidentally modifying the firewall policy for a firewall that is in use. When you create a firewall, the operation initializes this setting to <code>TRUE</code>.</p>"
+                        "smithy.api#documentation": "<p>A setting indicating whether the firewall is protected against a change to the firewall policy association.\n         Use this setting to protect against\n         accidentally modifying the firewall policy for a firewall that is in use. When you create a firewall, the operation initializes this setting to <code>TRUE</code>.</p>"
                     }
                 },
                 "Description": {
@@ -1549,10 +1602,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p></p>"
                     }
+                },
+                "EncryptionConfiguration": {
+                    "target": "com.amazonaws.networkfirewall#EncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A complex type that contains the Amazon Web Services KMS encryption configuration settings for your firewall.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The firewall defines the configuration settings for an AWS Network Firewall firewall. These settings include the firewall policy, the subnets in your VPC to use for the firewall endpoints, and any tags that are attached to the firewall AWS resource. </p> \n         <p>The status of the firewall, for example whether it's ready to filter network traffic,\n         is provided in the corresponding <a>FirewallStatus</a>. You can retrieve both\n         objects by calling <a>DescribeFirewall</a>.</p>"
+                "smithy.api#documentation": "<p>The firewall defines the configuration settings for an Network Firewall firewall. These settings include the firewall policy, the subnets in your VPC to use for the firewall endpoints, and any tags that are attached to the firewall Amazon Web Services resource. </p> \n         <p>The status of the firewall, for example whether it's ready to filter network traffic,\n         is provided in the corresponding <a>FirewallStatus</a>. You can retrieve both\n         objects by calling <a>DescribeFirewall</a>.</p>"
             }
         },
         "com.amazonaws.networkfirewall#FirewallMetadata": {
@@ -1600,7 +1659,7 @@
                 "StatelessFragmentDefaultActions": {
                     "target": "com.amazonaws.networkfirewall#StatelessActions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The actions to take on a fragmented UDP packet if it doesn't match any of the stateless\n      rules in the policy. Network Firewall only manages UDP packet fragments and silently drops packet fragments for other protocols. \n      If you want non-matching fragmented UDP packets to be forwarded for\n         stateful inspection, specify <code>aws:forward_to_sfe</code>. </p>\n         <p>You must specify one of the standard actions: <code>aws:pass</code>,\n            <code>aws:drop</code>, or <code>aws:forward_to_sfe</code>. In addition, you can specify\n         custom actions that are compatible with your standard section choice.</p>\n         <p>For example, you could specify <code>[\"aws:pass\"]</code> or you could specify\n            <code>[\"aws:pass\", “customActionName”]</code>. For information about compatibility, see\n         the custom action descriptions under <a>CustomAction</a>.</p>",
+                        "smithy.api#documentation": "<p>The actions to take on a fragmented UDP packet if it doesn't match any of the stateless\n      rules in the policy. Network Firewall only manages UDP packet fragments and silently drops packet fragments for other protocols.\n      If you want non-matching fragmented UDP packets to be forwarded for\n         stateful inspection, specify <code>aws:forward_to_sfe</code>. </p>\n         <p>You must specify one of the standard actions: <code>aws:pass</code>,\n            <code>aws:drop</code>, or <code>aws:forward_to_sfe</code>. In addition, you can specify\n         custom actions that are compatible with your standard section choice.</p>\n         <p>For example, you could specify <code>[\"aws:pass\"]</code> or you could specify\n            <code>[\"aws:pass\", “customActionName”]</code>. For information about compatibility, see\n         the custom action descriptions under <a>CustomAction</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1619,13 +1678,13 @@
                 "StatefulDefaultActions": {
                     "target": "com.amazonaws.networkfirewall#StatefulActions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The default actions to take on a packet that doesn't match any stateful rules. The stateful default action is optional, \n         and is only valid when using the strict rule order.</p>\n         <p>Valid values of the stateful default action:</p>\n         <ul>\n            <li>\n               <p>aws:drop_strict</p>\n            </li>\n            <li>\n               <p>aws:drop_established</p>\n            </li>\n            <li>\n               <p>aws:alert_strict</p>\n            </li>\n            <li>\n               <p>aws:alert_established</p>\n            </li>\n         </ul>\n         <p>For more information, see \n         <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/suricata-strict-rule-evaluation-order.html\">Strict evaluation order</a> in the <i>AWS Network Firewall Developer Guide</i>.\n      </p>"
+                        "smithy.api#documentation": "<p>The default actions to take on a packet that doesn't match any stateful rules. The stateful default action is optional,\n         and is only valid when using the strict rule order.</p>\n         <p>Valid values of the stateful default action:</p>\n         <ul>\n            <li>\n               <p>aws:drop_strict</p>\n            </li>\n            <li>\n               <p>aws:drop_established</p>\n            </li>\n            <li>\n               <p>aws:alert_strict</p>\n            </li>\n            <li>\n               <p>aws:alert_established</p>\n            </li>\n         </ul>\n         <p>For more information, see\n         <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/suricata-rule-evaluation-order.html#suricata-strict-rule-evaluation-order.html\">Strict evaluation order</a> in the <i>Network Firewall Developer Guide</i>.\n      </p>"
                     }
                 },
                 "StatefulEngineOptions": {
                     "target": "com.amazonaws.networkfirewall#StatefulEngineOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Additional options governing how Network Firewall handles stateful rules. The stateful \n       rule groups that you use in your policy must have stateful rule options settings that are compatible with these settings.</p>"
+                        "smithy.api#documentation": "<p>Additional options governing how Network Firewall handles stateful rules. The stateful\n       rule groups that you use in your policy must have stateful rule options settings that are compatible with these settings.</p>"
                     }
                 }
             },
@@ -1711,6 +1770,12 @@
                     "target": "com.amazonaws.networkfirewall#NumberOfAssociations",
                     "traits": {
                         "smithy.api#documentation": "<p>The number of firewalls that are associated with this firewall policy.</p>"
+                    }
+                },
+                "EncryptionConfiguration": {
+                    "target": "com.amazonaws.networkfirewall#EncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A complex type that contains the Amazon Web Services KMS encryption configuration settings for your firewall policy.</p>"
                     }
                 }
             },
@@ -1818,21 +1883,21 @@
                 "Protocol": {
                     "target": "com.amazonaws.networkfirewall#StatefulRuleProtocol",
                     "traits": {
-                        "smithy.api#documentation": "<p>The protocol to inspect for. To specify all, you can use <code>IP</code>, because all traffic on AWS and on the internet is IP.</p>",
+                        "smithy.api#documentation": "<p>The protocol to inspect for. To specify all, you can use <code>IP</code>, because all traffic on Amazon Web Services and on the internet is IP.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Source": {
                     "target": "com.amazonaws.networkfirewall#Source",
                     "traits": {
-                        "smithy.api#documentation": "<p>The source IP address or address range to inspect for, in CIDR notation. \n          To match with any address, specify <code>ANY</code>. </p>\n         <p>Specify an IP address or a block of IP addresses in Classless Inter-Domain Routing (CIDR) notation. Network Firewall supports all address ranges for IPv4. </p>\n         <p>Examples: </p>\n         <ul>\n            <li>\n               <p>To configure Network Firewall to inspect for the IP address 192.0.2.44, specify <code>192.0.2.44/32</code>.</p>\n            </li>\n            <li>\n               <p>To configure Network Firewall to inspect for IP addresses from 192.0.2.0 to 192.0.2.255, specify <code>192.0.2.0/24</code>.</p>\n            </li>\n         </ul>\n         <p>For more information about CIDR notation, see the Wikipedia entry <a href=\"https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing\">Classless\n         Inter-Domain Routing</a>.</p>",
+                        "smithy.api#documentation": "<p>The source IP address or address range to inspect for, in CIDR notation.\n          To match with any address, specify <code>ANY</code>. </p>\n         <p>Specify an IP address or a block of IP addresses in Classless Inter-Domain Routing (CIDR) notation. Network Firewall supports all address ranges for IPv4. </p>\n         <p>Examples: </p>\n         <ul>\n            <li>\n               <p>To configure Network Firewall to inspect for the IP address 192.0.2.44, specify <code>192.0.2.44/32</code>.</p>\n            </li>\n            <li>\n               <p>To configure Network Firewall to inspect for IP addresses from 192.0.2.0 to 192.0.2.255, specify <code>192.0.2.0/24</code>.</p>\n            </li>\n         </ul>\n         <p>For more information about CIDR notation, see the Wikipedia entry <a href=\"https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing\">Classless\n         Inter-Domain Routing</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "SourcePort": {
                     "target": "com.amazonaws.networkfirewall#Port",
                     "traits": {
-                        "smithy.api#documentation": "<p>The source port to inspect for. You can specify an individual port, for \n           example <code>1994</code> and you can specify a port\n               range, for example <code>1990:1994</code>.\n          To match with any port, specify <code>ANY</code>. </p>",
+                        "smithy.api#documentation": "<p>The source port to inspect for. You can specify an individual port, for\n           example <code>1994</code> and you can specify a port\n               range, for example <code>1990:1994</code>.\n          To match with any port, specify <code>ANY</code>. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1846,20 +1911,20 @@
                 "Destination": {
                     "target": "com.amazonaws.networkfirewall#Destination",
                     "traits": {
-                        "smithy.api#documentation": "<p>The destination IP address or address range to inspect for, in CIDR notation. \n          To match with any address, specify <code>ANY</code>. </p>\n         <p>Specify an IP address or a block of IP addresses in Classless Inter-Domain Routing (CIDR) notation. Network Firewall supports all address ranges for IPv4. </p>\n         <p>Examples: </p>\n         <ul>\n            <li>\n               <p>To configure Network Firewall to inspect for the IP address 192.0.2.44, specify <code>192.0.2.44/32</code>.</p>\n            </li>\n            <li>\n               <p>To configure Network Firewall to inspect for IP addresses from 192.0.2.0 to 192.0.2.255, specify <code>192.0.2.0/24</code>.</p>\n            </li>\n         </ul>\n         <p>For more information about CIDR notation, see the Wikipedia entry <a href=\"https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing\">Classless\n         Inter-Domain Routing</a>.</p>",
+                        "smithy.api#documentation": "<p>The destination IP address or address range to inspect for, in CIDR notation.\n          To match with any address, specify <code>ANY</code>. </p>\n         <p>Specify an IP address or a block of IP addresses in Classless Inter-Domain Routing (CIDR) notation. Network Firewall supports all address ranges for IPv4. </p>\n         <p>Examples: </p>\n         <ul>\n            <li>\n               <p>To configure Network Firewall to inspect for the IP address 192.0.2.44, specify <code>192.0.2.44/32</code>.</p>\n            </li>\n            <li>\n               <p>To configure Network Firewall to inspect for IP addresses from 192.0.2.0 to 192.0.2.255, specify <code>192.0.2.0/24</code>.</p>\n            </li>\n         </ul>\n         <p>For more information about CIDR notation, see the Wikipedia entry <a href=\"https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing\">Classless\n         Inter-Domain Routing</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "DestinationPort": {
                     "target": "com.amazonaws.networkfirewall#Port",
                     "traits": {
-                        "smithy.api#documentation": "<p>The destination port to inspect for. You can specify an individual port, for \n           example <code>1994</code> and you can specify\n         a port range, for example <code>1990:1994</code>.\n          To match with any port, specify <code>ANY</code>. </p>",
+                        "smithy.api#documentation": "<p>The destination port to inspect for. You can specify an individual port, for\n           example <code>1994</code> and you can specify\n         a port range, for example <code>1990:1994</code>.\n          To match with any port, specify <code>ANY</code>. </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The basic rule criteria for AWS Network Firewall to use to inspect packet headers in stateful\n         traffic flow inspection. Traffic flows that match the criteria are a match for the\n         corresponding <a>StatefulRule</a>. </p>"
+                "smithy.api#documentation": "<p>The basic rule criteria for Network Firewall to use to inspect packet headers in stateful\n         traffic flow inspection. Traffic flows that match the criteria are a match for the\n         corresponding <a>StatefulRule</a>. </p>"
             }
         },
         "com.amazonaws.networkfirewall#IPSet": {
@@ -1894,7 +1959,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>AWS doesn't currently have enough available capacity to fulfill your request. Try your\n         request later. </p>",
+                "smithy.api#documentation": "<p>Amazon Web Services doesn't currently have enough available capacity to fulfill your request. Try your\n         request later. </p>",
                 "smithy.api#error": "server"
             }
         },
@@ -1958,6 +2023,16 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.networkfirewall#KeyId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "\\S"
+            }
+        },
         "com.amazonaws.networkfirewall#Keyword": {
             "type": "string",
             "traits": {
@@ -2004,6 +2079,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "FirewallPolicies",
                     "pageSize": "MaxResults"
                 }
             }
@@ -2014,13 +2090,13 @@
                 "NextToken": {
                     "target": "com.amazonaws.networkfirewall#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>When you request a list of objects with a <code>MaxResults</code> setting, if the number of objects that are still available\n         for retrieval exceeds the maximum you requested, Network Firewall returns a <code>NextToken</code> \n         value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.</p>"
+                        "smithy.api#documentation": "<p>When you request a list of objects with a <code>MaxResults</code> setting, if the number of objects that are still available\n         for retrieval exceeds the maximum you requested, Network Firewall returns a <code>NextToken</code>\n         value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.</p>"
                     }
                 },
                 "MaxResults": {
                     "target": "com.amazonaws.networkfirewall#PaginationMaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of objects that you want Network Firewall to return for this request. If more \n          objects are available, in the response, Network Firewall provides a \n         <code>NextToken</code> value that you can use in a subsequent call to get the next batch of objects.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of objects that you want Network Firewall to return for this request. If more\n          objects are available, in the response, Network Firewall provides a\n         <code>NextToken</code> value that you can use in a subsequent call to get the next batch of objects.</p>"
                     }
                 }
             }
@@ -2031,7 +2107,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.networkfirewall#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>When you request a list of objects with a <code>MaxResults</code> setting, if the number of objects that are still available\n         for retrieval exceeds the maximum you requested, Network Firewall returns a <code>NextToken</code> \n         value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.</p>"
+                        "smithy.api#documentation": "<p>When you request a list of objects with a <code>MaxResults</code> setting, if the number of objects that are still available\n         for retrieval exceeds the maximum you requested, Network Firewall returns a <code>NextToken</code>\n         value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.</p>"
                     }
                 },
                 "FirewallPolicies": {
@@ -2066,6 +2142,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Firewalls",
                     "pageSize": "MaxResults"
                 }
             }
@@ -2076,7 +2153,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.networkfirewall#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>When you request a list of objects with a <code>MaxResults</code> setting, if the number of objects that are still available\n         for retrieval exceeds the maximum you requested, Network Firewall returns a <code>NextToken</code> \n         value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.</p>"
+                        "smithy.api#documentation": "<p>When you request a list of objects with a <code>MaxResults</code> setting, if the number of objects that are still available\n         for retrieval exceeds the maximum you requested, Network Firewall returns a <code>NextToken</code>\n         value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.</p>"
                     }
                 },
                 "VpcIds": {
@@ -2088,7 +2165,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.networkfirewall#PaginationMaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of objects that you want Network Firewall to return for this request. If more \n          objects are available, in the response, Network Firewall provides a \n         <code>NextToken</code> value that you can use in a subsequent call to get the next batch of objects.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of objects that you want Network Firewall to return for this request. If more\n          objects are available, in the response, Network Firewall provides a\n         <code>NextToken</code> value that you can use in a subsequent call to get the next batch of objects.</p>"
                     }
                 }
             }
@@ -2099,7 +2176,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.networkfirewall#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>When you request a list of objects with a <code>MaxResults</code> setting, if the number of objects that are still available\n         for retrieval exceeds the maximum you requested, Network Firewall returns a <code>NextToken</code> \n         value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.</p>"
+                        "smithy.api#documentation": "<p>When you request a list of objects with a <code>MaxResults</code> setting, if the number of objects that are still available\n         for retrieval exceeds the maximum you requested, Network Firewall returns a <code>NextToken</code>\n         value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.</p>"
                     }
                 },
                 "Firewalls": {
@@ -2134,6 +2211,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "RuleGroups",
                     "pageSize": "MaxResults"
                 }
             }
@@ -2144,19 +2222,19 @@
                 "NextToken": {
                     "target": "com.amazonaws.networkfirewall#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>When you request a list of objects with a <code>MaxResults</code> setting, if the number of objects that are still available\n         for retrieval exceeds the maximum you requested, Network Firewall returns a <code>NextToken</code> \n         value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.</p>"
+                        "smithy.api#documentation": "<p>When you request a list of objects with a <code>MaxResults</code> setting, if the number of objects that are still available\n         for retrieval exceeds the maximum you requested, Network Firewall returns a <code>NextToken</code>\n         value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.</p>"
                     }
                 },
                 "MaxResults": {
                     "target": "com.amazonaws.networkfirewall#PaginationMaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of objects that you want Network Firewall to return for this request. If more \n          objects are available, in the response, Network Firewall provides a \n         <code>NextToken</code> value that you can use in a subsequent call to get the next batch of objects.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of objects that you want Network Firewall to return for this request. If more\n          objects are available, in the response, Network Firewall provides a\n         <code>NextToken</code> value that you can use in a subsequent call to get the next batch of objects.</p>"
                     }
                 },
                 "Scope": {
                     "target": "com.amazonaws.networkfirewall#ResourceManagedStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The scope of the request. The default setting of <code>ACCOUNT</code> or a setting of \n         <code>NULL</code> returns all of the rule groups in your account. A setting of \n         <code>MANAGED</code> returns all available managed rule groups.</p>"
+                        "smithy.api#documentation": "<p>The scope of the request. The default setting of <code>ACCOUNT</code> or a setting of\n         <code>NULL</code> returns all of the rule groups in your account. A setting of\n         <code>MANAGED</code> returns all available managed rule groups.</p>"
                     }
                 }
             }
@@ -2167,7 +2245,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.networkfirewall#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>When you request a list of objects with a <code>MaxResults</code> setting, if the number of objects that are still available\n         for retrieval exceeds the maximum you requested, Network Firewall returns a <code>NextToken</code> \n         value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.</p>"
+                        "smithy.api#documentation": "<p>When you request a list of objects with a <code>MaxResults</code> setting, if the number of objects that are still available\n         for retrieval exceeds the maximum you requested, Network Firewall returns a <code>NextToken</code>\n         value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.</p>"
                     }
                 },
                 "RuleGroups": {
@@ -2201,10 +2279,11 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the tags associated with the specified resource. Tags are key:value pairs that\n         you can use to categorize and manage your resources, for purposes like billing. For\n         example, you might set the tag key to \"customer\" and the value to the customer name or ID.\n         You can specify one or more tags to add to each AWS resource, up to 50 tags for a\n         resource.</p>\n         <p>You can tag the AWS resources that you manage through AWS Network Firewall: firewalls, firewall\n         policies, and rule groups. </p>",
+                "smithy.api#documentation": "<p>Retrieves the tags associated with the specified resource. Tags are key:value pairs that\n         you can use to categorize and manage your resources, for purposes like billing. For\n         example, you might set the tag key to \"customer\" and the value to the customer name or ID.\n         You can specify one or more tags to add to each Amazon Web Services resource, up to 50 tags for a\n         resource.</p>\n         <p>You can tag the Amazon Web Services resources that you manage through Network Firewall: firewalls, firewall\n         policies, and rule groups. </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Tags",
                     "pageSize": "MaxResults"
                 }
             }
@@ -2215,13 +2294,13 @@
                 "NextToken": {
                     "target": "com.amazonaws.networkfirewall#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>When you request a list of objects with a <code>MaxResults</code> setting, if the number of objects that are still available\n         for retrieval exceeds the maximum you requested, Network Firewall returns a <code>NextToken</code> \n         value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.</p>"
+                        "smithy.api#documentation": "<p>When you request a list of objects with a <code>MaxResults</code> setting, if the number of objects that are still available\n         for retrieval exceeds the maximum you requested, Network Firewall returns a <code>NextToken</code>\n         value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.</p>"
                     }
                 },
                 "MaxResults": {
                     "target": "com.amazonaws.networkfirewall#TagsPaginationMaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of objects that you want Network Firewall to return for this request. If more \n          objects are available, in the response, Network Firewall provides a \n         <code>NextToken</code> value that you can use in a subsequent call to get the next batch of objects.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of objects that you want Network Firewall to return for this request. If more\n          objects are available, in the response, Network Firewall provides a\n         <code>NextToken</code> value that you can use in a subsequent call to get the next batch of objects.</p>"
                     }
                 },
                 "ResourceArn": {
@@ -2239,7 +2318,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.networkfirewall#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>When you request a list of objects with a <code>MaxResults</code> setting, if the number of objects that are still available\n         for retrieval exceeds the maximum you requested, Network Firewall returns a <code>NextToken</code> \n         value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.</p>"
+                        "smithy.api#documentation": "<p>When you request a list of objects with a <code>MaxResults</code> setting, if the number of objects that are still available\n         for retrieval exceeds the maximum you requested, Network Firewall returns a <code>NextToken</code>\n         value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.</p>"
                     }
                 },
                 "Tags": {
@@ -2276,7 +2355,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Defines where AWS Network Firewall sends logs for the firewall for one log type. This is used\n         in <a>LoggingConfiguration</a>. You can send each type of log to an Amazon S3 bucket, a CloudWatch log group, or a Kinesis Data Firehose delivery stream.</p>\n         <p>Network Firewall generates logs for stateful rule groups. You can save alert and flow log\n          types. The stateful rules engine records flow logs for all network traffic that it receives. \n          It records alert logs for traffic that matches stateful rules that have the rule\n          action set to <code>DROP</code> or <code>ALERT</code>. </p>"
+                "smithy.api#documentation": "<p>Defines where Network Firewall sends logs for the firewall for one log type. This is used\n         in <a>LoggingConfiguration</a>. You can send each type of log to an Amazon S3 bucket, a CloudWatch log group, or a Kinesis Data Firehose delivery stream.</p>\n         <p>Network Firewall generates logs for stateful rule groups. You can save alert and flow log\n          types. The stateful rules engine records flow logs for all network traffic that it receives.\n          It records alert logs for traffic that matches stateful rules that have the rule\n          action set to <code>DROP</code> or <code>ALERT</code>. </p>"
             }
         },
         "com.amazonaws.networkfirewall#LogDestinationConfigs": {
@@ -2357,7 +2436,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Defines how AWS Network Firewall performs logging for a <a>Firewall</a>. </p>"
+                "smithy.api#documentation": "<p>Defines how Network Firewall performs logging for a <a>Firewall</a>. </p>"
             }
         },
         "com.amazonaws.networkfirewall#MatchAttributes": {
@@ -2418,7 +2497,7 @@
                     "name": "network-firewall"
                 },
                 "aws.protocols#awsJson1_0": {},
-                "smithy.api#documentation": "<p>This is the API Reference for AWS Network Firewall. This guide is for developers who need\n         detailed information about the Network Firewall API actions, data types, and errors. </p>\n         <ul>\n            <li>\n               <p>The REST API requires you to handle connection details, such as calculating\n               signatures, handling request retries, and error handling. For general information\n               about using the AWS REST APIs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-apis.html\">AWS APIs</a>. </p>\n               <p>To access Network Firewall using the REST API endpoint:\n                  <code>https://network-firewall.<region>.amazonaws.com </code>\n               </p>\n            </li>\n            <li>\n               <p>Alternatively, you can use one of the AWS SDKs to access an API that's tailored to\n               the programming language or platform that you're using. For more information, see\n                  <a href=\"http://aws.amazon.com/tools/#SDKs\">AWS SDKs</a>.</p>\n            </li>\n            <li>\n               <p>For descriptions of Network Firewall features, including and step-by-step\n               instructions on how to use them through the Network Firewall console, see the <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/\">Network Firewall Developer\n                  Guide</a>.</p>\n            </li>\n         </ul>\n         <p>Network Firewall is a stateful, managed, network firewall and intrusion detection and\n         prevention service for Amazon Virtual Private Cloud (Amazon VPC). With Network Firewall, you can filter traffic at the\n         perimeter of your VPC. This includes filtering traffic going to and coming from an internet\n         gateway, NAT gateway, or over VPN or AWS Direct Connect. Network Firewall uses rules that are compatible\n      with Suricata, a free, open source intrusion detection system (IDS) engine. \n      AWS Network Firewall supports Suricata version 5.0.2. For information about Suricata, \n          see the <a href=\"https://suricata-ids.org/\">Suricata website</a>.</p>\n         <p>You can use Network Firewall to monitor and protect your VPC traffic in a number of ways.\n         The following are just a few examples: </p>\n         <ul>\n            <li>\n               <p>Allow domains or IP addresses for known AWS service endpoints, such as Amazon S3, and\n               block all other forms of traffic.</p>\n            </li>\n            <li>\n               <p>Use custom lists of known bad domains to limit the types of domain names that your\n               applications can access.</p>\n            </li>\n            <li>\n               <p>Perform deep packet inspection on traffic entering or leaving your VPC.</p>\n            </li>\n            <li>\n               <p>Use stateful protocol detection to filter protocols like HTTPS, regardless of the\n               port used.</p>\n            </li>\n         </ul>\n         <p>To enable Network Firewall for your VPCs, you perform steps in both Amazon VPC and in\n         Network Firewall. For information about using Amazon VPC, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/\">Amazon VPC User Guide</a>.</p>\n         <p>To start using Network Firewall, do the following: </p>\n         <ol>\n            <li>\n               <p>(Optional) If you don't already have a VPC that you want to protect, create it in\n               Amazon VPC. </p>\n            </li>\n            <li>\n               <p>In Amazon VPC, in each Availability Zone where you want to have a firewall endpoint, create a\n               subnet for the sole use of Network Firewall. </p>\n            </li>\n            <li>\n               <p>In Network Firewall, create stateless and stateful rule groups, \n                 to define the components of the network traffic filtering behavior that you want your firewall to have. </p>\n            </li>\n            <li>\n               <p>In Network Firewall, create a firewall policy that uses your rule groups and\n                 specifies additional default traffic filtering behavior. </p>\n            </li>\n            <li>\n               <p>In Network Firewall, create a firewall and specify your new firewall policy and \n                 VPC subnets. Network Firewall creates a firewall endpoint in each subnet that you\n               specify, with the behavior that's defined in the firewall policy.</p>\n            </li>\n            <li>\n               <p>In Amazon VPC, use ingress routing enhancements to route traffic through the new firewall\n               endpoints.</p>\n            </li>\n         </ol>",
+                "smithy.api#documentation": "<p>This is the API Reference for Network Firewall. This guide is for developers who need\n         detailed information about the Network Firewall API actions, data types, and errors. </p>\n         <ul>\n            <li>\n               <p>The REST API requires you to handle connection details, such as calculating\n               signatures, handling request retries, and error handling. For general information\n               about using the Amazon Web Services REST APIs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-apis.html\">Amazon Web Services APIs</a>. </p>\n               <p>To access Network Firewall using the REST API endpoint:\n                  <code>https://network-firewall.<region>.amazonaws.com </code>\n               </p>\n            </li>\n            <li>\n               <p>Alternatively, you can use one of the Amazon Web Services SDKs to access an API that's tailored to\n               the programming language or platform that you're using. For more information, see\n               <a href=\"http://aws.amazon.com/tools/#SDKs\">Amazon Web Services SDKs</a>.</p>\n            </li>\n            <li>\n               <p>For descriptions of Network Firewall features, including and step-by-step\n               instructions on how to use them through the Network Firewall console, see the <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/\">Network Firewall Developer\n                  Guide</a>.</p>\n            </li>\n         </ul>\n         <p>Network Firewall is a stateful, managed, network firewall and intrusion detection and\n         prevention service for Amazon Virtual Private Cloud (Amazon VPC). With Network Firewall, you can filter traffic at the\n         perimeter of your VPC. This includes filtering traffic going to and coming from an internet\n         gateway, NAT gateway, or over VPN or Direct Connect. Network Firewall uses rules that are compatible\n      with Suricata, a free, open source intrusion detection system (IDS) engine.\n      Network Firewall supports Suricata version 5.0.2. For information about Suricata,\n          see the <a href=\"https://suricata-ids.org/\">Suricata website</a>.</p>\n         <p>You can use Network Firewall to monitor and protect your VPC traffic in a number of ways.\n         The following are just a few examples: </p>\n         <ul>\n            <li>\n               <p>Allow domains or IP addresses for known Amazon Web Services service endpoints, such as Amazon S3, and\n               block all other forms of traffic.</p>\n            </li>\n            <li>\n               <p>Use custom lists of known bad domains to limit the types of domain names that your\n               applications can access.</p>\n            </li>\n            <li>\n               <p>Perform deep packet inspection on traffic entering or leaving your VPC.</p>\n            </li>\n            <li>\n               <p>Use stateful protocol detection to filter protocols like HTTPS, regardless of the\n               port used.</p>\n            </li>\n         </ul>\n         <p>To enable Network Firewall for your VPCs, you perform steps in both Amazon VPC and in\n         Network Firewall. For information about using Amazon VPC, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/\">Amazon VPC User Guide</a>.</p>\n         <p>To start using Network Firewall, do the following: </p>\n         <ol>\n            <li>\n               <p>(Optional) If you don't already have a VPC that you want to protect, create it in\n               Amazon VPC. </p>\n            </li>\n            <li>\n               <p>In Amazon VPC, in each Availability Zone where you want to have a firewall endpoint, create a\n               subnet for the sole use of Network Firewall. </p>\n            </li>\n            <li>\n               <p>In Network Firewall, create stateless and stateful rule groups,\n                 to define the components of the network traffic filtering behavior that you want your firewall to have. </p>\n            </li>\n            <li>\n               <p>In Network Firewall, create a firewall policy that uses your rule groups and\n                 specifies additional default traffic filtering behavior. </p>\n            </li>\n            <li>\n               <p>In Network Firewall, create a firewall and specify your new firewall policy and\n                 VPC subnets. Network Firewall creates a firewall endpoint in each subnet that you\n               specify, with the behavior that's defined in the firewall policy.</p>\n            </li>\n            <li>\n               <p>In Amazon VPC, use ingress routing enhancements to route traffic through the new firewall\n               endpoints.</p>\n            </li>\n         </ol>",
                 "smithy.api#title": "AWS Network Firewall"
             },
             "version": "2020-11-12",
@@ -2497,6 +2576,9 @@
                 },
                 {
                     "target": "com.amazonaws.networkfirewall#UpdateFirewallDescription"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#UpdateFirewallEncryptionConfiguration"
                 },
                 {
                     "target": "com.amazonaws.networkfirewall#UpdateFirewallPolicy"
@@ -2732,7 +2814,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates or updates an AWS Identity and Access Management policy for your rule group or firewall policy. Use this to share rule groups and firewall policies between accounts. This operation works in conjunction with the AWS Resource Access Manager (RAM) service\n           to manage resource sharing for Network Firewall. </p>\n         <p>Use this operation to create or update a resource policy for your rule group or firewall policy. In the policy, you specify the accounts that you want to share the resource with and the operations that you want the accounts to be able to perform. </p>\n         <p>When you add an account in the resource policy, you then run the following Resource Access Manager (RAM) operations to access and accept the shared rule group or firewall policy. </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/ram/latest/APIReference/API_GetResourceShareInvitations.html\">GetResourceShareInvitations</a> - Returns the Amazon Resource Names (ARNs) of the resource share invitations.  </p>\n           </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/ram/latest/APIReference/API_AcceptResourceShareInvitation.html\">AcceptResourceShareInvitation</a> - Accepts the share invitation for a specified resource share. </p>\n           </li>\n         </ul>\n         <p>For additional information about resource sharing using RAM, see <a href=\"https://docs.aws.amazon.com/ram/latest/userguide/what-is.html\">AWS Resource Access Manager User Guide</a>.</p>"
+                "smithy.api#documentation": "<p>Creates or updates an IAM policy for your rule group or firewall policy. Use this to share rule groups and firewall policies between accounts. This operation works in conjunction with the Amazon Web Services Resource Access Manager (RAM) service\n           to manage resource sharing for Network Firewall. </p>\n         <p>Use this operation to create or update a resource policy for your rule group or firewall policy. In the policy, you specify the accounts that you want to share the resource with and the operations that you want the accounts to be able to perform. </p>\n         <p>When you add an account in the resource policy, you then run the following Resource Access Manager (RAM) operations to access and accept the shared rule group or firewall policy. </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/ram/latest/APIReference/API_GetResourceShareInvitations.html\">GetResourceShareInvitations</a> - Returns the Amazon Resource Names (ARNs) of the resource share invitations.  </p>\n           </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/ram/latest/APIReference/API_AcceptResourceShareInvitation.html\">AcceptResourceShareInvitation</a> - Accepts the share invitation for a specified resource share. </p>\n           </li>\n         </ul>\n         <p>For additional information about resource sharing using RAM, see <a href=\"https://docs.aws.amazon.com/ram/latest/userguide/what-is.html\">Resource Access Manager User Guide</a>.</p>"
             }
         },
         "com.amazonaws.networkfirewall#PutResourcePolicyRequest": {
@@ -2748,7 +2830,7 @@
                 "Policy": {
                     "target": "com.amazonaws.networkfirewall#PolicyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Identity and Access Management policy statement that lists the accounts that you want to share your rule group or firewall policy with \n           and the operations that you want the accounts to be able to perform. </p>\n         <p>For a rule group resource, you can specify the following operations in the Actions section of the statement:</p>\n         <ul>\n            <li>\n               <p>network-firewall:CreateFirewallPolicy</p>\n            </li>\n            <li>\n               <p>network-firewall:UpdateFirewallPolicy</p>\n            </li>\n            <li>\n               <p>network-firewall:ListRuleGroups</p>\n            </li>\n         </ul>\n         <p>For a firewall policy resource, you can specify the following operations in the Actions section of the statement:</p>\n         <ul>\n            <li>\n               <p>network-firewall:CreateFirewall</p>\n            </li>\n            <li>\n               <p>network-firewall:UpdateFirewall</p>\n            </li>\n            <li>\n               <p>network-firewall:AssociateFirewallPolicy</p>\n            </li>\n            <li>\n               <p>network-firewall:ListFirewallPolicies</p>\n            </li>\n         </ul>\n         <p>In the Resource section of the statement, you specify the ARNs for the rule groups and firewall policies that you want to share with the account that you specified in <code>Arn</code>.</p>",
+                        "smithy.api#documentation": "<p>The IAM policy statement that lists the accounts that you want to share your rule group or firewall policy with\n           and the operations that you want the accounts to be able to perform. </p>\n         <p>For a rule group resource, you can specify the following operations in the Actions section of the statement:</p>\n         <ul>\n            <li>\n               <p>network-firewall:CreateFirewallPolicy</p>\n            </li>\n            <li>\n               <p>network-firewall:UpdateFirewallPolicy</p>\n            </li>\n            <li>\n               <p>network-firewall:ListRuleGroups</p>\n            </li>\n         </ul>\n         <p>For a firewall policy resource, you can specify the following operations in the Actions section of the statement:</p>\n         <ul>\n            <li>\n               <p>network-firewall:CreateFirewall</p>\n            </li>\n            <li>\n               <p>network-firewall:UpdateFirewall</p>\n            </li>\n            <li>\n               <p>network-firewall:AssociateFirewallPolicy</p>\n            </li>\n            <li>\n               <p>network-firewall:ListFirewallPolicies</p>\n            </li>\n         </ul>\n         <p>In the Resource section of the statement, you specify the ARNs for the rule groups and firewall policies that you want to share with the account that you specified in <code>Arn</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2867,7 +2949,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The inspection criteria and action for a single stateless rule. AWS Network Firewall inspects each packet for the specified matching\n         criteria. When a packet matches the criteria, Network Firewall performs the rule's actions on\n         the packet.</p>"
+                "smithy.api#documentation": "<p>The inspection criteria and action for a single stateless rule. Network Firewall inspects each packet for the specified matching\n         criteria. When a packet matches the criteria, Network Firewall performs the rule's actions on\n         the packet.</p>"
             }
         },
         "com.amazonaws.networkfirewall#RuleGroup": {
@@ -2889,12 +2971,12 @@
                 "StatefulRuleOptions": {
                     "target": "com.amazonaws.networkfirewall#StatefulRuleOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Additional options governing how Network Firewall handles stateful rules. The policies where you use your stateful \n       rule group must have stateful rule options settings that are compatible with these settings.</p>"
+                        "smithy.api#documentation": "<p>Additional options governing how Network Firewall handles stateful rules. The policies where you use your stateful\n       rule group must have stateful rule options settings that are compatible with these settings.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The object that defines the rules in a rule group. This, along with <a>RuleGroupResponse</a>, define the rule group. You can retrieve all objects for a rule group by calling <a>DescribeRuleGroup</a>. </p> \n         <p>AWS Network Firewall uses a rule group to inspect and control network traffic. \n    You define stateless rule groups to inspect individual packets and you define stateful rule groups to inspect packets in the context of their\n    traffic flow. </p>\n         <p>To use a rule group, you include it by reference in an Network Firewall firewall policy, then you use the policy in a firewall. You can reference a rule group from \n    more than one firewall policy, and you can use a firewall policy in more than one firewall. </p>"
+                "smithy.api#documentation": "<p>The object that defines the rules in a rule group. This, along with <a>RuleGroupResponse</a>, define the rule group. You can retrieve all objects for a rule group by calling <a>DescribeRuleGroup</a>. </p>\n         <p>Network Firewall uses a rule group to inspect and control network traffic.\n    You define stateless rule groups to inspect individual packets and you define stateful rule groups to inspect packets in the context of their\n    traffic flow. </p>\n         <p>To use a rule group, you include it by reference in an Network Firewall firewall policy, then you use the policy in a firewall. You can reference a rule group from\n    more than one firewall policy, and you can use a firewall policy in more than one firewall. </p>"
             }
         },
         "com.amazonaws.networkfirewall#RuleGroupMetadata": {
@@ -2950,13 +3032,13 @@
                 "Type": {
                     "target": "com.amazonaws.networkfirewall#RuleGroupType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the rule group is stateless or stateful. If the rule group is stateless, it contains \nstateless rules. If it is stateful, it contains stateful rules. </p>"
+                        "smithy.api#documentation": "<p>Indicates whether the rule group is stateless or stateful. If the rule group is stateless, it contains\nstateless rules. If it is stateful, it contains stateful rules. </p>"
                     }
                 },
                 "Capacity": {
                     "target": "com.amazonaws.networkfirewall#RuleCapacity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum operating resources that this rule group can use. Rule group capacity is fixed at creation. \n      When you update a rule group, you are limited to this capacity. When you reference a rule group \n      from a firewall policy, Network Firewall reserves this capacity for the rule group. </p> \n         <p>You can retrieve the capacity that would be required for a rule group before you create the rule group by calling \n      <a>CreateRuleGroup</a> with <code>DryRun</code> set to <code>TRUE</code>. </p>"
+                        "smithy.api#documentation": "<p>The maximum operating resources that this rule group can use. Rule group capacity is fixed at creation.\n      When you update a rule group, you are limited to this capacity. When you reference a rule group\n      from a firewall policy, Network Firewall reserves this capacity for the rule group. </p>\n         <p>You can retrieve the capacity that would be required for a rule group before you create the rule group by calling\n      <a>CreateRuleGroup</a> with <code>DryRun</code> set to <code>TRUE</code>. </p>"
                     }
                 },
                 "RuleGroupStatus": {
@@ -2981,6 +3063,12 @@
                     "target": "com.amazonaws.networkfirewall#NumberOfAssociations",
                     "traits": {
                         "smithy.api#documentation": "<p>The number of firewall policies that use this rule group.</p>"
+                    }
+                },
+                "EncryptionConfiguration": {
+                    "target": "com.amazonaws.networkfirewall#EncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A complex type that contains the Amazon Web Services KMS encryption configuration settings for your rule group.</p>"
                     }
                 }
             },
@@ -3105,7 +3193,7 @@
                 "StatefulRules": {
                     "target": "com.amazonaws.networkfirewall#StatefulRules",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of individual stateful rules inspection criteria to be used together in a stateful rule group. \n       Use this option to specify simple Suricata rules with protocol, source and destination, ports, direction, and rule options. \n       For information about the Suricata <code>Rules</code> format, see\n                                        <a href=\"https://suricata.readthedocs.io/en/suricata-5.0.0/rules/intro.html#\">Rules Format</a>. </p>"
+                        "smithy.api#documentation": "<p>An array of individual stateful rules inspection criteria to be used together in a stateful rule group.\n       Use this option to specify simple Suricata rules with protocol, source and destination, ports, direction, and rule options.\n       For information about the Suricata <code>Rules</code> format, see\n                                        <a href=\"https://suricata.readthedocs.io/en/suricata-5.0.0/rules/intro.html#\">Rules Format</a>. </p>"
                     }
                 },
                 "StatelessRulesAndCustomActions": {
@@ -3145,7 +3233,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Stateful inspection criteria for a domain list rule group. </p>\n         <p>For HTTPS traffic, domain filtering is SNI-based. It uses the server name indicator extension of the TLS handshake.</p>\n         <p>By default, Network Firewall domain list inspection only includes traffic coming from the VPC where you deploy the firewall. To inspect traffic from IP addresses outside of the deployment VPC, you set the <code>HOME_NET</code> rule variable to include the CIDR range of the deployment VPC plus the other CIDR ranges. For more information, see <a>RuleVariables</a> in this guide and <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/stateful-rule-groups-domain-names.html\">Stateful domain list rule groups in AWS Network Firewall</a> in the <i>Network Firewall Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Stateful inspection criteria for a domain list rule group. </p>\n         <p>For HTTPS traffic, domain filtering is SNI-based. It uses the server name indicator extension of the TLS handshake.</p>\n         <p>By default, Network Firewall domain list inspection only includes traffic coming from the VPC where you deploy the firewall. To inspect traffic from IP addresses outside of the deployment VPC, you set the <code>HOME_NET</code> rule variable to include the CIDR range of the deployment VPC plus the other CIDR ranges. For more information, see <a>RuleVariables</a> in this guide and <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/stateful-rule-groups-domain-names.html\">Stateful domain list rule groups in Network Firewall</a> in the <i>Network Firewall Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.networkfirewall#RulesString": {
@@ -3214,7 +3302,7 @@
                 "RuleOrder": {
                     "target": "com.amazonaws.networkfirewall#RuleOrder",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates how to manage the order of stateful rule evaluation for the policy. <code>DEFAULT_ACTION_ORDER</code> is\n         the default behavior. Stateful rules are provided to the rule engine as Suricata compatible strings, and Suricata evaluates them\n         based on certain settings. For more information, see \n         <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/suricata-rule-evaluation-order.html\">Evaluation order for stateful rules</a> in the <i>AWS Network Firewall Developer Guide</i>.\n      </p>"
+                        "smithy.api#documentation": "<p>Indicates how to manage the order of stateful rule evaluation for the policy. <code>DEFAULT_ACTION_ORDER</code> is\n         the default behavior. Stateful rules are provided to the rule engine as Suricata compatible strings, and Suricata evaluates them\n         based on certain settings. For more information, see\n         <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/suricata-rule-evaluation-order.html\">Evaluation order for stateful rules</a> in the <i>Network Firewall Developer Guide</i>.\n      </p>"
                     }
                 }
             },
@@ -3248,7 +3336,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A single Suricata rules specification, for use in a stateful rule group.  \n       Use this option to specify a simple Suricata rule with protocol, source and destination, ports, direction, and rule options. \n       For information about the Suricata <code>Rules</code> format, see\n                                        <a href=\"https://suricata.readthedocs.io/en/suricata-5.0.0/rules/intro.html#\">Rules Format</a>. </p>"
+                "smithy.api#documentation": "<p>A single Suricata rules specification, for use in a stateful rule group.\n       Use this option to specify a simple Suricata rule with protocol, source and destination, ports, direction, and rule options.\n       For information about the Suricata <code>Rules</code> format, see\n                                        <a href=\"https://suricata.readthedocs.io/en/suricata-5.0.0/rules/intro.html#\">Rules Format</a>. </p>"
             }
         },
         "com.amazonaws.networkfirewall#StatefulRuleDirection": {
@@ -3320,7 +3408,7 @@
                 "RuleOrder": {
                     "target": "com.amazonaws.networkfirewall#RuleOrder",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates how to manage the order of the rule evaluation for the rule group. <code>DEFAULT_ACTION_ORDER</code> is\n             the default behavior. Stateful rules are provided to the rule engine as Suricata compatible strings, and Suricata evaluates them\n             based on certain settings. For more information, see \n         <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/suricata-rule-evaluation-order.html\">Evaluation order for stateful rules</a> in the <i>AWS Network Firewall Developer Guide</i>.\n      </p>"
+                        "smithy.api#documentation": "<p>Indicates how to manage the order of the rule evaluation for the rule group. <code>DEFAULT_ACTION_ORDER</code> is\n             the default behavior. Stateful rules are provided to the rule engine as Suricata compatible strings, and Suricata evaluates them\n             based on certain settings. For more information, see\n         <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/suricata-rule-evaluation-order.html\">Evaluation order for stateful rules</a> in the <i>Network Firewall Developer Guide</i>.\n      </p>"
                     }
                 }
             },
@@ -3512,7 +3600,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The ID for a subnet that you want to associate with the firewall. This is used with\n            <a>CreateFirewall</a> and <a>AssociateSubnets</a>. AWS Network Firewall\n         creates an instance of the associated firewall in each subnet that you specify, to filter\n         traffic in the subnet's Availability Zone.</p>"
+                "smithy.api#documentation": "<p>The ID for a subnet that you want to associate with the firewall. This is used with\n            <a>CreateFirewall</a> and <a>AssociateSubnets</a>. Network Firewall\n         creates an instance of the associated firewall in each subnet that you specify, to filter\n         traffic in the subnet's Availability Zone.</p>"
             }
         },
         "com.amazonaws.networkfirewall#SubnetMappings": {
@@ -3538,7 +3626,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The status of the firewall endpoint and firewall policy configuration for a single VPC\n         subnet. </p>\n         <p>For each VPC subnet that you associate with a firewall, AWS Network Firewall does the\n         following: </p>\n         <ul>\n            <li>\n               <p>Instantiates a firewall endpoint in the subnet, ready to take traffic.</p>\n            </li>\n            <li>\n               <p>Configures the endpoint with the current firewall policy settings, to provide the\n               filtering behavior for the endpoint.</p>\n            </li>\n         </ul>\n         <p>When you update a firewall, for example to add a subnet association or change a rule\n         group in the firewall policy, the affected sync states reflect out-of-sync or not ready\n         status until the changes are complete. </p>"
+                "smithy.api#documentation": "<p>The status of the firewall endpoint and firewall policy configuration for a single VPC\n         subnet. </p>\n         <p>For each VPC subnet that you associate with a firewall, Network Firewall does the\n         following: </p>\n         <ul>\n            <li>\n               <p>Instantiates a firewall endpoint in the subnet, ready to take traffic.</p>\n            </li>\n            <li>\n               <p>Configures the endpoint with the current firewall policy settings, to provide the\n               filtering behavior for the endpoint.</p>\n            </li>\n         </ul>\n         <p>When you update a firewall, for example to add a subnet association or change a rule\n         group in the firewall policy, the affected sync states reflect out-of-sync or not ready\n         status until the changes are complete. </p>"
             }
         },
         "com.amazonaws.networkfirewall#SyncStateConfig": {
@@ -3644,7 +3732,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A key:value pair associated with an AWS resource. The key:value pair can be anything you\n         define. Typically, the tag key represents a category (such as \"environment\") and the tag\n         value represents a specific value within that category (such as \"test,\" \"development,\" or\n         \"production\"). You can add up to 50 tags to each AWS resource. </p>"
+                "smithy.api#documentation": "<p>A key:value pair associated with an Amazon Web Services resource. The key:value pair can be anything you\n         define. Typically, the tag key represents a category (such as \"environment\") and the tag\n         value represents a specific value within that category (such as \"test,\" \"development,\" or\n         \"production\"). You can add up to 50 tags to each Amazon Web Services resource. </p>"
             }
         },
         "com.amazonaws.networkfirewall#TagKey": {
@@ -3704,7 +3792,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds the specified tags to the specified resource. Tags are key:value pairs that you can\n         use to categorize and manage your resources, for purposes like billing. For example, you\n         might set the tag key to \"customer\" and the value to the customer name or ID. You can\n         specify one or more tags to add to each AWS resource, up to 50 tags for a resource.</p>\n         <p>You can tag the AWS resources that you manage through AWS Network Firewall: firewalls, firewall\n         policies, and rule groups. </p>"
+                "smithy.api#documentation": "<p>Adds the specified tags to the specified resource. Tags are key:value pairs that you can\n         use to categorize and manage your resources, for purposes like billing. For example, you\n         might set the tag key to \"customer\" and the value to the customer name or ID. You can\n         specify one or more tags to add to each Amazon Web Services resource, up to 50 tags for a resource.</p>\n         <p>You can tag the Amazon Web Services resources that you manage through Network Firewall: firewalls, firewall\n         policies, and rule groups. </p>"
             }
         },
         "com.amazonaws.networkfirewall#TagResourceRequest": {
@@ -3818,7 +3906,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes the tags with the specified keys from the specified resource. Tags are key:value\n         pairs that you can use to categorize and manage your resources, for purposes like billing.\n         For example, you might set the tag key to \"customer\" and the value to the customer name or\n         ID. You can specify one or more tags to add to each AWS resource, up to 50 tags for a\n         resource.</p>\n         <p>You can manage tags for the AWS resources that you manage through AWS Network Firewall:\n         firewalls, firewall policies, and rule groups. </p>"
+                "smithy.api#documentation": "<p>Removes the tags with the specified keys from the specified resource. Tags are key:value\n         pairs that you can use to categorize and manage your resources, for purposes like billing.\n         For example, you might set the tag key to \"customer\" and the value to the customer name or\n         ID. You can specify one or more tags to add to each Amazon Web Services resource, up to 50 tags for a\n         resource.</p>\n         <p>You can manage tags for the Amazon Web Services resources that you manage through Network Firewall:\n         firewalls, firewall policies, and rule groups. </p>"
             }
         },
         "com.amazonaws.networkfirewall#UntagResourceRequest": {
@@ -4022,6 +4110,90 @@
                 }
             }
         },
+        "com.amazonaws.networkfirewall#UpdateFirewallEncryptionConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkfirewall#UpdateFirewallEncryptionConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.networkfirewall#UpdateFirewallEncryptionConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkfirewall#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#InvalidTokenException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#ResourceOwnerCheckException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>A complex type that contains settings for encryption of your firewall resources.</p>"
+            }
+        },
+        "com.amazonaws.networkfirewall#UpdateFirewallEncryptionConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "UpdateToken": {
+                    "target": "com.amazonaws.networkfirewall#UpdateToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional token that you can use for optimistic locking. Network Firewall returns a token to your requests that access the firewall. The token marks the state of the firewall resource at the time of the request. </p>\n         <p>To make an unconditional change to the firewall, omit the token in your update request. Without the token, Network Firewall performs your updates regardless of whether the firewall has changed since you last retrieved it.</p>\n         <p>To make a conditional change to the firewall, provide the token in your update request. Network Firewall uses the token to ensure that the firewall hasn't changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the firewall again to get a current copy of it with a new token. Reapply your changes as needed, then try the operation again using the new token. </p>"
+                    }
+                },
+                "FirewallArn": {
+                    "target": "com.amazonaws.networkfirewall#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the firewall.</p>"
+                    }
+                },
+                "FirewallName": {
+                    "target": "com.amazonaws.networkfirewall#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The descriptive name of the firewall. You can't change the name of a firewall after you create it.</p>"
+                    }
+                },
+                "EncryptionConfiguration": {
+                    "target": "com.amazonaws.networkfirewall#EncryptionConfiguration"
+                }
+            }
+        },
+        "com.amazonaws.networkfirewall#UpdateFirewallEncryptionConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "FirewallArn": {
+                    "target": "com.amazonaws.networkfirewall#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the firewall.</p>"
+                    }
+                },
+                "FirewallName": {
+                    "target": "com.amazonaws.networkfirewall#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The descriptive name of the firewall. You can't change the name of a firewall after you create it.</p>"
+                    }
+                },
+                "UpdateToken": {
+                    "target": "com.amazonaws.networkfirewall#UpdateToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional token that you can use for optimistic locking. Network Firewall returns a token to your requests that access the firewall. The token marks the state of the firewall resource at the time of the request. </p>\n         <p>To make an unconditional change to the firewall, omit the token in your update request. Without the token, Network Firewall performs your updates regardless of whether the firewall has changed since you last retrieved it.</p>\n         <p>To make a conditional change to the firewall, provide the token in your update request. Network Firewall uses the token to ensure that the firewall hasn't changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the firewall again to get a current copy of it with a new token. Reapply your changes as needed, then try the operation again using the new token. </p>"
+                    }
+                },
+                "EncryptionConfiguration": {
+                    "target": "com.amazonaws.networkfirewall#EncryptionConfiguration"
+                }
+            }
+        },
         "com.amazonaws.networkfirewall#UpdateFirewallPolicy": {
             "type": "operation",
             "input": {
@@ -4080,7 +4252,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Modifies the flag, <code>ChangeProtection</code>, which indicates whether it \n         is possible to change the firewall. If the flag is set to <code>TRUE</code>, the firewall is protected \n         from changes. This setting helps protect against accidentally changing a firewall that's in use.</p>"
+                "smithy.api#documentation": "<p>Modifies the flag, <code>ChangeProtection</code>, which indicates whether it\n         is possible to change the firewall. If the flag is set to <code>TRUE</code>, the firewall is protected\n         from changes. This setting helps protect against accidentally changing a firewall that's in use.</p>"
             }
         },
         "com.amazonaws.networkfirewall#UpdateFirewallPolicyChangeProtectionRequest": {
@@ -4107,7 +4279,7 @@
                 "FirewallPolicyChangeProtection": {
                     "target": "com.amazonaws.networkfirewall#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A setting indicating whether the firewall is protected against a change to the firewall policy association. \n         Use this setting to protect against\n         accidentally modifying the firewall policy for a firewall that is in use. When you create a firewall, the operation initializes this setting to <code>TRUE</code>.</p>",
+                        "smithy.api#documentation": "<p>A setting indicating whether the firewall is protected against a change to the firewall policy association.\n         Use this setting to protect against\n         accidentally modifying the firewall policy for a firewall that is in use. When you create a firewall, the operation initializes this setting to <code>TRUE</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4137,7 +4309,7 @@
                 "FirewallPolicyChangeProtection": {
                     "target": "com.amazonaws.networkfirewall#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A setting indicating whether the firewall is protected against a change to the firewall policy association. \n         Use this setting to protect against\n         accidentally modifying the firewall policy for a firewall that is in use. When you create a firewall, the operation initializes this setting to <code>TRUE</code>.</p>"
+                        "smithy.api#documentation": "<p>A setting indicating whether the firewall is protected against a change to the firewall policy association.\n         Use this setting to protect against\n         accidentally modifying the firewall policy for a firewall that is in use. When you create a firewall, the operation initializes this setting to <code>TRUE</code>.</p>"
                     }
                 }
             }
@@ -4180,7 +4352,13 @@
                 "DryRun": {
                     "target": "com.amazonaws.networkfirewall#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether you want Network Firewall to just check the validity of the request, rather than run the request. </p>\n         <p>If set to <code>TRUE</code>, Network Firewall checks whether the request can run successfully, \n         but doesn't actually make the requested changes. The call returns the value that the request would return if you ran it with \n         dry run set to <code>FALSE</code>, but doesn't make additions or changes to your resources. This option allows you to make sure that you have \n         the required permissions to run the request and that your request parameters are valid. </p>\n         <p>If set to <code>FALSE</code>, Network Firewall makes the requested changes to your resources. </p>"
+                        "smithy.api#documentation": "<p>Indicates whether you want Network Firewall to just check the validity of the request, rather than run the request. </p>\n         <p>If set to <code>TRUE</code>, Network Firewall checks whether the request can run successfully,\n         but doesn't actually make the requested changes. The call returns the value that the request would return if you ran it with\n         dry run set to <code>FALSE</code>, but doesn't make additions or changes to your resources. This option allows you to make sure that you have\n         the required permissions to run the request and that your request parameters are valid. </p>\n         <p>If set to <code>FALSE</code>, Network Firewall makes the requested changes to your resources. </p>"
+                    }
+                },
+                "EncryptionConfiguration": {
+                    "target": "com.amazonaws.networkfirewall#EncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A complex type that contains settings for encryption of your firewall policy resources.</p>"
                     }
                 }
             }
@@ -4339,13 +4517,13 @@
                 "Rules": {
                     "target": "com.amazonaws.networkfirewall#RulesString",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string containing stateful rule group rules specifications in Suricata flat format, with one rule\nper line. Use this to import your existing Suricata compatible rule groups. </p>\n         <note>\n            <p>You must provide either this rules setting or a populated <code>RuleGroup</code> setting, but not both. </p>\n         </note>  \n         <p>You can provide your rule group specification in Suricata flat format through this setting when you create or update your rule group. The call \nresponse returns a <a>RuleGroup</a> object that Network Firewall has populated from your string. </p>"
+                        "smithy.api#documentation": "<p>A string containing stateful rule group rules specifications in Suricata flat format, with one rule\nper line. Use this to import your existing Suricata compatible rule groups. </p>\n         <note>\n            <p>You must provide either this rules setting or a populated <code>RuleGroup</code> setting, but not both. </p>\n         </note>  \n         <p>You can provide your rule group specification in Suricata flat format through this setting when you create or update your rule group. The call\nresponse returns a <a>RuleGroup</a> object that Network Firewall has populated from your string. </p>"
                     }
                 },
                 "Type": {
                     "target": "com.amazonaws.networkfirewall#RuleGroupType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the rule group is stateless or stateful. If the rule group is stateless, it contains \nstateless rules. If it is stateful, it contains stateful rules. </p> \n           <note>\n            <p>This setting is required for requests that do not include the <code>RuleGroupARN</code>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Indicates whether the rule group is stateless or stateful. If the rule group is stateless, it contains\nstateless rules. If it is stateful, it contains stateful rules. </p> \n           <note>\n            <p>This setting is required for requests that do not include the <code>RuleGroupARN</code>.</p>\n         </note>"
                     }
                 },
                 "Description": {
@@ -4357,7 +4535,13 @@
                 "DryRun": {
                     "target": "com.amazonaws.networkfirewall#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether you want Network Firewall to just check the validity of the request, rather than run the request. </p>\n         <p>If set to <code>TRUE</code>, Network Firewall checks whether the request can run successfully, \n         but doesn't actually make the requested changes. The call returns the value that the request would return if you ran it with \n         dry run set to <code>FALSE</code>, but doesn't make additions or changes to your resources. This option allows you to make sure that you have \n         the required permissions to run the request and that your request parameters are valid. </p>\n         <p>If set to <code>FALSE</code>, Network Firewall makes the requested changes to your resources. </p>"
+                        "smithy.api#documentation": "<p>Indicates whether you want Network Firewall to just check the validity of the request, rather than run the request. </p>\n         <p>If set to <code>TRUE</code>, Network Firewall checks whether the request can run successfully,\n         but doesn't actually make the requested changes. The call returns the value that the request would return if you ran it with\n         dry run set to <code>FALSE</code>, but doesn't make additions or changes to your resources. This option allows you to make sure that you have\n         the required permissions to run the request and that your request parameters are valid. </p>\n         <p>If set to <code>FALSE</code>, Network Firewall makes the requested changes to your resources. </p>"
+                    }
+                },
+                "EncryptionConfiguration": {
+                    "target": "com.amazonaws.networkfirewall#EncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A complex type that contains settings for encryption of your rule group resources.</p>"
                     }
                 }
             }
@@ -4437,7 +4621,7 @@
                 "SubnetChangeProtection": {
                     "target": "com.amazonaws.networkfirewall#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A setting indicating whether the firewall is protected against changes to the subnet associations. \n         Use this setting to protect against\n         accidentally modifying the subnet associations for a firewall that is in use. When you create a firewall, the operation initializes this setting to <code>TRUE</code>.</p>",
+                        "smithy.api#documentation": "<p>A setting indicating whether the firewall is protected against changes to the subnet associations.\n         Use this setting to protect against\n         accidentally modifying the subnet associations for a firewall that is in use. When you create a firewall, the operation initializes this setting to <code>TRUE</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4467,7 +4651,7 @@
                 "SubnetChangeProtection": {
                     "target": "com.amazonaws.networkfirewall#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A setting indicating whether the firewall is protected against changes to the subnet associations. \n         Use this setting to protect against\n         accidentally modifying the subnet associations for a firewall that is in use. When you create a firewall, the operation initializes this setting to <code>TRUE</code>.</p>"
+                        "smithy.api#documentation": "<p>A setting indicating whether the firewall is protected against changes to the subnet associations.\n         Use this setting to protect against\n         accidentally modifying the subnet associations for a firewall that is in use. When you create a firewall, the operation initializes this setting to <code>TRUE</code>.</p>"
                     }
                 }
             }
