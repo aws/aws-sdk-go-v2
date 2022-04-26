@@ -1,3 +1,7 @@
+# v1.20.0 (2022-04-26)
+
+* **Feature**: This release adds support for Lightsail load balancer HTTP to HTTPS redirect and TLS policy configuration.
+
 # v1.19.1 (2022-04-25)
 
 * **Dependency Update**: Updated to the latest SDK module versions

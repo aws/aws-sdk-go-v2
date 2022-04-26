@@ -1,8 +1,0 @@
-{
-    "id": "41bbd46a-0889-4591-8449-32da5efbae20",
-    "type": "feature",
-    "description": "Adds new APIs for IVS Chat, a feature for building interactive chat experiences alongside an IVS broadcast.",
-    "modules": [
-        "service/ivschat"
-    ]
-}

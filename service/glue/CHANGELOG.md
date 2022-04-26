@@ -1,3 +1,7 @@
+# v1.24.2 (2022-04-26)
+
+* **Documentation**: This release adds documentation for the APIs to create, read, delete, list, and batch read of AWS Glue custom patterns, and for Lake Formation configuration settings in the AWS Glue crawler.
+
 # v1.24.1 (2022-04-25)
 
 * **Dependency Update**: Updated to the latest SDK module versions

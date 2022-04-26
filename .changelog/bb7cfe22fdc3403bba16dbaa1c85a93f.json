@@ -1,8 +1,0 @@
-{
-    "id": "bb7cfe22-fdc3-403b-ba16-dbaa1c85a93f",
-    "type": "feature",
-    "description": "This release adds support for Lightsail load balancer HTTP to HTTPS redirect and TLS policy configuration.",
-    "modules": [
-        "service/lightsail"
-    ]
-}

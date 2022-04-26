@@ -1,3 +1,7 @@
+# v1.17.0 (2022-04-26)
+
+* **Feature**: CloudFront now supports the Server-Timing header in HTTP responses sent from CloudFront. You can use this header to view metrics that help you gain insights about the behavior and performance of CloudFront. To use this header, enable it in a response headers policy.
+
 # v1.16.4 (2022-04-25)
 
 * **Dependency Update**: Updated to the latest SDK module versions

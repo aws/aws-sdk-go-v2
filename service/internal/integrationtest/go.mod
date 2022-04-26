@@ -12,7 +12,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.23.1
 	github.com/aws/aws-sdk-go-v2/service/batch v1.18.1
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.20.4
-	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.16.4
+	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.17.0
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.13.4
 	github.com/aws/aws-sdk-go-v2/service/cloudsearch v1.13.4
 	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.15.6
@@ -46,7 +46,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.14.4
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.14.4
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.13.4
-	github.com/aws/aws-sdk-go-v2/service/glue v1.24.1
+	github.com/aws/aws-sdk-go-v2/service/glue v1.24.2
 	github.com/aws/aws-sdk-go-v2/service/health v1.15.4
 	github.com/aws/aws-sdk-go-v2/service/iam v1.18.4
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.12.4
@@ -54,7 +54,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.15.5
 	github.com/aws/aws-sdk-go-v2/service/kms v1.17.1
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.22.1
-	github.com/aws/aws-sdk-go-v2/service/lightsail v1.19.1
+	github.com/aws/aws-sdk-go-v2/service/lightsail v1.20.0
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.11.4
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.16.4
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.13.4

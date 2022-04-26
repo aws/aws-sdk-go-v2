@@ -1,8 +1,0 @@
-{
-    "id": "9b356f52-bd67-49b1-9a63-fa1758b7ef5a",
-    "type": "feature",
-    "description": "AWS Network Firewall now enables customers to use a customer managed AWS KMS key for the encryption of their firewall resources.",
-    "modules": [
-        "service/networkfirewall"
-    ]
-}

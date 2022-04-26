@@ -1,3 +1,7 @@
+# v1.16.0 (2022-04-26)
+
+* **Feature**: AWS Network Firewall now enables customers to use a customer managed AWS KMS key for the encryption of their firewall resources.
+
 # v1.15.4 (2022-04-25)
 
 * **Dependency Update**: Updated to the latest SDK module versions

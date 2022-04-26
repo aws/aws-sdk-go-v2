@@ -1,8 +1,0 @@
-{
-    "id": "6c92370b-39d0-4e5e-b417-c0ac4010597d",
-    "type": "feature",
-    "description": "CloudFront now supports the Server-Timing header in HTTP responses sent from CloudFront. You can use this header to view metrics that help you gain insights about the behavior and performance of CloudFront. To use this header, enable it in a response headers policy.",
-    "modules": [
-        "service/cloudfront"
-    ]
-}
