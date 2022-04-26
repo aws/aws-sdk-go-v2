@@ -1,0 +1,8 @@
+{
+    "id": "96bcadc5-352b-4729-806e-07feee9091d0",
+    "type": "bugfix",
+    "description": "Fixes a bug that could cause the SigV4 payload hash to be incorrectly encoded, leading to signing errors.",
+    "modules": [
+        "service/internal/checksum"
+    ]
+}

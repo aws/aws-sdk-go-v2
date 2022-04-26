@@ -369,6 +369,29 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 					"CRC32": "DUoRhQ==",
 				},
 			},
+			"http seekable checksum matches payload hash": {
+				initContext: func(ctx context.Context) context.Context {
+					return setContextInputAlgorithm(ctx, string(AlgorithmSHA256))
+				},
+				buildInput: middleware.BuildInput{
+					Request: func() *smithyhttp.Request {
+						r := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+						r.URL, _ = url.Parse("http://example.aws")
+						r.ContentLength = 11
+						r = requestMust(r.SetStream(bytes.NewReader([]byte("hello world"))))
+						return r
+					}(),
+				},
+				expectHeader: http.Header{
+					"X-Amz-Checksum-Sha256": []string{"uU0nuZNNPgilLlLX2n2r+sSE7+N6U4DukIj3rOLvzek="},
+				},
+				expectContentLength: 11,
+				expectPayload:       []byte("hello world"),
+				expectPayloadHash:   "b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9",
+				expectChecksumMetadata: map[string]string{
+					"SHA256": "uU0nuZNNPgilLlLX2n2r+sSE7+N6U4DukIj3rOLvzek=",
+				},
+			},
 			"http payload hash disabled": {
 				initContext: func(ctx context.Context) context.Context {
 					return setContextInputAlgorithm(ctx, string(AlgorithmCRC32))
