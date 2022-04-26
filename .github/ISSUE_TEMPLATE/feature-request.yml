@@ -49,7 +49,9 @@ body:
   - type: input
     id: go-sdk-version
     attributes:
-      label: AWS Go SDK version used
+      label: AWS Go SDK V2 Module Versions Used
+      description: |
+        Output of `go mod graph` or `go.mod` file listing the `github.com/aws/*` entries.
     validations:
       required: true
 
