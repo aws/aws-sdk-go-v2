@@ -1,3 +1,7 @@
+# v1.19.0 (2022-04-27)
+
+* **Feature**: Add list support for event configurations, allow to get and update event configurations by resource type, support LoRaWAN events; Make NetworkAnalyzerConfiguration as a resource, add List, Create, Delete API support; Add FCntStart attribute support for ABP WirelessDevice.
+
 # v1.18.4 (2022-04-25)
 
 * **Dependency Update**: Updated to the latest SDK module versions

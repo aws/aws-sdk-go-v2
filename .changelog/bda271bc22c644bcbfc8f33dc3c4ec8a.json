@@ -1,8 +1,0 @@
-{
-    "id": "bda271bc-22c6-44bc-bfc8-f33dc3c4ec8a",
-    "type": "documentation",
-    "description": "Documentation only update to support the Amplify GitHub App feature launch",
-    "modules": [
-        "service/amplify"
-    ]
-}

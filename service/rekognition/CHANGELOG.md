@@ -1,3 +1,7 @@
+# v1.18.0 (2022-04-27)
+
+* **Feature**: This release adds support to configure stream-processor resources for label detections on streaming-videos. UpateStreamProcessor API is also launched with this release, which could be used to update an existing stream-processor.
+
 # v1.17.4 (2022-04-25)
 
 * **Dependency Update**: Updated to the latest SDK module versions

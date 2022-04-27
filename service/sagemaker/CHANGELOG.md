@@ -1,3 +1,7 @@
+# v1.29.0 (2022-04-27)
+
+* **Feature**: Amazon SageMaker Autopilot adds support for custom validation dataset and validation ratio through the CreateAutoMLJob and DescribeAutoMLJob APIs.
+
 # v1.28.0 (2022-04-26)
 
 * **Feature**: SageMaker Inference Recommender now accepts customer KMS key ID for encryption of endpoints and compilation outputs created during inference recommendation.

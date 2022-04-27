@@ -15,7 +15,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.17.0
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.13.4
 	github.com/aws/aws-sdk-go-v2/service/cloudsearch v1.13.4
-	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.15.6
+	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.16.0
 	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.18.2
 	github.com/aws/aws-sdk-go-v2/service/codebuild v1.19.4
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.13.4
@@ -62,11 +62,11 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/polly v1.15.1
 	github.com/aws/aws-sdk-go-v2/service/rds v1.20.1
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.23.1
-	github.com/aws/aws-sdk-go-v2/service/rekognition v1.17.4
+	github.com/aws/aws-sdk-go-v2/service/rekognition v1.18.0
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.20.4
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.12.4
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.15.4
-	github.com/aws/aws-sdk-go-v2/service/s3 v1.26.6
+	github.com/aws/aws-sdk-go-v2/service/s3 v1.26.7
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.21.5
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.15.6
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.14.1

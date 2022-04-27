@@ -1,3 +1,7 @@
+# v1.11.5 (2022-04-27)
+
+* **Documentation**: Documentation only update to support the Amplify GitHub App feature launch
+
 # v1.11.4 (2022-04-25)
 
 * **Dependency Update**: Updated to the latest SDK module versions
